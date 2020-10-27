@@ -8,7 +8,7 @@
     "start:debug": "run-s launch:server --inspect",
     "launch:server": "ts-node-dev --project tsconfig.server.json src/index.ts",
     "build": "run-s clean compile copy",
-    "compile": "tsc",
+    "compile": "tsc --project tsconfig.server.json",
     "clean": "rimraf -rf dist",
     "copy": "cp README.md LICENSE package.json dist"
   },
@@ -23,6 +23,7 @@
     "url": "https://github.com/budproj/execution-mode/issues"
   },
   "engines": {
+    "yarn": ">=1.22.10",
     "node": ">=15.0.0"
   },
   "devDependencies": {
@@ -53,6 +54,7 @@
     "koa": "^2.13.0",
     "next": "^9.4.4",
     "react": "^16.14.0",
+    "react-dom": "^17.0.1",
     "typescript": "^4.0.3"
   }
 }

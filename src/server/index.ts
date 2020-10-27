@@ -14,10 +14,16 @@ const launch = (): void => {
     const server = new Koa()
     const router = new Router()
     const log = console.log
+    const handle = app.getRequestHandler()
 
     server.use(async (ctx, next) => {
       ctx.res.statusCode = 200
       await next()
+    })
+
+    router.all('(.*)', async (ctx) => {
+      await handle(ctx.req, ctx.res)
+      ctx.respond = false
     })
 
     server.use(router.routes())
