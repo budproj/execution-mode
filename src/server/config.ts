@@ -1,13 +1,9 @@
-const {
-  PORT,
-  NODE_ENV,
-  HOST,
-} = process.env
+const { PORT, NODE_ENV, HOST } = process.env
 
 type ServerConfig = {
-  port: string,
-  dev: boolean,
-  host: string,
+  port: string
+  dev: boolean
+  host: string
 }
 
 const config: ServerConfig = {

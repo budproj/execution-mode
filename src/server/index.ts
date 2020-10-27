@@ -28,9 +28,9 @@ const launch = (): void => {
 
     server.use(router.routes())
 
-    server.listen(config.port, () => (
-      log(`${cyan('➤')} ${gray('Web server running on:')} ${config.host}:${config.port}`)
-    ))
+    server.listen(config.port, () =>
+      log(`${cyan('➤')} ${gray('Web server running on:')} ${config.host}:${config.port}`),
+    )
   })
 }
 
