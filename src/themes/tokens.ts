@@ -39,6 +39,7 @@ type ColorTokens = {
 type FontTokens = {
   base: FontName
   circularstd: FontName
+  fallback: FontName
 }
 
 const colors: ColorTokens = {
@@ -79,6 +80,7 @@ const colors: ColorTokens = {
 const fonts: FontTokens = {
   base: 'CircularStd',
   circularstd: 'CircularStd',
+  fallback: 'sans-serif',
 }
 
 export default {
