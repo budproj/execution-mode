@@ -4,9 +4,9 @@
   "description": "Web interface for Bud's execution mode",
   "main": "index.js",
   "scripts": {
-    "start:dev": "run-s launch:server",
-    "start:debug": "run-s launch:server --inspect",
-    "launch:server": "ts-node-dev --project tsconfig.server.json src/index.ts",
+    "start:dev": "run-s launch:server -- --watch ./src/server",
+    "start:debug": "run-s start:dev --inspect",
+    "launch:server": "ts-node-dev --project tsconfig.server.json ./src/index.ts",
     "build": "run-s clean compile copy",
     "compile": "tsc --project tsconfig.server.json",
     "clean": "rimraf -rf dist",
@@ -25,7 +25,7 @@
     "url": "https://github.com/budproj/execution-mode/issues"
   },
   "engines": {
-    "yarn": ">=1.22.10",
+    "yarn": ">=2.3.3",
     "node": ">=15.0.0"
   },
   "devDependencies": {

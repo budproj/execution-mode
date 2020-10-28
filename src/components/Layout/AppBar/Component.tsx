@@ -5,7 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 
 const AppBar = (): ReactElement => (
   <Box px={4} py={3}>
-    <MUIAppBar position={'static'} square={false} color={'transparent'} elevation={3}>
+    <MUIAppBar position={'static'} square={false} color={'transparent'} elevation={4}>
       <Toolbar>Ok</Toolbar>
     </MUIAppBar>
   </Box>
