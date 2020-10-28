@@ -32,6 +32,26 @@ const theme: Theme = createMuiTheme({
     },
   },
 
+  palette: {
+    primary: {
+      light: tokens.colors.b200,
+      main: tokens.colors.b500,
+      dark: tokens.colors.b800,
+    },
+
+    grey: {
+      100: tokens.colors.g100,
+      200: tokens.colors.g200,
+      300: tokens.colors.g300,
+      400: tokens.colors.g400,
+      500: tokens.colors.g500,
+      600: tokens.colors.g600,
+      700: tokens.colors.g700,
+      800: tokens.colors.g800,
+      900: tokens.colors.g900,
+    },
+  },
+
   shadows: [
     'none',
     '0px 4px 16px 0 rgba(129,147,171,.05)',
