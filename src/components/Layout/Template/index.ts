@@ -1,4 +1,4 @@
 import Component from './Component'
-export * from './interfaces'
+export * from './types'
 
 export default Component

@@ -4,6 +4,7 @@ import next from 'next'
 import { cyan, gray } from 'chalk'
 
 import config from './config'
+import { addIntlToRequest } from './intl'
 
 const launch = (): void => {
   const app = next({
@@ -24,6 +25,11 @@ const launch = (): void => {
     router.all('(.*)', async (ctx) => {
       await handle(ctx.req, ctx.res)
       ctx.respond = false
+    })
+
+    server.use(async (ctx, next) => {
+      addIntlToRequest(ctx.req)
+      await next()
     })
 
     server.use(router.routes())

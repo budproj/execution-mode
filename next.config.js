@@ -1,4 +1,6 @@
-const serverRuntimeConfig = {}
+const serverRuntimeConfig = {
+  localeOverride: process.env.LOCALE_OVERRIDE,
+}
 
 const publicRuntimeConfig = {
   environments: {
