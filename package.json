@@ -8,14 +8,15 @@
     "server:launch": "ts-node --project tsconfig.server.json ./src/index.ts",
     "build": "run-s clean compile copy",
     "compile": "run-s compile:intl compile:typescript",
-    "compile:intl": "run-s intl:compile:ptBR",
+    "compile:intl": "run-p intl:compile:ptBR intl:compile:enUS",
     "compile:typescript": "tsc --project tsconfig.server.json",
     "clean": "rimraf -rf dist",
     "copy": "cp README.md LICENSE package.json dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "intl:extract": "formatjs extract './src/**/messages.ts' --out-file lang/pt-BR.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
-    "intl:compile:ptBR": "formatjs compile lang/pt-BR.json --ast --out-file compiled-lang/pt-BR.json"
+    "intl:compile:ptBR": "formatjs compile lang/pt-BR.json --ast --out-file compiled-lang/pt-BR.json",
+    "intl:compile:enUS": "formatjs compile lang/en-US.json --ast --out-file compiled-lang/en-US.json"
   },
   "author": "delucca <delucca@pm.me>",
   "license": "Apache-2.0",
