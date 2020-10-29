@@ -25,7 +25,7 @@ interface BudAppContext extends AppContext {
 }
 
 const getMessages = (locale: Locale): Promise<IntlMessage> => {
-  return import(`../../lang/${locale}.json`)
+  return import(`../../compiled-lang/${locale}.json`)
 }
 
 const BudApp = (props: BudAppProps): ReactElement => {

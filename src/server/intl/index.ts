@@ -6,7 +6,7 @@ import { basename } from 'path'
 import { DEFAULT_LOCALE } from './constants'
 import { Locale, IntlIncomingMessage } from './types'
 
-const supportedLocales: string[] = globSync('./lang/*.json').map((file: string) =>
+const supportedLocales: string[] = globSync('./compiled-lang/*.json').map((file: string) =>
   basename(file, '.json'),
 )
 
