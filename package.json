@@ -2,12 +2,10 @@
   "name": "execution-mode",
   "version": "0.0.1",
   "description": "Web interface for Bud's execution mode",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "start:dev": "run-s compile:intl server:watch",
-    "start:debug": "run-s start:dev --inspect",
-    "server:launch": "ts-node-dev --project tsconfig.server.json ./src/index.ts",
-    "server:watch": "run-s server:launch -- --watch ./src/server",
+    "start:dev": "nodemon",
+    "server:launch": "ts-node --project tsconfig.server.json ./src/index.ts",
     "build": "run-s clean compile copy",
     "compile": "run-s compile:intl compile:typescript",
     "compile:intl": "run-s intl:compile:ptBR",
@@ -56,10 +54,11 @@
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.0",
+    "nodemon": "^2.0.6",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
-    "ts-node-dev": "^1.0.0"
+    "ts-node": "^9.0.0"
   },
   "dependencies": {
     "@koa/router": "^9.4.0",

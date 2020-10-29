@@ -1,0 +1,5 @@
+{
+  "watch": ["server", "lang"],
+  "exec": "run-s compile:intl server:launch",
+  "ext": "ts tsx json"
+}
