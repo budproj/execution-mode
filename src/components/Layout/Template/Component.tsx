@@ -1,15 +1,17 @@
 import React, { ReactElement } from 'react'
-import Container from '@material-ui/core/Container'
+import { Box } from '@material-ui/core'
 
 import { TemplateProps } from './types'
 
 import AppBar from 'components/Layout/AppBar'
+import PageTitle from 'components/Layout/PageTitle'
 
 const Template = (props: TemplateProps): ReactElement => (
-  <Container maxWidth={false} disableGutters>
+  <Box py={3} px={4}>
     <AppBar />
+    <PageTitle />
     {props.children}
-  </Container>
+  </Box>
 )
 
 export default Template

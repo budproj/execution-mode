@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box'
 import MUIAppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import { useIntl } from 'react-intl'
-import { Divider, styled } from '@material-ui/core'
+import { Divider } from '@material-ui/core'
 
 import messages from './messages'
 
@@ -15,7 +15,7 @@ const AppBar = (): ReactElement => {
   const intl = useIntl()
 
   return (
-    <Box px={4} py={3}>
+    <Box>
       <MUIAppBar position={'static'} square={false} color={'transparent'} elevation={5}>
         <Toolbar>
           <Box py={2} display={'flex'} gridGap={40} flexGrow={1}>
