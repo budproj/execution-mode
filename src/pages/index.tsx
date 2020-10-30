@@ -1,5 +1,7 @@
-import React, { ReactElement } from 'react'
+import React, { Fragment, ReactElement } from 'react'
 
-const Index = (): ReactElement => <p>Running</p>
+import withRedirect from 'hocs/withRedirect'
 
-export default Index
+const Index = (): ReactElement => <Fragment />
+
+export default withRedirect(Index, '/myKeyResults')

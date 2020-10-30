@@ -23,8 +23,31 @@ const i18n = {
   ],
 }
 
+const i18nRouteGroup = [
+  {
+    destination: '/myKeyResults',
+    variants: ['/resultados-chave', '/key-results'],
+  },
+]
+
+const buildProxiedRoutes = (...routeGroups) => routeGroups.map(buildSingleProxiedRouteGroup).flat(4)
+
+const buildSingleProxiedRouteGroup = (routeGroup) => routeGroup.map(buildSingleRoute)
+
+const buildSingleRoute = ({ destination, variants }) =>
+  variants.map((variant) => buildRouteVariant(variant, destination))
+
+const buildRouteVariant = (variant, destination) => ({
+  destination,
+  source: variant,
+})
+
 module.exports = {
   serverRuntimeConfig,
   publicRuntimeConfig,
   i18n,
+
+  async rewrites() {
+    return buildProxiedRoutes(i18nRouteGroup)
+  },
 }
