@@ -1,6 +1,18 @@
 {
-  "422gPv": {
+  "/STfRx": {
     "defaultMessage": "Overview",
-    "description": "The main menu item showing the overview button"
+    "description": "AppBar menu item that links to Overview page"
+  },
+  "25ACLj": {
+    "defaultMessage": "Dashboard",
+    "description": "AppBar menu item that links to Dashboard page"
+  },
+  "2Ej1Zi": {
+    "defaultMessage": "Minhas KR",
+    "description": "AppBar menu item that links to My Key Results page"
+  },
+  "OuqJyR": {
+    "defaultMessage": "Meu Time",
+    "description": "AppBar menu item that links to My Team page"
   }
 }

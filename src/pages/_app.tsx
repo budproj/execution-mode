@@ -2,30 +2,20 @@ import React, { Fragment, ReactElement } from 'react'
 import App, { AppProps, AppContext } from 'next/app'
 import { ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { IntlProvider } from 'react-intl'
 
 import Template from 'components/Layout/Template'
 import theme from 'themes/preset-base'
-import { IntlProvider } from 'react-intl'
-import { IntlIncomingMessage, Locale } from 'server/intl/types'
-import { NextPageContext } from 'next'
 
 type IntlMessage = Record<string, string>
 
-interface BudAppCtx extends NextPageContext {
-  req: IntlIncomingMessage
-}
-
 interface BudAppProps extends AppProps {
-  locale: Locale
+  locale: string | undefined
   messages: IntlMessage
 }
 
-interface BudAppContext extends AppContext {
-  ctx: BudAppCtx
-}
-
-const getMessages = (locale: Locale): Promise<IntlMessage> => {
-  return import(`../../compiled-lang/${locale}.json`)
+const getMessages = (locale: string | undefined): Promise<IntlMessage> => {
+  return import(`../../compiled-lang/${locale}.json`) || {}
 }
 
 const BudApp = (props: BudAppProps): ReactElement => {
@@ -39,7 +29,7 @@ const BudApp = (props: BudAppProps): ReactElement => {
   }, [])
 
   return (
-    <IntlProvider locale={locale} messages={messages}>
+    <IntlProvider locale={locale || 'pt-BR'} messages={messages}>
       <ThemeProvider theme={theme}>
         <Template>
           <Fragment>
@@ -52,11 +42,11 @@ const BudApp = (props: BudAppProps): ReactElement => {
   )
 }
 
-BudApp.getInitialProps = async (appContext: BudAppContext) => {
+BudApp.getInitialProps = async (appContext: AppContext): Promise<BudAppProps> => {
   const pageProps = {}
 
-  const { Component, ctx } = appContext
-  const locale = ctx.req?.locale || window.LOCALE
+  const { Component, ctx, router } = appContext
+  const locale = router.locale
 
   const [appProps, messages] = await Promise.all([
     App.getInitialProps(appContext),

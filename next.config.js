@@ -1,24 +1,29 @@
-const serverRuntimeConfig = {
-  localeOverride: process.env.LOCALE_OVERRIDE,
-}
+const serverRuntimeConfig = {}
 
 const publicRuntimeConfig = {
-  environments: {
-    current: process.env.NODE_ENV,
-    local: 'local',
-    develop: 'develop',
-    production: 'production',
-  },
-
-  domains: {
-    root: 'getbud.co',
-    s3: 's3-sa-east-1.amazonaws.com',
-  },
+  environment: process.env.NODE_ENV,
+  domain: `${process.env.NODE_ENV}.getbud.co`.replace('production.', ''),
+  port: process.env.NODE_ENV === 'production' ? 80 : 3000,
 }
 
-const nextConfig = {
+const i18n = {
+  locales: ['pt-BR', 'en-US'],
+  defaultLocale: 'pt-BR',
+
+  domains: [
+    {
+      domain: `${publicRuntimeConfig.domain}:${publicRuntimeConfig.port}`,
+      defaultLocale: 'pt-BR',
+    },
+    {
+      domain: `en.${publicRuntimeConfig.domain}:${publicRuntimeConfig.port}`,
+      defaultLocale: 'en-US',
+    },
+  ],
+}
+
+module.exports = {
   serverRuntimeConfig,
   publicRuntimeConfig,
+  i18n,
 }
-
-module.exports = nextConfig

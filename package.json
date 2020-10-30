@@ -14,6 +14,8 @@
     "copy": "cp README.md LICENSE package.json dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "intl:generate:id": "eslint */**/messages.ts --fix",
+    "intl:refresh": "run-s intl:generate:id intl:extract",
     "intl:extract": "formatjs extract './src/**/messages.ts' --out-file lang/pt-BR.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
     "intl:compile:ptBR": "formatjs compile lang/pt-BR.json --ast --out-file compiled-lang/pt-BR.json",
     "intl:compile:enUS": "formatjs compile lang/en-US.json --ast --out-file compiled-lang/en-US.json"
@@ -70,7 +72,7 @@
     "crypto": "^1.0.1",
     "glob": "^7.1.6",
     "koa": "^2.13.0",
-    "next": "^9.4.4",
+    "next": "^10.0.0",
     "react": "^16.14.0",
     "react-dom": "^17.0.1",
     "react-intl": "^5.8.8",
