@@ -15,7 +15,9 @@
   "plugins": [
     "prettier",
     "@typescript-eslint",
-    "editorconfig"
+    "editorconfig",
+    "formatjs",
+    "import"
   ],
   "parserOptions": {
     "ecmaVersion": 2020,
@@ -26,6 +28,28 @@
     "no-console": "off",
     "comma-dangle": ["error", "always-multiline"],
     "import/prefer-default-export": "off",
-    "editorconfig/editorconfig": "error"
+    "editorconfig/editorconfig": "error",
+    "formatjs/enforce-description": ["error", "literal"],
+    "formatjs/enforce-default-message": ["error", "literal"],
+    "formatjs/no-camel-case": "error",
+    "formatjs/enforce-id": [
+      "error",
+      { "idInterpolationPattern": "[sha512:contenthash:base64:6]" }
+    ],
+    "import/no-unresolved": "error",
+    "import/order": [
+      "error",
+      { "newlines-between": "always" }
+    ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
   }
 }
