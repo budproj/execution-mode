@@ -2,14 +2,15 @@ const serverRuntimeConfig = {}
 
 const publicRuntimeConfig = {
   environment: process.env.NODE_ENV,
+  defaultLocale: process.env.DEFAULT_LOCALE,
 }
 
 const i18n = {
   locales:
     publicRuntimeConfig.environment === 'production'
       ? ['pt-BR', 'en-US']
-      : [process.env.LOCALE_OVERRIDE || 'pt-BR'],
-  defaultLocale: 'pt-BR',
+      : [process.env.LOCALE_OVERRIDE || publicRuntimeConfig.defaultLocale],
+  defaultLocale: publicRuntimeConfig.defaultLocale,
 
   domains: [
     {

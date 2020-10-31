@@ -2,11 +2,12 @@ import React, { ComponentType, ReactElement } from 'react'
 import { useRouter } from 'next/router'
 import { NextComponentType, NextPageContext } from 'next'
 
-const isBrowser = (): boolean => typeof window !== 'undefined'
+import isBrowser from 'specifications/isBrowser'
 
 const withRedirect = (WrappedComponent: NextComponentType, location: string): ComponentType => {
   const WithRedirectWrapper = (props: Record<string, unknown>): ReactElement => {
     const router = useRouter()
+
     if (isBrowser()) {
       router.push(location)
       return <></>
@@ -25,7 +26,7 @@ const withRedirect = (WrappedComponent: NextComponentType, location: string): Co
 
     const props = WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))
 
-    return props
+    return { ...props }
   }
 
   return WithRedirectWrapper
