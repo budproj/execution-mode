@@ -11,6 +11,17 @@ export enum Environment {
   production = 'production',
 }
 
+export enum Host {
+  'local.getbud.co' = 'local.getbud.co',
+  'develop.getbud.co' = 'develop.getbud.co',
+  'getbud.co' = 'getbud.co',
+}
+
+export interface BudServerConfig {
+  host: Host
+  supportedLocales: Locale[]
+}
+
 export interface BudPublicConfig {
   environment: Environment
   defaultLocale: Locale
@@ -18,7 +29,7 @@ export interface BudPublicConfig {
 
 export interface BudConfig {
   publicRuntimeConfig: BudPublicConfig
-  serverRuntimeConfig: Record<string, unknown>
+  serverRuntimeConfig: BudServerConfig
 }
 
 const getConfig = (): BudConfig => getNextConfig()

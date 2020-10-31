@@ -1,15 +1,12 @@
-const { PORT, NODE_ENV, HOST } = process.env
+import { ServerConfig } from './types'
 
-type ServerConfig = {
-  port: string
-  dev: boolean
-  host: string
-}
+const { PORT, APP_ENV, HOST, ENABLE_HTTPS } = process.env
 
 const config: ServerConfig = {
   port: PORT || '3000',
-  dev: NODE_ENV !== 'production',
-  host: HOST || 'http://local.getbud.co',
+  dev: APP_ENV !== 'production',
+  host: HOST || 'local.getbud.co',
+  secure: ENABLE_HTTPS === 'true',
 }
 
 export default config

@@ -6,7 +6,6 @@ import { NextComponentType, NextPageContext } from 'next'
 import accepts from 'accepts'
 
 import { IntlRouteGroup, IntlRouteGroupsFile } from './types'
-import { SUPPORTED_LOCALES } from './constants'
 
 import isBrowser from 'specifications/isBrowser'
 import getConfig, { Locale } from 'config'
@@ -17,7 +16,7 @@ const withIntlProxy = (
   routeGroupKey: string,
 ): ComponentType => {
   const routeGroups: IntlRouteGroupsFile = rawRouteGroups
-  const { publicRuntimeConfig } = getConfig()
+  const { serverRuntimeConfig, publicRuntimeConfig } = getConfig()
   const { defaultLocale } = publicRuntimeConfig
   const routeGroup: IntlRouteGroup = routeGroups[routeGroupKey]
 
@@ -37,12 +36,12 @@ const withIntlProxy = (
     ctx: NextPageContext,
   ): Promise<Record<string, unknown> | undefined> => {
     const accept = accepts(ctx.req as IncomingMessage)
-    const locale = ((accept.language(SUPPORTED_LOCALES) as unknown) as Locale) || defaultLocale
+    const locale =
+      ((accept.language(serverRuntimeConfig.supportedLocales) as unknown) as Locale) ||
+      defaultLocale
     const localizedRoute = routeGroup[locale] || ctx.pathname
     const headersSent = ctx.res?.headersSent
     const isInLocalizedRoute = ctx.req?.url === localizedRoute
-
-    console.log(headersSent)
 
     if (!isBrowser() && ctx.res && !headersSent && !isInLocalizedRoute) {
       ctx.res.writeHead(302, { Location: localizedRoute })

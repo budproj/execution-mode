@@ -1,18 +1,22 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const intlRouteGroups = require('./src/intlRouteGroups.json')
-
-const serverRuntimeConfig = {}
+const { HOST, APP_ENV, DEFAULT_LOCALE, LOCALE_OVERRIDE, SUPPORTED_LOCALES } = process.env
 
 const publicRuntimeConfig = {
-  environment: process.env.NODE_ENV,
-  defaultLocale: process.env.DEFAULT_LOCALE,
+  environment: APP_ENV,
+  defaultLocale: DEFAULT_LOCALE,
+}
+
+const serverRuntimeConfig = {
+  host: HOST,
+  supportedLocales:
+    publicRuntimeConfig.environment === 'production'
+      ? SUPPORTED_LOCALES.split(',')
+      : [LOCALE_OVERRIDE || publicRuntimeConfig.defaultLocale],
 }
 
 const i18n = {
-  locales:
-    publicRuntimeConfig.environment === 'production'
-      ? ['pt-BR', 'en-US']
-      : [process.env.LOCALE_OVERRIDE || publicRuntimeConfig.defaultLocale],
+  locales: serverRuntimeConfig.supportedLocales,
   defaultLocale: publicRuntimeConfig.defaultLocale,
 
   domains: [
