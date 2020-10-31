@@ -1,8 +1,8 @@
 import getNextConfig from 'next/config'
 
 export enum Locale {
-  'pt-BR',
-  'en-US',
+  'pt-BR' = 'pt-BR',
+  'en-US' = 'en-US',
 }
 
 export enum Environment {
