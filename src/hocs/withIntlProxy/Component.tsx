@@ -5,17 +5,18 @@ import { useRouter } from 'next/router'
 import { NextComponentType, NextPageContext } from 'next'
 import accepts from 'accepts'
 
-import { IntlRouteGroup } from './types'
+import { IntlRouteGroup, IntlRouteGroupsFile } from './types'
 import { SUPPORTED_LOCALES } from './constants'
 
 import isBrowser from 'specifications/isBrowser'
 import getConfig, { Locale } from 'config'
-import routeGroups from 'intlRouteGroups.json'
+import rawRouteGroups from 'intlRouteGroups.json'
 
 const withIntlProxy = (
   WrappedComponent: NextComponentType,
   routeGroupKey: string,
 ): ComponentType => {
+  const routeGroups: IntlRouteGroupsFile = rawRouteGroups
   const { publicRuntimeConfig } = getConfig()
   const { defaultLocale } = publicRuntimeConfig
   const routeGroup: IntlRouteGroup = routeGroups[routeGroupKey]
