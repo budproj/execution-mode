@@ -10,23 +10,23 @@ import { SUPPORTED_LOCALES } from './constants'
 
 import isBrowser from 'specifications/isBrowser'
 import getConfig, { Locale } from 'config'
+import routeGroups from 'intlRouteGroups.json'
 
 const withIntlProxy = (
   WrappedComponent: NextComponentType,
-  routeGroup: IntlRouteGroup,
-  defaultRoute: string,
+  routeGroupKey: string,
 ): ComponentType => {
   const { publicRuntimeConfig } = getConfig()
   const { defaultLocale } = publicRuntimeConfig
+  const routeGroup: IntlRouteGroup = routeGroups[routeGroupKey]
 
   const WithIntlProxyWrapper = (props: Record<string, unknown>): ReactElement => {
     const router = useRouter()
     const locale = ((router.locale as unknown) as Locale) || defaultLocale
-    const localizedRoute = routeGroup[locale] || defaultRoute || router.pathname
+    const localizedRoute = routeGroup[locale] || router.pathname
 
     if (isBrowser()) {
       router.push(localizedRoute)
-      return <></>
     }
 
     return <WrappedComponent {...props} />
@@ -37,10 +37,13 @@ const withIntlProxy = (
   ): Promise<Record<string, unknown> | undefined> => {
     const accept = accepts(ctx.req as IncomingMessage)
     const locale = ((accept.language(SUPPORTED_LOCALES) as unknown) as Locale) || defaultLocale
-    const localizedRoute = routeGroup[locale] || defaultRoute || ctx.pathname
-    const redirected = ctx.res?.hasHeader('Location') || true
+    const localizedRoute = routeGroup[locale] || ctx.pathname
+    const headersSent = ctx.res?.headersSent
+    const isInLocalizedRoute = ctx.req?.url === localizedRoute
 
-    if (!isBrowser() && ctx.res && !redirected) {
+    console.log(headersSent)
+
+    if (!isBrowser() && ctx.res && !headersSent && !isInLocalizedRoute) {
       ctx.res.writeHead(302, { Location: localizedRoute })
       ctx.res.end()
     }

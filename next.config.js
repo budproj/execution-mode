@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const intlRouteGroups = require('./src/intlRouteGroups.json')
+
 const serverRuntimeConfig = {}
 
 const publicRuntimeConfig = {
@@ -24,12 +27,12 @@ const i18n = {
   ],
 }
 
-const i18nRouteGroup = [
-  {
-    destination: '/myKeyResults',
-    variants: ['/resultados-chave', '/key-results'],
-  },
-]
+const normalizeIntlRouteGroup = (routeGroupEntry) => ({
+  destination: routeGroupEntry[0],
+  variants: Object.values(routeGroupEntry[1]),
+})
+
+const normalizedIntlRouteGrops = Object.entries(intlRouteGroups).map(normalizeIntlRouteGroup)
 
 const buildProxiedRoutes = (...routeGroups) => routeGroups.map(buildSingleProxiedRouteGroup).flat(4)
 
@@ -49,6 +52,6 @@ module.exports = {
   i18n,
 
   async rewrites() {
-    return buildProxiedRoutes(i18nRouteGroup)
+    return buildProxiedRoutes(normalizedIntlRouteGrops)
   },
 }
