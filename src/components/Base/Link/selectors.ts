@@ -37,7 +37,7 @@ const selectRoute = (state: SelectLocalizedHrefState): SelectLocalizedHrefState 
   selectedRoute: state?.routes?.[state.href],
 })
 
-const selectLocale = (state: SelectLocalizedHrefState): string =>
+const buildLocalizedHref = (state: SelectLocalizedHrefState): string =>
   state?.selectedRoute?.[state.options.locale] || state.href
 
 export const selectLocalizedHref: (
@@ -47,5 +47,37 @@ export const selectLocalizedHref: (
   (href, options): SelectLocalizedHrefState => ({ href, options }),
   groupByRoute,
   selectRoute,
-  selectLocale,
+  buildLocalizedHref,
 )
+
+type SelectAbsoluteHrefState = {
+  href: string
+  currentRoute: string
+  parentPathParts?: string[]
+  absoluteHrefParts?: string[]
+}
+
+const isAbsolutePath = (path: string): boolean => path.startsWith('/')
+
+const extractParentPath = (state: SelectAbsoluteHrefState): SelectAbsoluteHrefState => ({
+  ...state,
+  parentPathParts: state.currentRoute.split('/').slice(0, -1),
+})
+
+const appendDesiredRoute = (state: SelectAbsoluteHrefState): SelectAbsoluteHrefState => ({
+  ...state,
+  absoluteHrefParts: [...(state.parentPathParts || []), state.href],
+})
+
+const buildAbsoluteHref = (state: SelectAbsoluteHrefState): string =>
+  (state.absoluteHrefParts || []).join('/')
+
+const transformRelativeHrefToAbsolute: (href: string, currentRoute: string) => string = flow(
+  (href: string, currentRoute: string): SelectAbsoluteHrefState => ({ href, currentRoute }),
+  extractParentPath,
+  appendDesiredRoute,
+  buildAbsoluteHref,
+)
+
+export const selectAbsoluteHref = (href: string, currentRoute: string): string =>
+  isAbsolutePath(href) ? href : transformRelativeHrefToAbsolute(href, currentRoute)
