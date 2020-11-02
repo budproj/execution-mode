@@ -1,10 +1,24 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const intlRouteGroups = require('./src/intlRouteGroups.json')
+const omit = require('lodash/omit')
+
 const { HOST, APP_ENV, DEFAULT_LOCALE, LOCALE_OVERRIDE, SUPPORTED_LOCALES } = process.env
 
 const publicRuntimeConfig = {
   environment: APP_ENV,
   defaultLocale: DEFAULT_LOCALE,
+
+  intlRoutes: [
+    {
+      destination: '/keyResults',
+      source: '/resultados-chave',
+      locale: 'pt-BR',
+    },
+    {
+      destination: '/keyResults',
+      source: '/key-results',
+      locale: 'en-US',
+    },
+  ],
 }
 
 const serverRuntimeConfig = {
@@ -31,31 +45,12 @@ const i18n = {
   ],
 }
 
-const normalizeIntlRouteGroup = (routeGroupEntry) => ({
-  destination: routeGroupEntry[0],
-  variants: Object.values(routeGroupEntry[1]),
-})
-
-const normalizedIntlRouteGrops = Object.entries(intlRouteGroups).map(normalizeIntlRouteGroup)
-
-const buildProxiedRoutes = (...routeGroups) => routeGroups.map(buildSingleProxiedRouteGroup).flat(4)
-
-const buildSingleProxiedRouteGroup = (routeGroup) => routeGroup.map(buildSingleRoute)
-
-const buildSingleRoute = ({ destination, variants }) =>
-  variants.map((variant) => buildRouteVariant(variant, destination))
-
-const buildRouteVariant = (variant, destination) => ({
-  destination,
-  source: variant,
-})
-
 module.exports = {
   serverRuntimeConfig,
   publicRuntimeConfig,
   i18n,
 
   async rewrites() {
-    return buildProxiedRoutes(normalizedIntlRouteGrops)
+    return publicRuntimeConfig.intlRoutes.map((route) => omit(route, ['locale']))
   },
 }

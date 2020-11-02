@@ -17,6 +17,12 @@ export enum Host {
   'getbud.co' = 'getbud.co',
 }
 
+export interface Route {
+  destination: string
+  source: string
+  locale: Locale
+}
+
 export interface BudServerConfig {
   host: Host
   supportedLocales: Locale[]
@@ -25,6 +31,7 @@ export interface BudServerConfig {
 export interface BudPublicConfig {
   environment: Environment
   defaultLocale: Locale
+  intlRoutes: Route[]
 }
 
 export interface BudConfig {

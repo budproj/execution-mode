@@ -7,7 +7,7 @@ import { Divider } from '@material-ui/core'
 
 import messages from './messages'
 
-import Button from 'components/Layout/Button'
+import Button from 'components/Base/Button'
 import { NotificationBell } from 'components/Icons'
 import NamedAvatar from 'components/User/NamedAvatar/Component'
 

@@ -4,7 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { IntlProvider } from 'react-intl'
 
-import Template from 'components/Layout/Template'
+import Template from 'components/Base/Template'
 import theme from 'themes/preset-base'
 
 type IntlMessage = Record<string, string>

@@ -49,6 +49,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/glob", "npm:7.1.3"],
             ["@types/koa", "npm:2.11.6"],
             ["@types/koa__router", "npm:8.0.3"],
+            ["@types/lodash", "npm:4.14.164"],
             ["@types/node", "npm:14.14.6"],
             ["@types/prettier", "npm:2.1.5"],
             ["@types/react", "npm:16.9.55"],
@@ -69,6 +70,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:4.3.0"],
             ["koa", "npm:2.13.0"],
             ["lint-staged", "npm:10.5.0"],
+            ["lodash", "npm:4.17.20"],
             ["next", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:10.0.0"],
             ["nodemon", "npm:2.0.6"],
             ["npm-run-all", "npm:4.1.5"],
@@ -2628,6 +2630,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.163-3fbedee5f4-f118aab4b7.zip/node_modules/@types/lodash/",
           "packageDependencies": [
             ["@types/lodash", "npm:4.14.163"]
+          ],
+          "linkType": "HARD",
+        }],
+        ["npm:4.14.164", {
+          "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.164-619795b8bd-4158045fd1.zip/node_modules/@types/lodash/",
+          "packageDependencies": [
+            ["@types/lodash", "npm:4.14.164"]
           ],
           "linkType": "HARD",
         }]
@@ -6047,6 +6056,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/glob", "npm:7.1.3"],
             ["@types/koa", "npm:2.11.6"],
             ["@types/koa__router", "npm:8.0.3"],
+            ["@types/lodash", "npm:4.14.164"],
             ["@types/node", "npm:14.14.6"],
             ["@types/prettier", "npm:2.1.5"],
             ["@types/react", "npm:16.9.55"],
@@ -6067,6 +6077,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["husky", "npm:4.3.0"],
             ["koa", "npm:2.13.0"],
             ["lint-staged", "npm:10.5.0"],
+            ["lodash", "npm:4.17.20"],
             ["next", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:10.0.0"],
             ["nodemon", "npm:2.0.6"],
             ["npm-run-all", "npm:4.1.5"],
