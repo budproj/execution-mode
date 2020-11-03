@@ -1,4 +1,4 @@
-import { defineMessages } from 'react-intl'
+import { defineMessages, MessageDescriptor } from 'react-intl'
 
 export default defineMessages({
   alt: {
@@ -14,4 +14,4 @@ export default defineMessages({
     description:
       'The title text of our logotype, it is displayed when an user hover the icon itself',
   },
-})
+}) as Record<string, MessageDescriptor>

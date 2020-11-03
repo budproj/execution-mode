@@ -11,9 +11,21 @@
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"
   },
+  "FVnpVq": {
+    "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
+    "description": "The alternative text explaining our arrow right icon"
+  },
   "GeAU92": {
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
+  },
+  "Pkdkh4": {
+    "defaultMessage": "Minhas Key Result",
+    "description": "The name of the Key Results page, located at \"/keyResults\""
+  },
+  "RZrZdZ": {
+    "defaultMessage": "Home",
+    "description": "The name of the Home page, located at \"/\""
   },
   "Sn7K6v": {
     "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",

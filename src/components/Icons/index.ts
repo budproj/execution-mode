@@ -1,4 +1,4 @@
-export { default as CentralizedIcon } from './CentralizedIcon'
+export { default as ArrowRight } from './ArrowRight'
 
 export { default as NotificationBell } from './NotificationBell'
 

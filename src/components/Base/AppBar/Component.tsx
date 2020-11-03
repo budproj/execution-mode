@@ -43,8 +43,8 @@ const AppBar = (): ReactElement => {
         </Box>
 
         <Box display={'flex'} gridGap={20} alignItems={'center'} justifyContent={'flex-end'}>
-          <SearchIcon />
-          <NotificationIcon />
+          <SearchIcon fontSize={'small'} />
+          <NotificationIcon fontSize={'small'} />
           <SettingsIcon />
 
           <NamedAvatar />

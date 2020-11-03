@@ -1,4 +1,4 @@
-import { defineMessages } from 'react-intl'
+import { defineMessages, MessageDescriptor } from 'react-intl'
 
 export default defineMessages({
   dashboard: {
@@ -18,4 +18,4 @@ export default defineMessages({
     id: 'qakF7T',
     description: 'Placeholder item for layout purposes',
   },
-})
+}) as Record<string, MessageDescriptor>

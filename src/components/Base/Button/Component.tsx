@@ -10,8 +10,8 @@ export interface ButtonProps extends MUIButtonProps {
   isActive?: boolean
 }
 
-const Button = ({ children, ...rest }: ButtonProps): ReactElement => {
-  const classes = useClasses(styles, rest as StyledProps)
+const Button = ({ children, isActive, ...rest }: ButtonProps): ReactElement => {
+  const classes = useClasses(styles, { isActive, ...rest } as StyledProps)
 
   return (
     <MUIButton classes={classes} {...rest}>

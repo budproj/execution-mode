@@ -6,10 +6,7 @@ const styles: MUIStyle = (theme: Theme) => ({
   text: {
     textTransform: 'none',
     fontWeight: 500,
-    color: (props) => {
-      console.log(props)
-      return props.isActive ? theme.palette.primary.main : theme.palette.grey[500]
-    },
+    color: (props) => (props.isActive ? theme.palette.primary.main : theme.palette.grey[500]),
 
     '&:hover': {
       color: theme.palette.primary.main,
