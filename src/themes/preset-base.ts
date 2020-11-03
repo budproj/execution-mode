@@ -50,6 +50,10 @@ const theme: Theme = createMuiTheme({
       800: tokens.colors.g800,
       900: tokens.colors.g900,
     },
+
+    background: {
+      default: tokens.colors.white,
+    },
   },
 
   shadows: [

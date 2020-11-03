@@ -9,10 +9,12 @@ export interface TemplateProps {
 }
 
 const Template = (props: TemplateProps): ReactElement => (
-  <Box py={3} px={4}>
+  <Box>
     <AppBar />
-    <PageTitle />
-    {props.children}
+    <Box py={3} px={4}>
+      <PageTitle />
+      {props.children}
+    </Box>
   </Box>
 )
 
