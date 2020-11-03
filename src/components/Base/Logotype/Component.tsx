@@ -1,22 +1,21 @@
+import { Box } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-import CentralizedIcon from 'components/Icons/CentralizedIcon/Component'
-
-const NotificationBell = (): ReactElement => {
+const Logotype = (): ReactElement => {
   const intl = useIntl()
 
   return (
-    <CentralizedIcon>
+    <Box>
       <img
-        src={'/icons/notification-bell.svg'}
+        src={'/bud-logotype.svg'}
         alt={intl.formatMessage(messages.alt)}
         title={intl.formatMessage(messages.title)}
       />
-    </CentralizedIcon>
+    </Box>
   )
 }
 
-export default NotificationBell
+export default Logotype

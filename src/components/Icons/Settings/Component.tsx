@@ -5,13 +5,13 @@ import messages from './messages'
 
 import CentralizedIcon from 'components/Icons/CentralizedIcon/Component'
 
-const NotificationBell = (): ReactElement => {
+const Settings = (): ReactElement => {
   const intl = useIntl()
 
   return (
     <CentralizedIcon>
       <img
-        src={'/icons/notification-bell.svg'}
+        src={'/icons/settings.svg'}
         alt={intl.formatMessage(messages.alt)}
         title={intl.formatMessage(messages.title)}
       />
@@ -19,4 +19,4 @@ const NotificationBell = (): ReactElement => {
   )
 }
 
-export default NotificationBell
+export default Settings

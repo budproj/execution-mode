@@ -1,8 +1,4 @@
 {
-  "/STfRx": {
-    "defaultMessage": "Overview",
-    "description": "AppBar menu item that links to Overview page"
-  },
   "25ACLj": {
     "defaultMessage": "Dashboard",
     "description": "AppBar menu item that links to Dashboard page"
@@ -11,8 +7,40 @@
     "defaultMessage": "Minhas KR",
     "description": "AppBar menu item that links to My Key Results page"
   },
-  "OuqJyR": {
-    "defaultMessage": "Meu Time",
-    "description": "AppBar menu item that links to My Team page"
+  "CmE1a+": {
+    "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
+    "description": "The alternative text explaining our search icon"
+  },
+  "GeAU92": {
+    "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
+    "description": "The alternative text explaining our settings icon"
+  },
+  "Sn7K6v": {
+    "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
+    "description": "The alternative text explaining our notification bell icon"
+  },
+  "XYg5xf": {
+    "defaultMessage": "Clique aqui para editar suas configurações",
+    "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
+  },
+  "qakF7T": {
+    "defaultMessage": "Item",
+    "description": "Placeholder item for layout purposes"
+  },
+  "rpLZ2J": {
+    "defaultMessage": "Bud - Gestão de OKR e Estratégia",
+    "description": "The title text of our logotype, it is displayed when an user hover the icon itself"
+  },
+  "tcWO3v": {
+    "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
+    "description": "The alternative text explaining our logotype"
+  },
+  "x30AaU": {
+    "defaultMessage": "Clique aqui para fazer uma busca",
+    "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
+  },
+  "zIx/gZ": {
+    "defaultMessage": "Clique aqui para ver suas notificações",
+    "description": "The title text of our notification bell, it is displayed when an user hover the icon itself"
   }
 }

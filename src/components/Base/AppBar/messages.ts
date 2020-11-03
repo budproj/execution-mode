@@ -1,12 +1,6 @@
 import { defineMessages } from 'react-intl'
 
 export default defineMessages({
-  overview: {
-    defaultMessage: 'Overview',
-    id: '/STfRx',
-    description: 'AppBar menu item that links to Overview page',
-  },
-
   dashboard: {
     defaultMessage: 'Dashboard',
     id: '25ACLj',
@@ -19,9 +13,9 @@ export default defineMessages({
     description: 'AppBar menu item that links to My Key Results page',
   },
 
-  team: {
-    defaultMessage: 'Meu Time',
-    id: 'OuqJyR',
-    description: 'AppBar menu item that links to My Team page',
+  item: {
+    defaultMessage: 'Item',
+    id: 'qakF7T',
+    description: 'Placeholder item for layout purposes',
   },
 })

@@ -8,27 +8,36 @@ const theme: Theme = createMuiTheme({
     fontSize: 14,
     h1: {
       fontSize: 35,
-      fontWeight: 500,
+      fontWeight: 600,
     },
     h2: {
       fontSize: 25,
-      fontWeight: 500,
+      fontWeight: 600,
     },
     h3: {
       fontSize: 16,
-      fontWeight: 500,
+      fontWeight: 600,
     },
     subtitle1: {
       fontSize: 12,
-      fontWeight: 500,
+      fontWeight: 400,
+      lineHeight: 1.1,
+    },
+    subtitle2: {
+      fontSize: 12,
+      fontWeight: 600,
     },
     body1: {
-      fontSize: 16,
-      fontWeight: 300,
+      fontSize: 14,
+      fontWeight: 400,
+    },
+    body2: {
+      fontSize: 14,
+      fontWeight: 500,
     },
     button: {
       fontSize: 16,
-      fontWeight: 500,
+      fontWeight: 400,
     },
   },
 
@@ -53,6 +62,10 @@ const theme: Theme = createMuiTheme({
 
     background: {
       default: tokens.colors.white,
+    },
+
+    text: {
+      primary: tokens.colors.g500,
     },
   },
 

@@ -4,7 +4,8 @@
   "description": "Web interface for Bud's execution mode",
   "main": "src/index.js",
   "scripts": {
-    "start:dev": "nodemon",
+    "start:dev": "run-s intl:refresh server:watch",
+    "server:watch": "nodemon",
     "server:launch": "ts-node --project tsconfig.server.json ./src/index.ts",
     "build": "run-s clean compile copy",
     "compile": "run-s compile:intl compile:typescript",
