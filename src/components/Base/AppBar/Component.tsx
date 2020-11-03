@@ -5,9 +5,10 @@ import Toolbar from '@material-ui/core/Toolbar'
 import { useIntl } from 'react-intl'
 import { styled } from '@material-ui/core'
 
+import ToolbarMenuItem from '../ToolbarMenuItem/Component'
+
 import messages from './messages'
 
-import Button from 'components/Base/Button'
 import {
   NotificationBell as NotificationIcon,
   Search as SearchIcon,
@@ -35,10 +36,10 @@ const AppBar = (): ReactElement => {
         <Logotype />
 
         <Box py={2} display={'flex'} gridGap={55} flexGrow={1}>
-          <Button>{intl.formatMessage(messages.dashboard)}</Button>
-          <Button>{intl.formatMessage(messages.keyResults)}</Button>
-          <Button>{intl.formatMessage(messages.item)}</Button>
-          <Button>{intl.formatMessage(messages.item)}</Button>
+          <ToolbarMenuItem label={intl.formatMessage(messages.dashboard)} href={'/'} />
+          <ToolbarMenuItem label={intl.formatMessage(messages.keyResults)} href={'/keyResults'} />
+          <ToolbarMenuItem label={intl.formatMessage(messages.item)} href={'#'} />
+          <ToolbarMenuItem label={intl.formatMessage(messages.item)} href={'#'} />
         </Box>
 
         <Box display={'flex'} gridGap={20} alignItems={'center'} justifyContent={'flex-end'}>
