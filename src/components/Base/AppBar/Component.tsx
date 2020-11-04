@@ -1,4 +1,4 @@
-import { styled, useTheme } from '@material-ui/core'
+import { IconButton, styled, useTheme } from '@material-ui/core'
 import MUIAppBar from '@material-ui/core/AppBar'
 import Box from '@material-ui/core/Box'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -44,23 +44,33 @@ const AppBar = (): ReactElement => {
         </Box>
 
         <Box display={'flex'} gridGap={20} alignItems={'center'} justifyContent={'flex-end'}>
-          <SearchIcon
-            fontSize={'small'}
-            htmlColor={theme.palette.text.primary}
-            title={intl.formatMessage(messages.searchIconTitle)}
-            desc={intl.formatMessage(messages.searchIconDesc)}
-          />
-          <NotificationIcon
-            fontSize={'small'}
-            htmlColor={theme.palette.text.primary}
-            title={intl.formatMessage(messages.notificationBellIconTitle)}
-            desc={intl.formatMessage(messages.notificationBellIconDesc)}
-          />
-          <SettingsIcon
-            htmlColor={theme.palette.text.primary}
-            title={intl.formatMessage(messages.settingsIconTitle)}
-            desc={intl.formatMessage(messages.settingsIconDesc)}
-          />
+          <Box>
+            <IconButton color={'primary'}>
+              <SearchIcon
+                fontSize={'small'}
+                htmlColor={theme.palette.text.primary}
+                title={intl.formatMessage(messages.searchIconTitle)}
+                desc={intl.formatMessage(messages.searchIconDesc)}
+              />
+            </IconButton>
+
+            <IconButton color={'primary'}>
+              <NotificationIcon
+                fontSize={'small'}
+                htmlColor={theme.palette.text.primary}
+                title={intl.formatMessage(messages.notificationBellIconTitle)}
+                desc={intl.formatMessage(messages.notificationBellIconDesc)}
+              />
+            </IconButton>
+
+            <IconButton color={'primary'}>
+              <SettingsIcon
+                htmlColor={theme.palette.text.primary}
+                title={intl.formatMessage(messages.settingsIconTitle)}
+                desc={intl.formatMessage(messages.settingsIconDesc)}
+              />
+            </IconButton>
+          </Box>
 
           <NamedAvatar />
         </Box>
