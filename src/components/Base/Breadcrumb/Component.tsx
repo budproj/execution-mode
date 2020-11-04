@@ -1,9 +1,9 @@
 import { Box, styled } from '@material-ui/core'
-import { useRouter } from 'next/router'
-import React, { ReactElement } from 'react'
+import { indexOf } from 'lodash'
 import remove from 'lodash/remove'
 import startCase from 'lodash/startCase'
-import { indexOf } from 'lodash'
+import { useRouter } from 'next/router'
+import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
 import messages from './messages'
@@ -14,10 +14,11 @@ import ArrowRightIcon from 'components/Icons/ArrowRight'
 
 const StyledButton = styled(Button)({
   fontSize: 12,
+  justifyContent: 'flex-start',
+  minWidth: 0,
 
   '& .MuiButton-iconSizeSmall > :first-child': {
     fontSize: 10,
-    marginRight: 8,
   },
 })
 
@@ -26,8 +27,12 @@ const StyledBox = styled(Box)({
     fontWeight: 700,
   },
 
-  '& button:first-child .MuiButton-startIcon': {
-    display: 'none',
+  '& button:first-child': {
+    paddingLeft: 2,
+
+    '& .MuiButton-startIcon': {
+      display: 'none',
+    },
   },
 })
 

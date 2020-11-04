@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router'
 import flow from 'lodash/flow'
+import { useRouter } from 'next/router'
 
 import getConfig, { Locale, Route } from 'config'
 

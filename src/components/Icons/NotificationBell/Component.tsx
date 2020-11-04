@@ -1,6 +1,6 @@
+import { SvgIcon, SvgIconProps } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
-import { SvgIcon, SvgIconProps } from '@material-ui/core'
 
 import messages from './messages'
 

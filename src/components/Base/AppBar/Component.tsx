@@ -1,21 +1,21 @@
-import React, { ReactElement } from 'react'
-import Box from '@material-ui/core/Box'
-import MUIAppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import { useIntl } from 'react-intl'
 import { styled } from '@material-ui/core'
+import MUIAppBar from '@material-ui/core/AppBar'
+import Box from '@material-ui/core/Box'
+import Toolbar from '@material-ui/core/Toolbar'
+import React, { ReactElement } from 'react'
+import { useIntl } from 'react-intl'
 
 import ToolbarMenuItem from '../ToolbarMenuItem/Component'
 
 import messages from './messages'
 
+import Logotype from 'components/Base/Logotype/Component'
 import {
   NotificationBell as NotificationIcon,
   Search as SearchIcon,
   Settings as SettingsIcon,
 } from 'components/Icons'
 import NamedAvatar from 'components/User/NamedAvatar/Component'
-import Logotype from 'components/Base/Logotype/Component'
 
 const StyledAppBar = styled(MUIAppBar)(({ theme }) => ({
   backgroundColor: theme.palette.common.white,

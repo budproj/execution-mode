@@ -8,8 +8,12 @@ export { default as Link } from './Link'
 
 export { default as Logotype } from './Logotype'
 
-export { default as PageHeader } from './PageHeader'
+export { default as Page } from './Page'
 
-export { default as Template } from './Template'
+export { default as PageContent } from './PageContent'
+
+export { default as PageContentHeader } from './PageContentHeader'
+
+export { default as PageTitle } from './PageTitle'
 
 export { default as ToolbarMenuItem } from './ToolbarMenuItem'

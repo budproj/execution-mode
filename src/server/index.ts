@@ -1,7 +1,7 @@
-import Koa from 'koa'
 import Router from '@koa/router'
-import next from 'next'
 import { cyan, gray } from 'chalk'
+import Koa from 'koa'
+import next from 'next'
 
 import config from './config'
 

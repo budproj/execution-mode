@@ -1,4 +1,4 @@
-import { createMuiTheme, Theme } from '@material-ui/core/styles'
+import { Theme, createMuiTheme } from '@material-ui/core/styles'
 
 import tokens from './tokens'
 
@@ -9,6 +9,7 @@ const theme: Theme = createMuiTheme({
     h1: {
       fontSize: 35,
       fontWeight: 600,
+      color: tokens.colors.g800,
     },
     h2: {
       fontSize: 25,

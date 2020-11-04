@@ -1,6 +1,6 @@
 import { Theme } from '@material-ui/core'
 
-import { MUIStyle } from 'hooks/useClasses'
+import { MUIStyle } from 'state/hooks/useClasses'
 
 const styles: MUIStyle = (theme: Theme) => ({
   text: {

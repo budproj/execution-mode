@@ -1,13 +1,13 @@
 import { IncomingMessage } from 'http'
 
-import React, { ComponentType, ReactElement } from 'react'
-import { useRouter } from 'next/router'
-import { NextComponentType, NextPageContext } from 'next'
 import accepts from 'accepts'
+import { NextComponentType, NextPageContext } from 'next'
+import { useRouter } from 'next/router'
+import React, { ComponentType, ReactElement } from 'react'
 
-import isBrowser from 'specifications/isBrowser'
-import { useLocalizedPath } from 'hooks'
 import getConfig, { Locale } from 'config'
+import isBrowser from 'specifications/isBrowser'
+import { useLocalizedPath } from 'state/hooks'
 
 const withRedirect = (WrappedComponent: NextComponentType, location: string): ComponentType => {
   const WithRedirectWrapper = (props: Record<string, unknown>): ReactElement => {

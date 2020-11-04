@@ -1,4 +1,4 @@
-import { makeStyles, StyledProps, Theme } from '@material-ui/core'
+import { StyledProps, Theme, makeStyles } from '@material-ui/core'
 import { Styles } from '@material-ui/styles'
 
 export type MUIStyle = Styles<Theme, Record<string, unknown>, string>

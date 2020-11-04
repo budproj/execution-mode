@@ -1,4 +1,4 @@
-import { defineMessages, MessageDescriptor } from 'react-intl'
+import { MessageDescriptor, defineMessages } from 'react-intl'
 
 export default defineMessages({
   desc: {

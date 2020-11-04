@@ -1,10 +1,10 @@
-import React, { Fragment, ReactElement } from 'react'
-import App, { AppProps, AppContext } from 'next/app'
 import { ThemeProvider } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
+import App, { AppContext, AppProps } from 'next/app'
+import React, { ReactElement } from 'react'
 import { IntlProvider } from 'react-intl'
+import { RecoilRoot } from 'recoil'
 
-import Template from 'components/Base/Template'
+import Page from 'components/Base/Page'
 import theme from 'themes/preset-base'
 
 type IntlMessage = Record<string, string>
@@ -31,12 +31,11 @@ const BudApp = (props: BudAppProps): ReactElement => {
   return (
     <IntlProvider locale={locale || 'pt-BR'} messages={messages}>
       <ThemeProvider theme={theme}>
-        <Template>
-          <Fragment>
-            <CssBaseline />
+        <RecoilRoot>
+          <Page>
             <Component {...pageProps} />
-          </Fragment>
-        </Template>
+          </Page>
+        </RecoilRoot>
       </ThemeProvider>
     </IntlProvider>
   )

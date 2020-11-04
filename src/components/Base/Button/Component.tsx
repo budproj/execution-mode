@@ -1,10 +1,10 @@
 import { ButtonProps as MUIButtonProps, StyledProps } from '@material-ui/core'
-import React, { ReactElement } from 'react'
 import MUIButton from '@material-ui/core/Button'
+import React, { ReactElement } from 'react'
 
 import styles from './styles'
 
-import useClasses from 'hooks/useClasses'
+import useClasses from 'state/hooks/useClasses'
 
 export interface ButtonProps extends MUIButtonProps {
   isActive?: boolean

@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react'
 import NextLink from 'next/link'
+import React, { ReactElement } from 'react'
 
-import { useLocalizedPath } from 'hooks'
+import { useLocalizedPath } from 'state/hooks'
 
 export interface LinkProps {
   children: ReactElement | string
