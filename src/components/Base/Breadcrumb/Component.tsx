@@ -1,4 +1,4 @@
-import { Box, styled } from '@material-ui/core'
+import { Box, styled, useTheme } from '@material-ui/core'
 import { indexOf } from 'lodash'
 import remove from 'lodash/remove'
 import startCase from 'lodash/startCase'
@@ -39,6 +39,7 @@ const StyledBox = styled(Box)({
 const Breadcrumb = (): ReactElement => {
   const { pathname } = useRouter()
   const intl = useIntl()
+  const theme = useTheme()
 
   const stepTree = remove(['home', ...pathname.split('/')])
 
@@ -47,7 +48,15 @@ const Breadcrumb = (): ReactElement => {
       {stepTree.map(
         (step, index, arr): ReactElement => (
           <Link key={`breadcrumb-${index}`} href={arr.slice(1, indexOf(arr, step) + 1).join('/')}>
-            <StyledButton size={'small'} startIcon={<ArrowRightIcon />}>
+            <StyledButton
+              size={'small'}
+              startIcon={
+                <ArrowRightIcon
+                  desc={intl.formatMessage(messages.arrowRightIconDesc)}
+                  htmlColor={theme.palette.text.primary}
+                />
+              }
+            >
               {messages[step] ? intl.formatMessage(messages[step]) : startCase(step)}
             </StyledButton>
           </Link>

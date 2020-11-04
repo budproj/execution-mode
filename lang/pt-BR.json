@@ -35,6 +35,10 @@
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
   },
+  "nEFOO9": {
+    "defaultMessage": "Um ícone de funil. Clique nele para visualizar os filtros",
+    "description": "An alternative text, explaining our funnel icon for screen readers"
+  },
   "qakF7T": {
     "defaultMessage": "Item",
     "description": "Placeholder item for layout purposes"
@@ -42,6 +46,10 @@
   "rpLZ2J": {
     "defaultMessage": "Bud - Gestão de OKR e Estratégia",
     "description": "The title text of our logotype, it is displayed when an user hover the icon itself"
+  },
+  "t+fD+z": {
+    "defaultMessage": "Clique aqui para visualizar os filtros",
+    "description": "A tooltip for anayone who hovers our filter icon"
   },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",

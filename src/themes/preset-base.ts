@@ -37,8 +37,8 @@ const theme: Theme = createMuiTheme({
       fontWeight: 500,
     },
     button: {
-      fontSize: 16,
-      fontWeight: 400,
+      fontSize: 15,
+      fontWeight: 600,
     },
   },
 

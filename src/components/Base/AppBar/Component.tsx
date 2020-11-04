@@ -1,4 +1,4 @@
-import { styled } from '@material-ui/core'
+import { styled, useTheme } from '@material-ui/core'
 import MUIAppBar from '@material-ui/core/AppBar'
 import Box from '@material-ui/core/Box'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -29,6 +29,7 @@ const StyledToolbar = styled(Toolbar)({
 
 const AppBar = (): ReactElement => {
   const intl = useIntl()
+  const theme = useTheme()
 
   return (
     <StyledAppBar position={'sticky'} elevation={1}>
@@ -43,9 +44,23 @@ const AppBar = (): ReactElement => {
         </Box>
 
         <Box display={'flex'} gridGap={20} alignItems={'center'} justifyContent={'flex-end'}>
-          <SearchIcon fontSize={'small'} />
-          <NotificationIcon fontSize={'small'} />
-          <SettingsIcon />
+          <SearchIcon
+            fontSize={'small'}
+            htmlColor={theme.palette.text.primary}
+            title={intl.formatMessage(messages.searchIconTitle)}
+            desc={intl.formatMessage(messages.searchIconDesc)}
+          />
+          <NotificationIcon
+            fontSize={'small'}
+            htmlColor={theme.palette.text.primary}
+            title={intl.formatMessage(messages.notificationBellIconTitle)}
+            desc={intl.formatMessage(messages.notificationBellIconDesc)}
+          />
+          <SettingsIcon
+            htmlColor={theme.palette.text.primary}
+            title={intl.formatMessage(messages.settingsIconTitle)}
+            desc={intl.formatMessage(messages.settingsIconDesc)}
+          />
 
           <NamedAvatar />
         </Box>

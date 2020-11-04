@@ -8,10 +8,11 @@ import useClasses from 'state/hooks/useClasses'
 
 export interface ButtonProps extends MUIButtonProps {
   isActive?: boolean
+  rounded?: boolean
 }
 
-const Button = ({ children, isActive, ...rest }: ButtonProps): ReactElement => {
-  const classes = useClasses(styles, { isActive, ...rest } as StyledProps)
+const Button = ({ children, isActive, rounded, ...rest }: ButtonProps): ReactElement => {
+  const classes = useClasses(styles, { isActive, rounded, ...rest } as StyledProps)
 
   return (
     <MUIButton classes={classes} {...rest}>

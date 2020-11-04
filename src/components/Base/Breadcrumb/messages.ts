@@ -12,4 +12,10 @@ export default defineMessages({
     id: 'Pkdkh4',
     description: 'The name of the Key Results page, located at "/keyResults"',
   },
+
+  arrowRightIconDesc: {
+    defaultMessage: 'Um ícone de seta para o lado direito, meramente ilustrativo',
+    id: 'FVnpVq',
+    description: 'The alternative text explaining our arrow right icon',
+  },
 }) as Record<string, MessageDescriptor>
