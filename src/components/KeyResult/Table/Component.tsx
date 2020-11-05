@@ -15,6 +15,7 @@ import { useIntl } from 'react-intl'
 import messages from './messages'
 
 import { KeyResult } from 'components/KeyResult/types'
+import logger from 'lib/logger'
 import { useKeyResults } from 'state/hooks'
 
 interface HeadCell {
@@ -29,6 +30,10 @@ const StyledHeadLabel = styled(Typography)(({ theme }) => ({
 const KeyResultsTable = (): ReactElement => {
   const intl = useIntl()
   const keyResults = useKeyResults()
+  logger.debug('Rerendered component. Take a look at the keyResults hook data', {
+    data: keyResults,
+    component: 'KeyResultsTable',
+  })
 
   const headCells: HeadCell[] = [
     { id: 'title', label: intl.formatMessage(messages.tableHeadTitle) },
@@ -38,8 +43,6 @@ const KeyResultsTable = (): ReactElement => {
     { id: 'date', label: intl.formatMessage(messages.tableHeadDate) },
     { id: 'owner', label: intl.formatMessage(messages.tableHeadOwner) },
   ]
-
-  console.log(keyResults)
 
   // const onDragEnd = ({ source, destination }: DropResult): void => {
   //   if (destination && destination.index !== source.index) {
