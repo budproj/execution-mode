@@ -17,7 +17,7 @@
     "lint:fix": "eslint . --fix",
     "intl:generate:id": "eslint */**/*.ts(x)? --fix",
     "intl:refresh": "run-s intl:generate:id intl:extract",
-    "intl:extract": "formatjs extract './src/**/messages.ts' --out-file lang/pt-BR.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
+    "intl:extract": "formatjs extract './src/**/*.ts(x)?' --out-file lang/pt-BR.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
     "intl:compile:ptBR": "formatjs compile lang/pt-BR.json --ast --out-file compiled-lang/pt-BR.json",
     "intl:compile:enUS": "formatjs compile lang/en-US.json --ast --out-file compiled-lang/en-US.json"
   },

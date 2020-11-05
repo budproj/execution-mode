@@ -67,6 +67,10 @@
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
   },
+  "tf3MiP": {
+    "defaultMessage": "Minhas Key Results",
+    "description": "The page title that our users should see"
+  },
   "vzYQ5r": {
     "defaultMessage": "Nome da KR",
     "description": "The text of the table head related to the Title column"
