@@ -1,4 +1,8 @@
 {
+  "17XVCU": {
+    "defaultMessage": "Data",
+    "description": "The text of the table head related to the Date column"
+  },
   "25ACLj": {
     "defaultMessage": "Dashboard",
     "description": "AppBar menu item that links to Dashboard page"
@@ -6,6 +10,14 @@
   "2Ej1Zi": {
     "defaultMessage": "Minhas KR",
     "description": "AppBar menu item that links to My Key Results page"
+  },
+  "9hslRd": {
+    "defaultMessage": "OKR",
+    "description": "The text of the table head related to the OKR column"
+  },
+  "BlDXcz": {
+    "defaultMessage": "Proprietário",
+    "description": "The text of the table head related to the Owner column"
   },
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
@@ -18,6 +30,10 @@
   "GeAU92": {
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
+  },
+  "MfmBCB": {
+    "defaultMessage": "Status",
+    "description": "The text of the table head related to the Status column"
   },
   "Pkdkh4": {
     "defaultMessage": "Minhas Key Result",
@@ -35,6 +51,10 @@
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
   },
+  "kXNgkQ": {
+    "defaultMessage": "Progresso",
+    "description": "The text of the table head related to the Progress column"
+  },
   "qakF7T": {
     "defaultMessage": "Item",
     "description": "Placeholder item for layout purposes"
@@ -46,6 +66,10 @@
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
+  },
+  "vzYQ5r": {
+    "defaultMessage": "Nome da KR",
+    "description": "The text of the table head related to the Title column"
   },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",

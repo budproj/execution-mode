@@ -52,14 +52,25 @@ const DraggableRow = (id, index) => (props) => {
   )
 }
 
-const initialItems = [
-  { id: 'foo1', foo: 'PRIMEIRO', bar: 'ITEM' },
-  { id: 'foo2', foo: 'SEGUNDO', bar: 'ITEM' },
-  { id: 'foo3', foo: 'TERCEIRO', bar: 'ITEM' },
-]
+const items = {
+  foo: {
+    foo: 'PRIMEIRO',
+    bar: 'ITEM',
+  },
+  bar: {
+    foo: 'SEGUNDO',
+    bar: 'ITEM',
+  },
+  coo: {
+    foo: 'TERCEIRO',
+    bar: 'ITEM',
+  },
+}
+
+const initialOrder = ['foo', 'bar', 'coo']
 
 const KeyResultTable = (): ReactElement => {
-  const [items, setItems] = useState(initialItems)
+  const [order, setOrder] = useState(initialOrder)
   const onDragEnd = (result) => {
     if (!result.destination) {
       return
@@ -69,8 +80,8 @@ const KeyResultTable = (): ReactElement => {
       return
     }
 
-    const orderedItems = reorder(items, result.source.index, result.destination.index)
-    setItems(orderedItems)
+    const orderedItems = reorder(order, result.source.index, result.destination.index)
+    setOrder(orderedItems)
   }
 
   return (
@@ -84,10 +95,10 @@ const KeyResultTable = (): ReactElement => {
         </TableHead>
 
         <TableBody component={DroppableBody(onDragEnd)}>
-          {items.map((item, index) => (
-            <TableRow component={DraggableRow(item.id, index)} key={item.id}>
-              <TableCell>{item.foo}</TableCell>
-              <TableCell>{item.bar}</TableCell>
+          {order.map((item, index) => (
+            <TableRow component={DraggableRow(item, index)} key={item}>
+              <TableCell>{items[item].foo}</TableCell>
+              <TableCell>{items[item].bar}</TableCell>
             </TableRow>
           ))}
         </TableBody>
