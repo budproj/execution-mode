@@ -12,5 +12,5 @@ export default selector({
   get: async () =>
     fetch('/api/key-results')
       .then((res) => res.json())
-      .then((result) => result.keyResults.reduce(reduceToID, {})),
+      .then((result) => result.data.reduce(reduceToID, {})),
 })

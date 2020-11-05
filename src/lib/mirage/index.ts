@@ -1,45 +1,24 @@
-import faker from 'faker'
-import { createServer, Factory, Model, Server } from 'miragejs'
+import { createServer, Server } from 'miragejs'
 
-import { KeyResult } from 'components/KeyResult'
+import factories from './factories'
+import models from './models'
+import serializers from './serializers'
+
 import { NodeEnv } from 'config'
 
-export function makeServer(environment: NodeEnv, maxEntries = 50): Server {
+export function makeServer(environment: NodeEnv): Server {
   const server = createServer({
     environment,
-
-    models: {
-      keyResult: Model,
-    },
-
-    factories: {
-      keyResult: Factory.extend({
-        title: faker.name.title(),
-        team: faker.random.words(),
-        confidence: faker.random.number(100),
-        progress: faker.random.number(100),
-        date: {
-          start: faker.date.past(),
-          end: faker.date.future(),
-        },
-        icon: {
-          drawing: faker.random.word(),
-          backgroundColor: faker.random.hexaDecimal(),
-        },
-        objective: {
-          id: faker.random.uuid(),
-          title: faker.name.title(),
-        },
-        owner: {
-          id: faker.random.uuid(),
-          name: faker.name.findName(),
-          role: faker.name.jobTitle(),
-        },
-      } as KeyResult),
-    },
+    models,
+    factories,
+    serializers,
 
     seeds(server) {
-      server.createList('keyResult', faker.random.number(maxEntries))
+      server.create('user')
+      server.create('cycle')
+      server.createList('icon', 10)
+      server.createList('objective', 3)
+      server.createList('keyResult', 10)
     },
 
     routes() {

@@ -1,3 +1,4 @@
+import { CompanyCycle } from 'components/Company'
 import { Objective } from 'components/Objective'
 import { User } from 'components/User'
 
@@ -8,18 +9,13 @@ export interface KeyResultIcon {
   backgroundColor: string
 }
 
-export interface KeyResultDate {
-  start: Date
-  end: Date
-}
-
 export interface KeyResult {
   id: string
   title: string
   team: string
   confidence: number
   progress: number
-  date: KeyResultDate
+  cycle: CompanyCycle
   icon: KeyResultIcon
   objective: Objective
   owner: User
