@@ -1,5 +1,5 @@
 import faker from 'faker'
-import { Factory, Server } from 'miragejs'
+import { Factory, ModelInstance, Server } from 'miragejs'
 
 import { KeyResult } from 'components/KeyResult'
 import { pickRandom } from 'lib/mirage/selectors'
@@ -10,7 +10,7 @@ export default Factory.extend({
   confidence: faker.random.number(100),
   progress: faker.random.number(100),
 
-  afterCreate(keyResult: Record<string, unknown>, server: Server) {
+  afterCreate(keyResult: ModelInstance<KeyResult>, server: Server) {
     const owner = server.schema.users.first()
     const cycle = server.schema.cycles.first()
     const icon = pickRandom(server.schema.icons)
