@@ -1,15 +1,43 @@
-import { Table, TableCell, TableContainer, TableHead } from '@material-ui/core'
+import {
+  styled,
+  Table,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableSortLabel,
+  Typography,
+} from '@material-ui/core'
 import React, { ReactElement } from 'react'
 // import { DropResult } from 'react-beautiful-dnd'
 import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
+import { KeyResult } from 'components/KeyResult/types'
 import { useKeyResults } from 'state/hooks'
+
+interface HeadCell {
+  id: keyof KeyResult
+  label: string
+}
+
+const StyledHeadLabel = styled(Typography)(({ theme }) => ({
+  color: theme.palette.grey[300],
+}))
 
 const KeyResultsTable = (): ReactElement => {
   const intl = useIntl()
   const keyResults = useKeyResults()
+
+  const headCells: HeadCell[] = [
+    { id: 'title', label: intl.formatMessage(messages.tableHeadTitle) },
+    { id: 'objective', label: intl.formatMessage(messages.tableHeadOKR) },
+    { id: 'confidence', label: intl.formatMessage(messages.tableHeadStatus) },
+    { id: 'progress', label: intl.formatMessage(messages.tableHeadProgress) },
+    { id: 'date', label: intl.formatMessage(messages.tableHeadDate) },
+    { id: 'owner', label: intl.formatMessage(messages.tableHeadOwner) },
+  ]
 
   console.log(keyResults)
 
@@ -25,12 +53,15 @@ const KeyResultsTable = (): ReactElement => {
     <TableContainer>
       <Table>
         <TableHead>
-          <TableCell>{intl.formatMessage(messages.tableHeadTitle)}</TableCell>
-          <TableCell>{intl.formatMessage(messages.tableHeadOKR)}</TableCell>
-          <TableCell>{intl.formatMessage(messages.tableHeadStatus)}</TableCell>
-          <TableCell>{intl.formatMessage(messages.tableHeadProgress)}</TableCell>
-          <TableCell>{intl.formatMessage(messages.tableHeadDate)}</TableCell>
-          <TableCell>{intl.formatMessage(messages.tableHeadOwner)}</TableCell>
+          <TableRow>
+            {headCells.map((singleHeadCell) => (
+              <TableCell variant={'head'} key={singleHeadCell.id}>
+                <TableSortLabel active={true}>
+                  <StyledHeadLabel variant={'body2'}>{singleHeadCell.label}</StyledHeadLabel>
+                </TableSortLabel>
+              </TableCell>
+            ))}
+          </TableRow>
         </TableHead>
       </Table>
     </TableContainer>

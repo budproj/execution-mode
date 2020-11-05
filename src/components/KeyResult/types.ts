@@ -8,14 +8,18 @@ export interface KeyResultIcon {
   backgroundColor: string
 }
 
+export interface KeyResultDate {
+  start: Date
+  end: Date
+}
+
 export interface KeyResult {
   id: string
   title: string
   team: string
   confidence: number
   progress: number
-  startDate: Date
-  endDate: Date
+  date: KeyResultDate
   icon: KeyResultIcon
   objective: Objective
   owner: User

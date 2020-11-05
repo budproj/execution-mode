@@ -5,6 +5,8 @@ import { IntlProvider } from 'react-intl'
 import { RecoilRoot } from 'recoil'
 
 import Page from 'components/Base/Page'
+import getConfig from 'config'
+import { makeServer } from 'lib/mirage'
 import theme from 'themes/preset-base'
 
 type IntlMessage = Record<string, string>
@@ -13,6 +15,8 @@ interface BudAppProps extends AppProps {
   locale: string | undefined
   messages: IntlMessage
 }
+
+const config = getConfig()
 
 const getMessages = (locale: string | undefined): Promise<IntlMessage> => {
   return import(`../../compiled-lang/${locale}.json`) || {}
@@ -61,5 +65,7 @@ BudApp.getInitialProps = async (appContext: AppContext): Promise<BudAppProps> =>
     messages,
   }
 }
+
+config.publicRuntimeConfig.nodeEnv === 'development' && makeServer('development')
 
 export default BudApp

@@ -11,6 +11,8 @@ export enum Environment {
   production = 'production',
 }
 
+export type NodeEnv = 'test' | 'development' | 'production'
+
 export enum Host {
   'local.getbud.co' = 'local.getbud.co',
   'develop.getbud.co' = 'develop.getbud.co',
@@ -30,6 +32,7 @@ export interface BudServerConfig {
 
 export interface BudPublicConfig {
   environment: Environment
+  nodeEnv: NodeEnv
   defaultLocale: Locale
   intlRoutes: Route[]
 }

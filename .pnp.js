@@ -47,6 +47,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/eslint", "npm:7.2.4"],
             ["@types/eslint-config-prettier", "npm:6.11.0"],
             ["@types/eslint-plugin-prettier", "npm:3.1.0"],
+            ["@types/faker", "npm:5.1.4"],
             ["@types/glob", "npm:7.1.3"],
             ["@types/koa", "npm:2.11.6"],
             ["@types/koa__router", "npm:8.0.3"],
@@ -69,11 +70,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-formatjs", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:2.8.0"],
             ["eslint-plugin-import", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:2.22.1"],
             ["eslint-plugin-prettier", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:3.1.4"],
+            ["faker", "npm:5.1.0"],
             ["glob", "npm:7.1.6"],
             ["husky", "npm:4.3.0"],
             ["koa", "npm:2.13.0"],
             ["lint-staged", "npm:10.5.0"],
             ["lodash", "npm:4.17.20"],
+            ["miragejs", "npm:0.1.41"],
             ["next", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:10.0.0"],
             ["nodemon", "npm:2.0.6"],
             ["npm-run-all", "npm:4.1.5"],
@@ -2272,6 +2275,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["@miragejs/pretender-node-polyfill", [
+        ["npm:0.1.2", {
+          "packageLocation": "./.yarn/cache/@miragejs-pretender-node-polyfill-npm-0.1.2-faa2774172-28f2d68aa8.zip/node_modules/@miragejs/pretender-node-polyfill/",
+          "packageDependencies": [
+            ["@miragejs/pretender-node-polyfill", "npm:0.1.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["@next/env", [
         ["npm:10.0.0", {
           "packageLocation": "./.yarn/cache/@next-env-npm-10.0.0-cc24b6221d-60be51da6f.zip/node_modules/@next/env/",
@@ -2533,6 +2545,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/node", "npm:14.14.6"],
             ["@types/qs", "npm:6.9.5"],
             ["@types/range-parser", "npm:1.2.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/faker", [
+        ["npm:5.1.4", {
+          "packageLocation": "./.yarn/cache/@types-faker-npm-5.1.4-de64fbc9a1-8203d575d8.zip/node_modules/@types/faker/",
+          "packageDependencies": [
+            ["@types/faker", "npm:5.1.4"]
           ],
           "linkType": "HARD",
         }]
@@ -6119,6 +6140,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/eslint", "npm:7.2.4"],
             ["@types/eslint-config-prettier", "npm:6.11.0"],
             ["@types/eslint-plugin-prettier", "npm:3.1.0"],
+            ["@types/faker", "npm:5.1.4"],
             ["@types/glob", "npm:7.1.3"],
             ["@types/koa", "npm:2.11.6"],
             ["@types/koa__router", "npm:8.0.3"],
@@ -6141,11 +6163,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-formatjs", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:2.8.0"],
             ["eslint-plugin-import", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:2.22.1"],
             ["eslint-plugin-prettier", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:3.1.4"],
+            ["faker", "npm:5.1.0"],
             ["glob", "npm:7.1.6"],
             ["husky", "npm:4.3.0"],
             ["koa", "npm:2.13.0"],
             ["lint-staged", "npm:10.5.0"],
             ["lodash", "npm:4.17.20"],
+            ["miragejs", "npm:0.1.41"],
             ["next", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:10.0.0"],
             ["nodemon", "npm:2.0.6"],
             ["npm-run-all", "npm:4.1.5"],
@@ -6247,6 +6271,24 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/extsprintf-npm-1.3.0-61a92b324c-892efd56aa.zip/node_modules/extsprintf/",
           "packageDependencies": [
             ["extsprintf", "npm:1.3.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["fake-xml-http-request", [
+        ["npm:2.1.1", {
+          "packageLocation": "./.yarn/cache/fake-xml-http-request-npm-2.1.1-f100f27928-818ef45b44.zip/node_modules/fake-xml-http-request/",
+          "packageDependencies": [
+            ["fake-xml-http-request", "npm:2.1.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["faker", [
+        ["npm:5.1.0", {
+          "packageLocation": "./.yarn/cache/faker-npm-5.1.0-1d65bf8480-cc0a0c2b29.zip/node_modules/faker/",
+          "packageDependencies": [
+            ["faker", "npm:5.1.0"]
           ],
           "linkType": "HARD",
         }]
@@ -7228,6 +7270,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/infer-owner-npm-1.0.4-685ac3d2af-56aa1d87b0.zip/node_modules/infer-owner/",
           "packageDependencies": [
             ["infer-owner", "npm:1.0.4"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["inflected", [
+        ["npm:2.1.0", {
+          "packageLocation": "./.yarn/cache/inflected-npm-2.1.0-3319dba3d4-ce69a7aa82.zip/node_modules/inflected/",
+          "packageDependencies": [
+            ["inflected", "npm:2.1.0"]
           ],
           "linkType": "HARD",
         }]
@@ -8345,11 +8396,218 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["lodash.assign", [
+        ["npm:4.2.0", {
+          "packageLocation": "./.yarn/cache/lodash.assign-npm-4.2.0-18b16126b9-ef1a67138d.zip/node_modules/lodash.assign/",
+          "packageDependencies": [
+            ["lodash.assign", "npm:4.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.camelcase", [
+        ["npm:4.3.0", {
+          "packageLocation": "./.yarn/cache/lodash.camelcase-npm-4.3.0-bf268e3bf0-3cb674ed3b.zip/node_modules/lodash.camelcase/",
+          "packageDependencies": [
+            ["lodash.camelcase", "npm:4.3.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.clonedeep", [
+        ["npm:4.5.0", {
+          "packageLocation": "./.yarn/cache/lodash.clonedeep-npm-4.5.0-fbc3cda4e5-41e2fe4c57.zip/node_modules/lodash.clonedeep/",
+          "packageDependencies": [
+            ["lodash.clonedeep", "npm:4.5.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.compact", [
+        ["npm:3.0.1", {
+          "packageLocation": "./.yarn/cache/lodash.compact-npm-3.0.1-8c9c8b504a-261aea6ba9.zip/node_modules/lodash.compact/",
+          "packageDependencies": [
+            ["lodash.compact", "npm:3.0.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.find", [
+        ["npm:4.6.0", {
+          "packageLocation": "./.yarn/cache/lodash.find-npm-4.6.0-dd2db8c53f-a6188ffe8d.zip/node_modules/lodash.find/",
+          "packageDependencies": [
+            ["lodash.find", "npm:4.6.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.flatten", [
+        ["npm:4.4.0", {
+          "packageLocation": "./.yarn/cache/lodash.flatten-npm-4.4.0-495935e617-f22a7f6f16.zip/node_modules/lodash.flatten/",
+          "packageDependencies": [
+            ["lodash.flatten", "npm:4.4.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.forin", [
+        ["npm:4.4.0", {
+          "packageLocation": "./.yarn/cache/lodash.forin-npm-4.4.0-98acc6653e-a5d82f15b9.zip/node_modules/lodash.forin/",
+          "packageDependencies": [
+            ["lodash.forin", "npm:4.4.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.get", [
+        ["npm:4.4.2", {
+          "packageLocation": "./.yarn/cache/lodash.get-npm-4.4.2-7bda64ed87-447e575e3c.zip/node_modules/lodash.get/",
+          "packageDependencies": [
+            ["lodash.get", "npm:4.4.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.has", [
+        ["npm:4.5.2", {
+          "packageLocation": "./.yarn/cache/lodash.has-npm-4.5.2-0a10673e08-ed2cbed6f3.zip/node_modules/lodash.has/",
+          "packageDependencies": [
+            ["lodash.has", "npm:4.5.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.invokemap", [
+        ["npm:4.6.0", {
+          "packageLocation": "./.yarn/cache/lodash.invokemap-npm-4.6.0-d358fce989-1782264255.zip/node_modules/lodash.invokemap/",
+          "packageDependencies": [
+            ["lodash.invokemap", "npm:4.6.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.isempty", [
+        ["npm:4.4.0", {
+          "packageLocation": "./.yarn/cache/lodash.isempty-npm-4.4.0-9997a8300c-f5cf56151c.zip/node_modules/lodash.isempty/",
+          "packageDependencies": [
+            ["lodash.isempty", "npm:4.4.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.isequal", [
+        ["npm:4.5.0", {
+          "packageLocation": "./.yarn/cache/lodash.isequal-npm-4.5.0-f8b0f64d63-5b47e09464.zip/node_modules/lodash.isequal/",
+          "packageDependencies": [
+            ["lodash.isequal", "npm:4.5.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.isfunction", [
+        ["npm:3.0.9", {
+          "packageLocation": "./.yarn/cache/lodash.isfunction-npm-3.0.9-72aaa7f66c-4c7c77b45e.zip/node_modules/lodash.isfunction/",
+          "packageDependencies": [
+            ["lodash.isfunction", "npm:3.0.9"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.isinteger", [
+        ["npm:4.0.4", {
+          "packageLocation": "./.yarn/cache/lodash.isinteger-npm-4.0.4-42add9f4e1-a29551cc9a.zip/node_modules/lodash.isinteger/",
+          "packageDependencies": [
+            ["lodash.isinteger", "npm:4.0.4"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.isplainobject", [
+        ["npm:4.0.6", {
+          "packageLocation": "./.yarn/cache/lodash.isplainobject-npm-4.0.6-d73937742f-72a114b610.zip/node_modules/lodash.isplainobject/",
+          "packageDependencies": [
+            ["lodash.isplainobject", "npm:4.0.6"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.lowerfirst", [
+        ["npm:4.3.1", {
+          "packageLocation": "./.yarn/cache/lodash.lowerfirst-npm-4.3.1-2face3f9db-9ef73c1bca.zip/node_modules/lodash.lowerfirst/",
+          "packageDependencies": [
+            ["lodash.lowerfirst", "npm:4.3.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.map", [
+        ["npm:4.6.0", {
+          "packageLocation": "./.yarn/cache/lodash.map-npm-4.6.0-8013e2ad18-f8a8f4072c.zip/node_modules/lodash.map/",
+          "packageDependencies": [
+            ["lodash.map", "npm:4.6.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.mapvalues", [
+        ["npm:4.6.0", {
+          "packageLocation": "./.yarn/cache/lodash.mapvalues-npm-4.6.0-4664380119-84399826cc.zip/node_modules/lodash.mapvalues/",
+          "packageDependencies": [
+            ["lodash.mapvalues", "npm:4.6.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.pick", [
+        ["npm:4.4.0", {
+          "packageLocation": "./.yarn/cache/lodash.pick-npm-4.4.0-126deebf95-3cf24484b1.zip/node_modules/lodash.pick/",
+          "packageDependencies": [
+            ["lodash.pick", "npm:4.4.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.snakecase", [
+        ["npm:4.1.1", {
+          "packageLocation": "./.yarn/cache/lodash.snakecase-npm-4.1.1-b12cdbecb4-3b3d145759.zip/node_modules/lodash.snakecase/",
+          "packageDependencies": [
+            ["lodash.snakecase", "npm:4.1.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["lodash.sortby", [
         ["npm:4.7.0", {
           "packageLocation": "./.yarn/cache/lodash.sortby-npm-4.7.0-fda8ab950d-43cde11276.zip/node_modules/lodash.sortby/",
           "packageDependencies": [
             ["lodash.sortby", "npm:4.7.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.uniq", [
+        ["npm:4.5.0", {
+          "packageLocation": "./.yarn/cache/lodash.uniq-npm-4.5.0-7c270dca85-47cb25b59b.zip/node_modules/lodash.uniq/",
+          "packageDependencies": [
+            ["lodash.uniq", "npm:4.5.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.uniqby", [
+        ["npm:4.7.0", {
+          "packageLocation": "./.yarn/cache/lodash.uniqby-npm-4.7.0-8d0bd68e95-bea225431a.zip/node_modules/lodash.uniqby/",
+          "packageDependencies": [
+            ["lodash.uniqby", "npm:4.7.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lodash.values", [
+        ["npm:4.3.0", {
+          "packageLocation": "./.yarn/cache/lodash.values-npm-4.3.0-e748ca8e20-6cbacb0e04.zip/node_modules/lodash.values/",
+          "packageDependencies": [
+            ["lodash.values", "npm:4.3.0"]
           ],
           "linkType": "HARD",
         }]
@@ -8751,6 +9009,41 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["minizlib", "npm:2.1.2"],
             ["minipass", "npm:3.1.3"],
             ["yallist", "npm:4.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["miragejs", [
+        ["npm:0.1.41", {
+          "packageLocation": "./.yarn/cache/miragejs-npm-0.1.41-06df7a77b8-3996a06e34.zip/node_modules/miragejs/",
+          "packageDependencies": [
+            ["miragejs", "npm:0.1.41"],
+            ["@miragejs/pretender-node-polyfill", "npm:0.1.2"],
+            ["inflected", "npm:2.1.0"],
+            ["lodash.assign", "npm:4.2.0"],
+            ["lodash.camelcase", "npm:4.3.0"],
+            ["lodash.clonedeep", "npm:4.5.0"],
+            ["lodash.compact", "npm:3.0.1"],
+            ["lodash.find", "npm:4.6.0"],
+            ["lodash.flatten", "npm:4.4.0"],
+            ["lodash.forin", "npm:4.4.0"],
+            ["lodash.get", "npm:4.4.2"],
+            ["lodash.has", "npm:4.5.2"],
+            ["lodash.invokemap", "npm:4.6.0"],
+            ["lodash.isempty", "npm:4.4.0"],
+            ["lodash.isequal", "npm:4.5.0"],
+            ["lodash.isfunction", "npm:3.0.9"],
+            ["lodash.isinteger", "npm:4.0.4"],
+            ["lodash.isplainobject", "npm:4.0.6"],
+            ["lodash.lowerfirst", "npm:4.3.1"],
+            ["lodash.map", "npm:4.6.0"],
+            ["lodash.mapvalues", "npm:4.6.0"],
+            ["lodash.pick", "npm:4.4.0"],
+            ["lodash.snakecase", "npm:4.1.1"],
+            ["lodash.uniq", "npm:4.5.0"],
+            ["lodash.uniqby", "npm:4.7.0"],
+            ["lodash.values", "npm:4.3.0"],
+            ["pretender", "npm:3.4.3"]
           ],
           "linkType": "HARD",
         }]
@@ -10039,6 +10332,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["pretender", [
+        ["npm:3.4.3", {
+          "packageLocation": "./.yarn/cache/pretender-npm-3.4.3-7b4a9d2c45-42f84b2636.zip/node_modules/pretender/",
+          "packageDependencies": [
+            ["pretender", "npm:3.4.3"],
+            ["fake-xml-http-request", "npm:2.1.1"],
+            ["route-recognizer", "npm:0.3.4"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["prettier", [
         ["npm:2.1.2", {
           "packageLocation": "./.yarn/cache/prettier-npm-2.1.2-9d456ef3cd-bedc24c568.zip/node_modules/prettier/",
@@ -10897,6 +11201,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["ripemd160", "npm:2.0.2"],
             ["hash-base", "npm:3.1.0"],
             ["inherits", "npm:2.0.4"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["route-recognizer", [
+        ["npm:0.3.4", {
+          "packageLocation": "./.yarn/cache/route-recognizer-npm-0.3.4-e2704e473b-3fdc3e2079.zip/node_modules/route-recognizer/",
+          "packageDependencies": [
+            ["route-recognizer", "npm:0.3.4"]
           ],
           "linkType": "HARD",
         }]
