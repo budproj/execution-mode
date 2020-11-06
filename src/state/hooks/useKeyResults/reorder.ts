@@ -1,26 +1,11 @@
 import flow from 'lodash/flow'
-import { Loadable, SetterOrUpdater, useRecoilState, useRecoilValueLoadable } from 'recoil'
+import { SetterOrUpdater } from 'recoil'
 
-import { KeyResultsHashmap } from 'components/KeyResult'
 import { CustomSorting, User } from 'components/User'
 import logger from 'lib/logger'
-import { hasFetchedAllValues } from 'specifications'
 import { patchFromAPI } from 'state/actions'
-import userCustomSortingAtom from 'state/atoms/user/customSorting/keyResults'
-import userIDAtom from 'state/atoms/user/id'
-import { all as allSelector } from 'state/selectors/keyResults'
-import userCustomSortingSelector from 'state/selectors/user/customSorting/keyResults'
 
-const KEY = 'useKeyResults'
-
-type KeyResultsHook = {
-  all: Loadable<KeyResultsHashmap>
-  customSorting: Loadable<CustomSorting['keyResults']>
-  reorderCustomSort: (
-    fromIndex: number,
-    toIndex: number,
-  ) => CustomSorting['keyResults'] | false | void
-}
+const KEY = 'useKeyResults::reorder'
 
 interface ReorderCustomSortState {
   userID: User['id']
@@ -90,33 +75,21 @@ const updateCustomSortRemoteState = async (
   }
 }
 
-const useKeyResults = (): KeyResultsHook => {
-  const userID = useRecoilValueLoadable(userIDAtom)
-  const setLocalUserCustomSorting = useRecoilState(userCustomSortingAtom)[1]
-  const allKeyResults = useRecoilValueLoadable<KeyResultsHashmap>(allSelector)
-  const userCustomSorting = useRecoilValueLoadable<CustomSorting['keyResults']>(
-    userCustomSortingSelector,
-  )
+const reorder = (
+  userID: User['id'],
+  userCustomSorting: CustomSorting['keyResults'],
+  setLocalUserCustomSorting: SetterOrUpdater<CustomSorting['keyResults']>,
+) => (fromIndex: number, toIndex: number): Promise<ReorderCustomSortState> =>
+  flow(
+    changeSortOrder,
+    updateCustomSortLocalState,
+    updateCustomSortRemoteState,
+  )({
+    fromIndex,
+    toIndex,
+    setLocalUserCustomSorting,
+    userID: userID,
+    originalCustomSorting: userCustomSorting,
+  })
 
-  const reorderCustomSort = (fromIndex: number, toIndex: number): Promise<ReorderCustomSortState> =>
-    hasFetchedAllValues(userCustomSorting, userID) &&
-    flow(
-      changeSortOrder,
-      updateCustomSortLocalState,
-      updateCustomSortRemoteState,
-    )({
-      fromIndex,
-      toIndex,
-      setLocalUserCustomSorting,
-      userID: userID.contents,
-      originalCustomSorting: userCustomSorting.contents,
-    })
-
-  return {
-    reorderCustomSort,
-    all: allKeyResults,
-    customSorting: userCustomSorting,
-  }
-}
-
-export default useKeyResults
+export default reorder

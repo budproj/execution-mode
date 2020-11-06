@@ -47,7 +47,7 @@ const KeyResultsTable = (): ReactElement => {
 
   useEffect(() => {
     if (control === 0 && keyResults.customSorting.state === 'hasValue') {
-      keyResults.reorderCustomSort(0, 1)
+      keyResults.reorder(0, 1)
       control = 1
     }
   }, [keyResults])
