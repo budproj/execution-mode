@@ -1,7 +1,9 @@
+import customSorting from './customSorting'
 import cycle from './cycle'
 import icon from './icon'
 import keyResult from './keyResult'
 import objective from './objective'
+import team from './team'
 import user from './user'
 
 export default {
@@ -10,4 +12,6 @@ export default {
   cycle,
   icon,
   objective,
+  customSorting,
+  team,
 }

@@ -63,6 +63,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["accepts", "npm:1.3.7"],
             ["chalk", "npm:4.1.0"],
             ["crypto", "npm:1.0.1"],
+            ["date-fns", "npm:2.16.1"],
             ["eslint", "npm:7.12.1"],
             ["eslint-config-prettier", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:6.15.0"],
             ["eslint-import-resolver-typescript", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:2.3.0"],
@@ -5147,6 +5148,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["date-fns", [
+        ["npm:2.16.1", {
+          "packageLocation": "./.yarn/cache/date-fns-npm-2.16.1-2f082a8b35-fbe5d9aa1d.zip/node_modules/date-fns/",
+          "packageDependencies": [
+            ["date-fns", "npm:2.16.1"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["debug", [
         ["virtual:1a693cbdf41f6c76f18019cb77210859be16eef16627dac0e03e92b6d2ec98699c09dfca0638e23027cc025cfc583b1dd02ea5865067befc65c418929d1f00e3#npm:3.1.0", {
           "packageLocation": "./.yarn/$$virtual/debug-virtual-2f638cde4d/0/cache/debug-npm-3.1.0-9f0accb99b-1295acd5e0.zip/node_modules/debug/",
@@ -6218,6 +6228,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["accepts", "npm:1.3.7"],
             ["chalk", "npm:4.1.0"],
             ["crypto", "npm:1.0.1"],
+            ["date-fns", "npm:2.16.1"],
             ["eslint", "npm:7.12.1"],
             ["eslint-config-prettier", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:6.15.0"],
             ["eslint-import-resolver-typescript", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:2.3.0"],

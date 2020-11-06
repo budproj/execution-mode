@@ -1,4 +1,4 @@
-import { CompanyCycle } from 'components/Company'
+import { CompanyCycle, CompanyTeam } from 'components/Company'
 import { Objective } from 'components/Objective'
 import { User } from 'components/User'
 
@@ -12,9 +12,9 @@ export interface KeyResultIcon {
 export interface KeyResult {
   id: string
   title: string
-  team: string
   confidence: number
   progress: number
+  team: CompanyTeam
   cycle: CompanyCycle
   icon: KeyResultIcon
   objective: Objective

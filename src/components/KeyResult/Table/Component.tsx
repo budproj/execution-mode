@@ -30,7 +30,7 @@ const StyledHeadLabel = styled(Typography)(({ theme }) => ({
 const KeyResultsTable = (): ReactElement => {
   const intl = useIntl()
   const keyResults = useKeyResults()
-  logger.debug('Rerendered component. Take a look at the keyResults hook data', {
+  logger.debug('Rerendered component. Take a look at the keyResults hook data:', {
     data: keyResults,
     component: 'KeyResultsTable',
   })

@@ -1,12 +1,22 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const omit = require('lodash/omit')
 
-const { HOST, APP_ENV, DEFAULT_LOCALE, LOCALE_OVERRIDE, SUPPORTED_LOCALES, NODE_ENV } = process.env
+const {
+  HOST,
+  APP_ENV,
+  DEFAULT_LOCALE,
+  LOCALE_OVERRIDE,
+  SUPPORTED_LOCALES,
+  NODE_ENV,
+  LOG_LEVEL,
+  API_ACL_PATH,
+} = process.env
 
 const publicRuntimeConfig = {
   environment: APP_ENV,
   nodeEnv: NODE_ENV,
   defaultLocale: DEFAULT_LOCALE,
+  logLevel: LOG_LEVEL,
 
   intlRoutes: [
     {
@@ -20,6 +30,10 @@ const publicRuntimeConfig = {
       locale: 'en-US',
     },
   ],
+
+  api: {
+    acl: API_ACL_PATH,
+  },
 }
 
 const serverRuntimeConfig = {

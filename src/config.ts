@@ -1,5 +1,7 @@
 import getNextConfig from 'next/config'
 
+export type LogLevels = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
+
 export enum Locale {
   'pt-BR' = 'pt-BR',
   'en-US' = 'en-US',
@@ -25,6 +27,10 @@ export interface Route {
   locale: Locale
 }
 
+export interface BudAPIs {
+  acl: string
+}
+
 export interface BudServerConfig {
   host: Host
   supportedLocales: Locale[]
@@ -35,6 +41,8 @@ export interface BudPublicConfig {
   nodeEnv: NodeEnv
   defaultLocale: Locale
   intlRoutes: Route[]
+  logLevel: LogLevels
+  api: BudAPIs
 }
 
 export interface BudConfig {

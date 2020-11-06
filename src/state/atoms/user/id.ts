@@ -1,6 +1,8 @@
 import { atom } from 'recoil'
 
+export const KEY = 'ATOMS::USER::ID'
+
 export default atom({
-  key: 'USER::ID',
+  key: KEY,
   default: '1',
 })

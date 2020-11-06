@@ -1,14 +1,15 @@
+import format from 'date-fns/format'
 import { TransformableInfo } from 'logform'
 import TransportStream from 'winston-transport'
 
-enum LevelColors {
+import { LogLevels } from 'config'
+
+enum LogLevelColors {
   DEBUG = 'gray',
   INFO = 'darkturquoise',
   WARN = 'khaki',
   ERROR = 'tomato',
 }
-
-type Levels = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
 
 const defaultColor = 'color: inherit'
 const grayColor = 'color: gray'
@@ -21,10 +22,12 @@ export class ConsoleTransport extends TransportStream {
   }
 
   log(info: TransformableInfo, next: () => void): void {
-    const logLevelColor = `color: ${LevelColors[info.level.toUpperCase() as Levels]};`
+    const logLevelColor = `color: ${LogLevelColors[info.level.toUpperCase() as LogLevels]};`
+    const timestamp = new Date()
+    const formattedDate = format(timestamp, 'yyyy-MM-dd hh:mm:ss:SS')
 
     console.log(
-      `%c${info.component} %c➤ %c[%c${info.level.toUpperCase()}%c]:`,
+      `%c${formattedDate} - ${info.component} %c➤ %c[%c${info.level.toUpperCase()}%c]:`,
       grayColor,
       logLevelColor,
       defaultColor,

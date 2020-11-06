@@ -4,16 +4,14 @@ import { ConsoleTransport } from './transports'
 
 import getConfig from 'config'
 
-const LOGLEVEL = 'debug'
-
 const { publicRuntimeConfig } = getConfig()
 const logger = winston.createLogger({
-  level: LOGLEVEL,
+  level: publicRuntimeConfig.logLevel,
   defaultMeta: { service: 'bud@execution-mode' },
   transports: [
     new ConsoleTransport({
       silent: true,
-      level: LOGLEVEL,
+      level: publicRuntimeConfig.logLevel,
     }),
   ],
 })

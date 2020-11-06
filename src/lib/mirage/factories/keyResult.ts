@@ -6,7 +6,6 @@ import { pickRandom } from 'lib/mirage/selectors'
 
 export default Factory.extend({
   title: faker.name.title(),
-  team: faker.random.words(),
   confidence: faker.random.number(100),
   progress: faker.random.number(100),
 
@@ -15,10 +14,12 @@ export default Factory.extend({
     const cycle = server.schema.cycles.first()
     const icon = pickRandom(server.schema.icons)
     const objective = pickRandom(server.schema.objectives)
+    const team = pickRandom(server.schema.teams)
 
     keyResult.update('owner', owner)
     keyResult.update('cycle', cycle)
     keyResult.update('icon', icon)
     keyResult.update('objective', objective)
+    keyResult.update('team', team)
   },
 } as KeyResult)
