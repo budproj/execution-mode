@@ -1,13 +1,14 @@
 import flow from 'lodash/flow'
-import { SetterOrUpdater } from 'recoil'
+import { Loadable, SetterOrUpdater } from 'recoil'
 
 import { CustomSorting, User } from 'components/User'
 import logger from 'lib/logger'
+import { hasFetchedAllValues } from 'specifications'
 import { patchFromAPI } from 'state/actions'
 
 const KEY = 'useKeyResults::reorder'
 
-interface ReorderCustomSortState {
+export interface ReorderCustomSortState {
   userID: User['id']
   fromIndex: number
   toIndex: number
@@ -76,20 +77,26 @@ const updateCustomSortRemoteState = async (
 }
 
 const reorder = (
-  userID: User['id'],
-  userCustomSorting: CustomSorting['keyResults'],
+  userID: Loadable<User['id']>,
+  userCustomSorting: Loadable<CustomSorting['keyResults']>,
   setLocalUserCustomSorting: SetterOrUpdater<CustomSorting['keyResults']>,
-) => (fromIndex: number, toIndex: number): Promise<ReorderCustomSortState> =>
-  flow(
+) => (fromIndex: number, toIndex: number): Promise<ReorderCustomSortState> => {
+  const executeReorder = flow(
     changeSortOrder,
     updateCustomSortLocalState,
     updateCustomSortRemoteState,
-  )({
+  )
+  const state: ReorderCustomSortState = {
     fromIndex,
     toIndex,
     setLocalUserCustomSorting,
-    userID: userID,
-    originalCustomSorting: userCustomSorting,
-  })
+    userID: userID.contents,
+    originalCustomSorting: userCustomSorting.contents,
+  }
+
+  return hasFetchedAllValues(userID, userCustomSorting)
+    ? flow(executeReorder)(state)
+    : userCustomSorting.contents
+}
 
 export default reorder
