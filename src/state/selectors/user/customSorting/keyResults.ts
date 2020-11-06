@@ -1,7 +1,6 @@
 import { GetRecoilValue, selector } from 'recoil'
 
 import { CustomSorting } from 'components/User'
-import logger from 'lib/logger'
 import { getFromAPI } from 'state/actions'
 import userCustomSortingAtom from 'state/atoms/user/customSorting/keyResults'
 import userIDAtom from 'state/atoms/user/id'
@@ -12,8 +11,6 @@ const fetchKeyResultsSortinFromAPI = async (
   get: GetRecoilValue,
 ): Promise<CustomSorting['keyResults']> => {
   const userID = get(userIDAtom)
-  logger.debug(`Selected USER_ID: ${userID}`, { component: KEY })
-
   const response = await getFromAPI<CustomSorting['keyResults']>(
     `/users/${userID}/custom-sorting/key-results`,
     KEY,

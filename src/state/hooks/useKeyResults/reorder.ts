@@ -76,15 +76,23 @@ const updateCustomSortRemoteState = async (
   }
 }
 
+const extractNewCustomSorting = (
+  promise: Promise<ReorderCustomSortState>,
+): Promise<CustomSorting['keyResults']> => promise.then((state) => state.newCustomSorting)
+
 const reorder = (
   userID: Loadable<User['id']>,
   userCustomSorting: Loadable<CustomSorting['keyResults']>,
   setLocalUserCustomSorting: SetterOrUpdater<CustomSorting['keyResults']>,
-) => (fromIndex: number, toIndex: number): Promise<ReorderCustomSortState> => {
+) => (
+  fromIndex: number,
+  toIndex: number,
+): Promise<CustomSorting['keyResults']> | CustomSorting['keyResults'] => {
   const executeReorder = flow(
     changeSortOrder,
     updateCustomSortLocalState,
     updateCustomSortRemoteState,
+    extractNewCustomSorting,
   )
   const state: ReorderCustomSortState = {
     fromIndex,

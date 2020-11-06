@@ -1,6 +1,6 @@
 import { Loadable, useRecoilState, useRecoilValueLoadable } from 'recoil'
 
-import buildReorder, { ReorderCustomSortState } from './reorder'
+import buildReorder from './reorder'
 
 import { KeyResultsHashmap } from 'components/KeyResult'
 import { CustomSorting, User } from 'components/User'
@@ -12,7 +12,7 @@ import userCustomSortingSelector from 'state/selectors/user/customSorting/keyRes
 type KeyResultsHook = {
   all: Loadable<KeyResultsHashmap>
   customSorting: Loadable<CustomSorting['keyResults']>
-  reorder: (fromIndex: number, toIndex: number) => Promise<ReorderCustomSortState>
+  reorder: (fromIndex: number, toIndex: number) => Promise<CustomSorting['keyResults']>
 }
 
 const useKeyResults = (): KeyResultsHook => {
