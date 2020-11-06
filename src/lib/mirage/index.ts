@@ -25,8 +25,12 @@ export function makeServer(environment: NodeEnv): Server {
     routes() {
       this.namespace = 'api'
 
-      this.get('/key-results', handlers.keyResults)
-      this.get('/users/:id/custom-sorting/key-results', handlers.userCustomSortingKeyResults)
+      this.get('/key-results', handlers.keyResults.getAll)
+      this.patch('/users/:id/custom-sorting', handlers.customSorting.patchUser)
+      this.get(
+        '/users/:id/custom-sorting/key-results',
+        handlers.customSorting.keyResults.getFromUser,
+      )
     },
   })
 

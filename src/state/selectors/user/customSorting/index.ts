@@ -1,16 +1,16 @@
 import { selector } from 'recoil'
 
-import keyResultSelector from './keyResult'
+import keyResultsSelector from './keyResults'
 
-export const keyResult = keyResultSelector
+export const keyResults = keyResultsSelector
 
 export default selector({
   key: 'USER::CUSTOM_SORTING',
   get: ({ get }) => {
-    const keyResult = get(keyResultSelector)
+    const keyResults = get(keyResultsSelector)
 
     return {
-      keyResult,
+      keyResults,
     }
   },
 })

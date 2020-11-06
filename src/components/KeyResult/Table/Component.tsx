@@ -5,10 +5,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  TableSortLabel,
   Typography,
 } from '@material-ui/core'
-import React, { ReactElement } from 'react'
+import React, { useEffect, ReactElement } from 'react'
 // import { DropResult } from 'react-beautiful-dnd'
 import { useIntl } from 'react-intl'
 
@@ -17,6 +16,8 @@ import messages from './messages'
 import { KeyResult } from 'components/KeyResult/types'
 import logger from 'lib/logger'
 import { useKeyResults } from 'state/hooks'
+
+let control = 0
 
 interface HeadCell {
   id: keyof KeyResult
@@ -40,9 +41,16 @@ const KeyResultsTable = (): ReactElement => {
     { id: 'objective', label: intl.formatMessage(messages.tableHeadOKR) },
     { id: 'confidence', label: intl.formatMessage(messages.tableHeadStatus) },
     { id: 'progress', label: intl.formatMessage(messages.tableHeadProgress) },
-    { id: 'date', label: intl.formatMessage(messages.tableHeadDate) },
+    { id: 'cycle', label: intl.formatMessage(messages.tableHeadDate) },
     { id: 'owner', label: intl.formatMessage(messages.tableHeadOwner) },
   ]
+
+  useEffect(() => {
+    if (control === 0 && keyResults.customSorting.state === 'hasValue') {
+      keyResults.reorderCustomSort(0, 1)
+      control = 1
+    }
+  }, [keyResults])
 
   // const onDragEnd = ({ source, destination }: DropResult): void => {
   //   if (destination && destination.index !== source.index) {
@@ -59,9 +67,7 @@ const KeyResultsTable = (): ReactElement => {
           <TableRow>
             {headCells.map((singleHeadCell) => (
               <TableCell variant={'head'} key={singleHeadCell.id}>
-                <TableSortLabel active={true}>
-                  <StyledHeadLabel variant={'body2'}>{singleHeadCell.label}</StyledHeadLabel>
-                </TableSortLabel>
+                <StyledHeadLabel variant={'body2'}>{singleHeadCell.label}</StyledHeadLabel>
               </TableCell>
             ))}
           </TableRow>

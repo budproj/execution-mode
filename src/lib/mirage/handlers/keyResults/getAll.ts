@@ -1,4 +1,3 @@
-import { Request } from 'miragejs'
 // eslint-disable-next-line import/no-unresolved
 import DbCollection from 'miragejs/db-collection'
 
@@ -6,17 +5,10 @@ import { CompanyCycle, CompanyTeam } from 'components/Company'
 import { KeyResult, KeyResultIcon, KeyResultsHashmap } from 'components/KeyResult'
 import { Objective } from 'components/Objective'
 import { User } from 'components/User'
+import { MirageResponse } from 'lib/mirage/handlers'
+import { reduceToAttrs } from 'lib/mirage/selectors'
 
-type MirageResponse<T> = {
-  data: T
-}
-
-const reduceToAttrs = (
-  prev: Record<string, unknown>[],
-  next: Record<string, Record<string, unknown>>,
-): Record<string, unknown>[] => [...prev, next.attrs]
-
-const keyResults = (schema: Record<string, DbCollection>): MirageResponse<KeyResultsHashmap> => {
+const getAll = (schema: Record<string, DbCollection>): MirageResponse<KeyResultsHashmap> => {
   const dbModels = schema.keyResults.all().models
   const dbData = dbModels.reduce(reduceToAttrs, [])
 
@@ -69,19 +61,4 @@ const keyResults = (schema: Record<string, DbCollection>): MirageResponse<KeyRes
   }
 }
 
-const userCustomSortingKeyResults = (
-  schema: Record<string, DbCollection>,
-  request: Request,
-): MirageResponse<KeyResult['id'][]> => {
-  const userId = request.params.id
-  const userCustomSorting = schema.customSortings.findBy({ userId }).attrs
-
-  return {
-    data: userCustomSorting.keyResultIds,
-  }
-}
-
-export default {
-  keyResults,
-  userCustomSortingKeyResults,
-}
+export default getAll

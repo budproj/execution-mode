@@ -10,3 +10,8 @@ export const pickRandom = (dbCollection: DbCollection): PickRandomResult => {
 
   return dbCollection.find(picked)
 }
+
+export const reduceToAttrs = (
+  prev: Record<string, unknown>[],
+  next: Record<string, Record<string, unknown>>,
+): Record<string, unknown>[] => [...prev, next.attrs]
