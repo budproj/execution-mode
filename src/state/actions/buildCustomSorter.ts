@@ -3,25 +3,24 @@ import { Loadable, SetterOrUpdater } from 'recoil'
 
 import { CustomSorting, User } from 'components/User'
 import logger from 'lib/logger'
-import { hasFetchedAllValues } from 'specifications'
 import { patchFromAPI } from 'state/actions'
 
-const KEY = 'useKeyResults::reorder'
+const component = 'useReorderCustomSorting'
 
 export interface ReorderCustomSortState {
   userID: User['id']
   fromIndex: number
   toIndex: number
   originalCustomSorting: CustomSorting['keyResults']
-  newCustomSorting: CustomSorting['keyResults']
   setLocalUserCustomSorting: SetterOrUpdater<CustomSorting['keyResults']>
-  remoteResponse: CustomSorting['keyResults']
+  remoteResponse?: CustomSorting['keyResults']
+  newCustomSorting?: CustomSorting['keyResults']
 }
 
 const changeSortOrder = (state: ReorderCustomSortState): ReorderCustomSortState => {
   logger.debug('Reordering user custom sort. Original sort order:', {
     data: state.originalCustomSorting,
-    component: KEY,
+    component,
   })
 
   const newCustomSorting = Array.from(state.originalCustomSorting)
@@ -30,7 +29,7 @@ const changeSortOrder = (state: ReorderCustomSortState): ReorderCustomSortState 
 
   logger.debug('Finished defining new order. Dispatching the following order to our API:', {
     data: newCustomSorting,
-    component: KEY,
+    component,
   })
 
   return {
@@ -40,11 +39,13 @@ const changeSortOrder = (state: ReorderCustomSortState): ReorderCustomSortState 
 }
 
 const updateCustomSortLocalState = (state: ReorderCustomSortState): ReorderCustomSortState => {
+  if (!state.newCustomSorting) return state
+
   logger.debug(
     `Updating local state with the following new custom sort for user ${state.userID}:`,
     {
       data: state.newCustomSorting,
-      component: KEY,
+      component,
     },
   )
 
@@ -62,12 +63,12 @@ const updateCustomSortRemoteState = async (
 
   logger.debug(`Dispatching the following new custom sort for user ${state.userID}:`, {
     data: body,
-    component: KEY,
+    component,
   })
   const response = await patchFromAPI<CustomSorting['keyResults']>(
     `/users/${state.userID}/custom-sorting`,
     body,
-    KEY,
+    component,
   )
 
   return {
@@ -78,16 +79,14 @@ const updateCustomSortRemoteState = async (
 
 const extractNewCustomSorting = (
   promise: Promise<ReorderCustomSortState>,
-): Promise<CustomSorting['keyResults']> => promise.then((state) => state.newCustomSorting)
+): Promise<CustomSorting['keyResults'] | undefined> =>
+  promise.then((state) => state.newCustomSorting)
 
-const reorder = (
+const useReorderCustomSorting = (
   userID: Loadable<User['id']>,
   userCustomSorting: Loadable<CustomSorting['keyResults']>,
   setLocalUserCustomSorting: SetterOrUpdater<CustomSorting['keyResults']>,
-) => (
-  fromIndex: number,
-  toIndex: number,
-): Promise<CustomSorting['keyResults']> | CustomSorting['keyResults'] => {
+) => (fromIndex: number, toIndex: number): Promise<CustomSorting['keyResults']> => {
   const executeReorder = flow(
     changeSortOrder,
     updateCustomSortLocalState,
@@ -98,13 +97,11 @@ const reorder = (
     fromIndex,
     toIndex,
     setLocalUserCustomSorting,
-    userID: userID.contents,
-    originalCustomSorting: userCustomSorting.contents,
+    userID: userID.getValue(),
+    originalCustomSorting: userCustomSorting.getValue(),
   }
 
-  return hasFetchedAllValues(userID, userCustomSorting)
-    ? flow(executeReorder)(state)
-    : userCustomSorting.contents
+  return flow(executeReorder)(state)
 }
 
-export default reorder
+export default useReorderCustomSorting

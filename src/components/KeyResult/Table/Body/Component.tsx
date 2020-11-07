@@ -7,11 +7,15 @@ import {
   OnDragEndResponder,
   Draggable,
 } from 'react-beautiful-dnd'
+import { useRecoilStateLoadable, useRecoilValueLoadable } from 'recoil'
 
 import { KeyResult } from 'components/KeyResult'
 import logger from 'lib/logger'
 import { hasFetchedAllValues } from 'specifications'
-import { useKeyResults } from 'state/hooks'
+import { buildCustomSorter } from 'state/actions'
+import { allKeyResults as allKeyResultsAtom } from 'state/recoil/keyResults/all'
+import { userKeyResultsCustomSorting as userCustomSortingAtom } from 'state/recoil/users/current/customSorting/keyResults'
+import { userID as userIDAtom } from 'state/recoil/users/current/id'
 
 const DroppableBody = (onDragEnd: OnDragEndResponder) => (
   props: Record<string, unknown>,
@@ -44,22 +48,29 @@ const DraggableRow = (id: KeyResult['id'], index: number) => (
 )
 
 const KeyResultsTableBody = (): ReactElement => {
-  const keyResults = useKeyResults()
-  const wasDataFetched = hasFetchedAllValues(keyResults.customSorting)
+  const userID = useRecoilValueLoadable(userIDAtom)
+  const allKeyResults = useRecoilValueLoadable(allKeyResultsAtom)
+  const [userCustomSorting, setUserCustomSorting] = useRecoilStateLoadable(userCustomSortingAtom)
+  const reorderCustomSorting = buildCustomSorter(userID, userCustomSorting, setUserCustomSorting)
 
-  logger.debug('Rerendered Key Results table body. Take a look at the keyResults hook data:', {
-    data: keyResults,
+  const wasDataFetched = hasFetchedAllValues(userID, userCustomSorting)
+
+  logger.debug('Rerendered Key Results table body. Take a look at our Recoil hooks data:', {
+    data: {
+      allKeyResults,
+      userCustomSorting,
+    },
     component: 'KeyResultsTableBody',
   })
 
   const onDragEnd = ({ source, destination }: DropResult) =>
     destination && destination.index !== source.index
-      ? keyResults.reorder(source.index, destination.index)
-      : keyResults.customSorting
+      ? reorderCustomSorting(source.index, destination.index)
+      : userCustomSorting.getValue()
 
   return wasDataFetched ? (
     <TableBody component={DroppableBody(onDragEnd)}>
-      {keyResults.customSorting.contents.map((id: KeyResult['id'], index: number) => (
+      {userCustomSorting.getValue().map((id: KeyResult['id'], index: number) => (
         <TableRow component={DraggableRow(id, index)} key={id}>
           <TableCell>{id}</TableCell>
           <TableCell>{id}</TableCell>

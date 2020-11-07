@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil'
 
 import PageContent from 'components/Base/PageContent'
 import KeyResultTable from 'components/KeyResult/Table'
-import { title as pageTitleAtom } from 'state/atoms/page'
+import { pageTitle as pageTitleAtom } from 'state/recoil/page/title'
 
 const messages = defineMessages({
   pageTitle: {

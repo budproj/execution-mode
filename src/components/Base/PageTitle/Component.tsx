@@ -3,7 +3,7 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { title as pageTitleAtom } from 'state/atoms/page'
+import { pageTitle as pageTitleAtom } from 'state/recoil/page/title'
 
 const PageTitle = (): ReactElement => {
   const pageTitle = useRecoilValue(pageTitleAtom)
