@@ -1,10 +1,10 @@
 import { ThemeProvider } from '@material-ui/core/styles'
 import App, { AppContext, AppProps } from 'next/app'
 import React, { ReactElement } from 'react'
-import { IntlProvider } from 'react-intl'
 import { RecoilRoot } from 'recoil'
 
 import Page from 'components/Base/Page'
+import RecoilIntlProvider from 'components/Base/RecoilIntlProvider'
 import getConfig from 'config'
 import { makeServer } from 'lib/mirage'
 import theme from 'themes/preset-base'
@@ -33,15 +33,15 @@ const BudApp = (props: BudAppProps): ReactElement => {
   }, [])
 
   return (
-    <IntlProvider locale={locale || 'pt-BR'} messages={messages}>
-      <ThemeProvider theme={theme}>
-        <RecoilRoot>
+    <RecoilRoot>
+      <RecoilIntlProvider locale={locale || 'pt-BR'} messages={messages}>
+        <ThemeProvider theme={theme}>
           <Page>
             <Component {...pageProps} />
           </Page>
-        </RecoilRoot>
-      </ThemeProvider>
-    </IntlProvider>
+        </ThemeProvider>
+      </RecoilIntlProvider>
+    </RecoilRoot>
   )
 }
 

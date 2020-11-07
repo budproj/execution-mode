@@ -4,7 +4,9 @@ import Link from 'components/Base/Link'
 
 const Foo = (): ReactElement => (
   <Fragment>
-    <Link href={'keyResults'}>Ir para Key Results</Link>
+    <Link href={'keyResults'}>
+      <p>Ir para Key Results</p>
+    </Link>
   </Fragment>
 )
 

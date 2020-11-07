@@ -4,18 +4,19 @@ import accepts from 'accepts'
 import { NextComponentType, NextPageContext } from 'next'
 import { useRouter } from 'next/router'
 import React, { ComponentType, ReactElement } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import getConfig, { Locale } from 'config'
 import isBrowser from 'specifications/isBrowser'
-import { useLocalizedPath } from 'state/hooks'
+import { intlRoute as intlRouteAtom } from 'state/recoil/intl/route'
 
 const withRedirect = (WrappedComponent: NextComponentType, location: string): ComponentType => {
   const WithRedirectWrapper = (props: Record<string, unknown>): ReactElement => {
     const router = useRouter()
-    const localizedLocation = useLocalizedPath(location)
+    const intlRoute = useRecoilValue(intlRouteAtom(location))
 
     if (isBrowser()) {
-      router.push(localizedLocation)
+      router.push(intlRoute)
       return <></>
     }
 
@@ -29,12 +30,17 @@ const withRedirect = (WrappedComponent: NextComponentType, location: string): Co
 
     const accept = accepts(ctx?.req as IncomingMessage)
     const locale =
-      accept.language(serverRuntimeConfig.supportedLocales) || publicRuntimeConfig.defaultLocale
-
-    const localizedLocation = useLocalizedPath(location, locale as Locale, ctx?.req?.url as string)
+      (accept.language(serverRuntimeConfig.supportedLocales) as Locale) ||
+      (publicRuntimeConfig.defaultLocale as Locale)
+    const intlRoute =
+      publicRuntimeConfig.intlRoutes.find(
+        (item) =>
+          (item.destination === location || item.destination === `/${location}`) &&
+          item.locale === locale,
+      ).source || location
 
     if (!isBrowser() && ctx.res && !ctx.res.headersSent) {
-      ctx.res.writeHead(302, { Location: localizedLocation })
+      ctx.res.writeHead(302, { Location: intlRoute })
       ctx.res.end()
     }
 
