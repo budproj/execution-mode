@@ -12,7 +12,7 @@ export interface IntlLinkProps extends LinkProps {
 const IntlLink = ({ href, ...rest }: IntlLinkProps): ReactElement => {
   const intlRoute = useRecoilValue(intlRouteAtom(href))
 
-  return <Link href={intlRoute} as={href} {...rest} />
+  return <Link href={href} as={intlRoute} {...rest} />
 }
 
 export default IntlLink
