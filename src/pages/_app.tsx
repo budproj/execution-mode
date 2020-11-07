@@ -1,10 +1,12 @@
-import React, { Fragment, ReactElement } from 'react'
-import App, { AppProps, AppContext } from 'next/app'
 import { ThemeProvider } from '@material-ui/core/styles'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import { IntlProvider } from 'react-intl'
+import App, { AppContext, AppProps } from 'next/app'
+import React, { ReactElement } from 'react'
+import { RecoilRoot } from 'recoil'
 
-import Template from 'components/Layout/Template'
+import Page from 'components/Base/Page'
+import RecoilIntlProvider from 'components/Base/RecoilIntlProvider'
+import getConfig from 'config'
+import { makeServer } from 'lib/mirage'
 import theme from 'themes/preset-base'
 
 type IntlMessage = Record<string, string>
@@ -13,6 +15,8 @@ interface BudAppProps extends AppProps {
   locale: string | undefined
   messages: IntlMessage
 }
+
+const config = getConfig()
 
 const getMessages = (locale: string | undefined): Promise<IntlMessage> => {
   return import(`../../compiled-lang/${locale}.json`) || {}
@@ -29,16 +33,15 @@ const BudApp = (props: BudAppProps): ReactElement => {
   }, [])
 
   return (
-    <IntlProvider locale={locale || 'pt-BR'} messages={messages}>
-      <ThemeProvider theme={theme}>
-        <Template>
-          <Fragment>
-            <CssBaseline />
+    <RecoilRoot>
+      <RecoilIntlProvider locale={locale || 'pt-BR'} messages={messages}>
+        <ThemeProvider theme={theme}>
+          <Page>
             <Component {...pageProps} />
-          </Fragment>
-        </Template>
-      </ThemeProvider>
-    </IntlProvider>
+          </Page>
+        </ThemeProvider>
+      </RecoilIntlProvider>
+    </RecoilRoot>
   )
 }
 
@@ -62,5 +65,7 @@ BudApp.getInitialProps = async (appContext: AppContext): Promise<BudAppProps> =>
     messages,
   }
 }
+
+config.publicRuntimeConfig.nodeEnv === 'development' && makeServer('development')
 
 export default BudApp

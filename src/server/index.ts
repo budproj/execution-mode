@@ -1,13 +1,14 @@
-import Koa from 'koa'
 import Router from '@koa/router'
-import next from 'next'
 import { cyan, gray } from 'chalk'
+import Koa from 'koa'
+import next from 'next'
 
 import config from './config'
 
 const launch = (): void => {
   const app = next({
     dev: config.dev,
+    dir: './src',
   })
 
   app.prepare().then(() => {
@@ -29,7 +30,11 @@ const launch = (): void => {
     server.use(router.routes())
 
     server.listen(config.port, () =>
-      log(`${cyan('➤')} ${gray('Web server running on:')} ${config.host}:${config.port}`),
+      log(
+        `${cyan('➤')} ${gray('Web server running on:')} ${config.secure ? 'https' : 'http'}://${
+          config.host
+        }:${config.port}`,
+      ),
     )
   })
 }

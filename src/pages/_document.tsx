@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react'
-import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document'
 import { ServerStyleSheets } from '@material-ui/core/styles'
-import getConfig from 'next/config'
+import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
+import React, { ReactElement } from 'react'
 
+import getConfig from 'config'
 import theme from 'themes/preset-base'
 
 interface BudDocumentProps {

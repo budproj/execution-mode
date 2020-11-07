@@ -1,15 +1,24 @@
-import { SvgIcon } from '@material-ui/core'
+import { SvgIcon, SvgIconProps } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 
-const NotificationBell = (): ReactElement => (
-  <SvgIcon viewBox={'0 0 22 24'}>
+import { AcessibleIconProps } from 'components/Icons/types'
+
+export interface NotificationBellIconProps extends SvgIconProps, AcessibleIconProps {}
+
+const NotificationBell = ({ title, desc, ...rest }: NotificationBellIconProps): ReactElement => (
+  <SvgIcon viewBox="0 0 18 20" {...rest}>
+    <title>{title}</title>
+    <desc>{desc}</desc>
     <path
       fillRule="evenodd"
       clipRule="evenodd"
-      d="M20.2381 11.2678C20.2381 7.32614 16.5357 4.00591 13.0952 2.93686V2.57138C13.0952 1.25591 12.0286 0.19043 10.7143 0.19043C9.4 0.19043 8.33333 1.25591 8.33333 2.57138V2.93686C4.89286 4.00591 1.19048 7.32614 1.19048 11.2678V18.0476H0.595238C0.266667 18.0476 0 18.3142 0 18.6428V19.8333C0 20.1619 0.266667 20.4285 0.595238 20.4285H7.14286C7.14286 22.4 8.74167 24 10.7143 24C12.6869 24 14.2857 22.4 14.2857 20.4285H20.8333C21.1619 20.4285 21.4286 20.1619 21.4286 19.8333V18.6428C21.4286 18.3142 21.1619 18.0476 20.8333 18.0476H20.2381V11.2678ZM11.9048 21.0238C11.9048 21.3524 11.6381 21.619 11.3095 21.619H10.119C9.79048 21.619 9.52381 21.3524 9.52381 21.0238V20.4286H11.9048V21.0238ZM3.57143 11.2679V18.0476H17.8571V11.2679C17.8571 7.78452 13.9964 4.95238 10.7143 4.95238C7.43214 4.95238 3.57143 7.78452 3.57143 11.2679Z"
-      fill="#546181"
+      d="M17 9.305C17 5.994 13.89 3.205 11 2.307V2C11 0.895 10.104 0 9 0C7.896 0 7 0.895 7 2V2.307C4.11 3.205 1 5.994 1 9.305V15H0.5C0.224 15 0 15.224 0 15.5V16.5C0 16.776 0.224 17 0.5 17H6C6 18.656 7.343 20 9 20C10.657 20 12 18.656 12 17H17.5C17.776 17 18 16.776 18 16.5V15.5C18 15.224 17.776 15 17.5 15H17V9.305ZM8.5 18C8.224 18 8 17.776 8 17.5V17H10V17.5C10 17.776 9.776 18 9.5 18H8.5ZM3 9.305V15H15V9.305C15 6.379 11.757 4 9 4C6.243 4 3 6.379 3 9.305Z"
     />
   </SvgIcon>
 )
+
+NotificationBell.defaultProps = {
+  htmlColor: 'black',
+}
 
 export default NotificationBell

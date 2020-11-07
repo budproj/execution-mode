@@ -1,5 +1,14 @@
 {
-  "watch": ["server", "lang", "next.config.js"],
+  "watch": [
+    "lang/*",
+    "nodemon.json",
+    "package.json",
+    "src/server/*",
+    "src/next.config.js",
+    "src/tsconfig.json",
+    "src/tsconfig.server.json",
+    "src/next-env.d.ts"
+  ],
   "exec": "run-s compile:intl server:launch",
   "ext": "ts tsx json"
 }
