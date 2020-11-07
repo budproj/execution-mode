@@ -1,6 +1,5 @@
 import { Request } from 'miragejs'
-// eslint-disable-next-line import/no-unresolved
-import DbCollection from 'miragejs/db-collection'
+import DbCollection from 'miragejs/db-collection' // eslint-disable-line import/no-unresolved
 
 import { CustomSorting } from 'components/User'
 import { MirageResponse } from 'lib/mirage/handlers'

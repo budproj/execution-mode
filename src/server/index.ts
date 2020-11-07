@@ -8,6 +8,7 @@ import config from './config'
 const launch = (): void => {
   const app = next({
     dev: config.dev,
+    dir: './src',
   })
 
   app.prepare().then(() => {

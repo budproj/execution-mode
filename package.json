@@ -6,11 +6,11 @@
   "scripts": {
     "start:dev": "run-s intl:refresh server:watch",
     "server:watch": "nodemon",
-    "server:launch": "ts-node --project tsconfig.server.json ./src/index.ts",
+    "server:launch": "ts-node --project ./src/tsconfig.server.json ./src/index.ts",
     "build": "run-s clean compile copy",
     "compile": "run-s compile:intl compile:typescript",
     "compile:intl": "run-p intl:compile:ptBR intl:compile:enUS",
-    "compile:typescript": "tsc --project tsconfig.server.json",
+    "compile:typescript": "tsc --project ./src/tsconfig.server.json",
     "clean": "rimraf -rf dist",
     "copy": "cp README.md LICENSE package.json dist",
     "lint": "eslint .",

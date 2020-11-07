@@ -1,5 +1,9 @@
 {
   "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType":  "module"
+  },
   "ignorePatterns": ["**/dist/*", "**/node_modules/*"],
   "env": {
     "commonjs": true,
@@ -19,10 +23,6 @@
     "formatjs",
     "import"
   ],
-  "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType":  "module"
-  },
   "rules": {
     "prettier/prettier": ["error"],
     "no-console": "off",
@@ -54,7 +54,8 @@
     },
     "import/resolver": {
       "typescript": {
-        "alwaysTryTypes": true
+        "alwaysTryTypes": true,
+        "project": "./src/tsconfig.server.json"
       }
     }
   }

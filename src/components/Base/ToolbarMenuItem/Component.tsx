@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
 
 import Button from 'components/Base/Button'
-import Link from 'components/Base/Link'
+import IntlLink from 'components/Base/IntlLink'
 
 export interface ToolbarMenuItemProps {
   label: string
@@ -14,9 +14,9 @@ const ToolbarMenuItem = (props: ToolbarMenuItemProps): ReactElement => {
   const isHrefCurrentRoute = router.pathname === props.href
 
   return (
-    <Link href={props.href}>
+    <IntlLink href={props.href}>
       <Button isActive={isHrefCurrentRoute}>{props.label}</Button>
-    </Link>
+    </IntlLink>
   )
 }
 

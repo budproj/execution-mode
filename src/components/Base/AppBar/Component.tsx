@@ -39,8 +39,8 @@ const AppBar = (): ReactElement => {
         <Box py={2} display={'flex'} gridGap={55} flexGrow={1}>
           <ToolbarMenuItem label={intl.formatMessage(messages.dashboard)} href={'/'} />
           <ToolbarMenuItem label={intl.formatMessage(messages.keyResults)} href={'/keyResults'} />
-          <ToolbarMenuItem label={intl.formatMessage(messages.item)} href={'#'} />
-          <ToolbarMenuItem label={intl.formatMessage(messages.item)} href={'#'} />
+          <ToolbarMenuItem label={intl.formatMessage(messages.item)} href={'/'} />
+          <ToolbarMenuItem label={intl.formatMessage(messages.item)} href={'/'} />
         </Box>
 
         <Box display={'flex'} gridGap={20} alignItems={'center'} justifyContent={'flex-end'}>

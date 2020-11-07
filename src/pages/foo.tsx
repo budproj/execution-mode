@@ -1,12 +1,12 @@
 import React, { Fragment, ReactElement } from 'react'
 
-import Link from 'components/Base/Link'
+import IntlLink from 'components/Base/IntlLink'
 
 const Foo = (): ReactElement => (
   <Fragment>
-    <Link href={'keyResults'}>
+    <IntlLink href={'keyResults'}>
       <p>Ir para Key Results</p>
-    </Link>
+    </IntlLink>
   </Fragment>
 )
 

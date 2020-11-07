@@ -9,7 +9,7 @@ import { useIntl } from 'react-intl'
 import messages from './messages'
 
 import Button from 'components/Base/Button'
-import Link from 'components/Base/Link'
+import IntlLink from 'components/Base/IntlLink'
 import ArrowRightIcon from 'components/Icons/ArrowRight'
 
 const StyledButton = styled(Button)({
@@ -47,7 +47,10 @@ const Breadcrumb = (): ReactElement => {
     <StyledBox display={'flex'}>
       {stepTree.map(
         (step, index, arr): ReactElement => (
-          <Link key={`breadcrumb-${index}`} href={arr.slice(1, indexOf(arr, step) + 1).join('/')}>
+          <IntlLink
+            key={`breadcrumb-${index}`}
+            href={arr.slice(1, indexOf(arr, step) + 1).join('/')}
+          >
             <StyledButton
               size={'small'}
               startIcon={
@@ -59,7 +62,7 @@ const Breadcrumb = (): ReactElement => {
             >
               {messages[step] ? intl.formatMessage(messages[step]) : startCase(step)}
             </StyledButton>
-          </Link>
+          </IntlLink>
         ),
       )}
     </StyledBox>

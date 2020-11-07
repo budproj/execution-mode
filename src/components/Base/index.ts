@@ -4,7 +4,7 @@ export { default as Breadcrumb } from './Breadcrumb'
 
 export { default as Button } from './Button'
 
-export { default as Link } from './Link'
+export { default as IntlLink } from './IntlLink'
 
 export { default as Logotype } from './Logotype'
 

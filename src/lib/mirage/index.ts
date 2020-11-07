@@ -25,6 +25,11 @@ export function makeServer(environment: NodeEnv): Server {
     routes() {
       this.namespace = 'api'
 
+      this.passthrough((request) => {
+        if (request.url === '/_next/static/development/_devPagesManifest.json') return true
+      })
+      /* Temporary fix while https://github.com/vercel/next.js/issues/16874 is not solved */
+
       this.get('/key-results', handlers.keyResults.getAll)
       this.patch('/users/:id/custom-sorting', handlers.customSorting.patchUser)
       this.get(

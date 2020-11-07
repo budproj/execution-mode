@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-unresolved
-import DbCollection from 'miragejs/db-collection'
+import DbCollection from 'miragejs/db-collection' // eslint-disable-line import/no-unresolved
 
 import { CompanyCycle, CompanyTeam } from 'components/Company'
 import { KeyResult, KeyResultIcon, KeyResultsHashmap } from 'components/KeyResult'
