@@ -3,7 +3,7 @@ import { Loadable, SetterOrUpdater } from 'recoil'
 
 import { CustomSorting, User } from 'components/User'
 import logger from 'lib/logger'
-import { patchFromAPI } from 'state/actions'
+import { patchFromAPI } from 'state/actions/api'
 
 const component = 'useReorderCustomSorting'
 

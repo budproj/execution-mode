@@ -1,7 +1,3 @@
-export { default as getFromAPI } from './getFromAPI'
+export * as api from './api'
 
-export { default as fetchFromAPI } from './fetchFromAPI'
-
-export { default as patchFromAPI } from './patchFromAPI'
-
-export { default as buildCustomSorter } from './buildCustomSorter'
+export * as users from './users'
