@@ -1,3 +1,3 @@
-export { default as isBrowser } from './isBrowser'
+export { default as isBrowser } from './is-browser'
 
-export { default as hasFetchedAllValues } from './hasFetchedAllValues'
+export { default as hasFetchedAllValues } from './has-fetched-all-values'

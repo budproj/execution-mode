@@ -1,1 +1,1 @@
-export { default as withIntlRedirect } from './withIntlRedirect'
+export { default as withIntlRedirect } from './with-intl-redirect'

@@ -83,7 +83,9 @@ const fonts: FontTokens = {
   fallback: 'sans-serif',
 }
 
-export default {
+const tokens = {
   colors,
   fonts,
 }
+
+export default tokens

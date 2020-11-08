@@ -17,7 +17,9 @@ const logger = winston.createLogger({
 })
 
 if (publicRuntimeConfig.nodeEnv !== 'production') {
-  logger.transports.forEach((transport) => (transport.silent = false))
+  logger.transports.forEach((transport): void => {
+    transport.silent = false
+  })
 }
 
 export default logger

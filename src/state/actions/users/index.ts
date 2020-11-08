@@ -1,1 +1,1 @@
-export { default as buildCustomSorter } from './buildCustomSorter'
+export { default as buildCustomSorter } from './build-custom-sorter'

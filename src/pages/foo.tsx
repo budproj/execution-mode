@@ -3,11 +3,9 @@ import React, { Fragment, ReactElement } from 'react'
 import IntlLink from 'components/Base/IntlLink'
 
 const Foo = (): ReactElement => (
-  <Fragment>
-    <IntlLink href={'keyResults'}>
-      <p>Ir para Key Results</p>
-    </IntlLink>
-  </Fragment>
+  <IntlLink href="key-results">
+    <p>Ir para Key Results</p>
+  </IntlLink>
 )
 
 export default Foo

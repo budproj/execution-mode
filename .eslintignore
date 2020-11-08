@@ -1,9 +1,0 @@
-{
-    "ignorePatterns": [
-      ".next/*",
-      ".log/*",
-      "node_modules/*",
-      ".yarn/*",
-      ".pnp.js",
-    ]
-}

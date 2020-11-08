@@ -1,9 +1,11 @@
-import * as customSorting from './customSorting'
-import * as keyResults from './keyResults'
+import * as customSorting from './custom-sorting'
+import * as keyResults from './key-results'
 
 export * from './types'
 
-export default {
+const handlers = {
   keyResults,
   customSorting,
 }
+
+export default handlers

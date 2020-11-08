@@ -1,3 +1,3 @@
 export * as id from './id'
 
-export * as customSorting from './customSorting'
+export * as customSorting from './custom-sorting'

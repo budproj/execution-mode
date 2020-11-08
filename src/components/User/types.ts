@@ -2,7 +2,7 @@ import { KeyResult } from 'components/KeyResult'
 
 export interface CustomSorting {
   user: User['id']
-  keyResults: KeyResult['id'][]
+  keyResults: Array<KeyResult['id']>
 }
 
 export interface User {
