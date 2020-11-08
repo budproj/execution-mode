@@ -1,5 +1,5 @@
-import Component from './Component'
+import Component from './component'
 
-export * from './Component'
+export * from './component'
 
 export default Component

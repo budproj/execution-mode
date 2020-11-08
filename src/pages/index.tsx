@@ -2,6 +2,6 @@ import React, { Fragment, ReactElement } from 'react'
 
 import { withIntlRedirect } from 'hocs'
 
-const Index = (): ReactElement => <Fragment />
+const Index = (): ReactElement => <>Home</>
 
-export default withIntlRedirect(Index, 'keyResults')
+export default withIntlRedirect(Index, 'key-results')

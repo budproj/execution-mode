@@ -27,7 +27,7 @@ export class ConsoleTransport extends TransportStream {
     const formattedDate = format(timestamp, 'yyyy-MM-dd hh:mm:ss:SS')
 
     console.log(
-      `%c${formattedDate} - ${info.component} %c➤ %c[%c${info.level.toUpperCase()}%c]:`,
+      `%c${formattedDate} - ${info.component as string} %c➤ %c[%c${info.level.toUpperCase()}%c]:`,
       grayColor,
       logLevelColor,
       defaultColor,
@@ -35,7 +35,7 @@ export class ConsoleTransport extends TransportStream {
       defaultColor,
       info.message,
     )
-    info.data && console.log(info.data)
+    if (info.data) console.log(info.data)
 
     next()
   }

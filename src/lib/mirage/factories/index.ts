@@ -1,12 +1,12 @@
-import customSorting from './customSorting'
+import customSorting from './custom-sorting'
 import cycle from './cycle'
 import icon from './icon'
-import keyResult from './keyResult'
+import keyResult from './key-result'
 import objective from './objective'
 import team from './team'
 import user from './user'
 
-export default {
+const factories = {
   keyResult,
   user,
   cycle,
@@ -15,3 +15,5 @@ export default {
   customSorting,
   team,
 }
+
+export default factories

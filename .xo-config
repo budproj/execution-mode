@@ -1,0 +1,21 @@
+{
+  "space": true,
+  "semicolon": false,
+  "prettier": true,
+  "parserOptions": {
+    "project": "./src/tsconfig.server.json"
+  },
+  "ignores": [
+    "src/next.config.js"
+  ],
+  "extends": [
+    "xo/esnext",
+    "xo-react",
+    "xo-typescript",
+    "prettier"
+  ],
+  "rules": {
+    "unicorn/no-reduce": "off",
+    "unicorn/no-fn-reference-in-iterator": "off"
+  }
+}

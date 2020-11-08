@@ -18,23 +18,20 @@ interface BudAppProps extends AppProps {
 
 const config = getConfig()
 
-const getMessages = (locale: string | undefined): Promise<IntlMessage> => {
-  return import(`../../compiled-lang/${locale}.json`) || {}
-}
+const getMessages = async (locale: string | undefined): Promise<IntlMessage | undefined> =>
+  require(`../../compiled-lang/${locale ?? 'pt-BR'}.json`)
 
 const BudApp = (props: BudAppProps): ReactElement => {
   const { Component, pageProps, locale, messages } = props
 
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side')
-    if (jssStyles) {
-      jssStyles.parentElement?.removeChild(jssStyles) ?? false
-    }
+    if (jssStyles) jssStyles.remove()
   }, [])
 
   return (
     <RecoilRoot>
-      <RecoilIntlProvider locale={locale || 'pt-BR'} messages={messages}>
+      <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
         <ThemeProvider theme={theme}>
           <Page>
             <Component {...pageProps} />
@@ -49,14 +46,16 @@ BudApp.getInitialProps = async (appContext: AppContext): Promise<BudAppProps> =>
   const pageProps = {}
 
   const { Component, ctx, router } = appContext
-  const locale = router.locale
+  const { locale } = router
 
   const [appProps, messages] = await Promise.all([
     App.getInitialProps(appContext),
     getMessages(locale),
   ])
 
-  if (Component.getInitialProps) Object.assign(pageProps, await Component.getInitialProps(ctx))
+  if (Component.getInitialProps) {
+    Object.assign(pageProps, await Component.getInitialProps(ctx))
+  }
 
   return {
     ...appProps,
@@ -66,6 +65,6 @@ BudApp.getInitialProps = async (appContext: AppContext): Promise<BudAppProps> =>
   }
 }
 
-config.publicRuntimeConfig.nodeEnv === 'development' && makeServer('development')
+if (config.publicRuntimeConfig.nodeEnv === 'development') makeServer('development')
 
 export default BudApp

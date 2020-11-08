@@ -8,9 +8,9 @@ import getConfig, { Locale, Route } from 'config'
 
 const KEY = `${PREFIX}::ROUTE`
 
-type SelectIntlRouteBasedOnRouteParam = string
+type SelectIntlRouteBasedOnRouteParameter = string
 
-type IntlRouteParam = string
+type IntlRouteParameter = string
 
 type IntlRoute = Record<Locale | string, string>
 
@@ -60,11 +60,11 @@ const extractParentRoute = (state: SelectAbsoluteRouteState): SelectAbsoluteRout
 
 const appendDesiredRoute = (state: SelectAbsoluteRouteState): SelectAbsoluteRouteState => ({
   ...state,
-  absoluteRouteParts: [...(state.parentRouteParts || []), state.route],
+  absoluteRouteParts: [...(state.parentRouteParts ?? []), state.route],
 })
 
 const buildAbsoluteRoute = (state: SelectAbsoluteRouteState): string =>
-  (state.absoluteRouteParts || []).join('/')
+  (state.absoluteRouteParts ?? []).join('/')
 
 const transformRelativeRouteToAbsolute: (route: string, currentRoute: string) => string = flow(
   (route: string, currentRoute: string): SelectAbsoluteRouteState => ({ route, currentRoute }),
@@ -75,7 +75,7 @@ const transformRelativeRouteToAbsolute: (route: string, currentRoute: string) =>
 
 const groupByRoute = (state: SelectIntlRouteState): SelectIntlRouteState => ({
   ...state,
-  routes: state.options.intlRoutes.reduce(
+  routes: state.options.intlRoutes.reduce<IntlRouteGroup>(
     (routes, route) => ({
       ...routes,
       [route.destination]: {
@@ -83,7 +83,7 @@ const groupByRoute = (state: SelectIntlRouteState): SelectIntlRouteState => ({
         [route.locale]: route.source,
       },
     }),
-    {} as IntlRouteGroup,
+    {},
   ),
 })
 
@@ -93,7 +93,7 @@ const selectRoute = (state: SelectIntlRouteState): SelectIntlRouteState => ({
 })
 
 const buildIntlRoute = (state: SelectIntlRouteState): string =>
-  state?.selectedRoute?.[state.options.locale] || state.route
+  state?.selectedRoute?.[state.options.locale] ?? state.route
 
 export const selectIntlRoute: (href: string, options: SelectIntlRouteOptions) => string = flow(
   (route, options): SelectIntlRouteState => ({ route, options }),
@@ -104,7 +104,7 @@ export const selectIntlRoute: (href: string, options: SelectIntlRouteOptions) =>
 
 export const selectIntlRouteBasedOnLocale = selectorFamily<
   string,
-  SelectIntlRouteBasedOnRouteParam
+  SelectIntlRouteBasedOnRouteParameter
 >({
   key: `${KEY}::BASED_ON_LOCALE`,
   get: (route) => ({ get }): string => {
@@ -114,7 +114,7 @@ export const selectIntlRouteBasedOnLocale = selectorFamily<
   },
 })
 
-export const intlRoute = atomFamily<string, IntlRouteParam>({
+export const intlRoute = atomFamily<string, IntlRouteParameter>({
   key: KEY,
   default: selectIntlRouteBasedOnLocale,
 })

@@ -1,6 +1,6 @@
 import { belongsTo, Model, hasMany } from 'miragejs'
 
-export default {
+const models = {
   keyResult: Model.extend({
     owner: belongsTo('user'),
     cycle: belongsTo(),
@@ -18,3 +18,5 @@ export default {
     keyResults: hasMany(),
   }),
 }
+
+export default models
