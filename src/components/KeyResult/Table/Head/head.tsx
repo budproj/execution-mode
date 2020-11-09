@@ -16,14 +16,21 @@ const StyledHeadLabel = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[300],
 }))
 
-const StyledHeadCell = styled(TableCell)({
+const StyledHeadCell = styled(TableCell)(({ theme }) => ({
   padding: '16px 0',
-})
+  borderBottom: `1px solid ${theme.palette.grey[200]}`,
+}))
 
 const StyledHiddenHeadCell = styled(TableCell)({
   borderBottom: 'none',
   padding: 0,
   width: 30,
+})
+
+const StyledTableRow = styled(TableRow)({
+  '& th:nth-child(3)': {
+    paddingLeft: 13,
+  },
 })
 
 const KeyResultTableHead = (): ReactElement => {
@@ -41,7 +48,7 @@ const KeyResultTableHead = (): ReactElement => {
 
   return (
     <TableHead>
-      <TableRow>
+      <StyledTableRow>
         {headCells.map((singleHeadCell) =>
           singleHeadCell.hidden === true ? (
             <StyledHiddenHeadCell key={singleHeadCell.id} variant="head" />
@@ -51,7 +58,7 @@ const KeyResultTableHead = (): ReactElement => {
             </StyledHeadCell>
           ),
         )}
-      </TableRow>
+      </StyledTableRow>
     </TableHead>
   )
 }

@@ -21,9 +21,20 @@ const StyledSubtitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[300],
 }))
 
-const StyledBodyCell = styled(TableCell)({
+const StyledCell = styled(TableCell)(({ theme }) => ({
   padding: '16px 0',
-})
+  borderBottom: `1px solid ${theme.palette.grey[200]}`,
+}))
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '& td:nth-child(2)': {
+    borderRight: `1px solid ${theme.palette.grey[200]}`,
+  },
+
+  '& td:nth-child(3)': {
+    paddingLeft: 13,
+  },
+}))
 
 const KeyResultsTableBody = (): ReactElement => {
   const userID = useRecoilValueLoadable(userIDAtom)
@@ -50,21 +61,21 @@ const KeyResultsTableBody = (): ReactElement => {
   return wasDataFetched ? (
     <TableBody component={buildDroppableBody(onDragEnd)}>
       {userCustomSorting.getValue().map((id: KeyResult['id'], index: number) => (
-        <TableRow key={id} component={buildDraggableRow(id, index)}>
-          <StyledBodyCell>
+        <StyledTableRow key={id} component={buildDraggableRow(id, index)}>
+          <StyledCell>
             <Box>
               <StyledHighlightedText variant="body2">
                 {keyResultsHashmap[id].title}
               </StyledHighlightedText>
               <StyledSubtitle variant="subtitle1">{keyResultsHashmap[id].team.name}</StyledSubtitle>
             </Box>
-          </StyledBodyCell>
-          <StyledBodyCell>{id}</StyledBodyCell>
-          <StyledBodyCell>{id}</StyledBodyCell>
-          <StyledBodyCell>{id}</StyledBodyCell>
-          <StyledBodyCell>{id}</StyledBodyCell>
-          <StyledBodyCell>{id}</StyledBodyCell>
-        </TableRow>
+          </StyledCell>
+          <StyledCell>{id}</StyledCell>
+          <StyledCell>{id}</StyledCell>
+          <StyledCell>{id}</StyledCell>
+          <StyledCell>{id}</StyledCell>
+          <StyledCell>{id}</StyledCell>
+        </StyledTableRow>
       ))}
     </TableBody>
   ) : (
