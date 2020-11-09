@@ -4,6 +4,7 @@ import keyResult from './key-result'
 import objective from './objective'
 import team from './team'
 import user from './user'
+import confidence from './confidence'
 
 const factories = {
   keyResult,
@@ -12,6 +13,7 @@ const factories = {
   objective,
   customSorting,
   team,
+  confidence,
 }
 
 export default factories

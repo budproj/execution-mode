@@ -7,6 +7,9 @@ import grid from 'components/KeyResult/Table/grid'
 import StackIcon from 'components/Icons/Stack'
 import { useRecoilValue } from 'recoil'
 import { allKeyResults } from 'state/recoil/key-results/all'
+import { useIntl } from 'react-intl'
+
+import messages from './messages'
 
 export interface OKRProps {
   id: KeyResult['id']
@@ -24,12 +27,16 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 const Okr = ({ id }: OKRProps): ReactElement => {
   const keyResultsHashmap = useRecoilValue<KeyResultsHashmap>(allKeyResults)
   const theme = useTheme()
+  const intl = useIntl()
 
   return (
     <BaseCell width={grid.objective}>
       <Box display="flex" gridGap={20} alignItems="center">
         <StyledIconBox borderRadius={10} py={2} px={2}>
-          <StackIcon htmlColor={theme.palette.grey[300]} />
+          <StackIcon
+            desc={intl.formatMessage(messages.stackIconDesc)}
+            htmlColor={theme.palette.grey[300]}
+          />
         </StyledIconBox>
 
         <Box>
