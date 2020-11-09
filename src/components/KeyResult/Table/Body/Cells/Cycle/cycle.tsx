@@ -1,13 +1,13 @@
 import React, { ReactElement } from 'react'
 import { KeyResult } from 'components/KeyResult/types'
 
-import BaseCell from 'components/KeyResult/Table/Body/Cells/Base'
 import grid from 'components/KeyResult/Table/grid'
+import { TableCell } from '@material-ui/core'
 
 export interface CycleProps {
   id: KeyResult['id']
 }
 
-const Cycle = ({ id }: CycleProps): ReactElement => <BaseCell width={grid.cycle}>{id}</BaseCell>
+const Cycle = ({ id }: CycleProps): ReactElement => <TableCell width={grid.cycle}>{id}</TableCell>
 
 export default Cycle

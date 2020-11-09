@@ -2,13 +2,12 @@ import React, { ReactElement } from 'react'
 import { KeyResult, KeyResultConfidence, KeyResultsHashmap } from 'components/KeyResult/types'
 
 import { allKeyResults } from 'state/recoil/key-results/all'
-import BaseCell from 'components/KeyResult/Table/Body/Cells/Base'
 import grid from 'components/KeyResult/Table/grid'
 import { useRecoilValue } from 'recoil'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
 import messages from './messages'
-import { Box, styled, Theme, Typography, useTheme } from '@material-ui/core'
+import { Box, styled, TableCell, Theme, Typography, useTheme } from '@material-ui/core'
 
 export interface StatusProps {
   id: KeyResult['id']
@@ -53,7 +52,7 @@ const Status = ({ id }: StatusProps): ReactElement => {
   const tag = selectStatusTagBasedInConfidence(keyResult.confidence.value, theme)
 
   return (
-    <BaseCell width={grid.confidence}>
+    <TableCell width={grid.confidence}>
       <Box display="flex" flexDirection="column">
         <Box display="flex" flexDirection="row" gridGap={10} alignItems="center">
           <StyledTagCircle style={{ backgroundColor: tag.color }} />{' '}
@@ -65,7 +64,7 @@ const Status = ({ id }: StatusProps): ReactElement => {
           {intl.formatDate(keyResult.confidence.createdAt, { day: 'numeric', month: 'short' })}
         </StyledDate>
       </Box>
-    </BaseCell>
+    </TableCell>
   )
 }
 

@@ -37,7 +37,7 @@ const StyledDragHandler = styled(TableCell)(({ theme }) => ({
   fontSize: '0.75rem',
   color: theme.palette.grey[300],
   borderBottom: 'none',
-  width: 10,
+  width: '1%',
   padding: '0 10px 0 0',
 }))
 
@@ -49,11 +49,22 @@ const styles = (theme: Theme) => ({
   row: {
     backgroundColor: (props: DraggableStylesProps) =>
       props.isDragging ? theme.palette.primary.light : 'inherit',
-    boxShadow: (props: DraggableStylesProps) =>
-      props.isDragging ? `inset 0 1px 0px 0px ${theme.palette.grey[200]}` : 'inherit',
+    transition: '0.6s all ease-out',
 
-    '& td:first-child': {
-      backgroundColor: theme.palette.common.white,
+    '& td': {
+      borderColor: (props: DraggableStylesProps) =>
+        props.isDragging ? 'transparent' : theme.palette.grey[100],
+      borderStyle: 'solid',
+      borderWidth: '0.5px 0',
+
+      '&:first-child': {
+        backgroundColor: theme.palette.common.white,
+        borderColor: 'transparent',
+      },
+
+      '&:nth-child(2)': {
+        borderWidth: '0.5px 1px 0.5px 0',
+      },
     },
 
     '&:hover': {

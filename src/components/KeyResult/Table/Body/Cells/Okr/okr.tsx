@@ -1,8 +1,7 @@
 import React, { ReactElement } from 'react'
 import { KeyResult, KeyResultsHashmap } from 'components/KeyResult/types'
-import { Box, styled, Typography, useTheme } from '@material-ui/core'
+import { Box, styled, TableCell, Typography, useTheme } from '@material-ui/core'
 
-import BaseCell from 'components/KeyResult/Table/Body/Cells/Base'
 import grid from 'components/KeyResult/Table/grid'
 import StackIcon from 'components/Icons/Stack'
 import { useRecoilValue } from 'recoil'
@@ -30,7 +29,7 @@ const Okr = ({ id }: OKRProps): ReactElement => {
   const intl = useIntl()
 
   return (
-    <BaseCell width={grid.objective}>
+    <TableCell width={grid.objective}>
       <Box display="flex" gridGap={20} alignItems="center">
         <StyledIconBox borderRadius={10} py={2} px={2}>
           <StackIcon
@@ -43,7 +42,7 @@ const Okr = ({ id }: OKRProps): ReactElement => {
           <StyledTypography variant="body2">{keyResultsHashmap[id].title}</StyledTypography>
         </Box>
       </Box>
-    </BaseCell>
+    </TableCell>
   )
 }
 

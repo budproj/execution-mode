@@ -1,5 +1,3 @@
-export { default as Base } from './Base'
-
 export { default as Cycle } from './Cycle'
 
 export { default as Okr } from './Okr'

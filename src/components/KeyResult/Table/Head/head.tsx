@@ -18,13 +18,13 @@ const StyledHeadLabel = styled(Typography)(({ theme }) => ({
 }))
 
 const StyledHeadCell = styled(TableCell)(({ theme }) => ({
-  borderBottom: `1px solid ${theme.palette.grey[200]}`,
+  borderBottom: `0.5px solid ${theme.palette.grey[200]}`,
 }))
 
 const StyledHiddenHeadCell = styled(TableCell)({
   borderBottom: 'none',
+  width: '1%',
   padding: 0,
-  width: 30,
 })
 
 const StyledTableRow = styled(TableRow)({
