@@ -36,6 +36,8 @@ export { default as Search } from './Search'
 
 export { default as Settings } from './Settings'
 
+export { default as Stack } from './Stack'
+
 export { default as TicketStar } from './TicketStar'
 
 export { default as TimesSquare } from './TimesSquare'

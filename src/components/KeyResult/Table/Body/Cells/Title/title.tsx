@@ -13,6 +13,7 @@ export interface TitleProps {
 }
 
 const StyledCell = styled(BaseCell)(({ theme }) => ({
+  paddingLeft: 0,
   borderRight: `1px solid ${theme.palette.grey[200]}`,
 }))
 
@@ -30,9 +31,7 @@ const Title = ({ id }: TitleProps): ReactElement => {
   return (
     <StyledCell width={grid.title}>
       <Box display="flex" gridGap={20} alignItems="center">
-        <Box>
-          <DynamicIcon title={keyResultsHashmap[id].title} />
-        </Box>
+        <DynamicIcon title={keyResultsHashmap[id].title} />
 
         <Box>
           <StyledHighlightedText variant="body2">

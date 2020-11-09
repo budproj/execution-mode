@@ -5,7 +5,7 @@ import tokens from './tokens'
 const theme: Theme = createMuiTheme({
   typography: {
     fontFamily: [tokens.fonts.base, tokens.fonts.fallback].join(','),
-    fontSize: 14,
+    fontSize: 16,
     h1: {
       fontSize: 35,
       fontWeight: 600,
@@ -20,20 +20,20 @@ const theme: Theme = createMuiTheme({
       fontWeight: 600,
     },
     subtitle1: {
-      fontSize: 12,
+      fontSize: 14,
       fontWeight: 400,
       lineHeight: 1.1,
     },
     subtitle2: {
-      fontSize: 12,
+      fontSize: 14,
       fontWeight: 600,
     },
     body1: {
-      fontSize: 14,
+      fontSize: 16,
       fontWeight: 400,
     },
     body2: {
-      fontSize: 14,
+      fontSize: 16,
       fontWeight: 500,
     },
     button: {
@@ -50,6 +50,7 @@ const theme: Theme = createMuiTheme({
     },
 
     grey: {
+      50: tokens.colors.g50,
       100: tokens.colors.g100,
       200: tokens.colors.g200,
       300: tokens.colors.g300,

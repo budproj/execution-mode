@@ -5,6 +5,7 @@ type ColorTokens = {
   white: ColorHexCode
   black: ColorHexCode
 
+  g50: ColorHexCode
   g100: ColorHexCode
   g200: ColorHexCode
   g300: ColorHexCode
@@ -47,9 +48,10 @@ const colors: ColorTokens = {
   white: '#FFFFFF',
   black: '#000000',
 
+  g50: '#F5F8F9',
   g100: '#DDE5EE',
   g200: '#CBCFD9',
-  g300: '#979FB2',
+  g300: '#B8C5D4',
   g400: '#757F99',
   g500: '#525F7F',
   g600: '#424C66',

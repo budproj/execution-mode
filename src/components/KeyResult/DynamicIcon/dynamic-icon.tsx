@@ -1,4 +1,4 @@
-import { Box, makeStyles } from '@material-ui/core'
+import { Box, makeStyles, useTheme } from '@material-ui/core'
 import React, { ComponentType, ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 import { KeyResult } from 'components/KeyResult/types'
@@ -21,6 +21,8 @@ const styles = {
 }
 
 const DynamicIcon = ({ title }: DynamicIconProps): ReactElement => {
+  const theme = useTheme()
+
   const iconDrawingAtom = iconState.drawing.keyResultIconDrawing(title)
   const iconColorAtom = iconState.color.keyResultIconColor(title)
 
@@ -34,7 +36,7 @@ const DynamicIcon = ({ title }: DynamicIconProps): ReactElement => {
 
   return (
     <Box className={classes.box} borderRadius={10} py={2} px={2} lineHeight={1}>
-      <IconComponent htmlColor="white" fontSize="large" />
+      <IconComponent htmlColor={theme.palette.common.white} />
     </Box>
   )
 }
