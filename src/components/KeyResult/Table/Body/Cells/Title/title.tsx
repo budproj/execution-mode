@@ -31,7 +31,7 @@ const Title = ({ id }: TitleProps): ReactElement => {
     <StyledCell width={grid.title}>
       <Box display="flex" gridGap={20} alignItems="center">
         <Box>
-          <DynamicIcon id={id} />
+          <DynamicIcon title={keyResultsHashmap[id].title} />
         </Box>
 
         <Box>

@@ -96,7 +96,6 @@ const theme: Theme = createMuiTheme({
     '0px 20px 8px 0 rgba(129,147,171,.75)',
     '0px 20px 8px 0 rgba(129,147,171,.8)',
     '0px 20px 8px 0 rgba(129,147,171,.85)',
-    '0px 20px 8px 0 rgba(129,147,171,.9)',
   ],
 })
 

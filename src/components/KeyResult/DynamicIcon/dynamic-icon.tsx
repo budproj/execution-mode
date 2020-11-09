@@ -7,7 +7,7 @@ import * as iconState from 'state/recoil/key-results/icon'
 import * as Icons from 'components/Icons'
 
 export interface DynamicIconProps {
-  id: KeyResult['id']
+  title: KeyResult['title']
 }
 
 interface DynamicIconStyleProps {
@@ -20,9 +20,9 @@ const styles = {
   },
 }
 
-const DynamicIcon = ({ id }: DynamicIconProps): ReactElement => {
-  const iconDrawingAtom = iconState.drawing.keyResultIconDrawing(id)
-  const iconColorAtom = iconState.color.keyResultIconColor(id)
+const DynamicIcon = ({ title }: DynamicIconProps): ReactElement => {
+  const iconDrawingAtom = iconState.drawing.keyResultIconDrawing(title)
+  const iconColorAtom = iconState.color.keyResultIconColor(title)
 
   const iconDrawing = useRecoilValue<string>(iconDrawingAtom)
   const iconColor = useRecoilValue<string>(iconColorAtom)
