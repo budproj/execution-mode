@@ -44,9 +44,9 @@ const theme: Theme = createMuiTheme({
 
   palette: {
     primary: {
-      light: tokens.colors.b200,
       main: tokens.colors.b500,
       dark: tokens.colors.b800,
+      light: tokens.colors.c50,
     },
 
     grey: {

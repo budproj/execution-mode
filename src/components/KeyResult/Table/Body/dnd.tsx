@@ -1,11 +1,14 @@
-import { styled, TableBody, TableCell, TableRow } from '@material-ui/core'
+import { makeStyles, styled, TableBody, TableCell, TableRow, Theme } from '@material-ui/core'
 import { KeyResult } from 'components/KeyResult/types'
 import React, { ComponentType, ReactElement } from 'react'
 import {
   DragDropContext,
   Draggable,
   DraggableProvided,
+  DraggableStateSnapshot,
+  DraggingStyle,
   Droppable,
+  NotDraggingStyle,
   OnDragEndResponder,
 } from 'react-beautiful-dnd'
 import ReorderIcon from 'components/Icons/Reorder'
@@ -38,15 +41,45 @@ const StyledDragHandler = styled(TableCell)(({ theme }) => ({
   padding: '0 10px 0 0',
 }))
 
+interface DraggableStylesProps {
+  isDragging: boolean
+}
+
+const styles = (theme: Theme) => ({
+  row: {
+    backgroundColor: (props: DraggableStylesProps) =>
+      props.isDragging ? theme.palette.primary.light : 'inherit',
+    boxShadow: (props: DraggableStylesProps) =>
+      props.isDragging ? `inset 0 1px 0px 0px ${theme.palette.grey[200]}` : 'inherit',
+
+    '& td:first-child': {
+      backgroundColor: theme.palette.common.white,
+    },
+
+    '&:hover': {
+      backgroundColor: theme.palette.primary.light,
+
+      '& td:first-child': {
+        backgroundColor: theme.palette.common.white,
+      },
+    },
+  },
+})
+
 export const buildDraggableRow = (id: KeyResult['id'], index: number): ComponentType => (
   props: Record<string, unknown>,
 ): ReactElement => {
   const intl = useIntl()
+  const buildClasses = makeStyles(styles)
 
   return (
     <Draggable draggableId={id} index={index}>
-      {(provided: DraggableProvided) => (
-        <TableRow ref={provided.innerRef} {...provided.draggableProps} {...props}>
+      {(provided: DraggableProvided, { isDragging }: DraggableStateSnapshot) => (
+        <TableRow
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          className={buildClasses({ isDragging }).row}
+        >
           <StyledDragHandler {...provided.dragHandleProps}>
             <ReorderIcon
               desc={intl.formatMessage(messages.reorderIconDesc)}

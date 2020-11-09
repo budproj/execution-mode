@@ -25,6 +25,7 @@ type ColorTokens = {
   b800: ColorHexCode
   b900: ColorHexCode
 
+  c50: ColorHexCode
   c100: ColorHexCode
   c200: ColorHexCode
   c300: ColorHexCode
@@ -66,6 +67,7 @@ const colors: ColorTokens = {
   b800: '#2C2C66',
   b900: '#161633',
 
+  c50: '#F7FAFE',
   c100: '#E9F5FE',
   c200: '#E1F1FE',
   c300: '#92CDFC',
