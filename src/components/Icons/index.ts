@@ -2,6 +2,8 @@ export { default as ArrowRight } from './ArrowRight'
 
 export { default as NotificationBell } from './NotificationBell'
 
+export { default as PieChart } from './PieChart'
+
 export { default as Reorder } from './Reorder'
 
 export { default as Search } from './Search'

@@ -1,4 +1,4 @@
-import { TableBody, TableRow, TableCell, Typography, Box, styled } from '@material-ui/core'
+import { TableBody, TableRow } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { useRecoilStateLoadable, useRecoilValueLoadable } from 'recoil'
@@ -12,29 +12,7 @@ import { userKeyResultsCustomSorting as userCustomSortingAtom } from 'state/reco
 import { userID as userIDAtom } from 'state/recoil/users/current/id'
 
 import { buildDroppableBody, buildDraggableRow } from './dnd'
-
-const StyledHighlightedText = styled(Typography)(({ theme }) => ({
-  color: theme.palette.common.black,
-}))
-
-const StyledSubtitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.grey[300],
-}))
-
-const StyledCell = styled(TableCell)(({ theme }) => ({
-  padding: '16px 0',
-  borderBottom: `1px solid ${theme.palette.grey[200]}`,
-}))
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '& td:nth-child(2)': {
-    borderRight: `1px solid ${theme.palette.grey[200]}`,
-  },
-
-  '& td:nth-child(3)': {
-    paddingLeft: 13,
-  },
-}))
+import { Cycle, Okr, Owner, Progress, Status, Title } from './Cells'
 
 const KeyResultsTableBody = (): ReactElement => {
   const userID = useRecoilValueLoadable(userIDAtom)
@@ -43,7 +21,6 @@ const KeyResultsTableBody = (): ReactElement => {
   const reorderCustomSorting = buildCustomSorter(userID, userCustomSorting, setUserCustomSorting)
 
   const wasDataFetched = hasFetchedAllValues(userID, userCustomSorting)
-  const keyResultsHashmap = wasDataFetched ? allKeyResults.getValue() : {}
 
   logger.debug('Rerendered Key Results table body. Take a look at our Recoil hooks data:', {
     data: {
@@ -61,21 +38,14 @@ const KeyResultsTableBody = (): ReactElement => {
   return wasDataFetched ? (
     <TableBody component={buildDroppableBody(onDragEnd)}>
       {userCustomSorting.getValue().map((id: KeyResult['id'], index: number) => (
-        <StyledTableRow key={id} component={buildDraggableRow(id, index)}>
-          <StyledCell>
-            <Box>
-              <StyledHighlightedText variant="body2">
-                {keyResultsHashmap[id].title}
-              </StyledHighlightedText>
-              <StyledSubtitle variant="subtitle1">{keyResultsHashmap[id].team.name}</StyledSubtitle>
-            </Box>
-          </StyledCell>
-          <StyledCell>{id}</StyledCell>
-          <StyledCell>{id}</StyledCell>
-          <StyledCell>{id}</StyledCell>
-          <StyledCell>{id}</StyledCell>
-          <StyledCell>{id}</StyledCell>
-        </StyledTableRow>
+        <TableRow key={id} component={buildDraggableRow(id, index)}>
+          <Title id={id} />
+          <Okr id={id} />
+          <Status id={id} />
+          <Progress id={id} />
+          <Cycle id={id} />
+          <Owner id={id} />
+        </TableRow>
       ))}
     </TableBody>
   ) : (

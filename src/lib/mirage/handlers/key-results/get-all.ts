@@ -17,7 +17,6 @@ const getAll = (schema: Record<string, DbCollection>): MirageResponse<KeyResults
   ): KeyResult => {
     const team: CompanyTeam = schema.teams.find(next.teamId).attrs
     const cycle: CompanyCycle = schema.cycles.find(next.cycleId).attrs
-    const icon: KeyResultIcon = schema.icons.find(next.iconId).attrs
     const objective: Objective = schema.objectives.find(next.objectiveId).attrs
     const owner: User = schema.users.find(next.ownerId).attrs
 
@@ -36,11 +35,6 @@ const getAll = (schema: Record<string, DbCollection>): MirageResponse<KeyResults
           id: next.cycleId,
           start: cycle.start,
           end: cycle.end,
-        },
-        icon: {
-          id: next.iconId,
-          drawing: icon.drawing,
-          backgroundColor: icon.backgroundColor,
         },
         objective: {
           id: next.objectiveId,

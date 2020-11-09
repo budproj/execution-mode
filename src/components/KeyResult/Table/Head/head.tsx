@@ -1,10 +1,11 @@
-import { makeStyles, styled, TableCell, TableHead, TableRow, Typography } from '@material-ui/core'
+import { styled, TableCell, TableHead, TableRow, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
 import { KeyResult } from 'components/KeyResult/types'
+import grid from 'components/KeyResult/Table/grid'
 
 interface HeadCell {
   id: keyof KeyResult | 'icon'
@@ -53,7 +54,7 @@ const KeyResultTableHead = (): ReactElement => {
           singleHeadCell.hidden === true ? (
             <StyledHiddenHeadCell key={singleHeadCell.id} variant="head" />
           ) : (
-            <StyledHeadCell key={singleHeadCell.id} variant="head">
+            <StyledHeadCell key={singleHeadCell.id} variant="head" width={grid[singleHeadCell.id]}>
               <StyledHeadLabel variant="body2">{singleHeadCell.label}</StyledHeadLabel>
             </StyledHeadCell>
           ),

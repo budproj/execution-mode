@@ -1,7 +1,13 @@
 import { styled, TableBody, TableCell, TableRow } from '@material-ui/core'
 import { KeyResult } from 'components/KeyResult/types'
 import React, { ComponentType, ReactElement } from 'react'
-import { DragDropContext, Draggable, Droppable, OnDragEndResponder } from 'react-beautiful-dnd'
+import {
+  DragDropContext,
+  Draggable,
+  DraggableProvided,
+  Droppable,
+  OnDragEndResponder,
+} from 'react-beautiful-dnd'
 import ReorderIcon from 'components/Icons/Reorder'
 import { useIntl } from 'react-intl'
 
@@ -28,8 +34,8 @@ const StyledDragHandler = styled(TableCell)(({ theme }) => ({
   fontSize: '0.75rem',
   color: theme.palette.grey[300],
   borderBottom: 'none',
-  width: 0,
-  padding: 0,
+  width: 10,
+  padding: '0 10px 0 0',
 }))
 
 export const buildDraggableRow = (id: KeyResult['id'], index: number): ComponentType => (
@@ -39,7 +45,7 @@ export const buildDraggableRow = (id: KeyResult['id'], index: number): Component
 
   return (
     <Draggable draggableId={id} index={index}>
-      {(provided) => (
+      {(provided: DraggableProvided) => (
         <TableRow ref={provided.innerRef} {...provided.draggableProps} {...props}>
           <StyledDragHandler {...provided.dragHandleProps}>
             <ReorderIcon

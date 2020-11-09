@@ -16,7 +16,6 @@ export function makeServer(environment: NodeEnv): Server {
       server.create('user')
       server.create('cycle')
       server.createList('team', 3)
-      server.createList('icon', 10)
       server.createList('objective', 3)
       server.createList('keyResult', 10)
       server.create('customSorting')
