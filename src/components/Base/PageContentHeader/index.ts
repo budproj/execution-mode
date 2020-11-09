@@ -1,3 +1,3 @@
-import Component from './component'
+import PageContentHeader from './page-content-header'
 
-export default Component
+export default PageContentHeader

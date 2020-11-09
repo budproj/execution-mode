@@ -1,3 +1,3 @@
-import Component from './component'
+import PageContent from './page-content'
 
-export default Component
+export default PageContent

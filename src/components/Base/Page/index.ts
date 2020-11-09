@@ -1,5 +1,5 @@
-import Component from './component'
+import Page from './page'
 
-export * from './component'
+export * from './page'
 
-export default Component
+export default Page

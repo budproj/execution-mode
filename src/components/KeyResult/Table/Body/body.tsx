@@ -1,4 +1,4 @@
-import { TableBody, TableRow, TableCell } from '@material-ui/core'
+import { TableBody, TableRow, TableCell, Typography, Box, styled } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { useRecoilStateLoadable, useRecoilValueLoadable } from 'recoil'
@@ -13,6 +13,18 @@ import { userID as userIDAtom } from 'state/recoil/users/current/id'
 
 import { buildDroppableBody, buildDraggableRow } from './dnd'
 
+const StyledHighlightedText = styled(Typography)(({ theme }) => ({
+  color: theme.palette.common.black,
+}))
+
+const StyledSubtitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.grey[300],
+}))
+
+const StyledBodyCell = styled(TableCell)({
+  padding: '16px 0',
+})
+
 const KeyResultsTableBody = (): ReactElement => {
   const userID = useRecoilValueLoadable(userIDAtom)
   const allKeyResults = useRecoilValueLoadable(allKeyResultsAtom)
@@ -20,6 +32,7 @@ const KeyResultsTableBody = (): ReactElement => {
   const reorderCustomSorting = buildCustomSorter(userID, userCustomSorting, setUserCustomSorting)
 
   const wasDataFetched = hasFetchedAllValues(userID, userCustomSorting)
+  const keyResultsHashmap = wasDataFetched ? allKeyResults.getValue() : {}
 
   logger.debug('Rerendered Key Results table body. Take a look at our Recoil hooks data:', {
     data: {
@@ -38,11 +51,19 @@ const KeyResultsTableBody = (): ReactElement => {
     <TableBody component={buildDroppableBody(onDragEnd)}>
       {userCustomSorting.getValue().map((id: KeyResult['id'], index: number) => (
         <TableRow key={id} component={buildDraggableRow(id, index)}>
-          <TableCell>{id}</TableCell>
-          <TableCell>{id}</TableCell>
-          <TableCell>{id}</TableCell>
-          <TableCell>{id}</TableCell>
-          <TableCell>{id}</TableCell>
+          <StyledBodyCell>
+            <Box>
+              <StyledHighlightedText variant="body2">
+                {keyResultsHashmap[id].title}
+              </StyledHighlightedText>
+              <StyledSubtitle variant="subtitle1">{keyResultsHashmap[id].team.name}</StyledSubtitle>
+            </Box>
+          </StyledBodyCell>
+          <StyledBodyCell>{id}</StyledBodyCell>
+          <StyledBodyCell>{id}</StyledBodyCell>
+          <StyledBodyCell>{id}</StyledBodyCell>
+          <StyledBodyCell>{id}</StyledBodyCell>
+          <StyledBodyCell>{id}</StyledBodyCell>
         </TableRow>
       ))}
     </TableBody>

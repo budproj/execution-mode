@@ -1,5 +1,7 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
+type BreadcrumbMessages = 'home' | 'keyResults' | 'arrowRightIconDesc'
+
 export default defineMessages({
   home: {
     defaultMessage: 'Home',
@@ -18,4 +20,4 @@ export default defineMessages({
     id: 'FVnpVq',
     description: 'The alternative text explaining our arrow right icon',
   },
-}) as Record<string, MessageDescriptor>
+}) as Record<BreadcrumbMessages, MessageDescriptor>

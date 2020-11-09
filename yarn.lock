@@ -1492,6 +1492,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/ecma402-abstract@npm:1.3.2":
+  version: 1.3.2
+  resolution: "@formatjs/ecma402-abstract@npm:1.3.2"
+  dependencies:
+    tslib: ^2.0.1
+  checksum: 1ecba01455588027121def86fe440b3391e49513bdba7e1e55c94832c6f821ad7229a8c80b65bba9bc99d7d52d846b62fecd2639b75c6afc632231aaf09d9fbb
+  languageName: node
+  linkType: hard
+
 "@formatjs/ecma402-abstract@npm:^1.2.6":
   version: 1.2.6
   resolution: "@formatjs/ecma402-abstract@npm:1.2.6"
@@ -1544,6 +1553,19 @@ __metadata:
     intl-messageformat-parser: ^6.0.11
     tslib: ^2.0.1
   checksum: 62341a98ff5ecc6f0c2b045e3a66ccc713f1e8def8e7592ea05cdb6c75eb6ea1f5ea65a8e9e49573e872e360a7f5499b5f91d9c7c2b9f2e4834a4d689a3f80d2
+  languageName: node
+  linkType: hard
+
+"@formatjs/ts-transformer@npm:2.12.5":
+  version: 2.12.5
+  resolution: "@formatjs/ts-transformer@npm:2.12.5"
+  dependencies:
+    intl-messageformat-parser: 6.0.15
+    tslib: ^2.0.1
+    typescript: ^4.0
+  peerDependencies:
+    ts-jest: ^26.4.0
+  checksum: a8d58e35c3555623eadac919c7ce6fe25983a215130f0914937bd47233ebb23256b92fc42557418a6835a16a2e75e9cf665fa37459e96913ce7a6ed6196e78ce
   languageName: node
   linkType: hard
 
@@ -1899,6 +1921,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/emoji-regex@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@types/emoji-regex@npm:8.0.0"
+  checksum: 66659e5e80f2fb4beef7305e2865121df5ea0a028bda1b000b2ff0930e2cb214b4ded35988479992904e01226dd07b036bfc99f15986ff4189f5b666c9a768cd
+  languageName: node
+  linkType: hard
+
 "@types/eslint-config-prettier@npm:^6":
   version: 6.11.0
   resolution: "@types/eslint-config-prettier@npm:6.11.0"
@@ -1915,7 +1944,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:*, @types/eslint@npm:^7":
+"@types/eslint@npm:*, @types/eslint@npm:^7, @types/eslint@npm:^7.2.0":
   version: 7.2.4
   resolution: "@types/eslint@npm:7.2.4"
   dependencies:
@@ -1925,7 +1954,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/estree@npm:*":
+"@types/estree@npm:*, @types/estree@npm:^0.0.45":
   version: 0.0.45
   resolution: "@types/estree@npm:0.0.45"
   checksum: 9d339cbcf29a96a32e9d40efc21009c2342e93c4f653294dd1ef081ae474bca9e54707e5d4a1cff90b9e3566e8bdd71ac31e0c3d24bc2ff1d3d5aa75058b3937
@@ -2299,6 +2328,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@typescript-eslint/types@npm:3.10.1":
+  version: 3.10.1
+  resolution: "@typescript-eslint/types@npm:3.10.1"
+  checksum: cc075f8da439ae50a09da950532a8a369855e937e4502cd859829f6dab549e197a2ff2765a193b925e8caa3e16fc3f52bc3d53af0c8cf667c17b0424227055c4
+  languageName: node
+  linkType: hard
+
 "@typescript-eslint/types@npm:4.6.1":
   version: 4.6.1
   resolution: "@typescript-eslint/types@npm:4.6.1"
@@ -2322,6 +2358,34 @@ __metadata:
     typescript:
       optional: true
   checksum: 68765299b57eaf14273b22278bdaf40aa11d22605367fadc5cb33266c6947ed8409284586546ff8353482cbdb826a99cf11e6dd8a9c3bf224dd15619676da7aa
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/typescript-estree@npm:^3.6.0":
+  version: 3.10.1
+  resolution: "@typescript-eslint/typescript-estree@npm:3.10.1"
+  dependencies:
+    "@typescript-eslint/types": 3.10.1
+    "@typescript-eslint/visitor-keys": 3.10.1
+    debug: ^4.1.1
+    glob: ^7.1.6
+    is-glob: ^4.0.1
+    lodash: ^4.17.15
+    semver: ^7.3.2
+    tsutils: ^3.17.1
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: c048aa8b80129e0672ba57775072f1d4d9ea1216dee8fd23d224b9064dfebe48b12c1eb8efd823420c35598c423bddd2ec92b49d8c3f04860b91822f104e079f
+  languageName: node
+  linkType: hard
+
+"@typescript-eslint/visitor-keys@npm:3.10.1":
+  version: 3.10.1
+  resolution: "@typescript-eslint/visitor-keys@npm:3.10.1"
+  dependencies:
+    eslint-visitor-keys: ^1.1.0
+  checksum: 58890dc003211e47caf05a1ab19cf6d3945d0ee7267ef09bdcf0ff53514a8b93ed778ccf52ae14538fc4e9a03897374efd6e359f6483e8e2f76bb495bb874379
   languageName: node
   linkType: hard
 
@@ -4760,6 +4824,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"emoji-regex@npm:^9.0.0":
+  version: 9.2.0
+  resolution: "emoji-regex@npm:9.2.0"
+  checksum: 0ccee5f5e8ffcfe084e1a7499398b1ddb3b2f0e395a9bd5711ff136fc4606f24ca8bad930d60f5a12d4b2ce38dbb2b8cd0fd3e20a0d291770123b1e12bba9f04
+  languageName: node
+  linkType: hard
+
 "emojis-list@npm:^2.0.0":
   version: 2.1.0
   resolution: "emojis-list@npm:2.1.0"
@@ -5140,6 +5211,24 @@ __metadata:
   peerDependencies:
     eslint: ">=4.19.1"
   checksum: 8630a0467b6d4673cd8304f6aa6d430f91fe7f70f588a5022fcaa2c0d01355176910dd6a2b2b053c8dd5ce9222299998277740e269d3589d93f0c52cb744a519
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-formatjs@npm:^2.9.5":
+  version: 2.9.5
+  resolution: "eslint-plugin-formatjs@npm:2.9.5"
+  dependencies:
+    "@formatjs/ts-transformer": 2.12.5
+    "@types/emoji-regex": ^8.0.0
+    "@types/eslint": ^7.2.0
+    "@types/estree": ^0.0.45
+    "@typescript-eslint/typescript-estree": ^3.6.0
+    emoji-regex: ^9.0.0
+    intl-messageformat-parser: 6.0.15
+    tslib: ^2.0.1
+  peerDependencies:
+    eslint: ^7.0.0
+  checksum: aed5210f6ae7b2bbe1b6b4878a5603577db688a0ad2ae9a98600dfcb4609c97f27dc27bf75836c48c4bf2211254c35c79a8b5cb76e443f0fa2f73b9fdde3955a
   languageName: node
   linkType: hard
 
@@ -5526,6 +5615,7 @@ __metadata:
     eslint-import-resolver-node: ^0.3.4
     eslint-plugin-ava: ^11.0.0
     eslint-plugin-eslint-comments: ^3.2.0
+    eslint-plugin-formatjs: ^2.9.5
     eslint-plugin-import: ^2.22.1
     eslint-plugin-no-use-extend-native: ^0.5.0
     eslint-plugin-node: ^11.1.0
@@ -6715,6 +6805,16 @@ fsevents@~2.1.2:
   version: 1.4.0
   resolution: "interpret@npm:1.4.0"
   checksum: f15725d76206525546f559030ddc967db025c6db904eb8798a70ec3c07e42c5537c5cbc73a15eafd4ae5cdabad35601abf8878261c03dcc8217747e8037575fe
+  languageName: node
+  linkType: hard
+
+"intl-messageformat-parser@npm:6.0.15":
+  version: 6.0.15
+  resolution: "intl-messageformat-parser@npm:6.0.15"
+  dependencies:
+    "@formatjs/ecma402-abstract": 1.3.2
+    tslib: ^2.0.1
+  checksum: 7e119a41ee942cc89b5ada455227cda2c7a46c39d75a96150af97b313b2ee5eb4a79e5020c621d57db182e8e386a2f1be3b2b34af622a40e57ced3020d688dcd
   languageName: node
   linkType: hard
 

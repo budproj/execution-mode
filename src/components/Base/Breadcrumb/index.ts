@@ -1,3 +1,3 @@
-import Component from './component'
+import Breadcrumb from './breadcrumb'
 
-export default Component
+export default Breadcrumb

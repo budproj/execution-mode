@@ -1,3 +1,3 @@
-import Component from './component'
+import NamedAvatar from './named-avatar'
 
-export default Component
+export default NamedAvatar

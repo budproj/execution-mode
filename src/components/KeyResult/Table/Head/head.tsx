@@ -1,4 +1,4 @@
-import { styled, TableCell, TableHead, TableRow, Typography } from '@material-ui/core'
+import { makeStyles, styled, TableCell, TableHead, TableRow, Typography } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -7,18 +7,30 @@ import messages from './messages'
 import { KeyResult } from 'components/KeyResult/types'
 
 interface HeadCell {
-  id: keyof KeyResult
-  label: string
+  id: keyof KeyResult | 'icon'
+  label?: string
+  hidden?: boolean
 }
 
 const StyledHeadLabel = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[300],
 }))
 
+const StyledHeadCell = styled(TableCell)({
+  padding: '16px 0',
+})
+
+const StyledHiddenHeadCell = styled(TableCell)({
+  borderBottom: 'none',
+  padding: 0,
+  width: 30,
+})
+
 const KeyResultTableHead = (): ReactElement => {
   const intl = useIntl()
 
   const headCells: HeadCell[] = [
+    { id: 'icon', hidden: true },
     { id: 'title', label: intl.formatMessage(messages.tableHeadTitle) },
     { id: 'objective', label: intl.formatMessage(messages.tableHeadOKR) },
     { id: 'confidence', label: intl.formatMessage(messages.tableHeadStatus) },
@@ -30,11 +42,15 @@ const KeyResultTableHead = (): ReactElement => {
   return (
     <TableHead>
       <TableRow>
-        {headCells.map((singleHeadCell) => (
-          <TableCell key={singleHeadCell.id} variant="head">
-            <StyledHeadLabel variant="body2">{singleHeadCell.label}</StyledHeadLabel>
-          </TableCell>
-        ))}
+        {headCells.map((singleHeadCell) =>
+          singleHeadCell.hidden === true ? (
+            <StyledHiddenHeadCell key={singleHeadCell.id} variant="head" />
+          ) : (
+            <StyledHeadCell key={singleHeadCell.id} variant="head">
+              <StyledHeadLabel variant="body2">{singleHeadCell.label}</StyledHeadLabel>
+            </StyledHeadCell>
+          ),
+        )}
       </TableRow>
     </TableHead>
   )

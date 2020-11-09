@@ -1,3 +1,3 @@
-import Component from './component'
+import Logotype from './logotype'
 
-export default Component
+export default Logotype

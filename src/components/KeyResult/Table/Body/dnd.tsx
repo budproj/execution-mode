@@ -1,7 +1,11 @@
-import { TableBody, TableRow } from '@material-ui/core'
+import { styled, TableBody, TableCell, TableRow } from '@material-ui/core'
 import { KeyResult } from 'components/KeyResult/types'
 import React, { ComponentType, ReactElement } from 'react'
 import { DragDropContext, Draggable, Droppable, OnDragEndResponder } from 'react-beautiful-dnd'
+import ReorderIcon from 'components/Icons/Reorder'
+import { useIntl } from 'react-intl'
+
+import messages from './messages'
 
 export const buildDroppableBody = (onDragEnd: OnDragEndResponder) => (
   props: Record<string, unknown>,
@@ -20,15 +24,33 @@ export const buildDroppableBody = (onDragEnd: OnDragEndResponder) => (
   </DragDropContext>
 )
 
+const StyledDragHandler = styled(TableCell)(({ theme }) => ({
+  fontSize: '0.75rem',
+  color: theme.palette.grey[300],
+  borderBottom: 'none',
+  width: 0,
+  padding: 0,
+}))
+
 export const buildDraggableRow = (id: KeyResult['id'], index: number): ComponentType => (
   props: Record<string, unknown>,
-): ReactElement => (
-  <Draggable draggableId={id} index={index}>
-    {(provided) => (
-      <TableRow ref={provided.innerRef} {...provided.draggableProps} {...props}>
-        <p {...provided.dragHandleProps}>Test</p>
-        {props.children}
-      </TableRow>
-    )}
-  </Draggable>
-)
+): ReactElement => {
+  const intl = useIntl()
+
+  return (
+    <Draggable draggableId={id} index={index}>
+      {(provided) => (
+        <TableRow ref={provided.innerRef} {...provided.draggableProps} {...props}>
+          <StyledDragHandler {...provided.dragHandleProps}>
+            <ReorderIcon
+              desc={intl.formatMessage(messages.reorderIconDesc)}
+              fontSize="inherit"
+              htmlColor="inherit"
+            />
+          </StyledDragHandler>
+          {props.children}
+        </TableRow>
+      )}
+    </Draggable>
+  )
+}

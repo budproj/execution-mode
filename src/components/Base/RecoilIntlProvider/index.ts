@@ -1,3 +1,3 @@
-import Component from './component'
+import RecoilIntlProvider from './recoil-intl-provider'
 
-export default Component
+export default RecoilIntlProvider

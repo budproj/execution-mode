@@ -1,3 +1,3 @@
-import Component from './component'
+import Body from './body'
 
-export default Component
+export default Body
