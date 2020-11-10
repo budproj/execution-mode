@@ -1,10 +1,10 @@
 import { atom, selector } from 'recoil'
 
-import { PREFIX } from './constants'
-
 import { CustomSorting } from 'components/User'
 import { getFromAPI } from 'state/actions/api'
 import { userID as userIDAtom } from 'state/recoil/users/current/id'
+
+import { PREFIX } from './constants'
 
 export const KEY = `${PREFIX}::KEY_RESULTS`
 

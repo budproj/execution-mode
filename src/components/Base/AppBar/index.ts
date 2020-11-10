@@ -1,3 +1,3 @@
-import Component from './component'
+import AppBar from './app-bar'
 
-export default Component
+export default AppBar

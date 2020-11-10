@@ -18,4 +18,6 @@ export { default as PageTitle } from './PageTitle'
 
 export { default as RecoilIntlProvider } from './RecoilIntlProvider'
 
+export { default as Slider } from './Slider'
+
 export { default as ToolbarMenuItem } from './ToolbarMenuItem'

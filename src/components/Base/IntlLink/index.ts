@@ -1,5 +1,5 @@
-import Component from './component'
+import IntlLink from './intl-link'
 
-export * from './component'
+export * from './intl-link'
 
-export default Component
+export default IntlLink

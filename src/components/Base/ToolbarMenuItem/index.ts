@@ -1,3 +1,3 @@
-import Component from './component'
+import ToolbarMenuItem from './toolbar-menu-item'
 
-export default Component
+export default ToolbarMenuItem

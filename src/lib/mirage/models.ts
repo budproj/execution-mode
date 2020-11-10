@@ -1,17 +1,19 @@
 import { belongsTo, Model, hasMany } from 'miragejs'
 
 const models = {
+  user: Model,
+  cycle: Model,
+  objective: Model,
   keyResult: Model.extend({
     owner: belongsTo('user'),
     cycle: belongsTo(),
-    icon: belongsTo(),
     objective: belongsTo(),
     team: belongsTo(),
+    confidence: belongsTo(),
   }),
-  user: Model,
-  cycle: Model,
-  icon: Model,
-  objective: Model,
+  confidence: Model.extend({
+    user: belongsTo(),
+  }),
   team: Model,
   customSorting: Model.extend({
     user: belongsTo(),

@@ -1,6 +1,6 @@
-import React, { Fragment, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 
-import { withIntlRedirect } from 'hocs'
+import { withIntlRedirect } from 'components/hocs'
 
 const Index = (): ReactElement => <>Home</>
 

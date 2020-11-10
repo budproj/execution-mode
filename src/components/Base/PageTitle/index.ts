@@ -1,3 +1,3 @@
-import Component from './component'
+import PageTitle from './page-title'
 
-export default Component
+export default PageTitle

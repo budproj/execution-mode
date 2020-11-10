@@ -1,3 +1,3 @@
-import Component from './component'
+import ArrowRight from './arrow-right'
 
-export default Component
+export default ArrowRight

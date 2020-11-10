@@ -1,3 +1,3 @@
-import Component from './component'
+import NotificationBell from './notification-bell'
 
-export default Component
+export default NotificationBell

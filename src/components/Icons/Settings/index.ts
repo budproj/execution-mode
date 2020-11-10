@@ -1,3 +1,3 @@
-import Component from './component'
+import Settings from './settings'
 
-export default Component
+export default Settings

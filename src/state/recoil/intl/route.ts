@@ -1,10 +1,10 @@
 import flow from 'lodash/flow'
 import { atomFamily, selectorFamily } from 'recoil'
 
+import getConfig, { Locale, Route } from 'config'
+
 import { PREFIX } from './constants'
 import { locale as localeAtom } from './locale'
-
-import getConfig, { Locale, Route } from 'config'
 
 const KEY = `${PREFIX}::ROUTE`
 

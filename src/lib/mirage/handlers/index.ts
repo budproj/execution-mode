@@ -1,11 +1,11 @@
-import * as customSorting from './custom-sorting'
 import * as keyResults from './key-results'
+import * as users from './users'
 
 export * from './types'
 
 const handlers = {
   keyResults,
-  customSorting,
+  users,
 }
 
 export default handlers

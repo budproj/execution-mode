@@ -1,5 +1,13 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
+type KeyResultsTableHeadMessages =
+  | 'tableHeadTitle'
+  | 'tableHeadOKR'
+  | 'tableHeadStatus'
+  | 'tableHeadProgress'
+  | 'tableHeadDate'
+  | 'tableHeadOwner'
+
 export default defineMessages({
   tableHeadTitle: {
     defaultMessage: 'Nome da KR',
@@ -36,4 +44,4 @@ export default defineMessages({
     id: 'BlDXcz',
     description: 'The text of the table head related to the Owner column',
   },
-}) as Record<string, MessageDescriptor>
+}) as Record<KeyResultsTableHeadMessages, MessageDescriptor>

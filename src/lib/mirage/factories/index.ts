@@ -1,6 +1,6 @@
+import confidence from './confidence'
 import customSorting from './custom-sorting'
 import cycle from './cycle'
-import icon from './icon'
 import keyResult from './key-result'
 import objective from './objective'
 import team from './team'
@@ -10,10 +10,10 @@ const factories = {
   keyResult,
   user,
   cycle,
-  icon,
   objective,
   customSorting,
   team,
+  confidence,
 }
 
 export default factories

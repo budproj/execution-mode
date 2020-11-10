@@ -1,5 +1,5 @@
-import Component from './component'
+import Button from './button'
 
-export * from './component'
+export * from './button'
 
-export default Component
+export default Button
