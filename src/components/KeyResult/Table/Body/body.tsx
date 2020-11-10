@@ -1,5 +1,5 @@
 import { TableBody, TableRow } from '@material-ui/core'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { useRecoilStateLoadable, useRecoilValueLoadable } from 'recoil'
 
@@ -7,7 +7,10 @@ import { KeyResult } from 'components/KeyResult'
 import logger from 'lib/logger'
 import { hasFetchedAllValues } from 'specifications'
 import { buildCustomSorter } from 'state/actions/users'
-import { allKeyResults as allKeyResultsAtom } from 'state/recoil/key-results/all'
+import {
+  remoteKeyResults as remoteKeyResultsAtom,
+  selectRemoteKeyResults,
+} from 'state/recoil/key-results/remote'
 import { userKeyResultsCustomSorting as userCustomSortingAtom } from 'state/recoil/users/current/custom-sorting/key-results'
 import { userID as userIDAtom } from 'state/recoil/users/current/id'
 
@@ -17,15 +20,21 @@ import Skeleton from './skeleton'
 
 const KeyResultsTableBody = (): ReactElement => {
   const userID = useRecoilValueLoadable(userIDAtom)
-  const allKeyResults = useRecoilValueLoadable(allKeyResultsAtom)
+  const remoteKeyResultsRepository = useRecoilValueLoadable(remoteKeyResultsAtom)
+  const [remoteKeyResults, setRemoteKeyResults] = useRecoilStateLoadable(selectRemoteKeyResults)
   const [userCustomSorting, setUserCustomSorting] = useRecoilStateLoadable(userCustomSortingAtom)
   const reorderCustomSorting = buildCustomSorter(userID, userCustomSorting, setUserCustomSorting)
 
-  const wasDataFetched = hasFetchedAllValues(userID, userCustomSorting)
+  const wasDataFetched = hasFetchedAllValues(userID, userCustomSorting, remoteKeyResults)
+
+  useEffect(() => {
+    if (wasDataFetched && !remoteKeyResultsRepository.getValue())
+      setRemoteKeyResults(remoteKeyResults.getValue())
+  }, [wasDataFetched, remoteKeyResultsRepository, remoteKeyResults, setRemoteKeyResults])
 
   logger.debug('Rerendered Key Results table body. Take a look at our Recoil hooks data:', {
     data: {
-      allKeyResults,
+      remoteKeyResultsRepository,
       userCustomSorting,
     },
     component: 'KeyResultsTableBody',

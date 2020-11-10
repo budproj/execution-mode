@@ -1,13 +1,15 @@
 import React, { ReactElement } from 'react'
 import { KeyResult, KeyResultConfidence } from 'components/KeyResult/types'
 
-import { selectKeyResultByID } from 'state/recoil/key-results/single'
+import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
 import grid from 'components/KeyResult/Table/grid'
 import { useRecoilValue } from 'recoil'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
 import messages from './messages'
 import { Box, styled, TableCell, Theme, Typography, useTheme } from '@material-ui/core'
+
+import Skeleton from './skeleton'
 
 export interface StatusProps {
   id: KeyResult['id']
@@ -45,11 +47,12 @@ const StyledTagCircle = styled(Box)({
 const Status = ({ id }: StatusProps): ReactElement => {
   const intl = useIntl()
   const theme = useTheme()
-  const keyResult = useRecoilValue<KeyResult>(selectKeyResultByID(id))
+  const selectedKeyResult = useRecoilValue<KeyResult | undefined>(keyResultAtom(id))
+  const confidence = selectedKeyResult?.confidence?.value ?? 100
 
-  const tag = selectStatusTagBasedInConfidence(keyResult.confidence.value, theme)
+  const tag = selectStatusTagBasedInConfidence(confidence, theme)
 
-  return (
+  return selectedKeyResult ? (
     <TableCell width={grid.confidence}>
       <Box display="flex" gridGap={10}>
         <StyledTagCircle style={{ backgroundColor: tag.color, marginTop: 7 }} />
@@ -58,11 +61,16 @@ const Status = ({ id }: StatusProps): ReactElement => {
           <StyledStatus variant="body1">{intl.formatMessage(tag.message)}</StyledStatus>
           <StyledDate variant="subtitle1">
             {intl.formatMessage(messages.updatedAt)} -{' '}
-            {intl.formatDate(keyResult.confidence.createdAt, { day: 'numeric', month: 'short' })}
+            {intl.formatDate(selectedKeyResult.confidence.createdAt, {
+              day: 'numeric',
+              month: 'short',
+            })}
           </StyledDate>
         </Box>
       </Box>
     </TableCell>
+  ) : (
+    <Skeleton />
   )
 }
 
