@@ -50,6 +50,7 @@ const getAll = (schema: Record<string, DbCollection>): MirageResponse<KeyResults
           id: next.ownerId,
           name: owner.name,
           role: owner.role,
+          picture: owner.picture,
         },
       },
     }
