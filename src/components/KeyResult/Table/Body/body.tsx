@@ -25,12 +25,13 @@ const KeyResultsTableBody = (): ReactElement => {
   const [userCustomSorting, setUserCustomSorting] = useRecoilStateLoadable(userCustomSortingAtom)
   const reorderCustomSorting = buildCustomSorter(userID, userCustomSorting, setUserCustomSorting)
 
-  const wasDataFetched = hasFetchedAllValues(userID, userCustomSorting, remoteKeyResults)
+  const wasRemoteDataFetched = hasFetchedAllValues(remoteKeyResults)
+  const wasOrderFetched = hasFetchedAllValues(userCustomSorting)
 
   useEffect(() => {
-    if (wasDataFetched && !remoteKeyResultsRepository.getValue())
+    if (wasRemoteDataFetched && !remoteKeyResultsRepository.getValue())
       setRemoteKeyResults(remoteKeyResults.getValue())
-  }, [wasDataFetched, remoteKeyResultsRepository, remoteKeyResults, setRemoteKeyResults])
+  }, [wasRemoteDataFetched, remoteKeyResultsRepository, remoteKeyResults, setRemoteKeyResults])
 
   logger.debug('Rerendered Key Results table body. Take a look at our Recoil hooks data:', {
     data: {
@@ -45,7 +46,7 @@ const KeyResultsTableBody = (): ReactElement => {
       ? reorderCustomSorting(source.index, destination.index)
       : userCustomSorting.getValue()
 
-  return wasDataFetched ? (
+  return wasOrderFetched ? (
     <TableBody component={buildDroppableBody(onDragEnd)}>
       {userCustomSorting.getValue().map((id: KeyResult['id'], index: number) => (
         <TableRow key={id} component={buildDraggableRow(id, index)}>

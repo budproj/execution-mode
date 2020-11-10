@@ -27,8 +27,10 @@ const StyledBox = styled(Box)({
     fontWeight: 700,
   },
 
-  '& button:first-child': {
-    paddingLeft: 2,
+  '& a:first-child': {
+    '& button': {
+      paddingLeft: 2,
+    },
 
     '& .MuiButton-startIcon': {
       display: 'none',

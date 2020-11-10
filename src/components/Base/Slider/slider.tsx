@@ -9,7 +9,7 @@ export interface SliderProps extends MUISliderProps {
 
 const styles: Styles<Theme, SliderProps> = (theme) => ({
   root: {
-    color: (props) => props.trackColor ?? theme.palette.primary,
+    color: (props) => props.trackColor ?? theme.palette.primary.main,
     height: 8,
     '&:focus, &:hover, &$active': {
       '& .MuiSlider-thumb': {
@@ -43,11 +43,11 @@ const styles: Styles<Theme, SliderProps> = (theme) => ({
   },
 })
 
-const Slider = (props: SliderProps): ReactElement => {
+const Slider = ({ trackColor, ...rest }: SliderProps): ReactElement => {
   const buildClasses = makeStyles(styles)
-  const classes = buildClasses(props)
+  const classes = buildClasses({ trackColor, ...rest })
 
-  return <MUISlider classes={classes} {...props} />
+  return <MUISlider classes={classes} {...rest} />
 }
 
 export default Slider

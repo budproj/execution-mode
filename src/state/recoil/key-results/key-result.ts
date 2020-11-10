@@ -7,7 +7,10 @@ import logger from 'lib/logger'
 
 export const KEY = `${PREFIX}::ALL`
 
-export const selectKeyResultBasedOnID = selectorFamily<KeyResult | undefined, KeyResult['id']>({
+export const selectKeyResultBasedOnID = selectorFamily<
+  KeyResult | Partial<KeyResult> | undefined,
+  KeyResult['id']
+>({
   key: `${KEY}::ID`,
   get: (id) => ({ get }) => get(remoteKeyResults)?.[id],
   set: (id) => ({ get, set }, newValue) => {
