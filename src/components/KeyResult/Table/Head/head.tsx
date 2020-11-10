@@ -2,10 +2,10 @@ import { styled, TableCell, TableHead, TableRow, Typography } from '@material-ui
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import messages from './messages'
-
-import { KeyResult } from 'components/KeyResult/types'
 import grid from 'components/KeyResult/Table/grid'
+import { KeyResult } from 'components/KeyResult/types'
+
+import messages from './messages'
 
 interface HeadCell {
   id: keyof KeyResult | 'icon'

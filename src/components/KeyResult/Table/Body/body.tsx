@@ -14,8 +14,8 @@ import {
 import { userKeyResultsCustomSorting as userCustomSortingAtom } from 'state/recoil/users/current/custom-sorting/key-results'
 import { userID as userIDAtom } from 'state/recoil/users/current/id'
 
-import { buildDroppableBody, buildDraggableRow } from './dnd'
 import { Cycle, Okr, Owner, Progress, Status, Title } from './Cells'
+import { buildDroppableBody, buildDraggableRow } from './dnd'
 import Skeleton from './skeleton'
 
 const KeyResultsTableBody = (): ReactElement => {

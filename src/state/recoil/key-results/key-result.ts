@@ -1,9 +1,11 @@
-import { KeyResult } from 'components/KeyResult'
-import { atomFamily, selectorFamily } from 'recoil'
-import { remoteKeyResults } from './remote'
-import { PREFIX } from './constants'
 import defaultsDeep from 'lodash/defaultsDeep'
+import { atomFamily, selectorFamily } from 'recoil'
+
+import { KeyResult } from 'components/KeyResult'
 import logger from 'lib/logger'
+
+import { PREFIX } from './constants'
+import { remoteKeyResults } from './remote'
 
 export const KEY = `${PREFIX}::ALL`
 

@@ -1,8 +1,8 @@
+import { TableCell } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { KeyResult } from 'components/KeyResult/types'
 
 import grid from 'components/KeyResult/Table/grid'
-import { TableCell } from '@material-ui/core'
+import { KeyResult } from 'components/KeyResult/types'
 
 export interface OwnerProps {
   id: KeyResult['id']

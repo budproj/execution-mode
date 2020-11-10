@@ -1,11 +1,11 @@
 import { Box, styled, TableCell, Typography } from '@material-ui/core'
-import { KeyResult } from 'components/KeyResult/types'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
 import DynamicIcon from 'components/KeyResult/DynamicIcon'
 import grid from 'components/KeyResult/Table/grid'
+import { KeyResult } from 'components/KeyResult/types'
+import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
 
 import Skeleton from './skeleton'
 

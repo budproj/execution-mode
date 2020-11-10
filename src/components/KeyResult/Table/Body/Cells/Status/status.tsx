@@ -1,14 +1,13 @@
+import { Box, styled, TableCell, Theme, Typography, useTheme } from '@material-ui/core'
 import React, { ReactElement } from 'react'
-import { KeyResult, KeyResultConfidence } from 'components/KeyResult/types'
-
-import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
-import grid from 'components/KeyResult/Table/grid'
-import { useRecoilValue } from 'recoil'
 import { MessageDescriptor, useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
+
+import grid from 'components/KeyResult/Table/grid'
+import { KeyResult, KeyResultConfidence } from 'components/KeyResult/types'
+import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
 
 import messages from './messages'
-import { Box, styled, TableCell, Theme, Typography, useTheme } from '@material-ui/core'
-
 import Skeleton from './skeleton'
 
 export interface StatusProps {

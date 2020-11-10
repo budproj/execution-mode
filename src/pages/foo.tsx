@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 
 import IntlLink from 'components/Base/IntlLink'
 

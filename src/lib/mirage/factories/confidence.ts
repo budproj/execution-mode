@@ -1,6 +1,7 @@
 import faker from 'faker'
-import { KeyResultConfidence } from 'components/KeyResult'
 import { Factory, ModelInstance, Server } from 'miragejs'
+
+import { KeyResultConfidence } from 'components/KeyResult'
 
 export default Factory.extend({
   value: () => faker.random.number(100),

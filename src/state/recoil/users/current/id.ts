@@ -1,8 +1,8 @@
 import { atom } from 'recoil'
 
-import { PREFIX } from './constants'
-
 import { User } from 'components/User'
+
+import { PREFIX } from './constants'
 
 export const KEY = `${PREFIX}::ID`
 

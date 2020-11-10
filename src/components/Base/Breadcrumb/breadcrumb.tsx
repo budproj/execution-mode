@@ -6,11 +6,11 @@ import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import messages from './messages'
-
 import Button from 'components/Base/Button'
 import IntlLink from 'components/Base/IntlLink'
 import ArrowRightIcon from 'components/Icons/ArrowRight'
+
+import messages from './messages'
 
 const StyledButton = styled(Button)({
   fontSize: 12,

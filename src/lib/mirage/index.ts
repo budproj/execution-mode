@@ -1,10 +1,10 @@
 import { createServer, Server } from 'miragejs'
 
+import { NodeEnv } from 'config'
+
 import factories from './factories'
 import handlers from './handlers'
 import models from './models'
-
-import { NodeEnv } from 'config'
 
 export function makeServer(environment: NodeEnv): Server {
   const server = createServer({

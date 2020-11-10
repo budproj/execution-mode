@@ -1,8 +1,8 @@
 import * as winston from 'winston'
 
-import { ConsoleTransport } from './transports'
-
 import getConfig from 'config'
+
+import { ConsoleTransport } from './transports'
 
 const { publicRuntimeConfig } = getConfig()
 const logger = winston.createLogger({

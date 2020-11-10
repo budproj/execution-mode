@@ -1,12 +1,12 @@
-import React, { ReactElement } from 'react'
-import { KeyResult } from 'components/KeyResult/types'
 import { Box, styled, TableCell, Typography, useTheme } from '@material-ui/core'
-
-import grid from 'components/KeyResult/Table/grid'
-import StackIcon from 'components/Icons/Stack'
-import { useRecoilValue } from 'recoil'
-import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
+import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
+
+import StackIcon from 'components/Icons/Stack'
+import grid from 'components/KeyResult/Table/grid'
+import { KeyResult } from 'components/KeyResult/types'
+import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
 
 import messages from './messages'
 import Skeleton from './skeleton'

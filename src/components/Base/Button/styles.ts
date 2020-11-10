@@ -1,8 +1,8 @@
 import { Theme } from '@material-ui/core'
 
-import { ButtonProps } from './Component'
-
 import { MUIStyle } from 'themes/types'
+
+import { ButtonProps } from './button'
 
 const styles: MUIStyle = (theme: Theme) => ({
   root: {

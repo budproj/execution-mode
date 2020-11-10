@@ -1,11 +1,12 @@
-import { TableBody, TableRow, TableCell, styled, Box } from '@material-ui/core'
+import { TableBody, TableRow, TableCell, styled } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
 import React, { ReactElement } from 'react'
 
-import { Skeleton as TitleSkeleton } from './Cells/Title'
+import { Skeleton as CycleSkeleton } from './Cells/Cycle'
 import { Skeleton as OkrSkeleton } from './Cells/Okr'
-import { Skeleton as StatusSkeleton } from './Cells/Status'
 import { Skeleton as ProgressSkeleton } from './Cells/Progress'
+import { Skeleton as StatusSkeleton } from './Cells/Status'
+import { Skeleton as TitleSkeleton } from './Cells/Title'
 
 export interface TableSkeletonProps {
   amountOfRows: number
@@ -29,13 +30,7 @@ const TableSkeleton = (props: TableSkeletonProps): ReactElement => (
         <OkrSkeleton />
         <StatusSkeleton />
         <ProgressSkeleton />
-
-        <StyledSkeletonCell>
-          <Box display="flex" gridGap={20}>
-            <Skeleton width="20%" />
-            <Skeleton width="20%" />
-          </Box>
-        </StyledSkeletonCell>
+        <CycleSkeleton />
 
         <StyledSkeletonCell>
           <Skeleton variant="circle" width={40} height={40} />

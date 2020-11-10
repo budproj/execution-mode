@@ -5,10 +5,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import ToolbarMenuItem from '../ToolbarMenuItem'
-
-import messages from './messages'
-
 import Logotype from 'components/Base/Logotype'
 import {
   NotificationBell as NotificationIcon,
@@ -16,6 +12,10 @@ import {
   Settings as SettingsIcon,
 } from 'components/Icons'
 import NamedAvatar from 'components/User/NamedAvatar'
+
+import ToolbarMenuItem from '../ToolbarMenuItem'
+
+import messages from './messages'
 
 const StyledAppBar = styled(MUIAppBar)(({ theme }) => ({
   backgroundColor: theme.palette.common.white,

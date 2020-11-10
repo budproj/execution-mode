@@ -1,18 +1,17 @@
 import { makeStyles, styled, TableBody, TableCell, TableRow, Theme } from '@material-ui/core'
-import { KeyResult } from 'components/KeyResult/types'
 import React, { ComponentType, ReactElement } from 'react'
 import {
   DragDropContext,
   Draggable,
   DraggableProvided,
   DraggableStateSnapshot,
-  DraggingStyle,
   Droppable,
-  NotDraggingStyle,
   OnDragEndResponder,
 } from 'react-beautiful-dnd'
-import ReorderIcon from 'components/Icons/Reorder'
 import { useIntl } from 'react-intl'
+
+import ReorderIcon from 'components/Icons/Reorder'
+import { KeyResult } from 'components/KeyResult/types'
 
 import messages from './messages'
 

@@ -12,10 +12,13 @@
     "xo/esnext",
     "xo-react",
     "xo-typescript",
-    "prettier"
+    "prettier",
+    "import",
+    "plugin:import/typescript"
   ],
   "plugins": [
-    "formatjs"
+    "formatjs",
+    "unused-imports"
   ],
   "rules": {
     "unicorn/no-reduce": "off",
@@ -26,6 +29,47 @@
     "formatjs/enforce-id": [
       "error",
       { "idInterpolationPattern": "[sha512:contenthash:base64:6]" }
+    ],
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "import/no-unresolved": [
+      "error",
+      { "ignore": ["miragejs/db-collection"] }
+    ],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc" },
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling"
+        ]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "off",
+    "unused-imports/no-unused-imports-ts": "error",
+    "unused-imports/no-unused-vars-ts": [
+      "warn",
+      { "vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_" }
     ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      },
+      "typescript": {
+        "project": "src/tsconfig.server.json"
+      }
+    },
+    "import/ignore": ["node_modules"]
   }
 }

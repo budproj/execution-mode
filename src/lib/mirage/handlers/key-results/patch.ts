@@ -1,8 +1,8 @@
 import { Request } from 'miragejs'
 import DbCollection from 'miragejs/db-collection'
 
-import { MirageResponse } from 'lib/mirage/handlers'
 import { KeyResult } from 'components/KeyResult'
+import { MirageResponse } from 'lib/mirage/handlers'
 
 const patch = (
   schema: Record<string, DbCollection>,

@@ -1,11 +1,11 @@
-import { atom, selector } from 'recoil'
 import defaultsDeep from 'lodash/defaultsDeep'
-
-import { PREFIX } from './constants'
+import { atom, selector } from 'recoil'
 
 import { KeyResultsHashmap } from 'components/KeyResult'
-import { getFromAPI } from 'state/actions/api'
 import logger from 'lib/logger'
+import { getFromAPI } from 'state/actions/api'
+
+import { PREFIX } from './constants'
 
 export const KEY = `${PREFIX}::REMOTE`
 

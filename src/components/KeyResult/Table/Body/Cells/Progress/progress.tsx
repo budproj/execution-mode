@@ -1,15 +1,16 @@
-import React, { ChangeEvent, ReactElement, useState } from 'react'
 import { Box, styled, TableCell, Typography, useTheme } from '@material-ui/core'
-
-import { KeyResult } from 'components/KeyResult/types'
-import grid from 'components/KeyResult/Table/grid'
-import Slider from 'components/Base/Slider'
-import { useRecoilState } from 'recoil'
-import { selectKeyResultBasedOnID } from 'state/recoil/key-results/key-result'
-import { selectStatusTagBasedInConfidence } from 'components/KeyResult/Table/Body/Cells/Status'
+import React, { ChangeEvent, ReactElement, useState } from 'react'
 import { useIntl } from 'react-intl'
-import Skeleton from './skeleton'
+import { useRecoilState } from 'recoil'
+
+import Slider from 'components/Base/Slider'
+import { selectStatusTagBasedInConfidence } from 'components/KeyResult/Table/Body/Cells/Status'
+import grid from 'components/KeyResult/Table/grid'
+import { KeyResult } from 'components/KeyResult/types'
 import updateKeyResult from 'state/actions/key-results/update-key-result'
+import { selectKeyResultBasedOnID } from 'state/recoil/key-results/key-result'
+
+import Skeleton from './skeleton'
 
 export interface ProgressProps {
   id: KeyResult['id']

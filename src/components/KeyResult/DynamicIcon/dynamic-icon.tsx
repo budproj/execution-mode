@@ -1,10 +1,10 @@
 import { Box, makeStyles, useTheme } from '@material-ui/core'
-import React, { ComponentType, ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
-import { KeyResult } from 'components/KeyResult/types'
 
-import * as iconState from 'state/recoil/key-results/icon'
 import * as Icons from 'components/Icons'
+import { KeyResult } from 'components/KeyResult/types'
+import { drawing as drawingState, color as colorState } from 'state/recoil/key-results/icon'
 
 export interface DynamicIconProps {
   title: KeyResult['title']
@@ -23,8 +23,8 @@ const styles = {
 const DynamicIcon = ({ title }: DynamicIconProps): ReactElement => {
   const theme = useTheme()
 
-  const iconDrawingAtom = iconState.drawing.keyResultIconDrawing(title)
-  const iconColorAtom = iconState.color.keyResultIconColor(title)
+  const iconDrawingAtom = drawingState.keyResultIconDrawing(title)
+  const iconColorAtom = colorState.keyResultIconColor(title)
 
   const iconDrawing = useRecoilValue<string>(iconDrawingAtom)
   const iconColor = useRecoilValue<string>(iconColorAtom)

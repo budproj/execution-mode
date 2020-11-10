@@ -1,7 +1,7 @@
-import React, { ReactElement } from 'react'
-import MUISlider, { SliderProps as MUISliderProps } from '@material-ui/core/Slider'
 import { makeStyles, Theme } from '@material-ui/core'
+import MUISlider, { SliderProps as MUISliderProps } from '@material-ui/core/Slider'
 import { Styles } from '@material-ui/styles'
+import React, { ReactElement } from 'react'
 
 export interface SliderProps extends MUISliderProps {
   trackColor?: string

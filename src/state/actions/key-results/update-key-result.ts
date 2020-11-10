@@ -1,7 +1,9 @@
-import { KeyResult } from 'components/KeyResult'
-import logger from 'lib/logger'
 import { flow } from 'lodash'
 import { SetterOrUpdater } from 'recoil'
+
+import { KeyResult } from 'components/KeyResult'
+import logger from 'lib/logger'
+
 import { patchFromAPI } from '../api'
 
 const component = 'updateKeyResults'

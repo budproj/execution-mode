@@ -2264,7 +2264,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^4.4.1, @typescript-eslint/eslint-plugin@npm:^4.6.1":
+"@typescript-eslint/eslint-plugin@npm:^4.4.1, @typescript-eslint/eslint-plugin@npm:^4.5.0, @typescript-eslint/eslint-plugin@npm:^4.6.1":
   version: 4.6.1
   resolution: "@typescript-eslint/eslint-plugin@npm:4.6.1"
   dependencies:
@@ -5069,6 +5069,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eslint-config-import@npm:^0.13.0":
+  version: 0.13.0
+  resolution: "eslint-config-import@npm:0.13.0"
+  peerDependencies:
+    eslint-plugin-import: 0.13.x
+  checksum: 1809d6881e26df62732b510e75a09dcce36a882f2596a9284de047b73c205a2382d448568c9e2ea600b5dc4f19bdcf637906da4d39391d3fedc78ea053fea581
+  languageName: node
+  linkType: hard
+
 "eslint-config-prettier@npm:^6.13.0, eslint-config-prettier@npm:^6.15.0":
   version: 6.15.0
   resolution: "eslint-config-prettier@npm:6.15.0"
@@ -5137,6 +5146,22 @@ __metadata:
     debug: ^2.6.9
     resolve: ^1.13.1
   checksum: 825e34e662c988ece8229e6956a95f12d2fa19265b429e3e3db14e58bfe72e270c999cda0cfc690793ed6e6a3e49ffa8df0e0a8842d668a1f0f7de5ae1aa36f9
+  languageName: node
+  linkType: hard
+
+"eslint-import-resolver-typescript@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "eslint-import-resolver-typescript@npm:2.3.0"
+  dependencies:
+    debug: ^4.1.1
+    glob: ^7.1.6
+    is-glob: ^4.0.1
+    resolve: ^1.17.0
+    tsconfig-paths: ^3.9.0
+  peerDependencies:
+    eslint: "*"
+    eslint-plugin-import: "*"
+  checksum: 2d2c9e852897f27d7f442f3ee46a84482a4e227ad2aff73acd1dc4a85e0605e12bba194564a81f1ff436588678a8d256679ef9a03c26dc6c6a2ef5f407530315
   languageName: node
   linkType: hard
 
@@ -5352,6 +5377,26 @@ __metadata:
   peerDependencies:
     eslint: ">=7.11.0"
   checksum: 655c90e72f0aa4a7f9dd6250ce95f187ddb85a7e1e3ac46091f21025c1c6c2b308a520a7f5abfb14866b6926fee1023e3ceb7882c5b1fb63a4f0698b25f0d7e6
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-unused-imports@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "eslint-plugin-unused-imports@npm:1.0.0"
+  dependencies:
+    "@typescript-eslint/eslint-plugin": ^4.5.0
+    eslint: ^7.11.0
+    eslint-rule-composer: ^0.3.0
+    requireindex: ~1.2.0
+    typescript: ^4.0.3
+  checksum: 1363c9850233de1267f5bd5a373c41f5dfe322335517009129f9d64aaffc98e25917cf438490ba5d2c4ec324c0b3166b273cffa1ea0fb35955bce70be0368207
+  languageName: node
+  linkType: hard
+
+"eslint-rule-composer@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "eslint-rule-composer@npm:0.3.0"
+  checksum: eb96fffa4eb2cc40061bf082bb4cc48df746e9c556e4b20c653e1b84b34cabd66462bafad124d44ea2b89a750a2aec26c21507bd7b8b23f355136a8901e09d00
   languageName: node
   linkType: hard
 
@@ -5608,11 +5653,13 @@ __metadata:
     crypto: ^1.0.1
     date-fns: ^2.16.1
     eslint: ^7.13.0
+    eslint-config-import: ^0.13.0
     eslint-config-prettier: ^6.15.0
     eslint-config-xo: ^0.33.1
     eslint-config-xo-react: ^0.23.0
     eslint-config-xo-typescript: ^0.35.0
     eslint-import-resolver-node: ^0.3.4
+    eslint-import-resolver-typescript: ^2.3.0
     eslint-plugin-ava: ^11.0.0
     eslint-plugin-eslint-comments: ^3.2.0
     eslint-plugin-formatjs: ^2.9.5
@@ -5624,6 +5671,7 @@ __metadata:
     eslint-plugin-react: ^7.21.5
     eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-unicorn: ^23.0.0
+    eslint-plugin-unused-imports: ^1.0.0
     faker: ^5.1.0
     glob: ^7.1.6
     husky: ^4.3.0
@@ -10541,6 +10589,13 @@ fsevents@~2.1.2:
     tunnel-agent: ^0.6.0
     uuid: ^3.3.2
   checksum: 7a74841f3024cac21d8c3cca7f7f2e4243fbd62464d2f291fddb94008a9d010e20c4a1488f4224b03412a4438a699db2a3de11019e486c8e656f86b0b79bf022
+  languageName: node
+  linkType: hard
+
+"requireindex@npm:~1.2.0":
+  version: 1.2.0
+  resolution: "requireindex@npm:1.2.0"
+  checksum: a6c6c2edd46bcce88f839f69f1d29a11920664862d8b78c205fc69ab2d65a8f592c1a8d68755335898af14ab110cc9fdfc7c572412d38cec485bdf4db45c49c5
   languageName: node
   linkType: hard
 
