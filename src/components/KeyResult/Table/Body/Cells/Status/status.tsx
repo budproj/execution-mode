@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
-import { KeyResult, KeyResultConfidence, KeyResultsHashmap } from 'components/KeyResult/types'
+import { KeyResult, KeyResultConfidence } from 'components/KeyResult/types'
 
-import { allKeyResults } from 'state/recoil/key-results/all'
+import { selectKeyResultByID } from 'state/recoil/key-results/single'
 import grid from 'components/KeyResult/Table/grid'
 import { useRecoilValue } from 'recoil'
 import { MessageDescriptor, useIntl } from 'react-intl'
@@ -18,7 +18,7 @@ export interface Tag {
   color: string
 }
 
-const selectStatusTagBasedInConfidence = (
+export const selectStatusTagBasedInConfidence = (
   confidence: KeyResultConfidence['value'],
   theme: Theme,
 ): Tag => {
@@ -45,9 +45,7 @@ const StyledTagCircle = styled(Box)({
 const Status = ({ id }: StatusProps): ReactElement => {
   const intl = useIntl()
   const theme = useTheme()
-
-  const keyResultsHashmap = useRecoilValue<KeyResultsHashmap>(allKeyResults)
-  const keyResult = keyResultsHashmap[id]
+  const keyResult = useRecoilValue<KeyResult>(selectKeyResultByID(id))
 
   const tag = selectStatusTagBasedInConfidence(keyResult.confidence.value, theme)
 

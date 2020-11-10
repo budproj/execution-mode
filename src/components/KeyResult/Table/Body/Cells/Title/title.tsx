@@ -1,9 +1,9 @@
 import { Box, styled, TableCell, Typography } from '@material-ui/core'
-import { KeyResult, KeyResultsHashmap } from 'components/KeyResult/types'
+import { KeyResult } from 'components/KeyResult/types'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { allKeyResults } from 'state/recoil/key-results/all'
+import { selectKeyResultByID } from 'state/recoil/key-results/single'
 import DynamicIcon from 'components/KeyResult/DynamicIcon'
 import grid from 'components/KeyResult/Table/grid'
 
@@ -25,18 +25,16 @@ const StyledSubtitle = styled(Typography)(({ theme }) => ({
 }))
 
 const Title = ({ id }: TitleProps): ReactElement => {
-  const keyResultsHashmap = useRecoilValue<KeyResultsHashmap>(allKeyResults)
+  const keyResult = useRecoilValue<KeyResult>(selectKeyResultByID(id))
 
   return (
     <StyledCell width={grid.title}>
       <Box display="flex" gridGap={20} alignItems="center">
-        <DynamicIcon title={keyResultsHashmap[id].title} />
+        <DynamicIcon title={keyResult.title} />
 
         <Box>
-          <StyledHighlightedText variant="body2">
-            {keyResultsHashmap[id].title}
-          </StyledHighlightedText>
-          <StyledSubtitle variant="subtitle1">{keyResultsHashmap[id].team.name}</StyledSubtitle>
+          <StyledHighlightedText variant="body2">{keyResult.title}</StyledHighlightedText>
+          <StyledSubtitle variant="subtitle1">{keyResult.team.name}</StyledSubtitle>
         </Box>
       </Box>
     </StyledCell>
