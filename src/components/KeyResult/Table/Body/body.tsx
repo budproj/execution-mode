@@ -13,6 +13,7 @@ import { userID as userIDAtom } from 'state/recoil/users/current/id'
 
 import { buildDroppableBody, buildDraggableRow } from './dnd'
 import { Cycle, Okr, Owner, Progress, Status, Title } from './Cells'
+import Skeleton from './skeleton'
 
 const KeyResultsTableBody = (): ReactElement => {
   const userID = useRecoilValueLoadable(userIDAtom)
@@ -49,7 +50,7 @@ const KeyResultsTableBody = (): ReactElement => {
       ))}
     </TableBody>
   ) : (
-    <div>Loading...</div>
+    <Skeleton />
   )
 }
 

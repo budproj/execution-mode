@@ -53,16 +53,16 @@ const Status = ({ id }: StatusProps): ReactElement => {
 
   return (
     <TableCell width={grid.confidence}>
-      <Box display="flex" flexDirection="column">
-        <Box display="flex" flexDirection="row" gridGap={10} alignItems="center">
-          <StyledTagCircle style={{ backgroundColor: tag.color }} />{' '}
-          <StyledStatus variant="body1">{intl.formatMessage(tag.message)}</StyledStatus>
-        </Box>
+      <Box display="flex" gridGap={10}>
+        <StyledTagCircle style={{ backgroundColor: tag.color, marginTop: 7 }} />
 
-        <StyledDate variant="subtitle1">
-          {intl.formatMessage(messages.updatedAt)} -{' '}
-          {intl.formatDate(keyResult.confidence.createdAt, { day: 'numeric', month: 'short' })}
-        </StyledDate>
+        <Box display="flex" flexDirection="column" alignItems="flex-start">
+          <StyledStatus variant="body1">{intl.formatMessage(tag.message)}</StyledStatus>
+          <StyledDate variant="subtitle1">
+            {intl.formatMessage(messages.updatedAt)} -{' '}
+            {intl.formatDate(keyResult.confidence.createdAt, { day: 'numeric', month: 'short' })}
+          </StyledDate>
+        </Box>
       </Box>
     </TableCell>
   )
