@@ -22,7 +22,8 @@ export const selectKeyResultBasedOnID = selectorFamily<
     const currentState = get(selectKeyResultBasedOnID(id))
     logger.debug('Original Key Result data:', { data: currentState, component: KEY })
 
-    const updatedKeyResult = defaultsDeep(newValue, currentState)
+    const newValueCopy = { ...newValue }
+    const updatedKeyResult = defaultsDeep(newValueCopy, currentState)
     logger.debug('New Key Result data:', { data: updatedKeyResult, component: KEY })
 
     const allKeyResults = get(remoteKeyResults)

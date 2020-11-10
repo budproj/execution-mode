@@ -33,11 +33,9 @@ export function makeServer(environment: NodeEnv): Server {
       /* Temporary fix while https://github.com/vercel/next.js/issues/16874 is not solved */
 
       this.get('/key-results', handlers.keyResults.getAll)
-      this.patch('/users/:id/custom-sorting', handlers.customSorting.patchUser)
-      this.get(
-        '/users/:id/custom-sorting/key-results',
-        handlers.customSorting.keyResults.getFromUser,
-      )
+      this.patch('/key-results/:id', handlers.keyResults.patch)
+      this.patch('/users/:id/custom-sorting', handlers.users.customSorting.patch)
+      this.get('/users/:id/custom-sorting/key-results', handlers.users.customSorting.getKeyResults)
     },
   })
 

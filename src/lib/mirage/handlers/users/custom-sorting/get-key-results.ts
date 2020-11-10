@@ -4,7 +4,7 @@ import DbCollection from 'miragejs/db-collection'
 import { CustomSorting } from 'components/User'
 import { MirageResponse } from 'lib/mirage/handlers'
 
-const getFromUser = (
+const getKeyResults = (
   schema: Record<string, DbCollection>,
   request: Request,
 ): MirageResponse<CustomSorting['keyResults']> => {
@@ -16,4 +16,4 @@ const getFromUser = (
   }
 }
 
-export default getFromUser
+export default getKeyResults

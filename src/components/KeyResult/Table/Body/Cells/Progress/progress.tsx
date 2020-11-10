@@ -9,6 +9,7 @@ import { selectKeyResultBasedOnID } from 'state/recoil/key-results/key-result'
 import { selectStatusTagBasedInConfidence } from 'components/KeyResult/Table/Body/Cells/Status'
 import { useIntl } from 'react-intl'
 import Skeleton from './skeleton'
+import updateKeyResult from 'state/actions/key-results/update-key-result'
 
 export interface ProgressProps {
   id: KeyResult['id']
@@ -30,18 +31,18 @@ const Progress = ({ id }: ProgressProps): ReactElement => {
   const confidence = selectedKeyResult?.confidence?.value ?? 100
   const { color } = selectStatusTagBasedInConfidence(confidence, theme)
 
-  const handleSliderUpdate = (
-    _: ChangeEvent<Record<string, unknown>>,
-    newValue?: number | number[],
-  ): void => {
+  const handleSliderUpdate = (_: ChangeEvent<unknown>, newValue?: number | number[]): void => {
     if (newValue) setProgress(newValue as number)
   }
 
-  const handleSliderUpdateCommit = (
-    _: ChangeEvent<Record<string, unknown>>,
+  const handleSliderUpdateCommit = async (
+    _: ChangeEvent<unknown>,
     newValue: number | number[],
-  ) => (): void => {
-    setKeyResult({ progress: newValue as number })
+  ): Promise<void> => {
+    const newKeyResultPartial = {
+      progress: newValue as number,
+    }
+    await updateKeyResult(id, newKeyResultPartial, setKeyResult)
   }
 
   return selectedKeyResult ? (

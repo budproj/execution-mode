@@ -8,7 +8,7 @@ interface PatchUserRequestBody {
   keyResults: CustomSorting['keyResults']
 }
 
-const patchUser = (
+const patch = (
   schema: Record<string, DbCollection>,
   request: Request,
 ): MirageResponse<CustomSorting['keyResults']> => {
@@ -25,4 +25,4 @@ const patchUser = (
   }
 }
 
-export default patchUser
+export default patch
