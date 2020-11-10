@@ -24,7 +24,7 @@ const StyledAppBar = styled(MUIAppBar)(({ theme }) => ({
 
 const StyledToolbar = styled(Toolbar)({
   display: 'inline-grid',
-  gridTemplateColumns: '1fr 5fr 2fr',
+  gridTemplateColumns: '1fr 5fr 3fr',
 })
 
 const AppBar = (): ReactElement => {

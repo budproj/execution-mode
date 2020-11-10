@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react'
 
 import { StyledSkeletonCell } from 'components/KeyResult/Table/Body/skeleton'
 
-const TitleSkeleton = (): ReactElement => (
+const StatusSkeleton = (): ReactElement => (
   <StyledSkeletonCell>
     <Box display="flex" alignItems="flex-start" gridGap={10}>
       <Skeleton variant="circle" width={15} height={15} style={{ marginTop: 3 }} />
@@ -16,4 +16,4 @@ const TitleSkeleton = (): ReactElement => (
   </StyledSkeletonCell>
 )
 
-export default TitleSkeleton
+export default StatusSkeleton

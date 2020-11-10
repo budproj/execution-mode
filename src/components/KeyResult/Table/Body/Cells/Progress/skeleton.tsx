@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react'
 
 import { StyledSkeletonCell } from 'components/KeyResult/Table/Body/skeleton'
 
-const TitleSkeleton = (): ReactElement => (
+const ProgressSkeleton = (): ReactElement => (
   <StyledSkeletonCell>
     <Box display="flex" gridGap={20}>
       <Skeleton width="70%" />
@@ -13,4 +13,4 @@ const TitleSkeleton = (): ReactElement => (
   </StyledSkeletonCell>
 )
 
-export default TitleSkeleton
+export default ProgressSkeleton

@@ -1,4 +1,4 @@
-import { TableBody, TableRow, TableCell, styled } from '@material-ui/core'
+import { TableBody, TableRow, TableCell, styled, Theme } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 
 import { Skeleton as CycleSkeleton } from './Cells/Cycle'
@@ -12,12 +12,15 @@ export interface TableSkeletonProps {
   amountOfRows: number
 }
 
-export const StyledSkeletonCell = styled(TableCell)(({ theme }) => ({
+export const styledSkeletonCellStyles = (theme: Theme) => ({
   borderBottom: `1px solid ${theme.palette.grey[200]}`,
-}))
+})
+
+export const StyledSkeletonCell = styled(TableCell)(({ theme }) => styledSkeletonCellStyles(theme))
 
 const StyledHiddenCell = styled(TableCell)({
   borderBottom: 'none',
+  padding: '0px 22px 0px 0px',
 })
 
 const TableSkeleton = (props: TableSkeletonProps): ReactElement => (
