@@ -88,6 +88,7 @@
     "xo": "^0.34.2"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^1.2.0",
     "@koa/router": "^9.4.0",
     "@material-ui/core": "^4.11.0",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -106,6 +107,7 @@
     "react-dom": "^17.0.1",
     "react-intl": "^5.8.8",
     "recoil": "^0.1.2",
+    "tslib": "^2.0.3",
     "typescript": "^4.0.3",
     "winston": "^3.3.3",
     "winston-transport": "^4.4.0"

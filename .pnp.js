@@ -37,6 +37,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
+            ["@auth0/auth0-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:1.2.0"],
             ["@formatjs/cli", "npm:2.13.5"],
             ["@koa/router", "npm:9.4.0"],
             ["@material-ui/core", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:4.11.0"],
@@ -104,6 +105,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["recoil", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.1.2"],
             ["rimraf", "npm:3.0.2"],
             ["ts-node", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:9.0.0"],
+            ["tslib", "npm:2.0.3"],
             ["typescript", "patch:typescript@npm%3A4.0.5#builtin<compat/typescript>::version=4.0.5&hash=a72311"],
             ["winston", "npm:3.3.3"],
             ["winston-transport", "npm:4.4.0"],
@@ -181,6 +183,42 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["@ampproject/toolbox-validator-rules", "npm:2.5.4"],
             ["cross-fetch", "npm:3.0.5"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@auth0/auth0-react", [
+        ["virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:1.2.0", {
+          "packageLocation": "./.yarn/$$virtual/@auth0-auth0-react-virtual-01894a35be/0/cache/@auth0-auth0-react-npm-1.2.0-8edf0c87e9-732c7921c0.zip/node_modules/@auth0/auth0-react/",
+          "packageDependencies": [
+            ["@auth0/auth0-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:1.2.0"],
+            ["@auth0/auth0-spa-js", "npm:1.13.2"],
+            ["@types/react", "npm:16.9.55"],
+            ["@types/react-dom", null],
+            ["react", "npm:16.14.0"],
+            ["react-dom", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:17.0.1"]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react",
+            "react-dom",
+            "react"
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@auth0/auth0-spa-js", [
+        ["npm:1.13.2", {
+          "packageLocation": "./.yarn/cache/@auth0-auth0-spa-js-npm-1.13.2-4587f7c799-81f33e3f2b.zip/node_modules/@auth0/auth0-spa-js/",
+          "packageDependencies": [
+            ["@auth0/auth0-spa-js", "npm:1.13.2"],
+            ["abortcontroller-polyfill", "npm:1.5.0"],
+            ["browser-tabs-lock", "npm:1.2.9"],
+            ["core-js", "npm:3.7.0"],
+            ["es-cookie", "npm:1.3.2"],
+            ["fast-text-encoding", "npm:1.0.3"],
+            ["promise-polyfill", "npm:8.2.0"],
+            ["unfetch", "npm:4.2.0"]
           ],
           "linkType": "HARD",
         }]
@@ -3460,6 +3498,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["abortcontroller-polyfill", [
+        ["npm:1.5.0", {
+          "packageLocation": "./.yarn/cache/abortcontroller-polyfill-npm-1.5.0-a9504245ec-be16982004.zip/node_modules/abortcontroller-polyfill/",
+          "packageDependencies": [
+            ["abortcontroller-polyfill", "npm:1.5.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["accepts", [
         ["npm:1.3.7", {
           "packageLocation": "./.yarn/cache/accepts-npm-1.3.7-0dc9de65aa-2686fa30db.zip/node_modules/accepts/",
@@ -4270,6 +4317,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/brorand-npm-1.1.0-ea86634c4b-4536dd73f0.zip/node_modules/brorand/",
           "packageDependencies": [
             ["brorand", "npm:1.1.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["browser-tabs-lock", [
+        ["npm:1.2.9", {
+          "packageLocation": "./.yarn/unplugged/browser-tabs-lock-npm-1.2.9-86b8919aad/node_modules/browser-tabs-lock/",
+          "packageDependencies": [
+            ["browser-tabs-lock", "npm:1.2.9"]
           ],
           "linkType": "HARD",
         }]
@@ -5152,6 +5208,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["core-assert", "npm:0.2.1"],
             ["buf-compare", "npm:1.0.1"],
             ["is-error", "npm:2.2.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["core-js", [
+        ["npm:3.7.0", {
+          "packageLocation": "./.yarn/unplugged/core-js-npm-3.7.0-53202614cd/node_modules/core-js/",
+          "packageDependencies": [
+            ["core-js", "npm:3.7.0"]
           ],
           "linkType": "HARD",
         }]
@@ -6156,6 +6221,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["es-cookie", [
+        ["npm:1.3.2", {
+          "packageLocation": "./.yarn/cache/es-cookie-npm-1.3.2-626e96a30a-35177da58c.zip/node_modules/es-cookie/",
+          "packageDependencies": [
+            ["es-cookie", "npm:1.3.2"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["es-to-primitive", [
         ["npm:1.2.1", {
           "packageLocation": "./.yarn/cache/es-to-primitive-npm-1.2.1-b7a7eac6c5-d20b7be268.zip/node_modules/es-to-primitive/",
@@ -7152,6 +7226,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",
           "packageDependencies": [
             ["execution-mode", "workspace:."],
+            ["@auth0/auth0-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:1.2.0"],
             ["@formatjs/cli", "npm:2.13.5"],
             ["@koa/router", "npm:9.4.0"],
             ["@material-ui/core", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:4.11.0"],
@@ -7219,6 +7294,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["recoil", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.1.2"],
             ["rimraf", "npm:3.0.2"],
             ["ts-node", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:9.0.0"],
+            ["tslib", "npm:2.0.3"],
             ["typescript", "patch:typescript@npm%3A4.0.5#builtin<compat/typescript>::version=4.0.5&hash=a72311"],
             ["winston", "npm:3.3.3"],
             ["winston-transport", "npm:4.4.0"],
@@ -7412,6 +7488,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/fast-safe-stringify-npm-2.0.7-4c71091538-7bd2254326.zip/node_modules/fast-safe-stringify/",
           "packageDependencies": [
             ["fast-safe-stringify", "npm:2.0.7"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["fast-text-encoding", [
+        ["npm:1.0.3", {
+          "packageLocation": "./.yarn/cache/fast-text-encoding-npm-1.0.3-0f6dc8b4a3-f14fb9242f.zip/node_modules/fast-text-encoding/",
+          "packageDependencies": [
+            ["fast-text-encoding", "npm:1.0.3"]
           ],
           "linkType": "HARD",
         }]
@@ -11984,6 +12069,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
+      ["promise-polyfill", [
+        ["npm:8.2.0", {
+          "packageLocation": "./.yarn/cache/promise-polyfill-npm-8.2.0-caaa5896b6-37a612596d.zip/node_modules/promise-polyfill/",
+          "packageDependencies": [
+            ["promise-polyfill", "npm:8.2.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
       ["prop-types", [
         ["npm:15.7.2", {
           "packageLocation": "./.yarn/cache/prop-types-npm-15.7.2-d7a04f2274-a440dd406c.zip/node_modules/prop-types/",
@@ -14525,6 +14619,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [
             ["undefsafe", "npm:2.0.3"],
             ["debug", "virtual:fa0173d26738ef894de6f639abae81ef8c1dc3fb742f450a622367c86186d9f4d23dbd3bcc38bbe27382c39f87e11cad6137dd70480a36e752eee25974706e2c#npm:2.6.9"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["unfetch", [
+        ["npm:4.2.0", {
+          "packageLocation": "./.yarn/cache/unfetch-npm-4.2.0-7c13351021-a1ec2f1d0f.zip/node_modules/unfetch/",
+          "packageDependencies": [
+            ["unfetch", "npm:4.2.0"]
           ],
           "linkType": "HARD",
         }]

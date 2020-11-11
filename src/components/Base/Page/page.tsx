@@ -1,4 +1,4 @@
-import { Box, CssBaseline } from '@material-ui/core'
+import { Box } from '@material-ui/core'
 import React, { ReactElement } from 'react'
 
 import AppBar from 'components/Base/AppBar'
@@ -9,7 +9,6 @@ export interface PageProps {
 
 const Page = (props: PageProps): ReactElement => (
   <Box>
-    <CssBaseline />
     <AppBar />
 
     {props.children}

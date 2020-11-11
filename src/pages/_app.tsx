@@ -1,8 +1,11 @@
+import { Auth0Provider } from '@auth0/auth0-react'
+import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles'
 import App, { AppContext, AppProps } from 'next/app'
 import React, { ReactElement } from 'react'
 import { RecoilRoot } from 'recoil'
 
+import Auth0Gatekeeper from 'components/Base/Auth0Gatekeeper'
 import Page from 'components/Base/Page'
 import RecoilIntlProvider from 'components/Base/RecoilIntlProvider'
 import getConfig from 'config'
@@ -31,13 +34,22 @@ const BudApp = (props: BudAppProps): ReactElement => {
 
   return (
     <RecoilRoot>
-      <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
-        <ThemeProvider theme={theme}>
-          <Page>
-            <Component {...pageProps} />
-          </Page>
-        </ThemeProvider>
-      </RecoilIntlProvider>
+      <Auth0Provider
+        domain={config.publicRuntimeConfig.auth0.domain}
+        clientId={config.publicRuntimeConfig.auth0.clientID}
+        scope={config.publicRuntimeConfig.auth0.scope}
+      >
+        <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Auth0Gatekeeper>
+              <Page>
+                <Component {...pageProps} />
+              </Page>
+            </Auth0Gatekeeper>
+          </ThemeProvider>
+        </RecoilIntlProvider>
+      </Auth0Provider>
     </RecoilRoot>
   )
 }
@@ -65,6 +77,10 @@ BudApp.getInitialProps = async (appContext: AppContext): Promise<BudAppProps> =>
   }
 }
 
-if (config.publicRuntimeConfig.nodeEnv === 'development') makeServer('development')
+if (
+  config.publicRuntimeConfig.nodeEnv === 'development' &&
+  config.publicRuntimeConfig.mirage.enabled
+)
+  makeServer('development')
 
 export default BudApp

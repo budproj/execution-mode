@@ -1,6 +1,31 @@
 import getNextConfig from 'next/config'
 
-export type LogLevels = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
+export interface BudConfig {
+  publicRuntimeConfig: BudPublicConfig
+  serverRuntimeConfig: BudServerConfig
+}
+
+export interface BudPublicConfig {
+  environment: Environment
+  nodeEnv: NodeEnv
+  defaultLocale: Locale
+  intlRoutes: Route[]
+  logLevel: LogLevels
+  api: BudAPIs
+  auth0: Auth0Config
+  mirage: MirageConfig
+}
+
+export interface BudServerConfig {
+  host: Host
+  supportedLocales: Locale[]
+}
+
+export enum Host {
+  'local.getbud.co' = 'local.getbud.co',
+  'develop.getbud.co' = 'develop.getbud.co',
+  'getbud.co' = 'getbud.co',
+}
 
 export enum Locale {
   'pt-BR' = 'pt-BR',
@@ -15,11 +40,7 @@ export enum Environment {
 
 export type NodeEnv = 'test' | 'development' | 'production'
 
-export enum Host {
-  'local.getbud.co' = 'local.getbud.co',
-  'develop.getbud.co' = 'develop.getbud.co',
-  'getbud.co' = 'getbud.co',
-}
+export type LogLevels = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
 
 export interface Route {
   destination: string
@@ -31,23 +52,14 @@ export interface BudAPIs {
   acl: string
 }
 
-export interface BudServerConfig {
-  host: Host
-  supportedLocales: Locale[]
+export interface Auth0Config {
+  clientID: string
+  scope: string
+  domain: string
 }
 
-export interface BudPublicConfig {
-  environment: Environment
-  nodeEnv: NodeEnv
-  defaultLocale: Locale
-  intlRoutes: Route[]
-  logLevel: LogLevels
-  api: BudAPIs
-}
-
-export interface BudConfig {
-  publicRuntimeConfig: BudPublicConfig
-  serverRuntimeConfig: BudServerConfig
+export interface MirageConfig {
+  enabled: boolean
 }
 
 const getConfig = (): BudConfig => getNextConfig()
