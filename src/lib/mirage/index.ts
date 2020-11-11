@@ -28,13 +28,12 @@ export function makeServer(environment: NodeEnv): Server {
       this.passthrough((request) => {
         if (request.url === 'https://getbud.us.auth0.com/oauth/token') {
           return true
-        }
+        } // Workaround while https://github.com/miragejs/miragejs/issues/708 is not solved
 
         if (request.url === '/_next/static/development/_devPagesManifest.json') {
           return true
-        }
+        } // Workaround while https://github.com/vercel/next.js/issues/16874 is not solved
       })
-      /* Workaround while https://github.com/vercel/next.js/issues/16874 is not solved */
 
       this.get('/key-results', handlers.keyResults.getAll)
       this.patch('/key-results/:id', handlers.keyResults.patch)
