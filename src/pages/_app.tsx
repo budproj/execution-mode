@@ -1,8 +1,9 @@
-import { Auth0Provider } from '@auth0/auth0-react'
+import { AppState, Auth0Provider } from '@auth0/auth0-react'
 import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles'
 import App, { AppContext, AppProps } from 'next/app'
-import React, { ReactElement } from 'react'
+import { useRouter } from 'next/router'
+import React, { ReactElement, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 
 import Auth0Gatekeeper from 'components/Base/Auth0Gatekeeper'
@@ -26,19 +27,26 @@ const getMessages = async (locale: string | undefined): Promise<IntlMessage | un
 
 const BudApp = (props: BudAppProps): ReactElement => {
   const { Component, pageProps, locale, messages } = props
+  const router = useRouter()
 
-  React.useEffect(() => {
+  const onAuth0RedirectCallback = async (appState: AppState): Promise<void> => {
+    await router.push(appState?.returnTo ?? window.location.pathname)
+  }
+
+  useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) jssStyles.remove()
   }, [])
 
   return (
-    <RecoilRoot>
-      <Auth0Provider
-        domain={config.publicRuntimeConfig.auth0.domain}
-        clientId={config.publicRuntimeConfig.auth0.clientID}
-        scope={config.publicRuntimeConfig.auth0.scope}
-      >
+    <Auth0Provider
+      domain={config.publicRuntimeConfig.auth0.domain}
+      clientId={config.publicRuntimeConfig.auth0.clientID}
+      scope={config.publicRuntimeConfig.auth0.scope}
+      redirectUri={typeof window === 'undefined' ? '' : window.location.origin}
+      onRedirectCallback={onAuth0RedirectCallback}
+    >
+      <RecoilRoot>
         <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -49,8 +57,8 @@ const BudApp = (props: BudAppProps): ReactElement => {
             </Auth0Gatekeeper>
           </ThemeProvider>
         </RecoilIntlProvider>
-      </Auth0Provider>
-    </RecoilRoot>
+      </RecoilRoot>
+    </Auth0Provider>
   )
 }
 
@@ -73,7 +81,7 @@ BudApp.getInitialProps = async (appContext: AppContext): Promise<BudAppProps> =>
     ...appProps,
     pageProps,
     locale,
-    messages,
+    messages: messages ?? {},
   }
 }
 
