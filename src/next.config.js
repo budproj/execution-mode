@@ -13,7 +13,10 @@ const {
   AUTH0_CLIENT_ID_PUBLIC,
   AUTH0_SCOPE,
   AUTH0_DOMAIN,
-  ENABLE_MIRAGE,
+  MIRAGE_ENABLED,
+  MIRAGE_AUTH0_CLIENT_ID,
+  MIRAGE_AUTH0_SECRET,
+  MIRAGE_AUTH0_AUDIENCE,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -23,7 +26,7 @@ const publicRuntimeConfig = {
   logLevel: LOG_LEVEL,
 
   mirage: {
-    enabled: Boolean(ENABLE_MIRAGE),
+    enabled: Boolean(MIRAGE_ENABLED),
   },
 
   auth0: {

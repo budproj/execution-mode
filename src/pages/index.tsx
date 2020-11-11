@@ -1,9 +1,5 @@
 import React, { ReactElement } from 'react'
 
-const Index = (): ReactElement => (
-  <>
-    Home <a href="/api/login">Login</a>
-  </>
-)
+const Index = (): ReactElement => <>Home</>
 
 export default Index

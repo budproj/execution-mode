@@ -40,10 +40,12 @@ const BudApp = (props: BudAppProps): ReactElement => {
 
   return (
     <Auth0Provider
+      useRefreshTokens
       domain={config.publicRuntimeConfig.auth0.domain}
       clientId={config.publicRuntimeConfig.auth0.clientID}
       scope={config.publicRuntimeConfig.auth0.scope}
       redirectUri={typeof window === 'undefined' ? '' : window.location.origin}
+      cacheLocation="localstorage"
       onRedirectCallback={onAuth0RedirectCallback}
     >
       <RecoilRoot>

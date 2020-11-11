@@ -1,4 +1,4 @@
-import { createServer, Server } from 'miragejs'
+import { createServer, Server, Request } from 'miragejs'
 
 import { NodeEnv } from 'config'
 
@@ -25,8 +25,8 @@ export function makeServer(environment: NodeEnv): Server {
     routes() {
       this.namespace = '/api'
 
-      this.passthrough((request) => {
-        if (request.url === 'https://getbud.us.auth0.com/oauth/token') {
+      this.passthrough((request: Request): boolean | void => {
+        if (request.url.startsWith('https://getbud.us.auth0.com')) {
           return true
         } // Workaround while https://github.com/miragejs/miragejs/issues/708 is not solved
 
@@ -37,8 +37,9 @@ export function makeServer(environment: NodeEnv): Server {
 
       this.get('/key-results', handlers.keyResults.getAll)
       this.patch('/key-results/:id', handlers.keyResults.patch)
-      this.patch('/users/:id/custom-sorting', handlers.users.customSorting.patch)
+
       this.get('/users/:id/custom-sorting/key-results', handlers.users.customSorting.getKeyResults)
+      this.patch('/users/:id/custom-sorting', handlers.users.customSorting.patch)
     },
   })
 

@@ -13,7 +13,7 @@ export interface BudPublicConfig {
   logLevel: LogLevels
   api: BudAPIs
   auth0: Auth0Config
-  mirage: MirageConfig
+  mirage: MiragePublicConfig
 }
 
 export interface BudServerConfig {
@@ -58,7 +58,7 @@ export interface Auth0Config {
   domain: string
 }
 
-export interface MirageConfig {
+export interface MiragePublicConfig {
   enabled: boolean
 }
 
