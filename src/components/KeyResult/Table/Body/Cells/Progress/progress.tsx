@@ -40,10 +40,12 @@ const Progress = ({ id }: ProgressProps): ReactElement => {
     _: ChangeEvent<unknown>,
     newValue: number | number[],
   ): Promise<void> => {
-    const newKeyResultPartial = {
-      progress: newValue as number,
+    if (newValue !== selectedKeyResult?.progress) {
+      setProgress(newValue as number)
+
+      const newKeyResultPartial = { progress: newValue as number }
+      await updateKeyResult(id, newKeyResultPartial, setKeyResult)
     }
-    await updateKeyResult(id, newKeyResultPartial, setKeyResult)
   }
 
   return selectedKeyResult ? (

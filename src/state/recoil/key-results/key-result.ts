@@ -7,7 +7,7 @@ import logger from 'lib/logger'
 import { PREFIX } from './constants'
 import { remoteKeyResults } from './remote'
 
-export const KEY = `${PREFIX}::ALL`
+export const KEY = `${PREFIX}::SINGLE`
 
 export const selectKeyResultBasedOnID = selectorFamily<
   KeyResult | Partial<KeyResult> | undefined,

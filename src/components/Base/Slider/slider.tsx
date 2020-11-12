@@ -1,5 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core'
 import MUISlider, { SliderProps as MUISliderProps } from '@material-ui/core/Slider'
+import { lighten } from '@material-ui/core/styles/colorManipulator'
 import { Styles } from '@material-ui/styles'
 import React, { ReactElement } from 'react'
 
@@ -15,18 +16,22 @@ const styles: Styles<Theme, SliderProps> = (theme) => ({
       '& .MuiSlider-thumb': {
         boxShadow: 'inherit',
         transform: 'scale(1)',
+        transition: '.2s transform ease-in-out',
       },
     },
   },
   thumb: {
     height: 18,
     width: 18,
-    backgroundColor: theme.palette.common.white,
-    border: '2px solid currentColor',
+    backgroundColor: (props) =>
+      props.trackColor ? lighten(props.trackColor, 0.5) : lighten(theme.palette.primary.main, 0.5),
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderColor: theme.palette.common.white,
     marginTop: -5,
     marginLeft: -12,
     transform: 'scale(0)',
-    transition: '.2s transform ease-out',
+    transition: '.2s transform ease-in-out',
   },
   active: {},
   valueLabel: {
