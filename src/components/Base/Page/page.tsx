@@ -10,7 +10,6 @@ export interface PageProps {
 const Page = (props: PageProps): ReactElement => (
   <Box>
     <AppBar />
-
     {props.children}
   </Box>
 )
