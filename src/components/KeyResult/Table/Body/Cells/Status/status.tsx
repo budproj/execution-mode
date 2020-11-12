@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil'
 
 import grid from 'components/KeyResult/Table/grid'
 import { KeyResult, KeyResultConfidence } from 'components/KeyResult/types'
-import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
+import { keyResultConfidence } from 'state/recoil/key-results/single/confidence'
 
 import messages from './messages'
 import Skeleton from './skeleton'
@@ -46,12 +46,11 @@ const StyledTagCircle = styled(Box)({
 const Status = ({ id }: StatusProps): ReactElement => {
   const intl = useIntl()
   const theme = useTheme()
-  const selectedKeyResult = useRecoilValue<KeyResult | undefined>(keyResultAtom(id))
-  const confidence = selectedKeyResult?.confidence?.value ?? 100
+  const confidence = useRecoilValue<KeyResult['confidence'] | undefined>(keyResultConfidence(id))
 
-  const tag = selectStatusTagBasedInConfidence(confidence, theme)
+  const tag = selectStatusTagBasedInConfidence(confidence?.value ?? 0, theme)
 
-  return selectedKeyResult ? (
+  return confidence ? (
     <TableCell width={grid.confidence}>
       <Box display="flex" gridGap={10}>
         <StyledTagCircle style={{ backgroundColor: tag.color, marginTop: 7 }} />
@@ -60,7 +59,7 @@ const Status = ({ id }: StatusProps): ReactElement => {
           <StyledStatus variant="body1">{intl.formatMessage(tag.message)}</StyledStatus>
           <StyledDate variant="subtitle1">
             {intl.formatMessage(messages.updatedAt)} -{' '}
-            {intl.formatDate(selectedKeyResult.confidence.createdAt, {
+            {intl.formatDate(confidence.createdAt, {
               day: 'numeric',
               month: 'short',
             })}

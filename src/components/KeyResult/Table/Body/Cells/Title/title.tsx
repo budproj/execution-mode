@@ -5,7 +5,8 @@ import { useRecoilValue } from 'recoil'
 import DynamicIcon from 'components/KeyResult/DynamicIcon'
 import grid from 'components/KeyResult/Table/grid'
 import { KeyResult } from 'components/KeyResult/types'
-import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
+import { keyResultTeam } from 'state/recoil/key-results/single/team'
+import { keyResultTitle } from 'state/recoil/key-results/single/title'
 
 import Skeleton from './skeleton'
 
@@ -27,16 +28,17 @@ const StyledSubtitle = styled(Typography)(({ theme }) => ({
 }))
 
 const Title = ({ id }: TitleProps): ReactElement => {
-  const selectedKeyResult = useRecoilValue<KeyResult | undefined>(keyResultAtom(id))
+  const title = useRecoilValue<KeyResult['title'] | undefined>(keyResultTitle(id))
+  const team = useRecoilValue<KeyResult['team'] | undefined>(keyResultTeam(id))
 
-  return selectedKeyResult ? (
+  return title && team ? (
     <StyledCell width={grid.title}>
       <Box display="flex" gridGap={20} alignItems="center">
-        <DynamicIcon title={selectedKeyResult.title} />
+        <DynamicIcon title={title} />
 
         <Box>
-          <StyledHighlightedText variant="body2">{selectedKeyResult.title}</StyledHighlightedText>
-          <StyledSubtitle variant="subtitle1">{selectedKeyResult.team.name}</StyledSubtitle>
+          <StyledHighlightedText variant="body2">{title}</StyledHighlightedText>
+          <StyledSubtitle variant="subtitle1">{team.name}</StyledSubtitle>
         </Box>
       </Box>
     </StyledCell>

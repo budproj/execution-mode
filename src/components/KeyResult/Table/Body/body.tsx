@@ -1,5 +1,5 @@
 import { TableBody, TableRow } from '@material-ui/core'
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { useRecoilStateLoadable, useRecoilValueLoadable } from 'recoil'
 
@@ -7,10 +7,7 @@ import { KeyResult } from 'components/KeyResult'
 import logger from 'lib/logger'
 import { hasFetchedAllValues } from 'specifications'
 import { buildCustomSorter } from 'state/actions/users'
-import {
-  remoteKeyResults as remoteKeyResultsAtom,
-  selectRemoteKeyResults,
-} from 'state/recoil/key-results/remote'
+import { remoteKeyResults as remoteKeyResultsAtom } from 'state/recoil/key-results/remote'
 import { userKeyResultsCustomSorting as userCustomSortingAtom } from 'state/recoil/users/current/custom-sorting/key-results'
 import { userID as userIDAtom } from 'state/recoil/users/current/id'
 
@@ -20,22 +17,16 @@ import Skeleton from './skeleton'
 
 const KeyResultsTableBody = (): ReactElement => {
   const userID = useRecoilValueLoadable(userIDAtom)
-  const remoteKeyResultsRepository = useRecoilValueLoadable(remoteKeyResultsAtom)
-  const [remoteKeyResults, setRemoteKeyResults] = useRecoilStateLoadable(selectRemoteKeyResults)
+  const remoteKeyResults = useRecoilValueLoadable(remoteKeyResultsAtom)
   const [userCustomSorting, setUserCustomSorting] = useRecoilStateLoadable(userCustomSortingAtom)
   const reorderCustomSorting = buildCustomSorter(userID, userCustomSorting, setUserCustomSorting)
 
   const wasRemoteDataFetched = hasFetchedAllValues(remoteKeyResults)
   const wasOrderFetched = hasFetchedAllValues(userCustomSorting)
 
-  useEffect(() => {
-    if (wasRemoteDataFetched && !remoteKeyResultsRepository.getValue())
-      setRemoteKeyResults(remoteKeyResults.getValue())
-  }, [wasRemoteDataFetched, remoteKeyResultsRepository, remoteKeyResults, setRemoteKeyResults])
-
   logger.debug('Rerendered Key Results table body. Take a look at our Recoil hooks data:', {
     data: {
-      remoteKeyResultsRepository,
+      remoteKeyResults,
       userCustomSorting,
     },
     component: 'KeyResultsTableBody',
@@ -46,7 +37,7 @@ const KeyResultsTableBody = (): ReactElement => {
       ? reorderCustomSorting(source.index, destination.index)
       : userCustomSorting.getValue()
 
-  return wasOrderFetched ? (
+  return wasOrderFetched && wasRemoteDataFetched ? (
     <TableBody component={buildDroppableBody(onDragEnd)}>
       {userCustomSorting.getValue().map((id: KeyResult['id'], index: number) => (
         <TableRow key={id} component={buildDraggableRow(id, index)}>

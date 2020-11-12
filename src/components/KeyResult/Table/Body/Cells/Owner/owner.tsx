@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 
 import grid from 'components/KeyResult/Table/grid'
 import { KeyResult } from 'components/KeyResult/types'
-import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
+import { keyResultOwner } from 'state/recoil/key-results/single/owner'
 
 import Skeleton, { SkeletonPicture } from './skeleton'
 
@@ -27,7 +27,7 @@ const StyledBigAvatar = styled(Avatar)({
 })
 
 const Owner = ({ id }: OwnerProps): ReactElement => {
-  const selectedKeyResult = useRecoilValue<KeyResult | undefined>(keyResultAtom(id))
+  const owner = useRecoilValue<KeyResult['owner'] | undefined>(keyResultOwner(id))
   const [profileCardAnchorElement, setProfileCardAnchorElement] = useState<HTMLDivElement | null>(
     null,
   )
@@ -47,25 +47,21 @@ const Owner = ({ id }: OwnerProps): ReactElement => {
     setWasAvatarLoaded(true)
   }
 
-  return selectedKeyResult ? (
+  return owner ? (
     <TableCell width={grid.owner}>
       <Box display="flex" justifyContent="flex-end">
         <Box onMouseEnter={handleOpenProfileCard} onMouseLeave={handleCloseProfileCard}>
-          {!wasAvatarLoaded && selectedKeyResult.owner.picture && (
+          {!wasAvatarLoaded && owner.picture && (
             <SkeletonPicture style={{ position: 'absolute' }} />
           )}
-          <Avatar
-            alt={selectedKeyResult.owner.name}
-            src={selectedKeyResult.owner.picture}
-            onLoad={handleAvatarLoad}
-          >
-            {selectedKeyResult.owner.name[0]}
+          <Avatar alt={owner.name} src={owner.picture} onLoad={handleAvatarLoad}>
+            {owner.name[0]}
           </Avatar>
         </Box>
 
         <Popover
           disableRestoreFocus
-          id={selectedKeyResult.owner.id}
+          id={owner.id}
           open={isProfileCardOpen}
           anchorEl={profileCardAnchorElement}
           anchorOrigin={{
@@ -82,7 +78,7 @@ const Owner = ({ id }: OwnerProps): ReactElement => {
           onClose={handleCloseProfileCard}
         >
           <Box py={1} px={1} display="flex" flexDirection="column" gridGap={10} width={215}>
-            {!wasAvatarLoaded && selectedKeyResult.owner.picture && (
+            {!wasAvatarLoaded && owner.picture && (
               <SkeletonPicture
                 style={{ position: 'absolute', borderRadius: 4 }}
                 width={195}
@@ -90,17 +86,17 @@ const Owner = ({ id }: OwnerProps): ReactElement => {
               />
             )}
             <StyledBigAvatar
-              alt={selectedKeyResult.owner.name}
-              src={selectedKeyResult.owner.picture}
+              alt={owner.name}
+              src={owner.picture}
               variant="square"
               onLoad={handleAvatarLoad}
             >
-              {selectedKeyResult.owner.name[0]}
+              {owner.name[0]}
             </StyledBigAvatar>
 
             <Box>
-              <StyledName variant="body1">{selectedKeyResult.owner.name}</StyledName>
-              <StyledRole variant="body1">{selectedKeyResult.owner.role}</StyledRole>
+              <StyledName variant="body1">{owner.name}</StyledName>
+              <StyledRole variant="body1">{owner.role}</StyledRole>
             </Box>
           </Box>
         </Popover>
