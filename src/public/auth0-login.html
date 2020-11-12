@@ -100,6 +100,32 @@
 
     #error-message {
       display: none;
+      background-color: #FF1F0;
+      border-color: #FFCAC7;
+      padding: 0;
+    }
+
+    #error-message .alert-message {
+      padding: 24px 32px;
+      display: flex;
+      grid-gap: 5px;
+      justify-content: flex-start;
+    }
+
+    #error-message h3 {
+      color: #CF1322;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      padding: 0;
+      margin: 0;
+    }
+
+    #error-message p {
+      color: #595959;
+      font-size: 14px;
+      line-height: 22px;
+      margin: 0;
     }
 
     .base-container {
@@ -239,7 +265,17 @@
           <h1>Log in.</h1>
           <h5>Log in with your data that entered during your registration</h5>
         </div>
-        <div id="error-message" class="alert alert-danger"></div>
+        <div id="error-message" class="alert alert-danger">
+          <div class="alert-message">
+            <span>
+              <img src="https://i.imgur.com/ehNyfzw.png" />
+            </span>
+            <span>
+              <h3>Falha na autenticação</h3>
+              <p>Verifique suas informações de acesso</p>
+            </span>
+          </div>
+        </div>
         <form onsubmit="return false;" method="post">
           <div class="form-group">
            <label for="name">Your e-mail</label>
@@ -272,9 +308,9 @@
             <span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" /></span>
             Login in with Google
           </button>
-          <div class="btn-forgot">
-            <a href="#">Forgot password?</a>
-          </div>
+          <!-- <div class="btn-forgot">
+               <a href="#">Forgot password?</a>
+               </div> -->
         </form>
       </div>
     </div>
@@ -341,23 +377,6 @@
         });
       }
 
-      function signup() {
-        var button = this;
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
-
-        button.disabled = true;
-        webAuth.redirect.signupAndLogin({
-          connection: databaseConnection,
-          email: email,
-          password: password,
-          captcha: captcha.getValue()
-        }, function(err) {
-          if (err) displayError(err);
-          button.disabled = false;
-        });
-      }
-
       function loginWithGoogle() {
         webAuth.authorize({
           connection: 'google-oauth2'
@@ -375,7 +394,6 @@
 
       document.getElementById('btn-login').addEventListener('click', login);
       document.getElementById('btn-google').addEventListener('click', loginWithGoogle);
-      document.getElementById('btn-signup').addEventListener('click', signup);
     });
   </script>
 </body>

@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil'
 
 import grid from 'components/KeyResult/Table/grid'
 import { KeyResult } from 'components/KeyResult/types'
-import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
+import { keyResultCycle } from 'state/recoil/key-results/single/cycle'
 
 import Skeleton from './skeleton'
 
@@ -18,18 +18,17 @@ const StyledDate = styled(Typography)(({ theme }) => ({
 }))
 
 const Cycle = ({ id }: CycleProps): ReactElement => {
-  const selectedKeyResult = useRecoilValue<KeyResult | undefined>(keyResultAtom(id))
+  const cycle = useRecoilValue<KeyResult['cycle'] | undefined>(keyResultCycle(id))
   const intl = useIntl()
   const dateOptions: FormatDateOptions = {
     day: 'numeric',
     month: 'short',
   }
 
-  return selectedKeyResult ? (
+  return cycle ? (
     <TableCell width={grid.cycle}>
       <StyledDate>
-        {intl.formatDate(selectedKeyResult.cycle.start, dateOptions)} -{' '}
-        {intl.formatDate(selectedKeyResult.cycle.end, dateOptions)}
+        {intl.formatDate(cycle.start, dateOptions)} - {intl.formatDate(cycle.end, dateOptions)}
       </StyledDate>
     </TableCell>
   ) : (

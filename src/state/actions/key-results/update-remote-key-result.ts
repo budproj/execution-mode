@@ -6,20 +6,13 @@ import logger from 'lib/logger'
 
 import { patchFromAPI } from '../api'
 
-const component = 'updateKeyResults'
+const component = 'updateRemoteKeyResults'
 
 export interface UpdateKeyResultState {
   id: KeyResult['id']
   localStateSetter: SetterOrUpdater<Partial<KeyResult> | undefined>
   newKeyResult: Partial<KeyResult>
   remoteStateResult?: KeyResult
-}
-
-const updateLocalState = (state: UpdateKeyResultState): UpdateKeyResultState => {
-  state.localStateSetter(state.newKeyResult)
-  logger.debug('Local Key Result state updated with success')
-
-  return state
 }
 
 const updateRemoteState = async (state: UpdateKeyResultState): Promise<UpdateKeyResultState> => {
@@ -47,17 +40,15 @@ const extractRemoteResult = async (
   return state.remoteStateResult
 }
 
-const updateKeyResult = async (
+const updateRemoteKeyResult = async (
   keyResultID: KeyResult['id'],
   newKeyResult: Partial<KeyResult>,
-  keyResultSetter: SetterOrUpdater<Partial<KeyResult> | undefined>,
 ): Promise<KeyResult | undefined> => {
-  const run = flow(updateLocalState, updateRemoteState, extractRemoteResult)
+  const run = flow(updateRemoteState, extractRemoteResult)
 
   const state: UpdateKeyResultState = {
     newKeyResult,
     id: keyResultID,
-    localStateSetter: keyResultSetter,
   }
 
   logger.debug(
@@ -67,4 +58,4 @@ const updateKeyResult = async (
   return run(state)
 }
 
-export default updateKeyResult
+export default updateRemoteKeyResult

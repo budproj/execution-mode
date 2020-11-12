@@ -10,6 +10,13 @@ const {
   NODE_ENV,
   LOG_LEVEL,
   API_ACL_PATH,
+  AUTH0_CLIENT_ID_PUBLIC,
+  AUTH0_SCOPE,
+  AUTH0_DOMAIN,
+  MIRAGE_ENABLED,
+  MIRAGE_AUTH0_CLIENT_ID,
+  MIRAGE_AUTH0_SECRET,
+  MIRAGE_AUTH0_AUDIENCE,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -17,6 +24,16 @@ const publicRuntimeConfig = {
   nodeEnv: NODE_ENV,
   defaultLocale: DEFAULT_LOCALE,
   logLevel: LOG_LEVEL,
+
+  mirage: {
+    enabled: Boolean(MIRAGE_ENABLED),
+  },
+
+  auth0: {
+    clientID: AUTH0_CLIENT_ID_PUBLIC,
+    scope: AUTH0_SCOPE,
+    domain: AUTH0_DOMAIN,
+  },
 
   intlRoutes: [
     {

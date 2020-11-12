@@ -1,1 +1,1 @@
-export { default as updatedKeyResult } from './update-key-result'
+export { default as updatedRemoteKeyResult } from './update-remote-key-result'

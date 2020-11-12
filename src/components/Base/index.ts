@@ -1,5 +1,7 @@
 export { default as AppBar } from './AppBar'
 
+export { default as Auth0Gatekeeper } from './Auth0Gatekeeper'
+
 export { default as Breadcrumb } from './Breadcrumb'
 
 export { default as Button } from './Button'

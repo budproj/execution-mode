@@ -71,6 +71,33 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@auth0/auth0-react@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "@auth0/auth0-react@npm:1.2.0"
+  dependencies:
+    "@auth0/auth0-spa-js": ^1.13.1
+  peerDependencies:
+    react: ^16.11.0 || ^17
+    react-dom: ^16.11.0 || ^17
+  checksum: 732c7921c0ea7644b1a423f9a4e83967ac8092294923a440e957f5a9d7eb7249a842c5ac6a0418a14ea8c7d8be41d195ef46697f4e6cc7520cdccef236245e28
+  languageName: node
+  linkType: hard
+
+"@auth0/auth0-spa-js@npm:^1.13.1":
+  version: 1.13.2
+  resolution: "@auth0/auth0-spa-js@npm:1.13.2"
+  dependencies:
+    abortcontroller-polyfill: ^1.5.0
+    browser-tabs-lock: 1.2.9
+    core-js: ^3.6.5
+    es-cookie: ^1.3.2
+    fast-text-encoding: ^1.0.3
+    promise-polyfill: ^8.1.3
+    unfetch: ^4.2.0
+  checksum: 81f33e3f2b68b9e1f943fa2581d061041f40d40fe24504b02f1735d3707ef897f416dd48429879e78e0e73dfd49c3ad0689b5504d378ecbaedbd38921dab51ef
+  languageName: node
+  linkType: hard
+
 "@babel/code-frame@npm:7.10.4, @babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.10.4, @babel/code-frame@npm:^7.5.5":
   version: 7.10.4
   resolution: "@babel/code-frame@npm:7.10.4"
@@ -2610,6 +2637,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"abortcontroller-polyfill@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "abortcontroller-polyfill@npm:1.5.0"
+  checksum: be16982004c589e72e4e197c4828745baa94ef2fa02ec50ab449446071bd9ff1b9968e1adaa3b4ccb039144d4b11e43445383771048015ce7006dc0dfdaf342a
+  languageName: node
+  linkType: hard
+
 "accepts@npm:^1.3.5, accepts@npm:^1.3.7":
   version: 1.3.7
   resolution: "accepts@npm:1.3.7"
@@ -3288,6 +3322,13 @@ __metadata:
   version: 1.1.0
   resolution: "brorand@npm:1.1.0"
   checksum: 4536dd73f07f6884d89c09c906345b606abff477e87babef64a85656e8cf12b1c5f40d06313b91dac12bf3e031ac190b5d548f2c3bf75f655344c3fcf90cbc8a
+  languageName: node
+  linkType: hard
+
+"browser-tabs-lock@npm:1.2.9":
+  version: 1.2.9
+  resolution: "browser-tabs-lock@npm:1.2.9"
+  checksum: 4a11c0b60e254064137845568428cbaf43b67b6202af9bdd3f75f6d971294f1aaafdb125f752a0140b8c010800d157cefe53deabee367d7bccc96bcec0808f93
   languageName: node
   linkType: hard
 
@@ -4100,6 +4141,13 @@ __metadata:
     browserslist: ^4.8.5
     semver: 7.0.0
   checksum: b263b5313f5b10807cbe2037bcff1d0abc3611d8600ca29a742695eb21411f76a8c762db00a04d684a3f80645252aeb74b24542c157ec24697edd3ae7afcce87
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.6.5":
+  version: 3.7.0
+  resolution: "core-js@npm:3.7.0"
+  checksum: 95958cddb786e51d5ba2a0f60a0232270da1ba460e20870604adb03fbc282f83df78b84509b95ad5990ddbe79b990d9fb5a27426bd36a0e6243b50788fae369f
   languageName: node
   linkType: hard
 
@@ -4988,6 +5036,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"es-cookie@npm:^1.3.2":
+  version: 1.3.2
+  resolution: "es-cookie@npm:1.3.2"
+  checksum: 35177da58cc41ff6635ad3505ae0a338baadf9c14cc1cdc9338fc80ec5806b250fb43b1b3f60fd4cd0bd0fb2a0f2b93472a2bcfdb656ccdcf01e78375dda0b76
+  languageName: node
+  linkType: hard
+
 "es-to-primitive@npm:^1.2.1":
   version: 1.2.1
   resolution: "es-to-primitive@npm:1.2.1"
@@ -5624,6 +5679,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "execution-mode@workspace:."
   dependencies:
+    "@auth0/auth0-react": ^1.2.0
     "@formatjs/cli": ^2.13.5
     "@koa/router": ^9.4.0
     "@material-ui/core": ^4.11.0
@@ -5691,6 +5747,7 @@ __metadata:
     recoil: ^0.1.2
     rimraf: ^3.0.2
     ts-node: ^9.0.0
+    tslib: ^2.0.3
     typescript: ^4.0.3
     winston: ^3.3.3
     winston-transport: ^4.4.0
@@ -5859,6 +5916,13 @@ __metadata:
   version: 2.0.7
   resolution: "fast-safe-stringify@npm:2.0.7"
   checksum: 7bd22543263b707870d70c6f2336b6e8563e34d6807dc388cc0566895e31e0a8273af017a7eb1c9538d0ef54288284e1c0585b557bd856491295a847159fd929
+  languageName: node
+  linkType: hard
+
+"fast-text-encoding@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "fast-text-encoding@npm:1.0.3"
+  checksum: f14fb9242fc8ea942d8b6374f84e918aa5e97bbdf3cafbbf737b04f677277a1900cb9914eab601822cc51787dc607bfff5904e646b3fcc82d84081b21261ba87
   languageName: node
   linkType: hard
 
@@ -9977,6 +10041,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"promise-polyfill@npm:^8.1.3":
+  version: 8.2.0
+  resolution: "promise-polyfill@npm:8.2.0"
+  checksum: 37a612596d7f3eddf3cd650df9e94726eac8273f4d61efef7145dbf6570a082291e6424c718d17f84de1dd1473cbd24319094a63f7a2ccf3ece4145e512ccc40
+  languageName: node
+  linkType: hard
+
 "prop-types@npm:15.7.2, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
@@ -12079,7 +12150,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.0.1":
+"tslib@npm:^2.0.1, tslib@npm:^2.0.3":
   version: 2.0.3
   resolution: "tslib@npm:2.0.3"
   checksum: 447bfca5deaa157806c3f77eaba74d05dd0b38b014e47ce79d98b5c77ce7d91b00a687ba13ca1b5a74d35ca1098ac7a072c0a97fad06f0266612f2a03a6c8e8f
@@ -12251,6 +12322,13 @@ fsevents@~2.1.2:
   dependencies:
     debug: ^2.2.0
   checksum: 0974f82a8750c3c247d5a9cf7fe91279d1fad0069dda7b717937e7960addddedf2ddabe3ffb1f504929acd0c924ef654c5c85185aee4c514a0fbf2e2a4efcf39
+  languageName: node
+  linkType: hard
+
+"unfetch@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "unfetch@npm:4.2.0"
+  checksum: a1ec2f1d0fd6e0e9d46d659b6639dac490eefde4dcb5d9a060b78e380a543182bbdf395c7772685a023fb76c8e5d2c8b843f199d727c5f3af3cced88b3dcc741
   languageName: node
   linkType: hard
 

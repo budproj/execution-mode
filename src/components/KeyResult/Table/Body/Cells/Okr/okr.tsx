@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import StackIcon from 'components/Icons/Stack'
 import grid from 'components/KeyResult/Table/grid'
 import { KeyResult } from 'components/KeyResult/types'
-import { keyResult as keyResultAtom } from 'state/recoil/key-results/key-result'
+import { keyResultObjective } from 'state/recoil/key-results/single/objective'
 
 import messages from './messages'
 import Skeleton from './skeleton'
@@ -27,9 +27,9 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
 const Okr = ({ id }: OKRProps): ReactElement => {
   const theme = useTheme()
   const intl = useIntl()
-  const selectedKeyResult = useRecoilValue<KeyResult | undefined>(keyResultAtom(id))
+  const objective = useRecoilValue<KeyResult['objective'] | undefined>(keyResultObjective(id))
 
-  return selectedKeyResult ? (
+  return objective ? (
     <TableCell width={grid.objective}>
       <Box display="flex" gridGap={20} alignItems="center">
         <StyledIconBox borderRadius={10} py={2} px={2}>
@@ -40,7 +40,7 @@ const Okr = ({ id }: OKRProps): ReactElement => {
         </StyledIconBox>
 
         <Box>
-          <StyledTypography variant="body2">{selectedKeyResult.objective.title}</StyledTypography>
+          <StyledTypography variant="body2">{objective.title}</StyledTypography>
         </Box>
       </Box>
     </TableCell>

@@ -1,5 +1,5 @@
 export * as icon from './icon'
 
-export * as keyResult from './key-result'
+export * as single from './single'
 
 export * as remote from './remote'

@@ -1,4 +1,4 @@
-import { createServer, Server } from 'miragejs'
+import { createServer, Server, Request } from 'miragejs'
 
 import { NodeEnv } from 'config'
 
@@ -23,19 +23,23 @@ export function makeServer(environment: NodeEnv): Server {
     },
 
     routes() {
-      this.namespace = 'api'
+      this.namespace = '/api'
 
-      this.passthrough((request) => {
+      this.passthrough((request: Request): boolean | void => {
+        if (request.url.startsWith('https://getbud.us.auth0.com')) {
+          return true
+        } // Workaround while https://github.com/miragejs/miragejs/issues/708 is not solved
+
         if (request.url === '/_next/static/development/_devPagesManifest.json') {
           return true
-        }
+        } // Workaround while https://github.com/vercel/next.js/issues/16874 is not solved
       })
-      /* Temporary fix while https://github.com/vercel/next.js/issues/16874 is not solved */
 
       this.get('/key-results', handlers.keyResults.getAll)
       this.patch('/key-results/:id', handlers.keyResults.patch)
-      this.patch('/users/:id/custom-sorting', handlers.users.customSorting.patch)
+
       this.get('/users/:id/custom-sorting/key-results', handlers.users.customSorting.getKeyResults)
+      this.patch('/users/:id/custom-sorting', handlers.users.customSorting.patch)
     },
   })
 
