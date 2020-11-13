@@ -5,8 +5,11 @@
     "module": "esnext",
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext", "ESNext.Intl", "ES2018.Intl", "es2017"],
-    "baseUrl": "./",
     "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "lib/*": ["../lib/*"]
+    },
     "strict": true,
     "allowJs": true,
     "noEmit": true,
@@ -23,17 +26,18 @@
     "resolveJsonModule": true
   },
   "exclude": [
-    "dist",
-    "out",
     ".next",
     "next.config.js"
   ],
   "include": [
     "next-env.d.ts",
-    "*.d.ts",
     "*.ts",
-    "**/*.d.ts",
+    "*.tsx",
+    "*.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "**/*.d.ts",
+    "../lib/*.ts",
+    "../lib/**/*.ts"
   ]
 }

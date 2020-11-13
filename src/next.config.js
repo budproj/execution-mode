@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const omit = require('lodash/omit')
+const path = require('path')
 
 const {
   HOST,
@@ -92,6 +93,9 @@ module.exports = {
         fs: 'empty',
       }
     }
+
+    const libDir = path.join(__dirname, '../lib')
+    config.module.rules[0].include.push(libDir)
 
     return config
   },
