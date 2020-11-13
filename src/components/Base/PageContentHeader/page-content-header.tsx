@@ -4,11 +4,11 @@ import React, { ComponentType, ReactElement } from 'react'
 import Breadcrumb from 'components/Base/Breadcrumb'
 import PageTitle from 'components/Base/PageTitle'
 
-export interface PageContentHeaderProps {
+export interface PageContentHeaderProperties {
   RightWing?: ComponentType
 }
 
-const PageContentHeader = ({ RightWing }: PageContentHeaderProps): ReactElement => (
+const PageContentHeader = ({ RightWing }: PageContentHeaderProperties): ReactElement => (
   <Box>
     <Breadcrumb />
 

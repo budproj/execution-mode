@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface ScanIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface ScanIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Scan = ({ title, desc, ...rest }: ScanIconProps): ReactElement => (
+const Scan = ({ title, desc, ...rest }: ScanIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

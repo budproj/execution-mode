@@ -13,7 +13,7 @@ import { keyResultProgress } from 'state/recoil/key-results/single/progress'
 
 import Skeleton from './skeleton'
 
-export interface ProgressProps {
+export interface ProgressProperties {
   id: KeyResult['id']
 }
 
@@ -21,7 +21,7 @@ const StyledPercentage = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[300],
 }))
 
-const Progress = ({ id }: ProgressProps): ReactElement => {
+const Progress = ({ id }: ProgressProperties): ReactElement => {
   const theme = useTheme()
   const intl = useIntl()
 

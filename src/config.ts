@@ -7,7 +7,7 @@ export interface BudConfig {
 
 export interface BudPublicConfig {
   environment: Environment
-  nodeEnv: NodeEnv
+  nodeEnv: NodeEnvironment
   defaultLocale: Locale
   intlRoutes: Route[]
   logLevel: LogLevels
@@ -38,7 +38,7 @@ export enum Environment {
   production = 'production',
 }
 
-export type NodeEnv = 'test' | 'development' | 'production'
+export type NodeEnvironment = 'test' | 'development' | 'production'
 
 export type LogLevels = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
 

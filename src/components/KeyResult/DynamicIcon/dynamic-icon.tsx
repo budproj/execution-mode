@@ -6,21 +6,21 @@ import * as Icons from 'components/Icons'
 import { KeyResult } from 'components/KeyResult/types'
 import { drawing as drawingState, color as colorState } from 'state/recoil/key-results/icon'
 
-export interface DynamicIconProps {
+export interface DynamicIconProperties {
   title: KeyResult['title']
 }
 
-interface DynamicIconStyleProps {
+interface DynamicIconStyleProperties {
   color: string
 }
 
 const styles = {
   box: {
-    backgroundColor: (props: DynamicIconStyleProps) => props.color,
+    backgroundColor: (properties: DynamicIconStyleProperties) => properties.color,
   },
 }
 
-const DynamicIcon = ({ title }: DynamicIconProps): ReactElement => {
+const DynamicIcon = ({ title }: DynamicIconProperties): ReactElement => {
   const theme = useTheme()
 
   const iconDrawingAtom = drawingState.keyResultIconDrawing(title)

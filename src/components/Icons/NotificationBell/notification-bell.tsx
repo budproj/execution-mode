@@ -3,9 +3,13 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface NotificationBellIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface NotificationBellIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const NotificationBell = ({ title, desc, ...rest }: NotificationBellIconProps): ReactElement => (
+const NotificationBell = ({
+  title,
+  desc,
+  ...rest
+}: NotificationBellIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 18 20" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

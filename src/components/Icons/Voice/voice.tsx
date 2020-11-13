@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface VoiceIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface VoiceIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Voice = ({ title, desc, ...rest }: VoiceIconProps): ReactElement => (
+const Voice = ({ title, desc, ...rest }: VoiceIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

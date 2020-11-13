@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface FolderIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface FolderIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Folder = ({ title, desc, ...rest }: FolderIconProps): ReactElement => (
+const Folder = ({ title, desc, ...rest }: FolderIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

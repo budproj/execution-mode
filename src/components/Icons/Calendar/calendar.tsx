@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface CalendarIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface CalendarIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Calendar = ({ title, desc, ...rest }: CalendarIconProps): ReactElement => (
+const Calendar = ({ title, desc, ...rest }: CalendarIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

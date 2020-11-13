@@ -5,15 +5,15 @@ import { useSetRecoilState } from 'recoil'
 
 import { locale as localeAtom } from 'state/recoil/intl/locale'
 
-export interface RecoilIntlProviderProps extends OptionalIntlConfig {
+export interface RecoilIntlProviderProperties extends OptionalIntlConfig {
   children: ReactElement
 }
 
-const RecoilIntlProvider = (props: RecoilIntlProviderProps): ReactElement => {
+const RecoilIntlProvider = (properties: RecoilIntlProviderProperties): ReactElement => {
   const setRecoilIntl = useSetRecoilState(localeAtom)
-  setRecoilIntl(props.locale)
+  setRecoilIntl(properties.locale)
 
-  return <IntlProvider {...props} />
+  return <IntlProvider {...properties} />
 }
 
 export default RecoilIntlProvider

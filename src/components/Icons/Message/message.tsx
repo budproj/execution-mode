@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface MessageIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface MessageIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Message = ({ title, desc, ...rest }: MessageIconProps): ReactElement => (
+const Message = ({ title, desc, ...rest }: MessageIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

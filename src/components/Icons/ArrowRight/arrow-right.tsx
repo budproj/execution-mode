@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface ArrowRightIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface ArrowRightIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const ArrowRight = ({ title, desc, ...rest }: ArrowRightIconProps): ReactElement => (
+const ArrowRight = ({ title, desc, ...rest }: ArrowRightIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 5 8" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

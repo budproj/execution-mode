@@ -10,7 +10,7 @@ import { keyResultTitle } from 'state/recoil/key-results/single/title'
 
 import Skeleton from './skeleton'
 
-export interface TitleProps {
+export interface TitleProperties {
   id: KeyResult['id']
 }
 
@@ -27,7 +27,7 @@ const StyledSubtitle = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[300],
 }))
 
-const Title = ({ id }: TitleProps): ReactElement => {
+const Title = ({ id }: TitleProperties): ReactElement => {
   const title = useRecoilValue<KeyResult['title'] | undefined>(keyResultTitle(id))
   const team = useRecoilValue<KeyResult['team'] | undefined>(keyResultTeam(id))
 

@@ -3,14 +3,14 @@ import React, { ReactElement } from 'react'
 
 import AppBar from 'components/Base/AppBar'
 
-export interface PageProps {
+export interface PageProperties {
   children: ReactElement
 }
 
-const Page = (props: PageProps): ReactElement => (
+const Page = (properties: PageProperties): ReactElement => (
   <Box>
     <AppBar />
-    {props.children}
+    {properties.children}
   </Box>
 )
 

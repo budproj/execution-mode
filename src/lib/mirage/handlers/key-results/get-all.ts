@@ -5,11 +5,11 @@ import { KeyResult, KeyResultConfidence, KeyResultsHashmap } from 'components/Ke
 import { Objective } from 'components/Objective'
 import { User } from 'components/User'
 import { MirageResponse } from 'lib/mirage/handlers'
-import { reduceToAttrs } from 'lib/mirage/selectors'
+import { reduceToAttributes } from 'lib/mirage/selectors'
 
 const getAll = (schema: Record<string, DbCollection>): MirageResponse<KeyResultsHashmap> => {
-  const dbModels = schema.keyResults.all().models
-  const dbData = dbModels.reduce(reduceToAttrs, [])
+  const databaseModels = schema.keyResults.all().models
+  const databaseData = databaseModels.reduce(reduceToAttributes, [])
 
   const buildKeyResult = (
     previous: Record<string, KeyResult>,
@@ -57,7 +57,7 @@ const getAll = (schema: Record<string, DbCollection>): MirageResponse<KeyResults
   }
 
   return {
-    data: dbData.reduce(buildKeyResult, {}),
+    data: databaseData.reduce(buildKeyResult, {}),
   }
 }
 

@@ -1,16 +1,16 @@
 import { makeStyles, Theme } from '@material-ui/core'
-import MUISlider, { SliderProps as MUISliderProps } from '@material-ui/core/Slider'
+import MUISlider, { SliderProps as MUISliderProperties } from '@material-ui/core/Slider'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 import { Styles } from '@material-ui/styles'
 import React, { ReactElement } from 'react'
 
-export interface SliderProps extends MUISliderProps {
+export interface SliderProperties extends MUISliderProperties {
   trackColor?: string
 }
 
-const styles: Styles<Theme, SliderProps> = (theme) => ({
+const styles: Styles<Theme, SliderProperties> = (theme) => ({
   root: {
-    color: (props) => props.trackColor ?? theme.palette.primary.main,
+    color: (properties) => properties.trackColor ?? theme.palette.primary.main,
     height: 8,
     '&:focus, &:hover, &$active': {
       '& .MuiSlider-thumb': {
@@ -23,8 +23,10 @@ const styles: Styles<Theme, SliderProps> = (theme) => ({
   thumb: {
     height: 18,
     width: 18,
-    backgroundColor: (props) =>
-      props.trackColor ? lighten(props.trackColor, 0.5) : lighten(theme.palette.primary.main, 0.5),
+    backgroundColor: (properties) =>
+      properties.trackColor
+        ? lighten(properties.trackColor, 0.5)
+        : lighten(theme.palette.primary.main, 0.5),
     borderWidth: 2,
     borderStyle: 'solid',
     borderColor: theme.palette.common.white,
@@ -48,7 +50,7 @@ const styles: Styles<Theme, SliderProps> = (theme) => ({
   },
 })
 
-const Slider = ({ trackColor, ...rest }: SliderProps): ReactElement => {
+const Slider = ({ trackColor, ...rest }: SliderProperties): ReactElement => {
   const buildClasses = makeStyles(styles)
   const classes = buildClasses({ trackColor, ...rest })
 

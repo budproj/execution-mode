@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface GameIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface GameIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Game = ({ title, desc, ...rest }: GameIconProps): ReactElement => (
+const Game = ({ title, desc, ...rest }: GameIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

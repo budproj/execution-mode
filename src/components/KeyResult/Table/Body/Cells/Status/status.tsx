@@ -10,7 +10,7 @@ import { keyResultConfidence } from 'state/recoil/key-results/single/confidence'
 import messages from './messages'
 import Skeleton from './skeleton'
 
-export interface StatusProps {
+export interface StatusProperties {
   id: KeyResult['id']
 }
 
@@ -43,7 +43,7 @@ const StyledTagCircle = styled(Box)({
   height: 10,
 })
 
-const Status = ({ id }: StatusProps): ReactElement => {
+const Status = ({ id }: StatusProperties): ReactElement => {
   const intl = useIntl()
   const theme = useTheme()
   const confidence = useRecoilValue<KeyResult['confidence'] | undefined>(keyResultConfidence(id))

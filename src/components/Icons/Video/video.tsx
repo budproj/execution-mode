@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface VideoIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface VideoIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Video = ({ title, desc, ...rest }: VideoIconProps): ReactElement => (
+const Video = ({ title, desc, ...rest }: VideoIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

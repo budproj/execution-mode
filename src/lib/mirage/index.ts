@@ -23,7 +23,7 @@ export function makeServer(environment: NodeEnv): Server {
     },
 
     routes() {
-      this.namespace = '/api'
+      this.namespace = '/acl'
 
       this.passthrough((request: Request): boolean | void => {
         if (request.url.startsWith('https://getbud.us.auth0.com')) {

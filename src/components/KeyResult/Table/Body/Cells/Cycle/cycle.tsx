@@ -9,7 +9,7 @@ import { keyResultCycle } from 'state/recoil/key-results/single/cycle'
 
 import Skeleton from './skeleton'
 
-export interface CycleProps {
+export interface CycleProperties {
   id: KeyResult['id']
 }
 
@@ -17,7 +17,7 @@ const StyledDate = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[300],
 }))
 
-const Cycle = ({ id }: CycleProps): ReactElement => {
+const Cycle = ({ id }: CycleProperties): ReactElement => {
   const cycle = useRecoilValue<KeyResult['cycle'] | undefined>(keyResultCycle(id))
   const intl = useIntl()
   const dateOptions: FormatDateOptions = {

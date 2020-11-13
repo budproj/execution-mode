@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface SearchIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface SearchIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Search = ({ title, desc, ...rest }: SearchIconProps): ReactElement => (
+const Search = ({ title, desc, ...rest }: SearchIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 18 18" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

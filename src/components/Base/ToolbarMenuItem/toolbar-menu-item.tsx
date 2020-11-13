@@ -4,18 +4,18 @@ import React, { ReactElement } from 'react'
 import Button from 'components/Base/Button'
 import IntlLink from 'components/Base/IntlLink'
 
-export interface ToolbarMenuItemProps {
+export interface ToolbarMenuItemProperties {
   label: string
   href: string
 }
 
-const ToolbarMenuItem = (props: ToolbarMenuItemProps): ReactElement => {
+const ToolbarMenuItem = (properties: ToolbarMenuItemProperties): ReactElement => {
   const router = useRouter()
-  const isHrefCurrentRoute = router.pathname === props.href
+  const isHrefCurrentRoute = router.pathname === properties.href
 
   return (
-    <IntlLink href={props.href}>
-      <Button isActive={isHrefCurrentRoute}>{props.label}</Button>
+    <IntlLink href={properties.href}>
+      <Button isActive={isHrefCurrentRoute}>{properties.label}</Button>
     </IntlLink>
   )
 }

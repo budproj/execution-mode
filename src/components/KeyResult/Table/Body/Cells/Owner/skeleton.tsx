@@ -4,8 +4,8 @@ import React, { ReactElement } from 'react'
 
 import { StyledSkeletonCell } from 'components/KeyResult/Table/Body/skeleton'
 
-export const SkeletonPicture = (props: SkeletonProps): ReactElement => (
-  <Skeleton variant="circle" width={40} height={40} {...props} />
+export const SkeletonPicture = (properties: SkeletonProps): ReactElement => (
+  <Skeleton variant="circle" width={40} height={40} {...properties} />
 )
 
 const OwnerSkeleton = (): ReactElement => (
