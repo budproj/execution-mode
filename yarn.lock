@@ -1536,6 +1536,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@budproj/prettier-config@npm:^0.0.8":
+  version: 0.0.8
+  resolution: "@budproj/prettier-config@npm:0.0.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Fprettier-config%2F0.0.8%2F381cc096f62d10a04941ba9f7542fc8652484d80cd285ca4bf594bdcbb7c8c00"
+  peerDependencies:
+    eslint: ^2.x
+  checksum: dca6f56746d0358a6288dbf91bf53d59878621c51b9836e4bc260fdb3a848f644a5fdf4b961a5df0b9adf33ac9da5c5cd7a8c4550d78f4d39f8b439a959cc206
+  languageName: node
+  linkType: hard
+
 "@dabh/diagnostics@npm:^2.0.2":
   version: 2.0.2
   resolution: "@dabh/diagnostics@npm:2.0.2"
@@ -5514,6 +5523,7 @@ __metadata:
     "@budproj/eslint-config-intl": ^0.0.7
     "@budproj/eslint-config-prettier-ts": ^0.0.7
     "@budproj/eslint-config-react": ^0.0.7
+    "@budproj/prettier-config": ^0.0.8
     "@formatjs/cli": ^2.13.5
     "@koa/router": ^9.4.0
     "@material-ui/core": ^4.11.0
