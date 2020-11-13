@@ -15,7 +15,7 @@
     "copy": "cp README.md LICENSE package.json dist",
     "lint": "eslint . --ext ts,tsx",
     "lint:fix": "yarn lint --fix",
-    "intl:generate:id": "yarn lint:fix",
+    "intl:generate:id": "echo '\u001b[36m➤ \u001b[90mGenerating react-intl message ids...\u001b[39m' && yarn lint --config .eslintrc.predev --fix",
     "intl:refresh": "run-s intl:generate:id intl:extract",
     "intl:extract": "formatjs extract './src/**/*.ts(x)?' --out-file lang/pt-BR.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
     "intl:compile:ptBR": "formatjs compile lang/pt-BR.json --ast --out-file compiled-lang/pt-BR.json",

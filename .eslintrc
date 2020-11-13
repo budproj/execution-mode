@@ -1,6 +1,6 @@
 {
   "parserOptions": {
-    "project": "./src/tsconfig.server.json"
+    "project": "./src/tsconfig.json"
   },
   "extends": [
     "@budproj/eslint-config-base-ts",
@@ -16,8 +16,11 @@
   },
   "settings": {
     "import/resolver": {
+      "node": {
+        "paths": ["./", "src"]
+      },
       "typescript": {
-        "project": "src/tsconfig.server.json"
+        "project": "./src/tsconfig.json"
       }
     }
   }
