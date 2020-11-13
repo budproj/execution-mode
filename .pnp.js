@@ -41,7 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@budproj/eslint-config-base-ts", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-base-ts%2F0.0.7%2F8423b2260d5d1f77138c90e74679b39fe2f5f81180c95e83369f70a430daed2c"],
             ["@budproj/eslint-config-intl", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-intl%2F0.0.7%2Fcca0138f1df27a348325acce1623aff66bef2cfe138371b11d2e1e0789507570"],
             ["@budproj/eslint-config-prettier-ts", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-prettier-ts%2F0.0.7%2Ffbb537515e665b4cd21a1b4d5ca5ea9a34ca173a283a4d925d4d82723422f0b8"],
-            ["@budproj/eslint-config-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.7%2Fb6e4211604be18403392083bd78307bb90144a815a15dd19d7f800660f331859"],
+            ["@budproj/eslint-config-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.10%2F1c6d3445b6503bd22e5d01f83afd84541e5026942fea982ffb86e87599109fe0"],
             ["@budproj/prettier-config", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Fprettier-config%2F0.0.8%2F381cc096f62d10a04941ba9f7542fc8652484d80cd285ca4bf594bdcbb7c8c00"],
             ["@formatjs/cli", "npm:2.13.12"],
             ["@koa/router", "npm:9.4.0"],
@@ -2114,15 +2114,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@budproj/eslint-config-react", [
-        ["virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.7%2Fb6e4211604be18403392083bd78307bb90144a815a15dd19d7f800660f331859", {
-          "packageLocation": "./.yarn/$$virtual/@budproj-eslint-config-react-virtual-bcbe0bba18/0/cache/@budproj-eslint-config-react-npm-0.0.7-b34974ca58-c1c37627df.zip/node_modules/@budproj/eslint-config-react/",
+        ["virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.10%2F1c6d3445b6503bd22e5d01f83afd84541e5026942fea982ffb86e87599109fe0", {
+          "packageLocation": "./.yarn/$$virtual/@budproj-eslint-config-react-virtual-156f11c0cb/0/cache/@budproj-eslint-config-react-npm-0.0.10-12f92839ef-2cca37d65c.zip/node_modules/@budproj/eslint-config-react/",
           "packageDependencies": [
-            ["@budproj/eslint-config-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.7%2Fb6e4211604be18403392083bd78307bb90144a815a15dd19d7f800660f331859"],
+            ["@budproj/eslint-config-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.10%2F1c6d3445b6503bd22e5d01f83afd84541e5026942fea982ffb86e87599109fe0"],
             ["@types/eslint", "npm:7.2.4"],
             ["@types/eslint-plugin-react", null],
             ["@types/eslint-plugin-react-hooks", null],
             ["eslint", "npm:7.13.0"],
-            ["eslint-config-xo-react", "virtual:bcbe0bba18d1aefb179cd9c990f28cf3ad1c297fe3617fb622ae7b84db19c7ca32690e1795b41452a28cead2144da7cf583c66325a05397567376e497a62124b#npm:0.23.0"],
+            ["eslint-config-xo-react", "virtual:156f11c0cbdf9f9d4b14768802646781b20e34a3a577804f6f7d14e8c97cbfb2a95c66445d37fce129e39f429eac2a6c7001b0b682656b6ad81c0188e38f65f9#npm:0.23.0"],
             ["eslint-plugin-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:7.21.5"],
             ["eslint-plugin-react-hooks", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:4.2.0"]
           ],
@@ -6384,10 +6384,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["eslint-config-xo-react", [
-        ["virtual:bcbe0bba18d1aefb179cd9c990f28cf3ad1c297fe3617fb622ae7b84db19c7ca32690e1795b41452a28cead2144da7cf583c66325a05397567376e497a62124b#npm:0.23.0", {
-          "packageLocation": "./.yarn/$$virtual/eslint-config-xo-react-virtual-22ac2a1c12/0/cache/eslint-config-xo-react-npm-0.23.0-779f507493-b52f001513.zip/node_modules/eslint-config-xo-react/",
+        ["virtual:156f11c0cbdf9f9d4b14768802646781b20e34a3a577804f6f7d14e8c97cbfb2a95c66445d37fce129e39f429eac2a6c7001b0b682656b6ad81c0188e38f65f9#npm:0.23.0", {
+          "packageLocation": "./.yarn/$$virtual/eslint-config-xo-react-virtual-fed34cf8b3/0/cache/eslint-config-xo-react-npm-0.23.0-779f507493-b52f001513.zip/node_modules/eslint-config-xo-react/",
           "packageDependencies": [
-            ["eslint-config-xo-react", "virtual:bcbe0bba18d1aefb179cd9c990f28cf3ad1c297fe3617fb622ae7b84db19c7ca32690e1795b41452a28cead2144da7cf583c66325a05397567376e497a62124b#npm:0.23.0"],
+            ["eslint-config-xo-react", "virtual:156f11c0cbdf9f9d4b14768802646781b20e34a3a577804f6f7d14e8c97cbfb2a95c66445d37fce129e39f429eac2a6c7001b0b682656b6ad81c0188e38f65f9#npm:0.23.0"],
             ["@types/eslint", "npm:7.2.4"],
             ["@types/eslint-plugin-react", null],
             ["@types/eslint-plugin-react-hooks", null],
@@ -6852,7 +6852,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@budproj/eslint-config-base-ts", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-base-ts%2F0.0.7%2F8423b2260d5d1f77138c90e74679b39fe2f5f81180c95e83369f70a430daed2c"],
             ["@budproj/eslint-config-intl", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-intl%2F0.0.7%2Fcca0138f1df27a348325acce1623aff66bef2cfe138371b11d2e1e0789507570"],
             ["@budproj/eslint-config-prettier-ts", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-prettier-ts%2F0.0.7%2Ffbb537515e665b4cd21a1b4d5ca5ea9a34ca173a283a4d925d4d82723422f0b8"],
-            ["@budproj/eslint-config-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.7%2Fb6e4211604be18403392083bd78307bb90144a815a15dd19d7f800660f331859"],
+            ["@budproj/eslint-config-react", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.10%2F1c6d3445b6503bd22e5d01f83afd84541e5026942fea982ffb86e87599109fe0"],
             ["@budproj/prettier-config", "virtual:2269ce555680bf40b3cc0fd81a91d6ee8110bb9bbf634b0bff7918ddf75c57ad5070548e3d23bc7127cdd8fd88a4e61cc60774dfe210379e42e5dfac6f264aa8#npm:0.0.8::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Fprettier-config%2F0.0.8%2F381cc096f62d10a04941ba9f7542fc8652484d80cd285ca4bf594bdcbb7c8c00"],
             ["@formatjs/cli", "npm:2.13.12"],
             ["@koa/router", "npm:9.4.0"],

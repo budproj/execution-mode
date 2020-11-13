@@ -39,7 +39,7 @@
     "@budproj/eslint-config-base-ts": "^0.0.7",
     "@budproj/eslint-config-intl": "^0.0.7",
     "@budproj/eslint-config-prettier-ts": "^0.0.7",
-    "@budproj/eslint-config-react": "^0.0.7",
+    "@budproj/eslint-config-react": "^0.0.10",
     "@budproj/prettier-config": "^0.0.8",
     "@formatjs/cli": "^2.13.5",
     "@tsconfig/recommended": "^1.0.1",

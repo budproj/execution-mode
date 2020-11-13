@@ -1523,16 +1523,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@budproj/eslint-config-react@npm:^0.0.7":
-  version: 0.0.7
-  resolution: "@budproj/eslint-config-react@npm:0.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.7%2Fb6e4211604be18403392083bd78307bb90144a815a15dd19d7f800660f331859"
+"@budproj/eslint-config-react@npm:^0.0.10":
+  version: 0.0.10
+  resolution: "@budproj/eslint-config-react@npm:0.0.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40budproj%2Feslint-config-react%2F0.0.10%2F1c6d3445b6503bd22e5d01f83afd84541e5026942fea982ffb86e87599109fe0"
   dependencies:
     eslint-config-xo-react: ^0.23.0
   peerDependencies:
     eslint: ^7.x
     eslint-plugin-react: ^7.x
     eslint-plugin-react-hooks: ^4.x
-  checksum: c1c37627dfa6c87ec70b924ffa9f0c4f2d9d417c141e534380ade28b9dc0538df95cf6fe74254551433f54d0edc82ee4797287e2c06d6699b05530d051ff36ec
+  checksum: 2cca37d65c457f2515bcda812dfce51d9e274b5f1dee71b16a92c8fd6feed2c7b5792191ce8c3cb8266f67d9f344d24d70815003c7363b5172a515c33523f65c
   languageName: node
   linkType: hard
 
@@ -5522,7 +5522,7 @@ __metadata:
     "@budproj/eslint-config-base-ts": ^0.0.7
     "@budproj/eslint-config-intl": ^0.0.7
     "@budproj/eslint-config-prettier-ts": ^0.0.7
-    "@budproj/eslint-config-react": ^0.0.7
+    "@budproj/eslint-config-react": ^0.0.10
     "@budproj/prettier-config": ^0.0.8
     "@formatjs/cli": ^2.13.5
     "@koa/router": ^9.4.0
