@@ -5,11 +5,11 @@ import React, { ReactElement } from 'react'
 import getConfig from 'config'
 import theme from 'themes/preset-base'
 
-interface BudDocumentProps {
+interface BudDocumentProperties {
   env: string
 }
 
-class BudDocument extends Document<BudDocumentProps> {
+class BudDocument extends Document<BudDocumentProperties> {
   render(): ReactElement {
     return (
       <Html>
@@ -27,21 +27,21 @@ class BudDocument extends Document<BudDocumentProps> {
   }
 }
 
-BudDocument.getInitialProps = async (ctx: DocumentContext) => {
+BudDocument.getInitialProps = async (context: DocumentContext) => {
   const sheets = new ServerStyleSheets()
-  const originalRenderPage = ctx.renderPage
+  const originalRenderPage = context.renderPage
   const { publicRuntimeConfig } = getConfig()
 
-  ctx.renderPage = () =>
+  context.renderPage = () =>
     originalRenderPage({
-      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+      enhanceApp: (App) => (properties) => sheets.collect(<App {...properties} />),
     })
 
-  const initialProps = await Document.getInitialProps(ctx)
+  const initialProperties = await Document.getInitialProps(context)
 
   return {
-    ...initialProps,
-    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
+    ...initialProperties,
+    styles: [...React.Children.toArray(initialProperties.styles), sheets.getStyleElement()],
     env: publicRuntimeConfig.environment,
   }
 }

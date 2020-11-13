@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface LocationIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface LocationIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Location = ({ title, desc, ...rest }: LocationIconProps): ReactElement => (
+const Location = ({ title, desc, ...rest }: LocationIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

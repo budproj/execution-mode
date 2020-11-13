@@ -2,11 +2,12 @@ import { Theme } from '@material-ui/core'
 
 import { MUIStyle } from 'themes/types'
 
-import { ButtonProps } from './button'
+import { ButtonProps as ButtonProperties } from './button'
 
 const styles: MUIStyle = (theme: Theme) => ({
   root: {
-    borderRadius: (props: ButtonProps) => (props.rounded ? 40 : theme.shape.borderRadius),
+    borderRadius: (properties: ButtonProperties) =>
+      properties.rounded ? 40 : theme.shape.borderRadius,
   },
 
   contained: {
@@ -15,8 +16,8 @@ const styles: MUIStyle = (theme: Theme) => ({
 
   text: {
     textTransform: 'none',
-    color: (props: ButtonProps) =>
-      props.isActive ? theme.palette.primary.main : theme.palette.grey[500],
+    color: (properties: ButtonProperties) =>
+      properties.isActive ? theme.palette.primary.main : theme.palette.grey[500],
 
     '&:hover': {
       color: theme.palette.primary.main,

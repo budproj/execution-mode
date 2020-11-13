@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface TicketStarIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface TicketStarIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const TicketStar = ({ title, desc, ...rest }: TicketStarIconProps): ReactElement => (
+const TicketStar = ({ title, desc, ...rest }: TicketStarIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

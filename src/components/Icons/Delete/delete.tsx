@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface DeleteIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface DeleteIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Delete = ({ title, desc, ...rest }: DeleteIconProps): ReactElement => (
+const Delete = ({ title, desc, ...rest }: DeleteIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

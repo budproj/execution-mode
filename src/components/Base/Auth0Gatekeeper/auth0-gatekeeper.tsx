@@ -6,11 +6,11 @@ import logger from 'lib/logger'
 
 const component = 'Auth0Gatekeeper'
 
-export interface Auth0GatekeeperProps {
+export interface Auth0GatekeeperProperties {
   children: ReactElement
 }
 
-const Auth0Gatekeeper = ({ children }: Auth0GatekeeperProps): ReactElement => {
+const Auth0Gatekeeper = ({ children }: Auth0GatekeeperProperties): ReactElement => {
   const { isLoading, isAuthenticated, loginWithRedirect, user } = useAuth0()
 
   console.log(user)

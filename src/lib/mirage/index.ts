@@ -1,12 +1,12 @@
 import { createServer, Server, Request } from 'miragejs'
 
-import { NodeEnv } from 'config'
+import { NodeEnvironment } from 'config'
 
 import factories from './factories'
 import handlers from './handlers'
 import models from './models'
 
-export function makeServer(environment: NodeEnv): Server {
+export function makeServer(environment: NodeEnvironment): Server {
   const server = createServer({
     environment,
     models,
@@ -23,7 +23,7 @@ export function makeServer(environment: NodeEnv): Server {
     },
 
     routes() {
-      this.namespace = '/api'
+      this.namespace = '/acl'
 
       this.passthrough((request: Request): boolean | void => {
         if (request.url.startsWith('https://getbud.us.auth0.com')) {

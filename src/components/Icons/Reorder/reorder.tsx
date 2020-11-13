@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface ReorderIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface ReorderIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Reorder = ({ title, desc, ...rest }: ReorderIconProps): ReactElement => (
+const Reorder = ({ title, desc, ...rest }: ReorderIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 6 14" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

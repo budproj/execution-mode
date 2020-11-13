@@ -3,15 +3,15 @@ import React, { ComponentType, ReactElement } from 'react'
 
 import PageContentHeader from 'components/Base/PageContentHeader'
 
-export interface PageContentProps {
+export interface PageContentProperties {
   children: ReactElement
   RightWing?: ComponentType
 }
 
-const PageContent = (props: PageContentProps): ReactElement => (
+const PageContent = (properties: PageContentProperties): ReactElement => (
   <Box py={3} px={4}>
-    <PageContentHeader RightWing={props.RightWing} />
-    {props.children}
+    <PageContentHeader RightWing={properties.RightWing} />
+    {properties.children}
   </Box>
 )
 

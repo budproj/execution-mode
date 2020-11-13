@@ -8,7 +8,7 @@ import { keyResultOwner } from 'state/recoil/key-results/single/owner'
 
 import Skeleton, { SkeletonPicture } from './skeleton'
 
-export interface OwnerProps {
+export interface OwnerProperties {
   id: KeyResult['id']
 }
 
@@ -26,11 +26,11 @@ const StyledBigAvatar = styled(Avatar)({
   borderRadius: 4,
 })
 
-const Owner = ({ id }: OwnerProps): ReactElement => {
+const Owner = ({ id }: OwnerProperties): ReactElement => {
   const owner = useRecoilValue<KeyResult['owner'] | undefined>(keyResultOwner(id))
-  const [profileCardAnchorElement, setProfileCardAnchorElement] = useState<HTMLDivElement | null>(
-    null,
-  )
+  const [profileCardAnchorElement, setProfileCardAnchorElement] = useState<
+    HTMLDivElement | undefined
+  >()
   const [wasAvatarLoaded, setWasAvatarLoaded] = useState<boolean>(false)
 
   const isProfileCardOpen = Boolean(profileCardAnchorElement)
@@ -40,7 +40,7 @@ const Owner = ({ id }: OwnerProps): ReactElement => {
   }
 
   const handleCloseProfileCard = (): void => {
-    setProfileCardAnchorElement(null)
+    setProfileCardAnchorElement()
   }
 
   const handleAvatarLoad = (): void => {

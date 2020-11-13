@@ -2,7 +2,7 @@ import fs from 'fs'
 import https, { Server } from 'https'
 
 import Router from '@koa/router'
-import { cyan, gray } from 'chalk'
+import chalk from 'chalk'
 import Koa from 'koa'
 import next from 'next'
 
@@ -25,7 +25,9 @@ const buildServer = (app: Record<string, any>): void => {
 
   httpsServer.listen(config.port, () =>
     console.log(
-      `${cyan('➤')} ${gray('Web server running on:')} https://${config.host}:${config.port}`,
+      `${chalk.cyan('➤')} ${chalk.gray('Web server running on:')} https://${config.host}:${
+        config.port
+      }`,
     ),
   )
 }
@@ -35,14 +37,14 @@ const buildKoaServer = (app: Record<string, any>): Koa => {
   const router = new Router()
   const handle = app.getRequestHandler()
 
-  server.use(async (ctx, next) => {
-    ctx.res.statusCode = 200
+  server.use(async (context, next) => {
+    context.res.statusCode = 200
     await next()
   })
 
-  router.all('(.*)', async (ctx) => {
-    await handle(ctx.req, ctx.res)
-    ctx.respond = false
+  router.all('(.*)', async (context) => {
+    await handle(context.req, context.res)
+    context.respond = false
   })
 
   server.use(router.routes())

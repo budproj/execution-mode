@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface GraphIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface GraphIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Graph = ({ title, desc, ...rest }: GraphIconProps): ReactElement => (
+const Graph = ({ title, desc, ...rest }: GraphIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

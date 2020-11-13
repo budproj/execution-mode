@@ -8,7 +8,7 @@ import { Skeleton as ProgressSkeleton } from './Cells/Progress'
 import { Skeleton as StatusSkeleton } from './Cells/Status'
 import { Skeleton as TitleSkeleton } from './Cells/Title'
 
-export interface TableSkeletonProps {
+export interface TableSkeletonProperties {
   amountOfRows: number
 }
 
@@ -23,9 +23,9 @@ const StyledHiddenCell = styled(TableCell)({
   padding: '0px 22px 0px 0px',
 })
 
-const TableSkeleton = (props: TableSkeletonProps): ReactElement => (
+const TableSkeleton = (properties: TableSkeletonProperties): ReactElement => (
   <TableBody>
-    {[...new Array(props.amountOfRows).keys()].map((key) => (
+    {[...new Array(properties.amountOfRows).keys()].map((key) => (
       <TableRow key={`skeleton-row-${key}`}>
         <StyledHiddenCell />
 

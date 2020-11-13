@@ -11,7 +11,9 @@ import isBrowser from 'specifications/is-browser'
 import { intlRoute as intlRouteAtom } from 'state/recoil/intl/route'
 
 const withIntlRedirect = (WrappedComponent: NextComponentType, location: string): ComponentType => {
-  const WithRedirectWrapper = async (props: Record<string, unknown>): Promise<ReactElement> => {
+  const WithRedirectWrapper = async (
+    properties: Record<string, unknown>,
+  ): Promise<ReactElement> => {
     const router = useRouter()
     const intlRoute = useRecoilValue(intlRouteAtom(location))
 
@@ -19,15 +21,15 @@ const withIntlRedirect = (WrappedComponent: NextComponentType, location: string)
       await router.push(intlRoute)
     }
 
-    return <WrappedComponent {...props} />
+    return <WrappedComponent {...properties} />
   }
 
   WithRedirectWrapper.getInitialProps = async (
-    ctx: NextPageContext,
+    context: NextPageContext,
   ): Promise<Record<string, unknown> | undefined> => {
     const { publicRuntimeConfig, serverRuntimeConfig } = getConfig()
 
-    const accept = accepts(ctx?.req as IncomingMessage)
+    const accept = accepts(context?.req as IncomingMessage)
     const locale =
       (accept.language(serverRuntimeConfig.supportedLocales) as Locale) ||
       publicRuntimeConfig.defaultLocale
@@ -38,14 +40,15 @@ const withIntlRedirect = (WrappedComponent: NextComponentType, location: string)
           item.locale === locale,
       ).source || location
 
-    if (!isBrowser() && ctx.res && !ctx.res.headersSent) {
-      ctx.res.writeHead(302, { Location: intlRoute })
-      ctx.res.end()
+    if (!isBrowser() && context.res && !context.res.headersSent) {
+      context.res.writeHead(302, { Location: intlRoute })
+      context.res.end()
     }
 
-    const props = WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx))
+    const properties =
+      WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(context))
 
-    return { ...props }
+    return { ...properties }
   }
 
   return WithRedirectWrapper

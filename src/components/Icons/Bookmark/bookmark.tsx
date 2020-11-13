@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface BookmarkIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface BookmarkIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Bookmark = ({ title, desc, ...rest }: BookmarkIconProps): ReactElement => (
+const Bookmark = ({ title, desc, ...rest }: BookmarkIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

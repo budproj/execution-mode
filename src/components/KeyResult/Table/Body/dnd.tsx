@@ -16,14 +16,14 @@ import { KeyResult } from 'components/KeyResult/types'
 import messages from './messages'
 
 export const buildDroppableBody = (onDragEnd: OnDragEndResponder) => (
-  props: Record<string, unknown>,
+  properties: Record<string, unknown>,
 ): ReactElement => (
   <DragDropContext onDragEnd={onDragEnd}>
     <Droppable droppableId="list" direction="vertical">
       {(provided) => {
         return (
-          <TableBody ref={provided.innerRef} {...provided.droppableProps} {...props}>
-            {props.children}
+          <TableBody ref={provided.innerRef} {...provided.droppableProps} {...properties}>
+            {properties.children}
             {provided.placeholder}
           </TableBody>
         )
@@ -40,19 +40,19 @@ const StyledDragHandler = styled(TableCell)(({ theme }) => ({
   padding: '0 10px 0 0',
 }))
 
-interface DraggableStylesProps {
+interface DraggableStylesProperties {
   isDragging: boolean
 }
 
 const styles = (theme: Theme) => ({
   row: {
-    backgroundColor: (props: DraggableStylesProps) =>
-      props.isDragging ? theme.palette.primary.light : 'inherit',
+    backgroundColor: (properties: DraggableStylesProperties) =>
+      properties.isDragging ? theme.palette.primary.light : 'inherit',
     transition: '0.6s all ease-out',
 
     '& td': {
-      borderColor: (props: DraggableStylesProps) =>
-        props.isDragging ? 'transparent' : theme.palette.grey[100],
+      borderColor: (properties: DraggableStylesProperties) =>
+        properties.isDragging ? 'transparent' : theme.palette.grey[100],
       borderStyle: 'solid',
       borderWidth: '0.5px 0',
 
@@ -77,7 +77,7 @@ const styles = (theme: Theme) => ({
 })
 
 export const buildDraggableRow = (id: KeyResult['id'], index: number): ComponentType => (
-  props: Record<string, unknown>,
+  properties: Record<string, unknown>,
 ): ReactElement => {
   const intl = useIntl()
   const buildClasses = makeStyles(styles)
@@ -97,7 +97,7 @@ export const buildDraggableRow = (id: KeyResult['id'], index: number): Component
               htmlColor="inherit"
             />
           </StyledDragHandler>
-          {props.children}
+          {properties.children}
         </TableRow>
       )}
     </Draggable>

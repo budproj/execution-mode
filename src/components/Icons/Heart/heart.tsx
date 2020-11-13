@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface HeartIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface HeartIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Heart = ({ title, desc, ...rest }: HeartIconProps): ReactElement => (
+const Heart = ({ title, desc, ...rest }: HeartIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>

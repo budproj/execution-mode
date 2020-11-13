@@ -11,7 +11,7 @@ import { keyResultObjective } from 'state/recoil/key-results/single/objective'
 import messages from './messages'
 import Skeleton from './skeleton'
 
-export interface OKRProps {
+export interface OKRProperties {
   id: KeyResult['id']
 }
 
@@ -24,7 +24,7 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.grey[400],
 }))
 
-const Okr = ({ id }: OKRProps): ReactElement => {
+const Okr = ({ id }: OKRProperties): ReactElement => {
   const theme = useTheme()
   const intl = useIntl()
   const objective = useRecoilValue<KeyResult['objective'] | undefined>(keyResultObjective(id))

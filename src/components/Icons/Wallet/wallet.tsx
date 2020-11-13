@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProps } from 'components/Icons/types'
 
-export interface WalletIconProps extends SvgIconProps, AcessibleIconProps {}
+export interface WalletIconProperties extends SvgIconProps, AcessibleIconProps {}
 
-const Wallet = ({ title, desc, ...rest }: WalletIconProps): ReactElement => (
+const Wallet = ({ title, desc, ...rest }: WalletIconProperties): ReactElement => (
   <SvgIcon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
