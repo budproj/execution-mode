@@ -2,20 +2,18 @@ type ColorHexCode = string
 type FontName = string
 
 type ColorTokens = {
-  white: ColorHexCode
-  black: ColorHexCode
+  gray50: ColorHexCode
+  gray100: ColorHexCode
+  gray200: ColorHexCode
+  gray300: ColorHexCode
+  gray400: ColorHexCode
+  gray500: ColorHexCode
+  gray600: ColorHexCode
+  gray700: ColorHexCode
+  gray800: ColorHexCode
+  gray900: ColorHexCode
 
-  grey50: ColorHexCode
-  grey100: ColorHexCode
-  grey200: ColorHexCode
-  grey300: ColorHexCode
-  grey400: ColorHexCode
-  grey500: ColorHexCode
-  grey600: ColorHexCode
-  grey700: ColorHexCode
-  grey800: ColorHexCode
-  grey900: ColorHexCode
-
+  blue50: ColorHexCode
   blue100: ColorHexCode
   blue200: ColorHexCode
   blue300: ColorHexCode
@@ -37,6 +35,7 @@ type ColorTokens = {
   cyan800: ColorHexCode
   cyan900: ColorHexCode
 
+  green50: ColorHexCode
   green100: ColorHexCode
   green200: ColorHexCode
   green300: ColorHexCode
@@ -47,6 +46,7 @@ type ColorTokens = {
   green800: ColorHexCode
   green900: ColorHexCode
 
+  yellow50: ColorHexCode
   yellow100: ColorHexCode
   yellow200: ColorHexCode
   yellow300: ColorHexCode
@@ -57,6 +57,7 @@ type ColorTokens = {
   yellow800: ColorHexCode
   yellow900: ColorHexCode
 
+  red50: ColorHexCode
   red100: ColorHexCode
   red200: ColorHexCode
   red300: ColorHexCode
@@ -75,20 +76,18 @@ type FontTokens = {
 }
 
 const colors: ColorTokens = {
-  white: '#FFFFFF',
-  black: '#000000',
+  gray50: '#F5F8F9',
+  gray100: '#DDE5EE',
+  gray200: '#CBCFD9',
+  gray300: '#B8C5D4',
+  gray400: '#757F99',
+  gray500: '#525F7F',
+  gray600: '#424C66',
+  gray700: '#31394C',
+  gray800: '#212633',
+  gray900: '#101319',
 
-  grey50: '#F5F8F9',
-  grey100: '#DDE5EE',
-  grey200: '#CBCFD9',
-  grey300: '#B8C5D4',
-  grey400: '#757F99',
-  grey500: '#525F7F',
-  grey600: '#424C66',
-  grey700: '#31394C',
-  grey800: '#212633',
-  grey900: '#101319',
-
+  blue50: '#FBFBFF',
   blue100: '#F1F1FF',
   blue200: '#E2E2FF',
   blue300: '#E3E3FF',
@@ -110,6 +109,7 @@ const colors: ColorTokens = {
   cyan800: '#0F3E64',
   cyan900: '#071F32',
 
+  green50: '#EBFAF5',
   green100: '#BDEFDD',
   green200: '#92E5C6',
   green300: '#66DBAF',
@@ -120,6 +120,7 @@ const colors: ColorTokens = {
   green800: '#126647',
   green900: '#0B3D2A',
 
+  yellow50: '#FFFDF6',
   yellow100: '#FFF7E0',
   yellow200: '#FFF0C1',
   yellow300: '#FFE8A2',
@@ -130,6 +131,7 @@ const colors: ColorTokens = {
   yellow800: '#806D32',
   yellow900: '#4C411E',
 
+  red50: '#FFF5F6',
   red100: '#FFDFE1',
   red200: '#FFC0C3',
   red300: '#FFA0A6',

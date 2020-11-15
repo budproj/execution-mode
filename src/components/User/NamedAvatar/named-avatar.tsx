@@ -1,19 +1,23 @@
-import { Avatar, Box, Typography } from '@material-ui/core'
+import { Flex, Box, Avatar, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
 const NamedAvatar = (): ReactElement => (
-  <Box display="flex" alignItems="center" gridGap={15}>
-    <Avatar>B</Avatar>
+  <Flex alignItems="center" justifyContent="flex-end" gridGap={15}>
+    <Avatar
+      name="Bruno Delorence"
+      src="https://pickaface.net/gallery/avatar/unr_random_160817_0304_2mvqp69.png"
+      maxW={10}
+    />
 
     <Box>
-      <Typography color="textPrimary" variant="body2">
+      <Text color="gray.600" fontWeight={500}>
         Bruno Delorence
-      </Typography>
-      <Typography color="textPrimary" variant="subtitle1">
+      </Text>
+      <Text fontSize="sm" color="gray.600">
         Apple
-      </Typography>
+      </Text>
     </Box>
-  </Box>
+  </Flex>
 )
 
 export default NamedAvatar

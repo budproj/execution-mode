@@ -1,6 +1,5 @@
 import { AppState, Auth0Provider } from '@auth0/auth0-react'
-import { CssBaseline } from '@material-ui/core'
-import { ThemeProvider } from '@material-ui/core/styles'
+import { ChakraProvider } from '@chakra-ui/react'
 import App, { AppContext, AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
@@ -50,14 +49,13 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
     >
       <RecoilRoot>
         <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
+          <ChakraProvider theme={theme}>
             <Auth0Gatekeeper>
               <Page>
                 <Component {...pageProps} />
               </Page>
             </Auth0Gatekeeper>
-          </ThemeProvider>
+          </ChakraProvider>
         </RecoilIntlProvider>
       </RecoilRoot>
     </Auth0Provider>

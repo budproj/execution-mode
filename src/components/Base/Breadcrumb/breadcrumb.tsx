@@ -1,4 +1,5 @@
 import { Box, styled, useTheme } from '@material-ui/core'
+import Button from 'components/Base/Button'
 import { indexOf, kebabCase } from 'lodash'
 import remove from 'lodash/remove'
 import startCase from 'lodash/startCase'
@@ -6,7 +7,6 @@ import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import Button from 'components/Base/Button'
 import IntlLink from 'components/Base/IntlLink'
 import ArrowRightIcon from 'components/Icons/ArrowRight'
 
