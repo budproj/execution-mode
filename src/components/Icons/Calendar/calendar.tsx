@@ -1,12 +1,12 @@
-import { SvgIcon, SvgIconProps } from '@material-ui/core'
+import { Icon, IconProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import { AcessibleIconProps } from 'components/Icons/types'
+import { AcessibleIconProperties } from 'components/Icons/types'
 
-export interface CalendarIconProperties extends SvgIconProps, AcessibleIconProps {}
+export interface CalendarIconProperties extends IconProps, AcessibleIconProperties {}
 
 const Calendar = ({ title, desc, ...rest }: CalendarIconProperties): ReactElement => (
-  <SvgIcon viewBox="0 0 24 24" {...rest}>
+  <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
     <path
@@ -20,11 +20,11 @@ const Calendar = ({ title, desc, ...rest }: CalendarIconProperties): ReactElemen
     />
     <path d="M8.30489 6.59C8.73958 6.59 9.06559 6.261 9.06559 5.82V2.771C9.06559 2.33 8.73958 2 8.30489 2C7.8702 2 7.54419 2.33 7.54419 2.771V5.82C7.54419 6.261 7.8702 6.59 8.30489 6.59" />
     <path d="M15.695 6.59C16.1198 6.59 16.4557 6.261 16.4557 5.82V2.771C16.4557 2.33 16.1198 2 15.695 2C15.2603 2 14.9343 2.33 14.9343 2.771V5.82C14.9343 6.261 15.2603 6.59 15.695 6.59" />
-  </SvgIcon>
+  </Icon>
 )
 
 Calendar.defaultProps = {
-  htmlColor: 'black',
+  fill: 'black',
 }
 
 export default Calendar

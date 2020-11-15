@@ -1,3 +1,5 @@
-export { default as Table } from './Table'
+export { default as DynamicIcon } from './DynamicIcon'
+
+export { default as List } from './List'
 
 export * from './types'

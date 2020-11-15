@@ -1,6 +1,6 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-type BreadcrumbMessages = 'home' | 'keyResults' | 'arrowRightIconDesc'
+export type BreadcrumbMessages = 'home' | 'keyResults' | 'arrowRightIconDesc'
 
 export default defineMessages({
   home: {

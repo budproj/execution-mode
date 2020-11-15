@@ -6,6 +6,8 @@ export { default as Bookmark } from './Bookmark'
 
 export { default as Calendar } from './Calendar'
 
+export { default as Circle } from './Circle'
+
 export { default as Delete } from './Delete'
 
 export { default as Discovery } from './Discovery'

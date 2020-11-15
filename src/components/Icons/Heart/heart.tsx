@@ -1,12 +1,12 @@
-import { SvgIcon, SvgIconProps } from '@material-ui/core'
+import { Icon, IconProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import { AcessibleIconProps } from 'components/Icons/types'
+import { AcessibleIconProperties } from 'components/Icons/types'
 
-export interface HeartIconProperties extends SvgIconProps, AcessibleIconProps {}
+export interface HeartIconProperties extends IconProps, AcessibleIconProperties {}
 
 const Heart = ({ title, desc, ...rest }: HeartIconProperties): ReactElement => (
-  <SvgIcon viewBox="0 0 24 24" {...rest}>
+  <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
     <path
@@ -15,11 +15,11 @@ const Heart = ({ title, desc, ...rest }: HeartIconProperties): ReactElement => (
     />
     <path d="M12.0107 21.9999L11.7757 21.8373C9.48989 20.4273 7.36463 18.7646 5.43877 16.8795C4.07496 15.5355 3.03214 13.8921 2.39028 12.0752C1.26153 8.53513 2.58581 4.48937 6.28311 3.28829C8.23462 2.67543 10.385 3.05194 12.0107 4.31047V21.9999Z" />
     <path d="M18.2309 9.99922V9.99922C18.0301 9.98629 17.843 9.8859 17.7135 9.72157C17.5841 9.55723 17.5237 9.3434 17.5464 9.13016V9.13016C17.5681 8.4278 17.1685 7.78851 16.5522 7.53977C16.1614 7.43309 15.9248 7.00987 16.0225 6.59249C16.1153 6.18182 16.4998 5.92647 16.8863 6.0189C16.9351 6.027 16.9821 6.04468 17.0249 6.07105C18.2606 6.54658 19.0606 7.82641 18.9969 9.22576C18.9949 9.43785 18.9122 9.63998 18.7678 9.78581C18.6234 9.93164 18.4296 10.0087 18.2309 9.99922Z" />
-  </SvgIcon>
+  </Icon>
 )
 
 Heart.defaultProps = {
-  htmlColor: 'black',
+  fill: 'black',
 }
 
 export default Heart

@@ -5413,9 +5413,9 @@ __metadata:
   linkType: hard
 
 "csstype@npm:^2.5.2":
-  version: 2.6.13
-  resolution: "csstype@npm:2.6.13"
-  checksum: 0a84ef4b068e464039ee4cc79e621a38b4b8b5c683fd12d42dbb810e6457ac454c3c7e578e4d327f958fc563fc03aec0e74b57180abd5804d6e2590ae3cf7086
+  version: 2.6.14
+  resolution: "csstype@npm:2.6.14"
+  checksum: 9abe447b28534cc45304fca19a26d373c5bb8e9b18cedbb84330862937d102c9d8cc47f65d233f723c8512804e9d52b81d6fc57c23c6a4d5420f281827d73b03
   languageName: node
   linkType: hard
 
@@ -6600,7 +6600,6 @@ __metadata:
     "@koa/router": ^9.4.0
     "@material-ui/core": ^4.11.0
     "@material-ui/lab": ^4.0.0-alpha.56
-    "@material-ui/styles": ^4.10.0
     "@tsconfig/recommended": ^1.0.1
     "@types/accepts": ^1
     "@types/eslint": ^7

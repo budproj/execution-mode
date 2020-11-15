@@ -2,7 +2,7 @@ import { extendTheme } from '@chakra-ui/react'
 
 import tokens from 'themes/tokens'
 
-import * as components from './components'
+import Button from './components/button'
 
 const colors = {
   brand: {
@@ -98,8 +98,12 @@ const colors = {
 }
 
 const theme = extendTheme({
-  components,
   colors,
+
+  components: {
+    Button,
+  },
+
   fonts: {
     body: [tokens.fonts.base, tokens.fonts.fallback].join(','),
     heading: [tokens.fonts.base, tokens.fonts.fallback].join(','),

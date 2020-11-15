@@ -1,60 +1,40 @@
-import { makeStyles, Theme } from '@material-ui/core'
-import MUISlider, { SliderProps as MUISliderProperties } from '@material-ui/core/Slider'
-import { lighten } from '@material-ui/core/styles/colorManipulator'
-import { Styles } from '@material-ui/styles'
-import React, { ReactElement } from 'react'
+import {
+  Slider as ChakraSlider,
+  SliderFilledTrack,
+  SliderProps,
+  SliderThumb,
+  SliderTrack,
+} from '@chakra-ui/react'
+import React, { ReactElement, useState } from 'react'
 
-export interface SliderProperties extends MUISliderProperties {
+export interface SliderProperties extends SliderProps {
   trackColor?: string
 }
 
-const styles: Styles<Theme, SliderProperties> = (theme) => ({
-  root: {
-    color: (properties) => properties.trackColor ?? theme.palette.primary.main,
-    height: 8,
-    '&:focus, &:hover, &$active': {
-      '& .MuiSlider-thumb': {
-        boxShadow: 'inherit',
-        transform: 'scale(1)',
-        transition: '.2s transform ease-in-out',
-      },
-    },
-  },
-  thumb: {
-    height: 18,
-    width: 18,
-    backgroundColor: (properties) =>
-      properties.trackColor
-        ? lighten(properties.trackColor, 0.5)
-        : lighten(theme.palette.primary.main, 0.5),
-    borderWidth: 2,
-    borderStyle: 'solid',
-    borderColor: theme.palette.common.white,
-    marginTop: -5,
-    marginLeft: -12,
-    transform: 'scale(0)',
-    transition: '.2s transform ease-in-out',
-  },
-  active: {},
-  valueLabel: {
-    left: 'calc(-50% + 4px)',
-  },
-  track: {
-    height: 8,
-    borderRadius: 4,
-  },
-  rail: {
-    height: 8,
-    borderRadius: 4,
-    color: theme.palette.grey[300],
-  },
-})
-
 const Slider = ({ trackColor, ...rest }: SliderProperties): ReactElement => {
-  const buildClasses = makeStyles(styles)
-  const classes = buildClasses({ trackColor, ...rest })
+  const [isHovering, setIsHovering] = useState(false)
 
-  return <MUISlider classes={classes} {...rest} />
+  const handleEnter = () => setIsHovering(true)
+  const handleLeave = () => setIsHovering(false)
+
+  return (
+    <ChakraSlider onMouseEnter={handleEnter} onMouseLeave={handleLeave} {...rest}>
+      <SliderTrack h="8px" bg="gray.200" borderRadius="full">
+        <SliderFilledTrack bg={trackColor} borderRadius="full" />
+      </SliderTrack>
+
+      <SliderThumb
+        bg={trackColor}
+        borderColor="white"
+        borderWidth={2}
+        w="22px"
+        h="22px"
+        transform={isHovering ? 'scale(1)' : 'scale(0)'}
+        mt="-10px"
+        ml="-10px"
+      />
+    </ChakraSlider>
+  )
 }
 
 export default Slider

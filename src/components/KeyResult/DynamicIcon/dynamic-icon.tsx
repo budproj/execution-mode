@@ -1,4 +1,4 @@
-import { Box, makeStyles, useTheme } from '@material-ui/core'
+import { Box } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -10,33 +10,18 @@ export interface DynamicIconProperties {
   title: KeyResult['title']
 }
 
-interface DynamicIconStyleProperties {
-  color: string
-}
-
-const styles = {
-  box: {
-    backgroundColor: (properties: DynamicIconStyleProperties) => properties.color,
-  },
-}
-
 const DynamicIcon = ({ title }: DynamicIconProperties): ReactElement => {
-  const theme = useTheme()
-
   const iconDrawingAtom = drawingState.keyResultIconDrawing(title)
   const iconColorAtom = colorState.keyResultIconColor(title)
 
   const iconDrawing = useRecoilValue<string>(iconDrawingAtom)
   const iconColor = useRecoilValue<string>(iconColorAtom)
 
-  const buildClasses = makeStyles(styles)
-  const classes = buildClasses({ color: iconColor })
-
   const IconComponent = Icons[iconDrawing]
 
   return (
-    <Box className={classes.box} borderRadius={10} py={2} px={2} lineHeight={1}>
-      <IconComponent htmlColor={theme.palette.common.white} />
+    <Box bg={iconColor} borderRadius={10} p={4} lineHeight={1}>
+      <IconComponent fill="white" w={8} h={8} />
     </Box>
   )
 }

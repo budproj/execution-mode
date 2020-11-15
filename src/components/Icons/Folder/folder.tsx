@@ -1,12 +1,12 @@
-import { SvgIcon, SvgIconProps } from '@material-ui/core'
+import { Icon, IconProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import { AcessibleIconProps } from 'components/Icons/types'
+import { AcessibleIconProperties } from 'components/Icons/types'
 
-export interface FolderIconProperties extends SvgIconProps, AcessibleIconProps {}
+export interface FolderIconProperties extends IconProps, AcessibleIconProperties {}
 
 const Folder = ({ title, desc, ...rest }: FolderIconProperties): ReactElement => (
-  <SvgIcon viewBox="0 0 24 24" {...rest}>
+  <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
     <path
@@ -18,11 +18,11 @@ const Folder = ({ title, desc, ...rest }: FolderIconProperties): ReactElement =>
       clipRule="evenodd"
       d="M20.8321 6.54346C21.1521 6.91754 21.3993 7.34785 21.5612 7.81236C21.8798 8.76704 22.0273 9.77029 21.9969 10.7761V16.0291C21.9956 16.4716 21.963 16.9134 21.8991 17.3513C21.7775 18.124 21.5057 18.8655 21.0989 19.5341C20.9119 19.8571 20.6849 20.1552 20.4231 20.4214C19.2383 21.5089 17.665 22.0749 16.0574 21.992H7.93061C6.32049 22.0743 4.74462 21.5085 3.55601 20.4214C3.2974 20.1547 3.07337 19.8566 2.88915 19.5341C2.48475 18.866 2.21869 18.1237 2.1067 17.3513C2.03549 16.9141 1.99981 16.472 2 16.0291V10.7761C1.99983 10.3374 2.02357 9.89895 2.07113 9.46281C2.08113 9.38629 2.09614 9.31101 2.11098 9.23652C2.13573 9.11233 2.16005 8.99031 2.16005 8.86829C2.25031 8.34196 2.41496 7.83109 2.64908 7.35094C3.34261 5.86908 4.76525 5.11484 7.09481 5.11484H16.8754C18.1802 5.01393 19.4753 5.40673 20.5032 6.21515C20.6215 6.31552 20.7316 6.42532 20.8321 6.54346ZM6.97033 15.5411H17.0355H17.0533C17.2741 15.5507 17.4896 15.4716 17.6517 15.3216C17.8137 15.1715 17.9088 14.963 17.9157 14.7425C17.9282 14.5487 17.8644 14.3576 17.7379 14.2101C17.5924 14.0118 17.3618 13.8934 17.1155 13.8906H6.97033C6.51365 13.8906 6.14343 14.2601 6.14343 14.7159C6.14343 15.1716 6.51365 15.5411 6.97033 15.5411Z"
     />
-  </SvgIcon>
+  </Icon>
 )
 
 Folder.defaultProps = {
-  htmlColor: 'black',
+  fill: 'black',
 }
 
 export default Folder

@@ -4,8 +4,6 @@ export { default as Auth0Gatekeeper } from './Auth0Gatekeeper'
 
 export { default as Breadcrumb } from './Breadcrumb'
 
-export { default as Button } from './Button'
-
 export { default as IntlLink } from './IntlLink'
 
 export { default as Logotype } from './Logotype'
@@ -21,5 +19,3 @@ export { default as PageTitle } from './PageTitle'
 export { default as RecoilIntlProvider } from './RecoilIntlProvider'
 
 export { default as Slider } from './Slider'
-
-export { default as ToolbarMenuItem } from './ToolbarMenuItem'

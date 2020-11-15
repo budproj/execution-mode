@@ -1,12 +1,12 @@
-import { SvgIcon, SvgIconProps } from '@material-ui/core'
+import { Icon, IconProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import { AcessibleIconProps } from 'components/Icons/types'
+import { AcessibleIconProperties } from 'components/Icons/types'
 
-export interface WalletIconProperties extends SvgIconProps, AcessibleIconProps {}
+export interface WalletIconProperties extends IconProps, AcessibleIconProperties {}
 
 const Wallet = ({ title, desc, ...rest }: WalletIconProperties): ReactElement => (
-  <SvgIcon viewBox="0 0 24 24" {...rest}>
+  <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
     <path
@@ -19,11 +19,11 @@ const Wallet = ({ title, desc, ...rest }: WalletIconProperties): ReactElement =>
       d="M16.0374 12.2967C16.2465 13.2479 17.0805 13.9171 18.0326 13.8997H21.2825C21.6787 13.8997 22 13.5716 22 13.166V10.6345C21.9991 10.2298 21.6787 9.90087 21.2825 9.9H17.9561C16.8731 9.90348 15.9983 10.8024 16 11.9103C16 12.0399 16.0128 12.1696 16.0374 12.2967"
     />
     <circle cx="18" cy="11.9" r="1" />
-  </SvgIcon>
+  </Icon>
 )
 
 Wallet.defaultProps = {
-  htmlColor: 'black',
+  fill: 'black',
 }
 
 export default Wallet

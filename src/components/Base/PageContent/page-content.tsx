@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core'
+import { Box } from '@chakra-ui/react'
 import React, { ComponentType, ReactElement } from 'react'
 
 import PageContentHeader from 'components/Base/PageContentHeader'
@@ -9,7 +9,7 @@ export interface PageContentProperties {
 }
 
 const PageContent = (properties: PageContentProperties): ReactElement => (
-  <Box py={3} px={4}>
+  <Box py={10} px={20}>
     <PageContentHeader RightWing={properties.RightWing} />
     {properties.children}
   </Box>

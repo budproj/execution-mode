@@ -3,7 +3,7 @@ import { defineMessages, useIntl, MessageDescriptor } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import PageContent from 'components/Base/PageContent'
-import KeyResultTable from 'components/KeyResult/Table'
+import KeyResultList from 'components/KeyResult/List'
 import { pageTitle as pageTitleAtom } from 'state/recoil/page/title'
 
 const messages = defineMessages({
@@ -24,7 +24,7 @@ const MyKeyResultsIndex = (): ReactElement => {
 
   return (
     <PageContent>
-      <KeyResultTable />
+      <KeyResultList />
     </PageContent>
   )
 }

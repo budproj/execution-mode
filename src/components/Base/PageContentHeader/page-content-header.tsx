@@ -1,4 +1,4 @@
-import Box from '@material-ui/core/Box'
+import { Box, Flex, Grid, GridItem } from '@chakra-ui/react'
 import React, { ComponentType, ReactElement } from 'react'
 
 import Breadcrumb from 'components/Base/Breadcrumb'
@@ -12,14 +12,19 @@ const PageContentHeader = ({ RightWing }: PageContentHeaderProperties): ReactEle
   <Box>
     <Breadcrumb />
 
-    <Box display="grid" gridTemplateColumns="1fr 2fr" alignItems="flex-end" py={1}>
-      <PageTitle />
+    <Grid templateColumns="1fr 2fr" alignItems="flex-end" py={1}>
+      <GridItem>
+        <PageTitle />
+      </GridItem>
+
       {RightWing && (
-        <Box display="flex" justifyContent="flex-end">
-          <RightWing />
-        </Box>
+        <GridItem>
+          <Flex justifyContent="flex-end">
+            <RightWing />
+          </Flex>
+        </GridItem>
       )}
-    </Box>
+    </Grid>
   </Box>
 )
 
