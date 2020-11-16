@@ -38,12 +38,14 @@ const availableColors = [
 ]
 
 export const selectKeyResultIconColorBasedOnTitle = selectorFamily<
-  string,
+  string | undefined,
   SelectKeyResultIconColorBasedOnTitleParameter
 >({
   key: `${KEY}::BASED_ON_TITLE`,
   get: (title) => (): KeyResultIconColor => {
-    const titleParts = title.split('')
+    if (!title) return availableColors[0]
+
+    const titleParts = title.split('') ?? []
     const titleCodeParts = titleParts.map((char) => char.charCodeAt(0))
     const titleCode =
       titleCodeParts.reduce((previous, next) => previous + next, 0) % availableColors.length

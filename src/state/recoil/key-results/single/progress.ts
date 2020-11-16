@@ -9,10 +9,10 @@ export const KEY = `${PREFIX}::PROGRESS`
 
 export const selectRemoteKeyResultProgressBasedOnID = selectorFamily<
   KeyResult['progress'] | undefined,
-  KeyResult['id']
+  KeyResult['id'] | undefined
 >({
   key: `${KEY}::BASED_ON_ID`,
-  get: (id) => ({ get }) => get(remoteKeyResults)?.[id].progress,
+  get: (id) => ({ get }) => (id ? get(remoteKeyResults)?.[id].progress : undefined),
 })
 
 export const keyResultProgress = atomFamily<KeyResult['progress'] | undefined, KeyResult['id']>({

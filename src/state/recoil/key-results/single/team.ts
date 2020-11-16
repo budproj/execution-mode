@@ -9,10 +9,10 @@ export const KEY = `${PREFIX}::TEAM`
 
 export const selectRemoteKeyResultTeamBasedOnID = selectorFamily<
   KeyResult['team'] | undefined,
-  KeyResult['id']
+  KeyResult['id'] | undefined
 >({
   key: `${KEY}::BASED_ON_ID`,
-  get: (id) => ({ get }) => get(remoteKeyResults)?.[id].team,
+  get: (id) => ({ get }) => (id ? get(remoteKeyResults)?.[id].team : undefined),
 })
 
 export const keyResultTeam = atomFamily<KeyResult['team'] | undefined, KeyResult['id']>({

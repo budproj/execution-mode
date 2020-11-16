@@ -1,4 +1,4 @@
-import { Flex, Box, Text } from '@chakra-ui/react'
+import { Flex, Text, Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -11,7 +11,7 @@ import { keyResultConfidence } from 'state/recoil/key-results/single/confidence'
 import messages from './messages'
 
 export interface StatusProperties {
-  id: KeyResult['id']
+  id?: KeyResult['id']
 }
 
 export interface Tag {
@@ -34,25 +34,37 @@ const Status = ({ id }: StatusProperties): ReactElement => {
 
   const tag = selectStatusTagBasedInConfidence(confidence?.value ?? 0)
 
-  return confidence ? (
+  const isConfidenceLoaded = Boolean(confidence)
+
+  return (
     <BaseGridItem>
       <Flex gridGap={4}>
-        <CircleIcon fill={tag.color} mt="6px" desc={intl.formatMessage(tag.desc)} />
+        <SkeletonCircle size="16px" isLoaded={isConfidenceLoaded}>
+          <CircleIcon fill={tag.color} mt="6px" desc={intl.formatMessage(tag.desc)} />
+        </SkeletonCircle>
 
-        <Box display="flex" flexDirection="column" alignItems="flex-start">
-          <Text>{intl.formatMessage(tag.message)}</Text>
-          <Text color="gray.300" fontSize="14px">
-            {intl.formatMessage(messages.updatedAt)} -{' '}
-            {intl.formatDate(confidence.createdAt, {
-              day: 'numeric',
-              month: 'short',
-            })}
-          </Text>
-        </Box>
+        <Flex flexDirection="column" alignItems="flex-start" width="100%">
+          <Skeleton isLoaded={isConfidenceLoaded}>
+            <Text>{intl.formatMessage(tag.message)}</Text>
+          </Skeleton>
+
+          <SkeletonText
+            noOfLines={2}
+            minW="100%"
+            mt={isConfidenceLoaded ? 'inherit' : '4px'}
+            isLoaded={isConfidenceLoaded}
+          >
+            <Text color="gray.300" fontSize="14px">
+              {intl.formatMessage(messages.updatedAt)} -{' '}
+              {intl.formatDate(confidence?.createdAt, {
+                day: 'numeric',
+                month: 'short',
+              })}
+            </Text>
+          </SkeletonText>
+        </Flex>
       </Flex>
     </BaseGridItem>
-  ) : (
-    <>Loading</>
   )
 }
 

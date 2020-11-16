@@ -14,6 +14,7 @@ import { userID as userIDAtom } from 'state/recoil/users/current/id'
 import { Title, Okr, Status, Progress, Cycle, Owner } from './Items'
 import DraggableGrid from './draggable-grid'
 import DroppableBox from './droppable-box'
+import Skeleton from './skeleton'
 
 const component = 'KeyResultListBody'
 
@@ -23,7 +24,7 @@ const KeyResultListBody = (): ReactElement => {
   const [userCustomSorting, setUserCustomSorting] = useRecoilStateLoadable(userCustomSortingAtom)
   const reorderCustomSorting = buildCustomSorter(userID, userCustomSorting, setUserCustomSorting)
 
-  const wasRemoteDataFetched = hasFetchedAllValues(remoteKeyResults, userCustomSorting)
+  const wasRemoteDataFetched = hasFetchedAllValues(userCustomSorting)
 
   logger.debug('Rerendered Key Results table body. Take a look at our Recoil hooks data:', {
     component,
@@ -63,7 +64,7 @@ const KeyResultListBody = (): ReactElement => {
       ))}
     </DroppableBox>
   ) : (
-    <>Loading</>
+    <Skeleton />
   )
 }
 

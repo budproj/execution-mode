@@ -1,4 +1,4 @@
-import { Flex, Box, Text } from '@chakra-ui/react'
+import { Flex, Box, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -12,7 +12,7 @@ import { keyResultConfidence } from 'state/recoil/key-results/single/confidence'
 import { keyResultProgress } from 'state/recoil/key-results/single/progress'
 
 export interface ProgressProperties {
-  id: KeyResult['id']
+  id?: KeyResult['id']
 }
 
 const Progress = ({ id }: ProgressProperties): ReactElement => {
@@ -30,26 +30,35 @@ const Progress = ({ id }: ProgressProperties): ReactElement => {
   }
 
   const handleSliderUpdateEnd = async (newValue: number | number[]): Promise<void> => {
+    if (!id) return
+
     const newKeyResultPartial = { progress: newValue as number }
     await updateRemoteKeyResult(id, newKeyResultPartial)
   }
 
-  return progress ? (
+  const isProgressLoaded = Boolean(progress === 0 || progress)
+
+  return (
     <BaseGridItem>
-      <Flex alignItems="center" gridGap={5}>
+      <Flex alignItems="center" justifyContent="center" gridGap={5}>
         <Box w="70%">
-          <Slider
-            value={progress}
-            trackColor={color}
-            onChange={handleSliderUpdate}
-            onChangeEnd={handleSliderUpdateEnd}
-          />
+          <Skeleton isLoaded={isProgressLoaded}>
+            <Slider
+              value={progress}
+              trackColor={color}
+              onChange={handleSliderUpdate}
+              onChangeEnd={handleSliderUpdateEnd}
+            />
+          </Skeleton>
         </Box>
-        <Text color="gray.300">{intl.formatNumber(progress / 100, { style: 'percent' })}</Text>
+
+        <SkeletonText noOfLines={1} minW="10%" isLoaded={isProgressLoaded}>
+          <Text color="gray.300">
+            {intl.formatNumber((progress ?? 0) / 100, { style: 'percent' })}
+          </Text>
+        </SkeletonText>
       </Flex>
     </BaseGridItem>
-  ) : (
-    <>Loading</>
   )
 }
 

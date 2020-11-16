@@ -9,10 +9,10 @@ export const KEY = `${PREFIX}::CYCLE`
 
 export const selectRemoteKeyResultCycleBasedOnID = selectorFamily<
   KeyResult['cycle'] | undefined,
-  KeyResult['id']
+  KeyResult['id'] | undefined
 >({
   key: `${KEY}::BASED_ON_ID`,
-  get: (id) => ({ get }) => get(remoteKeyResults)?.[id].cycle,
+  get: (id) => ({ get }) => (id ? get(remoteKeyResults)?.[id].cycle : undefined),
 })
 
 export const keyResultCycle = atomFamily<KeyResult['cycle'] | undefined, KeyResult['id']>({

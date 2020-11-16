@@ -39,11 +39,13 @@ const availableDrawings = [
 ] as const
 
 export const selectKeyResultIconDrawingBasedOnTitle = selectorFamily<
-  string,
+  string | undefined,
   SelectKeyResultIconDrawingBasedOnTitleParameter
 >({
   key: `${KEY}::BASED_ON_TITLE`,
   get: (title) => (): KeyResultIconDrawing => {
+    if (!title) return availableDrawings[0]
+
     const titleParts = title.split('')
     const titleCodeParts = titleParts.map((char) => char.charCodeAt(0))
     const titleCode =

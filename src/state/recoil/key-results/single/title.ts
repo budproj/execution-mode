@@ -9,10 +9,10 @@ export const KEY = `${PREFIX}::TITLE`
 
 export const selectRemoteKeyResultTitleBasedOnID = selectorFamily<
   KeyResult['title'] | undefined,
-  KeyResult['id']
+  KeyResult['id'] | undefined
 >({
   key: `${KEY}::BASED_ON_ID`,
-  get: (id) => ({ get }) => get(remoteKeyResults)?.[id].title,
+  get: (id) => ({ get }) => (id ? get(remoteKeyResults)?.[id].title : undefined),
 })
 
 export const keyResultTitle = atomFamily<KeyResult['title'] | undefined, KeyResult['id']>({

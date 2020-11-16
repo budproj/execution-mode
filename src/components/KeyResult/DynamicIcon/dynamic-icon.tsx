@@ -7,7 +7,7 @@ import { KeyResult } from 'components/KeyResult/types'
 import { drawing as drawingState, color as colorState } from 'state/recoil/key-results/icon'
 
 export interface DynamicIconProperties {
-  title: KeyResult['title']
+  title: KeyResult['title'] | undefined
 }
 
 const DynamicIcon = ({ title }: DynamicIconProperties): ReactElement => {

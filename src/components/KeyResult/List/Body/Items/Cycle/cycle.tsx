@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react'
+import { Skeleton, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { FormatDateOptions, useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -8,7 +8,7 @@ import { KeyResult } from 'components/KeyResult/types'
 import { keyResultCycle } from 'state/recoil/key-results/single/cycle'
 
 export interface CycleProperties {
-  id: KeyResult['id']
+  id?: KeyResult['id']
 }
 
 const Cycle = ({ id }: CycleProperties): ReactElement => {
@@ -19,14 +19,16 @@ const Cycle = ({ id }: CycleProperties): ReactElement => {
     month: 'short',
   }
 
-  return cycle ? (
+  const isCycleLoaded = Boolean(cycle)
+
+  return (
     <BaseGridItem>
-      <Text color="gray.300">
-        {intl.formatDate(cycle.start, dateOptions)} - {intl.formatDate(cycle.end, dateOptions)}
-      </Text>
+      <Skeleton isLoaded={isCycleLoaded}>
+        <Text color="gray.300">
+          {intl.formatDate(cycle?.start, dateOptions)} - {intl.formatDate(cycle?.end, dateOptions)}
+        </Text>
+      </Skeleton>
     </BaseGridItem>
-  ) : (
-    <>Loading</>
   )
 }
 

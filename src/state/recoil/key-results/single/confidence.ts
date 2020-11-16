@@ -9,10 +9,10 @@ export const KEY = `${PREFIX}::CONFIDENCE`
 
 export const selectRemoteKeyResultConfidenceBasedOnID = selectorFamily<
   KeyResult['confidence'] | undefined,
-  KeyResult['id']
+  KeyResult['id'] | undefined
 >({
   key: `${KEY}::BASED_ON_ID`,
-  get: (id) => ({ get }) => get(remoteKeyResults)?.[id].confidence,
+  get: (id) => ({ get }) => (id ? get(remoteKeyResults)?.[id].confidence : undefined),
 })
 
 export const keyResultConfidence = atomFamily<KeyResult['confidence'] | undefined, KeyResult['id']>(

@@ -9,10 +9,10 @@ export const KEY = `${PREFIX}::OBJECTIVE`
 
 export const selectRemoteKeyResultObjectiveBasedOnID = selectorFamily<
   KeyResult['objective'] | undefined,
-  KeyResult['id']
+  KeyResult['id'] | undefined
 >({
   key: `${KEY}::BASED_ON_ID`,
-  get: (id) => ({ get }) => get(remoteKeyResults)?.[id].objective,
+  get: (id) => ({ get }) => (id ? get(remoteKeyResults)?.[id].objective : undefined),
 })
 
 export const keyResultObjective = atomFamily<KeyResult['objective'] | undefined, KeyResult['id']>({

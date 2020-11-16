@@ -5,36 +5,29 @@ import {
   SliderThumb,
   SliderTrack,
 } from '@chakra-ui/react'
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement } from 'react'
 
 export interface SliderProperties extends SliderProps {
   trackColor?: string
 }
 
-const Slider = ({ trackColor, ...rest }: SliderProperties): ReactElement => {
-  const [isHovering, setIsHovering] = useState(false)
+const Slider = ({ trackColor, ...rest }: SliderProperties): ReactElement => (
+  <ChakraSlider role="group" {...rest}>
+    <SliderTrack h="8px" bg="gray.100" borderRadius="full">
+      <SliderFilledTrack bg={trackColor} borderRadius="full" />
+    </SliderTrack>
 
-  const handleEnter = () => setIsHovering(true)
-  const handleLeave = () => setIsHovering(false)
-
-  return (
-    <ChakraSlider onMouseEnter={handleEnter} onMouseLeave={handleLeave} {...rest}>
-      <SliderTrack h="8px" bg="gray.200" borderRadius="full">
-        <SliderFilledTrack bg={trackColor} borderRadius="full" />
-      </SliderTrack>
-
-      <SliderThumb
-        bg={trackColor}
-        borderColor="white"
-        borderWidth={2}
-        w="22px"
-        h="22px"
-        transform={isHovering ? 'scale(1)' : 'scale(0)'}
-        mt="-10px"
-        ml="-10px"
-      />
-    </ChakraSlider>
-  )
-}
+    <SliderThumb
+      bg={trackColor}
+      borderColor="white"
+      borderWidth={2}
+      w="22px"
+      h="22px"
+      transition="0.2s opacity ease-in-out"
+      opacity={0}
+      _groupHover={{ opacity: 1 }}
+    />
+  </ChakraSlider>
+)
 
 export default Slider
