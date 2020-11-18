@@ -4,10 +4,10 @@ import App, { AppContext, AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
+import { IntlProvider } from 'react-intl'
 
 import Auth0Gatekeeper from 'components/Base/Auth0Gatekeeper'
 import Page from 'components/Base/Page'
-import RecoilIntlProvider from 'components/Base/RecoilIntlProvider'
 import getConfig from 'config'
 import { makeServer } from 'lib/mirage'
 import theme from 'themes/preset-base'
@@ -48,7 +48,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
       onRedirectCallback={onAuth0RedirectCallback}
     >
       <RecoilRoot>
-        <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
+        <IntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
           <ChakraProvider theme={theme}>
             <Auth0Gatekeeper>
               <Page>
@@ -56,7 +56,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
               </Page>
             </Auth0Gatekeeper>
           </ChakraProvider>
-        </RecoilIntlProvider>
+        </IntlProvider>
       </RecoilRoot>
     </Auth0Provider>
   )

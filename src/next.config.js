@@ -1,5 +1,4 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const omit = require('lodash/omit')
 const path = require('path')
 
 const {
@@ -15,9 +14,6 @@ const {
   AUTH0_SCOPE,
   AUTH0_DOMAIN,
   MIRAGE_ENABLED,
-  MIRAGE_AUTH0_CLIENT_ID,
-  MIRAGE_AUTH0_SECRET,
-  MIRAGE_AUTH0_AUDIENCE,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -36,19 +32,6 @@ const publicRuntimeConfig = {
     domain: AUTH0_DOMAIN,
   },
 
-  intlRoutes: [
-    {
-      destination: '/key-results',
-      source: '/resultados-chave',
-      locale: 'pt-BR',
-    },
-    {
-      destination: '/key-results',
-      source: '/key-results',
-      locale: 'en-US',
-    },
-  ],
-
   api: {
     acl: API_ACL_PATH,
   },
@@ -56,26 +39,12 @@ const publicRuntimeConfig = {
 
 const serverRuntimeConfig = {
   host: HOST,
-  supportedLocales:
-    publicRuntimeConfig.environment === 'production'
-      ? SUPPORTED_LOCALES.split(',')
-      : [LOCALE_OVERRIDE || publicRuntimeConfig.defaultLocale],
+  supportedLocales: SUPPORTED_LOCALES.split(','),
 }
 
 const i18n = {
   locales: serverRuntimeConfig.supportedLocales,
   defaultLocale: publicRuntimeConfig.defaultLocale,
-
-  domains: [
-    {
-      domain: 'getbud.co',
-      defaultLocale: 'pt-BR',
-    },
-    {
-      domain: 'en.getbud.co',
-      defaultLocale: 'en-US',
-    },
-  ],
 }
 
 module.exports = {
@@ -84,7 +53,13 @@ module.exports = {
   i18n,
 
   async rewrites() {
-    return publicRuntimeConfig.intlRoutes.map((route) => omit(route, ['locale']))
+    return [
+      {
+        source: '/pt-BR/resultados-chave',
+        destination: '/pt-BR/key-results',
+        locale: false,
+      },
+    ]
   },
 
   webpack: (config, { isServer }) => {
