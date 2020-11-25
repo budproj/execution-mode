@@ -1,5 +1,4 @@
-import { useAuth0 } from '@auth0/auth0-react'
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { useRecoilStateLoadable, useRecoilValueLoadable } from 'recoil'
 
@@ -20,21 +19,6 @@ import Skeleton from './skeleton'
 const component = 'KeyResultListBody'
 
 const KeyResultListBody = (): ReactElement => {
-  const { getAccessTokenSilently } = useAuth0()
-  const options = {
-    audience: 'https://api.getbud.co/business',
-    scope: 'read:key-results',
-  }
-
-  useEffect(() => {
-    const test = async () => {
-      const token = await getAccessTokenSilently(options)
-      console.log('token', token)
-    }
-
-    test()
-  }, [getAccessTokenSilently])
-
   const userID = useRecoilValueLoadable(userIDAtom)
   const remoteKeyResults = useRecoilValueLoadable(remoteKeyResultsAtom)
   const [userCustomSorting, setUserCustomSorting] = useRecoilStateLoadable(userCustomSortingAtom)

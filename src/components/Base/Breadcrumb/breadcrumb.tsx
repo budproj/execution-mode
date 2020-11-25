@@ -2,10 +2,10 @@ import { Breadcrumb as ChakraBreadcrumb, BreadcrumbItem } from '@chakra-ui/react
 import { kebabCase } from 'lodash'
 import remove from 'lodash/remove'
 import startCase from 'lodash/startCase'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
-import Link from 'next/link'
 
 import ArrowRightIcon from 'components/Icons/ArrowRight'
 

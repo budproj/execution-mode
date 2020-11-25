@@ -5,16 +5,14 @@ import logger from 'lib/logger'
 
 import PageLoading from '../PageLoading'
 
-const component = 'Auth0Gatekeeper'
+const component = 'AuthzGatekeeper'
 
-export interface Auth0GatekeeperProperties {
+export interface AuthzGatekeeperProperties {
   children: ReactElement
 }
 
-const Auth0Gatekeeper = ({ children }: Auth0GatekeeperProperties): ReactElement => {
-  const { isLoading, isAuthenticated, loginWithRedirect, user } = useAuth0()
-
-  console.log(user)
+const AuthzGatekeeper = ({ children }: AuthzGatekeeperProperties): ReactElement => {
+  const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0()
 
   useEffect((): void => {
     if (!isLoading && !isAuthenticated)
@@ -26,4 +24,4 @@ const Auth0Gatekeeper = ({ children }: Auth0GatekeeperProperties): ReactElement 
   return isLoading || !isAuthenticated ? <PageLoading /> : children
 }
 
-export default Auth0Gatekeeper
+export default AuthzGatekeeper

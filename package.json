@@ -14,7 +14,7 @@
     "clean": "rimraf -rf dist",
     "copy": "cp README.md LICENSE package.json dist",
     "lint": "eslint . --ext ts,tsx",
-    "lint:fix": "yarn lint --fix",
+    "lint:fix": "npm run lint --fix",
     "intl:generate:id": "echo '\u001b[36m➤ \u001b[90mGenerating react-intl message ids...\u001b[39m' && yarn lint --config .eslintrc.predev --fix",
     "intl:refresh": "run-s intl:generate:id intl:extract",
     "intl:extract": "formatjs extract './src/**/*.ts(x)?' --out-file lang/pt-BR.json --id-interpolation-pattern '[sha512:contenthash:base64:6]'",
@@ -72,6 +72,7 @@
     "ts-node": "^9.0.0"
   },
   "dependencies": {
+    "@apollo/client": "^3.2.9",
     "@auth0/auth0-react": "^1.2.0",
     "@chakra-ui/react": "^1.0.0",
     "@emotion/react": "^11.1.1",
@@ -81,6 +82,7 @@
     "chalk": "^4.1.0",
     "crypto": "^1.0.1",
     "date-fns": "^2.16.1",
+    "deepmerge": "^4.2.2",
     "framer-motion": "^2.9.4",
     "glob": "^7.1.6",
     "koa": "^2.13.0",

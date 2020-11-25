@@ -1,7 +1,8 @@
 import { Button } from '@chakra-ui/react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
+
+import IntlLink from 'components/Base/IntlLink'
 
 export interface MenuItemProperties {
   label: string
@@ -13,11 +14,11 @@ const MenuItem = (properties: MenuItemProperties): ReactElement => {
   const isHrefCurrentRoute = router.pathname === properties.href
 
   return (
-    <Link href={properties.href}>
+    <IntlLink href={properties.href}>
       <Button variant="text" isActive={isHrefCurrentRoute}>
         {properties.label}
       </Button>
-    </Link>
+    </IntlLink>
   )
 }
 

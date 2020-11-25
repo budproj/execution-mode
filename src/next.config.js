@@ -1,25 +1,28 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
+const _ = require('lodash')
 
 const {
   HOST,
   APP_ENV,
-  DEFAULT_LOCALE,
   LOCALE_OVERRIDE,
+  DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
   NODE_ENV,
   LOG_LEVEL,
   API_ACL_PATH,
+  API_GRAPHQL,
   AUTH0_CLIENT_ID_PUBLIC,
-  AUTH0_SCOPE,
   AUTH0_DOMAIN,
+  AUTH0_SCOPE,
+  AUTH0_AUDIENCE,
   MIRAGE_ENABLED,
 } = process.env
 
 const publicRuntimeConfig = {
   environment: APP_ENV,
   nodeEnv: NODE_ENV,
-  defaultLocale: DEFAULT_LOCALE,
+  defaultLocale: LOCALE_OVERRIDE ?? DEFAULT_LOCALE,
   logLevel: LOG_LEVEL,
 
   mirage: {
@@ -28,23 +31,48 @@ const publicRuntimeConfig = {
 
   auth0: {
     clientID: AUTH0_CLIENT_ID_PUBLIC,
-    scope: AUTH0_SCOPE,
     domain: AUTH0_DOMAIN,
+    scope: AUTH0_SCOPE,
+    audience: AUTH0_AUDIENCE,
   },
 
   api: {
     acl: API_ACL_PATH,
+    graphql: API_GRAPHQL,
   },
+
+  intlRoutes: [
+    {
+      destination: '/key-results',
+      source: '/resultados-chave',
+      locale: 'pt-BR',
+    },
+    {
+      destination: '/key-results',
+      source: '/key-results',
+      locale: 'en-US',
+    },
+  ],
 }
 
 const serverRuntimeConfig = {
   host: HOST,
-  supportedLocales: SUPPORTED_LOCALES.split(','),
+  supportedLocales: [LOCALE_OVERRIDE] ?? SUPPORTED_LOCALES.split(','),
 }
 
 const i18n = {
   locales: serverRuntimeConfig.supportedLocales,
   defaultLocale: publicRuntimeConfig.defaultLocale,
+  domains: [
+    {
+      domain: HOST,
+      defaultLocale: 'pt-BR',
+    },
+    {
+      domain: `en.${HOST}`,
+      defaultLocale: 'en-US',
+    }
+  ]
 }
 
 module.exports = {
@@ -53,13 +81,7 @@ module.exports = {
   i18n,
 
   async rewrites() {
-    return [
-      {
-        source: '/pt-BR/resultados-chave',
-        destination: '/pt-BR/key-results',
-        locale: false,
-      },
-    ]
+    return publicRuntimeConfig.intlRoutes.map((route) => _.omit(route, 'locale'))
   },
 
   webpack: (config, { isServer }) => {

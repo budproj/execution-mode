@@ -33,6 +33,10 @@ export function makeServer(environment: NodeEnvironment): Server {
         if (request.url === '/_next/static/development/_devPagesManifest.json') {
           return true
         } // Workaround while https://github.com/vercel/next.js/issues/16874 is not solved
+
+        if (request.url === 'http://localhost:8080/graphql') {
+          return true
+        }
       })
 
       this.get('/key-results', handlers.keyResults.getAll)
