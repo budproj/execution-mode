@@ -26,7 +26,7 @@ const publicRuntimeConfig = {
   logLevel: LOG_LEVEL,
 
   mirage: {
-    enabled: Boolean(MIRAGE_ENABLED),
+    enabled: MIRAGE_ENABLED === 'true',
   },
 
   auth0: {
@@ -93,6 +93,11 @@ module.exports = {
 
     const libDir = path.join(__dirname, '../lib')
     config.module.rules[0].include.push(libDir)
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: 'graphql-tag/loader',
+    });
 
     return config
   },

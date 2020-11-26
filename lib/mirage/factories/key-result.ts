@@ -1,24 +1,26 @@
 import faker from 'faker'
+import sample from 'lodash/sample'
 import { Factory, ModelInstance, Server } from 'miragejs'
 
-import { KeyResult } from 'components/KeyResult'
+import { KeyResult, KeyResultFormat } from 'components/KeyResult/types'
 import { pickRandom } from 'lib/mirage/selectors'
 
 export default Factory.extend({
-  title: () => faker.random.words(3),
-  progress: () => faker.random.number(100),
+  title: faker.company.catchPhrase,
+  description: faker.lorem.paragraph,
+  initialValue: () => faker.random.number({ min: 0, max: 30 }),
+  goal: () => faker.random.number({ min: 31, max: 100 }),
+  format: () => sample(Object.values(KeyResultFormat)),
+  createdAt: faker.date.past,
+  updatedAt: faker.date.past,
 
   afterCreate(keyResult: ModelInstance<KeyResult>, server: Server) {
     const owner = server.schema.users.first()
-    const cycle = server.schema.cycles.first()
     const objective = pickRandom(server.schema.objectives)
     const team = pickRandom(server.schema.teams)
-    const confidence = pickRandom(server.schema.confidences)
 
     keyResult.update('owner', owner)
-    keyResult.update('cycle', cycle)
     keyResult.update('objective', objective)
     keyResult.update('team', team)
-    keyResult.update('confidence', confidence)
   },
-} as KeyResult)
+})

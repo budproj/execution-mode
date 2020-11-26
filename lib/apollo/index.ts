@@ -28,11 +28,23 @@ const authLink = (authzClient: Auth0ContextInterface) =>
     }
   })
 
+const shouldMockServer =
+  config.publicRuntimeConfig.mirage.enabled && config.publicRuntimeConfig.environment === 'develop'
+
+const linkWithServer = (authzClient: Auth0ContextInterface) =>
+  shouldMockServer
+    ? {
+        uri: config.publicRuntimeConfig.api.graphql,
+      }
+    : {
+        link: authLink(authzClient).concat(httpLink),
+      }
+
 const createApolloClient = (authzClient: Auth0ContextInterface) =>
   new ApolloClient({
     cache: new InMemoryCache(),
     ssrMode: typeof window === 'undefined',
-    link: authLink(authzClient).concat(httpLink),
+    ...linkWithServer(authzClient),
   })
 
 export const initializeApollo = (authzClient: Auth0ContextInterface, initialState) => {
