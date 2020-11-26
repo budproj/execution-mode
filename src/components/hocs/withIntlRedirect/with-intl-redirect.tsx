@@ -8,13 +8,14 @@ import { useRecoilValue } from 'recoil'
 
 import getConfig, { Locale } from 'config'
 import isBrowser from 'specifications/is-browser'
-import { intlRoute as intlRouteAtom } from 'state/recoil/intl/route'
+import { intlRouteAtom } from 'state/recoil/intl'
 
 const withIntlRedirect = (WrappedComponent: NextComponentType, location: string): ComponentType => {
   const WithRedirectWrapper = async (
     properties: Record<string, unknown>,
   ): Promise<ReactElement> => {
     const router = useRouter()
+    console.log('ok')
     const intlRoute = useRecoilValue(intlRouteAtom(location))
 
     if (isBrowser()) {

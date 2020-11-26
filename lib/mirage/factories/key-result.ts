@@ -1,9 +1,8 @@
 import faker from 'faker'
 import sample from 'lodash/sample'
-import { Factory, ModelInstance, Server } from 'miragejs'
+import { Factory } from 'miragejs'
 
-import { KeyResult, KeyResultFormat } from 'components/KeyResult/types'
-import { pickRandom } from 'lib/mirage/selectors'
+import { KeyResultFormat } from 'components/KeyResult/types'
 
 export default Factory.extend({
   title: faker.company.catchPhrase,
@@ -13,14 +12,4 @@ export default Factory.extend({
   format: () => sample(Object.values(KeyResultFormat)),
   createdAt: faker.date.past,
   updatedAt: faker.date.past,
-
-  afterCreate(keyResult: ModelInstance<KeyResult>, server: Server) {
-    const owner = server.schema.users.first()
-    const objective = pickRandom(server.schema.objectives)
-    const team = pickRandom(server.schema.teams)
-
-    keyResult.update('owner', owner)
-    keyResult.update('objective', objective)
-    keyResult.update('team', team)
-  },
 })

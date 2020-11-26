@@ -1,11 +1,12 @@
-import { createGraphQLHandler, Request } from '@miragejs/graphql'
+import { Request } from '@miragejs/graphql'
 import { createServer } from 'miragejs'
 
 import getConfig, { NodeEnvironment } from 'config'
 
 import factories from './factories'
+import graphQLHandler from './graphql-handler'
 import models from './models'
-import schema from './schema.gql'
+import seeds from './seeds'
 
 export function makeServer(environment: NodeEnvironment) {
   const { publicRuntimeConfig } = getConfig()
@@ -14,30 +15,23 @@ export function makeServer(environment: NodeEnvironment) {
     environment,
     models,
     factories,
-
-    seeds(server) {
-      server.create('company')
-      server.createList('team', 3)
-      server.create('user')
-      server.create('cycle')
-      server.createList('objective', 3)
-      server.createList('keyResult', 10)
-      server.createList('confidenceReport', 10)
-      server.createList('progressReport', 10)
-      server.create('keyResultView')
-    },
+    seeds,
 
     routes() {
       this.urlPrefix = publicRuntimeConfig.api.graphql
 
       this.passthrough((request: Request): boolean | void => {
+        if (request.url.startsWith('https://getbud.us.auth0.com')) {
+          return true
+        } // Workaround while https://github.com/miragejs/miragejs/issues/708 is not solved
+
         if (request.url === '/_next/static/development/_devPagesManifest.json') {
           return true
         } // Workaround while https://github.com/vercel/next.js/issues/16874 is not solved
       })
 
-      const graphQLHandler = createGraphQLHandler(schema, this.schema)
-      this.post('/', graphQLHandler)
+      const graphQLRouteHandler = graphQLHandler(this.schema)
+      this.post('/', graphQLRouteHandler)
     },
   })
 }

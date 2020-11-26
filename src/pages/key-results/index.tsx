@@ -1,10 +1,10 @@
 import React, { ReactElement, useEffect } from 'react'
 import { defineMessages, useIntl, MessageDescriptor } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 import PageContent from 'components/Base/PageContent'
-import KeyResultList from 'components/KeyResult/List'
-import { pageTitle as pageTitleAtom } from 'state/recoil/page/title'
+import KeyResultView from 'components/KeyResult/View'
+import { pageTitleAtom } from 'state/recoil/page'
 
 const messages = defineMessages({
   pageTitle: {
@@ -15,7 +15,7 @@ const messages = defineMessages({
 }) as Record<string, MessageDescriptor>
 
 const MyKeyResultsIndex = (): ReactElement => {
-  const setPageTitle = useRecoilState(pageTitleAtom)[1]
+  const setPageTitle = useSetRecoilState(pageTitleAtom)
   const intl = useIntl()
 
   useEffect((): void => {
@@ -24,7 +24,7 @@ const MyKeyResultsIndex = (): ReactElement => {
 
   return (
     <PageContent>
-      <KeyResultList />
+      <KeyResultView />
     </PageContent>
   )
 }

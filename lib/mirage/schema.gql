@@ -29,6 +29,7 @@ type Team {
 
 type User {
   id: Int!
+  name: String!
   authzSub: String!
   role: String
   picture: String
@@ -62,10 +63,8 @@ type KeyResult {
   owner: User!
   objective: Objective!
   team: Team!
-  progressReports: [ProgressReport!]!
-  latestProgressReport: ProgressReport!
-  confidenceReports: [ConfidenceReport!]!
-  latestConfidenceReport: ConfidenceReport!
+  progressReports(limit: Int): [ProgressReport!]!
+  confidenceReports(limit: Int): [ConfidenceReport!]!
 }
 
 type Objective {
@@ -119,9 +118,7 @@ type Query {
   user(id: Int!): User!
 }
 
-"""
-Each binding represents a given view in our applications
-"""
+"""Each binding represents a given view in our applications"""
 enum KeyResultViewBinding {
   MINE
 }

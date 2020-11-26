@@ -1,3 +1,3 @@
-export * as locale from './locale'
+export { default as intlLocaleAtom } from './locale-atom'
 
-export * as route from './route'
+export { default as intlRouteAtom } from './route-atom'

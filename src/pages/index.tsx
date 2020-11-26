@@ -1,23 +1,7 @@
-import { gql, useQuery } from '@apollo/client'
 import React, { ReactElement } from 'react'
 
-const TEST = gql`
-  {
-    keyResult(id: 1) {
-      title
-      owner {
-        role
-      }
-    }
-  }
-`
+import { withIntlRedirect } from 'components/hocs'
 
-const Index = (): ReactElement => {
-  const { error, data, ...rest } = useQuery(TEST)
-  console.log('tt', rest)
-  console.log('tag', data)
+const Index = (): ReactElement => <>Home</>
 
-  return <>Home</>
-}
-
-export default Index
+export default withIntlRedirect(Index, 'key-results')
