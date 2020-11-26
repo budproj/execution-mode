@@ -54,9 +54,7 @@ export interface KeyResult {
   objective: Objective
   team: Team
   progressReports?: ProgressReport[]
-  confidenceReport?: ConfidenceReport[]
-  latestProgressReport?: ProgressReport
-  latestConfidenceReport?: ConfidenceReport
+  confidenceReports?: ConfidenceReport[]
 }
 
 export type KeyResultsHashmap = Record<string, KeyResult>

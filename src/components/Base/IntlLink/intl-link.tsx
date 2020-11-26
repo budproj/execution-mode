@@ -28,7 +28,6 @@ const ReferenceWrapper = forwardRef(
 
 const IntlLink = ({ href, children, ...rest }: IntlLinkProperties): ReactElement => {
   const intlRoute = useRecoilValue(intlRouteAtom(href))
-  console.log(href)
 
   return (
     <Link passHref href={href} as={intlRoute} {...rest}>

@@ -1,12 +1,12 @@
 import { atom } from 'recoil'
 
-import { KeyResult } from 'components/KeyResult/types'
+import { KeyResultView } from 'components/KeyResult/types'
 
 import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::VIEW_ATOM`
 
-export const viewAtom = atom<KeyResult[] | undefined>({
+export const viewAtom = atom<KeyResultView | undefined>({
   key: KEY,
   default: undefined,
 })
