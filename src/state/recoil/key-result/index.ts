@@ -1,1 +1,3 @@
-export { default as keyResultViewAtom } from './view-atom'
+export * as icon from './icon'
+
+export * as view from './view'

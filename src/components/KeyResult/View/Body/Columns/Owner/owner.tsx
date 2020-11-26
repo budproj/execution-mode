@@ -11,16 +11,19 @@ import {
   SkeletonCircle,
 } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'components/KeyResult/types'
+import { keyResultViewSelectors } from 'state/recoil/key-result/view'
 
 export interface OwnerProperties {
-  keyResult?: KeyResult
+  id?: KeyResult['id']
 }
 
-const Owner = ({ keyResult }: OwnerProperties): ReactElement => {
-  const owner = keyResult?.owner
+const Owner = ({ id }: OwnerProperties): ReactElement => {
+  const ownerSelector = keyResultViewSelectors.selectKeyResultOwner(id)
+  const owner = useRecoilValue(ownerSelector)
 
   const isOwnerLoaded = Boolean(owner)
 

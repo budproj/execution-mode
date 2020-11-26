@@ -1,19 +1,22 @@
 import { Flex, Box, Text, Skeleton } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import StackIcon from 'components/Icons/Stack'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'components/KeyResult/types'
+import { keyResultViewSelectors } from 'state/recoil/key-result/view'
 
 import messages from './messages'
 
 export interface OKRProperties {
-  keyResult?: KeyResult
+  id?: KeyResult['id']
 }
 
-const Okr = ({ keyResult }: OKRProperties): ReactElement => {
-  const objective = keyResult?.objective
+const Okr = ({ id }: OKRProperties): ReactElement => {
+  const objectiveSelector = keyResultViewSelectors.selectKeyResultObjective(id)
+  const objective = useRecoilValue(objectiveSelector)
   const intl = useIntl()
 
   const isObjectiveLoaded = Boolean(objective)

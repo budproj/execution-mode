@@ -42,7 +42,7 @@ export interface KeyResultView {
 }
 
 export interface KeyResult {
-  id: string
+  id: number
   title: string
   description?: string
   initialValue: number

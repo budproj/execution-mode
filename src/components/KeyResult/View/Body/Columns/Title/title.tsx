@@ -1,18 +1,23 @@
 import { Flex, Box, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import KeyResultDynamicIcon from 'components/KeyResult/DynamicIcon'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { BORDER_COLOR } from 'components/KeyResult/View/constants'
 import { KeyResult } from 'components/KeyResult/types'
+import { keyResultViewSelectors } from 'state/recoil/key-result/view'
 
 export interface TitleProperties {
-  keyResult?: KeyResult
+  id?: KeyResult['id']
 }
 
-const Title = ({ keyResult }: TitleProperties): ReactElement => {
-  const title = keyResult?.title
-  const team = keyResult?.team?.name
+const Title = ({ id }: TitleProperties): ReactElement => {
+  const titleSelector = keyResultViewSelectors.selectKeyResultTitle(id)
+  const teamSelector = keyResultViewSelectors.selectKeyResultTeam(id)
+
+  const title = useRecoilValue(titleSelector)
+  const team = useRecoilValue(teamSelector)
 
   const isTitleLoaded = Boolean(title)
   const isTeamLoaded = Boolean(team)
@@ -31,7 +36,7 @@ const Title = ({ keyResult }: TitleProperties): ReactElement => {
 
           <SkeletonText noOfLines={1} mt={isTeamLoaded ? 'inherit' : '4px'} isLoaded={isTeamLoaded}>
             <Text color="gray.200" fontSize="14px">
-              {team ?? 'This is a sample team name'}
+              {team?.name ?? 'This is a sample team name'}
             </Text>
           </SkeletonText>
         </Box>

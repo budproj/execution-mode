@@ -5,74 +5,48 @@ import { useRecoilState } from 'recoil'
 
 import { KeyResult, KeyResultViewBinding } from 'components/KeyResult/types'
 import logger from 'lib/logger'
-import { keyResultViewAtom } from 'state/recoil/key-result'
+import { keyResultViewRankAtom } from 'state/recoil/key-result/view'
 
-import { BORDER_COLOR, GRID_TEMPLATE_COLUMN } from '../constants'
-
-import {
-  KeyResultViewBodyColumnCycle,
-  KeyResultViewBodyColumnOkr,
-  KeyResultViewBodyColumnOwner,
-  KeyResultViewBodyColumnProgress,
-  KeyResultViewBodyColumnStatus,
-  KeyResultViewBodyColumnTitle,
-} from './Columns'
-import DraggableGrid from './draggable-grid'
 import DroppableBox from './droppable-box'
+import Line from './line'
 import queries from './queries.gql'
 import Skeleton from './skeleton'
 
 const component = 'KeyResultViewBody'
 
 const KeyResultViewBody = (): ReactElement => {
-  const [keyResultView, setKeyResultView] = useRecoilState(keyResultViewAtom)
+  const [rank, setRank] = useRecoilState(keyResultViewRankAtom)
   const { loading, data } = useQuery(queries.KeyResultViewForBinding, {
     variables: {
       binding: KeyResultViewBinding.MINE,
     },
   })
-  const isLocalStateUpdated = keyResultView === data?.keyResultView
 
   logger.debug('Rerendered Key Result View body. Take a look at our new data:', {
     component,
     data: {
       data,
       loading,
-      keyResultView,
+      rank,
     },
   })
 
   useEffect(() => {
-    if (!loading && data) setKeyResultView(data.keyResultView)
-  }, [loading, data, setKeyResultView])
+    if (!loading && data) setRank(data.keyResultView.rank)
+  }, [loading, data, setRank])
 
   const handleDragEnd = ({ source, destination }: DropResult) =>
-    destination && destination.index !== source.index
-      ? console.log(source, destination)
-      : keyResultView
+    destination && destination.index !== source.index ? console.log(source, destination) : rank
 
-  return !loading && isLocalStateUpdated ? (
+  return !loading && rank.length > 0 ? (
     <DroppableBox onDragEnd={handleDragEnd}>
-      {keyResultView?.keyResults.map((keyResult: KeyResult, index: number) => (
-        <DraggableGrid
-          key={keyResult.id}
-          id={keyResult.id}
+      {rank.map((keyResultID: KeyResult['id'], index: number) => (
+        <Line
+          key={`KEY_RESULT_VIEW_LINE-${keyResultID}`}
+          id={keyResultID}
           index={index}
-          alignItems="center"
-          templateColumns={GRID_TEMPLATE_COLUMN}
-          border={1}
-          borderColor="transparent"
-          borderStyle="solid"
-          borderBottomColor={BORDER_COLOR}
-          _hover={{ background: 'blue.50' }}
-        >
-          <KeyResultViewBodyColumnTitle keyResult={keyResult} />
-          <KeyResultViewBodyColumnOkr keyResult={keyResult} />
-          <KeyResultViewBodyColumnStatus keyResult={keyResult} />
-          <KeyResultViewBodyColumnProgress keyResult={keyResult} />
-          <KeyResultViewBodyColumnCycle keyResult={keyResult} />
-          <KeyResultViewBodyColumnOwner keyResult={keyResult} />
-        </DraggableGrid>
+          remoteKeyResult={data.keyResultView.keyResults[index]}
+        />
       ))}
     </DroppableBox>
   ) : (

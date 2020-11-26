@@ -4,11 +4,11 @@ import { KeyResultView } from 'components/KeyResult/types'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::VIEW_ATOM`
+const KEY = `${PREFIX}::RANK_ATOM`
 
-export const viewAtom = atom<KeyResultView | undefined>({
+const rankAtom = atom<KeyResultView['rank']>({
   key: KEY,
-  default: undefined,
+  default: [],
 })
 
-export default viewAtom
+export default rankAtom

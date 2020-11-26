@@ -1,6 +1,7 @@
 query KeyResultViewForBinding($binding: KeyResultViewBinding!) {
   keyResultView(binding: $binding) {
     id
+    rank
     keyResults {
       id
       title

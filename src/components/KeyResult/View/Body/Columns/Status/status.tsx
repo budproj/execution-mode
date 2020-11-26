@@ -1,15 +1,17 @@
 import { Flex, Text, Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import CircleIcon from 'components/Icons/Circle'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult, ConfidenceReport } from 'components/KeyResult/types'
+import { keyResultViewSelectors } from 'state/recoil/key-result/view'
 
 import messages from './messages'
 
 export interface StatusProperties {
-  keyResult?: KeyResult
+  id?: KeyResult['id']
 }
 
 export interface Tag {
@@ -26,14 +28,16 @@ export const selectStatusTagBasedInConfidence = (confidence: ConfidenceReport['v
   return { message: messages.overdue, desc: messages.descOverdue, color: 'red.500' }
 }
 
-const Status = ({ keyResult }: StatusProperties): ReactElement => {
-  const latestConfidenceReport = keyResult?.confidenceReports?.[0]
+const Status = ({ id }: StatusProperties): ReactElement => {
+  const confidenceReportsSelector = keyResultViewSelectors.selectKeyResultConfidenceReports(id)
+  const confidenceReports = useRecoilValue(confidenceReportsSelector)
+  const latestConfidenceReport = confidenceReports?.[0]
   const currentConfidence = latestConfidenceReport?.valueNew ?? 50
   const intl = useIntl()
 
   const tag = selectStatusTagBasedInConfidence(currentConfidence ?? 0)
 
-  const isKeyResultLoaded = Boolean(keyResult)
+  const isKeyResultLoaded = Boolean(id)
 
   return (
     <BaseGridItem>

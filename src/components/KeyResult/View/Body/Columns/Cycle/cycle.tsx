@@ -1,16 +1,20 @@
 import { Skeleton, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { FormatDateOptions, useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'components/KeyResult'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
+import { keyResultViewSelectors } from 'state/recoil/key-result/view'
 
 export interface CycleProperties {
-  keyResult?: KeyResult
+  id?: KeyResult['id']
 }
 
-const Cycle = ({ keyResult }: CycleProperties): ReactElement => {
-  const cycle = keyResult?.objective?.cycle
+const Cycle = ({ id }: CycleProperties): ReactElement => {
+  const cycleSelector = keyResultViewSelectors.selectKeyResultCycle(id)
+  const cycle = useRecoilValue(cycleSelector)
+
   const intl = useIntl()
   const dateOptions: FormatDateOptions = {
     day: 'numeric',
