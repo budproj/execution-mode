@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import StackIcon from 'components/Icons/Stack'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'components/KeyResult/types'
-import { keyResultViewSelectors } from 'state/recoil/key-result/view'
+import { selectKeyResultObjective } from 'state/recoil/key-result'
 
 import messages from './messages'
 
@@ -15,7 +15,7 @@ export interface OKRProperties {
 }
 
 const Okr = ({ id }: OKRProperties): ReactElement => {
-  const objectiveSelector = keyResultViewSelectors.selectKeyResultObjective(id)
+  const objectiveSelector = selectKeyResultObjective(id)
   const objective = useRecoilValue(objectiveSelector)
   const intl = useIntl()
 

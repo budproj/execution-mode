@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import React, { ReactElement, useEffect } from 'react'
-import { DropResult } from 'react-beautiful-dnd'
+import { DraggableLocation, DropResult } from 'react-beautiful-dnd'
 import { useRecoilState } from 'recoil'
 
 import { KeyResult, KeyResultViewBinding } from 'components/KeyResult/types'
@@ -35,8 +35,19 @@ const KeyResultViewBody = (): ReactElement => {
     if (!loading && data) setRank(data.keyResultView.rank)
   }, [loading, data, setRank])
 
+  const updateRank = (from: DraggableLocation['index'], to: DraggableLocation['index']) => {
+    const newCustomSorting = [...rank]
+    const [movedID] = newCustomSorting.splice(from, 1)
+    newCustomSorting.splice(to, 0, movedID)
+
+    setRank(newCustomSorting)
+    return newCustomSorting
+  }
+
   const handleDragEnd = ({ source, destination }: DropResult) =>
-    destination && destination.index !== source.index ? console.log(source, destination) : rank
+    destination && destination.index !== source.index
+      ? updateRank(source.index, destination.index)
+      : rank
 
   return !loading && rank.length > 0 ? (
     <DroppableBox onDragEnd={handleDragEnd}>

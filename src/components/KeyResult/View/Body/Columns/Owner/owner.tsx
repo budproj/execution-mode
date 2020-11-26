@@ -15,15 +15,17 @@ import { useRecoilValue } from 'recoil'
 
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'components/KeyResult/types'
-import { keyResultViewSelectors } from 'state/recoil/key-result/view'
+import { selectKeyResultOwner } from 'state/recoil/key-result'
 
 export interface OwnerProperties {
   id?: KeyResult['id']
 }
 
 const Owner = ({ id }: OwnerProperties): ReactElement => {
-  const ownerSelector = keyResultViewSelectors.selectKeyResultOwner(id)
+  const ownerSelector = selectKeyResultOwner(id)
   const owner = useRecoilValue(ownerSelector)
+
+  console.log(owner)
 
   const isOwnerLoaded = Boolean(owner)
 
@@ -41,7 +43,9 @@ const Owner = ({ id }: OwnerProperties): ReactElement => {
           >
             <PopoverBody>
               <Flex p={1} flexDirection="column" gridGap={3}>
-                <Image alt={owner?.name} src={owner?.picture} objectFit="cover" minH="192px" />
+                {owner?.picture && (
+                  <Image alt={owner?.name} src={owner?.picture} objectFit="cover" minH="192px" />
+                )}
 
                 <Box>
                   <Text>{owner?.name}</Text>

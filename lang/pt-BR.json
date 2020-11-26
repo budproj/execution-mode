@@ -15,9 +15,21 @@
     "defaultMessage": "Minhas KR",
     "description": "AppBar menu item that links to My Key Results page"
   },
+  "8bQS0s": {
+    "defaultMessage": "Em atraso",
+    "description": "We use this tag to group every key result with confidence lower than 25"
+  },
   "9hslRd": {
     "defaultMessage": "OKR",
     "description": "The text of the table head related to the OKR column"
+  },
+  "A3RqIa": {
+    "defaultMessage": "Um círculo amarelo, indicando que o resultado-chave está em risco",
+    "description": "A brief explanation for screen readers regarding the yellow status circle"
+  },
+  "AobZDF": {
+    "defaultMessage": "Em risco",
+    "description": "We use this tag to group every key result with confidence higher than 25 but lower than 50"
   },
   "BlDXcz": {
     "defaultMessage": "Proprietário",
@@ -35,6 +47,18 @@
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
   },
+  "J98VQ8": {
+    "defaultMessage": "Em dia",
+    "description": "We use this tag to group every key result with confidence higher than 50"
+  },
+  "JuRKh+": {
+    "defaultMessage": "Um círculo vermelho, indicando que o resultado-chave está atrasada",
+    "description": "A brief explanation for screen readers regarding the red status circle"
+  },
+  "LytmoI": {
+    "defaultMessage": "Um círculo verde, indicando que o resultado-chave está em dia",
+    "description": "A brief explanation for screen readers regarding the green status circle"
+  },
   "MfmBCB": {
     "defaultMessage": "Status",
     "description": "The text of the table head related to the Status column"
@@ -50,6 +74,10 @@
   "Sn7K6v": {
     "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
     "description": "The alternative text explaining our notification bell icon"
+  },
+  "UBruoq": {
+    "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
+    "description": "The alternative text explaining our stack icon"
   },
   "XYg5xf": {
     "defaultMessage": "Clique aqui para editar suas configurações",
@@ -82,6 +110,10 @@
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
+  },
+  "yQ7cY8": {
+    "defaultMessage": "Atualização de status",
+    "description": "We show this prefix before the updated time of the status column in our Key Results table"
   },
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",

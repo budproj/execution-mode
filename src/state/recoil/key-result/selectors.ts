@@ -3,8 +3,8 @@ import { selectorFamily, ReadWriteSelectorFamilyOptions } from 'recoil'
 
 import { KeyResult } from 'components/KeyResult'
 
+import keyResultAtomFamily from './atom-family'
 import { PREFIX } from './constants'
-import keyResultAtomFamily from './key-result-atom-family'
 
 const KEY = `${PREFIX}::SELECTORS`
 

@@ -8,15 +8,18 @@ import Slider from 'components/Base/Slider'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { selectStatusTagBasedInConfidence } from 'components/KeyResult/View/Body/Columns/Status'
 import { KeyResult, ProgressReport } from 'components/KeyResult/types'
-import { keyResultViewSelectors } from 'state/recoil/key-result/view'
+import {
+  selectKeyResultConfidenceReports,
+  selectKeyResultProgressReports,
+} from 'state/recoil/key-result'
 
 export interface ProgressProperties {
   id?: KeyResult['id']
 }
 
 const Progress = ({ id }: ProgressProperties): ReactElement => {
-  const progressReportsSelector = keyResultViewSelectors.selectKeyResultProgressReports(id)
-  const confidenceReportsSelector = keyResultViewSelectors.selectKeyResultConfidenceReports(id)
+  const progressReportsSelector = selectKeyResultProgressReports(id)
+  const confidenceReportsSelector = selectKeyResultConfidenceReports(id)
 
   const [progressReports, setProgressReports] = useRecoilState(progressReportsSelector)
   const confidenceReports = useRecoilValue(confidenceReportsSelector)

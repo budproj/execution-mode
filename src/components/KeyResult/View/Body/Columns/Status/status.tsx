@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import CircleIcon from 'components/Icons/Circle'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult, ConfidenceReport } from 'components/KeyResult/types'
-import { keyResultViewSelectors } from 'state/recoil/key-result/view'
+import { selectKeyResultConfidenceReports } from 'state/recoil/key-result'
 
 import messages from './messages'
 
@@ -29,7 +29,7 @@ export const selectStatusTagBasedInConfidence = (confidence: ConfidenceReport['v
 }
 
 const Status = ({ id }: StatusProperties): ReactElement => {
-  const confidenceReportsSelector = keyResultViewSelectors.selectKeyResultConfidenceReports(id)
+  const confidenceReportsSelector = selectKeyResultConfidenceReports(id)
   const confidenceReports = useRecoilValue(confidenceReportsSelector)
   const latestConfidenceReport = confidenceReports?.[0]
   const currentConfidence = latestConfidenceReport?.valueNew ?? 50

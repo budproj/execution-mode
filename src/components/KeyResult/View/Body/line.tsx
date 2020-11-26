@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil'
 
 import { KeyResult } from 'components/KeyResult/types'
 import logger from 'lib/logger'
-import { keyResultViewKeyResultAtomFamily } from 'state/recoil/key-result/view'
+import { keyResultAtomFamily } from 'state/recoil/key-result'
 
 import { BORDER_COLOR, GRID_TEMPLATE_COLUMN } from '../constants'
 
@@ -26,7 +26,7 @@ export interface LineProperties {
 }
 
 const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
-  const [keyResult, setKeyResult] = useRecoilState(keyResultViewKeyResultAtomFamily(id))
+  const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(id))
 
   useEffect(() => {
     if (!keyResult && remoteKeyResult) setKeyResult(remoteKeyResult)
@@ -49,6 +49,7 @@ const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
       borderColor="transparent"
       borderStyle="solid"
       borderBottomColor={BORDER_COLOR}
+      borderBottomWidth={1}
       _hover={{ background: 'blue.49' }}
     >
       <KeyResultViewBodyColumnTitle id={id} />
