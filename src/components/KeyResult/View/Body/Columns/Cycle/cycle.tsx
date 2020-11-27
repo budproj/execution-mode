@@ -25,7 +25,11 @@ const Cycle = ({ id }: CycleProperties): ReactElement => {
 
   return (
     <BaseGridItem>
-      <Skeleton isLoaded={isCycleLoaded}>
+      <Skeleton
+        isLoaded={isCycleLoaded}
+        fadeDuration={0}
+        /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+      >
         <Text color="gray.300">
           {intl.formatDate(cycle?.dateStart, dateOptions)} -{' '}
           {intl.formatDate(cycle?.dateEnd, dateOptions)}

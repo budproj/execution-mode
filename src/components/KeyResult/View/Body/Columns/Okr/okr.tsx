@@ -24,7 +24,12 @@ const Okr = ({ id }: OKRProperties): ReactElement => {
   return (
     <BaseGridItem>
       <Flex gridGap={4} alignItems="center">
-        <Skeleton borderRadius={10} isLoaded={isObjectiveLoaded}>
+        <Skeleton
+          borderRadius={10}
+          isLoaded={isObjectiveLoaded}
+          fadeDuration={0}
+          /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+        >
           <Box borderRadius={10} p={4} bg="gray.50">
             <StackIcon
               desc={intl.formatMessage(messages.stackIconDesc)}
@@ -36,7 +41,13 @@ const Okr = ({ id }: OKRProperties): ReactElement => {
         </Skeleton>
 
         <Box>
-          <Skeleton minH="20px" minW="150px" isLoaded={isObjectiveLoaded}>
+          <Skeleton
+            minH="20px"
+            minW="150px"
+            isLoaded={isObjectiveLoaded}
+            fadeDuration={0}
+            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+          >
             <Text color="gray.500">{objective?.title}</Text>
           </Skeleton>
         </Box>

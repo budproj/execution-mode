@@ -25,16 +25,31 @@ const Title = ({ id }: TitleProperties): ReactElement => {
   return (
     <BaseGridItem px={0} borderRight={1} borderColor={BORDER_COLOR} borderStyle="solid">
       <Flex gridGap={4} alignItems="center">
-        <Skeleton borderRadius={10} isLoaded={isTitleLoaded}>
+        <Skeleton
+          borderRadius={10}
+          isLoaded={isTitleLoaded}
+          fadeDuration={0}
+          /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+        >
           <KeyResultDynamicIcon title={title} />
         </Skeleton>
 
         <Box>
-          <Skeleton isLoaded={isTitleLoaded}>
+          <Skeleton
+            isLoaded={isTitleLoaded}
+            fadeDuration={0}
+            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+          >
             <Text>{title ?? 'This is a sample KR title'}</Text>
           </Skeleton>
 
-          <SkeletonText noOfLines={1} mt={isTeamLoaded ? 'inherit' : '4px'} isLoaded={isTeamLoaded}>
+          <SkeletonText
+            noOfLines={1}
+            mt={isTeamLoaded ? 'inherit' : '4px'}
+            isLoaded={isTeamLoaded}
+            fadeDuration={0}
+            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+          >
             <Text color="gray.200" fontSize="14px">
               {team?.name ?? 'This is a sample team name'}
             </Text>

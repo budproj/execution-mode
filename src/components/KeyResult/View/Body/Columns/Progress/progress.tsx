@@ -55,7 +55,11 @@ const Progress = ({ id }: ProgressProperties): ReactElement => {
     <BaseGridItem>
       <Flex alignItems="center" justifyContent="center" gridGap={5}>
         <Box w="70%">
-          <Skeleton isLoaded={isKeyResultLoaded}>
+          <Skeleton
+            isLoaded={isKeyResultLoaded}
+            fadeDuration={0}
+            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+          >
             <Slider
               value={currentProgress}
               trackColor={color}
@@ -65,7 +69,13 @@ const Progress = ({ id }: ProgressProperties): ReactElement => {
           </Skeleton>
         </Box>
 
-        <SkeletonText noOfLines={1} minW="10%" isLoaded={isKeyResultLoaded}>
+        <SkeletonText
+          noOfLines={1}
+          minW="10%"
+          isLoaded={isKeyResultLoaded}
+          fadeDuration={0}
+          /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+        >
           <Text color="gray.300">
             {intl.formatNumber((currentProgress ?? 0) / 100, { style: 'percent' })}
           </Text>

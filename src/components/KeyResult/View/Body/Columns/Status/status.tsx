@@ -42,12 +42,21 @@ const Status = ({ id }: StatusProperties): ReactElement => {
   return (
     <BaseGridItem>
       <Flex gridGap={4}>
-        <SkeletonCircle size="16px" isLoaded={isKeyResultLoaded}>
+        <SkeletonCircle
+          size="16px"
+          isLoaded={isKeyResultLoaded}
+          fadeDuration={0}
+          /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+        >
           <CircleIcon fill={tag.color} mt="6px" desc={intl.formatMessage(tag.desc)} />
         </SkeletonCircle>
 
         <Flex flexDirection="column" alignItems="flex-start" width="100%">
-          <Skeleton isLoaded={isKeyResultLoaded}>
+          <Skeleton
+            isLoaded={isKeyResultLoaded}
+            fadeDuration={0}
+            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+          >
             <Text>{intl.formatMessage(tag.message)}</Text>
           </Skeleton>
 
@@ -56,6 +65,8 @@ const Status = ({ id }: StatusProperties): ReactElement => {
             minW="100%"
             mt={isKeyResultLoaded ? 'inherit' : '4px'}
             isLoaded={isKeyResultLoaded}
+            fadeDuration={0}
+            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
             <Text color="gray.300" fontSize="14px">
               {intl.formatMessage(messages.updatedAt)} -{' '}

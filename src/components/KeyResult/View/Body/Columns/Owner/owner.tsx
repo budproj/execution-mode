@@ -31,7 +31,12 @@ const Owner = ({ id }: OwnerProperties): ReactElement => {
 
   return (
     <BaseGridItem pr={0} display="flex" justifyContent="flex-end">
-      <SkeletonCircle size="48px" isLoaded={isOwnerLoaded}>
+      <SkeletonCircle
+        size="48px"
+        isLoaded={isOwnerLoaded}
+        fadeDuration={0}
+        /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+      >
         <Popover placement="top-end">
           <PopoverTrigger>
             <Avatar name={owner?.name} src={owner?.picture} cursor="pointer" />
