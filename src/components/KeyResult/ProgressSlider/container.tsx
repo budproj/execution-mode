@@ -1,20 +1,21 @@
-import remove from 'lodash/remove'
-import React, { ReactElement } from 'react'
+import { remove } from 'lodash'
+import React from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
-import Slider from 'components/Base/Slider'
-import { selectConfidenceTag } from 'components/KeyResult/ConfidenceTag/selectors'
+import { Slider } from 'components/Base'
 import { KeyResult, ProgressReport } from 'components/KeyResult/types'
 import { buildPartialSelector } from 'state/recoil/key-result'
 
-import { selectProgressStep } from './selectors'
+import ProgressSliderComponent from './component'
 
-export interface ProgressSliderProperties {
+export interface ProgressSliderContainerProperties {
   id?: KeyResult['id']
+  isPopoverGuarded?: boolean
 }
 
 const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('initialValue')
 const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
+const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 const progressReportsSelector = buildPartialSelector<KeyResult['progressReports']>(
   'progressReports',
 )
@@ -22,19 +23,14 @@ const confidenceReportsSelector = buildPartialSelector<KeyResult['confidenceRepo
   'confidenceReports',
 )
 
-const ProgressSlider = ({ id }: ProgressSliderProperties): ReactElement => {
+const ProgressSliderContainer = ({ id, isPopoverGuarded }: ProgressSliderContainerProperties) => {
   const [progressReports, setProgressReports] = useRecoilState(progressReportsSelector(id))
   const confidenceReports = useRecoilValue(confidenceReportsSelector(id))
   const initialValue = useRecoilValue(initialValueSelector(id))
   const goal = useRecoilValue(goalSelector(id))
+  const format = useRecoilValue(formatSelector(id))
 
-  const latestProgressReport = progressReports?.[0]
-  const latestConfidenceReport = confidenceReports?.[0]
-  const currentProgress = latestProgressReport?.valueNew ?? 0
-  const currentConfidence = latestConfidenceReport?.valueNew ?? 50
-
-  const { color } = selectConfidenceTag(currentConfidence)
-  const step = selectProgressStep(initialValue, goal)
+  const isLoaded = Boolean(goal)
 
   const handleSliderUpdate = (valueNew?: number): void => {
     if (valueNew) {
@@ -48,26 +44,26 @@ const ProgressSlider = ({ id }: ProgressSliderProperties): ReactElement => {
     }
   }
 
-  const handleSliderUpdateEnd = async (newValue: number | number[]): Promise<number | number[]> => {
-    if (newValue === currentProgress) return currentProgress
-
+  const handleSliderUpdateEnd = (newValue: number | number[]) => {
+    console.log('ok')
     const newKeyResultPartial = { progress: newValue as number, id }
-    console.log('NAH')
-    return newValue
     // Await updateRemoteKeyResult(id, newKeyResultPartial)
   }
 
-  return (
-    <Slider
-      value={currentProgress}
-      trackColor={color}
-      min={initialValue}
-      max={goal}
-      step={step}
-      onChange={handleSliderUpdate}
-      onChangeEnd={handleSliderUpdateEnd}
+  return isLoaded ? (
+    <ProgressSliderComponent
+      isPopoverGuarded={isPopoverGuarded}
+      latestProgressReport={progressReports?.[0]}
+      latestConfidenceReport={confidenceReports?.[0]}
+      initialValue={initialValue as KeyResult['initialValue']}
+      goal={goal as KeyResult['goal']}
+      format={format}
+      handleSliderUpdate={handleSliderUpdate}
+      handleSliderUpdateEnd={handleSliderUpdateEnd}
     />
+  ) : (
+    <Slider isDisabled />
   )
 }
 
-export default ProgressSlider
+export default ProgressSliderContainer

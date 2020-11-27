@@ -43,13 +43,7 @@ const Title = ({ id }: TitleProperties): ReactElement => {
             <Text>{title ?? 'This is a sample KR title'}</Text>
           </Skeleton>
 
-          <SkeletonText
-            noOfLines={1}
-            mt={isTeamLoaded ? 'inherit' : '4px'}
-            isLoaded={isTeamLoaded}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-          >
+          <SkeletonText noOfLines={1} mt={isTeamLoaded ? 'inherit' : '4px'} isLoaded={isTeamLoaded}>
             <Text color="gray.200" fontSize="14px">
               {team?.name ?? 'This is a sample team name'}
             </Text>

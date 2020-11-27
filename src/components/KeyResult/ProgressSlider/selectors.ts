@@ -1,10 +1,15 @@
 import { KeyResult } from 'components/KeyResult/types'
 
-export const selectProgressStep = (
-  initialValue?: KeyResult['initialValue'],
-  goal?: KeyResult['goal'],
-): number => {
-  if (!initialValue || !goal) return 1
+import { KeyResultFormat } from '..'
 
-  return (goal - initialValue) / 100
+export const selectProgressStep = (format?: KeyResult['format']): number => {
+  const defaultStep = 1
+
+  if (!format) return defaultStep
+
+  const formatHashmap: Partial<Record<KeyResultFormat, number>> = {
+    [KeyResultFormat.PERCENTAGE]: 0.01,
+  }
+
+  return formatHashmap[format] ?? defaultStep
 }

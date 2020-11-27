@@ -42,9 +42,7 @@ const Status = ({ id }: StatusProperties): ReactElement => {
           minW="100%"
           mt={isKeyResultLoaded ? 'inherit' : '4px'}
           isLoaded={isKeyResultLoaded}
-          fadeDuration={0}
           pl={8}
-          /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         >
           <Text color="gray.300" fontSize="14px">
             {intl.formatMessage(messages.updatedAt)} -{' '}
