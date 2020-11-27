@@ -4,7 +4,7 @@ import logger from 'lib/logger'
 import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
 
-import { buildKeyResultView } from './builders'
+import { buildKeyResultView, buildProgressReport } from './builders'
 import { pickRandomModel } from './selectors'
 
 function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
@@ -25,6 +25,8 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const progressReports = server.createList('progressReport', 40, {
     user,
     keyResult: () => pickRandomModel(keyResults),
+    valueNew: buildProgressReport,
+    valuePrevious: buildProgressReport,
   })
   const confidenceReports = server.createList('confidenceReport', 40, {
     user,
