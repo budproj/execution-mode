@@ -124,7 +124,23 @@ enum KeyResultViewBinding {
 }
 
 type Mutation {
-  updateRank(rank: [Int!]!, id: Int!): KeyResultView!
-  createKeyResultView(binding: KeyResultViewBinding, title: String, rank: [Int!]!): KeyResultView!
-  createProgressReport(comment: String, keyResultID: Int!, value: Int!): ProgressReport!
+  updateRank(keyResultViewRankInput: KeyResultViewRankInput!, id: ID!): KeyResultView!
+  createKeyResultView(keyResultViewInput: KeyResultViewInput!): KeyResultView!
+  createProgressReport(progressReportInput: ProgressReportInput!): ProgressReport!
+}
+
+input KeyResultViewRankInput {
+  rank: [Int!]!
+}
+
+input KeyResultViewInput {
+  title: String
+  binding: String
+  rank: [Int!]!
+}
+
+input ProgressReportInput {
+  value: Float!
+  comment: String
+  keyResultID: Int!
 }

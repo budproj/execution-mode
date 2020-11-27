@@ -36,18 +36,26 @@ const KeyResultViewBody = (): ReactElement => {
     if (!loading && data) setKeyResultView(data.keyResultView)
   }, [loading, data, setKeyResultView])
 
-  const handleRankUpdate = (from: DraggableLocation['index'], to: DraggableLocation['index']) => {
+  const handleRankUpdate = async (
+    from: DraggableLocation['index'],
+    to: DraggableLocation['index'],
+  ) => {
     const newRank = [...(keyResultView?.rank ?? [])]
     const [movedID] = newRank.splice(from, 1)
     newRank.splice(to, 0, movedID)
 
-    const newKeyResultView = {
-      ...(keyResultView as KeyResultView),
+    const rankInput = {
       rank: newRank,
     }
 
+    const newKeyResultView = {
+      ...(keyResultView as KeyResultView),
+      ...rankInput,
+    }
+
     setKeyResultView(newKeyResultView)
-    updateRank({ variables: { id: keyResultView?.id, rank: newRank } })
+    await updateRank({ variables: { id: keyResultView?.id, rankInput } })
+
     return newKeyResultView
   }
 
