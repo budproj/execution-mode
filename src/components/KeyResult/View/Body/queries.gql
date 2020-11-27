@@ -33,3 +33,9 @@ query KeyResultViewForBinding($binding: KeyResultViewBinding!) {
     }
   }
 }
+
+mutation KeyResultViewUpdateRank($id: Int!, $rank: [Int!]!) {
+  updateRank(id: $id, rank: $rank) {
+    id
+  }
+}

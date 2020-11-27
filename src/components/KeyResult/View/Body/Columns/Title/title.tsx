@@ -22,8 +22,6 @@ const Title = ({ id }: TitleProperties): ReactElement => {
   const isTitleLoaded = Boolean(title)
   const isTeamLoaded = Boolean(team)
 
-  console.log('tag', isTitleLoaded, isTeamLoaded)
-
   return (
     <BaseGridItem px={0} borderRight={1} borderColor={BORDER_COLOR} borderStyle="solid">
       <Flex gridGap={4} alignItems="center">

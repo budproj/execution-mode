@@ -1,1 +1,1 @@
-export { default as keyResultViewRankAtom } from './rank-atom'
+export { default as keyResultViewAtom } from './atom'
