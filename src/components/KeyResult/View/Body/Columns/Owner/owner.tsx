@@ -15,17 +15,16 @@ import { useRecoilValue } from 'recoil'
 
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'components/KeyResult/types'
-import { selectKeyResultOwner } from 'state/recoil/key-result'
+import { buildPartialSelector } from 'state/recoil/key-result'
 
 export interface OwnerProperties {
   id?: KeyResult['id']
 }
 
-const Owner = ({ id }: OwnerProperties): ReactElement => {
-  const ownerSelector = selectKeyResultOwner(id)
-  const owner = useRecoilValue(ownerSelector)
+const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 
-  console.log(owner)
+const Owner = ({ id }: OwnerProperties): ReactElement => {
+  const owner = useRecoilValue(ownerSelector(id))
 
   const isOwnerLoaded = Boolean(owner)
 

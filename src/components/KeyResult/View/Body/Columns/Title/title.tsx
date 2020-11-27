@@ -6,18 +6,18 @@ import KeyResultDynamicIcon from 'components/KeyResult/DynamicIcon'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { BORDER_COLOR } from 'components/KeyResult/View/constants'
 import { KeyResult } from 'components/KeyResult/types'
-import { selectKeyResultTeam, selectKeyResultTitle } from 'state/recoil/key-result'
+import { buildPartialSelector } from 'state/recoil/key-result'
 
 export interface TitleProperties {
   id?: KeyResult['id']
 }
 
-const Title = ({ id }: TitleProperties): ReactElement => {
-  const titleSelector = selectKeyResultTitle(id)
-  const teamSelector = selectKeyResultTeam(id)
+const titleSelector = buildPartialSelector<KeyResult['title']>('title')
+const teamSelector = buildPartialSelector<KeyResult['team']>('team')
 
-  const title = useRecoilValue(titleSelector)
-  const team = useRecoilValue(teamSelector)
+const Title = ({ id }: TitleProperties): ReactElement => {
+  const title = useRecoilValue(titleSelector(id))
+  const team = useRecoilValue(teamSelector(id))
 
   const isTitleLoaded = Boolean(title)
   const isTeamLoaded = Boolean(team)

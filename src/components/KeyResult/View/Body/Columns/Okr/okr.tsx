@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import StackIcon from 'components/Icons/Stack'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'components/KeyResult/types'
-import { selectKeyResultObjective } from 'state/recoil/key-result'
+import { buildPartialSelector } from 'state/recoil/key-result'
 
 import messages from './messages'
 
@@ -14,9 +14,10 @@ export interface OKRProperties {
   id?: KeyResult['id']
 }
 
+const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
+
 const Okr = ({ id }: OKRProperties): ReactElement => {
-  const objectiveSelector = selectKeyResultObjective(id)
-  const objective = useRecoilValue(objectiveSelector)
+  const objective = useRecoilValue(objectiveSelector(id))
   const intl = useIntl()
 
   const isObjectiveLoaded = Boolean(objective)

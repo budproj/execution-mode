@@ -8,25 +8,26 @@ import Slider from 'components/Base/Slider'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { selectStatusTagBasedInConfidence } from 'components/KeyResult/View/Body/Columns/Status'
 import { KeyResult, ProgressReport } from 'components/KeyResult/types'
-import {
-  selectKeyResultConfidenceReports,
-  selectKeyResultProgressReports,
-} from 'state/recoil/key-result'
+import { buildPartialSelector } from 'state/recoil/key-result'
 
 export interface ProgressProperties {
   id?: KeyResult['id']
 }
 
-const Progress = ({ id }: ProgressProperties): ReactElement => {
-  const progressReportsSelector = selectKeyResultProgressReports(id)
-  const confidenceReportsSelector = selectKeyResultConfidenceReports(id)
+const progressReportsSelector = buildPartialSelector<KeyResult['progressReports']>(
+  'progressReports',
+)
+const confidenceReportsSelector = buildPartialSelector<KeyResult['confidenceReports']>(
+  'confidenceReports',
+)
 
-  const [progressReports, setProgressReports] = useRecoilState(progressReportsSelector)
-  const confidenceReports = useRecoilValue(confidenceReportsSelector)
+const Progress = ({ id }: ProgressProperties): ReactElement => {
+  const intl = useIntl()
+  const [progressReports, setProgressReports] = useRecoilState(progressReportsSelector(id))
+  const confidenceReports = useRecoilValue(confidenceReportsSelector(id))
 
   const latestProgressReport = progressReports?.[0]
   const latestConfidenceReport = confidenceReports?.[0]
-  const intl = useIntl()
 
   const currentProgress = latestProgressReport?.valueNew ?? 0
   const currentConfidence = latestConfidenceReport?.valueNew

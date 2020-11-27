@@ -5,15 +5,16 @@ import { useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'components/KeyResult'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
-import { selectKeyResultCycle } from 'state/recoil/key-result'
+import { buildPartialSelector } from 'state/recoil/key-result'
 
 export interface CycleProperties {
   id?: KeyResult['id']
 }
 
+const cycleSelector = buildPartialSelector<KeyResult['objective']['cycle']>('objective.cycle')
+
 const Cycle = ({ id }: CycleProperties): ReactElement => {
-  const cycleSelector = selectKeyResultCycle(id)
-  const cycle = useRecoilValue(cycleSelector)
+  const cycle = useRecoilValue(cycleSelector(id))
 
   const intl = useIntl()
   const dateOptions: FormatDateOptions = {

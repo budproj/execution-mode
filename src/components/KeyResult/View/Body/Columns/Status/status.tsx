@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import CircleIcon from 'components/Icons/Circle'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult, ConfidenceReport } from 'components/KeyResult/types'
-import { selectKeyResultConfidenceReports } from 'state/recoil/key-result'
+import { buildPartialSelector } from 'state/recoil/key-result'
 
 import messages from './messages'
 
@@ -28,12 +28,16 @@ export const selectStatusTagBasedInConfidence = (confidence: ConfidenceReport['v
   return { message: messages.overdue, desc: messages.descOverdue, color: 'red.500' }
 }
 
+const confidenceReportsSelector = buildPartialSelector<KeyResult['confidenceReports']>(
+  'confidenceReports',
+)
+
 const Status = ({ id }: StatusProperties): ReactElement => {
-  const confidenceReportsSelector = selectKeyResultConfidenceReports(id)
-  const confidenceReports = useRecoilValue(confidenceReportsSelector)
+  const intl = useIntl()
+  const confidenceReports = useRecoilValue(confidenceReportsSelector(id))
+
   const latestConfidenceReport = confidenceReports?.[0]
   const currentConfidence = latestConfidenceReport?.valueNew ?? 50
-  const intl = useIntl()
 
   const tag = selectStatusTagBasedInConfidence(currentConfidence ?? 0)
 
