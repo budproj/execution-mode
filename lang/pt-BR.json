@@ -23,6 +23,10 @@
     "defaultMessage": "OKR",
     "description": "The text of the table head related to the OKR column"
   },
+  "A3RqIa": {
+    "defaultMessage": "Um círculo amarelo, indicando que o resultado-chave está em risco",
+    "description": "A brief explanation for screen readers regarding the yellow status circle"
+  },
   "AobZDF": {
     "defaultMessage": "Em risco",
     "description": "We use this tag to group every key result with confidence higher than 25 but lower than 50"
@@ -46,6 +50,14 @@
   "J98VQ8": {
     "defaultMessage": "Em dia",
     "description": "We use this tag to group every key result with confidence higher than 50"
+  },
+  "JuRKh+": {
+    "defaultMessage": "Um círculo vermelho, indicando que o resultado-chave está atrasada",
+    "description": "A brief explanation for screen readers regarding the red status circle"
+  },
+  "LytmoI": {
+    "defaultMessage": "Um círculo verde, indicando que o resultado-chave está em dia",
+    "description": "A brief explanation for screen readers regarding the green status circle"
   },
   "MfmBCB": {
     "defaultMessage": "Status",

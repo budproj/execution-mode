@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react'
 
+import { withIntlRedirect } from 'components/hocs'
+
 const Index = (): ReactElement => <>Home</>
 
-export default Index
+export default withIntlRedirect(Index, 'key-results')

@@ -1,1 +1,1 @@
-export * as title from './title'
+export { default as pageTitleAtom } from './title-atom'

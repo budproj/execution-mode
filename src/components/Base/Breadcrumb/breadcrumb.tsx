@@ -2,11 +2,11 @@ import { Breadcrumb as ChakraBreadcrumb, BreadcrumbItem } from '@chakra-ui/react
 import { kebabCase } from 'lodash'
 import remove from 'lodash/remove'
 import startCase from 'lodash/startCase'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import IntlLink from 'components/Base/IntlLink'
 import ArrowRightIcon from 'components/Icons/ArrowRight'
 
 import messages, { BreadcrumbMessages } from './messages'
@@ -38,11 +38,11 @@ const Breadcrumb = (): ReactElement => {
             isCurrentPage={isCurrentPage(index)}
             fontWeight="500"
           >
-            <IntlLink href={array.slice(1, index + 1).join('/')}>
+            <Link href={array.slice(1, index + 1).join('/')}>
               {messages[step as BreadcrumbMessages]
                 ? intl.formatMessage(messages[step as BreadcrumbMessages])
                 : startCase(step)}
-            </IntlLink>
+            </Link>
           </BreadcrumbItem>
         ),
       )}

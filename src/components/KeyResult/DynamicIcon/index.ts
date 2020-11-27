@@ -1,3 +1,3 @@
-import DynamicIcon from './dynamic-icon'
+import KeyResultDynamicIcon from './dynamic-icon'
 
-export default DynamicIcon
+export default KeyResultDynamicIcon

@@ -2,7 +2,7 @@ import Link, { LinkProps } from 'next/link'
 import React, { ReactElement, forwardRef, RefObject, MouseEvent } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { intlRoute as intlRouteAtom } from 'state/recoil/intl/route'
+import { intlRouteAtom } from 'state/recoil/intl'
 
 export interface IntlLinkProperties extends LinkProps {
   href: string

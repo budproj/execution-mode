@@ -4,26 +4,23 @@ import { useRecoilValue } from 'recoil'
 
 import * as Icons from 'components/Icons'
 import { KeyResult } from 'components/KeyResult/types'
-import { drawing as drawingState, color as colorState } from 'state/recoil/key-results/icon'
+import { keyResultIconColorAtom, keyResultIconDrawingAtom } from 'state/recoil/key-result/icon'
 
-export interface DynamicIconProperties {
+export interface KeyResultDynamicIconProperties {
   title: KeyResult['title'] | undefined
 }
 
-const DynamicIcon = ({ title }: DynamicIconProperties): ReactElement => {
-  const iconDrawingAtom = drawingState.keyResultIconDrawing(title)
-  const iconColorAtom = colorState.keyResultIconColor(title)
+const KeyResultDynamicIcon = ({ title }: KeyResultDynamicIconProperties): ReactElement => {
+  const iconDrawingForTitle = useRecoilValue<string>(keyResultIconDrawingAtom(title))
+  const iconColorForTitle = useRecoilValue<string>(keyResultIconColorAtom(title))
 
-  const iconDrawing = useRecoilValue<string>(iconDrawingAtom)
-  const iconColor = useRecoilValue<string>(iconColorAtom)
-
-  const IconComponent = Icons[iconDrawing]
+  const IconComponent = Icons[iconDrawingForTitle]
 
   return (
-    <Box bg={iconColor} borderRadius={10} p={4} lineHeight={1}>
+    <Box bg={iconColorForTitle} borderRadius={10} p={4} lineHeight={1}>
       <IconComponent fill="white" w={8} h={8} />
     </Box>
   )
 }
 
-export default DynamicIcon
+export default KeyResultDynamicIcon

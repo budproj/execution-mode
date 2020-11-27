@@ -50,12 +50,14 @@ export interface Route {
 
 export interface BudAPIs {
   acl: string
+  graphql: string
 }
 
 export interface Auth0Config {
   clientID: string
-  scope: string
   domain: string
+  scope: string
+  audience: string
 }
 
 export interface MiragePublicConfig {

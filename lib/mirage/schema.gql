@@ -1,0 +1,146 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ProgressReport {
+  id: Int!
+  valuePrevious: Float
+  valueNew: Float!
+  comment: String
+  createdAt: DateTime!
+  keyResult: KeyResult!
+  user: User!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Team {
+  id: Int!
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  keyResults: [KeyResult!]!
+  company: Company!
+  users: [User!]!
+}
+
+type User {
+  id: Int!
+  name: String!
+  authzSub: String!
+  role: String
+  picture: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  keyResults: [KeyResult!]!
+  progressReports: [ProgressReport!]!
+  confidenceReports: [ConfidenceReport!]!
+  teams: [Team!]!
+}
+
+type ConfidenceReport {
+  id: Int!
+  valuePrevious: Float
+  valueNew: Float!
+  comment: String
+  createdAt: DateTime!
+  keyResult: KeyResult!
+  user: User!
+}
+
+type KeyResult {
+  id: Int!
+  title: String!
+  description: String
+  initialValue: Int!
+  goal: Int!
+  format: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  owner: User!
+  objective: Objective!
+  team: Team!
+  progressReports(limit: Int): [ProgressReport!]!
+  confidenceReports(limit: Int): [ConfidenceReport!]!
+}
+
+type Objective {
+  id: Int!
+  title: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  keyResults: [KeyResult!]!
+  cycle: Cycle!
+}
+
+type Cycle {
+  id: Int!
+  dateStart: DateTime!
+  dateEnd: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  company: Company!
+  objectives: [Objective!]!
+}
+
+type Company {
+  id: Int!
+  name: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  teams: [Team!]!
+  cycles: [Cycle!]!
+}
+
+type KeyResultView {
+  id: Int!
+  title: String
+  binding: String
+  rank: [Int!]!
+  keyResults: [KeyResult!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+}
+
+type Query {
+  company(id: Int!): Company!
+  confidenceReport(id: Int!): ConfidenceReport!
+  cycle(id: Int!): Cycle!
+  keyResult(id: Int!): KeyResult!
+  keyResultView(binding: KeyResultViewBinding, id: Int): KeyResultView!
+  objective(id: Int!): Objective!
+  progressReport(id: Int!): ProgressReport!
+  team(id: Int!): Team!
+  user(id: Int!): User!
+}
+
+"""Each binding represents a given view in our applications"""
+enum KeyResultViewBinding {
+  MINE
+}
+
+type Mutation {
+  updateRank(keyResultViewRankInput: KeyResultViewRankInput!, id: ID!): KeyResultView!
+  createKeyResultView(keyResultViewInput: KeyResultViewInput!): KeyResultView!
+  createProgressReport(progressReportInput: ProgressReportInput!): ProgressReport!
+}
+
+input KeyResultViewRankInput {
+  rank: [Int!]!
+}
+
+input KeyResultViewInput {
+  title: String
+  binding: String
+  rank: [Int!]!
+}
+
+input ProgressReportInput {
+  value: Float!
+  comment: String
+  keyResultID: Int!
+}

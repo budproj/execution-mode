@@ -1,7 +1,4 @@
 {
-  "parserOptions": {
-    "project": "./src/tsconfig.json"
-  },
   "extends": [
     "@budproj/eslint-config-base-ts",
     "@budproj/eslint-config-prettier-ts",
@@ -9,10 +6,7 @@
     "@budproj/eslint-config-react"
   ],
   "rules": {
-    "import/no-unresolved": [
-      "error",
-      { "ignore": ["miragejs/db-collection"] }
-    ]
+    "import/no-unresolved": ["error", { "ignore": ["miragejs/db-collection"] }]
   },
   "settings": {
     "import/resolver": {

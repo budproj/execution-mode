@@ -1,10 +1,10 @@
 export { default as AppBar } from './AppBar'
 
-export { default as Auth0Gatekeeper } from './Auth0Gatekeeper'
+export { default as AuthzGatekeeper } from './AuthzGatekeeper'
+
+export { default as AuthzApolloProvider } from './AuthzApolloProvider'
 
 export { default as Breadcrumb } from './Breadcrumb'
-
-export { default as IntlLink } from './IntlLink'
 
 export { default as Logotype } from './Logotype'
 
@@ -15,7 +15,5 @@ export { default as PageContent } from './PageContent'
 export { default as PageContentHeader } from './PageContentHeader'
 
 export { default as PageTitle } from './PageTitle'
-
-export { default as RecoilIntlProvider } from './RecoilIntlProvider'
 
 export { default as Slider } from './Slider'
