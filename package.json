@@ -13,6 +13,7 @@
     "compile:typescript": "tsc",
     "clean": "rimraf -rf dist",
     "copy": "cp README.md LICENSE package.json dist",
+    "format": "prettier --write 'src/**/*.ts'",
     "lint": "eslint . --ext ts,tsx",
     "lint:fix": "npm run lint -- --fix",
     "intl:generate:id": "echo '\u001b[36m➤ \u001b[90mGenerating react-intl message ids...\u001b[39m' && npm run lint -- --config .eslintrc.predev --fix",
@@ -64,7 +65,7 @@
     "eslint": "^7.13.0",
     "faker": "^5.1.0",
     "husky": "^4.3.0",
-    "lint-staged": "^10.5.0",
+    "lint-staged": "^10.5.1",
     "miragejs": "^0.1.41",
     "nodemon": "^2.0.6",
     "npm-run-all": "^4.1.5",
@@ -102,7 +103,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "run-s lint"
+      "pre-commit": "lint-staged"
     }
   }
 }
