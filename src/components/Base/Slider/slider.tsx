@@ -12,7 +12,7 @@ export interface SliderProperties extends SliderProps {
 }
 
 const Slider = ({ trackColor, ...rest }: SliderProperties): ReactElement => (
-  <ChakraSlider role="group" {...rest}>
+  <ChakraSlider role="group" focusThumbOnChange={false} {...rest}>
     <SliderTrack h="8px" bg="gray.100" borderRadius="full">
       <SliderFilledTrack bg={trackColor} borderRadius="full" />
     </SliderTrack>

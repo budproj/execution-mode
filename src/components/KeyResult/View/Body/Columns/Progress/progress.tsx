@@ -44,8 +44,12 @@ const Progress = ({ id }: ProgressProperties): ReactElement => {
     }
   }
 
-  const handleSliderUpdateEnd = async (newValue: number | number[]): Promise<void> => {
+  const handleSliderUpdateEnd = async (newValue: number | number[]): Promise<number | number[]> => {
+    if (newValue === currentProgress) return currentProgress
+
     const newKeyResultPartial = { progress: newValue as number, id }
+    console.log('NAH')
+    return newValue
     // Await updateRemoteKeyResult(id, newKeyResultPartial)
   }
 
