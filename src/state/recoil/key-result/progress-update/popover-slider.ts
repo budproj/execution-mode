@@ -4,11 +4,11 @@ import { KeyResult } from 'components/KeyResult/types'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::POPOVER_ATOM`
+const KEY = `${PREFIX}::POPOVER_SLIDER`
 
-export const popoverAtom = atom<KeyResult['id'] | undefined>({
+export const popoverSlider = atom<KeyResult['id'] | undefined>({
   key: KEY,
   default: undefined,
 })
 
-export default popoverAtom
+export default popoverSlider

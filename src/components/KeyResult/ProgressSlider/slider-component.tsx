@@ -10,25 +10,22 @@ import { selectProgressStep } from './selectors'
 export interface ProgressSliderComponentProperties extends SliderProperties {
   initialValue: KeyResult['initialValue']
   goal: KeyResult['goal']
-  latestProgressReport?: ProgressReport
-  latestConfidenceReport?: ConfidenceReport
+  currentProgress?: ProgressReport['valueNew']
+  currentConfidence?: ConfidenceReport['valueNew']
   format?: KeyResult['format']
   forwardedReference: ForwardedRef<HTMLDivElement>
 }
 
 const ProgressSliderComponent = ({
-  latestProgressReport,
-  latestConfidenceReport,
+  currentProgress,
+  currentConfidence,
   initialValue,
   goal,
   format,
   forwardedReference,
   ...rest
 }: ProgressSliderComponentProperties) => {
-  const currentProgress = latestProgressReport?.valueNew ?? 0
-  const currentConfidence = latestConfidenceReport?.valueNew ?? 50
-
-  const { color } = selectConfidenceTag(currentConfidence)
+  const { color } = selectConfidenceTag(currentConfidence ?? 50)
   const step = selectProgressStep(format)
 
   return (

@@ -9,7 +9,7 @@ import React from 'react'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
 import { KeyResult } from 'components/KeyResult/types'
-import { keyResultProgressUpdatePopoverAtom } from 'state/recoil/key-result/progress-update'
+import { keyResultProgressUpdatePopoverSlider } from 'state/recoil/key-result/progress-update'
 
 import SliderContainer from './slider-container'
 
@@ -18,8 +18,8 @@ export interface ProgressSliderProperties {
 }
 
 const ProgressSlider = ({ id }: ProgressSliderProperties) => {
-  const openedPopover = useRecoilValue(keyResultProgressUpdatePopoverAtom)
-  const resetOpenedPopover = useResetRecoilState(keyResultProgressUpdatePopoverAtom)
+  const openedPopover = useRecoilValue(keyResultProgressUpdatePopoverSlider)
+  const resetOpenedPopover = useResetRecoilState(keyResultProgressUpdatePopoverSlider)
   const isPopoverOpened = openedPopover === id && typeof openedPopover !== 'undefined'
 
   const handleClose = () => resetOpenedPopover()

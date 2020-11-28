@@ -1,11 +1,14 @@
-import { remove } from 'lodash'
 import React, { forwardRef, useCallback } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Slider } from 'components/Base'
-import { KeyResult, ProgressReport } from 'components/KeyResult/types'
+import { KeyResult } from 'components/KeyResult/types'
 import { buildPartialSelector } from 'state/recoil/key-result'
-import { keyResultProgressUpdatePopoverAtom } from 'state/recoil/key-result/progress-update'
+import {
+  keyResultProgressUpdatePopoverSlider,
+  keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
+  keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
+} from 'state/recoil/key-result/progress-update'
 
 import ProgressSliderComponent from './slider-component'
 
@@ -16,39 +19,23 @@ export interface ProgressSliderContainerProperties {
 const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('initialValue')
 const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
-const progressReportsSelector = buildPartialSelector<KeyResult['progressReports']>(
-  'progressReports',
-)
-const confidenceReportsSelector = buildPartialSelector<KeyResult['confidenceReports']>(
-  'confidenceReports',
-)
 
 const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContainerProperties>(
   ({ keyResultID }: ProgressSliderContainerProperties, forwardedReference) => {
-    const [progressReports, setProgressReports] = useRecoilState(
-      progressReportsSelector(keyResultID),
-    )
-    const confkeyResultIDenceReports = useRecoilValue(confidenceReportsSelector(keyResultID))
+    const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
+    const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
     const goal = useRecoilValue(goalSelector(keyResultID))
     const format = useRecoilValue(formatSelector(keyResultID))
-    const setOpenedPopover = useSetRecoilState(keyResultProgressUpdatePopoverAtom)
+    const setOpenedPopover = useSetRecoilState(keyResultProgressUpdatePopoverSlider)
 
     const isLoaded = Boolean(goal)
 
     const handleSlkeyResultIDerUpdate = useCallback(
       (valueNew?: number): void => {
-        if (valueNew) {
-          const previousReport = progressReports?.[0]
-          const newLocalReport = {
-            valueNew,
-            valuePrevious: previousReport?.valueNew,
-          }
-
-          setProgressReports(remove([newLocalReport as ProgressReport, ...(progressReports ?? [])]))
-        }
+        if (valueNew) setCurrentProgress(valueNew)
       },
-      [progressReports, setProgressReports],
+      [setCurrentProgress],
     )
 
     const handleSlkeyResultIDerUpdateEnd = useCallback(
@@ -64,8 +51,8 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
 
     return isLoaded ? (
       <ProgressSliderComponent
-        latestProgressReport={progressReports?.[0]}
-        latestConfidenceReport={confkeyResultIDenceReports?.[0]}
+        currentProgress={currentProgress}
+        currentConfidence={currentConfidence}
         initialValue={initialValue as KeyResult['initialValue']}
         goal={goal as KeyResult['goal']}
         format={format}
