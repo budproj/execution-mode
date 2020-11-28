@@ -17,6 +17,7 @@ const {
   AUTH0_SCOPE,
   AUTH0_AUDIENCE,
   MIRAGE_ENABLED,
+  MIRAGE_FAKER_SEED,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -27,6 +28,7 @@ const publicRuntimeConfig = {
 
   mirage: {
     enabled: MIRAGE_ENABLED === 'true',
+    fakerSeed: parseInt(MIRAGE_FAKER_SEED),
   },
 
   auth0: {

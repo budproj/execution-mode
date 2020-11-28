@@ -6,7 +6,7 @@ import {
   PopoverTrigger,
 } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
 
 import { KeyResult } from 'components/KeyResult/types'
 import { keyResultProgressUpdatePopoverAtom } from 'state/recoil/key-result/progress-update'
@@ -18,10 +18,11 @@ export interface ProgressSliderProperties {
 }
 
 const ProgressSlider = ({ id }: ProgressSliderProperties) => {
-  const [openedPopover, setOpenedPopover] = useRecoilState(keyResultProgressUpdatePopoverAtom)
-  const isPopoverOpened = openedPopover === id
+  const openedPopover = useRecoilValue(keyResultProgressUpdatePopoverAtom)
+  const resetOpenedPopover = useResetRecoilState(keyResultProgressUpdatePopoverAtom)
+  const isPopoverOpened = openedPopover === id && typeof openedPopover !== 'undefined'
 
-  const handleClose = () => setOpenedPopover()
+  const handleClose = () => resetOpenedPopover()
 
   return (
     <Popover isOpen={isPopoverOpened} placement="bottom-start" onClose={handleClose}>
