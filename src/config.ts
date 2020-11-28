@@ -62,6 +62,7 @@ export interface Auth0Config {
 
 export interface MiragePublicConfig {
   enabled: boolean
+  fakerSeed: number
 }
 
 const getConfig = (): BudConfig => getNextConfig()

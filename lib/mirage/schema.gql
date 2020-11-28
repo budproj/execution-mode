@@ -55,8 +55,8 @@ type KeyResult {
   id: Int!
   title: String!
   description: String
-  initialValue: Int!
-  goal: Int!
+  initialValue: Float!
+  goal: Float!
   format: String!
   createdAt: DateTime!
   updatedAt: DateTime!

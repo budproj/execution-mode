@@ -1,7 +1,10 @@
 import getPath from 'lodash/get'
-import { selectorFamily, ReadWriteSelectorFamilyOptions } from 'recoil'
+import { selectorFamily } from 'recoil'
 
+import { Team } from 'components/Company/types'
 import { KeyResult } from 'components/KeyResult'
+import { Objective } from 'components/Objective/types'
+import { User } from 'components/User/types'
 
 import keyResultAtomFamily from './atom-family'
 import { PREFIX } from './constants'
@@ -10,61 +13,29 @@ const KEY = `${PREFIX}::SELECTORS`
 
 type ValueOf<T> = T[keyof T]
 
-const selectKeyResultPart = (
-  part: keyof KeyResult,
-): ReadWriteSelectorFamilyOptions<ValueOf<KeyResult> | undefined, KeyResult['id'] | undefined> => ({
-  key: `${KEY}::KEY_RESULT_${part.toUpperCase()}`,
-  get: (id) => ({ get }) => {
-    if (!id) return
+export const buildPartialSelector = <
+  T extends ValueOf<KeyResult> | ValueOf<Objective> | ValueOf<User> | ValueOf<Team>
+>(
+  part: string,
+) =>
+  selectorFamily<T | undefined, KeyResult['id'] | undefined>({
+    key: `${KEY}::KEY_RESULT_${part.toUpperCase()}`,
+    get: (id) => ({ get }) => {
+      if (!id) return
 
-    const keyResult = get(keyResultAtomFamily(id))
-    const keyResultPart = getPath(keyResult, part)
+      const keyResult = get(keyResultAtomFamily(id))
+      const keyResultPart = getPath(keyResult, part) as T
 
-    return keyResultPart
-  },
-  set: (id) => ({ get, set }, newValue) => {
-    const originalKeyResult = get(keyResultAtomFamily(id as KeyResult['id'])) as KeyResult
-    const newPartialValue = { [part]: newValue }
-    const newKeyResult: KeyResult = {
-      ...originalKeyResult,
-      ...newPartialValue,
-    }
+      return keyResultPart
+    },
+    set: (id) => ({ get, set }, newValue) => {
+      const originalKeyResult = get(keyResultAtomFamily(id as KeyResult['id'])) as KeyResult
+      const newPartialValue = { [part]: newValue }
+      const newKeyResult: KeyResult = {
+        ...originalKeyResult,
+        ...newPartialValue,
+      }
 
-    set(keyResultAtomFamily(id as KeyResult['id']), newKeyResult)
-  },
-})
-
-export const selectKeyResultTitle = selectorFamily<
-  KeyResult['title'] | undefined,
-  KeyResult['id'] | undefined
->(selectKeyResultPart('title'))
-
-export const selectKeyResultTeam = selectorFamily<
-  KeyResult['team'] | undefined,
-  KeyResult['id'] | undefined
->(selectKeyResultPart('team'))
-
-export const selectKeyResultObjective = selectorFamily<
-  KeyResult['objective'] | undefined,
-  KeyResult['id'] | undefined
->(selectKeyResultPart('objective'))
-
-export const selectKeyResultConfidenceReports = selectorFamily<
-  KeyResult['confidenceReports'] | undefined,
-  KeyResult['id'] | undefined
->(selectKeyResultPart('confidenceReports'))
-
-export const selectKeyResultProgressReports = selectorFamily<
-  KeyResult['progressReports'] | undefined,
-  KeyResult['id'] | undefined
->(selectKeyResultPart('progressReports'))
-
-export const selectKeyResultCycle = selectorFamily<
-  KeyResult['objective']['cycle'] | undefined,
-  KeyResult['id'] | undefined
->(selectKeyResultPart('objective.cycle'))
-
-export const selectKeyResultOwner = selectorFamily<
-  KeyResult['owner'] | undefined,
-  KeyResult['id'] | undefined
->(selectKeyResultPart('owner'))
+      set(keyResultAtomFamily(id as KeyResult['id']), newKeyResult)
+    },
+  })

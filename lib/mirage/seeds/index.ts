@@ -1,13 +1,19 @@
+import faker from 'faker'
 import { Registry, Server } from 'miragejs'
 
+import getConfig from 'config'
 import logger from 'lib/logger'
 import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
 
-import { buildKeyResultView } from './builders'
+import { buildKeyResultView, buildProgressReport } from './builders'
 import { pickRandomModel } from './selectors'
 
+const { publicRuntimeConfig } = getConfig()
+
 function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
+  faker.seed(publicRuntimeConfig.mirage.fakerSeed)
+
   const company = server.create('company')
   const teams = server.createList('team', 3, { company })
   const user = server.create('user', { teams })
@@ -25,6 +31,8 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const progressReports = server.createList('progressReport', 40, {
     user,
     keyResult: () => pickRandomModel(keyResults),
+    valueNew: buildProgressReport,
+    valuePrevious: buildProgressReport,
   })
   const confidenceReports = server.createList('confidenceReport', 40, {
     user,

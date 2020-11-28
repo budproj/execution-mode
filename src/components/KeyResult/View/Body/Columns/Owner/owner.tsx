@@ -15,23 +15,27 @@ import { useRecoilValue } from 'recoil'
 
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'components/KeyResult/types'
-import { selectKeyResultOwner } from 'state/recoil/key-result'
+import { buildPartialSelector } from 'state/recoil/key-result'
 
 export interface OwnerProperties {
   id?: KeyResult['id']
 }
 
-const Owner = ({ id }: OwnerProperties): ReactElement => {
-  const ownerSelector = selectKeyResultOwner(id)
-  const owner = useRecoilValue(ownerSelector)
+const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 
-  console.log(owner)
+const Owner = ({ id }: OwnerProperties): ReactElement => {
+  const owner = useRecoilValue(ownerSelector(id))
 
   const isOwnerLoaded = Boolean(owner)
 
   return (
     <BaseGridItem pr={0} display="flex" justifyContent="flex-end">
-      <SkeletonCircle size="48px" isLoaded={isOwnerLoaded}>
+      <SkeletonCircle
+        size="48px"
+        isLoaded={isOwnerLoaded}
+        fadeDuration={0}
+        /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+      >
         <Popover placement="top-end">
           <PopoverTrigger>
             <Avatar name={owner?.name} src={owner?.picture} cursor="pointer" />

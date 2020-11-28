@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import StackIcon from 'components/Icons/Stack'
 import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'components/KeyResult/types'
-import { selectKeyResultObjective } from 'state/recoil/key-result'
+import { buildPartialSelector } from 'state/recoil/key-result'
 
 import messages from './messages'
 
@@ -14,9 +14,10 @@ export interface OKRProperties {
   id?: KeyResult['id']
 }
 
+const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
+
 const Okr = ({ id }: OKRProperties): ReactElement => {
-  const objectiveSelector = selectKeyResultObjective(id)
-  const objective = useRecoilValue(objectiveSelector)
+  const objective = useRecoilValue(objectiveSelector(id))
   const intl = useIntl()
 
   const isObjectiveLoaded = Boolean(objective)
@@ -24,7 +25,12 @@ const Okr = ({ id }: OKRProperties): ReactElement => {
   return (
     <BaseGridItem>
       <Flex gridGap={4} alignItems="center">
-        <Skeleton borderRadius={10} isLoaded={isObjectiveLoaded}>
+        <Skeleton
+          borderRadius={10}
+          isLoaded={isObjectiveLoaded}
+          fadeDuration={0}
+          /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+        >
           <Box borderRadius={10} p={4} bg="gray.50">
             <StackIcon
               desc={intl.formatMessage(messages.stackIconDesc)}
@@ -36,7 +42,13 @@ const Okr = ({ id }: OKRProperties): ReactElement => {
         </Skeleton>
 
         <Box>
-          <Skeleton minH="20px" minW="150px" isLoaded={isObjectiveLoaded}>
+          <Skeleton
+            minH="20px"
+            minW="150px"
+            isLoaded={isObjectiveLoaded}
+            fadeDuration={0}
+            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+          >
             <Text color="gray.500">{objective?.title}</Text>
           </Skeleton>
         </Box>

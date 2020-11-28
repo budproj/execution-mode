@@ -5,6 +5,9 @@ query KeyResultViewForBinding($binding: KeyResultViewBinding!) {
     keyResults {
       id
       title
+      initialValue
+      goal
+      format
       team {
         name
       }
