@@ -23,10 +23,11 @@ export default Factory.extend({
   },
 
   goal() {
+    const min = this.initialValue * 1.1
     const handlers = {
-      [KeyResultFormat.NUMBER]: () => faker.random.number({ min: this.initialValue }),
-      [KeyResultFormat.PERCENTAGE]: () => faker.random.float({ min: this.initialValue, max: 1 }),
-      [KeyResultFormat.COIN_BRL]: () => faker.random.number({ min: this.initialValue }),
+      [KeyResultFormat.NUMBER]: () => faker.random.number({ min }),
+      [KeyResultFormat.PERCENTAGE]: () => faker.random.float({ min, max: 1 }),
+      [KeyResultFormat.COIN_BRL]: () => faker.random.number({ min }),
     }
     const formatHandler = handlers[this.format]
 

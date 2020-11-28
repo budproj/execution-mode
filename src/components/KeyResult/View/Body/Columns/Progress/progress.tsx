@@ -32,7 +32,7 @@ const Progress = ({ id }: ProgressProperties): ReactElement => {
             fadeDuration={0}
             /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
-            <ProgressSlider isPopoverGuarded id={id} />
+            <ProgressSlider id={id} />
           </Skeleton>
         </Box>
 

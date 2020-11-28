@@ -1,3 +1,3 @@
-import KeyResultProgressSlider from './container'
+import KeyResultProgressSlider from './progress-slider'
 
 export default KeyResultProgressSlider

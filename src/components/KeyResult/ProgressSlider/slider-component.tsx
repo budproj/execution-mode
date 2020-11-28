@@ -1,35 +1,29 @@
-import React from 'react'
+import React, { ForwardedRef } from 'react'
 
 import Slider from 'components/Base/Slider'
 import { SliderProperties } from 'components/Base/Slider/slider'
 import { selectConfidenceTag } from 'components/KeyResult/ConfidenceTag/selectors'
-import { KeyResult, ProgressReport } from 'components/KeyResult/types'
+import { KeyResult, ProgressReport, ConfidenceReport } from 'components/KeyResult/types'
 
-import { ConfidenceReport } from '..'
-
-import PopoverGuard from './popover-guard'
 import { selectProgressStep } from './selectors'
 
-export interface ProgressSliderComponentProperties {
+export interface ProgressSliderComponentProperties extends SliderProperties {
   initialValue: KeyResult['initialValue']
   goal: KeyResult['goal']
-  handleSliderUpdate: SliderProperties['onChange']
-  handleSliderUpdateEnd: SliderProperties['onChangeEnd']
-  isPopoverGuarded?: boolean
   latestProgressReport?: ProgressReport
   latestConfidenceReport?: ConfidenceReport
   format?: KeyResult['format']
+  forwardedReference: ForwardedRef<HTMLDivElement>
 }
 
-const ProgressSlider = ({
+const ProgressSliderComponent = ({
   latestProgressReport,
   latestConfidenceReport,
   initialValue,
   goal,
   format,
-  handleSliderUpdate,
-  handleSliderUpdateEnd,
-  isPopoverGuarded,
+  forwardedReference,
+  ...rest
 }: ProgressSliderComponentProperties) => {
   const currentProgress = latestProgressReport?.valueNew ?? 0
   const currentConfidence = latestConfidenceReport?.valueNew ?? 50
@@ -37,28 +31,17 @@ const ProgressSlider = ({
   const { color } = selectConfidenceTag(currentConfidence)
   const step = selectProgressStep(format)
 
-  return isPopoverGuarded ? (
-    <PopoverGuard
-      Slider={Slider}
-      value={currentProgress}
-      trackColor={color}
-      min={initialValue}
-      max={goal}
-      step={step}
-      onChange={handleSliderUpdate}
-      onChangeEnd={handleSliderUpdateEnd}
-    />
-  ) : (
+  return (
     <Slider
+      ref={forwardedReference}
       value={currentProgress}
       trackColor={color}
       min={initialValue}
       max={goal}
       step={step}
-      onChange={handleSliderUpdate}
-      onChangeEnd={handleSliderUpdateEnd}
+      {...rest}
     />
   )
 }
 
-export default ProgressSlider
+export default ProgressSliderComponent
