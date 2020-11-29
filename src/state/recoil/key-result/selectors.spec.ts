@@ -1,19 +1,19 @@
 import faker from 'faker'
 import sinon from 'sinon'
 
-import keyResultAtomFamily from '../atom-family'
-import * as selectors from '../selectors'
+import keyResultAtomFamily from './atom-family'
+import * as selectors from './selectors'
 
-describe('build partial selector getter', () => {
+describe('partial selector getter', () => {
   afterEach(() => sinon.restore())
 
-  it('gets the keyResultAtomFamily with provided ID', () => {
+  it('uses the provided ID to get key results from atom family', () => {
     const spy = sinon.spy()
     const fakePart = faker.random.word()
     const fakeID = faker.random.number()
 
-    const fakePartSpecification = selectors.selectorSpecification(fakePart)
-    const fakeGetter = fakePartSpecification.get(fakeID)
+    const fakePartGetter = selectors.getKeyResultPart(fakePart)
+    const fakeGetter = fakePartGetter(fakeID)
 
     fakeGetter({ get: spy })
 
@@ -27,8 +27,8 @@ describe('build partial selector getter', () => {
     const stub = sinon.stub().returns(fakeData)
     const fakeID = faker.random.number()
 
-    const fakePartSpecification = selectors.selectorSpecification('rick')
-    const fakeGetter = fakePartSpecification.get(fakeID)
+    const fakePartGetter = selectors.getKeyResultPart('rick')
+    const fakeGetter = fakePartGetter(fakeID)
 
     const result = fakeGetter({ get: stub })
 
@@ -40,8 +40,8 @@ describe('build partial selector getter', () => {
     const stub = sinon.stub().returns(fakeData)
     const fakeID = faker.random.number()
 
-    const fakePartSpecification = selectors.selectorSpecification('rick.sanchez.morty')
-    const fakeGetter = fakePartSpecification.get(fakeID)
+    const fakePartGetter = selectors.getKeyResultPart('rick.sanchez.morty')
+    const fakeGetter = fakePartGetter(fakeID)
 
     const result = fakeGetter({ get: stub })
 
@@ -49,8 +49,8 @@ describe('build partial selector getter', () => {
   })
 
   it('returns undefined if no ID was provided', () => {
-    const fakePartSpecification = selectors.selectorSpecification(faker.random.word())
-    const fakeGetter = fakePartSpecification.get()
+    const fakePartGetter = selectors.getKeyResultPart(faker.random.word())
+    const fakeGetter = fakePartGetter()
 
     const result = fakeGetter({ get: sinon.fake() })
 
@@ -58,14 +58,14 @@ describe('build partial selector getter', () => {
   })
 })
 
-describe('build partial selector setters', () => {
+describe('partial selector setter', () => {
   it('gets the provided key result atom family with given ID', () => {
     const spy = sinon.spy()
     const fakePart = faker.random.word()
     const fakeID = faker.random.number()
 
-    const fakePartSpecification = selectors.selectorSpecification(fakePart)
-    const fakeSetter = fakePartSpecification.set(fakeID)
+    const fakePartSetter = selectors.setKeyResultPart(fakePart)
+    const fakeSetter = fakePartSetter(fakeID)
 
     fakeSetter({ get: spy, set: sinon.fake() }, faker.random.number())
 
@@ -82,8 +82,8 @@ describe('build partial selector setters', () => {
     const getStub = sinon.stub().returns(fakeData)
     const setSpy = sinon.spy()
 
-    const fakePartSpecification = selectors.selectorSpecification(fakePart)
-    const fakeSetter = fakePartSpecification.set(fakeID)
+    const fakePartSetter = selectors.setKeyResultPart(fakePart)
+    const fakeSetter = fakePartSetter(fakeID)
 
     fakeSetter({ get: getStub, set: setSpy }, fakeValue)
 
@@ -97,5 +97,14 @@ describe('build partial selector setters', () => {
     )
 
     expect(wasCalledAsExpected).toEqual(true)
+  })
+
+  it('returns undefined if no ID was provided', () => {
+    const fakePartSetter = selectors.setKeyResultPart(faker.random.word())
+    const fakeSetter = fakePartSetter()
+
+    const result = fakeSetter({ get: sinon.fake(), set: sinon.fake() }, faker.random.number())
+
+    expect(result).not.toBeDefined()
   })
 })

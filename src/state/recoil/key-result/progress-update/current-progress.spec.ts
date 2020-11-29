@@ -1,7 +1,7 @@
 import faker from 'faker'
 import sinon from 'sinon'
 
-import * as currentProgress from '../current-progress'
+import * as currentProgress from './current-progress'
 
 describe('getter', () => {
   afterEach(() => sinon.restore())
@@ -9,7 +9,7 @@ describe('getter', () => {
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentProgress, 'selectProgressReports')
     const fakeID = faker.random.number()
-    const getCurrentProgress = currentProgress.selectorSpecification.get(fakeID)
+    const getCurrentProgress = currentProgress.getCurrentProgress(fakeID)
 
     getCurrentProgress({ get: sinon.fake() })
 
@@ -22,7 +22,7 @@ describe('getter', () => {
     const fakeID = faker.random.number()
     const latestProgressValue = faker.random.number()
     const getStub = sinon.stub().returns([{ valueNew: latestProgressValue }])
-    const getCurrentProgress = currentProgress.selectorSpecification.get(fakeID)
+    const getCurrentProgress = currentProgress.getCurrentProgress(fakeID)
 
     const result = getCurrentProgress({ get: getStub })
 
@@ -30,7 +30,7 @@ describe('getter', () => {
   })
 
   it('returns undefined if undefined ID was provided', () => {
-    const getCurrentProgress = currentProgress.selectorSpecification.get()
+    const getCurrentProgress = currentProgress.getCurrentProgress()
 
     const result = getCurrentProgress({ get: sinon.fake() })
 
@@ -44,7 +44,7 @@ describe('setter', () => {
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentProgress, 'selectProgressReports')
     const fakeID = faker.random.number()
-    const setCurrentProgress = currentProgress.selectorSpecification.set(fakeID)
+    const setCurrentProgress = currentProgress.setCurrentProgress(fakeID)
 
     setCurrentProgress(
       {
@@ -70,7 +70,7 @@ describe('setter', () => {
 
     const fakeID = faker.random.number()
     const valueNew = faker.random.number()
-    const setCurrentProgress = currentProgress.selectorSpecification.set(fakeID)
+    const setCurrentProgress = currentProgress.setCurrentProgress(fakeID)
 
     setCurrentProgress(
       {
@@ -93,7 +93,7 @@ describe('setter', () => {
   })
 
   it('returns undefined if undefined ID was provided', () => {
-    const setCurrentProgress = currentProgress.selectorSpecification.set()
+    const setCurrentProgress = currentProgress.setCurrentProgress()
 
     const result = setCurrentProgress(
       { get: sinon.fake(), set: sinon.fake() },

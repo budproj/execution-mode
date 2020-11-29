@@ -3,8 +3,8 @@ import sinon from 'sinon'
 
 import * as config from 'src/config'
 
-import localeAtom from '../locale-atom'
-import * as selectors from '../selectors'
+import localeAtom from './locale-atom'
+import * as selectors from './selectors'
 
 describe('getter based on locale', () => {
   afterEach(() => sinon.restore())

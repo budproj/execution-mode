@@ -1,5 +1,5 @@
 import remove from 'lodash/remove'
-import { selectorFamily } from 'recoil'
+import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, ConfidenceReport } from 'src/components/KeyResult/types'
 import { PREFIX } from 'src/state/recoil/intl/constants'
@@ -12,41 +12,45 @@ export const selectConfidenceReports = buildPartialSelector<KeyResult['confidenc
   'confidenceReports',
 )
 
-export const selectorSpecification = {
-  key: KEY,
-  get: (id?: KeyResult['id']) => ({ get }: RecoilSpecificationGetter) => {
-    if (!id) return
+export const getCurrentConfidence = (id?: KeyResult['id']) => ({
+  get,
+}: RecoilSpecificationGetter) => {
+  if (!id) return
 
-    const confidenceReports = get(selectConfidenceReports(id))
-    const latestConfidenceReport = confidenceReports?.[0]
+  const confidenceReports = get(selectConfidenceReports(id))
+  const latestConfidenceReport = confidenceReports?.[0]
 
-    return latestConfidenceReport?.valueNew
-  },
-  set: (id?: KeyResult['id']) => (
-    { get, set }: RecoilSpecificationSetter,
-    valueNew: ConfidenceReport['valueNew'],
-  ) => {
-    if (!id) return
+  return latestConfidenceReport?.valueNew
+}
 
-    const confidenceReportsSelector = selectConfidenceReports(id)
+export const setCurrentConfidence = (id?: KeyResult['id']) => (
+  { get, set }: RecoilSpecificationSetter,
+  valueNew: ConfidenceReport['valueNew'] | DefaultValue | undefined,
+) => {
+  if (!id) return
 
-    const confidenceReports = get(confidenceReportsSelector)
-    const latestConfidenceReport = confidenceReports?.[0]
-    const newLocalReport = {
-      valueNew,
-      valuePrevious: latestConfidenceReport?.valueNew,
-    }
+  const confidenceReportsSelector = selectConfidenceReports(id)
 
-    set(
-      confidenceReportsSelector,
-      remove([newLocalReport as ConfidenceReport, ...(confidenceReports ?? [])]),
-    )
-  },
+  const confidenceReports = get(confidenceReportsSelector)
+  const latestConfidenceReport = confidenceReports?.[0]
+  const newLocalReport = {
+    valueNew,
+    valuePrevious: latestConfidenceReport?.valueNew,
+  }
+
+  set(
+    confidenceReportsSelector,
+    remove([newLocalReport as ConfidenceReport, ...(confidenceReports ?? [])]),
+  )
 }
 
 const currentConfidence = selectorFamily<
   ConfidenceReport['valueNew'] | undefined,
   KeyResult['id'] | undefined
->(selectorSpecification)
+>({
+  key: KEY,
+  get: getCurrentConfidence,
+  set: setCurrentConfidence,
+})
 
 export default currentConfidence

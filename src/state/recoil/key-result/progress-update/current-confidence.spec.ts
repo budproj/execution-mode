@@ -1,7 +1,7 @@
 import faker from 'faker'
 import sinon from 'sinon'
 
-import * as currentConfidence from '../current-confidence'
+import * as currentConfidence from './current-confidence'
 
 describe('getter', () => {
   afterEach(() => sinon.restore())
@@ -9,7 +9,7 @@ describe('getter', () => {
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentConfidence, 'selectConfidenceReports')
     const fakeID = faker.random.number()
-    const getCurrentConfidence = currentConfidence.selectorSpecification.get(fakeID)
+    const getCurrentConfidence = currentConfidence.getCurrentConfidence(fakeID)
 
     getCurrentConfidence({ get: sinon.fake() })
 
@@ -22,7 +22,7 @@ describe('getter', () => {
     const fakeID = faker.random.number()
     const latestConfidenceValue = faker.random.number()
     const getStub = sinon.stub().returns([{ valueNew: latestConfidenceValue }])
-    const getCurrentConfidence = currentConfidence.selectorSpecification.get(fakeID)
+    const getCurrentConfidence = currentConfidence.getCurrentConfidence(fakeID)
 
     const result = getCurrentConfidence({ get: getStub })
 
@@ -30,7 +30,7 @@ describe('getter', () => {
   })
 
   it('returns undefined if undefined ID was provided', () => {
-    const getCurrentConfidence = currentConfidence.selectorSpecification.get()
+    const getCurrentConfidence = currentConfidence.getCurrentConfidence()
 
     const result = getCurrentConfidence({ get: sinon.fake() })
 
@@ -44,7 +44,7 @@ describe('setter', () => {
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentConfidence, 'selectConfidenceReports')
     const fakeID = faker.random.number()
-    const setCurrentConfidence = currentConfidence.selectorSpecification.set(fakeID)
+    const setCurrentConfidence = currentConfidence.setCurrentConfidence(fakeID)
 
     setCurrentConfidence(
       {
@@ -70,7 +70,7 @@ describe('setter', () => {
 
     const fakeID = faker.random.number()
     const valueNew = faker.random.number()
-    const setCurrentConfidence = currentConfidence.selectorSpecification.set(fakeID)
+    const setCurrentConfidence = currentConfidence.setCurrentConfidence(fakeID)
 
     setCurrentConfidence(
       {
@@ -93,7 +93,7 @@ describe('setter', () => {
   })
 
   it('returns undefined if undefined ID was provided', () => {
-    const setCurrentConfidence = currentConfidence.selectorSpecification.set()
+    const setCurrentConfidence = currentConfidence.setCurrentConfidence()
 
     const result = setCurrentConfidence(
       { get: sinon.fake(), set: sinon.fake() },

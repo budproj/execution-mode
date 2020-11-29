@@ -26,24 +26,24 @@ const selectFromArrayBasedOnString = (string: string, array: any[]) => {
   return array[stringCode]
 }
 
-export const iconColorBasedOnTitleSpecification = {
-  key: `${KEY}::COLOR::BASED_ON_TITLE`,
-  get: (title: KeyResult['title']) => (): KeyResultIconColor =>
-    selectFromArrayBasedOnString(title, COLORS_AVAILABLE),
-}
+export const getIconColorBasedOnTitle = (title: KeyResult['title']) => (): KeyResultIconColor =>
+  selectFromArrayBasedOnString(title, COLORS_AVAILABLE)
 
 export const selectKeyResultIconColorBasedOnTitle = selectorFamily<
   string | undefined,
   SelectKeyResultIconColorBasedOnTitleParameter
->(iconColorBasedOnTitleSpecification)
+>({
+  key: `${KEY}::COLOR::BASED_ON_TITLE`,
+  get: getIconColorBasedOnTitle,
+})
 
-export const iconDrawingBasedOnTitleSpecification = {
-  key: `${KEY}::DRAWING::BASED_ON_TITLE`,
-  get: (title: KeyResult['title']) => (): KeyResultIconDrawing =>
-    selectFromArrayBasedOnString(title, DRAWINGS_AVAILABLE),
-}
+export const getIconDrawingBasedOnTitle = (title: KeyResult['title']) => (): KeyResultIconDrawing =>
+  selectFromArrayBasedOnString(title, DRAWINGS_AVAILABLE)
 
 export const selectKeyResultIconDrawingBasedOnTitle = selectorFamily<
   KeyResult['title'] | undefined,
   SelectKeyResultIconDrawingBasedOnTitleParameter
->(iconDrawingBasedOnTitleSpecification)
+>({
+  key: `${KEY}::DRAWING::BASED_ON_TITLE`,
+  get: getIconDrawingBasedOnTitle,
+})
