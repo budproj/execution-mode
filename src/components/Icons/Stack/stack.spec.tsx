@@ -4,8 +4,8 @@ import React from 'react'
 
 import Stack from './stack'
 
-describe('props rendering', () => {
-  it('renders provided title as svg title', () => {
+describe('icon customization', () => {
+  it('allows the customization of the icon title', () => {
     const fakeTitle = faker.random.word()
     const stack = enzyme.shallow(<Stack title={fakeTitle} desc="" />)
 
@@ -14,7 +14,7 @@ describe('props rendering', () => {
     expect(svgTitleComponent.text()).toEqual(fakeTitle)
   })
 
-  it('renders provided desc as svg desc', () => {
+  it('allows the customization of the icon description', () => {
     const fakeDesc = faker.random.word()
     const stack = enzyme.shallow(<Stack title="" desc={fakeDesc} />)
 
@@ -23,7 +23,7 @@ describe('props rendering', () => {
     expect(svgDescComponent.text()).toEqual(fakeDesc)
   })
 
-  it('passes all remaining props to Icon component', () => {
+  it('passes any unhandled customization directly to the Icon wrapper', () => {
     const fakeProperties = faker.helpers.userCard()
     const stack = enzyme.shallow(<Stack title="" desc="" {...fakeProperties} />)
 
@@ -32,7 +32,7 @@ describe('props rendering', () => {
     expect(iconComponent.props()).toMatchObject(fakeProperties)
   })
 
-  it('uses black as default fill props in Icon component', () => {
+  it('uses black as default fill', () => {
     const stack = enzyme.shallow(<Stack title="" desc="" />)
 
     const iconComponent = stack.find('Icon')
@@ -40,7 +40,7 @@ describe('props rendering', () => {
     expect(iconComponent.props().fill).toEqual('black')
   })
 
-  it('can override default fill with given prop', () => {
+  it('can customize the icon fill color', () => {
     const fakeColor = faker.internet.color()
     const stack = enzyme.shallow(<Stack title="" desc="" fill={fakeColor} />)
 
