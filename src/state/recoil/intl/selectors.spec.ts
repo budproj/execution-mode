@@ -3,7 +3,7 @@ import sinon from 'sinon'
 
 import * as config from 'src/config'
 
-import localeAtom from './locale-atom'
+import localeAtom from './locale'
 import * as selectors from './selectors'
 
 describe('getter based on locale', () => {
@@ -82,6 +82,32 @@ describe('getter based on locale', () => {
           {
             destination: faker.random.word(),
             source,
+            locale,
+          },
+        ],
+      } as config.BudPublicConfig,
+    }
+    sinon.stub(config, 'default').returns(fakeConfig as config.BudConfig)
+
+    const localeStub = sinon.stub().returns(locale)
+    const fakeGetter = selectors.selectorSpecification.get(destination)
+
+    const result = fakeGetter({ get: localeStub })
+
+    expect(result).toEqual(destination)
+  })
+
+  it('removes the locale prefix on locale prefixed sources', () => {
+    const locale = faker.random.word() as config.Locale
+    const source = `/${faker.random.word()}`
+    const destination = `/${faker.random.word()}`
+    const fakeConfig: Partial<config.BudConfig> = {
+      // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+      publicRuntimeConfig: {
+        intlRoutes: [
+          {
+            destination: faker.random.word(),
+            source: `/${locale}/${source}`,
             locale,
           },
         ],

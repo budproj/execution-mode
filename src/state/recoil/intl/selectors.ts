@@ -5,7 +5,7 @@ import getConfig, { Locale, Route } from 'src/config'
 import { RecoilSpecificationGetter } from '../types'
 
 import { PREFIX } from './constants'
-import localeAtom from './locale-atom'
+import localeAtom from './locale'
 
 const KEY = `${PREFIX}::SELECTORS`
 
@@ -52,6 +52,9 @@ const selectRouteGroup = (
 const selectIntlRoute = (locale: Locale | string, intlRouteGroup: IntlRouteGroup): string =>
   intlRouteGroup[locale as Locale]
 
+const removeLocalePrefix = (locale: Locale | string, route: string): string =>
+  route.replace(`/${locale}`, '')
+
 const buildIntlRoute = (
   locale: Locale | string,
   absoluteRoute: string,
@@ -62,8 +65,11 @@ const buildIntlRoute = (
   if (!intlRouteGroup) return absoluteRoute
 
   const intlRoute = selectIntlRoute(locale, intlRouteGroup)
+  if (!intlRoute) return absoluteRoute
 
-  return intlRoute ?? absoluteRoute
+  const intlRouteWithoutLocale = removeLocalePrefix(locale, intlRoute)
+
+  return intlRouteWithoutLocale
 }
 
 export const selectorSpecification = {
