@@ -8,17 +8,13 @@ import getConfig from 'src/config'
 
 import { APOLLO_STATE } from './constants'
 
-const config = getConfig()
 let APOLLO_CLIENT: ApolloClient<NormalizedCacheObject>
-
-const httpLink = createHttpLink({
-  uri: config.publicRuntimeConfig.api.graphql,
-})
 
 const authLink = (authzClient: Auth0ContextInterface) =>
   setContext(async (_, { headers }) => {
+    const { publicRuntimeConfig } = getConfig()
     const { getAccessTokenSilently } = authzClient
-    const token = await getAccessTokenSilently(config.publicRuntimeConfig.auth0)
+    const token = await getAccessTokenSilently(publicRuntimeConfig.auth0)
 
     return {
       headers: {
@@ -28,17 +24,19 @@ const authLink = (authzClient: Auth0ContextInterface) =>
     }
   })
 
-const shouldMockServer =
-  config.publicRuntimeConfig.mirage.enabled && config.publicRuntimeConfig.environment === 'develop'
+const linkWithServer = (authzClient: Auth0ContextInterface) => {
+  const { publicRuntimeConfig } = getConfig()
+  const shouldMockServer =
+    publicRuntimeConfig.mirage.enabled && publicRuntimeConfig.environment === 'develop'
 
-const linkWithServer = (authzClient: Auth0ContextInterface) =>
-  shouldMockServer
-    ? {
-        uri: config.publicRuntimeConfig.api.graphql,
-      }
-    : {
-        link: authLink(authzClient).concat(httpLink),
-      }
+  const httpLink = createHttpLink({
+    uri: publicRuntimeConfig.api.graphql,
+  })
+
+  return shouldMockServer
+    ? { uri: publicRuntimeConfig.api.graphql }
+    : { link: authLink(authzClient).concat(httpLink) }
+}
 
 const createApolloClient = (authzClient: Auth0ContextInterface) =>
   new ApolloClient({

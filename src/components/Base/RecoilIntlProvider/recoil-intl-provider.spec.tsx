@@ -11,6 +11,8 @@ const availableLocales = ['pt-BR', 'en-US']
 const FakeComponent = () => <p>{faker.random.word()}</p>
 
 describe('props customization', () => {
+  afterEach(() => sinon.restore())
+
   it('sets the provided locale in our state layer', () => {
     const fakeLocale = faker.helpers.randomize(availableLocales)
     const spy = sinon.spy()

@@ -7,6 +7,8 @@ import sinon from 'sinon'
 import PageTitle from './page-title'
 
 describe('state layer interaction', () => {
+  afterEach(() => sinon.restore())
+
   it('uses the page title from state layer', () => {
     const fakeTitle = faker.random.word()
     sinon.stub(recoil, 'useRecoilValue').returns(fakeTitle)
