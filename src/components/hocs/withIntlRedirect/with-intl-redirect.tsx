@@ -40,7 +40,7 @@ const withIntlRedirect = (WrappedComponent: NextComponentType, location: string)
       )?.source ?? location
 
     if (context.req && context.res && !context.res.headersSent) {
-      context.res.writeHead(302, { Location: intlRoute })
+      context.res.writeHead(302, { Location: intlRoute.replace(`/${locale}`, '') })
       context.res.end()
     }
 

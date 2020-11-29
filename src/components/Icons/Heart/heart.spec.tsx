@@ -1,0 +1,51 @@
+import enzyme from 'enzyme'
+import faker from 'faker'
+import React from 'react'
+
+import Heart from './heart'
+
+describe('props rendering', () => {
+  it('renders provided title as svg title', () => {
+    const fakeTitle = faker.random.word()
+    const heart = enzyme.shallow(<Heart title={fakeTitle} desc="" />)
+
+    const svgTitleComponent = heart.find('title')
+
+    expect(svgTitleComponent.text()).toEqual(fakeTitle)
+  })
+
+  it('renders provided desc as svg desc', () => {
+    const fakeDesc = faker.random.word()
+    const heart = enzyme.shallow(<Heart title="" desc={fakeDesc} />)
+
+    const svgDescComponent = heart.find('desc')
+
+    expect(svgDescComponent.text()).toEqual(fakeDesc)
+  })
+
+  it('passes all remaining props to Icon component', () => {
+    const fakeProperties = faker.helpers.userCard()
+    const heart = enzyme.shallow(<Heart title="" desc="" {...fakeProperties} />)
+
+    const iconComponent = heart.find('Icon')
+
+    expect(iconComponent.props()).toMatchObject(fakeProperties)
+  })
+
+  it('uses black as default fill props in Icon component', () => {
+    const heart = enzyme.shallow(<Heart title="" desc="" />)
+
+    const iconComponent = heart.find('Icon')
+
+    expect(iconComponent.props().fill).toEqual('black')
+  })
+
+  it('can override default fill with given prop', () => {
+    const fakeColor = faker.internet.color()
+    const heart = enzyme.shallow(<Heart title="" desc="" fill={fakeColor} />)
+
+    const iconComponent = heart.find('Icon')
+
+    expect(iconComponent.props().fill).toEqual(fakeColor)
+  })
+})
