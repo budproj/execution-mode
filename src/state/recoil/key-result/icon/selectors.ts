@@ -1,5 +1,7 @@
 import { selectorFamily } from 'recoil'
 
+import { KeyResult } from 'components/KeyResult'
+
 import { PREFIX, COLORS_AVAILABLE, DRAWINGS_AVAILABLE } from './constants'
 
 const KEY = `${PREFIX}::SELECTORS`
@@ -24,19 +26,24 @@ const selectFromArrayBasedOnString = (string: string, array: any[]) => {
   return array[stringCode]
 }
 
+export const iconColorBasedOnTitleSpecification = {
+  key: `${KEY}::COLOR::BASED_ON_TITLE`,
+  get: (title: KeyResult['title']) => (): KeyResultIconColor =>
+    selectFromArrayBasedOnString(title, COLORS_AVAILABLE),
+}
+
 export const selectKeyResultIconColorBasedOnTitle = selectorFamily<
   string | undefined,
   SelectKeyResultIconColorBasedOnTitleParameter
->({
-  key: `${KEY}::COLOR::BASED_ON_TITLE`,
-  get: (title) => (): KeyResultIconColor => selectFromArrayBasedOnString(title, COLORS_AVAILABLE),
-})
+>(iconColorBasedOnTitleSpecification)
+
+export const iconDrawingBasedOnTitleSpecification = {
+  key: `${KEY}::DRAWING::BASED_ON_TITLE`,
+  get: (title: KeyResult['title']) => (): KeyResultIconDrawing =>
+    selectFromArrayBasedOnString(title, DRAWINGS_AVAILABLE),
+}
 
 export const selectKeyResultIconDrawingBasedOnTitle = selectorFamily<
-  string | undefined,
+  KeyResult['title'] | undefined,
   SelectKeyResultIconDrawingBasedOnTitleParameter
->({
-  key: `${KEY}::DRAWING::BASED_ON_TITLE`,
-  get: (title) => (): KeyResultIconDrawing =>
-    selectFromArrayBasedOnString(title, DRAWINGS_AVAILABLE),
-})
+>(iconDrawingBasedOnTitleSpecification)
