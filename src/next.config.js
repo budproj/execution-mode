@@ -83,7 +83,10 @@ module.exports = {
   i18n,
 
   async rewrites() {
-    return publicRuntimeConfig.intlRoutes.map((route) => _.omit(route, 'locale'))
+    return publicRuntimeConfig.intlRoutes.map((route) => ({
+      ...route,
+      locale: false,
+    }))
   },
 
   webpack: (config, { isServer }) => {
