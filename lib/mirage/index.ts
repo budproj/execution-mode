@@ -1,7 +1,7 @@
 import { Request } from '@miragejs/graphql'
 import { createServer } from 'miragejs'
 
-import getConfig, { NodeEnvironment } from 'config'
+import getConfig, { NodeEnvironment } from 'src/config'
 
 import factories from './factories'
 import graphQLHandler from './graphql-handler'

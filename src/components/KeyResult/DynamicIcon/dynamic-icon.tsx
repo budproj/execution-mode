@@ -2,9 +2,9 @@ import { Box } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import * as Icons from 'components/Icons'
-import { KeyResult } from 'components/KeyResult/types'
-import { keyResultIconColorAtom, keyResultIconDrawingAtom } from 'state/recoil/key-result/icon'
+import * as Icons from 'src/components/Icons'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultIconColorAtom, keyResultIconDrawingAtom } from 'src/state/recoil/key-result/icon'
 
 export interface KeyResultDynamicIconProperties {
   title: KeyResult['title'] | undefined

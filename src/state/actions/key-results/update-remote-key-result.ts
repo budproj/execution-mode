@@ -1,8 +1,8 @@
 import { flow } from 'lodash'
 import { SetterOrUpdater } from 'recoil'
 
-import { KeyResult } from 'components/KeyResult'
 import logger from 'lib/logger'
+import { KeyResult } from 'src/components/KeyResult'
 
 import { patchFromAPI } from '../api'
 

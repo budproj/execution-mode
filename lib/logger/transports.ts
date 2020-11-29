@@ -2,7 +2,7 @@ import format from 'date-fns/format'
 import { TransformableInfo } from 'logform'
 import TransportStream from 'winston-transport'
 
-import { LogLevels } from 'config'
+import { LogLevels } from 'src/config'
 
 enum LogLevelColors {
   DEBUG = 'gray',

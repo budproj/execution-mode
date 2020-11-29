@@ -2,11 +2,11 @@ import { Flex, Box, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import KeyResultDynamicIcon from 'components/KeyResult/DynamicIcon'
-import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
-import { BORDER_COLOR } from 'components/KeyResult/View/constants'
-import { KeyResult } from 'components/KeyResult/types'
-import { buildPartialSelector } from 'state/recoil/key-result'
+import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
+import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
+import { BORDER_COLOR } from 'src/components/KeyResult/View/constants'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { buildPartialSelector } from 'src/state/recoil/key-result'
 
 export interface TitleProperties {
   id?: KeyResult['id']

@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import React, { ComponentType, ReactElement } from 'react'
 
-import PageContentHeader from 'components/Base/PageContentHeader'
+import PageContentHeader from 'src/components/Base/PageContentHeader'
 
 export interface PageContentProperties {
   children: ReactElement

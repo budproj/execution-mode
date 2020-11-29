@@ -2,8 +2,8 @@ import { Flex, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import CircleIcon from 'components/Icons/Circle'
-import { ConfidenceReport } from 'components/KeyResult/types'
+import CircleIcon from 'src/components/Icons/Circle'
+import { ConfidenceReport } from 'src/components/KeyResult/types'
 
 import { selectConfidenceTag } from './selectors'
 

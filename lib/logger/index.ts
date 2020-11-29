@@ -1,6 +1,6 @@
 import * as winston from 'winston'
 
-import getConfig from 'config'
+import getConfig from 'src/config'
 
 import { ConsoleTransport } from './transports'
 

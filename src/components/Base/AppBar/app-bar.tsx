@@ -2,8 +2,8 @@ import { Flex, Grid, GridItem } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import Logotype from 'components/Base/Logotype'
-import NamedAvatar from 'components/User/NamedAvatar'
+import Logotype from 'src/components/Base/Logotype'
+import NamedAvatar from 'src/components/User/NamedAvatar'
 
 import AppBarMenuItem from './MenuItem'
 import messages from './messages'

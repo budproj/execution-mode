@@ -1,6 +1,6 @@
-import { Team } from 'components/Company/types'
-import { Objective } from 'components/Objective/types'
-import { User } from 'components/User/types'
+import { Team } from 'src/components/Company/types'
+import { Objective } from 'src/components/Objective/types'
+import { User } from 'src/components/User/types'
 
 export enum KeyResultFormat {
   NUMBER = 'NUMBER',
@@ -13,6 +13,7 @@ export enum KeyResultViewBinding {
 }
 
 export interface ConfidenceReport {
+  id: number
   valuePrevious?: number
   valueNew: number
   comment?: string
@@ -22,6 +23,7 @@ export interface ConfidenceReport {
 }
 
 export interface ProgressReport {
+  id: number
   valuePrevious?: number
   valueNew: number
   comment?: string

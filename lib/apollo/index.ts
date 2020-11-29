@@ -4,7 +4,7 @@ import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react'
 import merge from 'deepmerge'
 import { useMemo } from 'react'
 
-import getConfig from 'config'
+import getConfig from 'src/config'
 
 import { APOLLO_STATE } from './constants'
 

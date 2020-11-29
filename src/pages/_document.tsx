@@ -1,7 +1,7 @@
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
 import React, { ReactElement } from 'react'
 
-import getConfig from 'config'
+import getConfig from 'src/config'
 
 interface BudDocumentProperties {
   env: string

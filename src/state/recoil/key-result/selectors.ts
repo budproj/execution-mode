@@ -1,10 +1,11 @@
 import getPath from 'lodash/get'
+import snakeCase from 'lodash/snakeCase'
 import { selectorFamily } from 'recoil'
 
-import { Team } from 'components/Company/types'
-import { KeyResult } from 'components/KeyResult'
-import { Objective } from 'components/Objective/types'
-import { User } from 'components/User/types'
+import { Team } from 'src/components/Company/types'
+import { KeyResult } from 'src/components/KeyResult'
+import { Objective } from 'src/components/Objective/types'
+import { User } from 'src/components/User/types'
 
 import keyResultAtomFamily from './atom-family'
 import { PREFIX } from './constants'
@@ -19,7 +20,7 @@ export const buildPartialSelector = <
   part: string,
 ) =>
   selectorFamily<T | undefined, KeyResult['id'] | undefined>({
-    key: `${KEY}::KEY_RESULT_${part.toUpperCase()}`,
+    key: `${KEY}::KEY_RESULT_${snakeCase(part).toUpperCase()}`,
     get: (id) => ({ get }) => {
       if (!id) return
 

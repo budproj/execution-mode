@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
 
-import IntlLink from 'components/Base/IntlLink'
+import IntlLink from 'src/components/Base/IntlLink'
 
 export interface MenuItemProperties {
   label: string

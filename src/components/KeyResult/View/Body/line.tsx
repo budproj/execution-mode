@@ -1,9 +1,9 @@
 import React, { ReactElement, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
-import { KeyResult } from 'components/KeyResult/types'
 import logger from 'lib/logger'
-import { keyResultAtomFamily } from 'state/recoil/key-result'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import { BORDER_COLOR, GRID_TEMPLATE_COLUMN } from '../constants'
 

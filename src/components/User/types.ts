@@ -1,5 +1,5 @@
-import { Team } from 'components/Company/types'
-import { KeyResult, ProgressReport, ConfidenceReport } from 'components/KeyResult/types'
+import { Team } from 'src/components/Company/types'
+import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
 
 export interface CustomSorting {
   user: User['id']

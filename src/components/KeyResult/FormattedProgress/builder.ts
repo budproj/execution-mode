@@ -1,6 +1,6 @@
 import { FormatNumberOptions } from 'react-intl'
 
-import { KeyResultFormat } from 'components/KeyResult/types'
+import { KeyResultFormat } from 'src/components/KeyResult/types'
 
 export const buildFormatNumberOptionsBasedOnFormat = (
   format?: KeyResultFormat,

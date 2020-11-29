@@ -1,5 +1,5 @@
-import { Cycle } from 'components/Company/types'
-import { KeyResult } from 'components/KeyResult/types'
+import { Cycle } from 'src/components/Company/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 
 export interface Objective {
   id: string

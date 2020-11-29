@@ -2,8 +2,8 @@ import faker from 'faker'
 import shuffle from 'lodash/shuffle'
 import { ModelInstance } from 'miragejs'
 
-import { KeyResultFormat } from 'components/KeyResult'
 import Models from 'lib/mirage/models'
+import { KeyResultFormat } from 'src/components/KeyResult'
 
 export const buildKeyResultView = (
   keyResultModels: Array<ModelInstance<typeof Models.keyResult>>,

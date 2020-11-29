@@ -6,9 +6,9 @@ import { useRouter } from 'next/router'
 import React, { ComponentType, ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import getConfig, { Locale } from 'config'
-import isBrowser from 'specifications/is-browser'
-import { intlRouteAtom } from 'state/recoil/intl'
+import getConfig, { Locale } from 'src/config'
+import isBrowser from 'src/specifications/is-browser'
+import { intlRouteAtom } from 'src/state/recoil/intl'
 
 const withIntlRedirect = (WrappedComponent: NextComponentType, location: string): ComponentType => {
   const WithRedirectWrapper = async (

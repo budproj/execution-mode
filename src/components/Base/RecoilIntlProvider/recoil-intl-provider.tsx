@@ -3,7 +3,7 @@ import { IntlProvider } from 'react-intl'
 import { OptionalIntlConfig } from 'react-intl/src/components/provider'
 import { useSetRecoilState } from 'recoil'
 
-import { intlLocaleAtom } from 'state/recoil/intl'
+import { intlLocaleAtom } from 'src/state/recoil/intl'
 
 export interface RecoilIntlProviderProperties extends OptionalIntlConfig {
   children: ReactElement

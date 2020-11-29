@@ -2,7 +2,7 @@ import faker from 'faker'
 import sample from 'lodash/sample'
 import { Factory } from 'miragejs'
 
-import { KeyResultViewBinding } from 'components/KeyResult/types'
+import { KeyResultViewBinding } from 'src/components/KeyResult/types'
 
 export default Factory.extend({
   title: faker.company.catchPhrase,

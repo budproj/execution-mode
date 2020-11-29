@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import ArrowRightIcon from 'components/Icons/ArrowRight'
+import ArrowRightIcon from 'src/components/Icons/ArrowRight'
 
 import messages, { BreadcrumbMessages } from './messages'
 

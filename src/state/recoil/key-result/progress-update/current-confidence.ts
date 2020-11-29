@@ -1,22 +1,20 @@
 import remove from 'lodash/remove'
 import { selectorFamily } from 'recoil'
 
-import { KeyResult, ConfidenceReport } from 'components/KeyResult/types'
-import { PREFIX } from 'state/recoil/intl/constants'
-import { buildPartialSelector } from 'state/recoil/key-result/selectors'
+import { KeyResult, ConfidenceReport } from 'src/components/KeyResult/types'
+import { PREFIX } from 'src/state/recoil/intl/constants'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import { RecoilSpecificationGetter, RecoilSpecificationSetter } from 'state/recoil/types'
 
 const KEY = `${PREFIX}::CURRENT_CONFIDENCE`
 
-const selectConfidenceReports = buildPartialSelector<KeyResult['confidenceReports']>(
+export const selectConfidenceReports = buildPartialSelector<KeyResult['confidenceReports']>(
   'confidenceReports',
 )
 
-const currentConfidence = selectorFamily<
-  ConfidenceReport['valueNew'] | undefined,
-  KeyResult['id'] | undefined
->({
+export const selectorSpecification = {
   key: KEY,
-  get: (id) => ({ get }) => {
+  get: (id: KeyResult['id'] | undefined) => ({ get }: RecoilSpecificationGetter) => {
     if (!id) return
 
     const confidenceReports = get(selectConfidenceReports(id))
@@ -24,7 +22,10 @@ const currentConfidence = selectorFamily<
 
     return latestConfidenceReport?.valueNew
   },
-  set: (id) => ({ get, set }, valueNew) => {
+  set: (id: KeyResult['id'] | undefined) => (
+    { get, set }: RecoilSpecificationSetter,
+    valueNew: ConfidenceReport['valueNew'],
+  ) => {
     if (!id) return
 
     const confidenceReportsSelector = selectConfidenceReports(id)
@@ -41,6 +42,11 @@ const currentConfidence = selectorFamily<
       remove([newLocalReport as ConfidenceReport, ...(confidenceReports ?? [])]),
     )
   },
-})
+}
+
+const currentConfidence = selectorFamily<
+  ConfidenceReport['valueNew'] | undefined,
+  KeyResult['id'] | undefined
+>(selectorSpecification)
 
 export default currentConfidence

@@ -1,5 +1,5 @@
-import getConfig from 'config'
 import logger from 'lib/logger'
+import getConfig from 'src/config'
 
 const defaultOptions = {
   method: 'GET',

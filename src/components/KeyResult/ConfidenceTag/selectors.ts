@@ -1,6 +1,6 @@
 import { MessageDescriptor } from 'react-intl'
 
-import { ConfidenceReport } from 'components/KeyResult/types'
+import { ConfidenceReport } from 'src/components/KeyResult/types'
 
 import messages from './messages'
 

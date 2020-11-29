@@ -1,6 +1,6 @@
 import { selectorFamily } from 'recoil'
 
-import getConfig, { Locale, Route } from 'config'
+import getConfig, { Locale, Route } from 'src/config'
 
 import { PREFIX } from './constants'
 import localeAtom from './locale-atom'

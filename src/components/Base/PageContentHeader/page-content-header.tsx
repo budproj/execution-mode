@@ -1,8 +1,8 @@
 import { Box, Flex, Grid, GridItem } from '@chakra-ui/react'
 import React, { ComponentType, ReactElement } from 'react'
 
-import Breadcrumb from 'components/Base/Breadcrumb'
-import PageTitle from 'components/Base/PageTitle'
+import Breadcrumb from 'src/components/Base/Breadcrumb'
+import PageTitle from 'src/components/Base/PageTitle'
 
 export interface PageContentHeaderProperties {
   RightWing?: ComponentType

@@ -1,6 +1,6 @@
 import { atomFamily } from 'recoil'
 
-import { KeyResult } from 'components/KeyResult/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 
 import { PREFIX } from './constants'
 
