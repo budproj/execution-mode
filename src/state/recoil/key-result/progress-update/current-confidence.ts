@@ -14,7 +14,7 @@ export const selectConfidenceReports = buildPartialSelector<KeyResult['confidenc
 
 export const selectorSpecification = {
   key: KEY,
-  get: (id: KeyResult['id'] | undefined) => ({ get }: RecoilSpecificationGetter) => {
+  get: (id?: KeyResult['id']) => ({ get }: RecoilSpecificationGetter) => {
     if (!id) return
 
     const confidenceReports = get(selectConfidenceReports(id))
@@ -22,7 +22,7 @@ export const selectorSpecification = {
 
     return latestConfidenceReport?.valueNew
   },
-  set: (id: KeyResult['id'] | undefined) => (
+  set: (id?: KeyResult['id']) => (
     { get, set }: RecoilSpecificationSetter,
     valueNew: ConfidenceReport['valueNew'],
   ) => {
