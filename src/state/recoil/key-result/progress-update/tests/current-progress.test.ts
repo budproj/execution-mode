@@ -4,9 +4,7 @@ import sinon from 'sinon'
 import * as currentProgress from '../current-progress'
 
 describe('getter', () => {
-  afterEach(() => {
-    sinon.restore()
-  })
+  afterEach(() => sinon.restore())
 
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentProgress, 'selectProgressReports')
@@ -41,9 +39,7 @@ describe('getter', () => {
 })
 
 describe('setter', () => {
-  afterEach(() => {
-    sinon.restore()
-  })
+  afterEach(() => sinon.restore())
 
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentProgress, 'selectProgressReports')

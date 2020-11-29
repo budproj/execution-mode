@@ -5,6 +5,8 @@ import keyResultAtomFamily from '../atom-family'
 import * as selectors from '../selectors'
 
 describe('build partial selector getter', () => {
+  afterEach(() => sinon.restore())
+
   it('gets the keyResultAtomFamily with provided ID', () => {
     const spy = sinon.spy()
     const fakePart = faker.random.word()

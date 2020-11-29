@@ -4,9 +4,7 @@ import sinon from 'sinon'
 import * as currentConfidence from '../current-confidence'
 
 describe('getter', () => {
-  afterEach(() => {
-    sinon.restore()
-  })
+  afterEach(() => sinon.restore())
 
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentConfidence, 'selectConfidenceReports')
@@ -41,9 +39,7 @@ describe('getter', () => {
 })
 
 describe('setter', () => {
-  afterEach(() => {
-    sinon.restore()
-  })
+  afterEach(() => sinon.restore())
 
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentConfidence, 'selectConfidenceReports')

@@ -2,6 +2,8 @@ import { selectorFamily } from 'recoil'
 
 import getConfig, { Locale, Route } from 'src/config'
 
+import { RecoilSpecificationGetter } from '../types'
+
 import { PREFIX } from './constants'
 import localeAtom from './locale-atom'
 
@@ -61,15 +63,12 @@ const buildIntlRoute = (
 
   const intlRoute = selectIntlRoute(locale, intlRouteGroup)
 
-  return intlRoute
+  return intlRoute ?? absoluteRoute
 }
 
-export const selectRouteBasedOnLocale = selectorFamily<
-  string,
-  SelectIntlRouteBasedOnRouteParameter
->({
+export const selectorSpecification = {
   key: `${KEY}::ROUTE::BASED_ON_LOCALE`,
-  get: (route) => ({ get }): string => {
+  get: (route: string) => ({ get }: RecoilSpecificationGetter): string => {
     const locale = get(localeAtom)
     if (!locale) return route
 
@@ -81,4 +80,9 @@ export const selectRouteBasedOnLocale = selectorFamily<
 
     return intlRoute
   },
-})
+}
+
+export const selectRouteBasedOnLocale = selectorFamily<
+  string,
+  SelectIntlRouteBasedOnRouteParameter
+>(selectorSpecification)
