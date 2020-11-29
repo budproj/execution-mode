@@ -4,7 +4,7 @@ import React, { ComponentType, ReactElement } from 'react'
 import PageContentHeader from 'src/components/Base/PageContentHeader'
 
 export interface PageContentProperties {
-  children: ReactElement
+  children?: ReactElement
   RightWing?: ComponentType
 }
 

@@ -1,14 +1,15 @@
 import enzyme from 'enzyme'
 import { ReactElement } from 'react'
 import { IntlProvider } from 'react-intl'
+import { RecoilRoot } from 'recoil'
 
 import messages from '../../compiled-lang/pt-BR.json'
 
 const defaultLocale = 'pt-BR'
 const locale = defaultLocale
 
-export function shallowWithIntl(element: ReactElement) {
-  return enzyme.shallow(element, {
+export const shallowWithIntl = (element: ReactElement) =>
+  enzyme.shallow(element, {
     wrappingComponent: IntlProvider,
     wrappingComponentProps: {
       locale,
@@ -16,10 +17,9 @@ export function shallowWithIntl(element: ReactElement) {
       messages,
     },
   })
-}
 
-export function mountWithIntl(element: ReactElement) {
-  return enzyme.mount(element, {
+export const mountWithIntl = (element: ReactElement) =>
+  enzyme.mount(element, {
     wrappingComponent: IntlProvider,
     wrappingComponentProps: {
       locale,
@@ -27,9 +27,14 @@ export function mountWithIntl(element: ReactElement) {
       messages,
     },
   })
-}
+
+export const mountWithRecoil = (element: ReactElement) =>
+  enzyme.mount(element, {
+    wrappingComponent: RecoilRoot,
+  })
 
 export default {
   shallowWithIntl,
   mountWithIntl,
+  mountWithRecoil,
 }
