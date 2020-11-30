@@ -5,13 +5,14 @@ import { useRecoilValue } from 'recoil'
 import * as Icons from 'src/components/Icons'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultIconColorAtom, keyResultIconDrawingAtom } from 'src/state/recoil/key-result/icon'
+import { KeyResultIconDrawing } from 'state/recoil/key-result/icon/types'
 
 export interface KeyResultDynamicIconProperties {
   title: KeyResult['title'] | undefined
 }
 
 const KeyResultDynamicIcon = ({ title }: KeyResultDynamicIconProperties): ReactElement => {
-  const iconDrawingForTitle = useRecoilValue<string>(keyResultIconDrawingAtom(title))
+  const iconDrawingForTitle = useRecoilValue<KeyResultIconDrawing>(keyResultIconDrawingAtom(title))
   const iconColorForTitle = useRecoilValue<string>(keyResultIconColorAtom(title))
 
   const IconComponent = Icons[iconDrawingForTitle]

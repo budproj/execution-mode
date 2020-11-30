@@ -5,9 +5,7 @@ import { selectKeyResultIconColorBasedOnTitle } from './selectors'
 
 const KEY = `${PREFIX}::COLOR_ATOM`
 
-type KeyResultIconColorParameter = string
-
-const colorAtom = atomFamily<string, KeyResultIconColorParameter>({
+const colorAtom = atomFamily<string, string | undefined>({
   key: KEY,
   default: selectKeyResultIconColorBasedOnTitle,
 })

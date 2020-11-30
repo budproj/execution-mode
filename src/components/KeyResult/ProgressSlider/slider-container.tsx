@@ -41,7 +41,7 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
     const handleSlkeyResultIDerUpdateEnd = useCallback(
       (newValue: number | number[]) => {
         setOpenedPopover(keyResultID)
-        console.log('ok')
+        console.log(newValue)
         // Console.log('ok')
         // const newKeyResultPartial = { progress: newValue as number, keyResultID }
         // Await updateRemoteKeyResult(keyResultID, newKeyResultPartial)
