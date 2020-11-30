@@ -1,5 +1,6 @@
 import enzyme from 'enzyme'
 import { ReactElement } from 'react'
+import { act } from 'react-dom/test-utils'
 import { IntlProvider } from 'react-intl'
 import { OptionalIntlConfig } from 'react-intl/src/components/provider'
 import { RecoilRoot } from 'recoil'
@@ -40,9 +41,22 @@ export const mountWithRecoil = (element: ReactElement) =>
     wrappingComponent: RecoilRoot,
   })
 
+export async function wait(amount = 0) {
+  // eslint-disable-next-line no-promise-executor-return
+  return new Promise((resolve) => setTimeout(resolve, amount))
+}
+
+export async function actWait(amount = 0) {
+  await act(async () => {
+    await wait(amount)
+  })
+}
+
 export default {
   shallowWithIntl,
   mountWithIntl,
   shallowWithRecoil,
   mountWithRecoil,
+  wait,
+  actWait,
 }

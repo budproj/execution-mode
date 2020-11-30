@@ -71,9 +71,17 @@
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
   },
+  "QKUmFp": {
+    "defaultMessage": "Fechar",
+    "description": "This message is displayed when an user hovers the close button of our progress slider popover"
+  },
   "RZrZdZ": {
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
+  },
+  "SWl7UB": {
+    "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
+    "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
   },
   "Sn7K6v": {
     "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
@@ -86,6 +94,10 @@
   "XYg5xf": {
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
+  },
+  "fNt8Of": {
+    "defaultMessage": "Atualizar Progresso",
+    "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
   },
   "kXNgkQ": {
     "defaultMessage": "Progresso",

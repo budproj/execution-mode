@@ -12,6 +12,7 @@ import Page from 'src/components/Base/Page'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
+import 'focus-visible/dist/focus-visible' // Keeps outline only in keytboard navigation. As seem in: https://github.com/chakra-ui/chakra-ui/issues/2016#issuecomment-691674038
 
 type IntlMessage = Record<string, string>
 

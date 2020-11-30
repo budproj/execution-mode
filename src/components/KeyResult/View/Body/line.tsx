@@ -50,7 +50,7 @@ const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
       borderStyle="solid"
       borderBottomColor={BORDER_COLOR}
       borderBottomWidth={1}
-      _hover={{ background: 'blue.49' }}
+      _hover={{ background: 'blue.50' }}
     >
       <KeyResultViewBodyColumnTitle id={id} />
       <KeyResultViewBodyColumnOkr id={id} />
