@@ -1,14 +1,17 @@
-import React from 'react'
-import sinon from 'sinon'
 import faker from 'faker'
+import React from 'react'
 import * as recoil from 'recoil'
-import SliderContainer from './slider-container'
+import sinon from 'sinon'
+
 import { mountWithIntl } from 'lib/enzyme'
 import {
   keyResultProgressUpdatePopoverSlider,
   keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
 } from 'src/state/recoil/key-result/progress-update'
+
 import { KeyResultFormat } from '../types'
+
+import SliderContainer from './slider-container'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
@@ -89,9 +92,9 @@ describe('component expectations', () => {
 
     const result = mountWithIntl(
       React.createElement(
-        (props) => (
+        (properties) => (
           <recoil.RecoilRoot>
-            <SliderContainer keyResultID={fakeID} {...props} />
+            <SliderContainer keyResultID={fakeID} {...properties} />
           </recoil.RecoilRoot>
         ),
         {},

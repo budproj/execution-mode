@@ -13,7 +13,7 @@ export interface ProgressSliderComponentProperties extends SliderProperties {
   currentProgress?: ProgressReport['valueNew']
   currentConfidence?: ConfidenceReport['valueNew']
   format?: KeyResult['format']
-  forwardedReference: ForwardedRef<HTMLDivElement>
+  forwardedReference?: ForwardedRef<HTMLDivElement>
 }
 
 const ProgressSliderComponent = ({
