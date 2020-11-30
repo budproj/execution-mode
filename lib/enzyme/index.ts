@@ -30,6 +30,11 @@ export const mountWithIntl = (element: ReactElement, options?: Partial<OptionalI
     },
   })
 
+export const shallowWithRecoil = (element: ReactElement) =>
+  enzyme.shallow(element, {
+    wrappingComponent: RecoilRoot,
+  })
+
 export const mountWithRecoil = (element: ReactElement) =>
   enzyme.mount(element, {
     wrappingComponent: RecoilRoot,
@@ -38,5 +43,6 @@ export const mountWithRecoil = (element: ReactElement) =>
 export default {
   shallowWithIntl,
   mountWithIntl,
+  shallowWithRecoil,
   mountWithRecoil,
 }
