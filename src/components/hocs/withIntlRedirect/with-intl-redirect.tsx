@@ -3,24 +3,22 @@ import { IncomingMessage } from 'http'
 import accepts from 'accepts'
 import { NextComponentType, NextPageContext } from 'next'
 import { useRouter } from 'next/router'
-import React, { ComponentType, ReactElement } from 'react'
+import React, { ComponentType, ReactElement, useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import getConfig, { Locale } from 'config'
-import isBrowser from 'specifications/is-browser'
-import { intlRouteAtom } from 'state/recoil/intl'
+import getConfig, { Locale } from 'src/config'
+import { intlRouteAtom } from 'src/state/recoil/intl'
 
 const withIntlRedirect = (WrappedComponent: NextComponentType, location: string): ComponentType => {
   const WithRedirectWrapper = async (
     properties: Record<string, unknown>,
   ): Promise<ReactElement> => {
     const router = useRouter()
-    console.log('ok')
     const intlRoute = useRecoilValue(intlRouteAtom(location))
 
-    if (isBrowser()) {
-      await router.push(intlRoute)
-    }
+    useEffect(() => {
+      ;(async () => router.push(intlRoute))()
+    }, [intlRoute, router])
 
     return <WrappedComponent {...properties} />
   }
@@ -39,10 +37,10 @@ const withIntlRedirect = (WrappedComponent: NextComponentType, location: string)
         (item) =>
           (item.destination === location || item.destination === `/${location}`) &&
           item.locale === locale,
-      ).source || location
+      )?.source ?? location
 
-    if (!isBrowser() && context.res && !context.res.headersSent) {
-      context.res.writeHead(302, { Location: intlRoute })
+    if (context.req && context.res && !context.res.headersSent) {
+      context.res.writeHead(302, { Location: intlRoute.replace(`/${locale}`, '') })
       context.res.end()
     }
 

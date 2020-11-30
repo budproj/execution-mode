@@ -3,9 +3,9 @@ import React, { ReactElement, useEffect } from 'react'
 import { DraggableLocation, DropResult } from 'react-beautiful-dnd'
 import { useRecoilState } from 'recoil'
 
-import { KeyResult, KeyResultView, KeyResultViewBinding } from 'components/KeyResult/types'
 import logger from 'lib/logger'
-import { keyResultViewAtom } from 'state/recoil/key-result/view'
+import { KeyResult, KeyResultView, KeyResultViewBinding } from 'src/components/KeyResult/types'
+import { keyResultViewAtom } from 'src/state/recoil/key-result/view'
 
 import DroppableBox from './droppable-box'
 import Line from './line'

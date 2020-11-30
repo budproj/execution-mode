@@ -1,10 +1,10 @@
 import faker from 'faker'
 import { Registry, Server } from 'miragejs'
 
-import getConfig from 'config'
 import logger from 'lib/logger'
 import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
+import getConfig from 'src/config'
 
 import { buildKeyResultView, buildProgressReport } from './builders'
 import { pickRandomModel } from './selectors'

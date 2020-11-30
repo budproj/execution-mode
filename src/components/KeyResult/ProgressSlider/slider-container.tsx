@@ -1,14 +1,14 @@
 import React, { forwardRef, useCallback } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { Slider } from 'components/Base'
-import { KeyResult } from 'components/KeyResult/types'
-import { buildPartialSelector } from 'state/recoil/key-result'
+import { Slider } from 'src/components/Base'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { buildPartialSelector } from 'src/state/recoil/key-result'
 import {
   keyResultProgressUpdatePopoverSlider,
   keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
   keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
-} from 'state/recoil/key-result/progress-update'
+} from 'src/state/recoil/key-result/progress-update'
 
 import ProgressSliderComponent from './slider-component'
 

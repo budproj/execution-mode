@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import AppBar from 'components/Base/AppBar'
+import AppBar from 'src/components/Base/AppBar'
 
 export interface PageProperties {
   children: ReactElement

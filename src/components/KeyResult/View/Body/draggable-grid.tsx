@@ -3,8 +3,8 @@ import React, { ReactElement } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { useIntl } from 'react-intl'
 
-import ReorderIcon from 'components/Icons/Reorder'
-import { KeyResult } from 'components/KeyResult/types'
+import ReorderIcon from 'src/components/Icons/Reorder'
+import { KeyResult } from 'src/components/KeyResult/types'
 
 import messages from './messages'
 

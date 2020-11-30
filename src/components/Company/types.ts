@@ -1,6 +1,6 @@
-import { KeyResult } from 'components/KeyResult/types'
-import { Objective } from 'components/Objective/types'
-import { User } from 'components/User/types'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { Objective } from 'src/components/Objective/types'
+import { User } from 'src/components/User/types'
 
 export interface Cycle {
   id: string

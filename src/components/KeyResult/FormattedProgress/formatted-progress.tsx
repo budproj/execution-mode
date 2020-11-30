@@ -2,7 +2,7 @@ import { Text, TextProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import { KeyResultFormat, ProgressReport } from 'components/KeyResult/types'
+import { KeyResultFormat, ProgressReport } from 'src/components/KeyResult/types'
 
 import { buildFormatNumberOptionsBasedOnFormat } from './builder'
 

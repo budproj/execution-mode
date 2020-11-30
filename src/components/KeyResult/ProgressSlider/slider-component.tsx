@@ -1,9 +1,9 @@
 import React, { ForwardedRef } from 'react'
 
-import Slider from 'components/Base/Slider'
-import { SliderProperties } from 'components/Base/Slider/slider'
-import { selectConfidenceTag } from 'components/KeyResult/ConfidenceTag/selectors'
-import { KeyResult, ProgressReport, ConfidenceReport } from 'components/KeyResult/types'
+import Slider from 'src/components/Base/Slider'
+import { SliderProperties } from 'src/components/Base/Slider/slider'
+import { selectConfidenceTag } from 'src/components/KeyResult/ConfidenceTag/selectors'
+import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
 
 import { selectProgressStep } from './selectors'
 

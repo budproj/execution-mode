@@ -1,6 +1,6 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-export type BreadcrumbMessages = 'home' | 'keyResults' | 'arrowRightIconDesc'
+export type BreadcrumbMessages = 'home' | 'key-results' | 'arrowRightIconDesc'
 
 export default defineMessages({
   home: {
@@ -9,7 +9,7 @@ export default defineMessages({
     description: 'The name of the Home page, located at "/"',
   },
 
-  keyResults: {
+  'key-results': {
     defaultMessage: 'Minhas Key Result',
     id: 'Pkdkh4',
     description: 'The name of the Key Results page, located at "/keyResults"',

@@ -5,13 +5,13 @@ import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 
-import AuthzApolloProvider from 'components/Base/AuthzApolloProvider'
-import AuthzGatekeeper from 'components/Base/AuthzGatekeeper'
-import Page from 'components/Base/Page'
-import RecoilIntlProvider from 'components/Base/RecoilIntlProvider'
-import getConfig from 'config'
 import { makeServer } from 'lib/mirage'
-import theme from 'themes/preset-base'
+import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
+import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
+import Page from 'src/components/Base/Page'
+import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
+import getConfig from 'src/config'
+import theme from 'src/themes/preset-base'
 
 type IntlMessage = Record<string, string>
 

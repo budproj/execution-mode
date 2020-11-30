@@ -45,14 +45,9 @@ const publicRuntimeConfig = {
 
   intlRoutes: [
     {
+      source: '/pt-BR/resultados-chave',
       destination: '/key-results',
-      source: '/resultados-chave',
       locale: 'pt-BR',
-    },
-    {
-      destination: '/key-results',
-      source: '/key-results',
-      locale: 'en-US',
     },
   ],
 }

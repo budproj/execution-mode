@@ -3,10 +3,10 @@ import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import StackIcon from 'components/Icons/Stack'
-import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
-import { KeyResult } from 'components/KeyResult/types'
-import { buildPartialSelector } from 'state/recoil/key-result'
+import StackIcon from 'src/components/Icons/Stack'
+import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { buildPartialSelector } from 'src/state/recoil/key-result'
 
 import messages from './messages'
 

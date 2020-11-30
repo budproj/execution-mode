@@ -1,7 +1,7 @@
 import { Box, Grid } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import { GRID_TEMPLATE_COLUMN, BORDER_COLOR } from 'components/KeyResult/View/constants'
+import { GRID_TEMPLATE_COLUMN, BORDER_COLOR } from 'src/components/KeyResult/View/constants'
 
 import {
   KeyResultViewBodyColumnCycle,

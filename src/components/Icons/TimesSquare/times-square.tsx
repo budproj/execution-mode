@@ -1,7 +1,7 @@
 import { Icon, IconProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import { AcessibleIconProperties } from 'components/Icons/types'
+import { AcessibleIconProperties } from 'src/components/Icons/types'
 
 export interface TimesSquareIconProperties extends IconProps, AcessibleIconProperties {}
 

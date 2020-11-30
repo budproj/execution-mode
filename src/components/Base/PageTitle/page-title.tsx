@@ -2,7 +2,7 @@ import { Heading, Skeleton } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { pageTitleAtom } from 'state/recoil/page'
+import { pageTitleAtom } from 'src/state/recoil/page'
 
 const PageTitle = (): ReactElement => {
   const pageTitle = useRecoilValue(pageTitleAtom)

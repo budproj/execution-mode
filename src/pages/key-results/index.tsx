@@ -2,9 +2,9 @@ import React, { ReactElement, useEffect } from 'react'
 import { defineMessages, useIntl, MessageDescriptor } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import PageContent from 'components/Base/PageContent'
-import KeyResultView from 'components/KeyResult/View'
-import { pageTitleAtom } from 'state/recoil/page'
+import PageContent from 'src/components/Base/PageContent'
+import KeyResultView from 'src/components/KeyResult/View'
+import { pageTitleAtom } from 'src/state/recoil/page'
 
 const messages = defineMessages({
   pageTitle: {

@@ -1,4 +1,4 @@
-import { KeyResult } from 'components/KeyResult/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 
 import { KeyResultFormat } from '..'
 

@@ -2,11 +2,11 @@ import { Flex, Box, Skeleton } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import FormattedProgress from 'components/KeyResult/FormattedProgress'
-import ProgressSlider from 'components/KeyResult/ProgressSlider'
-import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
-import { KeyResult } from 'components/KeyResult/types'
-import { buildPartialSelector } from 'state/recoil/key-result'
+import FormattedProgress from 'src/components/KeyResult/FormattedProgress'
+import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
+import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { buildPartialSelector } from 'src/state/recoil/key-result'
 
 export interface ProgressProperties {
   id?: KeyResult['id']

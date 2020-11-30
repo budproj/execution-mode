@@ -1,44 +1,56 @@
 import remove from 'lodash/remove'
-import { selectorFamily } from 'recoil'
+import { DefaultValue, selectorFamily } from 'recoil'
 
-import { KeyResult, ProgressReport } from 'components/KeyResult/types'
-import { PREFIX } from 'state/recoil/intl/constants'
-import { buildPartialSelector } from 'state/recoil/key-result/selectors'
+import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
+import { PREFIX } from 'src/state/recoil/intl/constants'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import { RecoilSpecificationGetter, RecoilSpecificationSetter } from 'state/recoil/types'
 
 const KEY = `${PREFIX}::CURRENT_PROGRESS`
 
-const selectProgressReports = buildPartialSelector<KeyResult['progressReports']>('progressReports')
+export const selectProgressReports = buildPartialSelector<KeyResult['progressReports']>(
+  'progressReports',
+)
+
+export const getCurrentProgress = (id?: KeyResult['id']) => ({
+  get,
+}: RecoilSpecificationGetter) => {
+  if (!id) return
+
+  const progressReports = get(selectProgressReports(id))
+  const latestProgressReport = progressReports?.[0]
+
+  return latestProgressReport?.valueNew
+}
+
+export const setCurrentProgress = (id?: KeyResult['id']) => (
+  { get, set }: RecoilSpecificationSetter,
+  valueNew: ProgressReport['valueNew'] | DefaultValue | undefined,
+) => {
+  if (!id) return
+
+  const progressReportsSelector = selectProgressReports(id)
+
+  const progressReports = get(progressReportsSelector)
+  const latestProgressReport = progressReports?.[0]
+  const newLocalReport = {
+    valueNew,
+    valuePrevious: latestProgressReport?.valueNew,
+  }
+
+  set(
+    progressReportsSelector,
+    remove([newLocalReport as ProgressReport, ...(progressReports ?? [])]),
+  )
+}
 
 const currentProgress = selectorFamily<
   ProgressReport['valueNew'] | undefined,
   KeyResult['id'] | undefined
 >({
   key: KEY,
-  get: (id) => ({ get }) => {
-    if (!id) return
-
-    const progressReports = get(selectProgressReports(id))
-    const latestProgressReport = progressReports?.[0]
-
-    return latestProgressReport?.valueNew
-  },
-  set: (id) => ({ get, set }, valueNew) => {
-    if (!id) return
-
-    const progressReportsSelector = selectProgressReports(id)
-
-    const progressReports = get(progressReportsSelector)
-    const latestProgressReport = progressReports?.[0]
-    const newLocalReport = {
-      valueNew,
-      valuePrevious: latestProgressReport?.valueNew,
-    }
-
-    set(
-      progressReportsSelector,
-      remove([newLocalReport as ProgressReport, ...(progressReports ?? [])]),
-    )
-  },
+  get: getCurrentProgress,
+  set: setCurrentProgress,
 })
 
 export default currentProgress

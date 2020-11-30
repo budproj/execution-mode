@@ -2,7 +2,7 @@ import { Grid, GridItem, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import { GRID_TEMPLATE_COLUMN, BORDER_COLOR } from 'components/KeyResult/View/constants'
+import { GRID_TEMPLATE_COLUMN, BORDER_COLOR } from 'src/components/KeyResult/View/constants'
 
 import messages from './messages'
 

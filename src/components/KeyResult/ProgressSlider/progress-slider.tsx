@@ -8,8 +8,8 @@ import {
 import React from 'react'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
-import { KeyResult } from 'components/KeyResult/types'
-import { keyResultProgressUpdatePopoverSlider } from 'state/recoil/key-result/progress-update'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultProgressUpdatePopoverSlider } from 'src/state/recoil/key-result/progress-update'
 
 import SliderContainer from './slider-container'
 

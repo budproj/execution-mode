@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 import { FormatDateOptions, useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { KeyResult } from 'components/KeyResult'
-import BaseGridItem from 'components/KeyResult/View/Body/Columns/Base'
-import { buildPartialSelector } from 'state/recoil/key-result'
+import { KeyResult } from 'src/components/KeyResult'
+import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
+import { buildPartialSelector } from 'src/state/recoil/key-result'
 
 export interface CycleProperties {
   id?: KeyResult['id']

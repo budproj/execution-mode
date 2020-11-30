@@ -1,6 +1,6 @@
 import { extendTheme } from '@chakra-ui/react'
 
-import tokens from 'themes/tokens'
+import tokens from 'src/themes/tokens'
 
 import { Button, Skeleton, Tooltip } from './components'
 
