@@ -31,20 +31,16 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
 
     const isLoaded = Boolean(goal)
 
-    const handleSlkeyResultIDerUpdate = useCallback(
+    const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
         if (valueNew) setCurrentProgress(valueNew)
       },
       [setCurrentProgress],
     )
 
-    const handleSlkeyResultIDerUpdateEnd = useCallback(
+    const handleSliderUpdateEnd = useCallback(
       (newValue: number | number[]) => {
-        setOpenedPopover(keyResultID)
-        console.log(newValue)
-        // Console.log('ok')
-        // const newKeyResultPartial = { progress: newValue as number, keyResultID }
-        // Await updateRemoteKeyResult(keyResultID, newKeyResultPartial)
+        if (newValue) setOpenedPopover(keyResultID)
       },
       [keyResultID, setOpenedPopover],
     )
@@ -57,8 +53,8 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
         goal={goal as KeyResult['goal']}
         format={format}
         forwardedReference={forwardedReference}
-        onChange={handleSlkeyResultIDerUpdate}
-        onChangeEnd={handleSlkeyResultIDerUpdateEnd}
+        onChange={handleSliderUpdate}
+        onChangeEnd={handleSliderUpdateEnd}
       />
     ) : (
       <Slider isDisabled />
