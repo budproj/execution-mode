@@ -6,7 +6,7 @@ import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
 import { BORDER_COLOR } from 'src/components/KeyResult/View/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 export interface TitleProperties {
   id?: KeyResult['id']

@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 
 import { KeyResult, ProgressReport } from 'src/components/KeyResult'
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
-import { buildPartialSelector } from 'src/state/recoil/key-result'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 

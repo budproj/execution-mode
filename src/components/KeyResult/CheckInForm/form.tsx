@@ -7,7 +7,7 @@ import { keyResultProgressUpdateCurrentProgress as selectCurrentProgress } from 
 
 import { KeyResult, ProgressReport } from '../types'
 
-import { CurrentProgressField, NewProgressField } from './Fields'
+import { CurrentProgressField, NewProgressField, CurrentConfidenceField } from './Fields'
 
 export interface CheckInFormProperties {
   keyResultID?: KeyResult['id']
@@ -36,6 +36,7 @@ const CheckInForm = ({ keyResultID }: CheckInFormProperties) => {
     >
       {() => (
         <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
+          <CurrentConfidenceField keyResultID={keyResultID} />
           <Flex gridGap={5}>
             <CurrentProgressField keyResultID={keyResultID} />
             <NewProgressField keyResultID={keyResultID} />

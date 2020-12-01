@@ -6,13 +6,12 @@ import { Team } from 'src/components/Company/types'
 import { KeyResult } from 'src/components/KeyResult'
 import { Objective } from 'src/components/Objective/types'
 import { User } from 'src/components/User/types'
+import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
+import { RecoilSpecificationGetter, RecoilSpecificationSetter } from 'src/state/recoil/types'
 
-import { RecoilSpecificationGetter, RecoilSpecificationSetter } from '../types'
-
-import keyResultAtomFamily from './atom-family'
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::SELECTORS`
+const KEY = `${PREFIX}::PARTIAL_SELECTOR`
 
 type ValueOf<T> = T[keyof T]
 type KeyResultPart = ValueOf<KeyResult> | ValueOf<Objective> | ValueOf<User> | ValueOf<Team>
@@ -50,3 +49,5 @@ export const buildPartialSelector = <T extends KeyResultPart>(part: string) =>
     get: getKeyResultPart<T>(part),
     set: setKeyResultPart<T>(part),
   })
+
+export default buildPartialSelector

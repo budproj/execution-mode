@@ -6,8 +6,8 @@ import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/se
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
 import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result'
 import { keyResultProgressUpdateCurrentProgress as selectCurrentProgress } from 'src/state/recoil/key-result/progress-update'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 export interface ProgressProperties {
   id?: KeyResult['id']

@@ -7,9 +7,29 @@
     "defaultMessage": "Atualizar",
     "description": "This message is displayed in a tooltip above the SliderThumb on our sliders"
   },
+  "/VrdI0": {
+    "defaultMessage": "Um ícone de pasta",
+    "description": "The desc message for the Folder icon. This icon is used to ilustrate our key results"
+  },
+  "/vJzGe": {
+    "defaultMessage": "Um ícone de marcador de página",
+    "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
+  },
+  "03yPkn": {
+    "defaultMessage": "Um ícone de bussúla",
+    "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
+  },
+  "0xI/K7": {
+    "defaultMessage": "Um ícone de microfone",
+    "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
+  },
   "17XVCU": {
     "defaultMessage": "Data",
     "description": "The text of the table head related to the Date column"
+  },
+  "1ss4IX": {
+    "defaultMessage": "Um ícone de mensagem",
+    "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
   "25ACLj": {
     "defaultMessage": "Dashboard",
@@ -18,6 +38,10 @@
   "2Ej1Zi": {
     "defaultMessage": "Minhas KR",
     "description": "AppBar menu item that links to My Key Results page"
+  },
+  "44uWtn": {
+    "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
+    "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
   },
   "8bQS0s": {
     "defaultMessage": "Em atraso",
@@ -30,6 +54,10 @@
   "A3RqIa": {
     "defaultMessage": "Um círculo amarelo, indicando que o resultado-chave está em risco",
     "description": "A brief explanation for screen readers regarding the yellow status circle"
+  },
+  "A5ct4X": {
+    "defaultMessage": "Um ícone de documento de texto",
+    "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
   },
   "AobZDF": {
     "defaultMessage": "Em risco",
@@ -46,6 +74,10 @@
   "FVnpVq": {
     "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
     "description": "The alternative text explaining our arrow right icon"
+  },
+  "GHu/pe": {
+    "defaultMessage": "Um ícone de video",
+    "description": "The desc message for the Video icon. This icon is used to ilustrate our key results"
   },
   "GeAU92": {
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
@@ -67,6 +99,14 @@
     "defaultMessage": "Status",
     "description": "The text of the table head related to the Status column"
   },
+  "NADPP1": {
+    "defaultMessage": "Um ícone de lata de lixo",
+    "description": "The desc message for the Delete icon. This icon is used to ilustrate our key results"
+  },
+  "P/ujgo": {
+    "defaultMessage": "Um ícone de controle de video game",
+    "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
+  },
   "Pkdkh4": {
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
@@ -74,6 +114,10 @@
   "QKUmFp": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our progress slider popover"
+  },
+  "RWaMNF": {
+    "defaultMessage": "Um ícone de coração",
+    "description": "The desc message for the Heart icon. This icon is used to ilustrate our key results"
   },
   "RZrZdZ": {
     "defaultMessage": "Home",
@@ -95,9 +139,25 @@
     "defaultMessage": "De:",
     "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
   },
+  "XNkzYe": {
+    "defaultMessage": "Um ícone de pin de localização",
+    "description": "The desc message for the Location icon. This icon is used to ilustrate our key results"
+  },
   "XYg5xf": {
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
+  },
+  "ZVTdlV": {
+    "defaultMessage": "Um ícone de ingresso de cinema",
+    "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
+  },
+  "ZXpNJ2": {
+    "defaultMessage": "Um ícone de gráfico de pizza",
+    "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
+  },
+  "c8UE59": {
+    "defaultMessage": "Um ícone de busca",
+    "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
   "fNt8Of": {
     "defaultMessage": "Atualizar Progresso",
@@ -106,6 +166,22 @@
   "kXNgkQ": {
     "defaultMessage": "Progresso",
     "description": "The text of the table head related to the Progress column"
+  },
+  "lApj0K": {
+    "defaultMessage": "Um ícone de carteira",
+    "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
+  },
+  "lm9HAr": {
+    "defaultMessage": "Um ícone de calendário",
+    "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
+  },
+  "m8Extk": {
+    "defaultMessage": "Um ícone de scanner",
+    "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
+  },
+  "nJ7CuJ": {
+    "defaultMessage": "Um ícone de relógio",
+    "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
   "qakF7T": {
     "defaultMessage": "Item",
@@ -122,6 +198,10 @@
   "tf3MiP": {
     "defaultMessage": "Minhas Key Results",
     "description": "The page title that our users should see"
+  },
+  "ui441M": {
+    "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
+    "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
   },
   "vEnRa9": {
     "defaultMessage": "Para:",

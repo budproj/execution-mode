@@ -7,8 +7,8 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import { KeyResult, KeyResultFormat, ProgressReport } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result'
 import { keyResultProgressUpdateCurrentProgress as selectCurrentProgress } from 'src/state/recoil/key-result/progress-update'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 

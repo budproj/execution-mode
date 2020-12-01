@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import ConfidenceTag from 'src/components/KeyResult/ConfidenceTag/confidence-tag'
 import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
@@ -22,7 +22,6 @@ const Status = ({ id }: StatusProperties): ReactElement => {
   const intl = useIntl()
   const latestConfidenceReport = useRecoilValue(confidenceReportsSelector(id))?.[0]
   const updateDate = latestConfidenceReport?.createdAt
-  const currentConfidence = latestConfidenceReport?.valueNew ?? 50
 
   const isKeyResultLoaded = Boolean(id)
 
@@ -34,7 +33,7 @@ const Status = ({ id }: StatusProperties): ReactElement => {
           fadeDuration={0}
           /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         >
-          <ConfidenceTag confidence={currentConfidence} />
+          <ConfidenceTag keyResultID={id} />
         </Skeleton>
 
         <SkeletonText

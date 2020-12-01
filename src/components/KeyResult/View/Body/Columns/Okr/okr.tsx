@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import StackIcon from 'src/components/Icons/Stack'
 import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
