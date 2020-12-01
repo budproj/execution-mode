@@ -8,12 +8,12 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useResetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import { Close as CloseIcon } from 'src/components/Icons'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultProgressUpdatePopoverSlider } from 'src/state/recoil/key-result/progress-update'
+import { keyResultProgressUpdatePopoverOpen } from 'src/state/recoil/key-result/progress-update'
 
 import messages from './messages'
 import SliderContainer from './slider-container'
@@ -24,14 +24,14 @@ export interface ProgressSliderProperties {
 
 const ProgressSlider = ({ id }: ProgressSliderProperties) => {
   const intl = useIntl()
-  const openedPopover = useRecoilValue(keyResultProgressUpdatePopoverSlider)
-  const resetOpenedPopover = useResetRecoilState(keyResultProgressUpdatePopoverSlider)
-  const isPopoverOpened = openedPopover === id && typeof openedPopover !== 'undefined'
+  const [isPopoverOpen, setPopoverOpen] = useRecoilState<boolean>(
+    keyResultProgressUpdatePopoverOpen(id),
+  )
 
-  const handleClose = () => resetOpenedPopover()
+  const handleClose = () => setPopoverOpen(false)
 
   return (
-    <Popover isOpen={isPopoverOpened} placement="bottom-start" onClose={handleClose}>
+    <Popover isOpen={isPopoverOpen} placement="bottom-start" onClose={handleClose}>
       <PopoverTrigger>
         <SliderContainer keyResultID={id} />
       </PopoverTrigger>

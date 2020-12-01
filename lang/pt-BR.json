@@ -191,6 +191,10 @@
     "defaultMessage": "Item",
     "description": "Placeholder item for layout purposes"
   },
+  "rH+dGv": {
+    "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
+    "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
+  },
   "rpLZ2J": {
     "defaultMessage": "Bud - Gestão de OKR e Estratégia",
     "description": "The title text of our logotype, it is displayed when an user hover the icon itself"

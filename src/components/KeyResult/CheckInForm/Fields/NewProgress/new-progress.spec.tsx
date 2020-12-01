@@ -3,106 +3,60 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { mountWithIntl, FakeFormikWrapper, actWait } from 'lib/enzyme'
+import { mountWithIntl, FakeFormikWrapper } from 'lib/enzyme'
 import { KeyResultFormat } from 'src/components/KeyResult/types'
 
 import NewProgress from './new-progress'
 
-describe('company expectations', () => {
+describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
-  it('dispatches the set action upon update without formatting for percentage inputs', async () => {
+  it('renders the Absolute mask if the key result format is NUMBER', () => {
+    const format = KeyResultFormat.NUMBER
+    sinon.stub(recoil, 'useRecoilValue').returns(format)
+
+    const result = mountWithIntl(
+      <FakeFormikWrapper>
+        <NewProgress keyResultID={faker.random.number()} />
+      </FakeFormikWrapper>,
+    )
+
+    const maskComponent = result.find('Absolute')
+
+    expect(maskComponent.length).toEqual(1)
+  })
+
+  it('renders the Percentage mask if the key result formata is PERCENTAGE', () => {
     const format = KeyResultFormat.PERCENTAGE
-    const newValue = '99%'
-    const spy = sinon.spy()
-
     sinon.stub(recoil, 'useRecoilValue').returns(format)
-    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
 
     const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <FakeFormikWrapper>
-          <NewProgress keyResultID={faker.random.number()} />
-        </FakeFormikWrapper>
-      </recoil.RecoilRoot>,
+      <FakeFormikWrapper>
+        <NewProgress keyResultID={faker.random.number()} />
+      </FakeFormikWrapper>,
     )
 
-    const input = result.find('input')
-    const event = { target: { name: 'newValue', value: newValue, focus: sinon.fake() } }
-    input.simulate('change', event)
+    const maskComponent = result.find('Percentage')
 
-    await actWait()
-
-    const expectedValue = 0.99
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(expectedValue)
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
+    expect(maskComponent.length).toEqual(1)
   })
 
-  it('dispatches the set action upon update without formatting for absolute inputs', async () => {
-    const format = KeyResultFormat.NUMBER
-    const newValue = '999.999,00'
-    const spy = sinon.spy()
-
-    sinon.stub(recoil, 'useRecoilValue').returns(format)
-    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
-
-    const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <FakeFormikWrapper>
-          <NewProgress keyResultID={faker.random.number()} />
-        </FakeFormikWrapper>
-      </recoil.RecoilRoot>,
-    )
-
-    const input = result.find('input')
-    const event = { target: { name: 'newValue', value: newValue, focus: sinon.fake() } }
-    input.simulate('change', event)
-
-    await actWait()
-
-    const expectedValue = 999999
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(expectedValue)
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-
-  it('dispatches the set action upon update without formatting for brazillian reais inputs', async () => {
+  it('renders the CoinBRL mask if the key result is COIN_BRL', () => {
     const format = KeyResultFormat.COIN_BRL
-    const newValue = 'R$999.999,99'
-    const spy = sinon.spy()
-
     sinon.stub(recoil, 'useRecoilValue').returns(format)
-    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
 
     const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <FakeFormikWrapper>
-          <NewProgress keyResultID={faker.random.number()} />
-        </FakeFormikWrapper>
-      </recoil.RecoilRoot>,
+      <FakeFormikWrapper>
+        <NewProgress keyResultID={faker.random.number()} />
+      </FakeFormikWrapper>,
     )
 
-    const input = result.find('input')
-    const event = { target: { name: 'newValue', value: newValue, focus: sinon.fake() } }
-    input.simulate('change', event)
+    const maskComponent = result.find('CoinBRL')
 
-    await actWait()
-
-    const expectedValue = 999999.99
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(expectedValue)
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
+    expect(maskComponent.length).toEqual(1)
   })
 
-  it('dispatches 0 upon update if an empty string is provided', async () => {
-    const format = KeyResultFormat.NUMBER
-    const newValue = ''
-    const spy = sinon.spy()
-
-    sinon.stub(recoil, 'useRecoilValue').returns(format)
-    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
-
+  it('renders the Absolute mask if no format was provided', () => {
     const result = mountWithIntl(
       <recoil.RecoilRoot>
         <FakeFormikWrapper>
@@ -111,15 +65,8 @@ describe('company expectations', () => {
       </recoil.RecoilRoot>,
     )
 
-    const input = result.find('input')
-    const event = { target: { name: 'newValue', value: newValue, focus: sinon.fake() } }
-    input.simulate('change', event)
+    const maskComponent = result.find('Absolute')
 
-    await actWait()
-
-    const expectedValue = 0
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(expectedValue)
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
+    expect(maskComponent.length).toEqual(1)
   })
 })

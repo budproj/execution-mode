@@ -41,10 +41,12 @@ const CheckInForm = ({ keyResultID }: CheckInFormProperties) => {
     >
       {() => (
         <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
-          <CurrentConfidenceField keyResultID={keyResultID} />
-          <Flex gridGap={5}>
-            <CurrentProgressField keyResultID={keyResultID} />
-            <NewProgressField keyResultID={keyResultID} />
+          <Flex direction="column" gridGap={5}>
+            <CurrentConfidenceField />
+            <Flex gridGap={5}>
+              <CurrentProgressField keyResultID={keyResultID} />
+              <NewProgressField keyResultID={keyResultID} />
+            </Flex>
           </Flex>
         </FormControl>
       )}

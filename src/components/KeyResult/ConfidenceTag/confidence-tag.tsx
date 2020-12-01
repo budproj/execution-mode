@@ -4,24 +4,20 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import CircleIcon from 'src/components/Icons/Circle'
-import { KeyResult } from 'src/components/KeyResult/types'
+import { ConfidenceReport } from 'src/components/KeyResult/types'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
 export interface ConfidenceTagProperties {
-  keyResultID?: KeyResult['id']
+  confidenceValue?: ConfidenceReport['valueNew']
 }
 
-const ConfidenceTag = ({ keyResultID }: ConfidenceTagProperties) => {
+const ConfidenceTag = ({ confidenceValue }: ConfidenceTagProperties) => {
   const intl = useIntl()
-  const confidenceTag = useRecoilValue(confidenceTagSelector(keyResultID))
+  const confidenceTag = useRecoilValue(confidenceTagSelector(confidenceValue))
 
   return (
     <Flex gridGap={4} alignItems="center">
-      <CircleIcon
-        fill={confidenceTag.color}
-        mt="6px"
-        desc={intl.formatMessage(confidenceTag.desc)}
-      />
+      <CircleIcon fill={confidenceTag.color} desc={intl.formatMessage(confidenceTag.desc)} />
       <Text>{intl.formatMessage(confidenceTag.message)}</Text>
     </Flex>
   )

@@ -1,9 +1,7 @@
 import { defineMessages, MessageDescriptor } from 'react-intl'
 import { selectorFamily } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult'
-import currentConfidenceSelector from 'src/state/recoil/key-result/progress-update/current-confidence'
-import { RecoilSpecificationGetter } from 'src/state/recoil/types'
+import { ConfidenceReport } from 'src/components/KeyResult'
 
 import { PREFIX } from './constants'
 
@@ -21,6 +19,19 @@ export interface Tag {
   message: MessageDescriptor
   desc: MessageDescriptor
   color: string
+}
+
+export const CONFIDENCE_UPDATED = {
+  max: 100,
+  min: 50,
+}
+export const CONFIDENCE_AT_RISK = {
+  max: 49,
+  min: 25,
+}
+export const CONFIDENCE_OUTDATED = {
+  max: 24,
+  min: 0,
 }
 
 export const messages = defineMessages({
@@ -62,33 +73,47 @@ export const messages = defineMessages({
   },
 }) as Record<ConfidenceTagMessages, MessageDescriptor>
 
-export const getConfidenceTagBasedOnID = (id?: KeyResult['id']) => ({
-  get,
-}: RecoilSpecificationGetter): Tag => {
-  const currentConfidence = get(currentConfidenceSelector(id)) ?? 50
+export const normalizeConfidence = (
+  value?: ConfidenceReport['valueNew'],
+): ConfidenceReport['valueNew'] => {
+  if (!value) return CONFIDENCE_UPDATED.max
 
-  if (currentConfidence >= 50)
-    return {
+  if (value >= CONFIDENCE_UPDATED.min) return CONFIDENCE_UPDATED.max
+
+  if (value >= CONFIDENCE_AT_RISK.min && value < CONFIDENCE_UPDATED.min)
+    return CONFIDENCE_AT_RISK.max
+
+  return CONFIDENCE_OUTDATED.max
+}
+
+export const getConfidenceTagBasedOnValue = (
+  value: ConfidenceReport['valueNew'] = CONFIDENCE_UPDATED.min,
+) => (): Tag => {
+  const normalizedConfidence = normalizeConfidence(value)
+  const confidenceHashmap = {
+    [CONFIDENCE_UPDATED.max]: {
       message: messages.upToDate,
       desc: messages.iconDescUpToDate,
       color: 'green.500',
-    }
-  if (currentConfidence >= 25 && currentConfidence < 50)
-    return {
+    },
+    [CONFIDENCE_AT_RISK.max]: {
       message: messages.atRisk,
       desc: messages.iconDescAtRisk,
       color: 'yellow.500',
-    }
-  return {
-    message: messages.overdue,
-    desc: messages.iconDescOverdue,
-    color: 'red.500',
+    },
+    [CONFIDENCE_OUTDATED.max]: {
+      message: messages.overdue,
+      desc: messages.iconDescOverdue,
+      color: 'red.500',
+    },
   }
+
+  return confidenceHashmap[normalizedConfidence]
 }
 
-export const confidenceTag = selectorFamily<Tag, KeyResult['id'] | undefined>({
+export const confidenceTag = selectorFamily<Tag, ConfidenceReport['valueNew'] | undefined>({
   key: KEY,
-  get: getConfidenceTagBasedOnID,
+  get: getConfidenceTagBasedOnValue,
 })
 
 export default confidenceTag

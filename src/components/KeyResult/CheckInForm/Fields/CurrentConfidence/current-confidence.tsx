@@ -1,32 +1,46 @@
-import { Box, FormLabel, Select } from '@chakra-ui/react'
-import { Field, FieldProps } from 'formik'
+import { Box, FormLabel, MenuItemOption } from '@chakra-ui/react'
+import { useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { ConfidenceReport, KeyResult } from 'src/components/KeyResult/types'
+import SelectMenu from 'src/components/Base/SelectMenu'
+import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
+import ConfidenceTag from 'src/components/KeyResult/ConfidenceTag/confidence-tag'
+import {
+  CONFIDENCE_AT_RISK,
+  CONFIDENCE_OUTDATED,
+  CONFIDENCE_UPDATED,
+  normalizeConfidence,
+} from 'src/state/recoil/key-result/selectors/confidence-tag'
 
 import messages from './messages'
 
-export interface CurrentConfidenceFieldProperties {
-  keyResultID?: KeyResult['id']
-}
-
-const CurrentConfidence = ({ keyResultID }: CurrentConfidenceFieldProperties) => {
+const CurrentConfidence = () => {
   const intl = useIntl()
-  const parseAndDispatch = (value: any) => {
-    console.log(intl)
-    console.log(value)
-    console.log(keyResultID)
-  }
+  const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
+  const normalizedConfidence = normalizeConfidence(values.confidence ?? 50)
+  const handleChange = (newValue: string | string[]) => setFieldValue('confidence', newValue)
 
   return (
     <Box>
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
-      <Field name="confidence" as="select">
-        {({ field }: FieldProps<ConfidenceReport['valueNew']>) => (
-          <Select formikField={field} onValueChange={parseAndDispatch} />
-        )}
-      </Field>
+      <SelectMenu
+        placeholder={<ConfidenceTag confidenceValue={normalizedConfidence} />}
+        value={normalizedConfidence.toString()}
+        onChange={handleChange}
+      >
+        <MenuItemOption value={CONFIDENCE_UPDATED.max.toString()}>
+          <ConfidenceTag confidenceValue={CONFIDENCE_UPDATED.max} />
+        </MenuItemOption>
+
+        <MenuItemOption value={CONFIDENCE_AT_RISK.max.toString()}>
+          <ConfidenceTag confidenceValue={CONFIDENCE_AT_RISK.max} />
+        </MenuItemOption>
+
+        <MenuItemOption value={CONFIDENCE_OUTDATED.max.toString()}>
+          <ConfidenceTag confidenceValue={CONFIDENCE_OUTDATED.max} />
+        </MenuItemOption>
+      </SelectMenu>
     </Box>
   )
 }

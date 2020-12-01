@@ -11,12 +11,11 @@ describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
   it('opens the popover as soon as the provided ID was marked as open', async () => {
-    const fakeID = faker.random.number()
-    sinon.stub(recoil, 'useRecoilValue').returns(fakeID)
+    sinon.stub(recoil, 'useRecoilState').returns([true, sinon.fake()])
 
     const result = mountWithIntl(
       <recoil.RecoilRoot>
-        <ProgressSlider id={fakeID} />
+        <ProgressSlider id={faker.random.number()} />
       </recoil.RecoilRoot>,
     )
     await actWait()
@@ -27,8 +26,7 @@ describe('component expectations', () => {
   })
 
   it('keeps the popover closed when needed', async () => {
-    const fakeID = faker.random.number()
-    sinon.stub(recoil, 'useRecoilValue').returns(fakeID)
+    sinon.stub(recoil, 'useRecoilState').returns([false, sinon.fake()])
 
     const result = mountWithIntl(
       <recoil.RecoilRoot>

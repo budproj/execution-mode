@@ -33,7 +33,7 @@ const Status = ({ id }: StatusProperties): ReactElement => {
           fadeDuration={0}
           /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         >
-          <ConfidenceTag keyResultID={id} />
+          <ConfidenceTag confidenceValue={latestConfidenceReport?.valueNew} />
         </Skeleton>
 
         <SkeletonText

@@ -3,7 +3,7 @@ const Input = {
     outline: () => ({
       field: {
         borderWidth: 2,
-        borderColor: 'gray.200',
+        borderColor: 'gray.100',
         color: 'gray.400',
         borderRadius: 4,
       },

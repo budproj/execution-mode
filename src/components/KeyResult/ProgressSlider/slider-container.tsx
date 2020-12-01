@@ -4,8 +4,9 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import Slider, { SliderProperties } from 'src/components/Base/Slider'
 import { KeyResult } from 'src/components/KeyResult/types'
 import {
-  keyResultProgressUpdatePopoverSlider,
+  keyResultProgressUpdatePopoverOpen,
   keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
+  keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
   keyResultProgressUpdateStep as selectStep,
 } from 'src/state/recoil/key-result/progress-update'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
@@ -28,11 +29,12 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
   ({ keyResultID }: ProgressSliderContainerProperties, forwardedReference) => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
-    const confidenceTag = useRecoilValue(confidenceTagSelector(keyResultID))
+    const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
+    const confidenceTag = useRecoilValue(confidenceTagSelector(currentConfidence))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
     const goal = useRecoilValue(goalSelector(keyResultID))
     const step = useRecoilValue(selectStep(keyResultID))
-    const setOpenedPopover = useSetRecoilState(keyResultProgressUpdatePopoverSlider)
+    const setOpenedPopover = useSetRecoilState(keyResultProgressUpdatePopoverOpen(keyResultID))
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
@@ -43,7 +45,7 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
 
     const handleSliderUpdateEnd = useCallback(
       (newValue: number | number[]) => {
-        if (newValue) setOpenedPopover(keyResultID)
+        if (newValue) setOpenedPopover(true)
       },
       [keyResultID, setOpenedPopover],
     )
