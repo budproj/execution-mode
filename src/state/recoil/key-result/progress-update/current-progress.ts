@@ -20,7 +20,7 @@ export const getCurrentProgress = (id?: KeyResult['id']) => ({
   const progressReports = get(selectProgressReports(id))
   const latestProgressReport = progressReports?.[0]
 
-  return latestProgressReport?.valueNew ?? 0
+  return latestProgressReport?.valueNew
 }
 
 export const setCurrentProgress = (id?: KeyResult['id']) => (

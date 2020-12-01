@@ -3,9 +3,11 @@ import { Formik } from 'formik'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { keyResultProgressUpdateCurrentProgress as selectCurrentProgress } from 'src/state/recoil/key-result/progress-update'
-
-import { KeyResult, ProgressReport } from '../types'
+import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
+import {
+  keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
+  keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
+} from 'src/state/recoil/key-result/progress-update'
 
 import { CurrentProgressField, NewProgressField, CurrentConfidenceField } from './Fields'
 
@@ -15,13 +17,16 @@ export interface CheckInFormProperties {
 
 export interface CheckInFormValues {
   currentProgress?: ProgressReport['valueNew']
+  confidence?: ConfidenceReport['valueNew']
   newProgress?: ProgressReport['valueNew']
 }
 
 const CheckInForm = ({ keyResultID }: CheckInFormProperties) => {
   const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
+  const confidence = useRecoilValue(selectCurrentConfidence(keyResultID))
   const initialValues: CheckInFormValues = {
     currentProgress,
+    confidence,
     newProgress: 0,
   }
 

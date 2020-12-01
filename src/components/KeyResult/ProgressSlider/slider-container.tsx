@@ -1,7 +1,7 @@
-import React, { forwardRef, useCallback } from 'react'
+import React, { ForwardedRef, forwardRef, useCallback, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { Slider } from 'src/components/Base'
+import Slider, { SliderProperties } from 'src/components/Base/Slider'
 import { KeyResult } from 'src/components/KeyResult/types'
 import {
   keyResultProgressUpdatePopoverSlider,
@@ -18,16 +18,21 @@ export interface ProgressSliderContainerProperties {
 const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('initialValue')
 const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 
+const ProgressSlider = forwardRef(
+  (properties: SliderProperties, reference: ForwardedRef<HTMLDivElement>) => (
+    <Slider {...properties} ref={reference} />
+  ),
+)
+
 const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContainerProperties>(
   ({ keyResultID }: ProgressSliderContainerProperties, forwardedReference) => {
+    const [isLoaded, setIsLoaded] = useState(false)
     const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
     const confidenceTag = useRecoilValue(confidenceTagSelector(keyResultID))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
     const goal = useRecoilValue(goalSelector(keyResultID))
     const step = useRecoilValue(selectStep(keyResultID))
     const setOpenedPopover = useSetRecoilState(keyResultProgressUpdatePopoverSlider)
-
-    const isLoaded = Boolean(goal)
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
@@ -43,18 +48,28 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
       [keyResultID, setOpenedPopover],
     )
 
-    return (
-      <Slider
+    if (!isLoaded && typeof goal !== 'undefined') setIsLoaded(true)
+
+    // Since Chakra use only hooks to handle lifecycles, it does not behaves well in their
+    // onChange events. Even if we provide the isDisabled tag to it, it dispatches the onChange and
+    // onChangeEnd events as soon as you pass an defined value. That triggers all the popovers to
+    // appears (since our applications understands that the slider was updates upon mounting).
+    // To prevent that I've added that dumb componen called ProgressSlider, that simples behaves
+    // as a different node in our tree and allow us to avoid that behaviour.
+    return isLoaded ? (
+      <ProgressSlider
         ref={forwardedReference}
         value={currentProgress}
         trackColor={confidenceTag?.color}
         min={initialValue as KeyResult['initialValue']}
         max={goal as KeyResult['goal']}
         step={step}
-        isDisabled={!isLoaded}
+        focusThumbOnChange={false}
         onChange={handleSliderUpdate}
         onChangeEnd={handleSliderUpdateEnd}
       />
+    ) : (
+      <Slider isDisabled />
     )
   },
 )
