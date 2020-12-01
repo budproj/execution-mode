@@ -41,7 +41,7 @@ const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
 
   return (
     <DraggableGrid
-      id={id}
+      keyResultID={id}
       index={index}
       alignItems="center"
       templateColumns={GRID_TEMPLATE_COLUMN}

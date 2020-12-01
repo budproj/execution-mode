@@ -1,16 +1,12 @@
-import { Box, BoxProps } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
-import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, DragDropContextProps } from 'react-beautiful-dnd'
 
-export interface DroppableBoxProperties extends BoxProps {
-  onDragEnd: OnDragEndResponder
-}
-
-const DroppableBox = ({ onDragEnd, children, ...rest }: DroppableBoxProperties): ReactElement => (
-  <DragDropContext onDragEnd={onDragEnd}>
+const DroppableBox = ({ onDragEnd, children, ...rest }: DragDropContextProps): ReactElement => (
+  <DragDropContext onDragEnd={onDragEnd} {...rest}>
     <Droppable droppableId="KEY_RESULT_VIEW" direction="vertical">
       {(provided) => (
-        <Box ref={provided.innerRef} {...provided.droppableProps} {...rest}>
+        <Box ref={provided.innerRef} {...provided.droppableProps}>
           {children}
           {provided.placeholder}
         </Box>
