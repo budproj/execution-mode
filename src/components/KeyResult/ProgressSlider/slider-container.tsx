@@ -47,7 +47,7 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
       (newValue: number | number[]) => {
         if (newValue) setOpenedPopover(true)
       },
-      [keyResultID, setOpenedPopover],
+      [setOpenedPopover],
     )
 
     if (!isLoaded && typeof goal !== 'undefined') setIsLoaded(true)

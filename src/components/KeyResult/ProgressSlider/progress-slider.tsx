@@ -36,8 +36,15 @@ const ProgressSlider = ({ id }: ProgressSliderProperties) => {
         <SliderContainer keyResultID={id} />
       </PopoverTrigger>
       <PopoverContent border="none" width={400}>
-        <Box boxShadow="lg" px={8} py={6} borderRadius={4}>
-          <PopoverHeader border="none" fontSize="18px" fontWeight={700} color="gray.600" px={0}>
+        <Box boxShadow="lg" py={6} borderRadius={4}>
+          <PopoverHeader
+            border="none"
+            fontSize="18px"
+            fontWeight={700}
+            color="gray.600"
+            px={8}
+            pb={0}
+          >
             {intl.formatMessage(messages.updateProgress)}
           </PopoverHeader>
           <PopoverCloseButton

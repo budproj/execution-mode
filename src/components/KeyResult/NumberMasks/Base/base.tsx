@@ -6,7 +6,6 @@ import { NumberMaskProperties } from 'src/components/KeyResult/NumberMasks/types
 
 const Base = <T extends string | number | undefined>({
   formikField,
-  handleChange,
   defaultValue,
   displayType = 'input',
   ...rest
