@@ -80,6 +80,8 @@ describe('component expectations', () => {
       .onCall(0)
       .returns([currentProgress, sinon.fake()])
       .onCall(1)
+      .returns([currentProgress, sinon.fake()])
+      .onCall(2)
       .returns([currentProgress + faker.random.number({ min: 1 }), sinon.fake()])
     sinon
       .stub(recoil, 'useRecoilValue')
