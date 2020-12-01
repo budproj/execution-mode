@@ -1,6 +1,6 @@
 import { selectorFamily } from 'recoil'
 
-import { KeyResult } from 'components/KeyResult'
+import { KeyResult } from 'src/components/KeyResult'
 
 import { PREFIX, COLORS_AVAILABLE, DRAWINGS_AVAILABLE } from './constants'
 import { KeyResultIconDrawing } from './types'

@@ -1,3 +1,3 @@
-import CheckInForm from './check-in-form'
+import CheckInForm from './form'
 
 export default CheckInForm

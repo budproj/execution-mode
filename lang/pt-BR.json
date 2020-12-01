@@ -91,6 +91,10 @@
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
   },
+  "XHDyV/": {
+    "defaultMessage": "De:",
+    "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
+  },
   "XYg5xf": {
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
@@ -118,6 +122,10 @@
   "tf3MiP": {
     "defaultMessage": "Minhas Key Results",
     "description": "The page title that our users should see"
+  },
+  "vEnRa9": {
+    "defaultMessage": "Para:",
+    "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
   },
   "vzYQ5r": {
     "defaultMessage": "Nome da KR",
