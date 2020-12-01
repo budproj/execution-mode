@@ -4,11 +4,11 @@ import { PREFIX } from './constants'
 import { selectKeyResultIconDrawingBasedOnTitle } from './selectors'
 import { KeyResultIconDrawing } from './types'
 
-const KEY = `${PREFIX}::DRAWING_ATOM`
+const KEY = `${PREFIX}::DRAWING`
 
-const drawingAtom = atomFamily<KeyResultIconDrawing, string | undefined>({
+const drawing = atomFamily<KeyResultIconDrawing, string | undefined>({
   key: KEY,
   default: selectKeyResultIconDrawingBasedOnTitle,
 })
 
-export default drawingAtom
+export default drawing

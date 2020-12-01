@@ -1,10 +1,15 @@
 import { Box } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
+import { MessageDescriptor, useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import * as Icons from 'src/components/Icons'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultIconColorAtom, keyResultIconDrawingAtom } from 'src/state/recoil/key-result/icon'
+import {
+  keyResultIconColor,
+  keyResultIconDesc,
+  keyResultIconDrawing,
+} from 'src/state/recoil/key-result/icon'
 import { KeyResultIconDrawing } from 'state/recoil/key-result/icon/types'
 
 export interface KeyResultDynamicIconProperties {
@@ -12,14 +17,16 @@ export interface KeyResultDynamicIconProperties {
 }
 
 const KeyResultDynamicIcon = ({ title }: KeyResultDynamicIconProperties): ReactElement => {
-  const iconDrawingForTitle = useRecoilValue<KeyResultIconDrawing>(keyResultIconDrawingAtom(title))
-  const iconColorForTitle = useRecoilValue<string>(keyResultIconColorAtom(title))
+  const intl = useIntl()
+  const drawing = useRecoilValue<KeyResultIconDrawing>(keyResultIconDrawing(title))
+  const color = useRecoilValue<string>(keyResultIconColor(title))
+  const desc = useRecoilValue<MessageDescriptor>(keyResultIconDesc(drawing))
 
-  const IconComponent = Icons[iconDrawingForTitle]
+  const IconComponent = Icons[drawing]
 
   return (
-    <Box bg={iconColorForTitle} borderRadius={10} p={4} lineHeight={1}>
-      <IconComponent fill="white" w={8} h={8} />
+    <Box bg={color} borderRadius={10} p={4} lineHeight={1}>
+      <IconComponent desc={intl.formatMessage(desc)} fill="white" w={8} h={8} />
     </Box>
   )
 }

@@ -1,3 +1,5 @@
+import faker from 'faker'
+
 import { DRAWINGS_AVAILABLE, COLORS_AVAILABLE } from './constants'
 import * as selectors from './selectors'
 
@@ -20,5 +22,20 @@ describe('icon color', () => {
     const result = getter()
 
     expect(result).toEqual(COLORS_AVAILABLE[1])
+  })
+})
+
+describe('icon desc', () => {
+  it('returns an expected desc based on static drawing', () => {
+    const staticDrawing = 'Activity'
+    const descGroup = {
+      Activity: faker.random.word(),
+    }
+    const selector = selectors.getDescBasedOnDrawing(descGroup as any)
+    const getter = selector(staticDrawing)
+
+    const result = getter()
+
+    expect(result).toEqual(descGroup.Activity)
   })
 })

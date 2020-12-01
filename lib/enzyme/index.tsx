@@ -1,9 +1,11 @@
 import enzyme from 'enzyme'
-import { ReactElement } from 'react'
+import { Formik } from 'formik'
+import React, { ReactElement } from 'react'
 import { act } from 'react-dom/test-utils'
 import { IntlProvider } from 'react-intl'
 import { OptionalIntlConfig } from 'react-intl/src/components/provider'
 import { RecoilRoot } from 'recoil'
+import sinon from 'sinon'
 
 import messages from '../../compiled-lang/pt-BR.json'
 
@@ -52,6 +54,16 @@ export async function actWait(amount = 0) {
   })
 }
 
+interface FakeFormikWrapper {
+  children: ReactElement
+}
+
+export const FakeFormikWrapper = ({ children }: FakeFormikWrapper) => (
+  <Formik initialValues={{}} onSubmit={sinon.fake()}>
+    {children}
+  </Formik>
+)
+
 export default {
   shallowWithIntl,
   mountWithIntl,
@@ -59,4 +71,5 @@ export default {
   mountWithRecoil,
   wait,
   actWait,
+  FakeFormikWrapper,
 }

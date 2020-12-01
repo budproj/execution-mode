@@ -3,11 +3,11 @@ import { atomFamily } from 'recoil'
 import { PREFIX } from './constants'
 import { selectKeyResultIconColorBasedOnTitle } from './selectors'
 
-const KEY = `${PREFIX}::COLOR_ATOM`
+const KEY = `${PREFIX}::COLOR`
 
-const colorAtom = atomFamily<string, string | undefined>({
+const color = atomFamily<string, string | undefined>({
   key: KEY,
   default: selectKeyResultIconColorBasedOnTitle,
 })
 
-export default colorAtom
+export default color
