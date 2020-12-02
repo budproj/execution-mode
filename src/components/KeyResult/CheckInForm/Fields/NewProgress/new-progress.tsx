@@ -1,12 +1,14 @@
 import { Box, FormLabel } from '@chakra-ui/react'
-import { Field, FieldProps } from 'formik'
-import React from 'react'
+import { Field, FieldProps, useFormikContext } from 'formik'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import { keyResultProgressUpdateCurrentProgress as selectCurrentProgress } from 'src/state/recoil/key-result/progress-update'
+import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
 
 import messages from './messages'
 
@@ -19,7 +21,13 @@ const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 const NewProgress = ({ keyResultID }: NewProgressFieldProperties) => {
   const intl = useIntl()
   const format = useRecoilValue(formatSelector(keyResultID))
+  const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
+  const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
   const Mask = selectMaskBasedOnFormat(format)
+
+  useEffect(() => {
+    if (values.newProgress !== currentProgress) setFieldValue('newProgress', currentProgress)
+  }, [currentProgress, setFieldValue])
 
   return (
     <Box>

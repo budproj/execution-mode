@@ -4,10 +4,7 @@ import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import { mountWithIntl } from 'lib/enzyme'
-import {
-  keyResultProgressUpdatePopoverSlider,
-  keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
-} from 'src/state/recoil/key-result/progress-update'
+import { keyResultProgressUpdateCurrentProgress as selectCurrentProgress } from 'src/state/recoil/key-result/progress-update'
 
 import { KeyResultFormat } from '../types'
 
@@ -73,6 +70,9 @@ describe('component expectations', () => {
         return selector.key.includes('GOAL')
       },
     )
+    const popOverOpenSelectorMatcher = sinon.match((selector: recoil.RecoilState<boolean>) => {
+      return selector.key.includes('POPOVER_OPEN')
+    })
 
     sinon
       .stub(recoil, 'useRecoilState')
@@ -87,10 +87,7 @@ describe('component expectations', () => {
       .stub(recoil, 'useRecoilValue')
       .withArgs(goalSelectorMatcher)
       .returns(faker.random.number())
-    sinon
-      .stub(recoil, 'useSetRecoilState')
-      .withArgs(keyResultProgressUpdatePopoverSlider)
-      .returns(spy)
+    sinon.stub(recoil, 'useSetRecoilState').withArgs(popOverOpenSelectorMatcher).returns(spy)
 
     const result = mountWithIntl(
       React.createElement(
