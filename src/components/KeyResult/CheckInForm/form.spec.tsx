@@ -1,10 +1,11 @@
+import * as apollo from '@apollo/client'
+import enzyme from 'enzyme'
 import faker from 'faker'
 import { FormikProps } from 'formik'
 import React from 'react'
 import * as recoil from 'recoil'
-import * as apollo from '@apollo/client'
 import sinon from 'sinon'
-import enzyme from 'enzyme'
+
 import {
   keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
   keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,

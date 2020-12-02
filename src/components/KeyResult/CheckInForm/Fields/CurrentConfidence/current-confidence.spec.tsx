@@ -1,8 +1,8 @@
+import enzyme from 'enzyme'
+import faker from 'faker'
 import * as formik from 'formik'
 import React from 'react'
 import sinon from 'sinon'
-import faker from 'faker'
-import enzyme from 'enzyme'
 
 import CurrentConfidence from './current-confidence'
 
@@ -19,7 +19,7 @@ describe('formik integration', () => {
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(
       'confidence',
-      parseInt(fakeConfidence, 10),
+      Number.parseInt(fakeConfidence, 10),
     )
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

@@ -1,9 +1,9 @@
+import enzyme from 'enzyme'
 import faker from 'faker'
+import * as formik from 'formik'
 import React from 'react'
 import * as recoil from 'recoil'
-import * as formik from 'formik'
 import sinon from 'sinon'
-import enzyme from 'enzyme'
 
 import { KeyResultFormat } from 'src/components/KeyResult/types'
 
