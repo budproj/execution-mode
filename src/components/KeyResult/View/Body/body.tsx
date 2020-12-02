@@ -16,8 +16,8 @@ const component = 'KeyResultViewBody'
 
 const KeyResultViewBody = (): ReactElement => {
   const [keyResultView, setKeyResultView] = useRecoilState(keyResultViewAtom)
-  const [updateRank] = useMutation(queries.KeyResultViewUpdateRank)
-  const { loading, data } = useQuery(queries.KeyResultViewForBinding, {
+  const [updateRank] = useMutation(queries.UPDATE_RANK)
+  const { loading, data } = useQuery(queries.KEY_RESULT_VIEW_FOR_BINDING, {
     variables: {
       binding: KeyResultViewBinding.MINE,
     },

@@ -42,4 +42,8 @@ const Slider = forwardRef<HTMLDivElement, SliderProperties>(
   },
 )
 
+Slider.defaultProps = {
+  value: 0,
+}
+
 export default Slider

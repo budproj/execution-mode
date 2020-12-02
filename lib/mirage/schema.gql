@@ -327,7 +327,7 @@ enum KeyResultViewBinding {
 
 type Mutation {
   createProgressReport(progressReportInput: ProgressReportInput!): ProgressReport!
-  checkIn(checkInInput: CheckInInput!): [Report!]!
+  createCheckIn(checkInInput: CheckInInput!): [Report!]!
   updateRank(keyResultViewRankInput: KeyResultViewRankInput!, id: ID!): KeyResultView!
   createKeyResultView(keyResultViewInput: KeyResultViewInput!): KeyResultView!
 }
