@@ -44,7 +44,7 @@ const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
     values: CheckInFormValues,
     actions: FormikHelpers<CheckInFormValues>,
   ) => {
-    actions.setFieldValue('currentProgress', values.newProgress)
+    actions?.setFieldValue('currentProgress', values.newProgress)
   }
 
   const syncRecoilState = (values: CheckInFormValues) => {
