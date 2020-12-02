@@ -1,22 +1,26 @@
 import { Input } from '@chakra-ui/react'
 import React from 'react'
-import NumberFormat from 'react-number-format'
+import NumberFormat, { NumberFormatValues } from 'react-number-format'
 
 import { NumberMaskProperties } from 'src/components/KeyResult/NumberMasks/types'
 
-const Base = <T extends string | number | undefined>({
-  formikField,
+const Base = ({
   defaultValue,
+  handleChange,
   displayType = 'input',
   ...rest
-}: NumberMaskProperties<T>) => {
+}: NumberMaskProperties) => {
+  const handleValueChange = ({ floatValue }: NumberFormatValues) => {
+    if (handleChange) handleChange(floatValue)
+  }
+
   return (
     <NumberFormat
       customInput={displayType === 'input' ? Input : undefined}
       allowNegative={false}
       displayType={displayType}
       defaultValue={defaultValue ?? 0}
-      {...formikField}
+      onValueChange={handleValueChange}
       {...rest}
     />
   )

@@ -2,7 +2,7 @@ import { Divider, Flex, FormControl, Button, Box } from '@chakra-ui/react'
 import { Formik, Form } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
 import {
@@ -15,6 +15,10 @@ import messages from './messages'
 
 export interface CheckInFormProperties {
   keyResultID?: KeyResult['id']
+  afterSubmit?: (
+    newProgress?: ProgressReport['valueNew'],
+    newConfidence?: ConfidenceReport['valueNew'],
+  ) => void
 }
 
 export interface CheckInFormValues {
@@ -23,10 +27,10 @@ export interface CheckInFormValues {
   newProgress?: ProgressReport['valueNew']
 }
 
-const CheckInForm = ({ keyResultID }: CheckInFormProperties) => {
+const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
   const intl = useIntl()
-  const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
-  const confidence = useRecoilValue(selectCurrentConfidence(keyResultID))
+  const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
+  const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
   const initialValues: CheckInFormValues = {
     currentProgress,
     confidence,
@@ -39,9 +43,13 @@ const CheckInForm = ({ keyResultID }: CheckInFormProperties) => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
-        setTimeout(() => {
-          actions.setSubmitting(false)
-        }, 1000)
+        actions.setFieldValue('currentProgress', values.newProgress)
+
+        setCurrentProgress(values.newProgress)
+        if (values.confidence !== confidence) setConfidence(values.confidence)
+
+        actions.setSubmitting(false)
+        if (afterSubmit) afterSubmit(values.newProgress, values.confidence)
       }}
     >
       {({ isSubmitting }) => (

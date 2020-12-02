@@ -19,7 +19,9 @@ export const getStepBasedOnID = (id?: KeyResult['id']) => ({
   if (!format) return defaultStep
 
   const formatHashmap: Partial<Record<KeyResultFormat, number>> = {
-    [KeyResultFormat.PERCENTAGE]: 0.01,
+    [KeyResultFormat.NUMBER]: 1,
+    [KeyResultFormat.PERCENTAGE]: 1,
+    [KeyResultFormat.COIN_BRL]: 1,
   }
 
   return formatHashmap[format] ?? defaultStep

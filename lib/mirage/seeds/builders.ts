@@ -19,9 +19,12 @@ export const buildKeyResultView = (
 
 export function buildProgressReport() {
   const handlers = {
-    [KeyResultFormat.NUMBER]: () => faker.random.number({ min: this.keyResult.initialValue }),
-    [KeyResultFormat.PERCENTAGE]: () => faker.random.float({ min: this.initialValue, max: 1 }),
-    [KeyResultFormat.COIN_BRL]: () => faker.random.number({ min: this.initialValue }),
+    [KeyResultFormat.NUMBER]: () =>
+      faker.random.number({ min: this.keyResult.initialValue, max: this.keyResult.goal }),
+    [KeyResultFormat.PERCENTAGE]: () =>
+      faker.random.float({ min: this.initialValue, max: this.keyResult.goal }),
+    [KeyResultFormat.COIN_BRL]: () =>
+      faker.random.number({ min: this.initialValue, max: this.keyResult.goal }),
   }
   const formatHandler = handlers[this.keyResult.format]
 

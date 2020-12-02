@@ -19,7 +19,8 @@ const CurrentConfidence = () => {
   const intl = useIntl()
   const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
   const normalizedConfidence = normalizeConfidence(values.confidence ?? 50)
-  const handleChange = (newValue: string | string[]) => setFieldValue('confidence', newValue)
+  const handleChange = (newValue: string | string[]) =>
+    setFieldValue('confidence', Number.parseInt(newValue as string, 10))
 
   return (
     <Box>

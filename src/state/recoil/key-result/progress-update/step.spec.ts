@@ -41,6 +41,6 @@ describe('step getter', () => {
 
     const result = selector({ get: stub })
 
-    expect(result).toEqual(0.01)
+    expect(result).toEqual(1)
   })
 })
