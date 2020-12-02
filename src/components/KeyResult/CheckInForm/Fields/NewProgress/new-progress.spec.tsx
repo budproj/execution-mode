@@ -3,73 +3,65 @@ import * as formik from 'formik'
 import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
+import enzyme from 'enzyme'
 
-import { mountWithIntl, FakeFormikWrapper, actWait } from 'lib/enzyme'
 import { KeyResultFormat } from 'src/components/KeyResult/types'
+import { keyResultProgressUpdateDraftValue as draftValueAtom } from 'src/state/recoil/key-result/progress-update'
 
 import NewProgress from './new-progress'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
-  it('renders the Absolute mask if the key result format is NUMBER', async () => {
+  it('renders the Absolute mask if the key result format is NUMBER', () => {
     const format = KeyResultFormat.NUMBER
     sinon.stub(recoil, 'useRecoilValue').returns(format)
 
-    const result = mountWithIntl(
-      <FakeFormikWrapper>
-        <NewProgress keyResultID={faker.random.number()} />
-      </FakeFormikWrapper>,
-    )
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+    sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
+
+    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.number()} />)
 
     const maskComponent = result.find('Absolute')
-    await actWait()
 
     expect(maskComponent.length).toEqual(1)
   })
 
-  it('renders the Percentage mask if the key result formata is PERCENTAGE', async () => {
+  it('renders the Percent mask if the key result format is PERCENTAGE', () => {
     const format = KeyResultFormat.PERCENTAGE
     sinon.stub(recoil, 'useRecoilValue').returns(format)
 
-    const result = mountWithIntl(
-      <FakeFormikWrapper>
-        <NewProgress keyResultID={faker.random.number()} />
-      </FakeFormikWrapper>,
-    )
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+    sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
+
+    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.number()} />)
 
     const maskComponent = result.find('Percentage')
-    await actWait()
 
     expect(maskComponent.length).toEqual(1)
   })
 
-  it('renders the CoinBRL mask if the key result is COIN_BRL', async () => {
+  it('renders the CoinBRL mask if the key result format is COIN_BRL', () => {
     const format = KeyResultFormat.COIN_BRL
     sinon.stub(recoil, 'useRecoilValue').returns(format)
 
-    const result = mountWithIntl(
-      <FakeFormikWrapper>
-        <NewProgress keyResultID={faker.random.number()} />
-      </FakeFormikWrapper>,
-    )
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+    sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
+
+    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.number()} />)
 
     const maskComponent = result.find('CoinBRL')
-    await actWait()
 
     expect(maskComponent.length).toEqual(1)
   })
 
   it('renders the Absolute mask if no format was provided', async () => {
-    const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <FakeFormikWrapper>
-          <NewProgress keyResultID={faker.random.number()} />
-        </FakeFormikWrapper>
-      </recoil.RecoilRoot>,
-    )
+    sinon.mock(recoil).expects('useRecoilValue').returns('')
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+    sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    await actWait()
+    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.number()} />)
+
     const maskComponent = result.find('Absolute')
 
     expect(maskComponent.length).toEqual(1)
@@ -77,46 +69,26 @@ describe('component expectations', () => {
 
   it('updates the field value with latest current progress', async () => {
     const spy = sinon.spy()
-    const currentProgress = faker.random.number()
-    const currentProgressSelectorMatcher = sinon.match(
-      (selector: recoil.RecoilState<number | undefined>) => {
-        return selector.key.includes('CURRENT_PROGRESS')
-      },
-    )
+    const fakeID = faker.random.number()
+    const fakeProgress = faker.random.number()
 
+    sinon.mock(recoil).expects('useRecoilValue').returns('')
     sinon
-      .stub(recoil, 'useRecoilValue')
-      .withArgs(currentProgressSelectorMatcher)
-      .onCall(0)
-      .returns(currentProgress)
-      .onCall(1)
-      .returns(currentProgress)
-    sinon
-      .stub(formik, 'useFormikContext')
-      .onCall(0)
-      .returns({
-        values: { newProgress: faker.random.number() },
-        setFieldValue: spy,
-      } as any)
-      .onCall(1)
-      .returns({
-        values: { newProgress: currentProgress },
-        setFieldValue: spy,
-      } as any)
+      .mock(formik)
+      .expects('useFormikContext')
+      .atLeast(1)
+      .returns({ values: {}, setFieldValue: sinon.fake() })
 
-    const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <FakeFormikWrapper>
-          <NewProgress keyResultID={faker.random.number()} />
-        </FakeFormikWrapper>
-      </recoil.RecoilRoot>,
-    )
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    stateStub.withArgs(draftValueAtom(fakeID)).returns([undefined, spy])
 
-    await actWait()
+    const result = enzyme.shallow(<NewProgress keyResultID={fakeID} />)
 
-    result.setProps({})
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(currentProgress)
+    const functionHook: (s: number) => void = result.find('Absolute').prop('handleChange')
+    functionHook(fakeProgress)
 
-    setTimeout(() => expect(wasSpyCalledAsExpected).toEqual(true), 200)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeProgress)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 })
