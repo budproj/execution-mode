@@ -5,7 +5,7 @@ import Slider, { SliderProperties } from 'src/components/Base/Slider'
 import { KeyResult } from 'src/components/KeyResult/types'
 import {
   keyResultProgressUpdatePopoverOpen,
-  keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
+  keyResultProgressUpdateDraftValue as draftValueAtom,
   keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
   keyResultProgressUpdateStep as selectStep,
 } from 'src/state/recoil/key-result/progress-update'
@@ -28,7 +28,7 @@ const ProgressSlider = forwardRef(
 const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContainerProperties>(
   ({ keyResultID }: ProgressSliderContainerProperties, forwardedReference) => {
     const [isLoaded, setIsLoaded] = useState(false)
-    const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
+    const [draftValue, setDraftValue] = useRecoilState(draftValueAtom(keyResultID))
     const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
     const confidenceTag = useRecoilValue(confidenceTagSelector(currentConfidence))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
@@ -38,9 +38,9 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
-        if (valueNew) setCurrentProgress(valueNew)
+        if (valueNew) setDraftValue(valueNew)
       },
-      [setCurrentProgress],
+      [setDraftValue],
     )
 
     const handleSliderUpdateEnd = useCallback(
@@ -61,7 +61,7 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
     return isLoaded ? (
       <ProgressSlider
         ref={forwardedReference}
-        value={currentProgress}
+        value={draftValue}
         trackColor={confidenceTag?.color}
         min={initialValue as KeyResult['initialValue']}
         max={goal as KeyResult['goal']}

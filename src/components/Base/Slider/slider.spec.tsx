@@ -33,3 +33,12 @@ describe('refence forwarding', () => {
     expect(fakeReference.current?.id).toContain('slider-track')
   })
 })
+
+describe('component expectations', () => {
+  it('uses 0 as value if no value is provided', () => {
+    const slider = mountWithIntl(<Slider />)
+
+    const chakraSliderComponent = slider.find('Slider')
+    expect(chakraSliderComponent.prop('value')).toEqual(0)
+  })
+})

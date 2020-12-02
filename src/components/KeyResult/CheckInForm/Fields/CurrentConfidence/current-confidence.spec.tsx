@@ -24,7 +24,7 @@ describe('formik integration', () => {
     const secondChild = result.find('MenuItemOption').at(1)
     secondChild.simulate('click')
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly('confidence', '49')
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly('confidence', 49)
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 })

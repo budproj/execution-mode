@@ -1,3 +1,4 @@
+import { ApolloProvider } from '@apollo/client'
 import faker from 'faker'
 import { FormikProps } from 'formik'
 import React from 'react'
@@ -11,7 +12,7 @@ import Form, { CheckInFormValues } from './form'
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
-  it('uses the current progress as initial value', async () => {
+  it.only('uses the current progress as initial value', async () => {
     const fakeCurrentProgress = faker.random.number()
     const currentProgressSelectorMatcher = sinon.match(
       (selector: recoil.RecoilState<number | undefined>) => {
@@ -24,11 +25,14 @@ describe('component expectations', () => {
 
     const result = mountWithIntl(
       <recoil.RecoilRoot>
-        <Form keyResultID={faker.random.number()} />
+        <ApolloProvider client={sinon.fake() as any}>
+          <Form keyResultID={faker.random.number()} />
+        </ApolloProvider>
       </recoil.RecoilRoot>,
     )
     await actWait()
 
+    console.log(result.debug())
     const formikComponent = result.find('Formik')
     const initialValues: FormikProps<CheckInFormValues>['initialValues'] = formikComponent.prop(
       'initialValues',
@@ -36,4 +40,14 @@ describe('component expectations', () => {
 
     expect(initialValues.currentProgress).toEqual(fakeCurrentProgress)
   })
+
+  it('updates the current progress field upon form submission', () => {})
+
+  it('updates the progress report state upon form submission', () => {})
+
+  it('updates the confidence report state upon form submission', () => {})
+
+  it('dispatchs a remote state update action upon form submittion', () => {})
+
+  it('executes the desired after submit hook upon form submission', () => {})
 })

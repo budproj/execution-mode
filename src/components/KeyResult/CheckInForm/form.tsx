@@ -77,9 +77,7 @@ const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
     if (afterSubmit) afterSubmit(values.newProgress, values.confidence)
   }
 
-  const hasLoadedAllValues = typeof currentProgress !== 'undefined'
-
-  return hasLoadedAllValues ? (
+  return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       {() => (
         <Form>
@@ -103,8 +101,6 @@ const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
         </Form>
       )}
     </Formik>
-  ) : (
-    <p>Loading...</p>
   )
 }
 

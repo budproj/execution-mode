@@ -8,24 +8,24 @@ import { keyResultProgressUpdateCurrentProgress as selectCurrentProgress } from 
 
 import { KeyResultFormat } from '../types'
 
-import SliderContainer from './slider-container'
+import TriggerContainer from './trigger-container'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
-  it('displays a disable slider if progress report data is not available', () => {
+  it('displays a disable trigger if progress report data is not available', () => {
     const result = mountWithIntl(
       <recoil.RecoilRoot>
-        <SliderContainer keyResultID={faker.random.number()} />
+        <TriggerContainer keyResultID={faker.random.number()} />
       </recoil.RecoilRoot>,
     )
 
-    const sliderComponent = result.find('Slider')
+    const sliderComponent = result.find('Trigger')
 
     expect(sliderComponent.prop('isDisabled')).toEqual(true)
   })
 
-  it('updates the local current progress when the slider value changes', () => {
+  it('updates the local current progress when the trigger value changes', () => {
     const fakeID = faker.random.number()
     const currentProgress = faker.random.number()
     const spy = sinon.spy()
@@ -47,11 +47,11 @@ describe('component expectations', () => {
 
     const result = mountWithIntl(
       <recoil.RecoilRoot>
-        <SliderContainer keyResultID={fakeID} />
+        <TriggerContainer keyResultID={fakeID} />
       </recoil.RecoilRoot>,
     )
 
-    const thumbComponent = result.find('SliderThumb')
+    const thumbComponent = result.find('TriggerThumb')
     const changeEvent = { key: 'ArrowRight' }
     thumbComponent.simulate('keyDown', changeEvent)
 
@@ -60,7 +60,7 @@ describe('component expectations', () => {
     setTimeout(() => expect(wasSpyCalledAsExpected).toEqual(true), 200)
   })
 
-  it('opens the popover when the user finishes updating the slider', () => {
+  it('opens the popover when the user finishes updating the trigger', () => {
     const fakeID = faker.random.number()
     const spy = sinon.spy()
     const currentProgress = faker.random.number()
@@ -93,7 +93,7 @@ describe('component expectations', () => {
       React.createElement(
         (properties) => (
           <recoil.RecoilRoot>
-            <SliderContainer keyResultID={fakeID} {...properties} />
+            <TriggerContainer keyResultID={fakeID} {...properties} />
           </recoil.RecoilRoot>
         ),
         {},

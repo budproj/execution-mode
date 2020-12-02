@@ -6,7 +6,7 @@ import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/se
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
 import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultProgressUpdateCurrentProgress as selectCurrentProgress } from 'src/state/recoil/key-result/progress-update'
+import { keyResultProgressUpdateDraftValue as draftValueAtom } from 'src/state/recoil/key-result/progress-update'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 export interface ProgressProperties {
@@ -16,7 +16,7 @@ export interface ProgressProperties {
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
 const Progress = ({ id }: ProgressProperties): ReactElement => {
-  const currentProgress = useRecoilValue(selectCurrentProgress(id))
+  const draftValue = useRecoilValue(draftValueAtom(id))
   const format = useRecoilValue(formatSelector(id))
   const ProgressMask = selectMaskBasedOnFormat(format)
 
@@ -44,7 +44,7 @@ const Progress = ({ id }: ProgressProperties): ReactElement => {
           /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         >
           <ProgressMask
-            value={currentProgress}
+            value={draftValue}
             displayType="text"
             renderText={(value) => (
               <Text color="gray.300" textAlign="right">
