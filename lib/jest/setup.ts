@@ -13,3 +13,15 @@ interface JestGlobal extends NodeJS.Global {
 declare let global: JestGlobal
 
 global.fetch = fetch
+
+jest.mock('react-intl', () => {
+  const reactIntl = jest.requireActual('react-intl')
+  const intl = reactIntl.createIntl({
+    locale: 'en',
+  })
+
+  return {
+    ...reactIntl,
+    useIntl: () => intl,
+  }
+})

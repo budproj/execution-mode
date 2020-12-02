@@ -1,32 +1,21 @@
-import { ApolloProvider } from '@apollo/client'
+import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { mountWithIntl, actWait } from 'lib/enzyme'
+import { keyResultProgressUpdateDraftValue as draftValueAtom } from 'src/state/recoil/key-result/progress-update'
 
-import ProgressSlider from './progress-slider'
+import ProgressSliderWrapper from './wrapper'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
-  it('opens the popover as soon as the provided ID was marked as open', async () => {
-    const stub = sinon.stub(recoil, 'useRecoilState')
-    const popoverOpenSelectorMatcher = sinon.match((selector: recoil.RecoilState<boolean>) => {
-      return selector.key.includes('POPOVER_OPEN')
-    })
-    stub.withArgs(popoverOpenSelectorMatcher).returns([true, sinon.fake()])
-    stub.callThrough()
+  it('opens the popover as soon as the provided ID was marked as open', () => {
+    sinon.mock(recoil).expects('useRecoilValue')
+    sinon.stub(recoil, 'useRecoilState').returns([true, sinon.fake()])
 
-    const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <ApolloProvider client={sinon.fake() as any}>
-          <ProgressSlider id={faker.random.number()} />
-        </ApolloProvider>
-      </recoil.RecoilRoot>,
-    )
-    await actWait()
+    const result = enzyme.shallow(<ProgressSliderWrapper id={faker.random.number()} />)
 
     const popoverComponent = result.find('Popover')
 
@@ -34,81 +23,35 @@ describe('component expectations', () => {
   })
 
   it('keeps the popover closed when needed', async () => {
-    const stub = sinon.stub(recoil, 'useRecoilState')
-    const popoverOpenSelectorMatcher = sinon.match((selector: recoil.RecoilState<boolean>) => {
-      return selector.key.includes('POPOVER_OPEN')
-    })
-    stub.withArgs(popoverOpenSelectorMatcher).returns([false, sinon.fake()])
-    stub.callThrough()
+    sinon.mock(recoil).expects('useRecoilValue')
+    sinon.stub(recoil, 'useRecoilState').returns([false, sinon.fake()])
 
-    const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <ApolloProvider client={sinon.fake() as any}>
-          <ProgressSlider id={faker.random.number()} />
-        </ApolloProvider>
-      </recoil.RecoilRoot>,
-    )
-    await actWait()
+    const result = enzyme.shallow(<ProgressSliderWrapper id={faker.random.number()} />)
 
     const popoverComponent = result.find('Popover')
 
     expect(popoverComponent.prop('isOpen')).toEqual(false)
   })
 
-  it('reverts the current progress if we close the popover', async () => {
+  it('reverts the current progress draft if we close the popover', () => {
+    const fakeID = faker.random.number()
+    const draftValue = faker.random.number()
+    const currentProgress = faker.random.number()
     const spy = sinon.spy()
-    const stub = sinon.stub(recoil, 'useRecoilState')
-    const oldProgressReport = faker.random.number()
-    const currentProgressSelectorMatcher = sinon.match((selector: recoil.RecoilState<boolean>) => {
-      return selector.key.includes('CURRENT_PROGRESS')
-    })
-    stub.withArgs(currentProgressSelectorMatcher).onCall(0).returns([oldProgressReport, spy])
-    stub.withArgs(currentProgressSelectorMatcher).returns([faker.random.number(), spy])
-    stub.callThrough()
 
-    const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <ApolloProvider client={sinon.fake() as any}>
-          <ProgressSlider id={faker.random.number()} />
-        </ApolloProvider>
-      </recoil.RecoilRoot>,
-    )
-    await actWait()
+    const useRecoilStateStub = sinon.stub(recoil, 'useRecoilState')
 
-    const closeButton = result.find('PopoverCloseButton').find('button')
-    closeButton.simulate('click')
+    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(oldProgressReport)
+    useRecoilStateStub.withArgs(draftValueAtom(fakeID)).returns([draftValue, spy])
+    useRecoilStateStub.returns([undefined, sinon.fake()])
 
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
+    const result = enzyme.shallow(<ProgressSliderWrapper id={fakeID} />)
 
-  it('reverts the current confidence if we close the popover', async () => {
-    const spy = sinon.spy()
-    const stub = sinon.stub(recoil, 'useRecoilState')
-    const oldConfidenceReport = faker.random.number()
-    const currentConfidenceSelectorMatcher = sinon.match(
-      (selector: recoil.RecoilState<boolean>) => {
-        return selector.key.includes('CURRENT_CONFIDENCE')
-      },
-    )
-    stub.withArgs(currentConfidenceSelectorMatcher).onCall(0).returns([oldConfidenceReport, spy])
-    stub.withArgs(currentConfidenceSelectorMatcher).returns([faker.random.number(), spy])
-    stub.callThrough()
+    const popover = result.find('Popover')
+    popover.simulate('close')
 
-    const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <ApolloProvider client={sinon.fake() as any}>
-          <ProgressSlider id={faker.random.number()} />
-        </ApolloProvider>
-      </recoil.RecoilRoot>,
-    )
-    await actWait()
-
-    const closeButton = result.find('PopoverCloseButton').find('button')
-    closeButton.simulate('click')
-
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(oldConfidenceReport)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(currentProgress)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

@@ -19,7 +19,7 @@ export interface ProgressSliderContentProperties {
   keyResultID?: KeyResult['id']
 }
 
-const Popover = ({ keyResultID }: ProgressSliderContentProperties) => {
+const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties) => {
   const intl = useIntl()
   const setDraftValue = useSetRecoilState(draftValueAtom(keyResultID))
   const setPopoverOpen = useSetRecoilState<boolean>(selectPopoverOpen(keyResultID))
@@ -60,4 +60,4 @@ const Popover = ({ keyResultID }: ProgressSliderContentProperties) => {
   )
 }
 
-export default Popover
+export default ProgressSliderPopover

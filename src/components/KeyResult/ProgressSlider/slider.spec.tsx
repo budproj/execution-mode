@@ -1,108 +1,90 @@
+import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { mountWithIntl } from 'lib/enzyme'
-import { keyResultProgressUpdateCurrentProgress as selectCurrentProgress } from 'src/state/recoil/key-result/progress-update'
+import {
+  keyResultProgressUpdateDraftValue as draftValueAtom,
+  keyResultProgressUpdatePopoverOpen,
+} from 'src/state/recoil/key-result/progress-update'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
-import { KeyResultFormat } from '../types'
-
-import TriggerContainer from './trigger-container'
+import ProgressSliderContainer from './slider'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
   it('displays a disable trigger if progress report data is not available', () => {
-    const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <TriggerContainer keyResultID={faker.random.number()} />
-      </recoil.RecoilRoot>,
-    )
+    const recoilMock = sinon.mock(recoil)
 
-    const sliderComponent = result.find('Trigger')
+    recoilMock.expects('useRecoilState').returns([undefined, sinon.fake()])
+    recoilMock.expects('useRecoilValue').atLeast(1)
+    recoilMock.expects('useSetRecoilState').returns(sinon.fake())
+
+    const result = enzyme
+      .shallow(<ProgressSliderContainer keyResultID={faker.random.number()} />)
+      .dive()
+
+    const sliderComponent = result.find('Slider')
 
     expect(sliderComponent.prop('isDisabled')).toEqual(true)
   })
 
-  it('updates the local current progress when the trigger value changes', () => {
+  it('updates the local draft value when the trigger value changes', () => {
     const fakeID = faker.random.number()
-    const currentProgress = faker.random.number()
     const spy = sinon.spy()
-    const currentProgressSelector = selectCurrentProgress(fakeID)
-    const goalSelectorMatcher = sinon.match(
-      (selector: recoil.RecoilState<KeyResultFormat | number | undefined>) => {
-        return selector.key.includes('GOAL')
-      },
-    )
+    const newValue = faker.random.number()
+    const goalSelector = buildPartialSelector('goal')
 
-    sinon
-      .stub(recoil, 'useRecoilState')
-      .withArgs(currentProgressSelector)
-      .returns([currentProgress, spy])
-    sinon
-      .stub(recoil, 'useRecoilValue')
-      .withArgs(goalSelectorMatcher)
-      .returns(faker.random.number())
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = mountWithIntl(
-      <recoil.RecoilRoot>
-        <TriggerContainer keyResultID={fakeID} />
-      </recoil.RecoilRoot>,
-    )
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    stateStub.withArgs(draftValueAtom(fakeID)).returns(['ok', spy])
+    stateStub.returns([undefined, sinon.fake()])
 
-    const thumbComponent = result.find('TriggerThumb')
-    const changeEvent = { key: 'ArrowRight' }
-    thumbComponent.simulate('keyDown', changeEvent)
+    const valueStub = sinon.stub(recoil, 'useRecoilValue')
+    valueStub.withArgs(goalSelector(fakeID)).returns(faker.random.number())
+    valueStub.returns('')
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(currentProgress + 1)
+    const result = enzyme
+      .shallow(<ProgressSliderContainer keyResultID={fakeID} />)
+      .dive()
+      .dive()
 
-    setTimeout(() => expect(wasSpyCalledAsExpected).toEqual(true), 200)
+    const slider = result.find('Slider')
+    slider.simulate('change', newValue)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newValue)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
   it('opens the popover when the user finishes updating the trigger', () => {
     const fakeID = faker.random.number()
     const spy = sinon.spy()
-    const currentProgress = faker.random.number()
-    const currentProgressSelector = selectCurrentProgress(fakeID)
-    const goalSelectorMatcher = sinon.match(
-      (selector: recoil.RecoilState<KeyResultFormat | number | undefined>) => {
-        return selector.key.includes('GOAL')
-      },
-    )
-    const popOverOpenSelectorMatcher = sinon.match((selector: recoil.RecoilState<boolean>) => {
-      return selector.key.includes('POPOVER_OPEN')
-    })
+    const goalSelector = buildPartialSelector('goal')
 
-    sinon
-      .stub(recoil, 'useRecoilState')
-      .withArgs(currentProgressSelector)
-      .onCall(0)
-      .returns([currentProgress, sinon.fake()])
-      .onCall(1)
-      .returns([currentProgress, sinon.fake()])
-      .onCall(2)
-      .returns([currentProgress + faker.random.number({ min: 1 }), sinon.fake()])
-    sinon
-      .stub(recoil, 'useRecoilValue')
-      .withArgs(goalSelectorMatcher)
-      .returns(faker.random.number())
-    sinon.stub(recoil, 'useSetRecoilState').withArgs(popOverOpenSelectorMatcher).returns(spy)
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 
-    const result = mountWithIntl(
-      React.createElement(
-        (properties) => (
-          <recoil.RecoilRoot>
-            <TriggerContainer keyResultID={fakeID} {...properties} />
-          </recoil.RecoilRoot>
-        ),
-        {},
-      ),
-    )
+    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
+    setStateStub.withArgs(keyResultProgressUpdatePopoverOpen(fakeID)).returns(spy)
+    setStateStub.returns(sinon.fake())
 
-    result.setProps({})
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeID)
+    const valueStub = sinon.stub(recoil, 'useRecoilValue')
+    valueStub.withArgs(goalSelector(fakeID)).returns(faker.random.number())
+    valueStub.returns('')
 
-    setTimeout(() => expect(wasSpyCalledAsExpected).toEqual(true), 200)
+    const result = enzyme
+      .shallow(<ProgressSliderContainer keyResultID={fakeID} />)
+      .dive()
+      .dive()
+
+    const slider = result.find('Slider')
+    slider.simulate('changeEnd', faker.random.number())
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(true)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 })
