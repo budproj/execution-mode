@@ -1,9 +1,11 @@
-import React from 'react'
-import sinon from 'sinon'
 import * as formik from 'formik'
-import CurrentConfidence from './current-confidence'
-import { mountWithIntl } from 'lib/enzyme'
+import React from 'react'
 import { RecoilRoot } from 'recoil'
+import sinon from 'sinon'
+
+import { mountWithIntl } from 'lib/enzyme'
+
+import CurrentConfidence from './current-confidence'
 
 describe('formik integration', () => {
   it('updates the formik value when the user chooses a new option', () => {

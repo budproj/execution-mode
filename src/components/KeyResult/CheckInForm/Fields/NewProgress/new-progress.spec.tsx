@@ -1,8 +1,8 @@
 import faker from 'faker'
+import * as formik from 'formik'
 import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
-import * as formik from 'formik'
 
 import { mountWithIntl, FakeFormikWrapper, actWait } from 'lib/enzyme'
 import { KeyResultFormat } from 'src/components/KeyResult/types'

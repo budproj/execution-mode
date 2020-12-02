@@ -1,9 +1,10 @@
 import faker from 'faker'
 import { FormikProps } from 'formik'
-import { actWait, mountWithIntl } from 'lib/enzyme'
 import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
+
+import { actWait, mountWithIntl } from 'lib/enzyme'
 
 import Form, { CheckInFormValues } from './form'
 
