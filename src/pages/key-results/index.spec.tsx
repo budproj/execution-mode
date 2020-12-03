@@ -88,6 +88,9 @@ describe('page control behaviors', () => {
         query: {},
       },
       fakeIntlRoute,
+      {
+        shallow: true,
+      },
     )
 
     expect(wasSpyCalledAsExpected).toEqual(true)
@@ -104,6 +107,46 @@ describe('page control behaviors', () => {
     enzyme.shallow(<KeyResultsPage />)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(intl.formatMessage(messages.pageTitle))
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('opens the drawer upon clicking a given line', () => {
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+    const fakePathname = faker.random.word()
+    const fakeIntlRoute = faker.random.word()
+
+    const valueStub = sinon.stub(recoil, 'useRecoilValue')
+    valueStub.withArgs(keyResultAtomFamily(fakeID)).returns(faker.random.word())
+    valueStub.withArgs(intlRouteAtom(fakePathname)).returns(fakeIntlRoute)
+    valueStub.returns(faker.random.word())
+
+    sinon.stub(router, 'useRouter').returns({
+      query: {},
+      pathname: fakePathname,
+      push: spy,
+    } as any)
+
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<KeyResultsPage />)
+
+    const keyResultView = result.find('KeyResultView')
+    keyResultView.simulate('lineClick', fakeID)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(
+      {
+        pathname: fakePathname,
+        query: {
+          id: fakeID,
+        },
+      },
+      `${fakeIntlRoute}?id=${fakeID}`,
+      {
+        shallow: true,
+      },
+    )
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

@@ -171,6 +171,10 @@
     "defaultMessage": "Atualizar Progresso",
     "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
   },
+  "j/xH+H": {
+    "defaultMessage": "Fechar",
+    "description": "This message is displayed when an user hovers the close button of our key result drawer"
+  },
   "kXNgkQ": {
     "defaultMessage": "Progresso",
     "description": "The text of the table head related to the Progress column"
@@ -186,6 +190,10 @@
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
+  },
+  "n7ZLVl": {
+    "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box a barra lateral do resultado chave",
+    "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our key result drawer close button"
   },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",

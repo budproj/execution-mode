@@ -14,7 +14,11 @@ import Skeleton from './skeleton'
 
 const component = 'KeyResultViewBody'
 
-const KeyResultViewBody = (): ReactElement => {
+export interface KeyResultViewBodyProperties {
+  onLineClick?: (id: KeyResult['id']) => void
+}
+
+const KeyResultViewBody = ({ onLineClick }: KeyResultViewBodyProperties): ReactElement => {
   const [keyResultView, setKeyResultView] = useRecoilState(keyResultViewAtom)
   const [updateRank] = useMutation(queries.UPDATE_RANK)
   const { loading, data } = useQuery(queries.KEY_RESULT_VIEW_FOR_BINDING, {
@@ -72,6 +76,7 @@ const KeyResultViewBody = (): ReactElement => {
           id={keyResultID}
           index={index}
           remoteKeyResult={data.keyResultView.keyResults[index]}
+          onLineClick={onLineClick}
         />
       ))}
     </DroppableBox>
