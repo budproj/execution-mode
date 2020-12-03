@@ -1,25 +1,24 @@
-import { Flex, Box, Skeleton } from '@chakra-ui/react'
+import { Flex, Box, Skeleton, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import FormattedProgress from 'src/components/KeyResult/FormattedProgress'
+import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
 import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result'
+import { keyResultProgressUpdateDraftValue as draftValueAtom } from 'src/state/recoil/key-result/progress-update'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 export interface ProgressProperties {
   id?: KeyResult['id']
 }
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
-const progressReportsSelector = buildPartialSelector<KeyResult['progressReports']>(
-  'progressReports',
-)
 
 const Progress = ({ id }: ProgressProperties): ReactElement => {
-  const currentProgress = useRecoilValue(progressReportsSelector(id))?.[0]?.valueNew
+  const draftValue = useRecoilValue(draftValueAtom(id))
   const format = useRecoilValue(formatSelector(id))
+  const ProgressMask = selectMaskBasedOnFormat(format)
 
   const isKeyResultLoaded = Boolean(id)
 
@@ -44,11 +43,14 @@ const Progress = ({ id }: ProgressProperties): ReactElement => {
           fadeDuration={0}
           /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         >
-          <FormattedProgress
-            progress={currentProgress}
-            format={format}
-            color="gray.300"
-            textAlign="right"
+          <ProgressMask
+            value={draftValue}
+            displayType="text"
+            renderText={(value) => (
+              <Text color="gray.300" textAlign="right">
+                {value}
+              </Text>
+            )}
           />
         </Skeleton>
       </Flex>

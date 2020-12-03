@@ -20,7 +20,7 @@ const Slider = forwardRef<HTMLDivElement, SliderProperties>(
     const intl = useIntl()
 
     return (
-      <ChakraSlider role="group" focusThumbOnChange={false} {...rest}>
+      <ChakraSlider role="group" {...rest}>
         <SliderTrack ref={forwardedReference} h="8px" bg="gray.100" borderRadius="full">
           <SliderFilledTrack bg={trackColor} borderRadius="full" />
         </SliderTrack>
@@ -41,5 +41,9 @@ const Slider = forwardRef<HTMLDivElement, SliderProperties>(
     )
   },
 )
+
+Slider.defaultProps = {
+  value: 0,
+}
 
 export default Slider

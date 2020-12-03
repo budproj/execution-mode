@@ -1,3 +1,5 @@
-export { default as keyResultIconColorAtom } from './color-atom'
+export { default as keyResultIconColor } from './color'
 
-export { default as keyResultIconDrawingAtom } from './drawing-atom'
+export { default as keyResultIconDrawing } from './drawing'
+
+export { default as keyResultIconDesc } from './desc'

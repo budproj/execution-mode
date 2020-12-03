@@ -5,6 +5,9 @@ export default {
     '^src/(.*)$': '<rootDir>/src/$1',
     '^lib/(.*)$': '<rootDir>/lib/$1',
   },
+  transform: {
+    '\\.(gql|graphql)$': 'jest-transform-graphql',
+  },
   globals: {
     'ts-jest': {
       babelConfig: {

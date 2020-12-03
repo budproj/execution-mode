@@ -10,7 +10,7 @@ export interface BudPublicConfig {
   nodeEnv: NodeEnvironment
   defaultLocale: Locale
   intlRoutes: Route[]
-  logLevel: LogLevels
+  logLevel: LogLevel
   api: BudAPIs
   auth0: Auth0Config
   mirage: MiragePublicConfig
@@ -40,7 +40,7 @@ export enum Environment {
 
 export type NodeEnvironment = 'test' | 'development' | 'production'
 
-export type LogLevels = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
+export type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
 
 export interface Route {
   destination: string

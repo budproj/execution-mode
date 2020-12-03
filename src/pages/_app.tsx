@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 
+import RecoilDebugObserver from 'components/Base/RecoilDebugObserver'
 import { makeServer } from 'lib/mirage'
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
@@ -12,6 +13,7 @@ import Page from 'src/components/Base/Page'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
+import 'focus-visible/dist/focus-visible' // Keeps outline only in keytboard navigation. As seem in: https://github.com/chakra-ui/chakra-ui/issues/2016#issuecomment-691674038
 
 type IntlMessage = Record<string, string>
 
@@ -49,6 +51,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
       onRedirectCallback={onAuth0RedirectCallback}
     >
       <RecoilRoot>
+        <RecoilDebugObserver />
         <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
           <ChakraProvider theme={theme}>
             <AuthzGatekeeper>

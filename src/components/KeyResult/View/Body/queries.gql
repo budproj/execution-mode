@@ -1,4 +1,4 @@
-query KeyResultViewForBinding($binding: KeyResultViewBinding!) {
+query KEY_RESULT_VIEW_FOR_BINDING($binding: KeyResultViewBinding!) {
   keyResultView(binding: $binding) {
     id
     rank
@@ -37,7 +37,7 @@ query KeyResultViewForBinding($binding: KeyResultViewBinding!) {
   }
 }
 
-mutation KeyResultViewUpdateRank($id: ID!, $rankInput: KeyResultViewRankInput!) {
+mutation UPDATE_RANK($id: ID!, $rankInput: KeyResultViewRankInput!) {
   updateRank(id: $id, keyResultViewRankInput: $rankInput) {
     id
   }

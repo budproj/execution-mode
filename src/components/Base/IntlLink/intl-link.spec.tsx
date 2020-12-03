@@ -1,9 +1,8 @@
+import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
-
-import { mountWithRecoil } from 'lib/enzyme'
 
 import IntlLink from './intl-link'
 
@@ -14,8 +13,9 @@ describe('expected behavior', () => {
 
   it('uses the provided href to preserve the page link', () => {
     const fakeHref = faker.internet.url()
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
 
-    const result = mountWithRecoil(
+    const result = enzyme.shallow(
       <IntlLink href={fakeHref}>
         <FakeLabel />
       </IntlLink>,
@@ -30,7 +30,7 @@ describe('expected behavior', () => {
     const fakeIntlRoute = faker.internet.url()
     sinon.stub(recoil, 'useRecoilValue').returns(fakeIntlRoute)
 
-    const result = mountWithRecoil(
+    const result = enzyme.shallow(
       <IntlLink href={faker.internet.url()}>
         <FakeLabel />
       </IntlLink>,
@@ -42,21 +42,24 @@ describe('expected behavior', () => {
   })
 
   it('uses the provided text as label for the link', () => {
-    const result = mountWithRecoil(
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
+
+    const result = enzyme.shallow(
       <IntlLink href={faker.internet.url()}>
         <FakeLabel />
       </IntlLink>,
     )
 
-    const labelComponent = result.find('a').find('FakeLabel')
+    const labelComponent = result.find('FakeLabel')
 
     expect(labelComponent.length).toEqual(1)
   })
 
   it('passes any unhandled props down', () => {
     const fakeProperties = faker.helpers.userCard()
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
 
-    const result = mountWithRecoil(
+    const result = enzyme.shallow(
       <IntlLink href={faker.internet.url()} {...fakeProperties}>
         <FakeLabel />
       </IntlLink>,

@@ -2,13 +2,33 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ProgressReport {
-  id: Int!
-  valuePrevious: Float
-  valueNew: Float!
+"""A report that records new confidence in a given key result"""
+type ConfidenceReport {
+  """The ID of your report"""
+  id: ID!
+
+  """The value of the latest previous report"""
+  valuePrevious: Int
+
+  """The last value reported"""
+  valueNew: Int!
+
+  """The comment in the report"""
   comment: String
+
+  """The creation date of the report"""
   createdAt: DateTime!
+
+  """The key result ID that this report is related to"""
+  keyResultId: ID!
+
+  """The key result that this report relates to"""
   keyResult: KeyResult!
+
+  """The user ID that owns this report"""
+  userId: ID!
+
+  """The user that owns this report"""
   user: User!
 }
 
@@ -17,105 +37,287 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type Team {
-  id: Int!
-  name: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  keyResults: [KeyResult!]!
-  company: Company!
-  users: [User!]!
-}
+"""A report that records new progress in a given key result"""
+type ProgressReport {
+  """The ID of your report"""
+  id: ID!
 
-type User {
-  id: Int!
-  name: String!
-  authzSub: String!
-  role: String
-  picture: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  keyResults: [KeyResult!]!
-  progressReports: [ProgressReport!]!
-  confidenceReports: [ConfidenceReport!]!
-  teams: [Team!]!
-}
-
-type ConfidenceReport {
-  id: Int!
+  """The value of the latest previous report"""
   valuePrevious: Float
+
+  """The last value reported"""
   valueNew: Float!
+
+  """The comment in the report"""
   comment: String
+
+  """The creation date of the report"""
   createdAt: DateTime!
+
+  """The key result ID that this report is related to"""
+  keyResultId: ID!
+
+  """The key result that this report relates to"""
   keyResult: KeyResult!
+
+  """The user ID that owns this report"""
+  userId: ID!
+
+  """The user that owns this report"""
   user: User!
 }
 
-type KeyResult {
-  id: Int!
-  title: String!
-  description: String
-  initialValue: Float!
-  goal: Float!
-  format: String!
+"""
+User is an entity inside a given company. It is associated with many teams, progress reports, and others.
+"""
+type User {
+  """The ID of the user"""
+  id: ID!
+
+  """The name of the user"""
+  name: String!
+
+  """The sub field in Auth0 (their ID)"""
+  authzSub: String!
+
+  """The user role in the company"""
+  role: String
+
+  """The picture of the user"""
+  picture: String
+
+  """The creation date of the user"""
   createdAt: DateTime!
+
+  """The last update date of this user"""
   updatedAt: DateTime!
+
+  """The creation date ordered list of key results that this user owns"""
+  keyResults: [KeyResult!]!
+
+  """
+  The creation date ordered list of progress reports created by this user
+  """
+  progressReports: [ProgressReport!]!
+
+  """
+  The creation date ordered list of confidence reports created by this user
+  """
+  confidenceReports: [ConfidenceReport!]!
+
+  """The creation date ordered list of teams that this user is part of"""
+  teams: [Team!]!
+}
+
+"""A collection of users for a given company"""
+type Team {
+  """The ID of the team"""
+  id: ID!
+
+  """The name of the team"""
+  name: String!
+
+  """The creation date of the team"""
+  createdAt: DateTime!
+
+  """The last update date of the team"""
+  updatedAt: DateTime!
+
+  """
+  The creation date ordered list of key results that belongs to that team
+  """
+  keyResults: [KeyResult!]!
+
+  """The company ID that owns this team"""
+  companyId: ID!
+
+  """The company that owns this team"""
+  company: Company!
+
+  """A creation date ordered list of users that are members of this team"""
+  users: [User!]!
+}
+
+"""A goal that is created for the team focusing in a given team objective"""
+type KeyResult {
+  """The ID of the key result"""
+  id: ID!
+
+  """The title(name) of the key result"""
+  title: String!
+
+  """The description explaining the key result"""
+  description: String
+
+  """The initial value of the key result"""
+  initialValue: Float!
+
+  """The goal of the key result"""
+  goal: Float!
+
+  """The format of the key result"""
+  format: String!
+
+  """The creation date of the key result"""
+  createdAt: DateTime!
+
+  """The last update date of the key result"""
+  updatedAt: DateTime!
+
+  """The owner ID of the key result"""
+  ownerId: ID!
+
+  """The owner of the key result"""
   owner: User!
+
+  """The object ID that this key result belongs to"""
+  objectiveId: ID!
+
+  """The objective that this key result belongs to"""
   objective: Objective!
+
+  """The team ID that this key result belongs to"""
+  teamId: ID!
+
+  """The team that this key result belongs to"""
   team: Team!
+
+  """The creation date ordered list of progress reports for this key result"""
   progressReports(limit: Int): [ProgressReport!]!
+
+  """
+  The creation date ordered list of confidence reports for this key result
+  """
   confidenceReports(limit: Int): [ConfidenceReport!]!
 }
 
+"""A group of key results that has the same focus"""
 type Objective {
-  id: Int!
+  """The ID of the objective"""
+  id: ID!
+
+  """The title(name) of the objective"""
   title: String!
+
+  """The creation date of the objective"""
   createdAt: DateTime!
+
+  """The last update date of the objective"""
   updatedAt: DateTime!
+
+  """
+  A creation date ordered list of key results that belongs to this objective
+  """
   keyResults: [KeyResult!]!
+
+  """The cycle ID that owns this objective"""
+  cycleId: ID!
+
+  """The cycle that owns this objective"""
   cycle: Cycle!
 }
 
+"""
+The period of time that can contain multiple objectives. It is used to organize a company' strategy
+"""
 type Cycle {
-  id: Int!
+  """The ID of the cycle"""
+  id: ID!
+
+  """The date that this cycle starts"""
   dateStart: DateTime!
+
+  """The date that this cycle ends"""
   dateEnd: DateTime!
+
+  """The creation date of this cycle"""
   createdAt: DateTime!
+
+  """The last update date of this cycle"""
   updatedAt: DateTime!
+
+  """The company ID that this cycle belongs to"""
+  companyId: ID!
+
+  """The company that this cycle belongs to"""
   company: Company!
+
+  """The objectives inside this cycle"""
   objectives: [Objective!]!
 }
 
+"""A group of teams that has a given stakeholder"""
 type Company {
-  id: Int!
+  """The ID of the company"""
+  id: ID!
+
+  """The name of the company"""
   name: String!
+
+  """The creation date of the company"""
   createdAt: DateTime!
+
+  """The last update date of the company"""
   updatedAt: DateTime!
+
+  """The teams that belongs to this company"""
   teams: [Team!]!
+
+  """The cycles that belongs to this company"""
   cycles: [Cycle!]!
 }
 
-type KeyResultView {
-  id: Int!
-  title: String
-  binding: String
-  rank: [Int!]!
-  keyResults: [KeyResult!]!
+"""Common shared object values between multiple report types"""
+type Report {
+  """The ID of the report"""
+  id: ID!
+
+  """The creation date of the report"""
   createdAt: DateTime!
+}
+
+"""
+A view created by an user that represents a custom key result ranking for a given binding
+"""
+type KeyResultView {
+  """The ID of the key result view"""
+  id: ID!
+
+  """The title(name) of the key result view"""
+  title: String
+
+  """An anchor between this view and a fixed tab in our applications"""
+  binding: String
+
+  """Ordered list of key result IDs"""
+  rank: [ID!]!
+
+  """The rank ordered list of key results in that view"""
+  keyResults: [KeyResult!]!
+
+  """The creation date of this view"""
+  createdAt: DateTime!
+
+  """The last update date of this view"""
   updatedAt: DateTime!
+
+  """The ID of the uswer that owns this view"""
+  userId: ID!
+
+  """The user that owns this view"""
   user: User!
 }
 
 type Query {
   company(id: Int!): Company!
-  confidenceReport(id: Int!): ConfidenceReport!
   cycle(id: Int!): Cycle!
-  keyResult(id: Int!): KeyResult!
-  keyResultView(binding: KeyResultViewBinding, id: Int): KeyResultView!
-  objective(id: Int!): Objective!
+  confidenceReport(id: Int!): ConfidenceReport!
   progressReport(id: Int!): ProgressReport!
+  keyResult(id: Int!): KeyResult!
+  objective(id: Int!): Objective!
   team(id: Int!): Team!
   user(id: Int!): User!
+  keyResultView(binding: KeyResultViewBinding, id: Int): KeyResultView!
 }
 
 """Each binding represents a given view in our applications"""
@@ -124,23 +326,53 @@ enum KeyResultViewBinding {
 }
 
 type Mutation {
+  createProgressReport(progressReportInput: ProgressReportInput!): ProgressReport!
+  createCheckIn(checkInInput: CheckInInput!): [Report!]!
   updateRank(keyResultViewRankInput: KeyResultViewRankInput!, id: ID!): KeyResultView!
   createKeyResultView(keyResultViewInput: KeyResultViewInput!): KeyResultView!
-  createProgressReport(progressReportInput: ProgressReportInput!): ProgressReport!
 }
 
-input KeyResultViewRankInput {
-  rank: [Int!]!
-}
-
-input KeyResultViewInput {
-  title: String
-  binding: String
-  rank: [Int!]!
-}
-
+"""The required data to create a new progress report"""
 input ProgressReportInput {
+  """The progress value you are reporting"""
   value: Float!
+
+  """The comment in your report"""
   comment: String
-  keyResultID: Int!
+
+  """The key result ID related to this report"""
+  keyResultId: ID!
+}
+
+"""Input data to create a new check-in"""
+input CheckInInput {
+  """The key result ID that you are reporting updated to"""
+  keyResultId: ID!
+
+  """The new progress in the report"""
+  progress: Float!
+
+  """The new confidence in the report"""
+  confidence: Int
+
+  """The comment in your new check-in report"""
+  comment: String
+}
+
+"""Required data to update a given key result view rank"""
+input KeyResultViewRankInput {
+  """Ordered list of key result IDs"""
+  rank: [ID!]!
+}
+
+"""Required data to create a new key result view"""
+input KeyResultViewInput {
+  """The title(name) of the key result view"""
+  title: String
+
+  """An anchor between this view and a fixed tab in our applications"""
+  binding: String
+
+  """Ordered list of key result IDs"""
+  rank: [ID!]!
 }

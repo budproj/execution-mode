@@ -10,6 +10,24 @@ const Button = {
         color: 'brand.600',
       },
     }),
+
+    solid: () => ({
+      bg: 'brand.500',
+      color: 'white',
+      width: '100%',
+
+      '&:hover': {
+        bg: 'brand.400',
+      },
+
+      '&:focus': {
+        bg: 'brand.400',
+      },
+
+      '&:active': {
+        bg: 'brand.400',
+      },
+    }),
   },
 
   defaultProps: {

@@ -15,7 +15,7 @@ import { useRecoilValue } from 'recoil'
 
 import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 export interface OwnerProperties {
   id?: KeyResult['id']

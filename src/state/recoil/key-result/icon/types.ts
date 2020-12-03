@@ -1,0 +1,25 @@
+import { MessageDescriptor } from 'react-intl'
+
+export type KeyResultIconDrawing =
+  | 'Activity'
+  | 'Bookmark'
+  | 'Calendar'
+  | 'Delete'
+  | 'Discovery'
+  | 'Document'
+  | 'EditSquare'
+  | 'Folder'
+  | 'Game'
+  | 'Graph'
+  | 'Heart'
+  | 'Location'
+  | 'Message'
+  | 'Scan'
+  | 'Search'
+  | 'TicketStar'
+  | 'TimesSquare'
+  | 'Video'
+  | 'Voice'
+  | 'Wallet'
+
+export type KeyResultIconDesc = Record<KeyResultIconDrawing, MessageDescriptor>

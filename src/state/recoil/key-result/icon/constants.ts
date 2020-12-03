@@ -1,5 +1,7 @@
 import { PREFIX as PARENT_PREFIX } from '../constants'
 
+import { KeyResultIconDrawing } from './types'
+
 export const PREFIX = `${PARENT_PREFIX}::ICON`
 
 export const COLORS_AVAILABLE = [
@@ -24,7 +26,7 @@ export const COLORS_AVAILABLE = [
   '#24CB8D',
 ]
 
-export const DRAWINGS_AVAILABLE = [
+export const DRAWINGS_AVAILABLE: KeyResultIconDrawing[] = [
   'Activity',
   'Bookmark',
   'Calendar',

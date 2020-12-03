@@ -36,6 +36,15 @@ describe('getter', () => {
 
     expect(result).not.toBeDefined()
   })
+
+  it('returns undefined if there is no progress reports', () => {
+    const fakeID = faker.random.number()
+    const getCurrentProgress = currentProgress.getCurrentProgress(fakeID)
+
+    const result = getCurrentProgress({ get: sinon.fake() })
+
+    expect(result).not.toBeDefined()
+  })
 })
 
 describe('setter', () => {

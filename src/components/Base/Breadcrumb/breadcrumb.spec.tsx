@@ -1,19 +1,11 @@
+import enzyme from 'enzyme'
 import faker from 'faker'
 import { NextRouter } from 'next/dist/next-server/lib/router/router'
 import * as router from 'next/router'
 import React from 'react'
-import { RecoilRoot } from 'recoil'
 import sinon from 'sinon'
 
-import { mountWithIntl } from 'lib/enzyme'
-
 import Breadcrumb from './breadcrumb'
-
-const RecoiledBreadcrumb = () => (
-  <RecoilRoot>
-    <Breadcrumb />
-  </RecoilRoot>
-)
 
 describe('component rendering expectations', () => {
   const numberBlocks = faker.random.number({ max: 10 })
@@ -27,7 +19,7 @@ describe('component rendering expectations', () => {
   it('renders a single block for each "/" block in URL', () => {
     sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
 
-    const result = mountWithIntl(<RecoiledBreadcrumb />)
+    const result = enzyme.shallow(<Breadcrumb />)
 
     const blocks = result.find('BreadcrumbItem')
 
@@ -37,10 +29,10 @@ describe('component rendering expectations', () => {
   it('renders the first element as "Home"', () => {
     sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
 
-    const result = mountWithIntl(<RecoiledBreadcrumb />)
+    const result = enzyme.shallow(<Breadcrumb />)
 
     const blocks = result.find('BreadcrumbItem')
-    const firstLabel = blocks.first().find('a').text()
+    const firstLabel = blocks.first().find('IntlLink').prop('children')
 
     expect(firstLabel).toEqual('Home')
   })
@@ -51,7 +43,7 @@ describe('component rendering expectations', () => {
     }
     sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
 
-    const result = mountWithIntl(<RecoiledBreadcrumb />)
+    const result = enzyme.shallow(<Breadcrumb />)
 
     const blocks = result.find('BreadcrumbItem')
     const expectedRelativeLinkForIndex: Record<number, string> = {
@@ -62,7 +54,7 @@ describe('component rendering expectations', () => {
     blocks.map((block, index) => {
       if (index === 0) return // The first block is always "Home"
 
-      const href = block.find('a').prop('href')
+      const href = block.find('IntlLink').prop('href')
       return expect(href).toEqual(expectedRelativeLinkForIndex[index])
     })
   })
@@ -70,7 +62,7 @@ describe('component rendering expectations', () => {
   it('uses the IntlLink for block links', () => {
     sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
 
-    const result = mountWithIntl(<RecoiledBreadcrumb />)
+    const result = enzyme.shallow(<Breadcrumb />)
 
     const intlLinkNodes = result.find('IntlLink')
 
@@ -83,7 +75,7 @@ describe('component rendering expectations', () => {
     }
     sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
 
-    const result = mountWithIntl(<RecoiledBreadcrumb />)
+    const result = enzyme.shallow(<Breadcrumb />)
 
     const blocks = result.find('BreadcrumbItem')
 
@@ -93,7 +85,7 @@ describe('component rendering expectations', () => {
   it('highlights the last element in the breadcrumb as the current page', () => {
     sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
 
-    const result = mountWithIntl(<RecoiledBreadcrumb />)
+    const result = enzyme.shallow(<Breadcrumb />)
 
     const lastBreadcrumb = result.find('BreadcrumbItem').last()
 
@@ -106,7 +98,7 @@ describe('component rendering expectations', () => {
     }
     sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
 
-    const result = mountWithIntl(<RecoiledBreadcrumb />)
+    const result = enzyme.shallow(<Breadcrumb />)
 
     const blocks = result.find('BreadcrumbItem')
     const expectedRelativeLabelForIndex: Record<number, string> = {
@@ -117,18 +109,18 @@ describe('component rendering expectations', () => {
     blocks.map((block, index) => {
       if (index === 0) return // The first block is always "Home"
 
-      const label = block.find('a').text()
+      const label = block.find('IntlLink').prop('children')
       return expect(label).toEqual(expectedRelativeLabelForIndex[index])
     })
   })
 
-  it.only('renders the proper Intl message label for a given block if exists', () => {
+  it('renders the proper Intl message label for a given block if exists', () => {
     const fakeRouter = {
       pathname: '/key-results/morty',
     }
     sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
 
-    const result = mountWithIntl(<RecoiledBreadcrumb />)
+    const result = enzyme.shallow(<Breadcrumb />)
 
     const blocks = result.find('BreadcrumbItem')
     const expectedRelativeLabelForIndex: Record<number, string> = {
@@ -139,7 +131,7 @@ describe('component rendering expectations', () => {
     blocks.map((block, index) => {
       if (index === 0) return // The first block is always "Home"
 
-      const label = block.find('a').text()
+      const label = block.find('IntlLink').prop('children')
       return expect(label).toEqual(expectedRelativeLabelForIndex[index])
     })
   })

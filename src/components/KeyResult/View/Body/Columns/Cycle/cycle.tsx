@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult'
 import BaseGridItem from 'src/components/KeyResult/View/Body/Columns/Base'
-import { buildPartialSelector } from 'src/state/recoil/key-result'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 export interface CycleProperties {
   id?: KeyResult['id']

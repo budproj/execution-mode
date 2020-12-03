@@ -9,15 +9,20 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import messages from './messages'
 
 export interface DraggableGridProperties extends GridProps {
-  id: KeyResult['id']
+  keyResultID: KeyResult['id']
   index: number
 }
 
-const DraggableGrid = ({ id, index, children, ...rest }: DraggableGridProperties): ReactElement => {
+const DraggableGrid = ({
+  keyResultID,
+  index,
+  children,
+  ...rest
+}: DraggableGridProperties): ReactElement => {
   const intl = useIntl()
 
   return (
-    <Draggable draggableId={`KEY_RESULT_VIEW_ROW::${id}`} index={index}>
+    <Draggable draggableId={`KEY_RESULT_VIEW_ROW::${keyResultID.toString()}`} index={index}>
       {(provided, { isDragging }) => (
         <Grid
           ref={provided.innerRef}

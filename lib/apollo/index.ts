@@ -2,6 +2,7 @@ import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } fr
 import { setContext } from '@apollo/client/link/context'
 import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react'
 import merge from 'deepmerge'
+import { AppProps } from 'next/app'
 import { useMemo } from 'react'
 
 import getConfig from 'src/config'
@@ -45,7 +46,10 @@ const createApolloClient = (authzClient: Auth0ContextInterface) =>
     ...linkWithServer(authzClient),
   })
 
-export const initializeApollo = (authzClient: Auth0ContextInterface, initialState) => {
+export const initializeApollo = (
+  authzClient: Auth0ContextInterface,
+  initialState: NormalizedCacheObject,
+) => {
   const apolloClient = APOLLO_CLIENT ?? createApolloClient(authzClient)
 
   if (initialState) {
@@ -63,7 +67,7 @@ export const initializeApollo = (authzClient: Auth0ContextInterface, initialStat
 
 export const addApolloState = (
   client: ApolloClient<NormalizedCacheObject>,
-  pageProperties: Record<string, unknown>,
+  pageProperties: AppProps['pageProps'],
 ) => {
   if (pageProperties?.props) {
     pageProperties.props[APOLLO_STATE] = client.cache.extract()
@@ -73,11 +77,11 @@ export const addApolloState = (
 }
 
 export const useApollo = (
-  pageProperties: Record<string, unknown>,
+  pageProperties: AppProps['pageProps']['props'],
 ): ApolloClient<NormalizedCacheObject> => {
   const authzClient = useAuth0()
 
-  const state = pageProperties[APOLLO_STATE]
+  const state: NormalizedCacheObject = pageProperties[APOLLO_STATE]
   const client = useMemo(() => initializeApollo(authzClient, state), [authzClient, state])
 
   return client

@@ -17,3 +17,5 @@ export { default as PageContentHeader } from './PageContentHeader'
 export { default as PageTitle } from './PageTitle'
 
 export { default as Slider } from './Slider'
+
+export { default as SelectMenu } from './SelectMenu'
