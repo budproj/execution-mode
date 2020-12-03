@@ -3,7 +3,7 @@ import snakeCase from 'lodash/snakeCase'
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { Team } from 'src/components/Company/types'
-import { KeyResult } from 'src/components/KeyResult'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { User } from 'src/components/User/types'
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'

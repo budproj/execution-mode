@@ -1,7 +1,7 @@
 import { defineMessages, MessageDescriptor } from 'react-intl'
 import { selectorFamily } from 'recoil'
 
-import { ConfidenceReport } from 'src/components/KeyResult'
+import { ConfidenceReport } from 'src/components/KeyResult/types'
 
 import { PREFIX } from './constants'
 

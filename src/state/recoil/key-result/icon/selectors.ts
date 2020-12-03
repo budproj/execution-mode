@@ -1,7 +1,7 @@
 import { MessageDescriptor } from 'react-intl'
 import { selectorFamily } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult'
+import { KeyResult } from 'src/components/KeyResult/types'
 
 import { PREFIX, COLORS_AVAILABLE, DRAWINGS_AVAILABLE } from './constants'
 import { KeyResultIconDesc, KeyResultIconDrawing } from './types'

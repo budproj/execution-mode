@@ -13,7 +13,7 @@ export enum KeyResultViewBinding {
 }
 
 export interface ConfidenceReport {
-  id: number
+  id: string
   valuePrevious?: number
   valueNew: number
   comment?: string
@@ -23,7 +23,7 @@ export interface ConfidenceReport {
 }
 
 export interface ProgressReport {
-  id: number
+  id: string
   valuePrevious?: number
   valueNew: number
   comment?: string
@@ -33,7 +33,7 @@ export interface ProgressReport {
 }
 
 export interface KeyResultView {
-  id: number
+  id: string
   title?: string
   binding?: KeyResultViewBinding
   rank: Array<KeyResult['id']>
@@ -44,7 +44,7 @@ export interface KeyResultView {
 }
 
 export interface KeyResult {
-  id: number
+  id: string
   title: string
   description?: string
   initialValue: number

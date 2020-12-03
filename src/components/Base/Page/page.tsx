@@ -1,16 +1,16 @@
-import { Box } from '@chakra-ui/react'
+import { Box, BoxProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
 import AppBar from 'src/components/Base/AppBar'
 
-export interface PageProperties {
-  children: ReactElement
+export interface PageProperties extends BoxProps {
+  children: ReactElement | ReactElement[]
 }
 
-const Page = (properties: PageProperties): ReactElement => (
-  <Box>
+const Page = ({ children, ...rest }: PageProperties): ReactElement => (
+  <Box {...rest}>
     <AppBar />
-    {properties.children}
+    {children}
   </Box>
 )
 

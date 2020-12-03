@@ -1,12 +1,16 @@
+import omit from 'lodash/omit'
+import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { defineMessages, useIntl, MessageDescriptor } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import PageContent from 'src/components/Base/PageContent'
-import KeyResultView from 'src/components/KeyResult/View'
+import { KeyResultView, KeyResultDrawer } from 'src/components/KeyResult'
+import { intlRouteAtom } from 'src/state/recoil/intl'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
-const messages = defineMessages({
+export const messages = defineMessages({
   pageTitle: {
     defaultMessage: 'Minhas Key Results',
     id: 'tf3MiP',
@@ -15,8 +19,23 @@ const messages = defineMessages({
 }) as Record<string, MessageDescriptor>
 
 const MyKeyResultsIndex = (): ReactElement => {
-  const setPageTitle = useSetRecoilState(pageTitleAtom)
   const intl = useIntl()
+  const router = useRouter()
+  const setPageTitle = useSetRecoilState(pageTitleAtom)
+  const intlRoute = useRecoilValue(intlRouteAtom(router.pathname))
+  const queryID = router.query.id as string
+  const keyResult = useRecoilValue(keyResultAtomFamily(queryID))
+
+  const isDrawerOpen = typeof keyResult !== 'undefined'
+
+  const closeKeyResultDrawer = async () =>
+    router.push(
+      {
+        pathname: router.pathname,
+        query: omit(router.query, 'id'),
+      },
+      intlRoute,
+    )
 
   useEffect((): void => {
     setPageTitle(intl.formatMessage(messages.pageTitle))
@@ -25,6 +44,7 @@ const MyKeyResultsIndex = (): ReactElement => {
   return (
     <PageContent>
       <KeyResultView />
+      <KeyResultDrawer isOpen={isDrawerOpen} keyResultID={queryID} onClose={closeKeyResultDrawer} />
     </PageContent>
   )
 }

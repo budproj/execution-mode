@@ -4,8 +4,8 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult'
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import { CheckInFormValues } from '../../form'
