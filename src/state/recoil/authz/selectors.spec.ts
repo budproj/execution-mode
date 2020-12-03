@@ -1,0 +1,28 @@
+import faker from 'faker'
+import sinon from 'sinon'
+
+import * as selectors from './selectors'
+
+describe('roles', () => {
+  it('returns the list of roles for our API', () => {
+    // eslint-disable-next-line unicorn/no-null
+    const fakeRoles = new Array(faker.random.number({ max: 100 })).fill(null).map(faker.random.word)
+    const fakeUser = {
+      ...faker.helpers.userCard(),
+      'https://api.getbud.co/roles': fakeRoles,
+    }
+    const stub = sinon.stub().returns(fakeUser)
+
+    const result = selectors.getRoles({ get: stub })
+
+    expect(result).toEqual({ api: fakeRoles })
+  })
+
+  it('returns an empty list if no user is defined', () => {
+    const stub = sinon.stub()
+
+    const result = selectors.getRoles({ get: stub })
+
+    expect(result).toEqual({ api: [] })
+  })
+})
