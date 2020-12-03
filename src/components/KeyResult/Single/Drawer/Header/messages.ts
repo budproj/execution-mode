@@ -1,6 +1,6 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-type DrawerMessages = 'updateProgress' | 'closeIconTitle' | 'closeIconDesc'
+type KeyResultDrawerHeaderMessages = 'closeIconTitle' | 'closeIconDesc'
 
 export default defineMessages({
   closeIconTitle: {
@@ -17,4 +17,4 @@ export default defineMessages({
     description:
       'This description is used for accessibility. Screen readers uses it when they hover the close icon button in our key result drawer close button',
   },
-}) as Record<DrawerMessages, MessageDescriptor>
+}) as Record<KeyResultDrawerHeaderMessages, MessageDescriptor>

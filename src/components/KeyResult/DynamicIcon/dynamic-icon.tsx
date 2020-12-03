@@ -14,9 +14,10 @@ import { KeyResultIconDrawing } from 'state/recoil/key-result/icon/types'
 
 export interface KeyResultDynamicIconProperties {
   title: KeyResult['title'] | undefined
+  size: number
 }
 
-const KeyResultDynamicIcon = ({ title }: KeyResultDynamicIconProperties): ReactElement => {
+const KeyResultDynamicIcon = ({ title, size }: KeyResultDynamicIconProperties): ReactElement => {
   const intl = useIntl()
   const drawing = useRecoilValue<KeyResultIconDrawing>(keyResultIconDrawing(title))
   const color = useRecoilValue<string>(keyResultIconColor(title))
@@ -26,9 +27,13 @@ const KeyResultDynamicIcon = ({ title }: KeyResultDynamicIconProperties): ReactE
 
   return (
     <Box bg={color} borderRadius={10} p={4} lineHeight={1}>
-      <IconComponent desc={intl.formatMessage(desc)} fill="white" w={8} h={8} />
+      <IconComponent desc={intl.formatMessage(desc)} fill="white" w={size} h={size} />
     </Box>
   )
+}
+
+KeyResultDynamicIcon.defaultProps = {
+  size: 8,
 }
 
 export default KeyResultDynamicIcon

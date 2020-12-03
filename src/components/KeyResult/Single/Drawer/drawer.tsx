@@ -1,17 +1,9 @@
-import {
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
-  DrawerProps,
-} from '@chakra-ui/react'
+import { DrawerContent, Drawer, DrawerOverlay, DrawerProps } from '@chakra-ui/react'
 import React from 'react'
-import { useIntl } from 'react-intl'
 
-import { Close as CloseIcon } from 'src/components/Icons'
 import { KeyResult } from 'src/components/KeyResult/types'
 
-import messages from './messages'
+import KeyResultDrawerHeader from './Header'
 
 export interface KeyResultDrawerProperties extends Partial<DrawerProps> {
   keyResultID?: KeyResult['id']
@@ -19,29 +11,19 @@ export interface KeyResultDrawerProperties extends Partial<DrawerProps> {
   onClose: () => void
 }
 
-const KeyResultDrawer = ({ keyResultID, ...rest }: KeyResultDrawerProperties) => {
-  const intl = useIntl()
-
-  return (
-    <Drawer {...rest}>
-      <DrawerOverlay>
-        <DrawerContent>
-          <DrawerCloseButton color="gray.300" _hover={{ bg: 'transparent', color: 'brand.400' }}>
-            <CloseIcon
-              title={intl.formatMessage(messages.closeIconTitle)}
-              desc={intl.formatMessage(messages.closeIconDesc)}
-              fill="currentColor"
-            />
-          </DrawerCloseButton>
-          {keyResultID}
-        </DrawerContent>
-      </DrawerOverlay>
-    </Drawer>
-  )
-}
+const KeyResultDrawer = ({ keyResultID, ...rest }: KeyResultDrawerProperties) => (
+  <Drawer {...rest}>
+    <DrawerOverlay>
+      <DrawerContent>
+        <KeyResultDrawerHeader keyResultID={keyResultID} />
+      </DrawerContent>
+    </DrawerOverlay>
+  </Drawer>
+)
 
 KeyResultDrawer.defaultProps = {
   placement: 'right',
+  size: 'sm',
 }
 
 export default KeyResultDrawer

@@ -1,1 +1,3 @@
-export { default as SingleDrawer } from './Drawer'
+export { default as KeyResultSingleDrawer } from './Drawer'
+
+export { default as KeyResultSingleTitle } from './Title'
