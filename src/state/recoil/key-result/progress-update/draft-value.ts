@@ -9,7 +9,7 @@ const KEY = `${PREFIX}::DRAFT_VALUE`
 
 const draftValue = atomFamily<ProgressReport['valueNew'] | undefined, KeyResult['id'] | undefined>({
   key: KEY,
-  default: currentProgress,
+  default: (id) => currentProgress(id),
 })
 
 export default draftValue

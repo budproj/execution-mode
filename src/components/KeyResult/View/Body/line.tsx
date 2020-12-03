@@ -16,6 +16,7 @@ import {
   KeyResultViewBodyColumnTitle,
 } from './Columns'
 import DraggableGrid from './draggable-grid'
+import SkeletonLine from './skeleton/line'
 
 const component = 'KeyResultViewBodyLine'
 
@@ -39,17 +40,19 @@ const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
     },
   })
 
-  return (
+  const isLoaded = typeof keyResult !== 'undefined'
+
+  return isLoaded ? (
     <DraggableGrid
       keyResultID={id}
-      index={index}
-      alignItems="center"
       templateColumns={GRID_TEMPLATE_COLUMN}
       border={0}
-      borderColor="transparent"
-      borderStyle="solid"
-      borderBottomColor={BORDER_COLOR}
       borderBottomWidth={1}
+      index={index}
+      alignItems="center"
+      borderColor="transparent"
+      borderBottomColor={BORDER_COLOR}
+      borderStyle="solid"
       _hover={{ background: 'blue.50' }}
     >
       <KeyResultViewBodyColumnTitle id={id} />
@@ -59,6 +62,8 @@ const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
       <KeyResultViewBodyColumnCycle id={id} />
       <KeyResultViewBodyColumnOwner id={id} />
     </DraggableGrid>
+  ) : (
+    <SkeletonLine />
   )
 }
 

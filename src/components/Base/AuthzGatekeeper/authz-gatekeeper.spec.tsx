@@ -12,8 +12,10 @@ describe('expected constraints', () => {
   afterEach(() => sinon.restore())
 
   it('renders the loading page if gatekeeper is checking if user is authenticated', () => {
-    const fakeAuthReturn = { isLoading: true }
-    sinon.stub(authz, 'useAuth0').returns(fakeAuthReturn as authz.Auth0ContextInterface)
+    const fakeAuthReturn = {
+      isLoading: true,
+    }
+    sinon.stub(authz, 'useAuth0').returns(fakeAuthReturn as any)
 
     const result = enzyme.shallow(
       <AuthzGatekeeper>
@@ -33,7 +35,7 @@ describe('expected constraints', () => {
       isAuthenticated: false,
       loginWithRedirect: () => new Promise(spy) as unknown,
     }
-    sinon.stub(authz, 'useAuth0').returns(fakeAuthReturn as authz.Auth0ContextInterface)
+    sinon.stub(authz, 'useAuth0').returns(fakeAuthReturn as any)
 
     enzyme.mount(
       <AuthzGatekeeper>
@@ -50,8 +52,9 @@ describe('expected constraints', () => {
     const fakeAuthReturn = {
       isLoading: false,
       isAuthenticated: false,
+      loginWithRedirect: sinon.fake.resolves(faker.random.word()),
     }
-    sinon.stub(authz, 'useAuth0').returns(fakeAuthReturn as authz.Auth0ContextInterface)
+    sinon.stub(authz, 'useAuth0').returns(fakeAuthReturn as any)
 
     const result = enzyme.shallow(
       <AuthzGatekeeper>
@@ -69,7 +72,7 @@ describe('expected constraints', () => {
       isLoading: false,
       isAuthenticated: true,
     }
-    sinon.stub(authz, 'useAuth0').returns(fakeAuthReturn as authz.Auth0ContextInterface)
+    sinon.stub(authz, 'useAuth0').returns(fakeAuthReturn as any)
 
     const result = enzyme.shallow(
       <AuthzGatekeeper>

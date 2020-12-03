@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 
+import RecoilDebugObserver from 'components/Base/RecoilDebugObserver'
 import { makeServer } from 'lib/mirage'
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
@@ -50,6 +51,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
       onRedirectCallback={onAuth0RedirectCallback}
     >
       <RecoilRoot>
+        <RecoilDebugObserver />
         <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
           <ChakraProvider theme={theme}>
             <AuthzGatekeeper>

@@ -26,6 +26,7 @@ describe('props customization', () => {
   })
 
   it('renders the provided children', () => {
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
     const result = enzyme.shallow(
       <RecoilIntlProvider locale="pt-BR">
         <FakeComponent />
