@@ -11,7 +11,7 @@ describe('partial selector getter', () => {
   it('uses the provided ID to get key results from atom family', () => {
     const spy = sinon.spy()
     const fakePart = faker.random.word()
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
 
     const fakePartGetter = buildPartialSelector.getKeyResultPart(fakePart)
     const fakeGetter = fakePartGetter(fakeID)
@@ -26,7 +26,7 @@ describe('partial selector getter', () => {
   it('returns the value in provided part path', () => {
     const fakeData = { rick: 'Morty' }
     const stub = sinon.stub().returns(fakeData)
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
 
     const fakePartGetter = buildPartialSelector.getKeyResultPart('rick')
     const fakeGetter = fakePartGetter(fakeID)
@@ -39,7 +39,7 @@ describe('partial selector getter', () => {
   it('returns the value in provided part deep path', () => {
     const fakeData = { rick: { sanchez: { morty: 'Smith' } } }
     const stub = sinon.stub().returns(fakeData)
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
 
     const fakePartGetter = buildPartialSelector.getKeyResultPart('rick.sanchez.morty')
     const fakeGetter = fakePartGetter(fakeID)
@@ -63,7 +63,7 @@ describe('partial selector setter', () => {
   it('gets the provided key result atom family with given ID', () => {
     const spy = sinon.spy()
     const fakePart = faker.random.word()
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
 
     const fakePartSetter = buildPartialSelector.setKeyResultPart(fakePart)
     const fakeSetter = fakePartSetter(fakeID)
@@ -79,7 +79,7 @@ describe('partial selector setter', () => {
     const fakeData = faker.helpers.createCard()
     const fakeValue = faker.random.objectElement()
     const fakePart = faker.random.word()
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const getStub = sinon.stub().returns(fakeData)
     const setSpy = sinon.spy()
 

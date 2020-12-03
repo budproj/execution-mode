@@ -20,7 +20,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.number()} />)
+    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
@@ -34,7 +34,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.number()} />)
+    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Percentage')
 
@@ -48,7 +48,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.number()} />)
+    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('CoinBRL')
 
@@ -60,7 +60,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.number()} />)
+    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
@@ -69,7 +69,7 @@ describe('component expectations', () => {
 
   it('updates the field value with latest current progress', async () => {
     const spy = sinon.spy()
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
 
     sinon.mock(recoil).expects('useRecoilValue').returns('')

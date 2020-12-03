@@ -23,7 +23,7 @@ const Progress = ({ id }: ProgressProperties): ReactElement => {
   const isKeyResultLoaded = Boolean(id)
 
   return (
-    <BaseGridItem>
+    <BaseGridItem preventLineClick>
       <Flex flexDir="column" alignItems="flex-end">
         <Box w="100%">
           <Skeleton

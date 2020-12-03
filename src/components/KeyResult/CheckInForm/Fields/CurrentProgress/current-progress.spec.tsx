@@ -17,7 +17,7 @@ describe('component expectations', () => {
     sinon.stub(recoil, 'useRecoilValue').returns(format)
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.number()} />)
+    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
@@ -29,7 +29,7 @@ describe('component expectations', () => {
     sinon.stub(recoil, 'useRecoilValue').returns(format)
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.number()} />)
+    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Percentage')
 
@@ -41,7 +41,7 @@ describe('component expectations', () => {
     sinon.stub(recoil, 'useRecoilValue').returns(format)
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.number()} />)
+    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('CoinBRL')
 
@@ -53,7 +53,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.number()} />)
+    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
@@ -65,7 +65,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.number()} />)
+    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 

@@ -29,7 +29,7 @@ const Owner = ({ id }: OwnerProperties): ReactElement => {
   const isOwnerLoaded = Boolean(owner)
 
   return (
-    <BaseGridItem pr={0} display="flex" justifyContent="flex-end">
+    <BaseGridItem preventLineClick pr={0} display="flex" justifyContent="flex-end">
       <SkeletonCircle
         size="48px"
         isLoaded={isOwnerLoaded}

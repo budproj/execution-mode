@@ -6,7 +6,7 @@ export { default as KeyResultProgressSlider } from './ProgressSlider'
 
 export { default as KeyResultConfidenceTag } from './ConfidenceTag'
 
-export { default as KeyResultDrawer } from './Drawer'
+export * as KeyResultSingle from './Single'
 
 export * as KeyResultNumberMasks from './NumberMasks'
 

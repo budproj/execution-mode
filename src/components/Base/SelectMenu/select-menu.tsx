@@ -41,7 +41,7 @@ const SelectMenu = ({
         {placeholder}
       </MenuButton>
       <MenuList>
-        <MenuOptionGroup value={value} type="radio" title={name} onChange={onChange}>
+        <MenuOptionGroup value={value} type="radio" onChange={onChange}>
           {children}
         </MenuOptionGroup>
       </MenuList>

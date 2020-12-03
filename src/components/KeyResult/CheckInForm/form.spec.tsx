@@ -17,7 +17,7 @@ describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
   it('uses the current progress as initial value', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const stateStub = sinon.stub(recoil, 'useRecoilState')
 
@@ -36,7 +36,7 @@ describe('component expectations', () => {
   })
 
   it('updates the current progress field upon form submission', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     const spy = sinon.spy()
@@ -63,7 +63,7 @@ describe('component expectations', () => {
   })
 
   it('updates the progress report state upon form submission', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     const spy = sinon.spy()
@@ -87,7 +87,7 @@ describe('component expectations', () => {
   })
 
   it('updates the confidence report state upon form submission', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const fakeConfidence = faker.random.number()
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     const spy = sinon.spy()
@@ -111,7 +111,7 @@ describe('component expectations', () => {
   })
 
   it('dispatchs a remote state update action upon form submittion', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const fakeConfidence = faker.random.number()
     const stateStub = sinon.stub(recoil, 'useRecoilState')
@@ -144,7 +144,7 @@ describe('component expectations', () => {
   })
 
   it('executes the desired after submit hook upon form submission', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const fakeConfidence = faker.random.number()
     const stateStub = sinon.stub(recoil, 'useRecoilState')

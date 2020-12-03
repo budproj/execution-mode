@@ -8,7 +8,7 @@ describe('getter', () => {
 
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentConfidence, 'selectConfidenceReports')
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const getCurrentConfidence = currentConfidence.getCurrentConfidence(fakeID)
 
     getCurrentConfidence({ get: sinon.fake() })
@@ -19,7 +19,7 @@ describe('getter', () => {
   })
 
   it('returns the value new from latest confidence report', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const latestConfidenceValue = faker.random.number()
     const getStub = sinon.stub().returns([{ valueNew: latestConfidenceValue }])
     const getCurrentConfidence = currentConfidence.getCurrentConfidence(fakeID)
@@ -43,7 +43,7 @@ describe('setter', () => {
 
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentConfidence, 'selectConfidenceReports')
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const setCurrentConfidence = currentConfidence.setCurrentConfidence(fakeID)
 
     setCurrentConfidence(
@@ -68,7 +68,7 @@ describe('setter', () => {
     const getterStub = sinon.stub().returns([latestConfidenceReport])
     const setterSpy = sinon.spy()
 
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const valueNew = faker.random.number()
     const setCurrentConfidence = currentConfidence.setCurrentConfidence(fakeID)
 
