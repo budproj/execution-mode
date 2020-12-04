@@ -1,42 +1,92 @@
+import * as apollo from '@apollo/client'
 import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
+import * as recoil from 'recoil'
 import sinon from 'sinon'
+
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 
 import KeyResultDrawer from './drawer'
 
-describe('component customization', () => {
-  it('hands over the open control to who is importing it', () => {
-    const fakeOpen = faker.random.boolean()
+describe('expected behaviors', () => {
+  afterEach(() => sinon.restore())
 
-    const result = enzyme.shallow(<KeyResultDrawer isOpen={fakeOpen} onClose={sinon.fake()} />)
+  it('updates the local key result data if it received new remote data', () => {
+    const fakeID = faker.random.word()
+    const fakeData = { keyResult: faker.helpers.userCard() }
+    const spy = sinon.spy()
 
-    const drawer = result.find('Drawer')
+    const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
+    recoilStateStub.withArgs(keyResultOpenDrawer).returns([fakeID, sinon.fake()])
+    recoilStateStub.withArgs(keyResultAtomFamily(fakeID)).returns([faker.random.word(), spy])
 
-    expect(drawer.prop('isOpen')).toEqual(fakeOpen)
+    const apolloStub = sinon.stub(apollo, 'useLazyQuery')
+    apolloStub.returns([
+      sinon.fake(),
+      {
+        loading: false,
+        data: fakeData,
+      },
+    ] as any)
+
+    enzyme.shallow(<KeyResultDrawer />)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeData.keyResult)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('hands over the on close function to who is importing it', () => {
-    const fakeOnClose = sinon.fake()
+  it('fetches new data in first call if an ID was provided', () => {
+    const fakeID = faker.random.word()
+    const spy = sinon.spy()
 
-    const result = enzyme.shallow(
-      <KeyResultDrawer isOpen={faker.random.boolean()} onClose={fakeOnClose} />,
-    )
+    const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
+    recoilStateStub.withArgs(keyResultOpenDrawer).returns([fakeID, sinon.fake()])
+    recoilStateStub.returns([faker.random.word(), sinon.fake()])
 
-    const drawer = result.find('Drawer')
+    const apolloStub = sinon.stub(apollo, 'useLazyQuery')
+    apolloStub.returns([spy, {}] as any)
 
-    expect(drawer.prop('onClose')).toEqual(fakeOnClose)
+    enzyme.shallow(<KeyResultDrawer />)
+
+    expect(spy.calledOnce).toEqual(true)
   })
 
-  it('passes any unhandled prop to the root drawer', () => {
-    const properties = faker.helpers.userCard()
+  it('fetched new data if it was already called, but the ID changed', () => {
+    const fakeID = faker.random.word()
+    const spy = sinon.spy()
 
-    const result = enzyme.shallow(
-      <KeyResultDrawer isOpen={faker.random.boolean()} onClose={sinon.fake()} {...properties} />,
-    )
+    const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
+    recoilStateStub.returns([faker.random.word(), sinon.fake()])
+
+    const apolloStub = sinon.stub(apollo, 'useLazyQuery')
+    apolloStub.returns([spy, { variables: { id: fakeID } }] as any)
+
+    enzyme.shallow(<KeyResultDrawer />)
+
+    expect(spy.calledOnce).toEqual(true)
+  })
+
+  it('sets the current opened ID to undefined upon drawer close', () => {
+    const spy = sinon.spy()
+
+    const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
+    recoilStateStub.withArgs(keyResultOpenDrawer).returns([faker.random.number(), spy])
+    recoilStateStub.returns([faker.random.word(), sinon.fake()])
+
+    const apolloStub = sinon.stub(apollo, 'useLazyQuery')
+    apolloStub.returns([sinon.fake(), {}] as any)
+
+    const result = enzyme.shallow(<KeyResultDrawer />)
 
     const drawer = result.find('Drawer')
+    drawer.simulate('close')
 
-    expect(drawer.props()).toMatchObject(properties)
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(undefined)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 })

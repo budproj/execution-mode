@@ -31,6 +31,8 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
   const { Component, pageProps, locale, messages } = properties
   const router = useRouter()
 
+  console.log(properties.APOLLO_STATE, 'tag')
+
   const onAuth0RedirectCallback = async (appState: AppState): void => {
     await router.replace(appState?.returnTo ?? window.location.pathname)
   }

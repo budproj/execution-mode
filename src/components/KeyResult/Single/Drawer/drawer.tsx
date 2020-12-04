@@ -1,29 +1,60 @@
-import { DrawerContent, Drawer, DrawerOverlay, DrawerProps } from '@chakra-ui/react'
-import React from 'react'
+import { useLazyQuery } from '@apollo/client'
+import { DrawerContent, Drawer, DrawerOverlay } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult/types'
+import logger from 'lib/logger'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 
 import KeyResultDrawerHeader from './Header'
+import queries from './queries.gql'
 
-export interface KeyResultDrawerProperties extends Partial<DrawerProps> {
-  keyResultID?: KeyResult['id']
-  isOpen: boolean
-  onClose: () => void
+const KeyResultDrawer = () => {
+  const [keyResultID, setKeyResultID] = useRecoilState(keyResultOpenDrawer)
+  const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
+  const [getKeyResult, { loading, data, called, variables }] = useLazyQuery(
+    queries.GET_KEY_RESULT,
+    {
+      variables: {
+        id: keyResultID,
+      },
+    },
+  )
+
+  // eslint-disable-next-line unicorn/no-useless-undefined
+  const handleClose = () => setKeyResultID(undefined)
+  const isOpen = Boolean(keyResultID)
+
+  logger.debug('Rerendered key result drawer contents. Take a look at our new data:', {
+    component,
+    data: {
+      data,
+      loading,
+      keyResult,
+    },
+  })
+
+  useEffect(() => {
+    if (!loading && data) setKeyResult(data.keyResult)
+  }, [loading, data, setKeyResult])
+
+  useEffect(() => {
+    if (!called && keyResultID) getKeyResult()
+    if (called && variables?.id !== keyResultID) getKeyResult()
+  }, [called, keyResultID, getKeyResult, variables])
+
+  return (
+    <Drawer isOpen={isOpen} size="sm" onClose={handleClose}>
+      <DrawerOverlay>
+        <DrawerContent>
+          <KeyResultDrawerHeader keyResultID={keyResultID} />
+        </DrawerContent>
+      </DrawerOverlay>
+    </Drawer>
+  )
 }
 
-const KeyResultDrawer = ({ keyResultID, ...rest }: KeyResultDrawerProperties) => (
-  <Drawer {...rest}>
-    <DrawerOverlay>
-      <DrawerContent>
-        <KeyResultDrawerHeader keyResultID={keyResultID} />
-      </DrawerContent>
-    </DrawerOverlay>
-  </Drawer>
-)
-
-KeyResultDrawer.defaultProps = {
-  placement: 'right',
-  size: 'sm',
-}
+const component = KeyResultDrawer.name
 
 export default KeyResultDrawer

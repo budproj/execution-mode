@@ -1,14 +1,12 @@
-import omit from 'lodash/omit'
-import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { defineMessages, useIntl, MessageDescriptor } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 import PageContent from 'src/components/Base/PageContent'
-import { KeyResultView, KeyResult } from 'src/components/KeyResult'
-import KeyResultDrawer from 'src/components/KeyResult/Single/Drawer'
-import { intlRouteAtom } from 'src/state/recoil/intl'
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { KeyResultView } from 'src/components/KeyResult'
+import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
 export const messages = defineMessages({
@@ -21,40 +19,10 @@ export const messages = defineMessages({
 
 const KeyResultsIndex = (): ReactElement => {
   const intl = useIntl()
-  const router = useRouter()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
-  const intlRoute = useRecoilValue(intlRouteAtom(router.pathname))
-  const queryID = router.query.id as string
-  const keyResult = useRecoilValue(keyResultAtomFamily(queryID))
+  const setOpenDrawer = useSetRecoilState(keyResultOpenDrawer)
 
-  const isDrawerOpen = typeof keyResult !== 'undefined'
-
-  const closeKeyResultDrawer = async () =>
-    router.push(
-      {
-        pathname: router.pathname,
-        query: omit(router.query, 'id'),
-      },
-      intlRoute,
-      {
-        shallow: true,
-      },
-    )
-
-  const handleLineClick = async (id: KeyResult['id']) =>
-    router.push(
-      {
-        pathname: router.pathname,
-        query: {
-          ...router.query,
-          id,
-        },
-      },
-      `${intlRoute}?id=${id}`,
-      {
-        shallow: true,
-      },
-    )
+  const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
   useEffect((): void => {
     setPageTitle(intl.formatMessage(messages.pageTitle))
@@ -63,7 +31,7 @@ const KeyResultsIndex = (): ReactElement => {
   return (
     <PageContent>
       <KeyResultView onLineClick={handleLineClick} />
-      <KeyResultDrawer isOpen={isDrawerOpen} keyResultID={queryID} onClose={closeKeyResultDrawer} />
+      <KeyResultSingleDrawer />
     </PageContent>
   )
 }

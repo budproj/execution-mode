@@ -309,15 +309,15 @@ type KeyResultView {
 }
 
 type Query {
-  company(id: Int!): Company!
-  cycle(id: Int!): Cycle!
-  confidenceReport(id: Int!): ConfidenceReport!
-  progressReport(id: Int!): ProgressReport!
-  keyResult(id: Int!): KeyResult!
-  objective(id: Int!): Objective!
-  team(id: Int!): Team!
-  user(id: Int!): User!
-  keyResultView(binding: KeyResultViewBinding, id: Int): KeyResultView!
+  company(id: ID!): Company!
+  cycle(id: ID!): Cycle!
+  confidenceReport(id: ID!): ConfidenceReport!
+  progressReport(id: ID!): ProgressReport!
+  keyResult(id: ID!): KeyResult!
+  objective(id: ID!): Objective!
+  team(id: ID!): Team!
+  user(id: ID!): User!
+  keyResultView(binding: KeyResultViewBinding, id: ID): KeyResultView!
 }
 
 """Each binding represents a given view in our applications"""
