@@ -1,4 +1,5 @@
 import getPath from 'lodash/get'
+import setDeep from 'lodash/set'
 import snakeCase from 'lodash/snakeCase'
 import { DefaultValue, selectorFamily } from 'recoil'
 
@@ -34,11 +35,7 @@ export const setKeyResultPart = <T>(part: string) => (id?: KeyResult['id']) => (
   if (!id) return
 
   const originalKeyResult = get(keyResultAtomFamily(id)) as KeyResult
-  const newPartialValue = { [part]: newValue }
-  const newKeyResult: KeyResult = {
-    ...originalKeyResult,
-    ...newPartialValue,
-  }
+  const newKeyResult = setDeep(originalKeyResult, part, newValue)
 
   set(keyResultAtomFamily(id), newKeyResult)
 }

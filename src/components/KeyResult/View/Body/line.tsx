@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
 
 import { BORDER_COLOR, GRID_TEMPLATE_COLUMN } from '../constants'
 
@@ -33,7 +33,7 @@ const KeyResultViewLine = ({
   remoteKeyResult,
   onLineClick,
 }: LineProperties): ReactElement => {
-  const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(id))
+  const [keyResult, setKeyResult] = useRecoilState(selectKeyResult(id))
 
   useEffect(() => {
     if (!keyResult && remoteKeyResult) setKeyResult(remoteKeyResult)

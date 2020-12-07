@@ -60,6 +60,8 @@ describe('partial selector getter', () => {
 })
 
 describe('partial selector setter', () => {
+  afterEach(() => sinon.restore())
+
   it('gets the provided key result atom family with given ID', () => {
     const spy = sinon.spy()
     const fakePart = faker.random.word()
@@ -107,5 +109,44 @@ describe('partial selector setter', () => {
     const result = fakeSetter({ get: sinon.fake(), set: sinon.fake() }, faker.random.number())
 
     expect(result).not.toBeDefined()
+  })
+
+  it('can set deep values', () => {
+    const fakeData = { rick: { sanchez: { morty: 'Smith' } } }
+    const stub = sinon.stub().returns(fakeData)
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+
+    const fakePartSetter = buildPartialSelector.setKeyResultPart('rick.sanchez.morty')
+    const fakeSetter = fakePartSetter(fakeID)
+    const newValue = faker.random.word()
+
+    fakeSetter({ get: stub, set: spy }, newValue)
+
+    const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
+      rick: { sanchez: { morty: newValue } },
+    })
+
+    expect(wasCalledAsExpected).toEqual(true)
+  })
+
+  it('preserves deep values upon setting', () => {
+    const preservedValue = faker.random.word()
+    const fakeData = { rick: { tag: preservedValue, sanchez: { morty: 'Smith' } } }
+    const stub = sinon.stub().returns(fakeData)
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+
+    const fakePartSetter = buildPartialSelector.setKeyResultPart('rick.sanchez.morty')
+    const fakeSetter = fakePartSetter(fakeID)
+    const newValue = faker.random.word()
+
+    fakeSetter({ get: stub, set: spy }, newValue)
+
+    const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
+      rick: { tag: preservedValue, sanchez: { morty: newValue } },
+    })
+
+    expect(wasCalledAsExpected).toEqual(true)
   })
 })
