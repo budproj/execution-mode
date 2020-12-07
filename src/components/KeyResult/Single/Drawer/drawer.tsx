@@ -45,7 +45,7 @@ const KeyResultDrawer = () => {
   }, [called, keyResultID, getKeyResult, variables])
 
   return (
-    <Drawer isOpen={isOpen} size="sm" onClose={handleClose}>
+    <Drawer isOpen={isOpen} size="sm" autoFocus={false} onClose={handleClose}>
       <DrawerOverlay>
         <DrawerContent>
           <KeyResultDrawerHeader keyResultID={keyResultID} />

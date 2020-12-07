@@ -23,5 +23,8 @@ query GET_KEY_RESULT($id: ID!) {
       id
       valueNew
     }
+    policies {
+      update
+    }
   }
 }

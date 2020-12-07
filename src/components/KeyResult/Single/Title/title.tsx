@@ -1,24 +1,40 @@
-import { Editable, EditableInput, EditablePreview, Flex, Skeleton } from '@chakra-ui/react'
-import React from 'react'
-import { useRecoilValue } from 'recoil'
+import { useMutation } from '@apollo/client'
+import { Editable, EditableInput, EditablePreview, Flex, Skeleton, Text } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { selectRoles } from 'src/state/recoil/authz/selectors'
+import { UserPolicy } from 'src/components/User/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+
+import queries from './queries.gql'
 
 export interface KeyResultSingleTitleProperties {
   keyResultID?: KeyResult['id']
 }
 
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
+const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
 
 const Title = ({ keyResultID }: KeyResultSingleTitleProperties) => {
-  const title = useRecoilValue(titleSelector(keyResultID))
-  const roles = useRecoilValue(selectRoles)
-  const isTitleLoaded = Boolean(title)
+  const [title, setTitle] = useRecoilState(titleSelector(keyResultID))
+  const policies = useRecoilValue(policiesSelector(keyResultID))
+  const [updateRemoteKeyResultTitle] = useMutation(queries.UPDATE_KEY_RESULT_TITLE)
+  const [titleDraft, setTitleDraft] = useState(title)
 
-  console.log(roles)
+  const isTitleLoaded = Boolean(title)
+  const canUpdate = policies?.update === UserPolicy.ALLOW
+
+  const handleTitleSubmit = async (newTitle: string) => {
+    setTitle(newTitle)
+    await updateRemoteKeyResultTitle({
+      variables: {
+        id: keyResultID,
+        title: newTitle,
+      },
+    })
+  }
 
   return (
     <Flex gridGap={4} alignItems="center">
@@ -27,10 +43,19 @@ const Title = ({ keyResultID }: KeyResultSingleTitleProperties) => {
       </Skeleton>
 
       <Skeleton isLoaded={isTitleLoaded}>
-        <Editable value={title}>
-          <EditablePreview />
-          <EditableInput />
-        </Editable>
+        {canUpdate ? (
+          <Editable
+            value={titleDraft}
+            onChange={setTitleDraft}
+            onCancel={setTitleDraft}
+            onSubmit={handleTitleSubmit}
+          >
+            <EditablePreview />
+            <EditableInput />
+          </Editable>
+        ) : (
+          <Text>{title}</Text>
+        )}
       </Skeleton>
     </Flex>
   )

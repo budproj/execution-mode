@@ -1,0 +1,6 @@
+mutation UPDATE_KEY_RESULT_TITLE($id: ID!, $title: String!) {
+  updateKeyResult(id: $id, keyResultInput: { title: $title }) {
+    id
+    title
+  }
+}

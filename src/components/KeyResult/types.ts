@@ -1,6 +1,6 @@
 import { Team } from 'src/components/Company/types'
 import { Objective } from 'src/components/Objective/types'
-import { User } from 'src/components/User/types'
+import { User, UserPolicies } from 'src/components/User/types'
 
 export enum KeyResultFormat {
   NUMBER = 'NUMBER',
@@ -57,6 +57,7 @@ export interface KeyResult {
   team: Team
   progressReports?: ProgressReport[]
   confidenceReports?: ConfidenceReport[]
+  policies?: UserPolicies
 }
 
 export type KeyResultsHashmap = Record<string, KeyResult>

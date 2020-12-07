@@ -14,12 +14,14 @@ const { publicRuntimeConfig } = getConfig()
 function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   faker.seed(publicRuntimeConfig.mirage.fakerSeed)
 
+  const policies = server.create('policy')
   const company = server.create('company')
   const teams = server.createList('team', 3, { company })
   const user = server.create('user', { teams })
   const cycle = server.create('cycle', { company })
   const objectives = server.createList('objective', 3, { cycle })
   const keyResults = server.createList('keyResult', 10, {
+    policies,
     owner: user,
     objective: () => pickRandomModel(objectives),
     team: () => pickRandomModel(teams),
@@ -50,6 +52,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       keyResultView,
       progressReports,
       confidenceReports,
+      policies,
     },
   })
 }
