@@ -81,7 +81,9 @@ describe('component side effects', () => {
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
       variables: {
         id: fakeID,
-        title: newTitle,
+        keyResultInput: {
+          title: newTitle,
+        },
       },
     })
     expect(wasSpyCalledAsExpected).toEqual(true)

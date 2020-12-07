@@ -4,11 +4,10 @@ import React, { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
+import queries from 'src/components/KeyResult/queries.gql'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { UserPolicy } from 'src/components/User/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
-
-import queries from './queries.gql'
 
 export interface KeyResultSingleTitleProperties {
   keyResultID?: KeyResult['id']
@@ -20,7 +19,7 @@ const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
 const Title = ({ keyResultID }: KeyResultSingleTitleProperties) => {
   const [title, setTitle] = useRecoilState(titleSelector(keyResultID))
   const policies = useRecoilValue(policiesSelector(keyResultID))
-  const [updateRemoteKeyResultTitle] = useMutation(queries.UPDATE_KEY_RESULT_TITLE)
+  const [updateRemoteKeyResultTitle] = useMutation(queries.UPDATE_KEY_RESULT)
   const [titleDraft, setTitleDraft] = useState(title)
 
   const isTitleLoaded = Boolean(title)
@@ -31,7 +30,9 @@ const Title = ({ keyResultID }: KeyResultSingleTitleProperties) => {
     await updateRemoteKeyResultTitle({
       variables: {
         id: keyResultID,
-        title: newTitle,
+        keyResultInput: {
+          title: newTitle,
+        },
       },
     })
   }

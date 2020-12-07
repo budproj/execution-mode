@@ -23,10 +23,6 @@
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
   },
-  "0ye29b": {
-    "defaultMessage": "Trocar o responsável",
-    "description": "The aria-label of our switch icon button. It is displayed when the userr is trying to change the owner of the key result"
-  },
   "17XVCU": {
     "defaultMessage": "Data",
     "description": "The text of the table head related to the Date column"
@@ -135,10 +131,6 @@
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
   },
-  "Rthzoe": {
-    "defaultMessage": "Clique aqui para trocar o responsável",
-    "description": "The title text of our switch icon, it is displayed when an user hover the icon itself"
-  },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
@@ -174,10 +166,6 @@
   "c8UE59": {
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
-  },
-  "dDGf0D": {
-    "defaultMessage": "Um ícone com duas setas apontando uma para a outra. Ao clicar você trocará o responsável pelo resultado chave",
-    "description": "The alternative text explaining our switch icon"
   },
   "fNt8Of": {
     "defaultMessage": "Atualizar Progresso",

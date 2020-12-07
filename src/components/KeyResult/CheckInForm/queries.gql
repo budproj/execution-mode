@@ -1,5 +1,0 @@
-mutation CREATE_CHECK_IN($checkInInput: CheckInInput!) {
-  createCheckIn(checkInInput: $checkInInput) {
-    id
-  }
-}

@@ -30,13 +30,14 @@ const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties)
   }
 
   return (
-    <PopoverContent width={400}>
+    <PopoverContent width={400} p={0} py={8}>
       <PopoverHeader border="none" fontSize="18px" fontWeight={700} color="gray.600" px={8} pb={0}>
         {intl.formatMessage(messages.updateProgress)}
       </PopoverHeader>
       <PopoverCloseButton
-        size="md"
+        size="lg"
         top="1rem"
+        right="1.5rem"
         color="gray.200"
         _hover={{ bg: 'transparent', color: 'brand.400' }}
       >

@@ -5,6 +5,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
+import queries from 'src/components/KeyResult/queries.gql'
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
 import {
   keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
@@ -13,7 +14,6 @@ import {
 
 import { CurrentProgressField, NewProgressField, CurrentConfidenceField } from './Fields'
 import messages from './messages'
-import queries from './queries.gql'
 
 export interface CheckInFormProperties {
   keyResultID?: KeyResult['id']

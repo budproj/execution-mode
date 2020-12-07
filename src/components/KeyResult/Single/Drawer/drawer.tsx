@@ -5,17 +5,17 @@ import { useRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
 import { KeyResultSingleOwner } from 'src/components/KeyResult/Single'
+import queries from 'src/components/KeyResult/queries.gql'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 
 import KeyResultDrawerHeader from './Header'
-import queries from './queries.gql'
 
 const KeyResultDrawer = () => {
   const [keyResultID, setKeyResultID] = useRecoilState(keyResultOpenDrawer)
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const [getKeyResult, { loading, data, called, variables }] = useLazyQuery(
-    queries.GET_KEY_RESULT,
+    queries.GET_KEY_RESULT_WITH_ID,
     {
       variables: {
         id: keyResultID,
