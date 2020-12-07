@@ -95,9 +95,6 @@ type User {
   """The creation date ordered list of key results that this user owns"""
   keyResults: [KeyResult!]!
 
-  """The creation date ordered list of objectives that this user owns"""
-  objectives: [Objective!]!
-
   """
   The creation date ordered list of progress reports created by this user
   """
@@ -110,12 +107,6 @@ type User {
 
   """The creation date ordered list of teams that this user is part of"""
   teams: [Team!]!
-
-  """The creation date ordered list of teams that this user owns"""
-  ownedTeams: [Team!]!
-
-  """The creation date ordered list of companies that this user owns"""
-  ownedCompanies: [Company!]!
 }
 
 """A collection of users for a given company"""
@@ -145,12 +136,6 @@ type Team {
 
   """A creation date ordered list of users that are members of this team"""
   users: [User!]!
-
-  """The user ID that owns this team"""
-  ownerId: ID!
-
-  """The user that owns this team"""
-  owner: Company!
 }
 
 """A goal that is created for the team focusing in a given team objective"""
@@ -230,12 +215,6 @@ type Objective {
 
   """The cycle that owns this objective"""
   cycle: Cycle!
-
-  """The user ID that owns this objective"""
-  ownerId: ID!
-
-  """The user that owns this objective"""
-  owner: User!
 }
 
 """
@@ -286,12 +265,6 @@ type Company {
 
   """The cycles that belongs to this company"""
   cycles: [Cycle!]!
-
-  """The user ID that this company belongs to"""
-  ownerId: ID!
-
-  """The user that this company belongs to"""
-  owner: User!
 }
 
 """Common shared object values between multiple report types"""
@@ -402,7 +375,4 @@ input KeyResultViewInput {
 
   """Ordered list of key result IDs"""
   rank: [ID!]!
-
-  """The ID of the user that you are creating a view to"""
-  userId: ID
 }
