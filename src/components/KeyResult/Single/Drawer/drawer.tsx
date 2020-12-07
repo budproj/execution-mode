@@ -1,9 +1,10 @@
 import { useLazyQuery } from '@apollo/client'
-import { DrawerContent, Drawer, DrawerOverlay } from '@chakra-ui/react'
+import { DrawerContent, Drawer, DrawerOverlay, Flex } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
+import { KeyResultSingleOwner } from 'src/components/KeyResult/Single'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 
@@ -49,6 +50,9 @@ const KeyResultDrawer = () => {
       <DrawerOverlay>
         <DrawerContent>
           <KeyResultDrawerHeader keyResultID={keyResultID} />
+          <Flex gridGap={4} pt={8} px={6}>
+            <KeyResultSingleOwner keyResultID={keyResultID} />
+          </Flex>
         </DrawerContent>
       </DrawerOverlay>
     </Drawer>

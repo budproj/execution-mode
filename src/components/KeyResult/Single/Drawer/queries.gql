@@ -6,6 +6,7 @@ query GET_KEY_RESULT($id: ID!) {
     goal
     owner {
       name
+      picture
     }
     objective {
       title
