@@ -51,11 +51,11 @@ const Title = ({ keyResultID }: KeyResultSingleTitleProperties) => {
             onCancel={setTitleDraft}
             onSubmit={handleTitleSubmit}
           >
-            <EditablePreview />
+            <EditablePreview color="gray.800" />
             <EditableInput />
           </Editable>
         ) : (
-          <Text>{title}</Text>
+          <Text color="gray.800">{title}</Text>
         )}
       </Skeleton>
     </Flex>

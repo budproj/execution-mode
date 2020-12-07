@@ -22,13 +22,15 @@ const Owner = ({ keyResultID }: KeyResultSingleOwnerProperties) => {
 
   return (
     <Flex gridGap={2} direction="column">
-      <Text fontWeight={500}>{intl.formatMessage(messages.label)}</Text>
+      <Text fontWeight={500} color="gray.600">
+        {intl.formatMessage(messages.label)}
+      </Text>
       <Flex alignItems="center" gridGap={2}>
         <SkeletonCircle isLoaded={isOwnerLoaded}>
           <Avatar name={owner?.name} src={owner?.picture} size="sm" />
         </SkeletonCircle>
         <Skeleton isLoaded={isOwnerLoaded}>
-          <Text>{owner?.name ?? 'John doe'}</Text>
+          <Text color="gray.700">{owner?.name ?? 'John doe'}</Text>
         </Skeleton>
       </Flex>
     </Flex>

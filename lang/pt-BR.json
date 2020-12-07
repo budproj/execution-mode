@@ -203,6 +203,10 @@
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
+  "oVCNrO": {
+    "defaultMessage": "OKR",
+    "description": "The label text above the OKR selection input in our key result single page or drawer"
+  },
   "qakF7T": {
     "defaultMessage": "Item",
     "description": "Placeholder item for layout purposes"
