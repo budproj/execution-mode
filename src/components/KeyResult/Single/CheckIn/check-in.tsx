@@ -2,7 +2,7 @@ import { Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import CheckInForm from 'components/KeyResult/CheckInForm'
+import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 import messages from './messages'
@@ -19,7 +19,7 @@ const CheckIn = ({ keyResultID }: KeyResultSingleCheckInProperties) => {
       <Text fontWeight={500} color="gray.600">
         {intl.formatMessage(messages.label)}
       </Text>
-      <CheckInForm submitOnBlur keyResultID={keyResultID} />
+      <CheckInForm submitOnBlur showGoal keyResultID={keyResultID} />
     </Flex>
   )
 }

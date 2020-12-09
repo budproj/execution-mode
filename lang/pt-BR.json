@@ -27,6 +27,10 @@
     "defaultMessage": "Data",
     "description": "The text of the table head related to the Date column"
   },
+  "1nABM7": {
+    "defaultMessage": "Meta:",
+    "description": "This is the label of the check-in form that indicates the goal for her/his key result"
+  },
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"

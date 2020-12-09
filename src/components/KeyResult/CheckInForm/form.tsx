@@ -1,8 +1,7 @@
 import { useMutation } from '@apollo/client'
-import { Divider, Flex, FormControl, Button, Box, SpaceProps } from '@chakra-ui/react'
+import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
 import React from 'react'
-import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import queries from 'src/components/KeyResult/queries.gql'
@@ -12,11 +11,12 @@ import {
   keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
 } from 'src/state/recoil/key-result/progress-update'
 
-import { CurrentProgressField, NewProgressField, CurrentConfidenceField } from './Fields'
-import messages from './messages'
+import { CurrentProgressField, NewProgressField, CurrentConfidenceField, GoalField } from './Fields'
+import Actions from './actions'
 
 export interface CheckInFormProperties {
   submitOnBlur: boolean
+  showGoal: boolean
   gutter?: SpaceProps['p']
   keyResultID?: KeyResult['id']
   afterSubmit?: (
@@ -31,8 +31,13 @@ export interface CheckInFormValues {
   newProgress?: ProgressReport['valueNew']
 }
 
-const CheckInForm = ({ keyResultID, afterSubmit, gutter, submitOnBlur }: CheckInFormProperties) => {
-  const intl = useIntl()
+const CheckInForm = ({
+  keyResultID,
+  afterSubmit,
+  gutter,
+  submitOnBlur,
+  showGoal,
+}: CheckInFormProperties) => {
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
   const [createCheckIn, data] = useMutation(queries.CREATE_CHECK_IN)
@@ -84,21 +89,16 @@ const CheckInForm = ({ keyResultID, afterSubmit, gutter, submitOnBlur }: CheckIn
       {() => (
         <Form>
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
-            <Flex direction="column" gridGap={5} p={gutter} pb={8}>
+            <Flex direction="column" gridGap={5} p={gutter} pb={submitOnBlur ? 0 : 8}>
               <CurrentConfidenceField submitOnBlur={submitOnBlur} />
               <Flex gridGap={5}>
                 <CurrentProgressField keyResultID={keyResultID} />
                 <NewProgressField keyResultID={keyResultID} submitOnBlur={submitOnBlur} />
+                {showGoal && <GoalField keyResultID={keyResultID} />}
               </Flex>
             </Flex>
 
-            <Divider />
-
-            <Box textAlign="center" p={gutter}>
-              <Button variant="solid" type="submit" isLoading={data.loading}>
-                {intl.formatMessage(messages.save)}
-              </Button>
-            </Box>
+            {!submitOnBlur && <Actions isLoading={data.loading} gutter={gutter} />}
           </FormControl>
         </Form>
       )}
@@ -108,6 +108,7 @@ const CheckInForm = ({ keyResultID, afterSubmit, gutter, submitOnBlur }: CheckIn
 
 CheckInForm.defaultProps = {
   submitOnBlur: false,
+  showGoal: false,
 }
 
 export default CheckInForm
