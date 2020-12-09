@@ -1,4 +1,4 @@
-import React, { MutableRefObject, forwardRef, useCallback, useState } from 'react'
+import React, { RefObject, forwardRef, useCallback, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import Slider, { SliderProperties } from 'src/components/Base/Slider'
@@ -20,9 +20,10 @@ const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('in
 const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 
 const ProgressSlider = forwardRef(
-  (properties: SliderProperties, reference: MutableRefObject<HTMLDivElement | null>) => (
-    <Slider {...properties} ref={reference} />
-  ),
+  (
+    properties: SliderProperties,
+    reference?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null,
+  ) => <Slider {...properties} ref={reference} />,
 )
 
 const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContainerProperties>(

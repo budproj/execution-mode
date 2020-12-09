@@ -4,10 +4,16 @@ import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
-import { KeyResultSingleOwner, KeyResultSingleOKR } from 'src/components/KeyResult/Single'
+import {
+  KeyResultSingleOwner,
+  KeyResultSingleOKR,
+  KeyResultSingleDescription,
+} from 'src/components/KeyResult/Single'
 import queries from 'src/components/KeyResult/queries.gql'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
+
+import KeyResultSingleCycle from '../Cycle'
 
 import KeyResultDrawerHeader from './Header'
 
@@ -53,6 +59,8 @@ const KeyResultDrawer = () => {
           <Flex gridGap={8} pt={8} px={6} direction="column">
             <KeyResultSingleOwner keyResultID={keyResultID} />
             <KeyResultSingleOKR keyResultID={keyResultID} />
+            <KeyResultSingleDescription keyResultID={keyResultID} />
+            <KeyResultSingleCycle keyResultID={keyResultID} />
           </Flex>
         </DrawerContent>
       </DrawerOverlay>

@@ -5,8 +5,8 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
+import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
 
 import KeyResultDrawer from './drawer'
 
@@ -20,7 +20,7 @@ describe('expected behaviors', () => {
 
     const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
     recoilStateStub.withArgs(keyResultOpenDrawer).returns([fakeID, sinon.fake()])
-    recoilStateStub.withArgs(keyResultAtomFamily(fakeID)).returns([faker.random.word(), spy])
+    recoilStateStub.withArgs(selectKeyResult(fakeID)).returns([faker.random.word(), spy])
 
     const apolloStub = sinon.stub(apollo, 'useLazyQuery')
     apolloStub.returns([

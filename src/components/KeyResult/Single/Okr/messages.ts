@@ -5,9 +5,8 @@ type KeyResultsSingleOKRMessages = 'label' | 'stackIconDesc'
 export default defineMessages({
   label: {
     defaultMessage: 'OKR',
-    id: 'oVCNrO',
-    description:
-      'The label text above the OKR selection input in our key result single page or drawer',
+    id: '9bJV7v',
+    description: 'The label text above the OKR section in our key result single page or drawer',
   },
 
   stackIconDesc: {
