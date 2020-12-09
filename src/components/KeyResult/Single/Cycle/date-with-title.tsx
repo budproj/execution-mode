@@ -14,9 +14,13 @@ const DateWithTitle = ({ isLoaded, title, formattedDate, color }: CycleDateWithT
       {title}
     </Text>
     <Skeleton isLoaded={isLoaded}>
-      <Text color={color ?? 'gray.300'}>{formattedDate ?? 'Sample date'}</Text>
+      <Text color={color}>{formattedDate ?? 'Sample date'}</Text>
     </Skeleton>
   </Flex>
 )
+
+DateWithTitle.defaultProps = {
+  color: 'gray.300',
+}
 
 export default DateWithTitle

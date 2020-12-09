@@ -37,14 +37,14 @@ const Cycle = ({ keyResultID }: KeyResultSingleCycleProperties) => {
           isLoaded={isCycleLoaded}
           title={intl.formatMessage(messages.startLabel)}
           formattedDate={intl.formatDate(cycle?.dateStart)}
-          color="gray.400"
+          color="gray.500"
         />
 
         <DateWithTitle
           isLoaded={isCycleLoaded}
           title={intl.formatMessage(messages.endLabel)}
           formattedDate={intl.formatDate(cycle?.dateEnd)}
-          color="gray.400"
+          color="gray.500"
         />
       </Flex>
     </Flex>

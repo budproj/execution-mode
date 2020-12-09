@@ -30,7 +30,7 @@ const Owner = ({ keyResultID }: KeyResultSingleOwnerProperties) => {
           <Avatar name={owner?.name} src={owner?.picture} size="sm" />
         </SkeletonCircle>
         <Skeleton isLoaded={isOwnerLoaded}>
-          <Text color="gray.700">{owner?.name ?? 'John doe'}</Text>
+          <Text color="gray.500">{owner?.name ?? 'John doe'}</Text>
         </Skeleton>
       </Flex>
     </Flex>

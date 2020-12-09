@@ -8,6 +8,7 @@ import {
   KeyResultSingleOwner,
   KeyResultSingleOKR,
   KeyResultSingleDescription,
+  KeyResultSingleCheckIn,
 } from 'src/components/KeyResult/Single'
 import queries from 'src/components/KeyResult/queries.gql'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
@@ -54,13 +55,14 @@ const KeyResultDrawer = () => {
   return (
     <Drawer isOpen={isOpen} size="sm" autoFocus={false} onClose={handleClose}>
       <DrawerOverlay>
-        <DrawerContent>
+        <DrawerContent overflowY="auto">
           <KeyResultDrawerHeader keyResultID={keyResultID} />
-          <Flex gridGap={8} pt={8} px={6} direction="column">
+          <Flex gridGap={8} py={8} px={6} direction="column">
             <KeyResultSingleOwner keyResultID={keyResultID} />
             <KeyResultSingleOKR keyResultID={keyResultID} />
             <KeyResultSingleDescription keyResultID={keyResultID} />
             <KeyResultSingleCycle keyResultID={keyResultID} />
+            <KeyResultSingleCheckIn keyResultID={keyResultID} />
           </Flex>
         </DrawerContent>
       </DrawerOverlay>

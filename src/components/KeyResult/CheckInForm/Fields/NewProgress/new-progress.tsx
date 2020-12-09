@@ -13,21 +13,26 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 import messages from './messages'
 
 export interface NewProgressFieldProperties {
+  submitOnBlur: boolean
   keyResultID?: KeyResult['id']
 }
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
-const NewProgress = ({ keyResultID }: NewProgressFieldProperties) => {
+const NewProgress = ({ keyResultID, submitOnBlur }: NewProgressFieldProperties) => {
   const intl = useIntl()
   const format = useRecoilValue(formatSelector(keyResultID))
   const [draftValue, setDraftValue] = useRecoilState(draftValueAtom(keyResultID))
-  const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
+  const { values, setFieldValue, submitForm } = useFormikContext<CheckInFormValues>()
   const Mask = selectMaskBasedOnFormat(format)
 
   const handleChange = (newValue?: string | number) => {
     setFieldValue('newProgress', newValue)
     setDraftValue(newValue as number)
+  }
+
+  const handleBlur = async () => {
+    if (submitOnBlur) await submitForm()
   }
 
   useEffect(() => {
@@ -37,9 +42,13 @@ const NewProgress = ({ keyResultID }: NewProgressFieldProperties) => {
   return (
     <Box>
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
-      <Mask value={values.newProgress} handleChange={handleChange} />
+      <Mask value={values.newProgress} handleChange={handleChange} onBlur={handleBlur} />
     </Box>
   )
+}
+
+NewProgress.defaultProps = {
+  submitOnBlur: false,
 }
 
 export default NewProgress

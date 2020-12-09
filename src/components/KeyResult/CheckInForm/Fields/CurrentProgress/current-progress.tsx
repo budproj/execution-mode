@@ -27,7 +27,7 @@ const CurrentProgress = ({ keyResultID }: CurrentProgressProperties) => {
   return (
     <Box>
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
-      <Mask isDisabled value={values.currentProgress} />
+      <Mask isDisabled value={values.currentProgress} bg="gray.50" />
     </Box>
   )
 }

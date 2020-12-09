@@ -149,4 +149,23 @@ describe('partial selector setter', () => {
 
     expect(wasCalledAsExpected).toEqual(true)
   })
+
+  it('can set list values', () => {
+    const fakeData = { morty: ['Smith'] }
+    const stub = sinon.stub().returns(fakeData)
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+
+    const fakePartSetter = buildPartialSelector.setKeyResultPart('morty')
+    const fakeSetter = fakePartSetter(fakeID)
+    const newValue = [faker.random.word(), 'Smith']
+
+    fakeSetter({ get: stub, set: spy }, newValue)
+
+    const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
+      morty: newValue,
+    })
+
+    expect(wasCalledAsExpected).toEqual(true)
+  })
 })

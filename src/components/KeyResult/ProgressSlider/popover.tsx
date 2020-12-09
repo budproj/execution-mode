@@ -30,7 +30,7 @@ const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties)
   }
 
   return (
-    <PopoverContent width={400} p={0} py={8}>
+    <PopoverContent width={400} p={0} pt={8}>
       <PopoverHeader border="none" fontSize="18px" fontWeight={700} color="gray.600" px={8} pb={0}>
         {intl.formatMessage(messages.updateProgress)}
       </PopoverHeader>
@@ -47,7 +47,7 @@ const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties)
           fill="currentColor"
         />
       </PopoverCloseButton>
-      <CheckInForm keyResultID={keyResultID} afterSubmit={handleSubmit} />
+      <CheckInForm keyResultID={keyResultID} afterSubmit={handleSubmit} gutter={8} />
     </PopoverContent>
   )
 }

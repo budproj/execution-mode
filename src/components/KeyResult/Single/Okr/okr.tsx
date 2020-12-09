@@ -41,7 +41,7 @@ const Okr = ({ keyResultID }: KeyResultSingleOKRProperties) => {
           </Box>
         </SkeletonCircle>
         <Skeleton isLoaded={isOKRLoaded}>
-          <Text color="gray.700">{objective?.title ?? 'Sample title'}</Text>
+          <Text color="gray.500">{objective?.title ?? 'Sample title'}</Text>
         </Skeleton>
       </Flex>
     </Flex>

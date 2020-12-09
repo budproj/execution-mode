@@ -37,11 +37,12 @@ export const setCurrentConfidence = (id?: KeyResult['id']) => (
     valueNew,
     valuePrevious: latestConfidenceReport?.valueNew,
   }
+  const newConfidenceReports = remove([
+    newLocalReport as ConfidenceReport,
+    ...(confidenceReports ?? []),
+  ])
 
-  set(
-    confidenceReportsSelector,
-    remove([newLocalReport as ConfidenceReport, ...(confidenceReports ?? [])]),
-  )
+  set(confidenceReportsSelector, newConfidenceReports)
 }
 
 const currentConfidence = selectorFamily<

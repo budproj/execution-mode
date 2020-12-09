@@ -91,4 +91,23 @@ describe('component expectations', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('submits the upon blur if asked to do so', () => {
+    const spy = sinon.spy()
+
+    sinon.mock(recoil).expects('useRecoilValue').returns('')
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+    sinon
+      .mock(formik)
+      .expects('useFormikContext')
+      .atLeast(1)
+      .returns({ values: {}, setFieldValue: sinon.fake(), submitForm: spy })
+
+    const result = enzyme.shallow(<NewProgress submitOnBlur />)
+
+    const input = result.find('Absolute')
+    input.simulate('blur')
+
+    expect(spy.calledOnce).toEqual(true)
+  })
 })

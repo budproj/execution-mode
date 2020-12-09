@@ -46,9 +46,9 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
 
     const handleSliderUpdateEnd = useCallback(
       (newValue: number | number[]) => {
-        if (newValue) setOpenedPopover(true)
+        if (newValue && newValue === draftValue) setOpenedPopover(true)
       },
-      [setOpenedPopover],
+      [setOpenedPopover, draftValue],
     )
 
     if (!isLoaded && typeof goal !== 'undefined') setIsLoaded(true)

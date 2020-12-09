@@ -15,12 +15,18 @@ import {
 
 import messages from './messages'
 
-const CurrentConfidence = () => {
+export interface CheckInFormCurrentConfidenceProperties {
+  submitOnBlur: boolean
+}
+
+const CurrentConfidence = ({ submitOnBlur }: CheckInFormCurrentConfidenceProperties) => {
   const intl = useIntl()
-  const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
+  const { values, setFieldValue, submitForm } = useFormikContext<CheckInFormValues>()
   const normalizedConfidence = normalizeConfidence(values.confidence ?? 50)
-  const handleChange = (newValue: string | string[]) =>
+  const handleChange = async (newValue: string | string[]) => {
     setFieldValue('confidence', Number.parseInt(newValue as string, 10))
+    if (submitOnBlur) await submitForm()
+  }
 
   return (
     <Box>
@@ -44,6 +50,10 @@ const CurrentConfidence = () => {
       </SelectMenu>
     </Box>
   )
+}
+
+CurrentConfidence.defaultProps = {
+  submitOnBlur: false,
 }
 
 export default CurrentConfidence

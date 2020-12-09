@@ -62,8 +62,9 @@ describe('component expectations', () => {
     const fakeID = faker.random.word()
     const spy = sinon.spy()
     const goalSelector = buildPartialSelector('goal')
+    const newProgress = faker.random.number()
 
-    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([newProgress, sinon.fake()])
 
     const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
     setStateStub.withArgs(keyResultProgressUpdatePopoverOpen(fakeID)).returns(spy)
@@ -79,10 +80,41 @@ describe('component expectations', () => {
       .dive()
 
     const slider = result.find('Slider')
-    slider.simulate('changeEnd', faker.random.number())
+    slider.simulate('changeEnd', newProgress)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(true)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('does not open the popover if the value changed, but not by the component or its childs', () => {
+    const fakeID = faker.random.word()
+    const spy = sinon.spy()
+    const goalSelector = buildPartialSelector('goal')
+    const newProgress = faker.random.number()
+
+    sinon
+      .mock(recoil)
+      .expects('useRecoilState')
+      .atLeast(1)
+      .returns([faker.random.number(), sinon.fake()])
+
+    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
+    setStateStub.withArgs(keyResultProgressUpdatePopoverOpen(fakeID)).returns(spy)
+    setStateStub.returns(sinon.fake())
+
+    const valueStub = sinon.stub(recoil, 'useRecoilValue')
+    valueStub.withArgs(goalSelector(fakeID)).returns(faker.random.number())
+    valueStub.returns('')
+
+    const result = enzyme
+      .shallow(<ProgressSlider keyResultID={fakeID} />)
+      .dive()
+      .dive()
+
+    const slider = result.find('Slider')
+    slider.simulate('changeEnd', newProgress)
+
+    expect(spy.calledOnce).toEqual(false)
   })
 })

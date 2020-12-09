@@ -35,7 +35,7 @@ const SelectMenu = ({
         fontWeight={300}
         rightIcon={<ChevronDownIcon desc={intl.formatMessage(messages.iconChevronDownDesc)} />}
         transition="none"
-        py="1.35rem"
+        py="1.15rem"
         _hover={{ span: { color: 'gray.400' } } as any}
       >
         {placeholder}

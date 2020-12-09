@@ -28,7 +28,7 @@ const Description = ({ keyResultID }: KeyResultSingleDescriptionProperties) => {
       </Text>
       <Flex alignItems="center" gridGap={2}>
         <SkeletonText isLoaded={isDescriptionLoaded} noOfLines={5} spacing={4} w="100%">
-          <Text color="gray.700">{description}</Text>
+          <Text color="gray.500">{description}</Text>
         </SkeletonText>
       </Flex>
     </Flex>

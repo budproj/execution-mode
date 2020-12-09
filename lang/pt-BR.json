@@ -183,6 +183,10 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
+  "cpaWkz": {
+    "defaultMessage": "Atualize seu progresso",
+    "description": "The label text above the check-in section in our key result single page or drawer"
+  },
   "dOaMzr": {
     "defaultMessage": "Data de início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"

@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Divider, Flex, FormControl, Button, Box } from '@chakra-ui/react'
+import { Divider, Flex, FormControl, Button, Box, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -16,6 +16,8 @@ import { CurrentProgressField, NewProgressField, CurrentConfidenceField } from '
 import messages from './messages'
 
 export interface CheckInFormProperties {
+  submitOnBlur: boolean
+  gutter?: SpaceProps['p']
   keyResultID?: KeyResult['id']
   afterSubmit?: (
     newProgress?: ProgressReport['valueNew'],
@@ -29,7 +31,7 @@ export interface CheckInFormValues {
   newProgress?: ProgressReport['valueNew']
 }
 
-const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
+const CheckInForm = ({ keyResultID, afterSubmit, gutter, submitOnBlur }: CheckInFormProperties) => {
   const intl = useIntl()
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
@@ -82,17 +84,17 @@ const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
       {() => (
         <Form>
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
-            <Flex direction="column" gridGap={5} px={8} py={8}>
-              <CurrentConfidenceField />
+            <Flex direction="column" gridGap={5} p={gutter} pb={8}>
+              <CurrentConfidenceField submitOnBlur={submitOnBlur} />
               <Flex gridGap={5}>
                 <CurrentProgressField keyResultID={keyResultID} />
-                <NewProgressField keyResultID={keyResultID} />
+                <NewProgressField keyResultID={keyResultID} submitOnBlur={submitOnBlur} />
               </Flex>
             </Flex>
 
             <Divider />
 
-            <Box textAlign="center" pt={6} px={8}>
+            <Box textAlign="center" p={gutter}>
               <Button variant="solid" type="submit" isLoading={data.loading}>
                 {intl.formatMessage(messages.save)}
               </Button>
@@ -102,6 +104,10 @@ const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
       )}
     </Formik>
   )
+}
+
+CheckInForm.defaultProps = {
+  submitOnBlur: false,
 }
 
 export default CheckInForm
