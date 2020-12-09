@@ -77,9 +77,11 @@ const CheckInForm = ({
     values: CheckInFormValues,
     actions: FormikHelpers<CheckInFormValues>,
   ) => {
-    syncDisabledFields(values, actions)
-    syncRecoilState(values)
-    await dispatchRemoteUpdate(values)
+    if (values.newProgress !== currentProgress || values.confidence !== confidence) {
+      syncDisabledFields(values, actions)
+      syncRecoilState(values)
+      await dispatchRemoteUpdate(values)
+    }
 
     if (afterSubmit) afterSubmit(values.newProgress, values.confidence)
   }
@@ -90,10 +92,14 @@ const CheckInForm = ({
         <Form>
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
             <Flex direction="column" gridGap={5} p={gutter} pb={submitOnBlur ? 0 : 8}>
-              <CurrentConfidenceField submitOnBlur={submitOnBlur} />
+              <CurrentConfidenceField submitOnBlur={submitOnBlur} isLoading={data.loading} />
               <Flex gridGap={5}>
                 <CurrentProgressField keyResultID={keyResultID} />
-                <NewProgressField keyResultID={keyResultID} submitOnBlur={submitOnBlur} />
+                <NewProgressField
+                  keyResultID={keyResultID}
+                  submitOnBlur={submitOnBlur}
+                  isLoading={data.loading}
+                />
                 {showGoal && <GoalField keyResultID={keyResultID} />}
               </Flex>
             </Flex>

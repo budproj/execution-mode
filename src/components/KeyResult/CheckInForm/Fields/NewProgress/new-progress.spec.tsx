@@ -95,7 +95,7 @@ describe('component expectations', () => {
   it('submits the upon blur if asked to do so', () => {
     const spy = sinon.spy()
 
-    sinon.mock(recoil).expects('useRecoilValue').returns('')
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1).returns('')
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon
       .mock(formik)
@@ -109,5 +109,25 @@ describe('component expectations', () => {
     input.simulate('blur')
 
     expect(spy.calledOnce).toEqual(true)
+  })
+
+  it('adds a loading state when submitting upon blur', () => {
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1).returns('')
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+    sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({
+      values: {},
+      isSubmitting: true,
+      setFieldValue: sinon.fake(),
+      submitForm: sinon.fake(),
+    })
+
+    const result = enzyme.shallow(<NewProgress submitOnBlur isLoading />)
+
+    const input = result.find('Absolute')
+    input.simulate('blur')
+
+    const newInput = result.find('Absolute')
+
+    expect(newInput.prop('isLoading')).toEqual(true)
   })
 })

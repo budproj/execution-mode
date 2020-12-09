@@ -40,4 +40,23 @@ describe('formik integration', () => {
 
     expect(spy.calledOnce).toEqual(true)
   })
+
+  it('adds a loading state when submitting upon blur', () => {
+    const fakeConfidence = faker.random.number().toString()
+    sinon.stub(formik, 'useFormikContext').returns({
+      values: {},
+      isSubmitting: true,
+      setFieldValue: sinon.fake(),
+      submitForm: sinon.fake(),
+    } as any)
+
+    const result = enzyme.shallow(<CurrentConfidence submitOnBlur isLoading />)
+
+    const selectMenu = result.find('SelectMenu')
+    selectMenu.simulate('change', fakeConfidence)
+
+    const newSelectMenu = result.find('SelectMenu')
+
+    expect(newSelectMenu.prop('isLoading')).toEqual(true)
+  })
 })
