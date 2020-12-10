@@ -1,0 +1,121 @@
+query GET_KEY_RESULT_WITH_ID($id: ID!) {
+  keyResult(id: $id) {
+    id
+    title
+    description
+    goal
+    owner {
+      name
+      picture
+    }
+    objective {
+      title
+      cycle {
+        dateStart
+        dateEnd
+        createdAt
+      }
+    }
+    progressReports(limit: 1) {
+      id
+      valueNew
+    }
+    confidenceReports(limit: 1) {
+      id
+      valueNew
+    }
+    policies {
+      update
+    }
+  }
+}
+
+query GET_KEY_RESULT_WITH_BINDING($id: ID!) {
+  keyResult(id: $id) {
+    id
+    title
+    description
+    goal
+    owner {
+      name
+      picture
+    }
+    objective {
+      title
+      cycle {
+        dateStart
+        dateEnd
+        createdAt
+      }
+    }
+    progressReports(limit: 1) {
+      id
+      valueNew
+    }
+    confidenceReports(limit: 1) {
+      id
+      valueNew
+    }
+    policies {
+      update
+    }
+  }
+}
+
+query KEY_RESULT_VIEW_WITH_BINDING($binding: KeyResultViewBinding!) {
+  keyResultView(binding: $binding) {
+    id
+    rank
+    keyResults {
+      id
+      title
+      initialValue
+      goal
+      format
+      team {
+        name
+      }
+      objective {
+        title
+        cycle {
+          dateStart
+          dateEnd
+        }
+      }
+      owner {
+        name
+        picture
+        role
+      }
+      progressReports(limit: 1) {
+        id
+        valueNew
+      }
+      confidenceReports(limit: 1) {
+        id
+        valueNew
+        comment
+        createdAt
+      }
+    }
+  }
+}
+
+mutation UPDATE_RANK($id: ID!, $rankInput: KeyResultViewRankInput!) {
+  updateRank(id: $id, keyResultViewRankInput: $rankInput) {
+    id
+  }
+}
+
+mutation UPDATE_KEY_RESULT($id: ID!, $keyResultInput: KeyResultInput!) {
+  updateKeyResult(id: $id, keyResultInput: $keyResultInput) {
+    id
+    title
+  }
+}
+
+mutation CREATE_CHECK_IN($checkInInput: CheckInInput!) {
+  createCheckIn(checkInInput: $checkInInput) {
+    id
+  }
+}

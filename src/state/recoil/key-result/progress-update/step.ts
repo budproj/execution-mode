@@ -1,6 +1,6 @@
 import { selectorFamily } from 'recoil'
 
-import { KeyResult, KeyResultFormat } from 'src/components/KeyResult'
+import { KeyResult, KeyResultFormat } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 import { RecoilSpecificationGetter } from 'src/state/recoil/types'
 

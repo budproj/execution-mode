@@ -6,7 +6,7 @@ import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::KEY_RESULT_ATOM_FAMILY`
 
-export const keyResultAtomFamily = atomFamily<KeyResult | undefined, KeyResult['id']>({
+export const keyResultAtomFamily = atomFamily<KeyResult | undefined, KeyResult['id'] | undefined>({
   key: KEY,
   default: undefined,
 })

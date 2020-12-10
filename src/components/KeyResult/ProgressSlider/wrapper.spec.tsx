@@ -15,7 +15,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilValue')
     sinon.stub(recoil, 'useRecoilState').returns([true, sinon.fake()])
 
-    const result = enzyme.shallow(<ProgressSliderWrapper id={faker.random.number()} />)
+    const result = enzyme.shallow(<ProgressSliderWrapper id={faker.random.word()} />)
 
     const popoverComponent = result.find('Popover')
 
@@ -26,7 +26,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilValue')
     sinon.stub(recoil, 'useRecoilState').returns([false, sinon.fake()])
 
-    const result = enzyme.shallow(<ProgressSliderWrapper id={faker.random.number()} />)
+    const result = enzyme.shallow(<ProgressSliderWrapper id={faker.random.word()} />)
 
     const popoverComponent = result.find('Popover')
 
@@ -34,7 +34,7 @@ describe('component expectations', () => {
   })
 
   it('reverts the current progress draft if we close the popover', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const draftValue = faker.random.number()
     const currentProgress = faker.random.number()
     const spy = sinon.spy()

@@ -1,6 +1,6 @@
 import { Box, FormLabel, MenuItemOption } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import SelectMenu from 'src/components/Base/SelectMenu'
@@ -15,12 +15,28 @@ import {
 
 import messages from './messages'
 
-const CurrentConfidence = () => {
+export interface CheckInFormCurrentConfidenceProperties {
+  submitOnBlur: boolean
+  isLoading?: boolean
+}
+
+const CurrentConfidence = ({ submitOnBlur, isLoading }: CheckInFormCurrentConfidenceProperties) => {
+  const [isSending, setIsSending] = useState(false)
   const intl = useIntl()
-  const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
+  const { values, setFieldValue, submitForm, isSubmitting } = useFormikContext<CheckInFormValues>()
   const normalizedConfidence = normalizeConfidence(values.confidence ?? 50)
-  const handleChange = (newValue: string | string[]) =>
+
+  const handleChange = async (newValue: string | string[]) => {
     setFieldValue('confidence', Number.parseInt(newValue as string, 10))
+    if (submitOnBlur) {
+      setIsSending(true)
+      await submitForm()
+    }
+  }
+
+  useEffect(() => {
+    if (!isSubmitting && !isLoading && isSending) setIsSending(false)
+  }, [isSubmitting, isLoading, isSending, setIsSending])
 
   return (
     <Box>
@@ -28,6 +44,7 @@ const CurrentConfidence = () => {
       <SelectMenu
         placeholder={<ConfidenceTag confidenceValue={normalizedConfidence} />}
         value={normalizedConfidence.toString()}
+        isLoading={isSending}
         onChange={handleChange}
       >
         <MenuItemOption value={CONFIDENCE_UPDATED.max.toString()}>
@@ -44,6 +61,10 @@ const CurrentConfidence = () => {
       </SelectMenu>
     </Box>
   )
+}
+
+CurrentConfidence.defaultProps = {
+  submitOnBlur: false,
 }
 
 export default CurrentConfidence

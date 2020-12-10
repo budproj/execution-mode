@@ -27,6 +27,10 @@
     "defaultMessage": "Data",
     "description": "The text of the table head related to the Date column"
   },
+  "1nABM7": {
+    "defaultMessage": "Meta:",
+    "description": "This is the label of the check-in form that indicates the goal for her/his key result"
+  },
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
@@ -39,6 +43,10 @@
     "defaultMessage": "Minhas KR",
     "description": "AppBar menu item that links to My Key Results page"
   },
+  "2qxo81": {
+    "defaultMessage": "Duração",
+    "description": "The label text above the Cycle section in our key result single page or drawer"
+  },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -46,6 +54,10 @@
   "8bQS0s": {
     "defaultMessage": "Em atraso",
     "description": "We use this tag to group every key result with confidence lower than 25"
+  },
+  "9bJV7v": {
+    "defaultMessage": "OKR",
+    "description": "The label text above the OKR section in our key result single page or drawer"
   },
   "9hslRd": {
     "defaultMessage": "OKR",
@@ -99,6 +111,10 @@
     "defaultMessage": "Um círculo verde, indicando que o resultado-chave está em dia",
     "description": "A brief explanation for screen readers regarding the green status circle"
   },
+  "M44zCJ": {
+    "defaultMessage": "Criado em",
+    "description": "The label text inside the Cycle section, above the creation date in our key result single page or drawer"
+  },
   "MWB++a": {
     "defaultMessage": "Qual o seu nível de segurança?",
     "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
@@ -130,6 +146,10 @@
   "RZrZdZ": {
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
+  },
+  "S/F2Hk": {
+    "defaultMessage": "Detalhes",
+    "description": "The label text above the Description section in our key result single page or drawer"
   },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
@@ -167,9 +187,25 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
+  "cpaWkz": {
+    "defaultMessage": "Atualize seu progresso",
+    "description": "The label text above the check-in section in our key result single page or drawer"
+  },
+  "dOaMzr": {
+    "defaultMessage": "Data de início",
+    "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
+  },
   "fNt8Of": {
     "defaultMessage": "Atualizar Progresso",
     "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
+  },
+  "iJq7du": {
+    "defaultMessage": "Responsável",
+    "description": "The label text above the Owner section in our key result single page or drawer"
+  },
+  "j/xH+H": {
+    "defaultMessage": "Fechar",
+    "description": "This message is displayed when an user hovers the close button of our key result drawer"
   },
   "kXNgkQ": {
     "defaultMessage": "Progresso",
@@ -186,6 +222,10 @@
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
+  },
+  "n7ZLVl": {
+    "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box a barra lateral do resultado chave",
+    "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our key result drawer close button"
   },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",
@@ -226,6 +266,10 @@
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
+  },
+  "y6z1c3": {
+    "defaultMessage": "Data de fim",
+    "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
   },
   "yQ7cY8": {
     "defaultMessage": "Atualização de status",

@@ -1,9 +1,11 @@
+import clone from 'lodash/clone'
 import getPath from 'lodash/get'
+import setWith from 'lodash/setWith'
 import snakeCase from 'lodash/snakeCase'
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { Team } from 'src/components/Company/types'
-import { KeyResult } from 'src/components/KeyResult'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { User } from 'src/components/User/types'
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
@@ -33,12 +35,8 @@ export const setKeyResultPart = <T>(part: string) => (id?: KeyResult['id']) => (
 ) => {
   if (!id) return
 
-  const originalKeyResult = get(keyResultAtomFamily(id)) as KeyResult
-  const newPartialValue = { [part]: newValue }
-  const newKeyResult: KeyResult = {
-    ...originalKeyResult,
-    ...newPartialValue,
-  }
+  const originalKeyResult = clone(get(keyResultAtomFamily(id))) as KeyResult
+  const newKeyResult = setWith(originalKeyResult, part, newValue, clone)
 
   set(keyResultAtomFamily(id), newKeyResult)
 }

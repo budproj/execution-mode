@@ -1,4 +1,13 @@
-import { Menu, MenuButton, MenuList, MenuOptionGroup, MenuProps, Button } from '@chakra-ui/react'
+import {
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuOptionGroup,
+  MenuProps,
+  Button,
+  Stack,
+  Spinner,
+} from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -10,6 +19,7 @@ export interface SelectMenuProperties extends MenuProps {
   placeholder: ReactElement
   value: string | undefined
   onChange: (value: string | string[]) => void
+  isLoading?: boolean
 }
 
 const SelectMenu = ({
@@ -18,6 +28,7 @@ const SelectMenu = ({
   onChange,
   value,
   children,
+  isLoading,
   ...rest
 }: SelectMenuProperties) => {
   const intl = useIntl()
@@ -33,15 +44,20 @@ const SelectMenu = ({
         color="gray.400"
         borderRadius={4}
         fontWeight={300}
-        rightIcon={<ChevronDownIcon desc={intl.formatMessage(messages.iconChevronDownDesc)} />}
+        rightIcon={
+          <Stack direction="row" alignItems="center">
+            {isLoading && <Spinner size="sm" color="gray.100" />}
+            <ChevronDownIcon desc={intl.formatMessage(messages.iconChevronDownDesc)} />
+          </Stack>
+        }
         transition="none"
-        py="1.35rem"
+        py="1.15rem"
         _hover={{ span: { color: 'gray.400' } } as any}
       >
         {placeholder}
       </MenuButton>
       <MenuList>
-        <MenuOptionGroup value={value} type="radio" title={name} onChange={onChange}>
+        <MenuOptionGroup value={value} type="radio" onChange={onChange}>
           {children}
         </MenuOptionGroup>
       </MenuList>

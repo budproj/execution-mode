@@ -4,4 +4,6 @@ export * as view from './view'
 
 export * as progressUpdate from './progress-update'
 
+export * as drawer from './drawer'
+
 export { default as keyResultAtomFamily } from './atom-family'

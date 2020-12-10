@@ -18,7 +18,11 @@ export interface ReferenceWrapperProperties {
 const ReferenceWrapper = forwardRef(
   (
     { onClick, href, children }: ReferenceWrapperProperties,
-    reference: RefObject<HTMLAnchorElement>,
+    reference:
+      | string
+      | ((instance: HTMLAnchorElement | null) => void)
+      | RefObject<HTMLAnchorElement>
+      | null,
   ) => (
     <a ref={reference} href={href} onClick={onClick}>
       {children}
@@ -26,7 +30,7 @@ const ReferenceWrapper = forwardRef(
   ),
 )
 
-const IntlLink = ({ href, children, ...rest }: IntlLinkProperties): ReactElement => {
+const IntlLink = ({ href, children, ...rest }: IntlLinkProperties) => {
   const intlRoute = useRecoilValue(intlRouteAtom(href))
 
   return (

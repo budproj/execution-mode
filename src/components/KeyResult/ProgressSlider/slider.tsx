@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, useCallback, useState } from 'react'
+import React, { RefObject, forwardRef, useCallback, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import Slider, { SliderProperties } from 'src/components/Base/Slider'
@@ -20,9 +20,10 @@ const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('in
 const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 
 const ProgressSlider = forwardRef(
-  (properties: SliderProperties, reference: ForwardedRef<HTMLDivElement>) => (
-    <Slider {...properties} ref={reference} />
-  ),
+  (
+    properties: SliderProperties,
+    reference?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null,
+  ) => <Slider {...properties} ref={reference} />,
 )
 
 const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContainerProperties>(
@@ -45,9 +46,9 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
 
     const handleSliderUpdateEnd = useCallback(
       (newValue: number | number[]) => {
-        if (newValue) setOpenedPopover(true)
+        if (newValue && newValue === draftValue) setOpenedPopover(true)
       },
-      [setOpenedPopover],
+      [setOpenedPopover, draftValue],
     )
 
     if (!isLoaded && typeof goal !== 'undefined') setIsLoaded(true)

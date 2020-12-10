@@ -1,27 +1,29 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import React, { ReactElement, useEffect } from 'react'
 import { DraggableLocation, DropResult } from 'react-beautiful-dnd'
 import { useRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
+import queries from 'src/components/KeyResult/queries.gql'
 import { KeyResult, KeyResultView, KeyResultViewBinding } from 'src/components/KeyResult/types'
 import { keyResultViewAtom } from 'src/state/recoil/key-result/view'
 
 import DroppableBox from './droppable-box'
 import Line from './line'
-import queries from './queries.gql'
 import Skeleton from './skeleton'
 
 const component = 'KeyResultViewBody'
 
-const KeyResultViewBody = (): ReactElement => {
+export interface KeyResultViewBodyProperties {
+  onLineClick?: (id: KeyResult['id']) => void
+}
+
+const KeyResultViewBody = ({ onLineClick }: KeyResultViewBodyProperties): ReactElement => {
   const [keyResultView, setKeyResultView] = useRecoilState(keyResultViewAtom)
   const [updateRank] = useMutation(queries.UPDATE_RANK)
-  const { loading, data } = useQuery(queries.KEY_RESULT_VIEW_FOR_BINDING, {
-    variables: {
-      binding: KeyResultViewBinding.MINE,
-    },
-  })
+  const [getKeyResultViewForBinding, { loading, data, called }] = useLazyQuery(
+    queries.KEY_RESULT_VIEW_WITH_BINDING,
+  )
 
   logger.debug('Rerendered Key Result View body. Take a look at our new data:', {
     component,
@@ -35,6 +37,15 @@ const KeyResultViewBody = (): ReactElement => {
   useEffect(() => {
     if (!loading && data) setKeyResultView(data.keyResultView)
   }, [loading, data, setKeyResultView])
+
+  useEffect(() => {
+    if (!called)
+      getKeyResultViewForBinding({
+        variables: {
+          binding: KeyResultViewBinding.MINE,
+        },
+      })
+  }, [called, getKeyResultViewForBinding])
 
   const handleRankUpdate = async (
     from: DraggableLocation['index'],
@@ -72,6 +83,7 @@ const KeyResultViewBody = (): ReactElement => {
           id={keyResultID}
           index={index}
           remoteKeyResult={data.keyResultView.keyResults[index]}
+          onLineClick={onLineClick}
         />
       ))}
     </DroppableBox>

@@ -95,6 +95,9 @@ type User {
   """The creation date ordered list of key results that this user owns"""
   keyResults: [KeyResult!]!
 
+  """The creation date ordered list of objectives that this user owns"""
+  objectives: [Objective!]!
+
   """
   The creation date ordered list of progress reports created by this user
   """
@@ -107,6 +110,30 @@ type User {
 
   """The creation date ordered list of teams that this user is part of"""
   teams: [Team!]!
+
+  """The creation date ordered list of teams that this user owns"""
+  ownedTeams: [Team!]!
+
+  """The creation date ordered list of companies that this user owns"""
+  ownedCompanies: [Company!]!
+}
+
+"""
+Defines the current user policies regarding a given resource. You can use it to display read/create/update/delete controls on your application
+"""
+type Policies {
+  create: UserPolicy!
+  read: UserPolicy!
+  update: UserPolicy!
+  delete: UserPolicy!
+}
+
+"""
+Defines if the user has the allowance for a given action regarding the resource
+"""
+enum UserPolicy {
+  ALLOW
+  DENY
 }
 
 """A collection of users for a given company"""
@@ -136,6 +163,12 @@ type Team {
 
   """A creation date ordered list of users that are members of this team"""
   users: [User!]!
+
+  """The user ID that owns this team"""
+  ownerId: ID!
+
+  """The user that owns this team"""
+  owner: Company!
 }
 
 """A goal that is created for the team focusing in a given team objective"""
@@ -189,6 +222,11 @@ type KeyResult {
   The creation date ordered list of confidence reports for this key result
   """
   confidenceReports(limit: Int): [ConfidenceReport!]!
+
+  """
+  Group of policies regarding given key result. Those policies decribe actions that your user can perform with that given resource
+  """
+  policies: Policies!
 }
 
 """A group of key results that has the same focus"""
@@ -215,6 +253,12 @@ type Objective {
 
   """The cycle that owns this objective"""
   cycle: Cycle!
+
+  """The user ID that owns this objective"""
+  ownerId: ID!
+
+  """The user that owns this objective"""
+  owner: User!
 }
 
 """
@@ -265,6 +309,12 @@ type Company {
 
   """The cycles that belongs to this company"""
   cycles: [Cycle!]!
+
+  """The user ID that this company belongs to"""
+  ownerId: ID!
+
+  """The user that this company belongs to"""
+  owner: User!
 }
 
 """Common shared object values between multiple report types"""
@@ -309,15 +359,15 @@ type KeyResultView {
 }
 
 type Query {
-  company(id: Int!): Company!
-  cycle(id: Int!): Cycle!
-  confidenceReport(id: Int!): ConfidenceReport!
-  progressReport(id: Int!): ProgressReport!
-  keyResult(id: Int!): KeyResult!
-  objective(id: Int!): Objective!
-  team(id: Int!): Team!
-  user(id: Int!): User!
-  keyResultView(binding: KeyResultViewBinding, id: Int): KeyResultView!
+  company(id: ID!): Company!
+  cycle(id: ID!): Cycle!
+  confidenceReport(id: ID!): ConfidenceReport!
+  progressReport(id: ID!): ProgressReport!
+  keyResult(id: ID!): KeyResult!
+  objective(id: ID!): Objective!
+  team(id: ID!): Team!
+  user(id: ID!): User!
+  keyResultView(binding: KeyResultViewBinding, id: ID): KeyResultView!
 }
 
 """Each binding represents a given view in our applications"""
@@ -328,6 +378,7 @@ enum KeyResultViewBinding {
 type Mutation {
   createProgressReport(progressReportInput: ProgressReportInput!): ProgressReport!
   createCheckIn(checkInInput: CheckInInput!): [Report!]!
+  updateKeyResult(keyResultInput: KeyResultInput!, id: ID!): KeyResult!
   updateRank(keyResultViewRankInput: KeyResultViewRankInput!, id: ID!): KeyResultView!
   createKeyResultView(keyResultViewInput: KeyResultViewInput!): KeyResultView!
 }
@@ -359,6 +410,33 @@ input CheckInInput {
   comment: String
 }
 
+"""Partial key result data you can send to update a given key result"""
+input KeyResultInput {
+  """The title(name) of the key result"""
+  title: String
+
+  """The description explaining the key result"""
+  description: String
+
+  """The initial value of the key result"""
+  initialValue: Float
+
+  """The goal of the key result"""
+  goal: Float
+
+  """The format of the key result"""
+  format: String
+
+  """The owner ID of the key result"""
+  ownerId: ID
+
+  """The object ID that this key result belongs to"""
+  objectiveId: ID
+
+  """The team ID that this key result belongs to"""
+  teamId: ID
+}
+
 """Required data to update a given key result view rank"""
 input KeyResultViewRankInput {
   """Ordered list of key result IDs"""
@@ -375,4 +453,7 @@ input KeyResultViewInput {
 
   """Ordered list of key result IDs"""
   rank: [ID!]!
+
+  """The ID of the user that you are creating a view to"""
+  userId: ID
 }

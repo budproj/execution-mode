@@ -4,8 +4,8 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult'
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import { CheckInFormValues } from '../../form'
@@ -27,7 +27,7 @@ const CurrentProgress = ({ keyResultID }: CurrentProgressProperties) => {
   return (
     <Box>
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
-      <Mask isDisabled value={values.currentProgress} />
+      <Mask isDisabled value={values.currentProgress} bg="gray.50" />
     </Box>
   )
 }

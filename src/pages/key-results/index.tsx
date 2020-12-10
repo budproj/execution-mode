@@ -3,10 +3,13 @@ import { defineMessages, useIntl, MessageDescriptor } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import PageContent from 'src/components/Base/PageContent'
-import KeyResultView from 'src/components/KeyResult/View'
+import { KeyResultView } from 'src/components/KeyResult'
+import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
-const messages = defineMessages({
+export const messages = defineMessages({
   pageTitle: {
     defaultMessage: 'Minhas Key Results',
     id: 'tf3MiP',
@@ -14,9 +17,12 @@ const messages = defineMessages({
   },
 }) as Record<string, MessageDescriptor>
 
-const MyKeyResultsIndex = (): ReactElement => {
-  const setPageTitle = useSetRecoilState(pageTitleAtom)
+const KeyResultsIndex = (): ReactElement => {
   const intl = useIntl()
+  const setPageTitle = useSetRecoilState(pageTitleAtom)
+  const setOpenDrawer = useSetRecoilState(keyResultOpenDrawer)
+
+  const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
   useEffect((): void => {
     setPageTitle(intl.formatMessage(messages.pageTitle))
@@ -24,9 +30,10 @@ const MyKeyResultsIndex = (): ReactElement => {
 
   return (
     <PageContent>
-      <KeyResultView />
+      <KeyResultView onLineClick={handleLineClick} />
+      <KeyResultSingleDrawer />
     </PageContent>
   )
 }
 
-export default MyKeyResultsIndex
+export default KeyResultsIndex

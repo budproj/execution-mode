@@ -15,7 +15,7 @@ describe('props customization', () => {
     expect(renderedHeader.prop('RightWing')).toEqual(FakeComponent)
   })
 
-  it('renders provided children', () => {
+  it('renders a single child', () => {
     const result = enzyme.shallow(
       <PageContent>
         <FakeComponent />
@@ -25,5 +25,31 @@ describe('props customization', () => {
     const renderedChild = result.find('FakeComponent')
 
     expect(renderedChild.length).toEqual(1)
+  })
+
+  it('renders multiple children', () => {
+    const result = enzyme.shallow(
+      <PageContent>
+        <FakeComponent />
+        <FakeComponent />
+      </PageContent>,
+    )
+
+    const renderedChild = result.find('FakeComponent')
+
+    expect(renderedChild.length).toEqual(2)
+  })
+
+  it('pass any unhlanded props to root Box', () => {
+    const properties = faker.helpers.userCard()
+    const result = enzyme.shallow(
+      <PageContent {...properties}>
+        <FakeComponent />
+      </PageContent>,
+    )
+
+    const box = result.find('Box')
+
+    expect(box.props()).toMatchObject(properties)
   })
 })

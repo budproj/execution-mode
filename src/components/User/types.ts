@@ -1,6 +1,8 @@
 import { Team } from 'src/components/Company/types'
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
 
+import { UserPolicy } from './constants'
+
 export interface CustomSorting {
   user: User['id']
   keyResults: Array<KeyResult['id']>
@@ -18,4 +20,11 @@ export interface User {
   progressReports?: ProgressReport[]
   confidenceReport?: ConfidenceReport[]
   teams?: Team[]
+}
+
+export interface UserPolicies {
+  create: UserPolicy
+  read: UserPolicy
+  update: UserPolicy
+  delete: UserPolicy
 }

@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
 
 import { BORDER_COLOR, GRID_TEMPLATE_COLUMN } from '../constants'
 
@@ -24,10 +24,16 @@ export interface LineProperties {
   id: KeyResult['id']
   remoteKeyResult: KeyResult
   index: number
+  onLineClick?: (id: KeyResult['id']) => void
 }
 
-const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
-  const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(id))
+const KeyResultViewLine = ({
+  id,
+  index,
+  remoteKeyResult,
+  onLineClick,
+}: LineProperties): ReactElement => {
+  const [keyResult, setKeyResult] = useRecoilState(selectKeyResult(id))
 
   useEffect(() => {
     if (!keyResult && remoteKeyResult) setKeyResult(remoteKeyResult)
@@ -42,6 +48,10 @@ const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
 
   const isLoaded = typeof keyResult !== 'undefined'
 
+  const handleLineClick = () => {
+    if (onLineClick) onLineClick(id)
+  }
+
   return isLoaded ? (
     <DraggableGrid
       keyResultID={id}
@@ -54,6 +64,8 @@ const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
       borderBottomColor={BORDER_COLOR}
       borderStyle="solid"
       _hover={{ background: 'blue.50' }}
+      cursor={onLineClick ? 'pointer' : 'auto'}
+      onClick={handleLineClick}
     >
       <KeyResultViewBodyColumnTitle id={id} />
       <KeyResultViewBodyColumnOkr id={id} />
@@ -67,4 +79,4 @@ const Line = ({ id, index, remoteKeyResult }: LineProperties): ReactElement => {
   )
 }
 
-export default Line
+export default KeyResultViewLine

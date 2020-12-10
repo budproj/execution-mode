@@ -3,7 +3,7 @@ import shuffle from 'lodash/shuffle'
 import { ModelInstance } from 'miragejs'
 
 import Models from 'lib/mirage/models'
-import { KeyResultFormat } from 'src/components/KeyResult'
+import { KeyResultFormat } from 'src/components/KeyResult/types'
 
 export const buildKeyResultView = (
   keyResultModels: Array<ModelInstance<typeof Models.keyResult>>,

@@ -23,7 +23,7 @@ export interface Team {
 }
 
 export interface Company {
-  id: number
+  id: string
   name: string
   createdAt: Date
   updatedAt: Date

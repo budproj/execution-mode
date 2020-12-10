@@ -1,21 +1,23 @@
 import { useMutation } from '@apollo/client'
-import { Divider, Flex, FormControl, Button, Box } from '@chakra-ui/react'
+import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
 import React from 'react'
-import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
+import queries from 'src/components/KeyResult/queries.gql'
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
 import {
   keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
   keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
 } from 'src/state/recoil/key-result/progress-update'
 
-import { CurrentProgressField, NewProgressField, CurrentConfidenceField } from './Fields'
-import messages from './messages'
-import queries from './queries.gql'
+import { CurrentProgressField, NewProgressField, CurrentConfidenceField, GoalField } from './Fields'
+import Actions from './actions'
 
 export interface CheckInFormProperties {
+  submitOnBlur: boolean
+  showGoal: boolean
+  gutter?: SpaceProps['p']
   keyResultID?: KeyResult['id']
   afterSubmit?: (
     newProgress?: ProgressReport['valueNew'],
@@ -29,8 +31,13 @@ export interface CheckInFormValues {
   newProgress?: ProgressReport['valueNew']
 }
 
-const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
-  const intl = useIntl()
+const CheckInForm = ({
+  keyResultID,
+  afterSubmit,
+  gutter,
+  submitOnBlur,
+  showGoal,
+}: CheckInFormProperties) => {
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
   const [createCheckIn, data] = useMutation(queries.CREATE_CHECK_IN)
@@ -70,11 +77,19 @@ const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
     values: CheckInFormValues,
     actions: FormikHelpers<CheckInFormValues>,
   ) => {
-    syncDisabledFields(values, actions)
-    syncRecoilState(values)
-    await dispatchRemoteUpdate(values)
+    const wasProgressUpdated = values.newProgress !== currentProgress
+    const wasConfidenceUpdated = values.confidence !== confidence
 
-    if (afterSubmit) afterSubmit(values.newProgress, values.confidence)
+    if (wasProgressUpdated || wasConfidenceUpdated) {
+      syncDisabledFields(values, actions)
+      syncRecoilState(values)
+      await dispatchRemoteUpdate(values)
+
+      const newProgress = wasProgressUpdated ? values.newProgress : undefined
+      const newConfidence = wasConfidenceUpdated ? values.confidence : undefined
+
+      if (afterSubmit) afterSubmit(newProgress, newConfidence)
+    }
   }
 
   return (
@@ -82,26 +97,30 @@ const CheckInForm = ({ keyResultID, afterSubmit }: CheckInFormProperties) => {
       {() => (
         <Form>
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
-            <Flex direction="column" gridGap={5} px={8} py={8}>
-              <CurrentConfidenceField />
+            <Flex direction="column" gridGap={5} p={gutter} pb={submitOnBlur ? 0 : 8}>
+              <CurrentConfidenceField submitOnBlur={submitOnBlur} isLoading={data.loading} />
               <Flex gridGap={5}>
                 <CurrentProgressField keyResultID={keyResultID} />
-                <NewProgressField keyResultID={keyResultID} />
+                <NewProgressField
+                  keyResultID={keyResultID}
+                  submitOnBlur={submitOnBlur}
+                  isLoading={data.loading}
+                />
+                {showGoal && <GoalField keyResultID={keyResultID} />}
               </Flex>
             </Flex>
 
-            <Divider />
-
-            <Box textAlign="center" pt={6} px={8}>
-              <Button variant="solid" type="submit" isLoading={data.loading}>
-                {intl.formatMessage(messages.save)}
-              </Button>
-            </Box>
+            {!submitOnBlur && <Actions isLoading={data.loading} gutter={gutter} />}
           </FormControl>
         </Form>
       )}
     </Formik>
   )
+}
+
+CheckInForm.defaultProps = {
+  submitOnBlur: false,
+  showGoal: false,
 }
 
 export default CheckInForm

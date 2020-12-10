@@ -6,6 +6,8 @@ export { default as AuthzApolloProvider } from './AuthzApolloProvider'
 
 export { default as Breadcrumb } from './Breadcrumb'
 
+export { default as IntlLink } from './IntlLink'
+
 export { default as Logotype } from './Logotype'
 
 export { default as Page } from './Page'
@@ -14,8 +16,16 @@ export { default as PageContent } from './PageContent'
 
 export { default as PageContentHeader } from './PageContentHeader'
 
+export { default as PageLoading } from './PageLoading'
+
 export { default as PageTitle } from './PageTitle'
+
+export { default as RecoilDebugObserver } from './RecoilDebugObserver'
+
+export { default as RecoilIntlProvider } from './RecoilIntlProvider'
 
 export { default as Slider } from './Slider'
 
 export { default as SelectMenu } from './SelectMenu'
+
+export { default as InputWithLoader } from './InputWithLoader'

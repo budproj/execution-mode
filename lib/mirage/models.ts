@@ -11,6 +11,7 @@ const models = {
     team: belongsTo(),
     confidenceReports: hasMany(),
     progressReports: hasMany(),
+    policies: belongsTo(),
   }),
   progressReport: Model.extend({
     user: belongsTo(),
@@ -43,6 +44,7 @@ const models = {
     confidenceReports: hasMany(),
     teams: hasMany(),
   }),
+  policy: Model,
 }
 
 export default models

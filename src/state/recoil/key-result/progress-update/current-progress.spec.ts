@@ -8,7 +8,7 @@ describe('getter', () => {
 
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentProgress, 'selectProgressReports')
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const getCurrentProgress = currentProgress.getCurrentProgress(fakeID)
 
     getCurrentProgress({ get: sinon.fake() })
@@ -19,7 +19,7 @@ describe('getter', () => {
   })
 
   it('returns the value new from latest progress report', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const latestProgressValue = faker.random.number()
     const getStub = sinon.stub().returns([{ valueNew: latestProgressValue }])
     const getCurrentProgress = currentProgress.getCurrentProgress(fakeID)
@@ -38,7 +38,7 @@ describe('getter', () => {
   })
 
   it('returns undefined if there is no progress reports', () => {
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const getCurrentProgress = currentProgress.getCurrentProgress(fakeID)
 
     const result = getCurrentProgress({ get: sinon.fake() })
@@ -52,7 +52,7 @@ describe('setter', () => {
 
   it('calls partial selector with provided ID', () => {
     const spy = sinon.spy(currentProgress, 'selectProgressReports')
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const setCurrentProgress = currentProgress.setCurrentProgress(fakeID)
 
     setCurrentProgress(
@@ -77,7 +77,7 @@ describe('setter', () => {
     const getterStub = sinon.stub().returns([latestProgressReport])
     const setterSpy = sinon.spy()
 
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const valueNew = faker.random.number()
     const setCurrentProgress = currentProgress.setCurrentProgress(fakeID)
 

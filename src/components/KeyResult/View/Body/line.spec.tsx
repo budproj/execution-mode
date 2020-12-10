@@ -13,7 +13,7 @@ describe('component side-effects', () => {
     sinon.stub(recoil, 'useRecoilState').returns([undefined, sinon.fake()])
 
     const result = enzyme.shallow(
-      <Line id={faker.random.number()} index={faker.random.number()} remoteKeyResult={{} as any} />,
+      <Line id={faker.random.word()} index={faker.random.number()} remoteKeyResult={{} as any} />,
     )
 
     const lineComponent = result.find('DraggableGrid')
@@ -25,7 +25,7 @@ describe('component side-effects', () => {
     sinon.stub(recoil, 'useRecoilState').returns([faker.random.word(), sinon.fake()])
 
     const result = enzyme.shallow(
-      <Line id={faker.random.number()} index={faker.random.number()} remoteKeyResult={{} as any} />,
+      <Line id={faker.random.word()} index={faker.random.number()} remoteKeyResult={{} as any} />,
     )
 
     const lineComponent = result.find('DraggableGrid')
@@ -40,7 +40,7 @@ describe('component side-effects', () => {
 
     enzyme.shallow(
       <Line
-        id={faker.random.number()}
+        id={faker.random.word()}
         index={faker.random.number()}
         remoteKeyResult={remoteKeyResult as any}
       />,

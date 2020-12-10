@@ -11,7 +11,7 @@ describe('partial selector getter', () => {
   it('uses the provided ID to get key results from atom family', () => {
     const spy = sinon.spy()
     const fakePart = faker.random.word()
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
 
     const fakePartGetter = buildPartialSelector.getKeyResultPart(fakePart)
     const fakeGetter = fakePartGetter(fakeID)
@@ -26,7 +26,7 @@ describe('partial selector getter', () => {
   it('returns the value in provided part path', () => {
     const fakeData = { rick: 'Morty' }
     const stub = sinon.stub().returns(fakeData)
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
 
     const fakePartGetter = buildPartialSelector.getKeyResultPart('rick')
     const fakeGetter = fakePartGetter(fakeID)
@@ -39,7 +39,7 @@ describe('partial selector getter', () => {
   it('returns the value in provided part deep path', () => {
     const fakeData = { rick: { sanchez: { morty: 'Smith' } } }
     const stub = sinon.stub().returns(fakeData)
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
 
     const fakePartGetter = buildPartialSelector.getKeyResultPart('rick.sanchez.morty')
     const fakeGetter = fakePartGetter(fakeID)
@@ -60,10 +60,12 @@ describe('partial selector getter', () => {
 })
 
 describe('partial selector setter', () => {
+  afterEach(() => sinon.restore())
+
   it('gets the provided key result atom family with given ID', () => {
     const spy = sinon.spy()
     const fakePart = faker.random.word()
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
 
     const fakePartSetter = buildPartialSelector.setKeyResultPart(fakePart)
     const fakeSetter = fakePartSetter(fakeID)
@@ -79,7 +81,7 @@ describe('partial selector setter', () => {
     const fakeData = faker.helpers.createCard()
     const fakeValue = faker.random.objectElement()
     const fakePart = faker.random.word()
-    const fakeID = faker.random.number()
+    const fakeID = faker.random.word()
     const getStub = sinon.stub().returns(fakeData)
     const setSpy = sinon.spy()
 
@@ -107,5 +109,63 @@ describe('partial selector setter', () => {
     const result = fakeSetter({ get: sinon.fake(), set: sinon.fake() }, faker.random.number())
 
     expect(result).not.toBeDefined()
+  })
+
+  it('can set deep values', () => {
+    const fakeData = { rick: { sanchez: { morty: 'Smith' } } }
+    const stub = sinon.stub().returns(fakeData)
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+
+    const fakePartSetter = buildPartialSelector.setKeyResultPart('rick.sanchez.morty')
+    const fakeSetter = fakePartSetter(fakeID)
+    const newValue = faker.random.word()
+
+    fakeSetter({ get: stub, set: spy }, newValue)
+
+    const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
+      rick: { sanchez: { morty: newValue } },
+    })
+
+    expect(wasCalledAsExpected).toEqual(true)
+  })
+
+  it('preserves deep values upon setting', () => {
+    const preservedValue = faker.random.word()
+    const fakeData = { rick: { tag: preservedValue, sanchez: { morty: 'Smith' } } }
+    const stub = sinon.stub().returns(fakeData)
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+
+    const fakePartSetter = buildPartialSelector.setKeyResultPart('rick.sanchez.morty')
+    const fakeSetter = fakePartSetter(fakeID)
+    const newValue = faker.random.word()
+
+    fakeSetter({ get: stub, set: spy }, newValue)
+
+    const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
+      rick: { tag: preservedValue, sanchez: { morty: newValue } },
+    })
+
+    expect(wasCalledAsExpected).toEqual(true)
+  })
+
+  it('can set list values', () => {
+    const fakeData = { morty: ['Smith'] }
+    const stub = sinon.stub().returns(fakeData)
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+
+    const fakePartSetter = buildPartialSelector.setKeyResultPart('morty')
+    const fakeSetter = fakePartSetter(fakeID)
+    const newValue = [faker.random.word(), 'Smith']
+
+    fakeSetter({ get: stub, set: spy }, newValue)
+
+    const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
+      morty: newValue,
+    })
+
+    expect(wasCalledAsExpected).toEqual(true)
   })
 })
