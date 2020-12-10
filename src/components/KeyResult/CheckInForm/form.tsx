@@ -77,13 +77,19 @@ const CheckInForm = ({
     values: CheckInFormValues,
     actions: FormikHelpers<CheckInFormValues>,
   ) => {
-    if (values.newProgress !== currentProgress || values.confidence !== confidence) {
+    const wasProgressUpdated = values.newProgress !== currentProgress
+    const wasConfidenceUpdated = values.confidence !== confidence
+
+    if (wasProgressUpdated || wasConfidenceUpdated) {
       syncDisabledFields(values, actions)
       syncRecoilState(values)
       await dispatchRemoteUpdate(values)
-    }
 
-    if (afterSubmit) afterSubmit(values.newProgress, values.confidence)
+      const newProgress = wasProgressUpdated ? values.newProgress : undefined
+      const newConfidence = wasConfidenceUpdated ? values.confidence : undefined
+
+      if (afterSubmit) afterSubmit(newProgress, newConfidence)
+    }
   }
 
   return (

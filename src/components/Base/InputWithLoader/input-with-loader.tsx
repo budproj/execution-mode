@@ -8,11 +8,9 @@ export interface InputWithLoaderProperties extends InputProps {
 const InputWithLoader = ({ isLoading, ...rest }: InputWithLoaderProperties) => (
   <InputGroup>
     <Input {...rest} />
-    {isLoading && (
-      <InputRightElement p={0}>
-        <Spinner size="sm" color="gray.100" />
-      </InputRightElement>
-    )}
+    <InputRightElement p={0}>
+      {isLoading && <Spinner size="sm" color="gray.100" />}
+    </InputRightElement>
   </InputGroup>
 )
 
