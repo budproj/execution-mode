@@ -52,7 +52,7 @@ const publicRuntimeConfig = {
 
 const serverRuntimeConfig = {
   host: HOST,
-  supportedLocales: [LOCALE_OVERRIDE] ?? SUPPORTED_LOCALES.split(','),
+  supportedLocales: LOCALE_OVERRIDE ? [LOCALE_OVERRIDE] : SUPPORTED_LOCALES.split(','),
 }
 
 const i18n = {
