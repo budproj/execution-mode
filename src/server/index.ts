@@ -1,5 +1,6 @@
 import fs from 'fs'
-import https, { Server } from 'https'
+import https, { Server as HttpsServer } from 'https'
+import http, { Server as HttpServer } from 'http'
 
 import Router from '@koa/router'
 import chalk from 'chalk'
@@ -21,9 +22,9 @@ const launch = async (): Promise<void> => {
 
 const buildServer = (app: Record<string, any>): void => {
   const koaServer = buildKoaServer(app)
-  const httpsServer = buildHttpsServer(koaServer)
+  const server = buildHttpOrHttpsServer(koaServer)
 
-  httpsServer.listen(config.port, () =>
+  server.listen(config.port, () =>
     console.log(
       `${chalk.cyan('➤')} ${chalk.gray('Web server running on:')} https://${config.host}:${
         config.port
@@ -52,13 +53,26 @@ const buildKoaServer = (app: Record<string, any>): Koa => {
   return server
 }
 
-const buildHttpsServer = (koaServer: Koa): Server => {
+const buildHttpOrHttpsServer = (koaServer: Koa): HttpsServer | HttpServer => {
+  const isHttps = fs.existsSync(config.https.key) && fs.existsSync(config.https.cert)
+  const server = isHttps ? buildHttpsServer(koaServer) : buildHttpServer(koaServer)
+
+  return server
+}
+
+const buildHttpsServer = (koaServer: Koa): HttpsServer => {
   const options = {
     key: fs.readFileSync(config.https.key, 'utf8').toString(),
     cert: fs.readFileSync(config.https.cert, 'utf8').toString(),
   }
 
   const server = https.createServer(options, koaServer.callback())
+
+  return server
+}
+
+const buildHttpServer = (koaServer: Koa): HttpServer => {
+  const server = http.createServer(koaServer.callback())
 
   return server
 }

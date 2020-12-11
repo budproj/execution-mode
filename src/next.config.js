@@ -10,7 +10,6 @@ const {
   SUPPORTED_LOCALES,
   NODE_ENV,
   LOG_LEVEL,
-  API_ACL_PATH,
   API_GRAPHQL,
   AUTH0_CLIENT_ID_PUBLIC,
   AUTH0_DOMAIN,
@@ -39,7 +38,6 @@ const publicRuntimeConfig = {
   },
 
   api: {
-    acl: API_ACL_PATH,
     graphql: API_GRAPHQL,
   },
 
