@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production next build && tsc --project ./tsconfig.server.json",
     "start:dev": "run-s intl:refresh server:watch",
     "server:watch": "nodemon",
-    "server:launch": "ts-node ./src/index.ts --project ./tsconfig.server.json",
+    "server:launch": "ts-node --project tsconfig.server.json ./src/index.ts",
     "compile": "run-s compile:intl compile:typescript",
     "compile:intl": "run-p intl:compile:ptBR intl:compile:enUS",
     "compile:typescript": "tsc",

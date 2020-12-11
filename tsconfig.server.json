@@ -1,5 +1,6 @@
 {
   "extends": "./tsconfig.json",
+  "include": ["src/server/**/*.ts"],
   "compilerOptions": {
     "isolatedModules": false,
     "noEmit": false,

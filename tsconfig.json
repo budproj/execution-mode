@@ -6,11 +6,7 @@
     "jsx": "preserve",
     "lib": ["dom", "dom.iterable", "esnext", "ESNext.Intl", "ES2018.Intl", "es2017"],
     "moduleResolution": "node",
-    "baseUrl": "./",
-    "paths": {
-      "lib/*": ["./lib/*"],
-      "src/*": ["./src/*"]
-    },
+    "baseUrl": ".",
     "strict": true,
     "allowJs": true,
     "noEmit": true,
@@ -26,7 +22,7 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "exclude": [".next", "next.config.js", "*.spec.*"],
+  "exclude": [".next", "next.config.js", "*.spec.*", "dist"],
   "include": [
     "next-env.d.ts",
     "*.ts",

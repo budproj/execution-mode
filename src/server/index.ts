@@ -12,7 +12,6 @@ import config from './config'
 const launch = async (): Promise<void> => {
   const app = next({
     dev: config.dev,
-    dir: './src',
   })
 
   await app.prepare()

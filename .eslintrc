@@ -1,4 +1,9 @@
 {
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.server.json",
+    "createDefaultProgram": true
+  },
   "extends": [
     "@budproj/eslint-config-base-ts",
     "@budproj/eslint-config-prettier-ts",
@@ -12,9 +17,6 @@
     "import/resolver": {
       "node": {
         "paths": ["./", "src"]
-      },
-      "typescript": {
-        "project": "./tsconfig.server.json"
       }
     }
   }
