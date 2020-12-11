@@ -13,4 +13,4 @@ const launch = async (): Promise<void> => {
   return buildServer(app)
 }
 
-launch()
+launch() // eslint-disable-line @typescript-eslint/no-floating-promises
