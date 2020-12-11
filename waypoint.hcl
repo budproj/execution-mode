@@ -14,7 +14,7 @@ app "app" {
       }
     }
   }
-  
+
   deploy{
     use "exec" {
       command = [

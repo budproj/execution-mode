@@ -1,6 +1,6 @@
 {
   "name": "execution-mode",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Web interface for Bud's execution mode",
   "main": "src/server/index.js",
   "scripts": {
