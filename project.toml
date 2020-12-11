@@ -1,6 +1,0 @@
-[project]
-name = "Execution Mode"
-version = "1.0.0"
-
-[build]
-include = [".next", "dist"]
