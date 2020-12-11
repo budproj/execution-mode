@@ -23,7 +23,7 @@ export function buildProgressReport(this: any) {
     [KeyResultFormat.COIN_BRL]: () =>
       faker.random.number({ min: this.initialValue, max: this.keyResult.goal }),
   }
-  const formatHandler = handlers[(this.keyResult.format as any) as KeyResultFormat]
+  const formatHandler = handlers[this.keyResult.format as KeyResultFormat]
 
   return formatHandler()
 }

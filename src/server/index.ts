@@ -1,6 +1,6 @@
 import fs from 'fs'
-import https, { Server as HttpsServer } from 'https'
 import http, { Server as HttpServer } from 'http'
+import https, { Server as HttpsServer } from 'https'
 
 import Router from '@koa/router'
 import chalk from 'chalk'

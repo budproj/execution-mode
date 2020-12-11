@@ -8,7 +8,6 @@ import sinon from 'sinon'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 
 import KeyResultsPage from './key-results'
-
 import messages from './messages'
 
 describe('page control behaviors', () => {

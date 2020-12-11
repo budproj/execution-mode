@@ -1,6 +1,7 @@
 import faker from 'faker'
 
 import * as confidenceTag from './confidence-tag'
+import { confidenceTagMessages } from './messages'
 
 describe('confidence tag getter', () => {
   it('returns the expected "upToDate" tag if current confidence is 50 or more', () => {
@@ -10,8 +11,8 @@ describe('confidence tag getter', () => {
     const result = selector()
 
     const expectedTag = {
-      message: confidenceTag.messages.upToDate,
-      desc: confidenceTag.messages.iconDescUpToDate,
+      message: confidenceTagMessages.upToDate,
+      desc: confidenceTagMessages.iconDescUpToDate,
       color: 'green.500',
     }
 
@@ -25,8 +26,8 @@ describe('confidence tag getter', () => {
     const result = selector()
 
     const expectedTag = {
-      message: confidenceTag.messages.atRisk,
-      desc: confidenceTag.messages.iconDescAtRisk,
+      message: confidenceTagMessages.atRisk,
+      desc: confidenceTagMessages.iconDescAtRisk,
       color: 'yellow.500',
     }
 
@@ -40,8 +41,8 @@ describe('confidence tag getter', () => {
     const result = selector()
 
     const expectedTag = {
-      message: confidenceTag.messages.overdue,
-      desc: confidenceTag.messages.iconDescOverdue,
+      message: confidenceTagMessages.overdue,
+      desc: confidenceTagMessages.iconDescOverdue,
       color: 'red.500',
     }
 
@@ -54,8 +55,8 @@ describe('confidence tag getter', () => {
     const result = selector()
 
     const expectedTag = {
-      message: confidenceTag.messages.upToDate,
-      desc: confidenceTag.messages.iconDescUpToDate,
+      message: confidenceTagMessages.upToDate,
+      desc: confidenceTagMessages.iconDescUpToDate,
       color: 'green.500',
     }
 
