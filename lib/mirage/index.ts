@@ -1,5 +1,4 @@
-import { Request } from '@miragejs/graphql'
-import { createServer } from 'miragejs'
+import { createServer, Request } from 'miragejs'
 
 import getConfig, { NodeEnvironment } from 'src/config'
 

@@ -4,7 +4,7 @@ import { DefaultValue, selectorFamily } from 'recoil'
 import { KeyResult } from 'src/components/KeyResult'
 import { PREFIX } from 'src/state/recoil/intl/constants'
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
-import { RecoilSpecificationSetter } from 'state/recoil/types'
+import { RecoilSpecificationSetter } from 'src/state/recoil/types'
 
 const KEY = `${PREFIX}::KEY_RESULT`
 

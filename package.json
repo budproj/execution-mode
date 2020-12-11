@@ -4,10 +4,11 @@
   "description": "Web interface for Bud's execution mode",
   "main": "src/index.js",
   "scripts": {
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "build": "NODE_ENV=production next build && tsc --project ./tsconfig.server.json",
     "start:dev": "run-s intl:refresh server:watch",
     "server:watch": "nodemon",
-    "server:launch": "ts-node ./src/index.ts",
-    "build": "run-s clean compile copy",
+    "server:launch": "ts-node ./src/index.ts --project ./tsconfig.server.json",
     "compile": "run-s compile:intl compile:typescript",
     "compile:intl": "run-p intl:compile:ptBR intl:compile:enUS",
     "compile:typescript": "tsc",
