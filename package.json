@@ -13,7 +13,7 @@
     "compile": "run-s compile:intl compile:server",
     "compile:intl": "run-p intl:compile:ptBR intl:compile:enUS",
     "compile:server": "tsc --project ./tsconfig.server.json",
-    "clean": "rimraf -rf dist",
+    "clean": "rimraf -rf dist .next",
     "copy": "cp README.md LICENSE package.json dist",
     "format": "prettier --write 'src/**/*.ts'",
     "lint": "eslint . --ext ts,tsx",
@@ -27,7 +27,8 @@
     "intl:compile:ptBR": "formatjs compile lang/pt-BR.json --ast --out-file compiled-lang/pt-BR.json",
     "intl:compile:enUS": "formatjs compile lang/en-US.json --ast --out-file compiled-lang/en-US.json",
     "test": "jest",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "deploy": "npm run build && waypoint up"
   },
   "author": "delucca <delucca@pm.me>",
   "license": "Apache-2.0",
