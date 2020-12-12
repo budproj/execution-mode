@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 
-import { makeServer } from 'lib/mirage'
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
 import Page from 'src/components/Base/Page'
@@ -13,7 +12,7 @@ import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
-import 'focus-visible/dist/focus-visible' // Keeps outline only in keytboard navigation. As seem in: https://github.com/chakra-ui/chakra-ui/issues/2016#issuecomment-691674038
+import 'focus-visible/dist/focus-visible' // Keeps outline only in keyboard navigation. As seem in: https://github.com/chakra-ui/chakra-ui/issues/2016#issuecomment-691674038
 
 type IntlMessage = Record<string, string>
 
@@ -31,7 +30,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
   const { Component, pageProps, locale, messages } = properties
   const router = useRouter()
 
-  const onAuth0RedirectCallback = async (appState: AppState): void => {
+  const onAuth0RedirectCallback = async (appState: AppState): Promise<void> => {
     await router.replace(appState?.returnTo ?? window.location.pathname)
   }
 
@@ -68,7 +67,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
   )
 }
 
-BudApp.getInitialProps = async (appContext: AppContext): Promise<BudAppProperties> => {
+BudApp.getInitialProps = async (appContext: AppContext) => {
   const pageProperties = {}
 
   const { Component, ctx, router } = appContext
@@ -94,7 +93,9 @@ BudApp.getInitialProps = async (appContext: AppContext): Promise<BudAppPropertie
 if (
   config.publicRuntimeConfig.nodeEnv === 'development' &&
   config.publicRuntimeConfig.mirage.enabled
-)
-  makeServer('development')
+) {
+  const mirage = require('lib/mirage')
+  mirage.makeServer('development')
+}
 
 export default BudApp

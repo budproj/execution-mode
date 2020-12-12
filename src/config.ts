@@ -49,7 +49,6 @@ export interface Route {
 }
 
 export interface BudAPIs {
-  acl: string
   graphql: string
 }
 

@@ -5,7 +5,8 @@ import React from 'react'
 import sinon from 'sinon'
 
 import * as apollo from 'lib/apollo'
-import config from 'src/next.config'
+
+import config from '../../../../next.config'
 
 import AuthzApolloProvider from './authz-apollo-provider'
 

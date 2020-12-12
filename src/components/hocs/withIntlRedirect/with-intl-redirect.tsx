@@ -3,13 +3,13 @@ import { IncomingMessage } from 'http'
 import accepts from 'accepts'
 import { NextComponentType, NextPageContext } from 'next'
 import { useRouter } from 'next/router'
-import React, { ComponentType, ReactElement, useEffect } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import getConfig, { Locale } from 'src/config'
 import { intlRouteAtom } from 'src/state/recoil/intl'
 
-const withIntlRedirect = (WrappedComponent: NextComponentType, location: string): ComponentType => {
+const withIntlRedirect = (WrappedComponent: NextComponentType, location: string) => {
   const WithRedirectWrapper = async (
     properties: Record<string, unknown>,
   ): Promise<ReactElement> => {
@@ -23,9 +23,7 @@ const withIntlRedirect = (WrappedComponent: NextComponentType, location: string)
     return <WrappedComponent {...properties} />
   }
 
-  WithRedirectWrapper.getInitialProps = async (
-    context: NextPageContext,
-  ): Promise<Record<string, unknown> | undefined> => {
+  WithRedirectWrapper.getInitialProps = async (context: NextPageContext) => {
     const { publicRuntimeConfig, serverRuntimeConfig } = getConfig()
 
     const accept = accepts(context?.req as IncomingMessage)

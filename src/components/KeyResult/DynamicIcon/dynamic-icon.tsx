@@ -10,7 +10,7 @@ import {
   keyResultIconDesc,
   keyResultIconDrawing,
 } from 'src/state/recoil/key-result/icon'
-import { KeyResultIconDrawing } from 'state/recoil/key-result/icon/types'
+import { KeyResultIconDrawing } from 'src/state/recoil/key-result/icon/types'
 
 export interface KeyResultDynamicIconProperties {
   title: KeyResult['title'] | undefined

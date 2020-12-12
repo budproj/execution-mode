@@ -1,2 +1,12 @@
-src/next-env.d.ts
-src/next.config.js
+next-env.d.ts
+next.config.js
+
+node_modules/*
+manifests/*
+lang/*
+compiled-lang/*
+.waypoint/*
+.git/*
+.github/*
+.next/*
+dist/*

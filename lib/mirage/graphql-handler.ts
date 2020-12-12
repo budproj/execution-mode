@@ -13,18 +13,18 @@ const graphQLHandler = (mirageSchema: unknown) =>
     resolvers: {
       KeyResult: {
         progressReports: (
-          parent: ModelInstance<typeof Models.keyResult>,
+          parent: ModelInstance<any>,
           { limit }: QueryKeyResultReportsArguments,
         ): Array<ModelInstance<typeof Models.progressReport>> =>
           limit ? parent.progressReports.models.slice(0, limit) : parent.progressReports.models,
 
         confidenceReports: (
-          parent: ModelInstance<typeof Models.keyResult>,
+          parent: ModelInstance<any>,
           { limit }: QueryKeyResultReportsArguments,
         ): Array<ModelInstance<typeof Models.confidenceReport>> =>
           limit ? parent.confidenceReports.models.slice(0, limit) : parent.confidenceReports.models,
       },
     },
-  })
+  } as any)
 
 export default graphQLHandler

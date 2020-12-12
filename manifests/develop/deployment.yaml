@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: execution-mode-app
+  labels:
+    app.kubernetes.io/name: execution-mode-app
+    app.kubernetes.io/version: 1.0.0
+    app.kubernetes.io/component: execution-mode
+    app.kubernetes.io/part-of: presentation-layer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: execution-mode-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: execution-mode-app
+        app.kubernetes.io/version: 1.0.0
+        app.kubernetes.io/component: execution-mode
+        app.kubernetes.io/part-of: presentation-layer
+    spec:
+      containers:
+        - name: execution-mode-app
+          image: 904333181156.dkr.ecr.sa-east-1.amazonaws.com/execution-mode:$ECR_TAG
+          ports:
+            - containerPort: 8080
+          env:
+            - name: APP_ENV
+              value: develop
+            - name: HOST
+              value: app.develop.getbud.co
+            - name: PORT
+              value: '8080'
+            - name: DEFAULT_LOCALE
+              value: pt-BR
+            - name: SUPPORTED_LOCALES
+              value: pt-BR
+            - name: API_GRAPHQL
+              value: https://api.develop.getbud.co/business/graphql
+            - name: AUTH0_CLIENT_ID_PUBLIC
+              value: 76DivGrWIbmLh7V2SkFyPeIbUFN6OBf3
+            - name: AUTH0_DOMAIN
+              value: getbud.us.auth0.com
+            - name: AUTH0_SCOPE
+              value: openid profile
+            - name: AUTH0_AUDIENCE
+              value: https://api.getbud.co/business"

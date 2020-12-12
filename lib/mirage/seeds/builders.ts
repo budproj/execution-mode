@@ -2,12 +2,9 @@ import faker from 'faker'
 import shuffle from 'lodash/shuffle'
 import { ModelInstance } from 'miragejs'
 
-import Models from 'lib/mirage/models'
 import { KeyResultFormat } from 'src/components/KeyResult/types'
 
-export const buildKeyResultView = (
-  keyResultModels: Array<ModelInstance<typeof Models.keyResult>>,
-) => {
+export const buildKeyResultView = (keyResultModels: Array<ModelInstance<any>>) => {
   const keyResults = shuffle(keyResultModels)
   const rank = keyResults.map((keyResult) => keyResult.id)
 
@@ -17,7 +14,7 @@ export const buildKeyResultView = (
   }
 }
 
-export function buildProgressReport() {
+export function buildProgressReport(this: any) {
   const handlers = {
     [KeyResultFormat.NUMBER]: () =>
       faker.random.number({ min: this.keyResult.initialValue, max: this.keyResult.goal }),
@@ -26,7 +23,7 @@ export function buildProgressReport() {
     [KeyResultFormat.COIN_BRL]: () =>
       faker.random.number({ min: this.initialValue, max: this.keyResult.goal }),
   }
-  const formatHandler = handlers[this.keyResult.format]
+  const formatHandler = handlers[this.keyResult.format as KeyResultFormat]
 
   return formatHandler()
 }

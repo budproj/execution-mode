@@ -10,7 +10,6 @@ const {
   SUPPORTED_LOCALES,
   NODE_ENV,
   LOG_LEVEL,
-  API_ACL_PATH,
   API_GRAPHQL,
   AUTH0_CLIENT_ID_PUBLIC,
   AUTH0_DOMAIN,
@@ -39,7 +38,6 @@ const publicRuntimeConfig = {
   },
 
   api: {
-    acl: API_ACL_PATH,
     graphql: API_GRAPHQL,
   },
 
@@ -54,7 +52,7 @@ const publicRuntimeConfig = {
 
 const serverRuntimeConfig = {
   host: HOST,
-  supportedLocales: [LOCALE_OVERRIDE] ?? SUPPORTED_LOCALES.split(','),
+  supportedLocales: LOCALE_OVERRIDE ? [LOCALE_OVERRIDE] : SUPPORTED_LOCALES.split(','),
 }
 
 const i18n = {
