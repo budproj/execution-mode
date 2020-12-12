@@ -11,6 +11,7 @@ RUN npm install
 COPY dist dist
 COPY .next .next
 COPY compiled-lang compiled-lang
+COPY public public
 COPY next.config.js .
 
 CMD [ "npm", "start" ]
