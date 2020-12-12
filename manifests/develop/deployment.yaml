@@ -30,7 +30,7 @@ spec:
             - name: APP_ENV
               value: develop
             - name: HOST
-              value: https://app.develop.getbud.co
+              value: app.develop.getbud.co
             - name: PORT
               value: '8080'
             - name: DEFAULT_LOCALE

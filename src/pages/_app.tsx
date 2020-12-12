@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 
-import { makeServer } from 'lib/mirage'
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
 import Page from 'src/components/Base/Page'
@@ -94,7 +93,9 @@ BudApp.getInitialProps = async (appContext: AppContext) => {
 if (
   config.publicRuntimeConfig.nodeEnv === 'development' &&
   config.publicRuntimeConfig.mirage.enabled
-)
-  makeServer('development')
+) {
+  const mirage = require('lib/mirage')
+  mirage.makeServer('development')
+}
 
 export default BudApp

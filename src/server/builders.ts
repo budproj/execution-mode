@@ -12,13 +12,11 @@ export const buildServer = (app: Record<string, any>): void => {
   const koaServer = buildKoaServer(app)
   const server = buildHttpOrHttpsServer(koaServer)
 
-  server.listen(config.port, () =>
-    console.log(
-      `${chalk.cyan('➤')} ${chalk.gray('Web server running on:')} https://${config.host}:${
-        config.port
-      }`,
-    ),
-  )
+  server.listen(config.port, () => {
+    const serverURL = `https://${config.host}${config.dev ? `:${config.port}` : ''}`
+
+    console.log(`${chalk.cyan('➤')} ${chalk.gray('Web server running on:')} ${serverURL}`)
+  })
 }
 
 const buildKoaServer = (app: Record<string, any>): Koa => {
