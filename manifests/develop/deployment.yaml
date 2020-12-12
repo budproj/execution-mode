@@ -28,7 +28,7 @@ spec:
             - containerPort: 8080
           env:
             - name: APP_ENV
-              value: production
+              value: develop
             - name: HOST
               value: https://app.develop.getbud.co
             - name: PORT
