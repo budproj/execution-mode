@@ -11,18 +11,15 @@ import { APOLLO_STATE } from './constants'
 
 let APOLLO_CLIENT: ApolloClient<NormalizedCacheObject>
 
-const authLink = (authzClient: Auth0ContextInterface) => {
-  console.log(authzClient)
-  console.log(setContext)
-
-  return setContext(async (_, { headers }) => {
-    console.log('ok')
+const authLink = (authzClient: Auth0ContextInterface) =>
+  setContext(async (_, { headers }) => {
+    console.log('antes de pegar a config')
     const { publicRuntimeConfig } = getConfig()
+    console.log('depois de pegar a config', publicRuntimeConfig)
     const { getAccessTokenSilently } = authzClient
+    console.log('depois de pegar a fn o token', getAccessTokenSilently)
     const token = await getAccessTokenSilently(publicRuntimeConfig.auth0)
-
-    console.log(token)
-    console.log(headers)
+    console.log('depois de pegar o token', token)
 
     return {
       headers: {
@@ -31,7 +28,6 @@ const authLink = (authzClient: Auth0ContextInterface) => {
       },
     }
   })
-}
 
 const linkWithServer = (authzClient: Auth0ContextInterface) => {
   const { publicRuntimeConfig } = getConfig()
@@ -41,8 +37,6 @@ const linkWithServer = (authzClient: Auth0ContextInterface) => {
   const httpLink = createHttpLink({
     uri: publicRuntimeConfig.api.graphql,
   })
-
-  console.log(httpLink)
 
   return shouldMockServer
     ? { uri: publicRuntimeConfig.api.graphql }
