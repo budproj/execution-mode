@@ -1,10 +1,50 @@
 import faker from 'faker'
+import { setConfig } from 'next/config'
 import sinon from 'sinon'
+
+import config from '../../../../next.config'
 
 import * as selectors from './selectors'
 
 describe('roles', () => {
-  it('returns the list of roles for our API', () => {
+  beforeAll(() => setConfig(config))
+
+  it('returns the list of roles for our API on develop environment', () => {
+    // eslint-disable-next-line unicorn/no-null
+    const fakeRoles = new Array(faker.random.number({ max: 100 })).fill(null).map(faker.random.word)
+    const fakeUser = {
+      ...faker.helpers.userCard(),
+      'https://api.develop.getbud.co/roles': fakeRoles,
+    }
+    const stub = sinon.stub().returns(fakeUser)
+
+    const result = selectors.getRoles({ get: stub })
+
+    expect(result).toEqual({ api: fakeRoles })
+  })
+
+  it('returns the list of roles for our API on local environment', () => {
+    // eslint-disable-next-line unicorn/no-null
+    const fakeRoles = new Array(faker.random.number({ max: 100 })).fill(null).map(faker.random.word)
+    const fakeUser = {
+      ...faker.helpers.userCard(),
+      'https://api.develop.getbud.co/roles': fakeRoles,
+    }
+    const stub = sinon.stub().returns(fakeUser)
+
+    const result = selectors.getRoles({ get: stub })
+
+    expect(result).toEqual({ api: fakeRoles })
+  })
+
+  it('returns the list of roles for our API on production environment', () => {
+    setConfig({
+      publicRuntimeConfig: {
+        ...config.publicRuntimeConfig,
+        environment: 'production',
+      },
+    })
+
     // eslint-disable-next-line unicorn/no-null
     const fakeRoles = new Array(faker.random.number({ max: 100 })).fill(null).map(faker.random.word)
     const fakeUser = {
@@ -16,6 +56,8 @@ describe('roles', () => {
     const result = selectors.getRoles({ get: stub })
 
     expect(result).toEqual({ api: fakeRoles })
+
+    setConfig(config)
   })
 
   it('returns an empty list if no user is defined', () => {
