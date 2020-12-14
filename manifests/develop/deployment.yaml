@@ -27,10 +27,6 @@ spec:
           ports:
             - containerPort: 8080
           env:
-            - name: NODE_ENV
-              value: development
-            - name: LOG_LEVEL
-              value: debug
             - name: APP_ENV
               value: develop
             - name: HOST
