@@ -11,8 +11,12 @@ import { APOLLO_STATE } from './constants'
 
 let APOLLO_CLIENT: ApolloClient<NormalizedCacheObject>
 
-const authLink = (authzClient: Auth0ContextInterface) =>
-  setContext(async (_, { headers }) => {
+const authLink = (authzClient: Auth0ContextInterface) => {
+  console.log(authzClient)
+  console.log(setContext)
+
+  return setContext(async (_, { headers }) => {
+    console.log('ok')
     const { publicRuntimeConfig } = getConfig()
     const { getAccessTokenSilently } = authzClient
     const token = await getAccessTokenSilently(publicRuntimeConfig.auth0)
@@ -27,17 +31,18 @@ const authLink = (authzClient: Auth0ContextInterface) =>
       },
     }
   })
+}
 
 const linkWithServer = (authzClient: Auth0ContextInterface) => {
   const { publicRuntimeConfig } = getConfig()
   const shouldMockServer =
     publicRuntimeConfig.mirage.enabled && publicRuntimeConfig.environment === 'develop'
 
-  console.log(shouldMockServer)
-
   const httpLink = createHttpLink({
     uri: publicRuntimeConfig.api.graphql,
   })
+
+  console.log(httpLink)
 
   return shouldMockServer
     ? { uri: publicRuntimeConfig.api.graphql }
