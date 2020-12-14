@@ -27,6 +27,8 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: NODE_ENV
+              value: development
             - name: APP_ENV
               value: develop
             - name: HOST
