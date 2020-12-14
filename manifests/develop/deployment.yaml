@@ -40,10 +40,10 @@ spec:
             - name: API_GRAPHQL
               value: https://api.develop.getbud.co/business/graphql
             - name: AUTH0_CLIENT_ID_PUBLIC
-              value: 76DivGrWIbmLh7V2SkFyPeIbUFN6OBf3
+              value: R1dkkCw8rdSt5CX1PmrUS7PutKufN5jd
             - name: AUTH0_DOMAIN
-              value: getbud.us.auth0.com
+              value: getbud-develop.us.auth0.com
             - name: AUTH0_SCOPE
               value: openid profile
             - name: AUTH0_AUDIENCE
-              value: https://api.getbud.co/business"
+              value: https://api.develop.getbud.co/business"

@@ -1,16 +1,21 @@
 import { selector } from 'recoil'
 
+import getConfig from 'src/config'
 import { RecoilSpecificationGetter } from 'src/state/recoil/types'
 
 import authzAtom from './atom'
 import { PREFIX } from './constants'
-import { AuthzRolesGroup } from './types'
+import { AuthzRolesGroup, AuthzTenantRole, UppercasedEnvironment } from './types'
 
 const KEY = `${PREFIX}::SELECTORS`
 
 export const getRoles = ({ get }: RecoilSpecificationGetter) => {
+  const { publicRuntimeConfig } = getConfig()
+  const uppercasedEnvironment = publicRuntimeConfig.environment.toUpperCase() as UppercasedEnvironment
+  const authzTenant = AuthzTenantRole[uppercasedEnvironment]
+
   const user = get(authzAtom)
-  const api = user?.['https://api.getbud.co/roles'] ?? []
+  const api = user?.[authzTenant] ?? []
 
   return {
     api,
