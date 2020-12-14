@@ -46,4 +46,4 @@ spec:
             - name: AUTH0_SCOPE
               value: openid profile
             - name: AUTH0_AUDIENCE
-              value: https://api.develop.getbud.co/business"
+              value: https://api.develop.getbud.co/business
