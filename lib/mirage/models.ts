@@ -37,6 +37,9 @@ const models = {
     keyResults: hasMany(),
     company: belongsTo(),
     users: hasMany(),
+    teams: hasMany(),
+    // eslint-disable-next-line unicorn/no-null
+    parentTeam: belongsTo('team', { inverse: null }),
   }),
   user: Model.extend({
     keyResults: hasMany(),

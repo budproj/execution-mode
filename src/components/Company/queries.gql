@@ -1,0 +1,16 @@
+query GET_ROOT_TEAMS {
+  teams(parentTeamId: null) {
+    name
+    description
+    teams {
+      keyResults {
+        owner {
+          picture
+        }
+        progressReports(limit: 1) {
+          valueNew
+        }
+      }
+    }
+  }
+}

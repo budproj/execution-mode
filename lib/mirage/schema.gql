@@ -144,6 +144,9 @@ type Team {
   """The name of the team"""
   name: String!
 
+  """The description about the team"""
+  description: String
+
   """The creation date of the team"""
   createdAt: DateTime!
 
@@ -169,6 +172,13 @@ type Team {
 
   """The user that owns this team"""
   owner: Company!
+
+  """The ID of the team that owns this team"""
+  parentTeamId: ID
+
+  """The team that owns this team"""
+  parentTeam: Team
+  teams: [Team!]!
 }
 
 """A goal that is created for the team focusing in a given team objective"""
@@ -366,6 +376,7 @@ type Query {
   keyResult(id: ID!): KeyResult!
   objective(id: ID!): Objective!
   team(id: ID!): Team!
+  teams(parentTeamId: ID): [Team!]
   user(id: ID!): User!
   me: User!
   keyResultView(binding: KeyResultViewBinding, id: ID): KeyResultView!

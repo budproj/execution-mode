@@ -16,7 +16,9 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   const policies = server.create('policy')
   const company = server.create('company')
-  const teams = server.createList('team', 3, { company })
+  const rootTeam = server.create('team')
+  const teams = server.createList('team', 3, { company, parentTeam: rootTeam })
+  rootTeam.update('teams', teams as any)
   const user = server.create('user', { teams })
   const cycle = server.create('cycle', { company })
   const objectives = server.createList('objective', 3, { cycle })
@@ -44,6 +46,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   logger.debug('Inserted fake data on MirageJS server', {
     data: {
       company,
+      rootTeam,
       teams,
       user,
       cycle,
