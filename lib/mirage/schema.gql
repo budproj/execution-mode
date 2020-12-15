@@ -367,6 +367,7 @@ type Query {
   objective(id: ID!): Objective!
   team(id: ID!): Team!
   user(id: ID!): User!
+  me: User!
   keyResultView(binding: KeyResultViewBinding, id: ID): KeyResultView!
 }
 
