@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   preset: 'ts-jest',
   setupFilesAfterEnv: ['./lib/jest/setup.ts'],
   testPathIgnorePatterns: ['node_modules', 'dist'],
@@ -11,7 +11,7 @@ export default {
   },
   globals: {
     'ts-jest': {
-      tsconfig: 'tsconfig.server.json',
+      tsconfig: 'tsconfig.test.json',
       babelConfig: {
         presets: ['@babel/preset-react'],
       },
