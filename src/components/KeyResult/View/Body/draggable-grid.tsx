@@ -11,12 +11,14 @@ import messages from './messages'
 export interface DraggableGridProperties extends GridProps {
   keyResultID: KeyResult['id']
   index: number
+  templateColumns: string
 }
 
 const DraggableGrid = ({
   keyResultID,
   index,
   children,
+  templateColumns,
   ...rest
 }: DraggableGridProperties): ReactElement => {
   const intl = useIntl()
@@ -27,10 +29,11 @@ const DraggableGrid = ({
         <Grid
           ref={provided.innerRef}
           bg={isDragging ? 'blue.50' : 'transparent'}
+          templateColumns={`0fr ${templateColumns}`}
           {...provided.draggableProps}
           {...rest}
         >
-          <Box position="absolute" ml="-21px" {...provided.dragHandleProps}>
+          <Box ml="-21px" {...provided.dragHandleProps}>
             <ReorderIcon desc={intl.formatMessage(messages.reorderIconDesc)} fill="gray.300" />
           </Box>
 

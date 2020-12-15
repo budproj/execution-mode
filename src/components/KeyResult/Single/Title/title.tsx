@@ -44,19 +44,22 @@ const Title = ({ keyResultID }: KeyResultSingleTitleProperties) => {
       </Skeleton>
 
       <Skeleton isLoaded={isTitleLoaded}>
-        {canUpdate ? (
-          <Editable
-            value={titleDraft}
-            onChange={setTitleDraft}
-            onCancel={setTitleDraft}
-            onSubmit={handleTitleSubmit}
-          >
-            <EditablePreview color="gray.800" />
-            <EditableInput />
-          </Editable>
-        ) : (
-          <Text color="gray.800">{title}</Text>
-        )}
+        {
+          // Disabled title edition until we figure our a proper user experience
+          canUpdate && false ? (
+            <Editable
+              value={titleDraft}
+              onChange={setTitleDraft}
+              onCancel={setTitleDraft}
+              onSubmit={handleTitleSubmit}
+            >
+              <EditablePreview color="gray.800" />
+              <EditableInput />
+            </Editable>
+          ) : (
+            <Text color="gray.800">{title}</Text>
+          )
+        }
       </Skeleton>
     </Flex>
   )

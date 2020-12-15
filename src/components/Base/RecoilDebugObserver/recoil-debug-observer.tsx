@@ -10,7 +10,7 @@ const RecoilDebugObserver = () => {
 
   useEffect(() => {
     if (publicRuntimeConfig.environment !== 'production') {
-      logger.debug('The following atoms were modified:')
+      logger.debug('The following atoms were modified:', { component })
       for (const node of snapshot.getNodes_UNSTABLE({ isModified: true })) {
         logger.debug(node.key, { data: snapshot.getLoadable(node), component })
       }

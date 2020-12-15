@@ -29,6 +29,7 @@ const ProgressSlider = forwardRef(
 const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContainerProperties>(
   ({ keyResultID }: ProgressSliderContainerProperties, forwardedReference) => {
     const [isLoaded, setIsLoaded] = useState(false)
+    const [isChanging, setIsChanging] = useState(false)
     const [draftValue, setDraftValue] = useRecoilState(draftValueAtom(keyResultID))
     const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
     const confidenceTag = useRecoilValue(confidenceTagSelector(currentConfidence))
@@ -39,16 +40,22 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
-        if (valueNew) setDraftValue(valueNew)
+        if (valueNew) {
+          setDraftValue(valueNew)
+          setIsChanging(true)
+        }
       },
-      [setDraftValue],
+      [setDraftValue, setIsChanging],
     )
 
     const handleSliderUpdateEnd = useCallback(
       (newValue: number | number[]) => {
-        if (newValue && newValue === draftValue) setOpenedPopover(true)
+        if (isChanging && newValue && newValue === draftValue) {
+          setOpenedPopover(true)
+          setIsChanging(false)
+        }
       },
-      [setOpenedPopover, draftValue],
+      [draftValue, isChanging, setOpenedPopover, setIsChanging],
     )
 
     if (!isLoaded && typeof goal !== 'undefined') setIsLoaded(true)

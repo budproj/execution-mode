@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
 import Logotype from 'src/components/Base/Logotype'
-import NamedAvatar from 'src/components/User/NamedAvatar'
+import Me from 'src/components/User/Me'
 
 import AppBarMenuItem from './MenuItem'
 import messages from './messages'
@@ -32,7 +32,7 @@ const AppBar = (): ReactElement => {
       </GridItem>
 
       <GridItem alignSelf="end">
-        <NamedAvatar />
+        <Me />
       </GridItem>
     </Grid>
   )
