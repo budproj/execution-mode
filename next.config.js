@@ -47,6 +47,12 @@ const publicRuntimeConfig = {
       destination: '/key-results',
       locale: 'pt-BR',
     },
+
+    {
+      source: '/pt-BR/objetivos',
+      destination: '/objectives',
+      locale: 'pt-BR',
+    },
   ],
 }
 

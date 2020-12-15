@@ -3,6 +3,7 @@ import { MessageDescriptor, defineMessages } from 'react-intl'
 type AppBarMessages =
   | 'dashboard'
   | 'keyResults'
+  | 'objectives'
   | 'item'
   | 'searchIconTitle'
   | 'searchIconDesc'
@@ -20,14 +21,14 @@ export default defineMessages({
 
   keyResults: {
     defaultMessage: 'Minhas KR',
-    id: '2Ej1Zi',
-    description: 'AppBar menu item that links to My Key Results page',
+    id: 'yDscHW',
+    description: 'AppBar menu item that links to Key Results page',
   },
 
-  item: {
-    defaultMessage: 'Item',
-    id: 'qakF7T',
-    description: 'Placeholder item for layout purposes',
+  objectives: {
+    defaultMessage: 'Minhas OKR',
+    id: 'VMTKKJ',
+    description: 'AppBar menu item that links to Objectives page',
   },
 
   searchIconTitle: {

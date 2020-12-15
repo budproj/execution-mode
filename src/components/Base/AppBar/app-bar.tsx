@@ -28,6 +28,7 @@ const AppBar = (): ReactElement => {
       <GridItem>
         <Flex gridGap={20}>
           <AppBarMenuItem label={intl.formatMessage(messages.keyResults)} href="/key-results" />
+          <AppBarMenuItem label={intl.formatMessage(messages.objectives)} href="/objectives" />
         </Flex>
       </GridItem>
 

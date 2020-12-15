@@ -19,7 +19,7 @@
     "lint": "eslint . --ext ts,tsx",
     "lint:fix": "npm run lint -- --fix",
     "lint:timing": "TIMING=1 eslint . --ext ts,tsx",
-    "lint:messages": "eslint **/messages.ts",
+    "lint:messages": "eslint **/messages.ts --fix",
     "format:and:lint": "run-s format lint:fix",
     "intl:generate:id": "echo '\u001b[36m➤ \u001b[90mGenerating react-intl message ids...\u001b[39m' && npm run lint:messages",
     "intl:refresh": "run-s intl:generate:id intl:extract",

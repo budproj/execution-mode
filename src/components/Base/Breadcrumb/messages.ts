@@ -15,6 +15,12 @@ export default defineMessages({
     description: 'The name of the Key Results page, located at "/keyResults"',
   },
 
+  objectives: {
+    defaultMessage: 'Objetivos',
+    id: '8nqWsp',
+    description: 'The name of the Objectives page, located at "/objectives"',
+  },
+
   arrowRightIconDesc: {
     defaultMessage: 'Um ícone de seta para o lado direito, meramente ilustrativo',
     id: 'FVnpVq',

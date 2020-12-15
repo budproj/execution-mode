@@ -39,10 +39,6 @@
     "defaultMessage": "Dashboard",
     "description": "AppBar menu item that links to Dashboard page"
   },
-  "2Ej1Zi": {
-    "defaultMessage": "Minhas KR",
-    "description": "AppBar menu item that links to My Key Results page"
-  },
   "2qxo81": {
     "defaultMessage": "Duração",
     "description": "The label text above the Cycle section in our key result single page or drawer"
@@ -54,6 +50,10 @@
   "8bQS0s": {
     "defaultMessage": "Em atraso",
     "description": "We use this tag to group every key result with confidence lower than 25"
+  },
+  "8nqWsp": {
+    "defaultMessage": "Objetivos",
+    "description": "The name of the Objectives page, located at \"/objectives\""
   },
   "9bJV7v": {
     "defaultMessage": "OKR",
@@ -98,6 +98,10 @@
   "GeAU92": {
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
+  },
+  "HpiBVM": {
+    "defaultMessage": "Objetivos",
+    "description": "The page title that our users should see in the objectives page"
   },
   "J98VQ8": {
     "defaultMessage": "Em dia",
@@ -163,6 +167,10 @@
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
   },
+  "VMTKKJ": {
+    "defaultMessage": "Minhas OKR",
+    "description": "AppBar menu item that links to Objectives page"
+  },
   "XHDyV/": {
     "defaultMessage": "De:",
     "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
@@ -211,6 +219,10 @@
     "defaultMessage": "Progresso",
     "description": "The text of the table head related to the Progress column"
   },
+  "khbEZF": {
+    "defaultMessage": "Minhas Key Results",
+    "description": "The page title that our users should see in the key results page"
+  },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
@@ -231,10 +243,6 @@
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
-  "qakF7T": {
-    "defaultMessage": "Item",
-    "description": "Placeholder item for layout purposes"
-  },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
     "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
@@ -246,10 +254,6 @@
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
-  },
-  "tf3MiP": {
-    "defaultMessage": "Minhas Key Results",
-    "description": "The page title that our users should see"
   },
   "ui441M": {
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
@@ -270,6 +274,10 @@
   "y6z1c3": {
     "defaultMessage": "Data de fim",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
+  },
+  "yDscHW": {
+    "defaultMessage": "Minhas KR",
+    "description": "AppBar menu item that links to Key Results page"
   },
   "yQ7cY8": {
     "defaultMessage": "Atualização de status",
