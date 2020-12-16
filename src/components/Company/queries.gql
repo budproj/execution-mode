@@ -1,5 +1,6 @@
-query GET_ROOT_TEAMS {
+query GET_ROOT_TEAMS_AND_COMPANIES {
   teams(parentTeamId: null) {
+    id
     name
     description
     teams {
@@ -7,6 +8,19 @@ query GET_ROOT_TEAMS {
         owner {
           picture
         }
+        progressReports(limit: 1) {
+          valueNew
+        }
+      }
+    }
+  }
+
+  companies {
+    id
+    name
+    description
+    teams {
+      keyResults {
         progressReports(limit: 1) {
           valueNew
         }

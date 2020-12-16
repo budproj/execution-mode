@@ -308,6 +308,9 @@ type Company {
   """The name of the company"""
   name: String!
 
+  """The description of the company"""
+  description: String
+
   """The creation date of the company"""
   createdAt: DateTime!
 
@@ -370,6 +373,7 @@ type KeyResultView {
 
 type Query {
   company(id: ID!): Company!
+  companies: [Company!]
   cycle(id: ID!): Cycle!
   confidenceReport(id: ID!): ConfidenceReport!
   progressReport(id: ID!): ProgressReport!
