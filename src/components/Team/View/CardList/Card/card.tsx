@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil'
 
 import CrownIcon from 'src/components/Icons/Crown'
 import { Team } from 'src/components/Team/types'
+import { companyAtomFamily } from 'src/state/recoil/company'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import messages from './messages'
@@ -16,8 +17,8 @@ export interface TeamCardProperties {
 
 const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
   const intl = useIntl()
-  const teamAtom = teamAtomFamily(id)
-  const team = useRecoilValue(teamAtom)
+  const atom = isCompany ? companyAtomFamily(id) : teamAtomFamily(id)
+  const team = useRecoilValue(atom)
   const isLoaded = Boolean(team)
 
   return (

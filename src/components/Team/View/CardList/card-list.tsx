@@ -5,6 +5,7 @@ import React from 'react'
 import queries from 'src/components/Team/queries.gql'
 import { GetRootTeamsAndCompaniesQueryData } from 'src/components/Team/types'
 
+import CompanyCards from './company-cards'
 import TeamCards from './team-cards'
 
 const TeamViewCardList = () => {
@@ -14,6 +15,7 @@ const TeamViewCardList = () => {
 
   return (
     <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
+      <CompanyCards companies={data?.companies} isLoading={loading} />
       <TeamCards teams={data?.teams} isLoading={loading} />
     </Grid>
   )
