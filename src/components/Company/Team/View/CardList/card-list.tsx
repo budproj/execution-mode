@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Flex } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
 import React from 'react'
 
 import queries from 'src/components/Company/queries.gql'
@@ -12,17 +12,19 @@ const TeamViewCardList = () => {
     queries.GET_ROOT_TEAMS_AND_COMPANIES,
   )
 
-  console.log(data)
-
   return (
-    <Flex>
+    <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
       {!loading && data ? (
-        data.companies.map((company) => <TeamCard key={company.id} />)
+        data.companies.map((company) => <TeamCard key={company.id} {...company} isCompany />)
+      ) : (
+        <TeamCard isCompany />
+      )}
+      {!loading && data ? (
+        data.teams.map((team) => <TeamCard key={team.id} {...team} />)
       ) : (
         <TeamCard />
       )}
-      {!loading && data ? data.teams.map((team) => <TeamCard key={team.id} />) : <TeamCard />}
-    </Flex>
+    </Grid>
   )
 }
 

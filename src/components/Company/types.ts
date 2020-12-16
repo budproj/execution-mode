@@ -20,6 +20,7 @@ export interface Cycle {
 export interface Team {
   id: string
   name: string
+  description?: string
   createdAt: Date
   updatedAt: Date
   company: Company
@@ -30,6 +31,7 @@ export interface Team {
 export interface Company {
   id: string
   name: string
+  description?: string
   createdAt: Date
   updatedAt: Date
   teams?: Team[]

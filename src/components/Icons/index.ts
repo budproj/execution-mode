@@ -12,6 +12,8 @@ export { default as Circle } from './Circle'
 
 export { default as Close } from './Close'
 
+export { default as Crown } from './Crown'
+
 export { default as Delete } from './Delete'
 
 export { default as Discovery } from './Discovery'

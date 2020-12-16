@@ -11,7 +11,7 @@ export interface KeyResultViewProperties extends BoxProps {
 }
 
 const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): ReactElement => (
-  <Box pt={20} {...rest}>
+  <Box {...rest}>
     <ViewHead />
     <ViewBody onLineClick={onLineClick} />
   </Box>

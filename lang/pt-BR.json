@@ -167,6 +167,10 @@
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
   },
+  "UUo+Pt": {
+    "defaultMessage": "Este time é uma empresa",
+    "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
+  },
   "VMTKKJ": {
     "defaultMessage": "Minhas OKR",
     "description": "AppBar menu item that links to Objectives page"
@@ -242,6 +246,10 @@
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
+  },
+  "pVkTLM": {
+    "defaultMessage": "Um ícone de coroa",
+    "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
