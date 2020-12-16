@@ -9,7 +9,7 @@ import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
-import { RecoilSpecificationGetter, RecoilSpecificationSetter } from 'src/state/recoil/types'
+import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 
 import { PREFIX } from './constants'
 
@@ -20,7 +20,7 @@ type KeyResultPart = ValueOf<KeyResult> | ValueOf<Objective> | ValueOf<User> | V
 
 export const getKeyResultPart = <T extends KeyResultPart>(part: string) => (
   id?: KeyResult['id'],
-) => ({ get }: RecoilSpecificationGetter) => {
+) => ({ get }: RecoilInterfaceGetter) => {
   if (!id) return
 
   const keyResult = get(keyResultAtomFamily(id))
@@ -30,7 +30,7 @@ export const getKeyResultPart = <T extends KeyResultPart>(part: string) => (
 }
 
 export const setKeyResultPart = <T>(part: string) => (id?: KeyResult['id']) => (
-  { get, set }: RecoilSpecificationSetter,
+  { get, set }: RecoilInterfaceReadWrite,
   newValue: T | DefaultValue | undefined,
 ) => {
   if (!id) return

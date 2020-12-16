@@ -4,7 +4,7 @@ import { DefaultValue, selectorFamily } from 'recoil'
 import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
 import { PREFIX } from 'src/state/recoil/intl/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
-import { RecoilSpecificationGetter, RecoilSpecificationSetter } from 'src/state/recoil/types'
+import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 
 const KEY = `${PREFIX}::CURRENT_PROGRESS`
 
@@ -12,9 +12,7 @@ export const selectProgressReports = buildPartialSelector<KeyResult['progressRep
   'progressReports',
 )
 
-export const getCurrentProgress = (id?: KeyResult['id']) => ({
-  get,
-}: RecoilSpecificationGetter) => {
+export const getCurrentProgress = (id?: KeyResult['id']) => ({ get }: RecoilInterfaceGetter) => {
   if (!id) return
 
   const progressReports = get(selectProgressReports(id))
@@ -24,7 +22,7 @@ export const getCurrentProgress = (id?: KeyResult['id']) => ({
 }
 
 export const setCurrentProgress = (id?: KeyResult['id']) => (
-  { get, set }: RecoilSpecificationSetter,
+  { get, set }: RecoilInterfaceReadWrite,
   valueNew: ProgressReport['valueNew'] | DefaultValue | undefined,
 ) => {
   if (!id) return

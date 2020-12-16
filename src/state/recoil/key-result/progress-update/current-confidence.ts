@@ -4,7 +4,7 @@ import { DefaultValue, selectorFamily } from 'recoil'
 import { KeyResult, ConfidenceReport } from 'src/components/KeyResult/types'
 import { PREFIX } from 'src/state/recoil/intl/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
-import { RecoilSpecificationGetter, RecoilSpecificationSetter } from 'src/state/recoil/types'
+import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 
 const KEY = `${PREFIX}::CURRENT_CONFIDENCE`
 
@@ -12,9 +12,7 @@ export const selectConfidenceReports = buildPartialSelector<KeyResult['confidenc
   'confidenceReports',
 )
 
-export const getCurrentConfidence = (id?: KeyResult['id']) => ({
-  get,
-}: RecoilSpecificationGetter) => {
+export const getCurrentConfidence = (id?: KeyResult['id']) => ({ get }: RecoilInterfaceGetter) => {
   if (!id) return
 
   const confidenceReports = get(selectConfidenceReports(id))
@@ -24,7 +22,7 @@ export const getCurrentConfidence = (id?: KeyResult['id']) => ({
 }
 
 export const setCurrentConfidence = (id?: KeyResult['id']) => (
-  { get, set }: RecoilSpecificationSetter,
+  { get, set }: RecoilInterfaceReadWrite,
   valueNew: ConfidenceReport['valueNew'] | DefaultValue | undefined,
 ) => {
   if (!id) return

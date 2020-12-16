@@ -6,7 +6,10 @@ import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::COMPANY_FAMILY`
 
-export const companyAtomFamily = atomFamily<Company | undefined, Company['id'] | undefined>({
+export const companyAtomFamily = atomFamily<
+  Partial<Company> | undefined,
+  Company['id'] | undefined
+>({
   key: KEY,
   default: undefined,
 })

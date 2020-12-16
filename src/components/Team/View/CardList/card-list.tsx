@@ -5,7 +5,7 @@ import React from 'react'
 import queries from 'src/components/Team/queries.gql'
 import { GetRootTeamsAndCompaniesQueryData } from 'src/components/Team/types'
 
-import TeamCard from './Card'
+import TeamCards from './team-cards'
 
 const TeamViewCardList = () => {
   const { data, loading } = useQuery<GetRootTeamsAndCompaniesQueryData>(
@@ -14,16 +14,7 @@ const TeamViewCardList = () => {
 
   return (
     <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
-      {!loading && data ? (
-        data.companies.map((company) => <TeamCard key={company.id} {...company} isCompany />)
-      ) : (
-        <TeamCard isCompany />
-      )}
-      {!loading && data ? (
-        data.teams.map((team) => <TeamCard key={team.id} {...team} />)
-      ) : (
-        <TeamCard />
-      )}
+      <TeamCards teams={data?.teams} isLoading={loading} />
     </Grid>
   )
 }
