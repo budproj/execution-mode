@@ -11,6 +11,9 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
         progressReports(limit: 1) {
           valueNew
         }
+        confidenceReports(limit: 1) {
+          valueNew
+        }
       }
     }
   }
@@ -21,7 +24,13 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
     description
     teams {
       keyResults {
+        owner {
+          picture
+        }
         progressReports(limit: 1) {
+          valueNew
+        }
+        confidenceReports(limit: 1) {
           valueNew
         }
       }

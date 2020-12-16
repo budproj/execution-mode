@@ -11,5 +11,3 @@ export * as KeyResultSingle from './Single'
 export * as KeyResultNumberMasks from './NumberMasks'
 
 export { default as KeyResultCheckInForm } from './CheckInForm'
-
-export * from './types'

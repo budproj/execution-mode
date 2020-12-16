@@ -1,4 +1,4 @@
-import { Cycle } from 'src/components/Company/types'
+import { Cycle } from 'src/components/Cycle/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 export interface Objective {

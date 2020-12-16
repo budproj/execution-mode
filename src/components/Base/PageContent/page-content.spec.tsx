@@ -48,7 +48,7 @@ describe('props customization', () => {
       </PageContent>,
     )
 
-    const box = result.find('Box')
+    const box = result.find('Box').first()
 
     expect(box.props()).toMatchObject(properties)
   })

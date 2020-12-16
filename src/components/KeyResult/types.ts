@@ -1,5 +1,5 @@
-import { Team } from 'src/components/Company/types'
 import { Objective } from 'src/components/Objective/types'
+import { Team } from 'src/components/Team/types'
 import { User, UserPolicies } from 'src/components/User/types'
 
 export enum KeyResultFormat {

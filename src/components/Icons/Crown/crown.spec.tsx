@@ -32,14 +32,6 @@ describe('icon customization', () => {
     expect(iconComponent.props()).toMatchObject(fakeProperties)
   })
 
-  it('uses black as default fill', () => {
-    const crown = enzyme.shallow(<Crown title="" desc="" />)
-
-    const iconComponent = crown.find('Icon')
-
-    expect(iconComponent.props().fill).toEqual('black')
-  })
-
   it('can customize the icon fill color', () => {
     const fakeColor = faker.internet.color()
     const crown = enzyme.shallow(<Crown title="" desc="" fill={fakeColor} />)

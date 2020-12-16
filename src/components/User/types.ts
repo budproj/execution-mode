@@ -1,5 +1,5 @@
-import { Team } from 'src/components/Company/types'
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
+import { Team } from 'src/components/Team/types'
 
 import { UserPolicy } from './constants'
 

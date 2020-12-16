@@ -2,8 +2,8 @@ import { Flex, Heading, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { Team } from 'src/components/Company/types'
 import CrownIcon from 'src/components/Icons/Crown'
+import { Team } from 'src/components/Team/types'
 
 import messages from './messages'
 
