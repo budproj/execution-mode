@@ -5,6 +5,8 @@ export interface Company {
   id: string
   name: string
   description?: string
+  currentProgress?: number
+  currentConfidence?: number
   createdAt: Date
   updatedAt: Date
   teams?: Team[]

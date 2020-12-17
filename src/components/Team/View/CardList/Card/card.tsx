@@ -7,9 +7,8 @@ import { Slider } from 'src/components/Base'
 import CrownIcon from 'src/components/Icons/Crown'
 import { Team } from 'src/components/Team/types'
 import { companyAtomFamily } from 'src/state/recoil/company'
-import companyCurrentProgress from 'src/state/recoil/company/selectors/current-progress'
+import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 import { teamAtomFamily } from 'src/state/recoil/team'
-import teamCurrentProgress from 'src/state/recoil/team/selectors/current-progress'
 
 import messages from './messages'
 
@@ -21,14 +20,11 @@ export interface TeamCardProperties {
 const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
   const intl = useIntl()
   const atom = isCompany ? companyAtomFamily(id) : teamAtomFamily(id)
-  const currentProgressSelector = isCompany ? companyCurrentProgress(id) : teamCurrentProgress(id)
 
   const team = useRecoilValue(atom)
-  const currentProgress = useRecoilValue(currentProgressSelector)
+  const confidenceTag = useRecoilValue(confidenceTagSelector(team?.currentConfidence))
 
   const isLoaded = Boolean(team)
-
-  console.log(currentProgress)
 
   return (
     <Box bg="gray.50" borderRadius="15px" py={6} px={10}>
@@ -51,7 +47,12 @@ const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
         </SkeletonText>
 
         <Skeleton isLoaded={isLoaded} borderRadius="full" height="12px">
-          <Slider isDisabled value={currentProgress} trackThickness="12px" />
+          <Slider
+            isDisabled
+            value={team?.currentProgress}
+            trackThickness="12px"
+            trackColor={confidenceTag.color}
+          />
         </Skeleton>
       </Flex>
     </Box>

@@ -3,17 +3,12 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
     id
     name
     description
+    currentProgress
+    currentConfidence
     teams {
       keyResults {
-        goal
         owner {
           picture
-        }
-        progressReports(limit: 1) {
-          valueNew
-        }
-        confidenceReports(limit: 1) {
-          valueNew
         }
       }
     }
@@ -23,17 +18,12 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
     id
     name
     description
+    currentProgress
+    currentConfidence
     teams {
       keyResults {
-        goal
         owner {
           picture
-        }
-        progressReports(limit: 1) {
-          valueNew
-        }
-        confidenceReports(limit: 1) {
-          valueNew
         }
       }
     }

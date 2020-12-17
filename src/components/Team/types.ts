@@ -11,6 +11,8 @@ export interface Team {
   id: string
   name: string
   description?: string
+  currentProgress?: number
+  currentConfidence?: number
   createdAt: Date
   updatedAt: Date
   company: Company
