@@ -2,9 +2,10 @@ import remove from 'lodash/remove'
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
-import { PREFIX } from 'src/state/recoil/intl/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
+
+import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::CURRENT_PROGRESS`
 

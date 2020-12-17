@@ -1,8 +1,8 @@
 import { atomFamily } from 'recoil'
 
 import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
-import { PREFIX } from 'src/state/recoil/intl/constants'
 
+import { PREFIX } from './constants'
 import currentProgress from './current-progress'
 
 const KEY = `${PREFIX}::DRAFT_VALUE`

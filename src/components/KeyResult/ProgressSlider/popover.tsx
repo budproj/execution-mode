@@ -5,13 +5,11 @@ import { useSetRecoilState } from 'recoil'
 
 import { Close as CloseIcon } from 'src/components/Icons'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
+import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
 import {
   keyResultProgressUpdateDraftValue as draftValueAtom,
   keyResultProgressUpdatePopoverOpen as selectPopoverOpen,
 } from 'src/state/recoil/key-result/progress-update'
-
-import { KeyResult } from '..'
-import { ProgressReport } from '../types'
 
 import messages from './messages'
 

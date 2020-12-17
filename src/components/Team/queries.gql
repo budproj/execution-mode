@@ -5,6 +5,7 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
     description
     teams {
       keyResults {
+        goal
         owner {
           picture
         }
@@ -24,6 +25,7 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
     description
     teams {
       keyResults {
+        goal
         owner {
           picture
         }

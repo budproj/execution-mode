@@ -7,6 +7,7 @@ import CrownIcon from 'src/components/Icons/Crown'
 import { Team } from 'src/components/Team/types'
 import { companyAtomFamily } from 'src/state/recoil/company'
 import { teamAtomFamily } from 'src/state/recoil/team'
+import teamCurrentProgress from 'src/state/recoil/team/selectors/current-progress'
 
 import messages from './messages'
 
@@ -18,8 +19,14 @@ export interface TeamCardProperties {
 const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
   const intl = useIntl()
   const atom = isCompany ? companyAtomFamily(id) : teamAtomFamily(id)
+  const currentProgressSelector = teamCurrentProgress(id)
+
   const team = useRecoilValue(atom)
+  const currentProgress = useRecoilValue(currentProgressSelector)
+
   const isLoaded = Boolean(team)
+
+  console.log(currentProgress)
 
   return (
     <Flex bg="gray.50" borderRadius="15px" py={6} px={10} direction="column" gridGap={4}>
