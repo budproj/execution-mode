@@ -9,7 +9,7 @@ import teamAtomFamily from '../atom-family'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::CURRENT_CONFIDENCE`
+const KEY = `${PREFIX}::CURRENT_PROGRESS`
 
 export const getCurrentProgress = (id?: Team['id']) => ({ get }: RecoilInterfaceGetter) => {
   if (!id) return 0
@@ -19,11 +19,12 @@ export const getCurrentProgress = (id?: Team['id']) => ({ get }: RecoilInterface
 
   const childTeamsPercentageProgresses = team.teams?.map(getTeamPercentageProgress)
   const teamCeiledAverageProgress = getCeiledAverageProgress(childTeamsPercentageProgresses)
+  const isNaN = Number.isNaN(teamCeiledAverageProgress)
 
-  return teamCeiledAverageProgress
+  return isNaN ? 0 : teamCeiledAverageProgress
 }
 
-const getTeamPercentageProgress = (team: Partial<Team>) => {
+export const getTeamPercentageProgress = (team: Partial<Team>) => {
   if (!team.keyResults) return 0
 
   const keyResultsPercentageProgresses = team.keyResults.map(getKeyResultPercentageProgress)
@@ -33,7 +34,10 @@ const getTeamPercentageProgress = (team: Partial<Team>) => {
 }
 
 const getKeyResultPercentageProgress = ({ goal, progressReports }: Partial<KeyResult>) => {
-  const latestReportedValue = progressReports?.[0].valueNew
+  const latestProgressReport = progressReports?.[0]
+  if (!latestProgressReport) return 0
+
+  const latestReportedValue = latestProgressReport.valueNew
   const percentageProgress = getProgressAsCeiledPercentage(latestReportedValue, goal)
 
   return percentageProgress
@@ -44,8 +48,20 @@ const getProgressAsCeiledPercentage = (
   goal: KeyResult['goal'] | undefined,
 ) => (latestReportedValue && goal ? Math.ceil((latestReportedValue / goal) * 100) : 0)
 
-const getCeiledAverageProgress = (progressReports: Array<ProgressReport['valueNew']> | undefined) =>
-  progressReports ? Math.ceil(sum(progressReports) / progressReports.length) : 0
+export const getCeiledAverageProgress = (
+  // For some reason, if I enable the following eslint rule, it crashes into a loop trying to change typeof Number.NaN by itself recursively
+  // eslint-disable-next-line unicorn/prefer-number-properties
+  progressReports?: Array<ProgressReport['valueNew'] | typeof Number.NaN>,
+) => {
+  if (!progressReports) return 0
+
+  const clearedProgressReports = progressReports.filter((value) => !Number.isNaN(value))
+  const ceiledAverageProgress = Math.ceil(
+    sum(clearedProgressReports) / clearedProgressReports.length,
+  )
+
+  return ceiledAverageProgress
+}
 
 const teamCurrentProgress = selectorFamily<
   ProgressReport['valueNew'] | undefined,

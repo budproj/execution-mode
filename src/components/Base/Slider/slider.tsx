@@ -13,15 +13,26 @@ import messages from './messages'
 
 export interface SliderProperties extends SliderProps {
   trackColor?: string
+  trackThickness?: string
 }
 
 const Slider = forwardRef<HTMLDivElement, SliderProperties>(
-  ({ trackColor, ...rest }: SliderProperties, forwardedReference) => {
+  ({ trackColor, trackThickness, ...rest }: SliderProperties, forwardedReference) => {
     const intl = useIntl()
 
     return (
-      <ChakraSlider role="group" {...rest}>
-        <SliderTrack ref={forwardedReference} h="8px" bg="gray.100" borderRadius="full">
+      <ChakraSlider
+        role="group"
+        _disabled={{ opacity: 1, pointerEvents: 'none', cursor: 'default' }}
+        {...rest}
+      >
+        <SliderTrack
+          ref={forwardedReference}
+          h={trackThickness}
+          bg="gray.100"
+          borderRadius="full"
+          _disabled={{ bg: 'gray.100' }}
+        >
           <SliderFilledTrack bg={trackColor} borderRadius="full" />
         </SliderTrack>
 
@@ -44,6 +55,8 @@ const Slider = forwardRef<HTMLDivElement, SliderProperties>(
 
 Slider.defaultProps = {
   value: 0,
+  trackColor: 'brand.400',
+  trackThickness: '8px',
 }
 
 export default Slider

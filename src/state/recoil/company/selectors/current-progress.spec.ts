@@ -8,7 +8,7 @@ describe('getter', () => {
 
   it('returns the current progress in percentage being the same as a key result if the team has only one active key result', () => {
     const fakeGoal = faker.random.number()
-    const fakeTeam = {
+    const fakeCompany = {
       teams: [
         {
           keyResults: [
@@ -25,20 +25,20 @@ describe('getter', () => {
         },
       ],
     }
-    const getStub = sinon.stub().returns(fakeTeam)
+    const getStub = sinon.stub().returns(fakeCompany)
     const currentProgressSelector = selector.getCurrentProgress(faker.random.word())
 
     const result = currentProgressSelector({ get: getStub })
 
     const expectedResult = Math.ceil(
-      (fakeTeam.teams[0].keyResults[0].progressReports[0].valueNew / fakeGoal) * 100,
+      (fakeCompany.teams[0].keyResults[0].progressReports[0].valueNew / fakeGoal) * 100,
     )
 
     expect(result).toEqual(expectedResult)
   })
 
   it('returns the current progress in percentage being the average of all key results of all child teams if they are all NUMBER formatted', () => {
-    const fakeTeam = {
+    const fakeCompany = {
       teams: [
         {
           keyResults: [
@@ -79,7 +79,7 @@ describe('getter', () => {
         },
       ],
     }
-    const getStub = sinon.stub().returns(fakeTeam)
+    const getStub = sinon.stub().returns(fakeCompany)
     const currentProgressSelector = selector.getCurrentProgress(faker.random.word())
 
     const result = currentProgressSelector({ get: getStub })
@@ -90,7 +90,7 @@ describe('getter', () => {
   })
 
   it('returns the current progress in percentage being the average of all key results of all child teams if they are all COIN_BRL formatted', () => {
-    const fakeTeam = {
+    const fakeCompany = {
       teams: [
         {
           keyResults: [
@@ -131,7 +131,7 @@ describe('getter', () => {
         },
       ],
     }
-    const getStub = sinon.stub().returns(fakeTeam)
+    const getStub = sinon.stub().returns(fakeCompany)
     const currentProgressSelector = selector.getCurrentProgress(faker.random.word())
 
     const result = currentProgressSelector({ get: getStub })
@@ -142,7 +142,7 @@ describe('getter', () => {
   })
 
   it('returns the current progress in percentage being the average of all key results of all child teams if they are all PERCENTAGE formatted', () => {
-    const fakeTeam = {
+    const fakeCompany = {
       teams: [
         {
           keyResults: [
@@ -183,7 +183,7 @@ describe('getter', () => {
         },
       ],
     }
-    const getStub = sinon.stub().returns(fakeTeam)
+    const getStub = sinon.stub().returns(fakeCompany)
     const currentProgressSelector = selector.getCurrentProgress(faker.random.word())
 
     const result = currentProgressSelector({ get: getStub })
@@ -194,7 +194,7 @@ describe('getter', () => {
   })
 
   it('returns the current progress in percentage being the average of all key results of all child teams if they have mixed formats', () => {
-    const fakeTeam = {
+    const fakeCompany = {
       teams: [
         {
           keyResults: [
@@ -235,7 +235,7 @@ describe('getter', () => {
         },
       ],
     }
-    const getStub = sinon.stub().returns(fakeTeam)
+    const getStub = sinon.stub().returns(fakeCompany)
     const currentProgressSelector = selector.getCurrentProgress(faker.random.word())
 
     const result = currentProgressSelector({ get: getStub })
@@ -246,7 +246,7 @@ describe('getter', () => {
   })
 
   it('returns 0 if no progress reports exists', () => {
-    const fakeTeam = {
+    const fakeCompany = {
       teams: [
         {
           keyResults: [
@@ -259,7 +259,7 @@ describe('getter', () => {
         },
       ],
     }
-    const getStub = sinon.stub().returns(fakeTeam)
+    const getStub = sinon.stub().returns(fakeCompany)
     const currentProgressSelector = selector.getCurrentProgress(faker.random.word())
 
     const result = currentProgressSelector({ get: getStub })
@@ -270,7 +270,7 @@ describe('getter', () => {
   })
 
   it('returns 0 if progressReports does not exist', () => {
-    const fakeTeam = {
+    const fakeCompany = {
       teams: [
         {
           keyResults: [
@@ -282,7 +282,7 @@ describe('getter', () => {
         },
       ],
     }
-    const getStub = sinon.stub().returns(fakeTeam)
+    const getStub = sinon.stub().returns(fakeCompany)
     const currentProgressSelector = selector.getCurrentProgress(faker.random.word())
 
     const result = currentProgressSelector({ get: getStub })
@@ -293,14 +293,14 @@ describe('getter', () => {
   })
 
   it('returns 0 if keyResults is empty', () => {
-    const fakeTeam = {
+    const fakeCompany = {
       teams: [
         {
           keyResults: [],
         },
       ],
     }
-    const getStub = sinon.stub().returns(fakeTeam)
+    const getStub = sinon.stub().returns(fakeCompany)
     const currentProgressSelector = selector.getCurrentProgress(faker.random.word())
 
     const result = currentProgressSelector({ get: getStub })
@@ -311,7 +311,7 @@ describe('getter', () => {
   })
 
   it('ignores a child team if keyResults is empty', () => {
-    const fakeTeam = {
+    const fakeCompany = {
       teams: [
         {
           keyResults: [],
@@ -332,112 +332,12 @@ describe('getter', () => {
         },
       ],
     }
-    const getStub = sinon.stub().returns(fakeTeam)
+    const getStub = sinon.stub().returns(fakeCompany)
     const currentProgressSelector = selector.getCurrentProgress(faker.random.word())
 
     const result = currentProgressSelector({ get: getStub })
 
     const expectedResult = 50
-
-    expect(result).toEqual(expectedResult)
-  })
-})
-
-describe('getTeamPercentageProgress', () => {
-  it('should return the last progress report if the team has a single key result', () => {
-    const fakeTeam = {
-      keyResults: [
-        {
-          format: 'COIN_BRL',
-          goal: 1000,
-          progressReports: [
-            {
-              valueNew: 500,
-            },
-          ],
-        },
-      ],
-    }
-    const result = selector.getTeamPercentageProgress(fakeTeam as any)
-
-    const expectedResult = 50
-
-    expect(result).toEqual(expectedResult)
-  })
-
-  it('should return the average progress if the team has more than one key results', () => {
-    const fakeTeam = {
-      keyResults: [
-        {
-          format: 'COIN_BRL',
-          goal: 1000,
-          progressReports: [
-            {
-              valueNew: 500,
-            },
-          ],
-        },
-
-        {
-          format: 'COIN_BRL',
-          goal: 2000,
-          progressReports: [
-            {
-              valueNew: 1000,
-            },
-          ],
-        },
-      ],
-    }
-    const result = selector.getTeamPercentageProgress(fakeTeam as any)
-
-    const expectedResult = 50
-
-    expect(result).toEqual(expectedResult)
-  })
-
-  it('should return 0 if there is no keyResults for that team', () => {
-    const fakeTeam = {}
-    const result = selector.getTeamPercentageProgress(fakeTeam as any)
-
-    const expectedResult = 0
-
-    expect(result).toEqual(expectedResult)
-  })
-})
-
-describe('getProgressAsCeiledPercentage', () => {
-  it('returns 0 if there progress report is not defined', () => {
-    const result = selector.getCeiledAverageProgress()
-
-    const expectedResult = 0
-
-    expect(result).toEqual(expectedResult)
-  })
-
-  it('returns the value if a single progress report is provided', () => {
-    const fakeValues = [faker.random.number()]
-    const result = selector.getCeiledAverageProgress(fakeValues)
-
-    const expectedResult = fakeValues[0]
-
-    expect(result).toEqual(expectedResult)
-  })
-
-  it('returns the average if multiple progress reports are provided', () => {
-    const fakeValues = [100, 50]
-    const result = selector.getCeiledAverageProgress(fakeValues)
-
-    const expectedResult = 75
-
-    expect(result).toEqual(expectedResult)
-  })
-
-  it('does not consider NaN values on average', () => {
-    const fakeValues = [100, 50, Number.NaN]
-    const result = selector.getCeiledAverageProgress(fakeValues)
-
-    const expectedResult = 75
 
     expect(result).toEqual(expectedResult)
   })
