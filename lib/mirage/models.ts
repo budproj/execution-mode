@@ -39,6 +39,7 @@ const models = {
     company: belongsTo(),
     users: hasMany(),
     teams: hasMany(),
+    objectives: hasMany(),
     // eslint-disable-next-line unicorn/no-null
     parentTeam: belongsTo('team', { inverse: null }),
   }),

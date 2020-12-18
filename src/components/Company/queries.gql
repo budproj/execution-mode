@@ -1,0 +1,6 @@
+query GET_COMPANY_NAME($companyId: ID!) {
+  company(id: $companyId) {
+    id
+    name
+  }
+}

@@ -21,6 +21,18 @@ export default defineMessages({
     description: 'The name of the Objectives page, located at "/objectives"',
   },
 
+  company: {
+    defaultMessage: 'Empresa',
+    id: 'uU2v6P',
+    description: 'The name of the Company Objectives page, located at "/objectives/company"',
+  },
+
+  team: {
+    defaultMessage: 'Time',
+    id: 'xfeZtN',
+    description: 'The name of the Team Objectives page, located at "/objectives/team"',
+  },
+
   arrowRightIconDesc: {
     defaultMessage: 'Um ícone de seta para o lado direito, meramente ilustrativo',
     id: 'FVnpVq',

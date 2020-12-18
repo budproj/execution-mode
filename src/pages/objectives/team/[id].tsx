@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 
-const TeamObjectives = () => {
+import TeamObjectives from 'src/components/Pages/TeamObjectives'
+
+const TeamObjectivesPage = () => {
   const router = useRouter()
   const { id } = router.query
 
-  return <p>Team: {id}</p>
+  return <TeamObjectives teamId={id as string} />
 }
 
-export default TeamObjectives
+export default TeamObjectivesPage

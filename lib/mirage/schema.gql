@@ -184,7 +184,10 @@ type Team {
   currentProgress: Float
 
   """The computed current confidence of this team"""
-  currentConfidence: Int
+  currentConfidence: Float
+
+  """The created ordered list of objectives in this team"""
+  objectives: [Objective!]
 }
 
 """A goal that is created for the team focusing in a given team objective"""
@@ -275,6 +278,12 @@ type Objective {
 
   """The user that owns this objective"""
   owner: User!
+
+  """The computed percentage current progress of this objective"""
+  currentProgress: Float
+
+  """The computed current confidence of this objective"""
+  currentConfidence: Float
 }
 
 """
@@ -339,7 +348,7 @@ type Company {
   currentProgress: Float
 
   """The computed current confidence of this company"""
-  currentConfidence: Int
+  currentConfidence: Float
 
   """A creation date ordered list of users that are members of this company"""
   users: [User!]!
@@ -389,11 +398,11 @@ type KeyResultView {
 type Query {
   confidenceReport(id: ID!): ConfidenceReport!
   progressReport(id: ID!): ProgressReport!
+  objective(id: ID!): Objective!
   company(id: ID!): Company!
   companies: [Company!]
   cycle(id: ID!): Cycle!
   keyResult(id: ID!): KeyResult!
-  objective(id: ID!): Objective!
   team(id: ID!): Team!
   teams(parentTeamId: ID): [Team!]
   user(id: ID!): User!

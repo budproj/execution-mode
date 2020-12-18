@@ -47,7 +47,11 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const users = [user, ...otherUsers]
   company.update('users', users as any)
   rootTeam.update('users', users as any)
-  teams.map((team) => team.update('users', users as any))
+  // eslint-disable-next-line array-callback-return
+  teams.map((team) => {
+    team.update('users', users as any)
+    team.update('objectives', objectives as any)
+  })
 
   logger.debug('Inserted fake data on MirageJS server', {
     data: {

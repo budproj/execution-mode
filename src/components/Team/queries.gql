@@ -23,3 +23,26 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
     }
   }
 }
+
+query GET_CHILD_TEAMS_OBJECTIVES($rootTeamId: ID!) {
+  team(id: $rootTeamId) {
+    teams {
+      objectives {
+        id
+        title
+        currentProgress
+        currentConfidence
+        cycle {
+          dateEnd
+        }
+      }
+    }
+  }
+}
+
+query GET_TEAM_NAME($teamId: ID!) {
+  team(id: $teamId) {
+    id
+    name
+  }
+}

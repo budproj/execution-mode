@@ -263,6 +263,10 @@
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
   },
+  "uU2v6P": {
+    "defaultMessage": "Empresa",
+    "description": "The name of the Company Objectives page, located at \"/objectives/company\""
+  },
   "ui441M": {
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
@@ -278,6 +282,10 @@
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
+  },
+  "xfeZtN": {
+    "defaultMessage": "Time",
+    "description": "The name of the Team Objectives page, located at \"/objectives/team\""
   },
   "y6z1c3": {
     "defaultMessage": "Data de fim",

@@ -29,7 +29,14 @@ const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
 
   return (
     <IntlLink href={href}>
-      <Box bg="gray.50" borderRadius="15px" py={12} px={10}>
+      <Box
+        bg="gray.50"
+        borderRadius="15px"
+        py={12}
+        px={10}
+        transition="0.4s all ease-out"
+        _hover={{ bg: 'white', boxShadow: 'md', transform: 'scale(1.03)' }}
+      >
         <Flex direction="column" gridGap={6} maxW="90%">
           {isCompany && (
             <CrownIcon
