@@ -1,20 +1,27 @@
+import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { IntlProvider } from 'react-intl'
 import { OptionalIntlConfig } from 'react-intl/src/components/provider'
 import { useSetRecoilState } from 'recoil'
 
-import { intlLocaleAtom } from 'src/state/recoil/intl'
+import { intlLocaleAtom, currentNextRoute } from 'src/state/recoil/intl'
 
 export interface RecoilIntlProviderProperties extends OptionalIntlConfig {
   children?: ReactElement
 }
 
 const RecoilIntlProvider = (properties: RecoilIntlProviderProperties): ReactElement => {
-  const setRecoilIntl = useSetRecoilState(intlLocaleAtom)
+  const router = useRouter()
+  const setIntl = useSetRecoilState(intlLocaleAtom)
+  const setCurrentNextRoute = useSetRecoilState(currentNextRoute)
 
   useEffect(() => {
-    setRecoilIntl(properties.locale)
-  }, [setRecoilIntl, properties.locale])
+    setIntl(properties.locale)
+  }, [setIntl, properties.locale])
+
+  useEffect(() => {
+    setCurrentNextRoute(router.pathname)
+  }, [setCurrentNextRoute, router.pathname])
 
   return <IntlProvider {...properties} />
 }

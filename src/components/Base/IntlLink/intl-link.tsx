@@ -1,8 +1,9 @@
 import Link, { LinkProps } from 'next/link'
+import { useRouter } from 'next/router'
 import React, { ReactElement, forwardRef, RefObject, MouseEvent } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { intlRouteAtom } from 'src/state/recoil/intl'
+import { selectRouteBasedOnLocale } from 'src/state/recoil/intl/selectors'
 
 export interface IntlLinkProperties extends LinkProps {
   href: string
@@ -31,10 +32,15 @@ const ReferenceWrapper = forwardRef(
 )
 
 const IntlLink = ({ href, children, ...rest }: IntlLinkProperties) => {
-  const intlRoute = useRecoilValue(intlRouteAtom(href))
+  const router = useRouter()
+  const intlRouteSelector = selectRouteBasedOnLocale(href)
+  const intlRoute = useRecoilValue(intlRouteSelector)
+
+  const isHrefAbsolute = href?.startsWith('/') || href?.startsWith('http')
+  const absoluteHref = isHrefAbsolute ? href : [router.pathname, href].join('/')
 
   return (
-    <Link passHref href={href} as={intlRoute} {...rest}>
+    <Link passHref href={absoluteHref} as={intlRoute} {...rest}>
       <ReferenceWrapper>{children}</ReferenceWrapper>
     </Link>
   )

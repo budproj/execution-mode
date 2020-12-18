@@ -43,6 +43,30 @@ describe('component customizations', () => {
 
     expect(name.text()).toEqual(fakeName)
   })
+
+  it('uses company link if is a company', () => {
+    const fakeID = faker.random.word()
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.returns({})
+
+    const result = enzyme.shallow(<TeamCard isCompany id={fakeID} />)
+
+    const linkComponent = result.find('IntlLink')
+
+    expect(linkComponent.prop('href')).toEqual(`company/${fakeID}`)
+  })
+
+  it('uses team link if is a team', () => {
+    const fakeID = faker.random.word()
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.returns({})
+
+    const result = enzyme.shallow(<TeamCard id={fakeID} />)
+
+    const linkComponent = result.find('IntlLink')
+
+    expect(linkComponent.prop('href')).toEqual(`team/${fakeID}`)
+  })
 })
 
 describe('component expectations', () => {
