@@ -3,7 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { Slider } from 'src/components/Base'
+import { DynamicAvatarGroup, Slider } from 'src/components/Base'
 import CrownIcon from 'src/components/Icons/Crown'
 import { Team } from 'src/components/Team/types'
 import { companyAtomFamily } from 'src/state/recoil/company'
@@ -27,7 +27,7 @@ const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
   const isLoaded = Boolean(team)
 
   return (
-    <Box bg="gray.50" borderRadius="15px" py={6} px={10}>
+    <Box bg="gray.50" borderRadius="15px" py={12} px={10}>
       <Flex direction="column" gridGap={6} maxW="90%">
         {isCompany && (
           <CrownIcon
@@ -54,6 +54,10 @@ const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
             trackColor={confidenceTag.color}
           />
         </Skeleton>
+
+        <Box pt={12}>
+          <DynamicAvatarGroup users={team?.users} isLoaded={isLoaded} />
+        </Box>
       </Flex>
     </Box>
   )

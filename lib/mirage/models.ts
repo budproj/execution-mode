@@ -28,6 +28,7 @@ const models = {
   company: Model.extend({
     teams: hasMany(),
     cycles: hasMany(),
+    users: hasMany(),
   }),
   cycle: Model.extend({
     company: belongsTo(),

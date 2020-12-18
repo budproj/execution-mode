@@ -340,6 +340,9 @@ type Company {
 
   """The computed current confidence of this company"""
   currentConfidence: Int
+
+  """A creation date ordered list of users that are members of this company"""
+  users: [User!]!
 }
 
 """Common shared object values between multiple report types"""

@@ -5,12 +5,9 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
     description
     currentProgress
     currentConfidence
-    teams {
-      keyResults {
-        owner {
-          picture
-        }
-      }
+    users {
+      name
+      picture
     }
   }
 
@@ -20,12 +17,9 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
     description
     currentProgress
     currentConfidence
-    teams {
-      keyResults {
-        owner {
-          picture
-        }
-      }
+    users {
+      name
+      picture
     }
   }
 }

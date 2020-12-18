@@ -29,3 +29,5 @@ export { default as Slider } from './Slider'
 export { default as SelectMenu } from './SelectMenu'
 
 export { default as InputWithLoader } from './InputWithLoader'
+
+export { default as DynamicAvatarGroup } from './DynamicAvatarGroup'

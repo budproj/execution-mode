@@ -20,6 +20,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const teams = server.createList('team', 3, { company, parentTeam: rootTeam })
   rootTeam.update('teams', teams as any)
   const user = server.create('user', { teams })
+  const otherUsers = server.createList('user', 5, { teams } as any)
   const cycle = server.create('cycle', { company })
   const objectives = server.createList('objective', 3, { cycle })
   const keyResults = server.createList('keyResult', 10, {
@@ -43,6 +44,11 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult: () => pickRandomModel(keyResults),
   })
 
+  const users = [user, ...otherUsers]
+  company.update('users', users as any)
+  rootTeam.update('users', users as any)
+  teams.map((team) => team.update('users', users as any))
+
   logger.debug('Inserted fake data on MirageJS server', {
     data: {
       company,
@@ -56,6 +62,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       progressReports,
       confidenceReports,
       policies,
+      otherUsers,
     },
   })
 }
