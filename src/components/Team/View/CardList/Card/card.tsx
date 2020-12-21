@@ -37,21 +37,22 @@ const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
         transition="0.4s all ease-out"
         _hover={{ bg: 'white', boxShadow: 'md', transform: 'scale(1.03)' }}
       >
-        <Flex direction="column" gridGap={6} maxW="90%">
-          {isCompany && (
-            <CrownIcon
-              title={intl.formatMessage(messages.crownIconTitle)}
-              desc={intl.formatMessage(messages.crownIconDesc)}
-              w="34px"
-              h="auto"
-              position="absolute"
-            />
-          )}
-          <Skeleton isLoaded={isLoaded} mt={8} w="80%" minH="40px">
-            <Heading size="lg">{team?.name}</Heading>
-          </Skeleton>
+        <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
+          <Flex flexGrow={1} direction="column" justifyContent="flex-end">
+            {isCompany && (
+              <CrownIcon
+                title={intl.formatMessage(messages.crownIconTitle)}
+                desc={intl.formatMessage(messages.crownIconDesc)}
+                w="34px"
+                h="auto"
+              />
+            )}
+            <Skeleton isLoaded={isLoaded} mt={2} w="80%" minH="40px">
+              <Heading size="lg">{team?.name}</Heading>
+            </Skeleton>
+          </Flex>
 
-          <SkeletonText isLoaded={isLoaded} noOfLines={2}>
+          <SkeletonText isLoaded={isLoaded} noOfLines={2} spacing="4">
             <Text color="gray.400">{team?.description}</Text>
           </SkeletonText>
 
