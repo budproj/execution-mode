@@ -12,6 +12,7 @@ export interface Tag {
   message: MessageDescriptor
   desc: MessageDescriptor
   color: string
+  bgColor: string
 }
 
 export const CONFIDENCE_UPDATED = {
@@ -49,16 +50,19 @@ export const getConfidenceTagBasedOnValue = (
       message: confidenceTagMessages.upToDate,
       desc: confidenceTagMessages.iconDescUpToDate,
       color: 'green.500',
+      bgColor: 'green.100',
     },
     [CONFIDENCE_AT_RISK.max]: {
       message: confidenceTagMessages.atRisk,
       desc: confidenceTagMessages.iconDescAtRisk,
       color: 'yellow.500',
+      bgColor: 'yellow.100',
     },
     [CONFIDENCE_OUTDATED.max]: {
       message: confidenceTagMessages.overdue,
       desc: confidenceTagMessages.iconDescOverdue,
       color: 'red.500',
+      bgColor: 'red.100',
     },
   }
 

@@ -58,4 +58,6 @@ export { default as Voice } from './Voice'
 
 export { default as Wallet } from './Wallet'
 
+export { default as CalendarOutline } from './CalendarOutline'
+
 export * from './types'

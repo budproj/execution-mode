@@ -20,9 +20,11 @@ describe('component lifecycle', () => {
       team: {
         teams: [
           {
+            id: faker.random.word(),
             objectives: [objectiveOne, objectiveTwo],
           },
           {
+            id: faker.random.word(),
             objectives: [objectiveThree],
           },
         ],
@@ -50,9 +52,11 @@ describe('component lifecycle', () => {
       team: {
         teams: [
           {
+            id: faker.random.word(),
             objectives: [objectiveOne, objectiveTwo, objectiveThree],
           },
           {
+            id: faker.random.word(),
             objectives: [objectiveThree, objectiveOne],
           },
         ],
@@ -89,5 +93,15 @@ describe('component lifecycle', () => {
     enzyme.shallow(<ChildTeamsObjectives rootTeamId={faker.random.word()} />)
 
     expect(spy.notCalled).toEqual(true)
+  })
+
+  it('shows the skeleton if no objectives are yet loaded', () => {
+    sinon.stub(apollo, 'useQuery').returns({ loading: false } as any)
+
+    const result = enzyme.shallow(<ChildTeamsObjectives rootTeamId={faker.random.word()} />)
+
+    const skeleton = result.find('ChildTeamsObjectivesSkeleton')
+
+    expect(skeleton.length).toEqual(1)
   })
 })

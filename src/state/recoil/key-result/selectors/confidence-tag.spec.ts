@@ -14,6 +14,7 @@ describe('confidence tag getter', () => {
       message: confidenceTagMessages.upToDate,
       desc: confidenceTagMessages.iconDescUpToDate,
       color: 'green.500',
+      bgColor: 'green.100',
     }
 
     expect(result).toEqual(expectedTag)
@@ -29,6 +30,7 @@ describe('confidence tag getter', () => {
       message: confidenceTagMessages.atRisk,
       desc: confidenceTagMessages.iconDescAtRisk,
       color: 'yellow.500',
+      bgColor: 'yellow.100',
     }
 
     expect(result).toEqual(expectedTag)
@@ -44,6 +46,7 @@ describe('confidence tag getter', () => {
       message: confidenceTagMessages.overdue,
       desc: confidenceTagMessages.iconDescOverdue,
       color: 'red.500',
+      bgColor: 'red.100',
     }
 
     expect(result).toEqual(expectedTag)
@@ -58,6 +61,7 @@ describe('confidence tag getter', () => {
       message: confidenceTagMessages.upToDate,
       desc: confidenceTagMessages.iconDescUpToDate,
       color: 'green.500',
+      bgColor: 'green.100',
     }
 
     expect(result).toEqual(expectedTag)

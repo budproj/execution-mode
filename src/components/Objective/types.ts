@@ -1,5 +1,5 @@
 import { Cycle } from 'src/components/Cycle/types'
-import { KeyResult } from 'src/components/KeyResult/types'
+import { ConfidenceReport, KeyResult, ProgressReport } from 'src/components/KeyResult/types'
 
 export interface Objective {
   id: string
@@ -8,4 +8,6 @@ export interface Objective {
   updatedAt: Date
   cycle: Cycle
   keyResults?: KeyResult[]
+  currentProgress?: ProgressReport['valueNew']
+  currentConfidence?: ConfidenceReport['valueNew']
 }

@@ -7,6 +7,10 @@
     "defaultMessage": "Atualizar",
     "description": "This message is displayed in a tooltip above the SliderThumb on our sliders"
   },
+  "/2GFGI": {
+    "defaultMessage": "O prazo deste objetivo",
+    "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
+  },
   "/VrdI0": {
     "defaultMessage": "Um ícone de pasta",
     "description": "The desc message for the Folder icon. This icon is used to ilustrate our key results"
@@ -162,6 +166,10 @@
   "Sn7K6v": {
     "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
     "description": "The alternative text explaining our notification bell icon"
+  },
+  "SpAXmO": {
+    "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
+    "description": "The alternative text explaining our calendar icon in the objective accordion item"
   },
   "UBruoq": {
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
