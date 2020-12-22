@@ -8,7 +8,7 @@ import { GetRootTeamsAndCompaniesQueryData } from 'src/components/Team/types'
 import CompanyCards from './company-cards'
 import TeamCards from './team-cards'
 
-const TeamViewCardList = () => {
+const TeamCardList = () => {
   const { data, loading } = useQuery<GetRootTeamsAndCompaniesQueryData>(
     queries.GET_ROOT_TEAMS_AND_COMPANIES,
   )
@@ -21,4 +21,4 @@ const TeamViewCardList = () => {
   )
 }
 
-export default TeamViewCardList
+export default TeamCardList

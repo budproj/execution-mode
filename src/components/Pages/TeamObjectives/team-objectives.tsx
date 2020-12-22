@@ -30,7 +30,7 @@ const TeamObjectives = ({ teamId, isCompany }: TeamObjectivesProperties) => {
 
   useEffect(() => {
     if (!data && loading) setPageTitle('')
-  }, [data, loading])
+  }, [data, loading, setPageTitle])
 
   useEffect(() => {
     if (!loading && data) setPageTitle(data[key].name)

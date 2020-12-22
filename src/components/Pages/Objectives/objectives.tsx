@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import PageContent from 'src/components/Base/PageContent'
-import { TeamViewCardList } from 'src/components/Team/View'
+import TeamCardList from 'src/components/Team/CardList'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
@@ -18,7 +18,7 @@ const KeyResultsPage = () => {
 
   return (
     <PageContent>
-      <TeamViewCardList />
+      <TeamCardList />
     </PageContent>
   )
 }
