@@ -27,6 +27,7 @@ query GET_ROOT_TEAMS_AND_COMPANIES {
 query GET_CHILD_TEAMS_OBJECTIVES($rootTeamId: ID!) {
   team(id: $rootTeamId) {
     teams {
+      id
       name
       objectives {
         id
