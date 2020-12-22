@@ -12,6 +12,8 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 export interface KeyResultListBodyColumnTitleProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
+  withRightBorder?: boolean
+  withDynamicIcon?: boolean
 }
 
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
@@ -20,6 +22,8 @@ const teamSelector = buildPartialSelector<KeyResult['team']>('team')
 const KeyResultListBodyColumnTitle = ({
   id,
   borderColor,
+  withRightBorder,
+  withDynamicIcon,
 }: KeyResultListBodyColumnTitleProperties): ReactElement => {
   const title = useRecoilValue(titleSelector(id))
   const team = useRecoilValue(teamSelector(id))
@@ -30,19 +34,21 @@ const KeyResultListBodyColumnTitle = ({
   return (
     <KeyResultListBodyColumnBase
       px={0}
-      borderRight={1}
+      borderRight={withRightBorder ? 1 : 0}
       borderColor={borderColor}
       borderStyle="solid"
     >
       <Flex gridGap={4} alignItems="center">
-        <Skeleton
-          borderRadius={10}
-          isLoaded={isTitleLoaded}
-          fadeDuration={0}
-          /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-        >
-          <KeyResultDynamicIcon title={title} />
-        </Skeleton>
+        {withDynamicIcon && (
+          <Skeleton
+            borderRadius={10}
+            isLoaded={isTitleLoaded}
+            fadeDuration={0}
+            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+          >
+            <KeyResultDynamicIcon title={title} />
+          </Skeleton>
+        )}
 
         <Box>
           <Skeleton

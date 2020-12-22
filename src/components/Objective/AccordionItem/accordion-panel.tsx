@@ -2,6 +2,8 @@ import { useLazyQuery } from '@apollo/client'
 import { AccordionPanel } from '@chakra-ui/react'
 import React, { useCallback, useEffect } from 'react'
 
+import KeyResultList from 'src/components/KeyResult/List'
+import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 import queries from 'src/components/Objective/queries.gql'
 import { GetObjectiveKeyResultsQuery, Objective } from 'src/components/Objective/types'
@@ -25,7 +27,6 @@ const ObjectiveAccordionPanel = ({
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const keyResultIDs = data?.objective?.keyResults?.map((keyResult) => keyResult.id)
   const isLoaded = Boolean(keyResultIDs)
-  console.log(isLoaded)
 
   const updateObjective = useCallback(() => {
     loadObjective(data?.objective)
@@ -54,7 +55,21 @@ const ObjectiveAccordionPanel = ({
 
   return (
     <AccordionPanel>
-      <p>Ok</p>
+      {isLoaded && isExpanded ? (
+        <KeyResultList
+          keyResultIDs={keyResultIDs}
+          templateColumns="2fr 1fr 2fr 1fr 1fr"
+          columns={[
+            KeyResultListBodyColumn.TITLE,
+            KeyResultListBodyColumn.STATUS,
+            KeyResultListBodyColumn.PROGRESS,
+            KeyResultListBodyColumn.CYCLE,
+            KeyResultListBodyColumn.OWNER,
+          ]}
+        />
+      ) : (
+        <p>Loading...</p>
+      )}
     </AccordionPanel>
   )
 }

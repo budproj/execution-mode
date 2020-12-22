@@ -1,4 +1,4 @@
-import { KeyResultListBodyColumn } from './types'
+import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
 
 export const LIST_TEMPLATE_COLUMN_DEFAULT = '5fr 4fr 4fr 3fr 3fr 1fr'
 

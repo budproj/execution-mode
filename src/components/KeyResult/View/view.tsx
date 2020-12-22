@@ -15,6 +15,7 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultViewAtom } from 'src/state/recoil/key-result/view'
 
+import { KeyResultListBodyColumn } from '../List/Body/Columns/types'
 import { KeyResultListType } from '../List/types'
 
 export interface KeyResultViewProperties extends BoxProps {
@@ -79,6 +80,12 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
       handleDragEnd={handleDragEnd}
       type={KeyResultListType.DND}
       keyResultIDs={keyResultView?.rank}
+      columnsProperties={{
+        [KeyResultListBodyColumn.TITLE]: {
+          withDynamicIcon: true,
+          withRightBorder: true,
+        },
+      }}
       onLineClick={onLineClick}
       {...rest}
     />

@@ -14,6 +14,12 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
       team {
         name
       }
+      objective {
+        cycle {
+          dateStart
+          dateEnd
+        }
+      }
     }
   }
 }

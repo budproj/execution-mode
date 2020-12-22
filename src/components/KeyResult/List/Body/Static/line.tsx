@@ -1,4 +1,4 @@
-import { GridProps } from '@chakra-ui/react'
+import { Grid, GridProps } from '@chakra-ui/react'
 import React from 'react'
 
 import {
@@ -9,30 +9,31 @@ import {
   KeyResultListBodyColumnStatus,
   KeyResultListBodyColumnTitle,
 } from 'src/components/KeyResult/List/Body/Columns'
-import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/types'
+import {
+  KeyResultListBodyColumn,
+  KeyResultListBodyColumnsProperties,
+} from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
-import DraggableGrid from './draggable-grid'
-
-export interface KeyResultListBodyDragAndDropLineProperties {
-  keyResultID: KeyResult['id']
-  index: number
+export interface KeyResultListBodyStaticLineProperties {
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
   columns: KeyResultListBodyColumn[]
+  columnsProperties: KeyResultListBodyColumnsProperties
   onLineClick?: (id: KeyResult['id']) => void
+  keyResultID?: KeyResult['id']
 }
 
-const KeyResultListDragAndDropLine = ({
+const KeyResultListBodyStaticLine = ({
   keyResultID,
-  index,
   onLineClick,
   templateColumns,
   borderColor,
   columns,
-}: KeyResultListBodyDragAndDropLineProperties) => {
+  columnsProperties,
+}: KeyResultListBodyStaticLineProperties) => {
   const handleLineClick = () => {
-    if (onLineClick) onLineClick(keyResultID)
+    if (onLineClick && keyResultID) onLineClick(keyResultID)
   }
 
   const columnComponents = {
@@ -45,33 +46,35 @@ const KeyResultListDragAndDropLine = ({
   }
 
   return (
-    <DraggableGrid
-      keyResultID={keyResultID}
+    <Grid
       templateColumns={templateColumns}
       border={0}
       borderBottomWidth={1}
-      index={index}
       alignItems="center"
       borderColor="transparent"
       borderBottomColor={borderColor}
       borderStyle="solid"
-      _hover={{ background: 'blue.50' }}
+      _hover={onLineClick ? { background: 'blue.50' } : {}}
       cursor={onLineClick ? 'pointer' : 'auto'}
       onClick={handleLineClick}
     >
       {columns.map((column) => {
         const ColumnComponent = columnComponents[column]
+        const columnProperties = columnsProperties[column]
 
         return (
           <ColumnComponent
-            key={`KEY_RESULT_LIST_BODY_DRAG_AND_DROP_LINE_${keyResultID}_COLUMN_${column}`}
+            key={`KEY_RESULT_LIST_BODY_STATIC_LINE_${
+              keyResultID ?? Math.random()
+            }_COLUMN_${column}`}
             id={keyResultID}
             borderColor={borderColor}
+            {...columnProperties}
           />
         )
       })}
-    </DraggableGrid>
+    </Grid>
   )
 }
 
-export default KeyResultListDragAndDropLine
+export default KeyResultListBodyStaticLine

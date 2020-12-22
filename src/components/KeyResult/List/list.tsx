@@ -3,16 +3,21 @@ import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 
 import logger from 'lib/logger'
+import {
+  KeyResultListBodyColumn,
+  KeyResultListBodyColumnsProperties,
+} from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 import KeyResultListBody from './Body'
 import KeyResultListBodySkeleton from './Body/Skeleton'
 import KeyResultListHead from './Head'
 import { BORDER_COLOR_DEFAULT, COLUMNS_DEFAULT, LIST_TEMPLATE_COLUMN_DEFAULT } from './constants'
-import { KeyResultListBodyColumn, KeyResultListType } from './types'
+import { KeyResultListType } from './types'
 
 export interface KeyResultListProperties extends BoxProps {
   columns: KeyResultListBodyColumn[]
+  columnsProperties: KeyResultListBodyColumnsProperties
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
   type: KeyResultListType
@@ -29,6 +34,7 @@ const KeyResultList = ({
   templateColumns,
   borderColor,
   columns,
+  columnsProperties,
   ...rest
 }: KeyResultListProperties): ReactElement => {
   const throwHandleDragEndError = () => {
@@ -51,6 +57,7 @@ const KeyResultList = ({
           type={type}
           columns={columns}
           templateColumns={templateColumns}
+          columnsProperties={columnsProperties}
           borderColor={borderColor}
           keyResultIDs={keyResultIDs}
           handleDragEnd={handleDragEnd ?? throwHandleDragEndError}
@@ -61,6 +68,7 @@ const KeyResultList = ({
           columns={columns}
           borderColor={borderColor}
           templateColumns={templateColumns}
+          columnsProperties={columnsProperties}
         />
       )}
     </Box>
@@ -74,6 +82,7 @@ KeyResultList.defaultProps = {
   templateColumns: LIST_TEMPLATE_COLUMN_DEFAULT,
   borderColor: BORDER_COLOR_DEFAULT,
   columns: COLUMNS_DEFAULT,
+  columnsProperties: {},
 }
 
 export default KeyResultList

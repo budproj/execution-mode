@@ -2,7 +2,7 @@ import { Grid, GridItem, GridProps, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import { KeyResultListBodyColumn } from '../types'
+import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
 
 import messages from './messages'
 
