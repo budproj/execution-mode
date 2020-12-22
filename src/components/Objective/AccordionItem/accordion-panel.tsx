@@ -4,7 +4,7 @@ import React, { useCallback, useEffect } from 'react'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import queries from 'src/components/Objective/queries.gql'
-import { Objective } from 'src/components/Objective/types'
+import { GetObjectiveKeyResultsQuery, Objective } from 'src/components/Objective/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
@@ -18,21 +18,24 @@ const ObjectiveAccordionPanel = ({
   isExpanded,
   objectiveID,
 }: ObjectiveAccordionPanelProperties) => {
-  const [fetchObjective, { data, loading, called }] = useLazyQuery(
+  const [fetchObjective, { data, loading, called }] = useLazyQuery<GetObjectiveKeyResultsQuery>(
     queries.GET_OBJECTIVE_KEY_RESULTS,
   )
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
+  const keyResultIDs = data?.objective?.keyResults?.map((keyResult) => keyResult.id)
+  const isLoaded = Boolean(keyResultIDs)
+  console.log(isLoaded)
 
   const updateObjective = useCallback(() => {
-    loadObjective(data.objective)
+    loadObjective(data?.objective)
     // If we add the "loadObjective" in our deps it starts an infinite loop upon execution, since
     // it changes on every render
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   const updateKeyResults = useCallback(() => {
-    loadKeyResults(data.objective.keyResults)
+    loadKeyResults(data?.objective?.keyResults)
     // If we add the "loadKeyResults" in our deps it starts an infinite loop upon execution, since
     // it changes on every render
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,7 +52,11 @@ const ObjectiveAccordionPanel = ({
     }
   }, [loading, data, updateObjective, updateKeyResults])
 
-  return <AccordionPanel>Ok</AccordionPanel>
+  return (
+    <AccordionPanel>
+      <p>Ok</p>
+    </AccordionPanel>
+  )
 }
 
 export default ObjectiveAccordionPanel
