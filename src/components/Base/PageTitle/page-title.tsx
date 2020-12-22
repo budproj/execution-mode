@@ -6,10 +6,10 @@ import { pageTitleAtom } from 'src/state/recoil/page'
 
 const PageTitle = (): ReactElement => {
   const pageTitle = useRecoilValue(pageTitleAtom)
-  const isPageTitleLoaded = Boolean(pageTitle)
+  const isLoaded = Boolean(pageTitle && pageTitle !== '')
 
   return (
-    <Skeleton isLoaded={isPageTitleLoaded}>
+    <Skeleton isLoaded={isLoaded} minH={isLoaded ? 'auto' : '57px'}>
       <Heading as="h1" fontSize="5xl" color="gray.700" fontWeight="500">
         {pageTitle}
       </Heading>

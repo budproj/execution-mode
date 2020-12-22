@@ -28,7 +28,11 @@ const TeamObjectives = ({ teamId, isCompany }: TeamObjectivesProperties) => {
     isCompany ? companyAtomFamily : teamAtomFamily,
   )
 
-  useEffect((): void => {
+  useEffect(() => {
+    if (!data && loading) setPageTitle('')
+  }, [data, loading])
+
+  useEffect(() => {
     if (!loading && data) setPageTitle(data[key].name)
   }, [loading, data, key, setPageTitle])
 
