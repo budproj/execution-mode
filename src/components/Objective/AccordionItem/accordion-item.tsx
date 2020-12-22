@@ -20,12 +20,16 @@ const ObjectiveAccordionItem = ({ objectiveID }: ObjectiveAccordionItemPropertie
 
   return (
     <AccordionItem border="none" bg="white" boxShadow="sm" p={4}>
-      <ObjectiveAccordionButton
-        objective={objective}
-        confidenceTag={confidenceTag}
-        isLoaded={isLoaded}
-      />
-      <ObjectiveAccordionPanel />
+      {({ isExpanded }) => (
+        <>
+          <ObjectiveAccordionButton
+            objective={objective}
+            confidenceTag={confidenceTag}
+            isLoaded={isLoaded}
+          />
+          <ObjectiveAccordionPanel isExpanded={isExpanded} objectiveID={objectiveID} />
+        </>
+      )}
     </AccordionItem>
   )
 }

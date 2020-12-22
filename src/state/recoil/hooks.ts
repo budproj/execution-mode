@@ -1,3 +1,4 @@
+import deepmerge from 'deepmerge'
 import { RecoilState, useRecoilCallback } from 'recoil'
 
 import { Objective } from 'src/components/Objective/types'
@@ -8,7 +9,7 @@ import { RecoilInterfaceCallback } from './types'
 type RecoilEntity = Partial<Team> | Partial<Objective> | undefined
 type RecoilEntityParameterKey = 'id'
 type RecoilFamilyParameter = Team['id']
-type RecoilFamily<E> = (parameter?: RecoilFamilyParameter) => RecoilState<E | undefined>
+type RecoilFamily<E> = (parameter?: RecoilFamilyParameter) => RecoilState<Partial<E>>
 
 export function useRecoilFamilyLoader<E extends RecoilEntity>(
   family: RecoilFamily<E>,
@@ -23,15 +24,18 @@ export function useRecoilFamilyLoader<E extends RecoilEntity>(
 export const buildFamilyLoader = <E extends RecoilEntity>(
   family: RecoilFamily<E>,
   parameter: RecoilEntityParameterKey,
-) => ({ set }: RecoilInterfaceCallback) => (initialData?: E | E[]) => {
-  if (!initialData) return
+) => ({ snapshot, set }: RecoilInterfaceCallback) => (data?: E | E[]) => {
+  if (!data) return
 
   const loadOnRecoil = (singleData: E) => {
     if (!singleData) return
 
     const atom = family(singleData[parameter])
-    return set(atom, singleData)
+    const originalValue = snapshot.getLoadable(atom).getValue()
+    const newValue = deepmerge(originalValue, singleData)
+
+    return set(atom, newValue)
   }
 
-  return Array.isArray(initialData) ? initialData.map(loadOnRecoil) : loadOnRecoil(initialData)
+  return Array.isArray(data) ? data.map(loadOnRecoil) : loadOnRecoil(data)
 }

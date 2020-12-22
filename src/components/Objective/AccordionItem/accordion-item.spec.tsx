@@ -18,7 +18,10 @@ describe('component data layer', () => {
     const stub = sinon.stub(recoil, 'useRecoilValue')
     stub.withArgs(objectiveAtomMatcher).returns(fakeObjective)
 
-    const result = enzyme.shallow(<ObjectiveAccordionItem />)
+    const result = enzyme
+      .shallow(<ObjectiveAccordionItem />)
+      .find('AccordionItem')
+      .renderProp('children')({} as never)
 
     const accordionButton = result.find('ObjectiveAccordionButton')
 
@@ -34,7 +37,10 @@ describe('component data layer', () => {
     const stub = sinon.stub(recoil, 'useRecoilValue')
     stub.withArgs(confidenceTagMatcher).returns(fakeTag)
 
-    const result = enzyme.shallow(<ObjectiveAccordionItem />)
+    const result = enzyme
+      .shallow(<ObjectiveAccordionItem />)
+      .find('AccordionItem')
+      .renderProp('children')({} as never)
 
     const accordionButton = result.find('ObjectiveAccordionButton')
 
@@ -50,7 +56,10 @@ describe('component data layer', () => {
     const stub = sinon.stub(recoil, 'useRecoilValue')
     stub.withArgs(objectiveAtomMatcher).returns(fakeObjective)
 
-    const result = enzyme.shallow(<ObjectiveAccordionItem />)
+    const result = enzyme
+      .shallow(<ObjectiveAccordionItem />)
+      .find('AccordionItem')
+      .renderProp('children')({} as never)
 
     const accordionButton = result.find('ObjectiveAccordionButton')
 
@@ -59,10 +68,27 @@ describe('component data layer', () => {
 
   it('consider as "not loaded" if we do not have an objective and notify the accordion button', () => {
     sinon.stub(recoil, 'useRecoilValue')
-    const result = enzyme.shallow(<ObjectiveAccordionItem />)
+    const result = enzyme
+      .shallow(<ObjectiveAccordionItem />)
+      .find('AccordionItem')
+      .renderProp('children')({} as never)
 
     const accordionButton = result.find('ObjectiveAccordionButton')
 
     expect(accordionButton.prop('isLoaded')).toEqual(false)
+  })
+
+  it('tells the panel if the current accordion is expanded', () => {
+    const fakeExpanded = faker.random.boolean()
+
+    sinon.stub(recoil, 'useRecoilValue')
+    const result = enzyme
+      .shallow(<ObjectiveAccordionItem />)
+      .find('AccordionItem')
+      .renderProp('children')({ isExpanded: fakeExpanded } as never)
+
+    const accordionPanel = result.find('ObjectiveAccordionPanel')
+
+    expect(accordionPanel.prop('isExpanded')).toEqual(fakeExpanded)
   })
 })

@@ -4,6 +4,7 @@ import { Registry, Server } from 'miragejs'
 import logger from 'lib/logger'
 import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
+import { ProgressReport } from 'src/components/KeyResult/types'
 import getConfig from 'src/config'
 
 import { buildKeyResultView, buildProgressReport } from './builders'
@@ -51,6 +52,12 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   teams.map((team) => {
     team.update('users', users as any)
     team.update('objectives', objectives as any)
+  })
+
+  keyResults.map((keyResult) => {
+    const latestProgressReport = keyResult.progressReports.models[0] as ProgressReport
+
+    return keyResult.update('currentProgress', latestProgressReport?.valueNew ?? 0)
   })
 
   logger.debug('Inserted fake data on MirageJS server', {

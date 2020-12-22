@@ -246,6 +246,12 @@ type KeyResult {
   Group of policies regarding given key result. Those policies decribe actions that your user can perform with that given resource
   """
   policies: Policies!
+
+  """The latest reported current progress of this key result"""
+  currentProgress: Float
+
+  """The latest reported current confidence of this key result"""
+  currentConfidence: Float
 }
 
 """A group of key results that has the same focus"""
@@ -398,11 +404,11 @@ type KeyResultView {
 type Query {
   confidenceReport(id: ID!): ConfidenceReport!
   progressReport(id: ID!): ProgressReport!
-  objective(id: ID!): Objective!
   company(id: ID!): Company!
   companies: [Company!]
   cycle(id: ID!): Cycle!
   keyResult(id: ID!): KeyResult!
+  objective(id: ID!): Objective!
   team(id: ID!): Team!
   teams(parentTeamId: ID): [Team!]
   user(id: ID!): User!

@@ -49,7 +49,7 @@ const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) =>
       {isLoaded ? (
         data?.team?.teams.map((team: Team) => (
           <ObjectiveGroup
-            key={team.id}
+            key={team.id ?? Math.random()}
             groupTitle={team.name}
             objectiveIDs={team.objectives?.map((objective) => objective.id)}
           />

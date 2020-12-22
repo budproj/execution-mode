@@ -8,6 +8,8 @@ export default Factory.extend({
   title: faker.company.catchPhrase,
   description: faker.lorem.paragraph,
   format: () => sample(Object.values(KeyResultFormat)),
+  currentConfidence: () => faker.random.number({ max: 100 }),
+  currentProgress: 0,
   createdAt: faker.date.past,
   updatedAt: faker.date.past,
 
