@@ -3,7 +3,7 @@ import React from 'react'
 
 import {
   KeyResultListBodyColumn,
-  KeyResultListBodyColumnsProperties,
+  KeyResultListBodyProperties,
 } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
@@ -14,7 +14,7 @@ export interface KeyResultListBodyStaticProperties {
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
   columns: KeyResultListBodyColumn[]
-  columnsProperties: KeyResultListBodyColumnsProperties
+  bodyProperties: KeyResultListBodyProperties
   onLineClick?: (id: KeyResult['id']) => void
 }
 

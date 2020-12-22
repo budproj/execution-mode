@@ -58,6 +58,8 @@ export interface KeyResult {
   progressReports?: ProgressReport[]
   confidenceReports?: ConfidenceReport[]
   policies?: UserPolicies
+  currentProgress?: ProgressReport['valueNew']
+  currentConfidence?: ConfidenceReport['valueNew']
 }
 
 export type KeyResultsHashmap = Record<string, KeyResult>

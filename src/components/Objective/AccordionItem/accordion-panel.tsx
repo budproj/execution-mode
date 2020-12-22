@@ -58,14 +58,20 @@ const ObjectiveAccordionPanel = ({
       {isLoaded && isExpanded ? (
         <KeyResultList
           keyResultIDs={keyResultIDs}
-          templateColumns="2fr 1fr 2fr 1fr 1fr"
+          templateColumns="0.1fr 2fr 1fr 2fr 1fr 1fr"
           columns={[
+            KeyResultListBodyColumn.STATUS_COLOR,
             KeyResultListBodyColumn.TITLE,
             KeyResultListBodyColumn.STATUS,
             KeyResultListBodyColumn.PROGRESS,
             KeyResultListBodyColumn.CYCLE,
             KeyResultListBodyColumn.OWNER,
           ]}
+          headProperties={{
+            [KeyResultListBodyColumn.STATUS_COLOR]: {
+              hidden: true,
+            },
+          }}
         />
       ) : (
         <p>Loading...</p>

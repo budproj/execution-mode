@@ -33,7 +33,6 @@ const KeyResultListBodyColumnTitle = ({
 
   return (
     <KeyResultListBodyColumnBase
-      px={0}
       borderRight={withRightBorder ? 1 : 0}
       borderColor={borderColor}
       borderStyle="solid"

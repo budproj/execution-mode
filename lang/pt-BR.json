@@ -231,6 +231,10 @@
     "defaultMessage": "Progresso",
     "description": "The text of the table head related to the Progress column"
   },
+  "keLWnT": {
+    "defaultMessage": "Cor do Status",
+    "description": "The text of the table head related to the Status color column"
+  },
   "khbEZF": {
     "defaultMessage": "Minhas Key Results",
     "description": "The page title that our users should see in the key results page"

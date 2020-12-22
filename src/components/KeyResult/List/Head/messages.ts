@@ -7,6 +7,7 @@ type KeyResultListHeadMessages =
   | 'listHeadProgress'
   | 'listHeadDate'
   | 'listHeadOwner'
+  | 'listHeadStatusColor'
 
 export default defineMessages({
   listHeadTitle: {
@@ -43,5 +44,11 @@ export default defineMessages({
     defaultMessage: 'Proprietário',
     id: 'BlDXcz',
     description: 'The text of the table head related to the Owner column',
+  },
+
+  listHeadStatusColor: {
+    defaultMessage: 'Cor do Status',
+    id: 'keLWnT',
+    description: 'The text of the table head related to the Status color column',
   },
 }) as Record<KeyResultListHeadMessages, MessageDescriptor>

@@ -9,3 +9,5 @@ export { default as KeyResultListBodyColumnProgress } from './Progress'
 export { default as KeyResultListBodyColumnTitle } from './Title'
 
 export { default as KeyResultListBodyColumnStatus } from './Status'
+
+export { default as KeyResultListBodyColumnStatusColor } from './StatusColor'

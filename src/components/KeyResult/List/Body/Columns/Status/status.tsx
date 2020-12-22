@@ -15,6 +15,7 @@ import messages from './messages'
 export interface KeyResultListBodyColumnStatusProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
+  withLastUpdateInfo?: boolean
 }
 
 const confidenceReportsSelector = buildPartialSelector<KeyResult['confidenceReports']>(
@@ -23,6 +24,7 @@ const confidenceReportsSelector = buildPartialSelector<KeyResult['confidenceRepo
 
 const KeyResultListBodyColumnStatus = ({
   id,
+  withLastUpdateInfo,
 }: KeyResultListBodyColumnStatusProperties): ReactElement => {
   const intl = useIntl()
   const latestConfidenceReport = useRecoilValue(confidenceReportsSelector(id))?.[0]
@@ -41,21 +43,23 @@ const KeyResultListBodyColumnStatus = ({
           <ConfidenceTag confidenceValue={latestConfidenceReport?.valueNew} />
         </Skeleton>
 
-        <SkeletonText
-          noOfLines={2}
-          minW="100%"
-          mt={isKeyResultLoaded ? 'inherit' : '4px'}
-          isLoaded={isKeyResultLoaded}
-          pl={8}
-        >
-          <Text color="gray.300" fontSize="14px">
-            {intl.formatMessage(messages.updatedAt)} -{' '}
-            {intl.formatDate(updateDate, {
-              day: 'numeric',
-              month: 'short',
-            })}
-          </Text>
-        </SkeletonText>
+        {withLastUpdateInfo && (
+          <SkeletonText
+            noOfLines={2}
+            minW="100%"
+            mt={isKeyResultLoaded ? 'inherit' : '4px'}
+            isLoaded={isKeyResultLoaded}
+            pl={8}
+          >
+            <Text color="gray.300" fontSize="14px">
+              {intl.formatMessage(messages.updatedAt)} -{' '}
+              {intl.formatDate(updateDate, {
+                day: 'numeric',
+                month: 'short',
+              })}
+            </Text>
+          </SkeletonText>
+        )}
       </Flex>
     </KeyResultListBodyColumnBase>
   )

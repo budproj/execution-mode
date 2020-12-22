@@ -80,10 +80,13 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
       handleDragEnd={handleDragEnd}
       type={KeyResultListType.DND}
       keyResultIDs={keyResultView?.rank}
-      columnsProperties={{
+      bodyProperties={{
         [KeyResultListBodyColumn.TITLE]: {
           withDynamicIcon: true,
           withRightBorder: true,
+        },
+        [KeyResultListBodyColumn.STATUS]: {
+          withLastUpdateInfo: true,
         },
       }}
       onLineClick={onLineClick}

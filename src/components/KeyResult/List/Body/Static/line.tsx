@@ -7,11 +7,12 @@ import {
   KeyResultListBodyColumnOwner,
   KeyResultListBodyColumnProgress,
   KeyResultListBodyColumnStatus,
+  KeyResultListBodyColumnStatusColor,
   KeyResultListBodyColumnTitle,
 } from 'src/components/KeyResult/List/Body/Columns'
 import {
   KeyResultListBodyColumn,
-  KeyResultListBodyColumnsProperties,
+  KeyResultListBodyProperties,
 } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
@@ -19,7 +20,7 @@ export interface KeyResultListBodyStaticLineProperties {
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
   columns: KeyResultListBodyColumn[]
-  columnsProperties: KeyResultListBodyColumnsProperties
+  bodyProperties: KeyResultListBodyProperties
   onLineClick?: (id: KeyResult['id']) => void
   keyResultID?: KeyResult['id']
 }
@@ -30,7 +31,7 @@ const KeyResultListBodyStaticLine = ({
   templateColumns,
   borderColor,
   columns,
-  columnsProperties,
+  bodyProperties,
 }: KeyResultListBodyStaticLineProperties) => {
   const handleLineClick = () => {
     if (onLineClick && keyResultID) onLineClick(keyResultID)
@@ -43,6 +44,7 @@ const KeyResultListBodyStaticLine = ({
     [KeyResultListBodyColumn.PROGRESS]: KeyResultListBodyColumnProgress,
     [KeyResultListBodyColumn.CYCLE]: KeyResultListBodyColumnCycle,
     [KeyResultListBodyColumn.OWNER]: KeyResultListBodyColumnOwner,
+    [KeyResultListBodyColumn.STATUS_COLOR]: KeyResultListBodyColumnStatusColor,
   }
 
   return (
@@ -54,13 +56,13 @@ const KeyResultListBodyStaticLine = ({
       borderColor="transparent"
       borderBottomColor={borderColor}
       borderStyle="solid"
-      _hover={onLineClick ? { background: 'blue.50' } : {}}
       cursor={onLineClick ? 'pointer' : 'auto'}
+      _hover={onLineClick ? { background: 'blue.50' } : {}}
       onClick={handleLineClick}
     >
       {columns.map((column) => {
         const ColumnComponent = columnComponents[column]
-        const columnProperties = columnsProperties[column]
+        const columnProperties = bodyProperties[column]
 
         return (
           <ColumnComponent
