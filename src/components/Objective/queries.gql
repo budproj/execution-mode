@@ -2,6 +2,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
   objective(id: $objectiveID) {
     id
     keyResults {
+      id
       title
       format
       currentConfidence

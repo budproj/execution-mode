@@ -1,12 +1,13 @@
 import deepmerge from 'deepmerge'
 import { RecoilState, useRecoilCallback } from 'recoil'
 
+import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 
 import { RecoilInterfaceCallback } from './types'
 
-type RecoilEntity = Partial<Team> | Partial<Objective> | undefined
+type RecoilEntity = Partial<Team> | Partial<Objective> | Partial<KeyResult> | undefined
 type RecoilEntityParameterKey = 'id'
 type RecoilFamilyParameter = Team['id']
 type RecoilFamily<E> = (parameter?: RecoilFamilyParameter) => RecoilState<Partial<E>>
