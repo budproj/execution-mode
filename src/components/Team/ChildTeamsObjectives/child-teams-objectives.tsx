@@ -30,9 +30,7 @@ const parseObjectives = (rootTeam?: Team) => {
 }
 
 const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) => {
-  const loadObjectivesOnRecoil = useRecoilFamilyLoader<Partial<Objective | undefined>>(
-    objectiveAtomFamily,
-  )
+  const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const { data, loading } = useQuery(queries.GET_CHILD_TEAMS_OBJECTIVES, {
     variables: { rootTeamId },
   })

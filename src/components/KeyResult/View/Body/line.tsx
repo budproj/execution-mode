@@ -1,9 +1,6 @@
-import React, { ReactElement, useEffect } from 'react'
-import { useRecoilState } from 'recoil'
+import React, { ReactElement } from 'react'
 
-import logger from 'lib/logger'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
 
 import { BORDER_COLOR, GRID_TEMPLATE_COLUMN } from '../constants'
 
@@ -18,36 +15,14 @@ import {
 import DraggableGrid from './draggable-grid'
 import SkeletonLine from './skeleton/line'
 
-const component = 'KeyResultViewBodyLine'
-
 export interface LineProperties {
   id: KeyResult['id']
-  remoteKeyResult: KeyResult
   index: number
+  isLoaded?: boolean
   onLineClick?: (id: KeyResult['id']) => void
 }
 
-const KeyResultViewLine = ({
-  id,
-  index,
-  remoteKeyResult,
-  onLineClick,
-}: LineProperties): ReactElement => {
-  const [keyResult, setKeyResult] = useRecoilState(selectKeyResult(id))
-
-  useEffect(() => {
-    if (!keyResult && remoteKeyResult) setKeyResult(remoteKeyResult)
-  }, [keyResult, remoteKeyResult, setKeyResult])
-
-  logger.debug('Rerendered Key Result View body line. Take a look at our new data:', {
-    component,
-    data: {
-      keyResult,
-    },
-  })
-
-  const isLoaded = typeof keyResult !== 'undefined'
-
+const KeyResultViewLine = ({ id, index, isLoaded, onLineClick }: LineProperties): ReactElement => {
   const handleLineClick = () => {
     if (onLineClick) onLineClick(id)
   }

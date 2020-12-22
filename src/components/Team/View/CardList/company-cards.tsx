@@ -12,7 +12,7 @@ export interface CompanyCardsProperties {
 }
 
 const CompanyCards = ({ companies, isLoading }: CompanyCardsProperties) => {
-  const loadCompaniesOnRecoil = useRecoilFamilyLoader<Partial<Company>>(companyAtomFamily)
+  const loadCompaniesOnRecoil = useRecoilFamilyLoader<Company>(companyAtomFamily)
 
   useEffect(() => {
     if (companies) loadCompaniesOnRecoil(companies)

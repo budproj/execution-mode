@@ -21,8 +21,8 @@ const ObjectiveAccordionPanel = ({
   const [fetchObjective, { data, loading, called }] = useLazyQuery(
     queries.GET_OBJECTIVE_KEY_RESULTS,
   )
-  const loadObjective = useRecoilFamilyLoader<Partial<Objective> | undefined>(objectiveAtomFamily)
-  const loadKeyResults = useRecoilFamilyLoader<Partial<KeyResult> | undefined>(keyResultAtomFamily)
+  const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
+  const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
 
   const updateObjective = useCallback(() => {
     loadObjective(data.objective)

@@ -12,7 +12,7 @@ export interface TeamCardsProperties {
 }
 
 const TeamCards = ({ teams, isLoading }: TeamCardsProperties) => {
-  const loadTeamsOnRecoil = useRecoilFamilyLoader<Partial<Team>>(teamAtomFamily)
+  const loadTeamsOnRecoil = useRecoilFamilyLoader<Team>(teamAtomFamily)
 
   useEffect(() => {
     if (teams) loadTeamsOnRecoil(teams)

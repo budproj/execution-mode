@@ -24,7 +24,7 @@ const TeamObjectives = ({ teamId, isCompany }: TeamObjectivesProperties) => {
 
   const setPageTitle = useSetRecoilState(pageTitleAtom)
   const { data, loading } = useQuery(query, { variables })
-  const loadTeamOnRecoil = useRecoilFamilyLoader<Partial<Team>>(
+  const loadTeamOnRecoil = useRecoilFamilyLoader<Team>(
     isCompany ? companyAtomFamily : teamAtomFamily,
   )
 

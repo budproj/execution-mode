@@ -6,6 +6,8 @@ import { useRecoilState } from 'recoil'
 import logger from 'lib/logger'
 import queries from 'src/components/KeyResult/queries.gql'
 import { KeyResult, KeyResultView, KeyResultViewBinding } from 'src/components/KeyResult/types'
+import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultViewAtom } from 'src/state/recoil/key-result/view'
 
 import DroppableBox from './droppable-box'
@@ -20,6 +22,7 @@ export interface KeyResultViewBodyProperties {
 
 const KeyResultViewBody = ({ onLineClick }: KeyResultViewBodyProperties): ReactElement => {
   const [keyResultView, setKeyResultView] = useRecoilState(keyResultViewAtom)
+  const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [updateRank] = useMutation(queries.UPDATE_RANK)
   const [getKeyResultViewForBinding, { loading, data, called }] = useLazyQuery(
     queries.KEY_RESULT_VIEW_WITH_BINDING,
@@ -46,6 +49,10 @@ const KeyResultViewBody = ({ onLineClick }: KeyResultViewBodyProperties): ReactE
         },
       })
   }, [called, getKeyResultViewForBinding])
+
+  useEffect(() => {
+    if (data) loadKeyResults(data.keyResultView.keyResults)
+  }, [data, loadKeyResults])
 
   const handleRankUpdate = async (
     from: DraggableLocation['index'],
@@ -82,7 +89,7 @@ const KeyResultViewBody = ({ onLineClick }: KeyResultViewBodyProperties): ReactE
           key={`KEY_RESULT_VIEW_LINE-${keyResultID}`}
           id={keyResultID}
           index={index}
-          remoteKeyResult={data.keyResultView.keyResults[index]}
+          isLoaded={called && !loading}
           onLineClick={onLineClick}
         />
       ))}

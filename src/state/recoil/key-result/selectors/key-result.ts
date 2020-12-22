@@ -22,7 +22,10 @@ export const updateKeyResult = (id?: KeyResult['id']) => (
   set(atom, newValue)
 }
 
-export const selectKeyResult = selectorFamily<KeyResult | undefined, KeyResult['id'] | undefined>({
+export const selectKeyResult = selectorFamily<
+  Partial<KeyResult> | undefined,
+  KeyResult['id'] | undefined
+>({
   key: KEY,
   get: (id) => ({ get }) => get(keyResultAtomFamily(id)),
   set: updateKeyResult,
