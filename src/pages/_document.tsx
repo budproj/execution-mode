@@ -18,6 +18,12 @@ class BudDocument extends Document<BudDocumentProperties> {
         <body>
           <Main />
           <NextScript />
+          <script
+            data-jsd-embedded
+            data-key="92b6f657-8095-4d1e-b6a9-1800fa5b344e"
+            data-base-url="https://jsd-widget.atlassian.com/"
+            src="https://jsd-widget.atlassian.com/assets/embed.js"
+          />
         </body>
       </Html>
     )

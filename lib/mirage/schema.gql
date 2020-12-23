@@ -2,41 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""A report that records new confidence in a given key result"""
-type ConfidenceReport {
-  """The ID of your report"""
-  id: ID!
-
-  """The value of the latest previous report"""
-  valuePrevious: Int
-
-  """The last value reported"""
-  valueNew: Int!
-
-  """The comment in the report"""
-  comment: String
-
-  """The creation date of the report"""
-  createdAt: DateTime!
-
-  """The key result ID that this report is related to"""
-  keyResultId: ID!
-
-  """The key result that this report relates to"""
-  keyResult: KeyResult!
-
-  """The user ID that owns this report"""
-  userId: ID!
-
-  """The user that owns this report"""
-  user: User!
-}
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 """A report that records new progress in a given key result"""
 type ProgressReport {
   """The ID of your report"""
@@ -66,6 +31,11 @@ type ProgressReport {
   """The user that owns this report"""
   user: User!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 """
 User is an entity inside a given company. It is associated with many teams, progress reports, and others.
@@ -136,6 +106,36 @@ enum UserPolicy {
   DENY
 }
 
+"""A report that records new confidence in a given key result"""
+type ConfidenceReport {
+  """The ID of your report"""
+  id: ID!
+
+  """The value of the latest previous report"""
+  valuePrevious: Int
+
+  """The last value reported"""
+  valueNew: Int!
+
+  """The comment in the report"""
+  comment: String
+
+  """The creation date of the report"""
+  createdAt: DateTime!
+
+  """The key result ID that this report is related to"""
+  keyResultId: ID!
+
+  """The key result that this report relates to"""
+  keyResult: KeyResult!
+
+  """The user ID that owns this report"""
+  userId: ID!
+
+  """The user that owns this report"""
+  user: User!
+}
+
 """A collection of users for a given company"""
 type Team {
   """The ID of the team"""
@@ -143,6 +143,9 @@ type Team {
 
   """The name of the team"""
   name: String!
+
+  """The description about the team"""
+  description: String
 
   """The creation date of the team"""
   createdAt: DateTime!
@@ -169,6 +172,22 @@ type Team {
 
   """The user that owns this team"""
   owner: Company!
+
+  """The ID of the team that owns this team"""
+  parentTeamId: ID
+
+  """The team that owns this team"""
+  parentTeam: Team
+  teams: [Team!]!
+
+  """The computed percentage current progress of this team"""
+  currentProgress: Float
+
+  """The computed current confidence of this team"""
+  currentConfidence: Float
+
+  """The created ordered list of objectives in this team"""
+  objectives: [Objective!]
 }
 
 """A goal that is created for the team focusing in a given team objective"""
@@ -227,6 +246,12 @@ type KeyResult {
   Group of policies regarding given key result. Those policies decribe actions that your user can perform with that given resource
   """
   policies: Policies!
+
+  """The latest reported current progress of this key result"""
+  currentProgress: Float
+
+  """The latest reported current confidence of this key result"""
+  currentConfidence: Float
 }
 
 """A group of key results that has the same focus"""
@@ -259,6 +284,12 @@ type Objective {
 
   """The user that owns this objective"""
   owner: User!
+
+  """The computed percentage current progress of this objective"""
+  currentProgress: Float
+
+  """The computed current confidence of this objective"""
+  currentConfidence: Float
 }
 
 """
@@ -298,6 +329,9 @@ type Company {
   """The name of the company"""
   name: String!
 
+  """The description of the company"""
+  description: String
+
   """The creation date of the company"""
   createdAt: DateTime!
 
@@ -315,6 +349,15 @@ type Company {
 
   """The user that this company belongs to"""
   owner: User!
+
+  """The computed percentage current progress of this company"""
+  currentProgress: Float
+
+  """The computed current confidence of this company"""
+  currentConfidence: Float
+
+  """A creation date ordered list of users that are members of this company"""
+  users: [User!]!
 }
 
 """Common shared object values between multiple report types"""
@@ -359,13 +402,15 @@ type KeyResultView {
 }
 
 type Query {
-  company(id: ID!): Company!
-  cycle(id: ID!): Cycle!
   confidenceReport(id: ID!): ConfidenceReport!
   progressReport(id: ID!): ProgressReport!
+  company(id: ID!): Company!
+  companies: [Company!]
+  cycle(id: ID!): Cycle!
   keyResult(id: ID!): KeyResult!
   objective(id: ID!): Objective!
   team(id: ID!): Team!
+  teams(parentTeamId: ID): [Team!]
   user(id: ID!): User!
   me: User!
   keyResultView(binding: KeyResultViewBinding, id: ID): KeyResultView!

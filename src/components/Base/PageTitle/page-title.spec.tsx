@@ -19,4 +19,14 @@ describe('state layer interaction', () => {
 
     expect(renderedTitle.text()).toEqual(fakeTitle)
   })
+
+  it('considers that we are loading the title if it is an empty string', () => {
+    sinon.stub(recoil, 'useRecoilValue').returns('')
+
+    const result = enzyme.shallow(<PageTitle />)
+
+    const skeleton = result.find('Skeleton')
+
+    expect(skeleton.prop('isLoaded')).toEqual(false)
+  })
 })

@@ -28,6 +28,7 @@ const models = {
   company: Model.extend({
     teams: hasMany(),
     cycles: hasMany(),
+    users: hasMany(),
   }),
   cycle: Model.extend({
     company: belongsTo(),
@@ -37,6 +38,10 @@ const models = {
     keyResults: hasMany(),
     company: belongsTo(),
     users: hasMany(),
+    teams: hasMany(),
+    objectives: hasMany(),
+    // eslint-disable-next-line unicorn/no-null
+    parentTeam: belongsTo('team', { inverse: null }),
   }),
   user: Model.extend({
     keyResults: hasMany(),

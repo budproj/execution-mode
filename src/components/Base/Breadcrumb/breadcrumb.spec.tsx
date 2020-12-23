@@ -1,5 +1,6 @@
 import enzyme from 'enzyme'
 import faker from 'faker'
+import { startCase } from 'lodash'
 import { NextRouter } from 'next/dist/next-server/lib/router/router'
 import * as router from 'next/router'
 import React from 'react'
@@ -126,6 +127,55 @@ describe('component rendering expectations', () => {
     const expectedRelativeLabelForIndex: Record<number, string> = {
       1: 'Minhas Key Result',
       2: 'Morty',
+    }
+
+    blocks.map((block, index) => {
+      if (index === 0) return // The first block is always "Home"
+
+      const label = block.find('IntlLink').prop('children')
+      return expect(label).toEqual(expectedRelativeLabelForIndex[index])
+    })
+  })
+
+  it('renders a dynamic step with provided dynamic data', () => {
+    const fakeRouter = {
+      pathname: '/key-results/morty/[id]',
+    }
+    const fakeDynamicParameters = {
+      id: faker.random.word(),
+    }
+    sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
+
+    const result = enzyme.shallow(<Breadcrumb routeParams={fakeDynamicParameters} />)
+
+    const blocks = result.find('BreadcrumbItem')
+    const expectedRelativeLabelForIndex: Record<number, string> = {
+      1: 'Minhas Key Result',
+      2: 'Morty',
+      3: startCase(fakeDynamicParameters.id),
+    }
+
+    blocks.map((block, index) => {
+      if (index === 0) return // The first block is always "Home"
+
+      const label = block.find('IntlLink').prop('children')
+      return expect(label).toEqual(expectedRelativeLabelForIndex[index])
+    })
+  })
+
+  it('renders the dynamic step name normalized if no dynamic data was provided', () => {
+    const fakeRouter = {
+      pathname: '/key-results/morty/[id]',
+    }
+    sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
+
+    const result = enzyme.shallow(<Breadcrumb />)
+
+    const blocks = result.find('BreadcrumbItem')
+    const expectedRelativeLabelForIndex: Record<number, string> = {
+      1: 'Minhas Key Result',
+      2: 'Morty',
+      3: 'Id',
     }
 
     blocks.map((block, index) => {

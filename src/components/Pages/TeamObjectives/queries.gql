@@ -1,0 +1,13 @@
+query GET_COMPANY_NAME($companyId: ID!) {
+  company(id: $companyId) {
+    id
+    name
+  }
+}
+
+query GET_TEAM_NAME($teamId: ID!) {
+  team(id: $teamId) {
+    id
+    name
+  }
+}

@@ -10,25 +10,30 @@ import {
   KeyResultSingleDescription,
   KeyResultSingleCheckIn,
 } from 'src/components/KeyResult/Single'
-import queries from 'src/components/KeyResult/queries.gql'
+import KeyResultSingleCycle from 'src/components/KeyResult/Single/Cycle'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
 
-import KeyResultSingleCycle from '../Cycle'
+import { KeyResult } from '../../types'
 
 import KeyResultDrawerHeader from './Header'
+import queries from './queries.gql'
+
+export interface GetKeyResultWithIDQuery {
+  keyResult: Partial<KeyResult>
+}
 
 const KeyResultDrawer = () => {
   const [keyResultID, setKeyResultID] = useRecoilState(keyResultOpenDrawer)
   const [keyResult, setKeyResult] = useRecoilState(selectKeyResult(keyResultID))
-  const [getKeyResult, { loading, data, called, variables }] = useLazyQuery(
-    queries.GET_KEY_RESULT_WITH_ID,
-    {
-      variables: {
-        id: keyResultID,
-      },
+  const [
+    getKeyResult,
+    { loading, data, called, variables },
+  ] = useLazyQuery<GetKeyResultWithIDQuery>(queries.GET_KEY_RESULT_WITH_ID, {
+    variables: {
+      id: keyResultID,
     },
-  )
+  })
 
   // eslint-disable-next-line unicorn/no-useless-undefined
   const handleClose = () => setKeyResultID(undefined)

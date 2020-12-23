@@ -76,7 +76,7 @@ type FontTokens = {
 }
 
 const colors: ColorTokens = {
-  gray50: '#F5F8F9',
+  gray50: '#F5F8FC',
   gray100: '#DDE5EE',
   gray200: '#CBCFD9',
   gray300: '#B8C5D4',

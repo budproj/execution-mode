@@ -2,7 +2,7 @@ import { selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultFormat } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
-import { RecoilSpecificationGetter } from 'src/state/recoil/types'
+import { RecoilInterfaceGetter } from 'src/state/recoil/types'
 
 import { PREFIX } from './constants'
 
@@ -12,7 +12,7 @@ const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
 export const getStepBasedOnID = (id?: KeyResult['id']) => ({
   get,
-}: RecoilSpecificationGetter): number => {
+}: RecoilInterfaceGetter): number => {
   const format = get(formatSelector(id))
   const defaultStep = 1
 

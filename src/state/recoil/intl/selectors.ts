@@ -2,9 +2,10 @@ import { selectorFamily } from 'recoil'
 
 import getConfig, { Locale, Route } from 'src/config'
 
-import { RecoilSpecificationGetter } from '../types'
+import { RecoilInterfaceGetter } from '../types'
 
 import { PREFIX } from './constants'
+import currentNextRouteAtom from './current-next-route'
 import localeAtom from './locale'
 
 const KEY = `${PREFIX}::SELECTORS`
@@ -17,7 +18,31 @@ type IntlRouteGroup = Record<Locale, IntlRoute['source']>
 
 type IntlRouteTree = Record<string, IntlRouteGroup>
 
-const selectCurrentRoute = (): string => window.location.pathname
+export const getRouteBasedOnLocale = (route: string) => ({
+  get,
+}: RecoilInterfaceGetter): string => {
+  const locale = get(localeAtom)
+  if (!locale) return route
+
+  const { publicRuntimeConfig } = getConfig()
+
+  const currentRoute = get(currentNextRouteAtom)
+  if (!currentRoute) return route
+
+  const absoluteRoute = selectAbsoluteRoute(route, currentRoute)
+  const intlRoute = buildIntlRoute(locale, absoluteRoute, route, publicRuntimeConfig.intlRoutes)
+  const staticIntlRoute = parseDynamicRoute(intlRoute, route)
+
+  return staticIntlRoute
+}
+
+export const selectRouteBasedOnLocale = selectorFamily<
+  string,
+  SelectIntlRouteBasedOnRouteParameter
+>({
+  key: `${KEY}::ROUTE::BASED_ON_LOCALE`,
+  get: getRouteBasedOnLocale,
+})
 
 export const selectAbsoluteRoute = (route: string, currentRoute: string): string =>
   isAbsoluteRoute(route) ? route : transformRelativeRouteToAbsolute(route, currentRoute)
@@ -25,7 +50,7 @@ export const selectAbsoluteRoute = (route: string, currentRoute: string): string
 const isAbsoluteRoute = (route: string): boolean => route.startsWith('/')
 
 const transformRelativeRouteToAbsolute = (route: string, currentRoute: string): string => {
-  const parentRouteParts = currentRoute.split('/').slice(0, -1)
+  const parentRouteParts = currentRoute.split('/')
   const absoluteRouteParts = [...(parentRouteParts ?? []), route]
   const absoluteRoute = (absoluteRouteParts ?? []).join('/')
 
@@ -44,6 +69,34 @@ const groupByDestination = (intlRoutes: Route[]): IntlRouteTree =>
     {},
   )
 
+const makeDynamicRoutesStatic = (
+  intlRouteTree: IntlRouteTree,
+  relativeRoute: string,
+): IntlRouteTree => {
+  const intlRouteTreeEntries = Object.entries(intlRouteTree)
+  const staticRouteTreeEntries = intlRouteTreeEntries.map(([key, value]) => [
+    parseDynamicRoute(key, relativeRoute),
+    value,
+  ])
+  const staticRouteTree = Object.fromEntries(staticRouteTreeEntries)
+
+  return staticRouteTree
+}
+
+const parseDynamicRoute = (route: string, staticValue: string) => {
+  const routeParts = route.split('/').slice(1)
+  const staticValueParts = staticValue.split('/')
+
+  const dynamicValue = staticValueParts.pop() ?? ''
+  const parameter = routeParts.pop()
+  const isDynamic = parameter?.[0] === ':'
+
+  const newRouteParts = [undefined, ...routeParts, isDynamic ? dynamicValue : parameter]
+  const staticRoute = newRouteParts.join('/')
+
+  return staticRoute
+}
+
 const selectRouteGroup = (
   absoluteRoute: string,
   intlRouteTree: IntlRouteTree,
@@ -52,43 +105,19 @@ const selectRouteGroup = (
 const selectIntlRoute = (locale: Locale | string, intlRouteGroup: IntlRouteGroup): string =>
   intlRouteGroup[locale as Locale]
 
-const removeLocalePrefix = (locale: Locale | string, route: string): string =>
-  route.replace(`/${locale}`, '')
-
 const buildIntlRoute = (
   locale: Locale | string,
   absoluteRoute: string,
+  relativeRoute: string,
   intlRoutes: Route[],
 ): string => {
   const intlRouteTree = groupByDestination(intlRoutes)
-  const intlRouteGroup = selectRouteGroup(absoluteRoute, intlRouteTree)
+  const intlStaticRouteTree = makeDynamicRoutesStatic(intlRouteTree, relativeRoute)
+  const intlRouteGroup = selectRouteGroup(absoluteRoute, intlStaticRouteTree)
   if (!intlRouteGroup) return absoluteRoute
 
   const intlRoute = selectIntlRoute(locale, intlRouteGroup)
   if (!intlRoute) return absoluteRoute
 
-  const intlRouteWithoutLocale = removeLocalePrefix(locale, intlRoute)
-
-  return intlRouteWithoutLocale
+  return intlRoute
 }
-
-export const selectorSpecification = {
-  key: `${KEY}::ROUTE::BASED_ON_LOCALE`,
-  get: (route: string) => ({ get }: RecoilSpecificationGetter): string => {
-    const locale = get(localeAtom)
-    if (!locale) return route
-
-    const { publicRuntimeConfig } = getConfig()
-
-    const currentRoute = selectCurrentRoute()
-    const absoluteRoute = selectAbsoluteRoute(route, currentRoute)
-    const intlRoute = buildIntlRoute(locale, absoluteRoute, publicRuntimeConfig.intlRoutes)
-
-    return intlRoute
-  },
-}
-
-export const selectRouteBasedOnLocale = selectorFamily<
-  string,
-  SelectIntlRouteBasedOnRouteParameter
->(selectorSpecification)

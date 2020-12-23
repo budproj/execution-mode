@@ -1,7 +1,7 @@
 import { selector } from 'recoil'
 
 import getConfig from 'src/config'
-import { RecoilSpecificationGetter } from 'src/state/recoil/types'
+import { RecoilInterfaceGetter } from 'src/state/recoil/types'
 
 import authzAtom from './atom'
 import { PREFIX } from './constants'
@@ -9,7 +9,7 @@ import { AuthzRolesGroup, AuthzTenantRole, UppercasedEnvironment } from './types
 
 const KEY = `${PREFIX}::SELECTORS`
 
-export const getRoles = ({ get }: RecoilSpecificationGetter) => {
+export const getRoles = ({ get }: RecoilInterfaceGetter) => {
   const { publicRuntimeConfig } = getConfig()
   const uppercasedEnvironment = publicRuntimeConfig.environment.toUpperCase() as UppercasedEnvironment
   const authzTenant = AuthzTenantRole[uppercasedEnvironment]

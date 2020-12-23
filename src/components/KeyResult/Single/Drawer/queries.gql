@@ -1,0 +1,25 @@
+query GET_KEY_RESULT_WITH_ID($id: ID!) {
+  keyResult(id: $id) {
+    id
+    title
+    description
+    goal
+    currentProgress
+    currentConfidence
+    owner {
+      name
+      picture
+    }
+    objective {
+      title
+      cycle {
+        dateStart
+        dateEnd
+        createdAt
+      }
+    }
+    policies {
+      update
+    }
+  }
+}

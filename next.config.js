@@ -47,6 +47,24 @@ const publicRuntimeConfig = {
       destination: '/key-results',
       locale: 'pt-BR',
     },
+
+    {
+      source: '/pt-BR/objetivos',
+      destination: '/objectives',
+      locale: 'pt-BR',
+    },
+
+    {
+      source: '/pt-BR/objetivos/empresa/:id',
+      destination: '/objectives/company/:id',
+      locale: 'pt-BR',
+    },
+
+    {
+      source: '/pt-BR/objetivos/time/:id',
+      destination: '/objectives/team/:id',
+      locale: 'pt-BR',
+    },
   ],
 }
 
@@ -58,16 +76,6 @@ const serverRuntimeConfig = {
 const i18n = {
   locales: serverRuntimeConfig.supportedLocales,
   defaultLocale: publicRuntimeConfig.defaultLocale,
-  domains: [
-    {
-      domain: HOST,
-      defaultLocale: 'pt-BR',
-    },
-    {
-      domain: `en.${HOST}`,
-      defaultLocale: 'en-US',
-    }
-  ]
 }
 
 module.exports = {

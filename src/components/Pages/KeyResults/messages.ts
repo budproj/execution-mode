@@ -5,8 +5,8 @@ type KeyResultsPageMessage = 'pageTitle'
 const messages = defineMessages({
   pageTitle: {
     defaultMessage: 'Minhas Key Results',
-    id: 'tf3MiP',
-    description: 'The page title that our users should see',
+    id: 'khbEZF',
+    description: 'The page title that our users should see in the key results page',
   },
 }) as Record<KeyResultsPageMessage, MessageDescriptor>
 

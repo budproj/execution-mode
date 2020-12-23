@@ -1,0 +1,28 @@
+query GET_TEAM_AND_CHILD_TEAMS_OBJECTIVES($rootTeamId: ID!) {
+  team(id: $rootTeamId) {
+    id
+    name
+    objectives {
+      id
+      title
+      currentProgress
+      currentConfidence
+      cycle {
+        dateEnd
+      }
+    }
+    teams {
+      id
+      name
+      objectives {
+        id
+        title
+        currentProgress
+        currentConfidence
+        cycle {
+          dateEnd
+        }
+      }
+    }
+  }
+}

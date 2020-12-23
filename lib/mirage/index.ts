@@ -20,7 +20,7 @@ export function makeServer(environment: NodeEnvironment) {
       this.urlPrefix = publicRuntimeConfig.api.graphql
 
       this.passthrough((request: Request): boolean | void => {
-        if (request.url.startsWith('https://getbud.us.auth0.com')) {
+        if (request.url.startsWith('https://getbud-develop.us.auth0.com')) {
           return true
         } // Workaround while https://github.com/miragejs/miragejs/issues/708 is not solved
 

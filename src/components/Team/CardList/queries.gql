@@ -1,0 +1,25 @@
+query GET_ROOT_TEAMS_AND_COMPANIES {
+  teams(parentTeamId: null) {
+    id
+    name
+    description
+    currentProgress
+    currentConfidence
+    users {
+      name
+      picture
+    }
+  }
+
+  companies {
+    id
+    name
+    description
+    currentProgress
+    currentConfidence
+    users {
+      name
+      picture
+    }
+  }
+}

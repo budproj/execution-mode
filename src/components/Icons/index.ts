@@ -12,6 +12,8 @@ export { default as Circle } from './Circle'
 
 export { default as Close } from './Close'
 
+export { default as Crown } from './Crown'
+
 export { default as Delete } from './Delete'
 
 export { default as Discovery } from './Discovery'
@@ -55,5 +57,7 @@ export { default as Video } from './Video'
 export { default as Voice } from './Voice'
 
 export { default as Wallet } from './Wallet'
+
+export { default as CalendarOutline } from './CalendarOutline'
 
 export * from './types'

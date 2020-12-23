@@ -1,0 +1,40 @@
+query GET_KEY_RESULT_VIEW_WITH_BINDING($binding: KeyResultViewBinding!) {
+  keyResultView(binding: $binding) {
+    id
+    rank
+    keyResults {
+      id
+      title
+      initialValue
+      goal
+      format
+      currentProgress
+      currentConfidence
+      team {
+        name
+      }
+      objective {
+        title
+        cycle {
+          dateStart
+          dateEnd
+        }
+      }
+      owner {
+        name
+        picture
+        role
+      }
+      confidenceReports(limit: 1) {
+        comment
+        createdAt
+      }
+    }
+  }
+}
+
+mutation UPDATE_RANK($id: ID!, $rankInput: KeyResultViewRankInput!) {
+  updateRank(id: $id, keyResultViewRankInput: $rankInput) {
+    id
+  }
+}
