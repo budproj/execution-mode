@@ -9,6 +9,7 @@ import {
   Text,
   Image,
   SkeletonCircle,
+  Skeleton,
 } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
@@ -22,12 +23,14 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 export interface KeyResultListBodyColumnOwnerProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
+  displayName?: boolean
 }
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 
 const KeyResultListBodyColumnOwner = ({
   id,
+  displayName,
 }: KeyResultListBodyColumnOwnerProperties): ReactElement => {
   const owner = useRecoilValue(ownerSelector(id))
 
@@ -35,16 +38,31 @@ const KeyResultListBodyColumnOwner = ({
 
   return (
     <KeyResultListBodyColumnBase preventLineClick pr={0} display="flex">
-      <SkeletonCircle
-        size="48px"
-        isLoaded={isOwnerLoaded}
-        fadeDuration={0}
-        /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-      >
-        <Popover placement="top-end">
-          <PopoverTrigger>
-            <Avatar name={owner?.name} src={owner?.picture} cursor="pointer" />
-          </PopoverTrigger>
+      <Popover placement="top-end">
+        <PopoverTrigger>
+          <Flex alignItems="center" gridGap={4}>
+            <SkeletonCircle
+              size="48px"
+              isLoaded={isOwnerLoaded}
+              fadeDuration={0}
+              /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+            >
+              <Avatar name={owner?.name} src={owner?.picture} cursor="pointer" />
+            </SkeletonCircle>
+
+            {displayName && (
+              <Skeleton
+                isLoaded={isOwnerLoaded}
+                w={isOwnerLoaded ? 'auto' : '150px'}
+                h={isOwnerLoaded ? 'auto' : '26px'}
+              >
+                <Text>{owner?.name}</Text>
+              </Skeleton>
+            )}
+          </Flex>
+        </PopoverTrigger>
+
+        {isOwnerLoaded && (
           <PopoverContent
             border="none"
             boxShadow="0px 5px 30px rgba(129, 147, 171, 0.2)"
@@ -63,8 +81,8 @@ const KeyResultListBodyColumnOwner = ({
               </Flex>
             </PopoverBody>
           </PopoverContent>
-        </Popover>
-      </SkeletonCircle>
+        )}
+      </Popover>
     </KeyResultListBodyColumnBase>
   )
 }

@@ -69,6 +69,11 @@ const ObjectiveAccordionPanel = ({
               hidden: true,
             },
           }}
+          bodyProperties={{
+            [KeyResultListBodyColumn.OWNER]: {
+              displayName: true,
+            },
+          }}
         />
       )}
     </AccordionPanel>
