@@ -5,6 +5,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     description
     goal
     currentProgress
+    currentConfidence
     owner {
       name
       picture
@@ -16,10 +17,6 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
         dateEnd
         createdAt
       }
-    }
-    confidenceReports(limit: 1) {
-      id
-      valueNew
     }
     policies {
       update

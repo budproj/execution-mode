@@ -6,8 +6,6 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence } from 'src/state/recoil/key-result/progress-update'
-
 import Form, { CheckInFormValues } from './form'
 
 describe('component expectations', () => {
@@ -15,6 +13,10 @@ describe('component expectations', () => {
 
   const selectCurrentProgressMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
     return selector.key.includes('CURRENT_PROGRESS')
+  })
+
+  const selectCurrentConfidenceMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+    return selector.key.includes('CURRENT_CONFIDENCE')
   })
 
   it('uses the current progress as initial value', () => {
@@ -25,6 +27,7 @@ describe('component expectations', () => {
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([])
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
@@ -45,6 +48,7 @@ describe('component expectations', () => {
     stateStub.withArgs(selectCurrentProgressMatcher).returns([faker.random.number(), sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
@@ -75,6 +79,7 @@ describe('component expectations', () => {
     stateStub.withArgs(selectCurrentProgressMatcher).returns([faker.random.number(), spy])
     stateStub.returns([undefined, sinon.fake()])
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
@@ -90,15 +95,16 @@ describe('component expectations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('updates the confidence report state upon form submission', async () => {
+  it('updates the current confidence state upon form submission', async () => {
     const fakeID = faker.random.word()
     const fakeConfidence = faker.random.number()
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     const spy = sinon.spy()
 
-    stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([faker.random.number(), spy])
+    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([faker.random.number(), spy])
     stateStub.returns([undefined, sinon.fake()])
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
@@ -114,6 +120,30 @@ describe('component expectations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
+  it('updates the latest confidence report state upon form submission', async () => {
+    const fakeID = faker.random.word()
+    const fakeConfidence = faker.random.number()
+    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
+    const spy = sinon.spy()
+
+    setStateStub.returns(spy)
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      confidence: fakeConfidence,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({ valueNew: fakeConfidence })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
   it('dispatchs a remote state update action upon form submittion', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
@@ -123,6 +153,7 @@ describe('component expectations', () => {
 
     stateStub.returns([undefined, sinon.fake()])
     sinon.stub(apollo, 'useMutation').returns([spy] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
@@ -155,10 +186,11 @@ describe('component expectations', () => {
     const spy = sinon.spy()
 
     stateStub
-      .withArgs(selectCurrentConfidence(fakeID))
+      .withArgs(selectCurrentConfidenceMatcher)
       .returns([faker.random.number(), sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
 
@@ -182,12 +214,13 @@ describe('component expectations', () => {
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
-    stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
+    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
 
     const spy = sinon.spy()
 
     stateStub.returns([undefined, sinon.fake()])
     sinon.stub(apollo, 'useMutation').returns([spy] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
@@ -207,7 +240,7 @@ describe('component expectations', () => {
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
-    stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
+    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
 
     const spy = sinon.spy()
 
@@ -240,10 +273,11 @@ describe('component expectations', () => {
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, spy])
-    stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
+    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
 
     stateStub.returns([undefined, sinon.fake()])
     sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
@@ -265,10 +299,11 @@ describe('component expectations', () => {
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
-    stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, spy])
+    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, spy])
 
     stateStub.returns([undefined, sinon.fake()])
     sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
@@ -290,10 +325,11 @@ describe('component expectations', () => {
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
-    stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
+    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
 
     stateStub.returns([undefined, sinon.fake()])
     sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
 
@@ -315,10 +351,11 @@ describe('component expectations', () => {
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
-    stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
+    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
 
     stateStub.returns([undefined, sinon.fake()])
     sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
 
@@ -345,10 +382,11 @@ describe('component expectations', () => {
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
-    stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
+    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
 
     stateStub.returns([undefined, sinon.fake()])
     sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
 

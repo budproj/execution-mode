@@ -6,10 +6,12 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import {
   keyResultProgressUpdatePopoverOpen,
   keyResultProgressUpdateDraftValue as draftValueAtom,
-  keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
   keyResultProgressUpdateStep as selectStep,
 } from 'src/state/recoil/key-result/progress-update'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import {
+  buildPartialSelector,
+  selectCurrentConfidence,
+} from 'src/state/recoil/key-result/selectors'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
 export interface ProgressSliderContainerProperties {

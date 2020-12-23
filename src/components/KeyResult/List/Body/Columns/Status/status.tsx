@@ -8,7 +8,10 @@ import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import {
+  selectCurrentConfidence,
+  selectLatestConfidenceReport,
+} from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
@@ -18,16 +21,13 @@ export interface KeyResultListBodyColumnStatusProperties
   withLastUpdateInfo?: boolean
 }
 
-const confidenceReportsSelector = buildPartialSelector<KeyResult['confidenceReports']>(
-  'confidenceReports',
-)
-
 const KeyResultListBodyColumnStatus = ({
   id,
   withLastUpdateInfo,
 }: KeyResultListBodyColumnStatusProperties): ReactElement => {
   const intl = useIntl()
-  const latestConfidenceReport = useRecoilValue(confidenceReportsSelector(id))?.[0]
+  const currentConfidence = useRecoilValue(selectCurrentConfidence(id))
+  const latestConfidenceReport = useRecoilValue(selectLatestConfidenceReport(id))
   const updateDate = latestConfidenceReport?.createdAt
 
   const isKeyResultLoaded = Boolean(id)
@@ -40,7 +40,7 @@ const KeyResultListBodyColumnStatus = ({
           fadeDuration={0}
           /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         >
-          <ConfidenceTag confidenceValue={latestConfidenceReport?.valueNew} />
+          <ConfidenceTag confidenceValue={currentConfidence} />
         </Skeleton>
 
         {withLastUpdateInfo && (

@@ -2,10 +2,13 @@ import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
 import React from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
-import { keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence } from 'src/state/recoil/key-result/progress-update'
+import {
+  selectCurrentConfidence,
+  selectLatestConfidenceReport,
+} from 'src/state/recoil/key-result/selectors'
 import selectCurrentProgress from 'src/state/recoil/key-result/selectors/current-progress'
 
 import { CurrentProgressField, NewProgressField, CurrentConfidenceField, GoalField } from './Fields'
@@ -38,6 +41,7 @@ const CheckInForm = ({
 }: CheckInFormProperties) => {
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
+  const setConfidenceReport = useSetRecoilState(selectLatestConfidenceReport(keyResultID))
   const [createCheckIn, data] = useMutation(queries.CREATE_CHECK_IN)
   const initialValues: CheckInFormValues = {
     currentProgress,
@@ -53,8 +57,12 @@ const CheckInForm = ({
   }
 
   const syncRecoilState = (values: CheckInFormValues) => {
-    if (values.newProgress !== currentProgress) setCurrentProgress(values.newProgress)
-    if (values.confidence !== confidence) setConfidence(values.confidence)
+    if (values.newProgress && values.newProgress !== currentProgress)
+      setCurrentProgress(values.newProgress)
+    if (values.confidence && values.confidence !== confidence) {
+      setConfidence(values.confidence)
+      setConfidenceReport({ valueNew: values.confidence })
+    }
   }
 
   const dispatchRemoteUpdate = async (values: CheckInFormValues) => {

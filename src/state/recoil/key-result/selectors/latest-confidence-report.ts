@@ -7,24 +7,26 @@ import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoi
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::CURRENT_CONFIDENCE`
+const KEY = `${PREFIX}::LATEST_CONFIDENCE_REPORT`
 
 export const selectConfidenceReports = buildPartialSelector<KeyResult['confidenceReports']>(
   'confidenceReports',
 )
 
-export const getCurrentConfidence = (id?: KeyResult['id']) => ({ get }: RecoilInterfaceGetter) => {
+export const getLatestConfidenceReport = (id?: KeyResult['id']) => ({
+  get,
+}: RecoilInterfaceGetter) => {
   if (!id) return
 
   const confidenceReports = get(selectConfidenceReports(id))
   const latestConfidenceReport = confidenceReports?.[0]
 
-  return latestConfidenceReport?.valueNew
+  return latestConfidenceReport
 }
 
-export const setCurrentConfidence = (id?: KeyResult['id']) => (
+export const setLatestConfidenceReport = (id?: KeyResult['id']) => (
   { get, set }: RecoilInterfaceReadWrite,
-  valueNew: ConfidenceReport['valueNew'] | DefaultValue | undefined,
+  newReport: Partial<ConfidenceReport> | DefaultValue | undefined,
 ) => {
   if (!id) return
 
@@ -32,25 +34,24 @@ export const setCurrentConfidence = (id?: KeyResult['id']) => (
 
   const confidenceReports = get(confidenceReportsSelector)
   const latestConfidenceReport = confidenceReports?.[0]
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const newLocalReport = {
-    valueNew,
+    createdAt: new Date(),
     valuePrevious: latestConfidenceReport?.valueNew,
-  }
-  const newConfidenceReports = remove([
-    newLocalReport as ConfidenceReport,
-    ...(confidenceReports ?? []),
-  ])
+    ...newReport,
+  } as ConfidenceReport
+  const newConfidenceReports = remove([newLocalReport, ...(confidenceReports ?? [])])
 
   set(confidenceReportsSelector, newConfidenceReports)
 }
 
 const currentConfidence = selectorFamily<
-  ConfidenceReport['valueNew'] | undefined,
+  Partial<ConfidenceReport> | undefined,
   KeyResult['id'] | undefined
 >({
   key: KEY,
-  get: getCurrentConfidence,
-  set: setCurrentConfidence,
+  get: getLatestConfidenceReport,
+  set: setLatestConfidenceReport,
 })
 
 export default currentConfidence

@@ -9,6 +9,7 @@ query GET_KEY_RESULT_VIEW_WITH_BINDING($binding: KeyResultViewBinding!) {
       goal
       format
       currentProgress
+      currentConfidence
       team {
         name
       }
@@ -25,8 +26,6 @@ query GET_KEY_RESULT_VIEW_WITH_BINDING($binding: KeyResultViewBinding!) {
         role
       }
       confidenceReports(limit: 1) {
-        id
-        valueNew
         comment
         createdAt
       }
