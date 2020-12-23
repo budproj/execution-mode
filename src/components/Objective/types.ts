@@ -11,7 +11,3 @@ export interface Objective {
   currentProgress?: ProgressReport['valueNew']
   currentConfidence?: ConfidenceReport['valueNew']
 }
-
-export interface GetObjectiveKeyResultsQuery {
-  objective: Partial<Objective>
-}

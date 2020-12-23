@@ -7,18 +7,22 @@ import React, { useEffect } from 'react'
 
 import ObjectiveGroup from 'src/components/Objective/Group'
 import { Objective } from 'src/components/Objective/types'
-import queries from 'src/components/Team/queries.gql'
 import { Team } from 'src/components/Team/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
+import queries from './queries.gql'
 import ChildTeamsObjectivesSkeleton from './skeleton'
 
 export interface ChildTeamsObjectivesProperties {
   rootTeamId: Team['id']
 }
 
-const parseObjectives = (rootTeam?: Team) => {
+export interface GetChildTeamsObjectivesQuery {
+  team: Partial<Team>
+}
+
+const parseObjectives = (rootTeam?: Partial<Team>) => {
   if (!rootTeam || !rootTeam?.teams) return
 
   const reducedTeams = rootTeam.teams.map((team) => team.objectives)
@@ -31,9 +35,12 @@ const parseObjectives = (rootTeam?: Team) => {
 
 const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) => {
   const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
-  const { data, loading } = useQuery(queries.GET_CHILD_TEAMS_OBJECTIVES, {
-    variables: { rootTeamId },
-  })
+  const { data, loading } = useQuery<GetChildTeamsObjectivesQuery>(
+    queries.GET_CHILD_TEAMS_OBJECTIVES,
+    {
+      variables: { rootTeamId },
+    },
+  )
 
   const objectives = parseObjectives(data?.team)
   const isLoaded = Boolean(data?.team?.teams)
@@ -45,7 +52,7 @@ const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) =>
   return (
     <Flex gridGap={4} direction="column">
       {isLoaded ? (
-        data?.team?.teams.map((team: Team) => (
+        data?.team?.teams?.map((team: Team) => (
           <ObjectiveGroup
             key={team.id ?? Math.random()}
             groupTitle={team.name}

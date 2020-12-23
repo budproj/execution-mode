@@ -4,7 +4,6 @@ import { Formik, Form, FormikHelpers } from 'formik'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 
-import queries from 'src/components/KeyResult/queries.gql'
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
 import {
   keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
@@ -13,6 +12,7 @@ import {
 
 import { CurrentProgressField, NewProgressField, CurrentConfidenceField, GoalField } from './Fields'
 import Actions from './actions'
+import queries from './queries.gql'
 
 export interface CheckInFormProperties {
   submitOnBlur: boolean

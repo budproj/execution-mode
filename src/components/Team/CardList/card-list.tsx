@@ -2,11 +2,17 @@ import { useQuery } from '@apollo/client'
 import { Grid } from '@chakra-ui/react'
 import React from 'react'
 
-import queries from 'src/components/Team/queries.gql'
-import { GetRootTeamsAndCompaniesQueryData } from 'src/components/Team/types'
+import { Company } from 'src/components/Company/types'
+import { Team } from 'src/components/Team/types'
 
 import CompanyCards from './company-cards'
+import queries from './queries.gql'
 import TeamCards from './team-cards'
+
+export interface GetRootTeamsAndCompaniesQueryData {
+  teams: Array<Partial<Team>>
+  companies: Array<Partial<Company>>
+}
 
 const TeamCardList = () => {
   const { data, loading } = useQuery<GetRootTeamsAndCompaniesQueryData>(

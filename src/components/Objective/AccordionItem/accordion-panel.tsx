@@ -5,15 +5,20 @@ import React, { useCallback, useEffect } from 'react'
 import KeyResultList from 'src/components/KeyResult/List'
 import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
-import queries from 'src/components/Objective/queries.gql'
-import { GetObjectiveKeyResultsQuery, Objective } from 'src/components/Objective/types'
+import { Objective } from 'src/components/Objective/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
+import queries from './queries.gql'
+
 export interface ObjectiveAccordionPanelProperties {
   isExpanded: boolean
   objectiveID?: Objective['id']
+}
+
+export interface GetObjectiveKeyResultsQuery {
+  objective: Partial<Objective>
 }
 
 const ObjectiveAccordionPanel = ({

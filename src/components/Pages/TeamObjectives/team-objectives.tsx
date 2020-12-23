@@ -3,14 +3,14 @@ import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 
 import { PageContent } from 'src/components/Base'
-import companyQueries from 'src/components/Company/queries.gql'
 import ChildTeamsObjectives from 'src/components/Team/ChildTeamsObjectives'
-import teamQueries from 'src/components/Team/queries.gql'
 import { Team } from 'src/components/Team/types'
 import { companyAtomFamily } from 'src/state/recoil/company'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { pageTitleAtom } from 'src/state/recoil/page'
 import { teamAtomFamily } from 'src/state/recoil/team'
+
+import queries from './queries.gql'
 
 export interface TeamObjectivesProperties {
   teamId: Team['id']
@@ -18,7 +18,7 @@ export interface TeamObjectivesProperties {
 }
 
 const TeamObjectives = ({ teamId, isCompany }: TeamObjectivesProperties) => {
-  const query = isCompany ? companyQueries.GET_COMPANY_NAME : teamQueries.GET_TEAM_NAME
+  const query = isCompany ? queries.GET_COMPANY_NAME : queries.GET_TEAM_NAME
   const variables = isCompany ? { companyId: teamId } : { teamId }
   const key = isCompany ? 'company' : 'team'
 

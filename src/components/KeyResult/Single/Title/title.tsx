@@ -4,10 +4,11 @@ import React, { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
-import queries from 'src/components/KeyResult/queries.gql'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { UserPolicy } from 'src/components/User/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+
+import queries from './queries.gql'
 
 export interface KeyResultSingleTitleProperties {
   keyResultID?: KeyResult['id']

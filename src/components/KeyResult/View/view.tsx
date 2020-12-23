@@ -5,7 +5,8 @@ import { DraggableLocation, DropResult } from 'react-beautiful-dnd'
 import { useRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
-import queries from 'src/components/KeyResult/queries.gql'
+import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
+import { KeyResultListType } from 'src/components/KeyResult/List/types'
 import {
   KeyResult,
   KeyResultViewBinding,
@@ -15,20 +16,24 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultViewAtom } from 'src/state/recoil/key-result/view'
 
-import { KeyResultListBodyColumn } from '../List/Body/Columns/types'
-import { KeyResultListType } from '../List/types'
+import queries from './queries.gql'
 
 export interface KeyResultViewProperties extends BoxProps {
   onLineClick?: (id: KeyResult['id']) => void
+}
+
+export interface GetKeyResultViewWithBindingQuery {
+  keyResultView: Partial<KeyResultViewType>
 }
 
 const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): ReactElement => {
   const [keyResultView, setKeyResultView] = useRecoilState(keyResultViewAtom)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [updateRank] = useMutation(queries.UPDATE_RANK)
-  const [getKeyResultViewForBinding, { loading, data, called }] = useLazyQuery(
-    queries.KEY_RESULT_VIEW_WITH_BINDING,
-  )
+  const [
+    getKeyResultViewForBinding,
+    { loading, data, called },
+  ] = useLazyQuery<GetKeyResultViewWithBindingQuery>(queries.GET_KEY_RESULT_VIEW_WITH_BINDING)
 
   const handleRankUpdate = async (
     from: DraggableLocation['index'],

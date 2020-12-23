@@ -4,11 +4,6 @@ import { User } from 'src/components/User/types'
 
 import { Objective } from '../Objective/types'
 
-export interface GetRootTeamsAndCompaniesQueryData {
-  teams: Array<Partial<Team>>
-  companies: Array<Partial<Company>>
-}
-
 export interface Team {
   id: string
   name: string

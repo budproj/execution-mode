@@ -6,7 +6,7 @@ import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::ATOM`
 
-const keyResultViewAtom = atom<KeyResultView | undefined>({
+const keyResultViewAtom = atom<Partial<KeyResultView> | undefined>({
   key: KEY,
   default: undefined,
 })
