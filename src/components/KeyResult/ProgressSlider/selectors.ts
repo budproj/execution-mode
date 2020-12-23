@@ -1,6 +1,4 @@
-import { KeyResult } from 'src/components/KeyResult/types'
-
-import { KeyResultFormat } from '..'
+import { KeyResult, KeyResultFormat } from 'src/components/KeyResult/types'
 
 export const selectProgressStep = (format?: KeyResult['format']): number => {
   const defaultStep = 1
