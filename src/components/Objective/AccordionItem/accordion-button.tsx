@@ -30,6 +30,7 @@ const ObjectiveAccordionButton = ({
   isLoaded,
 }: ObjectiveAccordionButtonProperties) => {
   const intl = useIntl()
+  const roundedProgress = Math.round(objective?.currentProgress ?? 0)
 
   return (
     <AccordionButton gridGap={4} _hover={{}}>
@@ -54,14 +55,14 @@ const ObjectiveAccordionButton = ({
       <Flex flexGrow={1} justifyContent="flex-end">
         <SkeletonCircle isLoaded={isLoaded} size="50px">
           <CircularProgress
-            value={objective?.currentProgress}
+            value={roundedProgress}
             thickness={6}
             color={confidenceTag?.color}
             trackColor={confidenceTag?.bgColor}
             size="55px"
           >
             <CircularProgressLabel color={confidenceTag?.color} fontWeight={700} fontSize="16px">
-              {objective?.currentProgress}%
+              {roundedProgress}%
             </CircularProgressLabel>
           </CircularProgress>
         </SkeletonCircle>
