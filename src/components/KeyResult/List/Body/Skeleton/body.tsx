@@ -8,6 +8,7 @@ import {
 import KeyResultListBodyStaticLine from 'src/components/KeyResult/List/Body/Static/line'
 
 export interface KeyResultListBodySkeletonProperties {
+  listID: string
   amountOfLines: number
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']

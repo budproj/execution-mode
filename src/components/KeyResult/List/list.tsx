@@ -1,4 +1,5 @@
 import { Box, BoxProps, GridProps } from '@chakra-ui/react'
+import uniqueId from 'lodash/uniqueId'
 import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 
@@ -17,6 +18,7 @@ import { BORDER_COLOR_DEFAULT, COLUMNS_DEFAULT, LIST_TEMPLATE_COLUMN_DEFAULT } f
 import { KeyResultListType } from './types'
 
 export interface KeyResultListProperties extends BoxProps {
+  id: string
   columns: KeyResultListBodyColumn[]
   templateColumns: GridProps['templateColumns']
   bodyProperties: KeyResultListBodyProperties
@@ -38,6 +40,7 @@ const KeyResultList = ({
   columns,
   bodyProperties,
   headProperties,
+  id,
   ...rest
 }: KeyResultListProperties): ReactElement => {
   const throwHandleDragEndError = () => {
@@ -58,6 +61,7 @@ const KeyResultList = ({
       />
       {keyResultIDs ? (
         <KeyResultListBody
+          listID={id}
           type={type}
           columns={columns}
           templateColumns={templateColumns}
@@ -69,6 +73,7 @@ const KeyResultList = ({
         />
       ) : (
         <KeyResultListBodySkeleton
+          listID={id}
           columns={columns}
           borderColor={borderColor}
           templateColumns={templateColumns}
@@ -88,6 +93,7 @@ KeyResultList.defaultProps = {
   columns: COLUMNS_DEFAULT,
   bodyProperties: {},
   headProperties: {},
+  id: uniqueId(),
 }
 
 export default KeyResultList

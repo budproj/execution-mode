@@ -3,6 +3,7 @@ import { Flex } from '@chakra-ui/react'
 import flatten from 'lodash/flatten'
 import remove from 'lodash/remove'
 import uniq from 'lodash/uniq'
+import uniqueId from 'lodash/uniqueId'
 import React, { useEffect } from 'react'
 
 import ObjectiveGroup from 'src/components/Objective/Group'
@@ -54,7 +55,7 @@ const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) =>
       {isLoaded ? (
         data?.team?.teams?.map((team: Team) => (
           <ObjectiveGroup
-            key={team.id ?? Math.random()}
+            key={team.id ?? uniqueId()}
             groupTitle={team.name}
             objectiveIDs={team.objectives?.map((objective) => objective.id)}
           />

@@ -1,4 +1,5 @@
 import { Accordion, Box, Heading, Skeleton } from '@chakra-ui/react'
+import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
 import ObjectiveAccordionItem from '../AccordionItem'
@@ -26,9 +27,7 @@ const ObjectiveGroup = ({ groupTitle, objectiveIDs }: ObjectiveGroupProperties) 
         {isLoaded ? (
           objectiveIDs?.map((objectiveID) => (
             <ObjectiveAccordionItem
-              key={`${groupTitle ?? Math.random()}_OBJECTIVE_ACCORDION_${
-                objectiveID ?? Math.random()
-              }`}
+              key={`${groupTitle ?? uniqueId()}_OBJECTIVE_ACCORDION_${objectiveID ?? uniqueId()}`}
               objectiveID={objectiveID}
             />
           ))

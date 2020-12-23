@@ -11,6 +11,7 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import DraggableGrid from './draggable-grid'
 
 export interface KeyResultListBodyDragAndDropLineProperties {
+  listID: string
   keyResultID: KeyResult['id']
   index: number
   templateColumns: GridProps['templateColumns']

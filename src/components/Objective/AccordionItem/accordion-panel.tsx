@@ -1,5 +1,6 @@
 import { useLazyQuery } from '@apollo/client'
 import { AccordionPanel } from '@chakra-ui/react'
+import uniqueId from 'lodash/uniqueId'
 import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -52,6 +53,7 @@ const ObjectiveAccordionPanel = ({
     <AccordionPanel>
       {isExpanded && (
         <KeyResultList
+          id={`OBJECTIVE_${objectiveID ?? uniqueId()}_ACCORDION`}
           keyResultIDs={keyResultIDs}
           templateColumns="0.1fr 2fr 1fr 2fr 1fr 2fr"
           columns={[

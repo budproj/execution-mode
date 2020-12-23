@@ -10,6 +10,7 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import KeyResultListBodyStaticLine from './line'
 
 export interface KeyResultListBodyStaticProperties {
+  listID: string
   keyResultIDs: Array<KeyResult['id']>
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']

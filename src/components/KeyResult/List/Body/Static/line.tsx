@@ -1,4 +1,5 @@
 import { Grid, GridProps } from '@chakra-ui/react'
+import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
 import {
@@ -17,6 +18,7 @@ import {
 import { KeyResult } from 'src/components/KeyResult/types'
 
 export interface KeyResultListBodyStaticLineProperties {
+  listID: string
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
   columns: KeyResultListBodyColumn[]
@@ -26,6 +28,7 @@ export interface KeyResultListBodyStaticLineProperties {
 }
 
 const KeyResultListBodyStaticLine = ({
+  listID,
   keyResultID,
   onLineClick,
   templateColumns,
@@ -66,8 +69,8 @@ const KeyResultListBodyStaticLine = ({
 
         return (
           <ColumnComponent
-            key={`KEY_RESULT_LIST_BODY_STATIC_LINE_${
-              keyResultID ?? Math.random()
+            key={`${listID}_KEY_RESULT_LIST_BODY_STATIC_LINE_${
+              keyResultID ?? uniqueId()
             }_COLUMN_${column}`}
             id={keyResultID}
             borderColor={borderColor}

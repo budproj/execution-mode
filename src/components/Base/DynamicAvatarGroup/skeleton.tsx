@@ -1,4 +1,5 @@
 import { Avatar, AvatarGroup, SkeletonCircle } from '@chakra-ui/react'
+import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
 export interface AvatarGroupSkeletonProperties {
@@ -10,7 +11,7 @@ const AvatarGroupSkeleton = ({ numOfAvatars }: AvatarGroupSkeletonProperties) =>
     {
       // eslint-disable-next-line unicorn/no-null
       new Array(numOfAvatars).fill(null).map(() => (
-        <SkeletonCircle key={`SKELETON_AVATAR_${Math.random() * numOfAvatars}`}>
+        <SkeletonCircle key={`SKELETON_AVATAR_${uniqueId()}`}>
           <Avatar />
         </SkeletonCircle>
       ))

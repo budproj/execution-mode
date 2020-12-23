@@ -1,3 +1,4 @@
+import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
 import ObjectiveGroup from 'src/components/Objective/Group'
@@ -13,7 +14,7 @@ const ChildTeamsObjectivesSkeleton = ({
     {
       // eslint-disable-next-line unicorn/no-null
       new Array(numOfSkeletons).fill(null).map(() => (
-        <ObjectiveGroup key={Math.random()} />
+        <ObjectiveGroup key={uniqueId()} />
       ))
     }
   </>
