@@ -28,6 +28,7 @@ const KeyResultDrawer = () => {
   const [keyResult, setKeyResult] = useRecoilState(selectKeyResult(keyResultID))
   const [getKeyResult, { loading, data }] = useLazyQuery<GetKeyResultWithIDQuery>(
     queries.GET_KEY_RESULT_WITH_ID,
+    { fetchPolicy: 'network-only' },
   )
 
   // eslint-disable-next-line unicorn/no-useless-undefined

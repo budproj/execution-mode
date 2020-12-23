@@ -6,10 +6,10 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
 import {
+  selectCurrentProgress,
   selectCurrentConfidence,
   selectLatestConfidenceReport,
 } from 'src/state/recoil/key-result/selectors'
-import selectCurrentProgress from 'src/state/recoil/key-result/selectors/current-progress'
 
 import { CurrentProgressField, NewProgressField, CurrentConfidenceField, GoalField } from './Fields'
 import Actions from './actions'
