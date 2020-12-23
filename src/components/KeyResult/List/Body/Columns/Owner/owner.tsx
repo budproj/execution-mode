@@ -34,7 +34,7 @@ const KeyResultListBodyColumnOwner = ({
   const isOwnerLoaded = Boolean(owner)
 
   return (
-    <KeyResultListBodyColumnBase preventLineClick pr={0} display="flex" justifyContent="flex-end">
+    <KeyResultListBodyColumnBase preventLineClick pr={0} display="flex">
       <SkeletonCircle
         size="48px"
         isLoaded={isOwnerLoaded}

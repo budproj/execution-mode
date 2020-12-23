@@ -1,7 +1,9 @@
 import faker from 'faker'
+import { snapshot_UNSTABLE } from 'recoil'
 import sinon from 'sinon'
 
 import * as hooks from './hooks'
+import { keyResultAtomFamily } from './key-result'
 
 describe('useRecoilFamilyLoader', () => {
   afterEach(() => sinon.restore())
@@ -186,5 +188,116 @@ describe('useRecoilFamilyLoader', () => {
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeAtom, fakeData)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('creates new root keys, preserving non-conflicting keys', () => {
+    const fakeAtom = faker.random.word()
+    const fakeFamily = sinon.stub().returns(fakeAtom)
+    const originalData = {
+      boo: faker.random.word(),
+    }
+    const fakeData = { foo: { boo: faker.random.word() } }
+    const fakeParameter = 'id'
+    const getValueStub = sinon.stub().returns(originalData)
+    const snapshotStub = sinon.stub().returns({ getValue: getValueStub })
+    const fakeSnapshot = { getLoadable: snapshotStub }
+    const spy = sinon.spy()
+
+    const familyLoader = hooks.buildFamilyLoader(fakeFamily, fakeParameter as any)
+    const loadData = familyLoader({ set: spy, snapshot: fakeSnapshot } as any)
+    loadData(fakeData as any)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeAtom, {
+      ...originalData,
+      foo: {
+        boo: fakeData.foo.boo,
+      },
+    })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('creates new deep keys, preserving non-conflicting keys', () => {
+    const fakeAtom = faker.random.word()
+    const fakeFamily = sinon.stub().returns(fakeAtom)
+    const originalData = {
+      boo: faker.random.word(),
+      foo: { foo: faker.random.word() },
+    }
+    const fakeData = { foo: { boo: faker.random.word() } }
+    const fakeParameter = 'id'
+    const getValueStub = sinon.stub().returns(originalData)
+    const snapshotStub = sinon.stub().returns({ getValue: getValueStub })
+    const fakeSnapshot = { getLoadable: snapshotStub }
+    const spy = sinon.spy()
+
+    const familyLoader = hooks.buildFamilyLoader(fakeFamily, fakeParameter as any)
+    const loadData = familyLoader({ set: spy, snapshot: fakeSnapshot } as any)
+    loadData(fakeData as any)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeAtom, {
+      ...originalData,
+      foo: {
+        ...originalData.foo,
+        boo: fakeData.foo.boo,
+      },
+    })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('merges new data receiving original data from recoil', () => {
+    const initialSnapshot = snapshot_UNSTABLE()
+    const fakeID = faker.random.word()
+    const keyResultAtom = keyResultAtomFamily(fakeID)
+
+    const initialData = {
+      id: fakeID,
+      morty: faker.random.word(),
+      rick: faker.random.word(),
+      evilMorty: [faker.random.word()],
+      smith: {
+        morty: faker.random.word(),
+        rick: faker.random.word(),
+      },
+    }
+    const newKeyResult = {
+      id: fakeID,
+      rick: faker.random.word(),
+      evilMorty: [faker.random.word()],
+      smith: {
+        rick: faker.random.word(),
+        smith: faker.random.word(),
+      },
+    }
+
+    const snapshotWithOriginalData = initialSnapshot.map(({ set }) =>
+      set(keyResultAtom, initialData as any),
+    )
+
+    const snapshotWithNewData = snapshotWithOriginalData.map(({ set }) => {
+      const buildKeyResultLoader = hooks.buildFamilyLoader(keyResultAtomFamily, 'id')
+      const loadKeyResult = buildKeyResultLoader({
+        set,
+        snapshot: snapshotWithOriginalData,
+      } as any)
+
+      return loadKeyResult(newKeyResult)
+    })
+
+    const result = snapshotWithNewData.getLoadable(keyResultAtom).getValue()
+    const expectedResult = {
+      id: fakeID,
+      morty: initialData.morty,
+      rick: newKeyResult.rick,
+      evilMorty: newKeyResult.evilMorty,
+      smith: {
+        morty: initialData.smith.morty,
+        rick: newKeyResult.smith.rick,
+        smith: newKeyResult.smith.smith,
+      },
+    }
+
+    expect(result).toEqual(expectedResult)
   })
 })
