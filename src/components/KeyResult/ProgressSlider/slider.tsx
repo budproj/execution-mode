@@ -16,6 +16,7 @@ import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confide
 
 export interface ProgressSliderContainerProperties {
   keyResultID?: KeyResult['id']
+  canChange?: boolean
 }
 
 const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('initialValue')
@@ -29,7 +30,7 @@ const ProgressSlider = forwardRef(
 )
 
 const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContainerProperties>(
-  ({ keyResultID }: ProgressSliderContainerProperties, forwardedReference) => {
+  ({ keyResultID, canChange }: ProgressSliderContainerProperties, forwardedReference) => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isChanging, setIsChanging] = useState(false)
     const [draftValue, setDraftValue] = useRecoilState(draftValueAtom(keyResultID))
@@ -77,6 +78,7 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
         max={goal as KeyResult['goal']}
         step={step}
         focusThumbOnChange={false}
+        isDisabled={!canChange}
         onChange={handleSliderUpdate}
         onChangeEnd={handleSliderUpdateEnd}
       />

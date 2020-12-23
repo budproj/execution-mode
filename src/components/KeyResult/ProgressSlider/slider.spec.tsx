@@ -144,4 +144,46 @@ describe('component expectations', () => {
 
     expect(wasSpyCalledAsExpected).not.toEqual(true)
   })
+
+  it('makes the slider disabled if we set canChange to false', () => {
+    const fakeID = faker.random.word()
+
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    stateStub.returns([undefined, sinon.fake()])
+
+    const valueStub = sinon.stub(recoil, 'useRecoilValue')
+    valueStub.returns('')
+
+    const result = enzyme
+      .shallow(<ProgressSlider keyResultID={fakeID} canChange={false} />)
+      .dive()
+      .dive()
+
+    const slider = result.find('Slider')
+
+    expect(slider.prop('isDisabled')).toEqual(true)
+  })
+
+  it('makes the slider enabled if we set canChange to true', () => {
+    const fakeID = faker.random.word()
+
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    stateStub.returns([undefined, sinon.fake()])
+
+    const valueStub = sinon.stub(recoil, 'useRecoilValue')
+    valueStub.returns('')
+
+    const result = enzyme
+      .shallow(<ProgressSlider canChange keyResultID={fakeID} />)
+      .dive()
+      .dive()
+
+    const slider = result.find('Slider')
+
+    expect(slider.prop('isDisabled')).toEqual(false)
+  })
 })

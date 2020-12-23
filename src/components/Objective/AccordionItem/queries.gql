@@ -5,6 +5,8 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
       id
       title
       format
+      goal
+      initialValue
       currentConfidence
       currentProgress
       owner {

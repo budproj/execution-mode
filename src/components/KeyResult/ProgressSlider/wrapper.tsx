@@ -14,9 +14,10 @@ import Slider from './slider'
 
 export interface ProgressSliderWrapperProperties {
   id?: KeyResult['id']
+  canChange?: boolean
 }
 
-const ProgressSliderWrapper = ({ id }: ProgressSliderWrapperProperties) => {
+const ProgressSliderWrapper = ({ id, canChange }: ProgressSliderWrapperProperties) => {
   const currentProgress = useRecoilValue(selectCurrentProgress(id))
   const [draftValue, setDraftValue] = useRecoilState(draftValueAtom(id))
   const [isPopoverOpen, setPopoverOpen] = useRecoilState<boolean>(
@@ -31,7 +32,7 @@ const ProgressSliderWrapper = ({ id }: ProgressSliderWrapperProperties) => {
   return (
     <PopoverWrapper isOpen={isPopoverOpen} placement="bottom-start" onClose={handleClose}>
       <PopoverTrigger>
-        <Slider keyResultID={id} />
+        <Slider keyResultID={id} canChange={canChange} />
       </PopoverTrigger>
       <Popover keyResultID={id} />
     </PopoverWrapper>

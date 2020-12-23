@@ -26,7 +26,9 @@ const ObjectiveGroup = ({ groupTitle, objectiveIDs }: ObjectiveGroupProperties) 
         {isLoaded ? (
           objectiveIDs?.map((objectiveID) => (
             <ObjectiveAccordionItem
-              key={`OBJECTIVE_ACCORDION_${objectiveID}`}
+              key={`${groupTitle ?? Math.random()}_OBJECTIVE_ACCORDION_${
+                objectiveID ?? Math.random()
+              }`}
               objectiveID={objectiveID}
             />
           ))

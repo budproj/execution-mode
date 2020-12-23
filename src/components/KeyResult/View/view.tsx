@@ -93,6 +93,9 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
         [KeyResultListBodyColumn.STATUS]: {
           withLastUpdateInfo: true,
         },
+        [KeyResultListBodyColumn.PROGRESS]: {
+          canChange: true,
+        },
       }}
       onLineClick={onLineClick}
       {...rest}

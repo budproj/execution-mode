@@ -1,6 +1,7 @@
 import { useLazyQuery } from '@apollo/client'
 import { AccordionPanel } from '@chakra-ui/react'
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
 import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
@@ -30,22 +31,8 @@ const ObjectiveAccordionPanel = ({
   )
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
-  const keyResultIDs = data?.objective?.keyResults?.map((keyResult) => keyResult.id)
-  const isLoaded = Boolean(keyResultIDs)
-
-  const updateObjective = useCallback(() => {
-    loadObjective(data?.objective)
-    // If we add the "loadObjective" in our deps it starts an infinite loop upon execution, since
-    // it changes on every render
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
-
-  const updateKeyResults = useCallback(() => {
-    loadKeyResults(data?.objective?.keyResults)
-    // If we add the "loadKeyResults" in our deps it starts an infinite loop upon execution, since
-    // it changes on every render
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
+  const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
+  const keyResultIDs = objective?.keyResults?.map((keyResult) => keyResult.id)
 
   useEffect(() => {
     if (isExpanded && !called) fetchObjective({ variables: { objectiveID } })
@@ -53,17 +40,20 @@ const ObjectiveAccordionPanel = ({
 
   useEffect(() => {
     if (!loading && data) {
-      updateObjective()
-      updateKeyResults()
+      loadObjective(data?.objective)
+      loadKeyResults(data?.objective?.keyResults)
     }
-  }, [loading, data, updateObjective, updateKeyResults])
+    // If we add the "loadObjective" and "loadKeyResults" in our deps it starts an infinite loop
+    // upon execution, since it changes on every render
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, data])
 
   return (
     <AccordionPanel>
-      {isLoaded && isExpanded ? (
+      {isExpanded && (
         <KeyResultList
           keyResultIDs={keyResultIDs}
-          templateColumns="0.1fr 2fr 1fr 2fr 1fr 1fr"
+          templateColumns="0.1fr 2fr 1fr 2fr 1fr 2fr"
           columns={[
             KeyResultListBodyColumn.STATUS_COLOR,
             KeyResultListBodyColumn.TITLE,
@@ -78,8 +68,6 @@ const ObjectiveAccordionPanel = ({
             },
           }}
         />
-      ) : (
-        <p>Loading...</p>
       )}
     </AccordionPanel>
   )

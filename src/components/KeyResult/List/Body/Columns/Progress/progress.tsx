@@ -14,12 +14,14 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 export interface KeyResultListBodyColumnProgressProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
+  canChange?: boolean
 }
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
 const KeyResultListBodyColumnProgress = ({
   id,
+  canChange,
 }: KeyResultListBodyColumnProgressProperties): ReactElement => {
   const draftValue = useRecoilValue(draftValueAtom(id))
   const format = useRecoilValue(formatSelector(id))
@@ -36,7 +38,7 @@ const KeyResultListBodyColumnProgress = ({
             fadeDuration={0}
             /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
-            <ProgressSlider id={id} />
+            <ProgressSlider id={id} canChange={canChange} />
           </Skeleton>
         </Box>
 
