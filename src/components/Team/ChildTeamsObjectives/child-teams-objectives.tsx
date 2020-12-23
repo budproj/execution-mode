@@ -24,10 +24,11 @@ export interface GetTeamAndChildTeamsObjectivesQuery {
 }
 
 const parseObjectives = (rootTeam?: Partial<Team>) => {
-  if (!rootTeam || !rootTeam?.teams) return
+  if (!rootTeam) return
 
-  const reducedTeams = rootTeam.teams.map((team) => team.objectives)
-  const flattenedList = flatten(reducedTeams)
+  const rootTeamObjectives = rootTeam?.objectives ?? []
+  const childTeamsObjectives = rootTeam?.teams?.map((team) => team.objectives) ?? []
+  const flattenedList = flatten([...rootTeamObjectives, ...childTeamsObjectives])
   const uniqObjectives = uniq(flattenedList)
   const clearedObjectives = remove(uniqObjectives)
 
