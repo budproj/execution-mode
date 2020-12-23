@@ -43,6 +43,40 @@ describe('component lifecycle', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
+  it('merges root team and child team objectives in our recoil state upon query return', () => {
+    const objectiveOne = faker.helpers.userCard()
+    const objectiveTwo = faker.helpers.userCard()
+    const objectiveThree = faker.helpers.userCard()
+    const objectiveFour = faker.helpers.userCard()
+
+    const fakeQueryData = {
+      team: {
+        objectives: [objectiveFour],
+        teams: [
+          {
+            id: faker.random.word(),
+            objectives: [objectiveOne, objectiveTwo],
+          },
+          {
+            id: faker.random.word(),
+            objectives: [objectiveThree],
+          },
+        ],
+      },
+    }
+
+    const spy = sinon.spy()
+    sinon.stub(apollo, 'useQuery').returns({ data: fakeQueryData } as any)
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(spy)
+
+    enzyme.shallow(<ChildTeamsObjectives rootTeamId={faker.random.word()} />)
+
+    const allObjectives = [objectiveFour, objectiveOne, objectiveTwo, objectiveThree]
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(allObjectives)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
   it('removes duplicated objectives, setting them only once', () => {
     const objectiveOne = faker.helpers.userCard()
     const objectiveTwo = faker.helpers.userCard()
