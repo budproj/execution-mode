@@ -2,15 +2,20 @@ import { Box, Flex, Grid, GridItem } from '@chakra-ui/react'
 import React, { ComponentType, ReactElement } from 'react'
 
 import Breadcrumb from 'src/components/Base/Breadcrumb'
+import { BreadcrumbProperties } from 'src/components/Base/Breadcrumb/breadcrumb'
 import PageTitle from 'src/components/Base/PageTitle'
 
 export interface PageContentHeaderProperties {
   RightWing?: ComponentType
+  breadcrumbParams?: BreadcrumbProperties['routeParams']
 }
 
-const PageContentHeader = ({ RightWing }: PageContentHeaderProperties): ReactElement => (
+const PageContentHeader = ({
+  RightWing,
+  breadcrumbParams,
+}: PageContentHeaderProperties): ReactElement => (
   <Box>
-    <Breadcrumb />
+    <Breadcrumb routeParams={breadcrumbParams} />
 
     <Grid templateColumns="1fr 2fr" alignItems="flex-end" py={1}>
       <GridItem>

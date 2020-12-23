@@ -28,6 +28,10 @@ const TeamObjectives = ({ teamId, isCompany }: TeamObjectivesProperties) => {
     isCompany ? companyAtomFamily : teamAtomFamily,
   )
 
+  const breadcrumbParameters = {
+    id: data?.[key]?.name,
+  }
+
   useEffect(() => {
     if (!data && loading) setPageTitle('')
   }, [data, loading, setPageTitle])
@@ -41,7 +45,7 @@ const TeamObjectives = ({ teamId, isCompany }: TeamObjectivesProperties) => {
   }, [data, loading, key, loadTeamOnRecoil])
 
   return (
-    <PageContent>
+    <PageContent breadcrumbParams={breadcrumbParameters}>
       <ChildTeamsObjectives rootTeamId={teamId} />
     </PageContent>
   )
