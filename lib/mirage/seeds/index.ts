@@ -17,7 +17,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   const policies = server.create('policy')
   const company = server.create('company')
-  const rootTeam = server.create('team')
+  const rootTeam = server.create('team', { name: faker.random.word() })
   const teams = server.createList('team', 3, { company, parentTeam: rootTeam })
   rootTeam.update('teams', teams as any)
   const user = server.create('user', { teams })
@@ -48,6 +48,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const users = [user, ...otherUsers]
   company.update('users', users as any)
   rootTeam.update('users', users as any)
+  rootTeam.update('objectives', [objectives[0]] as any)
   // eslint-disable-next-line array-callback-return
   teams.map((team) => {
     team.update('users', users as any)

@@ -19,7 +19,7 @@ export interface ChildTeamsObjectivesProperties {
   rootTeamId: Team['id']
 }
 
-export interface GetChildTeamsObjectivesQuery {
+export interface GetTeamAndChildTeamsObjectivesQuery {
   team: Partial<Team>
 }
 
@@ -36,8 +36,8 @@ const parseObjectives = (rootTeam?: Partial<Team>) => {
 
 const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) => {
   const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
-  const { data, loading } = useQuery<GetChildTeamsObjectivesQuery>(
-    queries.GET_CHILD_TEAMS_OBJECTIVES,
+  const { data, loading } = useQuery<GetTeamAndChildTeamsObjectivesQuery>(
+    queries.GET_TEAM_AND_CHILD_TEAMS_OBJECTIVES,
     {
       variables: { rootTeamId },
     },
@@ -53,13 +53,22 @@ const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) =>
   return (
     <Flex gridGap={4} direction="column">
       {isLoaded ? (
-        data?.team?.teams?.map((team: Team) => (
-          <ObjectiveGroup
-            key={team.id ?? uniqueId()}
-            groupTitle={team.name}
-            objectiveIDs={team.objectives?.map((objective) => objective.id)}
-          />
-        ))
+        <>
+          {data?.team.objectives && data?.team.objectives.length > 0 && (
+            <ObjectiveGroup
+              groupTitle={data?.team.name}
+              objectiveIDs={data?.team.objectives?.map((objective) => objective.id)}
+            />
+          )}
+
+          {data?.team?.teams?.map((team: Team) => (
+            <ObjectiveGroup
+              key={team.id ?? uniqueId()}
+              groupTitle={team.name}
+              objectiveIDs={team.objectives?.map((objective) => objective.id)}
+            />
+          ))}
+        </>
       ) : (
         <ChildTeamsObjectivesSkeleton />
       )}
