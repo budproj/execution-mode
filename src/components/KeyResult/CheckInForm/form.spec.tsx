@@ -6,22 +6,23 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import {
-  keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
-  keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
-} from 'src/state/recoil/key-result/progress-update'
+import { keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence } from 'src/state/recoil/key-result/progress-update'
 
 import Form, { CheckInFormValues } from './form'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
+  const selectCurrentProgressMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+    return selector.key.includes('CURRENT_PROGRESS')
+  })
+
   it('uses the current progress as initial value', () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const stateStub = sinon.stub(recoil, 'useRecoilState')
 
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([fakeProgress, sinon.fake()])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([])
 
@@ -41,7 +42,7 @@ describe('component expectations', () => {
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     const spy = sinon.spy()
 
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([faker.random.number(), sinon.fake()])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([faker.random.number(), sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
 
@@ -71,7 +72,7 @@ describe('component expectations', () => {
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     const spy = sinon.spy()
 
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([faker.random.number(), spy])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([faker.random.number(), spy])
     stateStub.returns([undefined, sinon.fake()])
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
 
@@ -180,7 +181,7 @@ describe('component expectations', () => {
     const fakeConfidence = faker.random.number()
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([fakeProgress, sinon.fake()])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
 
     const spy = sinon.spy()
@@ -205,7 +206,7 @@ describe('component expectations', () => {
     const fakeConfidence = faker.random.number()
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([fakeProgress, sinon.fake()])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
 
     const spy = sinon.spy()
@@ -238,7 +239,7 @@ describe('component expectations', () => {
     const spy = sinon.spy()
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([fakeProgress, spy])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, spy])
     stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
 
     stateStub.returns([undefined, sinon.fake()])
@@ -263,7 +264,7 @@ describe('component expectations', () => {
     const spy = sinon.spy()
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([fakeProgress, sinon.fake()])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, spy])
 
     stateStub.returns([undefined, sinon.fake()])
@@ -288,7 +289,7 @@ describe('component expectations', () => {
     const spy = sinon.spy()
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([fakeProgress, sinon.fake()])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
 
     stateStub.returns([undefined, sinon.fake()])
@@ -313,7 +314,7 @@ describe('component expectations', () => {
     const spy = sinon.spy()
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([fakeProgress, sinon.fake()])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
 
     stateStub.returns([undefined, sinon.fake()])
@@ -343,7 +344,7 @@ describe('component expectations', () => {
     const spy = sinon.spy()
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgress(fakeID)).returns([fakeProgress, sinon.fake()])
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.withArgs(selectCurrentConfidence(fakeID)).returns([fakeConfidence, sinon.fake()])
 
     stateStub.returns([undefined, sinon.fake()])

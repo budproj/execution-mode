@@ -5,10 +5,8 @@ import React from 'react'
 import { useRecoilState } from 'recoil'
 
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
-import {
-  keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
-  keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence,
-} from 'src/state/recoil/key-result/progress-update'
+import { keyResultProgressUpdateCurrentConfidence as selectCurrentConfidence } from 'src/state/recoil/key-result/progress-update'
+import selectCurrentProgress from 'src/state/recoil/key-result/selectors/current-progress'
 
 import { CurrentProgressField, NewProgressField, CurrentConfidenceField, GoalField } from './Fields'
 import Actions from './actions'

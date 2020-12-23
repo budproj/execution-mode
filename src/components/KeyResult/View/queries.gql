@@ -8,6 +8,7 @@ query GET_KEY_RESULT_VIEW_WITH_BINDING($binding: KeyResultViewBinding!) {
       initialValue
       goal
       format
+      currentProgress
       team {
         name
       }
@@ -22,10 +23,6 @@ query GET_KEY_RESULT_VIEW_WITH_BINDING($binding: KeyResultViewBinding!) {
         name
         picture
         role
-      }
-      progressReports(limit: 1) {
-        id
-        valueNew
       }
       confidenceReports(limit: 1) {
         id

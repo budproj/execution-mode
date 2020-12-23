@@ -1,15 +1,18 @@
 import { atomFamily } from 'recoil'
 
-import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
+import { KeyResult } from 'src/components/KeyResult/types'
+import selectCurrentProgress from 'src/state/recoil/key-result/selectors/current-progress'
 
 import { PREFIX } from './constants'
-import currentProgress from './current-progress'
 
 const KEY = `${PREFIX}::DRAFT_VALUE`
 
-const draftValue = atomFamily<ProgressReport['valueNew'] | undefined, KeyResult['id'] | undefined>({
+const draftValue = atomFamily<
+  KeyResult['currentProgress'] | undefined,
+  KeyResult['id'] | undefined
+>({
   key: KEY,
-  default: (id) => currentProgress(id),
+  default: (id) => selectCurrentProgress(id),
 })
 
 export default draftValue

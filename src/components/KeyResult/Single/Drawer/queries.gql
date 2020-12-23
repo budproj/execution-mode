@@ -4,6 +4,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     title
     description
     goal
+    currentProgress
     owner {
       name
       picture
@@ -15,10 +16,6 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
         dateEnd
         createdAt
       }
-    }
-    progressReports(limit: 1) {
-      id
-      valueNew
     }
     confidenceReports(limit: 1) {
       id

@@ -5,9 +5,9 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { KeyResult } from 'src/components/KeyResult/types'
 import {
   keyResultProgressUpdatePopoverOpen,
-  keyResultProgressUpdateCurrentProgress as selectCurrentProgress,
   keyResultProgressUpdateDraftValue as draftValueAtom,
 } from 'src/state/recoil/key-result/progress-update'
+import selectCurrentProgress from 'src/state/recoil/key-result/selectors/current-progress'
 
 import Popover from './popover'
 import Slider from './slider'
