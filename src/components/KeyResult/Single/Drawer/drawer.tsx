@@ -26,14 +26,10 @@ export interface GetKeyResultWithIDQuery {
 const KeyResultDrawer = () => {
   const [keyResultID, setKeyResultID] = useRecoilState(keyResultOpenDrawer)
   const [keyResult, setKeyResult] = useRecoilState(selectKeyResult(keyResultID))
-  const [
-    getKeyResult,
-    { loading, data, called, variables },
-  ] = useLazyQuery<GetKeyResultWithIDQuery>(queries.GET_KEY_RESULT_WITH_ID, {
-    variables: {
-      id: keyResultID,
-    },
-  })
+  const [getKeyResult, { loading, data }] = useLazyQuery<GetKeyResultWithIDQuery>(
+    queries.GET_KEY_RESULT_WITH_ID,
+    { fetchPolicy: 'network-only' },
+  )
 
   // eslint-disable-next-line unicorn/no-useless-undefined
   const handleClose = () => setKeyResultID(undefined)
@@ -53,9 +49,8 @@ const KeyResultDrawer = () => {
   }, [loading, data, setKeyResult])
 
   useEffect(() => {
-    if (!called && keyResultID) getKeyResult()
-    if (called && variables?.id !== keyResultID) getKeyResult()
-  }, [called, keyResultID, getKeyResult, variables])
+    if (keyResultID) getKeyResult({ variables: { id: keyResultID } })
+  }, [keyResultID, getKeyResult])
 
   return (
     <Drawer isOpen={isOpen} size="md" autoFocus={false} onClose={handleClose}>
