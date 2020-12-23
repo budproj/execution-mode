@@ -178,6 +178,74 @@ describe('component expectations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
+  it('pass progress as undefined to remote dispatch if it did not changed', async () => {
+    const fakeID = faker.random.word()
+    const fakeProgress = faker.random.number()
+    const fakeConfidence = faker.random.number()
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    const spy = sinon.spy()
+
+    stateStub.returns([fakeProgress, sinon.fake()])
+    sinon.stub(apollo, 'useMutation').returns([spy] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      newProgress: fakeProgress,
+      confidence: fakeConfidence,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
+      variables: {
+        checkInInput: {
+          keyResultId: fakeID,
+          progress: undefined,
+          confidence: fakeConfidence,
+        },
+      },
+    })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('pass confidence as undefined to remote dispatch if it did not changed', async () => {
+    const fakeID = faker.random.word()
+    const fakeProgress = faker.random.number()
+    const fakeConfidence = faker.random.number()
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    const spy = sinon.spy()
+
+    stateStub.returns([fakeConfidence, sinon.fake()])
+    sinon.stub(apollo, 'useMutation').returns([spy] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      newProgress: fakeProgress,
+      confidence: fakeConfidence,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
+      variables: {
+        checkInInput: {
+          keyResultId: fakeID,
+          progress: fakeProgress,
+          confidence: undefined,
+        },
+      },
+    })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
   it('executes the desired after submit hook upon form submission', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()

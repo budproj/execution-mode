@@ -65,11 +65,14 @@ const CheckInForm = ({
     }
   }
 
-  const dispatchRemoteUpdate = async (values: CheckInFormValues) => {
+  const dispatchRemoteUpdate = async (
+    newProgress: CheckInFormValues['currentProgress'],
+    newConfidence: CheckInFormValues['confidence'],
+  ) => {
     const checkIn = {
       keyResultId: keyResultID,
-      progress: values.newProgress,
-      confidence: values.confidence,
+      progress: newProgress,
+      confidence: newConfidence,
     }
 
     await createCheckIn({
@@ -89,10 +92,11 @@ const CheckInForm = ({
     if (wasProgressUpdated || wasConfidenceUpdated) {
       syncDisabledFields(values, actions)
       syncRecoilState(values)
-      await dispatchRemoteUpdate(values)
 
       const newProgress = wasProgressUpdated ? values.newProgress : undefined
       const newConfidence = wasConfidenceUpdated ? values.confidence : undefined
+
+      await dispatchRemoteUpdate(newProgress, newConfidence)
 
       if (afterSubmit) afterSubmit(newProgress, newConfidence)
     }
