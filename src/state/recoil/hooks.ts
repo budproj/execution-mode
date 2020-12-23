@@ -1,4 +1,5 @@
-import deepmerge from 'deepmerge'
+import clone from 'lodash/clone'
+import merge from 'lodash/merge'
 import { RecoilState, useRecoilCallback } from 'recoil'
 
 import { Company } from 'src/components/Company/types'
@@ -36,7 +37,8 @@ export const buildFamilyLoader = <E extends RecoilEntity>(
 
     const atom = family(singleData[parameter])
     const originalValue = snapshot.getLoadable(atom).getValue() ?? {}
-    const newValue = deepmerge(originalValue, singleData)
+    const clonedValue = clone(originalValue)
+    const newValue = merge(clonedValue, singleData)
 
     return set(atom, newValue)
   }

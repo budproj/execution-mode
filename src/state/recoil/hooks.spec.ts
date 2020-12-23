@@ -165,4 +165,26 @@ describe('useRecoilFamilyLoader', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('overwrittes conflicting arrays of original data, not appending new values', () => {
+    const fakeAtom = faker.random.word()
+    const fakeFamily = sinon.stub().returns(fakeAtom)
+    const originalData = {
+      boo: [faker.random.word()],
+    }
+    const fakeData = { boo: [faker.random.word()] }
+    const fakeParameter = 'id'
+    const getValueStub = sinon.stub().returns(originalData)
+    const snapshotStub = sinon.stub().returns({ getValue: getValueStub })
+    const fakeSnapshot = { getLoadable: snapshotStub }
+    const spy = sinon.spy()
+
+    const familyLoader = hooks.buildFamilyLoader(fakeFamily, fakeParameter as any)
+    const loadData = familyLoader({ set: spy, snapshot: fakeSnapshot } as any)
+    loadData(fakeData as any)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeAtom, fakeData)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
 })
