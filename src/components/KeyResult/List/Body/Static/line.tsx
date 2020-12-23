@@ -69,7 +69,7 @@ const KeyResultListBodyStaticLine = ({
 
         return (
           <ColumnComponent
-            key={`${listID}_KEY_RESULT_LIST_BODY_STATIC_LINE_${
+            key={`${listID}_KEY_RESULT_LIST_BODY_LINE_${
               keyResultID ?? uniqueId()
             }_COLUMN_${column}`}
             id={keyResultID}

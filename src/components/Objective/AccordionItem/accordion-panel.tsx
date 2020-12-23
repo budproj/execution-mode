@@ -54,6 +54,7 @@ const ObjectiveAccordionPanel = ({
       {isExpanded && (
         <KeyResultList
           id={`OBJECTIVE_${objectiveID ?? uniqueId()}_ACCORDION`}
+          py={8}
           keyResultIDs={keyResultIDs}
           templateColumns="0.1fr 2fr 1fr 2fr 1fr 2fr"
           columns={[

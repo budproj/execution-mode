@@ -1,4 +1,5 @@
 import { Box, GridProps } from '@chakra-ui/react'
+import { uniqueId } from 'lodash'
 import React from 'react'
 
 import {
@@ -7,6 +8,7 @@ import {
 } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
+import KeyResultListBodyStaticEmptyState from './empty-state'
 import KeyResultListBodyStaticLine from './line'
 
 export interface KeyResultListBodyStaticProperties {
@@ -19,15 +21,24 @@ export interface KeyResultListBodyStaticProperties {
   onLineClick?: (id: KeyResult['id']) => void
 }
 
-const KeyResultListBodyStatic = ({ keyResultIDs, ...rest }: KeyResultListBodyStaticProperties) => (
+const KeyResultListBodyStatic = ({
+  keyResultIDs,
+  listID,
+  ...rest
+}: KeyResultListBodyStaticProperties) => (
   <Box>
-    {keyResultIDs.map((keyResultID: KeyResult['id']) => (
-      <KeyResultListBodyStaticLine
-        key={`KEY_RESULT_LIST_BODY_STATIC_LINE_${keyResultID}`}
-        keyResultID={keyResultID}
-        {...rest}
-      />
-    ))}
+    {keyResultIDs.length === 0 ? (
+      <KeyResultListBodyStaticEmptyState />
+    ) : (
+      keyResultIDs.map((keyResultID: KeyResult['id']) => (
+        <KeyResultListBodyStaticLine
+          key={`${listID ?? uniqueId()}_KEY_RESULT_LIST_BODY_LINE_${keyResultID ?? uniqueId()}`}
+          keyResultID={keyResultID}
+          listID={listID}
+          {...rest}
+        />
+      ))
+    )}
   </Box>
 )
 

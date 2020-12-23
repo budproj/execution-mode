@@ -1,6 +1,6 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-type KeyResultTableBodyMessages = 'reorderIconDesc'
+type KeyResultListBodyDragAndDropMessages = 'reorderIconDesc'
 
 export default defineMessages({
   reorderIconDesc: {
@@ -9,4 +9,4 @@ export default defineMessages({
     id: '+O5SW4',
     description: 'The alternative text explaining our reorder icon',
   },
-}) as Record<KeyResultTableBodyMessages, MessageDescriptor>
+}) as Record<KeyResultListBodyDragAndDropMessages, MessageDescriptor>

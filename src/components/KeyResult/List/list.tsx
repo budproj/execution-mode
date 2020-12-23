@@ -53,12 +53,14 @@ const KeyResultList = ({
 
   return (
     <Box {...rest}>
-      <KeyResultListHead
-        columns={columns}
-        templateColumns={templateColumns}
-        headProperties={headProperties}
-        borderColor={borderColor}
-      />
+      {(!keyResultIDs || keyResultIDs.length > 0) && (
+        <KeyResultListHead
+          columns={columns}
+          templateColumns={templateColumns}
+          headProperties={headProperties}
+          borderColor={borderColor}
+        />
+      )}
       {keyResultIDs ? (
         <KeyResultListBody
           listID={id}
