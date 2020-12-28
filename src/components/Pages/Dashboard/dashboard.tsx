@@ -1,27 +1,30 @@
+import { useQuery } from '@apollo/client'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import PageContent from 'src/components/Base/PageContent'
 import { PageProperties } from 'src/components/Pages/types'
-import TeamCardList from 'src/components/Team/CardList'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
+import queries from './queries.gql'
 
-const KeyResultsPage = ({ isRootPage }: PageProperties) => {
+const DashboardPage = ({ isRootPage }: PageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
+  const { data, loading } = useQuery(queries.GET_USER_NAME_AND_GENDER)
+  const { name, gender } = data?.me ?? {}
 
   useEffect((): void => {
-    setPageTitle(intl.formatMessage(messages.pageTitle))
-  }, [intl, setPageTitle])
+    if (!loading) setPageTitle(intl.formatMessage(messages.greeting, { name, gender }))
+  }, [intl, loading, name, gender, setPageTitle])
 
   return (
     <PageContent showBreadcrumb={!isRootPage}>
-      <TeamCardList />
+      <p>Ok</p>
     </PageContent>
   )
 }
 
-export default KeyResultsPage
+export default DashboardPage

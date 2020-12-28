@@ -12,6 +12,7 @@ export interface User {
   id: string
   authzSub: string
   name: string
+  gender?: UserGender
   role?: string
   picture?: string
   createdAt: Date
@@ -27,4 +28,9 @@ export interface UserPolicies {
   read: UserPolicy
   update: UserPolicy
   delete: UserPolicy
+}
+
+export enum UserGender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
 }

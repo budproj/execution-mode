@@ -6,12 +6,13 @@ import PageContent from 'src/components/Base/PageContent'
 import { KeyResultView } from 'src/components/KeyResult'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { PageProperties } from 'src/components/Pages/types'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
 
-const KeyResultsPage = () => {
+const KeyResultsPage = ({ isRootPage }: PageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
   const setOpenDrawer = useSetRecoilState(keyResultOpenDrawer)
@@ -23,7 +24,7 @@ const KeyResultsPage = () => {
   }, [intl, setPageTitle])
 
   return (
-    <PageContent>
+    <PageContent showBreadcrumb={!isRootPage}>
       <KeyResultView onLineClick={handleLineClick} />
       <KeyResultSingleDrawer />
     </PageContent>

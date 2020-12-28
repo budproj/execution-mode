@@ -1,5 +1,6 @@
 query GET_USER_NAMED_AVATAR_DATA {
   me {
+    id
     name
     picture
   }

@@ -9,6 +9,7 @@ export interface PageContentProperties extends BoxProps {
   RightWing?: ComponentType
   contentTopGutter?: number
   breadcrumbParams?: BreadcrumbProperties['routeParams']
+  showBreadcrumb?: boolean
 }
 
 const PageContent = ({
@@ -16,10 +17,15 @@ const PageContent = ({
   children,
   contentTopGutter,
   breadcrumbParams,
+  showBreadcrumb,
   ...rest
 }: PageContentProperties) => (
   <Box py={10} px={20} {...rest}>
-    <PageContentHeader RightWing={RightWing} breadcrumbParams={breadcrumbParams} />
+    <PageContentHeader
+      RightWing={RightWing}
+      breadcrumbParams={breadcrumbParams}
+      showBreadcrumb={showBreadcrumb}
+    />
     <Box pt={contentTopGutter}>{children}</Box>
   </Box>
 )

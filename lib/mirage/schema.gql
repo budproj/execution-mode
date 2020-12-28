@@ -50,6 +50,9 @@ type User {
   """The sub field in Auth0 (their ID)"""
   authzSub: String!
 
+  """The gender of the user"""
+  gender: String
+
   """The user role in the company"""
   role: String
 
@@ -92,16 +95,16 @@ type User {
 Defines the current user policies regarding a given resource. You can use it to display read/create/update/delete controls on your application
 """
 type Policies {
-  create: UserPolicy!
-  read: UserPolicy!
-  update: UserPolicy!
-  delete: UserPolicy!
+  create: USER_POLICY!
+  read: USER_POLICY!
+  update: USER_POLICY!
+  delete: USER_POLICY!
 }
 
 """
 Defines if the user has the allowance for a given action regarding the resource
 """
-enum UserPolicy {
+enum USER_POLICY {
   ALLOW
   DENY
 }
@@ -413,11 +416,11 @@ type Query {
   teams(parentTeamId: ID): [Team!]
   user(id: ID!): User!
   me: User!
-  keyResultView(binding: KeyResultViewBinding, id: ID): KeyResultView!
+  keyResultView(binding: KEY_RESULT_VIEW_BINDING, id: ID): KeyResultView!
 }
 
 """Each binding represents a given view in our applications"""
-enum KeyResultViewBinding {
+enum KEY_RESULT_VIEW_BINDING {
   MINE
 }
 
@@ -447,7 +450,7 @@ input CheckInInput {
   keyResultId: ID!
 
   """The new progress in the report"""
-  progress: Float!
+  progress: Float
 
   """The new confidence in the report"""
   confidence: Int

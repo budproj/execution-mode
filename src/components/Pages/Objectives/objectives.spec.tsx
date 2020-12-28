@@ -21,4 +21,34 @@ describe('page control behaviors', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('hides the Breadcrumb if that is the root page', () => {
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<ObjectivesPage isRootPage />)
+
+    const pageContent = result.find('PageContent')
+
+    expect(pageContent.prop('showBreadcrumb')).toEqual(false)
+  })
+
+  it('hides the Breadcrumb if that is not the root page', () => {
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<ObjectivesPage isRootPage={false} />)
+
+    const pageContent = result.find('PageContent')
+
+    expect(pageContent.prop('showBreadcrumb')).toEqual(true)
+  })
+
+  it('hides the Breadcrumb by default', () => {
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<ObjectivesPage />)
+
+    const pageContent = result.find('PageContent')
+
+    expect(pageContent.prop('showBreadcrumb')).toEqual(true)
+  })
 })

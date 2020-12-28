@@ -2,51 +2,56 @@ import * as apollo from '@apollo/client'
 import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
+import { useIntl } from 'react-intl'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import * as recoilHooks from 'src/state/recoil/hooks'
+import { UserGender } from 'src/components/User/types'
 
-import TeamObjectives from './team-objectives'
+import DashboardPage from './dashboard'
+import messages from './messages'
 
 describe('page control behaviors', () => {
   afterEach(() => sinon.restore())
 
-  it('sets the page title to the team name upon mounting', () => {
+  it('sets the page title upon mounting after fetching user name', () => {
     const spy = sinon.spy()
-    const fakeName = faker.random.word()
-    const fakeQueryResult = { data: { team: { name: fakeName } } }
+    const intl = useIntl()
+    const fakeName = faker.name.firstName()
+    const fakeGender = faker.helpers.randomize([UserGender.MALE, UserGender.FEMALE, undefined])
+
+    const fakeData = { name: fakeName, gender: fakeGender }
+    const fakeQueryResult = { data: { me: fakeData }, loading: false }
+
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
-    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
     sinon.stub(apollo, 'useQuery').returns(fakeQueryResult as any)
 
-    enzyme.shallow(<TeamObjectives teamId={faker.random.word()} />)
+    enzyme.shallow(<DashboardPage />)
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeName)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(
+      intl.formatMessage(messages.greeting, { name: fakeName, gender: fakeGender }),
+    )
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('sets the team data upon mounting', () => {
+  it('does not set the page title if the user name is still being loaded', () => {
     const spy = sinon.spy()
-    const fakeName = faker.random.word()
-    const fakeQueryResult = { data: { team: { name: fakeName } } }
-    sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
-    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(spy)
+    const fakeQueryResult = { loading: true }
+
+    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
     sinon.stub(apollo, 'useQuery').returns(fakeQueryResult as any)
 
-    enzyme.shallow(<TeamObjectives teamId={faker.random.word()} />)
+    enzyme.shallow(<DashboardPage />)
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeQueryResult.data.team)
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
+    expect(spy.notCalled).toEqual(true)
   })
 
   it('hides the Breadcrumb if that is the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
     sinon.mock(apollo).expects('useQuery').atLeast(1).returns({})
 
-    const result = enzyme.shallow(<TeamObjectives isRootPage teamId={faker.random.word()} />)
+    const result = enzyme.shallow(<DashboardPage isRootPage />)
 
     const pageContent = result.find('PageContent')
 
@@ -57,9 +62,7 @@ describe('page control behaviors', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
     sinon.mock(apollo).expects('useQuery').atLeast(1).returns({})
 
-    const result = enzyme.shallow(
-      <TeamObjectives teamId={faker.random.word()} isRootPage={false} />,
-    )
+    const result = enzyme.shallow(<DashboardPage isRootPage={false} />)
 
     const pageContent = result.find('PageContent')
 
@@ -70,7 +73,7 @@ describe('page control behaviors', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
     sinon.mock(apollo).expects('useQuery').atLeast(1).returns({})
 
-    const result = enzyme.shallow(<TeamObjectives teamId={faker.random.word()} />)
+    const result = enzyme.shallow(<DashboardPage />)
 
     const pageContent = result.find('PageContent')
 
