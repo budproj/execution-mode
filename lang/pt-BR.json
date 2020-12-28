@@ -43,10 +43,6 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
-  "25ACLj": {
-    "defaultMessage": "Dashboard",
-    "description": "AppBar menu item that links to Dashboard page"
-  },
   "2qxo81": {
     "defaultMessage": "Duração",
     "description": "The label text above the Cycle section in our key result single page or drawer"
@@ -258,6 +254,10 @@
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
+  },
+  "mKv2wx": {
+    "defaultMessage": "Painel",
+    "description": "AppBar menu item that links to Dashboard page"
   },
   "mcWqy7": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segudando um pedaço de um quebra-cabeça e colaborando para montá-lo",
