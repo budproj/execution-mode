@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { UserGender } from 'src/components/User/types'
+import { USER_GENDER } from 'src/components/User/constants'
 
 import DashboardPage from './dashboard'
 import messages from './messages'
@@ -18,7 +18,7 @@ describe('page control behaviors', () => {
     const spy = sinon.spy()
     const intl = useIntl()
     const fakeName = faker.name.firstName()
-    const fakeGender = faker.helpers.randomize([UserGender.MALE, UserGender.FEMALE, undefined])
+    const fakeGender = faker.helpers.randomize([USER_GENDER.MALE, USER_GENDER.FEMALE, undefined])
 
     const fakeData = { name: fakeName, gender: fakeGender }
     const fakeQueryResult = { data: { me: fakeData }, loading: false }

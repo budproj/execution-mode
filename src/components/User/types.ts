@@ -1,7 +1,7 @@
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
 import { Team } from 'src/components/Team/types'
 
-import { UserPolicy } from './constants'
+import { USER_POLICY } from './constants'
 
 export interface CustomSorting {
   user: User['id']
@@ -12,7 +12,7 @@ export interface User {
   id: string
   authzSub: string
   name: string
-  gender?: UserGender
+  gender?: USER_GENDER
   role?: string
   picture?: string
   createdAt: Date
@@ -24,13 +24,8 @@ export interface User {
 }
 
 export interface UserPolicies {
-  create: UserPolicy
-  read: UserPolicy
-  update: UserPolicy
-  delete: UserPolicy
-}
-
-export enum UserGender {
-  MALE = 'MALE',
-  FEMALE = 'FEMALE',
+  create: USER_POLICY
+  read: USER_POLICY
+  update: USER_POLICY
+  delete: USER_POLICY
 }

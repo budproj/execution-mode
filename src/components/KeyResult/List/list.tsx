@@ -4,27 +4,29 @@ import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 
 import logger from 'lib/logger'
-import {
-  KeyResultListBodyColumn,
-  KeyResultListBodyProperties,
-} from 'src/components/KeyResult/List/Body/Columns/types'
+import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 import KeyResultListBody from './Body'
 import KeyResultListBodySkeleton from './Body/Skeleton'
 import KeyResultListHead from './Head'
 import { KeyResultListColumnHeadProperties } from './Head/types'
-import { BORDER_COLOR_DEFAULT, COLUMNS_DEFAULT, LIST_TEMPLATE_COLUMN_DEFAULT } from './constants'
-import { KeyResultListType } from './types'
+import {
+  BORDER_COLOR_DEFAULT,
+  COLUMNS_DEFAULT,
+  LIST_TEMPLATE_COLUMN_DEFAULT,
+  KEY_RESULT_LIST_TYPE,
+} from './constants'
 
 export interface KeyResultListProperties extends BoxProps {
   id: string
-  columns: KeyResultListBodyColumn[]
+  columns: KEY_RESULT_LIST_BODY_COLUMN[]
   templateColumns: GridProps['templateColumns']
   bodyProperties: KeyResultListBodyProperties
   headProperties: KeyResultListColumnHeadProperties
   borderColor: GridProps['borderColor']
-  type: KeyResultListType
+  type: KEY_RESULT_LIST_TYPE
   keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
   handleDragEnd?: (result: DropResult) => void
@@ -44,7 +46,7 @@ const KeyResultList = ({
   ...rest
 }: KeyResultListProperties): ReactElement => {
   const throwHandleDragEndError = () => {
-    if (type === KeyResultListType.DND)
+    if (type === KEY_RESULT_LIST_TYPE.DND)
       logger.error(
         'You must provide a handleDragError property to KeyResultList work as type DND',
         { component },

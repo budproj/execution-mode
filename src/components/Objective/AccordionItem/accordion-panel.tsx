@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
-import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
+import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
@@ -58,20 +58,20 @@ const ObjectiveAccordionPanel = ({
           keyResultIDs={keyResultIDs}
           templateColumns="0.1fr 2fr 1fr 2fr 1fr 2fr"
           columns={[
-            KeyResultListBodyColumn.STATUS_COLOR,
-            KeyResultListBodyColumn.TITLE,
-            KeyResultListBodyColumn.STATUS,
-            KeyResultListBodyColumn.PROGRESS,
-            KeyResultListBodyColumn.CYCLE,
-            KeyResultListBodyColumn.OWNER,
+            KEY_RESULT_LIST_BODY_COLUMN.STATUS_COLOR,
+            KEY_RESULT_LIST_BODY_COLUMN.TITLE,
+            KEY_RESULT_LIST_BODY_COLUMN.STATUS,
+            KEY_RESULT_LIST_BODY_COLUMN.PROGRESS,
+            KEY_RESULT_LIST_BODY_COLUMN.CYCLE,
+            KEY_RESULT_LIST_BODY_COLUMN.OWNER,
           ]}
           headProperties={{
-            [KeyResultListBodyColumn.STATUS_COLOR]: {
+            [KEY_RESULT_LIST_BODY_COLUMN.STATUS_COLOR]: {
               hidden: true,
             },
           }}
           bodyProperties={{
-            [KeyResultListBodyColumn.OWNER]: {
+            [KEY_RESULT_LIST_BODY_COLUMN.OWNER]: {
               displayName: true,
             },
           }}

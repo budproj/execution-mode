@@ -11,17 +11,15 @@ import {
   KeyResultListBodyColumnStatusColor,
   KeyResultListBodyColumnTitle,
 } from 'src/components/KeyResult/List/Body/Columns'
-import {
-  KeyResultListBodyColumn,
-  KeyResultListBodyProperties,
-} from 'src/components/KeyResult/List/Body/Columns/types'
+import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 export interface KeyResultListBodyStaticLineProperties {
   listID: string
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
-  columns: KeyResultListBodyColumn[]
+  columns: KEY_RESULT_LIST_BODY_COLUMN[]
   bodyProperties: KeyResultListBodyProperties
   onLineClick?: (id: KeyResult['id']) => void
   keyResultID?: KeyResult['id']
@@ -41,13 +39,13 @@ const KeyResultListBodyStaticLine = ({
   }
 
   const columnComponents = {
-    [KeyResultListBodyColumn.TITLE]: KeyResultListBodyColumnTitle,
-    [KeyResultListBodyColumn.OKR]: KeyResultListBodyColumnOkr,
-    [KeyResultListBodyColumn.STATUS]: KeyResultListBodyColumnStatus,
-    [KeyResultListBodyColumn.PROGRESS]: KeyResultListBodyColumnProgress,
-    [KeyResultListBodyColumn.CYCLE]: KeyResultListBodyColumnCycle,
-    [KeyResultListBodyColumn.OWNER]: KeyResultListBodyColumnOwner,
-    [KeyResultListBodyColumn.STATUS_COLOR]: KeyResultListBodyColumnStatusColor,
+    [KEY_RESULT_LIST_BODY_COLUMN.TITLE]: KeyResultListBodyColumnTitle,
+    [KEY_RESULT_LIST_BODY_COLUMN.OKR]: KeyResultListBodyColumnOkr,
+    [KEY_RESULT_LIST_BODY_COLUMN.STATUS]: KeyResultListBodyColumnStatus,
+    [KEY_RESULT_LIST_BODY_COLUMN.PROGRESS]: KeyResultListBodyColumnProgress,
+    [KEY_RESULT_LIST_BODY_COLUMN.CYCLE]: KeyResultListBodyColumnCycle,
+    [KEY_RESULT_LIST_BODY_COLUMN.OWNER]: KeyResultListBodyColumnOwner,
+    [KEY_RESULT_LIST_BODY_COLUMN.STATUS_COLOR]: KeyResultListBodyColumnStatusColor,
   }
 
   return (

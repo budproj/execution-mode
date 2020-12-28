@@ -1,6 +1,6 @@
 import { selectorFamily } from 'recoil'
 
-import getConfig, { Locale, Route } from 'src/config'
+import getConfig, { LOCALE, Route } from 'src/config'
 
 import { RecoilInterfaceGetter } from '../types'
 
@@ -12,9 +12,9 @@ const KEY = `${PREFIX}::SELECTORS`
 
 type SelectIntlRouteBasedOnRouteParameter = string
 
-type IntlRoute = Record<Locale | string, string>
+type IntlRoute = Record<LOCALE | string, string>
 
-type IntlRouteGroup = Record<Locale, IntlRoute['source']>
+type IntlRouteGroup = Record<LOCALE, IntlRoute['source']>
 
 type IntlRouteTree = Record<string, IntlRouteGroup>
 
@@ -102,11 +102,11 @@ const selectRouteGroup = (
   intlRouteTree: IntlRouteTree,
 ): IntlRouteGroup | undefined => intlRouteTree[absoluteRoute]
 
-const selectIntlRoute = (locale: Locale | string, intlRouteGroup: IntlRouteGroup): string =>
-  intlRouteGroup[locale as Locale]
+const selectIntlRoute = (locale: LOCALE | string, intlRouteGroup: IntlRouteGroup): string =>
+  intlRouteGroup[locale as LOCALE]
 
 const buildIntlRoute = (
-  locale: Locale | string,
+  locale: LOCALE | string,
   absoluteRoute: string,
   relativeRoute: string,
   intlRoutes: Route[],

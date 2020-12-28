@@ -6,9 +6,9 @@ export interface BudConfig {
 }
 
 export interface BudPublicConfig {
-  environment: Environment
+  environment: ENVIRONMENT
   nodeEnv: NodeEnvironment
-  defaultLocale: Locale
+  defaultLocale: LOCALE
   intlRoutes: Route[]
   logLevel: LogLevel
   api: BudAPIs
@@ -17,22 +17,22 @@ export interface BudPublicConfig {
 }
 
 export interface BudServerConfig {
-  host: Host
-  supportedLocales: Locale[]
+  host: HOST
+  supportedLocales: LOCALE[]
 }
 
-export enum Host {
+export enum HOST {
   'local.getbud.co' = 'local.getbud.co',
   'develop.getbud.co' = 'develop.getbud.co',
   'getbud.co' = 'getbud.co',
 }
 
-export enum Locale {
+export enum LOCALE {
   'pt-BR' = 'pt-BR',
   'en-US' = 'en-US',
 }
 
-export enum Environment {
+export enum ENVIRONMENT {
   local = 'local',
   develop = 'develop',
   production = 'production',
@@ -45,7 +45,7 @@ export type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
 export interface Route {
   destination: string
   source: string
-  locale: Locale
+  locale: LOCALE
 }
 
 export interface BudAPIs {

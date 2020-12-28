@@ -1,12 +1,12 @@
 import faker from 'faker'
 import { Factory } from 'miragejs'
 
-import { UserGender } from 'src/components/User/types'
+import { USER_GENDER } from 'src/components/User/constants'
 
 export default Factory.extend({
   authzSub: faker.random.uuid,
   name: faker.name.findName,
-  gender: () => faker.helpers.randomize([UserGender.MALE, UserGender.FEMALE, undefined]),
+  gender: () => faker.helpers.randomize([USER_GENDER.MALE, USER_GENDER.FEMALE, undefined]),
   role: faker.name.jobTitle,
   picture: () => faker.helpers.randomize([undefined, faker.image.avatar()]),
   createdAt: faker.date.past,
