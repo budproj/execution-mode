@@ -4,40 +4,48 @@ import faker from 'faker'
 import React from 'react'
 import sinon from 'sinon'
 
+import * as recoilHooks from 'src/state/recoil/hooks'
+
 import CompanyProgressOverview from './company-progress-overview'
 
-describe('remote data fetching and parsing', () => {
+describe('component lifecycle', () => {
   afterEach(() => sinon.restore())
 
-  it('passes the primary company name to our header', () => {
-    const fakeCompanyName = faker.random.word()
-    const fakeCompany = { name: fakeCompanyName }
+  it('updates our local state with the company data', () => {
+    const fakeCompany = faker.helpers.userCard()
     const fakeQueryResult = { me: { companies: [fakeCompany] } }
+    const spy = sinon.spy()
+
     sinon.stub(apollo, 'useQuery').returns({ data: fakeQueryResult } as any)
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(spy)
 
-    const result = enzyme.shallow(<CompanyProgressOverview />)
+    enzyme.shallow(<CompanyProgressOverview />)
 
-    const header = result.find('CompanyProgressOverviewHeader')
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeCompany)
 
-    expect(header.prop('companyName')).toEqual(fakeCompanyName)
+    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('passes the primary company gender to our header', () => {
-    const fakeCompanyGender = faker.random.word()
-    const fakeCompany = { gender: fakeCompanyGender }
+  it('passes company ID to our header', () => {
+    const fakeID = faker.random.uuid()
+    const fakeCompany = { id: fakeID }
     const fakeQueryResult = { me: { companies: [fakeCompany] } }
+
     sinon.stub(apollo, 'useQuery').returns({ data: fakeQueryResult } as any)
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<CompanyProgressOverview />)
 
     const header = result.find('CompanyProgressOverviewHeader')
 
-    expect(header.prop('companyGender')).toEqual(fakeCompanyGender)
+    expect(header.prop('companyID')).toEqual(fakeID)
   })
 
   it('passes the loading state to our header', () => {
     const fakeLoading = faker.random.boolean()
+
     sinon.stub(apollo, 'useQuery').returns({ loading: fakeLoading } as any)
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<CompanyProgressOverview />)
 

@@ -54,6 +54,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     team.update('users', users as any)
     team.update('objectives', objectives as any)
   })
+  company.update('latestReport', progressReports[0])
 
   keyResults.map((keyResult) => {
     const latestProgressReport = keyResult.progressReports.models[0] as ProgressReport

@@ -369,6 +369,9 @@ type Company {
 
   """A creation date ordered list of users that are members of this company"""
   users: [User!]!
+
+  """The latest report for this company"""
+  latestReport: ProgressReport
 }
 
 """Common shared object values between multiple report types"""
