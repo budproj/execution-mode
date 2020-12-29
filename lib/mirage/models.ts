@@ -48,6 +48,7 @@ const models = {
     progressReports: hasMany(),
     confidenceReports: hasMany(),
     teams: hasMany(),
+    companies: hasMany(),
   }),
   policy: Model,
 }

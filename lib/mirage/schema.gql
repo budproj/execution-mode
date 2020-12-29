@@ -89,6 +89,11 @@ type User {
 
   """The creation date ordered list of companies that this user owns"""
   ownedCompanies: [Company!]!
+
+  """
+  The creation date ordered list of companies that this user is a part of
+  """
+  companies(limit: Int): [Company!]!
 }
 
 """

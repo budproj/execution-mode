@@ -3,5 +3,9 @@ query GET_USER_NAMED_AVATAR_DATA {
     id
     name
     picture
+    companies(limit: 1) {
+      id
+      name
+    }
   }
 }

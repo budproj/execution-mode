@@ -5,10 +5,15 @@ export interface NamedAvatarProperties {
   isLoading?: boolean
   name?: string
   picture?: string
-  team?: string
+  company?: string
 }
 
-const NamedAvatar = ({ name, picture, team, isLoading }: NamedAvatarProperties): ReactElement => {
+const NamedAvatar = ({
+  name,
+  picture,
+  company,
+  isLoading,
+}: NamedAvatarProperties): ReactElement => {
   const isLoadingIsUndefined = typeof isLoading === 'undefined'
   const isLoaded = isLoadingIsUndefined || !isLoading
 
@@ -27,7 +32,7 @@ const NamedAvatar = ({ name, picture, team, isLoading }: NamedAvatarProperties):
 
         <Skeleton isLoaded={isLoaded} height={isLoaded ? 'auto' : '10px'} mt={isLoaded ? 0 : '8px'}>
           <Text fontSize="sm" color="gray.600">
-            {team}
+            {company}
           </Text>
         </Skeleton>
       </Box>

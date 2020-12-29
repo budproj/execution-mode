@@ -2,10 +2,8 @@ import { Box, GridProps } from '@chakra-ui/react'
 import { uniqueId } from 'lodash'
 import React from 'react'
 
-import {
-  KeyResultListBodyColumn,
-  KeyResultListBodyProperties,
-} from 'src/components/KeyResult/List/Body/Columns/types'
+import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 import KeyResultListBodyStaticEmptyState from './empty-state'
@@ -16,7 +14,7 @@ export interface KeyResultListBodyStaticProperties {
   keyResultIDs: Array<KeyResult['id']>
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
-  columns: KeyResultListBodyColumn[]
+  columns: KEY_RESULT_LIST_BODY_COLUMN[]
   bodyProperties: KeyResultListBodyProperties
   onLineClick?: (id: KeyResult['id']) => void
 }

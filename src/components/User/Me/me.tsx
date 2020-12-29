@@ -24,7 +24,7 @@ const Me = () => {
     <NamedAvatar
       name={userData?.name}
       picture={userData?.picture}
-      team="Apple"
+      company={userData?.companies?.[0]?.name}
       isLoading={loading}
     />
   )
