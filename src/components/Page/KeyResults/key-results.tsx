@@ -6,7 +6,7 @@ import PageContent from 'src/components/Base/PageContent'
 import { KeyResultView } from 'src/components/KeyResult'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { PageProperties } from 'src/components/Pages/types'
+import { PageProperties } from 'src/components/Page/types'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 import { pageTitleAtom } from 'src/state/recoil/page'
 

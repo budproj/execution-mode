@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import PageContent from 'src/components/Base/PageContent'
-import { PageProperties } from 'src/components/Pages/types'
+import { PageProperties } from 'src/components/Page/types'
 import TeamCardList from 'src/components/Team/CardList'
 import { pageTitleAtom } from 'src/state/recoil/page'
 

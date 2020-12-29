@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ObjectivesPage from 'src/components/Pages/Objectives'
+import ObjectivesPage from 'src/components/Page/Objectives'
 
 const ObjectivesIndex = () => <ObjectivesPage isRootPage />
 

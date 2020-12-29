@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 
-import TeamObjectives from 'src/components/Pages/TeamObjectives'
+import TeamObjectives from 'src/components/Page/TeamObjectives'
 
 const TeamObjectivesPage = () => {
   const router = useRouter()

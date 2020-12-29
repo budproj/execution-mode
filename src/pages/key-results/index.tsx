@@ -1,6 +1,6 @@
 import React from 'react'
 
-import KeyResultsPage from 'src/components/Pages/KeyResults'
+import KeyResultsPage from 'src/components/Page/KeyResults'
 
 const KeyResultsIndex = () => <KeyResultsPage isRootPage />
 

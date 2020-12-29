@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 
 import { PageContent } from 'src/components/Base'
-import { PageProperties } from 'src/components/Pages/types'
+import { PageProperties } from 'src/components/Page/types'
 import ChildTeamsObjectives from 'src/components/Team/ChildTeamsObjectives'
 import { Team } from 'src/components/Team/types'
 import { companyAtomFamily } from 'src/state/recoil/company'
