@@ -87,6 +87,10 @@
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"
   },
+  "ELi8q5": {
+    "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlighted>{company}</highlighted> como um todo?",
+    "description": "The title of the header section in our company overview report"
+  },
   "FEd9u8": {
     "defaultMessage": "Salvar",
     "description": "This message is displayed in the \"SAVE\" button in the checkin form"
@@ -282,10 +286,6 @@
   "rpLZ2J": {
     "defaultMessage": "Bud - Gestão de OKR e Estratégia",
     "description": "The title text of our logotype, it is displayed when an user hover the icon itself"
-  },
-  "slmscs": {
-    "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <span>{company}</span> como um todo?",
-    "description": "The title of the header section in our company overview report"
   },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",

@@ -11,7 +11,7 @@ import {
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ChevronDown as ChevronDownIcon } from 'src/components/Icons'
+import { ChevronDown as ChevronDownIcon } from 'src/components/Icon'
 
 import messages from './messages'
 

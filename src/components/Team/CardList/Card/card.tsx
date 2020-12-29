@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { DynamicAvatarGroup, IntlLink, Slider } from 'src/components/Base'
-import CrownIcon from 'src/components/Icons/Crown'
+import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
 import { companyAtomFamily } from 'src/state/recoil/company'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'

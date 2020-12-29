@@ -12,7 +12,7 @@ import {
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import CalendarOutlineIcon from 'src/components/Icons/CalendarOutline'
+import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Objective } from 'src/components/Objective/types'
 import { Tag } from 'src/state/recoil/key-result/selectors/confidence-tag'
 
