@@ -55,6 +55,10 @@
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
   },
+  "6KET/Z": {
+    "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
+    "description": "The title of the header section in our company overview report"
+  },
   "8bQS0s": {
     "defaultMessage": "Em atraso",
     "description": "We use this tag to group every key result with confidence lower than 25"
@@ -95,10 +99,6 @@
     "defaultMessage": "Um ícone de coroa que representa a sua empresa",
     "description": "This message is used by screen readers to explain our crown icon"
   },
-  "ELi8q5": {
-    "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlighted>{company}</highlighted> como um todo?",
-    "description": "The title of the header section in our company overview report"
-  },
   "FEd9u8": {
     "defaultMessage": "Salvar",
     "description": "This message is displayed in the \"SAVE\" button in the checkin form"
@@ -118,6 +118,10 @@
   "HpiBVM": {
     "defaultMessage": "Objetivos",
     "description": "The page title that our users should see in the objectives page"
+  },
+  "IkA9uV": {
+    "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
+    "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
   },
   "J98VQ8": {
     "defaultMessage": "Em dia",
@@ -174,6 +178,10 @@
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
+  },
+  "SjGqdc": {
+    "defaultMessage": "Desde a última segunda-feira",
+    "description": "This helper texts explains since when we are calculating your company progress"
   },
   "Sn7K6v": {
     "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
@@ -323,6 +331,10 @@
     "defaultMessage": "Nome da KR",
     "description": "The text of the table head related to the Title column"
   },
+  "w18rI2": {
+    "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
+    "description": "This message is used by screen readers to explain our arrow up"
+  },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
@@ -338,10 +350,6 @@
   "yDscHW": {
     "defaultMessage": "Minhas KR",
     "description": "AppBar menu item that links to Key Results page"
-  },
-  "yQ7cY8": {
-    "defaultMessage": "Atualização de status",
-    "description": "We show this prefix before the updated time of the status column in our Key Results table"
   },
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",

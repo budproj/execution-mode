@@ -4,6 +4,7 @@ query GET_USER_PRIMARY_COMPANY {
       id
       name
       gender
+      percentageProgressIncrease
       latestReport {
         id
         createdAt

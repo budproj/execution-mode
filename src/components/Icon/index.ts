@@ -1,5 +1,7 @@
 export { default as Activity } from './Activity'
 
+export { default as ArrowUp } from './ArrowUp'
+
 export { default as ArrowRight } from './ArrowRight'
 
 export { default as Bookmark } from './Bookmark'

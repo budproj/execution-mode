@@ -19,4 +19,5 @@ export interface Company {
   cycles?: Cycle[]
   users?: User[]
   latestReport?: ProgressReport | ConfidenceReport
+  percentageProgressIncrease?: number
 }

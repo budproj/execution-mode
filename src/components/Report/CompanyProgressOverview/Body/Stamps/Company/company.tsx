@@ -30,8 +30,8 @@ const CompanyProgressOverviewBodyStampCompany = ({
     >
       <Skeleton
         isLoaded={!isLoading}
-        minH={isLoading ? '21px' : 'auto'}
-        minW={isLoading ? '150px' : 'auto'}
+        h={isLoading ? '21px' : 'auto'}
+        w={isLoading ? '150px' : 'auto'}
       >
         <Heading as="h3" fontSize="18px">
           {company?.name}
@@ -40,8 +40,8 @@ const CompanyProgressOverviewBodyStampCompany = ({
 
       <Skeleton
         isLoaded={!isLoading}
-        minH={isLoading ? '20px' : 'auto'}
-        minW={isLoading ? '310px' : 'auto'}
+        h={isLoading ? '20px' : 'auto'}
+        w={isLoading ? '310px' : 'auto'}
       >
         <LastUpdateText date={latestReport?.createdAt} author={latestReport?.user?.name} />
       </Skeleton>

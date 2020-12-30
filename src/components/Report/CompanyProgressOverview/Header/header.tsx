@@ -27,8 +27,8 @@ const CompanyProgressOverviewHeader = ({
           {intl.formatMessage(messages.title, {
             gender: company?.gender,
             company: company?.name,
-            highlighted: (string) => (
-              <Text color="brand.400" display="inline">
+            highlight: (string) => (
+              <Text color="brand.400" display="inline" as="span">
                 {string}
               </Text>
             ),

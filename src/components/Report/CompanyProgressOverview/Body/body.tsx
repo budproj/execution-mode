@@ -1,9 +1,10 @@
-import { Box } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import React from 'react'
 
 import { Company } from 'src/components/Company/types'
 
 import CompanyProgressOverviewBodyStampCompany from './Stamps/Company'
+import CompanyProgressOverviewBodyStampProgressIncrease from './Stamps/ProgressIncrease'
 
 export interface CompanyProgressOverviewBodyProperties {
   companyID?: Company['id']
@@ -14,9 +15,10 @@ const CompanyProgressOverviewBody = ({
   companyID,
   isLoading,
 }: CompanyProgressOverviewBodyProperties) => (
-  <Box p={6}>
+  <Flex p={6} gridGap={20}>
     <CompanyProgressOverviewBodyStampCompany companyID={companyID} isLoading={isLoading} />
-  </Box>
+    <CompanyProgressOverviewBodyStampProgressIncrease companyID={companyID} isLoading={isLoading} />
+  </Flex>
 )
 
 export default CompanyProgressOverviewBody

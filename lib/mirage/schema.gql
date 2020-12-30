@@ -372,6 +372,9 @@ type Company {
 
   """The latest report for this company"""
   latestReport: ProgressReport
+
+  """The percentage progress increase since last monday"""
+  percentageProgressIncrease: Float!
 }
 
 """Common shared object values between multiple report types"""
