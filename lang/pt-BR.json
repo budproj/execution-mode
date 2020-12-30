@@ -131,6 +131,10 @@
     "defaultMessage": "Um círculo vermelho, indicando que o resultado-chave está atrasada",
     "description": "A brief explanation for screen readers regarding the red status circle"
   },
+  "Lc60Nd": {
+    "defaultMessage": "Posição atual",
+    "description": "This message is displayed below the current progress thumb"
+  },
   "LytmoI": {
     "defaultMessage": "Um círculo verde, indicando que o resultado-chave está em dia",
     "description": "A brief explanation for screen readers regarding the green status circle"
@@ -154,6 +158,10 @@
   "P/ujgo": {
     "defaultMessage": "Um ícone de controle de video game",
     "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
+  },
+  "PYLIcI": {
+    "defaultMessage": "Meta",
+    "description": "This message is displayed below the goal thumb"
   },
   "Pkdkh4": {
     "defaultMessage": "Minhas Key Result",

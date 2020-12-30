@@ -28,6 +28,8 @@ export { default as SliderWithHoverThumb } from './SliderWithHoverThumb'
 
 export { default as SliderWithFilledTrack } from './SliderWithFilledTrack'
 
+export { default as SliderWithGoal } from './SliderWithGoal'
+
 export { default as SelectMenu } from './SelectMenu'
 
 export { default as InputWithLoader } from './InputWithLoader'
