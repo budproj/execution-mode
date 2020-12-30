@@ -1,6 +1,6 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-type SliderMessages = 'updateLabel'
+type SliderWithHoverThumbMessages = 'updateLabel'
 
 export default defineMessages({
   updateLabel: {
@@ -8,4 +8,4 @@ export default defineMessages({
     id: '+r5To1',
     description: 'This message is displayed in a tooltip above the SliderThumb on our sliders',
   },
-}) as Record<SliderMessages, MessageDescriptor>
+}) as Record<SliderWithHoverThumbMessages, MessageDescriptor>

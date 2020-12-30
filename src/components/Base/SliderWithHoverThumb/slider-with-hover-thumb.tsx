@@ -1,5 +1,5 @@
 import {
-  Slider as ChakraSlider,
+  Slider,
   SliderFilledTrack,
   SliderProps,
   SliderThumb,
@@ -11,17 +11,17 @@ import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-export interface SliderProperties extends SliderProps {
+export interface SliderWithHoverThumbProperties extends SliderProps {
   trackColor?: string
   trackThickness?: string
 }
 
-const Slider = forwardRef<HTMLDivElement, SliderProperties>(
-  ({ trackColor, trackThickness, ...rest }: SliderProperties, forwardedReference) => {
+const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProperties>(
+  ({ trackColor, trackThickness, ...rest }: SliderWithHoverThumbProperties, forwardedReference) => {
     const intl = useIntl()
 
     return (
-      <ChakraSlider
+      <Slider
         role="group"
         _disabled={{ opacity: 1, pointerEvents: 'none', cursor: 'default' }}
         {...rest}
@@ -48,15 +48,15 @@ const Slider = forwardRef<HTMLDivElement, SliderProperties>(
             _groupHover={{ opacity: 1 }}
           />
         </Tooltip>
-      </ChakraSlider>
+      </Slider>
     )
   },
 )
 
-Slider.defaultProps = {
+SliderWithHoverThumb.defaultProps = {
   value: 0,
   trackColor: 'brand.400',
   trackThickness: '8px',
 }
 
-export default Slider
+export default SliderWithHoverThumb
