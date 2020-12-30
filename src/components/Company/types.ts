@@ -1,4 +1,5 @@
 import { Cycle } from 'src/components/Cycle/types'
+import { ConfidenceReport, ProgressReport } from 'src/components/KeyResult/types'
 import { Team } from 'src/components/Team/types'
 
 import { User } from '../User/types'
@@ -17,4 +18,5 @@ export interface Company {
   teams?: Team[]
   cycles?: Cycle[]
   users?: User[]
+  latestReport?: ProgressReport | ConfidenceReport
 }

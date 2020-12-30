@@ -1,0 +1,3 @@
+import CompanyProgressOverviewBodyStampCompany from './company'
+
+export default CompanyProgressOverviewBodyStampCompany

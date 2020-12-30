@@ -23,7 +23,7 @@ const CompanyProgressOverview = () => {
   return (
     <Box borderWidth="1px" borderColor="blue.100">
       <CompanyProgressOverviewHeader companyID={company?.id} isLoading={loading} />
-      <CompanyProgressOverviewBody />
+      <CompanyProgressOverviewBody companyID={company?.id} isLoading={loading} />
     </Box>
   )
 }

@@ -53,4 +53,32 @@ describe('component lifecycle', () => {
 
     expect(header.prop('isLoading')).toEqual(fakeLoading)
   })
+
+  it('passes company ID to our body', () => {
+    const fakeID = faker.random.uuid()
+    const fakeCompany = { id: fakeID }
+    const fakeQueryResult = { me: { companies: [fakeCompany] } }
+
+    sinon.stub(apollo, 'useQuery').returns({ data: fakeQueryResult } as any)
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<CompanyProgressOverview />)
+
+    const body = result.find('CompanyProgressOverviewBody')
+
+    expect(body.prop('companyID')).toEqual(fakeID)
+  })
+
+  it('passes the loading state to our body', () => {
+    const fakeLoading = faker.random.boolean()
+
+    sinon.stub(apollo, 'useQuery').returns({ loading: fakeLoading } as any)
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<CompanyProgressOverview />)
+
+    const body = result.find('CompanyProgressOverviewBody')
+
+    expect(body.prop('isLoading')).toEqual(fakeLoading)
+  })
 })

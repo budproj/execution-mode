@@ -1,8 +1,8 @@
-import { Flex, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
+import { Flex, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
-import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import LastUpdateText from 'src/components/Base/LastUpdateText'
 import ConfidenceTag from 'src/components/KeyResult/ConfidenceTag/confidence-tag'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
@@ -12,8 +12,6 @@ import {
   selectCurrentConfidence,
   selectLatestConfidenceReport,
 } from 'src/state/recoil/key-result/selectors'
-
-import messages from './messages'
 
 export interface KeyResultListBodyColumnStatusProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -25,10 +23,8 @@ const KeyResultListBodyColumnStatus = ({
   id,
   withLastUpdateInfo,
 }: KeyResultListBodyColumnStatusProperties): ReactElement => {
-  const intl = useIntl()
   const currentConfidence = useRecoilValue(selectCurrentConfidence(id))
   const latestConfidenceReport = useRecoilValue(selectLatestConfidenceReport(id))
-  const updateDate = latestConfidenceReport?.createdAt
 
   const isKeyResultLoaded = Boolean(id)
 
@@ -51,13 +47,10 @@ const KeyResultListBodyColumnStatus = ({
             isLoaded={isKeyResultLoaded}
             pl={8}
           >
-            <Text color="gray.300" fontSize="14px">
-              {intl.formatMessage(messages.updatedAt)} -{' '}
-              {intl.formatDate(updateDate, {
-                day: 'numeric',
-                month: 'short',
-              })}
-            </Text>
+            <LastUpdateText
+              date={latestConfidenceReport?.createdAt}
+              author={latestConfidenceReport?.user?.name}
+            />
           </SkeletonText>
         )}
       </Flex>

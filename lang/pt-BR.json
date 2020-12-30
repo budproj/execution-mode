@@ -47,6 +47,10 @@
     "defaultMessage": "Duração",
     "description": "The label text above the Cycle section in our key result single page or drawer"
   },
+  "3x3lDo": {
+    "defaultMessage": "Última atualização {day} as {hour} por {author}",
+    "description": "This message displays the latest report status for a given component"
+  },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -86,6 +90,10 @@
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"
+  },
+  "D8ZyT4": {
+    "defaultMessage": "Um ícone de coroa que representa a sua empresa",
+    "description": "This message is used by screen readers to explain our crown icon"
   },
   "ELi8q5": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlighted>{company}</highlighted> como um todo?",
@@ -175,6 +183,10 @@
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
   },
+  "TPAtkS": {
+    "defaultMessage": "Ontem",
+    "description": "This label is displayed if the last update date is yesterday"
+  },
   "UBruoq": {
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
@@ -250,6 +262,10 @@
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
+  },
+  "lII4JM": {
+    "defaultMessage": "Hoje",
+    "description": "This label is displayed if the last update date is today"
   },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
