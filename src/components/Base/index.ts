@@ -26,6 +26,8 @@ export { default as RecoilIntlProvider } from './RecoilIntlProvider'
 
 export { default as SliderWithHoverThumb } from './SliderWithHoverThumb'
 
+export { default as SliderWithFilledTrack } from './SliderWithFilledTrack'
+
 export { default as SelectMenu } from './SelectMenu'
 
 export { default as InputWithLoader } from './InputWithLoader'

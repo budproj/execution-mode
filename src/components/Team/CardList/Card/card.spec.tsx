@@ -87,7 +87,7 @@ describe('component expectations', () => {
 
     const result = enzyme.shallow(<TeamCard id={fakeID} />)
 
-    const slider = result.find('ForwardRef')
+    const slider = result.find('SliderWithFilledTrack')
 
     expect(slider.prop('trackColor')).toEqual(fakeConfidenceTag.color)
   })
