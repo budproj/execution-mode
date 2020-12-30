@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react'
 
-const Index = (): ReactElement => <>Home</>
+import DashboardPage from 'src/components/Page/Dashboard'
+
+const Index = (): ReactElement => <DashboardPage isRootPage />
 
 export default Index

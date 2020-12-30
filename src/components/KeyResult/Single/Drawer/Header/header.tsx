@@ -2,7 +2,7 @@ import { Box, DrawerCloseButton, DrawerHeader } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { Close as CloseIcon } from 'src/components/Icons'
+import { Close as CloseIcon } from 'src/components/Icon'
 import KeyResultSingleTitle from 'src/components/KeyResult/Single/Title'
 import { KeyResult } from 'src/components/KeyResult/types'
 

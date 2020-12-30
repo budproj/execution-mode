@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { UserPolicy } from 'src/components/User/constants'
+import { USER_POLICY } from 'src/components/User/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import queries from './queries.gql'
@@ -24,7 +24,7 @@ const Title = ({ keyResultID }: KeyResultSingleTitleProperties) => {
   const [titleDraft, setTitleDraft] = useState(title)
 
   const isTitleLoaded = Boolean(title)
-  const canUpdate = policies?.update === UserPolicy.ALLOW
+  const canUpdate = policies?.update === USER_POLICY.ALLOW
 
   const handleTitleSubmit = async (newTitle: string) => {
     setTitle(newTitle)

@@ -14,4 +14,28 @@ describe('props customization', () => {
 
     expect(renderedRightWing.length).toEqual(1)
   })
+
+  it('can show the Breadcrumb', () => {
+    const result = enzyme.shallow(<PageContentHeader showBreadcrumb />)
+
+    const renderedRightWing = result.find('Breadcrumb')
+
+    expect(renderedRightWing.length).toEqual(1)
+  })
+
+  it('can hide the Breadcrumb', () => {
+    const result = enzyme.shallow(<PageContentHeader showBreadcrumb={false} />)
+
+    const renderedRightWing = result.find('Breadcrumb')
+
+    expect(renderedRightWing.length).toEqual(0)
+  })
+
+  it('renders the Breadcrumb by default', () => {
+    const result = enzyme.shallow(<PageContentHeader />)
+
+    const renderedRightWing = result.find('Breadcrumb')
+
+    expect(renderedRightWing.length).toEqual(1)
+  })
 })

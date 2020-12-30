@@ -43,4 +43,16 @@ describe('component expectations', () => {
 
     expect(namedAvatar.prop('picture')).toEqual(fakePicture)
   })
+
+  it('passes the user first company to the NamedAvatar', () => {
+    const fakeCompanyName = faker.company.companyName()
+    const fakeData = { me: { companies: [{ name: fakeCompanyName }] } }
+    sinon.stub(apollo, 'useQuery').returns({ data: fakeData } as any)
+
+    const result = enzyme.shallow(<Me />)
+
+    const namedAvatar = result.find('NamedAvatar')
+
+    expect(namedAvatar.prop('company')).toEqual(fakeCompanyName)
+  })
 })

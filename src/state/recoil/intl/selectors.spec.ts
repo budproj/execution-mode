@@ -13,7 +13,7 @@ describe('getter based on locale', () => {
   it('returns the correct route for a given locale', () => {
     const source = `/${faker.random.word()}`
     const destination = `/${faker.random.word()}`
-    const locale = faker.random.word() as config.Locale
+    const locale = faker.random.word() as config.LOCALE
     const fakeConfig: Partial<config.BudConfig> = {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       publicRuntimeConfig: {
@@ -49,7 +49,7 @@ describe('getter based on locale', () => {
   it('returns the source route if the locale was found in route tree', () => {
     const source = `/${faker.random.word()}`
     const destination = `/${faker.random.word()}`
-    const locale = faker.random.word() as config.Locale
+    const locale = faker.random.word() as config.LOCALE
     const fakeConfig: Partial<config.BudConfig> = {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       publicRuntimeConfig: {
@@ -75,7 +75,7 @@ describe('getter based on locale', () => {
   it('returns the source route if the locale exists, but the destination was not found in route tree', () => {
     const source = `/${faker.random.word()}`
     const destination = `/${faker.random.word()}`
-    const locale = faker.random.word() as config.Locale
+    const locale = faker.random.word() as config.LOCALE
     const fakeConfig: Partial<config.BudConfig> = {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       publicRuntimeConfig: {
@@ -99,7 +99,7 @@ describe('getter based on locale', () => {
   })
 
   it('removes the locale prefix on locale prefixed sources', () => {
-    const locale = faker.random.word() as config.Locale
+    const locale = faker.random.word() as config.LOCALE
     const source = `/${faker.random.word()}`
     const destination = `/${faker.random.word()}`
     const fakeConfig: Partial<config.BudConfig> = {
@@ -129,7 +129,7 @@ describe('getter based on locale', () => {
     const fakeDestination = faker.random.word()
     const source = `/${parent}/${faker.random.word()}`
     const destination = `/${parent}/${fakeDestination}`
-    const locale = faker.random.word() as config.Locale
+    const locale = faker.random.word() as config.LOCALE
     const fakeConfig: Partial<config.BudConfig> = {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       publicRuntimeConfig: {
@@ -165,7 +165,7 @@ describe('getter based on locale', () => {
     const source = `/${intlParent}/:${parameter}`
     const destination = `/${parent}/:${parameter}`
 
-    const locale = faker.random.word() as config.Locale
+    const locale = faker.random.word() as config.LOCALE
     const fakeConfig: Partial<config.BudConfig> = {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       publicRuntimeConfig: {
@@ -206,7 +206,7 @@ describe('getter based on locale', () => {
     const source = `/${intlGrandfather}/${intlParent}/:${parameter}`
     const destination = `/${grandfather}/${parent}/:${parameter}`
 
-    const locale = faker.random.word() as config.Locale
+    const locale = faker.random.word() as config.LOCALE
     const fakeConfig: Partial<config.BudConfig> = {
       // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
       publicRuntimeConfig: {

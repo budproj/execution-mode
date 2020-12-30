@@ -1,10 +1,8 @@
 import { GridProps } from '@chakra-ui/react'
 import React from 'react'
 
-import {
-  KeyResultListBodyColumn,
-  KeyResultListBodyProperties,
-} from 'src/components/KeyResult/List/Body/Columns/types'
+import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import KeyResultListBodyStaticLine from 'src/components/KeyResult/List/Body/Static/line'
 import { KeyResult } from 'src/components/KeyResult/types'
 
@@ -16,7 +14,7 @@ export interface KeyResultListBodyDragAndDropLineProperties {
   index: number
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
-  columns: KeyResultListBodyColumn[]
+  columns: KEY_RESULT_LIST_BODY_COLUMN[]
   bodyProperties: KeyResultListBodyProperties
   onLineClick?: (id: KeyResult['id']) => void
 }

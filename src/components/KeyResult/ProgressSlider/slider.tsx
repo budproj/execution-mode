@@ -1,7 +1,9 @@
 import React, { RefObject, forwardRef, useCallback, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import Slider, { SliderProperties } from 'src/components/Base/Slider'
+import SliderWithHoverThumb, {
+  SliderWithHoverThumbProperties,
+} from 'src/components/Base/SliderWithHoverThumb'
 import { KeyResult } from 'src/components/KeyResult/types'
 import {
   keyResultProgressUpdatePopoverOpen,
@@ -24,9 +26,9 @@ const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 
 const ProgressSlider = forwardRef(
   (
-    properties: SliderProperties,
+    properties: SliderWithHoverThumbProperties,
     reference?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null,
-  ) => <Slider {...properties} ref={reference} />,
+  ) => <SliderWithHoverThumb {...properties} ref={reference} />,
 )
 
 const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContainerProperties>(
@@ -83,7 +85,7 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
         onChangeEnd={handleSliderUpdateEnd}
       />
     ) : (
-      <Slider isDisabled />
+      <SliderWithHoverThumb isDisabled />
     )
   },
 )

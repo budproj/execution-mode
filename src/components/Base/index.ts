@@ -24,7 +24,11 @@ export { default as RecoilDebugObserver } from './RecoilDebugObserver'
 
 export { default as RecoilIntlProvider } from './RecoilIntlProvider'
 
-export { default as Slider } from './Slider'
+export { default as SliderWithHoverThumb } from './SliderWithHoverThumb'
+
+export { default as SliderWithFilledTrack } from './SliderWithFilledTrack'
+
+export { default as SliderWithGoal } from './SliderWithGoal'
 
 export { default as SelectMenu } from './SelectMenu'
 

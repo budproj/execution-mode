@@ -2,7 +2,7 @@ import faker from 'faker'
 import shuffle from 'lodash/shuffle'
 import { ModelInstance } from 'miragejs'
 
-import { KeyResultFormat } from 'src/components/KeyResult/types'
+import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
 export const buildKeyResultView = (keyResultModels: Array<ModelInstance<any>>) => {
   const keyResults = shuffle(keyResultModels)
@@ -16,14 +16,14 @@ export const buildKeyResultView = (keyResultModels: Array<ModelInstance<any>>) =
 
 export function buildProgressReport(this: any) {
   const handlers = {
-    [KeyResultFormat.NUMBER]: () =>
+    [KEY_RESULT_FORMAT.NUMBER]: () =>
       faker.random.number({ min: this.keyResult.initialValue, max: this.keyResult.goal }),
-    [KeyResultFormat.PERCENTAGE]: () =>
+    [KEY_RESULT_FORMAT.PERCENTAGE]: () =>
       faker.random.float({ min: this.initialValue, max: this.keyResult.goal }),
-    [KeyResultFormat.COIN_BRL]: () =>
+    [KEY_RESULT_FORMAT.COIN_BRL]: () =>
       faker.random.number({ min: this.initialValue, max: this.keyResult.goal }),
   }
-  const formatHandler = handlers[this.keyResult.format as KeyResultFormat]
+  const formatHandler = handlers[this.keyResult.format as KEY_RESULT_FORMAT]
 
   return formatHandler()
 }

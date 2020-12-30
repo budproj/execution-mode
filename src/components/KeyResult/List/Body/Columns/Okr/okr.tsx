@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import StackIcon from 'src/components/Icons/Stack'
+import StackIcon from 'src/components/Icon/Stack'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'

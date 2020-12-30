@@ -1,6 +1,6 @@
 import faker from 'faker'
 
-import { KeyResultFormat } from 'src/components/KeyResult/types'
+import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
 import AbsoluteMask from './Absolute'
 import CoinBRLMask from './CoinBRL'
@@ -9,7 +9,7 @@ import * as selectors from './selectors'
 
 describe('select masked based on format', () => {
   it('returns the absolute mask if the number format is provided', () => {
-    const format = KeyResultFormat.NUMBER
+    const format = KEY_RESULT_FORMAT.NUMBER
 
     const mask = selectors.selectMaskBasedOnFormat(format)
 
@@ -17,7 +17,7 @@ describe('select masked based on format', () => {
   })
 
   it('returns the percentage mask if the percentage format is provided', () => {
-    const format = KeyResultFormat.PERCENTAGE
+    const format = KEY_RESULT_FORMAT.PERCENTAGE
 
     const mask = selectors.selectMaskBasedOnFormat(format)
 
@@ -25,7 +25,7 @@ describe('select masked based on format', () => {
   })
 
   it('returns the brazillian reais mask if the brazillian reais format is provided', () => {
-    const format = KeyResultFormat.COIN_BRL
+    const format = KEY_RESULT_FORMAT.COIN_BRL
 
     const mask = selectors.selectMaskBasedOnFormat(format)
 
@@ -39,7 +39,7 @@ describe('select masked based on format', () => {
   })
 
   it('returns the absolute mask if an invalid format is provided', () => {
-    const mask = selectors.selectMaskBasedOnFormat(faker.random.word() as KeyResultFormat)
+    const mask = selectors.selectMaskBasedOnFormat(faker.random.word() as KEY_RESULT_FORMAT)
 
     expect(mask).toEqual(AbsoluteMask)
   })

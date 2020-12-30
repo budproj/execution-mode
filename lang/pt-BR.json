@@ -43,17 +43,21 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
-  "25ACLj": {
-    "defaultMessage": "Dashboard",
-    "description": "AppBar menu item that links to Dashboard page"
-  },
   "2qxo81": {
     "defaultMessage": "Duração",
     "description": "The label text above the Cycle section in our key result single page or drawer"
   },
+  "3x3lDo": {
+    "defaultMessage": "Última atualização {day} as {hour} por {author}",
+    "description": "This message displays the latest report status for a given component"
+  },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
+  },
+  "6KET/Z": {
+    "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
+    "description": "The title of the header section in our company overview report"
   },
   "8bQS0s": {
     "defaultMessage": "Em atraso",
@@ -91,6 +95,10 @@
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"
   },
+  "D8ZyT4": {
+    "defaultMessage": "Um ícone de coroa que representa a sua empresa",
+    "description": "This message is used by screen readers to explain our crown icon"
+  },
   "FEd9u8": {
     "defaultMessage": "Salvar",
     "description": "This message is displayed in the \"SAVE\" button in the checkin form"
@@ -111,6 +119,10 @@
     "defaultMessage": "Objetivos",
     "description": "The page title that our users should see in the objectives page"
   },
+  "IkA9uV": {
+    "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
+    "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
   "J98VQ8": {
     "defaultMessage": "Em dia",
     "description": "We use this tag to group every key result with confidence higher than 50"
@@ -118,6 +130,10 @@
   "JuRKh+": {
     "defaultMessage": "Um círculo vermelho, indicando que o resultado-chave está atrasada",
     "description": "A brief explanation for screen readers regarding the red status circle"
+  },
+  "Lc60Nd": {
+    "defaultMessage": "Posição atual",
+    "description": "This message is displayed below the current progress thumb"
   },
   "LytmoI": {
     "defaultMessage": "Um círculo verde, indicando que o resultado-chave está em dia",
@@ -143,6 +159,10 @@
     "defaultMessage": "Um ícone de controle de video game",
     "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
   },
+  "PYLIcI": {
+    "defaultMessage": "Meta",
+    "description": "This message is displayed below the goal thumb"
+  },
   "Pkdkh4": {
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
@@ -167,6 +187,10 @@
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
   },
+  "SjGqdc": {
+    "defaultMessage": "Desde a última segunda-feira",
+    "description": "This helper texts explains since when we are calculating your company progress"
+  },
   "Sn7K6v": {
     "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
     "description": "The alternative text explaining our notification bell icon"
@@ -174,6 +198,10 @@
   "SpAXmO": {
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
+  },
+  "TPAtkS": {
+    "defaultMessage": "Ontem",
+    "description": "This label is displayed if the last update date is yesterday"
   },
   "UBruoq": {
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
@@ -223,6 +251,10 @@
     "defaultMessage": "Atualizar Progresso",
     "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
   },
+  "gODdaE": {
+    "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "iJq7du": {
     "defaultMessage": "Responsável",
     "description": "The label text above the Owner section in our key result single page or drawer"
@@ -247,6 +279,10 @@
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
   },
+  "lII4JM": {
+    "defaultMessage": "Hoje",
+    "description": "This label is displayed if the last update date is today"
+  },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
@@ -254,6 +290,10 @@
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
+  },
+  "mKv2wx": {
+    "defaultMessage": "Painel",
+    "description": "AppBar menu item that links to Dashboard page"
   },
   "mcWqy7": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segudando um pedaço de um quebra-cabeça e colaborando para montá-lo",
@@ -299,6 +339,10 @@
     "defaultMessage": "Nome da KR",
     "description": "The text of the table head related to the Title column"
   },
+  "w18rI2": {
+    "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
+    "description": "This message is used by screen readers to explain our arrow up"
+  },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
@@ -314,10 +358,6 @@
   "yDscHW": {
     "defaultMessage": "Minhas KR",
     "description": "AppBar menu item that links to Key Results page"
-  },
-  "yQ7cY8": {
-    "defaultMessage": "Atualização de status",
-    "description": "We show this prefix before the updated time of the status column in our Key Results table"
   },
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",

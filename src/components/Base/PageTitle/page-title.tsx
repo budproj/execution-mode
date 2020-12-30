@@ -10,7 +10,7 @@ const PageTitle = (): ReactElement => {
 
   return (
     <Skeleton isLoaded={isLoaded} minH={isLoaded ? 'auto' : '57px'}>
-      <Heading as="h1" fontSize="5xl" color="gray.700" fontWeight="500">
+      <Heading as="h1" fontSize="4xl" color="gray.700" fontWeight="500">
         {pageTitle}
       </Heading>
     </Skeleton>

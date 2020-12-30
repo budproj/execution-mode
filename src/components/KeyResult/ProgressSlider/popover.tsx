@@ -3,7 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { Close as CloseIcon } from 'src/components/Icons'
+import { Close as CloseIcon } from 'src/components/Icon'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
 import {

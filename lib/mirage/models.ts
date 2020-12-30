@@ -29,6 +29,7 @@ const models = {
     teams: hasMany(),
     cycles: hasMany(),
     users: hasMany(),
+    latestReport: belongsTo('progressReport'),
   }),
   cycle: Model.extend({
     company: belongsTo(),
@@ -48,6 +49,7 @@ const models = {
     progressReports: hasMany(),
     confidenceReports: hasMany(),
     teams: hasMany(),
+    companies: hasMany(),
   }),
   policy: Model,
 }

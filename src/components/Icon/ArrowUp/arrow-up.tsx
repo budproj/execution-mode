@@ -1,0 +1,21 @@
+import { Icon, IconProps } from '@chakra-ui/react'
+import React, { ReactElement } from 'react'
+
+import { AcessibleIconProperties } from 'src/components/Icon/types'
+
+export interface ArrowUpIconProperties extends IconProps, AcessibleIconProperties {}
+
+const ArrowUp = ({ title, desc, ...rest }: ArrowUpIconProperties): ReactElement => (
+  <Icon viewBox="0 0 26 33" {...rest}>
+    <title>{title}</title>
+    <desc>{desc}</desc>
+    <path d="M11.9221 30.4728L11.9221 4.54219L2.82916 12.7291C2.37701 13.133 1.68303 13.0939 1.27911 12.6417C0.875191 12.1896 0.914289 11.4956 1.36644 11.0917L12.2823 1.26744L12.3259 1.23469L12.386 1.18557L12.4351 1.15282L12.5061 1.10916L12.5716 1.07641L12.6261 1.07641L12.708 1.07641L12.7735 1.07641L12.8281 1.07641C12.8554 1.07641 12.8827 1.07641 12.9099 1.07641C12.9372 1.07641 12.9591 1 13.0136 1C13.0682 1 13.0136 1 13.0136 1C13.0136 1 13.0628 1 13.0901 1C13.1173 1 13.1446 1 13.1719 1L13.2265 1L13.292 1L13.3739 1L13.4284 1L13.4939 1.03275L13.5649 1.07641L13.614 1.10916L13.6741 1.15828L13.7177 1.19103L24.6336 11.0153C25.0857 11.4192 25.1248 12.1132 24.7209 12.5653C24.317 13.0175 23.623 13.0566 23.1708 12.6527L14.1052 4.54219L14.1052 30.4728C14.1052 31.0756 13.6165 31.5644 13.0136 31.5644C12.4108 31.5644 11.9221 31.0756 11.9221 30.4728Z" />
+  </Icon>
+)
+
+ArrowUp.defaultProps = {
+  fill: 'black',
+  stroke: 'black',
+}
+
+export default ArrowUp

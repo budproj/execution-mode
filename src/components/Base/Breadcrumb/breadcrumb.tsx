@@ -7,7 +7,7 @@ import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
 import IntlLink from 'src/components/Base/IntlLink'
-import ArrowRightIcon from 'src/components/Icons/ArrowRight'
+import ArrowRightIcon from 'src/components/Icon/ArrowRight'
 
 import messages, { BreadcrumbMessages } from './messages'
 

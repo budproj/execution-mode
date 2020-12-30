@@ -1,14 +1,19 @@
-import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
+import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 
 export const LIST_TEMPLATE_COLUMN_DEFAULT = '5fr 4fr 4fr 3fr 3fr 1fr'
 
 export const BORDER_COLOR_DEFAULT = 'gray.100'
 
 export const COLUMNS_DEFAULT = [
-  KeyResultListBodyColumn.TITLE,
-  KeyResultListBodyColumn.OKR,
-  KeyResultListBodyColumn.STATUS,
-  KeyResultListBodyColumn.PROGRESS,
-  KeyResultListBodyColumn.CYCLE,
-  KeyResultListBodyColumn.OWNER,
+  KEY_RESULT_LIST_BODY_COLUMN.TITLE,
+  KEY_RESULT_LIST_BODY_COLUMN.OKR,
+  KEY_RESULT_LIST_BODY_COLUMN.STATUS,
+  KEY_RESULT_LIST_BODY_COLUMN.PROGRESS,
+  KEY_RESULT_LIST_BODY_COLUMN.CYCLE,
+  KEY_RESULT_LIST_BODY_COLUMN.OWNER,
 ]
+
+export enum KEY_RESULT_LIST_TYPE {
+  DND = 'dragAndDrop',
+  STATIC = 'static',
+}

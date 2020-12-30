@@ -1,6 +1,7 @@
 import { selectorFamily } from 'recoil'
 
-import { KeyResult, KeyResultFormat } from 'src/components/KeyResult/types'
+import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 import { RecoilInterfaceGetter } from 'src/state/recoil/types'
 
@@ -18,10 +19,10 @@ export const getStepBasedOnID = (id?: KeyResult['id']) => ({
 
   if (!format) return defaultStep
 
-  const formatHashmap: Partial<Record<KeyResultFormat, number>> = {
-    [KeyResultFormat.NUMBER]: 1,
-    [KeyResultFormat.PERCENTAGE]: 1,
-    [KeyResultFormat.COIN_BRL]: 1,
+  const formatHashmap: Partial<Record<KEY_RESULT_FORMAT, number>> = {
+    [KEY_RESULT_FORMAT.NUMBER]: 1,
+    [KEY_RESULT_FORMAT.PERCENTAGE]: 1,
+    [KEY_RESULT_FORMAT.COIN_BRL]: 1,
   }
 
   return formatHashmap[format] ?? defaultStep

@@ -2,7 +2,7 @@ import { Grid, GridItem, GridProps, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
-import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
+import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 
 import messages from './messages'
 import { KeyResultListColumnHeadProperties } from './types'
@@ -10,7 +10,7 @@ import { KeyResultListColumnHeadProperties } from './types'
 export interface KeyResultListHeadProperties {
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
-  columns: KeyResultListBodyColumn[]
+  columns: KEY_RESULT_LIST_BODY_COLUMN[]
   headProperties: KeyResultListColumnHeadProperties
 }
 
@@ -22,13 +22,13 @@ const KeyResultListHead = ({
 }: KeyResultListHeadProperties): ReactElement => {
   const intl = useIntl()
   const columnMessages = {
-    [KeyResultListBodyColumn.TITLE]: messages.listHeadTitle,
-    [KeyResultListBodyColumn.OKR]: messages.listHeadOKR,
-    [KeyResultListBodyColumn.STATUS]: messages.listHeadStatus,
-    [KeyResultListBodyColumn.PROGRESS]: messages.listHeadProgress,
-    [KeyResultListBodyColumn.CYCLE]: messages.listHeadDate,
-    [KeyResultListBodyColumn.OWNER]: messages.listHeadOwner,
-    [KeyResultListBodyColumn.STATUS_COLOR]: messages.listHeadStatusColor,
+    [KEY_RESULT_LIST_BODY_COLUMN.TITLE]: messages.listHeadTitle,
+    [KEY_RESULT_LIST_BODY_COLUMN.OKR]: messages.listHeadOKR,
+    [KEY_RESULT_LIST_BODY_COLUMN.STATUS]: messages.listHeadStatus,
+    [KEY_RESULT_LIST_BODY_COLUMN.PROGRESS]: messages.listHeadProgress,
+    [KEY_RESULT_LIST_BODY_COLUMN.CYCLE]: messages.listHeadDate,
+    [KEY_RESULT_LIST_BODY_COLUMN.OWNER]: messages.listHeadOwner,
+    [KEY_RESULT_LIST_BODY_COLUMN.STATUS_COLOR]: messages.listHeadStatusColor,
   }
 
   return (

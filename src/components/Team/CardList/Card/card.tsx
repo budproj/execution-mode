@@ -3,8 +3,8 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { DynamicAvatarGroup, IntlLink, Slider } from 'src/components/Base'
-import CrownIcon from 'src/components/Icons/Crown'
+import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/components/Base'
+import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
 import { companyAtomFamily } from 'src/state/recoil/company'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
@@ -57,8 +57,7 @@ const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
           </SkeletonText>
 
           <Skeleton isLoaded={isLoaded} borderRadius="full" height="12px">
-            <Slider
-              isDisabled
+            <SliderWithFilledTrack
               value={team?.currentProgress}
               trackThickness="12px"
               trackColor={confidenceTag.color}

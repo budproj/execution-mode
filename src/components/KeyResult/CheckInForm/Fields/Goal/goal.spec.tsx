@@ -4,7 +4,7 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { KeyResultFormat } from 'src/components/KeyResult/types'
+import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
 import Goal from './goal'
 
@@ -12,7 +12,7 @@ describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
   it('renders the Absolute mask if the key result format is NUMBER', () => {
-    const format = KeyResultFormat.NUMBER
+    const format = KEY_RESULT_FORMAT.NUMBER
     sinon.stub(recoil, 'useRecoilValue').returns(format)
 
     const result = enzyme.shallow(<Goal keyResultID={faker.random.word()} />)
@@ -23,7 +23,7 @@ describe('component expectations', () => {
   })
 
   it('renders the Percent mask if the key result format is PERCENTAGE', () => {
-    const format = KeyResultFormat.PERCENTAGE
+    const format = KEY_RESULT_FORMAT.PERCENTAGE
     sinon.stub(recoil, 'useRecoilValue').returns(format)
 
     const result = enzyme.shallow(<Goal keyResultID={faker.random.word()} />)
@@ -34,7 +34,7 @@ describe('component expectations', () => {
   })
 
   it('renders the CoinBRL mask if the key result format is COIN_BRL', () => {
-    const format = KeyResultFormat.COIN_BRL
+    const format = KEY_RESULT_FORMAT.COIN_BRL
     sinon.stub(recoil, 'useRecoilValue').returns(format)
 
     const result = enzyme.shallow(<Goal keyResultID={faker.random.word()} />)

@@ -5,13 +5,10 @@ import { DraggableLocation, DropResult } from 'react-beautiful-dnd'
 import { useRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
-import { KeyResultListBodyColumn } from 'src/components/KeyResult/List/Body/Columns/types'
-import { KeyResultListType } from 'src/components/KeyResult/List/types'
-import {
-  KeyResult,
-  KeyResultViewBinding,
-  KeyResultView as KeyResultViewType,
-} from 'src/components/KeyResult/types'
+import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
+import { KeyResult, KeyResultView as KeyResultViewType } from 'src/components/KeyResult/types'
+import { KEY_RESULT_VIEW_BINDING } from 'src/components/User/constants'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultViewAtom } from 'src/state/recoil/key-result/view'
@@ -71,7 +68,7 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
     if (!called)
       getKeyResultViewForBinding({
         variables: {
-          binding: KeyResultViewBinding.MINE,
+          binding: KEY_RESULT_VIEW_BINDING.MINE,
         },
       })
   }, [called, getKeyResultViewForBinding])
@@ -83,17 +80,17 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
   return (
     <KeyResultList
       handleDragEnd={handleDragEnd}
-      type={KeyResultListType.DND}
+      type={KEY_RESULT_LIST_TYPE.DND}
       keyResultIDs={keyResultView?.rank}
       bodyProperties={{
-        [KeyResultListBodyColumn.TITLE]: {
+        [KEY_RESULT_LIST_BODY_COLUMN.TITLE]: {
           withDynamicIcon: true,
           withRightBorder: true,
         },
-        [KeyResultListBodyColumn.STATUS]: {
+        [KEY_RESULT_LIST_BODY_COLUMN.STATUS]: {
           withLastUpdateInfo: true,
         },
-        [KeyResultListBodyColumn.PROGRESS]: {
+        [KEY_RESULT_LIST_BODY_COLUMN.PROGRESS]: {
           canChange: true,
         },
       }}

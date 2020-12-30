@@ -1,10 +1,8 @@
 import { Box, GridProps } from '@chakra-ui/react'
 import React from 'react'
 
-import {
-  KeyResultListBodyColumn,
-  KeyResultListBodyProperties,
-} from 'src/components/KeyResult/List/Body/Columns/types'
+import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import KeyResultListBodyStaticLine from 'src/components/KeyResult/List/Body/Static/line'
 
 export interface KeyResultListBodySkeletonProperties {
@@ -12,7 +10,7 @@ export interface KeyResultListBodySkeletonProperties {
   amountOfLines: number
   templateColumns: GridProps['templateColumns']
   borderColor: GridProps['borderColor']
-  columns: KeyResultListBodyColumn[]
+  columns: KEY_RESULT_LIST_BODY_COLUMN[]
   bodyProperties: KeyResultListBodyProperties
 }
 

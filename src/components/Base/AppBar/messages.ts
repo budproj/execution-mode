@@ -14,8 +14,8 @@ type AppBarMessages =
 
 export default defineMessages({
   dashboard: {
-    defaultMessage: 'Dashboard',
-    id: '25ACLj',
+    defaultMessage: 'Painel',
+    id: 'mKv2wx',
     description: 'AppBar menu item that links to Dashboard page',
   },
 

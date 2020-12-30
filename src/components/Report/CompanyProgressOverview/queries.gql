@@ -1,0 +1,20 @@
+query GET_USER_PRIMARY_COMPANY {
+  me {
+    companies(limit: 1) {
+      id
+      name
+      gender
+      currentProgress
+      currentConfidence
+      percentageProgressIncrease
+      latestReport {
+        id
+        createdAt
+        user {
+          id
+          name
+        }
+      }
+    }
+  }
+}

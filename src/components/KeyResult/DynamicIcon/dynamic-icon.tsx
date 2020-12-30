@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import * as Icons from 'src/components/Icons'
+import * as Icons from 'src/components/Icon'
 import { KeyResult } from 'src/components/KeyResult/types'
 import {
   keyResultIconColor,
