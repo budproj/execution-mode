@@ -12,6 +12,7 @@ import {
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import PercentageProgressIncreaseTag from 'src/components/Base/PercentageProgressIncreaseTag'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Objective } from 'src/components/Objective/types'
 import { Tag } from 'src/state/recoil/key-result/selectors/confidence-tag'
@@ -41,6 +42,15 @@ const ObjectiveAccordionButton = ({
       </Skeleton>
 
       <AccordionIcon />
+
+      <Skeleton
+        isLoaded={isLoaded}
+        borderRadius="full"
+        w={isLoaded ? 'auto' : 70}
+        h={isLoaded ? 'auto' : 33}
+      >
+        <PercentageProgressIncreaseTag value={objective?.percentageProgressIncrease} />
+      </Skeleton>
 
       <Skeleton isLoaded={isLoaded} display="flex" gridGap={2} alignItems="center">
         <CalendarOutlineIcon

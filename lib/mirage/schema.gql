@@ -298,6 +298,9 @@ type Objective {
 
   """The computed current confidence of this objective"""
   currentConfidence: Float
+
+  """The percentage progress increase since last monday"""
+  percentageProgressIncrease: Float!
 }
 
 """

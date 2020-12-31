@@ -109,7 +109,7 @@ const colors: ColorTokens = {
   cyan800: '#0F3E64',
   cyan900: '#071F32',
 
-  green50: '#EBFAF5',
+  green50: '#E9FAf4',
   green100: '#BDEFDD',
   green200: '#92E5C6',
   green300: '#66DBAF',

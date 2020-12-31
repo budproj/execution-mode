@@ -10,4 +10,5 @@ export interface Objective {
   keyResults?: KeyResult[]
   currentProgress?: ProgressReport['valueNew']
   currentConfidence?: ConfidenceReport['valueNew']
+  percentageProgressIncrease?: number
 }
