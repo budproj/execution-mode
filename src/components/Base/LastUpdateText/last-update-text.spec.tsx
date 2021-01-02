@@ -94,10 +94,20 @@ describe('date conditional formatting', () => {
   it('displays the correct author', () => {
     const fakeAuthor = faker.random.word()
 
-    const result = enzyme.shallow(<LastUpdateText author={fakeAuthor} />)
+    const result = enzyme.shallow(<LastUpdateText author={fakeAuthor} date={new Date()} />)
 
     const text = result.find('Text')
 
     expect(text.text()).toContain(fakeAuthor)
+  })
+})
+
+describe('corner cases', () => {
+  it('displays a special empty state message when no data is provided', () => {
+    const result = enzyme.shallow(<LastUpdateText />)
+
+    const text = result.find('Text')
+
+    expect(text.text()).toEqual('Nenhuma atualização recente')
   })
 })

@@ -33,14 +33,17 @@ const LastUpdateText = ({ date, author }: LastUpdateTextProperties) => {
 
   const day = formatDay()
   const hour = intl.formatTime(updateDate)
-
-  return (
-    <Text fontSize="13px" color="gray.300">
-      {intl.formatMessage(messages.lastUpdateAt, {
+  const message = date
+    ? intl.formatMessage(messages.lastUpdateAt, {
         day,
         hour,
         author,
-      })}
+      })
+    : intl.formatMessage(messages.emptyStateMessage)
+
+  return (
+    <Text fontSize="13px" color="gray.300">
+      {message}
     </Text>
   )
 }
