@@ -36,21 +36,25 @@ const TeamCard = ({ id }: TeamCardProperties) => {
       >
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
           <Flex flexGrow={1} direction="column" justifyContent="flex-end">
-            {isCompany && (
-              <CrownIcon
-                title={intl.formatMessage(messages.crownIconTitle)}
-                desc={intl.formatMessage(messages.crownIconDesc)}
-                w="34px"
-                h="auto"
-              />
-            )}
+            <Box minH="23px">
+              {isCompany && (
+                <CrownIcon
+                  title={intl.formatMessage(messages.crownIconTitle)}
+                  desc={intl.formatMessage(messages.crownIconDesc)}
+                  w="34px"
+                  h="auto"
+                />
+              )}
+            </Box>
             <Skeleton isLoaded={isLoaded} mt={2} w="80%" minH="40px">
               <Heading size="lg">{team?.name}</Heading>
             </Skeleton>
           </Flex>
 
           <SkeletonText isLoaded={isLoaded} noOfLines={2} spacing="4">
-            <Text color="gray.400">{team?.description}</Text>
+            <Text color="gray.400" noOfLines={3}>
+              {team?.description}
+            </Text>
           </SkeletonText>
 
           <Skeleton isLoaded={isLoaded} borderRadius="full" height="12px">
