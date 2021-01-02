@@ -1,5 +1,5 @@
-import { Company } from 'src/components/Company/types'
+import { Team } from 'src/components/Team/types'
 
 export interface GetCompanyObjectivesQuery {
-  companies: Company[]
+  companies: Team[]
 }

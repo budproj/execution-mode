@@ -4,15 +4,15 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
-import { Company } from 'src/components/Company/types'
 import CrownIcon from 'src/components/Icon/Crown'
 import CompanyProgressOverviewBodyStampBase from 'src/components/Report/CompanyProgressOverview/Body/Stamps/Base'
-import { companyAtomFamily } from 'src/state/recoil/company'
+import { Team } from 'src/components/Team/types'
+import { teamAtomFamily } from 'src/state/recoil/team'
 
 import messages from './messages'
 
 export interface CompanyProgressOverviewBodyStampCompanyProperties {
-  companyID?: Company['id']
+  companyID?: Team['id']
   isLoading?: boolean
 }
 
@@ -21,7 +21,7 @@ const CompanyProgressOverviewBodyStampCompany = ({
   isLoading,
 }: CompanyProgressOverviewBodyStampCompanyProperties) => {
   const intl = useIntl()
-  const company = useRecoilValue(companyAtomFamily(companyID))
+  const company = useRecoilValue(teamAtomFamily(companyID))
   const latestReport = company?.latestReport
 
   return (

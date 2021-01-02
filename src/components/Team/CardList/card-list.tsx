@@ -1,30 +1,44 @@
 import { useQuery } from '@apollo/client'
 import { Grid } from '@chakra-ui/react'
-import React from 'react'
+import orderBy from 'lodash/orderBy'
+import React, { useEffect } from 'react'
 
-import { Company } from 'src/components/Company/types'
 import { Team } from 'src/components/Team/types'
+import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
+import { teamAtomFamily } from 'src/state/recoil/team'
 
-import CompanyCards from './company-cards'
+import TeamCard from './Card'
 import queries from './queries.gql'
-import TeamCards from './team-cards'
+import { GetTeamsQuery } from './types'
 
-export interface GetRootTeamsAndCompaniesQueryData {
-  teams: Array<Partial<Team>>
-  companies: Array<Partial<Company>>
+export interface TeamCardListProperties {
+  numEmptyStateCards: number
 }
 
-const TeamCardList = () => {
-  const { data, loading } = useQuery<GetRootTeamsAndCompaniesQueryData>(
-    queries.GET_ROOT_TEAMS_AND_COMPANIES,
-  )
+const TeamCardList = ({ numEmptyStateCards }: TeamCardListProperties) => {
+  const { data, loading } = useQuery<GetTeamsQuery>(queries.GET_TEAMS)
+  const loadTeamsOnRecoil = useRecoilFamilyLoader<Team>(teamAtomFamily)
+
+  const teams = orderBy(data?.teams, 'isCompany', 'desc')
+  const wereTeamsLoaded = !loading && Boolean(teams)
+  // eslint-disable-next-line unicorn/no-null
+  const emptyState = new Array(numEmptyStateCards).fill(null)
+
+  useEffect(() => {
+    if (wereTeamsLoaded) loadTeamsOnRecoil(teams)
+  }, [wereTeamsLoaded, teams, loadTeamsOnRecoil])
 
   return (
     <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
-      <CompanyCards companies={data?.companies} isLoading={loading} />
-      <TeamCards teams={data?.teams} isLoading={loading} />
+      {wereTeamsLoaded
+        ? teams?.map((team) => <TeamCard key={team.id} id={team.id} />)
+        : emptyState.map(() => <TeamCard key={Math.random()} />)}
     </Grid>
   )
+}
+
+TeamCardList.defaultProps = {
+  numEmptyStateCards: 3,
 }
 
 export default TeamCardList

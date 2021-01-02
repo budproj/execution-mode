@@ -6,7 +6,6 @@ import { useRecoilValue } from 'recoil'
 import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/components/Base'
 import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
-import { companyAtomFamily } from 'src/state/recoil/company'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
@@ -14,14 +13,12 @@ import messages from './messages'
 
 export interface TeamCardProperties {
   id?: Team['id']
-  isCompany?: boolean
 }
 
-const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
+const TeamCard = ({ id }: TeamCardProperties) => {
   const intl = useIntl()
-  const atom = isCompany ? companyAtomFamily(id) : teamAtomFamily(id)
-
-  const team = useRecoilValue(atom)
+  const team = useRecoilValue(teamAtomFamily(id))
+  const isCompany = Boolean(team?.isCompany)
   const confidenceTag = useRecoilValue(confidenceTagSelector(team?.currentConfidence))
   const href = [isCompany ? 'company' : 'team', id].join('/')
 

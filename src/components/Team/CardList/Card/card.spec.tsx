@@ -4,7 +4,6 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { companyAtomFamily } from 'src/state/recoil/company'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import TeamCard from './card'
@@ -12,7 +11,7 @@ import TeamCard from './card'
 describe('component customizations', () => {
   afterEach(() => sinon.restore())
 
-  it('uses data from the team atom family if is a team', () => {
+  it('uses data from the team atom family', () => {
     const fakeID = faker.random.word()
     const fakeName = faker.random.word()
     const fakeData = { name: fakeName }
@@ -28,38 +27,22 @@ describe('component customizations', () => {
     expect(name.text()).toEqual(fakeName)
   })
 
-  it('uses data from the company atom family if is a company', () => {
-    const fakeID = faker.random.word()
-    const fakeName = faker.random.word()
-    const fakeData = { name: fakeName }
-    const stub = sinon.stub(recoil, 'useRecoilValue')
-
-    stub.withArgs(companyAtomFamily(fakeID)).returns(fakeData)
-    stub.returns({})
-
-    const result = enzyme.shallow(<TeamCard isCompany id={fakeID} />)
-
-    const name = result.find('Heading')
-
-    expect(name.text()).toEqual(fakeName)
-  })
-
   it('uses company link if is a company', () => {
     const fakeID = faker.random.word()
     const stub = sinon.stub(recoil, 'useRecoilValue')
-    stub.returns({})
+    stub.returns({ isCompany: true })
 
-    const result = enzyme.shallow(<TeamCard isCompany id={fakeID} />)
+    const result = enzyme.shallow(<TeamCard id={fakeID} />)
 
     const linkComponent = result.find('IntlLink')
 
     expect(linkComponent.prop('href')).toEqual(`company/${fakeID}`)
   })
 
-  it('uses team link if is a team', () => {
+  it('uses team link if is not a company', () => {
     const fakeID = faker.random.word()
     const stub = sinon.stub(recoil, 'useRecoilValue')
-    stub.returns({})
+    stub.returns({ isCompany: false })
 
     const result = enzyme.shallow(<TeamCard id={fakeID} />)
 
@@ -82,7 +65,7 @@ describe('component expectations', () => {
       selector.key.includes('CONFIDENCE_TAG'),
     )
 
-    stub.withArgs(companyAtomFamily(fakeID)).returns(fakeData)
+    stub.withArgs(teamAtomFamily(fakeID)).returns(fakeData)
     stub.withArgs(confidenceTagMatcher).returns(fakeConfidenceTag)
 
     const result = enzyme.shallow(<TeamCard id={fakeID} />)

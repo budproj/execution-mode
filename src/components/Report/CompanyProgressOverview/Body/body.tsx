@@ -3,16 +3,16 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import SliderWithGoal from 'src/components/Base/SliderWithGoal'
-import { Company } from 'src/components/Company/types'
 import OverviewBodyBox from 'src/components/Report/Overview/OverviewBodyBox'
-import { companyAtomFamily } from 'src/state/recoil/company'
+import { Team } from 'src/components/Team/types'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
+import { teamAtomFamily } from 'src/state/recoil/team'
 
 import CompanyProgressOverviewBodyStampCompany from './Stamps/Company'
 import CompanyProgressOverviewBodyStampProgressIncrease from './Stamps/ProgressIncrease'
 
 export interface CompanyProgressOverviewBodyProperties {
-  companyID?: Company['id']
+  companyID?: Team['id']
   isLoading?: boolean
 }
 
@@ -20,7 +20,7 @@ const CompanyProgressOverviewBody = ({
   companyID,
   isLoading,
 }: CompanyProgressOverviewBodyProperties) => {
-  const company = useRecoilValue(companyAtomFamily(companyID))
+  const company = useRecoilValue(teamAtomFamily(companyID))
   const { color } = useRecoilValue(confidenceTagSelector(company?.currentConfidence))
 
   return (

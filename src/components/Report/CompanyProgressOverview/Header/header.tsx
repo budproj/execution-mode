@@ -3,14 +3,14 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { Company } from 'src/components/Company/types'
 import OverviewHeaderBox from 'src/components/Report/Overview/OverviewHeaderBox'
-import { companyAtomFamily } from 'src/state/recoil/company'
+import { Team } from 'src/components/Team/types'
+import { teamAtomFamily } from 'src/state/recoil/team'
 
 import messages from './messages'
 
 export interface CompanyProgressOverviewHeaderProperties {
-  companyID?: Company['id']
+  companyID?: Team['id']
   isLoading?: boolean
 }
 
@@ -19,7 +19,7 @@ const CompanyProgressOverviewHeader = ({
   isLoading,
 }: CompanyProgressOverviewHeaderProperties) => {
   const intl = useIntl()
-  const company = useRecoilValue(companyAtomFamily(companyID))
+  const company = useRecoilValue(teamAtomFamily(companyID))
 
   return (
     <OverviewHeaderBox>
