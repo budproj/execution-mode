@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client'
-import { Box } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 
 import { Company } from 'src/components/Company/types'
+import Overview from 'src/components/Report/Overview'
 import { companyAtomFamily } from 'src/state/recoil/company'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 
@@ -21,10 +21,10 @@ const CompanyProgressOverview = () => {
   }, [company, loading, loadCompany])
 
   return (
-    <Box borderWidth="1px" borderColor="blue.100">
+    <Overview>
       <CompanyProgressOverviewHeader companyID={company?.id} isLoading={loading} />
       <CompanyProgressOverviewBody companyID={company?.id} isLoading={loading} />
-    </Box>
+    </Overview>
   )
 }
 

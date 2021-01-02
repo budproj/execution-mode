@@ -1,9 +1,10 @@
-import { Box, Heading, Text, Skeleton } from '@chakra-ui/react'
+import { Heading, Text, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { Company } from 'src/components/Company/types'
+import OverviewHeaderBox from 'src/components/Report/Overview/OverviewHeaderBox'
 import { companyAtomFamily } from 'src/state/recoil/company'
 
 import messages from './messages'
@@ -21,7 +22,7 @@ const CompanyProgressOverviewHeader = ({
   const company = useRecoilValue(companyAtomFamily(companyID))
 
   return (
-    <Box p={6} borderBottomWidth={1} borderColor="blue.100">
+    <OverviewHeaderBox>
       <Skeleton isLoaded={!isLoading} maxW={isLoading ? '45%' : 'auto'}>
         <Heading as="h2" fontSize="xl">
           {intl.formatMessage(messages.title, {
@@ -35,7 +36,7 @@ const CompanyProgressOverviewHeader = ({
           })}
         </Heading>
       </Skeleton>
-    </Box>
+    </OverviewHeaderBox>
   )
 }
 

@@ -1,0 +1,11 @@
+query GET_COMPANY_OBJECTIVES {
+  teams(onlyCompanies: true) {
+    id
+    objectives {
+      id
+      title
+      currentProgress
+      percentageProgressIncrease
+    }
+  }
+}

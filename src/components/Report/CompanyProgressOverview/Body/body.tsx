@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil'
 
 import SliderWithGoal from 'src/components/Base/SliderWithGoal'
 import { Company } from 'src/components/Company/types'
+import OverviewBodyBox from 'src/components/Report/Overview/OverviewBodyBox'
 import { companyAtomFamily } from 'src/state/recoil/company'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
@@ -23,24 +24,26 @@ const CompanyProgressOverviewBody = ({
   const { color } = useRecoilValue(confidenceTagSelector(company?.currentConfidence))
 
   return (
-    <Flex p={6} pb={14} direction="column" gridGap={10}>
-      <Flex gridGap={20}>
-        <CompanyProgressOverviewBodyStampCompany companyID={companyID} isLoading={isLoading} />
-        <CompanyProgressOverviewBodyStampProgressIncrease
-          companyID={companyID}
-          isLoading={isLoading}
-        />
-      </Flex>
+    <OverviewBodyBox>
+      <Flex pb={8} direction="column" gridGap={10}>
+        <Flex gridGap={20}>
+          <CompanyProgressOverviewBodyStampCompany companyID={companyID} isLoading={isLoading} />
+          <CompanyProgressOverviewBodyStampProgressIncrease
+            companyID={companyID}
+            isLoading={isLoading}
+          />
+        </Flex>
 
-      <Skeleton isLoaded={!isLoading}>
-        <SliderWithGoal
-          value={company?.currentProgress}
-          trackThickness="16px"
-          thumbHeight="29px"
-          trackColor={color}
-        />
-      </Skeleton>
-    </Flex>
+        <Skeleton isLoaded={!isLoading}>
+          <SliderWithGoal
+            value={company?.currentProgress}
+            trackThickness="16px"
+            thumbHeight="29px"
+            trackColor={color}
+          />
+        </Skeleton>
+      </Flex>
+    </OverviewBodyBox>
   )
 }
 
