@@ -1,4 +1,5 @@
 import faker from 'faker'
+import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import * as latestConfidenceReport from './latest-confidence-report'
@@ -29,12 +30,21 @@ describe('getter', () => {
 describe('setter', () => {
   afterEach(() => sinon.restore())
 
+  const userMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+    if (!selector.key) return false
+    return selector.key.includes('USER')
+  })
+
   it('asks to set our confidence reports with an updated value', () => {
     const latestConfidenceValue = faker.random.number()
     const oldConfidenceReport = { valueNew: latestConfidenceValue }
+    const fakeUser = faker.helpers.userCard()
     const fakeSelector = sinon.fake()
 
-    const getterStub = sinon.stub().returns([oldConfidenceReport])
+    const getterStub = sinon.stub()
+    getterStub.withArgs(fakeSelector).returns([oldConfidenceReport])
+    getterStub.withArgs(userMatcher).returns(fakeUser)
+
     const setterSpy = sinon.spy()
     const clock = sinon.useFakeTimers()
     sinon.stub(latestConfidenceReport, 'selectConfidenceReports').returns(fakeSelector as any)
@@ -53,6 +63,7 @@ describe('setter', () => {
 
     const expectedNewConfidenceReports = [
       {
+        user: fakeUser,
         valueNew,
         valuePrevious: latestConfidenceValue,
         createdAt: new Date(),

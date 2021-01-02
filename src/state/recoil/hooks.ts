@@ -8,7 +8,7 @@ import { Team } from 'src/components/Team/types'
 
 import { RecoilInterfaceCallback } from './types'
 
-type RecoilEntity = Company | Team | Objective | KeyResult
+type RecoilEntity = Company | Team | Objective | KeyResult | User
 type RecoilEntityParameterKey = 'id'
 type RecoilFamilyParameter = Team['id']
 type RecoilFamily<E> = (parameter?: RecoilFamilyParameter) => RecoilState<Partial<E> | undefined>
