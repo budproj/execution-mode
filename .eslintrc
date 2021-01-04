@@ -6,7 +6,8 @@
     "@budproj/eslint-config-react"
   ],
   "rules": {
-    "import/no-unresolved": ["error", { "ignore": ["miragejs/db-collection"] }]
+    "import/no-unresolved": ["error", { "ignore": ["miragejs/db-collection"] }],
+    "react/jsx-indent": "off"
   },
   "settings": {
     "import/resolver": {
