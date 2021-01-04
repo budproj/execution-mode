@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { Stack as StackIcon } from 'src/components/Icon'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
@@ -40,8 +41,8 @@ const Okr = ({ keyResultID }: KeyResultSingleOKRProperties) => {
             <StackIcon desc={intl.formatMessage(messages.stackIconDesc)} fill="gray.300" />
           </Box>
         </SkeletonCircle>
-        <Skeleton isLoaded={isOKRLoaded}>
-          <Text color="gray.500">{objective?.title ?? 'Sample title'}</Text>
+        <Skeleton isLoaded={isOKRLoaded} {...buildSkeletonMinSize(isOKRLoaded, 250, 24)}>
+          <Text color="gray.500">{objective?.title}</Text>
         </Skeleton>
       </Flex>
     </Flex>

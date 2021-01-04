@@ -12,6 +12,7 @@ import {
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import PercentageProgressIncreaseTag from 'src/components/Base/PercentageProgressIncreaseTag'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Objective } from 'src/components/Objective/types'
@@ -35,9 +36,9 @@ const ObjectiveAccordionButton = ({
 
   return (
     <AccordionButton gridGap={4} _hover={{}}>
-      <Skeleton isLoaded={isLoaded} width={isLoaded ? 'auto' : '25%'}>
+      <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded ?? true, 300, 24)}>
         <Heading as="h4" fontSize="20px" fontWeight={500}>
-          {objective?.title ?? 'Sample title'}
+          {objective?.title}
         </Heading>
       </Skeleton>
 

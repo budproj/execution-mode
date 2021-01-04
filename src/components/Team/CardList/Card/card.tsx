@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/components/Base'
 import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
@@ -46,7 +47,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
                 />
               )}
             </Box>
-            <Skeleton isLoaded={isLoaded} mt={2} w="80%" minH="40px">
+            <Skeleton isLoaded={isLoaded} mt={2} {...buildSkeletonMinSize(isLoaded, 200, 40)}>
               <Heading size="lg">{team?.name}</Heading>
             </Skeleton>
           </Flex>

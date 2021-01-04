@@ -2,6 +2,8 @@ import { Accordion, Box, Heading, Skeleton } from '@chakra-ui/react'
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+
 import ObjectiveAccordionItem from '../AccordionItem'
 import { Objective } from '../types'
 
@@ -17,9 +19,9 @@ const ObjectiveGroup = ({ groupTitle, objectiveIDs }: ObjectiveGroupProperties) 
 
   return (
     <Box borderRadius="15px" bg="gray.50" p={6}>
-      <Skeleton isLoaded={isLoaded} maxW={isLoaded ? 'auto' : '30%'}>
+      <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 24)}>
         <Heading fontSize="20px" as="h3" fontWeight={500}>
-          {groupTitle ?? 'Sample title'}
+          {groupTitle}
         </Heading>
       </Skeleton>
 

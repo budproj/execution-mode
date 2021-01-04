@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
@@ -29,8 +30,8 @@ const Owner = ({ keyResultID }: KeyResultSingleOwnerProperties) => {
         <SkeletonCircle isLoaded={isOwnerLoaded}>
           <Avatar name={owner?.name} src={owner?.picture} size="sm" />
         </SkeletonCircle>
-        <Skeleton isLoaded={isOwnerLoaded}>
-          <Text color="gray.500">{owner?.name ?? 'John doe'}</Text>
+        <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 150, 24)}>
+          <Text color="gray.500">{owner?.name}</Text>
         </Skeleton>
       </Flex>
     </Flex>

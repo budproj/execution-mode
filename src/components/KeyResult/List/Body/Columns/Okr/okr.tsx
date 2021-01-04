@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import StackIcon from 'src/components/Icon/Stack'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
@@ -46,11 +47,10 @@ const KeyResultListBodyColumnOKR = ({ id }: KeyResultListBodyColumnOKRProperties
 
         <Box>
           <Skeleton
-            minH="20px"
-            minW="150px"
             isLoaded={isObjectiveLoaded}
             fadeDuration={0}
             /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+            {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
           >
             <Text color="gray.500">{objective?.title}</Text>
           </Skeleton>

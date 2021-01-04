@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import CrownIcon from 'src/components/Icon/Crown'
 import CompanyProgressOverviewBodyStampBase from 'src/components/Report/CompanyProgressOverview/Body/Stamps/Base'
@@ -38,11 +39,7 @@ const CompanyProgressOverviewBodyStampCompany = ({
         </Heading>
       </Skeleton>
 
-      <Skeleton
-        isLoaded={!isLoading}
-        h={isLoading ? '20px' : 'auto'}
-        w={isLoading ? '310px' : 'auto'}
-      >
+      <Skeleton isLoaded={!isLoading} {...buildSkeletonMinSize(!isLoading, 310, 20)}>
         <LastUpdateText date={latestReport?.createdAt} author={latestReport?.user?.name} />
       </Skeleton>
     </CompanyProgressOverviewBodyStampBase>

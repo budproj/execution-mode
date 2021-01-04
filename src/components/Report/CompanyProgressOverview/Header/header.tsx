@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import OverviewHeaderBox from 'src/components/Report/Overview/OverviewHeaderBox'
 import { Team } from 'src/components/Team/types'
 import { teamAtomFamily } from 'src/state/recoil/team'
@@ -23,7 +24,7 @@ const CompanyProgressOverviewHeader = ({
 
   return (
     <OverviewHeaderBox>
-      <Skeleton isLoaded={!isLoading} maxW={isLoading ? '45%' : 'auto'}>
+      <Skeleton isLoaded={!isLoading} {...buildSkeletonMinSize(!isLoading, 400, 24)}>
         <Heading as="h2" fontSize="xl">
           {intl.formatMessage(messages.title, {
             gender: company?.gender,

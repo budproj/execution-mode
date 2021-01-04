@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import ArrowUpIcon from 'src/components/Icon/ArrowUp'
 import CompanyProgressOverviewBodyStampBase from 'src/components/Report/CompanyProgressOverview/Body/Stamps/Base'
 import { Team } from 'src/components/Team/types'
@@ -35,11 +36,7 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
       iconVariant="outlined"
       iconBorderColor="green.200"
     >
-      <Skeleton
-        isLoaded={!isLoading}
-        h={isLoading ? '21px' : 'auto'}
-        w={isLoading ? '150px' : 'auto'}
-      >
+      <Skeleton isLoaded={!isLoading} {...buildSkeletonMinSize(!isLoading, 150, 21)}>
         <Heading as="h3" fontSize="18px">
           {intl.formatMessage(messages.titleLabel, {
             progress: Math.round(company?.percentageProgressIncrease ?? 0),
