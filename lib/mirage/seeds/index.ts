@@ -31,6 +31,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const user = server.create('user', { teams, companies: [company] })
   const otherUsers = server.createList('user', 5, { teams } as any)
   const cycle = server.create('cycle', { team: company })
+  const companyObjectives = server.createList('objective', 3, { cycle })
   const objectives = server.createList('objective', 3, { cycle })
   const keyResults = server.createList('keyResult', 10, {
     policies,
@@ -55,6 +56,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   const users = [user, ...otherUsers]
   company.update('users', users as any)
+  company.update('objectives', companyObjectives as any)
   rootTeam.update('users', users as any)
   rootTeam.update('objectives', [objectives[0]] as any)
   // eslint-disable-next-line array-callback-return
@@ -73,6 +75,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   logger.debug('Inserted fake data on MirageJS server', {
     data: {
       company,
+      companyObjectives,
       rootTeam,
       teams,
       user,

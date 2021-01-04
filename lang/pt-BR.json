@@ -279,6 +279,10 @@
     "defaultMessage": "Minhas Key Results",
     "description": "The page title that our users should see in the key results page"
   },
+  "ktId0y": {
+    "defaultMessage": "Como estão as prioridades?",
+    "description": "The title of the header section in our objectives overview report"
+  },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
