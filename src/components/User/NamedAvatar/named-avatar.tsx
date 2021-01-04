@@ -1,6 +1,8 @@
 import { Flex, Box, Avatar, Text, SkeletonCircle, Skeleton } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+
 export interface NamedAvatarProperties {
   isLoading?: boolean
   name?: string
@@ -30,7 +32,11 @@ const NamedAvatar = ({
           </Text>
         </Skeleton>
 
-        <Skeleton isLoaded={isLoaded} height={isLoaded ? 'auto' : '10px'} mt={isLoaded ? 0 : '8px'}>
+        <Skeleton
+          isLoaded={isLoaded}
+          {...buildSkeletonMinSize(isLoaded, 60, 10)}
+          mt={isLoaded ? 0 : '8px'}
+        >
           <Text fontSize="sm" color="gray.600">
             {company}
           </Text>

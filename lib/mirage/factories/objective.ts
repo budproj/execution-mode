@@ -7,4 +7,5 @@ export default Factory.extend({
   updatedAt: faker.date.past,
   currentProgress: () => faker.random.number({ min: 0, max: 100 }),
   currentConfidence: () => faker.random.number({ min: 0, max: 100 }),
+  percentageProgressIncrease: () => faker.random.float({ min: 0, max: 100 }),
 })

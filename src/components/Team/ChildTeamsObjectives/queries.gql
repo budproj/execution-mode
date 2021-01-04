@@ -7,6 +7,7 @@ query GET_TEAM_AND_CHILD_TEAMS_OBJECTIVES($rootTeamId: ID!) {
       title
       currentProgress
       currentConfidence
+      percentageProgressIncrease
       cycle {
         dateEnd
       }
@@ -19,6 +20,7 @@ query GET_TEAM_AND_CHILD_TEAMS_OBJECTIVES($rootTeamId: ID!) {
         title
         currentProgress
         currentConfidence
+        percentageProgressIncrease
         cycle {
           dateEnd
         }

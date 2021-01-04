@@ -1,15 +1,17 @@
-import { Box, Heading, Text, Skeleton } from '@chakra-ui/react'
+import { Heading, Text, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { Company } from 'src/components/Company/types'
-import { companyAtomFamily } from 'src/state/recoil/company'
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import OverviewHeaderBox from 'src/components/Report/Overview/OverviewHeaderBox'
+import { Team } from 'src/components/Team/types'
+import { teamAtomFamily } from 'src/state/recoil/team'
 
 import messages from './messages'
 
 export interface CompanyProgressOverviewHeaderProperties {
-  companyID?: Company['id']
+  companyID?: Team['id']
   isLoading?: boolean
 }
 
@@ -18,11 +20,11 @@ const CompanyProgressOverviewHeader = ({
   isLoading,
 }: CompanyProgressOverviewHeaderProperties) => {
   const intl = useIntl()
-  const company = useRecoilValue(companyAtomFamily(companyID))
+  const company = useRecoilValue(teamAtomFamily(companyID))
 
   return (
-    <Box p={6} borderBottomWidth={1} borderColor="blue.100">
-      <Skeleton isLoaded={!isLoading} maxW={isLoading ? '45%' : 'auto'}>
+    <OverviewHeaderBox>
+      <Skeleton isLoaded={!isLoading} {...buildSkeletonMinSize(!isLoading, 400, 24)}>
         <Heading as="h2" fontSize="xl">
           {intl.formatMessage(messages.title, {
             gender: company?.gender,
@@ -35,7 +37,7 @@ const CompanyProgressOverviewHeader = ({
           })}
         </Heading>
       </Skeleton>
-    </Box>
+    </OverviewHeaderBox>
   )
 }
 

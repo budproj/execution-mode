@@ -23,6 +23,9 @@ export interface GetTeamAndChildTeamsObjectivesQuery {
   team: Partial<Team>
 }
 
+const hasObjectives = (team?: Partial<Team>) =>
+  team?.objectives && team.objectives.length > 0 && true
+
 const parseObjectives = (rootTeam?: Partial<Team>) => {
   if (!rootTeam) return
 
@@ -55,20 +58,23 @@ const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) =>
     <Flex gridGap={4} direction="column">
       {isLoaded ? (
         <>
-          {data?.team.objectives && data?.team.objectives.length > 0 && (
+          {hasObjectives(data?.team) && (
             <ObjectiveGroup
               groupTitle={data?.team.name}
               objectiveIDs={data?.team.objectives?.map((objective) => objective.id)}
             />
           )}
 
-          {data?.team?.teams?.map((team: Team) => (
-            <ObjectiveGroup
-              key={team.id ?? uniqueId()}
-              groupTitle={team.name}
-              objectiveIDs={team.objectives?.map((objective) => objective.id)}
-            />
-          ))}
+          {data?.team?.teams?.map(
+            (team: Team) =>
+              hasObjectives(team) && (
+                <ObjectiveGroup
+                  key={team.id ?? uniqueId()}
+                  groupTitle={team.name}
+                  objectiveIDs={team.objectives?.map((objective) => objective.id)}
+                />
+              ),
+          )}
         </>
       ) : (
         <ChildTeamsObjectivesSkeleton />

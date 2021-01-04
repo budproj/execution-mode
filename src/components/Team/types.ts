@@ -1,20 +1,25 @@
-import { Company } from 'src/components/Company/types'
-import { KeyResult } from 'src/components/KeyResult/types'
+import { Cycle } from 'src/components/Cycle/types'
+import { ConfidenceReport, KeyResult, ProgressReport } from 'src/components/KeyResult/types'
+import { Objective } from 'src/components/Objective/types'
 import { User } from 'src/components/User/types'
 
-import { Objective } from '../Objective/types'
+import { TEAM_GENDER } from './constants'
 
 export interface Team {
   id: string
   name: string
   description?: string
+  gender?: TEAM_GENDER
   currentProgress?: number
   currentConfidence?: number
   createdAt: Date
   updatedAt: Date
-  company: Company
   keyResults?: KeyResult[]
   users?: User[]
   teams?: Team[]
   objectives?: Objective[]
+  cycles?: Cycle[]
+  latestReport?: ProgressReport | ConfidenceReport
+  percentageProgressIncrease?: number
+  isCompany?: boolean
 }

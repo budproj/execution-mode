@@ -35,6 +35,10 @@
     "defaultMessage": "Data",
     "description": "The text of the table head related to the Date column"
   },
+  "1HBRw6": {
+    "defaultMessage": "Nenhuma atualização recente",
+    "description": "This label is displayed if we do not have any update date to display"
+  },
   "1nABM7": {
     "defaultMessage": "Meta:",
     "description": "This is the label of the check-in form that indicates the goal for her/his key result"
@@ -274,6 +278,10 @@
   "khbEZF": {
     "defaultMessage": "Minhas Key Results",
     "description": "The page title that our users should see in the key results page"
+  },
+  "ktId0y": {
+    "defaultMessage": "Como estão as prioridades?",
+    "description": "The title of the header section in our objectives overview report"
   },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",

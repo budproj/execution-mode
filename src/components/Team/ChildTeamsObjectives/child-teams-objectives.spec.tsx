@@ -139,3 +139,109 @@ describe('component lifecycle', () => {
     expect(skeleton.length).toEqual(1)
   })
 })
+
+describe('component render', () => {
+  afterEach(() => sinon.restore())
+
+  it('renders only groups that have objectives', () => {
+    const objectiveOne = faker.helpers.userCard()
+    const objectiveTwo = faker.helpers.userCard()
+    const objectiveThree = faker.helpers.userCard()
+
+    const fakeQueryData = {
+      team: {
+        teams: [
+          {
+            id: faker.random.word(),
+            objectives: [objectiveOne, objectiveTwo],
+          },
+          {
+            id: faker.random.word(),
+            objectives: [objectiveThree],
+          },
+          {
+            id: faker.random.word(),
+          },
+        ],
+      },
+    }
+
+    sinon.stub(apollo, 'useQuery').returns({ data: fakeQueryData } as any)
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+
+    const result = enzyme.shallow(<ChildTeamsObjectives rootTeamId={faker.random.word()} />)
+
+    const objectiveGroups = result.find('ObjectiveGroup')
+
+    expect(objectiveGroups.length).toEqual(2)
+  })
+
+  it('renders root team objectives first', () => {
+    const objectiveOne = faker.helpers.userCard()
+    const objectiveTwo = faker.helpers.userCard()
+    const objectiveThree = faker.helpers.userCard()
+    const fakeName = faker.random.word()
+
+    const fakeQueryData = {
+      team: {
+        id: faker.random.word(),
+        name: fakeName,
+        objectives: [objectiveOne],
+
+        teams: [
+          {
+            id: faker.random.word(),
+            objectives: [objectiveOne, objectiveTwo],
+          },
+          {
+            id: faker.random.word(),
+            objectives: [objectiveThree],
+          },
+        ],
+      },
+    }
+
+    sinon.stub(apollo, 'useQuery').returns({ data: fakeQueryData } as any)
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+
+    const result = enzyme.shallow(<ChildTeamsObjectives rootTeamId={faker.random.word()} />)
+
+    const objectiveGroups = result.find('ObjectiveGroup').first()
+
+    expect(objectiveGroups.prop('groupTitle')).toEqual(fakeName)
+  })
+
+  it('does not render group if objectives are an empty array', () => {
+    const objectiveOne = faker.helpers.userCard()
+    const objectiveTwo = faker.helpers.userCard()
+    const objectiveThree = faker.helpers.userCard()
+
+    const fakeQueryData = {
+      team: {
+        teams: [
+          {
+            id: faker.random.word(),
+            objectives: [objectiveOne, objectiveTwo],
+          },
+          {
+            id: faker.random.word(),
+            objectives: [objectiveThree],
+          },
+          {
+            id: faker.random.word(),
+            objectives: [],
+          },
+        ],
+      },
+    }
+
+    sinon.stub(apollo, 'useQuery').returns({ data: fakeQueryData } as any)
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+
+    const result = enzyme.shallow(<ChildTeamsObjectives rootTeamId={faker.random.word()} />)
+
+    const objectiveGroups = result.find('ObjectiveGroup')
+
+    expect(objectiveGroups.length).toEqual(2)
+  })
+})

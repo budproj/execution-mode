@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { Flex } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -6,6 +7,7 @@ import { useSetRecoilState } from 'recoil'
 import PageContent from 'src/components/Base/PageContent'
 import { PageProperties } from 'src/components/Page/types'
 import CompanyProgressOverview from 'src/components/Report/CompanyProgressOverview'
+import ObjectivesOverview from 'src/components/Report/ObjectivesOverview'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
@@ -23,7 +25,10 @@ const DashboardPage = ({ isRootPage }: PageProperties) => {
 
   return (
     <PageContent showBreadcrumb={!isRootPage}>
-      <CompanyProgressOverview />
+      <Flex gridGap={10} direction="column">
+        <CompanyProgressOverview />
+        <ObjectivesOverview />
+      </Flex>
     </PageContent>
   )
 }

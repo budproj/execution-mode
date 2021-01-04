@@ -25,31 +25,27 @@ const models = {
     user: belongsTo(),
     keyResults: hasMany(),
   }),
-  company: Model.extend({
-    teams: hasMany(),
-    cycles: hasMany(),
-    users: hasMany(),
-    latestReport: belongsTo('progressReport'),
-  }),
   cycle: Model.extend({
-    company: belongsTo(),
+    team: belongsTo(),
     objectives: hasMany(),
   }),
   team: Model.extend({
     keyResults: hasMany(),
-    company: belongsTo(),
     users: hasMany(),
     teams: hasMany(),
     objectives: hasMany(),
     // eslint-disable-next-line unicorn/no-null
     parentTeam: belongsTo('team', { inverse: null }),
+    cycles: hasMany(),
+    latestReport: belongsTo('progressReport'),
   }),
   user: Model.extend({
     keyResults: hasMany(),
     progressReports: hasMany(),
     confidenceReports: hasMany(),
     teams: hasMany(),
-    companies: hasMany(),
+    // eslint-disable-next-line unicorn/no-null
+    companies: hasMany('team', { inverse: null }),
   }),
   policy: Model,
 }

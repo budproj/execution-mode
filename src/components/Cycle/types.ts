@@ -1,5 +1,5 @@
-import { Company } from 'src/components/Company/types'
 import { Objective } from 'src/components/Objective/types'
+import { Team } from 'src/components/Team/types'
 
 export interface Cycle {
   id: string
@@ -7,6 +7,6 @@ export interface Cycle {
   dateEnd: Date
   createdAt: Date
   updatedAt: Date
-  company: Company
+  team: Team
   objectives?: Objective[]
 }

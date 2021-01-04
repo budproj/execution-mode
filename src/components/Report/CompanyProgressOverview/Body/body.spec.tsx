@@ -9,8 +9,8 @@ import CompanyProgressOverviewBody from './body'
 describe('data layer usage', () => {
   afterEach(() => sinon.restore())
 
-  const companyAtomMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-    return selector.key.includes('COMPANY_FAMILY')
+  const teamAtomMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+    return selector.key.includes('TEAM_ATOM_FAMILY')
   })
 
   const confidenceTagMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
@@ -22,7 +22,7 @@ describe('data layer usage', () => {
     const fakeCompany = { currentProgress: fakeCurrentProgress }
     const stub = sinon.stub(recoil, 'useRecoilValue')
 
-    stub.withArgs(companyAtomMatcher).returns(fakeCompany)
+    stub.withArgs(teamAtomMatcher).returns(fakeCompany)
     stub.returns({})
 
     const result = enzyme.shallow(<CompanyProgressOverviewBody />)

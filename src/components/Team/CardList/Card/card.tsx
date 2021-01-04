@@ -3,10 +3,10 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/components/Base'
 import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
-import { companyAtomFamily } from 'src/state/recoil/company'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
@@ -14,14 +14,12 @@ import messages from './messages'
 
 export interface TeamCardProperties {
   id?: Team['id']
-  isCompany?: boolean
 }
 
-const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
+const TeamCard = ({ id }: TeamCardProperties) => {
   const intl = useIntl()
-  const atom = isCompany ? companyAtomFamily(id) : teamAtomFamily(id)
-
-  const team = useRecoilValue(atom)
+  const team = useRecoilValue(teamAtomFamily(id))
+  const isCompany = Boolean(team?.isCompany)
   const confidenceTag = useRecoilValue(confidenceTagSelector(team?.currentConfidence))
   const href = [isCompany ? 'company' : 'team', id].join('/')
 
@@ -39,21 +37,25 @@ const TeamCard = ({ id, isCompany }: TeamCardProperties) => {
       >
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
           <Flex flexGrow={1} direction="column" justifyContent="flex-end">
-            {isCompany && (
-              <CrownIcon
-                title={intl.formatMessage(messages.crownIconTitle)}
-                desc={intl.formatMessage(messages.crownIconDesc)}
-                w="34px"
-                h="auto"
-              />
-            )}
-            <Skeleton isLoaded={isLoaded} mt={2} w="80%" minH="40px">
+            <Box minH="23px">
+              {isCompany && (
+                <CrownIcon
+                  title={intl.formatMessage(messages.crownIconTitle)}
+                  desc={intl.formatMessage(messages.crownIconDesc)}
+                  w="34px"
+                  h="auto"
+                />
+              )}
+            </Box>
+            <Skeleton isLoaded={isLoaded} mt={2} {...buildSkeletonMinSize(isLoaded, 200, 40)}>
               <Heading size="lg">{team?.name}</Heading>
             </Skeleton>
           </Flex>
 
           <SkeletonText isLoaded={isLoaded} noOfLines={2} spacing="4">
-            <Text color="gray.400">{team?.description}</Text>
+            <Text color="gray.400" noOfLines={3}>
+              {team?.description}
+            </Text>
           </SkeletonText>
 
           <Skeleton isLoaded={isLoaded} borderRadius="full" height="12px">

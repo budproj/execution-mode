@@ -14,6 +14,7 @@ import {
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
@@ -51,11 +52,7 @@ const KeyResultListBodyColumnOwner = ({
             </SkeletonCircle>
 
             {displayName && (
-              <Skeleton
-                isLoaded={isOwnerLoaded}
-                w={isOwnerLoaded ? 'auto' : '150px'}
-                h={isOwnerLoaded ? 'auto' : '26px'}
-              >
+              <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}>
                 <Text>{owner?.name}</Text>
               </Skeleton>
             )}

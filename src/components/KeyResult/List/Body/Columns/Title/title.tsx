@@ -2,6 +2,7 @@ import { Flex, Box, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
@@ -58,9 +59,14 @@ const KeyResultListBodyColumnTitle = ({
             <Text>{title ?? 'This is a sample KR title'}</Text>
           </Skeleton>
 
-          <SkeletonText noOfLines={1} mt={isTeamLoaded ? 'inherit' : '4px'} isLoaded={isTeamLoaded}>
+          <SkeletonText
+            noOfLines={1}
+            mt={isTeamLoaded ? 'inherit' : '4px'}
+            isLoaded={isTeamLoaded}
+            {...buildSkeletonMinSize(isTeamLoaded, 100, 21)}
+          >
             <Text color="gray.200" fontSize="14px">
-              {team?.name ?? 'This is a sample team name'}
+              {team?.name}
             </Text>
           </SkeletonText>
         </Box>
