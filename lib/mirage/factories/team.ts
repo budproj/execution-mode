@@ -1,6 +1,8 @@
 import faker from 'faker'
 import { Factory } from 'miragejs'
 
+import { TEAM_GENDER } from 'src/components/Team/constants'
+
 export default Factory.extend({
   name: faker.commerce.department,
   description: faker.lorem.paragraph,
@@ -8,4 +10,7 @@ export default Factory.extend({
   currentConfidence: () => faker.random.number({ min: 0, max: 100 }),
   createdAt: faker.date.past,
   updatedAt: faker.date.past,
+  percentageProgressIncrease: () => faker.random.float({ min: 0, max: 100 }),
+  gender: () => faker.helpers.randomize([TEAM_GENDER.MALE, TEAM_GENDER.FEMALE, undefined]),
+  isCompany: false,
 })

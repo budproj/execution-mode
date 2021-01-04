@@ -1,4 +1,3 @@
-import company from './company'
 import confidenceReport from './confidence-report'
 import cycle from './cycle'
 import keyResult from './key-result'
@@ -18,7 +17,6 @@ const factories = {
   team,
   confidenceReport,
   progressReport,
-  company,
   policy,
 }
 

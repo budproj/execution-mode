@@ -38,7 +38,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 """
-User is an entity inside a given company. It is associated with many teams, progress reports, and others.
+User is an entity inside a given root team (a.k.a. company). It is associated with many teams, progress reports, and others.
 """
 type User {
   """The ID of the user"""
@@ -87,13 +87,10 @@ type User {
   """The creation date ordered list of teams that this user owns"""
   ownedTeams: [Team!]!
 
-  """The creation date ordered list of companies that this user owns"""
-  ownedCompanies: [Company!]!
-
   """
   The creation date ordered list of companies that this user is a part of
   """
-  companies(limit: Int): [Company!]!
+  companies(limit: Int): [Team!]!
 }
 
 """
@@ -144,7 +141,9 @@ type ConfidenceReport {
   user: User!
 }
 
-"""A collection of users for a given company"""
+"""
+A collection of users. It can be either inside another team, or a root team (a.k.a. company)
+"""
 type Team {
   """The ID of the team"""
   id: ID!
@@ -154,6 +153,9 @@ type Team {
 
   """The description about the team"""
   description: String
+
+  """The gender of the team"""
+  gender: String
 
   """The creation date of the team"""
   createdAt: DateTime!
@@ -166,12 +168,6 @@ type Team {
   """
   keyResults: [KeyResult!]!
 
-  """The company ID that owns this team"""
-  companyId: ID!
-
-  """The company that owns this team"""
-  company: Company!
-
   """A creation date ordered list of users that are members of this team"""
   users: [User!]!
 
@@ -179,7 +175,7 @@ type Team {
   ownerId: ID!
 
   """The user that owns this team"""
-  owner: Company!
+  owner: User!
 
   """The ID of the team that owns this team"""
   parentTeamId: ID
@@ -196,6 +192,23 @@ type Team {
 
   """The created ordered list of objectives in this team"""
   objectives: [Objective!]
+
+  """The cycles that belongs to this team"""
+  cycles: [Cycle!]!
+
+  """
+  The team that is the company of this team. This is also known as "rootTeam"
+  """
+  company: Team!
+
+  """The percentage progress increase of the team since last monday"""
+  percentageProgressIncrease: Float!
+
+  """The latest report for this team"""
+  latestReport: ProgressReport
+
+  """Defines if the team is a company"""
+  isCompany: Boolean!
 }
 
 """A goal that is created for the team focusing in a given team objective"""
@@ -304,7 +317,7 @@ type Objective {
 }
 
 """
-The period of time that can contain multiple objectives. It is used to organize a company' strategy
+The period of time that can contain multiple objectives. It is used to organize a team strategy
 """
 type Cycle {
   """The ID of the cycle"""
@@ -322,62 +335,14 @@ type Cycle {
   """The last update date of this cycle"""
   updatedAt: DateTime!
 
-  """The company ID that this cycle belongs to"""
-  companyId: ID!
+  """The team ID that this cycle belongs to"""
+  teamId: ID!
 
-  """The company that this cycle belongs to"""
-  company: Company!
+  """The team that this cycle belongs to"""
+  team: Team!
 
   """The objectives inside this cycle"""
   objectives: [Objective!]!
-}
-
-"""A group of teams that has a given stakeholder"""
-type Company {
-  """The ID of the company"""
-  id: ID!
-
-  """The name of the company"""
-  name: String!
-
-  """The gender of the company"""
-  gender: String
-
-  """The description of the company"""
-  description: String
-
-  """The creation date of the company"""
-  createdAt: DateTime!
-
-  """The last update date of the company"""
-  updatedAt: DateTime!
-
-  """The teams that belongs to this company"""
-  teams: [Team!]!
-
-  """The cycles that belongs to this company"""
-  cycles: [Cycle!]!
-
-  """The user ID that this company belongs to"""
-  ownerId: ID!
-
-  """The user that this company belongs to"""
-  owner: User!
-
-  """The computed percentage current progress of this company"""
-  currentProgress: Float
-
-  """The computed current confidence of this company"""
-  currentConfidence: Float
-
-  """A creation date ordered list of users that are members of this company"""
-  users: [User!]!
-
-  """The latest report for this company"""
-  latestReport: ProgressReport
-
-  """The percentage progress increase since last monday"""
-  percentageProgressIncrease: Float!
 }
 
 """Common shared object values between multiple report types"""
@@ -424,13 +389,11 @@ type KeyResultView {
 type Query {
   confidenceReport(id: ID!): ConfidenceReport!
   progressReport(id: ID!): ProgressReport!
-  company(id: ID!): Company!
-  companies: [Company!]
+  team(id: ID!): Team!
+  teams(onlyCompanies: Boolean, parentTeamId: ID): [Team!]
   cycle(id: ID!): Cycle!
   keyResult(id: ID!): KeyResult!
   objective(id: ID!): Objective!
-  team(id: ID!): Team!
-  teams(parentTeamId: ID): [Team!]
   user(id: ID!): User!
   me: User!
   keyResultView(binding: KEY_RESULT_VIEW_BINDING, id: ID): KeyResultView!
