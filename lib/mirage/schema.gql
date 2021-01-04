@@ -390,7 +390,7 @@ type Query {
   confidenceReport(id: ID!): ConfidenceReport!
   progressReport(id: ID!): ProgressReport!
   team(id: ID!): Team!
-  teams(onlyCompanies: Boolean, parentTeamId: ID): [Team!]
+  teams(onlyCompaniesAndDepartments: Boolean, onlyCompanies: Boolean, parentTeamId: ID): [Team!]
   cycle(id: ID!): Cycle!
   keyResult(id: ID!): KeyResult!
   objective(id: ID!): Objective!

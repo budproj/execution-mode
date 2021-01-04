@@ -13,4 +13,6 @@ export default Factory.extend({
   percentageProgressIncrease: () => faker.random.float({ min: 0, max: 100 }),
   gender: () => faker.helpers.randomize([TEAM_GENDER.MALE, TEAM_GENDER.FEMALE, undefined]),
   isCompany: false,
+  onlyCompanies: false,
+  onlyCompaniesAndDepartments: false,
 })

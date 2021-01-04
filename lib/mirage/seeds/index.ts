@@ -16,8 +16,16 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   faker.seed(publicRuntimeConfig.mirage.fakerSeed)
 
   const policies = server.create('policy')
-  const company = server.create('team', { isCompany: true })
-  const rootTeam = server.create('team', { name: faker.random.word(), parentTeam: company })
+  const company = server.create('team', {
+    isCompany: true,
+    onlyCompanies: true,
+    onlyCompaniesAndDepartments: true,
+  })
+  const rootTeam = server.create('team', {
+    name: faker.random.word(),
+    parentTeam: company,
+    onlyCompaniesAndDepartments: true,
+  })
   const teams = server.createList('team', 3, { parentTeam: rootTeam })
   rootTeam.update('teams', teams as any)
   const user = server.create('user', { teams, companies: [company] })
