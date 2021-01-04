@@ -7,7 +7,7 @@ const CompanyObjectives = () => {
   const router = useRouter()
   const { id } = router.query
 
-  return <TeamObjectives isCompany teamId={id as string} />
+  return <TeamObjectives teamId={id as string} />
 }
 
 export default CompanyObjectives
