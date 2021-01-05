@@ -1,6 +1,6 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-type GoalFieldMessages = 'label'
+type CheckInFormFieldGoalMessages = 'label'
 
 export default defineMessages({
   label: {
@@ -9,4 +9,4 @@ export default defineMessages({
     description:
       'This is the label of the check-in form that indicates the goal for her/his key result',
   },
-}) as Record<GoalFieldMessages, MessageDescriptor>
+}) as Record<CheckInFormFieldGoalMessages, MessageDescriptor>

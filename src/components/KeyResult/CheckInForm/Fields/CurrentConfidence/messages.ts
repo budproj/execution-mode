@@ -1,6 +1,6 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-type CurrentConfidenceFieldMessages = 'label'
+type CheckInFormFieldCurrentConfidenceMessages = 'label'
 
 export default defineMessages({
   label: {
@@ -9,4 +9,4 @@ export default defineMessages({
     description:
       'This is the label of the check-in form that indicates to which confidence level the user would update her/his key result',
   },
-}) as Record<CurrentConfidenceFieldMessages, MessageDescriptor>
+}) as Record<CheckInFormFieldCurrentConfidenceMessages, MessageDescriptor>

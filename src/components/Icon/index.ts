@@ -62,4 +62,6 @@ export { default as Wallet } from './Wallet'
 
 export { default as CalendarOutline } from './CalendarOutline'
 
+export { default as PlusOutline } from './PlusOutline'
+
 export * from './types'

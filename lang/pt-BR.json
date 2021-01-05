@@ -235,6 +235,10 @@
     "defaultMessage": "Início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
   },
+  "bqCVp4": {
+    "defaultMessage": "Clique aqui para começar a escrever um comentário",
+    "description": "This is the title text that is displayed if the user hovers the mouse in it"
+  },
   "c8UE59": {
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
@@ -303,6 +307,10 @@
     "defaultMessage": "Empresa",
     "description": "The name of the Company Objectives page, located at \"/overview/company\""
   },
+  "m4igWj": {
+    "defaultMessage": "Adicionar Comentário",
+    "description": "This is the label text that is displayed as a button as soon the check in form is displayed"
+  },
   "m7FoY9": {
     "defaultMessage": "Dono",
     "description": "The label text above the Owner section in our key result single page or drawer"
@@ -334,6 +342,10 @@
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",
     "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
+  },
+  "poN086": {
+    "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
+    "description": "This is the desc text that is displayed for screen readers"
   },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
