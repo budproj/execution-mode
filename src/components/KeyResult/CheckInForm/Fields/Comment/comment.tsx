@@ -3,7 +3,11 @@ import React, { useState } from 'react'
 import CheckInFormFieldCommentButton from './button'
 import CheckInFormFieldCommentInput from './input'
 
-const CheckInFormFieldComment = () => {
+export interface CheckInFormFieldCommentProperties {
+  submitOnBlur?: boolean
+}
+
+const CheckInFormFieldComment = ({ submitOnBlur }: CheckInFormFieldCommentProperties) => {
   const [showInput, setShowInput] = useState(false)
 
   const handleShowInput = () => {
@@ -11,7 +15,7 @@ const CheckInFormFieldComment = () => {
   }
 
   return showInput ? (
-    <CheckInFormFieldCommentInput />
+    <CheckInFormFieldCommentInput submitOnBlur={submitOnBlur} />
   ) : (
     <CheckInFormFieldCommentButton onClick={handleShowInput} />
   )

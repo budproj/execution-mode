@@ -100,9 +100,9 @@ const CheckInForm = ({
   ) => {
     const wasProgressUpdated = values.newProgress !== currentProgress
     const wasConfidenceUpdated = values.confidence !== confidence
-    const wasCommentCreated = values.comment !== ''
+    const wasCommentCreated = values.comment && values.comment !== ''
 
-    if (wasProgressUpdated || wasConfidenceUpdated) {
+    if (wasProgressUpdated || wasConfidenceUpdated || wasCommentCreated) {
       syncRecoilState(values)
 
       const newProgress = wasProgressUpdated ? values.newProgress : undefined
@@ -137,7 +137,7 @@ const CheckInForm = ({
                 isLoading={data.loading}
               />
 
-              <CheckInFormFieldComment />
+              <CheckInFormFieldComment submitOnBlur={submitOnBlur} />
 
               {!submitOnBlur && <Actions isLoading={data.loading} onCancel={onCancel} />}
             </Flex>
