@@ -34,7 +34,7 @@ const ProgressSliderWrapper = ({ id, canChange }: ProgressSliderWrapperPropertie
       <PopoverTrigger>
         <Slider keyResultID={id} canChange={canChange} />
       </PopoverTrigger>
-      <Popover keyResultID={id} />
+      <Popover keyResultID={id} onClose={handleClose} />
     </PopoverWrapper>
   )
 }

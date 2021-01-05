@@ -1,5 +1,6 @@
 import enzyme from 'enzyme'
 import React from 'react'
+import sinon from 'sinon'
 
 import Actions from './actions'
 
@@ -18,5 +19,20 @@ describe('component render', () => {
     const submitButton = result.find('Button').at(1)
 
     expect(submitButton.text()).toEqual('Salvar')
+  })
+})
+
+describe('component interations', () => {
+  afterEach(() => sinon.restore())
+
+  it('executes the provided cancel event upon cancel button click', () => {
+    const spy = sinon.spy()
+
+    const result = enzyme.shallow(<Actions onCancel={spy} />)
+
+    const cancelButton = result.find('Button').first()
+    cancelButton.simulate('click')
+
+    expect(spy.called).toEqual(true)
   })
 })

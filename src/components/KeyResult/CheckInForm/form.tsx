@@ -24,6 +24,7 @@ export interface CheckInFormProperties {
     newProgress?: ProgressReport['valueNew'],
     newConfidence?: ConfidenceReport['valueNew'],
   ) => void
+  onCancel?: () => void
 }
 
 export interface CheckInFormValues {
@@ -38,6 +39,7 @@ const CheckInForm = ({
   gutter,
   submitOnBlur,
   showGoal,
+  onCancel,
 }: CheckInFormProperties) => {
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
@@ -119,7 +121,7 @@ const CheckInForm = ({
               </Flex>
               <CurrentConfidenceField submitOnBlur={submitOnBlur} isLoading={data.loading} />
 
-              {!submitOnBlur && <Actions isLoading={data.loading} />}
+              {!submitOnBlur && <Actions isLoading={data.loading} onCancel={onCancel} />}
             </Flex>
           </FormControl>
         </Form>
