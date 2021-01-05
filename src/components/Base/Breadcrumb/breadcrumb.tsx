@@ -19,7 +19,7 @@ const Breadcrumb = ({ routeParams }: BreadcrumbProperties) => {
   const { pathname } = useRouter()
   const intl = useIntl()
 
-  const stepTree = remove(['home', ...pathname.split('/')])
+  const stepTree = remove(pathname.split('/'))
   const isCurrentPage = (index: number): boolean => index === stepTree.length - 1
   const buildDynamicStepName = (step: string) => {
     const key = step.slice(1, -1)
@@ -62,7 +62,7 @@ const Breadcrumb = ({ routeParams }: BreadcrumbProperties) => {
             isCurrentPage={isCurrentPage(index)}
             fontWeight="500"
           >
-            <IntlLink href={`/${array.slice(1, index + 1).join('/')}`}>
+            <IntlLink href={`/${array.slice(0, index + 1).join('/')}`}>
               {buildStepName(step)}
             </IntlLink>
           </BreadcrumbItem>
