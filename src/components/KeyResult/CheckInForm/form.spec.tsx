@@ -69,9 +69,43 @@ describe('component interations', () => {
     )
 
     await Promise.resolve()
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly('currentProgress', fakeProgress)
 
-    expect(wasSpyCalledAsExpected).toEqual(true)
+    const spyFirstCallArguments = spy.firstCall.args
+    const expectedArguments = ['currentProgress', fakeProgress]
+
+    expect(spyFirstCallArguments).toEqual(expectedArguments)
+  })
+
+  it('resets the comment field upon form submission', async () => {
+    const fakeID = faker.random.word()
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    const spy = sinon.spy()
+
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([faker.random.number(), sinon.fake()])
+    stateStub.returns([undefined, sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate(
+      'submit',
+      {
+        comment: faker.lorem.paragraph(),
+      },
+      {
+        setFieldValue: spy,
+      },
+    )
+
+    await Promise.resolve()
+
+    const spySecondCallArguments = spy.secondCall.args
+    const expectedArguments = ['comment', '']
+
+    expect(spySecondCallArguments).toEqual(expectedArguments)
   })
 
   it('updates the progress report state upon form submission', async () => {
@@ -148,7 +182,7 @@ describe('component interations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('dispatchs a remote state update action upon form submittion', async () => {
+  it('dispatchs a remote state update action without comment upon form submittion', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const fakeConfidence = faker.random.number()
@@ -175,6 +209,43 @@ describe('component interations', () => {
           keyResultId: fakeID,
           progress: fakeProgress,
           confidence: fakeConfidence,
+        },
+      },
+    })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('dispatchs a remote state update action with comment upon form submittion', async () => {
+    const fakeID = faker.random.word()
+    const fakeProgress = faker.random.number()
+    const fakeConfidence = faker.random.number()
+    const fakeComment = faker.lorem.lines(5)
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    const spy = sinon.spy()
+
+    stateStub.returns([undefined, sinon.fake()])
+    sinon.stub(apollo, 'useMutation').returns([spy] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      newProgress: fakeProgress,
+      confidence: fakeConfidence,
+      comment: fakeComment,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
+      variables: {
+        checkInInput: {
+          keyResultId: fakeID,
+          progress: fakeProgress,
+          confidence: fakeConfidence,
+          comment: fakeComment,
         },
       },
     })
@@ -229,7 +300,7 @@ describe('component interations', () => {
 describe('corner cases', () => {
   afterEach(() => sinon.restore())
 
-  it('pass progress as undefined to remote dispatch if it did not changed', async () => {
+  it('does not pass a progress report to remote dispatch if it did not changed', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const fakeConfidence = faker.random.number()
@@ -254,7 +325,6 @@ describe('corner cases', () => {
       variables: {
         checkInInput: {
           keyResultId: fakeID,
-          progress: undefined,
           confidence: fakeConfidence,
         },
       },
@@ -263,7 +333,7 @@ describe('corner cases', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('pass confidence as undefined to remote dispatch if it did not changed', async () => {
+  it('does not pass confidence to remote dispatch if it did not changed', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const fakeConfidence = faker.random.number()
@@ -289,7 +359,6 @@ describe('corner cases', () => {
         checkInInput: {
           keyResultId: fakeID,
           progress: fakeProgress,
-          confidence: undefined,
         },
       },
     })

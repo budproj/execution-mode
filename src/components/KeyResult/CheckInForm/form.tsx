@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
+import pickBy from 'lodash/pickBy'
 import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
@@ -56,14 +57,12 @@ const CheckInForm = ({
     currentProgress,
     confidence,
     newProgress: 0,
-    comment: undefined,
+    comment: '',
   }
 
-  const syncDisabledFields = (
-    values: CheckInFormValues,
-    actions: FormikHelpers<CheckInFormValues>,
-  ) => {
+  const refreshFields = (values: CheckInFormValues, actions: FormikHelpers<CheckInFormValues>) => {
     actions?.setFieldValue('currentProgress', values.newProgress)
+    actions?.setFieldValue('comment', initialValues.comment)
   }
 
   const syncRecoilState = (values: CheckInFormValues) => {
@@ -78,16 +77,19 @@ const CheckInForm = ({
   const dispatchRemoteUpdate = async (
     newProgress: CheckInFormValues['currentProgress'],
     newConfidence: CheckInFormValues['confidence'],
+    comment: CheckInFormValues['comment'],
   ) => {
     const checkIn = {
+      comment,
       keyResultId: keyResultID,
       progress: newProgress,
       confidence: newConfidence,
     }
+    const clearedCheckIn = pickBy(checkIn)
 
     await createCheckIn({
       variables: {
-        checkInInput: checkIn,
+        checkInInput: clearedCheckIn,
       },
     })
   }
@@ -98,17 +100,20 @@ const CheckInForm = ({
   ) => {
     const wasProgressUpdated = values.newProgress !== currentProgress
     const wasConfidenceUpdated = values.confidence !== confidence
+    const wasCommentCreated = values.comment !== ''
 
     if (wasProgressUpdated || wasConfidenceUpdated) {
-      syncDisabledFields(values, actions)
       syncRecoilState(values)
 
       const newProgress = wasProgressUpdated ? values.newProgress : undefined
       const newConfidence = wasConfidenceUpdated ? values.confidence : undefined
+      const comment = wasCommentCreated ? values.comment : undefined
 
-      await dispatchRemoteUpdate(newProgress, newConfidence)
+      await dispatchRemoteUpdate(newProgress, newConfidence, comment)
 
       if (afterSubmit) afterSubmit(newProgress, newConfidence)
+
+      refreshFields(values, actions)
     }
   }
 
