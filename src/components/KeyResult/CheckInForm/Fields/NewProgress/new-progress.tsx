@@ -2,6 +2,7 @@ import { Box, FormLabel } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { NumberFormatProps } from 'react-number-format'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import InputWithLoader from 'src/components/Base/InputWithLoader'
@@ -29,7 +30,7 @@ const NewProgress = ({ keyResultID, submitOnBlur, isLoading }: NewProgressFieldP
   const { values, setFieldValue, submitForm, isSubmitting } = useFormikContext<CheckInFormValues>()
   const Mask = selectMaskBasedOnFormat(format)
 
-  const handleChange = (newValue?: string | number) => {
+  const handleChange = (newValue?: NumberFormatProps['value']) => {
     setFieldValue('newProgress', newValue)
     setDraftValue(newValue as number)
   }
