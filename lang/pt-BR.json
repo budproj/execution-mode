@@ -207,6 +207,10 @@
     "defaultMessage": "Visão Geral",
     "description": "The name of the Overview page, located at \"/overview\""
   },
+  "VNHZWm": {
+    "defaultMessage": "Período",
+    "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
+  },
   "XNkzYe": {
     "defaultMessage": "Um ícone de pin de localização",
     "description": "The desc message for the Location icon. This icon is used to ilustrate our key results"

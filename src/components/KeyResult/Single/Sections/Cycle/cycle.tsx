@@ -1,8 +1,9 @@
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
@@ -29,16 +30,25 @@ const Cycle = ({ keyResultID }: KeyResultSingleCycleProperties) => {
       <Flex alignItems="flex-start" gridGap={10}>
         <DateWithTitle
           isLoaded={isCycleLoaded}
-          title={intl.formatMessage(messages.startLabel)}
-          formattedDate={intl.formatDate(cycle?.dateStart)}
+          label={messages.startLabel}
+          date={cycle?.dateStart}
         />
 
         <DateWithTitle
           isLoaded={isCycleLoaded}
-          title={intl.formatMessage(messages.endLabel)}
-          formattedDate={intl.formatDate(cycle?.dateEnd)}
+          label={messages.endLabel}
+          date={cycle?.dateEnd}
           color="gray.500"
         />
+
+        <Flex alignItems="flex-start" direction="column">
+          <Text fontWeight={300} color="gray.300">
+            {intl.formatMessage(messages.nameLabel)}
+          </Text>
+          <Skeleton isLoaded={isCycleLoaded} {...buildSkeletonMinSize(isCycleLoaded, 100, 20)}>
+            <Text color="gray.500">{cycle?.name}</Text>
+          </Skeleton>
+        </Flex>
       </Flex>
     </Flex>
   )

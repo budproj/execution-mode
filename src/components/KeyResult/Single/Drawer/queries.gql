@@ -13,9 +13,9 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     objective {
       title
       cycle {
+        name
         dateStart
         dateEnd
-        createdAt
       }
     }
     policies {

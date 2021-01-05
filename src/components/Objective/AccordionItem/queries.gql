@@ -19,6 +19,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
       }
       objective {
         cycle {
+          name
           dateStart
           dateEnd
         }

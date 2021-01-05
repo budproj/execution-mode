@@ -1,26 +1,34 @@
 import { ColorProps, Flex, Text, Skeleton } from '@chakra-ui/react'
 import React from 'react'
+import { MessageDescriptor, useIntl } from 'react-intl'
+
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 
 export interface CycleDateWithTitleProperties {
-  title: string
+  label: MessageDescriptor
+  isLoaded: boolean
   color?: ColorProps['color']
-  formattedDate?: string
-  isLoaded?: boolean
+  date?: Date
 }
 
-const DateWithTitle = ({ isLoaded, title, formattedDate, color }: CycleDateWithTitleProperties) => (
-  <Flex alignItems="flex-start" direction="column">
-    <Text fontWeight={300} color="gray.300">
-      {title}
-    </Text>
-    <Skeleton isLoaded={isLoaded}>
-      <Text color={color}>{formattedDate ?? 'Sample date'}</Text>
-    </Skeleton>
-  </Flex>
-)
+const DateWithTitle = ({ isLoaded, label, date, color }: CycleDateWithTitleProperties) => {
+  const intl = useIntl()
+
+  return (
+    <Flex alignItems="flex-start" direction="column">
+      <Text fontWeight={300} color="gray.300">
+        {intl.formatMessage(label)}
+      </Text>
+      <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 20)}>
+        <Text color={color}>{intl.formatDate(date)}</Text>
+      </Skeleton>
+    </Flex>
+  )
+}
 
 DateWithTitle.defaultProps = {
   color: 'gray.300',
+  isLoaded: true,
 }
 
 export default DateWithTitle

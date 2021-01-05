@@ -1,8 +1,8 @@
 import { Skeleton, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
-import { FormatDateOptions, useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
@@ -21,12 +21,6 @@ const KeyResultListBodyColumnCycle = ({
 }: KeyResultListBodyColumnCycleProperties): ReactElement => {
   const cycle = useRecoilValue(cycleSelector(id))
 
-  const intl = useIntl()
-  const dateOptions: FormatDateOptions = {
-    day: 'numeric',
-    month: 'short',
-  }
-
   const isCycleLoaded = Boolean(cycle)
 
   return (
@@ -35,11 +29,9 @@ const KeyResultListBodyColumnCycle = ({
         isLoaded={isCycleLoaded}
         fadeDuration={0}
         /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
+        {...buildSkeletonMinSize(isCycleLoaded, 100, 20)}
       >
-        <Text color="gray.300">
-          {intl.formatDate(cycle?.dateStart, dateOptions)} -{' '}
-          {intl.formatDate(cycle?.dateEnd, dateOptions)}
-        </Text>
+        <Text color="gray.300">{cycle?.name}</Text>
       </Skeleton>
     </KeyResultListBodyColumnBase>
   )
