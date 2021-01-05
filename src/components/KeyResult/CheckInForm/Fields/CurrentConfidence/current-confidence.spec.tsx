@@ -4,7 +4,7 @@ import * as formik from 'formik'
 import React from 'react'
 import sinon from 'sinon'
 
-import CurrentConfidence from './current-confidence'
+import CheckInFormFieldCurrentConfidence from './current-confidence'
 
 describe('formik integration', () => {
   afterEach(() => sinon.restore())
@@ -14,7 +14,7 @@ describe('formik integration', () => {
     const fakeConfidence = faker.random.number().toString()
     sinon.stub(formik, 'useFormikContext').returns({ values: {}, setFieldValue: spy } as any)
 
-    const result = enzyme.shallow(<CurrentConfidence />)
+    const result = enzyme.shallow(<CheckInFormFieldCurrentConfidence />)
 
     const selectMenu = result.find('SelectMenu')
     selectMenu.simulate('change', fakeConfidence)
@@ -33,7 +33,7 @@ describe('formik integration', () => {
       .stub(formik, 'useFormikContext')
       .returns({ values: {}, setFieldValue: sinon.fake(), submitForm: spy } as any)
 
-    const result = enzyme.shallow(<CurrentConfidence submitOnBlur />)
+    const result = enzyme.shallow(<CheckInFormFieldCurrentConfidence submitOnBlur />)
 
     const selectMenu = result.find('SelectMenu')
     selectMenu.simulate('change', fakeConfidence)
@@ -50,7 +50,7 @@ describe('formik integration', () => {
       submitForm: sinon.fake(),
     } as any)
 
-    const result = enzyme.shallow(<CurrentConfidence submitOnBlur isLoading />)
+    const result = enzyme.shallow(<CheckInFormFieldCurrentConfidence submitOnBlur isLoading />)
 
     const selectMenu = result.find('SelectMenu')
     selectMenu.simulate('change', fakeConfidence)

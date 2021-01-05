@@ -12,11 +12,11 @@ import messages from './messages'
 const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
-export interface GoalProperties {
+export interface CheckInFormFieldGoalProperties {
   keyResultID?: KeyResult['id']
 }
 
-const Goal = ({ keyResultID }: GoalProperties) => {
+const CheckInFormFieldGoal = ({ keyResultID }: CheckInFormFieldGoalProperties) => {
   const intl = useIntl()
   const goal = useRecoilValue(goalSelector(keyResultID))
   const format = useRecoilValue(formatSelector(keyResultID))
@@ -34,4 +34,4 @@ const Goal = ({ keyResultID }: GoalProperties) => {
   )
 }
 
-export default Goal
+export default CheckInFormFieldGoal

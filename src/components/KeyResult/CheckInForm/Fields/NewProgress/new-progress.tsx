@@ -14,7 +14,7 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
-export interface NewProgressFieldProperties {
+export interface CheckInFormFieldNewProgressProperties {
   submitOnBlur: boolean
   isLoading?: boolean
   keyResultID?: KeyResult['id']
@@ -22,7 +22,11 @@ export interface NewProgressFieldProperties {
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
-const NewProgress = ({ keyResultID, submitOnBlur, isLoading }: NewProgressFieldProperties) => {
+const CheckInFormFieldNewProgress = ({
+  keyResultID,
+  submitOnBlur,
+  isLoading,
+}: CheckInFormFieldNewProgressProperties) => {
   const [isSending, setIsSending] = useState(false)
   const intl = useIntl()
   const format = useRecoilValue(formatSelector(keyResultID))
@@ -64,8 +68,8 @@ const NewProgress = ({ keyResultID, submitOnBlur, isLoading }: NewProgressFieldP
   )
 }
 
-NewProgress.defaultProps = {
+CheckInFormFieldNewProgress.defaultProps = {
   submitOnBlur: false,
 }
 
-export default NewProgress
+export default CheckInFormFieldNewProgress

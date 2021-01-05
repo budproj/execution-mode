@@ -11,7 +11,13 @@ import {
   selectLatestConfidenceReport,
 } from 'src/state/recoil/key-result/selectors'
 
-import { CurrentProgressField, NewProgressField, CurrentConfidenceField, GoalField } from './Fields'
+import {
+  CheckInFormFieldCurrentProgress,
+  CheckInFormFieldNewProgress,
+  CheckInFormFieldCurrentConfidence,
+  CheckInFormFieldGoal,
+} from './Fields'
+import CheckInFormFieldComment from './Fields/Comment'
 import Actions from './actions'
 import queries from './queries.gql'
 
@@ -111,15 +117,20 @@ const CheckInForm = ({
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
             <Flex direction="column" gridGap={8} p={gutter} pb={submitOnBlur ? 0 : gutter}>
               <Flex gridGap={5}>
-                <CurrentProgressField keyResultID={keyResultID} />
-                <NewProgressField
+                <CheckInFormFieldCurrentProgress keyResultID={keyResultID} />
+                <CheckInFormFieldNewProgress
                   keyResultID={keyResultID}
                   submitOnBlur={submitOnBlur}
                   isLoading={data.loading}
                 />
-                {showGoal && <GoalField keyResultID={keyResultID} />}
+                {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
               </Flex>
-              <CurrentConfidenceField submitOnBlur={submitOnBlur} isLoading={data.loading} />
+              <CheckInFormFieldCurrentConfidence
+                submitOnBlur={submitOnBlur}
+                isLoading={data.loading}
+              />
+
+              <CheckInFormFieldComment />
 
               {!submitOnBlur && <Actions isLoading={data.loading} onCancel={onCancel} />}
             </Flex>

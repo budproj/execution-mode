@@ -1,3 +1,3 @@
-import Goal from './goal'
+import CheckInFormFieldGoal from './goal'
 
-export default Goal
+export default CheckInFormFieldGoal

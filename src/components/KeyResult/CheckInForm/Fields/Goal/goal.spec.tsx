@@ -6,7 +6,7 @@ import sinon from 'sinon'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
-import Goal from './goal'
+import CheckInFormFieldGoal from './goal'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
@@ -15,7 +15,7 @@ describe('component expectations', () => {
     const format = KEY_RESULT_FORMAT.NUMBER
     sinon.stub(recoil, 'useRecoilValue').returns(format)
 
-    const result = enzyme.shallow(<Goal keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<CheckInFormFieldGoal keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
@@ -26,7 +26,7 @@ describe('component expectations', () => {
     const format = KEY_RESULT_FORMAT.PERCENTAGE
     sinon.stub(recoil, 'useRecoilValue').returns(format)
 
-    const result = enzyme.shallow(<Goal keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<CheckInFormFieldGoal keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Percentage')
 
@@ -37,7 +37,7 @@ describe('component expectations', () => {
     const format = KEY_RESULT_FORMAT.COIN_BRL
     sinon.stub(recoil, 'useRecoilValue').returns(format)
 
-    const result = enzyme.shallow(<Goal keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<CheckInFormFieldGoal keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('CoinBRL')
 
@@ -47,7 +47,7 @@ describe('component expectations', () => {
   it('renders the Absolute mask if no format was provided', async () => {
     sinon.mock(recoil).expects('useRecoilValue').atLeast(1).returns('')
 
-    const result = enzyme.shallow(<Goal keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<CheckInFormFieldGoal keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
@@ -57,7 +57,7 @@ describe('component expectations', () => {
   it('makes the rendered mask be text', () => {
     sinon.mock(recoil).expects('useRecoilValue').atLeast(1).returns('')
 
-    const result = enzyme.shallow(<Goal keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<CheckInFormFieldGoal keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
