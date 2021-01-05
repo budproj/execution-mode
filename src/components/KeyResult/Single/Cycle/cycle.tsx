@@ -29,15 +29,8 @@ const Cycle = ({ keyResultID }: KeyResultSingleCycleProperties) => {
       <Flex alignItems="flex-start" gridGap={10}>
         <DateWithTitle
           isLoaded={isCycleLoaded}
-          title={intl.formatMessage(messages.createdAtLabel)}
-          formattedDate={intl.formatDate(cycle?.createdAt)}
-        />
-
-        <DateWithTitle
-          isLoaded={isCycleLoaded}
           title={intl.formatMessage(messages.startLabel)}
           formattedDate={intl.formatDate(cycle?.dateStart)}
-          color="gray.500"
         />
 
         <DateWithTitle

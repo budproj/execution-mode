@@ -27,6 +27,10 @@
     "defaultMessage": "Um ícone de marcador de página",
     "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
   },
+  "00ogu4": {
+    "defaultMessage": "Qual o seu nível de confiança?",
+    "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
+  },
   "03yPkn": {
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
@@ -51,9 +55,9 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
-  "2qxo81": {
-    "defaultMessage": "Duração",
-    "description": "The label text above the Cycle section in our key result single page or drawer"
+  "3gAggt": {
+    "defaultMessage": "Check-in",
+    "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
   },
   "3x3lDo": {
     "defaultMessage": "Última atualização {day} as {hour} por {author}",
@@ -63,6 +67,10 @@
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
   },
+  "5yyaMb": {
+    "defaultMessage": "Objetivo",
+    "description": "The label text above the OKR section in our key result single page or drawer"
+  },
   "6KET/Z": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
     "description": "The title of the header section in our company overview report"
@@ -70,10 +78,6 @@
   "8LTdv4": {
     "defaultMessage": "Objetivo",
     "description": "The text of the table head related to the Objective column"
-  },
-  "9bJV7v": {
-    "defaultMessage": "OKR",
-    "description": "The label text above the OKR section in our key result single page or drawer"
   },
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
@@ -127,17 +131,9 @@
     "defaultMessage": "Posição atual",
     "description": "This message is displayed below the current progress thumb"
   },
-  "M44zCJ": {
-    "defaultMessage": "Criado em",
-    "description": "The label text inside the Cycle section, above the creation date in our key result single page or drawer"
-  },
   "MBkjzW": {
     "defaultMessage": "Alto",
     "description": "We use this tag to group every key result with confidence higher than 50"
-  },
-  "MWB++a": {
-    "defaultMessage": "Qual o seu nível de segurança?",
-    "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
   },
   "NADPP1": {
     "defaultMessage": "Um ícone de lata de lixo",
@@ -167,9 +163,17 @@
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
   },
+  "Ro4JqE": {
+    "defaultMessage": "Para",
+    "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
+  },
   "S/F2Hk": {
     "defaultMessage": "Detalhes",
     "description": "The label text above the Description section in our key result single page or drawer"
+  },
+  "S1OFpY": {
+    "defaultMessage": "De",
+    "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
   },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
@@ -203,10 +207,6 @@
     "defaultMessage": "Visão Geral",
     "description": "The name of the Overview page, located at \"/overview\""
   },
-  "XHDyV/": {
-    "defaultMessage": "De:",
-    "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
-  },
   "XNkzYe": {
     "defaultMessage": "Um ícone de pin de localização",
     "description": "The desc message for the Location icon. This icon is used to ilustrate our key results"
@@ -227,6 +227,10 @@
     "defaultMessage": "Um ícone de gráfico de pizza",
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
+  "aiRCwP": {
+    "defaultMessage": "Início",
+    "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
+  },
   "c8UE59": {
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
@@ -235,17 +239,9 @@
     "defaultMessage": "Resultados-chave",
     "description": "AppBar menu item that links to Key Results page"
   },
-  "cpaWkz": {
-    "defaultMessage": "Atualize seu progresso",
-    "description": "The label text above the check-in section in our key result single page or drawer"
-  },
-  "dOaMzr": {
-    "defaultMessage": "Data de início",
-    "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
-  },
-  "fNt8Of": {
-    "defaultMessage": "Atualizar Progresso",
-    "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
+  "fZZOsX": {
+    "defaultMessage": "Fim",
+    "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
   },
   "faL9vf": {
     "defaultMessage": "Um círculo verde, indicando que a confiança está alta",
@@ -262,10 +258,6 @@
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
-  },
-  "iJq7du": {
-    "defaultMessage": "Responsável",
-    "description": "The label text above the Owner section in our key result single page or drawer"
   },
   "j/xH+H": {
     "defaultMessage": "Fechar",
@@ -302,6 +294,10 @@
   "loRR0C": {
     "defaultMessage": "Empresa",
     "description": "The name of the Company Objectives page, located at \"/overview/company\""
+  },
+  "m7FoY9": {
+    "defaultMessage": "Dono",
+    "description": "The label text above the Owner section in our key result single page or drawer"
   },
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
@@ -343,13 +339,13 @@
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
   },
+  "u/NI1D": {
+    "defaultMessage": "Check-in",
+    "description": "The label text above the check-in section in our key result single page or drawer"
+  },
   "ui441M": {
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
-  },
-  "vEnRa9": {
-    "defaultMessage": "Para:",
-    "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
   },
   "w18rI2": {
     "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
@@ -359,13 +355,13 @@
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
   },
-  "y6z1c3": {
-    "defaultMessage": "Data de fim",
-    "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
-  },
   "ycpCyI": {
     "defaultMessage": "Dono",
     "description": "The text of the table head related to the Owner column"
+  },
+  "z1FXkV": {
+    "defaultMessage": "Ciclo",
+    "description": "The label text above the Cycle section in our key result single page or drawer"
   },
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",

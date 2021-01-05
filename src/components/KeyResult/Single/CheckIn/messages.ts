@@ -4,8 +4,8 @@ type KeyResultsSingleCheckInMessages = 'label'
 
 export default defineMessages({
   label: {
-    defaultMessage: 'Atualize seu progresso',
-    id: 'cpaWkz',
+    defaultMessage: 'Check-in',
+    id: 'u/NI1D',
     description:
       'The label text above the check-in section in our key result single page or drawer',
   },

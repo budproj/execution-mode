@@ -108,7 +108,6 @@ const CheckInForm = ({
         <Form>
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
             <Flex direction="column" gridGap={5} p={gutter} pb={submitOnBlur ? 0 : 8}>
-              <CurrentConfidenceField submitOnBlur={submitOnBlur} isLoading={data.loading} />
               <Flex gridGap={5}>
                 <CurrentProgressField keyResultID={keyResultID} />
                 <NewProgressField
@@ -118,6 +117,7 @@ const CheckInForm = ({
                 />
                 {showGoal && <GoalField keyResultID={keyResultID} />}
               </Flex>
+              <CurrentConfidenceField submitOnBlur={submitOnBlur} isLoading={data.loading} />
             </Flex>
 
             {!submitOnBlur && <Actions isLoading={data.loading} gutter={gutter} />}

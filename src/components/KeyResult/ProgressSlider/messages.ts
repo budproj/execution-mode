@@ -1,11 +1,11 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-type ProgressSliderMessages = 'updateProgress' | 'closeIconTitle' | 'closeIconDesc'
+type ProgressSliderMessages = 'popoverTitle' | 'closeIconTitle' | 'closeIconDesc'
 
 export default defineMessages({
-  updateProgress: {
-    defaultMessage: 'Atualizar Progresso',
-    id: 'fNt8Of',
+  popoverTitle: {
+    defaultMessage: 'Check-in',
+    id: '3gAggt',
     description:
       'This is the title of our progress slider popover. It appears when the user moves the slider thumb',
   },
