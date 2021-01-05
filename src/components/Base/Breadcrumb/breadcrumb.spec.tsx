@@ -22,20 +22,9 @@ describe('component rendering expectations', () => {
 
     const result = enzyme.shallow(<Breadcrumb />)
 
-    const blocks = result.find('BreadcrumbItem')
+    const blocks = result.find('IntlLink')
 
-    expect(blocks.length).toEqual(numberBlocks + 1) // Added one since we manually adds the "Home" block
-  })
-
-  it('renders the first element as "Home"', () => {
-    sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
-
-    const result = enzyme.shallow(<Breadcrumb />)
-
-    const blocks = result.find('BreadcrumbItem')
-    const firstLabel = blocks.first().find('IntlLink').prop('children')
-
-    expect(firstLabel).toEqual('Home')
+    expect(blocks.length).toEqual(numberBlocks)
   })
 
   it('adds a link for each block with the relative path to that block', () => {
@@ -46,17 +35,14 @@ describe('component rendering expectations', () => {
 
     const result = enzyme.shallow(<Breadcrumb />)
 
-    const blocks = result.find('BreadcrumbItem')
+    const blocks = result.find('IntlLink')
     const expectedRelativeLinkForIndex: Record<number, string> = {
-      1: '/rick',
-      2: '/rick/morty',
+      0: '/rick',
+      1: '/rick/morty',
     }
 
     blocks.map((block, index) => {
-      if (index === 0) return // The first block is always "Home"
-
-      const href = block.find('IntlLink').prop('href')
-      return expect(href).toEqual(expectedRelativeLinkForIndex[index])
+      return expect(block.prop('href')).toEqual(expectedRelativeLinkForIndex[index])
     })
   })
 
@@ -67,20 +53,7 @@ describe('component rendering expectations', () => {
 
     const intlLinkNodes = result.find('IntlLink')
 
-    expect(intlLinkNodes.length).toEqual(numberBlocks + 1) // Added one since we manually adds the "Home" block
-  })
-
-  it('renders only "Home" if URL is "/"', () => {
-    const fakeRouter = {
-      pathname: '/',
-    }
-    sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
-
-    const result = enzyme.shallow(<Breadcrumb />)
-
-    const blocks = result.find('BreadcrumbItem')
-
-    expect(blocks.length).toEqual(1)
+    expect(intlLinkNodes.length).toEqual(numberBlocks)
   })
 
   it('highlights the last element in the breadcrumb as the current page', () => {
@@ -88,7 +61,7 @@ describe('component rendering expectations', () => {
 
     const result = enzyme.shallow(<Breadcrumb />)
 
-    const lastBreadcrumb = result.find('BreadcrumbItem').last()
+    const lastBreadcrumb = result.find('IntlLink').last().parent()
 
     expect(lastBreadcrumb.prop('isCurrentPage')).toEqual(true)
   })
@@ -101,17 +74,14 @@ describe('component rendering expectations', () => {
 
     const result = enzyme.shallow(<Breadcrumb />)
 
-    const blocks = result.find('BreadcrumbItem')
+    const blocks = result.find('IntlLink')
     const expectedRelativeLabelForIndex: Record<number, string> = {
-      1: 'Rick',
-      2: 'Morty',
+      0: 'Rick',
+      1: 'Morty',
     }
 
     blocks.map((block, index) => {
-      if (index === 0) return // The first block is always "Home"
-
-      const label = block.find('IntlLink').prop('children')
-      return expect(label).toEqual(expectedRelativeLabelForIndex[index])
+      return expect(block.prop('children')).toEqual(expectedRelativeLabelForIndex[index])
     })
   })
 
@@ -123,17 +93,14 @@ describe('component rendering expectations', () => {
 
     const result = enzyme.shallow(<Breadcrumb />)
 
-    const blocks = result.find('BreadcrumbItem')
+    const blocks = result.find('IntlLink')
     const expectedRelativeLabelForIndex: Record<number, string> = {
-      1: 'Minhas Key Result',
-      2: 'Morty',
+      0: 'Minhas Key Result',
+      1: 'Morty',
     }
 
     blocks.map((block, index) => {
-      if (index === 0) return // The first block is always "Home"
-
-      const label = block.find('IntlLink').prop('children')
-      return expect(label).toEqual(expectedRelativeLabelForIndex[index])
+      return expect(block.prop('children')).toEqual(expectedRelativeLabelForIndex[index])
     })
   })
 
@@ -148,18 +115,15 @@ describe('component rendering expectations', () => {
 
     const result = enzyme.shallow(<Breadcrumb routeParams={fakeDynamicParameters} />)
 
-    const blocks = result.find('BreadcrumbItem')
+    const blocks = result.find('IntlLink')
     const expectedRelativeLabelForIndex: Record<number, string> = {
-      1: 'Minhas Key Result',
-      2: 'Morty',
-      3: startCase(fakeDynamicParameters.id),
+      0: 'Minhas Key Result',
+      1: 'Morty',
+      2: startCase(fakeDynamicParameters.id),
     }
 
     blocks.map((block, index) => {
-      if (index === 0) return // The first block is always "Home"
-
-      const label = block.find('IntlLink').prop('children')
-      return expect(label).toEqual(expectedRelativeLabelForIndex[index])
+      return expect(block.prop('children')).toEqual(expectedRelativeLabelForIndex[index])
     })
   })
 
@@ -171,18 +135,15 @@ describe('component rendering expectations', () => {
 
     const result = enzyme.shallow(<Breadcrumb />)
 
-    const blocks = result.find('BreadcrumbItem')
+    const blocks = result.find('IntlLink')
     const expectedRelativeLabelForIndex: Record<number, string> = {
-      1: 'Minhas Key Result',
-      2: 'Morty',
-      3: 'Id',
+      0: 'Minhas Key Result',
+      1: 'Morty',
+      2: 'Id',
     }
 
     blocks.map((block, index) => {
-      if (index === 0) return // The first block is always "Home"
-
-      const label = block.find('IntlLink').prop('children')
-      return expect(label).toEqual(expectedRelativeLabelForIndex[index])
+      return expect(block.prop('children')).toEqual(expectedRelativeLabelForIndex[index])
     })
   })
 })
