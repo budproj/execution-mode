@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
+import { Box, Flex, Heading, Skeleton, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -52,20 +52,20 @@ const TeamCard = ({ id }: TeamCardProperties) => {
             </Skeleton>
           </Flex>
 
-          <SkeletonText isLoaded={isLoaded} noOfLines={2} spacing="4">
+          {/* We are using Skeleton below as a workaround for this issue: */}
+          {/* https://github.com/chakra-ui/chakra-ui/issues/2956 */}
+          <Skeleton isLoaded={isLoaded} noOfLines={3} spacing="4">
             <Text color="gray.400" noOfLines={3}>
               {team?.description}
             </Text>
-          </SkeletonText>
-
-          <Skeleton isLoaded={isLoaded} borderRadius="full" height="12px">
+          </Skeleton>
+          <Skeleton isLoaded={isLoaded} borderRadius="full">
             <SliderWithFilledTrack
               value={team?.currentProgress}
               trackThickness="12px"
               trackColor={confidenceTag.color}
             />
           </Skeleton>
-
           <Box pt={12}>
             <DynamicAvatarGroup users={team?.users} isLoaded={isLoaded} />
           </Box>
