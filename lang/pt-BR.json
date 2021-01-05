@@ -271,6 +271,10 @@
     "defaultMessage": "Progresso",
     "description": "The text of the table head related to the Progress column"
   },
+  "kawRcN": {
+    "defaultMessage": "Cancelar",
+    "description": "This message is displayed in the \"CANCEL\" button in the checkin form"
+  },
   "ktId0y": {
     "defaultMessage": "Como estão as prioridades?",
     "description": "The title of the header section in our objectives overview report"

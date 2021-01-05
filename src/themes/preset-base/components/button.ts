@@ -14,7 +14,7 @@ const Button = {
     solid: () => ({
       bg: 'brand.500',
       color: 'white',
-      width: '100%',
+      borderRadius: '2px',
 
       '&:hover': {
         bg: 'brand.400',
@@ -26,6 +26,29 @@ const Button = {
 
       '&:active': {
         bg: 'brand.400',
+      },
+    }),
+
+    outline: () => ({
+      borderColor: 'brand.500',
+      color: 'brand.500',
+      borderWidth: '2px',
+      borderRadius: '2px',
+
+      '&:hover': {
+        borderColor: 'brand.400',
+        color: 'brand.400',
+        bg: 'transparent',
+      },
+
+      '&:focus': {
+        borderColor: 'brand.400',
+        color: 'brand.400',
+      },
+
+      '&:active': {
+        borderColor: 'brand.400',
+        color: 'brand.400',
       },
     }),
   },

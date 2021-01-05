@@ -1,26 +1,26 @@
-import { Box, Button, Divider, SpaceProps } from '@chakra-ui/react'
+import { Box, Flex, Button } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
 export interface CheckInFormActionsProperties {
-  isLoading: boolean
-  gutter: SpaceProps['p']
+  isLoading?: boolean
 }
 
-const Actions = ({ isLoading, gutter }: CheckInFormActionsProperties) => {
+const Actions = ({ isLoading }: CheckInFormActionsProperties) => {
   const intl = useIntl()
 
   return (
     <Box>
-      <Divider />
-
-      <Box textAlign="center" p={gutter}>
-        <Button variant="solid" type="submit" isLoading={isLoading}>
-          {intl.formatMessage(messages.save)}
+      <Flex gridGap={4}>
+        <Button variant="outline" w="100%">
+          {intl.formatMessage(messages.cancelButtonLabel)}
         </Button>
-      </Box>
+        <Button variant="solid" type="submit" isLoading={isLoading} w="100%">
+          {intl.formatMessage(messages.saveButtonLabel)}
+        </Button>
+      </Flex>
     </Box>
   )
 }
