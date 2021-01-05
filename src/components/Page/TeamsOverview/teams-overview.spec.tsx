@@ -5,7 +5,7 @@ import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import messages from './messages'
-import ObjectivesPage from './objectives'
+import TeamsOverviewPage from './teams-overview'
 
 describe('page control behaviors', () => {
   afterEach(() => sinon.restore())
@@ -15,7 +15,7 @@ describe('page control behaviors', () => {
     const intl = useIntl()
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
 
-    enzyme.shallow(<ObjectivesPage />)
+    enzyme.shallow(<TeamsOverviewPage />)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(intl.formatMessage(messages.pageTitle))
 
@@ -25,7 +25,7 @@ describe('page control behaviors', () => {
   it('hides the Breadcrumb if that is the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<ObjectivesPage isRootPage />)
+    const result = enzyme.shallow(<TeamsOverviewPage isRootPage />)
 
     const pageContent = result.find('PageContent')
 
@@ -35,7 +35,7 @@ describe('page control behaviors', () => {
   it('hides the Breadcrumb if that is not the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<ObjectivesPage isRootPage={false} />)
+    const result = enzyme.shallow(<TeamsOverviewPage isRootPage={false} />)
 
     const pageContent = result.find('PageContent')
 
@@ -45,7 +45,7 @@ describe('page control behaviors', () => {
   it('hides the Breadcrumb by default', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<ObjectivesPage />)
+    const result = enzyme.shallow(<TeamsOverviewPage />)
 
     const pageContent = result.find('PageContent')
 

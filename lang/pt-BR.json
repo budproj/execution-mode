@@ -1,4 +1,8 @@
 {
+  "++WixA": {
+    "defaultMessage": "Visão Geral",
+    "description": "The page title that our users should see in the teams overview page"
+  },
   "+O5SW4": {
     "defaultMessage": "Um ícone com uma série de traços verticais. Clique e arraste ele para reordenar seus resultados chave",
     "description": "The alternative text explaining our reorder icon"
@@ -26,6 +30,10 @@
   "03yPkn": {
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
+  },
+  "0JqGQL": {
+    "defaultMessage": "Time",
+    "description": "The name of the Team Objectives page, located at \"/overview/team\""
   },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
@@ -66,10 +74,6 @@
   "8bQS0s": {
     "defaultMessage": "Em atraso",
     "description": "We use this tag to group every key result with confidence lower than 25"
-  },
-  "8nqWsp": {
-    "defaultMessage": "Objetivos",
-    "description": "The name of the Objectives page, located at \"/objectives\""
   },
   "9bJV7v": {
     "defaultMessage": "OKR",
@@ -119,10 +123,6 @@
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
   },
-  "HpiBVM": {
-    "defaultMessage": "Objetivos",
-    "description": "The page title that our users should see in the objectives page"
-  },
   "IkA9uV": {
     "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
@@ -134,6 +134,10 @@
   "JuRKh+": {
     "defaultMessage": "Um círculo vermelho, indicando que o resultado-chave está atrasada",
     "description": "A brief explanation for screen readers regarding the red status circle"
+  },
+  "KK195c": {
+    "defaultMessage": "Visão Geral",
+    "description": "AppBar menu item that links to company overview page"
   },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
@@ -215,9 +219,9 @@
     "defaultMessage": "Este time é uma empresa",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
-  "VMTKKJ": {
-    "defaultMessage": "Minhas OKR",
-    "description": "AppBar menu item that links to Objectives page"
+  "UgaIhX": {
+    "defaultMessage": "Visão Geral",
+    "description": "The name of the Overview page, located at \"/overview\""
   },
   "XHDyV/": {
     "defaultMessage": "De:",
@@ -242,6 +246,10 @@
   "c8UE59": {
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
+  },
+  "cBQLDC": {
+    "defaultMessage": "Resultados-chave",
+    "description": "AppBar menu item that links to Key Results page"
   },
   "cpaWkz": {
     "defaultMessage": "Atualize seu progresso",
@@ -295,6 +303,10 @@
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
   },
+  "loRR0C": {
+    "defaultMessage": "Empresa",
+    "description": "The name of the Company Objectives page, located at \"/overview/company\""
+  },
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
@@ -331,10 +343,6 @@
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
   },
-  "uU2v6P": {
-    "defaultMessage": "Empresa",
-    "description": "The name of the Company Objectives page, located at \"/objectives/company\""
-  },
   "ui441M": {
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
@@ -355,17 +363,9 @@
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
   },
-  "xfeZtN": {
-    "defaultMessage": "Time",
-    "description": "The name of the Team Objectives page, located at \"/objectives/team\""
-  },
   "y6z1c3": {
     "defaultMessage": "Data de fim",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
-  },
-  "yDscHW": {
-    "defaultMessage": "Minhas KR",
-    "description": "AppBar menu item that links to Key Results page"
   },
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",

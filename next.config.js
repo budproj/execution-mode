@@ -49,20 +49,20 @@ const publicRuntimeConfig = {
     },
 
     {
-      source: '/pt-BR/objetivos',
-      destination: '/objectives',
+      source: '/pt-BR/visao-geral',
+      destination: '/overview',
       locale: 'pt-BR',
     },
 
     {
-      source: '/pt-BR/objetivos/empresa/:id',
-      destination: '/objectives/company/:id',
+      source: '/pt-BR/visao-geral/empresa/:id',
+      destination: '/overview/company/:id',
       locale: 'pt-BR',
     },
 
     {
-      source: '/pt-BR/objetivos/time/:id',
-      destination: '/objectives/team/:id',
+      source: '/pt-BR/visao-geral/time/:id',
+      destination: '/overview/team/:id',
       locale: 'pt-BR',
     },
   ],

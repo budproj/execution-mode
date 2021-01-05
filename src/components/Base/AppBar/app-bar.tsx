@@ -29,7 +29,7 @@ const AppBar = (): ReactElement => {
         <Flex gridGap={20}>
           <AppBarMenuItem label={intl.formatMessage(messages.dashboard)} href="/" />
           <AppBarMenuItem label={intl.formatMessage(messages.keyResults)} href="/key-results" />
-          <AppBarMenuItem label={intl.formatMessage(messages.objectives)} href="/objectives" />
+          <AppBarMenuItem label={intl.formatMessage(messages.overview)} href="/overview" />
         </Flex>
       </GridItem>
 
