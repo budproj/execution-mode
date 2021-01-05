@@ -15,9 +15,10 @@ import messages from './messages'
 
 export interface ProgressSliderContentProperties {
   keyResultID?: KeyResult['id']
+  onClose?: () => void
 }
 
-const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties) => {
+const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentProperties) => {
   const intl = useIntl()
   const setDraftValue = useSetRecoilState(draftValueAtom(keyResultID))
   const setPopoverOpen = useSetRecoilState<boolean>(selectPopoverOpen(keyResultID))
@@ -45,7 +46,12 @@ const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties)
           fill="currentColor"
         />
       </PopoverCloseButton>
-      <CheckInForm keyResultID={keyResultID} afterSubmit={handleSubmit} gutter={8} />
+      <CheckInForm
+        keyResultID={keyResultID}
+        afterSubmit={handleSubmit}
+        gutter={8}
+        onCancel={onClose}
+      />
     </PopoverContent>
   )
 }

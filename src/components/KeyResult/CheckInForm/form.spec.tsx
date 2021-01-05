@@ -8,16 +8,16 @@ import sinon from 'sinon'
 
 import Form, { CheckInFormValues } from './form'
 
+const selectCurrentProgressMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('CURRENT_PROGRESS')
+})
+
+const selectCurrentConfidenceMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('CURRENT_CONFIDENCE')
+})
+
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
-
-  const selectCurrentProgressMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-    return selector.key.includes('CURRENT_PROGRESS')
-  })
-
-  const selectCurrentConfidenceMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-    return selector.key.includes('CURRENT_CONFIDENCE')
-  })
 
   it('uses the current progress as initial value', () => {
     const fakeID = faker.random.word()
@@ -38,6 +38,10 @@ describe('component expectations', () => {
 
     expect(initialValues.currentProgress).toEqual(fakeProgress)
   })
+})
+
+describe('component interations', () => {
+  afterEach(() => sinon.restore())
 
   it('updates the current progress field upon form submission', async () => {
     const fakeID = faker.random.word()
@@ -178,6 +182,53 @@ describe('component expectations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
+  it('executes the desired after submit hook upon form submission', async () => {
+    const fakeID = faker.random.word()
+    const fakeProgress = faker.random.number()
+    const fakeConfidence = faker.random.number()
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    const spy = sinon.spy()
+
+    stateStub
+      .withArgs(selectCurrentConfidenceMatcher)
+      .returns([faker.random.number(), sinon.fake()])
+    stateStub.returns([undefined, sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      newProgress: fakeProgress,
+      confidence: fakeConfidence,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeProgress, fakeConfidence)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('trigger the onCancel received prop upon cancel action', () => {
+    const spy = sinon.spy()
+
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
+
+    const result = enzyme.shallow(<Form onCancel={spy} />).dive()
+
+    const actions = result.find('Actions')
+    actions.simulate('cancel')
+
+    expect(spy.called).toEqual(true)
+  })
+})
+
+describe('corner cases', () => {
+  afterEach(() => sinon.restore())
+
   it('pass progress as undefined to remote dispatch if it did not changed', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
@@ -242,35 +293,6 @@ describe('component expectations', () => {
         },
       },
     })
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-
-  it('executes the desired after submit hook upon form submission', async () => {
-    const fakeID = faker.random.word()
-    const fakeProgress = faker.random.number()
-    const fakeConfidence = faker.random.number()
-    const stateStub = sinon.stub(recoil, 'useRecoilState')
-    const spy = sinon.spy()
-
-    stateStub
-      .withArgs(selectCurrentConfidenceMatcher)
-      .returns([faker.random.number(), sinon.fake()])
-    stateStub.returns([undefined, sinon.fake()])
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-
-    const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
-
-    const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
-      newProgress: fakeProgress,
-      confidence: fakeConfidence,
-    })
-
-    await Promise.resolve()
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeProgress, fakeConfidence)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

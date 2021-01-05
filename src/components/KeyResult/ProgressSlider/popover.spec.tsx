@@ -47,4 +47,16 @@ describe('component expectations', () => {
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(false)
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('triggers the onClose prop when we use the CheckInForm cancel event', () => {
+    const spy = sinon.spy()
+    sinon.stub(recoil, 'useSetRecoilState')
+
+    const result = enzyme.shallow(<ProgressSliderPopover onClose={spy} />)
+
+    const checkInForm = result.find('CheckInForm')
+    checkInForm.simulate('cancel')
+
+    expect(spy.called).toEqual(true)
+  })
 })
