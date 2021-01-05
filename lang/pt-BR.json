@@ -386,5 +386,9 @@
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",
     "description": "The title text of our notification bell, it is displayed when an user hover the icon itself"
+  },
+  "zgF+iY": {
+    "defaultMessage": "Comentário",
+    "description": "This is the label text that is displayed above the input"
   }
 }

@@ -37,6 +37,7 @@ export interface CheckInFormValues {
   currentProgress?: ProgressReport['valueNew']
   confidence?: ConfidenceReport['valueNew']
   newProgress?: ProgressReport['valueNew']
+  comment?: ProgressReport['comment']
 }
 
 const CheckInForm = ({
@@ -55,6 +56,7 @@ const CheckInForm = ({
     currentProgress,
     confidence,
     newProgress: 0,
+    comment: undefined,
   }
 
   const syncDisabledFields = (

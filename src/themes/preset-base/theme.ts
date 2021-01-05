@@ -2,7 +2,7 @@ import { extendTheme } from '@chakra-ui/react'
 
 import tokens from 'src/themes/tokens'
 
-import { Button, Skeleton, Tooltip, FormLabel, Input, Popover } from './components'
+import { Button, Skeleton, Tooltip, FormLabel, Input, Popover, Textarea } from './components'
 
 const colors = {
   brand: {
@@ -107,6 +107,7 @@ const theme = extendTheme({
     FormLabel,
     Input,
     Popover,
+    Textarea,
   },
 
   fonts: {
