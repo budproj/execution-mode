@@ -6,4 +6,5 @@ export default Factory.extend({
   dateEnd: faker.date.future,
   createdAt: faker.date.past,
   updatedAt: faker.date.past,
+  name: faker.company.catchPhrase,
 })

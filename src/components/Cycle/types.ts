@@ -7,6 +7,7 @@ export interface Cycle {
   dateEnd: Date
   createdAt: Date
   updatedAt: Date
+  name?: string
   team: Team
   objectives?: Objective[]
 }

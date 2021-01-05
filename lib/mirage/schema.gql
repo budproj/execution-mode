@@ -343,6 +343,9 @@ type Cycle {
 
   """The objectives inside this cycle"""
   objectives: [Objective!]!
+
+  """The name of the cycle"""
+  name: String!
 }
 
 """Common shared object values between multiple report types"""
