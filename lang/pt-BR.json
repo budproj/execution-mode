@@ -39,10 +39,6 @@
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
   },
-  "17XVCU": {
-    "defaultMessage": "Data",
-    "description": "The text of the table head related to the Date column"
-  },
   "1HBRw6": {
     "defaultMessage": "Nenhuma atualização recente",
     "description": "This label is displayed if we do not have any update date to display"
@@ -71,33 +67,17 @@
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
     "description": "The title of the header section in our company overview report"
   },
-  "8bQS0s": {
-    "defaultMessage": "Em atraso",
-    "description": "We use this tag to group every key result with confidence lower than 25"
+  "8LTdv4": {
+    "defaultMessage": "Objetivo",
+    "description": "The text of the table head related to the Objective column"
   },
   "9bJV7v": {
     "defaultMessage": "OKR",
     "description": "The label text above the OKR section in our key result single page or drawer"
   },
-  "9hslRd": {
-    "defaultMessage": "OKR",
-    "description": "The text of the table head related to the OKR column"
-  },
-  "A3RqIa": {
-    "defaultMessage": "Um círculo amarelo, indicando que o resultado-chave está em risco",
-    "description": "A brief explanation for screen readers regarding the yellow status circle"
-  },
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
-  },
-  "AobZDF": {
-    "defaultMessage": "Em risco",
-    "description": "We use this tag to group every key result with confidence higher than 25 but lower than 50"
-  },
-  "BlDXcz": {
-    "defaultMessage": "Proprietário",
-    "description": "The text of the table head related to the Owner column"
   },
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
@@ -106,6 +86,10 @@
   "D8ZyT4": {
     "defaultMessage": "Um ícone de coroa que representa a sua empresa",
     "description": "This message is used by screen readers to explain our crown icon"
+  },
+  "F33Lyk": {
+    "defaultMessage": "Cor do Nível de Confiança",
+    "description": "The text of the table head related to the Confidence Level color column"
   },
   "FEd9u8": {
     "defaultMessage": "Salvar",
@@ -123,17 +107,17 @@
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
   },
+  "HAQ+JV": {
+    "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
+    "description": "A brief explanation for screen readers regarding the red status circle"
+  },
+  "IGODpK": {
+    "defaultMessage": "Ciclo",
+    "description": "The text of the table head related to the Cycle column"
+  },
   "IkA9uV": {
     "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
-  },
-  "J98VQ8": {
-    "defaultMessage": "Em dia",
-    "description": "We use this tag to group every key result with confidence higher than 50"
-  },
-  "JuRKh+": {
-    "defaultMessage": "Um círculo vermelho, indicando que o resultado-chave está atrasada",
-    "description": "A brief explanation for screen readers regarding the red status circle"
   },
   "KK195c": {
     "defaultMessage": "Visão Geral",
@@ -143,21 +127,17 @@
     "defaultMessage": "Posição atual",
     "description": "This message is displayed below the current progress thumb"
   },
-  "LytmoI": {
-    "defaultMessage": "Um círculo verde, indicando que o resultado-chave está em dia",
-    "description": "A brief explanation for screen readers regarding the green status circle"
-  },
   "M44zCJ": {
     "defaultMessage": "Criado em",
     "description": "The label text inside the Cycle section, above the creation date in our key result single page or drawer"
   },
+  "MBkjzW": {
+    "defaultMessage": "Alto",
+    "description": "We use this tag to group every key result with confidence higher than 50"
+  },
   "MWB++a": {
     "defaultMessage": "Qual o seu nível de segurança?",
     "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
-  },
-  "MfmBCB": {
-    "defaultMessage": "Status",
-    "description": "The text of the table head related to the Status column"
   },
   "NADPP1": {
     "defaultMessage": "Um ícone de lata de lixo",
@@ -235,6 +215,10 @@
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
   },
+  "Yk89cv": {
+    "defaultMessage": "Médio",
+    "description": "We use this tag to group every key result with confidence higher than 25 but lower than 50"
+  },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
     "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
@@ -263,6 +247,18 @@
     "defaultMessage": "Atualizar Progresso",
     "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
   },
+  "faL9vf": {
+    "defaultMessage": "Um círculo verde, indicando que a confiança está alta",
+    "description": "A brief explanation for screen readers regarding the green status circle"
+  },
+  "fbqKln": {
+    "defaultMessage": "Nivel de confiança",
+    "description": "The text of the table head related to the Confidence Level column"
+  },
+  "fd6kjy": {
+    "defaultMessage": "Resultado-chave",
+    "description": "The text of the table head related to the KeyResult column"
+  },
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
@@ -275,21 +271,21 @@
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our key result drawer"
   },
+  "kLkKtK": {
+    "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
+    "description": "A brief explanation for screen readers regarding the yellow status circle"
+  },
   "kXNgkQ": {
     "defaultMessage": "Progresso",
     "description": "The text of the table head related to the Progress column"
   },
-  "keLWnT": {
-    "defaultMessage": "Cor do Status",
-    "description": "The text of the table head related to the Status color column"
-  },
-  "khbEZF": {
-    "defaultMessage": "Minhas Key Results",
-    "description": "The page title that our users should see in the key results page"
-  },
   "ktId0y": {
     "defaultMessage": "Como estão as prioridades?",
     "description": "The title of the header section in our objectives overview report"
+  },
+  "l1LZCB": {
+    "defaultMessage": "Resultados-chave",
+    "description": "The page title that our users should see in the key results page"
   },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
@@ -327,6 +323,10 @@
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
+  "nRf9bk": {
+    "defaultMessage": "Baixo",
+    "description": "We use this tag to group every key result with confidence lower than 25"
+  },
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",
     "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
@@ -351,10 +351,6 @@
     "defaultMessage": "Para:",
     "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
   },
-  "vzYQ5r": {
-    "defaultMessage": "Nome da KR",
-    "description": "The text of the table head related to the Title column"
-  },
   "w18rI2": {
     "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
     "description": "This message is used by screen readers to explain our arrow up"
@@ -366,6 +362,10 @@
   "y6z1c3": {
     "defaultMessage": "Data de fim",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
+  },
+  "ycpCyI": {
+    "defaultMessage": "Dono",
+    "description": "The text of the table head related to the Owner column"
   },
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",

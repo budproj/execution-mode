@@ -39,13 +39,13 @@ const KeyResultListBodyStaticLine = ({
   }
 
   const columnComponents = {
-    [KEY_RESULT_LIST_BODY_COLUMN.TITLE]: KeyResultListBodyColumnTitle,
-    [KEY_RESULT_LIST_BODY_COLUMN.OKR]: KeyResultListBodyColumnOkr,
-    [KEY_RESULT_LIST_BODY_COLUMN.STATUS]: KeyResultListBodyColumnStatus,
+    [KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT]: KeyResultListBodyColumnTitle,
+    [KEY_RESULT_LIST_BODY_COLUMN.OBJECTIVE]: KeyResultListBodyColumnOkr,
+    [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL]: KeyResultListBodyColumnStatus,
     [KEY_RESULT_LIST_BODY_COLUMN.PROGRESS]: KeyResultListBodyColumnProgress,
     [KEY_RESULT_LIST_BODY_COLUMN.CYCLE]: KeyResultListBodyColumnCycle,
     [KEY_RESULT_LIST_BODY_COLUMN.OWNER]: KeyResultListBodyColumnOwner,
-    [KEY_RESULT_LIST_BODY_COLUMN.STATUS_COLOR]: KeyResultListBodyColumnStatusColor,
+    [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL_COLOR]: KeyResultListBodyColumnStatusColor,
   }
 
   return (

@@ -47,20 +47,20 @@ export const getConfidenceTagBasedOnValue = (
   const normalizedConfidence = normalizeConfidence(value)
   const confidenceHashmap = {
     [CONFIDENCE_UPDATED.max]: {
-      message: confidenceTagMessages.upToDate,
-      desc: confidenceTagMessages.iconDescUpToDate,
+      message: confidenceTagMessages.high,
+      desc: confidenceTagMessages.iconDescHigh,
       color: 'green.500',
       bgColor: 'green.100',
     },
     [CONFIDENCE_AT_RISK.max]: {
-      message: confidenceTagMessages.atRisk,
-      desc: confidenceTagMessages.iconDescAtRisk,
+      message: confidenceTagMessages.medium,
+      desc: confidenceTagMessages.iconDescMedium,
       color: 'yellow.500',
       bgColor: 'yellow.100',
     },
     [CONFIDENCE_OUTDATED.max]: {
-      message: confidenceTagMessages.overdue,
-      desc: confidenceTagMessages.iconDescOverdue,
+      message: confidenceTagMessages.low,
+      desc: confidenceTagMessages.iconDescLow,
       color: 'red.500',
       bgColor: 'red.100',
     },

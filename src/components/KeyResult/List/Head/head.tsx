@@ -22,13 +22,13 @@ const KeyResultListHead = ({
 }: KeyResultListHeadProperties): ReactElement => {
   const intl = useIntl()
   const columnMessages = {
-    [KEY_RESULT_LIST_BODY_COLUMN.TITLE]: messages.listHeadTitle,
-    [KEY_RESULT_LIST_BODY_COLUMN.OKR]: messages.listHeadOKR,
-    [KEY_RESULT_LIST_BODY_COLUMN.STATUS]: messages.listHeadStatus,
+    [KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT]: messages.listHeadKeyResult,
+    [KEY_RESULT_LIST_BODY_COLUMN.OBJECTIVE]: messages.listHeadObjective,
+    [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL]: messages.listHeadConfidenceLevel,
     [KEY_RESULT_LIST_BODY_COLUMN.PROGRESS]: messages.listHeadProgress,
-    [KEY_RESULT_LIST_BODY_COLUMN.CYCLE]: messages.listHeadDate,
+    [KEY_RESULT_LIST_BODY_COLUMN.CYCLE]: messages.listHeadCycle,
     [KEY_RESULT_LIST_BODY_COLUMN.OWNER]: messages.listHeadOwner,
-    [KEY_RESULT_LIST_BODY_COLUMN.STATUS_COLOR]: messages.listHeadStatusColor,
+    [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL_COLOR]: messages.listHeadConfidenceLevelColor,
   }
 
   return (
