@@ -10,17 +10,17 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
-export interface KeyResultSingleOKRProperties {
+export interface KeyResultSingleObjectiveProperties {
   keyResultID?: KeyResult['id']
 }
 
 const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
 
-const Okr = ({ keyResultID }: KeyResultSingleOKRProperties) => {
+const Okr = ({ keyResultID }: KeyResultSingleObjectiveProperties) => {
   const intl = useIntl()
   const objective = useRecoilValue(objectiveSelector(keyResultID))
 
-  const isOKRLoaded = Boolean(objective)
+  const isObjectiveLoaded = Boolean(objective)
 
   return (
     <Flex gridGap={2} direction="column">
@@ -28,7 +28,7 @@ const Okr = ({ keyResultID }: KeyResultSingleOKRProperties) => {
         {intl.formatMessage(messages.label)}
       </Text>
       <Flex alignItems="center" gridGap={2}>
-        <SkeletonCircle isLoaded={isOKRLoaded}>
+        <SkeletonCircle isLoaded={isObjectiveLoaded}>
           <Box
             w="32px"
             h="32px"
@@ -41,7 +41,10 @@ const Okr = ({ keyResultID }: KeyResultSingleOKRProperties) => {
             <StackIcon desc={intl.formatMessage(messages.stackIconDesc)} fill="gray.300" />
           </Box>
         </SkeletonCircle>
-        <Skeleton isLoaded={isOKRLoaded} {...buildSkeletonMinSize(isOKRLoaded, 250, 24)}>
+        <Skeleton
+          isLoaded={isObjectiveLoaded}
+          {...buildSkeletonMinSize(isObjectiveLoaded, 250, 24)}
+        >
           <Text color="gray.500">{objective?.title}</Text>
         </Skeleton>
       </Flex>

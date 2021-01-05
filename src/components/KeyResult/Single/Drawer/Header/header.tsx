@@ -3,7 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { Close as CloseIcon } from 'src/components/Icon'
-import KeyResultSingleTitle from 'src/components/KeyResult/Single/Title'
+import KeyResultSingleTitle from 'src/components/KeyResult/Single/Sections/Title'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 import messages from './messages'

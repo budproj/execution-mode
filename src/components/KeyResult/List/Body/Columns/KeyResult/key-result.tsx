@@ -10,7 +10,7 @@ import KeyResultListBodyColumnBase, {
 import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
-export interface KeyResultListBodyColumnTitleProperties
+export interface KeyResultListBodyColumnKeyResultProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
   withRightBorder?: boolean
@@ -20,16 +20,16 @@ export interface KeyResultListBodyColumnTitleProperties
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
 const teamSelector = buildPartialSelector<KeyResult['team']>('team')
 
-const KeyResultListBodyColumnTitle = ({
+const KeyResultListBodyColumnKeyResult = ({
   id,
   borderColor,
   withRightBorder,
   withDynamicIcon,
-}: KeyResultListBodyColumnTitleProperties): ReactElement => {
+}: KeyResultListBodyColumnKeyResultProperties): ReactElement => {
   const title = useRecoilValue(titleSelector(id))
   const team = useRecoilValue(teamSelector(id))
 
-  const isTitleLoaded = Boolean(title)
+  const isKeyResultLoaded = Boolean(title)
   const isTeamLoaded = Boolean(team)
 
   return (
@@ -42,7 +42,7 @@ const KeyResultListBodyColumnTitle = ({
         {withDynamicIcon && (
           <Skeleton
             borderRadius={10}
-            isLoaded={isTitleLoaded}
+            isLoaded={isKeyResultLoaded}
             fadeDuration={0}
             /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
@@ -52,7 +52,7 @@ const KeyResultListBodyColumnTitle = ({
 
         <Box>
           <Skeleton
-            isLoaded={isTitleLoaded}
+            isLoaded={isKeyResultLoaded}
             fadeDuration={0}
             /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
@@ -75,4 +75,4 @@ const KeyResultListBodyColumnTitle = ({
   )
 }
 
-export default KeyResultListBodyColumnTitle
+export default KeyResultListBodyColumnKeyResult

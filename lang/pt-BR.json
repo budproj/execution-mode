@@ -67,10 +67,6 @@
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
   },
-  "5yyaMb": {
-    "defaultMessage": "Objetivo",
-    "description": "The label text above the OKR section in our key result single page or drawer"
-  },
   "6KET/Z": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
     "description": "The title of the header section in our company overview report"
@@ -190,6 +186,10 @@
   "SpAXmO": {
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
+  },
+  "T8ytLJ": {
+    "defaultMessage": "Objetivo",
+    "description": "The label text above the Objective section in our key result single page or drawer"
   },
   "TPAtkS": {
     "defaultMessage": "Ontem",

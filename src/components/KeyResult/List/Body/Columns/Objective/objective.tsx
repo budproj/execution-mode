@@ -13,14 +13,16 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
-export interface KeyResultListBodyColumnOKRProperties
+export interface KeyResultListBodyColumnObjectiveProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
 }
 
 const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
 
-const KeyResultListBodyColumnOKR = ({ id }: KeyResultListBodyColumnOKRProperties): ReactElement => {
+const KeyResultListBodyColumnObjective = ({
+  id,
+}: KeyResultListBodyColumnObjectiveProperties): ReactElement => {
   const objective = useRecoilValue(objectiveSelector(id))
   const intl = useIntl()
 
@@ -60,4 +62,4 @@ const KeyResultListBodyColumnOKR = ({ id }: KeyResultListBodyColumnOKRProperties
   )
 }
 
-export default KeyResultListBodyColumnOKR
+export default KeyResultListBodyColumnObjective

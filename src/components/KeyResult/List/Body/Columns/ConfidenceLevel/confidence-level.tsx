@@ -13,16 +13,16 @@ import {
   selectLatestConfidenceReport,
 } from 'src/state/recoil/key-result/selectors'
 
-export interface KeyResultListBodyColumnStatusProperties
+export interface KeyResultListBodyColumnConfidenceLevelProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
   withLastUpdateInfo?: boolean
 }
 
-const KeyResultListBodyColumnStatus = ({
+const KeyResultListBodyColumnConfidenceLevel = ({
   id,
   withLastUpdateInfo,
-}: KeyResultListBodyColumnStatusProperties): ReactElement => {
+}: KeyResultListBodyColumnConfidenceLevelProperties): ReactElement => {
   const currentConfidence = useRecoilValue(selectCurrentConfidence(id))
   const latestConfidenceReport = useRecoilValue(selectLatestConfidenceReport(id))
 
@@ -58,4 +58,4 @@ const KeyResultListBodyColumnStatus = ({
   )
 }
 
-export default KeyResultListBodyColumnStatus
+export default KeyResultListBodyColumnConfidenceLevel

@@ -1,12 +1,13 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-type KeyResultsSingleOKRMessages = 'label' | 'stackIconDesc'
+type KeyResultsSingleObjectiveMessages = 'label' | 'stackIconDesc'
 
 export default defineMessages({
   label: {
     defaultMessage: 'Objetivo',
-    id: '5yyaMb',
-    description: 'The label text above the OKR section in our key result single page or drawer',
+    id: 'T8ytLJ',
+    description:
+      'The label text above the Objective section in our key result single page or drawer',
   },
 
   stackIconDesc: {
@@ -14,4 +15,4 @@ export default defineMessages({
     id: 'UBruoq',
     description: 'The alternative text explaining our stack icon',
   },
-}) as Record<KeyResultsSingleOKRMessages, MessageDescriptor>
+}) as Record<KeyResultsSingleObjectiveMessages, MessageDescriptor>

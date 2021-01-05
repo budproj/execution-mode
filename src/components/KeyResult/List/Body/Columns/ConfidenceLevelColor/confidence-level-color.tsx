@@ -9,14 +9,14 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
-export interface KeyResultListBodyColumnStatusColorProperties
+export interface KeyResultListBodyColumnConfidenceLevelColorProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
 }
 
-const KeyResultListBodyColumnStatusColor = ({
+const KeyResultListBodyColumnConfidenceLevelColor = ({
   id,
-}: KeyResultListBodyColumnStatusColorProperties): ReactElement => {
+}: KeyResultListBodyColumnConfidenceLevelColorProperties): ReactElement => {
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
   const { color } = useRecoilValue(confidenceTagSelector(keyResult?.currentConfidence))
 
@@ -27,4 +27,4 @@ const KeyResultListBodyColumnStatusColor = ({
   )
 }
 
-export default KeyResultListBodyColumnStatusColor
+export default KeyResultListBodyColumnConfidenceLevelColor

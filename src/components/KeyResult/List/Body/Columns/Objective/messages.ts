@@ -1,6 +1,6 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
-type KeyResultListBodyColumnOKRMessages = 'stackIconDesc'
+type KeyResultListBodyColumnObjectiveMessages = 'stackIconDesc'
 
 export default defineMessages({
   stackIconDesc: {
@@ -8,4 +8,4 @@ export default defineMessages({
     id: 'UBruoq',
     description: 'The alternative text explaining our stack icon',
   },
-}) as Record<KeyResultListBodyColumnOKRMessages, MessageDescriptor>
+}) as Record<KeyResultListBodyColumnObjectiveMessages, MessageDescriptor>
