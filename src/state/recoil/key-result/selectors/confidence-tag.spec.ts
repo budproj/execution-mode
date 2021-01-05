@@ -4,15 +4,15 @@ import * as confidenceTag from './confidence-tag'
 import { confidenceTagMessages } from './messages'
 
 describe('confidence tag getter', () => {
-  it('returns the expected "upToDate" tag if current confidence is 50 or more', () => {
+  it('returns the expected "high" tag if current confidence is 50 or more', () => {
     const fakeConfidence = faker.random.number({ min: 50 })
     const selector = confidenceTag.getConfidenceTagBasedOnValue(fakeConfidence)
 
     const result = selector()
 
     const expectedTag = {
-      message: confidenceTagMessages.upToDate,
-      desc: confidenceTagMessages.iconDescUpToDate,
+      message: confidenceTagMessages.high,
+      desc: confidenceTagMessages.iconDescHigh,
       color: 'green.500',
       bgColor: 'green.100',
     }
@@ -20,15 +20,15 @@ describe('confidence tag getter', () => {
     expect(result).toEqual(expectedTag)
   })
 
-  it('returns the expected "atRisk" tag if current confidence is less than 50 or equal/higher than 25', () => {
+  it('returns the expected "medium" tag if current confidence is less than 50 or equal/higher than 25', () => {
     const fakeConfidence = faker.random.number({ min: 25, max: 49 })
     const selector = confidenceTag.getConfidenceTagBasedOnValue(fakeConfidence)
 
     const result = selector()
 
     const expectedTag = {
-      message: confidenceTagMessages.atRisk,
-      desc: confidenceTagMessages.iconDescAtRisk,
+      message: confidenceTagMessages.medium,
+      desc: confidenceTagMessages.iconDescMedium,
       color: 'yellow.500',
       bgColor: 'yellow.100',
     }
@@ -36,15 +36,15 @@ describe('confidence tag getter', () => {
     expect(result).toEqual(expectedTag)
   })
 
-  it('returns the expected "overdue" tag if the current confidence is less than 25', () => {
-    const fakeConfidence = faker.random.number({ max: 24 })
+  it('returns the expected "low" tag if the current confidence is less than 25', () => {
+    const fakeConfidence = faker.random.number({ min: 1, max: 24 })
     const selector = confidenceTag.getConfidenceTagBasedOnValue(fakeConfidence)
 
     const result = selector()
 
     const expectedTag = {
-      message: confidenceTagMessages.overdue,
-      desc: confidenceTagMessages.iconDescOverdue,
+      message: confidenceTagMessages.low,
+      desc: confidenceTagMessages.iconDescLow,
       color: 'red.500',
       bgColor: 'red.100',
     }
@@ -52,14 +52,14 @@ describe('confidence tag getter', () => {
     expect(result).toEqual(expectedTag)
   })
 
-  it('returns the expected "updates" tag if current confidence is not defined', () => {
+  it('returns the expected "high" tag if current confidence is not defined', () => {
     const selector = confidenceTag.getConfidenceTagBasedOnValue()
 
     const result = selector()
 
     const expectedTag = {
-      message: confidenceTagMessages.upToDate,
-      desc: confidenceTagMessages.iconDescUpToDate,
+      message: confidenceTagMessages.high,
+      desc: confidenceTagMessages.iconDescHigh,
       color: 'green.500',
       bgColor: 'green.100',
     }

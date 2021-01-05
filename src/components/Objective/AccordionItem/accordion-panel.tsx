@@ -58,15 +58,15 @@ const ObjectiveAccordionPanel = ({
           keyResultIDs={keyResultIDs}
           templateColumns="0.1fr 2fr 1fr 2fr 1fr 2fr"
           columns={[
-            KEY_RESULT_LIST_BODY_COLUMN.STATUS_COLOR,
-            KEY_RESULT_LIST_BODY_COLUMN.TITLE,
-            KEY_RESULT_LIST_BODY_COLUMN.STATUS,
+            KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL_COLOR,
+            KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT,
+            KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL,
             KEY_RESULT_LIST_BODY_COLUMN.PROGRESS,
             KEY_RESULT_LIST_BODY_COLUMN.CYCLE,
             KEY_RESULT_LIST_BODY_COLUMN.OWNER,
           ]}
           headProperties={{
-            [KEY_RESULT_LIST_BODY_COLUMN.STATUS_COLOR]: {
+            [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL_COLOR]: {
               hidden: true,
             },
           }}

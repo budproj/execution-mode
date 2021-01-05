@@ -6,15 +6,14 @@ import { useRecoilState } from 'recoil'
 import logger from 'lib/logger'
 import {
   KeyResultSingleOwner,
-  KeyResultSingleOKR,
+  KeyResultSingleObjective,
   KeyResultSingleDescription,
   KeyResultSingleCheckIn,
-} from 'src/components/KeyResult/Single'
-import KeyResultSingleCycle from 'src/components/KeyResult/Single/Cycle'
+  KeyResultSingleCycle,
+} from 'src/components/KeyResult/Single/Sections'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
-
-import { KeyResult } from '../../types'
 
 import KeyResultDrawerHeader from './Header'
 import queries from './queries.gql'
@@ -59,7 +58,7 @@ const KeyResultDrawer = () => {
           <KeyResultDrawerHeader keyResultID={keyResultID} />
           <Flex gridGap={8} py={8} px={6} direction="column">
             <KeyResultSingleOwner keyResultID={keyResultID} />
-            <KeyResultSingleOKR keyResultID={keyResultID} />
+            <KeyResultSingleObjective keyResultID={keyResultID} />
             <KeyResultSingleDescription keyResultID={keyResultID} />
             <KeyResultSingleCycle keyResultID={keyResultID} />
             <KeyResultSingleCheckIn keyResultID={keyResultID} />

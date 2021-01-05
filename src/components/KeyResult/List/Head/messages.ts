@@ -1,31 +1,31 @@
 import { MessageDescriptor, defineMessages } from 'react-intl'
 
 type KeyResultListHeadMessages =
-  | 'listHeadTitle'
-  | 'listHeadOKR'
-  | 'listHeadStatus'
+  | 'listHeadKeyResult'
+  | 'listHeadObjective'
+  | 'listHeadConfidenceLevel'
   | 'listHeadProgress'
-  | 'listHeadDate'
+  | 'listHeadCycle'
   | 'listHeadOwner'
-  | 'listHeadStatusColor'
+  | 'listHeadConfidenceLevelColor'
 
 export default defineMessages({
-  listHeadTitle: {
-    defaultMessage: 'Nome da KR',
-    id: 'vzYQ5r',
-    description: 'The text of the table head related to the Title column',
+  listHeadKeyResult: {
+    defaultMessage: 'Resultado-chave',
+    id: 'fd6kjy',
+    description: 'The text of the table head related to the KeyResult column',
   },
 
-  listHeadOKR: {
-    defaultMessage: 'OKR',
-    id: '9hslRd',
-    description: 'The text of the table head related to the OKR column',
+  listHeadObjective: {
+    defaultMessage: 'Objetivo',
+    id: '8LTdv4',
+    description: 'The text of the table head related to the Objective column',
   },
 
-  listHeadStatus: {
-    defaultMessage: 'Status',
-    id: 'MfmBCB',
-    description: 'The text of the table head related to the Status column',
+  listHeadConfidenceLevel: {
+    defaultMessage: 'Nivel de confiança',
+    id: 'fbqKln',
+    description: 'The text of the table head related to the Confidence Level column',
   },
 
   listHeadProgress: {
@@ -34,21 +34,21 @@ export default defineMessages({
     description: 'The text of the table head related to the Progress column',
   },
 
-  listHeadDate: {
-    defaultMessage: 'Data',
-    id: '17XVCU',
-    description: 'The text of the table head related to the Date column',
+  listHeadCycle: {
+    defaultMessage: 'Ciclo',
+    id: 'IGODpK',
+    description: 'The text of the table head related to the Cycle column',
   },
 
   listHeadOwner: {
-    defaultMessage: 'Proprietário',
-    id: 'BlDXcz',
+    defaultMessage: 'Dono',
+    id: 'ycpCyI',
     description: 'The text of the table head related to the Owner column',
   },
 
-  listHeadStatusColor: {
-    defaultMessage: 'Cor do Status',
-    id: 'keLWnT',
-    description: 'The text of the table head related to the Status color column',
+  listHeadConfidenceLevelColor: {
+    defaultMessage: 'Cor do Nível de Confiança',
+    id: 'F33Lyk',
+    description: 'The text of the table head related to the Confidence Level color column',
   },
 }) as Record<KeyResultListHeadMessages, MessageDescriptor>

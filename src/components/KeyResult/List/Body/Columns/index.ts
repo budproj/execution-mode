@@ -1,13 +1,13 @@
 export { default as KeyResultListBodyColumnCycle } from './Cycle'
 
-export { default as KeyResultListBodyColumnOkr } from './Okr'
+export { default as KeyResultListBodyColumnObjective } from './Objective'
 
 export { default as KeyResultListBodyColumnOwner } from './Owner'
 
 export { default as KeyResultListBodyColumnProgress } from './Progress'
 
-export { default as KeyResultListBodyColumnTitle } from './Title'
+export { default as KeyResultListBodyColumnKeyResult } from './KeyResult'
 
-export { default as KeyResultListBodyColumnStatus } from './Status'
+export { default as KeyResultListBodyColumnConfidenceLevel } from './ConfidenceLevel'
 
-export { default as KeyResultListBodyColumnStatusColor } from './StatusColor'
+export { default as KeyResultListBodyColumnConfidenceLevelColor } from './ConfidenceLevelColor'

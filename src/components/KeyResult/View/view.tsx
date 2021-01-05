@@ -83,11 +83,11 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
       type={KEY_RESULT_LIST_TYPE.DND}
       keyResultIDs={keyResultView?.rank}
       bodyProperties={{
-        [KEY_RESULT_LIST_BODY_COLUMN.TITLE]: {
+        [KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT]: {
           withDynamicIcon: true,
           withRightBorder: true,
         },
-        [KEY_RESULT_LIST_BODY_COLUMN.STATUS]: {
+        [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL]: {
           withLastUpdateInfo: true,
         },
         [KEY_RESULT_LIST_BODY_COLUMN.PROGRESS]: {

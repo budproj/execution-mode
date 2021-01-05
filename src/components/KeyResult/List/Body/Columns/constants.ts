@@ -1,9 +1,9 @@
 export enum KEY_RESULT_LIST_BODY_COLUMN {
-  TITLE = 'title',
-  OKR = 'okr',
-  STATUS = 'status',
+  KEY_RESULT = 'key-result',
+  OBJECTIVE = 'objective',
+  CONFIDENCE_LEVEL = 'confidence-level',
   PROGRESS = 'progress',
   CYCLE = 'cycle',
   OWNER = 'owner',
-  STATUS_COLOR = 'status-color',
+  CONFIDENCE_LEVEL_COLOR = 'confidence-level-color',
 }

@@ -4,12 +4,12 @@ import React from 'react'
 
 import {
   KeyResultListBodyColumnCycle,
-  KeyResultListBodyColumnOkr,
+  KeyResultListBodyColumnObjective,
   KeyResultListBodyColumnOwner,
   KeyResultListBodyColumnProgress,
-  KeyResultListBodyColumnStatus,
-  KeyResultListBodyColumnStatusColor,
-  KeyResultListBodyColumnTitle,
+  KeyResultListBodyColumnConfidenceLevel,
+  KeyResultListBodyColumnConfidenceLevelColor,
+  KeyResultListBodyColumnKeyResult,
 } from 'src/components/KeyResult/List/Body/Columns'
 import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/Columns/types'
@@ -39,13 +39,13 @@ const KeyResultListBodyStaticLine = ({
   }
 
   const columnComponents = {
-    [KEY_RESULT_LIST_BODY_COLUMN.TITLE]: KeyResultListBodyColumnTitle,
-    [KEY_RESULT_LIST_BODY_COLUMN.OKR]: KeyResultListBodyColumnOkr,
-    [KEY_RESULT_LIST_BODY_COLUMN.STATUS]: KeyResultListBodyColumnStatus,
+    [KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT]: KeyResultListBodyColumnKeyResult,
+    [KEY_RESULT_LIST_BODY_COLUMN.OBJECTIVE]: KeyResultListBodyColumnObjective,
+    [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL]: KeyResultListBodyColumnConfidenceLevel,
     [KEY_RESULT_LIST_BODY_COLUMN.PROGRESS]: KeyResultListBodyColumnProgress,
     [KEY_RESULT_LIST_BODY_COLUMN.CYCLE]: KeyResultListBodyColumnCycle,
     [KEY_RESULT_LIST_BODY_COLUMN.OWNER]: KeyResultListBodyColumnOwner,
-    [KEY_RESULT_LIST_BODY_COLUMN.STATUS_COLOR]: KeyResultListBodyColumnStatusColor,
+    [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL_COLOR]: KeyResultListBodyColumnConfidenceLevelColor,
   }
 
   return (

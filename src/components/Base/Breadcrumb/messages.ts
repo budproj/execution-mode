@@ -15,22 +15,22 @@ export default defineMessages({
     description: 'The name of the Key Results page, located at "/keyResults"',
   },
 
-  objectives: {
-    defaultMessage: 'Objetivos',
-    id: '8nqWsp',
-    description: 'The name of the Objectives page, located at "/objectives"',
+  overview: {
+    defaultMessage: 'Visão Geral',
+    id: 'UgaIhX',
+    description: 'The name of the Overview page, located at "/overview"',
   },
 
   company: {
     defaultMessage: 'Empresa',
-    id: 'uU2v6P',
-    description: 'The name of the Company Objectives page, located at "/objectives/company"',
+    id: 'loRR0C',
+    description: 'The name of the Company Objectives page, located at "/overview/company"',
   },
 
   team: {
     defaultMessage: 'Time',
-    id: 'xfeZtN',
-    description: 'The name of the Team Objectives page, located at "/objectives/team"',
+    id: '0JqGQL',
+    description: 'The name of the Team Objectives page, located at "/overview/team"',
   },
 
   arrowRightIconDesc: {
