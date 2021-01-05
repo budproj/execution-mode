@@ -29,12 +29,11 @@ const SelectMenu = ({
   value,
   children,
   isLoading,
-  ...rest
 }: SelectMenuProperties) => {
   const intl = useIntl()
 
   return (
-    <Menu {...rest}>
+    <Menu>
       <MenuButton
         id={id}
         as={Button}
