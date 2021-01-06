@@ -1,3 +1,3 @@
-import CurrentConfidence from './current-confidence'
+import CheckInFormFieldCurrentConfidence from './current-confidence'
 
-export default CurrentConfidence
+export default CheckInFormFieldCurrentConfidence

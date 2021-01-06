@@ -1,9 +1,9 @@
-export * as icon from './icon'
+export * as keyResultIcon from './icon'
 
-export * as view from './view'
+export * as keyResultView from './view'
 
-export * as progressUpdate from './progress-update'
+export * as keyResultCheckIn from './check-in'
 
-export * as drawer from './drawer'
+export * as keyResultDrawer from './drawer'
 
 export { default as keyResultAtomFamily } from './atom-family'

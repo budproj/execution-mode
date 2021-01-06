@@ -1,17 +1,25 @@
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
+import pickBy from 'lodash/pickBy'
 import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
+import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import {
   selectCurrentProgress,
   selectCurrentConfidence,
   selectLatestConfidenceReport,
 } from 'src/state/recoil/key-result/selectors'
 
-import { CurrentProgressField, NewProgressField, CurrentConfidenceField, GoalField } from './Fields'
+import {
+  CheckInFormFieldCurrentProgress,
+  CheckInFormFieldNewProgress,
+  CheckInFormFieldCurrentConfidence,
+  CheckInFormFieldGoal,
+} from './Fields'
+import CheckInFormFieldComment from './Fields/Comment'
 import Actions from './actions'
 import queries from './queries.gql'
 
@@ -31,6 +39,7 @@ export interface CheckInFormValues {
   currentProgress?: ProgressReport['valueNew']
   confidence?: ConfidenceReport['valueNew']
   newProgress?: ProgressReport['valueNew']
+  comment?: ProgressReport['comment']
 }
 
 const CheckInForm = ({
@@ -44,18 +53,19 @@ const CheckInForm = ({
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
   const setConfidenceReport = useSetRecoilState(selectLatestConfidenceReport(keyResultID))
+  const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
   const [createCheckIn, data] = useMutation(queries.CREATE_CHECK_IN)
+
   const initialValues: CheckInFormValues = {
     currentProgress,
     confidence,
     newProgress: 0,
+    comment: '',
   }
 
-  const syncDisabledFields = (
-    values: CheckInFormValues,
-    actions: FormikHelpers<CheckInFormValues>,
-  ) => {
+  const refreshFields = (values: CheckInFormValues, actions: FormikHelpers<CheckInFormValues>) => {
     actions?.setFieldValue('currentProgress', values.newProgress)
+    actions?.setFieldValue('comment', initialValues.comment)
   }
 
   const syncRecoilState = (values: CheckInFormValues) => {
@@ -65,21 +75,26 @@ const CheckInForm = ({
       setConfidence(values.confidence)
       setConfidenceReport({ valueNew: values.confidence })
     }
+
+    setCommentEnabled(false)
   }
 
   const dispatchRemoteUpdate = async (
     newProgress: CheckInFormValues['currentProgress'],
     newConfidence: CheckInFormValues['confidence'],
+    comment: CheckInFormValues['comment'],
   ) => {
     const checkIn = {
+      comment,
       keyResultId: keyResultID,
       progress: newProgress,
       confidence: newConfidence,
     }
+    const clearedCheckIn = pickBy(checkIn)
 
     await createCheckIn({
       variables: {
-        checkInInput: checkIn,
+        checkInInput: clearedCheckIn,
       },
     })
   }
@@ -90,17 +105,19 @@ const CheckInForm = ({
   ) => {
     const wasProgressUpdated = values.newProgress !== currentProgress
     const wasConfidenceUpdated = values.confidence !== confidence
+    const wasCommentCreated = values.comment && values.comment !== ''
 
-    if (wasProgressUpdated || wasConfidenceUpdated) {
-      syncDisabledFields(values, actions)
-      syncRecoilState(values)
-
+    if (wasProgressUpdated || wasConfidenceUpdated || wasCommentCreated) {
       const newProgress = wasProgressUpdated ? values.newProgress : undefined
       const newConfidence = wasConfidenceUpdated ? values.confidence : undefined
+      const comment = wasCommentCreated ? values.comment : undefined
 
-      await dispatchRemoteUpdate(newProgress, newConfidence)
+      await dispatchRemoteUpdate(newProgress, newConfidence, comment)
 
       if (afterSubmit) afterSubmit(newProgress, newConfidence)
+
+      syncRecoilState(values)
+      refreshFields(values, actions)
     }
   }
 
@@ -111,15 +128,20 @@ const CheckInForm = ({
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
             <Flex direction="column" gridGap={8} p={gutter} pb={submitOnBlur ? 0 : gutter}>
               <Flex gridGap={5}>
-                <CurrentProgressField keyResultID={keyResultID} />
-                <NewProgressField
+                <CheckInFormFieldCurrentProgress keyResultID={keyResultID} />
+                <CheckInFormFieldNewProgress
                   keyResultID={keyResultID}
                   submitOnBlur={submitOnBlur}
                   isLoading={data.loading}
                 />
-                {showGoal && <GoalField keyResultID={keyResultID} />}
+                {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
               </Flex>
-              <CurrentConfidenceField submitOnBlur={submitOnBlur} isLoading={data.loading} />
+              <CheckInFormFieldCurrentConfidence
+                submitOnBlur={submitOnBlur}
+                isLoading={data.loading}
+              />
+
+              <CheckInFormFieldComment keyResultID={keyResultID} submitOnBlur={submitOnBlur} />
 
               {!submitOnBlur && <Actions isLoading={data.loading} onCancel={onCancel} />}
             </Flex>

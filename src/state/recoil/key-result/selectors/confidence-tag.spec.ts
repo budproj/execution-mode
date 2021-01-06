@@ -69,7 +69,7 @@ describe('confidence tag getter', () => {
 })
 
 describe('normalize confidence', () => {
-  it('returns 100 for confidences within the range of the UPDATED tag', () => {
+  it('returns 100 for confidences within the range of the HIGH tag', () => {
     const fakeConfidence = faker.random.number({ min: 50, max: 100 })
 
     const result = confidenceTag.normalizeConfidence(fakeConfidence)
@@ -77,7 +77,7 @@ describe('normalize confidence', () => {
     expect(result).toEqual(100)
   })
 
-  it('returns 49 for confidences within the range of the AT_RISK tag', () => {
+  it('returns 49 for confidences within the range of the MEDIUM tag', () => {
     const fakeConfidence = faker.random.number({ min: 25, max: 49 })
 
     const result = confidenceTag.normalizeConfidence(fakeConfidence)
@@ -85,10 +85,16 @@ describe('normalize confidence', () => {
     expect(result).toEqual(49)
   })
 
-  it('returns 24 for confidences within the range of the OUTDATED tag', () => {
-    const fakeConfidence = faker.random.number({ min: 0, max: 24 })
+  it('returns 24 for confidences within the range of the LOW tag', () => {
+    const fakeConfidence = faker.random.number({ min: 1, max: 24 })
 
     const result = confidenceTag.normalizeConfidence(fakeConfidence)
+
+    expect(result).toEqual(24)
+  })
+
+  it('returns 24 for confidences within the range of the LOW tag if confidence was 0', () => {
+    const result = confidenceTag.normalizeConfidence(0)
 
     expect(result).toEqual(24)
   })

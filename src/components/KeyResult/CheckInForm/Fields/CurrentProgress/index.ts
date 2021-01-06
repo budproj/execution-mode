@@ -1,3 +1,3 @@
-import CurrentProgress from './current-progress'
+import CheckInFormFieldCurrentProgress from './current-progress'
 
-export default CurrentProgress
+export default CheckInFormFieldCurrentProgress

@@ -7,7 +7,7 @@ import sinon from 'sinon'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
-import CurrentProgress from './current-progress'
+import CheckInFormFieldCurrentProgress from './current-progress'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
@@ -17,7 +17,9 @@ describe('component expectations', () => {
     sinon.stub(recoil, 'useRecoilValue').returns(format)
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(
+      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+    )
 
     const maskComponent = result.find('Absolute')
 
@@ -29,7 +31,9 @@ describe('component expectations', () => {
     sinon.stub(recoil, 'useRecoilValue').returns(format)
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(
+      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+    )
 
     const maskComponent = result.find('Percentage')
 
@@ -41,7 +45,9 @@ describe('component expectations', () => {
     sinon.stub(recoil, 'useRecoilValue').returns(format)
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(
+      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+    )
 
     const maskComponent = result.find('CoinBRL')
 
@@ -53,7 +59,9 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(
+      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+    )
 
     const maskComponent = result.find('Absolute')
 
@@ -65,7 +73,9 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<CurrentProgress keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(
+      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+    )
 
     const maskComponent = result.find('Absolute')
 

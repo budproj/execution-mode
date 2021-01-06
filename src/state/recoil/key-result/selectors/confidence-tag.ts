@@ -15,15 +15,15 @@ export interface Tag {
   bgColor: string
 }
 
-export const CONFIDENCE_UPDATED = {
+export const CONFIDENCE_HIGH = {
   max: 100,
   min: 50,
 }
-export const CONFIDENCE_AT_RISK = {
+export const CONFIDENCE_MEDIUM = {
   max: 49,
   min: 25,
 }
-export const CONFIDENCE_OUTDATED = {
+export const CONFIDENCE_LOW = {
   max: 24,
   min: 0,
 }
@@ -31,34 +31,33 @@ export const CONFIDENCE_OUTDATED = {
 export const normalizeConfidence = (
   value?: ConfidenceReport['valueNew'],
 ): ConfidenceReport['valueNew'] => {
-  if (!value) return CONFIDENCE_UPDATED.max
+  if (!value && value !== 0) return CONFIDENCE_HIGH.max
 
-  if (value >= CONFIDENCE_UPDATED.min) return CONFIDENCE_UPDATED.max
+  if (value >= CONFIDENCE_HIGH.min) return CONFIDENCE_HIGH.max
 
-  if (value >= CONFIDENCE_AT_RISK.min && value < CONFIDENCE_UPDATED.min)
-    return CONFIDENCE_AT_RISK.max
+  if (value >= CONFIDENCE_MEDIUM.min && value < CONFIDENCE_HIGH.min) return CONFIDENCE_MEDIUM.max
 
-  return CONFIDENCE_OUTDATED.max
+  return CONFIDENCE_LOW.max
 }
 
 export const getConfidenceTagBasedOnValue = (
-  value: ConfidenceReport['valueNew'] = CONFIDENCE_UPDATED.min,
+  value: ConfidenceReport['valueNew'] = CONFIDENCE_HIGH.min,
 ) => (): Tag => {
   const normalizedConfidence = normalizeConfidence(value)
   const confidenceHashmap = {
-    [CONFIDENCE_UPDATED.max]: {
+    [CONFIDENCE_HIGH.max]: {
       message: confidenceTagMessages.high,
       desc: confidenceTagMessages.iconDescHigh,
       color: 'green.500',
       bgColor: 'green.100',
     },
-    [CONFIDENCE_AT_RISK.max]: {
+    [CONFIDENCE_MEDIUM.max]: {
       message: confidenceTagMessages.medium,
       desc: confidenceTagMessages.iconDescMedium,
       color: 'yellow.500',
       bgColor: 'yellow.100',
     },
-    [CONFIDENCE_OUTDATED.max]: {
+    [CONFIDENCE_LOW.max]: {
       message: confidenceTagMessages.low,
       desc: confidenceTagMessages.iconDescLow,
       color: 'red.500',

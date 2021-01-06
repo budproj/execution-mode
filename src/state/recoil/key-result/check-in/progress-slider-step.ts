@@ -7,7 +7,7 @@ import { RecoilInterfaceGetter } from 'src/state/recoil/types'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::STEP`
+const KEY = `${PREFIX}::PROGRESS_SLIDER_STEP`
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
@@ -28,9 +28,9 @@ export const getStepBasedOnID = (id?: KeyResult['id']) => ({
   return formatHashmap[format] ?? defaultStep
 }
 
-export const step = selectorFamily<number, KeyResult['id'] | undefined>({
+export const progressSliderStep = selectorFamily<number, KeyResult['id'] | undefined>({
   key: KEY,
   get: getStepBasedOnID,
 })
 
-export default step
+export default progressSliderStep

@@ -14,7 +14,7 @@ describe('component expectations', () => {
     const newProgressReport = faker.random.number()
     const useSetRecoilStateStub = sinon.stub(recoil, 'useSetRecoilState')
     const draftValueAtomMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-      return selector.key.includes('DRAFT_VALUE')
+      return selector.key.includes('PROGRESS_DRAFT')
     })
 
     useSetRecoilStateStub.withArgs(draftValueAtomMatcher).returns(spy)

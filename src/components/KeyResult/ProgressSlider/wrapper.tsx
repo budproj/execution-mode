@@ -4,9 +4,9 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import {
-  keyResultProgressUpdatePopoverOpen,
-  keyResultProgressUpdateDraftValue as draftValueAtom,
-} from 'src/state/recoil/key-result/progress-update'
+  keyResultCheckInPopoverOpen,
+  keyResultCheckInProgressDraft,
+} from 'src/state/recoil/key-result/check-in'
 import selectCurrentProgress from 'src/state/recoil/key-result/selectors/current-progress'
 
 import Popover from './popover'
@@ -19,10 +19,8 @@ export interface ProgressSliderWrapperProperties {
 
 const ProgressSliderWrapper = ({ id, canChange }: ProgressSliderWrapperProperties) => {
   const currentProgress = useRecoilValue(selectCurrentProgress(id))
-  const [draftValue, setDraftValue] = useRecoilState(draftValueAtom(id))
-  const [isPopoverOpen, setPopoverOpen] = useRecoilState<boolean>(
-    keyResultProgressUpdatePopoverOpen(id),
-  )
+  const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(id))
+  const [isPopoverOpen, setPopoverOpen] = useRecoilState<boolean>(keyResultCheckInPopoverOpen(id))
 
   const handleClose = () => {
     if (draftValue !== currentProgress) setDraftValue(currentProgress)

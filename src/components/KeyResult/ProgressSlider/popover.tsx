@@ -7,9 +7,9 @@ import { Close as CloseIcon } from 'src/components/Icon'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
 import {
-  keyResultProgressUpdateDraftValue as draftValueAtom,
-  keyResultProgressUpdatePopoverOpen as selectPopoverOpen,
-} from 'src/state/recoil/key-result/progress-update'
+  keyResultCheckInProgressDraft,
+  keyResultCheckInPopoverOpen,
+} from 'src/state/recoil/key-result/check-in'
 
 import messages from './messages'
 
@@ -20,8 +20,8 @@ export interface ProgressSliderContentProperties {
 
 const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentProperties) => {
   const intl = useIntl()
-  const setDraftValue = useSetRecoilState(draftValueAtom(keyResultID))
-  const setPopoverOpen = useSetRecoilState<boolean>(selectPopoverOpen(keyResultID))
+  const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
+  const setPopoverOpen = useSetRecoilState<boolean>(keyResultCheckInPopoverOpen(keyResultID))
 
   const handleSubmit = (newProgress?: ProgressReport['valueNew']) => {
     if (newProgress) setDraftValue(newProgress)

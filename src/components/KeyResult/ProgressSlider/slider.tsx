@@ -6,10 +6,10 @@ import SliderWithHoverThumb, {
 } from 'src/components/Base/SliderWithHoverThumb'
 import { KeyResult } from 'src/components/KeyResult/types'
 import {
-  keyResultProgressUpdatePopoverOpen,
-  keyResultProgressUpdateDraftValue as draftValueAtom,
-  keyResultProgressUpdateStep as selectStep,
-} from 'src/state/recoil/key-result/progress-update'
+  keyResultCheckInPopoverOpen,
+  keyResultCheckInProgressDraft,
+  keyResultCheckInProgressSliderStep,
+} from 'src/state/recoil/key-result/check-in'
 import {
   buildPartialSelector,
   selectCurrentConfidence,
@@ -35,13 +35,13 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
   ({ keyResultID, canChange }: ProgressSliderContainerProperties, forwardedReference) => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isChanging, setIsChanging] = useState(false)
-    const [draftValue, setDraftValue] = useRecoilState(draftValueAtom(keyResultID))
+    const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
     const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
     const confidenceTag = useRecoilValue(confidenceTagSelector(currentConfidence))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
     const goal = useRecoilValue(goalSelector(keyResultID))
-    const step = useRecoilValue(selectStep(keyResultID))
-    const setOpenedPopover = useSetRecoilState(keyResultProgressUpdatePopoverOpen(keyResultID))
+    const step = useRecoilValue(keyResultCheckInProgressSliderStep(keyResultID))
+    const setOpenedPopover = useSetRecoilState(keyResultCheckInPopoverOpen(keyResultID))
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {

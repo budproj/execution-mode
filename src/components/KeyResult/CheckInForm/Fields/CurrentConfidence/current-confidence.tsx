@@ -15,12 +15,15 @@ import {
 
 import messages from './messages'
 
-export interface CheckInFormCurrentConfidenceProperties {
+export interface CheckInFormFieldCurrentConfidenceProperties {
   submitOnBlur: boolean
   isLoading?: boolean
 }
 
-const CurrentConfidence = ({ submitOnBlur, isLoading }: CheckInFormCurrentConfidenceProperties) => {
+const CheckInFormFieldCurrentConfidence = ({
+  submitOnBlur,
+  isLoading,
+}: CheckInFormFieldCurrentConfidenceProperties) => {
   const [isSending, setIsSending] = useState(false)
   const intl = useIntl()
   const { values, setFieldValue, submitForm, isSubmitting } = useFormikContext<CheckInFormValues>()
@@ -63,8 +66,8 @@ const CurrentConfidence = ({ submitOnBlur, isLoading }: CheckInFormCurrentConfid
   )
 }
 
-CurrentConfidence.defaultProps = {
+CheckInFormFieldCurrentConfidence.defaultProps = {
   submitOnBlur: false,
 }
 
-export default CurrentConfidence
+export default CheckInFormFieldCurrentConfidence
