@@ -137,7 +137,7 @@ const CheckInForm = ({
                 isLoading={data.loading}
               />
 
-              <CheckInFormFieldComment submitOnBlur={submitOnBlur} />
+              <CheckInFormFieldComment keyResultID={keyResultID} submitOnBlur={submitOnBlur} />
 
               {!submitOnBlur && <Actions isLoading={data.loading} onCancel={onCancel} />}
             </Flex>

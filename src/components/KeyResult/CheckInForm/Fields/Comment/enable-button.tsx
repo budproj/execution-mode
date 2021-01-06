@@ -1,17 +1,25 @@
 import { Button, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
 import PlusOutlineIcon from 'src/components/Icon/PlusOutline'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 
 import messages from './messages'
 
-export interface CheckInFormFieldCommentButtonProperties {
-  onClick?: () => void
+export interface CheckInFormFieldCommentEnableButtonProperties {
+  keyResultID?: KeyResult['id']
 }
 
-const CheckInFormFieldCommentButton = ({ onClick }: CheckInFormFieldCommentButtonProperties) => {
+const CheckInFormFieldCommentEnableButton = ({
+  keyResultID,
+}: CheckInFormFieldCommentEnableButtonProperties) => {
   const intl = useIntl()
+  const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
+
+  const enableComment = () => setCommentEnabled(true)
 
   return (
     <Button
@@ -27,7 +35,7 @@ const CheckInFormFieldCommentButton = ({ onClick }: CheckInFormFieldCommentButto
           height="18px"
         />
       }
-      onClick={onClick}
+      onClick={enableComment}
     >
       <Text color="brand.400" fontWeight={400}>
         {intl.formatMessage(messages.buttonLabel)}
@@ -36,4 +44,4 @@ const CheckInFormFieldCommentButton = ({ onClick }: CheckInFormFieldCommentButto
   )
 }
 
-export default CheckInFormFieldCommentButton
+export default CheckInFormFieldCommentEnableButton

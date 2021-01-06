@@ -1,23 +1,27 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useRecoilValue } from 'recoil'
 
-import CheckInFormFieldCommentButton from './button'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
+
+import CheckInFormFieldCommentEnableButton from './enable-button'
 import CheckInFormFieldCommentInput from './input'
 
 export interface CheckInFormFieldCommentProperties {
+  keyResultID?: KeyResult['id']
   submitOnBlur?: boolean
 }
 
-const CheckInFormFieldComment = ({ submitOnBlur }: CheckInFormFieldCommentProperties) => {
-  const [showInput, setShowInput] = useState(false)
+const CheckInFormFieldComment = ({
+  keyResultID,
+  submitOnBlur,
+}: CheckInFormFieldCommentProperties) => {
+  const commentEnabled = useRecoilValue(keyResultCheckInCommentEnabled(keyResultID))
 
-  const handleShowInput = () => {
-    setShowInput(true)
-  }
-
-  return showInput ? (
+  return commentEnabled ? (
     <CheckInFormFieldCommentInput submitOnBlur={submitOnBlur} />
   ) : (
-    <CheckInFormFieldCommentButton onClick={handleShowInput} />
+    <CheckInFormFieldCommentEnableButton keyResultID={keyResultID} />
   )
 }
 
