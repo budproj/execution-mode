@@ -6,6 +6,7 @@ import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
+import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import {
   selectCurrentProgress,
   selectCurrentConfidence,
@@ -52,7 +53,9 @@ const CheckInForm = ({
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
   const setConfidenceReport = useSetRecoilState(selectLatestConfidenceReport(keyResultID))
+  const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
   const [createCheckIn, data] = useMutation(queries.CREATE_CHECK_IN)
+
   const initialValues: CheckInFormValues = {
     currentProgress,
     confidence,
@@ -72,6 +75,8 @@ const CheckInForm = ({
       setConfidence(values.confidence)
       setConfidenceReport({ valueNew: values.confidence })
     }
+
+    setCommentEnabled(false)
   }
 
   const dispatchRemoteUpdate = async (
@@ -103,8 +108,6 @@ const CheckInForm = ({
     const wasCommentCreated = values.comment && values.comment !== ''
 
     if (wasProgressUpdated || wasConfidenceUpdated || wasCommentCreated) {
-      syncRecoilState(values)
-
       const newProgress = wasProgressUpdated ? values.newProgress : undefined
       const newConfidence = wasConfidenceUpdated ? values.confidence : undefined
       const comment = wasCommentCreated ? values.comment : undefined
@@ -113,6 +116,7 @@ const CheckInForm = ({
 
       if (afterSubmit) afterSubmit(newProgress, newConfidence)
 
+      syncRecoilState(values)
       refreshFields(values, actions)
     }
   }

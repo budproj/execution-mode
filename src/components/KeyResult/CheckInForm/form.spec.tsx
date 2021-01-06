@@ -16,6 +16,14 @@ const selectCurrentConfidenceMatcher = sinon.match((selector: recoil.RecoilState
   return selector.key.includes('CURRENT_CONFIDENCE')
 })
 
+const selectLatestConfidenceReportMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('LATEST_CONFIDENCE_REPORT')
+})
+
+const selectCommentEnabledMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('COMMENT_ENABLED')
+})
+
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
@@ -164,7 +172,8 @@ describe('component interations', () => {
     const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
     const spy = sinon.spy()
 
-    setStateStub.returns(spy)
+    setStateStub.withArgs(selectLatestConfidenceReportMatcher).returns(spy)
+    setStateStub.returns(sinon.fake())
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 
@@ -178,6 +187,31 @@ describe('component interations', () => {
 
     await Promise.resolve()
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly({ valueNew: fakeConfidence })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('closes the comment input upon form submission', async () => {
+    const fakeID = faker.random.word()
+    const fakeConfidence = faker.random.number()
+    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
+    const spy = sinon.spy()
+
+    setStateStub.withArgs(selectCommentEnabledMatcher).returns(spy)
+    setStateStub.returns(sinon.fake())
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      confidence: fakeConfidence,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(false)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
