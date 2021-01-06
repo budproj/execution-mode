@@ -7,9 +7,9 @@ import SelectMenu from 'src/components/Base/SelectMenu'
 import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
 import ConfidenceTag from 'src/components/KeyResult/ConfidenceTag/confidence-tag'
 import {
-  CONFIDENCE_AT_RISK,
-  CONFIDENCE_OUTDATED,
-  CONFIDENCE_UPDATED,
+  CONFIDENCE_HIGH,
+  CONFIDENCE_MEDIUM,
+  CONFIDENCE_LOW,
   normalizeConfidence,
 } from 'src/state/recoil/key-result/selectors/confidence-tag'
 
@@ -50,16 +50,16 @@ const CheckInFormFieldCurrentConfidence = ({
         isLoading={isSending}
         onChange={handleChange}
       >
-        <MenuItemOption value={CONFIDENCE_UPDATED.max.toString()}>
-          <ConfidenceTag confidenceValue={CONFIDENCE_UPDATED.max} />
+        <MenuItemOption value={CONFIDENCE_HIGH.max.toString()}>
+          <ConfidenceTag confidenceValue={CONFIDENCE_HIGH.max} />
         </MenuItemOption>
 
-        <MenuItemOption value={CONFIDENCE_AT_RISK.max.toString()}>
-          <ConfidenceTag confidenceValue={CONFIDENCE_AT_RISK.max} />
+        <MenuItemOption value={CONFIDENCE_MEDIUM.max.toString()}>
+          <ConfidenceTag confidenceValue={CONFIDENCE_MEDIUM.max} />
         </MenuItemOption>
 
-        <MenuItemOption value={CONFIDENCE_OUTDATED.max.toString()}>
-          <ConfidenceTag confidenceValue={CONFIDENCE_OUTDATED.max} />
+        <MenuItemOption value={CONFIDENCE_LOW.max.toString()}>
+          <ConfidenceTag confidenceValue={CONFIDENCE_LOW.max} />
         </MenuItemOption>
       </SelectMenu>
     </Box>
