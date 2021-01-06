@@ -9,7 +9,7 @@ import InputWithLoader from 'src/components/Base/InputWithLoader'
 import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultProgressUpdateDraftValue as draftValueAtom } from 'src/state/recoil/key-result/progress-update'
+import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
@@ -30,7 +30,7 @@ const CheckInFormFieldNewProgress = ({
   const [isSending, setIsSending] = useState(false)
   const intl = useIntl()
   const format = useRecoilValue(formatSelector(keyResultID))
-  const [draftValue, setDraftValue] = useRecoilState(draftValueAtom(keyResultID))
+  const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const { values, setFieldValue, submitForm, isSubmitting } = useFormikContext<CheckInFormValues>()
   const Mask = selectMaskBasedOnFormat(format)
 

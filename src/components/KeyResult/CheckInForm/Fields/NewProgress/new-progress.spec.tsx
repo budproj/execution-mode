@@ -6,7 +6,7 @@ import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
-import { keyResultProgressUpdateDraftValue as draftValueAtom } from 'src/state/recoil/key-result/progress-update'
+import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 
 import NewProgress from './new-progress'
 
@@ -80,7 +80,7 @@ describe('component expectations', () => {
       .returns({ values: {}, setFieldValue: sinon.fake() })
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(draftValueAtom(fakeID)).returns([undefined, spy])
+    stateStub.withArgs(keyResultCheckInProgressDraft(fakeID)).returns([undefined, spy])
 
     const result = enzyme.shallow(<NewProgress keyResultID={fakeID} />)
 

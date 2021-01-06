@@ -5,9 +5,9 @@ import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import {
-  keyResultProgressUpdateDraftValue as draftValueAtom,
-  keyResultProgressUpdatePopoverOpen,
-} from 'src/state/recoil/key-result/progress-update'
+  keyResultCheckInProgressDraft,
+  keyResultCheckInPopoverOpen,
+} from 'src/state/recoil/key-result/check-in'
 
 import ProgressSliderWrapper from './wrapper'
 
@@ -46,7 +46,7 @@ describe('component expectations', () => {
 
     sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
 
-    useRecoilStateStub.withArgs(draftValueAtom(fakeID)).returns([draftValue, spy])
+    useRecoilStateStub.withArgs(keyResultCheckInProgressDraft(fakeID)).returns([draftValue, spy])
     useRecoilStateStub.returns([undefined, sinon.fake()])
 
     const result = enzyme.shallow(<ProgressSliderWrapper id={fakeID} />)
@@ -68,9 +68,7 @@ describe('component expectations', () => {
 
     sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
 
-    useRecoilStateStub
-      .withArgs(keyResultProgressUpdatePopoverOpen(fakeID))
-      .returns([undefined, spy])
+    useRecoilStateStub.withArgs(keyResultCheckInPopoverOpen(fakeID)).returns([undefined, spy])
     useRecoilStateStub.returns([undefined, sinon.fake()])
 
     const result = enzyme.shallow(<ProgressSliderWrapper id={fakeID} />)
@@ -92,9 +90,7 @@ describe('component expectations', () => {
 
     sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
 
-    useRecoilStateStub
-      .withArgs(keyResultProgressUpdatePopoverOpen(fakeID))
-      .returns([undefined, spy])
+    useRecoilStateStub.withArgs(keyResultCheckInPopoverOpen(fakeID)).returns([undefined, spy])
     useRecoilStateStub.returns([undefined, sinon.fake()])
 
     const result = enzyme.shallow(<ProgressSliderWrapper id={fakeID} />)
@@ -117,7 +113,7 @@ describe('component expectations', () => {
 
     sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
 
-    useRecoilStateStub.withArgs(draftValueAtom(fakeID)).returns([draftValue, spy])
+    useRecoilStateStub.withArgs(keyResultCheckInProgressDraft(fakeID)).returns([draftValue, spy])
     useRecoilStateStub.returns([undefined, sinon.fake()])
 
     const result = enzyme.shallow(<ProgressSliderWrapper id={fakeID} />)

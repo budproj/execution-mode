@@ -5,9 +5,9 @@ import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import {
-  keyResultProgressUpdateDraftValue as draftValueAtom,
-  keyResultProgressUpdatePopoverOpen,
-} from 'src/state/recoil/key-result/progress-update'
+  keyResultCheckInProgressDraft,
+  keyResultCheckInPopoverOpen,
+} from 'src/state/recoil/key-result/check-in'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import ProgressSlider from './slider'
@@ -38,7 +38,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(draftValueAtom(fakeID)).returns(['ok', spy])
+    stateStub.withArgs(keyResultCheckInProgressDraft(fakeID)).returns(['ok', spy])
     stateStub.returns([undefined, sinon.fake()])
 
     const valueStub = sinon.stub(recoil, 'useRecoilValue')
@@ -67,7 +67,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([newProgress, sinon.fake()])
 
     const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
-    setStateStub.withArgs(keyResultProgressUpdatePopoverOpen(fakeID)).returns(spy)
+    setStateStub.withArgs(keyResultCheckInPopoverOpen(fakeID)).returns(spy)
     setStateStub.returns(sinon.fake())
 
     const valueStub = sinon.stub(recoil, 'useRecoilValue')
@@ -101,7 +101,7 @@ describe('component expectations', () => {
       .returns([faker.random.number(), sinon.fake()])
 
     const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
-    setStateStub.withArgs(keyResultProgressUpdatePopoverOpen(fakeID)).returns(spy)
+    setStateStub.withArgs(keyResultCheckInPopoverOpen(fakeID)).returns(spy)
     setStateStub.returns(sinon.fake())
 
     const valueStub = sinon.stub(recoil, 'useRecoilValue')
@@ -128,7 +128,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([newProgress, sinon.fake()])
 
     const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
-    setStateStub.withArgs(keyResultProgressUpdatePopoverOpen(fakeID)).returns(spy)
+    setStateStub.withArgs(keyResultCheckInPopoverOpen(fakeID)).returns(spy)
     setStateStub.returns(sinon.fake())
 
     const valueStub = sinon.stub(recoil, 'useRecoilValue')

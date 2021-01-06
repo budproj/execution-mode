@@ -5,9 +5,9 @@ import selectCurrentProgress from 'src/state/recoil/key-result/selectors/current
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::DRAFT_VALUE`
+const KEY = `${PREFIX}::PROGRESS_DRAFT`
 
-const draftValue = atomFamily<
+const progressDraft = atomFamily<
   KeyResult['currentProgress'] | undefined,
   KeyResult['id'] | undefined
 >({
@@ -15,4 +15,4 @@ const draftValue = atomFamily<
   default: (id) => selectCurrentProgress(id),
 })
 
-export default draftValue
+export default progressDraft
