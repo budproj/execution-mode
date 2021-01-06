@@ -17,14 +17,14 @@ export interface Tag {
 
 export const CONFIDENCE_HIGH = {
   max: 100,
-  min: 50,
+  min: 67,
 }
 export const CONFIDENCE_MEDIUM = {
-  max: 49,
-  min: 25,
+  max: 66,
+  min: 33,
 }
 export const CONFIDENCE_LOW = {
-  max: 24,
+  max: 32,
   min: 0,
 }
 

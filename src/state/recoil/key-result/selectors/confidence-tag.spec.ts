@@ -4,8 +4,8 @@ import * as confidenceTag from './confidence-tag'
 import { confidenceTagMessages } from './messages'
 
 describe('confidence tag getter', () => {
-  it('returns the expected "high" tag if current confidence is 50 or more', () => {
-    const fakeConfidence = faker.random.number({ min: 50 })
+  it('returns the expected "high" tag if current confidence is 67 or more', () => {
+    const fakeConfidence = faker.random.number({ min: 67 })
     const selector = confidenceTag.getConfidenceTagBasedOnValue(fakeConfidence)
 
     const result = selector()
@@ -20,8 +20,8 @@ describe('confidence tag getter', () => {
     expect(result).toEqual(expectedTag)
   })
 
-  it('returns the expected "medium" tag if current confidence is less than 50 or equal/higher than 25', () => {
-    const fakeConfidence = faker.random.number({ min: 25, max: 49 })
+  it('returns the expected "medium" tag if current confidence is less than 66 or equal/higher than 33', () => {
+    const fakeConfidence = faker.random.number({ min: 33, max: 66 })
     const selector = confidenceTag.getConfidenceTagBasedOnValue(fakeConfidence)
 
     const result = selector()
@@ -36,8 +36,8 @@ describe('confidence tag getter', () => {
     expect(result).toEqual(expectedTag)
   })
 
-  it('returns the expected "low" tag if the current confidence is less than 25', () => {
-    const fakeConfidence = faker.random.number({ min: 1, max: 24 })
+  it('returns the expected "low" tag if the current confidence is 32 or less', () => {
+    const fakeConfidence = faker.random.number({ min: 0, max: 32 })
     const selector = confidenceTag.getConfidenceTagBasedOnValue(fakeConfidence)
 
     const result = selector()
@@ -70,7 +70,7 @@ describe('confidence tag getter', () => {
 
 describe('normalize confidence', () => {
   it('returns 100 for confidences within the range of the HIGH tag', () => {
-    const fakeConfidence = faker.random.number({ min: 50, max: 100 })
+    const fakeConfidence = faker.random.number({ min: 67, max: 100 })
 
     const result = confidenceTag.normalizeConfidence(fakeConfidence)
 
@@ -78,25 +78,25 @@ describe('normalize confidence', () => {
   })
 
   it('returns 49 for confidences within the range of the MEDIUM tag', () => {
-    const fakeConfidence = faker.random.number({ min: 25, max: 49 })
+    const fakeConfidence = faker.random.number({ min: 33, max: 66 })
 
     const result = confidenceTag.normalizeConfidence(fakeConfidence)
 
-    expect(result).toEqual(49)
+    expect(result).toEqual(66)
   })
 
   it('returns 24 for confidences within the range of the LOW tag', () => {
-    const fakeConfidence = faker.random.number({ min: 1, max: 24 })
+    const fakeConfidence = faker.random.number({ min: 0, max: 32 })
 
     const result = confidenceTag.normalizeConfidence(fakeConfidence)
 
-    expect(result).toEqual(24)
+    expect(result).toEqual(33)
   })
 
   it('returns 24 for confidences within the range of the LOW tag if confidence was 0', () => {
     const result = confidenceTag.normalizeConfidence(0)
 
-    expect(result).toEqual(24)
+    expect(result).toEqual(33)
   })
 
   it('returns 100 for undefined confidence values', () => {

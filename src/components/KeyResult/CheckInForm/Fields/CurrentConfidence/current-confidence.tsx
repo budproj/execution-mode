@@ -27,7 +27,7 @@ const CheckInFormFieldCurrentConfidence = ({
   const [isSending, setIsSending] = useState(false)
   const intl = useIntl()
   const { values, setFieldValue, submitForm, isSubmitting } = useFormikContext<CheckInFormValues>()
-  const normalizedConfidence = normalizeConfidence(values.confidence ?? 50)
+  const normalizedConfidence = normalizeConfidence(values.confidence)
 
   const handleChange = async (newValue: string | string[]) => {
     setFieldValue('confidence', Number.parseInt(newValue as string, 10))
