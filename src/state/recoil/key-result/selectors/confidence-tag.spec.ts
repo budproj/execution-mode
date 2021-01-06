@@ -20,7 +20,7 @@ describe('confidence tag getter', () => {
     expect(result).toEqual(expectedTag)
   })
 
-  it('returns the expected "medium" tag if current confidence is less than 66 or equal/higher than 33', () => {
+  it('returns the expected "medium" tag if current confidence is less than 66 and equal/higher than 33', () => {
     const fakeConfidence = faker.random.number({ min: 33, max: 66 })
     const selector = confidenceTag.getConfidenceTagBasedOnValue(fakeConfidence)
 
@@ -36,7 +36,7 @@ describe('confidence tag getter', () => {
     expect(result).toEqual(expectedTag)
   })
 
-  it('returns the expected "low" tag if the current confidence is 32 or less', () => {
+  it('returns the expected "low" tag if the current confidence is 32 and equal/higher than 0', () => {
     const fakeConfidence = faker.random.number({ min: 0, max: 32 })
     const selector = confidenceTag.getConfidenceTagBasedOnValue(fakeConfidence)
 
@@ -47,6 +47,22 @@ describe('confidence tag getter', () => {
       desc: confidenceTagMessages.iconDescLow,
       color: 'red.500',
       bgColor: 'red.100',
+    }
+
+    expect(result).toEqual(expectedTag)
+  })
+
+  it('returns the expected "barrier" tag if the current confidence is -1 or less', () => {
+    const fakeConfidence = faker.random.number({ max: -1 })
+    const selector = confidenceTag.getConfidenceTagBasedOnValue(fakeConfidence)
+
+    const result = selector()
+
+    const expectedTag = {
+      message: confidenceTagMessages.barrier,
+      desc: confidenceTagMessages.iconDescBarrier,
+      color: 'brand.500',
+      bgColor: 'brand.100',
     }
 
     expect(result).toEqual(expectedTag)
@@ -90,13 +106,21 @@ describe('normalize confidence', () => {
 
     const result = confidenceTag.normalizeConfidence(fakeConfidence)
 
-    expect(result).toEqual(33)
+    expect(result).toEqual(32)
   })
 
   it('returns 24 for confidences within the range of the LOW tag if confidence was 0', () => {
     const result = confidenceTag.normalizeConfidence(0)
 
-    expect(result).toEqual(33)
+    expect(result).toEqual(32)
+  })
+
+  it('returns -1 for confidences within the range of the BARRIER tag', () => {
+    const fakeConfidence = faker.random.number({ max: -1 })
+
+    const result = confidenceTag.normalizeConfidence(fakeConfidence)
+
+    expect(result).toEqual(-1)
   })
 
   it('returns 100 for undefined confidence values', () => {

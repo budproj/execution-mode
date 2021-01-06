@@ -4,9 +4,11 @@ type ConfidenceTagMessages =
   | 'high'
   | 'medium'
   | 'low'
+  | 'barrier'
   | 'iconDescHigh'
   | 'iconDescMedium'
   | 'iconDescLow'
+  | 'iconDescBarrier'
 
 export const confidenceTagMessages = defineMessages({
   high: {
@@ -24,8 +26,15 @@ export const confidenceTagMessages = defineMessages({
 
   low: {
     defaultMessage: 'Baixo',
-    id: 'nRf9bk',
-    description: 'We use this tag to group every key result with confidence lower than 25',
+    id: 'B0G29o',
+    description:
+      'We use this tag to group every key result with confidence that is 0 or higher and lower than 25',
+  },
+
+  barrier: {
+    defaultMessage: 'Com Barreira',
+    id: '0/VsDs',
+    description: 'We use this tag to group every key result with confidence lower than 0',
   },
 
   iconDescHigh: {
@@ -44,5 +53,11 @@ export const confidenceTagMessages = defineMessages({
     defaultMessage: 'Um círculo vermelho, indicando que a confiança está baixa',
     id: 'HAQ+JV',
     description: 'A brief explanation for screen readers regarding the red status circle',
+  },
+
+  iconDescBarrier: {
+    defaultMessage: 'Um círculo roxo, indicando que o resultado-chave tem uma barreira',
+    id: 'zEyzo8',
+    description: 'A brief explanation for screen readers regarding the purple status circle',
   },
 }) as Record<ConfidenceTagMessages, MessageDescriptor>

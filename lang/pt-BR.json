@@ -27,6 +27,10 @@
     "defaultMessage": "Um ícone de marcador de página",
     "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
   },
+  "0/VsDs": {
+    "defaultMessage": "Com Barreira",
+    "description": "We use this tag to group every key result with confidence lower than 0"
+  },
   "00ogu4": {
     "defaultMessage": "Qual o seu nível de confiança?",
     "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
@@ -78,6 +82,10 @@
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
+  },
+  "B0G29o": {
+    "defaultMessage": "Baixo",
+    "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
   },
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
@@ -335,10 +343,6 @@
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
-  "nRf9bk": {
-    "defaultMessage": "Baixo",
-    "description": "We use this tag to group every key result with confidence lower than 25"
-  },
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",
     "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
@@ -382,6 +386,10 @@
   "z1FXkV": {
     "defaultMessage": "Ciclo",
     "description": "The label text above the Cycle section in our key result single page or drawer"
+  },
+  "zEyzo8": {
+    "defaultMessage": "Um círculo roxo, indicando que o resultado-chave tem uma barreira",
+    "description": "A brief explanation for screen readers regarding the purple status circle"
   },
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",

@@ -10,6 +10,7 @@ import {
   CONFIDENCE_HIGH,
   CONFIDENCE_MEDIUM,
   CONFIDENCE_LOW,
+  CONFIDENCE_BARRIER,
   normalizeConfidence,
 } from 'src/state/recoil/key-result/selectors/confidence-tag'
 
@@ -60,6 +61,10 @@ const CheckInFormFieldCurrentConfidence = ({
 
         <MenuItemOption value={CONFIDENCE_LOW.max.toString()}>
           <ConfidenceTag confidenceValue={CONFIDENCE_LOW.max} />
+        </MenuItemOption>
+
+        <MenuItemOption value={CONFIDENCE_BARRIER.max.toString()}>
+          <ConfidenceTag confidenceValue={CONFIDENCE_BARRIER.max} />
         </MenuItemOption>
       </SelectMenu>
     </Box>
