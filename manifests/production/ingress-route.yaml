@@ -12,7 +12,7 @@ spec:
   entryPoints:
     - websecure
   routes:
-    - match: Host(`app.develop.getbud.co`)
+    - match: Host(`app.getbud.co`)
       kind: Rule
       services:
         - name: execution-mode-app
