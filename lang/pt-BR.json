@@ -71,6 +71,10 @@
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
   },
+  "4Ac1ls": {
+    "defaultMessage": "{team} | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
     "description": "The page title that is displayed in the browser tab"
@@ -179,6 +183,10 @@
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our progress slider popover"
   },
+  "QMM2q6": {
+    "defaultMessage": "Área",
+    "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
+  },
   "RWaMNF": {
     "defaultMessage": "Um ícone de coração",
     "description": "The desc message for the Heart icon. This icon is used to ilustrate our key results"
@@ -274,6 +282,10 @@
   "cBQLDC": {
     "defaultMessage": "Resultados-chave",
     "description": "AppBar menu item that links to Key Results page"
+  },
+  "fVyP58": {
+    "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
+    "description": "The page description that is displayed in Google and screen readers"
   },
   "fZZOsX": {
     "defaultMessage": "Fim",

@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client'
 import React, { useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { PageContent } from 'src/components/Base'
+import { PageContent, PageHead } from 'src/components/Base'
 import { PageProperties } from 'src/components/Page/types'
 import ChildTeamsObjectives from 'src/components/Team/ChildTeamsObjectives'
 import { Team } from 'src/components/Team/types'
@@ -10,6 +11,7 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { pageTitleAtom } from 'src/state/recoil/page'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
+import messages from './messages'
 import queries from './queries.gql'
 import { GetTeamNameQuery } from './types'
 
@@ -18,6 +20,7 @@ export interface TeamObjectivesProperties extends PageProperties {
 }
 
 const TeamObjectives = ({ teamId, isRootPage }: TeamObjectivesProperties) => {
+  const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
   const { data, loading } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_NAME, {
     variables: {
@@ -25,9 +28,11 @@ const TeamObjectives = ({ teamId, isRootPage }: TeamObjectivesProperties) => {
     },
   })
   const loadTeamOnRecoil = useRecoilFamilyLoader<Team>(teamAtomFamily)
+  const teamName = data?.team.name
+  const metaTitleLoadingFallback = intl.formatMessage(messages.metaTitleLoadingFallback)
 
   const breadcrumbParameters = {
-    id: data?.team.name ?? '',
+    id: teamName ?? '',
   }
 
   useEffect(() => {
@@ -44,6 +49,12 @@ const TeamObjectives = ({ teamId, isRootPage }: TeamObjectivesProperties) => {
 
   return (
     <PageContent breadcrumbParams={breadcrumbParameters} showBreadcrumb={!isRootPage}>
+      <PageHead
+        title={messages.metaTitle}
+        description={messages.metaDescription}
+        titleValues={{ team: teamName ?? metaTitleLoadingFallback }}
+      />
+
       <ChildTeamsObjectives rootTeamId={teamId} />
     </PageContent>
   )

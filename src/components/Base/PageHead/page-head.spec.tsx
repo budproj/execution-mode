@@ -23,6 +23,26 @@ describe('component renderization', () => {
     expect(title.text()).toEqual(fakeTitle)
   })
 
+  it('renders a provided title with variables', () => {
+    const fakeTitle = faker.random.word()
+    const fakeVar = faker.random.word()
+    const fakeDefaultMessage = `{var} ${fakeTitle}`
+
+    /* eslint-disable formatjs/enforce-description, formatjs/enforce-id, formatjs/enforce-default-message */
+    const titleMessage = defineMessage({
+      id: faker.random.uuid(),
+      defaultMessage: fakeDefaultMessage,
+    })
+    /* eslint-enable formatjs/enforce-description, formatjs/enforce-id, formatjs/enforce-default-message */
+
+    const result = enzyme.shallow(<PageHead title={titleMessage} titleValues={{ var: fakeVar }} />)
+
+    const title = result.find('title')
+    const expectedTitle = `${fakeVar} ${fakeTitle}`
+
+    expect(title.text()).toEqual(expectedTitle)
+  })
+
   it('renders a provided description', () => {
     const fakeDescription = faker.lorem.paragraph()
 
