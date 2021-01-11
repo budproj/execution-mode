@@ -1,10 +1,9 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type AppBarMessages =
+type AppBarMessage =
   | 'dashboard'
   | 'keyResults'
   | 'overview'
-  | 'item'
   | 'searchIconTitle'
   | 'searchIconDesc'
   | 'notificationBellIconTitle'
@@ -12,7 +11,7 @@ type AppBarMessages =
   | 'settingsIconTitle'
   | 'settingsIconDesc'
 
-export default defineMessages({
+export default defineMessages<AppBarMessage>({
   dashboard: {
     defaultMessage: 'Painel',
     id: 'mKv2wx',
@@ -70,4 +69,4 @@ export default defineMessages({
     id: 'GeAU92',
     description: 'The alternative text explaining our settings icon',
   },
-}) as Record<AppBarMessages, MessageDescriptor>
+})

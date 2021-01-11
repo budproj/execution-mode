@@ -1,8 +1,8 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type KeyResultDrawerHeaderMessages = 'closeIconTitle' | 'closeIconDesc'
+type KeyResultDrawerHeaderMessage = 'closeIconTitle' | 'closeIconDesc'
 
-export default defineMessages({
+export default defineMessages<KeyResultDrawerHeaderMessage>({
   closeIconTitle: {
     defaultMessage: 'Fechar',
     id: 'j/xH+H',
@@ -17,4 +17,4 @@ export default defineMessages({
     description:
       'This description is used for accessibility. Screen readers uses it when they hover the close icon button in our key result drawer close button',
   },
-}) as Record<KeyResultDrawerHeaderMessages, MessageDescriptor>
+})

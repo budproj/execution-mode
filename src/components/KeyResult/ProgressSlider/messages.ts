@@ -1,8 +1,8 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type ProgressSliderMessages = 'popoverTitle' | 'closeIconTitle' | 'closeIconDesc'
+type ProgressSliderMessage = 'popoverTitle' | 'closeIconTitle' | 'closeIconDesc'
 
-export default defineMessages({
+export default defineMessages<ProgressSliderMessage>({
   popoverTitle: {
     defaultMessage: 'Check-in',
     id: '3gAggt',
@@ -24,4 +24,4 @@ export default defineMessages({
     description:
       'This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button',
   },
-}) as Record<ProgressSliderMessages, MessageDescriptor>
+})

@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type PageHeadMessageKey = 'title' | 'description'
+type PageHeadMessage = 'title' | 'description'
 
-export default defineMessages<PageHeadMessageKey>({
+export default defineMessages<PageHeadMessage>({
   title: {
     defaultMessage: 'Bud',
     id: 'MpjjOt',

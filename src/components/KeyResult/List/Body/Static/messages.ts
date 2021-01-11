@@ -1,8 +1,8 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type KeyResultListBodyStaticMessages = 'teamAtWorkImageAlt' | 'teamAtWorkImageLabel'
+type KeyResultListBodyStaticMessage = 'teamAtWorkImageAlt' | 'teamAtWorkImageLabel'
 
-export default defineMessages({
+export default defineMessages<KeyResultListBodyStaticMessage>({
   teamAtWorkImageAlt: {
     defaultMessage:
       'Um desenho de uma mulher e um homem, cada qual segudando um pedaço de um quebra-cabeça e colaborando para montá-lo',
@@ -15,4 +15,4 @@ export default defineMessages({
     id: '/CiLko',
     description: 'The label message that is displayed below our team at work image',
   },
-}) as Record<KeyResultListBodyStaticMessages, MessageDescriptor>
+})

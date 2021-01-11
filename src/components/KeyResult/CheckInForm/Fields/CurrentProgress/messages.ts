@@ -1,12 +1,12 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type CheckInFormFieldCurrentProgressMessages = 'label'
+type CheckInFormFieldCurrentProgressMessage = 'label'
 
-export default defineMessages({
+export default defineMessages<CheckInFormFieldCurrentProgressMessage>({
   label: {
     defaultMessage: 'De',
     id: 'S1OFpY',
     description:
       'This is the label of the check-in form that indicates from which value the user would update her/his key result',
   },
-}) as Record<CheckInFormFieldCurrentProgressMessages, MessageDescriptor>
+})

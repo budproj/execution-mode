@@ -1,6 +1,6 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type KeyResultListHeadMessages =
+type KeyResultListHeadMessage =
   | 'listHeadKeyResult'
   | 'listHeadObjective'
   | 'listHeadConfidenceLevel'
@@ -9,7 +9,7 @@ type KeyResultListHeadMessages =
   | 'listHeadOwner'
   | 'listHeadConfidenceLevelColor'
 
-export default defineMessages({
+export default defineMessages<KeyResultListHeadMessage>({
   listHeadKeyResult: {
     defaultMessage: 'Resultado-chave',
     id: 'fd6kjy',
@@ -51,4 +51,4 @@ export default defineMessages({
     id: 'F33Lyk',
     description: 'The text of the table head related to the Confidence Level color column',
   },
-}) as Record<KeyResultListHeadMessages, MessageDescriptor>
+})

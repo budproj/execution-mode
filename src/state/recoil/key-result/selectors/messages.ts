@@ -1,6 +1,6 @@
-import { defineMessages, MessageDescriptor } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type ConfidenceTagMessages =
+type ConfidenceTagMessage =
   | 'high'
   | 'medium'
   | 'low'
@@ -10,7 +10,7 @@ type ConfidenceTagMessages =
   | 'iconDescLow'
   | 'iconDescBarrier'
 
-export const confidenceTagMessages = defineMessages({
+export const confidenceTagMessages = defineMessages<ConfidenceTagMessage>({
   high: {
     defaultMessage: 'Alto',
     id: 'MBkjzW',
@@ -60,4 +60,4 @@ export const confidenceTagMessages = defineMessages({
     id: 'zEyzo8',
     description: 'A brief explanation for screen readers regarding the purple status circle',
   },
-}) as Record<ConfidenceTagMessages, MessageDescriptor>
+})
