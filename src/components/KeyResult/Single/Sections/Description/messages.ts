@@ -1,12 +1,12 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type KeyResultsSingleDescriptionMessages = 'label'
+type KeyResultsSingleDescriptionMessage = 'label'
 
-export default defineMessages({
+export default defineMessages<KeyResultsSingleDescriptionMessage>({
   label: {
     defaultMessage: 'Detalhes',
     id: 'S/F2Hk',
     description:
       'The label text above the Description section in our key result single page or drawer',
   },
-}) as Record<KeyResultsSingleDescriptionMessages, MessageDescriptor>
+})

@@ -1,8 +1,8 @@
-import { defineMessages, MessageDescriptor } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-export type CardMessageKey = 'crownIconDesc' | 'crownIconTitle'
+type TeamCardMessage = 'crownIconDesc' | 'crownIconTitle'
 
-const cardMessages: Record<CardMessageKey, MessageDescriptor> = defineMessages({
+export default defineMessages<TeamCardMessage>({
   crownIconDesc: {
     defaultMessage: 'Um ícone de coroa',
     id: 'pVkTLM',
@@ -17,5 +17,3 @@ const cardMessages: Record<CardMessageKey, MessageDescriptor> = defineMessages({
       'The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company',
   },
 })
-
-export default cardMessages

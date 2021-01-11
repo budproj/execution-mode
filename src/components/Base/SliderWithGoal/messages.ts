@@ -1,8 +1,8 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type SliderWithGoalMessages = 'currentProgress' | 'goal'
+type SliderWithGoalMessage = 'currentProgress' | 'goal'
 
-export default defineMessages({
+export default defineMessages<SliderWithGoalMessage>({
   currentProgress: {
     defaultMessage: 'Posição atual',
     id: 'Lc60Nd',
@@ -14,4 +14,4 @@ export default defineMessages({
     id: 'PYLIcI',
     description: 'This message is displayed below the goal thumb',
   },
-}) as Record<SliderWithGoalMessages, MessageDescriptor>
+})

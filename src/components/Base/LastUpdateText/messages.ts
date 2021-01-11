@@ -1,8 +1,8 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type LastUpdateTextMessages = 'lastUpdateAt' | 'todayLabel' | 'yesterdayLabel' | 'emptyStateMessage'
+type LastUpdateTextMessage = 'lastUpdateAt' | 'todayLabel' | 'yesterdayLabel' | 'emptyStateMessage'
 
-export default defineMessages({
+export default defineMessages<LastUpdateTextMessage>({
   lastUpdateAt: {
     defaultMessage: 'Última atualização {day} as {hour} por {author}',
     id: '3x3lDo',
@@ -26,4 +26,4 @@ export default defineMessages({
     id: '1HBRw6',
     description: 'This label is displayed if we do not have any update date to display',
   },
-}) as Record<LastUpdateTextMessages, MessageDescriptor>
+})

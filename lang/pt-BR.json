@@ -71,9 +71,21 @@
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
   },
+  "4Ac1ls": {
+    "defaultMessage": "{team} | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
+  "5XBq+p": {
+    "defaultMessage": "Meus Resultados-Chave | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "6KET/Z": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
     "description": "The title of the header section in our company overview report"
+  },
+  "6vXlkc": {
+    "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
+    "description": "The page description that is displayed in Google and screen readers"
   },
   "8LTdv4": {
     "defaultMessage": "Objetivo",
@@ -82,6 +94,10 @@
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
+  },
+  "AII0ao": {
+    "defaultMessage": "Visualize seus resultados-chave e seus detalhes, atualize seu progresso e seu nível de confiança.",
+    "description": "The page description that is displayed in Google and screen readers"
   },
   "B0G29o": {
     "defaultMessage": "Baixo",
@@ -135,9 +151,17 @@
     "defaultMessage": "Posição atual",
     "description": "This message is displayed below the current progress thumb"
   },
+  "M9Jejl": {
+    "defaultMessage": "Painel | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "MBkjzW": {
     "defaultMessage": "Alto",
     "description": "We use this tag to group every key result with confidence higher than 50"
+  },
+  "MpjjOt": {
+    "defaultMessage": "Bud",
+    "description": "The default title for our page head meta title value"
   },
   "NADPP1": {
     "defaultMessage": "Um ícone de lata de lixo",
@@ -158,6 +182,10 @@
   "QKUmFp": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our progress slider popover"
+  },
+  "QMM2q6": {
+    "defaultMessage": "Área",
+    "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
   },
   "RWaMNF": {
     "defaultMessage": "Um ícone de coração",
@@ -255,6 +283,10 @@
     "defaultMessage": "Resultados-chave",
     "description": "AppBar menu item that links to Key Results page"
   },
+  "fVyP58": {
+    "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
+    "description": "The page description that is displayed in Google and screen readers"
+  },
   "fZZOsX": {
     "defaultMessage": "Fim",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
@@ -335,6 +367,10 @@
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segudando um pedaço de um quebra-cabeça e colaborando para montá-lo",
     "description": "The alternative text explaining our team at work image"
   },
+  "mkxm93": {
+    "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
+    "description": "The default description for our page head meta description value"
+  },
   "n7ZLVl": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box a barra lateral do resultado chave",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our key result drawer close button"
@@ -367,6 +403,10 @@
     "defaultMessage": "Check-in",
     "description": "The label text above the check-in section in our key result single page or drawer"
   },
+  "uXQE/x": {
+    "defaultMessage": "Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.",
+    "description": "The page description that is displayed in Google and screen readers"
+  },
   "ui441M": {
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
@@ -382,6 +422,10 @@
   "ycpCyI": {
     "defaultMessage": "Dono",
     "description": "The text of the table head related to the Owner column"
+  },
+  "z1+f17": {
+    "defaultMessage": "Visão Geral | bud",
+    "description": "The page title that is displayed in the browser tab"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",

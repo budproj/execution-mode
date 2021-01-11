@@ -1,8 +1,8 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type KeyResultsSingleObjectiveMessages = 'label' | 'stackIconDesc'
+type KeyResultsSingleObjectiveMessage = 'label' | 'stackIconDesc'
 
-export default defineMessages({
+export default defineMessages<KeyResultsSingleObjectiveMessage>({
   label: {
     defaultMessage: 'Objetivo',
     id: 'T8ytLJ',
@@ -15,4 +15,4 @@ export default defineMessages({
     id: 'UBruoq',
     description: 'The alternative text explaining our stack icon',
   },
-}) as Record<KeyResultsSingleObjectiveMessages, MessageDescriptor>
+})

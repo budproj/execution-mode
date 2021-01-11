@@ -1,13 +1,8 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type KeyResultsSingleCycleMessages =
-  | 'primaryLabel'
-  | 'createdAtLabel'
-  | 'startLabel'
-  | 'endLabel'
-  | 'nameLabel'
+type KeyResultsSingleCycleMessage = 'primaryLabel' | 'startLabel' | 'endLabel' | 'nameLabel'
 
-export default defineMessages({
+export default defineMessages<KeyResultsSingleCycleMessage>({
   primaryLabel: {
     defaultMessage: 'Ciclo',
     id: 'z1FXkV',
@@ -34,4 +29,4 @@ export default defineMessages({
     description:
       'The name label. It is displayed in the Cycle section, as a label of the name property',
   },
-}) as Record<KeyResultsSingleCycleMessages, MessageDescriptor>
+})

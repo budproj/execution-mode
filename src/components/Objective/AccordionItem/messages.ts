@@ -1,8 +1,8 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type ObjectiveAccordionItemMessages = 'calendarIconTitle' | 'calendarIconDesc'
+type ObjectiveAccordionItemMessage = 'calendarIconTitle' | 'calendarIconDesc'
 
-export default defineMessages({
+export default defineMessages<ObjectiveAccordionItemMessage>({
   calendarIconTitle: {
     defaultMessage: 'O prazo deste objetivo',
     id: '/2GFGI',
@@ -16,4 +16,4 @@ export default defineMessages({
     description:
       'The alternative text explaining our calendar icon in the objective accordion item',
   },
-}) as Record<ObjectiveAccordionItemMessages, MessageDescriptor>
+})

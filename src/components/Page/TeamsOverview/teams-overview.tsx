@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
+import { PageHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { PageProperties } from 'src/components/Page/types'
 import TeamCardList from 'src/components/Team/CardList'
@@ -19,6 +20,8 @@ const TeamsOverviewPage = ({ isRootPage }: PageProperties) => {
 
   return (
     <PageContent showBreadcrumb={!isRootPage}>
+      <PageHead title={messages.metaTitle} description={messages.metaDescription} />
+
       <TeamCardList />
     </PageContent>
   )

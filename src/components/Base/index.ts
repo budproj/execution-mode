@@ -37,3 +37,5 @@ export { default as InputWithLoader } from './InputWithLoader'
 export { default as DynamicAvatarGroup } from './DynamicAvatarGroup'
 
 export { default as PercentageProgressIncreaseTag } from './PercentageProgressIncreaseTag'
+
+export { default as PageHead } from './PageHead'

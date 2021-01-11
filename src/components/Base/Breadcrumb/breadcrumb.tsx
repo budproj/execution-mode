@@ -9,7 +9,7 @@ import { useIntl } from 'react-intl'
 import IntlLink from 'src/components/Base/IntlLink'
 import ArrowRightIcon from 'src/components/Icon/ArrowRight'
 
-import messages, { BreadcrumbMessages } from './messages'
+import messages, { BreadcrumbMessage } from './messages'
 
 export interface BreadcrumbProperties {
   routeParams?: Record<string, string>
@@ -37,7 +37,7 @@ const Breadcrumb = ({ routeParams }: BreadcrumbProperties) => {
     const fallbackStepName = isDynamicStep ? buildDynamicStepName(step) : normalizedStepName
 
     const stepName = hasIntlMessage
-      ? intl.formatMessage(messages[step as BreadcrumbMessages])
+      ? intl.formatMessage(messages[step as BreadcrumbMessage])
       : fallbackStepName
 
     return stepName

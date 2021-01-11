@@ -1,8 +1,8 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type LogotypeMessages = 'alt' | 'title'
+type LogotypeMessage = 'alt' | 'title'
 
-export default defineMessages({
+export default defineMessages<LogotypeMessage>({
   alt: {
     defaultMessage:
       'O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa',
@@ -16,4 +16,4 @@ export default defineMessages({
     description:
       'The title text of our logotype, it is displayed when an user hover the icon itself',
   },
-}) as Record<LogotypeMessages, MessageDescriptor>
+})

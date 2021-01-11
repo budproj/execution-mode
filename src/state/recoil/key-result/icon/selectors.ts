@@ -4,7 +4,8 @@ import { selectorFamily } from 'recoil'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 import { PREFIX, COLORS_AVAILABLE, DRAWINGS_AVAILABLE } from './constants'
-import { KeyResultIconDesc, KeyResultIconDrawing } from './types'
+import { iconDescMessages } from './messages'
+import { KeyResultIconDrawing } from './types'
 
 const KEY = `${PREFIX}::SELECTORS`
 
@@ -48,11 +49,11 @@ export const selectKeyResultIconDrawingBasedOnTitle = selectorFamily<
   get: getIconDrawingBasedOnTitle,
 })
 
-export const getDescBasedOnDrawing = (descGroup: KeyResultIconDesc) => (
+export const getDescBasedOnDrawing = (descGroup: typeof iconDescMessages) => (
   drawing: KeyResultIconDrawing,
 ) => () => descGroup[drawing]
 
-export const selectKeyResultIconDescBasedOnDrawing = (descGroup: KeyResultIconDesc) =>
+export const selectKeyResultIconDescBasedOnDrawing = (descGroup: typeof iconDescMessages) =>
   selectorFamily<MessageDescriptor, KeyResultIconDrawing>({
     key: `${KEY}::DESC::BASED_ON_DRAWING`,
     get: getDescBasedOnDrawing(descGroup),

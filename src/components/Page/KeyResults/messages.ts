@@ -1,13 +1,24 @@
-import { defineMessages, MessageDescriptor } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type KeyResultsPageMessage = 'pageTitle'
+type KeyResultsPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription'
 
-const messages = defineMessages({
+export default defineMessages<KeyResultsPageMessage>({
   pageTitle: {
     defaultMessage: 'Resultados-chave',
     id: 'l1LZCB',
     description: 'The page title that our users should see in the key results page',
   },
-}) as Record<KeyResultsPageMessage, MessageDescriptor>
 
-export default messages
+  metaTitle: {
+    defaultMessage: 'Meus Resultados-Chave | bud ',
+    id: '5XBq+p',
+    description: 'The page title that is displayed in the browser tab',
+  },
+
+  metaDescription: {
+    defaultMessage:
+      'Visualize seus resultados-chave e seus detalhes, atualize seu progresso e seu nível de confiança.',
+    id: 'AII0ao',
+    description: 'The page description that is displayed in Google and screen readers',
+  },
+})

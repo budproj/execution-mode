@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
+import { PageHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { KeyResultView } from 'src/components/KeyResult'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
@@ -25,6 +26,8 @@ const KeyResultsPage = ({ isRootPage }: PageProperties) => {
 
   return (
     <PageContent showBreadcrumb={!isRootPage}>
+      <PageHead title={messages.metaTitle} description={messages.metaDescription} />
+
       <KeyResultView onLineClick={handleLineClick} />
       <KeyResultSingleDrawer />
     </PageContent>

@@ -1,11 +1,11 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type CompanyProgressOverviewBodyStampProgressIncreaseMessages =
+type CompanyProgressOverviewBodyStampProgressIncreaseMessage =
   | 'arrowUpIconDesc'
   | 'titleLabel'
   | 'descriptionText'
 
-export default defineMessages({
+export default defineMessages<CompanyProgressOverviewBodyStampProgressIncreaseMessage>({
   arrowUpIconDesc: {
     defaultMessage:
       'Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana',
@@ -25,4 +25,4 @@ export default defineMessages({
     id: 'SjGqdc',
     description: 'This helper texts explains since when we are calculating your company progress',
   },
-}) as Record<CompanyProgressOverviewBodyStampProgressIncreaseMessages, MessageDescriptor>
+})

@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-import { KeyResultIconDesc } from './types'
+import { KeyResultIconDrawing } from './types'
 
-export const iconDescMessages: KeyResultIconDesc = defineMessages({
+export const iconDescMessages = defineMessages<KeyResultIconDrawing>({
   Activity: {
     defaultMessage: 'Um ícone arredondado com um gráfico de linha ao centro',
     id: '44uWtn',

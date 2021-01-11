@@ -1,12 +1,12 @@
-import { MessageDescriptor, defineMessages } from 'react-intl'
+import { defineMessages } from 'react-intl'
 
-type CheckInFormFieldCommentMessages =
+type CheckInFormFieldCommentMessage =
   | 'buttonLabel'
   | 'buttonIconDesc'
   | 'buttonIconTitle'
   | 'inputLabel'
 
-export default defineMessages({
+export default defineMessages<CheckInFormFieldCommentMessage>({
   buttonLabel: {
     defaultMessage: 'Adicionar Comentário',
     id: 'm4igWj',
@@ -31,4 +31,4 @@ export default defineMessages({
     id: 'zgF+iY',
     description: 'This is the label text that is displayed above the input',
   },
-}) as Record<CheckInFormFieldCommentMessages, MessageDescriptor>
+})
