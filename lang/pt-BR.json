@@ -1,0 +1,434 @@
+{
+  "++WixA": {
+    "defaultMessage": "Visão Geral",
+    "description": "The page title that our users should see in the teams overview page"
+  },
+  "+O5SW4": {
+    "defaultMessage": "Um ícone com uma série de traços verticais. Clique e arraste ele para reordenar seus resultados chave",
+    "description": "The alternative text explaining our reorder icon"
+  },
+  "+r5To1": {
+    "defaultMessage": "Atualizar",
+    "description": "This message is displayed in a tooltip above the SliderThumb on our sliders"
+  },
+  "/2GFGI": {
+    "defaultMessage": "O prazo deste objetivo",
+    "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
+  },
+  "/CiLko": {
+    "defaultMessage": "Esse objetivo não tem nenhum resultado-chave",
+    "description": "The label message that is displayed below our team at work image"
+  },
+  "/VrdI0": {
+    "defaultMessage": "Um ícone de pasta",
+    "description": "The desc message for the Folder icon. This icon is used to ilustrate our key results"
+  },
+  "/vJzGe": {
+    "defaultMessage": "Um ícone de marcador de página",
+    "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
+  },
+  "0/VsDs": {
+    "defaultMessage": "Com Barreira",
+    "description": "We use this tag to group every key result with confidence lower than 0"
+  },
+  "00ogu4": {
+    "defaultMessage": "Qual o seu nível de confiança?",
+    "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
+  },
+  "03yPkn": {
+    "defaultMessage": "Um ícone de bussúla",
+    "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
+  },
+  "0JqGQL": {
+    "defaultMessage": "Time",
+    "description": "The name of the Team Objectives page, located at \"/overview/team\""
+  },
+  "0xI/K7": {
+    "defaultMessage": "Um ícone de microfone",
+    "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
+  },
+  "1HBRw6": {
+    "defaultMessage": "Nenhuma atualização recente",
+    "description": "This label is displayed if we do not have any update date to display"
+  },
+  "1nABM7": {
+    "defaultMessage": "Meta:",
+    "description": "This is the label of the check-in form that indicates the goal for her/his key result"
+  },
+  "1ss4IX": {
+    "defaultMessage": "Um ícone de mensagem",
+    "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
+  },
+  "3gAggt": {
+    "defaultMessage": "Check-in",
+    "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
+  },
+  "3x3lDo": {
+    "defaultMessage": "Última atualização {day} as {hour} por {author}",
+    "description": "This message displays the latest report status for a given component"
+  },
+  "44uWtn": {
+    "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
+    "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
+  },
+  "5XBq+p": {
+    "defaultMessage": "Meus Resultados-Chave | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
+  "6KET/Z": {
+    "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
+    "description": "The title of the header section in our company overview report"
+  },
+  "6vXlkc": {
+    "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
+    "description": "The page description that is displayed in Google and screen readers"
+  },
+  "8LTdv4": {
+    "defaultMessage": "Objetivo",
+    "description": "The text of the table head related to the Objective column"
+  },
+  "A5ct4X": {
+    "defaultMessage": "Um ícone de documento de texto",
+    "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
+  },
+  "AII0ao": {
+    "defaultMessage": "Visualize seus resultados-chave e seus detalhes, atualize seu progresso e seu nível de confiança.",
+    "description": "The page description that is displayed in Google and screen readers"
+  },
+  "B0G29o": {
+    "defaultMessage": "Baixo",
+    "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
+  },
+  "CmE1a+": {
+    "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
+    "description": "The alternative text explaining our search icon"
+  },
+  "D8ZyT4": {
+    "defaultMessage": "Um ícone de coroa que representa a sua empresa",
+    "description": "This message is used by screen readers to explain our crown icon"
+  },
+  "F33Lyk": {
+    "defaultMessage": "Cor do Nível de Confiança",
+    "description": "The text of the table head related to the Confidence Level color column"
+  },
+  "FEd9u8": {
+    "defaultMessage": "Salvar",
+    "description": "This message is displayed in the \"SAVE\" button in the checkin form"
+  },
+  "FVnpVq": {
+    "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
+    "description": "The alternative text explaining our arrow right icon"
+  },
+  "GHu/pe": {
+    "defaultMessage": "Um ícone de video",
+    "description": "The desc message for the Video icon. This icon is used to ilustrate our key results"
+  },
+  "GeAU92": {
+    "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
+    "description": "The alternative text explaining our settings icon"
+  },
+  "HAQ+JV": {
+    "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
+    "description": "A brief explanation for screen readers regarding the red status circle"
+  },
+  "IGODpK": {
+    "defaultMessage": "Ciclo",
+    "description": "The text of the table head related to the Cycle column"
+  },
+  "IkA9uV": {
+    "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
+    "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
+  "KK195c": {
+    "defaultMessage": "Visão Geral",
+    "description": "AppBar menu item that links to company overview page"
+  },
+  "Lc60Nd": {
+    "defaultMessage": "Posição atual",
+    "description": "This message is displayed below the current progress thumb"
+  },
+  "M9Jejl": {
+    "defaultMessage": "Painel | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
+  "MBkjzW": {
+    "defaultMessage": "Alto",
+    "description": "We use this tag to group every key result with confidence higher than 50"
+  },
+  "MpjjOt": {
+    "defaultMessage": "Bud",
+    "description": "The default title for our page head meta title value"
+  },
+  "NADPP1": {
+    "defaultMessage": "Um ícone de lata de lixo",
+    "description": "The desc message for the Delete icon. This icon is used to ilustrate our key results"
+  },
+  "P/ujgo": {
+    "defaultMessage": "Um ícone de controle de video game",
+    "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
+  },
+  "PYLIcI": {
+    "defaultMessage": "Meta",
+    "description": "This message is displayed below the goal thumb"
+  },
+  "Pkdkh4": {
+    "defaultMessage": "Minhas Key Result",
+    "description": "The name of the Key Results page, located at \"/keyResults\""
+  },
+  "QKUmFp": {
+    "defaultMessage": "Fechar",
+    "description": "This message is displayed when an user hovers the close button of our progress slider popover"
+  },
+  "RWaMNF": {
+    "defaultMessage": "Um ícone de coração",
+    "description": "The desc message for the Heart icon. This icon is used to ilustrate our key results"
+  },
+  "RZrZdZ": {
+    "defaultMessage": "Home",
+    "description": "The name of the Home page, located at \"/\""
+  },
+  "Ro4JqE": {
+    "defaultMessage": "Para",
+    "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
+  },
+  "S/F2Hk": {
+    "defaultMessage": "Detalhes",
+    "description": "The label text above the Description section in our key result single page or drawer"
+  },
+  "S1OFpY": {
+    "defaultMessage": "De",
+    "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
+  },
+  "SWl7UB": {
+    "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
+    "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
+  },
+  "SjGqdc": {
+    "defaultMessage": "Desde a última segunda-feira",
+    "description": "This helper texts explains since when we are calculating your company progress"
+  },
+  "Sn7K6v": {
+    "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
+    "description": "The alternative text explaining our notification bell icon"
+  },
+  "SpAXmO": {
+    "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
+    "description": "The alternative text explaining our calendar icon in the objective accordion item"
+  },
+  "T8ytLJ": {
+    "defaultMessage": "Objetivo",
+    "description": "The label text above the Objective section in our key result single page or drawer"
+  },
+  "TPAtkS": {
+    "defaultMessage": "Ontem",
+    "description": "This label is displayed if the last update date is yesterday"
+  },
+  "UBruoq": {
+    "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
+    "description": "The alternative text explaining our stack icon"
+  },
+  "UUo+Pt": {
+    "defaultMessage": "Este time é uma empresa",
+    "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
+  },
+  "UgaIhX": {
+    "defaultMessage": "Visão Geral",
+    "description": "The name of the Overview page, located at \"/overview\""
+  },
+  "VNHZWm": {
+    "defaultMessage": "Período",
+    "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
+  },
+  "XNkzYe": {
+    "defaultMessage": "Um ícone de pin de localização",
+    "description": "The desc message for the Location icon. This icon is used to ilustrate our key results"
+  },
+  "XYg5xf": {
+    "defaultMessage": "Clique aqui para editar suas configurações",
+    "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
+  },
+  "Yk89cv": {
+    "defaultMessage": "Médio",
+    "description": "We use this tag to group every key result with confidence higher than 25 but lower than 50"
+  },
+  "ZVTdlV": {
+    "defaultMessage": "Um ícone de ingresso de cinema",
+    "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
+  },
+  "ZXpNJ2": {
+    "defaultMessage": "Um ícone de gráfico de pizza",
+    "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
+  },
+  "aiRCwP": {
+    "defaultMessage": "Início",
+    "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
+  },
+  "bqCVp4": {
+    "defaultMessage": "Clique aqui para começar a escrever um comentário",
+    "description": "This is the title text that is displayed if the user hovers the mouse in it"
+  },
+  "c8UE59": {
+    "defaultMessage": "Um ícone de busca",
+    "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
+  },
+  "cBQLDC": {
+    "defaultMessage": "Resultados-chave",
+    "description": "AppBar menu item that links to Key Results page"
+  },
+  "fZZOsX": {
+    "defaultMessage": "Fim",
+    "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
+  },
+  "faL9vf": {
+    "defaultMessage": "Um círculo verde, indicando que a confiança está alta",
+    "description": "A brief explanation for screen readers regarding the green status circle"
+  },
+  "fbqKln": {
+    "defaultMessage": "Nivel de confiança",
+    "description": "The text of the table head related to the Confidence Level column"
+  },
+  "fd6kjy": {
+    "defaultMessage": "Resultado-chave",
+    "description": "The text of the table head related to the KeyResult column"
+  },
+  "gODdaE": {
+    "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "j/xH+H": {
+    "defaultMessage": "Fechar",
+    "description": "This message is displayed when an user hovers the close button of our key result drawer"
+  },
+  "kLkKtK": {
+    "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
+    "description": "A brief explanation for screen readers regarding the yellow status circle"
+  },
+  "kXNgkQ": {
+    "defaultMessage": "Progresso",
+    "description": "The text of the table head related to the Progress column"
+  },
+  "kawRcN": {
+    "defaultMessage": "Cancelar",
+    "description": "This message is displayed in the \"CANCEL\" button in the checkin form"
+  },
+  "ktId0y": {
+    "defaultMessage": "Como estão as prioridades?",
+    "description": "The title of the header section in our objectives overview report"
+  },
+  "l1LZCB": {
+    "defaultMessage": "Resultados-chave",
+    "description": "The page title that our users should see in the key results page"
+  },
+  "lApj0K": {
+    "defaultMessage": "Um ícone de carteira",
+    "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
+  },
+  "lII4JM": {
+    "defaultMessage": "Hoje",
+    "description": "This label is displayed if the last update date is today"
+  },
+  "lm9HAr": {
+    "defaultMessage": "Um ícone de calendário",
+    "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
+  },
+  "loRR0C": {
+    "defaultMessage": "Empresa",
+    "description": "The name of the Company Objectives page, located at \"/overview/company\""
+  },
+  "m4igWj": {
+    "defaultMessage": "Adicionar Comentário",
+    "description": "This is the label text that is displayed as a button as soon the check in form is displayed"
+  },
+  "m7FoY9": {
+    "defaultMessage": "Dono",
+    "description": "The label text above the Owner section in our key result single page or drawer"
+  },
+  "m8Extk": {
+    "defaultMessage": "Um ícone de scanner",
+    "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
+  },
+  "mKv2wx": {
+    "defaultMessage": "Painel",
+    "description": "AppBar menu item that links to Dashboard page"
+  },
+  "mcWqy7": {
+    "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segudando um pedaço de um quebra-cabeça e colaborando para montá-lo",
+    "description": "The alternative text explaining our team at work image"
+  },
+  "mkxm93": {
+    "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
+    "description": "The default description for our page head meta description value"
+  },
+  "n7ZLVl": {
+    "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box a barra lateral do resultado chave",
+    "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our key result drawer close button"
+  },
+  "nJ7CuJ": {
+    "defaultMessage": "Um ícone de relógio",
+    "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
+  },
+  "pVkTLM": {
+    "defaultMessage": "Um ícone de coroa",
+    "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
+  },
+  "poN086": {
+    "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
+    "description": "This is the desc text that is displayed for screen readers"
+  },
+  "rH+dGv": {
+    "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
+    "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
+  },
+  "rpLZ2J": {
+    "defaultMessage": "Bud - Gestão de OKR e Estratégia",
+    "description": "The title text of our logotype, it is displayed when an user hover the icon itself"
+  },
+  "tcWO3v": {
+    "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
+    "description": "The alternative text explaining our logotype"
+  },
+  "u/NI1D": {
+    "defaultMessage": "Check-in",
+    "description": "The label text above the check-in section in our key result single page or drawer"
+  },
+  "uXQE/x": {
+    "defaultMessage": "Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.",
+    "description": "The page description that is displayed in Google and screen readers"
+  },
+  "ui441M": {
+    "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
+    "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
+  },
+  "w18rI2": {
+    "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
+    "description": "This message is used by screen readers to explain our arrow up"
+  },
+  "x30AaU": {
+    "defaultMessage": "Clique aqui para fazer uma busca",
+    "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
+  },
+  "ycpCyI": {
+    "defaultMessage": "Dono",
+    "description": "The text of the table head related to the Owner column"
+  },
+  "z1+f17": {
+    "defaultMessage": "Visão Geral | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
+  "z1FXkV": {
+    "defaultMessage": "Ciclo",
+    "description": "The label text above the Cycle section in our key result single page or drawer"
+  },
+  "zEyzo8": {
+    "defaultMessage": "Um círculo roxo, indicando que o resultado-chave tem uma barreira",
+    "description": "A brief explanation for screen readers regarding the purple status circle"
+  },
+  "zIx/gZ": {
+    "defaultMessage": "Clique aqui para ver suas notificações",
+    "description": "The title text of our notification bell, it is displayed when an user hover the icon itself"
+  },
+  "zgF+iY": {
+    "defaultMessage": "Comentário",
+    "description": "This is the label text that is displayed above the input"
+  }
+}

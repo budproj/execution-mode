@@ -1,11 +1,24 @@
 import { defineMessages } from 'react-intl'
 
-type TeamsOverviewPageMessage = 'pageTitle'
+type TeamsOverviewPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription'
 
 export default defineMessages<TeamsOverviewPageMessage>({
   pageTitle: {
     defaultMessage: 'Visão Geral',
     id: '++WixA',
     description: 'The page title that our users should see in the teams overview page',
+  },
+
+  metaTitle: {
+    defaultMessage: 'Visão Geral | bud ',
+    id: 'z1+f17',
+    description: 'The page title that is displayed in the browser tab',
+  },
+
+  metaDescription: {
+    defaultMessage:
+      'Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.',
+    id: 'uXQE/x',
+    description: 'The page description that is displayed in Google and screen readers',
   },
 })
