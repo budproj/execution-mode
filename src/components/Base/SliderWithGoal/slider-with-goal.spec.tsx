@@ -77,3 +77,77 @@ describe('component expectations', () => {
     expect(sliderPrimaryThumbValue.text()).toEqual('90%')
   })
 })
+
+describe('corner cases', () => {
+  it('hides the 0% tag if the value is almost at the beginning of the track', () => {
+    const fakeValue = faker.random.number({ min: 1, max: 4 })
+
+    const result = enzyme.shallow(<SliderWithGoal value={fakeValue} />)
+
+    const zeroTag = result.find('Text').at(4)
+
+    expect(zeroTag.prop('visibility')).toEqual('hidden')
+  })
+
+  it('hides the 0% tag if the value is 0', () => {
+    const fakeValue = 0
+
+    const result = enzyme.shallow(<SliderWithGoal value={fakeValue} />)
+
+    const zeroTag = result.find('Text').at(4)
+
+    expect(zeroTag.prop('visibility')).toEqual('hidden')
+  })
+
+  it('keeps the 0% tag if the value is not almost at the beginning of the track', () => {
+    const fakeValue = faker.random.number({ min: 5 })
+
+    const result = enzyme.shallow(<SliderWithGoal value={fakeValue} />)
+
+    const zeroTag = result.find('Text').at(4)
+
+    expect(zeroTag.prop('visibility')).toEqual('visible')
+  })
+
+  it('hides the 100% tag if the value is almost at the end of the track', () => {
+    const fakeValue = faker.random.number({ min: 94 })
+
+    const result = enzyme.shallow(<SliderWithGoal value={fakeValue} />)
+
+    const hundredTag = result.find('Text').at(5)
+
+    expect(hundredTag.prop('visibility')).toEqual('hidden')
+  })
+
+  it('keeps the 100% tag if the value is not almost at the end of the track', () => {
+    const fakeValue = faker.random.number({ max: 93 })
+
+    const result = enzyme.shallow(<SliderWithGoal value={fakeValue} />)
+
+    const hundredTag = result.find('Text').at(5)
+
+    expect(hundredTag.prop('visibility')).toEqual('visible')
+  })
+
+  it('flips the value thumb text to left if the value is almost at the end of the track', () => {
+    const fakeValue = faker.random.number({ min: 94 })
+
+    const result = enzyme.shallow(<SliderWithGoal value={fakeValue} />)
+
+    const thumbText = result.find('SliderThumb').first().find('Box')
+
+    expect(thumbText.prop('left')).toEqual('-80px')
+    expect(thumbText.prop('textAlign')).toEqual('right')
+  })
+
+  it('does not flips the value thumb text to left if the value is not almost at the end of the track', () => {
+    const fakeValue = faker.random.number({ max: 93 })
+
+    const result = enzyme.shallow(<SliderWithGoal value={fakeValue} />)
+
+    const thumbText = result.find('SliderThumb').first().find('Box')
+
+    expect(thumbText.prop('left')).toEqual('5px')
+    expect(thumbText.prop('textAlign')).toEqual('left')
+  })
+})

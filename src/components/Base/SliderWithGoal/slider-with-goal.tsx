@@ -27,6 +27,8 @@ const SliderWithGoal = ({
   ...rest
 }: SliderWithGoalProperties) => {
   const intl = useIntl()
+  const isAlmostAtTheBeginningOfTheTrack = value === 0 || (value && value < 5)
+  const isAlmostAtTheEndOfTheTrack = value && value > 93
 
   return (
     <Slider
@@ -52,7 +54,12 @@ const SliderWithGoal = ({
         _disabled={{ opacity: 1 }}
         _focus={{ boxShadow: 'none', outline: 'none' }}
       >
-        <Box position="absolute" top={thumbHeight} left="5px">
+        <Box
+          position="absolute"
+          top={thumbHeight}
+          left={isAlmostAtTheEndOfTheTrack ? '-80px' : '5px'}
+          textAlign={isAlmostAtTheEndOfTheTrack ? 'right' : 'left'}
+        >
           <Text color={trackColor} fontWeight={700}>
             {Math.round(value ?? 0)}%
           </Text>
@@ -82,11 +89,24 @@ const SliderWithGoal = ({
         </Box>
       </SliderThumb>
 
-      <Text color="gray.200" fontWeight={700} position="absolute" top={thumbHeight}>
+      <Text
+        color="gray.200"
+        fontWeight={700}
+        position="absolute"
+        top={thumbHeight}
+        visibility={isAlmostAtTheBeginningOfTheTrack ? 'hidden' : 'visible'}
+      >
         0%
       </Text>
 
-      <Text color="gray.200" fontWeight={700} position="absolute" top={thumbHeight} right={0}>
+      <Text
+        color="gray.200"
+        fontWeight={700}
+        position="absolute"
+        top={thumbHeight}
+        right={0}
+        visibility={isAlmostAtTheEndOfTheTrack ? 'hidden' : 'visible'}
+      >
         100%
       </Text>
     </Slider>
