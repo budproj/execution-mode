@@ -1,4 +1,4 @@
-import { GetRecoilValue, RecoilState, SetRecoilState, Snapshot } from 'recoil'
+import { GetRecoilValue, RecoilState, ResetRecoilState, SetRecoilState, Snapshot } from 'recoil'
 
 export interface RecoilInterfaceGetter {
   get: GetRecoilValue
@@ -7,6 +7,7 @@ export interface RecoilInterfaceGetter {
 export interface RecoilInterfaceReadWrite {
   get: GetRecoilValue
   set: SetRecoilState
+  reset: ResetRecoilState
 }
 
 export type RecoilInterfaceCallback = {
