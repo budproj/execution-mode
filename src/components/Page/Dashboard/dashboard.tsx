@@ -18,11 +18,11 @@ const DashboardPage = ({ isRootPage }: PageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
   const { data, loading } = useQuery(queries.GET_USER_NAME_AND_GENDER)
-  const { name, gender } = data?.me ?? {}
+  const { firstName, gender } = data?.me ?? {}
 
   useEffect((): void => {
-    if (!loading) setPageTitle(intl.formatMessage(messages.greeting, { name, gender }))
-  }, [intl, loading, name, gender, setPageTitle])
+    if (!loading) setPageTitle(intl.formatMessage(messages.greeting, { name: firstName, gender }))
+  }, [intl, loading, firstName, gender, setPageTitle])
 
   return (
     <PageContent showBreadcrumb={!isRootPage}>

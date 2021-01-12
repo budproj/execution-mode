@@ -11,7 +11,9 @@ export interface CustomSorting {
 export interface User {
   id: string
   authzSub: string
-  name: string
+  firstName: string
+  lastName?: string
+  fullName: string
   gender?: USER_GENDER
   role?: string
   picture?: string

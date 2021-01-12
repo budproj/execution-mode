@@ -1,7 +1,7 @@
 import faker from 'faker'
 import sinon from 'sinon'
 
-import keyResultAtomFamily from '../atom-family'
+import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
 
 import * as selectors from './key-result'
 
@@ -20,7 +20,7 @@ describe('setter', () => {
     const fakeID = faker.random.word()
     const selector = selectors.updateKeyResult(fakeID)
 
-    selector({ get: stub, set: spy }, newValue as any)
+    selector({ get: stub, set: spy } as any, newValue as any)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
       ...previousValue,
@@ -47,7 +47,7 @@ describe('setter', () => {
     const fakeID = faker.random.word()
     const selector = selectors.updateKeyResult(fakeID)
 
-    selector({ get: stub, set: spy }, newValue as any)
+    selector({ get: stub, set: spy } as any, newValue as any)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
       ...previousValue,
@@ -72,7 +72,7 @@ describe('setter', () => {
     const fakeID = faker.random.word()
     const selector = selectors.updateKeyResult(fakeID)
 
-    selector({ get: stub, set: spy }, newValue as any)
+    selector({ get: stub, set: spy } as any, newValue as any)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
       ...newValue,
@@ -98,7 +98,7 @@ describe('setter', () => {
     const fakeID = faker.random.word()
     const selector = selectors.updateKeyResult(fakeID)
 
-    selector({ get: stub, set: spy }, newValue as any)
+    selector({ get: stub, set: spy } as any, newValue as any)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
       ...previousValue,

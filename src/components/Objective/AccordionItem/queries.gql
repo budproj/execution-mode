@@ -10,7 +10,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
       currentConfidence
       currentProgress
       owner {
-        name
+        fullName
         picture
         role
       }

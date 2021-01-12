@@ -7,7 +7,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     currentProgress
     currentConfidence
     owner {
-      name
+      fullName
       picture
     }
     objective {

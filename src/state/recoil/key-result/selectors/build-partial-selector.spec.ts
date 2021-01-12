@@ -70,7 +70,7 @@ describe('partial selector setter', () => {
     const fakePartSetter = buildPartialSelector.setKeyResultPart(fakePart)
     const fakeSetter = fakePartSetter(fakeID)
 
-    fakeSetter({ get: spy, set: sinon.fake() }, faker.random.number())
+    fakeSetter({ get: spy, set: sinon.fake() } as any, faker.random.number())
 
     const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID))
 
@@ -88,7 +88,7 @@ describe('partial selector setter', () => {
     const fakePartSetter = buildPartialSelector.setKeyResultPart(fakePart)
     const fakeSetter = fakePartSetter(fakeID)
 
-    fakeSetter({ get: getStub, set: setSpy }, fakeValue)
+    fakeSetter({ get: getStub, set: setSpy } as any, fakeValue)
 
     const expectedValue = {
       ...fakeData,
@@ -106,7 +106,10 @@ describe('partial selector setter', () => {
     const fakePartSetter = buildPartialSelector.setKeyResultPart(faker.random.word())
     const fakeSetter = fakePartSetter()
 
-    const result = fakeSetter({ get: sinon.fake(), set: sinon.fake() }, faker.random.number())
+    const result = fakeSetter(
+      { get: sinon.fake(), set: sinon.fake() } as any,
+      faker.random.number(),
+    )
 
     expect(result).not.toBeDefined()
   })
@@ -121,7 +124,7 @@ describe('partial selector setter', () => {
     const fakeSetter = fakePartSetter(fakeID)
     const newValue = faker.random.word()
 
-    fakeSetter({ get: stub, set: spy }, newValue)
+    fakeSetter({ get: stub, set: spy } as any, newValue)
 
     const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
       rick: { sanchez: { morty: newValue } },
@@ -141,7 +144,7 @@ describe('partial selector setter', () => {
     const fakeSetter = fakePartSetter(fakeID)
     const newValue = faker.random.word()
 
-    fakeSetter({ get: stub, set: spy }, newValue)
+    fakeSetter({ get: stub, set: spy } as any, newValue)
 
     const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
       rick: { tag: preservedValue, sanchez: { morty: newValue } },
@@ -160,7 +163,7 @@ describe('partial selector setter', () => {
     const fakeSetter = fakePartSetter(fakeID)
     const newValue = [faker.random.word(), 'Smith']
 
-    fakeSetter({ get: stub, set: spy }, newValue)
+    fakeSetter({ get: stub, set: spy } as any, newValue)
 
     const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
       morty: newValue,

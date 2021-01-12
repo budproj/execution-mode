@@ -31,7 +31,7 @@ describe('data layer', () => {
     const fakeCompany = {
       latestReport: {
         user: {
-          name: fakeAuthorName,
+          fullName: fakeAuthorName,
         },
       },
     }

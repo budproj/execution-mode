@@ -31,7 +31,7 @@ describe('component expectations', () => {
     const fakeName = faker.random.word()
     const fakeUser = {
       ...faker.helpers.userCard(),
-      name: fakeName,
+      firstName: fakeName,
     }
 
     sinon.stub(recoil, 'useRecoilValue').returns(fakeUser)

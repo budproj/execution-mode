@@ -12,7 +12,7 @@ query GET_USER_PRIMARY_COMPANY {
         createdAt
         user {
           id
-          name
+          fullName
         }
       }
     }
