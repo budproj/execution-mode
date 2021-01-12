@@ -2,15 +2,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: execution-mode-app
+  name: execution-mode-canary
   labels:
-    app.kubernetes.io/name: execution-mode-app
-    app.kubernetes.io/version: 1.0.0
-    app.kubernetes.io/component: execution-mode
+    app.kubernetes.io/name: execution-mode-canary
     app.kubernetes.io/part-of: presentation-layer
+    app.kubernetes.io/component: service
+    app.kubernetes.io/version: 1.0.0
 spec:
   selector:
-    app.kubernetes.io/name: execution-mode-app
+    app.kubernetes.io/name: execution-mode-canary
   ports:
     - name: http
       port: 80
