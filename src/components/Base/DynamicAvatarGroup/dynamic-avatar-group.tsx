@@ -24,8 +24,8 @@ const DynamicAvatarGroup = ({
     <AvatarGroup size={size} max={max}>
       {users?.map((user, index) => (
         <Avatar
-          key={user.id ?? `DYNAMIC_AVATAR_${user.name ?? 'NOT_NAMED'}_${index}`}
-          name={user.name}
+          key={user.id ?? `DYNAMIC_AVATAR_${user.fullName ?? user.firstName ?? 'USER'}_${index}`}
+          name={user.fullName ?? user.firstName}
           src={user.picture}
         />
       ))}

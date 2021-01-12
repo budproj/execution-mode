@@ -45,7 +45,13 @@ type User {
   id: ID!
 
   """The name of the user"""
-  name: String!
+  firstName: String!
+
+  """The last name of the user"""
+  lastName: String
+
+  """The full name of the user"""
+  fullName: String!
 
   """The sub field in Auth0 (their ID)"""
   authzSub: String!

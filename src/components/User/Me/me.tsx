@@ -37,7 +37,7 @@ const Me = () => {
 
   return (
     <NamedAvatar
-      name={user?.name}
+      name={user?.firstName}
       picture={user?.picture}
       company={user?.companies?.[0]?.name}
       isLoading={loading}

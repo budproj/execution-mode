@@ -49,7 +49,7 @@ const KeyResultListBodyColumnConfidenceLevel = ({
           >
             <LastUpdateText
               date={latestConfidenceReport?.createdAt}
-              author={latestConfidenceReport?.user?.name}
+              author={latestConfidenceReport?.user?.fullName}
             />
           </SkeletonText>
         )}

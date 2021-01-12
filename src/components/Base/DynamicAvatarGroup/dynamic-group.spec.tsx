@@ -28,7 +28,7 @@ describe('component expectations', () => {
     const numberUsers = faker.random.number({ max: 100 })
     // eslint-disable-next-line unicorn/no-null
     const fakeUsers = new Array(numberUsers).fill(null).map(() => ({
-      name: faker.name.firstName(),
+      fullName: faker.name.findName(),
       picture: faker.image.avatar(),
     }))
     const result = enzyme.shallow(<DynamicAvatarGroup users={fakeUsers} />)
@@ -44,7 +44,7 @@ describe('component customizations', () => {
 
   it('uses a custom max', () => {
     const fakeMax = faker.random.number()
-    const fakeUsers = [{ name: faker.name.firstName(), picture: faker.image.avatar() }]
+    const fakeUsers = [{ fullName: faker.name.findName(), picture: faker.image.avatar() }]
     const result = enzyme.shallow(<DynamicAvatarGroup users={fakeUsers} max={fakeMax} />)
 
     const avatarGroup = result.find('AvatarGroup')
@@ -54,7 +54,7 @@ describe('component customizations', () => {
 
   it('uses a custom size', () => {
     const fakeSize = faker.random.word()
-    const fakeUsers = [{ name: faker.name.firstName(), picture: faker.image.avatar() }]
+    const fakeUsers = [{ fullName: faker.name.findName(), picture: faker.image.avatar() }]
     const result = enzyme.shallow(<DynamicAvatarGroup users={fakeUsers} size={fakeSize} />)
 
     const avatarGroup = result.find('AvatarGroup')
@@ -64,7 +64,7 @@ describe('component customizations', () => {
 
   it('can customize the amount of avatars in the skeleton', () => {
     const fakeSkeletonNumberOfAvatars = faker.random.number()
-    const fakeUsers = [{ name: faker.name.firstName(), picture: faker.image.avatar() }]
+    const fakeUsers = [{ fullName: faker.name.findName(), picture: faker.image.avatar() }]
     const result = enzyme.shallow(
       <DynamicAvatarGroup
         users={fakeUsers}

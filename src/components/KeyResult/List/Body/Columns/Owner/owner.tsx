@@ -48,12 +48,12 @@ const KeyResultListBodyColumnOwner = ({
               fadeDuration={0}
               /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
             >
-              <Avatar name={owner?.name} src={owner?.picture} cursor="pointer" />
+              <Avatar name={owner?.fullName} src={owner?.picture} cursor="pointer" />
             </SkeletonCircle>
 
             {displayName && (
               <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}>
-                <Text>{owner?.name}</Text>
+                <Text>{owner?.fullName}</Text>
               </Skeleton>
             )}
           </Flex>
@@ -68,11 +68,16 @@ const KeyResultListBodyColumnOwner = ({
             <PopoverBody>
               <Flex p={1} flexDirection="column" gridGap={3}>
                 {owner?.picture && (
-                  <Image alt={owner?.name} src={owner?.picture} objectFit="cover" minH="192px" />
+                  <Image
+                    alt={owner?.fullName}
+                    src={owner?.picture}
+                    objectFit="cover"
+                    minH="192px"
+                  />
                 )}
 
                 <Box>
-                  <Text>{owner?.name}</Text>
+                  <Text>{owner?.fullName}</Text>
                   <Text color="gray.400">{owner?.role}</Text>
                 </Box>
               </Flex>

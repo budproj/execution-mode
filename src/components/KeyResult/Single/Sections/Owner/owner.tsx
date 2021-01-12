@@ -28,10 +28,10 @@ const Owner = ({ keyResultID }: KeyResultSingleOwnerProperties) => {
       </Text>
       <Flex alignItems="center" gridGap={2}>
         <SkeletonCircle isLoaded={isOwnerLoaded}>
-          <Avatar name={owner?.name} src={owner?.picture} size="sm" />
+          <Avatar name={owner?.fullName} src={owner?.picture} size="sm" />
         </SkeletonCircle>
         <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 150, 24)}>
-          <Text color="gray.500">{owner?.name}</Text>
+          <Text color="gray.500">{owner?.fullName}</Text>
         </Skeleton>
       </Flex>
     </Flex>

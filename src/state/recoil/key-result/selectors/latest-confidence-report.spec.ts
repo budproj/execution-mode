@@ -57,7 +57,7 @@ describe('setter', () => {
       {
         get: getterStub,
         set: setterSpy,
-      },
+      } as any,
       { valueNew },
     )
 
@@ -83,7 +83,7 @@ describe('setter', () => {
   it('returns undefined if undefined ID was provided', () => {
     const setLatestConfidenceReport = latestConfidenceReport.setLatestConfidenceReport()
 
-    const result = setLatestConfidenceReport({ get: sinon.fake(), set: sinon.fake() }, {})
+    const result = setLatestConfidenceReport({ get: sinon.fake(), set: sinon.fake() } as any, {})
 
     expect(result).not.toBeDefined()
   })

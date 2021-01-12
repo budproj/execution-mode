@@ -26,7 +26,7 @@ const NamedAvatar = ({
       </SkeletonCircle>
 
       <Box>
-        <Skeleton isLoaded={isLoaded}>
+        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 24)}>
           <Text color="gray.600" fontWeight={500}>
             {name}
           </Text>

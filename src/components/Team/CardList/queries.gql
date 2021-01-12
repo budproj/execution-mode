@@ -7,7 +7,7 @@ query GET_TEAMS {
     currentConfidence
     isCompany
     users {
-      name
+      fullName
       picture
     }
   }

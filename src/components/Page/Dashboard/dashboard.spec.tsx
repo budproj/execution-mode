@@ -20,7 +20,7 @@ describe('page control behaviors', () => {
     const fakeName = faker.name.firstName()
     const fakeGender = faker.helpers.randomize([USER_GENDER.MALE, USER_GENDER.FEMALE, undefined])
 
-    const fakeData = { name: fakeName, gender: fakeGender }
+    const fakeData = { firstName: fakeName, gender: fakeGender }
     const fakeQueryResult = { data: { me: fakeData }, loading: false }
 
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
@@ -35,7 +35,7 @@ describe('page control behaviors', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('does not set the page title if the user name is still being loaded', () => {
+  it('does not set the page title if the user firstName is still being loaded', () => {
     const spy = sinon.spy()
     const fakeQueryResult = { loading: true }
 

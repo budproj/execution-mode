@@ -5,7 +5,9 @@ import { USER_GENDER } from 'src/components/User/constants'
 
 export default Factory.extend({
   authzSub: faker.random.uuid,
-  name: faker.name.findName,
+  firstName: faker.name.firstName,
+  lastName: faker.name.lastName,
+  fullName: faker.name.findName,
   gender: () => faker.helpers.randomize([USER_GENDER.MALE, USER_GENDER.FEMALE, undefined]),
   role: faker.name.jobTitle,
   picture: () => faker.helpers.randomize([undefined, faker.image.avatar()]),
