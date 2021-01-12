@@ -69,7 +69,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   keyResults.map((keyResult) => {
     const latestProgressReport = keyResult.progressReports.models[0] as ProgressReport
 
-    return keyResult.update('currentProgress', latestProgressReport?.valueNew ?? 0)
+    return keyResult.update('currentProgress', latestProgressReport?.valueNew)
   })
 
   logger.debug('Inserted fake data on MirageJS server', {
