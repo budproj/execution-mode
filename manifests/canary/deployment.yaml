@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: execution-mode-app
+  name: execution-mode-canary
   labels:
-    app.kubernetes.io/name: execution-mode-app
-    app.kubernetes.io/version: 1.0.0
-    app.kubernetes.io/component: execution-mode
+    app.kubernetes.io/name: execution-mode-canary
     app.kubernetes.io/part-of: presentation-layer
+    app.kubernetes.io/component: frontend-application
+    app.kubernetes.io/version: 1.0.0
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app.kubernetes.io/name: execution-mode-app
+      app.kubernetes.io/name: execution-mode-canary
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: execution-mode-app
-        app.kubernetes.io/version: 1.0.0
-        app.kubernetes.io/component: execution-mode
+        app.kubernetes.io/name: execution-mode-canary
         app.kubernetes.io/part-of: presentation-layer
+        app.kubernetes.io/component: frontend-application
+        app.kubernetes.io/version: 1.0.0
     spec:
       containers:
         - name: execution-mode-app
@@ -28,9 +28,9 @@ spec:
             - containerPort: 8080
           env:
             - name: APP_ENV
-              value: production
+              value: develop
             - name: HOST
-              value: app.getbud.co
+              value: app.canary.getbud.co
             - name: PORT
               value: '8080'
             - name: DEFAULT_LOCALE
@@ -38,7 +38,7 @@ spec:
             - name: SUPPORTED_LOCALES
               value: pt-BR
             - name: API_GRAPHQL
-              value: https://api.getbud.co/business/graphql
+              value: https://api.canary.getbud.co/business/graphql
             - name: AUTH0_CLIENT_ID_PUBLIC
               value: 76DivGrWIbmLh7V2SkFyPeIbUFN6OBf3
             - name: AUTH0_DOMAIN

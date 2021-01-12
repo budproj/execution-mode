@@ -1,0 +1,27 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: execution-mode
+  labels:
+    app.kubernetes.io/name: execution-mode
+    app.kubernetes.io/part-of: presentation-layer
+    app.kubernetes.io/component: ingress-route
+    app.kubernetes.io/version: 1.0.0
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`app.getbud.co`)
+      kind: Rule
+      services:
+        - name: execution-mode-stable
+          port: 80
+    - match: Host(`app.canary.getbud.co`)
+      kind: Rule
+      services:
+        - name: execution-mode-canary
+          port: 80
+  tls:
+    certResolver: letsencrypt
+    options: {}
