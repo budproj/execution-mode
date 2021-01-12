@@ -28,7 +28,10 @@
     "intl:compile:enUS": "formatjs compile lang/en-US.json --ast --out-file compiled-lang/en-US.json",
     "test": "jest",
     "test:watch": "npm run test -- --watch",
-    "deploy": "npm run build && waypoint up"
+    "deploy": "run-s build waypoint:build waypoint:deploy",
+    "release": "waypoint up",
+    "waypoint:build": "waypoint build",
+    "waypoint:deploy": "waypoint deploy"
   },
   "author": "delucca <delucca@pm.me>",
   "license": "Apache-2.0",
