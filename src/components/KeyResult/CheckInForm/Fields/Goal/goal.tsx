@@ -23,7 +23,7 @@ const CheckInFormFieldGoal = ({ keyResultID }: CheckInFormFieldGoalProperties) =
   const Mask = selectMaskBasedOnFormat(format)
 
   return (
-    <Flex alignSelf="flex-end" gridGap={1} pb={2}>
+    <Flex alignSelf="flex-end" alignItems="center" gridGap={1} pb={2}>
       <FormLabel fontSize="0.9rem" m={0} color="gray.400">
         {intl.formatMessage(messages.label)}
       </FormLabel>
