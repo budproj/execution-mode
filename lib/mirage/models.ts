@@ -12,6 +12,8 @@ const models = {
     confidenceReports: hasMany(),
     progressReports: hasMany(),
     policies: belongsTo(),
+    // eslint-disable-next-line unicorn/no-null
+    reports: hasMany('progressReport', { inverse: null }),
   }),
   progressReport: Model.extend({
     user: belongsTo(),
