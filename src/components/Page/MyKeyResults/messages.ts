@@ -4,9 +4,9 @@ type KeyResultsPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription'
 
 export default defineMessages<KeyResultsPageMessage>({
   pageTitle: {
-    defaultMessage: 'Resultados-chave',
-    id: 'l1LZCB',
-    description: 'The page title that our users should see in the key results page',
+    defaultMessage: 'Meus Resultados-Chave',
+    id: 'kynYpx',
+    description: 'The page title that our users should see in the my key results page',
   },
 
   metaTitle: {

@@ -1,8 +1,4 @@
 {
-  "++WixA": {
-    "defaultMessage": "Visão Geral",
-    "description": "The page title that our users should see in the teams overview page"
-  },
   "+O5SW4": {
     "defaultMessage": "Um ícone com uma série de traços verticais. Clique e arraste ele para reordenar seus resultados chave",
     "description": "The alternative text explaining our reorder icon"
@@ -38,10 +34,6 @@
   "03yPkn": {
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
-  },
-  "0JqGQL": {
-    "defaultMessage": "Time",
-    "description": "The name of the Team Objectives page, located at \"/overview/team\""
   },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
@@ -79,6 +71,10 @@
     "defaultMessage": "Meus Resultados-Chave | bud",
     "description": "The page title that is displayed in the browser tab"
   },
+  "5yQyMg": {
+    "defaultMessage": "Explorar",
+    "description": "The page title that our users should see in the teams explore page"
+  },
   "6KET/Z": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
     "description": "The title of the header section in our company overview report"
@@ -91,6 +87,10 @@
     "defaultMessage": "Objetivo",
     "description": "The text of the table head related to the Objective column"
   },
+  "987MLd": {
+    "defaultMessage": "Explorar",
+    "description": "The name of the Explore page, located at \"/explore\""
+  },
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
@@ -102,6 +102,10 @@
   "B0G29o": {
     "defaultMessage": "Baixo",
     "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
+  },
+  "B5ZikQ": {
+    "defaultMessage": "Meus Resultados-Chave",
+    "description": "AppBar menu item that links to \"My Key Results\" page"
   },
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
@@ -135,6 +139,10 @@
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
   },
+  "I5aN4R": {
+    "defaultMessage": "Explorar",
+    "description": "AppBar menu item that links to teams \"Explore\" page"
+  },
   "IGODpK": {
     "defaultMessage": "Ciclo",
     "description": "The text of the table head related to the Cycle column"
@@ -142,10 +150,6 @@
   "IkA9uV": {
     "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
-  },
-  "KK195c": {
-    "defaultMessage": "Visão Geral",
-    "description": "AppBar menu item that links to company overview page"
   },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
@@ -195,6 +199,10 @@
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
   },
+  "RcUoJA": {
+    "defaultMessage": "Painel",
+    "description": "AppBar menu item that links to \"Dashboard\" page"
+  },
   "Ro4JqE": {
     "defaultMessage": "Para",
     "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
@@ -239,10 +247,6 @@
     "defaultMessage": "Este time é uma empresa",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
-  "UgaIhX": {
-    "defaultMessage": "Visão Geral",
-    "description": "The name of the Overview page, located at \"/overview\""
-  },
   "VNHZWm": {
     "defaultMessage": "Período",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
@@ -282,10 +286,6 @@
   "c8UE59": {
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
-  },
-  "cBQLDC": {
-    "defaultMessage": "Resultados-chave",
-    "description": "AppBar menu item that links to Key Results page"
   },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
@@ -335,9 +335,9 @@
     "defaultMessage": "Como estão as prioridades?",
     "description": "The title of the header section in our objectives overview report"
   },
-  "l1LZCB": {
-    "defaultMessage": "Resultados-chave",
-    "description": "The page title that our users should see in the key results page"
+  "kynYpx": {
+    "defaultMessage": "Meus Resultados-Chave",
+    "description": "The page title that our users should see in the my key results page"
   },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
@@ -351,10 +351,6 @@
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
   },
-  "loRR0C": {
-    "defaultMessage": "Empresa",
-    "description": "The name of the Company Objectives page, located at \"/overview/company\""
-  },
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",
     "description": "This is the label text that is displayed as a button as soon the check in form is displayed"
@@ -366,10 +362,6 @@
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
-  },
-  "mKv2wx": {
-    "defaultMessage": "Painel",
-    "description": "AppBar menu item that links to Dashboard page"
   },
   "mcWqy7": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segudando um pedaço de um quebra-cabeça e colaborando para montá-lo",

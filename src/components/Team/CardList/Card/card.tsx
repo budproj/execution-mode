@@ -21,12 +21,11 @@ const TeamCard = ({ id }: TeamCardProperties) => {
   const team = useRecoilValue(teamAtomFamily(id))
   const isCompany = Boolean(team?.isCompany)
   const confidenceTag = useRecoilValue(confidenceTagSelector(team?.currentConfidence))
-  const href = [isCompany ? 'company' : 'team', id].join('/')
 
   const isLoaded = Boolean(team)
 
   return (
-    <IntlLink href={href}>
+    <IntlLink href={id ?? '#'}>
       <Box
         bg="gray.50"
         borderRadius="15px"

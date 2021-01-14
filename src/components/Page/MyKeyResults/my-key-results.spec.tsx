@@ -1,11 +1,14 @@
 import enzyme from 'enzyme'
+import faker from 'faker'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
+import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
+
 import messages from './messages'
-import TeamsOverviewPage from './teams-overview'
+import MyKeyResultsPage from './my-key-results'
 
 describe('page control behaviors', () => {
   afterEach(() => sinon.restore())
@@ -15,9 +18,27 @@ describe('page control behaviors', () => {
     const intl = useIntl()
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
 
-    enzyme.shallow(<TeamsOverviewPage />)
+    enzyme.shallow(<MyKeyResultsPage />)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(intl.formatMessage(messages.pageTitle))
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('opens the drawer upon clicking a given line', () => {
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+
+    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
+    setStateStub.withArgs(keyResultOpenDrawer).returns(spy)
+    setStateStub.returns(sinon.fake())
+
+    const result = enzyme.shallow(<MyKeyResultsPage />)
+
+    const keyResultView = result.find('KeyResultView')
+    keyResultView.simulate('lineClick', fakeID)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeID)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -25,7 +46,7 @@ describe('page control behaviors', () => {
   it('hides the Breadcrumb if that is the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<TeamsOverviewPage isRootPage />)
+    const result = enzyme.shallow(<MyKeyResultsPage isRootPage />)
 
     const pageContent = result.find('PageContent')
 
@@ -35,7 +56,7 @@ describe('page control behaviors', () => {
   it('hides the Breadcrumb if that is not the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<TeamsOverviewPage isRootPage={false} />)
+    const result = enzyme.shallow(<MyKeyResultsPage isRootPage={false} />)
 
     const pageContent = result.find('PageContent')
 
@@ -45,7 +66,7 @@ describe('page control behaviors', () => {
   it('hides the Breadcrumb by default', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<TeamsOverviewPage />)
+    const result = enzyme.shallow(<MyKeyResultsPage />)
 
     const pageContent = result.find('PageContent')
 

@@ -4,13 +4,13 @@ type TeamsOverviewPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription'
 
 export default defineMessages<TeamsOverviewPageMessage>({
   pageTitle: {
-    defaultMessage: 'Visão Geral',
-    id: '++WixA',
-    description: 'The page title that our users should see in the teams overview page',
+    defaultMessage: 'Explorar',
+    id: '5yQyMg',
+    description: 'The page title that our users should see in the teams explore page',
   },
 
   metaTitle: {
-    defaultMessage: 'Visão Geral | bud ',
+    defaultMessage: 'Explorar | bud ',
     id: 'z1+f17',
     description: 'The page title that is displayed in the browser tab',
   },

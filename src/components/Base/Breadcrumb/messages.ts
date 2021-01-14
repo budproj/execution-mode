@@ -1,12 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-export type BreadcrumbMessage =
-  | 'home'
-  | 'key-results'
-  | 'arrowRightIconDesc'
-  | 'overview'
-  | 'company'
-  | 'team'
+export type BreadcrumbMessage = 'home' | 'key-results' | 'arrowRightIconDesc' | 'explore'
 
 export default defineMessages<BreadcrumbMessage>({
   home: {
@@ -21,22 +15,10 @@ export default defineMessages<BreadcrumbMessage>({
     description: 'The name of the Key Results page, located at "/keyResults"',
   },
 
-  overview: {
-    defaultMessage: 'Visão Geral',
-    id: 'UgaIhX',
-    description: 'The name of the Overview page, located at "/overview"',
-  },
-
-  company: {
-    defaultMessage: 'Empresa',
-    id: 'loRR0C',
-    description: 'The name of the Company Objectives page, located at "/overview/company"',
-  },
-
-  team: {
-    defaultMessage: 'Time',
-    id: '0JqGQL',
-    description: 'The name of the Team Objectives page, located at "/overview/team"',
+  explore: {
+    defaultMessage: 'Explorar',
+    id: '987MLd',
+    description: 'The name of the Explore page, located at "/explore"',
   },
 
   arrowRightIconDesc: {
