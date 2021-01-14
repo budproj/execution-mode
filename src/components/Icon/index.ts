@@ -64,4 +64,6 @@ export { default as CalendarOutline } from './CalendarOutline'
 
 export { default as PlusOutline } from './PlusOutline'
 
+export { default as InfoCircle } from './InfoCircle'
+
 export * from './types'
