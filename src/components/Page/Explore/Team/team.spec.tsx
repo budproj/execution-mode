@@ -7,7 +7,7 @@ import sinon from 'sinon'
 
 import * as recoilHooks from 'src/state/recoil/hooks'
 
-import TeamObjectives from './team-objectives'
+import ExploreTeamPage from './team'
 
 describe('page control behaviors', () => {
   afterEach(() => sinon.restore())
@@ -20,7 +20,7 @@ describe('page control behaviors', () => {
     sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
     sinon.stub(apollo, 'useQuery').returns(fakeQueryResult as any)
 
-    enzyme.shallow(<TeamObjectives teamId={faker.random.word()} />)
+    enzyme.shallow(<ExploreTeamPage teamId={faker.random.word()} />)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeName)
 
@@ -35,7 +35,7 @@ describe('page control behaviors', () => {
     sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(spy)
     sinon.stub(apollo, 'useQuery').returns(fakeQueryResult as any)
 
-    enzyme.shallow(<TeamObjectives teamId={faker.random.word()} />)
+    enzyme.shallow(<ExploreTeamPage teamId={faker.random.word()} />)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeQueryResult.data.team)
 
@@ -46,7 +46,7 @@ describe('page control behaviors', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
     sinon.mock(apollo).expects('useQuery').atLeast(1).returns({})
 
-    const result = enzyme.shallow(<TeamObjectives isRootPage teamId={faker.random.word()} />)
+    const result = enzyme.shallow(<ExploreTeamPage isRootPage teamId={faker.random.word()} />)
 
     const pageContent = result.find('PageContent')
 
@@ -58,7 +58,7 @@ describe('page control behaviors', () => {
     sinon.mock(apollo).expects('useQuery').atLeast(1).returns({})
 
     const result = enzyme.shallow(
-      <TeamObjectives teamId={faker.random.word()} isRootPage={false} />,
+      <ExploreTeamPage teamId={faker.random.word()} isRootPage={false} />,
     )
 
     const pageContent = result.find('PageContent')
@@ -70,7 +70,7 @@ describe('page control behaviors', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
     sinon.mock(apollo).expects('useQuery').atLeast(1).returns({})
 
-    const result = enzyme.shallow(<TeamObjectives teamId={faker.random.word()} />)
+    const result = enzyme.shallow(<ExploreTeamPage teamId={faker.random.word()} />)
 
     const pageContent = result.find('PageContent')
 

@@ -10,7 +10,7 @@ import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
 
-const TeamsOverviewPage = ({ isRootPage }: PageProperties) => {
+const ExplorePage = ({ isRootPage }: PageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
 
@@ -27,4 +27,4 @@ const TeamsOverviewPage = ({ isRootPage }: PageProperties) => {
   )
 }
 
-export default TeamsOverviewPage
+export default ExplorePage

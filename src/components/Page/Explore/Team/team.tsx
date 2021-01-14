@@ -15,11 +15,11 @@ import messages from './messages'
 import queries from './queries.gql'
 import { GetTeamNameQuery } from './types'
 
-export interface TeamObjectivesProperties extends PageProperties {
+export interface ExploreTeamPageProperties extends PageProperties {
   teamId: Team['id']
 }
 
-const TeamObjectives = ({ teamId, isRootPage }: TeamObjectivesProperties) => {
+const ExploreTeamPage = ({ teamId, isRootPage }: ExploreTeamPageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
   const { data, loading } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_NAME, {
@@ -60,4 +60,4 @@ const TeamObjectives = ({ teamId, isRootPage }: TeamObjectivesProperties) => {
   )
 }
 
-export default TeamObjectives
+export default ExploreTeamPage

@@ -49,20 +49,14 @@ const publicRuntimeConfig = {
     },
 
     {
-      source: '/pt-BR/visao-geral',
-      destination: '/overview',
+      source: '/pt-BR/explorar',
+      destination: '/explore',
       locale: 'pt-BR',
     },
 
     {
-      source: '/pt-BR/visao-geral/empresa/:id',
-      destination: '/overview/company/:id',
-      locale: 'pt-BR',
-    },
-
-    {
-      source: '/pt-BR/visao-geral/time/:id',
-      destination: '/overview/team/:id',
+      source: '/pt-BR/explorar/:id',
+      destination: '/explore/:id',
       locale: 'pt-BR',
     },
   ],
