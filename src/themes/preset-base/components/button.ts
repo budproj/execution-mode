@@ -9,6 +9,10 @@ const Button = {
       '&:hover': {
         color: 'brand.600',
       },
+
+      '&:focus': {
+        boxShadow: 'none',
+      },
     }),
 
     solid: () => ({

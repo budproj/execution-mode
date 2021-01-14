@@ -11,3 +11,5 @@ export { default as Input } from './input'
 export { default as Popover } from './popover'
 
 export { default as Textarea } from './text-area'
+
+export { default as Menu } from './menu'

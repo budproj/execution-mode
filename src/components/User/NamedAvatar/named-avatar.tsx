@@ -20,12 +20,12 @@ const NamedAvatar = ({
   const isLoaded = isLoadingIsUndefined || !isLoading
 
   return (
-    <Flex alignItems="center" justifyContent="flex-end" gridGap={15}>
+    <Flex alignItems="center" gridGap={15}>
       <SkeletonCircle isLoaded={isLoaded} size="50px">
         <Avatar name={name} src={picture} />
       </SkeletonCircle>
 
-      <Box>
+      <Box textAlign="left">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 24)}>
           <Text color="gray.600" fontWeight={500}>
             {name}

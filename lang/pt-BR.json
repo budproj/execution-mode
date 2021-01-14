@@ -267,6 +267,10 @@
     "defaultMessage": "Um ícone de gráfico de pizza",
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
+  "aOzLdd": {
+    "defaultMessage": "Deslogar",
+    "description": "The label displayed in the user logout button"
+  },
   "aiRCwP": {
     "defaultMessage": "Início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"

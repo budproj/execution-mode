@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
 import isMatch from 'lodash/isMatch'
 import React, { useEffect } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -8,6 +9,8 @@ import { User } from 'src/components/User/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
+
+import UserLogout from '../Logout'
 
 import queries from './queries.gql'
 
@@ -36,12 +39,21 @@ const Me = () => {
   }, [hasRemoteData, wasUserIDLoaded, wasUserSynced, data, loadUser])
 
   return (
-    <NamedAvatar
-      name={user?.firstName}
-      picture={user?.picture}
-      company={user?.companies?.[0]?.name}
-      isLoading={loading}
-    />
+    <Menu>
+      <MenuButton>
+        <NamedAvatar
+          name={user?.firstName}
+          picture={user?.picture}
+          company={user?.companies?.[0]?.name}
+          isLoading={loading}
+        />
+      </MenuButton>
+      <MenuList>
+        <MenuItem py="3px">
+          <UserLogout />
+        </MenuItem>
+      </MenuList>
+    </Menu>
   )
 }
 

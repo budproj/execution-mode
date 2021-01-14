@@ -33,7 +33,7 @@ const AppBar = (): ReactElement => {
         </Flex>
       </GridItem>
 
-      <GridItem alignSelf="end">
+      <GridItem justifySelf="flex-end">
         <Me />
       </GridItem>
     </Grid>
