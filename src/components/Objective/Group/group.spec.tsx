@@ -27,8 +27,7 @@ describe('component expectations', () => {
 
   it('displays a single accordion for each objective if it is loaded', () => {
     const numberObjectives = faker.random.number({ min: 1, max: 50 })
-    // eslint-disable-next-line unicorn/no-null
-    const fakeObjectiveIDs = new Array(numberObjectives).fill(null).map(faker.random.word)
+    const fakeObjectiveIDs = [...new Array(numberObjectives)].map(() => faker.random.word())
 
     const result = enzyme.shallow(<ObjectiveGroup objectiveIDs={fakeObjectiveIDs} />)
 

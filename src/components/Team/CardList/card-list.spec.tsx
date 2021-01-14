@@ -44,8 +44,7 @@ describe('component render', () => {
   it('renders a single card for each returned team', () => {
     const buildTeam = () => ({ ...faker.helpers.userCard(), id: faker.random.uuid() })
     const numberTeams = faker.random.number({ max: 100 })
-    // eslint-disable-next-line unicorn/no-null
-    const fakeTeams = new Array(numberTeams).fill(null).map(buildTeam)
+    const fakeTeams = [...new Array(numberTeams)].map(() => buildTeam())
     const fakeData = { teams: fakeTeams }
 
     sinon.stub(apollo, 'useQuery').returns({ data: fakeData } as any)

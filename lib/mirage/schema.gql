@@ -2,16 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""A report that records new progress in a given key result"""
-type ProgressReport {
+"""A report that records new confidence in a given key result"""
+type ConfidenceReport {
   """The ID of your report"""
   id: ID!
 
   """The value of the latest previous report"""
-  valuePrevious: Float
+  valuePrevious: Int
 
   """The last value reported"""
-  valueNew: Float!
+  valueNew: Int!
 
   """The comment in the report"""
   comment: String
@@ -37,96 +37,16 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-"""
-User is an entity inside a given root team (a.k.a. company). It is associated with many teams, progress reports, and others.
-"""
-type User {
-  """The ID of the user"""
-  id: ID!
-
-  """The name of the user"""
-  firstName: String!
-
-  """The last name of the user"""
-  lastName: String
-
-  """The full name of the user"""
-  fullName: String!
-
-  """The sub field in Auth0 (their ID)"""
-  authzSub: String!
-
-  """The gender of the user"""
-  gender: String
-
-  """The user role in the company"""
-  role: String
-
-  """The picture of the user"""
-  picture: String
-
-  """The creation date of the user"""
-  createdAt: DateTime!
-
-  """The last update date of this user"""
-  updatedAt: DateTime!
-
-  """The creation date ordered list of key results that this user owns"""
-  keyResults: [KeyResult!]!
-
-  """The creation date ordered list of objectives that this user owns"""
-  objectives: [Objective!]!
-
-  """
-  The creation date ordered list of progress reports created by this user
-  """
-  progressReports: [ProgressReport!]!
-
-  """
-  The creation date ordered list of confidence reports created by this user
-  """
-  confidenceReports: [ConfidenceReport!]!
-
-  """The creation date ordered list of teams that this user is part of"""
-  teams: [Team!]!
-
-  """The creation date ordered list of teams that this user owns"""
-  ownedTeams: [Team!]!
-
-  """
-  The creation date ordered list of companies that this user is a part of
-  """
-  companies(limit: Int): [Team!]!
-}
-
-"""
-Defines the current user policies regarding a given resource. You can use it to display read/create/update/delete controls on your application
-"""
-type Policies {
-  create: USER_POLICY!
-  read: USER_POLICY!
-  update: USER_POLICY!
-  delete: USER_POLICY!
-}
-
-"""
-Defines if the user has the allowance for a given action regarding the resource
-"""
-enum USER_POLICY {
-  ALLOW
-  DENY
-}
-
-"""A report that records new confidence in a given key result"""
-type ConfidenceReport {
+"""A report that records new progress in a given key result"""
+type ProgressReport {
   """The ID of your report"""
   id: ID!
 
   """The value of the latest previous report"""
-  valuePrevious: Int
+  valuePrevious: Float
 
   """The last value reported"""
-  valueNew: Int!
+  valueNew: Float!
 
   """The comment in the report"""
   comment: String
@@ -217,6 +137,116 @@ type Team {
   isCompany: Boolean!
 }
 
+"""
+User is an entity inside a given root team (a.k.a. company). It is associated with many teams, progress reports, and others.
+"""
+type User {
+  """The ID of the user"""
+  id: ID!
+
+  """The name of the user"""
+  firstName: String!
+
+  """The last name of the user"""
+  lastName: String
+
+  """The full name of the user"""
+  fullName: String!
+
+  """The sub field in Auth0 (their ID)"""
+  authzSub: String!
+
+  """The gender of the user"""
+  gender: String
+
+  """The user role in the company"""
+  role: String
+
+  """The picture of the user"""
+  picture: String
+
+  """The creation date of the user"""
+  createdAt: DateTime!
+
+  """The last update date of this user"""
+  updatedAt: DateTime!
+
+  """The creation date ordered list of key results that this user owns"""
+  keyResults: [KeyResult!]!
+
+  """The creation date ordered list of objectives that this user owns"""
+  objectives: [Objective!]!
+
+  """
+  The creation date ordered list of progress reports created by this user
+  """
+  progressReports: [ProgressReport!]!
+
+  """
+  The creation date ordered list of confidence reports created by this user
+  """
+  confidenceReports: [ConfidenceReport!]!
+
+  """The creation date ordered list of teams that this user is part of"""
+  teams: [Team!]!
+
+  """The creation date ordered list of teams that this user owns"""
+  ownedTeams: [Team!]!
+
+  """
+  The creation date ordered list of companies that this user is a part of
+  """
+  companies(limit: Int): [Team!]!
+}
+
+"""
+Defines the current user policies regarding a given resource. You can use it to display read/create/update/delete controls on your application
+"""
+type Policies {
+  create: USER_POLICY!
+  read: USER_POLICY!
+  update: USER_POLICY!
+  delete: USER_POLICY!
+}
+
+"""
+Defines if the user has the allowance for a given action regarding the resource
+"""
+enum USER_POLICY {
+  ALLOW
+  DENY
+}
+
+"""Common shared object values between multiple report types"""
+type Report {
+  """The ID of the report"""
+  id: ID!
+
+  """The creation date of the report"""
+  createdAt: DateTime!
+
+  """The key result ID of this report"""
+  keyResultId: ID!
+
+  """The key result of that report"""
+  keyResult: KeyResult!
+
+  """The new progress in the report"""
+  progress: Float
+
+  """The new confidence in the report"""
+  confidence: Int
+
+  """The comment submitted with the report"""
+  comment: String
+
+  """The user ID that created this report"""
+  userId: ID!
+
+  """The user that created this report"""
+  user: User!
+}
+
 """A goal that is created for the team focusing in a given team objective"""
 type KeyResult {
   """The ID of the key result"""
@@ -279,6 +309,9 @@ type KeyResult {
 
   """The latest reported current confidence of this key result"""
   currentConfidence: Float
+
+  """Created date ordered list of reports regarding this key result"""
+  reports: [Report!]
 }
 
 """A group of key results that has the same focus"""
@@ -354,15 +387,6 @@ type Cycle {
   name: String!
 }
 
-"""Common shared object values between multiple report types"""
-type Report {
-  """The ID of the report"""
-  id: ID!
-
-  """The creation date of the report"""
-  createdAt: DateTime!
-}
-
 """
 A view created by an user that represents a custom key result ranking for a given binding
 """
@@ -401,6 +425,7 @@ type Query {
   team(id: ID!): Team!
   teams(onlyCompaniesAndDepartments: Boolean, onlyCompanies: Boolean, parentTeamId: ID): [Team!]
   cycle(id: ID!): Cycle!
+  report(id: ID!): Report!
   keyResult(id: ID!): KeyResult!
   objective(id: ID!): Objective!
   user(id: ID!): User!

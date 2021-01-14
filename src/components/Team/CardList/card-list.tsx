@@ -21,8 +21,7 @@ const TeamCardList = ({ numEmptyStateCards }: TeamCardListProperties) => {
 
   const teams = orderBy(data?.teams, 'isCompany', 'desc')
   const wereTeamsLoaded = !loading && Boolean(teams)
-  // eslint-disable-next-line unicorn/no-null
-  const emptyState = new Array(numEmptyStateCards).fill(null)
+  const emptyState = [...new Array(numEmptyStateCards)]
 
   useEffect(() => {
     if (wereTeamsLoaded) loadTeamsOnRecoil(teams)

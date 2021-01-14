@@ -18,8 +18,7 @@ const ObjectivesOverviewBody = ({
 }: ObjectivesOverviewBodyProperties) => {
   const loadObjectives = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const hasObjectives = objectives && objectives.length > 0 && true
-  // eslint-disable-next-line unicorn/no-null
-  const emptyState = new Array(noOfSkeletons).fill(null)
+  const emptyState = [...new Array(noOfSkeletons)]
 
   useEffect(() => {
     if (hasObjectives) loadObjectives(objectives)

@@ -11,8 +11,7 @@ import Breadcrumb from './breadcrumb'
 describe('component rendering expectations', () => {
   const numberBlocks = faker.random.number({ min: 2, max: 10 })
   const fakeRouter = {
-    // eslint-disable-next-line unicorn/no-null
-    pathname: new Array(numberBlocks).fill(null).map(faker.random.word).join('/'),
+    pathname: [...new Array(numberBlocks)].map(() => faker.random.word()).join('/'),
   }
 
   afterEach(() => sinon.restore())
