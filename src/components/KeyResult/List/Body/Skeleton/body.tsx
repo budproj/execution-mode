@@ -19,7 +19,7 @@ const KeyResultListBodySkeleton = ({
   ...rest
 }: KeyResultListBodySkeletonProperties) => (
   <Box>
-    {[...new Array(amountOfLines).keys()].map((key) => (
+    {[...[...new Array(amountOfLines)].keys()].map((key) => (
       <KeyResultListBodyStaticLine key={`SKELETON_LINE_${key}`} {...rest} />
     ))}
   </Box>

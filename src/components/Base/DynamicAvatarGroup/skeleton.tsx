@@ -8,14 +8,11 @@ export interface AvatarGroupSkeletonProperties {
 
 const AvatarGroupSkeleton = ({ numOfAvatars }: AvatarGroupSkeletonProperties) => (
   <AvatarGroup size="4xs">
-    {
-      // eslint-disable-next-line unicorn/no-null
-      new Array(numOfAvatars).fill(null).map(() => (
-        <SkeletonCircle key={`SKELETON_AVATAR_${uniqueId()}`}>
-          <Avatar />
-        </SkeletonCircle>
-      ))
-    }
+    {[...new Array(numOfAvatars)].map(() => (
+      <SkeletonCircle key={`SKELETON_AVATAR_${uniqueId()}`}>
+        <Avatar />
+      </SkeletonCircle>
+    ))}
   </AvatarGroup>
 )
 

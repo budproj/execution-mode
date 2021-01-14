@@ -11,12 +11,9 @@ const ChildTeamsObjectivesSkeleton = ({
   numOfSkeletons,
 }: ChildTeamsObjectivesSkeletonProperties) => (
   <>
-    {
-      // eslint-disable-next-line unicorn/no-null
-      new Array(numOfSkeletons).fill(null).map(() => (
-        <ObjectiveGroup key={uniqueId()} />
-      ))
-    }
+    {[...new Array(numOfSkeletons)].map(() => (
+      <ObjectiveGroup key={uniqueId()} />
+    ))}
   </>
 )
 

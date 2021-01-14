@@ -26,12 +26,11 @@ describe('component expectations', () => {
 
   it('renders a single avatar for each provided user', () => {
     const numberUsers = faker.random.number({ max: 100 })
-    // eslint-disable-next-line unicorn/no-null
-    const fakeUsers = new Array(numberUsers).fill(null).map(() => ({
+    const fakeUsers = [...new Array(numberUsers)].map(() => ({
       fullName: faker.name.findName(),
       picture: faker.image.avatar(),
     }))
-    const result = enzyme.shallow(<DynamicAvatarGroup users={fakeUsers} />)
+    const result = enzyme.shallow(<DynamicAvatarGroup isLoaded users={fakeUsers} />)
 
     const avatar = result.find('Avatar')
 

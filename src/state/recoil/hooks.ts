@@ -41,7 +41,9 @@ export const buildFamilyLoader = <E extends RecoilEntity>(
     return set(atom, newValue)
   }
 
-  return Array.isArray(data) ? data.map(loadOnRecoil) : loadOnRecoil(data)
+  return Array.isArray(data)
+    ? data.map((singleData) => loadOnRecoil(singleData))
+    : loadOnRecoil(data)
 }
 
 const overwriteMerge = (_: any[], sourceArray: any[]) => sourceArray

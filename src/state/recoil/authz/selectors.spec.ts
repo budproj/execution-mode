@@ -10,8 +10,9 @@ describe('roles', () => {
   beforeAll(() => setConfig(config))
 
   it('returns the list of roles for our API on develop environment', () => {
-    // eslint-disable-next-line unicorn/no-null
-    const fakeRoles = new Array(faker.random.number({ max: 100 })).fill(null).map(faker.random.word)
+    const fakeRoles = [...new Array(faker.random.number({ max: 100 }))].map(() =>
+      faker.random.word(),
+    )
     const fakeUser = {
       ...faker.helpers.userCard(),
       'https://api.develop.getbud.co/roles': fakeRoles,
@@ -24,8 +25,9 @@ describe('roles', () => {
   })
 
   it('returns the list of roles for our API on local environment', () => {
-    // eslint-disable-next-line unicorn/no-null
-    const fakeRoles = new Array(faker.random.number({ max: 100 })).fill(null).map(faker.random.word)
+    const fakeRoles = [...new Array(faker.random.number({ max: 100 }))].map(() =>
+      faker.random.word(),
+    )
     const fakeUser = {
       ...faker.helpers.userCard(),
       'https://api.develop.getbud.co/roles': fakeRoles,
@@ -45,8 +47,9 @@ describe('roles', () => {
       },
     })
 
-    // eslint-disable-next-line unicorn/no-null
-    const fakeRoles = new Array(faker.random.number({ max: 100 })).fill(null).map(faker.random.word)
+    const fakeRoles = [...new Array(faker.random.number({ max: 100 }))].map(() =>
+      faker.random.word(),
+    )
     const fakeUser = {
       ...faker.helpers.userCard(),
       'https://api.getbud.co/roles': fakeRoles,

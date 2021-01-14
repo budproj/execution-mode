@@ -10,12 +10,9 @@ export interface ObjectivesSkeletonProperties {
 const ObjectivesSkeleton = ({ numOfSkeletons }: ObjectivesSkeletonProperties) => {
   return (
     <>
-      {
-        // eslint-disable-next-line unicorn/no-null
-        new Array(numOfSkeletons).fill(null).map(() => (
-          <ObjectiveAccordionItem key={uniqueId()} />
-        ))
-      }
+      {[...new Array(numOfSkeletons)].map(() => (
+        <ObjectiveAccordionItem key={uniqueId()} />
+      ))}
     </>
   )
 }

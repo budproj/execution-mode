@@ -25,7 +25,7 @@ describe('component renderization', () => {
 
   it('renders a provided title with variables', () => {
     const fakeTitle = faker.random.word()
-    const fakeVar = faker.random.word()
+    const fakeVariable = faker.random.word()
     const fakeDefaultMessage = `{var} ${fakeTitle}`
 
     /* eslint-disable formatjs/enforce-description, formatjs/enforce-id, formatjs/enforce-default-message */
@@ -35,10 +35,12 @@ describe('component renderization', () => {
     })
     /* eslint-enable formatjs/enforce-description, formatjs/enforce-id, formatjs/enforce-default-message */
 
-    const result = enzyme.shallow(<PageHead title={titleMessage} titleValues={{ var: fakeVar }} />)
+    const result = enzyme.shallow(
+      <PageHead title={titleMessage} titleValues={{ var: fakeVariable }} />,
+    )
 
     const title = result.find('title')
-    const expectedTitle = `${fakeVar} ${fakeTitle}`
+    const expectedTitle = `${fakeVariable} ${fakeTitle}`
 
     expect(title.text()).toEqual(expectedTitle)
   })
