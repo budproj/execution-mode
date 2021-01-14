@@ -11,7 +11,7 @@ export default defineMessages<TeamsOverviewPageMessage>({
 
   metaTitle: {
     defaultMessage: 'Explorar | bud ',
-    id: 'z1+f17',
+    id: 'U2EgRG',
     description: 'The page title that is displayed in the browser tab',
   },
 
