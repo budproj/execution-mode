@@ -7,8 +7,8 @@ import sinon from 'sinon'
 
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 
-import KeyResultsPage from './key-results'
 import messages from './messages'
+import MyKeyResultsPage from './my-key-results'
 
 describe('page control behaviors', () => {
   afterEach(() => sinon.restore())
@@ -18,7 +18,7 @@ describe('page control behaviors', () => {
     const intl = useIntl()
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
 
-    enzyme.shallow(<KeyResultsPage />)
+    enzyme.shallow(<MyKeyResultsPage />)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(intl.formatMessage(messages.pageTitle))
 
@@ -33,7 +33,7 @@ describe('page control behaviors', () => {
     setStateStub.withArgs(keyResultOpenDrawer).returns(spy)
     setStateStub.returns(sinon.fake())
 
-    const result = enzyme.shallow(<KeyResultsPage />)
+    const result = enzyme.shallow(<MyKeyResultsPage />)
 
     const keyResultView = result.find('KeyResultView')
     keyResultView.simulate('lineClick', fakeID)
@@ -46,7 +46,7 @@ describe('page control behaviors', () => {
   it('hides the Breadcrumb if that is the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<KeyResultsPage isRootPage />)
+    const result = enzyme.shallow(<MyKeyResultsPage isRootPage />)
 
     const pageContent = result.find('PageContent')
 
@@ -56,7 +56,7 @@ describe('page control behaviors', () => {
   it('hides the Breadcrumb if that is not the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<KeyResultsPage isRootPage={false} />)
+    const result = enzyme.shallow(<MyKeyResultsPage isRootPage={false} />)
 
     const pageContent = result.find('PageContent')
 
@@ -66,7 +66,7 @@ describe('page control behaviors', () => {
   it('hides the Breadcrumb by default', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<KeyResultsPage />)
+    const result = enzyme.shallow(<MyKeyResultsPage />)
 
     const pageContent = result.find('PageContent')
 

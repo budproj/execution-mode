@@ -331,10 +331,6 @@
     "defaultMessage": "Como estão as prioridades?",
     "description": "The title of the header section in our objectives overview report"
   },
-  "l1LZCB": {
-    "defaultMessage": "Resultados-chave",
-    "description": "The page title that our users should see in the key results page"
-  },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
@@ -390,6 +386,10 @@
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
     "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
+  },
+  "rneM6S": {
+    "defaultMessage": "Meus Resultados-chave",
+    "description": "The page title that our users should see in the my key results page"
   },
   "rpLZ2J": {
     "defaultMessage": "Bud - Gestão de OKR e Estratégia",

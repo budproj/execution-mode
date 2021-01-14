@@ -13,7 +13,7 @@ import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
 
-const KeyResultsPage = ({ isRootPage }: PageProperties) => {
+const MyKeyResultsPage = ({ isRootPage }: PageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
   const setOpenDrawer = useSetRecoilState(keyResultOpenDrawer)
@@ -34,4 +34,4 @@ const KeyResultsPage = ({ isRootPage }: PageProperties) => {
   )
 }
 
-export default KeyResultsPage
+export default MyKeyResultsPage
