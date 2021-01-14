@@ -5,7 +5,9 @@ import { useIntl } from 'react-intl'
 import Logotype from 'src/components/Base/Logotype'
 import Me from 'src/components/User/Me'
 
+import AppBarHelperButtons from './HelperButtons'
 import AppBarMenuItem from './MenuItem'
+import { RIGHT_WING_GRID_GAP } from './constants'
 import messages from './messages'
 
 const AppBar = (): ReactElement => {
@@ -33,7 +35,13 @@ const AppBar = (): ReactElement => {
         </Flex>
       </GridItem>
 
-      <GridItem justifySelf="flex-end">
+      <GridItem
+        justifySelf="flex-end"
+        display="flex"
+        alignItems="center"
+        gridGap={RIGHT_WING_GRID_GAP}
+      >
+        <AppBarHelperButtons />
         <Me />
       </GridItem>
     </Grid>

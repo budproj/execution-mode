@@ -311,6 +311,10 @@
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
   },
+  "hRddDx": {
+    "defaultMessage": "Clique aqui para acessar nossa página de suporte",
+    "description": "SupportButton icon title that links to support page. It is displayed when the user hovers the icon itself"
+  },
   "j/xH+H": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our key result drawer"
@@ -422,6 +426,10 @@
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
+  },
+  "xRyM8t": {
+    "defaultMessage": "Ícone de um ponto de interrogação. Ao clicar nele você irá para nossa página de suporte",
+    "description": "SupportButton icon desc. This is used by screen readers for accessibility"
   },
   "ycpCyI": {
     "defaultMessage": "Dono",
