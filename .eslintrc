@@ -7,9 +7,7 @@
   ],
   "rules": {
     "import/no-unresolved": ["error", { "ignore": ["miragejs/db-collection"] }],
-    "react/jsx-indent": "off",
-    "unicorn/no-new-array": "off",
-    "unicorn/no-array-reduce": "off"
+    "react/jsx-indent": "off"
   },
   "settings": {
     "import/resolver": {
