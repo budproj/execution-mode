@@ -10,7 +10,7 @@ import {
 } from 'src/state/recoil/key-result/check-in'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
-import ProgressSlider from './slider'
+import ProgressSliderSlider from './slider'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
@@ -22,7 +22,7 @@ describe('component expectations', () => {
     recoilMock.expects('useRecoilValue').atLeast(1)
     recoilMock.expects('useSetRecoilState').returns(sinon.fake())
 
-    const result = enzyme.shallow(<ProgressSlider keyResultID={faker.random.word()} />).dive()
+    const result = enzyme.shallow(<ProgressSliderSlider keyResultID={faker.random.word()} />).dive()
 
     const sliderComponent = result.find('Slider')
 
@@ -46,7 +46,7 @@ describe('component expectations', () => {
     valueStub.returns('')
 
     const result = enzyme
-      .shallow(<ProgressSlider keyResultID={fakeID} />)
+      .shallow(<ProgressSliderSlider keyResultID={fakeID} />)
       .dive()
       .dive()
 
@@ -74,7 +74,7 @@ describe('component expectations', () => {
     valueStub.withArgs(goalSelector(fakeID)).returns(faker.random.number())
     valueStub.returns('')
 
-    const result = enzyme.shallow(<ProgressSlider keyResultID={fakeID} />)
+    const result = enzyme.shallow(<ProgressSliderSlider keyResultID={fakeID} />)
 
     const slider = result.dive().dive().find('Slider')
     slider.simulate('change', newProgress)
@@ -109,7 +109,7 @@ describe('component expectations', () => {
     valueStub.returns('')
 
     const result = enzyme
-      .shallow(<ProgressSlider keyResultID={fakeID} />)
+      .shallow(<ProgressSliderSlider keyResultID={fakeID} />)
       .dive()
       .dive()
 
@@ -135,7 +135,7 @@ describe('component expectations', () => {
     valueStub.withArgs(goalSelector(fakeID)).returns(faker.random.number())
     valueStub.returns('')
 
-    const result = enzyme.shallow(<ProgressSlider keyResultID={fakeID} />)
+    const result = enzyme.shallow(<ProgressSliderSlider keyResultID={fakeID} />)
 
     const slider = result.dive().dive().find('Slider')
     slider.simulate('changeEnd', newProgress)
@@ -157,7 +157,7 @@ describe('component expectations', () => {
     valueStub.returns('')
 
     const result = enzyme
-      .shallow(<ProgressSlider keyResultID={fakeID} canChange={false} />)
+      .shallow(<ProgressSliderSlider keyResultID={fakeID} canChange={false} />)
       .dive()
       .dive()
 
@@ -178,7 +178,7 @@ describe('component expectations', () => {
     valueStub.returns('')
 
     const result = enzyme
-      .shallow(<ProgressSlider canChange keyResultID={fakeID} />)
+      .shallow(<ProgressSliderSlider canChange keyResultID={fakeID} />)
       .dive()
       .dive()
 

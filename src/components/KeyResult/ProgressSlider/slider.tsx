@@ -16,7 +16,7 @@ import {
 } from 'src/state/recoil/key-result/selectors'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
-export interface ProgressSliderContainerProperties {
+export interface ProgressSliderSliderProperties {
   keyResultID?: KeyResult['id']
   canChange?: boolean
 }
@@ -24,15 +24,15 @@ export interface ProgressSliderContainerProperties {
 const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('initialValue')
 const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 
-const ProgressSlider = forwardRef(
+const ProgressSliderSliderWithReference = forwardRef(
   (
     properties: SliderWithHoverThumbProperties,
     reference?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null,
   ) => <SliderWithHoverThumb {...properties} ref={reference} />,
 )
 
-const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContainerProperties>(
-  ({ keyResultID, canChange }: ProgressSliderContainerProperties, forwardedReference) => {
+const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProperties>(
+  ({ keyResultID, canChange }: ProgressSliderSliderProperties, forwardedReference) => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isChanging, setIsChanging] = useState(false)
     const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
@@ -69,10 +69,10 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
     // onChange events. Even if we provide the isDisabled tag to it, it dispatches the onChange and
     // onChangeEnd events as soon as you pass an defined value. That triggers all the popovers to
     // appears (since our applications understands that the slider was updates upon mounting).
-    // To prevent that I've added that dumb componen called ProgressSlider, that simples behaves
+    // To prevent that I've added that dumb componen called ProgressSliderSlider, that simples behaves
     // as a different node in our tree and allow us to avoid that behaviour.
     return isLoaded ? (
-      <ProgressSlider
+      <ProgressSliderSliderWithReference
         ref={forwardedReference}
         value={draftValue}
         trackColor={confidenceTag?.color}
@@ -90,4 +90,4 @@ const ProgressSliderContainer = forwardRef<HTMLDivElement, ProgressSliderContain
   },
 )
 
-export default ProgressSliderContainer
+export default ProgressSliderSlider

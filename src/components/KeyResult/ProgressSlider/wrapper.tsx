@@ -10,7 +10,7 @@ import {
 import selectCurrentProgress from 'src/state/recoil/key-result/selectors/current-progress'
 
 import Popover from './popover'
-import Slider from './slider'
+import ProgressSliderSlider from './slider'
 
 export interface ProgressSliderWrapperProperties {
   id?: KeyResult['id']
@@ -30,7 +30,7 @@ const ProgressSliderWrapper = ({ id, canChange }: ProgressSliderWrapperPropertie
   return (
     <PopoverWrapper isOpen={isPopoverOpen} placement="bottom-start" onClose={handleClose}>
       <PopoverTrigger>
-        <Slider keyResultID={id} canChange={canChange} />
+        <ProgressSliderSlider keyResultID={id} canChange={canChange} />
       </PopoverTrigger>
       <Popover keyResultID={id} onClose={handleClose} />
     </PopoverWrapper>
