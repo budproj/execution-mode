@@ -10,7 +10,7 @@ export default defineMessages<TeamsOverviewPageMessage>({
   },
 
   metaTitle: {
-    defaultMessage: 'Visão Geral | bud ',
+    defaultMessage: 'Explorar | bud ',
     id: 'z1+f17',
     description: 'The page title that is displayed in the browser tab',
   },
