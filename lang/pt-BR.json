@@ -103,6 +103,10 @@
     "defaultMessage": "Baixo",
     "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
   },
+  "B5ZikQ": {
+    "defaultMessage": "Meus Resultados-Chave",
+    "description": "AppBar menu item that links to \"My Key Results\" page"
+  },
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"
@@ -119,10 +123,6 @@
     "defaultMessage": "Salvar",
     "description": "This message is displayed in the \"SAVE\" button in the checkin form"
   },
-  "FRdPsa": {
-    "defaultMessage": "Explorar",
-    "description": "AppBar menu item that links to teams explore page"
-  },
   "FVnpVq": {
     "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
     "description": "The alternative text explaining our arrow right icon"
@@ -138,6 +138,10 @@
   "HAQ+JV": {
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
+  },
+  "I5aN4R": {
+    "defaultMessage": "Explorar",
+    "description": "AppBar menu item that links to teams \"Explore\" page"
   },
   "IGODpK": {
     "defaultMessage": "Ciclo",
@@ -194,6 +198,10 @@
   "RZrZdZ": {
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
+  },
+  "RcUoJA": {
+    "defaultMessage": "Painel",
+    "description": "AppBar menu item that links to \"Dashboard\" page"
   },
   "Ro4JqE": {
     "defaultMessage": "Para",
@@ -279,10 +287,6 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
-  "cBQLDC": {
-    "defaultMessage": "Resultados-chave",
-    "description": "AppBar menu item that links to Key Results page"
-  },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
     "description": "The page description that is displayed in Google and screen readers"
@@ -331,6 +335,10 @@
     "defaultMessage": "Como estão as prioridades?",
     "description": "The title of the header section in our objectives overview report"
   },
+  "kynYpx": {
+    "defaultMessage": "Meus Resultados-Chave",
+    "description": "The page title that our users should see in the my key results page"
+  },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
@@ -354,10 +362,6 @@
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
-  },
-  "mKv2wx": {
-    "defaultMessage": "Painel",
-    "description": "AppBar menu item that links to Dashboard page"
   },
   "mcWqy7": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segudando um pedaço de um quebra-cabeça e colaborando para montá-lo",
@@ -386,10 +390,6 @@
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
     "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
-  },
-  "rneM6S": {
-    "defaultMessage": "Meus Resultados-chave",
-    "description": "The page title that our users should see in the my key results page"
   },
   "rpLZ2J": {
     "defaultMessage": "Bud - Gestão de OKR e Estratégia",

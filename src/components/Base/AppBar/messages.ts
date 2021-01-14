@@ -1,9 +1,9 @@
 import { defineMessages } from 'react-intl'
 
 type AppBarMessage =
-  | 'dashboard'
-  | 'keyResults'
-  | 'explore'
+  | 'firstMenuItem'
+  | 'secondMenuItem'
+  | 'thirdMenuItem'
   | 'searchIconTitle'
   | 'searchIconDesc'
   | 'notificationBellIconTitle'
@@ -12,22 +12,22 @@ type AppBarMessage =
   | 'settingsIconDesc'
 
 export default defineMessages<AppBarMessage>({
-  dashboard: {
+  firstMenuItem: {
     defaultMessage: 'Painel',
-    id: 'mKv2wx',
-    description: 'AppBar menu item that links to Dashboard page',
+    id: 'RcUoJA',
+    description: 'AppBar menu item that links to "Dashboard" page',
   },
 
-  keyResults: {
-    defaultMessage: 'Resultados-chave',
-    id: 'cBQLDC',
-    description: 'AppBar menu item that links to Key Results page',
+  secondMenuItem: {
+    defaultMessage: 'Meus Resultados-Chave',
+    id: 'B5ZikQ',
+    description: 'AppBar menu item that links to "My Key Results" page',
   },
 
-  explore: {
+  thirdMenuItem: {
     defaultMessage: 'Explorar',
-    id: 'FRdPsa',
-    description: 'AppBar menu item that links to teams explore page',
+    id: 'I5aN4R',
+    description: 'AppBar menu item that links to teams "Explore" page',
   },
 
   searchIconTitle: {
