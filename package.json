@@ -17,6 +17,7 @@
     "copy": "cp README.md LICENSE package.json dist",
     "format": "prettier --write 'src/**/*.ts'",
     "lint": "eslint . --ext ts,tsx",
+    "lint:staged": "lint-staged",
     "lint:fix": "npm run lint -- --fix",
     "lint:timing": "TIMING=1 eslint . --ext ts,tsx",
     "lint:messages": "eslint **/messages.ts --fix",
