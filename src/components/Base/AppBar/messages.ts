@@ -3,7 +3,7 @@ import { defineMessages } from 'react-intl'
 type AppBarMessage =
   | 'dashboard'
   | 'keyResults'
-  | 'overview'
+  | 'explore'
   | 'searchIconTitle'
   | 'searchIconDesc'
   | 'notificationBellIconTitle'
@@ -24,10 +24,10 @@ export default defineMessages<AppBarMessage>({
     description: 'AppBar menu item that links to Key Results page',
   },
 
-  overview: {
-    defaultMessage: 'Visão Geral',
-    id: 'KK195c',
-    description: 'AppBar menu item that links to company overview page',
+  explore: {
+    defaultMessage: 'Explorar',
+    id: 'FRdPsa',
+    description: 'AppBar menu item that links to teams explore page',
   },
 
   searchIconTitle: {
