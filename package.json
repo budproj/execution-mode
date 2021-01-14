@@ -4,7 +4,7 @@
   "description": "Web interface for Bud's execution mode",
   "main": "src/server/index.js",
   "scripts": {
-    "prepare": "[ \"$NODE_ENV\" != production ] || husky install",
+    "postinstall": "[ \"$NODE_ENV\" != production ] || husky install",
     "start": "NODE_ENV=production node ./dist/index.js",
     "build": "npm-run-all -s clean build:app compile",
     "build:app": "next build",
