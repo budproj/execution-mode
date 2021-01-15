@@ -28,7 +28,7 @@ const ProgressSliderSliderWithReference = forwardRef(
   (
     properties: SliderWithHoverThumbProperties,
     reference?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null,
-  ) => <SliderWithHoverThumb {...properties} ref={reference} />,
+  ) => <SliderWithHoverThumb {...properties} ref={reference} dataAction="open-check-in" />,
 )
 
 const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProperties>(
