@@ -59,7 +59,6 @@ const CheckInForm = ({
   const initialValues: CheckInFormValues = {
     currentProgress,
     confidence,
-    newProgress: 0,
     comment: '',
   }
 
@@ -122,7 +121,7 @@ const CheckInForm = ({
   }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
       {() => (
         <Form>
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
