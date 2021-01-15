@@ -15,7 +15,12 @@ describe('expected behaviors', () => {
 
   it('updates the local key result data if it received new remote data', () => {
     const fakeID = faker.random.word()
-    const fakeData = { keyResult: faker.helpers.userCard() }
+    const fakeData = {
+      keyResult: {
+        ...faker.helpers.userCard(),
+        id: fakeID,
+      },
+    }
     const spy = sinon.spy()
 
     const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
@@ -88,5 +93,37 @@ describe('expected behaviors', () => {
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(undefined)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+})
+
+describe('corner cases', () => {
+  afterEach(() => sinon.restore())
+
+  it('does not update the local key result if we have remote data, but it is from a different key result', () => {
+    const fakeID = faker.random.word()
+    const fakeData = {
+      keyResult: {
+        ...faker.helpers.userCard(),
+        id: faker.random.words(2),
+      },
+    }
+    const spy = sinon.spy()
+
+    const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
+    recoilStateStub.withArgs(keyResultOpenDrawer).returns([fakeID, sinon.fake()])
+    recoilStateStub.withArgs(selectKeyResult(fakeID)).returns([faker.random.word(), spy])
+
+    const apolloStub = sinon.stub(apollo, 'useLazyQuery')
+    apolloStub.returns([
+      sinon.fake(),
+      {
+        loading: false,
+        data: fakeData,
+      },
+    ] as any)
+
+    enzyme.shallow(<KeyResultDrawer />)
+
+    expect(spy.notCalled).toEqual(true)
   })
 })
