@@ -42,7 +42,7 @@ const Me = () => {
     <Menu>
       <MenuButton>
         <NamedAvatar
-          name={user?.firstName}
+          name={user?.fullName}
           picture={user?.picture}
           company={user?.companies?.[0]?.name}
           isLoading={loading}
