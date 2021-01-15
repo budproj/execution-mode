@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "@babel/preset-react": "^7.12.7",
-    "@budproj/eslint-config-base-ts": "^1.0.1",
+    "@budproj/eslint-config-base-ts": "^1.0.3",
     "@budproj/eslint-config-intl": "^1.0.0",
     "@budproj/eslint-config-prettier-ts": "^1.0.0",
     "@budproj/eslint-config-react": "^1.0.0",
