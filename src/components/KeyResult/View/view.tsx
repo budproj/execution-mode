@@ -79,7 +79,6 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
 
   return (
     <KeyResultList
-      handleDragEnd={handleDragEnd}
       type={KEY_RESULT_LIST_TYPE.DND}
       keyResultIDs={keyResultView?.rank}
       bodyProperties={{
@@ -94,6 +93,7 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
           canChange: true,
         },
       }}
+      onLineDragEnd={handleDragEnd}
       onLineClick={onLineClick}
       {...rest}
     />

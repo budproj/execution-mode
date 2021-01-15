@@ -29,13 +29,13 @@ export interface KeyResultListProperties extends BoxProps {
   type: KEY_RESULT_LIST_TYPE
   keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
-  handleDragEnd?: (result: DropResult) => void
+  onLineDragEnd?: (result: DropResult) => void
 }
 
 const KeyResultList = ({
   keyResultIDs,
   onLineClick,
-  handleDragEnd,
+  onLineDragEnd,
   type,
   templateColumns,
   borderColor,
@@ -72,7 +72,7 @@ const KeyResultList = ({
           bodyProperties={bodyProperties}
           borderColor={borderColor}
           keyResultIDs={keyResultIDs}
-          handleDragEnd={handleDragEnd ?? throwHandleDragEndError}
+          handleDragEnd={onLineDragEnd ?? throwHandleDragEndError}
           onLineClick={onLineClick}
         />
       ) : (
