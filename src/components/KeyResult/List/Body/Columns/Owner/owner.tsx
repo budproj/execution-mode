@@ -48,7 +48,12 @@ const KeyResultListBodyColumnOwner = ({
               fadeDuration={0}
               /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
             >
-              <Avatar name={owner?.fullName} src={owner?.picture} cursor="pointer" />
+              <Avatar
+                name={owner?.fullName}
+                src={owner?.picture}
+                cursor="pointer"
+                data-action="open-user-card"
+              />
             </SkeletonCircle>
 
             {displayName && (

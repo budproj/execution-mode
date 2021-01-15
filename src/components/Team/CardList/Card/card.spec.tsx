@@ -27,19 +27,7 @@ describe('component customizations', () => {
     expect(name.text()).toEqual(fakeName)
   })
 
-  it('uses company link if is a company', () => {
-    const fakeID = faker.random.word()
-    const stub = sinon.stub(recoil, 'useRecoilValue')
-    stub.returns({ isCompany: true })
-
-    const result = enzyme.shallow(<TeamCard id={fakeID} />)
-
-    const linkComponent = result.find('IntlLink')
-
-    expect(linkComponent.prop('href')).toEqual(`company/${fakeID}`)
-  })
-
-  it('uses team link if is not a company', () => {
+  it('uses proper link', () => {
     const fakeID = faker.random.word()
     const stub = sinon.stub(recoil, 'useRecoilValue')
     stub.returns({ isCompany: false })
@@ -48,7 +36,7 @@ describe('component customizations', () => {
 
     const linkComponent = result.find('IntlLink')
 
-    expect(linkComponent.prop('href')).toEqual(`team/${fakeID}`)
+    expect(linkComponent.prop('href')).toEqual(fakeID)
   })
 })
 

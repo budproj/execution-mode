@@ -14,10 +14,14 @@ import messages from './messages'
 export interface SliderWithHoverThumbProperties extends SliderProps {
   trackColor?: string
   trackThickness?: string
+  dataAction?: string
 }
 
 const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProperties>(
-  ({ trackColor, trackThickness, ...rest }: SliderWithHoverThumbProperties, forwardedReference) => {
+  (
+    { trackColor, trackThickness, dataAction, ...rest }: SliderWithHoverThumbProperties,
+    forwardedReference,
+  ) => {
     const intl = useIntl()
 
     return (
@@ -32,6 +36,7 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
           bg="gray.100"
           borderRadius="full"
           _disabled={{ bg: 'gray.100' }}
+          data-action={dataAction}
         >
           <SliderFilledTrack bg={trackColor} borderRadius="full" />
         </SliderTrack>
@@ -46,6 +51,7 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
             transition="0.2s opacity ease-in-out"
             opacity={0}
             _groupHover={{ opacity: 1 }}
+            data-action={dataAction}
           />
         </Tooltip>
       </Slider>

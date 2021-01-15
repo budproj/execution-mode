@@ -28,10 +28,10 @@ describe('component expectations', () => {
   })
 
   it('passes the user name to the NamedAvatar', () => {
-    const fakeName = faker.random.word()
+    const fakeName = faker.name.findName()
     const fakeUser = {
       ...faker.helpers.userCard(),
-      firstName: fakeName,
+      fullName: fakeName,
     }
 
     sinon.stub(recoil, 'useRecoilValue').returns(fakeUser)

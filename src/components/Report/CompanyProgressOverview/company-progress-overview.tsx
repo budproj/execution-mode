@@ -12,7 +12,9 @@ import queries from './queries.gql'
 import { GetUserPrimaryCompanyQuery } from './types'
 
 const CompanyProgressOverview = () => {
-  const { data, loading } = useQuery<GetUserPrimaryCompanyQuery>(queries.GET_USER_PRIMARY_COMPANY)
+  const { data, loading } = useQuery<GetUserPrimaryCompanyQuery>(queries.GET_USER_PRIMARY_COMPANY, {
+    fetchPolicy: 'network-only',
+  })
   const loadTeam = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const company = data?.me?.companies?.[0]
 

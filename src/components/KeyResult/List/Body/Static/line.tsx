@@ -1,4 +1,5 @@
 import { Grid, GridProps } from '@chakra-ui/react'
+import remove from 'lodash/remove'
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
@@ -34,8 +35,15 @@ const KeyResultListBodyStaticLine = ({
   columns,
   bodyProperties,
 }: KeyResultListBodyStaticLineProperties) => {
-  const handleLineClick = () => {
-    if (onLineClick && keyResultID) onLineClick(keyResultID)
+  const handleLineClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const target = event.target as HTMLDivElement
+    const actions = remove([
+      target.getAttribute('data-action'),
+      target.parentElement?.getAttribute('data-action'),
+    ])
+    const allowLineClick = actions.length === 0
+
+    if (onLineClick && keyResultID && allowLineClick) onLineClick(keyResultID)
   }
 
   const columnComponents = {
@@ -59,7 +67,7 @@ const KeyResultListBodyStaticLine = ({
       borderStyle="solid"
       cursor={onLineClick ? 'pointer' : 'auto'}
       _hover={onLineClick ? { background: 'blue.50' } : {}}
-      onClick={handleLineClick}
+      onMouseDown={handleLineClick}
     >
       {columns.map((column) => {
         const ColumnComponent = columnComponents[column]

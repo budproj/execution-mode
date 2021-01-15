@@ -2,6 +2,7 @@ query GET_USER_NAMED_AVATAR_DATA {
   me {
     id
     firstName
+    fullName
     picture
     companies(limit: 1) {
       id

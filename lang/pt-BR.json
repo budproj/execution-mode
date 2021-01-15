@@ -239,6 +239,10 @@
     "defaultMessage": "Ontem",
     "description": "This label is displayed if the last update date is yesterday"
   },
+  "U2EgRG": {
+    "defaultMessage": "Explorar | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "UBruoq": {
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
@@ -426,10 +430,6 @@
   "ycpCyI": {
     "defaultMessage": "Dono",
     "description": "The text of the table head related to the Owner column"
-  },
-  "z1+f17": {
-    "defaultMessage": "Visão Geral | bud",
-    "description": "The page title that is displayed in the browser tab"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",

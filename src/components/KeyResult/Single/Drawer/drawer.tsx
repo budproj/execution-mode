@@ -44,8 +44,8 @@ const KeyResultDrawer = () => {
   })
 
   useEffect(() => {
-    if (!loading && data) setKeyResult(data.keyResult)
-  }, [loading, data, setKeyResult])
+    if (!loading && data && data.keyResult.id === keyResultID) setKeyResult(data.keyResult)
+  }, [loading, data, keyResultID, setKeyResult])
 
   useEffect(() => {
     if (keyResultID) getKeyResult({ variables: { id: keyResultID } })

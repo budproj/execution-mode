@@ -12,7 +12,9 @@ import queries from './queries.gql'
 import { GetCompanyObjectivesQuery } from './types'
 
 const ObjectivesOverview = () => {
-  const { data, loading } = useQuery<GetCompanyObjectivesQuery>(queries.GET_COMPANY_OBJECTIVES)
+  const { data, loading } = useQuery<GetCompanyObjectivesQuery>(queries.GET_COMPANY_OBJECTIVES, {
+    fetchPolicy: 'network-only',
+  })
   const loadTeam = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const company = data?.teams?.[0]
 
