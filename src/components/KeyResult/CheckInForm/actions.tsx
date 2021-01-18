@@ -18,7 +18,13 @@ const Actions = ({ isLoading, onCancel }: CheckInFormActionsProperties) => {
         <Button variant="outline" w="100%" onClick={onCancel}>
           {intl.formatMessage(messages.cancelButtonLabel)}
         </Button>
-        <Button variant="solid" type="submit" isLoading={isLoading} w="100%">
+        <Button
+          variant="solid"
+          type="submit"
+          isLoading={isLoading}
+          w="100%"
+          _hover={{ bg: 'brand.600' }}
+        >
           {intl.formatMessage(messages.saveButtonLabel)}
         </Button>
       </Flex>
