@@ -10,6 +10,7 @@ import {
   KeyResultSingleDescription,
   KeyResultSingleCheckIn,
   KeyResultSingleCycle,
+  KeyResultSingleComments,
 } from 'src/components/KeyResult/Single/Sections'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
@@ -62,6 +63,7 @@ const KeyResultDrawer = () => {
             <KeyResultSingleDescription keyResultID={keyResultID} />
             <KeyResultSingleCycle keyResultID={keyResultID} />
             <KeyResultSingleCheckIn keyResultID={keyResultID} />
+            <KeyResultSingleComments keyResultID={keyResultID} />
           </Flex>
         </DrawerContent>
       </DrawerOverlay>

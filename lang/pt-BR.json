@@ -355,6 +355,10 @@
     "defaultMessage": "Hoje",
     "description": "This label is displayed if the last update date is today"
   },
+  "lQs6US": {
+    "defaultMessage": "Comentários",
+    "description": "The label text above the Comments section in our key result single page or drawer"
+  },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
