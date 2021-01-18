@@ -21,5 +21,13 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     policies {
       update
     }
+    reports {
+      createdAt
+      comment
+      user {
+        fullName
+        picture
+      }
+    }
   }
 }
