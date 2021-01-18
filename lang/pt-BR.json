@@ -319,6 +319,10 @@
     "defaultMessage": "Clique aqui para acessar nossa página de suporte",
     "description": "SupportButton icon title that links to support page. It is displayed when the user hovers the icon itself"
   },
+  "iJq7du": {
+    "defaultMessage": "Responsável",
+    "description": "The label text above the Owner section in our key result single page or drawer"
+  },
   "j/xH+H": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our key result drawer"
@@ -358,10 +362,6 @@
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",
     "description": "This is the label text that is displayed as a button as soon the check in form is displayed"
-  },
-  "m7FoY9": {
-    "defaultMessage": "Dono",
-    "description": "The label text above the Owner section in our key result single page or drawer"
   },
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
@@ -407,6 +407,10 @@
     "defaultMessage": "Check-in",
     "description": "The label text above the check-in section in our key result single page or drawer"
   },
+  "u7Yaxx": {
+    "defaultMessage": "Responsável",
+    "description": "The text of the table head related to the Owner column"
+  },
   "uXQE/x": {
     "defaultMessage": "Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.",
     "description": "The page description that is displayed in Google and screen readers"
@@ -426,10 +430,6 @@
   "xRyM8t": {
     "defaultMessage": "Ícone de um ponto de interrogação. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
-  },
-  "ycpCyI": {
-    "defaultMessage": "Dono",
-    "description": "The text of the table head related to the Owner column"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",
