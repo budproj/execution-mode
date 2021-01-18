@@ -10,13 +10,13 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
-export interface KeyResultSingleObjectiveProperties {
+export interface KeyResultSectionObjectiveProperties {
   keyResultID?: KeyResult['id']
 }
 
 const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
 
-const Okr = ({ keyResultID }: KeyResultSingleObjectiveProperties) => {
+const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectiveProperties) => {
   const intl = useIntl()
   const objective = useRecoilValue(objectiveSelector(keyResultID))
 
@@ -52,4 +52,4 @@ const Okr = ({ keyResultID }: KeyResultSingleObjectiveProperties) => {
   )
 }
 
-export default Okr
+export default KeyResultSectionObjective

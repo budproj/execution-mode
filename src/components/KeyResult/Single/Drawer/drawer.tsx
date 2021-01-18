@@ -5,12 +5,12 @@ import { useRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
 import {
-  KeyResultSingleOwner,
-  KeyResultSingleObjective,
-  KeyResultSingleDescription,
-  KeyResultSingleCheckIn,
-  KeyResultSingleCycle,
-  KeyResultSingleComments,
+  KeyResultSectionOwner,
+  KeyResultSectionObjective,
+  KeyResultSectionDescription,
+  KeyResultSectionCheckIn,
+  KeyResultSectionCycle,
+  KeyResultSectionComments,
 } from 'src/components/KeyResult/Single/Sections'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
@@ -58,12 +58,12 @@ const KeyResultDrawer = () => {
         <DrawerContent overflowY="auto">
           <KeyResultDrawerHeader keyResultID={keyResultID} />
           <Flex gridGap={8} py={8} px={6} direction="column">
-            <KeyResultSingleOwner keyResultID={keyResultID} />
-            <KeyResultSingleObjective keyResultID={keyResultID} />
-            <KeyResultSingleDescription keyResultID={keyResultID} />
-            <KeyResultSingleCycle keyResultID={keyResultID} />
-            <KeyResultSingleCheckIn keyResultID={keyResultID} />
-            <KeyResultSingleComments keyResultID={keyResultID} />
+            <KeyResultSectionOwner keyResultID={keyResultID} />
+            <KeyResultSectionObjective keyResultID={keyResultID} />
+            <KeyResultSectionDescription keyResultID={keyResultID} />
+            <KeyResultSectionCycle keyResultID={keyResultID} />
+            <KeyResultSectionCheckIn keyResultID={keyResultID} />
+            <KeyResultSectionComments keyResultID={keyResultID} />
           </Flex>
         </DrawerContent>
       </DrawerOverlay>

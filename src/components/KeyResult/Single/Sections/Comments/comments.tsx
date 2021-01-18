@@ -6,11 +6,11 @@ import { KeyResult } from 'src/components/KeyResult/types'
 
 import messages from './messages'
 
-export interface KeyResultSingleCommentsProperties {
+export interface KeyResultSectionCommentsProperties {
   keyResultID?: KeyResult['id']
 }
 
-const KeyResultSingleComments = ({ keyResultID }: KeyResultSingleCommentsProperties) => {
+const KeyResultSectionComments = ({ keyResultID }: KeyResultSectionCommentsProperties) => {
   const intl = useIntl()
 
   return (
@@ -22,4 +22,4 @@ const KeyResultSingleComments = ({ keyResultID }: KeyResultSingleCommentsPropert
   )
 }
 
-export default KeyResultSingleComments
+export default KeyResultSectionComments

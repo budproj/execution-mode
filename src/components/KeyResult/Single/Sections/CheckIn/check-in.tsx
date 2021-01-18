@@ -8,11 +8,11 @@ import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
 import EncouragingMessage from './encouraging-message'
 import messages from './messages'
 
-export interface KeyResultSingleCheckInProperties {
+export interface KeyResultSectionCheckInProperties {
   keyResultID?: KeyResult['id']
 }
 
-const CheckIn = ({ keyResultID }: KeyResultSingleCheckInProperties) => {
+const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInProperties) => {
   const [showMessage, setShowMessage] = useState(false)
   const intl = useIntl()
 
@@ -42,4 +42,4 @@ const CheckIn = ({ keyResultID }: KeyResultSingleCheckInProperties) => {
   )
 }
 
-export default CheckIn
+export default KeyResultSectionCheckIn

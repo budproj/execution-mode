@@ -8,13 +8,13 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
-export interface KeyResultSingleDescriptionProperties {
+export interface KeyResultSectionDescriptionProperties {
   keyResultID?: KeyResult['id']
 }
 
 const descriptionSelector = buildPartialSelector<KeyResult['description']>('description')
 
-const Description = ({ keyResultID }: KeyResultSingleDescriptionProperties) => {
+const KeyResultSectionDescription = ({ keyResultID }: KeyResultSectionDescriptionProperties) => {
   const intl = useIntl()
   const description = useRecoilValue(descriptionSelector(keyResultID))
 
@@ -35,4 +35,4 @@ const Description = ({ keyResultID }: KeyResultSingleDescriptionProperties) => {
   )
 }
 
-export default Description
+export default KeyResultSectionDescription

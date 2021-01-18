@@ -4,7 +4,7 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import Cycle from './cycle'
+import KeyResultSectionCycle from './cycle'
 
 describe('component expections', () => {
   afterEach(() => sinon.restore())
@@ -13,7 +13,7 @@ describe('component expections', () => {
     const fakeCycle = faker.random.word()
     sinon.stub(recoil, 'useRecoilValue').returns(fakeCycle)
 
-    const result = enzyme.shallow(<Cycle keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<KeyResultSectionCycle keyResultID={faker.random.word()} />)
 
     const dateBlocks = result.find('DateWithTitle')
 
@@ -22,7 +22,7 @@ describe('component expections', () => {
 
   it('considers as not loaded if no cycle is provided', () => {
     sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
-    const result = enzyme.shallow(<Cycle keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<KeyResultSectionCycle keyResultID={faker.random.word()} />)
 
     const dateBlocks = result.find('DateWithTitle')
 

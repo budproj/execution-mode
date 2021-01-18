@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSingleObjectiveMessage = 'label' | 'stackIconDesc'
+type KeyResultsSectionObjectiveMessage = 'label' | 'stackIconDesc'
 
-export default defineMessages<KeyResultsSingleObjectiveMessage>({
+export default defineMessages<KeyResultsSectionObjectiveMessage>({
   label: {
     defaultMessage: 'Objetivo',
     id: 'T8ytLJ',

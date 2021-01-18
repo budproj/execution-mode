@@ -1,3 +1,3 @@
-import KeyResultSingleObjective from './objective'
+import KeyResultSectionObjective from './objective'
 
-export default KeyResultSingleObjective
+export default KeyResultSectionObjective

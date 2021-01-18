@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSingleDescriptionMessage = 'label'
+type KeyResultsSectionDescriptionMessage = 'label'
 
-export default defineMessages<KeyResultsSingleDescriptionMessage>({
+export default defineMessages<KeyResultsSectionDescriptionMessage>({
   label: {
     defaultMessage: 'Detalhes',
     id: 'S/F2Hk',

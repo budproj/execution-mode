@@ -1,3 +1,3 @@
-import KeyResultSingleComments from './comments'
+import KeyResultSectionComments from './comments'
 
-export default KeyResultSingleComments
+export default KeyResultSectionComments

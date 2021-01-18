@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSingleCommentsMessage = 'label'
+type KeyResultsSectionCommentsMessage = 'label'
 
-export default defineMessages<KeyResultsSingleCommentsMessage>({
+export default defineMessages<KeyResultsSectionCommentsMessage>({
   label: {
     defaultMessage: 'Comentários',
     id: 'lQs6US',
