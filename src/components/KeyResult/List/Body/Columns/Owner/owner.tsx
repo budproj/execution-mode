@@ -29,6 +29,10 @@ export interface KeyResultListBodyColumnOwnerProperties
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 
+const handleMouseDownCapture = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  event.stopPropagation()
+}
+
 const KeyResultListBodyColumnOwner = ({
   id,
   displayName,
@@ -38,7 +42,13 @@ const KeyResultListBodyColumnOwner = ({
   const isOwnerLoaded = Boolean(owner)
 
   return (
-    <KeyResultListBodyColumnBase preventLineClick pr={0} display="flex">
+    <KeyResultListBodyColumnBase
+      preventLineClick
+      pr={0}
+      display="flex"
+      cursor="auto"
+      onMouseDownCapture={handleMouseDownCapture}
+    >
       <Popover placement="top-end">
         <PopoverTrigger>
           <Flex alignItems="center" gridGap={4}>

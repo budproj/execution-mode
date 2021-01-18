@@ -18,6 +18,10 @@ export interface ProgressSliderContentProperties {
   onClose?: () => void
 }
 
+const handleMouseDownCapture = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  event.stopPropagation()
+}
+
 const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentProperties) => {
   const intl = useIntl()
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
@@ -29,7 +33,13 @@ const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentPr
   }
 
   return (
-    <PopoverContent width={400} p={0} pt={8} cursor="auto">
+    <PopoverContent
+      width={400}
+      p={0}
+      pt={8}
+      cursor="auto"
+      onMouseDownCapture={handleMouseDownCapture}
+    >
       <PopoverHeader border="none" fontSize="18px" fontWeight={700} color="gray.600" px={8} pb={0}>
         {intl.formatMessage(messages.popoverTitle)}
       </PopoverHeader>

@@ -59,4 +59,21 @@ describe('component expectations', () => {
 
     expect(spy.called).toEqual(true)
   })
+
+  it('stops propagates upon mouse down events', () => {
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const spy = sinon.spy()
+
+    const result = enzyme.shallow(<ProgressSliderPopover onClose={spy} />)
+
+    const content = result.find('PopoverContent')
+
+    const event = {
+      stopPropagation: spy,
+    }
+    content.simulate('mouseDownCapture', event)
+
+    expect(spy.called).toEqual(true)
+  })
 })
