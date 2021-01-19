@@ -1,7 +1,9 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
+
 import { ProgressReport } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
+
 import KeyResultSectionCommentsCommentHead from './Head'
 
 export interface KeyResultSectionCommentsCommentProperties {

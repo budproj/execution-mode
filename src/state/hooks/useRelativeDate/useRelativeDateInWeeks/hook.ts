@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-const hook = (date: Date, snapshotDate: Date = new Date()) => {
+const useRelativeDateInWeeks = (date: Date, snapshotDate: Date = new Date()) => {
   const intl = useIntl()
 
   const weeksDifference = differenceInWeeks(date, snapshotDate)
@@ -14,10 +14,10 @@ const hook = (date: Date, snapshotDate: Date = new Date()) => {
   }
 
   let formatDate = formatters.longTimeAgo
-  if (weeksDifference <= 1) formatDate = formatters.oneWeekOrLess
-  if (weeksDifference > 1 && weeksDifference < 5) formatDate = formatters.thisMonth
+  if (weeksDifference >= 0) formatDate = formatters.oneWeekOrLess
+  if (weeksDifference < 0 && weeksDifference > -5) formatDate = formatters.thisMonth
 
   return formatDate()
 }
 
-export default hook
+export default useRelativeDateInWeeks

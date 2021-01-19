@@ -1,6 +1,7 @@
 import { Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+
 import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
 import messages from './messages'

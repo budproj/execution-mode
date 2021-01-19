@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-const hook = (date: Date, snapshotDate: Date = new Date()) => {
+const useRelativeDateInMinutes = (date: Date, snapshotDate: Date = new Date()) => {
   const intl = useIntl()
 
   const minutesDifference = differenceInMinutes(date, snapshotDate)
@@ -20,4 +20,4 @@ const hook = (date: Date, snapshotDate: Date = new Date()) => {
   return formatDate()
 }
 
-export default hook
+export default useRelativeDateInMinutes

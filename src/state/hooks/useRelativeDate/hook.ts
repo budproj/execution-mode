@@ -1,8 +1,8 @@
 import { differenceInMinutes } from 'date-fns'
 import { useState } from 'react'
+
 import { FORMATTER_THRESHOLDS } from './constants'
 import useRelativeDateFallback from './useRelativeDateFallback'
-
 import useRelativeDateInDays from './useRelativeDateInDays'
 import useRelativeDateInHours from './useRelativeDateInHours'
 import useRelativeDateInMinutes from './useRelativeDateInMinutes'
@@ -12,12 +12,12 @@ import useRelativeDateInWeeks from './useRelativeDateInWeeks'
 export type RelativeDateUnit = 'minute' | 'hour' | 'day' | 'week' | 'month'
 
 const formatters = {
-  minute: (date: Date, snapshotDate: Date) => useRelativeDateInMinutes(date, snapshotDate),
-  hour: (date: Date, snapshotDate: Date) => useRelativeDateInHours(date, snapshotDate),
-  day: (date: Date, snapshotDate: Date) => useRelativeDateInDays(date, snapshotDate),
-  week: (date: Date, snapshotDate: Date) => useRelativeDateInWeeks(date, snapshotDate),
-  month: (date: Date, snapshotDate: Date) => useRelativeDateInMonths(date, snapshotDate),
-  fallback: (date: Date, _snapshotDate: Date) => useRelativeDateFallback(date),
+  minute: useRelativeDateInMinutes,
+  hour: useRelativeDateInHours,
+  day: useRelativeDateInDays,
+  week: useRelativeDateInWeeks,
+  month: useRelativeDateInMonths,
+  fallback: useRelativeDateFallback,
 }
 
 const selectFormatterBasedOnDifference = (date: Date, snapshotDate: Date) => {
@@ -34,14 +34,14 @@ const selectFormatterBasedOnDifference = (date: Date, snapshotDate: Date) => {
 }
 
 const selectFormatter = (date?: Date, snapshotDate?: Date, unit?: RelativeDateUnit) => {
-  if (!date || !snapshotDate) return null
+  if (!date || !snapshotDate) return
 
   const formatter = unit ? formatters[unit] : selectFormatterBasedOnDifference(date, snapshotDate)
 
   return formatter
 }
 
-const hook = (
+const useRelativeDate = (
   initialDate?: Date,
   unit?: RelativeDateUnit,
   initialSnapshotDate: Date = new Date(),
@@ -55,4 +55,4 @@ const hook = (
   return [formattedDate, setDate, setSnapshotDate]
 }
 
-export default hook
+export default useRelativeDate

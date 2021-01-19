@@ -5,8 +5,8 @@ import { useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
-import KeyResultSectionCommentsComment from './Comment'
 
+import KeyResultSectionCommentsComment from './Comment'
 import messages from './messages'
 
 export interface KeyResultSectionCommentsProperties {

@@ -1,9 +1,14 @@
-import { useIntl } from 'react-intl'
+import { FormatDateOptions, useIntl } from 'react-intl'
 
-const hook = (date: Date) => {
+const useRelativeDateFallback = (date: Date) => {
   const intl = useIntl()
+  const options: FormatDateOptions = {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  }
 
-  return intl.formatDate(date)
+  return intl.formatDate(date, options)
 }
 
-export default hook
+export default useRelativeDateFallback

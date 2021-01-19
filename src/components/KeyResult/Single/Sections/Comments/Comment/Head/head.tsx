@@ -1,6 +1,7 @@
 import { Avatar, Flex, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+
 import { ProgressReport } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
 
