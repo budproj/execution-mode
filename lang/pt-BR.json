@@ -399,6 +399,10 @@
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
+  "oeB7dG": {
+    "defaultMessage": "Esse resultado-chave não tem nenhum comentário",
+    "description": "The label message that is displayed below our team at work image in our empty state"
+  },
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",
     "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"

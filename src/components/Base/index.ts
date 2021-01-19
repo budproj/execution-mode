@@ -41,3 +41,5 @@ export { default as PercentageProgressIncreaseTag } from './PercentageProgressIn
 export { default as PageHead } from './PageHead'
 
 export { default as SupportButton } from './SupportButton'
+
+export { default as EmptyState } from './EmptyState'

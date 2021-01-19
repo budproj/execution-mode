@@ -6,8 +6,9 @@ import { useRecoilValue } from 'recoil'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
-import KeyResultSectionCommentsComment from './Comment'
+import KeyResultSectionsCommentsList from './list'
 import messages from './messages'
+import KeyResultSectionsCommentsSkeleton from './skeleton'
 
 export interface KeyResultSectionCommentsProperties {
   noOfSkeletons: number
@@ -33,18 +34,11 @@ const KeyResultSectionComments = ({
       </Text>
 
       <Flex gridGap={8} direction="column">
-        {isLoaded
-          ? comments?.map(({ id, user, createdAt, comment }) => (
-              <KeyResultSectionCommentsComment
-                key={id}
-                user={user}
-                createdAt={createdAt}
-                comment={comment}
-              />
-            ))
-          : [...new Array(noOfSkeletons)].map(() => (
-              <KeyResultSectionCommentsComment key={Math.random()} />
-            ))}
+        {isLoaded ? (
+          <KeyResultSectionsCommentsList comments={comments} />
+        ) : (
+          <KeyResultSectionsCommentsSkeleton noOfLines={noOfSkeletons} />
+        )}
       </Flex>
     </Flex>
   )

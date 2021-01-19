@@ -11,8 +11,6 @@ describe('component expectations', () => {
 
   it('creates a single component for each report with comment', () => {
     const numberOfFakeReports = faker.random.number({ min: 1, max: 100 })
-    expect.assertions(numberOfFakeReports)
-
     const fakeReports = [...new Array(numberOfFakeReports)].map(() => ({
       id: faker.random.uuid(),
       comment: faker.helpers.userCard(),
@@ -22,20 +20,14 @@ describe('component expectations', () => {
 
     const result = enzyme.shallow(<KeyResultSectionComments />)
 
-    const comments = result.find('KeyResultSectionCommentsComment')
+    const commentList = result.find('KeyResultSectionsCommentsList')
 
-    comments.map((comment, index) => {
-      const relatedReport = fakeReports[index]
-
-      return expect(comment.key()).toEqual(relatedReport.id)
-    })
+    expect(commentList.prop('comments')).toEqual(fakeReports)
   })
 
   it('ignores all reports without comments', () => {
     const numberOfFakeReportsWithComment = faker.random.number({ min: 1, max: 100 })
     const numberOfFakeReportsWithoutComment = faker.random.number({ min: 1, max: 100 })
-
-    expect.assertions(numberOfFakeReportsWithComment)
 
     const fakeReportsWithComment = [...new Array(numberOfFakeReportsWithComment)].map(() => ({
       id: faker.random.uuid(),
@@ -51,23 +43,18 @@ describe('component expectations', () => {
     sinon.stub(recoil, 'useRecoilValue').returns(fakeReports)
 
     const result = enzyme.shallow(<KeyResultSectionComments />)
+    const commentList = result.find('KeyResultSectionsCommentsList')
 
-    const comments = result.find('KeyResultSectionCommentsComment')
-
-    comments.map((comment, index) => {
-      const relatedReport = fakeReportsWithComment[index]
-
-      return expect(comment.key()).toEqual(relatedReport.id)
-    })
+    expect(commentList.prop('comments')).toEqual(fakeReportsWithComment)
   })
 
-  it('creates three skeleton comments while loading', () => {
+  it('creates a skeleton while loading', () => {
     sinon.stub(recoil, 'useRecoilValue')
 
     const result = enzyme.shallow(<KeyResultSectionComments />)
 
-    const comments = result.find('KeyResultSectionCommentsComment')
+    const skeleton = result.find('KeyResultSectionsCommentsSkeleton')
 
-    expect(comments.length).toEqual(3)
+    expect(skeleton.length).toEqual(1)
   })
 })
