@@ -25,6 +25,9 @@ const KeyResultListBodyColumnConfidenceLevel = ({
 }: KeyResultListBodyColumnConfidenceLevelProperties): ReactElement => {
   const currentConfidence = useRecoilValue(selectCurrentConfidence(id))
   const latestConfidenceReport = useRecoilValue(selectLatestConfidenceReport(id))
+  const lastUpdateDate = latestConfidenceReport?.createdAt
+    ? new Date(latestConfidenceReport.createdAt)
+    : undefined
 
   const isKeyResultLoaded = Boolean(id)
 
@@ -47,10 +50,7 @@ const KeyResultListBodyColumnConfidenceLevel = ({
             isLoaded={isKeyResultLoaded}
             pl={8}
           >
-            <LastUpdateText
-              date={latestConfidenceReport?.createdAt}
-              author={latestConfidenceReport?.user?.fullName}
-            />
+            <LastUpdateText date={lastUpdateDate} author={latestConfidenceReport?.user?.fullName} />
           </SkeletonText>
         )}
       </Flex>

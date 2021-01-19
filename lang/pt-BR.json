@@ -39,6 +39,10 @@
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
   },
+  "1Dc9iL": {
+    "defaultMessage": "Na última hora",
+    "description": "This label is displayed if the date difference is less than 1 hour"
+  },
   "1HBRw6": {
     "defaultMessage": "Nenhuma atualização recente",
     "description": "This label is displayed if we do not have any update date to display"
@@ -50,6 +54,10 @@
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
+  },
+  "2IBj4Z": {
+    "defaultMessage": "Agora há pouco",
+    "description": "This label is displayed if the date difference is less than 1 minute"
   },
   "3gAggt": {
     "defaultMessage": "Check-in",
@@ -78,6 +86,10 @@
   "6KET/Z": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
     "description": "The title of the header section in our company overview report"
+  },
+  "6aChVs": {
+    "defaultMessage": "Nesta semana",
+    "description": "This label is displayed if the date difference is 1 week or less"
   },
   "6vXlkc": {
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
@@ -150,6 +162,10 @@
   "IkA9uV": {
     "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
+  "JZJeBS": {
+    "defaultMessage": "Ontem",
+    "description": "This label is displayed if the last is yesterday"
   },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
@@ -235,10 +251,6 @@
     "defaultMessage": "Objetivo",
     "description": "The label text above the Objective section in our key result single page or drawer"
   },
-  "TPAtkS": {
-    "defaultMessage": "Ontem",
-    "description": "This label is displayed if the last update date is yesterday"
-  },
   "U2EgRG": {
     "defaultMessage": "Explorar | bud",
     "description": "The page title that is displayed in the browser tab"
@@ -323,6 +335,10 @@
     "defaultMessage": "Responsável",
     "description": "The label text above the Owner section in our key result single page or drawer"
   },
+  "iivI51": {
+    "defaultMessage": "Neste mês",
+    "description": "This label is displayed if the date difference is 1 month or less"
+  },
   "j/xH+H": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our key result drawer"
@@ -350,10 +366,6 @@
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
-  },
-  "lII4JM": {
-    "defaultMessage": "Hoje",
-    "description": "This label is displayed if the last update date is today"
   },
   "lQs6US": {
     "defaultMessage": "Comentários",
@@ -406,6 +418,10 @@
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
+  },
+  "th1Ney": {
+    "defaultMessage": "Hoje",
+    "description": "This label is displayed if the date is today"
   },
   "u/NI1D": {
     "defaultMessage": "Check-in",

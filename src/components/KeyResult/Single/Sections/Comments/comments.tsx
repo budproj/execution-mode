@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import KeyResultSectionCommentsComment from './Comment'
 
 import messages from './messages'
 
@@ -17,15 +18,19 @@ const reportsSelector = buildPartialSelector<KeyResult['reports']>('reports')
 const KeyResultSectionComments = ({ keyResultID }: KeyResultSectionCommentsProperties) => {
   const intl = useIntl()
   const reports = useRecoilValue(reportsSelector(keyResultID))
-  const reportsWithComment = reports?.filter((report) => report.comment)
-
-  console.log(reportsWithComment)
+  const comments = reports?.filter((report) => report.comment)
 
   return (
-    <Flex gridGap={2} direction="column">
+    <Flex gridGap={4} direction="column">
       <Text fontWeight={500} color="gray.600">
         {intl.formatMessage(messages.label)}
       </Text>
+
+      <Flex gridGap={8} direction="column">
+        {comments?.map(({ user, createdAt, comment }) => (
+          <KeyResultSectionCommentsComment user={user} createdAt={createdAt} comment={comment} />
+        ))}
+      </Flex>
     </Flex>
   )
 }
