@@ -1,9 +1,10 @@
-import { Box } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import React from 'react'
 
 import { ProgressReport } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
 
+import KeyResultSectionCommentsCommentBody from './Body'
 import KeyResultSectionCommentsCommentHead from './Head'
 
 export interface KeyResultSectionCommentsCommentProperties {
@@ -17,9 +18,10 @@ const KeyResultSectionCommentsComment = ({
   createdAt,
   comment,
 }: KeyResultSectionCommentsCommentProperties) => (
-  <Box borderWidth="1px" borderColor="gray.100" py="18px" px="25px">
+  <Flex borderWidth="1px" borderColor="gray.100" py="18px" px="25px" gridGap={4} direction="column">
     <KeyResultSectionCommentsCommentHead user={user} createdAt={createdAt} />
-  </Box>
+    <KeyResultSectionCommentsCommentBody comment={comment} />
+  </Flex>
 )
 
 export default KeyResultSectionCommentsComment
