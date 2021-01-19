@@ -1,5 +1,5 @@
 import { differenceInMinutes } from 'date-fns'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 
 import { FORMATTER_THRESHOLDS } from './constants'
 import useRelativeDateFallback from './useRelativeDateFallback'
@@ -45,7 +45,11 @@ const useRelativeDate = (
   initialDate?: Date,
   unit?: RelativeDateUnit,
   initialSnapshotDate: Date = new Date(),
-) => {
+): [
+  string | undefined,
+  Dispatch<SetStateAction<Date | undefined>>,
+  Dispatch<SetStateAction<Date>>,
+] => {
   const [date, setDate] = useState(initialDate)
   const [snapshotDate, setSnapshotDate] = useState(initialSnapshotDate)
 

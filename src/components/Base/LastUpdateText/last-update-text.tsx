@@ -14,15 +14,11 @@ export interface LastUpdateTextProperties {
 const LastUpdateText = ({ date, author }: LastUpdateTextProperties) => {
   const intl = useIntl()
   const [formattedRelativeDate] = useRelativeDate(date)
+  const lowercasedFormattedRelativeDate = formattedRelativeDate?.toLowerCase()
 
-  const currentDate = new Date()
-  const updateDate = new Date(date ?? currentDate)
-
-  const hour = intl.formatTime(updateDate)
   const message = formattedRelativeDate
     ? intl.formatMessage(messages.lastUpdateAt, {
-        day: formattedRelativeDate,
-        hour,
+        date: lowercasedFormattedRelativeDate,
         author,
       })
     : intl.formatMessage(messages.emptyStateMessage)

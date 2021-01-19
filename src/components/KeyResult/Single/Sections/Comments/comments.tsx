@@ -27,8 +27,13 @@ const KeyResultSectionComments = ({ keyResultID }: KeyResultSectionCommentsPrope
       </Text>
 
       <Flex gridGap={8} direction="column">
-        {comments?.map(({ user, createdAt, comment }) => (
-          <KeyResultSectionCommentsComment user={user} createdAt={createdAt} comment={comment} />
+        {comments?.map(({ id, user, createdAt, comment }) => (
+          <KeyResultSectionCommentsComment
+            key={id}
+            user={user}
+            createdAt={createdAt}
+            comment={comment}
+          />
         ))}
       </Flex>
     </Flex>

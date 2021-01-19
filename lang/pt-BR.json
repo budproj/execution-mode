@@ -63,10 +63,6 @@
     "defaultMessage": "Check-in",
     "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
   },
-  "3x3lDo": {
-    "defaultMessage": "Última atualização {day} as {hour} por {author}",
-    "description": "This message displays the latest report status for a given component"
-  },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -94,6 +90,10 @@
   "6vXlkc": {
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
     "description": "The page description that is displayed in Google and screen readers"
+  },
+  "8G2Cwy": {
+    "defaultMessage": "Última atualização {date} por {author}",
+    "description": "This message displays the latest report status for a given component"
   },
   "8LTdv4": {
     "defaultMessage": "Objetivo",
