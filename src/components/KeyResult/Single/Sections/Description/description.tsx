@@ -18,7 +18,7 @@ const KeyResultSectionDescription = ({ keyResultID }: KeyResultSectionDescriptio
   const intl = useIntl()
   const description = useRecoilValue(descriptionSelector(keyResultID))
 
-  const isDescriptionLoaded = typeof description === 'undefined'
+  const isDescriptionLoaded = typeof description !== 'undefined'
 
   return (
     <Flex gridGap={2} direction="column">
