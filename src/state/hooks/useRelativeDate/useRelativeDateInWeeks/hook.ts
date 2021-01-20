@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-const useRelativeDateInWeeks = (date: Date, snapshotDate: Date = new Date()) => {
+const useRelativeDateInWeeks = (date: Date, snapshotDate: Date) => {
   const intl = useIntl()
 
   const weeksDifference = differenceInWeeks(date, snapshotDate)

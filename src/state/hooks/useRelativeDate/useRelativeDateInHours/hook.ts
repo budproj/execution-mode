@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-const useRelativeDateInHours = (date: Date, snapshotDate: Date = new Date()) => {
+const useRelativeDateInHours = (date: Date, snapshotDate: Date) => {
   const intl = useIntl()
 
   const hoursDifference = differenceInHours(date, snapshotDate)

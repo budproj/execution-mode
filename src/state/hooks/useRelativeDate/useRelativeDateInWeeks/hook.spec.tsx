@@ -11,7 +11,8 @@ interface TestComponentProperties {
 }
 
 const TestComponent = ({ fakeDate }: TestComponentProperties) => {
-  const relativeDate = useRelativeDateInWeeks(fakeDate)
+  const currentDate = new Date()
+  const relativeDate = useRelativeDateInWeeks(fakeDate, currentDate)
 
   return <p>{relativeDate}</p>
 }

@@ -1,6 +1,6 @@
 import { FormatDateOptions, useIntl } from 'react-intl'
 
-const useRelativeDateFallback = (date: Date) => {
+const useRelativeDateFallback = (date: Date, _snapshotDate: Date) => {
   const intl = useIntl()
   const options: FormatDateOptions = {
     day: 'numeric',

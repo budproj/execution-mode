@@ -8,7 +8,8 @@ interface TestComponentProperties {
 }
 
 const TestComponent = ({ fakeDate }: TestComponentProperties) => {
-  const relativeDate = useRelativeDateFallback(fakeDate)
+  const currentDate = new Date()
+  const relativeDate = useRelativeDateFallback(fakeDate, currentDate)
 
   return <p>{relativeDate}</p>
 }

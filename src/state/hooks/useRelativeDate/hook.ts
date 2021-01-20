@@ -21,14 +21,14 @@ const formatters = {
 }
 
 const selectFormatterBasedOnDifference = (date: Date, snapshotDate: Date) => {
-  const secondsDifference = differenceInMinutes(snapshotDate, date)
+  const minutesDifference = differenceInMinutes(date, snapshotDate)
   let formatter = formatters.fallback
 
-  if (secondsDifference < FORMATTER_THRESHOLDS.MONTH) formatter = formatters.month
-  if (secondsDifference < FORMATTER_THRESHOLDS.WEEK) formatter = formatters.week
-  if (secondsDifference < FORMATTER_THRESHOLDS.DAY) formatter = formatters.day
-  if (secondsDifference < FORMATTER_THRESHOLDS.HOUR) formatter = formatters.hour
-  if (secondsDifference < FORMATTER_THRESHOLDS.MINUTE) formatter = formatters.minute
+  if (minutesDifference > FORMATTER_THRESHOLDS.MONTH) formatter = formatters.month
+  if (minutesDifference > FORMATTER_THRESHOLDS.WEEK) formatter = formatters.week
+  if (minutesDifference > FORMATTER_THRESHOLDS.DAY) formatter = formatters.day
+  if (minutesDifference > FORMATTER_THRESHOLDS.HOUR) formatter = formatters.hour
+  if (minutesDifference > FORMATTER_THRESHOLDS.MINUTE) formatter = formatters.minute
 
   return formatter
 }
@@ -44,12 +44,14 @@ const selectFormatter = (date?: Date, snapshotDate?: Date, unit?: RelativeDateUn
 const useRelativeDate = (
   initialDate?: Date,
   unit?: RelativeDateUnit,
-  initialSnapshotDate: Date = new Date(),
+  initialSnapshot?: Date,
 ): [
   string | undefined,
   Dispatch<SetStateAction<Date | undefined>>,
   Dispatch<SetStateAction<Date>>,
 ] => {
+  const initialSnapshotDate = initialSnapshot ?? new Date()
+
   const [date, setDate] = useState(initialDate)
   const [snapshotDate, setSnapshotDate] = useState(initialSnapshotDate)
 

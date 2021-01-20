@@ -1,1 +1,1 @@
-export const MINUTES_THRESHOLD = 1440
+export const MINUTES_THRESHOLD = -1440
