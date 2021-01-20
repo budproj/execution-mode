@@ -47,6 +47,7 @@ const useRelativeDate = (
   initialSnapshot?: Date,
 ): [
   string | undefined,
+  Date | undefined,
   Dispatch<SetStateAction<Date | undefined>>,
   Dispatch<SetStateAction<Date>>,
 ] => {
@@ -58,7 +59,7 @@ const useRelativeDate = (
   const formatDate = selectFormatter(date, snapshotDate, unit)
   const formattedDate = formatDate && date ? formatDate(date, snapshotDate) : undefined
 
-  return [formattedDate, setDate, setSnapshotDate]
+  return [formattedDate, date, setDate, setSnapshotDate]
 }
 
 export default useRelativeDate
