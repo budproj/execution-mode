@@ -4,7 +4,7 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import Objective from './objective'
+import KeyResultSectionObjective from './objective'
 
 describe('component expections', () => {
   afterEach(() => sinon.restore())
@@ -13,7 +13,7 @@ describe('component expections', () => {
     const fakeObjective = faker.random.word()
     sinon.stub(recoil, 'useRecoilValue').returns(fakeObjective)
 
-    const result = enzyme.shallow(<Objective keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<KeyResultSectionObjective keyResultID={faker.random.word()} />)
 
     const skeleton = result.find('Skeleton')
 
@@ -22,7 +22,7 @@ describe('component expections', () => {
 
   it('considers as not loaded if no objective is provided', () => {
     sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
-    const result = enzyme.shallow(<Objective keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<KeyResultSectionObjective keyResultID={faker.random.word()} />)
 
     const skeleton = result.find('Skeleton')
 

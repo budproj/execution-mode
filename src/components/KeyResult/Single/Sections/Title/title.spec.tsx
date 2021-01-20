@@ -5,7 +5,7 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import Title from './title'
+import KeyResultSectionTitle from './title'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
@@ -20,7 +20,7 @@ describe('component expectations', () => {
     }
     sinon.stub(recoil, 'useRecoilValue').returns(fakePolicies)
 
-    const result = enzyme.shallow(<Title keyResultID={fakeID} />)
+    const result = enzyme.shallow(<KeyResultSectionTitle keyResultID={fakeID} />)
 
     const textComponent = result.find('Text')
 

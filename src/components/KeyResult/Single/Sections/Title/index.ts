@@ -1,3 +1,3 @@
-import KeyResultSingleTitle from './title'
+import KeyResultSectionTitle from './title'
 
-export default KeyResultSingleTitle
+export default KeyResultSectionTitle

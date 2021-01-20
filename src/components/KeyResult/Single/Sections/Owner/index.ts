@@ -1,3 +1,3 @@
-import KeyResultSingleOwner from './owner'
+import KeyResultSectionOwner from './owner'
 
-export default KeyResultSingleOwner
+export default KeyResultSectionOwner

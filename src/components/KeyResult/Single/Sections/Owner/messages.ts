@@ -1,11 +1,11 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSingleOwnerMessage = 'label'
+type KeyResultsSectionOwnerMessage = 'label'
 
-export default defineMessages<KeyResultsSingleOwnerMessage>({
+export default defineMessages<KeyResultsSectionOwnerMessage>({
   label: {
-    defaultMessage: 'Dono',
-    id: 'm7FoY9',
+    defaultMessage: 'Responsável',
+    id: 'iJq7du',
     description: 'The label text above the Owner section in our key result single page or drawer',
   },
 })

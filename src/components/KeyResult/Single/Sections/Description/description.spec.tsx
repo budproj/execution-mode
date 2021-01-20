@@ -4,7 +4,7 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import Description from './description'
+import KeyResultSectionDescription from './description'
 
 describe('component expections', () => {
   afterEach(() => sinon.restore())
@@ -13,7 +13,7 @@ describe('component expections', () => {
     const fakeDescription = faker.random.word()
     sinon.stub(recoil, 'useRecoilValue').returns(fakeDescription)
 
-    const result = enzyme.shallow(<Description keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<KeyResultSectionDescription keyResultID={faker.random.word()} />)
 
     const skeleton = result.find('SkeletonText')
 
@@ -24,7 +24,7 @@ describe('component expections', () => {
     const fakeDescription = ''
     sinon.stub(recoil, 'useRecoilValue').returns(fakeDescription)
 
-    const result = enzyme.shallow(<Description keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<KeyResultSectionDescription keyResultID={faker.random.word()} />)
 
     const skeleton = result.find('SkeletonText')
 
@@ -33,7 +33,7 @@ describe('component expections', () => {
 
   it('considers as not loaded if no description is provided', () => {
     sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
-    const result = enzyme.shallow(<Description keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<KeyResultSectionDescription keyResultID={faker.random.word()} />)
 
     const skeleton = result.find('SkeletonText')
 

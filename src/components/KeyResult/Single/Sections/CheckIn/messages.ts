@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSingleCheckInMessage = 'label'
+type KeyResultsSectionCheckInMessage = 'label'
 
-export default defineMessages<KeyResultsSingleCheckInMessage>({
+export default defineMessages<KeyResultsSectionCheckInMessage>({
   label: {
     defaultMessage: 'Check-in',
     id: 'u/NI1D',

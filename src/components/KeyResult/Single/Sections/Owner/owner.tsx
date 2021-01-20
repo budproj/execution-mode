@@ -9,13 +9,13 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
-export interface KeyResultSingleOwnerProperties {
+export interface KeyResultSectionOwnerProperties {
   keyResultID?: KeyResult['id']
 }
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 
-const Owner = ({ keyResultID }: KeyResultSingleOwnerProperties) => {
+const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties) => {
   const intl = useIntl()
   const owner = useRecoilValue(ownerSelector(keyResultID))
 
@@ -38,4 +38,4 @@ const Owner = ({ keyResultID }: KeyResultSingleOwnerProperties) => {
   )
 }
 
-export default Owner
+export default KeyResultSectionOwner

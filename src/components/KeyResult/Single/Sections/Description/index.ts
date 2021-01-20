@@ -1,3 +1,3 @@
-import KeyResultSingleDescription from './description'
+import KeyResultSectionDescription from './description'
 
-export default KeyResultSingleDescription
+export default KeyResultSectionDescription

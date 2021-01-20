@@ -10,14 +10,14 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import queries from './queries.gql'
 
-export interface KeyResultSingleTitleProperties {
+export interface KeyResultSectionTitleProperties {
   keyResultID?: KeyResult['id']
 }
 
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
 const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
 
-const Title = ({ keyResultID }: KeyResultSingleTitleProperties) => {
+const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties) => {
   const [title, setTitle] = useRecoilState(titleSelector(keyResultID))
   const policies = useRecoilValue(policiesSelector(keyResultID))
   const [updateRemoteKeyResultTitle] = useMutation(queries.UPDATE_KEY_RESULT)
@@ -66,4 +66,4 @@ const Title = ({ keyResultID }: KeyResultSingleTitleProperties) => {
   )
 }
 
-export default Title
+export default KeyResultSectionTitle

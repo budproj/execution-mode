@@ -1,7 +1,8 @@
 import { Text } from '@chakra-ui/react'
-import { differenceInDays } from 'date-fns'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
+
+import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
 import messages from './messages'
 
@@ -12,34 +13,19 @@ export interface LastUpdateTextProperties {
 
 const LastUpdateText = ({ date, author }: LastUpdateTextProperties) => {
   const intl = useIntl()
-  const currentDate = new Date()
-  const updateDate = new Date(date ?? currentDate)
-  const daysDifference = differenceInDays(updateDate, currentDate)
-  const formatDay = () => {
-    const formatters = {
-      today: () => intl.formatMessage(messages.todayLabel).toLowerCase(),
-      yesterday: () => intl.formatMessage(messages.yesterdayLabel).toLowerCase(),
-      thisWeek: () => intl.formatRelativeTime(daysDifference, 'day'),
-      longTimeAgo: () => intl.formatDate(updateDate),
-    }
+  const [formattedRelativeDate, previousDate, setDate] = useRelativeDate(date)
+  const lowercasedFormattedRelativeDate = formattedRelativeDate?.toLowerCase()
 
-    let formatter = formatters.longTimeAgo
-    if (daysDifference === 0) formatter = formatters.today
-    if (daysDifference === -1) formatter = formatters.yesterday
-    if (daysDifference < -1 && daysDifference > -8) formatter = formatters.thisWeek
-
-    return formatter()
-  }
-
-  const day = formatDay()
-  const hour = intl.formatTime(updateDate)
-  const message = date
+  const message = formattedRelativeDate
     ? intl.formatMessage(messages.lastUpdateAt, {
-        day,
-        hour,
+        date: lowercasedFormattedRelativeDate,
         author,
       })
     : intl.formatMessage(messages.emptyStateMessage)
+
+  useEffect(() => {
+    if (previousDate !== date) setDate(date)
+  }, [previousDate, date, setDate])
 
   return (
     <Text fontSize="13px" color="gray.300">

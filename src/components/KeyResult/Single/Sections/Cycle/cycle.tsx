@@ -10,13 +10,13 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 import DateWithTitle from './date-with-title'
 import messages from './messages'
 
-export interface KeyResultSingleCycleProperties {
+export interface KeyResultSectionCycleProperties {
   keyResultID?: KeyResult['id']
 }
 
 const cycleSelector = buildPartialSelector<KeyResult['objective']['cycle']>('objective.cycle')
 
-const Cycle = ({ keyResultID }: KeyResultSingleCycleProperties) => {
+const KeyResultSectionCycle = ({ keyResultID }: KeyResultSectionCycleProperties) => {
   const intl = useIntl()
   const cycle = useRecoilValue(cycleSelector(keyResultID))
 
@@ -54,4 +54,4 @@ const Cycle = ({ keyResultID }: KeyResultSingleCycleProperties) => {
   )
 }
 
-export default Cycle
+export default KeyResultSectionCycle

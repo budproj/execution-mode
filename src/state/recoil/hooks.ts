@@ -1,6 +1,7 @@
 import deepmerge from 'deepmerge'
 import { RecoilState, useRecoilCallback } from 'recoil'
 
+import { overwriteMerge } from 'lib/deepmerge/merge-strategies'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
@@ -45,5 +46,3 @@ export const buildFamilyLoader = <E extends RecoilEntity>(
     ? data.map((singleData) => loadOnRecoil(singleData))
     : loadOnRecoil(data)
 }
-
-const overwriteMerge = (_: any[], sourceArray: any[]) => sourceArray

@@ -1,104 +1,65 @@
-import { format, subDays } from 'date-fns'
 import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
-import sinon from 'sinon'
+import sinon, { SinonSpy } from 'sinon'
+
+import * as useRelativeDate from 'src/state/hooks/useRelativeDate'
 
 import LastUpdateText from './last-update-text'
 
 describe('date conditional formatting', () => {
   afterEach(() => sinon.restore())
 
-  it('displays the correct date when it is the same as today', () => {
-    const fakeDate = faker.date.past()
-    const clock = sinon.useFakeTimers()
+  it('displays the correct relative date', () => {
+    const fakeFormattedDate = faker.random.word()
+    sinon
+      .stub(useRelativeDate, 'default')
+      .returns([fakeFormattedDate, undefined, sinon.fake()] as any)
 
-    clock.setSystemTime(fakeDate)
-
-    const result = enzyme.shallow(<LastUpdateText date={fakeDate} />)
-
-    const text = result.find('Text')
-
-    expect(text.text()).toContain('hoje')
-
-    clock.restore()
-  })
-
-  it('displays the correct date when it is yesterday', () => {
-    const fakeDate = faker.date.past()
-    const fakeYesterdayDate = subDays(fakeDate, 1)
-    const clock = sinon.useFakeTimers()
-
-    clock.setSystemTime(fakeDate)
-
-    const result = enzyme.shallow(<LastUpdateText date={fakeYesterdayDate} />)
+    const result = enzyme.shallow(<LastUpdateText date={faker.date.past()} />)
 
     const text = result.find('Text')
 
-    expect(text.text()).toContain('ontem')
-
-    clock.restore()
-  })
-
-  it('displays the correct date when it is in this week', () => {
-    const fakeDate = faker.date.past()
-    const daysToSubtract = faker.random.number({ min: 2, max: 7 })
-    const fakeThisWeekDate = subDays(fakeDate, daysToSubtract)
-    const clock = sinon.useFakeTimers()
-
-    clock.setSystemTime(fakeDate)
-
-    const result = enzyme.shallow(<LastUpdateText date={fakeThisWeekDate} />)
-
-    const text = result.find('Text')
-
-    expect(text.text()).toContain(`${daysToSubtract} days ago`)
-
-    clock.restore()
-  })
-
-  it('displays the correct date when it is a long time ago', () => {
-    const fakeDate = faker.date.past()
-    const daysToSubtract = faker.random.number({ min: 8 })
-    const fakeLongTimeAgoDate = subDays(fakeDate, daysToSubtract)
-    const clock = sinon.useFakeTimers()
-
-    clock.setSystemTime(fakeDate)
-
-    const result = enzyme.shallow(<LastUpdateText date={fakeLongTimeAgoDate} />)
-
-    const text = result.find('Text')
-
-    expect(text.text()).toContain(format(fakeLongTimeAgoDate, 'M/d/yyyy'))
-
-    clock.restore()
-  })
-
-  it('displays the correct hour', () => {
-    const fakeDate = faker.date.past()
-    const daysToSubtract = faker.random.number({ min: 8 })
-    const fakeLongTimeAgoDate = subDays(fakeDate, daysToSubtract)
-    const clock = sinon.useFakeTimers()
-
-    clock.setSystemTime(fakeDate)
-
-    const result = enzyme.shallow(<LastUpdateText date={fakeLongTimeAgoDate} />)
-
-    const text = result.find('Text')
-
-    expect(text.text()).toContain(format(fakeLongTimeAgoDate, 'h:mm'))
-
-    clock.restore()
+    expect(text.text()).toEqual(`Última atualização ${fakeFormattedDate.toLowerCase()} por `)
   })
 
   it('displays the correct author', () => {
     const fakeAuthor = faker.random.word()
+    sinon
+      .mock(useRelativeDate)
+      .expects('default')
+      .atLeast(1)
+      .returns([faker.random.word(), undefined, sinon.fake()])
 
     const result = enzyme.shallow(<LastUpdateText author={fakeAuthor} date={new Date()} />)
 
     const text = result.find('Text')
 
     expect(text.text()).toContain(fakeAuthor)
+  })
+
+  it('updates the date upon render if the date prop changed', () => {
+    const originalRelateDateHook = useRelativeDate.default
+    const buildMockedRelativeDateHook = (spy: SinonSpy) => (initialDate?: Date) => {
+      const [formattedRelativeDate, date] = originalRelateDateHook(initialDate)
+
+      return [formattedRelativeDate, date, spy]
+    }
+
+    const initialDate = faker.date.past()
+    const newDate = faker.date.past()
+    const spy = sinon.spy()
+    sinon.stub(useRelativeDate, 'default').callsFake(buildMockedRelativeDateHook(spy) as any)
+
+    const result = enzyme.shallow(<LastUpdateText date={initialDate} />)
+    result.setProps({
+      date: newDate,
+    })
+    result.update()
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newDate)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 })
 

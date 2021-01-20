@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSingleCycleMessage = 'primaryLabel' | 'startLabel' | 'endLabel' | 'nameLabel'
+type KeyResultsSectionCycleMessage = 'primaryLabel' | 'startLabel' | 'endLabel' | 'nameLabel'
 
-export default defineMessages<KeyResultsSingleCycleMessage>({
+export default defineMessages<KeyResultsSectionCycleMessage>({
   primaryLabel: {
     defaultMessage: 'Ciclo',
     id: 'z1FXkV',

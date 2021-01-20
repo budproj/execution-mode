@@ -41,8 +41,8 @@ export default defineMessages<KeyResultListHeadMessage>({
   },
 
   listHeadOwner: {
-    defaultMessage: 'Dono',
-    id: 'ycpCyI',
+    defaultMessage: 'Responsável',
+    id: 'u7Yaxx',
     description: 'The text of the table head related to the Owner column',
   },
 

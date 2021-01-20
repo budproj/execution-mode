@@ -4,7 +4,7 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import Owner from './owner'
+import KeyResultSectionOwner from './owner'
 
 describe('component expections', () => {
   afterEach(() => sinon.restore())
@@ -13,7 +13,7 @@ describe('component expections', () => {
     const fakeOkr = faker.random.word()
     sinon.stub(recoil, 'useRecoilValue').returns(fakeOkr)
 
-    const result = enzyme.shallow(<Owner keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<KeyResultSectionOwner keyResultID={faker.random.word()} />)
 
     const skeleton = result.find('Skeleton')
 
@@ -22,7 +22,7 @@ describe('component expections', () => {
 
   it('considers as not loaded if no owner is provided', () => {
     sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
-    const result = enzyme.shallow(<Owner keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<KeyResultSectionOwner keyResultID={faker.random.word()} />)
 
     const skeleton = result.find('Skeleton')
 

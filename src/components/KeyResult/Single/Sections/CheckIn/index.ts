@@ -1,3 +1,3 @@
-import KeyResultSingleCheckIn from './check-in'
+import KeyResultSectionCheckIn from './check-in'
 
-export default KeyResultSingleCheckIn
+export default KeyResultSectionCheckIn

@@ -1,3 +1,3 @@
-import KeyResultSingleCycle from './cycle'
+import KeyResultSectionCycle from './cycle'
 
-export default KeyResultSingleCycle
+export default KeyResultSectionCycle

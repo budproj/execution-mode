@@ -8,18 +8,17 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
-export interface KeyResultSingleDescriptionProperties {
+export interface KeyResultSectionDescriptionProperties {
   keyResultID?: KeyResult['id']
 }
 
 const descriptionSelector = buildPartialSelector<KeyResult['description']>('description')
 
-const Description = ({ keyResultID }: KeyResultSingleDescriptionProperties) => {
+const KeyResultSectionDescription = ({ keyResultID }: KeyResultSectionDescriptionProperties) => {
   const intl = useIntl()
   const description = useRecoilValue(descriptionSelector(keyResultID))
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const isDescriptionLoaded = Boolean(description || description === '')
+  const isDescriptionLoaded = typeof description !== 'undefined'
 
   return (
     <Flex gridGap={2} direction="column">
@@ -35,4 +34,4 @@ const Description = ({ keyResultID }: KeyResultSingleDescriptionProperties) => {
   )
 }
 
-export default Description
+export default KeyResultSectionDescription

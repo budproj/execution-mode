@@ -39,6 +39,10 @@
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
   },
+  "1Dc9iL": {
+    "defaultMessage": "Na última hora",
+    "description": "This label is displayed if the date difference is less than 1 hour"
+  },
   "1HBRw6": {
     "defaultMessage": "Nenhuma atualização recente",
     "description": "This label is displayed if we do not have any update date to display"
@@ -51,13 +55,13 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
+  "2IBj4Z": {
+    "defaultMessage": "Agora há pouco",
+    "description": "This label is displayed if the date difference is less than 1 minute"
+  },
   "3gAggt": {
     "defaultMessage": "Check-in",
     "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
-  },
-  "3x3lDo": {
-    "defaultMessage": "Última atualização {day} as {hour} por {author}",
-    "description": "This message displays the latest report status for a given component"
   },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
@@ -79,9 +83,17 @@
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
     "description": "The title of the header section in our company overview report"
   },
+  "6aChVs": {
+    "defaultMessage": "Nesta semana",
+    "description": "This label is displayed if the date difference is 1 week or less"
+  },
   "6vXlkc": {
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
     "description": "The page description that is displayed in Google and screen readers"
+  },
+  "8G2Cwy": {
+    "defaultMessage": "Última atualização {date} por {author}",
+    "description": "This message displays the latest report status for a given component"
   },
   "8LTdv4": {
     "defaultMessage": "Objetivo",
@@ -150,6 +162,10 @@
   "IkA9uV": {
     "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
+  "JZJeBS": {
+    "defaultMessage": "Ontem",
+    "description": "This label is displayed if the last is yesterday"
   },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
@@ -235,10 +251,6 @@
     "defaultMessage": "Objetivo",
     "description": "The label text above the Objective section in our key result single page or drawer"
   },
-  "TPAtkS": {
-    "defaultMessage": "Ontem",
-    "description": "This label is displayed if the last update date is yesterday"
-  },
   "U2EgRG": {
     "defaultMessage": "Explorar | bud",
     "description": "The page title that is displayed in the browser tab"
@@ -319,6 +331,14 @@
     "defaultMessage": "Clique aqui para acessar nossa página de suporte",
     "description": "SupportButton icon title that links to support page. It is displayed when the user hovers the icon itself"
   },
+  "iJq7du": {
+    "defaultMessage": "Responsável",
+    "description": "The label text above the Owner section in our key result single page or drawer"
+  },
+  "iivI51": {
+    "defaultMessage": "Neste mês",
+    "description": "This label is displayed if the date difference is 1 month or less"
+  },
   "j/xH+H": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our key result drawer"
@@ -347,9 +367,9 @@
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
   },
-  "lII4JM": {
-    "defaultMessage": "Hoje",
-    "description": "This label is displayed if the last update date is today"
+  "lQs6US": {
+    "defaultMessage": "Comentários",
+    "description": "The label text above the Comments section in our key result single page or drawer"
   },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
@@ -358,10 +378,6 @@
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",
     "description": "This is the label text that is displayed as a button as soon the check in form is displayed"
-  },
-  "m7FoY9": {
-    "defaultMessage": "Dono",
-    "description": "The label text above the Owner section in our key result single page or drawer"
   },
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
@@ -383,6 +399,10 @@
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
+  "oeB7dG": {
+    "defaultMessage": "Esse resultado-chave não tem nenhum comentário",
+    "description": "The label message that is displayed below our team at work image in our empty state"
+  },
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",
     "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
@@ -403,9 +423,17 @@
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
   },
+  "th1Ney": {
+    "defaultMessage": "Hoje",
+    "description": "This label is displayed if the date is today"
+  },
   "u/NI1D": {
     "defaultMessage": "Check-in",
     "description": "The label text above the check-in section in our key result single page or drawer"
+  },
+  "u7Yaxx": {
+    "defaultMessage": "Responsável",
+    "description": "The text of the table head related to the Owner column"
   },
   "uXQE/x": {
     "defaultMessage": "Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.",
@@ -426,10 +454,6 @@
   "xRyM8t": {
     "defaultMessage": "Ícone de um ponto de interrogação. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
-  },
-  "ycpCyI": {
-    "defaultMessage": "Dono",
-    "description": "The text of the table head related to the Owner column"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",
