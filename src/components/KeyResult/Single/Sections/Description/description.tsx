@@ -18,8 +18,7 @@ const KeyResultSectionDescription = ({ keyResultID }: KeyResultSectionDescriptio
   const intl = useIntl()
   const description = useRecoilValue(descriptionSelector(keyResultID))
 
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const isDescriptionLoaded = Boolean(description || description === '')
+  const isDescriptionLoaded = typeof description === 'undefined'
 
   return (
     <Flex gridGap={2} direction="column">

@@ -1,6 +1,7 @@
 import deepmerge from 'deepmerge'
 import { DefaultValue, selectorFamily } from 'recoil'
 
+import { overwriteMerge } from 'lib/deepmerge'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { PREFIX } from 'src/state/recoil/intl/constants'
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
@@ -17,7 +18,9 @@ export const updateKeyResult = (id?: KeyResult['id']) => (
 
   const atom = keyResultAtomFamily(id)
   const currentValue = get(atom) ?? {}
-  const newValue = deepmerge(currentValue, newKeyResult as Partial<KeyResult>)
+  const newValue = deepmerge(currentValue, newKeyResult as Partial<KeyResult>, {
+    arrayMerge: overwriteMerge,
+  })
 
   set(atom, newValue)
 }

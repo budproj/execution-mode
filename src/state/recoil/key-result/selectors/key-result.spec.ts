@@ -109,4 +109,23 @@ describe('setter', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('overwrites already existing arrays', () => {
+    const previousValue = {
+      foo: [faker.random.word()],
+    }
+    const newValue = {
+      foo: [faker.random.word(), faker.random.word()],
+    }
+    const stub = sinon.stub().returns(previousValue)
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+    const selector = selectors.updateKeyResult(fakeID)
+
+    selector({ get: stub, set: spy } as any, newValue as any)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), newValue)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
 })

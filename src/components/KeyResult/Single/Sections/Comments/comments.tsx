@@ -25,7 +25,7 @@ const KeyResultSectionComments = ({
   const reports = useRecoilValue(reportsSelector(keyResultID))
 
   const comments = reports?.filter((report) => report.comment)
-  const isLoaded = typeof comments !== 'undefined'
+  const isLoaded = typeof reports !== 'undefined'
 
   return (
     <Flex gridGap={4} direction="column">
