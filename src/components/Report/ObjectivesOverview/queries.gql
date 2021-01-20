@@ -1,6 +1,8 @@
 query GET_COMPANY_OBJECTIVES {
   teams(onlyCompanies: true) {
     id
+    name
+    gender
     objectives {
       id
       title

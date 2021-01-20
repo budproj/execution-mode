@@ -23,8 +23,8 @@ export default defineMessages<KeyResultListHeadMessage>({
   },
 
   listHeadConfidenceLevel: {
-    defaultMessage: 'Nivel de confiança',
-    id: 'fbqKln',
+    defaultMessage: 'Nível de confiança',
+    id: 'UoPQ4X',
     description: 'The text of the table head related to the Confidence Level column',
   },
 
