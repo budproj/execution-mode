@@ -263,9 +263,17 @@
     "defaultMessage": "Este time é uma empresa",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
+  "UoPQ4X": {
+    "defaultMessage": "Nível de confiança",
+    "description": "The text of the table head related to the Confidence Level column"
+  },
   "VNHZWm": {
     "defaultMessage": "Período",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
+  },
+  "VhgGax": {
+    "defaultMessage": "Como estão as prioridades d{gender, select, MALE {o} FEMALE {a} other {o}} {team}?",
+    "description": "The title of the header section in our objectives overview report"
   },
   "XNkzYe": {
     "defaultMessage": "Um ícone de pin de localização",
@@ -315,10 +323,6 @@
     "defaultMessage": "Um círculo verde, indicando que a confiança está alta",
     "description": "A brief explanation for screen readers regarding the green status circle"
   },
-  "fbqKln": {
-    "defaultMessage": "Nivel de confiança",
-    "description": "The text of the table head related to the Confidence Level column"
-  },
   "fd6kjy": {
     "defaultMessage": "Resultado-chave",
     "description": "The text of the table head related to the KeyResult column"
@@ -354,10 +358,6 @@
   "kawRcN": {
     "defaultMessage": "Cancelar",
     "description": "This message is displayed in the \"CANCEL\" button in the checkin form"
-  },
-  "ktId0y": {
-    "defaultMessage": "Como estão as prioridades?",
-    "description": "The title of the header section in our objectives overview report"
   },
   "kynYpx": {
     "defaultMessage": "Meus Resultados-Chave",

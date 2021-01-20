@@ -26,7 +26,7 @@ const ObjectivesOverview = () => {
 
   return (
     <Overview>
-      <ObjectivesOverviewHeader />
+      <ObjectivesOverviewHeader teamID={company?.id} />
       <ObjectivesOverviewBody objectives={objectives} />
     </Overview>
   )
