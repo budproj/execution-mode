@@ -11,6 +11,7 @@ import {
   selectCurrentProgress,
   selectCurrentConfidence,
   selectLatestConfidenceReport,
+  selectLatestReport,
 } from 'src/state/recoil/key-result/selectors'
 
 import {
@@ -31,6 +32,7 @@ export interface CheckInFormProperties {
   afterSubmit?: (
     newProgress?: ProgressReport['valueNew'],
     newConfidence?: ConfidenceReport['valueNew'],
+    comment?: ProgressReport['comment'],
   ) => void
   onCancel?: () => void
 }
@@ -52,6 +54,7 @@ const CheckInForm = ({
 }: CheckInFormProperties) => {
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
+  const setLatestReport = useSetRecoilState(selectLatestReport(keyResultID))
   const setConfidenceReport = useSetRecoilState(selectLatestConfidenceReport(keyResultID))
   const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
   const [createCheckIn, data] = useMutation(queries.CREATE_CHECK_IN)
@@ -73,6 +76,10 @@ const CheckInForm = ({
     if (values.confidence && values.confidence !== confidence) {
       setConfidence(values.confidence)
       setConfidenceReport({ valueNew: values.confidence })
+    }
+
+    if (values.comment) {
+      setLatestReport({ comment: values.comment })
     }
 
     setCommentEnabled(false)
@@ -113,7 +120,7 @@ const CheckInForm = ({
 
       await dispatchRemoteUpdate(newProgress, newConfidence, comment)
 
-      if (afterSubmit) afterSubmit(newProgress, newConfidence)
+      if (afterSubmit) afterSubmit(newProgress, newConfidence, comment)
 
       syncRecoilState(values)
       refreshFields(values, actions)

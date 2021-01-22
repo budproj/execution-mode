@@ -24,6 +24,10 @@ const selectCommentEnabledMatcher = sinon.match((selector: recoil.RecoilState<un
   return selector.key.includes('COMMENT_ENABLED')
 })
 
+const selectLatestReportMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('LATEST_REPORT')
+})
+
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
@@ -191,6 +195,31 @@ describe('component interations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
+  it('updates the latest report state upon form submission', async () => {
+    const fakeID = faker.random.word()
+    const fakeComment = faker.lorem.paragraph()
+    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
+    const spy = sinon.spy()
+
+    setStateStub.withArgs(selectLatestReportMatcher).returns(spy)
+    setStateStub.returns(sinon.fake())
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      comment: fakeComment,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({ comment: fakeComment })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
   it('closes the comment input upon form submission', async () => {
     const fakeID = faker.random.word()
     const fakeConfidence = faker.random.number()
@@ -291,6 +320,7 @@ describe('component interations', () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const fakeConfidence = faker.random.number()
+    const fakeComment = faker.lorem.paragraph()
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     const spy = sinon.spy()
 
@@ -308,10 +338,15 @@ describe('component interations', () => {
     await formikComponent.simulate('submit', {
       newProgress: fakeProgress,
       confidence: fakeConfidence,
+      comment: fakeComment,
     })
-
     await Promise.resolve()
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeProgress, fakeConfidence)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(
+      fakeProgress,
+      fakeConfidence,
+      fakeComment,
+    )
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -509,92 +544,164 @@ describe('corner cases', () => {
     expect(spy.calledOnce).toEqual(false)
   })
 
-  it('only triggers the provided afterSubmit callback if any value has changed upon submission', () => {
+  it('triggers the provided afterSubmit callback if the progress has changed upon submission', async () => {
     const fakeID = faker.random.word()
-    const fakeProgress = faker.random.number()
-    const fakeConfidence = faker.random.number()
+    const fakeOldProgress = faker.random.number()
+    const fakeNewProgress = faker.random.number()
 
     const spy = sinon.spy()
 
     const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
-    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
-
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeOldProgress, sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
+
     sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
 
     const formikComponent = result.find('Formik')
-    formikComponent.simulate('submit', {
-      newProgress: fakeProgress,
-      confidence: fakeConfidence,
-    })
 
-    expect(spy.calledOnce).toEqual(false)
-  })
-
-  it('does not pass the new progress to afterSubmit event if it is the same as before', async () => {
-    const fakeID = faker.random.word()
-    const fakeProgress = faker.random.number()
-    const fakeConfidence = faker.random.number()
-
-    const spy = sinon.spy()
-
-    const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
-    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
-
-    stateStub.returns([undefined, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-
-    const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
-
-    const newConfidence = faker.random.number()
-    const formikComponent = result.find('Formik')
     // eslint-disable-next-line @typescript-eslint/await-thenable
     await formikComponent.simulate('submit', {
-      newProgress: fakeProgress,
-      confidence: newConfidence,
+      newProgress: fakeNewProgress,
     })
-
     await Promise.resolve()
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(undefined, newConfidence)
 
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-
-  it('does not pass the new confidence to afterSubmit event it the values is the same as before', async () => {
-    const fakeID = faker.random.word()
-    const fakeProgress = faker.random.number()
-    const fakeConfidence = faker.random.number()
-
-    const spy = sinon.spy()
-
-    const stateStub = sinon.stub(recoil, 'useRecoilState')
-    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
-    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
-
-    stateStub.returns([undefined, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-
-    const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
-
-    const newProgress = faker.random.number()
-    const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
-      newProgress,
-      confidence: fakeConfidence,
-    })
-
-    await Promise.resolve()
     // eslint-disable-next-line unicorn/no-useless-undefined
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newProgress, undefined)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeNewProgress, undefined, undefined)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('triggers the provided afterSubmit callback if the confidence has changed upon submission', async () => {
+    const fakeID = faker.random.word()
+    const fakeOldConfidence = faker.random.number()
+    const fakeNewConfidence = faker.random.number()
+
+    const spy = sinon.spy()
+
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeOldConfidence, sinon.fake()])
+    stateStub.returns([undefined, sinon.fake()])
+
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
+
+    const formikComponent = result.find('Formik')
+
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      confidence: fakeNewConfidence,
+    })
+    await Promise.resolve()
+
+    /* eslint-disable unicorn/no-useless-undefined */
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(
+      undefined,
+      fakeNewConfidence,
+      undefined,
+    )
+    /* eslint-enable unicorn/no-useless-undefined */
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('triggers the provided afterSubmit callback if the comment has changed upon form submission', async () => {
+    const fakeID = faker.random.word()
+    const fakeComment = faker.lorem.paragraph()
+
+    const spy = sinon.spy()
+
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
+
+    const formikComponent = result.find('Formik')
+
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      comment: fakeComment,
+    })
+    await Promise.resolve()
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(undefined, undefined, fakeComment)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('does not calls the afterSubmit hook if we submit the same progress as before', async () => {
+    const fakeID = faker.random.word()
+    const fakeProgress = faker.random.number()
+
+    const spy = sinon.spy()
+
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
+    stateStub.returns([undefined, sinon.fake()])
+
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      newProgress: fakeProgress,
+    })
+    await Promise.resolve()
+
+    expect(spy.notCalled).toEqual(true)
+  })
+
+  it('does not calls the afterSubmit hook if we submit the same confidence as before', async () => {
+    const fakeID = faker.random.word()
+    const fakeConfidence = faker.random.number()
+
+    const spy = sinon.spy()
+
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
+    stateStub.returns([undefined, sinon.fake()])
+
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      confidence: fakeConfidence,
+    })
+    await Promise.resolve()
+
+    expect(spy.notCalled).toEqual(true)
+  })
+
+  it('does not calls the afterSubmit hook if we submit an empty comment', async () => {
+    const fakeID = faker.random.word()
+
+    const spy = sinon.spy()
+
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      comment: '',
+    })
+    await Promise.resolve()
+
+    expect(spy.notCalled).toEqual(true)
   })
 })

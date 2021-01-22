@@ -1,6 +1,6 @@
-import { Box, FormLabel, Textarea } from '@chakra-ui/react'
+import { Box, Button, Flex, FormLabel, Textarea } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
-import React, { ChangeEvent, useCallback } from 'react'
+import React, { ChangeEvent } from 'react'
 import { useIntl } from 'react-intl'
 
 import InputWithLoader from 'src/components/Base/InputWithLoader'
@@ -14,28 +14,34 @@ export interface CheckInFormFieldCommentInputProperties {
 
 const CheckInFormFieldCommentInput = ({ submitOnBlur }: CheckInFormFieldCommentInputProperties) => {
   const intl = useIntl()
-  const { values, setFieldValue, submitForm, isSubmitting } = useFormikContext<CheckInFormValues>()
+  const { values, setFieldValue, isSubmitting } = useFormikContext<CheckInFormValues>()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setFieldValue('comment', event.target.value)
   }
 
-  const handleBlur = useCallback(async () => {
-    if (submitOnBlur) {
-      await submitForm()
-    }
-  }, [submitOnBlur, submitForm])
-
   return (
     <Box>
       <FormLabel>{intl.formatMessage(messages.inputLabel)}</FormLabel>
-      <InputWithLoader
-        value={values.comment}
-        isLoading={isSubmitting}
-        InputComponent={Textarea}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
+      <Flex direction="column" gridGap={4}>
+        <InputWithLoader
+          value={values.comment}
+          isLoading={isSubmitting}
+          InputComponent={Textarea}
+          onChange={handleChange}
+        />
+        {submitOnBlur && (
+          <Button
+            variant="solid"
+            type="submit"
+            isLoading={isSubmitting}
+            w="100%"
+            _hover={{ bg: 'brand.600' }}
+          >
+            {intl.formatMessage(messages.submitButtonText)}
+          </Button>
+        )}
+      </Flex>
     </Box>
   )
 }

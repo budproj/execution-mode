@@ -13,16 +13,16 @@ export interface KeyResultSectionCheckInProperties {
 }
 
 const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInProperties) => {
-  const [showMessage, setShowMessage] = useState(false)
+  const [showEncouragingMessage, setShowEncouragingMessage] = useState(false)
   const intl = useIntl()
 
-  const displayMessageUponNewProgressReport = (newProgress?: ProgressReport['valueNew']) => {
-    if (newProgress) setShowMessage(true)
+  const handleSubmitSideEffects = (newProgress?: ProgressReport['valueNew']) => {
+    if (newProgress) setShowEncouragingMessage(true)
   }
 
   useEffect(() => {
-    if (showMessage) setTimeout(() => setShowMessage(false), 3000)
-  }, [showMessage, setShowMessage])
+    if (showEncouragingMessage) setTimeout(() => setShowEncouragingMessage(false), 3000)
+  }, [showEncouragingMessage, setShowEncouragingMessage])
 
   return (
     <Flex gridGap={6} direction="column">
@@ -34,10 +34,10 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
           submitOnBlur
           showGoal
           keyResultID={keyResultID}
-          afterSubmit={displayMessageUponNewProgressReport}
+          afterSubmit={handleSubmitSideEffects}
         />
       </Flex>
-      <EncouragingMessage isOpen={showMessage} />
+      <EncouragingMessage isOpen={showEncouragingMessage} />
     </Flex>
   )
 }

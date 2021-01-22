@@ -35,7 +35,7 @@ describe('setter', () => {
     return selector.key.includes('USER')
   })
 
-  it('asks to set our confidence reports with an updated value', () => {
+  it('asks to set the new confidence report with an updated value', () => {
     const latestConfidenceValue = faker.random.number()
     const oldConfidenceReport = { valueNew: latestConfidenceValue }
     const fakeUser = faker.helpers.userCard()
