@@ -6,7 +6,7 @@ import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/
 import { KeyResult } from 'src/components/KeyResult/types'
 
 import KeyResultListBodyDragAndDropDraggableLine from './draggable-line'
-import DroppableBox from './droppable-box'
+import DroppableContext from './droppable-context'
 
 export interface KeyResultListBodyDragAndDropProperties extends KeyResultListBodyProperties {
   handleDragEnd: (result: DropResult) => void
@@ -23,7 +23,7 @@ const KeyResultListBodyDragAndDrop = ({
   listID,
   ...rest
 }: KeyResultListBodyDragAndDropProperties): ReactElement => (
-  <DroppableBox onDragEnd={handleDragEnd}>
+  <DroppableContext onDragEnd={handleDragEnd}>
     {keyResultIDs.map((keyResultID: KeyResult['id'], index: number) => (
       <KeyResultListBodyDragAndDropDraggableLine
         key={`${listID ?? uniqueId()}_KEY_RESULT_LIST_BODY_DRAG_AND_DROP_LINE_${
@@ -37,7 +37,7 @@ const KeyResultListBodyDragAndDrop = ({
         {...rest}
       />
     ))}
-  </DroppableBox>
+  </DroppableContext>
 )
 
 KeyResultListBodyDragAndDrop.defaultProps = {

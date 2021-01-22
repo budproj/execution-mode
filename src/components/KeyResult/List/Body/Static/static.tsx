@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react'
 import { uniqueId } from 'lodash'
 import React from 'react'
 
@@ -16,7 +15,7 @@ const KeyResultListBodyStatic = ({
   listID,
   ...rest
 }: KeyResultListBodyStaticProperties) => (
-  <Box>
+  <>
     {keyResultIDs.map((keyResultID: KeyResult['id']) => (
       <KeyResultListBodyStaticLine
         key={`${listID ?? uniqueId()}_KEY_RESULT_LIST_BODY_LINE_${keyResultID ?? uniqueId()}`}
@@ -26,7 +25,7 @@ const KeyResultListBodyStatic = ({
         {...rest}
       />
     ))}
-  </Box>
+  </>
 )
 
 export default KeyResultListBodyStatic

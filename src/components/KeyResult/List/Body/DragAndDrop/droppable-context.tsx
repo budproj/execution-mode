@@ -8,7 +8,6 @@ const DroppableBox = ({ onDragEnd, children, ...rest }: DragDropContextProps): R
       {(provided) => (
         <Box ref={provided.innerRef} {...provided.droppableProps}>
           {children}
-          {provided.placeholder}
         </Box>
       )}
     </Droppable>

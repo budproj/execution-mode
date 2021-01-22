@@ -12,7 +12,7 @@ import {
   KeyResultListBodyColumnConfidenceLevelColor,
   KeyResultListBodyColumnKeyResult,
 } from 'src/components/KeyResult/List/Body/Columns'
-import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 import { KeyResultListBodyStaticProperties } from './static'
@@ -25,8 +25,9 @@ const KeyResultListBodyStaticLine = ({
   listID,
   keyResultID,
   onLineClick,
-  templateColumns,
   borderColor,
+  templateColumns,
+  columnGap,
   columns,
   bodyProperties,
 }: KeyResultListBodyStaticLineProperties) => {
@@ -42,18 +43,19 @@ const KeyResultListBodyStaticLine = ({
   }
 
   const columnComponents = {
-    [KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT]: KeyResultListBodyColumnKeyResult,
-    [KEY_RESULT_LIST_BODY_COLUMN.OBJECTIVE]: KeyResultListBodyColumnObjective,
-    [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL]: KeyResultListBodyColumnConfidenceLevel,
-    [KEY_RESULT_LIST_BODY_COLUMN.PROGRESS]: KeyResultListBodyColumnProgress,
-    [KEY_RESULT_LIST_BODY_COLUMN.CYCLE]: KeyResultListBodyColumnCycle,
-    [KEY_RESULT_LIST_BODY_COLUMN.OWNER]: KeyResultListBodyColumnOwner,
-    [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL_COLOR]: KeyResultListBodyColumnConfidenceLevelColor,
+    [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: KeyResultListBodyColumnKeyResult,
+    [KEY_RESULT_LIST_COLUMN.OBJECTIVE]: KeyResultListBodyColumnObjective,
+    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: KeyResultListBodyColumnConfidenceLevel,
+    [KEY_RESULT_LIST_COLUMN.PROGRESS]: KeyResultListBodyColumnProgress,
+    [KEY_RESULT_LIST_COLUMN.CYCLE]: KeyResultListBodyColumnCycle,
+    [KEY_RESULT_LIST_COLUMN.OWNER]: KeyResultListBodyColumnOwner,
+    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]: KeyResultListBodyColumnConfidenceLevelColor,
   }
 
   return (
     <Grid
       templateColumns={templateColumns}
+      gridColumnGap={columnGap}
       border={0}
       borderBottomWidth={1}
       alignItems="center"

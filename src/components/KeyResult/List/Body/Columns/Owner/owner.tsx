@@ -36,6 +36,7 @@ const handleMouseDownCapture = (event: React.MouseEvent<HTMLElement, MouseEvent>
 const KeyResultListBodyColumnOwner = ({
   id,
   displayName,
+  justifyContent,
 }: KeyResultListBodyColumnOwnerProperties): ReactElement => {
   const owner = useRecoilValue(ownerSelector(id))
 
@@ -47,6 +48,7 @@ const KeyResultListBodyColumnOwner = ({
       pr={0}
       display="flex"
       cursor="auto"
+      justifyContent={justifyContent}
       onMouseDownCapture={handleMouseDownCapture}
     >
       <Popover placement="top-end">

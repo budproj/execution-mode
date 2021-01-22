@@ -33,6 +33,7 @@ describe('component customizations', () => {
       <KeyResultListHead
         templateColumns=""
         borderColor=""
+        columnGap={0}
         columns={AVAILABLE_TEST_COLUMNS as any}
         headProperties={{}}
       />,
@@ -65,6 +66,7 @@ describe('component customizations', () => {
       <KeyResultListHead
         templateColumns=""
         borderColor=""
+        columnGap={0}
         columns={AVAILABLE_TEST_COLUMNS as any}
         headProperties={fakeHeadProperties}
       />,

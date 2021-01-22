@@ -3,7 +3,7 @@ import uniqueId from 'lodash/uniqueId'
 import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 
-import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResultListBodyColumnProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
@@ -14,18 +14,20 @@ import { KeyResultListColumnHeadProperties } from './Head/types'
 import {
   BORDER_COLOR_DEFAULT,
   COLUMNS_DEFAULT,
-  LIST_TEMPLATE_COLUMN_DEFAULT,
+  GRID_COLUMN_GAP,
+  GRID_TEMPLATE_COLUMNS,
   KEY_RESULT_LIST_TYPE,
 } from './constants'
 
 export interface KeyResultListProperties extends BoxProps {
   id: string
-  columns: KEY_RESULT_LIST_BODY_COLUMN[]
-  templateColumns: GridProps['templateColumns']
+  columns: KEY_RESULT_LIST_COLUMN[]
   bodyProperties: KeyResultListBodyColumnProperties
   headProperties: KeyResultListColumnHeadProperties
   borderColor: GridProps['borderColor']
   type: KEY_RESULT_LIST_TYPE
+  templateColumns: GridProps['templateColumns']
+  columnGap: GridProps['gridColumnGap']
   keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
   onLineDragEnd?: (result: DropResult) => void
@@ -37,12 +39,13 @@ const KeyResultList = ({
   onLineClick,
   onLineDragEnd,
   type,
-  templateColumns,
   borderColor,
   columns,
   bodyProperties,
   headProperties,
   isLoading,
+  templateColumns,
+  columnGap,
   id,
   ...rest
 }: KeyResultListProperties): ReactElement => (
@@ -50,6 +53,7 @@ const KeyResultList = ({
     <KeyResultListHead
       columns={columns}
       templateColumns={templateColumns}
+      columnGap={columnGap}
       headProperties={headProperties}
       borderColor={borderColor}
     />
@@ -57,9 +61,10 @@ const KeyResultList = ({
       <KeyResultListBodySkeleton
         listID={id}
         type={type}
+        templateColumns={templateColumns}
+        columnGap={columnGap}
         columns={columns}
         borderColor={borderColor}
-        templateColumns={templateColumns}
         bodyProperties={bodyProperties}
         keyResultIDs={[]}
       />
@@ -69,6 +74,7 @@ const KeyResultList = ({
         type={type}
         columns={columns}
         templateColumns={templateColumns}
+        columnGap={columnGap}
         bodyProperties={bodyProperties}
         borderColor={borderColor}
         keyResultIDs={keyResultIDs}
@@ -81,8 +87,9 @@ const KeyResultList = ({
 
 KeyResultList.defaultProps = {
   type: 'static',
-  templateColumns: LIST_TEMPLATE_COLUMN_DEFAULT,
   borderColor: BORDER_COLOR_DEFAULT,
+  templateColumns: GRID_TEMPLATE_COLUMNS,
+  columnGap: GRID_COLUMN_GAP,
   columns: COLUMNS_DEFAULT,
   bodyProperties: {},
   headProperties: {},

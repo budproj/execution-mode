@@ -8,18 +8,19 @@ import KeyResultBodyStatic from 'src/components/KeyResult/List/Body/Static'
 import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 
-import { KEY_RESULT_LIST_BODY_COLUMN } from './Columns/constants'
+import { KEY_RESULT_LIST_COLUMN } from './Columns/constants'
 import { KeyResultListBodyColumnProperties } from './Columns/types'
 import messages from './messages'
 
 export interface KeyResultListBodyProperties {
   type: KEY_RESULT_LIST_TYPE
   listID: string
-  keyResultIDs?: Array<KeyResult['id']>
+  columns: KEY_RESULT_LIST_COLUMN[]
   templateColumns: GridProps['templateColumns']
+  columnGap: GridProps['gridColumnGap']
   borderColor: GridProps['borderColor']
-  columns: KEY_RESULT_LIST_BODY_COLUMN[]
   bodyProperties: KeyResultListBodyColumnProperties
+  keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
   handleDragEnd?: (result: DropResult) => void
 }
