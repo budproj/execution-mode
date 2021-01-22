@@ -119,6 +119,10 @@
     "defaultMessage": "Meus Resultados-Chave",
     "description": "AppBar menu item that links to \"My Key Results\" page"
   },
+  "Ba8bU1": {
+    "defaultMessage": "Enviar comentário",
+    "description": "This label is displayed in the submit button in our drawer"
+  },
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"

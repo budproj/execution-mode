@@ -4,9 +4,8 @@ import { DefaultValue, selectorFamily } from 'recoil'
 import { KeyResult, ConfidenceReport } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
-
-import { userAtomFamily } from '../../user'
-import meAtom from '../../user/me'
+import { userAtomFamily } from 'src/state/recoil/user'
+import meAtom from 'src/state/recoil/user/me'
 
 import { PREFIX } from './constants'
 

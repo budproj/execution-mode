@@ -28,16 +28,16 @@ describe('component interations', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+})
 
-  it('submits the form upon field change if it is supposed to do it', () => {
-    const spy = sinon.spy()
-    sinon.stub(formik, 'useFormikContext').returns({ submitForm: spy, values: {} } as any)
+describe('component customizations', () => {
+  it('displays the save button if the component is to submit on blur', () => {
+    sinon.stub(formik, 'useFormikContext').returns({ values: {} } as any)
 
     const result = enzyme.shallow(<CheckInFormFieldCommentInput submitOnBlur />)
 
-    const input = result.find('InputWithLoader')
-    input.simulate('blur')
+    const button = result.find('Button')
 
-    expect(spy.called).toEqual(true)
+    expect(button.length).toEqual(1)
   })
 })

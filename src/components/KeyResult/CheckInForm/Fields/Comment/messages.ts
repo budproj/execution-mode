@@ -5,6 +5,7 @@ type CheckInFormFieldCommentMessage =
   | 'buttonIconDesc'
   | 'buttonIconTitle'
   | 'inputLabel'
+  | 'submitButtonText'
 
 export default defineMessages<CheckInFormFieldCommentMessage>({
   buttonLabel: {
@@ -30,5 +31,11 @@ export default defineMessages<CheckInFormFieldCommentMessage>({
     defaultMessage: 'Comentário',
     id: 'zgF+iY',
     description: 'This is the label text that is displayed above the input',
+  },
+
+  submitButtonText: {
+    defaultMessage: 'Enviar comentário',
+    id: 'Ba8bU1',
+    description: 'This label is displayed in the submit button in our drawer',
   },
 })
