@@ -57,6 +57,7 @@ const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentPr
         />
       </PopoverCloseButton>
       <CheckInForm
+        showCancelButton
         keyResultID={keyResultID}
         afterSubmit={handleSubmit}
         gutter={8}

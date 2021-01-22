@@ -9,17 +9,13 @@ import CheckInFormFieldCommentInput from './input'
 
 export interface CheckInFormFieldCommentProperties {
   keyResultID?: KeyResult['id']
-  submitOnBlur?: boolean
 }
 
-const CheckInFormFieldComment = ({
-  keyResultID,
-  submitOnBlur,
-}: CheckInFormFieldCommentProperties) => {
+const CheckInFormFieldComment = ({ keyResultID }: CheckInFormFieldCommentProperties) => {
   const commentEnabled = useRecoilValue(keyResultCheckInCommentEnabled(keyResultID))
 
   return commentEnabled ? (
-    <CheckInFormFieldCommentInput submitOnBlur={submitOnBlur} />
+    <CheckInFormFieldCommentInput />
   ) : (
     <CheckInFormFieldCommentEnableButton keyResultID={keyResultID} />
   )

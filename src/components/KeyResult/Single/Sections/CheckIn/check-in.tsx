@@ -31,8 +31,8 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
           {intl.formatMessage(messages.label)}
         </Text>
         <CheckInForm
-          submitOnBlur
           showGoal
+          isCommentAlwaysEnabled
           keyResultID={keyResultID}
           afterSubmit={handleSubmitSideEffects}
         />
