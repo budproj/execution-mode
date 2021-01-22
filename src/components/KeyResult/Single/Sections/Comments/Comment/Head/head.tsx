@@ -15,7 +15,9 @@ const KeyResultSectionCommentsCommentHead = ({
   user,
   createdAt,
 }: KeyResultSectionCommentsCommentHeadProperties) => {
-  const [formattedDate] = useRelativeDate(createdAt)
+  const rawDate = new Date(createdAt ?? '')
+
+  const [formattedDate] = useRelativeDate(rawDate)
   const isLoaded = Boolean(user)
 
   return (

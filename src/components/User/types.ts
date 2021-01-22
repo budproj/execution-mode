@@ -17,8 +17,8 @@ export interface User {
   gender?: USER_GENDER
   role?: string
   picture?: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
   keyResults?: KeyResult[]
   progressReports?: ProgressReport[]
   confidenceReport?: ConfidenceReport[]

@@ -3,10 +3,10 @@ import { Team } from 'src/components/Team/types'
 
 export interface Cycle {
   id: string
-  dateStart: Date
-  dateEnd: Date
-  createdAt: Date
-  updatedAt: Date
+  dateStart: string
+  dateEnd: string
+  createdAt: string
+  updatedAt: string
   name?: string
   team: Team
   objectives?: Objective[]

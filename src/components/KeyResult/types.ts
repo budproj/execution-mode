@@ -10,7 +10,7 @@ export interface ConfidenceReport {
   valuePrevious?: number
   valueNew: number
   comment?: string
-  createdAt: Date
+  createdAt: string
   user: User
   keyResult: KeyResult
 }
@@ -20,7 +20,7 @@ export interface ProgressReport {
   valuePrevious?: number
   valueNew: number
   comment?: string
-  createdAt: Date
+  createdAt: string
   user: User
   keyResult: KeyResult
 }
@@ -31,8 +31,8 @@ export interface KeyResultView {
   binding?: KEY_RESULT_VIEW_BINDING
   rank: Array<KeyResult['id']>
   keyResults: KeyResult[]
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
   user: User
 }
 
@@ -43,8 +43,8 @@ export interface KeyResult {
   initialValue: number
   goal: number
   format: KEY_RESULT_FORMAT
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
   owner: User
   objective: Objective
   team: Team
