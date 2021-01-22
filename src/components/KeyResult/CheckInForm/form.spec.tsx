@@ -50,6 +50,23 @@ describe('component expectations', () => {
 
     expect(initialValues.currentProgress).toEqual(fakeProgress)
   })
+
+  it('opens the comment upon rendering if asked to keep comment always enabled', () => {
+    const fakeID = faker.random.word()
+    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
+    const spy = sinon.spy()
+
+    setStateStub.withArgs(selectCommentEnabledMatcher).returns(spy)
+    setStateStub.returns(sinon.fake())
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    enzyme.shallow(<Form isCommentAlwaysEnabled keyResultID={fakeID} />)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(true)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
 })
 
 describe('component interations', () => {
@@ -241,6 +258,31 @@ describe('component interations', () => {
 
     await Promise.resolve()
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(false)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('does not close the comment input upon form submission if it should always be enabled', async () => {
+    const fakeID = faker.random.word()
+    const fakeConfidence = faker.random.number()
+    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
+    const spy = sinon.spy()
+
+    setStateStub.withArgs(selectCommentEnabledMatcher).returns(spy)
+    setStateStub.returns(sinon.fake())
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    const result = enzyme.shallow(<Form isCommentAlwaysEnabled keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      confidence: fakeConfidence,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.secondCall.calledWithExactly(true)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

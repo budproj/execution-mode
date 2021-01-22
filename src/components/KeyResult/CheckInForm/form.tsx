@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
 import pickBy from 'lodash/pickBy'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
@@ -25,8 +25,9 @@ import Actions from './actions'
 import queries from './queries.gql'
 
 export interface CheckInFormProperties {
-  submitOnBlur: boolean
   showGoal: boolean
+  isCommentAlwaysEnabled: boolean
+  showCancelButton: boolean
   gutter?: SpaceProps['p']
   keyResultID?: KeyResult['id']
   afterSubmit?: (
@@ -48,7 +49,8 @@ const CheckInForm = ({
   keyResultID,
   afterSubmit,
   gutter,
-  submitOnBlur,
+  isCommentAlwaysEnabled,
+  showCancelButton,
   showGoal,
   onCancel,
 }: CheckInFormProperties) => {
@@ -82,7 +84,7 @@ const CheckInForm = ({
       setLatestReport({ comment: values.comment })
     }
 
-    setCommentEnabled(false)
+    setCommentEnabled(isCommentAlwaysEnabled)
   }
 
   const dispatchRemoteUpdate = async (
@@ -127,29 +129,30 @@ const CheckInForm = ({
     }
   }
 
+  useEffect(() => {
+    if (isCommentAlwaysEnabled) setCommentEnabled(true)
+  }, [isCommentAlwaysEnabled, setCommentEnabled])
+
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
       {() => (
         <Form>
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
-            <Flex direction="column" gridGap={8} p={gutter} pb={submitOnBlur ? 0 : gutter}>
+            <Flex direction="column" gridGap={8} p={gutter}>
               <Flex gridGap={5}>
                 <CheckInFormFieldCurrentProgress keyResultID={keyResultID} />
-                <CheckInFormFieldNewProgress
-                  keyResultID={keyResultID}
-                  submitOnBlur={submitOnBlur}
-                  isLoading={data.loading}
-                />
+                <CheckInFormFieldNewProgress keyResultID={keyResultID} isLoading={data.loading} />
                 {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
               </Flex>
-              <CheckInFormFieldCurrentConfidence
-                submitOnBlur={submitOnBlur}
+              <CheckInFormFieldCurrentConfidence isLoading={data.loading} />
+
+              <CheckInFormFieldComment keyResultID={keyResultID} />
+
+              <Actions
                 isLoading={data.loading}
+                showCancelButton={showCancelButton}
+                onCancel={onCancel}
               />
-
-              <CheckInFormFieldComment keyResultID={keyResultID} submitOnBlur={submitOnBlur} />
-
-              {!submitOnBlur && <Actions isLoading={data.loading} onCancel={onCancel} />}
             </Flex>
           </FormControl>
         </Form>
@@ -161,6 +164,8 @@ const CheckInForm = ({
 CheckInForm.defaultProps = {
   submitOnBlur: false,
   showGoal: false,
+  isCommentAlwaysEnabled: false,
+  showCancelButton: false,
 }
 
 export default CheckInForm

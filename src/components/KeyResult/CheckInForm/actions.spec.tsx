@@ -5,18 +5,26 @@ import sinon from 'sinon'
 import Actions from './actions'
 
 describe('component render', () => {
-  it('renders the proper cancel button text', () => {
-    const result = enzyme.shallow(<Actions />)
+  it('renders the proper cancel button text if we ask to do so', () => {
+    const result = enzyme.shallow(<Actions showCancelButton />)
 
     const cancelButton = result.find('Button').first()
 
     expect(cancelButton.text()).toEqual('Cancelar')
   })
 
+  it('does not render the cancel button text if we ask to do so', () => {
+    const result = enzyme.shallow(<Actions />)
+
+    const cancelButton = result.find('Button').first()
+
+    expect(cancelButton.text()).not.toEqual('Cancelar')
+  })
+
   it('renders the proper submit button text', () => {
     const result = enzyme.shallow(<Actions />)
 
-    const submitButton = result.find('Button').at(1)
+    const submitButton = result.find('Button').first()
 
     expect(submitButton.text()).toEqual('Salvar')
   })
@@ -28,7 +36,7 @@ describe('component interations', () => {
   it('executes the provided cancel event upon cancel button click', () => {
     const spy = sinon.spy()
 
-    const result = enzyme.shallow(<Actions onCancel={spy} />)
+    const result = enzyme.shallow(<Actions showCancelButton onCancel={spy} />)
 
     const cancelButton = result.find('Button').first()
     cancelButton.simulate('click')
