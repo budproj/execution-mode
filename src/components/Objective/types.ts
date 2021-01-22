@@ -4,8 +4,8 @@ import { ConfidenceReport, KeyResult, ProgressReport } from 'src/components/KeyR
 export interface Objective {
   id: string
   title: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
   cycle: Cycle
   keyResults?: KeyResult[]
   currentProgress?: ProgressReport['valueNew']

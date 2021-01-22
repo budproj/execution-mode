@@ -5,7 +5,7 @@ import { DraggableLocation, DropResult } from 'react-beautiful-dnd'
 import { useRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
-import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
 import { KeyResult, KeyResultView as KeyResultViewType } from 'src/components/KeyResult/types'
 import { KEY_RESULT_VIEW_BINDING } from 'src/components/User/constants'
@@ -81,16 +81,25 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
     <KeyResultList
       type={KEY_RESULT_LIST_TYPE.DND}
       keyResultIDs={keyResultView?.rank}
+      isLoading={loading}
+      headProperties={{
+        [KEY_RESULT_LIST_COLUMN.OWNER]: {
+          justifySelf: 'flex-end',
+        },
+      }}
       bodyProperties={{
-        [KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT]: {
+        [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
           withDynamicIcon: true,
           withRightBorder: true,
         },
-        [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL]: {
+        [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: {
           withLastUpdateInfo: true,
         },
-        [KEY_RESULT_LIST_BODY_COLUMN.PROGRESS]: {
+        [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
           canChange: true,
+        },
+        [KEY_RESULT_LIST_COLUMN.OWNER]: {
+          justifyContent: 'flex-end',
         },
       }}
       onLineDragEnd={handleDragEnd}

@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
-import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
@@ -56,22 +56,23 @@ const ObjectiveAccordionPanel = ({
           id={`OBJECTIVE_${objectiveID ?? uniqueId()}_ACCORDION`}
           py={8}
           keyResultIDs={keyResultIDs}
+          isLoading={loading}
           templateColumns="0.1fr 2fr 1fr 2fr 1fr 2fr"
           columns={[
-            KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL_COLOR,
-            KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT,
-            KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL,
-            KEY_RESULT_LIST_BODY_COLUMN.PROGRESS,
-            KEY_RESULT_LIST_BODY_COLUMN.CYCLE,
-            KEY_RESULT_LIST_BODY_COLUMN.OWNER,
+            KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR,
+            KEY_RESULT_LIST_COLUMN.KEY_RESULT,
+            KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL,
+            KEY_RESULT_LIST_COLUMN.PROGRESS,
+            KEY_RESULT_LIST_COLUMN.CYCLE,
+            KEY_RESULT_LIST_COLUMN.OWNER,
           ]}
           headProperties={{
-            [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL_COLOR]: {
+            [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]: {
               hidden: true,
             },
           }}
           bodyProperties={{
-            [KEY_RESULT_LIST_BODY_COLUMN.OWNER]: {
+            [KEY_RESULT_LIST_COLUMN.OWNER]: {
               displayName: true,
             },
           }}

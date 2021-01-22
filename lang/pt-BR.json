@@ -11,9 +11,9 @@
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
   },
-  "/CiLko": {
-    "defaultMessage": "Esse objetivo não tem nenhum resultado-chave",
-    "description": "The label message that is displayed below our team at work image"
+  "/K30xB": {
+    "defaultMessage": "Você não tem nenhum resultado-chave",
+    "description": "The label message that is displayed below our team at work image when the user has no key results in her/his key result view list"
   },
   "/VrdI0": {
     "defaultMessage": "Um ícone de pasta",

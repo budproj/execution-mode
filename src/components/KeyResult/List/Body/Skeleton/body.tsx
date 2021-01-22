@@ -1,17 +1,13 @@
-import { Box, GridProps } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 
-import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
-import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import KeyResultListBodyStaticLine from 'src/components/KeyResult/List/Body/Static/line'
+import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/body'
+import { KeyResult } from 'src/components/KeyResult/types'
 
-export interface KeyResultListBodySkeletonProperties {
-  listID: string
+export interface KeyResultListBodySkeletonProperties extends KeyResultListBodyProperties {
   amountOfLines: number
-  templateColumns: GridProps['templateColumns']
-  borderColor: GridProps['borderColor']
-  columns: KEY_RESULT_LIST_BODY_COLUMN[]
-  bodyProperties: KeyResultListBodyProperties
+  keyResultIDs: Array<KeyResult['id']>
 }
 
 const KeyResultListBodySkeleton = ({

@@ -26,8 +26,8 @@ const DraggableGrid = ({
       {(provided, { isDragging }) => (
         <Grid
           ref={provided.innerRef}
-          bg={isDragging ? 'blue.50' : 'transparent'}
           templateColumns="0fr 1fr"
+          bg={isDragging ? 'blue.50' : 'transparent'}
           alignItems="center"
           {...provided.draggableProps}
           {...rest}

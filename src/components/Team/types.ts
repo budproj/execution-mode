@@ -12,8 +12,8 @@ export interface Team {
   gender?: TEAM_GENDER
   currentProgress?: number
   currentConfidence?: number
-  createdAt: Date
-  updatedAt: Date
+  createdAt: string
+  updatedAt: string
   keyResults?: KeyResult[]
   users?: User[]
   teams?: Team[]
