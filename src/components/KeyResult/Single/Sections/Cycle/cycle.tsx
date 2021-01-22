@@ -31,13 +31,13 @@ const KeyResultSectionCycle = ({ keyResultID }: KeyResultSectionCycleProperties)
         <DateWithTitle
           isLoaded={isCycleLoaded}
           label={messages.startLabel}
-          date={cycle?.dateStart}
+          date={new Date(cycle?.dateStart ?? '')}
         />
 
         <DateWithTitle
           isLoaded={isCycleLoaded}
           label={messages.endLabel}
-          date={cycle?.dateEnd}
+          date={new Date(cycle?.dateEnd ?? '')}
           color="gray.500"
         />
 

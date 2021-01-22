@@ -3,9 +3,8 @@ import uniqueId from 'lodash/uniqueId'
 import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 
-import logger from 'lib/logger'
 import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
-import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/Columns/types'
+import { KeyResultListBodyColumnProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 import KeyResultListBody from './Body'
@@ -23,13 +22,14 @@ export interface KeyResultListProperties extends BoxProps {
   id: string
   columns: KEY_RESULT_LIST_BODY_COLUMN[]
   templateColumns: GridProps['templateColumns']
-  bodyProperties: KeyResultListBodyProperties
+  bodyProperties: KeyResultListBodyColumnProperties
   headProperties: KeyResultListColumnHeadProperties
   borderColor: GridProps['borderColor']
   type: KEY_RESULT_LIST_TYPE
   keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
   onLineDragEnd?: (result: DropResult) => void
+  isLoading?: boolean
 }
 
 const KeyResultList = ({
@@ -42,53 +42,42 @@ const KeyResultList = ({
   columns,
   bodyProperties,
   headProperties,
+  isLoading,
   id,
   ...rest
-}: KeyResultListProperties): ReactElement => {
-  const throwHandleDragEndError = () => {
-    if (type === KEY_RESULT_LIST_TYPE.DND)
-      logger.error(
-        'You must provide a handleDragError property to KeyResultList work as type DND',
-        { component },
-      )
-  }
-
-  return (
-    <Box {...rest}>
-      {(!keyResultIDs || keyResultIDs.length > 0) && (
-        <KeyResultListHead
-          columns={columns}
-          templateColumns={templateColumns}
-          headProperties={headProperties}
-          borderColor={borderColor}
-        />
-      )}
-      {keyResultIDs ? (
-        <KeyResultListBody
-          listID={id}
-          type={type}
-          columns={columns}
-          templateColumns={templateColumns}
-          bodyProperties={bodyProperties}
-          borderColor={borderColor}
-          keyResultIDs={keyResultIDs}
-          handleDragEnd={onLineDragEnd ?? throwHandleDragEndError}
-          onLineClick={onLineClick}
-        />
-      ) : (
-        <KeyResultListBodySkeleton
-          listID={id}
-          columns={columns}
-          borderColor={borderColor}
-          templateColumns={templateColumns}
-          bodyProperties={bodyProperties}
-        />
-      )}
-    </Box>
-  )
-}
-
-const component = KeyResultList.name
+}: KeyResultListProperties): ReactElement => (
+  <Box {...rest}>
+    <KeyResultListHead
+      columns={columns}
+      templateColumns={templateColumns}
+      headProperties={headProperties}
+      borderColor={borderColor}
+    />
+    {isLoading ? (
+      <KeyResultListBodySkeleton
+        listID={id}
+        type={type}
+        columns={columns}
+        borderColor={borderColor}
+        templateColumns={templateColumns}
+        bodyProperties={bodyProperties}
+        keyResultIDs={[]}
+      />
+    ) : (
+      <KeyResultListBody
+        listID={id}
+        type={type}
+        columns={columns}
+        templateColumns={templateColumns}
+        bodyProperties={bodyProperties}
+        borderColor={borderColor}
+        keyResultIDs={keyResultIDs}
+        handleDragEnd={onLineDragEnd}
+        onLineClick={onLineClick}
+      />
+    )}
+  </Box>
+)
 
 KeyResultList.defaultProps = {
   type: 'static',

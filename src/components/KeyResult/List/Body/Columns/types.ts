@@ -7,7 +7,7 @@ import { KeyResultListBodyColumnOwnerProperties } from './Owner/owner'
 import { KeyResultListBodyColumnProgressProperties } from './Progress/progress'
 import { KEY_RESULT_LIST_BODY_COLUMN } from './constants'
 
-export interface KeyResultListBodyProperties {
+export interface KeyResultListBodyColumnProperties {
   [KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT]?: KeyResultListBodyColumnKeyResultProperties
   [KEY_RESULT_LIST_BODY_COLUMN.OBJECTIVE]?: KeyResultListBodyColumnObjectiveProperties
   [KEY_RESULT_LIST_BODY_COLUMN.CONFIDENCE_LEVEL]?: KeyResultListBodyColumnConfidenceLevelProperties

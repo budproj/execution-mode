@@ -81,6 +81,7 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
     <KeyResultList
       type={KEY_RESULT_LIST_TYPE.DND}
       keyResultIDs={keyResultView?.rank}
+      isLoading={loading}
       bodyProperties={{
         [KEY_RESULT_LIST_BODY_COLUMN.KEY_RESULT]: {
           withDynamicIcon: true,

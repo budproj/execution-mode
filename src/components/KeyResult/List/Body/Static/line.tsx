@@ -1,4 +1,4 @@
-import { Grid, GridProps } from '@chakra-ui/react'
+import { Grid } from '@chakra-ui/react'
 import remove from 'lodash/remove'
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
@@ -13,16 +13,11 @@ import {
   KeyResultListBodyColumnKeyResult,
 } from 'src/components/KeyResult/List/Body/Columns'
 import { KEY_RESULT_LIST_BODY_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
-import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
-export interface KeyResultListBodyStaticLineProperties {
-  listID: string
-  templateColumns: GridProps['templateColumns']
-  borderColor: GridProps['borderColor']
-  columns: KEY_RESULT_LIST_BODY_COLUMN[]
-  bodyProperties: KeyResultListBodyProperties
-  onLineClick?: (id: KeyResult['id']) => void
+import { KeyResultListBodyStaticProperties } from './static'
+
+export interface KeyResultListBodyStaticLineProperties extends KeyResultListBodyStaticProperties {
   keyResultID?: KeyResult['id']
 }
 
