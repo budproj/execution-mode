@@ -299,6 +299,10 @@
     "defaultMessage": "Um ícone de gráfico de pizza",
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
+  "Zn0eYa": {
+    "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
+    "description": "The alternative text explaining our team at work image"
+  },
   "aOzLdd": {
     "defaultMessage": "Deslogar",
     "description": "The label displayed in the user logout button"
@@ -386,10 +390,6 @@
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
-  },
-  "mcWqy7": {
-    "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segudando um pedaço de um quebra-cabeça e colaborando para montá-lo",
-    "description": "The alternative text explaining our team at work image"
   },
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
