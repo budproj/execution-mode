@@ -88,6 +88,81 @@ describe('component lifecycle', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('declares itself as loading to our key result list if the apollo query was not called yet', () => {
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    sinon.stub(apollo, 'useLazyQuery').returns([sinon.fake(), { called: false }] as any)
+
+    const result = enzyme.shallow(<KeyResultView />)
+
+    const list = result.find('KeyResultList')
+
+    expect(list.prop('isLoading')).toEqual(true)
+  })
+
+  it('declares itself as loading to our key result list if the apollo query was called, but it is loading', () => {
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { called: true, loading: true }] as any)
+
+    const result = enzyme.shallow(<KeyResultView />)
+
+    const list = result.find('KeyResultList')
+
+    expect(list.prop('isLoading')).toEqual(true)
+  })
+
+  it('declares itself as loading to our key result list if the apollo query was finished but the key result was not loaded in our local state yet', () => {
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    const fakeData = {
+      keyResultView: {
+        rank: faker.random.word(),
+      },
+    }
+
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { called: true, loading: false, data: fakeData }] as any)
+
+    const result = enzyme.shallow(<KeyResultView />)
+
+    const list = result.find('KeyResultList')
+
+    expect(list.prop('isLoading')).toEqual(true)
+  })
+
+  it('can identify when the key result view is loaded in our local state', () => {
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+
+    const fakeData = {
+      keyResultView: {
+        rank: faker.random.word(),
+      },
+    }
+
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { called: true, loading: false, data: fakeData }] as any)
+
+    sinon.stub(recoil, 'useRecoilState').returns([fakeData.keyResultView, sinon.fake()])
+
+    const result = enzyme.shallow(<KeyResultView />)
+
+    const list = result.find('KeyResultList')
+
+    expect(list.prop('isLoading')).toEqual(false)
+  })
 })
 
 describe('component interations', () => {

@@ -32,6 +32,12 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
     { loading, data, called },
   ] = useLazyQuery<GetKeyResultViewWithBindingQuery>(queries.GET_KEY_RESULT_VIEW_WITH_BINDING)
 
+  const syncedWithLocalState =
+    called &&
+    !loading &&
+    typeof data !== 'undefined' &&
+    keyResultView?.rank === data.keyResultView.rank
+
   const handleRankUpdate = async (
     from: DraggableLocation['index'],
     to: DraggableLocation['index'],
@@ -81,7 +87,7 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
     <KeyResultList
       type={KEY_RESULT_LIST_TYPE.DND}
       keyResultIDs={keyResultView?.rank}
-      isLoading={loading}
+      isLoading={!syncedWithLocalState}
       headProperties={{
         [KEY_RESULT_LIST_COLUMN.OWNER]: {
           justifySelf: 'flex-end',

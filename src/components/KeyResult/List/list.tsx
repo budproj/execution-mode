@@ -35,6 +35,7 @@ export interface KeyResultListProperties extends BoxProps {
 }
 
 const KeyResultList = ({
+  id,
   keyResultIDs,
   onLineClick,
   onLineDragEnd,
@@ -43,10 +44,9 @@ const KeyResultList = ({
   columns,
   bodyProperties,
   headProperties,
-  isLoading,
   templateColumns,
   columnGap,
-  id,
+  isLoading,
   ...rest
 }: KeyResultListProperties): ReactElement => (
   <Box {...rest}>
