@@ -106,7 +106,7 @@ describe('component lifecycle', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('passes the list of key result IDs from the objective to the KeyREsultList', () => {
+  it('passes the list of key result IDs from the objective to the KeyResultList', () => {
     sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
     sinon
       .mock(apollo)
@@ -130,5 +130,94 @@ describe('component lifecycle', () => {
     const keyResultList = result.find('KeyResultList')
 
     expect(keyResultList.prop('keyResultIDs')).toEqual(fakeKeyResultsIDs)
+  })
+
+  it('declares itself as loading to our key result list if the apollo query was not called yet', () => {
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1).returns(faker.random.word())
+
+    sinon.stub(apollo, 'useLazyQuery').returns([sinon.fake(), { called: false } as any])
+
+    const result = enzyme.shallow(
+      <ObjectiveAccordionPanel isExpanded objectiveID={faker.random.uuid()} />,
+    )
+
+    const keyResultList = result.find('KeyResultList')
+
+    expect(keyResultList.prop('isLoading')).toEqual(true)
+  })
+
+  it('declares itself as loading to our key result list if the apollo query was called, but it is loading', () => {
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1).returns(faker.random.word())
+
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { called: true, loading: true } as any])
+
+    const result = enzyme.shallow(
+      <ObjectiveAccordionPanel isExpanded objectiveID={faker.random.uuid()} />,
+    )
+
+    const keyResultList = result.find('KeyResultList')
+
+    expect(keyResultList.prop('isLoading')).toEqual(true)
+  })
+
+  it('declares itself as loading to our key result list if the apollo query was finished but the objective was not loaded in our local state yet', () => {
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1).returns({})
+
+    const fakeKeyResultsIDs = [faker.random.word(), faker.random.word(), faker.random.word()]
+    const fakeData = {
+      objective: {
+        ...faker.helpers.userCard(),
+        keyResults: fakeKeyResultsIDs.map((fakeKeyResultID) => ({
+          ...faker.helpers.userCard(),
+          id: fakeKeyResultID,
+        })),
+      },
+    }
+
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { called: true, loading: false, data: fakeData } as any])
+
+    const result = enzyme.shallow(
+      <ObjectiveAccordionPanel isExpanded objectiveID={faker.random.uuid()} />,
+    )
+
+    const keyResultList = result.find('KeyResultList')
+
+    expect(keyResultList.prop('isLoading')).toEqual(true)
+  })
+
+  it('can identify when the objective is loaded in our local state', () => {
+    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
+
+    const fakeKeyResultsIDs = [faker.random.word(), faker.random.word(), faker.random.word()]
+    const fakeData = {
+      objective: {
+        ...faker.helpers.userCard(),
+        keyResults: fakeKeyResultsIDs.map((fakeKeyResultID) => ({
+          ...faker.helpers.userCard(),
+          id: fakeKeyResultID,
+        })),
+      },
+    }
+
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { called: true, loading: false, data: fakeData } as any])
+
+    sinon.stub(recoil, 'useRecoilValue').returns(fakeData.objective)
+
+    const result = enzyme.shallow(
+      <ObjectiveAccordionPanel isExpanded objectiveID={faker.random.uuid()} />,
+    )
+
+    const keyResultList = result.find('KeyResultList')
+
+    expect(keyResultList.prop('isLoading')).toEqual(false)
   })
 })
