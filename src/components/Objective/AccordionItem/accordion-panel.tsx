@@ -1,5 +1,6 @@
 import { useLazyQuery } from '@apollo/client'
 import { AccordionPanel } from '@chakra-ui/react'
+import isEqual from 'lodash/isEqual'
 import uniqueId from 'lodash/uniqueId'
 import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
@@ -23,6 +24,9 @@ export interface GetObjectiveKeyResultsQuery {
   objective: Partial<Objective>
 }
 
+const selectKeyResultIDs = (objective?: Partial<Objective>) =>
+  objective?.keyResults?.map((keyResult) => keyResult.id)
+
 const ObjectiveAccordionPanel = ({
   isExpanded,
   objectiveID,
@@ -33,7 +37,13 @@ const ObjectiveAccordionPanel = ({
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
-  const keyResultIDs = objective?.keyResults?.map((keyResult) => keyResult.id)
+
+  const keyResultIDs = selectKeyResultIDs(objective)
+  const syncedWithLocalState =
+    called &&
+    !loading &&
+    typeof data !== 'undefined' &&
+    isEqual(keyResultIDs, selectKeyResultIDs(data.objective))
 
   useEffect(() => {
     if (isExpanded && !called) fetchObjective({ variables: { objectiveID } })
@@ -56,7 +66,7 @@ const ObjectiveAccordionPanel = ({
           id={`OBJECTIVE_${objectiveID ?? uniqueId()}_ACCORDION`}
           py={8}
           keyResultIDs={keyResultIDs}
-          isLoading={loading}
+          isLoading={!syncedWithLocalState}
           templateColumns="0.1fr 2fr 1fr 2fr 1fr 2fr"
           columns={[
             KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR,
