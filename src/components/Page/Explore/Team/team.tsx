@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { PageContent, PageHead } from 'src/components/Base'
+import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { PageProperties } from 'src/components/Page/types'
 import ChildTeamsObjectives from 'src/components/Team/ChildTeamsObjectives'
 import { Team } from 'src/components/Team/types'
@@ -56,6 +57,7 @@ const ExploreTeamPage = ({ teamId, isRootPage }: ExploreTeamPageProperties) => {
       />
 
       <ChildTeamsObjectives rootTeamId={teamId} />
+      <KeyResultSingleDrawer />
     </PageContent>
   )
 }
