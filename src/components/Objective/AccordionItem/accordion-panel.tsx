@@ -3,7 +3,7 @@ import { AccordionPanel } from '@chakra-ui/react'
 import isEqual from 'lodash/isEqual'
 import uniqueId from 'lodash/uniqueId'
 import React, { useEffect } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
@@ -11,6 +11,7 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
 import queries from './queries.gql'
@@ -37,6 +38,7 @@ const ObjectiveAccordionPanel = ({
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
+  const setOpenDrawer = useSetRecoilState(keyResultOpenDrawer)
 
   const keyResultIDs = selectKeyResultIDs(objective)
   const syncedWithLocalState =
@@ -44,6 +46,8 @@ const ObjectiveAccordionPanel = ({
     !loading &&
     typeof data !== 'undefined' &&
     isEqual(keyResultIDs, selectKeyResultIDs(data.objective))
+
+  const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
   useEffect(() => {
     if (isExpanded && !called) fetchObjective({ variables: { objectiveID } })
@@ -86,6 +90,7 @@ const ObjectiveAccordionPanel = ({
               displayName: true,
             },
           }}
+          onLineClick={handleLineClick}
         />
       )}
     </AccordionPanel>
