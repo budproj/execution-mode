@@ -1,17 +1,15 @@
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
-import pickBy from 'lodash/pickBy'
 import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import { KeyResult, ProgressReport, ConfidenceReport } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import {
   selectCurrentProgress,
   selectCurrentConfidence,
-  selectLatestConfidenceReport,
-  selectLatestReport,
+  selectLatestCheckIn,
 } from 'src/state/recoil/key-result/selectors'
 
 import {
@@ -30,19 +28,15 @@ export interface CheckInFormProperties {
   showCancelButton: boolean
   gutter?: SpaceProps['p']
   keyResultID?: KeyResult['id']
-  afterSubmit?: (
-    newProgress?: ProgressReport['valueNew'],
-    newConfidence?: ConfidenceReport['valueNew'],
-    comment?: ProgressReport['comment'],
-  ) => void
+  afterSubmit?: (values: CheckInFormValues) => void
   onCancel?: () => void
 }
 
 export interface CheckInFormValues {
-  currentProgress?: ProgressReport['valueNew']
-  confidence?: ConfidenceReport['valueNew']
-  newProgress?: ProgressReport['valueNew']
-  comment?: ProgressReport['comment']
+  comment: KeyResultCheckIn['comment']
+  newProgress?: KeyResultCheckIn['progress']
+  currentProgress?: KeyResultCheckIn['progress']
+  confidence?: KeyResultCheckIn['confidence']
 }
 
 const CheckInForm = ({
@@ -55,15 +49,16 @@ const CheckInForm = ({
   onCancel,
 }: CheckInFormProperties) => {
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
-  const [confidence, setConfidence] = useRecoilState(selectCurrentConfidence(keyResultID))
-  const setLatestReport = useSetRecoilState(selectLatestReport(keyResultID))
-  const setConfidenceReport = useSetRecoilState(selectLatestConfidenceReport(keyResultID))
+  const [currentConfidence, setCurrentConfidence] = useRecoilState(
+    selectCurrentConfidence(keyResultID),
+  )
+  const setLatestCheckIn = useSetRecoilState(selectLatestCheckIn(keyResultID))
   const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
   const [createCheckIn, data] = useMutation(queries.CREATE_KEY_RESULT_CHECK_IN)
 
   const initialValues: CheckInFormValues = {
     currentProgress,
-    confidence,
+    confidence: currentConfidence,
     comment: '',
   }
 
@@ -73,36 +68,26 @@ const CheckInForm = ({
   }
 
   const syncRecoilState = (values: CheckInFormValues) => {
-    if (values.newProgress && values.newProgress !== currentProgress)
-      setCurrentProgress(values.newProgress)
-    if (values.confidence && values.confidence !== confidence) {
-      setConfidence(values.confidence)
-      setConfidenceReport({ valueNew: values.confidence })
-    }
-
+    if (values.newProgress !== currentProgress) setCurrentProgress(values.newProgress)
+    if (values.confidence !== currentConfidence) setCurrentConfidence(values.confidence)
     if (values.comment) {
-      setLatestReport({ comment: values.comment })
+      setLatestCheckIn({ comment: values.comment })
     }
 
     setCommentEnabled(isCommentAlwaysEnabled)
   }
 
-  const dispatchRemoteUpdate = async (
-    newProgress: CheckInFormValues['currentProgress'],
-    newConfidence: CheckInFormValues['confidence'],
-    comment: CheckInFormValues['comment'],
-  ) => {
+  const dispatchRemoteUpdate = async (values: CheckInFormValues) => {
     const checkIn = {
-      comment,
       keyResultId: keyResultID,
-      progress: newProgress,
-      confidence: newConfidence,
+      progress: values.newProgress,
+      confidence: values.confidence,
+      comment: values.comment,
     }
-    const clearedCheckIn = pickBy(checkIn)
 
     await createCheckIn({
       variables: {
-        checkInInput: clearedCheckIn,
+        keyResultCheckInInput: checkIn,
       },
     })
   }
@@ -112,17 +97,13 @@ const CheckInForm = ({
     actions: FormikHelpers<CheckInFormValues>,
   ) => {
     const wasProgressUpdated = values.newProgress !== currentProgress
-    const wasConfidenceUpdated = values.confidence !== confidence
+    const wasConfidenceUpdated = values.confidence !== currentConfidence
     const wasCommentCreated = values.comment && values.comment !== ''
 
     if (wasProgressUpdated || wasConfidenceUpdated || wasCommentCreated) {
-      const newProgress = wasProgressUpdated ? values.newProgress : undefined
-      const newConfidence = wasConfidenceUpdated ? values.confidence : undefined
-      const comment = wasCommentCreated ? values.comment : undefined
+      await dispatchRemoteUpdate(values)
 
-      await dispatchRemoteUpdate(newProgress, newConfidence, comment)
-
-      if (afterSubmit) afterSubmit(newProgress, newConfidence, comment)
+      if (afterSubmit) afterSubmit(values)
 
       syncRecoilState(values)
       refreshFields(values, actions)

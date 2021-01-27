@@ -22,7 +22,7 @@ export interface KeyResultCustomList {
   user: User
   title?: string
   binding?: KEY_RESULT_VIEW_BINDING
-  rank?: KeyResult['id'][]
+  rank?: Array<KeyResult['id']>
   keyResults?: KeyResult[]
 }
 

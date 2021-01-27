@@ -10,7 +10,7 @@ import KeyResultSectionCommentsCommentHead from './Head'
 export interface KeyResultSectionCommentsCommentProperties {
   user?: User
   createdAt?: ProgressReport['createdAt']
-  comment?: ProgressReport['comment']
+  comment?: KeyResultCheckIn['comment']
 }
 
 const KeyResultSectionCommentsComment = ({

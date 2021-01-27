@@ -7,7 +7,10 @@ import { useRecoilState } from 'recoil'
 import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
-import { KeyResult, KeyResultCustomList as KeyResultCustomListType } from 'src/components/KeyResult/types'
+import {
+  KeyResult,
+  KeyResultCustomList as KeyResultCustomListType,
+} from 'src/components/KeyResult/types'
 import { KEY_RESULT_VIEW_BINDING } from 'src/components/User/constants'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
@@ -23,7 +26,10 @@ export interface GetKeyResultCustomListWithBindingQuery {
   keyResultCustomList: Partial<KeyResultCustomListType>
 }
 
-const KeyResultCustomList = ({ onLineClick, ...rest }: KeyResultCustomListProperties): ReactElement => {
+const KeyResultCustomList = ({
+  onLineClick,
+  ...rest
+}: KeyResultCustomListProperties): ReactElement => {
   const [keyResultCustomList, setKeyResultCustomList] = useRecoilState(keyResultCustomListAtom)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [updateRank] = useMutation(queries.UPDATE_RANK)

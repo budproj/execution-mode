@@ -1,10 +1,8 @@
 import { Text, SkeletonText } from '@chakra-ui/react'
 import React from 'react'
 
-import { ProgressReport } from 'src/components/KeyResult/types'
-
 export interface KeyResultSectionCommentsCommentBodyProperties {
-  comment?: ProgressReport['comment']
+  comment?: KeyResultCheckIn['comment']
 }
 
 const KeyResultSectionCommentsCommentBody = ({

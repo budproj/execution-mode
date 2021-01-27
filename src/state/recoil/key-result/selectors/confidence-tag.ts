@@ -1,8 +1,6 @@
 import { MessageDescriptor } from 'react-intl'
 import { selectorFamily } from 'recoil'
 
-import { ConfidenceReport } from 'src/components/KeyResult/types'
-
 import { PREFIX } from './constants'
 import { confidenceTagMessages } from './messages'
 
@@ -33,8 +31,8 @@ export const CONFIDENCE_BARRIER = {
 }
 
 export const normalizeConfidence = (
-  value?: ConfidenceReport['valueNew'],
-): ConfidenceReport['valueNew'] => {
+  value?: KeyResultCheckIn['confidence'],
+): KeyResultCheckIn['confidence'] => {
   const defaultConfidence = CONFIDENCE_HIGH.max
 
   if (!value && value !== 0) return defaultConfidence
@@ -48,7 +46,7 @@ export const normalizeConfidence = (
 }
 
 export const getConfidenceTagBasedOnValue = (
-  value: ConfidenceReport['valueNew'] = CONFIDENCE_HIGH.min,
+  value: KeyResultCheckIn['confidence'] = CONFIDENCE_HIGH.min,
 ) => (): Tag => {
   const normalizedConfidence = normalizeConfidence(value)
   const confidenceHashmap = {
@@ -84,7 +82,7 @@ export const getConfidenceTagBasedOnValue = (
   return confidenceHashmap[normalizedConfidence]
 }
 
-export const confidenceTag = selectorFamily<Tag, ConfidenceReport['valueNew'] | undefined>({
+export const confidenceTag = selectorFamily<Tag, KeyResultCheckIn['confidence'] | undefined>({
   key: KEY,
   get: getConfidenceTagBasedOnValue,
 })

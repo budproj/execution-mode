@@ -1,6 +1,6 @@
 import { KeyResult, KeyResultCheckIn, KeyResultCustomList } from 'src/components/KeyResult/types'
-import { Team } from 'src/components/Team/types'
 import { Objective } from 'src/components/Objective/types'
+import { Team } from 'src/components/Team/types'
 
 import { USER_GENDER, USER_POLICY } from './constants'
 

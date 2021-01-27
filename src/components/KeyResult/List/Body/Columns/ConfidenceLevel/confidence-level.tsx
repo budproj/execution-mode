@@ -8,10 +8,7 @@ import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import {
-  selectCurrentConfidence,
-  selectLatestConfidenceReport,
-} from 'src/state/recoil/key-result/selectors'
+import { selectCurrentConfidence, selectLatestCheckIn } from 'src/state/recoil/key-result/selectors'
 
 export interface KeyResultListBodyColumnConfidenceLevelProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -24,10 +21,8 @@ const KeyResultListBodyColumnConfidenceLevel = ({
   withLastUpdateInfo,
 }: KeyResultListBodyColumnConfidenceLevelProperties): ReactElement => {
   const currentConfidence = useRecoilValue(selectCurrentConfidence(id))
-  const latestConfidenceReport = useRecoilValue(selectLatestConfidenceReport(id))
-  const lastUpdateDate = latestConfidenceReport?.createdAt
-    ? new Date(latestConfidenceReport.createdAt)
-    : undefined
+  const latestCheckIn = useRecoilValue(selectLatestCheckIn(id))
+  const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
 
   const isKeyResultLoaded = Boolean(id)
 
@@ -50,7 +45,7 @@ const KeyResultListBodyColumnConfidenceLevel = ({
             isLoaded={isKeyResultLoaded}
             pl={8}
           >
-            <LastUpdateText date={lastUpdateDate} author={latestConfidenceReport?.user?.fullName} />
+            <LastUpdateText date={lastUpdateDate} author={latestCheckIn?.user?.fullName} />
           </SkeletonText>
         )}
       </Flex>

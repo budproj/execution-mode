@@ -5,7 +5,8 @@ import { useSetRecoilState } from 'recoil'
 
 import { Close as CloseIcon } from 'src/components/Icon'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
-import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
+import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
+import { KeyResult } from 'src/components/KeyResult/types'
 import {
   keyResultCheckInProgressDraft,
   keyResultCheckInPopoverOpen,
@@ -27,8 +28,8 @@ const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentPr
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const setPopoverOpen = useSetRecoilState<boolean>(keyResultCheckInPopoverOpen(keyResultID))
 
-  const handleSubmit = (newProgress?: ProgressReport['valueNew']) => {
-    if (newProgress) setDraftValue(newProgress)
+  const handleSubmit = (values: CheckInFormValues) => {
+    if (values.newProgress) setDraftValue(values.newProgress)
     setPopoverOpen(false)
   }
 
