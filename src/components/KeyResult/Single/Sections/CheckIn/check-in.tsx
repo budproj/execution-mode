@@ -16,8 +16,8 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
   const [showEncouragingMessage, setShowEncouragingMessage] = useState(false)
   const intl = useIntl()
 
-  const handleSubmitSideEffects = (newProgress?: KeyResultCheckIn['progress']) => {
-    if (newProgress) setShowEncouragingMessage(true)
+  const handleSubmitSideEffects = () => {
+    setShowEncouragingMessage(true)
   }
 
   useEffect(() => {

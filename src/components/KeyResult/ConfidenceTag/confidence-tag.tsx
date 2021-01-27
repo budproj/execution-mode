@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil'
 
 import CircleIcon from 'src/components/Icon/Circle'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
+import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 
 export interface ConfidenceTagProperties {
   confidenceValue?: KeyResultCheckIn['confidence']

@@ -1,13 +1,13 @@
 import React from 'react'
 
 import { EmptyState } from 'src/components/Base'
-import { ProgressReport } from 'src/components/KeyResult/types'
+import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 
 import KeyResultSectionCommentsComment from './Comment'
 import messages from './messages'
 
 export interface KeyResultSectionsCommentsListProperties {
-  comments?: ProgressReport[]
+  comments?: KeyResultCheckIn[]
 }
 
 const KeyResultSectionsCommentsList = ({ comments }: KeyResultSectionsCommentsListProperties) =>

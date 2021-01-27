@@ -23,7 +23,7 @@ const CompanyProgressOverviewBodyStampCompany = ({
 }: CompanyProgressOverviewBodyStampCompanyProperties) => {
   const intl = useIntl()
   const company = useRecoilValue(teamAtomFamily(companyID))
-  const latestReport = company?.latestReport
+  const latestKeyResultCheckIn = company?.latestKeyResultCheckIn
 
   return (
     <CompanyProgressOverviewBodyStampBase
@@ -41,8 +41,8 @@ const CompanyProgressOverviewBodyStampCompany = ({
 
       <Skeleton isLoaded={!isLoading} {...buildSkeletonMinSize(!isLoading, 310, 20)}>
         <LastUpdateText
-          date={new Date(latestReport?.createdAt ?? '')}
-          author={latestReport?.user?.fullName}
+          date={new Date(latestKeyResultCheckIn?.createdAt ?? '')}
+          author={latestKeyResultCheckIn?.user?.fullName}
         />
       </Skeleton>
     </CompanyProgressOverviewBodyStampBase>

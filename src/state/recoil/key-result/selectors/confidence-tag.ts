@@ -1,5 +1,6 @@
 import { MessageDescriptor } from 'react-intl'
 import { selectorFamily } from 'recoil'
+import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 
 import { PREFIX } from './constants'
 import { confidenceTagMessages } from './messages'

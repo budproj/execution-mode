@@ -2,13 +2,13 @@ import { Avatar, Flex, Heading, Skeleton, SkeletonCircle, Text } from '@chakra-u
 import React from 'react'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import { ProgressReport } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
 import useRelativeDate from 'src/state/hooks/useRelativeDate'
+import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 
 export interface KeyResultSectionCommentsCommentHeadProperties {
   user?: User
-  createdAt?: ProgressReport['createdAt']
+  createdAt?: KeyResultCheckIn['createdAt']
 }
 
 const KeyResultSectionCommentsCommentHead = ({
