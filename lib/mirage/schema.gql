@@ -2,34 +2,50 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""A report that records new confidence in a given key result"""
-type ConfidenceReport {
-  """The ID of your report"""
+"""
+Defines the current available resource policies. You can use it to build read/create/update/delete logic on your application
+"""
+type Policies {
+  create: POLICY!
+  read: POLICY!
+  update: POLICY!
+  delete: POLICY!
+}
+
+"""
+Defines if the current user has the permission for a given action regarding the resource
+"""
+enum POLICY {
+  ALLOW
+  DENY
+}
+
+"""
+A view created by an user that represents a custom key result ranking for a given binding
+"""
+type KeyResultCustomList {
+  """The ID of the key result view"""
   id: ID!
 
-  """The value of the latest previous report"""
-  valuePrevious: Int
-
-  """The last value reported"""
-  valueNew: Int!
-
-  """The comment in the report"""
-  comment: String
-
-  """The creation date of the report"""
+  """The creation date of this view"""
   createdAt: DateTime!
 
-  """The key result ID that this report is related to"""
-  keyResultId: ID!
+  """The last update date of this view"""
+  updatedAt: DateTime!
 
-  """The key result that this report relates to"""
-  keyResult: KeyResult!
-
-  """The user ID that owns this report"""
+  """The ID of the uswer that owns this view"""
   userId: ID!
-
-  """The user that owns this report"""
   user: User!
+
+  """The title of the key result view"""
+  title: String
+
+  """An anchor between this view and a fixed tab in our applications"""
+  binding: String
+
+  """Ordered list of key result IDs"""
+  rank: [ID!]
+  keyResults: [KeyResult!]
 }
 
 """
@@ -37,34 +53,119 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+"""
+User is an entity inside a given root team (a.k.a. company). It is associated with many teams, progress reports, and others.
+"""
+type User {
+  """The ID of the user"""
+  id: ID!
+
+  """The name of the user"""
+  firstName: String!
+  fullName: String!
+
+  """The sub field in Auth0 (their ID)"""
+  authzSub: String!
+
+  """The creation date of the user"""
+  createdAt: DateTime!
+
+  """The last update date of this user"""
+  updatedAt: DateTime!
+
+  """The last name of the user"""
+  lastName: String
+
+  """The gender of the user"""
+  gender: String
+
+  """The user role in the company"""
+  role: String
+
+  """The picture of the user"""
+  picture: String
+  companies(limit: Int): [Team!]
+  teams: [Team!]
+  ownedTeams: [Team!]
+  objectives: [Objective!]
+  keyResults: [KeyResult!]
+  keyResultCustomLists: [KeyResultCustomList!]
+  checkIns: [KeyResultCheckIn!]
+}
+
+"""A goal that is created for the team focusing in a given team objective"""
+type KeyResult {
+  """The ID of the key result"""
+  id: ID!
+
+  """The title(name) of the key result"""
+  title: String!
+
+  """The initial value of the key result"""
+  initialValue: Float!
+
+  """The goal of the key result"""
+  goal: Float!
+
+  """The format of the key result"""
+  format: String!
+  currentProgress: Float!
+  currentConfidence: Float!
+
+  """The creation date of the key result"""
+  createdAt: DateTime!
+
+  """The last update date of the key result"""
+  updatedAt: DateTime!
+
+  """The owner ID of the key result"""
+  ownerId: ID!
+  owner: User!
+
+  """The object ID that this key result belongs to"""
+  objectiveId: ID!
+  objective: Objective!
+
+  """The team ID that this key result belongs to"""
+  teamId: ID!
+  team: Team!
+  policies: Policies!
+
+  """The description explaining the key result"""
+  description: String
+  checkIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
+}
+
+"""Defines the order to return your results in a given query"""
+enum QUERY_ORDER {
+  DESC
+  ASC
+}
+
 """A report that records new progress in a given key result"""
-type ProgressReport {
+type KeyResultCheckIn {
   """The ID of your report"""
   id: ID!
 
-  """The value of the latest previous report"""
-  valuePrevious: Float
+  """The reported progress in this check-in"""
+  progress: Float!
 
-  """The last value reported"""
-  valueNew: Float!
-
-  """The comment in the report"""
-  comment: String
+  """The reported confidence in this check-in"""
+  confidence: Int!
 
   """The creation date of the report"""
   createdAt: DateTime!
 
   """The key result ID that this report is related to"""
   keyResultId: ID!
-
-  """The key result that this report relates to"""
   keyResult: KeyResult!
 
   """The user ID that owns this report"""
   userId: ID!
-
-  """The user that owns this report"""
   user: User!
+
+  """The comment added in the report"""
+  comment: String
 }
 
 """
@@ -77,282 +178,40 @@ type Team {
   """The name of the team"""
   name: String!
 
+  """The creation date of the team"""
+  createdAt: DateTime!
+
+  """The last update date of the team"""
+  updatedAt: DateTime!
+  users: [User!]!
+
+  """The user ID that owns this team"""
+  ownerId: ID!
+  owner: User!
+
+  """The ID of the team that owns this team"""
+  parentTeamId: ID
+  parentTeam: Team!
+  isCompany: Boolean!
+  teams: [Team!]!
+  currentProgress: Float!
+  currentConfidence: Int!
+  percentageProgressIncrease: Float!
+
   """The description about the team"""
   description: String
 
   """The gender of the team"""
   gender: String
 
-  """The creation date of the team"""
-  createdAt: DateTime!
-
-  """The last update date of the team"""
-  updatedAt: DateTime!
-
-  """
-  The creation date ordered list of key results that belongs to that team
-  """
-  keyResults: [KeyResult!]!
-
-  """A creation date ordered list of users that are members of this team"""
-  users: [User!]!
-
-  """The user ID that owns this team"""
-  ownerId: ID!
-
-  """The user that owns this team"""
-  owner: User!
-
-  """The ID of the team that owns this team"""
-  parentTeamId: ID
-
-  """The team that owns this team"""
-  parentTeam: Team
-  teams: [Team!]!
-
-  """The computed percentage current progress of this team"""
-  currentProgress: Float
-
-  """The computed current confidence of this team"""
-  currentConfidence: Float
-
-  """The created ordered list of objectives in this team"""
-  objectives: [Objective!]
-
-  """The cycles that belongs to this team"""
-  cycles: [Cycle!]!
-
   """
   The team that is the company of this team. This is also known as "rootTeam"
   """
-  company: Team!
-
-  """The percentage progress increase of the team since last monday"""
-  percentageProgressIncrease: Float!
-
-  """The latest report for this team"""
-  latestReport: ProgressReport
-
-  """Defines if the team is a company"""
-  isCompany: Boolean!
-}
-
-"""
-User is an entity inside a given root team (a.k.a. company). It is associated with many teams, progress reports, and others.
-"""
-type User {
-  """The ID of the user"""
-  id: ID!
-
-  """The name of the user"""
-  firstName: String!
-
-  """The last name of the user"""
-  lastName: String
-
-  """The full name of the user"""
-  fullName: String!
-
-  """The sub field in Auth0 (their ID)"""
-  authzSub: String!
-
-  """The gender of the user"""
-  gender: String
-
-  """The user role in the company"""
-  role: String
-
-  """The picture of the user"""
-  picture: String
-
-  """The creation date of the user"""
-  createdAt: DateTime!
-
-  """The last update date of this user"""
-  updatedAt: DateTime!
-
-  """The creation date ordered list of key results that this user owns"""
-  keyResults: [KeyResult!]!
-
-  """The creation date ordered list of objectives that this user owns"""
-  objectives: [Objective!]!
-
-  """
-  The creation date ordered list of progress reports created by this user
-  """
-  progressReports: [ProgressReport!]!
-
-  """
-  The creation date ordered list of confidence reports created by this user
-  """
-  confidenceReports: [ConfidenceReport!]!
-
-  """The creation date ordered list of teams that this user is part of"""
-  teams: [Team!]!
-
-  """The creation date ordered list of teams that this user owns"""
-  ownedTeams: [Team!]!
-
-  """
-  The creation date ordered list of companies that this user is a part of
-  """
-  companies(limit: Int): [Team!]!
-}
-
-"""
-Defines the current user policies regarding a given resource. You can use it to display read/create/update/delete controls on your application
-"""
-type Policies {
-  create: USER_POLICY!
-  read: USER_POLICY!
-  update: USER_POLICY!
-  delete: USER_POLICY!
-}
-
-"""
-Defines if the user has the allowance for a given action regarding the resource
-"""
-enum USER_POLICY {
-  ALLOW
-  DENY
-}
-
-"""Common shared object values between multiple report types"""
-type Report {
-  """The ID of the report"""
-  id: ID!
-
-  """The creation date of the report"""
-  createdAt: DateTime!
-
-  """The key result ID of this report"""
-  keyResultId: ID!
-
-  """The key result of that report"""
-  keyResult: KeyResult!
-
-  """The new progress in the report"""
-  progress: Float
-
-  """The new confidence in the report"""
-  confidence: Int
-
-  """The comment submitted with the report"""
-  comment: String
-
-  """The user ID that created this report"""
-  userId: ID!
-
-  """The user that created this report"""
-  user: User!
-}
-
-"""A goal that is created for the team focusing in a given team objective"""
-type KeyResult {
-  """The ID of the key result"""
-  id: ID!
-
-  """The title(name) of the key result"""
-  title: String!
-
-  """The description explaining the key result"""
-  description: String
-
-  """The initial value of the key result"""
-  initialValue: Float!
-
-  """The goal of the key result"""
-  goal: Float!
-
-  """The format of the key result"""
-  format: String!
-
-  """The creation date of the key result"""
-  createdAt: DateTime!
-
-  """The last update date of the key result"""
-  updatedAt: DateTime!
-
-  """The owner ID of the key result"""
-  ownerId: ID!
-
-  """The owner of the key result"""
-  owner: User!
-
-  """The object ID that this key result belongs to"""
-  objectiveId: ID!
-
-  """The objective that this key result belongs to"""
-  objective: Objective!
-
-  """The team ID that this key result belongs to"""
-  teamId: ID!
-
-  """The team that this key result belongs to"""
-  team: Team!
-
-  """The creation date ordered list of progress reports for this key result"""
-  progressReports(limit: Int): [ProgressReport!]!
-
-  """
-  The creation date ordered list of confidence reports for this key result
-  """
-  confidenceReports(limit: Int): [ConfidenceReport!]!
-
-  """
-  Group of policies regarding given key result. Those policies decribe actions that your user can perform with that given resource
-  """
-  policies: Policies!
-
-  """The latest reported current progress of this key result"""
-  currentProgress: Float
-
-  """The latest reported current confidence of this key result"""
-  currentConfidence: Float
-
-  """Created date ordered list of reports regarding this key result"""
-  reports: [Report!]
-}
-
-"""A group of key results that has the same focus"""
-type Objective {
-  """The ID of the objective"""
-  id: ID!
-
-  """The title(name) of the objective"""
-  title: String!
-
-  """The creation date of the objective"""
-  createdAt: DateTime!
-
-  """The last update date of the objective"""
-  updatedAt: DateTime!
-
-  """
-  A creation date ordered list of key results that belongs to this objective
-  """
-  keyResults: [KeyResult!]!
-
-  """The cycle ID that owns this objective"""
-  cycleId: ID!
-
-  """The cycle that owns this objective"""
-  cycle: Cycle!
-
-  """The user ID that owns this objective"""
-  ownerId: ID!
-
-  """The user that owns this objective"""
-  owner: User!
-
-  """The computed percentage current progress of this objective"""
-  currentProgress: Float
-
-  """The computed current confidence of this objective"""
-  currentConfidence: Float
-
-  """The percentage progress increase since last monday"""
-  percentageProgressIncrease: Float!
+  company: Team
+  cycles: [Cycle!]
+  objectives: [Objective!]
+  keyResults: [KeyResult!]
+  latestKeyResultCheckIn: KeyResultCheckIn
 }
 
 """
@@ -376,147 +235,81 @@ type Cycle {
 
   """The team ID that this cycle belongs to"""
   teamId: ID!
-
-  """The team that this cycle belongs to"""
   team: Team!
-
-  """The objectives inside this cycle"""
-  objectives: [Objective!]!
 
   """The name of the cycle"""
   name: String!
+  objectives: [Objective!]
 }
 
-"""
-A view created by an user that represents a custom key result ranking for a given binding
-"""
-type KeyResultView {
-  """The ID of the key result view"""
+"""A group of key results that has the same focus"""
+type Objective {
+  """The ID of the objective"""
   id: ID!
 
-  """The title(name) of the key result view"""
-  title: String
+  """The title(name) of the objective"""
+  title: String!
+  currentProgress: Float!
+  currentConfidence: Int!
+  percentageProgressIncrease: Float!
 
-  """An anchor between this view and a fixed tab in our applications"""
-  binding: String
-
-  """Ordered list of key result IDs"""
-  rank: [ID!]!
-
-  """The rank ordered list of key results in that view"""
-  keyResults: [KeyResult!]!
-
-  """The creation date of this view"""
+  """The creation date of the objective"""
   createdAt: DateTime!
 
-  """The last update date of this view"""
+  """The last update date of the objective"""
   updatedAt: DateTime!
 
-  """The ID of the uswer that owns this view"""
-  userId: ID!
+  """The cycle ID that owns this objective"""
+  cycleId: ID!
+  cycle: Cycle!
 
-  """The user that owns this view"""
-  user: User!
+  """The user ID that owns this objective"""
+  ownerId: ID!
+  owner: User!
+  keyResults: [KeyResult!]
 }
 
 type Query {
-  confidenceReport(id: ID!): ConfidenceReport!
-  progressReport(id: ID!): ProgressReport!
+  user(id: ID!): User!
+  me: User!
   team(id: ID!): Team!
   teams(onlyCompaniesAndDepartments: Boolean, onlyCompanies: Boolean, parentTeamId: ID): [Team!]
   cycle(id: ID!): Cycle!
-  report(id: ID!): Report!
-  keyResult(id: ID!): KeyResult!
   objective(id: ID!): Objective!
-  user(id: ID!): User!
-  me: User!
-  keyResultView(binding: KEY_RESULT_VIEW_BINDING, id: ID): KeyResultView!
+  keyResult(id: ID!): KeyResult!
+  keyResultCustomList(binding: KEY_RESULT_CUSTOM_LIST_BINDING, id: ID): KeyResultCustomList!
+  keyResultCheckIn(id: ID!): KeyResultCheckIn!
 }
 
-"""Each binding represents a given view in our applications"""
-enum KEY_RESULT_VIEW_BINDING {
+"""
+Each binding represents a given key result custom list in our applications
+"""
+enum KEY_RESULT_CUSTOM_LIST_BINDING {
   MINE
 }
 
 type Mutation {
-  createProgressReport(progressReportInput: ProgressReportInput!): ProgressReport!
-  createCheckIn(checkInInput: CheckInInput!): [Report!]!
-  updateKeyResult(keyResultInput: KeyResultInput!, id: ID!): KeyResult!
-  updateRank(keyResultViewRankInput: KeyResultViewRankInput!, id: ID!): KeyResultView!
-  createKeyResultView(keyResultViewInput: KeyResultViewInput!): KeyResultView!
+  updateKeyResultCustomList(keyResultCustomListInput: KeyResultCustomListInput!, id: ID!): KeyResultCustomList!
+  createKeyResultCheckIn(keyResultCheckIn: KeyResultCheckInInput!): KeyResultCheckIn!
+}
+
+"""Required data to update a given key result custom list"""
+input KeyResultCustomListInput {
+  """Ordered list of key result IDs"""
+  rank: [ID!]!
 }
 
 """The required data to create a new progress report"""
-input ProgressReportInput {
+input KeyResultCheckInInput {
   """The progress value you are reporting"""
-  value: Float!
+  progress: Float!
 
-  """The comment in your report"""
-  comment: String
+  """The confidence value you are reporting"""
+  confidence: Int!
 
   """The key result ID related to this report"""
   keyResultId: ID!
-}
 
-"""Input data to create a new check-in"""
-input CheckInInput {
-  """The key result ID that you are reporting updated to"""
-  keyResultId: ID!
-
-  """The new progress in the report"""
-  progress: Float
-
-  """The new confidence in the report"""
-  confidence: Int
-
-  """The comment in your new check-in report"""
+  """The comment in your report"""
   comment: String
-}
-
-"""Partial key result data you can send to update a given key result"""
-input KeyResultInput {
-  """The title(name) of the key result"""
-  title: String
-
-  """The description explaining the key result"""
-  description: String
-
-  """The initial value of the key result"""
-  initialValue: Float
-
-  """The goal of the key result"""
-  goal: Float
-
-  """The format of the key result"""
-  format: String
-
-  """The owner ID of the key result"""
-  ownerId: ID
-
-  """The object ID that this key result belongs to"""
-  objectiveId: ID
-
-  """The team ID that this key result belongs to"""
-  teamId: ID
-}
-
-"""Required data to update a given key result view rank"""
-input KeyResultViewRankInput {
-  """Ordered list of key result IDs"""
-  rank: [ID!]!
-}
-
-"""Required data to create a new key result view"""
-input KeyResultViewInput {
-  """The title(name) of the key result view"""
-  title: String
-
-  """An anchor between this view and a fixed tab in our applications"""
-  binding: String
-
-  """Ordered list of key result IDs"""
-  rank: [ID!]!
-
-  """The ID of the user that you are creating a view to"""
-  userId: ID
 }

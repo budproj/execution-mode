@@ -59,7 +59,7 @@ const CheckInForm = ({
   const setLatestReport = useSetRecoilState(selectLatestReport(keyResultID))
   const setConfidenceReport = useSetRecoilState(selectLatestConfidenceReport(keyResultID))
   const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
-  const [createCheckIn, data] = useMutation(queries.CREATE_CHECK_IN)
+  const [createCheckIn, data] = useMutation(queries.CREATE_KEY_RESULT_CHECK_IN)
 
   const initialValues: CheckInFormValues = {
     currentProgress,

@@ -25,7 +25,7 @@ export interface ProgressReport {
   keyResult: KeyResult
 }
 
-export interface KeyResultView {
+export interface KeyResultCustomList {
   id: string
   title?: string
   binding?: KEY_RESULT_VIEW_BINDING

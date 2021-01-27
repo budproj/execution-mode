@@ -8,8 +8,6 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { USER_POLICY } from 'src/components/User/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
-import queries from './queries.gql'
-
 export interface KeyResultSectionTitleProperties {
   keyResultID?: KeyResult['id']
 }
@@ -20,7 +18,6 @@ const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
 const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties) => {
   const [title, setTitle] = useRecoilState(titleSelector(keyResultID))
   const policies = useRecoilValue(policiesSelector(keyResultID))
-  const [updateRemoteKeyResultTitle] = useMutation(queries.UPDATE_KEY_RESULT)
   const [titleDraft, setTitleDraft] = useState(title)
 
   const isTitleLoaded = Boolean(title)
@@ -28,14 +25,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
 
   const handleTitleSubmit = async (newTitle: string) => {
     setTitle(newTitle)
-    await updateRemoteKeyResultTitle({
-      variables: {
-        id: keyResultID,
-        keyResultInput: {
-          title: newTitle,
-        },
-      },
-    })
+    // DEPRECATED: Update remote state
   }
 
   return (

@@ -7,7 +7,7 @@ import sinon from 'sinon'
 
 import * as recoilHooks from 'src/state/recoil/hooks'
 
-import KeyResultView from './view'
+import KeyResultCustomList from './custom-list'
 
 describe('component lifecycle', () => {
   afterEach(() => sinon.restore())
@@ -20,7 +20,7 @@ describe('component lifecycle', () => {
     const spy = sinon.spy()
     sinon.stub(apollo, 'useLazyQuery').returns([spy, { called: false }] as any)
 
-    enzyme.shallow(<KeyResultView />)
+    enzyme.shallow(<KeyResultCustomList />)
 
     const spyExpectedArguments = {
       variables: {
@@ -40,7 +40,7 @@ describe('component lifecycle', () => {
     const spy = sinon.spy()
     sinon.stub(apollo, 'useLazyQuery').returns([spy, { called: true }] as any)
 
-    enzyme.shallow(<KeyResultView />)
+    enzyme.shallow(<KeyResultCustomList />)
 
     expect(spy.notCalled).toEqual(true)
   })
@@ -50,9 +50,9 @@ describe('component lifecycle', () => {
     sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
 
     const spy = sinon.spy()
-    const fakeKeyResultView = faker.helpers.userCard()
+    const fakeKeyResultCustomList = faker.helpers.userCard()
     const fakeData = {
-      keyResultView: fakeKeyResultView,
+      keyResultCustomList: fakeKeyResultCustomList,
     }
 
     sinon.stub(recoil, 'useRecoilState').returns([undefined, spy])
@@ -60,9 +60,9 @@ describe('component lifecycle', () => {
       .stub(apollo, 'useLazyQuery')
       .returns([sinon.fake(), { loading: false, data: fakeData }] as any)
 
-    enzyme.shallow(<KeyResultView />)
+    enzyme.shallow(<KeyResultCustomList />)
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeKeyResultView)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeKeyResultCustomList)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -74,7 +74,7 @@ describe('component lifecycle', () => {
     const spy = sinon.spy()
     const fakeKeyResults = [faker.helpers.userCard()]
     const fakeData = {
-      keyResultView: {
+      keyResultCustomList: {
         keyResults: fakeKeyResults,
       },
     }
@@ -82,7 +82,7 @@ describe('component lifecycle', () => {
     sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(spy)
     sinon.stub(apollo, 'useLazyQuery').returns([sinon.fake(), { data: fakeData }] as any)
 
-    enzyme.shallow(<KeyResultView />)
+    enzyme.shallow(<KeyResultCustomList />)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeKeyResults)
 
@@ -96,7 +96,7 @@ describe('component lifecycle', () => {
 
     sinon.stub(apollo, 'useLazyQuery').returns([sinon.fake(), { called: false }] as any)
 
-    const result = enzyme.shallow(<KeyResultView />)
+    const result = enzyme.shallow(<KeyResultCustomList />)
 
     const list = result.find('KeyResultList')
 
@@ -112,7 +112,7 @@ describe('component lifecycle', () => {
       .stub(apollo, 'useLazyQuery')
       .returns([sinon.fake(), { called: true, loading: true }] as any)
 
-    const result = enzyme.shallow(<KeyResultView />)
+    const result = enzyme.shallow(<KeyResultCustomList />)
 
     const list = result.find('KeyResultList')
 
@@ -125,7 +125,7 @@ describe('component lifecycle', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 
     const fakeData = {
-      keyResultView: {
+      keyResultCustomList: {
         rank: faker.random.word(),
       },
     }
@@ -134,7 +134,7 @@ describe('component lifecycle', () => {
       .stub(apollo, 'useLazyQuery')
       .returns([sinon.fake(), { called: true, loading: false, data: fakeData }] as any)
 
-    const result = enzyme.shallow(<KeyResultView />)
+    const result = enzyme.shallow(<KeyResultCustomList />)
 
     const list = result.find('KeyResultList')
 
@@ -146,7 +146,7 @@ describe('component lifecycle', () => {
     sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
 
     const fakeData = {
-      keyResultView: {
+      keyResultCustomList: {
         rank: faker.random.word(),
       },
     }
@@ -155,9 +155,9 @@ describe('component lifecycle', () => {
       .stub(apollo, 'useLazyQuery')
       .returns([sinon.fake(), { called: true, loading: false, data: fakeData }] as any)
 
-    sinon.stub(recoil, 'useRecoilState').returns([fakeData.keyResultView, sinon.fake()])
+    sinon.stub(recoil, 'useRecoilState').returns([fakeData.keyResultCustomList, sinon.fake()])
 
-    const result = enzyme.shallow(<KeyResultView />)
+    const result = enzyme.shallow(<KeyResultCustomList />)
 
     const list = result.find('KeyResultList')
 
@@ -181,14 +181,14 @@ describe('component interations', () => {
     const fakeBaseRank = [...new Array(rankLength)].map(() => faker.random.number())
     const fakeRank = [firstElement, secondElement, ...fakeBaseRank]
 
-    const fakeKeyResultView = {
+    const fakeKeyResultCustomList = {
       ...faker.helpers.userCard(),
       rank: fakeRank,
     }
 
-    sinon.stub(recoil, 'useRecoilState').returns([fakeKeyResultView, spy])
+    sinon.stub(recoil, 'useRecoilState').returns([fakeKeyResultCustomList, spy])
 
-    const result = enzyme.shallow(<KeyResultView />)
+    const result = enzyme.shallow(<KeyResultCustomList />)
     const list = result.find('KeyResultList')
 
     list.simulate('lineDragEnd', {
@@ -197,11 +197,11 @@ describe('component interations', () => {
     })
 
     const expectedFakeRank = [secondElement, firstElement, ...fakeBaseRank]
-    const newFakeKeyResultView = {
-      ...fakeKeyResultView,
+    const newFakeKeyResultCustomList = {
+      ...fakeKeyResultCustomList,
       rank: expectedFakeRank,
     }
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newFakeKeyResultView)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newFakeKeyResultCustomList)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -219,16 +219,16 @@ describe('component interations', () => {
     const fakeRank = [firstElement, secondElement, ...fakeBaseRank]
     const fakeID = faker.random.uuid()
 
-    const fakeKeyResultView = {
+    const fakeKeyResultCustomList = {
       ...faker.helpers.userCard(),
       id: fakeID,
       rank: fakeRank,
     }
 
-    sinon.stub(recoil, 'useRecoilState').returns([fakeKeyResultView, sinon.fake()])
+    sinon.stub(recoil, 'useRecoilState').returns([fakeKeyResultCustomList, sinon.fake()])
     sinon.stub(apollo, 'useMutation').returns([spy] as any)
 
-    const result = enzyme.shallow(<KeyResultView />)
+    const result = enzyme.shallow(<KeyResultCustomList />)
     const list = result.find('KeyResultList')
 
     list.simulate('lineDragEnd', {
@@ -264,14 +264,14 @@ describe('component interations', () => {
     const fakeBaseRank = [...new Array(rankLength)].map(() => faker.random.number())
     const fakeRank = [firstElement, secondElement, ...fakeBaseRank]
 
-    const fakeKeyResultView = {
+    const fakeKeyResultCustomList = {
       ...faker.helpers.userCard(),
       rank: fakeRank,
     }
 
-    sinon.stub(recoil, 'useRecoilState').returns([fakeKeyResultView, spy])
+    sinon.stub(recoil, 'useRecoilState').returns([fakeKeyResultCustomList, spy])
 
-    const result = enzyme.shallow(<KeyResultView />)
+    const result = enzyme.shallow(<KeyResultCustomList />)
     const list = result.find('KeyResultList')
 
     list.simulate('lineDragEnd', {
@@ -295,16 +295,16 @@ describe('component interations', () => {
     const fakeRank = [firstElement, secondElement, ...fakeBaseRank]
     const fakeID = faker.random.uuid()
 
-    const fakeKeyResultView = {
+    const fakeKeyResultCustomList = {
       ...faker.helpers.userCard(),
       id: fakeID,
       rank: fakeRank,
     }
 
-    sinon.stub(recoil, 'useRecoilState').returns([fakeKeyResultView, sinon.fake()])
+    sinon.stub(recoil, 'useRecoilState').returns([fakeKeyResultCustomList, sinon.fake()])
     sinon.stub(apollo, 'useMutation').returns([spy] as any)
 
-    const result = enzyme.shallow(<KeyResultView />)
+    const result = enzyme.shallow(<KeyResultCustomList />)
     const list = result.find('KeyResultList')
 
     list.simulate('lineDragEnd', {

@@ -1,7 +1,7 @@
 import confidenceReport from './confidence-report'
 import cycle from './cycle'
 import keyResult from './key-result'
-import keyResultView from './key-result-view'
+import keyResultCustomList from './key-result-view'
 import objective from './objective'
 import policy from './policy'
 import progressReport from './progress-report'
@@ -13,7 +13,7 @@ const factories = {
   user,
   cycle,
   objective,
-  keyResultView,
+  keyResultCustomList,
   team,
   confidenceReport,
   progressReport,

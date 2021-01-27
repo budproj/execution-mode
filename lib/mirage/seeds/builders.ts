@@ -4,7 +4,7 @@ import { ModelInstance } from 'miragejs'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
-export const buildKeyResultView = (keyResultModels: Array<ModelInstance<any>>) => {
+export const buildKeyResultCustomList = (keyResultModels: Array<ModelInstance<any>>) => {
   const keyResults = shuffle(keyResultModels)
   const rank = keyResults.map((keyResult) => keyResult.id)
 

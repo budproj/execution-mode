@@ -23,7 +23,7 @@ const models = {
     user: belongsTo(),
     keyResult: belongsTo(),
   }),
-  keyResultView: Model.extend({
+  keyResultCustomList: Model.extend({
     user: belongsTo(),
     keyResults: hasMany(),
   }),

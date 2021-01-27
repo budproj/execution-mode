@@ -7,7 +7,7 @@ import Models from 'lib/mirage/models'
 import { ProgressReport } from 'src/components/KeyResult/types'
 import getConfig from 'src/config'
 
-import { buildKeyResultView, buildProgressReport } from './builders'
+import { buildKeyResultCustomList, buildProgressReport } from './builders'
 import { pickRandomModel } from './selectors'
 
 const { publicRuntimeConfig } = getConfig()
@@ -39,9 +39,9 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     objective: () => pickRandomModel(objectives),
     team: () => pickRandomModel(teams),
   })
-  const keyResultView = server.create('keyResultView', {
+  const keyResultCustomList = server.create('keyResultCustomList', {
     user,
-    ...buildKeyResultView(keyResults),
+    ...buildKeyResultCustomList(keyResults),
   })
   const progressReports = server.createList('progressReport', 40, {
     user,
@@ -86,7 +86,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       cycle,
       objectives,
       keyResults,
-      keyResultView,
+      keyResultCustomList,
       progressReports,
       confidenceReports,
       policies,
