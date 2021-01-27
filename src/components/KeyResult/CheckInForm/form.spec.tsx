@@ -16,16 +16,12 @@ const selectCurrentConfidenceMatcher = sinon.match((selector: recoil.RecoilState
   return selector.key.includes('CURRENT_CONFIDENCE')
 })
 
-const selectLatestConfidenceReportMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-  return selector.key.includes('LATEST_CONFIDENCE_REPORT')
+const selectLatestCheckInMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('LATEST_CHECK_IN')
 })
 
 const selectCommentEnabledMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
   return selector.key.includes('COMMENT_ENABLED')
-})
-
-const selectLatestReportMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-  return selector.key.includes('LATEST_REPORT')
 })
 
 describe('component expectations', () => {
@@ -187,38 +183,16 @@ describe('component interations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('updates the latest confidence report state upon form submission', async () => {
+  it('updates the latest check-in state upon form submission', async () => {
     const fakeID = faker.random.word()
+    const fakeNewProgress = faker.random.number()
     const fakeConfidence = faker.random.number()
-    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
-    const spy = sinon.spy()
-
-    setStateStub.withArgs(selectLatestConfidenceReportMatcher).returns(spy)
-    setStateStub.returns(sinon.fake())
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
-    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
-
-    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
-
-    const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
-      confidence: fakeConfidence,
-    })
-
-    await Promise.resolve()
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({ valueNew: fakeConfidence })
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-
-  it('updates the latest report state upon form submission', async () => {
-    const fakeID = faker.random.word()
     const fakeComment = faker.lorem.paragraph()
+
     const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
     const spy = sinon.spy()
 
-    setStateStub.withArgs(selectLatestReportMatcher).returns(spy)
+    setStateStub.withArgs(selectLatestCheckInMatcher).returns(spy)
     setStateStub.returns(sinon.fake())
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
@@ -228,11 +202,17 @@ describe('component interations', () => {
     const formikComponent = result.find('Formik')
     // eslint-disable-next-line @typescript-eslint/await-thenable
     await formikComponent.simulate('submit', {
+      newProgress: fakeNewProgress,
+      confidence: fakeConfidence,
       comment: fakeComment,
     })
 
     await Promise.resolve()
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({ comment: fakeComment })
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
+      progress: fakeNewProgress,
+      confidence: fakeConfidence,
+      comment: fakeComment,
+    })
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -287,10 +267,11 @@ describe('component interations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('dispatchs a remote state update action without comment upon form submittion', async () => {
+  it('dispatches a remote state update action without comment upon form submittion', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const fakeConfidence = faker.random.number()
+
     const stateStub = sinon.stub(recoil, 'useRecoilState')
     const spy = sinon.spy()
 
@@ -310,7 +291,7 @@ describe('component interations', () => {
     await Promise.resolve()
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
       variables: {
-        checkInInput: {
+        keyResultCheckInInput: {
           keyResultId: fakeID,
           progress: fakeProgress,
           confidence: fakeConfidence,
@@ -321,7 +302,7 @@ describe('component interations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('dispatchs a remote state update action with comment upon form submittion', async () => {
+  it('dispatches a remote state update action with comment upon form submittion', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
     const fakeConfidence = faker.random.number()
@@ -346,7 +327,7 @@ describe('component interations', () => {
     await Promise.resolve()
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
       variables: {
-        checkInInput: {
+        keyResultCheckInInput: {
           keyResultId: fakeID,
           progress: fakeProgress,
           confidence: fakeConfidence,
@@ -375,20 +356,17 @@ describe('component interations', () => {
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
 
-    const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    const fakeValues = {
       newProgress: fakeProgress,
       confidence: fakeConfidence,
       comment: fakeComment,
-    })
+    }
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', fakeValues)
     await Promise.resolve()
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(
-      fakeProgress,
-      fakeConfidence,
-      fakeComment,
-    )
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValues)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -410,72 +388,6 @@ describe('component interations', () => {
 
 describe('corner cases', () => {
   afterEach(() => sinon.restore())
-
-  it('does not pass a progress report to remote dispatch if it did not changed', async () => {
-    const fakeID = faker.random.word()
-    const fakeProgress = faker.random.number()
-    const fakeConfidence = faker.random.number()
-    const stateStub = sinon.stub(recoil, 'useRecoilState')
-    const spy = sinon.spy()
-
-    stateStub.returns([fakeProgress, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([spy] as any)
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-
-    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
-
-    const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
-      newProgress: fakeProgress,
-      confidence: fakeConfidence,
-    })
-
-    await Promise.resolve()
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
-      variables: {
-        checkInInput: {
-          keyResultId: fakeID,
-          confidence: fakeConfidence,
-        },
-      },
-    })
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-
-  it('does not pass confidence to remote dispatch if it did not changed', async () => {
-    const fakeID = faker.random.word()
-    const fakeProgress = faker.random.number()
-    const fakeConfidence = faker.random.number()
-    const stateStub = sinon.stub(recoil, 'useRecoilState')
-    const spy = sinon.spy()
-
-    stateStub.returns([fakeConfidence, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([spy] as any)
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-
-    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
-
-    const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
-      newProgress: fakeProgress,
-      confidence: fakeConfidence,
-    })
-
-    await Promise.resolve()
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
-      variables: {
-        checkInInput: {
-          keyResultId: fakeID,
-          progress: fakeProgress,
-        },
-      },
-    })
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
 
   it('does not dispatch a remote state update action upon form submittion if the values are the same', () => {
     const fakeID = faker.random.word()
@@ -604,14 +516,14 @@ describe('corner cases', () => {
 
     const formikComponent = result.find('Formik')
 
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    const fakeValues = {
       newProgress: fakeNewProgress,
-    })
+    }
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', fakeValues)
     await Promise.resolve()
 
-    // eslint-disable-next-line unicorn/no-useless-undefined
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeNewProgress, undefined, undefined)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValues)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -634,19 +546,14 @@ describe('corner cases', () => {
 
     const formikComponent = result.find('Formik')
 
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    const fakeValues = {
       confidence: fakeNewConfidence,
-    })
+    }
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', fakeValues)
     await Promise.resolve()
 
-    /* eslint-disable unicorn/no-useless-undefined */
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(
-      undefined,
-      fakeNewConfidence,
-      undefined,
-    )
-    /* eslint-enable unicorn/no-useless-undefined */
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValues)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -665,13 +572,14 @@ describe('corner cases', () => {
 
     const formikComponent = result.find('Formik')
 
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    const fakeValues = {
       comment: fakeComment,
-    })
+    }
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', fakeValues)
     await Promise.resolve()
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(undefined, undefined, fakeComment)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValues)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

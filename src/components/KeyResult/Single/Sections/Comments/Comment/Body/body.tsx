@@ -1,5 +1,6 @@
 import { Text, SkeletonText } from '@chakra-ui/react'
 import React from 'react'
+
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 
 export interface KeyResultSectionCommentsCommentBodyProperties {

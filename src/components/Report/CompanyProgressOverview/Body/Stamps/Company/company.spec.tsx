@@ -12,7 +12,7 @@ describe('data layer', () => {
   it('passes the latest report date to the last update text component', () => {
     const fakeDate = faker.date.past()
     const fakeCompany = {
-      latestReport: {
+      latestKeyResultCheckIn: {
         createdAt: fakeDate,
       },
     }
@@ -29,7 +29,7 @@ describe('data layer', () => {
   it('passes the latest report author to the last update text component', () => {
     const fakeAuthorName = faker.name.firstName()
     const fakeCompany = {
-      latestReport: {
+      latestKeyResultCheckIn: {
         user: {
           fullName: fakeAuthorName,
         },

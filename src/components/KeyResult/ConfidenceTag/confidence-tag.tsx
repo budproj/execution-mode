@@ -4,8 +4,8 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import CircleIcon from 'src/components/Icon/Circle'
-import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
+import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
 export interface ConfidenceTagProperties {
   confidenceValue?: KeyResultCheckIn['confidence']

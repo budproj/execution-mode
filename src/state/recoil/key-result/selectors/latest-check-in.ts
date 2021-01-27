@@ -9,7 +9,7 @@ import meAtom from 'src/state/recoil/user/me'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::LATEST_REPORT`
+const KEY = `${PREFIX}::LATEST_CHECK_IN`
 
 export const selectCheckIns = buildPartialSelector<KeyResult['checkIns']>('checkIns')
 

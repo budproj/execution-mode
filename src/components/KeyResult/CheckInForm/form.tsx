@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
+import pickBy from 'lodash/pickBy'
 import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
@@ -70,10 +71,12 @@ const CheckInForm = ({
   const syncRecoilState = (values: CheckInFormValues) => {
     if (values.newProgress !== currentProgress) setCurrentProgress(values.newProgress)
     if (values.confidence !== currentConfidence) setCurrentConfidence(values.confidence)
-    if (values.comment) {
-      setLatestCheckIn({ comment: values.comment })
-    }
 
+    setLatestCheckIn({
+      progress: values.newProgress,
+      confidence: values.confidence,
+      comment: values.comment,
+    })
     setCommentEnabled(isCommentAlwaysEnabled)
   }
 
@@ -84,10 +87,11 @@ const CheckInForm = ({
       confidence: values.confidence,
       comment: values.comment,
     }
+    const clearedCheckIn = pickBy(checkIn)
 
     await createCheckIn({
       variables: {
-        keyResultCheckInInput: checkIn,
+        keyResultCheckInInput: clearedCheckIn,
       },
     })
   }

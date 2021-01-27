@@ -4,6 +4,8 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
+import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
+
 import ProgressSliderPopover from './popover'
 
 describe('component expectations', () => {
@@ -11,7 +13,7 @@ describe('component expectations', () => {
 
   it('updates the draft value with the submitted value from the form', () => {
     const spy = sinon.spy()
-    const newProgressReport = faker.random.number()
+    const newCheckIn = { newProgress: faker.random.number() }
     const useSetRecoilStateStub = sinon.stub(recoil, 'useSetRecoilState')
     const draftValueAtomMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
       return selector.key.includes('PROGRESS_DRAFT')
@@ -22,10 +24,12 @@ describe('component expectations', () => {
 
     const result = enzyme.shallow(<ProgressSliderPopover />)
 
-    const submitHook: (n: number) => void = result.find('CheckInForm').prop('afterSubmit')
-    submitHook(newProgressReport)
+    const submitHook: (values: CheckInFormValues) => void = result
+      .find('CheckInForm')
+      .prop('afterSubmit')
+    submitHook(newCheckIn as any)
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newProgressReport)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newCheckIn.newProgress)
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
