@@ -13,6 +13,7 @@ export interface BudPublicConfig {
   logLevel: LogLevel
   api: BudAPIs
   auth0: Auth0Config
+  hotjar: HotjarConfig
   mirage: MiragePublicConfig
 }
 
@@ -57,6 +58,11 @@ export interface Auth0Config {
   domain: string
   scope: string
   audience: string
+}
+
+export interface HotjarConfig {
+  id: number
+  sv: number
 }
 
 export interface MiragePublicConfig {

@@ -131,6 +131,7 @@
     "react": "^16.14.0",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.14.0",
+    "react-hotjar": "^2.2.1",
     "react-input-mask": "^2.0.4",
     "react-intl": "^5.8.8",
     "react-number-format": "^4.4.1",

@@ -7,6 +7,7 @@ import { RecoilRoot } from 'recoil'
 
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
+import Hotjar from 'src/components/Base/Hotjar'
 import Page from 'src/components/Base/Page'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
@@ -56,6 +57,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
               <AuthzApolloProvider pageProps={pageProps}>
                 <Page>
                   <Component {...pageProps} />
+                  <Hotjar />
                 </Page>
               </AuthzApolloProvider>
             </AuthzGatekeeper>

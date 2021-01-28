@@ -15,6 +15,8 @@ const {
   AUTH0_DOMAIN,
   AUTH0_SCOPE,
   AUTH0_AUDIENCE,
+  HOTJAR_ID,
+  HOTJAR_SV,
   MIRAGE_ENABLED,
   MIRAGE_FAKER_SEED,
 } = process.env
@@ -35,6 +37,11 @@ const publicRuntimeConfig = {
     domain: AUTH0_DOMAIN,
     scope: AUTH0_SCOPE,
     audience: AUTH0_AUDIENCE,
+  },
+
+  hotjar: {
+    id: parseInt(HOTJAR_ID),
+    sv: parseInt(HOTJAR_SV),
   },
 
   api: {
