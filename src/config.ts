@@ -15,6 +15,7 @@ export interface BudPublicConfig {
   auth0: Auth0Config
   hotjar: HotjarConfig
   mirage: MiragePublicConfig
+  underMaintenance: boolean
 }
 
 export interface BudServerConfig {

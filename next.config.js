@@ -19,6 +19,7 @@ const {
   HOTJAR_SV,
   MIRAGE_ENABLED,
   MIRAGE_FAKER_SEED,
+  UNDER_MAINTENANCE,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -26,6 +27,7 @@ const publicRuntimeConfig = {
   nodeEnv: NODE_ENV,
   defaultLocale: LOCALE_OVERRIDE ?? DEFAULT_LOCALE,
   logLevel: LOG_LEVEL,
+  underMaintenance: UNDER_MAINTENANCE === 'true',
 
   mirage: {
     enabled: MIRAGE_ENABLED === 'true',

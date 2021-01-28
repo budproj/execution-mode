@@ -5,11 +5,12 @@ import AppBar from 'src/components/Base/AppBar'
 
 export interface PageProperties extends BoxProps {
   children: ReactElement | ReactElement[]
+  hideAppBar?: boolean
 }
 
-const Page = ({ children, ...rest }: PageProperties): ReactElement => (
+const Page = ({ children, hideAppBar, ...rest }: PageProperties): ReactElement => (
   <Box {...rest}>
-    <AppBar />
+    {!hideAppBar && <AppBar />}
     {children}
   </Box>
 )

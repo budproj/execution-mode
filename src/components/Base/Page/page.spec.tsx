@@ -44,4 +44,28 @@ describe('props customization', () => {
 
     expect(box.props()).toMatchObject(properties)
   })
+
+  it('hides the AppBar if we ask to do it', () => {
+    const result = enzyme.shallow(
+      <Page hideAppBar>
+        <FakeComponent />
+      </Page>,
+    )
+
+    const appBar = result.find('AppBar')
+
+    expect(appBar.length).toEqual(0)
+  })
+
+  it('shows the AppBar if we do not ask to hide it', () => {
+    const result = enzyme.shallow(
+      <Page>
+        <FakeComponent />
+      </Page>,
+    )
+
+    const appBar = result.find('AppBar')
+
+    expect(appBar.length).toEqual(1)
+  })
 })
