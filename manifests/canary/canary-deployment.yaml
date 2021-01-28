@@ -48,6 +48,6 @@ spec:
             - name: AUTH0_AUDIENCE
               value: https://api.getbud.co/business
             - name: HOTJAR_ID
-              value: 2216269
+              value: '2216269'
             - name: HOTJAR_SV
-              value: 6
+              value: '6'
