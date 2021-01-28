@@ -49,3 +49,5 @@ export { default as Hotjar } from './Hotjar'
 export { default as NoSSR } from './NoSSR'
 
 export { default as MaintenanceGatekeeper } from './MaintenanceGatekeeper'
+
+export { default as ApolloQueryErrorBoundary } from './ApolloQueryErrorBoundary'

@@ -1,25 +1,30 @@
 import { defineMessages } from 'react-intl'
 
-type NotFoundMessage = 'title' | 'subtitle' | 'description' | 'imageAlt' | 'button' | 'metaTitle'
+type NotFoundMessage =
+  | 'title'
+  | 'callToAction'
+  | 'description'
+  | 'imageAlt'
+  | 'button'
+  | 'metaTitle'
 
 export default defineMessages<NotFoundMessage>({
   title: {
-    defaultMessage: 'Ué! Cadê a tela que tava aqui?',
-    id: 'SCe1xz',
+    defaultMessage: 'A página que você está procurando não foi encontrada!',
+    id: 'yiDjW/',
     description: 'The title displayed in our not found page',
   },
 
-  subtitle: {
-    defaultMessage: 'A tela que você está procurando foi abduzida!',
-    id: 'RMsn+8',
-    description: 'The subtitle displayed in our not found page',
+  callToAction: {
+    defaultMessage: 'Clique no botão abaixo para voltar para o Painel :)',
+    id: '6B2/Mv',
+    description: 'This message is displayed above the button in our not found page',
   },
 
   description: {
-    defaultMessage:
-      'Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)',
-    id: 'pYiVtw',
-    description: 'This message is displayed as a description in our not found page',
+    defaultMessage: 'Esse link pode estar expirado ou a URL está errada.',
+    id: 'xqxnpO',
+    description: 'The description displayed in our not found page',
   },
 
   imageAlt: {

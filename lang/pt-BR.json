@@ -91,6 +91,14 @@
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
   },
+  "6B2/Mv": {
+    "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
+    "description": "This message is displayed above the button in our not found page"
+  },
+  "6ImV0T": {
+    "defaultMessage": "Em manutenção | bud",
+    "description": "The page title of our under maintenance page that is displayed in the browser tab"
+  },
   "6KET/Z": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
     "description": "The title of the header section in our company overview report"
@@ -111,6 +119,10 @@
     "defaultMessage": "Objetivo",
     "description": "The text of the table head related to the Objective column"
   },
+  "8m+ead": {
+    "defaultMessage": "A tela que você está procurando foi abduzida!",
+    "description": "This message is displayed below the title in our internal server error page"
+  },
   "987MLd": {
     "defaultMessage": "Explorar",
     "description": "The name of the Explore page, located at \"/explore\""
@@ -130,6 +142,10 @@
   "B5ZikQ": {
     "defaultMessage": "Meus Resultados-Chave",
     "description": "AppBar menu item that links to \"My Key Results\" page"
+  },
+  "B7lxk0": {
+    "defaultMessage": "Erro inesperado | bud",
+    "description": "The page title of our internal server error page that is displayed in the browser tab"
   },
   "Ba8bU1": {
     "defaultMessage": "Enviar comentário",
@@ -174,6 +190,10 @@
   "IGODpK": {
     "defaultMessage": "Ciclo",
     "description": "The text of the table head related to the Cycle column"
+  },
+  "ILOigt": {
+    "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
+    "description": "This message is the alt message for our box drawing in the internal server error page"
   },
   "IkA9uV": {
     "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
@@ -223,10 +243,6 @@
     "defaultMessage": "Área",
     "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
   },
-  "RMsn+8": {
-    "defaultMessage": "A tela que você está procurando foi abduzida!",
-    "description": "The subtitle displayed in our not found page"
-  },
   "RWaMNF": {
     "defaultMessage": "Um ícone de coração",
     "description": "The desc message for the Heart icon. This icon is used to ilustrate our key results"
@@ -250,10 +266,6 @@
   "S1OFpY": {
     "defaultMessage": "De",
     "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
-  },
-  "SCe1xz": {
-    "defaultMessage": "Ué! Cadê a tela que tava aqui?",
-    "description": "The title displayed in our not found page"
   },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
@@ -343,6 +355,14 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
+  "cOUqfL": {
+    "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
+    "description": "The description displayed in our internal server error page"
+  },
+  "f3B+5Q": {
+    "defaultMessage": "Voltar",
+    "description": "This message is displayed as a label in the button on our internal server error page"
+  },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
     "description": "The page description that is displayed in Google and screen readers"
@@ -399,6 +419,10 @@
     "defaultMessage": "Meus Resultados-Chave",
     "description": "The page title that our users should see in the my key results page"
   },
+  "l3Oaah": {
+    "defaultMessage": "Ué! Cadê a tela que tava aqui?",
+    "description": "The title displayed in our internal server error page"
+  },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
@@ -439,13 +463,13 @@
     "defaultMessage": "Um ícone de coroa",
     "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
-  "pYiVtw": {
-    "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
-    "description": "This message is displayed as a description in our not found page"
-  },
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
+  },
+  "qBJI5X": {
+    "defaultMessage": "Página não encontrada | bud",
+    "description": "The page title of our not found page that is displayed in the browser tab"
   },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
@@ -490,6 +514,14 @@
   "xRyM8t": {
     "defaultMessage": "Ícone de um ponto de interrogação. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
+  },
+  "xqxnpO": {
+    "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
+    "description": "The description displayed in our not found page"
+  },
+  "yiDjW/": {
+    "defaultMessage": "A página que você está procurando não foi encontrada!",
+    "description": "The title displayed in our not found page"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",
