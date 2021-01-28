@@ -8,7 +8,7 @@ import PageContent from 'src/components/Base/PageContent'
 
 import messages from './messages'
 
-const NotFoundPage = () => {
+const NotFoundErrorPage = () => {
   const intl = useIntl()
 
   return (
@@ -45,4 +45,4 @@ const NotFoundPage = () => {
   )
 }
 
-export default NotFoundPage
+export default NotFoundErrorPage

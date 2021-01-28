@@ -29,7 +29,7 @@ describe('component expectations', () => {
       </MaintenanceGatekeeper>,
     )
 
-    const underMaintenance = result.find('UnderMaintenancePage')
+    const underMaintenance = result.find('UnderMaintenanceErrorPage')
 
     expect(underMaintenance.length).toEqual(1)
   })
@@ -95,7 +95,7 @@ describe('component expectations', () => {
       </MaintenanceGatekeeper>,
     )
 
-    const underMaintenance = result.find('UnderMaintenancePage')
+    const underMaintenance = result.find('UnderMaintenanceErrorPage')
 
     expect(underMaintenance.length).toEqual(0)
   })

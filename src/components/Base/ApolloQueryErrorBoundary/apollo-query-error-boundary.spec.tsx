@@ -24,7 +24,7 @@ describe('component expectations', () => {
       </ApolloQueryErrorBoundary>,
     )
 
-    const notFoundPage = result.find('NotFoundPage')
+    const notFoundPage = result.find('NotFoundErrorPage')
 
     expect(notFoundPage.length).toEqual(1)
   })
@@ -46,7 +46,7 @@ describe('component expectations', () => {
       </ApolloQueryErrorBoundary>,
     )
 
-    const notFoundPage = result.find('InternalServerErrorPage')
+    const notFoundPage = result.find('UnknownErrorPage')
 
     expect(notFoundPage.length).toEqual(1)
   })
@@ -68,7 +68,7 @@ describe('component expectations', () => {
       </ApolloQueryErrorBoundary>,
     )
 
-    const notFoundPage = result.find('InternalServerErrorPage')
+    const notFoundPage = result.find('UnknownErrorPage')
 
     expect(notFoundPage.length).toEqual(1)
   })

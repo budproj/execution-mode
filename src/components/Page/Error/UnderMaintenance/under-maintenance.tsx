@@ -9,7 +9,7 @@ import getConfig from 'src/config'
 
 import messages from './messages'
 
-const UnderMaintenancePage = () => {
+const UnderMaintenanceErrorPage = () => {
   const intl = useIntl()
   const { publicRuntimeConfig } = getConfig()
   const expectedReturnDate = publicRuntimeConfig.maintenanceMode.expectedReturn
@@ -52,4 +52,4 @@ const UnderMaintenancePage = () => {
   )
 }
 
-export default UnderMaintenancePage
+export default UnderMaintenanceErrorPage

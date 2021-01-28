@@ -1,4 +1,8 @@
 {
+  "+IK11v": {
+    "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
+    "description": "This message is the alt message for our box drawing in the unknown error page"
+  },
   "+O5SW4": {
     "defaultMessage": "Um ícone com uma série de traços verticais. Clique e arraste ele para reordenar seus resultados chave",
     "description": "The alternative text explaining our reorder icon"
@@ -35,10 +39,6 @@
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
   },
-  "0syFce": {
-    "defaultMessage": "Voltar",
-    "description": "This message is displayed as a label in the button on our not found page"
-  },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
@@ -59,6 +59,10 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
+  "29ODQz": {
+    "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
+    "description": "The description displayed in our unknown error page"
+  },
   "2IBj4Z": {
     "defaultMessage": "Agora há pouco",
     "description": "This label is displayed if the date difference is less than 1 minute"
@@ -75,29 +79,17 @@
     "defaultMessage": "{team} | bud",
     "description": "The page title that is displayed in the browser tab"
   },
-  "4RJXbj": {
-    "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
-    "description": "This message is the alt message for our box drawing in the not found page"
-  },
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
     "description": "The page title that is displayed in the browser tab"
   },
-  "5ft2YT": {
-    "defaultMessage": "Estamos trabalhando em melhorias para você! :)",
-    "description": "The title displayed in our under maintenance page"
+  "5th5LY": {
+    "defaultMessage": "Ué! Cadê a tela que tava aqui?",
+    "description": "The title displayed in our unknown error page"
   },
   "5yQyMg": {
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
-  },
-  "6B2/Mv": {
-    "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
-    "description": "This message is displayed above the button in our not found page"
-  },
-  "6ImV0T": {
-    "defaultMessage": "Em manutenção | bud",
-    "description": "The page title of our under maintenance page that is displayed in the browser tab"
   },
   "6KET/Z": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
@@ -119,10 +111,6 @@
     "defaultMessage": "Objetivo",
     "description": "The text of the table head related to the Objective column"
   },
-  "8m+ead": {
-    "defaultMessage": "A tela que você está procurando foi abduzida!",
-    "description": "This message is displayed below the title in our internal server error page"
-  },
   "987MLd": {
     "defaultMessage": "Explorar",
     "description": "The name of the Explore page, located at \"/explore\""
@@ -142,10 +130,6 @@
   "B5ZikQ": {
     "defaultMessage": "Meus Resultados-Chave",
     "description": "AppBar menu item that links to \"My Key Results\" page"
-  },
-  "B7lxk0": {
-    "defaultMessage": "Erro inesperado | bud",
-    "description": "The page title of our internal server error page that is displayed in the browser tab"
   },
   "Ba8bU1": {
     "defaultMessage": "Enviar comentário",
@@ -179,6 +163,10 @@
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
   },
+  "Gt9Z3F": {
+    "defaultMessage": "Página não encontrada | bud",
+    "description": "The page title of our not found error page that is displayed in the browser tab"
+  },
   "HAQ+JV": {
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
@@ -191,10 +179,6 @@
     "defaultMessage": "Ciclo",
     "description": "The text of the table head related to the Cycle column"
   },
-  "ILOigt": {
-    "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
-    "description": "This message is the alt message for our box drawing in the internal server error page"
-  },
   "IkA9uV": {
     "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
@@ -202,6 +186,10 @@
   "JZJeBS": {
     "defaultMessage": "Ontem",
     "description": "This label is displayed if the last is yesterday"
+  },
+  "Jdklxm": {
+    "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
+    "description": "This message is the alt message for our box drawing in the not found error page"
   },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
@@ -271,6 +259,10 @@
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
   },
+  "SenoB2": {
+    "defaultMessage": "A página que você está procurando não foi encontrada!",
+    "description": "The title displayed in our not found error page"
+  },
   "SjGqdc": {
     "defaultMessage": "Desde a última segunda-feira",
     "description": "This helper texts explains since when we are calculating your company progress"
@@ -286,6 +278,10 @@
   "T8ytLJ": {
     "defaultMessage": "Objetivo",
     "description": "The label text above the Objective section in our key result single page or drawer"
+  },
+  "TzHlPJ": {
+    "defaultMessage": "Em manutenção | bud",
+    "description": "The page title of our under maintenance error page that is displayed in the browser tab"
   },
   "U2EgRG": {
     "defaultMessage": "Explorar | bud",
@@ -319,6 +315,10 @@
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
   },
+  "XiSFEr": {
+    "defaultMessage": "Erro inesperado | bud",
+    "description": "The page title of our unknown error page that is displayed in the browser tab"
+  },
   "Yk89cv": {
     "defaultMessage": "Médio",
     "description": "We use this tag to group every key result with confidence higher than 25 but lower than 50"
@@ -335,10 +335,6 @@
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
     "description": "The alternative text explaining our team at work image"
   },
-  "aN6zsb": {
-    "defaultMessage": "O desenho de uma caixa fechada, ilustrando que estamos em manutenção",
-    "description": "This message is the alt message for our box drawing in the under maintenance page"
-  },
   "aOzLdd": {
     "defaultMessage": "Deslogar",
     "description": "The label displayed in the user logout button"
@@ -354,14 +350,6 @@
   "c8UE59": {
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
-  },
-  "cOUqfL": {
-    "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
-    "description": "The description displayed in our internal server error page"
-  },
-  "f3B+5Q": {
-    "defaultMessage": "Voltar",
-    "description": "This message is displayed as a label in the button on our internal server error page"
   },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
@@ -395,10 +383,6 @@
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
   },
-  "iqfmjJ": {
-    "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
-    "description": "This message is displayed as a description in our under maintenance page"
-  },
   "j/xH+H": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our key result drawer"
@@ -419,13 +403,13 @@
     "defaultMessage": "Meus Resultados-Chave",
     "description": "The page title that our users should see in the my key results page"
   },
-  "l3Oaah": {
-    "defaultMessage": "Ué! Cadê a tela que tava aqui?",
-    "description": "The title displayed in our internal server error page"
-  },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
+  },
+  "lMYmAU": {
+    "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
+    "description": "This message is displayed above the button in our not found error page"
   },
   "lQs6US": {
     "defaultMessage": "Comentários",
@@ -455,9 +439,17 @@
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
+  "nrToz/": {
+    "defaultMessage": "Voltar",
+    "description": "This message is displayed as a label in the button on our unknown error page"
+  },
   "oeB7dG": {
     "defaultMessage": "Esse resultado-chave não tem nenhum comentário",
     "description": "The label message that is displayed below our team at work image in our empty state"
+  },
+  "or8fId": {
+    "defaultMessage": "Voltar",
+    "description": "This message is displayed as a label in the button on our not found error page"
   },
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",
@@ -467,10 +459,6 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
-  "qBJI5X": {
-    "defaultMessage": "Página não encontrada | bud",
-    "description": "The page title of our not found page that is displayed in the browser tab"
-  },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
     "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
@@ -478,6 +466,10 @@
   "rpLZ2J": {
     "defaultMessage": "Bud - Gestão de OKR e Estratégia",
     "description": "The title text of our logotype, it is displayed when an user hover the icon itself"
+  },
+  "s6f/IS": {
+    "defaultMessage": "A tela que você está procurando foi abduzida!",
+    "description": "This message is displayed below the title in our unknown error page"
   },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
@@ -503,6 +495,14 @@
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
   },
+  "upeS+T": {
+    "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
+    "description": "This message is displayed as a description in our under maintenance error page"
+  },
+  "vJ/603": {
+    "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
+    "description": "The description displayed in our not found error page"
+  },
   "w18rI2": {
     "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
     "description": "This message is used by screen readers to explain our arrow up"
@@ -515,17 +515,13 @@
     "defaultMessage": "Ícone de um ponto de interrogação. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
   },
-  "xqxnpO": {
-    "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
-    "description": "The description displayed in our not found page"
-  },
-  "yiDjW/": {
-    "defaultMessage": "A página que você está procurando não foi encontrada!",
-    "description": "The title displayed in our not found page"
-  },
   "z1FXkV": {
     "defaultMessage": "Ciclo",
     "description": "The label text above the Cycle section in our key result single page or drawer"
+  },
+  "z4Qy+J": {
+    "defaultMessage": "O desenho de uma caixa fechada, ilustrando que estamos em manutenção",
+    "description": "This message is the alt message for our box drawing in the under maintenance error page"
   },
   "zEyzo8": {
     "defaultMessage": "Um círculo roxo, indicando que o resultado-chave tem uma barreira",
@@ -534,6 +530,10 @@
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",
     "description": "The title text of our notification bell, it is displayed when an user hover the icon itself"
+  },
+  "ze3hqu": {
+    "defaultMessage": "Estamos trabalhando em melhorias para você! :)",
+    "description": "The title displayed in our under maintenance error page"
   },
   "zgF+iY": {
     "defaultMessage": "Comentário",

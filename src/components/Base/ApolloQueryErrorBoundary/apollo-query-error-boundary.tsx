@@ -1,8 +1,8 @@
 import { ApolloError } from '@apollo/client'
 import React, { ComponentType, ReactElement } from 'react'
 
-import InternalServerErrorPage from 'src/components/Page/InternalServerError'
-import NotFoundPage from 'src/pages/404'
+import NotFoundErrorPage from 'src/components/Page/Error/NotFound'
+import UnknownErrorPage from 'src/components/Page/Error/Unknown'
 
 export interface ApolloQueryErrorBoundaryProperties {
   children: ReactElement
@@ -19,8 +19,8 @@ const ApolloQueryErrorBoundary = ({ children, error }: ApolloQueryErrorBoundaryP
     error?.graphQLErrors.map((graphQLError) => graphQLError?.extensions?.code) ?? []
 
   const errorComponents: Record<APOLLO_SERVER_ERROR_CODE, ComponentType> = {
-    BAD_USER_INPUT: NotFoundPage,
-    INTERNAL_SERVER_ERROR: InternalServerErrorPage,
+    BAD_USER_INPUT: NotFoundErrorPage,
+    INTERNAL_SERVER_ERROR: UnknownErrorPage,
   }
 
   const primaryErrorCode = errorCodes[0]

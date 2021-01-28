@@ -8,7 +8,7 @@ import PageContent from 'src/components/Base/PageContent'
 
 import messages from './messages'
 
-const InternalServerErrorPage = () => {
+const UnknownErrorPage = () => {
   const intl = useIntl()
 
   return (
@@ -48,4 +48,4 @@ const InternalServerErrorPage = () => {
   )
 }
 
-export default InternalServerErrorPage
+export default UnknownErrorPage

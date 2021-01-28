@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 
 import Page from 'src/components/Base/Page'
-import UnderMaintenance from 'src/components/Page/UnderMaintenance'
+import UnderMaintenanceErrorPage from 'src/components/Page/Error/UnderMaintenance'
 import getConfig from 'src/config'
 
 export interface MaintenanceGatekeeperProperties {
@@ -14,7 +14,7 @@ const MaintenanceGatekeeper = ({ children }: MaintenanceGatekeeperProperties) =>
 
   return (
     <Page appBarVariant={isUnderMaintenance ? 'onlyLogotype' : 'default'}>
-      {isUnderMaintenance ? <UnderMaintenance /> : children}
+      {isUnderMaintenance ? <UnderMaintenanceErrorPage /> : children}
     </Page>
   )
 }
