@@ -3,14 +3,16 @@ import React, { ReactElement } from 'react'
 
 import AppBar from 'src/components/Base/AppBar'
 
+import { AppBarVariant } from '../AppBar/app-bar'
+
 export interface PageProperties extends BoxProps {
   children: ReactElement | ReactElement[]
-  hideAppBar?: boolean
+  appBarVariant?: AppBarVariant
 }
 
-const Page = ({ children, hideAppBar, ...rest }: PageProperties): ReactElement => (
+const Page = ({ children, appBarVariant, ...rest }: PageProperties): ReactElement => (
   <Box {...rest}>
-    {!hideAppBar && <AppBar />}
+    <AppBar variant={appBarVariant} />
     {children}
   </Box>
 )

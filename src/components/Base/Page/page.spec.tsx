@@ -45,19 +45,19 @@ describe('props customization', () => {
     expect(box.props()).toMatchObject(properties)
   })
 
-  it('hides the AppBar if we ask to do it', () => {
+  it('asks to display only the logotype in the AppBar if we ask to do it', () => {
     const result = enzyme.shallow(
-      <Page hideAppBar>
+      <Page appBarVariant="onlyLogotype">
         <FakeComponent />
       </Page>,
     )
 
     const appBar = result.find('AppBar')
 
-    expect(appBar.length).toEqual(0)
+    expect(appBar.prop('variant')).toEqual('onlyLogotype')
   })
 
-  it('shows the AppBar if we do not ask to hide it', () => {
+  it('shows the default AppBar if we do not ask to hide it', () => {
     const result = enzyme.shallow(
       <Page>
         <FakeComponent />
@@ -66,6 +66,6 @@ describe('props customization', () => {
 
     const appBar = result.find('AppBar')
 
-    expect(appBar.length).toEqual(1)
+    expect(appBar.prop('variant')).toEqual('default')
   })
 })

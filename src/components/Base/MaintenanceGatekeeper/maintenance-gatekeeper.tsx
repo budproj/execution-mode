@@ -10,10 +10,10 @@ export interface MaintenanceGatekeeperProperties {
 
 const MaintenanceGatekeeper = ({ children }: MaintenanceGatekeeperProperties) => {
   const { publicRuntimeConfig } = getConfig()
-  const isUnderMaintenance = publicRuntimeConfig.underMaintenance
+  const isUnderMaintenance = publicRuntimeConfig.maintenanceMode.enabled
 
   return (
-    <Page hideAppBar={isUnderMaintenance}>
+    <Page appBarVariant={isUnderMaintenance ? 'onlyLogotype' : 'default'}>
       {isUnderMaintenance ? <UnderMaintenance /> : children}
     </Page>
   )

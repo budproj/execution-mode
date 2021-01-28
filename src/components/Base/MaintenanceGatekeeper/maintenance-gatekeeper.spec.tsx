@@ -15,7 +15,9 @@ describe('component expectations', () => {
   it('displays a UnderMaintenance component if our app is under maintenance', () => {
     const fakeConfig = {
       publicRuntimeConfig: {
-        underMaintenance: true,
+        maintenanceMode: {
+          enabled: true,
+        },
       },
     }
 
@@ -35,7 +37,9 @@ describe('component expectations', () => {
   it('does not displays the provided children if our app is under maintenance', () => {
     const fakeConfig = {
       publicRuntimeConfig: {
-        underMaintenance: true,
+        maintenanceMode: {
+          enabled: true,
+        },
       },
     }
 
@@ -55,7 +59,9 @@ describe('component expectations', () => {
   it('displays the provided children if our app is not under maintenance', () => {
     const fakeConfig = {
       publicRuntimeConfig: {
-        underMaintenance: false,
+        maintenanceMode: {
+          enabled: false,
+        },
       },
     }
 
@@ -75,7 +81,9 @@ describe('component expectations', () => {
   it('does not displays the UnderMaintenance component if our app is not under maintenance', () => {
     const fakeConfig = {
       publicRuntimeConfig: {
-        underMaintenance: false,
+        maintenanceMode: {
+          enabled: false,
+        },
       },
     }
 
@@ -92,10 +100,12 @@ describe('component expectations', () => {
     expect(underMaintenance.length).toEqual(0)
   })
 
-  it('hides the AppBar in page if our app is under maintenance', () => {
+  it('displays only the logotype in our AppBar if our app is under maintenance', () => {
     const fakeConfig = {
       publicRuntimeConfig: {
-        underMaintenance: true,
+        maintenanceMode: {
+          enabled: true,
+        },
       },
     }
 
@@ -109,13 +119,15 @@ describe('component expectations', () => {
 
     const page = result.find('Page')
 
-    expect(page.prop('hideAppBar')).toEqual(true)
+    expect(page.prop('appBarVariant')).toEqual('onlyLogotype')
   })
 
   it('shows the AppBar in page if our app is not under maintenance', () => {
     const fakeConfig = {
       publicRuntimeConfig: {
-        underMaintenance: false,
+        maintenanceMode: {
+          enabled: false,
+        },
       },
     }
 
@@ -129,6 +141,6 @@ describe('component expectations', () => {
 
     const page = result.find('Page')
 
-    expect(page.prop('hideAppBar')).toEqual(false)
+    expect(page.prop('appBarVariant')).toEqual('default')
   })
 })
