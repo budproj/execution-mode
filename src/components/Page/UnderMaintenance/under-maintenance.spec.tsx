@@ -4,7 +4,7 @@ import sinon from 'sinon'
 
 import * as config from 'src/config'
 
-import UnderMaintenance from './under-maintenance'
+import UnderMaintenancePage from './under-maintenance'
 
 const fakeDate = '2020-01-10T20:00:00Z'
 
@@ -22,7 +22,7 @@ describe('date format', () => {
 
     sinon.stub(config, 'default').returns(fakeConfig as any)
 
-    const result = enzyme.shallow(<UnderMaintenance />)
+    const result = enzyme.shallow(<UnderMaintenancePage />)
 
     const formattedDate = result.find('Text').last().text()
 
@@ -40,7 +40,7 @@ describe('date format', () => {
 
     sinon.stub(config, 'default').returns(fakeConfig as any)
 
-    const result = enzyme.shallow(<UnderMaintenance />)
+    const result = enzyme.shallow(<UnderMaintenancePage />)
 
     const formattedDate = result.find('Text').last().text()
 

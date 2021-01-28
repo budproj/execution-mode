@@ -35,6 +35,10 @@
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
   },
+  "0syFce": {
+    "defaultMessage": "Voltar",
+    "description": "This message is displayed as a label in the button on our not found page"
+  },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
@@ -70,6 +74,10 @@
   "4Ac1ls": {
     "defaultMessage": "{team} | bud",
     "description": "The page title that is displayed in the browser tab"
+  },
+  "4RJXbj": {
+    "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
+    "description": "This message is the alt message for our box drawing in the not found page"
   },
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
@@ -215,6 +223,10 @@
     "defaultMessage": "Área",
     "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
   },
+  "RMsn+8": {
+    "defaultMessage": "A tela que você está procurando foi abduzida!",
+    "description": "The subtitle displayed in our not found page"
+  },
   "RWaMNF": {
     "defaultMessage": "Um ícone de coração",
     "description": "The desc message for the Heart icon. This icon is used to ilustrate our key results"
@@ -238,6 +250,10 @@
   "S1OFpY": {
     "defaultMessage": "De",
     "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
+  },
+  "SCe1xz": {
+    "defaultMessage": "Ué! Cadê a tela que tava aqui?",
+    "description": "The title displayed in our not found page"
   },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
@@ -422,6 +438,10 @@
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",
     "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
+  },
+  "pYiVtw": {
+    "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
+    "description": "This message is displayed as a description in our not found page"
   },
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",

@@ -3,12 +3,13 @@ import capitalize from 'lodash/capitalize'
 import React from 'react'
 import { FormatDateOptions, useIntl } from 'react-intl'
 
+import { PageHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import getConfig from 'src/config'
 
 import messages from './messages'
 
-const UnderMaintenance = () => {
+const UnderMaintenancePage = () => {
   const intl = useIntl()
   const { publicRuntimeConfig } = getConfig()
   const expectedReturnDate = publicRuntimeConfig.maintenanceMode.expectedReturn
@@ -24,6 +25,8 @@ const UnderMaintenance = () => {
 
   return (
     <PageContent hideContentHeader contentTopGutter={0}>
+      <PageHead title={messages.metaTitle} />
+
       <Flex direction="column" alignItems="center" gridGap="20px">
         <Box>
           <Image src="/images/box-drawing.png" alt={intl.formatMessage(messages.imageAlt)} />
@@ -49,4 +52,4 @@ const UnderMaintenance = () => {
   )
 }
 
-export default UnderMaintenance
+export default UnderMaintenancePage

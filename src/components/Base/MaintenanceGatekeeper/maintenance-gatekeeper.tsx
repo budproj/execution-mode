@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 
 import Page from 'src/components/Base/Page'
-import UnderMaintenance from 'src/components/Base/UnderMaintenance'
+import UnderMaintenance from 'src/components/Page/UnderMaintenance'
 import getConfig from 'src/config'
 
 export interface MaintenanceGatekeeperProperties {

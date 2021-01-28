@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type UnderMaintenanceMessage = 'title' | 'description' | 'imageAlt'
+type UnderMaintenanceMessage = 'title' | 'description' | 'imageAlt' | 'metaTitle'
 
 export default defineMessages<UnderMaintenanceMessage>({
   title: {
@@ -21,5 +21,12 @@ export default defineMessages<UnderMaintenanceMessage>({
     id: 'aN6zsb',
     description:
       'This message is the alt message for our box drawing in the under maintenance page',
+  },
+
+  metaTitle: {
+    defaultMessage: 'Em manutenção | bud ',
+    id: '6ImV0T',
+    description:
+      'The page title of our under maintenance page that is displayed in the browser tab',
   },
 })
