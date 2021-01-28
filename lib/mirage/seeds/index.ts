@@ -4,10 +4,9 @@ import { Registry, Server } from 'miragejs'
 import logger from 'lib/logger'
 import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
-import { ProgressReport } from 'src/components/KeyResult/types'
 import getConfig from 'src/config'
 
-import { buildKeyResultCustomList, buildProgressReport } from './builders'
+import { buildKeyResultCustomList, buildKeyResultCheckIn } from './builders'
 import { pickRandomModel } from './selectors'
 
 const { publicRuntimeConfig } = getConfig()
@@ -43,15 +42,10 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     user,
     ...buildKeyResultCustomList(keyResults),
   })
-  const progressReports = server.createList('progressReport', 40, {
+  const checkIns = server.createList('keyResultCheckIn', 40, {
     user,
     keyResult: () => pickRandomModel(keyResults),
-    valueNew: buildProgressReport,
-    valuePrevious: buildProgressReport,
-  })
-  const confidenceReports = server.createList('confidenceReport', 40, {
-    user,
-    keyResult: () => pickRandomModel(keyResults),
+    progress: buildKeyResultCheckIn,
   })
 
   const users = [user, ...otherUsers]
@@ -66,14 +60,14 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     team.update('objectives', objectives as any)
   })
 
-  company.update('latestReport', progressReports[0])
+  company.update('latestKeyResultCheckIn', checkIns[0] as any)
 
   // eslint-disable-next-line array-callback-return
   keyResults.map((keyResult) => {
-    const latestProgressReport = keyResult.progressReports.models[0] as ProgressReport
+    const latestKeyResultCheckIn = keyResult.checkIns.models[0] as any
 
-    keyResult.update('currentProgress', latestProgressReport?.valueNew)
-    keyResult.update('reports', keyResult.progressReports as any)
+    keyResult.update('currentProgress', latestKeyResultCheckIn?.progress ?? 0)
+    keyResult.update('checkIns', keyResult.checkIns)
   })
 
   logger.debug('Inserted fake data on MirageJS server', {
@@ -87,8 +81,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       objectives,
       keyResults,
       keyResultCustomList,
-      progressReports,
-      confidenceReports,
+      checkIns,
       policies,
       otherUsers,
     },

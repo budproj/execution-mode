@@ -16,24 +16,18 @@ const graphQLHandler = (mirageSchema: unknown) =>
   createGraphQLHandler(graphQLSchema, mirageSchema, {
     resolvers: {
       KeyResult: {
-        progressReports: (
+        checkIns: (
           parent: ModelInstance<any>,
           { limit }: QueryKeyResultReportsArguments,
-        ): Array<ModelInstance<typeof Models.progressReport>> =>
-          limit ? parent.progressReports.models.slice(0, limit) : parent.progressReports.models,
-
-        confidenceReports: (
-          parent: ModelInstance<any>,
-          { limit }: QueryKeyResultReportsArguments,
-        ): Array<ModelInstance<typeof Models.confidenceReport>> =>
-          limit ? parent.confidenceReports.models.slice(0, limit) : parent.confidenceReports.models,
+        ): Array<ModelInstance<typeof Models.keyResultCheckIn>> =>
+          limit ? parent.keyResultCheckIn?.models.slice(0, limit) : parent.keyResultCheckIn?.models,
       },
 
       User: {
         companies: (
           parent: ModelInstance<any>,
           { limit }: QueryUserCompaniesArguments,
-        ): Array<ModelInstance<typeof Models.progressReport>> =>
+        ): Array<ModelInstance<typeof Models.keyResultCheckIn>> =>
           limit ? parent.companies.models.slice(0, limit) : parent.companies.models,
       },
     },

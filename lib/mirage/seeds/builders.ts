@@ -14,7 +14,7 @@ export const buildKeyResultCustomList = (keyResultModels: Array<ModelInstance<an
   }
 }
 
-export function buildProgressReport(this: any) {
+export function buildKeyResultCheckIn(this: any) {
   const handlers = {
     [KEY_RESULT_FORMAT.NUMBER]: () =>
       faker.random.number({ min: this.keyResult.initialValue, max: this.keyResult.goal }),

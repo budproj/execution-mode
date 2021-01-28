@@ -90,7 +90,7 @@ type User {
   objectives: [Objective!]
   keyResults: [KeyResult!]
   keyResultCustomLists: [KeyResultCustomList!]
-  checkIns: [KeyResultCheckIn!]
+  keyResultCheckIns: [KeyResultCheckIn!]
 }
 
 """A goal that is created for the team focusing in a given team objective"""
@@ -177,26 +177,20 @@ type Team {
 
   """The name of the team"""
   name: String!
+  isCompany: Boolean!
+  currentProgress: Float!
+  currentConfidence: Int!
+  percentageProgressIncrease: Float!
 
   """The creation date of the team"""
   createdAt: DateTime!
 
   """The last update date of the team"""
   updatedAt: DateTime!
-  users: [User!]!
 
   """The user ID that owns this team"""
   ownerId: ID!
   owner: User!
-
-  """The ID of the team that owns this team"""
-  parentTeamId: ID
-  parentTeam: Team!
-  isCompany: Boolean!
-  teams: [Team!]!
-  currentProgress: Float!
-  currentConfidence: Int!
-  percentageProgressIncrease: Float!
 
   """The description about the team"""
   description: String
@@ -208,6 +202,12 @@ type Team {
   The team that is the company of this team. This is also known as "rootTeam"
   """
   company: Team
+
+  """The ID of the team that owns this team"""
+  parentTeamId: ID
+  parentTeam: Team
+  users: [User!]
+  teams: [Team!]
   cycles: [Cycle!]
   objectives: [Objective!]
   keyResults: [KeyResult!]

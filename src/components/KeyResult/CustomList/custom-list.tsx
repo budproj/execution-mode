@@ -11,7 +11,7 @@ import {
   KeyResult,
   KeyResultCustomList as KeyResultCustomListType,
 } from 'src/components/KeyResult/types'
-import { KEY_RESULT_VIEW_BINDING } from 'src/components/User/constants'
+import { KEY_RESULT_CUSTOM_LIST_BINDING } from 'src/components/User/constants'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultCustomListAtom } from 'src/state/recoil/key-result/custom-list'
@@ -80,7 +80,7 @@ const KeyResultCustomList = ({
     if (!called)
       getKeyResultCustomListForBinding({
         variables: {
-          binding: KEY_RESULT_VIEW_BINDING.MINE,
+          binding: KEY_RESULT_CUSTOM_LIST_BINDING.MINE,
         },
       })
   }, [called, getKeyResultCustomListForBinding])
