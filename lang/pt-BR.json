@@ -339,10 +339,6 @@
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
   },
-  "Yk89cv": {
-    "defaultMessage": "Médio",
-    "description": "We use this tag to group every key result with confidence higher than 25 but lower than 50"
-  },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
     "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
@@ -443,10 +439,6 @@
     "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
     "description": "This message is displayed above the button in our not found error page"
   },
-  "lQs6US": {
-    "defaultMessage": "Comentários",
-    "description": "The label text above the Comments section in our key result single page or drawer"
-  },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
@@ -475,10 +467,6 @@
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our unknown error page"
   },
-  "oeB7dG": {
-    "defaultMessage": "Esse resultado-chave não tem nenhum comentário",
-    "description": "The label message that is displayed below our team at work image in our empty state"
-  },
   "or8fId": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
@@ -506,6 +494,10 @@
   "s6f/IS": {
     "defaultMessage": "A tela que você está procurando foi abduzida!",
     "description": "This message is displayed below the title in our unknown error page"
+  },
+  "sFYaLE": {
+    "defaultMessage": "Check-in",
+    "description": "This message is displayed as the form title, above the check-in form"
   },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
@@ -566,6 +558,10 @@
   "ze3hqu": {
     "defaultMessage": "Estamos trabalhando em melhorias para você! :)",
     "description": "The title displayed in our under maintenance error page"
+  },
+  "zev4wl": {
+    "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
+    "description": "This is a message explaining the flag icon in our check-in form"
   },
   "zgF+iY": {
     "defaultMessage": "Comentário",

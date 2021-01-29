@@ -28,7 +28,8 @@ const KeyResultSectionTimelineCardCheckInConfidenceTag = ({
         </Tag>
       </Skeleton>
 
-      {difference && <StatArrow type={arrowType} color={confidenceTag.colors.primary} />}
+      {/* eslint-disable-next-line unicorn/no-null */}
+      {difference ? <StatArrow type={arrowType} color={confidenceTag.colors.primary} /> : null}
     </StatHelpText>
   )
 }
