@@ -6,7 +6,10 @@ import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
-import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
+import {
+  keyResultCheckInCommentEnabled,
+  keyResultCheckInProgressDraft,
+} from 'src/state/recoil/key-result/check-in'
 import {
   selectCurrentProgress,
   selectCurrentConfidence,
@@ -26,7 +29,6 @@ import queries from './queries.gql'
 export interface CheckInFormProperties {
   showGoal: boolean
   isCommentAlwaysEnabled: boolean
-  showCancelButton: boolean
   gutter?: SpaceProps['p']
   keyResultID?: KeyResult['id']
   afterSubmit?: (values: CheckInFormValues) => void
@@ -45,7 +47,6 @@ const CheckInForm = ({
   afterSubmit,
   gutter,
   isCommentAlwaysEnabled,
-  showCancelButton,
   showGoal,
   onCancel,
 }: CheckInFormProperties) => {
@@ -53,12 +54,14 @@ const CheckInForm = ({
   const [currentConfidence, setCurrentConfidence] = useRecoilState(
     selectCurrentConfidence(keyResultID),
   )
+  const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const setLatestCheckIn = useSetRecoilState(selectLatestCheckIn(keyResultID))
   const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
   const [createCheckIn, data] = useMutation(queries.CREATE_KEY_RESULT_CHECK_IN)
 
   const initialValues: CheckInFormValues = {
     currentProgress,
+    newProgress: draftValue,
     confidence: currentConfidence,
     comment: '',
   }
@@ -114,6 +117,11 @@ const CheckInForm = ({
     }
   }
 
+  const handleCancel = () => {
+    if (onCancel) onCancel()
+    setDraftValue(currentProgress)
+  }
+
   useEffect(() => {
     if (isCommentAlwaysEnabled) setCommentEnabled(true)
   }, [isCommentAlwaysEnabled, setCommentEnabled])
@@ -133,11 +141,7 @@ const CheckInForm = ({
 
               <CheckInFormFieldComment keyResultID={keyResultID} />
 
-              <Actions
-                isLoading={data.loading}
-                showCancelButton={showCancelButton}
-                onCancel={onCancel}
-              />
+              <Actions isLoading={data.loading} onCancel={handleCancel} />
             </Flex>
           </FormControl>
         </Form>
@@ -150,7 +154,6 @@ CheckInForm.defaultProps = {
   submitOnBlur: false,
   showGoal: false,
   isCommentAlwaysEnabled: false,
-  showCancelButton: false,
 }
 
 export default CheckInForm

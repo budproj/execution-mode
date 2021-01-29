@@ -5,8 +5,10 @@ import sinon from 'sinon'
 import Actions from './actions'
 
 describe('component render', () => {
+  afterEach(() => sinon.restore())
+
   it('renders the proper cancel button text if we ask to do so', () => {
-    const result = enzyme.shallow(<Actions showCancelButton />)
+    const result = enzyme.shallow(<Actions onCancel={sinon.fake()} />)
 
     const cancelButton = result.find('Button').first()
 
@@ -36,7 +38,7 @@ describe('component interations', () => {
   it('executes the provided cancel event upon cancel button click', () => {
     const spy = sinon.spy()
 
-    const result = enzyme.shallow(<Actions showCancelButton onCancel={spy} />)
+    const result = enzyme.shallow(<Actions onCancel={spy} />)
 
     const cancelButton = result.find('Button').first()
     cancelButton.simulate('click')

@@ -16,7 +16,7 @@ describe('component interations', () => {
 
     const result = enzyme.shallow(<CheckInFormFieldCommentInput />)
 
-    const input = result.find('InputWithLoader')
+    const input = result.find('Textarea')
     const fakeEvent = {
       target: {
         value: fakeComment,
@@ -27,17 +27,5 @@ describe('component interations', () => {
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly('comment', fakeComment)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-})
-
-describe('component customizations', () => {
-  it('displays the save button if the component is to submit on blur', () => {
-    sinon.stub(formik, 'useFormikContext').returns({ values: {} } as any)
-
-    const result = enzyme.shallow(<CheckInFormFieldCommentInput submitOnBlur />)
-
-    const button = result.find('Button')
-
-    expect(button.length).toEqual(1)
   })
 })

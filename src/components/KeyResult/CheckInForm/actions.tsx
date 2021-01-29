@@ -6,12 +6,12 @@ import messages from './messages'
 
 export interface CheckInFormActionsProperties {
   isLoading?: boolean
-  showCancelButton?: boolean
   onCancel?: () => void
 }
 
-const Actions = ({ isLoading, onCancel, showCancelButton }: CheckInFormActionsProperties) => {
+const Actions = ({ isLoading, onCancel }: CheckInFormActionsProperties) => {
   const intl = useIntl()
+  const showCancelButton = Boolean(onCancel)
 
   return (
     <Grid gridGap={4} templateColumns="1fr 1fr">

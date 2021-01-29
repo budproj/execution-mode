@@ -17,25 +17,19 @@ import {
 import messages from './messages'
 
 export interface CheckInFormFieldCurrentConfidenceProperties {
-  submitOnBlur: boolean
   isLoading?: boolean
 }
 
 const CheckInFormFieldCurrentConfidence = ({
-  submitOnBlur,
   isLoading,
 }: CheckInFormFieldCurrentConfidenceProperties) => {
   const [isSending, setIsSending] = useState(false)
   const intl = useIntl()
-  const { values, setFieldValue, submitForm, isSubmitting } = useFormikContext<CheckInFormValues>()
+  const { values, setFieldValue, isSubmitting } = useFormikContext<CheckInFormValues>()
   const normalizedConfidence = normalizeConfidence(values.confidence)
 
   const handleChange = async (newValue: string | string[]) => {
     setFieldValue('confidence', Number.parseInt(newValue as string, 10))
-    if (submitOnBlur) {
-      setIsSending(true)
-      await submitForm()
-    }
   }
 
   useEffect(() => {

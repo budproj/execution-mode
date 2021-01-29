@@ -143,6 +143,10 @@
     "defaultMessage": "Um ícone de coroa que representa a sua empresa",
     "description": "This message is used by screen readers to explain our crown icon"
   },
+  "DrLml8": {
+    "defaultMessage": "Clique aqui para fechar o formulário de check-in",
+    "description": "This message is displayed as the alternative text for the close button in our check-in form"
+  },
   "F33Lyk": {
     "defaultMessage": "Cor do Nível de Confiança",
     "description": "The text of the table head related to the Confidence Level color column"
@@ -331,6 +335,10 @@
     "defaultMessage": "Um ícone de gráfico de pizza",
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
+  "Zmffm0": {
+    "defaultMessage": "Fechar",
+    "description": "This message is displayed as the title text for our close icon in our check-in form"
+  },
   "Zn0eYa": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
     "description": "The alternative text explaining our team at work image"
@@ -471,6 +479,10 @@
     "defaultMessage": "A tela que você está procurando foi abduzida!",
     "description": "This message is displayed below the title in our unknown error page"
   },
+  "sFYaLE": {
+    "defaultMessage": "Check-in",
+    "description": "This message is displayed as the form title, above the check-in form"
+  },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
@@ -478,10 +490,6 @@
   "th1Ney": {
     "defaultMessage": "Hoje",
     "description": "This label is displayed if the date is today"
-  },
-  "u/NI1D": {
-    "defaultMessage": "Check-in",
-    "description": "The label text above the check-in section in our key result single page or drawer"
   },
   "u7Yaxx": {
     "defaultMessage": "Responsável",
@@ -535,8 +543,16 @@
     "defaultMessage": "Estamos trabalhando em melhorias para você! :)",
     "description": "The title displayed in our under maintenance error page"
   },
+  "zev4wl": {
+    "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
+    "description": "This is a message explaining the flag icon in our check-in form"
+  },
   "zgF+iY": {
     "defaultMessage": "Comentário",
     "description": "This is the label text that is displayed above the input"
+  },
+  "zujGO+": {
+    "defaultMessage": "Fazer check-in",
+    "description": "This message is displayed as a label button in our key result section"
   }
 }

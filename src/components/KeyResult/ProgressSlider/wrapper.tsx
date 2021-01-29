@@ -1,13 +1,9 @@
 import { Popover as PopoverWrapper, PopoverTrigger } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
-import {
-  keyResultCheckInPopoverOpen,
-  keyResultCheckInProgressDraft,
-} from 'src/state/recoil/key-result/check-in'
-import selectCurrentProgress from 'src/state/recoil/key-result/selectors/current-progress'
+import { keyResultCheckInPopoverOpen } from 'src/state/recoil/key-result/check-in'
 
 import Popover from './popover'
 import ProgressSliderSlider from './slider'
@@ -18,12 +14,9 @@ export interface ProgressSliderWrapperProperties {
 }
 
 const ProgressSliderWrapper = ({ id, canChange }: ProgressSliderWrapperProperties) => {
-  const currentProgress = useRecoilValue(selectCurrentProgress(id))
-  const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(id))
   const [isPopoverOpen, setPopoverOpen] = useRecoilState<boolean>(keyResultCheckInPopoverOpen(id))
 
   const handleClose = () => {
-    if (draftValue !== currentProgress) setDraftValue(currentProgress)
     setPopoverOpen(false)
   }
 
