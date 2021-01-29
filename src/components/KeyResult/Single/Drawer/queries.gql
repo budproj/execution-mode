@@ -2,33 +2,11 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
   keyResult(id: $id) {
     id
     title
-    description
-    goal
     currentProgress
+    goal
     currentConfidence
-    owner {
-      fullName
-      picture
-    }
-    objective {
-      title
-      cycle {
-        name
-        dateStart
-        dateEnd
-      }
-    }
     policies {
       update
-    }
-    checkIns {
-      id
-      createdAt
-      comment
-      user {
-        fullName
-        picture
-      }
     }
   }
 }

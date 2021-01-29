@@ -149,6 +149,7 @@ type KeyResultCheckIn {
 
   """The reported progress in this check-in"""
   progress: Float!
+  relativePercentageProgress: Int!
 
   """The reported confidence in this check-in"""
   confidence: Int!

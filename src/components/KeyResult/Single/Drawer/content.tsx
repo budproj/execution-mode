@@ -7,7 +7,6 @@ import logger from 'lib/logger'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
 
-import KeyResultDrawerBody from './Body'
 import KeyResultDrawerHeader from './Header'
 import queries from './queries.gql'
 
@@ -46,7 +45,9 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
   return (
     <DrawerContent overflowY="auto">
       <KeyResultDrawerHeader keyResultID={keyResultID} />
-      <KeyResultDrawerBody keyResultID={keyResultID} />
+      {
+        // <KeyResultDrawerBody keyResultID={keyResultID} />
+      }
     </DrawerContent>
   )
 }

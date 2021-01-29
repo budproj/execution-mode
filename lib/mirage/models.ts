@@ -15,6 +15,8 @@ const models = {
   keyResultCheckIn: Model.extend({
     user: belongsTo(),
     keyResult: belongsTo(),
+    // eslint-disable-next-line unicorn/no-null
+    parent: belongsTo('keyResultCheckIn', { inverse: null }),
   }),
   keyResultCustomList: Model.extend({
     user: belongsTo(),

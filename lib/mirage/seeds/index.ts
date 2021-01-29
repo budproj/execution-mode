@@ -54,20 +54,34 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   rootTeam.update('users', users as any)
   rootTeam.update('objectives', [objectives[0]] as any)
 
-  // eslint-disable-next-line array-callback-return
   teams.map((team) => {
     team.update('users', users as any)
     team.update('objectives', objectives as any)
+
+    return team
   })
 
   company.update('latestKeyResultCheckIn', checkIns[0] as any)
 
-  // eslint-disable-next-line array-callback-return
   keyResults.map((keyResult) => {
     const latestKeyResultCheckIn = keyResult.checkIns.models[0] as any
+    const checkIns = keyResult.checkIns.models
+
+    checkIns.map((checkIn, index) => {
+      const parentIndex = index + 1
+
+      if (parentIndex < checkIns.length) {
+        const parent = checkIns[parentIndex]
+        checkIn.update('parent', parent)
+      }
+
+      return checkIn
+    })
 
     keyResult.update('currentProgress', latestKeyResultCheckIn?.progress ?? 0)
     keyResult.update('checkIns', keyResult.checkIns)
+
+    return keyResult
   })
 
   logger.debug('Inserted fake data on MirageJS server', {
