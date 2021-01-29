@@ -1,5 +1,5 @@
 import { AccordionItem } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { Objective } from 'src/components/Objective/types'
@@ -15,8 +15,13 @@ export interface ObjectiveAccordionItemProperties {
 
 const ObjectiveAccordionItem = ({ objectiveID }: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
-  const [confidenceTag] = useConfidenceTag(objective?.currentConfidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(objective?.currentConfidence)
   const isLoaded = Boolean(objective)
+
+  useEffect(() => {
+    if (typeof objective?.currentConfidence !== 'undefined')
+      setConfidence(objective?.currentConfidence)
+  }, [objective, setConfidence])
 
   return (
     <AccordionItem border="none" bg="white" boxShadow="sm" p={4}>

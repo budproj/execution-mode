@@ -41,6 +41,8 @@ describe('component customizations', () => {
 })
 
 describe('component expectations', () => {
+  afterEach(() => sinon.restore())
+
   it('should pass the confidence tag color to the slider', () => {
     const fakeID = faker.random.word()
     const fakeData = { currentConfidence: 50 }
@@ -50,6 +52,23 @@ describe('component expectations', () => {
     stub.withArgs(teamAtomFamily(fakeID)).returns(fakeData)
 
     const result = enzyme.shallow(<TeamCard id={fakeID} />)
+
+    const slider = result.find('SliderWithFilledTrack')
+
+    expect(slider.prop('trackColor')).toEqual('yellow.500')
+  })
+})
+
+describe('component lifecycle', () => {
+  afterEach(() => sinon.restore())
+
+  it('dispatches a confidence update after we receive a value for it', () => {
+    sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
+      currentConfidence: 50,
+    })
+
+    const result = enzyme.shallow(<TeamCard />)
+    result.setProps({ id: faker.random.uuid() })
 
     const slider = result.find('SliderWithFilledTrack')
 

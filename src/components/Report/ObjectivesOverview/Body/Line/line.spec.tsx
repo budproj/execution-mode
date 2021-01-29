@@ -59,3 +59,22 @@ describe('component render', () => {
     expect(slider.prop('trackColor')).toEqual('yellow.500')
   })
 })
+
+describe('component lifecycle', () => {
+  afterEach(() => sinon.restore())
+
+  it('dispatches a confidence update after we receive a value for it', () => {
+    sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
+      currentConfidence: 50,
+    })
+
+    const result = enzyme.shallow(
+      <ObjectivesOverviewBodyLine orderTagNumber={faker.random.number()} />,
+    )
+    result.setProps({ id: faker.random.uuid() })
+
+    const slider = result.find('SliderWithFilledTrack')
+
+    expect(slider.prop('trackColor')).toEqual('yellow.500')
+  })
+})

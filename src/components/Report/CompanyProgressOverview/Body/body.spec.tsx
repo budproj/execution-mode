@@ -38,3 +38,20 @@ describe('data layer usage', () => {
     expect(slider.prop('trackColor')).toEqual('yellow.500')
   })
 })
+
+describe('component lifecycle', () => {
+  afterEach(() => sinon.restore())
+
+  it('dispatches a confidence update after we receive a value for it', () => {
+    sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
+      currentConfidence: 50,
+    })
+
+    const result = enzyme.shallow(<CompanyProgressOverviewBody />)
+    result.setProps({ companyID: faker.random.uuid() })
+
+    const slider = result.find('SliderWithGoal')
+
+    expect(slider.prop('trackColor')).toEqual('yellow.500')
+  })
+})

@@ -6,13 +6,14 @@ import sinon from 'sinon'
 
 import ObjectiveAccordionItem from './accordion-item'
 
+const objectiveAtomMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('OBJECTIVE')
+})
+
 describe('component data layer', () => {
   afterEach(() => sinon.restore())
 
   it('fetches the objective from our recoil state and passes it to our accordion button', () => {
-    const objectiveAtomMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-      return selector.key.includes('OBJECTIVE')
-    })
     const fakeObjective = faker.helpers.userCard()
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
@@ -71,5 +72,38 @@ describe('component data layer', () => {
     const accordionPanel = result.find('ObjectiveAccordionPanel')
 
     expect(accordionPanel.prop('isExpanded')).toEqual(fakeExpanded)
+  })
+})
+
+describe('component lifecycle', () => {
+  afterEach(() => sinon.restore())
+
+  it('dispatches a confidence update after we receive a value for it', () => {
+    sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
+      currentConfidence: 50,
+    })
+
+    const result = enzyme.shallow(<ObjectiveAccordionItem />)
+    result.setProps({ objectiveID: faker.random.uuid() })
+
+    const accordionButton = result
+      .find('AccordionItem')
+      .renderProp('children')({ isExpanded: true } as never)
+      .find('ObjectiveAccordionButton')
+
+    const expectedTag = {
+      messages: {
+        short: 'Médio',
+        long: 'Média Confiança',
+        icon: 'Um círculo amarelo, indicando que a confiançá é média',
+      },
+      colors: {
+        scheme: 'yellow',
+        primary: 'yellow.500',
+        light: 'yellow.100',
+      },
+    }
+
+    expect(accordionButton.prop('confidenceTag')).toEqual(expectedTag)
   })
 })

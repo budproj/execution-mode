@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -20,7 +20,11 @@ const TeamCard = ({ id }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
   const isCompany = Boolean(team?.isCompany)
-  const [confidenceTag] = useConfidenceTag(team?.currentConfidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(team?.currentConfidence)
+
+  useEffect(() => {
+    if (typeof team?.currentConfidence !== 'undefined') setConfidence(team?.currentConfidence)
+  }, [team, setConfidence])
 
   const isLoaded = Boolean(team)
 

@@ -1,5 +1,5 @@
 import { Flex, Skeleton } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import SliderWithGoal from 'src/components/Base/SliderWithGoal'
@@ -21,7 +21,11 @@ const CompanyProgressOverviewBody = ({
   isLoading,
 }: CompanyProgressOverviewBodyProperties) => {
   const company = useRecoilValue(teamAtomFamily(companyID))
-  const [confidenceTag] = useConfidenceTag(company?.currentConfidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(company?.currentConfidence)
+
+  useEffect(() => {
+    if (typeof company?.currentConfidence !== 'undefined') setConfidence(company?.currentConfidence)
+  }, [company, setConfidence])
 
   return (
     <OverviewBodyBox>

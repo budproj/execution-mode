@@ -1,5 +1,5 @@
 import { Flex, Heading, Text, Skeleton } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -24,8 +24,13 @@ const ObjectivesOverviewBodyLine = ({
 }: ObjectivesOverviewBodyLineProperties) => {
   const intl = useIntl()
   const objective = useRecoilValue(objectiveAtomFamily(id))
-  const [confidenceTag] = useConfidenceTag(objective?.currentConfidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(objective?.currentConfidence)
   const isLoaded = Boolean(objective)
+
+  useEffect(() => {
+    if (typeof objective?.currentConfidence !== 'undefined')
+      setConfidence(objective.currentConfidence)
+  }, [objective, setConfidence])
 
   return (
     <OverviewBodyBox
