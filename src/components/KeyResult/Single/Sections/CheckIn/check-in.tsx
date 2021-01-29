@@ -9,6 +9,8 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { USER_POLICY } from 'src/components/User/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
+import { KeyResultSectionTimelineCardBase } from '../Timeline/Cards'
+
 import messages from './messages'
 
 export interface KeyResultSectionCheckInProperties {
@@ -41,14 +43,7 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
         </Button>
       </Collapse>
       <Collapse animateOpacity in={isOpen}>
-        <Flex
-          direction="column"
-          p={5}
-          borderWidth={1}
-          borderColor="gray.100"
-          borderRadius="4px"
-          gridGap={4}
-        >
+        <KeyResultSectionTimelineCardBase>
           <Flex>
             <Heading fontSize="18px" fontWeight={700} color="gray.600" flexGrow={1}>
               {intl.formatMessage(messages.formTitle)}
@@ -74,7 +69,7 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
             afterSubmit={handleClose}
             onCancel={handleClose}
           />
-        </Flex>
+        </KeyResultSectionTimelineCardBase>
       </Collapse>
     </Skeleton>
   ) : // eslint-disable-next-line unicorn/no-null

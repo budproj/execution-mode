@@ -42,7 +42,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     user,
     ...buildKeyResultCustomList(keyResults),
   })
-  const checkIns = server.createList('keyResultCheckIn', 40, {
+  const keyResultCheckIns = server.createList('keyResultCheckIn', 40, {
     user,
     keyResult: () => pickRandomModel(keyResults),
     progress: buildKeyResultCheckIn,
@@ -61,25 +61,25 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     return team
   })
 
-  company.update('latestKeyResultCheckIn', checkIns[0] as any)
+  company.update('latestKeyResultCheckIn', keyResultCheckIns[0] as any)
 
   keyResults.map((keyResult) => {
-    const latestKeyResultCheckIn = keyResult.checkIns.models[0] as any
-    const checkIns = keyResult.checkIns.models
+    const latestKeyResultCheckIn = keyResult.keyResultCheckIns.models[0] as any
+    const keyResultCheckIns = keyResult.keyResultCheckIns.models
 
-    checkIns.map((checkIn, index) => {
+    keyResultCheckIns.map((keyResultCheckIn, index) => {
       const parentIndex = index + 1
 
-      if (parentIndex < checkIns.length) {
-        const parent = checkIns[parentIndex]
-        checkIn.update('parent', parent)
+      if (parentIndex < keyResultCheckIns.length) {
+        const parent = keyResultCheckIns[parentIndex]
+        keyResultCheckIn.update('parent', parent)
       }
 
-      return checkIn
+      return keyResultCheckIn
     })
 
     keyResult.update('currentProgress', latestKeyResultCheckIn?.progress ?? 0)
-    keyResult.update('checkIns', keyResult.checkIns)
+    keyResult.update('keyResultCheckIns', keyResult.keyResultCheckIns)
 
     return keyResult
   })
@@ -95,7 +95,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       objectives,
       keyResults,
       keyResultCustomList,
-      checkIns,
+      keyResultCheckIns,
       policies,
       otherUsers,
     },

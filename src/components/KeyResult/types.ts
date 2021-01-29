@@ -9,10 +9,12 @@ export interface KeyResultCheckIn {
   id: string
   progress: number
   confidence: number
+  relativePercentageProgress: number
   createdAt: string
   keyResult: KeyResult
   user: User
   comment?: string
+  parent?: KeyResultCheckIn
 }
 
 export interface KeyResultCustomList {
@@ -41,7 +43,7 @@ export interface KeyResult {
   team: Team
   policies: UserPolicies
   description?: string
-  checkIns?: KeyResultCheckIn[]
+  keyResultCheckIns?: KeyResultCheckIn[]
 }
 
 export type KeyResultsHashmap = Record<string, KeyResult>

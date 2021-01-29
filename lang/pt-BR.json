@@ -215,6 +215,10 @@
     "defaultMessage": "Um ícone de lata de lixo",
     "description": "The desc message for the Delete icon. This icon is used to ilustrate our key results"
   },
+  "NF2bAx": {
+    "defaultMessage": "Este resultado-chave não possui nenhum check-in",
+    "description": "This text is displayed in our key result timeline when no content exist"
+  },
   "P/ujgo": {
     "defaultMessage": "Um ícone de controle de video game",
     "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
@@ -419,10 +423,6 @@
     "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
     "description": "This message is displayed above the button in our not found error page"
   },
-  "lQs6US": {
-    "defaultMessage": "Comentários",
-    "description": "The label text above the Comments section in our key result single page or drawer"
-  },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
@@ -450,10 +450,6 @@
   "nrToz/": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our unknown error page"
-  },
-  "oeB7dG": {
-    "defaultMessage": "Esse resultado-chave não tem nenhum comentário",
-    "description": "The label message that is displayed below our team at work image in our empty state"
   },
   "or8fId": {
     "defaultMessage": "Voltar",

@@ -133,7 +133,7 @@ type KeyResult {
 
   """The description explaining the key result"""
   description: String
-  checkIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
+  keyResultCheckIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
 }
 
 """Defines the order to return your results in a given query"""
@@ -149,10 +149,10 @@ type KeyResultCheckIn {
 
   """The reported progress in this check-in"""
   progress: Float!
-  relativePercentageProgress: Int!
 
   """The reported confidence in this check-in"""
   confidence: Int!
+  relativePercentageProgress: Int!
   percentageProgressIncrease: Int!
   absoluteConfidenceIncrease: Int!
 

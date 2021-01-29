@@ -8,5 +8,18 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     policies {
       update
     }
+    keyResultCheckIns {
+      id
+      confidence
+      relativePercentageProgress
+      createdAt
+      user {
+        fullName
+      }
+      parent {
+        confidence
+        relativePercentageProgress
+      }
+    }
   }
 }

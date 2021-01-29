@@ -11,7 +11,9 @@ import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::LATEST_CHECK_IN`
 
-export const selectCheckIns = buildPartialSelector<KeyResult['checkIns']>('checkIns')
+export const selectCheckIns = buildPartialSelector<KeyResult['keyResultCheckIns']>(
+  'keyResultCheckIns',
+)
 
 export const getLatestCheckIn = (id?: KeyResult['id']) => ({ get }: RecoilInterfaceGetter) => {
   if (!id) return

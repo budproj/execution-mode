@@ -9,7 +9,7 @@ const models = {
     owner: belongsTo('user'),
     objective: belongsTo(),
     team: belongsTo(),
-    checkIns: hasMany('keyResultCheckIn'),
+    keyResultCheckIns: hasMany('keyResultCheckIn'),
     policies: belongsTo(),
   }),
   keyResultCheckIn: Model.extend({
