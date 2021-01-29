@@ -24,6 +24,17 @@ describe('slider customization', () => {
 
     expect(sliderComponent.props()).toMatchObject(fakeProperties)
   })
+
+  it('customizes the track radius', () => {
+    const fakeTrackRadius = faker.random.number()
+    const sliderWithFilledTrack = enzyme.shallow(
+      <SliderWithFilledTrack trackRadius={fakeTrackRadius} />,
+    )
+
+    const sliderTrackComponent = sliderWithFilledTrack.find('SliderTrack')
+
+    expect(sliderTrackComponent.prop('borderRadius')).toEqual(fakeTrackRadius)
+  })
 })
 
 describe('component expectations', () => {
