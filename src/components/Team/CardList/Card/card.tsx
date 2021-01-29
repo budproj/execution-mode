@@ -7,7 +7,7 @@ import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/components/Base'
 import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
-import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
+import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import messages from './messages'
@@ -20,7 +20,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
   const isCompany = Boolean(team?.isCompany)
-  const confidenceTag = useRecoilValue(confidenceTagSelector(team?.currentConfidence))
+  const [confidenceTag] = useConfidenceTag(team?.currentConfidence)
 
   const isLoaded = Boolean(team)
 
@@ -60,7 +60,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
             <SliderWithFilledTrack
               value={team?.currentProgress}
               trackThickness="12px"
-              trackColor={confidenceTag.color}
+              trackColor={confidenceTag.colors.primary}
             />
           </Skeleton>
           <Box pt={12}>

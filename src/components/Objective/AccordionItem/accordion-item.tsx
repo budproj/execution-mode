@@ -3,7 +3,7 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { Objective } from 'src/components/Objective/types'
-import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
+import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
 import ObjectiveAccordionButton from './accordion-button'
@@ -15,7 +15,7 @@ export interface ObjectiveAccordionItemProperties {
 
 const ObjectiveAccordionItem = ({ objectiveID }: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
-  const confidenceTag = useRecoilValue(confidenceTagSelector(objective?.currentConfidence))
+  const [confidenceTag] = useConfidenceTag(objective?.currentConfidence)
   const isLoaded = Boolean(objective)
 
   return (

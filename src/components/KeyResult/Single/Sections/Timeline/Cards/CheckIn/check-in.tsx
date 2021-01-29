@@ -1,15 +1,17 @@
-import { Box, Flex, Skeleton } from '@chakra-ui/react'
+import { Box, Stat, StatLabel } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
+import { useIntl } from 'react-intl'
 
-import { SliderWithFilledTrack } from 'src/components/Base'
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
-import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
+
+import KeyResultSectionTimelineCardCheckInConfidenceTag from './confidence-tag'
+import KeyResultSectionTimelineCardCheckInHelpText from './help-text'
+import messages from './messages'
+import KeyResultSectionTimelineCardCheckInProgressBar from './progress-bar'
 
 export interface KeyResultSectionTimelineCardCheckInProperties {
-  id?: KeyResultCheckIn['id']
   relativePercentageProgress?: KeyResultCheckIn['relativePercentageProgress']
   confidence?: KeyResultCheckIn['confidence']
   createdAt?: KeyResultCheckIn['createdAt']
@@ -18,33 +20,37 @@ export interface KeyResultSectionTimelineCardCheckInProperties {
 }
 
 const KeyResultSectionTimelineCardCheckIn = ({
-  id,
   relativePercentageProgress,
   confidence,
+  createdAt,
+  user,
+  parent,
 }: KeyResultSectionTimelineCardCheckInProperties) => {
-  const confidenceTag = useRecoilValue(confidenceTagSelector(confidence))
+  const intl = useIntl()
+
+  const confidenceDifference = confidence && parent?.confidence && confidence - parent.confidence
 
   return (
     <Box>
       <KeyResultSectionTimelineCardBase borderBottomRadius={0}>
-        <p>{id}</p>
+        <Stat>
+          <KeyResultSectionTimelineCardCheckInConfidenceTag
+            confidence={confidence}
+            difference={confidenceDifference}
+          />
+
+          <StatLabel fontSize="27px" fontWeight={400}>
+            {intl.formatMessage(messages.title)}
+          </StatLabel>
+
+          <KeyResultSectionTimelineCardCheckInHelpText user={user} createdAt={createdAt} />
+        </Stat>
       </KeyResultSectionTimelineCardBase>
 
-      <Skeleton
-        isLoaded={Boolean(relativePercentageProgress)}
-        minH="12px"
-        borderRadius="full"
-        borderTopRadius={0}
-      >
-        <Flex>
-          <SliderWithFilledTrack
-            trackColor={confidenceTag.color}
-            value={relativePercentageProgress}
-            trackThickness="12px"
-            trackTopRadius={0}
-          />
-        </Flex>
-      </Skeleton>
+      <KeyResultSectionTimelineCardCheckInProgressBar
+        relativePercentageProgress={relativePercentageProgress}
+        confidence={confidence}
+      />
     </Box>
   )
 }

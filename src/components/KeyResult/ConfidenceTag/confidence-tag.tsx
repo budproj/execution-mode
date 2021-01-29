@@ -1,24 +1,25 @@
 import { Flex, Text } from '@chakra-ui/react'
-import React from 'react'
-import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import React, { useEffect } from 'react'
 
 import CircleIcon from 'src/components/Icon/Circle'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
-import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
+import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
 export interface ConfidenceTagProperties {
   confidenceValue?: KeyResultCheckIn['confidence']
 }
 
 const ConfidenceTag = ({ confidenceValue }: ConfidenceTagProperties) => {
-  const intl = useIntl()
-  const confidenceTag = useRecoilValue(confidenceTagSelector(confidenceValue))
+  const [confidenceTag, setConfidence] = useConfidenceTag(confidenceValue)
+
+  useEffect(() => {
+    if (typeof confidenceValue !== 'undefined') setConfidence(confidenceValue)
+  }, [confidenceValue, setConfidence])
 
   return (
     <Flex gridGap={4} alignItems="center">
-      <CircleIcon fill={confidenceTag.color} desc={intl.formatMessage(confidenceTag.desc)} />
-      <Text>{intl.formatMessage(confidenceTag.message)}</Text>
+      <CircleIcon fill={confidenceTag.colors.primary} desc={confidenceTag.messages.icon} />
+      <Text>{confidenceTag.messages.short}</Text>
     </Flex>
   )
 }

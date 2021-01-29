@@ -12,7 +12,7 @@ import {
   CONFIDENCE_LOW,
   CONFIDENCE_BARRIER,
   normalizeConfidence,
-} from 'src/state/recoil/key-result/selectors/confidence-tag'
+} from 'src/state/hooks/useConfidenceTag/hook'
 
 import messages from './messages'
 

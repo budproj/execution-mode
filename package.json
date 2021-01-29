@@ -30,6 +30,7 @@
     "intl:compile:enUS": "formatjs compile lang/en-US.json --ast --out-file compiled-lang/en-US.json",
     "test": "jest",
     "test:watch": "npm run test -- --watch",
+    "test:clear-cache": "npm run test -- --clearCache",
     "deploy": "run-s git:tag:canary build waypoint:build waypoint:deploy",
     "release": "run-s git:tag:remove-canary git:tag:stable waypoint:up",
     "git:tag:canary": "git tag canary -f && git push origin canary -f",

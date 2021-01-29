@@ -48,8 +48,7 @@ describe('component render', () => {
   })
 
   it('uses the correct track color in the slider', () => {
-    const fakeColor = faker.random.word()
-    sinon.stub(recoil, 'useRecoilValue').returns({ color: fakeColor })
+    sinon.stub(recoil, 'useRecoilValue').returns({ currentConfidence: 50 })
 
     const result = enzyme.shallow(
       <ObjectivesOverviewBodyLine orderTagNumber={faker.random.number()} />,
@@ -57,6 +56,6 @@ describe('component render', () => {
 
     const slider = result.find('SliderWithFilledTrack')
 
-    expect(slider.prop('trackColor')).toEqual(fakeColor)
+    expect(slider.prop('trackColor')).toEqual('yellow.500')
   })
 })

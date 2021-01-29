@@ -1,8 +1,5 @@
 import enzyme from 'enzyme'
-import faker from 'faker'
 import React from 'react'
-import { defineMessage } from 'react-intl'
-import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import ConfidenceTag from './confidence-tag'
@@ -10,47 +7,59 @@ import ConfidenceTag from './confidence-tag'
 describe('component render', () => {
   afterEach(() => sinon.restore())
 
-  /* eslint-disable formatjs/enforce-description, formatjs/enforce-id, formatjs/enforce-default-message */
-  const fakeMessage = defineMessage({
-    id: faker.random.uuid(),
-    defaultMessage: faker.lorem.paragraph(),
-  })
-
-  const fakeDesc = defineMessage({
-    id: faker.random.uuid(),
-    defaultMessage: faker.lorem.paragraph(),
-  })
-  /* eslint-enable formatjs/enforce-description, formatjs/enforce-id, formatjs/enforce-default-message */
-
-  it('renders the circle with provided confidence tag color', () => {
-    const fakeColor = faker.random.word()
-    const fakeTag = {
-      color: fakeColor,
-      message: fakeMessage,
-      desc: fakeDesc,
-    }
-    sinon.stub(recoil, 'useRecoilValue').returns(fakeTag)
-    sinon.mock(console).expects('error').atLeast(1)
-
-    const result = enzyme.shallow(<ConfidenceTag />)
+  it('renders the circle with provided confidence tag color for high confidence', () => {
+    const result = enzyme.shallow(<ConfidenceTag confidenceValue={100} />)
 
     const circle = result.find('Circle')
 
-    expect(circle.prop('fill')).toEqual(fakeColor)
+    expect(circle.prop('fill')).toEqual('green.500')
   })
 
-  it('renders the provided confidence tag message', () => {
-    const fakeTag = {
-      message: fakeMessage,
-      desc: fakeDesc,
-    }
-    sinon.stub(recoil, 'useRecoilValue').returns(fakeTag)
-    sinon.mock(console).expects('error').atLeast(1)
+  it('renders the circle with provided confidence tag color for medium confidence', () => {
+    const result = enzyme.shallow(<ConfidenceTag confidenceValue={50} />)
 
-    const result = enzyme.shallow(<ConfidenceTag />)
+    const circle = result.find('Circle')
+
+    expect(circle.prop('fill')).toEqual('yellow.500')
+  })
+
+  it('renders the circle with provided confidence tag color for low confidence', () => {
+    const result = enzyme.shallow(<ConfidenceTag confidenceValue={0} />)
+
+    const circle = result.find('Circle')
+
+    expect(circle.prop('fill')).toEqual('red.500')
+  })
+
+  it('renders the circle with provided confidence tag color for barrier confidence', () => {
+    const result = enzyme.shallow(<ConfidenceTag confidenceValue={-1} />)
+
+    const circle = result.find('Circle')
+
+    expect(circle.prop('fill')).toEqual('brand.500')
+  })
+
+  it('renders the correct tag text for high confidence', () => {
+    const result = enzyme.shallow(<ConfidenceTag confidenceValue={100} />)
 
     const text = result.find('Text')
 
-    expect(text.text()).toEqual(fakeMessage.defaultMessage)
+    expect(text.text()).toEqual('Alto')
+  })
+
+  it('renders the correct tag text for medium confidence', () => {
+    const result = enzyme.shallow(<ConfidenceTag confidenceValue={50} />)
+
+    const text = result.find('Text')
+
+    expect(text.text()).toEqual('Médio')
+  })
+
+  it('renders the correct tag text for low confidence', () => {
+    const result = enzyme.shallow(<ConfidenceTag confidenceValue={0} />)
+
+    const text = result.find('Text')
+
+    expect(text.text()).toEqual('Baixo')
   })
 })

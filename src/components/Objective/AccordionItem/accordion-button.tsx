@@ -16,13 +16,13 @@ import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import PercentageProgressIncreaseTag from 'src/components/Base/PercentageProgressIncreaseTag'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Objective } from 'src/components/Objective/types'
-import { Tag } from 'src/state/recoil/key-result/selectors/confidence-tag'
+import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
 
 import messages from './messages'
 
 export interface ObjectiveAccordionButtonProperties {
   objective?: Partial<Objective>
-  confidenceTag?: Tag
+  confidenceTag?: ConfidenceTag
   isLoaded?: boolean
 }
 
@@ -68,11 +68,15 @@ const ObjectiveAccordionButton = ({
           <CircularProgress
             value={roundedProgress}
             thickness={6}
-            color={confidenceTag?.color}
-            trackColor={confidenceTag?.bgColor}
+            color={confidenceTag?.colors.primary}
+            trackColor={confidenceTag?.colors.light}
             size="55px"
           >
-            <CircularProgressLabel color={confidenceTag?.color} fontWeight={700} fontSize="16px">
+            <CircularProgressLabel
+              color={confidenceTag?.colors.primary}
+              fontWeight={700}
+              fontSize="16px"
+            >
               {roundedProgress}%
             </CircularProgressLabel>
           </CircularProgress>

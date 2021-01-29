@@ -79,6 +79,10 @@
     "defaultMessage": "{team} | bud",
     "description": "The page title that is displayed in the browser tab"
   },
+  "4f4cWE": {
+    "defaultMessage": "Alto",
+    "description": "We use this tag to group every key result with confidence higher than 66"
+  },
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
     "description": "The page title that is displayed in the browser tab"
@@ -138,6 +142,10 @@
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"
+  },
+  "Cr1hEp": {
+    "defaultMessage": "Check-in",
+    "description": "This text is displayed as the title of our check-in cards"
   },
   "D8ZyT4": {
     "defaultMessage": "Um ícone de coroa que representa a sua empresa",
@@ -203,10 +211,6 @@
     "defaultMessage": "Painel | bud",
     "description": "The page title that is displayed in the browser tab"
   },
-  "MBkjzW": {
-    "defaultMessage": "Alto",
-    "description": "We use this tag to group every key result with confidence higher than 50"
-  },
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
@@ -238,6 +242,10 @@
   "QMM2q6": {
     "defaultMessage": "Área",
     "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
+  },
+  "QPGUqB": {
+    "defaultMessage": "Alta Confiança",
+    "description": "We use this tag to group every key result with confidence higher than 66"
   },
   "RWaMNF": {
     "defaultMessage": "Um ícone de coração",
@@ -315,6 +323,10 @@
     "defaultMessage": "Como estão as prioridades d{gender, select, MALE {o} FEMALE {a} other {o}} {team}?",
     "description": "The title of the header section in our objectives overview report"
   },
+  "XENgso": {
+    "defaultMessage": "Médio",
+    "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
+  },
   "XNkzYe": {
     "defaultMessage": "Um ícone de pin de localização",
     "description": "The desc message for the Location icon. This icon is used to ilustrate our key results"
@@ -326,10 +338,6 @@
   "XiSFEr": {
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
-  },
-  "Yk89cv": {
-    "defaultMessage": "Médio",
-    "description": "We use this tag to group every key result with confidence higher than 25 but lower than 50"
   },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
@@ -379,9 +387,17 @@
     "defaultMessage": "Resultado-chave",
     "description": "The text of the table head related to the KeyResult column"
   },
+  "ff3h07": {
+    "defaultMessage": "Baixa Confiança",
+    "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
+  },
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
+  },
+  "hPJxpx": {
+    "defaultMessage": "Média Confiança",
+    "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
   },
   "hRddDx": {
     "defaultMessage": "Clique aqui para acessar nossa página de suporte",
@@ -462,6 +478,10 @@
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
+  },
+  "r0jTFR": {
+    "defaultMessage": "Realizado por <highlight>{author}</highlight> às {hour}",
+    "description": "This text is displayed as a helper text, below the check-in card title"
   },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",

@@ -7,10 +7,10 @@ import { SliderWithFilledTrack } from 'src/components/Base'
 import { Close as CloseIcon } from 'src/components/Icon'
 import KeyResultSingleTitle from 'src/components/KeyResult/Single/Sections/Title'
 import { KeyResult } from 'src/components/KeyResult/types'
+import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 import { selectCurrentConfidence } from 'src/state/recoil/key-result/selectors'
-import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
 import messages from './messages'
 
@@ -23,7 +23,7 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(keyResultID))
   const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
-  const confidenceTag = useRecoilValue(confidenceTagSelector(currentConfidence))
+  const [confidenceTag] = useConfidenceTag(currentConfidence)
 
   const isLoaded = typeof draftValue !== 'undefined'
 
@@ -52,7 +52,7 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
         <Flex>
           <SliderWithFilledTrack
             trackRadius={0}
-            trackColor={confidenceTag.color}
+            trackColor={confidenceTag.colors.primary}
             value={draftValue}
             min={keyResult?.initialValue}
             max={keyResult?.goal}
