@@ -152,6 +152,8 @@ type KeyResultCheckIn {
 
   """The reported confidence in this check-in"""
   confidence: Int!
+  percentageProgressIncrease: Int!
+  absoluteConfidenceIncrease: Int!
 
   """The creation date of the report"""
   createdAt: DateTime!
@@ -166,6 +168,7 @@ type KeyResultCheckIn {
 
   """The comment added in the report"""
   comment: String
+  parent: KeyResultCheckIn
 }
 
 """
