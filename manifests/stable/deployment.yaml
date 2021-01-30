@@ -47,3 +47,7 @@ spec:
               value: openid profile
             - name: AUTH0_AUDIENCE
               value: https://api.getbud.co/business
+            - name: MAINTENANCE_MODE_ENABLED
+              value: true
+            - name: MAINTENANCE_MODE_EXPECTED_RETURN
+              value: 2020-01-30T17:00:00Z
