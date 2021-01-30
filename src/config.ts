@@ -15,6 +15,7 @@ export interface BudPublicConfig {
   auth0: Auth0Config
   hotjar: HotjarConfig
   mirage: MiragePublicConfig
+  maintenanceMode: MaintenanceModeConfig
 }
 
 export interface BudServerConfig {
@@ -68,6 +69,11 @@ export interface HotjarConfig {
 export interface MiragePublicConfig {
   enabled: boolean
   fakerSeed: number
+}
+
+export interface MaintenanceModeConfig {
+  enabled: boolean
+  expectedReturn: Date
 }
 
 const getConfig = (): BudConfig => getNextConfig()

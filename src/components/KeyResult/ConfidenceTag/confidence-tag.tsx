@@ -4,11 +4,11 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import CircleIcon from 'src/components/Icon/Circle'
-import { ConfidenceReport } from 'src/components/KeyResult/types'
+import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
 export interface ConfidenceTagProperties {
-  confidenceValue?: ConfidenceReport['valueNew']
+  confidenceValue?: KeyResultCheckIn['confidence']
 }
 
 const ConfidenceTag = ({ confidenceValue }: ConfidenceTagProperties) => {

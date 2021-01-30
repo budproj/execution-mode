@@ -35,8 +35,8 @@ describe('page control behaviors', () => {
 
     const result = enzyme.shallow(<MyKeyResultsPage />)
 
-    const keyResultView = result.find('KeyResultView')
-    keyResultView.simulate('lineClick', fakeID)
+    const keyResultCustomList = result.find('KeyResultCustomList')
+    keyResultCustomList.simulate('lineClick', fakeID)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeID)
 

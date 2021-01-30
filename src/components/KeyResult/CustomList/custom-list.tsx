@@ -7,42 +7,48 @@ import { useRecoilState } from 'recoil'
 import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
-import { KeyResult, KeyResultView as KeyResultViewType } from 'src/components/KeyResult/types'
-import { KEY_RESULT_VIEW_BINDING } from 'src/components/User/constants'
+import {
+  KeyResult,
+  KeyResultCustomList as KeyResultCustomListType,
+} from 'src/components/KeyResult/types'
+import { KEY_RESULT_CUSTOM_LIST_BINDING } from 'src/components/User/constants'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
-import { keyResultViewAtom } from 'src/state/recoil/key-result/view'
+import { keyResultCustomListAtom } from 'src/state/recoil/key-result/custom-list'
 
 import queries from './queries.gql'
 
-export interface KeyResultViewProperties extends BoxProps {
+export interface KeyResultCustomListProperties extends BoxProps {
   onLineClick?: (id: KeyResult['id']) => void
 }
 
-export interface GetKeyResultViewWithBindingQuery {
-  keyResultView: Partial<KeyResultViewType>
+export interface GetKeyResultCustomListWithBindingQuery {
+  keyResultCustomList: Partial<KeyResultCustomListType>
 }
 
-const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): ReactElement => {
-  const [keyResultView, setKeyResultView] = useRecoilState(keyResultViewAtom)
+const KeyResultCustomList = ({
+  onLineClick,
+  ...rest
+}: KeyResultCustomListProperties): ReactElement => {
+  const [keyResultCustomList, setKeyResultCustomList] = useRecoilState(keyResultCustomListAtom)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [updateRank] = useMutation(queries.UPDATE_RANK)
   const [
-    getKeyResultViewForBinding,
+    getKeyResultCustomListForBinding,
     { loading, data, called },
-  ] = useLazyQuery<GetKeyResultViewWithBindingQuery>(queries.GET_KEY_RESULT_VIEW_WITH_BINDING)
+  ] = useLazyQuery<GetKeyResultCustomListWithBindingQuery>(queries.GET_KEY_RESULT_VIEW_WITH_BINDING)
 
   const syncedWithLocalState =
     called &&
     !loading &&
     typeof data !== 'undefined' &&
-    keyResultView?.rank === data.keyResultView.rank
+    keyResultCustomList?.rank === data.keyResultCustomList.rank
 
   const handleRankUpdate = async (
     from: DraggableLocation['index'],
     to: DraggableLocation['index'],
   ) => {
-    const newRank = [...(keyResultView?.rank ?? [])]
+    const newRank = [...(keyResultCustomList?.rank ?? [])]
     const [movedID] = newRank.splice(from, 1)
     newRank.splice(to, 0, movedID)
 
@@ -50,43 +56,43 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
       rank: newRank,
     }
 
-    const newKeyResultView = {
-      ...(keyResultView as KeyResultViewType),
+    const newKeyResultCustomList = {
+      ...(keyResultCustomList as KeyResultCustomListType),
       ...rankInput,
     }
 
-    setKeyResultView(newKeyResultView)
-    await updateRank({ variables: { id: keyResultView?.id, rankInput } })
+    setKeyResultCustomList(newKeyResultCustomList)
+    await updateRank({ variables: { id: keyResultCustomList?.id, rankInput } })
 
-    return newKeyResultView
+    return newKeyResultCustomList
   }
 
   const handleDragEnd = ({ source, destination }: DropResult) =>
     destination && destination.index !== source.index
       ? handleRankUpdate(source.index, destination.index)
-      : keyResultView?.rank
+      : keyResultCustomList?.rank
 
   useEffect(() => {
-    if (!loading && data) setKeyResultView(data.keyResultView)
-  }, [loading, data, setKeyResultView])
+    if (!loading && data) setKeyResultCustomList(data.keyResultCustomList)
+  }, [loading, data, setKeyResultCustomList])
 
   useEffect(() => {
     if (!called)
-      getKeyResultViewForBinding({
+      getKeyResultCustomListForBinding({
         variables: {
-          binding: KEY_RESULT_VIEW_BINDING.MINE,
+          binding: KEY_RESULT_CUSTOM_LIST_BINDING.MINE,
         },
       })
-  }, [called, getKeyResultViewForBinding])
+  }, [called, getKeyResultCustomListForBinding])
 
   useEffect(() => {
-    if (data) loadKeyResults(data.keyResultView.keyResults)
+    if (data) loadKeyResults(data.keyResultCustomList.keyResults)
   }, [data, loadKeyResults])
 
   return (
     <KeyResultList
       type={KEY_RESULT_LIST_TYPE.DND}
-      keyResultIDs={keyResultView?.rank}
+      keyResultIDs={keyResultCustomList?.rank}
       isLoading={!syncedWithLocalState}
       headProperties={{
         [KEY_RESULT_LIST_COLUMN.OWNER]: {
@@ -115,4 +121,4 @@ const KeyResultView = ({ onLineClick, ...rest }: KeyResultViewProperties): React
   )
 }
 
-export default KeyResultView
+export default KeyResultCustomList

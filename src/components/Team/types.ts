@@ -1,5 +1,5 @@
 import { Cycle } from 'src/components/Cycle/types'
-import { ConfidenceReport, KeyResult, ProgressReport } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { User } from 'src/components/User/types'
 
@@ -8,18 +8,21 @@ import { TEAM_GENDER } from './constants'
 export interface Team {
   id: string
   name: string
-  description?: string
-  gender?: TEAM_GENDER
-  currentProgress?: number
-  currentConfidence?: number
+  isCompany: boolean
+  currentProgress: KeyResultCheckIn['progress']
+  currentConfidence: KeyResultCheckIn['confidence']
+  percentageProgressIncrease: number
   createdAt: string
   updatedAt: string
-  keyResults?: KeyResult[]
+  owner: User
+  description?: string
+  gender?: TEAM_GENDER
+  company?: Team
+  parentTeam?: Team
   users?: User[]
   teams?: Team[]
-  objectives?: Objective[]
   cycles?: Cycle[]
-  latestReport?: ProgressReport | ConfidenceReport
-  percentageProgressIncrease?: number
-  isCompany?: boolean
+  objectives?: Objective[]
+  keyResults?: KeyResult[]
+  latestKeyResultCheckIn?: KeyResultCheckIn
 }

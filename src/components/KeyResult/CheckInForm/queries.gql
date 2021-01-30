@@ -1,5 +1,5 @@
-mutation CREATE_CHECK_IN($checkInInput: CheckInInput!) {
-  createCheckIn(checkInInput: $checkInInput) {
+mutation CREATE_KEY_RESULT_CHECK_IN($keyResultCheckInInput: KeyResultCheckInInput!) {
+  createKeyResultCheckIn(keyResultCheckIn: $keyResultCheckInInput) {
     id
   }
 }

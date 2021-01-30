@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
-import { KeyResult, ProgressReport } from 'src/components/KeyResult/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 
 import EncouragingMessage from './encouraging-message'
 import messages from './messages'
@@ -16,8 +16,8 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
   const [showEncouragingMessage, setShowEncouragingMessage] = useState(false)
   const intl = useIntl()
 
-  const handleSubmitSideEffects = (newProgress?: ProgressReport['valueNew']) => {
-    if (newProgress) setShowEncouragingMessage(true)
+  const handleSubmitSideEffects = () => {
+    setShowEncouragingMessage(true)
   }
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { PageContent, PageHead } from 'src/components/Base'
+import { ApolloQueryErrorBoundary, PageContent, PageHead } from 'src/components/Base'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { PageProperties } from 'src/components/Page/types'
 import ChildTeamsObjectives from 'src/components/Team/ChildTeamsObjectives'
@@ -23,7 +23,7 @@ export interface ExploreTeamPageProperties extends PageProperties {
 const ExploreTeamPage = ({ teamId, isRootPage }: ExploreTeamPageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
-  const { data, loading } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_NAME, {
+  const { data, loading, error } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_NAME, {
     variables: {
       teamId,
     },
@@ -49,16 +49,18 @@ const ExploreTeamPage = ({ teamId, isRootPage }: ExploreTeamPageProperties) => {
   }, [data, loading, loadTeamOnRecoil])
 
   return (
-    <PageContent breadcrumbParams={breadcrumbParameters} showBreadcrumb={!isRootPage}>
-      <PageHead
-        title={messages.metaTitle}
-        description={messages.metaDescription}
-        titleValues={{ team: teamName ?? metaTitleLoadingFallback }}
-      />
+    <ApolloQueryErrorBoundary error={error}>
+      <PageContent breadcrumbParams={breadcrumbParameters} showBreadcrumb={!isRootPage}>
+        <PageHead
+          title={messages.metaTitle}
+          description={messages.metaDescription}
+          titleValues={{ team: teamName ?? metaTitleLoadingFallback }}
+        />
 
-      <ChildTeamsObjectives rootTeamId={teamId} />
-      <KeyResultSingleDrawer />
-    </PageContent>
+        <ChildTeamsObjectives rootTeamId={teamId} />
+        <KeyResultSingleDrawer />
+      </PageContent>
+    </ApolloQueryErrorBoundary>
   )
 }
 

@@ -52,4 +52,30 @@ describe('props customization', () => {
 
     expect(box.props()).toMatchObject(properties)
   })
+
+  it('hides the content header if we ask to do so', () => {
+    const properties = faker.helpers.userCard()
+    const result = enzyme.shallow(
+      <PageContent hideContentHeader {...properties}>
+        <FakeComponent />
+      </PageContent>,
+    )
+
+    const pageContentHeader = result.find('PageContentHeader')
+
+    expect(pageContentHeader.length).toEqual(0)
+  })
+
+  it('shows the content header if we do not ask to hide it', () => {
+    const properties = faker.helpers.userCard()
+    const result = enzyme.shallow(
+      <PageContent {...properties}>
+        <FakeComponent />
+      </PageContent>,
+    )
+
+    const pageContentHeader = result.find('PageContentHeader')
+
+    expect(pageContentHeader.length).toEqual(1)
+  })
 })

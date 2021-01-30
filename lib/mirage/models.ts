@@ -9,21 +9,14 @@ const models = {
     owner: belongsTo('user'),
     objective: belongsTo(),
     team: belongsTo(),
-    confidenceReports: hasMany(),
-    progressReports: hasMany(),
+    checkIns: hasMany('keyResultCheckIn'),
     policies: belongsTo(),
-    // eslint-disable-next-line unicorn/no-null
-    reports: hasMany('progressReport', { inverse: null }),
   }),
-  progressReport: Model.extend({
+  keyResultCheckIn: Model.extend({
     user: belongsTo(),
     keyResult: belongsTo(),
   }),
-  confidenceReport: Model.extend({
-    user: belongsTo(),
-    keyResult: belongsTo(),
-  }),
-  keyResultView: Model.extend({
+  keyResultCustomList: Model.extend({
     user: belongsTo(),
     keyResults: hasMany(),
   }),
@@ -39,12 +32,11 @@ const models = {
     // eslint-disable-next-line unicorn/no-null
     parentTeam: belongsTo('team', { inverse: null }),
     cycles: hasMany(),
-    latestReport: belongsTo('progressReport'),
+    latestKeyResultCheckIn: hasMany('keyResultCheckIn'),
   }),
   user: Model.extend({
     keyResults: hasMany(),
-    progressReports: hasMany(),
-    confidenceReports: hasMany(),
+    keyResultCheckIns: hasMany(),
     teams: hasMany(),
     // eslint-disable-next-line unicorn/no-null
     companies: hasMany('team', { inverse: null }),

@@ -1,6 +1,0 @@
-mutation UPDATE_KEY_RESULT($id: ID!, $keyResultInput: KeyResultInput!) {
-  updateKeyResult(id: $id, keyResultInput: $keyResultInput) {
-    id
-    title
-  }
-}

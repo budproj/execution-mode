@@ -1,6 +1,6 @@
 export * as keyResultIcon from './icon'
 
-export * as keyResultView from './view'
+export * as keyResultCustomList from './custom-list'
 
 export * as keyResultCheckIn from './check-in'
 

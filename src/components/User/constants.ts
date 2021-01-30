@@ -3,7 +3,7 @@ export enum USER_POLICY {
   DENY = 'DENY',
 }
 
-export enum KEY_RESULT_VIEW_BINDING {
+export enum KEY_RESULT_CUSTOM_LIST_BINDING {
   MINE = 'MINE',
 }
 

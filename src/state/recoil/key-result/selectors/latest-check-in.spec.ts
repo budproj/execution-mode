@@ -2,26 +2,26 @@ import faker from 'faker'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import * as latestReport from './latest-report'
+import * as latestCheckIn from './latest-check-in'
 
 describe('getter', () => {
   afterEach(() => sinon.restore())
 
-  it('returns the latest report', () => {
+  it('returns the latest check-in', () => {
     const fakeID = faker.random.word()
-    const confidenceReport = { comment: faker.lorem.paragraph() }
-    const getStub = sinon.stub().returns([confidenceReport])
-    const getLatestReport = latestReport.getLatestReport(fakeID)
+    const checkIn = { comment: faker.lorem.paragraph() }
+    const getStub = sinon.stub().returns([checkIn])
+    const getLatestCheckIn = latestCheckIn.getLatestCheckIn(fakeID)
 
-    const result = getLatestReport({ get: getStub })
+    const result = getLatestCheckIn({ get: getStub })
 
-    expect(result).toEqual(confidenceReport)
+    expect(result).toEqual(checkIn)
   })
 
   it('returns undefined if undefined ID was provided', () => {
-    const getLatestReport = latestReport.getLatestReport()
+    const getLatestCheckIn = latestCheckIn.getLatestCheckIn()
 
-    const result = getLatestReport({ get: sinon.fake() })
+    const result = getLatestCheckIn({ get: sinon.fake() })
 
     expect(result).not.toBeDefined()
   })
@@ -35,25 +35,25 @@ describe('setter', () => {
     return selector.key.includes('USER')
   })
 
-  it('asks to set the new report with an updated value', () => {
+  it('asks to set the new check-in with an updated value', () => {
     const latestComment = faker.lorem.paragraph()
-    const oldReport = { comment: latestComment }
+    const oldCheckIn = { comment: latestComment }
     const fakeUser = faker.helpers.userCard()
     const fakeSelector = sinon.fake()
 
     const getterStub = sinon.stub()
-    getterStub.withArgs(fakeSelector).returns([oldReport])
+    getterStub.withArgs(fakeSelector).returns([oldCheckIn])
     getterStub.withArgs(userMatcher).returns(fakeUser)
 
     const setterSpy = sinon.spy()
     const clock = sinon.useFakeTimers()
-    sinon.stub(latestReport, 'selectReports').returns(fakeSelector as any)
+    sinon.stub(latestCheckIn, 'selectCheckIns').returns(fakeSelector as any)
 
     const fakeID = faker.random.word()
     const newComment = faker.lorem.paragraph()
-    const setLatestReport = latestReport.setLatestReport(fakeID)
+    const setLatestCheckIn = latestCheckIn.setLatestCheckIn(fakeID)
 
-    setLatestReport(
+    setLatestCheckIn(
       {
         get: getterStub,
         set: setterSpy,
@@ -61,15 +61,15 @@ describe('setter', () => {
       { comment: newComment },
     )
 
-    const expectedNewReports = [
+    const expectedNewCheckIns = [
       {
         user: fakeUser,
         comment: newComment,
         createdAt: new Date(),
       },
-      oldReport,
+      oldCheckIn,
     ]
-    const wasCalledAsExpected = setterSpy.calledOnceWithExactly(fakeSelector, expectedNewReports)
+    const wasCalledAsExpected = setterSpy.calledOnceWithExactly(fakeSelector, expectedNewCheckIns)
 
     clock.restore()
 
@@ -77,9 +77,9 @@ describe('setter', () => {
   })
 
   it('returns undefined if undefined ID was provided', () => {
-    const setLatestReport = latestReport.setLatestReport()
+    const setLatestCheckIn = latestCheckIn.setLatestCheckIn()
 
-    const result = setLatestReport({ get: sinon.fake(), set: sinon.fake() } as any, {})
+    const result = setLatestCheckIn({ get: sinon.fake(), set: sinon.fake() } as any, {})
 
     expect(result).not.toBeDefined()
   })

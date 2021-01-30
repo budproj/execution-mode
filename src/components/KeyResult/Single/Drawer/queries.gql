@@ -21,7 +21,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     policies {
       update
     }
-    reports {
+    checkIns {
       id
       createdAt
       comment

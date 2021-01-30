@@ -19,6 +19,8 @@ const {
   HOTJAR_SV,
   MIRAGE_ENABLED,
   MIRAGE_FAKER_SEED,
+  MAINTENANCE_MODE_ENABLED,
+  MAINTENANCE_MODE_EXPECTED_RETURN
 } = process.env
 
 const publicRuntimeConfig = {
@@ -26,6 +28,10 @@ const publicRuntimeConfig = {
   nodeEnv: NODE_ENV,
   defaultLocale: LOCALE_OVERRIDE ?? DEFAULT_LOCALE,
   logLevel: LOG_LEVEL,
+  maintenanceMode: {
+    enabled: MAINTENANCE_MODE_ENABLED === 'true',
+    expectedReturn: new Date(MAINTENANCE_MODE_EXPECTED_RETURN)
+  },
 
   mirage: {
     enabled: MIRAGE_ENABLED === 'true',

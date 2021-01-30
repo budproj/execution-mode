@@ -32,7 +32,7 @@ export const setCurrentProgress = (id?: KeyResult['id']) => (
 }
 
 const selectCurrentProgress = selectorFamily<
-  KeyResult['currentProgress'],
+  KeyResult['currentProgress'] | undefined,
   KeyResult['id'] | undefined
 >({
   key: KEY,

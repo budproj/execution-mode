@@ -8,7 +8,7 @@ import { RecoilRoot } from 'recoil'
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
 import Hotjar from 'src/components/Base/Hotjar'
-import Page from 'src/components/Base/Page'
+import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
 import getConfig from 'src/config'
@@ -55,10 +55,10 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
           <ChakraProvider theme={theme}>
             <AuthzGatekeeper>
               <AuthzApolloProvider pageProps={pageProps}>
-                <Page>
+                <MaintenanceGatekeeper>
                   <Component {...pageProps} />
                   <Hotjar />
-                </Page>
+                </MaintenanceGatekeeper>
               </AuthzApolloProvider>
             </AuthzGatekeeper>
           </ChakraProvider>

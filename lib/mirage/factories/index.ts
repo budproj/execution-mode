@@ -1,22 +1,20 @@
-import confidenceReport from './confidence-report'
 import cycle from './cycle'
 import keyResult from './key-result'
-import keyResultView from './key-result-view'
+import keyResultCheckIn from './key-result-check-in'
+import keyResultCustomList from './key-result-custom-list'
 import objective from './objective'
 import policy from './policy'
-import progressReport from './progress-report'
 import team from './team'
 import user from './user'
 
 const factories = {
   keyResult,
+  keyResultCustomList,
+  keyResultCheckIn,
   user,
   cycle,
   objective,
-  keyResultView,
   team,
-  confidenceReport,
-  progressReport,
   policy,
 }
 

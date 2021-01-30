@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil'
 
 import { PageHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
-import { KeyResultView } from 'src/components/KeyResult'
+import { KeyResultCustomList } from 'src/components/KeyResult'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { PageProperties } from 'src/components/Page/types'
@@ -28,7 +28,7 @@ const MyKeyResultsPage = ({ isRootPage }: PageProperties) => {
     <PageContent showBreadcrumb={!isRootPage}>
       <PageHead title={messages.metaTitle} description={messages.metaDescription} />
 
-      <KeyResultView onLineClick={handleLineClick} />
+      <KeyResultCustomList onLineClick={handleLineClick} />
       <KeyResultSingleDrawer />
     </PageContent>
   )

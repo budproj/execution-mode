@@ -15,17 +15,17 @@ export interface KeyResultSectionCommentsProperties {
   keyResultID?: KeyResult['id']
 }
 
-const reportsSelector = buildPartialSelector<KeyResult['reports']>('reports')
+const checkInsSelector = buildPartialSelector<KeyResult['checkIns']>('checkIns')
 
 const KeyResultSectionComments = ({
   keyResultID,
   noOfSkeletons,
 }: KeyResultSectionCommentsProperties) => {
   const intl = useIntl()
-  const reports = useRecoilValue(reportsSelector(keyResultID))
+  const checkIns = useRecoilValue(checkInsSelector(keyResultID))
 
-  const comments = reports?.filter((report) => report.comment)
-  const isLoaded = typeof reports !== 'undefined'
+  const comments = checkIns?.filter((checkIn) => checkIn.comment)
+  const isLoaded = typeof checkIns !== 'undefined'
 
   return (
     <Flex gridGap={4} direction="column">

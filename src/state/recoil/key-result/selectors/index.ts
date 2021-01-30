@@ -8,6 +8,4 @@ export { default as selectCurrentProgress } from './current-progress'
 
 export { default as selectCurrentConfidence } from './current-confidence'
 
-export { default as selectLatestConfidenceReport } from './latest-confidence-report'
-
-export { default as selectLatestReport } from './latest-report'
+export { default as selectLatestCheckIn } from './latest-check-in'
