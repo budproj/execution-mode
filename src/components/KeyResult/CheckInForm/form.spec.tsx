@@ -301,6 +301,40 @@ describe('component interations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
+  it('dispatches a remote state update action with 0 progress upon form submittion', async () => {
+    const fakeID = faker.random.word()
+    const fakeConfidence = faker.random.number()
+
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    const spy = sinon.spy()
+
+    stateStub.returns([undefined, sinon.fake()])
+    sinon.stub(apollo, 'useMutation').returns([spy, {}] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      newProgress: 0,
+      confidence: fakeConfidence,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
+      variables: {
+        keyResultCheckInInput: {
+          keyResultId: fakeID,
+          progress: 0,
+          confidence: fakeConfidence,
+        },
+      },
+    })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
   it('executes the desired after submit hook upon form submission', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()

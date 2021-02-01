@@ -1,7 +1,8 @@
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
-import pickBy from 'lodash/pickBy'
+import isUndefined from 'lodash/isUndefined'
+import omitBy from 'lodash/omitBy'
 import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
@@ -95,7 +96,7 @@ const CheckInForm = ({
       confidence: values.confidence,
       comment: values.comment,
     }
-    const clearedCheckIn = pickBy(checkIn)
+    const clearedCheckIn = omitBy(checkIn, isUndefined)
 
     await createCheckIn({
       variables: {
