@@ -12,6 +12,7 @@ export interface KeyResultCheckIn {
   relativePercentageProgress: number
   createdAt: string
   keyResult: KeyResult
+  keyResultId: KeyResult['id']
   user: User
   comment?: string
   parent?: KeyResultCheckIn
