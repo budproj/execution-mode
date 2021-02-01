@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { DrawerContent } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
@@ -20,6 +20,7 @@ export interface GetKeyResultWithIDQuery {
 }
 
 const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentProperties) => {
+  const [isLoading, setIsLoading] = useState(true)
   const [keyResult, setKeyResult] = useRecoilState(selectKeyResult(keyResultID))
   const { loading, called, data } = useQuery<GetKeyResultWithIDQuery>(
     queries.GET_KEY_RESULT_WITH_ID,
@@ -40,13 +41,16 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
   })
 
   useEffect(() => {
-    if (called && data) setKeyResult(data.keyResult)
+    if (called && data) {
+      setKeyResult(data.keyResult)
+      setIsLoading(false)
+    }
   }, [called, data, setKeyResult])
 
   return (
     <DrawerContent overflowY="auto">
       <KeyResultDrawerHeader keyResultID={keyResultID} />
-      <KeyResultDrawerBody keyResultID={keyResultID} />
+      <KeyResultDrawerBody keyResultID={keyResultID} isLoading={isLoading} />
     </DrawerContent>
   )
 }

@@ -9,17 +9,21 @@ import KeyResultSectionTimelineContent from './Content'
 import KeyResultSectionTimelineSkeleton from './skeleton'
 
 export interface KeyResultSectionTimelineProperties {
+  isLoading: boolean
   keyResultID?: KeyResult['id']
 }
 
 const checkInsSelector = buildPartialSelector<KeyResult['keyResultCheckIns']>('keyResultCheckIns')
 
-const KeyResultSectionTimeline = ({ keyResultID }: KeyResultSectionTimelineProperties) => {
+const KeyResultSectionTimeline = ({
+  keyResultID,
+  isLoading,
+}: KeyResultSectionTimelineProperties) => {
   const checkIns = useRecoilValue(checkInsSelector(keyResultID))
 
   return (
     <Flex direction="column" gridGap={6}>
-      {typeof checkIns === 'undefined' ? (
+      {isLoading || typeof checkIns === 'undefined' ? (
         <KeyResultSectionTimelineSkeleton />
       ) : (
         <KeyResultSectionTimelineContent checkIns={checkIns} />

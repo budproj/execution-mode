@@ -37,4 +37,42 @@ describe('expected behaviors', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('notifies the body after adding remote data to local state', () => {
+    const fakeID = faker.random.word()
+    const fakeData = {
+      keyResult: faker.helpers.userCard(),
+    }
+
+    const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
+    recoilStateStub.withArgs(selectKeyResult(fakeID)).returns([faker.random.word(), sinon.fake()])
+
+    const apolloStub = sinon.stub(apollo, 'useQuery')
+    apolloStub.returns({
+      called: true,
+      data: fakeData,
+    } as any)
+
+    const result = enzyme.shallow(<KeyResultDrawerContent keyResultID={fakeID} />)
+
+    const body = result.find('KeyResultDrawerBody')
+
+    expect(body.prop('isLoading')).toEqual(false)
+  })
+
+  it('notifies the body that we did not yet added remote data to local state', () => {
+    sinon.stub(recoil, 'useRecoilState').returns([faker.random.word(), sinon.fake()])
+
+    const apolloStub = sinon.stub(apollo, 'useQuery')
+    apolloStub.returns({
+      called: true,
+      loading: true,
+    } as any)
+
+    const result = enzyme.shallow(<KeyResultDrawerContent keyResultID={faker.random.uuid()} />)
+
+    const body = result.find('KeyResultDrawerBody')
+
+    expect(body.prop('isLoading')).toEqual(true)
+  })
 })

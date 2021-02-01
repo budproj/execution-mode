@@ -9,13 +9,14 @@ import { KeyResult } from 'src/components/KeyResult/types'
 
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
+  isLoading: boolean
 }
 
-const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => {
+const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => {
   return (
     <Flex gridGap={8} py={8} px={6} direction="column">
       <KeyResultSectionCheckIn keyResultID={keyResultID} />
-      <KeyResultSectionTimeline keyResultID={keyResultID} />
+      <KeyResultSectionTimeline keyResultID={keyResultID} isLoading={isLoading} />
     </Flex>
   )
 }
