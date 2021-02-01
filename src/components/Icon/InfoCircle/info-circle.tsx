@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProperties } from 'src/components/Icon/types'
 
-export interface ArrowRightIconProperties extends IconProps, AcessibleIconProperties {}
+export interface InfoCircleIconProperties extends IconProps, AcessibleIconProperties {}
 
-const ArrowRight = ({ title, desc, ...rest }: ArrowRightIconProperties): ReactElement => (
+const InfoCircle = ({ title, desc, ...rest }: InfoCircleIconProperties): ReactElement => (
   <Icon viewBox="0 0 21 21" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -25,9 +25,9 @@ const ArrowRight = ({ title, desc, ...rest }: ArrowRightIconProperties): ReactEl
   </Icon>
 )
 
-ArrowRight.defaultProps = {
+InfoCircle.defaultProps = {
   fill: 'black',
   stroke: 'black',
 }
 
-export default ArrowRight
+export default InfoCircle

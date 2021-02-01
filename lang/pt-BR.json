@@ -183,6 +183,10 @@
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
   },
+  "HsEMwj": {
+    "defaultMessage": "Uma seta longa para a direita, separando o progresso anterior (à esquerda) do novo progress do check-in (à direita)",
+    "description": "This text is displayed to screen readers, explaining the right arrow icon in our check-in card"
+  },
   "I5aN4R": {
     "defaultMessage": "Explorar",
     "description": "AppBar menu item that links to teams \"Explore\" page"

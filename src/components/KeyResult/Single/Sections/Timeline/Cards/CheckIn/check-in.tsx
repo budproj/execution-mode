@@ -9,6 +9,7 @@ import { User } from 'src/components/User/types'
 import KeyResultSectionTimelineCardCheckInConfidenceTag from './confidence-tag'
 import KeyResultSectionTimelineCardCheckInHelpText from './help-text'
 import messages from './messages'
+import KeyResultSectionTimelineCardCheckInProgress from './progress'
 import KeyResultSectionTimelineCardCheckInProgressBar from './progress-bar'
 
 export interface KeyResultSectionTimelineCardCheckInProperties {
@@ -44,6 +45,12 @@ const KeyResultSectionTimelineCardCheckIn = ({
           </StatLabel>
 
           <KeyResultSectionTimelineCardCheckInHelpText user={user} createdAt={createdAt} />
+
+          <KeyResultSectionTimelineCardCheckInProgress
+            progress={relativePercentageProgress}
+            confidence={confidence}
+            parent={parent}
+          />
         </Stat>
       </KeyResultSectionTimelineCardBase>
 
