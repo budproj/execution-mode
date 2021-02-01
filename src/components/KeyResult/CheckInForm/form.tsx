@@ -42,6 +42,10 @@ export interface CheckInFormValues {
   confidence?: KeyResultCheckIn['confidence']
 }
 
+export interface CreateKeyResultCheckInMutation {
+  createKeyResultCheckIn: KeyResultCheckIn
+}
+
 const CheckInForm = ({
   keyResultID,
   afterSubmit,
@@ -57,7 +61,13 @@ const CheckInForm = ({
   const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const setLatestCheckIn = useSetRecoilState(selectLatestCheckIn(keyResultID))
   const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
-  const [createCheckIn, data] = useMutation(queries.CREATE_KEY_RESULT_CHECK_IN)
+  const [createCheckIn, { loading }] = useMutation<CreateKeyResultCheckInMutation>(
+    queries.CREATE_KEY_RESULT_CHECK_IN,
+    {
+      ignoreResults: false,
+      onCompleted: (data) => setLatestCheckIn(data.createKeyResultCheckIn),
+    },
+  )
 
   const initialValues: CheckInFormValues = {
     currentProgress,
@@ -75,11 +85,6 @@ const CheckInForm = ({
     if (values.newProgress !== currentProgress) setCurrentProgress(values.newProgress)
     if (values.confidence !== currentConfidence) setCurrentConfidence(values.confidence)
 
-    setLatestCheckIn({
-      progress: values.newProgress,
-      confidence: values.confidence,
-      comment: values.comment,
-    })
     setCommentEnabled(isCommentAlwaysEnabled)
   }
 
@@ -134,14 +139,14 @@ const CheckInForm = ({
             <Flex direction="column" gridGap={8} p={gutter}>
               <Flex gridGap={5}>
                 <CheckInFormFieldCurrentProgress keyResultID={keyResultID} />
-                <CheckInFormFieldNewProgress keyResultID={keyResultID} isLoading={data.loading} />
+                <CheckInFormFieldNewProgress keyResultID={keyResultID} isLoading={loading} />
                 {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
               </Flex>
               <CheckInFormFieldCurrentConfidence />
 
               <CheckInFormFieldComment keyResultID={keyResultID} />
 
-              <Actions isLoading={data.loading} onCancel={handleCancel} />
+              <Actions isLoading={loading} onCancel={handleCancel} />
             </Flex>
           </FormControl>
         </Form>

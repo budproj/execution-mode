@@ -37,25 +37,25 @@ const KeyResultSectionTimelineCardCheckIn = ({
   return (
     <Box>
       <KeyResultSectionTimelineCardBase borderBottomRadius={0}>
-        <Flex direction="column" gridGap={4}>
-          <Box>
-            <KeyResultSectionTimelineCardCheckInConfidenceTag
-              confidence={confidence}
-              difference={confidenceDifference}
-            />
+        <Flex direction="column" gridGap={5}>
+          <KeyResultSectionTimelineCardCheckInConfidenceTag
+            confidence={confidence}
+            difference={confidenceDifference}
+          />
 
+          <Box>
             <StatLabel fontSize="27px" fontWeight={400}>
               {intl.formatMessage(messages.title)}
             </StatLabel>
 
             <KeyResultSectionTimelineCardCheckInHelpText user={user} createdAt={createdAt} />
-
-            <KeyResultSectionTimelineCardCheckInProgress
-              relativePercentageProgress={relativePercentageProgress}
-              confidence={confidence}
-              parent={parent}
-            />
           </Box>
+
+          <KeyResultSectionTimelineCardCheckInProgress
+            relativePercentageProgress={relativePercentageProgress}
+            confidence={confidence}
+            parent={parent}
+          />
 
           {comment && <KeyResultSectionTimelineCardCheckInComment comment={comment} />}
         </Flex>

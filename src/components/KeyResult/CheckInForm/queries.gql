@@ -1,5 +1,13 @@
 mutation CREATE_KEY_RESULT_CHECK_IN($keyResultCheckInInput: KeyResultCheckInInput!) {
   createKeyResultCheckIn(keyResultCheckIn: $keyResultCheckInInput) {
     id
+    confidence
+    relativePercentageProgress
+    comment
+    createdAt
+    parent {
+      confidence
+      relativePercentageProgress
+    }
   }
 }

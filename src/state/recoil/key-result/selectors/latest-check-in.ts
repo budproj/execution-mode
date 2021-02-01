@@ -31,7 +31,10 @@ export const setLatestCheckIn = (id?: KeyResult['id']) => (
   if (!id) return
 
   const checkInsSelector = selectCheckIns(id)
+  const previousLatestCheckInSelector = selectLatestCheckIn(id)
+
   const checkIns = get(checkInsSelector)
+  const previousLatestCheckIn = get(previousLatestCheckInSelector)
 
   const userID = get(meAtom)
   const user = get(userAtomFamily(userID))
@@ -40,6 +43,7 @@ export const setLatestCheckIn = (id?: KeyResult['id']) => (
   const newLocalCheckIn = {
     user,
     createdAt: new Date(),
+    parent: previousLatestCheckIn,
     ...newCheckIn,
   } as KeyResultCheckIn
   const newCheckIns = remove([newLocalCheckIn, ...(checkIns ?? [])])
@@ -47,7 +51,7 @@ export const setLatestCheckIn = (id?: KeyResult['id']) => (
   set(checkInsSelector, newCheckIns)
 }
 
-const currentConfidence = selectorFamily<
+export const selectLatestCheckIn = selectorFamily<
   Partial<KeyResultCheckIn> | undefined,
   KeyResult['id'] | undefined
 >({
@@ -56,4 +60,4 @@ const currentConfidence = selectorFamily<
   set: setLatestCheckIn,
 })
 
-export default currentConfidence
+export default selectLatestCheckIn

@@ -13,7 +13,8 @@ const KeyResultSectionTimelineCardBase = ({
   borderBottomRadius,
 }: KeyResultSectionTimelineCardBaseProperties) => (
   <Stat
-    p={5}
+    px={6}
+    py={7}
     borderWidth={1}
     borderColor="gray.100"
     borderRadius={borderRadius}
