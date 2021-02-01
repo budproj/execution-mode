@@ -32,7 +32,8 @@ const KeyResultSectionTimelineCardCheckIn = ({
 }: KeyResultSectionTimelineCardCheckInProperties) => {
   const intl = useIntl()
 
-  const confidenceDifference = confidence && parent?.confidence && confidence - parent.confidence
+  const confidenceDifference =
+    confidence && typeof parent !== 'undefined' ? confidence - parent.confidence : 100
 
   return (
     <Box>
