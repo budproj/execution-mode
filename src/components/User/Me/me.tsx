@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
+import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import isMatch from 'lodash/isMatch'
 import React, { useEffect } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -49,9 +49,7 @@ const Me = () => {
         />
       </MenuButton>
       <MenuList>
-        <MenuItem py="3px">
-          <UserLogout />
-        </MenuItem>
+        <UserLogout />
       </MenuList>
     </Menu>
   )

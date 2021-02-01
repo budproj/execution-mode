@@ -12,7 +12,7 @@ describe('component expectations', () => {
   it('displays the skeleton component if it is being loaded', () => {
     sinon.stub(recoil, 'useRecoilValue')
 
-    const result = enzyme.shallow(<KeyResultSectionTimeline />)
+    const result = enzyme.shallow(<KeyResultSectionTimeline isLoading />)
 
     const skeleton = result.find('KeyResultSectionTimelineSkeleton')
 
@@ -25,7 +25,7 @@ describe('component expectations', () => {
 
     sinon.stub(recoil, 'useRecoilValue').returns(fakeCheckIns)
 
-    const result = enzyme.shallow(<KeyResultSectionTimeline />)
+    const result = enzyme.shallow(<KeyResultSectionTimeline isLoading={false} />)
 
     const content = result.find('KeyResultSectionTimelineContent')
 

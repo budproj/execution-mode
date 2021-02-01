@@ -1,6 +1,6 @@
 import { Box, FormLabel } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { NumberFormatProps } from 'react-number-format'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
@@ -20,15 +20,11 @@ export interface CheckInFormFieldNewProgressProperties {
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
-const CheckInFormFieldNewProgress = ({
-  keyResultID,
-  isLoading,
-}: CheckInFormFieldNewProgressProperties) => {
-  const [isSending, setIsSending] = useState(false)
+const CheckInFormFieldNewProgress = ({ keyResultID }: CheckInFormFieldNewProgressProperties) => {
   const intl = useIntl()
   const format = useRecoilValue(formatSelector(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
-  const { values, setFieldValue, isSubmitting } = useFormikContext<CheckInFormValues>()
+  const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
 
   const Mask = selectMaskBasedOnFormat(format)
 
@@ -37,14 +33,10 @@ const CheckInFormFieldNewProgress = ({
     setDraftValue(newValue as number)
   }
 
-  useEffect(() => {
-    if (!isSubmitting && !isLoading && isSending) setIsSending(false)
-  }, [isSubmitting, isLoading, isSending, setIsSending])
-
   return (
     <Box flex="1 1 0px">
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
-      <Mask value={values.newProgress} handleChange={handleChange} isLoading={isSending} />
+      <Mask value={values.newProgress} handleChange={handleChange} />
     </Box>
   )
 }

@@ -1,17 +1,19 @@
 import { Drawer, DrawerOverlay } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
 
-import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
+import { keyResultDrawerLoaded, keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 
 import KeyResultDrawerContent from './content'
 
 const KeyResultDrawer = () => {
-  const [keyResultID, setKeyResultID] = useRecoilState(keyResultOpenDrawer)
+  const keyResultID = useRecoilValue(keyResultDrawerOpen)
+  const resetOpenDrawer = useResetRecoilState(keyResultDrawerOpen)
+  const resetLoadedDrawer = useResetRecoilState(keyResultDrawerLoaded)
 
   const handleClose = () => {
-    // eslint-disable-next-line unicorn/no-useless-undefined
-    setKeyResultID(undefined)
+    resetOpenDrawer()
+    resetLoadedDrawer()
   }
 
   const isOpen = Boolean(keyResultID)

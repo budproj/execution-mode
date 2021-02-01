@@ -9,7 +9,7 @@ import messages from './messages'
 
 const CheckInFormFieldCommentInput = () => {
   const intl = useIntl()
-  const { values, setFieldValue, isSubmitting } = useFormikContext<CheckInFormValues>()
+  const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setFieldValue('comment', event.target.value)
@@ -19,12 +19,7 @@ const CheckInFormFieldCommentInput = () => {
     <Box>
       <FormLabel>{intl.formatMessage(messages.inputLabel)}</FormLabel>
       <Flex direction="column" gridGap={4}>
-        <Textarea
-          value={values.comment}
-          isLoading={isSubmitting}
-          InputComponent={Textarea}
-          onChange={handleChange}
-        />
+        <Textarea value={values.comment} onChange={handleChange} />
       </Flex>
     </Box>
   )

@@ -8,7 +8,7 @@ import { KeyResultCustomList } from 'src/components/KeyResult'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { PageProperties } from 'src/components/Page/types'
-import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
+import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
@@ -16,7 +16,7 @@ import messages from './messages'
 const MyKeyResultsPage = ({ isRootPage }: PageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
-  const setOpenDrawer = useSetRecoilState(keyResultOpenDrawer)
+  const setOpenDrawer = useSetRecoilState(keyResultDrawerOpen)
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 

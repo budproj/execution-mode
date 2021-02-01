@@ -137,7 +137,7 @@ const CheckInForm = ({
                 <CheckInFormFieldNewProgress keyResultID={keyResultID} isLoading={data.loading} />
                 {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
               </Flex>
-              <CheckInFormFieldCurrentConfidence isLoading={data.loading} />
+              <CheckInFormFieldCurrentConfidence />
 
               <CheckInFormFieldComment keyResultID={keyResultID} />
 

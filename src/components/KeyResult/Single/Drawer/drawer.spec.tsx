@@ -10,18 +10,18 @@ const selectOpenDrawerMatcher = sinon.match((selector: recoil.RecoilState<unknow
   return selector.key.includes('OPEN')
 })
 
+const selectLoadedDrawerMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('LOADED')
+})
+
 describe('expected behaviors', () => {
   afterEach(() => sinon.restore())
 
   it('renders the drawer content if the drawer is open', () => {
     const fakeID = faker.random.word()
 
-    const stub = sinon.stub(recoil, 'useRecoilState')
-    stub.withArgs(selectOpenDrawerMatcher).returns([fakeID, sinon.fake()])
-    stub.returns([undefined, sinon.fake()])
-
-    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+    sinon.stub(recoil, 'useRecoilValue').returns(fakeID)
 
     const result = enzyme.shallow(<KeyResultDrawer />)
 
@@ -31,12 +31,8 @@ describe('expected behaviors', () => {
   })
 
   it('does not render the drawer content if the drawer is closed', () => {
-    const stub = sinon.stub(recoil, 'useRecoilState')
-    stub.withArgs(selectOpenDrawerMatcher).returns([undefined, sinon.fake()])
-    stub.returns([undefined, sinon.fake()])
-
-    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+    sinon.stub(recoil, 'useRecoilValue')
 
     const result = enzyme.shallow(<KeyResultDrawer />)
 
@@ -47,12 +43,25 @@ describe('expected behaviors', () => {
 
   it('removes the opened key result when drawer is closed', () => {
     const spy = sinon.spy()
-    const stub = sinon.stub(recoil, 'useRecoilState')
-    stub.withArgs(selectOpenDrawerMatcher).returns([undefined, spy])
-    stub.returns([undefined, sinon.fake()])
+    const stub = sinon.stub(recoil, 'useResetRecoilState')
+    stub.withArgs(selectOpenDrawerMatcher).returns(spy)
+    stub.returns(sinon.fake())
+    sinon.stub(recoil, 'useRecoilValue')
 
-    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    const result = enzyme.shallow(<KeyResultDrawer />)
+
+    const drawer = result.find('Drawer')
+    drawer.simulate('close')
+
+    expect(spy.called).toEqual(true)
+  })
+
+  it('resets the loaded state when the drawer is closed', () => {
+    const spy = sinon.spy()
+    const stub = sinon.stub(recoil, 'useResetRecoilState')
+    stub.withArgs(selectLoadedDrawerMatcher).returns(spy)
+    stub.returns(sinon.fake())
+    sinon.stub(recoil, 'useRecoilValue')
 
     const result = enzyme.shallow(<KeyResultDrawer />)
 

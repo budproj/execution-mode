@@ -16,10 +16,11 @@ const UserLogout = () => {
   return (
     <Button
       color="gray.600"
-      p={0}
+      p={2}
       w="100%"
       justifyContent="flex-start"
       variant="none"
+      _hover={{ bg: 'blue.50' }}
       onClick={handleLogout}
     >
       {intl.formatMessage(messages.label)}

@@ -16,9 +16,9 @@ describe('component customizations', () => {
       </KeyResultSectionTimelineCardsBase>,
     )
 
-    const flex = result.find('Flex')
+    const stat = result.find('Stat')
 
-    expect(flex.prop('borderRadius')).toEqual(fakeRadius)
+    expect(stat.prop('borderRadius')).toEqual(fakeRadius)
   })
 
   it('can customize the border bottom radius', () => {
@@ -30,9 +30,9 @@ describe('component customizations', () => {
       </KeyResultSectionTimelineCardsBase>,
     )
 
-    const flex = result.find('Flex')
+    const stat = result.find('Stat')
 
-    expect(flex.prop('borderBottomRadius')).toEqual(fakeRadius)
+    expect(stat.prop('borderBottomRadius')).toEqual(fakeRadius)
   })
 
   it('should render provided children', () => {

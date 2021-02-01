@@ -1,4 +1,4 @@
-import { StatHelpText, Tag, Skeleton, StatArrow } from '@chakra-ui/react'
+import { Flex, Tag, Skeleton, StatArrow } from '@chakra-ui/react'
 import React from 'react'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
@@ -21,7 +21,7 @@ const KeyResultSectionTimelineCardCheckInConfidenceTag = ({
   const arrowType = difference && difference > 0 ? 'increase' : 'decrease'
 
   return (
-    <StatHelpText display="flex" alignItems="center" gridGap={2}>
+    <Flex alignItems="center" gridGap={2}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 33)}>
         <Tag size="lg" colorScheme={colorScheme} opacity={difference ? 1 : 0.3} px={5}>
           {confidenceTag.messages.long}
@@ -30,7 +30,7 @@ const KeyResultSectionTimelineCardCheckInConfidenceTag = ({
 
       {/* eslint-disable-next-line unicorn/no-null */}
       {difference ? <StatArrow type={arrowType} color={confidenceTag.colors.primary} /> : null}
-    </StatHelpText>
+    </Flex>
   )
 }
 
