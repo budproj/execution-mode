@@ -1,13 +1,14 @@
 import { Skeleton, Button, Collapse, Flex, Heading, IconButton } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CloseIcon from 'src/components/Icon/Close'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { USER_POLICY } from 'src/components/User/constants'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
+import { buildPartialSelector, selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
 
 import { KeyResultSectionTimelineCardBase } from '../Timeline/Cards'
 
@@ -20,8 +21,10 @@ export interface KeyResultSectionCheckInProperties {
 const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
 
 const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInProperties) => {
-  const policies = useRecoilValue(policiesSelector(keyResultID))
   const [isOpen, setIsOpen] = useState(false)
+  const policies = useRecoilValue(policiesSelector(keyResultID))
+  const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
+  const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const intl = useIntl()
 
   const isLoaded = typeof keyResultID !== 'undefined' && typeof policies !== 'undefined'
@@ -33,6 +36,7 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
 
   const handleClose = () => {
     setIsOpen(false)
+    setDraftValue(currentProgress)
   }
 
   return canUpdate ? (

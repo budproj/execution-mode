@@ -47,6 +47,7 @@ describe('expected behaviors', () => {
     stub.withArgs(selectOpenDrawerMatcher).returns(spy)
     stub.returns(sinon.fake())
     sinon.stub(recoil, 'useRecoilValue')
+    sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     const result = enzyme.shallow(<KeyResultDrawer />)
 
@@ -62,6 +63,7 @@ describe('expected behaviors', () => {
     stub.withArgs(selectLoadedDrawerMatcher).returns(spy)
     stub.returns(sinon.fake())
     sinon.stub(recoil, 'useRecoilValue')
+    sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     const result = enzyme.shallow(<KeyResultDrawer />)
 
@@ -69,5 +71,23 @@ describe('expected behaviors', () => {
     drawer.simulate('close')
 
     expect(spy.called).toEqual(true)
+  })
+
+  it('resets the draft value when the drawer is closed', () => {
+    const currentProgress = faker.random.number()
+    const spy = sinon.spy()
+
+    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
+    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+
+    const result = enzyme.shallow(<KeyResultDrawer />)
+
+    const drawer = result.find('Drawer')
+    drawer.simulate('close')
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(currentProgress)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 })
