@@ -1,4 +1,4 @@
-import { Flex, BorderProps } from '@chakra-ui/react'
+import { Stat, BorderProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
 export interface KeyResultSectionTimelineCardBaseProperties {
@@ -12,17 +12,15 @@ const KeyResultSectionTimelineCardBase = ({
   borderRadius,
   borderBottomRadius,
 }: KeyResultSectionTimelineCardBaseProperties) => (
-  <Flex
-    direction="column"
+  <Stat
     p={5}
     borderWidth={1}
     borderColor="gray.100"
     borderRadius={borderRadius}
     borderBottomRadius={borderBottomRadius ?? borderRadius}
-    gridGap={4}
   >
     {children}
-  </Flex>
+  </Stat>
 )
 
 KeyResultSectionTimelineCardBase.defaultProps = {

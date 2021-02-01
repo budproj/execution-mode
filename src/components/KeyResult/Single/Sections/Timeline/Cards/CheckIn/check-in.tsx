@@ -1,4 +1,4 @@
-import { Box, Stat, StatLabel } from '@chakra-ui/react'
+import { Box, Flex, StatLabel } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -6,6 +6,7 @@ import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Se
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
 
+import KeyResultSectionTimelineCardCheckInComment from './comment'
 import KeyResultSectionTimelineCardCheckInConfidenceTag from './confidence-tag'
 import KeyResultSectionTimelineCardCheckInHelpText from './help-text'
 import messages from './messages'
@@ -15,6 +16,7 @@ import KeyResultSectionTimelineCardCheckInProgressBar from './progress-bar'
 export interface KeyResultSectionTimelineCardCheckInProperties {
   relativePercentageProgress?: KeyResultCheckIn['relativePercentageProgress']
   confidence?: KeyResultCheckIn['confidence']
+  comment?: KeyResultCheckIn['comment']
   createdAt?: KeyResultCheckIn['createdAt']
   user?: User
   parent?: KeyResultCheckIn
@@ -23,6 +25,7 @@ export interface KeyResultSectionTimelineCardCheckInProperties {
 const KeyResultSectionTimelineCardCheckIn = ({
   relativePercentageProgress,
   confidence,
+  comment,
   createdAt,
   user,
   parent,
@@ -34,24 +37,28 @@ const KeyResultSectionTimelineCardCheckIn = ({
   return (
     <Box>
       <KeyResultSectionTimelineCardBase borderBottomRadius={0}>
-        <Stat>
-          <KeyResultSectionTimelineCardCheckInConfidenceTag
-            confidence={confidence}
-            difference={confidenceDifference}
-          />
+        <Flex direction="column" gridGap={4}>
+          <Box>
+            <KeyResultSectionTimelineCardCheckInConfidenceTag
+              confidence={confidence}
+              difference={confidenceDifference}
+            />
 
-          <StatLabel fontSize="27px" fontWeight={400}>
-            {intl.formatMessage(messages.title)}
-          </StatLabel>
+            <StatLabel fontSize="27px" fontWeight={400}>
+              {intl.formatMessage(messages.title)}
+            </StatLabel>
 
-          <KeyResultSectionTimelineCardCheckInHelpText user={user} createdAt={createdAt} />
+            <KeyResultSectionTimelineCardCheckInHelpText user={user} createdAt={createdAt} />
 
-          <KeyResultSectionTimelineCardCheckInProgress
-            progress={relativePercentageProgress}
-            confidence={confidence}
-            parent={parent}
-          />
-        </Stat>
+            <KeyResultSectionTimelineCardCheckInProgress
+              progress={relativePercentageProgress}
+              confidence={confidence}
+              parent={parent}
+            />
+          </Box>
+
+          {comment && <KeyResultSectionTimelineCardCheckInComment comment={comment} />}
+        </Flex>
       </KeyResultSectionTimelineCardBase>
 
       <KeyResultSectionTimelineCardCheckInProgressBar
