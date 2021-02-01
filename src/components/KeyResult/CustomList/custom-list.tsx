@@ -1,6 +1,6 @@
 import { useLazyQuery, useMutation } from '@apollo/client'
 import { BoxProps } from '@chakra-ui/react'
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import { DraggableLocation, DropResult } from 'react-beautiful-dnd'
 import { useRecoilState } from 'recoil'
 
@@ -30,6 +30,7 @@ const KeyResultCustomList = ({
   onLineClick,
   ...rest
 }: KeyResultCustomListProperties): ReactElement => {
+  const [isLoading, setIsLoading] = useState(true)
   const [keyResultCustomList, setKeyResultCustomList] = useRecoilState(keyResultCustomListAtom)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [updateRank] = useMutation(queries.UPDATE_RANK)
@@ -37,12 +38,6 @@ const KeyResultCustomList = ({
     getKeyResultCustomListForBinding,
     { loading, data, called },
   ] = useLazyQuery<GetKeyResultCustomListWithBindingQuery>(queries.GET_KEY_RESULT_VIEW_WITH_BINDING)
-
-  const syncedWithLocalState =
-    called &&
-    !loading &&
-    typeof data !== 'undefined' &&
-    keyResultCustomList?.rank === data.keyResultCustomList.rank
 
   const handleRankUpdate = async (
     from: DraggableLocation['index'],
@@ -52,17 +47,17 @@ const KeyResultCustomList = ({
     const [movedID] = newRank.splice(from, 1)
     newRank.splice(to, 0, movedID)
 
-    const rankInput = {
+    const keyResultCustomListInput = {
       rank: newRank,
     }
 
     const newKeyResultCustomList = {
       ...(keyResultCustomList as KeyResultCustomListType),
-      ...rankInput,
+      ...keyResultCustomListInput,
     }
 
     setKeyResultCustomList(newKeyResultCustomList)
-    await updateRank({ variables: { id: keyResultCustomList?.id, rankInput } })
+    await updateRank({ variables: { id: keyResultCustomList?.id, keyResultCustomListInput } })
 
     return newKeyResultCustomList
   }
@@ -73,8 +68,11 @@ const KeyResultCustomList = ({
       : keyResultCustomList?.rank
 
   useEffect(() => {
-    if (!loading && data) setKeyResultCustomList(data.keyResultCustomList)
-  }, [loading, data, setKeyResultCustomList])
+    if (!loading && data) {
+      setKeyResultCustomList(data.keyResultCustomList)
+      setIsLoading(false)
+    }
+  }, [loading, data, setKeyResultCustomList, setIsLoading])
 
   useEffect(() => {
     if (!called)
@@ -93,7 +91,7 @@ const KeyResultCustomList = ({
     <KeyResultList
       type={KEY_RESULT_LIST_TYPE.DND}
       keyResultIDs={keyResultCustomList?.rank}
-      isLoading={!syncedWithLocalState}
+      isLoading={isLoading}
       headProperties={{
         [KEY_RESULT_LIST_COLUMN.OWNER]: {
           justifySelf: 'flex-end',
