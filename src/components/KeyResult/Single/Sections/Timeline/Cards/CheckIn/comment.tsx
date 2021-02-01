@@ -4,7 +4,7 @@ import React from 'react'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 
 export interface KeyResultSectionTimelineCardCheckInCommentProperties {
-  comment?: KeyResultCheckIn['comment']
+  comment: KeyResultCheckIn['comment']
 }
 
 const KeyResultSectionTimelineCardCheckInComment = ({

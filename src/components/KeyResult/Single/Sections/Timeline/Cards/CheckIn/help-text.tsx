@@ -26,8 +26,8 @@ const KeyResultSectionTimelineCardCheckInHelpText = ({
   }
 
   return (
-    <StatHelpText fontSize="16px" color="gray.300" fontWeight={400}>
-      <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 24)}>
+    <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 24)}>
+      <StatHelpText fontSize="16px" color="gray.300" fontWeight={400}>
         {intl.formatMessage(messages.helperText, {
           author: user?.fullName,
           hour: intl.formatDate(createdAt, hourDateOptions),
@@ -37,8 +37,8 @@ const KeyResultSectionTimelineCardCheckInHelpText = ({
             </Text>
           ),
         })}
-      </Skeleton>
-    </StatHelpText>
+      </StatHelpText>
+    </Skeleton>
   )
 }
 

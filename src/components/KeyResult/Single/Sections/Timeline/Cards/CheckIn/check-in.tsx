@@ -51,7 +51,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
             <KeyResultSectionTimelineCardCheckInHelpText user={user} createdAt={createdAt} />
 
             <KeyResultSectionTimelineCardCheckInProgress
-              progress={relativePercentageProgress}
+              relativePercentageProgress={relativePercentageProgress}
               confidence={confidence}
               parent={parent}
             />

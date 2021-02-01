@@ -9,7 +9,7 @@ import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import messages from './messages'
 
 export interface KeyResultSectionTimelineCardCheckInProgressProperties {
-  progress?: KeyResultCheckIn['progress']
+  relativePercentageProgress?: KeyResultCheckIn['progress']
   confidence?: KeyResultCheckIn['confidence']
   parent?: KeyResultCheckIn
 }
@@ -17,19 +17,19 @@ export interface KeyResultSectionTimelineCardCheckInProgressProperties {
 const normalizeProgress = (progress?: number) => (progress ? progress / 100 : 0)
 
 const KeyResultSectionTimelineCardCheckInProgress = ({
-  progress,
+  relativePercentageProgress,
   confidence,
   parent,
 }: KeyResultSectionTimelineCardCheckInProgressProperties) => {
   const intl = useIntl()
   const [confidenceTag, setConfidence] = useConfidenceTag(confidence)
 
-  const normalizedParentProgress = normalizeProgress(parent?.progress)
-  const normalizedProgress = normalizeProgress(progress)
-  const isLoaded = Boolean(progress)
+  const normalizedParentProgress = normalizeProgress(parent?.relativePercentageProgress)
+  const normalizedProgress = normalizeProgress(relativePercentageProgress)
+  const isLoaded = Boolean(relativePercentageProgress) || relativePercentageProgress === 0
   const isSameAsParent = isLoaded && normalizedParentProgress === normalizedProgress
 
-  const progressNumberFormat: FormatNumberOptions = {
+  const relativePercentageProgressNumberFormat: FormatNumberOptions = {
     style: 'percent',
   }
 
@@ -41,20 +41,20 @@ const KeyResultSectionTimelineCardCheckInProgress = ({
     <Flex alignItems="center" gridGap={4}>
       <Skeleton isLoaded={isLoaded}>
         <StatNumber fontSize="48px" color="gray.100">
-          {intl.formatNumber(normalizedParentProgress, progressNumberFormat)}
+          {intl.formatNumber(normalizedParentProgress, relativePercentageProgressNumberFormat)}
         </StatNumber>
       </Skeleton>
       {!isSameAsParent && (
         <>
           <ArrowRightLongIcon
-            fill={confidenceTag.colors.primary}
+            fill={isLoaded ? confidenceTag.colors.primary : 'gray.100'}
             desc={intl.formatMessage(messages.arrowRightDesc)}
             w="20px"
             h="auto"
           />
           <Skeleton isLoaded={isLoaded}>
             <StatNumber fontSize="48px" color={confidenceTag.colors.primary}>
-              {intl.formatNumber(normalizedProgress, progressNumberFormat)}
+              {intl.formatNumber(normalizedProgress, relativePercentageProgressNumberFormat)}
             </StatNumber>
           </Skeleton>
         </>

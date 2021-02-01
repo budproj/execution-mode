@@ -16,7 +16,7 @@ const KeyResultSectionTimelineCardCheckInProgressBar = ({
 }: KeyResultSectionTimelineCardCheckInProgressBarInterface) => {
   const [confidenceTag] = useConfidenceTag(confidence)
 
-  const isLoaded = Boolean(relativePercentageProgress) && Boolean(confidence)
+  const isLoaded = Boolean(relativePercentageProgress) || relativePercentageProgress === 0
 
   return (
     <Skeleton isLoaded={isLoaded} minH="12px" borderRadius="full" borderTopRadius={0}>
