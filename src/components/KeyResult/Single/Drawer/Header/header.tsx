@@ -1,5 +1,5 @@
 import { Box, Flex, Skeleton, DrawerCloseButton, DrawerHeader } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -23,14 +23,20 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(keyResultID))
   const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
-  const [confidenceTag] = useConfidenceTag(currentConfidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(currentConfidence)
 
   const isLoaded = typeof draftValue !== 'undefined'
+
+  useEffect(() => {
+    if (currentConfidence) setConfidence(currentConfidence)
+  }, [currentConfidence, setConfidence])
 
   return (
     <Box>
       <DrawerHeader bg="blue.50" py={8}>
-        <KeyResultSingleTitle keyResultID={keyResultID} />
+        <Box maxW="90%">
+          <KeyResultSingleTitle keyResultID={keyResultID} />
+        </Box>
 
         <DrawerCloseButton
           color="gray.300"

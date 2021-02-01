@@ -1,4 +1,5 @@
 import { createGraphQLHandler } from '@miragejs/graphql'
+import { pickBy } from 'lodash'
 import { ModelInstance } from 'miragejs'
 
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
@@ -65,8 +66,9 @@ const graphQLHandler = (mirageSchema: unknown) =>
             createdAt: new Date(),
             ...keyResultCheckIn,
           }
+          const clearedKeyResultCheckIn = pickBy(enhancedKeyResultCheckIn)
 
-          const result = mirageSchema.keyResultCheckIns.create(enhancedKeyResultCheckIn)
+          const result = mirageSchema.keyResultCheckIns.create(clearedKeyResultCheckIn)
 
           return result
         },
