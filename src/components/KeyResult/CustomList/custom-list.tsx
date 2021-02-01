@@ -84,9 +84,8 @@ const KeyResultCustomList = ({
   }, [called, getKeyResultCustomListForBinding])
 
   useEffect(() => {
-    if (data) loadKeyResults(data.keyResultCustomList.keyResults)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
+    if (isLoading && data) loadKeyResults(data.keyResultCustomList.keyResults)
+  }, [isLoading, data, loadKeyResults])
 
   return (
     <KeyResultList
