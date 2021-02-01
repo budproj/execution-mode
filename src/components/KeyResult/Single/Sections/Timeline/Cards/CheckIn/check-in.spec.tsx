@@ -89,4 +89,17 @@ describe('component expectations', () => {
 
     expect(comment.length).toEqual(1)
   })
+
+  it('passes a 0 difference when previous check-in is null', () => {
+    const confidence = faker.random.number()
+
+    const result = enzyme.shallow(
+      // eslint-disable-next-line unicorn/no-null
+      <KeyResultSectionTimelineCardCheckIn confidence={confidence} parent={null} />,
+    )
+
+    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInConfidenceTag')
+
+    expect(confidenceTag.prop('difference')).toEqual(0)
+  })
 })

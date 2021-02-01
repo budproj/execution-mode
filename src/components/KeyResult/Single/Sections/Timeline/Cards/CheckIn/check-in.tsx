@@ -19,7 +19,7 @@ export interface KeyResultSectionTimelineCardCheckInProperties {
   comment?: KeyResultCheckIn['comment']
   createdAt?: KeyResultCheckIn['createdAt']
   user?: User
-  parent?: KeyResultCheckIn
+  parent?: KeyResultCheckIn | null
 }
 
 const KeyResultSectionTimelineCardCheckIn = ({
@@ -32,8 +32,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
 }: KeyResultSectionTimelineCardCheckInProperties) => {
   const intl = useIntl()
 
-  const confidenceDifference =
-    confidence && typeof parent !== 'undefined' ? confidence - parent.confidence : 100
+  const confidenceDifference = confidence && parent ? confidence - parent.confidence : 0
 
   return (
     <Box>

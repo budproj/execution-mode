@@ -11,7 +11,7 @@ import messages from './messages'
 export interface KeyResultSectionTimelineCardCheckInProgressProperties {
   relativePercentageProgress?: KeyResultCheckIn['progress']
   confidence?: KeyResultCheckIn['confidence']
-  parent?: KeyResultCheckIn
+  parent?: KeyResultCheckIn | null
 }
 
 const normalizeProgress = (progress?: number) => (progress ? progress / 100 : 0)
