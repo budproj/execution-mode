@@ -9,12 +9,14 @@ const models = {
     owner: belongsTo('user'),
     objective: belongsTo(),
     team: belongsTo(),
-    checkIns: hasMany('keyResultCheckIn'),
+    keyResultCheckIns: hasMany('keyResultCheckIn'),
     policies: belongsTo(),
   }),
   keyResultCheckIn: Model.extend({
     user: belongsTo(),
     keyResult: belongsTo(),
+    // eslint-disable-next-line unicorn/no-null
+    parent: belongsTo('keyResultCheckIn', { inverse: null }),
   }),
   keyResultCustomList: Model.extend({
     user: belongsTo(),

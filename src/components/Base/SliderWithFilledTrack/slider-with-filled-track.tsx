@@ -1,14 +1,18 @@
-import { Slider, SliderFilledTrack, SliderProps, SliderTrack } from '@chakra-ui/react'
+import { BorderProps, Slider, SliderFilledTrack, SliderProps, SliderTrack } from '@chakra-ui/react'
 import React from 'react'
 
 export interface SliderWithFilledTrackProperties extends SliderProps {
+  trackRadius: BorderProps['borderRadius']
   trackColor?: string
   trackThickness?: string
+  trackTopRadius?: BorderProps['borderTopRadius']
 }
 
 const SliderWithFilledTrack = ({
   trackColor,
   trackThickness,
+  trackRadius,
+  trackTopRadius,
   isDisabled,
   ...rest
 }: SliderWithFilledTrackProperties) => (
@@ -21,10 +25,15 @@ const SliderWithFilledTrack = ({
     <SliderTrack
       h={trackThickness}
       bg="gray.100"
-      borderRadius="full"
+      borderRadius={trackRadius}
+      borderTopRadius={trackTopRadius ?? trackRadius}
       _disabled={{ bg: 'gray.100' }}
     >
-      <SliderFilledTrack bg={trackColor} borderRadius="full" />
+      <SliderFilledTrack
+        bg={trackColor}
+        borderRadius={trackRadius}
+        borderTopLeftRadius={trackTopRadius ?? trackRadius}
+      />
     </SliderTrack>
   </Slider>
 )
@@ -33,6 +42,7 @@ SliderWithFilledTrack.defaultProps = {
   value: 0,
   trackColor: 'brand.400',
   trackThickness: '8px',
+  trackRadius: 'full',
   isDisabled: true,
 }
 

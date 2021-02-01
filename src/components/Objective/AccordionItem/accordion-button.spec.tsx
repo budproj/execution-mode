@@ -63,11 +63,14 @@ describe('component expectations', () => {
   })
 
   it('uses the confidence tag color in the circular progress', () => {
+    const fakeTagColor = faker.random.word()
+    const fakeTag = {
+      colors: {
+        primary: fakeTagColor,
+      },
+    }
     const fakeObjective = {
       currentProgress: faker.random.number(),
-    }
-    const fakeTag = {
-      color: faker.random.word(),
     }
 
     const result = enzyme.shallow(
@@ -80,7 +83,7 @@ describe('component expectations', () => {
 
     const circularProgress = result.find('CircularProgress')
 
-    expect(circularProgress.prop('color')).toEqual(fakeTag.color)
+    expect(circularProgress.prop('color')).toEqual(fakeTagColor)
   })
 
   it('displays the formated current progress in the circular progress', () => {

@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
+import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 
 import messages from './messages'
 import MyKeyResultsPage from './my-key-results'
@@ -30,7 +30,7 @@ describe('page control behaviors', () => {
     const fakeID = faker.random.word()
 
     const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
-    setStateStub.withArgs(keyResultOpenDrawer).returns(spy)
+    setStateStub.withArgs(keyResultDrawerOpen).returns(spy)
     setStateStub.returns(sinon.fake())
 
     const result = enzyme.shallow(<MyKeyResultsPage />)

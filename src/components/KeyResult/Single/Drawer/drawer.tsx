@@ -1,30 +1,19 @@
 import { Drawer, DrawerOverlay } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
 
-import {
-  keyResultCheckInCommentEnabled,
-  keyResultCheckInProgressDraft,
-} from 'src/state/recoil/key-result/check-in'
-import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
-import { selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
+import { keyResultDrawerLoaded, keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 
 import KeyResultDrawerContent from './content'
 
 const KeyResultDrawer = () => {
-  const [keyResultID, setKeyResultID] = useRecoilState(keyResultOpenDrawer)
-
-  const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
-  const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
-  const [progressDraft, setProgressDraft] = useRecoilState(
-    keyResultCheckInProgressDraft(keyResultID),
-  )
+  const keyResultID = useRecoilValue(keyResultDrawerOpen)
+  const resetOpenDrawer = useResetRecoilState(keyResultDrawerOpen)
+  const resetLoadedDrawer = useResetRecoilState(keyResultDrawerLoaded)
 
   const handleClose = () => {
-    // eslint-disable-next-line unicorn/no-useless-undefined
-    setKeyResultID(undefined)
-    setCommentEnabled(false)
-    if (progressDraft !== currentProgress) setProgressDraft(currentProgress)
+    resetOpenDrawer()
+    resetLoadedDrawer()
   }
 
   const isOpen = Boolean(keyResultID)

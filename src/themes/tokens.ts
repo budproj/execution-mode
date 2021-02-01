@@ -84,7 +84,7 @@ const colors: ColorTokens = {
   gray500: '#525F7F',
   gray600: '#424C66',
   gray700: '#31394C',
-  gray800: '#212633',
+  gray800: '#2f2f30',
   gray900: '#101319',
 
   blue50: '#FBFBFF',

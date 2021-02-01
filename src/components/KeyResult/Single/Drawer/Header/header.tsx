@@ -1,10 +1,16 @@
-import { Box, DrawerCloseButton, DrawerHeader } from '@chakra-ui/react'
+import { Box, Flex, Skeleton, DrawerCloseButton, DrawerHeader } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
+import { SliderWithFilledTrack } from 'src/components/Base'
 import { Close as CloseIcon } from 'src/components/Icon'
 import KeyResultSingleTitle from 'src/components/KeyResult/Single/Sections/Title'
 import { KeyResult } from 'src/components/KeyResult/types'
+import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
+import { selectCurrentConfidence } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 
@@ -14,11 +20,18 @@ export interface KeyResultDrawerHeaderProperties {
 
 const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties) => {
   const intl = useIntl()
+  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
+  const draftValue = useRecoilValue(keyResultCheckInProgressDraft(keyResultID))
+  const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
+  const [confidenceTag] = useConfidenceTag(currentConfidence)
+
+  const isLoaded = typeof draftValue !== 'undefined'
 
   return (
-    <Box borderBottomWidth={1} borderColor="gray.100" pt={8} pb={4}>
-      <DrawerHeader>
+    <Box>
+      <DrawerHeader bg="blue.50" py={8}>
         <KeyResultSingleTitle keyResultID={keyResultID} />
+
         <DrawerCloseButton
           color="gray.300"
           _hover={{ bg: 'transparent', color: 'brand.400' }}
@@ -34,6 +47,18 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
           />
         </DrawerCloseButton>
       </DrawerHeader>
+
+      <Skeleton isLoaded={isLoaded} minH="8px">
+        <Flex>
+          <SliderWithFilledTrack
+            trackRadius={0}
+            trackColor={confidenceTag.colors.primary}
+            value={draftValue}
+            min={keyResult?.initialValue}
+            max={keyResult?.goal}
+          />
+        </Flex>
+      </Skeleton>
     </Box>
   )
 }

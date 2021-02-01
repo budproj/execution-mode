@@ -10,4 +10,4 @@ export { default as KeyResultSectionCycle } from './Cycle'
 
 export { default as KeyResultSectionCheckIn } from './CheckIn'
 
-export { default as KeyResultSectionComments } from './Comments'
+export { default as KeyResultSectionTimeline } from './Timeline'

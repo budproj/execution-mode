@@ -119,28 +119,6 @@ describe('component lifecycle', () => {
     expect(list.prop('isLoading')).toEqual(true)
   })
 
-  it('declares itself as loading to our key result list if the apollo query was finished but the key result was not loaded in our local state yet', () => {
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
-    sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
-    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
-
-    const fakeData = {
-      keyResultCustomList: {
-        rank: faker.random.word(),
-      },
-    }
-
-    sinon
-      .stub(apollo, 'useLazyQuery')
-      .returns([sinon.fake(), { called: true, loading: false, data: fakeData }] as any)
-
-    const result = enzyme.shallow(<KeyResultCustomList />)
-
-    const list = result.find('KeyResultList')
-
-    expect(list.prop('isLoading')).toEqual(true)
-  })
-
   it('can identify when the key result view is loaded in our local state', () => {
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(recoilHooks).expects('useRecoilFamilyLoader').atLeast(1).returns(sinon.fake())
@@ -240,7 +218,7 @@ describe('component interations', () => {
     const expectedSpyCallArguments = {
       variables: {
         id: fakeID,
-        rankInput: {
+        keyResultCustomListInput: {
           rank: expectedFakeRank,
         },
       },

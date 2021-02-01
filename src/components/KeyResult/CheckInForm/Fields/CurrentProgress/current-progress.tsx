@@ -27,7 +27,7 @@ const CheckInFormFieldCurrentProgress = ({
   const Mask = selectMaskBasedOnFormat(format)
 
   return (
-    <Box>
+    <Box flex="1 1 0px">
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
       <Mask isDisabled value={values.currentProgress} bg="gray.50" />
     </Box>

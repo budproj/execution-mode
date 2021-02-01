@@ -133,7 +133,7 @@ type KeyResult {
 
   """The description explaining the key result"""
   description: String
-  checkIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
+  keyResultCheckIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
 }
 
 """Defines the order to return your results in a given query"""
@@ -152,6 +152,9 @@ type KeyResultCheckIn {
 
   """The reported confidence in this check-in"""
   confidence: Int!
+  relativePercentageProgress: Float!
+  percentageProgressIncrease: Float!
+  absoluteConfidenceIncrease: Int!
 
   """The creation date of the report"""
   createdAt: DateTime!
@@ -166,6 +169,7 @@ type KeyResultCheckIn {
 
   """The comment added in the report"""
   comment: String
+  parent: KeyResultCheckIn
 }
 
 """

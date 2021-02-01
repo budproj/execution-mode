@@ -4,10 +4,7 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import {
-  keyResultCheckInProgressDraft,
-  keyResultCheckInPopoverOpen,
-} from 'src/state/recoil/key-result/check-in'
+import { keyResultCheckInPopoverOpen } from 'src/state/recoil/key-result/check-in'
 
 import ProgressSliderWrapper from './wrapper'
 
@@ -34,29 +31,6 @@ describe('component expectations', () => {
     const popoverComponent = result.find('Popover')
 
     expect(popoverComponent.prop('isOpen')).toEqual(false)
-  })
-
-  it('reverts the current progress draft if we close the popover', () => {
-    const fakeID = faker.random.word()
-    const draftValue = faker.random.number()
-    const currentProgress = faker.random.number()
-    const spy = sinon.spy()
-
-    const useRecoilStateStub = sinon.stub(recoil, 'useRecoilState')
-
-    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
-
-    useRecoilStateStub.withArgs(keyResultCheckInProgressDraft(fakeID)).returns([draftValue, spy])
-    useRecoilStateStub.returns([undefined, sinon.fake()])
-
-    const result = enzyme.shallow(<ProgressSliderWrapper id={fakeID} />)
-
-    const popover = result.find('Popover')
-    popover.simulate('close')
-
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(currentProgress)
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
   it('closes the popover when we trigger the Chakra popover close event', () => {
@@ -99,29 +73,6 @@ describe('component expectations', () => {
     popover.simulate('close')
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(false)
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-
-  it('reverts current progress to previous value upon popover cancellation', () => {
-    const fakeID = faker.random.word()
-    const draftValue = faker.random.number()
-    const currentProgress = faker.random.number()
-    const spy = sinon.spy()
-
-    const useRecoilStateStub = sinon.stub(recoil, 'useRecoilState')
-
-    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
-
-    useRecoilStateStub.withArgs(keyResultCheckInProgressDraft(fakeID)).returns([draftValue, spy])
-    useRecoilStateStub.returns([undefined, sinon.fake()])
-
-    const result = enzyme.shallow(<ProgressSliderWrapper id={fakeID} />)
-
-    const popover = result.find('ProgressSliderPopover')
-    popover.simulate('close')
-
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(currentProgress)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

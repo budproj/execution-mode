@@ -5,6 +5,7 @@ import SliderWithHoverThumb, {
   SliderWithHoverThumbProperties,
 } from 'src/components/Base/SliderWithHoverThumb'
 import { KeyResult } from 'src/components/KeyResult/types'
+import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import {
   keyResultCheckInPopoverOpen,
   keyResultCheckInProgressDraft,
@@ -14,7 +15,6 @@ import {
   buildPartialSelector,
   selectCurrentConfidence,
 } from 'src/state/recoil/key-result/selectors'
-import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
 export interface ProgressSliderSliderProperties {
   keyResultID?: KeyResult['id']
@@ -37,11 +37,11 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     const [isChanging, setIsChanging] = useState(false)
     const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
     const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
-    const confidenceTag = useRecoilValue(confidenceTagSelector(currentConfidence))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
     const goal = useRecoilValue(goalSelector(keyResultID))
     const step = useRecoilValue(keyResultCheckInProgressSliderStep(keyResultID))
     const setOpenedPopover = useSetRecoilState(keyResultCheckInPopoverOpen(keyResultID))
+    const [confidenceTag] = useConfidenceTag(currentConfidence)
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
@@ -75,7 +75,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
       <ProgressSliderSliderWithReference
         ref={forwardedReference}
         value={draftValue}
-        trackColor={confidenceTag?.color}
+        trackColor={confidenceTag?.colors.primary}
         min={initialValue as KeyResult['initialValue']}
         max={goal as KeyResult['goal']}
         step={step}

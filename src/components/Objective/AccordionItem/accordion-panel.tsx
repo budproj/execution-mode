@@ -11,7 +11,7 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
-import { keyResultOpenDrawer } from 'src/state/recoil/key-result/drawer'
+import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
 import queries from './queries.gql'
@@ -38,7 +38,7 @@ const ObjectiveAccordionPanel = ({
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
-  const setOpenDrawer = useSetRecoilState(keyResultOpenDrawer)
+  const setOpenDrawer = useSetRecoilState(keyResultDrawerOpen)
 
   const keyResultIDs = selectKeyResultIDs(objective)
   const syncedWithLocalState =

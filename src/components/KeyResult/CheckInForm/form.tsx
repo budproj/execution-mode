@@ -1,12 +1,16 @@
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
-import pickBy from 'lodash/pickBy'
+import isUndefined from 'lodash/isUndefined'
+import omitBy from 'lodash/omitBy'
 import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
-import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
+import {
+  keyResultCheckInCommentEnabled,
+  keyResultCheckInProgressDraft,
+} from 'src/state/recoil/key-result/check-in'
 import {
   selectCurrentProgress,
   selectCurrentConfidence,
@@ -26,7 +30,6 @@ import queries from './queries.gql'
 export interface CheckInFormProperties {
   showGoal: boolean
   isCommentAlwaysEnabled: boolean
-  showCancelButton: boolean
   gutter?: SpaceProps['p']
   keyResultID?: KeyResult['id']
   afterSubmit?: (values: CheckInFormValues) => void
@@ -40,12 +43,15 @@ export interface CheckInFormValues {
   confidence?: KeyResultCheckIn['confidence']
 }
 
+export interface CreateKeyResultCheckInMutation {
+  createKeyResultCheckIn: KeyResultCheckIn
+}
+
 const CheckInForm = ({
   keyResultID,
   afterSubmit,
   gutter,
   isCommentAlwaysEnabled,
-  showCancelButton,
   showGoal,
   onCancel,
 }: CheckInFormProperties) => {
@@ -53,12 +59,20 @@ const CheckInForm = ({
   const [currentConfidence, setCurrentConfidence] = useRecoilState(
     selectCurrentConfidence(keyResultID),
   )
+  const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const setLatestCheckIn = useSetRecoilState(selectLatestCheckIn(keyResultID))
   const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
-  const [createCheckIn, data] = useMutation(queries.CREATE_KEY_RESULT_CHECK_IN)
+  const [createCheckIn, { loading }] = useMutation<CreateKeyResultCheckInMutation>(
+    queries.CREATE_KEY_RESULT_CHECK_IN,
+    {
+      ignoreResults: false,
+      onCompleted: (data) => setLatestCheckIn(data.createKeyResultCheckIn),
+    },
+  )
 
   const initialValues: CheckInFormValues = {
     currentProgress,
+    newProgress: draftValue,
     confidence: currentConfidence,
     comment: '',
   }
@@ -72,11 +86,6 @@ const CheckInForm = ({
     if (values.newProgress !== currentProgress) setCurrentProgress(values.newProgress)
     if (values.confidence !== currentConfidence) setCurrentConfidence(values.confidence)
 
-    setLatestCheckIn({
-      progress: values.newProgress,
-      confidence: values.confidence,
-      comment: values.comment,
-    })
     setCommentEnabled(isCommentAlwaysEnabled)
   }
 
@@ -87,7 +96,7 @@ const CheckInForm = ({
       confidence: values.confidence,
       comment: values.comment,
     }
-    const clearedCheckIn = pickBy(checkIn)
+    const clearedCheckIn = omitBy(checkIn, isUndefined)
 
     await createCheckIn({
       variables: {
@@ -114,6 +123,11 @@ const CheckInForm = ({
     }
   }
 
+  const handleCancel = () => {
+    if (onCancel) onCancel()
+    setDraftValue(currentProgress)
+  }
+
   useEffect(() => {
     if (isCommentAlwaysEnabled) setCommentEnabled(true)
   }, [isCommentAlwaysEnabled, setCommentEnabled])
@@ -126,18 +140,14 @@ const CheckInForm = ({
             <Flex direction="column" gridGap={8} p={gutter}>
               <Flex gridGap={5}>
                 <CheckInFormFieldCurrentProgress keyResultID={keyResultID} />
-                <CheckInFormFieldNewProgress keyResultID={keyResultID} isLoading={data.loading} />
+                <CheckInFormFieldNewProgress keyResultID={keyResultID} isLoading={loading} />
                 {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
               </Flex>
-              <CheckInFormFieldCurrentConfidence isLoading={data.loading} />
+              <CheckInFormFieldCurrentConfidence />
 
               <CheckInFormFieldComment keyResultID={keyResultID} />
 
-              <Actions
-                isLoading={data.loading}
-                showCancelButton={showCancelButton}
-                onCancel={onCancel}
-              />
+              <Actions isLoading={loading} onCancel={handleCancel} />
             </Flex>
           </FormControl>
         </Form>
@@ -150,7 +160,6 @@ CheckInForm.defaultProps = {
   submitOnBlur: false,
   showGoal: false,
   isCommentAlwaysEnabled: false,
-  showCancelButton: false,
 }
 
 export default CheckInForm

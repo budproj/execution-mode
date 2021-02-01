@@ -25,38 +25,4 @@ describe('formik integration', () => {
     )
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
-
-  it('submits the upon changing if asked to do so', () => {
-    const spy = sinon.spy()
-    const fakeConfidence = faker.random.number().toString()
-    sinon
-      .stub(formik, 'useFormikContext')
-      .returns({ values: {}, setFieldValue: sinon.fake(), submitForm: spy } as any)
-
-    const result = enzyme.shallow(<CheckInFormFieldCurrentConfidence submitOnBlur />)
-
-    const selectMenu = result.find('SelectMenu')
-    selectMenu.simulate('change', fakeConfidence)
-
-    expect(spy.calledOnce).toEqual(true)
-  })
-
-  it('adds a loading state when submitting upon blur', () => {
-    const fakeConfidence = faker.random.number().toString()
-    sinon.stub(formik, 'useFormikContext').returns({
-      values: {},
-      isSubmitting: true,
-      setFieldValue: sinon.fake(),
-      submitForm: sinon.fake(),
-    } as any)
-
-    const result = enzyme.shallow(<CheckInFormFieldCurrentConfidence submitOnBlur isLoading />)
-
-    const selectMenu = result.find('SelectMenu')
-    selectMenu.simulate('change', fakeConfidence)
-
-    const newSelectMenu = result.find('SelectMenu')
-
-    expect(newSelectMenu.prop('isLoading')).toEqual(true)
-  })
 })

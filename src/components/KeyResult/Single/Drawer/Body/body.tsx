@@ -4,35 +4,22 @@ import { useRecoilValue } from 'recoil'
 
 import {
   KeyResultSectionCheckIn,
-  KeyResultSectionComments,
-  KeyResultSectionCycle,
-  KeyResultSectionDescription,
-  KeyResultSectionObjective,
-  KeyResultSectionOwner,
+  KeyResultSectionTimeline,
 } from 'src/components/KeyResult/Single/Sections'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { USER_POLICY } from 'src/components/User/constants'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import { keyResultDrawerLoaded } from 'src/state/recoil/key-result/drawer'
 
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
 }
 
-const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
-
 const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => {
-  const policies = useRecoilValue(policiesSelector(keyResultID))
-
-  const canUpdate = policies?.update === USER_POLICY.ALLOW
+  const isLoaded = useRecoilValue(keyResultDrawerLoaded)
 
   return (
     <Flex gridGap={8} py={8} px={6} direction="column">
-      <KeyResultSectionOwner keyResultID={keyResultID} />
-      <KeyResultSectionObjective keyResultID={keyResultID} />
-      <KeyResultSectionDescription keyResultID={keyResultID} />
-      <KeyResultSectionCycle keyResultID={keyResultID} />
-      {canUpdate && <KeyResultSectionCheckIn keyResultID={keyResultID} />}
-      <KeyResultSectionComments keyResultID={keyResultID} />
+      <KeyResultSectionCheckIn keyResultID={keyResultID} />
+      <KeyResultSectionTimeline keyResultID={keyResultID} isLoading={!isLoaded} />
     </Flex>
   )
 }

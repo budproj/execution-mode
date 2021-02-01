@@ -79,6 +79,10 @@
     "defaultMessage": "{team} | bud",
     "description": "The page title that is displayed in the browser tab"
   },
+  "4f4cWE": {
+    "defaultMessage": "Alto",
+    "description": "We use this tag to group every key result with confidence higher than 66"
+  },
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
     "description": "The page title that is displayed in the browser tab"
@@ -139,9 +143,17 @@
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"
   },
+  "Cr1hEp": {
+    "defaultMessage": "Check-in",
+    "description": "This text is displayed as the title of our check-in cards"
+  },
   "D8ZyT4": {
     "defaultMessage": "Um ícone de coroa que representa a sua empresa",
     "description": "This message is used by screen readers to explain our crown icon"
+  },
+  "DrLml8": {
+    "defaultMessage": "Clique aqui para fechar o formulário de check-in",
+    "description": "This message is displayed as the alternative text for the close button in our check-in form"
   },
   "F33Lyk": {
     "defaultMessage": "Cor do Nível de Confiança",
@@ -171,6 +183,10 @@
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
   },
+  "HsEMwj": {
+    "defaultMessage": "Uma seta longa para a direita, separando o progresso anterior (à esquerda) do novo progress do check-in (à direita)",
+    "description": "This text is displayed to screen readers, explaining the right arrow icon in our check-in card"
+  },
   "I5aN4R": {
     "defaultMessage": "Explorar",
     "description": "AppBar menu item that links to teams \"Explore\" page"
@@ -199,10 +215,6 @@
     "defaultMessage": "Painel | bud",
     "description": "The page title that is displayed in the browser tab"
   },
-  "MBkjzW": {
-    "defaultMessage": "Alto",
-    "description": "We use this tag to group every key result with confidence higher than 50"
-  },
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
@@ -210,6 +222,10 @@
   "NADPP1": {
     "defaultMessage": "Um ícone de lata de lixo",
     "description": "The desc message for the Delete icon. This icon is used to ilustrate our key results"
+  },
+  "NF2bAx": {
+    "defaultMessage": "Este resultado-chave não possui nenhum check-in",
+    "description": "This text is displayed in our key result timeline when no content exist"
   },
   "P/ujgo": {
     "defaultMessage": "Um ícone de controle de video game",
@@ -230,6 +246,10 @@
   "QMM2q6": {
     "defaultMessage": "Área",
     "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
+  },
+  "QPGUqB": {
+    "defaultMessage": "Alta Confiança",
+    "description": "We use this tag to group every key result with confidence higher than 66"
   },
   "RWaMNF": {
     "defaultMessage": "Um ícone de coração",
@@ -307,6 +327,10 @@
     "defaultMessage": "Como estão as prioridades d{gender, select, MALE {o} FEMALE {a} other {o}} {team}?",
     "description": "The title of the header section in our objectives overview report"
   },
+  "XENgso": {
+    "defaultMessage": "Médio",
+    "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
+  },
   "XNkzYe": {
     "defaultMessage": "Um ícone de pin de localização",
     "description": "The desc message for the Location icon. This icon is used to ilustrate our key results"
@@ -319,10 +343,6 @@
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
   },
-  "Yk89cv": {
-    "defaultMessage": "Médio",
-    "description": "We use this tag to group every key result with confidence higher than 25 but lower than 50"
-  },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
     "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
@@ -330,6 +350,10 @@
   "ZXpNJ2": {
     "defaultMessage": "Um ícone de gráfico de pizza",
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
+  },
+  "Zmffm0": {
+    "defaultMessage": "Fechar",
+    "description": "This message is displayed as the title text for our close icon in our check-in form"
   },
   "Zn0eYa": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
@@ -367,9 +391,17 @@
     "defaultMessage": "Resultado-chave",
     "description": "The text of the table head related to the KeyResult column"
   },
+  "ff3h07": {
+    "defaultMessage": "Baixa Confiança",
+    "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
+  },
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
+  },
+  "hPJxpx": {
+    "defaultMessage": "Média Confiança",
+    "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
   },
   "hRddDx": {
     "defaultMessage": "Clique aqui para acessar nossa página de suporte",
@@ -411,10 +443,6 @@
     "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
     "description": "This message is displayed above the button in our not found error page"
   },
-  "lQs6US": {
-    "defaultMessage": "Comentários",
-    "description": "The label text above the Comments section in our key result single page or drawer"
-  },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
@@ -443,10 +471,6 @@
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our unknown error page"
   },
-  "oeB7dG": {
-    "defaultMessage": "Esse resultado-chave não tem nenhum comentário",
-    "description": "The label message that is displayed below our team at work image in our empty state"
-  },
   "or8fId": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
@@ -458,6 +482,10 @@
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
+  },
+  "r0jTFR": {
+    "defaultMessage": "Realizado por <highlight>{author}</highlight> às {hour}",
+    "description": "This text is displayed as a helper text, below the check-in card title"
   },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
@@ -471,6 +499,10 @@
     "defaultMessage": "A tela que você está procurando foi abduzida!",
     "description": "This message is displayed below the title in our unknown error page"
   },
+  "sFYaLE": {
+    "defaultMessage": "Check-in",
+    "description": "This message is displayed as the form title, above the check-in form"
+  },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
@@ -478,10 +510,6 @@
   "th1Ney": {
     "defaultMessage": "Hoje",
     "description": "This label is displayed if the date is today"
-  },
-  "u/NI1D": {
-    "defaultMessage": "Check-in",
-    "description": "The label text above the check-in section in our key result single page or drawer"
   },
   "u7Yaxx": {
     "defaultMessage": "Responsável",
@@ -535,8 +563,16 @@
     "defaultMessage": "Estamos trabalhando em melhorias para você! :)",
     "description": "The title displayed in our under maintenance error page"
   },
+  "zev4wl": {
+    "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
+    "description": "This is a message explaining the flag icon in our check-in form"
+  },
   "zgF+iY": {
     "defaultMessage": "Comentário",
     "description": "This is the label text that is displayed above the input"
+  },
+  "zujGO+": {
+    "defaultMessage": "Fazer check-in",
+    "description": "This message is displayed as a label button in our key result section"
   }
 }

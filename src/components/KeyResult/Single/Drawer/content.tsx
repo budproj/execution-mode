@@ -1,10 +1,11 @@
 import { useQuery } from '@apollo/client'
 import { DrawerContent } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultDrawerLoaded } from 'src/state/recoil/key-result/drawer'
 import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
 
 import KeyResultDrawerBody from './Body'
@@ -21,6 +22,7 @@ export interface GetKeyResultWithIDQuery {
 
 const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentProperties) => {
   const [keyResult, setKeyResult] = useRecoilState(selectKeyResult(keyResultID))
+  const setDrawerLoaded = useSetRecoilState(keyResultDrawerLoaded)
   const { loading, called, data } = useQuery<GetKeyResultWithIDQuery>(
     queries.GET_KEY_RESULT_WITH_ID,
     {
@@ -28,6 +30,13 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
       variables: { id: keyResultID },
     },
   )
+
+  useEffect(() => {
+    if (called && data) {
+      setKeyResult(data.keyResult)
+      setDrawerLoaded(true)
+    }
+  }, [called, data, setKeyResult, setDrawerLoaded])
 
   logger.debug('Rerendered key result drawer contents. Take a look at our new data:', {
     component,
@@ -38,10 +47,6 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
       loading,
     },
   })
-
-  useEffect(() => {
-    if (called && data) setKeyResult(data.keyResult)
-  }, [called, data, setKeyResult])
 
   return (
     <DrawerContent overflowY="auto">

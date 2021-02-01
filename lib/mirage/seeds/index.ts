@@ -42,7 +42,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     user,
     ...buildKeyResultCustomList(keyResults),
   })
-  const checkIns = server.createList('keyResultCheckIn', 40, {
+  const keyResultCheckIns = server.createList('keyResultCheckIn', 40, {
     user,
     keyResult: () => pickRandomModel(keyResults),
     progress: buildKeyResultCheckIn,
@@ -54,20 +54,34 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   rootTeam.update('users', users as any)
   rootTeam.update('objectives', [objectives[0]] as any)
 
-  // eslint-disable-next-line array-callback-return
   teams.map((team) => {
     team.update('users', users as any)
     team.update('objectives', objectives as any)
+
+    return team
   })
 
-  company.update('latestKeyResultCheckIn', checkIns[0] as any)
+  company.update('latestKeyResultCheckIn', keyResultCheckIns[0] as any)
 
-  // eslint-disable-next-line array-callback-return
   keyResults.map((keyResult) => {
-    const latestKeyResultCheckIn = keyResult.checkIns.models[0] as any
+    const latestKeyResultCheckIn = keyResult.keyResultCheckIns.models[0] as any
+    const keyResultCheckIns = keyResult.keyResultCheckIns.models
+
+    keyResultCheckIns.map((keyResultCheckIn, index) => {
+      const parentIndex = index + 1
+
+      if (parentIndex < keyResultCheckIns.length) {
+        const parent = keyResultCheckIns[parentIndex]
+        keyResultCheckIn.update('parent', parent)
+      }
+
+      return keyResultCheckIn
+    })
 
     keyResult.update('currentProgress', latestKeyResultCheckIn?.progress ?? 0)
-    keyResult.update('checkIns', keyResult.checkIns)
+    keyResult.update('keyResultCheckIns', keyResult.keyResultCheckIns)
+
+    return keyResult
   })
 
   logger.debug('Inserted fake data on MirageJS server', {
@@ -81,7 +95,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       objectives,
       keyResults,
       keyResultCustomList,
-      checkIns,
+      keyResultCheckIns,
       policies,
       otherUsers,
     },

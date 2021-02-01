@@ -39,15 +39,18 @@ describe('setter', () => {
     const latestComment = faker.lorem.paragraph()
     const oldCheckIn = { comment: latestComment }
     const fakeUser = faker.helpers.userCard()
-    const fakeSelector = sinon.fake()
+    const fakeCheckInsSelector = sinon.fake()
+    const fakeLatestSelector = sinon.fake()
 
     const getterStub = sinon.stub()
-    getterStub.withArgs(fakeSelector).returns([oldCheckIn])
+    getterStub.withArgs(fakeCheckInsSelector).returns([oldCheckIn])
+    getterStub.withArgs(fakeLatestSelector).returns(oldCheckIn)
     getterStub.withArgs(userMatcher).returns(fakeUser)
 
     const setterSpy = sinon.spy()
     const clock = sinon.useFakeTimers()
-    sinon.stub(latestCheckIn, 'selectCheckIns').returns(fakeSelector as any)
+    sinon.stub(latestCheckIn, 'selectCheckIns').returns(fakeCheckInsSelector as any)
+    sinon.stub(latestCheckIn, 'selectLatestCheckIn').returns(fakeLatestSelector as any)
 
     const fakeID = faker.random.word()
     const newComment = faker.lorem.paragraph()
@@ -66,10 +69,14 @@ describe('setter', () => {
         user: fakeUser,
         comment: newComment,
         createdAt: new Date(),
+        parent: oldCheckIn,
       },
       oldCheckIn,
     ]
-    const wasCalledAsExpected = setterSpy.calledOnceWithExactly(fakeSelector, expectedNewCheckIns)
+    const wasCalledAsExpected = setterSpy.calledOnceWithExactly(
+      fakeCheckInsSelector,
+      expectedNewCheckIns,
+    )
 
     clock.restore()
 

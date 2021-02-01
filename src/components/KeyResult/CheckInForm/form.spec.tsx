@@ -16,10 +16,6 @@ const selectCurrentConfidenceMatcher = sinon.match((selector: recoil.RecoilState
   return selector.key.includes('CURRENT_CONFIDENCE')
 })
 
-const selectLatestCheckInMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-  return selector.key.includes('LATEST_CHECK_IN')
-})
-
 const selectCommentEnabledMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
   return selector.key.includes('COMMENT_ENABLED')
 })
@@ -34,7 +30,7 @@ describe('component expectations', () => {
 
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -54,7 +50,7 @@ describe('component expectations', () => {
 
     setStateStub.withArgs(selectCommentEnabledMatcher).returns(spy)
     setStateStub.returns(sinon.fake())
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 
     enzyme.shallow(<Form isCommentAlwaysEnabled keyResultID={fakeID} />)
@@ -76,7 +72,7 @@ describe('component interations', () => {
 
     stateStub.withArgs(selectCurrentProgressMatcher).returns([faker.random.number(), sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -108,7 +104,7 @@ describe('component interations', () => {
 
     stateStub.withArgs(selectCurrentProgressMatcher).returns([faker.random.number(), sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -141,7 +137,7 @@ describe('component interations', () => {
 
     stateStub.withArgs(selectCurrentProgressMatcher).returns([faker.random.number(), spy])
     stateStub.returns([undefined, sinon.fake()])
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -166,7 +162,7 @@ describe('component interations', () => {
 
     stateStub.withArgs(selectCurrentConfidenceMatcher).returns([faker.random.number(), spy])
     stateStub.returns([undefined, sinon.fake()])
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -183,40 +179,6 @@ describe('component interations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('updates the latest check-in state upon form submission', async () => {
-    const fakeID = faker.random.word()
-    const fakeNewProgress = faker.random.number()
-    const fakeConfidence = faker.random.number()
-    const fakeComment = faker.lorem.paragraph()
-
-    const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
-    const spy = sinon.spy()
-
-    setStateStub.withArgs(selectLatestCheckInMatcher).returns(spy)
-    setStateStub.returns(sinon.fake())
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
-    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
-
-    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
-
-    const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
-      newProgress: fakeNewProgress,
-      confidence: fakeConfidence,
-      comment: fakeComment,
-    })
-
-    await Promise.resolve()
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
-      progress: fakeNewProgress,
-      confidence: fakeConfidence,
-      comment: fakeComment,
-    })
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-
   it('closes the comment input upon form submission', async () => {
     const fakeID = faker.random.word()
     const fakeConfidence = faker.random.number()
@@ -225,7 +187,7 @@ describe('component interations', () => {
 
     setStateStub.withArgs(selectCommentEnabledMatcher).returns(spy)
     setStateStub.returns(sinon.fake())
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -250,7 +212,7 @@ describe('component interations', () => {
 
     setStateStub.withArgs(selectCommentEnabledMatcher).returns(spy)
     setStateStub.returns(sinon.fake())
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 
     const result = enzyme.shallow(<Form isCommentAlwaysEnabled keyResultID={fakeID} />)
@@ -276,7 +238,7 @@ describe('component interations', () => {
     const spy = sinon.spy()
 
     stateStub.returns([undefined, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([spy] as any)
+    sinon.stub(apollo, 'useMutation').returns([spy, {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -311,7 +273,7 @@ describe('component interations', () => {
     const spy = sinon.spy()
 
     stateStub.returns([undefined, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([spy] as any)
+    sinon.stub(apollo, 'useMutation').returns([spy, {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -339,6 +301,40 @@ describe('component interations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
+  it('dispatches a remote state update action with 0 progress upon form submittion', async () => {
+    const fakeID = faker.random.word()
+    const fakeConfidence = faker.random.number()
+
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    const spy = sinon.spy()
+
+    stateStub.returns([undefined, sinon.fake()])
+    sinon.stub(apollo, 'useMutation').returns([spy, {}] as any)
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate('submit', {
+      newProgress: 0,
+      confidence: fakeConfidence,
+    })
+
+    await Promise.resolve()
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
+      variables: {
+        keyResultCheckInInput: {
+          keyResultId: fakeID,
+          progress: 0,
+          confidence: fakeConfidence,
+        },
+      },
+    })
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
   it('executes the desired after submit hook upon form submission', async () => {
     const fakeID = faker.random.word()
     const fakeProgress = faker.random.number()
@@ -351,7 +347,7 @@ describe('component interations', () => {
       .withArgs(selectCurrentConfidenceMatcher)
       .returns([faker.random.number(), sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
-    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
@@ -401,7 +397,7 @@ describe('corner cases', () => {
     const spy = sinon.spy()
 
     stateStub.returns([undefined, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([spy] as any)
+    sinon.stub(apollo, 'useMutation').returns([spy, {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -427,7 +423,7 @@ describe('corner cases', () => {
     const spy = sinon.spy()
 
     stateStub.returns([undefined, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake(), {}] as any)
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
@@ -458,7 +454,7 @@ describe('corner cases', () => {
     stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
 
     stateStub.returns([undefined, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake(), {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -484,7 +480,7 @@ describe('corner cases', () => {
     stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, spy])
 
     stateStub.returns([undefined, sinon.fake()])
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake(), {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
@@ -509,7 +505,7 @@ describe('corner cases', () => {
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeOldProgress, sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
 
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake(), {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
@@ -539,7 +535,7 @@ describe('corner cases', () => {
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeOldConfidence, sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
 
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake(), {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
@@ -564,7 +560,7 @@ describe('corner cases', () => {
 
     const spy = sinon.spy()
 
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake(), {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 
@@ -594,7 +590,7 @@ describe('corner cases', () => {
     stateStub.withArgs(selectCurrentProgressMatcher).returns([fakeProgress, sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
 
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake(), {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
@@ -619,7 +615,7 @@ describe('corner cases', () => {
     stateStub.withArgs(selectCurrentConfidenceMatcher).returns([fakeConfidence, sinon.fake()])
     stateStub.returns([undefined, sinon.fake()])
 
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake(), {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
@@ -639,7 +635,7 @@ describe('corner cases', () => {
 
     const spy = sinon.spy()
 
-    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake(), {}] as any)
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 

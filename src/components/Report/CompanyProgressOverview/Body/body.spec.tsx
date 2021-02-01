@@ -13,10 +13,6 @@ describe('data layer usage', () => {
     return selector.key.includes('TEAM_ATOM_FAMILY')
   })
 
-  const confidenceTagMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-    return selector.key.includes('CONFIDENCE_TAG')
-  })
-
   it('adds a slider with the company current progress', () => {
     const fakeCurrentProgress = faker.random.number()
     const fakeCompany = { currentProgress: fakeCurrentProgress }
@@ -33,17 +29,29 @@ describe('data layer usage', () => {
   })
 
   it('uses the current confidence color in the slider', () => {
-    const fakeColor = faker.random.word()
-    const fakeConfidenceTag = { color: fakeColor }
-    const stub = sinon.stub(recoil, 'useRecoilValue')
-
-    stub.withArgs(confidenceTagMatcher).returns(fakeConfidenceTag)
-    stub.returns({})
+    sinon.stub(recoil, 'useRecoilValue').returns({ currentConfidence: 50 })
 
     const result = enzyme.shallow(<CompanyProgressOverviewBody />)
 
     const slider = result.find('SliderWithGoal')
 
-    expect(slider.prop('trackColor')).toEqual(fakeColor)
+    expect(slider.prop('trackColor')).toEqual('yellow.500')
+  })
+})
+
+describe('component lifecycle', () => {
+  afterEach(() => sinon.restore())
+
+  it('dispatches a confidence update after we receive a value for it', () => {
+    sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
+      currentConfidence: 50,
+    })
+
+    const result = enzyme.shallow(<CompanyProgressOverviewBody />)
+    result.setProps({ companyID: faker.random.uuid() })
+
+    const slider = result.find('SliderWithGoal')
+
+    expect(slider.prop('trackColor')).toEqual('yellow.500')
   })
 })

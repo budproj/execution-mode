@@ -1,45 +1,79 @@
-import { Flex, Text } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Skeleton, Button, Collapse, Flex, Heading, IconButton } from '@chakra-ui/react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
+import CloseIcon from 'src/components/Icon/Close'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { USER_POLICY } from 'src/components/User/constants'
+import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
-import EncouragingMessage from './encouraging-message'
+import { KeyResultSectionTimelineCardBase } from '../Timeline/Cards'
+
 import messages from './messages'
 
 export interface KeyResultSectionCheckInProperties {
   keyResultID?: KeyResult['id']
 }
 
+const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
+
 const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInProperties) => {
-  const [showEncouragingMessage, setShowEncouragingMessage] = useState(false)
+  const policies = useRecoilValue(policiesSelector(keyResultID))
+  const [isOpen, setIsOpen] = useState(false)
   const intl = useIntl()
 
-  const handleSubmitSideEffects = () => {
-    setShowEncouragingMessage(true)
+  const isLoaded = typeof keyResultID !== 'undefined' && typeof policies !== 'undefined'
+  const canUpdate = policies?.update === USER_POLICY.ALLOW || !isLoaded
+
+  const handleOpen = () => {
+    setIsOpen(true)
   }
 
-  useEffect(() => {
-    if (showEncouragingMessage) setTimeout(() => setShowEncouragingMessage(false), 3000)
-  }, [showEncouragingMessage, setShowEncouragingMessage])
+  const handleClose = () => {
+    setIsOpen(false)
+  }
 
-  return (
-    <Flex gridGap={6} direction="column">
-      <Flex gridGap={2} direction="column">
-        <Text fontWeight={500} color="gray.600">
-          {intl.formatMessage(messages.label)}
-        </Text>
-        <CheckInForm
-          showGoal
-          isCommentAlwaysEnabled
-          keyResultID={keyResultID}
-          afterSubmit={handleSubmitSideEffects}
-        />
-      </Flex>
-      <EncouragingMessage isOpen={showEncouragingMessage} />
-    </Flex>
-  )
+  return canUpdate ? (
+    <Skeleton isLoaded={isLoaded}>
+      <Collapse animateOpacity in={!isOpen}>
+        <Button variant="outline" w="100%" borderRadius="full" onClick={handleOpen}>
+          {intl.formatMessage(messages.button)}
+        </Button>
+      </Collapse>
+      <Collapse animateOpacity in={isOpen}>
+        <KeyResultSectionTimelineCardBase>
+          <Flex>
+            <Heading fontSize="18px" fontWeight={700} color="gray.600" flexGrow={1}>
+              {intl.formatMessage(messages.formTitle)}
+            </Heading>
+
+            <IconButton
+              aria-label={intl.formatMessage(messages.closeIconAlt)}
+              icon={
+                <CloseIcon
+                  title={intl.formatMessage(messages.closeIconTitle)}
+                  desc={intl.formatMessage(messages.closeIconAlt)}
+                  fill="gray.200"
+                />
+              }
+              onClick={handleClose}
+            />
+          </Flex>
+
+          <CheckInForm
+            showGoal
+            isCommentAlwaysEnabled
+            keyResultID={keyResultID}
+            afterSubmit={handleClose}
+            onCancel={handleClose}
+          />
+        </KeyResultSectionTimelineCardBase>
+      </Collapse>
+    </Skeleton>
+  ) : // eslint-disable-next-line unicorn/no-null
+  null
 }
 
 export default KeyResultSectionCheckIn

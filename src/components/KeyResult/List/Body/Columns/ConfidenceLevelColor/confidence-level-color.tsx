@@ -6,8 +6,8 @@ import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
+import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
-import confidenceTagSelector from 'src/state/recoil/key-result/selectors/confidence-tag'
 
 export interface KeyResultListBodyColumnConfidenceLevelColorProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -18,11 +18,11 @@ const KeyResultListBodyColumnConfidenceLevelColor = ({
   id,
 }: KeyResultListBodyColumnConfidenceLevelColorProperties): ReactElement => {
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
-  const { color } = useRecoilValue(confidenceTagSelector(keyResult?.currentConfidence))
+  const [confidenceTag] = useConfidenceTag(keyResult?.currentConfidence)
 
   return (
     <KeyResultListBodyColumnBase p={0}>
-      <Box borderRadius="full" maxW="5px" minH="60px" bg={color} />
+      <Box borderRadius="full" maxW="5px" minH="60px" bg={confidenceTag.colors.primary} />
     </KeyResultListBodyColumnBase>
   )
 }

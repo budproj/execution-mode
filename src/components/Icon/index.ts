@@ -66,4 +66,8 @@ export { default as PlusOutline } from './PlusOutline'
 
 export { default as InfoCircle } from './InfoCircle'
 
+export { default as Flag } from './Flag'
+
+export { default as ArrowRightLong } from './ArrowRightLong'
+
 export * from './types'
