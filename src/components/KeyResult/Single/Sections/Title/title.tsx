@@ -4,7 +4,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { USER_POLICY } from 'src/components/User/constants'
+import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 export interface KeyResultSectionTitleProperties {
@@ -20,7 +20,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   const [titleDraft, setTitleDraft] = useState(title)
 
   const isTitleLoaded = Boolean(title)
-  const canUpdate = policies?.update === USER_POLICY.ALLOW
+  const canUpdate = policies?.update === AUTHZ_POLICY.ALLOW
 
   const handleTitleSubmit = async (newTitle: string) => {
     setTitle(newTitle)

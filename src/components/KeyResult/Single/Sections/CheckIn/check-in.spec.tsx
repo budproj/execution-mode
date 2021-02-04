@@ -10,15 +10,30 @@ const selectCurrentProgressMatcher = sinon.match((selector: recoil.RecoilState<u
   return selector.key.includes('CURRENT_PROGRESS')
 })
 
+const selectKeyResultPoliciesMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('POLICIES')
+})
+
+const defaultPolicies = {
+  childEntities: {
+    keyResultCheckIn: {},
+  },
+}
+
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
   it('does not show anything if the user is not allowed to edit the key result', () => {
-    const fakePolicies = {
-      update: 'DENY',
+    const fakeCheckInPolicies = {
+      create: 'DENY',
+    }
+    const fakeKeyResultPolicies = {
+      childEntities: {
+        keyResultCheckIn: fakeCheckInPolicies,
+      },
     }
 
-    sinon.stub(recoil, 'useRecoilValue').returns(fakePolicies)
+    sinon.stub(recoil, 'useRecoilValue').returns(fakeKeyResultPolicies)
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
 
@@ -28,7 +43,8 @@ describe('component expectations', () => {
   })
 
   it('shows the skeleton if it is still being loaded', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
 
@@ -42,7 +58,8 @@ describe('component interations', () => {
   afterEach(() => sinon.restore())
 
   it('shows the check-in button upon mounting', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
 
@@ -52,7 +69,8 @@ describe('component interations', () => {
   })
 
   it('does not shows the form upon mounting', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
 
@@ -62,7 +80,8 @@ describe('component interations', () => {
   })
 
   it('shows the form upon button clicking', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
 
@@ -75,7 +94,8 @@ describe('component interations', () => {
   })
 
   it('does not shows the button upon button clicking', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
 
@@ -88,7 +108,8 @@ describe('component interations', () => {
   })
 
   it('shows the button upon form cancellation', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
@@ -105,7 +126,8 @@ describe('component interations', () => {
   })
 
   it('does not shows the form upon form cancellation', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
@@ -122,7 +144,8 @@ describe('component interations', () => {
   })
 
   it('shows the button after submitting the form', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
@@ -140,7 +163,8 @@ describe('component interations', () => {
   })
 
   it('does not show the form after submitting the form', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
@@ -160,11 +184,18 @@ describe('component interations', () => {
   it('resets the draft value upon check-in form closing', () => {
     const currentProgress = faker.random.number()
     const spy = sinon.spy()
+    const fakeCheckInPolicies = {
+      create: 'ALLOW',
+    }
+    const fakeKeyResultPolicies = {
+      childEntities: {
+        keyResultCheckIn: fakeCheckInPolicies,
+      },
+    }
 
-    sinon
-      .stub(recoil, 'useRecoilValue')
-      .withArgs(selectCurrentProgressMatcher)
-      .returns(currentProgress)
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectKeyResultPoliciesMatcher).returns(fakeKeyResultPolicies)
+    stub.withArgs(selectCurrentProgressMatcher).returns(currentProgress)
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
 
     const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)

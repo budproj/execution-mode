@@ -2,7 +2,7 @@ import { KeyResult, KeyResultCheckIn, KeyResultCustomList } from 'src/components
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 
-import { USER_GENDER, USER_POLICY } from './constants'
+import { USER_GENDER } from './constants'
 
 export interface CustomSorting {
   user: User['id']
@@ -27,11 +27,4 @@ export interface User {
   keyResults?: KeyResult[]
   keyResultCustomLists?: KeyResultCustomList[]
   keyResultCheckIns?: KeyResultCheckIn[]
-}
-
-export interface UserPolicies {
-  create: USER_POLICY
-  read: USER_POLICY
-  update: USER_POLICY
-  delete: USER_POLICY
 }

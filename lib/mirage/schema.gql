@@ -5,7 +5,7 @@
 """
 Defines the current available resource policies. You can use it to build read/create/update/delete logic on your application
 """
-type Policies {
+type Policy {
   create: POLICY!
   read: POLICY!
   update: POLICY!
@@ -20,12 +20,25 @@ enum POLICY {
   DENY
 }
 
+"""Defines all user permissions for each entity in our domain"""
+type Permissions {
+  user: Policy!
+  team: Policy!
+  cycle: Policy!
+  objective: Policy!
+  keyResult: Policy!
+  keyResultCheckIn: Policy!
+  keyResultComment: Policy!
+  keyResultCustomList: Policy!
+}
+
 """
 A view created by an user that represents a custom key result ranking for a given binding
 """
-type KeyResultCustomList {
-  """The ID of the key result view"""
+type KeyResultCustomList implements EntityObject {
+  """The ID of this entity"""
   id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
 
   """The creation date of this view"""
   createdAt: DateTime!
@@ -48,6 +61,37 @@ type KeyResultCustomList {
   keyResults: [KeyResult!]
 }
 
+interface EntityObject {
+  """The ID of this entity"""
+  id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
+}
+
+"""
+A resource in our domain. This define the entity you are currently working with
+"""
+enum RESOURCE {
+  PERMISSION
+  USER
+  TEAM
+  CYCLE
+  OBJECTIVE
+  KEY_RESULT
+  KEY_RESULT_CHECK_IN
+  KEY_RESULT_COMMENT
+  KEY_RESULT_CUSTOM_LIST
+}
+
+"""
+A constraint is a given scope inside our domain. It defines which type of resources are you trying to interact with
+"""
+enum CONSTRAINT {
+  ANY
+  COMPANY
+  TEAM
+  OWNS
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -56,9 +100,10 @@ scalar DateTime
 """
 User is an entity inside a given root team (a.k.a. company). It is associated with many teams, progress reports, and others.
 """
-type User {
-  """The ID of the user"""
+type User implements EntityObject {
+  """The ID of this entity"""
   id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
 
   """The name of the user"""
   firstName: String!
@@ -93,10 +138,35 @@ type User {
   keyResultCheckIns: [KeyResultCheckIn!]
 }
 
-"""A goal that is created for the team focusing in a given team objective"""
-type KeyResult {
-  """The ID of the key result"""
+"""A comment in a given key result"""
+type KeyResultComment implements EntityObject {
+  """The ID of this entity"""
   id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
+
+  """The text of the comment"""
+  text: String!
+
+  """The creation date of the comment"""
+  createdAt: DateTime!
+
+  """The last update date of the comment"""
+  updatedAt: DateTime!
+
+  """The key result ID that this comment is related to"""
+  keyResultId: ID!
+  keyResult: KeyResult!
+
+  """The user ID that owns this comment"""
+  userId: ID!
+  user: User!
+}
+
+"""A goal that is created for the team focusing in a given team objective"""
+type KeyResult implements EntityObject {
+  """The ID of this entity"""
+  id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
 
   """The title(name) of the key result"""
   title: String!
@@ -111,6 +181,7 @@ type KeyResult {
   format: String!
   currentProgress: Float!
   currentConfidence: Float!
+  timeline(skip: Int, limit: Int = 10): [TimelineEntryUnion!]!
 
   """The creation date of the key result"""
   createdAt: DateTime!
@@ -129,12 +200,14 @@ type KeyResult {
   """The team ID that this key result belongs to"""
   teamId: ID!
   team: Team!
-  policies: Policies!
 
   """The description explaining the key result"""
   description: String
   keyResultCheckIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
+  keyResultComments: [KeyResultComment!]!
 }
+
+union TimelineEntryUnion = KeyResultCheckIn | KeyResultComment
 
 """Defines the order to return your results in a given query"""
 enum QUERY_ORDER {
@@ -143,9 +216,10 @@ enum QUERY_ORDER {
 }
 
 """A report that records new progress in a given key result"""
-type KeyResultCheckIn {
-  """The ID of your report"""
+type KeyResultCheckIn implements EntityObject {
+  """The ID of this entity"""
   id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
 
   """The reported progress in this check-in"""
   progress: Float!
@@ -175,9 +249,10 @@ type KeyResultCheckIn {
 """
 A collection of users. It can be either inside another team, or a root team (a.k.a. company)
 """
-type Team {
-  """The ID of the team"""
+type Team implements EntityObject {
+  """The ID of this entity"""
   id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
 
   """The name of the team"""
   name: String!
@@ -221,9 +296,10 @@ type Team {
 """
 The period of time that can contain multiple objectives. It is used to organize a team strategy
 """
-type Cycle {
-  """The ID of the cycle"""
+type Cycle implements EntityObject {
+  """The ID of this entity"""
   id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
 
   """The date that this cycle starts"""
   dateStart: DateTime!
@@ -247,9 +323,10 @@ type Cycle {
 }
 
 """A group of key results that has the same focus"""
-type Objective {
-  """The ID of the objective"""
+type Objective implements EntityObject {
+  """The ID of this entity"""
   id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
 
   """The title(name) of the objective"""
   title: String!
@@ -274,6 +351,7 @@ type Objective {
 }
 
 type Query {
+  permissions(constraint: CONSTRAINT = COMPANY): Permissions!
   user(id: ID!): User!
   me: User!
   team(id: ID!): Team!
@@ -283,6 +361,7 @@ type Query {
   keyResult(id: ID!): KeyResult!
   keyResultCustomList(binding: KEY_RESULT_CUSTOM_LIST_BINDING, id: ID): KeyResultCustomList!
   keyResultCheckIn(id: ID!): KeyResultCheckIn!
+  keyResultComment(id: ID!): KeyResultComment!
 }
 
 """
@@ -295,6 +374,7 @@ enum KEY_RESULT_CUSTOM_LIST_BINDING {
 type Mutation {
   updateKeyResultCustomList(keyResultCustomListInput: KeyResultCustomListInput!, id: ID!): KeyResultCustomList!
   createKeyResultCheckIn(keyResultCheckIn: KeyResultCheckInInput!): KeyResultCheckIn!
+  createKeyResultComment(keyResultComment: KeyResultCommentInput!): KeyResultComment!
 }
 
 """Required data to update a given key result custom list"""
@@ -316,4 +396,13 @@ input KeyResultCheckInInput {
 
   """The comment in your report"""
   comment: String
+}
+
+"""The required data to create a new comment"""
+input KeyResultCommentInput {
+  """The text of the comment"""
+  text: String!
+
+  """The key result ID related to this comment"""
+  keyResultId: ID!
 }

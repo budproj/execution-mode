@@ -4,29 +4,27 @@ import { useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import { keyResultTimelineFetched } from 'src/state/recoil/key-result/timeline'
 
 import KeyResultSectionTimelineContent from './Content'
 import KeyResultSectionTimelineSkeleton from './skeleton'
 
 export interface KeyResultSectionTimelineProperties {
-  isLoading: boolean
   keyResultID?: KeyResult['id']
 }
 
 const checkInsSelector = buildPartialSelector<KeyResult['keyResultCheckIns']>('keyResultCheckIns')
 
-const KeyResultSectionTimeline = ({
-  keyResultID,
-  isLoading,
-}: KeyResultSectionTimelineProperties) => {
+const KeyResultSectionTimeline = ({ keyResultID }: KeyResultSectionTimelineProperties) => {
   const checkIns = useRecoilValue(checkInsSelector(keyResultID))
+  const isLoaded = useRecoilValue(keyResultTimelineFetched(keyResultID))
 
   return (
     <Flex direction="column" gridGap={6}>
-      {isLoading || typeof checkIns === 'undefined' ? (
-        <KeyResultSectionTimelineSkeleton />
-      ) : (
+      {isLoaded ? (
         <KeyResultSectionTimelineContent checkIns={checkIns} />
+      ) : (
+        <KeyResultSectionTimelineSkeleton />
       )}
     </Flex>
   )

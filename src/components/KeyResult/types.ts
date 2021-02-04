@@ -1,7 +1,8 @@
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 import { KEY_RESULT_CUSTOM_LIST_BINDING } from 'src/components/User/constants'
-import { User, UserPolicies } from 'src/components/User/types'
+import { User } from 'src/components/User/types'
+import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
 
 import { KEY_RESULT_FORMAT } from './constants'
 
@@ -42,7 +43,7 @@ export interface KeyResult {
   owner: User
   objective: Objective
   team: Team
-  policies: UserPolicies
+  policies: AuthzPolicies
   description?: string
   keyResultCheckIns?: KeyResultCheckIn[]
 }

@@ -6,13 +6,18 @@ import sinon from 'sinon'
 
 import KeyResultSectionTimeline from './timeline'
 
+const selectTimelineFetchedMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('TIMELINE::FETCHED')
+})
+
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
   it('displays the skeleton component if it is being loaded', () => {
-    sinon.stub(recoil, 'useRecoilValue')
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectTimelineFetchedMatcher).returns(false)
 
-    const result = enzyme.shallow(<KeyResultSectionTimeline isLoading />)
+    const result = enzyme.shallow(<KeyResultSectionTimeline />)
 
     const skeleton = result.find('KeyResultSectionTimelineSkeleton')
 
@@ -23,9 +28,10 @@ describe('component expectations', () => {
     const noOfFakeCheckIns = faker.random.number({ max: 100 })
     const fakeCheckIns = [...new Array(noOfFakeCheckIns)].map(() => faker.helpers.userCard)
 
-    sinon.stub(recoil, 'useRecoilValue').returns(fakeCheckIns)
+    const stub = sinon.stub(recoil, 'useRecoilValue').returns(fakeCheckIns)
+    stub.withArgs(selectTimelineFetchedMatcher).returns(true)
 
-    const result = enzyme.shallow(<KeyResultSectionTimeline isLoading={false} />)
+    const result = enzyme.shallow(<KeyResultSectionTimeline />)
 
     const content = result.find('KeyResultSectionTimelineContent')
 

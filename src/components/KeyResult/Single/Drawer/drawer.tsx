@@ -3,7 +3,7 @@ import React from 'react'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
-import { keyResultDrawerLoaded, keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
+import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 import { selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
 
 import KeyResultDrawerContent from './content'
@@ -11,13 +11,11 @@ import KeyResultDrawerContent from './content'
 const KeyResultDrawer = () => {
   const keyResultID = useRecoilValue(keyResultDrawerOpen)
   const resetOpenDrawer = useResetRecoilState(keyResultDrawerOpen)
-  const resetLoadedDrawer = useResetRecoilState(keyResultDrawerLoaded)
   const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
 
   const handleClose = () => {
     resetOpenDrawer()
-    resetLoadedDrawer()
     setDraftValue(currentProgress)
   }
 

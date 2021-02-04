@@ -6,9 +6,10 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import CloseIcon from 'src/components/Icon/Close'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { USER_POLICY } from 'src/components/User/constants'
+import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
+import authzPoliciesKeyResult from 'src/state/recoil/authz/policies/key-result'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
-import { buildPartialSelector, selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
+import { selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
 
 import { KeyResultSectionTimelineCardBase } from '../Timeline/Cards'
 
@@ -18,17 +19,16 @@ export interface KeyResultSectionCheckInProperties {
   keyResultID?: KeyResult['id']
 }
 
-const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
-
 const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInProperties) => {
   const [isOpen, setIsOpen] = useState(false)
-  const policies = useRecoilValue(policiesSelector(keyResultID))
+  const keyResultPolicies = useRecoilValue(authzPoliciesKeyResult(keyResultID))
   const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const intl = useIntl()
 
-  const isLoaded = typeof keyResultID !== 'undefined' && typeof policies !== 'undefined'
-  const canUpdate = policies?.update === USER_POLICY.ALLOW || !isLoaded
+  const policies = keyResultPolicies.childEntities.keyResultCheckIn
+  const isLoaded = typeof currentProgress !== 'undefined'
+  const canUpdate = !isLoaded || policies?.create === AUTHZ_POLICY.ALLOW
 
   const handleOpen = () => {
     setIsOpen(true)
