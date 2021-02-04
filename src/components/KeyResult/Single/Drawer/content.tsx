@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { DrawerContent } from '@chakra-ui/react'
 import deepmerge from 'deepmerge'
-import React from 'react'
+import React, { useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
@@ -16,6 +16,7 @@ import { keyResultTimelineFetched } from 'src/state/recoil/key-result/timeline'
 import KeyResultDrawerBody from './Body'
 import KeyResultDrawerHeader from './Header'
 import queries from './queries.gql'
+import { MINIMUM_SCROLL_TOP_DIFFERENCE } from './constants'
 
 export interface KeyResultDrawerContentProperties {
   keyResultID: KeyResult['id']
@@ -31,6 +32,8 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
   const [keyResultPolicies, setKeyResultPolicies] = useRecoilState(
     authzPoliciesKeyResult(keyResultID),
   )
+  const [previousScrollTop, setPreviousScrollTop] = useState(0)
+  const [isScrollingUp, setIsScrollingUp] = useState(true)
 
   const buildKeyResultPolicies = (keyResultCheckInPolicies?: AuthzPolicies) => {
     if (!keyResultCheckInPolicies) return keyResultPolicies
@@ -54,6 +57,18 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
     setTimelineFetched(true)
   }
 
+  const handleScroll = (data: React.UIEvent<HTMLElement, UIEvent>) => {
+    const currentScrollTop = data.currentTarget.scrollTop
+    const scrollDifference = previousScrollTop - currentScrollTop
+    const absScrollDifference = Math.abs(scrollDifference)
+
+    const isInTheExpectedDirection = isScrollingUp ? scrollDifference >= 0 : scrollDifference < 0
+    const shouldUpdateState = absScrollDifference > MINIMUM_SCROLL_TOP_DIFFERENCE
+
+    if (shouldUpdateState) setPreviousScrollTop(currentScrollTop)
+    if (shouldUpdateState && !isInTheExpectedDirection) setIsScrollingUp(!isScrollingUp)
+  }
+
   const { loading, called, data } = useQuery<GetKeyResultWithIDQuery>(
     queries.GET_KEY_RESULT_WITH_ID,
     {
@@ -74,8 +89,8 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
   })
 
   return (
-    <DrawerContent overflowY="auto">
-      <KeyResultDrawerHeader keyResultID={keyResultID} />
+    <DrawerContent overflowY="auto" onScroll={handleScroll}>
+      <KeyResultDrawerHeader keyResultID={keyResultID} showCheckInButton={isScrollingUp} />
       <KeyResultDrawerBody keyResultID={keyResultID} />
     </DrawerContent>
   )

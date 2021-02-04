@@ -1,14 +1,20 @@
-import { createGraphQLHandler } from '@miragejs/graphql'
-import { pickBy } from 'lodash'
+import { createGraphQLHandler, mirageGraphQLFieldResolver } from '@miragejs/graphql'
+import { pickBy, sortBy } from 'lodash'
 import { ModelInstance } from 'miragejs'
 
-import { KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
 import Models from './models'
 import graphQLSchema from './schema.gql'
 
-export interface QueryKeyResultReportsArguments {
+export interface QueryKeyResultCheckInsArguments {
   limit?: number
+}
+
+export interface QueryKeyResultTimelineArguments {
+  limit?: number
+  skip?: number
 }
 
 export interface QueryUserCompaniesArguments {
@@ -25,11 +31,38 @@ const graphQLHandler = (mirageSchema: unknown) =>
       KeyResult: {
         keyResultCheckIns: (
           parent: ModelInstance<any>,
-          { limit }: QueryKeyResultReportsArguments,
+          { limit }: QueryKeyResultCheckInsArguments,
         ): Array<ModelInstance<typeof Models.keyResultCheckIn>> =>
           limit
             ? parent.keyResultCheckIns?.models.slice(0, limit)
             : parent.keyResultCheckIns?.models,
+
+        policies: () => ({
+          create: AUTHZ_POLICY.ALLOW,
+          update: AUTHZ_POLICY.ALLOW,
+          read: AUTHZ_POLICY.ALLOW,
+          delete: AUTHZ_POLICY.ALLOW,
+        }),
+
+        timeline: (
+          parent: ModelInstance<any>,
+          { limit, skip }: QueryKeyResultTimelineArguments,
+        ) => {
+          const timelineEntries = [
+            ...parent.keyResultCheckIns.models,
+            ...parent.keyResultComments.models,
+          ]
+          const orderedTimelineEntries = sortBy(timelineEntries, 'createdAt')
+
+          const skippedEntries = skip
+            ? orderedTimelineEntries.slice(skip, -1)
+            : orderedTimelineEntries
+          const limitedEntries = limit ? skippedEntries.slice(0, limit) : skippedEntries
+
+          console.log(limitedEntries, 'tag')
+
+          return limitedEntries
+        },
       },
 
       User: {

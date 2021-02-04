@@ -10,13 +10,17 @@ const models = {
     objective: belongsTo(),
     team: belongsTo(),
     keyResultCheckIns: hasMany('keyResultCheckIn'),
-    policies: belongsTo(),
+    keyResultComments: hasMany('keyResultComment'),
   }),
   keyResultCheckIn: Model.extend({
     user: belongsTo(),
     keyResult: belongsTo(),
     // eslint-disable-next-line unicorn/no-null
     parent: belongsTo('keyResultCheckIn', { inverse: null }),
+  }),
+  keyResultComment: Model.extend({
+    user: belongsTo(),
+    keyResult: belongsTo(),
   }),
   keyResultCustomList: Model.extend({
     user: belongsTo(),
@@ -43,7 +47,6 @@ const models = {
     // eslint-disable-next-line unicorn/no-null
     companies: hasMany('team', { inverse: null }),
   }),
-  policy: Model,
 }
 
 export default models

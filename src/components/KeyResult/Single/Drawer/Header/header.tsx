@@ -1,4 +1,12 @@
-import { Box, Flex, Skeleton, DrawerCloseButton, DrawerHeader } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Skeleton,
+  DrawerCloseButton,
+  DrawerHeader,
+  useTheme,
+  Collapse,
+} from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -11,19 +19,25 @@ import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 import { selectCurrentConfidence } from 'src/state/recoil/key-result/selectors'
+import { KeyResultSectionCheckIn } from 'src/components/KeyResult/Single/Sections'
 
 import messages from './messages'
 
 export interface KeyResultDrawerHeaderProperties {
   keyResultID?: KeyResult['id']
+  showCheckInButton?: boolean
 }
 
-const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties) => {
+const KeyResultDrawerHeader = ({
+  keyResultID,
+  showCheckInButton,
+}: KeyResultDrawerHeaderProperties) => {
   const intl = useIntl()
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(keyResultID))
   const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
   const [confidenceTag, setConfidence] = useConfidenceTag(currentConfidence)
+  const theme = useTheme()
 
   const isLoaded = typeof draftValue !== 'undefined'
 
@@ -32,7 +46,7 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
   }, [currentConfidence, setConfidence])
 
   return (
-    <Box>
+    <Box position="sticky" top={0} bg="white" zIndex={theme.zIndices.tooltip + 1}>
       <DrawerHeader bg="blue.50" py={8}>
         <Box maxW="90%">
           <KeyResultSingleTitle keyResultID={keyResultID} />
@@ -65,6 +79,12 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
           />
         </Flex>
       </Skeleton>
+
+      <Collapse in={showCheckInButton}>
+        <Box pb={4} pt={5} px={6}>
+          <KeyResultSectionCheckIn keyResultID={keyResultID} />
+        </Box>
+      </Collapse>
     </Box>
   )
 }

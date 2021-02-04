@@ -1,10 +1,7 @@
-import { Flex } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 
-import {
-  KeyResultSectionCheckIn,
-  KeyResultSectionTimeline,
-} from 'src/components/KeyResult/Single/Sections'
+import { KeyResultSectionTimeline } from 'src/components/KeyResult/Single/Sections'
 import { KeyResult } from 'src/components/KeyResult/types'
 
 export interface KeyResultDrawerBodyProperties {
@@ -12,10 +9,9 @@ export interface KeyResultDrawerBodyProperties {
 }
 
 const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => (
-  <Flex gridGap={8} py={8} px={6} direction="column">
-    <KeyResultSectionCheckIn keyResultID={keyResultID} />
+  <Box py={4} px={6}>
     <KeyResultSectionTimeline keyResultID={keyResultID} />
-  </Flex>
+  </Box>
 )
 
 export default KeyResultDrawerBody
