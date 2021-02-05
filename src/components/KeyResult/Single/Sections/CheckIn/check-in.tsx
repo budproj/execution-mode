@@ -1,11 +1,12 @@
 import { Skeleton, Button, Collapse, Flex, Heading } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
+import { keyResultDrawerIsCreatingCheckIn } from 'src/state/recoil/key-result/drawer'
 import { selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
 
 import { KeyResultSectionTimelineCardBase } from '../Timeline/Cards'
@@ -17,7 +18,9 @@ export interface KeyResultSectionCheckInProperties {
 }
 
 const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInProperties) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
+    keyResultDrawerIsCreatingCheckIn(keyResultID),
+  )
   const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const intl = useIntl()
@@ -25,11 +28,11 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
   const isLoaded = typeof currentProgress !== 'undefined'
 
   const handleOpen = () => {
-    setIsOpen(true)
+    setIsCreatingCheckIn(true)
   }
 
   const handleClose = () => {
-    setIsOpen(false)
+    setIsCreatingCheckIn(false)
     setDraftValue(currentProgress)
   }
 
@@ -39,13 +42,15 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
         <Button
           variant="solid"
           w="100%"
-          colorScheme={isOpen ? 'gray' : 'brand'}
-          onClick={isOpen ? handleClose : handleOpen}
+          colorScheme={isCreatingCheckIn ? 'gray' : 'brand'}
+          onClick={isCreatingCheckIn ? handleClose : handleOpen}
         >
-          {intl.formatMessage(isOpen ? messages.buttonLabelClose : messages.buttonLabelOpen)}
+          {intl.formatMessage(
+            isCreatingCheckIn ? messages.buttonLabelClose : messages.buttonLabelOpen,
+          )}
         </Button>
       </Skeleton>
-      <Collapse animateOpacity in={isOpen}>
+      <Collapse animateOpacity in={isCreatingCheckIn}>
         <KeyResultSectionTimelineCardBase>
           <Flex pb={4}>
             <Heading fontSize="md" fontWeight={700} color="gray.600" flexGrow={1}>

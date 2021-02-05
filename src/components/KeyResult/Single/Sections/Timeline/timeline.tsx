@@ -1,5 +1,6 @@
-import { Flex } from '@chakra-ui/react'
+import { Flex, Heading } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useRecoilValue } from 'recoil'
 
@@ -8,6 +9,7 @@ import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 import { keyResultTimelineFetched } from 'src/state/recoil/key-result/timeline'
 
 import KeyResultSectionTimelineContent from './Content'
+import messages from './messages'
 import KeyResultSectionTimelineSkeleton from './skeleton'
 
 export interface KeyResultSectionTimelineProperties {
@@ -21,6 +23,7 @@ const KeyResultSectionTimeline = ({
   keyResultID,
   scrollBarRef,
 }: KeyResultSectionTimelineProperties) => {
+  const intl = useIntl()
   const checkIns = useRecoilValue(checkInsSelector(keyResultID))
   const isLoaded = useRecoilValue(keyResultTimelineFetched(keyResultID))
 
@@ -28,6 +31,9 @@ const KeyResultSectionTimeline = ({
 
   return (
     <Flex direction="column" gridGap={4}>
+      <Heading as="h3" fontSize="sm" fontWeight={500} color="gray.400">
+        {intl.formatMessage(messages.title)}
+      </Heading>
       {isLoaded ? (
         <KeyResultSectionTimelineContent checkIns={checkIns} />
       ) : (

@@ -1,33 +1,63 @@
-import { Box, DrawerHeader, useTheme, Collapse } from '@chakra-ui/react'
+import { Box, DrawerHeader, useTheme, Collapse, Button } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
+import { useIntl } from 'react-intl'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResultSectionCheckIn } from 'src/components/KeyResult/Single/Sections'
 import KeyResultSingleTitle from 'src/components/KeyResult/Single/Sections/Title'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { authzPoliciesKeyResult } from 'src/state/recoil/authz/policies'
 import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
+import {
+  keyResultDrawerIsCreatingCheckIn,
+  keyResultDrawerIsScrolling,
+} from 'src/state/recoil/key-result/drawer'
+
+import messages from './messages'
 
 export interface KeyResultDrawerHeaderProperties {
   keyResultID?: KeyResult['id']
-  isScrolling?: boolean
 }
 
-const KeyResultDrawerHeader = ({ keyResultID, isScrolling }: KeyResultDrawerHeaderProperties) => {
+const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties) => {
+  const intl = useIntl()
+  const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
+    keyResultDrawerIsCreatingCheckIn(keyResultID),
+  )
+  const isScrolling = useRecoilValue(keyResultDrawerIsScrolling(keyResultID))
   const keyResultPolicies = useRecoilValue(authzPoliciesKeyResult(keyResultID))
   const theme = useTheme()
 
   const policies = keyResultPolicies.childEntities.keyResultCheckIn
+
+  const isNotScrollingOrAskedToCheckIn = !isScrolling || isCreatingCheckIn
   const canUpdate = policies?.create === AUTHZ_POLICY.ALLOW
+  const shouldShowCheckIn = canUpdate && isNotScrollingOrAskedToCheckIn
+
+  const handleCheckInButtonClick = () => {
+    setIsCreatingCheckIn(true)
+  }
 
   return (
     <Box position="sticky" top={0} bg="white" zIndex={theme.zIndices.tooltip}>
-      <DrawerHeader bg="blue.50" p={4} borderColor="gray.200" borderBottomWidth={1}>
+      <DrawerHeader
+        bg="blue.50"
+        p={4}
+        borderColor="gray.200"
+        borderBottomWidth={1}
+        display="flex"
+        alignItems="center"
+      >
         <KeyResultSingleTitle keyResultID={keyResultID} />
+        <Collapse in={isScrolling}>
+          <Button variant="solid" colorScheme="brand" px={6} onClick={handleCheckInButtonClick}>
+            {intl.formatMessage(messages.checkInButtonLabel)}
+          </Button>
+        </Collapse>
       </DrawerHeader>
 
-      <Collapse in={!isScrolling && canUpdate}>
-        <Box pb={2} pt={4} px={4}>
+      <Collapse unmountOnExit in={shouldShowCheckIn}>
+        <Box p={4}>
           <KeyResultSectionCheckIn keyResultID={keyResultID} />
         </Box>
       </Collapse>

@@ -75,6 +75,10 @@
     "defaultMessage": "{team} | bud",
     "description": "The page title that is displayed in the browser tab"
   },
+  "4N1d+U": {
+    "defaultMessage": "Últimas atividades",
+    "description": "This text is displayed at the top of our timeline, as its title"
+  },
   "4f4cWE": {
     "defaultMessage": "Alto",
     "description": "We use this tag to group every key result with confidence higher than 66"
@@ -138,6 +142,10 @@
   "Ba8bU1": {
     "defaultMessage": "Enviar comentário",
     "description": "This label is displayed in the submit button in our drawer"
+  },
+  "CW+HBw": {
+    "defaultMessage": "Check-in",
+    "description": "This message is displayed as a label button to open the check-in form when the user is scrolling in our key result drawer"
   },
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",

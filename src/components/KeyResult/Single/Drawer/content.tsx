@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { DrawerContent } from '@chakra-ui/react'
 import deepmerge from 'deepmerge'
-import React, { useState } from 'react'
+import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
@@ -31,7 +31,6 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
   const [keyResultPolicies, setKeyResultPolicies] = useRecoilState(
     authzPoliciesKeyResult(keyResultID),
   )
-  const [isScrolling, setIsScrolling] = useState(false)
 
   const buildKeyResultPolicies = (keyResultCheckInPolicies?: AuthzPolicies) => {
     if (!keyResultCheckInPolicies) return keyResultPolicies
@@ -55,14 +54,6 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
     setTimelineFetched(true)
   }
 
-  const handleScrollY = () => {
-    if (!isScrolling) setIsScrolling(true)
-  }
-
-  const handleScrollYReachStart = () => {
-    if (isScrolling) setIsScrolling(false)
-  }
-
   const { loading, called, data } = useQuery<GetKeyResultWithIDQuery>(
     queries.GET_KEY_RESULT_WITH_ID,
     {
@@ -84,12 +75,8 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
 
   return (
     <DrawerContent>
-      <KeyResultDrawerHeader keyResultID={keyResultID} isScrolling={isScrolling} />
-      <KeyResultDrawerBody
-        keyResultID={keyResultID}
-        onScrollY={handleScrollY}
-        onScrollYReachStart={handleScrollYReachStart}
-      />
+      <KeyResultDrawerHeader keyResultID={keyResultID} />
+      <KeyResultDrawerBody keyResultID={keyResultID} />
     </DrawerContent>
   )
 }
