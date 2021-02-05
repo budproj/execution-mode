@@ -62,8 +62,8 @@ const TeamCard = ({ id }: TeamCardProperties) => {
           </SkeletonText>
           <Skeleton isLoaded={isLoaded} borderRadius="full">
             <SliderWithFilledTrack
+              trackThickness={3}
               value={team?.currentProgress}
-              trackThickness="12px"
               trackColor={confidenceTag.color.primary}
             />
           </Skeleton>

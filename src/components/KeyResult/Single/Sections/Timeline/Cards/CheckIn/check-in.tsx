@@ -7,11 +7,11 @@ import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
 
 import KeyResultSectionTimelineCardCheckInComment from './comment'
-import KeyResultSectionTimelineCardCheckInConfidenceTag from './confidence-tag'
 import KeyResultSectionTimelineCardCheckInHelpText from './help-text'
 import messages from './messages'
 import KeyResultSectionTimelineCardCheckInProgress from './progress'
 import KeyResultSectionTimelineCardCheckInProgressBar from './progress-bar'
+import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative-confidence-tag'
 
 export interface KeyResultSectionTimelineCardCheckInProperties {
   relativePercentageProgress?: KeyResultCheckIn['relativePercentageProgress']
@@ -37,14 +37,14 @@ const KeyResultSectionTimelineCardCheckIn = ({
   return (
     <Box>
       <KeyResultSectionTimelineCardBase borderBottomRadius={0}>
-        <Flex direction="column" gridGap={5}>
-          <KeyResultSectionTimelineCardCheckInConfidenceTag
+        <Flex direction="column" gridGap={4}>
+          <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
             confidence={confidence}
             difference={confidenceDifference}
           />
 
           <Box>
-            <StatLabel fontSize="27px" fontWeight={400}>
+            <StatLabel fontSize="md" fontWeight={500} color="gray.600">
               {intl.formatMessage(messages.title)}
             </StatLabel>
 

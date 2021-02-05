@@ -24,7 +24,7 @@ const KeyResultSectionTimelineCardCheckInProgressBar = ({
         <SliderWithFilledTrack
           trackColor={confidenceTag.color.primary}
           value={relativePercentageProgress}
-          trackThickness="12px"
+          trackThickness={2}
           trackTopRadius={0}
         />
       </Flex>

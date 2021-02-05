@@ -16,23 +16,24 @@ const Button = {
     }),
 
     solid: ({ colorScheme }: ButtonProps) => ({
-      bg: `${colorScheme}.100`,
-      color: `${colorScheme}.500`,
+      bg: `${colorScheme ?? 'brand'}.100`,
+      color: `${colorScheme ?? 'brand'}.500`,
       borderRadius: '2px',
 
       '&:hover': {
-        bg: `${colorScheme}.500`,
+        bg: `${colorScheme ?? 'brand'}.500`,
         color: 'white',
       },
 
       '&:focus': {
-        bg: `${colorScheme}.100`,
-        color: `${colorScheme}.500`,
+        bg: `${colorScheme ?? 'brand'}.100`,
+        color: `${colorScheme ?? 'brand'}.500`,
+        boxShadow: 'none',
       },
 
       '&:active': {
-        bg: `${colorScheme}.100`,
-        color: `${colorScheme}.500`,
+        bg: `${colorScheme ?? 'brand'}.100`,
+        color: `${colorScheme ?? 'brand'}.500`,
       },
     }),
 

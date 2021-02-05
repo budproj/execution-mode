@@ -4,7 +4,9 @@ import {
   SliderFilledTrack,
   SliderProps,
   SliderThumb,
+  SliderThumbProps,
   SliderTrack,
+  SliderTrackProps,
   Text,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -13,9 +15,9 @@ import { useIntl } from 'react-intl'
 import messages from './messages'
 
 export interface SliderWithGoalProperties extends SliderProps {
-  trackThickness: string
-  trackColor: string
-  thumbHeight: string
+  trackThickness: SliderTrackProps['h']
+  trackColor: SliderTrackProps['color']
+  thumbHeight: SliderThumbProps['h']
 }
 
 const SliderWithGoal = ({
@@ -116,7 +118,7 @@ const SliderWithGoal = ({
 SliderWithGoal.defaultProps = {
   value: 0,
   trackColor: 'brand.400',
-  trackThickness: '8px',
+  trackThickness: 2,
   thumbHeight: '14px',
   isDisabled: true,
 }

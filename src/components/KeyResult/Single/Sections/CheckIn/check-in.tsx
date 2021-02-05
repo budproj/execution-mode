@@ -44,8 +44,8 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
         <Button
           variant="solid"
           w="100%"
-          onClick={isOpen ? handleClose : handleOpen}
           colorScheme={isOpen ? 'gray' : 'brand'}
+          onClick={isOpen ? handleClose : handleOpen}
         >
           {intl.formatMessage(isOpen ? messages.buttonLabelClose : messages.buttonLabelOpen)}
         </Button>

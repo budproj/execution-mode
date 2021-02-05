@@ -149,8 +149,8 @@ const CheckInForm = ({
 
               <Actions
                 isLoading={loading}
-                onCancel={handleCancel}
                 showCancelButton={Boolean(onCancel)}
+                onCancel={handleCancel}
               />
             </Flex>
           </FormControl>

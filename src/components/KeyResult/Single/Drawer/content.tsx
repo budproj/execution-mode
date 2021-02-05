@@ -15,8 +15,8 @@ import { keyResultTimelineFetched } from 'src/state/recoil/key-result/timeline'
 
 import KeyResultDrawerBody from './Body'
 import KeyResultDrawerHeader from './Header'
-import queries from './queries.gql'
 import { MINIMUM_SCROLL_TOP_DIFFERENCE } from './constants'
+import queries from './queries.gql'
 
 export interface KeyResultDrawerContentProperties {
   keyResultID: KeyResult['id']

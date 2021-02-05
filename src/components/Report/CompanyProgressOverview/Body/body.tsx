@@ -41,8 +41,8 @@ const CompanyProgressOverviewBody = ({
         <Skeleton isLoaded={!isLoading}>
           <SliderWithGoal
             value={company?.currentProgress}
-            trackThickness="16px"
-            thumbHeight="29px"
+            trackThickness={4}
+            thumbHeight={7}
             trackColor={confidenceTag.color.primary}
           />
         </Skeleton>

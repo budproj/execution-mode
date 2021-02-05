@@ -101,12 +101,12 @@ const theme = extendTheme({
   colors,
 
   styles: {
-    global: (props) => ({
+    global: (properties) => ({
       ':root': {
         fontSize: '14px',
       },
 
-      [`@media (min-width: ${props.theme.breakpoints[5]})`]: {
+      [`@media (min-width: ${properties.theme.breakpoints[5] as string})`]: {
         ':root': {
           fontSize: '16px',
         },

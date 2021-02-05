@@ -4,6 +4,7 @@ import {
   SliderProps,
   SliderThumb,
   SliderTrack,
+  SliderTrackProps,
   Tooltip,
 } from '@chakra-ui/react'
 import React, { forwardRef } from 'react'
@@ -12,8 +13,8 @@ import { useIntl } from 'react-intl'
 import messages from './messages'
 
 export interface SliderWithHoverThumbProperties extends SliderProps {
-  trackColor?: string
-  trackThickness?: string
+  trackColor?: SliderTrackProps['bg']
+  trackThickness?: SliderTrackProps['h']
   dataAction?: string
 }
 
@@ -62,7 +63,7 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
 SliderWithHoverThumb.defaultProps = {
   value: 0,
   trackColor: 'brand.400',
-  trackThickness: '8px',
+  trackThickness: 2,
 }
 
 export default SliderWithHoverThumb

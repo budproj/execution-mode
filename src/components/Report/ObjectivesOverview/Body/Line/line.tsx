@@ -54,8 +54,8 @@ const ObjectivesOverviewBodyLine = ({
       </Flex>
 
       <SliderWithFilledTrack
+        trackThickness={3}
         value={objective?.currentProgress}
-        trackThickness="12px"
         trackColor={confidenceTag.color.primary}
       />
     </OverviewBodyBox>

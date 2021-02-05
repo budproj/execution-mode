@@ -2,14 +2,14 @@ import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
 
-import KeyResultSectionTimelineCardCheckInConfidenceTag from './confidence-tag'
+import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative-confidence-tag'
 
 describe('component expectations', () => {
   it('uses a increase arrow if the difference is higher than 0', () => {
     const fakeDifference = faker.random.number({ min: 1 })
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInConfidenceTag difference={fakeDifference} />,
+      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag difference={fakeDifference} />,
     )
 
     const statArrow = result.find('StatArrow')
@@ -21,7 +21,7 @@ describe('component expectations', () => {
     const fakeDifference = faker.random.number({ max: -1 })
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInConfidenceTag difference={fakeDifference} />,
+      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag difference={fakeDifference} />,
     )
 
     const statArrow = result.find('StatArrow')
@@ -33,7 +33,7 @@ describe('component expectations', () => {
     const fakeDifference = 0
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInConfidenceTag difference={fakeDifference} />,
+      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag difference={fakeDifference} />,
     )
 
     const statArrow = result.find('StatArrow')

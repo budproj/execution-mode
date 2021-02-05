@@ -1,31 +1,29 @@
-import { Flex, Tag, Skeleton, StatArrow } from '@chakra-ui/react'
+import { Flex, Skeleton, StatArrow } from '@chakra-ui/react'
 import React from 'react'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import ConfidenceTag from 'src/components/KeyResult/ConfidenceTag'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
-export interface KeyResultSectionTimelineCardCheckInConfidenceTagProperties {
+export interface KeyResultSectionTimelineCardCheckInRelativeConfidenceTagProperties {
   confidence?: KeyResultCheckIn['confidence']
   difference?: number
 }
 
-const KeyResultSectionTimelineCardCheckInConfidenceTag = ({
+const KeyResultSectionTimelineCardCheckInRelativeConfidenceTag = ({
   confidence,
   difference,
-}: KeyResultSectionTimelineCardCheckInConfidenceTagProperties) => {
+}: KeyResultSectionTimelineCardCheckInRelativeConfidenceTagProperties) => {
   const [confidenceTag] = useConfidenceTag(confidence)
 
   const isLoaded = Boolean(confidence)
-  const colorScheme = difference ? confidenceTag.color.scheme : 'gray'
   const arrowType = difference && difference > 0 ? 'increase' : 'decrease'
 
   return (
     <Flex alignItems="center" gridGap={2}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 33)}>
-        <Tag size="lg" colorScheme={colorScheme} opacity={difference ? 1 : 0.3} px={5}>
-          {confidenceTag.messages.long}
-        </Tag>
+        <ConfidenceTag confidenceValue={confidence} />
       </Skeleton>
 
       {/* eslint-disable-next-line unicorn/no-null */}
@@ -34,4 +32,4 @@ const KeyResultSectionTimelineCardCheckInConfidenceTag = ({
   )
 }
 
-export default KeyResultSectionTimelineCardCheckInConfidenceTag
+export default KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
