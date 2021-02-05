@@ -24,7 +24,6 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
 
   const handleTitleSubmit = async (newTitle: string) => {
     setTitle(newTitle)
-    // DEPRECATED: Update remote state
   }
 
   return (
@@ -47,7 +46,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
               <EditableInput />
             </Editable>
           ) : (
-            <Text color="gray.800" fontSize="md">
+            <Text color="gray.800" fontSize="md" noOfLines={2}>
               {title}
             </Text>
           )

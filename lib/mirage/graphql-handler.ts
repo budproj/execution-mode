@@ -69,8 +69,6 @@ const graphQLHandler = (mirageSchema: unknown) =>
             : orderedTimelineEntries
           const limitedEntries = limit ? skippedEntries.slice(0, limit) : skippedEntries
 
-          console.log(limitedEntries, 'tag')
-
           return limitedEntries
         },
       },

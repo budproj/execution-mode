@@ -1,20 +1,24 @@
 import { Box, DrawerHeader, useTheme, Collapse } from '@chakra-ui/react'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
 
 import { KeyResultSectionCheckIn } from 'src/components/KeyResult/Single/Sections'
 import KeyResultSingleTitle from 'src/components/KeyResult/Single/Sections/Title'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { authzPoliciesKeyResult } from 'src/state/recoil/authz/policies'
+import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
 export interface KeyResultDrawerHeaderProperties {
   keyResultID?: KeyResult['id']
-  showCheckInButton?: boolean
+  isScrolling?: boolean
 }
 
-const KeyResultDrawerHeader = ({
-  keyResultID,
-  showCheckInButton,
-}: KeyResultDrawerHeaderProperties) => {
+const KeyResultDrawerHeader = ({ keyResultID, isScrolling }: KeyResultDrawerHeaderProperties) => {
+  const keyResultPolicies = useRecoilValue(authzPoliciesKeyResult(keyResultID))
   const theme = useTheme()
+
+  const policies = keyResultPolicies.childEntities.keyResultCheckIn
+  const canUpdate = policies?.create === AUTHZ_POLICY.ALLOW
 
   return (
     <Box position="sticky" top={0} bg="white" zIndex={theme.zIndices.tooltip}>
@@ -22,7 +26,7 @@ const KeyResultDrawerHeader = ({
         <KeyResultSingleTitle keyResultID={keyResultID} />
       </DrawerHeader>
 
-      <Collapse in={showCheckInButton}>
+      <Collapse in={!isScrolling && canUpdate}>
         <Box pb={2} pt={4} px={4}>
           <KeyResultSectionCheckIn keyResultID={keyResultID} />
         </Box>

@@ -6,9 +6,10 @@ import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
 export interface ConfidenceTagProperties {
   confidenceValue?: KeyResultCheckIn['confidence']
+  isGrayscale?: boolean
 }
 
-const ConfidenceTag = ({ confidenceValue }: ConfidenceTagProperties) => {
+const ConfidenceTag = ({ confidenceValue, isGrayscale }: ConfidenceTagProperties) => {
   const [confidenceTag, setConfidence] = useConfidenceTag(confidenceValue)
 
   useEffect(() => {
@@ -22,8 +23,8 @@ const ConfidenceTag = ({ confidenceValue }: ConfidenceTagProperties) => {
       fontSize="xs"
       p={2}
       borderRadius={4}
-      color={confidenceTag.color.primary}
-      bg={confidenceTag.color.light}
+      bg={isGrayscale ? 'gray.50' : confidenceTag.color.light}
+      color={isGrayscale ? 'gray.200' : confidenceTag.color.primary}
     >
       {confidenceTag.messages.long}
     </Tag>

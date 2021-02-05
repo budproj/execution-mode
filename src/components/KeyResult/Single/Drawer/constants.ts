@@ -1,1 +1,0 @@
-export const MINIMUM_SCROLL_TOP_DIFFERENCE = 100

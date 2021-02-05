@@ -5,8 +5,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
-import authzPoliciesKeyResult from 'src/state/recoil/authz/policies/key-result'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 import { selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
 
@@ -20,14 +18,11 @@ export interface KeyResultSectionCheckInProperties {
 
 const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInProperties) => {
   const [isOpen, setIsOpen] = useState(false)
-  const keyResultPolicies = useRecoilValue(authzPoliciesKeyResult(keyResultID))
   const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const intl = useIntl()
 
-  const policies = keyResultPolicies.childEntities.keyResultCheckIn
   const isLoaded = typeof currentProgress !== 'undefined'
-  const canUpdate = !isLoaded || policies?.create === AUTHZ_POLICY.ALLOW
 
   const handleOpen = () => {
     setIsOpen(true)
@@ -38,7 +33,7 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
     setDraftValue(currentProgress)
   }
 
-  return canUpdate ? (
+  return (
     <Flex direction="column" gridGap={4}>
       <Skeleton isLoaded={isLoaded}>
         <Button
@@ -67,8 +62,7 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
         </KeyResultSectionTimelineCardBase>
       </Collapse>
     </Flex>
-  ) : // eslint-disable-next-line unicorn/no-null
-  null
+  )
 }
 
 export default KeyResultSectionCheckIn
