@@ -36,7 +36,7 @@ const CheckInFormFieldNewProgress = ({ keyResultID }: CheckInFormFieldNewProgres
   return (
     <Box flex="1 1 0px">
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
-      <Mask value={values.newProgress} handleChange={handleChange} />
+      <Mask value={values.newProgress} handleChange={handleChange} fontSize="xs" />
     </Box>
   )
 }

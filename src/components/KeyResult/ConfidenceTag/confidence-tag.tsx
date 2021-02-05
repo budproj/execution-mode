@@ -19,7 +19,7 @@ const ConfidenceTag = ({ confidenceValue }: ConfidenceTagProperties) => {
     <Tag
       colorScheme={confidenceTag.color.scheme}
       textTransform="uppercase"
-      fontSize="11px"
+      fontSize="xs"
       p={2}
       borderRadius={4}
       color={confidenceTag.color.primary}

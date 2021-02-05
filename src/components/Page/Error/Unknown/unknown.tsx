@@ -15,29 +15,29 @@ const UnknownErrorPage = () => {
     <PageContent hideContentHeader contentTopGutter={0}>
       <PageHead title={messages.metaTitle} />
 
-      <Flex direction="column" alignItems="center" gridGap="20px">
+      <Flex direction="column" alignItems="center" gridGap={5}>
         <Box>
           <Image
             src="/images/alien-abduction-drawing.png"
             alt={intl.formatMessage(messages.imageAlt)}
           />
         </Box>
-        <Flex direction="column" maxWidth="530px" textAlign="center" gridGap="20px">
-          <Heading as="h1" fontSize="32px">
+        <Flex direction="column" maxWidth="xl" textAlign="center" gridGap={5}>
+          <Heading as="h1" fontSize="4xl">
             {intl.formatMessage(messages.title)}
           </Heading>
 
-          <Text as="h2" fontSize="20px" color="gray.400" fontWeight={700}>
+          <Text as="h2" fontSize="xl" color="gray.400" fontWeight={700}>
             {intl.formatMessage(messages.subtitle)}
           </Text>
 
-          <Text fontSize="20px" color="gray.400">
+          <Text fontSize="xl" color="gray.400">
             {intl.formatMessage(messages.description)}
           </Text>
 
-          <Box pt="40px">
+          <Box pt={16}>
             <IntlLink href="/">
-              <Button variant="solid" minWidth="150px">
+              <Button variant="solid" minWidth={36}>
                 {intl.formatMessage(messages.button)}
               </Button>
             </IntlLink>

@@ -28,7 +28,7 @@ const LastUpdateText = ({ date, author }: LastUpdateTextProperties) => {
   }, [previousDate, date, setDate])
 
   return (
-    <Text fontSize="13px" color="gray.300">
+    <Text fontSize="xs" color="gray.300">
       {message}
     </Text>
   )

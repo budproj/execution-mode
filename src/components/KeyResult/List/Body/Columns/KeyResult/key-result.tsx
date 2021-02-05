@@ -65,7 +65,7 @@ const KeyResultListBodyColumnKeyResult = ({
             isLoaded={isTeamLoaded}
             {...buildSkeletonMinSize(isTeamLoaded, 100, 21)}
           >
-            <Text color="gray.200" fontSize="14px">
+            <Text color="gray.200" fontSize="sm">
               {team?.name}
             </Text>
           </SkeletonText>

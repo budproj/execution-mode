@@ -30,8 +30,8 @@ const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectivePro
       <Flex alignItems="center" gridGap={2}>
         <SkeletonCircle isLoaded={isObjectiveLoaded}>
           <Box
-            w="32px"
-            h="32px"
+            w={8}
+            h={8}
             bg="gray.50"
             borderRadius="full"
             display="flex"

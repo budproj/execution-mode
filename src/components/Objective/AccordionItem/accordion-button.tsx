@@ -37,7 +37,7 @@ const ObjectiveAccordionButton = ({
   return (
     <AccordionButton gridGap={4} _hover={{}}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded ?? true, 300, 24)}>
-        <Heading as="h4" fontSize="20px" fontWeight={500}>
+        <Heading as="h4" fontSize="xl" fontWeight={500}>
           {objective?.title}
         </Heading>
       </Skeleton>
@@ -64,18 +64,18 @@ const ObjectiveAccordionButton = ({
       </Skeleton>
 
       <Flex flexGrow={1} justifyContent="flex-end">
-        <SkeletonCircle isLoaded={isLoaded} size="50px">
+        <SkeletonCircle isLoaded={isLoaded} size={14}>
           <CircularProgress
             value={roundedProgress}
             thickness={6}
             color={confidenceTag?.color.primary}
             trackColor={confidenceTag?.color.light}
-            size="55px"
+            size={14}
           >
             <CircularProgressLabel
               color={confidenceTag?.color.primary}
               fontWeight={700}
-              fontSize="16px"
+              fontSize="md"
             >
               {roundedProgress}%
             </CircularProgressLabel>

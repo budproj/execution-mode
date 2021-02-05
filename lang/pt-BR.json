@@ -227,6 +227,10 @@
     "defaultMessage": "Um ícone de lata de lixo",
     "description": "The desc message for the Delete icon. This icon is used to ilustrate our key results"
   },
+  "ND5T6U": {
+    "defaultMessage": "Uma seta para cima. Ao clicar nela você fechará o menu de seleção",
+    "description": "This is the desc attribute of our chevron up icon. It is used by screen readers"
+  },
   "NF2bAx": {
     "defaultMessage": "Este resultado-chave não possui nenhum check-in",
     "description": "This text is displayed in our key result timeline when no content exist"
@@ -423,10 +427,6 @@
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
   },
-  "j/xH+H": {
-    "defaultMessage": "Fechar",
-    "description": "This message is displayed when an user hovers the close button of our key result drawer"
-  },
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
     "description": "A brief explanation for screen readers regarding the yellow status circle"
@@ -466,10 +466,6 @@
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
     "description": "The default description for our page head meta description value"
-  },
-  "n7ZLVl": {
-    "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box a barra lateral do resultado chave",
-    "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our key result drawer close button"
   },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",

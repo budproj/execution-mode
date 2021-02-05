@@ -27,20 +27,20 @@ const UnderMaintenanceErrorPage = () => {
     <PageContent hideContentHeader contentTopGutter={0}>
       <PageHead title={messages.metaTitle} />
 
-      <Flex direction="column" alignItems="center" gridGap="20px">
+      <Flex direction="column" alignItems="center" gridGap={5}>
         <Box>
           <Image src="/images/box-drawing.png" alt={intl.formatMessage(messages.imageAlt)} />
         </Box>
-        <Flex direction="column" maxWidth="530px" textAlign="center" gridGap="50px">
-          <Heading as="h1" fontSize="32px">
+        <Flex direction="column" maxWidth="xl" textAlign="center" gridGap={14}>
+          <Heading as="h1" fontSize="4xl">
             {intl.formatMessage(messages.title)}
           </Heading>
-          <Text fontSize="20px" color="gray.400">
+          <Text fontSize="xl" color="gray.400">
             {intl.formatMessage(messages.description, {
               date: intl.formatDate(expectedReturnDate, dateFormatOptions),
               hour: intl.formatDate(expectedReturnDate, hourFormatOptions),
               highlight: (string: string) => (
-                <Text display="block" as="span" py="30px" fontWeight={700}>
+                <Text display="block" as="span" py={7} fontWeight={700}>
                   {capitalize(string)}
                 </Text>
               ),

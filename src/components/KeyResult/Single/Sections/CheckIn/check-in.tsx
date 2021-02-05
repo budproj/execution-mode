@@ -53,7 +53,7 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
       <Collapse animateOpacity in={isOpen}>
         <KeyResultSectionTimelineCardBase>
           <Flex pb={4}>
-            <Heading fontSize="18px" fontWeight={700} color="gray.600" flexGrow={1}>
+            <Heading fontSize="md" fontWeight={700} color="gray.600" flexGrow={1}>
               {intl.formatMessage(messages.formTitle)}
             </Heading>
           </Flex>

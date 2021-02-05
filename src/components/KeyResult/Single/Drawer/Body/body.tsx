@@ -9,7 +9,7 @@ export interface KeyResultDrawerBodyProperties {
 }
 
 const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => (
-  <Box py={4} px={6}>
+  <Box p={4}>
     <KeyResultSectionTimeline keyResultID={keyResultID} />
   </Box>
 )

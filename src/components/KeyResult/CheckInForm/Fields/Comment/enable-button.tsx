@@ -31,8 +31,8 @@ const CheckInFormFieldCommentEnableButton = ({
           title={intl.formatMessage(messages.buttonIconTitle)}
           fill="brand.500"
           stroke="brand.500"
-          w="18px"
-          height="18px"
+          w={5}
+          height={5}
         />
       }
       onClick={enableComment}

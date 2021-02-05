@@ -45,12 +45,12 @@ const Breadcrumb = ({ routeParams }: BreadcrumbProperties) => {
 
   return (
     <ChakraBreadcrumb
-      spacing="12px"
+      spacing={3}
       separator={
         <ArrowRightIcon
           desc={intl.formatMessage(messages.arrowRightIconDesc)}
           fill="gray.400"
-          fontSize={10}
+          fontSize="xs"
         />
       }
     >

@@ -64,7 +64,7 @@ const SliderWithGoal = ({
             {Math.round(value ?? 0)}%
           </Text>
 
-          <Text fontSize="13px" color="gray.200" fontWeight={400} width="max-content">
+          <Text fontSize="xs" color="gray.200" fontWeight={400} width="max-content">
             {intl.formatMessage(messages.currentProgress)}
           </Text>
         </Box>
@@ -83,7 +83,7 @@ const SliderWithGoal = ({
             80%
           </Text>
 
-          <Text fontSize="13px" color="gray.200" fontWeight={400} width="max-content">
+          <Text fontSize="xs" color="gray.200" fontWeight={400} width="max-content">
             {intl.formatMessage(messages.goal)}
           </Text>
         </Box>

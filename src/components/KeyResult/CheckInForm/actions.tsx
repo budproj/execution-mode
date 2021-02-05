@@ -16,7 +16,7 @@ const Actions = ({ isLoading, showCancelButton, onCancel }: CheckInFormActionsPr
   return (
     <Flex gridGap={4}>
       {showCancelButton && (
-        <Button variant="outline" w="100%" onClick={onCancel}>
+        <Button variant="solid" w="100%" onClick={onCancel} colorScheme="gray">
           {intl.formatMessage(messages.cancelButtonLabel)}
         </Button>
       )}

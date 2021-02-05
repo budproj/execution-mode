@@ -34,6 +34,7 @@ const CheckInFormFieldCurrentProgress = ({
         value={values.currentProgress}
         bg="blue.50"
         color="gray.500"
+        fontSize="xs"
         _disabled={{ opacity: 1 }}
       />
     </Box>
