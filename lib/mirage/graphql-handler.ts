@@ -1,8 +1,8 @@
-import { createGraphQLHandler, mirageGraphQLFieldResolver } from '@miragejs/graphql'
+import { createGraphQLHandler } from '@miragejs/graphql'
 import { pickBy, sortBy } from 'lodash'
 import { ModelInstance } from 'miragejs'
 
-import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { KeyResultCheckIn, KeyResultComment } from 'src/components/KeyResult/types'
 import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
 import Models from './models'
@@ -48,10 +48,20 @@ const graphQLHandler = (mirageSchema: unknown) =>
           parent: ModelInstance<any>,
           { limit, skip }: QueryKeyResultTimelineArguments,
         ) => {
-          const timelineEntries = [
-            ...parent.keyResultCheckIns.models,
-            ...parent.keyResultComments.models,
-          ]
+          const keyResultCheckIns = parent.keyResultCheckIns.models.map(
+            (keyResultCheckIn: ModelInstance<KeyResultCheckIn>) => ({
+              __typename: 'KeyResultCheckIn',
+              ...keyResultCheckIn.attrs,
+            }),
+          )
+          const keyResultComments = parent.keyResultComments.models.map(
+            (keyResultComment: ModelInstance<KeyResultComment>) => ({
+              __typename: 'KeyResultComment',
+              ...keyResultComment.attrs,
+            }),
+          )
+
+          const timelineEntries = [...keyResultCheckIns, ...keyResultComments]
           const orderedTimelineEntries = sortBy(timelineEntries, 'createdAt')
 
           const skippedEntries = skip

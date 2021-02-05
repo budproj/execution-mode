@@ -30,7 +30,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   return (
     <Flex gridGap={4} alignItems="center">
       <Skeleton borderRadius={10} isLoaded={isTitleLoaded}>
-        <KeyResultDynamicIcon title={title} size={6} />
+        <KeyResultDynamicIcon title={title} iconSize={3} boxSize={6} borderRadius={4} />
       </Skeleton>
 
       <Skeleton isLoaded={isTitleLoaded}>
@@ -47,7 +47,9 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
               <EditableInput />
             </Editable>
           ) : (
-            <Text color="gray.800">{title}</Text>
+            <Text color="gray.800" fontSize="md">
+              {title}
+            </Text>
           )
         }
       </Skeleton>

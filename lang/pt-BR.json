@@ -31,13 +31,13 @@
     "defaultMessage": "Com Barreira",
     "description": "We use this tag to group every key result with confidence lower than 0"
   },
-  "00ogu4": {
-    "defaultMessage": "Qual o seu nível de confiança?",
-    "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
-  },
   "03yPkn": {
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
+  },
+  "0SQt21": {
+    "defaultMessage": "Novo valor",
+    "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
   },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
@@ -50,10 +50,6 @@
   "1HBRw6": {
     "defaultMessage": "Nenhuma atualização recente",
     "description": "This label is displayed if we do not have any update date to display"
-  },
-  "1nABM7": {
-    "defaultMessage": "Meta:",
-    "description": "This is the label of the check-in form that indicates the goal for her/his key result"
   },
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
@@ -102,6 +98,10 @@
   "6aChVs": {
     "defaultMessage": "Nesta semana",
     "description": "This label is displayed if the date difference is 1 week or less"
+  },
+  "6spUEn": {
+    "defaultMessage": "Fazer check-in",
+    "description": "This message is displayed as a label button when the check-in form is closed in our key result section"
   },
   "6vXlkc": {
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
@@ -154,6 +154,10 @@
   "DrLml8": {
     "defaultMessage": "Clique aqui para fechar o formulário de check-in",
     "description": "This message is displayed as the alternative text for the close button in our check-in form"
+  },
+  "ErVh0y": {
+    "defaultMessage": "Valor atual",
+    "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
   },
   "F33Lyk": {
     "defaultMessage": "Cor do Nível de Confiança",
@@ -227,6 +231,14 @@
     "defaultMessage": "Este resultado-chave não possui nenhum check-in",
     "description": "This text is displayed in our key result timeline when no content exist"
   },
+  "NOqI9i": {
+    "defaultMessage": "Como está sua confiança?",
+    "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
+  },
+  "Nafqgw": {
+    "defaultMessage": "Cancelar check-in",
+    "description": "This message is displayed as a label button when the check-in form is opened in our key result section"
+  },
   "P/ujgo": {
     "defaultMessage": "Um ícone de controle de video game",
     "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
@@ -263,17 +275,9 @@
     "defaultMessage": "Painel",
     "description": "AppBar menu item that links to \"Dashboard\" page"
   },
-  "Ro4JqE": {
-    "defaultMessage": "Para",
-    "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
-  },
   "S/F2Hk": {
     "defaultMessage": "Detalhes",
     "description": "The label text above the Description section in our key result single page or drawer"
-  },
-  "S1OFpY": {
-    "defaultMessage": "De",
-    "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
   },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
@@ -294,6 +298,10 @@
   "SpAXmO": {
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
+  },
+  "SxsVDt": {
+    "defaultMessage": "Meta",
+    "description": "This is the label of the check-in form that indicates the goal for her/his key result"
   },
   "T8ytLJ": {
     "defaultMessage": "Objetivo",
@@ -523,6 +531,10 @@
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
   },
+  "unuB2s": {
+    "defaultMessage": "Sobre esse check-in",
+    "description": "This is the label text that is displayed above the input"
+  },
   "upeS+T": {
     "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
     "description": "This message is displayed as a description in our under maintenance error page"
@@ -566,13 +578,5 @@
   "zev4wl": {
     "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
     "description": "This is a message explaining the flag icon in our check-in form"
-  },
-  "zgF+iY": {
-    "defaultMessage": "Comentário",
-    "description": "This is the label text that is displayed above the input"
-  },
-  "zujGO+": {
-    "defaultMessage": "Fazer check-in",
-    "description": "This message is displayed as a label button in our key result section"
   }
 }

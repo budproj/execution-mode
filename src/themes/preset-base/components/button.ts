@@ -15,21 +15,24 @@ const Button = {
       },
     }),
 
-    solid: () => ({
-      bg: 'brand.500',
-      color: 'white',
+    solid: ({ colorScheme }: ButtonProps) => ({
+      bg: `${colorScheme}.100`,
+      color: `${colorScheme}.500`,
       borderRadius: '2px',
 
       '&:hover': {
-        bg: 'brand.400',
+        bg: `${colorScheme}.500`,
+        color: 'white',
       },
 
       '&:focus': {
-        bg: 'brand.400',
+        bg: `${colorScheme}.100`,
+        color: `${colorScheme}.500`,
       },
 
       '&:active': {
-        bg: 'brand.400',
+        bg: `${colorScheme}.100`,
+        color: `${colorScheme}.500`,
       },
     }),
 

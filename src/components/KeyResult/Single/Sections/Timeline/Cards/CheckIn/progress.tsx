@@ -47,13 +47,13 @@ const KeyResultSectionTimelineCardCheckInProgress = ({
       {!isSameAsParent && (
         <>
           <ArrowRightLongIcon
-            fill={isLoaded ? confidenceTag.colors.primary : 'gray.100'}
+            fill={isLoaded ? confidenceTag.color.primary : 'gray.100'}
             desc={intl.formatMessage(messages.arrowRightDesc)}
             w="20px"
             h="auto"
           />
           <Skeleton isLoaded={isLoaded}>
-            <StatNumber fontSize="48px" color={confidenceTag.colors.primary} lineHeight={1}>
+            <StatNumber fontSize="48px" color={confidenceTag.color.primary} lineHeight={1}>
               {intl.formatNumber(normalizedProgress, relativePercentageProgressNumberFormat)}
             </StatNumber>
           </Skeleton>

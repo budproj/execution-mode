@@ -43,7 +43,6 @@ const KeyResultListBodyColumnConfidenceLevel = ({
             minW="100%"
             mt={isKeyResultLoaded ? 'inherit' : '4px'}
             isLoaded={isKeyResultLoaded}
-            pl={8}
           >
             <LastUpdateText date={lastUpdateDate} author={latestCheckIn?.user?.fullName} />
           </SkeletonText>

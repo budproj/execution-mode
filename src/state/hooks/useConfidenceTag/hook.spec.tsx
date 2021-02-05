@@ -29,10 +29,10 @@ describe('confidence tag getter', () => {
         long: 'Alta Confiança',
         icon: 'Um círculo verde, indicando que a confiança está alta',
       },
-      colors: {
+      color: {
         scheme: 'green',
         primary: 'green.500',
-        light: 'green.100',
+        light: 'green.50',
       },
     }
 
@@ -52,10 +52,10 @@ describe('confidence tag getter', () => {
         long: 'Média Confiança',
         icon: 'Um círculo amarelo, indicando que a confiançá é média',
       },
-      colors: {
+      color: {
         scheme: 'yellow',
         primary: 'yellow.500',
-        light: 'yellow.100',
+        light: 'yellow.50',
       },
     }
 
@@ -75,10 +75,10 @@ describe('confidence tag getter', () => {
         long: 'Baixa Confiança',
         icon: 'Um círculo vermelho, indicando que a confiança está baixa',
       },
-      colors: {
+      color: {
         scheme: 'red',
         primary: 'red.500',
-        light: 'red.100',
+        light: 'red.50',
       },
     }
 
@@ -98,10 +98,10 @@ describe('confidence tag getter', () => {
         long: 'Com Barreira',
         icon: 'Um círculo roxo, indicando que o resultado-chave tem uma barreira',
       },
-      colors: {
+      color: {
         scheme: 'brand',
         primary: 'brand.500',
-        light: 'brand.100',
+        light: 'brand.50',
       },
     }
 
@@ -119,10 +119,10 @@ describe('confidence tag getter', () => {
         long: 'Alta Confiança',
         icon: 'Um círculo verde, indicando que a confiança está alta',
       },
-      colors: {
+      color: {
         scheme: 'green',
         primary: 'green.500',
-        light: 'green.100',
+        light: 'green.50',
       },
     }
 

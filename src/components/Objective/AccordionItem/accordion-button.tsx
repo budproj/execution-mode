@@ -68,12 +68,12 @@ const ObjectiveAccordionButton = ({
           <CircularProgress
             value={roundedProgress}
             thickness={6}
-            color={confidenceTag?.colors.primary}
-            trackColor={confidenceTag?.colors.light}
+            color={confidenceTag?.color.primary}
+            trackColor={confidenceTag?.color.light}
             size="55px"
           >
             <CircularProgressLabel
-              color={confidenceTag?.colors.primary}
+              color={confidenceTag?.color.primary}
               fontWeight={700}
               fontSize="16px"
             >

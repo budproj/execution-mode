@@ -43,7 +43,7 @@ const CompanyProgressOverviewBody = ({
             value={company?.currentProgress}
             trackThickness="16px"
             thumbHeight="29px"
-            trackColor={confidenceTag.colors.primary}
+            trackColor={confidenceTag.color.primary}
           />
         </Skeleton>
       </Flex>

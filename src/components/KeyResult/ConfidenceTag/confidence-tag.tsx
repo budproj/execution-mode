@@ -1,7 +1,6 @@
-import { Flex, Text } from '@chakra-ui/react'
+import { Tag } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 
-import CircleIcon from 'src/components/Icon/Circle'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
@@ -17,10 +16,17 @@ const ConfidenceTag = ({ confidenceValue }: ConfidenceTagProperties) => {
   }, [confidenceValue, setConfidence])
 
   return (
-    <Flex gridGap={4} alignItems="center">
-      <CircleIcon fill={confidenceTag.colors.primary} desc={confidenceTag.messages.icon} />
-      <Text>{confidenceTag.messages.short}</Text>
-    </Flex>
+    <Tag
+      colorScheme={confidenceTag.color.scheme}
+      textTransform="uppercase"
+      fontSize="11px"
+      p={2}
+      borderRadius={4}
+      color={confidenceTag.color.primary}
+      bg={confidenceTag.color.light}
+    >
+      {confidenceTag.messages.long}
+    </Tag>
   )
 }
 

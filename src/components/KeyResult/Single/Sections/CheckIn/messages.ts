@@ -1,12 +1,25 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSectionCheckInMessage = 'button' | 'formTitle' | 'closeIconAlt' | 'closeIconTitle'
+type KeyResultsSectionCheckInMessage =
+  | 'buttonLabelOpen'
+  | 'buttonLabelClose'
+  | 'formTitle'
+  | 'closeIconAlt'
+  | 'closeIconTitle'
 
 export default defineMessages<KeyResultsSectionCheckInMessage>({
-  button: {
+  buttonLabelOpen: {
     defaultMessage: 'Fazer check-in',
-    id: 'zujGO+',
-    description: 'This message is displayed as a label button in our key result section',
+    id: '6spUEn',
+    description:
+      'This message is displayed as a label button when the check-in form is closed in our key result section',
+  },
+
+  buttonLabelClose: {
+    defaultMessage: 'Cancelar check-in',
+    id: 'Nafqgw',
+    description:
+      'This message is displayed as a label button when the check-in form is opened in our key result section',
   },
 
   formTitle: {

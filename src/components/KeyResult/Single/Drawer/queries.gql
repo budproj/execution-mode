@@ -22,5 +22,10 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
         relativePercentageProgress
       }
     }
+    timeline {
+      ... on KeyResultCheckIn {
+        id
+      }
+    }
   }
 }

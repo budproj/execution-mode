@@ -137,7 +137,7 @@ const CheckInForm = ({
       {() => (
         <Form>
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
-            <Flex direction="column" gridGap={8} p={gutter}>
+            <Flex direction="column" gridGap={4} p={gutter}>
               <Flex gridGap={5}>
                 <CheckInFormFieldCurrentProgress keyResultID={keyResultID} />
                 <CheckInFormFieldNewProgress keyResultID={keyResultID} isLoading={loading} />
@@ -147,7 +147,11 @@ const CheckInForm = ({
 
               <CheckInFormFieldComment keyResultID={keyResultID} />
 
-              <Actions isLoading={loading} onCancel={handleCancel} />
+              <Actions
+                isLoading={loading}
+                onCancel={handleCancel}
+                showCancelButton={Boolean(onCancel)}
+              />
             </Flex>
           </FormControl>
         </Form>

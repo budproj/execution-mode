@@ -17,7 +17,7 @@ const KeyResultSectionTimelineCardCheckInConfidenceTag = ({
   const [confidenceTag] = useConfidenceTag(confidence)
 
   const isLoaded = Boolean(confidence)
-  const colorScheme = difference ? confidenceTag.colors.scheme : 'gray'
+  const colorScheme = difference ? confidenceTag.color.scheme : 'gray'
   const arrowType = difference && difference > 0 ? 'increase' : 'decrease'
 
   return (
@@ -29,7 +29,7 @@ const KeyResultSectionTimelineCardCheckInConfidenceTag = ({
       </Skeleton>
 
       {/* eslint-disable-next-line unicorn/no-null */}
-      {difference ? <StatArrow type={arrowType} color={confidenceTag.colors.primary} /> : null}
+      {difference ? <StatArrow type={arrowType} color={confidenceTag.color.primary} /> : null}
     </Flex>
   )
 }

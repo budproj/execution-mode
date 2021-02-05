@@ -22,7 +22,7 @@ const KeyResultListBodyColumnConfidenceLevelColor = ({
 
   return (
     <KeyResultListBodyColumnBase p={0}>
-      <Box borderRadius="full" maxW="5px" minH="60px" bg={confidenceTag.colors.primary} />
+      <Box borderRadius="full" maxW="5px" minH="60px" bg={confidenceTag.color.primary} />
     </KeyResultListBodyColumnBase>
   )
 }

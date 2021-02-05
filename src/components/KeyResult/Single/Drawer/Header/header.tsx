@@ -47,41 +47,12 @@ const KeyResultDrawerHeader = ({
 
   return (
     <Box position="sticky" top={0} bg="white" zIndex={theme.zIndices.tooltip + 1}>
-      <DrawerHeader bg="blue.50" py={8}>
-        <Box maxW="90%">
-          <KeyResultSingleTitle keyResultID={keyResultID} />
-        </Box>
-
-        <DrawerCloseButton
-          color="gray.300"
-          _hover={{ bg: 'transparent', color: 'brand.400' }}
-          fontSize="12px"
-          position="absolute"
-          top={21}
-          right={21}
-        >
-          <CloseIcon
-            title={intl.formatMessage(messages.closeIconTitle)}
-            desc={intl.formatMessage(messages.closeIconDesc)}
-            fill="currentColor"
-          />
-        </DrawerCloseButton>
+      <DrawerHeader bg="blue.50" py={4} borderColor="gray.200" borderBottomWidth={1}>
+        <KeyResultSingleTitle keyResultID={keyResultID} />
       </DrawerHeader>
 
-      <Skeleton isLoaded={isLoaded} minH="8px">
-        <Flex>
-          <SliderWithFilledTrack
-            trackRadius={0}
-            trackColor={confidenceTag.colors.primary}
-            value={draftValue}
-            min={keyResult?.initialValue}
-            max={keyResult?.goal}
-          />
-        </Flex>
-      </Skeleton>
-
       <Collapse in={showCheckInButton}>
-        <Box pb={4} pt={5} px={6}>
+        <Box pb={2} pt={4} px={6}>
           <KeyResultSectionCheckIn keyResultID={keyResultID} />
         </Box>
       </Collapse>

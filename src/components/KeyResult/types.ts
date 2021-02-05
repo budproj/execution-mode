@@ -19,6 +19,16 @@ export interface KeyResultCheckIn {
   parent?: KeyResultCheckIn
 }
 
+export interface KeyResultComment {
+  id: string
+  text: string
+  createdAt: string
+  updatedAt: string
+  user: User
+  keyResult: KeyResult
+  keyResultId: KeyResult['id']
+}
+
 export interface KeyResultCustomList {
   id: string
   createdAt: string

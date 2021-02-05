@@ -75,7 +75,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
       <ProgressSliderSliderWithReference
         ref={forwardedReference}
         value={draftValue}
-        trackColor={confidenceTag?.colors.primary}
+        trackColor={confidenceTag?.color.primary}
         min={initialValue as KeyResult['initialValue']}
         max={goal as KeyResult['goal']}
         step={step}

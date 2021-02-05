@@ -76,8 +76,8 @@ type FontTokens = {
 }
 
 const colors: ColorTokens = {
-  gray50: '#F5F8FC',
-  gray100: '#DDE5EE',
+  gray50: '#FAFAFA',
+  gray100: '#F1F3F6',
   gray200: '#CBCFD9',
   gray300: '#B8C5D4',
   gray400: '#757F99',
@@ -109,7 +109,7 @@ const colors: ColorTokens = {
   cyan800: '#0F3E64',
   cyan900: '#071F32',
 
-  green50: '#E9FAf4',
+  green50: '#EAFAF4',
   green100: '#BDEFDD',
   green200: '#92E5C6',
   green300: '#66DBAF',
@@ -120,18 +120,18 @@ const colors: ColorTokens = {
   green800: '#126647',
   green900: '#0B3D2A',
 
-  yellow50: '#FFFDF6',
-  yellow100: '#FFF7E0',
-  yellow200: '#FFF0C1',
-  yellow300: '#FFE8A2',
-  yellow400: '#FFE183',
-  yellow500: '#FFD964',
+  yellow50: '#FFF7E0',
+  yellow100: '#FFF0C1',
+  yellow200: '#FFE8A2',
+  yellow300: '#FFE183',
+  yellow400: '#FFD964',
+  yellow500: '#C19A22',
   yellow600: '#E6C35A',
   yellow700: '#B39846',
   yellow800: '#806D32',
   yellow900: '#4C411E',
 
-  red50: '#FFF5F6',
+  red50: '#FFF0F1',
   red100: '#FFDFE1',
   red200: '#FFC0C3',
   red300: '#FFA0A6',

@@ -7,7 +7,7 @@ import messages from './messages'
 
 export interface ConfidenceTag {
   messages: ConfidenceTagMessages
-  colors: ConfidenceTagColors
+  color: ConfidenceTagColor
 }
 
 export interface ConfidenceTagMessages {
@@ -16,7 +16,7 @@ export interface ConfidenceTagMessages {
   icon: string
 }
 
-export interface ConfidenceTagColors {
+export interface ConfidenceTagColor {
   scheme: string
   primary: string
   light: string
@@ -70,10 +70,10 @@ export const useConfidenceTag = (
         long: intl.formatMessage(messages.highLong),
         icon: intl.formatMessage(messages.highIcon),
       },
-      colors: {
+      color: {
         scheme: 'green',
         primary: 'green.500',
-        light: 'green.100',
+        light: 'green.50',
       },
     },
 
@@ -83,10 +83,10 @@ export const useConfidenceTag = (
         long: intl.formatMessage(messages.mediumLong),
         icon: intl.formatMessage(messages.mediumIcon),
       },
-      colors: {
+      color: {
         scheme: 'yellow',
         primary: 'yellow.500',
-        light: 'yellow.100',
+        light: 'yellow.50',
       },
     },
 
@@ -96,10 +96,10 @@ export const useConfidenceTag = (
         long: intl.formatMessage(messages.lowLong),
         icon: intl.formatMessage(messages.lowIcon),
       },
-      colors: {
+      color: {
         scheme: 'red',
         primary: 'red.500',
-        light: 'red.100',
+        light: 'red.50',
       },
     },
 
@@ -109,7 +109,7 @@ export const useConfidenceTag = (
         long: intl.formatMessage(messages.barrierLong),
         icon: intl.formatMessage(messages.barrierIcon),
       },
-      colors: {
+      color: {
         scheme: 'brand',
         primary: 'brand.500',
         light: 'brand.100',

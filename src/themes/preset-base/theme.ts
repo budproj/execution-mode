@@ -100,6 +100,20 @@ const colors = {
 const theme = extendTheme({
   colors,
 
+  styles: {
+    global: (props) => ({
+      ':root': {
+        fontSize: '14px',
+      },
+
+      [`@media (min-width: ${props.theme.breakpoints[5]})`]: {
+        ':root': {
+          fontSize: '16px',
+        },
+      },
+    }),
+  },
+
   components: {
     Button,
     Skeleton,
@@ -129,6 +143,14 @@ const theme = extendTheme({
     none: 'none',
     'dark-lg':
       'rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px',
+  },
+
+  sizes: {
+    xs: '16rem',
+    sm: '20rem',
+    md: '24rem',
+    lg: '28rem',
+    xl: '32rem',
   },
 })
 

@@ -1,9 +1,8 @@
-import { Skeleton, Button, Collapse, Flex, Heading, IconButton } from '@chakra-ui/react'
+import { Skeleton, Button, Collapse, Flex, Heading } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import CloseIcon from 'src/components/Icon/Close'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
@@ -40,30 +39,23 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
   }
 
   return canUpdate ? (
-    <Skeleton isLoaded={isLoaded}>
-      <Collapse animateOpacity in={!isOpen}>
-        <Button variant="outline" w="100%" borderRadius="full" onClick={handleOpen}>
-          {intl.formatMessage(messages.button)}
+    <Flex direction="column" gridGap={4}>
+      <Skeleton isLoaded={isLoaded}>
+        <Button
+          variant="solid"
+          w="100%"
+          onClick={isOpen ? handleClose : handleOpen}
+          colorScheme={isOpen ? 'gray' : 'brand'}
+        >
+          {intl.formatMessage(isOpen ? messages.buttonLabelClose : messages.buttonLabelOpen)}
         </Button>
-      </Collapse>
+      </Skeleton>
       <Collapse animateOpacity in={isOpen}>
         <KeyResultSectionTimelineCardBase>
-          <Flex>
+          <Flex pb={4}>
             <Heading fontSize="18px" fontWeight={700} color="gray.600" flexGrow={1}>
               {intl.formatMessage(messages.formTitle)}
             </Heading>
-
-            <IconButton
-              aria-label={intl.formatMessage(messages.closeIconAlt)}
-              icon={
-                <CloseIcon
-                  title={intl.formatMessage(messages.closeIconTitle)}
-                  desc={intl.formatMessage(messages.closeIconAlt)}
-                  fill="gray.200"
-                />
-              }
-              onClick={handleClose}
-            />
           </Flex>
 
           <CheckInForm
@@ -71,11 +63,10 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
             isCommentAlwaysEnabled
             keyResultID={keyResultID}
             afterSubmit={handleClose}
-            onCancel={handleClose}
           />
         </KeyResultSectionTimelineCardBase>
       </Collapse>
-    </Skeleton>
+    </Flex>
   ) : // eslint-disable-next-line unicorn/no-null
   null
 }

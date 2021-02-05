@@ -43,14 +43,19 @@ const SelectMenu = ({
         color="gray.400"
         borderRadius={4}
         fontWeight={300}
+        py={6}
+        pl={2}
+        pr={5}
         rightIcon={
           <Stack direction="row" alignItems="center">
             {isLoading && <Spinner size="sm" color="gray.100" />}
-            <ChevronDownIcon desc={intl.formatMessage(messages.iconChevronDownDesc)} />
+            <ChevronDownIcon
+              desc={intl.formatMessage(messages.iconChevronDownDesc)}
+              fontSize="12px"
+            />
           </Stack>
         }
         transition="none"
-        py="1.15rem"
         _hover={{ span: { color: 'gray.400' } } as any}
       >
         {placeholder}
