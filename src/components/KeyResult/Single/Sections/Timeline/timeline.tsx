@@ -17,14 +17,14 @@ export interface KeyResultSectionTimelineProperties {
   scrollBarRef?: PerfectScrollbar | null
 }
 
-const checkInsSelector = buildPartialSelector<KeyResult['keyResultCheckIns']>('keyResultCheckIns')
+const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 
 const KeyResultSectionTimeline = ({
   keyResultID,
   scrollBarRef,
 }: KeyResultSectionTimelineProperties) => {
   const intl = useIntl()
-  const checkIns = useRecoilValue(checkInsSelector(keyResultID))
+  const timeline = useRecoilValue(timelineSelector(keyResultID))
   const isLoaded = useRecoilValue(keyResultTimelineFetched(keyResultID))
 
   if (isLoaded && scrollBarRef) scrollBarRef.updateScroll()
@@ -35,7 +35,7 @@ const KeyResultSectionTimeline = ({
         {intl.formatMessage(messages.title)}
       </Heading>
       {isLoaded ? (
-        <KeyResultSectionTimelineContent checkIns={checkIns} />
+        <KeyResultSectionTimelineContent entries={timeline} />
       ) : (
         <KeyResultSectionTimelineSkeleton />
       )}

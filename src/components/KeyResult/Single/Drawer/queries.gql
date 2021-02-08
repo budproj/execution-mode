@@ -8,22 +8,23 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     policies(resource: KEY_RESULT_CHECK_IN) {
       create
     }
-    keyResultCheckIns {
-      id
-      confidence
-      relativePercentageProgress
-      comment
-      createdAt
-      user {
-        fullName
-      }
-      parent {
-        confidence
-        relativePercentageProgress
-      }
-    }
     timeline {
       ... on KeyResultCheckIn {
+        id
+        confidence
+        relativePercentageProgress
+        comment
+        createdAt
+        user {
+          fullName
+        }
+        parent {
+          confidence
+          relativePercentageProgress
+        }
+      }
+
+      ... on KeyResultComment {
         id
       }
     }

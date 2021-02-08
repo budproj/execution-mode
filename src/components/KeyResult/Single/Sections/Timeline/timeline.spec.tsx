@@ -25,16 +25,16 @@ describe('component expectations', () => {
   })
 
   it('displays the content with the check-ins if it was loaded', () => {
-    const noOfFakeCheckIns = faker.random.number({ max: 100 })
-    const fakeCheckIns = [...new Array(noOfFakeCheckIns)].map(() => faker.helpers.userCard)
+    const noOfFakeEntries = faker.random.number({ max: 100 })
+    const fakeEntries = [...new Array(noOfFakeEntries)].map(() => faker.helpers.userCard)
 
-    const stub = sinon.stub(recoil, 'useRecoilValue').returns(fakeCheckIns)
+    const stub = sinon.stub(recoil, 'useRecoilValue').returns(fakeEntries)
     stub.withArgs(selectTimelineFetchedMatcher).returns(true)
 
     const result = enzyme.shallow(<KeyResultSectionTimeline />)
 
     const content = result.find('KeyResultSectionTimelineContent')
 
-    expect(content.prop('checkIns')).toEqual(fakeCheckIns)
+    expect(content.prop('entries')).toEqual(fakeEntries)
   })
 })

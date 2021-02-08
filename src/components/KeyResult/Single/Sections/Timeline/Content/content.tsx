@@ -1,20 +1,24 @@
 import React from 'react'
 
 import { EmptyState } from 'src/components/Base'
-import { KeyResultSectionTimelineCardCheckIn } from 'src/components/KeyResult/Single/Sections/Timeline/Cards'
-import { KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 
+import KeyResultSectionTimelineContentEntry from './entry'
 import messages from './messages'
 
 export interface KeyResultSectionTimelineContentProperties {
-  checkIns?: KeyResultCheckIn[]
+  entries?: KeyResult['timeline']
 }
 
-const KeyResultSectionTimelineContent = ({ checkIns }: KeyResultSectionTimelineContentProperties) =>
-  checkIns && checkIns.length > 0 ? (
+const KeyResultSectionTimelineContent = ({ entries }: KeyResultSectionTimelineContentProperties) =>
+  entries && entries.length > 0 ? (
     <>
-      {checkIns.map((checkIn) => (
-        <KeyResultSectionTimelineCardCheckIn key={checkIn.id} {...checkIn} />
+      {entries.map((entry) => (
+        <KeyResultSectionTimelineContentEntry
+          key={entry.id}
+          typename={entry.__typename}
+          data={entry}
+        />
       ))}
     </>
   ) : (

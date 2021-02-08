@@ -47,6 +47,7 @@ const graphQLHandler = (mirageSchema: unknown) =>
         timeline: (
           parent: ModelInstance<any>,
           { limit, skip }: QueryKeyResultTimelineArguments,
+          context: any,
         ) => {
           const keyResultCheckIns = parent.keyResultCheckIns.models.map(
             (keyResultCheckIn: ModelInstance<KeyResultCheckIn>) => ({
@@ -69,7 +70,15 @@ const graphQLHandler = (mirageSchema: unknown) =>
             : orderedTimelineEntries
           const limitedEntries = limit ? skippedEntries.slice(0, limit) : skippedEntries
 
-          return limitedEntries
+          const limitedEntriesWithRelations = limitedEntries.map((entry) => ({
+            ...entry,
+            /* eslint-disable unicorn/no-fn-reference-in-iterator */
+            user: context.mirageSchema.users.find(entry.userId),
+            keyResult: context.mirageSchema.keyResults.find(entry.keyResultId),
+            /* eslint-enable unicorn/no-fn-reference-in-iterator */
+          }))
+
+          return limitedEntriesWithRelations
         },
       },
 

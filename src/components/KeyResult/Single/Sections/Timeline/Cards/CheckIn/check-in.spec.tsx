@@ -13,9 +13,12 @@ describe('component expectations', () => {
       confidence: previousConfidence,
     } as any
 
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckIn confidence={currentConfidence} parent={parent} />,
-    )
+    const fakeData = {
+      parent,
+      confidence: currentConfidence,
+    }
+
+    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
@@ -30,9 +33,12 @@ describe('component expectations', () => {
       confidence: previousConfidence,
     } as any
 
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckIn confidence={currentConfidence} parent={parent} />,
-    )
+    const fakeData = {
+      parent,
+      confidence: currentConfidence,
+    }
+
+    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
@@ -46,9 +52,12 @@ describe('component expectations', () => {
       confidence,
     } as any
 
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckIn confidence={confidence} parent={parent} />,
-    )
+    const fakeData = {
+      parent,
+      confidence,
+    }
+
+    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
@@ -63,9 +72,12 @@ describe('component expectations', () => {
       confidence: previousConfidence,
     } as any
 
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckIn confidence={currentConfidence} parent={parent} />,
-    )
+    const fakeData = {
+      parent,
+      confidence: currentConfidence,
+    }
+
+    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
@@ -81,9 +93,11 @@ describe('component expectations', () => {
   })
 
   it('displays the comment section if there is a comment', () => {
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckIn comment={faker.lorem.paragraph()} />,
-    )
+    const fakeData = {
+      comment: faker.lorem.paragraph(),
+    }
+
+    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
 
     const comment = result.find('KeyResultSectionTimelineCardCheckInComment')
 
@@ -93,10 +107,11 @@ describe('component expectations', () => {
   it('passes a 0 difference when previous check-in is null', () => {
     const confidence = faker.random.number()
 
-    const result = enzyme.shallow(
-      // eslint-disable-next-line unicorn/no-null
-      <KeyResultSectionTimelineCardCheckIn confidence={confidence} parent={null} />,
-    )
+    const fakeData = {
+      confidence,
+    }
+
+    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 

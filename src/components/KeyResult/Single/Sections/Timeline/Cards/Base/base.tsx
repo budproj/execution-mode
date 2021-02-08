@@ -1,4 +1,4 @@
-import { Stat, BorderProps } from '@chakra-ui/react'
+import { Box, BorderProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
 export interface KeyResultSectionTimelineCardBaseProperties {
@@ -12,7 +12,7 @@ const KeyResultSectionTimelineCardBase = ({
   borderRadius,
   borderBottomRadius,
 }: KeyResultSectionTimelineCardBaseProperties) => (
-  <Stat
+  <Box
     p={4}
     borderWidth={1}
     borderColor="gray.100"
@@ -20,7 +20,7 @@ const KeyResultSectionTimelineCardBase = ({
     borderBottomRadius={borderBottomRadius ?? borderRadius}
   >
     {children}
-  </Stat>
+  </Box>
 )
 
 KeyResultSectionTimelineCardBase.defaultProps = {

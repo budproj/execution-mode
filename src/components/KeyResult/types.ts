@@ -7,6 +7,7 @@ import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
 import { KEY_RESULT_FORMAT } from './constants'
 
 export interface KeyResultCheckIn {
+  __typename: string
   id: string
   progress: number
   confidence: number
@@ -20,6 +21,7 @@ export interface KeyResultCheckIn {
 }
 
 export interface KeyResultComment {
+  __typename: string
   id: string
   text: string
   createdAt: string
@@ -56,6 +58,7 @@ export interface KeyResult {
   policies: AuthzPolicies
   description?: string
   keyResultCheckIns?: KeyResultCheckIn[]
+  timeline: Array<KeyResultCheckIn | KeyResultComment>
 }
 
 export type KeyResultsHashmap = Record<string, KeyResult>

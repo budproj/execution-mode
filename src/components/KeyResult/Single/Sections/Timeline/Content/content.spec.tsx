@@ -5,32 +5,30 @@ import React from 'react'
 import KeyResultSectionTimelineContent from './content'
 
 describe('component expectations', () => {
-  it('displays the empty state if no check-ins were provided', () => {
-    const result = enzyme.shallow(<KeyResultSectionTimelineContent checkIns={[]} />)
+  it('displays the empty state if no entries were provided', () => {
+    const result = enzyme.shallow(<KeyResultSectionTimelineContent entries={[]} />)
 
     const emptyState = result.find('EmptyState')
 
     expect(emptyState.length).toEqual(1)
   })
 
-  it('displays one card for each loaded check-in', () => {
-    const noOfFakeCheckIns = faker.random.number({ max: 100 })
-    expect.assertions(noOfFakeCheckIns)
+  it('displays one card for each loaded entry', () => {
+    const noOfFakeEntries = faker.random.number({ max: 100 })
+    expect.assertions(noOfFakeEntries)
 
-    const fakeCheckIns = [...new Array(noOfFakeCheckIns)].map(() => ({
+    const fakeEntries = [...new Array(noOfFakeEntries)].map(() => ({
       id: faker.random.uuid(),
       ...faker.helpers.userCard(),
     }))
 
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineContent checkIns={fakeCheckIns as any} />,
-    )
+    const result = enzyme.shallow(<KeyResultSectionTimelineContent entries={fakeEntries as any} />)
 
-    const cards = result.find('KeyResultSectionTimelineCardCheckIn')
-    cards.map((checkInCard, index) => {
-      const expectedCheckIn = fakeCheckIns[index]
+    const cards = result.find('KeyResultSectionTimelineContentEntry')
+    cards.map((entryCard, index) => {
+      const expectedCheckIn = fakeEntries[index]
 
-      return expect(checkInCard.props()).toMatchObject(expectedCheckIn)
+      return expect(entryCard.prop('data')).toMatchObject(expectedCheckIn)
     })
   })
 })

@@ -1,10 +1,9 @@
-import { Box, Flex, StatLabel } from '@chakra-ui/react'
+import { Box, Stat, Flex, StatLabel } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
-import { User } from 'src/components/User/types'
 
 import KeyResultSectionTimelineCardCheckInComment from './comment'
 import KeyResultSectionTimelineCardCheckInHelpText from './help-text'
@@ -14,32 +13,23 @@ import KeyResultSectionTimelineCardCheckInProgressBar from './progress-bar'
 import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative-confidence-tag'
 
 export interface KeyResultSectionTimelineCardCheckInProperties {
-  relativePercentageProgress?: KeyResultCheckIn['relativePercentageProgress']
-  confidence?: KeyResultCheckIn['confidence']
-  comment?: KeyResultCheckIn['comment']
-  createdAt?: KeyResultCheckIn['createdAt']
-  user?: User
-  parent?: KeyResultCheckIn | null
+  data?: Partial<KeyResultCheckIn>
 }
 
 const KeyResultSectionTimelineCardCheckIn = ({
-  relativePercentageProgress,
-  confidence,
-  comment,
-  createdAt,
-  user,
-  parent,
+  data,
 }: KeyResultSectionTimelineCardCheckInProperties) => {
   const intl = useIntl()
 
-  const confidenceDifference = confidence && parent ? confidence - parent.confidence : 0
+  const confidenceDifference =
+    data?.confidence && data?.parent ? data.confidence - data.parent.confidence : 0
 
   return (
-    <Box>
+    <Stat>
       <KeyResultSectionTimelineCardBase borderBottomRadius={0}>
         <Flex direction="column" gridGap={4}>
           <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
-            confidence={confidence}
+            confidence={data?.confidence}
             difference={confidenceDifference}
           />
 
@@ -48,24 +38,27 @@ const KeyResultSectionTimelineCardCheckIn = ({
               {intl.formatMessage(messages.title)}
             </StatLabel>
 
-            <KeyResultSectionTimelineCardCheckInHelpText user={user} createdAt={createdAt} />
+            <KeyResultSectionTimelineCardCheckInHelpText
+              user={data?.user}
+              createdAt={data?.createdAt}
+            />
           </Box>
 
           <KeyResultSectionTimelineCardCheckInProgress
-            relativePercentageProgress={relativePercentageProgress}
-            confidence={confidence}
-            parent={parent}
+            relativePercentageProgress={data?.relativePercentageProgress}
+            confidence={data?.confidence}
+            parent={data?.parent}
           />
 
-          {comment && <KeyResultSectionTimelineCardCheckInComment comment={comment} />}
+          {data?.comment && <KeyResultSectionTimelineCardCheckInComment comment={data.comment} />}
         </Flex>
       </KeyResultSectionTimelineCardBase>
 
       <KeyResultSectionTimelineCardCheckInProgressBar
-        relativePercentageProgress={relativePercentageProgress}
-        confidence={confidence}
+        relativePercentageProgress={data?.relativePercentageProgress}
+        confidence={data?.confidence}
       />
-    </Box>
+    </Stat>
   )
 }
 
