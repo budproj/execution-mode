@@ -97,10 +97,10 @@ describe('component lifecycle', () => {
         long: 'Média Confiança',
         icon: 'Um círculo amarelo, indicando que a confiançá é média',
       },
-      colors: {
+      color: {
         scheme: 'yellow',
         primary: 'yellow.500',
-        light: 'yellow.100',
+        light: 'yellow.50',
       },
     }
 

@@ -112,7 +112,7 @@ export const useConfidenceTag = (
       color: {
         scheme: 'brand',
         primary: 'brand.500',
-        light: 'brand.100',
+        light: 'brand.50',
       },
     },
   }

@@ -74,7 +74,7 @@ describe('component expectations', () => {
 
     const result = enzyme.shallow(<DynamicIcon title={faker.random.word()} />)
 
-    const box = result.find('Box')
+    const box = result.find('Flex')
 
     expect(box.prop('bg')).toEqual(fakeColor)
   })

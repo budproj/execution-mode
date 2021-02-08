@@ -4,8 +4,9 @@ type LastUpdateTextMessage = 'lastUpdateAt' | 'emptyStateMessage'
 
 export default defineMessages<LastUpdateTextMessage>({
   lastUpdateAt: {
-    defaultMessage: 'Última atualização {unit, select, fallback {em} other {}} {date} por {author}',
-    id: 'u9WSjo',
+    defaultMessage:
+      'Última atualização {unit, select, fallback {em {date}} other {{date}}} por {author}',
+    id: 'TDt9po',
     description: 'This message displays the latest report status for a given component',
   },
 

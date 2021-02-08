@@ -4,11 +4,12 @@ import faker from 'faker'
 import React from 'react'
 import sinon from 'sinon'
 
-import useRelativeDate, { RelativeDateUnit } from './hook'
+import { RELATIVE_DATE_UNIT } from './constants'
+import useRelativeDate from './hook'
 
 interface TestComponentProperties {
   fakeDate: Date
-  unit?: RelativeDateUnit
+  unit?: RELATIVE_DATE_UNIT
 }
 
 const TestComponent = ({ fakeDate, unit }: TestComponentProperties) => {
@@ -382,7 +383,9 @@ describe('manual resolution of relative date', () => {
     const clock = sinon.useFakeTimers()
     clock.setSystemTime(fakeRootDate)
 
-    const result = enzyme.shallow(<TestComponent fakeDate={fakeRootDate} unit="minute" />)
+    const result = enzyme.shallow(
+      <TestComponent fakeDate={fakeRootDate} unit={RELATIVE_DATE_UNIT.MINUTE} />,
+    )
 
     const date = result.find('p').text()
 
@@ -397,7 +400,9 @@ describe('manual resolution of relative date', () => {
     const clock = sinon.useFakeTimers()
     clock.setSystemTime(fakeRootDate)
 
-    const result = enzyme.shallow(<TestComponent fakeDate={fakeRootDate} unit="hour" />)
+    const result = enzyme.shallow(
+      <TestComponent fakeDate={fakeRootDate} unit={RELATIVE_DATE_UNIT.HOUR} />,
+    )
 
     const date = result.find('p').text()
 
@@ -412,7 +417,9 @@ describe('manual resolution of relative date', () => {
     const clock = sinon.useFakeTimers()
     clock.setSystemTime(fakeRootDate)
 
-    const result = enzyme.shallow(<TestComponent fakeDate={fakeRootDate} unit="day" />)
+    const result = enzyme.shallow(
+      <TestComponent fakeDate={fakeRootDate} unit={RELATIVE_DATE_UNIT.DAY} />,
+    )
 
     const date = result.find('p').text()
 
@@ -427,7 +434,9 @@ describe('manual resolution of relative date', () => {
     const clock = sinon.useFakeTimers()
     clock.setSystemTime(fakeRootDate)
 
-    const result = enzyme.shallow(<TestComponent fakeDate={fakeRootDate} unit="week" />)
+    const result = enzyme.shallow(
+      <TestComponent fakeDate={fakeRootDate} unit={RELATIVE_DATE_UNIT.WEEK} />,
+    )
 
     const date = result.find('p').text()
 
@@ -442,7 +451,9 @@ describe('manual resolution of relative date', () => {
     const clock = sinon.useFakeTimers()
     clock.setSystemTime(fakeRootDate)
 
-    const result = enzyme.shallow(<TestComponent fakeDate={fakeRootDate} unit="month" />)
+    const result = enzyme.shallow(
+      <TestComponent fakeDate={fakeRootDate} unit={RELATIVE_DATE_UNIT.MONTH} />,
+    )
 
     const date = result.find('p').text()
 

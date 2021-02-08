@@ -17,7 +17,7 @@ describe('component expectations', () => {
       <KeyResultSectionTimelineCardCheckIn confidence={currentConfidence} parent={parent} />,
     )
 
-    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInConfidenceTag')
+    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
     expect(confidenceTag.prop('difference')).toEqual(currentConfidence - previousConfidence)
   })
@@ -34,7 +34,7 @@ describe('component expectations', () => {
       <KeyResultSectionTimelineCardCheckIn confidence={currentConfidence} parent={parent} />,
     )
 
-    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInConfidenceTag')
+    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
     expect(confidenceTag.prop('difference')).toEqual(100)
   })
@@ -50,7 +50,7 @@ describe('component expectations', () => {
       <KeyResultSectionTimelineCardCheckIn confidence={confidence} parent={parent} />,
     )
 
-    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInConfidenceTag')
+    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
     expect(confidenceTag.prop('difference')).toEqual(0)
   })
@@ -67,7 +67,7 @@ describe('component expectations', () => {
       <KeyResultSectionTimelineCardCheckIn confidence={currentConfidence} parent={parent} />,
     )
 
-    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInConfidenceTag')
+    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
     expect(confidenceTag.prop('difference')).toEqual(currentConfidence - previousConfidence)
   })
@@ -98,7 +98,7 @@ describe('component expectations', () => {
       <KeyResultSectionTimelineCardCheckIn confidence={confidence} parent={null} />,
     )
 
-    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInConfidenceTag')
+    const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
     expect(confidenceTag.prop('difference')).toEqual(0)
   })
