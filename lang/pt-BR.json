@@ -1,4 +1,8 @@
 {
+  "+G9goh": {
+    "defaultMessage": "Ver mais...",
+    "description": "This text is displayed in the button that expands a truncated text"
+  },
   "+IK11v": {
     "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
     "description": "This message is the alt message for our box drawing in the unknown error page"
@@ -194,6 +198,10 @@
   "HsEMwj": {
     "defaultMessage": "Uma seta longa para a direita, separando o progresso anterior (à esquerda) do novo progress do check-in (à direita)",
     "description": "This text is displayed to screen readers, explaining the right arrow icon in our check-in card"
+  },
+  "I+MSuS": {
+    "defaultMessage": "Ver menos...",
+    "description": "This text is displayed in the button that collapses the truncated text"
   },
   "I5aN4R": {
     "defaultMessage": "Explorar",

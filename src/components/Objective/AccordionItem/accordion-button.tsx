@@ -64,7 +64,7 @@ const ObjectiveAccordionButton = ({
       </Skeleton>
 
       <Flex flexGrow={1} justifyContent="flex-end">
-        <SkeletonCircle isLoaded={isLoaded} size={14}>
+        <SkeletonCircle isLoaded={isLoaded} size="50px">
           <CircularProgress
             value={roundedProgress}
             thickness={6}
