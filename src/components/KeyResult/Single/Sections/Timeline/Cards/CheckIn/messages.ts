@@ -10,8 +10,9 @@ export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
   },
 
   helperText: {
-    defaultMessage: 'Realizado por <highlight>{author}</highlight> às {hour}',
-    id: 'r0jTFR',
+    defaultMessage:
+      'Realizado por <highlight>{author}</highlight> {unit, select, fallback {em} other {}} {time}',
+    id: 'Ykg0Jh',
     description: 'This text is displayed as a helper text, below the check-in card title',
   },
 

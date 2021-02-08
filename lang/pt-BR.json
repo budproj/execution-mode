@@ -111,10 +111,6 @@
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
     "description": "The page description that is displayed in Google and screen readers"
   },
-  "8G2Cwy": {
-    "defaultMessage": "Última atualização {date} por {author}",
-    "description": "This message displays the latest report status for a given component"
-  },
   "8LTdv4": {
     "defaultMessage": "Objetivo",
     "description": "The text of the table head related to the Objective column"
@@ -363,6 +359,10 @@
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
   },
+  "Ykg0Jh": {
+    "defaultMessage": "Realizado por <highlight>{author}</highlight> {unit, select, fallback {em} other {}} {time}",
+    "description": "This text is displayed as a helper text, below the check-in card title"
+  },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
     "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
@@ -495,10 +495,6 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
-  "r0jTFR": {
-    "defaultMessage": "Realizado por <highlight>{author}</highlight> às {hour}",
-    "description": "This text is displayed as a helper text, below the check-in card title"
-  },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
     "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
@@ -526,6 +522,10 @@
   "u7Yaxx": {
     "defaultMessage": "Responsável",
     "description": "The text of the table head related to the Owner column"
+  },
+  "u9WSjo": {
+    "defaultMessage": "Última atualização {unit, select, fallback {em} other {}} {date} por {author}",
+    "description": "This message displays the latest report status for a given component"
   },
   "uXQE/x": {
     "defaultMessage": "Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.",
