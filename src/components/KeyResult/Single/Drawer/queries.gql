@@ -22,15 +22,22 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
           confidence
           relativePercentageProgress
         }
+        policies {
+          delete
+        }
       }
 
       ... on KeyResultComment {
         id
         text
         createdAt
+        keyResultId
         user {
           fullName
           picture
+        }
+        policies {
+          delete
         }
       }
     }

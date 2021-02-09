@@ -74,4 +74,6 @@ export { default as ArrowRightLong } from './ArrowRightLong'
 
 export { default as PaperPlane } from './PaperPlane'
 
+export { default as TreeDots } from './TreeDots'
+
 export * from './types'

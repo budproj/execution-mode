@@ -14,6 +14,7 @@ export interface KeyResultCheckIn {
   progress: number
   confidence: number
   relativePercentageProgress: number
+  policies: AuthzPolicies
   createdAt: string
   keyResult: KeyResult
   keyResultId: KeyResult['id']
@@ -26,6 +27,7 @@ export interface KeyResultComment {
   __typename: string
   id: string
   text: string
+  policies: AuthzPolicies
   createdAt: string
   updatedAt: string
   user: User

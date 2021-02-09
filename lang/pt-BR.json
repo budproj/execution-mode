@@ -231,6 +231,10 @@
     "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
     "description": "This message is the alt message for our box drawing in the not found error page"
   },
+  "KdYFbe": {
+    "defaultMessage": "Apagar",
+    "description": "This text is displayed in our menu, as an anchor to remove that given card"
+  },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
     "description": "This message is displayed below the current progress thumb"
@@ -474,6 +478,10 @@
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
+  },
+  "lI5vJI": {
+    "defaultMessage": "Um ícone com três pontos. Ao clicar nele você abrirá algumas opções",
+    "description": "This text is displayed as the tree dots desc text in our timeline cards"
   },
   "lMYmAU": {
     "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",

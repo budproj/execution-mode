@@ -9,3 +9,5 @@ export { default as selectCurrentConfidence } from './current-confidence'
 export { default as selectLatestCheckIn } from './latest-check-in'
 
 export { default as selectLatestTimelineEntry } from './latest-timeline-entry'
+
+export { default as removeTimelineEntry } from './remove-timeline-entry'
