@@ -1,4 +1,4 @@
-import { Flex, Skeleton, Text } from '@chakra-ui/react'
+import { Flex, Heading, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -24,9 +24,9 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       </Skeleton>
 
       <Skeleton isLoaded={isTitleLoaded}>
-        <Text color="gray.800" fontSize="md" noOfLines={1}>
+        <Heading color="gray.800" fontSize="md" noOfLines={1} as="h2">
           {title}
-        </Text>
+        </Heading>
       </Skeleton>
     </Flex>
   )

@@ -35,6 +35,7 @@ const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => 
   return (
     <PerfectScrollbar
       ref={(reference) => setScrollBarReference(reference)}
+      style={{ paddingTop: '1rem' }}
       onScrollY={handleScrollYStart}
       onYReachStart={handleScrollYReachedStart}
     >

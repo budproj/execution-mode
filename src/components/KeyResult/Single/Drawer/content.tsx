@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { DrawerContent } from '@chakra-ui/react'
+import { DrawerContent, Flex } from '@chakra-ui/react'
 import deepmerge from 'deepmerge'
 import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -76,9 +76,11 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
 
   return (
     <DrawerContent>
-      <KeyResultDrawerHeader keyResultID={keyResultID} />
-      <KeyResultDrawerBody keyResultID={keyResultID} />
-      <KeyResultDrawerFooter keyResultID={keyResultID} />
+      <Flex direction="column" minH="100%">
+        <KeyResultDrawerHeader keyResultID={keyResultID} />
+        <KeyResultDrawerBody keyResultID={keyResultID} />
+        <KeyResultDrawerFooter keyResultID={keyResultID} />
+      </Flex>
     </DrawerContent>
   )
 }

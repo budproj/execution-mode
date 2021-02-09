@@ -53,6 +53,7 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
         borderBottomWidth={1}
         display="flex"
         alignItems="center"
+        gridGap={2}
       >
         <Box flexGrow={1}>
           <KeyResultSingleTitle keyResultID={keyResultID} />
@@ -65,7 +66,7 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
       </DrawerHeader>
 
       <Collapse unmountOnExit in={shouldShowCheckIn}>
-        <Box p={4}>
+        <Box p={4} pb={0}>
           <KeyResultSectionCheckIn keyResultID={keyResultID} onCompleted={handleCheckInCompleted} />
         </Box>
       </Collapse>
