@@ -7,3 +7,5 @@ export { default as selectCurrentProgress } from './current-progress'
 export { default as selectCurrentConfidence } from './current-confidence'
 
 export { default as selectLatestCheckIn } from './latest-check-in'
+
+export { default as selectLatestTimelineEntry } from './latest-timeline-entry'

@@ -72,4 +72,6 @@ export { default as Flag } from './Flag'
 
 export { default as ArrowRightLong } from './ArrowRightLong'
 
+export { default as PaperPlane } from './PaperPlane'
+
 export * from './types'

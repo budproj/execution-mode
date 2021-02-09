@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
-import { KeyResult } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 import { keyResultDrawerIsCreatingCheckIn } from 'src/state/recoil/key-result/drawer'
 import { selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
@@ -15,9 +15,13 @@ import messages from './messages'
 
 export interface KeyResultSectionCheckInProperties {
   keyResultID?: KeyResult['id']
+  onCompleted?: (data: KeyResultCheckIn) => void
 }
 
-const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInProperties) => {
+const KeyResultSectionCheckIn = ({
+  keyResultID,
+  onCompleted,
+}: KeyResultSectionCheckInProperties) => {
   const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
     keyResultDrawerIsCreatingCheckIn(keyResultID),
   )
@@ -63,6 +67,7 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
             isCommentAlwaysEnabled
             keyResultID={keyResultID}
             afterSubmit={handleClose}
+            onCompleted={onCompleted}
           />
         </KeyResultSectionTimelineCardBase>
       </Collapse>

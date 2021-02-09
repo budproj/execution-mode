@@ -21,16 +21,23 @@ const ExpandableText = ({ text, fontSize, maxCollapsedLength }: ExpandableTextPr
   }
 
   const isTruncatedText = text.length > maxCollapsedLength
+  const shouldTruncateText = !isTruncatedText || (isTruncatedText && isExpanded)
 
   const truncatedText = text.slice(0, maxCollapsedLength)
-  const normalizedText = isTruncatedText && isExpanded ? text : `${truncatedText}...`
+  const normalizedText = shouldTruncateText ? text : `${truncatedText}...`
 
   const paragraphs = normalizedText.split('\n')
 
   return (
     <Box>
       {paragraphs.map((paragraph) => (
-        <Text key={uuidv5(paragraph, uuidv5.URL)} fontSize={fontSize}>
+        <Text
+          key={uuidv5(paragraph, uuidv5.URL)}
+          fontSize={fontSize}
+          _empty={{
+            height: 4,
+          }}
+        >
           {paragraph}
         </Text>
       ))}

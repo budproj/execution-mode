@@ -1,0 +1,11 @@
+mutation CREATE_KEY_RESULT_COMMENT($keyResultCommentInput: KeyResultCommentInput!) {
+  createKeyResultComment(keyResultComment: $keyResultCommentInput) {
+    id
+    text
+    createdAt
+    user {
+      fullName
+      picture
+    }
+  }
+}

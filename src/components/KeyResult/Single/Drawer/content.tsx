@@ -14,6 +14,7 @@ import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
 import { keyResultTimelineFetched } from 'src/state/recoil/key-result/timeline'
 
 import KeyResultDrawerBody from './Body'
+import KeyResultDrawerFooter from './Footer'
 import KeyResultDrawerHeader from './Header'
 import queries from './queries.gql'
 
@@ -77,6 +78,7 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
     <DrawerContent>
       <KeyResultDrawerHeader keyResultID={keyResultID} />
       <KeyResultDrawerBody keyResultID={keyResultID} />
+      <KeyResultDrawerFooter keyResultID={keyResultID} />
     </DrawerContent>
   )
 }

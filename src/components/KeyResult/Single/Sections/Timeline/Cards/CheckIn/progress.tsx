@@ -40,7 +40,7 @@ const KeyResultSectionTimelineCardCheckInProgress = ({
   return (
     <Flex alignItems="center" gridGap={4}>
       <Skeleton isLoaded={isLoaded}>
-        <StatNumber fontSize="2xl" color="gray.100" lineHeight={1}>
+        <StatNumber fontSize="2xl" color="gray.200" lineHeight={1}>
           {intl.formatNumber(normalizedParentProgress, relativePercentageProgressNumberFormat)}
         </StatNumber>
       </Skeleton>

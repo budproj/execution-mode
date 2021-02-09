@@ -34,6 +34,7 @@ export interface CheckInFormProperties {
   keyResultID?: KeyResult['id']
   afterSubmit?: (values: CheckInFormValues) => void
   onCancel?: () => void
+  onCompleted?: (data: KeyResultCheckIn) => void
 }
 
 export interface CheckInFormValues {
@@ -54,6 +55,7 @@ const CheckInForm = ({
   isCommentAlwaysEnabled,
   showGoal,
   onCancel,
+  onCompleted,
 }: CheckInFormProperties) => {
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [currentConfidence, setCurrentConfidence] = useRecoilState(
@@ -66,7 +68,10 @@ const CheckInForm = ({
     queries.CREATE_KEY_RESULT_CHECK_IN,
     {
       ignoreResults: false,
-      onCompleted: (data) => setLatestCheckIn(data.createKeyResultCheckIn),
+      onCompleted: (data) => {
+        setLatestCheckIn(data.createKeyResultCheckIn)
+        if (onCompleted) onCompleted(data.createKeyResultCheckIn)
+      },
     },
   )
 
@@ -79,6 +84,7 @@ const CheckInForm = ({
 
   const refreshFields = (values: CheckInFormValues, actions: FormikHelpers<CheckInFormValues>) => {
     actions?.setFieldValue('currentProgress', values.newProgress)
+    actions?.setFieldValue('newProgress', values.newProgress)
     actions?.setFieldValue('comment', initialValues.comment)
   }
 

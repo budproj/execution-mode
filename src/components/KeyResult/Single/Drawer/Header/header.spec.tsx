@@ -195,4 +195,35 @@ describe('component interactions', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('updates the latest timeline entry with a new check-in when form is completed', () => {
+    const fakeID = faker.random.uuid()
+    const fakeCheckIn = faker.helpers.userCard()
+    const spy = sinon.spy()
+    const fakePolicies = {
+      childEntities: {
+        keyResultCheckIn: {
+          create: 'ALLOW',
+        },
+      },
+    }
+
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectIsScrollingMatcher).returns(true)
+    stub.withArgs(selectPoliciesMatcher).returns(fakePolicies)
+
+    sinon.stub(recoil, 'useRecoilState').returns([true, sinon.fake()])
+    sinon.mock(chakra).expects('useTheme').atLeast(1).returns({ zIndices: {} })
+
+    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
+
+    const wrapper = enzyme.shallow(<KeyResultDrawerHeader keyResultID={fakeID} />)
+
+    const sectionCheckIn = wrapper.find('KeyResultSectionCheckIn')
+    sectionCheckIn.simulate('completed', fakeCheckIn)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeCheckIn)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
 })

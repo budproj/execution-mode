@@ -97,6 +97,39 @@ describe('component interations', () => {
     expect(spyFirstCallArguments).toEqual(expectedArguments)
   })
 
+  it('updates the new progress field upon form submission', async () => {
+    const fakeID = faker.random.word()
+    const fakeProgress = faker.random.number()
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    const spy = sinon.spy()
+
+    stateStub.withArgs(selectCurrentProgressMatcher).returns([faker.random.number(), sinon.fake()])
+    stateStub.returns([undefined, sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    // eslint-disable-next-line @typescript-eslint/await-thenable
+    await formikComponent.simulate(
+      'submit',
+      {
+        newProgress: fakeProgress,
+      },
+      {
+        setFieldValue: spy,
+      },
+    )
+
+    await Promise.resolve()
+
+    const spySecondCallArguments = spy.secondCall.args
+    const expectedArguments = ['newProgress', fakeProgress]
+
+    expect(spySecondCallArguments).toEqual(expectedArguments)
+  })
+
   it('resets the comment field upon form submission', async () => {
     const fakeID = faker.random.word()
     const stateStub = sinon.stub(recoil, 'useRecoilState')
@@ -123,10 +156,10 @@ describe('component interations', () => {
 
     await Promise.resolve()
 
-    const spySecondCallArguments = spy.secondCall.args
+    const spyThirdCallArguments = spy.thirdCall.args
     const expectedArguments = ['comment', '']
 
-    expect(spySecondCallArguments).toEqual(expectedArguments)
+    expect(spyThirdCallArguments).toEqual(expectedArguments)
   })
 
   it('updates the progress report state upon form submission', async () => {

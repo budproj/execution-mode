@@ -27,6 +27,10 @@
     "defaultMessage": "Um ícone de pasta",
     "description": "The desc message for the Folder icon. This icon is used to ilustrate our key results"
   },
+  "/aK0UI": {
+    "defaultMessage": "Um ícone de um avião de papel. Ao clicar nele você irá enviar um comentário",
+    "description": "The alternative text explaining our paper plane icon"
+  },
   "/vJzGe": {
     "defaultMessage": "Um ícone de marcador de página",
     "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
@@ -142,6 +146,10 @@
   "Ba8bU1": {
     "defaultMessage": "Enviar comentário",
     "description": "This label is displayed in the submit button in our drawer"
+  },
+  "CMMxiV": {
+    "defaultMessage": "Enviar comentário",
+    "description": "The title displayed in the tooltip when the user hovers our paper plane icon in our add comment form"
   },
   "CW+HBw": {
     "defaultMessage": "Check-in",

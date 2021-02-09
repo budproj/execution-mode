@@ -26,19 +26,19 @@ const KeyResultSectionTimelineCardCommentHeader = ({
 
   return (
     <Flex alignItems="center" gridGap={4}>
-      <SkeletonCircle isLoaded={isLoaded} size="50px">
-        <Avatar name={fullName} src={picture} />
+      <SkeletonCircle isLoaded={isLoaded} w={10} h={10}>
+        <Avatar name={fullName} src={picture} w={10} h={10} />
       </SkeletonCircle>
 
       <Flex direction="column" gridGap={1}>
-        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 130, 24)}>
+        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 130, 19)}>
           <Heading as="h4" fontSize="md" color="gray.700" fontWeight={700}>
             {fullName}
           </Heading>
         </Skeleton>
 
-        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 19)}>
-          <Text color="gray.300" fontSize="sm">
+        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 18)}>
+          <Text color="gray.300" fontSize="xs">
             {formattedDate}
           </Text>
         </Skeleton>
