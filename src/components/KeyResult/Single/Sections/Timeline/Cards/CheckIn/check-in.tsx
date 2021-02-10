@@ -1,11 +1,12 @@
-import { useMutation } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import { Box, Stat, Flex, StatLabel } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
-import { KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
+import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
 
 import KeyResultSectionTimelineCardCheckInComment from './comment'
@@ -20,13 +21,35 @@ export interface KeyResultSectionTimelineCardCheckInProperties {
   data?: Partial<KeyResultCheckIn>
 }
 
+export interface GetKeyResultWithLatestCheckInQuery {
+  keyResult: KeyResult
+}
+
 const KeyResultSectionTimelineCardCheckIn = ({
   data,
 }: KeyResultSectionTimelineCardCheckInProperties) => {
   const intl = useIntl()
   const removeEntryFromTimeline = useSetRecoilState(removeTimelineEntry(data?.keyResultId))
+  const setLatestCheckIn = useSetRecoilState(selectLatestCheckIn(data?.keyResultId))
+  const [getKeyResultWithLatestCheckIn] = useLazyQuery<GetKeyResultWithLatestCheckInQuery>(
+    queries.GET_KEY_RESULT_WITH_LATEST_CHECK_IN,
+    {
+      onCompleted: (queryResult) => {
+        const latestCheckIn = queryResult.keyResult?.keyResultCheckIns?.[0]
+
+        setLatestCheckIn(latestCheckIn)
+        removeEntryFromTimeline(data)
+      },
+    },
+  )
   const [deleteKeyResultCheckIn] = useMutation(queries.DELETE_KEY_RESULT_CHECK_IN, {
-    onCompleted: () => removeEntryFromTimeline(data),
+    onCompleted: () => {
+      getKeyResultWithLatestCheckIn({
+        variables: {
+          keyResultID: data?.keyResultId,
+        },
+      })
+    },
   })
 
   const handleDelete = async () => {

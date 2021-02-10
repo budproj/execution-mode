@@ -3,7 +3,6 @@ import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
-import progressDraft from 'src/state/recoil/key-result/check-in/progress-draft'
 import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
 import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
@@ -11,6 +10,7 @@ import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
 import { PREFIX } from './constants'
+import progressDraft from './progress-draft'
 
 const KEY = `${PREFIX}::LATEST`
 

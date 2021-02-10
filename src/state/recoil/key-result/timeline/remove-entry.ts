@@ -6,7 +6,7 @@ import { RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::REMOVE_TIMELINE_ENTRY`
+const KEY = `${PREFIX}::REMOVE_ENTRY`
 
 export const selectTimelineEntries = buildPartialSelector<KeyResult['timeline']>('timeline')
 

@@ -9,7 +9,7 @@ import meAtom from 'src/state/recoil/user/me'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::LATEST_TIMELINE_ENTRY`
+const KEY = `${PREFIX}::LATEST_ENTRY`
 
 export const selectTimelineEntries = buildPartialSelector<KeyResult['timeline']>('timeline')
 
