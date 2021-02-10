@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { EmptyState } from 'src/components/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
 
+import { KeyResultSectionTimelineCardEmptyState } from '../Cards'
+
 import KeyResultSectionTimelineContentEntry from './entry'
-import messages from './messages'
 
 export interface KeyResultSectionTimelineContentProperties {
   entries?: KeyResult['timeline']
@@ -22,7 +22,7 @@ const KeyResultSectionTimelineContent = ({ entries }: KeyResultSectionTimelineCo
       ))}
     </>
   ) : (
-    <EmptyState labelMessage={messages.emptyState} />
+    <KeyResultSectionTimelineCardEmptyState />
   )
 
 export default KeyResultSectionTimelineContent

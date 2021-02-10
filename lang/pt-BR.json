@@ -255,10 +255,6 @@
     "defaultMessage": "Uma seta para cima. Ao clicar nela você fechará o menu de seleção",
     "description": "This is the desc attribute of our chevron up icon. It is used by screen readers"
   },
-  "NF2bAx": {
-    "defaultMessage": "Este resultado-chave não possui nenhum check-in",
-    "description": "This text is displayed in our key result timeline when no content exist"
-  },
   "NOqI9i": {
     "defaultMessage": "Como está sua confiança?",
     "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
@@ -266,6 +262,10 @@
   "Nafqgw": {
     "defaultMessage": "Cancelar check-in",
     "description": "This message is displayed as a label button when the check-in form is opened in our key result section"
+  },
+  "O0072X": {
+    "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
+    "description": "This text is used by screen readers to explain our ghost image inside our key result drawer"
   },
   "P/ujgo": {
     "defaultMessage": "Um ícone de controle de video game",
@@ -523,6 +523,10 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
+  "rBdkOv": {
+    "defaultMessage": "Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado chave?",
+    "description": "This text gives more details regarding our empty state card in the key result drawer"
+  },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
     "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
@@ -538,6 +542,10 @@
   "sFYaLE": {
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
+  },
+  "tJ0oU2": {
+    "defaultMessage": "Está silencioso por aqui",
+    "description": "This text is the title of our empty state card inside our key result drawer"
   },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",

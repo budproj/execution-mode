@@ -64,4 +64,32 @@ describe('component customizations', () => {
 
     expect(fakeComponent.length).toEqual(1)
   })
+
+  it('can customize the border width', () => {
+    const fakeWidth = faker.random.number()
+
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardsBase borderWidth={fakeWidth}>
+        <FakeComponent />
+      </KeyResultSectionTimelineCardsBase>,
+    )
+
+    const box = result.find('Box')
+
+    expect(box.prop('borderWidth')).toEqual(fakeWidth)
+  })
+
+  it('can customize the background color', () => {
+    const fakeColor = faker.internet.color()
+
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardsBase bg={fakeColor}>
+        <FakeComponent />
+      </KeyResultSectionTimelineCardsBase>,
+    )
+
+    const box = result.find('Box')
+
+    expect(box.prop('bg')).toEqual(fakeColor)
+  })
 })

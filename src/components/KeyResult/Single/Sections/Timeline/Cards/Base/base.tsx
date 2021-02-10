@@ -1,4 +1,4 @@
-import { Box, BorderProps } from '@chakra-ui/react'
+import { Box, BorderProps, BackgroundProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
 import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
@@ -9,6 +9,8 @@ import KeyResultSectionTimelineCardBaseOptions from './options'
 export interface KeyResultSectionTimelineCardBaseProperties {
   children: ReactElement | ReactElement[]
   borderRadius: BorderProps['borderRadius']
+  borderWidth: BorderProps['borderWidth']
+  bg: BackgroundProps['bg']
   borderBottomRadius?: BorderProps['borderBottomRadius']
   policies?: AuthzPolicies
   onDelete?: () => void
@@ -17,13 +19,16 @@ export interface KeyResultSectionTimelineCardBaseProperties {
 const KeyResultSectionTimelineCardBase = ({
   children,
   borderRadius,
+  borderWidth,
   borderBottomRadius,
+  bg,
   policies,
   onDelete,
 }: KeyResultSectionTimelineCardBaseProperties) => (
   <Box
     p={4}
-    borderWidth={1}
+    bg={bg}
+    borderWidth={borderWidth}
     borderColor="gray.100"
     borderRadius={borderRadius}
     borderBottomRadius={borderBottomRadius ?? borderRadius}
@@ -40,6 +45,8 @@ const KeyResultSectionTimelineCardBase = ({
 
 KeyResultSectionTimelineCardBase.defaultProps = {
   borderRadius: '4px',
+  borderWidth: 1,
+  bg: 'transparent',
 }
 
 export default KeyResultSectionTimelineCardBase

@@ -8,7 +8,7 @@ describe('component expectations', () => {
   it('displays the empty state if no entries were provided', () => {
     const result = enzyme.shallow(<KeyResultSectionTimelineContent entries={[]} />)
 
-    const emptyState = result.find('EmptyState')
+    const emptyState = result.find('KeyResultSectionTimelineCardEmptyState')
 
     expect(emptyState.length).toEqual(1)
   })
