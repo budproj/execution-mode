@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client'
 import { DrawerContent, Flex } from '@chakra-ui/react'
 import deepmerge from 'deepmerge'
-import React from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import React, { useState } from 'react'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
 import { KeyResult } from 'src/components/KeyResult/types'
@@ -10,6 +10,7 @@ import authzPoliciesKeyResult, {
   AuthzPoliciesKeyResult,
 } from 'src/state/recoil/authz/policies/key-result'
 import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
+import { keyResultDrawerIsScrolling } from 'src/state/recoil/key-result/drawer'
 import selectKeyResult from 'src/state/recoil/key-result/key-result'
 import { keyResultTimelineFetched } from 'src/state/recoil/key-result/timeline'
 
@@ -28,10 +29,16 @@ export interface GetKeyResultWithIDQuery {
 
 const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentProperties) => {
   const [keyResult, setKeyResult] = useRecoilState(selectKeyResult(keyResultID))
+
+  const [limit] = useState(10)
+  const [offset, setOffset] = useState(keyResult?.timeline ? keyResult.timeline.length : 0)
+  const [canRefetch, setCanRefetch] = useState(false)
+
   const setTimelineFetched = useSetRecoilState(keyResultTimelineFetched(keyResultID))
   const [keyResultPolicies, setKeyResultPolicies] = useRecoilState(
     authzPoliciesKeyResult(keyResultID),
   )
+  const isScrolling = useRecoilValue(keyResultDrawerIsScrolling(keyResultID))
 
   const buildKeyResultPolicies = (keyResultCheckInPolicies?: AuthzPolicies) => {
     if (!keyResultCheckInPolicies) return keyResultPolicies
@@ -47,22 +54,56 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
   }
 
   const handleQueryData = (data: GetKeyResultWithIDQuery) => {
-    const { policies, ...rest } = data.keyResult
+    const { policies, ...newData } = data.keyResult
     const keyResultPolicies = buildKeyResultPolicies(policies)
 
+    const previousTimeline = keyResult?.timeline ?? []
+    const newTimeline = newData?.timeline ?? []
+    const timeline = [...previousTimeline, ...newTimeline]
+
+    const newKeyResult = {
+      ...newData,
+      timeline,
+    }
+
     setKeyResultPolicies(keyResultPolicies)
-    setKeyResult(rest)
+    setKeyResult(newKeyResult)
     setTimelineFetched(true)
+    setOffset(offset + limit)
+
+    const hasMoreData = newData?.timeline && newData.timeline.length >= limit
+    setCanRefetch(Boolean(hasMoreData))
   }
 
-  const { loading, called, data } = useQuery<GetKeyResultWithIDQuery>(
+  const { loading, called, data, fetchMore } = useQuery<GetKeyResultWithIDQuery>(
     queries.GET_KEY_RESULT_WITH_ID,
     {
-      fetchPolicy: 'network-only',
-      variables: { id: keyResultID },
+      variables: {
+        limit,
+        id: keyResultID,
+      },
       onCompleted: handleQueryData,
+      notifyOnNetworkStatusChange: true,
     },
   )
+
+  const handleInfiniteScroll = async () => {
+    const shouldFetchMore = canRefetch && isScrolling
+
+    if (shouldFetchMore) {
+      setCanRefetch(false)
+
+      const { data } = await fetchMore({
+        query: queries.GET_MORE_KEY_RESULT_TIMELINE_WITH_ID,
+        variables: {
+          limit,
+          offset,
+          id: keyResultID,
+        },
+      })
+      handleQueryData(data)
+    }
+  }
 
   logger.debug('Rerendered key result drawer contents. Take a look at our new data:', {
     component,
@@ -78,7 +119,11 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
     <DrawerContent>
       <Flex direction="column" minH="100%">
         <KeyResultDrawerHeader keyResultID={keyResultID} />
-        <KeyResultDrawerBody keyResultID={keyResultID} />
+        <KeyResultDrawerBody
+          keyResultID={keyResultID}
+          isLoading={loading}
+          onYReachEnd={handleInfiniteScroll}
+        />
         <KeyResultDrawerFooter keyResultID={keyResultID} />
       </Flex>
     </DrawerContent>

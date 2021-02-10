@@ -12,9 +12,15 @@ import {
 
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
+  onYReachEnd?: () => void
+  isLoading?: boolean
 }
 
-const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => {
+const KeyResultDrawerBody = ({
+  keyResultID,
+  onYReachEnd,
+  isLoading,
+}: KeyResultDrawerBodyProperties) => {
   const [isScrolling, setIsScrolling] = useRecoilState(keyResultDrawerIsScrolling(keyResultID))
   const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
     keyResultDrawerIsCreatingCheckIn(keyResultID),
@@ -39,9 +45,14 @@ const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => 
       options={{ suppressScrollX: true }}
       onScrollY={handleScrollYStart}
       onYReachStart={handleScrollYReachedStart}
+      onYReachEnd={onYReachEnd}
     >
       <Box p={4} pt={0}>
-        <KeyResultSectionTimeline keyResultID={keyResultID} scrollBarRef={scrollBarReference} />
+        <KeyResultSectionTimeline
+          keyResultID={keyResultID}
+          scrollBarRef={scrollBarReference}
+          isLoading={isLoading}
+        />
       </Box>
     </PerfectScrollbar>
   )
