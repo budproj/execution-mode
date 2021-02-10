@@ -26,7 +26,7 @@ export const removeTimelineEntry = (id?: KeyResult['id']) => (
   set(timelineEntriesSelector, removedTimelineEntries)
 }
 
-export const selectLatestTimelineEntry = selectorFamily<
+export const selectRemoveTimelineEntry = selectorFamily<
   Partial<KeyResultTimelineEntry> | undefined,
   KeyResult['id'] | undefined
 >({
@@ -36,4 +36,4 @@ export const selectLatestTimelineEntry = selectorFamily<
   set: removeTimelineEntry,
 })
 
-export default selectLatestTimelineEntry
+export default selectRemoveTimelineEntry

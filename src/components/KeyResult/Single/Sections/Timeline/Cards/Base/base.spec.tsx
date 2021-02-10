@@ -6,6 +6,24 @@ import KeyResultSectionTimelineCardsBase from './base'
 
 const FakeComponent = () => <p>{faker.lorem.paragraph()}</p>
 
+describe('component expectations', () => {
+  it('displays the options box if the user can delete that given entry', () => {
+    const fakePolicies = {
+      delete: 'ALLOW',
+    }
+
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardsBase policies={fakePolicies as any}>
+        <FakeComponent />
+      </KeyResultSectionTimelineCardsBase>,
+    )
+
+    const options = result.find('KeyResultSectionTimelineCardBaseOptions')
+
+    expect(options.length).toEqual(1)
+  })
+})
+
 describe('component customizations', () => {
   it('can customize the border radius', () => {
     const fakeRadius = faker.random.number()
