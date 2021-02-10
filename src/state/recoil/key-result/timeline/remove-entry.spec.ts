@@ -4,7 +4,7 @@ import { snapshot_UNSTABLE } from 'recoil'
 
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
 
-import selectRemoveTimelineEntry from './remove-timeline-entry'
+import selectRemoveTimelineEntry from './remove-entry'
 
 describe('setter', () => {
   it('removes a given entry from current entries', async () => {

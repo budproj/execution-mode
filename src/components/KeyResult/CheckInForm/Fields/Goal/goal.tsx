@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import FlagIcon from 'src/components/Icon/Flag'
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 import messages from './messages'
 

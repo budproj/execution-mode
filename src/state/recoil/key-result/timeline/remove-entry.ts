@@ -1,7 +1,7 @@
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 
 import { PREFIX } from './constants'

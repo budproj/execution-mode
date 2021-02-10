@@ -8,8 +8,8 @@ import KeyResultListBodyColumnBase, {
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
 import { KeyResult } from 'src/components/KeyResult/types'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 export interface KeyResultListBodyColumnProgressProperties
   extends KeyResultListBodyColumnBaseProperties {

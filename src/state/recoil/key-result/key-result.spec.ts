@@ -1,8 +1,7 @@
 import faker from 'faker'
 import sinon from 'sinon'
 
-import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
-
+import keyResultAtomFamily from './atom-family'
 import * as selectors from './key-result'
 
 describe('setter', () => {

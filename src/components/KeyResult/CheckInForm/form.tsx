@@ -11,11 +11,9 @@ import {
   keyResultCheckInCommentEnabled,
   keyResultCheckInProgressDraft,
 } from 'src/state/recoil/key-result/check-in'
-import {
-  selectCurrentProgress,
-  selectCurrentConfidence,
-  selectLatestCheckIn,
-} from 'src/state/recoil/key-result/selectors'
+import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
+import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 
 import {
   CheckInFormFieldCurrentProgress,

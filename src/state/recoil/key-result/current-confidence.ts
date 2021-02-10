@@ -1,5 +1,6 @@
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+
+import buildPartialSelector from './build-partial-selector'
 
 export const selectCurrentConfidence = buildPartialSelector<KeyResult['currentConfidence']>(
   'currentConfidence',

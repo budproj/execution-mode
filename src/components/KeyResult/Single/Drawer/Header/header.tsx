@@ -12,7 +12,7 @@ import {
   keyResultDrawerIsCreatingCheckIn,
   keyResultDrawerIsScrolling,
 } from 'src/state/recoil/key-result/drawer'
-import { selectLatestTimelineEntry } from 'src/state/recoil/key-result/selectors'
+import selectLatestTimelineEntry from 'src/state/recoil/key-result/timeline/latest-entry'
 
 import messages from './messages'
 

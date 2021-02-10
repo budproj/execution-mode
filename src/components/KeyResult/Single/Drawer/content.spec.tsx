@@ -7,7 +7,7 @@ import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import { defaultKeyResultPolicies } from 'src/state/recoil/authz/policies/key-result'
-import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
+import selectKeyResult from 'src/state/recoil/key-result/key-result'
 
 import KeyResultDrawerContent from './content'
 

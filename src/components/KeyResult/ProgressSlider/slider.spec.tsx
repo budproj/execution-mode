@@ -4,11 +4,11 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
   keyResultCheckInProgressDraft,
   keyResultCheckInPopoverOpen,
 } from 'src/state/recoil/key-result/check-in'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import ProgressSliderSlider from './slider'
 

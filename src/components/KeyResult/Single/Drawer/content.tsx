@@ -10,7 +10,7 @@ import authzPoliciesKeyResult, {
   AuthzPoliciesKeyResult,
 } from 'src/state/recoil/authz/policies/key-result'
 import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
-import { selectKeyResult } from 'src/state/recoil/key-result/selectors'
+import selectKeyResult from 'src/state/recoil/key-result/key-result'
 import { keyResultTimelineFetched } from 'src/state/recoil/key-result/timeline'
 
 import KeyResultDrawerBody from './Body'

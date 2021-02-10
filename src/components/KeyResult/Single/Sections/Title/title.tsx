@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 export interface KeyResultSectionTitleProperties {
   keyResultID?: KeyResult['id']

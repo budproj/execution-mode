@@ -1,8 +1,7 @@
 import faker from 'faker'
 import sinon from 'sinon'
 
-import keyResultAtomFamily from '../atom-family'
-
+import keyResultAtomFamily from './atom-family'
 import { getCurrentProgress, setCurrentProgress } from './current-progress'
 
 describe('getter', () => {

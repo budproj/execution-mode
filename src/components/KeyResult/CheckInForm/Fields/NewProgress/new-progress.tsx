@@ -8,8 +8,8 @@ import { useSetRecoilState, useRecoilValue } from 'recoil'
 import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import { KeyResult } from 'src/components/KeyResult/types'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
 
 import messages from './messages'
 

@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 import messages from './messages'
 

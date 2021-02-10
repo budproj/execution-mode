@@ -6,8 +6,8 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
+import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 import { keyResultDrawerIsCreatingCheckIn } from 'src/state/recoil/key-result/drawer'
-import { selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
 
 import { KeyResultSectionTimelineCardBase } from '../Timeline/Cards'
 

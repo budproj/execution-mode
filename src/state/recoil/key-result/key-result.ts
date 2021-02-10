@@ -4,8 +4,9 @@ import { DefaultValue, selectorFamily } from 'recoil'
 import { overwriteMerge } from 'lib/deepmerge'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { PREFIX } from 'src/state/recoil/intl/constants'
-import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
 import { RecoilInterfaceReadWrite } from 'src/state/recoil/types'
+
+import keyResultAtomFamily from './atom-family'
 
 const KEY = `${PREFIX}::KEY_RESULT`
 

@@ -15,6 +15,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
         relativePercentageProgress
         comment
         createdAt
+        keyResultId
         user {
           fullName
         }

@@ -2,7 +2,7 @@ import remove from 'lodash/remove'
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'

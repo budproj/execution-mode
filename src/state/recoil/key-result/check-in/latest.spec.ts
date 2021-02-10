@@ -2,7 +2,7 @@ import faker from 'faker'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import * as latestCheckIn from './latest-check-in'
+import * as latestCheckIn from './latest'
 
 describe('getter', () => {
   afterEach(() => sinon.restore())
@@ -73,7 +73,7 @@ describe('setter', () => {
       },
       oldCheckIn,
     ]
-    const wasCalledAsExpected = setterSpy.calledOnceWithExactly(
+    const wasCalledAsExpected = setterSpy.firstCall.calledWithExactly(
       fakeCheckInsSelector,
       expectedNewCheckIns,
     )

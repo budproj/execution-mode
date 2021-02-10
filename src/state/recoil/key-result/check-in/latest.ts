@@ -2,14 +2,17 @@ import remove from 'lodash/remove'
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
+import progressDraft from 'src/state/recoil/key-result/check-in/progress-draft'
+import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
+import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::LATEST_CHECK_IN`
+const KEY = `${PREFIX}::LATEST`
 
 export const selectCheckIns = buildPartialSelector<KeyResult['keyResultCheckIns']>(
   'keyResultCheckIns',
@@ -32,6 +35,9 @@ export const setLatestCheckIn = (id?: KeyResult['id']) => (
 
   const checkInsSelector = selectCheckIns(id)
   const previousLatestCheckInSelector = selectLatestCheckIn(id)
+  const currentProgressSelector = selectCurrentProgress(id)
+  const currentConfidenceSelector = selectCurrentConfidence(id)
+  const progressDraftSelector = progressDraft(id)
 
   const checkIns = get(checkInsSelector)
   const previousLatestCheckIn = get(previousLatestCheckInSelector)
@@ -49,6 +55,9 @@ export const setLatestCheckIn = (id?: KeyResult['id']) => (
   const newCheckIns = remove([newLocalCheckIn, ...(checkIns ?? [])])
 
   set(checkInsSelector, newCheckIns)
+  set(currentProgressSelector, newLocalCheckIn.progress)
+  set(progressDraftSelector, newLocalCheckIn.progress)
+  set(currentConfidenceSelector, newLocalCheckIn.confidence)
 }
 
 export const selectLatestCheckIn = selectorFamily<

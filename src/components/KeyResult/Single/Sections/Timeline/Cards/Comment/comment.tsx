@@ -6,7 +6,7 @@ import { useSetRecoilState } from 'recoil'
 import ExpandableText from 'src/components/Base/ExpandableText'
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
 import { KeyResultComment } from 'src/components/KeyResult/types'
-import { removeTimelineEntry } from 'src/state/recoil/key-result/selectors'
+import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
 
 import KeyResultSectionTimelineCardCommentHeader from './header'
 import queries from './queries.gql'

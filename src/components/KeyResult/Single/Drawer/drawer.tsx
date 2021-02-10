@@ -3,8 +3,8 @@ import React from 'react'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
+import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
-import { selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
 
 import KeyResultDrawerContent from './content'
 

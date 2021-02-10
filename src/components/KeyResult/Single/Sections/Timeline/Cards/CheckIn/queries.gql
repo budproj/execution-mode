@@ -1,0 +1,5 @@
+mutation DELETE_KEY_RESULT_CHECK_IN($keyResultCheckInID: ID!) {
+  deleteKeyResultCheckIn(id: $keyResultCheckInID) {
+    affected
+  }
+}

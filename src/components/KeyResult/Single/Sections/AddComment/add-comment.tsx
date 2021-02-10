@@ -5,7 +5,7 @@ import React from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { KeyResult, KeyResultComment } from 'src/components/KeyResult/types'
-import { selectLatestTimelineEntry } from 'src/state/recoil/key-result/selectors'
+import selectLatestTimelineEntry from 'src/state/recoil/key-result/timeline/latest-entry'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 

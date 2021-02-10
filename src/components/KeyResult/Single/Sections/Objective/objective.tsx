@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { Stack as StackIcon } from 'src/components/Icon'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 import messages from './messages'
 

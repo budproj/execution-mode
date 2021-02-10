@@ -8,7 +8,8 @@ import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { selectCurrentConfidence, selectLatestCheckIn } from 'src/state/recoil/key-result/selectors'
+import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
 
 export interface KeyResultListBodyColumnConfidenceLevelProperties
   extends KeyResultListBodyColumnBaseProperties {

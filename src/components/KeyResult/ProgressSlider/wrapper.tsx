@@ -7,7 +7,7 @@ import {
   keyResultCheckInPopoverOpen,
   keyResultCheckInProgressDraft,
 } from 'src/state/recoil/key-result/check-in'
-import { selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
+import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 
 import Popover from './popover'
 import ProgressSliderSlider from './slider'

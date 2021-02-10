@@ -2,7 +2,7 @@ import faker from 'faker'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import * as latestTimelineEntry from './latest-timeline-entry'
+import * as latestTimelineEntry from './latest-entry'
 
 describe('getter', () => {
   afterEach(() => sinon.restore())

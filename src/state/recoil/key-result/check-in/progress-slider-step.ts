@@ -2,7 +2,7 @@ import { selectorFamily } from 'recoil'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { RecoilInterfaceGetter } from 'src/state/recoil/types'
 
 import { PREFIX } from './constants'

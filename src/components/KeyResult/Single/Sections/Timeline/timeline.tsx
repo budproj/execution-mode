@@ -5,7 +5,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { keyResultTimelineFetched } from 'src/state/recoil/key-result/timeline'
 
 import KeyResultSectionTimelineContent from './Content'

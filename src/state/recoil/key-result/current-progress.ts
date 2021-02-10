@@ -1,13 +1,13 @@
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
-import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
+import { setKeyResultPart } from 'src/state/recoil/key-result/build-partial-selector'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 
-import { setKeyResultPart } from './build-partial-selector'
+import keyResultAtomFamily from './atom-family'
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::SELECT_CURRENT_PROGRESS`
+const KEY = `${PREFIX}::CURRENT_PROGRESS`
 
 const buildPartialSetter = setKeyResultPart<KeyResult['currentProgress']>('currentProgress')
 
