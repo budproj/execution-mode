@@ -6,9 +6,9 @@ import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::FETCHED`
 
-const keyResultTimelineFetched = atomFamily<boolean, KeyResult['id'] | undefined>({
+const keyResultDrawerFetched = atomFamily<boolean, KeyResult['id'] | undefined>({
   key: KEY,
   default: false,
 })
 
-export default keyResultTimelineFetched
+export default keyResultDrawerFetched

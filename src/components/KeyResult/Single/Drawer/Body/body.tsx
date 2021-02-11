@@ -1,6 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import PerfectScrollbar from 'react-perfect-scrollbar'
+import React from 'react'
 import { useRecoilState } from 'recoil'
 
 import { KeyResultSectionTimeline } from 'src/components/KeyResult/Single/Sections'
@@ -12,49 +11,31 @@ import {
 
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
-  onYReachEnd?: () => void
-  isLoading?: boolean
 }
 
-const KeyResultDrawerBody = ({
-  keyResultID,
-  onYReachEnd,
-  isLoading,
-}: KeyResultDrawerBodyProperties) => {
+const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => {
   const [isScrolling, setIsScrolling] = useRecoilState(keyResultDrawerIsScrolling(keyResultID))
   const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
     keyResultDrawerIsCreatingCheckIn(keyResultID),
   )
-  const [scrollBarReference, setScrollBarReference] = useState<
-    PerfectScrollbar | null | undefined
-  >()
 
-  const handleScrollYStart = () => {
+  const handleScrollY = () => {
     if (!isScrolling) setIsScrolling(true)
     if (isCreatingCheckIn) setIsCreatingCheckIn(false)
   }
 
-  const handleScrollYReachedStart = () => {
+  const handleScrollYReachStart = () => {
     if (isScrolling) setIsScrolling(false)
   }
 
   return (
-    <PerfectScrollbar
-      ref={(reference) => setScrollBarReference(reference)}
-      style={{ paddingTop: '1rem' }}
-      options={{ suppressScrollX: true }}
-      onScrollY={handleScrollYStart}
-      onYReachStart={handleScrollYReachedStart}
-      onYReachEnd={onYReachEnd}
-    >
-      <Box p={4} pt={0}>
-        <KeyResultSectionTimeline
-          keyResultID={keyResultID}
-          scrollBarRef={scrollBarReference}
-          isLoading={isLoading}
-        />
-      </Box>
-    </PerfectScrollbar>
+    <Box flexGrow={1} maxH="80%">
+      <KeyResultSectionTimeline
+        keyResultID={keyResultID}
+        onScrollY={handleScrollY}
+        onScrollYReachStart={handleScrollYReachStart}
+      />
+    </Box>
   )
 }
 

@@ -70,4 +70,18 @@ describe('component interations', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('triggers the provided onYReachEnd function', () => {
+    const fakeID = faker.random.uuid()
+    const spy = sinon.spy()
+
+    sinon.stub(recoil, 'useRecoilState').returns([undefined, sinon.fake()])
+
+    const wrapper = enzyme.shallow(<KeyResultDrawerBody keyResultID={fakeID} onYReachEnd={spy} />)
+
+    const scroll = wrapper.find('ScrollBar')
+    scroll.simulate('yReachEnd')
+
+    expect(spy.called).toEqual(true)
+  })
 })

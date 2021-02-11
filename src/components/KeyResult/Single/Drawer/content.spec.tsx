@@ -37,16 +37,24 @@ describe('expected behaviors', () => {
     recoilStateStub.returns([undefined, sinon.fake()])
 
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
+    sinon.stub(recoil, 'useRecoilValue')
 
+    let shouldExecuteQuery = true
     sinon.stub(apollo, 'useQuery').callsFake((_, options) => {
-      if (options?.onCompleted) options.onCompleted(fakeData)
+      if (options?.onCompleted && shouldExecuteQuery) {
+        shouldExecuteQuery = false
+        options.onCompleted(fakeData)
+      }
 
       return {} as any
     })
 
     enzyme.shallow(<KeyResultDrawerContent keyResultID={fakeID} />)
 
-    const expectedArguments = omit(fakeData.keyResult, 'policies')
+    const expectedArguments = {
+      ...omit(fakeData.keyResult, 'policies'),
+      timeline: [],
+    }
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(expectedArguments)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
@@ -70,9 +78,14 @@ describe('expected behaviors', () => {
     recoilStateStub.returns([undefined, sinon.fake()])
 
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
+    sinon.stub(recoil, 'useRecoilValue')
 
+    let shouldExecuteQuery = true
     sinon.stub(apollo, 'useQuery').callsFake((_, options) => {
-      if (options?.onCompleted) options.onCompleted(fakeData)
+      if (options?.onCompleted && shouldExecuteQuery) {
+        shouldExecuteQuery = false
+        options.onCompleted(fakeData)
+      }
 
       return {} as any
     })
@@ -106,8 +119,14 @@ describe('expected behaviors', () => {
     recoilStateStub.returns([undefined, sinon.fake()])
 
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
+    sinon.stub(recoil, 'useRecoilValue')
+
+    let shouldExecuteQuery = true
     sinon.stub(apollo, 'useQuery').callsFake((_, options) => {
-      if (options?.onCompleted) options.onCompleted(fakeData)
+      if (options?.onCompleted && shouldExecuteQuery) {
+        shouldExecuteQuery = false
+        options.onCompleted(fakeData)
+      }
 
       return {} as any
     })
@@ -125,4 +144,18 @@ describe('expected behaviors', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('uses the current key result timeline length as the offset on the first query', () => {})
+})
+
+describe('infinite scroll', () => {
+  afterEach(() => sinon.restore())
+
+  it('it executes a new query with a proper offset and limit values', () => {})
+
+  it('after N infinite scrolls, it uses the proper offset value', () => {})
+
+  it('it does not executes the query again if we reach the end of the timeline', () => {})
+
+  it('appens the new timeline at the end of the previous one', () => {})
 })

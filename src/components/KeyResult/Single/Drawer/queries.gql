@@ -1,4 +1,4 @@
-query GET_KEY_RESULT_WITH_ID($id: ID!, $limit: Int, $offset: Int) {
+query GET_KEY_RESULT_WITH_ID($id: ID!) {
   keyResult(id: $id) {
     id
     title
@@ -7,80 +7,6 @@ query GET_KEY_RESULT_WITH_ID($id: ID!, $limit: Int, $offset: Int) {
     currentConfidence
     policies(resource: KEY_RESULT_CHECK_IN) {
       create
-    }
-    timeline(limit: $limit, offset: $offset) {
-      ... on KeyResultCheckIn {
-        id
-        confidence
-        relativePercentageProgress
-        comment
-        createdAt
-        keyResultId
-        user {
-          fullName
-        }
-        parent {
-          confidence
-          relativePercentageProgress
-        }
-        policies {
-          delete
-        }
-      }
-
-      ... on KeyResultComment {
-        id
-        text
-        createdAt
-        keyResultId
-        user {
-          fullName
-          picture
-        }
-        policies {
-          delete
-        }
-      }
-    }
-  }
-}
-
-query GET_MORE_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $limit: Int, $offset: Int) {
-  keyResult(id: $id) {
-    id
-    timeline(limit: $limit, offset: $offset) {
-      ... on KeyResultCheckIn {
-        id
-        confidence
-        relativePercentageProgress
-        comment
-        createdAt
-        keyResultId
-        user {
-          fullName
-        }
-        parent {
-          confidence
-          relativePercentageProgress
-        }
-        policies {
-          delete
-        }
-      }
-
-      ... on KeyResultComment {
-        id
-        text
-        createdAt
-        keyResultId
-        user {
-          fullName
-          picture
-        }
-        policies {
-          delete
-        }
-      }
     }
   }
 }

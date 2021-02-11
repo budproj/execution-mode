@@ -1,53 +1,91 @@
-import { Flex, Heading, Spinner } from '@chakra-ui/react'
+import { useQuery } from '@apollo/client'
+import { Flex, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
-import { keyResultTimelineFetched } from 'src/state/recoil/key-result/timeline'
 
 import KeyResultSectionTimelineContent from './Content'
+import { PERFECT_SCROLLBAR_ID } from './constants'
 import messages from './messages'
+import queries from './queries.gql'
 import KeyResultSectionTimelineSkeleton from './skeleton'
 
 export interface KeyResultSectionTimelineProperties {
+  limit: number
   keyResultID?: KeyResult['id']
-  scrollBarRef?: PerfectScrollbar | null
-  isLoading?: boolean
+  onScrollY?: () => void
+  onScrollYReachStart?: () => void
+}
+
+export interface GetKeyResultTimelineWithIDQuery {
+  keyResult: {
+    id: KeyResult['id']
+    timeline: KeyResultTimelineEntry[]
+  }
 }
 
 const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 
 const KeyResultSectionTimeline = ({
   keyResultID,
-  scrollBarRef,
-  isLoading,
+  limit,
+  onScrollY,
+  onScrollYReachStart,
 }: KeyResultSectionTimelineProperties) => {
   const intl = useIntl()
-  const timeline = useRecoilValue(timelineSelector(keyResultID))
-  const isFetched = useRecoilValue(keyResultTimelineFetched(keyResultID))
+  const [timeline, setTimeline] = useRecoilState(timelineSelector(keyResultID))
 
-  if (isFetched && scrollBarRef) scrollBarRef.updateScroll()
+  const hasTimeline = timeline && timeline.length > 0
+
+  const handleQueryResult = (data: GetKeyResultTimelineWithIDQuery) =>
+    setTimeline(data.keyResult.timeline)
+
+  const { loading, fetchMore, data } = useQuery<GetKeyResultTimelineWithIDQuery>(
+    queries.GET_KEY_RESULT_TIMELINE_WITH_ID,
+    {
+      variables: {
+        limit,
+        id: keyResultID,
+      },
+      skip: hasTimeline,
+      onCompleted: handleQueryResult,
+    },
+  )
+
+  const hasMore = Boolean(data?.keyResult && data.keyResult.timeline.length >= limit)
 
   return (
-    <Flex direction="column" gridGap={4}>
-      <Heading as="h3" fontSize="sm" fontWeight={500} color="gray.400">
-        {intl.formatMessage(messages.title)}
-      </Heading>
-      {isFetched ? (
-        <KeyResultSectionTimelineContent entries={timeline} />
-      ) : (
-        <KeyResultSectionTimelineSkeleton />
-      )}
-      {isLoading && (
-        <Flex direction="column" alignItems="center" py={4}>
-          <Spinner size="lg" color="brand.400" />
-        </Flex>
-      )}
-    </Flex>
+    <PerfectScrollbar
+      id={PERFECT_SCROLLBAR_ID}
+      options={{ suppressScrollX: true }}
+      onScrollY={onScrollY}
+      onYReachStart={onScrollYReachStart}
+    >
+      <Flex direction="column" gridGap={4} p={4}>
+        <Heading as="h3" fontSize="sm" fontWeight={500} color="gray.400">
+          {intl.formatMessage(messages.title)}
+        </Heading>
+        {keyResultID && !loading ? (
+          <KeyResultSectionTimelineContent
+            keyResultID={keyResultID}
+            limit={limit}
+            initialHasMore={hasMore}
+            fetchMore={fetchMore}
+          />
+        ) : (
+          <KeyResultSectionTimelineSkeleton />
+        )}
+      </Flex>
+    </PerfectScrollbar>
   )
+}
+
+KeyResultSectionTimeline.defaultProps = {
+  limit: 10,
 }
 
 export default KeyResultSectionTimeline
