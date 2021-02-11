@@ -68,6 +68,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
       <KeyResultSectionTimelineCardBase
         borderBottomRadius={0}
         policies={data?.policies}
+        intlCardType={intl.formatMessage(messages.cardType)}
         onDelete={handleDelete}
       >
         <Flex direction="column" gridGap={4}>

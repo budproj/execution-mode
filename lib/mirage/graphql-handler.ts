@@ -14,7 +14,7 @@ export interface QueryKeyResultCheckInsArguments {
 
 export interface QueryKeyResultTimelineArguments {
   limit?: number
-  skip?: number
+  offset?: number
 }
 
 export interface QueryUserCompaniesArguments {
@@ -46,7 +46,7 @@ const graphQLHandler = (mirageSchema: unknown) =>
 
         timeline: (
           parent: ModelInstance<any>,
-          { limit, skip }: QueryKeyResultTimelineArguments,
+          { limit, offset }: QueryKeyResultTimelineArguments,
           context: any,
         ) => {
           const keyResultCheckIns = parent.keyResultCheckIns.models.map(
@@ -65,16 +65,17 @@ const graphQLHandler = (mirageSchema: unknown) =>
           const timelineEntries = [...keyResultCheckIns, ...keyResultComments]
           const orderedTimelineEntries = sortBy(timelineEntries, 'createdAt')
 
-          const skippedEntries = skip
-            ? orderedTimelineEntries.slice(skip, -1)
+          const offsetedEntries = offset
+            ? orderedTimelineEntries.slice(offset, -1)
             : orderedTimelineEntries
-          const limitedEntries = limit ? skippedEntries.slice(0, limit) : skippedEntries
+          const limitedEntries = limit ? offsetedEntries.slice(0, limit) : offsetedEntries
 
           const limitedEntriesWithRelations = limitedEntries.map((entry) => ({
             ...entry,
             /* eslint-disable unicorn/no-fn-reference-in-iterator */
             user: context.mirageSchema.users.find(entry.userId),
             keyResult: context.mirageSchema.keyResults.find(entry.keyResultId),
+            policies: context.mirageSchema.policies.find(entry.policiesId),
             /* eslint-enable unicorn/no-fn-reference-in-iterator */
           }))
 

@@ -39,9 +39,17 @@
     "defaultMessage": "Com Barreira",
     "description": "We use this tag to group every key result with confidence lower than 0"
   },
+  "02lpnJ": {
+    "defaultMessage": "Comentário",
+    "description": "This text is displayed in some places in our timeline card, showing the type of the card in a friendly name"
+  },
   "03yPkn": {
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
+  },
+  "0J4rjt": {
+    "defaultMessage": "Cancelar",
+    "description": "This text is used as a fallback to the confirmation modal cancel button. It is displayed if the component did not received a custom button label"
   },
   "0SQt21": {
     "defaultMessage": "Novo valor",
@@ -94,6 +102,10 @@
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
     "description": "The page title that is displayed in the browser tab"
+  },
+  "5llJzq": {
+    "defaultMessage": "Você tem certeza que deseja apagar este {type}?",
+    "description": "This text is used in our delete modal confirmation to explain to the user what will happen"
   },
   "5th5LY": {
     "defaultMessage": "Ué! Cadê a tela que tava aqui?",
@@ -203,6 +215,10 @@
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
   },
+  "Hfg9tY": {
+    "defaultMessage": "Confirmar",
+    "description": "This text is used as a fallback to the confirmation modal confirm button. It is displayed if the component did not received a custom button label"
+  },
   "HsEMwj": {
     "defaultMessage": "Uma seta longa para a direita, separando o progresso anterior (à esquerda) do novo progress do check-in (à direita)",
     "description": "This text is displayed to screen readers, explaining the right arrow icon in our check-in card"
@@ -222,6 +238,10 @@
   "IkA9uV": {
     "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
+  "Innace": {
+    "defaultMessage": "Um ícone de exclamação, alertando que se você confirmar a ação não poderá ser desfeita",
+    "description": "This text is used by screen readers to explain the icon"
   },
   "JZJeBS": {
     "defaultMessage": "Ontem",
@@ -383,9 +403,17 @@
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
   },
+  "YUvWwS": {
+    "defaultMessage": "Registro",
+    "description": "It is used as a fallback if the component has no card type defined for it"
+  },
   "Ykg0Jh": {
     "defaultMessage": "Realizado por <highlight>{author}</highlight> {unit, select, fallback {em} other {}} {time}",
     "description": "This text is displayed as a helper text, below the check-in card title"
+  },
+  "YxNkP6": {
+    "defaultMessage": "Check-in",
+    "description": "This text is displayed in some places in our timeline card, showing the type of the card in a friendly name"
   },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
@@ -458,6 +486,10 @@
   "iivI51": {
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
+  },
+  "jvxLB+": {
+    "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
+    "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
   },
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",

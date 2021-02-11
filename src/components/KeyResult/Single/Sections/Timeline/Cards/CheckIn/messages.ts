@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSectionTimelineCardCheckInMessage = 'title' | 'helperText' | 'arrowRightDesc'
+type KeyResultsSectionTimelineCardCheckInMessage =
+  | 'title'
+  | 'helperText'
+  | 'arrowRightDesc'
+  | 'cardType'
 
 export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
   title: {
@@ -22,5 +26,12 @@ export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
     id: 'HsEMwj',
     description:
       'This text is displayed to screen readers, explaining the right arrow icon in our check-in card',
+  },
+
+  cardType: {
+    defaultMessage: 'Check-in',
+    id: 'YxNkP6',
+    description:
+      'This text is displayed in some places in our timeline card, showing the type of the card in a friendly name',
   },
 })

@@ -11,6 +11,7 @@ export interface KeyResultSectionTimelineCardBaseProperties {
   borderRadius: BorderProps['borderRadius']
   borderWidth: BorderProps['borderWidth']
   bg: BackgroundProps['bg']
+  intlCardType?: string
   borderBottomRadius?: BorderProps['borderBottomRadius']
   policies?: AuthzPolicies
   onDelete?: () => void
@@ -24,6 +25,7 @@ const KeyResultSectionTimelineCardBase = ({
   bg,
   policies,
   onDelete,
+  intlCardType,
 }: KeyResultSectionTimelineCardBaseProperties) => (
   <Box
     p={4}
@@ -36,7 +38,7 @@ const KeyResultSectionTimelineCardBase = ({
   >
     {policies?.delete === AUTHZ_POLICY.ALLOW && (
       <Box position="absolute" right={4} top={4}>
-        <KeyResultSectionTimelineCardBaseOptions onDelete={onDelete} />
+        <KeyResultSectionTimelineCardBaseOptions intlCardType={intlCardType} onDelete={onDelete} />
       </Box>
     )}
     {children}

@@ -162,6 +162,17 @@ type KeyResultComment implements EntityObject {
   user: User!
 }
 
+"""The delete result from a delete mutation for key result comments"""
+type KeyResultCommentDeleteResult implements DeleteResultObject {
+  """The amount of entities removed"""
+  affected: Int!
+}
+
+interface DeleteResultObject {
+  """The amount of entities removed"""
+  affected: Int!
+}
+
 """A goal that is created for the team focusing in a given team objective"""
 type KeyResult implements EntityObject {
   """The ID of this entity"""
@@ -181,7 +192,7 @@ type KeyResult implements EntityObject {
   format: String!
   currentProgress: Float!
   currentConfidence: Float!
-  timeline(skip: Int, limit: Int = 10): [TimelineEntryUnion!]!
+  timeline(offset: Int, limit: Int = 10): [TimelineEntryUnion!]!
 
   """The creation date of the key result"""
   createdAt: DateTime!
@@ -244,6 +255,12 @@ type KeyResultCheckIn implements EntityObject {
   """The comment added in the report"""
   comment: String
   parent: KeyResultCheckIn
+}
+
+"""The delete result from a delete mutation for key result check-ins"""
+type KeyResultCheckInDeleteResult implements DeleteResultObject {
+  """The amount of entities removed"""
+  affected: Int!
 }
 
 """
@@ -374,7 +391,9 @@ enum KEY_RESULT_CUSTOM_LIST_BINDING {
 type Mutation {
   updateKeyResultCustomList(keyResultCustomListInput: KeyResultCustomListInput!, id: ID!): KeyResultCustomList!
   createKeyResultCheckIn(keyResultCheckIn: KeyResultCheckInInput!): KeyResultCheckIn!
+  deleteKeyResultCheckIn(id: ID!): KeyResultCheckInDeleteResult!
   createKeyResultComment(keyResultComment: KeyResultCommentInput!): KeyResultComment!
+  deleteKeyResultComment(id: ID!): KeyResultCommentDeleteResult!
 }
 
 """Required data to update a given key result custom list"""

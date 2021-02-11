@@ -13,7 +13,10 @@ describe('component expectations', () => {
     }
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardsBase policies={fakePolicies as any}>
+      <KeyResultSectionTimelineCardsBase
+        policies={fakePolicies as any}
+        intlCardType={faker.random.word()}
+      >
         <FakeComponent />
       </KeyResultSectionTimelineCardsBase>,
     )
@@ -29,7 +32,10 @@ describe('component customizations', () => {
     const fakeRadius = faker.random.number()
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardsBase borderRadius={fakeRadius}>
+      <KeyResultSectionTimelineCardsBase
+        borderRadius={fakeRadius}
+        intlCardType={faker.random.word()}
+      >
         <FakeComponent />
       </KeyResultSectionTimelineCardsBase>,
     )
@@ -43,7 +49,10 @@ describe('component customizations', () => {
     const fakeRadius = faker.random.number()
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardsBase borderBottomRadius={fakeRadius}>
+      <KeyResultSectionTimelineCardsBase
+        borderBottomRadius={fakeRadius}
+        intlCardType={faker.random.word()}
+      >
         <FakeComponent />
       </KeyResultSectionTimelineCardsBase>,
     )
@@ -55,7 +64,7 @@ describe('component customizations', () => {
 
   it('should render provided children', () => {
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardsBase>
+      <KeyResultSectionTimelineCardsBase intlCardType={faker.random.word()}>
         <FakeComponent />
       </KeyResultSectionTimelineCardsBase>,
     )
@@ -69,7 +78,7 @@ describe('component customizations', () => {
     const fakeWidth = faker.random.number()
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardsBase borderWidth={fakeWidth}>
+      <KeyResultSectionTimelineCardsBase borderWidth={fakeWidth} intlCardType={faker.random.word()}>
         <FakeComponent />
       </KeyResultSectionTimelineCardsBase>,
     )
@@ -83,7 +92,7 @@ describe('component customizations', () => {
     const fakeColor = faker.internet.color()
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardsBase bg={fakeColor}>
+      <KeyResultSectionTimelineCardsBase bg={fakeColor} intlCardType={faker.random.word()}>
         <FakeComponent />
       </KeyResultSectionTimelineCardsBase>,
     )

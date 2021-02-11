@@ -11,7 +11,7 @@ const AVAILABLE_TEST_DRAWINGS = [
   'Activity',
   'Bookmark',
   'Calendar',
-  'Delete',
+  'TrashBin',
   'Discovery',
   'Document',
   'EditSquare',

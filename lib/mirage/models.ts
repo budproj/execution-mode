@@ -17,10 +17,12 @@ const models = {
     keyResult: belongsTo(),
     // eslint-disable-next-line unicorn/no-null
     parent: belongsTo('keyResultCheckIn', { inverse: null }),
+    policies: belongsTo('policy'),
   }),
   keyResultComment: Model.extend({
     user: belongsTo(),
     keyResult: belongsTo(),
+    policies: belongsTo('policy'),
   }),
   keyResultCustomList: Model.extend({
     user: belongsTo(),
@@ -47,6 +49,7 @@ const models = {
     // eslint-disable-next-line unicorn/no-null
     companies: hasMany('team', { inverse: null }),
   }),
+  policy: Model,
 }
 
 export default models

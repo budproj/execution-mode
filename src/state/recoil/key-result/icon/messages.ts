@@ -21,7 +21,7 @@ export const iconDescMessages = defineMessages<KeyResultIconDrawing>({
     description:
       'The desc message for the Calendar icon. This icon is used to ilustrate our key results',
   },
-  Delete: {
+  TrashBin: {
     defaultMessage: 'Um ícone de lata de lixo',
     id: 'NADPP1',
     description:

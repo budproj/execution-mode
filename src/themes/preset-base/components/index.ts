@@ -13,3 +13,5 @@ export { default as Popover } from './popover'
 export { default as Textarea } from './text-area'
 
 export { default as Menu } from './menu'
+
+export { default as Modal } from './modal'

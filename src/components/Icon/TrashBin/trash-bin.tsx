@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProperties } from 'src/components/Icon/types'
 
-export interface DeleteIconProperties extends IconProps, AcessibleIconProperties {}
+export interface TrashBinIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Delete = ({ title, desc, ...rest }: DeleteIconProperties): ReactElement => (
+const TrashBin = ({ title, desc, ...rest }: TrashBinIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Delete = ({ title, desc, ...rest }: DeleteIconProperties): ReactElement =>
   </Icon>
 )
 
-Delete.defaultProps = {
+TrashBin.defaultProps = {
   fill: 'black',
 }
 
-export default Delete
+export default TrashBin

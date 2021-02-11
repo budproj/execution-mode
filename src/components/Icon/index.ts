@@ -18,7 +18,7 @@ export { default as Close } from './Close'
 
 export { default as Crown } from './Crown'
 
-export { default as Delete } from './Delete'
+export { default as TrashBin } from './TrashBin'
 
 export { default as Discovery } from './Discovery'
 
@@ -75,5 +75,7 @@ export { default as ArrowRightLong } from './ArrowRightLong'
 export { default as PaperPlane } from './PaperPlane'
 
 export { default as TreeDots } from './TreeDots'
+
+export { default as Warning } from './Warning'
 
 export * from './types'
