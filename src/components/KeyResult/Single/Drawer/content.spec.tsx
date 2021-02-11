@@ -15,7 +15,7 @@ const selectPoliciesMatcher = sinon.match((selector: recoil.RecoilState<unknown>
   return selector.key.includes('POLICIES')
 })
 
-describe('expected behaviors', () => {
+describe('component lifecycle', () => {
   afterEach(() => sinon.restore())
 
   it('updates the local key result data if it received new remote data', () => {
@@ -29,20 +29,14 @@ describe('expected behaviors', () => {
     }
     const spy = sinon.spy()
 
-    const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
-    recoilStateStub
-      .withArgs(selectPoliciesMatcher)
-      .returns([defaultKeyResultPolicies, sinon.fake()])
-    recoilStateStub.withArgs(selectKeyResult(fakeID)).returns([faker.random.word(), spy])
-    recoilStateStub.returns([undefined, sinon.fake()])
+    const stub = sinon.stub(recoil, 'useSetRecoilState')
+    stub.withArgs(selectKeyResult(fakeID)).returns(spy)
+    stub.returns(sinon.fake())
 
-    sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
-    sinon.stub(recoil, 'useRecoilValue')
+    sinon.stub(recoil, 'useRecoilState').returns([undefined, sinon.fake()])
 
-    let shouldExecuteQuery = true
     sinon.stub(apollo, 'useQuery').callsFake((_, options) => {
-      if (options?.onCompleted && shouldExecuteQuery) {
-        shouldExecuteQuery = false
+      if (options?.onCompleted) {
         options.onCompleted(fakeData)
       }
 
@@ -51,48 +45,8 @@ describe('expected behaviors', () => {
 
     enzyme.shallow(<KeyResultDrawerContent keyResultID={fakeID} />)
 
-    const expectedArguments = {
-      ...omit(fakeData.keyResult, 'policies'),
-      timeline: [],
-    }
+    const expectedArguments = omit(fakeData.keyResult, 'policies')
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(expectedArguments)
-
-    expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-
-  it('switches the fetched flag for the timeline to true after loading it to our local state', () => {
-    const spy = sinon.spy()
-    const fakeID = faker.random.word()
-    const fakeData = {
-      keyResult: {
-        ...faker.helpers.userCard(),
-        policies: defaultKeyResultPolicies,
-        id: fakeID,
-      },
-    }
-
-    const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
-    recoilStateStub
-      .withArgs(selectPoliciesMatcher)
-      .returns([defaultKeyResultPolicies, sinon.fake()])
-    recoilStateStub.returns([undefined, sinon.fake()])
-
-    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
-    sinon.stub(recoil, 'useRecoilValue')
-
-    let shouldExecuteQuery = true
-    sinon.stub(apollo, 'useQuery').callsFake((_, options) => {
-      if (options?.onCompleted && shouldExecuteQuery) {
-        shouldExecuteQuery = false
-        options.onCompleted(fakeData)
-      }
-
-      return {} as any
-    })
-
-    enzyme.shallow(<KeyResultDrawerContent keyResultID={fakeID} />)
-
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(true)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -114,17 +68,15 @@ describe('expected behaviors', () => {
       },
     }
 
-    const recoilStateStub = sinon.stub(recoil, 'useRecoilState')
-    recoilStateStub.withArgs(selectPoliciesMatcher).returns([defaultKeyResultPolicies, spy])
-    recoilStateStub.returns([undefined, sinon.fake()])
+    const stub = sinon.stub(recoil, 'useRecoilState')
+    stub.withArgs(selectPoliciesMatcher).returns([defaultKeyResultPolicies, spy])
+    stub.returns([undefined, sinon.fake()])
 
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
     sinon.stub(recoil, 'useRecoilValue')
 
-    let shouldExecuteQuery = true
     sinon.stub(apollo, 'useQuery').callsFake((_, options) => {
-      if (options?.onCompleted && shouldExecuteQuery) {
-        shouldExecuteQuery = false
+      if (options?.onCompleted) {
         options.onCompleted(fakeData)
       }
 
@@ -144,18 +96,4 @@ describe('expected behaviors', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
-
-  it('uses the current key result timeline length as the offset on the first query', () => {})
-})
-
-describe('infinite scroll', () => {
-  afterEach(() => sinon.restore())
-
-  it('it executes a new query with a proper offset and limit values', () => {})
-
-  it('after N infinite scrolls, it uses the proper offset value', () => {})
-
-  it('it does not executes the query again if we reach the end of the timeline', () => {})
-
-  it('appens the new timeline at the end of the previous one', () => {})
 })

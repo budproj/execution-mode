@@ -29,7 +29,7 @@ const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => 
   }
 
   return (
-    <Box flexGrow={1} maxH="80%">
+    <Box flexGrow={1} overflow="auto">
       <KeyResultSectionTimeline
         keyResultID={keyResultID}
         onScrollY={handleScrollY}

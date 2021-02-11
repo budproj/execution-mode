@@ -38,13 +38,12 @@ const KeyResultSectionTimeline = ({
 }: KeyResultSectionTimelineProperties) => {
   const intl = useIntl()
   const [timeline, setTimeline] = useRecoilState(timelineSelector(keyResultID))
-
-  const hasTimeline = timeline && timeline.length > 0
+  const hasTimeline = typeof timeline !== 'undefined'
 
   const handleQueryResult = (data: GetKeyResultTimelineWithIDQuery) =>
     setTimeline(data.keyResult.timeline)
 
-  const { loading, fetchMore, data } = useQuery<GetKeyResultTimelineWithIDQuery>(
+  const { fetchMore, data } = useQuery<GetKeyResultTimelineWithIDQuery>(
     queries.GET_KEY_RESULT_TIMELINE_WITH_ID,
     {
       variables: {
@@ -69,7 +68,7 @@ const KeyResultSectionTimeline = ({
         <Heading as="h3" fontSize="sm" fontWeight={500} color="gray.400">
           {intl.formatMessage(messages.title)}
         </Heading>
-        {keyResultID && !loading ? (
+        {keyResultID && hasTimeline ? (
           <KeyResultSectionTimelineContent
             keyResultID={keyResultID}
             limit={limit}

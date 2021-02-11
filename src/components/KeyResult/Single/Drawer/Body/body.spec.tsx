@@ -27,7 +27,7 @@ describe('component interations', () => {
 
     const wrapper = enzyme.shallow(<KeyResultDrawerBody keyResultID={fakeID} />)
 
-    const scroll = wrapper.find('ScrollBar')
+    const scroll = wrapper.find('KeyResultSectionTimeline')
     scroll.simulate('scrollY')
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(true)
@@ -45,7 +45,7 @@ describe('component interations', () => {
 
     const wrapper = enzyme.shallow(<KeyResultDrawerBody keyResultID={fakeID} />)
 
-    const scroll = wrapper.find('ScrollBar')
+    const scroll = wrapper.find('KeyResultSectionTimeline')
     scroll.simulate('scrollY')
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(false)
@@ -63,25 +63,11 @@ describe('component interations', () => {
 
     const wrapper = enzyme.shallow(<KeyResultDrawerBody keyResultID={fakeID} />)
 
-    const scroll = wrapper.find('ScrollBar')
-    scroll.simulate('yReachStart')
+    const scroll = wrapper.find('KeyResultSectionTimeline')
+    scroll.simulate('scrollYReachStart')
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(false)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
-  })
-
-  it('triggers the provided onYReachEnd function', () => {
-    const fakeID = faker.random.uuid()
-    const spy = sinon.spy()
-
-    sinon.stub(recoil, 'useRecoilState').returns([undefined, sinon.fake()])
-
-    const wrapper = enzyme.shallow(<KeyResultDrawerBody keyResultID={fakeID} onYReachEnd={spy} />)
-
-    const scroll = wrapper.find('ScrollBar')
-    scroll.simulate('yReachEnd')
-
-    expect(spy.called).toEqual(true)
   })
 })
