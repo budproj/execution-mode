@@ -181,4 +181,31 @@ describe('component interactions', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('triggers the onEntryDelete prop on delete action', async () => {
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
+
+    const spy = sinon.spy()
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+
+    const fakeID = faker.random.uuid()
+
+    const fakeData = {
+      id: fakeID,
+    }
+
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn data={fakeData} onEntryDelete={spy} />,
+    )
+
+    const base = result.find('KeyResultSectionTimelineCardBase')
+    base.simulate('delete')
+
+    await Promise.resolve()
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly('Check-in')
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
 })

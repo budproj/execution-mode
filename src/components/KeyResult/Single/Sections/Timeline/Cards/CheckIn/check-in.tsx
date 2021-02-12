@@ -19,6 +19,7 @@ import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative
 
 export interface KeyResultSectionTimelineCardCheckInProperties {
   data?: Partial<KeyResultCheckIn>
+  onEntryDelete?: (entryType: string) => void
 }
 
 export interface GetKeyResultWithLatestCheckInQuery {
@@ -27,6 +28,7 @@ export interface GetKeyResultWithLatestCheckInQuery {
 
 const KeyResultSectionTimelineCardCheckIn = ({
   data,
+  onEntryDelete,
 }: KeyResultSectionTimelineCardCheckInProperties) => {
   const intl = useIntl()
   const removeEntryFromTimeline = useSetRecoilState(removeTimelineEntry(data?.keyResultId))
@@ -58,8 +60,11 @@ const KeyResultSectionTimelineCardCheckIn = ({
         keyResultCheckInID: data?.id,
       },
     })
+
+    if (onEntryDelete) onEntryDelete(intlCardType)
   }
 
+  const intlCardType = intl.formatMessage(messages.cardType)
   const confidenceDifference =
     data?.confidence && data?.parent ? data.confidence - data.parent.confidence : 0
 
@@ -68,7 +73,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
       <KeyResultSectionTimelineCardBase
         borderBottomRadius={0}
         policies={data?.policies}
-        intlCardType={intl.formatMessage(messages.cardType)}
+        intlCardType={intlCardType}
         onDelete={handleDelete}
       >
         <Flex direction="column" gridGap={4}>

@@ -14,6 +14,10 @@ const selectIsCreatingCheckInMatcher = sinon.match((selector: recoil.RecoilState
   return selector.key.includes('IS_CREATING_CHECK_IN')
 })
 
+const selectEntryTypeMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('ENTRY_TYPE')
+})
+
 describe('component interations', () => {
   afterEach(() => sinon.restore())
 
@@ -27,8 +31,8 @@ describe('component interations', () => {
 
     const wrapper = enzyme.shallow(<KeyResultDrawerBody keyResultID={fakeID} />)
 
-    const scroll = wrapper.find('KeyResultSectionTimeline')
-    scroll.simulate('scrollY')
+    const timeline = wrapper.find('KeyResultSectionTimeline')
+    timeline.simulate('scrollY')
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(true)
 
@@ -45,8 +49,8 @@ describe('component interations', () => {
 
     const wrapper = enzyme.shallow(<KeyResultDrawerBody keyResultID={fakeID} />)
 
-    const scroll = wrapper.find('KeyResultSectionTimeline')
-    scroll.simulate('scrollY')
+    const timeline = wrapper.find('KeyResultSectionTimeline')
+    timeline.simulate('scrollY')
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(false)
 
@@ -63,10 +67,30 @@ describe('component interations', () => {
 
     const wrapper = enzyme.shallow(<KeyResultDrawerBody keyResultID={fakeID} />)
 
-    const scroll = wrapper.find('KeyResultSectionTimeline')
-    scroll.simulate('scrollYReachStart')
+    const timeline = wrapper.find('KeyResultSectionTimeline')
+    timeline.simulate('scrollYReachStart')
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(false)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('updates the entry type upon entry delete', () => {
+    const fakeID = faker.random.uuid()
+    const spy = sinon.spy()
+    const fakeEntry = faker.random.word()
+
+    const stub = sinon.stub(recoil, 'useSetRecoilState')
+    stub.withArgs(selectEntryTypeMatcher).returns(spy)
+
+    sinon.stub(recoil, 'useRecoilState').returns([undefined, sinon.fake()])
+
+    const wrapper = enzyme.shallow(<KeyResultDrawerBody keyResultID={fakeID} />)
+
+    const timeline = wrapper.find('KeyResultSectionTimeline')
+    timeline.simulate('entryDelete', fakeEntry)
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeEntry)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

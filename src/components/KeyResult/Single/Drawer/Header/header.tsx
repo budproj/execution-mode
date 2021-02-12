@@ -14,6 +14,7 @@ import {
 } from 'src/state/recoil/key-result/drawer'
 import selectLatestTimelineEntry from 'src/state/recoil/key-result/timeline/latest-entry'
 
+import KeyResultDrawerDeleteAlert from './DeleteAlert'
 import messages from './messages'
 
 export interface KeyResultDrawerHeaderProperties {
@@ -64,6 +65,8 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
           </Button>
         </Collapse>
       </DrawerHeader>
+
+      <KeyResultDrawerDeleteAlert keyResultID={keyResultID} />
 
       <Collapse unmountOnExit in={shouldShowCheckIn}>
         <Box p={4} pb={0}>

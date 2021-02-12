@@ -55,3 +55,5 @@ export { default as ApolloQueryErrorBoundary } from './ApolloQueryErrorBoundary'
 export { default as ExpandableText } from './ExpandableText'
 
 export { default as ConfirmationModal } from './ConfirmationModal'
+
+export { default as Alert } from './Alert'

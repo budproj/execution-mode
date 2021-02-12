@@ -9,11 +9,13 @@ import { KeyResultCheckIn, KeyResultComment } from 'src/components/KeyResult/typ
 export interface KeyResultSectionTimelineContentEntryProperties<E> {
   typename: string
   data: Partial<E>
+  onEntryDelete?: (entryType: string) => void
 }
 
 const KeyResultSectionTimelineContentEntry = <E extends KeyResultCheckIn | KeyResultComment>({
   typename,
   data,
+  onEntryDelete,
 }: KeyResultSectionTimelineContentEntryProperties<E>) => {
   const typenameComponents: Record<string, typeof KeyResultSectionTimelineCardCheckIn> = {
     KeyResultCheckIn: KeyResultSectionTimelineCardCheckIn,
@@ -22,7 +24,7 @@ const KeyResultSectionTimelineContentEntry = <E extends KeyResultCheckIn | KeyRe
   const TypenameComponent =
     typenameComponents[typename in typenameComponents ? typename : 'KeyResultComment']
 
-  return <TypenameComponent data={data} />
+  return <TypenameComponent data={data} onEntryDelete={onEntryDelete} />
 }
 
 export default KeyResultSectionTimelineContentEntry

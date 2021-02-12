@@ -12,6 +12,7 @@ import {
   Textarea,
   Menu,
   Modal,
+  Alert,
 } from './components'
 
 const colors = {
@@ -134,6 +135,7 @@ const theme = extendTheme({
     Textarea,
     Menu,
     Modal,
+    Alert,
   },
 
   fonts: {

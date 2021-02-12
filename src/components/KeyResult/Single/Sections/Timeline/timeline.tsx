@@ -19,6 +19,7 @@ export interface KeyResultSectionTimelineProperties {
   keyResultID?: KeyResult['id']
   onScrollY?: () => void
   onScrollYReachStart?: () => void
+  onEntryDelete?: (entryType: string) => void
 }
 
 export interface GetKeyResultTimelineWithIDQuery {
@@ -35,6 +36,7 @@ const KeyResultSectionTimeline = ({
   limit,
   onScrollY,
   onScrollYReachStart,
+  onEntryDelete,
 }: KeyResultSectionTimelineProperties) => {
   const intl = useIntl()
   const [timeline, setTimeline] = useRecoilState(timelineSelector(keyResultID))
@@ -74,6 +76,7 @@ const KeyResultSectionTimeline = ({
             limit={limit}
             initialHasMore={hasMore}
             fetchMore={fetchMore}
+            onEntryDelete={onEntryDelete}
           />
         ) : (
           <KeyResultSectionTimelineSkeleton />

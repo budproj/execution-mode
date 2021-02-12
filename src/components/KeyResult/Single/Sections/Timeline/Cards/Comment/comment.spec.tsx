@@ -31,4 +31,26 @@ describe('component interactions', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('triggers the onEntryDelete prop upon deletion request', async () => {
+    const spy = sinon.spy()
+    const fakeID = faker.random.uuid()
+    const fakeData = {
+      id: fakeID,
+    }
+
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.stub(apollo, 'useMutation').returns([sinon.fake()] as any)
+
+    const wrapper = enzyme.shallow(
+      <KeyResultSectionTimelineCardComment data={fakeData} onEntryDelete={spy} />,
+    )
+    wrapper.simulate('delete')
+
+    await Promise.resolve()
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly('Comentário')
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
 })

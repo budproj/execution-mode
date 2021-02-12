@@ -263,6 +263,10 @@
     "defaultMessage": "Painel | bud",
     "description": "The page title that is displayed in the browser tab"
   },
+  "MAcjZG": {
+    "defaultMessage": "Essa ação não pode ser desfeita",
+    "description": "This text is giving more details regarding the delete alert in our drawer"
+  },
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
@@ -470,6 +474,10 @@
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
+  },
+  "goSPM7": {
+    "defaultMessage": "Você excluiu um {type}",
+    "description": "This text is displayed as the alert title, explaining what resource the user removed"
   },
   "hPJxpx": {
     "defaultMessage": "Média Confiança",

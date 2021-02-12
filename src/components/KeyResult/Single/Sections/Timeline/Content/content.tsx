@@ -19,6 +19,7 @@ export interface KeyResultSectionTimelineContentProperties {
   fetchMore: <K extends string>(
     options: FetchMoreQueryOptions<Record<string, any>, K, GetKeyResultTimelineWithIDQuery>,
   ) => Promise<ApolloQueryResult<GetKeyResultTimelineWithIDQuery>>
+  onEntryDelete?: (entryType: string) => void
 }
 
 const KeyResultSectionTimelineContent = ({
@@ -26,6 +27,7 @@ const KeyResultSectionTimelineContent = ({
   limit,
   initialHasMore,
   fetchMore,
+  onEntryDelete,
 }: KeyResultSectionTimelineContentProperties) => {
   const [timeline, setTimeline] = useRecoilState(keyResultTimeline(keyResultID))
   const [hasMore, setHasMore] = useState(initialHasMore)
@@ -63,6 +65,7 @@ const KeyResultSectionTimelineContent = ({
             key={entry.id}
             typename={entry.__typename}
             data={entry}
+            onEntryDelete={onEntryDelete}
           />
         ))}
       </Flex>

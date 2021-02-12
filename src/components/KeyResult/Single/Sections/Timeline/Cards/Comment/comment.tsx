@@ -15,10 +15,12 @@ import queries from './queries.gql'
 
 export interface KeyResultSectionTimelineCardCommentProperties {
   data?: Partial<KeyResultComment>
+  onEntryDelete?: (entryType: string) => void
 }
 
 const KeyResultSectionTimelineCardComment = ({
   data,
+  onEntryDelete,
 }: KeyResultSectionTimelineCardCommentProperties) => {
   const intl = useIntl()
   const removeEntryFromTimeline = useSetRecoilState(removeTimelineEntry(data?.keyResultId))
@@ -26,18 +28,22 @@ const KeyResultSectionTimelineCardComment = ({
     onCompleted: () => removeEntryFromTimeline(data),
   })
 
+  const intlCardType = intl.formatMessage(messages.cardType)
+
   const handleDelete = async () => {
     await deleteKeyResultComment({
       variables: {
         keyResultCommentID: data?.id,
       },
     })
+
+    if (onEntryDelete) onEntryDelete(intlCardType)
   }
 
   return (
     <KeyResultSectionTimelineCardBase
       policies={data?.policies}
-      intlCardType={intl.formatMessage(messages.cardType)}
+      intlCardType={intlCardType}
       onDelete={handleDelete}
     >
       <Flex gridGap={4} direction="column">
