@@ -1,9 +1,9 @@
 import { useQuery } from '@apollo/client'
 import { Flex, Heading } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 
 import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
@@ -38,14 +38,20 @@ const KeyResultSectionTimeline = ({
   onScrollYReachStart,
   onEntryDelete,
 }: KeyResultSectionTimelineProperties) => {
+  const [hasMore, setHasMore] = useState(false)
   const intl = useIntl()
   const [timeline, setTimeline] = useRecoilState(timelineSelector(keyResultID))
+  const resetTimeline = useResetRecoilState(timelineSelector(keyResultID))
   const hasTimeline = typeof timeline !== 'undefined'
 
-  const handleQueryResult = (data: GetKeyResultTimelineWithIDQuery) =>
-    setTimeline(data.keyResult.timeline)
+  const handleQueryResult = (data: GetKeyResultTimelineWithIDQuery) => {
+    const isInLimit = data.keyResult.timeline.length >= 10
 
-  const { fetchMore, data } = useQuery<GetKeyResultTimelineWithIDQuery>(
+    setTimeline(data.keyResult.timeline)
+    setHasMore(isInLimit)
+  }
+
+  const { fetchMore } = useQuery<GetKeyResultTimelineWithIDQuery>(
     queries.GET_KEY_RESULT_TIMELINE_WITH_ID,
     {
       variables: {
@@ -57,7 +63,22 @@ const KeyResultSectionTimeline = ({
     },
   )
 
-  const hasMore = Boolean(data?.keyResult && data.keyResult.timeline.length >= limit)
+  const handleTimelineReset = async () => {
+    resetTimeline()
+
+    const { data } = await fetchMore({
+      variables: {
+        limit,
+        id: keyResultID,
+      },
+    })
+    setTimeline(data.keyResult.timeline)
+  }
+
+  const handleEntryDelete = async (entryType: string) => {
+    await handleTimelineReset()
+    if (onEntryDelete) onEntryDelete(entryType)
+  }
 
   return (
     <PerfectScrollbar
@@ -76,7 +97,7 @@ const KeyResultSectionTimeline = ({
             limit={limit}
             initialHasMore={hasMore}
             fetchMore={fetchMore}
-            onEntryDelete={onEntryDelete}
+            onEntryDelete={handleEntryDelete}
           />
         ) : (
           <KeyResultSectionTimelineSkeleton />

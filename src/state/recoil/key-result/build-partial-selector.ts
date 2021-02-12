@@ -29,14 +29,26 @@ export const getKeyResultPart = <T extends KeyResultPart>(part: string) => (
   return keyResultPart
 }
 
-export const setKeyResultPart = <T>(part: string) => (id?: KeyResult['id']) => (
-  { get, set }: RecoilInterfaceReadWrite,
+export const setKeyResultPart = <T>(part: string, defaultValue?: any) => (id?: KeyResult['id']) => (
+  { get, set, reset }: RecoilInterfaceReadWrite,
   newValue: T | DefaultValue | undefined,
 ) => {
   if (!id) return
+  if (newValue instanceof DefaultValue)
+    return resetKeyResultPart(part)(id)({ get, set, reset }, defaultValue)
 
   const originalKeyResult = clone(get(keyResultAtomFamily(id))) as KeyResult
   const newKeyResult = setWith(originalKeyResult, part, newValue, clone)
+
+  set(keyResultAtomFamily(id), newKeyResult)
+}
+
+const resetKeyResultPart = (part: string) => (id?: KeyResult['id']) => (
+  { get, set }: RecoilInterfaceReadWrite,
+  defaultValue?: any,
+) => {
+  const originalKeyResult = clone(get(keyResultAtomFamily(id))) as KeyResult
+  const newKeyResult = setWith(originalKeyResult, part, defaultValue, clone)
 
   set(keyResultAtomFamily(id), newKeyResult)
 }

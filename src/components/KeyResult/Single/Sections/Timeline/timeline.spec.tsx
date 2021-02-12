@@ -52,13 +52,19 @@ describe('component lifecycle', () => {
     }
     const spy = sinon.spy()
 
-    sinon
-      .stub(recoil, 'useRecoilState')
+    const stub = sinon.stub(recoil, 'useRecoilState')
+
+    stub
       .withArgs(selectTimelineMatcher)
+      .onFirstCall()
       .returns([undefined, spy] as any)
+    stub
+      .withArgs(selectTimelineMatcher)
+      .onSecondCall()
+      .returns([faker.random.word(), spy] as any)
 
     sinon.stub(apollo, 'useQuery').callsFake((_, options) => {
-      if (options?.onCompleted) {
+      if (options?.onCompleted && !options.skip) {
         options.onCompleted(fakeQueryResult)
       }
 
@@ -97,5 +103,102 @@ describe('component lifecycle', () => {
     enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
 
     expect(spy.notCalled).toEqual(true)
+  })
+})
+
+describe('component interactions', () => {
+  afterEach(() => sinon.restore())
+
+  it('resets the current timeline upon entry deletion', async () => {
+    const fakeFetchMore = sinon.stub().returns({ data: { keyResult: {} } })
+    sinon
+      .stub(recoil, 'useRecoilState')
+      .withArgs(selectTimelineMatcher)
+      .returns([[], sinon.fake()] as any)
+    sinon.stub(apollo, 'useQuery').returns({ fetchMore: fakeFetchMore } as any)
+
+    const spy = sinon.spy()
+    sinon.stub(recoil, 'useResetRecoilState').returns(spy)
+
+    const wrapper = enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
+
+    const content = wrapper.find('KeyResultSectionTimelineContent')
+    content.simulate('entryDelete')
+
+    await Promise.resolve()
+
+    expect(spy.called).toEqual(true)
+  })
+
+  it('should refetch the timeline after deletion', async () => {
+    const fakeFetchMore = sinon.stub().returns({ data: { keyResult: {} } })
+    sinon
+      .stub(recoil, 'useRecoilState')
+      .withArgs(selectTimelineMatcher)
+      .returns([[], sinon.fake()] as any)
+    sinon.stub(apollo, 'useQuery').returns({ fetchMore: fakeFetchMore } as any)
+
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+
+    const wrapper = enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
+
+    const content = wrapper.find('KeyResultSectionTimelineContent')
+    content.simulate('entryDelete')
+
+    await Promise.resolve()
+
+    expect(fakeFetchMore.called).toEqual(true)
+  })
+
+  it('should pass the refetched timeline results after deletion to our timeline local state', async () => {
+    const newFakeTimeline = faker.random.word()
+    const fakeFetchMore = sinon
+      .stub()
+      .returns({ data: { keyResult: { timeline: newFakeTimeline } } })
+
+    const spy = sinon.spy()
+    sinon
+      .stub(recoil, 'useRecoilState')
+      .withArgs(selectTimelineMatcher)
+      .returns([[], spy] as any)
+    sinon.stub(apollo, 'useQuery').returns({ fetchMore: fakeFetchMore } as any)
+
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+
+    const wrapper = enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
+
+    const content = wrapper.find('KeyResultSectionTimelineContent')
+    content.simulate('entryDelete')
+
+    await Promise.resolve()
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newFakeTimeline)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('executes the provided onEntryDelete prop upon entry deletion', async () => {
+    const spy = sinon.spy()
+    const fakeFetchMore = sinon.stub().returns({ data: { keyResult: {} } })
+
+    sinon
+      .stub(recoil, 'useRecoilState')
+      .withArgs(selectTimelineMatcher)
+      .returns([[], sinon.fake()] as any)
+    sinon.stub(apollo, 'useQuery').returns({ fetchMore: fakeFetchMore } as any)
+
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+
+    const wrapper = enzyme.shallow(
+      <KeyResultSectionTimeline keyResultID={faker.random.uuid()} onEntryDelete={spy} />,
+    )
+
+    const content = wrapper.find('KeyResultSectionTimelineContent')
+    content.simulate('entryDelete')
+
+    await Promise.resolve()
+    await Promise.resolve()
+
+    expect(spy.called).toEqual(true)
   })
 })

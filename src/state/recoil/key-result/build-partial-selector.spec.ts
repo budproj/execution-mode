@@ -1,4 +1,5 @@
 import faker from 'faker'
+import { DefaultValue } from 'recoil'
 import sinon from 'sinon'
 
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
@@ -167,6 +168,29 @@ describe('partial selector setter', () => {
 
     const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
       morty: newValue,
+    })
+
+    expect(wasCalledAsExpected).toEqual(true)
+  })
+
+  it('resets to a desired default value if we provide an instance of DefaultValue to the setter', () => {
+    const fakeDesiredDefaultValue = faker.random.word()
+    const fakeDefaultValue = new DefaultValue()
+    const preservedValue = faker.random.word()
+    const fakeData = { rick: preservedValue, morty: 'Smith' }
+
+    const stub = sinon.stub().returns(fakeData)
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+
+    const fakePartSetter = buildPartialSelector.setKeyResultPart('morty', fakeDesiredDefaultValue)
+    const fakeSetter = fakePartSetter(fakeID)
+
+    fakeSetter({ get: stub, set: spy } as any, fakeDefaultValue)
+
+    const wasCalledAsExpected = spy.calledOnceWithExactly(keyResultAtomFamily(fakeID), {
+      rick: preservedValue,
+      morty: fakeDesiredDefaultValue,
     })
 
     expect(wasCalledAsExpected).toEqual(true)
