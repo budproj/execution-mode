@@ -1,4 +1,4 @@
-import { Box, FormLabel, MenuItemOption } from '@chakra-ui/react'
+import { Box, Flex, FormLabel, MenuItemOption } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -29,7 +29,11 @@ const CheckInFormFieldCurrentConfidence = () => {
     <Box>
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
       <SelectMenu
-        placeholder={<ConfidenceTag confidenceValue={normalizedConfidence} />}
+        placeholder={
+          <Flex justifyContent="flex-start">
+            <ConfidenceTag confidenceValue={normalizedConfidence} />
+          </Flex>
+        }
         value={normalizedConfidence.toString()}
         onChange={handleChange}
       >

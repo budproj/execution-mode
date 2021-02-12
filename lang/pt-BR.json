@@ -1,4 +1,8 @@
 {
+  "+G9goh": {
+    "defaultMessage": "Ver mais...",
+    "description": "This text is displayed in the button that expands a truncated text"
+  },
   "+IK11v": {
     "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
     "description": "This message is the alt message for our box drawing in the unknown error page"
@@ -23,6 +27,10 @@
     "defaultMessage": "Um ícone de pasta",
     "description": "The desc message for the Folder icon. This icon is used to ilustrate our key results"
   },
+  "/aK0UI": {
+    "defaultMessage": "Um ícone de um avião de papel. Ao clicar nele você irá enviar um comentário",
+    "description": "The alternative text explaining our paper plane icon"
+  },
   "/vJzGe": {
     "defaultMessage": "Um ícone de marcador de página",
     "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
@@ -31,13 +39,21 @@
     "defaultMessage": "Com Barreira",
     "description": "We use this tag to group every key result with confidence lower than 0"
   },
-  "00ogu4": {
-    "defaultMessage": "Qual o seu nível de confiança?",
-    "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
+  "02lpnJ": {
+    "defaultMessage": "Comentário",
+    "description": "This text is displayed in some places in our timeline card, showing the type of the card in a friendly name"
   },
   "03yPkn": {
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
+  },
+  "0J4rjt": {
+    "defaultMessage": "Cancelar",
+    "description": "This text is used as a fallback to the confirmation modal cancel button. It is displayed if the component did not received a custom button label"
+  },
+  "0SQt21": {
+    "defaultMessage": "Novo valor",
+    "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
   },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
@@ -50,10 +66,6 @@
   "1HBRw6": {
     "defaultMessage": "Nenhuma atualização recente",
     "description": "This label is displayed if we do not have any update date to display"
-  },
-  "1nABM7": {
-    "defaultMessage": "Meta:",
-    "description": "This is the label of the check-in form that indicates the goal for her/his key result"
   },
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
@@ -79,6 +91,10 @@
     "defaultMessage": "{team} | bud",
     "description": "The page title that is displayed in the browser tab"
   },
+  "4N1d+U": {
+    "defaultMessage": "Últimas atividades",
+    "description": "This text is displayed at the top of our timeline, as its title"
+  },
   "4f4cWE": {
     "defaultMessage": "Alto",
     "description": "We use this tag to group every key result with confidence higher than 66"
@@ -86,6 +102,10 @@
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
     "description": "The page title that is displayed in the browser tab"
+  },
+  "5llJzq": {
+    "defaultMessage": "Você tem certeza que deseja apagar este {type}?",
+    "description": "This text is used in our delete modal confirmation to explain to the user what will happen"
   },
   "5th5LY": {
     "defaultMessage": "Ué! Cadê a tela que tava aqui?",
@@ -103,13 +123,13 @@
     "defaultMessage": "Nesta semana",
     "description": "This label is displayed if the date difference is 1 week or less"
   },
+  "6spUEn": {
+    "defaultMessage": "Fazer check-in",
+    "description": "This message is displayed as a label button when the check-in form is closed in our key result section"
+  },
   "6vXlkc": {
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
     "description": "The page description that is displayed in Google and screen readers"
-  },
-  "8G2Cwy": {
-    "defaultMessage": "Última atualização {date} por {author}",
-    "description": "This message displays the latest report status for a given component"
   },
   "8LTdv4": {
     "defaultMessage": "Objetivo",
@@ -139,6 +159,14 @@
     "defaultMessage": "Enviar comentário",
     "description": "This label is displayed in the submit button in our drawer"
   },
+  "CMMxiV": {
+    "defaultMessage": "Enviar comentário",
+    "description": "The title displayed in the tooltip when the user hovers our paper plane icon in our add comment form"
+  },
+  "CW+HBw": {
+    "defaultMessage": "Check-in",
+    "description": "This message is displayed as a label button to open the check-in form when the user is scrolling in our key result drawer"
+  },
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"
@@ -154,6 +182,10 @@
   "DrLml8": {
     "defaultMessage": "Clique aqui para fechar o formulário de check-in",
     "description": "This message is displayed as the alternative text for the close button in our check-in form"
+  },
+  "ErVh0y": {
+    "defaultMessage": "Valor atual",
+    "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
   },
   "F33Lyk": {
     "defaultMessage": "Cor do Nível de Confiança",
@@ -183,9 +215,17 @@
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
   },
+  "Hfg9tY": {
+    "defaultMessage": "Confirmar",
+    "description": "This text is used as a fallback to the confirmation modal confirm button. It is displayed if the component did not received a custom button label"
+  },
   "HsEMwj": {
     "defaultMessage": "Uma seta longa para a direita, separando o progresso anterior (à esquerda) do novo progress do check-in (à direita)",
     "description": "This text is displayed to screen readers, explaining the right arrow icon in our check-in card"
+  },
+  "I+MSuS": {
+    "defaultMessage": "Ver menos...",
+    "description": "This text is displayed in the button that collapses the truncated text"
   },
   "I5aN4R": {
     "defaultMessage": "Explorar",
@@ -199,6 +239,10 @@
     "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
   },
+  "Innace": {
+    "defaultMessage": "Um ícone de exclamação, alertando que se você confirmar a ação não poderá ser desfeita",
+    "description": "This text is used by screen readers to explain the icon"
+  },
   "JZJeBS": {
     "defaultMessage": "Ontem",
     "description": "This label is displayed if the last is yesterday"
@@ -206,6 +250,10 @@
   "Jdklxm": {
     "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
     "description": "This message is the alt message for our box drawing in the not found error page"
+  },
+  "KdYFbe": {
+    "defaultMessage": "Apagar",
+    "description": "This text is displayed in our menu, as an anchor to remove that given card"
   },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
@@ -215,6 +263,10 @@
     "defaultMessage": "Painel | bud",
     "description": "The page title that is displayed in the browser tab"
   },
+  "MAcjZG": {
+    "defaultMessage": "Essa ação não pode ser desfeita",
+    "description": "This text is giving more details regarding the delete alert in our drawer"
+  },
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
@@ -223,9 +275,21 @@
     "defaultMessage": "Um ícone de lata de lixo",
     "description": "The desc message for the Delete icon. This icon is used to ilustrate our key results"
   },
-  "NF2bAx": {
-    "defaultMessage": "Este resultado-chave não possui nenhum check-in",
-    "description": "This text is displayed in our key result timeline when no content exist"
+  "ND5T6U": {
+    "defaultMessage": "Uma seta para cima. Ao clicar nela você fechará o menu de seleção",
+    "description": "This is the desc attribute of our chevron up icon. It is used by screen readers"
+  },
+  "NOqI9i": {
+    "defaultMessage": "Como está sua confiança?",
+    "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
+  },
+  "Nafqgw": {
+    "defaultMessage": "Cancelar check-in",
+    "description": "This message is displayed as a label button when the check-in form is opened in our key result section"
+  },
+  "O0072X": {
+    "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
+    "description": "This text is used by screen readers to explain our ghost image inside our key result drawer"
   },
   "P/ujgo": {
     "defaultMessage": "Um ícone de controle de video game",
@@ -263,17 +327,9 @@
     "defaultMessage": "Painel",
     "description": "AppBar menu item that links to \"Dashboard\" page"
   },
-  "Ro4JqE": {
-    "defaultMessage": "Para",
-    "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
-  },
   "S/F2Hk": {
     "defaultMessage": "Detalhes",
     "description": "The label text above the Description section in our key result single page or drawer"
-  },
-  "S1OFpY": {
-    "defaultMessage": "De",
-    "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
   },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
@@ -295,9 +351,17 @@
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
   },
+  "SxsVDt": {
+    "defaultMessage": "Meta",
+    "description": "This is the label of the check-in form that indicates the goal for her/his key result"
+  },
   "T8ytLJ": {
     "defaultMessage": "Objetivo",
     "description": "The label text above the Objective section in our key result single page or drawer"
+  },
+  "TDt9po": {
+    "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}} por {author}",
+    "description": "This message displays the latest report status for a given component"
   },
   "TzHlPJ": {
     "defaultMessage": "Em manutenção | bud",
@@ -342,6 +406,18 @@
   "XiSFEr": {
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
+  },
+  "YUvWwS": {
+    "defaultMessage": "Registro",
+    "description": "It is used as a fallback if the component has no card type defined for it"
+  },
+  "Ykg0Jh": {
+    "defaultMessage": "Realizado por <highlight>{author}</highlight> {unit, select, fallback {em} other {}} {time}",
+    "description": "This text is displayed as a helper text, below the check-in card title"
+  },
+  "YxNkP6": {
+    "defaultMessage": "Check-in",
+    "description": "This text is displayed in some places in our timeline card, showing the type of the card in a friendly name"
   },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
@@ -399,6 +475,10 @@
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
   },
+  "goSPM7": {
+    "defaultMessage": "Você excluiu um {type}",
+    "description": "This text is displayed as the alert title, explaining what resource the user removed"
+  },
   "hPJxpx": {
     "defaultMessage": "Média Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
@@ -415,9 +495,9 @@
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
   },
-  "j/xH+H": {
-    "defaultMessage": "Fechar",
-    "description": "This message is displayed when an user hovers the close button of our key result drawer"
+  "jvxLB+": {
+    "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
+    "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
   },
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
@@ -439,6 +519,10 @@
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
   },
+  "lI5vJI": {
+    "defaultMessage": "Um ícone com três pontos. Ao clicar nele você abrirá algumas opções",
+    "description": "This text is displayed as the tree dots desc text in our timeline cards"
+  },
   "lMYmAU": {
     "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
     "description": "This message is displayed above the button in our not found error page"
@@ -458,10 +542,6 @@
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
     "description": "The default description for our page head meta description value"
-  },
-  "n7ZLVl": {
-    "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box a barra lateral do resultado chave",
-    "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our key result drawer close button"
   },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",
@@ -483,9 +563,9 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
-  "r0jTFR": {
-    "defaultMessage": "Realizado por <highlight>{author}</highlight> às {hour}",
-    "description": "This text is displayed as a helper text, below the check-in card title"
+  "rBdkOv": {
+    "defaultMessage": "Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado chave?",
+    "description": "This text gives more details regarding our empty state card in the key result drawer"
   },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
@@ -502,6 +582,10 @@
   "sFYaLE": {
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
+  },
+  "tJ0oU2": {
+    "defaultMessage": "Está silencioso por aqui",
+    "description": "This text is the title of our empty state card inside our key result drawer"
   },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
@@ -522,6 +606,10 @@
   "ui441M": {
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
+  },
+  "unuB2s": {
+    "defaultMessage": "Sobre esse check-in",
+    "description": "This is the label text that is displayed above the input"
   },
   "upeS+T": {
     "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
@@ -566,13 +654,5 @@
   "zev4wl": {
     "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
     "description": "This is a message explaining the flag icon in our check-in form"
-  },
-  "zgF+iY": {
-    "defaultMessage": "Comentário",
-    "description": "This is the label text that is displayed above the input"
-  },
-  "zujGO+": {
-    "defaultMessage": "Fazer check-in",
-    "description": "This message is displayed as a label button in our key result section"
   }
 }

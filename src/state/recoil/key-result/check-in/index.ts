@@ -5,3 +5,5 @@ export { default as keyResultCheckInProgressSliderStep } from './progress-slider
 export { default as keyResultCheckInProgressDraft } from './progress-draft'
 
 export { default as keyResultCheckInCommentEnabled } from './comment-enabled'
+
+export { default as keyResultLatestCheckIn } from './latest'

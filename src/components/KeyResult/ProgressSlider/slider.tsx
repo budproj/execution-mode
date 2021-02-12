@@ -6,15 +6,13 @@ import SliderWithHoverThumb, {
 } from 'src/components/Base/SliderWithHoverThumb'
 import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
   keyResultCheckInPopoverOpen,
   keyResultCheckInProgressDraft,
   keyResultCheckInProgressSliderStep,
 } from 'src/state/recoil/key-result/check-in'
-import {
-  buildPartialSelector,
-  selectCurrentConfidence,
-} from 'src/state/recoil/key-result/selectors'
+import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
 
 export interface ProgressSliderSliderProperties {
   keyResultID?: KeyResult['id']
@@ -75,7 +73,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
       <ProgressSliderSliderWithReference
         ref={forwardedReference}
         value={draftValue}
-        trackColor={confidenceTag?.colors.primary}
+        trackColor={confidenceTag?.color.primary}
         min={initialValue as KeyResult['initialValue']}
         max={goal as KeyResult['goal']}
         step={step}

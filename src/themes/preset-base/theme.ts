@@ -2,7 +2,18 @@ import { extendTheme } from '@chakra-ui/react'
 
 import tokens from 'src/themes/tokens'
 
-import { Button, Skeleton, Tooltip, FormLabel, Input, Popover, Textarea, Menu } from './components'
+import {
+  Button,
+  Skeleton,
+  Tooltip,
+  FormLabel,
+  Input,
+  Popover,
+  Textarea,
+  Menu,
+  Modal,
+  Alert,
+} from './components'
 
 const colors = {
   brand: {
@@ -100,6 +111,20 @@ const colors = {
 const theme = extendTheme({
   colors,
 
+  styles: {
+    global: (properties) => ({
+      ':root': {
+        fontSize: '14px',
+      },
+
+      [`@media (min-width: ${properties.theme.breakpoints[5] as string})`]: {
+        ':root': {
+          fontSize: '16px',
+        },
+      },
+    }),
+  },
+
   components: {
     Button,
     Skeleton,
@@ -109,6 +134,8 @@ const theme = extendTheme({
     Popover,
     Textarea,
     Menu,
+    Modal,
+    Alert,
   },
 
   fonts: {
@@ -119,16 +146,24 @@ const theme = extendTheme({
   shadows: {
     xs: '0 0 0 1px rgba(0, 0, 0, 0.05)',
     sm: '0 3px 10px rgba(0, 0, 0, 0.05)',
-    base: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
     md: '0 5px 30px rgba(0, 0, 0, 0.1)',
     lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
     xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+    base: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
     '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
     outline: '0 0 0 3px rgba(66, 153, 225, 0.6)',
     inner: 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
     none: 'none',
     'dark-lg':
       'rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px',
+  },
+
+  sizes: {
+    xs: '16rem',
+    sm: '20rem',
+    md: '24rem',
+    lg: '28rem',
+    xl: '32rem',
   },
 })
 

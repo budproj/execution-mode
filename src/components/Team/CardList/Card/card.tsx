@@ -32,7 +32,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
     <IntlLink href={id ?? '#'}>
       <Box
         bg="gray.50"
-        borderRadius="15px"
+        borderRadius={16}
         py={12}
         px={10}
         transition="0.4s all ease-out"
@@ -40,12 +40,12 @@ const TeamCard = ({ id }: TeamCardProperties) => {
       >
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
           <Flex flexGrow={1} direction="column" justifyContent="flex-end">
-            <Box minH="23px">
+            <Box minH={8}>
               {isCompany && (
                 <CrownIcon
                   title={intl.formatMessage(messages.crownIconTitle)}
                   desc={intl.formatMessage(messages.crownIconDesc)}
-                  w="34px"
+                  w={10}
                   h="auto"
                 />
               )}
@@ -62,9 +62,9 @@ const TeamCard = ({ id }: TeamCardProperties) => {
           </SkeletonText>
           <Skeleton isLoaded={isLoaded} borderRadius="full">
             <SliderWithFilledTrack
+              trackThickness={3}
               value={team?.currentProgress}
-              trackThickness="12px"
-              trackColor={confidenceTag.colors.primary}
+              trackColor={confidenceTag.color.primary}
             />
           </Skeleton>
           <Box pt={12}>

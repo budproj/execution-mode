@@ -30,7 +30,7 @@ export const DRAWINGS_AVAILABLE: KeyResultIconDrawing[] = [
   'Activity',
   'Bookmark',
   'Calendar',
-  'Delete',
+  'TrashBin',
   'Discovery',
   'Document',
   'EditSquare',

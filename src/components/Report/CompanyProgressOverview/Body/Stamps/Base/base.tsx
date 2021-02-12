@@ -20,8 +20,8 @@ const CompanyProgressOverviewBodyStampBase = ({
     <Flex
       borderRadius="full"
       bg={iconVariant === 'contained' ? 'gray.50' : 'transparent'}
-      w="80px"
-      height="80px"
+      w={20}
+      h={20}
       alignItems="center"
       justifyContent="center"
       borderColor={iconBorderColor}

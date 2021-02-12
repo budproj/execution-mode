@@ -22,9 +22,9 @@ const KeyResultSectionTimelineCardCheckInProgressBar = ({
     <Skeleton isLoaded={isLoaded} minH="12px" borderRadius="full" borderTopRadius={0}>
       <Flex>
         <SliderWithFilledTrack
-          trackColor={confidenceTag.colors.primary}
+          trackColor={confidenceTag.color.primary}
           value={relativePercentageProgress}
-          trackThickness="12px"
+          trackThickness={2}
           trackTopRadius={0}
         />
       </Flex>

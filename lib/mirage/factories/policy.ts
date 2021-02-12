@@ -1,10 +1,10 @@
 import { Factory } from 'miragejs'
 
-import { USER_POLICY } from 'src/components/User/constants'
+import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
 export default Factory.extend({
-  create: USER_POLICY.ALLOW,
-  update: USER_POLICY.ALLOW,
-  read: USER_POLICY.ALLOW,
-  delete: USER_POLICY.ALLOW,
+  create: AUTHZ_POLICY.ALLOW,
+  update: AUTHZ_POLICY.ALLOW,
+  read: AUTHZ_POLICY.ALLOW,
+  delete: AUTHZ_POLICY.ALLOW,
 })

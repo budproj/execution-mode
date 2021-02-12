@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProperties } from 'src/components/Icon/types'
 
-export interface CalendarOutlineIconProperties extends IconProps, AcessibleIconProperties {}
+export interface PlusOutlineIconProperties extends IconProps, AcessibleIconProperties {}
 
-const CalendarOutline = ({ title, desc, ...rest }: CalendarOutlineIconProperties): ReactElement => (
+const PlusOutline = ({ title, desc, ...rest }: PlusOutlineIconProperties): ReactElement => (
   <Icon viewBox="0 0 20 20" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -19,9 +19,9 @@ const CalendarOutline = ({ title, desc, ...rest }: CalendarOutlineIconProperties
   </Icon>
 )
 
-CalendarOutline.defaultProps = {
+PlusOutline.defaultProps = {
   fill: 'black',
   stroke: 'black,',
 }
 
-export default CalendarOutline
+export default PlusOutline

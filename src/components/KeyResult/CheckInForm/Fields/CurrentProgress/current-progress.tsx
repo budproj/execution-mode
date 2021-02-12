@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 import { CheckInFormValues } from '../../form'
 
@@ -29,7 +29,14 @@ const CheckInFormFieldCurrentProgress = ({
   return (
     <Box flex="1 1 0px">
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
-      <Mask isDisabled value={values.currentProgress} bg="gray.50" />
+      <Mask
+        isDisabled
+        value={values.currentProgress}
+        bg="blue.50"
+        color="gray.500"
+        fontSize="xs"
+        _disabled={{ opacity: 1 }}
+      />
     </Box>
   )
 }

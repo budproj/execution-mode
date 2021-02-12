@@ -20,7 +20,7 @@ const UserLogout = () => {
       w="100%"
       justifyContent="flex-start"
       variant="none"
-      _hover={{ bg: 'blue.50' }}
+      _hover={{ bg: 'blue.50', color: 'blue.600' }}
       onClick={handleLogout}
     >
       {intl.formatMessage(messages.label)}

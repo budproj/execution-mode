@@ -1,23 +1,22 @@
 import React from 'react'
 
-import { KeyResultSectionTimelineCardCheckIn } from './Cards'
+import { KeyResultSectionTimelineCardCheckIn, KeyResultSectionTimelineCardComment } from './Cards'
 
-export interface KeyResultSectionTimelineSkeletonProperties {
-  noOfSkeletons: number
-}
+const KeyResultSectionTimelineSkeleton = () => {
+  const skeleton = [
+    KeyResultSectionTimelineCardComment,
+    KeyResultSectionTimelineCardCheckIn,
+    KeyResultSectionTimelineCardComment,
+    KeyResultSectionTimelineCardComment,
+  ]
 
-const KeyResultSectionTimelineSkeleton = ({
-  noOfSkeletons,
-}: KeyResultSectionTimelineSkeletonProperties) => (
-  <>
-    {[...new Array(noOfSkeletons)].map(() => (
-      <KeyResultSectionTimelineCardCheckIn key={Math.random()} />
-    ))}
-  </>
-)
-
-KeyResultSectionTimelineSkeleton.defaultProps = {
-  noOfSkeletons: 3,
+  return (
+    <>
+      {skeleton.map((Component) => (
+        <Component key={Math.random()} />
+      ))}
+    </>
+  )
 }
 
 export default KeyResultSectionTimelineSkeleton

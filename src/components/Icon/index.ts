@@ -10,13 +10,15 @@ export { default as Calendar } from './Calendar'
 
 export { default as ChevronDown } from './ChevronDown'
 
+export { default as ChevronUp } from './ChevronUp'
+
 export { default as Circle } from './Circle'
 
 export { default as Close } from './Close'
 
 export { default as Crown } from './Crown'
 
-export { default as Delete } from './Delete'
+export { default as TrashBin } from './TrashBin'
 
 export { default as Discovery } from './Discovery'
 
@@ -69,5 +71,11 @@ export { default as InfoCircle } from './InfoCircle'
 export { default as Flag } from './Flag'
 
 export { default as ArrowRightLong } from './ArrowRightLong'
+
+export { default as PaperPlane } from './PaperPlane'
+
+export { default as TreeDots } from './TreeDots'
+
+export { default as Warning } from './Warning'
 
 export * from './types'

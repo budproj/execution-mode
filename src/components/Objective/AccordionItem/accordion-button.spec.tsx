@@ -65,7 +65,7 @@ describe('component expectations', () => {
   it('uses the confidence tag color in the circular progress', () => {
     const fakeTagColor = faker.random.word()
     const fakeTag = {
-      colors: {
+      color: {
         primary: fakeTagColor,
       },
     }

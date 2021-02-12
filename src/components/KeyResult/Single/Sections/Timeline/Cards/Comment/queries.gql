@@ -1,0 +1,5 @@
+mutation DELETE_KEY_RESULT_COMMENT($keyResultCommentID: ID!) {
+  deleteKeyResultComment(id: $keyResultCommentID) {
+    affected
+  }
+}

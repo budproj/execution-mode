@@ -28,8 +28,8 @@ export default defineMessages<CheckInFormFieldCommentMessage>({
   },
 
   inputLabel: {
-    defaultMessage: 'Comentário',
-    id: 'zgF+iY',
+    defaultMessage: 'Sobre esse check-in',
+    id: 'unuB2s',
     description: 'This is the label text that is displayed above the input',
   },
 

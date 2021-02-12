@@ -1,17 +1,20 @@
-import { Box, Flex, Skeleton, DrawerCloseButton, DrawerHeader } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Box, DrawerHeader, useTheme, Collapse, Button } from '@chakra-ui/react'
+import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { SliderWithFilledTrack } from 'src/components/Base'
-import { Close as CloseIcon } from 'src/components/Icon'
+import { KeyResultSectionCheckIn } from 'src/components/KeyResult/Single/Sections'
 import KeyResultSingleTitle from 'src/components/KeyResult/Single/Sections/Title'
-import { KeyResult } from 'src/components/KeyResult/types'
-import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
-import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
-import { selectCurrentConfidence } from 'src/state/recoil/key-result/selectors'
+import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { authzPoliciesKeyResult } from 'src/state/recoil/authz/policies'
+import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
+import {
+  keyResultDrawerIsCreatingCheckIn,
+  keyResultDrawerIsScrolling,
+} from 'src/state/recoil/key-result/drawer'
+import selectLatestTimelineEntry from 'src/state/recoil/key-result/timeline/latest-entry'
 
+import KeyResultDrawerDeleteAlert from './DeleteAlert'
 import messages from './messages'
 
 export interface KeyResultDrawerHeaderProperties {
@@ -20,51 +23,56 @@ export interface KeyResultDrawerHeaderProperties {
 
 const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties) => {
   const intl = useIntl()
-  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
-  const draftValue = useRecoilValue(keyResultCheckInProgressDraft(keyResultID))
-  const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
-  const [confidenceTag, setConfidence] = useConfidenceTag(currentConfidence)
+  const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
+    keyResultDrawerIsCreatingCheckIn(keyResultID),
+  )
+  const isScrolling = useRecoilValue(keyResultDrawerIsScrolling(keyResultID))
+  const keyResultPolicies = useRecoilValue(authzPoliciesKeyResult(keyResultID))
+  const setLatestTimelineEntry = useSetRecoilState(selectLatestTimelineEntry(keyResultID))
+  const theme = useTheme()
 
-  const isLoaded = typeof draftValue !== 'undefined'
+  const policies = keyResultPolicies.childEntities.keyResultCheckIn
 
-  useEffect(() => {
-    if (currentConfidence) setConfidence(currentConfidence)
-  }, [currentConfidence, setConfidence])
+  const isNotScrollingOrAskedToCheckIn = !isScrolling || isCreatingCheckIn
+  const canUpdate = policies?.create === AUTHZ_POLICY.ALLOW
+  const shouldShowCheckIn = canUpdate && isNotScrollingOrAskedToCheckIn
+
+  const handleCheckInButtonClick = () => {
+    setIsCreatingCheckIn(true)
+  }
+
+  const handleCheckInCompleted = (data: KeyResultCheckIn) => {
+    setLatestTimelineEntry(data)
+  }
 
   return (
-    <Box>
-      <DrawerHeader bg="blue.50" py={8}>
-        <Box maxW="90%">
+    <Box position="sticky" top={0} bg="white" zIndex={theme.zIndices.tooltip}>
+      <DrawerHeader
+        bg="blue.50"
+        p={4}
+        borderColor="gray.200"
+        borderBottomWidth={1}
+        display="flex"
+        alignItems="center"
+        gridGap={2}
+      >
+        <Box flexGrow={1}>
           <KeyResultSingleTitle keyResultID={keyResultID} />
         </Box>
-
-        <DrawerCloseButton
-          color="gray.300"
-          _hover={{ bg: 'transparent', color: 'brand.400' }}
-          fontSize="12px"
-          position="absolute"
-          top={21}
-          right={21}
-        >
-          <CloseIcon
-            title={intl.formatMessage(messages.closeIconTitle)}
-            desc={intl.formatMessage(messages.closeIconDesc)}
-            fill="currentColor"
-          />
-        </DrawerCloseButton>
+        <Collapse in={isScrolling}>
+          <Button variant="solid" colorScheme="brand" px={6} onClick={handleCheckInButtonClick}>
+            {intl.formatMessage(messages.checkInButtonLabel)}
+          </Button>
+        </Collapse>
       </DrawerHeader>
 
-      <Skeleton isLoaded={isLoaded} minH="8px">
-        <Flex>
-          <SliderWithFilledTrack
-            trackRadius={0}
-            trackColor={confidenceTag.colors.primary}
-            value={draftValue}
-            min={keyResult?.initialValue}
-            max={keyResult?.goal}
-          />
-        </Flex>
-      </Skeleton>
+      <KeyResultDrawerDeleteAlert keyResultID={keyResultID} />
+
+      <Collapse unmountOnExit in={shouldShowCheckIn}>
+        <Box p={4} pb={0}>
+          <KeyResultSectionCheckIn keyResultID={keyResultID} onCompleted={handleCheckInCompleted} />
+        </Box>
+      </Collapse>
     </Box>
   )
 }

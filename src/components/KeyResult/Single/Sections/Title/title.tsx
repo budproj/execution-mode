@@ -1,55 +1,32 @@
-import { Editable, EditableInput, EditablePreview, Flex, Skeleton, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { Flex, Heading, Skeleton } from '@chakra-ui/react'
+import React from 'react'
+import { useRecoilValue } from 'recoil'
 
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { USER_POLICY } from 'src/components/User/constants'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 export interface KeyResultSectionTitleProperties {
   keyResultID?: KeyResult['id']
 }
 
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
-const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
 
 const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties) => {
-  const [title, setTitle] = useRecoilState(titleSelector(keyResultID))
-  const policies = useRecoilValue(policiesSelector(keyResultID))
-  const [titleDraft, setTitleDraft] = useState(title)
+  const title = useRecoilValue(titleSelector(keyResultID))
 
   const isTitleLoaded = Boolean(title)
-  const canUpdate = policies?.update === USER_POLICY.ALLOW
-
-  const handleTitleSubmit = async (newTitle: string) => {
-    setTitle(newTitle)
-    // DEPRECATED: Update remote state
-  }
 
   return (
     <Flex gridGap={4} alignItems="center">
       <Skeleton borderRadius={10} isLoaded={isTitleLoaded}>
-        <KeyResultDynamicIcon title={title} size={6} />
+        <KeyResultDynamicIcon title={title} iconSize={3} boxSize={6} borderRadius={4} />
       </Skeleton>
 
       <Skeleton isLoaded={isTitleLoaded}>
-        {
-          // Disabled title edition until we figure our a proper user experience
-          canUpdate && false ? (
-            <Editable
-              value={titleDraft}
-              onChange={setTitleDraft}
-              onCancel={setTitleDraft}
-              onSubmit={handleTitleSubmit}
-            >
-              <EditablePreview color="gray.800" />
-              <EditableInput />
-            </Editable>
-          ) : (
-            <Text color="gray.800">{title}</Text>
-          )
-        }
+        <Heading color="gray.800" fontSize="md" noOfLines={1} as="h2">
+          {title}
+        </Heading>
       </Skeleton>
     </Flex>
   )

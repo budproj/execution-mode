@@ -6,7 +6,7 @@ import { useRecoilValue } from 'recoil'
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { Stack as StackIcon } from 'src/components/Icon'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 import messages from './messages'
 
@@ -30,8 +30,8 @@ const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectivePro
       <Flex alignItems="center" gridGap={2}>
         <SkeletonCircle isLoaded={isObjectiveLoaded}>
           <Box
-            w="32px"
-            h="32px"
+            w={8}
+            h={8}
             bg="gray.50"
             borderRadius="full"
             display="flex"

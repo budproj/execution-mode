@@ -11,11 +11,9 @@ import {
   keyResultCheckInCommentEnabled,
   keyResultCheckInProgressDraft,
 } from 'src/state/recoil/key-result/check-in'
-import {
-  selectCurrentProgress,
-  selectCurrentConfidence,
-  selectLatestCheckIn,
-} from 'src/state/recoil/key-result/selectors'
+import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
+import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 
 import {
   CheckInFormFieldCurrentProgress,
@@ -34,6 +32,7 @@ export interface CheckInFormProperties {
   keyResultID?: KeyResult['id']
   afterSubmit?: (values: CheckInFormValues) => void
   onCancel?: () => void
+  onCompleted?: (data: KeyResultCheckIn) => void
 }
 
 export interface CheckInFormValues {
@@ -54,6 +53,7 @@ const CheckInForm = ({
   isCommentAlwaysEnabled,
   showGoal,
   onCancel,
+  onCompleted,
 }: CheckInFormProperties) => {
   const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
   const [currentConfidence, setCurrentConfidence] = useRecoilState(
@@ -66,7 +66,10 @@ const CheckInForm = ({
     queries.CREATE_KEY_RESULT_CHECK_IN,
     {
       ignoreResults: false,
-      onCompleted: (data) => setLatestCheckIn(data.createKeyResultCheckIn),
+      onCompleted: (data) => {
+        setLatestCheckIn(data.createKeyResultCheckIn)
+        if (onCompleted) onCompleted(data.createKeyResultCheckIn)
+      },
     },
   )
 
@@ -79,6 +82,7 @@ const CheckInForm = ({
 
   const refreshFields = (values: CheckInFormValues, actions: FormikHelpers<CheckInFormValues>) => {
     actions?.setFieldValue('currentProgress', values.newProgress)
+    actions?.setFieldValue('newProgress', values.newProgress)
     actions?.setFieldValue('comment', initialValues.comment)
   }
 
@@ -137,7 +141,7 @@ const CheckInForm = ({
       {() => (
         <Form>
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
-            <Flex direction="column" gridGap={8} p={gutter}>
+            <Flex direction="column" gridGap={4} p={gutter}>
               <Flex gridGap={5}>
                 <CheckInFormFieldCurrentProgress keyResultID={keyResultID} />
                 <CheckInFormFieldNewProgress keyResultID={keyResultID} isLoading={loading} />
@@ -147,7 +151,11 @@ const CheckInForm = ({
 
               <CheckInFormFieldComment keyResultID={keyResultID} />
 
-              <Actions isLoading={loading} onCancel={handleCancel} />
+              <Actions
+                isLoading={loading}
+                showCancelButton={Boolean(onCancel)}
+                onCancel={handleCancel}
+              />
             </Flex>
           </FormControl>
         </Form>

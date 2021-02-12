@@ -34,18 +34,20 @@ const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentPr
   }
 
   return (
-    <PopoverContent
-      width={400}
-      p={0}
-      pt={8}
-      cursor="auto"
-      onMouseDownCapture={handleMouseDownCapture}
-    >
-      <PopoverHeader border="none" fontSize="18px" fontWeight={700} color="gray.600" px={8} pb={0}>
+    <PopoverContent width={400} p={6} cursor="auto" onMouseDownCapture={handleMouseDownCapture}>
+      <PopoverHeader
+        border="none"
+        fontSize="md"
+        fontWeight={700}
+        color="gray.600"
+        px={0}
+        pt={0}
+        pb={6}
+      >
         {intl.formatMessage(messages.popoverTitle)}
       </PopoverHeader>
       <PopoverCloseButton
-        size="lg"
+        size="md"
         top="1rem"
         right="1.5rem"
         color="gray.200"
@@ -57,12 +59,7 @@ const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentPr
           fill="currentColor"
         />
       </PopoverCloseButton>
-      <CheckInForm
-        keyResultID={keyResultID}
-        afterSubmit={handleSubmit}
-        gutter={8}
-        onCancel={onClose}
-      />
+      <CheckInForm keyResultID={keyResultID} afterSubmit={handleSubmit} onCancel={onClose} />
     </PopoverContent>
   )
 }

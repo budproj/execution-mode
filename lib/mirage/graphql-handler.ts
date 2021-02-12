@@ -1,14 +1,20 @@
 import { createGraphQLHandler } from '@miragejs/graphql'
-import { pickBy } from 'lodash'
+import { pickBy, sortBy } from 'lodash'
 import { ModelInstance } from 'miragejs'
 
-import { KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { KeyResultCheckIn, KeyResultComment } from 'src/components/KeyResult/types'
+import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
 import Models from './models'
 import graphQLSchema from './schema.gql'
 
-export interface QueryKeyResultReportsArguments {
+export interface QueryKeyResultCheckInsArguments {
   limit?: number
+}
+
+export interface QueryKeyResultTimelineArguments {
+  limit?: number
+  offset?: number
 }
 
 export interface QueryUserCompaniesArguments {
@@ -25,11 +31,56 @@ const graphQLHandler = (mirageSchema: unknown) =>
       KeyResult: {
         keyResultCheckIns: (
           parent: ModelInstance<any>,
-          { limit }: QueryKeyResultReportsArguments,
+          { limit }: QueryKeyResultCheckInsArguments,
         ): Array<ModelInstance<typeof Models.keyResultCheckIn>> =>
           limit
             ? parent.keyResultCheckIns?.models.slice(0, limit)
             : parent.keyResultCheckIns?.models,
+
+        policies: () => ({
+          create: AUTHZ_POLICY.ALLOW,
+          update: AUTHZ_POLICY.ALLOW,
+          read: AUTHZ_POLICY.ALLOW,
+          delete: AUTHZ_POLICY.ALLOW,
+        }),
+
+        timeline: (
+          parent: ModelInstance<any>,
+          { limit, offset }: QueryKeyResultTimelineArguments,
+          context: any,
+        ) => {
+          const keyResultCheckIns = parent.keyResultCheckIns.models.map(
+            (keyResultCheckIn: ModelInstance<KeyResultCheckIn>) => ({
+              __typename: 'KeyResultCheckIn',
+              ...keyResultCheckIn.attrs,
+            }),
+          )
+          const keyResultComments = parent.keyResultComments.models.map(
+            (keyResultComment: ModelInstance<KeyResultComment>) => ({
+              __typename: 'KeyResultComment',
+              ...keyResultComment.attrs,
+            }),
+          )
+
+          const timelineEntries = [...keyResultCheckIns, ...keyResultComments]
+          const orderedTimelineEntries = sortBy(timelineEntries, 'createdAt')
+
+          const offsetedEntries = offset
+            ? orderedTimelineEntries.slice(offset, -1)
+            : orderedTimelineEntries
+          const limitedEntries = limit ? offsetedEntries.slice(0, limit) : offsetedEntries
+
+          const limitedEntriesWithRelations = limitedEntries.map((entry) => ({
+            ...entry,
+            /* eslint-disable unicorn/no-fn-reference-in-iterator */
+            user: context.mirageSchema.users.find(entry.userId),
+            keyResult: context.mirageSchema.keyResults.find(entry.keyResultId),
+            policies: context.mirageSchema.policies.find(entry.policiesId),
+            /* eslint-enable unicorn/no-fn-reference-in-iterator */
+          }))
+
+          return limitedEntriesWithRelations
+        },
       },
 
       User: {

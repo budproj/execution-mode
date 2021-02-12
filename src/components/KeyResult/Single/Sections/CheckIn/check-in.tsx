@@ -1,14 +1,13 @@
-import { Skeleton, Button, Collapse, Flex, Heading, IconButton } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Skeleton, Button, Collapse, Flex, Heading } from '@chakra-ui/react'
+import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import CloseIcon from 'src/components/Icon/Close'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
-import { KeyResult } from 'src/components/KeyResult/types'
-import { USER_POLICY } from 'src/components/User/constants'
+import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
-import { buildPartialSelector, selectCurrentProgress } from 'src/state/recoil/key-result/selectors'
+import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
+import { keyResultDrawerIsCreatingCheckIn } from 'src/state/recoil/key-result/drawer'
 
 import { KeyResultSectionTimelineCardBase } from '../Timeline/Cards'
 
@@ -16,54 +15,51 @@ import messages from './messages'
 
 export interface KeyResultSectionCheckInProperties {
   keyResultID?: KeyResult['id']
+  onCompleted?: (data: KeyResultCheckIn) => void
 }
 
-const policiesSelector = buildPartialSelector<KeyResult['policies']>('policies')
-
-const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInProperties) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const policies = useRecoilValue(policiesSelector(keyResultID))
+const KeyResultSectionCheckIn = ({
+  keyResultID,
+  onCompleted,
+}: KeyResultSectionCheckInProperties) => {
+  const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
+    keyResultDrawerIsCreatingCheckIn(keyResultID),
+  )
   const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const intl = useIntl()
 
-  const isLoaded = typeof keyResultID !== 'undefined' && typeof policies !== 'undefined'
-  const canUpdate = policies?.update === USER_POLICY.ALLOW || !isLoaded
+  const isLoaded = typeof currentProgress !== 'undefined'
 
   const handleOpen = () => {
-    setIsOpen(true)
+    setIsCreatingCheckIn(true)
   }
 
   const handleClose = () => {
-    setIsOpen(false)
+    setIsCreatingCheckIn(false)
     setDraftValue(currentProgress)
   }
 
-  return canUpdate ? (
-    <Skeleton isLoaded={isLoaded}>
-      <Collapse animateOpacity in={!isOpen}>
-        <Button variant="outline" w="100%" borderRadius="full" onClick={handleOpen}>
-          {intl.formatMessage(messages.button)}
+  return (
+    <Flex direction="column" gridGap={4}>
+      <Skeleton isLoaded={isLoaded}>
+        <Button
+          variant="solid"
+          w="100%"
+          colorScheme={isCreatingCheckIn ? 'gray' : 'brand'}
+          onClick={isCreatingCheckIn ? handleClose : handleOpen}
+        >
+          {intl.formatMessage(
+            isCreatingCheckIn ? messages.buttonLabelClose : messages.buttonLabelOpen,
+          )}
         </Button>
-      </Collapse>
-      <Collapse animateOpacity in={isOpen}>
+      </Skeleton>
+      <Collapse animateOpacity in={isCreatingCheckIn}>
         <KeyResultSectionTimelineCardBase>
-          <Flex>
-            <Heading fontSize="18px" fontWeight={700} color="gray.600" flexGrow={1}>
+          <Flex pb={4}>
+            <Heading fontSize="md" fontWeight={700} color="gray.600" flexGrow={1}>
               {intl.formatMessage(messages.formTitle)}
             </Heading>
-
-            <IconButton
-              aria-label={intl.formatMessage(messages.closeIconAlt)}
-              icon={
-                <CloseIcon
-                  title={intl.formatMessage(messages.closeIconTitle)}
-                  desc={intl.formatMessage(messages.closeIconAlt)}
-                  fill="gray.200"
-                />
-              }
-              onClick={handleClose}
-            />
           </Flex>
 
           <CheckInForm
@@ -71,13 +67,12 @@ const KeyResultSectionCheckIn = ({ keyResultID }: KeyResultSectionCheckInPropert
             isCommentAlwaysEnabled
             keyResultID={keyResultID}
             afterSubmit={handleClose}
-            onCancel={handleClose}
+            onCompleted={onCompleted}
           />
         </KeyResultSectionTimelineCardBase>
       </Collapse>
-    </Skeleton>
-  ) : // eslint-disable-next-line unicorn/no-null
-  null
+    </Flex>
+  )
 }
 
 export default KeyResultSectionCheckIn

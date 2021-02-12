@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Flex, FlexProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -13,11 +13,18 @@ import {
 import { KeyResultIconDrawing } from 'src/state/recoil/key-result/icon/types'
 
 export interface KeyResultDynamicIconProperties {
-  title: KeyResult['title'] | undefined
-  size: number
+  title?: KeyResult['title']
+  iconSize: FlexProps['width']
+  boxSize: FlexProps['width']
+  borderRadius: FlexProps['borderRadius']
 }
 
-const KeyResultDynamicIcon = ({ title, size }: KeyResultDynamicIconProperties): ReactElement => {
+const KeyResultDynamicIcon = ({
+  title,
+  boxSize,
+  iconSize,
+  borderRadius,
+}: KeyResultDynamicIconProperties): ReactElement => {
   const intl = useIntl()
   const drawing = useRecoilValue<KeyResultIconDrawing>(keyResultIconDrawing(title))
   const color = useRecoilValue<string>(keyResultIconColor(title))
@@ -26,14 +33,24 @@ const KeyResultDynamicIcon = ({ title, size }: KeyResultDynamicIconProperties): 
   const IconComponent = Icons[drawing]
 
   return (
-    <Box bg={color} borderRadius={10} p={4} lineHeight={1}>
-      <IconComponent desc={intl.formatMessage(desc)} fill="white" w={size} h={size} />
-    </Box>
+    <Flex
+      lineHeight={1}
+      bg={color}
+      borderRadius={borderRadius}
+      w={boxSize}
+      h={boxSize}
+      alignItems="center"
+      justifyContent="center"
+    >
+      <IconComponent desc={intl.formatMessage(desc)} fill="white" w={iconSize} h={iconSize} />
+    </Flex>
   )
 }
 
 KeyResultDynamicIcon.defaultProps = {
-  size: 8,
+  iconSize: 8,
+  boxSize: 14,
+  borderRadius: 10,
 }
 
 export default KeyResultDynamicIcon

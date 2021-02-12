@@ -20,7 +20,7 @@ const SupportButton = () => {
         <InfoCircleIcon
           fill="gray.600"
           stroke="gray.600"
-          fontSize="23px"
+          fontSize="2xl"
           title={intl.formatMessage(messages.iconTitle)}
           desc={intl.formatMessage(messages.iconDesc)}
         />

@@ -40,20 +40,20 @@ const KeyResultSectionTimelineCardCheckInProgress = ({
   return (
     <Flex alignItems="center" gridGap={4}>
       <Skeleton isLoaded={isLoaded}>
-        <StatNumber fontSize="48px" color="gray.100" lineHeight={1}>
+        <StatNumber fontSize="2xl" color="gray.200" lineHeight={1}>
           {intl.formatNumber(normalizedParentProgress, relativePercentageProgressNumberFormat)}
         </StatNumber>
       </Skeleton>
       {!isSameAsParent && (
         <>
           <ArrowRightLongIcon
-            fill={isLoaded ? confidenceTag.colors.primary : 'gray.100'}
+            fill={isLoaded ? confidenceTag.color.primary : 'gray.100'}
             desc={intl.formatMessage(messages.arrowRightDesc)}
-            w="20px"
+            w={5}
             h="auto"
           />
           <Skeleton isLoaded={isLoaded}>
-            <StatNumber fontSize="48px" color={confidenceTag.colors.primary} lineHeight={1}>
+            <StatNumber fontSize="2xl" color={confidenceTag.color.primary} lineHeight={1}>
               {intl.formatNumber(normalizedProgress, relativePercentageProgressNumberFormat)}
             </StatNumber>
           </Skeleton>

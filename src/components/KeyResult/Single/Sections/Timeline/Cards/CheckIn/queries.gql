@@ -1,0 +1,19 @@
+mutation DELETE_KEY_RESULT_CHECK_IN($keyResultCheckInID: ID!) {
+  deleteKeyResultCheckIn(id: $keyResultCheckInID) {
+    affected
+  }
+}
+
+query GET_KEY_RESULT_WITH_LATEST_CHECK_IN($keyResultID: ID!) {
+  keyResult(id: $keyResultID) {
+    keyResultCheckIns(limit: 1) {
+      comment
+      createdAt
+      progress
+      confidence
+      user {
+        fullName
+      }
+    }
+  }
+}

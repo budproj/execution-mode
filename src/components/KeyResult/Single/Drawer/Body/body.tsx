@@ -1,26 +1,50 @@
-import { Flex } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import {
-  KeyResultSectionCheckIn,
-  KeyResultSectionTimeline,
-} from 'src/components/KeyResult/Single/Sections'
+import { KeyResultSectionTimeline } from 'src/components/KeyResult/Single/Sections'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultDrawerLoaded } from 'src/state/recoil/key-result/drawer'
+import {
+  keyResultDrawerIntlDeletedEntryType,
+  keyResultDrawerIsCreatingCheckIn,
+  keyResultDrawerIsScrolling,
+} from 'src/state/recoil/key-result/drawer'
 
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
 }
 
 const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => {
-  const isLoaded = useRecoilValue(keyResultDrawerLoaded)
+  const [isScrolling, setIsScrolling] = useRecoilState(keyResultDrawerIsScrolling(keyResultID))
+  const setIntlDeletedEntryType = useSetRecoilState(
+    keyResultDrawerIntlDeletedEntryType(keyResultID),
+  )
+  const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
+    keyResultDrawerIsCreatingCheckIn(keyResultID),
+  )
+
+  const handleScrollY = () => {
+    if (!isScrolling) setIsScrolling(true)
+    if (isCreatingCheckIn) setIsCreatingCheckIn(false)
+  }
+
+  const handleScrollYReachStart = () => {
+    if (isScrolling) setIsScrolling(false)
+  }
+
+  const handleEntryDelete = (entryType: string) => {
+    setIntlDeletedEntryType(entryType)
+  }
 
   return (
-    <Flex gridGap={8} py={8} px={6} direction="column">
-      <KeyResultSectionCheckIn keyResultID={keyResultID} />
-      <KeyResultSectionTimeline keyResultID={keyResultID} isLoading={!isLoaded} />
-    </Flex>
+    <Box flexGrow={1} overflow="auto">
+      <KeyResultSectionTimeline
+        keyResultID={keyResultID}
+        onScrollY={handleScrollY}
+        onScrollYReachStart={handleScrollYReachStart}
+        onEntryDelete={handleEntryDelete}
+      />
+    </Box>
   )
 }
 

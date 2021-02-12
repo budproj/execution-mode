@@ -1,21 +1,38 @@
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 import { KEY_RESULT_CUSTOM_LIST_BINDING } from 'src/components/User/constants'
-import { User, UserPolicies } from 'src/components/User/types'
+import { User } from 'src/components/User/types'
+import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
 
 import { KEY_RESULT_FORMAT } from './constants'
 
+export type KeyResultTimelineEntry = KeyResultCheckIn | KeyResultComment
+
 export interface KeyResultCheckIn {
+  __typename: string
   id: string
   progress: number
   confidence: number
   relativePercentageProgress: number
+  policies: AuthzPolicies
   createdAt: string
   keyResult: KeyResult
   keyResultId: KeyResult['id']
   user: User
   comment?: string
   parent?: KeyResultCheckIn
+}
+
+export interface KeyResultComment {
+  __typename: string
+  id: string
+  text: string
+  policies: AuthzPolicies
+  createdAt: string
+  updatedAt: string
+  user: User
+  keyResult: KeyResult
+  keyResultId: KeyResult['id']
 }
 
 export interface KeyResultCustomList {
@@ -42,9 +59,10 @@ export interface KeyResult {
   owner: User
   objective: Objective
   team: Team
-  policies: UserPolicies
+  policies: AuthzPolicies
   description?: string
   keyResultCheckIns?: KeyResultCheckIn[]
+  timeline: KeyResultTimelineEntry[]
 }
 
 export type KeyResultsHashmap = Record<string, KeyResult>

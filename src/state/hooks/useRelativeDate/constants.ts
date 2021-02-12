@@ -11,3 +11,12 @@ export const FORMATTER_THRESHOLDS = {
   WEEK: WEEK_FORMATTER_THRESHOLD,
   MONTH: MONTH_FORMATTER_THRESHOLD,
 }
+
+export enum RELATIVE_DATE_UNIT {
+  MONTH = 'month',
+  WEEK = 'week',
+  DAY = 'day',
+  HOUR = 'hour',
+  MINUTE = 'minute',
+  FALLBACK = 'fallback',
+}

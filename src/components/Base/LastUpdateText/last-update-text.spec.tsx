@@ -12,9 +12,7 @@ describe('date conditional formatting', () => {
 
   it('displays the correct relative date', () => {
     const fakeFormattedDate = faker.random.word()
-    sinon
-      .stub(useRelativeDate, 'default')
-      .returns([fakeFormattedDate, undefined, sinon.fake()] as any)
+    sinon.stub(useRelativeDate, 'default').returns([fakeFormattedDate, sinon.fake()] as any)
 
     const result = enzyme.shallow(<LastUpdateText date={faker.date.past()} />)
 
@@ -29,7 +27,7 @@ describe('date conditional formatting', () => {
       .mock(useRelativeDate)
       .expects('default')
       .atLeast(1)
-      .returns([faker.random.word(), undefined, sinon.fake()])
+      .returns([faker.random.word(), sinon.fake()])
 
     const result = enzyme.shallow(<LastUpdateText author={fakeAuthor} date={new Date()} />)
 
@@ -41,9 +39,11 @@ describe('date conditional formatting', () => {
   it('updates the date upon render if the date prop changed', () => {
     const originalRelateDateHook = useRelativeDate.default
     const buildMockedRelativeDateHook = (spy: SinonSpy) => (initialDate?: Date) => {
-      const [formattedRelativeDate, date] = originalRelateDateHook(initialDate)
+      const originalResult = originalRelateDateHook(initialDate)
+      const formattedRelativeDate = originalResult[0]
+      const date = originalResult[3]
 
-      return [formattedRelativeDate, date, spy]
+      return [formattedRelativeDate, spy, undefined, date]
     }
 
     const initialDate = faker.date.past()

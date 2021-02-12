@@ -8,7 +8,7 @@ import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 export interface KeyResultListBodyColumnKeyResultProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -65,7 +65,7 @@ const KeyResultListBodyColumnKeyResult = ({
             isLoaded={isTeamLoaded}
             {...buildSkeletonMinSize(isTeamLoaded, 100, 21)}
           >
-            <Text color="gray.200" fontSize="14px">
+            <Text color="gray.200" fontSize="sm">
               {team?.name}
             </Text>
           </SkeletonText>

@@ -13,6 +13,7 @@ import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
+import 'react-perfect-scrollbar/dist/css/styles.css'
 
 type IntlMessage = Record<string, string>
 

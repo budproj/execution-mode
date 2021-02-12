@@ -7,7 +7,7 @@ import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { buildPartialSelector } from 'src/state/recoil/key-result/selectors'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 export interface KeyResultListBodyColumnCycleProperties
   extends KeyResultListBodyColumnBaseProperties {

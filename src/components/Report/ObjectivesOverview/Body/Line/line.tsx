@@ -40,12 +40,10 @@ const ObjectivesOverviewBodyLine = ({
       pb={10}
     >
       <Flex alignItems="center" gridGap={6}>
-        <Text fontSize="20px">
-          {intl.formatNumber(orderTagNumber, { minimumIntegerDigits: 2 })}.
-        </Text>
+        <Text fontSize="xl">{intl.formatNumber(orderTagNumber, { minimumIntegerDigits: 2 })}.</Text>
 
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 400, 24)}>
-          <Heading fontSize="20px" as="h3" fontWeight={400}>
+          <Heading fontSize="xl" as="h3" fontWeight={400}>
             {objective?.title}
           </Heading>
         </Skeleton>
@@ -56,9 +54,9 @@ const ObjectivesOverviewBodyLine = ({
       </Flex>
 
       <SliderWithFilledTrack
+        trackThickness={3}
         value={objective?.currentProgress}
-        trackThickness="12px"
-        trackColor={confidenceTag.colors.primary}
+        trackColor={confidenceTag.color.primary}
       />
     </OverviewBodyBox>
   )

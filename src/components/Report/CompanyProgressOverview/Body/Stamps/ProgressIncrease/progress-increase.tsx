@@ -28,7 +28,7 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
       icon={
         <ArrowUpIcon
           desc={intl.formatMessage(messages.arrowUpIconDesc)}
-          fontSize="32px"
+          fontSize="4xl"
           fill="green.500"
           stroke="green.500"
         />
@@ -37,7 +37,7 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
       iconBorderColor="green.200"
     >
       <Skeleton isLoaded={!isLoading} {...buildSkeletonMinSize(!isLoading, 150, 21)}>
-        <Heading as="h3" fontSize="18px">
+        <Heading as="h3" fontSize="md">
           {intl.formatMessage(messages.titleLabel, {
             progress: Math.round(company?.percentageProgressIncrease ?? 0),
             highlight: (string) => (
@@ -49,7 +49,7 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
         </Heading>
       </Skeleton>
 
-      <Text fontSize="13px" color="gray.300">
+      <Text fontSize="xs" color="gray.300">
         {intl.formatMessage(messages.descriptionText)}
       </Text>
     </CompanyProgressOverviewBodyStampBase>

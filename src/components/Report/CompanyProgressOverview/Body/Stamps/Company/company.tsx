@@ -31,14 +31,14 @@ const CompanyProgressOverviewBodyStampCompany = ({
 
   return (
     <CompanyProgressOverviewBodyStampBase
-      icon={<CrownIcon desc={intl.formatMessage(messages.crownIconDesc)} fontSize="40px" />}
+      icon={<CrownIcon desc={intl.formatMessage(messages.crownIconDesc)} fontSize="4xl" />}
     >
       <Skeleton
         isLoaded={!isLoading}
         h={isLoading ? '21px' : 'auto'}
         w={isLoading ? '150px' : 'auto'}
       >
-        <Heading as="h3" fontSize="18px">
+        <Heading as="h3" fontSize="md">
           {company?.name}
         </Heading>
       </Skeleton>

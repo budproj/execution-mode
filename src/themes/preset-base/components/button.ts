@@ -2,34 +2,25 @@ import { ButtonProps } from '@chakra-ui/react'
 
 const Button = {
   variants: {
-    text: ({ isActive }: ButtonProps) => ({
-      fontWeight: 500,
-      color: isActive ? 'brand.600' : 'gray.700',
-
-      '&:hover': {
-        color: 'brand.600',
-      },
-
-      '&:focus': {
-        boxShadow: 'none',
-      },
-    }),
-
-    solid: () => ({
-      bg: 'brand.500',
-      color: 'white',
+    solid: ({ colorScheme }: ButtonProps) => ({
+      bg: `${colorScheme ?? 'brand'}.100`,
+      color: `${colorScheme ?? 'brand'}.500`,
       borderRadius: '2px',
 
       '&:hover': {
-        bg: 'brand.400',
+        bg: `${colorScheme ?? 'brand'}.500`,
+        color: 'white',
       },
 
       '&:focus': {
-        bg: 'brand.400',
+        bg: `${colorScheme ?? 'brand'}.100`,
+        color: `${colorScheme ?? 'brand'}.500`,
+        boxShadow: 'none',
       },
 
       '&:active': {
-        bg: 'brand.400',
+        bg: `${colorScheme ?? 'brand'}.100`,
+        color: `${colorScheme ?? 'brand'}.500`,
       },
     }),
 

@@ -1,10 +1,17 @@
-import { BorderProps, Slider, SliderFilledTrack, SliderProps, SliderTrack } from '@chakra-ui/react'
+import {
+  BorderProps,
+  Slider,
+  SliderFilledTrack,
+  SliderProps,
+  SliderTrack,
+  SliderTrackProps,
+} from '@chakra-ui/react'
 import React from 'react'
 
 export interface SliderWithFilledTrackProperties extends SliderProps {
   trackRadius: BorderProps['borderRadius']
-  trackColor?: string
-  trackThickness?: string
+  trackColor?: SliderTrackProps['bg']
+  trackThickness?: SliderTrackProps['h']
   trackTopRadius?: BorderProps['borderTopRadius']
 }
 
