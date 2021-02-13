@@ -1,4 +1,4 @@
-import React, { RefObject, forwardRef, useCallback, useState } from 'react'
+import React, { RefObject, forwardRef, useCallback, useState, useEffect } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import SliderWithHoverThumb, {
@@ -39,7 +39,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     const goal = useRecoilValue(goalSelector(keyResultID))
     const step = useRecoilValue(keyResultCheckInProgressSliderStep(keyResultID))
     const setOpenedPopover = useSetRecoilState(keyResultCheckInPopoverOpen(keyResultID))
-    const [confidenceTag] = useConfidenceTag(currentConfidence)
+    const [confidenceTag, setConfidenceInConfidenceTag] = useConfidenceTag(currentConfidence)
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
@@ -62,6 +62,10 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     )
 
     if (!isLoaded && typeof goal !== 'undefined') setIsLoaded(true)
+
+    useEffect(() => {
+      if (currentConfidence) setConfidenceInConfidenceTag(currentConfidence)
+    }, [currentConfidence, setConfidenceInConfidenceTag])
 
     // Since Chakra use only hooks to handle lifecycles, it does not behaves well in their
     // onChange events. Even if we provide the isDisabled tag to it, it dispatches the onChange and

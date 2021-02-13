@@ -115,6 +115,7 @@ const graphQLHandler = (mirageSchema: unknown) =>
             userId: user.id,
             parentId: latestKeyResultCheckInId,
             createdAt: new Date(),
+            policies: mirageSchema.policies.first(),
             ...keyResultCheckIn,
           }
           const clearedKeyResultCheckIn = pickBy(enhancedKeyResultCheckIn)
