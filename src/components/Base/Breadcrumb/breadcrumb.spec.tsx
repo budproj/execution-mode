@@ -1,6 +1,5 @@
 import enzyme from 'enzyme'
 import faker from 'faker'
-import { startCase } from 'lodash'
 import { NextRouter } from 'next/dist/next-server/lib/router/router'
 import * as router from 'next/router'
 import React from 'react'
@@ -118,7 +117,7 @@ describe('component rendering expectations', () => {
     const expectedRelativeLabelForIndex: Record<number, string> = {
       0: 'Minhas Key Result',
       1: 'Morty',
-      2: startCase(fakeDynamicParameters.id),
+      2: fakeDynamicParameters.id,
     }
 
     blocks.map((block, index) => {
@@ -139,6 +138,31 @@ describe('component rendering expectations', () => {
       0: 'Minhas Key Result',
       1: 'Morty',
       2: 'Id',
+    }
+
+    blocks.map((block, index) => {
+      return expect(block.prop('children')).toEqual(expectedRelativeLabelForIndex[index])
+    })
+  })
+})
+
+describe('corner cases', () => {
+  it('capitalizes correctly dynamic routes with & special character', () => {
+    const fakeRouter = {
+      pathname: '/key-results/morty/[id]',
+    }
+    const fakeDynamicParameters = {
+      id: 'M&G',
+    }
+    sinon.stub(router, 'useRouter').returns(fakeRouter as NextRouter)
+
+    const result = enzyme.shallow(<Breadcrumb routeParams={fakeDynamicParameters} />)
+
+    const blocks = result.find('IntlLink')
+    const expectedRelativeLabelForIndex: Record<number, string> = {
+      0: 'Minhas Key Result',
+      1: 'Morty',
+      2: 'M&G',
     }
 
     blocks.map((block, index) => {

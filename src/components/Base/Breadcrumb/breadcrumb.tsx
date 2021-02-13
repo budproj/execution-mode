@@ -21,14 +21,6 @@ const Breadcrumb = ({ routeParams }: BreadcrumbProperties) => {
 
   const stepTree = remove(pathname.split('/'))
   const isCurrentPage = (index: number): boolean => index === stepTree.length - 1
-  const buildDynamicStepName = (step: string) => {
-    const key = step.slice(1, -1)
-    const stepParameter = routeParams?.[key]
-    const stepName = stepParameter ? stepParameter : key
-    const normalizedStepName = startCase(stepName)
-
-    return normalizedStepName
-  }
 
   const buildStepName = (step: string) => {
     const normalizedStepName = startCase(step)
@@ -39,6 +31,14 @@ const Breadcrumb = ({ routeParams }: BreadcrumbProperties) => {
     const stepName = hasIntlMessage
       ? intl.formatMessage(messages[step as BreadcrumbMessage])
       : fallbackStepName
+
+    return stepName
+  }
+
+  const buildDynamicStepName = (step: string) => {
+    const key = step.slice(1, -1)
+    const stepParameter = routeParams?.[key]
+    const stepName = stepParameter ? stepParameter : startCase(key)
 
     return stepName
   }
