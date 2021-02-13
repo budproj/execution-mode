@@ -6,7 +6,6 @@ import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
-import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 
 import NewProgress from './new-progress'
 
@@ -77,17 +76,14 @@ describe('component expectations', () => {
       .mock(formik)
       .expects('useFormikContext')
       .atLeast(1)
-      .returns({ values: {}, setFieldValue: sinon.fake() })
-
-    const stub = sinon.stub(recoil, 'useSetRecoilState')
-    stub.withArgs(keyResultCheckInProgressDraft(fakeID)).returns(spy)
+      .returns({ values: {}, setFieldValue: spy })
 
     const result = enzyme.shallow(<NewProgress keyResultID={fakeID} />)
 
     const functionHook: (s: number) => void = result.find('Absolute').prop('handleChange')
     functionHook(fakeProgress)
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeProgress)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly('newProgress', fakeProgress)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

@@ -20,6 +20,10 @@ const selectCommentEnabledMatcher = sinon.match((selector: recoil.RecoilState<un
   return selector.key.includes('COMMENT_ENABLED')
 })
 
+const selectDraftMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('DRAFT')
+})
+
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
 
@@ -78,8 +82,7 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate(
+    formikComponent.simulate(
       'submit',
       {
         newProgress: fakeProgress,
@@ -89,6 +92,7 @@ describe('component interations', () => {
       },
     )
 
+    await Promise.resolve()
     await Promise.resolve()
 
     const spyFirstCallArguments = spy.firstCall.args
@@ -111,8 +115,7 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate(
+    formikComponent.simulate(
       'submit',
       {
         newProgress: fakeProgress,
@@ -122,6 +125,7 @@ describe('component interations', () => {
       },
     )
 
+    await Promise.resolve()
     await Promise.resolve()
 
     const spySecondCallArguments = spy.secondCall.args
@@ -143,8 +147,7 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate(
+    formikComponent.simulate(
       'submit',
       {
         comment: faker.lorem.paragraph(),
@@ -154,6 +157,7 @@ describe('component interations', () => {
       },
     )
 
+    await Promise.resolve()
     await Promise.resolve()
 
     const spyThirdCallArguments = spy.thirdCall.args
@@ -176,15 +180,48 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       newProgress: fakeProgress,
     })
 
     await Promise.resolve()
+    await Promise.resolve()
+
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeProgress)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
+  })
+
+  it('updates the progress draft state upon form submission', async () => {
+    const fakeID = faker.random.word()
+    const fakeProgress = faker.random.number()
+    const stateStub = sinon.stub(recoil, 'useRecoilState')
+    const spy = sinon.spy()
+
+    stateStub.withArgs(selectDraftMatcher).returns([faker.random.number(), spy])
+    stateStub.returns([undefined, sinon.fake()])
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake(), {}])
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+
+    const result = enzyme.shallow(<Form keyResultID={fakeID} />)
+
+    const formikComponent = result.find('Formik')
+    formikComponent.simulate(
+      'submit',
+      {
+        newProgress: fakeProgress,
+      },
+      {
+        setFieldValue: sinon.fake(),
+      },
+    )
+
+    await Promise.resolve()
+    await Promise.resolve()
+
+    const spyFirstCallArguments = spy.firstCall.firstArg
+
+    expect(spyFirstCallArguments).toEqual(fakeProgress)
   })
 
   it('updates the current confidence state upon form submission', async () => {
@@ -201,12 +238,13 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       confidence: fakeConfidence,
     })
 
     await Promise.resolve()
+    await Promise.resolve()
+
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeConfidence)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
@@ -226,12 +264,13 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       confidence: fakeConfidence,
     })
 
     await Promise.resolve()
+    await Promise.resolve()
+
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(false)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
@@ -251,12 +290,13 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form isCommentAlwaysEnabled keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       confidence: fakeConfidence,
     })
 
     await Promise.resolve()
+    await Promise.resolve()
+
     const wasSpyCalledAsExpected = spy.secondCall.calledWithExactly(true)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
@@ -277,13 +317,14 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       newProgress: fakeProgress,
       confidence: fakeConfidence,
     })
 
     await Promise.resolve()
+    await Promise.resolve()
+
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
       variables: {
         keyResultCheckInInput: {
@@ -312,14 +353,15 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       newProgress: fakeProgress,
       confidence: fakeConfidence,
       comment: fakeComment,
     })
 
     await Promise.resolve()
+    await Promise.resolve()
+
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
       variables: {
         keyResultCheckInInput: {
@@ -348,13 +390,14 @@ describe('component interations', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       newProgress: 0,
       confidence: fakeConfidence,
     })
 
     await Promise.resolve()
+    await Promise.resolve()
+
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly({
       variables: {
         keyResultCheckInInput: {
@@ -391,8 +434,9 @@ describe('component interations', () => {
       comment: fakeComment,
     }
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', fakeValues)
+    formikComponent.simulate('submit', fakeValues)
+
+    await Promise.resolve()
     await Promise.resolve()
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValues)
@@ -548,8 +592,9 @@ describe('corner cases', () => {
     const fakeValues = {
       newProgress: fakeNewProgress,
     }
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', fakeValues)
+    formikComponent.simulate('submit', fakeValues)
+
+    await Promise.resolve()
     await Promise.resolve()
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValues)
@@ -578,8 +623,9 @@ describe('corner cases', () => {
     const fakeValues = {
       confidence: fakeNewConfidence,
     }
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', fakeValues)
+    formikComponent.simulate('submit', fakeValues)
+
+    await Promise.resolve()
     await Promise.resolve()
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValues)
@@ -604,8 +650,9 @@ describe('corner cases', () => {
     const fakeValues = {
       comment: fakeComment,
     }
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', fakeValues)
+    formikComponent.simulate('submit', fakeValues)
+
+    await Promise.resolve()
     await Promise.resolve()
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValues)
@@ -629,10 +676,11 @@ describe('corner cases', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       newProgress: fakeProgress,
     })
+
+    await Promise.resolve()
     await Promise.resolve()
 
     expect(spy.notCalled).toEqual(true)
@@ -654,10 +702,11 @@ describe('corner cases', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       confidence: fakeConfidence,
     })
+
+    await Promise.resolve()
     await Promise.resolve()
 
     expect(spy.notCalled).toEqual(true)
@@ -675,10 +724,11 @@ describe('corner cases', () => {
     const result = enzyme.shallow(<Form keyResultID={fakeID} afterSubmit={spy} />)
 
     const formikComponent = result.find('Formik')
-    // eslint-disable-next-line @typescript-eslint/await-thenable
-    await formikComponent.simulate('submit', {
+    formikComponent.simulate('submit', {
       comment: '',
     })
+
+    await Promise.resolve()
     await Promise.resolve()
 
     expect(spy.notCalled).toEqual(true)

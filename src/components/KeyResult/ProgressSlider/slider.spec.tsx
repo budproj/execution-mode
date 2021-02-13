@@ -187,3 +187,34 @@ describe('component expectations', () => {
     expect(slider.prop('isDisabled')).toEqual(false)
   })
 })
+
+describe('component interactions', () => {
+  afterEach(() => sinon.restore())
+
+  it('updates the confidence tag upon new current confidence', () => {
+    const fakeID = faker.random.word()
+    const firstConfidence = 100
+    const secondConfidence = 50
+
+    const recoilMock = sinon.mock(recoil)
+    recoilMock.expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    recoilMock.expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
+
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.onFirstCall().returns(firstConfidence)
+    stub.returns(secondConfidence)
+
+    const wrapper = enzyme.shallow(
+      <ProgressSliderSlider canChange keyResultID={faker.random.uuid()} />,
+    )
+
+    wrapper.setProps({
+      keyResultID: fakeID,
+    })
+
+    const divedWrapper = wrapper.dive().dive()
+    const sliderFilledTrack = divedWrapper.find('SliderFilledTrack')
+
+    expect(sliderFilledTrack.prop('bg')).toEqual('yellow.500')
+  })
+})

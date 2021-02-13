@@ -37,7 +37,7 @@ const ObjectiveAccordionButton = ({
   return (
     <AccordionButton gridGap={4} _hover={{}}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded ?? true, 300, 24)}>
-        <Heading as="h4" fontSize="xl" fontWeight={500}>
+        <Heading as="h4" fontSize="xl" fontWeight={500} textAlign="left">
           {objective?.title}
         </Heading>
       </Skeleton>

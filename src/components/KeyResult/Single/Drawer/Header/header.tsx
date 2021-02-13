@@ -59,11 +59,13 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
         <Box flexGrow={1}>
           <KeyResultSingleTitle keyResultID={keyResultID} />
         </Box>
-        <Collapse in={isScrolling}>
-          <Button variant="solid" colorScheme="brand" px={6} onClick={handleCheckInButtonClick}>
-            {intl.formatMessage(messages.checkInButtonLabel)}
-          </Button>
-        </Collapse>
+        <Box>
+          <Collapse in={isScrolling}>
+            <Button variant="solid" colorScheme="brand" px={6} onClick={handleCheckInButtonClick}>
+              {intl.formatMessage(messages.checkInButtonLabel)}
+            </Button>
+          </Collapse>
+        </Box>
       </DrawerHeader>
 
       <KeyResultDrawerDeleteAlert keyResultID={keyResultID} />
