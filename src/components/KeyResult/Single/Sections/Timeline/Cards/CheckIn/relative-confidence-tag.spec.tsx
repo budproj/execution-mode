@@ -40,4 +40,16 @@ describe('component expectations', () => {
 
     expect(statArrow.length).toEqual(0)
   })
+
+  it('considers the confidence tag as loaded if the confidence is 0', () => {
+    const fakeConfidence = 0
+
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag confidence={fakeConfidence} />,
+    )
+
+    const skeleton = result.find('Skeleton')
+
+    expect(skeleton.prop('isLoaded')).toEqual(true)
+  })
 })

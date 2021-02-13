@@ -17,7 +17,8 @@ const KeyResultSectionTimelineCardCheckInRelativeConfidenceTag = ({
 }: KeyResultSectionTimelineCardCheckInRelativeConfidenceTagProperties) => {
   const [confidenceTag] = useConfidenceTag(confidence)
 
-  const isLoaded = Boolean(confidence)
+  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  const isLoaded = Boolean(confidence || confidence === 0)
   const arrowType = difference && difference > 0 ? 'increase' : 'decrease'
 
   return (
