@@ -59,6 +59,7 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
         id: keyResultID,
       },
       onCompleted: handleQueryData,
+      fetchPolicy: 'network-only',
     },
   )
 
