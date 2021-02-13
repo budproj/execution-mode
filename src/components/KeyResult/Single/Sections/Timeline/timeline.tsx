@@ -60,6 +60,7 @@ const KeyResultSectionTimeline = ({
       },
       skip: hasTimeline,
       onCompleted: handleQueryResult,
+      // The following fetchPolicy condition is required until https://github.com/apollographql/apollo-client/issues/7689 is solved
       fetchPolicy: hasTimeline ? 'cache-only' : 'network-only',
     },
   )
