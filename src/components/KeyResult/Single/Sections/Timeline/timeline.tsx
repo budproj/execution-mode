@@ -60,6 +60,7 @@ const KeyResultSectionTimeline = ({
       },
       skip: hasTimeline,
       onCompleted: handleQueryResult,
+      fetchPolicy: hasTimeline ? 'cache-only' : 'network-only',
     },
   )
 
