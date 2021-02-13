@@ -14,6 +14,10 @@ const selectTimelineMatcher = sinon.match((selector: recoil.RecoilState<unknown>
   return selector.key.includes('TIMELINE')
 })
 
+const selectCommentEnabledMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('COMMENT_ENABLED')
+})
+
 describe('expected behaviors', () => {
   afterEach(() => sinon.restore())
 
@@ -84,6 +88,25 @@ describe('expected behaviors', () => {
 
     const stub = sinon.stub(recoil, 'useResetRecoilState')
     stub.withArgs(selectTimelineMatcher).returns(spy)
+    stub.returns(sinon.fake())
+
+    const result = enzyme.shallow(<KeyResultDrawer />)
+
+    const drawer = result.find('Drawer')
+    drawer.simulate('close')
+
+    expect(spy.called).toEqual(true)
+  })
+
+  it('resets the comment enabled when the drawer is closed', () => {
+    const currentProgress = faker.random.number()
+    const spy = sinon.spy()
+
+    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
+    sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
+
+    const stub = sinon.stub(recoil, 'useResetRecoilState')
+    stub.withArgs(selectCommentEnabledMatcher).returns(spy)
     stub.returns(sinon.fake())
 
     const result = enzyme.shallow(<KeyResultDrawer />)

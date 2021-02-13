@@ -3,13 +3,12 @@ import { useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { NumberFormatProps } from 'react-number-format'
-import { useSetRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
-import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 
 import messages from './messages'
 
@@ -23,14 +22,12 @@ const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 const CheckInFormFieldNewProgress = ({ keyResultID }: CheckInFormFieldNewProgressProperties) => {
   const intl = useIntl()
   const format = useRecoilValue(formatSelector(keyResultID))
-  const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
 
   const Mask = selectMaskBasedOnFormat(format)
 
   const handleChange = (newValue?: NumberFormatProps['value']) => {
     setFieldValue('newProgress', newValue)
-    setDraftValue(newValue as number)
   }
 
   return (

@@ -87,7 +87,11 @@ const CheckInForm = ({
   }
 
   const syncRecoilState = (values: CheckInFormValues) => {
-    if (values.newProgress !== currentProgress) setCurrentProgress(values.newProgress)
+    if (values.newProgress !== currentProgress) {
+      setCurrentProgress(values.newProgress)
+      setDraftValue(values.newProgress)
+    }
+
     if (values.confidence !== currentConfidence) setCurrentConfidence(values.confidence)
 
     setCommentEnabled(isCommentAlwaysEnabled)
