@@ -16,6 +16,7 @@ const KeyResultListBodyColumnPercentualProgress = ({
   id,
 }: KeyResultListBodyColumnPercentualProgressProperties): ReactElement => {
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
+  console.log(keyResult)
 
   return <KeyResultListBodyColumnBase p={0}>Ok</KeyResultListBodyColumnBase>
 }

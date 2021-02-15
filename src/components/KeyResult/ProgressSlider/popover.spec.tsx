@@ -13,14 +13,10 @@ describe('component expectations', () => {
 
   it('updates the draft value with the submitted value from the form', () => {
     const spy = sinon.spy()
-    const newCheckIn = { newProgress: faker.random.number() }
-    const useSetRecoilStateStub = sinon.stub(recoil, 'useSetRecoilState')
-    const draftValueAtomMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-      return selector.key.includes('PROGRESS_DRAFT')
-    })
+    const newCheckIn = { valueNew: faker.random.number() }
 
-    useSetRecoilStateStub.withArgs(draftValueAtomMatcher).returns(spy)
-    useSetRecoilStateStub.returns(sinon.fake())
+    sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
+    sinon.stub(recoil, 'useRecoilState').returns([faker.random.number(), spy])
 
     const result = enzyme.shallow(<ProgressSliderPopover />)
 
@@ -29,19 +25,15 @@ describe('component expectations', () => {
       .prop('afterSubmit')
     submitHook(newCheckIn as any)
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newCheckIn.newProgress)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(newCheckIn.valueNew)
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
   it('closes the popup upon submission', () => {
     const spy = sinon.spy()
-    const useSetRecoilStateStub = sinon.stub(recoil, 'useSetRecoilState')
-    const popoverOpenSelectorMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-      return selector.key.includes('POPOVER_OPEN')
-    })
 
-    useSetRecoilStateStub.withArgs(popoverOpenSelectorMatcher).returns(spy)
-    useSetRecoilStateStub.returns(sinon.fake())
+    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
+    sinon.stub(recoil, 'useRecoilState').returns([] as any)
 
     const result = enzyme.shallow(<ProgressSliderPopover />)
 
@@ -54,7 +46,9 @@ describe('component expectations', () => {
 
   it('triggers the onClose prop when we use the CheckInForm cancel event', () => {
     const spy = sinon.spy()
+
     sinon.stub(recoil, 'useSetRecoilState')
+    sinon.stub(recoil, 'useRecoilState').returns([] as any)
 
     const result = enzyme.shallow(<ProgressSliderPopover onClose={spy} />)
 
@@ -66,6 +60,11 @@ describe('component expectations', () => {
 
   it('stops propagates upon mouse down events', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon
+      .mock(recoil)
+      .expects('useRecoilState')
+      .atLeast(1)
+      .returns([] as any)
 
     const spy = sinon.spy()
 

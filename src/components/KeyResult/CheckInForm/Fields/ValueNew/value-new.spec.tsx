@@ -7,7 +7,7 @@ import sinon from 'sinon'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
-import NewProgress from './new-progress'
+import CheckInFormFieldValueNew from './value-new'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
@@ -19,7 +19,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
@@ -33,7 +33,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Percentage')
 
@@ -47,7 +47,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('CoinBRL')
 
@@ -59,7 +59,7 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(<NewProgress keyResultID={faker.random.word()} />)
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
@@ -78,12 +78,12 @@ describe('component expectations', () => {
       .atLeast(1)
       .returns({ values: {}, setFieldValue: spy })
 
-    const result = enzyme.shallow(<NewProgress keyResultID={fakeID} />)
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={fakeID} />)
 
     const functionHook: (s: number) => void = result.find('Absolute').prop('handleChange')
     functionHook(fakeProgress)
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly('newProgress', fakeProgress)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly('valueNew', fakeProgress)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

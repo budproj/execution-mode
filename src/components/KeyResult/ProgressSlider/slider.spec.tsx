@@ -201,8 +201,8 @@ describe('component interactions', () => {
     recoilMock.expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
-    stub.onFirstCall().returns(firstConfidence)
-    stub.returns(secondConfidence)
+    stub.onFirstCall().returns({ confidence: firstConfidence })
+    stub.returns({ confidence: secondConfidence })
 
     const wrapper = enzyme.shallow(
       <ProgressSliderSlider canChange keyResultID={faker.random.uuid()} />,

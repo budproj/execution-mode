@@ -62,10 +62,13 @@ describe('expected behaviors', () => {
   })
 
   it('resets the draft value when the drawer is closed', () => {
-    const currentProgress = faker.random.number()
+    const fakeValue = faker.random.number()
+    const fakeLatestCheckIn = {
+      value: fakeValue,
+    }
     const spy = sinon.spy()
 
-    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
+    sinon.stub(recoil, 'useRecoilValue').returns(fakeLatestCheckIn)
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
     sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
 
@@ -74,7 +77,7 @@ describe('expected behaviors', () => {
     const drawer = result.find('Drawer')
     drawer.simulate('close')
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(currentProgress)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValue)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

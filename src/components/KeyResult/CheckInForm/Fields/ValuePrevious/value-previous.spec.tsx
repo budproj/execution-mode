@@ -7,7 +7,7 @@ import sinon from 'sinon'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
-import CheckInFormFieldCurrentProgress from './current-progress'
+import CheckInFormFieldValuePrevious from './value-previous'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
@@ -18,7 +18,7 @@ describe('component expectations', () => {
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
     const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+      <CheckInFormFieldValuePrevious keyResultID={faker.random.word()} />,
     )
 
     const maskComponent = result.find('Absolute')
@@ -32,7 +32,7 @@ describe('component expectations', () => {
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
     const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+      <CheckInFormFieldValuePrevious keyResultID={faker.random.word()} />,
     )
 
     const maskComponent = result.find('Percentage')
@@ -46,7 +46,7 @@ describe('component expectations', () => {
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
     const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+      <CheckInFormFieldValuePrevious keyResultID={faker.random.word()} />,
     )
 
     const maskComponent = result.find('CoinBRL')
@@ -60,7 +60,7 @@ describe('component expectations', () => {
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
     const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+      <CheckInFormFieldValuePrevious keyResultID={faker.random.word()} />,
     )
 
     const maskComponent = result.find('Absolute')
@@ -74,7 +74,7 @@ describe('component expectations', () => {
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
     const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
+      <CheckInFormFieldValuePrevious keyResultID={faker.random.word()} />,
     )
 
     const maskComponent = result.find('Absolute')

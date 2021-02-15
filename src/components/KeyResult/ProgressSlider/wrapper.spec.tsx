@@ -81,11 +81,14 @@ describe('component expectations', () => {
 
   it('resets the draft value upon popover closing', () => {
     const fakeID = faker.random.word()
-    const currentProgress = faker.random.number()
+    const fakeValue = faker.random.number()
+    const fakeLatestCheckIn = {
+      value: fakeValue,
+    }
     const spy = sinon.spy()
 
     sinon.stub(recoil, 'useRecoilState').returns([undefined, sinon.fake()])
-    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
+    sinon.stub(recoil, 'useRecoilValue').returns(fakeLatestCheckIn)
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
 
     const result = enzyme.shallow(<ProgressSliderWrapper id={fakeID} />)
@@ -93,7 +96,7 @@ describe('component expectations', () => {
     const popover = result.find('ProgressSliderPopover')
     popover.simulate('close')
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(currentProgress)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValue)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })

@@ -1,201 +1,278 @@
 import faker from 'faker'
-import * as recoil from 'recoil'
-import sinon from 'sinon'
-import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
-import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
+import { snapshot_UNSTABLE } from 'recoil'
 
-import * as latestCheckIn from './latest'
-import progressDraft from './progress-draft'
+import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
+import { userAtomFamily } from 'src/state/recoil/user'
+import meAtom from 'src/state/recoil/user/me'
+
+import selectLatestCheckIn from './latest'
 
 describe('getter', () => {
-  afterEach(() => sinon.restore())
-
   it('returns the latest check-in', () => {
     const fakeID = faker.random.word()
-    const checkIn = { comment: faker.lorem.paragraph() }
-    const getStub = sinon.stub().returns([checkIn])
-    const getLatestCheckIn = latestCheckIn.getLatestCheckIn(fakeID)
+    const fakeCheckIn = {
+      comment: faker.lorem.paragraph(),
+      value: faker.random.number(),
+      confidence: faker.random.number(),
+    }
 
-    const result = getLatestCheckIn({ get: getStub })
+    const snapshot = snapshot_UNSTABLE(({ set }) =>
+      set(keyResultAtomFamily(fakeID), {
+        latestKeyResultCheckIn: fakeCheckIn as any,
+      }),
+    )
 
-    expect(result).toEqual(checkIn)
+    const result = snapshot.getLoadable(selectLatestCheckIn(fakeID)).getValue()
+
+    expect(result).toEqual(fakeCheckIn)
   })
 
-  it('returns undefined if undefined ID was provided', () => {
-    const getLatestCheckIn = latestCheckIn.getLatestCheckIn()
+  it('returns the latest check-in from the check-ins list', () => {
+    const fakeID = faker.random.word()
+    const fakeCheckIn = {
+      comment: faker.lorem.paragraph(),
+      value: faker.random.number(),
+      confidence: faker.random.number(),
+    }
 
-    const result = getLatestCheckIn({ get: sinon.fake() })
+    const snapshot = snapshot_UNSTABLE(({ set }) =>
+      set(keyResultAtomFamily(fakeID), {
+        keyResultCheckIns: [fakeCheckIn] as any,
+      }),
+    )
 
-    expect(result).not.toBeDefined()
+    const result = snapshot.getLoadable(selectLatestCheckIn(fakeID)).getValue()
+
+    expect(result).toEqual(fakeCheckIn)
+  })
+
+  it('returns a check-in with initial value as value if there is no latest check-in', () => {
+    const fakeID = faker.random.word()
+    const fakeInitialValue = faker.random.number()
+
+    const snapshot = snapshot_UNSTABLE(({ set }) =>
+      set(keyResultAtomFamily(fakeID), {
+        initialValue: fakeInitialValue,
+      }),
+    )
+
+    const result = snapshot.getLoadable(selectLatestCheckIn(fakeID)).getValue()
+
+    expect(result?.value).toEqual(fakeInitialValue)
+  })
+
+  it('returns a check-in with 100 as confidence if there is no latest check-in', () => {
+    const fakeID = faker.random.word()
+
+    const snapshot = snapshot_UNSTABLE(({ set }) => set(keyResultAtomFamily(fakeID), {}))
+
+    const result = snapshot.getLoadable(selectLatestCheckIn(fakeID)).getValue()
+
+    expect(result?.confidence).toEqual(100)
   })
 })
 
 describe('setter', () => {
-  afterEach(() => sinon.restore())
-
-  const userMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-    if (!selector.key) return false
-    return selector.key.includes('USER')
-  })
-
-  it('asks to set the new check-in with an updated value', () => {
-    const latestComment = faker.lorem.paragraph()
-    const oldCheckIn = { comment: latestComment }
-    const fakeUser = faker.helpers.userCard()
-    const fakeCheckInsSelector = sinon.fake()
-    const fakeLatestSelector = sinon.fake()
-
-    const getterStub = sinon.stub()
-    getterStub.withArgs(fakeCheckInsSelector).returns([oldCheckIn])
-    getterStub.withArgs(fakeLatestSelector).returns(oldCheckIn)
-    getterStub.withArgs(userMatcher).returns(fakeUser)
-
-    const setterSpy = sinon.spy()
-    const clock = sinon.useFakeTimers()
-    sinon.stub(latestCheckIn, 'selectCheckIns').returns(fakeCheckInsSelector as any)
-    sinon.stub(latestCheckIn, 'selectLatestCheckIn').returns(fakeLatestSelector as any)
-
+  it('adds the new check-in, linked to parent and given user as our latest check-in attribute', () => {
     const fakeID = faker.random.word()
-    const newComment = faker.lorem.paragraph()
-    const setLatestCheckIn = latestCheckIn.setLatestCheckIn(fakeID)
+    const fakeUserID = faker.random.uuid()
 
-    setLatestCheckIn(
-      {
-        get: getterStub,
-        set: setterSpy,
-      } as any,
-      { comment: newComment },
+    const fakeCheckIn = {
+      comment: faker.lorem.paragraph(),
+      value: faker.random.number(),
+      confidence: faker.random.number(),
+    }
+    const fakeUser = {
+      ...faker.helpers.userCard(),
+      id: fakeUserID,
+    }
+    const fakePreviousCheckIn = {
+      comment: faker.lorem.paragraph(),
+      value: faker.random.number(),
+      confidence: faker.random.number(),
+    }
+
+    const initialSnapshot = snapshot_UNSTABLE(({ set }) => {
+      set(keyResultAtomFamily(fakeID), {
+        latestKeyResultCheckIn: fakePreviousCheckIn as any,
+      })
+
+      set(userAtomFamily(fakeUserID), fakeUser as any)
+
+      set(meAtom, fakeUserID)
+    })
+
+    const newSnapshot = initialSnapshot.map(({ set }) =>
+      set(selectLatestCheckIn(fakeID), fakeCheckIn as any),
     )
 
-    const expectedNewCheckIns = [
+    const result = newSnapshot.getLoadable(selectLatestCheckIn(fakeID)).getValue()
+    const expectedResult = {
+      ...fakeCheckIn,
+      parent: fakePreviousCheckIn,
+      user: fakeUser,
+    }
+
+    expect(result).toEqual(expectedResult)
+  })
+
+  it('can add a given check-in without a parent', () => {
+    const fakeID = faker.random.word()
+    const fakeUserID = faker.random.uuid()
+
+    const fakeCheckIn = {
+      comment: faker.lorem.paragraph(),
+      value: faker.random.number(),
+      confidence: faker.random.number(),
+    }
+    const fakeUser = {
+      ...faker.helpers.userCard(),
+      id: fakeUserID,
+    }
+
+    const initialSnapshot = snapshot_UNSTABLE(({ set }) => {
+      set(keyResultAtomFamily(fakeID), {
+        id: fakeID,
+      })
+
+      set(userAtomFamily(fakeUserID), fakeUser as any)
+
+      set(meAtom, fakeUserID)
+    })
+
+    const newSnapshot = initialSnapshot.map(({ set }) =>
+      set(selectLatestCheckIn(fakeID), fakeCheckIn as any),
+    )
+
+    const result = newSnapshot.getLoadable(selectLatestCheckIn(fakeID)).getValue()
+    const expectedResult = {
+      ...fakeCheckIn,
+      user: fakeUser,
+    }
+
+    expect(result).toEqual(expectedResult)
+  })
+
+  it('adds the new check-in to our check-ins list', () => {
+    const fakeID = faker.random.word()
+    const fakeUserID = faker.random.uuid()
+    const fakeNumberOfPreviousCheckIns = faker.random.number({ max: 100 })
+
+    const fakeCheckIn = {
+      comment: faker.lorem.paragraph(),
+      value: faker.random.number(),
+      confidence: faker.random.number(),
+    }
+    const fakeUser = {
+      ...faker.helpers.userCard(),
+      id: fakeUserID,
+    }
+    const fakePreviousCheckIns = [...new Array(fakeNumberOfPreviousCheckIns)].map(() =>
+      faker.helpers.userCard(),
+    )
+
+    const initialSnapshot = snapshot_UNSTABLE(({ set }) => {
+      set(keyResultAtomFamily(fakeID), {
+        id: fakeID,
+        keyResultCheckIns: fakePreviousCheckIns as any,
+      })
+
+      set(userAtomFamily(fakeUserID), fakeUser as any)
+
+      set(meAtom, fakeUserID)
+    })
+
+    const newSnapshot = initialSnapshot.map(({ set }) =>
+      set(selectLatestCheckIn(fakeID), fakeCheckIn as any),
+    )
+
+    const result = newSnapshot.getLoadable(keyResultAtomFamily(fakeID)).getValue()
+    const expectedResult = [
       {
+        ...fakeCheckIn,
         user: fakeUser,
-        comment: newComment,
-        createdAt: new Date(),
-        parent: oldCheckIn,
+        parent: fakePreviousCheckIns[0],
       },
-      oldCheckIn,
+      ...fakePreviousCheckIns,
     ]
-    const wasCalledAsExpected = setterSpy.firstCall.calledWithExactly(
-      fakeCheckInsSelector,
-      expectedNewCheckIns,
-    )
 
-    clock.restore()
-
-    expect(wasCalledAsExpected).toEqual(true)
+    expect(result?.keyResultCheckIns).toEqual(expectedResult)
   })
 
-  it('asks to updated the key result current progress upon a new check-in', () => {
-    const latestComment = faker.lorem.paragraph()
-    const oldCheckIn = { comment: latestComment }
-    const fakeUser = faker.helpers.userCard()
-    const fakeCheckInsSelector = sinon.fake()
-    const fakeLatestSelector = sinon.fake()
-
-    const getterStub = sinon.stub()
-    getterStub.withArgs(fakeCheckInsSelector).returns([oldCheckIn])
-    getterStub.withArgs(fakeLatestSelector).returns(oldCheckIn)
-    getterStub.withArgs(userMatcher).returns(fakeUser)
-
-    const setterSpy = sinon.spy()
-    const clock = sinon.useFakeTimers()
-
+  it('preserves old check-ins upon addition of the new check-in', () => {
     const fakeID = faker.random.word()
-    const newProgress = faker.random.number()
-    const setLatestCheckIn = latestCheckIn.setLatestCheckIn(fakeID)
+    const fakeUserID = faker.random.uuid()
+    const fakeNumberOfPreviousCheckIns = faker.random.number({ max: 100 })
 
-    setLatestCheckIn(
-      {
-        get: getterStub,
-        set: setterSpy,
-      } as any,
-      { progress: newProgress },
+    const fakeCheckIn = {
+      comment: faker.lorem.paragraph(),
+      value: faker.random.number(),
+      confidence: faker.random.number(),
+    }
+    const fakeUser = {
+      ...faker.helpers.userCard(),
+      id: fakeUserID,
+    }
+    const fakePreviousCheckIns = [...new Array(fakeNumberOfPreviousCheckIns)].map(() =>
+      faker.helpers.userCard(),
     )
 
-    const fakeSelector = selectCurrentProgress(fakeID)
-    const wasCalledAsExpected = setterSpy.secondCall.calledWithExactly(fakeSelector, newProgress)
+    const initialSnapshot = snapshot_UNSTABLE(({ set }) => {
+      set(keyResultAtomFamily(fakeID), {
+        id: fakeID,
+        keyResultCheckIns: fakePreviousCheckIns as any,
+      })
 
-    clock.restore()
+      set(userAtomFamily(fakeUserID), fakeUser as any)
 
-    expect(wasCalledAsExpected).toEqual(true)
+      set(meAtom, fakeUserID)
+    })
+
+    const newSnapshot = initialSnapshot.map(({ set }) =>
+      set(selectLatestCheckIn(fakeID), fakeCheckIn as any),
+    )
+
+    const result = newSnapshot.getLoadable(keyResultAtomFamily(fakeID)).getValue()
+
+    expect(result?.keyResultCheckIns?.slice(1)).toEqual(fakePreviousCheckIns)
   })
 
-  it('asks to update the progress draft upon a new check-in', () => {
-    const latestComment = faker.lorem.paragraph()
-    const oldCheckIn = { comment: latestComment }
-    const fakeUser = faker.helpers.userCard()
-    const fakeCheckInsSelector = sinon.fake()
-    const fakeLatestSelector = sinon.fake()
-
-    const getterStub = sinon.stub()
-    getterStub.withArgs(fakeCheckInsSelector).returns([oldCheckIn])
-    getterStub.withArgs(fakeLatestSelector).returns(oldCheckIn)
-    getterStub.withArgs(userMatcher).returns(fakeUser)
-
-    const setterSpy = sinon.spy()
-    const clock = sinon.useFakeTimers()
-
+  it('can add if no previous check-ins exist', () => {
     const fakeID = faker.random.word()
-    const newProgress = faker.random.number()
-    const setLatestCheckIn = latestCheckIn.setLatestCheckIn(fakeID)
+    const fakeUserID = faker.random.uuid()
 
-    setLatestCheckIn(
-      {
-        get: getterStub,
-        set: setterSpy,
-      } as any,
-      { progress: newProgress },
+    const fakeCheckIn = {
+      comment: faker.lorem.paragraph(),
+      value: faker.random.number(),
+      confidence: faker.random.number(),
+    }
+    const fakeUser = {
+      ...faker.helpers.userCard(),
+      id: fakeUserID,
+    }
+
+    const initialSnapshot = snapshot_UNSTABLE(({ set }) => {
+      set(keyResultAtomFamily(fakeID), {
+        id: fakeID,
+      })
+
+      set(userAtomFamily(fakeUserID), fakeUser as any)
+
+      set(meAtom, fakeUserID)
+    })
+
+    const newSnapshot = initialSnapshot.map(({ set }) =>
+      set(selectLatestCheckIn(fakeID), fakeCheckIn as any),
     )
 
-    const fakeSelector = progressDraft(fakeID)
-    const wasCalledAsExpected = setterSpy.thirdCall.calledWithExactly(fakeSelector, newProgress)
-
-    clock.restore()
-
-    expect(wasCalledAsExpected).toEqual(true)
-  })
-
-  it('asks to update the key result current confidence upon a new check-in', () => {
-    const latestComment = faker.lorem.paragraph()
-    const oldCheckIn = { comment: latestComment }
-    const fakeUser = faker.helpers.userCard()
-    const fakeCheckInsSelector = sinon.fake()
-    const fakeLatestSelector = sinon.fake()
-
-    const getterStub = sinon.stub()
-    getterStub.withArgs(fakeCheckInsSelector).returns([oldCheckIn])
-    getterStub.withArgs(fakeLatestSelector).returns(oldCheckIn)
-    getterStub.withArgs(userMatcher).returns(fakeUser)
-
-    const setterSpy = sinon.spy()
-    const clock = sinon.useFakeTimers()
-
-    const fakeID = faker.random.word()
-    const newConfidence = faker.random.number()
-    const setLatestCheckIn = latestCheckIn.setLatestCheckIn(fakeID)
-
-    setLatestCheckIn(
+    const result = newSnapshot.getLoadable(keyResultAtomFamily(fakeID)).getValue()
+    const expectedResult = [
       {
-        get: getterStub,
-        set: setterSpy,
-      } as any,
-      { confidence: newConfidence },
-    )
+        ...fakeCheckIn,
+        user: fakeUser,
+      },
+    ]
 
-    const fakeSelector = selectCurrentConfidence(fakeID)
-    const wasCalledAsExpected = setterSpy.getCall(3).calledWithExactly(fakeSelector, newConfidence)
-
-    clock.restore()
-
-    expect(wasCalledAsExpected).toEqual(true)
-  })
-
-  it('returns undefined if undefined ID was provided', () => {
-    const setLatestCheckIn = latestCheckIn.setLatestCheckIn()
-
-    const result = setLatestCheckIn({ get: sinon.fake(), set: sinon.fake() } as any, {})
-
-    expect(result).not.toBeDefined()
+    expect(result?.keyResultCheckIns).toEqual(expectedResult)
   })
 })

@@ -77,7 +77,7 @@ describe('component expectations', () => {
   })
 
   it('renders a single paragraph for each new line', () => {
-    const numberOfParagraphs = faker.random.number({ max: 10 })
+    const numberOfParagraphs = faker.random.number({ min: 2, max: 10 })
     const paragraphs = [...new Array(numberOfParagraphs)].map(() => faker.lorem.paragraph())
     const text = paragraphs.join('\n')
 
