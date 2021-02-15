@@ -2,6 +2,17 @@ import { ButtonProps } from '@chakra-ui/react'
 
 const Button = {
   variants: {
+    text: ({ colorScheme }: ButtonProps) => ({
+      '&:hover': {
+        color: `${colorScheme ?? 'brand'}.500`,
+      },
+
+      '&:focus': {
+        color: `${colorScheme ?? 'brand'}.500`,
+        boxShadow: 'none',
+      },
+    }),
+
     solid: ({ colorScheme }: ButtonProps) => ({
       bg: `${colorScheme ?? 'brand'}.100`,
       color: `${colorScheme ?? 'brand'}.500`,

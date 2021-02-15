@@ -1,11 +1,14 @@
-import React, { ReactElement } from 'react'
+import { Text, Skeleton } from '@chakra-ui/react'
+import React, { ReactElement, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
+import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
 export interface KeyResultListBodyColumnPercentualProgressProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -15,10 +18,26 @@ export interface KeyResultListBodyColumnPercentualProgressProperties
 const KeyResultListBodyColumnPercentualProgress = ({
   id,
 }: KeyResultListBodyColumnPercentualProgressProperties): ReactElement => {
-  const keyResult = useRecoilValue(keyResultAtomFamily(id))
-  console.log(keyResult)
+  const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(id))
+  const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
+  const intl = useIntl()
 
-  return <KeyResultListBodyColumnBase p={0}>Ok</KeyResultListBodyColumnBase>
+  const progress = latestKeyResultCheckIn?.progress ?? 0
+  const isLoaded = Boolean(latestKeyResultCheckIn)
+
+  useEffect(() => {
+    if (latestKeyResultCheckIn?.confidence) setConfidence(latestKeyResultCheckIn?.confidence)
+  }, [latestKeyResultCheckIn?.confidence, setConfidence])
+
+  return (
+    <KeyResultListBodyColumnBase>
+      <Skeleton isLoaded={isLoaded}>
+        <Text fontSize="md" color={confidenceTag.color.primary} fontWeight={500}>
+          {intl.formatNumber(progress / 100, { style: 'percent' })}
+        </Text>
+      </Skeleton>
+    </KeyResultListBodyColumnBase>
+  )
 }
 
 export default KeyResultListBodyColumnPercentualProgress

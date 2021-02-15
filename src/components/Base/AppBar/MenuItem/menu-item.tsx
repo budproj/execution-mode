@@ -15,7 +15,14 @@ const MenuItem = (properties: MenuItemProperties): ReactElement => {
 
   return (
     <IntlLink href={properties.href}>
-      <Button variant="text" isActive={isHrefCurrentRoute}>
+      <Button
+        variant="text"
+        isActive={isHrefCurrentRoute}
+        colorScheme="brand"
+        _active={{
+          color: 'brand.500',
+        }}
+      >
         {properties.label}
       </Button>
     </IntlLink>
