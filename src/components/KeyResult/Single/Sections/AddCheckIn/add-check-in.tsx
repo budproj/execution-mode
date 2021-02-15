@@ -4,32 +4,32 @@ import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
+import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
+import { KeyResultSectionTimelineCardBase } from 'src/components/KeyResult/Single/Sections/Timeline/Cards'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
-import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
+import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 import { keyResultDrawerIsCreatingCheckIn } from 'src/state/recoil/key-result/drawer'
-
-import { KeyResultSectionTimelineCardBase } from '../Timeline/Cards'
 
 import messages from './messages'
 
-export interface KeyResultSectionCheckInProperties {
+export interface KeyResultSectionAddCheckInProperties {
   keyResultID?: KeyResult['id']
   onCompleted?: (data: KeyResultCheckIn) => void
 }
 
-const KeyResultSectionCheckIn = ({
+const KeyResultSectionAddCheckIn = ({
   keyResultID,
   onCompleted,
-}: KeyResultSectionCheckInProperties) => {
+}: KeyResultSectionAddCheckInProperties) => {
   const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
     keyResultDrawerIsCreatingCheckIn(keyResultID),
   )
-  const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
+  const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const intl = useIntl()
 
-  const isLoaded = typeof currentProgress !== 'undefined'
+  const isLoaded = typeof latestKeyResultCheckIn?.value !== 'undefined'
 
   const handleOpen = () => {
     setIsCreatingCheckIn(true)
@@ -37,7 +37,12 @@ const KeyResultSectionCheckIn = ({
 
   const handleClose = () => {
     setIsCreatingCheckIn(false)
-    setDraftValue(currentProgress)
+    setDraftValue(latestKeyResultCheckIn?.value)
+  }
+
+  const handleSubmit = (values: CheckInFormValues) => {
+    if (values.valueNew) setDraftValue(values.valueNew)
+    setIsCreatingCheckIn(false)
   }
 
   return (
@@ -66,7 +71,7 @@ const KeyResultSectionCheckIn = ({
             showGoal
             isCommentAlwaysEnabled
             keyResultID={keyResultID}
-            afterSubmit={handleClose}
+            afterSubmit={handleSubmit}
             onCompleted={onCompleted}
           />
         </KeyResultSectionTimelineCardBase>
@@ -75,4 +80,4 @@ const KeyResultSectionCheckIn = ({
   )
 }
 
-export default KeyResultSectionCheckIn
+export default KeyResultSectionAddCheckIn

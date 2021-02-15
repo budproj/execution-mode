@@ -3,65 +3,69 @@ import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
-import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
-import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
-import { userAtomFamily } from 'src/state/recoil/user'
-import meAtom from 'src/state/recoil/user/me'
 
-import { PREFIX } from './constants'
-import progressDraft from './progress-draft'
+import keyResultAtomFamily from '../atom-family'
+
+import { DEFAULT_CONFIDENCE, PREFIX } from './constants'
 
 const KEY = `${PREFIX}::LATEST`
 
-export const selectCheckIns = buildPartialSelector<KeyResult['keyResultCheckIns']>(
+export const selectKeyResultCheckIns = buildPartialSelector<KeyResult['keyResultCheckIns']>(
   'keyResultCheckIns',
 )
+
+export const selectLatestKeyResultCheckIn = buildPartialSelector<
+  KeyResult['latestKeyResultCheckIn']
+>('latestKeyResultCheckIn')
 
 export const getLatestCheckIn = (id?: KeyResult['id']) => ({ get }: RecoilInterfaceGetter) => {
   if (!id) return
 
-  const checkIns = get(selectCheckIns(id))
-  const latestCheckIn = checkIns?.[0]
+  const keyResultCheckIns = get(selectKeyResultCheckIns(id))
+  const keyResultLatestCheckIn = get(selectLatestKeyResultCheckIn(id))
+  const keyResult = get(keyResultAtomFamily(id))
 
-  return latestCheckIn
+  const latestKeyResultCheckIn =
+    keyResultLatestCheckIn ?? (keyResultCheckIns?.[0] as KeyResultCheckIn)
+  const normalizedLatestKeyResultCheckIn: KeyResultCheckIn = {
+    ...latestKeyResultCheckIn,
+    value: latestKeyResultCheckIn?.value ?? keyResult?.initialValue ?? 0,
+    confidence: latestKeyResultCheckIn?.confidence ?? DEFAULT_CONFIDENCE,
+  }
+
+  return normalizedLatestKeyResultCheckIn
 }
 
 export const setLatestCheckIn = (id?: KeyResult['id']) => (
   { get, set }: RecoilInterfaceReadWrite,
-  newCheckIn: Partial<KeyResultCheckIn> | DefaultValue | undefined,
+  newCheckIn: KeyResultCheckIn | DefaultValue | undefined,
 ) => {
   if (!id) return
+  if (!newCheckIn) return
+  if (newCheckIn instanceof DefaultValue) return
 
-  const checkInsSelector = selectCheckIns(id)
-  const previousLatestCheckInSelector = selectLatestCheckIn(id)
-  const currentProgressSelector = selectCurrentProgress(id)
-  const currentConfidenceSelector = selectCurrentConfidence(id)
-  const progressDraftSelector = progressDraft(id)
+  const selectors = {
+    keyResultCheckIns: selectKeyResultCheckIns(id),
+    keyResultLatestCheckIn: selectLatestKeyResultCheckIn(id),
+    keyResultPreviousCheckIn: selectLatestCheckIn(id),
+  }
 
-  const checkIns = get(checkInsSelector)
-  const previousLatestCheckIn = get(previousLatestCheckInSelector)
+  const keyResultCheckIns = get(selectors.keyResultCheckIns) ?? []
+  const keyResultPreviousCheckIn = get(selectors.keyResultPreviousCheckIn) as KeyResultCheckIn
 
-  const userID = get(meAtom)
-  const user = get(userAtomFamily(userID))
-
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  const newLocalCheckIn = {
-    user,
-    createdAt: new Date(),
-    parent: previousLatestCheckIn,
+  const newLocalCheckIn: KeyResultCheckIn = {
+    parent: keyResultPreviousCheckIn,
     ...newCheckIn,
-  } as KeyResultCheckIn
-  const newCheckIns = remove([newLocalCheckIn, ...(checkIns ?? [])])
+  }
+  const newCheckIns = remove([newLocalCheckIn, ...keyResultCheckIns])
 
-  set(checkInsSelector, newCheckIns)
-  set(currentProgressSelector, newLocalCheckIn.progress)
-  set(progressDraftSelector, newLocalCheckIn.progress)
-  set(currentConfidenceSelector, newLocalCheckIn.confidence)
+  set(selectors.keyResultCheckIns, newCheckIns)
+  set(selectors.keyResultLatestCheckIn, newLocalCheckIn)
 }
 
 export const selectLatestCheckIn = selectorFamily<
-  Partial<KeyResultCheckIn> | undefined,
+  KeyResultCheckIn | undefined,
   KeyResult['id'] | undefined
 >({
   key: KEY,

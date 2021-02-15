@@ -1,0 +1,3 @@
+import KeyResultListBodyColumnPercentualProgress from './percentual-progress'
+
+export default KeyResultListBodyColumnPercentualProgress

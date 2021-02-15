@@ -31,6 +31,7 @@ const KeyResultListHead = ({
     [KEY_RESULT_LIST_COLUMN.CYCLE]: messages.listHeadCycle,
     [KEY_RESULT_LIST_COLUMN.OWNER]: messages.listHeadOwner,
     [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]: messages.listHeadConfidenceLevelColor,
+    [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: messages.listHeadPercentualProgress,
   }
 
   return (

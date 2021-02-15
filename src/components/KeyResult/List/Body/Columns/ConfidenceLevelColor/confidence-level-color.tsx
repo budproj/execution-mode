@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import KeyResultListBodyColumnBase, {
@@ -7,7 +7,7 @@ import KeyResultListBodyColumnBase, {
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
 export interface KeyResultListBodyColumnConfidenceLevelColorProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -17,8 +17,12 @@ export interface KeyResultListBodyColumnConfidenceLevelColorProperties
 const KeyResultListBodyColumnConfidenceLevelColor = ({
   id,
 }: KeyResultListBodyColumnConfidenceLevelColorProperties): ReactElement => {
-  const keyResult = useRecoilValue(keyResultAtomFamily(id))
-  const [confidenceTag] = useConfidenceTag(keyResult?.currentConfidence)
+  const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(id))
+  const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
+
+  useEffect(() => {
+    if (latestKeyResultCheckIn?.confidence) setConfidence(latestKeyResultCheckIn?.confidence)
+  }, [latestKeyResultCheckIn?.confidence, setConfidence])
 
   return (
     <KeyResultListBodyColumnBase p={0}>

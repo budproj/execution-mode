@@ -251,6 +251,10 @@
     "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
     "description": "This message is the alt message for our box drawing in the not found error page"
   },
+  "KSjqcC": {
+    "defaultMessage": "%",
+    "description": "The text of the table head related to the percentual progress column"
+  },
   "KdYFbe": {
     "defaultMessage": "Apagar",
     "description": "This text is displayed in our menu, as an anchor to remove that given card"

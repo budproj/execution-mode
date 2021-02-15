@@ -9,7 +9,7 @@ import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import messages from './messages'
 
 export interface KeyResultSectionTimelineCardCheckInProgressProperties {
-  relativePercentageProgress?: KeyResultCheckIn['progress']
+  progress?: KeyResultCheckIn['progress']
   confidence?: KeyResultCheckIn['confidence']
   parent?: KeyResultCheckIn | null
 }
@@ -17,19 +17,19 @@ export interface KeyResultSectionTimelineCardCheckInProgressProperties {
 const normalizeProgress = (progress?: number) => (progress ? progress / 100 : 0)
 
 const KeyResultSectionTimelineCardCheckInProgress = ({
-  relativePercentageProgress,
+  progress,
   confidence,
   parent,
 }: KeyResultSectionTimelineCardCheckInProgressProperties) => {
   const intl = useIntl()
   const [confidenceTag, setConfidence] = useConfidenceTag(confidence)
 
-  const normalizedParentProgress = normalizeProgress(parent?.relativePercentageProgress)
-  const normalizedProgress = normalizeProgress(relativePercentageProgress)
-  const isLoaded = Boolean(relativePercentageProgress) || relativePercentageProgress === 0
+  const normalizedParentProgress = normalizeProgress(parent?.progress)
+  const normalizedProgress = normalizeProgress(progress)
+  const isLoaded = Boolean(progress) || progress === 0
   const isSameAsParent = isLoaded && normalizedParentProgress === normalizedProgress
 
-  const relativePercentageProgressNumberFormat: FormatNumberOptions = {
+  const progressNumberFormat: FormatNumberOptions = {
     style: 'percent',
   }
 
@@ -41,7 +41,7 @@ const KeyResultSectionTimelineCardCheckInProgress = ({
     <Flex alignItems="center" gridGap={4}>
       <Skeleton isLoaded={isLoaded}>
         <StatNumber fontSize="2xl" color="gray.200" lineHeight={1}>
-          {intl.formatNumber(normalizedParentProgress, relativePercentageProgressNumberFormat)}
+          {intl.formatNumber(normalizedParentProgress, progressNumberFormat)}
         </StatNumber>
       </Skeleton>
       {!isSameAsParent && (
@@ -54,7 +54,7 @@ const KeyResultSectionTimelineCardCheckInProgress = ({
           />
           <Skeleton isLoaded={isLoaded}>
             <StatNumber fontSize="2xl" color={confidenceTag.color.primary} lineHeight={1}>
-              {intl.formatNumber(normalizedProgress, relativePercentageProgressNumberFormat)}
+              {intl.formatNumber(normalizedProgress, progressNumberFormat)}
             </StatNumber>
           </Skeleton>
         </>

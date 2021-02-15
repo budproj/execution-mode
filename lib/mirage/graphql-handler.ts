@@ -101,17 +101,16 @@ const graphQLHandler = (mirageSchema: unknown) =>
           // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
           const keyResult = mirageSchema.keyResults.find(keyResultCheckIn.keyResultId)
           const latestKeyResultCheckInId = keyResult.attrs.keyResultCheckInIds[0]
-          const progress = keyResultCheckIn?.progress ?? 0
+          const value = keyResultCheckIn?.value ?? 0
 
-          const relativePercentageProgress =
-            ((keyResult.goal - progress) / (keyResult.goal - keyResult.initialValue)) * 100
-          const normalizedMinRelativeProgress =
-            relativePercentageProgress < 0 ? 0 : relativePercentageProgress
+          const progress =
+            ((keyResult.goal - value) / (keyResult.goal - keyResult.initialValue)) * 100
+          const normalizedMinProgress = progress < 0 ? 0 : progress
           const normalizedMaxRelativeProgress =
-            normalizedMinRelativeProgress > 100 ? 100 : normalizedMinRelativeProgress
+            normalizedMinProgress > 100 ? 100 : normalizedMinProgress
 
           const enhancedKeyResultCheckIn = {
-            relativePercentageProgress: normalizedMaxRelativeProgress,
+            progress: normalizedMaxRelativeProgress,
             userId: user.id,
             parentId: latestKeyResultCheckInId,
             createdAt: new Date(),

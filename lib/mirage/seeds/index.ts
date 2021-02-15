@@ -6,7 +6,7 @@ import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
 import getConfig from 'src/config'
 
-import { buildKeyResultCustomList, buildKeyResultCheckIn } from './builders'
+import { buildKeyResultCustomList, buildKeyResultCheckInValue } from './builders'
 import { pickRandomModel } from './selectors'
 
 const { publicRuntimeConfig } = getConfig()
@@ -44,7 +44,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const keyResultCheckIns = server.createList('keyResultCheckIn', 40, {
     user,
     keyResult: () => pickRandomModel(keyResults),
-    progress: buildKeyResultCheckIn,
+    value: buildKeyResultCheckInValue,
     policies: basePolicy,
   })
   const keyResultComments = server.createList('keyResultComment', 100, {
@@ -83,7 +83,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       return keyResultCheckIn
     })
 
-    keyResult.update('currentProgress', latestKeyResultCheckIn?.progress ?? 0)
+    keyResult.update('latestKeyResultCheckIn', latestKeyResultCheckIn)
     keyResult.update('keyResultCheckIns', keyResult.keyResultCheckIns)
 
     return keyResult

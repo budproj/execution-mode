@@ -1,14 +1,15 @@
 mutation CREATE_KEY_RESULT_CHECK_IN($keyResultCheckInInput: KeyResultCheckInInput!) {
   createKeyResultCheckIn(keyResultCheckIn: $keyResultCheckInInput) {
     id
+    value
     confidence
-    relativePercentageProgress
+    progress
     comment
     createdAt
     keyResultId
     parent {
       confidence
-      relativePercentageProgress
+      progress
     }
     policies {
       delete

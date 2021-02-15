@@ -6,8 +6,8 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import {
   keyResultCheckInPopoverOpen,
   keyResultCheckInProgressDraft,
+  keyResultLatestCheckIn,
 } from 'src/state/recoil/key-result/check-in'
-import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 
 import Popover from './popover'
 import ProgressSliderSlider from './slider'
@@ -19,12 +19,12 @@ export interface ProgressSliderWrapperProperties {
 
 const ProgressSliderWrapper = ({ id, canChange }: ProgressSliderWrapperProperties) => {
   const [isPopoverOpen, setPopoverOpen] = useRecoilState<boolean>(keyResultCheckInPopoverOpen(id))
-  const currentProgress = useRecoilValue(selectCurrentProgress(id))
+  const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(id))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(id))
 
   const handleClose = () => {
     setPopoverOpen(false)
-    setDraftValue(currentProgress)
+    setDraftValue(latestKeyResultCheckIn?.value)
   }
 
   return (

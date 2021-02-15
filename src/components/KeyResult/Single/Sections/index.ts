@@ -8,7 +8,7 @@ export { default as KeyResultSectionDescription } from './Description'
 
 export { default as KeyResultSectionCycle } from './Cycle'
 
-export { default as KeyResultSectionCheckIn } from './CheckIn'
+export { default as KeyResultSectionAddCheckIn } from './AddCheckIn'
 
 export { default as KeyResultSectionTimeline } from './Timeline'
 

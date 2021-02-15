@@ -11,9 +11,10 @@ export type KeyResultTimelineEntry = KeyResultCheckIn | KeyResultComment
 export interface KeyResultCheckIn {
   __typename: string
   id: string
-  progress: number
+  value: number
   confidence: number
-  relativePercentageProgress: number
+  progress: number
+  progressIncrease: number
   policies: AuthzPolicies
   createdAt: string
   keyResult: KeyResult
@@ -52,8 +53,6 @@ export interface KeyResult {
   initialValue: number
   goal: number
   format: KEY_RESULT_FORMAT
-  currentProgress: KeyResultCheckIn['progress']
-  currentConfidence: KeyResultCheckIn['confidence']
   createdAt: string
   updatedAt: string
   owner: User
@@ -62,6 +61,7 @@ export interface KeyResult {
   policies: AuthzPolicies
   description?: string
   keyResultCheckIns?: KeyResultCheckIn[]
+  latestKeyResultCheckIn?: KeyResultCheckIn
   timeline: KeyResultTimelineEntry[]
 }
 

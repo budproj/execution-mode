@@ -1,7 +1,6 @@
 import faker from 'faker'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
-
 import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
 import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 
