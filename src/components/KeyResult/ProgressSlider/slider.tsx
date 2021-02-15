@@ -8,6 +8,7 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
+  keyResultCheckInIsSlidding,
   keyResultCheckInPopoverOpen,
   keyResultCheckInProgressDraft,
   keyResultCheckInProgressSliderStep,
@@ -34,6 +35,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     const [isLoaded, setIsLoaded] = useState(false)
     const [isChanging, setIsChanging] = useState(false)
     const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
+    const [isSlidding, setIsSlidding] = useRecoilState(keyResultCheckInIsSlidding(keyResultID))
     const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(keyResultID))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
     const goal = useRecoilValue(goalSelector(keyResultID))
@@ -49,8 +51,10 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
           setDraftValue(valueNew)
           setIsChanging(true)
         }
+
+        if (!isSlidding) setIsSlidding(true)
       },
-      [setDraftValue, setIsChanging],
+      [setDraftValue, setIsChanging, isSlidding, setIsSlidding],
     )
 
     const handleSliderUpdateEnd = useCallback(
@@ -59,8 +63,10 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
           setOpenedPopover(true)
           setIsChanging(false)
         }
+
+        if (isSlidding) setIsSlidding(false)
       },
-      [draftValue, isChanging, setOpenedPopover, setIsChanging],
+      [draftValue, isChanging, setOpenedPopover, setIsChanging, isSlidding, setIsSlidding],
     )
 
     if (!isLoaded && typeof goal !== 'undefined') setIsLoaded(true)

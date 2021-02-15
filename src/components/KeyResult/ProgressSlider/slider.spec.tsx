@@ -18,7 +18,7 @@ describe('component expectations', () => {
   it('displays a disable trigger if progress report data is not available', () => {
     const recoilMock = sinon.mock(recoil)
 
-    recoilMock.expects('useRecoilState').returns([undefined, sinon.fake()])
+    recoilMock.expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     recoilMock.expects('useRecoilValue').atLeast(1)
     recoilMock.expects('useSetRecoilState').returns(sinon.fake())
 
