@@ -2,9 +2,6 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
   keyResult(id: $id) {
     id
     title
-    currentProgress
-    goal
-    currentConfidence
     policies(resource: KEY_RESULT_CHECK_IN) {
       create
     }

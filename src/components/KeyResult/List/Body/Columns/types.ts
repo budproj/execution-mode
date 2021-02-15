@@ -4,6 +4,7 @@ import { KeyResultListBodyColumnCycleProperties } from './Cycle/cycle'
 import { KeyResultListBodyColumnKeyResultProperties } from './KeyResult/key-result'
 import { KeyResultListBodyColumnObjectiveProperties } from './Objective/objective'
 import { KeyResultListBodyColumnOwnerProperties } from './Owner/owner'
+import { KeyResultListBodyColumnPercentualProgressProperties } from './PercentualProgress/percentual-progress'
 import { KeyResultListBodyColumnProgressProperties } from './Progress/progress'
 import { KEY_RESULT_LIST_COLUMN } from './constants'
 
@@ -15,4 +16,5 @@ export interface KeyResultListBodyColumnProperties {
   [KEY_RESULT_LIST_COLUMN.CYCLE]?: KeyResultListBodyColumnCycleProperties
   [KEY_RESULT_LIST_COLUMN.OWNER]?: KeyResultListBodyColumnOwnerProperties
   [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]?: KeyResultListBodyColumnConfidenceLevelColorProperties
+  [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]?: KeyResultListBodyColumnPercentualProgressProperties
 }

@@ -4,7 +4,7 @@ import { User } from 'src/components/User/types'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::USER_FAMILY`
+const KEY = `${PREFIX}::FAMILY`
 
 export const userAtomFamily = atomFamily<Partial<User> | undefined, User['id'] | undefined>({
   key: KEY,

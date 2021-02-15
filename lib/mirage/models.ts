@@ -11,6 +11,8 @@ const models = {
     team: belongsTo(),
     keyResultCheckIns: hasMany('keyResultCheckIn'),
     keyResultComments: hasMany('keyResultComment'),
+    // eslint-disable-next-line unicorn/no-null
+    latestKeyResultCheckIn: belongsTo('keyResultCheckIn', { inverse: null }),
   }),
   keyResultCheckIn: Model.extend({
     user: belongsTo(),

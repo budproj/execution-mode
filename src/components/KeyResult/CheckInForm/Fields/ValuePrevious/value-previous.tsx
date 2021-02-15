@@ -14,13 +14,13 @@ import messages from './messages'
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
-export interface CheckInFormFieldCurrentProgressProperties {
+export interface CheckInFormFieldValuePreviousProperties {
   keyResultID?: KeyResult['id']
 }
 
-const CheckInFormFieldCurrentProgress = ({
+const CheckInFormFieldValuePrevious = ({
   keyResultID,
-}: CheckInFormFieldCurrentProgressProperties) => {
+}: CheckInFormFieldValuePreviousProperties) => {
   const intl = useIntl()
   const format = useRecoilValue(formatSelector(keyResultID))
   const { values } = useFormikContext<CheckInFormValues>()
@@ -31,7 +31,7 @@ const CheckInFormFieldCurrentProgress = ({
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
       <Mask
         isDisabled
-        value={values.currentProgress}
+        value={values.valuePrevious}
         bg="blue.50"
         color="gray.500"
         fontSize="xs"
@@ -41,4 +41,4 @@ const CheckInFormFieldCurrentProgress = ({
   )
 }
 
-export default CheckInFormFieldCurrentProgress
+export default CheckInFormFieldValuePrevious

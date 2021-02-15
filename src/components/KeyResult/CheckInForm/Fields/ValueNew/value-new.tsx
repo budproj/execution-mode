@@ -12,14 +12,14 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 
 import messages from './messages'
 
-export interface CheckInFormFieldNewProgressProperties {
+export interface CheckInFormFieldValueNewProperties {
   isLoading?: boolean
   keyResultID?: KeyResult['id']
 }
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
 
-const CheckInFormFieldNewProgress = ({ keyResultID }: CheckInFormFieldNewProgressProperties) => {
+const CheckInFormFieldValueNew = ({ keyResultID }: CheckInFormFieldValueNewProperties) => {
   const intl = useIntl()
   const format = useRecoilValue(formatSelector(keyResultID))
   const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
@@ -27,19 +27,19 @@ const CheckInFormFieldNewProgress = ({ keyResultID }: CheckInFormFieldNewProgres
   const Mask = selectMaskBasedOnFormat(format)
 
   const handleChange = (newValue?: NumberFormatProps['value']) => {
-    setFieldValue('newProgress', newValue)
+    setFieldValue('valueNew', newValue)
   }
 
   return (
     <Box flex="1 1 0px">
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
-      <Mask value={values.newProgress} handleChange={handleChange} fontSize="xs" />
+      <Mask value={values.valueNew} handleChange={handleChange} fontSize="xs" />
     </Box>
   )
 }
 
-CheckInFormFieldNewProgress.defaultProps = {
+CheckInFormFieldValueNew.defaultProps = {
   submitOnBlur: false,
 }
 
-export default CheckInFormFieldNewProgress
+export default CheckInFormFieldValueNew

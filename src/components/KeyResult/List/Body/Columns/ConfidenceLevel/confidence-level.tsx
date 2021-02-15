@@ -9,7 +9,6 @@ import KeyResultListBodyColumnBase, {
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
-import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
 
 export interface KeyResultListBodyColumnConfidenceLevelProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -21,7 +20,6 @@ const KeyResultListBodyColumnConfidenceLevel = ({
   id,
   withLastUpdateInfo,
 }: KeyResultListBodyColumnConfidenceLevelProperties): ReactElement => {
-  const currentConfidence = useRecoilValue(selectCurrentConfidence(id))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
 
@@ -35,7 +33,7 @@ const KeyResultListBodyColumnConfidenceLevel = ({
           fadeDuration={0}
           /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         >
-          <ConfidenceTag confidenceValue={currentConfidence} />
+          <ConfidenceTag confidenceValue={latestCheckIn?.confidence} />
         </Skeleton>
 
         {withLastUpdateInfo && (

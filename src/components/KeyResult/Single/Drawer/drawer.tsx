@@ -7,8 +7,8 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 import {
   keyResultCheckInCommentEnabled,
   keyResultCheckInProgressDraft,
+  keyResultLatestCheckIn,
 } from 'src/state/recoil/key-result/check-in'
-import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 
 import KeyResultDrawerContent from './content'
@@ -17,7 +17,7 @@ const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 
 const KeyResultDrawer = () => {
   const keyResultID = useRecoilValue(keyResultDrawerOpen)
-  const currentProgress = useRecoilValue(selectCurrentProgress(keyResultID))
+  const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const resetOpenDrawer = useResetRecoilState(keyResultDrawerOpen)
   const resetTimeline = useResetRecoilState(timelineSelector(keyResultID))
@@ -27,7 +27,7 @@ const KeyResultDrawer = () => {
     resetOpenDrawer()
     resetTimeline()
     resetCommentEnabled()
-    setDraftValue(currentProgress)
+    setDraftValue(latestKeyResultCheckIn?.value)
   }
 
   const isOpen = Boolean(keyResultID)

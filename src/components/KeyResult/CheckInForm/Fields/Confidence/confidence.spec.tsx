@@ -4,7 +4,7 @@ import * as formik from 'formik'
 import React from 'react'
 import sinon from 'sinon'
 
-import CheckInFormFieldCurrentConfidence from './current-confidence'
+import CheckInFormFieldConfidence from './confidence'
 
 describe('formik integration', () => {
   afterEach(() => sinon.restore())
@@ -14,7 +14,7 @@ describe('formik integration', () => {
     const fakeConfidence = faker.random.number().toString()
     sinon.stub(formik, 'useFormikContext').returns({ values: {}, setFieldValue: spy } as any)
 
-    const result = enzyme.shallow(<CheckInFormFieldCurrentConfidence />)
+    const result = enzyme.shallow(<CheckInFormFieldConfidence />)
 
     const selectMenu = result.find('SelectMenu')
     selectMenu.simulate('change', fakeConfidence)

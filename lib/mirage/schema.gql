@@ -190,8 +190,6 @@ type KeyResult implements EntityObject {
 
   """The format of the key result"""
   format: String!
-  currentProgress: Float!
-  currentConfidence: Float!
   timeline(offset: Int, limit: Int = 10): [TimelineEntryUnion!]!
 
   """The creation date of the key result"""
@@ -216,6 +214,7 @@ type KeyResult implements EntityObject {
   description: String
   keyResultCheckIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
   keyResultComments: [KeyResultComment!]!
+  latestKeyResultCheckIn: KeyResultCheckIn
 }
 
 union TimelineEntryUnion = KeyResultCheckIn | KeyResultComment
@@ -231,15 +230,13 @@ type KeyResultCheckIn implements EntityObject {
   """The ID of this entity"""
   id: ID!
   policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
-
-  """The reported progress in this check-in"""
-  progress: Float!
+  value: Float!
 
   """The reported confidence in this check-in"""
   confidence: Int!
-  relativePercentageProgress: Float!
-  percentageProgressIncrease: Float!
-  absoluteConfidenceIncrease: Int!
+  progress: Float!
+  progressIncrease: Float!
+  confidenceIncrease: Int!
 
   """The creation date of the report"""
   createdAt: DateTime!
@@ -405,7 +402,7 @@ input KeyResultCustomListInput {
 """The required data to create a new progress report"""
 input KeyResultCheckInInput {
   """The progress value you are reporting"""
-  progress: Float!
+  value: Float!
 
   """The confidence value you are reporting"""
   confidence: Int!

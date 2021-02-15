@@ -6,24 +6,24 @@ import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
 export interface KeyResultSectionTimelineCardCheckInProgressBarInterface {
-  relativePercentageProgress?: KeyResultCheckIn['relativePercentageProgress']
+  progress?: KeyResultCheckIn['progress']
   confidence?: KeyResultCheckIn['confidence']
 }
 
 const KeyResultSectionTimelineCardCheckInProgressBar = ({
-  relativePercentageProgress,
+  progress,
   confidence,
 }: KeyResultSectionTimelineCardCheckInProgressBarInterface) => {
   const [confidenceTag] = useConfidenceTag(confidence)
 
-  const isLoaded = Boolean(relativePercentageProgress) || relativePercentageProgress === 0
+  const isLoaded = Boolean(progress) || progress === 0
 
   return (
     <Skeleton isLoaded={isLoaded} minH="12px" borderRadius="full" borderTopRadius={0}>
       <Flex>
         <SliderWithFilledTrack
           trackColor={confidenceTag.color.primary}
-          value={relativePercentageProgress}
+          value={progress}
           trackThickness={2}
           trackTopRadius={0}
         />

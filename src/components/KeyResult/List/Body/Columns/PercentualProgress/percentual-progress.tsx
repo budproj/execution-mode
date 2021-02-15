@@ -1,5 +1,6 @@
-import { Box } from '@chakra-ui/react'
+import { Text, Skeleton } from '@chakra-ui/react'
 import React, { ReactElement, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import KeyResultListBodyColumnBase, {
@@ -9,26 +10,34 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
-export interface KeyResultListBodyColumnConfidenceLevelColorProperties
+export interface KeyResultListBodyColumnPercentualProgressProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
 }
 
-const KeyResultListBodyColumnConfidenceLevelColor = ({
+const KeyResultListBodyColumnPercentualProgress = ({
   id,
-}: KeyResultListBodyColumnConfidenceLevelColorProperties): ReactElement => {
+}: KeyResultListBodyColumnPercentualProgressProperties): ReactElement => {
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
+  const intl = useIntl()
+
+  const progress = latestKeyResultCheckIn?.progress ?? 0
+  const isLoaded = Boolean(latestKeyResultCheckIn)
 
   useEffect(() => {
     if (latestKeyResultCheckIn?.confidence) setConfidence(latestKeyResultCheckIn?.confidence)
   }, [latestKeyResultCheckIn?.confidence, setConfidence])
 
   return (
-    <KeyResultListBodyColumnBase p={0}>
-      <Box borderRadius="full" maxW="5px" minH="60px" bg={confidenceTag.color.primary} />
+    <KeyResultListBodyColumnBase>
+      <Skeleton isLoaded={isLoaded}>
+        <Text fontSize="md" color={confidenceTag.color.primary} fontWeight={500}>
+          {intl.formatNumber(progress / 100, { style: 'percent' })}
+        </Text>
+      </Skeleton>
     </KeyResultListBodyColumnBase>
   )
 }
 
-export default KeyResultListBodyColumnConfidenceLevelColor
+export default KeyResultListBodyColumnPercentualProgress

@@ -8,11 +8,12 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
+  keyResultCheckInIsSlidding,
   keyResultCheckInPopoverOpen,
   keyResultCheckInProgressDraft,
   keyResultCheckInProgressSliderStep,
+  keyResultLatestCheckIn,
 } from 'src/state/recoil/key-result/check-in'
-import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
 
 export interface ProgressSliderSliderProperties {
   keyResultID?: KeyResult['id']
@@ -34,12 +35,15 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     const [isLoaded, setIsLoaded] = useState(false)
     const [isChanging, setIsChanging] = useState(false)
     const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
-    const currentConfidence = useRecoilValue(selectCurrentConfidence(keyResultID))
+    const [isSlidding, setIsSlidding] = useRecoilState(keyResultCheckInIsSlidding(keyResultID))
+    const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(keyResultID))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
     const goal = useRecoilValue(goalSelector(keyResultID))
     const step = useRecoilValue(keyResultCheckInProgressSliderStep(keyResultID))
     const setOpenedPopover = useSetRecoilState(keyResultCheckInPopoverOpen(keyResultID))
-    const [confidenceTag, setConfidenceInConfidenceTag] = useConfidenceTag(currentConfidence)
+    const [confidenceTag, setConfidenceInConfidenceTag] = useConfidenceTag(
+      latestKeyResultCheckIn?.confidence,
+    )
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
@@ -47,8 +51,10 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
           setDraftValue(valueNew)
           setIsChanging(true)
         }
+
+        if (!isSlidding) setIsSlidding(true)
       },
-      [setDraftValue, setIsChanging],
+      [setDraftValue, setIsChanging, isSlidding, setIsSlidding],
     )
 
     const handleSliderUpdateEnd = useCallback(
@@ -57,15 +63,18 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
           setOpenedPopover(true)
           setIsChanging(false)
         }
+
+        if (isSlidding) setIsSlidding(false)
       },
-      [draftValue, isChanging, setOpenedPopover, setIsChanging],
+      [draftValue, isChanging, setOpenedPopover, setIsChanging, isSlidding, setIsSlidding],
     )
 
     if (!isLoaded && typeof goal !== 'undefined') setIsLoaded(true)
 
     useEffect(() => {
-      if (currentConfidence) setConfidenceInConfidenceTag(currentConfidence)
-    }, [currentConfidence, setConfidenceInConfidenceTag])
+      if (latestKeyResultCheckIn?.confidence)
+        setConfidenceInConfidenceTag(latestKeyResultCheckIn?.confidence)
+    }, [latestKeyResultCheckIn?.confidence, setConfidenceInConfidenceTag])
 
     // Since Chakra use only hooks to handle lifecycles, it does not behaves well in their
     // onChange events. Even if we provide the isDisabled tag to it, it dispatches the onChange and

@@ -7,7 +7,7 @@ import sinon from 'sinon'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
-import CheckInFormFieldCurrentProgress from './current-progress'
+import CheckInFormFieldValueNew from './value-new'
 
 describe('component expectations', () => {
   afterEach(() => sinon.restore())
@@ -15,11 +15,11 @@ describe('component expectations', () => {
   it('renders the Absolute mask if the key result format is NUMBER', () => {
     const format = KEY_RESULT_FORMAT.NUMBER
     sinon.stub(recoil, 'useRecoilValue').returns(format)
+
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
-    )
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
@@ -29,11 +29,11 @@ describe('component expectations', () => {
   it('renders the Percent mask if the key result format is PERCENTAGE', () => {
     const format = KEY_RESULT_FORMAT.PERCENTAGE
     sinon.stub(recoil, 'useRecoilValue').returns(format)
+
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
-    )
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Percentage')
 
@@ -43,11 +43,11 @@ describe('component expectations', () => {
   it('renders the CoinBRL mask if the key result format is COIN_BRL', () => {
     const format = KEY_RESULT_FORMAT.COIN_BRL
     sinon.stub(recoil, 'useRecoilValue').returns(format)
+
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
-    )
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('CoinBRL')
 
@@ -59,26 +59,32 @@ describe('component expectations', () => {
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
 
-    const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
-    )
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={faker.random.word()} />)
 
     const maskComponent = result.find('Absolute')
 
     expect(maskComponent.length).toEqual(1)
   })
 
-  it('makes the rendered mask be disabled', () => {
+  it('updates the field value with latest current progress', async () => {
+    const spy = sinon.spy()
+    const fakeID = faker.random.word()
+    const fakeProgress = faker.random.number()
+
     sinon.mock(recoil).expects('useRecoilValue').returns('')
-    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
-    sinon.mock(formik).expects('useFormikContext').atLeast(1).returns({ values: {} })
+    sinon
+      .mock(formik)
+      .expects('useFormikContext')
+      .atLeast(1)
+      .returns({ values: {}, setFieldValue: spy })
 
-    const result = enzyme.shallow(
-      <CheckInFormFieldCurrentProgress keyResultID={faker.random.word()} />,
-    )
+    const result = enzyme.shallow(<CheckInFormFieldValueNew keyResultID={fakeID} />)
 
-    const maskComponent = result.find('Absolute')
+    const functionHook: (s: number) => void = result.find('Absolute').prop('handleChange')
+    functionHook(fakeProgress)
 
-    expect(maskComponent.prop('isDisabled')).toEqual(true)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly('valueNew', fakeProgress)
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
   })
 })

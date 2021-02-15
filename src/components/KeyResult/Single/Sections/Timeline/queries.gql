@@ -5,7 +5,7 @@ query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $limit: Int, $offset: Int) {
       ... on KeyResultCheckIn {
         id
         confidence
-        relativePercentageProgress
+        progress
         comment
         createdAt
         keyResultId
@@ -14,7 +14,7 @@ query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $limit: Int, $offset: Int) {
         }
         parent {
           confidence
-          relativePercentageProgress
+          progress
         }
         policies {
           delete

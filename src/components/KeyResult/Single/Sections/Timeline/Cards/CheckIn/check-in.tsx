@@ -94,7 +94,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
           </Box>
 
           <KeyResultSectionTimelineCardCheckInProgress
-            relativePercentageProgress={data?.relativePercentageProgress}
+            progress={data?.progress}
             confidence={data?.confidence}
             parent={data?.parent}
           />
@@ -104,7 +104,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
       </KeyResultSectionTimelineCardBase>
 
       <KeyResultSectionTimelineCardCheckInProgressBar
-        relativePercentageProgress={data?.relativePercentageProgress}
+        progress={data?.progress}
         confidence={data?.confidence}
       />
     </Stat>

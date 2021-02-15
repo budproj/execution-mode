@@ -8,6 +8,7 @@ type KeyResultListHeadMessage =
   | 'listHeadCycle'
   | 'listHeadOwner'
   | 'listHeadConfidenceLevelColor'
+  | 'listHeadPercentualProgress'
 
 export default defineMessages<KeyResultListHeadMessage>({
   listHeadKeyResult: {
@@ -50,5 +51,11 @@ export default defineMessages<KeyResultListHeadMessage>({
     defaultMessage: 'Cor do Nível de Confiança',
     id: 'F33Lyk',
     description: 'The text of the table head related to the Confidence Level color column',
+  },
+
+  listHeadPercentualProgress: {
+    defaultMessage: '%',
+    id: 'KSjqcC',
+    description: 'The text of the table head related to the percentual progress column',
   },
 })

@@ -1,7 +1,7 @@
 import { PopoverCloseButton, PopoverContent, PopoverHeader } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { Close as CloseIcon } from 'src/components/Icon'
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
@@ -25,11 +25,11 @@ const handleMouseDownCapture = (event: React.MouseEvent<HTMLElement, MouseEvent>
 
 const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentProperties) => {
   const intl = useIntl()
-  const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
+  const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const setPopoverOpen = useSetRecoilState<boolean>(keyResultCheckInPopoverOpen(keyResultID))
 
   const handleSubmit = (values: CheckInFormValues) => {
-    if (values.newProgress) setDraftValue(values.newProgress)
+    if (values.valueNew) setDraftValue(values.valueNew)
     setPopoverOpen(false)
   }
 
@@ -59,7 +59,12 @@ const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentPr
           fill="currentColor"
         />
       </PopoverCloseButton>
-      <CheckInForm keyResultID={keyResultID} afterSubmit={handleSubmit} onCancel={onClose} />
+      <CheckInForm
+        keyResultID={keyResultID}
+        afterSubmit={handleSubmit}
+        valueNew={draftValue}
+        onCancel={onClose}
+      />
     </PopoverContent>
   )
 }

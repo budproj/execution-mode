@@ -7,18 +7,13 @@ import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
-import {
-  keyResultCheckInCommentEnabled,
-  keyResultCheckInProgressDraft,
-} from 'src/state/recoil/key-result/check-in'
+import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
-import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
-import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
 
 import {
-  CheckInFormFieldCurrentProgress,
-  CheckInFormFieldNewProgress,
-  CheckInFormFieldCurrentConfidence,
+  CheckInFormFieldConfidence,
+  CheckInFormFieldValueNew,
+  CheckInFormFieldValuePrevious,
   CheckInFormFieldGoal,
 } from './Fields'
 import CheckInFormFieldComment from './Fields/Comment'
@@ -33,13 +28,14 @@ export interface CheckInFormProperties {
   afterSubmit?: (values: CheckInFormValues) => void
   onCancel?: () => void
   onCompleted?: (data: KeyResultCheckIn) => void
+  valueNew?: KeyResultCheckIn['value']
 }
 
 export interface CheckInFormValues {
-  comment: KeyResultCheckIn['comment']
-  newProgress?: KeyResultCheckIn['progress']
-  currentProgress?: KeyResultCheckIn['progress']
+  valueNew?: KeyResultCheckIn['value']
+  valuePrevious?: KeyResultCheckIn['value']
   confidence?: KeyResultCheckIn['confidence']
+  comment?: KeyResultCheckIn['comment']
 }
 
 export interface CreateKeyResultCheckInMutation {
@@ -54,53 +50,44 @@ const CheckInForm = ({
   showGoal,
   onCancel,
   onCompleted,
+  valueNew,
 }: CheckInFormProperties) => {
-  const [currentProgress, setCurrentProgress] = useRecoilState(selectCurrentProgress(keyResultID))
-  const [currentConfidence, setCurrentConfidence] = useRecoilState(
-    selectCurrentConfidence(keyResultID),
+  const [latestKeyResultCheckIn, setLatestKeyResultCheckIn] = useRecoilState(
+    selectLatestCheckIn(keyResultID),
   )
-  const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
-  const setLatestCheckIn = useSetRecoilState(selectLatestCheckIn(keyResultID))
   const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
   const [createCheckIn, { loading }] = useMutation<CreateKeyResultCheckInMutation>(
     queries.CREATE_KEY_RESULT_CHECK_IN,
     {
       ignoreResults: false,
       onCompleted: (data) => {
-        setLatestCheckIn(data.createKeyResultCheckIn)
+        setLatestKeyResultCheckIn(data.createKeyResultCheckIn)
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
       },
     },
   )
 
   const initialValues: CheckInFormValues = {
-    currentProgress,
-    newProgress: draftValue,
-    confidence: currentConfidence,
+    valueNew: valueNew ?? latestKeyResultCheckIn?.value,
+    valuePrevious: latestKeyResultCheckIn?.value,
+    confidence: latestKeyResultCheckIn?.confidence,
     comment: '',
   }
 
   const refreshFields = (values: CheckInFormValues, actions: FormikHelpers<CheckInFormValues>) => {
-    actions?.setFieldValue('currentProgress', values.newProgress)
-    actions?.setFieldValue('newProgress', values.newProgress)
+    actions?.setFieldValue('valuePrevious', values.valueNew)
+    actions?.setFieldValue('valueNew', values.valueNew)
     actions?.setFieldValue('comment', initialValues.comment)
   }
 
-  const syncRecoilState = (values: CheckInFormValues) => {
-    if (values.newProgress !== currentProgress) {
-      setCurrentProgress(values.newProgress)
-      setDraftValue(values.newProgress)
-    }
-
-    if (values.confidence !== currentConfidence) setCurrentConfidence(values.confidence)
-
+  const syncRecoilState = () => {
     setCommentEnabled(isCommentAlwaysEnabled)
   }
 
   const dispatchRemoteUpdate = async (values: CheckInFormValues) => {
     const checkIn = {
       keyResultId: keyResultID,
-      progress: values.newProgress,
+      value: values.valueNew,
       confidence: values.confidence,
       comment: values.comment,
     }
@@ -117,8 +104,8 @@ const CheckInForm = ({
     values: CheckInFormValues,
     actions: FormikHelpers<CheckInFormValues>,
   ) => {
-    const wasProgressUpdated = values.newProgress !== currentProgress
-    const wasConfidenceUpdated = values.confidence !== currentConfidence
+    const wasProgressUpdated = values.valuePrevious !== values.valueNew
+    const wasConfidenceUpdated = values.confidence !== latestKeyResultCheckIn?.confidence
     const wasCommentCreated = values.comment && values.comment !== ''
 
     if (wasProgressUpdated || wasConfidenceUpdated || wasCommentCreated) {
@@ -126,14 +113,13 @@ const CheckInForm = ({
 
       if (afterSubmit) afterSubmit(values)
 
-      syncRecoilState(values)
+      syncRecoilState()
       refreshFields(values, actions)
     }
   }
 
   const handleCancel = () => {
     if (onCancel) onCancel()
-    setDraftValue(currentProgress)
   }
 
   useEffect(() => {
@@ -147,11 +133,11 @@ const CheckInForm = ({
           <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
             <Flex direction="column" gridGap={4} p={gutter}>
               <Flex gridGap={5}>
-                <CheckInFormFieldCurrentProgress keyResultID={keyResultID} />
-                <CheckInFormFieldNewProgress keyResultID={keyResultID} isLoading={loading} />
+                <CheckInFormFieldValuePrevious keyResultID={keyResultID} />
+                <CheckInFormFieldValueNew keyResultID={keyResultID} isLoading={loading} />
                 {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
               </Flex>
-              <CheckInFormFieldCurrentConfidence />
+              <CheckInFormFieldConfidence />
 
               <CheckInFormFieldComment keyResultID={keyResultID} />
 

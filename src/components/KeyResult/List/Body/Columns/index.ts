@@ -11,3 +11,5 @@ export { default as KeyResultListBodyColumnKeyResult } from './KeyResult'
 export { default as KeyResultListBodyColumnConfidenceLevel } from './ConfidenceLevel'
 
 export { default as KeyResultListBodyColumnConfidenceLevelColor } from './ConfidenceLevelColor'
+
+export { default as KeyResultListBodyColumnPercentualProgress } from './PercentualProgress'

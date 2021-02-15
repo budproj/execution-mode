@@ -6,4 +6,5 @@ export enum KEY_RESULT_LIST_COLUMN {
   CYCLE = 'cycle',
   OWNER = 'owner',
   CONFIDENCE_LEVEL_COLOR = 'confidence-level-color',
+  PERCENTUAL_PROGRESS = 'percentual-progress',
 }

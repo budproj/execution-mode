@@ -4,10 +4,10 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import KeyResultSectionCheckIn from './check-in'
+import KeyResultSectionAddCheckIn from './add-check-in'
 
-const selectCurrentProgressMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
-  return selector.key.includes('CURRENT_PROGRESS')
+const selectLatestMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
+  return selector.key.includes('LATEST')
 })
 
 const selectKeyResultPoliciesMatcher = sinon.match((selector: recoil.RecoilState<unknown>) => {
@@ -28,7 +28,7 @@ describe('component interations', () => {
     stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
     sinon.stub(recoil, 'useRecoilState').returns([false, sinon.fake()])
 
-    const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
+    const result = enzyme.shallow(<KeyResultSectionAddCheckIn keyResultID={faker.random.uuid()} />)
 
     const formWrapper = result.find('Collapse')
 
@@ -40,7 +40,7 @@ describe('component interations', () => {
     stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
     sinon.stub(recoil, 'useRecoilState').returns([true, sinon.fake()])
 
-    const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
+    const result = enzyme.shallow(<KeyResultSectionAddCheckIn keyResultID={faker.random.uuid()} />)
 
     const formWrapper = result.find('Collapse')
 
@@ -52,7 +52,7 @@ describe('component interations', () => {
     stub.withArgs(selectKeyResultPoliciesMatcher).returns(defaultPolicies)
     sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([true, sinon.fake()])
 
-    const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
+    const result = enzyme.shallow(<KeyResultSectionAddCheckIn keyResultID={faker.random.uuid()} />)
 
     const button = result.find('Button')
 
@@ -60,7 +60,7 @@ describe('component interations', () => {
   })
 
   it('resets the draft value upon check-in form closing', () => {
-    const currentProgress = faker.random.number()
+    const fakeValue = faker.random.number()
     const spy = sinon.spy()
     const fakeCheckInPolicies = {
       create: 'ALLOW',
@@ -70,19 +70,22 @@ describe('component interations', () => {
         keyResultCheckIn: fakeCheckInPolicies,
       },
     }
+    const fakeLatestCheckIn = {
+      value: fakeValue,
+    }
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
     stub.withArgs(selectKeyResultPoliciesMatcher).returns(fakeKeyResultPolicies)
-    stub.withArgs(selectCurrentProgressMatcher).returns(currentProgress)
+    stub.withArgs(selectLatestMatcher).returns(fakeLatestCheckIn)
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
     sinon.stub(recoil, 'useRecoilState').returns([true, sinon.fake()])
 
-    const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
+    const result = enzyme.shallow(<KeyResultSectionAddCheckIn keyResultID={faker.random.uuid()} />)
 
     const button = result.find('Button')
     button.simulate('click')
 
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(currentProgress)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeValue)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -101,11 +104,11 @@ describe('component interations', () => {
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
     stub.withArgs(selectKeyResultPoliciesMatcher).returns(fakeKeyResultPolicies)
-    stub.withArgs(selectCurrentProgressMatcher).returns(currentProgress)
+    stub.withArgs(selectLatestMatcher).returns(currentProgress)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
     sinon.stub(recoil, 'useRecoilState').returns([true, spy])
 
-    const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
+    const result = enzyme.shallow(<KeyResultSectionAddCheckIn keyResultID={faker.random.uuid()} />)
 
     const button = result.find('Button')
     button.simulate('click')
@@ -129,11 +132,11 @@ describe('component interations', () => {
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
     stub.withArgs(selectKeyResultPoliciesMatcher).returns(fakeKeyResultPolicies)
-    stub.withArgs(selectCurrentProgressMatcher).returns(currentProgress)
+    stub.withArgs(selectLatestMatcher).returns(currentProgress)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
     sinon.stub(recoil, 'useRecoilState').returns([false, spy])
 
-    const result = enzyme.shallow(<KeyResultSectionCheckIn keyResultID={faker.random.uuid()} />)
+    const result = enzyme.shallow(<KeyResultSectionAddCheckIn keyResultID={faker.random.uuid()} />)
 
     const button = result.find('Button')
     button.simulate('click')

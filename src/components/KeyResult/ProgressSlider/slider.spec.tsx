@@ -18,7 +18,7 @@ describe('component expectations', () => {
   it('displays a disable trigger if progress report data is not available', () => {
     const recoilMock = sinon.mock(recoil)
 
-    recoilMock.expects('useRecoilState').returns([undefined, sinon.fake()])
+    recoilMock.expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
     recoilMock.expects('useRecoilValue').atLeast(1)
     recoilMock.expects('useSetRecoilState').returns(sinon.fake())
 
@@ -201,8 +201,8 @@ describe('component interactions', () => {
     recoilMock.expects('useRecoilState').atLeast(1).returns([undefined, sinon.fake()])
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
-    stub.onFirstCall().returns(firstConfidence)
-    stub.returns(secondConfidence)
+    stub.onFirstCall().returns({ confidence: firstConfidence })
+    stub.returns({ confidence: secondConfidence })
 
     const wrapper = enzyme.shallow(
       <ProgressSliderSlider canChange keyResultID={faker.random.uuid()} />,

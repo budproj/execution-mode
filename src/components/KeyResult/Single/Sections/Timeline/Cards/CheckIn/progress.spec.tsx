@@ -10,14 +10,11 @@ describe('component expectations', () => {
     const previousProgress = faker.random.number({ max: currentProgress - 1 })
 
     const parent = {
-      relativePercentageProgress: previousProgress,
+      progress: previousProgress,
     } as any
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInProgress
-        relativePercentageProgress={currentProgress}
-        parent={parent}
-      />,
+      <KeyResultSectionTimelineCardCheckInProgress progress={currentProgress} parent={parent} />,
     )
 
     const arrow = result.find('ArrowRightLong')
@@ -30,14 +27,11 @@ describe('component expectations', () => {
     const previousProgress = faker.random.number({ max: currentProgress - 1 })
 
     const parent = {
-      relativePercentageProgress: previousProgress,
+      progress: previousProgress,
     } as any
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInProgress
-        relativePercentageProgress={currentProgress}
-        parent={parent}
-      />,
+      <KeyResultSectionTimelineCardCheckInProgress progress={currentProgress} parent={parent} />,
     )
 
     const statNumbers = result.find('StatNumber')
@@ -49,14 +43,11 @@ describe('component expectations', () => {
     const currentProgress = faker.random.number()
 
     const parent = {
-      relativePercentageProgress: currentProgress,
+      progress: currentProgress,
     } as any
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInProgress
-        relativePercentageProgress={currentProgress}
-        parent={parent}
-      />,
+      <KeyResultSectionTimelineCardCheckInProgress progress={currentProgress} parent={parent} />,
     )
 
     const arrow = result.find('ArrowRightLong')
@@ -68,14 +59,11 @@ describe('component expectations', () => {
     const currentProgress = faker.random.number()
 
     const parent = {
-      relativePercentageProgress: currentProgress,
+      progress: currentProgress,
     } as any
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInProgress
-        relativePercentageProgress={currentProgress}
-        parent={parent}
-      />,
+      <KeyResultSectionTimelineCardCheckInProgress progress={currentProgress} parent={parent} />,
     )
 
     const statNumbers = result.find('StatNumber')

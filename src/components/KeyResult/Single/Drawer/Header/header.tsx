@@ -3,7 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { KeyResultSectionCheckIn } from 'src/components/KeyResult/Single/Sections'
+import { KeyResultSectionAddCheckIn } from 'src/components/KeyResult/Single/Sections'
 import KeyResultSingleTitle from 'src/components/KeyResult/Single/Sections/Title'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { authzPoliciesKeyResult } from 'src/state/recoil/authz/policies'
@@ -72,7 +72,10 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
 
       <Collapse unmountOnExit in={shouldShowCheckIn}>
         <Box p={4} pb={0}>
-          <KeyResultSectionCheckIn keyResultID={keyResultID} onCompleted={handleCheckInCompleted} />
+          <KeyResultSectionAddCheckIn
+            keyResultID={keyResultID}
+            onCompleted={handleCheckInCompleted}
+          />
         </Box>
       </Collapse>
     </Box>

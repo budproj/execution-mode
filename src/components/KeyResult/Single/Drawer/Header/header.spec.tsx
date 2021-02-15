@@ -219,8 +219,8 @@ describe('component interactions', () => {
 
     const wrapper = enzyme.shallow(<KeyResultDrawerHeader keyResultID={fakeID} />)
 
-    const sectionCheckIn = wrapper.find('KeyResultSectionCheckIn')
-    sectionCheckIn.simulate('completed', fakeCheckIn)
+    const sectionAddCheckIn = wrapper.find('KeyResultSectionAddCheckIn')
+    sectionAddCheckIn.simulate('completed', fakeCheckIn)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeCheckIn)
 

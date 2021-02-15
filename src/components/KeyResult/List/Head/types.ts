@@ -15,4 +15,5 @@ export interface KeyResultListColumnHeadProperties {
   [KEY_RESULT_LIST_COLUMN.CYCLE]?: HeadProperties
   [KEY_RESULT_LIST_COLUMN.OWNER]?: HeadProperties
   [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]?: HeadProperties
+  [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]?: HeadProperties
 }

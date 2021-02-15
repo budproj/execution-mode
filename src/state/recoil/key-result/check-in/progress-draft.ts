@@ -1,18 +1,18 @@
 import { atomFamily } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult/types'
-import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
+import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 
 import { PREFIX } from './constants'
+import selectLatestCheckInValue from './latest-value'
 
 const KEY = `${PREFIX}::PROGRESS_DRAFT`
 
 const progressDraft = atomFamily<
-  KeyResult['currentProgress'] | undefined,
+  KeyResultCheckIn['value'] | undefined,
   KeyResult['id'] | undefined
 >({
   key: KEY,
-  default: (id) => selectCurrentProgress(id),
+  default: selectLatestCheckInValue,
 })
 
 export default progressDraft

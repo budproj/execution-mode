@@ -2,66 +2,70 @@ import remove from 'lodash/remove'
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
-import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
-import selectCurrentConfidence from 'src/state/recoil/key-result/current-confidence'
-import selectCurrentProgress from 'src/state/recoil/key-result/current-progress'
+import { User } from 'src/components/User/types'
+import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
-import { PREFIX } from './constants'
-import progressDraft from './progress-draft'
+import { DEFAULT_CONFIDENCE, PREFIX } from './constants'
 
 const KEY = `${PREFIX}::LATEST`
-
-export const selectCheckIns = buildPartialSelector<KeyResult['keyResultCheckIns']>(
-  'keyResultCheckIns',
-)
 
 export const getLatestCheckIn = (id?: KeyResult['id']) => ({ get }: RecoilInterfaceGetter) => {
   if (!id) return
 
-  const checkIns = get(selectCheckIns(id))
-  const latestCheckIn = checkIns?.[0]
+  const keyResult = get(keyResultAtomFamily(id))
 
-  return latestCheckIn
+  const keyResultCheckIns = keyResult?.keyResultCheckIns
+  const keyResultLatestCheckIn = keyResult?.latestKeyResultCheckIn
+
+  const latestKeyResultCheckIn =
+    keyResultLatestCheckIn ?? (keyResultCheckIns?.[0] as KeyResultCheckIn)
+  const normalizedLatestKeyResultCheckIn: KeyResultCheckIn = {
+    ...latestKeyResultCheckIn,
+    value: latestKeyResultCheckIn?.value ?? keyResult?.initialValue ?? 0,
+    confidence: latestKeyResultCheckIn?.confidence ?? DEFAULT_CONFIDENCE,
+  }
+
+  return normalizedLatestKeyResultCheckIn
 }
 
 export const setLatestCheckIn = (id?: KeyResult['id']) => (
   { get, set }: RecoilInterfaceReadWrite,
-  newCheckIn: Partial<KeyResultCheckIn> | DefaultValue | undefined,
+  newCheckIn: KeyResultCheckIn | DefaultValue | undefined,
 ) => {
   if (!id) return
+  if (!newCheckIn) return
+  if (newCheckIn instanceof DefaultValue) return
 
-  const checkInsSelector = selectCheckIns(id)
-  const previousLatestCheckInSelector = selectLatestCheckIn(id)
-  const currentProgressSelector = selectCurrentProgress(id)
-  const currentConfidenceSelector = selectCurrentConfidence(id)
-  const progressDraftSelector = progressDraft(id)
+  const keyResult = get(keyResultAtomFamily(id))
 
-  const checkIns = get(checkInsSelector)
-  const previousLatestCheckIn = get(previousLatestCheckInSelector)
+  const keyResultCheckIns = keyResult?.keyResultCheckIns ?? []
+  const keyResultLatestCheckIn = keyResult?.latestKeyResultCheckIn
+  const keyResultPreviousCheckIn = keyResultLatestCheckIn ?? keyResultCheckIns[0]
 
-  const userID = get(meAtom)
-  const user = get(userAtomFamily(userID))
+  const currentUserID = get(meAtom)
+  const currentUser = get(userAtomFamily(currentUserID)) as User
 
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  const newLocalCheckIn = {
-    user,
-    createdAt: new Date(),
-    parent: previousLatestCheckIn,
+  const newLocalCheckIn: KeyResultCheckIn = {
     ...newCheckIn,
-  } as KeyResultCheckIn
-  const newCheckIns = remove([newLocalCheckIn, ...(checkIns ?? [])])
+    parent: keyResultPreviousCheckIn,
+    user: currentUser,
+  }
+  const newCheckIns = remove([newLocalCheckIn, ...keyResultCheckIns])
 
-  set(checkInsSelector, newCheckIns)
-  set(currentProgressSelector, newLocalCheckIn.progress)
-  set(progressDraftSelector, newLocalCheckIn.progress)
-  set(currentConfidenceSelector, newLocalCheckIn.confidence)
+  const newKeyResult = {
+    ...keyResult,
+    latestKeyResultCheckIn: newLocalCheckIn,
+    keyResultCheckIns: newCheckIns,
+  }
+
+  set(keyResultAtomFamily(id), newKeyResult)
 }
 
 export const selectLatestCheckIn = selectorFamily<
-  Partial<KeyResultCheckIn> | undefined,
+  KeyResultCheckIn | undefined,
   KeyResult['id'] | undefined
 >({
   key: KEY,
