@@ -13,6 +13,7 @@ export interface SliderWithFilledTrackProperties extends SliderProps {
   trackColor?: SliderTrackProps['bg']
   trackThickness?: SliderTrackProps['h']
   trackTopRadius?: BorderProps['borderTopRadius']
+  filledTrackRadius?: BorderProps['borderRadius']
 }
 
 const SliderWithFilledTrack = ({
@@ -20,6 +21,7 @@ const SliderWithFilledTrack = ({
   trackThickness,
   trackRadius,
   trackTopRadius,
+  filledTrackRadius,
   isDisabled,
   ...rest
 }: SliderWithFilledTrackProperties) => (
@@ -38,7 +40,7 @@ const SliderWithFilledTrack = ({
     >
       <SliderFilledTrack
         bg={trackColor}
-        borderRadius={trackRadius}
+        borderRadius={filledTrackRadius ?? trackRadius}
         borderTopLeftRadius={trackTopRadius ?? trackRadius}
       />
     </SliderTrack>

@@ -46,7 +46,7 @@ const KeyResultSectionTimelineCardBase = ({
 )
 
 KeyResultSectionTimelineCardBase.defaultProps = {
-  borderRadius: '4px',
+  borderRadius: 2,
   borderWidth: 1,
   bg: 'transparent',
 }

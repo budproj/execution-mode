@@ -25,7 +25,9 @@ const KeyResultSectionTimelineCardCheckInProgressBar = ({
           trackColor={confidenceTag.color.primary}
           value={progress}
           trackThickness={2}
+          trackRadius={2}
           trackTopRadius={0}
+          filledTrackRadius="full"
         />
       </Flex>
     </Skeleton>

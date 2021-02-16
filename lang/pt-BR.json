@@ -303,6 +303,10 @@
     "defaultMessage": "Meta",
     "description": "This message is displayed below the goal thumb"
   },
+  "Pb0Tht": {
+    "defaultMessage": "Sobre este check-in",
+    "description": "This text is displayed in our check-in card, above the user comment if it exists"
+  },
   "Pkdkh4": {
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
