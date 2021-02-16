@@ -271,8 +271,8 @@ type Team implements EntityObject {
   """The name of the team"""
   name: String!
   isCompany: Boolean!
-  currentProgress: Float!
-  currentConfidence: Int!
+  progress: Float!
+  confidence: Int!
   progressIncreaseSinceLastWeek: Float!
 
   """The creation date of the team"""
@@ -301,6 +301,7 @@ type Team implements EntityObject {
   parentTeam: Team
   users: [User!]
   teams: [Team!]
+  teamsRanking: [Team!]
   cycles: [Cycle!]
   objectives: [Objective!]
   keyResults: [KeyResult!]
@@ -344,8 +345,8 @@ type Objective implements EntityObject {
 
   """The title(name) of the objective"""
   title: String!
-  currentProgress: Float!
-  currentConfidence: Int!
+  progress: Float!
+  confidence: Int!
   progressIncreaseSinceLastWeek: Float!
 
   """The creation date of the objective"""

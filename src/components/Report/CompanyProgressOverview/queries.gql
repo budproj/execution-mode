@@ -4,8 +4,8 @@ query GET_USER_PRIMARY_COMPANY {
       id
       name
       gender
-      currentProgress
-      currentConfidence
+      progress
+      confidence
       progressIncreaseSinceLastWeek
       latestKeyResultCheckIn {
         id

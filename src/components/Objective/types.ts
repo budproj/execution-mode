@@ -5,8 +5,8 @@ import { User } from 'src/components/User/types'
 export interface Objective {
   id: string
   title: string
-  currentProgress: KeyResultCheckIn['progress']
-  currentConfidence: KeyResultCheckIn['confidence']
+  progress: KeyResultCheckIn['progress']
+  confidence: KeyResultCheckIn['confidence']
   progressIncreaseSinceLastWeek: number
   createdAt: string
   updatedAt: string

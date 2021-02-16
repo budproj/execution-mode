@@ -6,8 +6,8 @@ query GET_COMPANY_OBJECTIVES {
     objectives {
       id
       title
-      currentProgress
-      currentConfidence
+      progress
+      confidence
       progressIncreaseSinceLastWeek
     }
   }

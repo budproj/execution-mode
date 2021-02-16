@@ -1,9 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type SliderWithDetailsMessage = 'currentProgress' | 'goal'
+type SliderWithDetailsMessage = 'progress' | 'goal'
 
 export default defineMessages<SliderWithDetailsMessage>({
-  currentProgress: {
+  progress: {
     defaultMessage: 'Posição atual',
     id: 'Lc60Nd',
     description: 'This message is displayed below the current progress thumb',

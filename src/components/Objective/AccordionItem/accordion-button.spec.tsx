@@ -52,14 +52,14 @@ describe('component expectations', () => {
 
   it('displays provided objective progress if it is loaded', () => {
     const fakeObjective = {
-      currentProgress: faker.random.number(),
+      progress: faker.random.number(),
     }
 
     const result = enzyme.shallow(<ObjectiveAccordionButton isLoaded objective={fakeObjective} />)
 
     const circularProgress = result.find('CircularProgress')
 
-    expect(circularProgress.prop('value')).toEqual(fakeObjective.currentProgress)
+    expect(circularProgress.prop('value')).toEqual(fakeObjective.progress)
   })
 
   it('uses the confidence tag color in the circular progress', () => {
@@ -70,7 +70,7 @@ describe('component expectations', () => {
       },
     }
     const fakeObjective = {
-      currentProgress: faker.random.number(),
+      progress: faker.random.number(),
     }
 
     const result = enzyme.shallow(
@@ -88,14 +88,14 @@ describe('component expectations', () => {
 
   it('displays the formated current progress in the circular progress', () => {
     const fakeObjective = {
-      currentProgress: faker.random.number(),
+      progress: faker.random.number(),
     }
 
     const result = enzyme.shallow(<ObjectiveAccordionButton isLoaded objective={fakeObjective} />)
 
     const circularProgressLabel = result.find('CircularProgressLabel')
 
-    expect(circularProgressLabel.text()).toEqual(`${fakeObjective.currentProgress}%`)
+    expect(circularProgressLabel.text()).toEqual(`${fakeObjective.progress}%`)
   })
 
   it('displays provided objective progress skeleton if it is not loaded', () => {

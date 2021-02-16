@@ -67,7 +67,7 @@ const SliderWithDetails = ({
           </Text>
 
           <Text fontSize="xs" color="gray.200" fontWeight={400} width="max-content">
-            {intl.formatMessage(messages.currentProgress)}
+            {intl.formatMessage(messages.progress)}
           </Text>
         </Box>
       </SliderThumb>

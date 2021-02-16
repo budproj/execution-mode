@@ -83,10 +83,10 @@ describe('expected behaviors', () => {
   })
 
   it('resets the timeline when the drawer is closed', () => {
-    const currentProgress = faker.random.number()
+    const progress = faker.random.number()
     const spy = sinon.spy()
 
-    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
+    sinon.stub(recoil, 'useRecoilValue').returns(progress)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     const stub = sinon.stub(recoil, 'useResetRecoilState')
@@ -102,10 +102,10 @@ describe('expected behaviors', () => {
   })
 
   it('resets the comment enabled when the drawer is closed', () => {
-    const currentProgress = faker.random.number()
+    const progress = faker.random.number()
     const spy = sinon.spy()
 
-    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
+    sinon.stub(recoil, 'useRecoilValue').returns(progress)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     const stub = sinon.stub(recoil, 'useResetRecoilState')

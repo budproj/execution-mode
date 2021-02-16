@@ -15,7 +15,7 @@ describe('data layer usage', () => {
 
   it('adds a slider with the company current progress', () => {
     const fakeCurrentProgress = faker.random.number()
-    const fakeCompany = { currentProgress: fakeCurrentProgress }
+    const fakeCompany = { progress: fakeCurrentProgress }
     const stub = sinon.stub(recoil, 'useRecoilValue')
 
     stub.withArgs(teamAtomMatcher).returns(fakeCompany)
@@ -29,7 +29,7 @@ describe('data layer usage', () => {
   })
 
   it('uses the current confidence color in the slider', () => {
-    sinon.stub(recoil, 'useRecoilValue').returns({ currentConfidence: 50 })
+    sinon.stub(recoil, 'useRecoilValue').returns({ confidence: 50 })
 
     const result = enzyme.shallow(<CompanyProgressOverviewBody />)
 
@@ -44,7 +44,7 @@ describe('component lifecycle', () => {
 
   it('dispatches a confidence update after we receive a value for it', () => {
     sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
-      currentConfidence: 50,
+      confidence: 50,
     })
 
     const result = enzyme.shallow(<CompanyProgressOverviewBody />)
