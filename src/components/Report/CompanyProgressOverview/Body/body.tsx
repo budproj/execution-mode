@@ -2,7 +2,7 @@ import { Flex, Skeleton } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import SliderWithGoal from 'src/components/Base/SliderWithGoal'
+import SliderWithDetails from 'src/components/Base/SliderWithDetails'
 import OverviewBodyBox from 'src/components/Report/Overview/OverviewBodyBox'
 import { Team } from 'src/components/Team/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
@@ -39,7 +39,7 @@ const CompanyProgressOverviewBody = ({
         </Flex>
 
         <Skeleton isLoaded={!isLoading}>
-          <SliderWithGoal
+          <SliderWithDetails
             value={company?.currentProgress}
             trackThickness={4}
             thumbHeight={7}

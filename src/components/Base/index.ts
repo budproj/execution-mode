@@ -28,7 +28,7 @@ export { default as SliderWithHoverThumb } from './SliderWithHoverThumb'
 
 export { default as SliderWithFilledTrack } from './SliderWithFilledTrack'
 
-export { default as SliderWithGoal } from './SliderWithGoal'
+export { default as SliderWithDetails } from './SliderWithDetails'
 
 export { default as SelectMenu } from './SelectMenu'
 

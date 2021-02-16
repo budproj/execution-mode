@@ -23,7 +23,7 @@ describe('data layer usage', () => {
 
     const result = enzyme.shallow(<CompanyProgressOverviewBody />)
 
-    const slider = result.find('SliderWithGoal')
+    const slider = result.find('SliderWithDetails')
 
     expect(slider.prop('value')).toEqual(fakeCurrentProgress)
   })
@@ -33,7 +33,7 @@ describe('data layer usage', () => {
 
     const result = enzyme.shallow(<CompanyProgressOverviewBody />)
 
-    const slider = result.find('SliderWithGoal')
+    const slider = result.find('SliderWithDetails')
 
     expect(slider.prop('trackColor')).toEqual('yellow.500')
   })
@@ -50,7 +50,7 @@ describe('component lifecycle', () => {
     const result = enzyme.shallow(<CompanyProgressOverviewBody />)
     result.setProps({ companyID: faker.random.uuid() })
 
-    const slider = result.find('SliderWithGoal')
+    const slider = result.find('SliderWithDetails')
 
     expect(slider.prop('trackColor')).toEqual('yellow.500')
   })
