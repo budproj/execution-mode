@@ -31,6 +31,10 @@
     "defaultMessage": "Um ícone de um avião de papel. Ao clicar nele você irá enviar um comentário",
     "description": "The alternative text explaining our paper plane icon"
   },
+  "/jzpox": {
+    "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal} {progress}%</highlight>}}",
+    "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
   "/vJzGe": {
     "defaultMessage": "Um ícone de marcador de página",
     "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
@@ -130,6 +134,10 @@
   "6vXlkc": {
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
     "description": "The page description that is displayed in Google and screen readers"
+  },
+  "89ola3": {
+    "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
+    "description": "This message is used by screen readers to explain our arrow down icon"
   },
   "8LTdv4": {
     "defaultMessage": "Objetivo",
@@ -234,10 +242,6 @@
   "IGODpK": {
     "defaultMessage": "Ciclo",
     "description": "The text of the table head related to the Cycle column"
-  },
-  "IkA9uV": {
-    "defaultMessage": "Evoluindo em <highlight>{progress}%</highlight>",
-    "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
   },
   "Innace": {
     "defaultMessage": "Um ícone de exclamação, alertando que se você confirmar a ação não poderá ser desfeita",
@@ -346,10 +350,6 @@
   "SenoB2": {
     "defaultMessage": "A página que você está procurando não foi encontrada!",
     "description": "The title displayed in our not found error page"
-  },
-  "SjGqdc": {
-    "defaultMessage": "Desde a última segunda-feira",
-    "description": "This helper texts explains since when we are calculating your company progress"
   },
   "Sn7K6v": {
     "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
@@ -499,6 +499,10 @@
     "defaultMessage": "Responsável",
     "description": "The label text above the Owner section in our key result single page or drawer"
   },
+  "iPv+uj": {
+    "defaultMessage": "Um ícone de uma linha reta na horizontal, representando que sua empresa não evolui desde o último evento de check-in",
+    "description": "This message is used by screen readers to explain our line icon"
+  },
   "iivI51": {
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
@@ -571,6 +575,10 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
+  "qYgVuC": {
+    "defaultMessage": "Em relação a última sexta-feira",
+    "description": "This helper texts explains since when we are calculating your company progress"
+  },
   "rBdkOv": {
     "defaultMessage": "Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado chave?",
     "description": "This text gives more details regarding our empty state card in the key result drawer"
@@ -590,6 +598,10 @@
   "sFYaLE": {
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
+  },
+  "t6KyQZ": {
+    "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
+    "description": "This message is used by screen readers to explain our arrow up icon"
   },
   "tJ0oU2": {
     "defaultMessage": "Está silencioso por aqui",
@@ -626,10 +638,6 @@
   "vJ/603": {
     "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
     "description": "The description displayed in our not found error page"
-  },
-  "w18rI2": {
-    "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
-    "description": "This message is used by screen readers to explain our arrow up"
   },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",

@@ -49,7 +49,7 @@ const ObjectivesOverviewBodyLine = ({
         </Skeleton>
 
         <Flex flexGrow={1} justifyContent="flex-end">
-          <PercentageProgressIncreaseTag value={objective?.percentageProgressIncrease} />
+          <PercentageProgressIncreaseTag value={objective?.progressIncreaseSinceLastCheckInEvent} />
         </Flex>
       </Flex>
 

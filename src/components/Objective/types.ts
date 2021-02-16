@@ -7,7 +7,7 @@ export interface Objective {
   title: string
   currentProgress: KeyResultCheckIn['progress']
   currentConfidence: KeyResultCheckIn['confidence']
-  percentageProgressIncrease: number
+  progressIncreaseSinceLastCheckInEvent: number
   createdAt: string
   updatedAt: string
   cycle: Cycle

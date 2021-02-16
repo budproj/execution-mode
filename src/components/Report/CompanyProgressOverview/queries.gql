@@ -6,7 +6,7 @@ query GET_USER_PRIMARY_COMPANY {
       gender
       currentProgress
       currentConfidence
-      percentageProgressIncrease
+      progressIncreaseSinceLastCheckInEvent
       latestKeyResultCheckIn {
         id
         createdAt

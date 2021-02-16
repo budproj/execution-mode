@@ -8,7 +8,7 @@ query GET_COMPANY_OBJECTIVES {
       title
       currentProgress
       currentConfidence
-      percentageProgressIncrease
+      progressIncreaseSinceLastCheckInEvent
     }
   }
 }

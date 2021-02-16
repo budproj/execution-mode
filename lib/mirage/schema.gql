@@ -273,7 +273,7 @@ type Team implements EntityObject {
   isCompany: Boolean!
   currentProgress: Float!
   currentConfidence: Int!
-  percentageProgressIncrease: Float!
+  progressIncreaseSinceLastCheckInEvent: Float!
 
   """The creation date of the team"""
   createdAt: DateTime!
@@ -346,7 +346,7 @@ type Objective implements EntityObject {
   title: String!
   currentProgress: Float!
   currentConfidence: Int!
-  percentageProgressIncrease: Float!
+  progressIncreaseSinceLastCheckInEvent: Float!
 
   """The creation date of the objective"""
   createdAt: DateTime!

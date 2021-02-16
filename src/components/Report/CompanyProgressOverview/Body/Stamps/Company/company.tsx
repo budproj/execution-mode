@@ -44,7 +44,13 @@ const CompanyProgressOverviewBodyStampCompany = ({
       </Skeleton>
 
       <Skeleton isLoaded={!isLoading} {...buildSkeletonMinSize(!isLoading, 310, 20)}>
-        <LastUpdateText date={checkInDate} author={latestKeyResultCheckIn?.user?.fullName} />
+        <LastUpdateText
+          date={checkInDate}
+          author={latestKeyResultCheckIn?.user?.fullName}
+          color="gray.400"
+          fontWeight={500}
+          fontSize="xs"
+        />
       </Skeleton>
     </CompanyProgressOverviewBodyStampBase>
   )

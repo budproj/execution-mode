@@ -2,6 +2,8 @@ export { default as Activity } from './Activity'
 
 export { default as ArrowUp } from './ArrowUp'
 
+export { default as ArrowDown } from './ArrowDown'
+
 export { default as ArrowRight } from './ArrowRight'
 
 export { default as Bookmark } from './Bookmark'
@@ -77,5 +79,7 @@ export { default as PaperPlane } from './PaperPlane'
 export { default as TreeDots } from './TreeDots'
 
 export { default as Warning } from './Warning'
+
+export { default as Line } from './Line'
 
 export * from './types'
