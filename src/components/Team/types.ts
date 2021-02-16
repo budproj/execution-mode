@@ -21,6 +21,7 @@ export interface Team {
   parentTeam?: Team
   users?: User[]
   teams?: Team[]
+  teamsRanking?: Team[]
   cycles?: Cycle[]
   objectives?: Objective[]
   keyResults?: KeyResult[]

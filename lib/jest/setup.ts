@@ -3,6 +3,7 @@ import Adapter from 'enzyme-adapter-react-16'
 import enableHooks from 'jest-react-hooks-shallow'
 import { DOMWindow, JSDOM } from 'jsdom'
 import fetch from 'node-fetch'
+import { act } from 'react-dom/test-utils'
 
 enableHooks(jest)
 
@@ -37,3 +38,12 @@ const dom = new JSDOM('<!doctype html><html><body></body></html>')
 global.window = dom.window
 global.document = global.window.document
 global.navigator = global.window.navigator
+
+export const waitForComponentToPaint = async (wrapper: any) => {
+  await act(async () => {
+    await new Promise((resolve) => {
+      setTimeout(resolve, 0)
+    })
+    wrapper.update()
+  })
+}

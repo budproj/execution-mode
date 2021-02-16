@@ -43,6 +43,8 @@ const models = {
     parentTeam: belongsTo('team', { inverse: null }),
     cycles: hasMany(),
     latestKeyResultCheckIn: belongsTo('keyResultCheckIn'),
+    // eslint-disable-next-line unicorn/no-null
+    teamsRanking: hasMany('team', { inverse: null }),
   }),
   user: Model.extend({
     keyResults: hasMany(),

@@ -20,13 +20,17 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     onlyCompanies: true,
     onlyCompaniesAndDepartments: true,
   })
+
   const rootTeam = server.create('team', {
     name: faker.random.word(),
     parentTeam: company,
     onlyCompaniesAndDepartments: true,
   })
+  company.update('teamsRanking', [rootTeam] as any)
+
   const teams = server.createList('team', 3, { parentTeam: rootTeam })
   rootTeam.update('teams', teams as any)
+
   const user = server.create('user', { teams, companies: [company] })
   const otherUsers = server.createList('user', 5, { teams } as any)
   const cycle = server.create('cycle', { team: company })
