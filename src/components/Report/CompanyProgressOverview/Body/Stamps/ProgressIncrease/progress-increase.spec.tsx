@@ -15,7 +15,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -37,7 +37,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -59,7 +59,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -81,7 +81,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -103,7 +103,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -125,7 +125,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -147,7 +147,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -170,7 +170,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -193,7 +193,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -216,7 +216,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -238,7 +238,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 
@@ -260,7 +260,7 @@ describe('conditional renderization', () => {
     const initializeState = ({ set }: MutableSnapshot) => {
       set(teamAtomFamily(fakeID), {
         id: fakeID,
-        progressIncreaseSinceLastCheckInEvent: fakeProgress,
+        progressIncreaseSinceLastWeek: fakeProgress,
       })
     }
 

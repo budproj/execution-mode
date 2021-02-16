@@ -10,7 +10,7 @@ export default Factory.extend({
   currentConfidence: () => faker.random.number({ min: 0, max: 100 }),
   createdAt: faker.date.past,
   updatedAt: faker.date.past,
-  progressIncreaseSinceLastCheckInEvent: () => faker.random.float({ min: -100, max: 100 }),
+  progressIncreaseSinceLastWeek: () => faker.random.float({ min: -100, max: 100 }),
   gender: () => faker.helpers.randomize([TEAM_GENDER.MALE, TEAM_GENDER.FEMALE, undefined]),
   isCompany: false,
   onlyCompanies: false,

@@ -7,5 +7,5 @@ export default Factory.extend({
   updatedAt: faker.date.past,
   currentProgress: () => faker.random.number({ min: 0, max: 100 }),
   currentConfidence: () => faker.random.number({ min: 0, max: 100 }),
-  progressIncreaseSinceLastCheckInEvent: () => faker.random.float({ min: -100, max: 100 }),
+  progressIncreaseSinceLastWeek: () => faker.random.float({ min: -100, max: 100 }),
 })

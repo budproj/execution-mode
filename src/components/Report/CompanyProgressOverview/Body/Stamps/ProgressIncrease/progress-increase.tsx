@@ -26,7 +26,7 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
   const intl = useIntl()
   const company = useRecoilValue(teamAtomFamily(companyID))
 
-  const progress = Math.round(company?.progressIncreaseSinceLastCheckInEvent ?? 0)
+  const progress = Math.round(company?.progressIncreaseSinceLastWeek ?? 0)
   const signalIndicator = {
     [SIGNAL.POSITIVE]: '+',
     [SIGNAL.NEGATIVE]: '-',

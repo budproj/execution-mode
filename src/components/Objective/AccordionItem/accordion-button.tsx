@@ -50,7 +50,7 @@ const ObjectiveAccordionButton = ({
         w={isLoaded ? 'auto' : 70}
         h={isLoaded ? 'auto' : 33}
       >
-        <PercentageProgressIncreaseTag value={objective?.progressIncreaseSinceLastCheckInEvent} />
+        <PercentageProgressIncreaseTag value={objective?.progressIncreaseSinceLastWeek} />
       </Skeleton>
 
       <Skeleton isLoaded={isLoaded} display="flex" gridGap={2} alignItems="center">
