@@ -5,6 +5,7 @@ type KeyResultsSectionTimelineCardCheckInMessage =
   | 'helperText'
   | 'arrowRightDesc'
   | 'cardType'
+  | 'commentTitle'
 
 export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
   title: {
@@ -33,5 +34,11 @@ export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
     id: 'YxNkP6',
     description:
       'This text is displayed in some places in our timeline card, showing the type of the card in a friendly name',
+  },
+
+  commentTitle: {
+    defaultMessage: 'Sobre este check-in',
+    id: 'Pb0Tht',
+    description: 'This text is displayed in our check-in card, above the user comment if it exists',
   },
 })
