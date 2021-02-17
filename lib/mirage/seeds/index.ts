@@ -1,4 +1,5 @@
 import faker from 'faker'
+import orderBy from 'lodash/orderBy'
 import { Registry, Server } from 'miragejs'
 
 import logger from 'lib/logger'
@@ -26,10 +27,10 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     parentTeam: company,
     onlyCompaniesAndDepartments: true,
   })
-  company.update('teamsRanking', [rootTeam] as any)
 
   const teams = server.createList('team', 3, { parentTeam: rootTeam })
   rootTeam.update('teams', teams as any)
+  company.update('teamsRanking', orderBy([rootTeam, ...teams], ['progress'], ['desc']) as any)
 
   const user = server.create('user', { teams, companies: [company] })
   const otherUsers = server.createList('user', 5, { teams } as any)

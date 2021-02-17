@@ -79,6 +79,10 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
+  "28q7aO": {
+    "defaultMessage": "Última sexta-feira",
+    "description": "The title of the third column in our body table at the teams overview report in our dashboard"
+  },
   "29ODQz": {
     "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
     "description": "The description displayed in our unknown error page"
@@ -438,10 +442,6 @@
   "YxNkP6": {
     "defaultMessage": "Check-in",
     "description": "This text is displayed in some places in our timeline card, showing the type of the card in a friendly name"
-  },
-  "YxQZbo": {
-    "defaultMessage": "Últimos 7 dias",
-    "description": "The title of the third column in our body table at the teams overview report in our dashboard"
   },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",

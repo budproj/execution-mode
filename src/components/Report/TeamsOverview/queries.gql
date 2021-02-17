@@ -6,6 +6,7 @@ query GET_COMPANY_TEAMS {
       name
       progress
       progressIncreaseSinceLastWeek
+      confidence
     }
   }
 }

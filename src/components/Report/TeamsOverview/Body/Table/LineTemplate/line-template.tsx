@@ -13,6 +13,7 @@ const TeamsOverviewBodyTableLineTemplate = ({ children, ...rest }: GridProps) =>
     py={4}
     borderBottomWidth={BORDER_WIDTH}
     borderColor={BORDER_COLOR}
+    alignItems="center"
     {...rest}
   >
     {children}
