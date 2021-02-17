@@ -28,9 +28,10 @@ const PercentageProgressIncreaseTag = ({
   const bgColor = bg ?? selectBackgroundColor(value)
   const labelColor = selectLabelColor(value)
 
-  const shouldRenderSignalArrow = showSignalArrow && value !== 0
+  const roundedValue = Math.round(value)
+  const shouldRenderSignalArrow = showSignalArrow && roundedValue !== 0
   const arrowType = shouldRenderSignalArrow && value > 0 ? 'increase' : 'decrease'
-  const normalizedMinimumIntegerDigits = value === 0 ? 1 : minimumIntegerDigits
+  const normalizedMinimumIntegerDigits = roundedValue === 0 ? 1 : minimumIntegerDigits
 
   return (
     <Tag
@@ -42,8 +43,8 @@ const PercentageProgressIncreaseTag = ({
       gridGap={2}
       fontSize={fontSize}
     >
-      {forcePositiveSignal && value > 0 && '+'}
-      {intl.formatNumber(value / 100, {
+      {forcePositiveSignal && roundedValue > 0 && '+'}
+      {intl.formatNumber(roundedValue / 100, {
         style: 'percent',
         minimumIntegerDigits: normalizedMinimumIntegerDigits,
       })}
