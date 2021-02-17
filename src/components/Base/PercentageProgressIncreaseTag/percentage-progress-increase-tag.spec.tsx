@@ -181,6 +181,17 @@ describe('component customizations', () => {
 
     expect(tag.text()).toEqual('0%')
   })
+
+  it('can define a custom px', () => {
+    const fakeValue = faker.random.number()
+    const fakePX = faker.random.number()
+
+    const result = enzyme.mount(<PercentageProgressIncreaseTag value={fakeValue} px={fakePX} />)
+
+    const tag = result.find('Tag')
+
+    expect(tag.prop('px')).toEqual(fakePX)
+  })
 })
 
 describe('signal arrow', () => {

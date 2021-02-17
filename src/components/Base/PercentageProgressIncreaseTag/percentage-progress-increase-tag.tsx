@@ -8,6 +8,7 @@ export interface PercentageProgressIncreaseTagProperties {
   value: number
   fontSize: TagProps['fontSize']
   bg?: TagProps['bg']
+  px?: TagProps['px']
   forcePositiveSignal?: boolean
   showSignalArrow?: boolean
   minimumIntegerDigits?: FormatNumberOptions['minimumIntegerDigits']
@@ -17,6 +18,7 @@ const PercentageProgressIncreaseTag = ({
   value,
   fontSize,
   bg,
+  px,
   forcePositiveSignal,
   showSignalArrow,
   minimumIntegerDigits,
@@ -34,7 +36,7 @@ const PercentageProgressIncreaseTag = ({
     <Tag
       borderRadius="full"
       py={2}
-      px={4}
+      px={px ?? 4}
       bg={bgColor}
       color={labelColor}
       gridGap={2}
