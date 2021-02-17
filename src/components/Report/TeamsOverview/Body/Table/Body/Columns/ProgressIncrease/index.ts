@@ -1,0 +1,3 @@
+import TeamsOverviewBodyTableBodyColumnProgressIncrease from './progress-increase'
+
+export default TeamsOverviewBodyTableBodyColumnProgressIncrease

@@ -27,7 +27,7 @@ describe('conditional renderization', () => {
 
     const h3 = wrapper.find('h3')
 
-    expect(h3.text()).toEqual('Variação de + 40%')
+    expect(h3.text()).toEqual('Variação de +40%')
   })
 
   it('displays the expected text with negative progress', () => {
@@ -49,7 +49,7 @@ describe('conditional renderization', () => {
 
     const h3 = wrapper.find('h3')
 
-    expect(h3.text()).toEqual('Variação de - 40%')
+    expect(h3.text()).toEqual('Variação de -40%')
   })
 
   it('displays the expected text with zero progress', () => {
@@ -272,6 +272,6 @@ describe('conditional renderization', () => {
 
     const progress = wrapper.find('h3').find('span')
 
-    expect(progress.text()).toEqual('+ 40%')
+    expect(progress.text()).toEqual('+40%')
   })
 })

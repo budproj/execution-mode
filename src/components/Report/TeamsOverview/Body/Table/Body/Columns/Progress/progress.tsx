@@ -22,7 +22,7 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
   useEffect(() => {
     if ((team && Boolean(team?.confidence)) || team?.confidence === 0)
       setConfidence(team.confidence)
-  }, [team?.confidence, setConfidence])
+  }, [team, setConfidence])
 
   return (
     <GridItem>

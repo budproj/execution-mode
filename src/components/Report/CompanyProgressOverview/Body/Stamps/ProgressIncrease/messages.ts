@@ -31,8 +31,8 @@ export default defineMessages<CompanyProgressOverviewBodyStampProgressIncreaseMe
 
   titleLabel: {
     defaultMessage:
-      '{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal} {progress}%</highlight>}}',
-    id: '/jzpox',
+      '{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}',
+    id: 'J+UxkH',
     description:
       'This label appears in our stamp title. It represents how much your company has increased since last week',
   },

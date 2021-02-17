@@ -35,10 +35,6 @@
     "defaultMessage": "Um ícone de um avião de papel. Ao clicar nele você irá enviar um comentário",
     "description": "The alternative text explaining our paper plane icon"
   },
-  "/jzpox": {
-    "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal} {progress}%</highlight>}}",
-    "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
-  },
   "/vJzGe": {
     "defaultMessage": "Um ícone de marcador de página",
     "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
@@ -258,6 +254,10 @@
   "Innace": {
     "defaultMessage": "Um ícone de exclamação, alertando que se você confirmar a ação não poderá ser desfeita",
     "description": "This text is used by screen readers to explain the icon"
+  },
+  "J+UxkH": {
+    "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
+    "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
   },
   "JZJeBS": {
     "defaultMessage": "Ontem",

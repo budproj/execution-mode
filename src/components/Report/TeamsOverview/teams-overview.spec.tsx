@@ -313,4 +313,271 @@ describe('data exibition', () => {
       return expect(textComponent.text()).toEqual(`${relatedTeam.progress}%`)
     })
   })
+
+  it('displays the correct team progress increase, for positive values with 2 digits, on each line', async () => {
+    const numberOfFakeTeams = faker.random.number({ min: 1, max: 10 })
+    expect.assertions(numberOfFakeTeams)
+
+    const fakeCompany = {
+      id: faker.random.uuid(),
+      teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
+        id: faker.random.uuid(),
+        name: faker.company.companyName(),
+        progress: faker.random.number({ min: 0, max: 100 }),
+        progressIncreaseSinceLastWeek: faker.random.number({ min: 10, max: 100 }),
+        confidence: faker.random.number({ min: 0, max: 100 }),
+      })),
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.GET_COMPANY_TEAMS,
+        },
+        result: {
+          data: {
+            teams: [fakeCompany],
+          },
+        },
+      },
+    ]
+
+    const wrapper = enzyme.mount(
+      <MockedProvider mocks={mocks}>
+        <RecoilRoot>
+          <TeamsOverview />
+        </RecoilRoot>
+      </MockedProvider>,
+    )
+
+    await waitForComponentToPaint(wrapper)
+
+    const lines = wrapper
+      .find('TeamsOverviewBodyTableBody')
+      .find('TeamsOverviewBodyTableLineTemplate')
+
+    lines.map((line, index) => {
+      const relatedTeam = fakeCompany.teamsRanking[index]
+      const textComponent = line
+        .find('TeamsOverviewBodyTableBodyColumnProgressIncrease')
+        .find('Tag')
+
+      return expect(textComponent.text()).toEqual(
+        `+${relatedTeam.progressIncreaseSinceLastWeek}%increased by`,
+      )
+    })
+  })
+
+  it('displays the correct team progress increase, for positive values different than 0 and with 1 digit, on each line', async () => {
+    const numberOfFakeTeams = faker.random.number({ min: 1, max: 10 })
+    expect.assertions(numberOfFakeTeams)
+
+    const fakeCompany = {
+      id: faker.random.uuid(),
+      teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
+        id: faker.random.uuid(),
+        name: faker.company.companyName(),
+        progress: faker.random.number({ min: 0, max: 100 }),
+        progressIncreaseSinceLastWeek: faker.random.number({ min: 1, max: 9 }),
+        confidence: faker.random.number({ min: 0, max: 100 }),
+      })),
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.GET_COMPANY_TEAMS,
+        },
+        result: {
+          data: {
+            teams: [fakeCompany],
+          },
+        },
+      },
+    ]
+
+    const wrapper = enzyme.mount(
+      <MockedProvider mocks={mocks}>
+        <RecoilRoot>
+          <TeamsOverview />
+        </RecoilRoot>
+      </MockedProvider>,
+    )
+
+    await waitForComponentToPaint(wrapper)
+
+    const lines = wrapper
+      .find('TeamsOverviewBodyTableBody')
+      .find('TeamsOverviewBodyTableLineTemplate')
+
+    lines.map((line, index) => {
+      const relatedTeam = fakeCompany.teamsRanking[index]
+      const textComponent = line
+        .find('TeamsOverviewBodyTableBodyColumnProgressIncrease')
+        .find('Tag')
+
+      return expect(textComponent.text()).toEqual(
+        `+0${relatedTeam.progressIncreaseSinceLastWeek}%increased by`,
+      )
+    })
+  })
+
+  it('displays the correct team progress increase, for negative values different than 0 and with 1 digit, on each line', async () => {
+    const numberOfFakeTeams = faker.random.number({ min: 1, max: 10 })
+    expect.assertions(numberOfFakeTeams)
+
+    const fakeCompany = {
+      id: faker.random.uuid(),
+      teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
+        id: faker.random.uuid(),
+        name: faker.company.companyName(),
+        progress: faker.random.number({ min: 0, max: 100 }),
+        progressIncreaseSinceLastWeek: faker.random.number({ min: -9, max: -1 }),
+        confidence: faker.random.number({ min: 0, max: 100 }),
+      })),
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.GET_COMPANY_TEAMS,
+        },
+        result: {
+          data: {
+            teams: [fakeCompany],
+          },
+        },
+      },
+    ]
+
+    const wrapper = enzyme.mount(
+      <MockedProvider mocks={mocks}>
+        <RecoilRoot>
+          <TeamsOverview />
+        </RecoilRoot>
+      </MockedProvider>,
+    )
+
+    await waitForComponentToPaint(wrapper)
+
+    const lines = wrapper
+      .find('TeamsOverviewBodyTableBody')
+      .find('TeamsOverviewBodyTableLineTemplate')
+
+    lines.map((line, index) => {
+      const relatedTeam = fakeCompany.teamsRanking[index]
+      const textComponent = line
+        .find('TeamsOverviewBodyTableBodyColumnProgressIncrease')
+        .find('Tag')
+
+      return expect(textComponent.text()).toEqual(
+        `-0${Math.abs(relatedTeam.progressIncreaseSinceLastWeek)}%decreased by`,
+      )
+    })
+  })
+
+  it('displays the correct team progress increase, for negative values with 2 digits, on each line', async () => {
+    const numberOfFakeTeams = faker.random.number({ min: 1, max: 10 })
+    expect.assertions(numberOfFakeTeams)
+
+    const fakeCompany = {
+      id: faker.random.uuid(),
+      teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
+        id: faker.random.uuid(),
+        name: faker.company.companyName(),
+        progress: faker.random.number({ min: 0, max: 100 }),
+        progressIncreaseSinceLastWeek: faker.random.number({ min: -100, max: -10 }),
+        confidence: faker.random.number({ min: 0, max: 100 }),
+      })),
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.GET_COMPANY_TEAMS,
+        },
+        result: {
+          data: {
+            teams: [fakeCompany],
+          },
+        },
+      },
+    ]
+
+    const wrapper = enzyme.mount(
+      <MockedProvider mocks={mocks}>
+        <RecoilRoot>
+          <TeamsOverview />
+        </RecoilRoot>
+      </MockedProvider>,
+    )
+
+    await waitForComponentToPaint(wrapper)
+
+    const lines = wrapper
+      .find('TeamsOverviewBodyTableBody')
+      .find('TeamsOverviewBodyTableLineTemplate')
+
+    lines.map((line, index) => {
+      const relatedTeam = fakeCompany.teamsRanking[index]
+      const textComponent = line
+        .find('TeamsOverviewBodyTableBodyColumnProgressIncrease')
+        .find('Tag')
+
+      return expect(textComponent.text()).toEqual(
+        `-${Math.abs(relatedTeam.progressIncreaseSinceLastWeek)}%decreased by`,
+      )
+    })
+  })
+
+  it('displays the correct team progress increase, for values equal 0, on each line', async () => {
+    const numberOfFakeTeams = faker.random.number({ min: 1, max: 10 })
+    expect.assertions(numberOfFakeTeams)
+
+    const fakeCompany = {
+      id: faker.random.uuid(),
+      teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
+        id: faker.random.uuid(),
+        name: faker.company.companyName(),
+        progress: faker.random.number({ min: 0, max: 100 }),
+        progressIncreaseSinceLastWeek: 0,
+        confidence: faker.random.number({ min: 0, max: 100 }),
+      })),
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.GET_COMPANY_TEAMS,
+        },
+        result: {
+          data: {
+            teams: [fakeCompany],
+          },
+        },
+      },
+    ]
+
+    const wrapper = enzyme.mount(
+      <MockedProvider mocks={mocks}>
+        <RecoilRoot>
+          <TeamsOverview />
+        </RecoilRoot>
+      </MockedProvider>,
+    )
+
+    await waitForComponentToPaint(wrapper)
+
+    const lines = wrapper
+      .find('TeamsOverviewBodyTableBody')
+      .find('TeamsOverviewBodyTableLineTemplate')
+
+    lines.map((line) => {
+      const textComponent = line
+        .find('TeamsOverviewBodyTableBodyColumnProgressIncrease')
+        .find('Tag')
+
+      return expect(textComponent.text()).toEqual('0%')
+    })
+  })
 })

@@ -6,6 +6,7 @@ import { Team } from 'src/components/Team/types'
 import {
   TeamsOverviewBodyTableBodyColumnNameAndOrder,
   TeamsOverviewBodyTableBodyColumnProgress,
+  TeamsOverviewBodyTableBodyColumnProgressIncrease,
 } from './Columns'
 
 export interface TeamsOverviewBodyTableBodyProperties {
@@ -18,6 +19,7 @@ const TeamsOverviewBodyTableBody = ({ teamsRanking }: TeamsOverviewBodyTableBody
       <TeamsOverviewBodyTableLineTemplate key={team?.id ?? Math.random()}>
         <TeamsOverviewBodyTableBodyColumnNameAndOrder team={team} order={index + 1} />
         <TeamsOverviewBodyTableBodyColumnProgress team={team} />
+        <TeamsOverviewBodyTableBodyColumnProgressIncrease team={team} />
       </TeamsOverviewBodyTableLineTemplate>
     ))}
   </>
