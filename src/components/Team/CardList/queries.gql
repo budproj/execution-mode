@@ -3,8 +3,8 @@ query GET_TEAMS {
     id
     name
     description
-    currentProgress
-    currentConfidence
+    progress
+    confidence
     isCompany
     users {
       fullName

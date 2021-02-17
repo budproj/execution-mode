@@ -32,7 +32,7 @@ const ObjectiveAccordionButton = ({
   isLoaded,
 }: ObjectiveAccordionButtonProperties) => {
   const intl = useIntl()
-  const roundedProgress = Math.round(objective?.currentProgress ?? 0)
+  const roundedProgress = Math.round(objective?.progress ?? 0)
 
   return (
     <AccordionButton gridGap={4} _hover={{}}>
@@ -50,7 +50,7 @@ const ObjectiveAccordionButton = ({
         w={isLoaded ? 'auto' : 70}
         h={isLoaded ? 'auto' : 33}
       >
-        <PercentageProgressIncreaseTag value={objective?.percentageProgressIncrease} />
+        <PercentageProgressIncreaseTag value={objective?.progressIncreaseSinceLastWeek} />
       </Skeleton>
 
       <Skeleton isLoaded={isLoaded} display="flex" gridGap={2} alignItems="center">

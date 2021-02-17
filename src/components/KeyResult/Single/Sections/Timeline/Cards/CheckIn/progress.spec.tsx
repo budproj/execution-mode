@@ -6,15 +6,15 @@ import KeyResultSectionTimelineCardCheckInProgress from './progress'
 
 describe('component expectations', () => {
   it('shows the arrow if the current progress is different than previous', () => {
-    const currentProgress = faker.random.number()
-    const previousProgress = faker.random.number({ max: currentProgress - 1 })
+    const progress = faker.random.number()
+    const previousProgress = faker.random.number({ max: progress - 1 })
 
     const parent = {
       progress: previousProgress,
     } as any
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInProgress progress={currentProgress} parent={parent} />,
+      <KeyResultSectionTimelineCardCheckInProgress progress={progress} parent={parent} />,
     )
 
     const arrow = result.find('ArrowRightLong')
@@ -23,15 +23,15 @@ describe('component expectations', () => {
   })
 
   it('shows the new progress if the current progress is different than previous', () => {
-    const currentProgress = faker.random.number()
-    const previousProgress = faker.random.number({ max: currentProgress - 1 })
+    const progress = faker.random.number()
+    const previousProgress = faker.random.number({ max: progress - 1 })
 
     const parent = {
       progress: previousProgress,
     } as any
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInProgress progress={currentProgress} parent={parent} />,
+      <KeyResultSectionTimelineCardCheckInProgress progress={progress} parent={parent} />,
     )
 
     const statNumbers = result.find('StatNumber')
@@ -40,14 +40,14 @@ describe('component expectations', () => {
   })
 
   it('hides the arrow if the current progress is the same as the parent', () => {
-    const currentProgress = faker.random.number()
+    const progress = faker.random.number()
 
     const parent = {
-      progress: currentProgress,
+      progress,
     } as any
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInProgress progress={currentProgress} parent={parent} />,
+      <KeyResultSectionTimelineCardCheckInProgress progress={progress} parent={parent} />,
     )
 
     const arrow = result.find('ArrowRightLong')
@@ -56,14 +56,14 @@ describe('component expectations', () => {
   })
 
   it('hides the new progress if the current progress is the same as the parent', () => {
-    const currentProgress = faker.random.number()
+    const progress = faker.random.number()
 
     const parent = {
-      progress: currentProgress,
+      progress,
     } as any
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInProgress progress={currentProgress} parent={parent} />,
+      <KeyResultSectionTimelineCardCheckInProgress progress={progress} parent={parent} />,
     )
 
     const statNumbers = result.find('StatNumber')

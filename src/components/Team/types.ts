@@ -9,9 +9,9 @@ export interface Team {
   id: string
   name: string
   isCompany: boolean
-  currentProgress: KeyResultCheckIn['progress']
-  currentConfidence: KeyResultCheckIn['confidence']
-  percentageProgressIncrease: number
+  progress: KeyResultCheckIn['progress']
+  confidence: KeyResultCheckIn['confidence']
+  progressIncreaseSinceLastWeek: number
   createdAt: string
   updatedAt: string
   owner: User
@@ -21,6 +21,7 @@ export interface Team {
   parentTeam?: Team
   users?: User[]
   teams?: Team[]
+  teamsRanking?: Team[]
   cycles?: Cycle[]
   objectives?: Objective[]
   keyResults?: KeyResult[]

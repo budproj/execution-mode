@@ -35,12 +35,12 @@ describe('component expectations', () => {
 
   it('closes the popover when we trigger the Chakra popover close event', () => {
     const fakeID = faker.random.word()
-    const currentProgress = faker.random.number()
+    const progress = faker.random.number()
     const spy = sinon.spy()
 
     const useRecoilStateStub = sinon.stub(recoil, 'useRecoilState')
 
-    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
+    sinon.stub(recoil, 'useRecoilValue').returns(progress)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     useRecoilStateStub.withArgs(keyResultCheckInPopoverOpen(fakeID)).returns([undefined, spy])
@@ -58,12 +58,12 @@ describe('component expectations', () => {
 
   it('closes the popup upon popover cancellation', () => {
     const fakeID = faker.random.word()
-    const currentProgress = faker.random.number()
+    const progress = faker.random.number()
     const spy = sinon.spy()
 
     const useRecoilStateStub = sinon.stub(recoil, 'useRecoilState')
 
-    sinon.stub(recoil, 'useRecoilValue').returns(currentProgress)
+    sinon.stub(recoil, 'useRecoilValue').returns(progress)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
 
     useRecoilStateStub.withArgs(keyResultCheckInPopoverOpen(fakeID)).returns([undefined, spy])

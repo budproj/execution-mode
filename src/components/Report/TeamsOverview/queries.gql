@@ -1,0 +1,12 @@
+query GET_COMPANY_TEAMS {
+  teams(onlyCompanies: true) {
+    id
+    teamsRanking {
+      id
+      name
+      progress
+      progressIncreaseSinceLastWeek
+      confidence
+    }
+  }
+}

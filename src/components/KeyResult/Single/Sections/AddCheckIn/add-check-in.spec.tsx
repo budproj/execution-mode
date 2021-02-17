@@ -91,7 +91,7 @@ describe('component interations', () => {
   })
 
   it('resets the is creating check-in value upon check-in form closing', () => {
-    const currentProgress = faker.random.number()
+    const progress = faker.random.number()
     const spy = sinon.spy()
     const fakeCheckInPolicies = {
       create: 'ALLOW',
@@ -104,7 +104,7 @@ describe('component interations', () => {
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
     stub.withArgs(selectKeyResultPoliciesMatcher).returns(fakeKeyResultPolicies)
-    stub.withArgs(selectLatestMatcher).returns(currentProgress)
+    stub.withArgs(selectLatestMatcher).returns(progress)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
     sinon.stub(recoil, 'useRecoilState').returns([true, spy])
 
@@ -119,7 +119,7 @@ describe('component interations', () => {
   })
 
   it('sets that the user is creating check-in value upon check-in form opening', () => {
-    const currentProgress = faker.random.number()
+    const progress = faker.random.number()
     const spy = sinon.spy()
     const fakeCheckInPolicies = {
       create: 'ALLOW',
@@ -132,7 +132,7 @@ describe('component interations', () => {
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
     stub.withArgs(selectKeyResultPoliciesMatcher).returns(fakeKeyResultPolicies)
-    stub.withArgs(selectLatestMatcher).returns(currentProgress)
+    stub.withArgs(selectLatestMatcher).returns(progress)
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
     sinon.stub(recoil, 'useRecoilState').returns([false, spy])
 

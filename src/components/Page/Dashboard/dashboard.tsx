@@ -8,7 +8,7 @@ import { PageHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { PageProperties } from 'src/components/Page/types'
 import CompanyProgressOverview from 'src/components/Report/CompanyProgressOverview'
-import ObjectivesOverview from 'src/components/Report/ObjectivesOverview'
+import TeamsOverview from 'src/components/Report/TeamsOverview'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
@@ -30,7 +30,7 @@ const DashboardPage = ({ isRootPage }: PageProperties) => {
 
       <Flex gridGap={10} direction="column">
         <CompanyProgressOverview />
-        <ObjectivesOverview />
+        <TeamsOverview />
       </Flex>
     </PageContent>
   )

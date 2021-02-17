@@ -24,12 +24,11 @@ const ObjectivesOverviewBodyLine = ({
 }: ObjectivesOverviewBodyLineProperties) => {
   const intl = useIntl()
   const objective = useRecoilValue(objectiveAtomFamily(id))
-  const [confidenceTag, setConfidence] = useConfidenceTag(objective?.currentConfidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(objective?.confidence)
   const isLoaded = Boolean(objective)
 
   useEffect(() => {
-    if (typeof objective?.currentConfidence !== 'undefined')
-      setConfidence(objective.currentConfidence)
+    if (typeof objective?.confidence !== 'undefined') setConfidence(objective.confidence)
   }, [objective, setConfidence])
 
   return (
@@ -49,13 +48,13 @@ const ObjectivesOverviewBodyLine = ({
         </Skeleton>
 
         <Flex flexGrow={1} justifyContent="flex-end">
-          <PercentageProgressIncreaseTag value={objective?.percentageProgressIncrease} />
+          <PercentageProgressIncreaseTag value={objective?.progressIncreaseSinceLastWeek} />
         </Flex>
       </Flex>
 
       <SliderWithFilledTrack
         trackThickness={3}
-        value={objective?.currentProgress}
+        value={objective?.progress}
         trackColor={confidenceTag.color.primary}
       />
     </OverviewBodyBox>

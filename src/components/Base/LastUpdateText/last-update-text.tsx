@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/react'
+import { Text, TextProps } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -7,11 +7,20 @@ import useRelativeDate from 'src/state/hooks/useRelativeDate'
 import messages from './messages'
 
 export interface LastUpdateTextProperties {
+  fontSize: TextProps['fontSize']
+  color: TextProps['color']
   date?: Date
   author?: string
+  fontWeight?: TextProps['fontWeight']
 }
 
-const LastUpdateText = ({ date, author }: LastUpdateTextProperties) => {
+const LastUpdateText = ({
+  date,
+  author,
+  fontSize,
+  fontWeight,
+  color,
+}: LastUpdateTextProperties) => {
   const intl = useIntl()
   const [formattedRelativeDate, setDate, relativeUnit, previousDate] = useRelativeDate(date)
   const lowercasedFormattedRelativeDate = formattedRelativeDate?.toLowerCase()
@@ -29,10 +38,15 @@ const LastUpdateText = ({ date, author }: LastUpdateTextProperties) => {
   }, [previousDate, date, setDate])
 
   return (
-    <Text fontSize="xs" color="gray.300">
+    <Text fontSize={fontSize} color={color} fontWeight={fontWeight}>
       {message}
     </Text>
   )
+}
+
+LastUpdateText.defaultProps = {
+  fontSize: 'sm',
+  color: 'gray.300',
 }
 
 export default LastUpdateText

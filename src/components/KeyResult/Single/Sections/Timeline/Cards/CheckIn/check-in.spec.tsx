@@ -16,7 +16,7 @@ describe('component expectations', () => {
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
     const previousConfidence = faker.random.number()
-    const currentConfidence = faker.random.number({ min: previousConfidence + 1 })
+    const confidence = faker.random.number({ min: previousConfidence + 1 })
 
     const parent = {
       confidence: previousConfidence,
@@ -24,14 +24,14 @@ describe('component expectations', () => {
 
     const fakeData = {
       parent,
-      confidence: currentConfidence,
+      confidence,
     }
 
     const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
-    expect(confidenceTag.prop('difference')).toEqual(currentConfidence - previousConfidence)
+    expect(confidenceTag.prop('difference')).toEqual(confidence - previousConfidence)
   })
 
   it('can use a parent confidence of 0', () => {
@@ -40,7 +40,7 @@ describe('component expectations', () => {
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
     const previousConfidence = 0
-    const currentConfidence = 100
+    const confidence = 100
 
     const parent = {
       confidence: previousConfidence,
@@ -48,7 +48,7 @@ describe('component expectations', () => {
 
     const fakeData = {
       parent,
-      confidence: currentConfidence,
+      confidence,
     }
 
     const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
@@ -87,7 +87,7 @@ describe('component expectations', () => {
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
     const previousConfidence = faker.random.number()
-    const currentConfidence = faker.random.number({ max: previousConfidence - 1 })
+    const confidence = faker.random.number({ max: previousConfidence - 1 })
 
     const parent = {
       confidence: previousConfidence,
@@ -95,14 +95,14 @@ describe('component expectations', () => {
 
     const fakeData = {
       parent,
-      confidence: currentConfidence,
+      confidence,
     }
 
     const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
-    expect(confidenceTag.prop('difference')).toEqual(currentConfidence - previousConfidence)
+    expect(confidenceTag.prop('difference')).toEqual(confidence - previousConfidence)
   })
 
   it('does not display the comment section there is no comment', () => {

@@ -45,7 +45,7 @@ describe('component expectations', () => {
 
   it('should pass the confidence tag color to the slider', () => {
     const fakeID = faker.random.word()
-    const fakeData = { currentConfidence: 50 }
+    const fakeData = { confidence: 50 }
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
 
@@ -64,7 +64,7 @@ describe('component lifecycle', () => {
 
   it('dispatches a confidence update after we receive a value for it', () => {
     sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
-      currentConfidence: 50,
+      confidence: 50,
     })
 
     const result = enzyme.shallow(<TeamCard />)

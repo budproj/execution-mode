@@ -14,20 +14,20 @@ import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-export interface SliderWithGoalProperties extends SliderProps {
+export interface SliderWithDetailsProperties extends SliderProps {
   trackThickness: SliderTrackProps['h']
   trackColor: SliderTrackProps['color']
   thumbHeight: SliderThumbProps['h']
 }
 
-const SliderWithGoal = ({
+const SliderWithDetails = ({
   trackColor,
   trackThickness,
   thumbHeight,
   value,
   isDisabled,
   ...rest
-}: SliderWithGoalProperties) => {
+}: SliderWithDetailsProperties) => {
   const intl = useIntl()
   const isAlmostAtTheBeginningOfTheTrack = value === 0 || (value && value < 5)
   const isAlmostAtTheEndOfTheTrack = value && value > 93
@@ -67,26 +67,7 @@ const SliderWithGoal = ({
           </Text>
 
           <Text fontSize="xs" color="gray.200" fontWeight={400} width="max-content">
-            {intl.formatMessage(messages.currentProgress)}
-          </Text>
-        </Box>
-      </SliderThumb>
-
-      <SliderThumb
-        bg="gray.300"
-        w="4px"
-        h={thumbHeight}
-        left="80%!important" // Need to use !important since Chakra does not support using 2 thumbs
-        _disabled={{ opacity: 1 }}
-        _focus={{ boxShadow: 'none', outline: 'none' }}
-      >
-        <Box position="absolute" top={thumbHeight} left="5px">
-          <Text color="gray.200" fontWeight={700}>
-            80%
-          </Text>
-
-          <Text fontSize="xs" color="gray.200" fontWeight={400} width="max-content">
-            {intl.formatMessage(messages.goal)}
+            {intl.formatMessage(messages.progress)}
           </Text>
         </Box>
       </SliderThumb>
@@ -115,7 +96,7 @@ const SliderWithGoal = ({
   )
 }
 
-SliderWithGoal.defaultProps = {
+SliderWithDetails.defaultProps = {
   value: 0,
   trackColor: 'brand.400',
   trackThickness: 2,
@@ -123,4 +104,4 @@ SliderWithGoal.defaultProps = {
   isDisabled: true,
 }
 
-export default SliderWithGoal
+export default SliderWithDetails
