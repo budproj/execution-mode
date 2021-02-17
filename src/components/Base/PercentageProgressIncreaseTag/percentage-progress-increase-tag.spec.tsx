@@ -224,4 +224,14 @@ describe('signal arrow', () => {
 
     expect(signalArrow.length).toEqual(0)
   })
+
+  it('does not show a signal arrow, even if we ask to, in close to zero values', () => {
+    const fakeValue = 0.2
+
+    const result = enzyme.mount(<PercentageProgressIncreaseTag showSignalArrow value={fakeValue} />)
+
+    const signalArrow = result.find('StatArrow')
+
+    expect(signalArrow.length).toEqual(0)
+  })
 })

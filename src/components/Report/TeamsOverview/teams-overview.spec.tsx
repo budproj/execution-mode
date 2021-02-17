@@ -580,4 +580,55 @@ describe('data exibition', () => {
       return expect(textComponent.text()).toEqual('0%')
     })
   })
+
+  it('displays the correct team progress increase, for values close to 0, on each line', async () => {
+    const numberOfFakeTeams = faker.random.number({ min: 1, max: 10 })
+    expect.assertions(numberOfFakeTeams)
+
+    const fakeCompany = {
+      id: faker.random.uuid(),
+      teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
+        id: faker.random.uuid(),
+        name: faker.company.companyName(),
+        progress: faker.random.number({ min: 0, max: 100 }),
+        progressIncreaseSinceLastWeek: 0.2,
+        confidence: faker.random.number({ min: 0, max: 100 }),
+      })),
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.GET_COMPANY_TEAMS,
+        },
+        result: {
+          data: {
+            teams: [fakeCompany],
+          },
+        },
+      },
+    ]
+
+    const wrapper = enzyme.mount(
+      <MockedProvider mocks={mocks}>
+        <RecoilRoot>
+          <TeamsOverview />
+        </RecoilRoot>
+      </MockedProvider>,
+    )
+
+    await waitForComponentToPaint(wrapper)
+
+    const lines = wrapper
+      .find('TeamsOverviewBodyTableBody')
+      .find('TeamsOverviewBodyTableLineTemplate')
+
+    lines.map((line) => {
+      const textComponent = line
+        .find('TeamsOverviewBodyTableBodyColumnProgressIncrease')
+        .find('Tag')
+
+      return expect(textComponent.text()).toEqual('0%')
+    })
+  })
 })
