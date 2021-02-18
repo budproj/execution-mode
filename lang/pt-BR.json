@@ -123,10 +123,6 @@
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
   },
-  "6KET/Z": {
-    "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> como um todo?",
-    "description": "The title of the header section in our company overview report"
-  },
   "6aChVs": {
     "defaultMessage": "Nesta semana",
     "description": "This label is displayed if the date difference is 1 week or less"
@@ -670,6 +666,10 @@
   "z4Qy+J": {
     "defaultMessage": "O desenho de uma caixa fechada, ilustrando que estamos em manutenção",
     "description": "This message is the alt message for our box drawing in the under maintenance error page"
+  },
+  "z4STCs": {
+    "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> nesse trimestre?",
+    "description": "The title of the header section in our company overview report"
   },
   "zEyzo8": {
     "defaultMessage": "Um círculo roxo, indicando que o resultado-chave tem uma barreira",
