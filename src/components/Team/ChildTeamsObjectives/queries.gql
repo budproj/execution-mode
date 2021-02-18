@@ -5,11 +5,13 @@ query GET_TEAM_AND_CHILD_TEAMS_OBJECTIVES($rootTeamId: ID!) {
     objectives {
       id
       title
-      progress
-      confidence
       progressIncreaseSinceLastWeek
       cycle {
         dateEnd
+      }
+      status {
+        progress
+        confidence
       }
     }
     teams {
@@ -18,11 +20,13 @@ query GET_TEAM_AND_CHILD_TEAMS_OBJECTIVES($rootTeamId: ID!) {
       objectives {
         id
         title
-        progress
-        confidence
         progressIncreaseSinceLastWeek
         cycle {
           dateEnd
+        }
+        status {
+          progress
+          confidence
         }
       }
     }

@@ -1,14 +1,16 @@
 query GET_TEAMS {
-  teams(onlyCompaniesAndDepartments: true) {
+  teams(filters: { onlyCompaniesAndDepartments: true }) {
     id
     name
     description
-    progress
-    confidence
     isCompany
     users {
       fullName
       picture
+    }
+    status {
+      progress
+      confidence
     }
   }
 }

@@ -1,12 +1,14 @@
 query GET_COMPANY_TEAMS {
-  teams(onlyCompanies: true) {
+  teams(filters: { onlyCompanies: true }) {
     id
     teamsRanking {
       id
       name
-      progress
       progressIncreaseSinceLastWeek
-      confidence
+      status {
+        progress
+        confidence
+      }
     }
   }
 }

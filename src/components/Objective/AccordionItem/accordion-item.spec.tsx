@@ -79,9 +79,12 @@ describe('component lifecycle', () => {
   afterEach(() => sinon.restore())
 
   it('dispatches a confidence update after we receive a value for it', () => {
-    sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
-      confidence: 50,
-    })
+    sinon
+      .stub(recoil, 'useRecoilValue')
+      .onSecondCall()
+      .returns({
+        status: { confidence: 50 },
+      })
 
     const result = enzyme.shallow(<ObjectiveAccordionItem />)
     result.setProps({ objectiveID: faker.random.uuid() })

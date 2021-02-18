@@ -4,8 +4,10 @@ query GET_USER_PRIMARY_COMPANY {
       id
       name
       gender
-      progress
-      confidence
+      status {
+        progress
+        confidence
+      }
       progressIncreaseSinceLastWeek
       latestKeyResultCheckIn {
         id

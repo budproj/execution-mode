@@ -17,9 +17,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: 0, max: 100 }),
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -62,9 +64,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: 0, max: 100 }),
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -115,9 +119,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: 0, max: 100 }),
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -164,9 +170,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: 0, max: 100 }),
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -201,7 +209,7 @@ describe('data exibition', () => {
       const relatedTeam = fakeCompany.teamsRanking[index]
       const slider = line.find('TeamsOverviewBodyTableBodyColumnProgress').find('Slider')
 
-      return expect(slider.prop('value')).toEqual(relatedTeam.progress)
+      return expect(slider.prop('value')).toEqual(relatedTeam.status.progress)
     })
   })
 
@@ -214,9 +222,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: 0, max: 100 }),
-        confidence: faker.helpers.randomize([20, 50, 100]),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.helpers.randomize([20, 50, 100]),
+        },
       })),
     }
 
@@ -258,7 +268,7 @@ describe('data exibition', () => {
       const sliderFilledTrack = line
         .find('TeamsOverviewBodyTableBodyColumnProgress')
         .find('SliderFilledTrack')
-      const expectedColor = expectedColors[relatedTeam.confidence]
+      const expectedColor = expectedColors[relatedTeam.status.confidence]
 
       return expect(sliderFilledTrack.prop('bg')).toEqual(expectedColor)
     })
@@ -273,9 +283,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: 0, max: 100 }),
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -310,7 +322,7 @@ describe('data exibition', () => {
       const relatedTeam = fakeCompany.teamsRanking[index]
       const textComponent = line.find('TeamsOverviewBodyTableBodyColumnProgress').find('Text')
 
-      return expect(textComponent.text()).toEqual(`${relatedTeam.progress}%`)
+      return expect(textComponent.text()).toEqual(`${relatedTeam.status.progress}%`)
     })
   })
 
@@ -323,9 +335,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: 10, max: 100 }),
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -377,9 +391,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: 1, max: 9 }),
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -431,9 +447,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: -9, max: -1 }),
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -485,9 +503,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: faker.random.number({ min: -100, max: -10 }),
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -539,9 +559,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: 0,
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 
@@ -590,9 +612,11 @@ describe('data exibition', () => {
       teamsRanking: [...new Array(numberOfFakeTeams)].map(() => ({
         id: faker.random.uuid(),
         name: faker.company.companyName(),
-        progress: faker.random.number({ min: 0, max: 100 }),
         progressIncreaseSinceLastWeek: 0.2,
-        confidence: faker.random.number({ min: 0, max: 100 }),
+        status: {
+          progress: faker.random.number({ min: 0, max: 100 }),
+          confidence: faker.random.number({ min: 0, max: 100 }),
+        },
       })),
     }
 

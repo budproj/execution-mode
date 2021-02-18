@@ -45,7 +45,7 @@ describe('component expectations', () => {
 
   it('should pass the confidence tag color to the slider', () => {
     const fakeID = faker.random.word()
-    const fakeData = { confidence: 50 }
+    const fakeData = { status: { confidence: 50 } }
 
     const stub = sinon.stub(recoil, 'useRecoilValue')
 
@@ -63,9 +63,12 @@ describe('component lifecycle', () => {
   afterEach(() => sinon.restore())
 
   it('dispatches a confidence update after we receive a value for it', () => {
-    sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
-      confidence: 50,
-    })
+    sinon
+      .stub(recoil, 'useRecoilValue')
+      .onSecondCall()
+      .returns({
+        status: { confidence: 50 },
+      })
 
     const result = enzyme.shallow(<TeamCard />)
     result.setProps({ id: faker.random.uuid() })

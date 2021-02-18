@@ -15,11 +15,12 @@ export interface ObjectiveAccordionItemProperties {
 
 const ObjectiveAccordionItem = ({ objectiveID }: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
-  const [confidenceTag, setConfidence] = useConfidenceTag(objective?.confidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(objective?.status?.confidence)
   const isLoaded = Boolean(objective)
 
   useEffect(() => {
-    if (typeof objective?.confidence !== 'undefined') setConfidence(objective?.confidence)
+    if (typeof objective?.status?.confidence !== 'undefined')
+      setConfidence(objective?.status?.confidence)
   }, [objective, setConfidence])
 
   return (

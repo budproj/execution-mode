@@ -13,15 +13,15 @@ export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
 const TeamsOverviewBodyTableBodyColumnProgress = ({
   team,
 }: TeamsOverviewBodyTableBodyColumnProgressProperties) => {
-  const [confidenceTag, setConfidence] = useConfidenceTag(team?.confidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(team?.status?.confidence)
   const intl = useIntl()
 
   const isLoaded = Boolean(team)
-  const progress = team?.progress ?? 0
+  const progress = team?.status?.progress ?? 0
 
   useEffect(() => {
-    if ((team && Boolean(team?.confidence)) || team?.confidence === 0)
-      setConfidence(team.confidence)
+    if ((team && Boolean(team?.status?.confidence)) || team?.status?.confidence === 0)
+      setConfidence(team.status.confidence)
   }, [team, setConfidence])
 
   return (
