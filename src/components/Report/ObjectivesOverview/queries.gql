@@ -1,14 +1,16 @@
 query GET_COMPANY_OBJECTIVES {
-  teams(onlyCompanies: true) {
+  teams(filters: { onlyCompanies: true }) {
     id
     name
     gender
     objectives {
       id
       title
-      progress
-      confidence
       progressIncreaseSinceLastWeek
+      status {
+        progress
+        confidence
+      }
     }
   }
 }

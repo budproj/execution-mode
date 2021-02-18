@@ -66,3 +66,9 @@ export interface KeyResult {
 }
 
 export type KeyResultsHashmap = Record<string, KeyResult>
+
+export interface KeyResultCheckInStatus {
+  progress: KeyResultCheckIn['progress']
+  confidence: KeyResultCheckIn['confidence']
+  createdAt: KeyResultCheckIn['createdAt']
+}

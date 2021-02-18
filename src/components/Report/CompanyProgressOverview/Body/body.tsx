@@ -21,10 +21,11 @@ const CompanyProgressOverviewBody = ({
   isLoading,
 }: CompanyProgressOverviewBodyProperties) => {
   const company = useRecoilValue(teamAtomFamily(companyID))
-  const [confidenceTag, setConfidence] = useConfidenceTag(company?.confidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(company?.status?.confidence)
 
   useEffect(() => {
-    if (typeof company?.confidence !== 'undefined') setConfidence(company?.confidence)
+    if (typeof company?.status?.confidence !== 'undefined')
+      setConfidence(company?.status?.confidence)
   }, [company, setConfidence])
 
   return (
@@ -40,7 +41,7 @@ const CompanyProgressOverviewBody = ({
 
         <Skeleton isLoaded={!isLoading}>
           <SliderWithDetails
-            value={company?.progress}
+            value={company?.status?.progress}
             trackThickness={4}
             thumbHeight={7}
             trackColor={confidenceTag.color.primary}

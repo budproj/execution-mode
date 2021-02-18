@@ -32,7 +32,7 @@ const ObjectiveAccordionButton = ({
   isLoaded,
 }: ObjectiveAccordionButtonProperties) => {
   const intl = useIntl()
-  const roundedProgress = Math.round(objective?.progress ?? 0)
+  const roundedProgress = Math.round(objective?.status?.progress ?? 0)
 
   return (
     <AccordionButton gridGap={4} _hover={{}}>

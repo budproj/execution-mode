@@ -24,11 +24,12 @@ const ObjectivesOverviewBodyLine = ({
 }: ObjectivesOverviewBodyLineProperties) => {
   const intl = useIntl()
   const objective = useRecoilValue(objectiveAtomFamily(id))
-  const [confidenceTag, setConfidence] = useConfidenceTag(objective?.confidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(objective?.status?.confidence)
   const isLoaded = Boolean(objective)
 
   useEffect(() => {
-    if (typeof objective?.confidence !== 'undefined') setConfidence(objective.confidence)
+    if (typeof objective?.status?.confidence !== 'undefined')
+      setConfidence(objective.status.confidence)
   }, [objective, setConfidence])
 
   return (
@@ -54,7 +55,7 @@ const ObjectivesOverviewBodyLine = ({
 
       <SliderWithFilledTrack
         trackThickness={3}
-        value={objective?.progress}
+        value={objective?.status?.progress}
         trackColor={confidenceTag.color.primary}
       />
     </OverviewBodyBox>

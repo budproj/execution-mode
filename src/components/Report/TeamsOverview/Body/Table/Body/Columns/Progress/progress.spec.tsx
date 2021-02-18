@@ -9,7 +9,7 @@ describe('component lifecycle', () => {
     const fakeInitialConfidence = 20
     const fakeNewConfidence = 50
     const fakeTeam = {
-      confidence: fakeInitialConfidence,
+      status: { confidence: fakeInitialConfidence },
     }
 
     const wrapper = enzyme.mount(
@@ -18,7 +18,7 @@ describe('component lifecycle', () => {
 
     wrapper.setProps({
       team: {
-        confidence: fakeNewConfidence,
+        status: { confidence: fakeNewConfidence },
       },
     })
 
@@ -48,7 +48,7 @@ describe('component expectations', () => {
   it('displays the correct percent value', () => {
     const fakeProgress = faker.random.number({ max: 100 })
     const fakeTeam = {
-      progress: fakeProgress,
+      status: { progress: fakeProgress },
     }
 
     const wrapper = enzyme.mount(
@@ -63,7 +63,7 @@ describe('component expectations', () => {
   it('rounds the percent value in the displayed text', () => {
     const fakeProgress = 95.87
     const fakeTeam = {
-      progress: fakeProgress,
+      status: { progress: fakeProgress },
     }
 
     const wrapper = enzyme.mount(

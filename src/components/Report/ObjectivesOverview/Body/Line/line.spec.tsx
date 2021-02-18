@@ -48,7 +48,7 @@ describe('component render', () => {
   })
 
   it('uses the correct track color in the slider', () => {
-    sinon.stub(recoil, 'useRecoilValue').returns({ confidence: 50 })
+    sinon.stub(recoil, 'useRecoilValue').returns({ status: { confidence: 50 } })
 
     const result = enzyme.shallow(
       <ObjectivesOverviewBodyLine orderTagNumber={faker.random.number()} />,
@@ -64,9 +64,12 @@ describe('component lifecycle', () => {
   afterEach(() => sinon.restore())
 
   it('dispatches a confidence update after we receive a value for it', () => {
-    sinon.stub(recoil, 'useRecoilValue').onSecondCall().returns({
-      confidence: 50,
-    })
+    sinon
+      .stub(recoil, 'useRecoilValue')
+      .onSecondCall()
+      .returns({
+        status: { confidence: 50 },
+      })
 
     const result = enzyme.shallow(
       <ObjectivesOverviewBodyLine orderTagNumber={faker.random.number()} />,

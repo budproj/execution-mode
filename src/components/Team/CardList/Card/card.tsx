@@ -20,10 +20,10 @@ const TeamCard = ({ id }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
   const isCompany = Boolean(team?.isCompany)
-  const [confidenceTag, setConfidence] = useConfidenceTag(team?.confidence)
+  const [confidenceTag, setConfidence] = useConfidenceTag(team?.status?.confidence)
 
   useEffect(() => {
-    if (typeof team?.confidence !== 'undefined') setConfidence(team?.confidence)
+    if (typeof team?.status?.confidence !== 'undefined') setConfidence(team?.status?.confidence)
   }, [team, setConfidence])
 
   const isLoaded = Boolean(team)
@@ -63,7 +63,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
           <Skeleton isLoaded={isLoaded} borderRadius="full">
             <SliderWithFilledTrack
               trackThickness={3}
-              value={team?.progress}
+              value={team?.status?.progress}
               trackColor={confidenceTag.color.primary}
             />
           </Skeleton>
