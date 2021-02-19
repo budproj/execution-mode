@@ -1,9 +1,12 @@
 query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $limit: Int, $offset: Int) {
   keyResult(id: $id) {
     id
+    format
     timeline(limit: $limit, offset: $offset) {
       ... on KeyResultCheckIn {
         id
+        value
+        valueIncrease
         confidence
         progress
         comment

@@ -231,6 +231,7 @@ type KeyResultCheckIn implements EntityObject {
   id: ID!
   policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
   value: Float!
+  valueIncrease: Float!
 
   """The reported confidence in this check-in"""
   confidence: Int!

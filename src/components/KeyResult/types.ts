@@ -12,6 +12,7 @@ export interface KeyResultCheckIn {
   __typename: string
   id: string
   value: number
+  valueIncrease: number
   confidence: number
   progress: number
   progressIncrease: number

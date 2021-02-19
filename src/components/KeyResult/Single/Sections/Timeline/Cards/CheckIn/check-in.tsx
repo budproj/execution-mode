@@ -16,8 +16,10 @@ import KeyResultSectionTimelineCardCheckInProgress from './progress'
 import KeyResultSectionTimelineCardCheckInProgressBar from './progress-bar'
 import queries from './queries.gql'
 import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative-confidence-tag'
+import KeyResultSectionTimelineCardCheckInValueIncrease from './value-increase'
 
 export interface KeyResultSectionTimelineCardCheckInProperties {
+  format?: KeyResult['format']
   data?: Partial<KeyResultCheckIn>
   onEntryDelete?: (entryType: string) => void
 }
@@ -27,6 +29,7 @@ export interface GetKeyResultWithLatestCheckInQuery {
 }
 
 const KeyResultSectionTimelineCardCheckIn = ({
+  format,
   data,
   onEntryDelete,
 }: KeyResultSectionTimelineCardCheckInProperties) => {
@@ -97,6 +100,12 @@ const KeyResultSectionTimelineCardCheckIn = ({
             progress={data?.progress}
             confidence={data?.confidence}
             parent={data?.parent}
+          />
+
+          <KeyResultSectionTimelineCardCheckInValueIncrease
+            format={format}
+            value={data?.value}
+            valueIncrease={data?.valueIncrease}
           />
 
           {data?.comment && <KeyResultSectionTimelineCardCheckInComment comment={data.comment} />}

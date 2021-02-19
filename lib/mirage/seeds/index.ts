@@ -62,6 +62,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     user,
     keyResult: () => pickRandomModel(keyResults),
     value: buildKeyResultCheckInValue,
+    valueIncrease: buildKeyResultCheckInValue,
     policies: basePolicy,
   })
   const keyResultComments = server.createList('keyResultComment', 100, {

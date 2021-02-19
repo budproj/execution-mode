@@ -1,106 +1,31 @@
 type ColorHexCode = string
 type FontName = string
 
-type ColorTokens = {
-  brand50: ColorHexCode
-  brand100: ColorHexCode
-  brand200: ColorHexCode
-  brand300: ColorHexCode
-  brand400: ColorHexCode
-  brand500: ColorHexCode
-  brand600: ColorHexCode
-  brand700: ColorHexCode
-  brand800: ColorHexCode
-  brand900: ColorHexCode
-
-  gray50: ColorHexCode
-  gray100: ColorHexCode
-  gray200: ColorHexCode
-  gray300: ColorHexCode
-  gray400: ColorHexCode
-  gray500: ColorHexCode
-  gray600: ColorHexCode
-  gray700: ColorHexCode
-  gray800: ColorHexCode
-  gray900: ColorHexCode
-
-  black50: ColorHexCode
-  black100: ColorHexCode
-  black200: ColorHexCode
-  black300: ColorHexCode
-  black400: ColorHexCode
-  black500: ColorHexCode
-  black600: ColorHexCode
-  black700: ColorHexCode
-  black800: ColorHexCode
-  black900: ColorHexCode
-
-  green50: ColorHexCode
-  green100: ColorHexCode
-  green200: ColorHexCode
-  green300: ColorHexCode
-  green400: ColorHexCode
-  green500: ColorHexCode
-  green600: ColorHexCode
-  green700: ColorHexCode
-  green800: ColorHexCode
-  green900: ColorHexCode
-
-  blue50: ColorHexCode
-  blue100: ColorHexCode
-  blue200: ColorHexCode
-  blue300: ColorHexCode
-  blue400: ColorHexCode
-  blue500: ColorHexCode
-  blue600: ColorHexCode
-  blue700: ColorHexCode
-  blue800: ColorHexCode
-  blue900: ColorHexCode
-
-  pink50: ColorHexCode
-  pink100: ColorHexCode
-  pink200: ColorHexCode
-  pink300: ColorHexCode
-  pink400: ColorHexCode
-  pink500: ColorHexCode
-  pink600: ColorHexCode
-  pink700: ColorHexCode
-  pink800: ColorHexCode
-  pink900: ColorHexCode
-
-  yellow50: ColorHexCode
-  yellow100: ColorHexCode
-  yellow200: ColorHexCode
-  yellow300: ColorHexCode
-  yellow400: ColorHexCode
-  yellow500: ColorHexCode
-  yellow600: ColorHexCode
-  yellow700: ColorHexCode
-  yellow800: ColorHexCode
-  yellow900: ColorHexCode
-
-  purple50: ColorHexCode
-  purple100: ColorHexCode
-  purple200: ColorHexCode
-  purple300: ColorHexCode
-  purple400: ColorHexCode
-  purple500: ColorHexCode
-  purple600: ColorHexCode
-  purple700: ColorHexCode
-  purple800: ColorHexCode
-  purple900: ColorHexCode
-
-  red50: ColorHexCode
-  red100: ColorHexCode
-  red200: ColorHexCode
-  red300: ColorHexCode
-  red400: ColorHexCode
-  red500: ColorHexCode
-  red600: ColorHexCode
-  red700: ColorHexCode
-  red800: ColorHexCode
-  red900: ColorHexCode
+export enum ColorScheme {
+  BRAND = 'brand',
+  GRAY = 'gray',
+  BLACK = 'black',
+  GREEN = 'green',
+  BLUE = 'blue',
+  PINK = 'pink',
+  YELLOW = 'yellow',
+  PURPLE = 'purple',
+  RED = 'red',
 }
+
+type ColorToken =
+  | `${ColorScheme}50`
+  | `${ColorScheme}100`
+  | `${ColorScheme}200`
+  | `${ColorScheme}300`
+  | `${ColorScheme}400`
+  | `${ColorScheme}500`
+  | `${ColorScheme}600`
+  | `${ColorScheme}700`
+  | `${ColorScheme}800`
+  | `${ColorScheme}900`
+
+type ColorTokens = Record<ColorToken, ColorHexCode>
 
 type FontTokens = {
   base: FontName
