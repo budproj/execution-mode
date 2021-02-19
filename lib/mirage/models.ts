@@ -4,6 +4,7 @@ const models = {
   objective: Model.extend({
     keyResults: hasMany(),
     cycle: belongsTo(),
+    status: belongsTo(),
   }),
   keyResult: Model.extend({
     owner: belongsTo('user'),
@@ -45,6 +46,7 @@ const models = {
     latestKeyResultCheckIn: belongsTo('keyResultCheckIn'),
     // eslint-disable-next-line unicorn/no-null
     teamsRanking: hasMany('team', { inverse: null }),
+    status: belongsTo(),
   }),
   user: Model.extend({
     keyResults: hasMany(),
@@ -54,6 +56,7 @@ const models = {
     companies: hasMany('team', { inverse: null }),
   }),
   policy: Model,
+  status: Model,
 }
 
 export default models

@@ -5,6 +5,7 @@ import keyResultComment from './key-result-comment'
 import keyResultCustomList from './key-result-custom-list'
 import objective from './objective'
 import policy from './policy'
+import status from './status'
 import team from './team'
 import user from './user'
 
@@ -18,6 +19,7 @@ const factories = {
   objective,
   team,
   policy,
+  status,
 }
 
 export default factories

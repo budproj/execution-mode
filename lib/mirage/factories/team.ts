@@ -6,8 +6,6 @@ import { TEAM_GENDER } from 'src/components/Team/constants'
 export default Factory.extend({
   name: faker.commerce.department,
   description: faker.lorem.lines(5),
-  progress: () => faker.random.number({ min: 0, max: 100 }),
-  confidence: () => faker.random.number({ min: 0, max: 100 }),
   createdAt: faker.date.past,
   updatedAt: faker.date.past,
   progressIncreaseSinceLastWeek: () => faker.random.float({ min: -100, max: 100 }),

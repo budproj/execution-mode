@@ -124,6 +124,18 @@ const graphQLHandler = (mirageSchema: unknown) =>
           return result
         },
       },
+
+      Query: {
+        teams: (_graphQLSchema: unknown, arguments_: any, { mirageSchema }: any) => {
+          const { teams } = mirageSchema
+          const filters = arguments_?.filters ?? {}
+
+          const filteredTeams: any = teams.where(filters)
+          const resolvedTeams = filteredTeams.models
+
+          return resolvedTeams
+        },
+      },
     },
   } as any)
 
