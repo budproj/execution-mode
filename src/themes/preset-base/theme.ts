@@ -17,16 +17,16 @@ import {
 
 const colors = {
   brand: {
-    50: tokens.colors.blue50,
-    100: tokens.colors.blue100,
-    200: tokens.colors.blue200,
-    300: tokens.colors.blue300,
-    400: tokens.colors.blue400,
-    500: tokens.colors.blue500,
-    600: tokens.colors.blue600,
-    700: tokens.colors.blue700,
-    800: tokens.colors.blue800,
-    900: tokens.colors.blue900,
+    50: tokens.colors.brand50,
+    100: tokens.colors.brand100,
+    200: tokens.colors.brand200,
+    300: tokens.colors.brand300,
+    400: tokens.colors.brand400,
+    500: tokens.colors.brand500,
+    600: tokens.colors.brand600,
+    700: tokens.colors.brand700,
+    800: tokens.colors.brand800,
+    900: tokens.colors.brand900,
   },
 
   gray: {
@@ -42,30 +42,17 @@ const colors = {
     900: tokens.colors.gray900,
   },
 
-  blue: {
-    50: tokens.colors.blue50,
-    100: tokens.colors.blue100,
-    200: tokens.colors.blue200,
-    300: tokens.colors.blue300,
-    400: tokens.colors.blue400,
-    500: tokens.colors.blue500,
-    600: tokens.colors.blue600,
-    700: tokens.colors.blue700,
-    800: tokens.colors.blue800,
-    900: tokens.colors.blue900,
-  },
-
-  cyan: {
-    50: tokens.colors.cyan50,
-    100: tokens.colors.cyan100,
-    200: tokens.colors.cyan200,
-    300: tokens.colors.cyan300,
-    400: tokens.colors.cyan400,
-    500: tokens.colors.cyan500,
-    600: tokens.colors.cyan600,
-    700: tokens.colors.cyan700,
-    800: tokens.colors.cyan800,
-    900: tokens.colors.cyan900,
+  black: {
+    50: tokens.colors.black50,
+    100: tokens.colors.black100,
+    200: tokens.colors.black200,
+    300: tokens.colors.black300,
+    400: tokens.colors.black400,
+    500: tokens.colors.black500,
+    600: tokens.colors.black600,
+    700: tokens.colors.black700,
+    800: tokens.colors.black800,
+    900: tokens.colors.black900,
   },
 
   green: {
@@ -81,6 +68,32 @@ const colors = {
     900: tokens.colors.green900,
   },
 
+  blue: {
+    50: tokens.colors.blue50,
+    100: tokens.colors.blue100,
+    200: tokens.colors.blue200,
+    300: tokens.colors.blue300,
+    400: tokens.colors.blue400,
+    500: tokens.colors.blue500,
+    600: tokens.colors.blue600,
+    700: tokens.colors.blue700,
+    800: tokens.colors.blue800,
+    900: tokens.colors.blue900,
+  },
+
+  pink: {
+    50: tokens.colors.pink50,
+    100: tokens.colors.pink100,
+    200: tokens.colors.pink200,
+    300: tokens.colors.pink300,
+    400: tokens.colors.pink400,
+    500: tokens.colors.pink500,
+    600: tokens.colors.pink600,
+    700: tokens.colors.pink700,
+    800: tokens.colors.pink800,
+    900: tokens.colors.pink900,
+  },
+
   yellow: {
     50: tokens.colors.yellow50,
     100: tokens.colors.yellow100,
@@ -92,6 +105,19 @@ const colors = {
     700: tokens.colors.yellow700,
     800: tokens.colors.yellow800,
     900: tokens.colors.yellow900,
+  },
+
+  purple: {
+    50: tokens.colors.purple50,
+    100: tokens.colors.purple100,
+    200: tokens.colors.purple200,
+    300: tokens.colors.purple300,
+    400: tokens.colors.purple400,
+    500: tokens.colors.purple500,
+    600: tokens.colors.purple600,
+    700: tokens.colors.purple700,
+    800: tokens.colors.purple800,
+    900: tokens.colors.purple900,
   },
 
   red: {

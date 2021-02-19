@@ -44,9 +44,9 @@ const ExpandableText = ({ text, fontSize, maxCollapsedLength }: ExpandableTextPr
       {isTruncatedText && (
         <Button
           p={0}
-          color="cyan.500"
+          color="blue.500"
           fontWeight={400}
-          _hover={{ color: 'cyan.300' }}
+          _hover={{ color: 'blue.300' }}
           onClick={toggleExpanded}
         >
           {intl.formatMessage(messages[isExpanded ? 'collapseButton' : 'expandButton'])}
