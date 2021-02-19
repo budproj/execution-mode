@@ -16,27 +16,39 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   faker.seed(publicRuntimeConfig.mirage.fakerSeed)
 
   const basePolicy = server.create('policy')
+  const statusList = server.createList('status', 10)
   const company = server.create('team', {
     isCompany: true,
     onlyCompanies: true,
     onlyCompaniesAndDepartments: true,
+    status: pickRandomModel(statusList),
   })
 
   const rootTeam = server.create('team', {
     name: faker.random.word(),
     parentTeam: company,
     onlyCompaniesAndDepartments: true,
+    status: pickRandomModel(statusList),
   })
 
-  const teams = server.createList('team', 3, { parentTeam: rootTeam })
+  const teams = server.createList('team', 3, {
+    parentTeam: rootTeam,
+    status: pickRandomModel(statusList),
+  })
   rootTeam.update('teams', teams as any)
   company.update('teamsRanking', orderBy([rootTeam, ...teams], ['progress'], ['desc']) as any)
 
   const user = server.create('user', { teams, companies: [company] })
   const otherUsers = server.createList('user', 5, { teams } as any)
   const cycle = server.create('cycle', { team: company })
-  const companyObjectives = server.createList('objective', 3, { cycle })
-  const objectives = server.createList('objective', 3, { cycle })
+  const companyObjectives = server.createList('objective', 3, {
+    cycle,
+    status: pickRandomModel(statusList),
+  })
+  const objectives = server.createList('objective', 3, {
+    cycle,
+    status: pickRandomModel(statusList),
+  })
   const keyResults = server.createList('keyResult', 10, {
     owner: user,
     objective: () => pickRandomModel(objectives),
@@ -109,6 +121,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       keyResultComments,
       otherUsers,
       basePolicy,
+      statusList,
     },
   })
 }
