@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl'
 import { ExpandableText } from 'src/components/Base'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 
+import { BORDER_COLOR } from './constants'
 import messages from './messages'
 
 export interface KeyResultSectionTimelineCardCheckInCommentProperties {
@@ -19,7 +20,7 @@ const KeyResultSectionTimelineCardCheckInComment = ({
 
   return (
     <Flex direction="column" gridGap={4}>
-      <Divider />
+      <Divider borderColor={BORDER_COLOR} />
       <Heading as="h4" fontSize="xs" color="gray.200" textTransform="uppercase">
         {intl.formatMessage(messages.commentTitle)}
       </Heading>

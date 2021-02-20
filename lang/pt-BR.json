@@ -427,6 +427,10 @@
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
   },
+  "XnTd/f": {
+    "defaultMessage": "Novo valor",
+    "description": "This text is displayed in our check-in card, as a title for the right column in the progress increase section"
+  },
   "YUvWwS": {
     "defaultMessage": "Registro",
     "description": "It is used as a fallback if the component has no card type defined for it"
@@ -554,6 +558,10 @@
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
+  },
+  "loAGsF": {
+    "defaultMessage": "Variação",
+    "description": "This text is displayed in our check-in card, as a title for the left column in the progress increase section"
   },
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",

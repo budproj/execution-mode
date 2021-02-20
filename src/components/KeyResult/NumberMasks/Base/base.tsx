@@ -16,7 +16,7 @@ const Base = ({
 
   return (
     <NumberFormat
-      customInput={displayType === 'input' ? Input : undefined}
+      customInput={Input}
       allowNegative={false}
       displayType={displayType}
       defaultValue={defaultValue ?? 0}

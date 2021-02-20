@@ -150,6 +150,22 @@ describe('component expectations', () => {
 
     expect(confidenceTag.prop('difference')).toEqual(0)
   })
+
+  it('does not show the value increase section if the value increase is zero', () => {
+    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
+    sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
+
+    const fakeData = {
+      valueIncrease: 0,
+    }
+
+    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
+
+    const valueIncreaseSection = result.find('KeyResultSectionTimelineCardCheckInValueIncrease')
+
+    expect(valueIncreaseSection.length).toEqual(0)
+  })
 })
 
 describe('component interactions', () => {

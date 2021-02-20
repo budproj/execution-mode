@@ -6,6 +6,8 @@ type KeyResultsSectionTimelineCardCheckInMessage =
   | 'arrowRightDesc'
   | 'cardType'
   | 'commentTitle'
+  | 'valueIncreaseLeftColumnTitle'
+  | 'valueIncreaseRightColumnTitle'
 
 export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
   title: {
@@ -40,5 +42,19 @@ export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
     defaultMessage: 'Sobre este check-in',
     id: 'Pb0Tht',
     description: 'This text is displayed in our check-in card, above the user comment if it exists',
+  },
+
+  valueIncreaseLeftColumnTitle: {
+    defaultMessage: 'Variação',
+    id: 'loAGsF',
+    description:
+      'This text is displayed in our check-in card, as a title for the left column in the progress increase section',
+  },
+
+  valueIncreaseRightColumnTitle: {
+    defaultMessage: 'Novo valor',
+    id: 'XnTd/f',
+    description:
+      'This text is displayed in our check-in card, as a title for the right column in the progress increase section',
   },
 })
