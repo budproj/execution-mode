@@ -4,16 +4,18 @@ import {
   KeyResultSectionTimelineCardCheckIn,
   KeyResultSectionTimelineCardComment,
 } from 'src/components/KeyResult/Single/Sections/Timeline/Cards'
-import { KeyResultCheckIn, KeyResultComment } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultCheckIn, KeyResultComment } from 'src/components/KeyResult/types'
 
 export interface KeyResultSectionTimelineContentEntryProperties<E> {
   typename: string
+  keyResultID: KeyResult['id']
   data: Partial<E>
   onEntryDelete?: (entryType: string) => void
 }
 
 const KeyResultSectionTimelineContentEntry = <E extends KeyResultCheckIn | KeyResultComment>({
   typename,
+  keyResultID,
   data,
   onEntryDelete,
 }: KeyResultSectionTimelineContentEntryProperties<E>) => {
@@ -24,7 +26,7 @@ const KeyResultSectionTimelineContentEntry = <E extends KeyResultCheckIn | KeyRe
   const TypenameComponent =
     typenameComponents[typename in typenameComponents ? typename : 'KeyResultComment']
 
-  return <TypenameComponent data={data} onEntryDelete={onEntryDelete} />
+  return <TypenameComponent keyResultID={keyResultID} data={data} onEntryDelete={onEntryDelete} />
 }
 
 export default KeyResultSectionTimelineContentEntry

@@ -12,6 +12,7 @@ describe('component expectations', () => {
 
   it('passes a positive difference when previous check-in has less confidence than the new one', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
@@ -27,7 +28,9 @@ describe('component expectations', () => {
       confidence,
     }
 
-    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn keyResultID={faker.random.uuid()} data={fakeData} />,
+    )
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
@@ -36,6 +39,7 @@ describe('component expectations', () => {
 
   it('can use a parent confidence of 0', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
@@ -51,7 +55,9 @@ describe('component expectations', () => {
       confidence,
     }
 
-    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn keyResultID={faker.random.uuid()} data={fakeData} />,
+    )
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
@@ -60,6 +66,7 @@ describe('component expectations', () => {
 
   it('passes a 0 difference when previous check-in has the same confidence as this one', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
@@ -74,7 +81,9 @@ describe('component expectations', () => {
       confidence,
     }
 
-    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn keyResultID={faker.random.uuid()} data={fakeData} />,
+    )
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
@@ -83,6 +92,7 @@ describe('component expectations', () => {
 
   it('passes a negative confidence when previous check-in has a bigger confidence than this one', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
@@ -98,7 +108,9 @@ describe('component expectations', () => {
       confidence,
     }
 
-    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn keyResultID={faker.random.uuid()} data={fakeData} />,
+    )
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
@@ -107,10 +119,13 @@ describe('component expectations', () => {
 
   it('does not display the comment section there is no comment', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
-    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn keyResultID={faker.random.uuid()} />,
+    )
 
     const comment = result.find('KeyResultSectionTimelineCardCheckInComment')
 
@@ -119,6 +134,7 @@ describe('component expectations', () => {
 
   it('displays the comment section if there is a comment', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
@@ -126,7 +142,9 @@ describe('component expectations', () => {
       comment: faker.lorem.paragraph(),
     }
 
-    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn keyResultID={faker.random.uuid()} data={fakeData} />,
+    )
 
     const comment = result.find('KeyResultSectionTimelineCardCheckInComment')
 
@@ -135,6 +153,7 @@ describe('component expectations', () => {
 
   it('passes a 0 difference when previous check-in is null', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
@@ -144,7 +163,9 @@ describe('component expectations', () => {
       confidence,
     }
 
-    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn keyResultID={faker.random.uuid()} data={fakeData} />,
+    )
 
     const confidenceTag = result.find('KeyResultSectionTimelineCardCheckInRelativeConfidenceTag')
 
@@ -153,6 +174,7 @@ describe('component expectations', () => {
 
   it('does not show the value increase section if the value increase is zero', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useMutation').atLeast(1).returns([sinon.fake()])
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
@@ -160,7 +182,9 @@ describe('component expectations', () => {
       valueIncrease: 0,
     }
 
-    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn keyResultID={faker.random.uuid()} data={fakeData} />,
+    )
 
     const valueIncreaseSection = result.find('KeyResultSectionTimelineCardCheckInValueIncrease')
 
@@ -173,6 +197,7 @@ describe('component interactions', () => {
 
   it('triggers a delete action upon request', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
     const spy = sinon.spy()
@@ -184,7 +209,9 @@ describe('component interactions', () => {
       id: fakeID,
     }
 
-    const result = enzyme.shallow(<KeyResultSectionTimelineCardCheckIn data={fakeData} />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimelineCardCheckIn keyResultID={faker.random.uuid()} data={fakeData} />,
+    )
 
     const base = result.find('KeyResultSectionTimelineCardBase')
     base.simulate('delete')
@@ -200,6 +227,7 @@ describe('component interactions', () => {
 
   it('triggers the onEntryDelete prop on delete action', async () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
+    sinon.mock(recoil).expects('useRecoilValue').atLeast(1)
     sinon.mock(apollo).expects('useLazyQuery').atLeast(1).returns([sinon.fake()])
 
     const spy = sinon.spy()
@@ -212,7 +240,11 @@ describe('component interactions', () => {
     }
 
     const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckIn data={fakeData} onEntryDelete={spy} />,
+      <KeyResultSectionTimelineCardCheckIn
+        keyResultID={faker.random.uuid()}
+        data={fakeData}
+        onEntryDelete={spy}
+      />,
     )
 
     const base = result.find('KeyResultSectionTimelineCardBase')

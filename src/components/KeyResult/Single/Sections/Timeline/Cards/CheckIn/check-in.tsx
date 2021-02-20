@@ -2,10 +2,11 @@ import { useLazyQuery, useMutation } from '@apollo/client'
 import { Box, Stat, Flex, StatLabel } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
+import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
 
@@ -19,7 +20,7 @@ import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative
 import KeyResultSectionTimelineCardCheckInValueIncrease from './value-increase'
 
 export interface KeyResultSectionTimelineCardCheckInProperties {
-  format?: KeyResult['format']
+  keyResultID: KeyResult['id']
   data?: Partial<KeyResultCheckIn>
   onEntryDelete?: (entryType: string) => void
 }
@@ -29,11 +30,12 @@ export interface GetKeyResultWithLatestCheckInQuery {
 }
 
 const KeyResultSectionTimelineCardCheckIn = ({
-  format,
+  keyResultID,
   data,
   onEntryDelete,
 }: KeyResultSectionTimelineCardCheckInProperties) => {
   const intl = useIntl()
+  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const removeEntryFromTimeline = useSetRecoilState(removeTimelineEntry(data?.keyResultId))
   const setLatestCheckIn = useSetRecoilState(selectLatestCheckIn(data?.keyResultId))
   const [getKeyResultWithLatestCheckIn] = useLazyQuery<GetKeyResultWithLatestCheckInQuery>(
@@ -104,7 +106,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
 
           {data?.valueIncrease !== 0 && (
             <KeyResultSectionTimelineCardCheckInValueIncrease
-              format={format}
+              format={keyResult?.format}
               value={data?.value}
               valueIncrease={data?.valueIncrease}
             />

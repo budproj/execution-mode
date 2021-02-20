@@ -63,6 +63,7 @@ const KeyResultSectionTimelineContent = ({
         {timeline.map((entry) => (
           <KeyResultSectionTimelineContentEntry
             key={entry.id}
+            keyResultID={keyResultID}
             typename={entry.__typename}
             data={entry}
             onEntryDelete={onEntryDelete}
