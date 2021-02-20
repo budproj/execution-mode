@@ -18,7 +18,7 @@ describe('custom properties', () => {
     const result = enzyme.shallow(<CompanyProgressOverviewHeader />)
 
     const heading = result.find('Heading')
-    const expectedText = `Como vai o desempenho do ${fakeName} como um todo?`
+    const expectedText = `Como vai o desempenho do ${fakeName} nesse trimestre?`
 
     expect(heading.text()).toEqual(expectedText)
   })
@@ -33,7 +33,7 @@ describe('custom properties', () => {
     const result = enzyme.shallow(<CompanyProgressOverviewHeader />)
 
     const heading = result.find('Heading')
-    const expectedText = `Como vai o desempenho do ${fakeName} como um todo?`
+    const expectedText = `Como vai o desempenho do ${fakeName} nesse trimestre?`
 
     expect(heading.text()).toEqual(expectedText)
   })
@@ -49,7 +49,7 @@ describe('custom properties', () => {
     const result = enzyme.shallow(<CompanyProgressOverviewHeader />)
 
     const heading = result.find('Heading')
-    const expectedText = `Como vai o desempenho da ${fakeName} como um todo?`
+    const expectedText = `Como vai o desempenho da ${fakeName} nesse trimestre?`
 
     expect(heading.text()).toEqual(expectedText)
   })

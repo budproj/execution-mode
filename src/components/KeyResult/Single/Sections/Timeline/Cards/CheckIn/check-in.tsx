@@ -102,11 +102,13 @@ const KeyResultSectionTimelineCardCheckIn = ({
             parent={data?.parent}
           />
 
-          <KeyResultSectionTimelineCardCheckInValueIncrease
-            format={format}
-            value={data?.value}
-            valueIncrease={data?.valueIncrease}
-          />
+          {data?.valueIncrease !== 0 && (
+            <KeyResultSectionTimelineCardCheckInValueIncrease
+              format={format}
+              value={data?.value}
+              valueIncrease={data?.valueIncrease}
+            />
+          )}
 
           {data?.comment && <KeyResultSectionTimelineCardCheckInComment comment={data.comment} />}
         </Flex>

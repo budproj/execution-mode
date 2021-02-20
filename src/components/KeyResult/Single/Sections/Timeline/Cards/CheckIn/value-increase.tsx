@@ -1,12 +1,11 @@
-import { Box, Divider, Flex, Heading, Text } from '@chakra-ui/react'
+import { Box, Divider, Flex, Heading, Text, Skeleton } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
-import { SIGNAL } from 'src/components/Report/CompanyProgressOverview/Body/Stamps/ProgressIncrease/constants'
 import useValueSignal from 'src/state/hooks/useValueSignal'
-import { COLOR_SCHEME_HASHMAP } from 'src/state/hooks/useValueSignal/constants'
+import { COLOR_SCHEME_HASHMAP, SIGNAL } from 'src/state/hooks/useValueSignal/constants'
 import { ColorScheme } from 'src/themes/tokens'
 
 import { BORDER_COLOR } from './constants'
@@ -29,15 +28,19 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
   valueIncrease,
 }: KeyResultSectionTimelineCardCheckInValueIncreaseProperties) => {
   const intl = useIntl()
-  const [previousValue, setValue, signalAttributes] = useValueSignal(value, customColorScheme)
+  const [previousValueIncrease, setValueIncrease, signalAttributes] = useValueSignal(
+    valueIncrease,
+    customColorScheme,
+  )
 
   const Mask = selectMaskBasedOnFormat(format)
-  const absoluteValue = Math.abs(value ?? 0)
+  const absoluteValueIncrease = Math.abs(valueIncrease ?? 0)
   const highlightColor = `${signalAttributes.colorScheme}.500`
+  const isLoaded = Boolean(valueIncrease) || valueIncrease === 0
 
   useEffect(() => {
-    if (value && value !== previousValue) setValue(value)
-  }, [previousValue, value, setValue])
+    if (valueIncrease && valueIncrease !== previousValueIncrease) setValueIncrease(valueIncrease)
+  }, [previousValueIncrease, valueIncrease, setValueIncrease])
 
   return (
     <Box>
@@ -48,10 +51,12 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
             {intl.formatMessage(messages.valueIncreaseLeftColumnTitle)}
           </Heading>
 
-          <Text color={highlightColor} fontSize="xl">
-            {signalAttributes.indicator}
-            <Mask value={absoluteValue} displayType="text" />
-          </Text>
+          <Skeleton isLoaded={isLoaded}>
+            <Text color={highlightColor} fontSize="xl">
+              {signalAttributes.indicator}
+              <Mask value={absoluteValueIncrease} displayType="text" />
+            </Text>
+          </Skeleton>
         </Flex>
 
         <Box py={1}>
@@ -63,9 +68,11 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
             {intl.formatMessage(messages.valueIncreaseRightColumnTitle)}
           </Heading>
 
-          <Text color="gray.500" fontSize="xl">
-            <Mask value={valueIncrease} displayType="text" />
-          </Text>
+          <Skeleton isLoaded={isLoaded}>
+            <Text color="gray.500" fontSize="xl">
+              <Mask value={value} displayType="text" />
+            </Text>
+          </Skeleton>
         </Flex>
       </Flex>
     </Box>
