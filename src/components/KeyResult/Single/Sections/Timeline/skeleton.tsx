@@ -1,3 +1,4 @@
+import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
 import { KeyResultSectionTimelineCardCheckIn, KeyResultSectionTimelineCardComment } from './Cards'
@@ -13,7 +14,7 @@ const KeyResultSectionTimelineSkeleton = () => {
   return (
     <>
       {skeleton.map((Component) => (
-        <Component key={Math.random()} />
+        <Component key={Math.random()} keyResultID={uniqueId()} />
       ))}
     </>
   )
