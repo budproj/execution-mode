@@ -2,6 +2,7 @@ mutation CREATE_KEY_RESULT_CHECK_IN($keyResultCheckInInput: KeyResultCheckInInpu
   createKeyResultCheckIn(keyResultCheckIn: $keyResultCheckInInput) {
     id
     value
+    valueIncrease
     confidence
     progress
     comment
