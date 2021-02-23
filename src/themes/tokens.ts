@@ -1,7 +1,7 @@
 type ColorHexCode = string
 type FontName = string
 
-export enum ColorScheme {
+export enum COLOR_SCHEME {
   BRAND = 'brand',
   GRAY = 'gray',
   UNIQUE_GRAY = 'uniqueGray',
@@ -15,16 +15,16 @@ export enum ColorScheme {
 }
 
 type ColorToken =
-  | `${ColorScheme}50`
-  | `${ColorScheme}100`
-  | `${ColorScheme}200`
-  | `${ColorScheme}300`
-  | `${ColorScheme}400`
-  | `${ColorScheme}500`
-  | `${ColorScheme}600`
-  | `${ColorScheme}700`
-  | `${ColorScheme}800`
-  | `${ColorScheme}900`
+  | `${COLOR_SCHEME}50`
+  | `${COLOR_SCHEME}100`
+  | `${COLOR_SCHEME}200`
+  | `${COLOR_SCHEME}300`
+  | `${COLOR_SCHEME}400`
+  | `${COLOR_SCHEME}500`
+  | `${COLOR_SCHEME}600`
+  | `${COLOR_SCHEME}700`
+  | `${COLOR_SCHEME}800`
+  | `${COLOR_SCHEME}900`
 
 type ColorTokens = Record<ColorToken, ColorHexCode>
 

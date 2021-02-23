@@ -35,7 +35,7 @@ const UnderMaintenanceErrorPage = () => {
           <Heading as="h1" fontSize="4xl" color="gray.900">
             {intl.formatMessage(messages.title)}
           </Heading>
-          <Text fontSize="xl" color="uniqueGray.200">
+          <Text fontSize="xl" color="uniqueGray.300">
             {intl.formatMessage(messages.description, {
               date: intl.formatDate(expectedReturnDate, dateFormatOptions),
               hour: intl.formatDate(expectedReturnDate, hourFormatOptions),

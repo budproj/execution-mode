@@ -44,20 +44,6 @@ describe('component expectations', () => {
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
 
-  it('triggers the onClose prop when we use the CheckInForm cancel event', () => {
-    const spy = sinon.spy()
-
-    sinon.stub(recoil, 'useSetRecoilState')
-    sinon.stub(recoil, 'useRecoilState').returns([] as any)
-
-    const result = enzyme.shallow(<ProgressSliderPopover onClose={spy} />)
-
-    const checkInForm = result.find('CheckInForm')
-    checkInForm.simulate('cancel')
-
-    expect(spy.called).toEqual(true)
-  })
-
   it('stops propagates upon mouse down events', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
     sinon

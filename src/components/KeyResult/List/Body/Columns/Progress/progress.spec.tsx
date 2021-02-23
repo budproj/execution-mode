@@ -36,6 +36,6 @@ describe('component expectations', () => {
 
     const number = wrapper.find('Absolute').first().dive().dive().dive()
 
-    expect(number.prop('color')).toEqual('gray.300')
+    expect(number.prop('color')).toEqual('uniqueGray.300')
   })
 })

@@ -1,6 +1,6 @@
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 
-export const BORDER_COLOR_DEFAULT = 'gray.100'
+export const BORDER_COLOR_DEFAULT = 'gray.300'
 export const GRID_TEMPLATE_COLUMNS =
   'minmax(0, 6fr) minmax(0, 4fr) minmax(0, 3fr) minmax(0, 4fr) minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr)'
 export const GRID_COLUMN_GAP = 6

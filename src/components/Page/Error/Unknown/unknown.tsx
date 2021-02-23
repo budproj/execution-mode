@@ -27,11 +27,11 @@ const UnknownErrorPage = () => {
             {intl.formatMessage(messages.title)}
           </Heading>
 
-          <Text as="h2" fontSize="xl" color="uniqueGray.200" fontWeight={700}>
+          <Text as="h2" fontSize="xl" color="uniqueGray.300" fontWeight={700}>
             {intl.formatMessage(messages.subtitle)}
           </Text>
 
-          <Text fontSize="xl" color="uniqueGray.200">
+          <Text fontSize="xl" color="uniqueGray.300">
             {intl.formatMessage(messages.description)}
           </Text>
 

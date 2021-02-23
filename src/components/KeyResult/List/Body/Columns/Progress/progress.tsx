@@ -70,7 +70,9 @@ const KeyResultListBodyColumnProgress = ({
               value={draftValue}
               displayType="text"
               renderText={(value) => (
-                <Text color={isSlidding ? confidenceTag.color.primary : 'gray.300'}>{value}</Text>
+                <Text color={isSlidding ? confidenceTag.color.primary : 'uniqueGray.300'}>
+                  {value}
+                </Text>
               )}
             />
           </Skeleton>
@@ -87,7 +89,7 @@ const KeyResultListBodyColumnProgress = ({
               value={goal}
               displayType="text"
               renderText={(value) => (
-                <Text color="gray.300" textAlign="right">
+                <Text color="uniqueGray.300" textAlign="right">
                   {value}
                 </Text>
               )}

@@ -24,11 +24,11 @@ const NotFoundErrorPage = () => {
             {intl.formatMessage(messages.title)}
           </Heading>
 
-          <Text as="h2" fontSize="xl" color="uniqueGray.200">
+          <Text as="h2" fontSize="xl" color="uniqueGray.300">
             {intl.formatMessage(messages.description)}
           </Text>
 
-          <Text fontSize="xl" fontWeight={700} color="uniqueGray.200">
+          <Text fontSize="xl" fontWeight={700} color="uniqueGray.300">
             {intl.formatMessage(messages.callToAction)}
           </Text>
 

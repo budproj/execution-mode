@@ -48,19 +48,19 @@ const KeyResultSectionTimelineCardBaseOptions = ({
         <MenuButton>
           <TreeDotsIcon
             desc={intl.formatMessage(messages.treeDotsIconDesc)}
-            fill="gray.300"
+            fill="uniqueGray.300"
             w={4}
             h="auto"
           />
         </MenuButton>
         <MenuList>
           <Button
-            color="gray.600"
+            color="uniqueGray.400"
             p={2}
             w="100%"
             justifyContent="flex-start"
             variant="none"
-            _hover={{ bg: 'blue.50', color: 'blue.600' }}
+            _hover={{ bg: 'gray.100' }}
             onClick={handleOpenDeleteConfirmationModal}
           >
             {intl.formatMessage(messages.removeMenuOption)}
