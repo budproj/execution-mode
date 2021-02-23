@@ -65,7 +65,7 @@ const KeyResultListBodyStaticLine = ({
       borderBottomColor={borderColor}
       borderStyle="solid"
       cursor={onLineClick ? 'pointer' : 'auto'}
-      _hover={onLineClick ? { background: 'blue.50' } : {}}
+      _hover={onLineClick ? { background: 'gray.50' } : {}}
       onMouseDown={handleLineClick}
     >
       {columns.map((column) => {
