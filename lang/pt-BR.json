@@ -531,6 +531,14 @@
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
   },
+  "ilU+Uz": {
+    "defaultMessage": "Meu perfil",
+    "description": "The page title that our users should see in the my profile page"
+  },
+  "jp5RLv": {
+    "defaultMessage": "Altere seu perfil",
+    "description": "The page description that is displayed in Google and screen readers for the my profile page"
+  },
   "jvxLB+": {
     "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
@@ -666,6 +674,10 @@
   "vJ/603": {
     "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
     "description": "The description displayed in our not found error page"
+  },
+  "vm0Yuj": {
+    "defaultMessage": "Meu perfil | bud",
+    "description": "The page title that is displayed in the browser tab for the my profile page"
   },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",

@@ -7,6 +7,8 @@ import { HELPDESK_URL } from 'src/components/Base/SupportButton/constants'
 import { Me } from 'src/components/User'
 import UserLogout from 'src/components/User/Logout'
 
+import IntlLink from '../../IntlLink'
+
 import messages from './messages'
 
 const UserMenuButton = (properties: ButtonProps) => (
@@ -31,7 +33,9 @@ const UserMenu = () => {
       </MenuButton>
       <MenuList p={0} w="xs">
         <Box p={2}>
-          <UserMenuButton>{intl.formatMessage(messages.firstOption)}</UserMenuButton>
+          <UserMenuButton>
+            <IntlLink href="/my-profile">{intl.formatMessage(messages.firstOption)}</IntlLink>
+          </UserMenuButton>
           <UserMenuButton>
             <Link href={HELPDESK_URL}>
               <a target="_blank">{intl.formatMessage(messages.secondOption)}</a>
