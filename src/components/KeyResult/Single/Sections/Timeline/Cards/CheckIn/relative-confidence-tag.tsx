@@ -24,7 +24,7 @@ const KeyResultSectionTimelineCardCheckInRelativeConfidenceTag = ({
   return (
     <Flex alignItems="center" gridGap={2}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 33)}>
-        <ConfidenceTag confidenceValue={confidence} isGrayscale={difference === 0} />
+        <ConfidenceTag confidenceValue={confidence} />
       </Skeleton>
 
       {/* eslint-disable-next-line unicorn/no-null */}
