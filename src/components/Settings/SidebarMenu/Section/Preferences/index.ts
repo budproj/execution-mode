@@ -1,0 +1,3 @@
+import SettingsSidebarMenuSectionPreferences from './preferences'
+
+export default SettingsSidebarMenuSectionPreferences

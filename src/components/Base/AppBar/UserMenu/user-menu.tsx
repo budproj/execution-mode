@@ -1,6 +1,6 @@
 import { Menu, MenuButton, MenuList, Button, ButtonProps, Divider, Box } from '@chakra-ui/react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { HELPDESK_URL } from 'src/components/Base/SupportButton/constants'
@@ -25,16 +25,29 @@ const UserMenuButton = (properties: ButtonProps) => (
 
 const UserMenu = () => {
   const intl = useIntl()
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleOpen = () => {
+    setIsOpen(true)
+  }
+
+  const handleClose = () => {
+    setIsOpen(false)
+  }
+
+  const handleClickCapture = () => {
+    handleClose()
+  }
 
   return (
-    <Menu>
-      <MenuButton>
+    <Menu isOpen={isOpen} onClose={handleClose}>
+      <MenuButton onClick={handleOpen}>
         <Me />
       </MenuButton>
       <MenuList p={0} w="xs">
         <Box p={2}>
-          <UserMenuButton>
-            <IntlLink href="/my-profile">{intl.formatMessage(messages.firstOption)}</IntlLink>
+          <UserMenuButton onClickCapture={handleClickCapture}>
+            <IntlLink href="/settings">{intl.formatMessage(messages.firstOption)}</IntlLink>
           </UserMenuButton>
           <UserMenuButton>
             <Link href={HELPDESK_URL}>

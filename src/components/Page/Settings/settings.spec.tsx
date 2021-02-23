@@ -5,7 +5,7 @@ import * as recoil from 'recoil'
 import sinon from 'sinon'
 
 import messages from './messages'
-import MyProfilePage from './my-profile'
+import SettingsPage from './settings'
 
 describe('component lifecycle', () => {
   afterEach(() => sinon.restore())
@@ -15,7 +15,7 @@ describe('component lifecycle', () => {
     const intl = useIntl()
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
 
-    enzyme.shallow(<MyProfilePage />)
+    enzyme.shallow(<SettingsPage />)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(intl.formatMessage(messages.pageTitle))
 
@@ -25,7 +25,7 @@ describe('component lifecycle', () => {
   it('hides the Breadcrumb if that is the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<MyProfilePage isRootPage />)
+    const result = enzyme.shallow(<SettingsPage isRootPage />)
 
     const pageContent = result.find('PageContent')
 
@@ -35,7 +35,7 @@ describe('component lifecycle', () => {
   it('hides the Breadcrumb if that is not the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<MyProfilePage isRootPage={false} />)
+    const result = enzyme.shallow(<SettingsPage isRootPage={false} />)
 
     const pageContent = result.find('PageContent')
 
@@ -45,7 +45,7 @@ describe('component lifecycle', () => {
   it('hides the Breadcrumb by default', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
 
-    const result = enzyme.shallow(<MyProfilePage />)
+    const result = enzyme.shallow(<SettingsPage />)
 
     const pageContent = result.find('PageContent')
 

@@ -25,7 +25,7 @@ const AppBar = ({ variant }: AppBarProperties): ReactElement => {
       py={4}
       borderBottom={1}
       gridGap={10}
-      borderColor="black.100"
+      borderColor="black.200"
       borderStyle="solid"
       alignItems="center"
       justifyContent="center"

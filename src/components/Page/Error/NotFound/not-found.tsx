@@ -17,7 +17,7 @@ const NotFoundErrorPage = () => {
 
       <Flex direction="column" alignItems="center" gridGap="xl">
         <Box>
-          <Image src="/images/ghost-drawing.png" alt={intl.formatMessage(messages.imageAlt)} />
+          <Image src="/images/ghost-drawing-md.png" alt={intl.formatMessage(messages.imageAlt)} />
         </Box>
         <Flex direction="column" maxWidth="xl" textAlign="center" gridGap={5}>
           <Heading as="h1" fontSize="4xl" color="black.900">

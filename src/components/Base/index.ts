@@ -57,3 +57,5 @@ export { default as ExpandableText } from './ExpandableText'
 export { default as ConfirmationModal } from './ConfirmationModal'
 
 export { default as Alert } from './Alert'
+
+export { default as ButtonActivableByURL } from './ButtonActivableByURL'
