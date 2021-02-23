@@ -18,8 +18,8 @@ const SupportButton = () => {
       aria-label={intl.formatMessage(messages.iconDesc)}
       icon={
         <InfoCircleIcon
-          fill="gray.600"
-          stroke="gray.600"
+          fill="uniqueGray.300"
+          stroke="uniqueGray.300"
           fontSize="2xl"
           title={intl.formatMessage(messages.iconTitle)}
           desc={intl.formatMessage(messages.iconDesc)}

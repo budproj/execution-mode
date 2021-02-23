@@ -7,6 +7,7 @@ import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import CompanyProgressOverviewBodyStampBase from 'src/components/Report/CompanyProgressOverview/Body/Stamps/Base'
 import { Team } from 'src/components/Team/types'
 import useValueSignal from 'src/state/hooks/useValueSignal'
+import { SIGNAL } from 'src/state/hooks/useValueSignal/constants'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { ICON_COMPONENT_HASHMAP, ICON_DESC_HASHMAP } from './constants'
@@ -44,8 +45,8 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
           stroke={`${signalAttributes.colorScheme}.500`}
         />
       }
-      iconVariant="outlined"
-      iconBorderColor={`${signalAttributes.colorScheme}.200`}
+      iconBorderColor={`${signalAttributes.colorScheme}.100`}
+      iconBgColor={signalAttributes.signal === SIGNAL.NEGATIVE ? 'red.50' : 'transparent'}
     >
       <Skeleton isLoaded={!isLoading} {...buildSkeletonMinSize(!isLoading, 150, 21)}>
         <Heading as="h3" fontSize="md" fontWeight={500}>
@@ -61,7 +62,7 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
         </Heading>
       </Skeleton>
 
-      <Text fontSize="xs" fontWeight={500} color="gray.400">
+      <Text fontSize="xs" fontWeight={500} color="uniqueGray.100">
         {intl.formatMessage(messages.descriptionText)}
       </Text>
     </CompanyProgressOverviewBodyStampBase>

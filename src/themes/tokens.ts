@@ -4,6 +4,7 @@ type FontName = string
 export enum ColorScheme {
   BRAND = 'brand',
   GRAY = 'gray',
+  UNIQUE_GRAY = 'uniqueGray',
   BLACK = 'black',
   GREEN = 'green',
   BLUE = 'blue',
@@ -55,6 +56,17 @@ const colors: ColorTokens = {
   gray700: '#5C636A',
   gray800: '#2E3135',
   gray900: '#121415',
+
+  uniqueGray50: '#F3F5FA',
+  uniqueGray100: '#A3B0C3',
+  uniqueGray200: '#A2B3CE',
+  uniqueGray300: '#8193AB',
+  uniqueGray400: '#525F7F',
+  uniqueGray500: '#30313F',
+  uniqueGray600: '#000000',
+  uniqueGray700: '#000000',
+  uniqueGray800: '#000000',
+  uniqueGray900: '#000000',
 
   black50: '#EBECED',
   black100: '#D7D7DA',

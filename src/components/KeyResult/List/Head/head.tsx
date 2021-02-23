@@ -53,7 +53,7 @@ const KeyResultListHead = ({
             key={`KEY_RESULT_LIST_HEAD_COLUMN_${column}`}
             justifySelf={columnProperties?.justifySelf}
           >
-            <Text hidden={columnProperties?.hidden}>
+            <Text hidden={columnProperties?.hidden} color="gray.200">
               {intl.formatMessage(columnMessages[column])}
             </Text>
           </GridItem>

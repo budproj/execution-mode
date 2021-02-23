@@ -31,7 +31,14 @@ const CompanyProgressOverviewBodyStampCompany = ({
 
   return (
     <CompanyProgressOverviewBodyStampBase
-      icon={<CrownIcon desc={intl.formatMessage(messages.crownIconDesc)} fontSize="4xl" />}
+      icon={
+        <CrownIcon
+          desc={intl.formatMessage(messages.crownIconDesc)}
+          fontSize="4xl"
+          fill="yellow.500"
+        />
+      }
+      iconBgColor="gray.50"
     >
       <Skeleton
         isLoaded={!isLoading}
@@ -47,7 +54,7 @@ const CompanyProgressOverviewBodyStampCompany = ({
         <LastUpdateText
           date={checkInDate}
           author={latestKeyResultCheckIn?.user?.fullName}
-          color="gray.400"
+          color="uniqueGray.100"
           fontWeight={500}
           fontSize="xs"
         />

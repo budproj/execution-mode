@@ -1,43 +1,42 @@
 import { Flex, FlexProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-export type StampIconVariant = 'outlined' | 'contained'
-
 export interface CompanyProgressOverviewBodyStampBaseProperties {
   icon: ReactElement
   children: ReactElement | ReactElement[]
   iconBorderColor?: FlexProps['borderColor']
-  iconVariant?: StampIconVariant
+  iconBgColor?: FlexProps['bg']
 }
 
 const CompanyProgressOverviewBodyStampBase = ({
   icon,
   children,
   iconBorderColor,
-  iconVariant,
+  iconBgColor,
 }: CompanyProgressOverviewBodyStampBaseProperties) => (
   <Flex gridGap={4} alignItems="center">
     <Flex
       borderRadius="full"
-      bg={iconVariant === 'contained' ? 'gray.50' : 'transparent'}
       w={20}
       h={20}
       alignItems="center"
       justifyContent="center"
+      bg={iconBgColor}
       borderColor={iconBorderColor}
-      borderWidth={iconVariant === 'outlined' ? 2 : 0}
+      borderWidth={2}
     >
       {icon}
     </Flex>
 
-    <Flex direction="column" gridGap={2}>
+    <Flex direction="column" gridGap={2} color="gray.900">
       {children}
     </Flex>
   </Flex>
 )
 
 CompanyProgressOverviewBodyStampBase.defaultProps = {
-  iconVariant: 'contained',
+  iconBgColor: 'transparent',
+  iconBorderColor: 'transparent',
 }
 
 export default CompanyProgressOverviewBodyStampBase

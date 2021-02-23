@@ -21,5 +21,5 @@ export const INDICATOR_HASHMAP = {
 export const COLOR_SCHEME_HASHMAP = {
   [SIGNAL.POSITIVE]: ColorScheme.GREEN,
   [SIGNAL.NEGATIVE]: ColorScheme.RED,
-  [SIGNAL.NEUTRAL]: ColorScheme.GRAY,
+  [SIGNAL.NEUTRAL]: ColorScheme.UNIQUE_GRAY,
 }

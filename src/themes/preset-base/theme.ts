@@ -42,6 +42,19 @@ const colors = {
     900: tokens.colors.gray900,
   },
 
+  uniqueGray: {
+    50: tokens.colors.uniqueGray50,
+    100: tokens.colors.uniqueGray100,
+    200: tokens.colors.uniqueGray200,
+    300: tokens.colors.uniqueGray300,
+    400: tokens.colors.uniqueGray400,
+    500: tokens.colors.uniqueGray500,
+    600: tokens.colors.uniqueGray600,
+    700: tokens.colors.uniqueGray700,
+    800: tokens.colors.uniqueGray800,
+    900: tokens.colors.uniqueGray900,
+  },
+
   black: {
     50: tokens.colors.black50,
     100: tokens.colors.black100,
