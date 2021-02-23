@@ -461,11 +461,46 @@ enum KEY_RESULT_CUSTOM_LIST_BINDING {
 }
 
 type Mutation {
+  updateUser(userData: UserDataInput!, userID: ID!): User!
   updateKeyResultCustomList(keyResultCustomListInput: KeyResultCustomListInput!, id: ID!): KeyResultCustomList!
   createKeyResultCheckIn(keyResultCheckIn: KeyResultCheckInInput!): KeyResultCheckIn!
   deleteKeyResultCheckIn(id: ID!): KeyResultCheckInDeleteResult!
   createKeyResultComment(keyResultComment: KeyResultCommentInput!): KeyResultComment!
   deleteKeyResultComment(id: ID!): KeyResultCommentDeleteResult!
+}
+
+"""Data that you can assign to a given user"""
+input UserDataInput {
+  """The first name of the user"""
+  firstName: String
+
+  """The last name of the user"""
+  lastName: String
+
+  """
+  The gender of the user. The gender is used to define how we would call that given user
+  """
+  gender: USER_GENDER
+
+  """The role of the user in her/his company"""
+  role: String
+
+  """The custom nickname that user wants to be called"""
+  nickname: String
+
+  """
+  A description for that user. A more detailed information where the user tells about her/himself
+  """
+  about: String
+
+  """The URL for the user's LinkedIn profile"""
+  linkedInProfileAddress: String
+}
+
+"""Each gender represents a possible gender option for our users"""
+enum USER_GENDER {
+  MALE
+  FEMALE
 }
 
 """Required data to update a given key result custom list"""
