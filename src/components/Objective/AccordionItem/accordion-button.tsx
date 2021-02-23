@@ -35,9 +35,9 @@ const ObjectiveAccordionButton = ({
   const roundedProgress = Math.round(objective?.status?.progress ?? 0)
 
   return (
-    <AccordionButton gridGap={4} _hover={{}}>
+    <AccordionButton gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded ?? true, 300, 24)}>
-        <Heading as="h4" fontSize="xl" fontWeight={500} textAlign="left">
+        <Heading as="h4" fontSize="xl" fontWeight={500} textAlign="left" color="gray.900">
           {objective?.title}
         </Heading>
       </Skeleton>
@@ -57,10 +57,12 @@ const ObjectiveAccordionButton = ({
         <CalendarOutlineIcon
           title={intl.formatMessage(messages.calendarIconTitle)}
           desc={intl.formatMessage(messages.calendarIconDesc)}
-          fill="gray.400"
+          fill="uniqueGray.300"
           mt="-2px"
         />
-        <Text color="gray.400">{intl.formatDate(objective?.cycle?.dateEnd ?? new Date())}</Text>
+        <Text color="uniqueGray.300">
+          {intl.formatDate(objective?.cycle?.dateEnd ?? new Date())}
+        </Text>
       </Skeleton>
 
       <Flex flexGrow={1} justifyContent="flex-end">
