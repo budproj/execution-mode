@@ -11,8 +11,7 @@ import messages from './messages'
 
 const UserMenuButton = (properties: ButtonProps) => (
   <Button
-    colorScheme="uniqueGray"
-    color="uniqueGray.400"
+    colorScheme="gray"
     p={2}
     fontWeight={400}
     w="100%"
