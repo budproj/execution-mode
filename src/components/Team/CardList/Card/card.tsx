@@ -47,16 +47,19 @@ const TeamCard = ({ id }: TeamCardProperties) => {
                   desc={intl.formatMessage(messages.crownIconDesc)}
                   w={10}
                   h="auto"
+                  fill="yellow.500"
                 />
               )}
             </Box>
             <Skeleton isLoaded={isLoaded} mt={2} {...buildSkeletonMinSize(isLoaded, 200, 40)}>
-              <Heading size="lg">{team?.name}</Heading>
+              <Heading size="lg" color="gray.900">
+                {team?.name}
+              </Heading>
             </Skeleton>
           </Flex>
 
           <SkeletonText isLoaded={isLoaded} noOfLines={3} spacing="4">
-            <Text color="gray.400" noOfLines={3}>
+            <Text color="uniqueGray.400" noOfLines={3}>
               {team?.description}
             </Text>
           </SkeletonText>
@@ -65,6 +68,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
               trackThickness={3}
               value={team?.status?.progress}
               trackColor={confidenceTag.color.primary}
+              trackBg="gray.200"
             />
           </Skeleton>
           <Box pt={12}>

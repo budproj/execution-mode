@@ -42,7 +42,7 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
         </Skeleton>
 
         <Skeleton isLoaded={isLoaded}>
-          <Text color="gray.300">
+          <Text color="gray.600">
             {intl.formatNumber(Math.round(progress) / 100, { style: 'percent' })}
           </Text>
         </Skeleton>

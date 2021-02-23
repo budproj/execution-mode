@@ -10,9 +10,15 @@ export interface ExpandableTextProperties {
   text: string
   fontSize: TextProps['fontSize']
   maxCollapsedLength: number
+  color: TextProps['color']
 }
 
-const ExpandableText = ({ text, fontSize, maxCollapsedLength }: ExpandableTextProperties) => {
+const ExpandableText = ({
+  text,
+  fontSize,
+  maxCollapsedLength,
+  color,
+}: ExpandableTextProperties) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const intl = useIntl()
 
@@ -34,6 +40,7 @@ const ExpandableText = ({ text, fontSize, maxCollapsedLength }: ExpandableTextPr
         <Text
           key={uuidv5(paragraph, uuidv5.URL)}
           fontSize={fontSize}
+          color={color}
           _empty={{
             height: 4,
           }}
@@ -42,13 +49,7 @@ const ExpandableText = ({ text, fontSize, maxCollapsedLength }: ExpandableTextPr
         </Text>
       ))}
       {isTruncatedText && (
-        <Button
-          p={0}
-          color="blue.500"
-          fontWeight={400}
-          _hover={{ color: 'blue.300' }}
-          onClick={toggleExpanded}
-        >
+        <Button p={0} colorScheme="brand" fontWeight={400} onClick={toggleExpanded}>
           {intl.formatMessage(messages[isExpanded ? 'collapseButton' : 'expandButton'])}
         </Button>
       )}
@@ -59,6 +60,7 @@ const ExpandableText = ({ text, fontSize, maxCollapsedLength }: ExpandableTextPr
 ExpandableText.defaultProps = {
   maxCollapsedLength: MAX_CHAR_LENGTH,
   fontSize: 'md',
+  color: 'gray.900',
 }
 
 export default ExpandableText

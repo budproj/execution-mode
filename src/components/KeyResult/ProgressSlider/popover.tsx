@@ -23,7 +23,7 @@ const handleMouseDownCapture = (event: React.MouseEvent<HTMLElement, MouseEvent>
   event.stopPropagation()
 }
 
-const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentProperties) => {
+const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties) => {
   const intl = useIntl()
   const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const setPopoverOpen = useSetRecoilState<boolean>(keyResultCheckInPopoverOpen(keyResultID))
@@ -34,12 +34,12 @@ const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentPr
   }
 
   return (
-    <PopoverContent width={400} p={6} cursor="auto" onMouseDownCapture={handleMouseDownCapture}>
+    <PopoverContent width="sm" p={6} cursor="auto" onMouseDownCapture={handleMouseDownCapture}>
       <PopoverHeader
         border="none"
         fontSize="md"
         fontWeight={700}
-        color="gray.600"
+        color="uniqueGray.400"
         px={0}
         pt={0}
         pb={6}
@@ -50,7 +50,7 @@ const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentPr
         size="md"
         top="1rem"
         right="1.5rem"
-        color="gray.200"
+        color="uniqueGray.200"
         _hover={{ bg: 'transparent', color: 'brand.400' }}
       >
         <CloseIcon
@@ -59,12 +59,7 @@ const ProgressSliderPopover = ({ keyResultID, onClose }: ProgressSliderContentPr
           fill="currentColor"
         />
       </PopoverCloseButton>
-      <CheckInForm
-        keyResultID={keyResultID}
-        afterSubmit={handleSubmit}
-        valueNew={draftValue}
-        onCancel={onClose}
-      />
+      <CheckInForm keyResultID={keyResultID} afterSubmit={handleSubmit} valueNew={draftValue} />
     </PopoverContent>
   )
 }

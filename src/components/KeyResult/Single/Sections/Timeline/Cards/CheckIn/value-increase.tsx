@@ -6,7 +6,7 @@ import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/se
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import useValueSignal from 'src/state/hooks/useValueSignal'
 import { COLOR_SCHEME_HASHMAP, SIGNAL } from 'src/state/hooks/useValueSignal/constants'
-import { ColorScheme } from 'src/themes/tokens'
+import { COLOR_SCHEME } from 'src/themes/tokens'
 
 import { BORDER_COLOR } from './constants'
 import messages from './messages'
@@ -19,7 +19,7 @@ export interface KeyResultSectionTimelineCardCheckInValueIncreaseProperties {
 
 const customColorScheme: typeof COLOR_SCHEME_HASHMAP = {
   ...COLOR_SCHEME_HASHMAP,
-  [SIGNAL.POSITIVE]: ColorScheme.BRAND,
+  [SIGNAL.POSITIVE]: COLOR_SCHEME.BRAND,
 }
 
 const KeyResultSectionTimelineCardCheckInValueIncrease = ({
@@ -47,7 +47,7 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
       <Divider borderColor={BORDER_COLOR} />
       <Flex borderColor={BORDER_COLOR} pt={4} gridGap={4}>
         <Flex gridGap={1} direction="column" grow={1}>
-          <Heading as="h4" fontWeight={400} fontSize="sm" color="gray.400">
+          <Heading as="h4" fontWeight={400} fontSize="sm" color="uniqueGray.200">
             {intl.formatMessage(messages.valueIncreaseLeftColumnTitle)}
           </Heading>
 
@@ -64,12 +64,12 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
         </Box>
 
         <Flex gridGap={1} direction="column" grow={1}>
-          <Heading as="h4" fontWeight={400} fontSize="sm" color="gray.400">
+          <Heading as="h4" fontWeight={400} fontSize="sm" color="uniqueGray.200">
             {intl.formatMessage(messages.valueIncreaseRightColumnTitle)}
           </Heading>
 
           <Skeleton isLoaded={isLoaded}>
-            <Text color="gray.500" fontSize="xl">
+            <Text color="uniqueGray.200" fontSize="xl">
               <Mask value={value} displayType="text" />
             </Text>
           </Skeleton>

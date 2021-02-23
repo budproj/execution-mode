@@ -10,7 +10,7 @@ const TeamsOverviewBodyTableHead = () => {
   const intl = useIntl()
 
   return (
-    <TeamsOverviewBodyTableLineTemplate fontSize="sm" color="gray.400" fontWeight={500}>
+    <TeamsOverviewBodyTableLineTemplate fontSize="sm" color="gray.600" fontWeight={500}>
       <GridItem>{intl.formatMessage(messages.firstColumnTitle)}</GridItem>
       <GridItem>{intl.formatMessage(messages.secondColumnTitle)}</GridItem>
       <GridItem>{intl.formatMessage(messages.thirdColumnTitle)}</GridItem>

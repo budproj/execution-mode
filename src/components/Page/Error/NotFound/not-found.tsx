@@ -20,21 +20,21 @@ const NotFoundErrorPage = () => {
           <Image src="/images/ghost-drawing.png" alt={intl.formatMessage(messages.imageAlt)} />
         </Box>
         <Flex direction="column" maxWidth="xl" textAlign="center" gridGap={5}>
-          <Heading as="h1" fontSize="4xl">
+          <Heading as="h1" fontSize="4xl" color="gray.900">
             {intl.formatMessage(messages.title)}
           </Heading>
 
-          <Text as="h2" fontSize="xl" color="gray.400">
+          <Text as="h2" fontSize="xl" color="uniqueGray.300">
             {intl.formatMessage(messages.description)}
           </Text>
 
-          <Text fontSize="xl" color="gray.400" fontWeight={700}>
+          <Text fontSize="xl" fontWeight={700} color="uniqueGray.300">
             {intl.formatMessage(messages.callToAction)}
           </Text>
 
           <Box pt={9}>
             <IntlLink href="/">
-              <Button variant="solid" minWidth={36}>
+              <Button variant="solid" minWidth={36} colorScheme="brand">
                 {intl.formatMessage(messages.button)}
               </Button>
             </IntlLink>

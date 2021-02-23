@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 
-import { ColorScheme } from 'src/themes/tokens'
+import { COLOR_SCHEME } from 'src/themes/tokens'
 
 import { COLOR_SCHEME_HASHMAP, INDICATOR, INDICATOR_HASHMAP, SIGNAL } from './constants'
 
@@ -9,7 +9,7 @@ export type ValueSignalHook = [number, Dispatch<SetStateAction<number>>, ValueSi
 export interface ValueSignalAttributes {
   signal: SIGNAL
   indicator: INDICATOR
-  colorScheme: ColorScheme
+  colorScheme: COLOR_SCHEME
 }
 
 const selectSignal = (value?: number) => {

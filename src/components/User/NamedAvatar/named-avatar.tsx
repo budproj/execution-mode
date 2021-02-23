@@ -27,7 +27,7 @@ const NamedAvatar = ({
 
       <Box textAlign="left">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 24)}>
-          <Text color="gray.600" fontWeight={500}>
+          <Text color="uniqueGray.400" fontWeight={500}>
             {name}
           </Text>
         </Skeleton>
@@ -37,7 +37,7 @@ const NamedAvatar = ({
           {...buildSkeletonMinSize(isLoaded, 60, 10)}
           mt={isLoaded ? 0 : '8px'}
         >
-          <Text fontSize="sm" color="gray.600">
+          <Text fontSize="sm" color="uniqueGray.400">
             {company}
           </Text>
         </Skeleton>

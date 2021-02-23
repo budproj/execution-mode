@@ -55,8 +55,8 @@ const KeyResultSectionAddCommentInput = ({
       transition="0.2s box-shadow ease-in"
       overflow="hidden"
       fontSize="sm"
-      color="gray.700"
-      borderColor={isOnFocus ? 'brand.400' : 'gray.300'}
+      color="uniqueGray.400"
+      borderColor={isOnFocus ? 'brand.500' : 'uniqueGray.200'}
       boxShadow={isOnFocus ? '0 0 0 1px #6F6EFF' : 'none'}
       borderRadius={numberOfRows === 1 ? 'full' : 60 / numberOfRows}
     >
@@ -95,7 +95,7 @@ const KeyResultSectionAddCommentInput = ({
         position="absolute"
         right={6}
         bottom={4}
-        color="gray.400"
+        color="uniqueGray.200"
         aria-label={intl.formatMessage(messages.paperPlaneIconDesc)}
         _hover={{
           color: 'brand.500',

@@ -10,6 +10,7 @@ import React from 'react'
 
 export interface SliderWithFilledTrackProperties extends SliderProps {
   trackRadius: BorderProps['borderRadius']
+  trackBg: SliderTrackProps['bg']
   trackColor?: SliderTrackProps['bg']
   trackThickness?: SliderTrackProps['h']
   trackTopRadius?: BorderProps['borderTopRadius']
@@ -21,6 +22,7 @@ const SliderWithFilledTrack = ({
   trackThickness,
   trackRadius,
   trackTopRadius,
+  trackBg,
   filledTrackRadius,
   isDisabled,
   ...rest
@@ -33,10 +35,10 @@ const SliderWithFilledTrack = ({
   >
     <SliderTrack
       h={trackThickness}
-      bg="gray.100"
+      bg={trackBg}
       borderRadius={trackRadius}
       borderTopRadius={trackTopRadius ?? trackRadius}
-      _disabled={{ bg: 'gray.100' }}
+      _disabled={{ bg: trackBg }}
     >
       <SliderFilledTrack
         bg={trackColor}
@@ -50,6 +52,7 @@ const SliderWithFilledTrack = ({
 SliderWithFilledTrack.defaultProps = {
   value: 0,
   trackColor: 'brand.400',
+  trackBg: 'gray.50',
   trackThickness: '8px',
   trackRadius: 'full',
   isDisabled: true,

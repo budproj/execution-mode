@@ -37,10 +37,10 @@ const KeyResultListBodyColumnObjective = ({
           fadeDuration={0}
           /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         >
-          <Box borderRadius={10} p={4} bg="gray.50">
+          <Box borderRadius={10} p={4} bg="uniqueGray.50">
             <StackIcon
               desc={intl.formatMessage(messages.stackIconDesc)}
-              fill="gray.300"
+              fill="uniqueGray.200"
               w={8}
               h={8}
             />
@@ -54,7 +54,7 @@ const KeyResultListBodyColumnObjective = ({
             /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
             {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
           >
-            <Text color="gray.500">{objective?.title}</Text>
+            <Text color="uniqueGray.300">{objective?.title}</Text>
           </Skeleton>
         </Box>
       </Flex>

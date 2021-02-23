@@ -49,7 +49,7 @@ describe('component interations', () => {
 
     const box = wrapper.find('Box')
 
-    expect(box.prop('borderColor')).toEqual('brand.400')
+    expect(box.prop('borderColor')).toEqual('brand.500')
   })
 
   it('should change the box shadow if the input is focused', () => {
@@ -77,7 +77,7 @@ describe('component interations', () => {
 
     const box = wrapper.find('Box')
 
-    expect(box.prop('borderColor')).toEqual('gray.300')
+    expect(box.prop('borderColor')).toEqual('uniqueGray.200')
   })
 
   it('should not have a box shadow if the input is not focused', () => {
@@ -106,7 +106,7 @@ describe('component interations', () => {
 
     const box = wrapper.find('Box')
 
-    expect(box.prop('borderColor')).toEqual('gray.300')
+    expect(box.prop('borderColor')).toEqual('uniqueGray.200')
   })
 
   it('should not have a box shadow if the input was focused, but it is not anymore', () => {

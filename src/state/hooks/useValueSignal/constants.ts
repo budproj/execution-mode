@@ -1,4 +1,4 @@
-import { ColorScheme } from 'src/themes/tokens'
+import { COLOR_SCHEME } from 'src/themes/tokens'
 
 export enum SIGNAL {
   POSITIVE = 'positive',
@@ -19,7 +19,7 @@ export const INDICATOR_HASHMAP = {
 }
 
 export const COLOR_SCHEME_HASHMAP = {
-  [SIGNAL.POSITIVE]: ColorScheme.GREEN,
-  [SIGNAL.NEGATIVE]: ColorScheme.RED,
-  [SIGNAL.NEUTRAL]: ColorScheme.GRAY,
+  [SIGNAL.POSITIVE]: COLOR_SCHEME.GREEN,
+  [SIGNAL.NEGATIVE]: COLOR_SCHEME.RED,
+  [SIGNAL.NEUTRAL]: COLOR_SCHEME.UNIQUE_GRAY,
 }

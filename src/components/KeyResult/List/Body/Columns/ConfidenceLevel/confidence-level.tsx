@@ -43,7 +43,11 @@ const KeyResultListBodyColumnConfidenceLevel = ({
             mt={isKeyResultLoaded ? 'inherit' : '4px'}
             isLoaded={isKeyResultLoaded}
           >
-            <LastUpdateText date={lastUpdateDate} author={latestCheckIn?.user?.fullName} />
+            <LastUpdateText
+              date={lastUpdateDate}
+              author={latestCheckIn?.user?.fullName}
+              color="uniqueGray.300"
+            />
           </SkeletonText>
         )}
       </Flex>

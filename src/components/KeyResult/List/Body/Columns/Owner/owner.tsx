@@ -80,6 +80,7 @@ const KeyResultListBodyColumnOwner = ({
           <PopoverContent
             border="none"
             boxShadow="0px 5px 30px rgba(129, 147, 171, 0.2)"
+            outline="none"
             _focus={{ boxShadow: '0px 5px 30px rgba(129, 147, 171, 0.2)' }}
           >
             <PopoverBody>
@@ -94,8 +95,8 @@ const KeyResultListBodyColumnOwner = ({
                 )}
 
                 <Box>
-                  <Text>{owner?.fullName}</Text>
-                  <Text color="gray.400">{owner?.role}</Text>
+                  <Text color="gray.900">{owner?.fullName}</Text>
+                  <Text color="uniqueGray.200">{owner?.role}</Text>
                 </Box>
               </Flex>
             </PopoverBody>
