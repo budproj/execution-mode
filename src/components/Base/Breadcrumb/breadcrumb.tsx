@@ -58,9 +58,10 @@ const Breadcrumb = ({ routeParams }: BreadcrumbProperties) => {
         (step, index, array): ReactElement => (
           <BreadcrumbItem
             key={`breadcrumb-${kebabCase(step)}`}
-            color={isCurrentPage(index) ? 'gray.600' : 'gray.400'}
+            color={isCurrentPage(index) ? 'uniqueGray.400' : 'uniqueGray.300'}
             isCurrentPage={isCurrentPage(index)}
             fontWeight="500"
+            _hover={{ color: 'brand.500' }}
           >
             <IntlLink href={`/${array.slice(0, index + 1).join('/')}`}>
               {buildStepName(step)}
