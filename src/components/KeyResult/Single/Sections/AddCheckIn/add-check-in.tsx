@@ -51,7 +51,9 @@ const KeyResultSectionAddCheckIn = ({
         <Button
           variant="solid"
           w="100%"
-          colorScheme={isCreatingCheckIn ? 'gray' : 'brand'}
+          colorScheme={isCreatingCheckIn ? 'uniqueGray' : 'brand'}
+          bg={isCreatingCheckIn ? 'gray.100' : 'brand.100'}
+          color={isCreatingCheckIn ? 'uniqueGray.400' : 'brand.500'}
           onClick={isCreatingCheckIn ? handleClose : handleOpen}
         >
           {intl.formatMessage(

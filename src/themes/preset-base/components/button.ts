@@ -26,8 +26,6 @@ const Button = {
       },
 
       '&:focus': {
-        bg: `${colorScheme ?? 'brand'}.100`,
-        color: `${colorScheme ?? 'brand'}.500`,
         boxShadow: 'none',
       },
 

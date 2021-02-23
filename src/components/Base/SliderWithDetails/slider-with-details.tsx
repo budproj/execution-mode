@@ -42,9 +42,9 @@ const SliderWithDetails = ({
     >
       <SliderTrack
         h={trackThickness}
-        bg="gray.50"
+        bg="gray.200"
         borderRadius="full"
-        _disabled={{ bg: 'gray.50' }}
+        _disabled={{ bg: 'gray.200' }}
       >
         <SliderFilledTrack bg={trackColor} borderRadius="full" borderRightRadius="0" />
       </SliderTrack>

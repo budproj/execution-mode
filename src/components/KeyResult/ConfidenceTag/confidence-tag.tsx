@@ -7,10 +7,9 @@ import { COLOR_SCHEME } from 'src/themes/tokens'
 
 export interface ConfidenceTagProperties {
   confidenceValue?: KeyResultCheckIn['confidence']
-  isGrayscale?: boolean
 }
 
-const ConfidenceTag = ({ confidenceValue, isGrayscale }: ConfidenceTagProperties) => {
+const ConfidenceTag = ({ confidenceValue }: ConfidenceTagProperties) => {
   const [confidenceTag, setConfidence] = useConfidenceTag(confidenceValue)
 
   useEffect(() => {
@@ -28,8 +27,8 @@ const ConfidenceTag = ({ confidenceValue, isGrayscale }: ConfidenceTagProperties
       fontSize="xs"
       p={2}
       borderRadius={4}
-      bg={isGrayscale ? 'gray.50' : bgColor}
-      color={isGrayscale ? 'gray.200' : textColor}
+      bg={bgColor}
+      color={textColor}
     >
       {confidenceTag.messages.long}
     </Tag>
