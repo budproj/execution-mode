@@ -131,7 +131,7 @@ describe('hook returned attributes', () => {
     const wrapper = enzyme.mount(<TestComponent fakeValue={fakeValue} />)
 
     const expectedAttributes = {
-      colorScheme: 'uniqueGray',
+      colorScheme: 'gray',
     }
     const dummyComponentAttributes = wrapper.find('DummyComponent').props()
 

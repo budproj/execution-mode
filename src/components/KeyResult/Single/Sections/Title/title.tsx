@@ -24,7 +24,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       </Skeleton>
 
       <Skeleton isLoaded={isTitleLoaded}>
-        <Heading color="gray.800" fontSize="md" noOfLines={1} as="h2">
+        <Heading color="black.800" fontSize="md" noOfLines={1} as="h2">
           {title}
         </Heading>
       </Skeleton>

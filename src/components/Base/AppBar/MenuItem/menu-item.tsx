@@ -19,7 +19,7 @@ const MenuItem = (properties: MenuItemProperties): ReactElement => {
         variant="text"
         isActive={isHrefCurrentRoute}
         colorScheme="brand"
-        color="uniqueGray.400"
+        color="gray.400"
         _active={{
           color: 'brand.500',
         }}

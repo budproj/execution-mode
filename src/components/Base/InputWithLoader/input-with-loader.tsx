@@ -10,7 +10,7 @@ const InputWithLoader = ({ isLoading, InputComponent, ...rest }: InputWithLoader
   <InputGroup>
     <InputComponent {...rest} />
     <InputRightElement p={0}>
-      {isLoading && <Spinner size="sm" color="gray.100" />}
+      {isLoading && <Spinner size="sm" color="black.100" />}
     </InputRightElement>
   </InputGroup>
 )

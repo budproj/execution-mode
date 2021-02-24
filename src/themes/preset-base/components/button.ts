@@ -3,7 +3,7 @@ import { ButtonProps } from '@chakra-ui/react'
 const Button = {
   variants: {
     text: ({ colorScheme }: ButtonProps) => ({
-      color: `${colorScheme ?? 'uniqueGray'}.500`,
+      color: `${colorScheme ?? 'gray'}.500`,
 
       '&:hover': {
         color: `${colorScheme ?? 'brand'}.400`,

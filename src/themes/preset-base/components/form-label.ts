@@ -2,7 +2,7 @@ const FormLabel = {
   baseStyle: {
     fontWeight: 300,
     fontSize: 'xs',
-    color: 'uniqueGray.300',
+    color: 'gray.300',
   },
 }
 

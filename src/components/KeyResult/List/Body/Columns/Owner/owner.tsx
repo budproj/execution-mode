@@ -95,8 +95,8 @@ const KeyResultListBodyColumnOwner = ({
                 )}
 
                 <Box>
-                  <Text color="gray.900">{owner?.fullName}</Text>
-                  <Text color="uniqueGray.200">{owner?.role}</Text>
+                  <Text color="black.900">{owner?.fullName}</Text>
+                  <Text color="gray.200">{owner?.role}</Text>
                 </Box>
               </Flex>
             </PopoverBody>

@@ -51,9 +51,9 @@ const KeyResultSectionAddCheckIn = ({
         <Button
           variant="solid"
           w="100%"
-          colorScheme={isCreatingCheckIn ? 'uniqueGray' : 'brand'}
-          bg={isCreatingCheckIn ? 'gray.100' : 'brand.100'}
-          color={isCreatingCheckIn ? 'uniqueGray.400' : 'brand.500'}
+          colorScheme={isCreatingCheckIn ? 'gray' : 'brand'}
+          bg={isCreatingCheckIn ? 'black.100' : 'brand.100'}
+          color={isCreatingCheckIn ? 'gray.400' : 'brand.500'}
           onClick={isCreatingCheckIn ? handleClose : handleOpen}
         >
           {intl.formatMessage(
@@ -64,7 +64,7 @@ const KeyResultSectionAddCheckIn = ({
       <Collapse animateOpacity in={isCreatingCheckIn}>
         <KeyResultSectionTimelineCardBase>
           <Flex pb={4}>
-            <Heading fontSize="md" fontWeight={700} color="gray.600" flexGrow={1}>
+            <Heading fontSize="md" fontWeight={700} color="black.600" flexGrow={1}>
               {intl.formatMessage(messages.formTitle)}
             </Heading>
           </Flex>

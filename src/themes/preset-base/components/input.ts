@@ -4,8 +4,8 @@ const Input = {
       field: {
         borderWidth: 2,
         borderRadius: 4,
-        borderColor: 'gray.200',
-        color: 'uniqueGray.400',
+        borderColor: 'black.200',
+        color: 'gray.400',
         fontWeight: 500,
       },
     }),

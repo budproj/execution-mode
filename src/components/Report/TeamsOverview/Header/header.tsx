@@ -11,7 +11,7 @@ const TeamsOverviewHeader = () => {
 
   return (
     <OverviewHeaderBox>
-      <Heading as="h2" fontSize="xl" color="gray.900">
+      <Heading as="h2" fontSize="xl" color="black.900">
         {intl.formatMessage(messages.title)}
       </Heading>
     </OverviewHeaderBox>

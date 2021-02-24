@@ -24,7 +24,7 @@ const KeyResultSectionCycle = ({ keyResultID }: KeyResultSectionCycleProperties)
 
   return (
     <Flex gridGap={4} direction="column">
-      <Text fontWeight={500} color="gray.600">
+      <Text fontWeight={500} color="black.600">
         {intl.formatMessage(messages.primaryLabel)}
       </Text>
       <Flex alignItems="flex-start" gridGap={10}>
@@ -38,15 +38,15 @@ const KeyResultSectionCycle = ({ keyResultID }: KeyResultSectionCycleProperties)
           isLoaded={isCycleLoaded}
           label={messages.endLabel}
           date={new Date(cycle?.dateEnd ?? '')}
-          color="gray.500"
+          color="black.500"
         />
 
         <Flex alignItems="flex-start" direction="column">
-          <Text fontWeight={300} color="gray.300">
+          <Text fontWeight={300} color="black.300">
             {intl.formatMessage(messages.nameLabel)}
           </Text>
           <Skeleton isLoaded={isCycleLoaded} {...buildSkeletonMinSize(isCycleLoaded, 100, 20)}>
-            <Text color="gray.500">{cycle?.name}</Text>
+            <Text color="black.500">{cycle?.name}</Text>
           </Skeleton>
         </Flex>
       </Flex>

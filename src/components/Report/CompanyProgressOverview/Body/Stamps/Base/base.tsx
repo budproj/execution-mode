@@ -28,7 +28,7 @@ const CompanyProgressOverviewBodyStampBase = ({
       {icon}
     </Flex>
 
-    <Flex direction="column" gridGap={2} color="gray.900">
+    <Flex direction="column" gridGap={2} color="black.900">
       {children}
     </Flex>
   </Flex>

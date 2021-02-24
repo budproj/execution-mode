@@ -48,9 +48,9 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
   return (
     <Box position="sticky" top={0} bg="white" zIndex={theme.zIndices.tooltip}>
       <DrawerHeader
-        bg="uniqueGray.50"
+        bg="gray.50"
         p={4}
-        borderColor="gray.300"
+        borderColor="black.300"
         borderBottomWidth={1}
         display="flex"
         alignItems="center"

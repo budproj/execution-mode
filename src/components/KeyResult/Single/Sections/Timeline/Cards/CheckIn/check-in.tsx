@@ -88,7 +88,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
           />
 
           <Box>
-            <StatLabel fontSize="md" fontWeight={500} color="gray.900">
+            <StatLabel fontSize="md" fontWeight={500} color="black.900">
               {intl.formatMessage(messages.title)}
             </StatLabel>
 

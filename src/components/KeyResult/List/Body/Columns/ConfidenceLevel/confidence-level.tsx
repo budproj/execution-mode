@@ -46,7 +46,7 @@ const KeyResultListBodyColumnConfidenceLevel = ({
             <LastUpdateText
               date={lastUpdateDate}
               author={latestCheckIn?.user?.fullName}
-              color="uniqueGray.300"
+              color="gray.300"
             />
           </SkeletonText>
         )}
