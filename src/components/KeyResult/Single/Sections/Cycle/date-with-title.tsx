@@ -16,7 +16,7 @@ const DateWithTitle = ({ isLoaded, label, date, color }: CycleDateWithTitlePrope
 
   return (
     <Flex alignItems="flex-start" direction="column">
-      <Text fontWeight={300} color="gray.300">
+      <Text fontWeight={300} color="black.300">
         {intl.formatMessage(label)}
       </Text>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 20)}>
@@ -27,7 +27,7 @@ const DateWithTitle = ({ isLoaded, label, date, color }: CycleDateWithTitlePrope
 }
 
 DateWithTitle.defaultProps = {
-  color: 'gray.300',
+  color: 'black.300',
   isLoaded: true,
 }
 

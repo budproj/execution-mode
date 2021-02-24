@@ -47,7 +47,7 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
       <Divider borderColor={BORDER_COLOR} />
       <Flex borderColor={BORDER_COLOR} pt={4} gridGap={4}>
         <Flex gridGap={1} direction="column" grow={1}>
-          <Heading as="h4" fontWeight={400} fontSize="sm" color="uniqueGray.200">
+          <Heading as="h4" fontWeight={400} fontSize="sm" color="gray.200">
             {intl.formatMessage(messages.valueIncreaseLeftColumnTitle)}
           </Heading>
 
@@ -64,12 +64,12 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
         </Box>
 
         <Flex gridGap={1} direction="column" grow={1}>
-          <Heading as="h4" fontWeight={400} fontSize="sm" color="uniqueGray.200">
+          <Heading as="h4" fontWeight={400} fontSize="sm" color="gray.200">
             {intl.formatMessage(messages.valueIncreaseRightColumnTitle)}
           </Heading>
 
           <Skeleton isLoaded={isLoaded}>
-            <Text color="uniqueGray.200" fontSize="xl">
+            <Text color="gray.200" fontSize="xl">
               <Mask value={value} displayType="text" />
             </Text>
           </Skeleton>

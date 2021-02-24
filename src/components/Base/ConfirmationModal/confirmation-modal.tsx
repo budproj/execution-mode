@@ -47,7 +47,7 @@ const ConfirmationModal = ({
                 fill="red.500"
                 stroke="red.500"
               />
-              <Heading as="h3" fontSize="lg" color="gray.800">
+              <Heading as="h3" fontSize="lg" color="black.800">
                 {titleText ?? intl.formatMessage(messages.titleFallback)}
               </Heading>
             </Flex>

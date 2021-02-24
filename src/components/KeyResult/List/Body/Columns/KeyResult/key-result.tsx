@@ -56,7 +56,7 @@ const KeyResultListBodyColumnKeyResult = ({
             fadeDuration={0}
             /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
-            <Text color="gray.900">{title ?? 'This is a sample KR title'}</Text>
+            <Text color="black.900">{title ?? 'This is a sample KR title'}</Text>
           </Skeleton>
 
           <SkeletonText
@@ -65,7 +65,7 @@ const KeyResultListBodyColumnKeyResult = ({
             isLoaded={isTeamLoaded}
             {...buildSkeletonMinSize(isTeamLoaded, 100, 21)}
           >
-            <Text color="uniqueGray.300" fontSize="sm">
+            <Text color="gray.300" fontSize="sm">
               {team?.name}
             </Text>
           </SkeletonText>

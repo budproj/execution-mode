@@ -31,7 +31,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
   return (
     <IntlLink href={id ?? '#'}>
       <Box
-        bg="gray.50"
+        bg="black.50"
         borderRadius={16}
         py={12}
         px={10}
@@ -52,14 +52,14 @@ const TeamCard = ({ id }: TeamCardProperties) => {
               )}
             </Box>
             <Skeleton isLoaded={isLoaded} mt={2} {...buildSkeletonMinSize(isLoaded, 200, 40)}>
-              <Heading size="lg" color="gray.900">
+              <Heading size="lg" color="black.900">
                 {team?.name}
               </Heading>
             </Skeleton>
           </Flex>
 
           <SkeletonText isLoaded={isLoaded} noOfLines={3} spacing="4">
-            <Text color="uniqueGray.400" noOfLines={3}>
+            <Text color="gray.400" noOfLines={3}>
               {team?.description}
             </Text>
           </SkeletonText>
@@ -68,7 +68,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
               trackThickness={3}
               value={team?.status?.progress}
               trackColor={confidenceTag.color.primary}
-              trackBg="gray.200"
+              trackBg="black.200"
             />
           </Skeleton>
           <Box pt={12}>

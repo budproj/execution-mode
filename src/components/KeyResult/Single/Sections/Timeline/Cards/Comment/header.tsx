@@ -32,13 +32,13 @@ const KeyResultSectionTimelineCardCommentHeader = ({
 
       <Flex direction="column" gridGap={1}>
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 130, 19)}>
-          <Heading as="h4" fontSize="md" color="gray.700" fontWeight={700}>
+          <Heading as="h4" fontSize="md" color="black.700" fontWeight={700}>
             {fullName}
           </Heading>
         </Skeleton>
 
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 18)}>
-          <Text color="gray.300" fontSize="xs">
+          <Text color="black.300" fontSize="xs">
             {formattedDate}
           </Text>
         </Skeleton>

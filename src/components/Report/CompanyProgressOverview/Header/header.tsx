@@ -25,7 +25,7 @@ const CompanyProgressOverviewHeader = ({
   return (
     <OverviewHeaderBox>
       <Skeleton isLoaded={!isLoading} {...buildSkeletonMinSize(!isLoading, 400, 24)}>
-        <Heading as="h2" fontSize="xl" color="gray.900">
+        <Heading as="h2" fontSize="xl" color="black.900">
           {intl.formatMessage(messages.title, {
             gender: company?.gender,
             company: company?.name,

@@ -39,7 +39,7 @@ const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties)
         border="none"
         fontSize="md"
         fontWeight={700}
-        color="uniqueGray.400"
+        color="gray.400"
         px={0}
         pt={0}
         pb={6}
@@ -50,7 +50,7 @@ const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties)
         size="md"
         top="1rem"
         right="1.5rem"
-        color="uniqueGray.200"
+        color="gray.200"
         _hover={{ bg: 'transparent', color: 'brand.400' }}
       >
         <CloseIcon

@@ -1,6 +1,6 @@
 const Tooltip = {
   baseStyle: {
-    bg: 'gray.600',
+    bg: 'black.600',
     px: 5,
     borderRadius: 3,
   },

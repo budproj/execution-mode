@@ -38,7 +38,7 @@ const CompanyProgressOverviewBodyStampCompany = ({
           fill="yellow.500"
         />
       }
-      iconBgColor="gray.50"
+      iconBgColor="black.50"
     >
       <Skeleton
         isLoaded={!isLoading}
@@ -54,7 +54,7 @@ const CompanyProgressOverviewBodyStampCompany = ({
         <LastUpdateText
           date={checkInDate}
           author={latestKeyResultCheckIn?.user?.fullName}
-          color="uniqueGray.100"
+          color="gray.100"
           fontWeight={500}
           fontSize="xs"
         />

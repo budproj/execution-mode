@@ -44,7 +44,7 @@ const Alert = ({
     <Collapse in={isOpen}>
       <Box p={wrapperPadding} pb={wrapperPaddingBottom ?? wrapperPadding}>
         <ChakraAlert status={status} variant={variant}>
-          <Flex direction="column" gridGap={1} color="gray.700">
+          <Flex direction="column" gridGap={1} color="black.700">
             <AlertTitle fontSize="md">{title}</AlertTitle>
             <AlertDescription fontSize="sm">{description}</AlertDescription>
           </Flex>

@@ -34,9 +34,9 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
         <SliderTrack
           ref={forwardedReference}
           h={trackThickness}
-          bg="gray.200"
+          bg="gray.50"
           borderRadius="full"
-          _disabled={{ bg: 'gray.200' }}
+          _disabled={{ bg: 'gray.50' }}
           data-action={dataAction}
         >
           <SliderFilledTrack bg={trackColor} borderRadius="full" />

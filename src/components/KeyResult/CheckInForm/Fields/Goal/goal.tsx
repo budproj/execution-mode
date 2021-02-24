@@ -27,8 +27,13 @@ const CheckInFormFieldGoal = ({ keyResultID }: CheckInFormFieldGoalProperties) =
     <Box flex="1 1 0px">
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
       <Flex py={2} alignItems="center" gridGap={2}>
-        <FlagIcon fill="gray.600" w={4} h="auto" desc={intl.formatMessage(messages.flagIconDesc)} />
-        <Text color="gray.400" fontSize="xs">
+        <FlagIcon
+          fill="black.600"
+          w={4}
+          h="auto"
+          desc={intl.formatMessage(messages.flagIconDesc)}
+        />
+        <Text color="black.400" fontSize="xs">
           <Mask value={goal} displayType="text" />
         </Text>
       </Flex>

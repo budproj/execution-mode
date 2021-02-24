@@ -31,7 +31,7 @@ const KeyResultListBodyColumnCycle = ({
         /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         {...buildSkeletonMinSize(isCycleLoaded, 100, 20)}
       >
-        <Text color="uniqueGray.300">{cycle?.name}</Text>
+        <Text color="gray.300">{cycle?.name}</Text>
       </Skeleton>
     </KeyResultListBodyColumnBase>
   )

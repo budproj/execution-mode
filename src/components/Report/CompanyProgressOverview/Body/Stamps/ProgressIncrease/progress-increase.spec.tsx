@@ -205,8 +205,8 @@ describe('conditional renderization', () => {
 
     const icon = wrapper.find('Line')
 
-    expect(icon.prop('fill')).toEqual('uniqueGray.500')
-    expect(icon.prop('stroke')).toEqual('uniqueGray.500')
+    expect(icon.prop('fill')).toEqual('gray.500')
+    expect(icon.prop('stroke')).toEqual('gray.500')
   })
 
   it('displays the correct color in the highlighted text with positive progress', () => {

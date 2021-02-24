@@ -18,9 +18,9 @@ const ObjectiveGroup = ({ groupTitle, objectiveIDs }: ObjectiveGroupProperties) 
   const isLoaded = Boolean(objectiveIDs && objectiveIDs.length > 0)
 
   return (
-    <Box borderRadius="xl" bg="gray.50" p={6}>
+    <Box borderRadius="xl" bg="black.50" p={6}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 24)}>
-        <Heading fontSize="xl" as="h3" fontWeight={500} color="gray.900">
+        <Heading fontSize="xl" as="h3" fontWeight={500} color="black.900">
           {groupTitle}
         </Heading>
       </Skeleton>

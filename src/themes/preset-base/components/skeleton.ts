@@ -1,7 +1,7 @@
 const Skeleton = {
   defaultProps: {
-    startColor: 'gray.100',
-    endColor: 'gray.50',
+    startColor: 'black.100',
+    endColor: 'black.50',
   },
 }
 

@@ -23,7 +23,7 @@ const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties)
 
   return (
     <Flex gridGap={2} direction="column">
-      <Text fontWeight={500} color="gray.600">
+      <Text fontWeight={500} color="black.600">
         {intl.formatMessage(messages.label)}
       </Text>
       <Flex alignItems="center" gridGap={2}>
@@ -31,7 +31,7 @@ const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties)
           <Avatar name={owner?.fullName} src={owner?.picture} size="sm" />
         </SkeletonCircle>
         <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 150, 24)}>
-          <Text color="gray.500">{owner?.fullName}</Text>
+          <Text color="black.500">{owner?.fullName}</Text>
         </Skeleton>
       </Flex>
     </Flex>

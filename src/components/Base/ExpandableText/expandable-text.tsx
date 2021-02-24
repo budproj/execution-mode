@@ -60,7 +60,7 @@ const ExpandableText = ({
 ExpandableText.defaultProps = {
   maxCollapsedLength: MAX_CHAR_LENGTH,
   fontSize: 'md',
-  color: 'gray.900',
+  color: 'black.900',
 }
 
 export default ExpandableText

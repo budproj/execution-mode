@@ -33,7 +33,7 @@ const DraggableGrid = ({
           {...rest}
         >
           <Box ml="-21px" {...provided.dragHandleProps}>
-            <ReorderIcon desc={intl.formatMessage(messages.reorderIconDesc)} fill="gray.300" />
+            <ReorderIcon desc={intl.formatMessage(messages.reorderIconDesc)} fill="black.300" />
           </Box>
 
           {children}

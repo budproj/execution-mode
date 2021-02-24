@@ -46,7 +46,7 @@ const LastUpdateText = ({
 
 LastUpdateText.defaultProps = {
   fontSize: 'sm',
-  color: 'gray.300',
+  color: 'black.300',
 }
 
 export default LastUpdateText

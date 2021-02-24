@@ -49,7 +49,7 @@ const Breadcrumb = ({ routeParams }: BreadcrumbProperties) => {
       separator={
         <ArrowRightIcon
           desc={intl.formatMessage(messages.arrowRightIconDesc)}
-          fill="gray.400"
+          fill="black.400"
           fontSize="xs"
         />
       }
@@ -58,7 +58,7 @@ const Breadcrumb = ({ routeParams }: BreadcrumbProperties) => {
         (step, index, array): ReactElement => (
           <BreadcrumbItem
             key={`breadcrumb-${kebabCase(step)}`}
-            color={isCurrentPage(index) ? 'uniqueGray.400' : 'uniqueGray.300'}
+            color={isCurrentPage(index) ? 'gray.400' : 'gray.300'}
             isCurrentPage={isCurrentPage(index)}
             fontWeight="500"
             _hover={{ color: 'brand.500' }}

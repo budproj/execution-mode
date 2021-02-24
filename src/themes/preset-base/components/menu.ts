@@ -8,7 +8,7 @@ const Menu = {
 
     item: {
       '&:focus': {
-        bg: 'gray.50',
+        bg: 'black.50',
       },
     },
   },

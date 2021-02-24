@@ -32,10 +32,10 @@ const UnderMaintenanceErrorPage = () => {
           <Image src="/images/box-drawing.png" alt={intl.formatMessage(messages.imageAlt)} />
         </Box>
         <Flex direction="column" maxWidth="xl" textAlign="center" gridGap={14}>
-          <Heading as="h1" fontSize="4xl" color="gray.900">
+          <Heading as="h1" fontSize="4xl" color="black.900">
             {intl.formatMessage(messages.title)}
           </Heading>
-          <Text fontSize="xl" color="uniqueGray.300">
+          <Text fontSize="xl" color="gray.300">
             {intl.formatMessage(messages.description, {
               date: intl.formatDate(expectedReturnDate, dateFormatOptions),
               hour: intl.formatDate(expectedReturnDate, hourFormatOptions),

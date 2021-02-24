@@ -41,8 +41,8 @@ const SelectMenu = ({
             as={Button}
             w="100%"
             borderWidth={2}
-            borderColor="gray.100"
-            color="gray.400"
+            borderColor="black.100"
+            color="black.400"
             borderRadius={4}
             fontWeight={300}
             py={6}
@@ -50,14 +50,14 @@ const SelectMenu = ({
             pr={5}
             rightIcon={
               <Stack direction="row" alignItems="center">
-                {isLoading && <Spinner size="sm" color="gray.100" />}
+                {isLoading && <Spinner size="sm" color="black.100" />}
                 <ChevronDownIcon
                   desc={intl.formatMessage(
                     isOpen ? messages.iconChevronUpDesc : messages.iconChevronDownDesc,
                   )}
                   fontSize="xs"
-                  color="gray.50"
-                  stroke="gray.50"
+                  color="black.50"
+                  stroke="black.50"
                   transition="0.2s all ease-in"
                   transform={isOpen ? 'rotate(180deg)' : 'none'}
                 />

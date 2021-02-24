@@ -10,15 +10,15 @@ const KeyResultSectionTimelineCardEmptyState = () => {
   const intl = useIntl()
 
   return (
-    <KeyResultSectionTimelineCardBase borderWidth={0} bg="gray.50">
+    <KeyResultSectionTimelineCardBase borderWidth={0} bg="black.50">
       <Flex direction="column" alignItems="center" gridGap={2} py={4}>
         <Box>
           <Image src="/images/ghost-drawing.png" />
         </Box>
-        <Heading as="h3" fontSize="md" color="uniqueGray.400">
+        <Heading as="h3" fontSize="md" color="gray.400">
           {intl.formatMessage(messages.title)}
         </Heading>
-        <Text fontSize="sm" color="uniqueGray.400" textAlign="center">
+        <Text fontSize="sm" color="gray.400" textAlign="center">
           {intl.formatMessage(messages.description)}
         </Text>
       </Flex>

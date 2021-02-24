@@ -34,7 +34,7 @@ const TeamsOverviewBodyTableBodyColumnNameAndOrder = ({
         </Flex>
 
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 21)}>
-          <Heading as="h3" fontSize="md" fontWeight={400} color="gray.900">
+          <Heading as="h3" fontSize="md" fontWeight={400} color="black.900">
             {team?.name}
           </Heading>
         </Skeleton>

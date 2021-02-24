@@ -24,7 +24,7 @@ const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectivePro
 
   return (
     <Flex gridGap={2} direction="column">
-      <Text fontWeight={500} color="gray.600">
+      <Text fontWeight={500} color="black.600">
         {intl.formatMessage(messages.label)}
       </Text>
       <Flex alignItems="center" gridGap={2}>
@@ -32,20 +32,20 @@ const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectivePro
           <Box
             w={8}
             h={8}
-            bg="gray.50"
+            bg="black.50"
             borderRadius="full"
             display="flex"
             alignItems="center"
             justifyContent="center"
           >
-            <StackIcon desc={intl.formatMessage(messages.stackIconDesc)} fill="gray.300" />
+            <StackIcon desc={intl.formatMessage(messages.stackIconDesc)} fill="black.300" />
           </Box>
         </SkeletonCircle>
         <Skeleton
           isLoaded={isObjectiveLoaded}
           {...buildSkeletonMinSize(isObjectiveLoaded, 250, 24)}
         >
-          <Text color="gray.500">{objective?.title}</Text>
+          <Text color="black.500">{objective?.title}</Text>
         </Skeleton>
       </Flex>
     </Flex>

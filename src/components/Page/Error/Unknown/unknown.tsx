@@ -23,15 +23,15 @@ const UnknownErrorPage = () => {
           />
         </Box>
         <Flex direction="column" maxWidth="xl" textAlign="center" gridGap={5}>
-          <Heading as="h1" fontSize="4xl" color="gray.900">
+          <Heading as="h1" fontSize="4xl" color="black.900">
             {intl.formatMessage(messages.title)}
           </Heading>
 
-          <Text as="h2" fontSize="xl" color="uniqueGray.300" fontWeight={700}>
+          <Text as="h2" fontSize="xl" color="gray.300" fontWeight={700}>
             {intl.formatMessage(messages.subtitle)}
           </Text>
 
-          <Text fontSize="xl" color="uniqueGray.300">
+          <Text fontSize="xl" color="gray.300">
             {intl.formatMessage(messages.description)}
           </Text>
 

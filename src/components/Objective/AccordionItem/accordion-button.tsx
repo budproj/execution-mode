@@ -37,7 +37,7 @@ const ObjectiveAccordionButton = ({
   return (
     <AccordionButton gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded ?? true, 300, 24)}>
-        <Heading as="h4" fontSize="xl" fontWeight={500} textAlign="left" color="gray.900">
+        <Heading as="h4" fontSize="xl" fontWeight={500} textAlign="left" color="black.900">
           {objective?.title}
         </Heading>
       </Skeleton>
@@ -57,12 +57,10 @@ const ObjectiveAccordionButton = ({
         <CalendarOutlineIcon
           title={intl.formatMessage(messages.calendarIconTitle)}
           desc={intl.formatMessage(messages.calendarIconDesc)}
-          fill="uniqueGray.300"
+          fill="gray.300"
           mt="-2px"
         />
-        <Text color="uniqueGray.300">
-          {intl.formatDate(objective?.cycle?.dateEnd ?? new Date())}
-        </Text>
+        <Text color="gray.300">{intl.formatDate(objective?.cycle?.dateEnd ?? new Date())}</Text>
       </Skeleton>
 
       <Flex flexGrow={1} justifyContent="flex-end">

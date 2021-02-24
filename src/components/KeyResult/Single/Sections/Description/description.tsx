@@ -22,12 +22,12 @@ const KeyResultSectionDescription = ({ keyResultID }: KeyResultSectionDescriptio
 
   return (
     <Flex gridGap={2} direction="column">
-      <Text fontWeight={500} color="gray.600">
+      <Text fontWeight={500} color="black.600">
         {intl.formatMessage(messages.label)}
       </Text>
       <Flex alignItems="center" gridGap={2}>
         <SkeletonText isLoaded={isDescriptionLoaded} noOfLines={5} spacing={4} w="100%">
-          <Text color="gray.500">{description}</Text>
+          <Text color="black.500">{description}</Text>
         </SkeletonText>
       </Flex>
     </Flex>

@@ -53,7 +53,7 @@ const KeyResultSectionTimelineCardComment = ({
           date={new Date(data?.createdAt ?? 0)}
         />
         <SkeletonText noOfLines={4} isLoaded={Boolean(data)}>
-          <ExpandableText text={data?.text ?? ''} fontSize="sm" color="uniqueGray.400" />
+          <ExpandableText text={data?.text ?? ''} fontSize="sm" color="gray.400" />
         </SkeletonText>
       </Flex>
     </KeyResultSectionTimelineCardBase>

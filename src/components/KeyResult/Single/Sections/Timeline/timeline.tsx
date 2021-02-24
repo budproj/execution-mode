@@ -90,7 +90,7 @@ const KeyResultSectionTimeline = ({
       onYReachStart={onScrollYReachStart}
     >
       <Flex direction="column" gridGap={4} p={4}>
-        <Heading as="h3" fontSize="sm" fontWeight={500} color="uniqueGray.300">
+        <Heading as="h3" fontSize="sm" fontWeight={500} color="gray.300">
           {intl.formatMessage(messages.title)}
         </Heading>
         {keyResultID && hasTimeline ? (
