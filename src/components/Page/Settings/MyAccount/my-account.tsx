@@ -11,7 +11,7 @@ import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
 
-const SettingsPage = ({ isRootPage }: PageProperties) => {
+const SettingsMyAccountPage = ({ isRootPage }: PageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
 
@@ -33,4 +33,4 @@ const SettingsPage = ({ isRootPage }: PageProperties) => {
   )
 }
 
-export default SettingsPage
+export default SettingsMyAccountPage

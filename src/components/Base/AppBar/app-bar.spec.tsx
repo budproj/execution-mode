@@ -23,9 +23,9 @@ describe('component customizations', () => {
   it('hides the user section if we ask to display only the logotype', () => {
     const result = enzyme.shallow(<AppBar variant="onlyLogotype" />)
 
-    const me = result.find('Me')
+    const userMenu = result.find('AppBarUserMenu')
 
-    expect(me.length).toEqual(0)
+    expect(userMenu.length).toEqual(0)
   })
 
   it('displays the menu section if we do not ask to display only the logotype', () => {
@@ -39,8 +39,8 @@ describe('component customizations', () => {
   it('displays the user section if we do not ask to display only the logotype', () => {
     const result = enzyme.shallow(<AppBar />)
 
-    const me = result.find('Me')
+    const userMenu = result.find('AppBarUserMenu')
 
-    expect(me.length).toEqual(1)
+    expect(userMenu.length).toEqual(1)
   })
 })

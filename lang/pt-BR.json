@@ -75,10 +75,6 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
-  "1xEL8L": {
-    "defaultMessage": "Meu perfil",
-    "description": "AppBar user menu first item option"
-  },
   "28q7aO": {
     "defaultMessage": "Última sexta-feira",
     "description": "The title of the third column in our body table at the teams overview report in our dashboard"
@@ -90,6 +86,10 @@
   "2IBj4Z": {
     "defaultMessage": "Agora há pouco",
     "description": "This label is displayed if the date difference is less than 1 minute"
+  },
+  "2lGnmq": {
+    "defaultMessage": "Minha conta | bud",
+    "description": "The page title that is displayed in the browser tab for the my profile page"
   },
   "3gAggt": {
     "defaultMessage": "Check-in",
@@ -130,6 +130,10 @@
   "6aChVs": {
     "defaultMessage": "Nesta semana",
     "description": "This label is displayed if the date difference is 1 week or less"
+  },
+  "6lmXk8": {
+    "defaultMessage": "Clique aqui para acessar nossa página de configurações",
+    "description": "SupportButton icon title that links to settings page. It is displayed when the user hovers the icon itself"
   },
   "6spUEn": {
     "defaultMessage": "Fazer check-in",
@@ -215,10 +219,6 @@
     "defaultMessage": "Salvar",
     "description": "This message is displayed in the \"SAVE\" button in the checkin form"
   },
-  "FF2KvU": {
-    "defaultMessage": "Preferências",
-    "description": "This title is displayed as the heading of the preferences menu section"
-  },
   "FVnpVq": {
     "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
     "description": "The alternative text explaining our arrow right icon"
@@ -267,10 +267,6 @@
     "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
   },
-  "JYkjjF": {
-    "defaultMessage": "Meu perfil",
-    "description": "This label defines the text on the first menu section option"
-  },
   "JZJeBS": {
     "defaultMessage": "Ontem",
     "description": "This label is displayed if the last is yesterday"
@@ -302,6 +298,10 @@
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
+  },
+  "N+Tad7": {
+    "defaultMessage": "Ícone de uma engrenagem. Ao clicar nele você irá para nossa página de configurações",
+    "description": "GearButton icon desc. This is used by screen readers for accessibility"
   },
   "NADPP1": {
     "defaultMessage": "Um ícone de lata de lixo",
@@ -399,6 +399,10 @@
     "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}} por {author}",
     "description": "This message displays the latest report status for a given component"
   },
+  "TKIxVB": {
+    "defaultMessage": "Definições",
+    "description": "This title is displayed as the heading of the definitions menu section"
+  },
   "TzHlPJ": {
     "defaultMessage": "Em manutenção | bud",
     "description": "The page title of our under maintenance error page that is displayed in the browser tab"
@@ -487,10 +491,6 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
-  "ejsLdS": {
-    "defaultMessage": "Suporte",
-    "description": "AppBar user menu second item option"
-  },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
     "description": "The page description that is displayed in Google and screen readers"
@@ -511,6 +511,10 @@
     "defaultMessage": "Baixa Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
   },
+  "fwIpqP": {
+    "defaultMessage": "Visualize e atualize as preferências do seu perfil",
+    "description": "The page description that is displayed in Google and screen readers for the my profile page"
+  },
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
@@ -518,6 +522,14 @@
   "goSPM7": {
     "defaultMessage": "Você excluiu um {type}",
     "description": "This text is displayed as the alert title, explaining what resource the user removed"
+  },
+  "h4sP/q": {
+    "defaultMessage": "Minha conta",
+    "description": "The page title that our users should see in the my profile page"
+  },
+  "h5uqwJ": {
+    "defaultMessage": "Fale com nosso suporte técnico",
+    "description": "AppBar user menu third item option"
   },
   "hPJxpx": {
     "defaultMessage": "Média Confiança",
@@ -538,14 +550,6 @@
   "iivI51": {
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
-  },
-  "ilU+Uz": {
-    "defaultMessage": "Meu perfil",
-    "description": "The page title that our users should see in the my profile page"
-  },
-  "jp5RLv": {
-    "defaultMessage": "Altere seu perfil",
-    "description": "The page description that is displayed in Google and screen readers for the my profile page"
   },
   "jvxLB+": {
     "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
@@ -595,6 +599,10 @@
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
   },
+  "mBPu4P": {
+    "defaultMessage": "Artigos de suporte",
+    "description": "AppBar user menu second item option"
+  },
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
     "description": "The default description for our page head meta description value"
@@ -623,6 +631,10 @@
     "defaultMessage": "Em relação a última sexta-feira",
     "description": "This helper texts explains since when we are calculating your company progress"
   },
+  "qmEcGQ": {
+    "defaultMessage": "Minha conta",
+    "description": "AppBar user menu first item option"
+  },
   "rBdkOv": {
     "defaultMessage": "Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado chave?",
     "description": "This text gives more details regarding our empty state card in the key result drawer"
@@ -642,6 +654,10 @@
   "sFYaLE": {
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
+  },
+  "sYGIlp": {
+    "defaultMessage": "Minha conta",
+    "description": "This label defines the text on the first menu section option"
   },
   "t6KyQZ": {
     "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
@@ -682,10 +698,6 @@
   "vJ/603": {
     "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
     "description": "The description displayed in our not found error page"
-  },
-  "vm0Yuj": {
-    "defaultMessage": "Meu perfil | bud",
-    "description": "The page title that is displayed in the browser tab for the my profile page"
   },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",

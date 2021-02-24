@@ -16,18 +16,22 @@ const SupportButton = () => {
       <a target="_blank">
         <IconButton
           aria-label={intl.formatMessage(messages.iconDesc)}
+          h={8}
+          minH={8}
+          minW={8}
           icon={
             <InfoCircleIcon
-              fill="gray.400"
-              stroke="gray.400"
-              fontSize="2xl"
+              fill="gray.500"
+              stroke="gray.500"
+              w={5}
+              h="auto"
               title={intl.formatMessage(messages.iconTitle)}
               desc={intl.formatMessage(messages.iconDesc)}
             />
           }
           borderRadius="full"
           _hover={{
-            bg: 'brand.50',
+            bg: 'gray.50',
           }}
         />
       </a>
