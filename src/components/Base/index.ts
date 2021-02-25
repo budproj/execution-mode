@@ -61,3 +61,5 @@ export { default as Alert } from './Alert'
 export { default as ButtonActivableByURL } from './ButtonActivableByURL'
 
 export { default as SettingsButton } from './SettingsButton'
+
+export { default as EditableField } from './EditableField'

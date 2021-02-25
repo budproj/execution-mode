@@ -37,7 +37,7 @@ const Button = {
 
     ghost: ({ colorScheme }: ButtonProps) => ({
       color: `${colorScheme ?? 'brand'}.500`,
-      borderRadius: 1,
+      borderRadius: 4,
 
       '&:hover': {
         bg: `${colorScheme ?? 'brand'}.50`,

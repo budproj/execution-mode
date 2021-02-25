@@ -8,6 +8,9 @@ const SettingsSidebarMenuSectionButton = (properties: ButtonActivableByURLProper
     variant="ghost"
     colorScheme="gray"
     justifyContent="flex-start"
+    fontSize="sm"
+    _active={{ bg: 'transparent', color: 'brand.500' }}
+    _hover={{ bg: 'gray.50', color: 'brand.500' }}
     {...properties}
   />
 )

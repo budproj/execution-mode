@@ -151,6 +151,10 @@
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
   },
+  "8EABR0": {
+    "defaultMessage": "Sobre você",
+    "description": "This is the label that goes on our user account settings page, at the seventh field to update the user informations"
+  },
   "8LTdv4": {
     "defaultMessage": "Objetivo",
     "description": "The text of the table head related to the Objective column"
@@ -239,6 +243,10 @@
     "defaultMessage": "Página não encontrada | bud",
     "description": "The page title of our not found error page that is displayed in the browser tab"
   },
+  "H/aZym": {
+    "defaultMessage": "Escolha como suas informações aparecerão para os outros usuários.",
+    "description": "This subtitle is displayed as the subtitle of the personal informations section in our user account settings page"
+  },
   "HAQ+JV": {
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
@@ -319,6 +327,10 @@
     "defaultMessage": "Como está sua confiança?",
     "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
   },
+  "NYGW+N": {
+    "defaultMessage": "Cargo",
+    "description": "This is the label that goes on our user account settings page, at the fifth field to update the user informations"
+  },
   "Nafqgw": {
     "defaultMessage": "Cancelar check-in",
     "description": "This message is displayed as a label button when the check-in form is opened in our key result section"
@@ -391,6 +403,10 @@
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
   },
+  "SvJM0q": {
+    "defaultMessage": "Time",
+    "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
+  },
   "SxsVDt": {
     "defaultMessage": "Meta",
     "description": "This is the label of the check-in form that indicates the goal for her/his key result"
@@ -458,6 +474,10 @@
   "XnTd/f": {
     "defaultMessage": "Novo valor",
     "description": "This text is displayed in our check-in card, as a title for the right column in the progress increase section"
+  },
+  "Y+MtZe": {
+    "defaultMessage": "Nome",
+    "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
   },
   "YUvWwS": {
     "defaultMessage": "Registro",
@@ -619,6 +639,10 @@
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
+  "nnWr7M": {
+    "defaultMessage": "Gênero",
+    "description": "This is the label that goes on our user account settings page, at the sixth field to update the user informations"
+  },
   "nrToz/": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our unknown error page"
@@ -631,6 +655,10 @@
     "defaultMessage": "Um ícone de coroa",
     "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
+  "pXeDLf": {
+    "defaultMessage": "Sobrenome",
+    "description": "This is the label that goes on our user account settings page, at the second field to update the user informations"
+  },
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
@@ -642,6 +670,10 @@
   "qmEcGQ": {
     "defaultMessage": "Minha conta",
     "description": "AppBar user menu first item option"
+  },
+  "r1mfc1": {
+    "defaultMessage": "Informações pessoais",
+    "description": "This title is displayed as the heading of the personal informations section in our user account settings page"
   },
   "rBdkOv": {
     "defaultMessage": "Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado chave?",
@@ -714,6 +746,10 @@
   "xRyM8t": {
     "defaultMessage": "Ícone de um ponto de interrogação. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
+  },
+  "xVR0F1": {
+    "defaultMessage": "Apelido",
+    "description": "This is the label that goes on our user account settings page, at the third field to update the user informations"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",

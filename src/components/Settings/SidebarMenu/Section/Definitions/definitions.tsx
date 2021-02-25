@@ -13,11 +13,18 @@ const SettingsSidebarMenuSectionPreferences = () => {
 
   return (
     <Flex direction="column" gridGap={3} pr={8}>
-      <Heading as="h2" color="gray.300" fontWeight={700} fontSize="sm" textTransform="uppercase">
+      <Heading
+        as="h2"
+        color="gray.300"
+        fontWeight={700}
+        fontSize="xs"
+        textTransform="uppercase"
+        pl={4}
+      >
         {intl.formatMessage(messages.sectionTitle)}
       </Heading>
 
-      <SettingsSidebarMenuSectionButton href="/settings/my-account" _active={{ bg: 'gray.50' }}>
+      <SettingsSidebarMenuSectionButton href="/settings/my-account">
         <IntlLink href="/settings/my-account">
           {intl.formatMessage(messages.firstOptionLabel)}
         </IntlLink>

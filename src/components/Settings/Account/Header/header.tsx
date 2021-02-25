@@ -1,20 +1,8 @@
-import { Flex, Heading, Tag, TagProps, Text } from '@chakra-ui/react'
+import { Flex, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
 
+import TeamTag from 'src/components/Team/Tag'
 import UserAvatarEmptyState from 'src/components/User/AvatarEmptyState'
-
-const TeamTag = (properties: TagProps) => (
-  <Tag
-    bg="gray.50"
-    color="gray.500"
-    textTransform="uppercase"
-    fontWeight={500}
-    fontSize="2xs"
-    borderRadius={4}
-    p={2}
-    {...properties}
-  />
-)
 
 const SettingsAccountHeader = () => (
   <Flex gridGap={4} alignItems="center">
