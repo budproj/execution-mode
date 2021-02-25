@@ -6,7 +6,7 @@ import { useSetRecoilState } from 'recoil'
 import { PageHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { PageProperties } from 'src/components/Page/types'
-import { SettingsProfile, SettingsSidebarMenu } from 'src/components/Settings'
+import { SettingsAccount, SettingsSidebarMenu } from 'src/components/Settings'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
@@ -27,7 +27,7 @@ const SettingsMyAccountPage = ({ isRootPage }: PageProperties) => {
         <SettingsSidebarMenu />
         <Divider orientation="vertical" borderColor="black.200" height="auto" />
 
-        <SettingsProfile />
+        <SettingsAccount />
       </Flex>
     </PageContent>
   )

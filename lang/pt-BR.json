@@ -1,4 +1,8 @@
 {
+  "+/9Nj7": {
+    "defaultMessage": "Seu avatar",
+    "description": "The title text of our image icon in our settings account page, it is displayed when an user hover the icon itself"
+  },
   "+G9goh": {
     "defaultMessage": "Ver mais...",
     "description": "This text is displayed in the button that expands a truncated text"
@@ -422,6 +426,10 @@
   "UoPQ4X": {
     "defaultMessage": "Nível de confiança",
     "description": "The text of the table head related to the Confidence Level column"
+  },
+  "Uu0OJV": {
+    "defaultMessage": "Um ícone de imagem. Ele indica que nesse campo fica seu avatar",
+    "description": "The alternative text explaining our image icon in the settings account page"
   },
   "VNHZWm": {
     "defaultMessage": "Período",

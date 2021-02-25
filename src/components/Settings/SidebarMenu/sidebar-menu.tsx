@@ -4,7 +4,7 @@ import React from 'react'
 import { SettingsSidebarMenuSectionDefinitions } from './Section'
 
 const SettingsSidebarMenu = () => (
-  <Box width="xs">
+  <Box width="xs" py={4}>
     <Flex gridGap={3} direction="column">
       <SettingsSidebarMenuSectionDefinitions />
     </Flex>

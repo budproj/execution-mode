@@ -13,6 +13,7 @@ import {
   Menu,
   Modal,
   Alert,
+  Avatar,
 } from './components'
 
 const colors = {
@@ -162,6 +163,7 @@ const theme = extendTheme({
     Menu,
     Modal,
     Alert,
+    Avatar,
   },
 
   fonts: {
@@ -190,6 +192,10 @@ const theme = extendTheme({
     md: '24rem',
     lg: '28rem',
     xl: '32rem',
+  },
+
+  fontSizes: {
+    '2xs': '0.625rem',
   },
 })
 
