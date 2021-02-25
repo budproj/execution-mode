@@ -1,30 +1,44 @@
-import { Flex, Heading, Text } from '@chakra-ui/react'
+import { Flex, Heading, Text, Skeleton } from '@chakra-ui/react'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
 
-import TeamTag from 'src/components/Team/Tag'
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import UserAvatarEmptyState from 'src/components/User/AvatarEmptyState'
+import UserTeamTags from 'src/components/User/TeamTags'
+import { User } from 'src/components/User/types'
+import { userAtomFamily } from 'src/state/recoil/user'
 
-const SettingsAccountHeader = () => (
-  <Flex gridGap={4} alignItems="center">
-    <UserAvatarEmptyState size="xl" />
+export interface SettingsAccountHeader {
+  userID?: User['id']
+}
 
-    <Flex direction="column" gridGap={4}>
-      <Flex direction="column" gridGap={1}>
-        <Heading as="h2" color="black.900" fontSize="xl" fontWeight={500}>
-          Daniel De Lucca
-        </Heading>
+const SettingsAccountHeader = ({ userID }: SettingsAccountHeader) => {
+  const user = useRecoilValue(userAtomFamily(userID))
+  const isLoaded = Boolean(user)
 
-        <Text color="gray.400" fontSize="md" fontWeight={400}>
-          Engenheiro de Software Sênior
-        </Text>
-      </Flex>
+  return (
+    <Flex gridGap={4} alignItems="center">
+      <UserAvatarEmptyState size="xl" />
 
-      <Flex gridGap={2} alignItems="flex-start">
-        <TeamTag>Produto</TeamTag>
-        <TeamTag>Marketing</TeamTag>
+      <Flex direction="column" gridGap={4}>
+        <Flex direction="column" gridGap={1}>
+          <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 180, 24)}>
+            <Heading as="h2" color="black.900" fontSize="xl" fontWeight={500}>
+              {user?.fullName}
+            </Heading>
+          </Skeleton>
+
+          <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 220, 21)}>
+            <Text color="gray.400" fontSize="md" fontWeight={400}>
+              {user?.role}
+            </Text>
+          </Skeleton>
+        </Flex>
+
+        <UserTeamTags userID={userID} />
       </Flex>
     </Flex>
-  </Flex>
-)
+  )
+}
 
 export default SettingsAccountHeader

@@ -1,0 +1,16 @@
+query GET_USER_DATA($id: ID!) {
+  user(id: $id) {
+    firstName
+    lastName
+    fullName
+    role
+    nickname
+    gender
+    about
+    linkedInProfileAddress
+    teams {
+      id
+      name
+    }
+  }
+}

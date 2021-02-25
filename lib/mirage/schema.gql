@@ -129,6 +129,17 @@ type User implements EntityObject {
 
   """The picture of the user"""
   picture: String
+
+  """The custom nickname that user wants to be called"""
+  nickname: String
+
+  """
+  A description for that user. A more detailed information where the user tells about her/himself
+  """
+  about: String
+
+  """The URL for the user's LinkedIn profile"""
+  linkedInProfileAddress: String
   companies(limit: Int): [Team!]
   teams: [Team!]
   ownedTeams: [Team!]
