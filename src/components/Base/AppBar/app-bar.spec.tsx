@@ -39,7 +39,7 @@ describe('component customizations', () => {
   it('displays the user section if we do not ask to display only the logotype', () => {
     const result = enzyme.shallow(<AppBar />)
 
-    const userMenu = result.find('AppBarUserMenu')
+    const userMenu = result.find('UserMenu')
 
     expect(userMenu.length).toEqual(1)
   })
