@@ -147,6 +147,10 @@
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
     "description": "The page description that is displayed in Google and screen readers"
   },
+  "77LX/s": {
+    "defaultMessage": "Vincule seu perfil às suas redes sociais para facilitar a conexão com seus colegas!",
+    "description": "This subtitle is displayed as the subtitle of the social media section in our user account settings page"
+  },
   "89ola3": {
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
@@ -639,6 +643,10 @@
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
   },
+  "nPCTf0": {
+    "defaultMessage": "Redes sociais",
+    "description": "This title is displayed as the heading of the social media section in our user account settings page"
+  },
   "nnWr7M": {
     "defaultMessage": "Gênero",
     "description": "This is the label that goes on our user account settings page, at the sixth field to update the user informations"
@@ -766,6 +774,10 @@
   "zEyzo8": {
     "defaultMessage": "Um círculo roxo, indicando que o resultado-chave tem uma barreira",
     "description": "A brief explanation for screen readers regarding the purple status circle"
+  },
+  "zHAPqJ": {
+    "defaultMessage": "LinkedIn",
+    "description": "This is the label that goes on our user account settings page, at the first field to update the user social media accounts"
   },
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",

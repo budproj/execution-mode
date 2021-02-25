@@ -12,9 +12,13 @@ const EditableField = ({ label, value, children, ...rest }: EditableFieldPropert
     <FormLabel fontSize="sm" m={0}>
       {label}
     </FormLabel>
-    <Text fontSize="md" color="black.900" fontWeight={400}>
-      {children ?? value}
-    </Text>
+    {children ? (
+      children
+    ) : (
+      <Text fontSize="md" color="black.900" fontWeight={400}>
+        {children ?? value}
+      </Text>
+    )}
   </Stack>
 )
 
