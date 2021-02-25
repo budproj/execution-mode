@@ -72,6 +72,12 @@ const publicRuntimeConfig = {
       destination: '/explore/:id',
       locale: 'pt-BR',
     },
+
+    {
+      source: '/pt-BR/configuracoes/minha-conta',
+      destination: '/settings/my-account',
+      locale: 'pt-BR',
+    },
   ],
 }
 

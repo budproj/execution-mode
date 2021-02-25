@@ -1,0 +1,3 @@
+import SettingsSidebarMenuSectionDefinitions from './definitions'
+
+export default SettingsSidebarMenuSectionDefinitions

@@ -13,7 +13,7 @@ const KeyResultSectionTimelineCardEmptyState = () => {
     <KeyResultSectionTimelineCardBase borderWidth={0} bg="black.50">
       <Flex direction="column" alignItems="center" gridGap={2} py={4}>
         <Box>
-          <Image src="/images/ghost-drawing.png" />
+          <Image src="/images/ghost-drawing-sm.png" />
         </Box>
         <Heading as="h3" fontSize="md" color="gray.400">
           {intl.formatMessage(messages.title)}

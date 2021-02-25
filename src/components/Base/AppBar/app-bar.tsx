@@ -3,10 +3,10 @@ import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
 import Logotype from 'src/components/Base/Logotype'
-import Me from 'src/components/User/Me'
 
 import AppBarHelperButtons from './HelperButtons'
 import AppBarMenuItem from './MenuItem'
+import AppBarUserMenu from './UserMenu'
 import { RIGHT_WING_GRID_GAP } from './constants'
 import messages from './messages'
 
@@ -25,7 +25,7 @@ const AppBar = ({ variant }: AppBarProperties): ReactElement => {
       py={4}
       borderBottom={1}
       gridGap={10}
-      borderColor="black.100"
+      borderColor="black.200"
       borderStyle="solid"
       alignItems="center"
       justifyContent="center"
@@ -50,7 +50,7 @@ const AppBar = ({ variant }: AppBarProperties): ReactElement => {
             gridGap={RIGHT_WING_GRID_GAP}
           >
             <AppBarHelperButtons />
-            <Me />
+            <AppBarUserMenu />
           </Flex>
         </>
       )}

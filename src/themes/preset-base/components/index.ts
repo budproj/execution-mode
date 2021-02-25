@@ -17,3 +17,5 @@ export { default as Menu } from './menu'
 export { default as Modal } from './modal'
 
 export { default as Alert } from './alert'
+
+export { default as Avatar } from './avatar'

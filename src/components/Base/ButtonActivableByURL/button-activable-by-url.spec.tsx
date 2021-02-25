@@ -4,7 +4,7 @@ import * as router from 'next/router'
 import React from 'react'
 import sinon from 'sinon'
 
-import MenuItem from './menu-item'
+import ButtonActivableByURL from './button-activable-by-url'
 
 describe('props customization', () => {
   afterEach(() => sinon.restore())
@@ -13,7 +13,7 @@ describe('props customization', () => {
     const fakeHref = faker.internet.url()
     sinon.stub(router, 'useRouter').returns({ pathname: fakeHref } as router.NextRouter)
 
-    const result = enzyme.shallow(<MenuItem label={faker.random.word()} href={fakeHref} />)
+    const result = enzyme.shallow(<ButtonActivableByURL href={fakeHref} />)
 
     const buttonComponent = result.find('Button')
 
@@ -24,21 +24,10 @@ describe('props customization', () => {
     const fakeHref = faker.internet.url()
     sinon.stub(router, 'useRouter').returns({ pathname: faker.random.word() } as router.NextRouter)
 
-    const result = enzyme.shallow(<MenuItem label={faker.random.word()} href={fakeHref} />)
+    const result = enzyme.shallow(<ButtonActivableByURL href={fakeHref} />)
 
     const buttonComponent = result.find('Button')
 
     expect(buttonComponent.prop('isActive')).toEqual(false)
-  })
-
-  it('renders a custom label', () => {
-    const fakeLabel = faker.random.word()
-    sinon.stub(router, 'useRouter').returns({ pathname: faker.random.word() } as router.NextRouter)
-
-    const result = enzyme.shallow(<MenuItem label={fakeLabel} href={faker.internet.url()} />)
-
-    const buttonComponent = result.find('Button')
-
-    expect(buttonComponent.text()).toEqual(fakeLabel)
   })
 })

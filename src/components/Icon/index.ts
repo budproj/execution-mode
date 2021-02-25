@@ -82,4 +82,8 @@ export { default as Warning } from './Warning'
 
 export { default as Line } from './Line'
 
+export { default as Gear } from './Gear'
+
+export { default as Image } from './Image'
+
 export * from './types'

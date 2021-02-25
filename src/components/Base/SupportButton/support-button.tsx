@@ -1,36 +1,41 @@
 import { IconButton } from '@chakra-ui/react'
+import Link from 'next/link'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import InfoCircleIcon from 'src/components/Icon/InfoCircle'
 
+import { HELPDESK_URL } from './constants'
 import messages from './messages'
-
-const redirectToSupport = () => {
-  window.location.href = 'https://getbud.atlassian.net/servicedesk/customer/portals'
-}
 
 const SupportButton = () => {
   const intl = useIntl()
 
   return (
-    <IconButton
-      aria-label={intl.formatMessage(messages.iconDesc)}
-      icon={
-        <InfoCircleIcon
-          fill="gray.400"
-          stroke="gray.400"
-          fontSize="2xl"
-          title={intl.formatMessage(messages.iconTitle)}
-          desc={intl.formatMessage(messages.iconDesc)}
+    <Link href={HELPDESK_URL}>
+      <a target="_blank">
+        <IconButton
+          aria-label={intl.formatMessage(messages.iconDesc)}
+          h={8}
+          minH={8}
+          minW={8}
+          icon={
+            <InfoCircleIcon
+              fill="gray.500"
+              stroke="gray.500"
+              w={5}
+              h="auto"
+              title={intl.formatMessage(messages.iconTitle)}
+              desc={intl.formatMessage(messages.iconDesc)}
+            />
+          }
+          borderRadius="full"
+          _hover={{
+            bg: 'gray.50',
+          }}
         />
-      }
-      borderRadius="full"
-      _hover={{
-        bg: 'brand.50',
-      }}
-      onClick={redirectToSupport}
-    />
+      </a>
+    </Link>
   )
 }
 

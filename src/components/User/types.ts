@@ -20,9 +20,12 @@ export interface User {
   gender?: USER_GENDER
   role?: string
   picture?: string
-  companies?: Team[]
-  teams?: Team[]
-  ownedTeams?: Team[]
+  nickname?: string
+  about?: string
+  linkedInProfileAddress?: string
+  companies?: Array<Partial<Team>>
+  teams?: Array<Partial<Team>>
+  ownedTeams?: Array<Partial<Team>>
   objectives?: Objective[]
   keyResults?: KeyResult[]
   keyResultCustomLists?: KeyResultCustomList[]
