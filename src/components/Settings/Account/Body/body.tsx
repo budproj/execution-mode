@@ -15,7 +15,7 @@ const SettingsAccountBody = ({ userID, loading }: SettingsAccountBodyProperties)
   <Flex direction="column" gridGap={6}>
     <SettingsAccountBodyPersonalInformations userID={userID} loading={loading} />
     <Divider borderColor="black.200" />
-    <SettingsAccountBodySocialMedia />
+    <SettingsAccountBodySocialMedia userID={userID} loading={loading} />
   </Flex>
 )
 
