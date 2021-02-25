@@ -1,15 +1,29 @@
 import { Stack, Flex } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import EditableField from 'src/components/Base/EditableField'
 import SettingsAccountBodySectionTitle from 'src/components/Settings/Account/Body/SectionTitle'
-import TeamTag from 'src/components/Team/Tag'
+import UserTeamTags from 'src/components/User/TeamTags'
+import { User } from 'src/components/User/types'
+import { userAtomFamily } from 'src/state/recoil/user'
 
 import messages from './messages'
 
-const SettingsAccountBodyPersonalInformations = () => {
+export interface SettingsAccountBodyPersonalInformationsProperties {
+  userID?: User['id']
+  loading?: boolean
+}
+
+const SettingsAccountBodyPersonalInformations = ({
+  userID,
+  loading,
+}: SettingsAccountBodyPersonalInformationsProperties) => {
+  const user = useRecoilValue(userAtomFamily(userID))
   const intl = useIntl()
+
+  const isLoaded = !loading && Boolean(user)
 
   return (
     <Stack direction="column" spacing={6}>
@@ -22,35 +36,44 @@ const SettingsAccountBodyPersonalInformations = () => {
         <Flex>
           <EditableField
             label={intl.formatMessage(messages.firstFieldLabel)}
-            value="Daniel"
+            value={user?.firstName}
+            isLoaded={isLoaded}
             flexGrow={1}
           />
           <EditableField
             label={intl.formatMessage(messages.secondFieldLabel)}
-            value="De Lucca"
+            value={user?.lastName}
+            isLoaded={isLoaded}
             flexGrow={1}
           />
         </Flex>
 
-        <EditableField label={intl.formatMessage(messages.thirdFieldLabel)} value="odelucca" />
+        <EditableField
+          label={intl.formatMessage(messages.thirdFieldLabel)}
+          value={user?.nickname}
+          isLoaded={isLoaded}
+        />
 
         <EditableField label={intl.formatMessage(messages.fourthFieldLabel)}>
-          <Stack direction="row" spacing={2}>
-            <TeamTag>Produto</TeamTag>
-            <TeamTag>Marketing</TeamTag>
-          </Stack>
+          <UserTeamTags userID={userID} />
         </EditableField>
 
         <EditableField
           label={intl.formatMessage(messages.fifthFieldLabel)}
-          value="Engenheiro de Software Sênio"
+          value={user?.role}
+          isLoaded={isLoaded}
         />
-
-        <EditableField label={intl.formatMessage(messages.sixthFieldLabel)} value="Masculino" />
 
         <EditableField
           label={intl.formatMessage(messages.sixthFieldLabel)}
-          value="Desenvolvimento frontend e backend, construção de OKRs, automatização de planilhas do google."
+          value={user?.gender}
+          isLoaded={isLoaded}
+        />
+
+        <EditableField
+          label={intl.formatMessage(messages.seventhFieldLabel)}
+          value={user?.about}
+          isLoaded={isLoaded}
         />
       </Stack>
     </Stack>

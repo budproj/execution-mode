@@ -53,7 +53,7 @@ const SettingsProfile = () => {
     <Flex py={4} gridGap={6} direction="column" w="full">
       <SettingsAccountHeader userID={myUserID} loading={loading} />
       <Divider borderColor="black.200" />
-      <SettingsAccountBody />
+      <SettingsAccountBody userID={myUserID} loading={loading} />
     </Flex>
   )
 }
