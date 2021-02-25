@@ -55,7 +55,7 @@ const SettingsAccountBodyPersonalInformations = ({
         />
 
         <EditableField label={intl.formatMessage(messages.fourthFieldLabel)}>
-          <UserTeamTags userID={userID} />
+          <UserTeamTags userID={userID} loading={loading} />
         </EditableField>
 
         <EditableField

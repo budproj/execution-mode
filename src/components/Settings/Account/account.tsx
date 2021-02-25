@@ -12,8 +12,9 @@ import SettingsAccountBody from './Body'
 import SettingsAccountHeader from './Header'
 import queries from './queries.gql'
 
-interface GetUserDataQuery {
+export interface GetUserDataQuery {
   user: {
+    id: User['id']
     firstName: User['firstName']
     fullName: User['fullName']
     lastname?: User['lastName']
@@ -29,20 +30,20 @@ interface GetUserDataQuery {
   }
 }
 
-const SettingsProfile = () => {
+const SettingsAccount = () => {
   const myUserID = useRecoilValue(meAtom)
   const setUser = useSetRecoilState(userAtomFamily(myUserID))
   const [getUserData, { data, loading, variables }] = useLazyQuery<GetUserDataQuery>(
     queries.GET_USER_DATA,
+    {
+      variables: {
+        id: myUserID,
+      },
+    },
   )
 
   useEffect(() => {
-    if (myUserID && myUserID !== variables?.id)
-      getUserData({
-        variables: {
-          id: myUserID,
-        },
-      })
+    if (myUserID && myUserID !== variables?.id) getUserData()
   }, [myUserID, getUserData, variables])
 
   useEffect(() => {
@@ -58,4 +59,4 @@ const SettingsProfile = () => {
   )
 }
 
-export default SettingsProfile
+export default SettingsAccount
