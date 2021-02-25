@@ -10,11 +10,12 @@ import UserTeamTagsSkeleton from './skeleton'
 
 export interface UserTeamTagsProperties {
   userID?: User['id']
+  loading?: boolean
 }
 
-const UserTeamTags = ({ userID }: UserTeamTagsProperties) => {
+const UserTeamTags = ({ userID, loading }: UserTeamTagsProperties) => {
   const user = useRecoilValue(userAtomFamily(userID))
-  const isLoaded = Boolean(user)
+  const isLoaded = !loading && Boolean(user)
 
   return isLoaded ? (
     <Stack spacing={2} direction="row">

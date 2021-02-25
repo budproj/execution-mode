@@ -32,7 +32,9 @@ interface GetUserDataQuery {
 const SettingsProfile = () => {
   const myUserID = useRecoilValue(meAtom)
   const setUser = useSetRecoilState(userAtomFamily(myUserID))
-  const [getUserData, { data, variables }] = useLazyQuery<GetUserDataQuery>(queries.GET_USER_DATA)
+  const [getUserData, { data, loading, variables }] = useLazyQuery<GetUserDataQuery>(
+    queries.GET_USER_DATA,
+  )
 
   useEffect(() => {
     if (myUserID && myUserID !== variables?.id)
@@ -49,7 +51,7 @@ const SettingsProfile = () => {
 
   return (
     <Flex py={4} gridGap={6} direction="column" w="full">
-      <SettingsAccountHeader userID={myUserID} />
+      <SettingsAccountHeader userID={myUserID} loading={loading} />
       <Divider borderColor="black.200" />
       <SettingsAccountBody />
     </Flex>

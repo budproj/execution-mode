@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type AvatarEmptyStateMessage = 'imageIconTitle' | 'imageIconDesc'
+type AvatarMessage = 'imageIconTitle' | 'imageIconDesc'
 
-export default defineMessages<AvatarEmptyStateMessage>({
+export default defineMessages<AvatarMessage>({
   imageIconTitle: {
     defaultMessage: 'Seu avatar',
     id: '+/9Nj7',

@@ -3,22 +3,23 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import UserAvatarEmptyState from 'src/components/User/AvatarEmptyState'
+import UserAvatar from 'src/components/User/Avatar'
 import UserTeamTags from 'src/components/User/TeamTags'
 import { User } from 'src/components/User/types'
 import { userAtomFamily } from 'src/state/recoil/user'
 
 export interface SettingsAccountHeader {
   userID?: User['id']
+  loading?: boolean
 }
 
-const SettingsAccountHeader = ({ userID }: SettingsAccountHeader) => {
+const SettingsAccountHeader = ({ userID, loading }: SettingsAccountHeader) => {
   const user = useRecoilValue(userAtomFamily(userID))
-  const isLoaded = Boolean(user)
+  const isLoaded = !loading && Boolean(user)
 
   return (
     <Flex gridGap={4} alignItems="center">
-      <UserAvatarEmptyState size="xl" />
+      <UserAvatar size="xl" name={user?.fullName} src={user?.picture} />
 
       <Flex direction="column" gridGap={4}>
         <Flex direction="column" gridGap={1}>
@@ -28,14 +29,14 @@ const SettingsAccountHeader = ({ userID }: SettingsAccountHeader) => {
             </Heading>
           </Skeleton>
 
-          <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 220, 21)}>
+          <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 220, 18)}>
             <Text color="gray.400" fontSize="md" fontWeight={400}>
               {user?.role}
             </Text>
           </Skeleton>
         </Flex>
 
-        <UserTeamTags userID={userID} />
+        <UserTeamTags userID={userID} loading={loading} />
       </Flex>
     </Flex>
   )

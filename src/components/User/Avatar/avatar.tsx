@@ -6,12 +6,11 @@ import ImageIcon from 'src/components/Icon/Image'
 
 import messages from './messages'
 
-const UserAvatarEmptyState = (properties: AvatarProps) => {
+const UserAvatar = (properties: AvatarProps) => {
   const intl = useIntl()
 
   return (
     <Avatar
-      bg="brand.100"
       variant="square"
       icon={
         <ImageIcon
@@ -25,4 +24,4 @@ const UserAvatarEmptyState = (properties: AvatarProps) => {
   )
 }
 
-export default UserAvatarEmptyState
+export default UserAvatar
