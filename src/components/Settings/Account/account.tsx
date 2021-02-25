@@ -33,9 +33,10 @@ export interface GetUserDataQuery {
 const SettingsAccount = () => {
   const myUserID = useRecoilValue(meAtom)
   const setUser = useSetRecoilState(userAtomFamily(myUserID))
-  const [getUserData, { data, loading, variables }] = useLazyQuery<GetUserDataQuery>(
+  const [getUserData, { loading, variables }] = useLazyQuery<GetUserDataQuery>(
     queries.GET_USER_DATA,
     {
+      onCompleted: (data) => setUser(data.user),
       variables: {
         id: myUserID,
       },
@@ -45,10 +46,6 @@ const SettingsAccount = () => {
   useEffect(() => {
     if (myUserID && myUserID !== variables?.id) getUserData()
   }, [myUserID, getUserData, variables])
-
-  useEffect(() => {
-    if (data) setUser(data.user)
-  }, [data, setUser])
 
   return (
     <Flex py={4} gridGap={6} direction="column" w="full">
