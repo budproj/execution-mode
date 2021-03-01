@@ -179,6 +179,10 @@
     "defaultMessage": "Explorar",
     "description": "The name of the Explore page, located at \"/explore\""
   },
+  "9sw0lJ": {
+    "defaultMessage": "Selecione seu gênero",
+    "description": "This is the fallback value that goes on our user account settings page, at the sixth field to update the user informations. The fallback value appears if the user has no data at that field"
+  },
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
@@ -238,6 +242,10 @@
   "FEd9u8": {
     "defaultMessage": "Salvar",
     "description": "This message is displayed in the \"SAVE\" button in the checkin form"
+  },
+  "FPhsI3": {
+    "defaultMessage": "Selecione seus times",
+    "description": "This is the fallback value that goes on our user account settings page, at the fourth field to update the user informations. The fallback value appears if the user has no data at that field"
   },
   "FVnpVq": {
     "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
@@ -394,6 +402,10 @@
   "RcUoJA": {
     "defaultMessage": "Painel",
     "description": "AppBar menu item that links to \"Dashboard\" page"
+  },
+  "RrW2fc": {
+    "defaultMessage": "Atualize seu cargo",
+    "description": "This is the fallback value that goes on our user account settings page, at the fifth field to update the user informations. The fallback value appears if the user has no data at that field"
   },
   "S/F2Hk": {
     "defaultMessage": "Detalhes",
@@ -599,6 +611,10 @@
     "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
   },
+  "k0fMvn": {
+    "defaultMessage": "Escreva sobre você",
+    "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
+  },
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
     "description": "A brief explanation for screen readers regarding the yellow status circle"
@@ -770,6 +786,10 @@
   "xVR0F1": {
     "defaultMessage": "Apelido",
     "description": "This is the label that goes on our user account settings page, at the third field to update the user informations"
+  },
+  "yJ4O6G": {
+    "defaultMessage": "Nenhuma informação",
+    "description": "The fallback value appears if no value is defined for that field. This field is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",

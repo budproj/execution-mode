@@ -60,25 +60,31 @@ const SettingsAccountBodyPersonalInformations = ({
           isLoaded={isLoaded}
         />
 
-        <EditableField label={intl.formatMessage(messages.fourthFieldLabel)}>
+        <EditableField
+          label={intl.formatMessage(messages.fourthFieldLabel)}
+          customFallbackValue={intl.formatMessage(messages.fallbackFourthField)}
+        >
           <UserTeamTags userID={userID} loading={loading} />
         </EditableField>
 
         <EditableField
           label={intl.formatMessage(messages.fifthFieldLabel)}
           value={user?.role}
+          customFallbackValue={intl.formatMessage(messages.fallbackFifthField)}
           isLoaded={isLoaded}
         />
 
         <EditableField
           label={intl.formatMessage(messages.sixthFieldLabel)}
           value={gender}
+          customFallbackValue={intl.formatMessage(messages.fallbackSixthField)}
           isLoaded={isLoaded}
         />
 
         <EditableField
           label={intl.formatMessage(messages.seventhFieldLabel)}
           value={user?.about}
+          customFallbackValue={intl.formatMessage(messages.fallbackSeventhField)}
           isLoaded={isLoaded}
         />
       </Stack>

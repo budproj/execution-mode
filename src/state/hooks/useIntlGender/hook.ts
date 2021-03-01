@@ -6,7 +6,7 @@ import { USER_GENDER } from 'src/components/User/constants'
 import messages from './messages'
 
 type IntlGenderHook = [
-  string,
+  string | undefined,
   Dispatch<SetStateAction<USER_GENDER | undefined>>,
   USER_GENDER | undefined,
 ]
@@ -18,13 +18,10 @@ const useIntlGender = (initialValue?: USER_GENDER): IntlGenderHook => {
   const genderMessageDescriptorHashmap = {
     [USER_GENDER.MALE]: messages.maleGender,
     [USER_GENDER.FEMALE]: messages.femaleGender,
-    default: messages.undefinedGender,
   }
 
-  const messageDescriptor = genderValue
-    ? genderMessageDescriptorHashmap[genderValue]
-    : genderMessageDescriptorHashmap.default
-  const gender = intl.formatMessage(messageDescriptor)
+  const messageDescriptor = genderValue ? genderMessageDescriptorHashmap[genderValue] : undefined
+  const gender = messageDescriptor ? intl.formatMessage(messageDescriptor) : undefined
 
   return [gender, setGenderValue, genderValue]
 }

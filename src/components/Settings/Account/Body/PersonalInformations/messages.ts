@@ -10,6 +10,10 @@ type SettingsAccountBodyPersonalInformationsMessage =
   | 'fifthFieldLabel'
   | 'sixthFieldLabel'
   | 'seventhFieldLabel'
+  | 'fallbackFourthField'
+  | 'fallbackFifthField'
+  | 'fallbackSixthField'
+  | 'fallbackSeventhField'
 
 export default defineMessages<SettingsAccountBodyPersonalInformationsMessage>({
   sectionTitle: {
@@ -73,5 +77,33 @@ export default defineMessages<SettingsAccountBodyPersonalInformationsMessage>({
     id: '8EABR0',
     description:
       'This is the label that goes on our user account settings page, at the seventh field to update the user informations',
+  },
+
+  fallbackFourthField: {
+    defaultMessage: 'Selecione seus times',
+    id: 'FPhsI3',
+    description:
+      'This is the fallback value that goes on our user account settings page, at the fourth field to update the user informations. The fallback value appears if the user has no data at that field',
+  },
+
+  fallbackFifthField: {
+    defaultMessage: 'Atualize seu cargo',
+    id: 'RrW2fc',
+    description:
+      'This is the fallback value that goes on our user account settings page, at the fifth field to update the user informations. The fallback value appears if the user has no data at that field',
+  },
+
+  fallbackSixthField: {
+    defaultMessage: 'Selecione seu gênero',
+    id: '9sw0lJ',
+    description:
+      'This is the fallback value that goes on our user account settings page, at the sixth field to update the user informations. The fallback value appears if the user has no data at that field',
+  },
+
+  fallbackSeventhField: {
+    defaultMessage: 'Escreva sobre você',
+    id: 'k0fMvn',
+    description:
+      'This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field',
   },
 })
