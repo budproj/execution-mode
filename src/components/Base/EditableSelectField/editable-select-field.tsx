@@ -7,7 +7,7 @@ export interface EditableSelectFieldProperties {
   label: string
   onChange: (value: string | string[]) => void
   isLoaded?: boolean
-  customFallbackValue?: string
+  customFallbackPlaceholder?: string
   value?: string
   placeholder?: string
   children?: MenuProps['children']
@@ -19,7 +19,7 @@ const EditableSelectField = ({
   value,
   children,
   placeholder,
-  customFallbackValue,
+  customFallbackPlaceholder,
   isLoaded,
   flexGrow,
   onChange,
@@ -32,7 +32,7 @@ const EditableSelectField = ({
       <EditableSelectValue
         value={value}
         placeholder={placeholder}
-        customFallbackValue={customFallbackValue}
+        customFallbackPlaceholder={customFallbackPlaceholder}
         isLoaded={isLoaded}
         onChange={onChange}
       >

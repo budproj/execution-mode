@@ -86,7 +86,7 @@ describe('fallback value', () => {
   it('should render the provided fallback value', () => {
     const customFallback = faker.random.word()
     const wrapper = enzyme.shallow(
-      <EditableSelectValue customFallbackValue={customFallback} onChange={sinon.fake()}>
+      <EditableSelectValue customFallbackPlaceholder={customFallback} onChange={sinon.fake()}>
         <MenuItemOption>{faker.random.word()}</MenuItemOption>
       </EditableSelectValue>,
     )

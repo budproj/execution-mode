@@ -83,9 +83,9 @@ const SettingsAccountBodyPersonalInformations = ({
           label={intl.formatMessage(messages.sixthFieldLabel)}
           value={user?.gender}
           placeholder={intlGender}
-          customFallbackValue={intl.formatMessage(messages.fallbackSixthField)}
+          customFallbackPlaceholder={intl.formatMessage(messages.fallbackSixthField)}
           isLoaded={isLoaded}
-          onChange={() => {}}
+          onChange={() => console.log('ok')}
         >
           <MenuItemOption value={USER_GENDER.MALE}>{maleIntlGender}</MenuItemOption>
           <MenuItemOption value={USER_GENDER.FEMALE}>{femaleIntlGender}</MenuItemOption>

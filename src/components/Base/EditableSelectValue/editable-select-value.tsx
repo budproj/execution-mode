@@ -10,7 +10,7 @@ export interface EditableSelectValueProperties extends MenuProps {
   onChange: (value: string | string[]) => void
   value?: string
   placeholder?: string
-  customFallbackValue?: string
+  customFallbackPlaceholder?: string
   isLoaded?: boolean
 }
 
@@ -19,13 +19,14 @@ const EditableSelectValue = ({
   onChange,
   value,
   placeholder,
-  customFallbackValue,
+  customFallbackPlaceholder,
   children,
 }: EditableSelectValueProperties) => {
   const [isHovering, setIsHovering] = useState(false)
   const intl = useIntl()
 
-  const fallbackValue = customFallbackValue ?? intl.formatMessage(messages.fallbackValue)
+  const fallbackPlaceholder =
+    customFallbackPlaceholder ?? intl.formatMessage(messages.fallbackPlaceholder)
   const defaultColor = value ? 'black.900' : 'gray.400'
 
   const handleStartHover = () => {
@@ -49,7 +50,7 @@ const EditableSelectValue = ({
         onMouseEnter={handleStartHover}
         onMouseLeave={handleEndHover}
       >
-        {placeholder ?? fallbackValue}
+        {placeholder ?? fallbackPlaceholder}
         <PenIcon
           fill="brand.400"
           opacity={isHovering ? 1 : 0}

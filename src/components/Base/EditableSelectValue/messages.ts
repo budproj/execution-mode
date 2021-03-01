@@ -1,9 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type EditableSelectValueMessage = 'fallbackValue' | 'editableIconDesc' | 'editableIconTitle'
+type EditableSelectValueMessage = 'fallbackPlaceholder' | 'editableIconDesc' | 'editableIconTitle'
 
 export default defineMessages<EditableSelectValueMessage>({
-  fallbackValue: {
+  fallbackPlaceholder: {
     defaultMessage: 'Nenhuma informação',
     id: 'eI6jYw',
     description:
