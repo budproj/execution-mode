@@ -3,7 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { EditableField } from 'src/components/Base'
+import EditableInputField from 'src/components/Base/EditableInputField'
 import SettingsAccountBodySectionTitle from 'src/components/Settings/Account/Body/SectionTitle'
 import { User } from 'src/components/User/types'
 import { userAtomFamily } from 'src/state/recoil/user'
@@ -31,7 +31,7 @@ const SettingsAccountBodySocialMedia = ({
         subtitle={intl.formatMessage(messages.sectionSubtitle)}
       />
 
-      <EditableField
+      <EditableInputField
         label={intl.formatMessage(messages.firstFieldLabel)}
         value={user?.linkedInProfileAddress}
         isLoaded={isLoaded}

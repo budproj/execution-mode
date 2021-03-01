@@ -95,10 +95,6 @@
     "defaultMessage": "Feminino",
     "description": "This text is used accross our platform to identify the female gender"
   },
-  "2fINVh": {
-    "defaultMessage": "Não definido",
-    "description": "This text is used accross our platform to identify the undefined gender"
-  },
   "2lGnmq": {
     "defaultMessage": "Minha conta | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
@@ -427,10 +423,6 @@
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
   },
-  "SvJM0q": {
-    "defaultMessage": "Time",
-    "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
-  },
   "SxsVDt": {
     "defaultMessage": "Meta",
     "description": "This is the label of the check-in form that indicates the goal for her/his key result"
@@ -478,6 +470,10 @@
   "VhgGax": {
     "defaultMessage": "Como estão as prioridades d{gender, select, MALE {o} FEMALE {a} other {o}} {team}?",
     "description": "The title of the header section in our objectives overview report"
+  },
+  "WKevJy": {
+    "defaultMessage": "Clique aqui para editar esse campo",
+    "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
   },
   "XENgso": {
     "defaultMessage": "Médio",
@@ -534,6 +530,10 @@
   "aiRCwP": {
     "defaultMessage": "Início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
+  },
+  "bdkUKs": {
+    "defaultMessage": "Times",
+    "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
   },
   "bqCVp4": {
     "defaultMessage": "Clique aqui para começar a escrever um comentário",
@@ -686,6 +686,10 @@
   "or8fId": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
+  },
+  "pLYuso": {
+    "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
+    "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
   },
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",

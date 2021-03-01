@@ -62,4 +62,4 @@ export { default as ButtonActivableByURL } from './ButtonActivableByURL'
 
 export { default as SettingsButton } from './SettingsButton'
 
-export { default as EditableField } from './EditableField'
+export { default as EditableInputField } from './EditableInputField'

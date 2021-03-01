@@ -52,8 +52,8 @@ export default defineMessages<SettingsAccountBodyPersonalInformationsMessage>({
   },
 
   fourthFieldLabel: {
-    defaultMessage: 'Time',
-    id: 'SvJM0q',
+    defaultMessage: 'Times',
+    id: 'bdkUKs',
     description:
       'This is the label that goes on our user account settings page, at the fourth field to update the user informations',
   },

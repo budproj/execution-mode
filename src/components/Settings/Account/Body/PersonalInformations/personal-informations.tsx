@@ -1,9 +1,9 @@
-import { Stack, Flex } from '@chakra-ui/react'
+import { Stack, Flex, FormLabel } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import EditableField from 'src/components/Base/EditableField'
+import EditableInputField from 'src/components/Base/EditableInputField'
 import SettingsAccountBodySectionTitle from 'src/components/Settings/Account/Body/SectionTitle'
 import UserTeamTags from 'src/components/User/TeamTags'
 import { User } from 'src/components/User/types'
@@ -38,15 +38,15 @@ const SettingsAccountBodyPersonalInformations = ({
         subtitle={intl.formatMessage(messages.sectionSubtitle)}
       />
 
-      <Stack direction="column" spacing={4}>
-        <Flex>
-          <EditableField
+      <Stack direction="column" spacing={4} maxW="xl">
+        <Flex gridGap={4}>
+          <EditableInputField
             label={intl.formatMessage(messages.firstFieldLabel)}
             value={user?.firstName}
             isLoaded={isLoaded}
             flexGrow={1}
           />
-          <EditableField
+          <EditableInputField
             label={intl.formatMessage(messages.secondFieldLabel)}
             value={user?.lastName}
             isLoaded={isLoaded}
@@ -54,34 +54,34 @@ const SettingsAccountBodyPersonalInformations = ({
           />
         </Flex>
 
-        <EditableField
+        <EditableInputField
           label={intl.formatMessage(messages.thirdFieldLabel)}
           value={user?.nickname}
           isLoaded={isLoaded}
         />
 
-        <EditableField
-          label={intl.formatMessage(messages.fourthFieldLabel)}
-          customFallbackValue={intl.formatMessage(messages.fallbackFourthField)}
-        >
+        <Stack direciton="column" spacing={2}>
+          <FormLabel fontSize="sm" m={0}>
+            {intl.formatMessage(messages.fourthFieldLabel)}
+          </FormLabel>
           <UserTeamTags userID={userID} loading={loading} />
-        </EditableField>
+        </Stack>
 
-        <EditableField
+        <EditableInputField
           label={intl.formatMessage(messages.fifthFieldLabel)}
           value={user?.role}
           customFallbackValue={intl.formatMessage(messages.fallbackFifthField)}
           isLoaded={isLoaded}
         />
 
-        <EditableField
+        <EditableInputField
           label={intl.formatMessage(messages.sixthFieldLabel)}
           value={gender}
           customFallbackValue={intl.formatMessage(messages.fallbackSixthField)}
           isLoaded={isLoaded}
         />
 
-        <EditableField
+        <EditableInputField
           label={intl.formatMessage(messages.seventhFieldLabel)}
           value={user?.about}
           customFallbackValue={intl.formatMessage(messages.fallbackSeventhField)}

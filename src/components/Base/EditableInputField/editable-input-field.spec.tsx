@@ -2,13 +2,13 @@ import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
 
-import EditableField from './editable-field'
+import EditableInputField from './editable-input-field'
 
 describe('component expectations', () => {
   it('should be able to render the provided value', () => {
     const value = faker.random.word()
 
-    const wrapper = enzyme.mount(<EditableField value={value} label={faker.random.word()} />)
+    const wrapper = enzyme.mount(<EditableInputField value={value} label={faker.random.word()} />)
 
     const textComponent = wrapper.find('Text')
 
@@ -19,9 +19,9 @@ describe('component expectations', () => {
     const FakeChild = () => <p>{faker.random.word()}</p>
 
     const wrapper = enzyme.mount(
-      <EditableField label={faker.random.word()}>
+      <EditableInputField label={faker.random.word()}>
         <FakeChild />
-      </EditableField>,
+      </EditableInputField>,
     )
 
     const fakeChild = wrapper.find('FakeChild')
@@ -34,9 +34,9 @@ describe('component expectations', () => {
     const value = faker.random.word()
 
     const wrapper = enzyme.mount(
-      <EditableField value={value} label={faker.random.word()}>
+      <EditableInputField value={value} label={faker.random.word()}>
         <FakeChild />
-      </EditableField>,
+      </EditableInputField>,
     )
 
     const textComponent = wrapper.find('Text')
