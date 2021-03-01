@@ -55,7 +55,7 @@ const EditableTextAreaValue = ({
       {isEditing ? (
         <Textarea
           autoFocus
-          value={value}
+          defaultValue={value}
           px={2}
           py={1}
           _focus={{ boxShadow: 'none' }}
