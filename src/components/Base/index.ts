@@ -67,3 +67,9 @@ export { default as EditableInputField } from './EditableInputField'
 export { default as EditableInputValue } from './EditableInputValue'
 
 export { default as EditableTextAreaValue } from './EditableTextAreaValue'
+
+export { default as EditableTextAreaField } from './EditableTextAreaField'
+
+export { default as EditableSelectValue } from './EditableSelectValue'
+
+export { default as EditableSelectField } from './EditableSelectField'

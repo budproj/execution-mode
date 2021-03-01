@@ -1,12 +1,14 @@
-import { Stack, Flex, FormLabel } from '@chakra-ui/react'
+import { Stack, Flex, FormLabel, MenuItemOption } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import EditableInputField from 'src/components/Base/EditableInputField'
+import EditableSelectField from 'src/components/Base/EditableSelectField'
 import EditableTextAreaField from 'src/components/Base/EditableTextAreaField'
 import SettingsAccountBodySectionTitle from 'src/components/Settings/Account/Body/SectionTitle'
 import UserTeamTags from 'src/components/User/TeamTags'
+import { USER_GENDER } from 'src/components/User/constants'
 import { User } from 'src/components/User/types'
 import useIntlGender from 'src/state/hooks/useIntlGender'
 import { userAtomFamily } from 'src/state/recoil/user'
@@ -24,13 +26,15 @@ const SettingsAccountBodyPersonalInformations = ({
 }: SettingsAccountBodyPersonalInformationsProperties) => {
   const user = useRecoilValue(userAtomFamily(userID))
   const intl = useIntl()
-  const [gender, setGenderValue, previousGenderValue] = useIntlGender(user?.gender)
+  const [intlGender, setIntlGenderValue, previousGenderValue] = useIntlGender(user?.gender)
+  const [maleIntlGender] = useIntlGender(USER_GENDER.MALE)
+  const [femaleIntlGender] = useIntlGender(USER_GENDER.FEMALE)
 
   const isLoaded = !loading && Boolean(user)
 
   useEffect(() => {
-    if (previousGenderValue !== user?.gender) setGenderValue(user?.gender)
-  }, [user?.gender, setGenderValue, previousGenderValue])
+    if (previousGenderValue !== user?.gender) setIntlGenderValue(user?.gender)
+  }, [user?.gender, setIntlGenderValue, previousGenderValue])
 
   return (
     <Stack direction="column" spacing={6}>
@@ -75,12 +79,17 @@ const SettingsAccountBodyPersonalInformations = ({
           isLoaded={isLoaded}
         />
 
-        <EditableInputField
+        <EditableSelectField
           label={intl.formatMessage(messages.sixthFieldLabel)}
-          value={gender}
+          value={user?.gender}
+          placeholder={intlGender}
           customFallbackValue={intl.formatMessage(messages.fallbackSixthField)}
           isLoaded={isLoaded}
-        />
+          onChange={() => {}}
+        >
+          <MenuItemOption value={USER_GENDER.MALE}>{maleIntlGender}</MenuItemOption>
+          <MenuItemOption value={USER_GENDER.FEMALE}>{femaleIntlGender}</MenuItemOption>
+        </EditableSelectField>
 
         <EditableTextAreaField
           label={intl.formatMessage(messages.seventhFieldLabel)}
