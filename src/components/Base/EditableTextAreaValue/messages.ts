@@ -1,13 +1,13 @@
 import { defineMessages } from 'react-intl'
 
-type EditableInputFieldMessage = 'fallbackValue' | 'editableIconDesc' | 'editableIconTitle'
+type EditableTextAreaValueMessage = 'fallbackValue' | 'editableIconDesc' | 'editableIconTitle'
 
-export default defineMessages<EditableInputFieldMessage>({
+export default defineMessages<EditableTextAreaValueMessage>({
   fallbackValue: {
     defaultMessage: 'Nenhuma informação',
-    id: 'yJ4O6G',
+    id: 'CWzl6a',
     description:
-      'The fallback value appears if no value is defined for that field. This field is customizable, so it will only appears if no value is defined, and no custom fallback value was provided',
+      'The fallback value appears if no value is defined for that text area. This text area is customizable, so it will only appears if no value is defined, and no custom fallback value was provided',
   },
 
   editableIconDesc: {

@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import EditableInputField from 'src/components/Base/EditableInputField'
+import EditableTextAreaField from 'src/components/Base/EditableTextAreaField'
 import SettingsAccountBodySectionTitle from 'src/components/Settings/Account/Body/SectionTitle'
 import UserTeamTags from 'src/components/User/TeamTags'
 import { User } from 'src/components/User/types'
@@ -81,7 +82,7 @@ const SettingsAccountBodyPersonalInformations = ({
           isLoaded={isLoaded}
         />
 
-        <EditableInputField
+        <EditableTextAreaField
           label={intl.formatMessage(messages.seventhFieldLabel)}
           value={user?.about}
           customFallbackValue={intl.formatMessage(messages.fallbackSeventhField)}

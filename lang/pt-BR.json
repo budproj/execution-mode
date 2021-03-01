@@ -207,6 +207,10 @@
     "defaultMessage": "Check-in",
     "description": "This message is displayed as a label button to open the check-in form when the user is scrolling in our key result drawer"
   },
+  "CWzl6a": {
+    "defaultMessage": "Nenhuma informação",
+    "description": "The fallback value appears if no value is defined for that text area. This text area is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
+  },
   "CkCxOl": {
     "defaultMessage": "Posição do time",
     "description": "The title of the first column in our body table at the teams overview report in our dashboard"
@@ -543,6 +547,10 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
+  "eI6jYw": {
+    "defaultMessage": "Nenhuma informação",
+    "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
+  },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
     "description": "The page description that is displayed in Google and screen readers"
@@ -790,10 +798,6 @@
   "xVR0F1": {
     "defaultMessage": "Apelido",
     "description": "This is the label that goes on our user account settings page, at the third field to update the user informations"
-  },
-  "yJ4O6G": {
-    "defaultMessage": "Nenhuma informação",
-    "description": "The fallback value appears if no value is defined for that field. This field is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",

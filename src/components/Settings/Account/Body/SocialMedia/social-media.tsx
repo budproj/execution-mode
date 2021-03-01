@@ -25,7 +25,7 @@ const SettingsAccountBodySocialMedia = ({
   const isLoaded = !loading && Boolean(user)
 
   return (
-    <Stack direction="column" spacing={6}>
+    <Stack direction="column" spacing={6} maxW="xl">
       <SettingsAccountBodySectionTitle
         title={intl.formatMessage(messages.sectionTitle)}
         subtitle={intl.formatMessage(messages.sectionSubtitle)}

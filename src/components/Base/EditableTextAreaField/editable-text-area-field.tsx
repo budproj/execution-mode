@@ -1,9 +1,9 @@
 import { Stack, FormLabel, StackProps } from '@chakra-ui/react'
 import React from 'react'
 
-import EditableInputValue from 'src/components/Base/EditableInputValue'
+import EditableTextAreaValue from 'src/components/Base/EditableTextAreaValue'
 
-export interface EditableInputFieldProperties {
+export interface EditableTextAreaFieldProperties {
   label: string
   isLoaded?: boolean
   customFallbackValue?: string
@@ -11,19 +11,19 @@ export interface EditableInputFieldProperties {
   flexGrow?: StackProps['flexGrow']
 }
 
-const EditableInputField = ({
+const EditableTextAreaField = ({
   label,
   value,
   customFallbackValue,
   isLoaded,
   flexGrow,
-}: EditableInputFieldProperties) => {
+}: EditableTextAreaFieldProperties) => {
   return (
     <Stack direciton="column" w="full" spacing={0} flexGrow={flexGrow}>
       <FormLabel fontSize="sm" m={0}>
         {label}
       </FormLabel>
-      <EditableInputValue
+      <EditableTextAreaValue
         value={value}
         customFallbackValue={customFallbackValue}
         isLoaded={isLoaded}
@@ -32,4 +32,4 @@ const EditableInputField = ({
   )
 }
 
-export default EditableInputField
+export default EditableTextAreaField
