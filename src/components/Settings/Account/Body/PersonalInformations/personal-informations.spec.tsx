@@ -1,3 +1,4 @@
+import { MockedProvider, MockedResponse } from '@apollo/client/testing'
 import * as Chakra from '@chakra-ui/react'
 import enzyme from 'enzyme'
 import faker from 'faker'
@@ -11,6 +12,7 @@ import { User } from 'src/components/User/types'
 import { userAtomFamily } from 'src/state/recoil/user'
 
 import SettingsAccountBodyPersonalInformations from './personal-informations'
+import queries from './queries.gql'
 
 const defaultUser = {
   id: faker.random.uuid(),
@@ -31,15 +33,17 @@ const defaultUser = {
   ],
 }
 
-const buildWrapper = (fakeUser: Partial<User>) => {
+const buildWrapper = (fakeUser: Partial<User>, mocks: MockedResponse[] = []) => {
   const initializeState = ({ set }: MutableSnapshot) => {
     set(userAtomFamily(fakeUser.id), fakeUser)
   }
 
   const wrapper = enzyme.mount(
-    <RecoilRoot initializeState={initializeState}>
-      <SettingsAccountBodyPersonalInformations userID={fakeUser.id} />
-    </RecoilRoot>,
+    <MockedProvider mocks={mocks}>
+      <RecoilRoot initializeState={initializeState}>
+        <SettingsAccountBodyPersonalInformations isLoaded userID={fakeUser.id} />
+      </RecoilRoot>
+    </MockedProvider>,
   )
 
   return wrapper
@@ -332,5 +336,311 @@ describe('info rendering', () => {
     const sixthEditableField = wrapper.find('EditableTextAreaValue').find('Text')
 
     expect(sixthEditableField.text()).toEqual('Escreva sobre você')
+  })
+})
+
+describe('mutations', () => {
+  it('should be able to update the user first name', async () => {
+    const fakeUserID = faker.random.uuid()
+    const fakeUserFirstName = faker.name.firstName()
+    const newFakeUserFirstName = faker.name.firstName()
+    const spy = sinon.spy()
+    const fakeUser = {
+      ...defaultUser,
+      id: fakeUserID,
+      firstName: fakeUserFirstName,
+    }
+    const response = {
+      id: fakeUser.id,
+      firstName: fakeUser.firstName,
+      lastName: fakeUser.lastName,
+      fullName: fakeUser.fullName,
+      nickname: fakeUser.nickname,
+      role: fakeUser.role,
+      gender: fakeUser.gender,
+      about: fakeUser.about,
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.UPDATE_USER_INFORMATION,
+          variables: {
+            userID: fakeUserID,
+            userData: {
+              firstName: newFakeUserFirstName,
+            },
+          },
+        },
+        result: () => {
+          spy()
+          return {
+            data: {
+              updateUser: response,
+            },
+          }
+        },
+      },
+    ]
+
+    const wrapper = buildWrapper(fakeUser, mocks)
+
+    await waitForComponentToPaint(wrapper)
+    wrapper.update()
+
+    const editablePreview = wrapper
+      .find('EditableInputField')
+      .at(0)
+      .find('Editable')
+      .find('EditablePreview')
+    editablePreview.simulate('focus')
+
+    const editableInput = wrapper
+      .find('EditableInputField')
+      .at(0)
+      .find('Editable')
+      .find('EditableInput')
+      .find('input')
+    editableInput.simulate('change', { target: { value: newFakeUserFirstName } })
+
+    const editable = wrapper
+      .find('EditableInputField')
+      .at(0)
+      .find('Editable')
+      .find('EditableInput')
+      .find('input')
+    editable.simulate('blur')
+
+    await waitForComponentToPaint(wrapper)
+
+    expect(spy.called).toEqual(true)
+  })
+
+  it('should be able to update the user last name', async () => {
+    const fakeUserID = faker.random.uuid()
+    const fakeUserLastName = faker.name.lastName()
+    const newFakeUserLastName = faker.name.lastName()
+    const spy = sinon.spy()
+    const fakeUser = {
+      ...defaultUser,
+      id: fakeUserID,
+      lastName: fakeUserLastName,
+    }
+    const response = {
+      id: fakeUser.id,
+      firstName: fakeUser.firstName,
+      lastName: fakeUser.lastName,
+      fullName: fakeUser.fullName,
+      nickname: fakeUser.nickname,
+      role: fakeUser.role,
+      gender: fakeUser.gender,
+      about: fakeUser.about,
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.UPDATE_USER_INFORMATION,
+          variables: {
+            userID: fakeUserID,
+            userData: {
+              lastName: newFakeUserLastName,
+            },
+          },
+        },
+        result: () => {
+          spy()
+          return {
+            data: {
+              updateUser: response,
+            },
+          }
+        },
+      },
+    ]
+
+    const wrapper = buildWrapper(fakeUser, mocks)
+
+    await waitForComponentToPaint(wrapper)
+    wrapper.update()
+
+    const editablePreview = wrapper
+      .find('EditableInputField')
+      .at(1)
+      .find('Editable')
+      .find('EditablePreview')
+    editablePreview.simulate('focus')
+
+    const editableInput = wrapper
+      .find('EditableInputField')
+      .at(1)
+      .find('Editable')
+      .find('EditableInput')
+      .find('input')
+    editableInput.simulate('change', { target: { value: newFakeUserLastName } })
+
+    const editable = wrapper
+      .find('EditableInputField')
+      .at(1)
+      .find('Editable')
+      .find('EditableInput')
+      .find('input')
+    editable.simulate('blur')
+
+    await waitForComponentToPaint(wrapper)
+
+    expect(spy.called).toEqual(true)
+  })
+
+  it('should be able to update the user nickname', async () => {
+    const fakeUserID = faker.random.uuid()
+    const fakeUserNickname = faker.internet.userName()
+    const newFakeUserNickname = faker.internet.userName()
+    const spy = sinon.spy()
+    const fakeUser = {
+      ...defaultUser,
+      id: fakeUserID,
+      nickname: fakeUserNickname,
+    }
+    const response = {
+      id: fakeUser.id,
+      firstName: fakeUser.firstName,
+      lastName: fakeUser.lastName,
+      fullName: fakeUser.fullName,
+      nickname: fakeUser.nickname,
+      role: fakeUser.role,
+      gender: fakeUser.gender,
+      about: fakeUser.about,
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.UPDATE_USER_INFORMATION,
+          variables: {
+            userID: fakeUserID,
+            userData: {
+              nickname: newFakeUserNickname,
+            },
+          },
+        },
+        result: () => {
+          spy()
+          return {
+            data: {
+              updateUser: response,
+            },
+          }
+        },
+      },
+    ]
+
+    const wrapper = buildWrapper(fakeUser, mocks)
+
+    await waitForComponentToPaint(wrapper)
+    wrapper.update()
+
+    const editablePreview = wrapper
+      .find('EditableInputField')
+      .at(2)
+      .find('Editable')
+      .find('EditablePreview')
+    editablePreview.simulate('focus')
+
+    const editableInput = wrapper
+      .find('EditableInputField')
+      .at(2)
+      .find('Editable')
+      .find('EditableInput')
+      .find('input')
+    editableInput.simulate('change', { target: { value: newFakeUserNickname } })
+
+    const editable = wrapper
+      .find('EditableInputField')
+      .at(2)
+      .find('Editable')
+      .find('EditableInput')
+      .find('input')
+    editable.simulate('blur')
+
+    await waitForComponentToPaint(wrapper)
+
+    expect(spy.called).toEqual(true)
+  })
+
+  it('should be able to update the user role', async () => {
+    const fakeUserID = faker.random.uuid()
+    const fakeUserRole = faker.name.jobTitle()
+    const newFakeUserRole = faker.name.jobTitle()
+    const spy = sinon.spy()
+    const fakeUser = {
+      ...defaultUser,
+      id: fakeUserID,
+      role: fakeUserRole,
+    }
+    const response = {
+      id: fakeUser.id,
+      firstName: fakeUser.firstName,
+      lastName: fakeUser.lastName,
+      fullName: fakeUser.fullName,
+      nickaname: fakeUser.nickname,
+      role: fakeUser.role,
+      gender: fakeUser.gender,
+      about: fakeUser.about,
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.UPDATE_USER_INFORMATION,
+          variables: {
+            userID: fakeUserID,
+            userData: {
+              role: newFakeUserRole,
+            },
+          },
+        },
+        result: () => {
+          spy()
+          return {
+            data: {
+              updateUser: response,
+            },
+          }
+        },
+      },
+    ]
+
+    const wrapper = buildWrapper(fakeUser, mocks)
+
+    await waitForComponentToPaint(wrapper)
+    wrapper.update()
+
+    const editablePreview = wrapper
+      .find('EditableInputField')
+      .at(3)
+      .find('Editable')
+      .find('EditablePreview')
+    editablePreview.simulate('focus')
+
+    const editableInput = wrapper
+      .find('EditableInputField')
+      .at(3)
+      .find('Editable')
+      .find('EditableInput')
+      .find('input')
+    editableInput.simulate('change', { target: { value: newFakeUserRole } })
+
+    const editable = wrapper
+      .find('EditableInputField')
+      .at(3)
+      .find('Editable')
+      .find('EditableInput')
+      .find('input')
+    editable.simulate('blur')
+
+    await waitForComponentToPaint(wrapper)
+
+    expect(spy.called).toEqual(true)
   })
 })
