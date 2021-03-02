@@ -1,4 +1,4 @@
-import { SkeletonText, Text, Textarea, Stack, Box } from '@chakra-ui/react'
+import { SkeletonText, Text, Textarea, Stack, Box, TextareaProps } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -11,6 +11,7 @@ export interface EditableTextAreaValueProperties {
   skeletonNumberOfLines: number
   customFallbackValue?: string
   value?: string
+  onBlur?: TextareaProps['onBlur']
 }
 
 const autoSelectAll = (event: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -22,6 +23,7 @@ const EditableTextAreaValue = ({
   customFallbackValue,
   isLoaded,
   skeletonNumberOfLines,
+  onBlur,
 }: EditableTextAreaValueProperties) => {
   const [isEditing, setIsEditing] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
@@ -46,8 +48,10 @@ const EditableTextAreaValue = ({
     if (isEditing) setIsEditing(false)
   }
 
-  const handleBlur = () => {
+  const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
     handleStopEdit()
+    handleStopHover()
+    if (onBlur) onBlur(event)
   }
 
   return (

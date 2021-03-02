@@ -140,6 +140,8 @@ const SettingsAccountBodyPersonalInformations = ({
           value={user?.about}
           customFallbackValue={intl.formatMessage(messages.fallbackSeventhField)}
           isLoaded={isLoaded}
+          isSubmitting={loading}
+          onSubmit={handleValueUpdate('about')}
         />
       </Stack>
     </Stack>
