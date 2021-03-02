@@ -36,7 +36,7 @@ const buildWrapper = (fakeUser: Partial<User>) => {
 
   const wrapper = enzyme.mount(
     <RecoilRoot initializeState={initializeState}>
-      <SettingsAccountHeader userID={fakeUser.id} />
+      <SettingsAccountHeader isLoaded userID={fakeUser.id} />
     </RecoilRoot>,
   )
 
