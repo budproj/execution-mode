@@ -12,6 +12,7 @@ export interface EditableTextAreaValueProperties {
   customFallbackValue?: string
   value?: string
   onBlur?: TextareaProps['onBlur']
+  isSubmitting?: boolean
 }
 
 const autoSelectAll = (event: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -24,6 +25,7 @@ const EditableTextAreaValue = ({
   isLoaded,
   skeletonNumberOfLines,
   onBlur,
+  isSubmitting,
 }: EditableTextAreaValueProperties) => {
   const [isEditing, setIsEditing] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
@@ -88,11 +90,11 @@ const EditableTextAreaValue = ({
           >
             {value ?? fallbackValue}
           </Text>
-          <Box pt={2}>
+          <Box pt={2} display={isEditing || isSubmitting ? 'none' : 'inherit'}>
             <PenIcon
               fill="brand.400"
               opacity={isHovering && !isEditing ? 1 : 0}
-              display={isEditing ? 'none' : 'inherit'}
+              display={isEditing || isSubmitting ? 'none' : 'inherit'}
               transition="opacity .2s ease-out"
               desc={intl.formatMessage(messages.editableIconDesc)}
               title={intl.formatMessage(messages.editableIconTitle)}

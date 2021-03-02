@@ -1,4 +1,4 @@
-import { Stack, FormLabel, StackProps } from '@chakra-ui/react'
+import { Stack, FormLabel, StackProps, Spinner, Box } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 import EditableTextAreaValue from 'src/components/Base/EditableTextAreaValue'
@@ -38,12 +38,20 @@ const EditableTextAreaField = ({
       <FormLabel fontSize="sm" m={0}>
         {label}
       </FormLabel>
-      <EditableTextAreaValue
-        value={value}
-        customFallbackValue={customFallbackValue}
-        isLoaded={isLoaded}
-        onBlur={handleBlur}
-      />
+      <Stack direction="row" alignItems="flex-start" gridGap={2}>
+        <EditableTextAreaValue
+          value={value}
+          customFallbackValue={customFallbackValue}
+          isLoaded={isLoaded}
+          isSubmitting={isSubmitting && wasSubmitted}
+          onBlur={handleBlur}
+        />
+        {isSubmitting && wasSubmitted && (
+          <Box pt={2}>
+            <Spinner color="gray.200" size="sm" />
+          </Box>
+        )}
+      </Stack>
     </Stack>
   )
 }

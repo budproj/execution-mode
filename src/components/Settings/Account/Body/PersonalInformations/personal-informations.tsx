@@ -53,7 +53,7 @@ const SettingsAccountBodyPersonalInformations = ({
     },
   )
 
-  const handleValueUpdate = (key: keyof User) => async (value: string) => {
+  const handleValueUpdate = (key: keyof User) => async (value: string | string[]) => {
     if (user?.[key] === value) return
 
     const userData = {
@@ -129,7 +129,8 @@ const SettingsAccountBodyPersonalInformations = ({
           placeholder={intlGender}
           customFallbackPlaceholder={intl.formatMessage(messages.fallbackSixthField)}
           isLoaded={isLoaded}
-          onChange={() => console.log('ok')}
+          isSubmitting={loading}
+          onChange={handleValueUpdate('gender')}
         >
           <MenuItemOption value={USER_GENDER.MALE}>{maleIntlGender}</MenuItemOption>
           <MenuItemOption value={USER_GENDER.FEMALE}>{femaleIntlGender}</MenuItemOption>

@@ -12,6 +12,7 @@ export interface EditableSelectValueProperties extends MenuProps {
   placeholder?: string
   customFallbackPlaceholder?: string
   isLoaded?: boolean
+  isSubmitting?: boolean
 }
 
 const EditableSelectValue = ({
@@ -21,6 +22,7 @@ const EditableSelectValue = ({
   placeholder,
   customFallbackPlaceholder,
   children,
+  isSubmitting,
 }: EditableSelectValueProperties) => {
   const [isHovering, setIsHovering] = useState(false)
   const intl = useIntl()
@@ -54,6 +56,7 @@ const EditableSelectValue = ({
         <PenIcon
           fill="brand.400"
           opacity={isHovering ? 1 : 0}
+          display={isSubmitting ? 'none' : 'inherit'}
           transition="opacity .2s ease-out"
           desc={intl.formatMessage(messages.editableIconDesc)}
           title={intl.formatMessage(messages.editableIconTitle)}

@@ -1,4 +1,4 @@
-import { Stack, FormLabel, StackProps, EditableProps, Flex, Spinner } from '@chakra-ui/react'
+import { Stack, FormLabel, StackProps, EditableProps, Spinner } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 import EditableInputValue from 'src/components/Base/EditableInputValue'
@@ -38,7 +38,7 @@ const EditableInputField = ({
       <FormLabel fontSize="sm" m={0}>
         {label}
       </FormLabel>
-      <Flex alignItems="center" gridGap={2}>
+      <Stack direction="row" alignItems="center" gridGap={2}>
         <EditableInputValue
           value={value}
           customFallbackValue={customFallbackValue}
@@ -47,7 +47,7 @@ const EditableInputField = ({
           onSubmit={handleSubmit}
         />
         {isSubmitting && wasSubmitted && <Spinner color="gray.200" size="sm" />}
-      </Flex>
+      </Stack>
     </Stack>
   )
 }
