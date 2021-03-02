@@ -69,4 +69,16 @@ describe('fallback value', () => {
 
     expect(editablePreview.text()).toEqual(customFallback)
   })
+
+  it('should render the provided fallback value if value is null', () => {
+    const customFallback = faker.random.word()
+    const wrapper = enzyme.mount(
+      // eslint-disable-next-line unicorn/no-null
+      <EditableInputValue customFallbackValue={customFallback} value={null} />,
+    )
+
+    const editablePreview = wrapper.find('EditablePreview')
+
+    expect(editablePreview.text()).toEqual(customFallback)
+  })
 })

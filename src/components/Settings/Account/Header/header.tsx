@@ -9,13 +9,12 @@ import { User } from 'src/components/User/types'
 import { userAtomFamily } from 'src/state/recoil/user'
 
 export interface SettingsAccountHeader {
+  isLoaded: boolean
   userID?: User['id']
-  loading?: boolean
 }
 
-const SettingsAccountHeader = ({ userID, loading }: SettingsAccountHeader) => {
+const SettingsAccountHeader = ({ userID, isLoaded }: SettingsAccountHeader) => {
   const user = useRecoilValue(userAtomFamily(userID))
-  const isLoaded = !loading && Boolean(user)
 
   return (
     <Flex gridGap={4} alignItems="center">
@@ -36,7 +35,7 @@ const SettingsAccountHeader = ({ userID, loading }: SettingsAccountHeader) => {
           </Skeleton>
         </Flex>
 
-        <UserTeamTags userID={userID} loading={loading} />
+        <UserTeamTags userID={userID} isLoaded={isLoaded} />
       </Flex>
     </Flex>
   )

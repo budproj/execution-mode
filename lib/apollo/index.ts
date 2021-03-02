@@ -36,7 +36,8 @@ const linkWithServer = (authzClient: Auth0ContextInterface) => {
 
   return shouldMockServer
     ? { uri: publicRuntimeConfig.api.graphql }
-    : { link: authLink(authzClient).concat(httpLink) }
+    : // eslint-disable-next-line unicorn/prefer-spread
+      { link: authLink(authzClient).concat(httpLink) }
 }
 
 const createApolloClient = (authzClient: Auth0ContextInterface) =>

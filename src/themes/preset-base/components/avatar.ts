@@ -10,6 +10,10 @@ const Avatar = {
     square: {
       container: {
         borderRadius: 4,
+
+        '& img': {
+          borderRadius: 4,
+        },
       },
     },
   },

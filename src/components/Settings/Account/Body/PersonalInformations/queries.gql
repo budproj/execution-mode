@@ -1,0 +1,12 @@
+mutation UPDATE_USER_INFORMATION($userID: ID!, $userData: UserDataInput!) {
+  updateUser(userID: $userID, userData: $userData) {
+    id
+    firstName
+    lastName
+    fullName
+    nickname
+    role
+    gender
+    about
+  }
+}

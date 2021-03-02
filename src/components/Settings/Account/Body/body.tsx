@@ -7,15 +7,15 @@ import SettingsAccountBodyPersonalInformations from './PersonalInformations'
 import SettingsAccountBodySocialMedia from './SocialMedia'
 
 export interface SettingsAccountBodyProperties {
+  isLoaded: boolean
   userID?: User['id']
-  loading?: boolean
 }
 
-const SettingsAccountBody = ({ userID, loading }: SettingsAccountBodyProperties) => (
+const SettingsAccountBody = ({ userID, isLoaded }: SettingsAccountBodyProperties) => (
   <Flex direction="column" gridGap={6}>
-    <SettingsAccountBodyPersonalInformations userID={userID} loading={loading} />
+    <SettingsAccountBodyPersonalInformations userID={userID} isLoaded={isLoaded} />
     <Divider borderColor="black.200" />
-    <SettingsAccountBodySocialMedia userID={userID} loading={loading} />
+    <SettingsAccountBodySocialMedia userID={userID} isLoaded={isLoaded} />
   </Flex>
 )
 

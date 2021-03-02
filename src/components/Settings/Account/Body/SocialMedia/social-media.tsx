@@ -12,17 +12,15 @@ import messages from './messages'
 
 export interface SettingsAccountSocialMediaProperties {
   userID?: User['id']
-  loading?: boolean
+  isLoaded?: boolean
 }
 
 const SettingsAccountBodySocialMedia = ({
   userID,
-  loading,
+  isLoaded,
 }: SettingsAccountSocialMediaProperties) => {
   const user = useRecoilValue(userAtomFamily(userID))
   const intl = useIntl()
-
-  const isLoaded = !loading && Boolean(user)
 
   return (
     <Stack direction="column" spacing={6} maxW="xl">
