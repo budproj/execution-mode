@@ -50,6 +50,30 @@ describe('component interactions', () => {
 
     expect(editablePreview.prop('color')).toEqual('black.900')
   })
+
+  it('should disable the field when the user is submitting', () => {
+    const wrapper = enzyme.mount(<EditableInputValue isSubmitting value={faker.random.word()} />)
+
+    const editable = wrapper.find('Editable')
+
+    expect(editable.prop('isDisabled')).toEqual(true)
+  })
+
+  it('should change stack cursor when the user is submitting', () => {
+    const wrapper = enzyme.mount(<EditableInputValue isSubmitting value={faker.random.word()} />)
+
+    const stack = wrapper.find('Stack')
+
+    expect(stack.prop('cursor')).toEqual('auto')
+  })
+
+  it('should change the color of the input when the user is submitting', () => {
+    const wrapper = enzyme.mount(<EditableInputValue isSubmitting value={faker.random.word()} />)
+
+    const editablePreview = wrapper.find('EditablePreview')
+
+    expect(editablePreview.prop('color')).toEqual('gray.400')
+  })
 })
 
 describe('fallback value', () => {

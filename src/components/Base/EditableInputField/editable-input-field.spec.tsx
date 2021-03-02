@@ -14,4 +14,32 @@ describe('component expectations', () => {
 
     expect(editableInputValue.text()).toEqual(value)
   })
+
+  it('should disable the field if the user submitted the field and it is loading', () => {
+    const wrapper = enzyme.mount(<EditableInputField isSubmitting label={faker.random.word()} />)
+
+    const editablePreview = wrapper.find('EditablePreview').find('span')
+    editablePreview.simulate('focus')
+
+    const editableInput = wrapper.find('EditableInput').find('input')
+    editableInput.simulate('blur')
+
+    const editableComponent = wrapper.find('Editable')
+
+    expect(editableComponent.prop('isDisabled')).toEqual(true)
+  })
+
+  it('should show the spinner if the user submitted the field and it is loading', () => {
+    const wrapper = enzyme.mount(<EditableInputField isSubmitting label={faker.random.word()} />)
+
+    const editablePreview = wrapper.find('EditablePreview').find('span')
+    editablePreview.simulate('focus')
+
+    const editableInput = wrapper.find('EditableInput').find('input')
+    editableInput.simulate('blur')
+
+    const spinner = wrapper.find('Spinner')
+
+    expect(spinner.length).toEqual(1)
+  })
 })
