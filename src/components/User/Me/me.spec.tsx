@@ -60,7 +60,7 @@ describe('info rendering', () => {
     ]
 
     const spy = sinon.spy()
-    sinon.stub(recoil, 'useSetRecoilState').returns(spy)
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(spy)
 
     const wrapper = enzyme.mount(
       <MockedProvider mocks={mocks}>

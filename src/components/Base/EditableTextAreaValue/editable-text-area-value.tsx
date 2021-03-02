@@ -32,7 +32,7 @@ const EditableTextAreaValue = ({
   const intl = useIntl()
 
   const fallbackValue = customFallbackValue ?? intl.formatMessage(messages.fallbackValue)
-  const defaultColor = value ? 'black.900' : 'gray.400'
+  const defaultColor = value && !isSubmitting ? 'black.900' : 'gray.400'
 
   const handleHover = () => {
     if (!isHovering) setIsHovering(true)
@@ -57,7 +57,7 @@ const EditableTextAreaValue = ({
   }
 
   return (
-    <SkeletonText noOfLines={skeletonNumberOfLines} spacing={2} isLoaded={isLoaded}>
+    <SkeletonText noOfLines={skeletonNumberOfLines} spacing={2} isLoaded={isLoaded} w="full">
       {isEditing ? (
         <Textarea
           autoFocus
@@ -74,14 +74,14 @@ const EditableTextAreaValue = ({
           direction="row"
           spacing={2}
           alignItems="flex-start"
-          cursor="pointer"
+          cursor={isSubmitting ? 'auto' : 'pointer'}
           onMouseEnter={handleHover}
           onMouseLeave={handleStopHover}
-          onClick={handleStartEdit}
+          onClick={isSubmitting ? undefined : handleStartEdit}
         >
           <Text
             fontSize="md"
-            color={isHovering ? 'brand.500' : defaultColor}
+            color={isHovering && !isSubmitting ? 'brand.500' : defaultColor}
             fontWeight={400}
             transition=".2s color ease-out"
             py={1}

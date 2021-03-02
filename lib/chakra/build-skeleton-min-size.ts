@@ -14,8 +14,8 @@ const buildSkeletonMinSize = (
   const height = maxHeight
 
   return {
-    width: isLoaded ? 'auto' : `${width}px`,
-    height: isLoaded ? 'auto' : `${height}px`,
+    width: isLoaded ? 'full' : `${width}px`,
+    height: isLoaded ? 'full' : `${height}px`,
   }
 }
 

@@ -43,7 +43,7 @@ const EditableSelectValue = ({
 
   const fallbackPlaceholder =
     customFallbackPlaceholder ?? intl.formatMessage(messages.fallbackPlaceholder)
-  const defaultColor = value ? 'black.900' : 'gray.400'
+  const defaultColor = value && !isSubmitting ? 'black.900' : 'gray.400'
 
   const handleStartHover = () => {
     setIsHovering(true)
@@ -64,9 +64,10 @@ const EditableSelectValue = ({
           as={Text}
           fontSize="md"
           fontWeight={400}
-          color={isHovering ? 'brand.500' : defaultColor}
+          color={isHovering && !isSubmitting ? 'brand.500' : defaultColor}
           py={1}
-          cursor="pointer"
+          cursor={isSubmitting ? 'auto' : 'pointer'}
+          isDisabled={isSubmitting}
           onMouseEnter={handleStartHover}
           onMouseLeave={handleEndHover}
         >

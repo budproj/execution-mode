@@ -1,12 +1,13 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
 import NamedAvatar from 'src/components/User/NamedAvatar'
 import { User } from 'src/components/User/types'
+import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
+import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
-import selectUser from 'src/state/recoil/user/selector'
 
 import queries from './queries.gql'
 
@@ -27,11 +28,11 @@ export interface GetUserNamedAvatarDataQuery {
 
 const Me = () => {
   const [me, setMe] = useRecoilState(meAtom)
-  const setUser = useSetRecoilState(selectUser(me))
+  const loadUser = useRecoilFamilyLoader(userAtomFamily)
   const { loading } = useQuery<GetUserNamedAvatarDataQuery>(queries.GET_USER_NAMED_AVATAR_DATA, {
     onCompleted: (data) => {
       setMe(data.me.id)
-      setUser(data.me)
+      loadUser(data.me)
     },
   })
 

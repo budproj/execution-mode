@@ -44,11 +44,11 @@ const EditableSelectField = ({
       </FormLabel>
       <Stack direction="row" alignItems="center" gridGap={2}>
         <EditableSelectValue
+          isSubmitting
           value={value}
           placeholder={placeholder}
           customFallbackPlaceholder={customFallbackPlaceholder}
-          isLoaded={isLoaded}
-          isSubmitting={isSubmitting && wasSubmitted}
+          isLoaded={isLoaded} // IsSubmitting && wasSubmitted}
           onChange={handleChange}
         >
           {children}
