@@ -14,6 +14,7 @@ export interface ConfidenceTagMessages {
   short: string
   long: string
   icon: string
+  helper: string
 }
 
 export interface ConfidenceTagColor {
@@ -69,6 +70,7 @@ export const useConfidenceTag = (
         short: intl.formatMessage(messages.highShort),
         long: intl.formatMessage(messages.highLong),
         icon: intl.formatMessage(messages.highIcon),
+        helper: intl.formatMessage(messages.highHelperText),
       },
       color: {
         scheme: 'green',
@@ -82,6 +84,7 @@ export const useConfidenceTag = (
         short: intl.formatMessage(messages.mediumShort),
         long: intl.formatMessage(messages.mediumLong),
         icon: intl.formatMessage(messages.mediumIcon),
+        helper: intl.formatMessage(messages.mediumHelperText),
       },
       color: {
         scheme: 'yellow',
@@ -95,6 +98,7 @@ export const useConfidenceTag = (
         short: intl.formatMessage(messages.lowShort),
         long: intl.formatMessage(messages.lowLong),
         icon: intl.formatMessage(messages.lowIcon),
+        helper: intl.formatMessage(messages.lowHelperText),
       },
       color: {
         scheme: 'red',
@@ -108,6 +112,7 @@ export const useConfidenceTag = (
         short: intl.formatMessage(messages.barrierShort),
         long: intl.formatMessage(messages.barrierLong),
         icon: intl.formatMessage(messages.barrierIcon),
+        helper: intl.formatMessage(messages.barrierHelperText),
       },
       color: {
         scheme: 'brand',

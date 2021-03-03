@@ -15,11 +15,14 @@ import ChevronDownIcon from 'src/components/Icon/ChevronDown'
 
 import messages from './messages'
 
-export interface SelectMenuProperties extends MenuProps {
+export interface SelectMenuProperties {
   placeholder: ReactElement
   value: string | undefined
   onChange: (value: string | string[]) => void
+  children: MenuProps['children']
+  id?: MenuProps['id']
   isLoading?: boolean
+  matchWidth?: MenuProps['matchWidth']
 }
 
 const SelectMenu = ({
@@ -29,11 +32,12 @@ const SelectMenu = ({
   value,
   children,
   isLoading,
+  matchWidth,
 }: SelectMenuProperties) => {
   const intl = useIntl()
 
   return (
-    <Menu>
+    <Menu matchWidth={matchWidth}>
       {({ isOpen }) => (
         <>
           <MenuButton

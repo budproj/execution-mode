@@ -207,6 +207,10 @@
     "defaultMessage": "Enviar comentário",
     "description": "The title displayed in the tooltip when the user hovers our paper plane icon in our add comment form"
   },
+  "CQAFfW": {
+    "defaultMessage": "Se tudo continuar assim, esperamos alcançar o resultado",
+    "description": "This text explains our tag to the user"
+  },
   "CW+HBw": {
     "defaultMessage": "Check-in",
     "description": "This message is displayed as a label button to open the check-in form when the user is scrolling in our key result drawer"
@@ -543,6 +547,10 @@
     "defaultMessage": "Início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
   },
+  "atVRfC": {
+    "defaultMessage": "Existe um risco de não alcançarmos, mas seguimos otimistas",
+    "description": "This text explains our tag to the user"
+  },
   "bdkUKs": {
     "defaultMessage": "Times",
     "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
@@ -711,6 +719,10 @@
     "defaultMessage": "Essa semana",
     "description": "The text displayed as a prefix in our progress tag label in the team objective accordion button"
   },
+  "p/WfG+": {
+    "defaultMessage": "Não vamos alcançar o resultado a não ser que a gente mude nossos planos",
+    "description": "This text explains our tag to the user"
+  },
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
@@ -806,6 +818,10 @@
   "xVR0F1": {
     "defaultMessage": "Apelido",
     "description": "This is the label that goes on our user account settings page, at the third field to update the user informations"
+  },
+  "xXxjVp": {
+    "defaultMessage": "Existe um fator externo impedindo o progresso desse resultado-chave",
+    "description": "This text explains our tag to the user"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",

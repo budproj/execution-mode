@@ -28,6 +28,7 @@ describe('confidence tag getter', () => {
         short: 'Alto',
         long: 'Alta Confiança',
         icon: 'Um círculo verde, indicando que a confiança está alta',
+        helper: 'Se tudo continuar assim, esperamos alcançar o resultado',
       },
       color: {
         scheme: 'green',
@@ -51,6 +52,7 @@ describe('confidence tag getter', () => {
         short: 'Médio',
         long: 'Média Confiança',
         icon: 'Um círculo amarelo, indicando que a confiançá é média',
+        helper: 'Existe um risco de não alcançarmos, mas seguimos otimistas',
       },
       color: {
         scheme: 'yellow',
@@ -74,6 +76,7 @@ describe('confidence tag getter', () => {
         short: 'Baixo',
         long: 'Baixa Confiança',
         icon: 'Um círculo vermelho, indicando que a confiança está baixa',
+        helper: 'Não vamos alcançar o resultado a não ser que a gente mude nossos planos',
       },
       color: {
         scheme: 'red',
@@ -97,6 +100,7 @@ describe('confidence tag getter', () => {
         short: 'Com Barreira',
         long: 'Com Barreira',
         icon: 'Um círculo roxo, indicando que o resultado-chave tem uma barreira',
+        helper: 'Existe um fator externo impedindo o progresso desse resultado-chave',
       },
       color: {
         scheme: 'brand',
@@ -118,6 +122,7 @@ describe('confidence tag getter', () => {
         short: 'Alto',
         long: 'Alta Confiança',
         icon: 'Um círculo verde, indicando que a confiança está alta',
+        helper: 'Se tudo continuar assim, esperamos alcançar o resultado',
       },
       color: {
         scheme: 'green',

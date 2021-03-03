@@ -70,7 +70,7 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
 
       <KeyResultDrawerDeleteAlert keyResultID={keyResultID} />
 
-      <Collapse unmountOnExit in={shouldShowCheckIn}>
+      <Collapse unmountOnExit in={shouldShowCheckIn} style={{ overflow: 'visible' }}>
         <Box p={4} pb={0}>
           <KeyResultSectionAddCheckIn
             keyResultID={keyResultID}
