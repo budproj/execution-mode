@@ -72,6 +72,6 @@ describe('customizations', () => {
       loadedHeight: desiredLoadedHeight,
     })
 
-    expect(result.width).toEqual(desiredLoadedHeight)
+    expect(result.height).toEqual(desiredLoadedHeight)
   })
 })
