@@ -98,7 +98,7 @@ const SliderWithDetails = ({
 
 SliderWithDetails.defaultProps = {
   value: 0,
-  trackColor: 'brand.400',
+  trackColor: 'brand.500',
   trackThickness: 2,
   thumbHeight: '14px',
   isDisabled: true,

@@ -62,7 +62,7 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
 
 SliderWithHoverThumb.defaultProps = {
   value: 0,
-  trackColor: 'brand.400',
+  trackColor: 'brand.500',
   trackThickness: 2,
 }
 

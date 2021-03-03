@@ -51,7 +51,7 @@ const SliderWithFilledTrack = ({
 
 SliderWithFilledTrack.defaultProps = {
   value: 0,
-  trackColor: 'brand.400',
+  trackColor: 'brand.500',
   trackBg: 'gray.50',
   trackThickness: '8px',
   trackRadius: 'full',

@@ -254,9 +254,9 @@ describe('data exibition', () => {
     await waitForComponentToPaint(wrapper)
 
     const expectedColors: Record<number, string> = {
-      20: 'red.500',
-      50: 'yellow.500',
-      100: 'green.500',
+      20: 'brand.500',
+      50: 'brand.500',
+      100: 'brand.500',
     }
 
     const lines = wrapper
