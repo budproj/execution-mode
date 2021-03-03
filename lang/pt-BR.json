@@ -603,6 +603,10 @@
     "defaultMessage": "Clique aqui para acessar nossa página de suporte",
     "description": "SupportButton icon title that links to support page. It is displayed when the user hovers the icon itself"
   },
+  "hn3cE7": {
+    "defaultMessage": "Progresso acumulado dessa semana",
+    "description": "This helper texts explains since when we are calculating your company progress"
+  },
   "iJq7du": {
     "defaultMessage": "Responsável",
     "description": "The label text above the Owner section in our key result single page or drawer"
@@ -710,10 +714,6 @@
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
-  },
-  "qYgVuC": {
-    "defaultMessage": "Em relação a última sexta-feira",
-    "description": "This helper texts explains since when we are calculating your company progress"
   },
   "qmEcGQ": {
     "defaultMessage": "Minha conta",

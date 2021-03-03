@@ -1,11 +1,10 @@
 import { Flex, Skeleton } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import SliderWithDetails from 'src/components/Base/SliderWithDetails'
 import OverviewBodyBox from 'src/components/Report/Overview/OverviewBodyBox'
 import { Team } from 'src/components/Team/types'
-import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import CompanyProgressOverviewBodyStampCompany from './Stamps/Company'
@@ -21,12 +20,6 @@ const CompanyProgressOverviewBody = ({
   isLoading,
 }: CompanyProgressOverviewBodyProperties) => {
   const company = useRecoilValue(teamAtomFamily(companyID))
-  const [confidenceTag, setConfidence] = useConfidenceTag(company?.status?.confidence)
-
-  useEffect(() => {
-    if (typeof company?.status?.confidence !== 'undefined')
-      setConfidence(company?.status?.confidence)
-  }, [company, setConfidence])
 
   return (
     <OverviewBodyBox>
@@ -40,12 +33,7 @@ const CompanyProgressOverviewBody = ({
         </Flex>
 
         <Skeleton isLoaded={!isLoading}>
-          <SliderWithDetails
-            value={company?.status?.progress}
-            trackThickness={4}
-            thumbHeight={7}
-            trackColor={confidenceTag.color.primary}
-          />
+          <SliderWithDetails value={company?.status?.progress} trackThickness={4} thumbHeight={7} />
         </Skeleton>
       </Flex>
     </OverviewBodyBox>
