@@ -91,6 +91,10 @@
     "defaultMessage": "Agora há pouco",
     "description": "This label is displayed if the date difference is less than 1 minute"
   },
+  "2RoJ81": {
+    "defaultMessage": "Feminino",
+    "description": "This text is used accross our platform to identify the female gender"
+  },
   "2lGnmq": {
     "defaultMessage": "Minha conta | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
@@ -171,6 +175,10 @@
     "defaultMessage": "Explorar",
     "description": "The name of the Explore page, located at \"/explore\""
   },
+  "9sw0lJ": {
+    "defaultMessage": "Selecione seu gênero",
+    "description": "This is the fallback value that goes on our user account settings page, at the sixth field to update the user informations. The fallback value appears if the user has no data at that field"
+  },
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
@@ -198,6 +206,10 @@
   "CW+HBw": {
     "defaultMessage": "Check-in",
     "description": "This message is displayed as a label button to open the check-in form when the user is scrolling in our key result drawer"
+  },
+  "CWzl6a": {
+    "defaultMessage": "Nenhuma informação",
+    "description": "The fallback value appears if no value is defined for that text area. This text area is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
   },
   "CkCxOl": {
     "defaultMessage": "Posição do time",
@@ -230,6 +242,10 @@
   "FEd9u8": {
     "defaultMessage": "Salvar",
     "description": "This message is displayed in the \"SAVE\" button in the checkin form"
+  },
+  "FPhsI3": {
+    "defaultMessage": "Selecione seus times",
+    "description": "This is the fallback value that goes on our user account settings page, at the fourth field to update the user informations. The fallback value appears if the user has no data at that field"
   },
   "FVnpVq": {
     "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
@@ -387,6 +403,10 @@
     "defaultMessage": "Painel",
     "description": "AppBar menu item that links to \"Dashboard\" page"
   },
+  "RrW2fc": {
+    "defaultMessage": "Atualize seu cargo",
+    "description": "This is the fallback value that goes on our user account settings page, at the fifth field to update the user informations. The fallback value appears if the user has no data at that field"
+  },
   "S/F2Hk": {
     "defaultMessage": "Detalhes",
     "description": "The label text above the Description section in our key result single page or drawer"
@@ -406,10 +426,6 @@
   "SpAXmO": {
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
-  },
-  "SvJM0q": {
-    "defaultMessage": "Time",
-    "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
   },
   "SxsVDt": {
     "defaultMessage": "Meta",
@@ -458,6 +474,10 @@
   "VhgGax": {
     "defaultMessage": "Como estão as prioridades d{gender, select, MALE {o} FEMALE {a} other {o}} {team}?",
     "description": "The title of the header section in our objectives overview report"
+  },
+  "WKevJy": {
+    "defaultMessage": "Clique aqui para editar esse campo",
+    "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
   },
   "XENgso": {
     "defaultMessage": "Médio",
@@ -515,6 +535,10 @@
     "defaultMessage": "Início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
   },
+  "bdkUKs": {
+    "defaultMessage": "Times",
+    "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
+  },
   "bqCVp4": {
     "defaultMessage": "Clique aqui para começar a escrever um comentário",
     "description": "This is the title text that is displayed if the user hovers the mouse in it"
@@ -522,6 +546,10 @@
   "c8UE59": {
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
+  },
+  "eI6jYw": {
+    "defaultMessage": "Nenhuma informação",
+    "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
   },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
@@ -563,6 +591,10 @@
     "defaultMessage": "Fale com nosso suporte técnico",
     "description": "AppBar user menu third item option"
   },
+  "hMXuTX": {
+    "defaultMessage": "Masculino",
+    "description": "This text is used accross our platform to identify the male gender"
+  },
   "hPJxpx": {
     "defaultMessage": "Média Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
@@ -586,6 +618,10 @@
   "jvxLB+": {
     "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
+  },
+  "k0fMvn": {
+    "defaultMessage": "Escreva sobre você",
+    "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
   },
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
@@ -658,6 +694,10 @@
   "or8fId": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
+  },
+  "pLYuso": {
+    "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
+    "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
   },
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",

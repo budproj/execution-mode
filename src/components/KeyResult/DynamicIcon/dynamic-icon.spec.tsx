@@ -59,7 +59,7 @@ describe('component expectations', () => {
 
     const result = enzyme.shallow(<DynamicIcon title={faker.random.word()} />)
 
-    // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
+    // eslint-disable-next-line unicorn/no-array-callback-reference
     const icon = result.find(fakeIconName)
 
     expect(icon.length).toEqual(1)
@@ -95,7 +95,7 @@ describe('component expectations', () => {
 
     const result = enzyme.shallow(<DynamicIcon title={faker.random.word()} />)
 
-    // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
+    // eslint-disable-next-line unicorn/no-array-callback-reference
     const icon = result.find(defaultFakeIconName)
 
     expect(icon.prop('desc')).toEqual(fakeText)

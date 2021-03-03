@@ -14,6 +14,7 @@ import {
   Modal,
   Alert,
   Avatar,
+  Editable,
 } from './components'
 
 const colors = {
@@ -164,6 +165,7 @@ const theme = extendTheme({
     Modal,
     Alert,
     Avatar,
+    Editable,
   },
 
   fonts: {

@@ -60,7 +60,7 @@ const useRelativeDate = (
   const [snapshotDate, setSnapshotDate] = useState(initialSnapshotDate)
 
   const [formatDate, unit] = selectFormatter(date, snapshotDate, initialUnit)
-  const formattedDate = formatDate && date ? formatDate(date, snapshotDate) : undefined
+  const formattedDate = date ? formatDate(date, snapshotDate) : undefined
 
   return [formattedDate, setDate, unit, date, setSnapshotDate]
 }

@@ -1,12 +1,13 @@
 import { useLazyQuery } from '@apollo/client'
 import { Divider, Flex } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import isMatch from 'lodash/isMatch'
+import React, { useEffect, useState } from 'react'
+import { useRecoilValue, useRecoilState } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
-import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
+import userSelector from 'src/state/recoil/user/selector'
 
 import SettingsAccountBody from './Body'
 import SettingsAccountHeader from './Header'
@@ -31,9 +32,10 @@ export interface GetUserDataQuery {
 }
 
 const SettingsAccount = () => {
+  const [isRecoilSynced, setIsRecoilSynced] = useState(false)
   const myUserID = useRecoilValue(meAtom)
-  const setUser = useSetRecoilState(userAtomFamily(myUserID))
-  const [getUserData, { loading, variables }] = useLazyQuery<GetUserDataQuery>(
+  const [user, setUser] = useRecoilState(userSelector(myUserID))
+  const [getUserData, { loading, variables, data }] = useLazyQuery<GetUserDataQuery>(
     queries.GET_USER_DATA,
     {
       onCompleted: (data) => setUser(data.user),
@@ -43,15 +45,21 @@ const SettingsAccount = () => {
     },
   )
 
+  const isLoaded = !loading && isRecoilSynced
+
   useEffect(() => {
     if (myUserID && myUserID !== variables?.id) getUserData()
   }, [myUserID, getUserData, variables])
 
+  useEffect(() => {
+    if (!isRecoilSynced && data && user && isMatch(user, data.user)) setIsRecoilSynced(true)
+  }, [isRecoilSynced, setIsRecoilSynced, user, data])
+
   return (
     <Flex py={4} gridGap={6} direction="column" w="full">
-      <SettingsAccountHeader userID={myUserID} loading={loading} />
+      <SettingsAccountHeader userID={myUserID} isLoaded={isLoaded} />
       <Divider borderColor="black.200" />
-      <SettingsAccountBody userID={myUserID} loading={loading} />
+      <SettingsAccountBody userID={myUserID} isLoaded={isLoaded} />
     </Flex>
   )
 }

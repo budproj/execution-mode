@@ -86,4 +86,6 @@ export { default as Gear } from './Gear'
 
 export { default as Image } from './Image'
 
+export { default as Pen } from './Pen'
+
 export * from './types'

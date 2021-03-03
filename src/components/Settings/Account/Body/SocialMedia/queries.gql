@@ -1,0 +1,6 @@
+mutation UPDATE_USER_SOCIAL_MEDIA($userID: ID!, $userData: UserDataInput!) {
+  updateUser(userID: $userID, userData: $userData) {
+    id
+    linkedInProfileAddress
+  }
+}

@@ -1,34 +1,31 @@
 import { Flex, Box, Avatar, Text, SkeletonCircle, Skeleton } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import { User } from 'src/components/User/types'
+import selectUser from 'src/state/recoil/user/selector'
 
 export interface NamedAvatarProperties {
+  userID?: User['id']
   isLoading?: boolean
-  name?: string
-  picture?: string
-  company?: string
 }
 
-const NamedAvatar = ({
-  name,
-  picture,
-  company,
-  isLoading,
-}: NamedAvatarProperties): ReactElement => {
-  const isLoadingIsUndefined = typeof isLoading === 'undefined'
-  const isLoaded = isLoadingIsUndefined || !isLoading
+const NamedAvatar = ({ userID, isLoading }: NamedAvatarProperties): ReactElement => {
+  const user = useRecoilValue(selectUser(userID))
+
+  const isLoaded = Boolean(user) || !isLoading
 
   return (
     <Flex alignItems="center" gridGap={15}>
       <SkeletonCircle isLoaded={isLoaded} size="50px">
-        <Avatar name={name} src={picture} />
+        <Avatar name={user?.fullName} src={user?.picture} />
       </SkeletonCircle>
 
       <Box textAlign="left">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 24)}>
           <Text color="gray.500" fontWeight={500}>
-            {name}
+            {user?.fullName}
           </Text>
         </Skeleton>
 
@@ -38,7 +35,7 @@ const NamedAvatar = ({
           mt={isLoaded ? 0 : '8px'}
         >
           <Text fontSize="sm" color="gray.500">
-            {company}
+            {user?.companies?.[0]?.name}
           </Text>
         </Skeleton>
       </Box>
