@@ -11,7 +11,7 @@ export default Factory.extend({
   nickname: faker.internet.userName,
   about: faker.lorem.paragraph,
   linkedInProfileAddress: faker.internet.url,
-  gender: () => faker.helpers.randomize([USER_GENDER.MALE, USER_GENDER.FEMALE, undefined]),
+  gender: () => faker.helpers.randomize([USER_GENDER.MALE, USER_GENDER.FEMALE]), // , undefined]),
   role: faker.name.jobTitle,
   picture: () => faker.helpers.randomize([undefined, faker.image.avatar()]),
   createdAt: faker.date.past,

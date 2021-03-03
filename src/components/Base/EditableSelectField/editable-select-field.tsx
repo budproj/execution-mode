@@ -44,7 +44,7 @@ const EditableSelectField = ({
       </FormLabel>
       <Stack direction="row" alignItems="center" gridGap={2}>
         <EditableSelectValue
-          isSubmitting
+          isSubmitting={isSubmitting && wasSubmitted}
           value={value}
           placeholder={placeholder}
           customFallbackPlaceholder={customFallbackPlaceholder}
