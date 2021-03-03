@@ -1,5 +1,5 @@
-import { Box, Flex, Heading, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Box, Flex, Heading, Skeleton, SkeletonText, Text, Stack } from '@chakra-ui/react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -7,7 +7,6 @@ import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/components/Base'
 import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
-import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import messages from './messages'
@@ -19,14 +18,10 @@ export interface TeamCardProperties {
 const TeamCard = ({ id }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
+
   const isCompany = Boolean(team?.isCompany)
-  const [confidenceTag, setConfidence] = useConfidenceTag(team?.status?.confidence)
-
-  useEffect(() => {
-    if (typeof team?.status?.confidence !== 'undefined') setConfidence(team?.status?.confidence)
-  }, [team, setConfidence])
-
   const isLoaded = Boolean(team)
+  const progress = team?.status?.progress ?? 0
 
   return (
     <IntlLink href={id ?? '#'}>
@@ -63,14 +58,19 @@ const TeamCard = ({ id }: TeamCardProperties) => {
               {team?.description}
             </Text>
           </SkeletonText>
-          <Skeleton isLoaded={isLoaded} borderRadius="full">
-            <SliderWithFilledTrack
-              trackThickness={3}
-              value={team?.status?.progress}
-              trackColor={confidenceTag.color.primary}
-              trackBg="black.200"
-            />
-          </Skeleton>
+
+          <Stack direction="row" gridGap={4} alignItems="center">
+            <Skeleton isLoaded={isLoaded} borderRadius="full" flexGrow={1} display="flex">
+              <SliderWithFilledTrack trackThickness={3} value={progress} trackBg="black.200" />
+            </Skeleton>
+
+            <Skeleton isLoaded={isLoaded} borderRadius="full">
+              <Text fontSize="md" color="black.600">
+                {intl.formatNumber(progress / 100, { style: 'percent' })}
+              </Text>
+            </Skeleton>
+          </Stack>
+
           <Box pt={12}>
             <DynamicAvatarGroup users={team?.users} isLoaded={isLoaded} />
           </Box>
