@@ -48,7 +48,7 @@ const EditableSelectField = ({
           value={value}
           placeholder={placeholder}
           customFallbackPlaceholder={customFallbackPlaceholder}
-          isLoaded={isLoaded} // IsSubmitting && wasSubmitted}
+          isLoaded={isLoaded}
           onChange={handleChange}
         >
           {children}

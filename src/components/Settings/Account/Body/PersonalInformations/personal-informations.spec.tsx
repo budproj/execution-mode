@@ -3,6 +3,7 @@ import * as Chakra from '@chakra-ui/react'
 import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
+import { act } from 'react-dom/test-utils'
 import { MutableSnapshot, RecoilRoot } from 'recoil'
 import sinon from 'sinon'
 
@@ -638,6 +639,120 @@ describe('mutations', () => {
       .find('EditableInput')
       .find('input')
     editable.simulate('blur')
+
+    await waitForComponentToPaint(wrapper)
+
+    expect(spy.called).toEqual(true)
+  })
+
+  it('should be able to update the user gender', async () => {
+    const fakeUserID = faker.random.uuid()
+    const fakeUserGender = USER_GENDER.MALE
+    const newFakeUserGender = USER_GENDER.FEMALE
+    const spy = sinon.spy()
+    const fakeUser = {
+      ...defaultUser,
+      id: fakeUserID,
+      gender: fakeUserGender,
+    }
+    const response = {
+      id: fakeUser.id,
+      firstName: fakeUser.firstName,
+      lastName: fakeUser.lastName,
+      fullName: fakeUser.fullName,
+      nickaname: fakeUser.nickname,
+      role: fakeUser.role,
+      gender: fakeUser.gender,
+      about: fakeUser.about,
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.UPDATE_USER_INFORMATION,
+          variables: {
+            userID: fakeUserID,
+            userData: {
+              gender: newFakeUserGender,
+            },
+          },
+        },
+        result: () => {
+          spy()
+          return {
+            data: {
+              updateUser: response,
+            },
+          }
+        },
+      },
+    ]
+
+    const wrapper = buildWrapper(fakeUser, mocks)
+
+    await waitForComponentToPaint(wrapper)
+    wrapper.update()
+
+    const editableSelect = wrapper.find('EditableSelectValue')
+    const function_ = editableSelect.prop('onChange')
+    if (function_) act(() => function_(newFakeUserGender as any))
+
+    await waitForComponentToPaint(wrapper)
+
+    expect(spy.called).toEqual(true)
+  })
+
+  it('should be able to update the user about', async () => {
+    const fakeUserID = faker.random.uuid()
+    const fakeUserAbout = faker.lorem.paragraph()
+    const newFakeUserAbout = faker.lorem.paragraph()
+    const spy = sinon.spy()
+    const fakeUser = {
+      ...defaultUser,
+      id: fakeUserID,
+      about: fakeUserAbout,
+    }
+    const response = {
+      id: fakeUser.id,
+      firstName: fakeUser.firstName,
+      lastName: fakeUser.lastName,
+      fullName: fakeUser.fullName,
+      nickaname: fakeUser.nickname,
+      role: fakeUser.role,
+      gender: fakeUser.gender,
+      about: fakeUser.about,
+    }
+
+    const mocks = [
+      {
+        request: {
+          query: queries.UPDATE_USER_INFORMATION,
+          variables: {
+            userID: fakeUserID,
+            userData: {
+              about: newFakeUserAbout,
+            },
+          },
+        },
+        result: () => {
+          spy()
+          return {
+            data: {
+              updateUser: response,
+            },
+          }
+        },
+      },
+    ]
+
+    const wrapper = buildWrapper(fakeUser, mocks)
+
+    await waitForComponentToPaint(wrapper)
+    wrapper.update()
+
+    const editableTextarea = wrapper.find('EditableTextAreaValue')
+    const function_ = editableTextarea.prop('onBlur')
+    if (function_) function_({ target: { value: newFakeUserAbout } } as any)
 
     await waitForComponentToPaint(wrapper)
 
