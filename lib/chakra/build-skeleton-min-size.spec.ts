@@ -6,13 +6,13 @@ describe('builder', () => {
   it('returns "auto" for width if data is loaded', () => {
     const result = buildSkeletonMinSize(true, faker.random.number(), faker.random.number())
 
-    expect(result.width).toEqual('auto')
+    expect(result.width).toEqual('full')
   })
 
   it('returns "auto" for height if data is loaded', () => {
     const result = buildSkeletonMinSize(true, faker.random.number(), faker.random.number())
 
-    expect(result.height).toEqual('auto')
+    expect(result.height).toEqual('full')
   })
 
   it('returns provided normalized width if data is not loaded', () => {
