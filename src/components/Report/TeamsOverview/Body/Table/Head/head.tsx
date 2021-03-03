@@ -11,15 +11,21 @@ const TeamsOverviewBodyTableHead = () => {
 
   return (
     <TeamsOverviewBodyTableLineTemplate fontSize="sm" color="black.600" fontWeight={500}>
-      <Tooltip label={intl.formatMessage(messages.firstColumnTooltip)} placement="bottom-start">
-        <GridItem>{intl.formatMessage(messages.firstColumnTitle)}</GridItem>
-      </Tooltip>
-      <Tooltip label={intl.formatMessage(messages.secondColumnTooltip)} placement="bottom-start">
-        <GridItem>{intl.formatMessage(messages.secondColumnTitle)}</GridItem>
-      </Tooltip>
-      <Tooltip label={intl.formatMessage(messages.thirdColumnTooltip)} placement="bottom-start">
-        <GridItem>{intl.formatMessage(messages.thirdColumnTitle)}</GridItem>
-      </Tooltip>
+      <GridItem>
+        <Tooltip label={intl.formatMessage(messages.firstColumnTooltip)} placement="bottom-start">
+          {intl.formatMessage(messages.firstColumnTitle)}
+        </Tooltip>
+      </GridItem>
+      <GridItem>
+        <Tooltip label={intl.formatMessage(messages.secondColumnTooltip)} placement="bottom-start">
+          {intl.formatMessage(messages.secondColumnTitle)}
+        </Tooltip>
+      </GridItem>
+      <GridItem>
+        <Tooltip label={intl.formatMessage(messages.thirdColumnTooltip)} placement="bottom-start">
+          {intl.formatMessage(messages.thirdColumnTitle)}
+        </Tooltip>
+      </GridItem>
     </TeamsOverviewBodyTableLineTemplate>
   )
 }

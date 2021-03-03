@@ -2,9 +2,8 @@ import { IconButton, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import IntlLink from 'src/components/Base/IntlLink'
 import GearIcon from 'src/components/Icon/Gear'
-
-import IntlLink from '../IntlLink'
 
 import messages from './messages'
 

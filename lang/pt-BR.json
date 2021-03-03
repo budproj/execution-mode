@@ -67,6 +67,10 @@
     "defaultMessage": "Novo valor",
     "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
   },
+  "0d1/rp": {
+    "defaultMessage": "Indica o quanto esse resultado-chave evoluiu até o momento",
+    "description": "This tooltip explains the fourth column of the key result list"
+  },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
@@ -387,6 +391,10 @@
     "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
   },
+  "QEsnT8": {
+    "defaultMessage": "Percentual de progresso entre o valor inicial e a meta",
+    "description": "This tooltip explains the fifth column of the key result list"
+  },
   "QKUmFp": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our progress slider popover"
@@ -426,6 +434,10 @@
   "SenoB2": {
     "defaultMessage": "A página que você está procurando não foi encontrada!",
     "description": "The title displayed in our not found error page"
+  },
+  "Smwz9L": {
+    "defaultMessage": "Descreve o período no qual esse resultado-chave faz parte",
+    "description": "This tooltip explains the sixth column of the key result list"
   },
   "Sn7K6v": {
     "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
@@ -567,6 +579,10 @@
     "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
     "description": "This tooltip appears when the user hovers the second column title"
   },
+  "dymB9a": {
+    "defaultMessage": "Cada resultado-chave pertence a um objetivo",
+    "description": "This tooltip explains the second column of the key result list"
+  },
   "eI6jYw": {
     "defaultMessage": "Nenhuma informação",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
@@ -707,6 +723,10 @@
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
     "description": "The default description for our page head meta description value"
   },
+  "mslW5a": {
+    "defaultMessage": "Esses são seus resultados-chave. Cuide bem deles!",
+    "description": "This tooltip explains the first column of the key result list"
+  },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
@@ -822,6 +842,10 @@
   "vJ/603": {
     "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
     "description": "The description displayed in our not found error page"
+  },
+  "wJjuae": {
+    "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",
+    "description": "This tooltip explains the seventh column of the key result list"
   },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",

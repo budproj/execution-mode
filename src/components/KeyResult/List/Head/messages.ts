@@ -2,13 +2,19 @@ import { defineMessages } from 'react-intl'
 
 type KeyResultListHeadMessage =
   | 'listHeadKeyResult'
+  | 'listHeadKeyResultTooltip'
   | 'listHeadObjective'
+  | 'listHeadObjectiveTooltip'
   | 'listHeadConfidenceLevel'
   | 'listHeadProgress'
+  | 'listHeadProgressTooltip'
   | 'listHeadCycle'
+  | 'listHeadCycleTooltip'
   | 'listHeadOwner'
+  | 'listHeadOwnerTooltip'
   | 'listHeadConfidenceLevelColor'
   | 'listHeadPercentualProgress'
+  | 'listHeadPercentualProgressTooltip'
 
 export default defineMessages<KeyResultListHeadMessage>({
   listHeadKeyResult: {
@@ -17,10 +23,22 @@ export default defineMessages<KeyResultListHeadMessage>({
     description: 'The text of the table head related to the KeyResult column',
   },
 
+  listHeadKeyResultTooltip: {
+    defaultMessage: 'Esses são seus resultados-chave. Cuide bem deles!',
+    id: 'mslW5a',
+    description: 'This tooltip explains the first column of the key result list',
+  },
+
   listHeadObjective: {
     defaultMessage: 'Objetivo',
     id: '8LTdv4',
     description: 'The text of the table head related to the Objective column',
+  },
+
+  listHeadObjectiveTooltip: {
+    defaultMessage: 'Cada resultado-chave pertence a um objetivo',
+    id: 'dymB9a',
+    description: 'This tooltip explains the second column of the key result list',
   },
 
   listHeadConfidenceLevel: {
@@ -35,16 +53,34 @@ export default defineMessages<KeyResultListHeadMessage>({
     description: 'The text of the table head related to the Progress column',
   },
 
+  listHeadProgressTooltip: {
+    defaultMessage: 'Indica o quanto esse resultado-chave evoluiu até o momento',
+    id: '0d1/rp',
+    description: 'This tooltip explains the fourth column of the key result list',
+  },
+
   listHeadCycle: {
     defaultMessage: 'Ciclo',
     id: 'IGODpK',
     description: 'The text of the table head related to the Cycle column',
   },
 
+  listHeadCycleTooltip: {
+    defaultMessage: 'Descreve o período no qual esse resultado-chave faz parte',
+    id: 'Smwz9L',
+    description: 'This tooltip explains the sixth column of the key result list',
+  },
+
   listHeadOwner: {
     defaultMessage: 'Responsável',
     id: 'u7Yaxx',
     description: 'The text of the table head related to the Owner column',
+  },
+
+  listHeadOwnerTooltip: {
+    defaultMessage: 'A pessoa responsável por garantir que esse resultado-chave aconteça',
+    id: 'wJjuae',
+    description: 'This tooltip explains the seventh column of the key result list',
   },
 
   listHeadConfidenceLevelColor: {
@@ -57,5 +93,11 @@ export default defineMessages<KeyResultListHeadMessage>({
     defaultMessage: '%',
     id: 'KSjqcC',
     description: 'The text of the table head related to the percentual progress column',
+  },
+
+  listHeadPercentualProgressTooltip: {
+    defaultMessage: 'Percentual de progresso entre o valor inicial e a meta',
+    id: 'QEsnT8',
+    description: 'This tooltip explains the fifth column of the key result list',
   },
 })
