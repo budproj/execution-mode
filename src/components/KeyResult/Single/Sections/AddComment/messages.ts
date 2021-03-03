@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSectionAddCommentMessage = 'paperPlaneIconTitle' | 'paperPlaneIconDesc'
+type KeyResultsSectionAddCommentMessage =
+  | 'paperPlaneIconTitle'
+  | 'paperPlaneIconDesc'
+  | 'placeholder'
 
 export default defineMessages<KeyResultsSectionAddCommentMessage>({
   paperPlaneIconTitle: {
@@ -14,5 +17,12 @@ export default defineMessages<KeyResultsSectionAddCommentMessage>({
     defaultMessage: 'Um ícone de um avião de papel. Ao clicar nele você irá enviar um comentário',
     id: '/aK0UI',
     description: 'The alternative text explaining our paper plane icon',
+  },
+
+  placeholder: {
+    defaultMessage: 'Clique aqui para comentar :)',
+    id: '+6p/sC',
+    description:
+      'This text is displayed in our comment input in our key result drawer when it has no value',
   },
 })

@@ -20,7 +20,7 @@ export interface TextareaAutosizeContext {
 const KeyResultSectionAddCommentInput = ({
   isLoading,
 }: KeyResultSectionAddCommentInputProperties) => {
-  const [isOnFocus, setIsOnFocus] = useState(true)
+  const [isOnFocus, setIsOnFocus] = useState(false)
   const [numberOfRows, setNumberOfRows] = useState(1)
   const {
     values,
@@ -61,8 +61,8 @@ const KeyResultSectionAddCommentInput = ({
       borderRadius={numberOfRows === 1 ? 'full' : 60 / numberOfRows}
     >
       <TextareaAutosize
-        autoFocus
         value={values.text}
+        placeholder={intl.formatMessage(messages.placeholder)}
         maxRows={14}
         style={{
           resize: 'none',

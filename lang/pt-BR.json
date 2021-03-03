@@ -3,6 +3,10 @@
     "defaultMessage": "Seu avatar",
     "description": "The title text of our image icon in our settings account page, it is displayed when an user hover the icon itself"
   },
+  "+6p/sC": {
+    "defaultMessage": "Clique aqui para comentar :)",
+    "description": "This text is displayed in our comment input in our key result drawer when it has no value"
+  },
   "+G9goh": {
     "defaultMessage": "Ver mais...",
     "description": "This text is displayed in the button that expands a truncated text"
