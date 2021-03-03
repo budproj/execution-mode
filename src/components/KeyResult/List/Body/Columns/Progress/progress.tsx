@@ -1,5 +1,6 @@
-import { Flex, Box, Skeleton, Text } from '@chakra-ui/react'
+import { Flex, Box, Skeleton, Text, Tooltip } from '@chakra-ui/react'
 import React, { ReactElement, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import KeyResultListBodyColumnBase, {
@@ -15,6 +16,8 @@ import {
   keyResultCheckInProgressDraft,
 } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+
+import messages from './messages'
 
 export interface KeyResultListBodyColumnProgressProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -35,6 +38,7 @@ const KeyResultListBodyColumnProgress = ({
   const isSlidding = useRecoilValue(keyResultCheckInIsSlidding(id))
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
+  const intl = useIntl()
 
   const ProgressMask = selectMaskBasedOnFormat(format)
   const isKeyResultLoaded = Boolean(id)
@@ -70,7 +74,12 @@ const KeyResultListBodyColumnProgress = ({
               value={draftValue}
               displayType="text"
               renderText={(value) => (
-                <Text color={isSlidding ? confidenceTag.color.primary : 'gray.300'}>{value}</Text>
+                <Tooltip
+                  label={intl.formatMessage(messages.leftSideValueTooltip)}
+                  placement="bottom-start"
+                >
+                  <Text color={isSlidding ? confidenceTag.color.primary : 'gray.300'}>{value}</Text>
+                </Tooltip>
               )}
             />
           </Skeleton>
@@ -87,9 +96,14 @@ const KeyResultListBodyColumnProgress = ({
               value={goal}
               displayType="text"
               renderText={(value) => (
-                <Text color="gray.300" textAlign="right">
-                  {value}
-                </Text>
+                <Tooltip
+                  label={intl.formatMessage(messages.rightSideValueTooltip)}
+                  placement="bottom-end"
+                >
+                  <Text color="gray.300" textAlign="right">
+                    {value}
+                  </Text>
+                </Tooltip>
               )}
             />
           </Skeleton>

@@ -235,6 +235,10 @@
     "defaultMessage": "Um ícone de coroa que representa a sua empresa",
     "description": "This message is used by screen readers to explain our crown icon"
   },
+  "D9XMWI": {
+    "defaultMessage": "Meta",
+    "description": "This tooltip is displayed when the user hovers the right side value of our progress bar"
+  },
   "DrLml8": {
     "defaultMessage": "Clique aqui para fechar o formulário de check-in",
     "description": "This message is displayed as the alternative text for the close button in our check-in form"
@@ -407,6 +411,10 @@
     "defaultMessage": "Alta Confiança",
     "description": "We use this tag to group every key result with confidence higher than 66"
   },
+  "QcCy51": {
+    "defaultMessage": "Valor atual",
+    "description": "This tooltip is displayed when the user hovers the left side value of our progress bar"
+  },
   "RWaMNF": {
     "defaultMessage": "Um ícone de coração",
     "description": "The desc message for the Heart icon. This icon is used to ilustrate our key results"
@@ -506,6 +514,10 @@
   "XENgso": {
     "defaultMessage": "Médio",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
+  },
+  "XEey8C": {
+    "defaultMessage": "Arraste até o novo valor para iniciar um check-in",
+    "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
   },
   "XNkzYe": {
     "defaultMessage": "Um ícone de pin de localização",

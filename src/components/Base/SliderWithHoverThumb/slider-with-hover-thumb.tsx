@@ -6,6 +6,7 @@ import {
   SliderTrack,
   SliderTrackProps,
   Tooltip,
+  TooltipProps,
 } from '@chakra-ui/react'
 import React, { forwardRef } from 'react'
 import { useIntl } from 'react-intl'
@@ -16,11 +17,18 @@ export interface SliderWithHoverThumbProperties extends SliderProps {
   trackColor?: SliderTrackProps['bg']
   trackThickness?: SliderTrackProps['h']
   dataAction?: string
+  thumbTooltipLabel?: TooltipProps['label']
 }
 
 const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProperties>(
   (
-    { trackColor, trackThickness, dataAction, ...rest }: SliderWithHoverThumbProperties,
+    {
+      trackColor,
+      trackThickness,
+      dataAction,
+      thumbTooltipLabel,
+      ...rest
+    }: SliderWithHoverThumbProperties,
     forwardedReference,
   ) => {
     const intl = useIntl()
@@ -42,7 +50,10 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
           <SliderFilledTrack bg={trackColor} borderRadius="full" />
         </SliderTrack>
 
-        <Tooltip label={intl.formatMessage(messages.updateLabel)} placement="top">
+        <Tooltip
+          label={thumbTooltipLabel ?? intl.formatMessage(messages.updateLabel)}
+          placement="top"
+        >
           <SliderThumb
             bg={trackColor}
             borderColor="white"

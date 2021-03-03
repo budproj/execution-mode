@@ -1,4 +1,5 @@
 import React, { RefObject, forwardRef, useCallback, useState, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import SliderWithHoverThumb, {
@@ -14,6 +15,8 @@ import {
   keyResultCheckInProgressSliderStep,
   keyResultLatestCheckIn,
 } from 'src/state/recoil/key-result/check-in'
+
+import messages from './messages'
 
 export interface ProgressSliderSliderProperties {
   keyResultID?: KeyResult['id']
@@ -44,6 +47,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     const [confidenceTag, setConfidenceInConfidenceTag] = useConfidenceTag(
       latestKeyResultCheckIn?.confidence,
     )
+    const intl = useIntl()
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
@@ -92,6 +96,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
         step={step}
         focusThumbOnChange={false}
         isDisabled={!canChange}
+        thumbTooltipLabel={intl.formatMessage(messages.thumbTooltip)}
         onChange={handleSliderUpdate}
         onChangeEnd={handleSliderUpdateEnd}
       />

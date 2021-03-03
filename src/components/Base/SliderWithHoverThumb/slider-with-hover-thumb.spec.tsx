@@ -24,6 +24,17 @@ describe('slider customization', () => {
 
     expect(sliderComponent.props()).toMatchObject(fakeProperties)
   })
+
+  it('can customize the tooltip of the thumb', () => {
+    const fakeTooltipLabel = faker.random.word()
+    const sliderWithHoverThumb = enzyme.shallow(
+      <SliderWithHoverThumb thumbTooltipLabel={fakeTooltipLabel} />,
+    )
+
+    const tooltipComponent = sliderWithHoverThumb.find('Tooltip')
+
+    expect(tooltipComponent.prop('label')).toEqual(fakeTooltipLabel)
+  })
 })
 
 describe('refence forwarding', () => {
