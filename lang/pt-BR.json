@@ -67,6 +67,10 @@
     "defaultMessage": "Novo valor",
     "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
   },
+  "0d1/rp": {
+    "defaultMessage": "Indica o quanto esse resultado-chave evoluiu até o momento",
+    "description": "This tooltip explains the fourth column of the key result list"
+  },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
@@ -139,13 +143,13 @@
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
   },
+  "6RzNYt": {
+    "defaultMessage": "Um círculo com um ponto de interrogação no meio",
+    "description": "This message explains our tooltip icon for screen readers"
+  },
   "6aChVs": {
     "defaultMessage": "Nesta semana",
     "description": "This label is displayed if the date difference is 1 week or less"
-  },
-  "6lmXk8": {
-    "defaultMessage": "Clique aqui para acessar nossa página de configurações",
-    "description": "SupportButton icon title that links to settings page. It is displayed when the user hovers the icon itself"
   },
   "6spUEn": {
     "defaultMessage": "Fazer check-in",
@@ -234,6 +238,10 @@
   "D8ZyT4": {
     "defaultMessage": "Um ícone de coroa que representa a sua empresa",
     "description": "This message is used by screen readers to explain our crown icon"
+  },
+  "D9XMWI": {
+    "defaultMessage": "Meta",
+    "description": "This tooltip is displayed when the user hovers the right side value of our progress bar"
   },
   "DrLml8": {
     "defaultMessage": "Clique aqui para fechar o formulário de check-in",
@@ -391,6 +399,10 @@
     "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
   },
+  "QEsnT8": {
+    "defaultMessage": "Percentual de progresso entre o valor inicial e a meta",
+    "description": "This tooltip explains the fifth column of the key result list"
+  },
   "QKUmFp": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our progress slider popover"
@@ -402,6 +414,10 @@
   "QPGUqB": {
     "defaultMessage": "Alta Confiança",
     "description": "We use this tag to group every key result with confidence higher than 66"
+  },
+  "QcCy51": {
+    "defaultMessage": "Valor atual",
+    "description": "This tooltip is displayed when the user hovers the left side value of our progress bar"
   },
   "RWaMNF": {
     "defaultMessage": "Um ícone de coração",
@@ -430,6 +446,10 @@
   "SenoB2": {
     "defaultMessage": "A página que você está procurando não foi encontrada!",
     "description": "The title displayed in our not found error page"
+  },
+  "Smwz9L": {
+    "defaultMessage": "Descreve o período no qual esse resultado-chave faz parte",
+    "description": "This tooltip explains the sixth column of the key result list"
   },
   "Sn7K6v": {
     "defaultMessage": "Um ícone de sino, ao clicar nele você verá suas notificações",
@@ -487,6 +507,10 @@
     "defaultMessage": "Como estão as prioridades d{gender, select, MALE {o} FEMALE {a} other {o}} {team}?",
     "description": "The title of the header section in our objectives overview report"
   },
+  "W9swHV": {
+    "defaultMessage": "Configurações",
+    "description": "This tooltip is displayed when the user hovers the settings icon"
+  },
   "WKevJy": {
     "defaultMessage": "Clique aqui para editar esse campo",
     "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
@@ -494,6 +518,10 @@
   "XENgso": {
     "defaultMessage": "Médio",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
+  },
+  "XEey8C": {
+    "defaultMessage": "Arraste até o novo valor para iniciar um check-in",
+    "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
   },
   "XNkzYe": {
     "defaultMessage": "Um ícone de pin de localização",
@@ -563,9 +591,21 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
+  "dB4Sbq": {
+    "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
+    "description": "This tooltip appears when the user hovers the second column title"
+  },
+  "dymB9a": {
+    "defaultMessage": "Cada resultado-chave pertence a um objetivo",
+    "description": "This tooltip explains the second column of the key result list"
+  },
   "eI6jYw": {
     "defaultMessage": "Nenhuma informação",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
+  },
+  "f6/kwR": {
+    "defaultMessage": "Esse é o progresso acumulado dessa semana",
+    "description": "This tooltip appears when the user hovers the third column title"
   },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
@@ -591,9 +631,17 @@
     "defaultMessage": "Visualize e atualize as preferências do seu perfil",
     "description": "The page description that is displayed in Google and screen readers for the my profile page"
   },
+  "fx39XE": {
+    "defaultMessage": "Ajuda",
+    "description": "This tooltip is displayed when the user hovers the support button"
+  },
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
+  },
+  "gm1hfm": {
+    "defaultMessage": "Progresso do objetivo acumulado na semana",
+    "description": "This tooltip explains regarding our progress tag"
   },
   "goSPM7": {
     "defaultMessage": "Você excluiu um {type}",
@@ -615,10 +663,6 @@
     "defaultMessage": "Média Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
   },
-  "hdclOn": {
-    "defaultMessage": "Ajuda",
-    "description": "SupportButton icon title that links to support page. It is displayed when the user hovers the icon itself"
-  },
   "hn3cE7": {
     "defaultMessage": "Progresso acumulado dessa semana",
     "description": "This helper texts explains since when we are calculating your company progress"
@@ -639,9 +683,21 @@
     "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
   },
+  "jxyYl3": {
+    "defaultMessage": "Ordenada pelo progresso",
+    "description": "This tooltip appears when the user hovers the first column title"
+  },
   "k0fMvn": {
     "defaultMessage": "Escreva sobre você",
     "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
+  },
+  "k3EFXK": {
+    "defaultMessage": "O nível de confiança descreve como você vê suas chances de alcançar esse resultado-chave dentro do prazo",
+    "description": "The tooltip of the check-in form. It appears when the user hovers the question mark icon"
+  },
+  "kFrglO": {
+    "defaultMessage": "O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.",
+    "description": "This tooltip explains how the progress of the objective is calculated"
   },
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
@@ -694,6 +750,10 @@
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
     "description": "The default description for our page head meta description value"
+  },
+  "mslW5a": {
+    "defaultMessage": "Esses são seus resultados-chave. Cuide bem deles!",
+    "description": "This tooltip explains the first column of the key result list"
   },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",
@@ -810,6 +870,10 @@
   "vJ/603": {
     "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
     "description": "The description displayed in our not found error page"
+  },
+  "wJjuae": {
+    "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",
+    "description": "This tooltip explains the seventh column of the key result list"
   },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",

@@ -1,6 +1,11 @@
 import { defineMessages } from 'react-intl'
 
-type ObjectiveAccordionItemMessage = 'calendarIconTitle' | 'calendarIconDesc' | 'progressTagLabel'
+type ObjectiveAccordionItemMessage =
+  | 'calendarIconTitle'
+  | 'calendarIconDesc'
+  | 'progressTagLabel'
+  | 'progressTagTooltip'
+  | 'progressTooltip'
 
 export default defineMessages<ObjectiveAccordionItemMessage>({
   calendarIconTitle: {
@@ -22,5 +27,18 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
     id: 'oycX/u',
     description:
       'The text displayed as a prefix in our progress tag label in the team objective accordion button',
+  },
+
+  progressTagTooltip: {
+    defaultMessage: 'Progresso do objetivo acumulado na semana',
+    id: 'gm1hfm',
+    description: 'This tooltip explains regarding our progress tag',
+  },
+
+  progressTooltip: {
+    defaultMessage:
+      'O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.',
+    id: 'kFrglO',
+    description: 'This tooltip explains how the progress of the objective is calculated',
   },
 })
