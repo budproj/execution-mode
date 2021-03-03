@@ -379,6 +379,10 @@
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
   },
+  "Q2diI+": {
+    "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
+    "description": "SupportButton icon desc. This is used by screen readers for accessibility"
+  },
   "QKUmFp": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our progress slider popover"
@@ -599,8 +603,8 @@
     "defaultMessage": "Média Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
   },
-  "hRddDx": {
-    "defaultMessage": "Clique aqui para acessar nossa página de suporte",
+  "hdclOn": {
+    "defaultMessage": "Ajuda",
     "description": "SupportButton icon title that links to support page. It is displayed when the user hovers the icon itself"
   },
   "hn3cE7": {
@@ -794,10 +798,6 @@
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
-  },
-  "xRyM8t": {
-    "defaultMessage": "Ícone de um ponto de interrogação. Ao clicar nele você irá para nossa página de suporte",
-    "description": "SupportButton icon desc. This is used by screen readers for accessibility"
   },
   "xVR0F1": {
     "defaultMessage": "Apelido",

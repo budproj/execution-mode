@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import InfoCircleIcon from 'src/components/Icon/InfoCircle'
+import BuoyIcon from 'src/components/Icon/Buoy'
 
 import { HELPDESK_URL } from './constants'
 import messages from './messages'
@@ -20,7 +20,7 @@ const SupportButton = () => {
           minH={8}
           minW={8}
           icon={
-            <InfoCircleIcon
+            <BuoyIcon
               fill="gray.500"
               stroke="gray.500"
               w={5}
