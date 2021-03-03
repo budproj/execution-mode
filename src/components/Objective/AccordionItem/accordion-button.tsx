@@ -8,6 +8,8 @@ import {
   CircularProgress,
   CircularProgressLabel,
   Flex,
+  Tooltip,
+  Box,
 } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -49,18 +51,20 @@ const ObjectiveAccordionButton = ({
 
       <AccordionIcon />
 
-      <Skeleton
-        isLoaded={isLoaded}
-        borderRadius="full"
-        w={isLoaded ? 'auto' : 70}
-        h={isLoaded ? 'auto' : 33}
-      >
-        <PercentageProgressIncreaseTag
-          forcePositiveSignal
-          value={objective?.progressIncreaseSinceLastWeek}
-          prefix={intl.formatMessage(messages.progressTagLabel)}
-        />
-      </Skeleton>
+      <Tooltip label={intl.formatMessage(messages.progressTagTooltip)} placement="top">
+        <Skeleton
+          isLoaded={isLoaded}
+          borderRadius="full"
+          w={isLoaded ? 'auto' : 70}
+          h={isLoaded ? 'auto' : 33}
+        >
+          <PercentageProgressIncreaseTag
+            forcePositiveSignal
+            value={objective?.progressIncreaseSinceLastWeek}
+            prefix={intl.formatMessage(messages.progressTagLabel)}
+          />
+        </Skeleton>
+      </Tooltip>
 
       <Skeleton isLoaded={isLoaded} display="flex" gridGap={2} alignItems="center">
         <CalendarOutlineIcon
@@ -73,23 +77,27 @@ const ObjectiveAccordionButton = ({
       </Skeleton>
 
       <Flex flexGrow={1} justifyContent="flex-end">
-        <SkeletonCircle isLoaded={isLoaded} size="50px">
-          <CircularProgress
-            value={roundedProgress}
-            thickness={6}
-            color={confidenceTag?.color.primary}
-            trackColor={confidenceTag?.color.light}
-            size={14}
-          >
-            <CircularProgressLabel
-              color={confidenceTag?.color.primary}
-              fontWeight={700}
-              fontSize="md"
-            >
-              {roundedProgress}%
-            </CircularProgressLabel>
-          </CircularProgress>
-        </SkeletonCircle>
+        <Tooltip label={intl.formatMessage(messages.progressTooltip)} placement="top-end">
+          <Box>
+            <SkeletonCircle isLoaded={isLoaded} size="50px">
+              <CircularProgress
+                value={roundedProgress}
+                thickness={6}
+                color={confidenceTag?.color.primary}
+                trackColor={confidenceTag?.color.light}
+                size={14}
+              >
+                <CircularProgressLabel
+                  color={confidenceTag?.color.primary}
+                  fontWeight={700}
+                  fontSize="md"
+                >
+                  {roundedProgress}%
+                </CircularProgressLabel>
+              </CircularProgress>
+            </SkeletonCircle>
+          </Box>
+        </Tooltip>
       </Flex>
     </AccordionButton>
   )
