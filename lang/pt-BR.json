@@ -699,6 +699,10 @@
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
   },
+  "oycX/u": {
+    "defaultMessage": "Essa semana",
+    "description": "The text displayed as a prefix in our progress tag label in the team objective accordion button"
+  },
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"

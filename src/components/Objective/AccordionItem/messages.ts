@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type ObjectiveAccordionItemMessage = 'calendarIconTitle' | 'calendarIconDesc'
+type ObjectiveAccordionItemMessage = 'calendarIconTitle' | 'calendarIconDesc' | 'progressTagLabel'
 
 export default defineMessages<ObjectiveAccordionItemMessage>({
   calendarIconTitle: {
@@ -15,5 +15,12 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
     id: 'SpAXmO',
     description:
       'The alternative text explaining our calendar icon in the objective accordion item',
+  },
+
+  progressTagLabel: {
+    defaultMessage: 'Essa semana',
+    id: 'oycX/u',
+    description:
+      'The text displayed as a prefix in our progress tag label in the team objective accordion button',
   },
 })

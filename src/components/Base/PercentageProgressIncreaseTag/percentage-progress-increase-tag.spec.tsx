@@ -234,4 +234,24 @@ describe('signal arrow', () => {
 
     expect(signalArrow.length).toEqual(0)
   })
+
+  it('can define a custom prefix', () => {
+    const fakePrefix = faker.random.word()
+
+    const result = enzyme.mount(<PercentageProgressIncreaseTag prefix={fakePrefix} />)
+
+    const tag = result.find('Tag')
+
+    expect(tag.text()).toEqual(`${fakePrefix} 0%`)
+  })
+
+  it('prevent double spaces in custom prefix', () => {
+    const fakePrefix = faker.random.word()
+
+    const result = enzyme.mount(<PercentageProgressIncreaseTag prefix={`${fakePrefix} `} />)
+
+    const tag = result.find('Tag')
+
+    expect(tag.text()).toEqual(`${fakePrefix} 0%`)
+  })
 })

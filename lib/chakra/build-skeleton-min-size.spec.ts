@@ -53,3 +53,23 @@ describe('builder', () => {
     expect(heightResult).toBeGreaterThanOrEqual(height / 2)
   })
 })
+
+describe('customizations', () => {
+  it('can customize the loaded width', () => {
+    const desiredLoadedWidth = faker.random.word()
+    const result = buildSkeletonMinSize(true, faker.random.number(), faker.random.number(), {
+      loadedWidth: desiredLoadedWidth,
+    })
+
+    expect(result.width).toEqual(desiredLoadedWidth)
+  })
+
+  it('can customize the loaded height', () => {
+    const desiredLoadedHeight = faker.random.word()
+    const result = buildSkeletonMinSize(true, faker.random.number(), faker.random.number(), {
+      loadedHeight: desiredLoadedHeight,
+    })
+
+    expect(result.width).toEqual(desiredLoadedHeight)
+  })
+})
