@@ -143,10 +143,6 @@
     "defaultMessage": "Nesta semana",
     "description": "This label is displayed if the date difference is 1 week or less"
   },
-  "6lmXk8": {
-    "defaultMessage": "Clique aqui para acessar nossa página de configurações",
-    "description": "SupportButton icon title that links to settings page. It is displayed when the user hovers the icon itself"
-  },
   "6spUEn": {
     "defaultMessage": "Fazer check-in",
     "description": "This message is displayed as a label button when the check-in form is closed in our key result section"
@@ -487,6 +483,10 @@
     "defaultMessage": "Como estão as prioridades d{gender, select, MALE {o} FEMALE {a} other {o}} {team}?",
     "description": "The title of the header section in our objectives overview report"
   },
+  "W9swHV": {
+    "defaultMessage": "Configurações",
+    "description": "This tooltip is displayed when the user hovers the settings icon"
+  },
   "WKevJy": {
     "defaultMessage": "Clique aqui para editar esse campo",
     "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
@@ -563,9 +563,17 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
+  "dB4Sbq": {
+    "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
+    "description": "This tooltip appears when the user hovers the second column title"
+  },
   "eI6jYw": {
     "defaultMessage": "Nenhuma informação",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
+  },
+  "f6/kwR": {
+    "defaultMessage": "Esse é o progresso acumulado dessa semana",
+    "description": "This tooltip appears when the user hovers the third column title"
   },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
@@ -591,6 +599,10 @@
     "defaultMessage": "Visualize e atualize as preferências do seu perfil",
     "description": "The page description that is displayed in Google and screen readers for the my profile page"
   },
+  "fx39XE": {
+    "defaultMessage": "Ajuda",
+    "description": "This tooltip is displayed when the user hovers the support button"
+  },
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
@@ -615,10 +627,6 @@
     "defaultMessage": "Média Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
   },
-  "hdclOn": {
-    "defaultMessage": "Ajuda",
-    "description": "SupportButton icon title that links to support page. It is displayed when the user hovers the icon itself"
-  },
   "hn3cE7": {
     "defaultMessage": "Progresso acumulado dessa semana",
     "description": "This helper texts explains since when we are calculating your company progress"
@@ -638,6 +646,10 @@
   "jvxLB+": {
     "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
+  },
+  "jxyYl3": {
+    "defaultMessage": "Ordenada pelo progresso",
+    "description": "This tooltip appears when the user hovers the first column title"
   },
   "k0fMvn": {
     "defaultMessage": "Escreva sobre você",

@@ -1,4 +1,4 @@
-import { IconButton } from '@chakra-ui/react'
+import { IconButton, Tooltip } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -14,26 +14,27 @@ const SupportButton = () => {
   return (
     <Link href={HELPDESK_URL}>
       <a target="_blank">
-        <IconButton
-          aria-label={intl.formatMessage(messages.iconDesc)}
-          h={8}
-          minH={8}
-          minW={8}
-          icon={
-            <BuoyIcon
-              fill="gray.500"
-              stroke="gray.500"
-              w={5}
-              h="auto"
-              title={intl.formatMessage(messages.iconTitle)}
-              desc={intl.formatMessage(messages.iconDesc)}
-            />
-          }
-          borderRadius="full"
-          _hover={{
-            bg: 'gray.50',
-          }}
-        />
+        <Tooltip label={intl.formatMessage(messages.tooltip)}>
+          <IconButton
+            aria-label={intl.formatMessage(messages.iconDesc)}
+            h={8}
+            minH={8}
+            minW={8}
+            icon={
+              <BuoyIcon
+                fill="gray.500"
+                stroke="gray.500"
+                w={5}
+                h="auto"
+                desc={intl.formatMessage(messages.iconDesc)}
+              />
+            }
+            borderRadius="full"
+            _hover={{
+              bg: 'gray.50',
+            }}
+          />
+        </Tooltip>
       </a>
     </Link>
   )

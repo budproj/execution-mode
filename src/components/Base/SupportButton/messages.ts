@@ -1,13 +1,12 @@
 import { defineMessages } from 'react-intl'
 
-type SupportButtonMessage = 'iconTitle' | 'iconDesc'
+type SupportButtonMessage = 'tooltip' | 'iconDesc'
 
 export default defineMessages<SupportButtonMessage>({
-  iconTitle: {
+  tooltip: {
     defaultMessage: 'Ajuda',
-    id: 'hdclOn',
-    description:
-      'SupportButton icon title that links to support page. It is displayed when the user hovers the icon itself',
+    id: 'fx39XE',
+    description: 'This tooltip is displayed when the user hovers the support button',
   },
 
   iconDesc: {
