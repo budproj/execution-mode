@@ -1,10 +1,9 @@
 import { Flex, GridItem, Text, Skeleton } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { SliderWithFilledTrack } from 'src/components/Base'
 import { Team } from 'src/components/Team/types'
-import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
   team?: Team
@@ -13,16 +12,10 @@ export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
 const TeamsOverviewBodyTableBodyColumnProgress = ({
   team,
 }: TeamsOverviewBodyTableBodyColumnProgressProperties) => {
-  const [confidenceTag, setConfidence] = useConfidenceTag(team?.status?.confidence)
   const intl = useIntl()
 
   const isLoaded = Boolean(team)
   const progress = team?.status?.progress ?? 0
-
-  useEffect(() => {
-    if ((team && Boolean(team?.status?.confidence)) || team?.status?.confidence === 0)
-      setConfidence(team.status.confidence)
-  }, [team, setConfidence])
 
   return (
     <GridItem>
@@ -34,11 +27,7 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
           w="100%"
           h={isLoaded ? 'auto' : 2}
         >
-          <SliderWithFilledTrack
-            trackColor={confidenceTag.color.primary}
-            value={progress}
-            trackThickness={2}
-          />
+          <SliderWithFilledTrack value={progress} trackThickness={2} />
         </Skeleton>
 
         <Skeleton isLoaded={isLoaded}>

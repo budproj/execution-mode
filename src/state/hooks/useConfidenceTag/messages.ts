@@ -4,15 +4,19 @@ type ConfidenceTagMessage =
   | 'highShort'
   | 'highLong'
   | 'highIcon'
+  | 'highHelperText'
   | 'mediumShort'
   | 'mediumLong'
   | 'mediumIcon'
+  | 'mediumHelperText'
   | 'lowShort'
   | 'lowLong'
   | 'lowIcon'
+  | 'lowHelperText'
   | 'barrierShort'
   | 'barrierLong'
   | 'barrierIcon'
+  | 'barrierHelperText'
 
 export default defineMessages<ConfidenceTagMessage>({
   highShort: {
@@ -31,6 +35,12 @@ export default defineMessages<ConfidenceTagMessage>({
     defaultMessage: 'Um círculo verde, indicando que a confiança está alta',
     id: 'faL9vf',
     description: 'A brief explanation for screen readers regarding the green status circle',
+  },
+
+  highHelperText: {
+    defaultMessage: 'Se tudo continuar assim, esperamos alcançar o resultado',
+    id: 'CQAFfW',
+    description: 'This text explains our tag to the user',
   },
 
   mediumShort: {
@@ -53,6 +63,12 @@ export default defineMessages<ConfidenceTagMessage>({
     description: 'A brief explanation for screen readers regarding the yellow status circle',
   },
 
+  mediumHelperText: {
+    defaultMessage: 'Existe um risco de não alcançarmos, mas seguimos otimistas',
+    id: 'atVRfC',
+    description: 'This text explains our tag to the user',
+  },
+
   lowShort: {
     defaultMessage: 'Baixo',
     id: 'B0G29o',
@@ -73,6 +89,12 @@ export default defineMessages<ConfidenceTagMessage>({
     description: 'A brief explanation for screen readers regarding the red status circle',
   },
 
+  lowHelperText: {
+    defaultMessage: 'Não vamos alcançar o resultado a não ser que a gente mude nossos planos',
+    id: 'p/WfG+',
+    description: 'This text explains our tag to the user',
+  },
+
   barrierShort: {
     defaultMessage: 'Com Barreira',
     id: '0/VsDs',
@@ -89,5 +111,11 @@ export default defineMessages<ConfidenceTagMessage>({
     defaultMessage: 'Um círculo roxo, indicando que o resultado-chave tem uma barreira',
     id: 'zEyzo8',
     description: 'A brief explanation for screen readers regarding the purple status circle',
+  },
+
+  barrierHelperText: {
+    defaultMessage: 'Existe um fator externo impedindo o progresso desse resultado-chave',
+    id: 'xXxjVp',
+    description: 'This text explains our tag to the user',
   },
 })

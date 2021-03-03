@@ -61,7 +61,7 @@ const KeyResultSectionAddCheckIn = ({
           )}
         </Button>
       </Skeleton>
-      <Collapse animateOpacity in={isCreatingCheckIn}>
+      <Collapse animateOpacity in={isCreatingCheckIn} style={{ overflow: 'visible' }}>
         <KeyResultSectionTimelineCardBase>
           <Flex pb={4}>
             <Heading fontSize="md" fontWeight={700} color="black.600" flexGrow={1}>

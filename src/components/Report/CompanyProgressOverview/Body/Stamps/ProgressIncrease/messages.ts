@@ -38,8 +38,8 @@ export default defineMessages<CompanyProgressOverviewBodyStampProgressIncreaseMe
   },
 
   descriptionText: {
-    defaultMessage: 'Em relação a última sexta-feira',
-    id: 'qYgVuC',
+    defaultMessage: 'Progresso acumulado dessa semana',
+    id: 'hn3cE7',
     description: 'This helper texts explains since when we are calculating your company progress',
   },
 })

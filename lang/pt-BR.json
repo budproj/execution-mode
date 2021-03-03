@@ -3,6 +3,10 @@
     "defaultMessage": "Seu avatar",
     "description": "The title text of our image icon in our settings account page, it is displayed when an user hover the icon itself"
   },
+  "+6p/sC": {
+    "defaultMessage": "Clique aqui para comentar :)",
+    "description": "This text is displayed in our comment input in our key result drawer when it has no value"
+  },
   "+G9goh": {
     "defaultMessage": "Ver mais...",
     "description": "This text is displayed in the button that expands a truncated text"
@@ -203,6 +207,10 @@
     "defaultMessage": "Enviar comentário",
     "description": "The title displayed in the tooltip when the user hovers our paper plane icon in our add comment form"
   },
+  "CQAFfW": {
+    "defaultMessage": "Se tudo continuar assim, esperamos alcançar o resultado",
+    "description": "This text explains our tag to the user"
+  },
   "CW+HBw": {
     "defaultMessage": "Check-in",
     "description": "This message is displayed as a label button to open the check-in form when the user is scrolling in our key result drawer"
@@ -379,6 +387,10 @@
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
   },
+  "Q2diI+": {
+    "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
+    "description": "SupportButton icon desc. This is used by screen readers for accessibility"
+  },
   "QKUmFp": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our progress slider popover"
@@ -535,6 +547,10 @@
     "defaultMessage": "Início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
   },
+  "atVRfC": {
+    "defaultMessage": "Existe um risco de não alcançarmos, mas seguimos otimistas",
+    "description": "This text explains our tag to the user"
+  },
   "bdkUKs": {
     "defaultMessage": "Times",
     "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
@@ -599,9 +615,13 @@
     "defaultMessage": "Média Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
   },
-  "hRddDx": {
-    "defaultMessage": "Clique aqui para acessar nossa página de suporte",
+  "hdclOn": {
+    "defaultMessage": "Ajuda",
     "description": "SupportButton icon title that links to support page. It is displayed when the user hovers the icon itself"
+  },
+  "hn3cE7": {
+    "defaultMessage": "Progresso acumulado dessa semana",
+    "description": "This helper texts explains since when we are calculating your company progress"
   },
   "iJq7du": {
     "defaultMessage": "Responsável",
@@ -695,6 +715,14 @@
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
   },
+  "oycX/u": {
+    "defaultMessage": "Essa semana",
+    "description": "The text displayed as a prefix in our progress tag label in the team objective accordion button"
+  },
+  "p/WfG+": {
+    "defaultMessage": "Não vamos alcançar o resultado a não ser que a gente mude nossos planos",
+    "description": "This text explains our tag to the user"
+  },
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
@@ -710,10 +738,6 @@
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
-  },
-  "qYgVuC": {
-    "defaultMessage": "Em relação a última sexta-feira",
-    "description": "This helper texts explains since when we are calculating your company progress"
   },
   "qmEcGQ": {
     "defaultMessage": "Minha conta",
@@ -791,13 +815,13 @@
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
   },
-  "xRyM8t": {
-    "defaultMessage": "Ícone de um ponto de interrogação. Ao clicar nele você irá para nossa página de suporte",
-    "description": "SupportButton icon desc. This is used by screen readers for accessibility"
-  },
   "xVR0F1": {
     "defaultMessage": "Apelido",
     "description": "This is the label that goes on our user account settings page, at the third field to update the user informations"
+  },
+  "xXxjVp": {
+    "defaultMessage": "Existe um fator externo impedindo o progresso desse resultado-chave",
+    "description": "This text explains our tag to the user"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",

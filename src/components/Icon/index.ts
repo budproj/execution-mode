@@ -88,4 +88,6 @@ export { default as Image } from './Image'
 
 export { default as Pen } from './Pen'
 
+export { default as Buoy } from './Buoy'
+
 export * from './types'

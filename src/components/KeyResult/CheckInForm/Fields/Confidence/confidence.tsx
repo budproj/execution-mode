@@ -29,6 +29,7 @@ const CheckInFormFieldCurrentConfidence = () => {
     <Box>
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
       <SelectMenu
+        matchWidth
         placeholder={
           <Flex justifyContent="flex-start">
             <ConfidenceTag confidenceValue={normalizedConfidence} />
@@ -38,19 +39,19 @@ const CheckInFormFieldCurrentConfidence = () => {
         onChange={handleChange}
       >
         <MenuItemOption value={CONFIDENCE_HIGH.max.toString()}>
-          <ConfidenceTag confidenceValue={CONFIDENCE_HIGH.max} />
+          <ConfidenceTag showHelperText confidenceValue={CONFIDENCE_HIGH.max} />
         </MenuItemOption>
 
         <MenuItemOption value={CONFIDENCE_MEDIUM.max.toString()}>
-          <ConfidenceTag confidenceValue={CONFIDENCE_MEDIUM.max} />
+          <ConfidenceTag showHelperText confidenceValue={CONFIDENCE_MEDIUM.max} />
         </MenuItemOption>
 
         <MenuItemOption value={CONFIDENCE_LOW.max.toString()}>
-          <ConfidenceTag confidenceValue={CONFIDENCE_LOW.max} />
+          <ConfidenceTag showHelperText confidenceValue={CONFIDENCE_LOW.max} />
         </MenuItemOption>
 
         <MenuItemOption value={CONFIDENCE_BARRIER.max.toString()}>
-          <ConfidenceTag confidenceValue={CONFIDENCE_BARRIER.max} />
+          <ConfidenceTag showHelperText confidenceValue={CONFIDENCE_BARRIER.max} />
         </MenuItemOption>
       </SelectMenu>
     </Box>

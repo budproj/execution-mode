@@ -12,6 +12,7 @@ export interface PercentageProgressIncreaseTagProperties {
   forcePositiveSignal?: boolean
   showSignalArrow?: boolean
   minimumIntegerDigits?: FormatNumberOptions['minimumIntegerDigits']
+  prefix?: string
 }
 
 const PercentageProgressIncreaseTag = ({
@@ -22,6 +23,7 @@ const PercentageProgressIncreaseTag = ({
   forcePositiveSignal,
   showSignalArrow,
   minimumIntegerDigits,
+  prefix,
 }: PercentageProgressIncreaseTagProperties) => {
   const intl = useIntl()
 
@@ -43,6 +45,7 @@ const PercentageProgressIncreaseTag = ({
       gridGap={2}
       fontSize={fontSize}
     >
+      {prefix && `${prefix.trim()} `}
       {forcePositiveSignal && roundedValue > 0 && '+'}
       {intl.formatNumber(roundedValue / 100, {
         style: 'percent',

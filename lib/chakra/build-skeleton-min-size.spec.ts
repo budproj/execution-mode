@@ -37,19 +37,41 @@ describe('builder', () => {
     const width = faker.random.number()
 
     const result = buildSkeletonMinSize(false, width, faker.random.number())
-    const widthResult = Number(result.width.split('px')[0])
+    const resultWidth = result.width as string
+    const resultWidthValue = Number(resultWidth.split('px')[0])
 
-    expect(widthResult).toBeLessThanOrEqual(width)
-    expect(widthResult).toBeGreaterThanOrEqual(width / 2)
+    expect(resultWidthValue).toBeLessThanOrEqual(width)
+    expect(resultWidthValue).toBeGreaterThanOrEqual(width / 2)
   })
 
   it('returns a random number between half of height and height if data is not loaded and it set to dynamic', () => {
     const height = faker.random.number()
 
     const result = buildSkeletonMinSize(false, faker.random.number(), height)
-    const heightResult = Number(result.height.split('px')[0])
+    const resultHeight = result.height as string
+    const resultHeightValue = Number(resultHeight.split('px')[0])
 
-    expect(heightResult).toBeLessThanOrEqual(height)
-    expect(heightResult).toBeGreaterThanOrEqual(height / 2)
+    expect(resultHeightValue).toBeLessThanOrEqual(height)
+    expect(resultHeightValue).toBeGreaterThanOrEqual(height / 2)
+  })
+})
+
+describe('customizations', () => {
+  it('can customize the loaded width', () => {
+    const desiredLoadedWidth = faker.random.word()
+    const result = buildSkeletonMinSize(true, faker.random.number(), faker.random.number(), {
+      loadedWidth: desiredLoadedWidth,
+    })
+
+    expect(result.width).toEqual(desiredLoadedWidth)
+  })
+
+  it('can customize the loaded height', () => {
+    const desiredLoadedHeight = faker.random.word()
+    const result = buildSkeletonMinSize(true, faker.random.number(), faker.random.number(), {
+      loadedHeight: desiredLoadedHeight,
+    })
+
+    expect(result.height).toEqual(desiredLoadedHeight)
   })
 })

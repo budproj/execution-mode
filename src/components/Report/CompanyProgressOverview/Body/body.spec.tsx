@@ -27,34 +27,4 @@ describe('data layer usage', () => {
 
     expect(slider.prop('value')).toEqual(fakeCurrentProgress)
   })
-
-  it('uses the current confidence color in the slider', () => {
-    sinon.stub(recoil, 'useRecoilValue').returns({ status: { confidence: 50 } })
-
-    const result = enzyme.shallow(<CompanyProgressOverviewBody />)
-
-    const slider = result.find('SliderWithDetails')
-
-    expect(slider.prop('trackColor')).toEqual('yellow.500')
-  })
-})
-
-describe('component lifecycle', () => {
-  afterEach(() => sinon.restore())
-
-  it('dispatches a confidence update after we receive a value for it', () => {
-    sinon
-      .stub(recoil, 'useRecoilValue')
-      .onSecondCall()
-      .returns({
-        status: { confidence: 50 },
-      })
-
-    const result = enzyme.shallow(<CompanyProgressOverviewBody />)
-    result.setProps({ companyID: faker.random.uuid() })
-
-    const slider = result.find('SliderWithDetails')
-
-    expect(slider.prop('trackColor')).toEqual('yellow.500')
-  })
 })

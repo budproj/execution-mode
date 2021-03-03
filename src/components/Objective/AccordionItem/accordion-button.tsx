@@ -36,7 +36,12 @@ const ObjectiveAccordionButton = ({
 
   return (
     <AccordionButton gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
-      <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded ?? true, 300, 24)}>
+      <Skeleton
+        isLoaded={isLoaded}
+        {...buildSkeletonMinSize(isLoaded ?? true, 300, 24, {
+          loadedWidth: 'auto',
+        })}
+      >
         <Heading as="h4" fontSize="xl" fontWeight={500} textAlign="left" color="black.900">
           {objective?.title}
         </Heading>
@@ -50,7 +55,11 @@ const ObjectiveAccordionButton = ({
         w={isLoaded ? 'auto' : 70}
         h={isLoaded ? 'auto' : 33}
       >
-        <PercentageProgressIncreaseTag value={objective?.progressIncreaseSinceLastWeek} />
+        <PercentageProgressIncreaseTag
+          forcePositiveSignal
+          value={objective?.progressIncreaseSinceLastWeek}
+          prefix={intl.formatMessage(messages.progressTagLabel)}
+        />
       </Skeleton>
 
       <Skeleton isLoaded={isLoaded} display="flex" gridGap={2} alignItems="center">
