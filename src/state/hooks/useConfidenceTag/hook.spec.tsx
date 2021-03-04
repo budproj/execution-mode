@@ -103,9 +103,9 @@ describe('confidence tag getter', () => {
         helper: 'Existe um fator externo impedindo o progresso desse resultado-chave',
       },
       color: {
-        scheme: 'brand',
-        primary: 'brand.500',
-        light: 'brand.50',
+        scheme: 'purple',
+        primary: 'purple.500',
+        light: 'purple.50',
       },
     }
 

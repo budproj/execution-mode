@@ -70,8 +70,6 @@ const KeyResultSectionTimelineCardCheckIn = ({
   }
 
   const intlCardType = intl.formatMessage(messages.cardType)
-  const confidenceDifference =
-    data?.confidence && data?.parent ? data.confidence - data.parent.confidence : 0
 
   return (
     <Stat>
@@ -83,8 +81,8 @@ const KeyResultSectionTimelineCardCheckIn = ({
       >
         <Flex direction="column" gridGap={4}>
           <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
-            confidence={data?.confidence}
-            difference={confidenceDifference}
+            currentConfidence={data?.confidence}
+            parentConfidence={data?.parent?.confidence}
           />
 
           <Box>

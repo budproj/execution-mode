@@ -1,0 +1,3 @@
+import KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText from './confidence-icon'
+
+export default KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText

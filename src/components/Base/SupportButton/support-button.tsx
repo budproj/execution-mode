@@ -1,8 +1,9 @@
-import { IconButton, Tooltip } from '@chakra-ui/react'
+import { IconButton } from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import BuoyIcon from 'src/components/Icon/Buoy'
 
 import { HELPDESK_URL } from './constants'
@@ -14,7 +15,7 @@ const SupportButton = () => {
   return (
     <Link href={HELPDESK_URL}>
       <a target="_blank">
-        <Tooltip label={intl.formatMessage(messages.tooltip)}>
+        <TooltipWithDelay label={intl.formatMessage(messages.tooltip)}>
           <IconButton
             aria-label={intl.formatMessage(messages.iconDesc)}
             h={8}
@@ -34,7 +35,7 @@ const SupportButton = () => {
               bg: 'gray.50',
             }}
           />
-        </Tooltip>
+        </TooltipWithDelay>
       </a>
     </Link>
   )

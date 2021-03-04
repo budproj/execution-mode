@@ -8,7 +8,6 @@ import {
   CircularProgress,
   CircularProgressLabel,
   Flex,
-  Tooltip,
   Box,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -16,6 +15,7 @@ import { useIntl } from 'react-intl'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import PercentageProgressIncreaseTag from 'src/components/Base/PercentageProgressIncreaseTag'
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Objective } from 'src/components/Objective/types'
 import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
@@ -51,7 +51,7 @@ const ObjectiveAccordionButton = ({
 
       <AccordionIcon />
 
-      <Tooltip label={intl.formatMessage(messages.progressTagTooltip)} placement="top">
+      <TooltipWithDelay label={intl.formatMessage(messages.progressTagTooltip)} placement="top">
         <Skeleton
           isLoaded={isLoaded}
           borderRadius="full"
@@ -64,7 +64,7 @@ const ObjectiveAccordionButton = ({
             prefix={intl.formatMessage(messages.progressTagLabel)}
           />
         </Skeleton>
-      </Tooltip>
+      </TooltipWithDelay>
 
       <Skeleton isLoaded={isLoaded} display="flex" gridGap={2} alignItems="center">
         <CalendarOutlineIcon
@@ -77,7 +77,7 @@ const ObjectiveAccordionButton = ({
       </Skeleton>
 
       <Flex flexGrow={1} justifyContent="flex-end">
-        <Tooltip label={intl.formatMessage(messages.progressTooltip)} placement="top-end">
+        <TooltipWithDelay label={intl.formatMessage(messages.progressTooltip)} placement="top-end">
           <Box>
             <SkeletonCircle isLoaded={isLoaded} size="50px">
               <CircularProgress
@@ -97,7 +97,7 @@ const ObjectiveAccordionButton = ({
               </CircularProgress>
             </SkeletonCircle>
           </Box>
-        </Tooltip>
+        </TooltipWithDelay>
       </Flex>
     </AccordionButton>
   )

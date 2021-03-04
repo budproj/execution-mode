@@ -115,9 +115,9 @@ export const useConfidenceTag = (
         helper: intl.formatMessage(messages.barrierHelperText),
       },
       color: {
-        scheme: 'brand',
-        primary: 'brand.500',
-        light: 'brand.50',
+        scheme: 'purple',
+        primary: 'purple.500',
+        light: 'purple.50',
       },
     },
   }

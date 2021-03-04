@@ -1,8 +1,9 @@
-import { IconButton, Tooltip } from '@chakra-ui/react'
+import { IconButton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import IntlLink from 'src/components/Base/IntlLink'
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import GearIcon from 'src/components/Icon/Gear'
 
 import messages from './messages'
@@ -12,7 +13,7 @@ const SupportButton = () => {
 
   return (
     <IntlLink href="/settings/my-account">
-      <Tooltip label={intl.formatMessage(messages.tooltip)}>
+      <TooltipWithDelay label={intl.formatMessage(messages.tooltip)}>
         <IconButton
           aria-label={intl.formatMessage(messages.iconDesc)}
           h={8}
@@ -26,7 +27,7 @@ const SupportButton = () => {
             bg: 'gray.50',
           }}
         />
-      </Tooltip>
+      </TooltipWithDelay>
     </IntlLink>
   )
 }

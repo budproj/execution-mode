@@ -1,36 +1,60 @@
-import { Flex, Skeleton, StatArrow } from '@chakra-ui/react'
+import { Flex, Skeleton, StatArrow, Box } from '@chakra-ui/react'
 import React from 'react'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import TooltipWithRichText from 'src/components/Base/TooltipWithRichText'
 import ConfidenceTag from 'src/components/KeyResult/ConfidenceTag'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
+import KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText from './RichTooltips/ConfidenceIcon'
+
 export interface KeyResultSectionTimelineCardCheckInRelativeConfidenceTagProperties {
-  confidence?: KeyResultCheckIn['confidence']
-  difference?: number
+  parentConfidence: KeyResultCheckIn['confidence']
+  currentConfidence?: KeyResultCheckIn['confidence']
 }
 
 const KeyResultSectionTimelineCardCheckInRelativeConfidenceTag = ({
-  confidence,
-  difference,
+  currentConfidence,
+  parentConfidence,
 }: KeyResultSectionTimelineCardCheckInRelativeConfidenceTagProperties) => {
-  const [confidenceTag] = useConfidenceTag(confidence)
+  const [confidenceTag] = useConfidenceTag(currentConfidence)
 
   // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-  const isLoaded = Boolean(confidence || confidence === 0)
+  const isLoaded = Boolean(currentConfidence || currentConfidence === 0)
+  const difference = (currentConfidence ?? 100) - parentConfidence
   const arrowType = difference && difference > 0 ? 'increase' : 'decrease'
 
   return (
     <Flex alignItems="center" gridGap={2}>
-      <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 33)}>
-        <ConfidenceTag confidenceValue={confidence} />
+      <Skeleton
+        isLoaded={isLoaded}
+        cursor="help"
+        {...buildSkeletonMinSize(isLoaded, 150, 33, { loadedWidth: 'auto' })}
+      >
+        <ConfidenceTag showTooltip confidenceValue={currentConfidence} />
       </Skeleton>
 
-      {/* eslint-disable-next-line unicorn/no-null */}
-      {difference ? <StatArrow type={arrowType} color={confidenceTag.color.primary} /> : null}
+      {difference !== 0 && (
+        <TooltipWithRichText
+          tooltip={
+            <KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText
+              currentConfidence={currentConfidence}
+              parentConfidence={parentConfidence}
+            />
+          }
+        >
+          <Box cursor="help">
+            <StatArrow type={arrowType} color={confidenceTag.color.primary} />
+          </Box>
+        </TooltipWithRichText>
+      )}
     </Flex>
   )
+}
+
+KeyResultSectionTimelineCardCheckInRelativeConfidenceTag.defaultProps = {
+  parentConfidence: 100,
 }
 
 export default KeyResultSectionTimelineCardCheckInRelativeConfidenceTag

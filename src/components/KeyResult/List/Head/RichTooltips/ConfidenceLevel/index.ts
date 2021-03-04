@@ -1,0 +1,3 @@
+import KeyResultListHeadTooltipWithRichTextsConfidenceLevel from './confidence-level'
+
+export default KeyResultListHeadTooltipWithRichTextsConfidenceLevel

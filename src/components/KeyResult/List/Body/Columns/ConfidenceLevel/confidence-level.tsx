@@ -33,7 +33,7 @@ const KeyResultListBodyColumnConfidenceLevel = ({
           fadeDuration={0}
           /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
         >
-          <ConfidenceTag confidenceValue={latestCheckIn?.confidence} />
+          <ConfidenceTag showTooltip confidenceValue={latestCheckIn?.confidence} />
         </Skeleton>
 
         {withLastUpdateInfo && (

@@ -5,11 +5,12 @@ import {
   SliderThumb,
   SliderTrack,
   SliderTrackProps,
-  Tooltip,
   TooltipProps,
 } from '@chakra-ui/react'
 import React, { forwardRef } from 'react'
 import { useIntl } from 'react-intl'
+
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 
 import messages from './messages'
 
@@ -50,7 +51,7 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
           <SliderFilledTrack bg={trackColor} borderRadius="full" />
         </SliderTrack>
 
-        <Tooltip
+        <TooltipWithDelay
           label={thumbTooltipLabel ?? intl.formatMessage(messages.updateLabel)}
           placement="top"
         >
@@ -65,7 +66,7 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
             _groupHover={{ opacity: 1 }}
             data-action={dataAction}
           />
-        </Tooltip>
+        </TooltipWithDelay>
       </Slider>
     )
   },
