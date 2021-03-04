@@ -36,6 +36,7 @@ const CheckInFormFieldCurrentConfidence = () => {
               fill="gray.400"
               stroke="gray.400"
               desc={intl.formatMessage(messages.tooltipIconDesc)}
+              cursor="help"
             />
           </Flex>
         </Tooltip>

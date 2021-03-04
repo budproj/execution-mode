@@ -78,7 +78,9 @@ const KeyResultListBodyColumnProgress = ({
                   label={intl.formatMessage(messages.leftSideValueTooltip)}
                   placement="bottom-start"
                 >
-                  <Text color={isSlidding ? confidenceTag.color.primary : 'gray.300'}>{value}</Text>
+                  <Text color={isSlidding ? confidenceTag.color.primary : 'gray.300'} cursor="help">
+                    {value}
+                  </Text>
                 </Tooltip>
               )}
             />
@@ -100,7 +102,7 @@ const KeyResultListBodyColumnProgress = ({
                   label={intl.formatMessage(messages.rightSideValueTooltip)}
                   placement="bottom-end"
                 >
-                  <Text color="gray.300" textAlign="right">
+                  <Text color="gray.300" textAlign="right" cursor="help">
                     {value}
                   </Text>
                 </Tooltip>

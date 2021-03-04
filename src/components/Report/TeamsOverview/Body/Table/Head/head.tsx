@@ -1,4 +1,4 @@
-import { GridItem, Tooltip } from '@chakra-ui/react'
+import { GridItem, Tooltip, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -13,17 +13,17 @@ const TeamsOverviewBodyTableHead = () => {
     <TeamsOverviewBodyTableLineTemplate fontSize="sm" color="black.600" fontWeight={500}>
       <GridItem>
         <Tooltip label={intl.formatMessage(messages.firstColumnTooltip)} placement="bottom-start">
-          {intl.formatMessage(messages.firstColumnTitle)}
+          <Text cursor="help">{intl.formatMessage(messages.firstColumnTitle)}</Text>
         </Tooltip>
       </GridItem>
       <GridItem>
         <Tooltip label={intl.formatMessage(messages.secondColumnTooltip)} placement="bottom-start">
-          {intl.formatMessage(messages.secondColumnTitle)}
+          <Text cursor="help">{intl.formatMessage(messages.secondColumnTitle)}</Text>
         </Tooltip>
       </GridItem>
       <GridItem>
         <Tooltip label={intl.formatMessage(messages.thirdColumnTooltip)} placement="bottom-start">
-          {intl.formatMessage(messages.thirdColumnTitle)}
+          <Text cursor="help">{intl.formatMessage(messages.thirdColumnTitle)}</Text>
         </Tooltip>
       </GridItem>
     </TeamsOverviewBodyTableLineTemplate>

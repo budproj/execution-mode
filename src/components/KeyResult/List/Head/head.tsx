@@ -112,7 +112,7 @@ const KeyResultListHead = ({
             justifySelf={columnProperties?.justifySelf}
           >
             <Wrapper>
-              <Text hidden={columnProperties?.hidden} color="gray.300">
+              <Text hidden={columnProperties?.hidden} color="gray.300" cursor="help">
                 {intl.formatMessage(columnMessages[column])}
               </Text>
             </Wrapper>
