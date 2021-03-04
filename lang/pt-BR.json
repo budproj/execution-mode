@@ -111,6 +111,10 @@
     "defaultMessage": "Check-in",
     "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
   },
+  "3n0bhJ": {
+    "defaultMessage": "Esses são os resultados-chave que fazem parte desse objetivo",
+    "description": "This tooltip explains the first column of the key result list"
+  },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -750,10 +754,6 @@
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
     "description": "The default description for our page head meta description value"
-  },
-  "mslW5a": {
-    "defaultMessage": "Esses são seus resultados-chave. Cuide bem deles!",
-    "description": "This tooltip explains the first column of the key result list"
   },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",

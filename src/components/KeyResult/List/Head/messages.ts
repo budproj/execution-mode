@@ -24,8 +24,8 @@ export default defineMessages<KeyResultListHeadMessage>({
   },
 
   listHeadKeyResultTooltip: {
-    defaultMessage: 'Esses são seus resultados-chave. Cuide bem deles!',
-    id: 'mslW5a',
+    defaultMessage: 'Esses são os resultados-chave que fazem parte desse objetivo',
+    id: '3n0bhJ',
     description: 'This tooltip explains the first column of the key result list',
   },
 
