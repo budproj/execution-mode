@@ -42,8 +42,8 @@ export default defineMessages<KeyResultListHeadMessage>({
   },
 
   listHeadConfidenceLevel: {
-    defaultMessage: 'Nível de confiança',
-    id: 'UoPQ4X',
+    defaultMessage: 'Confiança',
+    id: 'X2V7x7',
     description: 'The text of the table head related to the Confidence Level column',
   },
 

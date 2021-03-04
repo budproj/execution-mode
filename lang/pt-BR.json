@@ -291,6 +291,10 @@
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
   },
+  "HEuyOR": {
+    "defaultMessage": "Descreve o quão confiante a pessoa responsável por um resultado chave está:",
+    "description": "This message is displayed as an introduction to our rich tooltip regarding the confidence level at the head of our key-results table"
+  },
   "Hfg9tY": {
     "defaultMessage": "Confirmar",
     "description": "This text is used as a fallback to the confirmation modal confirm button. It is displayed if the component did not received a custom button label"
@@ -495,10 +499,6 @@
     "defaultMessage": "Este time é uma empresa",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
-  "UoPQ4X": {
-    "defaultMessage": "Nível de confiança",
-    "description": "The text of the table head related to the Confidence Level column"
-  },
   "Uu0OJV": {
     "defaultMessage": "Um ícone de imagem. Ele indica que nesse campo fica seu avatar",
     "description": "The alternative text explaining our image icon in the settings account page"
@@ -518,6 +518,10 @@
   "WKevJy": {
     "defaultMessage": "Clique aqui para editar esse campo",
     "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
+  },
+  "X2V7x7": {
+    "defaultMessage": "Confiança",
+    "description": "The text of the table head related to the Confidence Level column"
   },
   "XENgso": {
     "defaultMessage": "Médio",

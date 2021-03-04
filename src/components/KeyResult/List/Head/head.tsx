@@ -12,9 +12,10 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { RichTooltip } from 'src/components/Base'
-import { RichTooltipProps } from 'src/components/Base/RichTooltip/rich-tooltip'
+import { RichTooltipProperties } from 'src/components/Base/RichTooltip/rich-tooltip'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 
+import KeyResultListHeadRichTooltipsConfidenceLevel from './RichTooltips/ConfidenceLevel'
 import messages from './messages'
 import { KeyResultListColumnHeadProperties } from './types'
 
@@ -62,8 +63,10 @@ const KeyResultListHead = ({
         {children}
       </Tooltip>
     ),
-    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: ({ children }: RichTooltipProps) => (
-      <RichTooltip tooltip={<p>Ok</p>}>{children}</RichTooltip>
+    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: ({ children }: RichTooltipProperties) => (
+      <RichTooltip tooltip={<KeyResultListHeadRichTooltipsConfidenceLevel />}>
+        {children}
+      </RichTooltip>
     ),
     [KEY_RESULT_LIST_COLUMN.PROGRESS]: ({ children }: TooltipProps) => (
       <Tooltip
