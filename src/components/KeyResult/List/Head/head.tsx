@@ -55,7 +55,9 @@ const KeyResultListHead = ({
         {children}
       </TooltipWithDelay>
     ),
-    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: ({ children }: TooltipWithRichTextProperties) => (
+    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: ({
+      children,
+    }: Partial<TooltipWithRichTextProperties>) => (
       <TooltipWithRichText tooltip={<KeyResultListHeadTooltipWithRichTextsConfidenceLevel />}>
         {children}
       </TooltipWithRichText>
