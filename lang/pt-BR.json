@@ -87,10 +87,6 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
-  "28q7aO": {
-    "defaultMessage": "Última sexta-feira",
-    "description": "The title of the third column in our body table at the teams overview report in our dashboard"
-  },
   "29ODQz": {
     "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
     "description": "The description displayed in our unknown error page"
@@ -247,6 +243,10 @@
     "defaultMessage": "Meta",
     "description": "This tooltip is displayed when the user hovers the right side value of our progress bar"
   },
+  "Dnh8iG": {
+    "defaultMessage": "de <highlight>{confidence}</highlight>",
+    "description": "This text is displayed as the first line of our confidence tooltip"
+  },
   "DrLml8": {
     "defaultMessage": "Clique aqui para fechar o formulário de check-in",
     "description": "This message is displayed as the alternative text for the close button in our check-in form"
@@ -314,6 +314,10 @@
   "IGODpK": {
     "defaultMessage": "Ciclo",
     "description": "The text of the table head related to the Cycle column"
+  },
+  "Ii3n+d": {
+    "defaultMessage": "para <highlight>{confidence}</highlight>",
+    "description": "This text is displayed as the second line of our confidence tooltip"
   },
   "Innace": {
     "defaultMessage": "Um ícone de exclamação, alertando que se você confirmar a ação não poderá ser desfeita",
@@ -426,6 +430,10 @@
   "QcCy51": {
     "defaultMessage": "Valor atual",
     "description": "This tooltip is displayed when the user hovers the left side value of our progress bar"
+  },
+  "RN1J2p": {
+    "defaultMessage": "Essa semana",
+    "description": "The title of the third column in our body table at the teams overview report in our dashboard"
   },
   "RWaMNF": {
     "defaultMessage": "Um ícone de coração",
@@ -578,6 +586,10 @@
   "Zn0eYa": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
     "description": "The alternative text explaining our team at work image"
+  },
+  "aO+w74": {
+    "defaultMessage": "A confiança mudou neste check-in:",
+    "description": "This text is the first line of our icon tooltip when the check-in has a different confidence from the previous check-in"
   },
   "aiRCwP": {
     "defaultMessage": "Início",

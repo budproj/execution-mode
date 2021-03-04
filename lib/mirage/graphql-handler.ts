@@ -76,6 +76,7 @@ const graphQLHandler = (mirageSchema: unknown) =>
             user: context.mirageSchema.users.find(entry.userId),
             keyResult: context.mirageSchema.keyResults.find(entry.keyResultId),
             policies: context.mirageSchema.policies.find(entry.policiesId),
+            parent: entry.parentId && context.mirageSchema.keyResultCheckIns.find(entry.parentId),
             /* eslint-enable unicorn/no-array-callback-reference */
           }))
 

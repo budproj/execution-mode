@@ -37,8 +37,8 @@ export default defineMessages<TeamsOverviewBodyMessage>({
   },
 
   thirdColumnTitle: {
-    defaultMessage: 'Última sexta-feira',
-    id: '28q7aO',
+    defaultMessage: 'Essa semana',
+    id: 'RN1J2p',
     description:
       'The title of the third column in our body table at the teams overview report in our dashboard',
   },
