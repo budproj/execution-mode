@@ -20,7 +20,9 @@ const RichTooltip = ({ children, tooltip, ...rest }: RichTooltipProperties) => {
   return (
     <Popover trigger="hover">
       <PopoverTrigger>{children}</PopoverTrigger>
-      <PopoverContent sx={styles}>{tooltip}</PopoverContent>
+      <PopoverContent sx={styles} {...rest}>
+        {tooltip}
+      </PopoverContent>
     </Popover>
   )
 }
