@@ -7,15 +7,15 @@ import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
 import messages from './messages'
 
-export interface KeyResultSectionTimelineCardCheckInConfidenceIconRichTooltipProperties {
+export interface KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichTextProperties {
   currentConfidence: KeyResultCheckIn['value']
   parentConfidence: KeyResultCheckIn['value']
 }
 
-const KeyResultSectionTimelineCardCheckInConfidenceIconRichTooltip = ({
+const KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText = ({
   currentConfidence,
   parentConfidence,
-}: KeyResultSectionTimelineCardCheckInConfidenceIconRichTooltipProperties) => {
+}: KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichTextProperties) => {
   const [currentConfidenceTag] = useConfidenceTag(currentConfidence)
   const [parentConfidenceTag] = useConfidenceTag(parentConfidence)
   const intl = useIntl()
@@ -49,9 +49,9 @@ const KeyResultSectionTimelineCardCheckInConfidenceIconRichTooltip = ({
   )
 }
 
-KeyResultSectionTimelineCardCheckInConfidenceIconRichTooltip.defaultProps = {
+KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText.defaultProps = {
   currentConfidence: 100,
   parentConfidence: 100,
 }
 
-export default KeyResultSectionTimelineCardCheckInConfidenceIconRichTooltip
+export default KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText

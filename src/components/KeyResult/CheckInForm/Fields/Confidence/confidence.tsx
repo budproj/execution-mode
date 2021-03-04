@@ -1,9 +1,10 @@
-import { Box, Flex, FormLabel, MenuItemOption, Tooltip } from '@chakra-ui/react'
+import { Box, Flex, FormLabel, MenuItemOption } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import SelectMenu from 'src/components/Base/SelectMenu'
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import InfoCircleIcon from 'src/components/Icon/InfoCircle'
 import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
 import ConfidenceTag from 'src/components/KeyResult/ConfidenceTag/confidence-tag'
@@ -30,7 +31,7 @@ const CheckInFormFieldCurrentConfidence = () => {
     <Box>
       <Flex alignItems="flex-start">
         <FormLabel flexGrow={1}>{intl.formatMessage(messages.label)}</FormLabel>
-        <Tooltip label={intl.formatMessage(messages.tooltip)} placement="top-end">
+        <TooltipWithDelay label={intl.formatMessage(messages.tooltip)} placement="top-end">
           <Flex>
             <InfoCircleIcon
               fill="gray.400"
@@ -39,7 +40,7 @@ const CheckInFormFieldCurrentConfidence = () => {
               cursor="help"
             />
           </Flex>
-        </Tooltip>
+        </TooltipWithDelay>
       </Flex>
       <SelectMenu
         matchWidth

@@ -1,12 +1,12 @@
 import { Tag, Text, Box } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 
-import RichTooltip from 'src/components/Base/RichTooltip'
+import TooltipWithRichText from 'src/components/Base/TooltipWithRichText'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { COLOR_SCHEME } from 'src/themes/tokens'
 
-import ConfidenceTagRichTooltip from './rich-tooltip'
+import ConfidenceTagTooltipWithRichText from './rich-tooltip'
 
 export interface ConfidenceTagProperties {
   showHelperText: boolean
@@ -31,8 +31,8 @@ const ConfidenceTag = ({
 
   return (
     <Box>
-      <RichTooltip
-        tooltip={<ConfidenceTagRichTooltip confidenceTag={confidenceTag} />}
+      <TooltipWithRichText
+        tooltip={<ConfidenceTagTooltipWithRichText confidenceTag={confidenceTag} />}
         display={showTooltip ? 'inherit' : 'none'}
       >
         <Tag
@@ -46,7 +46,7 @@ const ConfidenceTag = ({
         >
           {confidenceTag.messages.long}
         </Tag>
-      </RichTooltip>
+      </TooltipWithRichText>
       {showHelperText && (
         <Text color="gray.200" fontSize="sm" fontWeight={400} pt={2}>
           {confidenceTag.messages.helper}

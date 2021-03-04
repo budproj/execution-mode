@@ -1,8 +1,9 @@
-import { Flex, Box, Skeleton, Text, Tooltip } from '@chakra-ui/react'
+import { Flex, Box, Skeleton, Text } from '@chakra-ui/react'
 import React, { ReactElement, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
@@ -74,14 +75,14 @@ const KeyResultListBodyColumnProgress = ({
               value={draftValue}
               displayType="text"
               renderText={(value) => (
-                <Tooltip
+                <TooltipWithDelay
                   label={intl.formatMessage(messages.leftSideValueTooltip)}
                   placement="bottom-start"
                 >
                   <Text color={isSlidding ? confidenceTag.color.primary : 'gray.300'} cursor="help">
                     {value}
                   </Text>
-                </Tooltip>
+                </TooltipWithDelay>
               )}
             />
           </Skeleton>
@@ -98,14 +99,14 @@ const KeyResultListBodyColumnProgress = ({
               value={goal}
               displayType="text"
               renderText={(value) => (
-                <Tooltip
+                <TooltipWithDelay
                   label={intl.formatMessage(messages.rightSideValueTooltip)}
                   placement="bottom-end"
                 >
                   <Text color="gray.300" textAlign="right" cursor="help">
                     {value}
                   </Text>
-                </Tooltip>
+                </TooltipWithDelay>
               )}
             />
           </Skeleton>

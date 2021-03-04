@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultListHeadRichTooltipsConfidenceLevelMessage = 'introduction'
+type KeyResultListHeadTooltipWithRichTextsConfidenceLevelMessage = 'introduction'
 
-export default defineMessages<KeyResultListHeadRichTooltipsConfidenceLevelMessage>({
+export default defineMessages<KeyResultListHeadTooltipWithRichTextsConfidenceLevelMessage>({
   introduction: {
     defaultMessage: 'Descreve o quão confiante a pessoa responsável por um resultado chave está:',
     id: 'HEuyOR',

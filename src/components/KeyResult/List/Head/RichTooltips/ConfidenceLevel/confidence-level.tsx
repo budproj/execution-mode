@@ -12,7 +12,7 @@ import {
 
 import messages from './messages'
 
-const RichTooltipHeading = (properties: HeadingProps) => (
+const TooltipHeading = (properties: HeadingProps) => (
   <Heading
     as="h3"
     fontSize="sm"
@@ -23,7 +23,7 @@ const RichTooltipHeading = (properties: HeadingProps) => (
   />
 )
 
-const KeyResultListHeadRichTooltipsConfidenceLevel = () => {
+const KeyResultListHeadTooltipWithRichTextsConfidenceLevel = () => {
   const intl = useIntl()
   const [highConfidenceTag] = useConfidenceTag(CONFIDENCE_HIGH.max)
   const [mediumConfidenceTag] = useConfidenceTag(CONFIDENCE_MEDIUM.max)
@@ -34,27 +34,27 @@ const KeyResultListHeadRichTooltipsConfidenceLevel = () => {
     <Box pb={2}>
       <Text>{intl.formatMessage(messages.introduction)}</Text>
 
-      <RichTooltipHeading color={highConfidenceTag.color.primary}>
+      <TooltipHeading color={highConfidenceTag.color.primary}>
         {highConfidenceTag.messages.long}:
-      </RichTooltipHeading>
+      </TooltipHeading>
       <Text>{highConfidenceTag.messages.helper}</Text>
 
-      <RichTooltipHeading color={mediumConfidenceTag.color.primary}>
+      <TooltipHeading color={mediumConfidenceTag.color.primary}>
         {mediumConfidenceTag.messages.long}:
-      </RichTooltipHeading>
+      </TooltipHeading>
       <Text>{mediumConfidenceTag.messages.helper}</Text>
 
-      <RichTooltipHeading color={lowConfidenceTag.color.primary}>
+      <TooltipHeading color={lowConfidenceTag.color.primary}>
         {lowConfidenceTag.messages.long}:
-      </RichTooltipHeading>
+      </TooltipHeading>
       <Text>{lowConfidenceTag.messages.helper}</Text>
 
-      <RichTooltipHeading color={barrierConfidenceTag.color.primary}>
+      <TooltipHeading color={barrierConfidenceTag.color.primary}>
         {barrierConfidenceTag.messages.long}:
-      </RichTooltipHeading>
+      </TooltipHeading>
       <Text>{barrierConfidenceTag.messages.helper}</Text>
     </Box>
   )
 }
 
-export default KeyResultListHeadRichTooltipsConfidenceLevel
+export default KeyResultListHeadTooltipWithRichTextsConfidenceLevel

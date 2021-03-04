@@ -1,7 +1,8 @@
-import { GridItem, Tooltip, Text } from '@chakra-ui/react'
+import { GridItem, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import TeamsOverviewBodyTableLineTemplate from 'src/components/Report/TeamsOverview/Body/Table/LineTemplate'
 
 import messages from './messages'
@@ -12,19 +13,28 @@ const TeamsOverviewBodyTableHead = () => {
   return (
     <TeamsOverviewBodyTableLineTemplate fontSize="sm" color="black.600" fontWeight={500}>
       <GridItem>
-        <Tooltip label={intl.formatMessage(messages.firstColumnTooltip)} placement="bottom-start">
+        <TooltipWithDelay
+          label={intl.formatMessage(messages.firstColumnTooltip)}
+          placement="bottom-start"
+        >
           <Text cursor="help">{intl.formatMessage(messages.firstColumnTitle)}</Text>
-        </Tooltip>
+        </TooltipWithDelay>
       </GridItem>
       <GridItem>
-        <Tooltip label={intl.formatMessage(messages.secondColumnTooltip)} placement="bottom-start">
+        <TooltipWithDelay
+          label={intl.formatMessage(messages.secondColumnTooltip)}
+          placement="bottom-start"
+        >
           <Text cursor="help">{intl.formatMessage(messages.secondColumnTitle)}</Text>
-        </Tooltip>
+        </TooltipWithDelay>
       </GridItem>
       <GridItem>
-        <Tooltip label={intl.formatMessage(messages.thirdColumnTooltip)} placement="bottom-start">
+        <TooltipWithDelay
+          label={intl.formatMessage(messages.thirdColumnTooltip)}
+          placement="bottom-start"
+        >
           <Text cursor="help">{intl.formatMessage(messages.thirdColumnTitle)}</Text>
-        </Tooltip>
+        </TooltipWithDelay>
       </GridItem>
     </TeamsOverviewBodyTableLineTemplate>
   )

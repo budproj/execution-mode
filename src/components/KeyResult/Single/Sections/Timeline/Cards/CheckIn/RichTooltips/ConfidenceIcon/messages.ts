@@ -1,11 +1,11 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSectionTimelineCardCheckInConfidenceIconRichTooltipMessage =
+type KeyResultsSectionTimelineCardCheckInConfidenceIconTooltipWithRichTextMessage =
   | 'introduction'
   | 'firstLine'
   | 'secondLine'
 
-export default defineMessages<KeyResultsSectionTimelineCardCheckInConfidenceIconRichTooltipMessage>(
+export default defineMessages<KeyResultsSectionTimelineCardCheckInConfidenceIconTooltipWithRichTextMessage>(
   {
     introduction: {
       defaultMessage: 'A confiança mudou neste check-in:',

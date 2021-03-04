@@ -1,21 +1,13 @@
-import {
-  Grid,
-  GridItem,
-  GridProps,
-  Text,
-  Tooltip,
-  TooltipProps,
-  BoxProps,
-  Box,
-} from '@chakra-ui/react'
+import { Grid, GridItem, GridProps, Text, TooltipProps, BoxProps, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { RichTooltip } from 'src/components/Base'
-import { RichTooltipProperties } from 'src/components/Base/RichTooltip/rich-tooltip'
+import { TooltipWithRichText } from 'src/components/Base'
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
+import { TooltipWithRichTextProperties } from 'src/components/Base/TooltipWithRichText/tooltip-with-rich-text'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 
-import KeyResultListHeadRichTooltipsConfidenceLevel from './RichTooltips/ConfidenceLevel'
+import KeyResultListHeadTooltipWithRichTextsConfidenceLevel from './RichTooltips/ConfidenceLevel'
 import messages from './messages'
 import { KeyResultListColumnHeadProperties } from './types'
 
@@ -48,51 +40,57 @@ const KeyResultListHead = ({
 
   const columnWrappers = {
     [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: ({ children }: TooltipProps) => (
-      <Tooltip
+      <TooltipWithDelay
         label={intl.formatMessage(messages.listHeadKeyResultTooltip)}
         placement="bottom-start"
       >
         {children}
-      </Tooltip>
+      </TooltipWithDelay>
     ),
     [KEY_RESULT_LIST_COLUMN.OBJECTIVE]: ({ children }: TooltipProps) => (
-      <Tooltip
+      <TooltipWithDelay
         label={intl.formatMessage(messages.listHeadObjectiveTooltip)}
         placement="bottom-start"
       >
         {children}
-      </Tooltip>
+      </TooltipWithDelay>
     ),
-    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: ({ children }: RichTooltipProperties) => (
-      <RichTooltip tooltip={<KeyResultListHeadRichTooltipsConfidenceLevel />}>
+    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: ({ children }: TooltipWithRichTextProperties) => (
+      <TooltipWithRichText tooltip={<KeyResultListHeadTooltipWithRichTextsConfidenceLevel />}>
         {children}
-      </RichTooltip>
+      </TooltipWithRichText>
     ),
     [KEY_RESULT_LIST_COLUMN.PROGRESS]: ({ children }: TooltipProps) => (
-      <Tooltip
+      <TooltipWithDelay
         label={intl.formatMessage(messages.listHeadProgressTooltip)}
         placement="bottom-start"
       >
         {children}
-      </Tooltip>
+      </TooltipWithDelay>
     ),
     [KEY_RESULT_LIST_COLUMN.CYCLE]: ({ children }: TooltipProps) => (
-      <Tooltip label={intl.formatMessage(messages.listHeadCycleTooltip)} placement="bottom-start">
+      <TooltipWithDelay
+        label={intl.formatMessage(messages.listHeadCycleTooltip)}
+        placement="bottom-start"
+      >
         {children}
-      </Tooltip>
+      </TooltipWithDelay>
     ),
     [KEY_RESULT_LIST_COLUMN.OWNER]: ({ children }: TooltipProps) => (
-      <Tooltip label={intl.formatMessage(messages.listHeadOwnerTooltip)} placement="bottom-start">
+      <TooltipWithDelay
+        label={intl.formatMessage(messages.listHeadOwnerTooltip)}
+        placement="bottom-start"
+      >
         {children}
-      </Tooltip>
+      </TooltipWithDelay>
     ),
     [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: ({ children }: TooltipProps) => (
-      <Tooltip
+      <TooltipWithDelay
         label={intl.formatMessage(messages.listHeadPercentualProgressTooltip)}
         placement="bottom-start"
       >
         {children}
-      </Tooltip>
+      </TooltipWithDelay>
     ),
     [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]: ({ children }: BoxProps) => (
       <Box>{children}</Box>

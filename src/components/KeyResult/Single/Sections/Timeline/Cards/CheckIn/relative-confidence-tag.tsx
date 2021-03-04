@@ -2,12 +2,12 @@ import { Flex, Skeleton, StatArrow, Box } from '@chakra-ui/react'
 import React from 'react'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import RichTooltip from 'src/components/Base/RichTooltip'
+import TooltipWithRichText from 'src/components/Base/TooltipWithRichText'
 import ConfidenceTag from 'src/components/KeyResult/ConfidenceTag'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
-import KeyResultSectionTimelineCardCheckInConfidenceIconRichTooltip from './RichTooltips/ConfidenceIcon'
+import KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText from './RichTooltips/ConfidenceIcon'
 
 export interface KeyResultSectionTimelineCardCheckInRelativeConfidenceTagProperties {
   parentConfidence: KeyResultCheckIn['confidence']
@@ -36,9 +36,9 @@ const KeyResultSectionTimelineCardCheckInRelativeConfidenceTag = ({
       </Skeleton>
 
       {difference !== 0 && (
-        <RichTooltip
+        <TooltipWithRichText
           tooltip={
-            <KeyResultSectionTimelineCardCheckInConfidenceIconRichTooltip
+            <KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText
               currentConfidence={currentConfidence}
               parentConfidence={parentConfidence}
             />
@@ -47,7 +47,7 @@ const KeyResultSectionTimelineCardCheckInRelativeConfidenceTag = ({
           <Box cursor="help">
             <StatArrow type={arrowType} color={confidenceTag.color.primary} />
           </Box>
-        </RichTooltip>
+        </TooltipWithRichText>
       )}
     </Flex>
   )

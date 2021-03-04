@@ -74,4 +74,4 @@ export { default as EditableSelectValue } from './EditableSelectValue'
 
 export { default as EditableSelectField } from './EditableSelectField'
 
-export { default as RichTooltip } from './RichTooltip'
+export { default as TooltipWithRichText } from './TooltipWithRichText'

@@ -3,11 +3,13 @@ import React from 'react'
 
 import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
 
-export interface ConfidenceTagRichTooltipProperties {
+export interface ConfidenceTagTooltipWithRichTextProperties {
   confidenceTag: ConfidenceTag
 }
 
-const ConfidenceTagRichTooltip = ({ confidenceTag }: ConfidenceTagRichTooltipProperties) => (
+const ConfidenceTagTooltipWithRichText = ({
+  confidenceTag,
+}: ConfidenceTagTooltipWithRichTextProperties) => (
   <Box py={2}>
     <Heading
       as="h3"
@@ -22,4 +24,4 @@ const ConfidenceTagRichTooltip = ({ confidenceTag }: ConfidenceTagRichTooltipPro
   </Box>
 )
 
-export default ConfidenceTagRichTooltip
+export default ConfidenceTagTooltipWithRichText
