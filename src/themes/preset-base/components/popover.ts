@@ -1,7 +1,14 @@
+import { PopoverProps } from '@chakra-ui/popover'
+
 import tooltipTheme from './tooltip'
 
+const sizes: Record<string, number> = {
+  sm: 52,
+  default: 64,
+}
+
 const Popover = {
-  baseStyle: {
+  baseStyle: ({ size }: PopoverProps) => ({
     content: {
       boxShadow: 'md',
       border: 'none',
@@ -11,7 +18,11 @@ const Popover = {
         boxShadow: 'md',
       },
     },
-  },
+
+    popper: {
+      maxW: size && size in sizes ? sizes[size as string] : sizes.default,
+    },
+  }),
 
   variants: {
     'rich-tooltip': {

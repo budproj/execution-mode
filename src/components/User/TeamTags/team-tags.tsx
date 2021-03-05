@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react'
+import { Wrap, WrapItem } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -17,11 +17,13 @@ const UserTeamTags = ({ userID, isLoaded }: UserTeamTagsProperties) => {
   const user = useRecoilValue(userAtomFamily(userID))
 
   return isLoaded ? (
-    <Stack spacing={2} direction="row">
+    <Wrap spacing={2}>
       {user?.teams?.map((team) => (
-        <TeamTag key={team.id}>{team.name}</TeamTag>
+        <WrapItem key={team.id}>
+          <TeamTag>{team.name}</TeamTag>
+        </WrapItem>
       ))}
-    </Stack>
+    </Wrap>
   ) : (
     <UserTeamTagsSkeleton />
   )

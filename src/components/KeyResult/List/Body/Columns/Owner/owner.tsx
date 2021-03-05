@@ -1,25 +1,25 @@
 import {
   Avatar,
-  Box,
   Flex,
   Popover,
   PopoverBody,
   PopoverContent,
   PopoverTrigger,
   Text,
-  Image,
   SkeletonCircle,
   Skeleton,
 } from '@chakra-ui/react'
-import React, { ReactElement } from 'react'
-import { useRecoilValue } from 'recoil'
+import React, { ReactElement, useEffect } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
+import UserProfileCard from 'src/components/User/ProfileCard'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
+import selectUser from 'src/state/recoil/user/selector'
 
 export interface KeyResultListBodyColumnOwnerProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -39,8 +39,13 @@ const KeyResultListBodyColumnOwner = ({
   justifyContent,
 }: KeyResultListBodyColumnOwnerProperties): ReactElement => {
   const owner = useRecoilValue(ownerSelector(id))
+  const setUser = useSetRecoilState(selectUser(owner?.id))
 
   const isOwnerLoaded = Boolean(owner)
+
+  useEffect(() => {
+    if (owner) setUser(owner)
+  }, [owner, setUser])
 
   return (
     <KeyResultListBodyColumnBase
@@ -51,7 +56,7 @@ const KeyResultListBodyColumnOwner = ({
       justifyContent={justifyContent}
       onMouseDownCapture={handleMouseDownCapture}
     >
-      <Popover placement="top-end">
+      <Popover placement="top-end" size="sm">
         <PopoverTrigger>
           <Flex alignItems="center" gridGap={4}>
             <SkeletonCircle
@@ -78,27 +83,14 @@ const KeyResultListBodyColumnOwner = ({
 
         {isOwnerLoaded && (
           <PopoverContent
+            p={0}
             border="none"
             boxShadow="0px 5px 30px rgba(129, 147, 171, 0.2)"
             outline="none"
             _focus={{ boxShadow: '0px 5px 30px rgba(129, 147, 171, 0.2)' }}
           >
-            <PopoverBody>
-              <Flex p={1} flexDirection="column" gridGap={3}>
-                {owner?.picture && (
-                  <Image
-                    alt={owner?.fullName}
-                    src={owner?.picture}
-                    objectFit="cover"
-                    minH="192px"
-                  />
-                )}
-
-                <Box>
-                  <Text color="black.900">{owner?.fullName}</Text>
-                  <Text color="gray.200">{owner?.role}</Text>
-                </Box>
-              </Flex>
+            <PopoverBody p={0}>
+              <UserProfileCard userID={owner?.id} />
             </PopoverBody>
           </PopoverContent>
         )}

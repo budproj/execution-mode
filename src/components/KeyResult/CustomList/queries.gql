@@ -20,9 +20,18 @@ query GET_KEY_RESULT_VIEW_WITH_BINDING($binding: KEY_RESULT_CUSTOM_LIST_BINDING!
         }
       }
       owner {
+        id
+        firstName
         fullName
+        nickname
         picture
         role
+        about
+        linkedInProfileAddress
+        teams {
+          id
+          name
+        }
       }
       latestKeyResultCheckIn {
         id

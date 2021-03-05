@@ -71,6 +71,10 @@
     "defaultMessage": "Indica o quanto esse resultado-chave evoluiu até o momento",
     "description": "This tooltip explains the fourth column of the key result list"
   },
+  "0dk0bw": {
+    "defaultMessage": "O logotipo do LinkedIn. Ao clicar você irá visitar o perfil do LinkedIn deste usuário",
+    "description": "This message is displayed to screen readers to explain our LinkedIn icon"
+  },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
@@ -110,6 +114,10 @@
   "3n0bhJ": {
     "defaultMessage": "Esses são os resultados-chave que fazem parte desse objetivo",
     "description": "This tooltip explains the first column of the key result list"
+  },
+  "3rnKj8": {
+    "defaultMessage": "Confira como seu card aparecerá para outros usuários.",
+    "description": "This subtitle is displayed as the subtitle of the user card preview section in our user account settings page"
   },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
@@ -787,6 +795,10 @@
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
     "description": "The default description for our page head meta description value"
   },
+  "mnors5": {
+    "defaultMessage": "Sobre {nickname}",
+    "description": "The about section title for the user in the user card"
+  },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
@@ -950,5 +962,9 @@
   "zev4wl": {
     "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
     "description": "This is a message explaining the flag icon in our check-in form"
+  },
+  "zsB72A": {
+    "defaultMessage": "Pré-visualização",
+    "description": "This title is displayed as the heading of the user card preview section in our user account settings page"
   }
 }

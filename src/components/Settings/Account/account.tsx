@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
-import { Divider, Flex } from '@chakra-ui/react'
+import { Divider, Flex, Stack } from '@chakra-ui/react'
 import isMatch from 'lodash/isMatch'
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue, useRecoilState } from 'recoil'
@@ -11,6 +11,7 @@ import userSelector from 'src/state/recoil/user/selector'
 
 import SettingsAccountBody from './Body'
 import SettingsAccountHeader from './Header'
+import SettingsAccountUserCardPreview from './UserCardPreview'
 import queries from './queries.gql'
 
 export interface GetUserDataQuery {
@@ -56,10 +57,16 @@ const SettingsAccount = () => {
   }, [isRecoilSynced, setIsRecoilSynced, user, data])
 
   return (
-    <Flex py={4} gridGap={6} direction="column" w="full">
-      <SettingsAccountHeader userID={myUserID} isLoaded={isLoaded} />
-      <Divider borderColor="black.200" />
-      <SettingsAccountBody userID={myUserID} isLoaded={isLoaded} />
+    <Flex direction="row" w="full" gridGap={14}>
+      <Stack py={4} spacing={6} direction="column" flexGrow={1}>
+        <SettingsAccountHeader userID={myUserID} isLoaded={isLoaded} />
+        <Divider borderColor="black.200" />
+        <SettingsAccountBody userID={myUserID} isLoaded={isLoaded} />
+      </Stack>
+
+      <Divider orientation="vertical" borderColor="black.200" />
+
+      <SettingsAccountUserCardPreview userID={myUserID} />
     </Flex>
   )
 }
