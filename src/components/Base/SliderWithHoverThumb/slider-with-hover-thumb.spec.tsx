@@ -31,7 +31,7 @@ describe('slider customization', () => {
       <SliderWithHoverThumb thumbTooltipLabel={fakeTooltipLabel} />,
     )
 
-    const tooltipComponent = sliderWithHoverThumb.find('Tooltip')
+    const tooltipComponent = sliderWithHoverThumb.find('TooltipWithDelay')
 
     expect(tooltipComponent.prop('label')).toEqual(fakeTooltipLabel)
   })
