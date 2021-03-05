@@ -1,10 +1,20 @@
-import { Grid, GridItem, GridProps, Text, TooltipProps, BoxProps, Box } from '@chakra-ui/react'
+import {
+  Grid,
+  GridItem,
+  GridProps,
+  Text,
+  TooltipProps,
+  BoxProps,
+  Box,
+  Stack,
+} from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { TooltipWithRichText } from 'src/components/Base'
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { TooltipWithRichTextProperties } from 'src/components/Base/TooltipWithRichText/tooltip-with-rich-text'
+import InfoCircleIcon from 'src/components/Icon/InfoCircle'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 
 import KeyResultListHeadTooltipWithRichTextsConfidenceLevel from './RichTooltips/ConfidenceLevel'
@@ -59,7 +69,14 @@ const KeyResultListHead = ({
       children,
     }: Partial<TooltipWithRichTextProperties>) => (
       <TooltipWithRichText tooltip={<KeyResultListHeadTooltipWithRichTextsConfidenceLevel />}>
-        {children}
+        <Stack alignItems="center" direction="row" cursor="help">
+          {children}
+          <InfoCircleIcon
+            fill="gray.300"
+            stroke="gray.400"
+            desc={intl.formatMessage(messages.listHeadConfidenceLevelIconDesc)}
+          />
+        </Stack>
       </TooltipWithRichText>
     ),
     [KEY_RESULT_LIST_COLUMN.PROGRESS]: ({ children }: TooltipProps) => (
@@ -119,7 +136,7 @@ const KeyResultListHead = ({
             justifySelf={columnProperties?.justifySelf}
           >
             <Wrapper>
-              <Text hidden={columnProperties?.hidden} color="gray.300" cursor="help">
+              <Text hidden={columnProperties?.hidden} color="gray.400" cursor="help">
                 {intl.formatMessage(columnMessages[column])}
               </Text>
             </Wrapper>

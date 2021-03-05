@@ -20,7 +20,7 @@ const TooltipWithRichText = ({ children, tooltip, ...rest }: TooltipWithRichText
   const styles = useStyleConfig('Tooltip', rest)
 
   return (
-    <Popover trigger="hover" openDelay={OPEN_DELAY_IN_MS}>
+    <Popover trigger="hover" openDelay={OPEN_DELAY_IN_MS} variant="rich-tooltip">
       <PopoverTrigger>{children}</PopoverTrigger>
       <PopoverContent sx={styles} {...rest}>
         {tooltip}

@@ -163,10 +163,6 @@
     "defaultMessage": "Vincule seu perfil às suas redes sociais para facilitar a conexão com seus colegas!",
     "description": "This subtitle is displayed as the subtitle of the social media section in our user account settings page"
   },
-  "81xtg9": {
-    "defaultMessage": "Um círculo com um sinal de subtração do meio, indicando que o progress se manteve o mesmo",
-    "description": "This desc message explains the neutral icon for screen readers"
-  },
   "89ola3": {
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
@@ -275,6 +271,10 @@
     "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
     "description": "The alternative text explaining our arrow right icon"
   },
+  "GHeIgq": {
+    "defaultMessage": "Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado-chave?",
+    "description": "This text gives more details regarding our empty state card in the key result drawer"
+  },
   "GHu/pe": {
     "defaultMessage": "Um ícone de video",
     "description": "The desc message for the Video icon. This icon is used to ilustrate our key results"
@@ -294,10 +294,6 @@
   "HAQ+JV": {
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
-  },
-  "HEuyOR": {
-    "defaultMessage": "Descreve o quão confiante a pessoa responsável por um resultado chave está:",
-    "description": "This message is displayed as an introduction to our rich tooltip regarding the confidence level at the head of our key-results table"
   },
   "Hfg9tY": {
     "defaultMessage": "Confirmar",
@@ -435,10 +431,6 @@
     "defaultMessage": "Valor atual",
     "description": "This tooltip is displayed when the user hovers the left side value of our progress bar"
   },
-  "Qt/E5T": {
-    "defaultMessage": "Um ícone de seta para cima, indicando que o progress aumentou",
-    "description": "This desc message explains the increase icon for screen readers"
-  },
   "RN1J2p": {
     "defaultMessage": "Essa semana",
     "description": "The title of the third column in our body table at the teams overview report in our dashboard"
@@ -495,6 +487,10 @@
     "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}} por {author}",
     "description": "This message displays the latest report status for a given component"
   },
+  "TIorHN": {
+    "defaultMessage": "Existe um risco de não alcançarmos o resultado-chave, mas seguimos otimistas",
+    "description": "This text explains our tag to the user"
+  },
   "TKIxVB": {
     "defaultMessage": "Definições",
     "description": "This title is displayed as the heading of the definitions menu section"
@@ -510,10 +506,6 @@
   "UBruoq": {
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
-  },
-  "UTF2eY": {
-    "defaultMessage": "Um ícone de seta para baixo, indicando que o progress reduziu",
-    "description": "This desc message explains the decrease icon for screen readers"
   },
   "UUo+Pt": {
     "defaultMessage": "Este time é uma empresa",
@@ -571,6 +563,10 @@
     "defaultMessage": "Nome",
     "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
   },
+  "Y1oyYG": {
+    "defaultMessage": "Um ícone de seta para cima, indicando que o progresso aumentou",
+    "description": "This desc message explains the increase icon for screen readers"
+  },
   "YUvWwS": {
     "defaultMessage": "Registro",
     "description": "It is used as a fallback if the component has no card type defined for it"
@@ -607,9 +603,9 @@
     "defaultMessage": "Início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
   },
-  "atVRfC": {
-    "defaultMessage": "Existe um risco de não alcançarmos, mas seguimos otimistas",
-    "description": "This text explains our tag to the user"
+  "bZYEAl": {
+    "defaultMessage": "Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo",
+    "description": "This desc message explains the neutral icon for screen readers"
   },
   "bdkUKs": {
     "defaultMessage": "Times",
@@ -751,6 +747,10 @@
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
   },
+  "lBc00A": {
+    "defaultMessage": "Descreve o quão confiante a pessoa responsável por um resultado-chave está:",
+    "description": "This message is displayed as an introduction to our rich tooltip regarding the confidence level at the head of our key-results table"
+  },
   "lI5vJI": {
     "defaultMessage": "Um ícone com três pontos. Ao clicar nele você abrirá algumas opções",
     "description": "This text is displayed as the tree dots desc text in our timeline cards"
@@ -758,6 +758,10 @@
   "lMYmAU": {
     "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
     "description": "This message is displayed above the button in our not found error page"
+  },
+  "lMxUF9": {
+    "defaultMessage": "Um ícone de seta para baixo, indicando que o progresso reduziu",
+    "description": "This desc message explains the decrease icon for screen readers"
   },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
@@ -807,10 +811,6 @@
     "defaultMessage": "Essa semana",
     "description": "The text displayed as a prefix in our progress tag label in the team objective accordion button"
   },
-  "p/WfG+": {
-    "defaultMessage": "Não vamos alcançar o resultado a não ser que a gente mude nossos planos",
-    "description": "This text explains our tag to the user"
-  },
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
@@ -835,10 +835,6 @@
     "defaultMessage": "Informações pessoais",
     "description": "This title is displayed as the heading of the personal informations section in our user account settings page"
   },
-  "rBdkOv": {
-    "defaultMessage": "Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado chave?",
-    "description": "This text gives more details regarding our empty state card in the key result drawer"
-  },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
     "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
@@ -846,6 +842,10 @@
   "rpLZ2J": {
     "defaultMessage": "Bud - Gestão de OKR e Estratégia",
     "description": "The title text of our logotype, it is displayed when an user hover the icon itself"
+  },
+  "rsHltm": {
+    "defaultMessage": "Não vamos alcançar o resultado a não ser que a gente mude nossa abordagem",
+    "description": "This text explains our tag to the user"
   },
   "s6f/IS": {
     "defaultMessage": "A tela que você está procurando foi abduzida!",
@@ -902,6 +902,10 @@
   "wJjuae": {
     "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",
     "description": "This tooltip explains the seventh column of the key result list"
+  },
+  "wwt9p1": {
+    "defaultMessage": "Um círculo com um ponto de interrogação ao centro",
+    "description": "This message describes the info circle icon to our screen readers"
   },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",

@@ -18,7 +18,7 @@ const TooltipHeading = (properties: HeadingProps) => (
     fontSize="sm"
     pt={4}
     textTransform="uppercase"
-    fontWeight={400}
+    fontWeight={500}
     {...properties}
   />
 )

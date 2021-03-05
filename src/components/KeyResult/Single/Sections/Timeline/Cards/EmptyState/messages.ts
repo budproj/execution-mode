@@ -19,8 +19,8 @@ export default defineMessages<KeyResultsSectionTimelineCardEmtpyStateMessage>({
 
   description: {
     defaultMessage:
-      'Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado chave?',
-    id: 'rBdkOv',
+      'Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado-chave?',
+    id: 'GHeIgq',
     description:
       'This text gives more details regarding our empty state card in the key result drawer',
   },
