@@ -23,7 +23,6 @@ const TeamsOverviewBodyTableBodyColumnProgressIncrease = ({
           value={team?.progressIncreaseSinceLastWeek}
           bg="transparent"
           fontSize="md"
-          minimumIntegerDigits={2}
           px={0}
         />
       </Skeleton>

@@ -163,6 +163,10 @@
     "defaultMessage": "Vincule seu perfil às suas redes sociais para facilitar a conexão com seus colegas!",
     "description": "This subtitle is displayed as the subtitle of the social media section in our user account settings page"
   },
+  "81xtg9": {
+    "defaultMessage": "Um círculo com um sinal de subtração do meio, indicando que o progress se manteve o mesmo",
+    "description": "This desc message explains the neutral icon for screen readers"
+  },
   "89ola3": {
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
@@ -431,6 +435,10 @@
     "defaultMessage": "Valor atual",
     "description": "This tooltip is displayed when the user hovers the left side value of our progress bar"
   },
+  "Qt/E5T": {
+    "defaultMessage": "Um ícone de seta para cima, indicando que o progress aumentou",
+    "description": "This desc message explains the increase icon for screen readers"
+  },
   "RN1J2p": {
     "defaultMessage": "Essa semana",
     "description": "The title of the third column in our body table at the teams overview report in our dashboard"
@@ -502,6 +510,10 @@
   "UBruoq": {
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
+  },
+  "UTF2eY": {
+    "defaultMessage": "Um ícone de seta para baixo, indicando que o progress reduziu",
+    "description": "This desc message explains the decrease icon for screen readers"
   },
   "UUo+Pt": {
     "defaultMessage": "Este time é uma empresa",

@@ -13,7 +13,7 @@ export enum COLOR_SCHEME {
   RED = 'red',
 }
 
-type ColorToken =
+export type ColorToken =
   | `${COLOR_SCHEME}50`
   | `${COLOR_SCHEME}100`
   | `${COLOR_SCHEME}200`
