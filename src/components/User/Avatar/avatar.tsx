@@ -1,4 +1,4 @@
-import { Avatar, AvatarProps } from '@chakra-ui/react'
+import { Avatar, AvatarProps, Flex, Text, useTheme } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -6,8 +6,14 @@ import ImageIcon from 'src/components/Icon/Image'
 
 import messages from './messages'
 
-const UserAvatar = (properties: AvatarProps) => {
+export interface UserAvatarProperties extends AvatarProps {
+  bottomText?: string
+}
+
+const UserAvatar = ({ bottomText, ...rest }: UserAvatarProperties) => {
   const intl = useIntl()
+  const { colors } = useTheme()
+  const blackShadeColor: string = colors.black[600]
 
   return (
     <Avatar
@@ -19,8 +25,25 @@ const UserAvatar = (properties: AvatarProps) => {
           fill="brand.500"
         />
       }
-      {...properties}
-    />
+      {...rest}
+    >
+      {bottomText && (
+        <Flex
+          w="full"
+          h="30%"
+          position="absolute"
+          direction="column"
+          justifyContent="flex-end"
+          bottom={0}
+          p={2}
+          background={`linear-gradient(transparent, ${blackShadeColor})`}
+        >
+          <Text color="white" fontSize="sm" textTransform="none" noOfLines={1} overflow="hidden">
+            {bottomText}
+          </Text>
+        </Flex>
+      )}
+    </Avatar>
   )
 }
 

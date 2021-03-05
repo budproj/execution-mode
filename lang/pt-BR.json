@@ -71,6 +71,10 @@
     "defaultMessage": "Indica o quanto esse resultado-chave evoluiu até o momento",
     "description": "This tooltip explains the fourth column of the key result list"
   },
+  "0dk0bw": {
+    "defaultMessage": "O logotipo do LinkedIn. Ao clicar você irá visitar o perfil do LinkedIn deste usuário",
+    "description": "This message is displayed to screen readers to explain our LinkedIn icon"
+  },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
@@ -786,6 +790,10 @@
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
     "description": "The default description for our page head meta description value"
+  },
+  "mnors5": {
+    "defaultMessage": "Sobre {nickname}",
+    "description": "The about section title for the user in the user card"
   },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",

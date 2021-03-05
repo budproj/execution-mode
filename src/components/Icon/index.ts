@@ -94,4 +94,6 @@ export { default as ArrowHeadUp } from './ArrowHeadUp'
 
 export { default as ArrowHeadDown } from './ArrowHeadDown'
 
+export { default as LinkedIn } from './LinkedIn'
+
 export * from './types'

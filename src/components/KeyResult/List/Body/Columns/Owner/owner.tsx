@@ -56,7 +56,7 @@ const KeyResultListBodyColumnOwner = ({
       justifyContent={justifyContent}
       onMouseDownCapture={handleMouseDownCapture}
     >
-      <Popover placement="top-end">
+      <Popover placement="top-end" size="sm">
         <PopoverTrigger>
           <Flex alignItems="center" gridGap={4}>
             <SkeletonCircle
@@ -83,12 +83,13 @@ const KeyResultListBodyColumnOwner = ({
 
         {isOwnerLoaded && (
           <PopoverContent
+            p={0}
             border="none"
             boxShadow="0px 5px 30px rgba(129, 147, 171, 0.2)"
             outline="none"
             _focus={{ boxShadow: '0px 5px 30px rgba(129, 147, 171, 0.2)' }}
           >
-            <PopoverBody>
+            <PopoverBody p={0}>
               <UserProfileCard userID={owner?.id} />
             </PopoverBody>
           </PopoverContent>
