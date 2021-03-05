@@ -46,23 +46,23 @@ const UserMenu = () => {
       </MenuButton>
       <MenuList p={0} w="xs">
         <Box p={2}>
-          <UserMenuButton onClickCapture={handleClickCapture}>
-            <IntlLink href="/settings/my-account">
+          <IntlLink href="/settings/my-account">
+            <UserMenuButton onClickCapture={handleClickCapture}>
               {intl.formatMessage(messages.firstOption)}
-            </IntlLink>
-          </UserMenuButton>
+            </UserMenuButton>
+          </IntlLink>
 
-          <UserMenuButton>
-            <Link href={HELPDESK_URL}>
+          <Link href={HELPDESK_URL}>
+            <UserMenuButton>
               <a target="_blank">{intl.formatMessage(messages.secondOption)}</a>
-            </Link>
-          </UserMenuButton>
+            </UserMenuButton>
+          </Link>
 
-          <UserMenuButton>
-            <Link href={HELPDESK_NEW_TICKET_URL}>
+          <Link href={HELPDESK_NEW_TICKET_URL}>
+            <UserMenuButton>
               <a target="_blank">{intl.formatMessage(messages.thirdOption)}</a>
-            </Link>
-          </UserMenuButton>
+            </UserMenuButton>
+          </Link>
         </Box>
 
         <Divider pt={4} borderColor="black.200" />
