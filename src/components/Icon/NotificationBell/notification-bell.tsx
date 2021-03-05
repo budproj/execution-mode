@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface NotificationBellIconProperties extends IconProps, AcessibleIconProperties {}
 
-const NotificationBell = ({
+const NotificationBellIcon = ({
   title,
   desc,
   ...rest
@@ -21,8 +21,8 @@ const NotificationBell = ({
   </Icon>
 )
 
-NotificationBell.defaultProps = {
+NotificationBellIcon.defaultProps = {
   fill: 'black',
 }
 
-export default NotificationBell
+export default NotificationBellIcon

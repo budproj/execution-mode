@@ -1,3 +1,3 @@
-import InfoCircle from './info-circle'
+import InfoCircleIcon from './info-circle'
 
-export default InfoCircle
+export default InfoCircleIcon

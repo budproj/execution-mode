@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface SwitchIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Switch = ({ title, desc, ...rest }: SwitchIconProperties) => (
+const SwitchIcon = ({ title, desc, ...rest }: SwitchIconProperties) => (
   <Icon viewBox="0 0 16 19" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -14,8 +14,8 @@ const Switch = ({ title, desc, ...rest }: SwitchIconProperties) => (
   </Icon>
 )
 
-Switch.defaultProps = {
+SwitchIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Switch
+export default SwitchIcon

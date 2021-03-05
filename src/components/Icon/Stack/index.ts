@@ -1,3 +1,3 @@
-import Stack from './stack'
+import StackIcon from './stack'
 
-export default Stack
+export default StackIcon

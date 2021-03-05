@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface HeartIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Heart = ({ title, desc, ...rest }: HeartIconProperties): ReactElement => (
+const HeartIcon = ({ title, desc, ...rest }: HeartIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -18,8 +18,8 @@ const Heart = ({ title, desc, ...rest }: HeartIconProperties): ReactElement => (
   </Icon>
 )
 
-Heart.defaultProps = {
+HeartIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Heart
+export default HeartIcon

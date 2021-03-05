@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface InfoCircleIconProperties extends IconProps, AcessibleIconProperties {}
 
-const InfoCircle = ({ title, desc, ...rest }: InfoCircleIconProperties): ReactElement => (
+const InfoCircleIcon = ({ title, desc, ...rest }: InfoCircleIconProperties): ReactElement => (
   <Icon viewBox="0 0 21 21" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -25,9 +25,9 @@ const InfoCircle = ({ title, desc, ...rest }: InfoCircleIconProperties): ReactEl
   </Icon>
 )
 
-InfoCircle.defaultProps = {
+InfoCircleIcon.defaultProps = {
   fill: 'black',
   stroke: 'black',
 }
 
-export default InfoCircle
+export default InfoCircleIcon

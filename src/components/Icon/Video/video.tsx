@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface VideoIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Video = ({ title, desc, ...rest }: VideoIconProperties): ReactElement => (
+const VideoIcon = ({ title, desc, ...rest }: VideoIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Video = ({ title, desc, ...rest }: VideoIconProperties): ReactElement => (
   </Icon>
 )
 
-Video.defaultProps = {
+VideoIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Video
+export default VideoIcon

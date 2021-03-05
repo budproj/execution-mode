@@ -377,7 +377,7 @@ describe('data exibition', () => {
         .find('Tag')
 
       return expect(textComponent.text()).toEqual(
-        `+${relatedTeam.progressIncreaseSinceLastWeek}%increased by`,
+        `Um ícone de seta para cima, indicando que o progresso aumentou+${relatedTeam.progressIncreaseSinceLastWeek}%`,
       )
     })
   })
@@ -433,7 +433,7 @@ describe('data exibition', () => {
         .find('Tag')
 
       return expect(textComponent.text()).toEqual(
-        `+0${relatedTeam.progressIncreaseSinceLastWeek}%increased by`,
+        `Um ícone de seta para cima, indicando que o progresso aumentou+${relatedTeam.progressIncreaseSinceLastWeek}%`,
       )
     })
   })
@@ -489,7 +489,9 @@ describe('data exibition', () => {
         .find('Tag')
 
       return expect(textComponent.text()).toEqual(
-        `-0${Math.abs(relatedTeam.progressIncreaseSinceLastWeek)}%decreased by`,
+        `Um ícone de seta para baixo, indicando que o progresso reduziu-${Math.abs(
+          relatedTeam.progressIncreaseSinceLastWeek,
+        )}%`,
       )
     })
   })
@@ -545,7 +547,9 @@ describe('data exibition', () => {
         .find('Tag')
 
       return expect(textComponent.text()).toEqual(
-        `-${Math.abs(relatedTeam.progressIncreaseSinceLastWeek)}%decreased by`,
+        `Um ícone de seta para baixo, indicando que o progresso reduziu-${Math.abs(
+          relatedTeam.progressIncreaseSinceLastWeek,
+        )}%`,
       )
     })
   })
@@ -599,7 +603,9 @@ describe('data exibition', () => {
         .find('TeamsOverviewBodyTableBodyColumnProgressIncrease')
         .find('Tag')
 
-      return expect(textComponent.text()).toEqual('0%')
+      return expect(textComponent.text()).toEqual(
+        'Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo0%',
+      )
     })
   })
 
@@ -652,7 +658,9 @@ describe('data exibition', () => {
         .find('TeamsOverviewBodyTableBodyColumnProgressIncrease')
         .find('Tag')
 
-      return expect(textComponent.text()).toEqual('0%')
+      return expect(textComponent.text()).toEqual(
+        'Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo0%',
+      )
     })
   })
 })

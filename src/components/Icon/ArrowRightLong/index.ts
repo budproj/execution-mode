@@ -1,3 +1,3 @@
-import ArrowRightLong from './arrow-right-long'
+import ArrowRightLongIcon from './arrow-right-long'
 
-export default ArrowRightLong
+export default ArrowRightLongIcon

@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface StackIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Stack = ({ title, desc, ...rest }: StackIconProperties): ReactElement => (
+const StackIcon = ({ title, desc, ...rest }: StackIconProperties): ReactElement => (
   <Icon viewBox="0 0 25 26" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Stack = ({ title, desc, ...rest }: StackIconProperties): ReactElement => (
   </Icon>
 )
 
-Stack.defaultProps = {
+StackIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Stack
+export default StackIcon

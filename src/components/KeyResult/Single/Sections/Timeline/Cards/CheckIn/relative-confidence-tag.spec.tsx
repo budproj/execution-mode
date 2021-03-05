@@ -6,10 +6,14 @@ import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative
 
 describe('component expectations', () => {
   it('uses a increase arrow if the difference is higher than 0', () => {
-    const fakeDifference = faker.random.number({ min: 1 })
+    const fakePreviousConfidence = faker.random.number({ min: -1, max: 99 })
+    const fakeCurrentConfidence = faker.random.number({ min: fakePreviousConfidence + 1, max: 100 })
 
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag difference={fakeDifference} />,
+    const result = enzyme.mount(
+      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
+        parentConfidence={fakePreviousConfidence}
+        currentConfidence={fakeCurrentConfidence}
+      />,
     )
 
     const statArrow = result.find('StatArrow')
@@ -18,10 +22,14 @@ describe('component expectations', () => {
   })
 
   it('uses a decrease arrow if the difference is lower than 0', () => {
-    const fakeDifference = faker.random.number({ max: -1 })
+    const fakePreviousConfidence = faker.random.number({ min: 0, max: 99 })
+    const fakeCurrentConfidence = faker.random.number({ min: -1, max: fakePreviousConfidence - 1 })
 
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag difference={fakeDifference} />,
+    const result = enzyme.mount(
+      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
+        parentConfidence={fakePreviousConfidence}
+        currentConfidence={fakeCurrentConfidence}
+      />,
     )
 
     const statArrow = result.find('StatArrow')
@@ -30,10 +38,13 @@ describe('component expectations', () => {
   })
 
   it('does not display the arrow if the difference is 0', () => {
-    const fakeDifference = 0
+    const fakePreviousConfidence = faker.random.number({ min: -1, max: 100 })
 
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag difference={fakeDifference} />,
+    const result = enzyme.mount(
+      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
+        parentConfidence={fakePreviousConfidence}
+        currentConfidence={fakePreviousConfidence}
+      />,
     )
 
     const statArrow = result.find('StatArrow')
@@ -42,10 +53,13 @@ describe('component expectations', () => {
   })
 
   it('considers the confidence tag as loaded if the confidence is 0', () => {
-    const fakeConfidence = 0
+    const fakePreviousConfidence = faker.random.number({ min: -1, max: 100 })
 
-    const result = enzyme.shallow(
-      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag confidence={fakeConfidence} />,
+    const result = enzyme.mount(
+      <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
+        parentConfidence={fakePreviousConfidence}
+        currentConfidence={fakePreviousConfidence}
+      />,
     )
 
     const skeleton = result.find('Skeleton')

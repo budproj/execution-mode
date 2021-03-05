@@ -64,8 +64,8 @@ export default defineMessages<ConfidenceTagMessage>({
   },
 
   mediumHelperText: {
-    defaultMessage: 'Existe um risco de não alcançarmos, mas seguimos otimistas',
-    id: 'atVRfC',
+    defaultMessage: 'Existe um risco de não alcançarmos o resultado-chave, mas seguimos otimistas',
+    id: 'TIorHN',
     description: 'This text explains our tag to the user',
   },
 
@@ -90,8 +90,8 @@ export default defineMessages<ConfidenceTagMessage>({
   },
 
   lowHelperText: {
-    defaultMessage: 'Não vamos alcançar o resultado a não ser que a gente mude nossos planos',
-    id: 'p/WfG+',
+    defaultMessage: 'Não vamos alcançar o resultado a não ser que a gente mude nossa abordagem',
+    id: 'rsHltm',
     description: 'This text explains our tag to the user',
   },
 

@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface LocationIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Location = ({ title, desc, ...rest }: LocationIconProperties): ReactElement => (
+const LocationIcon = ({ title, desc, ...rest }: LocationIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -18,8 +18,8 @@ const Location = ({ title, desc, ...rest }: LocationIconProperties): ReactElemen
   </Icon>
 )
 
-Location.defaultProps = {
+LocationIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Location
+export default LocationIcon

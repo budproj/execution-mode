@@ -1,3 +1,3 @@
-import Folder from './folder'
+import FolderIcon from './folder'
 
-export default Folder
+export default FolderIcon

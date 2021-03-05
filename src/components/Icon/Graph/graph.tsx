@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface GraphIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Graph = ({ title, desc, ...rest }: GraphIconProperties): ReactElement => (
+const GraphIcon = ({ title, desc, ...rest }: GraphIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Graph = ({ title, desc, ...rest }: GraphIconProperties): ReactElement => (
   </Icon>
 )
 
-Graph.defaultProps = {
+GraphIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Graph
+export default GraphIcon

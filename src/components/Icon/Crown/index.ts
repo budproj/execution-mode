@@ -1,3 +1,3 @@
-import Crown from './crown'
+import CrownIcon from './crown'
 
-export default Crown
+export default CrownIcon

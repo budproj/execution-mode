@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface BookmarkIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Bookmark = ({ title, desc, ...rest }: BookmarkIconProperties): ReactElement => (
+const BookmarkIcon = ({ title, desc, ...rest }: BookmarkIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -21,8 +21,8 @@ const Bookmark = ({ title, desc, ...rest }: BookmarkIconProperties): ReactElemen
   </Icon>
 )
 
-Bookmark.defaultProps = {
+BookmarkIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Bookmark
+export default BookmarkIcon

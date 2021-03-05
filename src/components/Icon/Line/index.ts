@@ -1,3 +1,3 @@
-import Line from './line'
+import LineIcon from './line'
 
-export default Line
+export default LineIcon

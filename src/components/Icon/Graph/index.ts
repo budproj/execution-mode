@@ -1,3 +1,3 @@
-import Graph from './graph'
+import GraphIcon from './graph'
 
-export default Graph
+export default GraphIcon

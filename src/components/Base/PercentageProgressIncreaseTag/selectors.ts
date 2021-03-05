@@ -1,3 +1,5 @@
+import { ColorToken } from 'src/themes/tokens'
+
 import { buildColorWithIntensity } from './builders'
 
 export const selectBackgroundColor = (value: number) => {
@@ -7,8 +9,7 @@ export const selectBackgroundColor = (value: number) => {
   return color
 }
 
-export const selectLabelColor = (value: number) => {
-  const intensity = 500
+export const selectLabelColor = (value: number, intensity = 500): ColorToken => {
   const color = buildColorWithIntensity(value, intensity)
 
   return color

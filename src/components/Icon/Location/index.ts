@@ -1,3 +1,3 @@
-import Location from './location'
+import LocationIcon from './location'
 
-export default Location
+export default LocationIcon

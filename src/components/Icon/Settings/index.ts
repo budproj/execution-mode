@@ -1,3 +1,3 @@
-import Settings from './settings'
+import SettingsIcon from './settings'
 
-export default Settings
+export default SettingsIcon

@@ -1,3 +1,3 @@
-import NotificationBell from './notification-bell'
+import NotificationBellIcon from './notification-bell'
 
-export default NotificationBell
+export default NotificationBellIcon

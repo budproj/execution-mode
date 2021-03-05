@@ -1,3 +1,3 @@
-import Wallet from './wallet'
+import WalletIcon from './wallet'
 
-export default Wallet
+export default WalletIcon

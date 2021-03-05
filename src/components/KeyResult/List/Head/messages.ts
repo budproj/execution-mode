@@ -13,6 +13,7 @@ type KeyResultListHeadMessage =
   | 'listHeadOwner'
   | 'listHeadOwnerTooltip'
   | 'listHeadConfidenceLevelColor'
+  | 'listHeadConfidenceLevelIconDesc'
   | 'listHeadPercentualProgress'
   | 'listHeadPercentualProgressTooltip'
 
@@ -87,6 +88,12 @@ export default defineMessages<KeyResultListHeadMessage>({
     defaultMessage: 'Cor do Nível de Confiança',
     id: 'F33Lyk',
     description: 'The text of the table head related to the Confidence Level color column',
+  },
+
+  listHeadConfidenceLevelIconDesc: {
+    defaultMessage: 'Um círculo com um ponto de interrogação ao centro',
+    id: 'wwt9p1',
+    description: 'This message describes the info circle icon to our screen readers',
   },
 
   listHeadPercentualProgress: {

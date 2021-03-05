@@ -1,3 +1,3 @@
-import Search from './search'
+import SearchIcon from './search'
 
-export default Search
+export default SearchIcon

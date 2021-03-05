@@ -1,3 +1,3 @@
-import Gear from './gear'
+import GearIcon from './gear'
 
-export default Gear
+export default GearIcon

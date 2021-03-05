@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface BuoyIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Buoy = ({ title, desc, ...rest }: BuoyIconProperties): ReactElement => (
+const BuoyIcon = ({ title, desc, ...rest }: BuoyIconProperties): ReactElement => (
   <Icon viewBox="0 0 22 22" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -16,8 +16,8 @@ const Buoy = ({ title, desc, ...rest }: BuoyIconProperties): ReactElement => (
   </Icon>
 )
 
-Buoy.defaultProps = {
+BuoyIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Buoy
+export default BuoyIcon

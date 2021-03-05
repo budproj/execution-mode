@@ -1,3 +1,3 @@
-import Close from './close'
+import CloseIcon from './close'
 
-export default Close
+export default CloseIcon

@@ -1,3 +1,3 @@
-import Scan from './scan'
+import ScanIcon from './scan'
 
-export default Scan
+export default ScanIcon

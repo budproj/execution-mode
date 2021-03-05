@@ -1,3 +1,3 @@
-import Circle from './circle'
+import CircleIcon from './circle'
 
-export default Circle
+export default CircleIcon

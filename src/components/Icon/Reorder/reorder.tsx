@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface ReorderIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Reorder = ({ title, desc, ...rest }: ReorderIconProperties): ReactElement => (
+const ReorderIcon = ({ title, desc, ...rest }: ReorderIconProperties): ReactElement => (
   <Icon viewBox="0 0 6 14" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Reorder = ({ title, desc, ...rest }: ReorderIconProperties): ReactElement 
   </Icon>
 )
 
-Reorder.defaultProps = {
+ReorderIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Reorder
+export default ReorderIcon

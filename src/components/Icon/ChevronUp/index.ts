@@ -1,3 +1,3 @@
-import ChevronUp from './chevron-up'
+import ChevronUpIcon from './chevron-up'
 
-export default ChevronUp
+export default ChevronUpIcon

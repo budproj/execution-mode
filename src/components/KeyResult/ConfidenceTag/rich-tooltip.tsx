@@ -15,7 +15,7 @@ const ConfidenceTagTooltipWithRichText = ({
       as="h3"
       fontSize="sm"
       textTransform="uppercase"
-      fontWeight={400}
+      fontWeight={500}
       color={confidenceTag.color.primary}
     >
       {confidenceTag.messages.long}

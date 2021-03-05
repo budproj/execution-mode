@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface WarningIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Warning = ({ title, desc, ...rest }: WarningIconProperties): ReactElement => (
+const WarningIcon = ({ title, desc, ...rest }: WarningIconProperties): ReactElement => (
   <Icon viewBox="0 0 51 51" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -30,9 +30,9 @@ const Warning = ({ title, desc, ...rest }: WarningIconProperties): ReactElement 
   </Icon>
 )
 
-Warning.defaultProps = {
+WarningIcon.defaultProps = {
   fill: 'black',
   stroke: 'black',
 }
 
-export default Warning
+export default WarningIcon

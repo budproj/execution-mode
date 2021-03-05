@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface ActivityIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Activity = ({ title, desc, ...rest }: ActivityIconProperties): ReactElement => (
+const ActivityIcon = ({ title, desc, ...rest }: ActivityIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -18,8 +18,8 @@ const Activity = ({ title, desc, ...rest }: ActivityIconProperties): ReactElemen
   </Icon>
 )
 
-Activity.defaultProps = {
+ActivityIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Activity
+export default ActivityIcon

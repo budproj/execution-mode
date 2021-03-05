@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface PaperPlaneIconProperties extends IconProps, AcessibleIconProperties {}
 
-const PaperPlane = ({ title, desc, ...rest }: PaperPlaneIconProperties): ReactElement => (
+const PaperPlaneIcon = ({ title, desc, ...rest }: PaperPlaneIconProperties): ReactElement => (
   <Icon viewBox="0 0 14 13" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -16,9 +16,9 @@ const PaperPlane = ({ title, desc, ...rest }: PaperPlaneIconProperties): ReactEl
   </Icon>
 )
 
-PaperPlane.defaultProps = {
+PaperPlaneIcon.defaultProps = {
   fill: 'black',
   stroke: 'black',
 }
 
-export default PaperPlane
+export default PaperPlaneIcon

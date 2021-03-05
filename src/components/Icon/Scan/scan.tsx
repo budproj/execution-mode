@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface ScanIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Scan = ({ title, desc, ...rest }: ScanIconProperties): ReactElement => (
+const ScanIcon = ({ title, desc, ...rest }: ScanIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -19,8 +19,8 @@ const Scan = ({ title, desc, ...rest }: ScanIconProperties): ReactElement => (
   </Icon>
 )
 
-Scan.defaultProps = {
+ScanIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Scan
+export default ScanIcon

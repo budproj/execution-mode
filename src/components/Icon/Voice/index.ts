@@ -1,3 +1,3 @@
-import Voice from './voice'
+import VoiceIcon from './voice'
 
-export default Voice
+export default VoiceIcon

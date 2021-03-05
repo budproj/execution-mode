@@ -5,7 +5,11 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface ArrowRightLongIconProperties extends IconProps, AcessibleIconProperties {}
 
-const ArrowRightLong = ({ title, desc, ...rest }: ArrowRightLongIconProperties): ReactElement => (
+const ArrowRightLongIcon = ({
+  title,
+  desc,
+  ...rest
+}: ArrowRightLongIconProperties): ReactElement => (
   <Icon viewBox="0 0 22 20" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -13,8 +17,8 @@ const ArrowRightLong = ({ title, desc, ...rest }: ArrowRightLongIconProperties):
   </Icon>
 )
 
-ArrowRightLong.defaultProps = {
+ArrowRightLongIcon.defaultProps = {
   fill: 'black',
 }
 
-export default ArrowRightLong
+export default ArrowRightLongIcon

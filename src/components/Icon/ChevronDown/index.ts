@@ -1,3 +1,3 @@
-import ChevronDown from './chevron-down'
+import ChevronDownIcon from './chevron-down'
 
-export default ChevronDown
+export default ChevronDownIcon

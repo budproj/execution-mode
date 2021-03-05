@@ -34,7 +34,7 @@ describe('component expectations', () => {
 
     const wrapper = enzyme.shallow(<KeyResultListBodyColumnProgress id={fakeID} />)
 
-    const number = wrapper.find('Absolute').first().dive().dive().dive()
+    const number = wrapper.find('Absolute').first().dive().dive().dive().find('Text')
 
     expect(number.prop('color')).toEqual('gray.300')
   })

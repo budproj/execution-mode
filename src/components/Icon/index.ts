@@ -90,4 +90,8 @@ export { default as Pen } from './Pen'
 
 export { default as Buoy } from './Buoy'
 
+export { default as ArrowHeadUp } from './ArrowHeadUp'
+
+export { default as ArrowHeadDown } from './ArrowHeadDown'
+
 export * from './types'

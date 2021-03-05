@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface SearchIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Search = ({ title, desc, ...rest }: SearchIconProperties): ReactElement => (
+const SearchIcon = ({ title, desc, ...rest }: SearchIconProperties): ReactElement => (
   <Icon viewBox="0 0 18 18" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Search = ({ title, desc, ...rest }: SearchIconProperties): ReactElement =>
   </Icon>
 )
 
-Search.defaultProps = {
+SearchIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Search
+export default SearchIcon

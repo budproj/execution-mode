@@ -5,6 +5,7 @@ const Tooltip = {
     px: 3,
     py: 1,
     borderRadius: 3,
+    maxW: 72,
   },
 }
 

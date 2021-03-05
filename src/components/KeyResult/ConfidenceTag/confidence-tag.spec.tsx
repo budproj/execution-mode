@@ -18,7 +18,7 @@ describe('component render', () => {
   it('can render the provided helper text', () => {
     const wrapper = enzyme.mount(<ConfidenceTag showHelperText confidenceValue={50} />)
 
-    const textComponent = wrapper.find('Text')
+    const textComponent = wrapper.find('Text').last()
 
     expect(textComponent.text()).toEqual(
       'Existe um risco de não alcançarmos, mas seguimos otimistas',

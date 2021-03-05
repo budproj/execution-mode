@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface GameIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Game = ({ title, desc, ...rest }: GameIconProperties): ReactElement => (
+const GameIcon = ({ title, desc, ...rest }: GameIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -21,8 +21,8 @@ const Game = ({ title, desc, ...rest }: GameIconProperties): ReactElement => (
   </Icon>
 )
 
-Game.defaultProps = {
+GameIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Game
+export default GameIcon
