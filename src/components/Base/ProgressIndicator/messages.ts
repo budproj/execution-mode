@@ -4,21 +4,21 @@ type ProgressIndicatorMessage = 'increaseIconDesc' | 'decreaseIconDesc' | 'neutr
 
 export default defineMessages<ProgressIndicatorMessage>({
   increaseIconDesc: {
-    defaultMessage: 'Um ícone de seta para cima, indicando que o progress aumentou',
-    id: 'Qt/E5T',
+    defaultMessage: 'Um ícone de seta para cima, indicando que o progresso aumentou',
+    id: 'Y1oyYG',
     description: 'This desc message explains the increase icon for screen readers',
   },
 
   decreaseIconDesc: {
-    defaultMessage: 'Um ícone de seta para baixo, indicando que o progress reduziu',
-    id: 'UTF2eY',
+    defaultMessage: 'Um ícone de seta para baixo, indicando que o progresso reduziu',
+    id: 'lMxUF9',
     description: 'This desc message explains the decrease icon for screen readers',
   },
 
   neutralIconDesc: {
     defaultMessage:
-      'Um círculo com um sinal de subtração do meio, indicando que o progress se manteve o mesmo',
-    id: '81xtg9',
+      'Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo',
+    id: 'bZYEAl',
     description: 'This desc message explains the neutral icon for screen readers',
   },
 })

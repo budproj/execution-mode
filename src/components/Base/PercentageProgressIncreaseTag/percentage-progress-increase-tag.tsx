@@ -29,14 +29,17 @@ const PercentageProgressIncreaseTag = ({
 }: PercentageProgressIncreaseTagProperties) => {
   const intl = useIntl()
 
-  const isValuePositive = value > 0
-  const isValueNegative = value < 0
-
-  const bgColor = bg ?? selectBackgroundColor(value)
-  const labelColor = selectLabelColor(value)
-  const arrowColor = selectLabelColor(value, !isValuePositive && !isValueNegative ? 300 : undefined)
-
   const roundedValue = Math.round(value)
+  const isValuePositive = roundedValue > 0
+  const isValueNegative = roundedValue < 0
+
+  const bgColor = bg ?? selectBackgroundColor(roundedValue)
+  const labelColor = selectLabelColor(roundedValue)
+  const arrowColor = selectLabelColor(
+    roundedValue,
+    !isValuePositive && !isValueNegative ? 300 : undefined,
+  )
+
   const arrowType = isValuePositive ? 'increase' : isValueNegative ? 'decrease' : 'neutral'
   const normalizedMinimumIntegerDigits = roundedValue === 0 ? 1 : minimumIntegerDigits
 
