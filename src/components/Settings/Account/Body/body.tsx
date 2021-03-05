@@ -1,4 +1,4 @@
-import { Divider, Flex } from '@chakra-ui/react'
+import { Divider, Stack } from '@chakra-ui/react'
 import React from 'react'
 
 import { User } from 'src/components/User/types'
@@ -12,11 +12,11 @@ export interface SettingsAccountBodyProperties {
 }
 
 const SettingsAccountBody = ({ userID, isLoaded }: SettingsAccountBodyProperties) => (
-  <Flex direction="column" gridGap={6}>
+  <Stack direction="column" spacing={6}>
     <SettingsAccountBodyPersonalInformations userID={userID} isLoaded={isLoaded} />
     <Divider borderColor="black.200" />
     <SettingsAccountBodySocialMedia userID={userID} isLoaded={isLoaded} />
-  </Flex>
+  </Stack>
 )
 
 export default SettingsAccountBody

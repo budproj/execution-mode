@@ -29,7 +29,7 @@ const UserProfileCard = ({ userID }: UserProfileCardProperties) => {
         <Stack direction="column" spacing={1} flexGrow={1}>
           <Skeleton isLoaded={isUserLoaded} {...buildSkeletonMinSize(isUserLoaded, 140, 21)}>
             <Heading fontSize="md" fontWeight={500} color="black.900" as="h3">
-              {user?.nickname}
+              {user?.nickname ?? user?.firstName}
             </Heading>
           </Skeleton>
           <Skeleton isLoaded={isUserLoaded} {...buildSkeletonMinSize(isUserLoaded, 100, 17)}>
@@ -66,27 +66,29 @@ const UserProfileCard = ({ userID }: UserProfileCardProperties) => {
         />
       </AspectRatio>
 
-      <Stack direction="column" spacing={1}>
-        <Skeleton isLoaded={isUserLoaded} {...buildSkeletonMinSize(isUserLoaded, 100, 17)}>
-          <Heading
-            as="h4"
-            fontSize="2xs"
-            fontWeight={700}
-            textTransform="uppercase"
-            color="gray.300"
-          >
-            {intl.formatMessage(messages.aboutTitle, {
-              nickname: user?.nickname ?? user?.firstName,
-            })}
-          </Heading>
-        </Skeleton>
+      {(user?.about || !isUserLoaded) && (
+        <Stack direction="column" spacing={1}>
+          <Skeleton isLoaded={isUserLoaded} {...buildSkeletonMinSize(isUserLoaded, 100, 17)}>
+            <Heading
+              as="h4"
+              fontSize="2xs"
+              fontWeight={700}
+              textTransform="uppercase"
+              color="gray.300"
+            >
+              {intl.formatMessage(messages.aboutTitle, {
+                nickname: user?.nickname ?? user?.firstName,
+              })}
+            </Heading>
+          </Skeleton>
 
-        <SkeletonText isLoaded={isUserLoaded}>
-          <Text color="gray.500" fontSize="sm" noOfLines={5}>
-            {user?.about}
-          </Text>
-        </SkeletonText>
-      </Stack>
+          <SkeletonText isLoaded={isUserLoaded}>
+            <Text color="gray.500" fontSize="sm" noOfLines={5}>
+              {user?.about}
+            </Text>
+          </SkeletonText>
+        </Stack>
+      )}
     </Stack>
   )
 }

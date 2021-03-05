@@ -115,6 +115,10 @@
     "defaultMessage": "Esses são os resultados-chave que fazem parte desse objetivo",
     "description": "This tooltip explains the first column of the key result list"
   },
+  "3rnKj8": {
+    "defaultMessage": "Confira como seu card aparecerá para outros usuários.",
+    "description": "This subtitle is displayed as the subtitle of the user card preview section in our user account settings page"
+  },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -958,5 +962,9 @@
   "zev4wl": {
     "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
     "description": "This is a message explaining the flag icon in our check-in form"
+  },
+  "zsB72A": {
+    "defaultMessage": "Pré-visualização",
+    "description": "This title is displayed as the heading of the user card preview section in our user account settings page"
   }
 }
