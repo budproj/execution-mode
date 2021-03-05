@@ -1,3 +1,3 @@
-import Buoy from './buoy'
+import BuoyIcon from './buoy'
 
-export default Buoy
+export default BuoyIcon

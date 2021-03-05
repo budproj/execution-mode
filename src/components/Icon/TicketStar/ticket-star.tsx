@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface TicketStarIconProperties extends IconProps, AcessibleIconProperties {}
 
-const TicketStar = ({ title, desc, ...rest }: TicketStarIconProperties): ReactElement => (
+const TicketStarIcon = ({ title, desc, ...rest }: TicketStarIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const TicketStar = ({ title, desc, ...rest }: TicketStarIconProperties): ReactEl
   </Icon>
 )
 
-TicketStar.defaultProps = {
+TicketStarIcon.defaultProps = {
   fill: 'black',
 }
 
-export default TicketStar
+export default TicketStarIcon

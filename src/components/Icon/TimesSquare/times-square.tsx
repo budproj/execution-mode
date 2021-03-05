@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface TimesSquareIconProperties extends IconProps, AcessibleIconProperties {}
 
-const TimesSquare = ({ title, desc, ...rest }: TimesSquareIconProperties): ReactElement => (
+const TimesSquareIcon = ({ title, desc, ...rest }: TimesSquareIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const TimesSquare = ({ title, desc, ...rest }: TimesSquareIconProperties): React
   </Icon>
 )
 
-TimesSquare.defaultProps = {
+TimesSquareIcon.defaultProps = {
   fill: 'black',
 }
 
-export default TimesSquare
+export default TimesSquareIcon

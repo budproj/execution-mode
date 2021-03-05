@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface PenIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Pen = ({ title, desc, ...rest }: PenIconProperties): ReactElement => (
+const PenIcon = ({ title, desc, ...rest }: PenIconProperties): ReactElement => (
   <Icon viewBox="0 0 14 14" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Pen = ({ title, desc, ...rest }: PenIconProperties): ReactElement => (
   </Icon>
 )
 
-Pen.defaultProps = {
+PenIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Pen
+export default PenIcon

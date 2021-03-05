@@ -1,3 +1,3 @@
-import Discovery from './discovery'
+import DiscoveryIcon from './discovery'
 
-export default Discovery
+export default DiscoveryIcon

@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface SettingsIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Settings = ({ title, desc, ...rest }: SettingsIconProperties): ReactElement => (
+const SettingsIcon = ({ title, desc, ...rest }: SettingsIconProperties): ReactElement => (
   <Icon viewBox="0 0 25 25" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Settings = ({ title, desc, ...rest }: SettingsIconProperties): ReactElemen
   </Icon>
 )
 
-Settings.defaultProps = {
+SettingsIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Settings
+export default SettingsIcon

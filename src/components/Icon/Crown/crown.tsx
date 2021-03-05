@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface CrownIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Crown = ({ title, desc, ...rest }: CrownIconProperties): ReactElement => (
+const CrownIcon = ({ title, desc, ...rest }: CrownIconProperties): ReactElement => (
   <Icon viewBox="0 0 34 23" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -15,8 +15,8 @@ const Crown = ({ title, desc, ...rest }: CrownIconProperties): ReactElement => (
   </Icon>
 )
 
-Crown.defaultProps = {
+CrownIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Crown
+export default CrownIcon

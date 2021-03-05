@@ -1,3 +1,3 @@
-import PlusOutline from './plus-outline'
+import PlusOutlineIcon from './plus-outline'
 
-export default PlusOutline
+export default PlusOutlineIcon

@@ -1,3 +1,3 @@
-import TicketStar from './ticket-star'
+import TicketStarIcon from './ticket-star'
 
-export default TicketStar
+export default TicketStarIcon

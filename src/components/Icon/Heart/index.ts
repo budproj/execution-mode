@@ -1,3 +1,3 @@
-import Heart from './heart'
+import HeartIcon from './heart'
 
-export default Heart
+export default HeartIcon

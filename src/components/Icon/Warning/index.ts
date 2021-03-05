@@ -1,3 +1,3 @@
-import Warning from './warning'
+import WarningIcon from './warning'
 
-export default Warning
+export default WarningIcon

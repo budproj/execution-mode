@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface FolderIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Folder = ({ title, desc, ...rest }: FolderIconProperties): ReactElement => (
+const FolderIcon = ({ title, desc, ...rest }: FolderIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -21,8 +21,8 @@ const Folder = ({ title, desc, ...rest }: FolderIconProperties): ReactElement =>
   </Icon>
 )
 
-Folder.defaultProps = {
+FolderIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Folder
+export default FolderIcon

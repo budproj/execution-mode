@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface DiscoveryIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Discovery = ({ title, desc, ...rest }: DiscoveryIconProperties): ReactElement => (
+const DiscoveryIcon = ({ title, desc, ...rest }: DiscoveryIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Discovery = ({ title, desc, ...rest }: DiscoveryIconProperties): ReactElem
   </Icon>
 )
 
-Discovery.defaultProps = {
+DiscoveryIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Discovery
+export default DiscoveryIcon

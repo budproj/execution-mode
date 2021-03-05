@@ -1,3 +1,3 @@
-import Image from './image'
+import ImageIcon from './image'
 
-export default Image
+export default ImageIcon

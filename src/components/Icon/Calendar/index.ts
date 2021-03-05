@@ -1,3 +1,3 @@
-import Calendar from './calendar'
+import CalendarIcon from './calendar'
 
-export default Calendar
+export default CalendarIcon

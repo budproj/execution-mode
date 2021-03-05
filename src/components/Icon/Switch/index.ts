@@ -1,3 +1,3 @@
-import Switch from './switch'
+import SwitchIcon from './switch'
 
-export default Switch
+export default SwitchIcon

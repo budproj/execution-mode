@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface MessageIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Message = ({ title, desc, ...rest }: MessageIconProperties): ReactElement => (
+const MessageIcon = ({ title, desc, ...rest }: MessageIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Message = ({ title, desc, ...rest }: MessageIconProperties): ReactElement 
   </Icon>
 )
 
-Message.defaultProps = {
+MessageIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Message
+export default MessageIcon

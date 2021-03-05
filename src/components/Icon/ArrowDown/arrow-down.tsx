@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface ArrowDownIconProperties extends IconProps, AcessibleIconProperties {}
 
-const ArrowDown = ({ title, desc, ...rest }: ArrowDownIconProperties): ReactElement => (
+const ArrowDownIcon = ({ title, desc, ...rest }: ArrowDownIconProperties): ReactElement => (
   <Icon viewBox="0 0 26 33" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -13,9 +13,9 @@ const ArrowDown = ({ title, desc, ...rest }: ArrowDownIconProperties): ReactElem
   </Icon>
 )
 
-ArrowDown.defaultProps = {
+ArrowDownIcon.defaultProps = {
   fill: 'black',
   stroke: 'black',
 }
 
-export default ArrowDown
+export default ArrowDownIcon

@@ -1,3 +1,3 @@
-import Bookmark from './bookmark'
+import BookmarkIcon from './bookmark'
 
-export default Bookmark
+export default BookmarkIcon

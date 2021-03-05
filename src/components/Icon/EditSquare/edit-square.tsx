@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface EditSquareIconProperties extends IconProps, AcessibleIconProperties {}
 
-const EditSquare = ({ title, desc, ...rest }: EditSquareIconProperties): ReactElement => (
+const EditSquareIcon = ({ title, desc, ...rest }: EditSquareIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const EditSquare = ({ title, desc, ...rest }: EditSquareIconProperties): ReactEl
   </Icon>
 )
 
-EditSquare.defaultProps = {
+EditSquareIcon.defaultProps = {
   fill: 'black',
 }
 
-export default EditSquare
+export default EditSquareIcon

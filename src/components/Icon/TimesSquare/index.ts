@@ -1,3 +1,3 @@
-import TimesSquare from './times-square'
+import TimesSquareIcon from './times-square'
 
-export default TimesSquare
+export default TimesSquareIcon

@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface FlagIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Flag = ({ title, desc, ...rest }: FlagIconProperties): ReactElement => (
+const FlagIcon = ({ title, desc, ...rest }: FlagIconProperties): ReactElement => (
   <Icon viewBox="0 0 19 23" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -14,8 +14,8 @@ const Flag = ({ title, desc, ...rest }: FlagIconProperties): ReactElement => (
   </Icon>
 )
 
-Flag.defaultProps = {
+FlagIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Flag
+export default FlagIcon

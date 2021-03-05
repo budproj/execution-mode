@@ -1,3 +1,3 @@
-import Reorder from './reorder'
+import ReorderIcon from './reorder'
 
-export default Reorder
+export default ReorderIcon

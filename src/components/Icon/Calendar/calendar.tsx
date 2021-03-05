@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface CalendarIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Calendar = ({ title, desc, ...rest }: CalendarIconProperties): ReactElement => (
+const CalendarIcon = ({ title, desc, ...rest }: CalendarIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -23,8 +23,8 @@ const Calendar = ({ title, desc, ...rest }: CalendarIconProperties): ReactElemen
   </Icon>
 )
 
-Calendar.defaultProps = {
+CalendarIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Calendar
+export default CalendarIcon

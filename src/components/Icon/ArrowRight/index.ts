@@ -1,3 +1,3 @@
-import ArrowRight from './arrow-right'
+import ArrowRightIcon from './arrow-right'
 
-export default ArrowRight
+export default ArrowRightIcon

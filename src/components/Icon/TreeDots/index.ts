@@ -1,3 +1,3 @@
-import TreeDots from './tree-dots'
+import TreeDotsIcon from './tree-dots'
 
-export default TreeDots
+export default TreeDotsIcon

@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface ChevronUpIconProperties extends IconProps, AcessibleIconProperties {}
 
-const ChevronUp = ({ title, desc, ...rest }: ChevronUpIconProperties): ReactElement => (
+const ChevronUpIcon = ({ title, desc, ...rest }: ChevronUpIconProperties): ReactElement => (
   <Icon viewBox="0 0 8 6" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -22,9 +22,9 @@ const ChevronUp = ({ title, desc, ...rest }: ChevronUpIconProperties): ReactElem
   </Icon>
 )
 
-ChevronUp.defaultProps = {
+ChevronUpIcon.defaultProps = {
   fill: 'black',
   stroke: 'black',
 }
 
-export default ChevronUp
+export default ChevronUpIcon

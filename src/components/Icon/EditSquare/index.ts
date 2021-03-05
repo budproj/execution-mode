@@ -1,3 +1,3 @@
-import EditSquare from './edit-square'
+import EditSquareIcon from './edit-square'
 
-export default EditSquare
+export default EditSquareIcon

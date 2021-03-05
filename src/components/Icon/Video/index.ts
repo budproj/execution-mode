@@ -1,3 +1,3 @@
-import Video from './video'
+import VideoIcon from './video'
 
-export default Video
+export default VideoIcon

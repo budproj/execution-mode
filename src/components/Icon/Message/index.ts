@@ -1,3 +1,3 @@
-import Message from './message'
+import MessageIcon from './message'
 
-export default Message
+export default MessageIcon

@@ -1,3 +1,3 @@
-import Flag from './flag'
+import FlagIcon from './flag'
 
-export default Flag
+export default FlagIcon

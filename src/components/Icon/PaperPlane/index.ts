@@ -1,3 +1,3 @@
-import PaperPlane from './paper-plane'
+import PaperPlaneIcon from './paper-plane'
 
-export default PaperPlane
+export default PaperPlaneIcon

@@ -1,3 +1,3 @@
-import Document from './document'
+import DocumentIcon from './document'
 
-export default Document
+export default DocumentIcon

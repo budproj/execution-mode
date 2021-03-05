@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface DocumentIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Document = ({ title, desc, ...rest }: DocumentIconProperties): ReactElement => (
+const DocumentIcon = ({ title, desc, ...rest }: DocumentIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -21,8 +21,8 @@ const Document = ({ title, desc, ...rest }: DocumentIconProperties): ReactElemen
   </Icon>
 )
 
-Document.defaultProps = {
+DocumentIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Document
+export default DocumentIcon

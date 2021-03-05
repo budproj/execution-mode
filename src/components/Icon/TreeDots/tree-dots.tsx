@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface TreeDotsIconProperties extends IconProps, AcessibleIconProperties {}
 
-const TreeDots = ({ title, desc, ...rest }: TreeDotsIconProperties): ReactElement => (
+const TreeDotsIcon = ({ title, desc, ...rest }: TreeDotsIconProperties): ReactElement => (
   <Icon viewBox="0 0 18 4" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -15,8 +15,8 @@ const TreeDots = ({ title, desc, ...rest }: TreeDotsIconProperties): ReactElemen
   </Icon>
 )
 
-TreeDots.defaultProps = {
+TreeDotsIcon.defaultProps = {
   fill: 'black',
 }
 
-export default TreeDots
+export default TreeDotsIcon

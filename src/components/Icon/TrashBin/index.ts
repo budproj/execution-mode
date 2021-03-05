@@ -1,3 +1,3 @@
-import TrashBin from './trash-bin'
+import TrashBinIcon from './trash-bin'
 
-export default TrashBin
+export default TrashBinIcon

@@ -1,3 +1,3 @@
-import Activity from './activity'
+import ActivityIcon from './activity'
 
-export default Activity
+export default ActivityIcon

@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface GearIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Gear = ({ title, desc, ...rest }: GearIconProperties): ReactElement => (
+const GearIcon = ({ title, desc, ...rest }: GearIconProperties): ReactElement => (
   <Icon viewBox="0 0 20 20" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Gear = ({ title, desc, ...rest }: GearIconProperties): ReactElement => (
   </Icon>
 )
 
-Gear.defaultProps = {
+GearIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Gear
+export default GearIcon

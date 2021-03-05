@@ -1,3 +1,3 @@
-import CalendarOutline from './calendar-outline'
+import CalendarOutlineIcon from './calendar-outline'
 
-export default CalendarOutline
+export default CalendarOutlineIcon

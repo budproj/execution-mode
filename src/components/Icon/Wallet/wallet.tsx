@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface WalletIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Wallet = ({ title, desc, ...rest }: WalletIconProperties): ReactElement => (
+const WalletIcon = ({ title, desc, ...rest }: WalletIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -22,8 +22,8 @@ const Wallet = ({ title, desc, ...rest }: WalletIconProperties): ReactElement =>
   </Icon>
 )
 
-Wallet.defaultProps = {
+WalletIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Wallet
+export default WalletIcon

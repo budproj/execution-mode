@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface VoiceIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Voice = ({ title, desc, ...rest }: VoiceIconProperties): ReactElement => (
+const VoiceIcon = ({ title, desc, ...rest }: VoiceIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const Voice = ({ title, desc, ...rest }: VoiceIconProperties): ReactElement => (
   </Icon>
 )
 
-Voice.defaultProps = {
+VoiceIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Voice
+export default VoiceIcon

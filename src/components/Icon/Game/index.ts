@@ -1,3 +1,3 @@
-import Game from './game'
+import GameIcon from './game'
 
-export default Game
+export default GameIcon

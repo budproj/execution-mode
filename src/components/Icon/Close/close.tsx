@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface CloseIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Close = ({ title, desc, ...rest }: CloseIconProperties): ReactElement => (
+const CloseIcon = ({ title, desc, ...rest }: CloseIconProperties): ReactElement => (
   <Icon viewBox="0 0 13 13" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -13,8 +13,8 @@ const Close = ({ title, desc, ...rest }: CloseIconProperties): ReactElement => (
   </Icon>
 )
 
-Close.defaultProps = {
+CloseIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Close
+export default CloseIcon

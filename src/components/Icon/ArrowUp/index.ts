@@ -1,3 +1,3 @@
-import ArrowUp from './arrow-up'
+import ArrowUpIcon from './arrow-up'
 
-export default ArrowUp
+export default ArrowUpIcon

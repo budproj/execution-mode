@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface ImageIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Image = ({ title, desc, ...rest }: ImageIconProperties): ReactElement => (
+const ImageIcon = ({ title, desc, ...rest }: ImageIconProperties): ReactElement => (
   <Icon viewBox="0 0 31 31" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -15,8 +15,8 @@ const Image = ({ title, desc, ...rest }: ImageIconProperties): ReactElement => (
   </Icon>
 )
 
-Image.defaultProps = {
+ImageIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Image
+export default ImageIcon

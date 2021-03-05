@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface PlusOutlineIconProperties extends IconProps, AcessibleIconProperties {}
 
-const PlusOutline = ({ title, desc, ...rest }: PlusOutlineIconProperties): ReactElement => (
+const PlusOutlineIcon = ({ title, desc, ...rest }: PlusOutlineIconProperties): ReactElement => (
   <Icon viewBox="0 0 20 20" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -19,9 +19,9 @@ const PlusOutline = ({ title, desc, ...rest }: PlusOutlineIconProperties): React
   </Icon>
 )
 
-PlusOutline.defaultProps = {
+PlusOutlineIcon.defaultProps = {
   fill: 'black',
   stroke: 'black,',
 }
 
-export default PlusOutline
+export default PlusOutlineIcon

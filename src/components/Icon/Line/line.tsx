@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface LineIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Line = ({ title, desc, ...rest }: LineIconProperties): ReactElement => (
+const LineIcon = ({ title, desc, ...rest }: LineIconProperties): ReactElement => (
   <Icon viewBox="0 0 29 4" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -13,8 +13,8 @@ const Line = ({ title, desc, ...rest }: LineIconProperties): ReactElement => (
   </Icon>
 )
 
-Line.defaultProps = {
+LineIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Line
+export default LineIcon

@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface TrashBinIconProperties extends IconProps, AcessibleIconProperties {}
 
-const TrashBin = ({ title, desc, ...rest }: TrashBinIconProperties): ReactElement => (
+const TrashBinIcon = ({ title, desc, ...rest }: TrashBinIconProperties): ReactElement => (
   <Icon viewBox="0 0 24 24" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -17,8 +17,8 @@ const TrashBin = ({ title, desc, ...rest }: TrashBinIconProperties): ReactElemen
   </Icon>
 )
 
-TrashBin.defaultProps = {
+TrashBinIcon.defaultProps = {
   fill: 'black',
 }
 
-export default TrashBin
+export default TrashBinIcon

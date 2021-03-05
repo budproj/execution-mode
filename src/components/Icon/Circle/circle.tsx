@@ -5,7 +5,7 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 
 export interface CircleIconProperties extends IconProps, AcessibleIconProperties {}
 
-const Circle = ({ title, desc, ...rest }: CircleIconProperties): ReactElement => (
+const CircleIcon = ({ title, desc, ...rest }: CircleIconProperties): ReactElement => (
   <Icon viewBox="0 0 200 200" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
@@ -13,8 +13,8 @@ const Circle = ({ title, desc, ...rest }: CircleIconProperties): ReactElement =>
   </Icon>
 )
 
-Circle.defaultProps = {
+CircleIcon.defaultProps = {
   fill: 'black',
 }
 
-export default Circle
+export default CircleIcon

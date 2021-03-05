@@ -1,3 +1,3 @@
-import ArrowDown from './arrow-down'
+import ArrowDownIcon from './arrow-down'
 
-export default ArrowDown
+export default ArrowDownIcon
