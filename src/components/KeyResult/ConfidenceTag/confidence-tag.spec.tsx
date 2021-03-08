@@ -21,7 +21,7 @@ describe('component render', () => {
     const textComponent = wrapper.find('Text').last()
 
     expect(textComponent.text()).toEqual(
-      'Existe um risco de não alcançarmos, mas seguimos otimistas',
+      'Existe um risco de não alcançarmos o resultado-chave, mas seguimos otimistas',
     )
   })
 })

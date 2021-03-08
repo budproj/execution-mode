@@ -32,7 +32,7 @@ describe('component interactions', () => {
     const menuButton = wrapper.find('MenuButton')
     menuButton.simulate('mouseEnter')
 
-    const penIcon = wrapper.find('Pen')
+    const penIcon = wrapper.find('PenIcon')
 
     expect(penIcon.prop('opacity')).toEqual(1)
   })
@@ -48,7 +48,7 @@ describe('component interactions', () => {
     menuButton.simulate('mouseEnter')
     menuButton.simulate('mouseLeave')
 
-    const penIcon = wrapper.find('Pen')
+    const penIcon = wrapper.find('PenIcon')
 
     expect(penIcon.prop('opacity')).toEqual(0)
   })
@@ -93,6 +93,6 @@ describe('fallback value', () => {
 
     const newMenuButton = wrapper.find('MenuButton')
 
-    expect(newMenuButton.text()).toEqual(`${customFallback}<Pen />`)
+    expect(newMenuButton.text()).toEqual(`${customFallback}<PenIcon />`)
   })
 })

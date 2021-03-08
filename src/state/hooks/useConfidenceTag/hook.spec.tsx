@@ -52,7 +52,7 @@ describe('confidence tag getter', () => {
         short: 'Médio',
         long: 'Média Confiança',
         icon: 'Um círculo amarelo, indicando que a confiançá é média',
-        helper: 'Existe um risco de não alcançarmos, mas seguimos otimistas',
+        helper: 'Existe um risco de não alcançarmos o resultado-chave, mas seguimos otimistas',
       },
       color: {
         scheme: 'yellow',
@@ -76,7 +76,7 @@ describe('confidence tag getter', () => {
         short: 'Baixo',
         long: 'Baixa Confiança',
         icon: 'Um círculo vermelho, indicando que a confiança está baixa',
-        helper: 'Não vamos alcançar o resultado a não ser que a gente mude nossos planos',
+        helper: 'Não vamos alcançar o resultado a não ser que a gente mude nossa abordagem',
       },
       color: {
         scheme: 'red',
