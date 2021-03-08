@@ -52,7 +52,7 @@ const UserProfileCard = ({ userID }: UserProfileCardProperties) => {
         )}
       </Flex>
 
-      <UserTeamTags userID={userID} isLoaded={isUserLoaded} />
+      <UserTeamTags userID={userID} max={2} isLoaded={isUserLoaded} />
 
       <AspectRatio ratio={1} maxW="full">
         <UserAvatar
