@@ -39,8 +39,10 @@ const SettingsAccountBodySocialMedia = ({
     },
   )
 
-  const handleValueUpdate = (key: keyof User) => async (value: string | string[]) => {
+  const handleValueUpdate = (key: keyof User) => async (value: string | string[] | null) => {
     if (user?.[key] === value) return
+    // eslint-disable-next-line unicorn/no-null
+    if (value === '') value = null
 
     const userData = {
       [key]: value,

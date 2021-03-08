@@ -41,13 +41,15 @@ const UserProfileCard = ({ userID }: UserProfileCardProperties) => {
 
         {user?.linkedInProfileAddress && (
           <Link href={user?.linkedInProfileAddress}>
-            <LinkedInIcon
-              desc={intl.formatMessage(messages.linkedInIconDesc)}
-              fill="gray.100"
-              cursor="pointer"
-              transition=".3s fill ease-out"
-              _hover={{ fill: 'brand.500' }}
-            />
+            <a target="_blank">
+              <LinkedInIcon
+                desc={intl.formatMessage(messages.linkedInIconDesc)}
+                fill="gray.100"
+                cursor="pointer"
+                transition=".3s fill ease-out"
+                _hover={{ fill: 'brand.500' }}
+              />
+            </a>
           </Link>
         )}
       </Flex>

@@ -165,4 +165,77 @@ describe('mutations', () => {
 
     expect(spy.called).toEqual(true)
   })
+
+  describe('remove all content', () => {
+    it('should be able to remove the linkedIn address', async () => {
+      const fakeUserID = faker.random.uuid()
+      const fakeUserLinkedInAddress = faker.internet.url()
+      const newFakeUserLinkedInAddress = ''
+      const spy = sinon.spy()
+      const fakeUser = {
+        ...defaultUser,
+        id: fakeUserID,
+        linkedInProfileAddress: fakeUserLinkedInAddress,
+      }
+      const response = {
+        id: fakeUser.id,
+        linkedInProfileAddress: fakeUser.linkedInProfileAddress,
+      }
+
+      const mocks = [
+        {
+          request: {
+            query: queries.UPDATE_USER_SOCIAL_MEDIA,
+            variables: {
+              userID: fakeUserID,
+              userData: {
+                // eslint-disable-next-line unicorn/no-null
+                linkedInProfileAddress: null,
+              },
+            },
+          },
+          result: () => {
+            spy()
+            return {
+              data: {
+                updateUser: response,
+              },
+            }
+          },
+        },
+      ]
+
+      const wrapper = buildWrapper(fakeUser, mocks)
+
+      await waitForComponentToPaint(wrapper)
+      wrapper.update()
+
+      const editablePreview = wrapper
+        .find('EditableInputField')
+        .at(0)
+        .find('Editable')
+        .find('EditablePreview')
+      editablePreview.simulate('focus')
+
+      const editableInput = wrapper
+        .find('EditableInputField')
+        .at(0)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editableInput.simulate('change', { target: { value: newFakeUserLinkedInAddress } })
+
+      const editable = wrapper
+        .find('EditableInputField')
+        .at(0)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editable.simulate('blur')
+
+      await waitForComponentToPaint(wrapper)
+
+      expect(spy.called).toEqual(true)
+    })
+  })
 })
