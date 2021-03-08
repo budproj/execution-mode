@@ -133,7 +133,7 @@ describe('info rendering', () => {
     await waitForComponentToPaint(wrapper)
     wrapper.update()
 
-    const teams = wrapper.find('UserTeamTags').find('Stack').find('TeamTag')
+    const teams = wrapper.find('UserTeamTags').find('TeamTag')
 
     teams.map((team, index) => {
       const relatedTeam = fakeUserTeams[index]
