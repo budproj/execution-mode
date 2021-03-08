@@ -210,7 +210,7 @@ describe('info rendering', () => {
     await waitForComponentToPaint(wrapper)
     wrapper.update()
 
-    const teams = wrapper.find('UserTeamTags').find('Stack').find('TeamTag')
+    const teams = wrapper.find('UserTeamTags').find('TeamTag')
 
     teams.map((team, index) => {
       const relatedTeam = fakeUserTeams[index]
@@ -757,5 +757,373 @@ describe('mutations', () => {
     await waitForComponentToPaint(wrapper)
 
     expect(spy.called).toEqual(true)
+  })
+
+  describe('remove all content', () => {
+    it('should be able to clear the user first name', async () => {
+      const fakeUserID = faker.random.uuid()
+      const fakeUserData = faker.name.firstName()
+      const newFakeUserData = ''
+      const spy = sinon.spy()
+      const fakeUser = {
+        ...defaultUser,
+        id: fakeUserID,
+        firstName: fakeUserData,
+      }
+      const response = {
+        id: fakeUser.id,
+        firstName: fakeUser.firstName,
+        lastName: fakeUser.lastName,
+        fullName: fakeUser.fullName,
+        nickname: fakeUser.nickname,
+        role: fakeUser.role,
+        gender: fakeUser.gender,
+        about: fakeUser.about,
+      }
+
+      const mocks = [
+        {
+          request: {
+            query: queries.UPDATE_USER_INFORMATION,
+            variables: {
+              userID: fakeUserID,
+              userData: {
+                // eslint-disable-next-line unicorn/no-null
+                firstName: null,
+              },
+            },
+          },
+          result: () => {
+            spy()
+            return {
+              data: {
+                updateUser: response,
+              },
+            }
+          },
+        },
+      ]
+
+      const wrapper = buildWrapper(fakeUser, mocks)
+
+      await waitForComponentToPaint(wrapper)
+      wrapper.update()
+
+      const editablePreview = wrapper
+        .find('EditableInputField')
+        .at(0)
+        .find('Editable')
+        .find('EditablePreview')
+      editablePreview.simulate('focus')
+
+      const editableInput = wrapper
+        .find('EditableInputField')
+        .at(0)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editableInput.simulate('change', { target: { value: newFakeUserData } })
+
+      const editable = wrapper
+        .find('EditableInputField')
+        .at(0)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editable.simulate('blur')
+
+      await waitForComponentToPaint(wrapper)
+
+      expect(spy.called).toEqual(true)
+    })
+
+    it('should be able to clear the user last name', async () => {
+      const fakeUserID = faker.random.uuid()
+      const fakeUserData = faker.name.lastName()
+      const newFakeUserData = ''
+      const spy = sinon.spy()
+      const fakeUser = {
+        ...defaultUser,
+        id: fakeUserID,
+        lastName: fakeUserData,
+      }
+      const response = {
+        id: fakeUser.id,
+        firstName: fakeUser.firstName,
+        lastName: fakeUser.lastName,
+        fullName: fakeUser.fullName,
+        nickname: fakeUser.nickname,
+        role: fakeUser.role,
+        gender: fakeUser.gender,
+        about: fakeUser.about,
+      }
+
+      const mocks = [
+        {
+          request: {
+            query: queries.UPDATE_USER_INFORMATION,
+            variables: {
+              userID: fakeUserID,
+              userData: {
+                // eslint-disable-next-line unicorn/no-null
+                lastName: null,
+              },
+            },
+          },
+          result: () => {
+            spy()
+            return {
+              data: {
+                updateUser: response,
+              },
+            }
+          },
+        },
+      ]
+
+      const wrapper = buildWrapper(fakeUser, mocks)
+
+      await waitForComponentToPaint(wrapper)
+      wrapper.update()
+
+      const editablePreview = wrapper
+        .find('EditableInputField')
+        .at(1)
+        .find('Editable')
+        .find('EditablePreview')
+      editablePreview.simulate('focus')
+
+      const editableInput = wrapper
+        .find('EditableInputField')
+        .at(1)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editableInput.simulate('change', { target: { value: newFakeUserData } })
+
+      const editable = wrapper
+        .find('EditableInputField')
+        .at(1)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editable.simulate('blur')
+
+      await waitForComponentToPaint(wrapper)
+
+      expect(spy.called).toEqual(true)
+    })
+
+    it('should be able to clear the user nickname', async () => {
+      const fakeUserID = faker.random.uuid()
+      const fakeUserData = faker.internet.userName()
+      const newFakeUserData = ''
+      const spy = sinon.spy()
+      const fakeUser = {
+        ...defaultUser,
+        id: fakeUserID,
+        nickname: fakeUserData,
+      }
+      const response = {
+        id: fakeUser.id,
+        firstName: fakeUser.firstName,
+        lastName: fakeUser.lastName,
+        fullName: fakeUser.fullName,
+        nickname: fakeUser.nickname,
+        role: fakeUser.role,
+        gender: fakeUser.gender,
+        about: fakeUser.about,
+      }
+
+      const mocks = [
+        {
+          request: {
+            query: queries.UPDATE_USER_INFORMATION,
+            variables: {
+              userID: fakeUserID,
+              userData: {
+                // eslint-disable-next-line unicorn/no-null
+                nickname: null,
+              },
+            },
+          },
+          result: () => {
+            spy()
+            return {
+              data: {
+                updateUser: response,
+              },
+            }
+          },
+        },
+      ]
+
+      const wrapper = buildWrapper(fakeUser, mocks)
+
+      await waitForComponentToPaint(wrapper)
+      wrapper.update()
+
+      const editablePreview = wrapper
+        .find('EditableInputField')
+        .at(2)
+        .find('Editable')
+        .find('EditablePreview')
+      editablePreview.simulate('focus')
+
+      const editableInput = wrapper
+        .find('EditableInputField')
+        .at(2)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editableInput.simulate('change', { target: { value: newFakeUserData } })
+
+      const editable = wrapper
+        .find('EditableInputField')
+        .at(2)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editable.simulate('blur')
+
+      await waitForComponentToPaint(wrapper)
+
+      expect(spy.called).toEqual(true)
+    })
+
+    it('should be able to clear the user role', async () => {
+      const fakeUserID = faker.random.uuid()
+      const fakeUserData = faker.name.jobTitle()
+      const newFakeUserData = ''
+      const spy = sinon.spy()
+      const fakeUser = {
+        ...defaultUser,
+        id: fakeUserID,
+        role: fakeUserData,
+      }
+      const response = {
+        id: fakeUser.id,
+        firstName: fakeUser.firstName,
+        lastName: fakeUser.lastName,
+        fullName: fakeUser.fullName,
+        nickname: fakeUser.nickname,
+        role: fakeUser.role,
+        gender: fakeUser.gender,
+        about: fakeUser.about,
+      }
+
+      const mocks = [
+        {
+          request: {
+            query: queries.UPDATE_USER_INFORMATION,
+            variables: {
+              userID: fakeUserID,
+              userData: {
+                // eslint-disable-next-line unicorn/no-null
+                role: null,
+              },
+            },
+          },
+          result: () => {
+            spy()
+            return {
+              data: {
+                updateUser: response,
+              },
+            }
+          },
+        },
+      ]
+
+      const wrapper = buildWrapper(fakeUser, mocks)
+
+      await waitForComponentToPaint(wrapper)
+      wrapper.update()
+
+      const editablePreview = wrapper
+        .find('EditableInputField')
+        .at(3)
+        .find('Editable')
+        .find('EditablePreview')
+      editablePreview.simulate('focus')
+
+      const editableInput = wrapper
+        .find('EditableInputField')
+        .at(3)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editableInput.simulate('change', { target: { value: newFakeUserData } })
+
+      const editable = wrapper
+        .find('EditableInputField')
+        .at(3)
+        .find('Editable')
+        .find('EditableInput')
+        .find('input')
+      editable.simulate('blur')
+
+      await waitForComponentToPaint(wrapper)
+
+      expect(spy.called).toEqual(true)
+    })
+
+    it('should be able to clear the user about', async () => {
+      const fakeUserID = faker.random.uuid()
+      const fakeUserData = faker.name.jobTitle()
+      const newFakeUserData = ''
+      const spy = sinon.spy()
+      const fakeUser = {
+        ...defaultUser,
+        id: fakeUserID,
+        about: fakeUserData,
+      }
+      const response = {
+        id: fakeUser.id,
+        firstName: fakeUser.firstName,
+        lastName: fakeUser.lastName,
+        fullName: fakeUser.fullName,
+        nickname: fakeUser.nickname,
+        role: fakeUser.role,
+        gender: fakeUser.gender,
+        about: fakeUser.about,
+      }
+
+      const mocks = [
+        {
+          request: {
+            query: queries.UPDATE_USER_INFORMATION,
+            variables: {
+              userID: fakeUserID,
+              userData: {
+                // eslint-disable-next-line unicorn/no-null
+                about: null,
+              },
+            },
+          },
+          result: () => {
+            spy()
+            return {
+              data: {
+                updateUser: response,
+              },
+            }
+          },
+        },
+      ]
+
+      const wrapper = buildWrapper(fakeUser, mocks)
+
+      await waitForComponentToPaint(wrapper)
+      wrapper.update()
+
+      const editableTextarea = wrapper.find('EditableTextAreaValue')
+      const function_ = editableTextarea.prop('onBlur')
+      if (function_) function_({ target: { value: newFakeUserData } } as any)
+
+      await waitForComponentToPaint(wrapper)
+
+      expect(spy.called).toEqual(true)
+    })
   })
 })

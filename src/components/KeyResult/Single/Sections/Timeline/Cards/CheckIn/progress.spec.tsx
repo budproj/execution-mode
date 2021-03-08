@@ -17,7 +17,7 @@ describe('component expectations', () => {
       <KeyResultSectionTimelineCardCheckInProgress progress={progress} parent={parent} />,
     )
 
-    const arrow = result.find('ArrowRightLong')
+    const arrow = result.find('ArrowRightLongIcon')
 
     expect(arrow.length).toEqual(1)
   })
@@ -50,7 +50,7 @@ describe('component expectations', () => {
       <KeyResultSectionTimelineCardCheckInProgress progress={progress} parent={parent} />,
     )
 
-    const arrow = result.find('ArrowRightLong')
+    const arrow = result.find('ArrowRightLongIcon')
 
     expect(arrow.length).toEqual(0)
   })

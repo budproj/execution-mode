@@ -1,3 +1,4 @@
+import { ThemeProvider } from '@chakra-ui/react'
 import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
@@ -9,6 +10,14 @@ import { User } from 'src/components/User/types'
 import { userAtomFamily } from 'src/state/recoil/user'
 
 import SettingsAccountHeader from './header'
+
+const fakeTheme = {
+  colors: {
+    black: {
+      600: faker.random.word(),
+    },
+  },
+}
 
 const defaultUser = {
   id: faker.random.uuid(),
@@ -36,7 +45,9 @@ const buildWrapper = (fakeUser: Partial<User>) => {
 
   const wrapper = enzyme.mount(
     <RecoilRoot initializeState={initializeState}>
-      <SettingsAccountHeader isLoaded userID={fakeUser.id} />
+      <ThemeProvider theme={fakeTheme}>
+        <SettingsAccountHeader isLoaded userID={fakeUser.id} />
+      </ThemeProvider>
     </RecoilRoot>,
   )
 
@@ -122,7 +133,7 @@ describe('info rendering', () => {
     await waitForComponentToPaint(wrapper)
     wrapper.update()
 
-    const teams = wrapper.find('UserTeamTags').find('Stack').find('TeamTag')
+    const teams = wrapper.find('UserTeamTags').find('TeamTag')
 
     teams.map((team, index) => {
       const relatedTeam = fakeUserTeams[index]

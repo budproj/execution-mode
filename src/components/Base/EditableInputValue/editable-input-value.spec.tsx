@@ -22,7 +22,7 @@ describe('component interactions', () => {
     const stack = wrapper.find('Stack')
     stack.simulate('mouseEnter')
 
-    const penIcon = wrapper.find('Pen')
+    const penIcon = wrapper.find('PenIcon')
 
     expect(penIcon.prop('opacity')).toEqual(1)
   })
@@ -34,7 +34,7 @@ describe('component interactions', () => {
     stack.simulate('mouseEnter')
     stack.simulate('mouseLeave')
 
-    const penIcon = wrapper.find('Pen')
+    const penIcon = wrapper.find('PenIcon')
 
     expect(penIcon.prop('opacity')).toEqual(0)
   })

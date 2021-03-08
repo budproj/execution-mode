@@ -91,7 +91,7 @@ describe('conditional renderization', () => {
       </RecoilRoot>,
     )
 
-    const icon = wrapper.find('ArrowUp')
+    const icon = wrapper.find('ArrowUpIcon')
 
     expect(icon.length).toEqual(1)
   })
@@ -113,7 +113,7 @@ describe('conditional renderization', () => {
       </RecoilRoot>,
     )
 
-    const icon = wrapper.find('ArrowDown')
+    const icon = wrapper.find('ArrowDownIcon')
 
     expect(icon.length).toEqual(1)
   })
@@ -135,7 +135,7 @@ describe('conditional renderization', () => {
       </RecoilRoot>,
     )
 
-    const icon = wrapper.find('Line')
+    const icon = wrapper.find('LineIcon')
 
     expect(icon.length).toEqual(1)
   })
@@ -157,7 +157,7 @@ describe('conditional renderization', () => {
       </RecoilRoot>,
     )
 
-    const icon = wrapper.find('ArrowUp')
+    const icon = wrapper.find('ArrowUpIcon')
 
     expect(icon.prop('fill')).toEqual('green.500')
     expect(icon.prop('stroke')).toEqual('green.500')
@@ -180,7 +180,7 @@ describe('conditional renderization', () => {
       </RecoilRoot>,
     )
 
-    const icon = wrapper.find('ArrowDown')
+    const icon = wrapper.find('ArrowDownIcon')
 
     expect(icon.prop('fill')).toEqual('red.500')
     expect(icon.prop('stroke')).toEqual('red.500')
@@ -203,7 +203,7 @@ describe('conditional renderization', () => {
       </RecoilRoot>,
     )
 
-    const icon = wrapper.find('Line')
+    const icon = wrapper.find('LineIcon')
 
     expect(icon.prop('fill')).toEqual('gray.500')
     expect(icon.prop('stroke')).toEqual('gray.500')

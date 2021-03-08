@@ -11,14 +11,16 @@ import UserTeamTagsSkeleton from './skeleton'
 export interface UserTeamTagsProperties {
   userID?: User['id']
   isLoaded?: boolean
+  max?: number
 }
 
-const UserTeamTags = ({ userID, isLoaded }: UserTeamTagsProperties) => {
+const UserTeamTags = ({ userID, isLoaded, max }: UserTeamTagsProperties) => {
   const user = useRecoilValue(userAtomFamily(userID))
+  const teams = user?.teams?.slice(0, max)
 
-  return isLoaded ? (
+  return isLoaded && teams ? (
     <Wrap spacing={2}>
-      {user?.teams?.map((team) => (
+      {teams.map((team) => (
         <WrapItem key={team.id}>
           <TeamTag>{team.name}</TeamTag>
         </WrapItem>

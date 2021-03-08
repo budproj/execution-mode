@@ -41,18 +41,20 @@ const UserProfileCard = ({ userID }: UserProfileCardProperties) => {
 
         {user?.linkedInProfileAddress && (
           <Link href={user?.linkedInProfileAddress}>
-            <LinkedInIcon
-              desc={intl.formatMessage(messages.linkedInIconDesc)}
-              fill="gray.100"
-              cursor="pointer"
-              transition=".3s fill ease-out"
-              _hover={{ fill: 'brand.500' }}
-            />
+            <a target="_blank">
+              <LinkedInIcon
+                desc={intl.formatMessage(messages.linkedInIconDesc)}
+                fill="gray.100"
+                cursor="pointer"
+                transition=".3s fill ease-out"
+                _hover={{ fill: 'brand.500' }}
+              />
+            </a>
           </Link>
         )}
       </Flex>
 
-      <UserTeamTags userID={userID} isLoaded={isUserLoaded} />
+      <UserTeamTags userID={userID} max={2} isLoaded={isUserLoaded} />
 
       <AspectRatio ratio={1} maxW="full">
         <UserAvatar
