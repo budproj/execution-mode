@@ -13,6 +13,7 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import meAtom from 'src/state/recoil/user/me'
 
 import queries from './queries.gql'
+import KeyResultOwnedByUserSkeleton from './skeleton'
 
 export interface KeyResultOwnedByUserProperties {
   onLineClick?: (id: KeyResult['id']) => void
@@ -45,10 +46,14 @@ const KeyResultOwnedByUser = ({ onLineClick }: KeyResultOwnedByUserProperties) =
   )
 
   return (
-    <Stack direction="column">
-      {data?.cycles.map((cycle) => (
-        <KeyResultCycleList key={cycle.id} id={cycle.id} onLineClick={onLineClick} />
-      ))}
+    <Stack direction="column" gridGap={8}>
+      {data ? (
+        data.cycles.map((cycle) => (
+          <KeyResultCycleList key={cycle.id} id={cycle.id} onLineClick={onLineClick} />
+        ))
+      ) : (
+        <KeyResultOwnedByUserSkeleton />
+      )}
     </Stack>
   )
 }

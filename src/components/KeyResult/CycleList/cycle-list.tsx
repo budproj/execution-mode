@@ -33,7 +33,7 @@ const KeyResultCycleList = ({ id, onLineClick }: KeyResultCycleListProperties) =
   }, [cycle?.cadence, setCadenceValue])
 
   return (
-    <Stack direction="column" gridGap={4}>
+    <Stack direction="column" gridGap={8}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 300, 21)}>
         <Heading as="h2" fontSize="md" color="gray.500" fontWeight={700} textTransform="uppercase">
           {intl.formatMessage(messages.title, {
