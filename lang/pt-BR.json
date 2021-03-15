@@ -87,6 +87,10 @@
     "defaultMessage": "Nenhuma atualização recente",
     "description": "This label is displayed if we do not have any update date to display"
   },
+  "1f25lH": {
+    "defaultMessage": "{prefix} {cycle}",
+    "description": "This message displays the cycle name with a given prefix"
+  },
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
@@ -682,6 +686,10 @@
   "goSPM7": {
     "defaultMessage": "Você excluiu um {type}",
     "description": "This text is displayed as the alert title, explaining what resource the user removed"
+  },
+  "gu4aCE": {
+    "defaultMessage": "Anual",
+    "description": "This text is used as prefix for our yearly cadences"
   },
   "h4sP/q": {
     "defaultMessage": "Minha conta",

@@ -37,6 +37,7 @@ const KeyResultListBodyColumnKeyResult = ({
       borderRight={withRightBorder ? 1 : 0}
       borderColor={borderColor}
       borderStyle="solid"
+      pr={2}
     >
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
