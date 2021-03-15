@@ -32,33 +32,34 @@ type Permissions {
   keyResultCustomList: Policy!
 }
 
-"""
-A view created by an user that represents a custom key result ranking for a given binding
-"""
-type KeyResultCustomList implements EntityObject {
+"""A report that records new progress in a given key result"""
+type KeyResultCheckIn implements EntityObject {
   """The ID of this entity"""
   id: ID!
   policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
+  value: Float!
+  valueIncrease: Float!
 
-  """The creation date of this view"""
+  """The reported confidence in this check-in"""
+  confidence: Int!
+  progress: Float!
+  progressIncrease: Float!
+  confidenceIncrease: Int!
+
+  """The creation date of the report"""
   createdAt: DateTime!
 
-  """The last update date of this view"""
-  updatedAt: DateTime!
+  """The key result ID that this report is related to"""
+  keyResultId: ID!
+  keyResult: KeyResult!
 
-  """The ID of the uswer that owns this view"""
+  """The user ID that owns this report"""
   userId: ID!
   user: User!
 
-  """The title of the key result view"""
-  title: String
-
-  """An anchor between this view and a fixed tab in our applications"""
-  binding: String
-
-  """Ordered list of key result IDs"""
-  rank: [ID!]
-  keyResults: [KeyResult!]
+  """The comment added in the report"""
+  comment: String
+  parent: KeyResultCheckIn
 }
 
 interface EntityObject {
@@ -97,177 +98,13 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-"""
-User is an entity inside a given root team (a.k.a. company). It is associated with many teams, progress reports, and others.
-"""
-type User implements EntityObject {
-  """The ID of this entity"""
-  id: ID!
-  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
-
-  """The name of the user"""
-  firstName: String!
-  fullName: String!
-
-  """The sub field in Auth0 (their ID)"""
-  authzSub: String!
-
-  """The creation date of the user"""
-  createdAt: DateTime!
-
-  """The last update date of this user"""
-  updatedAt: DateTime!
-
-  """The last name of the user"""
-  lastName: String
-
-  """The gender of the user"""
-  gender: String
-
-  """The user role in the company"""
-  role: String
-
-  """The picture of the user"""
-  picture: String
-
-  """The custom nickname that user wants to be called"""
-  nickname: String
-
-  """
-  A description for that user. A more detailed information where the user tells about her/himself
-  """
-  about: String
-
-  """The URL for the user's LinkedIn profile"""
-  linkedInProfileAddress: String
-  companies(limit: Int): [Team!]
-  teams: [Team!]
-  ownedTeams: [Team!]
-  objectives: [Objective!]
-  keyResults: [KeyResult!]
-  keyResultCustomLists: [KeyResultCustomList!]
-  keyResultCheckIns: [KeyResultCheckIn!]
-}
-
-"""A comment in a given key result"""
-type KeyResultComment implements EntityObject {
-  """The ID of this entity"""
-  id: ID!
-  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
-
-  """The text of the comment"""
-  text: String!
-
-  """The creation date of the comment"""
-  createdAt: DateTime!
-
-  """The last update date of the comment"""
-  updatedAt: DateTime!
-
-  """The key result ID that this comment is related to"""
-  keyResultId: ID!
-  keyResult: KeyResult!
-
-  """The user ID that owns this comment"""
-  userId: ID!
-  user: User!
-}
-
-"""The delete result from a delete mutation for key result comments"""
-type KeyResultCommentDeleteResult implements DeleteResultObject {
+"""The delete result from a delete mutation for key result check-ins"""
+type KeyResultCheckInDeleteResult implements DeleteResultObject {
   """The amount of entities removed"""
   affected: Int!
 }
 
 interface DeleteResultObject {
-  """The amount of entities removed"""
-  affected: Int!
-}
-
-"""A goal that is created for the team focusing in a given team objective"""
-type KeyResult implements EntityObject {
-  """The ID of this entity"""
-  id: ID!
-  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
-
-  """The title(name) of the key result"""
-  title: String!
-
-  """The initial value of the key result"""
-  initialValue: Float!
-
-  """The goal of the key result"""
-  goal: Float!
-
-  """The format of the key result"""
-  format: String!
-  timeline(offset: Int, limit: Int = 10): [TimelineEntryUnion!]!
-
-  """The creation date of the key result"""
-  createdAt: DateTime!
-
-  """The last update date of the key result"""
-  updatedAt: DateTime!
-
-  """The owner ID of the key result"""
-  ownerId: ID!
-  owner: User!
-
-  """The object ID that this key result belongs to"""
-  objectiveId: ID!
-  objective: Objective!
-
-  """The team ID that this key result belongs to"""
-  teamId: ID!
-  team: Team!
-
-  """The description explaining the key result"""
-  description: String
-  keyResultCheckIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
-  keyResultComments: [KeyResultComment!]!
-  latestKeyResultCheckIn: KeyResultCheckIn
-}
-
-union TimelineEntryUnion = KeyResultCheckIn | KeyResultComment
-
-"""Defines the order to return your results in a given query"""
-enum QUERY_ORDER {
-  DESC
-  ASC
-}
-
-"""A report that records new progress in a given key result"""
-type KeyResultCheckIn implements EntityObject {
-  """The ID of this entity"""
-  id: ID!
-  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
-  value: Float!
-  valueIncrease: Float!
-
-  """The reported confidence in this check-in"""
-  confidence: Int!
-  progress: Float!
-  progressIncrease: Float!
-  confidenceIncrease: Int!
-
-  """The creation date of the report"""
-  createdAt: DateTime!
-
-  """The key result ID that this report is related to"""
-  keyResultId: ID!
-  keyResult: KeyResult!
-
-  """The user ID that owns this report"""
-  userId: ID!
-  user: User!
-
-  """The comment added in the report"""
-  comment: String
-  parent: KeyResultCheckIn
-}
-
-"""The delete result from a delete mutation for key result check-ins"""
-type KeyResultCheckInDeleteResult implements DeleteResultObject {
   """The amount of entities removed"""
   affected: Int!
 }
@@ -342,8 +179,8 @@ type Team implements EntityObject {
   company: Team
 
   """The ID of the team that owns this team"""
-  parentTeamId: ID
-  parentTeam: Team
+  parentId: ID
+  parent: Team
   users: [User!]
   teams: [Team!]
   teamsRanking: [Team!]
@@ -355,6 +192,26 @@ type Team implements EntityObject {
 }
 
 """
+The current status of this cycle. By status we mean progress, confidence, and other reported values from it's objectives
+"""
+type CycleStatus implements Status {
+  """
+  The computed percentage current progress of this entity. The entity progress calculation vary based on the entity
+  """
+  progress: Float!
+
+  """
+  The computed current confidence of this entity. The confidence is always the lowest among the entity's children
+  """
+  confidence: Int!
+
+  """
+  The most recent objective status update inside among all objectives for this cycle
+  """
+  latestObjectiveStatus: ObjectiveStatus
+}
+
+"""
 The period of time that can contain multiple objectives. It is used to organize a team strategy
 """
 type Cycle implements EntityObject {
@@ -362,11 +219,23 @@ type Cycle implements EntityObject {
   id: ID!
   policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
 
+  """The title of the cycle"""
+  title: String!
+
+  """
+  The candence of this cycle. Cadence is the frequency at which previous objectives have to be grade and new ones created.
+  """
+  cadence: CADENCE!
+
+  """This flag defines if objectives related to this cycle can be updated"""
+  active: Boolean!
+
   """The date that this cycle starts"""
   dateStart: DateTime!
 
   """The date that this cycle ends"""
   dateEnd: DateTime!
+  status: CycleStatus!
 
   """The creation date of this cycle"""
   createdAt: DateTime!
@@ -377,10 +246,34 @@ type Cycle implements EntityObject {
   """The team ID that this cycle belongs to"""
   teamId: ID!
   team: Team!
-
-  """The name of the cycle"""
-  name: String!
   objectives: [Objective!]
+  keyResults(
+    """The user ID that should owns the key results you are trying to fetch"""
+    ownerId: ID
+  ): [KeyResult!]
+
+  """
+  Each cycle can relates with a given higher cycle, creating a for of tree-like architecture. If this cycle has any cycle above it, the ID of that will be recorded here
+  """
+  parentId: ID
+
+  """
+  Each cycle can relates with a given higher cycle, creating a for of tree-like architecture. If this cycle has any cycle above it, that one will be recorded here
+  """
+  parent: Cycle
+
+  """
+  Each cycle can have multiple cycles below it. If this cycle has any cycle inside of it, those will be listed here
+  """
+  cycles: [Cycle!]
+}
+
+"""
+Each cadence represents a period of time in which your cycles can be created
+"""
+enum CADENCE {
+  YEARLY
+  QUARTERLY
 }
 
 """
@@ -428,52 +321,174 @@ type Objective implements EntityObject {
   status: ObjectiveStatus!
 }
 
+"""
+User is an entity inside a given root team (a.k.a. company). It is associated with many teams, progress reports, and others.
+"""
+type User implements EntityObject {
+  """The ID of this entity"""
+  id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
+
+  """The name of the user"""
+  firstName: String!
+  fullName: String!
+
+  """The sub field in Auth0 (their ID)"""
+  authzSub: String!
+
+  """The creation date of the user"""
+  createdAt: DateTime!
+
+  """The last update date of this user"""
+  updatedAt: DateTime!
+
+  """The last name of the user"""
+  lastName: String
+
+  """The gender of the user"""
+  gender: String
+
+  """The user role in the company"""
+  role: String
+
+  """The picture of the user"""
+  picture: String
+
+  """The custom nickname that user wants to be called"""
+  nickname: String
+
+  """
+  A description for that user. A more detailed information where the user tells about her/himself
+  """
+  about: String
+
+  """The URL for the user's LinkedIn profile"""
+  linkedInProfileAddress: String
+  companies(limit: Int): [Team!]
+  teams: [Team!]
+  ownedTeams: [Team!]
+  objectives: [Objective!]
+  keyResults: [KeyResult!]
+  keyResultCheckIns: [KeyResultCheckIn!]
+}
+
+"""A comment in a given key result"""
+type KeyResultComment implements EntityObject {
+  """The ID of this entity"""
+  id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
+
+  """The text of the comment"""
+  text: String!
+
+  """The creation date of the comment"""
+  createdAt: DateTime!
+
+  """The last update date of the comment"""
+  updatedAt: DateTime!
+
+  """The key result ID that this comment is related to"""
+  keyResultId: ID!
+  keyResult: KeyResult!
+
+  """The user ID that owns this comment"""
+  userId: ID!
+  user: User!
+}
+
+"""The delete result from a delete mutation for key result comments"""
+type KeyResultCommentDeleteResult implements DeleteResultObject {
+  """The amount of entities removed"""
+  affected: Int!
+}
+
+"""A goal that is created for the team focusing in a given team objective"""
+type KeyResult implements EntityObject {
+  """The ID of this entity"""
+  id: ID!
+  policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
+
+  """The title(name) of the key result"""
+  title: String!
+
+  """The initial value of the key result"""
+  initialValue: Float!
+
+  """The goal of the key result"""
+  goal: Float!
+
+  """The format of the key result"""
+  format: String!
+  timeline(offset: Int, limit: Int = 10): [TimelineEntryUnion!]!
+
+  """The creation date of the key result"""
+  createdAt: DateTime!
+
+  """The last update date of the key result"""
+  updatedAt: DateTime!
+
+  """The owner ID of the key result"""
+  ownerId: ID!
+  owner: User!
+
+  """The object ID that this key result belongs to"""
+  objectiveId: ID!
+  objective: Objective!
+
+  """The team ID that this key result belongs to"""
+  teamId: ID!
+  team: Team!
+
+  """The description explaining the key result"""
+  description: String
+  keyResultCheckIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
+  keyResultComments: [KeyResultComment!]!
+  latestKeyResultCheckIn: KeyResultCheckIn
+}
+
+union TimelineEntryUnion = KeyResultCheckIn | KeyResultComment
+
+"""Defines the order to return your results in a given query"""
+enum QUERY_ORDER {
+  DESC
+  ASC
+}
+
 type Query {
   permissions(constraint: CONSTRAINT = COMPANY): Permissions!
   user(id: ID!): User!
   me: User!
-  team(filters: TeamFiltersInput, id: ID!): Team!
-  teams(filters: TeamFiltersInput): [Team!]
+  team(id: ID!): Team!
+  teams(
+    """The ID of the parent team that you want to user on this query"""
+    parentId: ID
+
+    """
+    A flag that toggles this query to fetch only companies. A company is a team that does not have a parent
+    """
+    onlyCompanies: Boolean
+
+    """
+    A flag that toggles this query to fetch only companies and departments. A company is a team that does not have a parent, while a department is a team that has teams inside of it
+    """
+    onlyCompaniesAndDepartments: Boolean
+  ): [Team!]
   cycle(id: ID!): Cycle!
-  cycles: [Cycle!]
+  cycles(
+    """If this flag is true, it will only fetch active cycles"""
+    active: Boolean = true
+
+    """This key filters all queries to a given cadence"""
+    cadence: CADENCE
+  ): [Cycle!]
   objective(id: ID!): Objective!
   keyResult(id: ID!): KeyResult!
-  keyResultCustomList(binding: KEY_RESULT_CUSTOM_LIST_BINDING, id: ID): KeyResultCustomList!
   keyResultCheckIn(id: ID!): KeyResultCheckIn!
   keyResultComment(id: ID!): KeyResultComment!
 }
 
-"""A list of fields that we can filter our team to"""
-input TeamFiltersInput {
-  """
-  The ID of the cycle we want to filter in our query. By default, it uses the closest cycle to an end as a filter, considering the creation date as a tie-breaker
-  """
-  cycleID: ID
-
-  """The ID of the parent team that you want to user on this query"""
-  parentTeamId: ID
-
-  """
-  A flag that toggles this query to fetch only companies. A company is a team that does not have a parent
-  """
-  onlyCompanies: Boolean
-
-  """
-  A flag that toggles this query to fetch only companies and departments. A company is a team that does not have a parent, while a department is a team that has teams inside of it
-  """
-  onlyCompaniesAndDepartments: Boolean
-}
-
-"""
-Each binding represents a given key result custom list in our applications
-"""
-enum KEY_RESULT_CUSTOM_LIST_BINDING {
-  MINE
-}
-
 type Mutation {
   updateUser(userData: UserDataInput!, userID: ID!): User!
-  updateKeyResultCustomList(keyResultCustomListInput: KeyResultCustomListInput!, id: ID!): KeyResultCustomList!
   createKeyResultCheckIn(keyResultCheckIn: KeyResultCheckInInput!): KeyResultCheckIn!
   deleteKeyResultCheckIn(id: ID!): KeyResultCheckInDeleteResult!
   createKeyResultComment(keyResultComment: KeyResultCommentInput!): KeyResultComment!
@@ -512,12 +527,6 @@ input UserDataInput {
 enum USER_GENDER {
   MALE
   FEMALE
-}
-
-"""Required data to update a given key result custom list"""
-input KeyResultCustomListInput {
-  """Ordered list of key result IDs"""
-  rank: [ID!]!
 }
 
 """The required data to create a new progress report"""

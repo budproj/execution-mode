@@ -5,9 +5,10 @@ import { Registry, Server } from 'miragejs'
 import logger from 'lib/logger'
 import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
+import { CADENCE } from 'src/components/Cycle/constants'
 import getConfig from 'src/config'
 
-import { buildKeyResultCustomList, buildKeyResultCheckInValue } from './builders'
+import { buildKeyResultCheckInValue } from './builders'
 import { pickRandomModel } from './selectors'
 
 const { publicRuntimeConfig } = getConfig()
@@ -26,13 +27,13 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   const rootTeam = server.create('team', {
     name: faker.random.word(),
-    parentTeam: company,
+    parent: company,
     onlyCompaniesAndDepartments: true,
     status: pickRandomModel(statusList),
   })
 
   const teams = server.createList('team', 3, {
-    parentTeam: rootTeam,
+    parent: rootTeam,
     status: pickRandomModel(statusList),
   })
   rootTeam.update('teams', teams as any)
@@ -40,7 +41,12 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   const user = server.create('user', { teams, companies: [company] })
   const otherUsers = server.createList('user', 5, { teams } as any)
-  const cycle = server.create('cycle', { team: company })
+  const cycle = server.create('cycle', {
+    team: company,
+    status: pickRandomModel(statusList),
+    active: true,
+    cadence: CADENCE.QUARTERLY,
+  })
   const companyObjectives = server.createList('objective', 3, {
     cycle,
     status: pickRandomModel(statusList),
@@ -53,10 +59,6 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     owner: user,
     objective: () => pickRandomModel(objectives),
     team: () => pickRandomModel(teams),
-  })
-  const keyResultCustomList = server.create('keyResultCustomList', {
-    user,
-    ...buildKeyResultCustomList(keyResults),
   })
   const keyResultCheckIns = server.createList('keyResultCheckIn', 40, {
     user,
@@ -85,6 +87,9 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   })
 
   company.update('latestKeyResultCheckIn', keyResultCheckIns[0] as any)
+
+  cycle.update('objectives', objectives as any)
+  cycle.update('keyResults', keyResults as any)
 
   keyResults.map((keyResult) => {
     const latestKeyResultCheckIn = keyResult.keyResultCheckIns.models[0] as any
@@ -117,7 +122,6 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       cycle,
       objectives,
       keyResults,
-      keyResultCustomList,
       keyResultCheckIns,
       keyResultComments,
       otherUsers,

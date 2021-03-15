@@ -1,18 +1,6 @@
 import faker from 'faker'
-import shuffle from 'lodash/shuffle'
-import { ModelInstance } from 'miragejs'
 
 import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
-
-export const buildKeyResultCustomList = (keyResultModels: Array<ModelInstance<any>>) => {
-  const keyResults = shuffle(keyResultModels)
-  const rank = keyResults.map((keyResult) => keyResult.id)
-
-  return {
-    keyResults,
-    rank,
-  }
-}
 
 export function buildKeyResultCheckInValue(this: any) {
   const handlers = {

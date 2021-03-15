@@ -1,10 +1,14 @@
 import faker from 'faker'
 import { Factory } from 'miragejs'
 
+import { CADENCE } from 'src/components/Cycle/constants'
+
 export default Factory.extend({
+  title: faker.company.catchPhrase,
+  active: faker.random.boolean,
+  cadence: () => faker.helpers.randomize(Object.values(CADENCE)),
   dateStart: faker.date.past,
   dateEnd: faker.date.future,
   createdAt: faker.date.past,
   updatedAt: faker.date.past,
-  name: faker.company.catchPhrase,
 })

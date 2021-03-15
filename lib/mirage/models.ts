@@ -27,13 +27,14 @@ const models = {
     keyResult: belongsTo(),
     policies: belongsTo('policy'),
   }),
-  keyResultCustomList: Model.extend({
-    user: belongsTo(),
-    keyResults: hasMany(),
-  }),
   cycle: Model.extend({
     team: belongsTo(),
     objectives: hasMany(),
+    keyResults: hasMany(),
+    status: belongsTo(),
+    // eslint-disable-next-line unicorn/no-null
+    parent: belongsTo('cycle', { inverse: null }),
+    cycles: hasMany(),
   }),
   team: Model.extend({
     keyResults: hasMany(),
@@ -41,7 +42,7 @@ const models = {
     teams: hasMany(),
     objectives: hasMany(),
     // eslint-disable-next-line unicorn/no-null
-    parentTeam: belongsTo('team', { inverse: null }),
+    parent: belongsTo('team', { inverse: null }),
     cycles: hasMany(),
     latestKeyResultCheckIn: belongsTo('keyResultCheckIn'),
     // eslint-disable-next-line unicorn/no-null
