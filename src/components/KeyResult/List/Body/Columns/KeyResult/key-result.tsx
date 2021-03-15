@@ -2,35 +2,37 @@ import { Flex, Box, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import LastUpdateText from 'src/components/Base/LastUpdateText'
 import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
+import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
 export interface KeyResultListBodyColumnKeyResultProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
   withRightBorder?: boolean
   withDynamicIcon?: boolean
+  withLastUpdateInfo?: boolean
 }
 
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
-const teamSelector = buildPartialSelector<KeyResult['team']>('team')
 
 const KeyResultListBodyColumnKeyResult = ({
   id,
   borderColor,
   withRightBorder,
   withDynamicIcon,
+  withLastUpdateInfo,
 }: KeyResultListBodyColumnKeyResultProperties): ReactElement => {
   const title = useRecoilValue(titleSelector(id))
-  const team = useRecoilValue(teamSelector(id))
+  const latestCheckIn = useRecoilValue(selectLatestCheckIn(id))
 
   const isKeyResultLoaded = Boolean(title)
-  const isTeamLoaded = Boolean(team)
+  const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
 
   return (
     <KeyResultListBodyColumnBase
@@ -38,6 +40,7 @@ const KeyResultListBodyColumnKeyResult = ({
       borderColor={borderColor}
       borderStyle="solid"
       pr={2}
+      h="full"
     >
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
@@ -60,16 +63,16 @@ const KeyResultListBodyColumnKeyResult = ({
             <Text color="black.900">{title ?? 'This is a sample KR title'}</Text>
           </Skeleton>
 
-          <SkeletonText
-            noOfLines={1}
-            mt={isTeamLoaded ? 'inherit' : '4px'}
-            isLoaded={isTeamLoaded}
-            {...buildSkeletonMinSize(isTeamLoaded, 100, 21)}
-          >
-            <Text color="gray.300" fontSize="sm">
-              {team?.name}
-            </Text>
-          </SkeletonText>
+          {withLastUpdateInfo && (
+            <SkeletonText
+              noOfLines={2}
+              minW="100%"
+              mt={isKeyResultLoaded ? 'inherit' : '4px'}
+              isLoaded={isKeyResultLoaded}
+            >
+              <LastUpdateText date={lastUpdateDate} color="gray.300" />
+            </SkeletonText>
+          )}
         </Box>
       </Flex>
     </KeyResultListBodyColumnBase>

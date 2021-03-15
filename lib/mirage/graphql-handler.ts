@@ -102,6 +102,10 @@ const graphQLHandler = (mirageSchema: unknown) =>
           // eslint-disable-next-line unicorn/no-array-callback-reference
           const keyResult = mirageSchema.keyResults.find(keyResultCheckIn.keyResultId)
           const latestKeyResultCheckInId = keyResult.attrs.keyResultCheckInIds[0]
+          const latestKeyResultCheckIn = mirageSchema.keyResultCheckIns.find(
+            // eslint-disable-next-line unicorn/no-array-callback-reference
+            latestKeyResultCheckInId,
+          )
           const value = keyResultCheckIn?.value ?? 0
 
           const progress =
@@ -112,6 +116,7 @@ const graphQLHandler = (mirageSchema: unknown) =>
 
           const enhancedKeyResultCheckIn = {
             progress: normalizedMaxRelativeProgress,
+            valueIncrease: value - latestKeyResultCheckIn.value,
             userId: user.id,
             parentId: latestKeyResultCheckInId,
             createdAt: new Date(),
@@ -119,7 +124,6 @@ const graphQLHandler = (mirageSchema: unknown) =>
             ...keyResultCheckIn,
           }
           const clearedKeyResultCheckIn = pickBy(enhancedKeyResultCheckIn)
-
           const result = mirageSchema.keyResultCheckIns.create(clearedKeyResultCheckIn)
 
           return result

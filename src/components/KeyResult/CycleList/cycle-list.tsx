@@ -47,7 +47,7 @@ const KeyResultCycleList = ({ id, onLineClick }: KeyResultCycleListProperties) =
         type={KEY_RESULT_LIST_TYPE.STATIC}
         keyResultIDs={keyResultIDs}
         isLoading={!isLoaded}
-        templateColumns="7fr 5fr 5fr 6fr 1fr 2fr"
+        templateColumns="7fr 6fr 4fr 6fr 1fr 2fr"
         columns={[
           KEY_RESULT_LIST_COLUMN.KEY_RESULT,
           KEY_RESULT_LIST_COLUMN.OBJECTIVE,
@@ -65,8 +65,6 @@ const KeyResultCycleList = ({ id, onLineClick }: KeyResultCycleListProperties) =
           [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
             withDynamicIcon: true,
             withRightBorder: true,
-          },
-          [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: {
             withLastUpdateInfo: true,
           },
           [KEY_RESULT_LIST_COLUMN.PROGRESS]: {

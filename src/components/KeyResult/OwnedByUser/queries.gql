@@ -9,9 +9,6 @@ query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES($userID: ID!) {
       initialValue
       goal
       format
-      team {
-        name
-      }
       objective {
         title
       }
