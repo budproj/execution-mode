@@ -43,6 +43,8 @@ const KeyResultListBodyColumnKeyResult = ({
       borderStyle="solid"
       pr={2}
       h="full"
+      alignItems="center"
+      display="flex"
     >
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
