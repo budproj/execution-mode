@@ -18,7 +18,7 @@ describe('date conditional formatting', () => {
 
     const text = result.find('Text')
 
-    expect(text.text()).toEqual(`Última atualização ${fakeFormattedDate.toLowerCase()} por `)
+    expect(text.text()).toEqual(`Última atualização ${fakeFormattedDate.toLowerCase()}`)
   })
 
   it('displays the correct author', () => {

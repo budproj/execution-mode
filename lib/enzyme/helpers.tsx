@@ -20,7 +20,8 @@ export const RecoilSpy = () => {
     }
 
     setNodes(newNodes)
-  }, [snapshot, nodes, setNodes])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [snapshot])
 
   return <RecoilSpyAnchor {...nodes} />
 }

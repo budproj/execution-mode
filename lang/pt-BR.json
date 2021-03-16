@@ -503,10 +503,6 @@
     "defaultMessage": "Definições",
     "description": "This title is displayed as the heading of the definitions menu section"
   },
-  "TSamEC": {
-    "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}} {author, select, author {por {author}} other {}}",
-    "description": "This message displays the latest report status for a given component"
-  },
   "TzHlPJ": {
     "defaultMessage": "Em manutenção | bud",
     "description": "The page title of our under maintenance error page that is displayed in the browser tab"
@@ -638,6 +634,10 @@
   "dymB9a": {
     "defaultMessage": "Cada resultado-chave pertence a um objetivo",
     "description": "This tooltip explains the second column of the key result list"
+  },
+  "e9PG+t": {
+    "defaultMessage": "por {author}",
+    "description": "This message displays the latest report author for a given component"
   },
   "eI6jYw": {
     "defaultMessage": "Nenhuma informação",
@@ -938,6 +938,10 @@
   "xXxjVp": {
     "defaultMessage": "Existe um fator externo impedindo o progresso desse resultado-chave",
     "description": "This text explains our tag to the user"
+  },
+  "xkN783": {
+    "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}}",
+    "description": "This message displays the latest report status for a given component"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",
