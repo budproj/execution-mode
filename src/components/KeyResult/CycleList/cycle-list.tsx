@@ -36,11 +36,13 @@ const KeyResultCycleList = ({ id, onLineClick }: KeyResultCycleListProperties) =
     <Stack direction="column" gridGap={8}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 300, 21)}>
         <Heading as="h2" fontSize="md" color="gray.500" fontWeight={700} textTransform="uppercase">
-          {intl.formatMessage(messages.title, {
-            prefix: cadence.prefix,
-            cycle: cycle?.title,
-            suffix: cycle?.parent?.title,
-          })}
+          {intl
+            .formatMessage(messages.title, {
+              prefix: cadence.prefix,
+              cycle: cycle?.title,
+              suffix: cycle?.parent?.title,
+            })
+            .trim()}
         </Heading>
       </Skeleton>
 
