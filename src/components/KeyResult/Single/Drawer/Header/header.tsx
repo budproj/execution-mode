@@ -60,7 +60,7 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
           <KeyResultSingleTitle keyResultID={keyResultID} />
         </Box>
         <Box>
-          <Collapse in={isScrolling}>
+          <Collapse in={isScrolling && canUpdate}>
             <Button variant="solid" colorScheme="brand" px={6} onClick={handleCheckInButtonClick}>
               {intl.formatMessage(messages.checkInButtonLabel)}
             </Button>

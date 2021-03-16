@@ -487,13 +487,13 @@
     "defaultMessage": "Meta",
     "description": "This is the label of the check-in form that indicates the goal for her/his key result"
   },
+  "T5iKmP": {
+    "defaultMessage": "{prefix} {cycle} {suffix}",
+    "description": "This message displays the cycle name with a given prefix"
+  },
   "T8ytLJ": {
     "defaultMessage": "Objetivo",
     "description": "The label text above the Objective section in our key result single page or drawer"
-  },
-  "TDt9po": {
-    "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}} por {author}",
-    "description": "This message displays the latest report status for a given component"
   },
   "TIorHN": {
     "defaultMessage": "Existe um risco de não alcançarmos o resultado-chave, mas seguimos otimistas",
@@ -635,6 +635,10 @@
     "defaultMessage": "Cada resultado-chave pertence a um objetivo",
     "description": "This tooltip explains the second column of the key result list"
   },
+  "e9PG+t": {
+    "defaultMessage": "por {author}",
+    "description": "This message displays the latest report author for a given component"
+  },
   "eI6jYw": {
     "defaultMessage": "Nenhuma informação",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
@@ -682,6 +686,10 @@
   "goSPM7": {
     "defaultMessage": "Você excluiu um {type}",
     "description": "This text is displayed as the alert title, explaining what resource the user removed"
+  },
+  "gu4aCE": {
+    "defaultMessage": "Anual",
+    "description": "This text is used as prefix for our yearly cadences"
   },
   "h4sP/q": {
     "defaultMessage": "Minha conta",
@@ -930,6 +938,10 @@
   "xXxjVp": {
     "defaultMessage": "Existe um fator externo impedindo o progresso desse resultado-chave",
     "description": "This text explains our tag to the user"
+  },
+  "xkN783": {
+    "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}}",
+    "description": "This message displays the latest report status for a given component"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",

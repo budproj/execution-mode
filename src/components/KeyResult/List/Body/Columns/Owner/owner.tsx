@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Flex,
   Popover,
   PopoverBody,
@@ -17,6 +16,7 @@ import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { UserAvatar } from 'src/components/User'
 import UserProfileCard from 'src/components/User/ProfileCard'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import selectUser from 'src/state/recoil/user/selector'
@@ -65,16 +65,22 @@ const KeyResultListBodyColumnOwner = ({
               fadeDuration={0}
               /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
             >
-              <Avatar
+              <UserAvatar
                 name={owner?.fullName}
                 src={owner?.picture}
                 cursor="pointer"
                 data-action="open-user-card"
+                variant="rounded"
               />
             </SkeletonCircle>
 
             {displayName && (
-              <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}>
+              <Skeleton
+                display="flex"
+                alignItems="center"
+                isLoaded={isOwnerLoaded}
+                {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}
+              >
                 <Text>{owner?.fullName}</Text>
               </Skeleton>
             )}

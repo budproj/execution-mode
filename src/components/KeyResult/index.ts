@@ -1,6 +1,6 @@
 export { default as KeyResultDynamicIcon } from './DynamicIcon'
 
-export { default as KeyResultCustomList } from './CustomList'
+export { default as KeyResultOwnedByUser } from './OwnedByUser'
 
 export { default as KeyResultProgressSlider } from './ProgressSlider'
 
@@ -11,3 +11,5 @@ export * as KeyResultSingle from './Single'
 export * as KeyResultNumberMasks from './NumberMasks'
 
 export { default as KeyResultCheckInForm } from './CheckInForm'
+
+export { default as KeyResultCycleList } from './CycleList'

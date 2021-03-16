@@ -1,5 +1,5 @@
 query GET_TEAMS {
-  teams(filters: { onlyCompaniesAndDepartments: true }) {
+  teams(onlyCompaniesAndDepartments: true) {
     id
     name
     description

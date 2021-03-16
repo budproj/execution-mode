@@ -17,7 +17,7 @@ export interface Team {
   description?: string
   gender?: TEAM_GENDER
   company?: Team
-  parentTeam?: Team
+  parent?: Team
   users?: User[]
   teams?: Team[]
   teamsRanking?: Team[]

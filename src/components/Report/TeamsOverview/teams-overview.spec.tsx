@@ -4,7 +4,7 @@ import faker from 'faker'
 import React from 'react'
 import { RecoilRoot } from 'recoil'
 
-import { waitForComponentToPaint } from 'lib/jest/setup'
+import { waitForComponentToPaint } from 'lib/enzyme/helpers'
 
 import queries from './queries.gql'
 import TeamsOverview from './teams-overview'

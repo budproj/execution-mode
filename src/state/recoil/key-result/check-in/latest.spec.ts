@@ -275,4 +275,37 @@ describe('setter', () => {
 
     expect(result?.keyResultCheckIns).toEqual(expectedResult)
   })
+
+  it('updates the given key-result as not outdated uppon setting', () => {
+    const fakeID = faker.random.word()
+    const fakeUserID = faker.random.uuid()
+
+    const fakeCheckIn = {
+      comment: faker.lorem.paragraph(),
+      value: faker.random.number(),
+      confidence: faker.random.number(),
+    }
+    const fakeUser = {
+      ...faker.helpers.userCard(),
+      id: fakeUserID,
+    }
+
+    const initialSnapshot = snapshot_UNSTABLE(({ set }) => {
+      set(keyResultAtomFamily(fakeID), {
+        id: fakeID,
+      })
+
+      set(userAtomFamily(fakeUserID), fakeUser as any)
+
+      set(meAtom, fakeUserID)
+    })
+
+    const newSnapshot = initialSnapshot.map(({ set }) =>
+      set(selectLatestCheckIn(fakeID), fakeCheckIn as any),
+    )
+
+    const result = newSnapshot.getLoadable(keyResultAtomFamily(fakeID)).getValue()
+
+    expect(result?.isOutdated).toEqual(false)
+  })
 })

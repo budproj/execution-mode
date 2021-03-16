@@ -29,7 +29,6 @@ const LastUpdateText = ({
     ? intl.formatMessage(messages.lastUpdateAt, {
         date: lowercasedFormattedRelativeDate,
         unit: relativeUnit,
-        author,
       })
     : intl.formatMessage(messages.emptyStateMessage)
 
@@ -39,7 +38,7 @@ const LastUpdateText = ({
 
   return (
     <Text fontSize={fontSize} color={color} fontWeight={fontWeight}>
-      {message}
+      {`${message} ${author ? intl.formatMessage(messages.author, { author }) : ''}`.trim()}
     </Text>
   )
 }

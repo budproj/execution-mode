@@ -5,9 +5,10 @@ import { Registry, Server } from 'miragejs'
 import logger from 'lib/logger'
 import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
+import { CADENCE } from 'src/components/Cycle/constants'
 import getConfig from 'src/config'
 
-import { buildKeyResultCustomList, buildKeyResultCheckInValue } from './builders'
+import { buildKeyResultCheckInValue } from './builders'
 import { pickRandomModel } from './selectors'
 
 const { publicRuntimeConfig } = getConfig()
@@ -26,13 +27,13 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   const rootTeam = server.create('team', {
     name: faker.random.word(),
-    parentTeam: company,
+    parent: company,
     onlyCompaniesAndDepartments: true,
     status: pickRandomModel(statusList),
   })
 
   const teams = server.createList('team', 3, {
-    parentTeam: rootTeam,
+    parent: rootTeam,
     status: pickRandomModel(statusList),
   })
   rootTeam.update('teams', teams as any)
@@ -40,9 +41,31 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   const user = server.create('user', { teams, companies: [company] })
   const otherUsers = server.createList('user', 5, { teams } as any)
-  const cycle = server.create('cycle', { team: company })
+
+  const companyCycle = server.create('cycle', {
+    title: '2021',
+    team: company,
+    status: pickRandomModel(statusList),
+    active: true,
+    cadence: CADENCE.YEARLY,
+  })
+
+  const cycle = server.create('cycle', {
+    title: 'Q1',
+    team: company,
+    status: pickRandomModel(statusList),
+    active: true,
+    cadence: CADENCE.QUARTERLY,
+    parent: companyCycle,
+  })
+
+  const cycles = {
+    [CADENCE.YEARLY]: companyCycle,
+    [CADENCE.QUARTERLY]: cycle,
+  }
+
   const companyObjectives = server.createList('objective', 3, {
-    cycle,
+    cycle: companyCycle,
     status: pickRandomModel(statusList),
   })
   const objectives = server.createList('objective', 3, {
@@ -53,10 +76,6 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     owner: user,
     objective: () => pickRandomModel(objectives),
     team: () => pickRandomModel(teams),
-  })
-  const keyResultCustomList = server.create('keyResultCustomList', {
-    user,
-    ...buildKeyResultCustomList(keyResults),
   })
   const keyResultCheckIns = server.createList('keyResultCheckIn', 40, {
     user,
@@ -89,6 +108,8 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   keyResults.map((keyResult) => {
     const latestKeyResultCheckIn = keyResult.keyResultCheckIns.models[0] as any
     const keyResultCheckIns = keyResult.keyResultCheckIns.models
+    const objective = keyResult.objective as any
+    const cycle = cycles[objective.cycle.cadence as CADENCE]
 
     keyResultCheckIns.map((keyResultCheckIn, index) => {
       const parentIndex = index + 1
@@ -104,6 +125,15 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult.update('latestKeyResultCheckIn', latestKeyResultCheckIn)
     keyResult.update('keyResultCheckIns', keyResult.keyResultCheckIns)
 
+    const previousCycleKeyResultIds = (cycle.attrs.keyResultIds as any[]) ?? []
+    const previousCycleKeyResults = previousCycleKeyResultIds.map(
+      (keyResultId: any) => keyResults[keyResultId - 1],
+    )
+    const newCycleKeyResults = [...previousCycleKeyResults, keyResult]
+
+    cycle.update('keyResults', newCycleKeyResults as any)
+    console.log(newCycleKeyResults, 'tag')
+
     return keyResult
   })
 
@@ -114,10 +144,9 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       rootTeam,
       teams,
       user,
-      cycle,
+      cycles,
       objectives,
       keyResults,
-      keyResultCustomList,
       keyResultCheckIns,
       keyResultComments,
       otherUsers,

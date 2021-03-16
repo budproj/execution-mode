@@ -8,6 +8,7 @@ export default Factory.extend({
   title: faker.company.catchPhrase,
   description: faker.lorem.paragraph,
   format: () => sample(Object.values(KEY_RESULT_FORMAT)),
+  isOutdated: faker.random.boolean,
   createdAt: faker.date.past,
   updatedAt: faker.date.past,
 

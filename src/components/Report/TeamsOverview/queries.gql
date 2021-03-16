@@ -1,5 +1,5 @@
 query GET_COMPANY_TEAMS {
-  teams(filters: { onlyCompanies: true }) {
+  teams(onlyCompanies: true) {
     id
     teamsRanking {
       id

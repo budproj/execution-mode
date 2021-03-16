@@ -7,7 +7,7 @@ import { act } from 'react-dom/test-utils'
 import { MutableSnapshot, RecoilRoot } from 'recoil'
 import sinon from 'sinon'
 
-import { waitForComponentToPaint } from 'lib/jest/setup'
+import { waitForComponentToPaint } from 'lib/enzyme/helpers'
 import { USER_GENDER } from 'src/components/User/constants'
 import { User } from 'src/components/User/types'
 import { userAtomFamily } from 'src/state/recoil/user'

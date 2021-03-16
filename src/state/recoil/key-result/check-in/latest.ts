@@ -57,6 +57,7 @@ export const setLatestCheckIn = (id?: KeyResult['id']) => (
 
   const newKeyResult = {
     ...keyResult,
+    isOutdated: false,
     latestKeyResultCheckIn: newLocalCheckIn,
     keyResultCheckIns: newCheckIns,
   }

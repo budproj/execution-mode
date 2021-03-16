@@ -1,6 +1,5 @@
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
-import { KEY_RESULT_CUSTOM_LIST_BINDING } from 'src/components/User/constants'
 import { User } from 'src/components/User/types'
 import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
 
@@ -37,23 +36,13 @@ export interface KeyResultComment {
   keyResultId: KeyResult['id']
 }
 
-export interface KeyResultCustomList {
-  id: string
-  createdAt: string
-  updatedAt: string
-  user: User
-  title?: string
-  binding?: KEY_RESULT_CUSTOM_LIST_BINDING
-  rank?: Array<KeyResult['id']>
-  keyResults?: KeyResult[]
-}
-
 export interface KeyResult {
   id: string
   title: string
   initialValue: number
   goal: number
   format: KEY_RESULT_FORMAT
+  isOutdated: boolean
   createdAt: string
   updatedAt: string
   owner: User
