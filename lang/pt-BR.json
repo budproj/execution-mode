@@ -87,10 +87,6 @@
     "defaultMessage": "Nenhuma atualização recente",
     "description": "This label is displayed if we do not have any update date to display"
   },
-  "1f25lH": {
-    "defaultMessage": "{prefix} {cycle}",
-    "description": "This message displays the cycle name with a given prefix"
-  },
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
@@ -490,6 +486,10 @@
   "SxsVDt": {
     "defaultMessage": "Meta",
     "description": "This is the label of the check-in form that indicates the goal for her/his key result"
+  },
+  "T5iKmP": {
+    "defaultMessage": "{prefix} {cycle} {suffix}",
+    "description": "This message displays the cycle name with a given prefix"
   },
   "T8ytLJ": {
     "defaultMessage": "Objetivo",

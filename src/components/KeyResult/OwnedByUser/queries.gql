@@ -3,6 +3,9 @@ query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES($userID: ID!) {
     id
     title
     cadence
+    parent {
+      title
+    }
     keyResults(ownerId: $userID) {
       id
       title

@@ -41,14 +41,31 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   const user = server.create('user', { teams, companies: [company] })
   const otherUsers = server.createList('user', 5, { teams } as any)
+
+  const companyCycle = server.create('cycle', {
+    title: '2021',
+    team: company,
+    status: pickRandomModel(statusList),
+    active: true,
+    cadence: CADENCE.YEARLY,
+  })
+
   const cycle = server.create('cycle', {
+    title: 'Q1',
     team: company,
     status: pickRandomModel(statusList),
     active: true,
     cadence: CADENCE.QUARTERLY,
+    parent: companyCycle,
   })
+
+  const cycles = {
+    [CADENCE.YEARLY]: companyCycle,
+    [CADENCE.QUARTERLY]: cycle,
+  }
+
   const companyObjectives = server.createList('objective', 3, {
-    cycle,
+    cycle: companyCycle,
     status: pickRandomModel(statusList),
   })
   const objectives = server.createList('objective', 3, {
@@ -88,12 +105,11 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   company.update('latestKeyResultCheckIn', keyResultCheckIns[0] as any)
 
-  cycle.update('objectives', objectives as any)
-  cycle.update('keyResults', keyResults as any)
-
   keyResults.map((keyResult) => {
     const latestKeyResultCheckIn = keyResult.keyResultCheckIns.models[0] as any
     const keyResultCheckIns = keyResult.keyResultCheckIns.models
+    const objective = keyResult.objective as any
+    const cycle = cycles[objective.cycle.cadence as CADENCE]
 
     keyResultCheckIns.map((keyResultCheckIn, index) => {
       const parentIndex = index + 1
@@ -109,6 +125,15 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult.update('latestKeyResultCheckIn', latestKeyResultCheckIn)
     keyResult.update('keyResultCheckIns', keyResult.keyResultCheckIns)
 
+    const previousCycleKeyResultIds = (cycle.attrs.keyResultIds as any[]) ?? []
+    const previousCycleKeyResults = previousCycleKeyResultIds.map(
+      (keyResultId: any) => keyResults[keyResultId - 1],
+    )
+    const newCycleKeyResults = [...previousCycleKeyResults, keyResult]
+
+    cycle.update('keyResults', newCycleKeyResults as any)
+    console.log(newCycleKeyResults, 'tag')
+
     return keyResult
   })
 
@@ -119,7 +144,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       rootTeam,
       teams,
       user,
-      cycle,
+      cycles,
       objectives,
       keyResults,
       keyResultCheckIns,

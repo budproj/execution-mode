@@ -39,6 +39,7 @@ const KeyResultCycleList = ({ id, onLineClick }: KeyResultCycleListProperties) =
           {intl.formatMessage(messages.title, {
             prefix: cadence.prefix,
             cycle: cycle?.title,
+            suffix: cycle?.parent?.title,
           })}
         </Heading>
       </Skeleton>

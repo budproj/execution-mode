@@ -4,8 +4,8 @@ type KeyResultCycleListMessage = 'title'
 
 export default defineMessages<KeyResultCycleListMessage>({
   title: {
-    defaultMessage: '{prefix} {cycle}',
-    id: '1f25lH',
+    defaultMessage: '{prefix} {cycle} {suffix}',
+    id: 'T5iKmP',
     description: 'This message displays the cycle name with a given prefix',
   },
 })
