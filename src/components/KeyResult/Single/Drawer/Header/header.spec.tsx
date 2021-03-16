@@ -226,4 +226,28 @@ describe('component interactions', () => {
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
+
+  it('does not show the check-in button if the user is not allowed to do a check-in', () => {
+    const fakeID = faker.random.uuid()
+    const fakePolicies = {
+      childEntities: {
+        keyResultCheckIn: {
+          create: 'DENY',
+        },
+      },
+    }
+
+    const stub = sinon.stub(recoil, 'useRecoilValue')
+    stub.withArgs(selectIsScrollingMatcher).returns(true)
+    stub.withArgs(selectPoliciesMatcher).returns(fakePolicies)
+
+    sinon.mock(recoil).expects('useRecoilState').atLeast(1).returns([false, sinon.fake()])
+    sinon.mock(chakra).expects('useTheme').atLeast(1).returns({ zIndices: {} })
+
+    const wrapper = enzyme.shallow(<KeyResultDrawerHeader keyResultID={fakeID} />)
+
+    const sectionWrapper = wrapper.find('Collapse').first()
+
+    expect(sectionWrapper.prop('in')).toEqual(false)
+  })
 })
