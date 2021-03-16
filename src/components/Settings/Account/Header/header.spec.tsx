@@ -4,7 +4,7 @@ import faker from 'faker'
 import React from 'react'
 import { MutableSnapshot, RecoilRoot } from 'recoil'
 
-import { waitForComponentToPaint } from 'lib/jest/setup'
+import { waitForComponentToPaint } from 'lib/enzyme/helpers'
 import { USER_GENDER } from 'src/components/User/constants'
 import { User } from 'src/components/User/types'
 import { userAtomFamily } from 'src/state/recoil/user'

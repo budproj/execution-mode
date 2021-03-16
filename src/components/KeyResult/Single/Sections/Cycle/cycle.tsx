@@ -46,7 +46,7 @@ const KeyResultSectionCycle = ({ keyResultID }: KeyResultSectionCycleProperties)
             {intl.formatMessage(messages.nameLabel)}
           </Text>
           <Skeleton isLoaded={isCycleLoaded} {...buildSkeletonMinSize(isCycleLoaded, 100, 20)}>
-            <Text color="black.500">{cycle?.name}</Text>
+            <Text color="black.500">{cycle?.title}</Text>
           </Skeleton>
         </Flex>
       </Flex>

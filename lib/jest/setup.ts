@@ -3,7 +3,6 @@ import Adapter from 'enzyme-adapter-react-16'
 import enableHooks from 'jest-react-hooks-shallow'
 import { DOMWindow, JSDOM } from 'jsdom'
 import fetch from 'node-fetch'
-import { act } from 'react-dom/test-utils'
 
 enableHooks(jest)
 
@@ -52,12 +51,3 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: jest.fn(),
   })),
 })
-
-export const waitForComponentToPaint = async (wrapper: any) => {
-  await act(async () => {
-    await new Promise((resolve) => {
-      setTimeout(resolve, 0)
-    })
-    wrapper.update()
-  })
-}

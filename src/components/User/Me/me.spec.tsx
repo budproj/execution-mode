@@ -6,7 +6,7 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { waitForComponentToPaint } from 'lib/jest/setup'
+import { waitForComponentToPaint } from 'lib/enzyme/helpers'
 import * as recoilHooks from 'src/state/recoil/hooks'
 
 import Me from './me'
