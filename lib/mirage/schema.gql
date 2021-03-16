@@ -419,6 +419,7 @@ type KeyResult implements EntityObject {
 
   """The format of the key result"""
   format: String!
+  isOutdated: Boolean!
   timeline(offset: Int, limit: Int = 10): [TimelineEntryUnion!]!
 
   """The creation date of the key result"""

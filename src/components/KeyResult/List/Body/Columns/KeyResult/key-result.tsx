@@ -20,6 +20,7 @@ export interface KeyResultListBodyColumnKeyResultProperties
 }
 
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
+const isOutdatedSelector = buildPartialSelector<KeyResult['isOutdated']>('isOutdated')
 
 const KeyResultListBodyColumnKeyResult = ({
   id,
@@ -29,6 +30,7 @@ const KeyResultListBodyColumnKeyResult = ({
   withLastUpdateInfo,
 }: KeyResultListBodyColumnKeyResultProperties): ReactElement => {
   const title = useRecoilValue(titleSelector(id))
+  const isOutdated = useRecoilValue(isOutdatedSelector(id))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(id))
 
   const isKeyResultLoaded = Boolean(title)
@@ -70,7 +72,7 @@ const KeyResultListBodyColumnKeyResult = ({
               mt={isKeyResultLoaded ? 'inherit' : '4px'}
               isLoaded={isKeyResultLoaded}
             >
-              <LastUpdateText date={lastUpdateDate} color="gray.300" />
+              <LastUpdateText date={lastUpdateDate} color={isOutdated ? 'red.500' : 'gray.300'} />
             </SkeletonText>
           )}
         </Box>

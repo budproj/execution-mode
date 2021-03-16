@@ -42,6 +42,7 @@ export interface KeyResult {
   initialValue: number
   goal: number
   format: KEY_RESULT_FORMAT
+  isOutdated: boolean
   createdAt: string
   updatedAt: string
   owner: User
