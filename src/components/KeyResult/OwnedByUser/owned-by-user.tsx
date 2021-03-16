@@ -5,13 +5,13 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { Cycle } from 'src/components/Cycle/types'
-import KeyResultCycleList from 'src/components/KeyResult/CycleList'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import meAtom from 'src/state/recoil/user/me'
 
+import KeyResultOwnedByUserCyclesList from './cycle-lists'
 import queries from './queries.gql'
 import KeyResultOwnedByUserSkeleton from './skeleton'
 
@@ -30,7 +30,7 @@ const KeyResultOwnedByUser = ({ onLineClick }: KeyResultOwnedByUserProperties) =
   const userID = useRecoilValue(meAtom)
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
-  const { data } = useQuery<GetKeyResultOwnedByUserWithBindingQuery>(
+  const { data, loading, called } = useQuery<GetKeyResultOwnedByUserWithBindingQuery>(
     queries.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
     {
       variables: {
@@ -47,10 +47,8 @@ const KeyResultOwnedByUser = ({ onLineClick }: KeyResultOwnedByUserProperties) =
 
   return (
     <Stack direction="column" gridGap={8}>
-      {data ? (
-        data.cycles.map((cycle) => (
-          <KeyResultCycleList key={cycle.id} id={cycle.id} onLineClick={onLineClick} />
-        ))
+      {called && !loading && data ? (
+        <KeyResultOwnedByUserCyclesList cycles={data.cycles} onLineClick={onLineClick} />
       ) : (
         <KeyResultOwnedByUserSkeleton />
       )}
