@@ -11,29 +11,31 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import meAtom from 'src/state/recoil/user/me'
 
-import KeyResultOwnedByUserCyclesList from './cycle-lists'
+import KeyResultActiveAndOwnedByUserCyclesList from './cycle-lists'
 import queries from './queries.gql'
-import KeyResultOwnedByUserSkeleton from './skeleton'
+import KeyResultActiveAndOwnedByUserSkeleton from './skeleton'
 
-export interface KeyResultOwnedByUserProperties {
+export interface KeyResultActiveAndOwnedByUserProperties {
   onLineClick?: (id: KeyResult['id']) => void
 }
 
-export interface GetKeyResultOwnedByUserWithBindingQuery {
+export interface GetKeyResultActiveAndOwnedByUserWithBindingQuery {
   cycles: Array<{
     id: Cycle['id']
     keyResults: Cycle['keyResults']
   }>
 }
 
-const KeyResultOwnedByUser = ({ onLineClick }: KeyResultOwnedByUserProperties) => {
+const KeyResultActiveAndOwnedByUser = ({
+  onLineClick,
+}: KeyResultActiveAndOwnedByUserProperties) => {
   const userID = useRecoilValue(meAtom)
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [
     fetchUserActiveCycles,
     { data, loading, called },
-  ] = useLazyQuery<GetKeyResultOwnedByUserWithBindingQuery>(
+  ] = useLazyQuery<GetKeyResultActiveAndOwnedByUserWithBindingQuery>(
     queries.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
     {
       variables: {
@@ -55,12 +57,12 @@ const KeyResultOwnedByUser = ({ onLineClick }: KeyResultOwnedByUserProperties) =
   return (
     <Stack direction="column" gridGap={8}>
       {called && !loading && data ? (
-        <KeyResultOwnedByUserCyclesList cycles={data.cycles} onLineClick={onLineClick} />
+        <KeyResultActiveAndOwnedByUserCyclesList cycles={data.cycles} onLineClick={onLineClick} />
       ) : (
-        <KeyResultOwnedByUserSkeleton />
+        <KeyResultActiveAndOwnedByUserSkeleton />
       )}
     </Stack>
   )
 }
 
-export default KeyResultOwnedByUser
+export default KeyResultActiveAndOwnedByUser

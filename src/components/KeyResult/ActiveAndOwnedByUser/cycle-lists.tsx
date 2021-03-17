@@ -8,7 +8,7 @@ import KeyResultCycleList from '../CycleList'
 
 import messages from './messages'
 
-export interface KeyResultOwnedByUserCyclesListProperties {
+export interface KeyResultActiveAndOwnedByUserCyclesListProperties {
   cycles: Array<{
     id: Cycle['id']
     keyResults: Cycle['keyResults']
@@ -16,10 +16,10 @@ export interface KeyResultOwnedByUserCyclesListProperties {
   onLineClick?: (id: KeyResult['id']) => void
 }
 
-const KeyResultOwnedByUserCyclesList = ({
+const KeyResultActiveAndOwnedByUserCyclesList = ({
   cycles,
   onLineClick,
-}: KeyResultOwnedByUserCyclesListProperties) => {
+}: KeyResultActiveAndOwnedByUserCyclesListProperties) => {
   const cyclesWithKeyResults = cycles.filter(
     (cycle) => cycle.keyResults && cycle.keyResults.length > 0,
   )
@@ -36,4 +36,4 @@ const KeyResultOwnedByUserCyclesList = ({
   )
 }
 
-export default KeyResultOwnedByUserCyclesList
+export default KeyResultActiveAndOwnedByUserCyclesList

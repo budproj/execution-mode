@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultOwnedByUserMessage = 'emptyStateLabel'
+type KeyResultActiveAndOwnedByUserMessage = 'emptyStateLabel'
 
-export default defineMessages<KeyResultOwnedByUserMessage>({
+export default defineMessages<KeyResultActiveAndOwnedByUserMessage>({
   emptyStateLabel: {
     defaultMessage: 'Você não tem nenhum resultado-chave',
     id: '/K30xB',

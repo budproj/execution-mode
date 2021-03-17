@@ -5,11 +5,11 @@ const Button = {
     text: ({ colorScheme }: ButtonProps) => ({
       color: `${colorScheme ?? 'gray'}.500`,
 
-      '&:hover': {
+      _hover: {
         color: `${colorScheme ?? 'brand'}.400`,
       },
 
-      '&:focus': {
+      _focus: {
         color: `${colorScheme ?? 'brand'}.400`,
         boxShadow: 'none',
       },
@@ -20,16 +20,16 @@ const Button = {
       color: `${colorScheme ?? 'brand'}.500`,
       borderRadius: '2px',
 
-      '&:hover': {
+      _hover: {
         bg: `${colorScheme ?? 'brand'}.500`,
         color: 'white',
       },
 
-      '&:focus': {
+      _focus: {
         boxShadow: 'none',
       },
 
-      '&:active': {
+      _active: {
         bg: `${colorScheme ?? 'brand'}.100`,
         color: `${colorScheme ?? 'brand'}.500`,
       },
@@ -39,15 +39,15 @@ const Button = {
       color: `${colorScheme ?? 'brand'}.500`,
       borderRadius: 4,
 
-      '&:hover': {
+      _hover: {
         bg: `${colorScheme ?? 'brand'}.50`,
       },
 
-      '&:focus': {
+      _focus: {
         boxShadow: 'none',
       },
 
-      '&:active': {
+      _active: {
         bg: `${colorScheme ?? 'brand'}.50`,
       },
     }),
@@ -58,18 +58,18 @@ const Button = {
       borderWidth: '2px',
       borderRadius: '2px',
 
-      '&:hover': {
+      _hover: {
         borderColor: 'brand.400',
         color: 'brand.400',
         bg: 'transparent',
       },
 
-      '&:focus': {
+      _focus: {
         borderColor: 'brand.400',
         color: 'brand.400',
       },
 
-      '&:active': {
+      _active: {
         borderColor: 'brand.400',
         color: 'brand.400',
       },

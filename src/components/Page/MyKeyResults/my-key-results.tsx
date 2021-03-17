@@ -1,10 +1,12 @@
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { PageHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
-import KeyResultsOwnedByUser from 'src/components/KeyResult/OwnedByUser'
+import { KeyResultNotActiveAndOwnedByUser } from 'src/components/KeyResult'
+import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { PageProperties } from 'src/components/Page/types'
@@ -27,9 +29,23 @@ const MyKeyResultsPage = ({ isRootPage }: PageProperties) => {
   return (
     <PageContent showBreadcrumb={!isRootPage}>
       <PageHead title={messages.metaTitle} description={messages.metaDescription} />
-
-      <KeyResultsOwnedByUser onLineClick={handleLineClick} />
       <KeyResultSingleDrawer />
+
+      <Tabs>
+        <TabList>
+          <Tab>{intl.formatMessage(messages.firstTab)}</Tab>
+          <Tab>{intl.formatMessage(messages.secondTab)}</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+          </TabPanel>
+
+          <TabPanel>
+            <KeyResultNotActiveAndOwnedByUser />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </PageContent>
   )
 }

@@ -14,7 +14,7 @@ const Editable = {
       py: 1,
       px: 2,
 
-      '&:focus': {
+      _focus: {
         boxShadow: 'none',
       },
     },

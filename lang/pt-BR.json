@@ -335,6 +335,10 @@
     "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
   },
+  "JBA9+L": {
+    "defaultMessage": "Explorar ciclos anteriores",
+    "description": "This text is displayed as a tab where the user can click to change the view below it"
+  },
   "JZJeBS": {
     "defaultMessage": "Ontem",
     "description": "This label is displayed if the last is yesterday"
@@ -798,6 +802,10 @@
   "mBPu4P": {
     "defaultMessage": "Artigos de suporte",
     "description": "AppBar user menu second item option"
+  },
+  "mdG+CG": {
+    "defaultMessage": "Ciclos ativos",
+    "description": "This text is displayed as a tab where the user can click to change the view below it"
   },
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",

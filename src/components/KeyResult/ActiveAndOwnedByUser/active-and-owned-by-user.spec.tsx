@@ -10,7 +10,7 @@ import { RecoilSpy, waitForComponentToPaint } from 'lib/enzyme/helpers'
 import * as KeyResultCycleList from 'src/components/KeyResult/CycleList'
 import meAtom from 'src/state/recoil/user/me'
 
-import KeyResultOwnedByUser from './owned-by-user'
+import KeyResultActiveAndOwnedByUser from './active-and-owned-by-user'
 import queries from './queries.gql'
 
 const fakeTheme = {
@@ -107,7 +107,7 @@ describe('component lifecycle', () => {
       <MockedProvider mocks={mocks}>
         <RecoilRoot initializeState={initializeState}>
           <ThemeProvider theme={fakeTheme}>
-            <KeyResultOwnedByUser />
+            <KeyResultActiveAndOwnedByUser />
             <RecoilSpy />
           </ThemeProvider>
         </RecoilRoot>
@@ -152,7 +152,7 @@ describe('component lifecycle', () => {
       <MockedProvider mocks={mocks}>
         <RecoilRoot initializeState={initializeState}>
           <ThemeProvider theme={fakeTheme}>
-            <KeyResultOwnedByUser />
+            <KeyResultActiveAndOwnedByUser />
             <RecoilSpy />
           </ThemeProvider>
         </RecoilRoot>
@@ -199,7 +199,7 @@ describe('component renderization', () => {
       <MockedProvider mocks={mocks}>
         <RecoilRoot initializeState={initializeState}>
           <ThemeProvider theme={fakeTheme}>
-            <KeyResultOwnedByUser />
+            <KeyResultActiveAndOwnedByUser />
             <RecoilSpy />
           </ThemeProvider>
         </RecoilRoot>
@@ -209,7 +209,7 @@ describe('component renderization', () => {
     await waitForComponentToPaint(wrapper)
     await waitForComponentToPaint(wrapper)
 
-    const cycleList = wrapper.find('KeyResultOwnedByUserCyclesList')
+    const cycleList = wrapper.find('KeyResultActiveAndOwnedByUserCyclesList')
 
     expect(cycleList.prop('cycles')).toEqual([fakeCycle])
   })

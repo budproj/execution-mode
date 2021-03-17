@@ -14,7 +14,7 @@ const Menu = {
         color: 'gray.200',
       },
 
-      '&:focus': {
+      _focus: {
         bg: 'black.50',
       },
     },
