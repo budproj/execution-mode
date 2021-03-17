@@ -115,6 +115,7 @@ describe('component lifecycle', () => {
     )
 
     await waitForComponentToPaint(wrapper)
+    await waitForComponentToPaint(wrapper)
 
     const spyAnchor = wrapper.find('RecoilSpyAnchor')
     const loadedFirstCycle = spyAnchor.prop(`CYCLE::FAMILY__"${firstCycle.id}"`)
@@ -158,6 +159,7 @@ describe('component lifecycle', () => {
       </MockedProvider>,
     )
 
+    await waitForComponentToPaint(wrapper)
     await waitForComponentToPaint(wrapper)
 
     const spyAnchor = wrapper.find('RecoilSpyAnchor')
@@ -204,6 +206,7 @@ describe('component renderization', () => {
       </MockedProvider>,
     )
 
+    await waitForComponentToPaint(wrapper)
     await waitForComponentToPaint(wrapper)
 
     const cycleList = wrapper.find('KeyResultOwnedByUserCyclesList')
