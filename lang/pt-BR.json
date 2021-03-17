@@ -851,6 +851,10 @@
     "defaultMessage": "Minha conta",
     "description": "AppBar user menu first item option"
   },
+  "qytqsj": {
+    "defaultMessage": "Trimestral",
+    "description": "This text is used as prefix for our quarterly cadences"
+  },
   "r1mfc1": {
     "defaultMessage": "Informações pessoais",
     "description": "This title is displayed as the heading of the personal informations section in our user account settings page"
