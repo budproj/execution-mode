@@ -1,7 +1,7 @@
-import { useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/react'
 import flatten from 'lodash/flatten'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { Cycle } from 'src/components/Cycle/types'
@@ -30,7 +30,10 @@ const KeyResultOwnedByUser = ({ onLineClick }: KeyResultOwnedByUserProperties) =
   const userID = useRecoilValue(meAtom)
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
-  const { data, loading, called } = useQuery<GetKeyResultOwnedByUserWithBindingQuery>(
+  const [
+    fetchUserActiveCycles,
+    { data, loading, called },
+  ] = useLazyQuery<GetKeyResultOwnedByUserWithBindingQuery>(
     queries.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
     {
       variables: {
@@ -44,6 +47,10 @@ const KeyResultOwnedByUser = ({ onLineClick }: KeyResultOwnedByUserProperties) =
       },
     },
   )
+
+  useEffect(() => {
+    if (userID) fetchUserActiveCycles()
+  }, [userID, fetchUserActiveCycles])
 
   return (
     <Stack direction="column" gridGap={8}>
