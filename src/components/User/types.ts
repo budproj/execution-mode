@@ -1,4 +1,4 @@
-import { KeyResult, KeyResultCheckIn, KeyResultCustomList } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 
@@ -28,6 +28,5 @@ export interface User {
   ownedTeams?: Array<Partial<Team>>
   objectives?: Objective[]
   keyResults?: KeyResult[]
-  keyResultCustomLists?: KeyResultCustomList[]
   keyResultCheckIns?: KeyResultCheckIn[]
 }
