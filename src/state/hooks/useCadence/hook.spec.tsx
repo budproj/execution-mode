@@ -40,7 +40,7 @@ describe('hook returned cadence', () => {
     const wrapper = enzyme.mount(<TestComponent fakeCadence={fakeCadence} />)
 
     const expectedAttributes = {
-      prefix: undefined,
+      prefix: 'Trimestral',
     }
     const dummyComponentAttributes = wrapper.find('DummyComponent').props()
 

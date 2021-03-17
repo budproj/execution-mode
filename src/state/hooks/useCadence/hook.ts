@@ -17,7 +17,7 @@ const useCadence = (initialValue?: CADENCE): CadenceHook => {
 
   const cadencePrefixMessageDescriptorHashmap = {
     [CADENCE.YEARLY]: messages.yearlyPrefix,
-    [CADENCE.QUARTERLY]: undefined,
+    [CADENCE.QUARTERLY]: messages.quarterlyPrefix,
   }
 
   const cadencePrefixMessageDescriptor = cadenceValue
