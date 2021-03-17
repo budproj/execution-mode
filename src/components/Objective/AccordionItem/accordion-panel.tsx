@@ -86,6 +86,9 @@ const ObjectiveAccordionPanel = ({
             },
           }}
           bodyProperties={{
+            [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
+              withLastUpdateInfo: true,
+            },
             [KEY_RESULT_LIST_COLUMN.OWNER]: {
               displayName: true,
             },
