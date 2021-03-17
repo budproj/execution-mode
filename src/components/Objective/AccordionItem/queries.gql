@@ -7,6 +7,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
       format
       goal
       initialValue
+      isOutdated
       latestKeyResultCheckIn {
         id
         value
@@ -35,6 +36,10 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
           dateStart
           dateEnd
         }
+      }
+      latestKeyResultCheckIn {
+        id
+        createdAt
       }
     }
   }
