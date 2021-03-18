@@ -31,7 +31,7 @@ const MyKeyResultsPage = ({ isRootPage }: PageProperties) => {
       <PageHead title={messages.metaTitle} description={messages.metaDescription} />
       <KeyResultSingleDrawer />
 
-      <Tabs>
+      <Tabs isLazy>
         <TabList>
           <Tab>{intl.formatMessage(messages.firstTab)}</Tab>
           <Tab>{intl.formatMessage(messages.secondTab)}</Tab>
