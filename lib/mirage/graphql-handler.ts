@@ -1,7 +1,9 @@
 import { createGraphQLHandler } from '@miragejs/graphql'
-import { pickBy, sortBy } from 'lodash'
+import { pickBy, sortBy, flatten } from 'lodash'
 import { ModelInstance } from 'miragejs'
 
+import { CADENCE } from 'src/components/Cycle/constants'
+import { Cycle } from 'src/components/Cycle/types'
 import { KeyResultCheckIn, KeyResultComment } from 'src/components/KeyResult/types'
 import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
@@ -19,6 +21,18 @@ export interface QueryKeyResultTimelineArguments {
 
 export interface QueryUserCompaniesArguments {
   limit?: number
+}
+
+export interface QueryCyclesArguments {
+  active?: boolean
+  cadence?: CADENCE
+  orderBy?: {
+    cadence?: 'DESC' | 'ASC'
+  }
+}
+
+export interface QuerySameTitleCyclesChildrenArguments {
+  parentIds: Array<Cycle['id']>
 }
 
 export interface CreateKeyResultCheckInInterface {
@@ -139,6 +153,33 @@ const graphQLHandler = (mirageSchema: unknown) =>
           const resolvedTeams = filteredTeams.models
 
           return resolvedTeams
+        },
+
+        cycles: (
+          _graphQLSchema: unknown,
+          { orderBy: _, ...filters }: QueryCyclesArguments,
+          { mirageSchema }: any,
+        ): Array<ModelInstance<typeof Models.cycle>> => {
+          const { cycles } = mirageSchema
+
+          const filteredCycles: any = cycles.where(filters)
+          const resolvedCycles = filteredCycles.models
+
+          return resolvedCycles
+        },
+
+        sameTitleCyclesChildren: (
+          _graphQLSchema: unknown,
+          { parentIds }: QuerySameTitleCyclesChildrenArguments,
+          { mirageSchema }: any,
+        ): Array<ModelInstance<typeof Models.cycle>> => {
+          const { cycles } = mirageSchema
+
+          const allCycles = parentIds.map((parentId) => cycles.where({ parentId }))
+          const allCyclesModels = allCycles.map((cycles) => cycles.models)
+          const flattenedCycles = flatten(allCyclesModels)
+
+          return flattenedCycles
         },
       },
     },

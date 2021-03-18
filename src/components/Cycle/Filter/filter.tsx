@@ -4,6 +4,7 @@ import React from 'react'
 import { Cycle } from 'src/components/Cycle/types'
 import { KeyResultNotActiveAndOwnedByUserFilter } from 'src/state/recoil/key-result/filters'
 
+import CycleFilterQuarterSelector from './quarter-selector'
 import CycleFilterYearSelector from './year-selector'
 
 export interface CycleFilterProperties {
@@ -12,12 +13,17 @@ export interface CycleFilterProperties {
   activeFilters?: KeyResultNotActiveAndOwnedByUserFilter
 }
 
-const CycleFilter = ({ onYearFilter, activeFilters }: CycleFilterProperties) => {
+const CycleFilter = ({ onYearFilter, onQuarterFilter, activeFilters }: CycleFilterProperties) => {
   return (
     <Stack direction="row">
       <CycleFilterYearSelector
         filteredYearIDs={activeFilters?.yearCycleIDs}
         onYearFilter={onYearFilter}
+      />
+      <CycleFilterQuarterSelector
+        filteredYearIDs={activeFilters?.yearCycleIDs}
+        filteredQuarterIDs={activeFilters?.quarterCycleIDs}
+        onQuarterFilter={onQuarterFilter}
       />
     </Stack>
   )

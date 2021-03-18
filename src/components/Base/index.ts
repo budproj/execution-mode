@@ -75,3 +75,5 @@ export { default as EditableSelectValue } from './EditableSelectValue'
 export { default as EditableSelectField } from './EditableSelectField'
 
 export { default as TooltipWithRichText } from './TooltipWithRichText'
+
+export { default as ButtonOptionGroup } from './ButtonOptionGroup'

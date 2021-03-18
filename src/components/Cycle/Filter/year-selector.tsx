@@ -11,7 +11,6 @@ import { useRecoilValue } from 'recoil'
 import { Cycle } from 'src/components/Cycle/types'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import ChevronDownIcon from 'src/components/Icon/ChevronDown'
-import ChevronUpIcon from 'src/components/Icon/ChevronUp'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import selectCyclesFromList from 'src/state/recoil/cycle/select-from-list'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
@@ -72,6 +71,7 @@ const CycleFilterYearSelector = ({
         colorScheme="black"
         color="gray.500"
         variant="outline"
+        fontSize="sm"
         leftIcon={
           <CalendarOutlineIcon
             fill="currentColor"
@@ -80,25 +80,15 @@ const CycleFilterYearSelector = ({
         }
         rightIcon={
           <Box pl={4}>
-            {isOpen ? (
-              <ChevronUpIcon
-                fill="gray.200"
-                stroke="gray.200"
-                w={3}
-                h="auto"
-                transition=".2s all ease-in-out"
-                desc={intl.formatMessage(messages.yearRightIconDescOpened)}
-              />
-            ) : (
-              <ChevronDownIcon
-                fill="gray.200"
-                stroke="gray.200"
-                w={3}
-                h="auto"
-                transition=".2s all ease-in-out"
-                desc={intl.formatMessage(messages.yearRightIconDescClosed)}
-              />
-            )}
+            <ChevronDownIcon
+              fill="gray.200"
+              stroke="gray.200"
+              w={3}
+              h="auto"
+              transition=".2s all ease-in-out"
+              desc={intl.formatMessage(messages.yearRightIconDescClosed)}
+              transform={isOpen ? 'rotate(180deg)' : 'none'}
+            />
           </Box>
         }
         _hover={{
@@ -124,7 +114,7 @@ const CycleFilterYearSelector = ({
             </Flex>
           ) : (
             data?.cycles.map((cycle) => (
-              <MenuItemOption key={cycle.id} value={cycle.id}>
+              <MenuItemOption key={cycle.id} value={cycle.id} fontSize="sm">
                 {cycle.title}
               </MenuItemOption>
             ))

@@ -619,6 +619,10 @@
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
     "description": "The alternative text explaining our team at work image"
   },
+  "aKyktL": {
+    "defaultMessage": "Q2",
+    "description": "This button appears as an empty state while the user is selecting the cycle filter"
+  },
   "aO+w74": {
     "defaultMessage": "A confiança mudou neste check-in:",
     "description": "This text is the first line of our icon tooltip when the check-in has a different confidence from the previous check-in"
@@ -666,6 +670,10 @@
   "f6/kwR": {
     "defaultMessage": "Esse é o progresso acumulado dessa semana",
     "description": "This tooltip appears when the user hovers the third column title"
+  },
+  "fI4P80": {
+    "defaultMessage": "Q1",
+    "description": "This button appears as an empty state while the user is selecting the cycle filter"
   },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
@@ -923,6 +931,10 @@
     "defaultMessage": "Hoje",
     "description": "This label is displayed if the date is today"
   },
+  "u4rqek": {
+    "defaultMessage": "Q4",
+    "description": "This button appears as an empty state while the user is selecting the cycle filter"
+  },
   "u7Yaxx": {
     "defaultMessage": "Responsável",
     "description": "The text of the table head related to the Owner column"
@@ -1002,6 +1014,10 @@
   "zev4wl": {
     "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
     "description": "This is a message explaining the flag icon in our check-in form"
+  },
+  "znpwST": {
+    "defaultMessage": "Q3",
+    "description": "This button appears as an empty state while the user is selecting the cycle filter"
   },
   "zsB72A": {
     "defaultMessage": "Pré-visualização",

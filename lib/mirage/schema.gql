@@ -37,6 +37,8 @@ type KeyResultCheckIn implements EntityObject {
   """The ID of this entity"""
   id: ID!
   policies(resource: RESOURCE, constraint: CONSTRAINT): Policy!
+
+  """The reported value in this check-in"""
   value: Float!
   valueIncrease: Float!
 
@@ -256,15 +258,7 @@ type Cycle implements EntityObject {
   Each cycle can relates with a given higher cycle, creating a for of tree-like architecture. If this cycle has any cycle above it, the ID of that will be recorded here
   """
   parentId: ID
-
-  """
-  Each cycle can relates with a given higher cycle, creating a for of tree-like architecture. If this cycle has any cycle above it, that one will be recorded here
-  """
   parent: Cycle
-
-  """
-  Each cycle can have multiple cycles below it. If this cycle has any cycle inside of it, those will be listed here
-  """
   cycles: [Cycle!]
 }
 
@@ -442,7 +436,7 @@ type KeyResult implements EntityObject {
 
   """The description explaining the key result"""
   description: String
-  keyResultCheckIns(limit: Int, order: QUERY_ORDER = DESC): [KeyResultCheckIn!]
+  keyResultCheckIns(limit: Int, order: SORTING = DESC): [KeyResultCheckIn!]
   keyResultComments: [KeyResultComment!]!
   latestKeyResultCheckIn: KeyResultCheckIn
 }
@@ -450,7 +444,7 @@ type KeyResult implements EntityObject {
 union TimelineEntryUnion = KeyResultCheckIn | KeyResultComment
 
 """Defines the order to return your results in a given query"""
-enum QUERY_ORDER {
+enum SORTING {
   DESC
   ASC
 }
@@ -481,11 +475,21 @@ type Query {
 
     """This key filters all queries to a given cadence"""
     cadence: CADENCE
+    orderBy: CycleOrderByInput = {cadence: DESC}
   ): [Cycle!]
+  sameTitleCyclesChildren(parentIds: [ID!]!): [Cycle!]
   objective(id: ID!): Objective!
   keyResult(id: ID!): KeyResult!
   keyResultCheckIn(id: ID!): KeyResultCheckIn!
   keyResultComment(id: ID!): KeyResultComment!
+}
+
+"""In this object the user can define a custom ordering"""
+input CycleOrderByInput {
+  """
+  This key defines how our cycles should be ordered based on their cadence key. Desc sorting means higher cadences first (year-quarter-month-...)
+  """
+  cadence: SORTING
 }
 
 type Mutation {
