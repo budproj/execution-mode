@@ -1,4 +1,5 @@
 import faker from 'faker'
+import flatten from 'lodash/flatten'
 import orderBy from 'lodash/orderBy'
 import { Registry, Server } from 'miragejs'
 
@@ -42,7 +43,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const user = server.create('user', { teams, companies: [company] })
   const otherUsers = server.createList('user', 5, { teams } as any)
 
-  const companyCycle = server.create('cycle', {
+  const strategicCycle = server.create('cycle', {
     title: '2021',
     team: company,
     status: pickRandomModel(statusList),
@@ -50,72 +51,361 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     cadence: CADENCE.YEARLY,
   })
 
-  const cycle = server.create('cycle', {
+  const tacticalCycle = server.create('cycle', {
     title: 'Q1',
     team: company,
     status: pickRandomModel(statusList),
     active: true,
     cadence: CADENCE.QUARTERLY,
-    parent: companyCycle,
+    parent: strategicCycle,
+  })
+
+  const previousStrategicCycle = server.create('cycle', {
+    title: '2020',
+    team: company,
+    status: pickRandomModel(statusList),
+    active: false,
+    cadence: CADENCE.YEARLY,
+  })
+
+  const previousTacticalCycle1 = server.create('cycle', {
+    title: 'Q3',
+    team: company,
+    status: pickRandomModel(statusList),
+    active: false,
+    cadence: CADENCE.QUARTERLY,
+    parent: previousStrategicCycle,
+  })
+
+  const previousTacticalCycle2 = server.create('cycle', {
+    title: 'Q4',
+    team: company,
+    status: pickRandomModel(statusList),
+    active: false,
+    cadence: CADENCE.QUARTERLY,
+    parent: previousStrategicCycle,
+  })
+
+  const oldStrategicCycle = server.create('cycle', {
+    title: '2019',
+    team: company,
+    status: pickRandomModel(statusList),
+    active: false,
+    cadence: CADENCE.YEARLY,
+  })
+
+  const oldTacticalCycle = server.create('cycle', {
+    title: 'Q4',
+    team: company,
+    status: pickRandomModel(statusList),
+    active: false,
+    cadence: CADENCE.QUARTERLY,
+    parent: oldStrategicCycle,
   })
 
   const cycles = {
-    [CADENCE.YEARLY]: companyCycle,
-    [CADENCE.QUARTERLY]: cycle,
+    active: {
+      [CADENCE.YEARLY]: strategicCycle,
+      [CADENCE.QUARTERLY]: tacticalCycle,
+    },
+    inactive: {
+      previous: {
+        [CADENCE.YEARLY]: previousStrategicCycle,
+        [CADENCE.QUARTERLY]: [previousTacticalCycle1, previousTacticalCycle2],
+      },
+      old: {
+        [CADENCE.YEARLY]: oldStrategicCycle,
+        [CADENCE.QUARTERLY]: oldTacticalCycle,
+      },
+    },
   }
 
-  const companyObjectives = server.createList('objective', 3, {
-    cycle: companyCycle,
+  const strategicObjectives = server.createList('objective', 3, {
+    cycle: cycles.active.YEARLY,
     status: pickRandomModel(statusList),
   })
-  const objectives = server.createList('objective', 3, {
-    cycle,
+
+  const tacticalObjectives = server.createList('objective', 3, {
+    cycle: cycles.active.QUARTERLY,
     status: pickRandomModel(statusList),
   })
-  const keyResults = server.createList('keyResult', 10, {
+
+  const previousStrategicObjectives = server.createList('objective', 3, {
+    cycle: cycles.inactive.previous.YEARLY,
+    status: pickRandomModel(statusList),
+  })
+
+  const previousTacticalObjectives1 = server.createList('objective', 3, {
+    cycle: cycles.inactive.previous.QUARTERLY[0],
+    status: pickRandomModel(statusList),
+  })
+
+  const previousTacticalObjectives2 = server.createList('objective', 3, {
+    cycle: cycles.inactive.previous.QUARTERLY[1],
+    status: pickRandomModel(statusList),
+  })
+
+  const oldStrategicObjectives = server.createList('objective', 3, {
+    cycle: cycles.inactive.old.YEARLY,
+    status: pickRandomModel(statusList),
+  })
+
+  const oldTacticalObjectives = server.createList('objective', 3, {
+    cycle: cycles.inactive.old.QUARTERLY,
+    status: pickRandomModel(statusList),
+  })
+
+  const objectives = {
+    active: {
+      [CADENCE.YEARLY]: strategicObjectives,
+      [CADENCE.QUARTERLY]: tacticalObjectives,
+    },
+    inactive: {
+      previous: {
+        [CADENCE.YEARLY]: previousStrategicObjectives,
+        [CADENCE.QUARTERLY]: [previousTacticalObjectives1, previousTacticalObjectives2],
+      },
+      old: {
+        [CADENCE.YEARLY]: oldStrategicObjectives,
+        [CADENCE.QUARTERLY]: oldTacticalObjectives,
+      },
+    },
+  }
+
+  const strategicKeyResults = server.createList('keyResult', 4, {
     owner: user,
-    objective: () => pickRandomModel(objectives),
+    objective: () => pickRandomModel(strategicObjectives),
     team: () => pickRandomModel(teams),
   })
-  const keyResultCheckIns = server.createList('keyResultCheckIn', 40, {
+
+  const tacticalKeyResults = server.createList('keyResult', 4, {
+    owner: user,
+    objective: () => pickRandomModel(tacticalObjectives),
+    team: () => pickRandomModel(teams),
+  })
+
+  const previousStrategicKeyResults = server.createList('keyResult', 4, {
+    owner: user,
+    objective: () => pickRandomModel(previousStrategicObjectives),
+    team: () => pickRandomModel(teams),
+  })
+
+  const previousTacticalKeyResults1 = server.createList('keyResult', 4, {
+    owner: user,
+    objective: () => pickRandomModel(previousTacticalObjectives1),
+    team: () => pickRandomModel(teams),
+  })
+
+  const previousTacticalKeyResults2 = server.createList('keyResult', 4, {
+    owner: user,
+    objective: () => pickRandomModel(previousTacticalObjectives2),
+    team: () => pickRandomModel(teams),
+  })
+
+  const oldStrategicKeyResults = server.createList('keyResult', 4, {
+    owner: user,
+    objective: () => pickRandomModel(oldStrategicObjectives),
+    team: () => pickRandomModel(teams),
+  })
+
+  const oldTacticalKeyResults = server.createList('keyResult', 4, {
+    owner: user,
+    objective: () => pickRandomModel(oldTacticalObjectives),
+    team: () => pickRandomModel(teams),
+  })
+
+  const keyResults = {
+    active: {
+      [CADENCE.YEARLY]: strategicKeyResults,
+      [CADENCE.QUARTERLY]: tacticalKeyResults,
+    },
+    inactive: {
+      previous: {
+        [CADENCE.YEARLY]: previousStrategicKeyResults,
+        [CADENCE.QUARTERLY]: [previousTacticalKeyResults1, previousTacticalKeyResults2],
+      },
+      old: {
+        [CADENCE.YEARLY]: oldStrategicKeyResults,
+        [CADENCE.QUARTERLY]: oldTacticalKeyResults,
+      },
+    },
+  }
+
+  const strategicKeyResultCheckIns = server.createList('keyResultCheckIn', 10, {
     user,
-    keyResult: () => pickRandomModel(keyResults),
+    keyResult: () => pickRandomModel(strategicKeyResults),
     value: buildKeyResultCheckInValue,
     valueIncrease: buildKeyResultCheckInValue,
     policies: basePolicy,
   })
-  const keyResultComments = server.createList('keyResultComment', 100, {
+
+  const tacticalKeyResultCheckIns = server.createList('keyResultCheckIn', 10, {
     user,
-    keyResult: () => pickRandomModel(keyResults),
+    keyResult: () => pickRandomModel(tacticalKeyResults),
+    value: buildKeyResultCheckInValue,
+    valueIncrease: buildKeyResultCheckInValue,
     policies: basePolicy,
   })
 
+  const previousStrategicKeyResultCheckIns = server.createList('keyResultCheckIn', 10, {
+    user,
+    keyResult: () => pickRandomModel(previousStrategicKeyResults),
+    value: buildKeyResultCheckInValue,
+    valueIncrease: buildKeyResultCheckInValue,
+    policies: basePolicy,
+  })
+
+  const previousTacticalKeyResultCheckIns1 = server.createList('keyResultCheckIn', 10, {
+    user,
+    keyResult: () => pickRandomModel(previousTacticalKeyResults1),
+    value: buildKeyResultCheckInValue,
+    valueIncrease: buildKeyResultCheckInValue,
+    policies: basePolicy,
+  })
+
+  const previousTacticalKeyResultCheckIns2 = server.createList('keyResultCheckIn', 10, {
+    user,
+    keyResult: () => pickRandomModel(previousTacticalKeyResults2),
+    value: buildKeyResultCheckInValue,
+    valueIncrease: buildKeyResultCheckInValue,
+    policies: basePolicy,
+  })
+
+  const oldStrategicKeyResultCheckIns = server.createList('keyResultCheckIn', 10, {
+    user,
+    keyResult: () => pickRandomModel(oldStrategicKeyResults),
+    value: buildKeyResultCheckInValue,
+    valueIncrease: buildKeyResultCheckInValue,
+    policies: basePolicy,
+  })
+
+  const oldTacticalKeyResultCheckIns = server.createList('keyResultCheckIn', 10, {
+    user,
+    keyResult: () => pickRandomModel(oldTacticalKeyResults),
+    value: buildKeyResultCheckInValue,
+    valueIncrease: buildKeyResultCheckInValue,
+    policies: basePolicy,
+  })
+
+  const keyResultCheckIns = {
+    active: {
+      [CADENCE.YEARLY]: strategicKeyResultCheckIns,
+      [CADENCE.QUARTERLY]: tacticalKeyResultCheckIns,
+    },
+    inactive: {
+      previous: {
+        [CADENCE.YEARLY]: previousStrategicKeyResultCheckIns,
+        [CADENCE.QUARTERLY]: [
+          previousTacticalKeyResultCheckIns1,
+          previousTacticalKeyResultCheckIns2,
+        ],
+      },
+      old: {
+        [CADENCE.YEARLY]: oldStrategicKeyResultCheckIns,
+        [CADENCE.QUARTERLY]: oldTacticalKeyResultCheckIns,
+      },
+    },
+  }
+
+  const strategicKeyResultComments = server.createList('keyResultComment', 10, {
+    user,
+    keyResult: () => pickRandomModel(strategicKeyResults),
+    policies: basePolicy,
+  })
+
+  const tacticalKeyResultComments = server.createList('keyResultComment', 10, {
+    user,
+    keyResult: () => pickRandomModel(tacticalKeyResults),
+    policies: basePolicy,
+  })
+
+  const previousStrategicKeyResultComments = server.createList('keyResultComment', 10, {
+    user,
+    keyResult: () => pickRandomModel(previousStrategicKeyResults),
+    policies: basePolicy,
+  })
+
+  const previousTacticalKeyResultComments1 = server.createList('keyResultComment', 10, {
+    user,
+    keyResult: () => pickRandomModel(previousTacticalKeyResults1),
+    policies: basePolicy,
+  })
+
+  const previousTacticalKeyResultComments2 = server.createList('keyResultComment', 10, {
+    user,
+    keyResult: () => pickRandomModel(previousTacticalKeyResults2),
+    policies: basePolicy,
+  })
+
+  const oldStrategicKeyResultComments = server.createList('keyResultComment', 10, {
+    user,
+    keyResult: () => pickRandomModel(oldStrategicKeyResults),
+    policies: basePolicy,
+  })
+
+  const oldTacticalKeyResultComments = server.createList('keyResultComment', 10, {
+    user,
+    keyResult: () => pickRandomModel(oldTacticalKeyResults),
+    policies: basePolicy,
+  })
+
+  const keyResultComments = {
+    active: {
+      [CADENCE.YEARLY]: strategicKeyResultComments,
+      [CADENCE.QUARTERLY]: tacticalKeyResultComments,
+    },
+    inactive: {
+      previous: {
+        [CADENCE.YEARLY]: previousStrategicKeyResultComments,
+        [CADENCE.QUARTERLY]: [
+          previousTacticalKeyResultComments1,
+          previousTacticalKeyResultComments2,
+        ],
+      },
+      old: {
+        [CADENCE.YEARLY]: oldStrategicKeyResultComments,
+        [CADENCE.QUARTERLY]: oldTacticalKeyResultComments,
+      },
+    },
+  }
+
   const users = [user, ...otherUsers]
+
   company.update('users', users as any)
-  company.update('objectives', companyObjectives as any)
+  company.update('objectives', [
+    ...objectives.active.YEARLY,
+    ...objectives.inactive.previous.YEARLY,
+    ...objectives.inactive.old.YEARLY,
+  ] as any)
   rootTeam.update('users', users as any)
-  rootTeam.update('objectives', [objectives[0]] as any)
+  rootTeam.update('objectives', [
+    ...objectives.active.QUARTERLY,
+    ...flatten(objectives.inactive.previous.QUARTERLY),
+    ...objectives.inactive.old.QUARTERLY,
+  ] as any)
 
   teams.map((team) => {
     team.update('users', users as any)
-    team.update('objectives', objectives as any)
+    team.update('objectives', [
+      ...objectives.active.QUARTERLY,
+      ...flatten(objectives.inactive.previous.QUARTERLY),
+      ...objectives.inactive.old.QUARTERLY,
+    ] as any)
 
     return team
   })
 
-  company.update('latestKeyResultCheckIn', keyResultCheckIns[0] as any)
+  company.update('latestKeyResultCheckIn', tacticalKeyResultCheckIns[0] as any)
 
-  keyResults.map((keyResult) => {
+  tacticalKeyResults.map((keyResult) => {
     const latestKeyResultCheckIn = keyResult.keyResultCheckIns.models[0] as any
-    const keyResultCheckIns = keyResult.keyResultCheckIns.models
-    const objective = keyResult.objective as any
-    const cycle = cycles[objective.cycle.cadence as CADENCE]
+    const tacticalKeyResultCheckIns = keyResult.keyResultCheckIns.models
 
-    keyResultCheckIns.map((keyResultCheckIn, index) => {
+    tacticalKeyResultCheckIns.map((keyResultCheckIn, index) => {
       const parentIndex = index + 1
 
-      if (parentIndex < keyResultCheckIns.length) {
-        const parent = keyResultCheckIns[parentIndex]
+      if (parentIndex < tacticalKeyResultCheckIns.length) {
+        const parent = tacticalKeyResultCheckIns[parentIndex]
         keyResultCheckIn.update('parent', parent)
       }
 
@@ -125,22 +415,21 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult.update('latestKeyResultCheckIn', latestKeyResultCheckIn)
     keyResult.update('keyResultCheckIns', keyResult.keyResultCheckIns)
 
-    const previousCycleKeyResultIds = (cycle.attrs.keyResultIds as any[]) ?? []
-    const previousCycleKeyResults = previousCycleKeyResultIds.map(
-      (keyResultId: any) => keyResults[keyResultId - 1],
-    )
-    const newCycleKeyResults = [...previousCycleKeyResults, keyResult]
-
-    cycle.update('keyResults', newCycleKeyResults as any)
-    console.log(newCycleKeyResults, 'tag')
-
     return keyResult
   })
+
+  cycles.active.YEARLY.update('keyResults', strategicKeyResults as any)
+  cycles.active.QUARTERLY.update('keyResults', tacticalKeyResults as any)
+  cycles.inactive.previous.YEARLY.update('keyResults', previousStrategicKeyResults as any)
+  cycles.inactive.previous.QUARTERLY[0].update('keyResults', previousTacticalKeyResults1 as any)
+  cycles.inactive.previous.QUARTERLY[1].update('keyResults', previousTacticalKeyResults2 as any)
+  cycles.inactive.old.YEARLY.update('keyResults', oldStrategicKeyResults as any)
+  cycles.inactive.old.QUARTERLY.update('keyResults', oldTacticalKeyResults as any)
 
   logger.debug('Inserted fake data on MirageJS server', {
     data: {
       company,
-      companyObjectives,
+      strategicObjectives,
       rootTeam,
       teams,
       user,
