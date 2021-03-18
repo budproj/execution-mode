@@ -1,13 +1,19 @@
 import { useLazyQuery } from '@apollo/client'
+import { Stack } from '@chakra-ui/layout'
 import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
 import React, { useEffect } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
+import CycleFilter from 'src/components/Cycle/Filter'
 import { Cycle } from 'src/components/Cycle/types'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import filtersAtomFamily, {
+  KEY_RESULT_FILTER_TYPE,
+  KeyResultNotActiveAndOwnedByUserFilter,
+} from 'src/state/recoil/key-result/filters'
 import meAtom from 'src/state/recoil/user/me'
 
 import { KeyResult } from '../types'
@@ -20,6 +26,9 @@ export interface GetKeyResultNotActiveAndOwnedByUserWithBindingQuery {
 
 const KeyResultNotActiveAndOwnedByUser = () => {
   const userID = useRecoilValue(meAtom)
+  const [filters, setFilters] = useRecoilState<KeyResultNotActiveAndOwnedByUserFilter | undefined>(
+    filtersAtomFamily(KEY_RESULT_FILTER_TYPE.NOT_ACTIVE_AND_OWNED_BY_USER),
+  )
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [
@@ -46,7 +55,33 @@ const KeyResultNotActiveAndOwnedByUser = () => {
     if (userID) fetchUserActiveCycles()
   }, [userID, fetchUserActiveCycles])
 
-  return <p>Ok</p>
+  const handleYearFilterUpdate = (yearCycleIDs: Array<Cycle['id']>) => {
+    setFilters({
+      yearCycleIDs,
+      quarterCycleIDs: filters ? filters.quarterCycleIDs : [],
+    })
+  }
+
+  const handleQuarterFilterUpdate = (quarterCycleIDs: Array<Cycle['id']>) => {
+    setFilters({
+      quarterCycleIDs,
+      yearCycleIDs: filters ? filters.yearCycleIDs : [],
+    })
+  }
+
+  return (
+    <Stack direction="column" spacing={8}>
+      <Stack direction="row">
+        <CycleFilter
+          activeFilters={filters}
+          onYearFilter={handleYearFilterUpdate}
+          onQuarterFilter={handleQuarterFilterUpdate}
+        />
+      </Stack>
+
+      <p>KRs</p>
+    </Stack>
+  )
 }
 
 export default KeyResultNotActiveAndOwnedByUser

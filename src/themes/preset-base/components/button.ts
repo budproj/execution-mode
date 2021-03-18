@@ -52,26 +52,25 @@ const Button = {
       },
     }),
 
-    outline: () => ({
-      borderColor: 'brand.500',
-      color: 'brand.500',
-      borderWidth: '2px',
-      borderRadius: '2px',
+    outline: ({ colorScheme }: ButtonProps) => ({
+      color: `${colorScheme ?? 'brand'}.500`,
+      borderColor: `${colorScheme ?? 'brand'}.100`,
+      borderWidth: 2,
+      borderRadius: 4,
 
       _hover: {
-        borderColor: 'brand.400',
-        color: 'brand.400',
+        borderColor: `${colorScheme ?? 'brand'}.400`,
         bg: 'transparent',
       },
 
       _focus: {
-        borderColor: 'brand.400',
-        color: 'brand.400',
+        borderColor: `${colorScheme ?? 'brand'}.400`,
+        boxShadow: 'none',
       },
 
       _active: {
-        borderColor: 'brand.400',
-        color: 'brand.400',
+        borderColor: `${colorScheme ?? 'brand'}.400`,
+        bg: 'transparent',
       },
     }),
   },

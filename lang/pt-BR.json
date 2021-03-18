@@ -171,6 +171,14 @@
     "defaultMessage": "Vincule seu perfil às suas redes sociais para facilitar a conexão com seus colegas!",
     "description": "This subtitle is displayed as the subtitle of the social media section in our user account settings page"
   },
+  "7Yw26b": {
+    "defaultMessage": "Selecione o ano",
+    "description": "This message is displayed when no year filter was selected"
+  },
+  "7d+540": {
+    "defaultMessage": "Uma seta para cima, indicando que o menu de seleção de ciclos está aberto",
+    "description": "This message is displayed to the user screen reader when the year select menu is opened"
+  },
   "89ola3": {
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
@@ -475,6 +483,10 @@
     "defaultMessage": "A página que você está procurando não foi encontrada!",
     "description": "The title displayed in our not found error page"
   },
+  "SiJuyU": {
+    "defaultMessage": "Um ícone de calendário, indicando que aqui você seleciona o ano que deseja filtrar",
+    "description": "This message is used by screen readers to explain the icon to the user"
+  },
   "Smwz9L": {
     "defaultMessage": "Descreve o período no qual esse resultado-chave faz parte",
     "description": "This tooltip explains the sixth column of the key result list"
@@ -638,6 +650,10 @@
   "dymB9a": {
     "defaultMessage": "Cada resultado-chave pertence a um objetivo",
     "description": "This tooltip explains the second column of the key result list"
+  },
+  "e37pvj": {
+    "defaultMessage": "Uma seta para baixo, indicando que ao clicar você irá abrir a lista de ciclos",
+    "description": "This message is displayed to the user screen reader when the year select menu is closed"
   },
   "e9PG+t": {
     "defaultMessage": "por {author}",
