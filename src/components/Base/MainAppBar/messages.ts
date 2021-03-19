@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type AppBarMessage =
+type MainAppBarMessage =
   | 'firstMenuItem'
   | 'secondMenuItem'
   | 'thirdMenuItem'
@@ -11,23 +11,23 @@ type AppBarMessage =
   | 'settingsIconTitle'
   | 'settingsIconDesc'
 
-export default defineMessages<AppBarMessage>({
+export default defineMessages<MainAppBarMessage>({
   firstMenuItem: {
     defaultMessage: 'Painel',
-    id: 'RcUoJA',
-    description: 'AppBar menu item that links to "Dashboard" page',
+    id: '4cmOYV',
+    description: 'MainAppBar menu item that links to "Dashboard" page',
   },
 
   secondMenuItem: {
     defaultMessage: 'Meus Resultados-Chave',
-    id: 'B5ZikQ',
-    description: 'AppBar menu item that links to "My Key Results" page',
+    id: 'ytvOyM',
+    description: 'MainAppBar menu item that links to "My Key Results" page',
   },
 
   thirdMenuItem: {
     defaultMessage: 'Explorar',
-    id: 'I5aN4R',
-    description: 'AppBar menu item that links to teams "Explore" page',
+    id: 'ciNUJf',
+    description: 'MainAppBar menu item that links to teams "Explore" page',
   },
 
   searchIconTitle: {

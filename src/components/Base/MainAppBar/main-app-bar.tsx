@@ -4,19 +4,19 @@ import { useIntl } from 'react-intl'
 
 import Logotype from 'src/components/Base/Logotype'
 
-import AppBarHelperButtons from './HelperButtons'
-import AppBarMenuItem from './MenuItem'
-import AppBarUserMenu from './UserMenu'
+import MainAppBarHelperButtons from './HelperButtons'
+import MainAppBarMenuItem from './MenuItem'
+import MainAppBarUserMenu from './UserMenu'
 import { RIGHT_WING_GRID_GAP } from './constants'
 import messages from './messages'
 
-export type AppBarVariant = 'default' | 'onlyLogotype'
+export type MainAppBarVariant = 'default' | 'onlyLogotype'
 
-export interface AppBarProperties {
-  variant: AppBarVariant
+export interface MainAppBarProperties {
+  variant: MainAppBarVariant
 }
 
-const AppBar = ({ variant }: AppBarProperties): ReactElement => {
+const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
   const intl = useIntl()
 
   return (
@@ -35,12 +35,15 @@ const AppBar = ({ variant }: AppBarProperties): ReactElement => {
       {variant !== 'onlyLogotype' && (
         <>
           <Flex gridGap={20} flexGrow={1}>
-            <AppBarMenuItem label={intl.formatMessage(messages.firstMenuItem)} href="/" />
-            <AppBarMenuItem
+            <MainAppBarMenuItem label={intl.formatMessage(messages.firstMenuItem)} href="/" />
+            <MainAppBarMenuItem
               label={intl.formatMessage(messages.secondMenuItem)}
               href="/my-key-results"
             />
-            <AppBarMenuItem label={intl.formatMessage(messages.thirdMenuItem)} href="/explore" />
+            <MainAppBarMenuItem
+              label={intl.formatMessage(messages.thirdMenuItem)}
+              href="/explore"
+            />
           </Flex>
 
           <Flex
@@ -49,8 +52,8 @@ const AppBar = ({ variant }: AppBarProperties): ReactElement => {
             alignItems="center"
             gridGap={RIGHT_WING_GRID_GAP}
           >
-            <AppBarHelperButtons />
-            <AppBarUserMenu />
+            <MainAppBarHelperButtons />
+            <MainAppBarUserMenu />
           </Flex>
         </>
       )}
@@ -58,8 +61,8 @@ const AppBar = ({ variant }: AppBarProperties): ReactElement => {
   )
 }
 
-AppBar.defaultProps = {
+MainAppBar.defaultProps = {
   variant: 'default',
 }
 
-export default AppBar
+export default MainAppBar

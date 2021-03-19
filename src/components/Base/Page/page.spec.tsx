@@ -45,26 +45,26 @@ describe('props customization', () => {
     expect(box.props()).toMatchObject(properties)
   })
 
-  it('asks to display only the logotype in the AppBar if we ask to do it', () => {
+  it('asks to display only the logotype in the MainAppBar if we ask to do it', () => {
     const result = enzyme.shallow(
       <Page appBarVariant="onlyLogotype">
         <FakeComponent />
       </Page>,
     )
 
-    const appBar = result.find('AppBar')
+    const appBar = result.find('MainAppBar')
 
     expect(appBar.prop('variant')).toEqual('onlyLogotype')
   })
 
-  it('shows the default AppBar if we do not ask to hide it', () => {
+  it('shows the default MainAppBar if we do not ask to hide it', () => {
     const result = enzyme.shallow(
       <Page>
         <FakeComponent />
       </Page>,
     )
 
-    const appBar = result.find('AppBar')
+    const appBar = result.find('MainAppBar')
 
     expect(appBar.prop('variant')).toEqual('default')
   })

@@ -1,18 +1,18 @@
 import { Box, BoxProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import AppBar from 'src/components/Base/AppBar'
+import MainAppBar from 'src/components/Base/MainAppBar'
 
-import { AppBarVariant } from '../AppBar/app-bar'
+import { MainAppBarVariant } from '../MainAppBar/main-app-bar'
 
 export interface PageProperties extends BoxProps {
   children: ReactElement | ReactElement[]
-  appBarVariant?: AppBarVariant
+  appBarVariant?: MainAppBarVariant
 }
 
 const Page = ({ children, appBarVariant, ...rest }: PageProperties): ReactElement => (
   <Box {...rest}>
-    <AppBar variant={appBarVariant} />
+    <MainAppBar variant={appBarVariant} />
     {children}
   </Box>
 )

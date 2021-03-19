@@ -20,11 +20,17 @@ import { KeyResult } from '../types'
 
 import queries from './queries.gql'
 
+export interface KeyResultNotActiveAndOwnedByUserProperties {
+  onLineClick?: (id: KeyResult['id']) => void
+}
+
 export interface GetKeyResultNotActiveAndOwnedByUserWithBindingQuery {
   cycles: Cycle[]
 }
 
-const KeyResultNotActiveAndOwnedByUser = () => {
+const KeyResultNotActiveAndOwnedByUser = (
+  _properties: KeyResultNotActiveAndOwnedByUserProperties,
+) => {
   const userID = useRecoilValue(meAtom)
   const [filters, setFilters] = useRecoilState<KeyResultNotActiveAndOwnedByUserFilter | undefined>(
     filtersAtomFamily(KEY_RESULT_FILTER_TYPE.NOT_ACTIVE_AND_OWNED_BY_USER),

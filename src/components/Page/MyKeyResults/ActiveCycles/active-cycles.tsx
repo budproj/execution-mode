@@ -1,21 +1,21 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/tabs'
+import { Box } from '@chakra-ui/layout'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { PageHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
-import { KeyResultNotActiveAndOwnedByUser } from 'src/components/KeyResult'
 import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
+import MyKeyResultsPageSwitcher from 'src/components/Page/MyKeyResults/Switcher'
 import { PageProperties } from 'src/components/Page/types'
 import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
 import messages from './messages'
 
-const MyKeyResultsPage = ({ isRootPage }: PageProperties) => {
+const MyKeyResultsActiveCyclesPage = ({ isRootPage }: PageProperties) => {
   const intl = useIntl()
   const setPageTitle = useSetRecoilState(pageTitleAtom)
   const setOpenDrawer = useSetRecoilState(keyResultDrawerOpen)
@@ -31,23 +31,13 @@ const MyKeyResultsPage = ({ isRootPage }: PageProperties) => {
       <PageHead title={messages.metaTitle} description={messages.metaDescription} />
       <KeyResultSingleDrawer />
 
-      <Tabs isLazy>
-        <TabList>
-          <Tab>{intl.formatMessage(messages.firstTab)}</Tab>
-          <Tab>{intl.formatMessage(messages.secondTab)}</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
-          </TabPanel>
+      <Box pb={8}>
+        <MyKeyResultsPageSwitcher />
+      </Box>
 
-          <TabPanel>
-            <KeyResultNotActiveAndOwnedByUser />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+      <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
     </PageContent>
   )
 }
 
-export default MyKeyResultsPage
+export default MyKeyResultsActiveCyclesPage

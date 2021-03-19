@@ -4,11 +4,11 @@ import React from 'react'
 import SettingsButton from 'src/components/Base/SettingsButton'
 import SupportButton from 'src/components/Base/SupportButton'
 
-const AppBarHelperButtons = () => (
+const MainAppBarHelperButtons = () => (
   <Flex>
     <SupportButton />
     <SettingsButton />
   </Flex>
 )
 
-export default AppBarHelperButtons
+export default MainAppBarHelperButtons

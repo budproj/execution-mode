@@ -1,4 +1,4 @@
-export { default as AppBar } from './AppBar'
+export { default as MainAppBar } from './MainAppBar'
 
 export { default as AuthzGatekeeper } from './AuthzGatekeeper'
 
@@ -77,3 +77,7 @@ export { default as EditableSelectField } from './EditableSelectField'
 export { default as TooltipWithRichText } from './TooltipWithRichText'
 
 export { default as ButtonOptionGroup } from './ButtonOptionGroup'
+
+export { default as RouteTab } from './RouteTab'
+
+export { default as RouteTabs } from './RouteTabs'

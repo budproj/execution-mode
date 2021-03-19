@@ -1,7 +1,7 @@
 import React from 'react'
 
-import MyKeyResultsPage from 'src/components/Page/MyKeyResults'
+import MyKeyResultsActiveCyclesPage from 'src/components/Page/MyKeyResults/ActiveCycles'
 
-const MyKeyResultsIndex = () => <MyKeyResultsPage isRootPage />
+const MyKeyResultsIndex = () => <MyKeyResultsActiveCyclesPage isRootPage />
 
 export default MyKeyResultsIndex

@@ -217,7 +217,7 @@
   },
   "B5ZikQ": {
     "defaultMessage": "Meus Resultados-Chave",
-    "description": "AppBar menu item that links to \"My Key Results\" page"
+    "description": "MainAppBar menu item that links to \"My Key Results\" page"
   },
   "Ba8bU1": {
     "defaultMessage": "Enviar comentário",
@@ -325,7 +325,7 @@
   },
   "I5aN4R": {
     "defaultMessage": "Explorar",
-    "description": "AppBar menu item that links to teams \"Explore\" page"
+    "description": "MainAppBar menu item that links to teams \"Explore\" page"
   },
   "IGODpK": {
     "defaultMessage": "Ciclo",
@@ -465,7 +465,7 @@
   },
   "RcUoJA": {
     "defaultMessage": "Painel",
-    "description": "AppBar menu item that links to \"Dashboard\" page"
+    "description": "MainAppBar menu item that links to \"Dashboard\" page"
   },
   "RrW2fc": {
     "defaultMessage": "Atualize seu cargo",
@@ -725,7 +725,7 @@
   },
   "h5uqwJ": {
     "defaultMessage": "Fale com nosso suporte técnico",
-    "description": "AppBar user menu third item option"
+    "description": "MainAppBar user menu third item option"
   },
   "hMXuTX": {
     "defaultMessage": "Masculino",
@@ -825,7 +825,7 @@
   },
   "mBPu4P": {
     "defaultMessage": "Artigos de suporte",
-    "description": "AppBar user menu second item option"
+    "description": "MainAppBar user menu second item option"
   },
   "mdG+CG": {
     "defaultMessage": "Ciclos ativos",
@@ -881,7 +881,7 @@
   },
   "qmEcGQ": {
     "defaultMessage": "Minha conta",
-    "description": "AppBar user menu first item option"
+    "description": "MainAppBar user menu first item option"
   },
   "qytqsj": {
     "defaultMessage": "Trimestral",

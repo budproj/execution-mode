@@ -62,6 +62,12 @@ const publicRuntimeConfig = {
     },
 
     {
+      source: '/pt-BR/meus-resultados-chave/ciclos-anteriores',
+      destination: '/my-key-results/previous-cycles',
+      locale: 'pt-BR',
+    },
+
+    {
       source: '/pt-BR/explorar',
       destination: '/explore',
       locale: 'pt-BR',
