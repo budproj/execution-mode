@@ -48,22 +48,13 @@ const KeyResultListBodyColumnKeyResult = ({
     >
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
-          <Skeleton
-            borderRadius={10}
-            isLoaded={isKeyResultLoaded}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-          >
+          <Skeleton borderRadius={10} isLoaded={isKeyResultLoaded}>
             <KeyResultDynamicIcon title={title} />
           </Skeleton>
         )}
 
         <Box>
-          <Skeleton
-            isLoaded={isKeyResultLoaded}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-          >
+          <Skeleton isLoaded={isKeyResultLoaded}>
             <Text color="black.900">{title ?? 'This is a sample KR title'}</Text>
           </Skeleton>
 

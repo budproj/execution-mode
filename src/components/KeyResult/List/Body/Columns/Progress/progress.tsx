@@ -52,11 +52,7 @@ const KeyResultListBodyColumnProgress = ({
     <KeyResultListBodyColumnBase preventLineClick>
       <Flex flexDir="column">
         <Box w="100%">
-          <Skeleton
-            isLoaded={isKeyResultLoaded}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-          >
+          <Skeleton isLoaded={isKeyResultLoaded}>
             <ProgressSlider id={id} canChange={canChange} />
           </Skeleton>
         </Box>
@@ -67,9 +63,6 @@ const KeyResultListBodyColumnProgress = ({
             minW="40%"
             mt={isKeyResultLoaded ? 'inherit' : '4px'}
             isLoaded={isKeyResultLoaded}
-            flexGrow={1}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
             <ProgressMask
               value={draftValue}
@@ -87,13 +80,13 @@ const KeyResultListBodyColumnProgress = ({
             />
           </Skeleton>
 
+          <Box flexGrow={1} />
+
           <Skeleton
             noOfLines={1}
             minW="40%"
             mt={isKeyResultLoaded ? 'inherit' : '4px'}
             isLoaded={isKeyResultLoaded}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
             <ProgressMask
               value={goal}

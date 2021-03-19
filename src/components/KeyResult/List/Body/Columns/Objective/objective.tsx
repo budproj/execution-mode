@@ -31,12 +31,7 @@ const KeyResultListBodyColumnObjective = ({
   return (
     <KeyResultListBodyColumnBase>
       <Flex gridGap={4} alignItems="center">
-        <Skeleton
-          borderRadius={10}
-          isLoaded={isObjectiveLoaded}
-          fadeDuration={0}
-          /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-        >
+        <Skeleton borderRadius={10} isLoaded={isObjectiveLoaded}>
           <Box borderRadius={10} p={4} bg="gray.50">
             <StackIcon
               desc={intl.formatMessage(messages.stackIconDesc)}
@@ -50,8 +45,6 @@ const KeyResultListBodyColumnObjective = ({
         <Box>
           <Skeleton
             isLoaded={isObjectiveLoaded}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
             {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
           >
             <Text color="gray.300">{objective?.title}</Text>
