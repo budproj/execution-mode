@@ -19,6 +19,7 @@ export interface BudPublicConfig {
 }
 
 export interface BudServerConfig {
+  url: string
   host: HOST
   supportedLocales: LOCALE[]
 }

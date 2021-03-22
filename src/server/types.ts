@@ -7,5 +7,6 @@ export interface ServerConfig {
   port: string
   dev: boolean
   host: string
+  url: string
   https: HttpsServerConfig
 }

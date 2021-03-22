@@ -3,6 +3,7 @@ const path = require('path')
 const _ = require('lodash')
 
 const {
+  URL,
   HOST,
   APP_ENV,
   LOCALE_OVERRIDE,
@@ -88,6 +89,7 @@ const publicRuntimeConfig = {
 }
 
 const serverRuntimeConfig = {
+  url: URL,
   host: HOST,
   supportedLocales: LOCALE_OVERRIDE ? [LOCALE_OVERRIDE] : SUPPORTED_LOCALES.split(','),
 }
