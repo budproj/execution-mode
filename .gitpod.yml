@@ -9,7 +9,7 @@ tasks:
       rm -rf .gnupg &&
       echo $GNUGPG | base64 -d | tar --no-same-owner -xzvf -
       
-  - name: Development Server
+  - name: Server
     init: npm install
     command: npm run start:dev
 
