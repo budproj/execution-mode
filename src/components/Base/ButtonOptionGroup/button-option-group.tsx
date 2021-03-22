@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 
 export interface ButtonOptionGroupProperties {
   children: ButtonGroupProps['children']
+  onChange?: (values: string[]) => void
 }
 
 interface ButtonOptionEvent extends React.MouseEvent<HTMLDivElement, MouseEvent> {
@@ -15,17 +16,26 @@ interface ButtonOptionTarget extends EventTarget {
   textContent: string
 }
 
-const ButtonOptionGroup = ({ children }: ButtonOptionGroupProperties) => {
-  const [value, setValue] = useState<string[]>([])
+const ButtonOptionGroup = ({ children, onChange }: ButtonOptionGroupProperties) => {
+  const [values, setValue] = useState<string[]>([])
 
   const handleClickCapture = (event: ButtonOptionEvent) => {
-    const newRawValue = [...value, event.target.value ?? event.target.textContent]
-    const newToggledValue = xor(value, newRawValue)
+    const newRawValues = [event.target.value ?? event.target.textContent]
+    const newToggledValues = xor(values, newRawValues)
 
-    setValue(newToggledValue)
+    setValue(newToggledValues)
+    if (onChange) onChange(newToggledValues)
   }
 
-  return <ButtonGroup onClickCapture={handleClickCapture}>{children}</ButtonGroup>
+  const activableChildren = React.Children.map(children, (child) =>
+    React.isValidElement(child)
+      ? React.cloneElement(child, {
+          isActive: values.includes(child.props.value),
+        })
+      : child,
+  )
+
+  return <ButtonGroup onClickCapture={handleClickCapture}>{activableChildren}</ButtonGroup>
 }
 
 export default ButtonOptionGroup

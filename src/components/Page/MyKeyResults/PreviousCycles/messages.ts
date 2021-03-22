@@ -1,11 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type MyKeyResultsPreviousCyclesPageMessage =
-  | 'pageTitle'
-  | 'metaTitle'
-  | 'metaDescription'
-  | 'firstTab'
-  | 'secondTab'
+type MyKeyResultsPreviousCyclesPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription'
 
 export default defineMessages<MyKeyResultsPreviousCyclesPageMessage>({
   pageTitle: {
@@ -25,19 +20,5 @@ export default defineMessages<MyKeyResultsPreviousCyclesPageMessage>({
       'Visualize seus resultados-chave e seus detalhes, atualize seu progresso e seu nível de confiança.',
     id: 'AII0ao',
     description: 'The page description that is displayed in Google and screen readers',
-  },
-
-  firstTab: {
-    defaultMessage: 'Ciclos ativos',
-    id: 'mdG+CG',
-    description:
-      'This text is displayed as a tab where the user can click to change the view below it',
-  },
-
-  secondTab: {
-    defaultMessage: 'Explorar ciclos anteriores',
-    id: 'JBA9+L',
-    description:
-      'This text is displayed as a tab where the user can click to change the view below it',
   },
 })

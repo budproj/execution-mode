@@ -1,6 +1,8 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { ButtonOptionGroup } from 'src/components/Base'
+
 import CycleFilterQuarterSelectorButton from './button'
 import messages from './messages'
 
@@ -14,7 +16,7 @@ const CycleFilterQuarterSelectorEmptyState = () => {
   ]
 
   return (
-    <>
+    <ButtonOptionGroup alignItems="center">
       {buttonContents.map((buttonContent) => (
         <CycleFilterQuarterSelectorButton
           key={Math.random()}
@@ -30,7 +32,7 @@ const CycleFilterQuarterSelectorEmptyState = () => {
           {buttonContent}
         </CycleFilterQuarterSelectorButton>
       ))}
-    </>
+    </ButtonOptionGroup>
   )
 }
 

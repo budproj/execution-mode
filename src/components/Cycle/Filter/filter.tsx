@@ -22,7 +22,6 @@ const CycleFilter = ({ onYearFilter, onQuarterFilter, activeFilters }: CycleFilt
       />
       <CycleFilterQuarterSelector
         filteredYearIDs={activeFilters?.yearCycleIDs}
-        filteredQuarterIDs={activeFilters?.quarterCycleIDs}
         onQuarterFilter={onQuarterFilter}
       />
     </Stack>

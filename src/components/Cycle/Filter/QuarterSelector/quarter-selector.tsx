@@ -1,14 +1,12 @@
 import { useLazyQuery } from '@apollo/client'
 import React, { useEffect } from 'react'
-import { useRecoilValue } from 'recoil'
 
-import { ButtonOptionGroup } from 'src/components/Base'
 import { Cycle } from 'src/components/Cycle/types'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
-import selectCyclesFromList from 'src/state/recoil/cycle/select-from-list'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 
 import CycleFilterQuarterSelectorEmptyState from './empty-state'
+import CycleFilterQuarterSelectorQuarterOptions from './quarter-options'
 import queries from './queries.gql'
 
 export interface CycleFilterQuarterSelectorProperties {
@@ -27,13 +25,11 @@ type QuarterlyCyclesFromFilteredParentsResult = {
 const CycleFilterQuarterSelector = ({
   onQuarterFilter,
   filteredYearIDs,
-  filteredQuarterIDs,
 }: CycleFilterQuarterSelectorProperties) => {
-  const parentCycles = useRecoilValue(selectCyclesFromList(filteredYearIDs))
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const [
     fetchCycleOptions,
-    { called, loading, data },
+    { loading, data },
   ] = useLazyQuery<QuarterlyCyclesFromFilteredParentsResult>(
     queries.GET_QUARTERLY_CYCLES_FROM_FILTERED_PARENTS,
     {
@@ -52,12 +48,14 @@ const CycleFilterQuarterSelector = ({
     if (hasParentCycles) fetchCycleOptions()
   }, [hasParentCycles, fetchCycleOptions])
 
-  console.log(called, loading, data, 'tag')
-
-  return (
-    <ButtonOptionGroup>
-      {hasParentCycles ? <p>Ok</p> : <CycleFilterQuarterSelectorEmptyState />}
-    </ButtonOptionGroup>
+  return hasParentCycles ? (
+    <CycleFilterQuarterSelectorQuarterOptions
+      isLoading={loading}
+      quarters={data?.sameTitleCyclesChildren}
+      onFilter={onQuarterFilter}
+    />
+  ) : (
+    <CycleFilterQuarterSelectorEmptyState />
   )
 }
 

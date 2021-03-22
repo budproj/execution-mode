@@ -75,6 +75,10 @@ const KeyResultNotActiveAndOwnedByUser = (
     })
   }
 
+  useEffect(() => {
+    console.log(filters, 'tag')
+  }, [filters])
+
   return (
     <Stack direction="column" spacing={8}>
       <Stack direction="row">

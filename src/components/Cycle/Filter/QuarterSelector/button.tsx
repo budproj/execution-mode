@@ -9,6 +9,10 @@ const CycleFilterQuarterSelectorButton = (properties: ButtonProps) => (
     px={5}
     variant="solid"
     fontSize="xs"
+    _active={{
+      bg: 'gray.500',
+      color: 'white',
+    }}
     {...properties}
   />
 )
