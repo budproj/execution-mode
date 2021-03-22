@@ -131,6 +131,10 @@
     "defaultMessage": "Últimas atividades",
     "description": "This text is displayed at the top of our timeline, as its title"
   },
+  "4cmOYV": {
+    "defaultMessage": "Painel",
+    "description": "MainAppBar menu item that links to \"Dashboard\" page"
+  },
   "4f4cWE": {
     "defaultMessage": "Alto",
     "description": "We use this tag to group every key result with confidence higher than 66"
@@ -214,10 +218,6 @@
   "B0G29o": {
     "defaultMessage": "Baixo",
     "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
-  },
-  "B5ZikQ": {
-    "defaultMessage": "Meus Resultados-Chave",
-    "description": "MainAppBar menu item that links to \"My Key Results\" page"
   },
   "Ba8bU1": {
     "defaultMessage": "Enviar comentário",
@@ -323,10 +323,6 @@
     "defaultMessage": "Ver menos...",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
-  "I5aN4R": {
-    "defaultMessage": "Explorar",
-    "description": "MainAppBar menu item that links to teams \"Explore\" page"
-  },
   "IGODpK": {
     "defaultMessage": "Ciclo",
     "description": "The text of the table head related to the Cycle column"
@@ -403,6 +399,10 @@
     "defaultMessage": "Cancelar check-in",
     "description": "This message is displayed as a label button when the check-in form is opened in our key result section"
   },
+  "Nwj8qY": {
+    "defaultMessage": "Minha conta",
+    "description": "MainAppBar user menu first item option"
+  },
   "O0072X": {
     "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawer"
@@ -462,10 +462,6 @@
   "RZrZdZ": {
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
-  },
-  "RcUoJA": {
-    "defaultMessage": "Painel",
-    "description": "MainAppBar menu item that links to \"Dashboard\" page"
   },
   "RrW2fc": {
     "defaultMessage": "Atualize seu cargo",
@@ -647,6 +643,14 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
+  "cPGOoL": {
+    "defaultMessage": "Fale com nosso suporte técnico",
+    "description": "MainAppBar user menu third item option"
+  },
+  "ciNUJf": {
+    "defaultMessage": "Explorar",
+    "description": "MainAppBar menu item that links to teams \"Explore\" page"
+  },
   "dB4Sbq": {
     "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
     "description": "This tooltip appears when the user hovers the second column title"
@@ -722,10 +726,6 @@
   "h4sP/q": {
     "defaultMessage": "Minha conta",
     "description": "The page title that our users should see in the my profile page"
-  },
-  "h5uqwJ": {
-    "defaultMessage": "Fale com nosso suporte técnico",
-    "description": "MainAppBar user menu third item option"
   },
   "hMXuTX": {
     "defaultMessage": "Masculino",
@@ -823,10 +823,6 @@
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
   },
-  "mBPu4P": {
-    "defaultMessage": "Artigos de suporte",
-    "description": "MainAppBar user menu second item option"
-  },
   "mdG+CG": {
     "defaultMessage": "Ciclos ativos",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
@@ -878,10 +874,6 @@
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
-  },
-  "qmEcGQ": {
-    "defaultMessage": "Minha conta",
-    "description": "MainAppBar user menu first item option"
   },
   "qytqsj": {
     "defaultMessage": "Trimestral",
@@ -982,6 +974,14 @@
   "xkN783": {
     "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}}",
     "description": "This message displays the latest report status for a given component"
+  },
+  "yq7/PT": {
+    "defaultMessage": "Artigos de suporte",
+    "description": "MainAppBar user menu second item option"
+  },
+  "ytvOyM": {
+    "defaultMessage": "Meus Resultados-Chave",
+    "description": "MainAppBar menu item that links to \"My Key Results\" page"
   },
   "z1FXkV": {
     "defaultMessage": "Ciclo",
