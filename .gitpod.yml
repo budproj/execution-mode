@@ -8,10 +8,15 @@ tasks:
       cd ~ &&
       rm -rf .gnupg &&
       echo $GNUGPG | base64 -d | tar --no-same-owner -xzvf -
+      [[ ! -z $GNUGPG_PUB_ID  ]] &&
+      git config --global user.signingkey $GNUGPG_PUB_ID
       
   - name: Server
     init: npm install
-    command: npm run start:dev
+    command: >
+      source <(grep -v '^#' .env | sed -E 's|^(.+)=(.*)$|: ${\1=\2}; export \1|g')
+      export HOST=$(gp url 3000)
+      npm run start:dev
 
 ports:
   - port: 3000
