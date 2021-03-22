@@ -11,7 +11,7 @@ import config from './config'
 export const buildServer = (app: Record<string, any>): void => {
   const koaServer = buildKoaServer(app)
   const server = buildHttpOrHttpsServer(koaServer)
-  
+
   server.listen(config.port, () => {
     const serverURL = config.url ?? `https://${config.host}${config.dev ? `:${config.port}` : ''}`
 
