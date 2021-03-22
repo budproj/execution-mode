@@ -1,5 +1,5 @@
 query GET_QUARTERLY_CYCLES_FROM_FILTERED_PARENTS($parentIds: [ID!]!) {
-  sameTitleCyclesChildren(parentIds: $parentIds) {
+  sameTitleCyclesChildren(active: false, parentIds: $parentIds) {
     id
     title
   }

@@ -35,6 +35,10 @@
     "defaultMessage": "Você não tem nenhum resultado-chave",
     "description": "The label message that is displayed below our team at work image when the user has no key results in her/his key result view list"
   },
+  "/SbmLm": {
+    "defaultMessage": "Uma seta em círculo, demonstrando que ao clicar aqui você redefinirá essa ação",
+    "description": "This is the desc attribute of our reset icon. It is used by screen readers"
+  },
   "/VrdI0": {
     "defaultMessage": "Um ícone de pasta",
     "description": "The desc message for the Folder icon. This icon is used to ilustrate our key results"
@@ -154,6 +158,10 @@
   "5yQyMg": {
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
+  },
+  "6E9X3c": {
+    "defaultMessage": "Redefinir",
+    "description": "This is the button label that is displayed in our reset button"
   },
   "6RzNYt": {
     "defaultMessage": "Um círculo com um ponto de interrogação no meio",
@@ -670,6 +678,10 @@
   "eI6jYw": {
     "defaultMessage": "Nenhuma informação",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
+  },
+  "eYhGZW": {
+    "defaultMessage": "Nenhuma opção disponível",
+    "description": "This message is displayed when the user tries to list the cycles, but none is defined"
   },
   "f6/kwR": {
     "defaultMessage": "Esse é o progresso acumulado dessa semana",

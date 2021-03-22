@@ -1,7 +1,7 @@
 import { useLazyQuery } from '@apollo/client'
 import { Button } from '@chakra-ui/button'
 import { Box, Flex } from '@chakra-ui/layout'
-import { Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup } from '@chakra-ui/menu'
+import { Menu, MenuButton, MenuList } from '@chakra-ui/menu'
 import { Text } from '@chakra-ui/react'
 import { Spinner } from '@chakra-ui/spinner'
 import React, { useState } from 'react'
@@ -17,6 +17,7 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 
 import messages from './messages'
 import queries from './queries.gql'
+import CycleFilterYearSelectorYearList from './year-list'
 
 export interface CycleFilterYearSelectorProperties {
   onYearFilter: (cycleIDs: Array<Cycle['id']>) => void
@@ -54,11 +55,6 @@ const CycleFilterYearSelector = ({
 
   const handleCloseMenu = () => {
     setIsOpen(false)
-  }
-
-  const handleChange = (cycleIDs: string | string[]) => {
-    cycleIDs = Array.isArray(cycleIDs) ? cycleIDs : [cycleIDs]
-    onYearFilter(cycleIDs)
   }
 
   const isFilterActive = filteredYearIDs && filteredYearIDs.length > 0
@@ -107,19 +103,13 @@ const CycleFilterYearSelector = ({
         </Text>
       </MenuButton>
       <MenuList>
-        <MenuOptionGroup type="checkbox" onChange={handleChange}>
-          {(loading || !called) && Boolean(data) ? (
-            <Flex p={4} alignItems="center" justifyContent="center">
-              <Spinner color="gray.400" />
-            </Flex>
-          ) : (
-            data?.cycles.map((cycle) => (
-              <MenuItemOption key={cycle.id} value={cycle.id} fontSize="sm">
-                {cycle.title}
-              </MenuItemOption>
-            ))
-          )}
-        </MenuOptionGroup>
+        {loading || !called ? (
+          <Flex p={4} alignItems="center" justifyContent="center">
+            <Spinner color="gray.400" />
+          </Flex>
+        ) : (
+          <CycleFilterYearSelectorYearList cycles={data?.cycles} onFilter={onYearFilter} />
+        )}
       </MenuList>
     </Menu>
   )

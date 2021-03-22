@@ -80,8 +80,8 @@ const KeyResultNotActiveAndOwnedByUser = (
   }
 
   useEffect(() => {
-    console.log(filters, 'tag')
-  }, [filters])
+    console.log(data, 'tag')
+  }, [data])
 
   return (
     <Stack direction="column" spacing={8}>

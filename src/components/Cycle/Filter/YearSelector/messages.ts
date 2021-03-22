@@ -5,6 +5,7 @@ type CycleFilterMessage =
   | 'yearLeftIconDesc'
   | 'yearRightIconDescClosed'
   | 'yearRightIconDescOpened'
+  | 'emptyListLabel'
 
 export default defineMessages<CycleFilterMessage>({
   yearSelectorEmptyState: {
@@ -32,5 +33,12 @@ export default defineMessages<CycleFilterMessage>({
     id: '7d+540',
     description:
       'This message is displayed to the user screen reader when the year select menu is opened',
+  },
+
+  emptyListLabel: {
+    defaultMessage: 'Nenhuma opção disponível',
+    id: 'eYhGZW',
+    description:
+      'This message is displayed when the user tries to list the cycles, but none is defined',
   },
 })

@@ -1,5 +1,5 @@
 query GET_NOT_ACTIVE_YEARLY_CYCLES {
-  cycles(active: false, cadence: YEARLY) {
+  cycles(cadence: YEARLY) {
     id
     title
   }
