@@ -3,14 +3,7 @@ image:
 
 tasks:
   - name: Apply GPG keys
-    before: >
-      [[ ! -z $GNUPG  ]] &&
-      [[ ! -z $GNUPG_KEY_ID  ]] &&
-      cd ~ &&
-      rm -rf .gnupg &&
-      echo $GNUPG | base64 -d | tar --no-same-owner -xzvf - &&
-      git config --global user.signingkey $GNUGPG_PUB_ID &&
-      git config --global commit.gpgsign true
+    before: curl -s https://raw.githubusercontent.com/budproj/gist/main/gitpod/gpg-sync.sh | bash -
       
   - name: Server
     init: >
