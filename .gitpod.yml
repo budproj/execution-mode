@@ -5,19 +5,19 @@ tasks:
   - name: Apply GPG keys
     before: >
       [[ ! -z $GNUGPG  ]] &&
+      [[ ! -z $GNUGPG_PUB_ID  ]] &&
       cd ~ &&
       rm -rf .gnupg &&
-      echo $GNUGPG | base64 -d | tar --no-same-owner -xzvf -
-    command: >
-      [[ ! -z $GNUGPG_PUB_ID  ]] &&
-      git config --global user.signingkey $GNUGPG_PUB_ID
+      echo $GNUGPG | base64 -d | tar --no-same-owner -xzvf - &&
+      git config --global user.signingkey $GNUGPG_PUB_ID &&
+      git config --global commit.gpgsign true
       
   - name: Server
-    init: npm install
-    command: >
-      source <(grep -v '^#' .env | sed -E 's|^(.+)=(.*)$|: ${\1=\2}; export \1|g')
+    init: >
+      npm install &&
+      source <(grep -v '^#' .env | sed -E 's|^(.+)=(.*)$|: ${\1=\2}; export \1|g') &&
       export URL=$(gp url 3000)
-      npm run start:dev
+    command: npm run start:dev
 
 ports:
   - port: 3000
