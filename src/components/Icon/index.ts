@@ -96,4 +96,6 @@ export { default as ArrowHeadDown } from './ArrowHeadDown'
 
 export { default as LinkedIn } from './LinkedIn'
 
+export { default as Reload } from './Reload'
+
 export * from './types'

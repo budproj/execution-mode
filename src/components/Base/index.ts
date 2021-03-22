@@ -81,3 +81,5 @@ export { default as ButtonOptionGroup } from './ButtonOptionGroup'
 export { default as RouteTab } from './RouteTab'
 
 export { default as RouteTabs } from './RouteTabs'
+
+export { default as ResetButton } from './ResetButton'

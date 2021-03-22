@@ -10,7 +10,6 @@ const Button = {
       },
 
       _focus: {
-        color: `${colorScheme ?? 'brand'}.400`,
         boxShadow: 'none',
       },
     }),

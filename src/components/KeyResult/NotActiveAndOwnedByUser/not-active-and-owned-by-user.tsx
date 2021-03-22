@@ -3,8 +3,9 @@ import { Stack } from '@chakra-ui/layout'
 import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
 import React, { useEffect } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 
+import { ResetButton } from 'src/components/Base'
 import CycleFilter from 'src/components/Cycle/Filter'
 import { Cycle } from 'src/components/Cycle/types'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
@@ -33,6 +34,9 @@ const KeyResultNotActiveAndOwnedByUser = (
 ) => {
   const userID = useRecoilValue(meAtom)
   const [filters, setFilters] = useRecoilState<KeyResultNotActiveAndOwnedByUserFilter | undefined>(
+    filtersAtomFamily(KEY_RESULT_FILTER_TYPE.NOT_ACTIVE_AND_OWNED_BY_USER),
+  )
+  const resetFilters = useResetRecoilState(
     filtersAtomFamily(KEY_RESULT_FILTER_TYPE.NOT_ACTIVE_AND_OWNED_BY_USER),
   )
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
@@ -81,12 +85,13 @@ const KeyResultNotActiveAndOwnedByUser = (
 
   return (
     <Stack direction="column" spacing={8}>
-      <Stack direction="row">
+      <Stack direction="row" alignItems="center" spacing={4}>
         <CycleFilter
           activeFilters={filters}
           onYearFilter={handleYearFilterUpdate}
           onQuarterFilter={handleQuarterFilterUpdate}
         />
+        <ResetButton onClick={resetFilters} />
       </Stack>
 
       <p>KRs</p>
