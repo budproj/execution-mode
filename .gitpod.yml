@@ -8,6 +8,7 @@ tasks:
       cd ~ &&
       rm -rf .gnupg &&
       echo $GNUGPG | base64 -d | tar --no-same-owner -xzvf -
+    command: >
       [[ ! -z $GNUGPG_PUB_ID  ]] &&
       git config --global user.signingkey $GNUGPG_PUB_ID
       
