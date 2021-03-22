@@ -4,8 +4,8 @@ import React from 'react'
 import { Cycle } from 'src/components/Cycle/types'
 import { KeyResultNotActiveAndOwnedByUserFilter } from 'src/state/recoil/key-result/filters'
 
-import CycleFilterQuarterSelector from './quarter-selector'
-import CycleFilterYearSelector from './year-selector'
+import CycleFilterQuarterSelector from './QuarterSelector'
+import CycleFilterYearSelector from './YearSelector'
 
 export interface CycleFilterProperties {
   onYearFilter: (cycleIDs: Array<Cycle['id']>) => void

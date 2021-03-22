@@ -1,10 +1,3 @@
-query GET_NOT_ACTIVE_YEARLY_CYCLES {
-  cycles(active: false, cadence: YEARLY) {
-    id
-    title
-  }
-}
-
 query GET_QUARTERLY_CYCLES_FROM_FILTERED_PARENTS($parentIds: [ID!]!) {
   sameTitleCyclesChildren(parentIds: $parentIds) {
     id
