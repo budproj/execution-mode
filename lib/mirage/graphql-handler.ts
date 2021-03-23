@@ -1,5 +1,5 @@
 import { createGraphQLHandler } from '@miragejs/graphql'
-import { pickBy, sortBy, flatten } from 'lodash'
+import { pickBy, sortBy, flatten, omitBy, isNull } from 'lodash'
 import { ModelInstance } from 'miragejs'
 
 import { CADENCE } from 'src/components/Cycle/constants'
@@ -163,7 +163,10 @@ const graphQLHandler = (mirageSchema: unknown) =>
         ): Array<ModelInstance<typeof Models.cycle>> => {
           const { cycles } = mirageSchema
 
-          const filteredCycles: any = cycles.where(filters)
+          const clearedFilters = omitBy(filters, isNull)
+          console.log(clearedFilters, filters, 'tag-2')
+
+          const filteredCycles: any = cycles.where(clearedFilters)
           const resolvedCycles = filteredCycles.models
 
           return resolvedCycles
@@ -176,7 +179,9 @@ const graphQLHandler = (mirageSchema: unknown) =>
         ): Array<ModelInstance<typeof Models.cycle>> => {
           const { cycles } = mirageSchema
 
-          const allCycles = parentIds.map((parentId) => cycles.where({ parentId, active }))
+          const filters = omitBy({ active }, isNull)
+
+          const allCycles = parentIds.map((parentId) => cycles.where({ parentId, ...filters }))
           const allCyclesModels = allCycles.map((cycles) => cycles.models)
           const flattenedCycles = flatten(allCyclesModels)
 
