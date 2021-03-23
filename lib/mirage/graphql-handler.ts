@@ -33,6 +33,7 @@ export interface QueryCyclesArguments {
 
 export interface QuerySameTitleCyclesChildrenArguments {
   parentIds: Array<Cycle['id']>
+  active?: boolean
 }
 
 export interface CreateKeyResultCheckInInterface {
@@ -170,12 +171,12 @@ const graphQLHandler = (mirageSchema: unknown) =>
 
         sameTitleCyclesChildren: (
           _graphQLSchema: unknown,
-          { parentIds }: QuerySameTitleCyclesChildrenArguments,
+          { parentIds, active }: QuerySameTitleCyclesChildrenArguments,
           { mirageSchema }: any,
         ): Array<ModelInstance<typeof Models.cycle>> => {
           const { cycles } = mirageSchema
 
-          const allCycles = parentIds.map((parentId) => cycles.where({ parentId }))
+          const allCycles = parentIds.map((parentId) => cycles.where({ parentId, active }))
           const allCyclesModels = allCycles.map((cycles) => cycles.models)
           const flattenedCycles = flatten(allCyclesModels)
 

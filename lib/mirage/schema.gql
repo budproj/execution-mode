@@ -259,7 +259,14 @@ type Cycle implements EntityObject {
   """
   parentId: ID
   parent: Cycle
-  cycles: [Cycle!]
+  cycles(
+    """If this flag is true, it will only fetch active cycles"""
+    active: Boolean = true
+
+    """This key filters all queries to a given cadence"""
+    cadence: CADENCE
+    orderBy: CycleOrderByInput = {cadence: DESC}
+  ): [Cycle!]
 }
 
 """
@@ -268,6 +275,20 @@ Each cadence represents a period of time in which your cycles can be created
 enum CADENCE {
   YEARLY
   QUARTERLY
+}
+
+"""In this object the user can define a custom ordering"""
+input CycleOrderByInput {
+  """
+  This key defines how our cycles should be ordered based on their cadence key. Desc sorting means higher cadences first (year-quarter-month-...)
+  """
+  cadence: SORTING
+}
+
+"""Defines the order to return your results in a given query"""
+enum SORTING {
+  DESC
+  ASC
 }
 
 """
@@ -443,12 +464,6 @@ type KeyResult implements EntityObject {
 
 union TimelineEntryUnion = KeyResultCheckIn | KeyResultComment
 
-"""Defines the order to return your results in a given query"""
-enum SORTING {
-  DESC
-  ASC
-}
-
 type Query {
   permissions(constraint: CONSTRAINT = COMPANY): Permissions!
   user(id: ID!): User!
@@ -477,19 +492,21 @@ type Query {
     cadence: CADENCE
     orderBy: CycleOrderByInput = {cadence: DESC}
   ): [Cycle!]
-  sameTitleCyclesChildren(parentIds: [ID!]!): [Cycle!]
+  sameTitleCyclesChildren(
+    """If this flag is true, it will only fetch active cycles"""
+    active: Boolean = true
+
+    """This key filters all queries to a given cadence"""
+    cadence: CADENCE
+    orderBy: CycleOrderByInput = {cadence: DESC}
+
+    """Defines the parent cycles we are going to fetch children from"""
+    parentIds: [ID!]!
+  ): [Cycle!]
   objective(id: ID!): Objective!
   keyResult(id: ID!): KeyResult!
   keyResultCheckIn(id: ID!): KeyResultCheckIn!
   keyResultComment(id: ID!): KeyResultComment!
-}
-
-"""In this object the user can define a custom ordering"""
-input CycleOrderByInput {
-  """
-  This key defines how our cycles should be ordered based on their cadence key. Desc sorting means higher cadences first (year-quarter-month-...)
-  """
-  cadence: SORTING
 }
 
 type Mutation {
