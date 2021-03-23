@@ -1,8 +1,9 @@
-query GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES($userID: ID!) {
-  cycles(active: false, cadence: YEARLY) {
+query GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES($userID: ID!, $cycleIDs: [ID!]) {
+  cycles(active: null, cadence: YEARLY, ids: $cycleIDs) {
     id
     title
     cadence
+    active
     keyResults(ownerId: $userID) {
       id
       title
@@ -39,7 +40,7 @@ query GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES($userID: ID!) {
         }
       }
     }
-    cycles {
+    cycles(active: false) {
       id
       title
       cadence

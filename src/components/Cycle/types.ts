@@ -11,6 +11,7 @@ export interface Cycle {
   cadence: CADENCE
   dateStart: string
   dateEnd: string
+  active: boolean
   createdAt: string
   updatedAt: string
   team: Team

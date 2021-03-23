@@ -49,6 +49,7 @@ const KeyResultNotActiveAndOwnedByUser = (
     {
       variables: {
         userID,
+        cycleIDs: filters?.yearCycleIDs,
       },
       onCompleted: (data) => {
         const childCycles = flatten(data.cycles.map((cycle) => cycle?.cycles))

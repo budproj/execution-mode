@@ -31,6 +31,10 @@ export interface QueryCyclesArguments {
   }
 }
 
+export interface QueryAllCyclesArguments extends QueryCyclesArguments {
+  ids?: Array<Cycle['id']>
+}
+
 export interface QuerySameTitleCyclesChildrenArguments {
   parentIds: Array<Cycle['id']>
   active?: boolean
@@ -40,7 +44,11 @@ export interface CreateKeyResultCheckInInterface {
   keyResultCheckIn: Partial<KeyResultCheckIn>
 }
 
-const graphQLHandler = (mirageSchema: unknown) =>
+export interface QueryCycleCyclesArguments {
+  active?: boolean
+}
+
+const graphQLHandler = (mirageSchema: any) =>
   createGraphQLHandler(graphQLSchema, mirageSchema, {
     resolvers: {
       KeyResult: {
@@ -107,6 +115,19 @@ const graphQLHandler = (mirageSchema: unknown) =>
           limit ? parent.companies.models.slice(0, limit) : parent.companies.models,
       },
 
+      Cycle: {
+        cycles: (parent: ModelInstance<any>) => {
+          const { cycles } = mirageSchema
+          const parentCycleModelList = parent.attrs.cycleIds.map((cycleID: Cycle['id']) =>
+            cycles.where({ id: cycleID }),
+          )
+          const parentCycles = parentCycleModelList.map((parentCycle: any) => parentCycle.models)
+          const flattenedParentCycles = flatten(parentCycles)
+
+          return flattenedParentCycles
+        },
+      },
+
       Mutation: {
         createKeyResultCheckIn: (
           _: any,
@@ -158,18 +179,21 @@ const graphQLHandler = (mirageSchema: unknown) =>
 
         cycles: (
           _graphQLSchema: unknown,
-          { orderBy: _, ...filters }: QueryCyclesArguments,
+          { orderBy: _, ids, ...filters }: QueryAllCyclesArguments,
           { mirageSchema }: any,
         ): Array<ModelInstance<typeof Models.cycle>> => {
           const { cycles } = mirageSchema
 
           const clearedFilters = omitBy(filters, isNull)
-          console.log(clearedFilters, filters, 'tag-2')
 
           const filteredCycles: any = cycles.where(clearedFilters)
           const resolvedCycles = filteredCycles.models
 
-          return resolvedCycles
+          const cyclesWithSelectedIDs = ids
+            ? resolvedCycles.filter((cycle: Cycle) => ids.includes(cycle.id))
+            : resolvedCycles
+
+          return cyclesWithSelectedIDs
         },
 
         sameTitleCyclesChildren: (

@@ -491,6 +491,9 @@ type Query {
     """This key filters all queries to a given cadence"""
     cadence: CADENCE
     orderBy: CycleOrderByInput = {cadence: DESC}
+
+    """Defines the cycles we want to fetch data from"""
+    ids: [ID!]
   ): [Cycle!]
   sameTitleCyclesChildren(
     """If this flag is true, it will only fetch active cycles"""
@@ -501,7 +504,7 @@ type Query {
     orderBy: CycleOrderByInput = {cadence: DESC}
 
     """Defines the parent cycles we are going to fetch children from"""
-    parentIds: [ID!]!
+    parentIds: [ID!]
   ): [Cycle!]
   objective(id: ID!): Objective!
   keyResult(id: ID!): KeyResult!
