@@ -783,6 +783,10 @@
     "defaultMessage": "O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.",
     "description": "This tooltip explains how the progress of the objective is calculated"
   },
+  "kHg/gs": {
+    "defaultMessage": "Você não tem nenhum resultado-chave em ciclos anteriores",
+    "description": "The label message that is displayed below our team at work image when the user has no key results in her/his key result view list"
+  },
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
     "description": "A brief explanation for screen readers regarding the yellow status circle"

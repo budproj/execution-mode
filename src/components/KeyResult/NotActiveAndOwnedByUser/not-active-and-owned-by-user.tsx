@@ -9,6 +9,7 @@ import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import { ResetButton } from 'src/components/Base'
 import CycleFilter from 'src/components/Cycle/Filter'
 import { Cycle } from 'src/components/Cycle/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
@@ -18,9 +19,10 @@ import filtersAtomFamily, {
 } from 'src/state/recoil/key-result/filters'
 import meAtom from 'src/state/recoil/user/me'
 
-import { KeyResult } from '../types'
-
+import KeyResultNotActiveAndOwnedByUserCyclesList from './cycle-lists'
+import filterCycles from './filter-cycles'
 import queries from './queries.gql'
+import KeyResultNotActiveAndOwnedByUserSkeleton from './skeleton'
 
 export interface KeyResultNotActiveAndOwnedByUserProperties {
   onLineClick?: (id: KeyResult['id']) => void
@@ -30,9 +32,9 @@ export interface GetKeyResultNotActiveAndOwnedByUserWithBindingQuery {
   cycles: Cycle[]
 }
 
-const KeyResultNotActiveAndOwnedByUser = (
-  _properties: KeyResultNotActiveAndOwnedByUserProperties,
-) => {
+const KeyResultNotActiveAndOwnedByUser = ({
+  onLineClick,
+}: KeyResultNotActiveAndOwnedByUserProperties) => {
   const userID = useRecoilValue(meAtom)
   const [filters, setFilters] = useRecoilState<KeyResultNotActiveAndOwnedByUserFilter | undefined>(
     filtersAtomFamily(KEY_RESULT_FILTER_TYPE.NOT_ACTIVE_AND_OWNED_BY_USER),
@@ -79,13 +81,11 @@ const KeyResultNotActiveAndOwnedByUser = (
   const yearlyCycles =
     data && uniqBy(filter(data.cycles.map((cycle) => cycle.parent)) as Cycle[], 'id')
 
+  const filteredData = filterCycles(data?.cycles, filters)
+
   useEffect(() => {
     if (userID) fetchUserActiveCycles()
   }, [userID, fetchUserActiveCycles])
-
-  useEffect(() => {
-    console.log(data, 'tag')
-  }, [data])
 
   return (
     <Stack direction="column" spacing={8}>
@@ -99,7 +99,16 @@ const KeyResultNotActiveAndOwnedByUser = (
         <ResetButton onClick={resetFilters} />
       </Stack>
 
-      <p>KRs</p>
+      <Stack direction="column" gridGap={8}>
+        {called && !loading && filteredData ? (
+          <KeyResultNotActiveAndOwnedByUserCyclesList
+            cycles={filteredData}
+            onLineClick={onLineClick}
+          />
+        ) : (
+          <KeyResultNotActiveAndOwnedByUserSkeleton />
+        )}
+      </Stack>
     </Stack>
   )
 }
