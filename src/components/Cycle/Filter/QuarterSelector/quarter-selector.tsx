@@ -16,7 +16,7 @@ export interface CycleFilterQuarterSelectorProperties {
 }
 
 type QuarterlyCyclesFromFilteredParentsResult = {
-  sameTitleCyclesChildren: Array<{
+  cyclesInSamePeriod: Array<{
     id: Cycle['id']
     period: Cycle['period']
   }>
@@ -37,7 +37,7 @@ const CycleFilterQuarterSelector = ({
         parentIds: filteredYearIDs,
       },
       onCompleted: (data) => {
-        loadCycles(data.sameTitleCyclesChildren)
+        loadCycles(data.cyclesInSamePeriod)
       },
     },
   )
@@ -51,7 +51,7 @@ const CycleFilterQuarterSelector = ({
   return hasParentCycles ? (
     <CycleFilterQuarterSelectorQuarterOptions
       isLoading={loading}
-      quarters={data?.sameTitleCyclesChildren}
+      quarters={data?.cyclesInSamePeriod}
       onFilter={onQuarterFilter}
     />
   ) : (

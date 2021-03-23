@@ -2,6 +2,7 @@ import { useLazyQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
+import uniqBy from 'lodash/uniqBy'
 import React, { useEffect } from 'react'
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 
@@ -49,7 +50,6 @@ const KeyResultNotActiveAndOwnedByUser = (
     {
       variables: {
         userID,
-        cycleIDs: filters?.yearCycleIDs,
       },
       onCompleted: (data) => {
         const childCycles = flatten(data.cycles.map((cycle) => cycle?.cycles))
@@ -61,10 +61,6 @@ const KeyResultNotActiveAndOwnedByUser = (
       },
     },
   )
-
-  useEffect(() => {
-    if (userID) fetchUserActiveCycles()
-  }, [userID, fetchUserActiveCycles])
 
   const handleYearFilterUpdate = (yearCycleIDs: Array<Cycle['id']>) => {
     setFilters({
@@ -80,6 +76,13 @@ const KeyResultNotActiveAndOwnedByUser = (
     })
   }
 
+  const yearlyCycles =
+    data && uniqBy(filter(data.cycles.map((cycle) => cycle.parent)) as Cycle[], 'id')
+
+  useEffect(() => {
+    if (userID) fetchUserActiveCycles()
+  }, [userID, fetchUserActiveCycles])
+
   useEffect(() => {
     console.log(data, 'tag')
   }, [data])
@@ -89,6 +92,7 @@ const KeyResultNotActiveAndOwnedByUser = (
       <Stack direction="row" alignItems="center" spacing={4}>
         <CycleFilter
           activeFilters={filters}
+          yearOptions={yearlyCycles}
           onYearFilter={handleYearFilterUpdate}
           onQuarterFilter={handleQuarterFilterUpdate}
         />

@@ -1,5 +1,5 @@
 import { createGraphQLHandler } from '@miragejs/graphql'
-import { pickBy, sortBy, flatten, omitBy, isNull } from 'lodash'
+import { pickBy, sortBy, flatten, omitBy, isNull, uniqBy } from 'lodash'
 import { ModelInstance } from 'miragejs'
 
 import { CADENCE } from 'src/components/Cycle/constants'
@@ -210,8 +210,9 @@ const graphQLHandler = (mirageSchema: any) =>
           )
           const allCyclesModels = allCycles.map((cycles) => cycles.models)
           const flattenedCycles = flatten(allCyclesModels)
+          const uniqCycles = uniqBy(flattenedCycles, 'period')
 
-          return flattenedCycles
+          return uniqCycles
         },
       },
     },

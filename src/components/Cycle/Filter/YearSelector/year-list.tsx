@@ -2,18 +2,14 @@ import { MenuItemOption, MenuOptionGroup } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { CycleOption } from 'src/components/Cycle/Filter/filter'
 import { Cycle } from 'src/components/Cycle/types'
 
 import messages from './messages'
 
 export interface CycleFilterYearSelectorYearListProperties {
   onFilter: (cycleIDs: Array<Cycle['id']>) => void
-  cycles?: YearData[]
-}
-
-type YearData = {
-  id: Cycle['id']
-  period: Cycle['period']
+  cycles?: CycleOption[]
 }
 
 const CycleFilterYearSelectorYearList = ({

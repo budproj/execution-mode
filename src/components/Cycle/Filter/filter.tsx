@@ -10,13 +10,25 @@ import CycleFilterYearSelector from './YearSelector'
 export interface CycleFilterProperties {
   onYearFilter: (cycleIDs: Array<Cycle['id']>) => void
   onQuarterFilter: (cycleIDs: Array<Cycle['id']>) => void
+  yearOptions?: CycleOption[]
   activeFilters?: KeyResultNotActiveAndOwnedByUserFilter
 }
 
-const CycleFilter = ({ onYearFilter, onQuarterFilter, activeFilters }: CycleFilterProperties) => {
+export type CycleOption = {
+  id: Cycle['id']
+  period: Cycle['period']
+}
+
+const CycleFilter = ({
+  onYearFilter,
+  onQuarterFilter,
+  activeFilters,
+  yearOptions,
+}: CycleFilterProperties) => {
   return (
     <Stack direction="row">
       <CycleFilterYearSelector
+        options={yearOptions}
         filteredYearIDs={activeFilters?.yearCycleIDs}
         onYearFilter={onYearFilter}
       />

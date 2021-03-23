@@ -8,6 +8,7 @@ import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import { CycleOption } from 'src/components/Cycle/Filter/filter'
 import { Cycle } from 'src/components/Cycle/types'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import ChevronDownIcon from 'src/components/Icon/ChevronDown'
@@ -22,18 +23,17 @@ import CycleFilterYearSelectorYearList from './year-list'
 export interface CycleFilterYearSelectorProperties {
   onYearFilter: (cycleIDs: Array<Cycle['id']>) => void
   filteredYearIDs?: Array<Cycle['id']>
+  options?: CycleOption[]
 }
 
 type NotActiveYearlyCyclesResult = {
-  cycles: Array<{
-    id: Cycle['id']
-    period: Cycle['period']
-  }>
+  cycles: CycleOption[]
 }
 
 const CycleFilterYearSelector = ({
   onYearFilter,
   filteredYearIDs,
+  options,
 }: CycleFilterYearSelectorProperties) => {
   const [isOpen, setIsOpen] = useState(false)
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
@@ -48,8 +48,10 @@ const CycleFilterYearSelector = ({
     },
   })
 
+  const hasOptions = Boolean(options)
+
   const handleOpenMenu = () => {
-    fetchNotActiveYearlyCycles()
+    if (!hasOptions) fetchNotActiveYearlyCycles()
     setIsOpen(true)
   }
 
@@ -103,12 +105,15 @@ const CycleFilterYearSelector = ({
         </Text>
       </MenuButton>
       <MenuList>
-        {loading || !called ? (
+        {!hasOptions && (loading || !called) ? (
           <Flex p={4} alignItems="center" justifyContent="center">
             <Spinner color="gray.400" />
           </Flex>
         ) : (
-          <CycleFilterYearSelectorYearList cycles={data?.cycles} onFilter={onYearFilter} />
+          <CycleFilterYearSelectorYearList
+            cycles={options ?? data?.cycles}
+            onFilter={onYearFilter}
+          />
         )}
       </MenuList>
     </Menu>
