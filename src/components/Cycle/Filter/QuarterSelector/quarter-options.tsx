@@ -14,7 +14,7 @@ export interface CycleFilterQuarterSelectorQuarterOptionsProperties {
 
 type QuarterButtonData = {
   id: Cycle['id']
-  title: Cycle['title']
+  period: Cycle['period']
 }
 
 const CycleFilterQuarterSelectorQuarterOptions = ({
@@ -30,7 +30,7 @@ const CycleFilterQuarterSelectorQuarterOptions = ({
     <ButtonOptionGroup onChange={onFilter}>
       {quarters.map((quarter) => (
         <CycleFilterQuarterSelectorButton key={quarter.id} value={quarter.id}>
-          {quarter.title}
+          {quarter.period}
         </CycleFilterQuarterSelectorButton>
       ))}
     </ButtonOptionGroup>

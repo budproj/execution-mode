@@ -26,7 +26,7 @@ const KeyResultListBodyColumnCycle = ({
   return (
     <KeyResultListBodyColumnBase>
       <Skeleton isLoaded={isCycleLoaded} {...buildSkeletonMinSize(isCycleLoaded, 100, 20)}>
-        <Text color="gray.300">{cycle?.title}</Text>
+        <Text color="gray.300">{cycle?.period}</Text>
       </Skeleton>
     </KeyResultListBodyColumnBase>
   )

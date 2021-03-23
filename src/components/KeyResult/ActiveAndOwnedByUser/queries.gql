@@ -1,10 +1,10 @@
 query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES($userID: ID!) {
-  cycles {
+  cycles(active: true) {
     id
-    title
+    period
     cadence
     parent {
-      title
+      period
     }
     keyResults(ownerId: $userID) {
       id

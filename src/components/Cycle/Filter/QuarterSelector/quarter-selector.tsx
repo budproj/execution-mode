@@ -18,7 +18,7 @@ export interface CycleFilterQuarterSelectorProperties {
 type QuarterlyCyclesFromFilteredParentsResult = {
   sameTitleCyclesChildren: Array<{
     id: Cycle['id']
-    title: Cycle['title']
+    period: Cycle['period']
   }>
 }
 

@@ -32,7 +32,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
       }
       objective {
         cycle {
-          title
+          period
           dateStart
           dateEnd
         }

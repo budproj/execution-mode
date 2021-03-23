@@ -36,7 +36,7 @@ export interface QueryAllCyclesArguments extends QueryCyclesArguments {
 }
 
 export interface QuerySameTitleCyclesChildrenArguments {
-  parentIds: Array<Cycle['id']>
+  fromCycles: Array<Cycle['id']>
   active?: boolean
 }
 
@@ -196,16 +196,18 @@ const graphQLHandler = (mirageSchema: any) =>
           return cyclesWithSelectedIDs
         },
 
-        sameTitleCyclesChildren: (
+        cyclesInSamePeriod: (
           _graphQLSchema: unknown,
-          { parentIds, active }: QuerySameTitleCyclesChildrenArguments,
+          { fromCycles, active }: QuerySameTitleCyclesChildrenArguments,
           { mirageSchema }: any,
         ): Array<ModelInstance<typeof Models.cycle>> => {
           const { cycles } = mirageSchema
 
           const filters = omitBy({ active }, isNull)
 
-          const allCycles = parentIds.map((parentId) => cycles.where({ parentId, ...filters }))
+          const allCycles = fromCycles.map((cycleID) =>
+            cycles.where({ parentId: cycleID, ...filters }),
+          )
           const allCyclesModels = allCycles.map((cycles) => cycles.models)
           const flattenedCycles = flatten(allCyclesModels)
 

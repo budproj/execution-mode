@@ -27,7 +27,7 @@ export interface CycleFilterYearSelectorProperties {
 type NotActiveYearlyCyclesResult = {
   cycles: Array<{
     id: Cycle['id']
-    title: Cycle['title']
+    period: Cycle['period']
   }>
 }
 
@@ -58,7 +58,7 @@ const CycleFilterYearSelector = ({
   }
 
   const isFilterActive = filteredYearIDs && filteredYearIDs.length > 0
-  const selectedCycleTitles = cycles.map((cycle) => cycle?.title).join(', ')
+  const selectedCyclePeriods = cycles.map((cycle) => cycle?.period).join(', ')
 
   return (
     <Menu closeOnSelect={false} isOpen={isOpen} onOpen={handleOpenMenu} onClose={handleCloseMenu}>
@@ -98,7 +98,7 @@ const CycleFilterYearSelector = ({
       >
         <Text isTruncated maxW={40}>
           {isFilterActive
-            ? selectedCycleTitles
+            ? selectedCyclePeriods
             : intl.formatMessage(messages.yearSelectorEmptyState)}
         </Text>
       </MenuButton>

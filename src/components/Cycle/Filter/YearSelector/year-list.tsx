@@ -13,7 +13,7 @@ export interface CycleFilterYearSelectorYearListProperties {
 
 type YearData = {
   id: Cycle['id']
-  title: Cycle['title']
+  period: Cycle['period']
 }
 
 const CycleFilterYearSelectorYearList = ({
@@ -31,7 +31,7 @@ const CycleFilterYearSelectorYearList = ({
     <MenuOptionGroup type="checkbox" onChange={handleChange}>
       {cycles.map((cycle) => (
         <MenuItemOption key={cycle.id} value={cycle.id} fontSize="sm">
-          {cycle.title}
+          {cycle.period}
         </MenuItemOption>
       ))}
     </MenuOptionGroup>

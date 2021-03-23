@@ -44,15 +44,16 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const otherUsers = server.createList('user', 5, { teams } as any)
 
   const strategicCycle = server.create('cycle', {
-    title: '2021',
+    period: '2021',
     team: company,
     status: pickRandomModel(statusList),
     active: true,
+    hasNotActiveChildren: false,
     cadence: CADENCE.YEARLY,
   })
 
   const tacticalCycle = server.create('cycle', {
-    title: 'Q1',
+    period: 'Q1',
     team: company,
     status: pickRandomModel(statusList),
     active: true,
@@ -61,15 +62,16 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   })
 
   const previousStrategicCycle = server.create('cycle', {
-    title: '2020',
+    period: '2020',
     team: company,
     status: pickRandomModel(statusList),
     active: false,
+    hasNotActiveChildren: true,
     cadence: CADENCE.YEARLY,
   })
 
   const previousTacticalCycle1 = server.create('cycle', {
-    title: 'Q3',
+    period: 'Q3',
     team: company,
     status: pickRandomModel(statusList),
     active: false,
@@ -78,7 +80,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   })
 
   const previousTacticalCycle2 = server.create('cycle', {
-    title: 'Q4',
+    period: 'Q4',
     team: company,
     status: pickRandomModel(statusList),
     active: false,
@@ -87,15 +89,16 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   })
 
   const oldStrategicCycle = server.create('cycle', {
-    title: '2019',
+    period: '2019',
     team: company,
     status: pickRandomModel(statusList),
     active: false,
+    hasNotActiveChildren: true,
     cadence: CADENCE.YEARLY,
   })
 
   const oldTacticalCycle = server.create('cycle', {
-    title: 'Q4',
+    period: 'Q4',
     team: company,
     status: pickRandomModel(statusList),
     active: false,
