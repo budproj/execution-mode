@@ -2,9 +2,8 @@ import React from 'react'
 
 import { EmptyState } from 'src/components/Base'
 import { Cycle } from 'src/components/Cycle/types'
+import KeyResultCycleList from 'src/components/KeyResult/CycleList'
 import { KeyResult } from 'src/components/KeyResult/types'
-
-import KeyResultCycleList from '../CycleList'
 
 import messages from './messages'
 
@@ -28,7 +27,13 @@ const KeyResultNotActiveAndOwnedByUserCyclesList = ({
   return hasCyclesWithKeyResults ? (
     <>
       {cyclesWithKeyResults.map((cycle) => (
-        <KeyResultCycleList key={cycle.id} id={cycle.id} onLineClick={onLineClick} />
+        <KeyResultCycleList
+          key={cycle.id}
+          isNotActive
+          isDisabled
+          id={cycle.id}
+          onLineClick={onLineClick}
+        />
       ))}
     </>
   ) : (

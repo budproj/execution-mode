@@ -16,11 +16,18 @@ import { KEY_RESULT_LIST_TYPE } from '../List/constants'
 import messages from './messages'
 
 export interface KeyResultCycleListProperties {
+  isActive: boolean
   id?: Cycle['id']
+  isDisabled?: boolean
   onLineClick?: (id: KeyResult['id']) => void
 }
 
-const KeyResultCycleList = ({ id, onLineClick }: KeyResultCycleListProperties) => {
+const KeyResultCycleList = ({
+  id,
+  isActive,
+  isDisabled,
+  onLineClick,
+}: KeyResultCycleListProperties) => {
   const cycle = useRecoilValue(cycleAtomFamily(id))
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
   const intl = useIntl()
@@ -71,7 +78,8 @@ const KeyResultCycleList = ({ id, onLineClick }: KeyResultCycleListProperties) =
             withLastUpdateInfo: true,
           },
           [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
-            canChange: true,
+            isActive,
+            isDisabled,
           },
           [KEY_RESULT_LIST_COLUMN.OWNER]: {
             justifyContent: 'flex-end',
@@ -81,6 +89,10 @@ const KeyResultCycleList = ({ id, onLineClick }: KeyResultCycleListProperties) =
       />
     </Stack>
   )
+}
+
+KeyResultCycleList.defaultProps = {
+  isActive: true,
 }
 
 export default KeyResultCycleList

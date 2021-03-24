@@ -23,7 +23,8 @@ import messages from './messages'
 export interface KeyResultListBodyColumnProgressProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
-  canChange?: boolean
+  isDisabled?: boolean
+  isActive?: boolean
 }
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
@@ -31,7 +32,8 @@ const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 
 const KeyResultListBodyColumnProgress = ({
   id,
-  canChange,
+  isDisabled,
+  isActive,
 }: KeyResultListBodyColumnProgressProperties): ReactElement => {
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(id))
   const format = useRecoilValue(formatSelector(id))
@@ -53,7 +55,7 @@ const KeyResultListBodyColumnProgress = ({
       <Flex flexDir="column">
         <Box w="100%">
           <Skeleton isLoaded={isKeyResultLoaded}>
-            <ProgressSlider id={id} canChange={canChange} />
+            <ProgressSlider id={id} isDisabled={isDisabled} isActive={isActive} />
           </Skeleton>
         </Box>
 
