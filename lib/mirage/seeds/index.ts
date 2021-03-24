@@ -8,6 +8,7 @@ import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
 import { CADENCE } from 'src/components/Cycle/constants'
 import getConfig from 'src/config'
+import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
 import { buildKeyResultCheckInValue } from './builders'
 import { pickRandomModel } from './selectors'
@@ -17,7 +18,14 @@ const { publicRuntimeConfig } = getConfig()
 function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   faker.seed(publicRuntimeConfig.mirage.fakerSeed)
 
-  const basePolicy = server.create('policy')
+  const allowPolicy = server.create('policy')
+  const denyPolicy = server.create('policy', {
+    create: AUTHZ_POLICY.DENY,
+    update: AUTHZ_POLICY.DENY,
+    read: AUTHZ_POLICY.DENY,
+    delete: AUTHZ_POLICY.DENY,
+  })
+
   const statusList = server.createList('status', 10)
   const company = server.create('team', {
     isCompany: true,
@@ -239,7 +247,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult: () => pickRandomModel(strategicKeyResults),
     value: buildKeyResultCheckInValue,
     valueIncrease: buildKeyResultCheckInValue,
-    policies: basePolicy,
+    policies: allowPolicy,
   })
 
   const tacticalKeyResultCheckIns = server.createList('keyResultCheckIn', 10, {
@@ -247,7 +255,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult: () => pickRandomModel(tacticalKeyResults),
     value: buildKeyResultCheckInValue,
     valueIncrease: buildKeyResultCheckInValue,
-    policies: basePolicy,
+    policies: allowPolicy,
   })
 
   const previousStrategicKeyResultCheckIns = server.createList('keyResultCheckIn', 10, {
@@ -255,7 +263,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult: () => pickRandomModel(previousStrategicKeyResults),
     value: buildKeyResultCheckInValue,
     valueIncrease: buildKeyResultCheckInValue,
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const previousTacticalKeyResultCheckIns1 = server.createList('keyResultCheckIn', 10, {
@@ -263,7 +271,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult: () => pickRandomModel(previousTacticalKeyResults1),
     value: buildKeyResultCheckInValue,
     valueIncrease: buildKeyResultCheckInValue,
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const previousTacticalKeyResultCheckIns2 = server.createList('keyResultCheckIn', 10, {
@@ -271,7 +279,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult: () => pickRandomModel(previousTacticalKeyResults2),
     value: buildKeyResultCheckInValue,
     valueIncrease: buildKeyResultCheckInValue,
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const oldStrategicKeyResultCheckIns = server.createList('keyResultCheckIn', 10, {
@@ -279,7 +287,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult: () => pickRandomModel(oldStrategicKeyResults),
     value: buildKeyResultCheckInValue,
     valueIncrease: buildKeyResultCheckInValue,
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const oldTacticalKeyResultCheckIns = server.createList('keyResultCheckIn', 10, {
@@ -287,7 +295,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     keyResult: () => pickRandomModel(oldTacticalKeyResults),
     value: buildKeyResultCheckInValue,
     valueIncrease: buildKeyResultCheckInValue,
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const keyResultCheckIns = {
@@ -313,43 +321,43 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   const strategicKeyResultComments = server.createList('keyResultComment', 10, {
     user,
     keyResult: () => pickRandomModel(strategicKeyResults),
-    policies: basePolicy,
+    policies: allowPolicy,
   })
 
   const tacticalKeyResultComments = server.createList('keyResultComment', 10, {
     user,
     keyResult: () => pickRandomModel(tacticalKeyResults),
-    policies: basePolicy,
+    policies: allowPolicy,
   })
 
   const previousStrategicKeyResultComments = server.createList('keyResultComment', 10, {
     user,
     keyResult: () => pickRandomModel(previousStrategicKeyResults),
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const previousTacticalKeyResultComments1 = server.createList('keyResultComment', 10, {
     user,
     keyResult: () => pickRandomModel(previousTacticalKeyResults1),
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const previousTacticalKeyResultComments2 = server.createList('keyResultComment', 10, {
     user,
     keyResult: () => pickRandomModel(previousTacticalKeyResults2),
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const oldStrategicKeyResultComments = server.createList('keyResultComment', 10, {
     user,
     keyResult: () => pickRandomModel(oldStrategicKeyResults),
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const oldTacticalKeyResultComments = server.createList('keyResultComment', 10, {
     user,
     keyResult: () => pickRandomModel(oldTacticalKeyResults),
-    policies: basePolicy,
+    policies: denyPolicy,
   })
 
   const keyResultComments = {
@@ -442,7 +450,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
       keyResultCheckIns,
       keyResultComments,
       otherUsers,
-      basePolicy,
+      allowPolicy,
       statusList,
     },
   })

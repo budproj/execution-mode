@@ -13,12 +13,14 @@ export interface AuthzPoliciesKeyResult {
 
 export interface AuthzPoliciesKeyResulChildEntities {
   keyResultCheckIn: AuthzPolicies
+  keyResultComment: AuthzPolicies
 }
 
 export const defaultKeyResultPolicies = {
   root: defaultPolicies,
   childEntities: {
     keyResultCheckIn: defaultPolicies,
+    keyResultComment: defaultPolicies,
   },
 }
 

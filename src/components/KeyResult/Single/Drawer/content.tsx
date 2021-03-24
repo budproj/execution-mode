@@ -22,7 +22,12 @@ export interface KeyResultDrawerContentProperties {
 }
 
 export interface GetKeyResultWithIDQuery {
-  keyResult: Partial<KeyResult>
+  keyResult: KeyResultQueryResult
+}
+
+export interface KeyResultQueryResult extends Partial<KeyResult> {
+  keyResultCheckInPolicies: AuthzPolicies
+  keyResultCommentPolicies: AuthzPolicies
 }
 
 const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentProperties) => {
@@ -31,12 +36,16 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
     authzPoliciesKeyResult(keyResultID),
   )
 
-  const buildKeyResultPolicies = (keyResultCheckInPolicies?: AuthzPolicies) => {
-    if (!keyResultCheckInPolicies) return keyResultPolicies
+  const buildKeyResultPolicies = (
+    keyResultCheckInPolicies?: AuthzPolicies,
+    keyResultCommentPolicies?: AuthzPolicies,
+  ) => {
+    if (!keyResultCheckInPolicies || !keyResultCommentPolicies) return keyResultPolicies
 
     const newPolicies: Partial<AuthzPoliciesKeyResult> = {
       childEntities: {
         keyResultCheckIn: keyResultCheckInPolicies,
+        keyResultComment: keyResultCommentPolicies,
       },
     }
     const newKeyResultPolicies = deepmerge(keyResultPolicies, newPolicies)
@@ -45,8 +54,11 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
   }
 
   const handleQueryData = (data: GetKeyResultWithIDQuery) => {
-    const { policies, ...newKeyResult } = data.keyResult
-    const keyResultPolicies = buildKeyResultPolicies(policies)
+    const { keyResultCheckInPolicies, keyResultCommentPolicies, ...newKeyResult } = data.keyResult
+    const keyResultPolicies = buildKeyResultPolicies(
+      keyResultCheckInPolicies,
+      keyResultCommentPolicies,
+    )
 
     setKeyResultPolicies(keyResultPolicies)
     setKeyResult(newKeyResult)

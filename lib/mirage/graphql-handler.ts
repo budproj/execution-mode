@@ -60,12 +60,19 @@ const graphQLHandler = (mirageSchema: any) =>
             ? parent.keyResultCheckIns?.models.slice(0, limit)
             : parent.keyResultCheckIns?.models,
 
-        policies: () => ({
-          create: AUTHZ_POLICY.ALLOW,
-          update: AUTHZ_POLICY.ALLOW,
-          read: AUTHZ_POLICY.ALLOW,
-          delete: AUTHZ_POLICY.ALLOW,
-        }),
+        policies: (parent: ModelInstance<any>) => {
+          const cycle = mirageSchema.cycles.where({
+            id: parent.objective.attrs.cycleId,
+          }).models[0]
+          const defaultPolicy = AUTHZ_POLICY[cycle.active ? 'ALLOW' : 'DENY']
+
+          return {
+            create: defaultPolicy,
+            update: defaultPolicy,
+            read: defaultPolicy,
+            delete: defaultPolicy,
+          }
+        },
 
         timeline: (
           parent: ModelInstance<any>,
