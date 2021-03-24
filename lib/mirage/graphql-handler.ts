@@ -1,7 +1,9 @@
 import { createGraphQLHandler } from '@miragejs/graphql'
-import { pickBy, sortBy } from 'lodash'
+import { pickBy, sortBy, flatten, omitBy, isNull, uniqBy } from 'lodash'
 import { ModelInstance } from 'miragejs'
 
+import { CADENCE } from 'src/components/Cycle/constants'
+import { Cycle } from 'src/components/Cycle/types'
 import { KeyResultCheckIn, KeyResultComment } from 'src/components/KeyResult/types'
 import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
@@ -21,11 +23,32 @@ export interface QueryUserCompaniesArguments {
   limit?: number
 }
 
+export interface QueryCyclesArguments {
+  active?: boolean
+  cadence?: CADENCE
+  orderBy?: {
+    cadence?: 'DESC' | 'ASC'
+  }
+}
+
+export interface QueryAllCyclesArguments extends QueryCyclesArguments {
+  ids?: Array<Cycle['id']>
+}
+
+export interface QuerySameTitleCyclesChildrenArguments {
+  fromCycles: Array<Cycle['id']>
+  active?: boolean
+}
+
 export interface CreateKeyResultCheckInInterface {
   keyResultCheckIn: Partial<KeyResultCheckIn>
 }
 
-const graphQLHandler = (mirageSchema: unknown) =>
+export interface QueryCycleCyclesArguments {
+  active?: boolean
+}
+
+const graphQLHandler = (mirageSchema: any) =>
   createGraphQLHandler(graphQLSchema, mirageSchema, {
     resolvers: {
       KeyResult: {
@@ -37,12 +60,19 @@ const graphQLHandler = (mirageSchema: unknown) =>
             ? parent.keyResultCheckIns?.models.slice(0, limit)
             : parent.keyResultCheckIns?.models,
 
-        policies: () => ({
-          create: AUTHZ_POLICY.ALLOW,
-          update: AUTHZ_POLICY.ALLOW,
-          read: AUTHZ_POLICY.ALLOW,
-          delete: AUTHZ_POLICY.ALLOW,
-        }),
+        policies: (parent: ModelInstance<any>) => {
+          const cycle = mirageSchema.cycles.where({
+            id: parent.objective.attrs.cycleId,
+          }).models[0]
+          const defaultPolicy = AUTHZ_POLICY[cycle.active ? 'ALLOW' : 'DENY']
+
+          return {
+            create: defaultPolicy,
+            update: defaultPolicy,
+            read: defaultPolicy,
+            delete: defaultPolicy,
+          }
+        },
 
         timeline: (
           parent: ModelInstance<any>,
@@ -92,6 +122,19 @@ const graphQLHandler = (mirageSchema: unknown) =>
           limit ? parent.companies.models.slice(0, limit) : parent.companies.models,
       },
 
+      Cycle: {
+        cycles: (parent: ModelInstance<any>) => {
+          const { cycles } = mirageSchema
+          const parentCycleModelList = parent.attrs.cycleIds.map((cycleID: Cycle['id']) =>
+            cycles.where({ id: cycleID }),
+          )
+          const parentCycles = parentCycleModelList.map((parentCycle: any) => parentCycle.models)
+          const flattenedParentCycles = flatten(parentCycles)
+
+          return flattenedParentCycles
+        },
+      },
+
       Mutation: {
         createKeyResultCheckIn: (
           _: any,
@@ -139,6 +182,44 @@ const graphQLHandler = (mirageSchema: unknown) =>
           const resolvedTeams = filteredTeams.models
 
           return resolvedTeams
+        },
+
+        cycles: (
+          _graphQLSchema: unknown,
+          { orderBy: _, ids, ...filters }: QueryAllCyclesArguments,
+          { mirageSchema }: any,
+        ): Array<ModelInstance<typeof Models.cycle>> => {
+          const { cycles } = mirageSchema
+
+          const clearedFilters = omitBy(filters, isNull)
+
+          const filteredCycles: any = cycles.where(clearedFilters)
+          const resolvedCycles = filteredCycles.models
+
+          const cyclesWithSelectedIDs = ids
+            ? resolvedCycles.filter((cycle: Cycle) => ids.includes(cycle.id))
+            : resolvedCycles
+
+          return cyclesWithSelectedIDs
+        },
+
+        cyclesInSamePeriod: (
+          _graphQLSchema: unknown,
+          { fromCycles, active }: QuerySameTitleCyclesChildrenArguments,
+          { mirageSchema }: any,
+        ): Array<ModelInstance<typeof Models.cycle>> => {
+          const { cycles } = mirageSchema
+
+          const filters = omitBy({ active }, isNull)
+
+          const allCycles = fromCycles.map((cycleID) =>
+            cycles.where({ parentId: cycleID, ...filters }),
+          )
+          const allCyclesModels = allCycles.map((cycles) => cycles.models)
+          const flattenedCycles = flatten(allCyclesModels)
+          const uniqCycles = uniqBy(flattenedCycles, 'period')
+
+          return uniqCycles
         },
       },
     },

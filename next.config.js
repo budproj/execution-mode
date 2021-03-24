@@ -3,6 +3,7 @@ const path = require('path')
 const _ = require('lodash')
 
 const {
+  URL,
   HOST,
   APP_ENV,
   LOCALE_OVERRIDE,
@@ -62,6 +63,12 @@ const publicRuntimeConfig = {
     },
 
     {
+      source: '/pt-BR/meus-resultados-chave/ciclos-anteriores',
+      destination: '/my-key-results/previous-cycles',
+      locale: 'pt-BR',
+    },
+
+    {
       source: '/pt-BR/explorar',
       destination: '/explore',
       locale: 'pt-BR',
@@ -82,6 +89,7 @@ const publicRuntimeConfig = {
 }
 
 const serverRuntimeConfig = {
+  url: URL,
   host: HOST,
   supportedLocales: LOCALE_OVERRIDE ? [LOCALE_OVERRIDE] : SUPPORTED_LOCALES.split(','),
 }

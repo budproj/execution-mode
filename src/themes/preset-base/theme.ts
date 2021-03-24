@@ -15,6 +15,7 @@ import {
   Alert,
   Avatar,
   Editable,
+  Tabs,
 } from './components'
 
 const colors = {
@@ -166,6 +167,7 @@ const theme = extendTheme({
     Alert,
     Avatar,
     Editable,
+    Tabs,
   },
 
   fonts: {

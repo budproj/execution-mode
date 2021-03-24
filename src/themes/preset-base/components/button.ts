@@ -5,12 +5,11 @@ const Button = {
     text: ({ colorScheme }: ButtonProps) => ({
       color: `${colorScheme ?? 'gray'}.500`,
 
-      '&:hover': {
+      _hover: {
         color: `${colorScheme ?? 'brand'}.400`,
       },
 
-      '&:focus': {
-        color: `${colorScheme ?? 'brand'}.400`,
+      _focus: {
         boxShadow: 'none',
       },
     }),
@@ -20,16 +19,16 @@ const Button = {
       color: `${colorScheme ?? 'brand'}.500`,
       borderRadius: '2px',
 
-      '&:hover': {
+      _hover: {
         bg: `${colorScheme ?? 'brand'}.500`,
         color: 'white',
       },
 
-      '&:focus': {
+      _focus: {
         boxShadow: 'none',
       },
 
-      '&:active': {
+      _active: {
         bg: `${colorScheme ?? 'brand'}.100`,
         color: `${colorScheme ?? 'brand'}.500`,
       },
@@ -39,39 +38,38 @@ const Button = {
       color: `${colorScheme ?? 'brand'}.500`,
       borderRadius: 4,
 
-      '&:hover': {
+      _hover: {
         bg: `${colorScheme ?? 'brand'}.50`,
       },
 
-      '&:focus': {
+      _focus: {
         boxShadow: 'none',
       },
 
-      '&:active': {
+      _active: {
         bg: `${colorScheme ?? 'brand'}.50`,
       },
     }),
 
-    outline: () => ({
-      borderColor: 'brand.500',
-      color: 'brand.500',
-      borderWidth: '2px',
-      borderRadius: '2px',
+    outline: ({ colorScheme }: ButtonProps) => ({
+      color: `${colorScheme ?? 'brand'}.500`,
+      borderColor: `${colorScheme ?? 'brand'}.100`,
+      borderWidth: 2,
+      borderRadius: 4,
 
-      '&:hover': {
-        borderColor: 'brand.400',
-        color: 'brand.400',
+      _hover: {
+        borderColor: `${colorScheme ?? 'brand'}.400`,
         bg: 'transparent',
       },
 
-      '&:focus': {
-        borderColor: 'brand.400',
-        color: 'brand.400',
+      _focus: {
+        borderColor: `${colorScheme ?? 'brand'}.400`,
+        boxShadow: 'none',
       },
 
-      '&:active': {
-        borderColor: 'brand.400',
-        color: 'brand.400',
+      _active: {
+        borderColor: `${colorScheme ?? 'brand'}.400`,
+        bg: 'transparent',
       },
     }),
   },

@@ -34,7 +34,7 @@ const CheckInFormFieldValuePrevious = ({
         value={values.valuePrevious}
         bg="black.100"
         fontSize="xs"
-        _disabled={{ opacity: 1 }}
+        _disabled={{ opacity: 1, borderColor: 'black.200' }}
       />
     </Box>
   )

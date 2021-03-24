@@ -100,7 +100,7 @@ describe('component expectations', () => {
     expect(underMaintenance.length).toEqual(0)
   })
 
-  it('displays only the logotype in our AppBar if our app is under maintenance', () => {
+  it('displays only the logotype in our MainAppBar if our app is under maintenance', () => {
     const fakeConfig = {
       publicRuntimeConfig: {
         maintenanceMode: {
@@ -122,7 +122,7 @@ describe('component expectations', () => {
     expect(page.prop('appBarVariant')).toEqual('onlyLogotype')
   })
 
-  it('shows the AppBar in page if our app is not under maintenance', () => {
+  it('shows the MainAppBar in page if our app is not under maintenance', () => {
     const fakeConfig = {
       publicRuntimeConfig: {
         maintenanceMode: {

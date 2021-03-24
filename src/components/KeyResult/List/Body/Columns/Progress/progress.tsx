@@ -23,7 +23,8 @@ import messages from './messages'
 export interface KeyResultListBodyColumnProgressProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
-  canChange?: boolean
+  isDisabled?: boolean
+  isActive?: boolean
 }
 
 const formatSelector = buildPartialSelector<KeyResult['format']>('format')
@@ -31,7 +32,8 @@ const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 
 const KeyResultListBodyColumnProgress = ({
   id,
-  canChange,
+  isDisabled,
+  isActive,
 }: KeyResultListBodyColumnProgressProperties): ReactElement => {
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(id))
   const format = useRecoilValue(formatSelector(id))
@@ -52,12 +54,8 @@ const KeyResultListBodyColumnProgress = ({
     <KeyResultListBodyColumnBase preventLineClick>
       <Flex flexDir="column">
         <Box w="100%">
-          <Skeleton
-            isLoaded={isKeyResultLoaded}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-          >
-            <ProgressSlider id={id} canChange={canChange} />
+          <Skeleton isLoaded={isKeyResultLoaded}>
+            <ProgressSlider id={id} isDisabled={isDisabled} isActive={isActive} />
           </Skeleton>
         </Box>
 
@@ -67,9 +65,6 @@ const KeyResultListBodyColumnProgress = ({
             minW="40%"
             mt={isKeyResultLoaded ? 'inherit' : '4px'}
             isLoaded={isKeyResultLoaded}
-            flexGrow={1}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
             <ProgressMask
               value={draftValue}
@@ -87,13 +82,13 @@ const KeyResultListBodyColumnProgress = ({
             />
           </Skeleton>
 
+          <Box flexGrow={1} />
+
           <Skeleton
             noOfLines={1}
             minW="40%"
             mt={isKeyResultLoaded ? 'inherit' : '4px'}
             isLoaded={isKeyResultLoaded}
-            fadeDuration={0}
-            /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
           >
             <ProgressMask
               value={goal}

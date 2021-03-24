@@ -10,7 +10,7 @@ const PageTitle = (): ReactElement => {
   const isLoaded = Boolean(pageTitle && pageTitle !== '')
 
   return (
-    <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 400, 57)}>
+    <Skeleton isLoaded={isLoaded} fadeDuration={0} {...buildSkeletonMinSize(isLoaded, 400, 57)}>
       <Heading as="h1" fontSize="4xl" color="black.900" fontWeight="500">
         {pageTitle}
       </Heading>

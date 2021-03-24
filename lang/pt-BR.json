@@ -35,6 +35,10 @@
     "defaultMessage": "Você não tem nenhum resultado-chave",
     "description": "The label message that is displayed below our team at work image when the user has no key results in her/his key result view list"
   },
+  "/SbmLm": {
+    "defaultMessage": "Uma seta em círculo, demonstrando que ao clicar aqui você redefinirá essa ação",
+    "description": "This is the desc attribute of our reset icon. It is used by screen readers"
+  },
   "/VrdI0": {
     "defaultMessage": "Um ícone de pasta",
     "description": "The desc message for the Folder icon. This icon is used to ilustrate our key results"
@@ -131,6 +135,10 @@
     "defaultMessage": "Últimas atividades",
     "description": "This text is displayed at the top of our timeline, as its title"
   },
+  "4cmOYV": {
+    "defaultMessage": "Painel",
+    "description": "MainAppBar menu item that links to \"Dashboard\" page"
+  },
   "4f4cWE": {
     "defaultMessage": "Alto",
     "description": "We use this tag to group every key result with confidence higher than 66"
@@ -151,6 +159,10 @@
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
   },
+  "6E9X3c": {
+    "defaultMessage": "Redefinir",
+    "description": "This is the button label that is displayed in our reset button"
+  },
   "6RzNYt": {
     "defaultMessage": "Um círculo com um ponto de interrogação no meio",
     "description": "This message explains our tooltip icon for screen readers"
@@ -170,6 +182,14 @@
   "77LX/s": {
     "defaultMessage": "Vincule seu perfil às suas redes sociais para facilitar a conexão com seus colegas!",
     "description": "This subtitle is displayed as the subtitle of the social media section in our user account settings page"
+  },
+  "7Yw26b": {
+    "defaultMessage": "Selecione o ano",
+    "description": "This message is displayed when no year filter was selected"
+  },
+  "7d+540": {
+    "defaultMessage": "Uma seta para cima, indicando que o menu de seleção de ciclos está aberto",
+    "description": "This message is displayed to the user screen reader when the year select menu is opened"
   },
   "89ola3": {
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
@@ -206,10 +226,6 @@
   "B0G29o": {
     "defaultMessage": "Baixo",
     "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
-  },
-  "B5ZikQ": {
-    "defaultMessage": "Meus Resultados-Chave",
-    "description": "AppBar menu item that links to \"My Key Results\" page"
   },
   "Ba8bU1": {
     "defaultMessage": "Enviar comentário",
@@ -315,10 +331,6 @@
     "defaultMessage": "Ver menos...",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
-  "I5aN4R": {
-    "defaultMessage": "Explorar",
-    "description": "AppBar menu item that links to teams \"Explore\" page"
-  },
   "IGODpK": {
     "defaultMessage": "Ciclo",
     "description": "The text of the table head related to the Cycle column"
@@ -334,6 +346,10 @@
   "J+UxkH": {
     "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
+  "JBA9+L": {
+    "defaultMessage": "Explorar ciclos anteriores",
+    "description": "This text is displayed as a tab where the user can click to change the view below it"
   },
   "JZJeBS": {
     "defaultMessage": "Ontem",
@@ -390,6 +406,10 @@
   "Nafqgw": {
     "defaultMessage": "Cancelar check-in",
     "description": "This message is displayed as a label button when the check-in form is opened in our key result section"
+  },
+  "Nwj8qY": {
+    "defaultMessage": "Minha conta",
+    "description": "MainAppBar user menu first item option"
   },
   "O0072X": {
     "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
@@ -451,10 +471,6 @@
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
   },
-  "RcUoJA": {
-    "defaultMessage": "Painel",
-    "description": "AppBar menu item that links to \"Dashboard\" page"
-  },
   "RrW2fc": {
     "defaultMessage": "Atualize seu cargo",
     "description": "This is the fallback value that goes on our user account settings page, at the fifth field to update the user informations. The fallback value appears if the user has no data at that field"
@@ -470,6 +486,10 @@
   "SenoB2": {
     "defaultMessage": "A página que você está procurando não foi encontrada!",
     "description": "The title displayed in our not found error page"
+  },
+  "SiJuyU": {
+    "defaultMessage": "Um ícone de calendário, indicando que aqui você seleciona o ano que deseja filtrar",
+    "description": "This message is used by screen readers to explain the icon to the user"
   },
   "Smwz9L": {
     "defaultMessage": "Descreve o período no qual esse resultado-chave faz parte",
@@ -603,6 +623,10 @@
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
     "description": "The alternative text explaining our team at work image"
   },
+  "aKyktL": {
+    "defaultMessage": "Q2",
+    "description": "This button appears as an empty state while the user is selecting the cycle filter"
+  },
   "aO+w74": {
     "defaultMessage": "A confiança mudou neste check-in:",
     "description": "This text is the first line of our icon tooltip when the check-in has a different confidence from the previous check-in"
@@ -627,6 +651,14 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
+  "cPGOoL": {
+    "defaultMessage": "Fale com nosso suporte técnico",
+    "description": "MainAppBar user menu third item option"
+  },
+  "ciNUJf": {
+    "defaultMessage": "Explorar",
+    "description": "MainAppBar menu item that links to teams \"Explore\" page"
+  },
   "dB4Sbq": {
     "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
     "description": "This tooltip appears when the user hovers the second column title"
@@ -634,6 +666,10 @@
   "dymB9a": {
     "defaultMessage": "Cada resultado-chave pertence a um objetivo",
     "description": "This tooltip explains the second column of the key result list"
+  },
+  "e37pvj": {
+    "defaultMessage": "Uma seta para baixo, indicando que ao clicar você irá abrir a lista de ciclos",
+    "description": "This message is displayed to the user screen reader when the year select menu is closed"
   },
   "e9PG+t": {
     "defaultMessage": "por {author}",
@@ -643,9 +679,17 @@
     "defaultMessage": "Nenhuma informação",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
   },
+  "eYhGZW": {
+    "defaultMessage": "Nenhuma opção disponível",
+    "description": "This message is displayed when the user tries to list the cycles, but none is defined"
+  },
   "f6/kwR": {
     "defaultMessage": "Esse é o progresso acumulado dessa semana",
     "description": "This tooltip appears when the user hovers the third column title"
+  },
+  "fI4P80": {
+    "defaultMessage": "Q1",
+    "description": "This button appears as an empty state while the user is selecting the cycle filter"
   },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
@@ -695,10 +739,6 @@
     "defaultMessage": "Minha conta",
     "description": "The page title that our users should see in the my profile page"
   },
-  "h5uqwJ": {
-    "defaultMessage": "Fale com nosso suporte técnico",
-    "description": "AppBar user menu third item option"
-  },
   "hMXuTX": {
     "defaultMessage": "Masculino",
     "description": "This text is used accross our platform to identify the male gender"
@@ -742,6 +782,10 @@
   "kFrglO": {
     "defaultMessage": "O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.",
     "description": "This tooltip explains how the progress of the objective is calculated"
+  },
+  "kHg/gs": {
+    "defaultMessage": "Você não tem nenhum resultado-chave em ciclos anteriores",
+    "description": "The label message that is displayed below our team at work image when the user has no key results in her/his key result view list"
   },
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
@@ -795,9 +839,9 @@
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
   },
-  "mBPu4P": {
-    "defaultMessage": "Artigos de suporte",
-    "description": "AppBar user menu second item option"
+  "mdG+CG": {
+    "defaultMessage": "Ciclos ativos",
+    "description": "This text is displayed as a tab where the user can click to change the view below it"
   },
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
@@ -847,10 +891,6 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
-  "qmEcGQ": {
-    "defaultMessage": "Minha conta",
-    "description": "AppBar user menu first item option"
-  },
   "qytqsj": {
     "defaultMessage": "Trimestral",
     "description": "This text is used as prefix for our quarterly cadences"
@@ -898,6 +938,10 @@
   "th1Ney": {
     "defaultMessage": "Hoje",
     "description": "This label is displayed if the date is today"
+  },
+  "u4rqek": {
+    "defaultMessage": "Q4",
+    "description": "This button appears as an empty state while the user is selecting the cycle filter"
   },
   "u7Yaxx": {
     "defaultMessage": "Responsável",
@@ -947,6 +991,14 @@
     "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}}",
     "description": "This message displays the latest report status for a given component"
   },
+  "yq7/PT": {
+    "defaultMessage": "Artigos de suporte",
+    "description": "MainAppBar user menu second item option"
+  },
+  "ytvOyM": {
+    "defaultMessage": "Meus Resultados-Chave",
+    "description": "MainAppBar menu item that links to \"My Key Results\" page"
+  },
   "z1FXkV": {
     "defaultMessage": "Ciclo",
     "description": "The label text above the Cycle section in our key result single page or drawer"
@@ -978,6 +1030,10 @@
   "zev4wl": {
     "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
     "description": "This is a message explaining the flag icon in our check-in form"
+  },
+  "znpwST": {
+    "defaultMessage": "Q3",
+    "description": "This button appears as an empty state while the user is selecting the cycle filter"
   },
   "zsB72A": {
     "defaultMessage": "Pré-visualização",

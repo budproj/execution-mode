@@ -31,10 +31,10 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
   const setLatestTimelineEntry = useSetRecoilState(selectLatestTimelineEntry(keyResultID))
   const theme = useTheme()
 
-  const policies = keyResultPolicies.childEntities.keyResultCheckIn
+  const checkInPolicies = keyResultPolicies.childEntities.keyResultCheckIn
 
   const isNotScrollingOrAskedToCheckIn = !isScrolling || isCreatingCheckIn
-  const canUpdate = policies?.create === AUTHZ_POLICY.ALLOW
+  const canUpdate = checkInPolicies?.create === AUTHZ_POLICY.ALLOW
   const shouldShowCheckIn = canUpdate && isNotScrollingOrAskedToCheckIn
 
   const handleCheckInButtonClick = () => {

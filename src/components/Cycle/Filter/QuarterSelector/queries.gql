@@ -1,0 +1,6 @@
+query GET_QUARTERLY_CYCLES_FROM_FILTERED_PARENTS($parentIds: [ID!]!) {
+  cyclesInSamePeriod(fromCycles: $parentIds, active: false) {
+    id
+    period
+  }
+}

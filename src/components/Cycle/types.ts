@@ -7,10 +7,11 @@ import { CADENCE } from './constants'
 
 export interface Cycle {
   id: string
-  title: string
+  period: string
   cadence: CADENCE
   dateStart: string
   dateEnd: string
+  active: boolean
   createdAt: string
   updatedAt: string
   team: Team

@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 
-import KeyResultListBodyStaticLine from 'src/components/KeyResult/List/Body/Static/line'
+import KeyResultListBodyStaticSkeletonLine from 'src/components/KeyResult/List/Body/Static/skeleton-line'
 import { KeyResultListBodyProperties } from 'src/components/KeyResult/List/Body/body'
 import { KeyResult } from 'src/components/KeyResult/types'
 
@@ -16,7 +16,7 @@ const KeyResultListBodySkeleton = ({
 }: KeyResultListBodySkeletonProperties) => (
   <Box>
     {[...[...new Array(amountOfLines)].keys()].map((key) => (
-      <KeyResultListBodyStaticLine key={`SKELETON_LINE_${key}`} {...rest} />
+      <KeyResultListBodyStaticSkeletonLine key={`SKELETON_LINE_${key}`} {...rest} />
     ))}
   </Box>
 )

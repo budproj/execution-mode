@@ -23,11 +23,7 @@ const KeyResultListBodyColumnConfidenceLevel = ({
   return (
     <KeyResultListBodyColumnBase>
       <Flex gridGap={2} flexDir="column">
-        <Skeleton
-          isLoaded={isKeyResultLoaded}
-          fadeDuration={0}
-          /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-        >
+        <Skeleton isLoaded={isKeyResultLoaded}>
           <ConfidenceTag showTooltip confidenceValue={latestCheckIn?.confidence} />
         </Skeleton>
       </Flex>

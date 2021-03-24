@@ -11,3 +11,5 @@ export { default as keyResultAtomFamily } from './atom-family'
 export { default as keyResultSelector } from './key-result'
 
 export { default as keyResultBuildPartialSelector } from './build-partial-selector'
+
+export { default as keyResultFiltersAtomFamily } from './filters'

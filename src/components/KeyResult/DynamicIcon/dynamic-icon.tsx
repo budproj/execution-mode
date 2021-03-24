@@ -17,6 +17,7 @@ export interface KeyResultDynamicIconProperties {
   iconSize: FlexProps['width']
   boxSize: FlexProps['width']
   borderRadius: FlexProps['borderRadius']
+  isDisabled?: boolean
 }
 
 const KeyResultDynamicIcon = ({
@@ -24,6 +25,7 @@ const KeyResultDynamicIcon = ({
   boxSize,
   iconSize,
   borderRadius,
+  isDisabled,
 }: KeyResultDynamicIconProperties): ReactElement => {
   const intl = useIntl()
   const drawing = useRecoilValue<KeyResultIconDrawing>(keyResultIconDrawing(title))
@@ -35,7 +37,7 @@ const KeyResultDynamicIcon = ({
   return (
     <Flex
       lineHeight={1}
-      bg={color}
+      bg={isDisabled ? 'black.500' : color}
       borderRadius={borderRadius}
       w={boxSize}
       h={boxSize}

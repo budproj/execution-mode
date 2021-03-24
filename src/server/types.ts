@@ -8,4 +8,5 @@ export interface ServerConfig {
   dev: boolean
   host: string
   https: HttpsServerConfig
+  url?: string
 }

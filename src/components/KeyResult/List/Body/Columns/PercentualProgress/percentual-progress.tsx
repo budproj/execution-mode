@@ -13,10 +13,12 @@ import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 export interface KeyResultListBodyColumnPercentualProgressProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
+  isDisabled?: boolean
 }
 
 const KeyResultListBodyColumnPercentualProgress = ({
   id,
+  isDisabled,
 }: KeyResultListBodyColumnPercentualProgressProperties): ReactElement => {
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
@@ -32,7 +34,11 @@ const KeyResultListBodyColumnPercentualProgress = ({
   return (
     <KeyResultListBodyColumnBase>
       <Skeleton isLoaded={isLoaded}>
-        <Text fontSize="md" color={confidenceTag.color.primary} fontWeight={500}>
+        <Text
+          fontSize="md"
+          color={isDisabled ? 'gray.400' : confidenceTag.color.primary}
+          fontWeight={500}
+        >
           {intl.formatNumber(progress / 100, { style: 'percent' })}
         </Text>
       </Skeleton>

@@ -59,12 +59,7 @@ const KeyResultListBodyColumnOwner = ({
       <Popover placement="top-end" size="sm">
         <PopoverTrigger>
           <Flex alignItems="center" gridGap={4}>
-            <SkeletonCircle
-              size="48px"
-              isLoaded={isOwnerLoaded}
-              fadeDuration={0}
-              /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-            >
+            <SkeletonCircle size="48px" isLoaded={isOwnerLoaded}>
               <UserAvatar
                 name={owner?.fullName}
                 src={owner?.picture}

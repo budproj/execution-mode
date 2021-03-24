@@ -1,15 +1,39 @@
-export { default as KeyResultListBodyColumnCycle } from './Cycle'
+export {
+  KeyResultListBodyColumnCycleSkeleton,
+  default as KeyResultListBodyColumnCycle,
+} from './Cycle'
 
-export { default as KeyResultListBodyColumnObjective } from './Objective'
+export {
+  KeyResultListBodyColumnObjectiveSkeleton,
+  default as KeyResultListBodyColumnObjective,
+} from './Objective'
 
-export { default as KeyResultListBodyColumnOwner } from './Owner'
+export {
+  KeyResultListBodyColumnOwnerSkeleton,
+  default as KeyResultListBodyColumnOwner,
+} from './Owner'
 
-export { default as KeyResultListBodyColumnProgress } from './Progress'
+export {
+  KeyResultListBodyColumnProgressSkeleton,
+  default as KeyResultListBodyColumnProgress,
+} from './Progress'
 
-export { default as KeyResultListBodyColumnKeyResult } from './KeyResult'
+export {
+  KeyResultListBodyColumnKeyResultSkeleton,
+  default as KeyResultListBodyColumnKeyResult,
+} from './KeyResult'
 
-export { default as KeyResultListBodyColumnConfidenceLevel } from './ConfidenceLevel'
+export {
+  KeyResultListBodyColumnConfidenceLevelSkeleton,
+  default as KeyResultListBodyColumnConfidenceLevel,
+} from './ConfidenceLevel'
 
-export { default as KeyResultListBodyColumnConfidenceLevelColor } from './ConfidenceLevelColor'
+export {
+  KeyResultListBodyColumnConfidenceLevelColorSkeleton,
+  default as KeyResultListBodyColumnConfidenceLevelColor,
+} from './ConfidenceLevelColor'
 
-export { default as KeyResultListBodyColumnPercentualProgress } from './PercentualProgress'
+export {
+  KeyResultListBodyColumnPercentualProgressSkeleton,
+  default as KeyResultListBodyColumnPercentualProgress,
+} from './PercentualProgress'

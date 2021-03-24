@@ -2,7 +2,10 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
   keyResult(id: $id) {
     id
     title
-    policies(resource: KEY_RESULT_CHECK_IN) {
+    keyResultCheckInPolicies: policies(resource: KEY_RESULT_CHECK_IN) {
+      create
+    }
+    keyResultCommentPolicies: policies(resource: KEY_RESULT_COMMENT) {
       create
     }
   }

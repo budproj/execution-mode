@@ -20,7 +20,8 @@ import messages from './messages'
 
 export interface ProgressSliderSliderProperties {
   keyResultID?: KeyResult['id']
-  canChange?: boolean
+  isDisabled?: boolean
+  isActive?: boolean
 }
 
 const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('initialValue')
@@ -34,7 +35,7 @@ const ProgressSliderSliderWithReference = forwardRef(
 )
 
 const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProperties>(
-  ({ keyResultID, canChange }: ProgressSliderSliderProperties, forwardedReference) => {
+  ({ keyResultID, isDisabled, isActive }: ProgressSliderSliderProperties, forwardedReference) => {
     const [isLoaded, setIsLoaded] = useState(false)
     const [isChanging, setIsChanging] = useState(false)
     const [draftValue, setDraftValue] = useRecoilState(keyResultCheckInProgressDraft(keyResultID))
@@ -90,12 +91,12 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
       <ProgressSliderSliderWithReference
         ref={forwardedReference}
         value={draftValue}
-        trackColor={confidenceTag?.color.primary}
+        trackColor={isActive ? confidenceTag?.color.primary : 'black.400'}
         min={initialValue as KeyResult['initialValue']}
         max={goal as KeyResult['goal']}
         step={step}
         focusThumbOnChange={false}
-        isDisabled={!canChange}
+        isDisabled={isDisabled}
         thumbTooltipLabel={intl.formatMessage(messages.thumbTooltip)}
         onChange={handleSliderUpdate}
         onChangeEnd={handleSliderUpdateEnd}

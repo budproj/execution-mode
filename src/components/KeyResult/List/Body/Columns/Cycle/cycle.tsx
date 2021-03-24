@@ -25,13 +25,8 @@ const KeyResultListBodyColumnCycle = ({
 
   return (
     <KeyResultListBodyColumnBase>
-      <Skeleton
-        isLoaded={isCycleLoaded}
-        fadeDuration={0}
-        /* Using fadeDuration=0 as a workaround for this issue: https://github.com/chakra-ui/chakra-ui/issues/2644 */
-        {...buildSkeletonMinSize(isCycleLoaded, 100, 20)}
-      >
-        <Text color="gray.300">{cycle?.title}</Text>
+      <Skeleton isLoaded={isCycleLoaded} {...buildSkeletonMinSize(isCycleLoaded, 100, 20)}>
+        <Text color="gray.300">{cycle?.period}</Text>
       </Skeleton>
     </KeyResultListBodyColumnBase>
   )

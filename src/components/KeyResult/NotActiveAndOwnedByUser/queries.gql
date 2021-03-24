@@ -1,0 +1,47 @@
+query GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES($userID: ID!) {
+  cycles(active: false) {
+    id
+    period
+    cadence
+    active
+    parent {
+      id
+      period
+    }
+    keyResults(ownerId: $userID) {
+      id
+      title
+      initialValue
+      goal
+      format
+      objective {
+        title
+      }
+      owner {
+        id
+        firstName
+        fullName
+        nickname
+        picture
+        role
+        about
+        linkedInProfileAddress
+        teams {
+          id
+          name
+        }
+      }
+      latestKeyResultCheckIn {
+        id
+        value
+        confidence
+        progress
+        comment
+        createdAt
+        user {
+          fullName
+        }
+      }
+    }
+  }
+}
