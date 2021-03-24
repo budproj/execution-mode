@@ -54,8 +54,8 @@ const KeyResultNotActiveAndOwnedByUser = ({
         userID,
       },
       onCompleted: (data) => {
-        const childCycles = flatten(data.cycles.map((cycle) => cycle?.cycles))
-        const cycles = filter(flatten([data.cycles, childCycles]))
+        const parentCycles = flatten(data.cycles.map((cycle) => cycle?.parent))
+        const cycles = filter(flatten([parentCycles, data.cycles]))
         const keyResults = flatten(cycles.map((cycle) => cycle?.keyResults))
 
         loadCycles(cycles)
@@ -67,7 +67,7 @@ const KeyResultNotActiveAndOwnedByUser = ({
   const handleYearFilterUpdate = (yearCycleIDs: Array<Cycle['id']>) => {
     setFilters({
       yearCycleIDs,
-      quarterCycleIDs: filters ? filters.quarterCycleIDs : [],
+      quarterCycleIDs: [],
     })
   }
 

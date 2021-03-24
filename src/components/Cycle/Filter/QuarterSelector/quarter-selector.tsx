@@ -1,4 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
+import groupBy from 'lodash/groupBy'
 import React, { useEffect } from 'react'
 
 import { Cycle } from 'src/components/Cycle/types'
@@ -43,6 +44,7 @@ const CycleFilterQuarterSelector = ({
   )
 
   const hasParentCycles = filteredYearIDs && filteredYearIDs.length > 0
+  const quarters = data && groupBy(data.cyclesInSamePeriod, (item) => item.period)
 
   useEffect(() => {
     if (hasParentCycles) fetchCycleOptions()
@@ -51,7 +53,7 @@ const CycleFilterQuarterSelector = ({
   return hasParentCycles ? (
     <CycleFilterQuarterSelectorQuarterOptions
       isLoading={loading}
-      quarters={data?.cyclesInSamePeriod}
+      quarters={quarters}
       onFilter={onQuarterFilter}
     />
   ) : (

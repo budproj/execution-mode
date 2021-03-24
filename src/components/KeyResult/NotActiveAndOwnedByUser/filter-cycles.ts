@@ -16,7 +16,7 @@ const filterCycles = (cycles?: Cycle[], filters?: KeyResultNotActiveAndOwnedByUs
 
   const yearFilteredCycles = cycles.filter(
     (cycle) =>
-      filters?.yearCycleIDs.includes(cycle.id) ??
+      filters?.yearCycleIDs.includes(cycle.id) ||
       (cycle.parent && filters?.yearCycleIDs.includes(cycle.parent.id)),
   )
 
