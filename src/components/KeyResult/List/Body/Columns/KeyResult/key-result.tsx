@@ -17,6 +17,7 @@ export interface KeyResultListBodyColumnKeyResultProperties
   withRightBorder?: boolean
   withDynamicIcon?: boolean
   withLastUpdateInfo?: boolean
+  isDisabled?: boolean
 }
 
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
@@ -28,6 +29,7 @@ const KeyResultListBodyColumnKeyResult = ({
   withRightBorder,
   withDynamicIcon,
   withLastUpdateInfo,
+  isDisabled,
 }: KeyResultListBodyColumnKeyResultProperties): ReactElement => {
   const title = useRecoilValue(titleSelector(id))
   const isOutdated = useRecoilValue(isOutdatedSelector(id))
@@ -49,7 +51,7 @@ const KeyResultListBodyColumnKeyResult = ({
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
           <Skeleton borderRadius={10} isLoaded={isKeyResultLoaded}>
-            <KeyResultDynamicIcon title={title} />
+            <KeyResultDynamicIcon title={title} isDisabled={isDisabled} />
           </Skeleton>
         )}
 

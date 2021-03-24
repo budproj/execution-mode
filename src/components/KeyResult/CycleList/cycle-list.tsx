@@ -76,6 +76,7 @@ const KeyResultCycleList = ({
             withDynamicIcon: true,
             withRightBorder: true,
             withLastUpdateInfo: true,
+            isDisabled,
           },
           [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
             isActive,
