@@ -29,8 +29,8 @@ const KeyResultNotActiveAndOwnedByUserCyclesList = ({
       {cyclesWithKeyResults.map((cycle) => (
         <KeyResultCycleList
           key={cycle.id}
-          isNotActive
           isDisabled
+          isActive={false}
           id={cycle.id}
           onLineClick={onLineClick}
         />

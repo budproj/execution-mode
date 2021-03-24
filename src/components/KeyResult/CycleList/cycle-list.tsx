@@ -82,6 +82,9 @@ const KeyResultCycleList = ({
             isActive,
             isDisabled,
           },
+          [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
+            isDisabled,
+          },
           [KEY_RESULT_LIST_COLUMN.OWNER]: {
             justifyContent: 'flex-end',
           },
