@@ -58,7 +58,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     active: true,
     hasNotActiveChildren: false,
     cadence: CADENCE.YEARLY,
-  })
+  } as any)
 
   const tacticalCycle = server.create('cycle', {
     period: 'Q1',
@@ -67,7 +67,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     active: true,
     cadence: CADENCE.QUARTERLY,
     parent: strategicCycle,
-  })
+  } as any)
 
   const previousStrategicCycle = server.create('cycle', {
     period: '2020',
@@ -76,7 +76,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     active: false,
     hasNotActiveChildren: true,
     cadence: CADENCE.YEARLY,
-  })
+  } as any)
 
   const previousTacticalCycle1 = server.create('cycle', {
     period: 'Q3',
@@ -85,7 +85,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     active: false,
     cadence: CADENCE.QUARTERLY,
     parent: previousStrategicCycle,
-  })
+  } as any)
 
   const previousTacticalCycle2 = server.create('cycle', {
     period: 'Q4',
@@ -94,7 +94,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     active: false,
     cadence: CADENCE.QUARTERLY,
     parent: previousStrategicCycle,
-  })
+  } as any)
 
   const oldStrategicCycle = server.create('cycle', {
     period: '2019',
@@ -103,7 +103,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     active: false,
     hasNotActiveChildren: true,
     cadence: CADENCE.YEARLY,
-  })
+  } as any)
 
   const oldTacticalCycle = server.create('cycle', {
     period: 'Q4',
@@ -112,7 +112,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     active: false,
     cadence: CADENCE.QUARTERLY,
     parent: oldStrategicCycle,
-  })
+  } as any)
 
   const cycles = {
     active: {
