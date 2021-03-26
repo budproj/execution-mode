@@ -48,9 +48,9 @@ spec:
             - name: AUTH0_AUDIENCE
               value: https://api.getbud.co/business
             - name: MAINTENANCE_MODE_ENABLED
-              value: 'false'
+              value: 'true'
             - name: MAINTENANCE_MODE_EXPECTED_RETURN
-              value: 2021-01-31T22:00:00Z
+              value: 2021-03-26T20:00:00Z
             - name: HOTJAR_ID
               value: '2216269'
             - name: HOTJAR_SV
