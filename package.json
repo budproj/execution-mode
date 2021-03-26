@@ -132,6 +132,7 @@
     "lodash": "^4.17.20",
     "logform": "^2.2.0",
     "next": "^10.0.3",
+    "nextjs-progressbar": "^0.0.8",
     "react": "^16.14.0",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "^16.14.0",

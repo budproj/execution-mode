@@ -9,6 +9,7 @@ import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
 import Hotjar from 'src/components/Base/Hotjar'
 import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
+import ProgressBar from 'src/components/Base/ProgressBar'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
 import getConfig from 'src/config'
@@ -59,6 +60,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                 <MaintenanceGatekeeper>
                   <Component {...pageProps} />
                   <Hotjar />
+                  <ProgressBar />
                 </MaintenanceGatekeeper>
               </AuthzApolloProvider>
             </AuthzGatekeeper>
