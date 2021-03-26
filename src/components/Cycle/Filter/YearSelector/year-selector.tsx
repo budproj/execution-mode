@@ -89,14 +89,16 @@ const CycleFilterYearSelector = ({
             />
           </Box>
         }
-        _hover={{
-          borderColor: 'gray.200',
+        _hover={
+          {
+            borderColor: 'gray.200',
 
-          '& span:last-child svg': {
-            fill: 'gray.500',
-            stroke: 'gray.500',
-          },
-        }}
+            '& span:last-child svg': {
+              fill: 'gray.500',
+              stroke: 'gray.500',
+            },
+          } as any
+        }
       >
         <Text isTruncated maxW={40}>
           {isFilterActive
