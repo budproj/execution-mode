@@ -5,17 +5,22 @@ import https, { Server as HttpsServer } from 'https'
 import Router from '@koa/router'
 import chalk from 'chalk'
 import Koa from 'koa'
+import localtunnel from 'localtunnel'
 
 import config from './config'
 
-export const buildServer = (app: Record<string, any>): void => {
+export const buildServer = async (app: Record<string, any>): Promise<void> => {
   const koaServer = buildKoaServer(app)
   const server = buildHttpOrHttpsServer(koaServer)
 
-  server.listen(config.port, () => {
-    const serverURL = config.url ?? `https://${config.host}${config.dev ? `:${config.port}` : ''}`
+  const tunnel = config.isCodespace && (await localtunnel({ port: config.port }))
+  const endpoint = tunnel
+    ? tunnel.url
+    : config.url?.toString() ??
+      `https://${config.host}${config.dev ? `:${config.port.toString()}` : ''}`
 
-    console.log(`${chalk.cyan('➤')} ${chalk.gray('Web server running on:')} ${serverURL}`)
+  server.listen(config.port, () => {
+    console.log(`${chalk.cyan('➤')} ${chalk.gray('Web server running on:')} ${endpoint}`)
   })
 }
 

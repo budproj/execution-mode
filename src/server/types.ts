@@ -4,9 +4,10 @@ export interface HttpsServerConfig {
 }
 
 export interface ServerConfig {
-  port: string
+  port: number
   dev: boolean
   host: string
+  isCodespace: boolean
   https: HttpsServerConfig
   url?: string
 }
