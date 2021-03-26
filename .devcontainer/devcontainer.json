@@ -1,0 +1,7 @@
+{
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "dev-app",
+  "workspaceFolder": "/workspace",
+  "postCreateCommand": "bin/codespace-init",
+  "forwardPorts": [3000]
+}
