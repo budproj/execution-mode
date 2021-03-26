@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 export interface ButtonOptionGroupProperties {
   children: ButtonGroupProps['children']
   onChange?: (values: string[]) => void
+  alignItems?: ButtonGroupProps['alignItems']
 }
 
 interface ButtonOptionEvent extends React.MouseEvent<HTMLDivElement, MouseEvent> {
@@ -16,7 +17,7 @@ interface ButtonOptionTarget extends EventTarget {
   textContent: string
 }
 
-const ButtonOptionGroup = ({ children, onChange }: ButtonOptionGroupProperties) => {
+const ButtonOptionGroup = ({ children, onChange, alignItems }: ButtonOptionGroupProperties) => {
   const [values, setValue] = useState<string[]>([])
 
   const handleClickCapture = (event: ButtonOptionEvent) => {
@@ -35,7 +36,11 @@ const ButtonOptionGroup = ({ children, onChange }: ButtonOptionGroupProperties) 
       : child,
   )
 
-  return <ButtonGroup onClickCapture={handleClickCapture}>{activableChildren}</ButtonGroup>
+  return (
+    <ButtonGroup alignItems={alignItems} onClickCapture={handleClickCapture}>
+      {activableChildren}
+    </ButtonGroup>
+  )
 }
 
 export default ButtonOptionGroup
