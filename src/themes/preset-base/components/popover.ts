@@ -20,7 +20,7 @@ const Popover = {
     },
 
     popper: {
-      maxW: size && size in sizes ? sizes[size as string] : sizes.default,
+      maxW: size && size in sizes ? sizes[size] : sizes.default,
     },
   }),
 

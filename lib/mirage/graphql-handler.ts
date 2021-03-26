@@ -102,12 +102,12 @@ const graphQLHandler = (mirageSchema: any) =>
 
           const limitedEntriesWithRelations = limitedEntries.map((entry) => ({
             ...entry,
-            /* eslint-disable unicorn/no-array-callback-reference */
+            /* eslint-disable unicorn/no-fn-reference-in-iterator */
             user: context.mirageSchema.users.find(entry.userId),
             keyResult: context.mirageSchema.keyResults.find(entry.keyResultId),
             policies: context.mirageSchema.policies.find(entry.policiesId),
             parent: entry.parentId && context.mirageSchema.keyResultCheckIns.find(entry.parentId),
-            /* eslint-enable unicorn/no-array-callback-reference */
+            /* eslint-enable unicorn/no-fn-reference-in-iterator */
           }))
 
           return limitedEntriesWithRelations
@@ -142,11 +142,11 @@ const graphQLHandler = (mirageSchema: any) =>
           { mirageSchema }: any,
         ) => {
           const user = mirageSchema.users.first()
-          // eslint-disable-next-line unicorn/no-array-callback-reference
+          // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
           const keyResult = mirageSchema.keyResults.find(keyResultCheckIn.keyResultId)
           const latestKeyResultCheckInId = keyResult.attrs.keyResultCheckInIds[0]
           const latestKeyResultCheckIn = mirageSchema.keyResultCheckIns.find(
-            // eslint-disable-next-line unicorn/no-array-callback-reference
+            // eslint-disable-next-line unicorn/no-fn-reference-in-iterator
             latestKeyResultCheckInId,
           )
           const value = keyResultCheckIn?.value ?? 0

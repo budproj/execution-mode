@@ -24,7 +24,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
     update: AUTHZ_POLICY.DENY,
     read: AUTHZ_POLICY.DENY,
     delete: AUTHZ_POLICY.DENY,
-  })
+  } as any)
 
   const statusList = server.createList('status', 10)
   const company = server.create('team', {
