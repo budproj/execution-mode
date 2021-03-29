@@ -1,6 +1,6 @@
-query GET_NOT_ACTIVE_YEARLY_CYCLES {
+query GET_NOT_ACTIVE_YEARLY_CYCLES State/Authz/Policies/KeyResult{
   cycles(active: null, cadence: YEARLY) {
     id
-    title
+    period
   }
 }
