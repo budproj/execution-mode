@@ -1,13 +1,9 @@
-import * as apollo from '@apollo/client'
 import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
-import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import * as recoilHooks from 'src/state/recoil/hooks'
-
-import CycleFilterYearSelector from './year-selector'
+import CycleFilterYearSelectorYearList from './year-list'
 
 const fakeQueryResultCycle = {
   id: faker.random.uuid(),
@@ -27,22 +23,49 @@ describe('component renderization', () => {
       period: faker.random.word(),
     }
 
-    sinon.stub(apollo, 'useLazyQuery').returns([sinon.fake(), {}] as any)
-    sinon.stub(recoil, 'useRecoilValue')
-    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+    const cycles = [firstCycle, secondCycle]
 
-    const wrapper = enzyme.shallow(<CycleFilterYearSelector onYearFilter={sinon.fake()} />)
+    const wrapper = enzyme.shallow(
+      <CycleFilterYearSelectorYearList cycles={cycles} onFilter={sinon.fake()} />,
+    )
+
+    const menuItemOptions = wrapper.find('MenuItemOption')
+
+    menuItemOptions.map((menuItem, index) => {
+      const expectedCycle = cycles[index]
+
+      return expect(menuItem.text()).toEqual(expectedCycle.period)
+    })
   })
 
-  it('displays a fallback message if we do not have any year cycle to filter', () => {})
+  it('displays a fallback message if we do not have any year cycle to filter', () => {
+    const wrapper = enzyme.shallow(<CycleFilterYearSelectorYearList onFilter={sinon.fake()} />)
 
-  it('shows a list of comma separated years considering the filtered years', () => {})
-})
+    const menuItemOption = wrapper.find('MenuItemOption')
 
-describe('component lifecycle', () => {
-  it('loads the returned cycles in our Recoil state', () => {})
+    expect(menuItemOption.text()).toEqual('Nenhuma opção disponível')
+  })
 })
 
 describe('component interactions', () => {
-  it('executes a given action upon filtering an year cycle', () => {})
+  it('executes a given action upon filtering an year cycle', () => {
+    const firstCycle = {
+      ...fakeQueryResultCycle,
+      period: faker.random.word(),
+    }
+
+    const cycles = [firstCycle]
+    const spy = sinon.spy()
+
+    const wrapper = enzyme.shallow(
+      <CycleFilterYearSelectorYearList cycles={cycles} onFilter={spy} />,
+    )
+
+    const menuOptionGroup = wrapper.find('MenuOptionGroup')
+    menuOptionGroup.simulate('change', [firstCycle.id])
+
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly([firstCycle.id])
+
+    expect(wasSpyCalledAsExpected).toEqual(true)
+  })
 })
