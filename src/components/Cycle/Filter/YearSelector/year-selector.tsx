@@ -60,7 +60,7 @@ const CycleFilterYearSelector = ({
   }
 
   const isFilterActive = filteredYearIDs && filteredYearIDs.length > 0
-  const selectedCyclePeriods = cycles.map((cycle) => cycle?.period).join(', ')
+  const selectedCyclePeriods = cycles?.map((cycle) => cycle?.period).join(', ')
 
   return (
     <Menu closeOnSelect={false} isOpen={isOpen} onOpen={handleOpenMenu} onClose={handleCloseMenu}>

@@ -1,14 +1,12 @@
-import { MockedProvider } from '@apollo/client/testing'
-import { ThemeProvider } from '@chakra-ui/react'
+import * as apollo from '@apollo/client'
 import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
-import { RecoilRoot } from 'recoil'
+import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { RecoilSpy, waitForComponentToPaint } from 'lib/enzyme/helpers'
+import * as recoilHooks from 'src/state/recoil/hooks'
 
-import queries from './queries.gql'
 import CycleFilterYearSelector from './year-selector'
 
 const fakeQueryResultCycle = {
@@ -17,7 +15,9 @@ const fakeQueryResultCycle = {
 }
 
 describe('component renderization', () => {
-  it('renders a single year option for each returned year from our GraphQL servers', async () => {
+  afterEach(() => sinon.restore())
+
+  it('shows a list of comma separated years considering the filtered years', () => {
     const firstCycle = {
       ...fakeQueryResultCycle,
       period: faker.random.word(),
@@ -27,42 +27,66 @@ describe('component renderization', () => {
       period: faker.random.word(),
     }
 
-    const mocks = [
-      {
-        request: {
-          query: queries.GET_NOT_ACTIVE_YEARLY_CYCLES,
-        },
-        result: {
-          data: {
-            cycles: [firstCycle, secondCycle],
-          },
-        },
-      },
-    ]
+    sinon.stub(apollo, 'useLazyQuery').returns([sinon.fake(), {}] as any)
+    sinon.stub(recoil, 'useRecoilValue').returns([firstCycle, secondCycle])
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
 
-    const wrapper = enzyme.mount(
-      <MockedProvider mocks={mocks}>
-        <RecoilRoot>
-          <ThemeProvider theme={{}}>
-            <CycleFilterYearSelector onYearFilter={sinon.fake()} />
-            <RecoilSpy />
-          </ThemeProvider>
-        </RecoilRoot>
-      </MockedProvider>,
+    const wrapper = enzyme.shallow(
+      <CycleFilterYearSelector
+        filteredYearIDs={[faker.random.word()]}
+        onYearFilter={sinon.fake()}
+      />,
     )
 
-    await waitForComponentToPaint(wrapper)
+    const textComponent = wrapper.find('Text')
+
+    expect(textComponent.text()).toEqual(`${firstCycle.period}, ${secondCycle.period}`)
   })
-
-  it('displays a fallback message if we do not have any year cycle to filter', () => {})
-
-  it('shows a list of comma separated years considering the filtered years', () => {})
 })
 
 describe('component lifecycle', () => {
-  it('loads the returned cycles in our Recoil state', () => {})
-})
+  it('loads the returned cycles in our Recoil state', () => {
+    const firstCycle = {
+      ...fakeQueryResultCycle,
+      period: faker.random.word(),
+    }
+    const secondCycle = {
+      ...fakeQueryResultCycle,
+      period: faker.random.word(),
+    }
+    const fakeData = {
+      cycles: [firstCycle, secondCycle],
+    }
+    const spy = sinon.spy()
 
-describe('component interactions', () => {
-  it('executes a given action upon filtering an year cycle', () => {})
+    const fakeFetcher = sinon.stub()
+    sinon.stub(apollo, 'useLazyQuery').callsFake((_, options) => {
+      fakeFetcher.callsFake(() => {
+        if (options?.onCompleted) {
+          options.onCompleted(fakeData)
+        }
+      })
+
+      return [fakeFetcher, {}] as any
+    })
+
+    sinon.stub(recoil, 'useRecoilValue')
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(spy)
+
+    const wrapper = enzyme.shallow(
+      <CycleFilterYearSelector
+        filteredYearIDs={[faker.random.word()]}
+        onYearFilter={sinon.fake()}
+      />,
+    )
+
+    const menu = wrapper.find('Menu')
+    menu.simulate('open')
+
+    wrapper.update()
+
+    const wasCalledAsExpected = spy.calledOnceWithExactly(fakeData.cycles)
+
+    expect(wasCalledAsExpected).toEqual(true)
+  })
 })
