@@ -1,7 +1,6 @@
 import * as apollo from '@apollo/client'
 import enzyme from 'enzyme'
 import faker from 'faker'
-import { omit } from 'lodash'
 import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
@@ -45,8 +44,7 @@ describe('component lifecycle', () => {
 
     enzyme.shallow(<KeyResultDrawerContent keyResultID={fakeID} />)
 
-    const expectedArguments = omit(fakeData.keyResult, 'policies')
-    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(expectedArguments)
+    const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeData.keyResult)
 
     expect(wasSpyCalledAsExpected).toEqual(true)
   })
@@ -63,7 +61,7 @@ describe('component lifecycle', () => {
     const fakeData = {
       keyResult: {
         ...faker.helpers.userCard(),
-        policies: newCheckInPolicies,
+        keyResultCheckInPolicies: newCheckInPolicies,
         id: fakeID,
       },
     }

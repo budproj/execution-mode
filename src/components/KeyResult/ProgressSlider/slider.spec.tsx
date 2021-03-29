@@ -157,7 +157,7 @@ describe('component expectations', () => {
     valueStub.returns('')
 
     const result = enzyme
-      .shallow(<ProgressSliderSlider keyResultID={fakeID} canChange={false} />)
+      .shallow(<ProgressSliderSlider isDisabled keyResultID={fakeID} />)
       .dive()
       .dive()
 
@@ -178,13 +178,13 @@ describe('component expectations', () => {
     valueStub.returns('')
 
     const result = enzyme
-      .shallow(<ProgressSliderSlider canChange keyResultID={fakeID} />)
+      .shallow(<ProgressSliderSlider keyResultID={fakeID} />)
       .dive()
       .dive()
 
     const slider = result.find('Slider')
 
-    expect(slider.prop('isDisabled')).toEqual(false)
+    expect(slider.prop('isDisabled')).toBeUndefined()
   })
 })
 
@@ -205,7 +205,7 @@ describe('component interactions', () => {
     stub.returns({ confidence: secondConfidence })
 
     const wrapper = enzyme.shallow(
-      <ProgressSliderSlider canChange keyResultID={faker.random.uuid()} />,
+      <ProgressSliderSlider isActive keyResultID={faker.random.uuid()} />,
     )
 
     wrapper.setProps({
