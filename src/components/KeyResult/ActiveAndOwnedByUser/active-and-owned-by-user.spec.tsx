@@ -23,10 +23,10 @@ const fakeTheme = {
 
 const fakeCycle = {
   id: faker.random.uuid(),
-  title: faker.random.word(),
+  period: faker.random.word(),
   cadence: faker.random.word(),
   parent: {
-    title: faker.random.word(),
+    period: faker.random.word(),
   },
   keyResults: [
     {
