@@ -30,6 +30,7 @@ describe('date format', () => {
   })
 
   it('formats the hour part date accordingly', () => {
+    process.env.TZ = 'UTC'
     const fakeConfig = {
       publicRuntimeConfig: {
         maintenanceMode: {
@@ -44,6 +45,6 @@ describe('date format', () => {
 
     const formattedDate = result.find('Text').last().text()
 
-    expect(formattedDate).toContain('5 pm')
+    expect(formattedDate).toContain('8 pm')
   })
 })

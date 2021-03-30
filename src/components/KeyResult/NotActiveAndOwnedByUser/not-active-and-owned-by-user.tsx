@@ -54,7 +54,7 @@ const KeyResultNotActiveAndOwnedByUser = ({
         userID,
       },
       onCompleted: (data) => {
-        const parentCycles = flatten(data.cycles.map((cycle) => cycle?.parent))
+        const parentCycles = uniqBy(flatten(data.cycles.map((cycle) => cycle?.parent)), 'id')
         const cycles = filter(flatten([parentCycles, data.cycles]))
         const keyResults = flatten(cycles.map((cycle) => cycle?.keyResults))
 

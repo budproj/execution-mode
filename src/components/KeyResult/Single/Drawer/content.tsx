@@ -1,14 +1,11 @@
 import { useQuery } from '@apollo/client'
 import { DrawerContent, Flex } from '@chakra-ui/react'
-import deepmerge from 'deepmerge'
 import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
 import { KeyResult } from 'src/components/KeyResult/types'
-import authzPoliciesKeyResult, {
-  AuthzPoliciesKeyResult,
-} from 'src/state/recoil/authz/policies/key-result'
+import authzPoliciesKeyResult from 'src/state/recoil/authz/policies/key-result'
 import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
 import selectKeyResult from 'src/state/recoil/key-result/key-result'
 
@@ -40,17 +37,19 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
     keyResultCheckInPolicies?: AuthzPolicies,
     keyResultCommentPolicies?: AuthzPolicies,
   ) => {
-    if (!keyResultCheckInPolicies || !keyResultCommentPolicies) return keyResultPolicies
+    if (!keyResultCheckInPolicies && !keyResultCommentPolicies) return keyResultPolicies
 
-    const newPolicies: Partial<AuthzPoliciesKeyResult> = {
+    const newPolicies = {
+      root: keyResultPolicies.root,
       childEntities: {
-        keyResultCheckIn: keyResultCheckInPolicies,
-        keyResultComment: keyResultCommentPolicies,
+        keyResultCheckIn:
+          keyResultCheckInPolicies ?? keyResultPolicies.childEntities.keyResultCheckIn,
+        keyResultComment:
+          keyResultCommentPolicies ?? keyResultPolicies.childEntities.keyResultComment,
       },
     }
-    const newKeyResultPolicies = deepmerge(keyResultPolicies, newPolicies)
 
-    return newKeyResultPolicies
+    return newPolicies
   }
 
   const handleQueryData = (data: GetKeyResultWithIDQuery) => {

@@ -1,4 +1,3 @@
-import * as apollo from '@apollo/client'
 import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
@@ -8,8 +7,8 @@ import sinon from 'sinon'
 
 import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 
-import MyKeyResultsActiveCyclesPage from './active-cycles'
 import messages from './messages'
+import MyKeyResultsPreviousCyclesPage from './previous-cycles'
 
 describe('page control behaviors', () => {
   afterEach(() => sinon.restore())
@@ -18,9 +17,8 @@ describe('page control behaviors', () => {
     const spy = sinon.spy()
     const intl = useIntl()
     sinon.stub(recoil, 'useSetRecoilState').returns(spy)
-    sinon.stub(apollo, 'useQuery').returns({} as any)
 
-    enzyme.shallow(<MyKeyResultsActiveCyclesPage />)
+    enzyme.shallow(<MyKeyResultsPreviousCyclesPage />)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(intl.formatMessage(messages.pageTitle))
 
@@ -31,15 +29,14 @@ describe('page control behaviors', () => {
     const spy = sinon.spy()
     const fakeID = faker.random.word()
 
-    sinon.stub(apollo, 'useQuery').returns({} as any)
     const setStateStub = sinon.stub(recoil, 'useSetRecoilState')
     setStateStub.withArgs(keyResultDrawerOpen).returns(spy)
     setStateStub.returns(sinon.fake())
 
-    const result = enzyme.shallow(<MyKeyResultsActiveCyclesPage />)
+    const result = enzyme.shallow(<MyKeyResultsPreviousCyclesPage />)
 
-    const keyResultActiveAndOwnedByUser = result.find('KeyResultActiveAndOwnedByUser')
-    keyResultActiveAndOwnedByUser.simulate('lineClick', fakeID)
+    const keyResultNotActiveAndOwnedByUser = result.find('KeyResultNotActiveAndOwnedByUser')
+    keyResultNotActiveAndOwnedByUser.simulate('lineClick', fakeID)
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeID)
 
@@ -48,9 +45,8 @@ describe('page control behaviors', () => {
 
   it('hides the Breadcrumb if that is the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-    sinon.stub(apollo, 'useQuery').returns({} as any)
 
-    const result = enzyme.shallow(<MyKeyResultsActiveCyclesPage isRootPage />)
+    const result = enzyme.shallow(<MyKeyResultsPreviousCyclesPage isRootPage />)
 
     const pageContent = result.find('PageContent')
 
@@ -59,9 +55,8 @@ describe('page control behaviors', () => {
 
   it('hides the Breadcrumb if that is not the root page', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-    sinon.stub(apollo, 'useQuery').returns({} as any)
 
-    const result = enzyme.shallow(<MyKeyResultsActiveCyclesPage isRootPage={false} />)
+    const result = enzyme.shallow(<MyKeyResultsPreviousCyclesPage isRootPage={false} />)
 
     const pageContent = result.find('PageContent')
 
@@ -70,42 +65,11 @@ describe('page control behaviors', () => {
 
   it('hides the Breadcrumb by default', () => {
     sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-    sinon.stub(apollo, 'useQuery').returns({} as any)
 
-    const result = enzyme.shallow(<MyKeyResultsActiveCyclesPage />)
+    const result = enzyme.shallow(<MyKeyResultsPreviousCyclesPage />)
 
     const pageContent = result.find('PageContent')
 
     expect(pageContent.prop('showBreadcrumb')).toEqual(true)
-  })
-
-  it('shows the switcher if the user has not active cycles', () => {
-    const mockedData = {
-      cycles: [],
-    }
-
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-    sinon.stub(apollo, 'useQuery').returns({ data: mockedData } as any)
-
-    const result = enzyme.shallow(<MyKeyResultsActiveCyclesPage isRootPage={false} />)
-
-    const switcher = result.find('MyKeyResultsPageSwitcher')
-
-    expect(switcher.length).toEqual(1)
-  })
-
-  it('hides the switcher if the user does not have active cycles', () => {
-    const mockedData = {
-      cycles: undefined,
-    }
-
-    sinon.mock(recoil).expects('useSetRecoilState').atLeast(1).returns(sinon.fake())
-    sinon.stub(apollo, 'useQuery').returns({ data: mockedData } as any)
-
-    const result = enzyme.shallow(<MyKeyResultsActiveCyclesPage isRootPage={false} />)
-
-    const switcher = result.find('MyKeyResultsPageSwitcher')
-
-    expect(switcher.length).toEqual(0)
   })
 })

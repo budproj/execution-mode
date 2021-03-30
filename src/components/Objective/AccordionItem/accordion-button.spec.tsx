@@ -39,7 +39,7 @@ describe('component expectations', () => {
 
     const date = result.find('Text')
 
-    expect(date.text()).toEqual('1/14/2020')
+    expect(date.text()).toEqual('1/15/2020')
   })
 
   it('displays provided objective end date skeleton if it is not loaded', () => {

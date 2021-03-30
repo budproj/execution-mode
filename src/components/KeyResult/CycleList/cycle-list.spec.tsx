@@ -18,7 +18,7 @@ describe('info rendering', () => {
     const fakeCycle = {
       id: fakeCycleID,
       cadence: 'QUARTERLY',
-      title: fakeCycleTitle,
+      period: fakeCycleTitle,
     }
 
     const initializeState = ({ set }: MutableSnapshot) => {
@@ -33,7 +33,7 @@ describe('info rendering', () => {
 
     const cycleTitle = wrapper.find('Heading').first()
 
-    expect(cycleTitle.text()).toEqual(fakeCycleTitle)
+    expect(cycleTitle.text()).toEqual(`Trimestral ${fakeCycleTitle}`)
   })
 
   it('renders a proper quarterly cycle title with parent', () => {
@@ -43,9 +43,9 @@ describe('info rendering', () => {
     const fakeCycle = {
       id: fakeCycleID,
       cadence: 'QUARTERLY',
-      title: fakeCycleTitle,
+      period: fakeCycleTitle,
       parent: {
-        title: fakeParentTitle,
+        period: fakeParentTitle,
       },
     }
 
@@ -61,7 +61,7 @@ describe('info rendering', () => {
 
     const cycleTitle = wrapper.find('Heading').first()
 
-    expect(cycleTitle.text()).toEqual(`${fakeCycleTitle} ${fakeParentTitle}`)
+    expect(cycleTitle.text()).toEqual(`Trimestral ${fakeCycleTitle} ${fakeParentTitle}`)
   })
 
   it('renders a propert yearly cycle title', () => {
@@ -70,7 +70,7 @@ describe('info rendering', () => {
     const fakeCycle = {
       id: fakeCycleID,
       cadence: 'YEARLY',
-      title: fakeCycleTitle,
+      period: fakeCycleTitle,
     }
 
     const initializeState = ({ set }: MutableSnapshot) => {
