@@ -105,6 +105,8 @@ describe('component lifecycle', () => {
 })
 
 describe('component interactions', () => {
+  afterEach(() => sinon.restore())
+
   it('do not persist quarter filters while filtering for years', () => {
     const spy = sinon.spy()
     const fakeFilters = {
@@ -161,7 +163,80 @@ describe('component interactions', () => {
 })
 
 describe('component renderization', () => {
-  it('do not duplicate yearly cycles in our filter', () => {})
+  afterEach(() => sinon.restore())
 
-  it('do not keep not filtered cycles while rendering the data', () => {})
+  it('do not duplicate yearly cycles in our filter', () => {
+    const fakeParentCycle = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+    }
+    const fakeCycleOne = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle,
+    }
+    const fakeCycleTwo = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle,
+    }
+    const fakeData = {
+      cycles: [fakeCycleOne, fakeCycleTwo],
+    }
+
+    sinon.stub(recoil, 'useRecoilValue').returns(faker.random.word())
+    sinon.stub(recoil, 'useRecoilState').returns([undefined, sinon.fake()])
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { data: fakeData, loading: false, called: true }] as any)
+
+    const wrapper = enzyme.shallow(<KeyResultNotActiveAndOwnedByUser />)
+    const cycleFilter = wrapper.find('CycleFilter')
+
+    const expectedOptions = [fakeParentCycle]
+
+    expect(cycleFilter.prop('yearOptions')).toEqual(expectedOptions)
+  })
+
+  it('do not keep not filtered cycles while rendering the data', () => {
+    const fakeParentCycle = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+    }
+    const fakeCycleOne = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle,
+    }
+    const fakeCycleTwo = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle,
+    }
+    const fakeData = {
+      cycles: [fakeCycleOne, fakeCycleTwo],
+    }
+
+    const fakeFilter = {
+      yearCycleIDs: [fakeParentCycle.id],
+      quarterCycleIDs: [fakeCycleTwo.id],
+    }
+
+    sinon.stub(recoil, 'useRecoilValue').returns(faker.random.word())
+    sinon.stub(recoil, 'useRecoilState').returns([fakeFilter, sinon.fake()])
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { data: fakeData, loading: false, called: true }] as any)
+
+    const wrapper = enzyme.shallow(<KeyResultNotActiveAndOwnedByUser />)
+    const cycleList = wrapper.find('KeyResultNotActiveAndOwnedByUserCyclesList')
+
+    const expectedFilteredCycles = [fakeParentCycle, fakeCycleTwo]
+
+    expect(cycleList.prop('cycles')).toEqual(expectedFilteredCycles)
+  })
 })
