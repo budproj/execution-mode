@@ -200,28 +200,39 @@ describe('component renderization', () => {
     expect(cycleFilter.prop('yearOptions')).toEqual(expectedOptions)
   })
 
-  it('do not keep not filtered cycles while rendering the data', () => {
-    const fakeParentCycle = {
+  it('do not show other years if we have an year filter', () => {
+    const fakeParentCycle2021 = {
       ...faker.helpers.userCard(),
       id: faker.random.uuid(),
     }
-    const fakeCycleOne = {
+    const fakeCycleQ12021 = {
       ...faker.helpers.userCard(),
       id: faker.random.uuid(),
-      parent: fakeParentCycle,
+      parent: fakeParentCycle2021,
     }
-    const fakeCycleTwo = {
+    const fakeCycleQ22021 = {
       ...faker.helpers.userCard(),
       id: faker.random.uuid(),
-      parent: fakeParentCycle,
+      parent: fakeParentCycle2021,
     }
+
+    const fakeParentCycle2020 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+    }
+    const fakeCycleQ42020 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle2020,
+    }
+
     const fakeData = {
-      cycles: [fakeCycleOne, fakeCycleTwo],
+      cycles: [fakeCycleQ12021, fakeCycleQ22021, fakeParentCycle2020, fakeCycleQ42020],
     }
 
     const fakeFilter = {
-      yearCycleIDs: [fakeParentCycle.id],
-      quarterCycleIDs: [fakeCycleTwo.id],
+      yearCycleIDs: [fakeParentCycle2021.id],
+      quarterCycleIDs: [],
     }
 
     sinon.stub(recoil, 'useRecoilValue').returns(faker.random.word())
@@ -235,7 +246,114 @@ describe('component renderization', () => {
     const wrapper = enzyme.shallow(<KeyResultNotActiveAndOwnedByUser />)
     const cycleList = wrapper.find('KeyResultNotActiveAndOwnedByUserCyclesList')
 
-    const expectedFilteredCycles = [fakeParentCycle, fakeCycleTwo]
+    const expectedFilteredCycles = [fakeCycleQ12021, fakeCycleQ22021]
+
+    expect(cycleList.prop('cycles')).toEqual(expectedFilteredCycles)
+  })
+
+  it('do not show other quarters and neither year cycles if we have a quarter filter', () => {
+    const fakeParentCycle2021 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+    }
+    const fakeCycleQ12021 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle2021,
+    }
+    const fakeCycleQ22021 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle2021,
+    }
+
+    const fakeParentCycle2020 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+    }
+    const fakeCycleQ42020 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle2020,
+    }
+
+    const fakeData = {
+      cycles: [fakeCycleQ12021, fakeCycleQ22021, fakeParentCycle2020, fakeCycleQ42020],
+    }
+
+    const fakeFilter = {
+      yearCycleIDs: [fakeParentCycle2021.id],
+      quarterCycleIDs: [fakeCycleQ22021.id],
+    }
+
+    sinon.stub(recoil, 'useRecoilValue').returns(faker.random.word())
+    sinon.stub(recoil, 'useRecoilState').returns([fakeFilter, sinon.fake()])
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { data: fakeData, loading: false, called: true }] as any)
+
+    const wrapper = enzyme.shallow(<KeyResultNotActiveAndOwnedByUser />)
+    const cycleList = wrapper.find('KeyResultNotActiveAndOwnedByUserCyclesList')
+
+    const expectedFilteredCycles = [fakeCycleQ22021]
+
+    expect(cycleList.prop('cycles')).toEqual(expectedFilteredCycles)
+  })
+
+  it('do not hide the quarter cycles if we have a filter on their parents', () => {
+    const fakeParentCycle2021 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+    }
+    const fakeCycleQ12021 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle2021,
+    }
+    const fakeCycleQ22021 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle2021,
+    }
+
+    const fakeParentCycle2020 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+    }
+    const fakeCycleQ42020 = {
+      ...faker.helpers.userCard(),
+      id: faker.random.uuid(),
+      parent: fakeParentCycle2020,
+    }
+
+    const fakeData = {
+      cycles: [fakeCycleQ12021, fakeCycleQ22021, fakeParentCycle2020, fakeCycleQ42020],
+    }
+
+    const fakeFilter = {
+      yearCycleIDs: [fakeParentCycle2021.id, fakeParentCycle2020.id],
+      quarterCycleIDs: [],
+    }
+
+    sinon.stub(recoil, 'useRecoilValue').returns(faker.random.word())
+    sinon.stub(recoil, 'useRecoilState').returns([fakeFilter, sinon.fake()])
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+    sinon
+      .stub(apollo, 'useLazyQuery')
+      .returns([sinon.fake(), { data: fakeData, loading: false, called: true }] as any)
+
+    const wrapper = enzyme.shallow(<KeyResultNotActiveAndOwnedByUser />)
+    const cycleList = wrapper.find('KeyResultNotActiveAndOwnedByUserCyclesList')
+
+    const expectedFilteredCycles = [
+      fakeCycleQ12021,
+      fakeCycleQ22021,
+      fakeParentCycle2020,
+      fakeCycleQ42020,
+    ]
 
     expect(cycleList.prop('cycles')).toEqual(expectedFilteredCycles)
   })
