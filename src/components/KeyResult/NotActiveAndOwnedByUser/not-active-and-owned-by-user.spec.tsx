@@ -105,9 +105,59 @@ describe('component lifecycle', () => {
 })
 
 describe('component interactions', () => {
-  it('do not persist quarter filters while filtering for years', () => {})
+  it('do not persist quarter filters while filtering for years', () => {
+    const spy = sinon.spy()
+    const fakeFilters = {
+      yearCycleIDs: [faker.random.word()],
+      quarterCycleIDs: [faker.random.word()],
+    }
 
-  it('do not clear year filters while filtering for quarter', () => {})
+    sinon.stub(recoil, 'useRecoilValue').returns(faker.random.word())
+    sinon.stub(recoil, 'useRecoilState').returns([fakeFilters, spy])
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+    sinon.stub(apollo, 'useLazyQuery').returns([sinon.fake(), {}] as any)
+
+    const wrapper = enzyme.shallow(<KeyResultNotActiveAndOwnedByUser />)
+
+    const newYearFilter = [faker.random.word()]
+    const cycleFilter = wrapper.find('CycleFilter')
+    cycleFilter.simulate('yearFilter', newYearFilter)
+
+    const expectedNewFilters = {
+      yearCycleIDs: newYearFilter,
+      quarterCycleIDs: [],
+    }
+
+    expect(spy.firstCall.args[0]).toEqual(expectedNewFilters)
+  })
+
+  it('do not clear year filters while filtering for quarter', () => {
+    const spy = sinon.spy()
+    const fakeFilters = {
+      yearCycleIDs: [faker.random.word()],
+      quarterCycleIDs: [faker.random.word()],
+    }
+
+    sinon.stub(recoil, 'useRecoilValue').returns(faker.random.word())
+    sinon.stub(recoil, 'useRecoilState').returns([fakeFilters, spy])
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(sinon.fake())
+    sinon.stub(apollo, 'useLazyQuery').returns([sinon.fake(), {}] as any)
+
+    const wrapper = enzyme.shallow(<KeyResultNotActiveAndOwnedByUser />)
+
+    const newQuarterFilter = [faker.random.word()]
+    const cycleFilter = wrapper.find('CycleFilter')
+    cycleFilter.simulate('quarterFilter', newQuarterFilter)
+
+    const expectedNewFilters = {
+      yearCycleIDs: fakeFilters.yearCycleIDs,
+      quarterCycleIDs: newQuarterFilter,
+    }
+
+    expect(spy.firstCall.args[0]).toEqual(expectedNewFilters)
+  })
 })
 
 describe('component renderization', () => {
