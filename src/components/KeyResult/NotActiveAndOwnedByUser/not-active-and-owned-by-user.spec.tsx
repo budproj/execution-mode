@@ -50,7 +50,58 @@ describe('component lifecycle', () => {
     expect(spy.firstCall.args[0]).toEqual(expectedFirstCall)
   })
 
-  it('do not forget to extract key results from parents while loading query result data', () => {})
+  it('do not forget to extract key results from parents while loading query result data', () => {
+    const spy = sinon.spy()
+
+    const fakeParentKeyResults = [faker.helpers.userCard()]
+    const fakeCycleOneKeyResults = [faker.helpers.userCard()]
+    const fakeCycleTwoKeyResults = [faker.helpers.userCard()]
+
+    const fakeParentCycle = {
+      ...faker.helpers.userCard(),
+      keyResults: fakeParentKeyResults,
+    }
+    const fakeCycleOne = {
+      ...faker.helpers.userCard(),
+      keyResults: fakeCycleOneKeyResults,
+      parent: fakeParentCycle,
+    }
+    const fakeCycleTwo = {
+      ...faker.helpers.userCard(),
+      keyResults: fakeCycleTwoKeyResults,
+      parent: fakeParentCycle,
+    }
+
+    const fakeData = {
+      cycles: [fakeCycleOne, fakeCycleTwo],
+    }
+
+    sinon.stub(recoil, 'useRecoilValue').returns(faker.random.word())
+    sinon.stub(recoil, 'useRecoilState').returns([undefined, sinon.fake()])
+    sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
+    sinon.stub(recoilHooks, 'useRecoilFamilyLoader').returns(spy)
+
+    const fakeFetcher = sinon.stub()
+    sinon.stub(apollo, 'useLazyQuery').callsFake((_, options) => {
+      fakeFetcher.callsFake(() => {
+        if (options?.onCompleted) {
+          options.onCompleted(fakeData)
+        }
+      })
+
+      return [fakeFetcher, {}] as any
+    })
+
+    enzyme.shallow(<KeyResultNotActiveAndOwnedByUser />)
+
+    const expectedSecondCall = [
+      ...fakeParentKeyResults,
+      ...fakeCycleOneKeyResults,
+      ...fakeCycleTwoKeyResults,
+    ]
+
+    expect(spy.secondCall.args[0]).toEqual(expectedSecondCall)
+  })
 })
 
 describe('component interactions', () => {
