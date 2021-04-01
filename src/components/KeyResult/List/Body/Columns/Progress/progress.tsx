@@ -69,7 +69,7 @@ const KeyResultListBodyColumnProgress = ({
             <ProgressMask
               value={draftValue}
               displayType="text"
-              renderText={(value: string) => (
+              renderText={(value) => (
                 <TooltipWithDelay
                   label={intl.formatMessage(messages.leftSideValueTooltip)}
                   placement="bottom-start"

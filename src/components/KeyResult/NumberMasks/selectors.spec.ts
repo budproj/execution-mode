@@ -4,6 +4,7 @@ import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 
 import AbsoluteMask from './Absolute'
 import CoinBRLMask from './CoinBRL'
+import CoinUSDMask from './CoinUSD'
 import PercentageMask from './Percentage'
 import * as selectors from './selectors'
 
@@ -30,6 +31,14 @@ describe('select masked based on format', () => {
     const mask = selectors.selectMaskBasedOnFormat(format)
 
     expect(mask).toEqual(CoinBRLMask)
+  })
+
+  it('returns the USD mask if the brazillian reais format is provided', () => {
+    const format = KEY_RESULT_FORMAT.COIN_USD
+
+    const mask = selectors.selectMaskBasedOnFormat(format)
+
+    expect(mask).toEqual(CoinUSDMask)
   })
 
   it('returns the absolute mask if no format is provided', () => {
