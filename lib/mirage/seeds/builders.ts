@@ -10,6 +10,8 @@ export function buildKeyResultCheckInValue(this: any) {
       faker.random.float({ min: this.initialValue, max: this.keyResult.goal }),
     [KEY_RESULT_FORMAT.COIN_BRL]: () =>
       faker.random.number({ min: this.initialValue, max: this.keyResult.goal }),
+    [KEY_RESULT_FORMAT.COIN_USD]: () =>
+      faker.random.number({ min: this.initialValue, max: this.keyResult.goal }),
   }
   const formatHandler = handlers[this.keyResult.format as KEY_RESULT_FORMAT]
 
