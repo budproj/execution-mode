@@ -34,9 +34,9 @@ spec:
             - name: PORT
               value: '8080'
             - name: DEFAULT_LOCALE
-              value: pt-BR
+              value: en-US
             - name: SUPPORTED_LOCALES
-              value: pt-BR,en-US
+              value: en-US
             - name: LOCALE_OVERRIDE
               value: en-US
             - name: API_GRAPHQL
