@@ -984,7 +984,7 @@
     "description": "This text explains our tag to the user"
   },
   "xkN783": {
-    "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}}",
+    "defaultMessage": "Last update {unit, select, fallback {at {date}} other {{date}}}",
     "description": "This message displays the latest report status for a given component"
   },
   "yq7/PT": {
