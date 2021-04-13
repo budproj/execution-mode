@@ -34,11 +34,9 @@ spec:
             - name: PORT
               value: '8080'
             - name: DEFAULT_LOCALE
-              value: en-US
+              value: pt-BR
             - name: SUPPORTED_LOCALES
-              value: en-US
-            - name: LOCALE_OVERRIDE
-              value: en-US
+              value: pt-BR,en-US
             - name: API_GRAPHQL
               value: https://api.canary.getbud.co/business/graphql
             - name: AUTH0_CLIENT_ID_PUBLIC
