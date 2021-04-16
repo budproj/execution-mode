@@ -10,6 +10,8 @@ import { ResetButton } from 'src/components/Base'
 import CycleFilter from 'src/components/Cycle/Filter'
 import { Cycle } from 'src/components/Cycle/types'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { GraphQLConnection } from 'src/components/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
@@ -29,7 +31,7 @@ export interface KeyResultNotActiveAndOwnedByUserProperties {
 }
 
 export interface GetKeyResultNotActiveAndOwnedByUserWithBindingQuery {
-  cycles: Cycle[]
+  cycles: GraphQLConnection<Cycle>
 }
 
 const KeyResultNotActiveAndOwnedByUser = ({
@@ -44,6 +46,8 @@ const KeyResultNotActiveAndOwnedByUser = ({
   )
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
+  const [cycles, setCycleEdges] = useConnectionEdges<Cycle>()
+  const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
   const [
     fetchUserActiveCycles,
     { data, loading, called },
@@ -52,14 +56,6 @@ const KeyResultNotActiveAndOwnedByUser = ({
     {
       variables: {
         userID,
-      },
-      onCompleted: (data) => {
-        const parentCycles = uniqBy(flatten(data.cycles.map((cycle) => cycle?.parent)), 'id')
-        const cycles = filter(flatten([parentCycles, data.cycles]))
-        const keyResults = flatten(cycles.map((cycle) => cycle?.keyResults))
-
-        loadCycles(cycles)
-        loadKeyResults(keyResults)
       },
     },
   )
@@ -79,13 +75,50 @@ const KeyResultNotActiveAndOwnedByUser = ({
   }
 
   const yearlyCycles =
-    data && uniqBy(filter(data.cycles.map((cycle) => cycle.parent)) as Cycle[], 'id')
+    cycles.length > 0 && uniqBy(filter(cycles.map((cycle) => cycle.parent)) as Cycle[], 'id')
 
-  const filteredData = filterCycles(data?.cycles, filters)
+  const filteredData = filterCycles(cycles, filters)
 
   useEffect(() => {
     if (userID) fetchUserActiveCycles()
   }, [userID, fetchUserActiveCycles])
+
+  useEffect(() => {
+    if (data) {
+      const { edges: queryEdges } = data.cycles
+
+      const parentCycleEdges = uniqBy(
+        flatten(
+          queryEdges.map((edge) => ({
+            node: edge.node?.parent,
+          })),
+        ),
+        'node.id',
+      )
+      const cycleEdges = flatten([parentCycleEdges, queryEdges]).filter((cycle) => Boolean(cycle))
+      const cycleNodes = cycleEdges.map((edge) => edge.node)
+
+      const keyResultEdgesList = cycleNodes.map((cycle) => cycle?.keyResults?.edges)
+      const keyResultEdges = flatten(keyResultEdgesList).filter((keyResult) => Boolean(keyResult))
+
+      setCycleEdges(cycleEdges as any)
+      setKeyResultEdges(keyResultEdges as any)
+    }
+  }, [data, setCycleEdges, setKeyResultEdges])
+
+  useEffect(() => {
+    if (cycles) {
+      loadCycles(cycles)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cycles])
+
+  useEffect(() => {
+    if (keyResults) {
+      loadKeyResults(keyResults)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyResults])
 
   return (
     <Stack direction="column" spacing={8}>

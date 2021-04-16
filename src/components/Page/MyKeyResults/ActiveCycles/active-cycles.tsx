@@ -25,7 +25,7 @@ const MyKeyResultsActiveCyclesPage = ({ isRootPage }: PageProperties) => {
   const { data, loading } = useQuery(queries.LIST_NOT_ACTIVE_CYCLES)
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
-  const hasInactiveCycles = Boolean(data?.cycles)
+  const hasInactiveCycles = data?.cycles?.edges.length > 0
 
   useEffect((): void => {
     setPageTitle(intl.formatMessage(messages.pageTitle))

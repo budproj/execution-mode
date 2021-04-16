@@ -1,5 +1,9 @@
 query LIST_NOT_ACTIVE_CYCLES {
   cycles(active: false) {
-    id
+    edges {
+      node {
+        id
+      }
+    }
   }
 }
