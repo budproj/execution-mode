@@ -4,9 +4,13 @@ query GET_USER_NAMED_AVATAR_DATA {
     firstName
     fullName
     picture
-    companies(limit: 1) {
-      id
-      name
+    companies(first: 1) {
+      edges {
+        node {
+          id
+          name
+        }
+      }
     }
   }
 }

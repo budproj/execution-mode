@@ -1,13 +1,21 @@
 query GET_COMPANY_TEAMS {
-  teams(onlyCompanies: true) {
-    id
-    teamsRanking {
-      id
-      name
-      progressIncreaseSinceLastWeek
-      status {
-        progress
-        confidence
+  teams(level: COMPANY) {
+    edges {
+      node {
+        id
+        rankedTeams {
+          edges {
+            node {
+              id
+              name
+              progressIncreaseSinceLastWeek
+              status {
+                progress
+                confidence
+              }
+            }
+          }
+        }
       }
     }
   }

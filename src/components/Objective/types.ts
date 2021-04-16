@@ -1,17 +1,16 @@
 import { Cycle } from 'src/components/Cycle/types'
 import { KeyResult, KeyResultCheckIn, KeyResultCheckInStatus } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
+import { GraphQLConnection, GraphQLNode } from 'src/components/types'
 
-export interface Objective {
-  id: string
+export interface Objective extends GraphQLNode {
   title: string
   progressIncreaseSinceLastWeek: number
-  createdAt: string
   updatedAt: string
   cycle: Cycle
   owner: User
   status: ObjectiveStatus
-  keyResults?: KeyResult[]
+  keyResults?: GraphQLConnection<KeyResult>
 }
 
 export interface ObjectiveStatus extends KeyResultCheckInStatus {

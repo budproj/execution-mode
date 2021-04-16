@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 
 import Overview from 'src/components/Report/Overview'
 import { Team } from 'src/components/Team/types'
+import { GraphQLConnection } from 'src/components/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
@@ -11,7 +12,7 @@ import TeamsOverviewHeader from './Header'
 import queries from './queries.gql'
 
 export interface GetCompanyTeamsQuery {
-  teams: Partial<Team[]>
+  teams: GraphQLConnection<Team>
 }
 
 const TeamsOverview = () => {
@@ -19,7 +20,7 @@ const TeamsOverview = () => {
     fetchPolicy: 'network-only',
   })
   const loadTeam = useRecoilFamilyLoader<Team>(teamAtomFamily)
-  const company = data?.teams?.[0]
+  const company = data?.teams?.edges?.[0]?.node
 
   useEffect(() => {
     if (!loading && company) loadTeam(company)
@@ -28,7 +29,7 @@ const TeamsOverview = () => {
   return (
     <Overview>
       <TeamsOverviewHeader />
-      <TeamsOverviewBody teamsRanking={company?.teamsRanking} />
+      <TeamsOverviewBody teamsRanking={company?.rankedTeams?.edges} />
     </Overview>
   )
 }

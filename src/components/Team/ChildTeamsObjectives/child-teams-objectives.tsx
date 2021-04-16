@@ -24,13 +24,15 @@ export interface GetTeamAndChildTeamsObjectivesQuery {
 }
 
 const hasObjectives = (team?: Partial<Team>) =>
-  team?.objectives && team.objectives.length > 0 && true
+  team?.objectives && team.objectives.edges.length > 0 && true
 
 const parseObjectives = (rootTeam?: Partial<Team>) => {
   if (!rootTeam) return
 
-  const rootTeamObjectives = rootTeam?.objectives ?? []
-  const childTeamsObjectives = rootTeam?.teams?.map((team) => team.objectives) ?? []
+  const rootTeamObjectives = rootTeam?.objectives?.edges?.map((edge) => edge.node) ?? []
+  const childTeamsObjectives =
+    rootTeam?.teams?.edges?.map((edge) => edge.node.objectives?.edges?.map((edge) => edge.node)) ??
+    []
   const flattenedList = flatten([...rootTeamObjectives, ...childTeamsObjectives])
   const uniqObjectives = uniq(flattenedList)
   const clearedObjectives = remove(uniqObjectives)
@@ -61,17 +63,17 @@ const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) =>
           {hasObjectives(data?.team) && (
             <ObjectiveGroup
               groupTitle={data?.team.name}
-              objectiveIDs={data?.team.objectives?.map((objective) => objective.id)}
+              objectiveIDs={data?.team.objectives?.edges?.map((edge) => edge.node.id)}
             />
           )}
 
-          {data?.team?.teams?.map(
-            (team: Team) =>
-              hasObjectives(team) && (
+          {data?.team?.teams?.edges?.map(
+            (edge) =>
+              hasObjectives(edge.node) && (
                 <ObjectiveGroup
-                  key={team.id ?? uniqueId()}
-                  groupTitle={team.name}
-                  objectiveIDs={team.objectives?.map((objective) => objective.id)}
+                  key={edge.node.id ?? uniqueId()}
+                  groupTitle={edge.node.name}
+                  objectiveIDs={edge.node.objectives?.edges?.map((edge) => edge.node.id)}
                 />
               ),
           )}

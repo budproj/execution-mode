@@ -3,20 +3,20 @@ import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
 
+import { GraphQLNode } from '../types'
+
 import { KEY_RESULT_FORMAT } from './constants'
 
 export type KeyResultTimelineEntry = KeyResultCheckIn | KeyResultComment
 
-export interface KeyResultCheckIn {
+export interface KeyResultCheckIn extends GraphQLNode {
   __typename: string
-  id: string
   value: number
   valueIncrease: number
   confidence: number
   progress: number
   progressIncrease: number
   policies: AuthzPolicies
-  createdAt: string
   keyResult: KeyResult
   keyResultId: KeyResult['id']
   user: User
@@ -24,26 +24,22 @@ export interface KeyResultCheckIn {
   parent?: KeyResultCheckIn
 }
 
-export interface KeyResultComment {
+export interface KeyResultComment extends GraphQLNode {
   __typename: string
-  id: string
   text: string
   policies: AuthzPolicies
-  createdAt: string
   updatedAt: string
   user: User
   keyResult: KeyResult
   keyResultId: KeyResult['id']
 }
 
-export interface KeyResult {
-  id: string
+export interface KeyResult extends GraphQLNode {
   title: string
   initialValue: number
   goal: number
   format: KEY_RESULT_FORMAT
   isOutdated: boolean
-  createdAt: string
   updatedAt: string
   owner: User
   objective: Objective
