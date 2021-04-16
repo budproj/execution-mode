@@ -9,6 +9,8 @@ import React, { useEffect } from 'react'
 import ObjectiveGroup from 'src/components/Objective/Group'
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
+import { GraphQLEdge } from 'src/components/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
@@ -26,14 +28,10 @@ export interface GetTeamAndChildTeamsObjectivesQuery {
 const hasObjectives = (team?: Partial<Team>) =>
   team?.objectives && team.objectives.edges.length > 0 && true
 
-const parseObjectives = (rootTeam?: Partial<Team>) => {
-  if (!rootTeam) return
+const mergeObjectives = (rootObjectives: Objective[], childObjectives: Objective[]) => {
+  if (!rootObjectives && !childObjectives) return
 
-  const rootTeamObjectives = rootTeam?.objectives?.edges?.map((edge) => edge.node) ?? []
-  const childTeamsObjectives =
-    rootTeam?.teams?.edges?.map((edge) => edge.node.objectives?.edges?.map((edge) => edge.node)) ??
-    []
-  const flattenedList = flatten([...rootTeamObjectives, ...childTeamsObjectives])
+  const flattenedList = flatten([...rootObjectives, ...childObjectives])
   const uniqObjectives = uniq(flattenedList)
   const clearedObjectives = remove(uniqObjectives)
 
@@ -48,13 +46,34 @@ const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) =>
       variables: { rootTeamId },
     },
   )
+  const [teamObjectives, setTeamObjectiveEdges] = useConnectionEdges<Objective>()
+  const [childTeams, setChildTeamEdges] = useConnectionEdges<Team>()
+  const [childTeamObjectives, setChildTeamObjectiveEdges] = useConnectionEdges<Objective>()
 
-  const objectives = parseObjectives(data?.team)
+  const objectives = mergeObjectives(teamObjectives, childTeamObjectives)
   const isLoaded = Boolean(data?.team?.teams)
 
   useEffect(() => {
     if (!loading && data && objectives) loadObjectivesOnRecoil(objectives)
   }, [objectives, data, loading, loadObjectivesOnRecoil])
+
+  useEffect(() => {
+    if (data) {
+      const { team } = data
+      const { teams } = team
+
+      const rawRootObjectives = team.objectives?.edges
+      const rawChildObjectives = teams?.edges.map((edge) => edge.node.objectives?.edges)
+      const flattenedChildObjectives = flatten(rawChildObjectives)
+      const nonUndefinedChildObjectives = remove<GraphQLEdge<Objective>>(
+        flattenedChildObjectives as any,
+      )
+
+      setTeamObjectiveEdges(rawRootObjectives)
+      setChildTeamEdges(teams?.edges)
+      setChildTeamObjectiveEdges(nonUndefinedChildObjectives)
+    }
+  }, [data, setTeamObjectiveEdges, setChildTeamEdges, setChildTeamObjectiveEdges])
 
   return (
     <Flex gridGap={4} direction="column">
@@ -63,17 +82,17 @@ const ChildTeamsObjectives = ({ rootTeamId }: ChildTeamsObjectivesProperties) =>
           {hasObjectives(data?.team) && (
             <ObjectiveGroup
               groupTitle={data?.team.name}
-              objectiveIDs={data?.team.objectives?.edges?.map((edge) => edge.node.id)}
+              objectiveIDs={teamObjectives.map((objective) => objective.id)}
             />
           )}
 
-          {data?.team?.teams?.edges?.map(
-            (edge) =>
-              hasObjectives(edge.node) && (
+          {childTeams?.map(
+            (childTeam) =>
+              hasObjectives(childTeam) && (
                 <ObjectiveGroup
-                  key={edge.node.id ?? uniqueId()}
-                  groupTitle={edge.node.name}
-                  objectiveIDs={edge.node.objectives?.edges?.map((edge) => edge.node.id)}
+                  key={childTeam.id ?? uniqueId()}
+                  groupTitle={childTeam.name}
+                  objectiveIDs={childTeam.objectives?.edges.map((edge) => edge.node.id)}
                 />
               ),
           )}

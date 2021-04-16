@@ -2,7 +2,6 @@ import React from 'react'
 
 import OverviewBodyBox from 'src/components/Report/Overview/OverviewBodyBox'
 import { Team } from 'src/components/Team/types'
-import { GraphQLEdge } from 'src/components/types'
 
 import {
   TeamsOverviewBodyTableBody,
@@ -11,7 +10,7 @@ import {
 } from './Table'
 
 export interface TeamsOverviewBodyProperties {
-  teamsRanking?: Array<GraphQLEdge<Team>>
+  teamsRanking?: Team[]
 }
 
 const TeamsOverviewBody = ({ teamsRanking }: TeamsOverviewBodyProperties) => (

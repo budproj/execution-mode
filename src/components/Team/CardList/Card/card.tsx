@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, Skeleton, SkeletonText, Text, Stack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -7,6 +7,8 @@ import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/components/Base'
 import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import messages from './messages'
@@ -18,10 +20,15 @@ export interface TeamCardProperties {
 const TeamCard = ({ id }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
+  const [users, setUserEdges] = useConnectionEdges<User>()
 
   const isCompany = Boolean(team?.isCompany)
   const isLoaded = Boolean(team)
   const progress = team?.status?.progress ?? 0
+
+  useEffect(() => {
+    if (team) setUserEdges(team.users?.edges)
+  }, [team, setUserEdges])
 
   return (
     <IntlLink href={id ?? '#'}>
@@ -72,7 +79,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
           </Stack>
 
           <Box pt={12}>
-            <DynamicAvatarGroup users={team?.users} isLoaded={isLoaded} />
+            <DynamicAvatarGroup users={users} isLoaded={isLoaded} />
           </Box>
         </Flex>
       </Box>
