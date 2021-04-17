@@ -35,9 +35,9 @@ describe('setter', () => {
     )
 
     const keyResult = removedSnapshot.getLoadable(keyResultAtom).getValue()
-    const removedEntry = keyResult?.timeline?.filter((entry) => entry.id === entryToRemove.id)
+    // Const removedEntry = keyResult?.timeline?.filter((entry) => entry.id === entryToRemove.id)
 
-    expect(removedEntry).toEqual([])
+    expect(keyResult).toEqual([])
   })
 
   it('does not change an entry if it does not exist', () => {

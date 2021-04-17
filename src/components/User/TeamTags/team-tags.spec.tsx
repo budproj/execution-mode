@@ -43,7 +43,7 @@ describe('info rendering', () => {
       teams: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const teamTags = wrapper.find('TeamTag')
 
@@ -65,7 +65,7 @@ describe('info rendering', () => {
       teams: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser, {
+    const wrapper = buildWrapper(fakeUser as any, {
       max: maxNumberOfTeams,
     })
 

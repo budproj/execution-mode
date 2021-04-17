@@ -23,7 +23,7 @@ export interface Team extends GraphQLNode {
   cycles?: GraphQLConnection<Cycle>
   objectives?: GraphQLConnection<Objective>
   keyResults?: GraphQLConnection<KeyResult>
-  latestKeyResultCheckIn?: GraphQLConnection<KeyResultCheckIn>
+  latestKeyResultCheckIn?: KeyResultCheckIn
 }
 
 export interface TeamStatus extends KeyResultCheckInStatus {

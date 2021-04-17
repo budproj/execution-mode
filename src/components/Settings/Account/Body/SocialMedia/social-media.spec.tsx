@@ -58,7 +58,7 @@ describe('social media', () => {
       linkedInProfileAddress: fakeUserLinkedInAddress,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -80,7 +80,7 @@ describe('social media', () => {
       linkedInProfileAddress: undefined,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -133,7 +133,7 @@ describe('mutations', () => {
       },
     ]
 
-    const wrapper = buildWrapper(fakeUser, mocks)
+    const wrapper = buildWrapper(fakeUser as any, mocks)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -205,7 +205,7 @@ describe('mutations', () => {
         },
       ]
 
-      const wrapper = buildWrapper(fakeUser, mocks)
+      const wrapper = buildWrapper(fakeUser as any, mocks)
 
       await waitForComponentToPaint(wrapper)
       wrapper.update()

@@ -69,7 +69,7 @@ describe('info rendering', () => {
       picture: fakeUserPicture,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -88,7 +88,7 @@ describe('info rendering', () => {
       fullName: fakeUserFullName,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -107,7 +107,7 @@ describe('info rendering', () => {
       role: fakeUserRole,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -128,7 +128,7 @@ describe('info rendering', () => {
     }
 
     expect.assertions(fakeNumberOfTeams)
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()

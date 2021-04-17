@@ -234,7 +234,8 @@ describe('setter', () => {
 
     const result = newSnapshot.getLoadable(keyResultAtomFamily(fakeID)).getValue()
 
-    expect(result?.keyResultCheckIns?.slice(1)).toEqual(fakePreviousCheckIns)
+    // Expect(result?.keyResultCheckIns?.slice(1)).toEqual(fakePreviousCheckIns)
+    expect(true).toEqual(false)
   })
 
   it('can add if no previous check-ins exist', () => {

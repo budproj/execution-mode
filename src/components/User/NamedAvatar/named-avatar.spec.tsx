@@ -44,7 +44,7 @@ describe('info rendering', () => {
       fullName: fakeFullName,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
 
@@ -65,7 +65,7 @@ describe('info rendering', () => {
       ],
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
 
@@ -81,7 +81,7 @@ describe('info rendering', () => {
       picture: fakePicture,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
 

@@ -1,6 +1,7 @@
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
+import { GraphQLConnection } from 'src/components/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 
@@ -24,10 +25,12 @@ export const removeTimelineEntry = (id?: KeyResult['id']) => (
   const removedTimelineEdges = timelineConnection?.edges.filter(
     (edge) => edge.node.id !== entryToRemove.id,
   )
+
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const newTimelineConnection = {
     ...timelineConnection,
     edges: removedTimelineEdges,
-  }
+  } as GraphQLConnection<KeyResultTimelineEntry>
 
   set(timelineConnectionSelector, newTimelineConnection)
 }
