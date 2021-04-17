@@ -2,15 +2,14 @@ import { Cycle } from 'src/components/Cycle/types'
 import { KeyResult, KeyResultCheckIn, KeyResultCheckInStatus } from 'src/components/KeyResult/types'
 import { Objective, ObjectiveStatus } from 'src/components/Objective/types'
 import { User } from 'src/components/User/types'
+import { GraphQLConnection, GraphQLNode } from 'src/components/types'
 
 import { TEAM_GENDER } from './constants'
 
-export interface Team {
-  id: string
+export interface Team extends GraphQLNode {
   name: string
   isCompany: boolean
   progressIncreaseSinceLastWeek: number
-  createdAt: string
   updatedAt: string
   owner: User
   status: TeamStatus
@@ -18,12 +17,12 @@ export interface Team {
   gender?: TEAM_GENDER
   company?: Team
   parent?: Team
-  users?: User[]
-  teams?: Team[]
-  teamsRanking?: Team[]
-  cycles?: Cycle[]
-  objectives?: Objective[]
-  keyResults?: KeyResult[]
+  users?: GraphQLConnection<User>
+  teams?: GraphQLConnection<Team>
+  rankedTeams?: GraphQLConnection<Team>
+  cycles?: GraphQLConnection<Cycle>
+  objectives?: GraphQLConnection<Objective>
+  keyResults?: GraphQLConnection<KeyResult>
   latestKeyResultCheckIn?: KeyResultCheckIn
 }
 

@@ -58,7 +58,7 @@ describe('info renderization', () => {
       nickname: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const headingComponent = wrapper.find('Heading').first()
 
@@ -73,7 +73,7 @@ describe('info renderization', () => {
       firstName: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const headingComponent = wrapper.find('Heading').first()
 
@@ -87,7 +87,7 @@ describe('info renderization', () => {
       fullName: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const textComponent = wrapper.find('Text').first()
 
@@ -101,7 +101,7 @@ describe('info renderization', () => {
       picture: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const avatarComponent = wrapper.find('UserAvatar')
 
@@ -117,7 +117,7 @@ describe('info renderization', () => {
       teams: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const teamTagComponents = wrapper.find('UserTeamTags').find('TeamTag')
 
@@ -135,7 +135,7 @@ describe('info renderization', () => {
       fullName: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const avatarComponent = wrapper.find('UserAvatar')
 
@@ -148,7 +148,7 @@ describe('info renderization', () => {
       about: undefined,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const lastHeadingComponent = wrapper.find('Heading').last()
 
@@ -162,7 +162,7 @@ describe('info renderization', () => {
       about: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const lastTextComponent = wrapper.find('Text').last()
 
@@ -176,7 +176,7 @@ describe('info renderization', () => {
       nickname: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const lastHeadingComponent = wrapper.find('Heading').last()
 
@@ -190,7 +190,7 @@ describe('info renderization', () => {
       role: fakeData,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     const userAvatarComponent = wrapper.find('UserAvatar')
 

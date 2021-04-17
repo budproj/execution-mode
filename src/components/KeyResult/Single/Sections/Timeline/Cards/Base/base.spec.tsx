@@ -14,7 +14,7 @@ describe('component expectations', () => {
 
     const result = enzyme.shallow(
       <KeyResultSectionTimelineCardsBase
-        policies={fakePolicies as any}
+        policy={fakePolicies as any}
         intlCardType={faker.random.word()}
       >
         <FakeComponent />

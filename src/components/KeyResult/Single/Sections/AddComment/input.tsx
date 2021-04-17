@@ -59,6 +59,8 @@ const KeyResultSectionAddCommentInput = ({
       borderColor={isOnFocus ? 'brand.500' : 'gray.200'}
       boxShadow={isOnFocus ? '0 0 0 1px #6F6EFF' : 'none'}
       borderRadius={numberOfRows === 1 ? 'full' : 60 / numberOfRows}
+      px={4}
+      py={2}
     >
       <TextareaAutosize
         value={values.text}
@@ -67,7 +69,6 @@ const KeyResultSectionAddCommentInput = ({
         style={{
           resize: 'none',
           width: '100%',
-          padding: '0.5rem 1rem',
           outline: 'none',
         }}
         onHeightChange={handleHeightChange as any}

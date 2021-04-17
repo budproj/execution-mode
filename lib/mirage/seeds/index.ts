@@ -7,8 +7,8 @@ import logger from 'lib/logger'
 import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
 import { CADENCE } from 'src/components/Cycle/constants'
+import { GraphQLEffect } from 'src/components/types'
 import getConfig from 'src/config'
-import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
 import { buildKeyResultCheckInValue } from './builders'
 import { pickRandomModel } from './selectors'
@@ -20,10 +20,10 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
 
   const allowPolicy = server.create('policy')
   const denyPolicy = server.create('policy', {
-    create: AUTHZ_POLICY.DENY,
-    update: AUTHZ_POLICY.DENY,
-    read: AUTHZ_POLICY.DENY,
-    delete: AUTHZ_POLICY.DENY,
+    create: GraphQLEffect.DENY,
+    update: GraphQLEffect.DENY,
+    read: GraphQLEffect.DENY,
+    delete: GraphQLEffect.DENY,
   } as any)
 
   const statusList = server.createList('status', 10)

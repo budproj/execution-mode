@@ -48,7 +48,7 @@ describe('setter', () => {
     const setterSpy = sinon.spy()
     const clock = sinon.useFakeTimers()
     sinon
-      .stub(latestTimelineEntry, 'selectTimelineEntries')
+      .stub(latestTimelineEntry, 'selectTimelineEntries' as any)
       .returns(fakeTimelineEntrysSelector as any)
 
     const fakeID = faker.random.word()
@@ -101,7 +101,7 @@ describe('setter', () => {
     const setterSpy = sinon.spy()
     const clock = sinon.useFakeTimers()
     sinon
-      .stub(latestTimelineEntry, 'selectTimelineEntries')
+      .stub(latestTimelineEntry, 'selectTimelineEntries' as any)
       .returns(fakeTimelineEntrysSelector as any)
 
     const fakeID = faker.random.word()

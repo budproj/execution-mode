@@ -16,7 +16,7 @@ const CompanyProgressOverview = () => {
     fetchPolicy: 'network-only',
   })
   const loadTeam = useRecoilFamilyLoader<Team>(teamAtomFamily)
-  const company = data?.me?.companies?.[0]
+  const company = data?.me?.companies?.edges?.[0]?.node
 
   useEffect(() => {
     if (!loading && company) loadTeam(company)

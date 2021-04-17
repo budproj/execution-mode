@@ -1,16 +1,24 @@
 query GET_TEAMS {
-  teams(onlyCompaniesAndDepartments: true) {
-    id
-    name
-    description
-    isCompany
-    users {
-      fullName
-      picture
-    }
-    status {
-      progress
-      confidence
+  teams(level: COMPANY_OR_DEPARTMENT) {
+    edges {
+      node {
+        id
+        name
+        description
+        isCompany
+        users {
+          edges {
+            node {
+              fullName
+              picture
+            }
+          }
+        }
+        status {
+          progress
+          confidence
+        }
+      }
     }
   }
 }

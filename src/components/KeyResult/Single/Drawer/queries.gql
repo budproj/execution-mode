@@ -1,12 +1,16 @@
-query GET_KEY_RESULT_WITH_ID($id: ID!) {
+query GET_KEY_RESULT_WITH_ID($id: ID!, $scope: Scope!) {
   keyResult(id: $id) {
     id
     title
-    keyResultCheckInPolicies: policies(resource: KEY_RESULT_CHECK_IN) {
-      create
+    keyResultCheckIns(first: 1) {
+      policy(scope: $scope) {
+        create
+      }
     }
-    keyResultCommentPolicies: policies(resource: KEY_RESULT_COMMENT) {
-      create
+    keyResultComments(first: 1) {
+      policy(scope: $scope) {
+        create
+      }
     }
   }
 }

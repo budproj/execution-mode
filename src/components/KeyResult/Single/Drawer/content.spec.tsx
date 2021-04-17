@@ -5,7 +5,6 @@ import React from 'react'
 import * as recoil from 'recoil'
 import sinon from 'sinon'
 
-import { defaultKeyResultPolicies } from 'src/state/recoil/authz/policies/key-result'
 import selectKeyResult from 'src/state/recoil/key-result/key-result'
 
 import KeyResultDrawerContent from './content'
@@ -22,7 +21,7 @@ describe('component lifecycle', () => {
     const fakeData = {
       keyResult: {
         ...faker.helpers.userCard(),
-        policies: defaultKeyResultPolicies,
+        policies: {},
         id: fakeID,
       },
     }
@@ -67,7 +66,7 @@ describe('component lifecycle', () => {
     }
 
     const stub = sinon.stub(recoil, 'useRecoilState')
-    stub.withArgs(selectPoliciesMatcher).returns([defaultKeyResultPolicies, spy])
+    stub.withArgs(selectPoliciesMatcher).returns([{}, spy])
     stub.returns([undefined, sinon.fake()])
 
     sinon.stub(recoil, 'useSetRecoilState').returns(sinon.fake())
@@ -84,9 +83,7 @@ describe('component lifecycle', () => {
     enzyme.shallow(<KeyResultDrawerContent keyResultID={fakeID} />)
 
     const expectedPolicies = {
-      ...defaultKeyResultPolicies,
       childEntities: {
-        ...defaultKeyResultPolicies.childEntities,
         keyResultCheckIn: newCheckInPolicies,
       },
     }

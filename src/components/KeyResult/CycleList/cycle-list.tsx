@@ -7,6 +7,7 @@ import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { Cycle } from 'src/components/Cycle/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 import useCadence from 'src/state/hooks/useCadence'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 
 import KeyResultList from '../List'
@@ -28,16 +29,21 @@ const KeyResultCycleList = ({
   isDisabled,
   onLineClick,
 }: KeyResultCycleListProperties) => {
+  const intl = useIntl()
   const cycle = useRecoilValue(cycleAtomFamily(id))
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
-  const intl = useIntl()
+  const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
   const isLoaded = Boolean(cycle)
-  const keyResultIDs = cycle?.keyResults?.map((keyResult) => keyResult.id)
+  const keyResultIDs = keyResults.map((keyResult) => keyResult.id)
 
   useEffect(() => {
     if (cycle?.cadence) setCadenceValue(cycle?.cadence)
   }, [cycle?.cadence, setCadenceValue])
+
+  useEffect(() => {
+    if (cycle) setKeyResultEdges(cycle?.keyResults?.edges)
+  }, [cycle, setKeyResultEdges])
 
   return (
     <Stack direction="column" gridGap={8}>

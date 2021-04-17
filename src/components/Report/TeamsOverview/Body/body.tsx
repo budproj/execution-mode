@@ -10,13 +10,13 @@ import {
 } from './Table'
 
 export interface TeamsOverviewBodyProperties {
-  teamsRanking?: Team[]
+  teamsRanking: Team[]
 }
 
 const TeamsOverviewBody = ({ teamsRanking }: TeamsOverviewBodyProperties) => (
   <OverviewBodyBox p={0}>
     <TeamsOverviewBodyTableHead />
-    {typeof teamsRanking === 'undefined' ? (
+    {teamsRanking.length === 0 ? (
       <TeamsOverviewBodyTableSkeleton />
     ) : (
       <TeamsOverviewBodyTableBody teamsRanking={teamsRanking} />

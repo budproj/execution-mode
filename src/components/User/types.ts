@@ -1,6 +1,7 @@
-import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
+import { GraphQLConnection, GraphQLNode } from 'src/components/types'
 
 import { USER_GENDER } from './constants'
 
@@ -9,12 +10,10 @@ export interface CustomSorting {
   keyResults: Array<KeyResult['id']>
 }
 
-export interface User {
-  id: string
+export interface User extends GraphQLNode {
   firstName: string
   fullName: string
   authzSub: string
-  createdAt: string
   updatedAt: string
   lastName?: string
   gender?: USER_GENDER
@@ -23,10 +22,10 @@ export interface User {
   nickname?: string
   about?: string
   linkedInProfileAddress?: string
-  companies?: Array<Partial<Team>>
-  teams?: Array<Partial<Team>>
-  ownedTeams?: Array<Partial<Team>>
-  objectives?: Objective[]
-  keyResults?: KeyResult[]
-  keyResultCheckIns?: KeyResultCheckIn[]
+  companies?: GraphQLConnection<Team>
+  teams?: GraphQLConnection<Team>
+  ownedTeams?: GraphQLConnection<Team>
+  objectives?: GraphQLConnection<Objective>
+  keyResults?: GraphQLConnection<KeyResult>
+  keyResultCheckIns?: GraphQLConnection<KeyResult>
 }

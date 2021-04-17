@@ -1,10 +1,10 @@
 import { Factory } from 'miragejs'
 
-import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
+import { GraphQLEffect } from 'src/components/types'
 
 export default Factory.extend({
-  create: AUTHZ_POLICY.ALLOW,
-  update: AUTHZ_POLICY.ALLOW,
-  read: AUTHZ_POLICY.ALLOW,
-  delete: AUTHZ_POLICY.ALLOW,
+  create: GraphQLEffect.ALLOW,
+  update: GraphQLEffect.ALLOW,
+  read: GraphQLEffect.ALLOW,
+  delete: GraphQLEffect.ALLOW,
 })

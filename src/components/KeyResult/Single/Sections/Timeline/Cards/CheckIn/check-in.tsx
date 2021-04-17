@@ -42,7 +42,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
     queries.GET_KEY_RESULT_WITH_LATEST_CHECK_IN,
     {
       onCompleted: (queryResult) => {
-        const latestCheckIn = queryResult.keyResult?.keyResultCheckIns?.[0]
+        const latestCheckIn = queryResult.keyResult?.keyResultCheckIns?.edges[0].node
 
         setLatestCheckIn(latestCheckIn)
         removeEntryFromTimeline(data)
@@ -75,7 +75,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
     <Stat>
       <KeyResultSectionTimelineCardBase
         borderBottomRadius={0}
-        policies={data?.policies}
+        policy={data?.policy}
         intlCardType={intlCardType}
         onDelete={handleDelete}
       >

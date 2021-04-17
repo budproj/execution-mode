@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 
-import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 import KeyResultSectionTimelineContent from './Content'
@@ -23,10 +23,7 @@ export interface KeyResultSectionTimelineProperties {
 }
 
 export interface GetKeyResultTimelineWithIDQuery {
-  keyResult: {
-    id: KeyResult['id']
-    timeline: KeyResultTimelineEntry[]
-  }
+  keyResult: KeyResult
 }
 
 const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
@@ -45,7 +42,8 @@ const KeyResultSectionTimeline = ({
   const hasTimeline = typeof timeline !== 'undefined'
 
   const handleQueryResult = (data: GetKeyResultTimelineWithIDQuery) => {
-    const isInLimit = data.keyResult.timeline.length >= 10
+    const isInLimit =
+      (data.keyResult.timeline && data.keyResult.timeline?.edges.length >= 10) ?? true
 
     setTimeline(data.keyResult.timeline)
     setHasMore(isInLimit)
@@ -55,7 +53,7 @@ const KeyResultSectionTimeline = ({
     queries.GET_KEY_RESULT_TIMELINE_WITH_ID,
     {
       variables: {
-        limit,
+        first: limit,
         id: keyResultID,
       },
       skip: hasTimeline,
@@ -70,7 +68,7 @@ const KeyResultSectionTimeline = ({
 
     const { data } = await fetchMore({
       variables: {
-        limit,
+        first: limit,
         id: keyResultID,
       },
     })

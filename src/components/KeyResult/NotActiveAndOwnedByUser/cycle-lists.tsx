@@ -19,12 +19,10 @@ const KeyResultNotActiveAndOwnedByUserCyclesList = ({
   cycles,
   onLineClick,
 }: KeyResultNotActiveAndOwnedByUserCyclesListProperties) => {
-  const cyclesWithKeyResults = cycles.filter(
-    (cycle) => cycle.keyResults && cycle.keyResults.length > 0,
-  )
-  const hasCyclesWithKeyResults = cyclesWithKeyResults.length > 0
+  const cyclesWithKeyResults =
+    cycles?.filter((cycle) => cycle.keyResults && cycle.keyResults?.edges.length > 0) ?? []
 
-  return hasCyclesWithKeyResults ? (
+  return cyclesWithKeyResults.length > 0 ? (
     <>
       {cyclesWithKeyResults.map((cycle) => (
         <KeyResultCycleList

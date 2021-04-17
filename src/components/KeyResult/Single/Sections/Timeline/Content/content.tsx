@@ -1,13 +1,14 @@
 import { FetchMoreQueryOptions, ApolloQueryResult } from '@apollo/client'
 import { Flex, Spinner } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useRecoilState } from 'recoil'
 
 import { KeyResultSectionTimelineCardEmptyState } from 'src/components/KeyResult/Single/Sections/Timeline/Cards'
 import { PERFECT_SCROLLBAR_ID } from 'src/components/KeyResult/Single/Sections/Timeline/constants'
 import { GetKeyResultTimelineWithIDQuery } from 'src/components/KeyResult/Single/Sections/Timeline/timeline'
-import { KeyResult } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import keyResultTimeline from 'src/state/recoil/key-result/timeline/selector'
 
 import KeyResultSectionTimelineContentEntry from './entry'
@@ -29,22 +30,27 @@ const KeyResultSectionTimelineContent = ({
   fetchMore,
   onEntryDelete,
 }: KeyResultSectionTimelineContentProperties) => {
-  const [timeline, setTimeline] = useRecoilState(keyResultTimeline(keyResultID))
+  const [timelineConnection, setTimelineConnection] = useRecoilState(keyResultTimeline(keyResultID))
+  const [timeline, setTimelineEdges] = useConnectionEdges<KeyResultTimelineEntry>()
   const [hasMore, setHasMore] = useState(initialHasMore)
 
   const handleInfiniteScroll = async () => {
     const queryResult = await fetchMore({
       variables: {
-        limit,
+        first: limit,
         id: keyResultID,
-        offset: timeline?.length,
+        after: timelineConnection?.pageInfo.endCursor,
       },
     })
-    const nextPageEntries = queryResult.data.keyResult.timeline
+    const nextPage = queryResult.data.keyResult.timeline
 
-    setTimeline(nextPageEntries)
-    if (nextPageEntries.length < limit) setHasMore(false)
+    setTimelineConnection(nextPage)
+    if (nextPage && nextPage.edges.length < limit) setHasMore(false)
   }
+
+  useEffect(() => {
+    if (timelineConnection) setTimelineEdges(timelineConnection.edges)
+  }, [timelineConnection, setTimelineEdges])
 
   return timeline && timeline.length > 0 ? (
     <InfiniteScroll

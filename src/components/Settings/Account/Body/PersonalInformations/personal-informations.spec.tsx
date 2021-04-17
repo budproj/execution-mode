@@ -68,7 +68,7 @@ describe('info rendering', () => {
       firstName: fakeUserFirstName,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -90,7 +90,7 @@ describe('info rendering', () => {
       firstName: undefined,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -113,7 +113,7 @@ describe('info rendering', () => {
       lastName: fakeUserLastName,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -135,7 +135,7 @@ describe('info rendering', () => {
       lastName: undefined,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -158,7 +158,7 @@ describe('info rendering', () => {
       nickname: fakeUserNickname,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -180,7 +180,7 @@ describe('info rendering', () => {
       nickname: undefined,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -205,7 +205,7 @@ describe('info rendering', () => {
     }
 
     expect.assertions(fakeNumberOfTeams)
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -228,7 +228,7 @@ describe('info rendering', () => {
       role: fakeUserRole,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -250,7 +250,7 @@ describe('info rendering', () => {
       role: undefined,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -273,7 +273,7 @@ describe('info rendering', () => {
       gender: fakeUserGender,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -292,7 +292,7 @@ describe('info rendering', () => {
       gender: fakeUserGender,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -311,7 +311,7 @@ describe('info rendering', () => {
       about: fakeUserAbout,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -329,7 +329,7 @@ describe('info rendering', () => {
       about: undefined,
     }
 
-    const wrapper = buildWrapper(fakeUser)
+    const wrapper = buildWrapper(fakeUser as any)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -384,7 +384,7 @@ describe('mutations', () => {
       },
     ]
 
-    const wrapper = buildWrapper(fakeUser, mocks)
+    const wrapper = buildWrapper(fakeUser as any, mocks)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -460,7 +460,7 @@ describe('mutations', () => {
       },
     ]
 
-    const wrapper = buildWrapper(fakeUser, mocks)
+    const wrapper = buildWrapper(fakeUser as any, mocks)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -536,7 +536,7 @@ describe('mutations', () => {
       },
     ]
 
-    const wrapper = buildWrapper(fakeUser, mocks)
+    const wrapper = buildWrapper(fakeUser as any, mocks)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -612,7 +612,7 @@ describe('mutations', () => {
       },
     ]
 
-    const wrapper = buildWrapper(fakeUser, mocks)
+    const wrapper = buildWrapper(fakeUser as any, mocks)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -688,7 +688,7 @@ describe('mutations', () => {
       },
     ]
 
-    const wrapper = buildWrapper(fakeUser, mocks)
+    const wrapper = buildWrapper(fakeUser as any, mocks)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -745,7 +745,7 @@ describe('mutations', () => {
       },
     ]
 
-    const wrapper = buildWrapper(fakeUser, mocks)
+    const wrapper = buildWrapper(fakeUser as any, mocks)
 
     await waitForComponentToPaint(wrapper)
     wrapper.update()
@@ -804,7 +804,7 @@ describe('mutations', () => {
         },
       ]
 
-      const wrapper = buildWrapper(fakeUser, mocks)
+      const wrapper = buildWrapper(fakeUser as any, mocks)
 
       await waitForComponentToPaint(wrapper)
       wrapper.update()
@@ -881,7 +881,7 @@ describe('mutations', () => {
         },
       ]
 
-      const wrapper = buildWrapper(fakeUser, mocks)
+      const wrapper = buildWrapper(fakeUser as any, mocks)
 
       await waitForComponentToPaint(wrapper)
       wrapper.update()
@@ -958,7 +958,7 @@ describe('mutations', () => {
         },
       ]
 
-      const wrapper = buildWrapper(fakeUser, mocks)
+      const wrapper = buildWrapper(fakeUser as any, mocks)
 
       await waitForComponentToPaint(wrapper)
       wrapper.update()
@@ -1035,7 +1035,7 @@ describe('mutations', () => {
         },
       ]
 
-      const wrapper = buildWrapper(fakeUser, mocks)
+      const wrapper = buildWrapper(fakeUser as any, mocks)
 
       await waitForComponentToPaint(wrapper)
       wrapper.update()
@@ -1112,7 +1112,7 @@ describe('mutations', () => {
         },
       ]
 
-      const wrapper = buildWrapper(fakeUser, mocks)
+      const wrapper = buildWrapper(fakeUser as any, mocks)
 
       await waitForComponentToPaint(wrapper)
       wrapper.update()

@@ -3,6 +3,7 @@ import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
+import { GraphQLConnection } from 'src/components/types'
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 import { userAtomFamily } from 'src/state/recoil/user'
@@ -17,7 +18,7 @@ export const getLatestCheckIn = (id?: KeyResult['id']) => ({ get }: RecoilInterf
 
   const keyResult = get(keyResultAtomFamily(id))
 
-  const keyResultCheckIns = keyResult?.keyResultCheckIns
+  const keyResultCheckIns = keyResult?.keyResultCheckIns?.edges?.map((edge) => edge.node)
   const keyResultLatestCheckIn = keyResult?.latestKeyResultCheckIn
 
   const latestKeyResultCheckIn =
@@ -39,9 +40,12 @@ export const setLatestCheckIn = (id?: KeyResult['id']) => (
   if (!newCheckIn) return
   if (newCheckIn instanceof DefaultValue) return
 
-  const keyResult = get(keyResultAtomFamily(id))
+  const keyResult = get(keyResultAtomFamily(id)) as KeyResult
 
-  const keyResultCheckIns = keyResult?.keyResultCheckIns ?? []
+  const keyResultCheckInConnection = keyResult?.keyResultCheckIns as GraphQLConnection<KeyResultCheckIn>
+  const keyResultCheckInEdges = keyResultCheckInConnection?.edges ?? []
+  const keyResultCheckIns = keyResultCheckInEdges.map((edge) => edge.node)
+
   const keyResultLatestCheckIn = keyResult?.latestKeyResultCheckIn
   const keyResultPreviousCheckIn = keyResultLatestCheckIn ?? keyResultCheckIns[0]
 
@@ -53,13 +57,16 @@ export const setLatestCheckIn = (id?: KeyResult['id']) => (
     parent: keyResultPreviousCheckIn,
     user: currentUser,
   }
-  const newCheckIns = remove([newLocalCheckIn, ...keyResultCheckIns])
+  const newCheckInEdges = remove([{ node: newLocalCheckIn }, ...keyResultCheckInEdges])
 
-  const newKeyResult = {
+  const newKeyResult: KeyResult = {
     ...keyResult,
     isOutdated: false,
     latestKeyResultCheckIn: newLocalCheckIn,
-    keyResultCheckIns: newCheckIns,
+    keyResultCheckIns: {
+      ...keyResultCheckInConnection,
+      edges: newCheckInEdges,
+    },
   }
 
   set(keyResultAtomFamily(id), newKeyResult)

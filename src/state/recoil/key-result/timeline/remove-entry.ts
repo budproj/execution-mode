@@ -1,6 +1,7 @@
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
+import { GraphQLConnection } from 'src/components/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 
@@ -8,7 +9,7 @@ import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::REMOVE_ENTRY`
 
-export const selectTimelineEntries = buildPartialSelector<KeyResult['timeline']>('timeline')
+export const selectTimelineConnection = buildPartialSelector<KeyResult['timeline']>('timeline')
 
 export const removeTimelineEntry = (id?: KeyResult['id']) => (
   { get, set }: RecoilInterfaceReadWrite,
@@ -18,12 +19,20 @@ export const removeTimelineEntry = (id?: KeyResult['id']) => (
   if (!entryToRemove) return
   if (entryToRemove instanceof DefaultValue) return
 
-  const timelineEntriesSelector = selectTimelineEntries(id)
-  const timelineEntries = get(timelineEntriesSelector)
+  const timelineConnectionSelector = selectTimelineConnection(id)
+  const timelineConnection = get(timelineConnectionSelector)
 
-  const removedTimelineEntries = timelineEntries?.filter((entry) => entry.id !== entryToRemove.id)
+  const removedTimelineEdges = timelineConnection?.edges.filter(
+    (edge) => edge.node.id !== entryToRemove.id,
+  )
 
-  set(timelineEntriesSelector, removedTimelineEntries)
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  const newTimelineConnection = {
+    ...timelineConnection,
+    edges: removedTimelineEdges,
+  } as GraphQLConnection<KeyResultTimelineEntry>
+
+  set(timelineConnectionSelector, newTimelineConnection)
 }
 
 export const selectRemoveTimelineEntry = selectorFamily<

@@ -3,12 +3,13 @@ import { AccordionPanel } from '@chakra-ui/react'
 import isEqual from 'lodash/isEqual'
 import uniqueId from 'lodash/uniqueId'
 import React, { useEffect } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
@@ -25,8 +26,8 @@ export interface GetObjectiveKeyResultsQuery {
   objective: Partial<Objective>
 }
 
-const selectKeyResultIDs = (objective?: Partial<Objective>) =>
-  objective?.keyResults?.map((keyResult) => keyResult.id)
+const selectKeyResultIDs = (keyResults?: KeyResult[]) =>
+  keyResults?.map((keyResult) => keyResult.id)
 
 const ObjectiveAccordionPanel = ({
   isExpanded,
@@ -37,15 +38,15 @@ const ObjectiveAccordionPanel = ({
   )
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
-  const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const setOpenDrawer = useSetRecoilState(keyResultDrawerOpen)
+  const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
-  const keyResultIDs = selectKeyResultIDs(objective)
+  const keyResultIDs = selectKeyResultIDs(keyResults)
   const syncedWithLocalState =
     called &&
     !loading &&
     typeof data !== 'undefined' &&
-    isEqual(keyResultIDs, selectKeyResultIDs(data.objective))
+    isEqual(keyResultIDs, selectKeyResultIDs(keyResults))
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
@@ -54,14 +55,18 @@ const ObjectiveAccordionPanel = ({
   }, [isExpanded, called, fetchObjective, objectiveID])
 
   useEffect(() => {
-    if (!loading && data) {
+    console.log('tag')
+    if (data) {
       loadObjective(data?.objective)
-      loadKeyResults(data?.objective?.keyResults)
+      setKeyResultEdges(data.objective.keyResults?.edges)
     }
-    // If we add the "loadObjective" and "loadKeyResults" in our deps it starts an infinite loop
-    // upon execution, since it changes on every render
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, data])
+  }, [data, setKeyResultEdges])
+
+  useEffect(() => {
+    if (keyResults) loadKeyResults(keyResults)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyResults])
 
   return (
     <AccordionPanel>

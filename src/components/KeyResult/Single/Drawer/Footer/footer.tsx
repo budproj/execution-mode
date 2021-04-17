@@ -4,18 +4,18 @@ import { useRecoilValue } from 'recoil'
 
 import { KeyResultSectionAddComment } from 'src/components/KeyResult/Single/Sections'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { authzPoliciesKeyResult } from 'src/state/recoil/authz/policies'
-import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
+import { GraphQLEffect } from 'src/components/types'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 export interface KeyResultDrawerFooterProperties {
   keyResultID?: KeyResult['id']
 }
 
 const KeyResultDrawerFooter = ({ keyResultID }: KeyResultDrawerFooterProperties) => {
-  const keyResultPolicies = useRecoilValue(authzPoliciesKeyResult(keyResultID))
+  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
 
-  const commentPolicies = keyResultPolicies.childEntities.keyResultComment
-  const canCreate = commentPolicies?.create === AUTHZ_POLICY.ALLOW
+  const commentPolicy = keyResult?.keyResultComments?.policy
+  const canCreate = commentPolicy?.create === GraphQLEffect.ALLOW
 
   return canCreate ? (
     <Box p={4} boxShadow="md">

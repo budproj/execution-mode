@@ -3,30 +3,42 @@ query GET_TEAM_AND_CHILD_TEAMS_OBJECTIVES($rootTeamId: ID!) {
     id
     name
     objectives {
-      id
-      title
-      progressIncreaseSinceLastWeek
-      cycle {
-        dateEnd
-      }
-      status {
-        progress
-        confidence
+      edges {
+        node {
+          id
+          title
+          progressIncreaseSinceLastWeek
+          cycle {
+            dateEnd
+          }
+          status {
+            progress
+            confidence
+          }
+        }
       }
     }
     teams {
-      id
-      name
-      objectives {
-        id
-        title
-        progressIncreaseSinceLastWeek
-        cycle {
-          dateEnd
-        }
-        status {
-          progress
-          confidence
+      edges {
+        node {
+          id
+          name
+          objectives {
+            edges {
+              node {
+                id
+                title
+                progressIncreaseSinceLastWeek
+                cycle {
+                  dateEnd
+                }
+                status {
+                  progress
+                  confidence
+                }
+              }
+            }
+          }
         }
       }
     }

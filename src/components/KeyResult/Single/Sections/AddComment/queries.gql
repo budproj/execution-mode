@@ -1,5 +1,5 @@
 mutation CREATE_KEY_RESULT_COMMENT($keyResultCommentInput: KeyResultCommentInput!) {
-  createKeyResultComment(keyResultComment: $keyResultCommentInput) {
+  createKeyResultComment(data: $keyResultCommentInput) {
     id
     text
     createdAt
@@ -8,7 +8,7 @@ mutation CREATE_KEY_RESULT_COMMENT($keyResultCommentInput: KeyResultCommentInput
       fullName
       picture
     }
-    policies {
+    policy {
       delete
     }
   }

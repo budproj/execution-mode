@@ -35,7 +35,7 @@ const NamedAvatar = ({ userID, isLoading }: NamedAvatarProperties): ReactElement
           mt={isLoaded ? 0 : '8px'}
         >
           <Text fontSize="sm" color="gray.500">
-            {user?.companies?.[0]?.name}
+            {user?.companies?.edges[0]?.node?.name}
           </Text>
         </Skeleton>
       </Box>

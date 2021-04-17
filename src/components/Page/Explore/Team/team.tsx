@@ -8,6 +8,7 @@ import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { PageProperties } from 'src/components/Page/types'
 import ChildTeamsObjectives from 'src/components/Team/ChildTeamsObjectives'
 import { Team } from 'src/components/Team/types'
+import { Scope } from 'src/components/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { pageTitleAtom } from 'src/state/recoil/page'
 import { teamAtomFamily } from 'src/state/recoil/team'
@@ -58,7 +59,7 @@ const ExploreTeamPage = ({ teamId, isRootPage }: ExploreTeamPageProperties) => {
         />
 
         <ChildTeamsObjectives rootTeamId={teamId} />
-        <KeyResultSingleDrawer />
+        <KeyResultSingleDrawer scope={Scope.COMPANY} />
       </PageContent>
     </ApolloQueryErrorBoundary>
   )
