@@ -3,6 +3,7 @@ import React from 'react'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
+import { Scope } from 'src/components/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
   keyResultCheckInCommentEnabled,
@@ -13,9 +14,13 @@ import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 
 import KeyResultDrawerContent from './content'
 
+interface KeyResultDrawerProperties {
+  scope?: Scope
+}
+
 const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 
-const KeyResultDrawer = () => {
+const KeyResultDrawer = ({ scope }: KeyResultDrawerProperties) => {
   const keyResultID = useRecoilValue(keyResultDrawerOpen)
   const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
@@ -36,7 +41,7 @@ const KeyResultDrawer = () => {
     <Drawer isOpen={isOpen} size="sm" autoFocus={false} onClose={handleClose}>
       <DrawerOverlay>
         {isOpen && typeof keyResultID !== 'undefined' && (
-          <KeyResultDrawerContent keyResultID={keyResultID} />
+          <KeyResultDrawerContent keyResultID={keyResultID} scope={scope} />
         )}
       </DrawerOverlay>
     </Drawer>

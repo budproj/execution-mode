@@ -75,7 +75,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
     <Stat>
       <KeyResultSectionTimelineCardBase
         borderBottomRadius={0}
-        policies={data?.policies}
+        policy={data?.policy}
         intlCardType={intlCardType}
         onDelete={handleDelete}
       >

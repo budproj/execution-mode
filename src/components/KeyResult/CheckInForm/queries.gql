@@ -1,5 +1,5 @@
 mutation CREATE_KEY_RESULT_CHECK_IN($keyResultCheckInInput: KeyResultCheckInInput!) {
-  createKeyResultCheckIn(keyResultCheckIn: $keyResultCheckInInput) {
+  createKeyResultCheckIn(data: $keyResultCheckInInput) {
     id
     value
     valueIncrease
@@ -12,7 +12,7 @@ mutation CREATE_KEY_RESULT_CHECK_IN($keyResultCheckInInput: KeyResultCheckInInpu
       confidence
       progress
     }
-    policies {
+    policy {
       delete
     }
   }

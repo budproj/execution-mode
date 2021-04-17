@@ -42,7 +42,7 @@ const KeyResultSectionTimelineCardComment = ({
 
   return (
     <KeyResultSectionTimelineCardBase
-      policies={data?.policies}
+      policy={data?.policy}
       intlCardType={intlCardType}
       onDelete={handleDelete}
     >

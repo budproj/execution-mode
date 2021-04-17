@@ -5,7 +5,6 @@ import { ModelInstance } from 'miragejs'
 import { CADENCE } from 'src/components/Cycle/constants'
 import { Cycle } from 'src/components/Cycle/types'
 import { KeyResultCheckIn, KeyResultComment } from 'src/components/KeyResult/types'
-import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
 
 import Models from './models'
 import graphQLSchema from './schema.gql'
@@ -64,7 +63,7 @@ const graphQLHandler = (mirageSchema: any) =>
           const cycle = mirageSchema.cycles.where({
             id: parent.objective.attrs.cycleId,
           }).models[0]
-          const defaultPolicy = AUTHZ_POLICY[cycle.active ? 'ALLOW' : 'DENY']
+          const defaultPolicy = 'ALLOW'
 
           return {
             create: defaultPolicy,

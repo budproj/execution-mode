@@ -9,6 +9,7 @@ import { KeyResultNotActiveAndOwnedByUser } from 'src/components/KeyResult'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { PageProperties } from 'src/components/Page/types'
+import { Scope } from 'src/components/types'
 import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
@@ -30,7 +31,7 @@ const MyKeyResultsPreviousCyclesPage = ({ isRootPage }: PageProperties) => {
   return (
     <PageContent showBreadcrumb={!isRootPage}>
       <PageHead title={messages.metaTitle} description={messages.metaDescription} />
-      <KeyResultSingleDrawer />
+      <KeyResultSingleDrawer scope={Scope.OWNS} />
 
       <Box pb={8}>
         <MyKeyResultsPageSwitcher />

@@ -6,9 +6,7 @@ import { MutableSnapshot, RecoilRoot } from 'recoil'
 import sinon from 'sinon'
 
 import * as KeyResultSectionAddComment from 'src/components/KeyResult/Single/Sections/AddComment'
-import { authzPoliciesKeyResult } from 'src/state/recoil/authz/policies'
-import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
-import defaultPolicies from 'src/state/recoil/authz/policies/default-policies'
+import { GraphQLEffect } from 'src/components/types'
 
 import KeyResultDrawerFooter from './footer'
 
@@ -19,10 +17,10 @@ describe('component renderization', () => {
   it('do not hide the comment section if the user can create comments in that key result', () => {
     const keyResultID = faker.random.uuid()
     const allowPolicy = {
-      create: AUTHZ_POLICY.ALLOW,
-      update: AUTHZ_POLICY.ALLOW,
-      read: AUTHZ_POLICY.ALLOW,
-      delete: AUTHZ_POLICY.ALLOW,
+      create: GraphQLEffect.ALLOW,
+      update: GraphQLEffect.ALLOW,
+      read: GraphQLEffect.ALLOW,
+      delete: GraphQLEffect.ALLOW,
     }
     const policies = {
       root: defaultPolicies,
@@ -51,10 +49,10 @@ describe('component renderization', () => {
   it('do not show the comment section if the user cannot create comments in that key result', () => {
     const keyResultID = faker.random.uuid()
     const denyPolicy = {
-      create: AUTHZ_POLICY.DENY,
-      update: AUTHZ_POLICY.DENY,
-      read: AUTHZ_POLICY.DENY,
-      delete: AUTHZ_POLICY.DENY,
+      create: GraphQLEffect.DENY,
+      update: GraphQLEffect.DENY,
+      read: GraphQLEffect.DENY,
+      delete: GraphQLEffect.DENY,
     }
     const policies = {
       root: defaultPolicies,

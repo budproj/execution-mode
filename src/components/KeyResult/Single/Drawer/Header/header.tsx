@@ -6,8 +6,8 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { KeyResultSectionAddCheckIn } from 'src/components/KeyResult/Single/Sections'
 import KeyResultSingleTitle from 'src/components/KeyResult/Single/Sections/Title'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
-import { authzPoliciesKeyResult } from 'src/state/recoil/authz/policies'
-import { AUTHZ_POLICY } from 'src/state/recoil/authz/policies/constants'
+import { GraphQLEffect } from 'src/components/types'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import {
   keyResultDrawerIsCreatingCheckIn,
   keyResultDrawerIsScrolling,
@@ -27,14 +27,14 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
     keyResultDrawerIsCreatingCheckIn(keyResultID),
   )
   const isScrolling = useRecoilValue(keyResultDrawerIsScrolling(keyResultID))
-  const keyResultPolicies = useRecoilValue(authzPoliciesKeyResult(keyResultID))
+  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const setLatestTimelineEntry = useSetRecoilState(selectLatestTimelineEntry(keyResultID))
   const theme = useTheme()
 
-  const checkInPolicies = keyResultPolicies.childEntities.keyResultCheckIn
+  const checkInPolicy = keyResult?.keyResultCheckIns?.policy
 
   const isNotScrollingOrAskedToCheckIn = !isScrolling || isCreatingCheckIn
-  const canUpdate = checkInPolicies?.create === AUTHZ_POLICY.ALLOW
+  const canUpdate = checkInPolicy?.create === GraphQLEffect.ALLOW
   const shouldShowCheckIn = canUpdate && isNotScrollingOrAskedToCheckIn
 
   const handleCheckInButtonClick = () => {

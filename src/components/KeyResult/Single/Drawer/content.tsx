@@ -1,12 +1,11 @@
 import { useQuery } from '@apollo/client'
 import { DrawerContent, Flex } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 import logger from 'lib/logger'
 import { KeyResult } from 'src/components/KeyResult/types'
-import authzPoliciesKeyResult from 'src/state/recoil/authz/policies/key-result'
-import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
+import { Scope } from 'src/components/types'
 import selectKeyResult from 'src/state/recoil/key-result/key-result'
 
 import KeyResultDrawerBody from './Body'
@@ -16,57 +15,25 @@ import queries from './queries.gql'
 
 export interface KeyResultDrawerContentProperties {
   keyResultID: KeyResult['id']
+  scope?: Scope
 }
 
 export interface GetKeyResultWithIDQuery {
-  keyResult: KeyResultQueryResult
+  keyResult: KeyResult
 }
 
-export interface KeyResultQueryResult extends Partial<KeyResult> {
-  keyResultCheckInPolicies: AuthzPolicies
-  keyResultCommentPolicies: AuthzPolicies
-}
-
-const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentProperties) => {
+const KeyResultDrawerContent = ({ keyResultID, scope }: KeyResultDrawerContentProperties) => {
   const setKeyResult = useSetRecoilState(selectKeyResult(keyResultID))
-  const [keyResultPolicies, setKeyResultPolicies] = useRecoilState(
-    authzPoliciesKeyResult(keyResultID),
-  )
-
-  const buildKeyResultPolicies = (
-    keyResultCheckInPolicies?: AuthzPolicies,
-    keyResultCommentPolicies?: AuthzPolicies,
-  ) => {
-    if (!keyResultCheckInPolicies && !keyResultCommentPolicies) return keyResultPolicies
-
-    const newPolicies = {
-      root: keyResultPolicies.root,
-      childEntities: {
-        keyResultCheckIn:
-          keyResultCheckInPolicies ?? keyResultPolicies.childEntities.keyResultCheckIn,
-        keyResultComment:
-          keyResultCommentPolicies ?? keyResultPolicies.childEntities.keyResultComment,
-      },
-    }
-
-    return newPolicies
-  }
 
   const handleQueryData = (data: GetKeyResultWithIDQuery) => {
-    const { keyResultCheckInPolicies, keyResultCommentPolicies, ...newKeyResult } = data.keyResult
-    const keyResultPolicies = buildKeyResultPolicies(
-      keyResultCheckInPolicies,
-      keyResultCommentPolicies,
-    )
-
-    setKeyResultPolicies(keyResultPolicies)
-    setKeyResult(newKeyResult)
+    setKeyResult(data.keyResult)
   }
 
   const { loading, called, data } = useQuery<GetKeyResultWithIDQuery>(
     queries.GET_KEY_RESULT_WITH_ID,
     {
       variables: {
+        scope,
         id: keyResultID,
       },
       onCompleted: handleQueryData,
@@ -95,5 +62,9 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
 }
 
 const component = KeyResultDrawerContent.name
+
+KeyResultDrawerContent.defaultProps = {
+  scope: Scope.ANY,
+}
 
 export default KeyResultDrawerContent

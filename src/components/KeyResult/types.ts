@@ -1,9 +1,8 @@
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
-import { AuthzPolicies } from 'src/state/recoil/authz/policies/types'
 
-import { GraphQLNode } from '../types'
+import { GraphQLConnection, GraphQLNode, GraphQLPolicy } from '../types'
 
 import { KEY_RESULT_FORMAT } from './constants'
 
@@ -16,7 +15,7 @@ export interface KeyResultCheckIn extends GraphQLNode {
   confidence: number
   progress: number
   progressIncrease: number
-  policies: AuthzPolicies
+  policy: GraphQLPolicy
   keyResult: KeyResult
   keyResultId: KeyResult['id']
   user: User
@@ -27,7 +26,7 @@ export interface KeyResultCheckIn extends GraphQLNode {
 export interface KeyResultComment extends GraphQLNode {
   __typename: string
   text: string
-  policies: AuthzPolicies
+  policy: GraphQLPolicy
   updatedAt: string
   user: User
   keyResult: KeyResult
@@ -44,11 +43,12 @@ export interface KeyResult extends GraphQLNode {
   owner: User
   objective: Objective
   team: Team
-  policies: AuthzPolicies
+  policy: GraphQLPolicy
   description?: string
-  keyResultCheckIns?: KeyResultCheckIn[]
+  keyResultCheckIns?: GraphQLConnection<KeyResultCheckIn>
+  keyResultComments?: GraphQLConnection<KeyResultComment>
   latestKeyResultCheckIn?: KeyResultCheckIn
-  timeline: KeyResultTimelineEntry[]
+  timeline?: GraphQLConnection<KeyResultTimelineEntry>
 }
 
 export type KeyResultsHashmap = Record<string, KeyResult>
