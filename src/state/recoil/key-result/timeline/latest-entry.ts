@@ -2,6 +2,7 @@ import remove from 'lodash/remove'
 import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
+import { GraphQLConnection } from 'src/components/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 import { userAtomFamily } from 'src/state/recoil/user'
@@ -37,7 +38,6 @@ export const setLatestTimelineEntry = (id?: KeyResult['id']) => (
   const userID = get(meAtom)
   const user = get(userAtomFamily(userID))
 
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const newLocalTimelineEntry = {
     user,
     createdAt: new Date(),
@@ -50,10 +50,11 @@ export const setLatestTimelineEntry = (id?: KeyResult['id']) => (
     ...(timelineConnection?.edges ?? []),
   ])
 
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
   const newTimelineConnection = {
     ...timelineConnection,
     edges: newTimelineEdges,
-  }
+  } as GraphQLConnection<KeyResultTimelineEntry>
 
   set(timelineConnectionSelector, newTimelineConnection)
 }

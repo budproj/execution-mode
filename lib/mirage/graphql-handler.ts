@@ -59,10 +59,7 @@ const graphQLHandler = (mirageSchema: any) =>
             ? parent.keyResultCheckIns?.models.slice(0, limit)
             : parent.keyResultCheckIns?.models,
 
-        policies: (parent: ModelInstance<any>) => {
-          const cycle = mirageSchema.cycles.where({
-            id: parent.objective.attrs.cycleId,
-          }).models[0]
+        policies: () => {
           const defaultPolicy = 'ALLOW'
 
           return {
