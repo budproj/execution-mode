@@ -8,7 +8,7 @@ import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::REMOVE_ENTRY`
 
-export const selectTimelineEntries = buildPartialSelector<KeyResult['timeline']>('timeline')
+export const selectTimelineConnection = buildPartialSelector<KeyResult['timeline']>('timeline')
 
 export const removeTimelineEntry = (id?: KeyResult['id']) => (
   { get, set }: RecoilInterfaceReadWrite,
@@ -18,12 +18,18 @@ export const removeTimelineEntry = (id?: KeyResult['id']) => (
   if (!entryToRemove) return
   if (entryToRemove instanceof DefaultValue) return
 
-  const timelineEntriesSelector = selectTimelineEntries(id)
-  const timelineEntries = get(timelineEntriesSelector)
+  const timelineConnectionSelector = selectTimelineConnection(id)
+  const timelineConnection = get(timelineConnectionSelector)
 
-  const removedTimelineEntries = timelineEntries?.filter((entry) => entry.id !== entryToRemove.id)
+  const removedTimelineEdges = timelineConnection?.edges.filter(
+    (edge) => edge.node.id !== entryToRemove.id,
+  )
+  const newTimelineConnection = {
+    ...timelineConnection,
+    edges: removedTimelineEdges,
+  }
 
-  set(timelineEntriesSelector, removedTimelineEntries)
+  set(timelineConnectionSelector, newTimelineConnection)
 }
 
 export const selectRemoveTimelineEntry = selectorFamily<

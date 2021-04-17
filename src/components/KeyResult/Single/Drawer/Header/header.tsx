@@ -42,6 +42,7 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
   }
 
   const handleCheckInCompleted = (data: KeyResultCheckIn) => {
+    console.log(data, 'tag')
     setLatestTimelineEntry(data)
   }
 
