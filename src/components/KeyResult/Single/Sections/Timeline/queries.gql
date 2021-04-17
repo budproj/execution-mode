@@ -1,41 +1,48 @@
-query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $limit: Int, $offset: Int) {
+query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $first: Int, $after: String) {
   keyResult(id: $id) {
     id
     format
-    timeline(limit: $limit, offset: $offset) {
-      ... on KeyResultCheckIn {
-        id
-        value
-        valueIncrease
-        confidence
-        progress
-        comment
-        createdAt
-        keyResultId
-        user {
-          fullName
-        }
-        parent {
-          confidence
-          progress
-        }
-        policies {
-          delete
+    timeline(first: $first, after: $after) {
+      edges {
+        node {
+          ... on KeyResultCheckIn {
+            id
+            value
+            valueIncrease
+            confidence
+            progress
+            comment
+            createdAt
+            keyResultId
+            user {
+              fullName
+            }
+            parent {
+              confidence
+              progress
+            }
+            policy {
+              delete
+            }
+          }
+
+          ... on KeyResultComment {
+            id
+            text
+            createdAt
+            keyResultId
+            user {
+              fullName
+              picture
+            }
+            policy {
+              delete
+            }
+          }
         }
       }
-
-      ... on KeyResultComment {
-        id
-        text
-        createdAt
-        keyResultId
-        user {
-          fullName
-          picture
-        }
-        policies {
-          delete
-        }
+      pageInfo {
+        endCursor
       }
     }
   }
