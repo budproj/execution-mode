@@ -75,7 +75,9 @@ const KeyResultNotActiveAndOwnedByUser = ({
   }
 
   const yearlyCycles =
-    cycles.length > 0 && uniqBy(filter(cycles.map((cycle) => cycle.parent)) as Cycle[], 'id')
+    cycles.length > 0
+      ? uniqBy(filter(cycles.map((cycle) => cycle.parent)) as Cycle[], 'id')
+      : undefined
 
   const filteredData = filterCycles(cycles, filters)
 
@@ -95,7 +97,9 @@ const KeyResultNotActiveAndOwnedByUser = ({
         ),
         'node.id',
       )
-      const cycleEdges = flatten([parentCycleEdges, queryEdges]).filter((cycle) => Boolean(cycle))
+      const cycleEdges = flatten([parentCycleEdges, queryEdges]).filter((edge) =>
+        Boolean(edge.node),
+      )
       const cycleNodes = cycleEdges.map((edge) => edge.node)
 
       const keyResultEdgesList = cycleNodes.map((cycle) => cycle?.keyResults?.edges)

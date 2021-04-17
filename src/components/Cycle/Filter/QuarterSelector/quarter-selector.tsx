@@ -3,6 +3,8 @@ import groupBy from 'lodash/groupBy'
 import React, { useEffect } from 'react'
 
 import { Cycle } from 'src/components/Cycle/types'
+import { GraphQLConnection } from 'src/components/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 
@@ -17,10 +19,7 @@ export interface CycleFilterQuarterSelectorProperties {
 }
 
 type QuarterlyCyclesFromFilteredParentsResult = {
-  cyclesInSamePeriod: Array<{
-    id: Cycle['id']
-    period: Cycle['period']
-  }>
+  cyclesInSamePeriod: GraphQLConnection<Cycle>
 }
 
 const CycleFilterQuarterSelector = ({
@@ -28,6 +27,7 @@ const CycleFilterQuarterSelector = ({
   filteredYearIDs,
 }: CycleFilterQuarterSelectorProperties) => {
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
+  const [cycles, setCycleEdges] = useConnectionEdges<Cycle>()
   const [
     fetchCycleOptions,
     { loading, data },
@@ -37,18 +37,25 @@ const CycleFilterQuarterSelector = ({
       variables: {
         parentIds: filteredYearIDs,
       },
-      onCompleted: (data) => {
-        loadCycles(data.cyclesInSamePeriod)
-      },
     },
   )
 
   const hasParentCycles = filteredYearIDs && filteredYearIDs.length > 0
-  const quarters = data && groupBy(data.cyclesInSamePeriod, (item) => item.period)
+  const quarters = data && groupBy(cycles, (item) => item.period)
 
   useEffect(() => {
     if (hasParentCycles) fetchCycleOptions()
   }, [hasParentCycles, fetchCycleOptions])
+
+  useEffect(() => {
+    if (data) setCycleEdges(data.cyclesInSamePeriod?.edges)
+  }, [data, setCycleEdges])
+
+  useEffect(() => {
+    if (cycles) loadCycles(cycles)
+  }, [cycles, loadCycles])
+
+  console.log(cycles, quarters, 'tag')
 
   return hasParentCycles ? (
     <CycleFilterQuarterSelectorQuarterOptions
