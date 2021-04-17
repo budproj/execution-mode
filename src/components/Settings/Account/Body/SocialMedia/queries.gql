@@ -1,5 +1,5 @@
-mutation UPDATE_USER_SOCIAL_MEDIA($userID: ID!, $userData: UserDataInput!) {
-  updateUser(userID: $userID, userData: $userData) {
+mutation UPDATE_USER_SOCIAL_MEDIA($userID: ID!, $userData: UserInput!) {
+  updateUser(id: $userID, data: $userData) {
     id
     linkedInProfileAddress
   }

@@ -4,7 +4,6 @@ import isMatch from 'lodash/isMatch'
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue, useRecoilState } from 'recoil'
 
-import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import meAtom from 'src/state/recoil/user/me'
 import userSelector from 'src/state/recoil/user/selector'
@@ -15,21 +14,7 @@ import SettingsAccountUserCardPreview from './UserCardPreview'
 import queries from './queries.gql'
 
 export interface GetUserDataQuery {
-  user: {
-    id: User['id']
-    firstName: User['firstName']
-    fullName: User['fullName']
-    lastname?: User['lastName']
-    role?: User['role']
-    nickname?: User['nickname']
-    gender?: User['gender']
-    about?: User['about']
-    linkedInProfileAddress?: User['linkedInProfileAddress']
-    teams?: Array<{
-      id: Team['id']
-      name: Team['name']
-    }>
-  }
+  user: User
 }
 
 const SettingsAccount = () => {
