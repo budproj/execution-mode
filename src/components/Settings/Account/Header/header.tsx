@@ -3,7 +3,7 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import UserAvatar from 'src/components/User/Avatar'
+import { UserEditableAvatar } from 'src/components/User/EditableAvatar/wrapper'
 import UserTeamTags from 'src/components/User/TeamTags'
 import { User } from 'src/components/User/types'
 import { userAtomFamily } from 'src/state/recoil/user'
@@ -18,7 +18,7 @@ const SettingsAccountHeader = ({ userID, isLoaded }: SettingsAccountHeader) => {
 
   return (
     <Flex gridGap={4} alignItems="center">
-      <UserAvatar size="xl" name={user?.fullName} src={user?.picture} />
+      <UserEditableAvatar size="xl" name={user?.fullName} picture={user?.picture} />
 
       <Flex direction="column" gridGap={4}>
         <Flex direction="column" gridGap={1}>
