@@ -9,7 +9,12 @@ import { UserUpdatePictureModal } from '../UpdatePictureModal/wrapper'
 
 import { UserEditableAvatarProperties } from './interface'
 
-export const UserEditableAvatar = ({ name, picture, size }: UserEditableAvatarProperties) => {
+export const UserEditableAvatar = ({
+  userID,
+  name,
+  picture,
+  size,
+}: UserEditableAvatarProperties) => {
   const [isHovering, setIsHovering] = useState(false)
   const [isCropping, setIsCropping] = useState(false)
   const [
@@ -103,6 +108,7 @@ export const UserEditableAvatar = ({ name, picture, size }: UserEditableAvatarPr
       />
 
       <UserUpdatePictureModal
+        userID={userID}
         src={localPictureData}
         isOpen={isCropping}
         onClose={handleCropClose}

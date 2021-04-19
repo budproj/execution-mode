@@ -18,7 +18,7 @@ const SettingsAccountHeader = ({ userID, isLoaded }: SettingsAccountHeader) => {
 
   return (
     <Flex gridGap={4} alignItems="center">
-      <UserEditableAvatar size="xl" name={user?.fullName} picture={user?.picture} />
+      <UserEditableAvatar size="xl" userID={userID} name={user?.fullName} picture={user?.picture} />
 
       <Flex direction="column" gridGap={4}>
         <Flex direction="column" gridGap={1}>

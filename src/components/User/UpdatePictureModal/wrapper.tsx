@@ -1,3 +1,4 @@
+import { useMutation } from '@apollo/client'
 import {
   Box,
   Modal,
@@ -15,11 +16,13 @@ import Cropper from 'react-easy-crop'
 import { Area } from 'react-easy-crop/types'
 import { useIntl } from 'react-intl'
 
-import { getCroppedImg } from './canvas'
+import { getCroppedPictureFile } from './canvas'
 import { UserUpdatePictureModalInterface } from './interface'
 import messages from './messages'
+import query from './query.gql'
 
 export const UserUpdatePictureModal = ({
+  userID,
   src,
   isOpen,
   initialZoom,
@@ -30,6 +33,8 @@ export const UserUpdatePictureModal = ({
   const [zoom, setZoom] = useState(initialZoom)
   const [croppedArea, setCroppedArea] = useState<Area>()
   const intl = useIntl()
+
+  const [updatePicture, { data, loading }] = useMutation(query.UpdateUserPicture)
 
   const handleClose = () => {
     setIsModalOpen(false)
@@ -46,13 +51,21 @@ export const UserUpdatePictureModal = ({
   const handleSubmit = async () => {
     if (!src || !croppedArea) return
 
-    const image = await getCroppedImg(src, croppedArea)
-    console.log(image, 'tag')
+    const file = await getCroppedPictureFile(src, croppedArea)
+    console.log(file, 'tag-2')
+    await updatePicture({
+      variables: {
+        userID,
+        file,
+      },
+    })
   }
 
   useEffect(() => {
     setIsModalOpen(Boolean(isOpen))
   }, [isOpen, setIsModalOpen])
+
+  console.log(data, loading, 'tag')
 
   return (
     <Modal isOpen={isModalOpen} onClose={handleClose}>

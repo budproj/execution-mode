@@ -1,6 +1,7 @@
-import { ApolloClient, createHttpLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
+import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react'
+import { createUploadLink } from 'apollo-upload-client'
 import merge from 'deepmerge'
 import { AppProps } from 'next/app'
 import { useMemo } from 'react'
@@ -30,14 +31,14 @@ const linkWithServer = (authzClient: Auth0ContextInterface) => {
   const shouldMockServer =
     publicRuntimeConfig.mirage.enabled && publicRuntimeConfig.environment === 'develop'
 
-  const httpLink = createHttpLink({
+  const link = createUploadLink({
     uri: publicRuntimeConfig.api.graphql,
   })
 
   return shouldMockServer
     ? { uri: publicRuntimeConfig.api.graphql }
     : // eslint-disable-next-line unicorn/prefer-spread
-      { link: authLink(authzClient).concat(httpLink) }
+      { link: authLink(authzClient).concat(link) }
 }
 
 const createApolloClient = (authzClient: Auth0ContextInterface) =>

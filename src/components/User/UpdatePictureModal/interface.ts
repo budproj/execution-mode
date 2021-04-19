@@ -1,4 +1,5 @@
 export interface UserUpdatePictureModalInterface {
+  userID?: string
   src?: string
   initialZoom?: number
   isOpen?: boolean
