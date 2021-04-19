@@ -55,8 +55,6 @@ const CycleFilterQuarterSelector = ({
     if (cycles) loadCycles(cycles)
   }, [cycles, loadCycles])
 
-  console.log(cycles, quarters, 'tag')
-
   return hasParentCycles ? (
     <CycleFilterQuarterSelectorQuarterOptions
       isLoading={loading}

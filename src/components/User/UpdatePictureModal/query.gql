@@ -1,0 +1,5 @@
+mutation UpdateUserPicture($userID: ID!, $file: Upload!) {
+  updateUser(id: $userID, data: { picture: $file }) {
+    picture
+  }
+}

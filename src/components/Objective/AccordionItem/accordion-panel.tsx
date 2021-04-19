@@ -55,7 +55,6 @@ const ObjectiveAccordionPanel = ({
   }, [isExpanded, called, fetchObjective, objectiveID])
 
   useEffect(() => {
-    console.log('tag')
     if (data) {
       loadObjective(data?.objective)
       setKeyResultEdges(data.objective.keyResults?.edges)
@@ -96,6 +95,9 @@ const ObjectiveAccordionPanel = ({
             },
             [KEY_RESULT_LIST_COLUMN.OWNER]: {
               displayName: true,
+            },
+            [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+              isDisabled: true,
             },
           }}
           onLineClick={handleLineClick}
