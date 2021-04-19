@@ -97,6 +97,9 @@ const ObjectiveAccordionPanel = ({
             [KEY_RESULT_LIST_COLUMN.OWNER]: {
               displayName: true,
             },
+            [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+              isDisabled: true,
+            },
           }}
           onLineClick={handleLineClick}
         />
