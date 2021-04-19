@@ -33,8 +33,6 @@ const TeamCardList = ({ numEmptyStateCards }: TeamCardListProperties) => {
     if (data) setEdges(data.teams.edges)
   }, [data, setEdges])
 
-  console.log(orderedTeams, 'tag')
-
   return (
     <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
       {wereTeamsLoaded

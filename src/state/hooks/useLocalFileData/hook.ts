@@ -8,7 +8,6 @@ export const useLocalFileData = (initialFile?: File): LocalFileDataHook => {
   const [localFileData, setLocalFileData] = useState<string>()
 
   const handleLoad = (localData: string) => {
-    console.log(localData, 'tag')
     setLocalFileData(localData)
     setLoading(false)
   }

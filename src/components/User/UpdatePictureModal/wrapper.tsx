@@ -10,16 +10,26 @@ import {
   SliderThumb,
   SliderTrack,
   Button,
+  Spinner,
 } from '@chakra-ui/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import Cropper from 'react-easy-crop'
 import { Area } from 'react-easy-crop/types'
 import { useIntl } from 'react-intl'
+import { useRecoilState } from 'recoil'
+
+import { userAtomFamily } from 'src/state/recoil/user'
+
+import { User } from '../types'
 
 import { getCroppedPictureFile } from './canvas'
 import { UserUpdatePictureModalInterface } from './interface'
 import messages from './messages'
 import query from './query.gql'
+
+interface UpdateUserMutationResult {
+  updateUser: User
+}
 
 export const UserUpdatePictureModal = ({
   userID,
@@ -32,9 +42,20 @@ export const UserUpdatePictureModal = ({
   const [crop, setCrop] = useState({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(initialZoom)
   const [croppedArea, setCroppedArea] = useState<Area>()
+  const [user, setUser] = useRecoilState(userAtomFamily(userID))
   const intl = useIntl()
 
-  const [updatePicture, { data, loading }] = useMutation(query.UpdateUserPicture)
+  const [updatePicture, { loading }] = useMutation<UpdateUserMutationResult>(
+    query.UpdateUserPicture,
+    {
+      onCompleted: (data) => {
+        setUser({
+          ...user,
+          ...data.updateUser,
+        })
+      },
+    },
+  )
 
   const handleClose = () => {
     setIsModalOpen(false)
@@ -52,7 +73,6 @@ export const UserUpdatePictureModal = ({
     if (!src || !croppedArea) return
 
     const file = await getCroppedPictureFile(src, croppedArea)
-    console.log(file, 'tag-2')
     await updatePicture({
       variables: {
         userID,
@@ -65,8 +85,6 @@ export const UserUpdatePictureModal = ({
     setIsModalOpen(Boolean(isOpen))
   }, [isOpen, setIsModalOpen])
 
-  console.log(data, loading, 'tag')
-
   return (
     <Modal isOpen={isModalOpen} onClose={handleClose}>
       <ModalOverlay />
@@ -78,10 +96,30 @@ export const UserUpdatePictureModal = ({
             zoom={zoom}
             aspect={1 / 1}
             cropSize={{ width: 300, height: 300 }}
+            style={{
+              cropAreaStyle: {
+                color: 'rgba(255, 255, 255, .7)',
+              },
+            }}
             onCropChange={setCrop}
             onZoomChange={setZoom}
             onCropComplete={handleCrop}
           />
+
+          <Box
+            position="absolute"
+            display="flex"
+            w="full"
+            h="full"
+            justifyContent="center"
+            alignItems="center"
+            background="rgba(0,0,0,.8)"
+            top={0}
+            left={0}
+            hidden={!loading}
+          >
+            <Spinner size="xl" color="brand.400" />
+          </Box>
         </Box>
 
         <ModalFooter
@@ -100,7 +138,7 @@ export const UserUpdatePictureModal = ({
             <SliderThumb />
           </Slider>
 
-          <Button variant="solid" colorScheme="brand" onClick={handleSubmit}>
+          <Button variant="solid" colorScheme="brand" disabled={loading} onClick={handleSubmit}>
             {intl.formatMessage(messages.submitButtonLabel)}
           </Button>
         </ModalFooter>

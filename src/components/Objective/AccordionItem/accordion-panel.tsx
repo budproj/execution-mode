@@ -55,7 +55,6 @@ const ObjectiveAccordionPanel = ({
   }, [isExpanded, called, fetchObjective, objectiveID])
 
   useEffect(() => {
-    console.log('tag')
     if (data) {
       loadObjective(data?.objective)
       setKeyResultEdges(data.objective.keyResults?.edges)

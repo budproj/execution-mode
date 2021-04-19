@@ -1,4 +1,5 @@
 import { Area } from 'react-easy-crop/types'
+import { v4 as uuidv4 } from 'uuid'
 
 const createImage = async (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
@@ -36,6 +37,9 @@ export async function getCroppedPictureFile(imageSource: string, pixelCrop: Area
   )
 
   return new Promise((resolve, reject) => {
-    canvas.toBlob((blob) => (blob ? resolve(blob) : reject()), 'image/jpeg')
+    canvas.toBlob(
+      (blob) => (blob ? resolve(new File([blob], `${uuidv4()}.jpeg`)) : reject()),
+      'image/jpeg',
+    )
   })
 }

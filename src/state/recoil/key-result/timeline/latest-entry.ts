@@ -29,7 +29,6 @@ export const setLatestTimelineEntry = (id?: KeyResult['id']) => (
   { get, set }: RecoilInterfaceReadWrite,
   newTimelineEntry: KeyResultTimelineEntry | DefaultValue | undefined,
 ) => {
-  console.log(newTimelineEntry, 'tag')
   if (!id) return
 
   const timelineConnectionSelector = selectTimelineConnection(id)
