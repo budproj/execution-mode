@@ -1038,5 +1038,9 @@
   "zsB72A": {
     "defaultMessage": "Preview",
     "description": "This title is displayed as the heading of the user card preview section in our user account settings page"
+  },
+  "nPjrcU": {
+    "defaultMessage": "Update",
+    "description": "This message is displayer as soon as our user hovers the avatar"
   }
 }
