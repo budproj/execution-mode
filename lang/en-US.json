@@ -1031,6 +1031,10 @@
     "defaultMessage": "Q3",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
   },
+  "3e+zPY": {
+    "defaultMessage": "Save",
+    "description": "This button is displayed with our crop picture modal to submit the form"
+  },
   "zsB72A": {
     "defaultMessage": "Preview",
     "description": "This title is displayed as the heading of the user card preview section in our user account settings page"
