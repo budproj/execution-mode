@@ -983,10 +983,6 @@
     "defaultMessage": "There is an external and inconvenient factor blocking our progress concerning this key result",
     "description": "This text explains our tag to the user"
   },
-  "xkN783": {
-    "defaultMessage": "Last update {unit, select, fallback {at {date}} other {{date}}}",
-    "description": "This message displays the latest report status for a given component"
-  },
   "yq7/PT": {
     "defaultMessage": "Support content",
     "description": "MainAppBar user menu second item option"
@@ -1042,5 +1038,21 @@
   "nPjrcU": {
     "defaultMessage": "Update",
     "description": "This message is displayer as soon as our user hovers the avatar"
+  },
+  "+XSqc3": {
+    "defaultMessage": "Latest updatej",
+    "description": "This prefix is displayed as default in our last updated component"
+  },
+  "/DyxUT": {
+    "defaultMessage": "Latest check-in",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
+  },
+  "8693wE": {
+    "defaultMessage": "Latest check-in",
+    "description": "This message is displayed alongisde with the header, as the prefix for our last update text component"
+  },
+  "sObsR1": {
+    "defaultMessage": "{unit, select, fallback {at {date}} other {{date}}}",
+    "description": "This text displays the latest report status for a given component, using a given date logic"
   }
 }

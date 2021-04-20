@@ -19,6 +19,10 @@
     "defaultMessage": "Um ícone com uma série de traços verticais. Clique e arraste ele para reordenar seus resultados chave",
     "description": "The alternative text explaining our reorder icon"
   },
+  "+XSqc3": {
+    "defaultMessage": "Última atualização",
+    "description": "This prefix is displayed as default in our last updated component"
+  },
   "+r3NGz": {
     "defaultMessage": "Progresso",
     "description": "The title of the second column in our body table at the teams overview report in our dashboard"
@@ -30,6 +34,10 @@
   "/2GFGI": {
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
+  },
+  "/DyxUT": {
+    "defaultMessage": "Último check-in",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
   "/K30xB": {
     "defaultMessage": "Você não tem nenhum resultado-chave",
@@ -194,6 +202,10 @@
   "7d+540": {
     "defaultMessage": "Uma seta para cima, indicando que o menu de seleção de ciclos está aberto",
     "description": "This message is displayed to the user screen reader when the year select menu is opened"
+  },
+  "8693wE": {
+    "defaultMessage": "Último check-in",
+    "description": "This message is displayed alongisde with the header, as the prefix for our last update text component"
   },
   "89ola3": {
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
@@ -919,6 +931,10 @@
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
   },
+  "sObsR1": {
+    "defaultMessage": "{unit, select, fallback {em {date}} other {{date}}}",
+    "description": "This text displays the latest report status for a given component, using a given date logic"
+  },
   "sYGIlp": {
     "defaultMessage": "Minha conta",
     "description": "This label defines the text on the first menu section option"
@@ -986,10 +1002,6 @@
   "xXxjVp": {
     "defaultMessage": "Existe um fator externo impedindo o progresso desse resultado-chave",
     "description": "This text explains our tag to the user"
-  },
-  "xkN783": {
-    "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}}",
-    "description": "This message displays the latest report status for a given component"
   },
   "yq7/PT": {
     "defaultMessage": "Artigos de suporte",
