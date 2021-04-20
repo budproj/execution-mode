@@ -37,7 +37,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       <Stack>
         <Skeleton isLoaded={isLoaded}>
           <ExpandableText
-            color="black.800"
+            color="black.900"
             fontSize="xl"
             maxCollapsedLength={100}
             Wrapper={Heading}
@@ -54,7 +54,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           <LastUpdateText
             fontSize="sm"
             date={lastUpdateDate}
-            color={isOutdated ? 'red.500' : 'gray.300'}
+            color={isOutdated ? 'red.500' : 'gray.400'}
             prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
           />
         </SkeletonText>

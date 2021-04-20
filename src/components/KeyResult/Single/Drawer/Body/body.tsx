@@ -1,9 +1,10 @@
-import { Stack } from '@chakra-ui/react'
+import { Divider, Stack } from '@chakra-ui/react'
 import React from 'react'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import {
+  KeyResultSectionDescription,
   KeyResultSectionTimeline,
   KeyResultSectionTitle,
 } from 'src/components/KeyResult/Single/Sections'
@@ -51,6 +52,8 @@ const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => 
     >
       <Stack flexGrow={1} overflow="auto" p={4} pt={0} gridGap={4}>
         <KeyResultSectionTitle keyResultID={keyResultID} />
+        <Divider borderColor="gray.100" />
+        <KeyResultSectionDescription keyResultID={keyResultID} />
 
         <KeyResultSectionTimeline
           keyResultID={keyResultID}

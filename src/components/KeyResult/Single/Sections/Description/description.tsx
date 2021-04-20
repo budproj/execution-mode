@@ -1,8 +1,9 @@
-import { Flex, Text, SkeletonText } from '@chakra-ui/react'
+import { Flex, SkeletonText, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import { ExpandableText } from 'src/components/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
@@ -22,12 +23,12 @@ const KeyResultSectionDescription = ({ keyResultID }: KeyResultSectionDescriptio
 
   return (
     <Flex gridGap={2} direction="column">
-      <Text fontWeight={500} color="black.600">
+      <Heading as="h3" fontWeight={700} color="gray.500" fontSize="xs" textTransform="uppercase">
         {intl.formatMessage(messages.label)}
-      </Text>
+      </Heading>
       <Flex alignItems="center" gridGap={2}>
-        <SkeletonText isLoaded={isDescriptionLoaded} noOfLines={5} spacing={4} w="100%">
-          <Text color="black.500">{description}</Text>
+        <SkeletonText isLoaded={isDescriptionLoaded} noOfLines={5} spacing={2} w="100%">
+          <ExpandableText fontSize="md" color="black.800" text={description} />
         </SkeletonText>
       </Flex>
     </Flex>
