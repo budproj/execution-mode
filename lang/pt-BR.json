@@ -859,6 +859,10 @@
     "defaultMessage": "Redes sociais",
     "description": "This title is displayed as the heading of the social media section in our user account settings page"
   },
+  "nPjrcU": {
+    "defaultMessage": "Editar",
+    "description": "This message is displayer as soon as our user hovers the avatar"
+  },
   "nnWr7M": {
     "defaultMessage": "Gênero",
     "description": "This is the label that goes on our user account settings page, at the sixth field to update the user informations"

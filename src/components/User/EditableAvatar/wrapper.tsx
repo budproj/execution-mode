@@ -1,13 +1,14 @@
 import { Box, Flex, Text } from '@chakra-ui/layout'
 import { Spinner } from '@chakra-ui/spinner'
 import React, { useEffect, useRef, useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import UserAvatar from 'src/components/User/Avatar'
+import { UserUpdatePictureModal } from 'src/components/User/UpdatePictureModal/wrapper'
 import { useLocalFileData } from 'src/state/hooks/useLocalFileData/hook'
 
-import { UserUpdatePictureModal } from '../UpdatePictureModal/wrapper'
-
 import { UserEditableAvatarProperties } from './interface'
+import messages from './messages'
 
 export const UserEditableAvatar = ({
   userID,
@@ -15,6 +16,7 @@ export const UserEditableAvatar = ({
   picture,
   size,
 }: UserEditableAvatarProperties) => {
+  const intl = useIntl()
   const [isHovering, setIsHovering] = useState(false)
   const [isCropping, setIsCropping] = useState(false)
   const [
@@ -94,7 +96,7 @@ export const UserEditableAvatar = ({
           transition=".3s opacity ease-in-out"
         >
           <Text color="white" fontSize="xs" fontWeight={700} textTransform="uppercase">
-            Editar
+            {intl.formatMessage(messages.hoverMessage)}
           </Text>
         </Flex>
       </Box>
