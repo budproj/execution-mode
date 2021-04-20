@@ -32,7 +32,7 @@ const KeyResultDrawerDeleteAlert = ({ keyResultID }: KeyResultDrawerDeleteAlertP
       status="success"
       variant="outline"
       wrapperPadding={4}
-      wrapperPaddingBottom={0}
+      wrapperPaddingTop={0}
       isOpen={Boolean(intlDeletedEntryType)}
       onClose={handleAlertClose}
     />

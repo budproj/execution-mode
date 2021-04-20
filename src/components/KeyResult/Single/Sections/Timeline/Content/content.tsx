@@ -5,7 +5,6 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { useRecoilState } from 'recoil'
 
 import { KeyResultSectionTimelineCardEmptyState } from 'src/components/KeyResult/Single/Sections/Timeline/Cards'
-import { PERFECT_SCROLLBAR_ID } from 'src/components/KeyResult/Single/Sections/Timeline/constants'
 import { GetKeyResultTimelineWithIDQuery } from 'src/components/KeyResult/Single/Sections/Timeline/timeline'
 import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -17,6 +16,7 @@ export interface KeyResultSectionTimelineContentProperties {
   keyResultID: KeyResult['id']
   limit: number
   initialHasMore: boolean
+  scrollTarget: string
   fetchMore: <K extends string>(
     options: FetchMoreQueryOptions<Record<string, any>, K, GetKeyResultTimelineWithIDQuery>,
   ) => Promise<ApolloQueryResult<GetKeyResultTimelineWithIDQuery>>
@@ -27,6 +27,7 @@ const KeyResultSectionTimelineContent = ({
   keyResultID,
   limit,
   initialHasMore,
+  scrollTarget,
   fetchMore,
   onEntryDelete,
 }: KeyResultSectionTimelineContentProperties) => {
@@ -57,7 +58,7 @@ const KeyResultSectionTimelineContent = ({
       dataLength={timeline.length}
       next={handleInfiniteScroll}
       hasMore={hasMore}
-      scrollableTarget={PERFECT_SCROLLBAR_ID}
+      scrollableTarget={scrollTarget}
       style={{ overflowX: 'hidden' }}
       loader={
         <Flex direction="column" alignItems="center" p={4}>

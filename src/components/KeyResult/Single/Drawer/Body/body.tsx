@@ -1,14 +1,20 @@
-import { Box } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 import React from 'react'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import { KeyResultSectionTimeline } from 'src/components/KeyResult/Single/Sections'
+import {
+  KeyResultSectionTimeline,
+  KeyResultSectionTitle,
+} from 'src/components/KeyResult/Single/Sections'
 import { KeyResult } from 'src/components/KeyResult/types'
 import {
   keyResultDrawerIntlDeletedEntryType,
   keyResultDrawerIsCreatingCheckIn,
   keyResultDrawerIsScrolling,
 } from 'src/state/recoil/key-result/drawer'
+
+import { PERFECT_SCROLLBAR_ID } from './constants'
 
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
@@ -37,14 +43,22 @@ const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => 
   }
 
   return (
-    <Box flexGrow={1} overflow="auto">
-      <KeyResultSectionTimeline
-        keyResultID={keyResultID}
-        onScrollY={handleScrollY}
-        onScrollYReachStart={handleScrollYReachStart}
-        onEntryDelete={handleEntryDelete}
-      />
-    </Box>
+    <PerfectScrollbar
+      id={PERFECT_SCROLLBAR_ID}
+      options={{ suppressScrollX: true }}
+      onScrollY={handleScrollY}
+      onYReachStart={handleScrollYReachStart}
+    >
+      <Stack flexGrow={1} overflow="auto" p={4} pt={0} gridGap={4}>
+        <KeyResultSectionTitle keyResultID={keyResultID} />
+
+        <KeyResultSectionTimeline
+          keyResultID={keyResultID}
+          scrollTarget={PERFECT_SCROLLBAR_ID}
+          onEntryDelete={handleEntryDelete}
+        />
+      </Stack>
+    </PerfectScrollbar>
   )
 }
 
