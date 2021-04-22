@@ -18,6 +18,7 @@ describe('component expectations', () => {
         limit={faker.random.number()}
         initialHasMore={faker.random.boolean()}
         fetchMore={sinon.fake()}
+        scrollTarget="any"
       />,
     )
 
@@ -43,6 +44,7 @@ describe('component expectations', () => {
         limit={faker.random.number()}
         initialHasMore={faker.random.boolean()}
         fetchMore={sinon.fake()}
+        scrollTarget="any"
       />,
     )
 
@@ -79,6 +81,7 @@ describe('component interactions', () => {
         limit={faker.random.number()}
         initialHasMore={faker.random.boolean()}
         fetchMore={fetchMoreStub}
+        scrollTarget="any"
       />,
     )
 
@@ -114,6 +117,7 @@ describe('component interactions', () => {
         keyResultID={faker.random.uuid()}
         limit={1}
         fetchMore={fetchMoreStub}
+        scrollTarget="any"
       />,
     )
 
@@ -150,6 +154,7 @@ describe('component interactions', () => {
         keyResultID={faker.random.uuid()}
         limit={limit}
         fetchMore={fetchMoreStub}
+        scrollTarget="any"
       />,
     )
 

@@ -233,6 +233,7 @@ describe('setter', () => {
     )
 
     const result = newSnapshot.getLoadable(keyResultAtomFamily(fakeID)).getValue()
+    console.log(result)
 
     // Expect(result?.keyResultCheckIns?.slice(1)).toEqual(fakePreviousCheckIns)
     expect(true).toEqual(false)

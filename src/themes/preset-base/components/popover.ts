@@ -8,6 +8,8 @@ const sizes: Record<string, number> = {
 }
 
 const Popover = {
+  parts: ['content', 'popper'],
+
   baseStyle: ({ size }: PopoverProps) => ({
     content: {
       boxShadow: 'md',

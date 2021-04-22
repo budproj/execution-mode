@@ -138,7 +138,10 @@ describe('setter', () => {
   it('returns undefined if undefined ID was provided', () => {
     const setLatestTimelineEntry = latestTimelineEntry.setLatestTimelineEntry()
 
-    const result = setLatestTimelineEntry({ get: sinon.fake(), set: sinon.fake() } as any, {})
+    const result = setLatestTimelineEntry(
+      { get: sinon.fake(), set: sinon.fake() } as any,
+      {} as any,
+    )
 
     expect(result).not.toBeDefined()
   })

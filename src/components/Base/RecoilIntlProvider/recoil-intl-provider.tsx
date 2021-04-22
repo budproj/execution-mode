@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
-import { IntlProvider } from 'react-intl'
-import { OptionalIntlConfig } from 'react-intl/src/components/provider'
+import { IntlConfig, IntlProvider } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { intlLocaleAtom, currentNextRoute } from 'src/state/recoil/intl'
 
-export interface RecoilIntlProviderProperties extends OptionalIntlConfig {
+export interface RecoilIntlProviderProperties extends IntlConfig {
   children?: ReactElement
 }
 

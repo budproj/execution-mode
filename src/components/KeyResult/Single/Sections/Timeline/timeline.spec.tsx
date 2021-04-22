@@ -18,7 +18,7 @@ describe('component expectations', () => {
     sinon.stub(recoil, 'useRecoilState').returns([] as any)
     sinon.mock(apollo).expects('useQuery').atLeast(1).returns({})
 
-    const result = enzyme.shallow(<KeyResultSectionTimeline />)
+    const result = enzyme.shallow(<KeyResultSectionTimeline scrollTarget="any" />)
 
     const skeleton = result.find('KeyResultSectionTimelineSkeleton')
 
@@ -32,7 +32,9 @@ describe('component expectations', () => {
       .returns([[]] as any)
     sinon.mock(apollo).expects('useQuery').atLeast(1).returns({})
 
-    const result = enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
+    const result = enzyme.shallow(
+      <KeyResultSectionTimeline keyResultID={faker.random.uuid()} scrollTarget="any" />,
+    )
 
     const content = result.find('KeyResultSectionTimelineContent')
 
@@ -71,7 +73,9 @@ describe('component lifecycle', () => {
       return {} as any
     })
 
-    enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
+    enzyme.shallow(
+      <KeyResultSectionTimeline keyResultID={faker.random.uuid()} scrollTarget="any" />,
+    )
 
     const wasSpyCalledAsExpected = spy.calledOnceWithExactly(fakeData)
 
@@ -100,7 +104,9 @@ describe('component lifecycle', () => {
       return {} as any
     })
 
-    enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
+    enzyme.shallow(
+      <KeyResultSectionTimeline keyResultID={faker.random.uuid()} scrollTarget="any" />,
+    )
 
     expect(spy.notCalled).toEqual(true)
   })
@@ -120,7 +126,9 @@ describe('component interactions', () => {
     const spy = sinon.spy()
     sinon.stub(recoil, 'useResetRecoilState').returns(spy)
 
-    const wrapper = enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
+    const wrapper = enzyme.shallow(
+      <KeyResultSectionTimeline keyResultID={faker.random.uuid()} scrollTarget="any" />,
+    )
 
     const content = wrapper.find('KeyResultSectionTimelineContent')
     content.simulate('entryDelete')
@@ -140,7 +148,9 @@ describe('component interactions', () => {
 
     sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
 
-    const wrapper = enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
+    const wrapper = enzyme.shallow(
+      <KeyResultSectionTimeline keyResultID={faker.random.uuid()} scrollTarget="any" />,
+    )
 
     const content = wrapper.find('KeyResultSectionTimelineContent')
     content.simulate('entryDelete')
@@ -165,7 +175,9 @@ describe('component interactions', () => {
 
     sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
 
-    const wrapper = enzyme.shallow(<KeyResultSectionTimeline keyResultID={faker.random.uuid()} />)
+    const wrapper = enzyme.shallow(
+      <KeyResultSectionTimeline keyResultID={faker.random.uuid()} scrollTarget="any" />,
+    )
 
     const content = wrapper.find('KeyResultSectionTimelineContent')
     content.simulate('entryDelete')
@@ -190,7 +202,11 @@ describe('component interactions', () => {
     sinon.stub(recoil, 'useResetRecoilState').returns(sinon.fake())
 
     const wrapper = enzyme.shallow(
-      <KeyResultSectionTimeline keyResultID={faker.random.uuid()} onEntryDelete={spy} />,
+      <KeyResultSectionTimeline
+        keyResultID={faker.random.uuid()}
+        scrollTarget="any"
+        onEntryDelete={spy}
+      />,
     )
 
     const content = wrapper.find('KeyResultSectionTimelineContent')
