@@ -38,7 +38,7 @@ const KeyResultDrawer = ({ scope }: KeyResultDrawerProperties) => {
   const isOpen = Boolean(keyResultID)
 
   return (
-    <Drawer isOpen={isOpen} size="sm" autoFocus={false} onClose={handleClose}>
+    <Drawer isOpen={isOpen} size="md" autoFocus={false} onClose={handleClose}>
       <DrawerOverlay>
         {isOpen && typeof keyResultID !== 'undefined' && (
           <KeyResultDrawerContent keyResultID={keyResultID} scope={scope} />

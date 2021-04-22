@@ -7,6 +7,10 @@
     "defaultMessage": "Clique aqui para comentar :)",
     "description": "This text is displayed in our comment input in our key result drawer when it has no value"
   },
+  "+CyB1n": {
+    "defaultMessage": "Data Limite",
+    "description": "The heading text of the goal section in our key-result drawer"
+  },
   "+G9goh": {
     "defaultMessage": "Ver mais...",
     "description": "This text is displayed in the button that expands a truncated text"
@@ -19,6 +23,10 @@
     "defaultMessage": "Um ícone com uma série de traços verticais. Clique e arraste ele para reordenar seus resultados chave",
     "description": "The alternative text explaining our reorder icon"
   },
+  "+XSqc3": {
+    "defaultMessage": "Última atualização",
+    "description": "This prefix is displayed as default in our last updated component"
+  },
   "+r3NGz": {
     "defaultMessage": "Progresso",
     "description": "The title of the second column in our body table at the teams overview report in our dashboard"
@@ -30,6 +38,14 @@
   "/2GFGI": {
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
+  },
+  "/50OpL": {
+    "defaultMessage": "Meta",
+    "description": "The heading text of the goal section in our key-result drawer"
+  },
+  "/DyxUT": {
+    "defaultMessage": "Último check-in",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
   "/K30xB": {
     "defaultMessage": "Você não tem nenhum resultado-chave",
@@ -90,6 +106,10 @@
   "1HBRw6": {
     "defaultMessage": "Nenhuma atualização recente",
     "description": "This label is displayed if we do not have any update date to display"
+  },
+  "1Ve0Ag": {
+    "defaultMessage": "Um ícone de um calendário, indicando que essa é a data limite do seu resultado-chave",
+    "description": "The description text for the key-result section goal icon"
   },
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
@@ -195,6 +215,10 @@
     "defaultMessage": "Uma seta para cima, indicando que o menu de seleção de ciclos está aberto",
     "description": "This message is displayed to the user screen reader when the year select menu is opened"
   },
+  "8693wE": {
+    "defaultMessage": "Último check-in",
+    "description": "This message is displayed alongisde with the header, as the prefix for our last update text component"
+  },
   "89ola3": {
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
@@ -242,10 +266,6 @@
   "CQAFfW": {
     "defaultMessage": "Se tudo continuar assim, esperamos alcançar o resultado",
     "description": "This text explains our tag to the user"
-  },
-  "CW+HBw": {
-    "defaultMessage": "Check-in",
-    "description": "This message is displayed as a label button to open the check-in form when the user is scrolling in our key result drawer"
   },
   "CWzl6a": {
     "defaultMessage": "Nenhuma informação",
@@ -300,7 +320,7 @@
     "description": "The alternative text explaining our arrow right icon"
   },
   "GHeIgq": {
-    "defaultMessage": "Faz tempo que ninguém interage nesse resultado-chave. Que tal compartilhar uma informação relevante com o time? :)",
+    "defaultMessage": "Faz um tempo que ninguém interage aqui, o que você de comentar um pouco sobre o progresso desse resultado-chave?",
     "description": "This text gives more details regarding our empty state card in the key result drawer"
   },
   "GHu/pe": {
@@ -606,6 +626,10 @@
   "YxNkP6": {
     "defaultMessage": "Check-in",
     "description": "This text is displayed in some places in our timeline card, showing the type of the card in a friendly name"
+  },
+  "YzN13f": {
+    "defaultMessage": "Um ícone de um alvo, indicando que essa é a meta do seu resultado-chave",
+    "description": "The description text for the key-result section goal icon"
   },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
@@ -923,6 +947,10 @@
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
   },
+  "sObsR1": {
+    "defaultMessage": "{unit, select, fallback {em {date}} other {{date}}}",
+    "description": "This text displays the latest report status for a given component, using a given date logic"
+  },
   "sYGIlp": {
     "defaultMessage": "Minha conta",
     "description": "This label defines the text on the first menu section option"
@@ -990,10 +1018,6 @@
   "xXxjVp": {
     "defaultMessage": "Existe um fator externo impedindo o progresso desse resultado-chave",
     "description": "This text explains our tag to the user"
-  },
-  "xkN783": {
-    "defaultMessage": "Última atualização {unit, select, fallback {em {date}} other {{date}}}",
-    "description": "This message displays the latest report status for a given component"
   },
   "yq7/PT": {
     "defaultMessage": "Artigos de suporte",

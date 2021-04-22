@@ -22,6 +22,7 @@ export interface AlertProperties {
   variant?: AlertProps['variant']
   wrapperPadding?: BoxProps['p']
   wrapperPaddingBottom?: BoxProps['pb']
+  wrapperPaddingTop?: BoxProps['pt']
 }
 
 const Alert = ({
@@ -33,6 +34,7 @@ const Alert = ({
   variant,
   wrapperPadding,
   wrapperPaddingBottom,
+  wrapperPaddingTop,
   autoHide,
   autoHideTTLInMilliseconds,
 }: AlertProperties) => {
@@ -42,7 +44,11 @@ const Alert = ({
 
   return (
     <Collapse in={isOpen}>
-      <Box p={wrapperPadding} pb={wrapperPaddingBottom ?? wrapperPadding}>
+      <Box
+        p={wrapperPadding}
+        pb={wrapperPaddingBottom ?? wrapperPadding}
+        pt={wrapperPaddingTop ?? wrapperPadding}
+      >
         <ChakraAlert status={status} variant={variant}>
           <Flex direction="column" gridGap={1} color="black.700">
             <AlertTitle fontSize="md">{title}</AlertTitle>

@@ -2,6 +2,10 @@ query GET_KEY_RESULT_WITH_ID($id: ID!, $scope: Scope!) {
   keyResult(id: $id) {
     id
     title
+    isOutdated
+    description
+    goal
+    format
     keyResultCheckIns(first: 1) {
       policy(scope: $scope) {
         create
@@ -10,6 +14,21 @@ query GET_KEY_RESULT_WITH_ID($id: ID!, $scope: Scope!) {
     keyResultComments(first: 1) {
       policy(scope: $scope) {
         create
+      }
+    }
+    latestKeyResultCheckIn {
+      id
+      createdAt
+    }
+    owner {
+      fullName
+      role
+      picture
+    }
+    objective {
+      title
+      cycle {
+        dateEnd
       }
     }
   }

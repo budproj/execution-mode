@@ -1,12 +1,19 @@
 import { defineMessages } from 'react-intl'
 
-type LastUpdateTextMessage = 'lastUpdateAt' | 'author' | 'emptyStateMessage'
+type LastUpdateTextMessage = 'prefix' | 'date' | 'author' | 'emptyStateMessage'
 
 export default defineMessages<LastUpdateTextMessage>({
-  lastUpdateAt: {
-    defaultMessage: 'Última atualização {unit, select, fallback {em {date}} other {{date}}}',
-    id: 'xkN783',
-    description: 'This message displays the latest report status for a given component',
+  prefix: {
+    defaultMessage: 'Última atualização',
+    id: '+XSqc3',
+    description: 'This prefix is displayed as default in our last updated component',
+  },
+
+  date: {
+    defaultMessage: '{unit, select, fallback {em {date}} other {{date}}}',
+    id: 'sObsR1',
+    description:
+      'This text displays the latest report status for a given component, using a given date logic',
   },
 
   author: {

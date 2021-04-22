@@ -1,4 +1,4 @@
-import { Avatar, Flex, Text, SkeletonCircle, Skeleton } from '@chakra-ui/react'
+import { Avatar, Flex, Text, SkeletonCircle, Skeleton, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -6,6 +6,8 @@ import { useRecoilValue } from 'recoil'
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
+
+import { KeyResultSectionHeading } from '../Heading/wrapper'
 
 import messages from './messages'
 
@@ -23,16 +25,22 @@ const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties)
 
   return (
     <Flex gridGap={2} direction="column">
-      <Text fontWeight={500} color="black.600">
-        {intl.formatMessage(messages.label)}
-      </Text>
+      <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
       <Flex alignItems="center" gridGap={2}>
-        <SkeletonCircle isLoaded={isOwnerLoaded}>
-          <Avatar name={owner?.fullName} src={owner?.picture} size="sm" />
+        <SkeletonCircle isLoaded={isOwnerLoaded} w={10} h={10}>
+          <Avatar name={owner?.fullName} src={owner?.picture} w={10} h={10} />
         </SkeletonCircle>
-        <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 150, 24)}>
-          <Text color="black.500">{owner?.fullName}</Text>
-        </Skeleton>
+        <Stack spacing={0}>
+          <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 150, 24)}>
+            <Text color="black.900">{owner?.fullName}</Text>
+          </Skeleton>
+
+          <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 200, 19)}>
+            <Text color="gray.400" fontSize="sm">
+              {owner?.role}
+            </Text>
+          </Skeleton>
+        </Stack>
       </Flex>
     </Flex>
   )

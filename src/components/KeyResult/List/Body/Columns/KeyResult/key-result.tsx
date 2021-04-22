@@ -1,5 +1,6 @@
 import { Flex, Box, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
@@ -10,6 +11,8 @@ import KeyResultListBodyColumnBase, {
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+
+import messages from './messages'
 
 export interface KeyResultListBodyColumnKeyResultProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -34,6 +37,7 @@ const KeyResultListBodyColumnKeyResult = ({
   const title = useRecoilValue(titleSelector(id))
   const isOutdated = useRecoilValue(isOutdatedSelector(id))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(id))
+  const intl = useIntl()
 
   const isKeyResultLoaded = Boolean(title)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
@@ -67,7 +71,11 @@ const KeyResultListBodyColumnKeyResult = ({
               mt={isKeyResultLoaded ? 'inherit' : '4px'}
               isLoaded={isKeyResultLoaded}
             >
-              <LastUpdateText date={lastUpdateDate} color={isOutdated ? 'red.500' : 'gray.300'} />
+              <LastUpdateText
+                date={lastUpdateDate}
+                color={isOutdated ? 'red.500' : 'gray.300'}
+                prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
+              />
             </SkeletonText>
           )}
         </Box>

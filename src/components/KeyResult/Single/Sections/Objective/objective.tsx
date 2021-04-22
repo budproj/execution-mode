@@ -8,6 +8,8 @@ import { Stack as StackIcon } from 'src/components/Icon'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
+import { KeyResultSectionHeading } from '../Heading/wrapper'
+
 import messages from './messages'
 
 export interface KeyResultSectionObjectiveProperties {
@@ -24,28 +26,26 @@ const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectivePro
 
   return (
     <Flex gridGap={2} direction="column">
-      <Text fontWeight={500} color="black.600">
-        {intl.formatMessage(messages.label)}
-      </Text>
+      <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
       <Flex alignItems="center" gridGap={2}>
         <SkeletonCircle isLoaded={isObjectiveLoaded}>
           <Box
             w={8}
             h={8}
-            bg="black.50"
+            bg="gray.50"
             borderRadius="full"
             display="flex"
             alignItems="center"
             justifyContent="center"
           >
-            <StackIcon desc={intl.formatMessage(messages.stackIconDesc)} fill="black.300" />
+            <StackIcon desc={intl.formatMessage(messages.stackIconDesc)} fill="gray.400" />
           </Box>
         </SkeletonCircle>
         <Skeleton
           isLoaded={isObjectiveLoaded}
           {...buildSkeletonMinSize(isObjectiveLoaded, 250, 24)}
         >
-          <Text color="black.500">{objective?.title}</Text>
+          <Text color="black.900">{objective?.title}</Text>
         </Skeleton>
       </Flex>
     </Flex>

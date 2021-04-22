@@ -2,23 +2,20 @@ import { useQuery } from '@apollo/client'
 import { Flex, Heading } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 import KeyResultSectionTimelineContent from './Content'
-import { PERFECT_SCROLLBAR_ID } from './constants'
 import messages from './messages'
 import queries from './queries.gql'
 import KeyResultSectionTimelineSkeleton from './skeleton'
 
 export interface KeyResultSectionTimelineProperties {
   limit: number
+  scrollTarget: string
   keyResultID?: KeyResult['id']
-  onScrollY?: () => void
-  onScrollYReachStart?: () => void
   onEntryDelete?: (entryType: string) => void
 }
 
@@ -31,8 +28,7 @@ const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 const KeyResultSectionTimeline = ({
   keyResultID,
   limit,
-  onScrollY,
-  onScrollYReachStart,
+  scrollTarget,
   onEntryDelete,
 }: KeyResultSectionTimelineProperties) => {
   const [hasMore, setHasMore] = useState(false)
@@ -81,29 +77,23 @@ const KeyResultSectionTimeline = ({
   }
 
   return (
-    <PerfectScrollbar
-      id={PERFECT_SCROLLBAR_ID}
-      options={{ suppressScrollX: true }}
-      onScrollY={onScrollY}
-      onYReachStart={onScrollYReachStart}
-    >
-      <Flex direction="column" gridGap={4} p={4}>
-        <Heading as="h3" fontSize="sm" fontWeight={500} color="gray.300">
-          {intl.formatMessage(messages.title)}
-        </Heading>
-        {keyResultID && hasTimeline ? (
-          <KeyResultSectionTimelineContent
-            keyResultID={keyResultID}
-            limit={limit}
-            initialHasMore={hasMore}
-            fetchMore={fetchMore}
-            onEntryDelete={handleEntryDelete}
-          />
-        ) : (
-          <KeyResultSectionTimelineSkeleton />
-        )}
-      </Flex>
-    </PerfectScrollbar>
+    <Flex direction="column" gridGap={4}>
+      <Heading as="h3" fontSize="sm" fontWeight={500} color="gray.300">
+        {intl.formatMessage(messages.title)}
+      </Heading>
+      {keyResultID && hasTimeline ? (
+        <KeyResultSectionTimelineContent
+          keyResultID={keyResultID}
+          limit={limit}
+          initialHasMore={hasMore}
+          fetchMore={fetchMore}
+          scrollTarget={scrollTarget}
+          onEntryDelete={handleEntryDelete}
+        />
+      ) : (
+        <KeyResultSectionTimelineSkeleton />
+      )}
+    </Flex>
   )
 }
 
