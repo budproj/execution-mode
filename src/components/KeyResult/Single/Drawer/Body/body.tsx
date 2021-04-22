@@ -19,9 +19,10 @@ import { PERFECT_SCROLLBAR_ID } from './constants'
 
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
+  isLoading?: boolean
 }
 
-const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => {
+const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => {
   const [isScrolling, setIsScrolling] = useRecoilState(keyResultDrawerIsScrolling(keyResultID))
   const setIntlDeletedEntryType = useSetRecoilState(
     keyResultDrawerIntlDeletedEntryType(keyResultID),
@@ -53,7 +54,7 @@ const KeyResultDrawerBody = ({ keyResultID }: KeyResultDrawerBodyProperties) => 
       <Stack flexGrow={1} overflow="auto" p={4} pt={0} gridGap={4}>
         <KeyResultSectionTitle keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
-        <KeyResultSectionDescription keyResultID={keyResultID} />
+        <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
 
         <KeyResultSectionTimeline
           keyResultID={keyResultID}

@@ -54,7 +54,7 @@ const KeyResultDrawerContent = ({ keyResultID, scope }: KeyResultDrawerContentPr
     <DrawerContent pt={4}>
       <Flex direction="column" minH="100%" maxH="100%">
         <KeyResultDrawerHeader keyResultID={keyResultID} />
-        <KeyResultDrawerBody keyResultID={keyResultID} />
+        <KeyResultDrawerBody keyResultID={keyResultID} isLoading={loading} />
         <KeyResultDrawerFooter keyResultID={keyResultID} />
       </Flex>
     </DrawerContent>
