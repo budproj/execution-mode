@@ -60,7 +60,6 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
         <KeyResultSectionTitle keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
-        <Divider borderColor="gray.100" />
 
         <Stack direction="row">
           <Box flexGrow={1}>
