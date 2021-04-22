@@ -5,6 +5,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import {
   KeyResultSectionDescription,
+  KeyResultSectionObjective,
   KeyResultSectionTimeline,
   KeyResultSectionTitle,
 } from 'src/components/KeyResult/Single/Sections'
@@ -54,10 +55,11 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
       onScrollY={handleScrollY}
       onYReachStart={handleScrollYReachStart}
     >
-      <Stack flexGrow={1} overflow="auto" p={4} pt={0} gridGap={4}>
+      <Stack flexGrow={1} overflow="auto" p={4} pt={0} gridGap={2}>
         <KeyResultSectionTitle keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
+        <Divider borderColor="gray.100" />
 
         <Stack direction="row">
           <Box flexGrow={1}>
@@ -68,6 +70,10 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
             <KeyResultSingleSectionDeadline keyResultID={keyResultID} isLoading={isLoading} />
           </Box>
         </Stack>
+        <Divider borderColor="gray.100" />
+
+        <KeyResultSectionObjective keyResultID={keyResultID} />
+        <Divider borderColor="gray.100" />
 
         <KeyResultSectionTimeline
           keyResultID={keyResultID}

@@ -21,6 +21,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!, $scope: Scope!) {
       createdAt
     }
     objective {
+      title
       cycle {
         dateEnd
       }
