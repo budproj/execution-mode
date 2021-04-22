@@ -1,4 +1,4 @@
-import { Divider, Stack } from '@chakra-ui/react'
+import { Box, Divider, Stack } from '@chakra-ui/react'
 import React from 'react'
 import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -15,6 +15,7 @@ import {
   keyResultDrawerIsScrolling,
 } from 'src/state/recoil/key-result/drawer'
 
+import { KeyResultSingleSectionDeadline } from '../../Sections/Deadline/wrapper'
 import { KeyResultSingleSectionGoal } from '../../Sections/Goal/wrapper'
 
 import { PERFECT_SCROLLBAR_ID } from './constants'
@@ -57,7 +58,16 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
         <KeyResultSectionTitle keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
-        <KeyResultSingleSectionGoal keyResultID={keyResultID} isLoading={isLoading} />
+
+        <Stack direction="row">
+          <Box flexGrow={1}>
+            <KeyResultSingleSectionGoal keyResultID={keyResultID} isLoading={isLoading} />
+          </Box>
+
+          <Box flexGrow={1}>
+            <KeyResultSingleSectionDeadline keyResultID={keyResultID} isLoading={isLoading} />
+          </Box>
+        </Stack>
 
         <KeyResultSectionTimeline
           keyResultID={keyResultID}

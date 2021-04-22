@@ -7,6 +7,10 @@
     "defaultMessage": "Clique aqui para comentar :)",
     "description": "This text is displayed in our comment input in our key result drawer when it has no value"
   },
+  "+CyB1n": {
+    "defaultMessage": "Data Limite",
+    "description": "The heading text of the goal section in our key-result drawer"
+  },
   "+G9goh": {
     "defaultMessage": "Ver mais...",
     "description": "This text is displayed in the button that expands a truncated text"
@@ -102,6 +106,10 @@
   "1HBRw6": {
     "defaultMessage": "Nenhuma atualização recente",
     "description": "This label is displayed if we do not have any update date to display"
+  },
+  "1Ve0Ag": {
+    "defaultMessage": "Um ícone de um calendário, indicando que essa é a data limite do seu resultado-chave",
+    "description": "The description text for the key-result section goal icon"
   },
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",

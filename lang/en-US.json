@@ -1062,5 +1062,13 @@
   "YzN13f": {
     "defaultMessage": "A bullseye icon, showing that this is the goal of your key-result",
     "description": "The description text for the key-result section goal icon"
+  },
+  "+CyB1n": {
+    "defaultMessage": "Deadline",
+    "description": "The heading text of the goal section in our key-result drawer"
+  },
+  "1Ve0Ag": {
+    "defaultMessage": "A calendar icon, it suggests that the content in this section is regarding your key-result deadline",
+    "description": "The description text for the key-result section goal icon"
   }
 }
