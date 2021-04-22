@@ -1,4 +1,4 @@
-import { Flex, SkeletonText } from '@chakra-ui/react'
+import { Divider, Flex, SkeletonText } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -25,18 +25,22 @@ const KeyResultSectionDescription = ({
   const intl = useIntl()
   const description = useRecoilValue(descriptionSelector(keyResultID))
 
-  const hasData = typeof description !== 'undefined'
+  const hasData = Boolean(description)
   isLoading ??= hasData
 
   return hasData || isLoading ? (
-    <Flex gridGap={2} direction="column">
-      <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
-      <Flex alignItems="center" gridGap={2}>
-        <SkeletonText isLoaded={!isLoading} noOfLines={5} spacing={2} w="100%">
-          <ExpandableText fontSize="md" color="black.800" text={description} />
-        </SkeletonText>
+    <>
+      <Flex gridGap={2} direction="column">
+        <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
+        <Flex alignItems="center" gridGap={2}>
+          <SkeletonText isLoaded={!isLoading} noOfLines={5} spacing={2} w="100%">
+            <ExpandableText fontSize="md" color="black.800" text={description ?? ''} />
+          </SkeletonText>
+        </Flex>
       </Flex>
-    </Flex>
+
+      <Divider borderColor="gray.100" />
+    </>
   ) : // eslint-disable-next-line unicorn/no-null
   null
 }
