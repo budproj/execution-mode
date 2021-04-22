@@ -6,6 +6,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 import {
   KeyResultSectionDescription,
   KeyResultSectionObjective,
+  KeyResultSectionOwner,
   KeyResultSectionTimeline,
   KeyResultSectionTitle,
 } from 'src/components/KeyResult/Single/Sections'
@@ -70,6 +71,9 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
             <KeyResultSingleSectionDeadline keyResultID={keyResultID} isLoading={isLoading} />
           </Box>
         </Stack>
+        <Divider borderColor="gray.100" />
+
+        <KeyResultSectionOwner keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
 
         <KeyResultSectionObjective keyResultID={keyResultID} />
