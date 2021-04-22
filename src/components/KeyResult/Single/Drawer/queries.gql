@@ -4,6 +4,8 @@ query GET_KEY_RESULT_WITH_ID($id: ID!, $scope: Scope!) {
     title
     isOutdated
     description
+    goal
+    format
     keyResultCheckIns(first: 1) {
       policy(scope: $scope) {
         create

@@ -1054,5 +1054,13 @@
   "sObsR1": {
     "defaultMessage": "{unit, select, fallback {at {date}} other {{date}}}",
     "description": "This text displays the latest report status for a given component, using a given date logic"
+  },
+  "/50OpL": {
+    "defaultMessage": "Goal",
+    "description": "The heading text of the goal section in our key-result drawer"
+  },
+  "YzN13f": {
+    "defaultMessage": "A bullseye icon, showing that this is the goal of your key-result",
+    "description": "The description text for the key-result section goal icon"
   }
 }

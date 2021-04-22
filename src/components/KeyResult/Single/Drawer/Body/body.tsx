@@ -15,6 +15,8 @@ import {
   keyResultDrawerIsScrolling,
 } from 'src/state/recoil/key-result/drawer'
 
+import { KeyResultSingleSectionGoal } from '../../Sections/Goal/wrapper'
+
 import { PERFECT_SCROLLBAR_ID } from './constants'
 
 export interface KeyResultDrawerBodyProperties {
@@ -55,6 +57,7 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
         <KeyResultSectionTitle keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
+        <KeyResultSingleSectionGoal keyResultID={keyResultID} isLoading={isLoading} />
 
         <KeyResultSectionTimeline
           keyResultID={keyResultID}

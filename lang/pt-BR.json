@@ -35,6 +35,10 @@
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
   },
+  "/50OpL": {
+    "defaultMessage": "Meta",
+    "description": "The heading text of the goal section in our key-result drawer"
+  },
   "/DyxUT": {
     "defaultMessage": "Último check-in",
     "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
@@ -614,6 +618,10 @@
   "YxNkP6": {
     "defaultMessage": "Check-in",
     "description": "This text is displayed in some places in our timeline card, showing the type of the card in a friendly name"
+  },
+  "YzN13f": {
+    "defaultMessage": "Um ícone de um alvo, indicando que essa é a meta do seu resultado-chave",
+    "description": "The description text for the key-result section goal icon"
   },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",

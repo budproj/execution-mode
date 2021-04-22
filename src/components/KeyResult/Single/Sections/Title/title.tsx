@@ -34,7 +34,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
         <KeyResultDynamicIcon title={title} iconSize={4} boxSize={10} borderRadius={8} />
       </Skeleton>
 
-      <Stack>
+      <Stack spacing={0}>
         <Skeleton isLoaded={isLoaded}>
           <ExpandableText
             color="black.900"
