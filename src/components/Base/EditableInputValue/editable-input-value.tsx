@@ -58,7 +58,8 @@ const EditableInputValue = ({
   )
   const [currentValue, setCurrentValue] = useState(value ?? customFallbackValue)
 
-  const defaultColor = currentValue && !isSubmitting ? 'black.900' : 'gray.400'
+  const defaultColor =
+    currentValue === customFallbackValue || isSubmitting ? 'gray.400' : 'black.900'
   const isWithinMaxCharacters = maxCharacters ? expandedValue.length <= maxCharacters : true
 
   const handleHover = () => {
