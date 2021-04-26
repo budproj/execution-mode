@@ -59,6 +59,7 @@ const EditableInputValue = ({
   const [currentValue, setCurrentValue] = useState(value ?? customFallbackValue)
 
   const defaultColor = currentValue && !isSubmitting ? 'black.900' : 'gray.400'
+  const isWithinMaxCharacters = maxCharacters ? expandedValue.length <= maxCharacters : true
 
   const handleHover = () => {
     if (!isHovering) setIsHovering(true)
@@ -89,8 +90,22 @@ const EditableInputValue = ({
   }
 
   useEffect(() => {
-    setCurrentValue(isExpanded ? expandedValue : truncatedValue)
-  }, [isExpanded, expandedValue, truncatedValue])
+    setCurrentValue(isWithinMaxCharacters || isExpanded ? expandedValue : truncatedValue)
+  }, [isExpanded, expandedValue, truncatedValue, isWithinMaxCharacters])
+
+  useEffect(() => {
+    setExpandedValue(value ?? (customFallbackValue as string))
+    setTruncatedValue(truncateValue(value, maxCharacters) ?? customFallbackValue)
+    setIsExpanded(!isTruncated)
+  }, [
+    value,
+    setExpandedValue,
+    setTruncatedValue,
+    setIsExpanded,
+    customFallbackValue,
+    maxCharacters,
+    isTruncated,
+  ])
 
   // TECH DEBT: Until https://github.com/chakra-ui/chakra-ui/issues/3497 is fixed we can't update
   // Editable defaultValue prop. So, we must conditional render it
@@ -136,7 +151,7 @@ const EditableInputValue = ({
                   />
                 </Stack>
 
-                {isTruncated && !isEditing && (
+                {isTruncated && !isWithinMaxCharacters && !isEditing && (
                   <Button
                     p={0}
                     maxH={0}

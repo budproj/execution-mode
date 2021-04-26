@@ -40,7 +40,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
             value={title}
             isLoaded={isLoaded}
             isSubmitting={false}
-            maxCharacters={5}
+            maxCharacters={100}
             previewProperties={{
               fontSize: 'xl',
               fontWeight: 700,
