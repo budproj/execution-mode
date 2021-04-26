@@ -28,6 +28,7 @@ export interface EditableInputValueProperties {
   previewProperties?: EditablePreviewProps
   maxCharacters?: number
   isTruncated?: boolean
+  isDisabled?: boolean
 }
 
 const truncateValue = (value?: string | null, maxCharacters?: number): string =>
@@ -44,6 +45,7 @@ const EditableInputValue = ({
   previewProperties,
   maxCharacters,
   isTruncated,
+  isDisabled,
 }: EditableInputValueProperties) => {
   const intl = useIntl()
 
@@ -118,7 +120,7 @@ const EditableInputValue = ({
       {isLoaded ? (
         <Editable
           value={currentValue}
-          isDisabled={isSubmitting}
+          isDisabled={isDisabled ?? isSubmitting}
           onSubmit={handleSubmit}
           onEdit={handleEdit}
           onChange={handleChange}

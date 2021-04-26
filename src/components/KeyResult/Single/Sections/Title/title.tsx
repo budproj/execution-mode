@@ -37,10 +37,11 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       <Stack spacing={2} flexGrow={1}>
         <Skeleton isLoaded={isLoaded}>
           <EditableInputValue
+            isDisabled
             value={title}
             isLoaded={isLoaded}
             isSubmitting={false}
-            maxCharacters={100}
+            maxCharacters={220}
             previewProperties={{
               fontSize: 'xl',
               fontWeight: 700,
