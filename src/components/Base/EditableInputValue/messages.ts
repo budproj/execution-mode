@@ -1,6 +1,11 @@
 import { defineMessages } from 'react-intl'
 
-type EditableInputValueMessage = 'fallbackValue' | 'editableIconDesc' | 'editableIconTitle'
+type EditableInputValueMessage =
+  | 'fallbackValue'
+  | 'editableIconDesc'
+  | 'editableIconTitle'
+  | 'collapseButton'
+  | 'expandButton'
 
 export default defineMessages<EditableInputValueMessage>({
   fallbackValue: {
@@ -21,5 +26,17 @@ export default defineMessages<EditableInputValueMessage>({
     defaultMessage: 'Clique aqui para editar esse campo',
     id: 'WKevJy',
     description: 'The title for our pen icon. This message is displayed in our UI as a tooltip',
+  },
+
+  expandButton: {
+    defaultMessage: 'Ver mais...',
+    id: '+G9goh',
+    description: 'This text is displayed in the button that expands a truncated text',
+  },
+
+  collapseButton: {
+    defaultMessage: 'Ver menos...',
+    id: 'I+MSuS',
+    description: 'This text is displayed in the button that collapses the truncated text',
   },
 })

@@ -1,9 +1,9 @@
-import { Flex, Heading, Skeleton, SkeletonText, Stack } from '@chakra-ui/react'
+import { Flex, Skeleton, SkeletonText, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import ExpandableText from 'src/components/Base/ExpandableText'
+import EditableInputValue from 'src/components/Base/EditableInputValue'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
@@ -34,14 +34,22 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
         <KeyResultDynamicIcon title={title} iconSize={4} boxSize={10} borderRadius={8} />
       </Skeleton>
 
-      <Stack spacing={0}>
+      <Stack spacing={2} flexGrow={1}>
         <Skeleton isLoaded={isLoaded}>
-          <ExpandableText
-            color="black.900"
-            fontSize="xl"
-            maxCollapsedLength={100}
-            Wrapper={Heading}
-            text={title}
+          <EditableInputValue
+            value={title}
+            isLoaded={isLoaded}
+            isSubmitting={false}
+            maxCharacters={5}
+            previewProperties={{
+              fontSize: 'xl',
+              fontWeight: 700,
+              p: 0,
+              as: 'h1',
+            }}
+            onSubmit={(value: string) => {
+              console.log(value, 'tag')
+            }}
           />
         </Skeleton>
 
