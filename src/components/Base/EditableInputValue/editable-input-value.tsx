@@ -63,6 +63,7 @@ const EditableInputValue = ({
   const defaultColor =
     currentValue === customFallbackValue || isSubmitting ? 'gray.400' : 'black.900'
   const isWithinMaxCharacters = maxCharacters ? expandedValue.length <= maxCharacters : true
+  const isLocked = isDisabled ?? isSubmitting
 
   const handleHover = () => {
     if (!isHovering) setIsHovering(true)
@@ -120,7 +121,7 @@ const EditableInputValue = ({
       {isLoaded ? (
         <Editable
           value={currentValue}
-          isDisabled={isDisabled ?? isSubmitting}
+          isDisabled={isLocked}
           onSubmit={handleSubmit}
           onEdit={handleEdit}
           onChange={handleChange}
@@ -132,22 +133,22 @@ const EditableInputValue = ({
                   direction="row"
                   spacing={2}
                   alignItems="center"
-                  cursor={isSubmitting ? 'auto' : 'pointer'}
+                  cursor={isLocked ? 'auto' : 'pointer'}
                   onMouseEnter={handleHover}
                   onMouseLeave={handleStopHover}
-                  onClick={isSubmitting ? undefined : onEdit}
+                  onClick={isLocked ? undefined : onEdit}
                 >
                   <EditablePreview
                     fontSize="md"
-                    color={isHovering && !isSubmitting ? 'brand.500' : defaultColor}
+                    color={isHovering && !isLocked ? 'brand.500' : defaultColor}
                     fontWeight={400}
-                    cursor={isSubmitting ? 'auto' : 'pointer'}
+                    cursor={isLocked ? 'auto' : 'pointer'}
                     {...previewProperties}
                   />
                   <PenIcon
                     fill="brand.400"
-                    opacity={isHovering && !isEditing && !isSubmitting ? 1 : 0}
-                    display={isEditing || isSubmitting ? 'none' : 'inherit'}
+                    opacity={isHovering && !isEditing && !isLocked ? 1 : 0}
+                    display={isEditing || isLocked ? 'none' : 'inherit'}
                     transition="opacity .2s ease-out"
                     desc={intl.formatMessage(messages.editableIconDesc)}
                     title={intl.formatMessage(messages.editableIconTitle)}
