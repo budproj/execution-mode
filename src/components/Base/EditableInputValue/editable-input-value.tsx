@@ -8,6 +8,7 @@ import {
   Box,
   EditablePreviewProps,
   Button,
+  useTheme,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -59,6 +60,7 @@ const EditableInputValue = ({
     truncateValue(value, maxCharacters) ?? customFallbackValue,
   )
   const [currentValue, setCurrentValue] = useState(value ?? customFallbackValue)
+  const { components } = useTheme()
 
   const defaultColor =
     currentValue === customFallbackValue || isSubmitting ? 'gray.400' : 'black.900'
@@ -111,8 +113,15 @@ const EditableInputValue = ({
     isTruncated,
   ])
 
-  // TECH DEBT: Until https://github.com/chakra-ui/chakra-ui/issues/3497 is fixed we can't update
-  // Editable defaultValue prop. So, we must conditional render it
+  const isDisableFix = isDisabled
+    ? {
+        color: previewProperties?.color ?? defaultColor,
+        fontSize: previewProperties?.fontSize ?? 'md',
+        fontWeight: previewProperties?.fontWeight ?? 400,
+        p: previewProperties?.p,
+      }
+    : {}
+
   return (
     <Skeleton
       isLoaded={isLoaded}
@@ -168,7 +177,10 @@ const EditableInputValue = ({
                 )}
               </Box>
 
-              <EditableInput />
+              <EditableInput
+                borderWidth={isDisabled ? 0 : components.Editable.baseStyle.input.borderWidth}
+                {...isDisableFix}
+              />
             </>
           )}
         </Editable>
