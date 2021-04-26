@@ -1,4 +1,4 @@
-mutation UPDATE_KEY_RESULT_TITLE($id: ID, $title: string) {
+mutation UPDATE_KEY_RESULT_TITLE($id: ID!, $title: String!) {
   updateKeyResult(id: $id, data: {
     title: $title
   }) {
