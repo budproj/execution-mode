@@ -27,6 +27,7 @@ export interface EditableTextAreaValueProperties {
   color?: TextProps['color']
   isTruncated?: boolean
   maxCharacters?: number
+  isDisabled?: boolean
 }
 
 const autoSelectAll = (event: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -45,6 +46,7 @@ const EditableTextAreaValue = ({
   color,
   isTruncated,
   maxCharacters,
+  isDisabled,
 }: EditableTextAreaValueProperties) => {
   isTruncated ??= Boolean(maxCharacters)
 
@@ -54,24 +56,26 @@ const EditableTextAreaValue = ({
 
   const fallbackValue = customFallbackValue ?? intl.formatMessage(messages.fallbackValue)
   const defaultColor = value && !isSubmitting ? color : 'gray.400'
+  const isLocked = isDisabled ?? isSubmitting
 
   const handleHover = () => {
-    if (!isHovering) setIsHovering(true)
+    if (!isHovering && !isLocked) setIsHovering(true)
   }
 
   const handleStopHover = () => {
-    if (isHovering) setIsHovering(false)
+    if (isHovering && !isLocked) setIsHovering(false)
   }
 
   const handleStartEdit = () => {
-    if (!isEditing) setIsEditing(true)
+    if (!isEditing && !isLocked) setIsEditing(true)
   }
 
   const handleStopEdit = () => {
-    if (isEditing) setIsEditing(false)
+    if (isEditing && !isLocked) setIsEditing(false)
   }
 
   const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
+    if (isLocked) return
     handleStopEdit()
     handleStopHover()
     if (onBlur) onBlur(event)
@@ -86,7 +90,7 @@ const EditableTextAreaValue = ({
 
   return (
     <SkeletonText noOfLines={skeletonNumberOfLines} spacing={2} isLoaded={isLoaded} w="full">
-      {isEditing ? (
+      {isEditing && !isLocked ? (
         <Textarea
           autoFocus
           defaultValue={value}
@@ -102,7 +106,7 @@ const EditableTextAreaValue = ({
           direction="row"
           spacing={2}
           alignItems="flex-start"
-          cursor={isSubmitting ? 'auto' : 'pointer'}
+          cursor={isLocked ? 'auto' : 'pointer'}
         >
           {isTruncated ? (
             <ExpandableText

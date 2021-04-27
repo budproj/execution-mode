@@ -69,6 +69,7 @@ const KeyResultSectionDescription = ({
               fontSize="md"
               color="black.800"
               maxCharacters={500}
+              isDisabled={!canUpdate}
               onBlur={handleSubmit}
             />
           </SkeletonText>
