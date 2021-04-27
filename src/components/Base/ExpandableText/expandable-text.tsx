@@ -12,14 +12,30 @@ export interface ExpandableTextProperties {
   color: TextProps['color']
   Wrapper?: ComponentType<TextProps>
   text?: string
+  fontWeight?: TextProps['fontWeight']
+  transition?: TextProps['transition']
+  py?: TextProps['py']
+  borderWidth?: TextProps['borderWidth']
+  borderColor?: TextProps['borderColor']
+  onClickPreview?: () => void
+  onMouseEnterPreview?: () => void
+  onMouseLeavePreview?: () => void
 }
 
 const ExpandableText = ({
   text,
   fontSize,
+  fontWeight,
   maxCollapsedLength,
   color,
   Wrapper = Text,
+  transition,
+  py,
+  borderWidth,
+  borderColor,
+  onClickPreview,
+  onMouseEnterPreview,
+  onMouseLeavePreview,
 }: ExpandableTextProperties) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const intl = useIntl()
@@ -43,10 +59,18 @@ const ExpandableText = ({
         <Wrapper
           key={uuidv5(paragraph, uuidv5.URL)}
           fontSize={fontSize}
+          fontWeight={fontWeight}
           color={color}
+          transition={transition}
+          py={py}
+          borderWidth={borderWidth}
+          borderColor={borderColor}
           _empty={{
             height: 4,
           }}
+          onClick={onClickPreview}
+          onMouseEnter={onMouseEnterPreview}
+          onMouseLeave={onMouseLeavePreview}
         >
           {paragraph}
         </Wrapper>

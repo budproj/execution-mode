@@ -3,7 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { ExpandableText } from 'src/components/Base'
+import { EditableTextAreaValue } from 'src/components/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
@@ -34,7 +34,14 @@ const KeyResultSectionDescription = ({
         <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
         <Flex alignItems="center" gridGap={2}>
           <SkeletonText isLoaded={!isLoading} noOfLines={5} spacing={2} w="100%">
-            <ExpandableText fontSize="md" color="black.800" text={description ?? ''} />
+            <EditableTextAreaValue
+              isTruncated
+              value={description}
+              isLoaded={!isLoading}
+              fontSize="md"
+              color="black.800"
+              maxCharacters={500}
+            />
           </SkeletonText>
         </Flex>
       </Flex>
