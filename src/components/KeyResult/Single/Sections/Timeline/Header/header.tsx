@@ -1,4 +1,4 @@
-import { DrawerHeader, useTheme, Collapse, Box } from '@chakra-ui/react'
+import { useTheme, Collapse, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -6,17 +6,21 @@ import { KeyResultSectionAddCheckIn } from 'src/components/KeyResult/Single/Sect
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { keyResultTimelineIntlDeletedEntryType } from 'src/state/recoil/key-result/timeline'
 import selectLatestTimelineEntry from 'src/state/recoil/key-result/timeline/latest-entry'
 
-import KeyResultDrawerDeleteAlert from './DeleteAlert'
+import KeyResultSectionTimelineDeleteAlert from './DeleteAlert'
 
-export interface KeyResultDrawerHeaderProperties {
+export interface KeyResultSectionTimelineHeaderProperties {
   keyResultID?: KeyResult['id']
 }
 
-const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties) => {
+const KeyResultSectionTimelineHeader = ({
+  keyResultID,
+}: KeyResultSectionTimelineHeaderProperties) => {
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const setLatestTimelineEntry = useSetRecoilState(selectLatestTimelineEntry(keyResultID))
+  const intlDeletedEntryType = useRecoilValue(keyResultTimelineIntlDeletedEntryType(keyResultID))
   const theme = useTheme()
 
   const checkInPolicy = keyResult?.keyResultCheckIns?.policy
@@ -28,19 +32,23 @@ const KeyResultDrawerHeader = ({ keyResultID }: KeyResultDrawerHeaderProperties)
   }
 
   return (
-    <DrawerHeader bg="white" position="sticky" top={0} zIndex={theme.zIndices.tooltip} p={0}>
-      <KeyResultDrawerDeleteAlert keyResultID={keyResultID} />
+    <Box
+      bg="white"
+      position="sticky"
+      top={0}
+      py={canUpdate || Boolean(intlDeletedEntryType) ? 4 : 0}
+      zIndex={theme.zIndices.tooltip}
+    >
+      <KeyResultSectionTimelineDeleteAlert keyResultID={keyResultID} />
 
       <Collapse unmountOnExit in={canUpdate} style={{ overflow: 'visible' }}>
-        <Box px={4} pb={4}>
-          <KeyResultSectionAddCheckIn
-            keyResultID={keyResultID}
-            onCompleted={handleCheckInCompleted}
-          />
-        </Box>
+        <KeyResultSectionAddCheckIn
+          keyResultID={keyResultID}
+          onCompleted={handleCheckInCompleted}
+        />
       </Collapse>
-    </DrawerHeader>
+    </Box>
   )
 }
 
-export default KeyResultDrawerHeader
+export default KeyResultSectionTimelineHeader

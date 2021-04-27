@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsDrawerDeleteAlertMessage = 'title' | 'description'
+type KeyResultsSectionTimelineDeleteAlertMessage = 'title' | 'description'
 
-export default defineMessages<KeyResultsDrawerDeleteAlertMessage>({
+export default defineMessages<KeyResultsSectionTimelineDeleteAlertMessage>({
   title: {
     defaultMessage: 'Você excluiu um {type}',
     id: 'goSPM7',

@@ -10,7 +10,6 @@ import selectKeyResult from 'src/state/recoil/key-result/key-result'
 
 import KeyResultDrawerBody from './Body'
 import KeyResultDrawerFooter from './Footer'
-import KeyResultDrawerHeader from './Header'
 import queries from './queries.gql'
 
 export interface KeyResultDrawerContentProperties {
@@ -51,9 +50,8 @@ const KeyResultDrawerContent = ({ keyResultID, scope }: KeyResultDrawerContentPr
   })
 
   return (
-    <DrawerContent pt={4}>
+    <DrawerContent>
       <Flex direction="column" minH="100%" maxH="100%">
-        <KeyResultDrawerHeader keyResultID={keyResultID} />
         <KeyResultDrawerBody keyResultID={keyResultID} isLoading={loading} />
         <KeyResultDrawerFooter keyResultID={keyResultID} />
       </Flex>

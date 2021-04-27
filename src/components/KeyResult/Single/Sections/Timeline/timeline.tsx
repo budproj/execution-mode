@@ -10,6 +10,7 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
 import KeyResultSectionTimelineContent from './Content'
+import KeyResultSectionTimelineHeader from './Header/header'
 import messages from './messages'
 import queries from './queries.gql'
 import KeyResultSectionTimelineSkeleton from './skeleton'
@@ -80,6 +81,8 @@ const KeyResultSectionTimeline = ({
 
   return (
     <Flex direction="column" gridGap={4}>
+      <KeyResultSectionTimelineHeader keyResultID={keyResultID} />
+
       <KeyResultSectionHeading>{intl.formatMessage(messages.title)} </KeyResultSectionHeading>
       {keyResultID && hasTimeline ? (
         <KeyResultSectionTimelineContent

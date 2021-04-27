@@ -36,7 +36,7 @@ const LastUpdateText = ({
     : intl.formatMessage(messages.emptyStateMessage)
 
   const message = filter([
-    prefix ?? intl.formatMessage(messages.prefix),
+    date && (prefix ?? intl.formatMessage(messages.prefix)),
     formattedDateMessage,
     author && intl.formatMessage(messages.author, { author }),
   ])

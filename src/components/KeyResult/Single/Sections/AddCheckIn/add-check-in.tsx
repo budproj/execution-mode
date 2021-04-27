@@ -1,7 +1,7 @@
 import { Skeleton, Button, Collapse, Flex, Heading } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
@@ -9,7 +9,6 @@ import { KeyResultSectionTimelineCardBase } from 'src/components/KeyResult/Singl
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
-import { keyResultDrawerIsCreatingCheckIn } from 'src/state/recoil/key-result/drawer'
 
 import messages from './messages'
 
@@ -22,9 +21,7 @@ const KeyResultSectionAddCheckIn = ({
   keyResultID,
   onCompleted,
 }: KeyResultSectionAddCheckInProperties) => {
-  const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
-    keyResultDrawerIsCreatingCheckIn(keyResultID),
-  )
+  const [isOpen, setIsOpen] = useState(false)
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const intl = useIntl()
@@ -32,17 +29,17 @@ const KeyResultSectionAddCheckIn = ({
   const isLoaded = typeof latestKeyResultCheckIn?.value !== 'undefined'
 
   const handleOpen = () => {
-    setIsCreatingCheckIn(true)
+    setIsOpen(true)
   }
 
   const handleClose = () => {
-    setIsCreatingCheckIn(false)
+    setIsOpen(false)
     setDraftValue(latestKeyResultCheckIn?.value)
   }
 
   const handleSubmit = (values: CheckInFormValues) => {
     if (values.valueNew) setDraftValue(values.valueNew)
-    setIsCreatingCheckIn(false)
+    setIsOpen(false)
   }
 
   return (
@@ -51,17 +48,15 @@ const KeyResultSectionAddCheckIn = ({
         <Button
           variant="solid"
           w="100%"
-          colorScheme={isCreatingCheckIn ? 'gray' : 'brand'}
-          bg={isCreatingCheckIn ? 'black.100' : 'brand.100'}
-          color={isCreatingCheckIn ? 'gray.400' : 'brand.500'}
-          onClick={isCreatingCheckIn ? handleClose : handleOpen}
+          colorScheme={isOpen ? 'gray' : 'brand'}
+          bg={isOpen ? 'black.100' : 'brand.100'}
+          color={isOpen ? 'gray.400' : 'brand.500'}
+          onClick={isOpen ? handleClose : handleOpen}
         >
-          {intl.formatMessage(
-            isCreatingCheckIn ? messages.buttonLabelClose : messages.buttonLabelOpen,
-          )}
+          {intl.formatMessage(isOpen ? messages.buttonLabelClose : messages.buttonLabelOpen)}
         </Button>
       </Skeleton>
-      <Collapse animateOpacity in={isCreatingCheckIn} style={{ overflow: 'visible' }}>
+      <Collapse animateOpacity in={isOpen} style={{ overflow: 'visible' }}>
         <KeyResultSectionTimelineCardBase>
           <Flex pb={4}>
             <Heading fontSize="md" fontWeight={700} color="black.600" flexGrow={1}>
