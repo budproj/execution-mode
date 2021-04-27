@@ -1,27 +1,17 @@
 import enzyme from 'enzyme'
 import faker from 'faker'
 import React from 'react'
-import { RecoilRoot, useSetRecoilState } from 'recoil'
+import { RecoilRoot } from 'recoil'
 import sinon from 'sinon'
-
-import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultDrawerIntlDeletedEntryType } from 'src/state/recoil/key-result/drawer'
 
 import KeyResultDrawerDeleteAlert from './delete-alert'
 
-interface TestDeletedEntryTypeController {
-  keyResultID: KeyResult['id']
-  entryType?: string
-}
-
-const TestDeletedEntryTypeController = ({
-  keyResultID,
-  entryType,
-}: TestDeletedEntryTypeController) => {
-  const setDeletedEntryType = useSetRecoilState(keyResultDrawerIntlDeletedEntryType(keyResultID))
+const TestDeletedEntryTypeController = () => {
+  // Const setDeletedEntryType = useSetRecoilState(keyResultDrawerIntlDeletedEntryType(keyResultID))
 
   const handleClick = () => {
-    setDeletedEntryType(entryType)
+    // SetDeletedEntryType(entryType)
+    console.log('ok')
   }
 
   return <button type="button" id="control-deleted-entry-type" onClick={handleClick} />
@@ -37,7 +27,7 @@ describe('component expectations', () => {
 
     const wrapper = enzyme.mount(
       <RecoilRoot>
-        <TestDeletedEntryTypeController keyResultID={fakeID} entryType={faker.random.word()} />
+        <TestDeletedEntryTypeController />
         <KeyResultDrawerDeleteAlert keyResultID={fakeID} />
       </RecoilRoot>,
     )
@@ -77,7 +67,7 @@ describe('component interactions', () => {
 
     const wrapper = enzyme.mount(
       <RecoilRoot>
-        <TestDeletedEntryTypeController keyResultID={fakeID} entryType={faker.random.word()} />
+        <TestDeletedEntryTypeController />
         <KeyResultDrawerDeleteAlert keyResultID={fakeID} />
       </RecoilRoot>,
     )
