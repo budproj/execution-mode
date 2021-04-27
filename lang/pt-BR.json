@@ -399,6 +399,10 @@
     "defaultMessage": "Essa ação não pode ser desfeita",
     "description": "This text is giving more details regarding the delete alert in our drawer"
   },
+  "MNn3/r": {
+    "defaultMessage": "Insira uma descrição clicando aqui",
+    "description": "This text is displayed as a placeholder for the description section of a key-result, only when that key-result don't have a description"
+  },
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
