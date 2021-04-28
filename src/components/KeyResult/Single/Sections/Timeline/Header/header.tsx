@@ -37,7 +37,7 @@ const KeyResultSectionTimelineHeader = ({
       position="sticky"
       top={0}
       py={canUpdate || Boolean(intlDeletedEntryType) ? 4 : 0}
-      zIndex={theme.zIndices.tooltip}
+      zIndex={theme.zIndices.docked}
     >
       <KeyResultSectionTimelineDeleteAlert keyResultID={keyResultID} />
 
