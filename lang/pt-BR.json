@@ -451,6 +451,10 @@
     "defaultMessage": "Um ícone de controle de video game",
     "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
   },
+  "PR6F4W": {
+    "defaultMessage": "Cancelar",
+    "description": "This text is displayed as the button that will cancel the update for ou goal update popover inside the key-result drawer"
+  },
   "PYLIcI": {
     "defaultMessage": "Meta",
     "description": "This message is displayed below the goal thumb"
@@ -754,6 +758,10 @@
   "fwIpqP": {
     "defaultMessage": "Visualize e atualize as preferências do seu perfil",
     "description": "The page description that is displayed in Google and screen readers for the my profile page"
+  },
+  "fwpFhg": {
+    "defaultMessage": "Salvar",
+    "description": "This text is displayed as the button that will save the update for our goal update popover inside the key-result drawer"
   },
   "fx39XE": {
     "defaultMessage": "Ajuda",

@@ -97,6 +97,7 @@ export const KeyResultSingleSectionGoal = ({
             <KeyResultSingleSectionGoalUpdateForm
               keyResultID={keyResultID}
               onCancel={handleUpdateClose}
+              onSubmit={handleUpdateClose}
             />
           </PopoverContent>
         </Popover>

@@ -1,4 +1,4 @@
-mutation UPDATE_KEY_RESULT_GOAL_AND_INITIAL_VALUE($id: ID!, $initialValue: number, $goal: number) {
+mutation UPDATE_KEY_RESULT_GOAL_AND_INITIAL_VALUE($id: ID!, $initialValue: Float, $goal: Float) {
   updateKeyResult(id: $id, data: {
     initialValue: $initialValue,
     goal: $goal

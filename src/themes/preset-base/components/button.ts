@@ -22,6 +22,11 @@ const Button = {
       _hover: {
         bg: `${colorScheme ?? 'brand'}.500`,
         color: 'white',
+
+        _disabled: {
+          bg: `${colorScheme ?? 'brand'}.100`,
+          color: `${colorScheme ?? 'brand'}.500`,
+        },
       },
 
       _focus: {

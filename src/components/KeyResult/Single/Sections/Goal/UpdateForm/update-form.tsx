@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
-import { Button, FormControl, FormLabel, FormLabelProps } from '@chakra-ui/react'
+import { Button, FormControl, FormLabel, FormLabelProps, Spinner } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -10,6 +10,7 @@ import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/se
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import {
+  KeyResultGoalAndInitialValueFormValues,
   KeyResultGoalAndInitialValueMutationResult,
   KeyResultSingleSectionGoalUpdateFormInterface,
 } from './interfaces'
@@ -23,44 +24,80 @@ const GoalUpdateFormLabel = (properties: FormLabelProps) => (
 export const KeyResultSingleSectionGoalUpdateForm = ({
   keyResultID,
   onCancel,
+  onSubmit,
 }: KeyResultSingleSectionGoalUpdateFormInterface) => {
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const [updateKeyResult, { loading }] = useMutation<KeyResultGoalAndInitialValueMutationResult>(
     queries.UPDATE_KEY_RESULT_GOAL_AND_INITIAL_VALUE,
+    {
+      onCompleted: (data) => {
+        console.log(data, 'tag')
+      },
+    },
   )
   const intl = useIntl()
 
   const Mask = selectMaskBasedOnFormat(keyResult?.format)
 
-  const initialValues = {
+  const initialValues: KeyResultGoalAndInitialValueFormValues = {
     initialValue: keyResult?.initialValue,
     goal: keyResult?.goal,
   }
 
-  const handleSubmit = (values: typeof initialValues) => {
-    console.log(values)
+  const handleSubmit = async ({ initialValue, goal }: KeyResultGoalAndInitialValueFormValues) => {
+    await updateKeyResult({
+      variables: {
+        initialValue,
+        goal,
+        id: keyResultID,
+      },
+    })
+
+    if (onSubmit) onSubmit({ initialValue, goal })
   }
 
-  const handleCancel = () => {
+  const handleCancel = (resetForm: () => void) => () => {
+    resetForm()
     if (onCancel) onCancel()
   }
 
+  const handleChange = (
+    valueName: string,
+    values: KeyResultGoalAndInitialValueFormValues,
+    setValues: (values: KeyResultGoalAndInitialValueFormValues) => void,
+  ) => (newValue?: string | number | null) => {
+    setValues({
+      ...values,
+      [valueName]: newValue,
+    })
+  }
+
   return (
-    <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
-      {() => (
+    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      {({ values, setValues, isSubmitting, resetForm }) => (
         <Form>
           <FormControl id={`key-result-goal-update-${keyResultID?.toString() ?? ''}`}>
             <Stack spacing={4}>
               <Stack spacing={0}>
                 <GoalUpdateFormLabel>{intl.formatMessage(messages.firstLabel)}</GoalUpdateFormLabel>
-                <Mask value={keyResult?.initialValue} fontSize="xs" name="initialValue" />
+                <Mask
+                  value={values.initialValue}
+                  fontSize="xs"
+                  name="initialValue"
+                  handleChange={handleChange('initialValue', values, setValues)}
+                />
               </Stack>
 
               <Stack spacing={0}>
                 <GoalUpdateFormLabel>
                   {intl.formatMessage(messages.secondLabel)}
                 </GoalUpdateFormLabel>
-                <Mask value={keyResult?.goal} fontSize="xs" name="goal" />
+                <Mask
+                  value={values.goal}
+                  fontSize="xs"
+                  name="goal"
+                  handleChange={handleChange('goal', values, setValues)}
+                />
               </Stack>
 
               <Stack direction="row">
@@ -68,19 +105,25 @@ export const KeyResultSingleSectionGoalUpdateForm = ({
                   variant="outline"
                   flexGrow={1}
                   colorScheme="brand"
+                  type="button"
                   flexBasis={0}
-                  onClick={handleCancel}
+                  onClick={handleCancel(resetForm)}
                 >
                   {intl.formatMessage(messages.firstButton)}
                 </Button>
                 <Button
+                  isDisabled={isSubmitting || loading}
                   variant="solid"
                   type="submit"
                   flexGrow={1}
                   colorScheme="brand"
                   flexBasis={0}
                 >
-                  {intl.formatMessage(messages.lastButton)}
+                  {isSubmitting || loading ? (
+                    <Spinner color="brand.500" />
+                  ) : (
+                    intl.formatMessage(messages.lastButton)
+                  )}
                 </Button>
               </Stack>
             </Stack>
