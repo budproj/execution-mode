@@ -12,9 +12,9 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
+import { KeyResultSingleSectionGoalUpdateForm } from './UpdateForm/update-form'
 import { KeyResultSectionGoalInterface } from './interface'
 import messages from './messages'
-import { KeyResultSingleSectionGoalUpdateForm } from './update-form'
 
 export const KeyResultSingleSectionGoal = ({
   keyResultID,
