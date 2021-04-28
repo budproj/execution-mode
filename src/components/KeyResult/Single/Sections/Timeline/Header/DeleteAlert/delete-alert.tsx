@@ -4,18 +4,20 @@ import { useRecoilValue, useResetRecoilState } from 'recoil'
 
 import Alert from 'src/components/Base/Alert'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultDrawerIntlDeletedEntryType } from 'src/state/recoil/key-result/drawer'
+import { keyResultTimelineIntlDeletedEntryType } from 'src/state/recoil/key-result/timeline'
 
 import messages from './messages'
 
-export interface KeyResultDrawerDeleteAlertProperties {
+export interface KeyResultSectionTimelineDeleteAlertProperties {
   keyResultID?: KeyResult['id']
 }
 
-const KeyResultDrawerDeleteAlert = ({ keyResultID }: KeyResultDrawerDeleteAlertProperties) => {
-  const intlDeletedEntryType = useRecoilValue(keyResultDrawerIntlDeletedEntryType(keyResultID))
+const KeyResultSectionTimelineDeleteAlert = ({
+  keyResultID,
+}: KeyResultSectionTimelineDeleteAlertProperties) => {
+  const intlDeletedEntryType = useRecoilValue(keyResultTimelineIntlDeletedEntryType(keyResultID))
   const resetDeleteAlertComponentType = useResetRecoilState(
-    keyResultDrawerIntlDeletedEntryType(keyResultID),
+    keyResultTimelineIntlDeletedEntryType(keyResultID),
   )
   const intl = useIntl()
 
@@ -31,12 +33,11 @@ const KeyResultDrawerDeleteAlert = ({ keyResultID }: KeyResultDrawerDeleteAlertP
       description={intl.formatMessage(messages.description)}
       status="success"
       variant="outline"
-      wrapperPadding={4}
-      wrapperPaddingTop={0}
+      wrapperPaddingBottom={4}
       isOpen={Boolean(intlDeletedEntryType)}
       onClose={handleAlertClose}
     />
   )
 }
 
-export default KeyResultDrawerDeleteAlert
+export default KeyResultSectionTimelineDeleteAlert

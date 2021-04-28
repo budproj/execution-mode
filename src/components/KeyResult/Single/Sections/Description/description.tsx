@@ -1,41 +1,83 @@
-import { Divider, Flex, SkeletonText } from '@chakra-ui/react'
+import { useMutation } from '@apollo/client'
+import { Box, Divider, Flex, SkeletonText, Spinner } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 
-import { ExpandableText } from 'src/components/Base'
+import { EditableTextAreaValue } from 'src/components/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
-import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
+import { GraphQLEffect } from 'src/components/types'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
 import messages from './messages'
+import queries from './queries.gql'
 
 export interface KeyResultSectionDescriptionProperties {
   keyResultID?: KeyResult['id']
   isLoading?: boolean
 }
 
-const descriptionSelector = buildPartialSelector<KeyResult['description']>('description')
+interface UpdateKeyResultDescriptionMutationResult {
+  updateKeyResult: KeyResult
+}
 
 const KeyResultSectionDescription = ({
   keyResultID,
   isLoading,
 }: KeyResultSectionDescriptionProperties) => {
   const intl = useIntl()
-  const description = useRecoilValue(descriptionSelector(keyResultID))
+  const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
+  const [updateKeyResult, { loading }] = useMutation<UpdateKeyResultDescriptionMutationResult>(
+    queries.UPDATE_KEY_RESULT_DESCRIPTION,
+  )
 
-  const hasData = Boolean(description)
+  const handleSubmit = async (event: React.FocusEvent<HTMLTextAreaElement>) => {
+    const description = event.target.value
+    if (description === keyResult?.description) return
+
+    await updateKeyResult({
+      variables: {
+        description,
+        id: keyResultID,
+      },
+    })
+
+    setKeyResult({
+      ...keyResult,
+      description,
+    })
+  }
+
+  const hasData = Boolean(keyResult?.description)
+  const canUpdate = keyResult?.policy?.update === GraphQLEffect.ALLOW
   isLoading ??= hasData
 
-  return hasData || isLoading ? (
+  return hasData || isLoading || canUpdate ? (
     <>
       <Flex gridGap={2} direction="column">
         <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
         <Flex alignItems="center" gridGap={2}>
           <SkeletonText isLoaded={!isLoading} noOfLines={5} spacing={2} w="100%">
-            <ExpandableText fontSize="md" color="black.800" text={description ?? ''} />
+            <EditableTextAreaValue
+              isTruncated
+              value={keyResult?.description}
+              customFallbackValue={intl.formatMessage(messages.emptyStateMessage)}
+              isLoaded={!isLoading}
+              isSubmitting={loading}
+              fontSize="md"
+              color="black.800"
+              maxCharacters={500}
+              isDisabled={!canUpdate}
+              onBlur={handleSubmit}
+            />
           </SkeletonText>
+          {loading && (
+            <Box pt={2}>
+              <Spinner color="brand.400" />
+            </Box>
+          )}
         </Flex>
       </Flex>
 

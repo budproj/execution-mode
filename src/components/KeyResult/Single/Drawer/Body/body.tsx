@@ -1,7 +1,5 @@
 import { Box, Divider, Stack } from '@chakra-ui/react'
 import React from 'react'
-import PerfectScrollbar from 'react-perfect-scrollbar'
-import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import {
   KeyResultSectionDescription,
@@ -10,82 +8,44 @@ import {
   KeyResultSectionTimeline,
   KeyResultSectionTitle,
 } from 'src/components/KeyResult/Single/Sections'
+import { KeyResultSingleSectionDeadline } from 'src/components/KeyResult/Single/Sections/Deadline/wrapper'
+import { KeyResultSingleSectionGoal } from 'src/components/KeyResult/Single/Sections/Goal/wrapper'
 import { KeyResult } from 'src/components/KeyResult/types'
-import {
-  keyResultDrawerIntlDeletedEntryType,
-  keyResultDrawerIsCreatingCheckIn,
-  keyResultDrawerIsScrolling,
-} from 'src/state/recoil/key-result/drawer'
 
-import { KeyResultSingleSectionDeadline } from '../../Sections/Deadline/wrapper'
-import { KeyResultSingleSectionGoal } from '../../Sections/Goal/wrapper'
-
-import { PERFECT_SCROLLBAR_ID } from './constants'
+import { SCROLLBAR_ID } from './constants'
 
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
   isLoading?: boolean
 }
 
-const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => {
-  const [isScrolling, setIsScrolling] = useRecoilState(keyResultDrawerIsScrolling(keyResultID))
-  const setIntlDeletedEntryType = useSetRecoilState(
-    keyResultDrawerIntlDeletedEntryType(keyResultID),
-  )
-  const [isCreatingCheckIn, setIsCreatingCheckIn] = useRecoilState(
-    keyResultDrawerIsCreatingCheckIn(keyResultID),
-  )
+const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => (
+  <Stack flexGrow={1} overflow="auto" p={4} pt={0} gridGap={2} id={SCROLLBAR_ID}>
+    <Box pt={4}>
+      <KeyResultSectionTitle keyResultID={keyResultID} />
+    </Box>
+    <Divider borderColor="gray.100" />
+    <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
 
-  const handleScrollY = () => {
-    if (!isScrolling) setIsScrolling(true)
-    if (isCreatingCheckIn) setIsCreatingCheckIn(false)
-  }
+    <Stack direction="row">
+      <Box flexGrow={1}>
+        <KeyResultSingleSectionGoal keyResultID={keyResultID} isLoading={isLoading} />
+      </Box>
 
-  const handleScrollYReachStart = () => {
-    if (isScrolling) setIsScrolling(false)
-  }
+      <Box flexGrow={1}>
+        <KeyResultSingleSectionDeadline keyResultID={keyResultID} isLoading={isLoading} />
+      </Box>
+    </Stack>
+    <Divider borderColor="gray.100" />
 
-  const handleEntryDelete = (entryType: string) => {
-    setIntlDeletedEntryType(entryType)
-  }
+    <KeyResultSectionOwner keyResultID={keyResultID} />
+    <Divider borderColor="gray.100" />
 
-  return (
-    <PerfectScrollbar
-      id={PERFECT_SCROLLBAR_ID}
-      options={{ suppressScrollX: true }}
-      onScrollY={handleScrollY}
-      onYReachStart={handleScrollYReachStart}
-    >
-      <Stack flexGrow={1} overflow="auto" p={4} pt={0} gridGap={2}>
-        <KeyResultSectionTitle keyResultID={keyResultID} />
-        <Divider borderColor="gray.100" />
-        <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
+    <KeyResultSectionObjective keyResultID={keyResultID} />
+    <Divider borderColor="gray.100" />
 
-        <Stack direction="row">
-          <Box flexGrow={1}>
-            <KeyResultSingleSectionGoal keyResultID={keyResultID} isLoading={isLoading} />
-          </Box>
-
-          <Box flexGrow={1}>
-            <KeyResultSingleSectionDeadline keyResultID={keyResultID} isLoading={isLoading} />
-          </Box>
-        </Stack>
-        <Divider borderColor="gray.100" />
-
-        <KeyResultSectionOwner keyResultID={keyResultID} />
-        <Divider borderColor="gray.100" />
-
-        <KeyResultSectionObjective keyResultID={keyResultID} />
-        <Divider borderColor="gray.100" />
-
-        <KeyResultSectionTimeline
-          keyResultID={keyResultID}
-          scrollTarget={PERFECT_SCROLLBAR_ID}
-          onEntryDelete={handleEntryDelete}
-        />
-      </Stack>
-    </PerfectScrollbar>
-  )
-}
+    <KeyResultSectionTimeline keyResultID={keyResultID} scrollTarget={SCROLLBAR_ID} />
+  </Stack>
+)
 
 export default KeyResultDrawerBody

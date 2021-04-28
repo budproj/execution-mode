@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Flex, Heading } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useResetRecoilState } from 'recoil'
@@ -7,7 +7,10 @@ import { useRecoilState, useResetRecoilState } from 'recoil'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
+import { KeyResultSectionHeading } from '../Heading/wrapper'
+
 import KeyResultSectionTimelineContent from './Content'
+import KeyResultSectionTimelineHeader from './Header/header'
 import messages from './messages'
 import queries from './queries.gql'
 import KeyResultSectionTimelineSkeleton from './skeleton'
@@ -78,9 +81,9 @@ const KeyResultSectionTimeline = ({
 
   return (
     <Flex direction="column" gridGap={4}>
-      <Heading as="h3" fontSize="sm" fontWeight={500} color="gray.300">
-        {intl.formatMessage(messages.title)}
-      </Heading>
+      <KeyResultSectionTimelineHeader keyResultID={keyResultID} />
+
+      <KeyResultSectionHeading>{intl.formatMessage(messages.title)} </KeyResultSectionHeading>
       {keyResultID && hasTimeline ? (
         <KeyResultSectionTimelineContent
           keyResultID={keyResultID}

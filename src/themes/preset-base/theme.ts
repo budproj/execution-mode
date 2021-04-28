@@ -16,6 +16,7 @@ import {
   Avatar,
   Editable,
   Tabs,
+  Drawer,
 } from './components'
 
 const colors = {
@@ -168,6 +169,7 @@ const theme = extendTheme({
     Avatar,
     Editable,
     Tabs,
+    Drawer,
   },
 
   fonts: {
@@ -196,6 +198,7 @@ const theme = extendTheme({
     md: '24rem',
     lg: '28rem',
     xl: '32rem',
+    '2xl': '36rem',
   },
 
   fontSizes: {

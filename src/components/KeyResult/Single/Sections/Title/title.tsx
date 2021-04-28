@@ -1,49 +1,85 @@
-import { Flex, Heading, Skeleton, SkeletonText, Stack } from '@chakra-ui/react'
+import { useMutation } from '@apollo/client'
+import { Box, Flex, Skeleton, SkeletonText, Spinner, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
-import ExpandableText from 'src/components/Base/ExpandableText'
+import EditableInputValue from 'src/components/Base/EditableInputValue'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
-import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
+import { GraphQLEffect } from 'src/components/types'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
 import messages from './messages'
+import queries from './queries.gql'
 
 export interface KeyResultSectionTitleProperties {
   keyResultID?: KeyResult['id']
 }
 
-const titleSelector = buildPartialSelector<KeyResult['title']>('title')
-const isOutdatedSelector = buildPartialSelector<KeyResult['isOutdated']>('isOutdated')
+interface UpdateKeyResultTitleMutationResult {
+  updateKeyResult: KeyResult
+}
 
 const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties) => {
-  const title = useRecoilValue(titleSelector(keyResultID))
-  const isOutdated = useRecoilValue(isOutdatedSelector(keyResultID))
+  const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const intl = useIntl()
+  const [updateKeyResult, { loading }] = useMutation<UpdateKeyResultTitleMutationResult>(
+    queries.UPDATE_KEY_RESULT_TITLE,
+  )
 
-  const isLoaded = Boolean(title)
+  const isLoaded = Boolean(keyResult)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
+
+  const handleSubmit = async (title: string) => {
+    if (title === keyResult?.title) return
+
+    await updateKeyResult({
+      variables: {
+        title,
+        id: keyResultID,
+      },
+    })
+
+    setKeyResult({
+      ...keyResult,
+      title,
+    })
+  }
 
   return (
     <Flex gridGap={4} alignItems="flex-start">
       <Skeleton borderRadius={10} isLoaded={isLoaded}>
-        <KeyResultDynamicIcon title={title} iconSize={4} boxSize={10} borderRadius={8} />
+        <KeyResultDynamicIcon title={keyResult?.title} iconSize={4} boxSize={10} borderRadius={8} />
       </Skeleton>
 
-      <Stack spacing={0}>
-        <Skeleton isLoaded={isLoaded}>
-          <ExpandableText
-            color="black.900"
-            fontSize="xl"
-            maxCollapsedLength={100}
-            Wrapper={Heading}
-            text={title}
-          />
-        </Skeleton>
+      <Stack spacing={2} flexGrow={1}>
+        <Stack direction="row">
+          <Skeleton isLoaded={isLoaded} flexGrow={1}>
+            <EditableInputValue
+              value={keyResult?.title}
+              isLoaded={isLoaded}
+              isSubmitting={loading}
+              isDisabled={keyResult?.policy?.update !== GraphQLEffect.ALLOW}
+              maxCharacters={120}
+              previewProperties={{
+                fontSize: 'xl',
+                fontWeight: 700,
+                p: 0,
+                as: 'h1',
+              }}
+              onSubmit={handleSubmit}
+            />
+          </Skeleton>
+          {loading && (
+            <Box pt={2}>
+              <Spinner color="brand.400" />
+            </Box>
+          )}
+        </Stack>
 
         <SkeletonText
           noOfLines={2}
@@ -54,7 +90,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           <LastUpdateText
             fontSize="sm"
             date={lastUpdateDate}
-            color={isOutdated ? 'red.500' : 'gray.400'}
+            color={keyResult?.isOutdated ? 'red.500' : 'gray.400'}
             prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
           />
         </SkeletonText>

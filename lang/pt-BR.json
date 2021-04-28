@@ -299,6 +299,10 @@
     "defaultMessage": "Clique aqui para fechar o formulário de check-in",
     "description": "This message is displayed as the alternative text for the close button in our check-in form"
   },
+  "Dt91Bg": {
+    "defaultMessage": "Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave",
+    "description": "This message is displayed for screen readers as the description of the arrow down icon inside the key-result drawer. That icon is only displayed when the user hovers the mouse over the goal"
+  },
   "ErVh0y": {
     "defaultMessage": "Valor atual",
     "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
@@ -399,6 +403,10 @@
     "defaultMessage": "Essa ação não pode ser desfeita",
     "description": "This text is giving more details regarding the delete alert in our drawer"
   },
+  "MNn3/r": {
+    "defaultMessage": "Insira uma descrição clicando aqui",
+    "description": "This text is displayed as a placeholder for the description section of a key-result, only when that key-result don't have a description"
+  },
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
@@ -443,6 +451,10 @@
     "defaultMessage": "Um ícone de controle de video game",
     "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
   },
+  "PR6F4W": {
+    "defaultMessage": "Cancelar",
+    "description": "This text is displayed as the button that will cancel the update for ou goal update popover inside the key-result drawer"
+  },
   "PYLIcI": {
     "defaultMessage": "Meta",
     "description": "This message is displayed below the goal thumb"
@@ -478,6 +490,10 @@
   "QcCy51": {
     "defaultMessage": "Valor atual",
     "description": "This tooltip is displayed when the user hovers the left side value of our progress bar"
+  },
+  "Qptcpe": {
+    "defaultMessage": "Meta",
+    "description": "This text is used as a label on the update goal form inside the key-result drawer. That is the second label of that form"
   },
   "RN1J2p": {
     "defaultMessage": "Essa semana",
@@ -675,6 +691,10 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
+  "cHSa08": {
+    "defaultMessage": "Valor Inicial",
+    "description": "This text is used as a label on the update goal form inside the key-result drawer. That is the first label of that form"
+  },
   "cPGOoL": {
     "defaultMessage": "Fale com nosso suporte técnico",
     "description": "MainAppBar user menu third item option"
@@ -738,6 +758,10 @@
   "fwIpqP": {
     "defaultMessage": "Visualize e atualize as preferências do seu perfil",
     "description": "The page description that is displayed in Google and screen readers for the my profile page"
+  },
+  "fwpFhg": {
+    "defaultMessage": "Salvar",
+    "description": "This text is displayed as the button that will save the update for our goal update popover inside the key-result drawer"
   },
   "fx39XE": {
     "defaultMessage": "Ajuda",

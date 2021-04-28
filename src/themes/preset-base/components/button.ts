@@ -22,6 +22,11 @@ const Button = {
       _hover: {
         bg: `${colorScheme ?? 'brand'}.500`,
         color: 'white',
+
+        _disabled: {
+          bg: `${colorScheme ?? 'brand'}.100`,
+          color: `${colorScheme ?? 'brand'}.500`,
+        },
       },
 
       _focus: {
@@ -53,23 +58,27 @@ const Button = {
 
     outline: ({ colorScheme }: ButtonProps) => ({
       color: `${colorScheme ?? 'brand'}.500`,
-      borderColor: `${colorScheme ?? 'brand'}.100`,
+      borderColor: `${colorScheme ?? 'brand'}.500`,
       borderWidth: 2,
       borderRadius: 4,
 
       _hover: {
         borderColor: `${colorScheme ?? 'brand'}.400`,
-        bg: 'transparent',
+        bg: `${colorScheme ?? 'brand'}.500`,
+        color: 'white',
       },
 
       _focus: {
         borderColor: `${colorScheme ?? 'brand'}.400`,
+        bg: `${colorScheme ?? 'brand'}.500`,
+        color: 'white',
         boxShadow: 'none',
       },
 
       _active: {
         borderColor: `${colorScheme ?? 'brand'}.400`,
-        bg: 'transparent',
+        bg: `${colorScheme ?? 'brand'}.500`,
+        color: 'white',
       },
     }),
   },
