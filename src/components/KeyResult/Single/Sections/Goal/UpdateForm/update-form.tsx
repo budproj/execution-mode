@@ -31,7 +31,10 @@ export const KeyResultSingleSectionGoalUpdateForm = ({
     queries.UPDATE_KEY_RESULT_GOAL_AND_INITIAL_VALUE,
     {
       onCompleted: (data) => {
-        console.log(data, 'tag')
+        setKeyResult({
+          ...keyResult,
+          ...data.updateKeyResult,
+        })
       },
     },
   )
@@ -45,6 +48,8 @@ export const KeyResultSingleSectionGoalUpdateForm = ({
   }
 
   const handleSubmit = async ({ initialValue, goal }: KeyResultGoalAndInitialValueFormValues) => {
+    if (initialValue === keyResult?.initialValue && goal === keyResult?.goal) return
+
     await updateKeyResult({
       variables: {
         initialValue,
@@ -73,7 +78,7 @@ export const KeyResultSingleSectionGoalUpdateForm = ({
   }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
       {({ values, setValues, isSubmitting, resetForm }) => (
         <Form>
           <FormControl id={`key-result-goal-update-${keyResultID?.toString() ?? ''}`}>
@@ -105,7 +110,6 @@ export const KeyResultSingleSectionGoalUpdateForm = ({
                   variant="outline"
                   flexGrow={1}
                   colorScheme="brand"
-                  type="button"
                   flexBasis={0}
                   onClick={handleCancel(resetForm)}
                 >
