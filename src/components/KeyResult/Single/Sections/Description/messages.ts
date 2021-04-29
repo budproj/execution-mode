@@ -4,8 +4,8 @@ type KeyResultsSectionDescriptionMessage = 'label' | 'emptyStateMessage'
 
 export default defineMessages<KeyResultsSectionDescriptionMessage>({
   label: {
-    defaultMessage: 'Detalhes',
-    id: 'S/F2Hk',
+    defaultMessage: 'Descrição',
+    id: 'q7MmHc',
     description:
       'The label text above the Description section in our key result single page or drawer',
   },

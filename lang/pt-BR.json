@@ -511,10 +511,6 @@
     "defaultMessage": "Atualize seu cargo",
     "description": "This is the fallback value that goes on our user account settings page, at the fifth field to update the user informations. The fallback value appears if the user has no data at that field"
   },
-  "S/F2Hk": {
-    "defaultMessage": "Detalhes",
-    "description": "The label text above the Description section in our key result single page or drawer"
-  },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
@@ -942,6 +938,10 @@
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
+  },
+  "q7MmHc": {
+    "defaultMessage": "Descrição",
+    "description": "The label text above the Description section in our key result single page or drawer"
   },
   "qytqsj": {
     "defaultMessage": "Trimestral",
