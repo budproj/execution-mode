@@ -20,7 +20,15 @@ export interface KeyResultDrawerBodyProperties {
 }
 
 const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => (
-  <Stack flexGrow={1} overflow="auto" p={4} pt={0} gridGap={2} id={SCROLLBAR_ID}>
+  <Stack
+    flexGrow={1}
+    overflowY="auto"
+    overflowX="hidden"
+    p={4}
+    pt={0}
+    gridGap={2}
+    id={SCROLLBAR_ID}
+  >
     <Box pt={4}>
       <KeyResultSectionTitle keyResultID={keyResultID} />
     </Box>
