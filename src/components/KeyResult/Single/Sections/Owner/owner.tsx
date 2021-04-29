@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil'
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import SwitchIcon from 'src/components/Icon/Switch'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { GraphQLEffect } from 'src/components/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
@@ -17,20 +18,23 @@ export interface KeyResultSectionOwnerProperties {
 }
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
+const policySelector = buildPartialSelector<KeyResult['policy']>('policy')
 
 const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties) => {
   const [isHovering, setIsHovering] = useState(false)
   const intl = useIntl()
   const owner = useRecoilValue(ownerSelector(keyResultID))
+  const policy = useRecoilValue(policySelector(keyResultID))
 
   const isOwnerLoaded = Boolean(owner)
+  const canUpdate = policy?.update === GraphQLEffect.ALLOW
 
   const handleMouseEnter = () => {
-    if (!isHovering) setIsHovering(true)
+    if (!isHovering && canUpdate) setIsHovering(true)
   }
 
   const handleMouseLeave = () => {
-    if (isHovering) setIsHovering(false)
+    if (isHovering && canUpdate) setIsHovering(false)
   }
 
   return (
@@ -39,12 +43,12 @@ const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties)
       <Flex
         alignItems="center"
         gridGap={2}
-        cursor="pointer"
+        cursor={canUpdate ? 'pointer' : 'auto'}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <SkeletonCircle isLoaded={isOwnerLoaded} w={10} h={10}>
-          {isHovering ? (
+          {canUpdate && isHovering ? (
             <Flex
               w={10}
               h={10}
@@ -63,7 +67,9 @@ const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties)
         </SkeletonCircle>
         <Stack spacing={0}>
           <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 150, 24)}>
-            <Text color={isHovering ? 'brand.500' : 'black.900'}>{owner?.fullName}</Text>
+            <Text color={canUpdate && isHovering ? 'brand.500' : 'black.900'}>
+              {owner?.fullName}
+            </Text>
           </Skeleton>
 
           <Skeleton isLoaded={isOwnerLoaded} {...buildSkeletonMinSize(isOwnerLoaded, 200, 19)}>
