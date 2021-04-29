@@ -1,3 +1,3 @@
-import KeyResultSectionOwner from './owner'
+import { KeyResultSingleSectionOwnerWrapper } from './wrapper'
 
-export default KeyResultSectionOwner
+export default KeyResultSingleSectionOwnerWrapper
