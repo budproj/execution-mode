@@ -48,7 +48,7 @@ export const KeyResultSingleSectionOwnerUpdateUserList = ({
   }
 
   return (
-    <Stack spacing={4}>
+    <Stack spacing={4} maxH={80} overflowY="auto">
       {users.length > 0 ? (
         users.map((user) => (
           <NamedAvatar
