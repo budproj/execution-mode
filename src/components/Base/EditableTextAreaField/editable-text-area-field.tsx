@@ -9,7 +9,7 @@ export interface EditableTextAreaFieldProperties {
   customFallbackValue?: string
   value?: string
   flexGrow?: StackProps['flexGrow']
-  onSubmit?: (value: string) => void
+  onSubmit?: (value?: string) => void
   isSubmitting?: boolean
 }
 
@@ -24,9 +24,9 @@ const EditableTextAreaField = ({
 }: EditableTextAreaFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
-  const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
+  const handleSave = (value?: string) => {
     setWasSubmitted(true)
-    if (onSubmit) onSubmit(event.target.value)
+    if (onSubmit) onSubmit(value)
   }
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const EditableTextAreaField = ({
           customFallbackValue={customFallbackValue}
           isLoaded={isLoaded}
           isSubmitting={isSubmitting && wasSubmitted}
-          onBlur={handleBlur}
+          onSave={handleSave}
         />
         {isSubmitting && wasSubmitted && (
           <Box pt={2}>

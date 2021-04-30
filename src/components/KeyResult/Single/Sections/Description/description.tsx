@@ -33,8 +33,7 @@ const KeyResultSectionDescription = ({
     queries.UPDATE_KEY_RESULT_DESCRIPTION,
   )
 
-  const handleSubmit = async (event: React.FocusEvent<HTMLTextAreaElement>) => {
-    const description = event.target.value
+  const handleSubmit = async (description?: string) => {
     if (description === keyResult?.description) return
 
     await updateKeyResult({
@@ -70,7 +69,7 @@ const KeyResultSectionDescription = ({
               color="black.800"
               maxCharacters={500}
               isDisabled={!canUpdate}
-              onBlur={handleSubmit}
+              onSave={handleSubmit}
             />
           </SkeletonText>
           {loading && (

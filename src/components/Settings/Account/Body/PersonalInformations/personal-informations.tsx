@@ -53,7 +53,7 @@ const SettingsAccountBodyPersonalInformations = ({
     },
   )
 
-  const handleValueUpdate = (key: keyof User) => async (value: string | string[] | null) => {
+  const handleValueUpdate = (key: keyof User) => async (value?: string | string[] | null) => {
     if (user?.[key] === value) return
     // eslint-disable-next-line unicorn/no-null
     if (value === '') value = null
