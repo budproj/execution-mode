@@ -3,7 +3,7 @@ const Texarea = {
     outline: () => ({
       borderWidth: 2,
       borderColor: 'black.200',
-      color: 'gray.400',
+      color: 'black.900',
       borderRadius: 4,
     }),
   },

@@ -1,6 +1,13 @@
 import { defineMessages } from 'react-intl'
 
-type EditableTextAreaValueMessage = 'fallbackValue' | 'editableIconDesc' | 'editableIconTitle'
+type EditableTextAreaValueMessage =
+  | 'fallbackValue'
+  | 'editableIconDesc'
+  | 'editableIconTitle'
+  | 'cancelIconDesc'
+  | 'cancelIconTitle'
+  | 'saveIconDesc'
+  | 'saveIconTitle'
 
 export default defineMessages<EditableTextAreaValueMessage>({
   fallbackValue: {
@@ -21,5 +28,33 @@ export default defineMessages<EditableTextAreaValueMessage>({
     defaultMessage: 'Clique aqui para editar esse campo',
     id: 'WKevJy',
     description: 'The title for our pen icon. This message is displayed in our UI as a tooltip',
+  },
+
+  cancelIconDesc: {
+    defaultMessage: 'Um ícone de X. Ao clicar nele você irá cancelar a edição deste campo',
+    id: 'FQaST6',
+    description:
+      'This text is used by screen readers to explain the X icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field',
+  },
+
+  cancelIconTitle: {
+    defaultMessage: 'Cancelar',
+    id: 'ObFHxY',
+    description:
+      'This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field',
+  },
+
+  saveIconDesc: {
+    defaultMessage: 'Um ícone de check. Ao clicar nele você irá salvar suas alterações',
+    id: 'xywRWB',
+    description:
+      'This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field',
+  },
+
+  saveIconTitle: {
+    defaultMessage: 'Salvar',
+    id: 'A6/DXF',
+    description:
+      'This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to save the edition of that field',
   },
 })

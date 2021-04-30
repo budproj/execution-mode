@@ -1,16 +1,10 @@
-import {
-  SkeletonText,
-  Text,
-  Textarea,
-  Stack,
-  Box,
-  TextareaProps,
-  TextProps,
-} from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { SkeletonText, Text, Textarea, Stack, Box, TextProps, IconButton } from '@chakra-ui/react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
+import CheckIcon from 'src/components/Icon/Check'
 import PenIcon from 'src/components/Icon/Pen'
+import TimesIcon from 'src/components/Icon/Times'
 
 import ExpandableText from '../ExpandableText'
 
@@ -21,13 +15,13 @@ export interface EditableTextAreaValueProperties {
   skeletonNumberOfLines: number
   customFallbackValue?: string
   value?: string
-  onBlur?: TextareaProps['onBlur']
   isSubmitting?: boolean
   fontSize?: TextProps['fontSize']
   color?: TextProps['color']
   isTruncated?: boolean
   maxCharacters?: number
   isDisabled?: boolean
+  onSave?: (value?: string) => void
 }
 
 const autoSelectAll = (event: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -40,24 +34,33 @@ const EditableTextAreaValue = ({
   customFallbackValue,
   isLoaded,
   skeletonNumberOfLines,
-  onBlur,
   isSubmitting,
   fontSize,
   color,
   isTruncated,
   maxCharacters,
   isDisabled,
+  onSave,
 }: EditableTextAreaValueProperties) => {
   isTruncated ??= Boolean(maxCharacters)
 
   const [isEditing, setIsEditing] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
+  const [inputValue, setInputValue] = useState(value)
+  const input = useRef<HTMLTextAreaElement>(null)
   const intl = useIntl()
 
   const fallbackValue = customFallbackValue ?? intl.formatMessage(messages.fallbackValue)
   const defaultColor = value && !isSubmitting ? color : 'gray.400'
   const isLocked = isDisabled ?? isSubmitting
   const isEmpty = !value || value === ''
+
+  const previewProperties = {
+    fontSize,
+    color: isHovering && !isSubmitting ? 'brand.500' : defaultColor,
+    fontWeight: 400,
+    transition: '.2s color ease-out',
+  }
 
   const handleHover = () => {
     if (!isHovering && !isLocked) setIsHovering(true)
@@ -75,33 +78,81 @@ const EditableTextAreaValue = ({
     if (isEditing && !isLocked) setIsEditing(false)
   }
 
-  const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
-    if (isLocked) return
-    handleStopEdit()
-    handleStopHover()
-    if (onBlur) onBlur(event)
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setInputValue(event.target.value)
   }
 
-  const previewProperties = {
-    fontSize,
-    color: isHovering && !isSubmitting ? 'brand.500' : defaultColor,
-    fontWeight: 400,
-    transition: '.2s color ease-out',
+  const handleSave = () => {
+    if (isLocked) return
+
+    const value = input?.current?.value
+
+    handleStopEdit()
+    handleStopHover()
+
+    if (onSave) onSave(value)
   }
+
+  const handleCancel = () => {
+    handleStopEdit()
+    handleStopHover()
+    setInputValue(value)
+  }
+
+  useEffect(() => {
+    setInputValue(value)
+  }, [value, setInputValue])
 
   return (
     <SkeletonText noOfLines={skeletonNumberOfLines} spacing={2} isLoaded={isLoaded} w="full">
       {isEditing && !isLocked ? (
-        <Textarea
-          autoFocus
-          defaultValue={value}
-          px={2}
-          py={1}
-          _focus={{ boxShadow: 'none' }}
-          _hover={{ borderColor: 'black.200' }}
-          onBlur={handleBlur}
-          onFocus={autoSelectAll}
-        />
+        <Stack spacing={2}>
+          <Textarea
+            ref={input}
+            autoFocus
+            value={inputValue}
+            px={2}
+            py={1}
+            _focus={{ boxShadow: 'none' }}
+            _hover={{ borderColor: 'black.200' }}
+            onFocus={autoSelectAll}
+            onChange={handleChange}
+          />
+          <Stack direction="row" justifyContent="flex-end">
+            <IconButton
+              colorScheme="black"
+              variant="solid"
+              aria-label={intl.formatMessage(messages.cancelIconDesc)}
+              icon={
+                <TimesIcon
+                  fill="currentColor"
+                  desc={intl.formatMessage(messages.cancelIconDesc)}
+                  title={intl.formatMessage(messages.cancelIconTitle)}
+                />
+              }
+              _hover={{
+                bg: 'red.500',
+                color: 'white',
+              }}
+              onClick={handleCancel}
+            />
+            <IconButton
+              bg="brand.500"
+              aria-label={intl.formatMessage(messages.saveIconDesc)}
+              icon={
+                <CheckIcon
+                  fill="white"
+                  desc={intl.formatMessage(messages.saveIconDesc)}
+                  title={intl.formatMessage(messages.saveIconTitle)}
+                />
+              }
+              _hover={{
+                bg: 'brand.400',
+              }}
+              onClick={handleSave}
+            />
+          </Stack>
+        </Stack>
       ) : (
         <Stack
           direction="row"
