@@ -1,8 +1,18 @@
-import { SkeletonText, Text, Textarea, Stack, Box, TextProps, Button } from '@chakra-ui/react'
+import {
+  SkeletonText,
+  Text,
+  Textarea,
+  Stack,
+  Box,
+  TextProps,
+  Button,
+  IconButton,
+} from '@chakra-ui/react'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import PenIcon from 'src/components/Icon/Pen'
+import TimesIcon from 'src/components/Icon/Times'
 
 import ExpandableText from '../ExpandableText'
 
@@ -117,7 +127,19 @@ const EditableTextAreaValue = ({
             onChange={handleChange}
           />
           <Stack direction="row" justifyContent="flex-end">
-            <Button onClick={handleCancel}>X</Button>
+            <IconButton
+              colorScheme="black"
+              variant="solid"
+              aria-label={intl.formatMessage(messages.cancelIconDesc)}
+              icon={
+                <TimesIcon
+                  fill="gray.500"
+                  desc={intl.formatMessage(messages.cancelIconDesc)}
+                  title={intl.formatMessage(messages.cancelIconTitle)}
+                />
+              }
+              onClick={handleCancel}
+            />
             <Button onClick={handleSave}>V</Button>
           </Stack>
         </Stack>
