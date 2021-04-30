@@ -15,7 +15,6 @@ const Input = {
         borderWidth: 0,
         bg: 'black.50',
         color: 'black.600',
-        p: 4,
       },
     },
   },

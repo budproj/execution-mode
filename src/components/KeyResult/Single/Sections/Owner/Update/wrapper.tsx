@@ -27,7 +27,14 @@ export const KeyResultSingleSectionOwnerUpdateWrapper = ({
   const [fetchUsers, { data }] = useLazyQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
 
   const handleSearch = (searchValue: string) => {
-    console.log(searchValue, 'tag')
+    if (!data) return
+
+    if (!searchValue || searchValue === '') setUserEdges(data.users.edges)
+
+    const filteredUserEdges = data.users.edges.filter((edge) =>
+      edge.node.fullName.toUpperCase().includes(searchValue.toUpperCase()),
+    )
+    setUserEdges(filteredUserEdges)
   }
 
   useEffect(() => {
@@ -45,7 +52,7 @@ export const KeyResultSingleSectionOwnerUpdateWrapper = ({
   return (
     <Stack spacing={4}>
       <KeyResultSingleSectionOwnerUpdateSearch onChange={handleSearch} />
-      {users ? (
+      {data ? (
         <KeyResultSingleSectionOwnerUpdateUserList users={users} />
       ) : (
         <KeyResultSingleSectionOwnerUpdateUserListSkeleton />
