@@ -7,6 +7,7 @@ export interface KeyResultSingleSectionOwnerUpdateProperties {
 
 export interface KeyResultSingleSectionOwnerUpdateUserListProperties {
   users: User[]
+  keyResultID?: string
 }
 
 export interface KeyResultSingleSectionOwnerUpdateUserListSkeletonProperties {

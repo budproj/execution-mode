@@ -18,6 +18,7 @@ export interface NamedAvatarProperties {
   subtitleType?: 'team' | 'company' | 'role'
   canEdit?: boolean
   canHover?: boolean
+  onClick?: () => void
 }
 
 const NamedAvatar = ({
@@ -26,6 +27,7 @@ const NamedAvatar = ({
   subtitleType,
   canEdit,
   canHover,
+  onClick,
 }: NamedAvatarProperties): ReactElement => {
   subtitleType ??= 'company'
 
@@ -69,6 +71,7 @@ const NamedAvatar = ({
       cursor={canHover ? 'pointer' : 'auto'}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
     >
       <SkeletonCircle isLoaded={isLoaded} w={12} h={12}>
         {canEdit && isHovering ? (

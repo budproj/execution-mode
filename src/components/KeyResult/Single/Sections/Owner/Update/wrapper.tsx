@@ -53,7 +53,7 @@ export const KeyResultSingleSectionOwnerUpdateWrapper = ({
     <Stack spacing={4}>
       <KeyResultSingleSectionOwnerUpdateSearch onChange={handleSearch} />
       {data ? (
-        <KeyResultSingleSectionOwnerUpdateUserList users={users} />
+        <KeyResultSingleSectionOwnerUpdateUserList users={users} keyResultID={keyResultID} />
       ) : (
         <KeyResultSingleSectionOwnerUpdateUserListSkeleton />
       )}
