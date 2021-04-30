@@ -1,0 +1,11 @@
+query GET_USER_LIST {
+  users {
+    edges {
+      node {
+        id
+        fullName
+        picture
+      }
+    }
+  }
+}

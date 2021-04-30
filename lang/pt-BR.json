@@ -155,6 +155,10 @@
     "defaultMessage": "{team} | bud",
     "description": "The page title that is displayed in the browser tab"
   },
+  "4Ekhch": {
+    "defaultMessage": "Um ícone de setas entrelaçadas. Ao clicar aqui você irá trocar o dono deste resultado-chave",
+    "description": "This message is used by screen readers when the user is focusing on the owner section of the key-result drawer"
+  },
   "4N1d+U": {
     "defaultMessage": "Últimas atividades",
     "description": "This text is displayed at the top of our timeline, as its title"

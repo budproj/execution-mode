@@ -38,7 +38,13 @@ export const KeyResultSingleSectionOwnerWrapper = ({
   }
 
   return (
-    <Popover placement="bottom-start" isOpen={isOpen} onOpen={handleOpen} onClose={handleClose}>
+    <Popover
+      isLazy
+      placement="bottom-start"
+      isOpen={isOpen}
+      onOpen={handleOpen}
+      onClose={handleClose}
+    >
       <Flex gridGap={2} direction="column">
         <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
         <PopoverTrigger>
