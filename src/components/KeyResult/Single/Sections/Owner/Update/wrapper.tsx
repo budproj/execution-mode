@@ -10,6 +10,7 @@ import { userAtomFamily } from 'src/state/recoil/user'
 
 import { KeyResultSingleSectionOwnerUpdateProperties } from './interface'
 import queries from './queries.gql'
+import { KeyResultSingleSectionOwnerUpdateSearch } from './search'
 import { KeyResultSingleSectionOwnerUpdateUserList } from './user-list'
 import { KeyResultSingleSectionOwnerUpdateUserListSkeleton } from './user-list-skeleton'
 
@@ -25,6 +26,10 @@ export const KeyResultSingleSectionOwnerUpdateWrapper = ({
   const loadUsers = useRecoilFamilyLoader(userAtomFamily)
   const [fetchUsers, { data }] = useLazyQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
 
+  const handleSearch = (searchValue: string) => {
+    console.log(searchValue, 'tag')
+  }
+
   useEffect(() => {
     if (isOpen) fetchUsers()
   }, [isOpen, fetchUsers])
@@ -39,6 +44,7 @@ export const KeyResultSingleSectionOwnerUpdateWrapper = ({
 
   return (
     <Stack spacing={4}>
+      <KeyResultSingleSectionOwnerUpdateSearch onChange={handleSearch} />
       {users ? (
         <KeyResultSingleSectionOwnerUpdateUserList users={users} />
       ) : (

@@ -12,3 +12,7 @@ export interface KeyResultSingleSectionOwnerUpdateUserListProperties {
 export interface KeyResultSingleSectionOwnerUpdateUserListSkeletonProperties {
   numberOfSkeletons?: number
 }
+
+export interface KeyResultSingleSectionOwnerUpdateSearchProperties {
+  onChange?: (searchValue: string) => void
+}
