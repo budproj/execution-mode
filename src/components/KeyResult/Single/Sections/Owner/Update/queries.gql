@@ -5,6 +5,14 @@ query GET_USER_LIST {
         id
         fullName
         picture
+        teams {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
       }
     }
   }

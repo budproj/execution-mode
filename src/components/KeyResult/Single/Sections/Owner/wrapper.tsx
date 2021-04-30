@@ -1,5 +1,5 @@
 import { Popover, PopoverTrigger, PopoverContent } from '@chakra-ui/popover'
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, useTheme } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -26,6 +26,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
   const [isOpen, setIsOpen] = useState(false)
   const intl = useIntl()
   const policy = useRecoilValue(policySelector(keyResultID))
+  const theme = useTheme()
 
   const canUpdate = policy?.update === GraphQLEffect.ALLOW
 
@@ -38,24 +39,23 @@ export const KeyResultSingleSectionOwnerWrapper = ({
   }
 
   return (
-    <Popover
-      isLazy
-      placement="bottom-start"
-      isOpen={isOpen}
-      onOpen={handleOpen}
-      onClose={handleClose}
-    >
-      <Flex gridGap={2} direction="column">
-        <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
-        <PopoverTrigger>
-          <Box>
-            <KeyResultSectionOwner keyResultID={keyResultID} />
-          </Box>
-        </PopoverTrigger>
-      </Flex>
-      <PopoverContent width="md">
-        <KeyResultSingleSectionOwnerUpdateWrapper keyResultID={keyResultID} />
-      </PopoverContent>
-    </Popover>
+    <Box zIndex={theme.zIndices.popover}>
+      <Popover placement="bottom-start" isOpen={isOpen} onOpen={handleOpen} onClose={handleClose}>
+        <Flex gridGap={2} direction="column">
+          <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
+          <Flex direction="row">
+            <PopoverTrigger>
+              <Box>
+                <KeyResultSectionOwner keyResultID={keyResultID} />
+              </Box>
+            </PopoverTrigger>
+            <Box flexGrow={1} />
+          </Flex>
+        </Flex>
+        <PopoverContent width="md">
+          <KeyResultSingleSectionOwnerUpdateWrapper keyResultID={keyResultID} isOpen={isOpen} />
+        </PopoverContent>
+      </Popover>
+    </Box>
   )
 }

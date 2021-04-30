@@ -26,6 +26,7 @@ const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties)
       userID={owner?.id}
       isLoading={!isOwnerLoaded}
       canEdit={canUpdate}
+      canHover={canUpdate}
     />
   )
 }

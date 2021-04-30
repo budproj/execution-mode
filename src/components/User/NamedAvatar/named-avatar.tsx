@@ -17,6 +17,7 @@ export interface NamedAvatarProperties {
   isLoading?: boolean
   subtitleType?: 'team' | 'company' | 'role'
   canEdit?: boolean
+  canHover?: boolean
 }
 
 const NamedAvatar = ({
@@ -24,6 +25,7 @@ const NamedAvatar = ({
   isLoading,
   subtitleType,
   canEdit,
+  canHover,
 }: NamedAvatarProperties): ReactElement => {
   subtitleType ??= 'company'
 
@@ -45,11 +47,11 @@ const NamedAvatar = ({
   const subtitle = availableSubtitles[subtitleType]
 
   const handleMouseEnter = () => {
-    if (!isHovering && canEdit) setIsHovering(true)
+    if (!isHovering && canHover) setIsHovering(true)
   }
 
   const handleMouseLeave = () => {
-    if (isHovering && canEdit) setIsHovering(false)
+    if (isHovering && canHover) setIsHovering(false)
   }
 
   useEffect(() => {
@@ -64,7 +66,7 @@ const NamedAvatar = ({
       alignItems="center"
       direction="row"
       spacing={4}
-      cursor={canEdit ? 'pointer' : 'auto'}
+      cursor={canHover ? 'pointer' : 'auto'}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -87,16 +89,12 @@ const NamedAvatar = ({
         )}
       </SkeletonCircle>
 
-      <Stack spacing={0} textAlign="left">
-        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 24)}>
+      <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
+        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
           <Text color={isHovering ? 'brand.500' : 'black.900'}>{user?.fullName}</Text>
         </Skeleton>
 
-        <Skeleton
-          isLoaded={isLoaded}
-          {...buildSkeletonMinSize(isLoaded, 60, 10)}
-          mt={isLoaded ? 0 : '8px'}
-        >
+        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>
           <Text fontSize="sm" color="gray.400">
             {subtitle}
           </Text>
