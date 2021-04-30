@@ -47,7 +47,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
           </Box>
         </PopoverTrigger>
       </Flex>
-      <PopoverContent>
+      <PopoverContent width="md">
         <KeyResultSingleSectionOwnerUpdateWrapper keyResultID={keyResultID} />
       </PopoverContent>
     </Popover>
