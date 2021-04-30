@@ -131,6 +131,10 @@
     "defaultMessage": "Minha conta | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
   },
+  "32yCaj": {
+    "defaultMessage": "Procurar",
+    "description": "The text is displayed as a placeholder in our search input inside the key-result drawer while the user is changing the owner of that key-result"
+  },
   "3e+zPY": {
     "defaultMessage": "Finalizar",
     "description": "This button is displayed with our crop picture modal to submit the form"
