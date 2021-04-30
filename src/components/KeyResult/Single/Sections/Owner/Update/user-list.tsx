@@ -19,10 +19,11 @@ interface UpdateKeyResultOwnerMutationResult {
 export const KeyResultSingleSectionOwnerUpdateUserList = ({
   users,
   keyResultID,
+  onSubmit,
 }: KeyResultSingleSectionOwnerUpdateUserListProperties) => {
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const intl = useIntl()
-  const [updateKeyResult, { loading }] = useMutation<UpdateKeyResultOwnerMutationResult>(
+  const [updateKeyResult] = useMutation<UpdateKeyResultOwnerMutationResult>(
     queries.UPDATE_KEY_RESULT_OWNER,
     {
       variables: {
@@ -38,6 +39,7 @@ export const KeyResultSingleSectionOwnerUpdateUserList = ({
   )
 
   const handleUserClick = (userID: string) => async () => {
+    if (onSubmit) onSubmit(userID)
     await updateKeyResult({
       variables: {
         userID,

@@ -8,12 +8,13 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 
 export interface KeyResultSectionOwnerProperties {
   keyResultID?: KeyResult['id']
+  isEditting?: boolean
 }
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 const policySelector = buildPartialSelector<KeyResult['policy']>('policy')
 
-const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties) => {
+const KeyResultSectionOwner = ({ keyResultID, isEditting }: KeyResultSectionOwnerProperties) => {
   const owner = useRecoilValue(ownerSelector(keyResultID))
   const policy = useRecoilValue(policySelector(keyResultID))
 
@@ -25,6 +26,7 @@ const KeyResultSectionOwner = ({ keyResultID }: KeyResultSectionOwnerProperties)
       subtitleType="role"
       userID={owner?.id}
       isLoading={!isOwnerLoaded}
+      isEditting={isEditting}
       canEdit={canUpdate}
       canHover={canUpdate}
     />

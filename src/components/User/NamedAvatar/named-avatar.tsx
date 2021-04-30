@@ -15,6 +15,7 @@ import messages from './messages'
 export interface NamedAvatarProperties {
   userID?: User['id']
   isLoading?: boolean
+  isEditting?: boolean
   subtitleType?: 'team' | 'company' | 'role'
   canEdit?: boolean
   canHover?: boolean
@@ -24,6 +25,7 @@ export interface NamedAvatarProperties {
 const NamedAvatar = ({
   userID,
   isLoading,
+  isEditting,
   subtitleType,
   canEdit,
   canHover,
@@ -74,7 +76,7 @@ const NamedAvatar = ({
       onClick={onClick}
     >
       <SkeletonCircle isLoaded={isLoaded} w={12} h={12}>
-        {canEdit && isHovering ? (
+        {canEdit && (isHovering || isEditting) ? (
           <Flex
             w={12}
             h={12}
@@ -94,7 +96,7 @@ const NamedAvatar = ({
 
       <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
-          <Text color={isHovering ? 'brand.500' : 'black.900'}>{user?.fullName}</Text>
+          <Text color={isHovering || isEditting ? 'brand.500' : 'black.900'}>{user?.fullName}</Text>
         </Skeleton>
 
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>

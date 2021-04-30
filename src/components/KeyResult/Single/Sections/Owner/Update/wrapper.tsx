@@ -21,6 +21,7 @@ interface GetUserListQueryResult {
 export const KeyResultSingleSectionOwnerUpdateWrapper = ({
   keyResultID,
   isOpen,
+  onSubmit,
 }: KeyResultSingleSectionOwnerUpdateProperties) => {
   const [users, setUserEdges] = useConnectionEdges<User>()
   const loadUsers = useRecoilFamilyLoader(userAtomFamily)
@@ -53,7 +54,11 @@ export const KeyResultSingleSectionOwnerUpdateWrapper = ({
     <Stack spacing={4}>
       <KeyResultSingleSectionOwnerUpdateSearch onChange={handleSearch} />
       {data ? (
-        <KeyResultSingleSectionOwnerUpdateUserList users={users} keyResultID={keyResultID} />
+        <KeyResultSingleSectionOwnerUpdateUserList
+          users={users}
+          keyResultID={keyResultID}
+          onSubmit={onSubmit}
+        />
       ) : (
         <KeyResultSingleSectionOwnerUpdateUserListSkeleton />
       )}
