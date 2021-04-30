@@ -57,6 +57,7 @@ const EditableTextAreaValue = ({
   const fallbackValue = customFallbackValue ?? intl.formatMessage(messages.fallbackValue)
   const defaultColor = value && !isSubmitting ? color : 'gray.400'
   const isLocked = isDisabled ?? isSubmitting
+  const isEmpty = !value || value === ''
 
   const handleHover = () => {
     if (!isHovering && !isLocked) setIsHovering(true)
@@ -110,7 +111,7 @@ const EditableTextAreaValue = ({
         >
           {isTruncated ? (
             <ExpandableText
-              text={value ?? fallbackValue}
+              text={isEmpty ? fallbackValue : value}
               maxCollapsedLength={maxCharacters}
               onClickPreview={isSubmitting ? undefined : handleStartEdit}
               onMouseEnterPreview={handleHover}

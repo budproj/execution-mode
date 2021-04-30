@@ -9,12 +9,7 @@ import KeyResultDrawerDeleteAlert from './delete-alert'
 const TestDeletedEntryTypeController = () => {
   // Const setDeletedEntryType = useSetRecoilState(keyResultDrawerIntlDeletedEntryType(keyResultID))
 
-  const handleClick = () => {
-    // SetDeletedEntryType(entryType)
-    console.log('ok')
-  }
-
-  return <button type="button" id="control-deleted-entry-type" onClick={handleClick} />
+  return <button type="button" id="control-deleted-entry-type" />
 }
 
 describe('component expectations', () => {

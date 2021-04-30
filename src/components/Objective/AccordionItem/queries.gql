@@ -47,6 +47,9 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
             id
             createdAt
           }
+          policy {
+            update
+          }
         }
       }
     }

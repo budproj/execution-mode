@@ -47,6 +47,9 @@ const KeyResultActiveAndOwnedByUser = ({
     },
   )
 
+  const isCyclesLoadedOnRecoil = data?.cycles?.edges.length === cycles.length
+  const isLoaded = called && !loading && data && isCyclesLoadedOnRecoil
+
   useEffect(() => {
     if (userID) fetchUserActiveCycles()
   }, [userID, fetchUserActiveCycles])
@@ -81,7 +84,7 @@ const KeyResultActiveAndOwnedByUser = ({
 
   return (
     <Stack direction="column" gridGap={8}>
-      {called && !loading && data ? (
+      {isLoaded ? (
         <KeyResultActiveAndOwnedByUserCyclesList cycles={cycles} onLineClick={onLineClick} />
       ) : (
         <KeyResultActiveAndOwnedByUserSkeleton />

@@ -20,6 +20,8 @@ const KeyResultActiveAndOwnedByUserCyclesList = ({
   const cyclesWithKeyResults =
     cycles?.filter((cycle) => cycle.keyResults && cycle.keyResults?.edges.length > 0) ?? []
 
+  console.log(cyclesWithKeyResults, 'tag')
+
   return cyclesWithKeyResults.length > 0 ? (
     <>
       {cyclesWithKeyResults.map((cycle) => (

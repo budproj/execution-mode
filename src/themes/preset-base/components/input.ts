@@ -9,6 +9,14 @@ const Input = {
         fontWeight: 500,
       },
     }),
+
+    solid: {
+      field: {
+        borderWidth: 0,
+        bg: 'black.50',
+        color: 'black.600',
+      },
+    },
   },
 }
 

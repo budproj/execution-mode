@@ -34,7 +34,9 @@ const KeyResultCycleList = ({
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
-  const isLoaded = Boolean(cycle)
+  const isCycleLoaded = Boolean(cycle)
+  const isCycleKeyResultsLoaded = cycle?.keyResults?.edges.length === keyResults.length
+  const isLoaded = isCycleLoaded && isCycleKeyResultsLoaded
   const keyResultIDs = keyResults.map((keyResult) => keyResult.id)
 
   useEffect(() => {

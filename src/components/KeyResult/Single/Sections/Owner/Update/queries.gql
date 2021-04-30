@@ -1,0 +1,49 @@
+query GET_USER_LIST {
+  users {
+    edges {
+      node {
+        id
+        fullName
+        picture
+        teams {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UPDATE_KEY_RESULT_OWNER($keyResultID: ID!, $userID: ID!) {
+  updateKeyResult(id: $keyResultID, data: {
+    ownerId: $userID
+  }) {
+    id
+    ownerId
+    owner {
+      id
+      firstName
+      fullName
+      nickname
+      picture
+      role
+      about
+      linkedInProfileAddress
+      teams {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
+    }
+    policy {
+      update
+    }
+  }
+}
