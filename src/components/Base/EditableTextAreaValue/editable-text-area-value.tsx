@@ -1,16 +1,8 @@
-import {
-  SkeletonText,
-  Text,
-  Textarea,
-  Stack,
-  Box,
-  TextProps,
-  Button,
-  IconButton,
-} from '@chakra-ui/react'
+import { SkeletonText, Text, Textarea, Stack, Box, TextProps, IconButton } from '@chakra-ui/react'
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
+import CheckIcon from 'src/components/Icon/Check'
 import PenIcon from 'src/components/Icon/Pen'
 import TimesIcon from 'src/components/Icon/Times'
 
@@ -133,14 +125,32 @@ const EditableTextAreaValue = ({
               aria-label={intl.formatMessage(messages.cancelIconDesc)}
               icon={
                 <TimesIcon
-                  fill="gray.500"
+                  fill="currentColor"
                   desc={intl.formatMessage(messages.cancelIconDesc)}
                   title={intl.formatMessage(messages.cancelIconTitle)}
                 />
               }
+              _hover={{
+                bg: 'red.500',
+                color: 'white',
+              }}
               onClick={handleCancel}
             />
-            <Button onClick={handleSave}>V</Button>
+            <IconButton
+              bg="brand.500"
+              aria-label={intl.formatMessage(messages.saveIconDesc)}
+              icon={
+                <CheckIcon
+                  fill="white"
+                  desc={intl.formatMessage(messages.saveIconDesc)}
+                  title={intl.formatMessage(messages.saveIconTitle)}
+                />
+              }
+              _hover={{
+                bg: 'brand.400',
+              }}
+              onClick={handleSave}
+            />
           </Stack>
         </Stack>
       ) : (

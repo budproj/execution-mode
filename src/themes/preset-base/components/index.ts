@@ -25,5 +25,3 @@ export { default as Editable } from './editable'
 export { default as Tabs } from './tabs'
 
 export { default as Drawer } from './drawer'
-
-export { default as IconButton } from './icon-button'

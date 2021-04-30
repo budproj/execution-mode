@@ -17,7 +17,6 @@ import {
   Editable,
   Tabs,
   Drawer,
-  IconButton,
 } from './components'
 
 const colors = {
@@ -171,7 +170,6 @@ const theme = extendTheme({
     Editable,
     Tabs,
     Drawer,
-    IconButton,
   },
 
   fonts: {
