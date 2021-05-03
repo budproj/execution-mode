@@ -255,6 +255,10 @@
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
   },
+  "A6/DXF": {
+    "defaultMessage": "Salvar",
+    "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to save the edition of that field"
+  },
   "AII0ao": {
     "defaultMessage": "Visualize seus resultados-chave e seus detalhes, atualize seu progresso e seu nível de confiança.",
     "description": "The page description that is displayed in Google and screen readers"
@@ -326,6 +330,10 @@
   "FPhsI3": {
     "defaultMessage": "Selecione seus times",
     "description": "This is the fallback value that goes on our user account settings page, at the fourth field to update the user informations. The fallback value appears if the user has no data at that field"
+  },
+  "FQaST6": {
+    "defaultMessage": "Um ícone de X. Ao clicar nele você irá cancelar a edição deste campo",
+    "description": "This text is used by screen readers to explain the X icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field"
   },
   "FVnpVq": {
     "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
@@ -450,6 +458,10 @@
   "O0072X": {
     "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawer"
+  },
+  "ObFHxY": {
+    "defaultMessage": "Cancelar",
+    "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field"
   },
   "P+AGjw": {
     "defaultMessage": "Como está o progresso dos times?",
@@ -1058,6 +1070,10 @@
   "xXxjVp": {
     "defaultMessage": "Existe um fator externo impedindo o progresso desse resultado-chave",
     "description": "This text explains our tag to the user"
+  },
+  "xywRWB": {
+    "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",
+    "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
   },
   "yq7/PT": {
     "defaultMessage": "Artigos de suporte",

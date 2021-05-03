@@ -62,7 +62,7 @@ export const KeyResultSingleSectionGoal = ({
         <GoalIcon fill="gray.400" w={5} h={5} desc={intl.formatMessage(messages.iconDescription)} />
       </Box>
 
-      <Stack spacing={0} zIndex={theme.zIndices.popover}>
+      <Stack spacing={0} zIndex={theme.zIndices.tooltip}>
         <KeyResultSectionHeading>{intl.formatMessage(messages.heading)}</KeyResultSectionHeading>
         <Popover
           isOpen={isUpdateOpen}
