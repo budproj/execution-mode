@@ -11,7 +11,6 @@ import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/se
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
 import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
-import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
   keyResultCheckInIsSlidding,
   keyResultCheckInProgressDraft,
@@ -29,9 +28,6 @@ export interface KeyResultListBodyColumnProgressProperties
   isDisabled?: boolean
   isActive?: boolean
 }
-
-const formatSelector = buildPartialSelector<KeyResult['format']>('format')
-const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
 
 const KeyResultListBodyColumnProgress = ({
   id,
