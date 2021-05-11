@@ -16,7 +16,7 @@ import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
 
 import 'react-perfect-scrollbar/dist/css/styles.css'
-import SmartlookProvider from '../components/Base/SmartlookProvider/smartlook-provider'
+import { SmartlookProvider } from '../components/Base/SmartlookProvider/smartlook-provider'
 
 type IntlMessage = Record<string, string>
 
@@ -60,10 +60,10 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
             <AuthzGatekeeper>
               <AuthzApolloProvider pageProps={pageProps}>
                 <MaintenanceGatekeeper>
-                  <Component {...pageProps} />
                   <HotjarProvider />
                   <SmartlookProvider />
                   <ProgressBar />
+                  <Component {...pageProps} />
                 </MaintenanceGatekeeper>
               </AuthzApolloProvider>
             </AuthzGatekeeper>
