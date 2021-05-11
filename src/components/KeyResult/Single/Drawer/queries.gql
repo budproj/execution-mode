@@ -1,4 +1,4 @@
-query GET_KEY_RESULT_WITH_ID($id: ID!, $scope: Scope!) {
+query GET_KEY_RESULT_WITH_ID($id: ID!) {
   keyResult(id: $id) {
     id
     title
@@ -8,12 +8,12 @@ query GET_KEY_RESULT_WITH_ID($id: ID!, $scope: Scope!) {
     initialValue
     format
     keyResultCheckIns(first: 1) {
-      policy(scope: $scope) {
+      policy {
         create
       }
     }
     keyResultComments(first: 1) {
-      policy(scope: $scope) {
+      policy {
         create
       }
     }

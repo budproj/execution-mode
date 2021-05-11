@@ -14,14 +14,13 @@ import queries from './queries.gql'
 
 export interface KeyResultDrawerContentProperties {
   keyResultID: KeyResult['id']
-  scope?: Scope
 }
 
 export interface GetKeyResultWithIDQuery {
   keyResult: KeyResult
 }
 
-const KeyResultDrawerContent = ({ keyResultID, scope }: KeyResultDrawerContentProperties) => {
+const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentProperties) => {
   const setKeyResult = useSetRecoilState(selectKeyResult(keyResultID))
 
   const handleQueryData = (data: GetKeyResultWithIDQuery) => {
@@ -32,7 +31,6 @@ const KeyResultDrawerContent = ({ keyResultID, scope }: KeyResultDrawerContentPr
     queries.GET_KEY_RESULT_WITH_ID,
     {
       variables: {
-        scope,
         id: keyResultID,
       },
       onCompleted: handleQueryData,
