@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client'
 import React from 'react'
 import { useRecoilState } from 'recoil'
-import smartlookClient from 'smartlook-client'
 
 import NamedAvatar from 'src/components/User/NamedAvatar'
 import { User } from 'src/components/User/types'
@@ -22,10 +21,6 @@ const Me = () => {
     onCompleted: (data) => {
       setMe(data.me.id)
       loadUser(data.me)
-      smartlookClient.identify(data.me.id, {
-        name: data.me.fullName,
-        company: data.me.companies?.edges[0]?.node.name ?? '',
-      })
     },
   })
 
