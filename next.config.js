@@ -21,7 +21,8 @@ const {
   MIRAGE_ENABLED,
   MIRAGE_FAKER_SEED,
   MAINTENANCE_MODE_ENABLED,
-  MAINTENANCE_MODE_EXPECTED_RETURN
+  MAINTENANCE_MODE_EXPECTED_RETURN,
+  SMARTLOOK_API_KEY
 } = process.env
 
 const publicRuntimeConfig = {
@@ -49,6 +50,10 @@ const publicRuntimeConfig = {
   hotjar: {
     id: parseInt(HOTJAR_ID),
     sv: parseInt(HOTJAR_SV),
+  },
+
+  smartlook: {
+    id: SMARTLOOK_API_KEY,
   },
 
   api: {

@@ -1,4 +1,4 @@
-import { Flex, Box, Skeleton, Text } from '@chakra-ui/react'
+import { Box, Flex, Skeleton, Text } from '@chakra-ui/react'
 import React, { ReactElement, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -18,6 +18,9 @@ import {
 } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
+import { keyResultAtomFamily } from '../../../../../../state/recoil/key-result'
+import { GraphQLEffect } from '../../../../../types'
+
 import messages from './messages'
 
 export interface KeyResultListBodyColumnProgressProperties
@@ -36,15 +39,15 @@ const KeyResultListBodyColumnProgress = ({
   isActive,
 }: KeyResultListBodyColumnProgressProperties): ReactElement => {
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(id))
-  const format = useRecoilValue(formatSelector(id))
-  const goal = useRecoilValue(goalSelector(id))
+  const keyResult = useRecoilValue(keyResultAtomFamily(id))
   const isSlidding = useRecoilValue(keyResultCheckInIsSlidding(id))
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
   const intl = useIntl()
 
-  const ProgressMask = selectMaskBasedOnFormat(format)
+  const ProgressMask = selectMaskBasedOnFormat(keyResult?.format)
   const isKeyResultLoaded = Boolean(id)
+  const canCreateCheckIn = keyResult?.keyResultCheckIns?.policy?.create === GraphQLEffect.ALLOW
 
   useEffect(() => {
     if (latestKeyResultCheckIn?.confidence) setConfidence(latestKeyResultCheckIn?.confidence)
@@ -55,7 +58,11 @@ const KeyResultListBodyColumnProgress = ({
       <Flex flexDir="column">
         <Box w="100%">
           <Skeleton isLoaded={isKeyResultLoaded}>
-            <ProgressSlider id={id} isDisabled={isDisabled} isActive={isActive} />
+            <ProgressSlider
+              id={id}
+              isDisabled={isDisabled ?? !canCreateCheckIn}
+              isActive={isActive}
+            />
           </Skeleton>
         </Box>
 
@@ -91,7 +98,7 @@ const KeyResultListBodyColumnProgress = ({
             isLoaded={isKeyResultLoaded}
           >
             <ProgressMask
-              value={goal}
+              value={keyResult?.goal}
               displayType="text"
               renderText={(value) => (
                 <TooltipWithDelay

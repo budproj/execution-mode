@@ -1,14 +1,14 @@
-import { hotjar } from 'react-hotjar'
+import smartlookClient from 'smartlook-client'
 
 import getConfig from 'src/config'
 
-const Hotjar = () => {
+const SmartlookProvider = () => {
   const { publicRuntimeConfig } = getConfig()
   if (publicRuntimeConfig.environment === 'production')
-    hotjar.initialize(publicRuntimeConfig.hotjar.id, publicRuntimeConfig.hotjar.sv)
+    smartlookClient.init(publicRuntimeConfig.smartlook.id)
 
   // eslint-disable-next-line unicorn/no-null
   return null
 }
 
-export default Hotjar
+export default SmartlookProvider

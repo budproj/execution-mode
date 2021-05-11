@@ -44,7 +44,7 @@ export { default as SupportButton } from './SupportButton'
 
 export { default as EmptyState } from './EmptyState'
 
-export { default as Hotjar } from './Hotjar'
+export { default as Hotjar } from './HotjarProvider'
 
 export { default as NoSSR } from './NoSSR'
 
