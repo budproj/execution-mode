@@ -18,6 +18,7 @@
       <env name="AUTH0_AUDIENCE" value="https://api.develop.getbud.co/business" />
       <env name="MIRAGE_ENABLED" value="true" />
       <env name="MIRAGE_FAKER_SEED" value="1234" />
+      <env name="SMARTLOOK_API_KEY" value="5cab2cdecc225119adeece5e90353c122c462d14" />
     </envs>
     <method v="2" />
   </configuration>
