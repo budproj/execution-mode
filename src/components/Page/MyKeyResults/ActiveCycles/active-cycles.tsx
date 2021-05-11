@@ -12,7 +12,6 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import MyKeyResultsPageSwitcher from 'src/components/Page/MyKeyResults/Switcher'
 import MyKeyResultsPageSwitcherSkeleton from 'src/components/Page/MyKeyResults/Switcher/skeleton'
 import { PageProperties } from 'src/components/Page/types'
-import { Scope } from 'src/components/types'
 import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
 import { pageTitleAtom } from 'src/state/recoil/page'
 
@@ -35,7 +34,7 @@ const MyKeyResultsActiveCyclesPage = ({ isRootPage }: PageProperties) => {
   return (
     <PageContent showBreadcrumb={!isRootPage}>
       <PageHead title={messages.metaTitle} description={messages.metaDescription} />
-      <KeyResultSingleDrawer scope={Scope.OWNS} />
+      <KeyResultSingleDrawer />
 
       <Box pb={8}>
         {loading ? (

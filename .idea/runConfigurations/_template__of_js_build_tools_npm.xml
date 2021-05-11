@@ -1,0 +1,24 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" type="js.build_tools.npm">
+    <package-json value="$PROJECT_DIR$/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="server:watch" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs>
+      <env name="NODE_ENV" value="development" />
+      <env name="PORT" value="3000" />
+      <env name="APP_ENV" value="develop" />
+      <env name="LOG_LEVEL" value="debug" />
+      <env name="LOCALE_OVERRIDE" value="pt-BR" />
+      <env name="API_GRAPHQL" value="https://localhost:8080/graphql" />
+      <env name="AUTH0_CLIENT_ID_PUBLIC" value="74b655c7cc4f80817298ecea856d2279f5ef01b4" />
+      <env name="AUTH0_DOMAIN" value="getbud-develop.us.auth0.com" />
+      <env name="AUTH0_AUDIENCE" value="https://api.develop.getbud.co/business" />
+      <env name="MIRAGE_ENABLED" value="true" />
+      <env name="MIRAGE_FAKER_SEED" value="1234" />
+    </envs>
+    <method v="2" />
+  </configuration>
+</component>

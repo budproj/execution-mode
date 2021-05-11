@@ -14,6 +14,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
             id
             value
             confidence
+            createdAt
           }
           owner {
             id
@@ -43,12 +44,13 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
               dateEnd
             }
           }
-          latestKeyResultCheckIn {
-            id
-            createdAt
-          }
           policy {
             update
+          }
+          keyResultCheckIns {
+            policy {
+              create
+            }
           }
         }
       }
