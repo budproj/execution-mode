@@ -9,6 +9,9 @@ query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES($userID: ID!) {
           period
         }
         keyResults(ownerId: $userID) {
+          policy {
+            create
+          }
           edges {
             node {
               id
