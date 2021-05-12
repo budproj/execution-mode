@@ -55,3 +55,5 @@ spec:
               value: '2216269'
             - name: HOTJAR_SV
               value: '6'
+            - name: SMARTLOOK_API_KEY
+              value: '5cab2cdecc225119adeece5e90353c122c462d14'
