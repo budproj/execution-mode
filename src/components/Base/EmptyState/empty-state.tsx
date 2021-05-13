@@ -16,7 +16,7 @@ const EmptyState = ({ labelMessage }: EmptyStateProperties) => {
       <Box>
         <Image src="/images/bud-team-at-work.png" alt={intl.formatMessage(messages.imageAlt)} />
       </Box>
-      <Text color="black.300">{intl.formatMessage(labelMessage)}</Text>
+      <Text color="gray.300">{intl.formatMessage(labelMessage)}</Text>
     </Flex>
   )
 }
