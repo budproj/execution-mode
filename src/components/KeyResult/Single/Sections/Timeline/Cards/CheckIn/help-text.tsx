@@ -32,7 +32,7 @@ const KeyResultSectionTimelineCardCheckInHelpText = ({
 
   return (
     <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 24)}>
-      <StatHelpText fontSize="sm" color="gray.200" fontWeight={400} lineHeight={1}>
+      <StatHelpText fontSize="sm" color="gray.300" fontWeight={400} lineHeight={1}>
         {intl.formatMessage(messages.helperText, {
           author: user?.fullName,
           time: formattedRelativeDate?.toLowerCase(),

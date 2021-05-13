@@ -21,11 +21,11 @@ const KeyResultSectionTimelineCardCheckInComment = ({
   return (
     <Flex direction="column" gridGap={4}>
       <Divider borderColor={BORDER_COLOR} />
-      <Heading as="h4" fontSize="xs" color="gray.200" textTransform="uppercase">
+      <Heading as="h4" fontSize="xs" color="gray.300" textTransform="uppercase">
         {intl.formatMessage(messages.commentTitle)}
       </Heading>
       <SkeletonText isLoaded={isLoaded} noOfLines={4}>
-        <StatHelpText color="black.700">
+        <StatHelpText color="gray.500">
           <ExpandableText text={comment ?? ''} fontSize="sm" color="gray.400" />
         </StatHelpText>
       </SkeletonText>
