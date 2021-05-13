@@ -42,9 +42,9 @@ const SliderWithDetails = ({
     >
       <SliderTrack
         h={trackThickness}
-        bg="gray.50"
+        bg="black.200"
         borderRadius="full"
-        _disabled={{ bg: 'gray.50' }}
+        _disabled={{ bg: 'black.200' }}
       >
         <SliderFilledTrack bg={trackColor} borderRadius="full" borderRightRadius="0" />
       </SliderTrack>
@@ -66,7 +66,7 @@ const SliderWithDetails = ({
             {Math.round(value ?? 0)}%
           </Text>
 
-          <Text fontSize="xs" color="black.400" fontWeight={400} width="max-content">
+          <Text fontSize="xs" color="gray.300" fontWeight={400} width="max-content">
             {intl.formatMessage(messages.progress)}
           </Text>
         </Box>
