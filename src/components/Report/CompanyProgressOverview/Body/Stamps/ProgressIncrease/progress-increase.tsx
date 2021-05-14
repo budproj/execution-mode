@@ -62,7 +62,7 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
         </Heading>
       </Skeleton>
 
-      <Text fontSize="xs" fontWeight={500} color="gray.100">
+      <Text fontSize="xs" fontWeight={500} color="gray.300">
         {intl.formatMessage(messages.descriptionText)}
       </Text>
     </CompanyProgressOverviewBodyStampBase>
