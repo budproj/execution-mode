@@ -63,7 +63,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     )
 
     const handleSliderUpdateEnd = useCallback(
-      (newValue: number | number[]) => {
+      (newValue: number) => {
         if (isChanging && newValue && newValue === draftValue) {
           setOpenedPopover(true)
           setIsChanging(false)
@@ -85,7 +85,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     // onChange events. Even if we provide the isDisabled tag to it, it dispatches the onChange and
     // onChangeEnd events as soon as you pass an defined value. That triggers all the popovers to
     // appears (since our applications understands that the slider was updates upon mounting).
-    // To prevent that I've added that dumb componen called ProgressSliderSlider, that simples behaves
+    // To prevent that I've added that dumb component called ProgressSliderSlider, that simples behaves
     // as a different node in our tree and allow us to avoid that behaviour.
     return isLoaded ? (
       <ProgressSliderSliderWithReference
