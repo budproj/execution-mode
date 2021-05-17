@@ -1,4 +1,4 @@
-import React, { RefObject, forwardRef, useCallback, useState, useEffect } from 'react'
+import React, { forwardRef, RefObject, useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -16,6 +16,8 @@ import {
   keyResultLatestCheckIn,
 } from 'src/state/recoil/key-result/check-in'
 
+import { KEY_RESULT_TYPE } from '../constants'
+
 import messages from './messages'
 
 export interface ProgressSliderSliderProperties {
@@ -26,6 +28,7 @@ export interface ProgressSliderSliderProperties {
 
 const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('initialValue')
 const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
+const typeSelector = buildPartialSelector<KeyResult['type']>('type')
 
 const ProgressSliderSliderWithReference = forwardRef(
   (
@@ -43,6 +46,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(keyResultID))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
     const goal = useRecoilValue(goalSelector(keyResultID))
+    const type = useRecoilValue(typeSelector(keyResultID))
     const step = useRecoilValue(keyResultCheckInProgressSliderStep(keyResultID))
     const setOpenedPopover = useSetRecoilState(keyResultCheckInPopoverOpen(keyResultID))
     const [confidenceTag, setConfidenceInConfidenceTag] = useConfidenceTag(
@@ -63,7 +67,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     )
 
     const handleSliderUpdateEnd = useCallback(
-      (newValue: number | number[]) => {
+      (newValue: number) => {
         if (isChanging && newValue && newValue === draftValue) {
           setOpenedPopover(true)
           setIsChanging(false)
@@ -85,7 +89,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     // onChange events. Even if we provide the isDisabled tag to it, it dispatches the onChange and
     // onChangeEnd events as soon as you pass an defined value. That triggers all the popovers to
     // appears (since our applications understands that the slider was updates upon mounting).
-    // To prevent that I've added that dumb componen called ProgressSliderSlider, that simples behaves
+    // To prevent that I've added that dumb component called ProgressSliderSlider, that simples behaves
     // as a different node in our tree and allow us to avoid that behaviour.
     return isLoaded ? (
       <ProgressSliderSliderWithReference
@@ -98,6 +102,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
         focusThumbOnChange={false}
         isDisabled={isDisabled}
         thumbTooltipLabel={intl.formatMessage(messages.thumbTooltip)}
+        isReversed={type === KEY_RESULT_TYPE.DESCENDING}
         onChange={handleSliderUpdate}
         onChangeEnd={handleSliderUpdateEnd}
       />

@@ -4,7 +4,7 @@ import { User } from 'src/components/User/types'
 
 import { GraphQLConnection, GraphQLNode, GraphQLPolicy } from '../types'
 
-import { KEY_RESULT_FORMAT } from './constants'
+import { KEY_RESULT_FORMAT, KEY_RESULT_TYPE } from './constants'
 
 export type KeyResultTimelineEntry = KeyResultCheckIn | KeyResultComment
 
@@ -38,6 +38,7 @@ export interface KeyResult extends GraphQLNode {
   initialValue: number
   goal: number
   format: KEY_RESULT_FORMAT
+  type: KEY_RESULT_TYPE
   isOutdated: boolean
   updatedAt: string
   owner: User
