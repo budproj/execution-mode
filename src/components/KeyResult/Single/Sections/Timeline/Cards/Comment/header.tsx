@@ -38,7 +38,7 @@ const KeyResultSectionTimelineCardCommentHeader = ({
         </Skeleton>
 
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 18)}>
-          <Text color="black.300" fontSize="xs">
+          <Text color="gray.300" fontSize="xs">
             {formattedDate}
           </Text>
         </Skeleton>
