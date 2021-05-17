@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { Stack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -6,12 +7,14 @@ import { useSetRecoilState } from 'recoil'
 import { ApolloQueryErrorBoundary, PageContent, PageHead } from 'src/components/Base'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { PageProperties } from 'src/components/Page/types'
-import ChildTeamsObjectives from 'src/components/Team/ChildTeamsObjectives'
 import { Team } from 'src/components/Team/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { pageTitleAtom } from 'src/state/recoil/page'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
+import { ChildTeamsWrapper } from './ChildTeams/wrapper'
+import { TeamMembersWrapper } from './Members/wrapper'
+import { TeamObjectivesWrapper } from './Objectives/wrapper'
 import messages from './messages'
 import queries from './queries.gql'
 import { GetTeamNameQuery } from './types'
@@ -50,15 +53,26 @@ const ExploreTeamPage = ({ teamId, isRootPage }: ExploreTeamPageProperties) => {
 
   return (
     <ApolloQueryErrorBoundary error={error}>
-      <PageContent breadcrumbParams={breadcrumbParameters} showBreadcrumb={!isRootPage}>
+      <PageContent
+        breadcrumbParams={breadcrumbParameters}
+        showBreadcrumb={!isRootPage}
+        bg="black.50"
+      >
+        <KeyResultSingleDrawer />
         <PageHead
           title={messages.metaTitle}
           description={messages.metaDescription}
           titleValues={{ team: teamName ?? metaTitleLoadingFallback }}
         />
 
-        <ChildTeamsObjectives rootTeamId={teamId} />
-        <KeyResultSingleDrawer />
+        <Stack direction="row" w="full">
+          <TeamObjectivesWrapper teamID={teamId} />
+
+          <Stack spacing={6} flexGrow={1}>
+            <TeamMembersWrapper />
+            <ChildTeamsWrapper />
+          </Stack>
+        </Stack>
       </PageContent>
     </ApolloQueryErrorBoundary>
   )
