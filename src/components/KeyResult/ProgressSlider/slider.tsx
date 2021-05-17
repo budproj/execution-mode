@@ -1,4 +1,4 @@
-import React, { RefObject, forwardRef, useCallback, useState, useEffect } from 'react'
+import React, { forwardRef, RefObject, useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -16,6 +16,8 @@ import {
   keyResultLatestCheckIn,
 } from 'src/state/recoil/key-result/check-in'
 
+import { KEY_RESULT_TYPE } from '../constants'
+
 import messages from './messages'
 
 export interface ProgressSliderSliderProperties {
@@ -26,6 +28,7 @@ export interface ProgressSliderSliderProperties {
 
 const initialValueSelector = buildPartialSelector<KeyResult['initialValue']>('initialValue')
 const goalSelector = buildPartialSelector<KeyResult['goal']>('goal')
+const typeSelector = buildPartialSelector<KeyResult['type']>('type')
 
 const ProgressSliderSliderWithReference = forwardRef(
   (
@@ -43,6 +46,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
     const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(keyResultID))
     const initialValue = useRecoilValue(initialValueSelector(keyResultID))
     const goal = useRecoilValue(goalSelector(keyResultID))
+    const type = useRecoilValue(typeSelector(keyResultID))
     const step = useRecoilValue(keyResultCheckInProgressSliderStep(keyResultID))
     const setOpenedPopover = useSetRecoilState(keyResultCheckInPopoverOpen(keyResultID))
     const [confidenceTag, setConfidenceInConfidenceTag] = useConfidenceTag(
@@ -98,6 +102,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
         focusThumbOnChange={false}
         isDisabled={isDisabled}
         thumbTooltipLabel={intl.formatMessage(messages.thumbTooltip)}
+        isReversed={type === KEY_RESULT_TYPE.DESCENDING}
         onChange={handleSliderUpdate}
         onChangeEnd={handleSliderUpdateEnd}
       />

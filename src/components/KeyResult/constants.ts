@@ -4,3 +4,8 @@ export enum KEY_RESULT_FORMAT {
   COIN_BRL = 'COIN_BRL',
   COIN_USD = 'COIN_USD',
 }
+
+export enum KEY_RESULT_TYPE {
+  ASCENDING = 'ASCENDING',
+  DESCENDING = 'DESCENDING',
+}
