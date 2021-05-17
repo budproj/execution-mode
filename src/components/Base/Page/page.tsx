@@ -1,4 +1,5 @@
-import { Box, BoxProps } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/layout'
+import { BoxProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
 import MainAppBar from 'src/components/Base/MainAppBar'
@@ -11,10 +12,10 @@ export interface PageProperties extends BoxProps {
 }
 
 const Page = ({ children, appBarVariant, ...rest }: PageProperties): ReactElement => (
-  <Box {...rest}>
+  <Flex minH="100vh" direction="column" {...rest}>
     <MainAppBar variant={appBarVariant} />
     {children}
-  </Box>
+  </Flex>
 )
 
 export default Page

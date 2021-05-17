@@ -3,7 +3,7 @@ import faker from 'faker'
 import React from 'react'
 import { defineMessage } from 'react-intl'
 
-import PageHead from './page-head'
+import PageMetaHead from './page-meta-head'
 
 describe('component renderization', () => {
   it('renders a provided title', () => {
@@ -16,7 +16,7 @@ describe('component renderization', () => {
     })
     /* eslint-enable formatjs/enforce-description, formatjs/enforce-id, formatjs/enforce-default-message */
 
-    const result = enzyme.shallow(<PageHead title={titleMessage} />)
+    const result = enzyme.shallow(<PageMetaHead title={titleMessage} />)
 
     const title = result.find('title')
 
@@ -36,7 +36,7 @@ describe('component renderization', () => {
     /* eslint-enable formatjs/enforce-description, formatjs/enforce-id, formatjs/enforce-default-message */
 
     const result = enzyme.shallow(
-      <PageHead title={titleMessage} titleValues={{ var: fakeVariable }} />,
+      <PageMetaHead title={titleMessage} titleValues={{ var: fakeVariable }} />,
     )
 
     const title = result.find('title')
@@ -55,7 +55,7 @@ describe('component renderization', () => {
     })
     /* eslint-enable formatjs/enforce-description, formatjs/enforce-id, formatjs/enforce-default-message */
 
-    const result = enzyme.shallow(<PageHead description={descriptionMessage} />)
+    const result = enzyme.shallow(<PageMetaHead description={descriptionMessage} />)
 
     const meta = result.find('meta')
 
@@ -63,7 +63,7 @@ describe('component renderization', () => {
   })
 
   it('renders a default title if none was provided', () => {
-    const result = enzyme.shallow(<PageHead />)
+    const result = enzyme.shallow(<PageMetaHead />)
 
     const title = result.find('title')
 
@@ -71,7 +71,7 @@ describe('component renderization', () => {
   })
 
   it('renders a default description if none was provided', () => {
-    const result = enzyme.shallow(<PageHead />)
+    const result = enzyme.shallow(<PageMetaHead />)
 
     const meta = result.find('meta')
 

@@ -6,13 +6,13 @@ import defaultMessages from './messages'
 
 type MessageFormatPrimitiveValue = string | number | boolean | null | undefined
 
-export interface PageHeadProperties {
+export interface PageMetaHeadProperties {
   title: MessageDescriptor
   description: MessageDescriptor
   titleValues?: Record<string, MessageFormatPrimitiveValue>
 }
 
-const PageHead = ({ title, description, titleValues }: PageHeadProperties) => {
+const PageMetaHead = ({ title, description, titleValues }: PageMetaHeadProperties) => {
   const intl = useIntl()
 
   return (
@@ -23,9 +23,9 @@ const PageHead = ({ title, description, titleValues }: PageHeadProperties) => {
   )
 }
 
-PageHead.defaultProps = {
+PageMetaHead.defaultProps = {
   title: defaultMessages.title,
   description: defaultMessages.description,
 }
 
-export default PageHead
+export default PageMetaHead

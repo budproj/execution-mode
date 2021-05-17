@@ -2,7 +2,7 @@ import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { PageHead } from 'src/components/Base'
+import { PageMetaHead } from 'src/components/Base'
 import IntlLink from 'src/components/Base/IntlLink'
 import PageContent from 'src/components/Base/PageContent'
 
@@ -12,8 +12,8 @@ const UnknownErrorPage = () => {
   const intl = useIntl()
 
   return (
-    <PageContent hideContentHeader contentTopGutter={0}>
-      <PageHead title={messages.metaTitle} />
+    <PageContent>
+      <PageMetaHead title={messages.metaTitle} />
 
       <Flex direction="column" alignItems="center" gridGap={5}>
         <Box>

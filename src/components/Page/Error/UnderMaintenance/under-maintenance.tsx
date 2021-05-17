@@ -3,9 +3,10 @@ import capitalize from 'lodash/capitalize'
 import React from 'react'
 import { FormatDateOptions, useIntl } from 'react-intl'
 
-import { PageHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import getConfig from 'src/config'
+
+import { PageMetaHead } from '../../../Base'
 
 import messages from './messages'
 
@@ -24,8 +25,8 @@ const UnderMaintenanceErrorPage = () => {
   }
 
   return (
-    <PageContent hideContentHeader contentTopGutter={0}>
-      <PageHead title={messages.metaTitle} />
+    <PageContent>
+      <PageMetaHead title={messages.metaTitle} />
 
       <Flex direction="column" alignItems="center" gridGap={5}>
         <Box>
