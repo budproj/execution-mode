@@ -11,10 +11,11 @@ import { Team } from 'src/components/Team/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
+import { TeamActiveObjectives } from '../../Team/ActiveObjectives/wrapper'
+
 import { ChildTeamsWrapper } from './ChildTeams/wrapper'
 import { TeamHeader } from './Header/wrapper'
 import { TeamMembersWrapper } from './Members/wrapper'
-import { TeamObjectivesWrapper } from './Objectives/wrapper'
 import messages from './messages'
 import queries from './queries.gql'
 import { GetTeamNameQuery } from './types'
@@ -55,7 +56,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
           <Box />
 
           <GridItem>
-            <TeamObjectivesWrapper teamID={teamId} />
+            <TeamActiveObjectives teamID={teamId} />
           </GridItem>
 
           <GridItem>
