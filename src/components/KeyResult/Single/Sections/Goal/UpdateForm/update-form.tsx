@@ -66,16 +66,18 @@ export const KeyResultSingleSectionGoalUpdateForm = ({
     if (onCancel) onCancel()
   }
 
-  const handleChange = (
-    valueName: string,
-    values: KeyResultGoalAndInitialValueFormValues,
-    setValues: (values: KeyResultGoalAndInitialValueFormValues) => void,
-  ) => (newValue?: string | number | null) => {
-    setValues({
-      ...values,
-      [valueName]: newValue,
-    })
-  }
+  const handleChange =
+    (
+      valueName: string,
+      values: KeyResultGoalAndInitialValueFormValues,
+      setValues: (values: KeyResultGoalAndInitialValueFormValues) => void,
+    ) =>
+    (newValue?: string | number | null) => {
+      setValues({
+        ...values,
+        [valueName]: newValue,
+      })
+    }
 
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>

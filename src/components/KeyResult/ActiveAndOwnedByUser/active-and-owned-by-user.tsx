@@ -35,17 +35,15 @@ const KeyResultActiveAndOwnedByUser = ({
   const [cycles, setCycleEdges] = useConnectionEdges<Cycle>()
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
-  const [
-    fetchUserActiveCycles,
-    { data, loading, called },
-  ] = useLazyQuery<GetKeyResultActiveAndOwnedByUserWithBindingQuery>(
-    queries.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
-    {
-      variables: {
-        userID,
+  const [fetchUserActiveCycles, { data, loading, called }] =
+    useLazyQuery<GetKeyResultActiveAndOwnedByUserWithBindingQuery>(
+      queries.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
+      {
+        variables: {
+          userID,
+        },
       },
-    },
-  )
+    )
 
   const isCyclesLoadedOnRecoil = data?.cycles?.edges.length === cycles.length
   const isLoaded = called && !loading && data && isCyclesLoadedOnRecoil

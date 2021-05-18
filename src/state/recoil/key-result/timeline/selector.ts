@@ -12,29 +12,33 @@ const KEY = `${PREFIX}::SELECTOR`
 
 export const timelinePartialSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 
-export const getTimeline = (id?: KeyResult['id']) => ({ get }: RecoilInterfaceGetter) => {
-  if (!id) return
+export const getTimeline =
+  (id?: KeyResult['id']) =>
+  ({ get }: RecoilInterfaceGetter) => {
+    if (!id) return
 
-  const timeline = get(timelinePartialSelector(id))
+    const timeline = get(timelinePartialSelector(id))
 
-  return timeline
-}
+    return timeline
+  }
 
-export const setTimeline = (id?: KeyResult['id']) => (
-  { get, set }: RecoilInterfaceReadWrite,
-  newValue: GraphQLConnection<KeyResultTimelineEntry> | DefaultValue | undefined,
-) => {
-  if (!id) return
-  if (!newValue) return
-  if (newValue instanceof DefaultValue) return
+export const setTimeline =
+  (id?: KeyResult['id']) =>
+  (
+    { get, set }: RecoilInterfaceReadWrite,
+    newValue: GraphQLConnection<KeyResultTimelineEntry> | DefaultValue | undefined,
+  ) => {
+    if (!id) return
+    if (!newValue) return
+    if (newValue instanceof DefaultValue) return
 
-  const timelineSelector = timelinePartialSelector(id)
-  const previousTimeline = get(timelineSelector) ?? {}
+    const timelineSelector = timelinePartialSelector(id)
+    const previousTimeline = get(timelineSelector) ?? {}
 
-  const timeline = deepmerge(previousTimeline, newValue)
+    const timeline = deepmerge(previousTimeline, newValue)
 
-  set(timelineSelector, timeline)
-}
+    set(timelineSelector, timeline)
+  }
 
 export const selectTimeline = selectorFamily<
   GraphQLConnection<KeyResultTimelineEntry> | undefined,

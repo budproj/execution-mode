@@ -28,17 +28,15 @@ const CycleFilterQuarterSelector = ({
 }: CycleFilterQuarterSelectorProperties) => {
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const [cycles, setCycleEdges] = useConnectionEdges<Cycle>()
-  const [
-    fetchCycleOptions,
-    { loading, data },
-  ] = useLazyQuery<QuarterlyCyclesFromFilteredParentsResult>(
-    queries.GET_QUARTERLY_CYCLES_FROM_FILTERED_PARENTS,
-    {
-      variables: {
-        parentIds: filteredYearIDs,
+  const [fetchCycleOptions, { loading, data }] =
+    useLazyQuery<QuarterlyCyclesFromFilteredParentsResult>(
+      queries.GET_QUARTERLY_CYCLES_FROM_FILTERED_PARENTS,
+      {
+        variables: {
+          parentIds: filteredYearIDs,
+        },
       },
-    },
-  )
+    )
 
   const hasParentCycles = filteredYearIDs && filteredYearIDs.length > 0
   const quarters = data && groupBy(cycles, (item) => item.period)

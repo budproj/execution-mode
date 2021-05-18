@@ -14,49 +14,51 @@ const KEY = `${PREFIX}::LATEST_ENTRY`
 
 export const selectTimelineConnection = buildPartialSelector<KeyResult['timeline']>('timeline')
 
-export const getLatestTimelineEntry = (id?: KeyResult['id']) => ({
-  get,
-}: RecoilInterfaceGetter) => {
-  if (!id) return
+export const getLatestTimelineEntry =
+  (id?: KeyResult['id']) =>
+  ({ get }: RecoilInterfaceGetter) => {
+    if (!id) return
 
-  const timelineConnection = get(selectTimelineConnection(id))
-  const latestTimelineEntry = timelineConnection?.edges?.[0].node
+    const timelineConnection = get(selectTimelineConnection(id))
+    const latestTimelineEntry = timelineConnection?.edges?.[0].node
 
-  return latestTimelineEntry
-}
-
-export const setLatestTimelineEntry = (id?: KeyResult['id']) => (
-  { get, set }: RecoilInterfaceReadWrite,
-  newTimelineEntry: KeyResultTimelineEntry | DefaultValue | undefined,
-) => {
-  if (!id) return
-
-  const timelineConnectionSelector = selectTimelineConnection(id)
-  const timelineConnection = get(timelineConnectionSelector)
-
-  const userID = get(meAtom)
-  const user = get(userAtomFamily(userID))
-
-  const newLocalTimelineEntry = {
-    user,
-    createdAt: new Date(),
-    ...newTimelineEntry,
+    return latestTimelineEntry
   }
-  const newTimelineEdges = remove([
-    {
-      node: newLocalTimelineEntry,
-    },
-    ...(timelineConnection?.edges ?? []),
-  ])
 
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  const newTimelineConnection = {
-    ...timelineConnection,
-    edges: newTimelineEdges,
-  } as GraphQLConnection<KeyResultTimelineEntry>
+export const setLatestTimelineEntry =
+  (id?: KeyResult['id']) =>
+  (
+    { get, set }: RecoilInterfaceReadWrite,
+    newTimelineEntry: KeyResultTimelineEntry | DefaultValue | undefined,
+  ) => {
+    if (!id) return
 
-  set(timelineConnectionSelector, newTimelineConnection)
-}
+    const timelineConnectionSelector = selectTimelineConnection(id)
+    const timelineConnection = get(timelineConnectionSelector)
+
+    const userID = get(meAtom)
+    const user = get(userAtomFamily(userID))
+
+    const newLocalTimelineEntry = {
+      user,
+      createdAt: new Date(),
+      ...newTimelineEntry,
+    }
+    const newTimelineEdges = remove([
+      {
+        node: newLocalTimelineEntry,
+      },
+      ...(timelineConnection?.edges ?? []),
+    ])
+
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    const newTimelineConnection = {
+      ...timelineConnection,
+      edges: newTimelineEdges,
+    } as GraphQLConnection<KeyResultTimelineEntry>
+
+    set(timelineConnectionSelector, newTimelineConnection)
+  }
 
 export const selectLatestTimelineEntry = selectorFamily<
   KeyResultTimelineEntry | undefined,

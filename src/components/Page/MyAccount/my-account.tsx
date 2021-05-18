@@ -6,7 +6,7 @@ import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { SettingsAccount, SettingsSidebarMenu } from 'src/components/Settings'
 
-import { PageHeader } from '../../../Base/PageHeader/wrapper'
+import { PageHeader } from '../../Base/PageHeader/wrapper'
 
 import messages from './messages'
 

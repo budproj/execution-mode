@@ -18,23 +18,23 @@ type IntlRouteGroup = Record<LOCALE, IntlRoute['source']>
 
 type IntlRouteTree = Record<string, IntlRouteGroup>
 
-export const getRouteBasedOnLocale = (route: string) => ({
-  get,
-}: RecoilInterfaceGetter): string => {
-  const locale = get(localeAtom)
-  if (!locale) return route
+export const getRouteBasedOnLocale =
+  (route: string) =>
+  ({ get }: RecoilInterfaceGetter): string => {
+    const locale = get(localeAtom)
+    if (!locale) return route
 
-  const { publicRuntimeConfig } = getConfig()
+    const { publicRuntimeConfig } = getConfig()
 
-  const currentRoute = get(currentNextRouteAtom)
-  if (!currentRoute) return route
+    const currentRoute = get(currentNextRouteAtom)
+    if (!currentRoute) return route
 
-  const absoluteRoute = selectAbsoluteRoute(route, currentRoute)
-  const intlRoute = buildIntlRoute(locale, absoluteRoute, route, publicRuntimeConfig.intlRoutes)
-  const staticIntlRoute = parseDynamicRoute(intlRoute, route)
+    const absoluteRoute = selectAbsoluteRoute(route, currentRoute)
+    const intlRoute = buildIntlRoute(locale, absoluteRoute, route, publicRuntimeConfig.intlRoutes)
+    const staticIntlRoute = parseDynamicRoute(intlRoute, route)
 
-  return staticIntlRoute
-}
+    return staticIntlRoute
+  }
 
 export const selectRouteBasedOnLocale = selectorFamily<
   string,

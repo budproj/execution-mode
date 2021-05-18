@@ -8,12 +8,14 @@ import selectLatestCheckIn from './latest'
 
 const KEY = `${PREFIX}::LATEST`
 
-export const getLatestCheckInValue = (id?: KeyResult['id']) => ({ get }: RecoilInterfaceGetter) => {
-  if (!id) return
+export const getLatestCheckInValue =
+  (id?: KeyResult['id']) =>
+  ({ get }: RecoilInterfaceGetter) => {
+    if (!id) return
 
-  const keyResultLatestCheckIn = get(selectLatestCheckIn(id))
-  return keyResultLatestCheckIn?.value
-}
+    const keyResultLatestCheckIn = get(selectLatestCheckIn(id))
+    return keyResultLatestCheckIn?.value
+  }
 
 export const selectLatestCheckInValue = selectorFamily<
   KeyResultCheckIn['value'] | undefined,
