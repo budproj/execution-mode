@@ -1,6 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
 import { AccordionPanel } from '@chakra-ui/react'
-import isEqual from 'lodash/isEqual'
 import uniqueId from 'lodash/uniqueId'
 import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
@@ -46,7 +45,7 @@ const ObjectiveAccordionPanel = ({
     called &&
     !loading &&
     typeof data !== 'undefined' &&
-    isEqual(keyResultIDs, selectKeyResultIDs(keyResults))
+    data?.objective?.keyResults?.edges.length === keyResultIDs?.length
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
