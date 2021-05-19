@@ -4,10 +4,12 @@ import React from 'react'
 import ObjectiveAccordionItem from 'src/components/Objective/AccordionItem'
 
 export interface ObjectivesSkeletonProperties {
-  numOfSkeletons: number
+  numOfSkeletons?: number
 }
 
-const ObjectivesSkeleton = ({ numOfSkeletons }: ObjectivesSkeletonProperties) => {
+export const ObjectiveListSkeleton = ({ numOfSkeletons }: ObjectivesSkeletonProperties) => {
+  numOfSkeletons ??= 3
+
   return (
     <>
       {[...new Array(numOfSkeletons)].map(() => (
@@ -16,9 +18,3 @@ const ObjectivesSkeleton = ({ numOfSkeletons }: ObjectivesSkeletonProperties) =>
     </>
   )
 }
-
-ObjectivesSkeleton.defaultProps = {
-  numOfSkeletons: 3,
-}
-
-export default ObjectivesSkeleton

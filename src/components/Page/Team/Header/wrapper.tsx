@@ -1,5 +1,5 @@
 import { Stack } from '@chakra-ui/layout'
-import { SkeletonText, Text } from '@chakra-ui/react'
+import { Skeleton, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -30,11 +30,16 @@ export const TeamHeader = ({ team, isLoaded }: TeamHeaderProperties) => {
         </Text>
       </SkeletonText>
 
-      <Stack direction="row" spacing="8" pt="4">
-        <SliderWithFilledTrack value={progress} />
-        <Text color="brand.500" fontWeight={700}>
-          {intl.formatNumber(progress / 100, { style: 'percent' })}
-        </Text>
+      <Stack direction="row" spacing="8" pt="4" alignItems="center">
+        <Skeleton isLoaded={isLoaded} w="full" pb={isLoaded ? '2' : 0}>
+          <SliderWithFilledTrack value={progress} />
+        </Skeleton>
+
+        <Skeleton isLoaded={isLoaded}>
+          <Text color="brand.500" fontWeight={700}>
+            {intl.formatNumber(progress / 100, { style: 'percent' })}
+          </Text>
+        </Skeleton>
       </Stack>
     </PageHeader>
   )

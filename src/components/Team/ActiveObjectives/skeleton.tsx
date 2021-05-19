@@ -4,21 +4,19 @@ import React from 'react'
 import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
 
 export interface ChildTeamsObjectivesSkeletonProperties {
-  numOfSkeletons: number
+  numOfSkeletons?: number
 }
 
-const ChildTeamsObjectivesSkeleton = ({
+export const TeamActiveObjectivesSkeleton = ({
   numOfSkeletons,
-}: ChildTeamsObjectivesSkeletonProperties) => (
-  <>
-    {[...new Array(numOfSkeletons)].map(() => (
-      <ObjectivesFromCycle key={uniqueId()} />
-    ))}
-  </>
-)
+}: ChildTeamsObjectivesSkeletonProperties) => {
+  numOfSkeletons ??= 1
 
-ChildTeamsObjectivesSkeleton.defaultProps = {
-  numOfSkeletons: 3,
+  return (
+    <>
+      {[...new Array(numOfSkeletons)].map(() => (
+        <ObjectivesFromCycle key={uniqueId()} />
+      ))}
+    </>
+  )
 }
-
-export default ChildTeamsObjectivesSkeleton

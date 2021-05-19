@@ -12,6 +12,7 @@ import { Objective } from '../../Objective/types'
 import { Team } from '../types'
 
 import queries from './queries.gql'
+import { TeamActiveObjectivesSkeleton } from './skeleton'
 
 export interface TeamActiveObjectivesProperties {
   teamID: string
@@ -21,7 +22,9 @@ export interface GetTeamActiveObjectivesQuery {
   team: Partial<Team>
 }
 
-const groupObjectivesByCycle = (objectives: Objective[]): Array<[Cycle, Objective[]]> => {
+const groupObjectivesByCycle = (objectives?: Objective[]): Array<[Cycle, Objective[]]> => {
+  if (!objectives) return
+
   const objectivesCyclePairs: Array<[Cycle, Objective]> = objectives.map((objective) => [
     objective.cycle,
     objective,
@@ -36,7 +39,7 @@ const groupObjectivesByCycle = (objectives: Objective[]): Array<[Cycle, Objectiv
 
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
   const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
-  const { data, loading } = useQuery<GetTeamActiveObjectivesQuery>(
+  const { data, loading, called } = useQuery<GetTeamActiveObjectivesQuery>(
     queries.GET_TEAM_ACTIVE_OBJECTIVES,
     {
       variables: { teamID },
@@ -45,6 +48,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   const [objectives, setObjectiveEdges] = useConnectionEdges<Objective>()
 
   const groupedObjectivesByCycle = groupObjectivesByCycle(objectives)
+  const isLoaded = called && !loading && groupedObjectivesByCycle
 
   useEffect(() => {
     if (data) setObjectiveEdges(data?.team.objectives?.edges)
@@ -54,38 +58,15 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     if (objectives) loadObjectivesOnRecoil(objectives)
   }, [objectives, loadObjectivesOnRecoil])
 
-  // Return (
-  //   <Flex gridGap={4} direction="column">
-  //     {isLoaded ? (
-  //       <>
-  //         {hasObjectives(data?.team) && (
-  //           <ObjectiveGroup
-  //             groupTitle={data?.team.name}
-  //             objectiveIDs={teamObjectives.map((objective) => objective.id)}
-  //           />
-  //         )}
-  //
-  //         {childTeams?.map(
-  //           (childTeam) =>
-  //             hasObjectives(childTeam) && (
-  //               <ObjectiveGroup
-  //                 key={childTeam.id ?? uniqueId()}
-  //                 groupTitle={childTeam.name}
-  //                 objectiveIDs={childTeam.objectives?.edges.map((edge) => edge.node.id)}
-  //               />
-  //             ),
-  //         )}
-  //       </>
-  //     ) : (
-  //       <ChildTeamsObjectivesSkeleton />
-  //     )}
-  //   </Flex>
-  // )
   return (
     <Stack>
-      {groupedObjectivesByCycle.map(([cycle, objectives]) => (
-        <ObjectivesFromCycle key={cycle.id} cycle={cycle} objectives={objectives} />
-      ))}
+      {isLoaded ? (
+        groupedObjectivesByCycle.map(([cycle, objectives]) => (
+          <ObjectivesFromCycle key={cycle.id} cycle={cycle} objectives={objectives} />
+        ))
+      ) : (
+        <TeamActiveObjectivesSkeleton />
+      )}
     </Stack>
   )
 }
