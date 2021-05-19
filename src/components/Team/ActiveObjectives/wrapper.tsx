@@ -22,7 +22,9 @@ export interface GetTeamActiveObjectivesQuery {
   team: Partial<Team>
 }
 
-const groupObjectivesByCycle = (objectives?: Objective[]): Array<[Cycle, Objective[]]> => {
+const groupObjectivesByCycle = (
+  objectives?: Objective[],
+): Array<[Cycle, Objective[]]> | undefined => {
   if (!objectives) return
 
   const objectivesCyclePairs: Array<[Cycle, Objective]> = objectives.map((objective) => [
@@ -60,7 +62,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
 
   return (
     <Stack>
-      {isLoaded ? (
+      {isLoaded && groupedObjectivesByCycle ? (
         groupedObjectivesByCycle.map(([cycle, objectives]) => (
           <ObjectivesFromCycle key={cycle.id} cycle={cycle} objectives={objectives} />
         ))

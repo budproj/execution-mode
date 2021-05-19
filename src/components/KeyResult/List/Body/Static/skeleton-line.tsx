@@ -68,6 +68,9 @@ const KeyResultListBodyStaticSkeletonLine = ({
       borderStyle="solid"
       cursor={onLineClick ? 'pointer' : 'auto'}
       _hover={onLineClick ? { background: 'black.50' } : {}}
+      _last={{
+        borderColor: 'transparent',
+      }}
       onMouseDown={handleLineClick}
     >
       {columns.map((column) => {
