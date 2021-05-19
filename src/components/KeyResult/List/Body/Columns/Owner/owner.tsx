@@ -25,6 +25,7 @@ export interface KeyResultListBodyColumnOwnerProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
   displayName?: boolean
+  displayRole?: boolean
 }
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
@@ -36,6 +37,7 @@ const handleMouseDownCapture = (event: React.MouseEvent<HTMLElement, MouseEvent>
 const KeyResultListBodyColumnOwner = ({
   id,
   displayName,
+  displayRole,
   justifyContent,
 }: KeyResultListBodyColumnOwnerProperties): ReactElement => {
   const owner = useRecoilValue(ownerSelector(id))
@@ -69,16 +71,29 @@ const KeyResultListBodyColumnOwner = ({
               />
             </SkeletonCircle>
 
-            {displayName && (
-              <Skeleton
-                display="flex"
-                alignItems="center"
-                isLoaded={isOwnerLoaded}
-                {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}
-              >
-                <Text>{owner?.fullName}</Text>
-              </Skeleton>
-            )}
+            <Flex direction="column">
+              {displayName && (
+                <Skeleton
+                  display="flex"
+                  alignItems="center"
+                  isLoaded={isOwnerLoaded}
+                  {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}
+                >
+                  <Text color="gray.500">{owner?.fullName}</Text>
+                </Skeleton>
+              )}
+
+              {displayRole && (
+                <Skeleton
+                  display="flex"
+                  alignItems="center"
+                  isLoaded={isOwnerLoaded}
+                  {...buildSkeletonMinSize(isOwnerLoaded, 100, 26)}
+                >
+                  <Text color="gray.400">{owner?.role}</Text>
+                </Skeleton>
+              )}
+            </Flex>
           </Flex>
         </PopoverTrigger>
 

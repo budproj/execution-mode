@@ -24,7 +24,7 @@ const ObjectiveAccordionItem = ({ objectiveID }: ObjectiveAccordionItemPropertie
   }, [objective, setConfidence])
 
   return (
-    <AccordionItem border="none" bg="white" boxShadow="sm" p={4} borderRadius="10">
+    <AccordionItem border="none" bg="white" boxShadow="xs" p={4} borderRadius="10">
       {({ isExpanded }) => (
         <>
           <ObjectiveAccordionButton

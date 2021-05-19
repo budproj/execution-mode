@@ -19,6 +19,7 @@ import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
 import { keyResultAtomFamily } from '../../../../../../state/recoil/key-result'
 import { GraphQLEffect } from '../../../../../types'
+import ConfidenceTag from '../../../../ConfidenceTag'
 
 import messages from './messages'
 
@@ -27,12 +28,18 @@ export interface KeyResultListBodyColumnProgressProperties
   id?: KeyResult['id']
   isDisabled?: boolean
   isActive?: boolean
+  hideGoal?: boolean
+  hideCurrentValue?: boolean
+  withConfidenceTag?: boolean
 }
 
 const KeyResultListBodyColumnProgress = ({
   id,
   isDisabled,
   isActive,
+  hideGoal,
+  hideCurrentValue,
+  withConfidenceTag,
 }: KeyResultListBodyColumnProgressProperties): ReactElement => {
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(id))
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
@@ -53,6 +60,12 @@ const KeyResultListBodyColumnProgress = ({
     <KeyResultListBodyColumnBase preventLineClick>
       <Flex flexDir="column">
         <Box w="100%">
+          {withConfidenceTag && (
+            <Skeleton isLoaded={isKeyResultLoaded}>
+              <ConfidenceTag showTooltip confidenceValue={latestKeyResultCheckIn?.confidence} />
+            </Skeleton>
+          )}
+
           <Skeleton isLoaded={isKeyResultLoaded}>
             <ProgressSlider
               id={id}
@@ -63,51 +76,62 @@ const KeyResultListBodyColumnProgress = ({
         </Box>
 
         <Flex>
-          <Skeleton
-            noOfLines={1}
-            minW="40%"
-            mt={isKeyResultLoaded ? 'inherit' : '4px'}
-            isLoaded={isKeyResultLoaded}
-          >
-            <ProgressMask
-              value={draftValue}
-              displayType="text"
-              renderText={(value) => (
-                <TooltipWithDelay
-                  label={intl.formatMessage(messages.leftSideValueTooltip)}
-                  placement="bottom-start"
-                >
-                  <Text color={isSlidding ? confidenceTag.color.primary : 'gray.300'} cursor="help">
-                    {value}
-                  </Text>
-                </TooltipWithDelay>
-              )}
-            />
-          </Skeleton>
+          <Box>
+            {!hideCurrentValue && (
+              <Skeleton
+                noOfLines={1}
+                minW="40%"
+                mt={isKeyResultLoaded ? 'inherit' : '4px'}
+                isLoaded={isKeyResultLoaded}
+              >
+                <ProgressMask
+                  value={draftValue}
+                  displayType="text"
+                  renderText={(value) => (
+                    <TooltipWithDelay
+                      label={intl.formatMessage(messages.leftSideValueTooltip)}
+                      placement="bottom-start"
+                    >
+                      <Text
+                        color={isSlidding ? confidenceTag.color.primary : 'gray.300'}
+                        cursor="help"
+                      >
+                        {value}
+                      </Text>
+                    </TooltipWithDelay>
+                  )}
+                />
+              </Skeleton>
+            )}
+          </Box>
 
           <Box flexGrow={1} />
 
-          <Skeleton
-            noOfLines={1}
-            minW="40%"
-            mt={isKeyResultLoaded ? 'inherit' : '4px'}
-            isLoaded={isKeyResultLoaded}
-          >
-            <ProgressMask
-              value={keyResult?.goal}
-              displayType="text"
-              renderText={(value) => (
-                <TooltipWithDelay
-                  label={intl.formatMessage(messages.rightSideValueTooltip)}
-                  placement="bottom-end"
-                >
-                  <Text color="gray.300" textAlign="right" cursor="help">
-                    {value}
-                  </Text>
-                </TooltipWithDelay>
-              )}
-            />
-          </Skeleton>
+          <Box>
+            {!hideGoal && (
+              <Skeleton
+                noOfLines={1}
+                minW="40%"
+                mt={isKeyResultLoaded ? 'inherit' : '4px'}
+                isLoaded={isKeyResultLoaded}
+              >
+                <ProgressMask
+                  value={keyResult?.goal}
+                  displayType="text"
+                  renderText={(value) => (
+                    <TooltipWithDelay
+                      label={intl.formatMessage(messages.rightSideValueTooltip)}
+                      placement="bottom-end"
+                    >
+                      <Text color="gray.300" textAlign="right" cursor="help">
+                        {value}
+                      </Text>
+                    </TooltipWithDelay>
+                  )}
+                />
+              </Skeleton>
+            )}
+          </Box>
         </Flex>
       </Flex>
     </KeyResultListBodyColumnBase>
