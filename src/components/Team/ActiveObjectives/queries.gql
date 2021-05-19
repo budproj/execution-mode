@@ -1,43 +1,22 @@
-query GET_TEAM_AND_CHILD_TEAMS_OBJECTIVES($rootTeamId: ID!) {
-  team(id: $rootTeamId) {
+query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
+  team(id: $teamID) {
     id
     name
-    objectives {
+    objectives(active: true) {
       edges {
         node {
           id
           title
           progressIncreaseSinceLastWeek
           cycle {
+            id
+            period
+            cadence
             dateEnd
           }
           status {
             progress
             confidence
-          }
-        }
-      }
-    }
-    teams {
-      edges {
-        node {
-          id
-          name
-          objectives {
-            edges {
-              node {
-                id
-                title
-                progressIncreaseSinceLastWeek
-                cycle {
-                  dateEnd
-                }
-                status {
-                  progress
-                  confidence
-                }
-              }
-            }
           }
         }
       }

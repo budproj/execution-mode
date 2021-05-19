@@ -1,7 +1,7 @@
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
-import ObjectiveGroup from 'src/components/Objective/Group'
+import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
 
 export interface ChildTeamsObjectivesSkeletonProperties {
   numOfSkeletons: number
@@ -12,7 +12,7 @@ const ChildTeamsObjectivesSkeleton = ({
 }: ChildTeamsObjectivesSkeletonProperties) => (
   <>
     {[...new Array(numOfSkeletons)].map(() => (
-      <ObjectiveGroup key={uniqueId()} />
+      <ObjectivesFromCycle key={uniqueId()} />
     ))}
   </>
 )

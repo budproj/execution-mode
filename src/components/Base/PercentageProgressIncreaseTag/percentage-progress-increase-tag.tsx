@@ -45,7 +45,7 @@ const PercentageProgressIncreaseTag = ({
 
   return (
     <Tag
-      borderRadius="full"
+      borderRadius="4"
       py={2}
       px={px ?? 4}
       bg={bgColor}

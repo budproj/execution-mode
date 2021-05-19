@@ -48,7 +48,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
         />
         <KeyResultSingleDrawer />
 
-        <Grid templateColumns="2fr 1fr" gridGap="8">
+        <Grid templateColumns="2fr 1fr" templateRows="auto 1fr" gridGap="8" w="full">
           <GridItem>
             <TeamHeader isLoaded={called && !loading} team={data?.team} />
           </GridItem>
