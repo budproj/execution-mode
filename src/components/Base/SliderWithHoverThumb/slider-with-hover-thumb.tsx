@@ -22,20 +22,36 @@ export interface SliderWithHoverThumbProperties extends SliderProps {
   isReversed?: boolean
 }
 
-const marshalReversedValue = (value?: number, min?: number, isReversed?: boolean): number => {
+const marshalReversedValue = (
+  value?: number,
+  min?: number,
+  max?: number,
+  isReversed?: boolean,
+): number => {
   value ??= 0
-  min ??= isReversed ? 0 : 100
+  min ??= isReversed ? 100 : 0
+  max ??= isReversed ? 0 : 100
   if (!isReversed) return value
 
-  return min - value
+  const deltaMin = min - value
+
+  return max + deltaMin
 }
 
-const unmarshalReversedValue = (value?: number, min?: number, isReversed?: boolean): number => {
+const unmarshalReversedValue = (
+  value?: number,
+  min?: number,
+  max?: number,
+  isReversed?: boolean,
+): number => {
   value ??= 0
   min ??= isReversed ? 0 : 100
+  max ??= isReversed ? 100 : 0
   if (!isReversed) return value
 
-  return Math.abs(value - min)
+  const deltaMax = value - max
+
+  return min - deltaMax
 }
 
 const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProperties>(
@@ -57,25 +73,25 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
   ) => {
     const intl = useIntl()
     const [controlledValue, setControlledValue] = useState(
-      marshalReversedValue(value, min, isReversed),
+      marshalReversedValue(value, min, max, isReversed),
     )
 
     const handleChange = (newValue: number) => {
-      const unmarshaledValue = unmarshalReversedValue(newValue, min, isReversed)
+      const unmarshalledValue = unmarshalReversedValue(newValue, min, max, isReversed)
 
-      if (onChange) onChange(unmarshaledValue)
+      if (onChange) onChange(unmarshalledValue)
       setControlledValue(newValue)
     }
 
     const handleChangeEnd = (newValue: number) => {
       if (onChangeEnd) {
-        const unmarshaledValue = unmarshalReversedValue(newValue, min, isReversed)
-        onChangeEnd(unmarshaledValue)
+        const unmarshalledValue = unmarshalReversedValue(newValue, min, max, isReversed)
+        onChangeEnd(unmarshalledValue)
       }
     }
 
     useEffect(() => {
-      const marshaledValue = marshalReversedValue(value, min, isReversed)
+      const marshaledValue = marshalReversedValue(value, min, max, isReversed)
       if (value && marshaledValue !== controlledValue) {
         setControlledValue(marshaledValue)
       }

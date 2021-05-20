@@ -8,13 +8,16 @@ import useValueSignal from 'src/state/hooks/useValueSignal'
 import { COLOR_SCHEME_HASHMAP, SIGNAL } from 'src/state/hooks/useValueSignal/constants'
 import { COLOR_SCHEME } from 'src/themes/tokens'
 
+import { KEY_RESULT_TYPE } from '../../../../../constants'
+
 import { BORDER_COLOR } from './constants'
 import messages from './messages'
 
 export interface KeyResultSectionTimelineCardCheckInValueIncreaseProperties {
   format?: KeyResult['format']
-  value?: KeyResultCheckIn['value']
+  progress?: number
   valueIncrease?: KeyResultCheckIn['valueIncrease']
+  type?: KEY_RESULT_TYPE
 }
 
 const customColorScheme: typeof COLOR_SCHEME_HASHMAP = {
@@ -24,13 +27,17 @@ const customColorScheme: typeof COLOR_SCHEME_HASHMAP = {
 
 const KeyResultSectionTimelineCardCheckInValueIncrease = ({
   format,
-  value,
+  progress,
   valueIncrease,
+  type,
 }: KeyResultSectionTimelineCardCheckInValueIncreaseProperties) => {
   const intl = useIntl()
   const [previousValueIncrease, setValueIncrease, signalAttributes] = useValueSignal(
     valueIncrease,
     customColorScheme,
+    {
+      type,
+    },
   )
 
   const Mask = selectMaskBasedOnFormat(format)
@@ -70,7 +77,7 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
 
           <Skeleton isLoaded={isLoaded}>
             <Text color="gray.200" fontSize="xl">
-              <Mask value={value} displayType="text" />
+              <Mask value={Math.round(progress ?? 0)} displayType="text" />
             </Text>
           </Skeleton>
         </Flex>
