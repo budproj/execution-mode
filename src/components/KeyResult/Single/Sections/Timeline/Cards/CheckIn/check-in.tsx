@@ -13,10 +13,10 @@ import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-ent
 import KeyResultSectionTimelineCardCheckInComment from './comment'
 import KeyResultSectionTimelineCardCheckInHelpText from './help-text'
 import messages from './messages'
-import KeyResultSectionTimelineCardCheckInProgress from './progress'
 import KeyResultSectionTimelineCardCheckInProgressBar from './progress-bar'
 import queries from './queries.gql'
 import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative-confidence-tag'
+import { KeyResultSectionTimelineCardCheckInValue } from './value'
 import KeyResultSectionTimelineCardCheckInValueIncrease from './value-increase'
 
 export interface KeyResultSectionTimelineCardCheckInProperties {
@@ -96,16 +96,17 @@ const KeyResultSectionTimelineCardCheckIn = ({
             />
           </Box>
 
-          <KeyResultSectionTimelineCardCheckInProgress
-            progress={data?.progress}
+          <KeyResultSectionTimelineCardCheckInValue
+            value={data?.value}
             confidence={data?.confidence}
             parent={data?.parent}
+            format={keyResult?.format}
           />
 
           {data?.valueIncrease !== 0 && (
             <KeyResultSectionTimelineCardCheckInValueIncrease
               format={keyResult?.format}
-              value={data?.value}
+              progress={data?.progress}
               valueIncrease={data?.valueIncrease}
             />
           )}

@@ -13,7 +13,7 @@ import messages from './messages'
 
 export interface KeyResultSectionTimelineCardCheckInValueIncreaseProperties {
   format?: KeyResult['format']
-  value?: KeyResultCheckIn['value']
+  progress?: number
   valueIncrease?: KeyResultCheckIn['valueIncrease']
 }
 
@@ -24,7 +24,7 @@ const customColorScheme: typeof COLOR_SCHEME_HASHMAP = {
 
 const KeyResultSectionTimelineCardCheckInValueIncrease = ({
   format,
-  value,
+  progress,
   valueIncrease,
 }: KeyResultSectionTimelineCardCheckInValueIncreaseProperties) => {
   const intl = useIntl()
@@ -70,7 +70,7 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
 
           <Skeleton isLoaded={isLoaded}>
             <Text color="gray.200" fontSize="xl">
-              <Mask value={value} displayType="text" />
+              <Mask value={Math.round(progress ?? 0)} displayType="text" />
             </Text>
           </Skeleton>
         </Flex>

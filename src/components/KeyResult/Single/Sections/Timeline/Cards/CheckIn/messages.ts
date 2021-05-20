@@ -52,8 +52,8 @@ export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
   },
 
   valueIncreaseRightColumnTitle: {
-    defaultMessage: 'Novo valor',
-    id: 'XnTd/f',
+    defaultMessage: 'Progresso atual',
+    id: '20iPM0',
     description:
       'This text is displayed in our check-in card, as a title for the right column in the progress increase section',
   },
