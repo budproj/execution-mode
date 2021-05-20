@@ -105,9 +105,10 @@ const KeyResultSectionTimelineCardCheckIn = ({
 
           {data?.valueIncrease !== 0 && (
             <KeyResultSectionTimelineCardCheckInValueIncrease
-              format={keyResult?.format}
               progress={data?.progress}
               valueIncrease={data?.valueIncrease}
+              format={keyResult?.format}
+              type={keyResult?.type}
             />
           )}
 

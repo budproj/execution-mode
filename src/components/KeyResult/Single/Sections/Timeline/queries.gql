@@ -2,6 +2,7 @@ query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $first: Int, $after: String) {
   keyResult(id: $id) {
     id
     format
+    type
     timeline(first: $first, after: $after) {
       edges {
         node {

@@ -8,6 +8,8 @@ import useValueSignal from 'src/state/hooks/useValueSignal'
 import { COLOR_SCHEME_HASHMAP, SIGNAL } from 'src/state/hooks/useValueSignal/constants'
 import { COLOR_SCHEME } from 'src/themes/tokens'
 
+import { KEY_RESULT_TYPE } from '../../../../../constants'
+
 import { BORDER_COLOR } from './constants'
 import messages from './messages'
 
@@ -15,6 +17,7 @@ export interface KeyResultSectionTimelineCardCheckInValueIncreaseProperties {
   format?: KeyResult['format']
   progress?: number
   valueIncrease?: KeyResultCheckIn['valueIncrease']
+  type?: KEY_RESULT_TYPE
 }
 
 const customColorScheme: typeof COLOR_SCHEME_HASHMAP = {
@@ -26,11 +29,15 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
   format,
   progress,
   valueIncrease,
+  type,
 }: KeyResultSectionTimelineCardCheckInValueIncreaseProperties) => {
   const intl = useIntl()
   const [previousValueIncrease, setValueIncrease, signalAttributes] = useValueSignal(
     valueIncrease,
     customColorScheme,
+    {
+      type,
+    },
   )
 
   const Mask = selectMaskBasedOnFormat(format)
