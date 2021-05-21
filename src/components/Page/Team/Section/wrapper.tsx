@@ -9,8 +9,8 @@ interface TeamSectionWrapperProperties extends BoxProps {
 }
 
 export const TeamSectionWrapper = ({ title, ...rest }: TeamSectionWrapperProperties) => (
-  <Stack flexGrow={1}>
+  <Stack flexGrow={1} flex={1} overflow="auto">
     <TeamSectionHeading>{title}</TeamSectionHeading>
-    <Box p={2} bg="white" borderRadius="10" w="full" h="full" {...rest} />
+    <Box p={2} bg="white" borderRadius="10" w="full" h="full" overflow="auto" {...rest} />
   </Stack>
 )

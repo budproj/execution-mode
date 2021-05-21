@@ -6,5 +6,15 @@ query GET_TEAM_NAME($teamId: ID!) {
     status {
       progress
     }
+    users {
+      edges {
+        node {
+          id
+          fullName
+          role
+          picture
+        }
+      }
+    }
   }
 }

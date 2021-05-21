@@ -48,7 +48,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
         />
         <KeyResultSingleDrawer />
 
-        <Grid templateColumns="2fr 1fr" templateRows="auto 1fr" gridGap="8" flexGrow={1}>
+        <Grid templateColumns="3.5fr 1fr" templateRows="auto 1fr" gridGap="8" flexGrow={1}>
           <GridItem>
             <TeamHeader isLoaded={called && !loading} team={data?.team} />
           </GridItem>
@@ -61,7 +61,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
 
           <GridItem>
             <Stack direction="column" h="full" spacing="8">
-              <TeamMembersWrapper />
+              <TeamMembersWrapper teamID={teamId} />
               <ChildTeamsWrapper />
             </Stack>
           </GridItem>

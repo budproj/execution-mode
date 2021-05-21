@@ -12,7 +12,6 @@ import { KeyResultSingleSectionOwnerUpdateProperties } from './interface'
 import queries from './queries.gql'
 import { KeyResultSingleSectionOwnerUpdateSearch } from './search'
 import { KeyResultSingleSectionOwnerUpdateUserList } from './user-list'
-import { KeyResultSingleSectionOwnerUpdateUserListSkeleton } from './user-list-skeleton'
 
 interface GetUserListQueryResult {
   users: GraphQLConnection<User>
@@ -53,15 +52,12 @@ export const KeyResultSingleSectionOwnerUpdateWrapper = ({
   return (
     <Stack spacing={4}>
       <KeyResultSingleSectionOwnerUpdateSearch onChange={handleSearch} />
-      {data ? (
-        <KeyResultSingleSectionOwnerUpdateUserList
-          users={users}
-          keyResultID={keyResultID}
-          onSubmit={onSubmit}
-        />
-      ) : (
-        <KeyResultSingleSectionOwnerUpdateUserListSkeleton />
-      )}
+      <KeyResultSingleSectionOwnerUpdateUserList
+        isLoading={!data}
+        users={users}
+        keyResultID={keyResultID}
+        onSubmit={onSubmit}
+      />
     </Stack>
   )
 }

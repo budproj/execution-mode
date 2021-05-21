@@ -11,12 +11,13 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import selectUser from 'src/state/recoil/user/selector'
 
 import messages from './messages'
+import { NamedAvatarSubtitleType } from './types'
 
 export interface NamedAvatarProperties {
   userID?: User['id']
   isLoading?: boolean
   isEditting?: boolean
-  subtitleType?: 'team' | 'company' | 'role'
+  subtitleType?: NamedAvatarSubtitleType
   canEdit?: boolean
   canHover?: boolean
   onClick?: () => void

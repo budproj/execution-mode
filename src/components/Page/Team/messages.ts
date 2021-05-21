@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type TeamObjectivesPageMessage = 'metaTitle' | 'metaDescription' | 'metaTitleLoadingFallback'
+type ExploreTeamPageMessage = 'metaTitle' | 'metaDescription' | 'metaTitleLoadingFallback'
 
-export default defineMessages<TeamObjectivesPageMessage>({
+export default defineMessages<ExploreTeamPageMessage>({
   metaTitle: {
     defaultMessage: '{team} | bud ',
     id: '4Ac1ls',
