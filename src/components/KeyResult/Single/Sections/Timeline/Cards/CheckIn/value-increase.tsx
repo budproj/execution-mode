@@ -8,7 +8,7 @@ import useValueSignal from 'src/state/hooks/useValueSignal'
 import { COLOR_SCHEME_HASHMAP, SIGNAL } from 'src/state/hooks/useValueSignal/constants'
 import { COLOR_SCHEME } from 'src/themes/tokens'
 
-import { KEY_RESULT_TYPE } from '../../../../../constants'
+import { KEY_RESULT_TYPE, KEY_RESULT_FORMAT } from '../../../../../constants'
 
 import { BORDER_COLOR } from './constants'
 import messages from './messages'
@@ -41,6 +41,7 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
   )
 
   const Mask = selectMaskBasedOnFormat(format)
+  const IncreaseMask = selectMaskBasedOnFormat(KEY_RESULT_FORMAT.PERCENTAGE)
   const absoluteValueIncrease = Math.abs(valueIncrease ?? 0)
   const highlightColor = `${signalAttributes.colorScheme}.500`
   const isLoaded = Boolean(valueIncrease) || valueIncrease === 0
@@ -77,7 +78,7 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
 
           <Skeleton isLoaded={isLoaded}>
             <Text color="gray.200" fontSize="xl">
-              <Mask value={Math.round(progress ?? 0)} displayType="text" />
+              <IncreaseMask value={Math.round(progress ?? 0)} displayType="text" />
             </Text>
           </Skeleton>
         </Flex>
