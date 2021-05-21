@@ -71,6 +71,10 @@
     "defaultMessage": "Com Barreira",
     "description": "We use this tag to group every key result with confidence lower than 0"
   },
+  "02eAuB": {
+    "defaultMessage": "Essa semana:",
+    "description": "The text displayed as a prefix in our progress tag label in the team objective accordion button"
+  },
   "02lpnJ": {
     "defaultMessage": "Comentário",
     "description": "This text is displayed in some places in our timeline card, showing the type of the card in a friendly name"
@@ -946,10 +950,6 @@
   "or8fId": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
-  },
-  "oycX/u": {
-    "defaultMessage": "Essa semana",
-    "description": "The text displayed as a prefix in our progress tag label in the team objective accordion button"
   },
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
