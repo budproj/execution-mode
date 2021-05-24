@@ -19,13 +19,13 @@ export default Factory.extend({
       [KEY_RESULT_FORMAT.COIN_BRL]: () => faker.random.number({ min: 0 }),
       [KEY_RESULT_FORMAT.COIN_USD]: () => faker.random.number({ min: 0 }),
     }
-    const formatHandler = handlers[(this.format as any) as KEY_RESULT_FORMAT]
+    const formatHandler = handlers[this.format as any as KEY_RESULT_FORMAT]
 
     return formatHandler()
   },
 
   goal() {
-    const initialValue = (this.initialValue as any) as number
+    const initialValue = this.initialValue as any as number
     const min = initialValue * 1.1
     const handlers = {
       [KEY_RESULT_FORMAT.NUMBER]: () => faker.random.number({ min }),
@@ -33,7 +33,7 @@ export default Factory.extend({
       [KEY_RESULT_FORMAT.COIN_BRL]: () => faker.random.number({ min }),
       [KEY_RESULT_FORMAT.COIN_USD]: () => faker.random.number({ min }),
     }
-    const formatHandler = handlers[(this.format as any) as KEY_RESULT_FORMAT]
+    const formatHandler = handlers[this.format as any as KEY_RESULT_FORMAT]
 
     return formatHandler()
   },

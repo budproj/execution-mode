@@ -37,9 +37,9 @@ export const selectKeyResultIconColorBasedOnTitle = selectorFamily<
   get: getIconColorBasedOnTitle,
 })
 
-export const getIconDrawingBasedOnTitle = (
-  title?: KeyResult['title'],
-) => (): KeyResultIconDrawing => selectFromArrayBasedOnString(DRAWINGS_AVAILABLE, title)
+export const getIconDrawingBasedOnTitle =
+  (title?: KeyResult['title']) => (): KeyResultIconDrawing =>
+    selectFromArrayBasedOnString(DRAWINGS_AVAILABLE, title)
 
 export const selectKeyResultIconDrawingBasedOnTitle = selectorFamily<
   KeyResultIconDrawing,
@@ -49,9 +49,9 @@ export const selectKeyResultIconDrawingBasedOnTitle = selectorFamily<
   get: getIconDrawingBasedOnTitle,
 })
 
-export const getDescBasedOnDrawing = (descGroup: typeof iconDescMessages) => (
-  drawing: KeyResultIconDrawing,
-) => () => descGroup[drawing]
+export const getDescBasedOnDrawing =
+  (descGroup: typeof iconDescMessages) => (drawing: KeyResultIconDrawing) => () =>
+    descGroup[drawing]
 
 export const selectKeyResultIconDescBasedOnDrawing = (descGroup: typeof iconDescMessages) =>
   selectorFamily<MessageDescriptor, KeyResultIconDrawing>({

@@ -18,40 +18,41 @@ const KEY = `${PREFIX}::PARTIAL_SELECTOR`
 type ValueOf<T> = T[keyof T]
 type KeyResultPart = ValueOf<KeyResult> | ValueOf<Objective> | ValueOf<User> | ValueOf<Team>
 
-export const getKeyResultPart = <T extends KeyResultPart>(part: string) => (
-  id?: KeyResult['id'],
-) => ({ get }: RecoilInterfaceGetter) => {
-  if (!id) return
+export const getKeyResultPart =
+  <T extends KeyResultPart>(part: string) =>
+  (id?: KeyResult['id']) =>
+  ({ get }: RecoilInterfaceGetter) => {
+    if (!id) return
 
-  const keyResult = get(keyResultAtomFamily(id))
-  const keyResultPart = getPath(keyResult, part) as T
+    const keyResult = get(keyResultAtomFamily(id))
+    const keyResultPart = getPath(keyResult, part) as T
 
-  return keyResultPart
-}
+    return keyResultPart
+  }
 
-export const setKeyResultPart = <T>(part: string, defaultValue?: any) => (id?: KeyResult['id']) => (
-  { get, set, reset }: RecoilInterfaceReadWrite,
-  newValue: T | DefaultValue | undefined,
-) => {
-  if (!id) return
-  if (newValue instanceof DefaultValue)
-    return resetKeyResultPart(part)(id)({ get, set, reset }, defaultValue)
+export const setKeyResultPart =
+  <T>(part: string, defaultValue?: any) =>
+  (id?: KeyResult['id']) =>
+  ({ get, set, reset }: RecoilInterfaceReadWrite, newValue: T | DefaultValue | undefined) => {
+    if (!id) return
+    if (newValue instanceof DefaultValue)
+      return resetKeyResultPart(part)(id)({ get, set, reset }, defaultValue)
 
-  const originalKeyResult = clone(get(keyResultAtomFamily(id))) as KeyResult
-  const newKeyResult = setWith(originalKeyResult, part, newValue, clone)
+    const originalKeyResult = clone(get(keyResultAtomFamily(id))) as KeyResult
+    const newKeyResult = setWith(originalKeyResult, part, newValue, clone)
 
-  set(keyResultAtomFamily(id), newKeyResult)
-}
+    set(keyResultAtomFamily(id), newKeyResult)
+  }
 
-const resetKeyResultPart = (part: string) => (id?: KeyResult['id']) => (
-  { get, set }: RecoilInterfaceReadWrite,
-  defaultValue?: any,
-) => {
-  const originalKeyResult = clone(get(keyResultAtomFamily(id))) as KeyResult
-  const newKeyResult = setWith(originalKeyResult, part, defaultValue, clone)
+const resetKeyResultPart =
+  (part: string) =>
+  (id?: KeyResult['id']) =>
+  ({ get, set }: RecoilInterfaceReadWrite, defaultValue?: any) => {
+    const originalKeyResult = clone(get(keyResultAtomFamily(id))) as KeyResult
+    const newKeyResult = setWith(originalKeyResult, part, defaultValue, clone)
 
-  set(keyResultAtomFamily(id), newKeyResult)
-}
+    set(keyResultAtomFamily(id), newKeyResult)
+  }
 
 export const buildPartialSelector = <T extends KeyResultPart>(part: string) =>
   selectorFamily<T | undefined, KeyResult['id'] | undefined>({

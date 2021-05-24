@@ -1,6 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
 import { AccordionPanel } from '@chakra-ui/react'
-import isEqual from 'lodash/isEqual'
 import uniqueId from 'lodash/uniqueId'
 import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
@@ -46,7 +45,7 @@ const ObjectiveAccordionPanel = ({
     called &&
     !loading &&
     typeof data !== 'undefined' &&
-    isEqual(keyResultIDs, selectKeyResultIDs(keyResults))
+    data?.objective?.keyResults?.edges.length === keyResultIDs?.length
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
@@ -68,33 +67,41 @@ const ObjectiveAccordionPanel = ({
   }, [keyResults])
 
   return (
-    <AccordionPanel>
+    <AccordionPanel pb={0}>
       {isExpanded && (
         <KeyResultList
           id={`OBJECTIVE_${objectiveID ?? uniqueId()}_ACCORDION`}
-          py={8}
+          pt={4}
           keyResultIDs={keyResultIDs}
           isLoading={!syncedWithLocalState}
-          templateColumns="0.1fr 2fr 1fr 2fr 1fr 2fr"
+          templateColumns="2fr 1fr 0.1fr 1fr"
           columns={[
-            KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR,
             KEY_RESULT_LIST_COLUMN.KEY_RESULT,
-            KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL,
             KEY_RESULT_LIST_COLUMN.PROGRESS,
-            KEY_RESULT_LIST_COLUMN.CYCLE,
+            KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS,
             KEY_RESULT_LIST_COLUMN.OWNER,
           ]}
           headProperties={{
-            [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]: {
+            [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
               hidden: true,
             },
           }}
           bodyProperties={{
             [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
               withLastUpdateInfo: true,
+              withDynamicIcon: true,
+            },
+            [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+              withConfidenceTag: true,
+              hideGoal: true,
+              hideCurrentValue: true,
+            },
+            [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
+              isDisabled: true,
             },
             [KEY_RESULT_LIST_COLUMN.OWNER]: {
               displayName: true,
+              displayRole: true,
             },
           }}
           onLineClick={handleLineClick}

@@ -10,12 +10,14 @@ const selectCyclesFromList = selectorFamily<
   Array<Cycle['id']> | undefined
 >({
   key: `${PREFIX}::SELECT_FROM_LIST`,
-  get: (cycleIDs) => ({ get }) => {
-    if (!cycleIDs) return []
-    const cycles = cycleIDs.map((id) => get(cycleAtomFamily(id)))
+  get:
+    (cycleIDs) =>
+    ({ get }) => {
+      if (!cycleIDs) return []
+      const cycles = cycleIDs.map((id) => get(cycleAtomFamily(id)))
 
-    return cycles
-  },
+      return cycles
+    },
 })
 
 export default selectCyclesFromList

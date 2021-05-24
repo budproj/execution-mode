@@ -10,6 +10,7 @@ export interface KeyResultSingleSectionOwnerUpdateUserListProperties {
   users: User[]
   keyResultID?: string
   onSubmit?: (userID: string) => void
+  isLoading?: boolean
 }
 
 export interface KeyResultSingleSectionOwnerUpdateUserListSkeletonProperties {

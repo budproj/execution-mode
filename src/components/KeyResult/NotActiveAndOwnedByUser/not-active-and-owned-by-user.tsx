@@ -48,17 +48,15 @@ const KeyResultNotActiveAndOwnedByUser = ({
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [cycles, setCycleEdges] = useConnectionEdges<Cycle>()
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
-  const [
-    fetchUserActiveCycles,
-    { data, loading, called },
-  ] = useLazyQuery<GetKeyResultNotActiveAndOwnedByUserWithBindingQuery>(
-    queries.GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES,
-    {
-      variables: {
-        userID,
+  const [fetchUserActiveCycles, { data, loading, called }] =
+    useLazyQuery<GetKeyResultNotActiveAndOwnedByUserWithBindingQuery>(
+      queries.GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES,
+      {
+        variables: {
+          userID,
+        },
       },
-    },
-  )
+    )
 
   const handleYearFilterUpdate = (yearCycleIDs: Array<Cycle['id']>) => {
     setFilters({

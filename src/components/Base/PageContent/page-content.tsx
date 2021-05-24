@@ -1,41 +1,10 @@
-import { Box, BoxProps } from '@chakra-ui/react'
-import React, { ComponentType, ReactElement } from 'react'
+import { Flex, BoxProps } from '@chakra-ui/react'
+import React from 'react'
 
-import { BreadcrumbProperties } from 'src/components/Base/Breadcrumb/breadcrumb'
-import PageContentHeader from 'src/components/Base/PageContentHeader'
-
-export interface PageContentProperties extends BoxProps {
-  children?: ReactElement | ReactElement[]
-  RightWing?: ComponentType
-  contentTopGutter?: number
-  breadcrumbParams?: BreadcrumbProperties['routeParams']
-  showBreadcrumb?: boolean
-  hideContentHeader?: boolean
-}
-
-const PageContent = ({
-  RightWing,
-  children,
-  contentTopGutter,
-  breadcrumbParams,
-  showBreadcrumb,
-  hideContentHeader,
-  ...rest
-}: PageContentProperties) => (
-  <Box py={10} px={20} {...rest}>
-    {!hideContentHeader && (
-      <PageContentHeader
-        RightWing={RightWing}
-        breadcrumbParams={breadcrumbParams}
-        showBreadcrumb={showBreadcrumb}
-      />
-    )}
-    <Box pt={contentTopGutter}>{children}</Box>
-  </Box>
+const PageContent = ({ children, ...rest }: BoxProps) => (
+  <Flex py={10} px={20} flexGrow={1} direction="column" {...rest}>
+    {children}
+  </Flex>
 )
-
-PageContent.defaultProps = {
-  contentTopGutter: 20,
-}
 
 export default PageContent

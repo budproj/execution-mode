@@ -51,7 +51,8 @@ const KeyResultListBodyStaticSkeletonLine = ({
     [KEY_RESULT_LIST_COLUMN.PROGRESS]: KeyResultListBodyColumnProgressSkeleton,
     [KEY_RESULT_LIST_COLUMN.CYCLE]: KeyResultListBodyColumnCycleSkeleton,
     [KEY_RESULT_LIST_COLUMN.OWNER]: KeyResultListBodyColumnOwnerSkeleton,
-    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]: KeyResultListBodyColumnConfidenceLevelColorSkeleton,
+    [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]:
+      KeyResultListBodyColumnConfidenceLevelColorSkeleton,
     [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: KeyResultListBodyColumnPercentualProgressSkeleton,
   }
 
@@ -67,6 +68,9 @@ const KeyResultListBodyStaticSkeletonLine = ({
       borderStyle="solid"
       cursor={onLineClick ? 'pointer' : 'auto'}
       _hover={onLineClick ? { background: 'black.50' } : {}}
+      _last={{
+        borderColor: 'transparent',
+      }}
       onMouseDown={handleLineClick}
     >
       {columns.map((column) => {

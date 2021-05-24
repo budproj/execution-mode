@@ -1,6 +1,0 @@
-query GET_TEAM_NAME($teamId: ID!) {
-  team(id: $teamId) {
-    id
-    name
-  }
-}

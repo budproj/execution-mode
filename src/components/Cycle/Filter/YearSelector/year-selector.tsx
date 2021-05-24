@@ -39,14 +39,12 @@ const CycleFilterYearSelector = ({
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const cycles = useRecoilValue(selectCyclesFromList(filteredYearIDs))
   const intl = useIntl()
-  const [
-    fetchNotActiveYearlyCycles,
-    { called, loading, data },
-  ] = useLazyQuery<NotActiveYearlyCyclesResult>(queries.GET_NOT_ACTIVE_YEARLY_CYCLES, {
-    onCompleted: (data) => {
-      loadCycles(data.cycles)
-    },
-  })
+  const [fetchNotActiveYearlyCycles, { called, loading, data }] =
+    useLazyQuery<NotActiveYearlyCyclesResult>(queries.GET_NOT_ACTIVE_YEARLY_CYCLES, {
+      onCompleted: (data) => {
+        loadCycles(data.cycles)
+      },
+    })
 
   const hasOptions = Boolean(options)
 

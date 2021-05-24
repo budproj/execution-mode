@@ -22,11 +22,8 @@ const KeyResultSectionAddCommentInput = ({
 }: KeyResultSectionAddCommentInputProperties) => {
   const [isOnFocus, setIsOnFocus] = useState(false)
   const [numberOfRows, setNumberOfRows] = useState(1)
-  const {
-    values,
-    setValues,
-    isSubmitting,
-  } = useFormikContext<KeyResultSectionAddCommentInitialValues>()
+  const { values, setValues, isSubmitting } =
+    useFormikContext<KeyResultSectionAddCommentInitialValues>()
   const intl = useIntl()
 
   const handleHeightChange = (height: number, context: TextareaAutosizeContext) => {

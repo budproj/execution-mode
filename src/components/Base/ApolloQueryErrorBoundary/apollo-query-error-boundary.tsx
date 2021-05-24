@@ -1,8 +1,8 @@
 import { ApolloError } from '@apollo/client'
 import React, { ComponentType, ReactElement } from 'react'
 
-import NotFoundErrorPage from 'src/components/Page/Error/NotFound'
-import UnknownErrorPage from 'src/components/Page/Error/Unknown'
+import NotFoundErrorPage from 'src/components/Page/Errors/NotFound'
+import UnknownErrorPage from 'src/components/Page/Errors/Unknown'
 
 export interface ApolloQueryErrorBoundaryProperties {
   children: ReactElement

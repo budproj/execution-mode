@@ -19,12 +19,8 @@ export const UserEditableAvatar = ({
   const intl = useIntl()
   const [isHovering, setIsHovering] = useState(false)
   const [isCropping, setIsCropping] = useState(false)
-  const [
-    localPictureData,
-    localPictureLoading,
-    setPictureFile,
-    resetPictureData,
-  ] = useLocalFileData()
+  const [localPictureData, localPictureLoading, setPictureFile, resetPictureData] =
+    useLocalFileData()
   const pictureInput = useRef<HTMLInputElement>(null)
 
   const isLoading = Boolean(!localPictureLoading)

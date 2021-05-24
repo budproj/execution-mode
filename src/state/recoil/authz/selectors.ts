@@ -11,7 +11,8 @@ const KEY = `${PREFIX}::SELECTORS`
 
 export const getRoles = ({ get }: RecoilInterfaceGetter) => {
   const { publicRuntimeConfig } = getConfig()
-  const uppercasedEnvironment = publicRuntimeConfig.environment.toUpperCase() as UPPERCASED_ENVIRONMENT
+  const uppercasedEnvironment =
+    publicRuntimeConfig.environment.toUpperCase() as UPPERCASED_ENVIRONMENT
   const authzTenant = AUTHZ_TENANT_ROLE[uppercasedEnvironment]
 
   const user = get(authzAtom)

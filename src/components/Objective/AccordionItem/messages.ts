@@ -23,8 +23,8 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
   },
 
   progressTagLabel: {
-    defaultMessage: 'Essa semana',
-    id: 'oycX/u',
+    defaultMessage: 'Essa semana:',
+    id: '02eAuB',
     description:
       'The text displayed as a prefix in our progress tag label in the team objective accordion button',
   },
