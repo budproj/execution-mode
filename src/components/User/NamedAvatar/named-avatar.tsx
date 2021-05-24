@@ -40,7 +40,7 @@ const NamedAvatar = ({
   const [teams, setTeamEdges] = useConnectionEdges<Team>()
   const intl = useIntl()
 
-  const isLoaded = Boolean(user) || !isLoading
+  const isLoaded = Boolean(user) && !isLoading
   const company = companies?.[0]
   const team = teams?.[0]
 
@@ -76,7 +76,7 @@ const NamedAvatar = ({
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
     >
-      <SkeletonCircle isLoaded={isLoaded} w={12} h={12}>
+      <SkeletonCircle isLoaded={isLoaded} w={12} h={12} fadeDuration={0}>
         {canEdit && (isHovering || isEditting) ? (
           <Flex
             w={12}

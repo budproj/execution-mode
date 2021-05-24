@@ -14,9 +14,10 @@ import messages from './messages'
 
 interface TeamMembersWrapperProperties {
   teamID?: string
+  isLoading?: boolean
 }
 
-export const TeamMembersWrapper = ({ teamID }: TeamMembersWrapperProperties) => {
+export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProperties) => {
   const intl = useIntl()
   const [isLoaded, setIsLoaded] = useState(false)
   const team = useRecoilValue(teamAtomFamily(teamID))
@@ -26,13 +27,17 @@ export const TeamMembersWrapper = ({ teamID }: TeamMembersWrapperProperties) => 
   useEffect(() => {
     if (team) {
       setTeamMemberEdges(team.users?.edges)
-      if (!isLoaded) setIsLoaded(true)
+      if (!isLoaded && !isLoading) setIsLoaded(true)
     }
-  }, [team, setTeamMemberEdges, isLoaded, setIsLoaded])
+  }, [team, setTeamMemberEdges, isLoading, isLoaded, setIsLoaded])
 
   useEffect(() => {
     loadUsersOnRecoil(teamMembers)
   }, [teamMembers, loadUsersOnRecoil])
+
+  useEffect(() => {
+    if (isLoaded && isLoading) setIsLoaded(false)
+  }, [isLoading, isLoaded, setIsLoaded])
 
   return (
     <TeamSectionWrapper

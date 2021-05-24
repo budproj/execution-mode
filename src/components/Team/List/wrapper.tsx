@@ -8,15 +8,15 @@ import { TeamListSkeleton } from './skeleton'
 
 interface TeamListProperties {
   teams: Team[]
-  isLoaded?: boolean
+  isLoading?: boolean
 }
 
-export const TeamList = ({ teams, isLoaded }: TeamListProperties) => (
+export const TeamList = ({ teams, isLoading }: TeamListProperties) => (
   <Stack>
-    {isLoaded ? (
-      teams.map((team) => <TeamListSingle key={team.id} team={team} />)
-    ) : (
+    {isLoading ? (
       <TeamListSkeleton />
+    ) : (
+      teams.map((team) => <TeamListSingle key={team.id} team={team} />)
     )}
   </Stack>
 )

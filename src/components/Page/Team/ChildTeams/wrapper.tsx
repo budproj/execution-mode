@@ -13,9 +13,10 @@ import messages from './messages'
 
 interface ChildTeamsWrapperProperties {
   teamID?: string
+  isLoading?: boolean
 }
 
-export const ChildTeamsWrapper = ({ teamID }: ChildTeamsWrapperProperties) => {
+export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProperties) => {
   const intl = useIntl()
   const [isLoaded, setIsLoaded] = useState(false)
   const team = useRecoilValue(teamAtomFamily(teamID))
@@ -25,9 +26,9 @@ export const ChildTeamsWrapper = ({ teamID }: ChildTeamsWrapperProperties) => {
   useEffect(() => {
     if (team) {
       setChildTeamEdges(team.teams?.edges)
-      if (!isLoaded) setIsLoaded(true)
+      if (!isLoaded && !isLoading) setIsLoaded(true)
     }
-  }, [team, setChildTeamEdges, isLoaded, setIsLoaded])
+  }, [team, setChildTeamEdges, isLoading, isLoaded, setIsLoaded])
 
   useEffect(() => {
     loadTeamsOnRecoil(childTeams)
@@ -36,12 +37,13 @@ export const ChildTeamsWrapper = ({ teamID }: ChildTeamsWrapperProperties) => {
   return (
     <TeamSectionWrapper
       px={8}
+      py={0}
       title={intl.formatMessage(messages.title, {
         isLoaded,
         totalTeamsCount: childTeams.length,
       })}
     >
-      <TeamList teams={childTeams} isLoaded={isLoaded} />
+      <TeamList teams={childTeams} isLoading={!isLoaded} />
     </TeamSectionWrapper>
   )
 }

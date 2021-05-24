@@ -33,6 +33,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   })
   const loadTeamOnRecoil = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const metaTitleLoadingFallback = intl.formatMessage(messages.metaTitleLoadingFallback)
+  const isLoading = loading || !called
 
   useEffect(() => {
     if (!loading && data) loadTeamOnRecoil(data.team)
@@ -61,8 +62,8 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
 
           <GridItem>
             <Stack direction="column" h="full" spacing="8">
-              <TeamMembersWrapper teamID={teamId} />
-              <ChildTeamsWrapper teamID={teamId} />
+              <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
+              <ChildTeamsWrapper teamID={teamId} isLoading={isLoading} />
             </Stack>
           </GridItem>
         </Grid>
