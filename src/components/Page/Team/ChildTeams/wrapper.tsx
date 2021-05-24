@@ -41,7 +41,7 @@ export const ChildTeamsWrapper = ({ teamID }: ChildTeamsWrapperProperties) => {
         totalTeamsCount: childTeams.length,
       })}
     >
-      <TeamList teams={childTeams} />
+      <TeamList teams={childTeams} isLoaded={isLoaded} />
     </TeamSectionWrapper>
   )
 }
