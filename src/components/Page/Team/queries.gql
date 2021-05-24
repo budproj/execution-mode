@@ -16,5 +16,16 @@ query GET_TEAM_NAME($teamId: ID!) {
         }
       }
     }
+    teams {
+      edges {
+        node {
+          id
+          name
+          status {
+            progress
+          }
+        }
+      }
+    }
   }
 }

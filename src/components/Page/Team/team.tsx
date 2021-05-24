@@ -35,7 +35,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   const metaTitleLoadingFallback = intl.formatMessage(messages.metaTitleLoadingFallback)
 
   useEffect(() => {
-    if (!loading && data) loadTeamOnRecoil(data?.team)
+    if (!loading && data) loadTeamOnRecoil(data.team)
   }, [data, loading, loadTeamOnRecoil])
 
   return (
@@ -62,7 +62,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
           <GridItem>
             <Stack direction="column" h="full" spacing="8">
               <TeamMembersWrapper teamID={teamId} />
-              <ChildTeamsWrapper />
+              <ChildTeamsWrapper teamID={teamId} />
             </Stack>
           </GridItem>
         </Grid>

@@ -3,7 +3,7 @@ import { Skeleton, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { Breadcrumb, PageTitle, SliderWithFilledTrack } from '../../../Base'
+import { PageTitle, SliderWithFilledTrack } from '../../../Base'
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
 import { Team } from '../../../Team/types'
 
@@ -15,13 +15,9 @@ interface TeamHeaderProperties {
 export const TeamHeader = ({ team, isLoaded }: TeamHeaderProperties) => {
   const intl = useIntl()
   const progress = team?.status.progress ?? 0
-  const breadcrumbParameters = {
-    id: team?.name ?? '',
-  }
 
   return (
     <PageHeader pb={0}>
-      <Breadcrumb routeParams={breadcrumbParameters} />
       <PageTitle>{team?.name}</PageTitle>
 
       <SkeletonText isLoaded={isLoaded}>
