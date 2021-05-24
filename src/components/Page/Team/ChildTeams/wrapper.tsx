@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil'
 import { useConnectionEdges } from '../../../../state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from '../../../../state/recoil/hooks'
 import { teamAtomFamily } from '../../../../state/recoil/team'
+import { EmptyState } from '../../../Base'
 import { TeamList } from '../../../Team/List/wrapper'
 import { Team } from '../../../Team/types'
 import { TeamSectionWrapper } from '../Section/wrapper'
@@ -20,19 +21,24 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
   const intl = useIntl()
   const [isLoaded, setIsLoaded] = useState(false)
   const team = useRecoilValue(teamAtomFamily(teamID))
-  const [childTeams, setChildTeamEdges] = useConnectionEdges<Team>()
+  const [childTeams, setChildTeamEdges, childTeamEdges, areEdgesLoaded] = useConnectionEdges<Team>()
   const loadTeamsOnRecoil = useRecoilFamilyLoader<Team>(teamAtomFamily)
 
   useEffect(() => {
-    if (team) {
-      setChildTeamEdges(team.teams?.edges)
-      if (!isLoaded && !isLoading) setIsLoaded(true)
-    }
-  }, [team, setChildTeamEdges, isLoading, isLoaded, setIsLoaded])
+    if (team) setChildTeamEdges(team.teams?.edges)
+  }, [team, setChildTeamEdges])
 
   useEffect(() => {
     loadTeamsOnRecoil(childTeams)
   }, [childTeams, loadTeamsOnRecoil])
+
+  useEffect(() => {
+    if (!isLoaded && !isLoading && childTeamEdges && areEdgesLoaded) setIsLoaded(true)
+  }, [isLoaded, isLoading, childTeamEdges, areEdgesLoaded, setIsLoaded])
+
+  useEffect(() => {
+    if (!childTeamEdges) setIsLoaded(false)
+  }, [childTeamEdges, setIsLoaded])
 
   return (
     <TeamSectionWrapper
@@ -43,7 +49,11 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
         totalTeamsCount: childTeams.length,
       })}
     >
-      <TeamList teams={childTeams} isLoading={!isLoaded} />
+      {isLoaded && childTeams.length === 0 ? (
+        <EmptyState imageKey="empty-folder" labelMessage={messages.emptyState} h="full" />
+      ) : (
+        <TeamList teams={childTeams} isLoading={!isLoaded} />
+      )}
     </TeamSectionWrapper>
   )
 }
