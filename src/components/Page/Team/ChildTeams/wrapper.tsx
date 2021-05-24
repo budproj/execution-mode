@@ -35,7 +35,7 @@ export const ChildTeamsWrapper = ({ teamID }: ChildTeamsWrapperProperties) => {
 
   return (
     <TeamSectionWrapper
-      p={4}
+      px={8}
       title={intl.formatMessage(messages.title, {
         isLoaded,
         totalTeamsCount: childTeams.length,
