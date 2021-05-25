@@ -8,6 +8,7 @@ export interface EmptyStateProperties {
   labelMessage: MessageDescriptor
   imageKey: keyof typeof imageKeys
   h?: FlexProps['h']
+  py?: FlexProps['py']
 }
 
 const imageKeys = {
@@ -20,14 +21,14 @@ const imageAlts = {
   'empty-folder': messages.emptyFolderAlt,
 }
 
-const EmptyState = ({ labelMessage, imageKey, h }: EmptyStateProperties) => {
+const EmptyState = ({ labelMessage, imageKey, h, py }: EmptyStateProperties) => {
   const intl = useIntl()
 
   const imageURL = imageKeys[imageKey]
   const imageAlt = imageAlts[imageKey]
 
   return (
-    <Flex alignItems="center" justifyContent="center" gridGap={8} direction="column" h={h}>
+    <Flex alignItems="center" justifyContent="center" gridGap={8} direction="column" h={h} py={py}>
       <Box>
         <Image src={imageURL} alt={intl.formatMessage(imageAlt)} />
       </Box>

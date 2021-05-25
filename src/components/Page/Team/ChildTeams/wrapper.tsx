@@ -50,7 +50,7 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
       })}
     >
       {isLoaded && childTeams.length === 0 ? (
-        <EmptyState imageKey="empty-folder" labelMessage={messages.emptyState} h="full" />
+        <EmptyState imageKey="empty-folder" labelMessage={messages.emptyState} h="full" py={16} />
       ) : (
         <TeamList teams={childTeams} isLoading={!isLoaded} />
       )}
