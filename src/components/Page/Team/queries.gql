@@ -6,7 +6,7 @@ query GET_TEAM_NAME($teamId: ID!) {
     status {
       progress
     }
-    users {
+    users(first: 1000) {
       edges {
         node {
           id
