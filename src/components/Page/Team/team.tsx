@@ -60,8 +60,8 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
             <TeamActiveObjectives teamID={teamId} />
           </GridItem>
 
-          <GridItem>
-            <Stack direction="column" h="full" spacing="8">
+          <GridItem h="fit-content">
+            <Stack direction="column" spacing="8">
               <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
               <ChildTeamsWrapper teamID={teamId} isLoading={isLoading} />
             </Stack>

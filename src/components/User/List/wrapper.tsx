@@ -29,7 +29,7 @@ export const UserList = ({
   }
 
   return (
-    <Stack spacing={4} maxH={80} overflowY="auto">
+    <Stack spacing={4}>
       {isLoading ? (
         <UserListSkeleton />
       ) : users.length > 0 ? (
