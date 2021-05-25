@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client'
+import { Box } from '@chakra-ui/layout'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 
@@ -45,5 +46,9 @@ export const KeyResultSingleSectionOwnerUpdateUserList = ({
     })
   }
 
-  return <UserList users={users} isLoading={isLoading} onUserClick={handleUserClick} />
+  return (
+    <Box overflow="auto">
+      <UserList users={users} isLoading={isLoading} onUserClick={handleUserClick} />
+    </Box>
+  )
 }
