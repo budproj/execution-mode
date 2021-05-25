@@ -43,6 +43,7 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
   return (
     <TeamSectionWrapper
       px={8}
+      maxH="30vh"
       py={0}
       title={intl.formatMessage(messages.title, {
         isLoaded,
