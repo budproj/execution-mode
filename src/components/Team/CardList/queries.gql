@@ -1,5 +1,5 @@
 query GET_TEAMS {
-  teams(level: COMPANY_OR_DEPARTMENT) {
+  teams(first: 1000) {
     edges {
       node {
         id
