@@ -21,7 +21,7 @@ const TeamCardList = ({ numEmptyStateCards }: TeamCardListProperties) => {
   const loadTeamsOnRecoil = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const [teams, setEdges] = useConnectionEdges<Team>()
 
-  const orderedTeams = orderBy(teams, 'isCompany', 'desc')
+  const orderedTeams = orderBy(teams, ['isCompany', 'name'], ['desc', 'asc'])
   const wereTeamsLoaded = !loading && Boolean(teams)
   const emptyState = [...new Array(numEmptyStateCards)]
 
@@ -36,7 +36,7 @@ const TeamCardList = ({ numEmptyStateCards }: TeamCardListProperties) => {
   return (
     <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
       {wereTeamsLoaded
-        ? teams?.map((team) => <TeamCard key={team.id} id={team.id} />)
+        ? orderedTeams?.map((team) => <TeamCard key={team.id} id={team.id} />)
         : emptyState.map(() => <TeamCard key={Math.random()} />)}
     </Grid>
   )
