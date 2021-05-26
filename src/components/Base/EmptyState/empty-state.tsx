@@ -32,7 +32,9 @@ const EmptyState = ({ labelMessage, imageKey, h, py }: EmptyStateProperties) => 
       <Box>
         <Image src={imageURL} alt={intl.formatMessage(imageAlt)} />
       </Box>
-      <Text color="gray.300">{intl.formatMessage(labelMessage)}</Text>
+      <Text color="gray.300" textAlign="center">
+        {intl.formatMessage(labelMessage)}
+      </Text>
     </Flex>
   )
 }

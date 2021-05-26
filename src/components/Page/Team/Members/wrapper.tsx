@@ -42,7 +42,6 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
   return (
     <TeamSectionWrapper
       p={4}
-      maxH="30vh"
       title={intl.formatMessage(messages.title, {
         isLoaded,
         totalMembersCount: teamMembers.length,

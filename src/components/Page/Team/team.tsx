@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client'
 import { Box, Stack } from '@chakra-ui/layout'
-import { Grid, GridItem } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -49,24 +48,23 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
         />
         <KeyResultSingleDrawer />
 
-        <Grid templateColumns="3.5fr 1fr" templateRows="auto 1fr" gridGap="8" flexGrow={1}>
-          <GridItem>
+        <Stack spacing={8}>
+          <Stack direction="row">
             <TeamHeader isLoaded={called && !loading} team={data?.team} />
-          </GridItem>
+            <Box w="28rem" />
+          </Stack>
 
-          <Box />
+          <Stack direction="row" spacing={8} maxH="100%">
+            <Box flexGrow={1}>
+              <TeamActiveObjectives teamID={teamId} />
+            </Box>
 
-          <GridItem>
-            <TeamActiveObjectives teamID={teamId} />
-          </GridItem>
-
-          <GridItem>
-            <Stack direction="column" spacing="8">
+            <Stack spacing="8" w="lg" maxH="4xl">
               <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
               <ChildTeamsWrapper teamID={teamId} isLoading={isLoading} />
             </Stack>
-          </GridItem>
-        </Grid>
+          </Stack>
+        </Stack>
       </PageContent>
     </ApolloQueryErrorBoundary>
   )

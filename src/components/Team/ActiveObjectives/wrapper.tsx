@@ -61,7 +61,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   }, [objectives, loadObjectivesOnRecoil])
 
   return (
-    <Stack>
+    <Stack spacing={12}>
       {isLoaded && groupedObjectivesByCycle ? (
         groupedObjectivesByCycle.map(([cycle, objectives]) => (
           <ObjectivesFromCycle key={cycle.id} cycle={cycle} objectives={objectives} />

@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/layout'
+import { Box, Stack } from '@chakra-ui/layout'
 import { Skeleton, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -17,8 +17,10 @@ export const TeamHeader = ({ team, isLoaded }: TeamHeaderProperties) => {
   const progress = team?.status.progress ?? 0
 
   return (
-    <PageHeader pb={0}>
-      <PageTitle>{team?.name}</PageTitle>
+    <PageHeader pb={0} flexGrow={1}>
+      <Box>
+        <PageTitle>{team?.name}</PageTitle>
+      </Box>
 
       <SkeletonText isLoaded={isLoaded}>
         <Text color="black.600" mt="2">
