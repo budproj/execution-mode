@@ -14,11 +14,13 @@ export interface EmptyStateProperties {
 const imageKeys = {
   'working-team': '/images/bud-team-at-work.png',
   'empty-folder': '/images/bud-empty-folder.png',
+  pages: '/images/bud-pages.png',
 }
 
 const imageAlts = {
   'working-team': messages.workingTeamAlt,
   'empty-folder': messages.emptyFolderAlt,
+  pages: messages.pagesAlt,
 }
 
 const EmptyState = ({ labelMessage, imageKey, h, py }: EmptyStateProperties) => {

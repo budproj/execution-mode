@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type EmptyStateMessage = 'workingTeamAlt' | 'emptyFolderAlt'
+type EmptyStateMessage = 'workingTeamAlt' | 'emptyFolderAlt' | 'pagesAlt'
 
 export default defineMessages<EmptyStateMessage>({
   workingTeamAlt: {
@@ -14,5 +14,11 @@ export default defineMessages<EmptyStateMessage>({
     defaultMessage: 'Um desenho de uma pasta aberta sem nada dentro',
     id: 'L/b/G/',
     description: 'The alternative text explaining the empty folder image',
+  },
+
+  pagesAlt: {
+    defaultMessage: 'Algumas páginas, exibindo também alguns ícones e outros desenhos',
+    id: '1rAwNV',
+    description: 'The alternative text explaining the pages image',
   },
 })
