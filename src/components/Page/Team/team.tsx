@@ -59,7 +59,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
               <TeamActiveObjectives teamID={teamId} />
             </Box>
 
-            <Stack spacing="8" w="lg" maxH="4xl">
+            <Stack spacing="8" w="md" minW="md" maxH="4xl">
               <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
               <ChildTeamsWrapper teamID={teamId} isLoading={isLoading} />
             </Stack>
