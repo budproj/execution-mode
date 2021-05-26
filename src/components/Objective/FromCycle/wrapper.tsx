@@ -41,7 +41,7 @@ export const ObjectivesFromCycle = ({ cycle, objectives }: ObjectivesFromCyclePr
         </Heading>
       </Skeleton>
 
-      <Accordion allowToggle gridGap={8} display="flex" flexDirection="column">
+      <Accordion allowToggle allowMultiple gridGap={8} display="flex" flexDirection="column">
         {isLoaded && objectives ? (
           objectives.map((objective) => (
             <ObjectiveAccordionItem key={objective.id} objectiveID={objective.id} />

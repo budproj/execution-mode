@@ -43,15 +43,13 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
   return (
     <TeamSectionWrapper
       px={8}
-      maxH="30vh"
-      py={0}
       title={intl.formatMessage(messages.title, {
         isLoaded,
         totalTeamsCount: childTeams.length,
       })}
     >
       {isLoaded && childTeams.length === 0 ? (
-        <EmptyState imageKey="empty-folder" labelMessage={messages.emptyState} h="full" py={16} />
+        <EmptyState imageKey="empty-folder" labelMessage={messages.emptyState} py={8} />
       ) : (
         <TeamList teams={childTeams} isLoading={!isLoaded} />
       )}

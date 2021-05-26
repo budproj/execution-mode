@@ -15,6 +15,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
             id
             value
             confidence
+            progress
             createdAt
           }
           owner {

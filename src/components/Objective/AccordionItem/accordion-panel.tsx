@@ -93,8 +93,6 @@ const ObjectiveAccordionPanel = ({
             },
             [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
               withConfidenceTag: true,
-              hideGoal: true,
-              hideCurrentValue: true,
             },
             [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
               isDisabled: true,
