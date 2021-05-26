@@ -11,6 +11,7 @@ import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
 import { Objective } from '../../Objective/types'
 import { Team } from '../types'
 
+import { TeamActiveObjectivesEmptyState } from './empty-state'
 import queries from './queries.gql'
 import { TeamActiveObjectivesSkeleton } from './skeleton'
 
@@ -61,11 +62,15 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   }, [objectives, loadObjectivesOnRecoil])
 
   return (
-    <Stack spacing={12}>
-      {isLoaded && groupedObjectivesByCycle ? (
-        groupedObjectivesByCycle.map(([cycle, objectives]) => (
-          <ObjectivesFromCycle key={cycle.id} cycle={cycle} objectives={objectives} />
-        ))
+    <Stack spacing={12} h="full">
+      {isLoaded ? (
+        !groupedObjectivesByCycle || groupedObjectivesByCycle.length === 0 ? (
+          <TeamActiveObjectivesEmptyState />
+        ) : (
+          groupedObjectivesByCycle.map(([cycle, objectives]) => (
+            <ObjectivesFromCycle key={cycle.id} cycle={cycle} objectives={objectives} />
+          ))
+        )
       ) : (
         <TeamActiveObjectivesSkeleton />
       )}
