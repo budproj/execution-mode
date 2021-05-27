@@ -5,6 +5,8 @@ import { useIntl } from 'react-intl'
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { Team } from 'src/components/Team/types'
 
+import { IntlLink } from '../../../../../../../Base'
+
 export interface TeamsOverviewBodyTableBodyColumnNameAndOrderProperties {
   order: number
   team?: Team
@@ -34,9 +36,11 @@ const TeamsOverviewBodyTableBodyColumnNameAndOrder = ({
         </Flex>
 
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 21)}>
-          <Heading as="h3" fontSize="md" fontWeight={400} color="black.900">
-            {team?.name}
-          </Heading>
+          <IntlLink href={`/explore/${team?.id ?? ''}`}>
+            <Heading as="h3" fontSize="md" fontWeight={400} color="black.900">
+              {team?.name}
+            </Heading>
+          </IntlLink>
         </Skeleton>
       </Flex>
     </GridItem>
