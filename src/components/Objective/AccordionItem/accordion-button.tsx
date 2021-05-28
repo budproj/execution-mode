@@ -89,9 +89,7 @@ const ObjectiveAccordionButton = ({
             </Skeleton>
           </TooltipWithDelay>
 
-          <Skeleton isLoaded={isLoaded}>
-            <ObjectiveAccordionMenu />
-          </Skeleton>
+          <ObjectiveAccordionMenu />
         </Stack>
 
         <AccordionIcon />
