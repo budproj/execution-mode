@@ -23,12 +23,14 @@ import messages from './messages'
 
 export interface ObjectiveAccordionButtonProperties {
   objective?: Partial<Objective>
+  teamID?: string
   confidenceTag?: ConfidenceTag
   isLoaded?: boolean
 }
 
 const ObjectiveAccordionButton = ({
   objective,
+  teamID,
   confidenceTag,
   isLoaded,
 }: ObjectiveAccordionButtonProperties) => {
@@ -89,7 +91,7 @@ const ObjectiveAccordionButton = ({
             </Skeleton>
           </TooltipWithDelay>
 
-          <ObjectiveAccordionMenu />
+          <ObjectiveAccordionMenu teamID={teamID} />
         </Stack>
 
         <AccordionIcon />

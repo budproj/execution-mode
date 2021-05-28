@@ -1,7 +1,7 @@
 import { Box, BorderProps, BackgroundProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import { GraphQLEffect, GraphQLPolicy } from 'src/components/types'
+import { GraphQLEffect, GraphQLEntityPolicy } from 'src/components/types'
 
 import KeyResultSectionTimelineCardBaseOptions from './options'
 
@@ -12,7 +12,7 @@ export interface KeyResultSectionTimelineCardBaseProperties {
   bg: BackgroundProps['bg']
   intlCardType?: string
   borderBottomRadius?: BorderProps['borderBottomRadius']
-  policy?: GraphQLPolicy
+  policy?: GraphQLEntityPolicy
   onDelete?: () => void
 }
 

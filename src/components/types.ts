@@ -1,6 +1,6 @@
 export interface GraphQLConnection<N extends GraphQLNode> {
   edges: Array<GraphQLEdge<N>>
-  policy: GraphQLPolicy
+  policy: GraphQLConnectionPolicy
   pageInfo: GraphQLPageInfo
 }
 
@@ -13,8 +13,11 @@ export interface GraphQLNode {
   createdAt: string
 }
 
-export interface GraphQLPolicy {
+export interface GraphQLConnectionPolicy {
   create: GraphQLEffect
+}
+
+export interface GraphQLEntityPolicy {
   read: GraphQLEffect
   update: GraphQLEffect
   delete: GraphQLEffect

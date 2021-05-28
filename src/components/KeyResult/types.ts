@@ -2,7 +2,7 @@ import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 
-import { GraphQLConnection, GraphQLNode, GraphQLPolicy } from '../types'
+import { GraphQLConnection, GraphQLNode, GraphQLEntityPolicy } from '../types'
 
 import { KEY_RESULT_FORMAT, KEY_RESULT_TYPE } from './constants'
 
@@ -15,7 +15,7 @@ export interface KeyResultCheckIn extends GraphQLNode {
   confidence: number
   progress: number
   progressIncrease: number
-  policy: GraphQLPolicy
+  policy: GraphQLEntityPolicy
   keyResult: KeyResult
   keyResultId: KeyResult['id']
   user: User
@@ -26,7 +26,7 @@ export interface KeyResultCheckIn extends GraphQLNode {
 export interface KeyResultComment extends GraphQLNode {
   __typename: string
   text: string
-  policy: GraphQLPolicy
+  policy: GraphQLEntityPolicy
   updatedAt: string
   user: User
   keyResult: KeyResult
@@ -44,7 +44,7 @@ export interface KeyResult extends GraphQLNode {
   owner: User
   objective: Objective
   team: Team
-  policy: GraphQLPolicy
+  policy: GraphQLEntityPolicy
   description?: string
   keyResultCheckIns?: GraphQLConnection<KeyResultCheckIn>
   keyResultComments?: GraphQLConnection<KeyResultComment>

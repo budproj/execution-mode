@@ -15,9 +15,14 @@ import { ObjectiveListSkeleton } from './objective-list-skeleton'
 export interface ObjectivesFromCycleProperties {
   cycle?: Cycle
   objectives?: Objective[]
+  teamID?: string
 }
 
-export const ObjectivesFromCycle = ({ cycle, objectives }: ObjectivesFromCycleProperties) => {
+export const ObjectivesFromCycle = ({
+  cycle,
+  objectives,
+  teamID,
+}: ObjectivesFromCycleProperties) => {
   const intl = useIntl()
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
 
@@ -44,7 +49,7 @@ export const ObjectivesFromCycle = ({ cycle, objectives }: ObjectivesFromCyclePr
       <Accordion allowToggle allowMultiple gridGap={8} display="flex" flexDirection="column">
         {isLoaded && objectives ? (
           objectives.map((objective) => (
-            <ObjectiveAccordionItem key={objective.id} objectiveID={objective.id} />
+            <ObjectiveAccordionItem key={objective.id} objectiveID={objective.id} teamID={teamID} />
           ))
         ) : (
           <ObjectiveListSkeleton />

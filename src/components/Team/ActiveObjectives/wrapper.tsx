@@ -68,7 +68,12 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
           <TeamActiveObjectivesEmptyState />
         ) : (
           groupedObjectivesByCycle.map(([cycle, objectives]) => (
-            <ObjectivesFromCycle key={cycle.id} cycle={cycle} objectives={objectives} />
+            <ObjectivesFromCycle
+              key={cycle.id}
+              cycle={cycle}
+              objectives={objectives}
+              teamID={teamID}
+            />
           ))
         )
       ) : (

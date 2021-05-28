@@ -2,8 +2,11 @@ import { Menu, MenuButton, MenuList } from '@chakra-ui/menu'
 import { MenuItem, MenuItemProps, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
+import { teamAtomFamily } from '../../../state/recoil/team'
 import TreeDotsIcon from '../../Icon/TreeDots'
+import { GraphQLEffect } from '../../types'
 
 import messages from './messages'
 
@@ -30,8 +33,17 @@ const ObjectiveMenuOption = (properties: MenuItemProps) => (
   />
 )
 
-export const ObjectiveAccordionMenu = () => {
+interface ObjectiveAccordionMenuProperties {
+  teamID?: string
+}
+
+export const ObjectiveAccordionMenu = ({ teamID }: ObjectiveAccordionMenuProperties) => {
   const intl = useIntl()
+  const team = useRecoilValue(teamAtomFamily(teamID))
+
+  const canCreateKeyResult = team?.keyResults?.policy?.create === GraphQLEffect.ALLOW
+
+  console.log(team, canCreateKeyResult, 'tag')
 
   return (
     <Skeleton isLoaded>
@@ -59,7 +71,11 @@ export const ObjectiveAccordionMenu = () => {
           />
         </MenuButton>
         <MenuList p={3} boxShadow="md">
-          <ObjectiveMenuOption>{intl.formatMessage(messages.firstMenuOption)}</ObjectiveMenuOption>
+          {canCreateKeyResult && (
+            <ObjectiveMenuOption>
+              {intl.formatMessage(messages.firstMenuOption)}
+            </ObjectiveMenuOption>
+          )}
         </MenuList>
       </Menu>
     </Skeleton>
