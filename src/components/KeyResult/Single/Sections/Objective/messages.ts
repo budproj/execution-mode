@@ -5,9 +5,9 @@ type KeyResultsSectionObjectiveMessage = 'label' | 'stackIconDesc'
 export default defineMessages<KeyResultsSectionObjectiveMessage>({
   label: {
     defaultMessage: 'Objetivo',
-    id: 'T8ytLJ',
+    id: 'TIXwh1',
     description:
-      'The label text above the Objective section in our key result single page or drawer',
+      'The label text above the Objective section in our key result single page or drawers',
   },
 
   stackIconDesc: {

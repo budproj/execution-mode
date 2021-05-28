@@ -5,15 +5,15 @@ type KeyResultsSectionOwnerUpdateMessage = 'searchPlaceholder' | 'iconDesc'
 export default defineMessages<KeyResultsSectionOwnerUpdateMessage>({
   searchPlaceholder: {
     defaultMessage: 'Procurar',
-    id: '32yCaj',
+    id: 'GtgPfn',
     description:
-      'The text is displayed as a placeholder in our search input inside the key-result drawer while the user is changing the owner of that key-result',
+      'The text is displayed as a placeholder in our search input inside the key-result drawers while the user is changing the owner of that key-result',
   },
 
   iconDesc: {
     defaultMessage: 'Um ícone de lupa, indicando que este é um campo de busca',
-    id: 'UfU6Si',
+    id: 'kpJFIH',
     description:
-      'This text is used by screen readers to explain the icon to the user. It is located in the key-result drawer, inside the edit owner component, as a description for the search icon',
+      'This text is used by screen readers to explain the icon to the user. It is located in the key-result drawers, inside the edit owner component, as a description for the search icon',
   },
 })

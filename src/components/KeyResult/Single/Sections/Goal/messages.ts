@@ -11,15 +11,15 @@ export default defineMessages<KeyResultsSectionGoalMessage>({
 
   heading: {
     defaultMessage: 'Meta',
-    id: '/50OpL',
-    description: 'The heading text of the goal section in our key-result drawer',
+    id: '4XHRhd',
+    description: 'The heading text of the goal section in our key-result drawers',
   },
 
   hoverIconDescription: {
     defaultMessage:
       'Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave',
-    id: 'Dt91Bg',
+    id: 'PFysOr',
     description:
-      'This message is displayed for screen readers as the description of the arrow down icon inside the key-result drawer. That icon is only displayed when the user hovers the mouse over the goal',
+      'This message is displayed for screen readers as the description of the arrow down icon inside the key-result drawers. That icon is only displayed when the user hovers the mouse over the goal',
   },
 })

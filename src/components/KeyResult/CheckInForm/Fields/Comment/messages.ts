@@ -35,7 +35,7 @@ export default defineMessages<CheckInFormFieldCommentMessage>({
 
   submitButtonText: {
     defaultMessage: 'Enviar comentário',
-    id: 'Ba8bU1',
-    description: 'This label is displayed in the submit button in our drawer',
+    id: 'dgMLta',
+    description: 'This label is displayed in the submit button in our drawers',
   },
 })

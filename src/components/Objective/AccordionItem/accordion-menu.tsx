@@ -2,8 +2,9 @@ import { Menu, MenuButton, MenuList } from '@chakra-ui/menu'
 import { MenuItem, MenuItemProps, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { keyResultInsertDrawerIsOpen } from '../../../state/recoil/key-result/drawers/insert/is-open'
 import { teamAtomFamily } from '../../../state/recoil/team'
 import TreeDotsIcon from '../../Icon/TreeDots'
 import { GraphQLEffect } from '../../types'
@@ -41,9 +42,15 @@ interface ObjectiveAccordionMenuProperties {
 export const ObjectiveAccordionMenu = ({ teamID, isLoaded }: ObjectiveAccordionMenuProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(teamID))
+  const setKeyResultInsertDrawerIsOpen = useSetRecoilState(keyResultInsertDrawerIsOpen)
 
   const canCreateKeyResult = team?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const hasAnyOptions = !isLoaded || canCreateKeyResult
+
+  const openKeyResultInsertDrawer = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    setKeyResultInsertDrawerIsOpen(true)
+    stopAccordionOpen(event)
+  }
 
   return (
     <Skeleton isLoaded={isLoaded} display={hasAnyOptions ? 'inherit' : 'none'}>
@@ -72,7 +79,7 @@ export const ObjectiveAccordionMenu = ({ teamID, isLoaded }: ObjectiveAccordionM
         </MenuButton>
         <MenuList p={3} boxShadow="md">
           {canCreateKeyResult && (
-            <ObjectiveMenuOption>
+            <ObjectiveMenuOption onClick={openKeyResultInsertDrawer}>
               {intl.formatMessage(messages.firstMenuOption)}
             </ObjectiveMenuOption>
           )}

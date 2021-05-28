@@ -21,8 +21,8 @@ export default defineMessages<KeyResultsSectionAddCommentMessage>({
 
   placeholder: {
     defaultMessage: 'Clique aqui para comentar :)',
-    id: '+6p/sC',
+    id: 'kOLcvX',
     description:
-      'This text is displayed in our comment input in our key result drawer when it has no value',
+      'This text is displayed in our comment input in our key result drawers when it has no value',
   },
 })

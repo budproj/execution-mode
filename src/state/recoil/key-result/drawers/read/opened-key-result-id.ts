@@ -4,11 +4,9 @@ import { KeyResult } from 'src/components/KeyResult/types'
 
 import { PREFIX } from './constants'
 
-const KEY = `${PREFIX}::OPEN`
+const KEY = `${PREFIX}::OPENED_KEY_RESULT_ID`
 
-export const openDrawer = atom<KeyResult['id'] | undefined>({
+export const keyResultReadDrawerOpenedKeyResultID = atom<KeyResult['id'] | undefined>({
   key: KEY,
   default: undefined,
 })
-
-export default openDrawer
