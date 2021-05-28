@@ -18,6 +18,7 @@ import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { Objective } from 'src/components/Objective/types'
 import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
 
+import { ObjectiveAccordionMenu } from './accordion-menu'
 import messages from './messages'
 
 export interface ObjectiveAccordionButtonProperties {
@@ -69,21 +70,29 @@ const ObjectiveAccordionButton = ({
         </Heading>
       </Skeleton>
 
-      <Stack flexGrow={1} justifyContent="flex-end" direction="row" alignItems="center" spacing="6">
-        <TooltipWithDelay label={intl.formatMessage(messages.progressTagTooltip)} placement="top">
-          <Skeleton
-            isLoaded={isLoaded}
-            borderRadius="full"
-            w={isLoaded ? 'auto' : 70}
-            h={isLoaded ? 'auto' : 33}
-          >
-            <PercentageProgressIncreaseTag
-              forcePositiveSignal
-              value={objective?.progressIncreaseSinceLastWeek}
-              prefix={intl.formatMessage(messages.progressTagLabel)}
-            />
+      <Stack flexGrow={1} justifyContent="flex-end" direction="row" alignItems="center" spacing="8">
+        <Stack spacing={4} direction="row" alignItems="stretch">
+          <TooltipWithDelay label={intl.formatMessage(messages.progressTagTooltip)} placement="top">
+            <Skeleton
+              isLoaded={isLoaded}
+              borderRadius={4}
+              w={isLoaded ? 'auto' : 140}
+              h={isLoaded ? 'auto' : 33}
+            >
+              <PercentageProgressIncreaseTag
+                forcePositiveSignal
+                bg="black.100"
+                h="full"
+                value={objective?.progressIncreaseSinceLastWeek}
+                prefix={intl.formatMessage(messages.progressTagLabel)}
+              />
+            </Skeleton>
+          </TooltipWithDelay>
+
+          <Skeleton isLoaded={isLoaded}>
+            <ObjectiveAccordionMenu />
           </Skeleton>
-        </TooltipWithDelay>
+        </Stack>
 
         <AccordionIcon />
       </Stack>

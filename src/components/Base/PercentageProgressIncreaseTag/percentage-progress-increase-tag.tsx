@@ -15,6 +15,7 @@ export interface PercentageProgressIncreaseTagProperties {
   showSignalArrow?: boolean
   minimumIntegerDigits?: FormatNumberOptions['minimumIntegerDigits']
   prefix?: string
+  h?: TagProps['h']
 }
 
 const PercentageProgressIncreaseTag = ({
@@ -26,6 +27,7 @@ const PercentageProgressIncreaseTag = ({
   showSignalArrow,
   minimumIntegerDigits,
   prefix,
+  h,
 }: PercentageProgressIncreaseTagProperties) => {
   const intl = useIntl()
 
@@ -46,12 +48,13 @@ const PercentageProgressIncreaseTag = ({
   return (
     <Tag
       borderRadius="4"
-      py={2}
-      px={px ?? 4}
+      py={3}
+      px={px ?? 3}
       bg={bgColor}
       color={labelColor}
       gridGap={2}
       fontSize={fontSize}
+      h={h}
     >
       {showSignalArrow && <ProgressIndicator type={arrowType} color={arrowColor} />}
       {prefix && `${prefix.trim()} `}

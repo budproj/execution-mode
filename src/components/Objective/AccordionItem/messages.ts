@@ -6,6 +6,7 @@ type ObjectiveAccordionItemMessage =
   | 'progressTagLabel'
   | 'progressTagTooltip'
   | 'progressTooltip'
+  | 'optionsButtonIconDesc'
 
 export default defineMessages<ObjectiveAccordionItemMessage>({
   calendarIconTitle: {
@@ -40,5 +41,12 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
       'O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.',
     id: 'kFrglO',
     description: 'This tooltip explains how the progress of the objective is calculated',
+  },
+
+  optionsButtonIconDesc: {
+    defaultMessage: 'Um ícone de tres pontos, indicando que ao clicar aqui um menu se expandirá',
+    id: 'XvdEsU',
+    description:
+      'The description for screen readers regarding the three dots icon in the objectives accordion',
   },
 })
