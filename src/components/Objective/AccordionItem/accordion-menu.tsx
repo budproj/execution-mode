@@ -35,18 +35,18 @@ const ObjectiveMenuOption = (properties: MenuItemProps) => (
 
 interface ObjectiveAccordionMenuProperties {
   teamID?: string
+  isLoaded?: boolean
 }
 
-export const ObjectiveAccordionMenu = ({ teamID }: ObjectiveAccordionMenuProperties) => {
+export const ObjectiveAccordionMenu = ({ teamID, isLoaded }: ObjectiveAccordionMenuProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(teamID))
 
   const canCreateKeyResult = team?.keyResults?.policy?.create === GraphQLEffect.ALLOW
-
-  console.log(team, canCreateKeyResult, 'tag')
+  const hasAnyOptions = !isLoaded || canCreateKeyResult
 
   return (
-    <Skeleton isLoaded>
+    <Skeleton isLoaded={isLoaded} display={hasAnyOptions ? 'inherit' : 'none'}>
       <Menu placement="bottom-end">
         <MenuButton
           bg="black.100"
