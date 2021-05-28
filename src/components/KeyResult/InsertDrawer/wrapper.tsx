@@ -1,9 +1,11 @@
+import { Stack } from '@chakra-ui/layout'
 import { Drawer, DrawerContent, DrawerOverlay } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
 import { keyResultInsertDrawerIsOpen } from '../../../state/recoil/key-result/drawers/insert/is-open'
 
+import { KeyResultInsertDrawerFormWrapper } from './Form/wrapper'
 import { KeyResultInsertDrawerHeader } from './header'
 
 export const KeyResultInsertDrawer = () => {
@@ -14,7 +16,10 @@ export const KeyResultInsertDrawer = () => {
     <Drawer isOpen={isOpen} size="xl" placement="right" onClose={resetIsOpen}>
       <DrawerOverlay />
       <DrawerContent>
-        <KeyResultInsertDrawerHeader />
+        <Stack>
+          <KeyResultInsertDrawerHeader />
+          <KeyResultInsertDrawerFormWrapper />
+        </Stack>
       </DrawerContent>
     </Drawer>
   )
