@@ -3,6 +3,7 @@ import { Formik, Form } from 'formik'
 import React from 'react'
 
 import { DescriptionInput } from './description'
+import { FormatInput } from './format'
 import { TitleInput } from './title'
 
 type FormValues = {
@@ -24,6 +25,7 @@ export const KeyResultInsertDrawerFormWrapper = () => {
         <FormControl id="key-result-insert" display="flex" flexDirection="column" p={8} gridGap={8}>
           <TitleInput />
           <DescriptionInput />
+          <FormatInput />
         </FormControl>
       </Form>
     </Formik>

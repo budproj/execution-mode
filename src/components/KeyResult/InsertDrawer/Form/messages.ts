@@ -5,6 +5,7 @@ type KeyResultInsertDrawerFormMessage =
   | 'firstInputPlaceholder'
   | 'secondInputLabel'
   | 'secondInputPlaceholder'
+  | 'thirdInputLabel'
 
 export default defineMessages<KeyResultInsertDrawerFormMessage>({
   firstInputLabel: {
@@ -33,5 +34,11 @@ export default defineMessages<KeyResultInsertDrawerFormMessage>({
     id: 'Cu5tci',
     description:
       'This message is displayed as the placeholder for our second input in our key-result drawer',
+  },
+
+  thirdInputLabel: {
+    defaultMessage: 'Formato do Resultado-chave',
+    id: '0t238C',
+    description: 'This label appears above the third input in our insert key-result drawer',
   },
 })
