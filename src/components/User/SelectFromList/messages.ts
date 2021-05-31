@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSectionOwnerUpdateMessage = 'searchPlaceholder' | 'iconDesc'
+type SelectUserFromListMessage = 'searchPlaceholder' | 'iconDesc'
 
-export default defineMessages<KeyResultsSectionOwnerUpdateMessage>({
+export default defineMessages<SelectUserFromListMessage>({
   searchPlaceholder: {
     defaultMessage: 'Procurar',
     id: 'GtgPfn',
