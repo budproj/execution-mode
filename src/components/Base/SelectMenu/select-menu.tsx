@@ -24,6 +24,7 @@ export interface SelectMenuProperties {
   isLoading?: boolean
   matchWidth?: MenuProps['matchWidth']
   closeOnSelect?: MenuProps['closeOnSelect']
+  isLazy?: MenuProps['isLazy']
 }
 
 const SelectMenu = ({
@@ -35,11 +36,12 @@ const SelectMenu = ({
   isLoading,
   matchWidth,
   closeOnSelect,
+  isLazy,
 }: SelectMenuProperties) => {
   const intl = useIntl()
 
   return (
-    <Menu matchWidth={matchWidth} closeOnSelect={closeOnSelect}>
+    <Menu matchWidth={matchWidth} closeOnSelect={closeOnSelect} isLazy={isLazy}>
       {({ isOpen }) => (
         <>
           <MenuButton

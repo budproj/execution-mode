@@ -10,11 +10,15 @@ import { FormValues } from './wrapper'
 
 export const OwnerInput = () => {
   const intl = useIntl()
-  const { values } = useFormikContext<FormValues>()
+  const { values, setFieldValue } = useFormikContext<FormValues>()
+
+  const handleChange = (newOwnerID: string): void => {
+    setFieldValue('ownerId', newOwnerID)
+  }
 
   return (
     <FormInputBase title={intl.formatMessage(messages.sixthInputLabel)}>
-      <KeyResultOwnerSelectMenu value={values.ownerId} />
+      <KeyResultOwnerSelectMenu value={values.ownerId} onChange={handleChange} />
     </FormInputBase>
   )
 }

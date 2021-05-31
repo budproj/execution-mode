@@ -1,7 +1,9 @@
+import { Box } from '@chakra-ui/layout'
 import React from 'react'
 
 import SelectMenu from '../../Base/SelectMenu'
 import { NamedAvatar } from '../../User'
+import { AllReachableUsers } from '../../User/AllReachableUsers/wrapper'
 
 interface KeyResultOwnerSelectMenuProperties {
   value: string
@@ -20,6 +22,7 @@ export const KeyResultOwnerSelectMenu = ({
   return (
     <SelectMenu
       matchWidth
+      isLazy
       placeholder={
         <NamedAvatar
           userID={value}
@@ -32,7 +35,9 @@ export const KeyResultOwnerSelectMenu = ({
       value={value}
       onChange={handleChange}
     >
-      <p>Ok</p>
+      <Box p={4}>
+        <AllReachableUsers onSelect={handleChange} />
+      </Box>
     </SelectMenu>
   )
 }

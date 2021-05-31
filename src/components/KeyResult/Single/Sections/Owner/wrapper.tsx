@@ -50,7 +50,13 @@ export const KeyResultSingleSectionOwnerWrapper = ({
 
   return (
     <Box zIndex={theme.zIndices.popover}>
-      <Popover placement="bottom-start" isOpen={isOpen} onOpen={handleOpen} onClose={handleClose}>
+      <Popover
+        isLazy
+        placement="bottom-start"
+        isOpen={isOpen}
+        onOpen={handleOpen}
+        onClose={handleClose}
+      >
         <Flex gridGap={2} direction="column">
           <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
           <Flex direction="row">
@@ -63,11 +69,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
           </Flex>
         </Flex>
         <PopoverContent width="md">
-          <KeyResultAvailableOwners
-            keyResultID={keyResultID}
-            isOpen={isOpen}
-            onSelect={handleUpdate}
-          />
+          <KeyResultAvailableOwners keyResultID={keyResultID} onSelect={handleUpdate} />
         </PopoverContent>
       </Popover>
     </Box>

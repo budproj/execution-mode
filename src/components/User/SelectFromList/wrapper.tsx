@@ -10,7 +10,7 @@ import { UserSearch } from './search'
 export interface SelectUserFromListProperties {
   users: User[]
   isLoading?: boolean
-  onSelect?: (userID: string) => Promise<void>
+  onSelect?: (userID: string) => void | Promise<void>
   onSearch?: (query: string) => void
 }
 

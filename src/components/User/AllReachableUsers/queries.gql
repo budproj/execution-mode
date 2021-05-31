@@ -1,0 +1,19 @@
+query GET_USER_LIST {
+  users(first: 1000) {
+    edges {
+      node {
+        id
+        fullName
+        picture
+        teams {
+          edges {
+            node {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
