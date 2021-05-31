@@ -1,4 +1,14 @@
-import { Avatar, Text, SkeletonCircle, Skeleton, Stack, Flex } from '@chakra-ui/react'
+import {
+  Avatar,
+  Text,
+  SkeletonCircle,
+  Skeleton,
+  Stack,
+  Flex,
+  AvatarProps,
+  StackProps,
+  TextProps,
+} from '@chakra-ui/react'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -20,6 +30,10 @@ export interface NamedAvatarProperties {
   subtitleType?: NamedAvatarSubtitleType
   canEdit?: boolean
   canHover?: boolean
+  avatarSize?: AvatarProps['w']
+  displaySubtitle?: boolean
+  horizontalGap?: StackProps['spacing']
+  nameColor?: TextProps['color']
   onClick?: () => void
 }
 
@@ -31,8 +45,15 @@ const NamedAvatar = ({
   canEdit,
   canHover,
   onClick,
+  avatarSize,
+  displaySubtitle,
+  horizontalGap,
+  nameColor,
 }: NamedAvatarProperties): ReactElement => {
   subtitleType ??= 'company'
+  avatarSize ??= 12
+  displaySubtitle ??= true
+  horizontalGap ??= 4
 
   const [isHovering, setIsHovering] = useState(false)
   const user = useRecoilValue(selectUser(userID))
@@ -70,13 +91,13 @@ const NamedAvatar = ({
     <Stack
       alignItems="center"
       direction="row"
-      spacing={4}
+      spacing={horizontalGap}
       cursor={canHover ? 'pointer' : 'auto'}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
     >
-      <SkeletonCircle isLoaded={isLoaded} w={12} h={12} fadeDuration={0}>
+      <SkeletonCircle isLoaded={isLoaded} w={avatarSize} h={avatarSize} fadeDuration={0}>
         {canEdit && (isHovering || isEditting) ? (
           <Flex
             w={12}
@@ -91,20 +112,22 @@ const NamedAvatar = ({
             <SwitchIcon fill="brand.500" desc={intl.formatMessage(messages.changeIconDesc)} />
           </Flex>
         ) : (
-          <Avatar name={user?.fullName} src={user?.picture} w={12} h={12} />
+          <Avatar name={user?.fullName} src={user?.picture} w={avatarSize} h={avatarSize} />
         )}
       </SkeletonCircle>
 
       <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
-          <Text color={isHovering || isEditting ? 'brand.500' : 'black.900'}>{user?.fullName}</Text>
+          <Text color={isHovering || isEditting ? 'brand.500' : nameColor}>{user?.fullName}</Text>
         </Skeleton>
 
-        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>
-          <Text fontSize="sm" color="gray.400">
-            {subtitle}
-          </Text>
-        </Skeleton>
+        {displaySubtitle && (
+          <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>
+            <Text fontSize="sm" color="gray.400">
+              {subtitle}
+            </Text>
+          </Skeleton>
+        )}
       </Stack>
     </Stack>
   )

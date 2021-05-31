@@ -48,11 +48,13 @@ const SelectMenu = ({
             w="100%"
             borderWidth={2}
             borderColor="gray.100"
-            color="black.900"
+            color="gray.500"
             borderRadius={4}
             fontWeight={300}
             textAlign="left"
-            p={6}
+            py={6}
+            px={3}
+            fontSize="lg"
             _hover={{
               color: 'black.900',
             }}

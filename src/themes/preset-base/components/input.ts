@@ -5,10 +5,11 @@ const Input = {
         borderWidth: 2,
         borderRadius: 4,
         borderColor: 'gray.100',
-        color: 'black.900',
+        color: 'gray.500',
         fontWeight: 400,
         fontSize: 'lg',
         py: 6,
+        px: 3,
       },
     }),
 
