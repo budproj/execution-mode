@@ -5,7 +5,7 @@ const Input = {
         borderWidth: 2,
         borderRadius: 4,
         borderColor: 'gray.100',
-        color: 'gray.300',
+        color: 'black.900',
         fontWeight: 400,
         fontSize: 'lg',
         py: 6,

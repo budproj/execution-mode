@@ -6,6 +6,8 @@ type KeyResultInsertDrawerFormMessage =
   | 'secondInputLabel'
   | 'secondInputPlaceholder'
   | 'thirdInputLabel'
+  | 'fourthInputLabel'
+  | 'fifthInputLabel'
 
 export default defineMessages<KeyResultInsertDrawerFormMessage>({
   firstInputLabel: {
@@ -40,5 +42,17 @@ export default defineMessages<KeyResultInsertDrawerFormMessage>({
     defaultMessage: 'Formato do Resultado-chave',
     id: '0t238C',
     description: 'This label appears above the third input in our insert key-result drawer',
+  },
+
+  fourthInputLabel: {
+    defaultMessage: 'Valor Inicial',
+    id: 'WiYOXK',
+    description: 'This label appears above the fourth input in our insert key-result drawer',
+  },
+
+  fifthInputLabel: {
+    defaultMessage: 'Meta',
+    id: 'L0c5bp',
+    description: 'This label appears above the fifth input in our insert key-result drawer',
   },
 })
