@@ -23,6 +23,7 @@ export interface SelectMenuProperties {
   id?: MenuProps['id']
   isLoading?: boolean
   matchWidth?: MenuProps['matchWidth']
+  closeOnSelect?: MenuProps['closeOnSelect']
 }
 
 const SelectMenu = ({
@@ -33,11 +34,12 @@ const SelectMenu = ({
   children,
   isLoading,
   matchWidth,
+  closeOnSelect,
 }: SelectMenuProperties) => {
   const intl = useIntl()
 
   return (
-    <Menu matchWidth={matchWidth}>
+    <Menu matchWidth={matchWidth} closeOnSelect={closeOnSelect}>
       {({ isOpen }) => (
         <>
           <MenuButton

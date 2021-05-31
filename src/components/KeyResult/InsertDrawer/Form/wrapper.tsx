@@ -2,22 +2,28 @@ import { FormControl } from '@chakra-ui/react'
 import { Formik, Form } from 'formik'
 import React from 'react'
 
+import { KEY_RESULT_FORMAT } from '../../constants'
+
 import { DescriptionInput } from './description'
 import { FormatInput } from './format'
 import { TitleInput } from './title'
 
-type FormValues = {
+export type FormValues = {
   title: string
   description: string
+  format: KEY_RESULT_FORMAT
 }
 
 export const KeyResultInsertDrawerFormWrapper = () => {
   const initialValues: FormValues = {
     title: '',
     description: '',
+    format: KEY_RESULT_FORMAT.PERCENTAGE,
   }
 
-  const handleSubmit = (values: FormValues): void => {}
+  const handleSubmit = (values: FormValues): void => {
+    console.log(values)
+  }
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
