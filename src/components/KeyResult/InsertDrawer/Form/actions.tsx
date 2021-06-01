@@ -12,7 +12,7 @@ interface FormActionsInterface {
 
 export const FormActions = ({ onClose }: FormActionsInterface) => {
   const intl = useIntl()
-  const { resetForm, submitForm } = useFormikContext()
+  const { resetForm, submitForm, isSubmitting } = useFormikContext()
 
   const handleCancel = () => {
     resetForm()
@@ -24,7 +24,13 @@ export const FormActions = ({ onClose }: FormActionsInterface) => {
       <Button variant="outline" flexGrow={1} colorScheme="brand" onClick={handleCancel}>
         {intl.formatMessage(messages.firstActionButtonLabel)}
       </Button>
-      <Button variant="solid" flexGrow={1} colorScheme="brand" onClick={submitForm}>
+      <Button
+        variant="solid"
+        flexGrow={1}
+        colorScheme="brand"
+        isLoading={isSubmitting}
+        onClick={submitForm}
+      >
         {intl.formatMessage(messages.secondActionButtonLabel)}
       </Button>
     </Stack>
