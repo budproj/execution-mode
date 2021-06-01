@@ -2,9 +2,10 @@ import { useMutation } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import { FormControl } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
-import React from 'react'
-import { useRecoilValue } from 'recoil'
+import React, { useEffect } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { lastInsertedKeyResultIDAtom } from '../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
 import meAtom from '../../../../state/recoil/user/me'
 import { KEY_RESULT_FORMAT, KEY_RESULT_TYPE } from '../../constants'
 import { KeyResult } from '../../types'
@@ -35,13 +36,18 @@ interface InsertKeyResultFormProperties {
   teamID?: string
 }
 
+interface CreateKeyResultMutationResult {
+  createKeyResult: KeyResult
+}
+
 export const InsertKeyResultForm = ({
   onClose,
   objectiveID,
   teamID,
 }: InsertKeyResultFormProperties) => {
   const currentUserID = useRecoilValue(meAtom)
-  const [createKeyResult, { data, error, loading }] = useMutation<KeyResult>(
+  const setLastInsertedKeyResultID = useSetRecoilState(lastInsertedKeyResultIDAtom)
+  const [createKeyResult, { data, error, loading }] = useMutation<CreateKeyResultMutationResult>(
     queries.CREATE_KEY_RESULT,
   )
   const initialValues: FormValues = {
@@ -65,6 +71,10 @@ export const InsertKeyResultForm = ({
 
     await createKeyResult({ variables })
   }
+
+  useEffect(() => {
+    if (data && !error) setLastInsertedKeyResultID(data.createKeyResult.id)
+  }, [data, error, setLastInsertedKeyResultID])
 
   console.log(data, error, loading, 'tag')
 
