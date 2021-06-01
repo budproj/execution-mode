@@ -52,6 +52,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
 
   const groupedObjectivesByCycle = groupObjectivesByCycle(objectives)
   const isLoaded = called && !loading && groupedObjectivesByCycle
+  const syncedWithLocalState = data?.team.objectives?.edges.length === objectives.length
 
   useEffect(() => {
     if (data) setObjectiveEdges(data?.team.objectives?.edges)
@@ -64,10 +65,10 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   return (
     <Stack spacing={12} h="full">
       {isLoaded ? (
-        !groupedObjectivesByCycle || groupedObjectivesByCycle.length === 0 ? (
+        syncedWithLocalState && groupedObjectivesByCycle?.length === 0 ? (
           <TeamActiveObjectivesEmptyState />
         ) : (
-          groupedObjectivesByCycle.map(([cycle, objectives]) => (
+          groupedObjectivesByCycle?.map(([cycle, objectives]) => (
             <ObjectivesFromCycle
               key={cycle.id}
               cycle={cycle}
