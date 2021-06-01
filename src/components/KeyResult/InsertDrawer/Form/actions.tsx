@@ -19,17 +19,12 @@ export const FormActions = ({ onClose }: FormActionsInterface) => {
     if (onClose) onClose()
   }
 
-  const handleSubmit = async () => {
-    await submitForm()
-    if (onClose) onClose()
-  }
-
   return (
     <Stack flexGrow={1} alignItems="flex-end" justifyContent="center" direction="row">
       <Button variant="outline" flexGrow={1} colorScheme="brand" onClick={handleCancel}>
         {intl.formatMessage(messages.firstActionButtonLabel)}
       </Button>
-      <Button variant="solid" flexGrow={1} colorScheme="brand" onClick={handleSubmit}>
+      <Button variant="solid" flexGrow={1} colorScheme="brand" onClick={submitForm}>
         {intl.formatMessage(messages.secondActionButtonLabel)}
       </Button>
     </Stack>

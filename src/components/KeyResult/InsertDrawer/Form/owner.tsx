@@ -13,13 +13,13 @@ export const OwnerInput = () => {
   const { values, setFieldValue } = useFormikContext<FormValues>()
 
   const handleChange = (newOwnerID: string): void => {
-    setFieldValue('ownerId', newOwnerID)
+    setFieldValue('ownerID', newOwnerID)
   }
 
   return (
     <FormInputBase title={intl.formatMessage(messages.sixthInputLabel)}>
       <KeyResultOwnerSelectMenu
-        value={values.ownerId}
+        value={values.ownerID}
         avatarSubtitleType="role"
         onChange={handleChange}
       />
