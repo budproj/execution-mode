@@ -32,6 +32,7 @@ export type FormValues = {
 
 interface InsertKeyResultFormProperties {
   onClose?: () => void
+  onSuccess?: () => void
   objectiveID?: string
   teamID?: string
 }
@@ -42,12 +43,13 @@ interface CreateKeyResultMutationResult {
 
 export const InsertKeyResultForm = ({
   onClose,
+  onSuccess,
   objectiveID,
   teamID,
 }: InsertKeyResultFormProperties) => {
   const currentUserID = useRecoilValue(meAtom)
   const setLastInsertedKeyResultID = useSetRecoilState(lastInsertedKeyResultIDAtom)
-  const [createKeyResult, { data, error, loading }] = useMutation<CreateKeyResultMutationResult>(
+  const [createKeyResult, { data, error }] = useMutation<CreateKeyResultMutationResult>(
     queries.CREATE_KEY_RESULT,
   )
   const initialValues: FormValues = {
@@ -70,13 +72,12 @@ export const InsertKeyResultForm = ({
     }
 
     await createKeyResult({ variables })
+    if (onSuccess) onSuccess()
   }
 
   useEffect(() => {
     if (data && !error) setLastInsertedKeyResultID(data.createKeyResult.id)
   }, [data, error, setLastInsertedKeyResultID])
-
-  console.log(data, error, loading, 'tag')
 
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
