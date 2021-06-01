@@ -71,6 +71,7 @@ export const InsertKeyResultForm = ({
       type: keyResultType,
     }
 
+    console.log(values, 'tag')
     await createKeyResult({ variables })
     if (onSuccess) onSuccess()
   }
