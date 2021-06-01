@@ -4,6 +4,7 @@ query GET_USER_LIST {
       node {
         id
         fullName
+        role
         picture
         teams {
           edges {

@@ -9,6 +9,8 @@ type KeyResultInsertDrawerFormMessage =
   | 'fourthInputLabel'
   | 'fifthInputLabel'
   | 'sixthInputLabel'
+  | 'firstActionButtonLabel'
+  | 'secondActionButtonLabel'
 
 export default defineMessages<KeyResultInsertDrawerFormMessage>({
   firstInputLabel: {
@@ -61,5 +63,19 @@ export default defineMessages<KeyResultInsertDrawerFormMessage>({
     defaultMessage: 'Responsável',
     id: 'wiFglx',
     description: 'This label appears above the sixth input in our insert key-result drawer',
+  },
+
+  firstActionButtonLabel: {
+    defaultMessage: 'Cancelar',
+    id: 'VUKPKt',
+    description:
+      'This is a button label displayed inside the insert key-result drawer. This is the first button',
+  },
+
+  secondActionButtonLabel: {
+    defaultMessage: 'Salvar',
+    id: 'M0RYZa',
+    description:
+      'This is a button label displayed inside the insert key-result drawer. This is the second button',
   },
 })

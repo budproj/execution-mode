@@ -4,15 +4,18 @@ import React from 'react'
 import SelectMenu from '../../Base/SelectMenu'
 import { NamedAvatar } from '../../User'
 import { AllReachableUsers } from '../../User/AllReachableUsers/wrapper'
+import { NamedAvatarSubtitleType } from '../../User/NamedAvatar/types'
 
 interface KeyResultOwnerSelectMenuProperties {
   value: string
   onChange?: (newOwnerID: string) => void
+  avatarSubtitleType?: NamedAvatarSubtitleType
 }
 
 export const KeyResultOwnerSelectMenu = ({
   value,
   onChange,
+  avatarSubtitleType,
 }: KeyResultOwnerSelectMenuProperties) => {
   const handleChange = (newOwnerID: string | string[]) => {
     if (Array.isArray(newOwnerID)) throw new Error('Cannot parse string array')
@@ -36,7 +39,7 @@ export const KeyResultOwnerSelectMenu = ({
       onChange={handleChange}
     >
       <Box p={4}>
-        <AllReachableUsers onSelect={handleChange} />
+        <AllReachableUsers avatarSubtitleType={avatarSubtitleType} onSelect={handleChange} />
       </Box>
     </SelectMenu>
   )

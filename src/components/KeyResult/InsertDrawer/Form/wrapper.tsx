@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil'
 import meAtom from '../../../../state/recoil/user/me'
 import { KEY_RESULT_FORMAT } from '../../constants'
 
+import { FormActions } from './actions'
 import { DescriptionInput } from './description'
 import { FormatInput } from './format'
 import { GoalInput } from './goal'
@@ -23,7 +24,11 @@ export type FormValues = {
   ownerId: string
 }
 
-export const KeyResultInsertDrawerFormWrapper = () => {
+interface KeyResultInsertDrawerFormProperties {
+  onClose?: () => void
+}
+
+export const KeyResultInsertDrawerWrapper = ({ onClose }: KeyResultInsertDrawerFormProperties) => {
   const currentUserID = useRecoilValue(meAtom)
   const initialValues: FormValues = {
     title: '',
@@ -41,7 +46,14 @@ export const KeyResultInsertDrawerFormWrapper = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
       <Form>
-        <FormControl id="key-result-insert" display="flex" flexDirection="column" p={8} gridGap={8}>
+        <FormControl
+          id="key-result-insert"
+          display="flex"
+          flexDirection="column"
+          p={8}
+          gridGap={8}
+          h="full"
+        >
           <TitleInput />
           <DescriptionInput />
           <FormatInput />
@@ -52,6 +64,8 @@ export const KeyResultInsertDrawerFormWrapper = () => {
           </Stack>
 
           <OwnerInput />
+
+          <FormActions onClose={onClose} />
         </FormControl>
       </Form>
     </Formik>

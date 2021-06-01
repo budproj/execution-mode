@@ -18,7 +18,11 @@ export const OwnerInput = () => {
 
   return (
     <FormInputBase title={intl.formatMessage(messages.sixthInputLabel)}>
-      <KeyResultOwnerSelectMenu value={values.ownerId} onChange={handleChange} />
+      <KeyResultOwnerSelectMenu
+        value={values.ownerId}
+        avatarSubtitleType="role"
+        onChange={handleChange}
+      />
     </FormInputBase>
   )
 }
