@@ -4,7 +4,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { keyResultInsertDrawerIsOpen } from '../../../state/recoil/key-result/drawers/insert/is-open'
+import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
 import { teamAtomFamily } from '../../../state/recoil/team'
 import TreeDotsIcon from '../../Icon/TreeDots'
 import { GraphQLEffect } from '../../types'
@@ -36,19 +36,24 @@ const ObjectiveMenuOption = (properties: MenuItemProps) => (
 
 interface ObjectiveAccordionMenuProperties {
   teamID?: string
+  objectiveID?: string
   isLoaded?: boolean
 }
 
-export const ObjectiveAccordionMenu = ({ teamID, isLoaded }: ObjectiveAccordionMenuProperties) => {
+export const ObjectiveAccordionMenu = ({
+  teamID,
+  objectiveID,
+  isLoaded,
+}: ObjectiveAccordionMenuProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(teamID))
-  const setKeyResultInsertDrawerIsOpen = useSetRecoilState(keyResultInsertDrawerIsOpen)
+  const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
 
   const canCreateKeyResult = team?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const hasAnyOptions = !isLoaded || canCreateKeyResult
 
   const openKeyResultInsertDrawer = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    setKeyResultInsertDrawerIsOpen(true)
+    setKeyResultInsertDrawerObjectiveID(objectiveID)
     stopAccordionOpen(event)
   }
 

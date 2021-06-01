@@ -1,0 +1,25 @@
+mutation CREATE_KEY_RESULT(
+  $title: String!,
+  $initialValue: Float!,
+  $goal: Float!,
+  $format: KeyResultFormat!,
+  $ownerID: ID!,
+  $objectiveID: ID!,
+  $teamID: ID!,
+  $type: KeyResultType,
+  $description: String,
+) {
+  createKeyResult(data: {
+    title: $title,
+    initialValue: $initialValue,
+    goal: $goal,
+    format: $format,
+    ownerId: $ownerID,
+    objectiveId: $objectiveID,
+    teamId: $teamID,
+    type: $type,
+    description: $description,
+  }) {
+    id
+  }
+}

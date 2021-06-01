@@ -48,7 +48,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
           titleValues={{ team: data?.team.name ?? metaTitleLoadingFallback }}
         />
         <KeyResultSingleDrawer />
-        <KeyResultInsertDrawer />
+        <KeyResultInsertDrawer teamID={teamId} />
 
         <Stack spacing={8}>
           <Stack direction="row">

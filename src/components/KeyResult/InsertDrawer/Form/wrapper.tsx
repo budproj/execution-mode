@@ -16,6 +16,8 @@ import { OwnerInput } from './owner'
 import { TitleInput } from './title'
 
 export type FormValues = {
+  objectiveID?: string
+  teamID?: string
   title: string
   description: string
   format: KEY_RESULT_FORMAT
@@ -24,13 +26,21 @@ export type FormValues = {
   ownerId: string
 }
 
-interface KeyResultInsertDrawerFormProperties {
+interface InsertKeyResultFormProperties {
   onClose?: () => void
+  objectiveID?: string
+  teamID?: string
 }
 
-export const KeyResultInsertDrawerWrapper = ({ onClose }: KeyResultInsertDrawerFormProperties) => {
+export const InsertKeyResultForm = ({
+  onClose,
+  objectiveID,
+  teamID,
+}: InsertKeyResultFormProperties) => {
   const currentUserID = useRecoilValue(meAtom)
   const initialValues: FormValues = {
+    objectiveID,
+    teamID,
     title: '',
     description: '',
     format: KEY_RESULT_FORMAT.PERCENTAGE,
@@ -40,7 +50,7 @@ export const KeyResultInsertDrawerWrapper = ({ onClose }: KeyResultInsertDrawerF
   }
 
   const handleSubmit = (values: FormValues): void => {
-    console.log(values)
+    console.log(values, 'tag')
   }
 
   return (

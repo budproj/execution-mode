@@ -91,7 +91,7 @@ const ObjectiveAccordionButton = ({
             </Skeleton>
           </TooltipWithDelay>
 
-          <ObjectiveAccordionMenu teamID={teamID} isLoaded={isLoaded} />
+          <ObjectiveAccordionMenu teamID={teamID} objectiveID={objective?.id} isLoaded={isLoaded} />
         </Stack>
 
         <AccordionIcon />
