@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import { FormControl } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
@@ -34,6 +34,7 @@ interface InsertKeyResultFormProperties {
   onClose?: () => void
   onSuccess?: () => void
   onError?: () => void
+  onValidationError?: () => void
   objectiveID?: string
   teamID?: string
 }
@@ -42,13 +43,19 @@ interface CreateKeyResultMutationResult {
   createKeyResult: KeyResult
 }
 
+const defineKeyResultType = (values: FormValues): KEY_RESULT_TYPE => {
+  return values.initialValue <= values.goal ? KEY_RESULT_TYPE.ASCENDING : KEY_RESULT_TYPE.DESCENDING
+}
+
 export const InsertKeyResultForm = ({
   onClose,
   onSuccess,
   onError,
+  onValidationError,
   objectiveID,
   teamID,
 }: InsertKeyResultFormProperties) => {
+  const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
   const currentUserID = useRecoilValue(meAtom)
   const setLastInsertedKeyResultID = useSetRecoilState(lastInsertedKeyResultIDAtom)
   const [createKeyResult, { data, error }] = useMutation<CreateKeyResultMutationResult>(
@@ -65,12 +72,25 @@ export const InsertKeyResultForm = ({
     ownerID: currentUserID,
   }
 
+  const validateFields = (values: FormValues): boolean => {
+    const invalidFields: Array<keyof FormValues> = []
+    if (!values.title || values.title === '') invalidFields.push('title')
+
+    if (invalidFields !== validationErrors) setValidationErrors(invalidFields)
+
+    return invalidFields.length === 0
+  }
+
   const handleSubmit = async (values: FormValues): Promise<void> => {
-    const keyResultType =
-      values.initialValue <= values.goal ? KEY_RESULT_TYPE.ASCENDING : KEY_RESULT_TYPE.DESCENDING
+    const areAllFieldsValid = validateFields(values)
+    if (!areAllFieldsValid) {
+      if (onValidationError) onValidationError()
+      return
+    }
+
     const variables = {
       ...values,
-      type: keyResultType,
+      type: defineKeyResultType(values),
     }
 
     await createKeyResult({ variables }).catch(() => {
@@ -83,7 +103,7 @@ export const InsertKeyResultForm = ({
       if (onSuccess) onSuccess()
       setLastInsertedKeyResultID(data.createKeyResult.id)
     }
-  }, [data, error, setLastInsertedKeyResultID])
+  }, [data, error, onSuccess, setLastInsertedKeyResultID])
 
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
@@ -96,7 +116,7 @@ export const InsertKeyResultForm = ({
           gridGap={8}
           h="full"
         >
-          <TitleInput />
+          <TitleInput hasValidationErrors={validationErrors.includes('title')} />
           <DescriptionInput />
           <FormatInput />
 

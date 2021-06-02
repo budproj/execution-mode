@@ -11,6 +11,7 @@ type KeyResultInsertDrawerFormMessage =
   | 'sixthInputLabel'
   | 'firstActionButtonLabel'
   | 'secondActionButtonLabel'
+  | 'invalidIconDesc'
 
 export default defineMessages<KeyResultInsertDrawerFormMessage>({
   firstInputLabel: {
@@ -77,5 +78,12 @@ export default defineMessages<KeyResultInsertDrawerFormMessage>({
     id: 'M0RYZa',
     description:
       'This is a button label displayed inside the insert key-result drawer. This is the second button',
+  },
+
+  invalidIconDesc: {
+    defaultMessage: 'Um ícone de X indicando que os dados neste campo não são válidos',
+    id: 't3VVHw',
+    description:
+      'This is used by screen readers to explain the X that appears when the users types a non-valid data in a given controlled field',
   },
 })

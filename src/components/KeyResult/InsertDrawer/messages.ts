@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultInsertDrawerMessage = 'title' | 'successToastMessage' | 'unexpectedErrorToastMessage'
+type KeyResultInsertDrawerMessage =
+  | 'title'
+  | 'successToastMessage'
+  | 'unexpectedErrorToastMessage'
+  | 'validationErrorToastMessage'
 
 export default defineMessages<KeyResultInsertDrawerMessage>({
   title: {
@@ -20,5 +24,12 @@ export default defineMessages<KeyResultInsertDrawerMessage>({
     id: '5fB6ei',
     description:
       'This message appears in an error toast after the user creates a new key-result but an unexpected error occurred',
+  },
+
+  validationErrorToastMessage: {
+    defaultMessage: 'Preencha os campos obrigatórios para poder salvar este resultado-chave.',
+    id: 'jCjr1X',
+    description:
+      'This message appears in an error toast after the users tries to create a key-result but there are some validation errors in the form',
   },
 })
