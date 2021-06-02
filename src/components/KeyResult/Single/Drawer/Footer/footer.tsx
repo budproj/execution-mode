@@ -18,7 +18,7 @@ const KeyResultDrawerFooter = ({ keyResultID }: KeyResultDrawerFooterProperties)
   const canCreate = commentPolicy?.create === GraphQLEffect.ALLOW
 
   return canCreate ? (
-    <Box p={4} boxShadow="md">
+    <Box p={4} boxShadow="md" borderColor="new_gray.200" borderTopWidth={1}>
       <KeyResultSectionAddComment keyResultID={keyResultID} />
     </Box>
   ) : // eslint-disable-next-line unicorn/no-null

@@ -23,6 +23,12 @@ const Popover = {
 
     popper: {
       maxW: size && size in sizes ? sizes[size] : sizes.default,
+      borderColor: 'new_gray.200',
+      borderWidth: 1,
+      borderStyle: 'solid',
+      boxShadow: 'md',
+      outline: 'none',
+      _focus: { boxShadow: 'md' },
     },
   }),
 

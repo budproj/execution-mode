@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/layout'
-import React from 'react'
+import React, { useState } from 'react'
 
 import SelectMenu from '../../Base/SelectMenu'
 import { NamedAvatar } from '../../User'
@@ -17,15 +17,29 @@ export const KeyResultOwnerSelectMenu = ({
   onChange,
   avatarSubtitleType,
 }: KeyResultOwnerSelectMenuProperties) => {
+  const [isOpen, setIsOpen] = useState(false)
+
   const handleChange = (newOwnerID: string | string[]) => {
     if (Array.isArray(newOwnerID)) throw new Error('Cannot parse string array')
     if (onChange) onChange(newOwnerID)
+    handleClose()
+  }
+
+  const handleOpen = () => {
+    if (!isOpen) setIsOpen(true)
+  }
+
+  const handleClose = () => {
+    if (isOpen) setIsOpen(false)
   }
 
   return (
     <SelectMenu
       matchWidth
       isLazy
+      closeOnSelect
+      isOpen={isOpen}
+      value={value}
       placeholder={
         <NamedAvatar
           userID={value}
@@ -35,7 +49,8 @@ export const KeyResultOwnerSelectMenu = ({
           nameColor="gray.500"
         />
       }
-      value={value}
+      onOpen={handleOpen}
+      onClose={handleClose}
       onChange={handleChange}
     >
       <Box p={4}>

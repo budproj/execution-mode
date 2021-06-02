@@ -25,7 +25,14 @@ const ObjectiveAccordionItem = ({ objectiveID, teamID }: ObjectiveAccordionItemP
   }, [objective, setConfidence])
 
   return (
-    <AccordionItem border="none" bg="white" boxShadow="xs" p={4} borderRadius="10">
+    <AccordionItem
+      borderWidth={1}
+      borderColor="new_gray.200"
+      bg="white"
+      boxShadow="md"
+      p={4}
+      borderRadius="10"
+    >
       {({ isExpanded }) => (
         <>
           <ObjectiveAccordionButton
