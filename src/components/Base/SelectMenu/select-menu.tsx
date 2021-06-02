@@ -28,7 +28,7 @@ export interface SelectMenuProperties {
   isOpen?: MenuProps['isOpen']
   onOpen?: MenuProps['onOpen']
   onClose?: MenuProps['onClose']
-  placement: MenuProps['placement']
+  placement?: MenuProps['placement']
 }
 
 const SelectMenu = ({
