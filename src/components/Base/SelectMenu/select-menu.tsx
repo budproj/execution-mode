@@ -28,6 +28,7 @@ export interface SelectMenuProperties {
   isOpen?: MenuProps['isOpen']
   onOpen?: MenuProps['onOpen']
   onClose?: MenuProps['onClose']
+  placement: MenuProps['placement']
 }
 
 const SelectMenu = ({
@@ -43,6 +44,7 @@ const SelectMenu = ({
   isOpen,
   onOpen,
   onClose,
+  placement,
 }: SelectMenuProperties) => {
   const intl = useIntl()
 
@@ -52,6 +54,7 @@ const SelectMenu = ({
       isLazy={isLazy}
       isOpen={isOpen}
       closeOnSelect={closeOnSelect}
+      placement={placement}
       onOpen={onOpen}
       onClose={onClose}
     >
@@ -90,7 +93,7 @@ const SelectMenu = ({
       >
         {placeholder}
       </MenuButton>
-      <MenuList>
+      <MenuList boxShadow="md" borderColor="new_gray.200" borderWidth={1}>
         <MenuOptionGroup value={value} type="radio" onChange={onChange}>
           {children}
         </MenuOptionGroup>
