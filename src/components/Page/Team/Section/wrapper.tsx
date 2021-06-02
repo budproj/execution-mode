@@ -12,11 +12,10 @@ export const TeamSectionWrapper = ({ title, ...rest }: TeamSectionWrapperPropert
   <Stack spacing={4} maxH="md">
     <TeamSectionHeading>{title}</TeamSectionHeading>
     <Box
-      p={2}
       bg="white"
       borderRadius="10"
       w="full"
-      overflow="auto"
+      overflowY="auto"
       boxShadow="md"
       borderColor="new_gray.200"
       borderWidth={1}
