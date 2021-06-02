@@ -12,7 +12,7 @@ export default defineMessages<KeyResultsSectionDeadlineMessage>({
 
   heading: {
     defaultMessage: 'Data Limite',
-    id: '+CyB1n',
-    description: 'The heading text of the goal section in our key-result drawer',
+    id: 's6b2FE',
+    description: 'The heading text of the goal section in our key-result drawers',
   },
 })

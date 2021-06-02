@@ -33,7 +33,7 @@ const CheckInFormFieldValueNew = ({ keyResultID }: CheckInFormFieldValueNewPrope
   return (
     <Box flex="1 1 0px">
       <FormLabel>{intl.formatMessage(messages.label)}</FormLabel>
-      <Mask value={values.valueNew} handleChange={handleChange} fontSize="xs" />
+      <Mask value={values.valueNew} handleChange={handleChange} />
     </Box>
   )
 }

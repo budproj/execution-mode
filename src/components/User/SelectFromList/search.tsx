@@ -4,12 +4,13 @@ import { useIntl } from 'react-intl'
 
 import SearchIcon from 'src/components/Icon/Search'
 
-import { KeyResultSingleSectionOwnerUpdateSearchProperties } from './interface'
 import messages from './messages'
 
-export const KeyResultSingleSectionOwnerUpdateSearch = ({
-  onChange,
-}: KeyResultSingleSectionOwnerUpdateSearchProperties) => {
+export interface UserSearchProperties {
+  onChange?: (searchValue: string) => void
+}
+
+export const UserSearch = ({ onChange }: UserSearchProperties) => {
   const intl = useIntl()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

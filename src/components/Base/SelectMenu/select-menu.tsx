@@ -16,13 +16,15 @@ import ChevronDownIcon from 'src/components/Icon/ChevronDown'
 import messages from './messages'
 
 export interface SelectMenuProperties {
-  placeholder: ReactElement
+  placeholder: ReactElement | string
   value: string | undefined
   onChange: (value: string | string[]) => void
   children: MenuProps['children']
   id?: MenuProps['id']
   isLoading?: boolean
   matchWidth?: MenuProps['matchWidth']
+  closeOnSelect?: MenuProps['closeOnSelect']
+  isLazy?: MenuProps['isLazy']
 }
 
 const SelectMenu = ({
@@ -33,11 +35,13 @@ const SelectMenu = ({
   children,
   isLoading,
   matchWidth,
+  closeOnSelect,
+  isLazy,
 }: SelectMenuProperties) => {
   const intl = useIntl()
 
   return (
-    <Menu matchWidth={matchWidth}>
+    <Menu matchWidth={matchWidth} closeOnSelect={closeOnSelect} isLazy={isLazy}>
       {({ isOpen }) => (
         <>
           <MenuButton
@@ -45,13 +49,17 @@ const SelectMenu = ({
             as={Button}
             w="100%"
             borderWidth={2}
-            borderColor="black.100"
-            color="black.400"
+            borderColor="gray.100"
+            color="gray.500"
             borderRadius={4}
             fontWeight={300}
+            textAlign="left"
             py={6}
-            pl={2}
-            pr={5}
+            px={3}
+            fontSize="lg"
+            _hover={{
+              color: 'black.900',
+            }}
             rightIcon={
               <Stack direction="row" alignItems="center">
                 {isLoading && <Spinner size="sm" color="black.100" />}
@@ -60,8 +68,8 @@ const SelectMenu = ({
                     isOpen ? messages.iconChevronUpDesc : messages.iconChevronDownDesc,
                   )}
                   fontSize="xs"
-                  color="black.50"
-                  stroke="black.50"
+                  color="black.900"
+                  stroke="black.900"
                   transition="0.2s all ease-in"
                   transform={isOpen ? 'rotate(180deg)' : 'none'}
                 />

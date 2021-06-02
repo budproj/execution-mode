@@ -2,11 +2,11 @@ import React from 'react'
 
 import { NamedAvatar } from 'src/components/User/index'
 
-import { KeyResultSingleSectionOwnerUpdateUserListSkeletonProperties } from '../../KeyResult/Single/Sections/Owner/Update/interface'
+export interface UserListSkeletonProperties {
+  numberOfSkeletons?: number
+}
 
-export const UserListSkeleton = ({
-  numberOfSkeletons,
-}: KeyResultSingleSectionOwnerUpdateUserListSkeletonProperties) => (
+export const UserListSkeleton = ({ numberOfSkeletons }: UserListSkeletonProperties) => (
   <>
     {[...new Array(numberOfSkeletons ?? 3)].map(() => (
       <NamedAvatar key={Math.random()} isLoading />

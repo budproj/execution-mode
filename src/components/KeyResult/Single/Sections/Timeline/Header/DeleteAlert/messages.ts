@@ -12,7 +12,7 @@ export default defineMessages<KeyResultsSectionTimelineDeleteAlertMessage>({
 
   description: {
     defaultMessage: 'Essa ação não pode ser desfeita',
-    id: 'MAcjZG',
-    description: 'This text is giving more details regarding the delete alert in our drawer',
+    id: 'JHyn+l',
+    description: 'This text is giving more details regarding the delete alert in our drawers',
   },
 })

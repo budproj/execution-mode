@@ -10,6 +10,7 @@ import { Team } from 'src/components/Team/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
+import { KeyResultInsertDrawer } from '../../KeyResult/InsertDrawer/wrapper'
 import { TeamActiveObjectives } from '../../Team/ActiveObjectives/wrapper'
 
 import { ChildTeamsWrapper } from './ChildTeams/wrapper'
@@ -47,6 +48,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
           titleValues={{ team: data?.team.name ?? metaTitleLoadingFallback }}
         />
         <KeyResultSingleDrawer />
+        <KeyResultInsertDrawer teamID={teamId} />
 
         <Stack spacing={8}>
           <Stack direction="row">

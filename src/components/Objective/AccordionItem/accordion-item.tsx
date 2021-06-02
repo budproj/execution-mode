@@ -11,9 +11,10 @@ import ObjectiveAccordionPanel from './accordion-panel'
 
 export interface ObjectiveAccordionItemProperties {
   objectiveID?: Objective['id']
+  teamID?: string
 }
 
-const ObjectiveAccordionItem = ({ objectiveID }: ObjectiveAccordionItemProperties) => {
+const ObjectiveAccordionItem = ({ objectiveID, teamID }: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const [confidenceTag, setConfidence] = useConfidenceTag(objective?.status?.confidence)
   const isLoaded = Boolean(objective)
@@ -30,6 +31,7 @@ const ObjectiveAccordionItem = ({ objectiveID }: ObjectiveAccordionItemPropertie
           <ObjectiveAccordionButton
             objective={objective}
             confidenceTag={confidenceTag}
+            teamID={teamID}
             isLoaded={isLoaded}
           />
           <ObjectiveAccordionPanel isExpanded={isExpanded} objectiveID={objectiveID} />

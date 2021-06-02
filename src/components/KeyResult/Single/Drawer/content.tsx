@@ -38,7 +38,7 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
     },
   )
 
-  logger.debug('Rerendered key result drawer contents. Take a look at our new data:', {
+  logger.debug('Rerendered key result drawers contents. Take a look at our new data:', {
     component,
     data: {
       data,

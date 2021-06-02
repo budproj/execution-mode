@@ -1,26 +1,26 @@
 import { useMutation } from '@apollo/client'
-import { Box } from '@chakra-ui/layout'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult/types'
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { keyResultAtomFamily } from '../../../../../state/recoil/key-result'
+import { AllReachableUsers } from '../../../../User/AllReachableUsers/wrapper'
+import { KeyResult } from '../../../types'
 
-import { UserList } from '../../../../../User/List/wrapper'
-
-import { KeyResultSingleSectionOwnerUpdateUserListProperties } from './interface'
 import queries from './queries.gql'
+
+interface KeyResultAvailableOwnersProperties {
+  keyResultID?: string
+  onSelect?: (userID: string) => void
+}
 
 interface UpdateKeyResultOwnerMutationResult {
   updateKeyResult: KeyResult
 }
 
-export const KeyResultSingleSectionOwnerUpdateUserList = ({
-  users,
+export const KeyResultAvailableOwners = ({
   keyResultID,
-  onSubmit,
-  isLoading,
-}: KeyResultSingleSectionOwnerUpdateUserListProperties) => {
+  onSelect,
+}: KeyResultAvailableOwnersProperties) => {
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const [updateKeyResult] = useMutation<UpdateKeyResultOwnerMutationResult>(
     queries.UPDATE_KEY_RESULT_OWNER,
@@ -37,8 +37,8 @@ export const KeyResultSingleSectionOwnerUpdateUserList = ({
     },
   )
 
-  const handleUserClick = async (userID: string) => {
-    if (onSubmit) onSubmit(userID)
+  const handleUserSelect = async (userID: string) => {
+    if (onSelect) onSelect(userID)
     await updateKeyResult({
       variables: {
         userID,
@@ -46,9 +46,5 @@ export const KeyResultSingleSectionOwnerUpdateUserList = ({
     })
   }
 
-  return (
-    <Box overflow="auto">
-      <UserList users={users} isLoading={isLoading} onUserClick={handleUserClick} />
-    </Box>
-  )
+  return <AllReachableUsers onSelect={handleUserSelect} />
 }

@@ -11,9 +11,9 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
-import { KeyResultSingleSectionOwnerUpdateWrapper } from './Update/wrapper'
 import messages from './messages'
 import KeyResultSectionOwner from './owner'
+import { KeyResultAvailableOwners } from './user-list'
 
 interface KeyResultSingleSectionOwnerWrapperProperties {
   keyResultID?: string
@@ -50,7 +50,13 @@ export const KeyResultSingleSectionOwnerWrapper = ({
 
   return (
     <Box zIndex={theme.zIndices.popover}>
-      <Popover placement="bottom-start" isOpen={isOpen} onOpen={handleOpen} onClose={handleClose}>
+      <Popover
+        isLazy
+        placement="bottom-start"
+        isOpen={isOpen}
+        onOpen={handleOpen}
+        onClose={handleClose}
+      >
         <Flex gridGap={2} direction="column">
           <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
           <Flex direction="row">
@@ -63,11 +69,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
           </Flex>
         </Flex>
         <PopoverContent width="md">
-          <KeyResultSingleSectionOwnerUpdateWrapper
-            keyResultID={keyResultID}
-            isOpen={isOpen}
-            onSubmit={handleUpdate}
-          />
+          <KeyResultAvailableOwners keyResultID={keyResultID} onSelect={handleUpdate} />
         </PopoverContent>
       </Popover>
     </Box>

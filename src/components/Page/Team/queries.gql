@@ -6,6 +6,11 @@ query GET_TEAM_NAME($teamId: ID!) {
     status {
       progress
     }
+    keyResults {
+      policy {
+        create
+      }
+    }
     users(first: 1000) {
       edges {
         node {

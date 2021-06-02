@@ -9,17 +9,17 @@ import {
   keyResultCheckInProgressDraft,
   keyResultLatestCheckIn,
 } from 'src/state/recoil/key-result/check-in'
-import { keyResultDrawerOpen } from 'src/state/recoil/key-result/drawer'
+import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import KeyResultDrawerContent from './content'
 
 const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 
 const KeyResultDrawer = () => {
-  const keyResultID = useRecoilValue(keyResultDrawerOpen)
+  const keyResultID = useRecoilValue(keyResultReadDrawerOpenedKeyResultID)
   const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
-  const resetOpenDrawer = useResetRecoilState(keyResultDrawerOpen)
+  const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const resetTimeline = useResetRecoilState(timelineSelector(keyResultID))
   const resetCommentEnabled = useResetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
 
