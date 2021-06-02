@@ -33,6 +33,7 @@ export type FormValues = {
 interface InsertKeyResultFormProperties {
   onClose?: () => void
   onSuccess?: () => void
+  onError?: () => void
   objectiveID?: string
   teamID?: string
 }
@@ -44,6 +45,7 @@ interface CreateKeyResultMutationResult {
 export const InsertKeyResultForm = ({
   onClose,
   onSuccess,
+  onError,
   objectiveID,
   teamID,
 }: InsertKeyResultFormProperties) => {
@@ -71,13 +73,16 @@ export const InsertKeyResultForm = ({
       type: keyResultType,
     }
 
-    console.log(values, 'tag')
-    await createKeyResult({ variables })
-    if (onSuccess) onSuccess()
+    await createKeyResult({ variables }).catch(() => {
+      if (onError) onError()
+    })
   }
 
   useEffect(() => {
-    if (data && !error) setLastInsertedKeyResultID(data.createKeyResult.id)
+    if (data && !error) {
+      if (onSuccess) onSuccess()
+      setLastInsertedKeyResultID(data.createKeyResult.id)
+    }
   }, [data, error, setLastInsertedKeyResultID])
 
   return (

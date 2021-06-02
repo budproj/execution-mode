@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultInsertDrawerMessage = 'title' | 'successToastMessage'
+type KeyResultInsertDrawerMessage = 'title' | 'successToastMessage' | 'unexpectedErrorToastMessage'
 
 export default defineMessages<KeyResultInsertDrawerMessage>({
   title: {
@@ -13,5 +13,12 @@ export default defineMessages<KeyResultInsertDrawerMessage>({
     defaultMessage: 'Resultado-chave criado com sucesso!',
     id: 'YznDPX',
     description: 'This message appears after the user creates a new key-result as a toast',
+  },
+
+  unexpectedErrorToastMessage: {
+    defaultMessage: 'Desculpe, mas um erro inesperado aconteceu. Tente novamente mais tarde',
+    id: '5fB6ei',
+    description:
+      'This message appears in an error toast after the user creates a new key-result but an unexpected error occurred',
   },
 })

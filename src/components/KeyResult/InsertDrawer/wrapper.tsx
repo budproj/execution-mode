@@ -30,6 +30,13 @@ export const KeyResultInsertDrawer = ({ teamID }: KeyResultInsertDrawerPropertie
     })
   }
 
+  const handleError = () => {
+    toast({
+      title: intl.formatMessage(messages.unexpectedErrorToastMessage),
+      status: 'error',
+    })
+  }
+
   return (
     <Drawer isOpen={isOpen} size="xl" placement="right" onClose={resetDrawerObjectiveID}>
       <DrawerOverlay />
@@ -42,6 +49,7 @@ export const KeyResultInsertDrawer = ({ teamID }: KeyResultInsertDrawerPropertie
               teamID={teamID}
               onClose={resetDrawerObjectiveID}
               onSuccess={handleSuccess}
+              onError={handleError}
             />
           </Flex>
         </Stack>
