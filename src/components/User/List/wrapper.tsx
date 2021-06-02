@@ -1,6 +1,7 @@
-import { Stack, Text } from '@chakra-ui/layout'
+import { Box, Stack, Text } from '@chakra-ui/layout'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import { NamedAvatar } from 'src/components/User'
 
@@ -29,22 +30,26 @@ export const UserList = ({
   }
 
   return (
-    <Stack spacing={4}>
-      {isLoading ? (
-        <UserListSkeleton />
-      ) : users.length > 0 ? (
-        users.map((user) => (
-          <NamedAvatar
-            key={user.id}
-            canHover={Boolean(onUserClick)}
-            userID={user.id}
-            subtitleType={avatarSubtitleType}
-            onClick={handleUserClick(user.id)}
-          />
-        ))
-      ) : (
-        <Text color="black.600">{intl.formatMessage(messages.emptyState)}</Text>
-      )}
-    </Stack>
+    <Box maxH="333h" overflowY="auto">
+      <PerfectScrollbar>
+        <Stack spacing={4}>
+          {isLoading ? (
+            <UserListSkeleton />
+          ) : users.length > 0 ? (
+            users.map((user) => (
+              <NamedAvatar
+                key={user.id}
+                canHover={Boolean(onUserClick)}
+                userID={user.id}
+                subtitleType={avatarSubtitleType}
+                onClick={handleUserClick(user.id)}
+              />
+            ))
+          ) : (
+            <Text color="black.600">{intl.formatMessage(messages.emptyState)}</Text>
+          )}
+        </Stack>
+      </PerfectScrollbar>
+    </Box>
   )
 }
