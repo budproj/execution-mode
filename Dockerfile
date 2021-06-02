@@ -8,7 +8,7 @@ COPY package.json ./
 COPY package-lock.json ./
 COPY scripts scripts
 RUN chmod +x ./scripts/postinstall.sh
-RUN npm install
+RUN npm install --ignore-scripts
 
 COPY dist dist
 COPY .next .next

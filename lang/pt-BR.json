@@ -3,14 +3,6 @@
     "defaultMessage": "Seu avatar",
     "description": "The title text of our image icon in our settings account page, it is displayed when an user hover the icon itself"
   },
-  "+6p/sC": {
-    "defaultMessage": "Clique aqui para comentar :)",
-    "description": "This text is displayed in our comment input in our key result drawer when it has no value"
-  },
-  "+CyB1n": {
-    "defaultMessage": "Data Limite",
-    "description": "The heading text of the goal section in our key-result drawer"
-  },
   "+G9goh": {
     "defaultMessage": "Ver mais...",
     "description": "This text is displayed in the button that expands a truncated text"
@@ -39,10 +31,6 @@
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
   },
-  "/50OpL": {
-    "defaultMessage": "Meta",
-    "description": "The heading text of the goal section in our key-result drawer"
-  },
   "/DyxUT": {
     "defaultMessage": "Último check-in",
     "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
@@ -67,6 +55,10 @@
     "defaultMessage": "Um ícone de marcador de página",
     "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
   },
+  "/xx1Eb": {
+    "defaultMessage": "Descrição",
+    "description": "This message is displayed as the label for the second input in our insert key-result drawer"
+  },
   "0/VsDs": {
     "defaultMessage": "Com Barreira",
     "description": "We use this tag to group every key result with confidence lower than 0"
@@ -87,6 +79,14 @@
     "defaultMessage": "Cancelar",
     "description": "This text is used as a fallback to the confirmation modal cancel button. It is displayed if the component did not received a custom button label"
   },
+  "0OH4ZL": {
+    "defaultMessage": "Descrição",
+    "description": "The label text above the Description section in our key result single page or drawers"
+  },
+  "0OHE6C": {
+    "defaultMessage": "Numérico",
+    "description": "This message is displayed inside our key-result format select as the title of the number format"
+  },
   "0SQt21": {
     "defaultMessage": "Novo valor",
     "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
@@ -99,9 +99,17 @@
     "defaultMessage": "O logotipo do LinkedIn. Ao clicar você irá visitar o perfil do LinkedIn deste usuário",
     "description": "This message is displayed to screen readers to explain our LinkedIn icon"
   },
+  "0t238C": {
+    "defaultMessage": "Formato do Resultado-chave",
+    "description": "This label appears above the third input in our insert key-result drawer"
+  },
   "0xI/K7": {
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
+  },
+  "15BMJI": {
+    "defaultMessage": "Valor Inicial",
+    "description": "This text is used as a label on the update goal form inside the key-result drawers. That is the first label of that form"
   },
   "1Dc9iL": {
     "defaultMessage": "Na última hora",
@@ -114,6 +122,14 @@
   "1Ve0Ag": {
     "defaultMessage": "Um ícone de um calendário, indicando que essa é a data limite do seu resultado-chave",
     "description": "The description text for the key-result section goal icon"
+  },
+  "1bgaUB": {
+    "defaultMessage": "Meta",
+    "description": "This text is used as a label on the update goal form inside the key-result drawers. That is the second label of that form"
+  },
+  "1rAwNV": {
+    "defaultMessage": "Algumas páginas, exibindo também alguns ícones e outros desenhos",
+    "description": "The alternative text explaining the pages image"
   },
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
@@ -135,13 +151,17 @@
     "defaultMessage": "Feminino",
     "description": "This text is used accross our platform to identify the female gender"
   },
+  "2chQA0": {
+    "defaultMessage": "Faz tempo que ninguém interage nesse resultado-chave. Que tal compartilhar uma informação relevante com o time? :)",
+    "description": "This text gives more details regarding our empty state card in the key result drawers"
+  },
   "2lGnmq": {
     "defaultMessage": "Minha conta | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
   },
-  "32yCaj": {
-    "defaultMessage": "Procurar",
-    "description": "The text is displayed as a placeholder in our search input inside the key-result drawer while the user is changing the owner of that key-result"
+  "39q6ig": {
+    "defaultMessage": "OKRs",
+    "description": "This message is displayed above the empty state inside the active cycles section at the Team page"
   },
   "3e+zPY": {
     "defaultMessage": "Finalizar",
@@ -171,6 +191,10 @@
     "defaultMessage": "Últimas atividades",
     "description": "This text is displayed at the top of our timeline, as its title"
   },
+  "4XHRhd": {
+    "defaultMessage": "Meta",
+    "description": "The heading text of the goal section in our key-result drawers"
+  },
   "4cmOYV": {
     "defaultMessage": "Painel",
     "description": "MainAppBar menu item that links to \"Dashboard\" page"
@@ -182,6 +206,10 @@
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
     "description": "The page title that is displayed in the browser tab"
+  },
+  "5fB6ei": {
+    "defaultMessage": "Desculpe, mas um erro inesperado aconteceu. Tente novamente mais tarde",
+    "description": "This message appears in an error toast after the user creates a new key-result but an unexpected error occurred"
   },
   "5llJzq": {
     "defaultMessage": "Você tem certeza que deseja apagar este {type}?",
@@ -195,13 +223,13 @@
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
   },
-  "62Zn7m": {
-    "defaultMessage": "Um ícone de setas entrelaçadas. Ao clicar aqui você irá editar esse campo",
-    "description": "This message is used by screen readers when the user is focusing on the component which contains the user name and picture. This component is used in multiple places, like: our header, the key-result drawer, and other"
-  },
   "6E9X3c": {
     "defaultMessage": "Redefinir",
     "description": "This is the button label that is displayed in our reset button"
+  },
+  "6J+ZAo": {
+    "defaultMessage": "Título",
+    "description": "This label is displayed above the first input of our form inside the key-result insert drawer"
   },
   "6RzNYt": {
     "defaultMessage": "Um círculo com um ponto de interrogação no meio",
@@ -231,6 +259,18 @@
     "defaultMessage": "Uma seta para cima, indicando que o menu de seleção de ciclos está aberto",
     "description": "This message is displayed to the user screen reader when the year select menu is opened"
   },
+  "7tvIOz": {
+    "defaultMessage": "Adicionar resultado-chave",
+    "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
+  },
+  "8/Eg3L": {
+    "defaultMessage": "100",
+    "description": "This message is displayed inside our key-result format select as the example of the number format"
+  },
+  "84XFCQ": {
+    "defaultMessage": "Percentual",
+    "description": "This message is displayed inside our key-result format select as the title of the percent format"
+  },
   "8693wE": {
     "defaultMessage": "Último check-in",
     "description": "This message is displayed alongisde with the header, as the prefix for our last update text component"
@@ -247,6 +287,10 @@
     "defaultMessage": "Objetivo",
     "description": "The text of the table head related to the Objective column"
   },
+  "8YI1Fn": {
+    "defaultMessage": "Financeiro (Real)",
+    "description": "This message is displayed inside our key-result format select as the title of the coin BRL format"
+  },
   "8l7xtl": {
     "defaultMessage": "Sair",
     "description": "The label displayed in the user logout button"
@@ -254,6 +298,10 @@
   "987MLd": {
     "defaultMessage": "Explorar",
     "description": "The name of the Explore page, located at \"/explore\""
+  },
+  "9dXuLd": {
+    "defaultMessage": "R$ 100",
+    "description": "This message is displayed inside our key-result format select as the example of the coin BRL format"
   },
   "9sw0lJ": {
     "defaultMessage": "Selecione seu gênero",
@@ -275,9 +323,9 @@
     "defaultMessage": "Baixo",
     "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
   },
-  "Ba8bU1": {
-    "defaultMessage": "Enviar comentário",
-    "description": "This label is displayed in the submit button in our drawer"
+  "BydeYi": {
+    "defaultMessage": "Início",
+    "description": "The label text inside the Cycle section, above the start date in our key result single page or drawers"
   },
   "CMMxiV": {
     "defaultMessage": "Enviar comentário",
@@ -303,6 +351,10 @@
     "defaultMessage": "Check-in",
     "description": "This text is displayed as the title of our check-in cards"
   },
+  "Cu5tci": {
+    "defaultMessage": "Se quiser, inclua uma descrição para ajudar seus colegas a entenderem por que esse resultado-chave é importante e como você pretende alcançá-lo.",
+    "description": "This message is displayed as the placeholder for our second input in our key-result drawer"
+  },
   "D8ZyT4": {
     "defaultMessage": "Um ícone de coroa que representa a sua empresa",
     "description": "This message is used by screen readers to explain our crown icon"
@@ -310,6 +362,14 @@
   "D9XMWI": {
     "defaultMessage": "Meta",
     "description": "This tooltip is displayed when the user hovers the right side value of our progress bar"
+  },
+  "DHoDPU": {
+    "defaultMessage": "Salvar",
+    "description": "This text is displayed as the button that will save the update for our goal update popover inside the key-result drawers"
+  },
+  "DJm8nF": {
+    "defaultMessage": "Nenhuma pessoa encontrada",
+    "description": "This message is displayed when the key-result drawers update owner option user list has no users to display. This usually happens when the user tries to search but there is no results"
   },
   "Dnh8iG": {
     "defaultMessage": "de <highlight>{confidence}</highlight>",
@@ -319,9 +379,9 @@
     "defaultMessage": "Clique aqui para fechar o formulário de check-in",
     "description": "This message is displayed as the alternative text for the close button in our check-in form"
   },
-  "Dt91Bg": {
-    "defaultMessage": "Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave",
-    "description": "This message is displayed for screen readers as the description of the arrow down icon inside the key-result drawer. That icon is only displayed when the user hovers the mouse over the goal"
+  "DsPsDZ": {
+    "defaultMessage": "Este time não possui nenhum subtime.",
+    "description": "This message is displayed in our team plage inside the child teams section when that team has no child teams"
   },
   "ErVh0y": {
     "defaultMessage": "Valor atual",
@@ -359,6 +419,10 @@
     "defaultMessage": "Página não encontrada | bud",
     "description": "The page title of our not found error page that is displayed in the browser tab"
   },
+  "GtgPfn": {
+    "defaultMessage": "Procurar",
+    "description": "The text is displayed as a placeholder in our search input inside the key-result drawers while the user is changing the owner of that key-result"
+  },
   "H/aZym": {
     "defaultMessage": "Escolha como suas informações aparecerão para os outros usuários.",
     "description": "This subtitle is displayed as the subtitle of the personal informations section in our user account settings page"
@@ -366,6 +430,14 @@
   "HAQ+JV": {
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
+  },
+  "HEYvPI": {
+    "defaultMessage": "Criar Resultado Chave",
+    "description": "This message appears as the title of the insert Key Result drawer"
+  },
+  "HQfOOa": {
+    "defaultMessage": "Ciclo",
+    "description": "The label text above the Cycle section in our key result single page or drawers"
   },
   "Hfg9tY": {
     "defaultMessage": "Confirmar",
@@ -383,6 +455,10 @@
     "defaultMessage": "Ciclo",
     "description": "The text of the table head related to the Cycle column"
   },
+  "IHNvqx": {
+    "defaultMessage": "Responsável",
+    "description": "The label text above the Owner section in our key result single page or drawers"
+  },
   "Ii3n+d": {
     "defaultMessage": "para <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the second line of our confidence tooltip"
@@ -399,6 +475,10 @@
     "defaultMessage": "Explorar ciclos anteriores",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
   },
+  "JHyn+l": {
+    "defaultMessage": "Essa ação não pode ser desfeita",
+    "description": "This text is giving more details regarding the delete alert in our drawers"
+  },
   "JZJeBS": {
     "defaultMessage": "Ontem",
     "description": "This label is displayed if the last is yesterday"
@@ -406,6 +486,10 @@
   "Jdklxm": {
     "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
     "description": "This message is the alt message for our box drawing in the not found error page"
+  },
+  "Jkg7nT": {
+    "defaultMessage": "US$ 100",
+    "description": "This message is displayed inside our key-result format select as the example of the coin USD format"
   },
   "KSjqcC": {
     "defaultMessage": "%",
@@ -415,17 +499,25 @@
     "defaultMessage": "Apagar",
     "description": "This text is displayed in our menu, as an anchor to remove that given card"
   },
+  "L/b/G/": {
+    "defaultMessage": "Um desenho de uma pasta aberta sem nada dentro",
+    "description": "The alternative text explaining the empty folder image"
+  },
+  "L0c5bp": {
+    "defaultMessage": "Meta",
+    "description": "This label appears above the fifth input in our insert key-result drawer"
+  },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
     "description": "This message is displayed below the current progress thumb"
   },
+  "M0RYZa": {
+    "defaultMessage": "Salvar",
+    "description": "This is a button label displayed inside the insert key-result drawer. This is the second button"
+  },
   "M9Jejl": {
     "defaultMessage": "Painel | bud",
     "description": "The page title that is displayed in the browser tab"
-  },
-  "MAcjZG": {
-    "defaultMessage": "Essa ação não pode ser desfeita",
-    "description": "This text is giving more details regarding the delete alert in our drawer"
   },
   "MNn3/r": {
     "defaultMessage": "Insira uma descrição clicando aqui",
@@ -459,13 +551,17 @@
     "defaultMessage": "Cancelar check-in",
     "description": "This message is displayed as a label button when the check-in form is opened in our key result section"
   },
+  "NojznG": {
+    "defaultMessage": "Subtimes {isLoaded, select, true {({totalTeamsCount})} other{}}",
+    "description": "This message is displayed inside the explore page, above the child teams section"
+  },
   "Nwj8qY": {
     "defaultMessage": "Minha conta",
     "description": "MainAppBar user menu first item option"
   },
-  "O0072X": {
-    "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
-    "description": "This text is used by screen readers to explain our ghost image inside our key result drawer"
+  "OEfoTC": {
+    "defaultMessage": "Um ícone de setas entrelaçadas. Ao clicar aqui você irá editar esse campo",
+    "description": "This message is used by screen readers when the user is focusing on the component which contains the user name and picture. This component is used in multiple places, like: our header, the key-result drawers, and other"
   },
   "ObFHxY": {
     "defaultMessage": "Cancelar",
@@ -479,9 +575,9 @@
     "defaultMessage": "Um ícone de controle de video game",
     "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
   },
-  "PR6F4W": {
-    "defaultMessage": "Cancelar",
-    "description": "This text is displayed as the button that will cancel the update for ou goal update popover inside the key-result drawer"
+  "PFysOr": {
+    "defaultMessage": "Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave",
+    "description": "This message is displayed for screen readers as the description of the arrow down icon inside the key-result drawers. That icon is only displayed when the user hovers the mouse over the goal"
   },
   "PYLIcI": {
     "defaultMessage": "Meta",
@@ -519,9 +615,9 @@
     "defaultMessage": "Valor atual",
     "description": "This tooltip is displayed when the user hovers the left side value of our progress bar"
   },
-  "Qptcpe": {
-    "defaultMessage": "Meta",
-    "description": "This text is used as a label on the update goal form inside the key-result drawer. That is the second label of that form"
+  "R8hOYh": {
+    "defaultMessage": "Este time não possui OKRs",
+    "description": "This message is displayed as the empty state message inside the team page"
   },
   "RN1J2p": {
     "defaultMessage": "Essa semana",
@@ -571,9 +667,9 @@
     "defaultMessage": "{prefix} {cycle} {suffix}",
     "description": "This message displays the cycle name with a given prefix"
   },
-  "T8ytLJ": {
+  "TIXwh1": {
     "defaultMessage": "Objetivo",
-    "description": "The label text above the Objective section in our key result single page or drawer"
+    "description": "The label text above the Objective section in our key result single page or drawers"
   },
   "TIorHN": {
     "defaultMessage": "Existe um risco de não alcançarmos o resultado-chave, mas seguimos otimistas",
@@ -599,10 +695,6 @@
     "defaultMessage": "Este time é uma empresa",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
-  "UfU6Si": {
-    "defaultMessage": "Um ícone de lupa, indicando que este é um campo de busca",
-    "description": "This text is used by screen readers to explain the icon to the user. It is located in the key-result drawer, inside the edit owner component, as a description for the search icon"
-  },
   "Uu0OJV": {
     "defaultMessage": "Um ícone de imagem. Ele indica que nesse campo fica seu avatar",
     "description": "The alternative text explaining our image icon in the settings account page"
@@ -611,6 +703,14 @@
     "defaultMessage": "Período",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
   },
+  "VUKPKt": {
+    "defaultMessage": "Cancelar",
+    "description": "This is a button label displayed inside the insert key-result drawer. This is the first button"
+  },
+  "VltGNp": {
+    "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
+    "description": "This text is used by screen readers to explain our ghost image inside our key result drawers"
+  },
   "W9swHV": {
     "defaultMessage": "Configurações",
     "description": "This tooltip is displayed when the user hovers the settings icon"
@@ -618,6 +718,10 @@
   "WKevJy": {
     "defaultMessage": "Clique aqui para editar esse campo",
     "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
+  },
+  "WiYOXK": {
+    "defaultMessage": "Valor Inicial",
+    "description": "This label appears above the fourth input in our insert key-result drawer"
   },
   "X2V7x7": {
     "defaultMessage": "Confiança",
@@ -631,10 +735,6 @@
     "defaultMessage": "Arraste até o novo valor para iniciar um check-in",
     "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
   },
-  "XL/hXA": {
-    "defaultMessage": "Faz tempo que ninguém interage nesse resultado-chave. Que tal compartilhar uma informação relevante com o time? :)",
-    "description": "This text gives more details regarding our empty state card in the key result drawer"
-  },
   "XNkzYe": {
     "defaultMessage": "Um ícone de pin de localização",
     "description": "The desc message for the Location icon. This icon is used to ilustrate our key results"
@@ -646,6 +746,10 @@
   "XiSFEr": {
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
+  },
+  "XvdEsU": {
+    "defaultMessage": "Um ícone de tres pontos, indicando que ao clicar aqui um menu se expandirá",
+    "description": "The description for screen readers regarding the three dots icon in the objectives accordion"
   },
   "Y+MtZe": {
     "defaultMessage": "Nome",
@@ -671,6 +775,14 @@
     "defaultMessage": "Um ícone de um alvo, indicando que essa é a meta do seu resultado-chave",
     "description": "The description text for the key-result section goal icon"
   },
+  "YznDPX": {
+    "defaultMessage": "Resultado-chave criado com sucesso!",
+    "description": "This message appears after the user creates a new key-result as a toast"
+  },
+  "ZPSK4M": {
+    "defaultMessage": "Insira um título para este Resultado-chave",
+    "description": "The placeholder for the first input in our key-result insert drawer form"
+  },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
     "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
@@ -695,9 +807,9 @@
     "defaultMessage": "A confiança mudou neste check-in:",
     "description": "This text is the first line of our icon tooltip when the check-in has a different confidence from the previous check-in"
   },
-  "aiRCwP": {
-    "defaultMessage": "Início",
-    "description": "The label text inside the Cycle section, above the start date in our key result single page or drawer"
+  "aVLR+w": {
+    "defaultMessage": "100%",
+    "description": "This message is displayed inside our key-result format select as the example of the percent format"
   },
   "bZYEAl": {
     "defaultMessage": "Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo",
@@ -715,10 +827,6 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
-  "cHSa08": {
-    "defaultMessage": "Valor Inicial",
-    "description": "This text is used as a label on the update goal form inside the key-result drawer. That is the first label of that form"
-  },
   "cPGOoL": {
     "defaultMessage": "Fale com nosso suporte técnico",
     "description": "MainAppBar user menu third item option"
@@ -730,6 +838,10 @@
   "dB4Sbq": {
     "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
     "description": "This tooltip appears when the user hovers the second column title"
+  },
+  "dgMLta": {
+    "defaultMessage": "Enviar comentário",
+    "description": "This label is displayed in the submit button in our drawers"
   },
   "dymB9a": {
     "defaultMessage": "Cada resultado-chave pertence a um objetivo",
@@ -747,6 +859,10 @@
     "defaultMessage": "Nenhuma informação",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
   },
+  "eUCb55": {
+    "defaultMessage": "Fim",
+    "description": "The label text inside the Cycle section, above the end date in our key result single page or drawers"
+  },
   "eYhGZW": {
     "defaultMessage": "Nenhuma opção disponível",
     "description": "This message is displayed when the user tries to list the cycles, but none is defined"
@@ -763,10 +879,6 @@
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
     "description": "The page description that is displayed in Google and screen readers"
   },
-  "fZZOsX": {
-    "defaultMessage": "Fim",
-    "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
-  },
   "faL9vf": {
     "defaultMessage": "Um círculo verde, indicando que a confiança está alta",
     "description": "A brief explanation for screen readers regarding the green status circle"
@@ -782,10 +894,6 @@
   "fwIpqP": {
     "defaultMessage": "Visualize e atualize as preferências do seu perfil",
     "description": "The page description that is displayed in Google and screen readers for the my profile page"
-  },
-  "fwpFhg": {
-    "defaultMessage": "Salvar",
-    "description": "This text is displayed as the button that will save the update for our goal update popover inside the key-result drawer"
   },
   "fx39XE": {
     "defaultMessage": "Ajuda",
@@ -823,10 +931,6 @@
     "defaultMessage": "Progresso acumulado dessa semana",
     "description": "This helper texts explains since when we are calculating your company progress"
   },
-  "iJq7du": {
-    "defaultMessage": "Responsável",
-    "description": "The label text above the Owner section in our key result single page or drawer"
-  },
   "iPv+uj": {
     "defaultMessage": "Um ícone de uma linha reta na horizontal, representando que sua empresa não evolui desde o último evento de check-in",
     "description": "This message is used by screen readers to explain our line icon"
@@ -834,6 +938,18 @@
   "iivI51": {
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
+  },
+  "ijCibq": {
+    "defaultMessage": "Financeiro (Dólar)",
+    "description": "This message is displayed inside our key-result format select as the title of the coin USD format"
+  },
+  "jCjr1X": {
+    "defaultMessage": "Preencha os campos obrigatórios para poder salvar este resultado-chave.",
+    "description": "This message appears in an error toast after the users tries to create a key-result but there are some validation errors in the form"
+  },
+  "jYw0F3": {
+    "defaultMessage": "Membros do time {isLoaded, select, true {({totalMembersCount})} other{}}",
+    "description": "This message is displayed inside the explore page, above the members section"
   },
   "jvxLB+": {
     "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
@@ -863,6 +979,10 @@
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
     "description": "A brief explanation for screen readers regarding the yellow status circle"
   },
+  "kOLcvX": {
+    "defaultMessage": "Clique aqui para comentar :)",
+    "description": "This text is displayed in our comment input in our key result drawers when it has no value"
+  },
   "kXNgkQ": {
     "defaultMessage": "Progresso",
     "description": "The text of the table head related to the Progress column"
@@ -870,6 +990,10 @@
   "kawRcN": {
     "defaultMessage": "Cancelar",
     "description": "This message is displayed in the \"CANCEL\" button in the checkin form"
+  },
+  "kpJFIH": {
+    "defaultMessage": "Um ícone de lupa, indicando que este é um campo de busca",
+    "description": "This text is used by screen readers to explain the icon to the user. It is located in the key-result drawers, inside the edit owner component, as a description for the search icon"
   },
   "kynYpx": {
     "defaultMessage": "Meus Resultados-Chave",
@@ -911,10 +1035,6 @@
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
   },
-  "mQBvYY": {
-    "defaultMessage": "Nenhuma pessoa encontrada",
-    "description": "This message is displayed when the key-result drawer update owner option user list has no users to display. This usually happens when the user tries to search but there is no results"
-  },
   "mdG+CG": {
     "defaultMessage": "Ciclos ativos",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
@@ -955,6 +1075,10 @@
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
   },
+  "pTXAs1": {
+    "defaultMessage": "Um ícone de seta para a direita. Ao clicar aqui voce será enviado para a página deste time",
+    "description": "This message is used by screen readers to explain the right arrow at our team lists component"
+  },
   "pVkTLM": {
     "defaultMessage": "Um ícone de coroa",
     "description": "The desc message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
@@ -966,10 +1090,6 @@
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
-  },
-  "q7MmHc": {
-    "defaultMessage": "Descrição",
-    "description": "The label text above the Description section in our key result single page or drawer"
   },
   "qytqsj": {
     "defaultMessage": "Trimestral",
@@ -991,6 +1111,10 @@
     "defaultMessage": "Não vamos alcançar o resultado a não ser que a gente mude nossa abordagem",
     "description": "This text explains our tag to the user"
   },
+  "s6b2FE": {
+    "defaultMessage": "Data Limite",
+    "description": "The heading text of the goal section in our key-result drawers"
+  },
   "s6f/IS": {
     "defaultMessage": "A tela que você está procurando foi abduzida!",
     "description": "This message is displayed below the title in our unknown error page"
@@ -1007,13 +1131,13 @@
     "defaultMessage": "Minha conta",
     "description": "This label defines the text on the first menu section option"
   },
+  "t3VVHw": {
+    "defaultMessage": "Um ícone de X indicando que os dados neste campo não são válidos",
+    "description": "This is used by screen readers to explain the X that appears when the users types a non-valid data in a given controlled field"
+  },
   "t6KyQZ": {
     "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
     "description": "This message is used by screen readers to explain our arrow up icon"
-  },
-  "tJ0oU2": {
-    "defaultMessage": "Está silencioso por aqui",
-    "description": "This text is the title of our empty state card inside our key result drawer"
   },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
@@ -1047,6 +1171,10 @@
     "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
     "description": "This message is displayed as a description in our under maintenance error page"
   },
+  "vDa/w5": {
+    "defaultMessage": "Está silencioso por aqui",
+    "description": "This text is the title of our empty state card inside our key result drawers"
+  },
   "vJ/603": {
     "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
     "description": "The description displayed in our not found error page"
@@ -1055,6 +1183,10 @@
     "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",
     "description": "This tooltip explains the seventh column of the key result list"
   },
+  "wiFglx": {
+    "defaultMessage": "Responsável",
+    "description": "This label appears above the sixth input in our insert key-result drawer"
+  },
   "wwt9p1": {
     "defaultMessage": "Um círculo com um ponto de interrogação ao centro",
     "description": "This message describes the info circle icon to our screen readers"
@@ -1062,6 +1194,10 @@
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
+  },
+  "x8ytCP": {
+    "defaultMessage": "Cancelar",
+    "description": "This text is displayed as the button that will cancel the update for ou goal update popover inside the key-result drawers"
   },
   "xVR0F1": {
     "defaultMessage": "Apelido",
@@ -1082,10 +1218,6 @@
   "ytvOyM": {
     "defaultMessage": "Meus Resultados-Chave",
     "description": "MainAppBar menu item that links to \"My Key Results\" page"
-  },
-  "z1FXkV": {
-    "defaultMessage": "Ciclo",
-    "description": "The label text above the Cycle section in our key result single page or drawer"
   },
   "z4Qy+J": {
     "defaultMessage": "O desenho de uma caixa fechada, ilustrando que estamos em manutenção",
