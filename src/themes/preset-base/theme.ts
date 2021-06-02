@@ -136,6 +136,19 @@ const colors = {
     800: tokens.colors.red800,
     900: tokens.colors.red900,
   },
+
+  new_gray: {
+    50: tokens.colors.new_gray50,
+    100: tokens.colors.new_gray100,
+    200: tokens.colors.new_gray200,
+    300: tokens.colors.new_gray300,
+    400: tokens.colors.new_gray400,
+    500: tokens.colors.new_gray500,
+    600: tokens.colors.new_gray600,
+    700: tokens.colors.new_gray700,
+    800: tokens.colors.new_gray800,
+    900: tokens.colors.new_gray900,
+  },
 }
 
 const theme = extendTheme({
@@ -178,18 +191,7 @@ const theme = extendTheme({
   },
 
   shadows: {
-    xs: '0 0 56px rgba(29, 26, 152, 0.03)',
-    sm: '0 3px 10px rgba(0, 0, 0, 0.05)',
     md: '0 5px 30px rgba(0, 0, 0, 0.1)',
-    lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-    xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-    base: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-    '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-    outline: '0 0 0 3px rgba(66, 153, 225, 0.6)',
-    inner: 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
-    none: 'none',
-    'dark-lg':
-      'rgba(0, 0, 0, 0.1) 0px 0px 0px 1px, rgba(0, 0, 0, 0.2) 0px 5px 10px, rgba(0, 0, 0, 0.4) 0px 15px 40px',
   },
 
   sizes: {

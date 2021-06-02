@@ -47,7 +47,7 @@ export const KeyResultInsertDrawer = ({ teamID }: KeyResultInsertDrawerPropertie
   return (
     <Drawer isOpen={isOpen} size="xl" placement="right" onClose={resetDrawerObjectiveID}>
       <DrawerOverlay />
-      <DrawerContent>
+      <DrawerContent overflowY="auto">
         <Stack flexGrow={1}>
           <KeyResultInsertDrawerHeader />
           <Flex flexGrow={1}>

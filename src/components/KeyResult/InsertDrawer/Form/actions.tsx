@@ -20,7 +20,7 @@ export const FormActions = ({ onClose }: FormActionsInterface) => {
   }
 
   return (
-    <Stack flexGrow={1} alignItems="flex-end" justifyContent="center" direction="row">
+    <Stack flexGrow={1} alignItems="flex-end" justifyContent="center" direction="row" pt={16}>
       <Button variant="outline" flexGrow={1} colorScheme="brand" onClick={handleCancel}>
         {intl.formatMessage(messages.firstActionButtonLabel)}
       </Button>

@@ -98,13 +98,7 @@ const KeyResultListBodyColumnOwner = ({
         </PopoverTrigger>
 
         {isOwnerLoaded && (
-          <PopoverContent
-            p={0}
-            border="none"
-            boxShadow="0px 5px 30px rgba(129, 147, 171, 0.2)"
-            outline="none"
-            _focus={{ boxShadow: '0px 5px 30px rgba(129, 147, 171, 0.2)' }}
-          >
+          <PopoverContent p={0}>
             <PopoverBody p={0}>
               <UserProfileCard userID={owner?.id} />
             </PopoverBody>

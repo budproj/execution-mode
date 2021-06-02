@@ -11,6 +11,7 @@ export enum COLOR_SCHEME {
   YELLOW = 'yellow',
   PURPLE = 'purple',
   RED = 'red',
+  NEW_GRAY = 'new_gray',
 }
 
 export type ColorToken =
@@ -132,6 +133,17 @@ const colors: ColorTokens = {
   red700: '#803135',
   red800: '#40181B',
   red900: '#1A0A0B',
+
+  new_gray50: '',
+  new_gray100: '',
+  new_gray200: '#EEF2FC',
+  new_gray300: '',
+  new_gray400: '',
+  new_gray500: '',
+  new_gray600: '',
+  new_gray700: '',
+  new_gray800: '',
+  new_gray900: '',
 }
 
 const fonts: FontTokens = {
