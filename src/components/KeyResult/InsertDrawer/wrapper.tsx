@@ -49,8 +49,8 @@ export const KeyResultInsertDrawer = ({ teamID }: KeyResultInsertDrawerPropertie
     <Drawer isOpen={isOpen} size="xl" placement="right" onClose={resetDrawerObjectiveID}>
       <DrawerOverlay />
       <DrawerContent overflowY="auto">
-        <PerfectScrollbar>
-          <Stack flexGrow={1}>
+        <PerfectScrollbar style={{ flexGrow: 1 }}>
+          <Stack h="full">
             <KeyResultInsertDrawerHeader />
             <Flex flexGrow={1}>
               <InsertKeyResultForm

@@ -1,4 +1,5 @@
 import { Box } from '@chakra-ui/layout'
+import { MenuProps } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 import SelectMenu from '../../Base/SelectMenu'
@@ -10,12 +11,14 @@ interface KeyResultOwnerSelectMenuProperties {
   value: string
   onChange?: (newOwnerID: string) => void
   avatarSubtitleType?: NamedAvatarSubtitleType
+  placement?: MenuProps['placement']
 }
 
 export const KeyResultOwnerSelectMenu = ({
   value,
   onChange,
   avatarSubtitleType,
+  placement,
 }: KeyResultOwnerSelectMenuProperties) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -40,6 +43,7 @@ export const KeyResultOwnerSelectMenu = ({
       closeOnSelect
       isOpen={isOpen}
       value={value}
+      placement={placement}
       placeholder={
         <NamedAvatar
           userID={value}

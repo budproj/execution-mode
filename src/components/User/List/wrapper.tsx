@@ -30,8 +30,8 @@ export const UserList = ({
   }
 
   return (
-    <Box maxH="333h" overflowY="auto">
-      <PerfectScrollbar>
+    <Box maxH="30vh" overflowY="auto">
+      <PerfectScrollbar options={{ suppressScrollX: true }}>
         <Stack spacing={4}>
           {isLoading ? (
             <UserListSkeleton />

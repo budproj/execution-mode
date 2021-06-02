@@ -21,6 +21,7 @@ export const OwnerInput = () => {
       <KeyResultOwnerSelectMenu
         value={values.ownerID}
         avatarSubtitleType="role"
+        placement="top"
         onChange={handleChange}
       />
     </FormInputBase>
