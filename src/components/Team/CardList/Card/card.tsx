@@ -38,7 +38,7 @@ const TeamCard = ({ id }: TeamCardProperties) => {
         py={12}
         px={10}
         transition="0.4s all ease-out"
-        _hover={{ bg: 'white', boxShadow: 'md', transform: 'scale(1.03)' }}
+        _hover={{ bg: 'white', boxShadow: 'with-stroke.light', transform: 'scale(1.03)' }}
       >
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
           <Flex flexGrow={1} direction="column" justifyContent="flex-end">

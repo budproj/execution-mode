@@ -82,7 +82,7 @@ export const ObjectiveAccordionMenu = ({
             fill="currentColor"
           />
         </MenuButton>
-        <MenuList p={3} boxShadow="md" borderColor="new_gray.200" borderWidth={1}>
+        <MenuList p={3} boxShadow="with-stroke.light" borderColor="new-gray.200" borderWidth={1}>
           {canCreateKeyResult && (
             <ObjectiveMenuOption onClick={openKeyResultInsertDrawer}>
               {intl.formatMessage(messages.firstMenuOption)}

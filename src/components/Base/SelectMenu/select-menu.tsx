@@ -93,7 +93,12 @@ const SelectMenu = ({
       >
         {placeholder}
       </MenuButton>
-      <MenuList boxShadow="md" borderColor="new_gray.200" borderWidth={1}>
+      <MenuList
+        boxShadow="with-stroke.light"
+        borderColor="new-gray.200"
+        borderWidth={1}
+        overflow="hidden"
+      >
         <MenuOptionGroup value={value} type="radio" onChange={onChange}>
           {children}
         </MenuOptionGroup>

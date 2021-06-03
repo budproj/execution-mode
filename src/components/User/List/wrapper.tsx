@@ -1,7 +1,7 @@
 import { Stack, Text } from '@chakra-ui/layout'
+import { Scrollbars } from 'rc-scrollbars'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import { NamedAvatar } from 'src/components/User'
 
@@ -30,7 +30,7 @@ export const UserList = ({
   }
 
   return (
-    <PerfectScrollbar>
+    <Scrollbars autoHeight>
       <Stack spacing={4}>
         {isLoading ? (
           <UserListSkeleton />
@@ -48,6 +48,6 @@ export const UserList = ({
           <Text color="black.600">{intl.formatMessage(messages.emptyState)}</Text>
         )}
       </Stack>
-    </PerfectScrollbar>
+    </Scrollbars>
   )
 }

@@ -137,17 +137,17 @@ const colors = {
     900: tokens.colors.red900,
   },
 
-  new_gray: {
-    50: tokens.colors.new_gray50,
-    100: tokens.colors.new_gray100,
-    200: tokens.colors.new_gray200,
-    300: tokens.colors.new_gray300,
-    400: tokens.colors.new_gray400,
-    500: tokens.colors.new_gray500,
-    600: tokens.colors.new_gray600,
-    700: tokens.colors.new_gray700,
-    800: tokens.colors.new_gray800,
-    900: tokens.colors.new_gray900,
+  'new-gray': {
+    50: tokens.colors['new-gray50'],
+    100: tokens.colors['new-gray100'],
+    200: tokens.colors['new-gray200'],
+    300: tokens.colors['new-gray300'],
+    400: tokens.colors['new-gray400'],
+    500: tokens.colors['new-gray500'],
+    600: tokens.colors['new-gray600'],
+    700: tokens.colors['new-gray700'],
+    800: tokens.colors['new-gray800'],
+    900: tokens.colors['new-gray900'],
   },
 }
 
@@ -191,7 +191,11 @@ const theme = extendTheme({
   },
 
   shadows: {
-    md: '0 5px 30px rgba(0, 0, 0, 0.1)',
+    'with-stroke.light': '0px 5px 10px rgba(181, 192, 219, 0.1)',
+    'with-stroke.medium': '0px 5px 20px rgba(181, 192, 219, 0.2)',
+    'with-stroke.dark': '0px 5px 30px rgba(181, 192, 219, 0.3)',
+    'for-background.light': '0px 0px 56px rgba(83, 83, 191, 0.07)',
+    'for-background.medium': '0px 0px 56px rgba(83, 83, 191, 0.12)',
   },
 
   sizes: {

@@ -16,9 +16,7 @@ export const TeamSectionWrapper = ({ title, children, ...rest }: TeamSectionWrap
       borderRadius="10"
       w="full"
       overflowY="hidden"
-      boxShadow="md"
-      borderColor="new_gray.200"
-      borderWidth={1}
+      boxShadow="for-background.light"
       p={6}
       {...rest}
     >

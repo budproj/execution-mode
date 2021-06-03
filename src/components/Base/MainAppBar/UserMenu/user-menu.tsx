@@ -44,7 +44,13 @@ const UserMenu = () => {
       <MenuButton onClick={handleOpen}>
         <Me />
       </MenuButton>
-      <MenuList p={0} w="xs">
+      <MenuList
+        p={0}
+        w="xs"
+        boxShadow="with-stroke.dark"
+        borderWidth={1}
+        borderColor="new-gray.200"
+      >
         <Box p={2}>
           <IntlLink href="/settings/my-account">
             <UserMenuButton onClickCapture={handleClickCapture}>

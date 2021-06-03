@@ -11,7 +11,7 @@ export enum COLOR_SCHEME {
   YELLOW = 'yellow',
   PURPLE = 'purple',
   RED = 'red',
-  NEW_GRAY = 'new_gray',
+  NEW_GRAY = 'new-gray',
 }
 
 export type ColorToken =
@@ -134,16 +134,16 @@ const colors: ColorTokens = {
   red800: '#40181B',
   red900: '#1A0A0B',
 
-  new_gray50: '',
-  new_gray100: '',
-  new_gray200: '#EEF2FC',
-  new_gray300: '',
-  new_gray400: '',
-  new_gray500: '',
-  new_gray600: '',
-  new_gray700: '',
-  new_gray800: '',
-  new_gray900: '',
+  'new-gray50': '#F8F9FD',
+  'new-gray100': '#F2F6FE',
+  'new-gray200': '#EEF2FC',
+  'new-gray300': '#E8EEFC',
+  'new-gray400': '#D9E2F6',
+  'new-gray500': '#B5C0DB',
+  'new-gray600': '#99A4C2',
+  'new-gray700': '#8491B0',
+  'new-gray800': '#525F7F',
+  'new-gray900': '#364059',
 }
 
 const fonts: FontTokens = {
