@@ -1,7 +1,5 @@
-import { Box } from '@chakra-ui/layout'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useRecoilValue } from 'recoil'
 
 import { useConnectionEdges } from '../../../../state/hooks/useConnectionEdges/hook'
@@ -44,6 +42,7 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
 
   return (
     <TeamSectionWrapper
+      p={3}
       title={intl.formatMessage(messages.title, {
         isLoaded,
         totalTeamsCount: childTeams.length,
@@ -52,11 +51,7 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
       {isLoaded && childTeams.length === 0 ? (
         <EmptyState imageKey="empty-folder" labelMessage={messages.emptyState} py={8} />
       ) : (
-        <PerfectScrollbar>
-          <Box px={8}>
-            <TeamList teams={childTeams} isLoading={!isLoaded} />
-          </Box>
-        </PerfectScrollbar>
+        <TeamList teams={childTeams} isLoading={!isLoaded} />
       )}
     </TeamSectionWrapper>
   )

@@ -23,7 +23,7 @@ export const SelectUserFromList = ({
   onSearch,
   avatarSubtitleType,
 }: SelectUserFromListProperties) => (
-  <Stack spacing={4}>
+  <Stack spacing={4} maxH="full">
     <UserSearch onChange={onSearch} />
     <UserList
       users={users}

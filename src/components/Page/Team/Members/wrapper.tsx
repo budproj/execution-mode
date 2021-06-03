@@ -6,7 +6,7 @@ import { useConnectionEdges } from '../../../../state/hooks/useConnectionEdges/h
 import { useRecoilFamilyLoader } from '../../../../state/recoil/hooks'
 import { teamAtomFamily } from '../../../../state/recoil/team'
 import { userAtomFamily } from '../../../../state/recoil/user'
-import { UserList } from '../../../User/List/wrapper'
+import { SelectUserFromList } from '../../../User/SelectFromList/wrapper'
 import { User } from '../../../User/types'
 import { TeamSectionWrapper } from '../Section/wrapper'
 
@@ -41,13 +41,12 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
 
   return (
     <TeamSectionWrapper
-      p={4}
       title={intl.formatMessage(messages.title, {
         isLoaded,
         totalMembersCount: teamMembers.length,
       })}
     >
-      <UserList users={teamMembers} avatarSubtitleType="role" isLoading={!isLoaded} />
+      <SelectUserFromList users={teamMembers} avatarSubtitleType="role" isLoading={!isLoaded} />
     </TeamSectionWrapper>
   )
 }
