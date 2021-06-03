@@ -24,6 +24,17 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
   const [teamMembers, setTeamMemberEdges] = useConnectionEdges(team?.users?.edges)
   const loadUsersOnRecoil = useRecoilFamilyLoader<User>(userAtomFamily)
 
+  const handleSearch = (searchValue: string) => {
+    if (!team?.users?.edges) return
+
+    if (!searchValue || searchValue === '') setTeamMemberEdges(team?.users?.edges)
+
+    const filteredUserEdges = team?.users?.edges.filter((edges) =>
+      edges.node.fullName.toUpperCase().includes(searchValue.toUpperCase()),
+    )
+    setTeamMemberEdges(filteredUserEdges)
+  }
+
   useEffect(() => {
     if (team) {
       setTeamMemberEdges(team.users?.edges)
@@ -46,7 +57,12 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
         totalMembersCount: teamMembers.length,
       })}
     >
-      <SelectUserFromList users={teamMembers} avatarSubtitleType="role" isLoading={!isLoaded} />
+      <SelectUserFromList
+        users={teamMembers}
+        avatarSubtitleType="role"
+        isLoading={!isLoaded}
+        onSearch={handleSearch}
+      />
     </TeamSectionWrapper>
   )
 }
