@@ -26,10 +26,9 @@ const ObjectiveAccordionItem = ({ objectiveID, teamID }: ObjectiveAccordionItemP
 
   return (
     <AccordionItem
-      borderWidth={1}
-      borderColor="new_gray.200"
+      borderColor="transparent"
       bg="white"
-      boxShadow="md"
+      boxShadow="for-background.light"
       p={4}
       borderRadius="10"
     >

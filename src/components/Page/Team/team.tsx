@@ -41,7 +41,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
 
   return (
     <ApolloQueryErrorBoundary error={error}>
-      <PageContent bg="black.50">
+      <PageContent bg="new-gray.50">
         <PageMetaHead
           title={messages.metaTitle}
           description={messages.metaDescription}
