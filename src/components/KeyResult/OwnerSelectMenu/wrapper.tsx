@@ -57,7 +57,7 @@ export const KeyResultOwnerSelectMenu = ({
       onClose={handleClose}
       onChange={handleChange}
     >
-      <Box p={4}>
+      <Box p={4} maxH="full" h="full">
         <AllReachableUsers avatarSubtitleType={avatarSubtitleType} onSelect={handleChange} />
       </Box>
     </SelectMenu>

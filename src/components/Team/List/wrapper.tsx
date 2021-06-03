@@ -1,7 +1,7 @@
 import { Stack } from '@chakra-ui/layout'
 import { Divider } from '@chakra-ui/react'
+import { Scrollbars } from 'rc-scrollbars'
 import React from 'react'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 
 import { Team } from '../types'
 
@@ -14,7 +14,7 @@ interface TeamListProperties {
 }
 
 export const TeamList = ({ teams, isLoading }: TeamListProperties) => (
-  <PerfectScrollbar>
+  <Scrollbars autoHeight>
     <Stack spacing={8} p={3}>
       {isLoading ? (
         <TeamListSkeleton />
@@ -29,5 +29,5 @@ export const TeamList = ({ teams, isLoading }: TeamListProperties) => (
         ))
       )}
     </Stack>
-  </PerfectScrollbar>
+  </Scrollbars>
 )

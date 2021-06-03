@@ -2,7 +2,6 @@ import { Flex, Stack } from '@chakra-ui/layout'
 import { Drawer, DrawerContent, DrawerOverlay, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import PerfectScrollbar from 'react-perfect-scrollbar'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
 import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
@@ -48,22 +47,20 @@ export const KeyResultInsertDrawer = ({ teamID }: KeyResultInsertDrawerPropertie
   return (
     <Drawer isOpen={isOpen} size="xl" placement="right" onClose={resetDrawerObjectiveID}>
       <DrawerOverlay />
-      <DrawerContent overflowY="auto">
-        <PerfectScrollbar style={{ flexGrow: 1 }}>
-          <Stack h="full">
-            <KeyResultInsertDrawerHeader />
-            <Flex flexGrow={1}>
-              <InsertKeyResultForm
-                objectiveID={drawerObjectiveID}
-                teamID={teamID}
-                onClose={resetDrawerObjectiveID}
-                onSuccess={handleSuccess}
-                onError={handleError}
-                onValidationError={handleValidationError}
-              />
-            </Flex>
-          </Stack>
-        </PerfectScrollbar>
+      <DrawerContent overflowY="auto" flexGrow={1}>
+        <Stack h="full">
+          <KeyResultInsertDrawerHeader />
+          <Flex flexGrow={1}>
+            <InsertKeyResultForm
+              objectiveID={drawerObjectiveID}
+              teamID={teamID}
+              onClose={resetDrawerObjectiveID}
+              onSuccess={handleSuccess}
+              onError={handleError}
+              onValidationError={handleValidationError}
+            />
+          </Flex>
+        </Stack>
       </DrawerContent>
     </Drawer>
   )

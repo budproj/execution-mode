@@ -54,6 +54,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
         isLazy
         placement="bottom-start"
         isOpen={isOpen}
+        size="md"
         onOpen={handleOpen}
         onClose={handleClose}
       >
@@ -68,7 +69,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
             <Box flexGrow={1} />
           </Flex>
         </Flex>
-        <PopoverContent width="md">
+        <PopoverContent width="md" h="full" overflow="hidden">
           <KeyResultAvailableOwners keyResultID={keyResultID} onSelect={handleUpdate} />
         </PopoverContent>
       </Popover>
