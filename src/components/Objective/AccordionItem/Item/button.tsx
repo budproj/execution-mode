@@ -1,14 +1,5 @@
 import { Stack } from '@chakra-ui/layout'
-import {
-  AccordionButton,
-  AccordionIcon,
-  Heading,
-  Skeleton,
-  SkeletonCircle,
-  CircularProgress,
-  CircularProgressLabel,
-  Box,
-} from '@chakra-ui/react'
+import { AccordionButton, AccordionIcon, Heading, Skeleton, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -20,6 +11,7 @@ import { Objective } from 'src/components/Objective/types'
 import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
 
 import { objectiveAccordionEntryModes } from '../../../../state/recoil/objective/accordion'
+import { RadioProgress } from '../../../Base/RadioProgress/wrapper'
 import { ObjectiveAccordionMenu } from '../Menu/wrapper'
 
 import messages from './messages'
@@ -43,31 +35,23 @@ const ObjectiveAccordionButton = ({
 }: ObjectiveAccordionButtonProperties) => {
   const accordionEntryModes = useRecoilValue(objectiveAccordionEntryModes(accordionID))
   const intl = useIntl()
+
+  const entryMode = accordionEntryModes[accordionIndex]
   const roundedProgress = Math.round(objective?.status?.progress ?? 0)
 
-  console.log(accordionEntryModes, 'tag')
+  console.log(entryMode, 'tag')
 
   return (
     <AccordionButton p={0} gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
       <TooltipWithDelay label={intl.formatMessage(messages.progressTooltip)} placement="top-end">
         <Box>
-          <SkeletonCircle isLoaded={isLoaded} size="50px">
-            <CircularProgress
-              value={roundedProgress}
-              thickness={6}
-              color={confidenceTag?.color.primary}
-              trackColor={confidenceTag?.color.light}
-              size={14}
-            >
-              <CircularProgressLabel
-                color={confidenceTag?.color.primary}
-                fontWeight={700}
-                fontSize="md"
-              >
-                {roundedProgress}%
-              </CircularProgressLabel>
-            </CircularProgress>
-          </SkeletonCircle>
+          <RadioProgress
+            progress={roundedProgress}
+            isLoaded={isLoaded}
+            size={14}
+            color={confidenceTag?.color.primary}
+            trackColor={confidenceTag?.color.light}
+          />
         </Box>
       </TooltipWithDelay>
 
