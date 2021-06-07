@@ -6,7 +6,7 @@ import { Objective } from 'src/components/Objective/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
-import ObjectiveAccordionButton from './button'
+import { ObjectiveAccordionButton } from './Button/wrapper'
 import ObjectiveAccordionPanel from './panel'
 
 export interface ObjectiveAccordionItemProperties {
