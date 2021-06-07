@@ -1,5 +1,5 @@
 import { Stack } from '@chakra-ui/layout'
-import { Accordion, Heading, Skeleton } from '@chakra-ui/react'
+import { Heading, Skeleton } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -7,10 +7,8 @@ import buildSkeletonMinSize from '../../../../lib/chakra/build-skeleton-min-size
 import useCadence from '../../../state/hooks/useCadence'
 import { Cycle } from '../../Cycle/types'
 import messages from '../../KeyResult/CycleList/messages'
-import ObjectiveAccordionItem from '../AccordionItem'
+import { ObjectiveAccordion } from '../AccordionItem/wrapper'
 import { Objective } from '../types'
-
-import { ObjectiveListSkeleton } from './objective-list-skeleton'
 
 export interface ObjectivesFromCycleProperties {
   cycle?: Cycle
@@ -46,15 +44,12 @@ export const ObjectivesFromCycle = ({
         </Heading>
       </Skeleton>
 
-      <Accordion allowToggle allowMultiple gridGap={8} display="flex" flexDirection="column">
-        {isLoaded && objectives ? (
-          objectives.map((objective) => (
-            <ObjectiveAccordionItem key={objective.id} objectiveID={objective.id} teamID={teamID} />
-          ))
-        ) : (
-          <ObjectiveListSkeleton />
-        )}
-      </Accordion>
+      <ObjectiveAccordion
+        isLoaded={isLoaded}
+        objectives={objectives}
+        teamID={teamID}
+        accordionID={cycle?.id}
+      />
     </Stack>
   )
 }

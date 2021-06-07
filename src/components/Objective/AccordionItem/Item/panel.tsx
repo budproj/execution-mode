@@ -14,7 +14,7 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
-import { lastInsertedKeyResultIDAtom } from '../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
+import { lastInsertedKeyResultIDAtom } from '../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
 
 import queries from './queries.gql'
 

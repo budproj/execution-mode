@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import PercentageProgressIncreaseTag from 'src/components/Base/PercentageProgressIncreaseTag'
@@ -18,14 +19,18 @@ import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { Objective } from 'src/components/Objective/types'
 import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
 
-import { ObjectiveAccordionMenu } from './accordion-menu'
+import { objectiveAccordionEntryModes } from '../../../../state/recoil/objective/accordion'
+import { ObjectiveAccordionMenu } from '../Menu/wrapper'
+
 import messages from './messages'
 
 export interface ObjectiveAccordionButtonProperties {
+  accordionIndex: number
   objective?: Partial<Objective>
   teamID?: string
   confidenceTag?: ConfidenceTag
   isLoaded?: boolean
+  accordionID?: string
 }
 
 const ObjectiveAccordionButton = ({
@@ -33,9 +38,14 @@ const ObjectiveAccordionButton = ({
   teamID,
   confidenceTag,
   isLoaded,
+  accordionID,
+  accordionIndex,
 }: ObjectiveAccordionButtonProperties) => {
+  const accordionEntryModes = useRecoilValue(objectiveAccordionEntryModes(accordionID))
   const intl = useIntl()
   const roundedProgress = Math.round(objective?.status?.progress ?? 0)
+
+  console.log(accordionEntryModes, 'tag')
 
   return (
     <AccordionButton p={0} gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
@@ -91,7 +101,13 @@ const ObjectiveAccordionButton = ({
             </Skeleton>
           </TooltipWithDelay>
 
-          <ObjectiveAccordionMenu teamID={teamID} objectiveID={objective?.id} isLoaded={isLoaded} />
+          <ObjectiveAccordionMenu
+            teamID={teamID}
+            objectiveID={objective?.id}
+            isLoaded={isLoaded}
+            accordionID={accordionID}
+            accordionIndex={accordionIndex}
+          />
         </Stack>
 
         <AccordionIcon />

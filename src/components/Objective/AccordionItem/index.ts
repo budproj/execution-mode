@@ -1,3 +1,3 @@
-import ObjectiveAccordionItem from './accordion-item'
+import ObjectiveAccordionItem from './Item/wrapper'
 
 export default ObjectiveAccordionItem
