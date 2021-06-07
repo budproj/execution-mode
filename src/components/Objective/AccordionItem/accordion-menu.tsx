@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
+import { objectiveAtomFamily } from '../../../state/recoil/objective'
 import { teamAtomFamily } from '../../../state/recoil/team'
 import TreeDotsIcon from '../../Icon/TreeDots'
 import { GraphQLEffect } from '../../types'
@@ -47,10 +48,12 @@ export const ObjectiveAccordionMenu = ({
 }: ObjectiveAccordionMenuProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(teamID))
+  const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
 
   const canCreateKeyResult = team?.keyResults?.policy?.create === GraphQLEffect.ALLOW
-  const hasAnyOptions = !isLoaded || canCreateKeyResult
+  const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
+  const hasAnyOptions = !isLoaded || canCreateKeyResult || canUpdateObjective
 
   const openKeyResultInsertDrawer = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     setKeyResultInsertDrawerObjectiveID(objectiveID)
@@ -86,6 +89,11 @@ export const ObjectiveAccordionMenu = ({
           {canCreateKeyResult && (
             <ObjectiveMenuOption onClick={openKeyResultInsertDrawer}>
               {intl.formatMessage(messages.firstMenuOption)}
+            </ObjectiveMenuOption>
+          )}
+          {canUpdateObjective && (
+            <ObjectiveMenuOption>
+              {intl.formatMessage(messages.secondMenuOption)}
             </ObjectiveMenuOption>
           )}
         </MenuList>

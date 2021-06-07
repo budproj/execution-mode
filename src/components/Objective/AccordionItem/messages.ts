@@ -8,6 +8,7 @@ type ObjectiveAccordionItemMessage =
   | 'progressTooltip'
   | 'optionsButtonIconDesc'
   | 'firstMenuOption'
+  | 'secondMenuOption'
 
 export default defineMessages<ObjectiveAccordionItemMessage>({
   calendarIconTitle: {
@@ -56,5 +57,12 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
     id: '7tvIOz',
     description:
       'This is the first option that appears when you open the menu of a given objective inside the accordion button',
+  },
+
+  secondMenuOption: {
+    defaultMessage: 'Editar este OKR',
+    id: 'd7EKd5',
+    description:
+      'This is the second option that appears when you open the menu of a given objective inside the accordion button',
   },
 })

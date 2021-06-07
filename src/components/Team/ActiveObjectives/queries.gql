@@ -18,6 +18,9 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
             progress
             confidence
           }
+          policy {
+            update
+          }
         }
       }
     }
