@@ -1,7 +1,14 @@
 import { useMutation } from '@apollo/client'
-import { Input } from '@chakra-ui/input'
+import { Input, InputGroup } from '@chakra-ui/input'
 import { Stack } from '@chakra-ui/layout'
-import { FormControl, IconButton, IconButtonProps } from '@chakra-ui/react'
+import {
+  FormControl,
+  IconButton,
+  IconButtonProps,
+  InputRightElement,
+  useToast,
+} from '@chakra-ui/react'
+import { Spinner } from '@chakra-ui/spinner'
 import { Form, Formik, Field } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -44,6 +51,7 @@ const EditModeIconButton = (properties: IconButtonProps) => (
 
 export const EditMode = ({ objective, accordionID, accordionIndex }: EditModeProperties) => {
   const intl = useIntl()
+  const toast = useToast()
   const [updateObjective, { loading }] = useMutation<UpdateObjectiveMutationResult>(
     queries.UPDATE_OBJECTIVE,
     {
@@ -72,6 +80,11 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
       },
     })
 
+    toast({
+      title: intl.formatMessage(messages.submitToastMessage),
+      status: 'success',
+    })
+
     handleCancel()
   }
 
@@ -90,7 +103,12 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
           gridGap={8}
           onClick={stopAccordionOpen}
         >
-          <Field name="title" as={Input} />
+          <InputGroup>
+            <Field name="title" as={Input} />
+            <InputRightElement h="full" pr={4}>
+              {loading && <Spinner color="gray.500" />}
+            </InputRightElement>
+          </InputGroup>
 
           <Stack direction="row" spacing={4} alignItems="stretch">
             <EditModeIconButton
@@ -105,11 +123,12 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
             </EditModeIconButton>
 
             <EditModeIconButton
+              isLoading={loading}
               aria-label={intl.formatMessage(messages.submitButtonDesc)}
               type="submit"
               _hover={{
-                color: 'white',
-                bg: 'green.500',
+                color: loading ? 'gray.500' : 'white',
+                bg: loading ? 'gray.50' : 'green.500',
               }}
             >
               <CheckIcon desc={intl.formatMessage(messages.submitButtonDesc)} fill="currentColor" />

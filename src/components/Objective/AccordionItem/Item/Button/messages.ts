@@ -9,6 +9,7 @@ type ObjectiveAccordionItemMessage =
   | 'optionsButtonIconDesc'
   | 'cancelButtonDesc'
   | 'submitButtonDesc'
+  | 'submitToastMessage'
 
 export default defineMessages<ObjectiveAccordionItemMessage>({
   calendarIconTitle: {
@@ -66,5 +67,12 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
     id: 'xfx/rc',
     description:
       'This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the check button',
+  },
+
+  submitToastMessage: {
+    defaultMessage: 'Objetivo atualizado com sucesso',
+    id: 'B3oV9s',
+    description:
+      'This text is displayed as a toast when the user clicks on the check button to update a given objective title',
   },
 })
