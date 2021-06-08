@@ -7,7 +7,7 @@ import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
 import { ObjectiveAccordionButton } from './Button/wrapper'
-import ObjectiveAccordionPanel from './panel'
+import { ObjectiveAccordionPanel } from './Panel/wrapper'
 
 export interface ObjectiveAccordionItemProperties {
   index: number
@@ -49,7 +49,13 @@ const ObjectiveAccordionItem = ({
             accordionID={accordionID}
             accordionIndex={index}
           />
-          <ObjectiveAccordionPanel isExpanded={isExpanded} objectiveID={objectiveID} />
+          <ObjectiveAccordionPanel
+            isExpanded={isExpanded}
+            objectiveID={objectiveID}
+            accordionIndex={index}
+            accordionID={accordionID}
+            teamID={teamID}
+          />
         </>
       )}
     </AccordionItem>

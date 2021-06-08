@@ -76,8 +76,8 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
             <EditModeIconButton
               aria-label={intl.formatMessage(messages.cancelButtonDesc)}
               _hover={{
-                color: 'red.500',
-                bg: 'red.100',
+                color: 'white',
+                bg: 'red.500',
               }}
               onClick={handleCancel}
             >
@@ -88,8 +88,8 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
               aria-label={intl.formatMessage(messages.submitButtonDesc)}
               type="submit"
               _hover={{
-                color: 'green.500',
-                bg: 'green.100',
+                color: 'white',
+                bg: 'green.500',
               }}
             >
               <CheckIcon desc={intl.formatMessage(messages.submitButtonDesc)} fill="currentColor" />
