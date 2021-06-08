@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { Spinner } from '@chakra-ui/spinner'
 import { Form, Formik, Field } from 'formik'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
@@ -52,7 +52,7 @@ const EditModeIconButton = (properties: IconButtonProps) => (
 export const EditMode = ({ objective, accordionID, accordionIndex }: EditModeProperties) => {
   const intl = useIntl()
   const toast = useToast()
-  const [updateObjective, { loading }] = useMutation<UpdateObjectiveMutationResult>(
+  const [updateObjective, { loading, error }] = useMutation<UpdateObjectiveMutationResult>(
     queries.UPDATE_OBJECTIVE,
     {
       onCompleted: (data) => {
@@ -87,6 +87,14 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
 
     handleCancel()
   }
+
+  useEffect(() => {
+    if (error)
+      toast({
+        title: intl.formatMessage(messages.unexpectedErrorToastMessage),
+        status: 'error',
+      })
+  }, [error, toast])
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>

@@ -10,6 +10,7 @@ type ObjectiveAccordionItemMessage =
   | 'cancelButtonDesc'
   | 'submitButtonDesc'
   | 'submitToastMessage'
+  | 'unexpectedErrorToastMessage'
 
 export default defineMessages<ObjectiveAccordionItemMessage>({
   calendarIconTitle: {
@@ -74,5 +75,12 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
     id: 'B3oV9s',
     description:
       'This text is displayed as a toast when the user clicks on the check button to update a given objective title',
+  },
+
+  unexpectedErrorToastMessage: {
+    defaultMessage: 'Desculpe, mas aconteceu um erro inesperado. Tente novamente mais tarde',
+    id: 'BipZgy',
+    description:
+      'This text is displayed as a toast when the user tries to update an objective but an error occur',
   },
 })
