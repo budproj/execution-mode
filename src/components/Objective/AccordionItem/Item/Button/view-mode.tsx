@@ -29,10 +29,9 @@ export const ViewMode = ({
   const intl = useIntl()
 
   return (
-    <Stack direction="row" flexGrow={1}>
+    <Stack direction="row" flexGrow={1} alignItems="center">
       <Skeleton
         isLoaded={isLoaded}
-        flexGrow={1}
         {...buildSkeletonMinSize(isLoaded ?? true, 300, 24, {
           loadedWidth: 'auto',
         })}
@@ -42,7 +41,7 @@ export const ViewMode = ({
         </Heading>
       </Skeleton>
 
-      <Stack justifyContent="flex-end" direction="row" alignItems="center" spacing="8">
+      <Stack justifyContent="flex-end" direction="row" alignItems="center" spacing="8" flexGrow={1}>
         <Stack spacing={4} direction="row" alignItems="stretch">
           <TooltipWithDelay label={intl.formatMessage(messages.progressTagTooltip)} placement="top">
             <Skeleton

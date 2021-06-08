@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { keyResultInsertDrawerObjectiveID } from '../../../../state/recoil/key-result/drawers/insert/objective-id'
+import { stopAccordionOpen } from '../handlers'
 
-import { stopAccordionOpen } from './handlers'
 import messages from './messages'
 import { ObjectiveMenuOption } from './option-base'
 

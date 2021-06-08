@@ -9,8 +9,8 @@ import { teamAtomFamily } from '../../../../state/recoil/team'
 import TreeDotsIcon from '../../../Icon/TreeDots'
 import { GraphQLEffect } from '../../../types'
 import messages from '../Item/Button/messages'
+import { stopAccordionOpen } from '../handlers'
 
-import { stopAccordionOpen } from './handlers'
 import { CreateKeyResultOption } from './option-create-key-result'
 import { UpdateObjectiveOption } from './option-update-objective'
 

@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { objectiveAccordionEditEntries } from '../../../../state/recoil/objective/accordion'
+import { stopAccordionOpen } from '../handlers'
 
-import { stopAccordionOpen } from './handlers'
 import messages from './messages'
 import { ObjectiveMenuOption } from './option-base'
 
