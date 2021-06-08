@@ -7,12 +7,15 @@ import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { Objective } from 'src/components/Objective/types'
 import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
 
-import { objectiveAccordionEntryModes } from '../../../../../state/recoil/objective/accordion'
+import {
+  AccordionEntryMode,
+  objectiveAccordionEntryModes,
+} from '../../../../../state/recoil/objective/accordion'
 import { RadioProgress } from '../../../../Base/RadioProgress/wrapper'
 
-import { ActionBox } from './action-box'
+import { EditMode } from './edit-mode'
 import messages from './messages'
-import { TitleBox } from './title-box'
+import { ViewMode } from './view-mode'
 
 export interface ObjectiveAccordionButtonProperties {
   accordionIndex: number
@@ -34,7 +37,7 @@ export const ObjectiveAccordionButton = ({
   const accordionEntryModes = useRecoilValue(objectiveAccordionEntryModes(accordionID))
   const intl = useIntl()
 
-  const entryMode = accordionEntryModes[accordionIndex]
+  const mode = accordionEntryModes[accordionIndex]
   const roundedProgress = Math.round(objective?.status?.progress ?? 0)
 
   return (
@@ -51,16 +54,17 @@ export const ObjectiveAccordionButton = ({
         </Box>
       </TooltipWithDelay>
 
-      <TitleBox mode={entryMode} objective={objective} isLoaded={isLoaded} />
-
-      <ActionBox
-        accordionIndex={accordionIndex}
-        accordionID={accordionID}
-        isLoaded={isLoaded}
-        teamID={teamID}
-        objective={objective}
-        mode={entryMode}
-      />
+      {mode === AccordionEntryMode.EDIT ? (
+        <EditMode />
+      ) : (
+        <ViewMode
+          accordionIndex={accordionIndex}
+          accordionID={accordionID}
+          isLoaded={isLoaded}
+          teamID={teamID}
+          objective={objective}
+        />
+      )}
     </AccordionButton>
   )
 }
