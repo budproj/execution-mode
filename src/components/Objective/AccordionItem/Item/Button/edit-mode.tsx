@@ -47,12 +47,12 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
   }
 
   const handleCancel = () => {
-    console.log('tag')
     setObjectiveToCollapsedMode(accordionIndex)
   }
 
   const handleSubmit = async (values: EditModeValues) => {
     console.log(values, 'tag')
+    handleCancel()
   }
 
   return (
