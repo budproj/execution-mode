@@ -4,7 +4,9 @@ import { FormControl, IconButton, IconButtonProps } from '@chakra-ui/react'
 import { Form, Formik, Field } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
+import { objectiveAccordionCollapsedIndexes } from '../../../../../state/recoil/objective/accordion'
 import CheckIcon from '../../../../Icon/Check'
 import TimesIcon from '../../../../Icon/Times'
 import { Objective } from '../../../types'
@@ -17,7 +19,9 @@ type EditModeValues = {
 }
 
 interface EditModeProperties {
+  accordionIndex: number
   objective?: Partial<Objective>
+  accordionID?: string
 }
 
 const EditModeIconButton = (properties: IconButtonProps) => (
@@ -32,10 +36,19 @@ const EditModeIconButton = (properties: IconButtonProps) => (
   />
 )
 
-export const EditMode = ({ objective }: EditModeProperties) => {
+export const EditMode = ({ objective, accordionID, accordionIndex }: EditModeProperties) => {
+  const setObjectiveToCollapsedMode = useSetRecoilState(
+    objectiveAccordionCollapsedIndexes(accordionID),
+  )
   const intl = useIntl()
+
   const initialValues: EditModeValues = {
     title: objective?.title ?? '',
+  }
+
+  const handleCancel = () => {
+    console.log('tag')
+    setObjectiveToCollapsedMode(accordionIndex)
   }
 
   const handleSubmit = async (values: EditModeValues) => {
@@ -55,7 +68,7 @@ export const EditMode = ({ objective }: EditModeProperties) => {
           flexDirection="row"
           alignItems="center"
           gridGap={8}
-          onClickCapture={stopAccordionOpen}
+          onClick={stopAccordionOpen}
         >
           <Field name="title" as={Input} />
 
@@ -66,6 +79,7 @@ export const EditMode = ({ objective }: EditModeProperties) => {
                 color: 'red.500',
                 bg: 'red.100',
               }}
+              onClick={handleCancel}
             >
               <TimesIcon desc={intl.formatMessage(messages.cancelButtonDesc)} fill="currentColor" />
             </EditModeIconButton>

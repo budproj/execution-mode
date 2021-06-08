@@ -50,14 +50,17 @@ export const objectiveAccordionExpandedEntries = selectorFamily<
     },
 })
 
-export const objectiveAccordionEditEntries = selectorFamily<number | number[], string | undefined>({
-  key: `${PREFIX}::ACCORDION_EDIT_INDEXES`,
+export const objectiveAccordionIndexesBeingEdited = selectorFamily<
+  number | number[],
+  string | undefined
+>({
+  key: `${PREFIX}::ACCORDION_INDEXES_BEING_EDITED`,
   get:
     (id) =>
     ({ get }) => {
       const accordionEntries = get(objectiveAccordionEntryModes(id))
       return accordionEntries
-        .map((entryState, index) => (entryState === AccordionEntryMode.EDIT ? -1 : index))
+        .map((entryState, index) => (entryState === AccordionEntryMode.EDIT ? index : -1))
         .filter((entryIndex) => entryIndex !== -1)
     },
   set:
@@ -70,6 +73,35 @@ export const objectiveAccordionEditEntries = selectorFamily<number | number[], s
 
       const newAccordionIndexesState = accordionIndexesState.map((state, stateIndex) =>
         stateIndex === index ? AccordionEntryMode.EDIT : state,
+      )
+
+      set(accordionAtom, newAccordionIndexesState)
+    },
+})
+
+export const objectiveAccordionCollapsedIndexes = selectorFamily<
+  number | number[],
+  string | undefined
+>({
+  key: `${PREFIX}::ACCORDION_COLLAPSED_INDEXES`,
+  get:
+    (id) =>
+    ({ get }) => {
+      const accordionEntries = get(objectiveAccordionEntryModes(id))
+      return accordionEntries
+        .map((entryState, index) => (entryState === AccordionEntryMode.COLLAPSED ? index : -1))
+        .filter((entryIndex) => entryIndex !== -1)
+    },
+  set:
+    (id) =>
+    ({ get, set }, index) => {
+      if (index instanceof DefaultValue) return
+
+      const accordionAtom = objectiveAccordionEntryModes(id)
+      const accordionIndexesState = get(accordionAtom)
+
+      const newAccordionIndexesState = accordionIndexesState.map((state, stateIndex) =>
+        stateIndex === index ? AccordionEntryMode.COLLAPSED : state,
       )
 
       set(accordionAtom, newAccordionIndexesState)

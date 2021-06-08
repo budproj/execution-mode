@@ -2,7 +2,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { objectiveAccordionEditEntries } from '../../../../state/recoil/objective/accordion'
+import { objectiveAccordionIndexesBeingEdited } from '../../../../state/recoil/objective/accordion'
 import { stopAccordionOpen } from '../handlers'
 
 import messages from './messages'
@@ -17,7 +17,9 @@ export const UpdateObjectiveOption = ({
   accordionID,
   accordionIndex,
 }: UpdateObjectiveOptionsProperties) => {
-  const setObjectiveToEditMode = useSetRecoilState(objectiveAccordionEditEntries(accordionID))
+  const setObjectiveToEditMode = useSetRecoilState(
+    objectiveAccordionIndexesBeingEdited(accordionID),
+  )
   const intl = useIntl()
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {

@@ -55,7 +55,7 @@ export const ObjectiveAccordionButton = ({
       </TooltipWithDelay>
 
       {mode === AccordionEntryMode.EDIT ? (
-        <EditMode objective={objective} />
+        <EditMode objective={objective} accordionIndex={accordionIndex} accordionID={accordionID} />
       ) : (
         <ViewMode
           accordionIndex={accordionIndex}
