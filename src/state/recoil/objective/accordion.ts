@@ -1,4 +1,4 @@
-import { atomFamily, DefaultValue, selectorFamily } from 'recoil'
+import { atomFamily, DefaultValue, GetRecoilValue, selectorFamily, SetRecoilState } from 'recoil'
 
 import { Objective } from '../../../components/Objective/types'
 
@@ -14,6 +14,39 @@ export const buildDefaultAccordionStateFromObjectives = (
   objectives: Objective[] = [],
 ): AccordionEntryMode[] => objectives.map(() => AccordionEntryMode.COLLAPSED)
 
+const getIndexInGivenModes =
+  (modes: AccordionEntryMode | AccordionEntryMode[]) =>
+  (id?: string) =>
+  ({ get }: { get: GetRecoilValue }): number[] => {
+    const modesAsArray = Array.isArray(modes) ? modes : [modes]
+    const accordionEntries = get(objectiveAccordionEntryModes(id))
+
+    return accordionEntries
+      .map((indexMode, index) => (modesAsArray.includes(indexMode) ? index : -1))
+      .filter((index) => index !== -1)
+  }
+
+const setIndexesToGivenMode =
+  (selectedMode: AccordionEntryMode, othersMode?: AccordionEntryMode) =>
+  (id?: string) =>
+  (
+    { get, set }: { get: GetRecoilValue; set: SetRecoilState },
+    indexes: DefaultValue | number | number[],
+  ): number[] | undefined => {
+    if (indexes instanceof DefaultValue) return
+
+    const indexesAsArray = Array.isArray(indexes) ? indexes : [indexes]
+
+    const accordionAtom = objectiveAccordionEntryModes(id)
+    const accordionIndexesState = get(accordionAtom)
+
+    const newAccordionIndexesState = accordionIndexesState.map((indexMode, index) =>
+      indexesAsArray.includes(index) ? selectedMode : othersMode ?? indexMode,
+    )
+
+    set(accordionAtom, newAccordionIndexesState)
+  }
+
 export const objectiveAccordionEntryModes = atomFamily<AccordionEntryMode[], string | undefined>({
   key: `${PREFIX}::ACCORDION_ENTRY_MODES`,
   default: buildDefaultAccordionStateFromObjectives(),
@@ -24,30 +57,8 @@ export const objectiveAccordionExpandedEntries = selectorFamily<
   string | undefined
 >({
   key: `${PREFIX}::ACCORDION_EXPANDED_ENTRIES`,
-  get:
-    (id) =>
-    ({ get }) => {
-      const accordionEntries = get(objectiveAccordionEntryModes(id))
-      return accordionEntries
-        .map((entryState, index) => (entryState === AccordionEntryMode.COLLAPSED ? -1 : index))
-        .filter((entryIndex) => entryIndex !== -1)
-    },
-  set:
-    (id) =>
-    ({ get, set }, indexes) => {
-      if (indexes instanceof DefaultValue) return
-
-      const indexesAsArray = Array.isArray(indexes) ? indexes : [indexes]
-
-      const accordionAtom = objectiveAccordionEntryModes(id)
-      const accordionIndexesState = get(accordionAtom)
-
-      const newAccordionIndexesState = accordionIndexesState.map((_, index) =>
-        indexesAsArray.includes(index) ? AccordionEntryMode.VIEW : AccordionEntryMode.COLLAPSED,
-      )
-
-      set(accordionAtom, newAccordionIndexesState)
-    },
+  get: getIndexInGivenModes([AccordionEntryMode.VIEW, AccordionEntryMode.EDIT]),
+  set: setIndexesToGivenMode(AccordionEntryMode.VIEW, AccordionEntryMode.COLLAPSED),
 })
 
 export const objectiveAccordionIndexesBeingEdited = selectorFamily<
@@ -55,28 +66,8 @@ export const objectiveAccordionIndexesBeingEdited = selectorFamily<
   string | undefined
 >({
   key: `${PREFIX}::ACCORDION_INDEXES_BEING_EDITED`,
-  get:
-    (id) =>
-    ({ get }) => {
-      const accordionEntries = get(objectiveAccordionEntryModes(id))
-      return accordionEntries
-        .map((entryState, index) => (entryState === AccordionEntryMode.EDIT ? index : -1))
-        .filter((entryIndex) => entryIndex !== -1)
-    },
-  set:
-    (id) =>
-    ({ get, set }, index) => {
-      if (index instanceof DefaultValue) return
-
-      const accordionAtom = objectiveAccordionEntryModes(id)
-      const accordionIndexesState = get(accordionAtom)
-
-      const newAccordionIndexesState = accordionIndexesState.map((state, stateIndex) =>
-        stateIndex === index ? AccordionEntryMode.EDIT : state,
-      )
-
-      set(accordionAtom, newAccordionIndexesState)
-    },
+  get: getIndexInGivenModes(AccordionEntryMode.EDIT),
+  set: setIndexesToGivenMode(AccordionEntryMode.EDIT),
 })
 
 export const objectiveAccordionCollapsedIndexes = selectorFamily<
@@ -84,26 +75,15 @@ export const objectiveAccordionCollapsedIndexes = selectorFamily<
   string | undefined
 >({
   key: `${PREFIX}::ACCORDION_COLLAPSED_INDEXES`,
-  get:
-    (id) =>
-    ({ get }) => {
-      const accordionEntries = get(objectiveAccordionEntryModes(id))
-      return accordionEntries
-        .map((entryState, index) => (entryState === AccordionEntryMode.COLLAPSED ? index : -1))
-        .filter((entryIndex) => entryIndex !== -1)
-    },
-  set:
-    (id) =>
-    ({ get, set }, index) => {
-      if (index instanceof DefaultValue) return
+  get: getIndexInGivenModes(AccordionEntryMode.COLLAPSED),
+  set: setIndexesToGivenMode(AccordionEntryMode.COLLAPSED),
+})
 
-      const accordionAtom = objectiveAccordionEntryModes(id)
-      const accordionIndexesState = get(accordionAtom)
-
-      const newAccordionIndexesState = accordionIndexesState.map((state, stateIndex) =>
-        stateIndex === index ? AccordionEntryMode.COLLAPSED : state,
-      )
-
-      set(accordionAtom, newAccordionIndexesState)
-    },
+export const objectiveAccordionIndexesBeingViewed = selectorFamily<
+  number | number[],
+  string | undefined
+>({
+  key: `${PREFIX}::ACCORDION_INDEXES_BEING_VIEWED`,
+  get: getIndexInGivenModes(AccordionEntryMode.VIEW),
+  set: setIndexesToGivenMode(AccordionEntryMode.VIEW),
 })
