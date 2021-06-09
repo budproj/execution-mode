@@ -48,6 +48,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
           }
           policy {
             update
+            delete
           }
           keyResultCheckIns {
             policy {
