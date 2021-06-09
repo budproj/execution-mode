@@ -14,11 +14,13 @@ import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-resul
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
+import { AccordionEntryMode } from '../../../../../state/recoil/objective/accordion'
 
 import queries from './queries.gql'
 
 export interface ObjectiveKeyResultsProperties {
   objectiveID?: Objective['id']
+  mode: AccordionEntryMode
 }
 
 export interface GetObjectiveKeyResultsQuery {
@@ -28,7 +30,7 @@ export interface GetObjectiveKeyResultsQuery {
 const selectKeyResultIDs = (keyResults?: KeyResult[]) =>
   keyResults?.map((keyResult) => keyResult.id)
 
-export const ObjectiveKeyResults = ({ objectiveID }: ObjectiveKeyResultsProperties) => {
+export const ObjectiveKeyResults = ({ objectiveID, mode }: ObjectiveKeyResultsProperties) => {
   const lastInsertedKeyResultID = useRecoilValue(lastInsertedKeyResultIDAtom)
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
@@ -100,6 +102,7 @@ export const ObjectiveKeyResults = ({ objectiveID }: ObjectiveKeyResultsProperti
         [KEY_RESULT_LIST_COLUMN.OWNER]: {
           displayName: true,
           displayRole: true,
+          displayPicture: mode === AccordionEntryMode.VIEW,
         },
       }}
       onLineClick={handleLineClick}

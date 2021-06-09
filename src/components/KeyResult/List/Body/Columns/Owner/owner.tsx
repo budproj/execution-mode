@@ -26,6 +26,7 @@ export interface KeyResultListBodyColumnOwnerProperties
   id?: KeyResult['id']
   displayName?: boolean
   displayRole?: boolean
+  displayPicture?: boolean
 }
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
@@ -38,6 +39,7 @@ const KeyResultListBodyColumnOwner = ({
   id,
   displayName,
   displayRole,
+  displayPicture,
   justifyContent,
 }: KeyResultListBodyColumnOwnerProperties): ReactElement => {
   const owner = useRecoilValue(ownerSelector(id))
@@ -61,15 +63,17 @@ const KeyResultListBodyColumnOwner = ({
       <Popover placement="top-end" size="sm">
         <PopoverTrigger>
           <Flex alignItems="center" gridGap={4}>
-            <SkeletonCircle size="48px" isLoaded={isOwnerLoaded}>
-              <UserAvatar
-                name={owner?.fullName}
-                src={owner?.picture}
-                cursor="pointer"
-                data-action="open-user-card"
-                variant="rounded"
-              />
-            </SkeletonCircle>
+            {displayPicture && (
+              <SkeletonCircle size="48px" isLoaded={isOwnerLoaded}>
+                <UserAvatar
+                  name={owner?.fullName}
+                  src={owner?.picture}
+                  cursor="pointer"
+                  data-action="open-user-card"
+                  variant="rounded"
+                />
+              </SkeletonCircle>
+            )}
 
             <Flex direction="column">
               {displayName && (
@@ -107,6 +111,10 @@ const KeyResultListBodyColumnOwner = ({
       </Popover>
     </KeyResultListBodyColumnBase>
   )
+}
+
+KeyResultListBodyColumnOwner.defaultProps = {
+  displayPicture: true,
 }
 
 export default KeyResultListBodyColumnOwner
