@@ -1,26 +1,12 @@
+import { Skeleton } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
-import { useIntl } from 'react-intl'
 
-import KeyResultListBodyColumnBase, {
-  KeyResultListBodyColumnBaseProperties,
-} from 'src/components/KeyResult/List/Body/Columns/Base'
-import { KeyResult } from 'src/components/KeyResult/types'
+import KeyResultListBodyColumnBase from 'src/components/KeyResult/List/Body/Columns/Base'
 
-export interface KeyResultListBodyColumnActionsProperties
-  extends KeyResultListBodyColumnBaseProperties {
-  id?: KeyResult['id']
-}
-
-const KeyResultListBodyColumnActionsSkeleton = ({
-  id,
-}: KeyResultListBodyColumnActionsProperties): ReactElement => {
-  const intl = useIntl()
-
-  return (
-    <KeyResultListBodyColumnBase preventLineClick>
-      <p>Teste</p>
-    </KeyResultListBodyColumnBase>
-  )
-}
+const KeyResultListBodyColumnActionsSkeleton = (): ReactElement => (
+  <KeyResultListBodyColumnBase preventLineClick justifySelf="flex-end">
+    <Skeleton w={12} h={12} borderRadius={4} />
+  </KeyResultListBodyColumnBase>
+)
 
 export default KeyResultListBodyColumnActionsSkeleton
