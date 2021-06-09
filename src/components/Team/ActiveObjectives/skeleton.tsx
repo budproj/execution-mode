@@ -14,8 +14,8 @@ export const TeamActiveObjectivesSkeleton = ({
 
   return (
     <>
-      {[...new Array(numOfSkeletons)].map(() => (
-        <ObjectivesFromCycle key={uniqueId()} />
+      {[...new Array(numOfSkeletons)].map((_) => (
+        <ObjectivesFromCycle key={uniqueId()} objectiveIDs={[]} />
       ))}
     </>
   )

@@ -14,8 +14,8 @@ export const ObjectiveAccordionSkeleton = ({
 
   return (
     <>
-      {[...new Array(numOfSkeletons)].map(() => (
-        <ObjectiveAccordionItem key={uniqueId()} />
+      {[...new Array(numOfSkeletons)].map((_, index) => (
+        <ObjectiveAccordionItem key={uniqueId()} index={index} />
       ))}
     </>
   )
