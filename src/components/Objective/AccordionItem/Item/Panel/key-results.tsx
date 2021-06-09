@@ -34,7 +34,7 @@ export const ObjectiveKeyResults = ({ objectiveID }: ObjectiveKeyResultsProperti
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
-  const { data, called, loading } = useQuery<GetObjectiveKeyResultsQuery>(
+  const { data, called, loading, refetch } = useQuery<GetObjectiveKeyResultsQuery>(
     queries.GET_OBJECTIVE_KEY_RESULTS,
     {
       fetchPolicy: 'network-only',
@@ -63,6 +63,10 @@ export const ObjectiveKeyResults = ({ objectiveID }: ObjectiveKeyResultsProperti
     if (keyResults) loadKeyResults(keyResults)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyResults])
+
+  useEffect(() => {
+    if (lastInsertedKeyResultID) void refetch()
+  }, [lastInsertedKeyResultID, refetch])
 
   return (
     <KeyResultList

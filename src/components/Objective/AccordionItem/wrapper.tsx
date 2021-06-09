@@ -3,25 +3,24 @@ import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import {
-  buildDefaultAccordionStateFromObjectives,
+  buildDefaultAccordionStateFromList,
   objectiveAccordionExpandedEntries,
   objectiveAccordionEntryModes,
 } from '../../../state/recoil/objective/accordion'
-import { Objective } from '../types'
 
 import ObjectiveAccordionItem from './Item/wrapper'
 import { ObjectiveAccordionSkeleton } from './skeleton'
 
 interface ObjectiveAccordionProperties {
   isLoaded: boolean
+  objectiveIDs: string[]
   accordionID?: string
-  objectives?: Objective[]
   teamID?: string
 }
 
 export const ObjectiveAccordion = ({
   isLoaded,
-  objectives,
+  objectiveIDs,
   teamID,
   accordionID,
 }: ObjectiveAccordionProperties) => {
@@ -31,8 +30,8 @@ export const ObjectiveAccordion = ({
   )
 
   useEffect(() => {
-    setIndexesState(buildDefaultAccordionStateFromObjectives(objectives))
-  }, [objectives, setIndexesState])
+    setIndexesState(buildDefaultAccordionStateFromList(objectiveIDs))
+  }, [objectiveIDs, setIndexesState])
 
   return (
     <Accordion
@@ -44,11 +43,11 @@ export const ObjectiveAccordion = ({
       flexDirection="column"
       onChange={setAccordionExpandedIndexes}
     >
-      {isLoaded && objectives ? (
-        objectives.map((objective, index) => (
+      {isLoaded && objectiveIDs ? (
+        objectiveIDs.map((objectiveID, index) => (
           <ObjectiveAccordionItem
-            key={objective.id}
-            objectiveID={objective.id}
+            key={objectiveID}
+            objectiveID={objectiveID}
             teamID={teamID}
             accordionID={accordionID}
             index={index}

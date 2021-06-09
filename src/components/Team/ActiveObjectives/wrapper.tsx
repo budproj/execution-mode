@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import uniq from 'lodash/uniq'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
@@ -23,35 +23,32 @@ export interface GetTeamActiveObjectivesQuery {
   team: Partial<Team>
 }
 
-const groupObjectivesByCycle = (
-  objectives?: Objective[],
-): Array<[Cycle, Objective[]]> | undefined => {
-  if (!objectives) return
+const groupObjectivesByCycle = (objectives?: Objective[]): Array<[Cycle, string[]]> => {
+  if (!objectives) return []
 
-  const objectivesCyclePairs: Array<[Cycle, Objective]> = objectives.map((objective) => [
-    objective.cycle,
-    objective,
-  ])
-  const cycles = uniq(objectivesCyclePairs.map(([cycle]) => cycle))
+  const cycles: Cycle[] = uniq(objectives.map((objective) => objective.cycle))
 
   return cycles.map((cycle) => [
     cycle,
-    objectives.filter((objective) => objective.cycle.id === cycle.id),
+    objectives
+      .filter((objective) => objective.cycle.id === cycle.id)
+      .map((objective) => objective.id),
   ])
 }
 
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
+  const [cycleObjectives, setCycleObjectives] = useState<Array<[Cycle, string[]]>>([])
   const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const { data, loading, called } = useQuery<GetTeamActiveObjectivesQuery>(
     queries.GET_TEAM_ACTIVE_OBJECTIVES,
     {
+      fetchPolicy: 'no-cache',
       variables: { teamID },
     },
   )
   const [objectives, setObjectiveEdges] = useConnectionEdges<Objective>()
 
-  const groupedObjectivesByCycle = groupObjectivesByCycle(objectives)
-  const isLoaded = called && !loading && groupedObjectivesByCycle
+  const isLoaded = called && !loading
   const syncedWithLocalState = data?.team.objectives?.edges.length === objectives.length
 
   useEffect(() => {
@@ -59,20 +56,30 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   }, [data, setObjectiveEdges])
 
   useEffect(() => {
-    if (objectives) loadObjectivesOnRecoil(objectives)
+    if (objectives) {
+      loadObjectivesOnRecoil(objectives)
+    }
   }, [objectives, loadObjectivesOnRecoil])
+
+  useEffect(() => {
+    if (objectives) {
+      const groupedObjectivesByCycle = groupObjectivesByCycle(objectives)
+
+      setCycleObjectives(groupedObjectivesByCycle)
+    }
+  }, [objectives, setCycleObjectives])
 
   return (
     <Stack spacing={12} h="full">
       {isLoaded ? (
-        syncedWithLocalState && groupedObjectivesByCycle?.length === 0 ? (
+        syncedWithLocalState && isLoaded && cycleObjectives.length === 0 ? (
           <TeamActiveObjectivesEmptyState />
         ) : (
-          groupedObjectivesByCycle?.map(([cycle, objectives]) => (
+          cycleObjectives.map(([cycle, objectiveIDs]) => (
             <ObjectivesFromCycle
               key={cycle.id}
               cycle={cycle}
-              objectives={objectives}
+              objectiveIDs={objectiveIDs}
               teamID={teamID}
             />
           ))

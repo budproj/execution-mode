@@ -1,7 +1,5 @@
 import { atomFamily, DefaultValue, GetRecoilValue, selectorFamily, SetRecoilState } from 'recoil'
 
-import { Objective } from '../../../components/Objective/types'
-
 import { PREFIX } from './constants'
 
 export enum AccordionEntryMode {
@@ -10,9 +8,8 @@ export enum AccordionEntryMode {
   EDIT = 'edit',
 }
 
-export const buildDefaultAccordionStateFromObjectives = (
-  objectives: Objective[] = [],
-): AccordionEntryMode[] => objectives.map(() => AccordionEntryMode.COLLAPSED)
+export const buildDefaultAccordionStateFromList = (data: any[] = []): AccordionEntryMode[] =>
+  data.map(() => AccordionEntryMode.COLLAPSED)
 
 const getIndexInGivenModes =
   (modes: AccordionEntryMode | AccordionEntryMode[]) =>
@@ -49,7 +46,7 @@ const setIndexesToGivenMode =
 
 export const objectiveAccordionEntryModes = atomFamily<AccordionEntryMode[], string | undefined>({
   key: `${PREFIX}::ACCORDION_ENTRY_MODES`,
-  default: buildDefaultAccordionStateFromObjectives(),
+  default: buildDefaultAccordionStateFromList(),
 })
 
 export const objectiveAccordionExpandedEntries = selectorFamily<

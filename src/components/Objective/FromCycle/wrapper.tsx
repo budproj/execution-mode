@@ -8,17 +8,16 @@ import useCadence from '../../../state/hooks/useCadence'
 import { Cycle } from '../../Cycle/types'
 import messages from '../../KeyResult/CycleList/messages'
 import { ObjectiveAccordion } from '../AccordionItem/wrapper'
-import { Objective } from '../types'
 
 export interface ObjectivesFromCycleProperties {
   cycle?: Cycle
-  objectives?: Objective[]
+  objectiveIDs: string[]
   teamID?: string
 }
 
 export const ObjectivesFromCycle = ({
   cycle,
-  objectives,
+  objectiveIDs,
   teamID,
 }: ObjectivesFromCycleProperties) => {
   const intl = useIntl()
@@ -46,7 +45,7 @@ export const ObjectivesFromCycle = ({
 
       <ObjectiveAccordion
         isLoaded={isLoaded}
-        objectives={objectives}
+        objectiveIDs={objectiveIDs}
         teamID={teamID}
         accordionID={cycle?.id}
       />

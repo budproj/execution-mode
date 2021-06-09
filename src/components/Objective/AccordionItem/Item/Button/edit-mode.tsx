@@ -14,6 +14,8 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
+import { useRecoilFamilyLoader } from '../../../../../state/recoil/hooks'
+import { objectiveAtomFamily } from '../../../../../state/recoil/objective'
 import { objectiveAccordionIndexesBeingViewed } from '../../../../../state/recoil/objective/accordion'
 import CheckIcon from '../../../../Icon/Check'
 import TimesIcon from '../../../../Icon/Times'
@@ -52,11 +54,12 @@ const EditModeIconButton = (properties: IconButtonProps) => (
 export const EditMode = ({ objective, accordionID, accordionIndex }: EditModeProperties) => {
   const intl = useIntl()
   const toast = useToast()
+  const loadObjectiveOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const [updateObjective, { loading, error }] = useMutation<UpdateObjectiveMutationResult>(
     queries.UPDATE_OBJECTIVE,
     {
       onCompleted: (data) => {
-        console.log(data, 'tag')
+        loadObjectiveOnRecoil(data.updateObjective)
       },
     },
   )
