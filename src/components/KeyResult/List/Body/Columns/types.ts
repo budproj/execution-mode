@@ -1,3 +1,4 @@
+import { KeyResultListBodyColumnActionsProperties } from './Actions/actions'
 import { KeyResultListBodyColumnConfidenceLevelProperties } from './ConfidenceLevel/confidence-level'
 import { KeyResultListBodyColumnConfidenceLevelColorProperties } from './ConfidenceLevelColor/confidence-level-color'
 import { KeyResultListBodyColumnCycleProperties } from './Cycle/cycle'
@@ -17,4 +18,5 @@ export interface KeyResultListBodyColumnProperties {
   [KEY_RESULT_LIST_COLUMN.OWNER]?: KeyResultListBodyColumnOwnerProperties
   [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]?: KeyResultListBodyColumnConfidenceLevelColorProperties
   [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]?: KeyResultListBodyColumnPercentualProgressProperties
+  [KEY_RESULT_LIST_COLUMN.ACTIONS]?: KeyResultListBodyColumnActionsProperties
 }
