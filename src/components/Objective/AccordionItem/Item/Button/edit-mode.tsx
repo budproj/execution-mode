@@ -17,6 +17,7 @@ import { useSetRecoilState } from 'recoil'
 import { useRecoilFamilyLoader } from '../../../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../../../state/recoil/objective'
 import { objectiveAccordionIndexesBeingViewed } from '../../../../../state/recoil/objective/accordion'
+import { CancelIcon } from '../../../../Icon/Cancel/wrapper'
 import CheckIcon from '../../../../Icon/Check'
 import TimesIcon from '../../../../Icon/Times'
 import { Objective } from '../../../types'
@@ -91,62 +92,78 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
     handleCancel()
   }
 
+  const validateTitle = (value: string): string | undefined => {
+    if (value.length === 0) return intl.formatMessage(messages.requiredFieldError)
+  }
+
   useEffect(() => {
     if (error)
       toast({
         title: intl.formatMessage(messages.unexpectedErrorToastMessage),
         status: 'error',
       })
-  }, [error, toast])
+  }, [error, toast, intl])
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form
-        style={{
-          flexGrow: 1,
-        }}
-      >
-        <FormControl
-          id={`update-objective-${objective?.id ?? ''}`}
-          display="flex"
-          flexDirection="row"
-          alignItems="center"
-          gridGap={8}
-          onClick={stopAccordionOpen}
+      {({ errors }) => (
+        <Form
+          style={{
+            flexGrow: 1,
+          }}
         >
-          <InputGroup>
-            <Field name="title" as={Input} />
-            <InputRightElement h="full" pr={4}>
-              {loading && <Spinner color="gray.500" />}
-            </InputRightElement>
-          </InputGroup>
+          <FormControl
+            id={`update-objective-${objective?.id ?? ''}`}
+            display="flex"
+            flexDirection="row"
+            alignItems="center"
+            gridGap={8}
+            onClick={stopAccordionOpen}
+          >
+            <InputGroup>
+              <Field name="title" as={Input} validate={validateTitle} isInvalid={errors.title} />
+              <InputRightElement h="full" pr={4}>
+                {loading && <Spinner color="gray.500" />}
+                {errors.title && (
+                  <CancelIcon fill="red.500" desc={intl.formatMessage(messages.invalidIconDesc)} />
+                )}
+              </InputRightElement>
+            </InputGroup>
 
-          <Stack direction="row" spacing={4} alignItems="stretch">
-            <EditModeIconButton
-              aria-label={intl.formatMessage(messages.cancelButtonDesc)}
-              _hover={{
-                color: 'white',
-                bg: 'red.500',
-              }}
-              onClick={handleCancel}
-            >
-              <TimesIcon desc={intl.formatMessage(messages.cancelButtonDesc)} fill="currentColor" />
-            </EditModeIconButton>
+            <Stack direction="row" spacing={4} alignItems="stretch">
+              <EditModeIconButton
+                aria-label={intl.formatMessage(messages.cancelButtonDesc)}
+                _hover={{
+                  color: 'white',
+                  bg: 'red.500',
+                }}
+                onClick={handleCancel}
+              >
+                <TimesIcon
+                  desc={intl.formatMessage(messages.cancelButtonDesc)}
+                  fill="currentColor"
+                />
+              </EditModeIconButton>
 
-            <EditModeIconButton
-              isLoading={loading}
-              aria-label={intl.formatMessage(messages.submitButtonDesc)}
-              type="submit"
-              _hover={{
-                color: loading ? 'gray.500' : 'white',
-                bg: loading ? 'gray.50' : 'green.500',
-              }}
-            >
-              <CheckIcon desc={intl.formatMessage(messages.submitButtonDesc)} fill="currentColor" />
-            </EditModeIconButton>
-          </Stack>
-        </FormControl>
-      </Form>
+              <EditModeIconButton
+                isLoading={loading}
+                isDisabled={Object.values(errors).length > 0}
+                aria-label={intl.formatMessage(messages.submitButtonDesc)}
+                type="submit"
+                _hover={{
+                  color: loading || Object.values(errors).length > 0 ? 'gray.500' : 'white',
+                  bg: loading || Object.values(errors).length > 0 ? 'gray.50' : 'green.500',
+                }}
+              >
+                <CheckIcon
+                  desc={intl.formatMessage(messages.submitButtonDesc)}
+                  fill="currentColor"
+                />
+              </EditModeIconButton>
+            </Stack>
+          </FormControl>
+        </Form>
+      )}
     </Formik>
   )
 }

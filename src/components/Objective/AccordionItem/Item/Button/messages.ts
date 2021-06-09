@@ -11,6 +11,8 @@ type ObjectiveAccordionItemMessage =
   | 'submitButtonDesc'
   | 'submitToastMessage'
   | 'unexpectedErrorToastMessage'
+  | 'requiredFieldError'
+  | 'invalidIconDesc'
 
 export default defineMessages<ObjectiveAccordionItemMessage>({
   calendarIconTitle: {
@@ -82,5 +84,19 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
     id: 'BipZgy',
     description:
       'This text is displayed as a toast when the user tries to update an objective but an error occur',
+  },
+
+  requiredFieldError: {
+    defaultMessage: 'Este campo precisa conter algum valor',
+    id: 'NMWZmv',
+    description:
+      'This text is used inside the update objective fields when the user tries to make blank a given required field',
+  },
+
+  invalidIconDesc: {
+    defaultMessage: 'Um ícone de X indicando que os dados neste campo não são válidos',
+    id: 't3VVHw',
+    description:
+      'This is used by screen readers to explain the X that appears when the users types a non-valid data in a given controlled field',
   },
 })
