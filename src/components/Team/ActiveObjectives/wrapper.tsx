@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
-import uniq from 'lodash/uniq'
+import uniqBy from 'lodash/uniqBy'
 import React, { useEffect, useState } from 'react'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
@@ -26,7 +26,10 @@ export interface GetTeamActiveObjectivesQuery {
 const groupObjectivesByCycle = (objectives?: Objective[]): Array<[Cycle, string[]]> => {
   if (!objectives) return []
 
-  const cycles: Cycle[] = uniq(objectives.map((objective) => objective.cycle))
+  const cycles: Cycle[] = uniqBy(
+    objectives.map((objective) => objective.cycle),
+    'id',
+  )
 
   return cycles.map((cycle) => [
     cycle,
