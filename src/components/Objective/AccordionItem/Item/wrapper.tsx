@@ -6,15 +6,22 @@ import { Objective } from 'src/components/Objective/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
-import ObjectiveAccordionButton from './accordion-button'
-import ObjectiveAccordionPanel from './accordion-panel'
+import { ObjectiveAccordionButton } from './Button/wrapper'
+import { ObjectiveAccordionPanel } from './Panel/wrapper'
 
 export interface ObjectiveAccordionItemProperties {
+  index: number
   objectiveID?: Objective['id']
   teamID?: string
+  accordionID?: string
 }
 
-const ObjectiveAccordionItem = ({ objectiveID, teamID }: ObjectiveAccordionItemProperties) => {
+const ObjectiveAccordionItem = ({
+  objectiveID,
+  teamID,
+  index,
+  accordionID,
+}: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const [confidenceTag, setConfidence] = useConfidenceTag(objective?.status?.confidence)
   const isLoaded = Boolean(objective)
@@ -39,8 +46,16 @@ const ObjectiveAccordionItem = ({ objectiveID, teamID }: ObjectiveAccordionItemP
             confidenceTag={confidenceTag}
             teamID={teamID}
             isLoaded={isLoaded}
+            accordionID={accordionID}
+            accordionIndex={index}
           />
-          <ObjectiveAccordionPanel isExpanded={isExpanded} objectiveID={objectiveID} />
+          <ObjectiveAccordionPanel
+            isExpanded={isExpanded}
+            objectiveID={objectiveID}
+            accordionIndex={index}
+            accordionID={accordionID}
+            teamID={teamID}
+          />
         </>
       )}
     </AccordionItem>
