@@ -16,6 +16,7 @@ type KeyResultListHeadMessage =
   | 'listHeadConfidenceLevelIconDesc'
   | 'listHeadPercentualProgress'
   | 'listHeadPercentualProgressTooltip'
+  | 'listHeadActions'
 
 export default defineMessages<KeyResultListHeadMessage>({
   listHeadKeyResult: {
@@ -106,5 +107,12 @@ export default defineMessages<KeyResultListHeadMessage>({
     defaultMessage: 'Percentual de progresso entre o valor inicial e a meta',
     id: 'QEsnT8',
     description: 'This tooltip explains the fifth column of the key result list',
+  },
+
+  listHeadActions: {
+    defaultMessage: 'Ações',
+    id: 'QKkwxU',
+    description:
+      'This message is displayed as the column header for the key-result table in the actions column',
   },
 })

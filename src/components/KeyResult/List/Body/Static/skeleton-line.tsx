@@ -12,6 +12,7 @@ import {
   KeyResultListBodyColumnOwnerSkeleton,
   KeyResultListBodyColumnConfidenceLevelColorSkeleton,
   KeyResultListBodyColumnPercentualProgressSkeleton,
+  KeyResultListBodyColumnActionsSkeleton,
 } from 'src/components/KeyResult/List/Body/Columns'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
@@ -54,6 +55,7 @@ const KeyResultListBodyStaticSkeletonLine = ({
     [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]:
       KeyResultListBodyColumnConfidenceLevelColorSkeleton,
     [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: KeyResultListBodyColumnPercentualProgressSkeleton,
+    [KEY_RESULT_LIST_COLUMN.ACTIONS]: KeyResultListBodyColumnActionsSkeleton,
   }
 
   return (

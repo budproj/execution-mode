@@ -16,7 +16,7 @@ const KeyResultListBodyColumnBase = ({
   }
 
   return (
-    <GridItem py={6} onClick={preventLineClickHandler} {...rest}>
+    <GridItem py={6} onMouseDownCapture={preventLineClickHandler} {...rest}>
       {children}
     </GridItem>
   )

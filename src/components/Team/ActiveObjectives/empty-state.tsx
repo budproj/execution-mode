@@ -17,7 +17,7 @@ export const TeamActiveObjectivesEmptyState = () => {
       </Heading>
 
       <Flex bg="white" w="full" h="full" alignContent="center" justifyContent="center" p={16}>
-        <EmptyState imageKey="pages" labelMessage={messages.emptyStateMessage} />
+        <EmptyState imageKey="people-with-pages" labelMessage={messages.emptyStateMessage} />
       </Flex>
     </Stack>
   )

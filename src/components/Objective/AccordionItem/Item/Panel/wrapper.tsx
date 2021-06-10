@@ -40,7 +40,7 @@ export const ObjectiveAccordionPanel = ({
     <AccordionPanel pb={0}>
       {isExpanded && (
         <>
-          <ObjectiveKeyResults objectiveID={objectiveID} />
+          <ObjectiveKeyResults objectiveID={objectiveID} mode={mode} />
           {showInsertButton && <InsertKeyResultButton objectiveID={objectiveID} />}
         </>
       )}

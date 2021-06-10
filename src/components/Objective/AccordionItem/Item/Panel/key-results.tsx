@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import uniqueId from 'lodash/uniqueId'
+import without from 'lodash/without'
 import React, { useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -14,11 +15,13 @@ import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-resul
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
+import { AccordionEntryMode } from '../../../../../state/recoil/objective/accordion'
 
 import queries from './queries.gql'
 
 export interface ObjectiveKeyResultsProperties {
   objectiveID?: Objective['id']
+  mode: AccordionEntryMode
 }
 
 export interface GetObjectiveKeyResultsQuery {
@@ -28,7 +31,7 @@ export interface GetObjectiveKeyResultsQuery {
 const selectKeyResultIDs = (keyResults?: KeyResult[]) =>
   keyResults?.map((keyResult) => keyResult.id)
 
-export const ObjectiveKeyResults = ({ objectiveID }: ObjectiveKeyResultsProperties) => {
+export const ObjectiveKeyResults = ({ objectiveID, mode }: ObjectiveKeyResultsProperties) => {
   const lastInsertedKeyResultID = useRecoilValue(lastInsertedKeyResultIDAtom)
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
@@ -48,8 +51,29 @@ export const ObjectiveKeyResults = ({ objectiveID }: ObjectiveKeyResultsProperti
   const keyResultListMatchesDataLength =
     called && !loading && data?.objective?.keyResults?.edges.length === keyResultIDs?.length
   const isLoading = !lastInsertedKeyResultID && !keyResultListMatchesDataLength
+  const isEditing = mode === AccordionEntryMode.EDIT
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
+  const templateColumns = isEditing ? '2fr 1fr 0.1fr 0.68fr 0.25fr' : '2fr 1fr 0.1fr 1fr'
+  const columns = without(
+    [
+      KEY_RESULT_LIST_COLUMN.KEY_RESULT,
+      KEY_RESULT_LIST_COLUMN.PROGRESS,
+      KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS,
+      KEY_RESULT_LIST_COLUMN.OWNER,
+      isEditing && KEY_RESULT_LIST_COLUMN.ACTIONS,
+    ],
+    false,
+  ) as KEY_RESULT_LIST_COLUMN[]
+
+  const handleKeyResultDelete = (id?: string) => {
+    if (!id) return
+
+    const filteredKeyResultEdges =
+      data?.objective?.keyResults?.edges.filter((edge) => edge.node.id !== id) ?? []
+
+    setKeyResultEdges(filteredKeyResultEdges)
+  }
 
   useEffect(() => {
     if (data) {
@@ -74,15 +98,13 @@ export const ObjectiveKeyResults = ({ objectiveID }: ObjectiveKeyResultsProperti
       pt={4}
       keyResultIDs={keyResultIDs}
       isLoading={isLoading}
-      templateColumns="2fr 1fr 0.1fr 1fr"
-      columns={[
-        KEY_RESULT_LIST_COLUMN.KEY_RESULT,
-        KEY_RESULT_LIST_COLUMN.PROGRESS,
-        KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS,
-        KEY_RESULT_LIST_COLUMN.OWNER,
-      ]}
+      templateColumns={templateColumns}
+      columns={columns}
       headProperties={{
         [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
+          hidden: true,
+        },
+        [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
           hidden: true,
         },
       }}
@@ -100,6 +122,10 @@ export const ObjectiveKeyResults = ({ objectiveID }: ObjectiveKeyResultsProperti
         [KEY_RESULT_LIST_COLUMN.OWNER]: {
           displayName: true,
           displayRole: true,
+          displayPicture: !isEditing,
+        },
+        [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
+          onDelete: handleKeyResultDelete,
         },
       }}
       onLineClick={handleLineClick}

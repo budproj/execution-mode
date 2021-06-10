@@ -37,3 +37,8 @@ export {
   KeyResultListBodyColumnPercentualProgressSkeleton,
   default as KeyResultListBodyColumnPercentualProgress,
 } from './PercentualProgress'
+
+export {
+  KeyResultListBodyColumnActionsSkeleton,
+  default as KeyResultListBodyColumnActions,
+} from './Actions'
