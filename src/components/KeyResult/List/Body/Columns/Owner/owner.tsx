@@ -31,10 +31,6 @@ export interface KeyResultListBodyColumnOwnerProperties
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 
-const handleMouseDownCapture = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-  event.stopPropagation()
-}
-
 const KeyResultListBodyColumnOwner = ({
   id,
   displayName,
