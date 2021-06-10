@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react'
 import KeyResultListBodyColumnBase from 'src/components/KeyResult/List/Body/Columns/Base'
 
 const KeyResultListBodyColumnActionsSkeleton = (): ReactElement => (
-  <KeyResultListBodyColumnBase preventLineClick justifySelf="flex-end">
+  <KeyResultListBodyColumnBase preventLineClick>
     <Skeleton w={12} h={12} borderRadius={4} />
   </KeyResultListBodyColumnBase>
 )

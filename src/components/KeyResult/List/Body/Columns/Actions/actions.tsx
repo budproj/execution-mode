@@ -26,7 +26,7 @@ const KeyResultListBodyColumnActions = ({
   const canDelete = keyResult?.policy?.delete === GraphQLEffect.ALLOW
 
   return (
-    <KeyResultListBodyColumnBase preventLineClick justifySelf="flex-end">
+    <KeyResultListBodyColumnBase preventLineClick>
       {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
     </KeyResultListBodyColumnBase>
   )
