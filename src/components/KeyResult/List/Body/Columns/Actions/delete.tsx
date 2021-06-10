@@ -12,13 +12,14 @@ import queries from './queries.gql'
 
 interface DeleteActionProperties {
   id?: string
+  onDelete?: (id?: string) => void
 }
 
 interface DeleteKeyResultMutationResult {
   deleteKeyResult: DeleteResult
 }
 
-export const DeleteAction = ({ id }: DeleteActionProperties) => {
+export const DeleteAction = ({ id, onDelete }: DeleteActionProperties) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const intl = useIntl()
   const toast = useToast()
@@ -41,6 +42,7 @@ export const DeleteAction = ({ id }: DeleteActionProperties) => {
 
   const handleDelete = async () => {
     await deleteKeyResult()
+    if (onDelete) onDelete(id)
   }
 
   useEffect(() => {

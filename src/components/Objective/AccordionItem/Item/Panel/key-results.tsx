@@ -66,6 +66,15 @@ export const ObjectiveKeyResults = ({ objectiveID, mode }: ObjectiveKeyResultsPr
     false,
   ) as KEY_RESULT_LIST_COLUMN[]
 
+  const handleKeyResultDelete = (id?: string) => {
+    if (!id) return
+
+    const filteredKeyResultEdges =
+      data?.objective?.keyResults?.edges.filter((edge) => edge.node.id !== id) ?? []
+
+    setKeyResultEdges(filteredKeyResultEdges)
+  }
+
   useEffect(() => {
     if (data) {
       loadObjective(data?.objective)
@@ -114,6 +123,9 @@ export const ObjectiveKeyResults = ({ objectiveID, mode }: ObjectiveKeyResultsPr
           displayName: true,
           displayRole: true,
           displayPicture: !isEditing,
+        },
+        [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
+          onDelete: handleKeyResultDelete,
         },
       }}
       onLineClick={handleLineClick}

@@ -14,10 +14,12 @@ import { DeleteAction } from './delete'
 export interface KeyResultListBodyColumnActionsProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
+  onDelete?: (id?: string) => void
 }
 
 const KeyResultListBodyColumnActions = ({
   id,
+  onDelete,
 }: KeyResultListBodyColumnActionsProperties): ReactElement => {
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
 
@@ -25,7 +27,7 @@ const KeyResultListBodyColumnActions = ({
 
   return (
     <KeyResultListBodyColumnBase preventLineClick justifySelf="flex-end">
-      {canDelete && <DeleteAction id={id} />}
+      {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
     </KeyResultListBodyColumnBase>
   )
 }
