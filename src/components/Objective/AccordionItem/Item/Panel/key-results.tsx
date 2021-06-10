@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import uniqueId from 'lodash/uniqueId'
 import without from 'lodash/without'
 import React, { useEffect } from 'react'
@@ -36,21 +36,22 @@ export const ObjectiveKeyResults = ({ objectiveID, mode }: ObjectiveKeyResultsPr
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-  const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
-  const { data, called, loading, refetch } = useQuery<GetObjectiveKeyResultsQuery>(
+  const [keyResults, setKeyResultEdges, keyResultEdges, isLoaded] = useConnectionEdges<KeyResult>()
+  const [getKeyResults, { called }] = useLazyQuery<GetObjectiveKeyResultsQuery>(
     queries.GET_OBJECTIVE_KEY_RESULTS,
     {
       fetchPolicy: 'network-only',
       variables: {
         objectiveID,
       },
+      onCompleted: (data) => {
+        loadObjective(data.objective)
+        setKeyResultEdges(data.objective.keyResults?.edges)
+      },
     },
   )
 
   const keyResultIDs = selectKeyResultIDs(keyResults)
-  const keyResultListMatchesDataLength =
-    called && !loading && data?.objective?.keyResults?.edges.length === keyResultIDs?.length
-  const isLoading = !lastInsertedKeyResultID && !keyResultListMatchesDataLength
   const isEditing = mode === AccordionEntryMode.EDIT
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
@@ -69,35 +70,28 @@ export const ObjectiveKeyResults = ({ objectiveID, mode }: ObjectiveKeyResultsPr
   const handleKeyResultDelete = (id?: string) => {
     if (!id) return
 
-    const filteredKeyResultEdges =
-      data?.objective?.keyResults?.edges.filter((edge) => edge.node.id !== id) ?? []
+    const filteredKeyResultEdges = keyResultEdges?.filter((edge) => edge.node.id !== id) ?? []
 
     setKeyResultEdges(filteredKeyResultEdges)
   }
 
   useEffect(() => {
-    if (data) {
-      loadObjective(data?.objective)
-      setKeyResultEdges(data.objective.keyResults?.edges)
+    if (isLoaded) {
+      loadKeyResults(keyResults)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, setKeyResultEdges])
+  }, [keyResults, isLoaded])
 
   useEffect(() => {
-    if (keyResults) loadKeyResults(keyResults)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keyResults])
-
-  useEffect(() => {
-    if (lastInsertedKeyResultID) void refetch()
-  }, [lastInsertedKeyResultID, refetch])
+    if (!called || lastInsertedKeyResultID) getKeyResults()
+  }, [called, lastInsertedKeyResultID, getKeyResults])
 
   return (
     <KeyResultList
       id={`OBJECTIVE_${objectiveID ?? uniqueId()}_ACCORDION`}
       pt={4}
       keyResultIDs={keyResultIDs}
-      isLoading={isLoading}
+      isLoading={!isLoaded}
       templateColumns={templateColumns}
       columns={columns}
       headProperties={{

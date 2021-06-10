@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import uniqBy from 'lodash/uniqBy'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
@@ -40,7 +40,6 @@ const groupObjectivesByCycle = (objectives?: Objective[]): Array<[Cycle, string[
 }
 
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
-  const [cycleObjectives, setCycleObjectives] = useState<Array<[Cycle, string[]]>>([])
   const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const { data, loading, called } = useQuery<GetTeamActiveObjectivesQuery>(
     queries.GET_TEAM_ACTIVE_OBJECTIVES,
@@ -53,6 +52,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
 
   const isLoaded = called && !loading
   const syncedWithLocalState = data?.team.objectives?.edges.length === objectives.length
+  const groupedObjectivesByCycle = groupObjectivesByCycle(objectives)
 
   useEffect(() => {
     if (data) setObjectiveEdges(data?.team.objectives?.edges)
@@ -64,21 +64,13 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     }
   }, [objectives, loadObjectivesOnRecoil])
 
-  useEffect(() => {
-    if (objectives) {
-      const groupedObjectivesByCycle = groupObjectivesByCycle(objectives)
-
-      setCycleObjectives(groupedObjectivesByCycle)
-    }
-  }, [objectives, setCycleObjectives])
-
   return (
     <Stack spacing={12} h="full">
       {isLoaded ? (
-        syncedWithLocalState && isLoaded && cycleObjectives.length === 0 ? (
+        syncedWithLocalState && isLoaded && groupedObjectivesByCycle.length === 0 ? (
           <TeamActiveObjectivesEmptyState />
         ) : (
-          cycleObjectives.map(([cycle, objectiveIDs]) => (
+          groupedObjectivesByCycle.map(([cycle, objectiveIDs]) => (
             <ObjectivesFromCycle
               key={cycle.id}
               cycle={cycle}
