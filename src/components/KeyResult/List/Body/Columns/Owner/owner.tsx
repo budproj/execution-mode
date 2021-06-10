@@ -58,11 +58,10 @@ const KeyResultListBodyColumnOwner = ({
       display="flex"
       cursor="auto"
       justifyContent={justifyContent}
-      onMouseDownCapture={handleMouseDownCapture}
     >
       <Popover placement="top-end" size="sm">
         <PopoverTrigger>
-          <Flex alignItems="center" gridGap={4}>
+          <Flex alignItems="center" gridGap={4} cursor="pointer">
             {displayPicture && (
               <SkeletonCircle size="48px" isLoaded={isOwnerLoaded}>
                 <UserAvatar
