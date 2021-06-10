@@ -12,8 +12,8 @@ type ConfirmationDialogMessage =
 
 export default defineMessages<ConfirmationDialogMessage>({
   firstDialogTitle: {
-    defaultMessage: 'Tem certeza que deseja excluir este {type}',
-    id: 'vsM0eW',
+    defaultMessage: 'Tem certeza que deseja excluir este {type}?',
+    id: 'IvHtzb',
     description:
       'This message is displayed as the title for the first confirmation modal while removing a given resource',
   },

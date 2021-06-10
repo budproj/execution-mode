@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultListBodyColumnActionsMessage = 'deleteIconDesc' | 'deleteDialogType'
+type KeyResultListBodyColumnActionsMessage =
+  | 'deleteIconDesc'
+  | 'deleteDialogType'
+  | 'deleteFirstDialogDescription'
 
 export default defineMessages<KeyResultListBodyColumnActionsMessage>({
   deleteIconDesc: {
@@ -15,5 +18,12 @@ export default defineMessages<KeyResultListBodyColumnActionsMessage>({
     id: 'h/WXZ6',
     description:
       'This message is used as the type to display in some of the delete dialogs while removing a given key-result',
+  },
+
+  deleteFirstDialogDescription: {
+    defaultMessage: 'Você perderá todos os check-ins e comentários feitos até aqui.',
+    id: 'FRO0CY',
+    description:
+      'This message is used as the description in our first dialog while removing a key-result',
   },
 })

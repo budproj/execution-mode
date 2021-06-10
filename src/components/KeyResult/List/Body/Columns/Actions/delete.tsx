@@ -49,6 +49,7 @@ export const DeleteAction = ({ id }: DeleteActionProperties) => {
         dangerousAction
         isOpen={isDialogOpen}
         type={intl.formatMessage(messages.deleteDialogType)}
+        description={intl.formatMessage(messages.deleteFirstDialogDescription)}
         onClose={handleClose}
       />
     </>
