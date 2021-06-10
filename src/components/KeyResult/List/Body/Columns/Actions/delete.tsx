@@ -23,6 +23,10 @@ export const DeleteAction = ({ id }: DeleteActionProperties) => {
     if (isDialogOpen) setIsDialogOpen(false)
   }
 
+  const handleDelete = () => {
+    console.log(id, 'tag')
+  }
+
   return (
     <>
       <IconButton
@@ -51,6 +55,7 @@ export const DeleteAction = ({ id }: DeleteActionProperties) => {
         type={intl.formatMessage(messages.deleteDialogType)}
         description={intl.formatMessage(messages.deleteFirstDialogDescription)}
         onClose={handleClose}
+        onConfirm={handleDelete}
       />
     </>
   )

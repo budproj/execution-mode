@@ -1,50 +1,50 @@
 import { defineMessages } from 'react-intl'
 
 type ConfirmationDialogMessage =
-  | 'firstDialogTitle'
-  | 'secondDialogTitle'
-  | 'secondDialogDescription'
-  | 'secondDialogInputLabel'
-  | 'secondDialogPlaceholder'
+  | 'confirmationDialogTitle'
+  | 'dangerDialogTitle'
+  | 'dangerDialogDescription'
+  | 'dangerDialogInputLabel'
+  | 'dangerDialogPlaceholder'
   | 'dialogConfirmationButton'
   | 'dialogCancelButton'
   | 'defaultKeyword'
 
 export default defineMessages<ConfirmationDialogMessage>({
-  firstDialogTitle: {
+  confirmationDialogTitle: {
     defaultMessage: 'Tem certeza que deseja excluir este {type}?',
-    id: 'IvHtzb',
+    id: 'zQoORA',
     description:
-      'This message is displayed as the title for the first confirmation modal while removing a given resource',
+      'This message is displayed as the title for the confirmation modal while removing a given resource',
   },
 
-  secondDialogTitle: {
+  dangerDialogTitle: {
     defaultMessage: 'Atenção! Esta ação não pode ser desfeita',
-    id: 'UW67Oq',
+    id: 'xwbI5E',
     description:
-      'This message is displayed as the title for the second confirmation modal while removing a given resource',
+      'This message is displayed as the title for the danger confirmation modal while removing a given resource',
   },
 
-  secondDialogDescription: {
+  dangerDialogDescription: {
     defaultMessage:
       'Se realmente tem certeza de que deseja excluir este {type}, confirme sua ação escrevendo “EXCLUIR” no campo abaixo:',
-    id: 'nNymjR',
+    id: 'hzOI/d',
     description:
-      'This message is displayed as the description for the second confirmation modal while removing a given resource',
+      'This message is displayed as the description for the danger confirmation modal while removing a given resource',
   },
 
-  secondDialogInputLabel: {
+  dangerDialogInputLabel: {
     defaultMessage: 'Confirme sua ação',
-    id: 'tMTL/d',
+    id: 'aT1RWB',
     description:
-      'This message is displayed as the input label for the second delete resource dialog',
+      'This message is displayed as the input label for the danger delete resource dialog',
   },
 
-  secondDialogPlaceholder: {
+  dangerDialogPlaceholder: {
     defaultMessage: 'Escreva {keyword} para confirmar a exclusão',
-    id: '2q3pxG',
+    id: '9lxU9H',
     description:
-      'This message appears as a placeholder on the input in the second confirmation modal while deleting a given resource',
+      'This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource',
   },
 
   dialogConfirmationButton: {
