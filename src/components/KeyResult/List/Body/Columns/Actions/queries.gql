@@ -1,0 +1,5 @@
+mutation DELETE_KEY_RESULT($keyResultID: ID!) {
+  deleteKeyResult(id: $keyResultID) {
+    affected
+  }
+}

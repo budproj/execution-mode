@@ -1,19 +1,35 @@
-import { IconButton } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { IconButton, useToast } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ConfirmationDialog } from '../../../../../Base/ConfirmationDialog/wrapper'
 import { TrashBinOutlineIcon } from '../../../../../Icon/TrashBinOutline/trash-bin-outline'
+import { DeleteResult } from '../../../../../types'
 
 import messages from './messages'
+import queries from './queries.gql'
 
 interface DeleteActionProperties {
   id?: string
 }
 
+interface DeleteKeyResultMutationResult {
+  deleteKeyResult: DeleteResult
+}
+
 export const DeleteAction = ({ id }: DeleteActionProperties) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const intl = useIntl()
+  const toast = useToast()
+  const [deleteKeyResult, { data, error }] = useMutation<DeleteKeyResultMutationResult>(
+    queries.DELETE_KEY_RESULT,
+    {
+      variables: {
+        keyResultID: id,
+      },
+    },
+  )
 
   const handleOpen = () => {
     if (!isDialogOpen) setIsDialogOpen(true)
@@ -23,9 +39,27 @@ export const DeleteAction = ({ id }: DeleteActionProperties) => {
     if (isDialogOpen) setIsDialogOpen(false)
   }
 
-  const handleDelete = () => {
-    console.log(id, 'tag')
+  const handleDelete = async () => {
+    await deleteKeyResult()
   }
+
+  useEffect(() => {
+    if (data) {
+      toast({
+        title: intl.formatMessage(messages.deleteSuccessToastMessage),
+        status: 'success',
+      })
+    }
+  }, [data, toast, intl])
+
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: intl.formatMessage(messages.deleteErrorToastMessage),
+        status: 'error',
+      })
+    }
+  }, [error, toast, intl])
 
   return (
     <>

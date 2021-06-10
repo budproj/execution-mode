@@ -38,3 +38,7 @@ export enum Scope {
   COMPANY = 'COMPANY',
   ANY = 'ANY',
 }
+
+export interface DeleteResult {
+  affected: number
+}
