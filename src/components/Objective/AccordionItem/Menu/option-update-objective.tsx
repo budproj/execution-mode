@@ -8,7 +8,7 @@ import { stopAccordionOpen } from '../handlers'
 import messages from './messages'
 import { ObjectiveMenuOption } from './option-base'
 
-interface UpdateObjectiveOptionsProperties {
+interface UpdateObjectiveOptionProperties {
   accordionIndex: number
   accordionID?: string
 }
@@ -16,7 +16,7 @@ interface UpdateObjectiveOptionsProperties {
 export const UpdateObjectiveOption = ({
   accordionID,
   accordionIndex,
-}: UpdateObjectiveOptionsProperties) => {
+}: UpdateObjectiveOptionProperties) => {
   const setObjectiveToEditMode = useSetRecoilState(
     objectiveAccordionIndexesBeingEdited(accordionID),
   )
