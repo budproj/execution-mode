@@ -21,6 +21,7 @@ interface ObjectiveAccordionMenuProperties {
   objectiveID?: string
   isLoaded?: boolean
   accordionID?: string
+  onObjetiveDelete?: (objectiveID?: string) => void
 }
 
 export const ObjectiveAccordionMenu = ({
@@ -29,6 +30,7 @@ export const ObjectiveAccordionMenu = ({
   isLoaded,
   accordionID,
   accordionIndex,
+  onObjetiveDelete,
 }: ObjectiveAccordionMenuProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(teamID))
@@ -69,7 +71,9 @@ export const ObjectiveAccordionMenu = ({
           {canUpdateObjective && (
             <UpdateObjectiveOption accordionID={accordionID} accordionIndex={accordionIndex} />
           )}
-          {canDeleteObjective && <DeleteObjectiveOption objectiveID={objectiveID} />}
+          {canDeleteObjective && (
+            <DeleteObjectiveOption objectiveID={objectiveID} onDelete={onObjetiveDelete} />
+          )}
         </MenuList>
       </Menu>
     </Skeleton>

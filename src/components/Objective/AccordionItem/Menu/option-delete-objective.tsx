@@ -46,7 +46,7 @@ export const DeleteObjectiveOption = ({
   }
 
   const handleDelete = async () => {
-    await deleteObjective()
+    // Await deleteObjective()
     if (onDelete) onDelete(objectiveID)
   }
 
