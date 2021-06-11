@@ -12,6 +12,7 @@ import messages from '../Item/Button/messages'
 import { stopAccordionOpen } from '../handlers'
 
 import { CreateKeyResultOption } from './option-create-key-result'
+import { DeleteObjectiveOption } from './option-delete-objective'
 import { UpdateObjectiveOption } from './option-update-objective'
 
 interface ObjectiveAccordionMenuProperties {
@@ -35,7 +36,8 @@ export const ObjectiveAccordionMenu = ({
 
   const canCreateKeyResult = team?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
-  const hasAnyOptions = !isLoaded || canCreateKeyResult || canUpdateObjective
+  const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
+  const hasAnyOptions = !isLoaded || canCreateKeyResult || canUpdateObjective || canDeleteObjective
 
   return (
     <Skeleton isLoaded={isLoaded} display={hasAnyOptions ? 'inherit' : 'none'}>
@@ -67,6 +69,7 @@ export const ObjectiveAccordionMenu = ({
           {canUpdateObjective && (
             <UpdateObjectiveOption accordionID={accordionID} accordionIndex={accordionIndex} />
           )}
+          {canDeleteObjective && <DeleteObjectiveOption objectiveID={objectiveID} />}
         </MenuList>
       </Menu>
     </Skeleton>

@@ -20,6 +20,7 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
           }
           policy {
             update
+            delete
           }
         }
       }

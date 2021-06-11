@@ -8,11 +8,11 @@ import { stopAccordionOpen } from '../handlers'
 import messages from './messages'
 import { ObjectiveMenuOption } from './option-base'
 
-interface CreateKeyResultOptionsProperties {
+interface CreateKeyResultOptionProperties {
   objectiveID?: string
 }
 
-export const CreateKeyResultOption = ({ objectiveID }: CreateKeyResultOptionsProperties) => {
+export const CreateKeyResultOption = ({ objectiveID }: CreateKeyResultOptionProperties) => {
   const intl = useIntl()
   const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
 

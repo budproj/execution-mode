@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type ObjectiveAccordionMenuMessage = 'firstMenuOption' | 'secondMenuOption'
+type ObjectiveAccordionMenuMessage = 'firstMenuOption' | 'secondMenuOption' | 'thirdMenuOption'
 
 export default defineMessages<ObjectiveAccordionMenuMessage>({
   firstMenuOption: {
@@ -15,5 +15,12 @@ export default defineMessages<ObjectiveAccordionMenuMessage>({
     id: 'd7EKd5',
     description:
       'This is the second option that appears when you open the menu of a given objective inside the accordion button',
+  },
+
+  thirdMenuOption: {
+    defaultMessage: 'Excluir este OKR',
+    id: '6BeRhq',
+    description:
+      'This is the third option that appears when you open the menu of a given objective inside the accordion button',
   },
 })
