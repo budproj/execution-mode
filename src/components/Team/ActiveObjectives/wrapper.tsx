@@ -45,7 +45,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [objectives, setObjectiveEdges, _, isLoaded] = useConnectionEdges<Objective>()
-  const { data } = useQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
+  const { called } = useQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
     fetchPolicy: 'no-cache',
     variables: { teamID },
     onCompleted: (data) => {
@@ -56,8 +56,8 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   const groupedObjectivesByCycle = groupObjectivesByCycle(objectives)
 
   useEffect(() => {
-    if (activeObjectives) setObjectiveEdges(activeObjectives)
-  }, [activeObjectives, setObjectiveEdges])
+    if (called && activeObjectives) setObjectiveEdges(activeObjectives)
+  }, [called, activeObjectives, setObjectiveEdges])
 
   useEffect(() => {
     if (objectives) loadObjectivesOnRecoil(objectives)
