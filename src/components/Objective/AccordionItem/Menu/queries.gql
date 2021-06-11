@@ -1,0 +1,5 @@
+mutation DELETE_OBJECTIVE($objectiveID: ID!) {
+  deleteObjective(id: $objectiveID) {
+    affected
+  }
+}

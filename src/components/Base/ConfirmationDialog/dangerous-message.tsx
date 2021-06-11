@@ -33,7 +33,7 @@ export const DangerousMessage = ({
 
   const handleTypedKeywordChange = (event: ChangeEvent<HTMLInputElement>) => {
     const typedKeyword = event.target.value
-    setIsValidKeyword(typedKeyword === keyword)
+    setIsValidKeyword(typedKeyword.toUpperCase() === keyword?.toUpperCase())
   }
 
   const handleConfirmation = () => {
