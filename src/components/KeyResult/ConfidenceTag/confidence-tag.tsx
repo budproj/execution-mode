@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import TooltipWithRichText from 'src/components/Base/TooltipWithRichText'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
-import { COLOR_SCHEME } from 'src/themes/tokens'
 
 import ConfidenceTagTooltipWithRichText from './rich-tooltip'
 
@@ -25,10 +24,6 @@ const ConfidenceTag = ({
     if (typeof confidenceValue !== 'undefined') setConfidence(confidenceValue)
   }, [confidenceValue, setConfidence])
 
-  const textColor =
-    confidenceTag.color.scheme === COLOR_SCHEME.YELLOW ? 'yellow.600' : confidenceTag.color.primary
-  const bgColor = confidenceTag.color.light
-
   return (
     <Box>
       <TooltipWithRichText
@@ -41,8 +36,8 @@ const ConfidenceTag = ({
           fontSize="xs"
           p={2}
           borderRadius={4}
-          bg={bgColor}
-          color={textColor}
+          bg={confidenceTag.color.light}
+          color={confidenceTag.color.primary}
         >
           {confidenceTag.messages.long}
         </Tag>

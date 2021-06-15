@@ -17,10 +17,16 @@ export interface ConfidenceTagMessages {
   helper: string
 }
 
-export interface ConfidenceTagColor {
-  scheme: string
+interface ConfidenceTagColorVariant {
   primary: string
   light: string
+}
+
+export interface ConfidenceTagColor extends ConfidenceTagColorVariant {
+  scheme: string
+  variants: {
+    sharp: ConfidenceTagColorVariant
+  }
 }
 
 export type ConfidenceTagHook = [ConfidenceTag, Dispatch<SetStateAction<number>>]
@@ -76,6 +82,12 @@ export const useConfidenceTag = (
         scheme: 'green',
         primary: 'green.500',
         light: 'green.50',
+        variants: {
+          sharp: {
+            primary: 'green.500',
+            light: 'green.100',
+          },
+        },
       },
     },
 
@@ -88,8 +100,14 @@ export const useConfidenceTag = (
       },
       color: {
         scheme: 'yellow',
-        primary: 'yellow.500',
-        light: 'yellow.50',
+        primary: 'yellow.700',
+        light: 'yellow.100',
+        variants: {
+          sharp: {
+            primary: 'yellow.600',
+            light: 'yellow.200',
+          },
+        },
       },
     },
 
@@ -104,6 +122,12 @@ export const useConfidenceTag = (
         scheme: 'red',
         primary: 'red.500',
         light: 'red.50',
+        variants: {
+          sharp: {
+            primary: 'red.500',
+            light: 'red.100',
+          },
+        },
       },
     },
 
@@ -118,6 +142,12 @@ export const useConfidenceTag = (
         scheme: 'purple',
         primary: 'purple.500',
         light: 'purple.50',
+        variants: {
+          sharp: {
+            primary: 'purple.500',
+            light: 'purple.100',
+          },
+        },
       },
     },
   }

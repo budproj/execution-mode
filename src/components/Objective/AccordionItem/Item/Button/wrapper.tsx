@@ -48,8 +48,8 @@ export const ObjectiveAccordionButton = ({
             progress={roundedProgress}
             isLoaded={isLoaded}
             size={14}
-            color={confidenceTag?.color.primary}
-            trackColor={confidenceTag?.color.light}
+            color={confidenceTag?.color.variants.sharp.primary}
+            trackColor={confidenceTag?.color.variants.sharp.light}
           />
         </Box>
       </TooltipWithDelay>
