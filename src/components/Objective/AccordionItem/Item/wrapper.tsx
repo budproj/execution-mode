@@ -14,6 +14,7 @@ export interface ObjectiveAccordionItemProperties {
   objectiveID?: Objective['id']
   teamID?: string
   accordionID?: string
+  isDisabled?: boolean
 }
 
 const ObjectiveAccordionItem = ({
@@ -21,6 +22,7 @@ const ObjectiveAccordionItem = ({
   teamID,
   index,
   accordionID,
+  isDisabled,
 }: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const [confidenceTag, setConfidence] = useConfidenceTag(objective?.status?.confidence)
@@ -48,6 +50,7 @@ const ObjectiveAccordionItem = ({
             isLoaded={isLoaded}
             accordionID={accordionID}
             accordionIndex={index}
+            isDisabled={isDisabled}
           />
           <ObjectiveAccordionPanel
             isExpanded={isExpanded}
@@ -55,6 +58,7 @@ const ObjectiveAccordionItem = ({
             accordionIndex={index}
             accordionID={accordionID}
             teamID={teamID}
+            isDisabled={isDisabled}
           />
         </>
       )}

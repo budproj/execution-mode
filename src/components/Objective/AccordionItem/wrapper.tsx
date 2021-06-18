@@ -16,6 +16,7 @@ interface ObjectiveAccordionProperties {
   objectiveIDs: string[]
   accordionID?: string
   teamID?: string
+  isDisabled?: boolean
 }
 
 export const ObjectiveAccordion = ({
@@ -23,6 +24,7 @@ export const ObjectiveAccordion = ({
   objectiveIDs,
   teamID,
   accordionID,
+  isDisabled,
 }: ObjectiveAccordionProperties) => {
   const setIndexesState = useSetRecoilState(objectiveAccordionEntryModes(accordionID))
   const [accordionExpandedIndexes, setAccordionExpandedIndexes] = useRecoilState(
@@ -51,6 +53,7 @@ export const ObjectiveAccordion = ({
             teamID={teamID}
             accordionID={accordionID}
             index={index}
+            isDisabled={isDisabled}
           />
         ))
       ) : (

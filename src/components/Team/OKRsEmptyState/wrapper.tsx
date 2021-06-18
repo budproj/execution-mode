@@ -7,7 +7,7 @@ import { EmptyState } from '../../Base'
 
 import messages from './messages'
 
-export const TeamActiveObjectivesEmptyState = () => {
+export const TeamOKRsEmptyState = () => {
   const intl = useIntl()
 
   return (

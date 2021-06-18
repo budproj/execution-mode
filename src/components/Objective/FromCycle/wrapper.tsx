@@ -16,6 +16,7 @@ export interface ObjectivesFromCycleProperties {
   objectiveIDs: string[]
   teamID?: string
   onViewOldCycles?: Action
+  isDisabled?: boolean
 }
 
 export const ObjectivesFromCycle = ({
@@ -23,6 +24,7 @@ export const ObjectivesFromCycle = ({
   objectiveIDs,
   teamID,
   onViewOldCycles,
+  isDisabled,
 }: ObjectivesFromCycleProperties) => {
   const intl = useIntl()
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
@@ -57,6 +59,7 @@ export const ObjectivesFromCycle = ({
         objectiveIDs={objectiveIDs}
         teamID={teamID}
         accordionID={cycle?.id}
+        isDisabled={isDisabled}
       />
     </Stack>
   )

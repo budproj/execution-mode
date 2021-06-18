@@ -20,6 +20,7 @@ export interface ObjectiveAccordionPanelProperties {
   accordionID?: string
   objectiveID?: Objective['id']
   teamID?: string
+  isDisabled?: boolean
 }
 
 export const ObjectiveAccordionPanel = ({
@@ -28,6 +29,7 @@ export const ObjectiveAccordionPanel = ({
   accordionID,
   accordionIndex,
   teamID,
+  isDisabled,
 }: ObjectiveAccordionPanelProperties) => {
   const team = useRecoilValue(teamAtomFamily(teamID))
   const accordionEntryModes = useRecoilValue(objectiveAccordionEntryModes(accordionID))
@@ -40,8 +42,8 @@ export const ObjectiveAccordionPanel = ({
     <AccordionPanel pb={0}>
       {isExpanded && (
         <>
-          <ObjectiveKeyResults objectiveID={objectiveID} mode={mode} />
-          {showInsertButton && <InsertKeyResultButton objectiveID={objectiveID} />}
+          <ObjectiveKeyResults objectiveID={objectiveID} mode={mode} isDisabled={isDisabled} />
+          {showInsertButton && !isDisabled && <InsertKeyResultButton objectiveID={objectiveID} />}
         </>
       )}
     </AccordionPanel>

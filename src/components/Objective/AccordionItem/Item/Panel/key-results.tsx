@@ -22,6 +22,7 @@ import queries from './queries.gql'
 export interface ObjectiveKeyResultsProperties {
   objectiveID?: Objective['id']
   mode: AccordionEntryMode
+  isDisabled?: boolean
 }
 
 export interface GetObjectiveKeyResultsQuery {
@@ -31,7 +32,11 @@ export interface GetObjectiveKeyResultsQuery {
 const selectKeyResultIDs = (keyResults?: KeyResult[]) =>
   keyResults?.map((keyResult) => keyResult.id)
 
-export const ObjectiveKeyResults = ({ objectiveID, mode }: ObjectiveKeyResultsProperties) => {
+export const ObjectiveKeyResults = ({
+  objectiveID,
+  mode,
+  isDisabled,
+}: ObjectiveKeyResultsProperties) => {
   const lastInsertedKeyResultID = useRecoilValue(lastInsertedKeyResultIDAtom)
   const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
@@ -106,12 +111,15 @@ export const ObjectiveKeyResults = ({ objectiveID, mode }: ObjectiveKeyResultsPr
         [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
           withLastUpdateInfo: true,
           withDynamicIcon: true,
+          isDisabled,
         },
         [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
           withConfidenceTag: true,
+          isActive: !isDisabled,
+          isDisabled,
         },
         [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
-          isDisabled: true,
+          isDisabled,
         },
         [KEY_RESULT_LIST_COLUMN.OWNER]: {
           displayName: true,

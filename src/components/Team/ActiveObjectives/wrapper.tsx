@@ -15,10 +15,10 @@ import {
 import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnection } from '../../types'
+import { TeamOKRsEmptyState } from '../OKRsEmptyState/wrapper'
+import { TeamOKRsSkeleton } from '../OKRsSkeleton/wrapper'
 
-import { TeamActiveObjectivesEmptyState } from './empty-state'
 import queries from './queries.gql'
-import { TeamActiveObjectivesSkeleton } from './skeleton'
 
 export interface TeamActiveObjectivesProperties {
   teamID: string
@@ -39,8 +39,8 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
 
-  const [objectiveEdges, setObjectiveEdges] = useConnectionEdges<Objective>()
-  const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
+  const [objectiveEdges, setObjectiveEdges, _, isLoaded] = useConnectionEdges<Objective>()
+  const [cycles, setCycleObjectives, cycleObjectives] = useCycleObjectives()
 
   const { called } = useQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
     fetchPolicy: 'no-cache',
@@ -71,7 +71,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     <Stack spacing={12} h="full">
       {isLoaded ? (
         cycles.length === 0 ? (
-          <TeamActiveObjectivesEmptyState />
+          <TeamOKRsEmptyState />
         ) : (
           cycles.map(([cycle, objectiveIDs]) => (
             <ObjectivesFromCycle
@@ -84,7 +84,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
           ))
         )
       ) : (
-        <TeamActiveObjectivesSkeleton />
+        <TeamOKRsSkeleton />
       )}
     </Stack>
   )

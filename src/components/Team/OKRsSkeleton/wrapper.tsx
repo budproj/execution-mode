@@ -7,9 +7,7 @@ export interface ChildTeamsObjectivesSkeletonProperties {
   numOfSkeletons?: number
 }
 
-export const TeamActiveObjectivesSkeleton = ({
-  numOfSkeletons,
-}: ChildTeamsObjectivesSkeletonProperties) => {
+export const TeamOKRsSkeleton = ({ numOfSkeletons }: ChildTeamsObjectivesSkeletonProperties) => {
   numOfSkeletons ??= 1
 
   return (
