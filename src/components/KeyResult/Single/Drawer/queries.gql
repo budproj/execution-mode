@@ -2,7 +2,6 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
   keyResult(id: $id) {
     id
     title
-    isOutdated
     description
     goal
     initialValue
@@ -17,9 +16,12 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
         create
       }
     }
-    latestKeyResultCheckIn {
-      id
-      createdAt
+    status {
+      isOutdated
+      latestCheckIn {
+        id
+        createdAt
+      }
     }
     owner {
       fullName
