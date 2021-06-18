@@ -10,13 +10,15 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
           type
           goal
           initialValue
-          isOutdated
-          latestKeyResultCheckIn {
-            id
-            value
-            confidence
-            progress
-            createdAt
+          status {
+            isOutdated
+            latestKeyResultCheckIn {
+              id
+              value
+              confidence
+              progress
+              createdAt
+            }
           }
           owner {
             id
