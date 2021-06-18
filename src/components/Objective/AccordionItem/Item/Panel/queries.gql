@@ -12,7 +12,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
           initialValue
           status {
             isOutdated
-            latestKeyResultCheckIn {
+            latestCheckIn {
               id
               value
               confidence
