@@ -11,7 +11,7 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { KeyResultInsertDrawer } from '../../KeyResult/InsertDrawer/wrapper'
-import { TeamActiveObjectives } from '../../Team/ActiveObjectives/wrapper'
+import { TeamObjectives } from '../../Team/Objectives/wrapper'
 
 import { ChildTeamsWrapper } from './ChildTeams/wrapper'
 import { TeamHeader } from './Header/wrapper'
@@ -58,7 +58,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
 
           <Stack direction="row" spacing={8} maxH="100%">
             <Box flexGrow={1}>
-              <TeamActiveObjectives teamID={teamId} />
+              <TeamObjectives teamID={teamId} />
             </Box>
 
             <Stack spacing="8" w="md" minW="md" maxH="4xl">

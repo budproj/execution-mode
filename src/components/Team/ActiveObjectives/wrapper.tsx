@@ -2,12 +2,16 @@ import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import uniqBy from 'lodash/uniqBy'
 import React, { useEffect, useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../state/recoil/objective'
 import { teamActiveObjectives } from '../../../state/recoil/team/active-objectives'
+import {
+  ObjectivesViewMode,
+  teamObjectivesViewMode,
+} from '../../../state/recoil/team/objectives-view-mode'
 import { Cycle } from '../../Cycle/types'
 import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
 import { Objective } from '../../Objective/types'
@@ -50,6 +54,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
   const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
+  const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [objectives, setObjectiveEdges, _, isLoaded] = useConnectionEdges<Objective>()
   const { called } = useQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
     fetchPolicy: 'no-cache',
@@ -63,7 +68,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   const groupedObjectivesByCycle = groupObjectivesByCycle(objectives)
 
   const handleViewOldCycles = () => {
-    console.log('tag')
+    setObjectivesViewMode(ObjectivesViewMode.NOT_ACTIVE)
   }
 
   useEffect(() => {
