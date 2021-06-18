@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import uniqBy from 'lodash/uniqBy'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
@@ -11,7 +11,7 @@ import { teamActiveObjectives } from '../../../state/recoil/team/active-objectiv
 import { Cycle } from '../../Cycle/types'
 import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
 import { Objective } from '../../Objective/types'
-import { Team } from '../types'
+import { GraphQLConnection } from '../../types'
 
 import { TeamActiveObjectivesEmptyState } from './empty-state'
 import queries from './queries.gql'
@@ -22,7 +22,12 @@ export interface TeamActiveObjectivesProperties {
 }
 
 export interface GetTeamActiveObjectivesQuery {
-  team: Partial<Team>
+  team: {
+    id: string
+    name: string
+    activeObjectives: GraphQLConnection<Objective>
+    notActiveObjectives: GraphQLConnection<Objective>
+  }
 }
 
 const groupObjectivesByCycle = (objectives?: Objective[]): Array<[Cycle, string[]]> => {
@@ -42,6 +47,7 @@ const groupObjectivesByCycle = (objectives?: Objective[]): Array<[Cycle, string[
 }
 
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
+  const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
   const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [objectives, setObjectiveEdges, _, isLoaded] = useConnectionEdges<Objective>()
@@ -49,11 +55,16 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     fetchPolicy: 'no-cache',
     variables: { teamID },
     onCompleted: (data) => {
-      setActiveObjectives(data.team.objectives?.edges ?? [])
+      setActiveObjectives(data.team.activeObjectives?.edges ?? [])
+      setHasNotActiveObjectives(data.team.notActiveObjectives.edges.length > 0)
     },
   })
 
   const groupedObjectivesByCycle = groupObjectivesByCycle(objectives)
+
+  const handleViewOldCycles = () => {
+    console.log('tag')
+  }
 
   useEffect(() => {
     if (called && activeObjectives) setObjectiveEdges(activeObjectives)
@@ -75,6 +86,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
               cycle={cycle}
               objectiveIDs={objectiveIDs}
               teamID={teamID}
+              onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
             />
           ))
         )

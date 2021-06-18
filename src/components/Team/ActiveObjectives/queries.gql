@@ -2,7 +2,7 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
   team(id: $teamID) {
     id
     name
-    objectives(active: true) {
+    activeObjectives: objectives(active: true) {
       edges {
         node {
           id
@@ -24,6 +24,13 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
             update
             delete
           }
+        }
+      }
+    }
+    notActiveObjectives: objectives(active: false, first: 1) {
+      edges {
+        node {
+          id
         }
       }
     }

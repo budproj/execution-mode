@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { useToast } from '@chakra-ui/react'
+import { MenuItem, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
@@ -10,7 +10,6 @@ import { DeleteResult } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 
 import messages from './messages'
-import { ObjectiveMenuOption } from './option-base'
 import queries from './queries.gql'
 
 interface DeleteObjectiveOptionProperties {
@@ -77,9 +76,7 @@ export const DeleteObjectiveOption = ({
 
   return (
     <>
-      <ObjectiveMenuOption onClick={handleClick}>
-        {intl.formatMessage(messages.thirdMenuOption)}
-      </ObjectiveMenuOption>
+      <MenuItem onClick={handleClick}>{intl.formatMessage(messages.thirdMenuOption)}</MenuItem>
       <ConfirmationDialog
         dangerousAction
         isOpen={isDialogOpen}

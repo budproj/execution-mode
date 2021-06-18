@@ -9,21 +9,26 @@ import { Cycle } from '../../Cycle/types'
 import messages from '../../KeyResult/CycleList/messages'
 import { ObjectiveAccordion } from '../AccordionItem/wrapper'
 
+import { Action, ActionMenu } from './action-menu'
+
 export interface ObjectivesFromCycleProperties {
   cycle?: Cycle
   objectiveIDs: string[]
   teamID?: string
+  onViewOldCycles?: Action
 }
 
 export const ObjectivesFromCycle = ({
   cycle,
   objectiveIDs,
   teamID,
+  onViewOldCycles,
 }: ObjectivesFromCycleProperties) => {
   const intl = useIntl()
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
 
   const isLoaded = Boolean(cycle)
+  const shouldDisplayActionMenu = Boolean(onViewOldCycles)
 
   useEffect(() => {
     if (cycle) setCadenceValue(cycle.cadence)
@@ -31,17 +36,21 @@ export const ObjectivesFromCycle = ({
 
   return (
     <Stack spacing={4}>
-      <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 21)}>
-        <Heading fontSize="sm" color="gray.500" textTransform="uppercase">
-          {intl
-            .formatMessage(messages.title, {
-              prefix: cadence.prefix,
-              cycle: cycle?.period,
-              suffix: cycle?.parent?.period,
-            })
-            .trim()}
-        </Heading>
-      </Skeleton>
+      <Stack direction="row" alignItems="center">
+        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 21)}>
+          <Heading fontSize="sm" color="gray.500" textTransform="uppercase">
+            {intl
+              .formatMessage(messages.title, {
+                prefix: cadence.prefix,
+                cycle: cycle?.period,
+                suffix: cycle?.parent?.period,
+              })
+              .trim()}
+          </Heading>
+        </Skeleton>
+
+        {shouldDisplayActionMenu && <ActionMenu onViewOldCycles={onViewOldCycles} />}
+      </Stack>
 
       <ObjectiveAccordion
         isLoaded={isLoaded}

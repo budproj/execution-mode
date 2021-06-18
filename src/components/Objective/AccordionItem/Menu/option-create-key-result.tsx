@@ -1,3 +1,4 @@
+import { MenuItem } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -6,7 +7,6 @@ import { keyResultInsertDrawerObjectiveID } from '../../../../state/recoil/key-r
 import { stopAccordionOpen } from '../handlers'
 
 import messages from './messages'
-import { ObjectiveMenuOption } from './option-base'
 
 interface CreateKeyResultOptionProperties {
   objectiveID?: string
@@ -21,9 +21,5 @@ export const CreateKeyResultOption = ({ objectiveID }: CreateKeyResultOptionProp
     stopAccordionOpen(event)
   }
 
-  return (
-    <ObjectiveMenuOption onClick={handleClick}>
-      {intl.formatMessage(messages.firstMenuOption)}
-    </ObjectiveMenuOption>
-  )
+  return <MenuItem onClick={handleClick}>{intl.formatMessage(messages.firstMenuOption)}</MenuItem>
 }

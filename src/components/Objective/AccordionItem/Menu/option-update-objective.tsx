@@ -1,3 +1,4 @@
+import { MenuItem } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -6,7 +7,6 @@ import { objectiveAccordionIndexesBeingEdited } from '../../../../state/recoil/o
 import { stopAccordionOpen } from '../handlers'
 
 import messages from './messages'
-import { ObjectiveMenuOption } from './option-base'
 
 interface UpdateObjectiveOptionProperties {
   accordionIndex: number
@@ -27,9 +27,5 @@ export const UpdateObjectiveOption = ({
     stopAccordionOpen(event)
   }
 
-  return (
-    <ObjectiveMenuOption onClick={handleClick}>
-      {intl.formatMessage(messages.secondMenuOption)}
-    </ObjectiveMenuOption>
-  )
+  return <MenuItem onClick={handleClick}>{intl.formatMessage(messages.secondMenuOption)}</MenuItem>
 }

@@ -8,9 +8,9 @@ import { objectiveAtomFamily } from '../../../../state/recoil/objective'
 import { teamAtomFamily } from '../../../../state/recoil/team'
 import TreeDotsIcon from '../../../Icon/TreeDots'
 import { GraphQLEffect } from '../../../types'
-import messages from '../Item/Button/messages'
 import { stopAccordionOpen } from '../handlers'
 
+import messages from './messages'
 import { CreateKeyResultOption } from './option-create-key-result'
 import { DeleteObjectiveOption } from './option-delete-objective'
 import { UpdateObjectiveOption } from './option-update-objective'
@@ -41,7 +41,7 @@ export const ObjectiveAccordionMenu = ({
 
   return (
     <Skeleton isLoaded={isLoaded} display={hasAnyOptions ? 'inherit' : 'none'}>
-      <Menu placement="bottom-end">
+      <Menu placement="bottom-end" variant="action-list">
         <MenuButton
           bg="black.100"
           borderRadius={4}
@@ -64,7 +64,7 @@ export const ObjectiveAccordionMenu = ({
             fill="currentColor"
           />
         </MenuButton>
-        <MenuList p={3} boxShadow="with-stroke.light" borderColor="new-gray.200" borderWidth={1}>
+        <MenuList>
           {canCreateKeyResult && <CreateKeyResultOption objectiveID={objectiveID} />}
           {canUpdateObjective && (
             <UpdateObjectiveOption accordionID={accordionID} accordionIndex={accordionIndex} />
