@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { GraphQLEdge, GraphQLNode } from 'src/components/types'
 
@@ -18,7 +18,7 @@ export const useConnectionEdges = <N extends GraphQLNode>(
   const [edges, setEdges] = useState(initialEdges)
   const [isLoaded, setIsLoaded] = useState(Boolean(initialEdges))
 
-  const nodes = marshalEdges(edges)
+  const nodes = useMemo(() => marshalEdges(edges), [edges])
 
   const update = useCallback(
     (newEdges?: Array<GraphQLEdge<N>>) => {

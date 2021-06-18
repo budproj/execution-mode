@@ -1,0 +1,23 @@
+query GET_TEAM_NOT_ACTIVE_OBJECTIVES($teamID: ID!) {
+  team(id: $teamID) {
+    id
+    name
+    objectives(active: false) {
+      edges {
+        node {
+          id
+          title
+          cycle {
+            id
+            period
+            cadence
+            dateEnd
+          }
+          status {
+            progress
+          }
+        }
+      }
+    }
+  }
+}
