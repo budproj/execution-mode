@@ -87,6 +87,10 @@
     "defaultMessage": "Numérico",
     "description": "This message is displayed inside our key-result format select as the title of the number format"
   },
+  "0R+aEr": {
+    "defaultMessage": "O resultado-chave foi removido com sucesso",
+    "description": "This message appears in a toast after the user removes a key-result"
+  },
   "0SQt21": {
     "defaultMessage": "Novo valor",
     "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
@@ -223,6 +227,10 @@
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
   },
+  "6BeRhq": {
+    "defaultMessage": "Excluir este OKR",
+    "description": "This is the third option that appears when you open the menu of a given objective inside the accordion button"
+  },
   "6E9X3c": {
     "defaultMessage": "Redefinir",
     "description": "This is the button label that is displayed in our reset button"
@@ -242,6 +250,10 @@
   "6spUEn": {
     "defaultMessage": "Fazer check-in",
     "description": "This message is displayed as a label button when the check-in form is closed in our key result section"
+  },
+  "6uAE86": {
+    "defaultMessage": "Criar Resultado-chave",
+    "description": "This message is used as the label to the create key-result button inside the objective accordion"
   },
   "6vXlkc": {
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
@@ -303,6 +315,10 @@
     "defaultMessage": "R$ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin BRL format"
   },
+  "9lxU9H": {
+    "defaultMessage": "Escreva {keyword} para confirmar a exclusão",
+    "description": "This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource"
+  },
   "9sw0lJ": {
     "defaultMessage": "Selecione seu gênero",
     "description": "This is the fallback value that goes on our user account settings page, at the sixth field to update the user informations. The fallback value appears if the user has no data at that field"
@@ -319,9 +335,25 @@
     "defaultMessage": "Visualize seus resultados-chave e seus detalhes, atualize seu progresso e seu nível de confiança.",
     "description": "The page description that is displayed in Google and screen readers"
   },
+  "Afdu+X": {
+    "defaultMessage": "Excluir {type}",
+    "description": "This message appears as a button label on the delete confirmation button"
+  },
   "B0G29o": {
     "defaultMessage": "Baixo",
     "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
+  },
+  "B3oV9s": {
+    "defaultMessage": "Objetivo atualizado com sucesso",
+    "description": "This text is displayed as a toast when the user clicks on the check button to update a given objective title"
+  },
+  "BYO0eO": {
+    "defaultMessage": "Um ícone de lixeira. Ao clicar nele você irá remover este resultado-chave",
+    "description": "This text is used by screen readers to explain our trash can icon, used to remove that line in the key-result table"
+  },
+  "BipZgy": {
+    "defaultMessage": "Desculpe, mas aconteceu um erro inesperado. Tente novamente mais tarde",
+    "description": "This text is displayed as a toast when the user tries to update an objective but an error occur"
   },
   "BydeYi": {
     "defaultMessage": "Início",
@@ -363,6 +395,10 @@
     "defaultMessage": "Meta",
     "description": "This tooltip is displayed when the user hovers the right side value of our progress bar"
   },
+  "DEMBaq": {
+    "defaultMessage": "Um ícone com o sinal de positivo, indicando que ao clicar aqui você irá abrir o painel para inserir um resultado-chave",
+    "description": "This message is used inside the objective accordion panel, on the insert key-result button"
+  },
   "DHoDPU": {
     "defaultMessage": "Salvar",
     "description": "This text is displayed as the button that will save the update for our goal update popover inside the key-result drawers"
@@ -402,6 +438,10 @@
   "FQaST6": {
     "defaultMessage": "Um ícone de X. Ao clicar nele você irá cancelar a edição deste campo",
     "description": "This text is used by screen readers to explain the X icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field"
+  },
+  "FRO0CY": {
+    "defaultMessage": "Você perderá todos os check-ins e comentários feitos até aqui.",
+    "description": "This message is used as the description in our first dialog while removing a key-result"
   },
   "FVnpVq": {
     "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
@@ -450,6 +490,10 @@
   "I+MSuS": {
     "defaultMessage": "Ver menos...",
     "description": "This text is displayed in the button that collapses the truncated text"
+  },
+  "IGHT6z": {
+    "defaultMessage": "Você perderá todos os resultados-chave deste OKR, incluindo todos os check-ins e comentários feitos até aqui.",
+    "description": "This message is used as the modal description while removing a given objective"
   },
   "IGODpK": {
     "defaultMessage": "Ciclo",
@@ -539,6 +583,10 @@
     "defaultMessage": "Uma seta para cima. Ao clicar nela você fechará o menu de seleção",
     "description": "This is the desc attribute of our chevron up icon. It is used by screen readers"
   },
+  "NMWZmv": {
+    "defaultMessage": "Este campo precisa conter algum valor",
+    "description": "This text is used inside the update objective fields when the user tries to make blank a given required field"
+  },
   "NOqI9i": {
     "defaultMessage": "Como está sua confiança?",
     "description": "This is the label of the check-in form that indicates to which confidence level the user would update her/his key result"
@@ -603,6 +651,10 @@
     "defaultMessage": "Fechar",
     "description": "This message is displayed when an user hovers the close button of our progress slider popover"
   },
+  "QKkwxU": {
+    "defaultMessage": "Ações",
+    "description": "This message is displayed as the column header for the key-result table in the actions column"
+  },
   "QMM2q6": {
     "defaultMessage": "Área",
     "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
@@ -634,6 +686,10 @@
   "RrW2fc": {
     "defaultMessage": "Atualize seu cargo",
     "description": "This is the fallback value that goes on our user account settings page, at the fifth field to update the user informations. The fallback value appears if the user has no data at that field"
+  },
+  "SDzYq9": {
+    "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
+    "description": "This message appears when the user tries to remove a given objective, but receives an error"
   },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
@@ -691,6 +747,10 @@
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
   },
+  "UN5BY2": {
+    "defaultMessage": "EXCLUIR",
+    "description": "This message is used as the default keyword to type to confirm while removing a given resource"
+  },
   "UUo+Pt": {
     "defaultMessage": "Este time é uma empresa",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
@@ -722,6 +782,10 @@
   "WiYOXK": {
     "defaultMessage": "Valor Inicial",
     "description": "This label appears above the fourth input in our insert key-result drawer"
+  },
+  "WkRV5L": {
+    "defaultMessage": "Cancelar",
+    "description": "This message appears as a cancel button in the modal while deleting a given resource"
   },
   "X2V7x7": {
     "defaultMessage": "Confiança",
@@ -807,6 +871,10 @@
     "defaultMessage": "A confiança mudou neste check-in:",
     "description": "This text is the first line of our icon tooltip when the check-in has a different confidence from the previous check-in"
   },
+  "aT1RWB": {
+    "defaultMessage": "Confirme sua ação",
+    "description": "This message is displayed as the input label for the danger delete resource dialog"
+  },
   "aVLR+w": {
     "defaultMessage": "100%",
     "description": "This message is displayed inside our key-result format select as the example of the percent format"
@@ -831,9 +899,17 @@
     "defaultMessage": "Fale com nosso suporte técnico",
     "description": "MainAppBar user menu third item option"
   },
+  "cRj0sI": {
+    "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
+    "description": "This message appears when the user tries to remove a given key-result, but receives an error"
+  },
   "ciNUJf": {
     "defaultMessage": "Explorar",
     "description": "MainAppBar menu item that links to teams \"Explore\" page"
+  },
+  "d7EKd5": {
+    "defaultMessage": "Editar este OKR",
+    "description": "This is the second option that appears when you open the menu of a given objective inside the accordion button"
   },
   "dB4Sbq": {
     "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
@@ -915,6 +991,10 @@
     "defaultMessage": "Anual",
     "description": "This text is used as prefix for our yearly cadences"
   },
+  "h/WXZ6": {
+    "defaultMessage": "resultado-chave",
+    "description": "This message is used as the type to display in some of the delete dialogs while removing a given key-result"
+  },
   "h4sP/q": {
     "defaultMessage": "Minha conta",
     "description": "The page title that our users should see in the my profile page"
@@ -930,6 +1010,10 @@
   "hn3cE7": {
     "defaultMessage": "Progresso acumulado dessa semana",
     "description": "This helper texts explains since when we are calculating your company progress"
+  },
+  "hzOI/d": {
+    "defaultMessage": "Se realmente tem certeza de que deseja excluir este {type}, confirme sua ação escrevendo “EXCLUIR” no campo abaixo:",
+    "description": "This message is displayed as the description for the danger confirmation modal while removing a given resource"
   },
   "iPv+uj": {
     "defaultMessage": "Um ícone de uma linha reta na horizontal, representando que sua empresa não evolui desde o último evento de check-in",
@@ -950,6 +1034,10 @@
   "jYw0F3": {
     "defaultMessage": "Membros do time {isLoaded, select, true {({totalMembersCount})} other{}}",
     "description": "This message is displayed inside the explore page, above the members section"
+  },
+  "jjr+Ye": {
+    "defaultMessage": "O objetivo foi removido com sucesso",
+    "description": "This message appears in a toast after the user removes an objective"
   },
   "jvxLB+": {
     "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
@@ -1019,6 +1107,10 @@
     "defaultMessage": "Um ícone de seta para baixo, indicando que o progresso reduziu",
     "description": "This desc message explains the decrease icon for screen readers"
   },
+  "lf4c2p": {
+    "defaultMessage": "objetivo",
+    "description": "This message is used as our resource type while removing a objective"
+  },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
@@ -1062,6 +1154,10 @@
   "nnWr7M": {
     "defaultMessage": "Gênero",
     "description": "This is the label that goes on our user account settings page, at the sixth field to update the user informations"
+  },
+  "npWxt7": {
+    "defaultMessage": "Um botão com um ícone de X. Ao clicar nele você irá cancelar a atualização do objetivo",
+    "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the cancel button"
   },
   "nrToz/": {
     "defaultMessage": "Voltar",
@@ -1207,6 +1303,14 @@
     "defaultMessage": "Existe um fator externo impedindo o progresso desse resultado-chave",
     "description": "This text explains our tag to the user"
   },
+  "xfx/rc": {
+    "defaultMessage": "Um botão com um ícone de confirmação. Ao clicar nele você irá salvar sua atualização do objetivo",
+    "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the check button"
+  },
+  "xwbI5E": {
+    "defaultMessage": "Atenção! Esta ação não pode ser desfeita",
+    "description": "This message is displayed as the title for the danger confirmation modal while removing a given resource"
+  },
   "xywRWB": {
     "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
@@ -1238,6 +1342,10 @@
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",
     "description": "The title text of our notification bell, it is displayed when an user hover the icon itself"
+  },
+  "zQoORA": {
+    "defaultMessage": "Tem certeza que deseja excluir este {type}?",
+    "description": "This message is displayed as the title for the confirmation modal while removing a given resource"
   },
   "ze3hqu": {
     "defaultMessage": "Estamos trabalhando em melhorias para você! :)",
