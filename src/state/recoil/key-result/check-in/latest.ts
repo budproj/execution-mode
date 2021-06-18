@@ -21,7 +21,7 @@ export const getLatestCheckIn =
     const keyResult = get(keyResultAtomFamily(id))
 
     const keyResultCheckIns = keyResult?.keyResultCheckIns?.edges?.map((edge) => edge.node)
-    const keyResultLatestCheckIn = keyResult?.latestKeyResultCheckIn
+    const keyResultLatestCheckIn = keyResult?.status?.latestCheckIn
 
     const latestKeyResultCheckIn =
       keyResultLatestCheckIn ?? (keyResultCheckIns?.[0] as KeyResultCheckIn)
@@ -51,7 +51,7 @@ export const setLatestCheckIn =
     const keyResultCheckInEdges = keyResultCheckInConnection?.edges ?? []
     const keyResultCheckIns = keyResultCheckInEdges.map((edge) => edge.node)
 
-    const keyResultLatestCheckIn = keyResult?.latestKeyResultCheckIn
+    const keyResultLatestCheckIn = keyResult?.status?.latestCheckIn
     const keyResultPreviousCheckIn = keyResultLatestCheckIn ?? keyResultCheckIns[0]
 
     const currentUserID = get(meAtom)
@@ -66,11 +66,16 @@ export const setLatestCheckIn =
 
     const newKeyResult: KeyResult = {
       ...keyResult,
-      isOutdated: false,
-      latestKeyResultCheckIn: newLocalCheckIn,
       keyResultCheckIns: {
         ...keyResultCheckInConnection,
         edges: newCheckInEdges,
+      },
+      status: {
+        progress: newLocalCheckIn.progress,
+        confidence: newLocalCheckIn.confidence,
+        isOutdated: false,
+        reportDate: new Date().toISOString(),
+        latestCheckIn: newLocalCheckIn,
       },
     }
 
