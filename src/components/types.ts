@@ -1,3 +1,5 @@
+import { KeyResultCheckIn } from './KeyResult/types'
+
 export interface GraphQLConnection<N extends GraphQLNode> {
   edges: Array<GraphQLEdge<N>>
   policy: GraphQLConnectionPolicy
@@ -41,4 +43,17 @@ export enum Scope {
 
 export interface DeleteResult {
   affected: number
+}
+
+export interface Status {
+  progress: number
+  confidence: number
+  isOutdated: boolean
+  reportDate?: string
+  latestCheckIn?: KeyResultCheckIn
+}
+
+export interface Delta {
+  progress: number
+  confidence: number
 }

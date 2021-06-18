@@ -90,7 +90,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           <LastUpdateText
             fontSize="sm"
             date={lastUpdateDate}
-            color={keyResult?.isOutdated ? 'red.500' : 'gray.400'}
+            color={keyResult?.status?.isOutdated ? 'red.500' : 'gray.400'}
             prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
           />
         </SkeletonText>

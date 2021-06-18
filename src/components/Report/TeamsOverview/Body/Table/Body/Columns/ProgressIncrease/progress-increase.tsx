@@ -20,7 +20,7 @@ const TeamsOverviewBodyTableBodyColumnProgressIncrease = ({
         <PercentageProgressIncreaseTag
           forcePositiveSignal
           showSignalArrow
-          value={team?.progressIncreaseSinceLastWeek}
+          value={team?.delta.progress}
           bg="transparent"
           fontSize="md"
           px={0}

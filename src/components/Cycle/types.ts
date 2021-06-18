@@ -1,6 +1,6 @@
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
-import { GraphQLConnection, GraphQLNode } from 'src/components/types'
+import { Delta, GraphQLConnection, GraphQLNode, Status } from 'src/components/types'
 
 import { KeyResult } from '../KeyResult/types'
 
@@ -13,6 +13,8 @@ export interface Cycle extends GraphQLNode {
   dateEnd: string
   active: boolean
   updatedAt: string
+  status: Status
+  delta: Delta
   team: Team
   parent?: Cycle
   cycles?: GraphQLConnection<Cycle>

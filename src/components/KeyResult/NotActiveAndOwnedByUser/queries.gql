@@ -40,15 +40,17 @@ query GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES($userID: ID!) {
                   }
                 }
               }
-              latestKeyResultCheckIn {
-                id
-                value
-                confidence
-                progress
-                comment
-                createdAt
-                user {
-                  fullName
+              status {
+                latestCheckIn {
+                  id
+                  value
+                  confidence
+                  progress
+                  comment
+                  createdAt
+                  user {
+                    fullName
+                  }
                 }
               }
               keyResultCheckIns {

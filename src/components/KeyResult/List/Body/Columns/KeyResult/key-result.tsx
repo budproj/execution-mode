@@ -24,7 +24,7 @@ export interface KeyResultListBodyColumnKeyResultProperties
 }
 
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
-const isOutdatedSelector = buildPartialSelector<KeyResult['isOutdated']>('isOutdated')
+const statusSelector = buildPartialSelector<KeyResult['status']>('status')
 
 const KeyResultListBodyColumnKeyResult = ({
   id,
@@ -35,7 +35,7 @@ const KeyResultListBodyColumnKeyResult = ({
   isDisabled,
 }: KeyResultListBodyColumnKeyResultProperties): ReactElement => {
   const title = useRecoilValue(titleSelector(id))
-  const isOutdated = useRecoilValue(isOutdatedSelector(id))
+  const status = useRecoilValue(statusSelector(id))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const intl = useIntl()
 
@@ -73,7 +73,7 @@ const KeyResultListBodyColumnKeyResult = ({
             >
               <LastUpdateText
                 date={lastUpdateDate}
-                color={isOutdated ? 'red.500' : 'gray.300'}
+                color={status?.isOutdated ? 'red.500' : 'gray.300'}
                 prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
               />
             </SkeletonText>

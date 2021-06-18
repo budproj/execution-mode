@@ -7,7 +7,6 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
         node {
           id
           title
-          progressIncreaseSinceLastWeek
           cycle {
             id
             period
@@ -17,6 +16,9 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
           status {
             progress
             confidence
+          }
+          delta {
+            progress
           }
           policy {
             update

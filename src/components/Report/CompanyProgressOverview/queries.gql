@@ -6,18 +6,20 @@ query GET_USER_PRIMARY_COMPANY {
           id
           name
           gender
-          progressIncreaseSinceLastWeek
           status {
             progress
             confidence
-          }
-          latestKeyResultCheckIn {
-            id
-            createdAt
-            user {
+            latestCheckIn {
               id
-              fullName
+              createdAt
+              user {
+                id
+                fullName
+              }
             }
+          }
+          delta {
+            progress
           }
         }
       }

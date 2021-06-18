@@ -9,12 +9,14 @@ query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $first: Int, $after: String) {
           ... on KeyResultCheckIn {
             id
             value
-            valueIncrease
             confidence
             progress
             comment
             createdAt
             keyResultId
+            delta {
+              value
+            }
             user {
               fullName
             }

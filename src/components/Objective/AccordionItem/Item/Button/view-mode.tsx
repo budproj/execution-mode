@@ -54,7 +54,7 @@ export const ViewMode = ({
                 forcePositiveSignal
                 bg="black.100"
                 h="full"
-                value={objective?.progressIncreaseSinceLastWeek}
+                value={objective?.delta?.progress}
                 prefix={intl.formatMessage(messages.progressTagLabel)}
               />
             </Skeleton>

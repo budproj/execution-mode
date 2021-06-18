@@ -103,10 +103,10 @@ const KeyResultSectionTimelineCardCheckIn = ({
             format={keyResult?.format}
           />
 
-          {data?.valueIncrease !== 0 && (
+          {data?.delta?.value !== 0 && (
             <KeyResultSectionTimelineCardCheckInValueIncrease
               progress={data?.progress}
-              valueIncrease={data?.valueIncrease}
+              valueIncrease={data?.delta?.value}
               format={keyResult?.format}
               type={keyResult?.type}
             />

@@ -26,7 +26,7 @@ const TeamsOverview = () => {
   const company = data?.teams?.edges?.[0]?.node
 
   useEffect(() => {
-    if (company) setRankedTeamsEdges(company?.rankedTeams?.edges)
+    if (company) setRankedTeamsEdges(company?.rankedDescendants?.edges)
   }, [company, setRankedTeamsEdges])
 
   useEffect(() => {

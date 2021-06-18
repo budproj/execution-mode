@@ -1,5 +1,4 @@
-mutation UPDATE_OBJECTIVE($objectiveID: ID!, $title: String!) {
-  updateObjective(id: $objectiveID, data: {
+mutation UPDATE_OBJECTIVE($objectiveID: ID!, $title: String!) { updateObjective(id: $objectiveID, data: {
     title: $title,
   }) {
     id
