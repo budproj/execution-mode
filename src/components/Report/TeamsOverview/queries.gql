@@ -3,15 +3,17 @@ query GET_COMPANY_TEAMS {
     edges {
       node {
         id
-        rankedTeams {
+        rankedDescendants {
           edges {
             node {
               id
               name
-              progressIncreaseSinceLastWeek
               status {
                 progress
                 confidence
+              }
+              delta {
+                progress
               }
             }
           }
