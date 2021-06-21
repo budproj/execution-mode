@@ -51,7 +51,7 @@ export const TimeMachineController = ({
         borderRadius="10"
         alignItems="center"
       >
-        <Stack direction="row" flexGrow={1}>
+        <Stack direction="row" flexGrow={1} alignItems="center">
           <Heading as="h3" fontSize="lg" color="gray.500" fontWeight={500}>
             {intl.formatMessage(messages.timeMachineDescription)}
           </Heading>
@@ -59,6 +59,7 @@ export const TimeMachineController = ({
           <CycleFilter
             activeFilters={filters}
             yearOptions={yearlyCycles}
+            flexGrow={1}
             onYearFilter={onYearFilter}
             onQuarterFilter={onQuarterFilter}
           />
