@@ -111,8 +111,6 @@ const KeyResultNotActiveAndOwnedByUser = ({
     if (isLoadedOnRecoil) updateCycles(cycles)
   }, [cycles, isLoadedOnRecoil, updateCycles])
 
-  console.log(filteredCycles, isLoaded, 'tag')
-
   return (
     <Stack direction="column" spacing={8}>
       <Stack direction="row" alignItems="center" spacing={4}>

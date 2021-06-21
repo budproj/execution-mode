@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
+import { useCycleFilters } from '../../../state/hooks/useCycleFilters/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../state/recoil/objective'
@@ -36,8 +37,23 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
 
-  const [objectiveEdges, setObjectiveEdges, _, isLoaded] = useConnectionEdges<Objective>()
-  const [cycles, setCycleObjectives, cycleObjectives] = useCycleObjectives()
+  const [objectiveEdges, setObjectiveEdges, _, isConnectionLoaded] = useConnectionEdges<Objective>()
+  const [objectiveCycles, setCycleObjectives, cycleObjectives] = useCycleObjectives()
+
+  const [
+    filteredCycles,
+    filters,
+    { applyYearFilter, applyQuarterFilter, updateCycles, isLoaded, cycles },
+  ] = useCycleFilters(teamID)
+
+  const handleClose = () => {
+    setObjectivesViewMode(ObjectivesViewMode.ACTIVE)
+  }
+
+  const filteredCycleIDs = new Set(filteredCycles.map((cycle) => cycle.id))
+  const filteredObjectiveCycles = objectiveCycles.filter(([cycle]) =>
+    filteredCycleIDs.has(cycle.id),
+  )
 
   useQuery<GetTeamNotActiveObjectivesQuery>(queries.GET_TEAM_NOT_ACTIVE_OBJECTIVES, {
     variables: { teamID },
@@ -45,10 +61,6 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
       setObjectiveEdges(data.team.objectives?.edges ?? [])
     },
   })
-
-  const handleClose = () => {
-    setObjectivesViewMode(ObjectivesViewMode.ACTIVE)
-  }
 
   useEffect(() => {
     if (objectiveEdges) setCycleObjectives(objectiveEdges)
@@ -58,17 +70,25 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
     loadObjectivesOnRecoil(cycleObjectives)
   }, [cycleObjectives, loadObjectivesOnRecoil])
 
-  console.log(cycles, 'tag')
+  useEffect(() => {
+    if (isConnectionLoaded) updateCycles(objectiveCycles.map(([cycle]) => cycle))
+  }, [objectiveCycles, isConnectionLoaded, updateCycles])
 
   return (
     <Stack spacing={12} h="full">
-      <TimeMachineController onClose={handleClose} />
+      <TimeMachineController
+        filters={filters}
+        cycles={cycles}
+        onYearFilter={applyYearFilter}
+        onQuarterFilter={applyQuarterFilter}
+        onClose={handleClose}
+      />
 
       {isLoaded ? (
-        cycles.length === 0 ? (
+        filteredObjectiveCycles.length === 0 ? (
           <TeamOKRsEmptyState />
         ) : (
-          cycles.map(([cycle, objectiveIDs]) => (
+          filteredObjectiveCycles.map(([cycle, objectiveIDs]) => (
             <ObjectivesFromCycle
               key={cycle.id}
               isDisabled

@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Resetter, useRecoilState, useResetRecoilState } from 'recoil'
 
 import { Cycle } from '../../../components/Cycle/types'
-import { cycleFilters, FilteredCycles } from '../../recoil/cycle/filters'
+import { cycleAppliedFilters, cycleFilters, FilteredCycles } from '../../recoil/cycle/filters'
 
 type FilterHandler = (cycleIDs: string[]) => void
 
@@ -42,7 +42,7 @@ export const useCycleFilters = (id: string, initialCycles?: Cycle[]): CycleFilte
   const [isLoaded, setIsLoaded] = useState(Boolean(initialCycles))
 
   const [filters, setFilters] = useRecoilState(cycleFilters(id))
-  const resetFilters = useResetRecoilState(cycleFilters(id))
+  const resetFilters = useResetRecoilState(cycleAppliedFilters(id))
 
   const applyYearFilter = (yearCycleIDs: string[]) => {
     setFilters({
@@ -57,11 +57,14 @@ export const useCycleFilters = (id: string, initialCycles?: Cycle[]): CycleFilte
     } as FilteredCycles)
   }
 
-  const updateCycles = (cycles: Cycle[] = []) => {
-    setCycles(cycles)
-    setFilteredCycles(filterCycles(cycles, filters))
-    if (!isLoaded) setIsLoaded(true)
-  }
+  const updateCycles = useCallback(
+    (cycles: Cycle[] = []) => {
+      setCycles(cycles)
+      setFilteredCycles(filterCycles(cycles, filters))
+      if (!isLoaded) setIsLoaded(true)
+    },
+    [setCycles, filters, setFilteredCycles, isLoaded, setIsLoaded],
+  )
 
   const options: Options = {
     isLoaded,
