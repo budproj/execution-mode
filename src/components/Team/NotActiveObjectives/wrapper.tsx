@@ -7,7 +7,10 @@ import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../state/recoil/objective'
-import { teamObjectivesViewMode } from '../../../state/recoil/team/objectives-view-mode'
+import {
+  ObjectivesViewMode,
+  teamObjectivesViewMode,
+} from '../../../state/recoil/team/objectives-view-mode'
 import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnection } from '../../types'
@@ -15,6 +18,7 @@ import { TeamOKRsEmptyState } from '../OKRsEmptyState/wrapper'
 import { TeamOKRsSkeleton } from '../OKRsSkeleton/wrapper'
 
 import queries from './queries.gql'
+import { TimeMachineController } from './time-machine-controller'
 
 interface TeamNotActiveObjectivesProperties {
   teamID: string
@@ -42,6 +46,10 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
     },
   })
 
+  const handleClose = () => {
+    setObjectivesViewMode(ObjectivesViewMode.ACTIVE)
+  }
+
   useEffect(() => {
     if (objectiveEdges) setCycleObjectives(objectiveEdges)
   }, [objectiveEdges, setCycleObjectives])
@@ -54,6 +62,8 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
 
   return (
     <Stack spacing={12} h="full">
+      <TimeMachineController onClose={handleClose} />
+
       {isLoaded ? (
         cycles.length === 0 ? (
           <TeamOKRsEmptyState />

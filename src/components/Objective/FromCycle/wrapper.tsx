@@ -40,7 +40,7 @@ export const ObjectivesFromCycle = ({
     <Stack spacing={4}>
       <Stack direction="row" alignItems="center">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 21)}>
-          <Heading fontSize="sm" color="gray.500" textTransform="uppercase">
+          <Heading as="h2" fontSize="sm" color="gray.500" textTransform="uppercase">
             {intl
               .formatMessage(messages.title, {
                 prefix: cadence.prefix,
