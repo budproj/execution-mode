@@ -37,7 +37,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
-  const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
+  const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
 
   const [objectiveEdges, setObjectiveEdges, _, isLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives] = useCycleObjectives()

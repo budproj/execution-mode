@@ -10,7 +10,7 @@ import { ResetButton } from 'src/components/Base'
 import CycleFilter from 'src/components/Cycle/Filter'
 import { Cycle } from 'src/components/Cycle/types'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { GraphQLConnection } from 'src/components/types'
+import { GraphQLConnection, GraphQLEdge } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
@@ -31,14 +31,42 @@ export interface GetKeyResultNotActiveAndOwnedByUserWithBindingQuery {
   cycles: GraphQLConnection<Cycle>
 }
 
+const flattenCycleEdges = (rawEdges: Array<GraphQLEdge<Cycle>>): Array<GraphQLEdge<Cycle>> => {
+  const parentCycleEdges = uniqBy(
+    flatten(
+      rawEdges.map((edge) => ({
+        node: edge.node?.parent,
+      })),
+    ),
+    'node.id',
+  )
+
+  return flatten([parentCycleEdges, rawEdges]).filter((edge): edge is GraphQLEdge<Cycle> =>
+    Boolean(edge.node),
+  )
+}
+
+const flattenKeyResultEdges = (
+  cycleEdges: Array<GraphQLEdge<Cycle>>,
+): Array<GraphQLEdge<KeyResult>> => {
+  const keyResultEdges = cycleEdges.map((edge) => edge.node.keyResults?.edges)
+
+  return flatten(keyResultEdges).filter((edge): edge is GraphQLEdge<KeyResult> =>
+    Boolean(edge?.node),
+  )
+}
+
 const KeyResultNotActiveAndOwnedByUser = ({
   onLineClick,
 }: KeyResultNotActiveAndOwnedByUserProperties) => {
   const userID = useRecoilValue(meAtom)
-  const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
-  const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
-  const [cycles, setCycleEdges] = useConnectionEdges<Cycle>()
-  const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
+
+  const [loadCycles, { isLoaded: isLoadedOnRecoil }] = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
+  const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
+
+  const [cycles, setCycleEdges, _, isCycleConnectionLoaded] = useConnectionEdges<Cycle>()
+  const [keyResults, setKeyResultEdges, __, isKeyResultConnectionLoaded] =
+    useConnectionEdges<KeyResult>()
 
   const [
     filteredCycles,
@@ -46,15 +74,21 @@ const KeyResultNotActiveAndOwnedByUser = ({
     { applyYearFilter, applyQuarterFilter, resetFilters, updateCycles, isLoaded },
   ] = useCycleFilters(userID)
 
-  const [fetchUserActiveCycles, { data, loading, called }] =
-    useLazyQuery<GetKeyResultNotActiveAndOwnedByUserWithBindingQuery>(
-      queries.GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES,
-      {
-        variables: {
-          userID,
-        },
+  const [fetchUserActiveCycles] = useLazyQuery<GetKeyResultNotActiveAndOwnedByUserWithBindingQuery>(
+    queries.GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES,
+    {
+      variables: {
+        userID,
       },
-    )
+      onCompleted: (data) => {
+        const flattenedCycleEdges = flattenCycleEdges(data.cycles.edges)
+        const flattenedKeyResultEdges = flattenKeyResultEdges(flattenedCycleEdges)
+
+        setCycleEdges(flattenedCycleEdges)
+        setKeyResultEdges(flattenedKeyResultEdges)
+      },
+    },
+  )
 
   const yearlyCycles =
     cycles.length > 0
@@ -66,47 +100,18 @@ const KeyResultNotActiveAndOwnedByUser = ({
   }, [userID, fetchUserActiveCycles])
 
   useEffect(() => {
-    if (data) {
-      const { edges: queryEdges } = data.cycles
-
-      const parentCycleEdges = uniqBy(
-        flatten(
-          queryEdges.map((edge) => ({
-            node: edge.node?.parent,
-          })),
-        ),
-        'node.id',
-      )
-      const cycleEdges = flatten([parentCycleEdges, queryEdges]).filter((edge) =>
-        Boolean(edge.node),
-      )
-      const cycleNodes = cycleEdges.map((edge) => edge.node)
-
-      const keyResultEdgesList = cycleNodes.map((cycle) => cycle?.keyResults?.edges)
-      const keyResultEdges = flatten(keyResultEdgesList).filter((keyResult) => Boolean(keyResult))
-
-      setCycleEdges(cycleEdges as any)
-      setKeyResultEdges(keyResultEdges as any)
-    }
-  }, [data, setCycleEdges, setKeyResultEdges])
+    if (isCycleConnectionLoaded) loadCycles(cycles)
+  }, [cycles, isCycleConnectionLoaded, loadCycles])
 
   useEffect(() => {
-    updateCycles(cycles)
-  }, [cycles, updateCycles])
+    if (isKeyResultConnectionLoaded) loadKeyResults(keyResults)
+  }, [keyResults, isKeyResultConnectionLoaded, loadKeyResults])
 
   useEffect(() => {
-    if (filteredCycles) {
-      loadCycles(filteredCycles)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filteredCycles])
+    if (isLoadedOnRecoil) updateCycles(cycles)
+  }, [cycles, isLoadedOnRecoil, updateCycles])
 
-  useEffect(() => {
-    if (keyResults) {
-      loadKeyResults(keyResults)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keyResults])
+  console.log(filteredCycles, isLoaded, 'tag')
 
   return (
     <Stack direction="column" spacing={8}>
@@ -121,7 +126,7 @@ const KeyResultNotActiveAndOwnedByUser = ({
       </Stack>
 
       <Stack direction="column" gridGap={8}>
-        {called && !loading && isLoaded ? (
+        {isLoaded ? (
           <KeyResultNotActiveAndOwnedByUserCyclesList
             cycles={filteredCycles}
             onLineClick={onLineClick}

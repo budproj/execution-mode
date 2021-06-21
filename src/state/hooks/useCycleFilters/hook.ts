@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Resetter, useRecoilState, useResetRecoilState } from 'recoil'
 
 import { Cycle } from '../../../components/Cycle/types'
@@ -12,6 +12,7 @@ interface Options {
   applyQuarterFilter: FilterHandler
   resetFilters: Resetter
   updateCycles: (cycles?: Cycle[]) => void
+  cycles: Cycle[]
 }
 
 type CycleFiltersHook = [Cycle[], FilteredCycles, Options]
@@ -58,6 +59,7 @@ export const useCycleFilters = (id: string, initialCycles?: Cycle[]): CycleFilte
 
   const updateCycles = (cycles: Cycle[] = []) => {
     setCycles(cycles)
+    setFilteredCycles(filterCycles(cycles, filters))
     if (!isLoaded) setIsLoaded(true)
   }
 
@@ -67,11 +69,8 @@ export const useCycleFilters = (id: string, initialCycles?: Cycle[]): CycleFilte
     applyQuarterFilter,
     resetFilters,
     updateCycles,
+    cycles,
   }
-
-  useEffect(() => {
-    setFilteredCycles(filterCycles(cycles, filters))
-  }, [cycles, filters, setFilteredCycles])
 
   return [filteredCycles, filters, options]
 }

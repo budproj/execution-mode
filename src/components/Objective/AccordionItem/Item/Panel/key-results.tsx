@@ -38,8 +38,8 @@ export const ObjectiveKeyResults = ({
   isDisabled,
 }: ObjectiveKeyResultsProperties) => {
   const lastInsertedKeyResultID = useRecoilValue(lastInsertedKeyResultIDAtom)
-  const loadObjective = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
-  const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
+  const [loadObjective] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
+  const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const [keyResults, setKeyResultEdges, keyResultEdges, isLoaded] = useConnectionEdges<KeyResult>()
   const [getKeyResults, { called }] = useLazyQuery<GetObjectiveKeyResultsQuery>(

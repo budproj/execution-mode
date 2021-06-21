@@ -22,7 +22,7 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
   const [isLoaded, setIsLoaded] = useState(false)
   const team = useRecoilValue(teamAtomFamily(teamID))
   const [teamMembers, setTeamMemberEdges] = useConnectionEdges(team?.users?.edges)
-  const loadUsersOnRecoil = useRecoilFamilyLoader<User>(userAtomFamily)
+  const [loadUsersOnRecoil] = useRecoilFamilyLoader<User>(userAtomFamily)
 
   const handleSearch = (searchValue: string) => {
     if (!team?.users?.edges) return

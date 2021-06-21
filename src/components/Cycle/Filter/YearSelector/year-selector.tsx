@@ -36,7 +36,7 @@ const CycleFilterYearSelector = ({
   options,
 }: CycleFilterYearSelectorProperties) => {
   const [isOpen, setIsOpen] = useState(false)
-  const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
+  const [loadCycles] = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const cycles = useRecoilValue(selectCyclesFromList(filteredYearIDs))
   const intl = useIntl()
   const [fetchNotActiveYearlyCycles, { called, loading, data }] =

@@ -31,7 +31,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
       teamId,
     },
   })
-  const loadTeamOnRecoil = useRecoilFamilyLoader<Team>(teamAtomFamily)
+  const [loadTeamOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const metaTitleLoadingFallback = intl.formatMessage(messages.metaTitleLoadingFallback)
   const isLoading = loading || !called
 

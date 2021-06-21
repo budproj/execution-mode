@@ -26,7 +26,7 @@ const CycleFilterQuarterSelector = ({
   onQuarterFilter,
   filteredYearIDs,
 }: CycleFilterQuarterSelectorProperties) => {
-  const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
+  const [loadCycles] = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const [cycles, setCycleEdges] = useConnectionEdges<Cycle>()
   const [fetchCycleOptions, { loading, data }] =
     useLazyQuery<QuarterlyCyclesFromFilteredParentsResult>(

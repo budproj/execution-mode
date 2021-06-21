@@ -34,7 +34,7 @@ export interface GetTeamNotActiveObjectivesQuery {
 
 export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesProperties) => {
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
-  const loadObjectivesOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
+  const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
 
   const [objectiveEdges, setObjectiveEdges, _, isLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives] = useCycleObjectives()

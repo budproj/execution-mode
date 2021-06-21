@@ -16,7 +16,7 @@ export interface GetUserNamedAvatarDataQuery {
 
 const Me = () => {
   const [me, setMe] = useRecoilState(meAtom)
-  const loadUser = useRecoilFamilyLoader(userAtomFamily)
+  const [loadUser] = useRecoilFamilyLoader(userAtomFamily)
   const { loading } = useQuery<GetUserNamedAvatarDataQuery>(queries.GET_USER_NAMED_AVATAR_DATA, {
     onCompleted: (data) => {
       setMe(data.me.id)
