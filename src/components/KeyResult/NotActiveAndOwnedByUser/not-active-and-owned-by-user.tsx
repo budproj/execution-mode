@@ -43,7 +43,7 @@ const KeyResultNotActiveAndOwnedByUser = ({
   const [
     filteredCycles,
     filters,
-    { applyYearFilter, applyQuarterFilter, resetFilters, updateCycles },
+    { applyYearFilter, applyQuarterFilter, resetFilters, updateCycles, isLoaded },
   ] = useCycleFilters(userID)
 
   const [fetchUserActiveCycles, { data, loading, called }] =
@@ -121,7 +121,7 @@ const KeyResultNotActiveAndOwnedByUser = ({
       </Stack>
 
       <Stack direction="column" gridGap={8}>
-        {called && !loading ? (
+        {called && !loading && isLoaded ? (
           <KeyResultNotActiveAndOwnedByUserCyclesList
             cycles={filteredCycles}
             onLineClick={onLineClick}

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Resetter, useRecoilState, useResetRecoilState } from 'recoil'
 
 import { Cycle } from '../../../components/Cycle/types'
@@ -6,14 +6,15 @@ import { cycleFilters, FilteredCycles } from '../../recoil/cycle/filters'
 
 type FilterHandler = (cycleIDs: string[]) => void
 
-interface Actions {
+interface Options {
+  isLoaded: boolean
   applyYearFilter: FilterHandler
   applyQuarterFilter: FilterHandler
   resetFilters: Resetter
-  updateCycles: Dispatch<SetStateAction<Cycle[]>>
+  updateCycles: (cycles?: Cycle[]) => void
 }
 
-type CycleFiltersHook = [Cycle[], FilteredCycles, Actions]
+type CycleFiltersHook = [Cycle[], FilteredCycles, Options]
 
 const filterCycles = (cycles: Cycle[], filters: FilteredCycles): Cycle[] => {
   if (!cycles) return cycles
@@ -34,9 +35,10 @@ const filterCycles = (cycles: Cycle[], filters: FilteredCycles): Cycle[] => {
   )
 }
 
-export const useCycleFilters = (id: string, initialCycles: Cycle[] = []): CycleFiltersHook => {
-  const [cycles, updateCycles] = useState(initialCycles)
-  const [filteredCycles, setFilteredCycles] = useState(initialCycles)
+export const useCycleFilters = (id: string, initialCycles?: Cycle[]): CycleFiltersHook => {
+  const [cycles, setCycles] = useState(initialCycles ?? [])
+  const [filteredCycles, setFilteredCycles] = useState(initialCycles ?? [])
+  const [isLoaded, setIsLoaded] = useState(Boolean(initialCycles))
 
   const [filters, setFilters] = useRecoilState(cycleFilters(id))
   const resetFilters = useResetRecoilState(cycleFilters(id))
@@ -54,7 +56,13 @@ export const useCycleFilters = (id: string, initialCycles: Cycle[] = []): CycleF
     } as FilteredCycles)
   }
 
-  const actions: Actions = {
+  const updateCycles = (cycles: Cycle[] = []) => {
+    setCycles(cycles)
+    if (!isLoaded) setIsLoaded(true)
+  }
+
+  const options: Options = {
+    isLoaded,
     applyYearFilter,
     applyQuarterFilter,
     resetFilters,
@@ -65,5 +73,5 @@ export const useCycleFilters = (id: string, initialCycles: Cycle[] = []): CycleF
     setFilteredCycles(filterCycles(cycles, filters))
   }, [cycles, filters, setFilteredCycles])
 
-  return [filteredCycles, filters, actions]
+  return [filteredCycles, filters, options]
 }
