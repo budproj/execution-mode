@@ -49,6 +49,7 @@ export interface Status {
   progress: number
   confidence: number
   isOutdated: boolean
+  isActive: boolean
   reportDate?: string
   latestCheckIn?: KeyResultCheckIn
 }

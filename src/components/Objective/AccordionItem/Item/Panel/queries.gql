@@ -12,6 +12,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
           initialValue
           status {
             isOutdated
+            isActive
             latestCheckIn {
               id
               value
