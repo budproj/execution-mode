@@ -4,7 +4,7 @@ import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
 import uniqBy from 'lodash/uniqBy'
 import React, { useEffect } from 'react'
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import { ResetButton } from 'src/components/Base'
 import CycleFilter from 'src/components/Cycle/Filter'
@@ -15,14 +15,11 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
-import filtersAtomFamily, {
-  KEY_RESULT_FILTER_TYPE,
-  KeyResultNotActiveAndOwnedByUserFilter,
-} from 'src/state/recoil/key-result/filters'
 import meAtom from 'src/state/recoil/user/me'
 
+import { useCycleFilters } from '../../../state/hooks/useCycleFilters/hook'
+
 import KeyResultNotActiveAndOwnedByUserCyclesList from './cycle-lists'
-import filterCycles from './filter-cycles'
 import queries from './queries.gql'
 import KeyResultNotActiveAndOwnedByUserSkeleton from './skeleton'
 
@@ -38,16 +35,17 @@ const KeyResultNotActiveAndOwnedByUser = ({
   onLineClick,
 }: KeyResultNotActiveAndOwnedByUserProperties) => {
   const userID = useRecoilValue(meAtom)
-  const [filters, setFilters] = useRecoilState<KeyResultNotActiveAndOwnedByUserFilter | undefined>(
-    filtersAtomFamily(KEY_RESULT_FILTER_TYPE.NOT_ACTIVE_AND_OWNED_BY_USER),
-  )
-  const resetFilters = useResetRecoilState(
-    filtersAtomFamily(KEY_RESULT_FILTER_TYPE.NOT_ACTIVE_AND_OWNED_BY_USER),
-  )
   const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [cycles, setCycleEdges] = useConnectionEdges<Cycle>()
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
+
+  const [
+    filteredCycles,
+    filters,
+    { applyYearFilter, applyQuarterFilter, resetFilters, updateCycles },
+  ] = useCycleFilters(userID)
+
   const [fetchUserActiveCycles, { data, loading, called }] =
     useLazyQuery<GetKeyResultNotActiveAndOwnedByUserWithBindingQuery>(
       queries.GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES,
@@ -58,26 +56,10 @@ const KeyResultNotActiveAndOwnedByUser = ({
       },
     )
 
-  const handleYearFilterUpdate = (yearCycleIDs: Array<Cycle['id']>) => {
-    setFilters({
-      yearCycleIDs,
-      quarterCycleIDs: [],
-    })
-  }
-
-  const handleQuarterFilterUpdate = (quarterCycleIDs: Array<Cycle['id']>) => {
-    setFilters({
-      quarterCycleIDs,
-      yearCycleIDs: filters ? filters.yearCycleIDs : [],
-    })
-  }
-
   const yearlyCycles =
     cycles.length > 0
       ? uniqBy(filter(cycles.map((cycle) => cycle.parent)) as Cycle[], 'id')
       : undefined
-
-  const filteredData = filterCycles(cycles, filters)
 
   useEffect(() => {
     if (userID) fetchUserActiveCycles()
@@ -109,11 +91,15 @@ const KeyResultNotActiveAndOwnedByUser = ({
   }, [data, setCycleEdges, setKeyResultEdges])
 
   useEffect(() => {
-    if (cycles) {
-      loadCycles(cycles)
+    updateCycles(cycles)
+  }, [cycles, updateCycles])
+
+  useEffect(() => {
+    if (filteredCycles) {
+      loadCycles(filteredCycles)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cycles])
+  }, [filteredCycles])
 
   useEffect(() => {
     if (keyResults) {
@@ -128,16 +114,16 @@ const KeyResultNotActiveAndOwnedByUser = ({
         <CycleFilter
           activeFilters={filters}
           yearOptions={yearlyCycles}
-          onYearFilter={handleYearFilterUpdate}
-          onQuarterFilter={handleQuarterFilterUpdate}
+          onYearFilter={applyYearFilter}
+          onQuarterFilter={applyQuarterFilter}
         />
         <ResetButton onClick={resetFilters} />
       </Stack>
 
       <Stack direction="column" gridGap={8}>
-        {called && !loading && filteredData ? (
+        {called && !loading ? (
           <KeyResultNotActiveAndOwnedByUserCyclesList
-            cycles={filteredData}
+            cycles={filteredCycles}
             onLineClick={onLineClick}
           />
         ) : (
