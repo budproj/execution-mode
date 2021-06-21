@@ -6,6 +6,7 @@ import { useSetRecoilState } from 'recoil'
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleFilters } from '../../../state/hooks/useCycleFilters/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
+import { cycleAtomFamily } from '../../../state/recoil/cycle'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../state/recoil/objective'
 import {
@@ -36,6 +37,7 @@ export interface GetTeamNotActiveObjectivesQuery {
 export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesProperties) => {
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
+  const [loadCyclesOnRecoil] = useRecoilFamilyLoader<Objective>(cycleAtomFamily)
 
   const [objectiveEdges, setObjectiveEdges, _, isConnectionLoaded] = useConnectionEdges<Objective>()
   const [objectiveCycles, setCycleObjectives, cycleObjectives] = useCycleObjectives()
@@ -73,6 +75,10 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
   useEffect(() => {
     if (isConnectionLoaded) updateCycles(objectiveCycles.map(([cycle]) => cycle))
   }, [objectiveCycles, isConnectionLoaded, updateCycles])
+
+  useEffect(() => {
+    loadCyclesOnRecoil(cycles)
+  }, [cycles, loadCyclesOnRecoil])
 
   return (
     <Stack spacing={12} h="full">

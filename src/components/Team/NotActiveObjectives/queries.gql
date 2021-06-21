@@ -12,6 +12,9 @@ query GET_TEAM_NOT_ACTIVE_OBJECTIVES($teamID: ID!) {
             period
             cadence
             dateEnd
+            parent {
+              id
+            }
           }
           status {
             progress

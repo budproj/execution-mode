@@ -1,6 +1,5 @@
 import { Stack } from '@chakra-ui/layout'
 import { Heading, IconButton } from '@chakra-ui/react'
-import filter from 'lodash/filter'
 import uniqBy from 'lodash/uniqBy'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -31,7 +30,10 @@ export const TimeMachineController = ({
 
   const yearlyCycles =
     cycles.length > 0
-      ? uniqBy(filter(cycles.map((cycle) => cycle.parent)) as Cycle[], 'id')
+      ? uniqBy(
+          cycles.filter((cycle) => cycle.cadence === 'YEARLY'),
+          'id',
+        )
       : undefined
 
   return (
