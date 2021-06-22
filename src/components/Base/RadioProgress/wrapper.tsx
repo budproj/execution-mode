@@ -13,6 +13,7 @@ interface RadioProgressProperties {
   progress?: number
   isLoaded?: boolean
   size?: CircularProgressProps['size']
+  isDisabled?: boolean
 }
 
 export const RadioProgress = ({
@@ -21,6 +22,7 @@ export const RadioProgress = ({
   progress,
   color,
   trackColor,
+  isDisabled,
 }: RadioProgressProperties) => {
   progress ??= 0
   size ??= 14
@@ -33,11 +35,15 @@ export const RadioProgress = ({
       <CircularProgress
         value={progress}
         thickness={6}
-        color={color}
-        trackColor={trackColor}
+        color={isDisabled ? 'gray.200' : color}
+        trackColor={isDisabled ? 'gray.100' : trackColor}
         size={size}
       >
-        <CircularProgressLabel color={color} fontWeight={700} fontSize="md">
+        <CircularProgressLabel
+          color={isDisabled ? 'gray.300' : color}
+          fontWeight={700}
+          fontSize="md"
+        >
           {intl.formatNumber(progress / 100, { style: 'percent' })}
         </CircularProgressLabel>
       </CircularProgress>

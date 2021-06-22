@@ -33,6 +33,9 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
 
   const isLoaded = Boolean(keyResult)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
+  const isActive = keyResult?.status?.isActive
+  const isOutdated = keyResult?.status?.isOutdated && isActive
+  const canUpdate = keyResult?.policy?.update !== GraphQLEffect.ALLOW && isActive
 
   const handleSubmit = async (title: string) => {
     if (title === keyResult?.title) return
@@ -53,7 +56,13 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   return (
     <Flex gridGap={4} alignItems="flex-start">
       <Skeleton borderRadius={10} isLoaded={isLoaded}>
-        <KeyResultDynamicIcon title={keyResult?.title} iconSize={4} boxSize={10} borderRadius={8} />
+        <KeyResultDynamicIcon
+          title={keyResult?.title}
+          iconSize={4}
+          boxSize={10}
+          borderRadius={8}
+          isDisabled={!isActive}
+        />
       </Skeleton>
 
       <Stack spacing={2} flexGrow={1}>
@@ -63,7 +72,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
               value={keyResult?.title}
               isLoaded={isLoaded}
               isSubmitting={loading}
-              isDisabled={keyResult?.policy?.update !== GraphQLEffect.ALLOW}
+              isDisabled={!canUpdate}
               maxCharacters={120}
               previewProperties={{
                 fontSize: 'xl',
@@ -90,7 +99,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           <LastUpdateText
             fontSize="sm"
             date={lastUpdateDate}
-            color={keyResult?.status?.isOutdated ? 'red.500' : 'gray.400'}
+            color={isOutdated ? 'red.500' : 'gray.400'}
             prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
           />
         </SkeletonText>

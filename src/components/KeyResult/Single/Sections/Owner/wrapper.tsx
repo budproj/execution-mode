@@ -30,7 +30,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const theme = useTheme()
 
-  const canUpdate = policy?.update === GraphQLEffect.ALLOW
+  const canUpdate = policy?.update === GraphQLEffect.ALLOW && keyResult?.status?.isActive
 
   const handleOpen = () => {
     if (canUpdate && !isOpen) setIsOpen(true)
@@ -63,7 +63,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
           <Flex direction="row">
             <PopoverTrigger>
               <Box>
-                <KeyResultSectionOwner keyResultID={keyResultID} isEditting={isOpen} />
+                <KeyResultSectionOwner keyResultID={keyResultID} isEditing={isOpen} />
               </Box>
             </PopoverTrigger>
             <Box flexGrow={1} />

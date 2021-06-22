@@ -29,7 +29,7 @@ export const KeyResultSingleSectionGoal = ({
 
   const GoalNumberMask = selectMaskBasedOnFormat(keyResult?.format)
   const hasData = typeof keyResult?.goal !== 'undefined'
-  const canUpdate = keyResult?.policy?.update === GraphQLEffect.ALLOW
+  const canUpdate = keyResult?.policy?.update === GraphQLEffect.ALLOW && keyResult?.status?.isActive
   isLoading ??= hasData
 
   const handleUpdateOpen = () => {

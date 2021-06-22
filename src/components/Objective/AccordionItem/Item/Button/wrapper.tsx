@@ -24,6 +24,7 @@ export interface ObjectiveAccordionButtonProperties {
   confidenceTag?: ConfidenceTag
   isLoaded?: boolean
   accordionID?: string
+  isDisabled?: boolean
 }
 
 export const ObjectiveAccordionButton = ({
@@ -33,6 +34,7 @@ export const ObjectiveAccordionButton = ({
   isLoaded,
   accordionID,
   accordionIndex,
+  isDisabled,
 }: ObjectiveAccordionButtonProperties) => {
   const accordionEntryModes = useRecoilValue(objectiveAccordionEntryModes(accordionID))
   const intl = useIntl()
@@ -50,11 +52,12 @@ export const ObjectiveAccordionButton = ({
             size={14}
             color={confidenceTag?.color.variants.sharp.primary}
             trackColor={confidenceTag?.color.variants.sharp.light}
+            isDisabled={isDisabled}
           />
         </Box>
       </TooltipWithDelay>
 
-      {mode === AccordionEntryMode.EDIT ? (
+      {mode === AccordionEntryMode.EDIT && !isDisabled ? (
         <EditMode objective={objective} accordionIndex={accordionIndex} accordionID={accordionID} />
       ) : (
         <ViewMode
@@ -63,6 +66,7 @@ export const ObjectiveAccordionButton = ({
           isLoaded={isLoaded}
           teamID={teamID}
           objective={objective}
+          isDisabled={isDisabled}
         />
       )}
     </AccordionButton>

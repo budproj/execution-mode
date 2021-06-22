@@ -26,7 +26,7 @@ export const AllReachableUsers = ({
 }: AllReachableUsersProperties) => {
   const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
   const [users, setUserEdges] = useConnectionEdges<User>()
-  const loadUsers = useRecoilFamilyLoader(userAtomFamily)
+  const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)
 
   const handleSearch = (searchValue: string) => {
     if (!data) return

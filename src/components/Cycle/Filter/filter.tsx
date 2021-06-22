@@ -1,8 +1,8 @@
-import { Stack } from '@chakra-ui/react'
+import { Stack, StackProps } from '@chakra-ui/react'
 import React from 'react'
 
 import { Cycle } from 'src/components/Cycle/types'
-import { KeyResultNotActiveAndOwnedByUserFilter } from 'src/state/recoil/key-result/filters'
+import { FilteredCycles } from 'src/state/recoil/cycle/filters'
 
 import CycleFilterQuarterSelector from './QuarterSelector'
 import CycleFilterYearSelector from './YearSelector'
@@ -11,7 +11,8 @@ export interface CycleFilterProperties {
   onYearFilter: (cycleIDs: Array<Cycle['id']>) => void
   onQuarterFilter: (cycleIDs: Array<Cycle['id']>) => void
   yearOptions?: CycleOption[]
-  activeFilters?: KeyResultNotActiveAndOwnedByUserFilter
+  activeFilters?: FilteredCycles
+  flexGrow?: StackProps['flexGrow']
 }
 
 export type CycleOption = {
@@ -24,9 +25,10 @@ const CycleFilter = ({
   onQuarterFilter,
   activeFilters,
   yearOptions,
+  flexGrow,
 }: CycleFilterProperties) => {
   return (
-    <Stack direction="row">
+    <Stack direction="row" flexGrow={flexGrow} spacing={8}>
       <CycleFilterYearSelector
         options={yearOptions}
         filteredYearIDs={activeFilters?.yearCycleIDs}

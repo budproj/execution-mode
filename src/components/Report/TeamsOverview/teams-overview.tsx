@@ -22,7 +22,7 @@ const TeamsOverview = () => {
   })
   const [rankedTeams, setRankedTeamsEdges] = useConnectionEdges<Team>()
 
-  const loadTeam = useRecoilFamilyLoader<Team>(teamAtomFamily)
+  const [loadTeam] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const company = data?.teams?.edges?.[0]?.node
 
   useEffect(() => {

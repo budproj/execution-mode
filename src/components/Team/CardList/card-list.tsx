@@ -18,7 +18,7 @@ export interface TeamCardListProperties {
 
 const TeamCardList = ({ numEmptyStateCards }: TeamCardListProperties) => {
   const { data, loading } = useQuery<GetTeamsQuery>(queries.GET_TEAMS)
-  const loadTeamsOnRecoil = useRecoilFamilyLoader<Team>(teamAtomFamily)
+  const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const [teams, setEdges] = useConnectionEdges<Team>()
 
   const orderedTeams = orderBy(teams, ['isCompany', 'name'], ['desc', 'asc'])

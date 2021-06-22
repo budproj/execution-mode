@@ -55,7 +55,7 @@ const EditModeIconButton = (properties: IconButtonProps) => (
 export const EditMode = ({ objective, accordionID, accordionIndex }: EditModeProperties) => {
   const intl = useIntl()
   const toast = useToast()
-  const loadObjectiveOnRecoil = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
+  const [loadObjectiveOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const [updateObjective, { loading, error }] = useMutation<UpdateObjectiveMutationResult>(
     queries.UPDATE_OBJECTIVE,
     {

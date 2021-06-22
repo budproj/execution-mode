@@ -25,7 +25,7 @@ const KeyResultSectionTimelineHeader = ({
 
   const checkInPolicy = keyResult?.keyResultCheckIns?.policy
 
-  const canUpdate = checkInPolicy?.create === GraphQLEffect.ALLOW
+  const canUpdate = checkInPolicy?.create === GraphQLEffect.ALLOW && keyResult?.status?.isActive
 
   const handleCheckInCompleted = (data: KeyResultCheckIn) => {
     setLatestTimelineEntry(data)

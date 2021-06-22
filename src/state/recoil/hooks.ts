@@ -1,4 +1,5 @@
 import deepmerge from 'deepmerge'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { RecoilState, useRecoilCallback } from 'recoil'
 
 import { overwriteMerge } from 'lib/deepmerge/merge-strategies'
@@ -14,24 +15,41 @@ type RecoilEntity = Team | Objective | KeyResult | User | Cycle
 type RecoilEntityParameterKey = 'id'
 type RecoilFamilyParameter = Team['id']
 type RecoilFamily<E> = (parameter?: RecoilFamilyParameter) => RecoilState<Partial<E> | undefined>
+type Loader<E> = (data?: Partial<E> | Array<Partial<E | undefined>> | undefined) => void | void[]
+type Options = {
+  isLoaded: boolean
+}
+
+type RecoilFamilyLoaderHook<E> = [Loader<E>, Options]
 
 export function useRecoilFamilyLoader<E extends RecoilEntity>(
   family: RecoilFamily<E>,
   parameter: RecoilEntityParameterKey = 'id',
-) {
-  const familyLoader = buildFamilyLoader(family, parameter)
+): RecoilFamilyLoaderHook<E> {
+  const [isLoaded, setIsLoaded] = useState(false)
+
+  const familyLoader = buildFamilyLoader(family, parameter, setIsLoaded)
   const loadOnRecoil = useRecoilCallback(familyLoader)
 
-  return loadOnRecoil
+  const options = {
+    isLoaded,
+  }
+
+  return [loadOnRecoil, options]
 }
 
 export const buildFamilyLoader =
-  <E extends RecoilEntity>(family: RecoilFamily<E>, parameter: RecoilEntityParameterKey) =>
+  <E extends RecoilEntity>(
+    family: RecoilFamily<E>,
+    parameter: RecoilEntityParameterKey,
+    setIsLoaded: Dispatch<SetStateAction<boolean>>,
+  ) =>
   ({ snapshot, set }: RecoilInterfaceCallback) =>
   (data?: Partial<E> | Array<Partial<E | undefined>>) => {
     if (!data) return
 
     const loadOnRecoil = (singleData?: Partial<E>) => {
+      setIsLoaded(true)
       if (!singleData) return
 
       const atom = family(singleData[parameter])

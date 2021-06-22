@@ -73,7 +73,7 @@ const KeyResultListBodyColumnKeyResult = ({
             >
               <LastUpdateText
                 date={lastUpdateDate}
-                color={status?.isOutdated ? 'red.500' : 'gray.300'}
+                color={status?.isOutdated && !isDisabled ? 'red.500' : 'gray.300'}
                 prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
               />
             </SkeletonText>

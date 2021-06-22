@@ -1,6 +1,7 @@
 import { defineMessages } from 'react-intl'
 
 type ObjectiveAccordionMenuMessage =
+  | 'optionsButtonIconDesc'
   | 'firstMenuOption'
   | 'secondMenuOption'
   | 'thirdMenuOption'
@@ -10,6 +11,13 @@ type ObjectiveAccordionMenuMessage =
   | 'deleteObjectiveErrorToastMessage'
 
 export default defineMessages<ObjectiveAccordionMenuMessage>({
+  optionsButtonIconDesc: {
+    defaultMessage: 'Um ícone de tres pontos, indicando que ao clicar aqui um menu se expandirá',
+    id: 'XvdEsU',
+    description:
+      'The description for screen readers regarding the three dots icon in the objectives accordion',
+  },
+
   firstMenuOption: {
     defaultMessage: 'Adicionar resultado-chave',
     id: '7tvIOz',

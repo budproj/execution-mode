@@ -40,6 +40,7 @@ query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES($userID: ID!) {
               }
               status {
                 isOutdated
+                isActive
                 latestCheckIn {
                   id
                   value

@@ -15,7 +15,7 @@ const CompanyProgressOverview = () => {
   const { data, loading } = useQuery<GetUserPrimaryCompanyQuery>(queries.GET_USER_PRIMARY_COMPANY, {
     fetchPolicy: 'network-only',
   })
-  const loadTeam = useRecoilFamilyLoader<Team>(teamAtomFamily)
+  const [loadTeam] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const company = data?.me?.companies?.edges?.[0]?.node
 
   useEffect(() => {

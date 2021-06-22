@@ -11,12 +11,14 @@ export interface ConfidenceTagProperties {
   showHelperText: boolean
   showTooltip: boolean
   confidenceValue?: KeyResultCheckIn['confidence']
+  isDisabled?: boolean
 }
 
 const ConfidenceTag = ({
   confidenceValue,
   showHelperText,
   showTooltip,
+  isDisabled,
 }: ConfidenceTagProperties) => {
   const [confidenceTag, setConfidence] = useConfidenceTag(confidenceValue)
 
@@ -31,13 +33,13 @@ const ConfidenceTag = ({
         display={showTooltip ? 'inherit' : 'none'}
       >
         <Tag
-          colorScheme={confidenceTag.color.scheme}
+          colorScheme={isDisabled ? 'gray' : confidenceTag.color.scheme}
           textTransform="uppercase"
           fontSize="xs"
           p={2}
           borderRadius={4}
-          bg={confidenceTag.color.light}
-          color={confidenceTag.color.primary}
+          bg={isDisabled ? 'gray.50' : confidenceTag.color.light}
+          color={isDisabled ? 'gray.400' : confidenceTag.color.primary}
         >
           {confidenceTag.messages.long}
         </Tag>

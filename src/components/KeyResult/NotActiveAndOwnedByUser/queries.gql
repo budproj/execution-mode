@@ -41,6 +41,7 @@ query GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES($userID: ID!) {
                 }
               }
               status {
+                isActive
                 latestCheckIn {
                   id
                   value

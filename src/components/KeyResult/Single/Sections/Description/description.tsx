@@ -50,7 +50,7 @@ const KeyResultSectionDescription = ({
   }
 
   const hasData = Boolean(keyResult?.description)
-  const canUpdate = keyResult?.policy?.update === GraphQLEffect.ALLOW
+  const canUpdate = keyResult?.policy?.update === GraphQLEffect.ALLOW && keyResult?.status?.isActive
   isLoading ??= hasData
 
   return hasData || isLoading || canUpdate ? (

@@ -30,8 +30,8 @@ const KeyResultActiveAndOwnedByUser = ({
   onLineClick,
 }: KeyResultActiveAndOwnedByUserProperties) => {
   const userID = useRecoilValue(meAtom)
-  const loadCycles = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
-  const loadKeyResults = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
+  const [loadCycles] = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
+  const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [cycles, setCycleEdges] = useConnectionEdges<Cycle>()
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 

@@ -17,6 +17,7 @@ interface ViewModeProperties {
   objective?: Partial<Objective>
   teamID?: string
   accordionID?: string
+  isDisabled?: boolean
 }
 
 export const ViewMode = ({
@@ -25,6 +26,7 @@ export const ViewMode = ({
   isLoaded,
   teamID,
   accordionID,
+  isDisabled,
 }: ViewModeProperties) => {
   const intl = useIntl()
 
@@ -42,32 +44,37 @@ export const ViewMode = ({
       </Skeleton>
 
       <Stack justifyContent="flex-end" direction="row" alignItems="center" spacing="8" flexGrow={1}>
-        <Stack spacing={4} direction="row" alignItems="stretch">
-          <TooltipWithDelay label={intl.formatMessage(messages.progressTagTooltip)} placement="top">
-            <Skeleton
-              isLoaded={isLoaded}
-              borderRadius={4}
-              w={isLoaded ? 'auto' : 140}
-              h={isLoaded ? 'auto' : 33}
+        {!isDisabled && (
+          <Stack spacing={4} direction="row" alignItems="stretch">
+            <TooltipWithDelay
+              label={intl.formatMessage(messages.progressTagTooltip)}
+              placement="top"
             >
-              <PercentageProgressIncreaseTag
-                forcePositiveSignal
-                bg="black.100"
-                h="full"
-                value={objective?.delta?.progress}
-                prefix={intl.formatMessage(messages.progressTagLabel)}
-              />
-            </Skeleton>
-          </TooltipWithDelay>
+              <Skeleton
+                isLoaded={isLoaded}
+                borderRadius={4}
+                w={isLoaded ? 'auto' : 140}
+                h={isLoaded ? 'auto' : 33}
+              >
+                <PercentageProgressIncreaseTag
+                  forcePositiveSignal
+                  bg="black.100"
+                  h="full"
+                  value={objective?.delta?.progress}
+                  prefix={intl.formatMessage(messages.progressTagLabel)}
+                />
+              </Skeleton>
+            </TooltipWithDelay>
 
-          <ObjectiveAccordionMenu
-            teamID={teamID}
-            objectiveID={objective?.id}
-            isLoaded={isLoaded}
-            accordionID={accordionID}
-            accordionIndex={accordionIndex}
-          />
-        </Stack>
+            <ObjectiveAccordionMenu
+              teamID={teamID}
+              objectiveID={objective?.id}
+              isLoaded={isLoaded}
+              accordionID={accordionID}
+              accordionIndex={accordionIndex}
+            />
+          </Stack>
+        )}
 
         <AccordionIcon />
       </Stack>

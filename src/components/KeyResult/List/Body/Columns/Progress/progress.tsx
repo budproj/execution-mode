@@ -43,7 +43,7 @@ const KeyResultListBodyColumnProgress = ({
 }: KeyResultListBodyColumnProgressProperties): ReactElement => {
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(id))
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
-  const isSlidding = useRecoilValue(keyResultCheckInIsSlidding(id))
+  const isSliding = useRecoilValue(keyResultCheckInIsSlidding(id))
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
   const intl = useIntl()
@@ -62,7 +62,11 @@ const KeyResultListBodyColumnProgress = ({
         <Box w="100%">
           {withConfidenceTag && (
             <Skeleton isLoaded={isKeyResultLoaded}>
-              <ConfidenceTag showTooltip confidenceValue={latestKeyResultCheckIn?.confidence} />
+              <ConfidenceTag
+                showTooltip
+                confidenceValue={latestKeyResultCheckIn?.confidence}
+                isDisabled={isDisabled}
+              />
             </Skeleton>
           )}
 
@@ -93,7 +97,7 @@ const KeyResultListBodyColumnProgress = ({
                       placement="bottom-start"
                     >
                       <Text
-                        color={isSlidding ? confidenceTag.color.primary : 'gray.300'}
+                        color={isSliding ? confidenceTag.color.primary : 'gray.300'}
                         cursor="help"
                       >
                         {value}

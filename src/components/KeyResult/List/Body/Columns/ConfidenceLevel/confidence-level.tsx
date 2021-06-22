@@ -12,10 +12,12 @@ import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 export interface KeyResultListBodyColumnConfidenceLevelProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
+  isDisabled?: boolean
 }
 
 const KeyResultListBodyColumnConfidenceLevel = ({
   id,
+  isDisabled,
 }: KeyResultListBodyColumnConfidenceLevelProperties): ReactElement => {
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const isKeyResultLoaded = Boolean(id)
@@ -24,7 +26,11 @@ const KeyResultListBodyColumnConfidenceLevel = ({
     <KeyResultListBodyColumnBase>
       <Flex gridGap={2} flexDir="column">
         <Skeleton isLoaded={isKeyResultLoaded}>
-          <ConfidenceTag showTooltip confidenceValue={latestCheckIn?.confidence} />
+          <ConfidenceTag
+            showTooltip
+            confidenceValue={latestCheckIn?.confidence}
+            isDisabled={isDisabled}
+          />
         </Skeleton>
       </Flex>
     </KeyResultListBodyColumnBase>

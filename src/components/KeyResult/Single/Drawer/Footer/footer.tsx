@@ -15,7 +15,7 @@ const KeyResultDrawerFooter = ({ keyResultID }: KeyResultDrawerFooterProperties)
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
 
   const commentPolicy = keyResult?.keyResultComments?.policy
-  const canCreate = commentPolicy?.create === GraphQLEffect.ALLOW
+  const canCreate = commentPolicy?.create === GraphQLEffect.ALLOW && keyResult?.status?.isActive
 
   return canCreate ? (
     <Box p={4} boxShadow="with-stroke.light" borderColor="new-gray.200" borderTopWidth={1}>

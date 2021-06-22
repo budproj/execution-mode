@@ -22,7 +22,7 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
   const [isLoaded, setIsLoaded] = useState(false)
   const team = useRecoilValue(teamAtomFamily(teamID))
   const [childTeams, setChildTeamEdges, childTeamEdges] = useConnectionEdges<Team>()
-  const loadTeamsOnRecoil = useRecoilFamilyLoader<Team>(teamAtomFamily)
+  const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
 
   useEffect(() => {
     if (team) setChildTeamEdges(team.teams?.edges)

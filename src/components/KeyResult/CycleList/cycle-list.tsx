@@ -90,6 +90,9 @@ const KeyResultCycleList = ({
             isActive,
             isDisabled,
           },
+          [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: {
+            isDisabled,
+          },
           [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
             isDisabled,
           },
