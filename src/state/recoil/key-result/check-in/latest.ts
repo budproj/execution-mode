@@ -74,6 +74,7 @@ export const setLatestCheckIn =
         progress: newLocalCheckIn.progress,
         confidence: newLocalCheckIn.confidence,
         isOutdated: false,
+        isActive: true,
         reportDate: new Date().toISOString(),
         latestCheckIn: newLocalCheckIn,
       },
