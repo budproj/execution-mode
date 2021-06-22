@@ -28,7 +28,7 @@ const CycleFilter = ({
   flexGrow,
 }: CycleFilterProperties) => {
   return (
-    <Stack direction="row" flexGrow={flexGrow} justifyContent="space-evenly">
+    <Stack direction="row" flexGrow={flexGrow} spacing={8}>
       <CycleFilterYearSelector
         options={yearOptions}
         filteredYearIDs={activeFilters?.yearCycleIDs}

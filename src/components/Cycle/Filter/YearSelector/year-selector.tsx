@@ -77,8 +77,8 @@ const CycleFilterYearSelector = ({
         rightIcon={
           <Box pl={4}>
             <ChevronDownIcon
-              fill="gray.200"
-              stroke="gray.200"
+              fill="currentColor"
+              stroke="currentColor"
               w={3}
               h="auto"
               transition=".2s all ease-in-out"
@@ -87,16 +87,20 @@ const CycleFilterYearSelector = ({
             />
           </Box>
         }
-        _hover={
-          {
-            borderColor: 'gray.200',
-
-            '& span:last-child svg': {
-              fill: 'gray.500',
-              stroke: 'gray.500',
-            },
-          } as any
-        }
+        _hover={{
+          bg: 'brand.500',
+          borderColor: 'brand.500',
+          color: 'white',
+        }}
+        _expanded={{
+          bg: 'brand.500',
+          borderColor: 'brand.500',
+          color: 'white',
+        }}
+        _active={{
+          bg: 'brand.500',
+        }}
+        _focus={{}}
       >
         <Text isTruncated maxW={40}>
           {isFilterActive
