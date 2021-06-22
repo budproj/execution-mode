@@ -100,7 +100,7 @@ export const useConfidenceTag = (
       },
       color: {
         scheme: 'yellow',
-        primary: 'yellow.700',
+        primary: 'yellow.600',
         light: 'yellow.100',
         variants: {
           sharp: {
