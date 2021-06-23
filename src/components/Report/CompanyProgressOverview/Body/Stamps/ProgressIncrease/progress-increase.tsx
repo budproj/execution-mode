@@ -25,7 +25,7 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
   const intl = useIntl()
   const company = useRecoilValue(teamAtomFamily(companyID))
 
-  const progress = Math.round(company?.delta?.progress ?? 0)
+  const progress = Math.round(company?.tacticalCycle?.delta?.progress ?? 0)
   const [previousProgress, setProgress, signalAttributes] = useValueSignal(progress)
 
   const IconComponent = ICON_COMPONENT_HASHMAP[signalAttributes.signal]

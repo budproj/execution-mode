@@ -17,6 +17,7 @@ export interface Team extends GraphQLNode {
   gender?: TEAM_GENDER
   company?: Team
   parent?: Team
+  tacticalCycle?: Cycle
   users?: GraphQLConnection<User>
   teams?: GraphQLConnection<Team>
   rankedDescendants?: GraphQLConnection<Team>
