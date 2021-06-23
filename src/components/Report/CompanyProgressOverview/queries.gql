@@ -6,20 +6,22 @@ query GET_USER_PRIMARY_COMPANY {
           id
           name
           gender
-          status {
-            progress
-            confidence
-            latestCheckIn {
-              id
-              createdAt
-              user {
+          tacticalCycle {
+            status {
+              progress
+              confidence
+              latestCheckIn {
                 id
-                fullName
+                createdAt
+                user {
+                  id
+                  fullName
+                }
               }
             }
-          }
-          delta {
-            progress
+            delta {
+              progress
+            }
           }
         }
       }

@@ -24,7 +24,7 @@ const CompanyProgressOverviewBodyStampCompany = ({
   const intl = useIntl()
   const company = useRecoilValue(teamAtomFamily(companyID))
 
-  const latestKeyResultCheckIn = company?.status?.latestCheckIn
+  const latestKeyResultCheckIn = company?.tacticalCycle?.status?.latestCheckIn
   const checkInDate = latestKeyResultCheckIn?.createdAt
     ? new Date(latestKeyResultCheckIn?.createdAt)
     : new Date()

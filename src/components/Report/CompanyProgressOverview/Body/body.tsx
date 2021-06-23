@@ -33,7 +33,11 @@ const CompanyProgressOverviewBody = ({
         </Flex>
 
         <Skeleton isLoaded={!isLoading}>
-          <SliderWithDetails value={company?.status?.progress} trackThickness={4} thumbHeight={7} />
+          <SliderWithDetails
+            value={company?.tacticalCycle?.status?.progress}
+            trackThickness={4}
+            thumbHeight={7}
+          />
         </Skeleton>
       </Flex>
     </OverviewBodyBox>
