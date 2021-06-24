@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { HELPDESK_NEW_TICKET_URL, HELPDESK_URL } from 'src/components/Base/SupportButton/constants'
+import { HELPDESK_URL } from 'src/components/Base/SupportButton/constants'
 import { Me } from 'src/components/User'
 import UserLogout from 'src/components/User/Logout'
 
@@ -61,12 +61,6 @@ const UserMenu = () => {
           <Link href={HELPDESK_URL}>
             <UserMenuButton>
               <a target="_blank">{intl.formatMessage(messages.secondOption)}</a>
-            </UserMenuButton>
-          </Link>
-
-          <Link href={HELPDESK_NEW_TICKET_URL}>
-            <UserMenuButton>
-              <a target="_blank">{intl.formatMessage(messages.thirdOption)}</a>
             </UserMenuButton>
           </Link>
         </Box>
