@@ -4,7 +4,19 @@ query GET_USER_NAMED_AVATAR_DATA {
     firstName
     fullName
     picture
+    email
+    gender
+    role
+    createdAt
     companies(first: 1) {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+    teams {
       edges {
         node {
           id
