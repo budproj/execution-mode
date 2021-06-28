@@ -8,7 +8,7 @@ import { identifyFactory } from './identify-factory'
 import { logEventFactory } from './log-event-factory'
 import { AmplitudeStaticAttributes, AmplitudeUser, AmplitudeUserGroups } from './types'
 
-type AmplitudeHook = {
+export type AmplitudeHook = {
   identify: (userID: string, userData: AmplitudeUser, userGroups?: AmplitudeUserGroups) => void
   logEvent: (eventType: string, eventProperties?: Record<string, any>) => void
 } & AmplitudeStaticAttributes

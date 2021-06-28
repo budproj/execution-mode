@@ -58,16 +58,16 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
         <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
           <ChakraProvider theme={theme}>
             <AuthzGatekeeper>
-              <AuthzApolloProvider pageProps={pageProps}>
-                <AmplitudeProvider>
+              <AmplitudeProvider>
+                <AuthzApolloProvider pageProps={pageProps}>
                   <MaintenanceGatekeeper>
                     <HotjarProvider />
                     <SmartlookProvider />
                     <ProgressBar />
                     <Component {...pageProps} />
                   </MaintenanceGatekeeper>
-                </AmplitudeProvider>
-              </AuthzApolloProvider>
+                </AuthzApolloProvider>
+              </AmplitudeProvider>
             </AuthzGatekeeper>
           </ChakraProvider>
         </RecoilIntlProvider>

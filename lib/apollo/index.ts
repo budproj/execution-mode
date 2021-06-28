@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
+import { ApolloClient, ApolloLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react'
 import { createUploadLink } from 'apollo-upload-client'
@@ -8,11 +8,13 @@ import { useMemo } from 'react'
 
 import getConfig from 'src/config'
 
+import { AmplitudeHook, useAmplitude } from '../../src/state/hooks/useAmplitude/hook'
+
 import { APOLLO_STATE } from './constants'
 
 let APOLLO_CLIENT: ApolloClient<NormalizedCacheObject>
 
-const authLink = (authzClient: Auth0ContextInterface) =>
+const authzLinkFactory = (authzClient: Auth0ContextInterface) =>
   setContext(async (_, { headers }) => {
     const { publicRuntimeConfig } = getConfig()
     const { getAccessTokenSilently } = authzClient
@@ -26,33 +28,45 @@ const authLink = (authzClient: Auth0ContextInterface) =>
     }
   })
 
-const linkWithServer = (authzClient: Auth0ContextInterface) => {
+const amplitudeLinkFactory = ({ deviceID, sessionID }: AmplitudeHook) =>
+  setContext((_, { headers, ...previousContext }) => ({
+    ...previousContext,
+    headers: {
+      ...headers,
+      'Device-ID': deviceID,
+      'Session-ID': sessionID,
+    },
+  }))
+
+const linkWithServer = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) => {
   const { publicRuntimeConfig } = getConfig()
   const shouldMockServer =
     publicRuntimeConfig.mirage.enabled && publicRuntimeConfig.environment === 'develop'
 
-  const link = createUploadLink({
+  const authLink = authzLinkFactory(authzClient)
+  const amplitudeLink = amplitudeLinkFactory(amplitude)
+  const uploadLink = createUploadLink({
     uri: publicRuntimeConfig.api.graphql,
   })
 
   return shouldMockServer
     ? { uri: publicRuntimeConfig.api.graphql }
-    : // eslint-disable-next-line unicorn/prefer-spread
-      { link: authLink(authzClient).concat(link) }
+    : { link: ApolloLink.from([authLink, amplitudeLink, uploadLink]) }
 }
 
-const createApolloClient = (authzClient: Auth0ContextInterface) =>
+const createApolloClient = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) =>
   new ApolloClient({
     cache: new InMemoryCache(),
     ssrMode: typeof window === 'undefined',
-    ...linkWithServer(authzClient),
+    ...linkWithServer(authzClient, amplitude),
   })
 
 export const initializeApollo = (
   authzClient: Auth0ContextInterface,
+  amplitude: AmplitudeHook,
   initialState: NormalizedCacheObject,
 ) => {
-  const apolloClient = APOLLO_CLIENT ?? createApolloClient(authzClient)
+  const apolloClient = APOLLO_CLIENT ?? createApolloClient(authzClient, amplitude)
 
   if (initialState) {
     const existingCache = apolloClient.extract()
@@ -82,9 +96,13 @@ export const useApollo = (
   pageProperties: AppProps['pageProps']['props'],
 ): ApolloClient<NormalizedCacheObject> => {
   const authzClient = useAuth0()
+  const amplitude = useAmplitude()
 
   const state: NormalizedCacheObject = pageProperties[APOLLO_STATE]
-  const client = useMemo(() => initializeApollo(authzClient, state), [authzClient, state])
+  const client = useMemo(
+    () => initializeApollo(authzClient, amplitude, state),
+    [authzClient, state],
+  )
 
   return client
 }
