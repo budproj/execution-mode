@@ -13,3 +13,8 @@ export type AmplitudeUserGroups = {
   companies: string[]
   teams: string[]
 }
+
+export type AmplitudeStaticAttributes = {
+  deviceID?: string
+  sessionID?: number
+}
