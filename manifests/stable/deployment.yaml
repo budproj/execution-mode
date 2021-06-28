@@ -57,3 +57,5 @@ spec:
               value: '6'
             - name: SMARTLOOK_API_KEY
               value: '5cab2cdecc225119adeece5e90353c122c462d14'
+            - name: AMPLITUDE_API_KEY
+              value: 9314f6f12a26e6a5989287b16d030c30
