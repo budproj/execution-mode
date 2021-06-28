@@ -79,6 +79,10 @@
     "defaultMessage": "Cancelar",
     "description": "This text is used as a fallback to the confirmation modal cancel button. It is displayed if the component did not received a custom button label"
   },
+  "0N9lO8": {
+    "defaultMessage": "Central de ajuda",
+    "description": "MainAppBar user menu second item option"
+  },
   "0OH4ZL": {
     "defaultMessage": "Descrição",
     "description": "The label text above the Description section in our key result single page or drawers"
@@ -219,6 +223,10 @@
     "defaultMessage": "Você tem certeza que deseja apagar este {type}?",
     "description": "This text is used in our delete modal confirmation to explain to the user what will happen"
   },
+  "5o6tYt": {
+    "defaultMessage": "Explorar ciclos anteriores",
+    "description": "This message appears below the time machine title, as an auxiliary title in a team's page"
+  },
   "5th5LY": {
     "defaultMessage": "Ué! Cadê a tela que tava aqui?",
     "description": "The title displayed in our unknown error page"
@@ -278,6 +286,10 @@
   "8/Eg3L": {
     "defaultMessage": "100",
     "description": "This message is displayed inside our key-result format select as the example of the number format"
+  },
+  "81Bqza": {
+    "defaultMessage": "Um ícone de X. Ao clicar nele você irá fechar a máquina do tempo",
+    "description": "This message is used by screen readers to explain our time machine close button inside a team's page"
   },
   "84XFCQ": {
     "defaultMessage": "Percentual",
@@ -611,6 +623,10 @@
     "defaultMessage": "Um ícone de setas entrelaçadas. Ao clicar aqui você irá editar esse campo",
     "description": "This message is used by screen readers when the user is focusing on the component which contains the user name and picture. This component is used in multiple places, like: our header, the key-result drawers, and other"
   },
+  "OErdYA": {
+    "defaultMessage": "Um ícone de tres pontos, indicando que ao clicar aqui um menu se expandirá",
+    "description": "The description for screen readers regarding the three dots above the objectives accordion"
+  },
   "ObFHxY": {
     "defaultMessage": "Cancelar",
     "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field"
@@ -702,6 +718,10 @@
   "SiJuyU": {
     "defaultMessage": "Um ícone de calendário, indicando que aqui você seleciona o ano que deseja filtrar",
     "description": "This message is used by screen readers to explain the icon to the user"
+  },
+  "Sm4xi7": {
+    "defaultMessage": "Máquina do tempo",
+    "description": "This message is displayed as the title of the time machine section in a team's page"
   },
   "Smwz9L": {
     "defaultMessage": "Descreve o período no qual esse resultado-chave faz parte",
@@ -895,9 +915,9 @@
     "defaultMessage": "Um ícone de busca",
     "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
   },
-  "cPGOoL": {
-    "defaultMessage": "Fale com nosso suporte técnico",
-    "description": "MainAppBar user menu third item option"
+  "c8x6gV": {
+    "defaultMessage": "Explorar ciclos anteriores",
+    "description": "This message is displayed when the user opens the menu inside a given cycle at the team page"
   },
   "cRj0sI": {
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
@@ -1314,10 +1334,6 @@
   "xywRWB": {
     "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
-  },
-  "yq7/PT": {
-    "defaultMessage": "Artigos de suporte",
-    "description": "MainAppBar user menu second item option"
   },
   "ytvOyM": {
     "defaultMessage": "Meus Resultados-Chave",
