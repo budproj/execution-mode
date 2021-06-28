@@ -15,6 +15,7 @@ export interface BudPublicConfig {
   auth0: Auth0Config
   hotjar: HotjarConfig
   smartlook: SmartlookConfig
+  amplitude: AmplitudeConfig
   mirage: MiragePublicConfig
   maintenanceMode: MaintenanceModeConfig
 }
@@ -70,6 +71,10 @@ export interface HotjarConfig {
 
 export interface SmartlookConfig {
   id: string
+}
+
+export interface AmplitudeConfig {
+  apiKey: string
 }
 
 export interface MiragePublicConfig {

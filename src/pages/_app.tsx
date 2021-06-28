@@ -15,6 +15,7 @@ import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
 
+import { AmplitudeProvider } from '../components/Base/AmplitudeProvider/amplitude-provider'
 import { SmartlookProvider } from '../components/Base/SmartlookProvider/smartlook-provider'
 
 type IntlMessage = Record<string, string>
@@ -58,12 +59,14 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
           <ChakraProvider theme={theme}>
             <AuthzGatekeeper>
               <AuthzApolloProvider pageProps={pageProps}>
-                <MaintenanceGatekeeper>
-                  <HotjarProvider />
-                  <SmartlookProvider />
-                  <ProgressBar />
-                  <Component {...pageProps} />
-                </MaintenanceGatekeeper>
+                <AmplitudeProvider>
+                  <MaintenanceGatekeeper>
+                    <HotjarProvider />
+                    <SmartlookProvider />
+                    <ProgressBar />
+                    <Component {...pageProps} />
+                  </MaintenanceGatekeeper>
+                </AmplitudeProvider>
               </AuthzApolloProvider>
             </AuthzGatekeeper>
           </ChakraProvider>

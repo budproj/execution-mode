@@ -19,6 +19,7 @@
       <env name="MIRAGE_ENABLED" value="false" />
       <env name="MIRAGE_FAKER_SEED" value="1234" />
       <env name="SMARTLOOK_API_KEY" value="5cab2cdecc225119adeece5e90353c122c462d14" />
+      <env name="AMPLITUDE_API_KEY" value="ce5c7ca0f7ad9002798472d2d858a50e" />
     </envs>
     <method v="2" />
   </configuration>
