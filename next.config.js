@@ -22,7 +22,8 @@ const {
   MIRAGE_FAKER_SEED,
   MAINTENANCE_MODE_ENABLED,
   MAINTENANCE_MODE_EXPECTED_RETURN,
-  SMARTLOOK_API_KEY
+  SMARTLOOK_API_KEY,
+  AMPLITUDE_API_KEY,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -54,6 +55,10 @@ const publicRuntimeConfig = {
 
   smartlook: {
     id: SMARTLOOK_API_KEY,
+  },
+
+  amplitude: {
+    apiKey: AMPLITUDE_API_KEY,
   },
 
   api: {

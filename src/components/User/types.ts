@@ -13,6 +13,7 @@ export interface CustomSorting {
 export interface User extends GraphQLNode {
   firstName: string
   fullName: string
+  email: string
   authzSub: string
   updatedAt: string
   lastName?: string
