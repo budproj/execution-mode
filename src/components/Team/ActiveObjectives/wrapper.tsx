@@ -14,7 +14,7 @@ import {
 } from '../../../state/recoil/team/objectives-view-mode'
 import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
 import { Objective } from '../../Objective/types'
-import { GraphQLConnection } from '../../types'
+import { GraphQLConnection, GraphQLConnectionPolicy, GraphQLEffect } from '../../types'
 import { TeamOKRsEmptyState } from '../OKRsEmptyState/wrapper'
 import { TeamOKRsSkeleton } from '../OKRsSkeleton/wrapper'
 
@@ -34,6 +34,7 @@ export interface GetTeamActiveObjectivesQuery {
 }
 
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
+  const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
@@ -46,6 +47,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     fetchPolicy: 'no-cache',
     variables: { teamID },
     onCompleted: (data) => {
+      setObjectivesPolicy(data.team.activeObjectives.policy)
       setActiveObjectives(data.team.activeObjectives?.edges ?? [])
       setHasNotActiveObjectives(data.team.notActiveObjectives.edges.length > 0)
     },
@@ -79,6 +81,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
               cycle={cycle}
               objectiveIDs={objectiveIDs}
               teamID={teamID}
+              canCreateObjective={objectivesPolicy?.create === GraphQLEffect.ALLOW}
               onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
             />
           ))

@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl'
 
-type ObjectivesFromCycleMessage = 'title' | 'optionsButtonIconDesc' | 'explorePreviousCyclesOption'
+type ObjectivesFromCycleMessage =
+  | 'title'
+  | 'optionsButtonIconDesc'
+  | 'explorePreviousCyclesOption'
+  | 'createOKROption'
 
 export default defineMessages<ObjectivesFromCycleMessage>({
   title: {
@@ -21,5 +25,11 @@ export default defineMessages<ObjectivesFromCycleMessage>({
     id: 'c8x6gV',
     description:
       'This message is displayed when the user opens the menu inside a given cycle at the team page',
+  },
+
+  createOKROption: {
+    defaultMessage: 'Adicionar um OKR neste ciclo',
+    id: 'TaXVmY',
+    description: 'This message is displayed inside the team page, on the options menu of a cycle',
   },
 })

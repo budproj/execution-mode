@@ -17,6 +17,7 @@ export interface ObjectivesFromCycleProperties {
   teamID?: string
   onViewOldCycles?: Action
   isDisabled?: boolean
+  canCreateObjective?: boolean
 }
 
 export const ObjectivesFromCycle = ({
@@ -25,12 +26,17 @@ export const ObjectivesFromCycle = ({
   teamID,
   onViewOldCycles,
   isDisabled,
+  canCreateObjective,
 }: ObjectivesFromCycleProperties) => {
   const intl = useIntl()
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
 
   const isLoaded = Boolean(cycle)
   const shouldDisplayActionMenu = Boolean(onViewOldCycles)
+
+  const handleCreateOKR = () => {
+    console.log('tag')
+  }
 
   useEffect(() => {
     if (cycle) setCadenceValue(cycle.cadence)
@@ -51,7 +57,12 @@ export const ObjectivesFromCycle = ({
           </Heading>
         </Skeleton>
 
-        {shouldDisplayActionMenu && <ActionMenu onViewOldCycles={onViewOldCycles} />}
+        {shouldDisplayActionMenu && (
+          <ActionMenu
+            onViewOldCycles={onViewOldCycles}
+            onCreateOKR={canCreateObjective ? handleCreateOKR : undefined}
+          />
+        )}
       </Stack>
 
       <ObjectiveAccordion

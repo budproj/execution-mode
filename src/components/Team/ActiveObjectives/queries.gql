@@ -26,6 +26,9 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
           }
         }
       }
+      policy {
+        create
+      }
     }
     notActiveObjectives: supportObjectives(active: false, first: 1) {
       edges {
