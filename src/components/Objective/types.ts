@@ -9,6 +9,8 @@ import {
   Status,
 } from 'src/components/types'
 
+import { Team } from '../Team/types'
+
 export interface Objective extends GraphQLNode {
   title: string
   updatedAt: string
@@ -17,5 +19,8 @@ export interface Objective extends GraphQLNode {
   cycle: Cycle
   owner: User
   policy: GraphQLEntityPolicy
+  teamId?: string
+  team?: Team
+  supportTeams?: GraphQLConnection<Team>
   keyResults?: GraphQLConnection<KeyResult>
 }

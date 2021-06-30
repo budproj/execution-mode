@@ -30,7 +30,7 @@ export interface GetTeamNotActiveObjectivesQuery {
   team: {
     id: string
     name: string
-    objectives: GraphQLConnection<Objective>
+    supportObjectives: GraphQLConnection<Objective>
   }
 }
 
@@ -60,7 +60,7 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
   useQuery<GetTeamNotActiveObjectivesQuery>(queries.GET_TEAM_NOT_ACTIVE_OBJECTIVES, {
     variables: { teamID },
     onCompleted: (data) => {
-      setObjectiveEdges(data.team.objectives?.edges ?? [])
+      setObjectiveEdges(data.team.supportObjectives?.edges ?? [])
     },
   })
 

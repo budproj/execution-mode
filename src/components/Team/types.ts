@@ -23,5 +23,6 @@ export interface Team extends GraphQLNode {
   rankedDescendants?: GraphQLConnection<Team>
   cycles?: GraphQLConnection<Cycle>
   objectives?: GraphQLConnection<Objective>
+  supportObjectives?: GraphQLConnection<Objective>
   keyResults?: GraphQLConnection<KeyResult>
 }
