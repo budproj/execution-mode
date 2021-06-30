@@ -43,15 +43,19 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   const [objectiveEdges, setObjectiveEdges, _, isRemoteDataLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
 
-  const { called } = useQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
-    fetchPolicy: 'no-cache',
-    variables: { teamID },
-    onCompleted: (data) => {
-      setObjectivesPolicy(data.team.activeObjectives.policy)
-      setActiveObjectives(data.team.activeObjectives?.edges ?? [])
-      setHasNotActiveObjectives(data.team.notActiveObjectives.edges.length > 0)
+  const { called, refetch } = useQuery<GetTeamActiveObjectivesQuery>(
+    queries.GET_TEAM_ACTIVE_OBJECTIVES,
+    {
+      fetchPolicy: 'no-cache',
+      variables: { teamID },
+      notifyOnNetworkStatusChange: true,
+      onCompleted: (data) => {
+        setObjectivesPolicy(data.team.activeObjectives.policy)
+        setActiveObjectives(data.team.activeObjectives?.edges ?? [])
+        setHasNotActiveObjectives(data.team.notActiveObjectives.edges.length > 0)
+      },
     },
-  })
+  )
 
   const handleViewOldCycles = () => {
     setObjectivesViewMode(ObjectivesViewMode.NOT_ACTIVE)
@@ -83,6 +87,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
               teamID={teamID}
               canCreateObjective={objectivesPolicy?.create === GraphQLEffect.ALLOW}
               onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
+              onNewObjective={refetch}
             />
           ))
         )
