@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
-import { Heading, Skeleton } from '@chakra-ui/react'
+import { Heading, Skeleton, useToast } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -35,12 +35,25 @@ export const ObjectivesFromCycle = ({
   const intl = useIntl()
   const userID = useRecoilValue(meAtom)
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
+  const toast = useToast()
   const [createDraftObjective] = useMutation(queries.CREATE_DRAFT_OBJECTIVE, {
     variables: {
       title: intl.formatMessage(messages.draftObjectiveTitle),
       cycleID: cycle?.id,
       ownerID: userID,
       teamID,
+    },
+    onCompleted: () => {
+      toast({
+        title: intl.formatMessage(messages.draftObjectiveSuccessToastMessage),
+        status: 'success',
+      })
+    },
+    onError: () => {
+      toast({
+        title: intl.formatMessage(messages.draftObjectiveErrorToastMessage),
+        status: 'error',
+      })
     },
   })
 
