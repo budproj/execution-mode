@@ -5,6 +5,7 @@ type ObjectivesFromCycleMessage =
   | 'optionsButtonIconDesc'
   | 'explorePreviousCyclesOption'
   | 'createOKROption'
+  | 'draftObjectiveTitle'
 
 export default defineMessages<ObjectivesFromCycleMessage>({
   title: {
@@ -31,5 +32,12 @@ export default defineMessages<ObjectivesFromCycleMessage>({
     defaultMessage: 'Adicionar um OKR neste ciclo',
     id: 'TaXVmY',
     description: 'This message is displayed inside the team page, on the options menu of a cycle',
+  },
+
+  draftObjectiveTitle: {
+    defaultMessage: 'Novo objetivo',
+    id: '6Syzud',
+    description:
+      'This message is used as the draft title of a new objective when an objective is created inside the team page',
   },
 })

@@ -1,15 +1,19 @@
+import { useMutation } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import { Heading, Skeleton } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from '../../../../lib/chakra/build-skeleton-min-size'
 import useCadence from '../../../state/hooks/useCadence'
+import meAtom from '../../../state/recoil/user/me'
 import { Cycle } from '../../Cycle/types'
-import messages from '../../KeyResult/CycleList/messages'
 import { ObjectiveAccordion } from '../AccordionItem/wrapper'
 
 import { Action, ActionMenu } from './action-menu'
+import messages from './messages'
+import queries from './queries.gql'
 
 export interface ObjectivesFromCycleProperties {
   cycle?: Cycle
@@ -29,14 +33,19 @@ export const ObjectivesFromCycle = ({
   canCreateObjective,
 }: ObjectivesFromCycleProperties) => {
   const intl = useIntl()
+  const userID = useRecoilValue(meAtom)
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
+  const [createDraftObjective] = useMutation(queries.CREATE_DRAFT_OBJECTIVE, {
+    variables: {
+      title: intl.formatMessage(messages.draftObjectiveTitle),
+      cycleID: cycle?.id,
+      ownerID: userID,
+      teamID,
+    },
+  })
 
   const isLoaded = Boolean(cycle)
   const shouldDisplayActionMenu = Boolean(onViewOldCycles)
-
-  const handleCreateOKR = () => {
-    console.log('tag')
-  }
 
   useEffect(() => {
     if (cycle) setCadenceValue(cycle.cadence)
@@ -60,7 +69,7 @@ export const ObjectivesFromCycle = ({
         {shouldDisplayActionMenu && (
           <ActionMenu
             onViewOldCycles={onViewOldCycles}
-            onCreateOKR={canCreateObjective ? handleCreateOKR : undefined}
+            onCreateOKR={canCreateObjective ? createDraftObjective : undefined}
           />
         )}
       </Stack>

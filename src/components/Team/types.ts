@@ -24,5 +24,6 @@ export interface Team extends GraphQLNode {
   cycles?: GraphQLConnection<Cycle>
   objectives?: GraphQLConnection<Objective>
   supportObjectives?: GraphQLConnection<Objective>
+  allObjectives?: GraphQLConnection<Objective>
   keyResults?: GraphQLConnection<KeyResult>
 }

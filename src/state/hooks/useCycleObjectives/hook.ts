@@ -28,8 +28,8 @@ const groupObjectivesByCycle = (objectives?: Objective[]): CycleObjectives => {
   ])
 }
 
-export const useCycleObjectives = (initialObjectives: Objective[] = []): CycleObjectivesHook => {
-  const [objectives, setObjectives] = useState(initialObjectives)
+export const useCycleObjectives = (initialObjectives?: Objective[]): CycleObjectivesHook => {
+  const [objectives, setObjectives] = useState(initialObjectives ?? [])
   const [isLoaded, setIsLoaded] = useState(Boolean(initialObjectives))
 
   const cycles = useMemo(() => groupObjectivesByCycle(objectives), [objectives])
