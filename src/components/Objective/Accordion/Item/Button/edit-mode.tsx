@@ -121,7 +121,14 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
             onClick={stopAccordionOpen}
           >
             <InputGroup>
-              <Field name="title" as={Input} validate={validateTitle} isInvalid={errors.title} />
+              <Field
+                name="title"
+                as={Input}
+                validate={validateTitle}
+                isInvalid={errors.title}
+                // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
+                onKeyUp={(event: KeyboardEvent) => event.preventDefault()}
+              />
               <InputRightElement h="full" pr={4}>
                 {loading && <Spinner color="gray.500" />}
                 {errors.title && (
