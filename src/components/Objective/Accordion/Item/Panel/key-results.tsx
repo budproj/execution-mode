@@ -17,6 +17,7 @@ import { objectiveAtomFamily } from 'src/state/recoil/objective'
 import { lastInsertedKeyResultIDAtom } from '../../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
 import { AccordionEntryMode } from '../../../../../state/recoil/objective/accordion'
 
+import messages from './messages'
 import queries from './queries.gql'
 
 export interface ObjectiveKeyResultsProperties {
@@ -99,6 +100,7 @@ export const ObjectiveKeyResults = ({
       isLoading={!isLoaded}
       templateColumns={templateColumns}
       columns={columns}
+      emptyStateMessage={messages.keyResultListEmptyStateMessage}
       headProperties={{
         [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
           hidden: true,

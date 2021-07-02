@@ -55,7 +55,6 @@ export const ObjectiveAccordionItem = ({
           <ObjectiveAccordionPanel
             isExpanded={isExpanded}
             objectiveID={objectiveID}
-            accordionIndex={index}
             accordionID={accordionID}
             teamID={teamID}
             isDisabled={isDisabled}

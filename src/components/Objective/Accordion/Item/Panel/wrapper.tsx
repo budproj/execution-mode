@@ -16,7 +16,6 @@ import { ObjectiveKeyResults } from './key-results'
 
 export interface ObjectiveAccordionPanelProperties {
   isExpanded: boolean
-  accordionIndex: number
   accordionID?: string
   objectiveID?: Objective['id']
   teamID?: string
@@ -27,14 +26,13 @@ export const ObjectiveAccordionPanel = ({
   isExpanded,
   objectiveID,
   accordionID,
-  accordionIndex,
   teamID,
   isDisabled,
 }: ObjectiveAccordionPanelProperties) => {
   const team = useRecoilValue(teamAtomFamily(teamID))
-  const accordionEntryModes = useRecoilValue(objectiveAccordionEntryModes(accordionID))
+  const accordionEntry = useRecoilValue(objectiveAccordionEntryModes(accordionID))
 
-  const mode = accordionEntryModes[accordionIndex]
+  const mode = objectiveID ? accordionEntry[objectiveID].mode : AccordionEntryMode.VIEW
   const canCreateKeyResult = team?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const showInsertButton = mode === AccordionEntryMode.EDIT && canCreateKeyResult
 
