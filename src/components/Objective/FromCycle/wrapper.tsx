@@ -3,10 +3,11 @@ import { Stack } from '@chakra-ui/layout'
 import { Heading, Skeleton, useToast } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import buildSkeletonMinSize from '../../../../lib/chakra/build-skeleton-min-size'
 import useCadence from '../../../state/hooks/useCadence'
+import { objectiveAccordionIDsBeingEdited } from '../../../state/recoil/objective/accordion'
 import meAtom from '../../../state/recoil/user/me'
 import { Cycle } from '../../Cycle/types'
 import { GetTeamActiveObjectivesQuery } from '../../Team/ActiveObjectives/wrapper'
@@ -52,6 +53,7 @@ export const ObjectivesFromCycle = ({
   const intl = useIntl()
   const toast = useToast()
   const userID = useRecoilValue(meAtom)
+  const setObjectiveIDToEditMode = useSetRecoilState(objectiveAccordionIDsBeingEdited(cycle?.id))
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
 
   const [createDraftObjective] = useMutation<CreateDraftObjectiveQueryResult>(
@@ -63,12 +65,13 @@ export const ObjectivesFromCycle = ({
         ownerID: userID,
         teamID,
       },
-      onCompleted: async () => {
+      onCompleted: async (data) => {
         toast({
           title: intl.formatMessage(messages.draftObjectiveSuccessToastMessage),
           status: 'success',
         })
 
+        setObjectiveIDToEditMode(data.createObjective.id)
         if (onNewObjective) await onNewObjective({ teamID })
       },
       onError: () => {

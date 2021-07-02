@@ -1,9 +1,10 @@
 import { Accordion } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import {
   objectiveAccordionExpandedEntries,
+  objectiveAccordionIDs,
   objectiveAccordionUpdate,
 } from '../../../state/recoil/objective/accordion'
 
@@ -26,9 +27,14 @@ export const ObjectiveAccordion = ({
   isDisabled,
 }: ObjectiveAccordionProperties) => {
   const refreshAccordionState = useSetRecoilState(objectiveAccordionUpdate(accordionID))
+  const accordionObjectiveIDs = useRecoilValue(objectiveAccordionIDs(accordionID))
   const [accordionExpandedIndexes, setAccordionExpandedIndexes] = useRecoilState(
     objectiveAccordionExpandedEntries(accordionID),
   )
+
+  const objectiveIDsAsArray = Array.isArray(accordionObjectiveIDs)
+    ? accordionObjectiveIDs
+    : [accordionObjectiveIDs]
 
   useEffect(() => {
     refreshAccordionState(objectiveIDs)
@@ -44,8 +50,8 @@ export const ObjectiveAccordion = ({
       flexDirection="column"
       onChange={setAccordionExpandedIndexes}
     >
-      {isLoaded && objectiveIDs ? (
-        objectiveIDs.map((objectiveID, index) => (
+      {isLoaded && objectiveIDsAsArray ? (
+        objectiveIDsAsArray.map((objectiveID, index) => (
           <ObjectiveAccordionItem
             key={objectiveID}
             objectiveID={objectiveID}
