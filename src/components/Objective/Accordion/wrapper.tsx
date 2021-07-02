@@ -8,7 +8,7 @@ import {
   objectiveAccordionEntryModes,
 } from '../../../state/recoil/objective/accordion'
 
-import ObjectiveAccordionItem from './Item/wrapper'
+import { ObjectiveAccordionItem } from './Item/wrapper'
 import { ObjectiveAccordionSkeleton } from './skeleton'
 
 interface ObjectiveAccordionProperties {

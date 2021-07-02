@@ -17,7 +17,7 @@ export interface ObjectiveAccordionItemProperties {
   isDisabled?: boolean
 }
 
-const ObjectiveAccordionItem = ({
+export const ObjectiveAccordionItem = ({
   objectiveID,
   teamID,
   index,
@@ -65,5 +65,3 @@ const ObjectiveAccordionItem = ({
     </AccordionItem>
   )
 }
-
-export default ObjectiveAccordionItem

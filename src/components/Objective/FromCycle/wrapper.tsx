@@ -11,7 +11,7 @@ import meAtom from '../../../state/recoil/user/me'
 import { Cycle } from '../../Cycle/types'
 import { GetTeamActiveObjectivesQuery } from '../../Team/ActiveObjectives/wrapper'
 import { Delta, GraphQLEntityPolicy, Status } from '../../types'
-import { ObjectiveAccordion } from '../AccordionItem/wrapper'
+import { ObjectiveAccordion } from '../Accordion/wrapper'
 
 import { Action, ActionMenu } from './action-menu'
 import messages from './messages'
@@ -53,6 +53,7 @@ export const ObjectivesFromCycle = ({
   const toast = useToast()
   const userID = useRecoilValue(meAtom)
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
+
   const [createDraftObjective] = useMutation<CreateDraftObjectiveQueryResult>(
     queries.CREATE_DRAFT_OBJECTIVE,
     {

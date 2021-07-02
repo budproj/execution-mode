@@ -1,7 +1,7 @@
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
-import ObjectiveAccordionItem from 'src/components/Objective/AccordionItem/index'
+import { ObjectiveAccordionItem } from 'src/components/Objective/Accordion/Item/wrapper'
 
 export interface ObjectiveAccordionSkeletonProperties {
   numOfSkeletons?: number

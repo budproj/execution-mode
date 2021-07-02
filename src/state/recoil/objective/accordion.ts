@@ -1,3 +1,6 @@
+import filter from 'lodash/filter'
+import map from 'lodash/map'
+import mapValues from 'lodash/mapValues'
 import { atomFamily, DefaultValue, GetRecoilValue, selectorFamily, SetRecoilState } from 'recoil'
 
 import { PREFIX } from './constants'
@@ -8,8 +11,24 @@ export enum AccordionEntryMode {
   EDIT = 'edit',
 }
 
-export const buildDefaultAccordionStateFromList = (data: any[] = []): AccordionEntryMode[] =>
-  data.map(() => AccordionEntryMode.COLLAPSED)
+type ObjectiveEntry = {
+  position: number
+  mode: AccordionEntryMode
+}
+
+type ObjectiveAccordion = Record<string, ObjectiveEntry>
+
+export const buildDefaultAccordionStateFromList = (data: string[] = []): ObjectiveAccordion =>
+  data.reduce(
+    (previous, key, index) => ({
+      ...previous,
+      [key]: {
+        position: index,
+        mode: AccordionEntryMode.COLLAPSED,
+      },
+    }),
+    {},
+  )
 
 const getIndexInGivenModes =
   (modes: AccordionEntryMode | AccordionEntryMode[]) =>
@@ -17,10 +36,11 @@ const getIndexInGivenModes =
   ({ get }: { get: GetRecoilValue }): number[] => {
     const modesAsArray = Array.isArray(modes) ? modes : [modes]
     const accordionEntries = get(objectiveAccordionEntryModes(id))
+    const entriesInSelectedMode = filter(accordionEntries, (entry) =>
+      modesAsArray.includes(entry.mode),
+    )
 
-    return accordionEntries
-      .map((indexMode, index) => (modesAsArray.includes(indexMode) ? index : -1))
-      .filter((index) => index !== -1)
+    return map(entriesInSelectedMode, 'position')
   }
 
 const setIndexesToGivenMode =
@@ -35,16 +55,17 @@ const setIndexesToGivenMode =
     const indexesAsArray = Array.isArray(indexes) ? indexes : [indexes]
 
     const accordionAtom = objectiveAccordionEntryModes(id)
-    const accordionIndexesState = get(accordionAtom)
+    const accordionState = get(accordionAtom)
 
-    const newAccordionIndexesState = accordionIndexesState.map((indexMode, index) =>
-      indexesAsArray.includes(index) ? selectedMode : othersMode ?? indexMode,
-    )
+    const newAccordionIndexesState = mapValues(accordionState, (entry) => ({
+      ...entry,
+      mode: indexesAsArray.includes(entry.position) ? selectedMode : othersMode ?? entry.mode,
+    }))
 
     set(accordionAtom, newAccordionIndexesState)
   }
 
-export const objectiveAccordionEntryModes = atomFamily<AccordionEntryMode[], string | undefined>({
+export const objectiveAccordionEntryModes = atomFamily<ObjectiveAccordion, string | undefined>({
   key: `${PREFIX}::ACCORDION_ENTRY_MODES`,
   default: buildDefaultAccordionStateFromList(),
 })
