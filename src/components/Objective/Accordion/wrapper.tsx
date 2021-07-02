@@ -3,9 +3,8 @@ import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import {
-  buildDefaultAccordionStateFromList,
   objectiveAccordionExpandedEntries,
-  objectiveAccordionEntryModes,
+  objectiveAccordionUpdate,
 } from '../../../state/recoil/objective/accordion'
 
 import { ObjectiveAccordionItem } from './Item/wrapper'
@@ -26,14 +25,14 @@ export const ObjectiveAccordion = ({
   accordionID,
   isDisabled,
 }: ObjectiveAccordionProperties) => {
-  const setIndexesState = useSetRecoilState(objectiveAccordionEntryModes(accordionID))
+  const refreshAccordionState = useSetRecoilState(objectiveAccordionUpdate(accordionID))
   const [accordionExpandedIndexes, setAccordionExpandedIndexes] = useRecoilState(
     objectiveAccordionExpandedEntries(accordionID),
   )
 
   useEffect(() => {
-    setIndexesState(buildDefaultAccordionStateFromList(objectiveIDs))
-  }, [objectiveIDs, setIndexesState])
+    refreshAccordionState(objectiveIDs)
+  }, [objectiveIDs, refreshAccordionState])
 
   return (
     <Accordion

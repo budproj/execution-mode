@@ -105,3 +105,35 @@ export const objectiveAccordionIndexesBeingViewed = selectorFamily<
   get: getIndexInGivenModes(AccordionEntryMode.VIEW),
   set: setIndexesToGivenMode(AccordionEntryMode.VIEW),
 })
+
+export const objectiveAccordionUpdate = selectorFamily<string[], string | undefined>({
+  key: `${PREFIX}::ACCORDION_UPDATE`,
+  get:
+    (id) =>
+    ({ get }) => {
+      const accordionState = get(objectiveAccordionEntryModes(id))
+      return Object.keys(accordionState)
+    },
+  set:
+    (id) =>
+    ({ get, set }, newObjectiveKeys) => {
+      if (newObjectiveKeys instanceof DefaultValue) return
+
+      const accordionAtom = objectiveAccordionEntryModes(id)
+      const previousState = get(accordionAtom)
+      const newBaseState = buildDefaultAccordionStateFromList(newObjectiveKeys)
+
+      const newState = Object.entries(newBaseState).reduce(
+        (previous, [key, entry]) => ({
+          ...previous,
+          [key]: {
+            ...entry,
+            mode: previousState[key]?.mode ?? entry.mode,
+          },
+        }),
+        {},
+      )
+
+      set(accordionAtom, newState)
+    },
+})
