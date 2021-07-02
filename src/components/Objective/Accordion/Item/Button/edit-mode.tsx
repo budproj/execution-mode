@@ -122,6 +122,7 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
           >
             <InputGroup>
               <Field
+                autoFocus
                 name="title"
                 as={Input}
                 validate={validateTitle}
