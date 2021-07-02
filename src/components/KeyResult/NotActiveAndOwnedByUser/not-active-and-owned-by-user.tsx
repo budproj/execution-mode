@@ -77,6 +77,7 @@ const KeyResultNotActiveAndOwnedByUser = ({
   const [fetchUserActiveCycles] = useLazyQuery<GetKeyResultNotActiveAndOwnedByUserWithBindingQuery>(
     queries.GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES,
     {
+      fetchPolicy: 'no-cache',
       variables: {
         userID,
       },
