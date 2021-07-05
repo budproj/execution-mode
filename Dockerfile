@@ -6,7 +6,7 @@ WORKDIR /usr/app
 
 COPY package.json ./
 COPY package-lock.json ./
-COPY scripts scripts
+COPY bin bin
 RUN chmod +x ./scripts/postinstall.sh
 RUN npm install --ignore-scripts
 
