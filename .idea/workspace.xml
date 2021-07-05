@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="612a51ea-035f-4ae9-b010-95068c75ac39" name="Default Changelist" comment="feature(theme): updates yellow token" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/components/User/AllReachableUsers/wrapper.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/User/List/wrapper.tsx" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProjectId" id="1tPC1G6BNYZPrs8D1a2q1iwZZun" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../delucca/workspaces/nestjs-mixing-headers" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="612a51ea-035f-4ae9-b010-95068c75ac39" name="Default Changelist" comment="" />
+      <created>1622661121338</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1622661121338</updated>
+      <workItem from="1622661123785" duration="906000" />
+      <workItem from="1622669791576" duration="61000" />
+      <workItem from="1622669937358" duration="3000" />
+      <workItem from="1622670027248" duration="308000" />
+      <workItem from="1622729703257" duration="12000" />
+      <workItem from="1622729934833" duration="3830000" />
+      <workItem from="1622751509918" duration="280000" />
+      <workItem from="1622753165859" duration="1346000" />
+      <workItem from="1623025483363" duration="2000" />
+      <workItem from="1623025697486" duration="2000" />
+      <workItem from="1623025766537" duration="1000" />
+      <workItem from="1623025774905" duration="1000" />
+      <workItem from="1623025784458" duration="2000" />
+      <workItem from="1623025924740" duration="2000" />
+      <workItem from="1623026815183" duration="1000" />
+      <workItem from="1623071870117" duration="1958000" />
+      <workItem from="1623261913367" duration="790000" />
+      <workItem from="1623679204190" duration="170000" />
+      <workItem from="1623679942998" duration="308000" />
+      <workItem from="1623790487176" duration="2447000" />
+      <workItem from="1623937107277" duration="48000" />
+      <workItem from="1624473538814" duration="9000" />
+      <workItem from="1624568453298" duration="721000" />
+      <workItem from="1624889800585" duration="18000" />
+    </task>
+    <task id="LOCAL-00001" summary="feature(theme): updates yellow token">
+      <created>1623792245609</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1623792245609</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feature(theme): updates yellow token" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature(theme): updates yellow token" />
+  </component>
+</project>
