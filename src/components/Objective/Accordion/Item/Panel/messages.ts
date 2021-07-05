@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type ObjectiveAccordionPanelMessage = 'insertButtonIconDesc' | 'insertButtonLabel'
+type ObjectiveAccordionPanelMessage =
+  | 'insertButtonIconDesc'
+  | 'insertButtonLabel'
+  | 'keyResultListEmptyStateMessage'
 
 export default defineMessages<ObjectiveAccordionPanelMessage>({
   insertButtonIconDesc: {
@@ -16,5 +19,12 @@ export default defineMessages<ObjectiveAccordionPanelMessage>({
     id: '6uAE86',
     description:
       'This message is used as the label to the create key-result button inside the objective accordion',
+  },
+
+  keyResultListEmptyStateMessage: {
+    defaultMessage: 'Este objetivo não tem nenhum resultado-chave',
+    id: 'J8dAid',
+    description:
+      'This message is displayed in the key-results empty state inside the team page when an objective has no key-results',
   },
 })

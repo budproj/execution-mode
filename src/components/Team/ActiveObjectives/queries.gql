@@ -2,8 +2,8 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
   team(id: $teamID) {
     id
     name
-    activeObjectives: objectives(active: true) {
-      edges {
+    activeObjectives: allObjectives(active: true) {
+       edges {
         node {
           id
           title
@@ -26,8 +26,11 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
           }
         }
       }
+      policy {
+        create
+      }
     }
-    notActiveObjectives: objectives(active: false, first: 1) {
+    notActiveObjectives: allObjectives(active: false, first: 1) {
       edges {
         node {
           id

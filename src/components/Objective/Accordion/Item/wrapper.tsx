@@ -17,7 +17,7 @@ export interface ObjectiveAccordionItemProperties {
   isDisabled?: boolean
 }
 
-const ObjectiveAccordionItem = ({
+export const ObjectiveAccordionItem = ({
   objectiveID,
   teamID,
   index,
@@ -55,7 +55,6 @@ const ObjectiveAccordionItem = ({
           <ObjectiveAccordionPanel
             isExpanded={isExpanded}
             objectiveID={objectiveID}
-            accordionIndex={index}
             accordionID={accordionID}
             teamID={teamID}
             isDisabled={isDisabled}
@@ -65,5 +64,3 @@ const ObjectiveAccordionItem = ({
     </AccordionItem>
   )
 }
-
-export default ObjectiveAccordionItem

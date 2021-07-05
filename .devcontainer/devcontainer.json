@@ -2,6 +2,14 @@
   "dockerComposeFile": "docker-compose.yaml",
   "service": "dev-app",
   "workspaceFolder": "/workspace",
-  "postCreateCommand": "bin/codespace-init",
-  "forwardPorts": [3000]
+  "postCreateCommand": "bin/workspace-init",
+  "settings": {
+    "debug.javascript.usePreview": false
+  },
+  "extensions": [
+    "firefox-devtools.vscode-firefox-debug",
+    "dbaeumer.vscode-eslint",
+    "github.copilot",
+    "eamodio.gitlens"
+  ]
 }

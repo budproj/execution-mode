@@ -1,0 +1,42 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Debug on Firefox",
+      "configurations": ["Server", "Firefox"]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Server",
+      "type": "node",
+      "request": "launch",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env.local",
+      "runtimeExecutable": "npm",
+      "port": 9229,
+      "timeout": 15000,
+      "runtimeArgs": [
+        "run-script",
+        "start:dev"
+      ],
+      "skipFiles": [
+        "**/node_modules/**/*.js",
+        "<node_internals>/**"
+      ]
+    },
+    {
+      "name": "Firefox",
+      "type": "firefox",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "pathMappings": [
+        {
+          "url": "webpack://_n_e/src",
+          "path": "${workspaceFolder}/src"
+        }
+      ]
+    }
+  ]
+}

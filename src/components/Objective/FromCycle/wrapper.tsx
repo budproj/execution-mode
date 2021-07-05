@@ -1,15 +1,22 @@
+import { ApolloQueryResult, useMutation } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
-import { Heading, Skeleton } from '@chakra-ui/react'
+import { Heading, Skeleton, useToast } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import buildSkeletonMinSize from '../../../../lib/chakra/build-skeleton-min-size'
 import useCadence from '../../../state/hooks/useCadence'
+import { objectiveAccordionIDsBeingEdited } from '../../../state/recoil/objective/accordion'
+import meAtom from '../../../state/recoil/user/me'
 import { Cycle } from '../../Cycle/types'
-import messages from '../../KeyResult/CycleList/messages'
-import { ObjectiveAccordion } from '../AccordionItem/wrapper'
+import { GetTeamActiveObjectivesQuery } from '../../Team/ActiveObjectives/wrapper'
+import { Delta, GraphQLEntityPolicy, Status } from '../../types'
+import { ObjectiveAccordion } from '../Accordion/wrapper'
 
 import { Action, ActionMenu } from './action-menu'
+import messages from './messages'
+import queries from './queries.gql'
 
 export interface ObjectivesFromCycleProperties {
   cycle?: Cycle
@@ -17,6 +24,21 @@ export interface ObjectivesFromCycleProperties {
   teamID?: string
   onViewOldCycles?: Action
   isDisabled?: boolean
+  canCreateObjective?: boolean
+  onNewObjective?: (
+    variables: Record<string, any>,
+  ) => Promise<ApolloQueryResult<GetTeamActiveObjectivesQuery>>
+}
+
+type CreateDraftObjectiveQueryResult = {
+  createObjective: {
+    id: string
+    title: string
+    cycle: Cycle
+    status: Status
+    delta: Delta
+    policy: GraphQLEntityPolicy
+  }
 }
 
 export const ObjectivesFromCycle = ({
@@ -25,9 +47,41 @@ export const ObjectivesFromCycle = ({
   teamID,
   onViewOldCycles,
   isDisabled,
+  canCreateObjective,
+  onNewObjective,
 }: ObjectivesFromCycleProperties) => {
   const intl = useIntl()
+  const toast = useToast()
+  const userID = useRecoilValue(meAtom)
+  const setObjectiveIDToEditMode = useSetRecoilState(objectiveAccordionIDsBeingEdited(cycle?.id))
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
+
+  const [createDraftObjective] = useMutation<CreateDraftObjectiveQueryResult>(
+    queries.CREATE_DRAFT_OBJECTIVE,
+    {
+      variables: {
+        title: intl.formatMessage(messages.draftObjectiveTitle),
+        cycleID: cycle?.id,
+        ownerID: userID,
+        teamID,
+      },
+      onCompleted: async (data) => {
+        toast({
+          title: intl.formatMessage(messages.draftObjectiveSuccessToastMessage),
+          status: 'success',
+        })
+
+        setObjectiveIDToEditMode(data.createObjective.id)
+        if (onNewObjective) await onNewObjective({ teamID })
+      },
+      onError: () => {
+        toast({
+          title: intl.formatMessage(messages.draftObjectiveErrorToastMessage),
+          status: 'error',
+        })
+      },
+    },
+  )
 
   const isLoaded = Boolean(cycle)
   const shouldDisplayActionMenu = Boolean(onViewOldCycles)
@@ -51,7 +105,12 @@ export const ObjectivesFromCycle = ({
           </Heading>
         </Skeleton>
 
-        {shouldDisplayActionMenu && <ActionMenu onViewOldCycles={onViewOldCycles} />}
+        {shouldDisplayActionMenu && (
+          <ActionMenu
+            onViewOldCycles={onViewOldCycles}
+            onCreateOKR={canCreateObjective ? createDraftObjective : undefined}
+          />
+        )}
       </Stack>
 
       <ObjectiveAccordion

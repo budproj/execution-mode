@@ -36,10 +36,10 @@ export const ObjectiveAccordionButton = ({
   accordionIndex,
   isDisabled,
 }: ObjectiveAccordionButtonProperties) => {
-  const accordionEntryModes = useRecoilValue(objectiveAccordionEntryModes(accordionID))
+  const accordionEntry = useRecoilValue(objectiveAccordionEntryModes(accordionID))
   const intl = useIntl()
 
-  const mode = accordionEntryModes[accordionIndex]
+  const mode = objective?.id ? accordionEntry[objective.id].mode : AccordionEntryMode.VIEW
   const roundedProgress = Math.round(objective?.status?.progress ?? 0)
 
   return (

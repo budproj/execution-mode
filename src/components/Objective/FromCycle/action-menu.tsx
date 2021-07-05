@@ -11,9 +11,10 @@ export type Action = () => void
 
 interface ActionMenuProperties {
   onViewOldCycles?: Action
+  onCreateOKR?: Action
 }
 
-export const ActionMenu = ({ onViewOldCycles }: ActionMenuProperties) => {
+export const ActionMenu = ({ onViewOldCycles, onCreateOKR }: ActionMenuProperties) => {
   const intl = useIntl()
 
   return (
@@ -29,6 +30,9 @@ export const ActionMenu = ({ onViewOldCycles }: ActionMenuProperties) => {
           <MenuItem onClick={onViewOldCycles}>
             {intl.formatMessage(messages.explorePreviousCyclesOption)}
           </MenuItem>
+        )}
+        {onCreateOKR && (
+          <MenuItem onClick={onCreateOKR}>{intl.formatMessage(messages.createOKROption)}</MenuItem>
         )}
       </MenuList>
     </Menu>

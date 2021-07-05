@@ -2,6 +2,7 @@ import { Box, BoxProps, GridProps } from '@chakra-ui/react'
 import uniqueId from 'lodash/uniqueId'
 import React, { ReactElement } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
+import { MessageDescriptor } from 'react-intl'
 
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResultListBodyColumnProperties } from 'src/components/KeyResult/List/Body/Columns/types'
@@ -28,6 +29,7 @@ export interface KeyResultListProperties extends BoxProps {
   type: KEY_RESULT_LIST_TYPE
   templateColumns: GridProps['templateColumns']
   columnGap: GridProps['gridColumnGap']
+  emptyStateMessage?: MessageDescriptor
   keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
   onLineDragEnd?: (result: DropResult) => void
@@ -47,6 +49,7 @@ const KeyResultList = ({
   templateColumns,
   columnGap,
   isLoading,
+  emptyStateMessage,
   ...rest
 }: KeyResultListProperties): ReactElement => (
   <Box {...rest}>
@@ -79,6 +82,7 @@ const KeyResultList = ({
         borderColor={borderColor}
         keyResultIDs={keyResultIDs}
         handleDragEnd={onLineDragEnd}
+        emptyStateMessage={emptyStateMessage}
         onLineClick={onLineClick}
       />
     )}

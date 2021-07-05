@@ -1,6 +1,7 @@
 import { Box, GridProps } from '@chakra-ui/react'
 import React from 'react'
 import { DropResult } from 'react-beautiful-dnd'
+import { MessageDescriptor } from 'react-intl'
 
 import { EmptyState } from 'src/components/Base'
 import KeyResultBodyDragAndDrop from 'src/components/KeyResult/List/Body/DragAndDrop'
@@ -20,12 +21,18 @@ export interface KeyResultListBodyProperties {
   columnGap: GridProps['gridColumnGap']
   borderColor: GridProps['borderColor']
   bodyProperties: KeyResultListBodyColumnProperties
+  emptyStateMessage?: MessageDescriptor
   keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
   handleDragEnd?: (result: DropResult) => void
 }
 
-const KeyResultListBody = ({ type, keyResultIDs, ...rest }: KeyResultListBodyProperties) => {
+const KeyResultListBody = ({
+  type,
+  keyResultIDs,
+  emptyStateMessage,
+  ...rest
+}: KeyResultListBodyProperties) => {
   const bodyComponents = {
     [KEY_RESULT_LIST_TYPE.DND]: KeyResultBodyDragAndDrop,
     [KEY_RESULT_LIST_TYPE.STATIC]: KeyResultBodyStatic,
@@ -35,8 +42,8 @@ const KeyResultListBody = ({ type, keyResultIDs, ...rest }: KeyResultListBodyPro
   return keyResultIDs && keyResultIDs.length > 0 ? (
     <BodyComponent keyResultIDs={keyResultIDs} type={type} {...rest} />
   ) : (
-    <Box pt={20}>
-      <EmptyState labelMessage={messages.emptyStateLabel} />
+    <Box py={20}>
+      <EmptyState labelMessage={emptyStateMessage ?? messages.emptyStateLabel} />
     </Box>
   )
 }

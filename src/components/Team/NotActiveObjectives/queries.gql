@@ -2,7 +2,7 @@ query GET_TEAM_NOT_ACTIVE_OBJECTIVES($teamID: ID!) {
   team(id: $teamID) {
     id
     name
-    objectives(active: false) {
+    allObjectives(active: false) {
       edges {
         node {
           id
