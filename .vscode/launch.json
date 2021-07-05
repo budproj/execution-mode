@@ -1,5 +1,11 @@
 {
   "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Debug on Firefox",
+      "configurations": ["Server", "Firefox"]
+    }
+  ],
   "configurations": [
     {
       "name": "Server",
@@ -15,21 +21,22 @@
         "start:dev"
       ],
       "skipFiles": [
+        "**/node_modules/**/*.js",
         "<node_internals>/**"
       ]
-    }
+    },
     {
       "name": "Firefox",
       "type": "firefox",
       "request": "launch",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}"
-    },
-  ],
-  "compounds": [
-    {
-      "name": "Debug on Firefox",
-      "configurations": ["Server", "Firefox"]
+      "webRoot": "${workspaceFolder}",
+      "pathMappings": [
+        {
+          "url": "webpack://_n_e/src",
+          "path": "${workspaceFolder}/src"
+        }
+      ]
     }
   ]
 }

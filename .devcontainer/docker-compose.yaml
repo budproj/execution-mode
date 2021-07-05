@@ -4,8 +4,6 @@ services:
   dev-app:
     image: mcr.microsoft.com/vscode/devcontainers/typescript-node:14
     command: tail -f /dev/null
-    env_file:
-      - ../.env
-      - ../.env.development
+    user: 1000:1000
     volumes:
       - ..:/workspace:cached

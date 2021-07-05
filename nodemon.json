@@ -9,6 +9,6 @@
     "lang/*",
     "src/server/*"
   ],
-  "exec": "run-s compile:intl server:launch",
+  "exec": "run-s compile:intl start:debug",
   "ext": "ts tsx json"
 }
