@@ -251,6 +251,10 @@
     "defaultMessage": "Um círculo com um ponto de interrogação no meio",
     "description": "This message explains our tooltip icon for screen readers"
   },
+  "6Syzud": {
+    "defaultMessage": "Novo objetivo",
+    "description": "This message is used as the draft title of a new objective when an objective is created inside the team page"
+  },
   "6aChVs": {
     "defaultMessage": "Nesta semana",
     "description": "This label is displayed if the date difference is 1 week or less"
@@ -527,6 +531,10 @@
     "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
   },
+  "J8dAid": {
+    "defaultMessage": "Este objetivo não tem nenhum resultado-chave",
+    "description": "This message is displayed in the key-results empty state inside the team page when an objective has no key-results"
+  },
   "JBA9+L": {
     "defaultMessage": "Explorar ciclos anteriores",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
@@ -679,6 +687,10 @@
     "defaultMessage": "Alta Confiança",
     "description": "We use this tag to group every key result with confidence higher than 66"
   },
+  "QRy8b9": {
+    "defaultMessage": "Um novo objetivo foi criado com sucesso",
+    "description": "This message appears as a toast as soon as the the user clicks to add a new objective in the team page"
+  },
   "QcCy51": {
     "defaultMessage": "Valor atual",
     "description": "This tooltip is displayed when the user hovers the left side value of our progress bar"
@@ -754,6 +766,10 @@
   "TKIxVB": {
     "defaultMessage": "Definições",
     "description": "This title is displayed as the heading of the definitions menu section"
+  },
+  "TaXVmY": {
+    "defaultMessage": "Adicionar um OKR neste ciclo",
+    "description": "This message is displayed inside the team page, on the options menu of a cycle"
   },
   "TzHlPJ": {
     "defaultMessage": "Em manutenção | bud",
@@ -1034,6 +1050,10 @@
   "hzOI/d": {
     "defaultMessage": "Se realmente tem certeza de que deseja excluir este {type}, confirme sua ação escrevendo “EXCLUIR” no campo abaixo:",
     "description": "This message is displayed as the description for the danger confirmation modal while removing a given resource"
+  },
+  "i9bdpU": {
+    "defaultMessage": "Houve um erro inesperado ao criar seu objetivo. Tente novamente mais tarde",
+    "description": "This message appears as an error toast when the users tries to create a new objective but an error appears"
   },
   "iPv+uj": {
     "defaultMessage": "Um ícone de uma linha reta na horizontal, representando que sua empresa não evolui desde o último evento de check-in",
