@@ -61,6 +61,10 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     setObjectivesViewMode(ObjectivesViewMode.NOT_ACTIVE)
   }
 
+  const handleRefetch = async () => {
+    void refetch({ teamID })
+  }
+
   useEffect(() => {
     if (called && activeObjectives) setObjectiveEdges(activeObjectives)
   }, [called, activeObjectives, setObjectiveEdges])
@@ -77,7 +81,12 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     <Stack spacing={12} h="full">
       {isLoaded ? (
         cycles.length === 0 ? (
-          <TeamOKRsEmptyState />
+          <TeamOKRsEmptyState
+            teamID={teamID}
+            isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
+            onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
+            onNewObjective={handleRefetch}
+          />
         ) : (
           cycles.map(([cycle, objectiveIDs]) => (
             <CycleObjectives
@@ -85,9 +94,9 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
               cycle={cycle}
               objectiveIDs={objectiveIDs}
               teamID={teamID}
-              canCreateObjective={objectivesPolicy?.create === GraphQLEffect.ALLOW}
+              isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
               onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
-              onNewObjective={refetch}
+              onNewObjective={handleRefetch}
             />
           ))
         )

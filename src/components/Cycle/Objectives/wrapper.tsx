@@ -1,4 +1,4 @@
-import { ApolloQueryResult, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import { Heading, Skeleton, useToast } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
@@ -11,7 +11,6 @@ import buildSkeletonMinSize from '../../../../lib/chakra/build-skeleton-min-size
 import useCadence from '../../../state/hooks/useCadence'
 import meAtom from '../../../state/recoil/user/me'
 import { ObjectiveAccordion } from '../../Objective/Accordion/wrapper'
-import { GetTeamActiveObjectivesQuery } from '../../Team/ActiveObjectives/wrapper'
 import { Delta, GraphQLEntityPolicy, Status } from '../../types'
 import { Action, ActionMenu } from '../ActionMenu/wrapper'
 import { Cycle } from '../types'
@@ -25,10 +24,8 @@ export interface ObjectivesFromCycleProperties {
   teamID?: string
   onViewOldCycles?: Action
   isDisabled?: boolean
-  canCreateObjective?: boolean
-  onNewObjective?: (
-    variables: Record<string, any>,
-  ) => Promise<ApolloQueryResult<GetTeamActiveObjectivesQuery>>
+  isAllowedToCreateObjectives?: boolean
+  onNewObjective?: () => void
 }
 
 type CreateDraftObjectiveQueryResult = {
@@ -48,12 +45,12 @@ export const CycleObjectives = ({
   teamID,
   onViewOldCycles,
   isDisabled,
-  canCreateObjective,
+  isAllowedToCreateObjectives,
   onNewObjective,
 }: ObjectivesFromCycleProperties) => {
   const intl = useIntl()
   const toast = useToast()
-  const userID = useRecoilValue(meAtom)
+  const ownerID = useRecoilValue(meAtom)
   const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
 
@@ -63,7 +60,7 @@ export const CycleObjectives = ({
       variables: {
         title: intl.formatMessage(messages.draftObjectiveTitle),
         cycleID: cycle?.id,
-        ownerID: userID,
+        ownerID,
         teamID,
       },
       onCompleted: async (data) => {
@@ -73,7 +70,7 @@ export const CycleObjectives = ({
         })
 
         setObjectiveIDToEditMode(data.createObjective.id)
-        if (onNewObjective) await onNewObjective({ teamID })
+        if (onNewObjective) void onNewObjective()
       },
       onError: () => {
         toast({
@@ -85,7 +82,7 @@ export const CycleObjectives = ({
   )
 
   const isLoaded = Boolean(cycle)
-  const shouldDisplayActionMenu = Boolean(onViewOldCycles)
+  const shouldDisplayActionMenu = Boolean(onViewOldCycles) || Boolean(isAllowedToCreateObjectives)
 
   const handleDraftObjectiveCreation = (cycleID?: string) => {
     void createDraftObjective({
@@ -118,7 +115,7 @@ export const CycleObjectives = ({
           <ActionMenu
             cycleID={cycle?.id}
             onViewOldCycles={onViewOldCycles}
-            onCreateOKR={canCreateObjective ? handleDraftObjectiveCreation : undefined}
+            onCreateOKR={isAllowedToCreateObjectives ? handleDraftObjectiveCreation : undefined}
           />
         )}
       </Stack>
