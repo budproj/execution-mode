@@ -1,12 +1,11 @@
 import { Accordion } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import {
-  objectiveAccordionExpandedEntries,
-  objectiveAccordionIDs,
-  objectiveAccordionUpdate,
-} from '../../../state/recoil/objective/accordion'
+  objectiveAccordion,
+  objectiveAccordionExpandedIndexes,
+} from 'src/state/recoil/objective/accordion'
 
 import { ObjectiveAccordionItem } from './Item/wrapper'
 import { ObjectiveAccordionSkeleton } from './skeleton'
@@ -26,19 +25,14 @@ export const ObjectiveAccordion = ({
   accordionID,
   isDisabled,
 }: ObjectiveAccordionProperties) => {
-  const refreshAccordionState = useSetRecoilState(objectiveAccordionUpdate(accordionID))
-  const accordionObjectiveIDs = useRecoilValue(objectiveAccordionIDs(accordionID))
-  const [accordionExpandedIndexes, setAccordionExpandedIndexes] = useRecoilState(
-    objectiveAccordionExpandedEntries(accordionID),
+  const [accordionEntries, setAccordionEntries] = useRecoilState(objectiveAccordion(accordionID))
+  const [accordionExpandedIndexes, setExpandedIndexes] = useRecoilState(
+    objectiveAccordionExpandedIndexes(accordionID),
   )
 
-  const objectiveIDsAsArray = Array.isArray(accordionObjectiveIDs)
-    ? accordionObjectiveIDs
-    : [accordionObjectiveIDs]
-
   useEffect(() => {
-    refreshAccordionState(objectiveIDs)
-  }, [objectiveIDs, refreshAccordionState])
+    setAccordionEntries(objectiveIDs)
+  }, [objectiveIDs, setAccordionEntries])
 
   return (
     <Accordion
@@ -48,16 +42,14 @@ export const ObjectiveAccordion = ({
       gridGap={8}
       display="flex"
       flexDirection="column"
-      onChange={setAccordionExpandedIndexes}
+      onChange={setExpandedIndexes}
     >
-      {isLoaded && objectiveIDsAsArray ? (
-        objectiveIDsAsArray.map((objectiveID, index) => (
+      {isLoaded ? (
+        accordionEntries.map((objectiveID) => (
           <ObjectiveAccordionItem
             key={objectiveID}
             objectiveID={objectiveID}
             teamID={teamID}
-            accordionID={accordionID}
-            index={index}
             isDisabled={isDisabled}
           />
         ))

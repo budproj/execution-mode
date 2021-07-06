@@ -5,9 +5,10 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+
 import buildSkeletonMinSize from '../../../../lib/chakra/build-skeleton-min-size'
 import useCadence from '../../../state/hooks/useCadence'
-import { objectiveAccordionIDsBeingEdited } from '../../../state/recoil/objective/accordion'
 import meAtom from '../../../state/recoil/user/me'
 import { ObjectiveAccordion } from '../../Objective/Accordion/wrapper'
 import { GetTeamActiveObjectivesQuery } from '../../Team/ActiveObjectives/wrapper'
@@ -53,7 +54,7 @@ export const CycleObjectives = ({
   const intl = useIntl()
   const toast = useToast()
   const userID = useRecoilValue(meAtom)
-  const setObjectiveIDToEditMode = useSetRecoilState(objectiveAccordionIDsBeingEdited(cycle?.id))
+  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
   const [cadence, setCadenceValue] = useCadence(cycle?.cadence)
 
   const [createDraftObjective] = useMutation<CreateDraftObjectiveQueryResult>(

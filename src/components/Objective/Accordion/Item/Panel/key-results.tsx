@@ -13,16 +13,16 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
+import { ObjectiveMode } from 'src/state/recoil/objective/context'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
-import { AccordionEntryMode } from '../../../../../state/recoil/objective/accordion'
 
 import messages from './messages'
 import queries from './queries.gql'
 
 export interface ObjectiveKeyResultsProperties {
   objectiveID?: Objective['id']
-  mode: AccordionEntryMode
+  mode: ObjectiveMode
   isDisabled?: boolean
 }
 
@@ -58,7 +58,7 @@ export const ObjectiveKeyResults = ({
   )
 
   const keyResultIDs = selectKeyResultIDs(keyResults)
-  const isEditing = mode === AccordionEntryMode.EDIT
+  const isEditing = mode === ObjectiveMode.EDIT
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
   const templateColumns = isEditing ? '2fr 1fr 0.1fr 0.68fr 0.25fr' : '2fr 1fr 0.1fr 1fr'

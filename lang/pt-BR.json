@@ -235,6 +235,10 @@
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
   },
+  "612Wwz": {
+    "defaultMessage": "Adicionar um OKR {cadence} no ciclo {cycle} {parent}",
+    "description": "This message is displayed inside the team page, on the options menu of a cycle"
+  },
   "6BeRhq": {
     "defaultMessage": "Excluir este OKR",
     "description": "This is the third option that appears when you open the menu of a given objective inside the accordion button"

@@ -3,27 +3,22 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { objectiveAccordionIndexesBeingEdited } from '../../../../state/recoil/objective/accordion'
+import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+
 import { stopAccordionOpen } from '../handlers'
 
 import messages from './messages'
 
 interface UpdateObjectiveOptionProperties {
-  accordionIndex: number
-  accordionID?: string
+  objectiveID?: string
 }
 
-export const UpdateObjectiveOption = ({
-  accordionID,
-  accordionIndex,
-}: UpdateObjectiveOptionProperties) => {
-  const setObjectiveToEditMode = useSetRecoilState(
-    objectiveAccordionIndexesBeingEdited(accordionID),
-  )
+export const UpdateObjectiveOption = ({ objectiveID }: UpdateObjectiveOptionProperties) => {
+  const setObjectiveToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
   const intl = useIntl()
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    setObjectiveToEditMode(accordionIndex)
+    setObjectiveToEditMode(objectiveID)
     stopAccordionOpen(event)
   }
 
