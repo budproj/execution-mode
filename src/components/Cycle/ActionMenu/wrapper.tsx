@@ -29,6 +29,7 @@ type GetActiveCyclesQueryResult = {
 export const ActionMenu = ({ cycleID, onViewOldCycles, onCreateOKR }: ActionMenuProperties) => {
   const intl = useIntl()
   const [isOpen, setIsOpen] = useState(false)
+  const [relatedCycles, setRelatedCycles] = useState<Cycle[]>()
   const [activeCycles, setActiveCycleEdges, _, isConnectionLoaded] = useConnectionEdges<Cycle>()
 
   const [fetchActiveCycles, { called, loading }] = useLazyQuery<GetActiveCyclesQueryResult>(
@@ -40,12 +41,19 @@ export const ActionMenu = ({ cycleID, onViewOldCycles, onCreateOKR }: ActionMenu
 
   const handleOpenMenu = () => setIsOpen(true)
   const handleCloseMenu = () => setIsOpen(false)
+
   const shouldShowLoadingSpinner =
     (Boolean(onCreateOKR) && loading && !isConnectionLoaded) || (Boolean(onCreateOKR) && !called)
 
   useEffect(() => {
     if (isOpen) fetchActiveCycles()
   }, [isOpen, fetchActiveCycles])
+
+  useEffect(() => {
+    const relatedCycles = activeCycles.filter((cycle) => cycle.id !== cycleID)
+
+    setRelatedCycles(relatedCycles)
+  }, [cycleID, activeCycles, setRelatedCycles])
 
   return (
     <Menu
@@ -65,7 +73,12 @@ export const ActionMenu = ({ cycleID, onViewOldCycles, onCreateOKR }: ActionMenu
         {shouldShowLoadingSpinner ? (
           <ActionSpinner />
         ) : (
-          <Actions onViewOldCycles={onViewOldCycles} onCreateOKR={onCreateOKR} />
+          <Actions
+            currentCycleID={cycleID}
+            relatedCycles={relatedCycles}
+            onViewOldCycles={onViewOldCycles}
+            onCreateOKR={onCreateOKR}
+          />
         )}
       </MenuList>
     </Menu>

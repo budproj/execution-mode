@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl'
 
-type ActionMenuMessage = 'optionsButtonIconDesc' | 'explorePreviousCyclesOption' | 'createOKROption'
+type ActionMenuMessage =
+  | 'optionsButtonIconDesc'
+  | 'explorePreviousCyclesOption'
+  | 'createOKRInThisCycleOption'
+  | 'createOKRInRelatedCycleOption'
 
 export default defineMessages<ActionMenuMessage>({
   optionsButtonIconDesc: {
@@ -17,9 +21,15 @@ export default defineMessages<ActionMenuMessage>({
       'This message is displayed when the user opens the menu inside a given cycle at the team page',
   },
 
-  createOKROption: {
+  createOKRInThisCycleOption: {
     defaultMessage: 'Adicionar um OKR neste ciclo',
     id: 'TaXVmY',
+    description: 'This message is displayed inside the team page, on the options menu of a cycle',
+  },
+
+  createOKRInRelatedCycleOption: {
+    defaultMessage: 'Adicionar um OKR {cadence} no ciclo {cycle} {parent}',
+    id: '612Wwz',
     description: 'This message is displayed inside the team page, on the options menu of a cycle',
   },
 })

@@ -86,6 +86,14 @@ export const CycleObjectives = ({
   const isLoaded = Boolean(cycle)
   const shouldDisplayActionMenu = Boolean(onViewOldCycles)
 
+  const handleDraftObjectiveCreation = (cycleID?: string) => {
+    void createDraftObjective({
+      variables: {
+        cycleID,
+      },
+    })
+  }
+
   useEffect(() => {
     if (cycle) setCadenceValue(cycle.cadence)
   }, [cycle, setCadenceValue])
@@ -109,7 +117,7 @@ export const CycleObjectives = ({
           <ActionMenu
             cycleID={cycle?.id}
             onViewOldCycles={onViewOldCycles}
-            onCreateOKR={canCreateObjective ? createDraftObjective : undefined}
+            onCreateOKR={canCreateObjective ? handleDraftObjectiveCreation : undefined}
           />
         )}
       </Stack>
