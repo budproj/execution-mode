@@ -12,7 +12,7 @@ import {
   ObjectivesViewMode,
   teamObjectivesViewMode,
 } from '../../../state/recoil/team/objectives-view-mode'
-import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
+import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnection, GraphQLConnectionPolicy, GraphQLEffect } from '../../types'
 import { TeamOKRsEmptyState } from '../OKRsEmptyState/wrapper'
@@ -49,10 +49,10 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
       fetchPolicy: 'no-cache',
       variables: { teamID },
       notifyOnNetworkStatusChange: true,
-      onCompleted: (data) => {
-        setObjectivesPolicy(data.team.activeObjectives.policy)
-        setActiveObjectives(data.team.activeObjectives?.edges ?? [])
-        setHasNotActiveObjectives(data.team.notActiveObjectives.edges.length > 0)
+      onCompleted: ({ team }) => {
+        setObjectivesPolicy(team.activeObjectives.policy)
+        setActiveObjectives(team.activeObjectives?.edges ?? [])
+        setHasNotActiveObjectives(team.notActiveObjectives.edges.length > 0)
       },
     },
   )
@@ -80,7 +80,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
           <TeamOKRsEmptyState />
         ) : (
           cycles.map(([cycle, objectiveIDs]) => (
-            <ObjectivesFromCycle
+            <CycleObjectives
               key={cycle.id}
               cycle={cycle}
               objectiveIDs={objectiveIDs}

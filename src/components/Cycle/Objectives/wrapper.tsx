@@ -9,12 +9,12 @@ import buildSkeletonMinSize from '../../../../lib/chakra/build-skeleton-min-size
 import useCadence from '../../../state/hooks/useCadence'
 import { objectiveAccordionIDsBeingEdited } from '../../../state/recoil/objective/accordion'
 import meAtom from '../../../state/recoil/user/me'
-import { Cycle } from '../../Cycle/types'
+import { ObjectiveAccordion } from '../../Objective/Accordion/wrapper'
 import { GetTeamActiveObjectivesQuery } from '../../Team/ActiveObjectives/wrapper'
 import { Delta, GraphQLEntityPolicy, Status } from '../../types'
-import { ObjectiveAccordion } from '../Accordion/wrapper'
+import { Action, ActionMenu } from '../ActionMenu/wrapper'
+import { Cycle } from '../types'
 
-import { Action, ActionMenu } from './action-menu'
 import messages from './messages'
 import queries from './queries.gql'
 
@@ -41,7 +41,7 @@ type CreateDraftObjectiveQueryResult = {
   }
 }
 
-export const ObjectivesFromCycle = ({
+export const CycleObjectives = ({
   cycle,
   objectiveIDs,
   teamID,
@@ -107,6 +107,7 @@ export const ObjectivesFromCycle = ({
 
         {shouldDisplayActionMenu && (
           <ActionMenu
+            cycleID={cycle?.id}
             onViewOldCycles={onViewOldCycles}
             onCreateOKR={canCreateObjective ? createDraftObjective : undefined}
           />

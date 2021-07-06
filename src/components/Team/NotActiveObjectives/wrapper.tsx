@@ -13,7 +13,7 @@ import {
   ObjectivesViewMode,
   teamObjectivesViewMode,
 } from '../../../state/recoil/team/objectives-view-mode'
-import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
+import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnection } from '../../types'
 import { TeamOKRsEmptyState } from '../OKRsEmptyState/wrapper'
@@ -95,7 +95,7 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
           <TeamOKRsEmptyState />
         ) : (
           filteredObjectiveCycles.map(([cycle, objectiveIDs]) => (
-            <ObjectivesFromCycle
+            <CycleObjectives
               key={cycle.id}
               isDisabled
               cycle={cycle}

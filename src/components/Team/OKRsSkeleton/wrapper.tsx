@@ -1,7 +1,7 @@
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
-import { ObjectivesFromCycle } from '../../Objective/FromCycle/wrapper'
+import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 
 export interface ChildTeamsObjectivesSkeletonProperties {
   numOfSkeletons?: number
@@ -13,7 +13,7 @@ export const TeamOKRsSkeleton = ({ numOfSkeletons }: ChildTeamsObjectivesSkeleto
   return (
     <>
       {[...new Array(numOfSkeletons)].map((_) => (
-        <ObjectivesFromCycle key={uniqueId()} objectiveIDs={[]} />
+        <CycleObjectives key={uniqueId()} objectiveIDs={[]} />
       ))}
     </>
   )

@@ -7,9 +7,10 @@
     "debug.javascript.usePreview": false
   },
   "extensions": [
-    "firefox-devtools.vscode-firefox-debug",
-    "dbaeumer.vscode-eslint",
-    "github.copilot",
-    "eamodio.gitlens"
-  ]
+	"firefox-devtools.vscode-firefox-debug",
+	"dbaeumer.vscode-eslint",
+	"github.copilot",
+	"eamodio.gitlens",
+	"graphql.vscode-graphql"
+]
 }
