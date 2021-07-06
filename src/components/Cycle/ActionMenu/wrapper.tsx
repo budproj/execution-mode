@@ -35,6 +35,7 @@ export const ActionMenu = ({ cycleID, onViewOldCycles, onCreateOKR }: ActionMenu
   const [fetchActiveCycles, { called, loading }] = useLazyQuery<GetActiveCyclesQueryResult>(
     queries.GET_ACTIVE_CYCLES,
     {
+      fetchPolicy: 'no-cache',
       onCompleted: ({ cycles }) => setActiveCycleEdges(cycles.edges),
     },
   )
