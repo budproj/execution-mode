@@ -92,7 +92,7 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
 
       {isLoaded ? (
         filteredObjectiveCycles.length === 0 ? (
-          <TeamOKRsEmptyState />
+          <TeamOKRsEmptyState teamID={teamID} />
         ) : (
           filteredObjectiveCycles.map(([cycle, objectiveIDs]) => (
             <CycleObjectives
