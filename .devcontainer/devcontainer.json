@@ -10,6 +10,8 @@
     "firefox-devtools.vscode-firefox-debug",
     "dbaeumer.vscode-eslint",
     "github.copilot",
-    "eamodio.gitlens"
+    "eamodio.gitlens",
+    "graphql.vscode-graphql",
+  	"esbenp.prettier-vscode"
   ]
 }

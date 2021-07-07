@@ -12,22 +12,13 @@ import { ObjectiveAccordionMenu } from '../../Menu/wrapper'
 import messages from './messages'
 
 interface ViewModeProperties {
-  accordionIndex: number
   isLoaded?: boolean
   objective?: Partial<Objective>
   teamID?: string
-  accordionID?: string
   isDisabled?: boolean
 }
 
-export const ViewMode = ({
-  objective,
-  accordionIndex,
-  isLoaded,
-  teamID,
-  accordionID,
-  isDisabled,
-}: ViewModeProperties) => {
+export const ViewMode = ({ objective, isLoaded, teamID, isDisabled }: ViewModeProperties) => {
   const intl = useIntl()
 
   return (
@@ -70,8 +61,6 @@ export const ViewMode = ({
               teamID={teamID}
               objectiveID={objective?.id}
               isLoaded={isLoaded}
-              accordionID={accordionID}
-              accordionIndex={accordionIndex}
             />
           </Stack>
         )}

@@ -6,11 +6,8 @@ import { useRecoilValue } from 'recoil'
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { Objective } from 'src/components/Objective/types'
 import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
+import { objectiveContext, ObjectiveMode } from 'src/state/recoil/objective/context'
 
-import {
-  AccordionEntryMode,
-  objectiveAccordionEntryModes,
-} from '../../../../../state/recoil/objective/accordion'
 import { RadioProgress } from '../../../../Base/RadioProgress/wrapper'
 
 import { EditMode } from './edit-mode'
@@ -18,12 +15,10 @@ import messages from './messages'
 import { ViewMode } from './view-mode'
 
 export interface ObjectiveAccordionButtonProperties {
-  accordionIndex: number
   objective?: Partial<Objective>
   teamID?: string
   confidenceTag?: ConfidenceTag
   isLoaded?: boolean
-  accordionID?: string
   isDisabled?: boolean
 }
 
@@ -32,14 +27,11 @@ export const ObjectiveAccordionButton = ({
   teamID,
   confidenceTag,
   isLoaded,
-  accordionID,
-  accordionIndex,
   isDisabled,
 }: ObjectiveAccordionButtonProperties) => {
-  const accordionEntry = useRecoilValue(objectiveAccordionEntryModes(accordionID))
+  const context = useRecoilValue(objectiveContext(objective?.id))
   const intl = useIntl()
 
-  const mode = objective?.id ? accordionEntry[objective.id].mode : AccordionEntryMode.VIEW
   const roundedProgress = Math.round(objective?.status?.progress ?? 0)
 
   return (
@@ -57,12 +49,10 @@ export const ObjectiveAccordionButton = ({
         </Box>
       </TooltipWithDelay>
 
-      {mode === AccordionEntryMode.EDIT && !isDisabled ? (
-        <EditMode objective={objective} accordionIndex={accordionIndex} accordionID={accordionID} />
+      {context.mode === ObjectiveMode.EDIT && !isDisabled ? (
+        <EditMode objective={objective} />
       ) : (
         <ViewMode
-          accordionIndex={accordionIndex}
-          accordionID={accordionID}
           isLoaded={isLoaded}
           teamID={teamID}
           objective={objective}

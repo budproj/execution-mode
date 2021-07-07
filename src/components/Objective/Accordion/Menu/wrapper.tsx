@@ -16,19 +16,15 @@ import { DeleteObjectiveOption } from './option-delete-objective'
 import { UpdateObjectiveOption } from './option-update-objective'
 
 interface ObjectiveAccordionMenuProperties {
-  accordionIndex: number
   teamID?: string
   objectiveID?: string
   isLoaded?: boolean
-  accordionID?: string
 }
 
 export const ObjectiveAccordionMenu = ({
   teamID,
   objectiveID,
   isLoaded,
-  accordionID,
-  accordionIndex,
 }: ObjectiveAccordionMenuProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(teamID))
@@ -66,9 +62,7 @@ export const ObjectiveAccordionMenu = ({
         </MenuButton>
         <MenuList>
           {canCreateKeyResult && <CreateKeyResultOption objectiveID={objectiveID} />}
-          {canUpdateObjective && (
-            <UpdateObjectiveOption accordionID={accordionID} accordionIndex={accordionIndex} />
-          )}
+          {canUpdateObjective && <UpdateObjectiveOption objectiveID={objectiveID} />}
           {canDeleteObjective && (
             <DeleteObjectiveOption objectiveID={objectiveID} teamID={teamID} />
           )}

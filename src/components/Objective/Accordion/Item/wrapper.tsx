@@ -10,18 +10,14 @@ import { ObjectiveAccordionButton } from './Button/wrapper'
 import { ObjectiveAccordionPanel } from './Panel/wrapper'
 
 export interface ObjectiveAccordionItemProperties {
-  index: number
   objectiveID?: Objective['id']
   teamID?: string
-  accordionID?: string
   isDisabled?: boolean
 }
 
 export const ObjectiveAccordionItem = ({
   objectiveID,
   teamID,
-  index,
-  accordionID,
   isDisabled,
 }: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
@@ -48,14 +44,11 @@ export const ObjectiveAccordionItem = ({
             confidenceTag={confidenceTag}
             teamID={teamID}
             isLoaded={isLoaded}
-            accordionID={accordionID}
-            accordionIndex={index}
             isDisabled={isDisabled}
           />
           <ObjectiveAccordionPanel
             isExpanded={isExpanded}
             objectiveID={objectiveID}
-            accordionID={accordionID}
             teamID={teamID}
             isDisabled={isDisabled}
           />

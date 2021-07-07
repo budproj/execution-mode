@@ -14,9 +14,10 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
+import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+
 import { useRecoilFamilyLoader } from '../../../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../../../state/recoil/objective'
-import { objectiveAccordionIndexesBeingViewed } from '../../../../../state/recoil/objective/accordion'
 import { CancelIcon } from '../../../../Icon/Cancel/wrapper'
 import CheckIcon from '../../../../Icon/Check'
 import TimesIcon from '../../../../Icon/Times'
@@ -31,9 +32,7 @@ type EditModeValues = {
 }
 
 interface EditModeProperties {
-  accordionIndex: number
   objective?: Partial<Objective>
-  accordionID?: string
 }
 
 interface UpdateObjectiveMutationResult {
@@ -52,7 +51,7 @@ const EditModeIconButton = (properties: IconButtonProps) => (
   />
 )
 
-export const EditMode = ({ objective, accordionID, accordionIndex }: EditModeProperties) => {
+export const EditMode = ({ objective }: EditModeProperties) => {
   const intl = useIntl()
   const toast = useToast()
   const [loadObjectiveOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
@@ -64,16 +63,14 @@ export const EditMode = ({ objective, accordionID, accordionIndex }: EditModePro
       },
     },
   )
-  const setObjectiveToViewMode = useSetRecoilState(
-    objectiveAccordionIndexesBeingViewed(accordionID),
-  )
+  const setObjectiveToViewMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.VIEW))
 
   const initialValues: EditModeValues = {
     title: objective?.title ?? '',
   }
 
   const handleCancel = () => {
-    setObjectiveToViewMode(accordionIndex)
+    setObjectiveToViewMode(objective?.id)
   }
 
   const handleSubmit = async (values: EditModeValues) => {
