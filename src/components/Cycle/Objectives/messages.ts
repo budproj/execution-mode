@@ -3,7 +3,6 @@ import { defineMessages } from 'react-intl'
 type ObjectivesFromCycleMessage =
   | 'title'
   | 'draftObjectiveTitle'
-  | 'draftObjectiveSuccessToastMessage'
   | 'draftObjectiveErrorToastMessage'
 
 export default defineMessages<ObjectivesFromCycleMessage>({
@@ -18,13 +17,6 @@ export default defineMessages<ObjectivesFromCycleMessage>({
     id: '6Syzud',
     description:
       'This message is used as the draft title of a new objective when an objective is created inside the team page',
-  },
-
-  draftObjectiveSuccessToastMessage: {
-    defaultMessage: 'Um novo objetivo foi criado com sucesso',
-    id: 'QRy8b9',
-    description:
-      'This message appears as a toast as soon as the the user clicks to add a new objective in the team page',
   },
 
   draftObjectiveErrorToastMessage: {

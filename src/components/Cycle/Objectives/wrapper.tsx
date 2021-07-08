@@ -64,11 +64,6 @@ export const CycleObjectives = ({
         teamID,
       },
       onCompleted: async (data) => {
-        toast({
-          title: intl.formatMessage(messages.draftObjectiveSuccessToastMessage),
-          status: 'success',
-        })
-
         setObjectiveIDToEditMode(data.createObjective.id)
         if (onNewObjective) void onNewObjective()
       },
