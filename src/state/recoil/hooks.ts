@@ -56,7 +56,7 @@ export const buildFamilyLoader =
       const originalValue = snapshot.getLoadable(atom).getValue() ?? {}
       const newValue = deepmerge(originalValue, singleData, { arrayMerge: overwriteMerge })
 
-      return set(atom, newValue)
+      return set(atom, newValue as any)
     }
 
     return Array.isArray(data)
