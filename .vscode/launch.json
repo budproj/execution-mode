@@ -16,14 +16,8 @@
       "runtimeExecutable": "npm",
       "port": 9229,
       "timeout": 15000,
-      "runtimeArgs": [
-        "run-script",
-        "start:dev"
-      ],
-      "skipFiles": [
-        "**/node_modules/**/*.js",
-        "<node_internals>/**"
-      ]
+      "runtimeArgs": ["run-script", "start:debug"],
+      "skipFiles": ["**/node_modules/**/*.js", "<node_internals>/**"]
     },
     {
       "name": "Firefox",
