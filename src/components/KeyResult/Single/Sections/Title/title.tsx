@@ -35,7 +35,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
   const isActive = keyResult?.status?.isActive
   const isOutdated = keyResult?.status?.isOutdated && isActive
-  const canUpdate = keyResult?.policy?.update !== GraphQLEffect.ALLOW && isActive
+  const canUpdate = keyResult?.policy?.update === GraphQLEffect.ALLOW && isActive
 
   const handleSubmit = async (title: string) => {
     if (title === keyResult?.title) return
@@ -58,8 +58,8 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       <Skeleton borderRadius={10} isLoaded={isLoaded}>
         <KeyResultDynamicIcon
           title={keyResult?.title}
-          iconSize={4}
-          boxSize={10}
+          iconSize={8}
+          boxSize={12}
           borderRadius={8}
           isDisabled={!isActive}
         />
