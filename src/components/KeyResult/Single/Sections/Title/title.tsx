@@ -75,8 +75,9 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
               isDisabled={!canUpdate}
               maxCharacters={120}
               previewProperties={{
-                fontSize: 'xl',
+                fontSize: '2xl',
                 fontWeight: 700,
+                lineHeight: '1.8rem',
                 p: 0,
                 as: 'h1',
               }}
@@ -97,7 +98,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           isLoaded={isLoaded}
         >
           <LastUpdateText
-            fontSize="sm"
+            fontSize="md"
             date={lastUpdateDate}
             color={isOutdated ? 'red.500' : 'gray.400'}
             prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
