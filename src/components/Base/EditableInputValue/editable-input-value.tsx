@@ -165,13 +165,7 @@ const EditableInputValue = ({
                 </Stack>
 
                 {isTruncated && !isWithinMaxCharacters && !isEditing && (
-                  <Button
-                    p={0}
-                    maxH={0}
-                    colorScheme="brand"
-                    fontWeight={400}
-                    onClick={toggleExpanded}
-                  >
+                  <Button p={0} colorScheme="brand" fontWeight={400} onClick={toggleExpanded}>
                     {intl.formatMessage(messages[isExpanded ? 'collapseButton' : 'expandButton'])}
                   </Button>
                 )}

@@ -65,7 +65,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
         />
       </Skeleton>
 
-      <Stack spacing={2} flexGrow={1}>
+      <Stack spacing={0} flexGrow={1}>
         <Stack direction="row">
           <Skeleton isLoaded={isLoaded} flexGrow={1}>
             <EditableInputValue
