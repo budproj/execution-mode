@@ -10,7 +10,7 @@ const KeyResultSectionTimelineCardEmptyState = () => {
   const intl = useIntl()
 
   return (
-    <KeyResultSectionTimelineCardBase borderWidth={0} bg="black.50">
+    <KeyResultSectionTimelineCardBase hideUser borderWidth={0} bg="transparent" boxShadow="none">
       <Flex direction="column" alignItems="center" gridGap={2} py={4}>
         <Box>
           <Image src="/images/ghost-drawing-sm.png" />

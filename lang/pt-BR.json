@@ -31,6 +31,10 @@
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
   },
+  "/9JMMz": {
+    "defaultMessage": "Status",
+    "description": "This text is displayed in our check-in card, as a title for the right column in the progress increase section"
+  },
   "/DyxUT": {
     "defaultMessage": "Último check-in",
     "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
@@ -142,10 +146,6 @@
   "1ss4IX": {
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
-  },
-  "20iPM0": {
-    "defaultMessage": "Progresso atual",
-    "description": "This text is displayed in our check-in card, as a title for the right column in the progress increase section"
   },
   "29ODQz": {
     "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
@@ -322,6 +322,10 @@
   "8YI1Fn": {
     "defaultMessage": "Financeiro (Real)",
     "description": "This message is displayed inside our key-result format select as the title of the coin BRL format"
+  },
+  "8kcr+g": {
+    "defaultMessage": "Usuário",
+    "description": "This message is displayed as the user name whenever the user is not defined"
   },
   "8l7xtl": {
     "defaultMessage": "Sair",
@@ -659,10 +663,6 @@
     "defaultMessage": "Meta",
     "description": "This message is displayed below the goal thumb"
   },
-  "Pb0Tht": {
-    "defaultMessage": "Sobre este check-in",
-    "description": "This text is displayed in our check-in card, above the user comment if it exists"
-  },
   "Pkdkh4": {
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
@@ -798,6 +798,10 @@
   "Uu0OJV": {
     "defaultMessage": "Um ícone de imagem. Ele indica que nesse campo fica seu avatar",
     "description": "The alternative text explaining our image icon in the settings account page"
+  },
+  "VDLkuO": {
+    "defaultMessage": "Mostrar mais",
+    "description": "This text is displayed in the button that expands a truncated text"
   },
   "VNHZWm": {
     "defaultMessage": "Período",
@@ -1015,6 +1019,10 @@
     "defaultMessage": "Ajuda",
     "description": "This tooltip is displayed when the user hovers the support button"
   },
+  "gLS6ev": {
+    "defaultMessage": "Neste check-in",
+    "description": "This text is displayed in our check-in card, as a title for the left column in the progress increase section"
+  },
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
@@ -1159,10 +1167,6 @@
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
   },
-  "loAGsF": {
-    "defaultMessage": "Variação",
-    "description": "This text is displayed in our check-in card, as a title for the left column in the progress increase section"
-  },
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",
     "description": "This is the label text that is displayed as a button as soon the check in form is displayed"
@@ -1251,6 +1255,10 @@
     "defaultMessage": "Não vamos alcançar o resultado a não ser que a gente mude nossa abordagem",
     "description": "This text explains our tag to the user"
   },
+  "rvZQ2D": {
+    "defaultMessage": "Progresso",
+    "description": "This message is displayed as the title of the progress section inside check-in card"
+  },
   "s6b2FE": {
     "defaultMessage": "Data Limite",
     "description": "The heading text of the goal section in our key-result drawers"
@@ -1267,9 +1275,17 @@
     "defaultMessage": "{unit, select, fallback {em {date}} other {{date}}}",
     "description": "This text displays the latest report status for a given component, using a given date logic"
   },
+  "sP2MCY": {
+    "defaultMessage": "Mostrar menos",
+    "description": "This text is displayed in the button that collapses the truncated text"
+  },
   "sYGIlp": {
     "defaultMessage": "Minha conta",
     "description": "This label defines the text on the first menu section option"
+  },
+  "sp/6lg": {
+    "defaultMessage": "Sobre",
+    "description": "This text is displayed in our check-in card, above the user comment if it exists"
   },
   "t3VVHw": {
     "defaultMessage": "Um ícone de X indicando que os dados neste campo não são válidos",

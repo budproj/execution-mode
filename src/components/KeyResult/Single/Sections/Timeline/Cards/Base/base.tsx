@@ -1,4 +1,4 @@
-import { Box, BorderProps, BackgroundProps, Stack } from '@chakra-ui/react'
+import { Box, BoxProps, BorderProps, BackgroundProps, Stack } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
 import { User } from 'src/components/User/types'
@@ -18,6 +18,7 @@ export interface KeyResultSectionTimelineCardBaseProperties {
   intlCardType?: string
   hideUser?: boolean
   borderBottomRadius?: BorderProps['borderBottomRadius']
+  boxShadow?: BoxProps['boxShadow']
   policy?: GraphQLEntityPolicy
   onDelete?: () => void
 }
@@ -31,6 +32,7 @@ const KeyResultSectionTimelineCardBase = ({
   borderRadius,
   borderWidth,
   borderBottomRadius,
+  boxShadow,
   bg,
   onDelete,
   policy,
@@ -41,7 +43,7 @@ const KeyResultSectionTimelineCardBase = ({
     bg={bg}
     borderWidth={borderWidth}
     borderColor="new-gray.200"
-    boxShadow="with-stroke.medium"
+    boxShadow={boxShadow}
     borderRadius={borderRadius}
     borderBottomRadius={borderBottomRadius ?? borderRadius}
     position="relative"
@@ -70,6 +72,7 @@ const KeyResultSectionTimelineCardBase = ({
 KeyResultSectionTimelineCardBase.defaultProps = {
   borderRadius: 6,
   borderWidth: 1,
+  boxShadow: 'with-stroke.medium',
   bg: 'white',
 }
 

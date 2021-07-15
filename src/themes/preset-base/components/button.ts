@@ -18,6 +18,8 @@ const Button = {
       bg: `${colorScheme ?? 'brand'}.500`,
       color: 'white',
       borderRadius: '4px',
+      borderWidth: 2,
+      borderColor: `${colorScheme ?? 'brand'}.500`,
       fontSize: 'lg',
       lineHeight: 'xl',
       py: 3,
@@ -25,10 +27,12 @@ const Button = {
 
       _hover: {
         bg: `${colorScheme ?? 'brand'}.100`,
+        borderColor: `${colorScheme ?? 'brand'}.100`,
         color: `${colorScheme ?? 'brand'}.500`,
 
         _disabled: {
           bg: `${colorScheme ?? 'brand'}.500`,
+          borderColor: `${colorScheme ?? 'brand'}.500`,
           color: `${colorScheme ?? 'brand'}.500`,
         },
       },
@@ -46,6 +50,10 @@ const Button = {
     ghost: ({ colorScheme }: ButtonProps) => ({
       color: `${colorScheme ?? 'brand'}.500`,
       borderRadius: 4,
+      fontSize: 'lg',
+      lineHeight: 'xl',
+      py: 3,
+      h: 'auto',
 
       _hover: {
         bg: `${colorScheme ?? 'brand'}.50`,
@@ -65,6 +73,10 @@ const Button = {
       borderColor: `${colorScheme ?? 'brand'}.500`,
       borderWidth: 2,
       borderRadius: 4,
+      py: 3,
+      h: 'auto',
+      fontSize: 'lg',
+      lineHeight: 'xl',
 
       _hover: {
         borderColor: `${colorScheme ?? 'brand'}.400`,
