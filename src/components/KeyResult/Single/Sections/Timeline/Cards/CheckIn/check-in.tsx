@@ -74,6 +74,9 @@ const KeyResultSectionTimelineCardCheckIn = ({
   return (
     <Stat>
       <KeyResultSectionTimelineCardBase
+        user={data?.user}
+        date={data?.createdAt}
+        isLoaded={Boolean(data)}
         borderBottomRadius={0}
         policy={data?.policy}
         intlCardType={intlCardType}

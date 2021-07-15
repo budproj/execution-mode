@@ -36,14 +36,18 @@ export const CardHeader = ({
         <Avatar name={fullName} src={picture} w={12} h={12} />
       </SkeletonCircle>
 
-      <Flex direction="column" alignItems="center">
+      <Flex direction="column">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 130, 19)}>
           <Heading as="h4" fontSize="lg" color="black.800" fontWeight={700}>
             {fullName ?? intl.formatMessage(messages.unknownUser)}
           </Heading>
         </Skeleton>
 
-        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 100, 18)}>
+        <Skeleton
+          isLoaded={isLoaded}
+          {...buildSkeletonMinSize(isLoaded, 100, 18)}
+          mt={isLoaded ? 'inherit' : 2}
+        >
           <Text color="gray.300" fontSize="sm" fontWeight={500}>
             {formattedDate}
           </Text>
