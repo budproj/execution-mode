@@ -49,20 +49,16 @@ const KeyResultSectionAddCheckIn = ({
           variant="solid"
           w="100%"
           colorScheme={isOpen ? 'gray' : 'brand'}
-          bg={isOpen ? 'black.100' : 'brand.100'}
-          color={isOpen ? 'gray.400' : 'brand.500'}
           onClick={isOpen ? handleClose : handleOpen}
         >
           {intl.formatMessage(isOpen ? messages.buttonLabelClose : messages.buttonLabelOpen)}
         </Button>
       </Skeleton>
       <Collapse animateOpacity in={isOpen} style={{ overflow: 'visible' }}>
-        <KeyResultSectionTimelineCardBase>
-          <Flex pb={4}>
-            <Heading fontSize="md" fontWeight={700} color="black.600" flexGrow={1}>
-              {intl.formatMessage(messages.formTitle)}
-            </Heading>
-          </Flex>
+        <KeyResultSectionTimelineCardBase hideUser>
+          <Heading fontSize="lg" fontWeight={700} color="black.800" flexGrow={1}>
+            {intl.formatMessage(messages.formTitle)}
+          </Heading>
 
           <CheckInForm
             showGoal

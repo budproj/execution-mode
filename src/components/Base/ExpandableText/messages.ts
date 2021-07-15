@@ -4,14 +4,14 @@ type ExpandableTextMessage = 'expandButton' | 'collapseButton'
 
 export default defineMessages<ExpandableTextMessage>({
   expandButton: {
-    defaultMessage: 'Ver mais...',
-    id: '+G9goh',
+    defaultMessage: 'Mostrar mais',
+    id: 'VDLkuO',
     description: 'This text is displayed in the button that expands a truncated text',
   },
 
   collapseButton: {
-    defaultMessage: 'Ver menos...',
-    id: 'I+MSuS',
+    defaultMessage: 'Mostrar menos',
+    id: 'sP2MCY',
     description: 'This text is displayed in the button that collapses the truncated text',
   },
 })

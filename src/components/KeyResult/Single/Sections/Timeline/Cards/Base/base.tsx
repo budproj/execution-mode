@@ -1,8 +1,10 @@
-import { Box, BorderProps, BackgroundProps } from '@chakra-ui/react'
+import { Box, BorderProps, BackgroundProps, Stack } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
+import { User } from 'src/components/User/types'
 import { GraphQLEffect, GraphQLEntityPolicy } from 'src/components/types'
 
+import { CardHeader } from './header'
 import KeyResultSectionTimelineCardBaseOptions from './options'
 
 export interface KeyResultSectionTimelineCardBaseProperties {
@@ -10,7 +12,11 @@ export interface KeyResultSectionTimelineCardBaseProperties {
   borderRadius: BorderProps['borderRadius']
   borderWidth: BorderProps['borderWidth']
   bg: BackgroundProps['bg']
+  user?: User
+  date?: string
+  isLoaded?: boolean
   intlCardType?: string
+  hideUser?: boolean
   borderBottomRadius?: BorderProps['borderBottomRadius']
   policy?: GraphQLEntityPolicy
   onDelete?: () => void
@@ -18,6 +24,10 @@ export interface KeyResultSectionTimelineCardBaseProperties {
 
 const KeyResultSectionTimelineCardBase = ({
   children,
+  user,
+  date,
+  isLoaded,
+  hideUser,
   borderRadius,
   borderWidth,
   borderBottomRadius,
@@ -30,7 +40,8 @@ const KeyResultSectionTimelineCardBase = ({
     p={4}
     bg={bg}
     borderWidth={borderWidth}
-    borderColor="black.200"
+    borderColor="new-gray.200"
+    boxShadow="with-stroke.medium"
     borderRadius={borderRadius}
     borderBottomRadius={borderBottomRadius ?? borderRadius}
     position="relative"
@@ -40,14 +51,26 @@ const KeyResultSectionTimelineCardBase = ({
         <KeyResultSectionTimelineCardBaseOptions intlCardType={intlCardType} onDelete={onDelete} />
       </Box>
     )}
-    {children}
+
+    <Stack spacing={4}>
+      {!hideUser && (
+        <CardHeader
+          isLoaded={isLoaded}
+          fullName={user?.fullName}
+          picture={user?.picture}
+          date={new Date(date ?? 0)}
+        />
+      )}
+
+      {children}
+    </Stack>
   </Box>
 )
 
 KeyResultSectionTimelineCardBase.defaultProps = {
-  borderRadius: 2,
+  borderRadius: 6,
   borderWidth: 1,
-  bg: 'transparent',
+  bg: 'white',
 }
 
 export default KeyResultSectionTimelineCardBase

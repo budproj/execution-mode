@@ -9,7 +9,6 @@ import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Se
 import { KeyResultComment } from 'src/components/KeyResult/types'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
 
-import KeyResultSectionTimelineCardCommentHeader from './header'
 import messages from './messages'
 import queries from './queries.gql'
 
@@ -29,6 +28,7 @@ const KeyResultSectionTimelineCardComment = ({
   })
 
   const intlCardType = intl.formatMessage(messages.cardType)
+  const isLoaded = Boolean(data)
 
   const handleDelete = async () => {
     await deleteKeyResultComment({
@@ -42,18 +42,16 @@ const KeyResultSectionTimelineCardComment = ({
 
   return (
     <KeyResultSectionTimelineCardBase
+      user={data?.user}
+      date={data?.createdAt}
+      isLoaded={isLoaded}
       policy={data?.policy}
       intlCardType={intlCardType}
       onDelete={handleDelete}
     >
       <Flex gridGap={4} direction="column">
-        <KeyResultSectionTimelineCardCommentHeader
-          fullName={data?.user?.fullName}
-          picture={data?.user?.picture}
-          date={new Date(data?.createdAt ?? 0)}
-        />
-        <SkeletonText noOfLines={4} isLoaded={Boolean(data)}>
-          <ExpandableText text={data?.text ?? ''} fontSize="sm" color="gray.400" />
+        <SkeletonText noOfLines={4} isLoaded={isLoaded}>
+          <ExpandableText text={data?.text ?? ''} fontSize="md" color="gray.500" />
         </SkeletonText>
       </Flex>
     </KeyResultSectionTimelineCardBase>

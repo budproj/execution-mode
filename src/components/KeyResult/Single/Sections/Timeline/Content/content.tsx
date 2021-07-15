@@ -68,7 +68,7 @@ const KeyResultSectionTimelineContent = ({
       next={handleInfiniteScroll}
       hasMore={hasMore}
       scrollableTarget={scrollTarget}
-      style={{ overflowX: 'hidden' }}
+      style={{ overflow: 'visible' }}
       loader={
         <Flex direction="column" alignItems="center" p={4}>
           <Spinner size="lg" color="brand.400" />

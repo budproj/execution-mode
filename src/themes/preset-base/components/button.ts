@@ -15,16 +15,20 @@ const Button = {
     }),
 
     solid: ({ colorScheme }: ButtonProps) => ({
-      bg: `${colorScheme ?? 'brand'}.100`,
-      color: `${colorScheme ?? 'brand'}.500`,
-      borderRadius: '2px',
+      bg: `${colorScheme ?? 'brand'}.500`,
+      color: 'white',
+      borderRadius: '4px',
+      fontSize: 'lg',
+      lineHeight: 'xl',
+      py: 3,
+      h: 'auto',
 
       _hover: {
-        bg: `${colorScheme ?? 'brand'}.500`,
-        color: 'white',
+        bg: `${colorScheme ?? 'brand'}.100`,
+        color: `${colorScheme ?? 'brand'}.500`,
 
         _disabled: {
-          bg: `${colorScheme ?? 'brand'}.100`,
+          bg: `${colorScheme ?? 'brand'}.500`,
           color: `${colorScheme ?? 'brand'}.500`,
         },
       },

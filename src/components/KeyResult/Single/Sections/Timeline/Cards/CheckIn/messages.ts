@@ -8,6 +8,7 @@ type KeyResultsSectionTimelineCardCheckInMessage =
   | 'commentTitle'
   | 'valueIncreaseLeftColumnTitle'
   | 'valueIncreaseRightColumnTitle'
+  | 'progressTitle'
 
 export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
   title: {
@@ -39,22 +40,29 @@ export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
   },
 
   commentTitle: {
-    defaultMessage: 'Sobre este check-in',
-    id: 'Pb0Tht',
+    defaultMessage: 'Sobre',
+    id: 'sp/6lg',
     description: 'This text is displayed in our check-in card, above the user comment if it exists',
   },
 
   valueIncreaseLeftColumnTitle: {
-    defaultMessage: 'Variação',
-    id: 'loAGsF',
+    defaultMessage: 'Neste check-in',
+    id: 'gLS6ev',
     description:
       'This text is displayed in our check-in card, as a title for the left column in the progress increase section',
   },
 
   valueIncreaseRightColumnTitle: {
-    defaultMessage: 'Progresso atual',
-    id: '20iPM0',
+    defaultMessage: 'Status',
+    id: '/9JMMz',
     description:
       'This text is displayed in our check-in card, as a title for the right column in the progress increase section',
+  },
+
+  progressTitle: {
+    defaultMessage: 'Progresso',
+    id: 'rvZQ2D',
+    description:
+      'This message is displayed as the title of the progress section inside check-in card',
   },
 })

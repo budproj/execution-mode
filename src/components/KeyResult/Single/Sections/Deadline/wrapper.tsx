@@ -27,8 +27,8 @@ export const KeyResultSingleSectionDeadline = ({
   return hasData || isLoading ? (
     <Stack direction="row" alignItems="center" spacing={3}>
       <Box
-        w={10}
-        h={10}
+        w={12}
+        h={12}
         background="gray.50"
         display="flex"
         borderRadius="full"
@@ -37,13 +37,13 @@ export const KeyResultSingleSectionDeadline = ({
       >
         <CalendarFilledOutlineIcon
           fill="gray.400"
-          w={5}
-          h={5}
+          w={6}
+          h={6}
           desc={intl.formatMessage(messages.iconDescription)}
         />
       </Box>
 
-      <Stack spacing={0}>
+      <Stack spacing={0} fontSize="lg">
         <KeyResultSectionHeading>{intl.formatMessage(messages.heading)}</KeyResultSectionHeading>
         <Skeleton isLoaded={!isLoading}>
           <Text>{intl.formatDate(objective?.cycle?.dateEnd)}</Text>

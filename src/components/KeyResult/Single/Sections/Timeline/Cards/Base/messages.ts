@@ -5,6 +5,7 @@ type KeyResultsSectionTimelineCardBaseMessage =
   | 'removeMenuOption'
   | 'deleteModalTitle'
   | 'cardTypeFallback'
+  | 'unknownUser'
 
 export default defineMessages<KeyResultsSectionTimelineCardBaseMessage>({
   treeDotsIconDesc: {
@@ -30,5 +31,11 @@ export default defineMessages<KeyResultsSectionTimelineCardBaseMessage>({
     defaultMessage: 'Registro',
     id: 'YUvWwS',
     description: 'It is used as a fallback if the component has no card type defined for it',
+  },
+
+  unknownUser: {
+    defaultMessage: 'Usuário',
+    id: '8kcr+g',
+    description: 'This message is displayed as the user name whenever the user is not defined',
   },
 })

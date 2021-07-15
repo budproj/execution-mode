@@ -19,6 +19,7 @@ query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $first: Int, $after: String) {
             }
             user {
               fullName
+              picture
             }
             parent {
               confidence

@@ -21,7 +21,7 @@ const KeyResultSectionTimelineCardCheckInComment = ({
   return (
     <Flex direction="column" gridGap={4}>
       <Divider borderColor={BORDER_COLOR} />
-      <Heading as="h4" fontSize="xs" color="gray.300" textTransform="uppercase">
+      <Heading as="h4" fontSize="xs" color="gray.300" textTransform="uppercase" fontWeight={700}>
         {intl.formatMessage(messages.commentTitle)}
       </Heading>
       <SkeletonText isLoaded={isLoaded} noOfLines={4}>
