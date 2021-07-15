@@ -6,12 +6,12 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 export interface TreeDotsIconProperties extends IconProps, AcessibleIconProperties {}
 
 const TreeDotsIcon = ({ title, desc, ...rest }: TreeDotsIconProperties): ReactElement => (
-  <Icon viewBox="0 0 18 4" {...rest}>
+  <Icon viewBox="0 0 25 25" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
-    <circle cx="1.92857" cy="1.92857" r="1.92857" />
-    <circle cx="9.0001" cy="1.92857" r="1.92857" />
-    <circle cx="16.0714" cy="1.92857" r="1.92857" />
+    <circle cx="5.5" cy="12.5" r="2.5" />
+    <circle cx="12.5" cy="12.5" r="2.5" />
+    <circle cx="19.5" cy="12.5" r="2.5" />
   </Icon>
 )
 

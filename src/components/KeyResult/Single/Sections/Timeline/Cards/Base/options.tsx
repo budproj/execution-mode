@@ -44,12 +44,17 @@ const KeyResultSectionTimelineCardBaseOptions = ({
 
   return (
     <>
-      <Menu isOpen={isMenuOpen} onOpen={handleMenuOpen} onClose={handleMenuClose}>
+      <Menu
+        variant="action-list"
+        isOpen={isMenuOpen}
+        onOpen={handleMenuOpen}
+        onClose={handleMenuClose}
+      >
         <MenuButton>
           <TreeDotsIcon
             desc={intl.formatMessage(messages.treeDotsIconDesc)}
-            fill="gray.300"
-            w={4}
+            fill="new-gray.800"
+            w={7}
             h="auto"
           />
         </MenuButton>
