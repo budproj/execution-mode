@@ -76,7 +76,6 @@ const KeyResultSectionTimelineCardCheckIn = ({
         user={data?.user}
         date={data?.createdAt}
         isLoaded={Boolean(data)}
-        borderBottomRadius={0}
         policy={data?.policy}
         intlCardType={intlCardType}
         onDelete={handleDelete}
@@ -108,13 +107,15 @@ const KeyResultSectionTimelineCardCheckIn = ({
           )}
 
           {data?.comment && <KeyResultSectionTimelineCardCheckInComment comment={data.comment} />}
+
+          <Divider borderColor={BORDER_COLOR} />
+
+          <KeyResultSectionTimelineCardCheckInProgressBar
+            progress={data?.progress}
+            confidence={data?.confidence}
+          />
         </Flex>
       </KeyResultSectionTimelineCardBase>
-
-      <KeyResultSectionTimelineCardCheckInProgressBar
-        progress={data?.progress}
-        confidence={data?.confidence}
-      />
     </Stat>
   )
 }

@@ -8,6 +8,7 @@ type KeyResultsSectionTimelineCardCheckInMessage =
   | 'commentTitle'
   | 'valueIncreaseLeftColumnTitle'
   | 'valueIncreaseRightColumnTitle'
+  | 'progressTitle'
 
 export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
   title: {
@@ -56,5 +57,12 @@ export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
     id: '/9JMMz',
     description:
       'This text is displayed in our check-in card, as a title for the right column in the progress increase section',
+  },
+
+  progressTitle: {
+    defaultMessage: 'Progresso',
+    id: 'rvZQ2D',
+    description:
+      'This message is displayed as the title of the progress section inside check-in card',
   },
 })
