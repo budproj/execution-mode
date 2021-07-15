@@ -67,7 +67,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       <Skeleton borderRadius={10} isLoaded={isLoaded}>
         <KeyResultDynamicIcon
           title={keyResult?.title}
-          iconSize={8}
+          iconSize={7}
           boxSize={12}
           borderRadius={8}
           isDisabled={!isActive}

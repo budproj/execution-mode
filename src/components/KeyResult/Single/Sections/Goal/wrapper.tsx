@@ -51,15 +51,15 @@ export const KeyResultSingleSectionGoal = ({
   return hasData || isLoading ? (
     <Stack direction="row" alignItems="center" spacing={3}>
       <Box
-        w={10}
-        h={10}
+        w={12}
+        h={12}
         background="gray.50"
         display="flex"
         borderRadius="full"
         alignItems="center"
         justifyContent="center"
       >
-        <GoalIcon fill="gray.400" w={5} h={5} desc={intl.formatMessage(messages.iconDescription)} />
+        <GoalIcon fill="gray.400" w={6} h={6} desc={intl.formatMessage(messages.iconDescription)} />
       </Box>
 
       <Stack spacing={0} zIndex={theme.zIndices.tooltip}>
@@ -78,6 +78,7 @@ export const KeyResultSingleSectionGoal = ({
               cursor={canUpdate ? 'pointer' : 'auto'}
               color={isUpdateOpen || (canUpdate && isHovering) ? 'brand.400' : 'currentColor'}
               transition=".3s color ease-in-out"
+              fontSize="lg"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
