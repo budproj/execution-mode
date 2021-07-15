@@ -16,6 +16,7 @@ export interface KeyResultSectionTimelineCardBaseProperties {
   date?: string
   isLoaded?: boolean
   intlCardType?: string
+  hideUser?: boolean
   borderBottomRadius?: BorderProps['borderBottomRadius']
   policy?: GraphQLEntityPolicy
   onDelete?: () => void
@@ -26,6 +27,7 @@ const KeyResultSectionTimelineCardBase = ({
   user,
   date,
   isLoaded,
+  hideUser,
   borderRadius,
   borderWidth,
   borderBottomRadius,
@@ -50,8 +52,8 @@ const KeyResultSectionTimelineCardBase = ({
       </Box>
     )}
 
-    <Stack spacing={6}>
-      {(!isLoaded || Boolean(user)) && (
+    <Stack spacing={4}>
+      {!hideUser && (
         <CardHeader
           isLoaded={isLoaded}
           fullName={user?.fullName}

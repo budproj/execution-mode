@@ -1,5 +1,5 @@
 import { useLazyQuery, useMutation } from '@apollo/client'
-import { Box, Stat, Flex, StatLabel } from '@chakra-ui/react'
+import { Box, Stat, Flex, StatLabel, Divider } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -11,11 +11,10 @@ import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
 
 import KeyResultSectionTimelineCardCheckInComment from './comment'
-import KeyResultSectionTimelineCardCheckInHelpText from './help-text'
+import { BORDER_COLOR } from './constants'
 import messages from './messages'
 import KeyResultSectionTimelineCardCheckInProgressBar from './progress-bar'
 import queries from './queries.gql'
-import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative-confidence-tag'
 import { KeyResultSectionTimelineCardCheckInValue } from './value'
 import KeyResultSectionTimelineCardCheckInValueIncrease from './value-increase'
 
@@ -83,32 +82,25 @@ const KeyResultSectionTimelineCardCheckIn = ({
         onDelete={handleDelete}
       >
         <Flex direction="column" gridGap={4}>
-          <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
-            currentConfidence={data?.confidence}
-            parentConfidence={data?.parent?.confidence}
-          />
+          <Divider borderColor={BORDER_COLOR} />
 
           <Box>
-            <StatLabel fontSize="lg" fontWeight={500} color="black.900">
+            <StatLabel fontSize="lg" fontWeight={500} color="black.900" pb={2}>
               {intl.formatMessage(messages.title)}
             </StatLabel>
 
-            <KeyResultSectionTimelineCardCheckInHelpText
-              user={data?.user}
-              createdAt={data?.createdAt}
+            <KeyResultSectionTimelineCardCheckInValue
+              value={data?.value}
+              confidence={data?.confidence}
+              parent={data?.parent}
+              format={keyResult?.format}
             />
           </Box>
 
-          <KeyResultSectionTimelineCardCheckInValue
-            value={data?.value}
-            confidence={data?.confidence}
-            parent={data?.parent}
-            format={keyResult?.format}
-          />
-
           {data?.delta?.value !== 0 && (
             <KeyResultSectionTimelineCardCheckInValueIncrease
-              progress={data?.progress}
+              confidence={data?.confidence}
+              parentConfidence={data?.parent?.confidence}
               valueIncrease={data?.delta?.value}
               format={keyResult?.format}
               type={keyResult?.type}

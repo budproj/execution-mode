@@ -8,14 +8,16 @@ import useValueSignal from 'src/state/hooks/useValueSignal'
 import { COLOR_SCHEME_HASHMAP, SIGNAL } from 'src/state/hooks/useValueSignal/constants'
 import { COLOR_SCHEME } from 'src/themes/tokens'
 
-import { KEY_RESULT_TYPE, KEY_RESULT_FORMAT } from '../../../../../constants'
+import { KEY_RESULT_TYPE } from '../../../../../constants'
 
 import { BORDER_COLOR } from './constants'
 import messages from './messages'
+import KeyResultSectionTimelineCardCheckInRelativeConfidenceTag from './relative-confidence-tag'
 
 export interface KeyResultSectionTimelineCardCheckInValueIncreaseProperties {
   format?: KeyResult['format']
-  progress?: number
+  confidence?: number
+  parentConfidence?: number
   valueIncrease?: KeyResultCheckIn['valueIncrease']
   type?: KEY_RESULT_TYPE
 }
@@ -27,7 +29,8 @@ const customColorScheme: typeof COLOR_SCHEME_HASHMAP = {
 
 const KeyResultSectionTimelineCardCheckInValueIncrease = ({
   format,
-  progress,
+  confidence,
+  parentConfidence,
   valueIncrease,
   type,
 }: KeyResultSectionTimelineCardCheckInValueIncreaseProperties) => {
@@ -41,9 +44,7 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
   )
 
   const Mask = selectMaskBasedOnFormat(format)
-  const IncreaseMask = selectMaskBasedOnFormat(KEY_RESULT_FORMAT.PERCENTAGE)
   const absoluteValueIncrease = Math.abs(valueIncrease ?? 0)
-  const highlightColor = `${signalAttributes.colorScheme}.500`
   const isLoaded = Boolean(valueIncrease) || valueIncrease === 0
 
   useEffect(() => {
@@ -53,14 +54,21 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
   return (
     <Box>
       <Divider borderColor={BORDER_COLOR} />
-      <Flex borderColor={BORDER_COLOR} pt={4} gridGap={4}>
+      <Flex borderColor={BORDER_COLOR} pt={4} gridGap={8}>
         <Flex gridGap={1} direction="column" grow={1}>
-          <Heading as="h4" fontWeight={400} fontSize="sm" color="gray.200">
+          <Heading
+            as="h4"
+            fontWeight={700}
+            fontSize="xs"
+            color="gray.300"
+            textTransform="uppercase"
+            pb={2}
+          >
             {intl.formatMessage(messages.valueIncreaseLeftColumnTitle)}
           </Heading>
 
           <Skeleton isLoaded={isLoaded}>
-            <Text color={highlightColor} fontSize="xl">
+            <Text color="new-gray.800" fontSize="xl">
               {signalAttributes.indicator}
               <Mask value={absoluteValueIncrease} displayType="text" />
             </Text>
@@ -72,14 +80,22 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
         </Box>
 
         <Flex gridGap={1} direction="column" grow={1}>
-          <Heading as="h4" fontWeight={400} fontSize="sm" color="gray.200">
+          <Heading
+            as="h4"
+            fontWeight={700}
+            fontSize="xs"
+            color="gray.300"
+            textTransform="uppercase"
+            pb={2}
+          >
             {intl.formatMessage(messages.valueIncreaseRightColumnTitle)}
           </Heading>
 
           <Skeleton isLoaded={isLoaded}>
-            <Text color="gray.200" fontSize="xl">
-              <IncreaseMask value={Math.round(progress ?? 0)} displayType="text" />
-            </Text>
+            <KeyResultSectionTimelineCardCheckInRelativeConfidenceTag
+              currentConfidence={confidence}
+              parentConfidence={parentConfidence}
+            />
           </Skeleton>
         </Flex>
       </Flex>
