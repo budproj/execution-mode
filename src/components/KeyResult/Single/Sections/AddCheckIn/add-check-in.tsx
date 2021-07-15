@@ -49,8 +49,6 @@ const KeyResultSectionAddCheckIn = ({
           variant="solid"
           w="100%"
           colorScheme={isOpen ? 'gray' : 'brand'}
-          bg={isOpen ? 'black.100' : 'brand.100'}
-          color={isOpen ? 'gray.400' : 'brand.500'}
           onClick={isOpen ? handleClose : handleOpen}
         >
           {intl.formatMessage(isOpen ? messages.buttonLabelClose : messages.buttonLabelOpen)}
