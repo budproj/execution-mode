@@ -19,12 +19,27 @@ export interface KeyResultDrawerBodyProperties {
 }
 
 const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => (
-  <Stack flexGrow={1} p={8} pt={0} id={SCROLLBAR_ID} overflowY="auto" overflowX="hidden">
-    <Box pt={8}>
+  <Stack
+    spacing={0}
+    flexGrow={1}
+    pb={8}
+    id={SCROLLBAR_ID}
+    overflowY="auto"
+    overflowX="hidden"
+    bg="new-gray.50"
+  >
+    <Box pt={8} px={8} pb={2} bg="white">
       <KeyResultSectionTitle keyResultID={keyResultID} />
     </Box>
 
-    <Stack spacing={5}>
+    <Stack
+      spacing={5}
+      px={8}
+      pb={4}
+      bg="white"
+      borderBottomColor="new-gray.400"
+      borderBottomWidth={1}
+    >
       <Divider borderColor="gray.100" />
 
       <Stack direction="row">
@@ -42,10 +57,11 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
       <Divider borderColor="gray.100" />
 
       <KeyResultSectionOwner keyResultID={keyResultID} />
-      <Divider borderColor="gray.100" />
-
-      <KeyResultSectionTimeline keyResultID={keyResultID} scrollTarget={SCROLLBAR_ID} />
     </Stack>
+
+    <Box p={8} pt={4}>
+      <KeyResultSectionTimeline keyResultID={keyResultID} scrollTarget={SCROLLBAR_ID} />
+    </Box>
   </Stack>
 )
 

@@ -33,7 +33,7 @@ const KeyResultSectionTimelineHeader = ({
 
   return (
     <Box
-      bg="white"
+      bg="new-gray.50"
       position="sticky"
       top={0}
       py={canUpdate || Boolean(intlDeletedEntryType) ? 4 : 0}
