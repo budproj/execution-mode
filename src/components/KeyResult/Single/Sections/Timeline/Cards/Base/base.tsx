@@ -30,7 +30,8 @@ const KeyResultSectionTimelineCardBase = ({
     p={4}
     bg={bg}
     borderWidth={borderWidth}
-    borderColor="black.200"
+    borderColor="new-gray.200"
+    boxShadow="with-stroke.medium"
     borderRadius={borderRadius}
     borderBottomRadius={borderBottomRadius ?? borderRadius}
     position="relative"
@@ -45,9 +46,9 @@ const KeyResultSectionTimelineCardBase = ({
 )
 
 KeyResultSectionTimelineCardBase.defaultProps = {
-  borderRadius: 2,
+  borderRadius: 6,
   borderWidth: 1,
-  bg: 'transparent',
+  bg: 'white',
 }
 
 export default KeyResultSectionTimelineCardBase
