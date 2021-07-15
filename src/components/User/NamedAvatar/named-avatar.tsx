@@ -118,12 +118,14 @@ const NamedAvatar = ({
 
       <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
-          <Text color={isHovering || isEditting ? 'brand.500' : nameColor}>{user?.fullName}</Text>
+          <Text fontSize="lg" color={isHovering || isEditting ? 'brand.500' : nameColor}>
+            {user?.fullName}
+          </Text>
         </Skeleton>
 
         {displaySubtitle && (
           <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>
-            <Text fontSize="sm" color="gray.400">
+            <Text fontSize="md" color="gray.400">
               {subtitle}
             </Text>
           </Skeleton>
