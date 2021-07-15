@@ -42,6 +42,8 @@ query GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES($userID: ID!) {
               }
               status {
                 isActive
+                confidence
+                progress
                 latestCheckIn {
                   id
                   value

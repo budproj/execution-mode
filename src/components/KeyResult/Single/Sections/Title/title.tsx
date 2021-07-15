@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Box, Flex, Skeleton, SkeletonText, Spinner, Stack } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
@@ -11,7 +11,6 @@ import PercentageMask from 'src/components/KeyResult/NumberMasks/Percentage'
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
-import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
@@ -30,7 +29,6 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const intl = useIntl()
-  const [confidenceTag, setConfidence] = useConfidenceTag(keyResult?.status?.confidence)
 
   const [updateKeyResult, { loading }] = useMutation<UpdateKeyResultTitleMutationResult>(
     queries.UPDATE_KEY_RESULT_TITLE,
@@ -57,10 +55,6 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       title,
     })
   }
-
-  useEffect(() => {
-    if (keyResult?.status?.confidence) setConfidence(keyResult.status.confidence)
-  }, [keyResult, setConfidence])
 
   return (
     <Flex gridGap={4} alignItems="flex-start">
