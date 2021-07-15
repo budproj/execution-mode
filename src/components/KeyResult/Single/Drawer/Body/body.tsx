@@ -3,7 +3,6 @@ import React from 'react'
 
 import {
   KeyResultSectionDescription,
-  KeyResultSectionObjective,
   KeyResultSectionOwner,
   KeyResultSectionTimeline,
   KeyResultSectionTitle,
@@ -43,9 +42,6 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
       <Divider borderColor="gray.100" />
 
       <KeyResultSectionOwner keyResultID={keyResultID} />
-      <Divider borderColor="gray.100" />
-
-      <KeyResultSectionObjective keyResultID={keyResultID} />
       <Divider borderColor="gray.100" />
 
       <KeyResultSectionTimeline keyResultID={keyResultID} scrollTarget={SCROLLBAR_ID} />
