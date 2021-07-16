@@ -1,5 +1,5 @@
-import { Box, Divider, Stack } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Divider, Portal, Stack } from '@chakra-ui/react'
+import React, { useRef } from 'react'
 
 import {
   KeyResultSectionDescription,
@@ -18,51 +18,59 @@ export interface KeyResultDrawerBodyProperties {
   isLoading?: boolean
 }
 
-const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => (
-  <Stack
-    spacing={0}
-    flexGrow={1}
-    pb={8}
-    id={SCROLLBAR_ID}
-    overflowY="auto"
-    overflowX="hidden"
-    bg="new-gray.50"
-  >
-    <Box pt={8} px={8} pb={2} bg="white">
-      <KeyResultSectionTitle keyResultID={keyResultID} />
-    </Box>
+const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => {
+  const timelinePortalReference = useRef<HTMLDivElement>(null)
 
+  return (
     <Stack
-      spacing={4}
-      px={8}
-      pb={4}
-      bg="white"
-      borderBottomColor="new-gray.400"
-      borderBottomWidth={1}
+      spacing={0}
+      flexGrow={1}
+      pb={8}
+      id={SCROLLBAR_ID}
+      overflowY="auto"
+      overflowX="hidden"
+      bg="new-gray.50"
     >
-      <Divider borderColor="gray.100" />
+      <Box pt={8} px={8} pb={2} bg="white">
+        <KeyResultSectionTitle keyResultID={keyResultID} />
+      </Box>
 
-      <Stack direction="row">
-        <Box flexGrow={1}>
-          <KeyResultSingleSectionGoal keyResultID={keyResultID} isLoading={isLoading} />
+      <Portal containerRef={timelinePortalReference}>
+        <Box p={8} pt={4}>
+          <KeyResultSectionTimeline keyResultID={keyResultID} scrollTarget={SCROLLBAR_ID} />
         </Box>
+      </Portal>
 
-        <Box flexGrow={1}>
-          <KeyResultSingleSectionDeadline keyResultID={keyResultID} isLoading={isLoading} />
-        </Box>
+      <Stack
+        spacing={4}
+        px={8}
+        pb={4}
+        bg="white"
+        borderBottomColor="new-gray.400"
+        borderBottomWidth={1}
+      >
+        <Divider borderColor="gray.100" />
+
+        <Stack direction="row">
+          <Box flexGrow={1}>
+            <KeyResultSingleSectionGoal keyResultID={keyResultID} isLoading={isLoading} />
+          </Box>
+
+          <Box flexGrow={1}>
+            <KeyResultSingleSectionDeadline keyResultID={keyResultID} isLoading={isLoading} />
+          </Box>
+        </Stack>
+        <Divider borderColor="gray.100" />
+
+        <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
+        <Divider borderColor="gray.100" />
+
+        <KeyResultSectionOwner keyResultID={keyResultID} />
       </Stack>
-      <Divider borderColor="gray.100" />
 
-      <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
-      <Divider borderColor="gray.100" />
-
-      <KeyResultSectionOwner keyResultID={keyResultID} />
+      <Box ref={timelinePortalReference} />
     </Stack>
-
-    <Box p={8} pt={4}>
-      <KeyResultSectionTimeline keyResultID={keyResultID} scrollTarget={SCROLLBAR_ID} />
-    </Box>
-  </Stack>
-)
+  )
+}
 
 export default KeyResultDrawerBody

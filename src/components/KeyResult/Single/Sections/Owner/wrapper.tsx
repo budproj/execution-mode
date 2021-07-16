@@ -1,5 +1,5 @@
 import { Popover, PopoverTrigger, PopoverContent } from '@chakra-ui/popover'
-import { Box, Flex, useTheme } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useRecoilState } from 'recoil'
@@ -28,7 +28,6 @@ export const KeyResultSingleSectionOwnerWrapper = ({
   const intl = useIntl()
   const policy = useRecoilValue(policySelector(keyResultID))
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
-  const theme = useTheme()
 
   const canUpdate = policy?.update === GraphQLEffect.ALLOW && keyResult?.status?.isActive
 
@@ -49,30 +48,28 @@ export const KeyResultSingleSectionOwnerWrapper = ({
   }
 
   return (
-    <Box zIndex={theme.zIndices.popover}>
-      <Popover
-        isLazy
-        placement="bottom-start"
-        isOpen={isOpen}
-        size="md"
-        onOpen={handleOpen}
-        onClose={handleClose}
-      >
-        <Flex gridGap={2} direction="column">
-          <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
-          <Flex direction="row">
-            <PopoverTrigger>
-              <Box>
-                <KeyResultSectionOwner keyResultID={keyResultID} isEditing={isOpen} />
-              </Box>
-            </PopoverTrigger>
-            <Box flexGrow={1} />
-          </Flex>
+    <Popover
+      isLazy
+      placement="bottom-start"
+      isOpen={isOpen}
+      size="md"
+      onOpen={handleOpen}
+      onClose={handleClose}
+    >
+      <Flex gridGap={2} direction="column">
+        <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
+        <Flex direction="row">
+          <PopoverTrigger>
+            <Box>
+              <KeyResultSectionOwner keyResultID={keyResultID} isEditing={isOpen} />
+            </Box>
+          </PopoverTrigger>
+          <Box flexGrow={1} />
         </Flex>
-        <PopoverContent width="md" h="full" overflow="hidden">
-          <KeyResultAvailableOwners keyResultID={keyResultID} onSelect={handleUpdate} />
-        </PopoverContent>
-      </Popover>
-    </Box>
+      </Flex>
+      <PopoverContent width="md" h="full" overflow="hidden">
+        <KeyResultAvailableOwners keyResultID={keyResultID} onSelect={handleUpdate} />
+      </PopoverContent>
+    </Popover>
   )
 }

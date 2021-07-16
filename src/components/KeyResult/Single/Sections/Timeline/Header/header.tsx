@@ -1,4 +1,4 @@
-import { useTheme, Collapse, Box } from '@chakra-ui/react'
+import { Collapse, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -21,7 +21,6 @@ const KeyResultSectionTimelineHeader = ({
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const setLatestTimelineEntry = useSetRecoilState(selectLatestTimelineEntry(keyResultID))
   const intlDeletedEntryType = useRecoilValue(keyResultTimelineIntlDeletedEntryType(keyResultID))
-  const theme = useTheme()
 
   const checkInPolicy = keyResult?.keyResultCheckIns?.policy
 
@@ -37,7 +36,7 @@ const KeyResultSectionTimelineHeader = ({
       position="sticky"
       top={0}
       py={canUpdate || Boolean(intlDeletedEntryType) ? 4 : 0}
-      zIndex={theme.zIndices.docked}
+      zIndex={1}
     >
       <KeyResultSectionTimelineDeleteAlert keyResultID={keyResultID} />
 
