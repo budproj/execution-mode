@@ -80,7 +80,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
         intlCardType={intlCardType}
         onDelete={handleDelete}
       >
-        <Flex direction="column" gridGap={4}>
+        <Flex direction="column" gridGap={3}>
           <Divider borderColor={BORDER_COLOR} />
 
           <Box>

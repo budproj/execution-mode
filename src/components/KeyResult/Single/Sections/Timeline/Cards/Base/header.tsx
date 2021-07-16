@@ -38,7 +38,7 @@ export const CardHeader = ({
 
       <Flex direction="column">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 130, 19)}>
-          <Heading as="h4" fontSize="lg" color="black.800" fontWeight={700}>
+          <Heading as="h4" fontSize="lg" color="black.800" fontWeight={500}>
             {fullName ?? intl.formatMessage(messages.unknownUser)}
           </Heading>
         </Skeleton>
@@ -48,7 +48,7 @@ export const CardHeader = ({
           {...buildSkeletonMinSize(isLoaded, 100, 18)}
           mt={isLoaded ? 'inherit' : 2}
         >
-          <Text color="gray.300" fontSize="sm" fontWeight={500}>
+          <Text color="gray.300" fontSize="sm" fontWeight={300}>
             {formattedDate}
           </Text>
         </Skeleton>
