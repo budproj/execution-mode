@@ -59,10 +59,10 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
           <Heading
             as="h4"
             fontWeight={700}
-            fontSize="xs"
-            color="gray.300"
+            fontSize="sm"
+            color="new-gray.600"
             textTransform="uppercase"
-            pb={2}
+            pb={1}
           >
             {intl.formatMessage(messages.valueIncreaseLeftColumnTitle)}
           </Heading>
@@ -83,10 +83,10 @@ const KeyResultSectionTimelineCardCheckInValueIncrease = ({
           <Heading
             as="h4"
             fontWeight={700}
-            fontSize="xs"
-            color="gray.300"
+            fontSize="sm"
+            color="new-gray.600"
             textTransform="uppercase"
-            pb={2}
+            pb={1}
           >
             {intl.formatMessage(messages.valueIncreaseRightColumnTitle)}
           </Heading>

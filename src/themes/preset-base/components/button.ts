@@ -22,7 +22,7 @@ const Button = {
       borderColor: `${colorScheme ?? 'brand'}.500`,
       fontSize: 'lg',
       lineHeight: 'xl',
-      py: 3,
+      py: 2,
       h: 'auto',
 
       _hover: {
@@ -52,7 +52,7 @@ const Button = {
       borderRadius: 4,
       fontSize: 'lg',
       lineHeight: 'xl',
-      py: 3,
+      py: 2,
       h: 'auto',
 
       _hover: {
@@ -73,7 +73,7 @@ const Button = {
       borderColor: `${colorScheme ?? 'brand'}.500`,
       borderWidth: 2,
       borderRadius: 4,
-      py: 3,
+      py: 2,
       h: 'auto',
       fontSize: 'lg',
       lineHeight: 'xl',

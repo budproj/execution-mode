@@ -78,7 +78,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
               isDisabled={!canUpdate}
               maxCharacters={120}
               previewProperties={{
-                fontSize: '2xl',
+                fontSize: 'xl',
                 fontWeight: 700,
                 lineHeight: '1.8rem',
                 p: 0,
@@ -114,7 +114,11 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           </Skeleton>
 
           <Skeleton noOfLines={1} isLoaded={isLoaded} color="gray.400" fontWeight={700}>
-            <PercentageMask value={keyResult?.status?.progress} displayType="text" />
+            <PercentageMask
+              value={keyResult?.status?.progress}
+              displayType="text"
+              decimalScale={0}
+            />
           </Skeleton>
         </Stack>
       </Stack>

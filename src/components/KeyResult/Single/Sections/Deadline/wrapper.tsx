@@ -43,7 +43,7 @@ export const KeyResultSingleSectionDeadline = ({
         />
       </Box>
 
-      <Stack spacing={0} fontSize="lg">
+      <Stack spacing={0} fontSize="md">
         <KeyResultSectionHeading>{intl.formatMessage(messages.heading)}</KeyResultSectionHeading>
         <Skeleton isLoaded={!isLoading}>
           <Text>{intl.formatDate(objective?.cycle?.dateEnd)}</Text>

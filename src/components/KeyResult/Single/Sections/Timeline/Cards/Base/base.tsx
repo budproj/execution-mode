@@ -54,7 +54,7 @@ const KeyResultSectionTimelineCardBase = ({
       </Box>
     )}
 
-    <Stack spacing={4}>
+    <Stack spacing={3}>
       {!hideUser && (
         <CardHeader
           isLoaded={isLoaded}

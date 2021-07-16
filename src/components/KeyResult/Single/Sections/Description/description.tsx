@@ -64,9 +64,9 @@ const KeyResultSectionDescription = ({
             customFallbackValue={intl.formatMessage(messages.emptyStateMessage)}
             isLoaded={!isLoading}
             isSubmitting={loading}
-            fontSize="lg"
+            fontSize="md"
             color="black.800"
-            maxCharacters={500}
+            maxCharacters={250}
             isDisabled={!canUpdate}
             onSave={handleSubmit}
           />

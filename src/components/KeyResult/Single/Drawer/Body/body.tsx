@@ -33,7 +33,7 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
     </Box>
 
     <Stack
-      spacing={5}
+      spacing={4}
       px={8}
       pb={4}
       bg="white"

@@ -51,7 +51,7 @@ const KeyResultSectionTimelineCardComment = ({
     >
       <Flex gridGap={4} direction="column">
         <SkeletonText noOfLines={4} isLoaded={isLoaded}>
-          <ExpandableText text={data?.text ?? ''} fontSize="md" color="gray.500" />
+          <ExpandableText text={data?.text ?? ''} fontSize="md" color="new-gray.900" />
         </SkeletonText>
       </Flex>
     </KeyResultSectionTimelineCardBase>

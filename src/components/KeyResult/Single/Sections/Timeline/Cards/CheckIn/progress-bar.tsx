@@ -24,14 +24,14 @@ const KeyResultSectionTimelineCardCheckInProgressBar = ({
   const isLoaded = Boolean(progress) || progress === 0
 
   return (
-    <Stack spacing={2} pb={4}>
+    <Stack spacing={2}>
       <Heading
         as="h4"
         fontWeight={700}
-        fontSize="xs"
-        color="gray.300"
+        fontSize="sm"
+        color="new-gray.600"
         textTransform="uppercase"
-        pb={2}
+        pt={2}
       >
         {intl.formatMessage(messages.progressTitle)}
       </Heading>
@@ -48,7 +48,7 @@ const KeyResultSectionTimelineCardCheckInProgressBar = ({
         </Skeleton>
 
         <Skeleton noOfLines={1} isLoaded={isLoaded} color="gray.400" fontWeight={700}>
-          <PercentageMask value={progress} displayType="text" />
+          <PercentageMask value={progress} displayType="text" decimalScale={0} />
         </Skeleton>
       </Stack>
     </Stack>
