@@ -1,6 +1,5 @@
 import { Box, Stack } from '@chakra-ui/layout'
 import { Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/popover'
-import { useTheme } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -25,7 +24,6 @@ export const KeyResultSingleSectionGoal = ({
   const [isUpdateOpen, setIsUpdateOpen] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
-  const theme = useTheme()
 
   const GoalNumberMask = selectMaskBasedOnFormat(keyResult?.format)
   const hasData = typeof keyResult?.goal !== 'undefined'
@@ -62,7 +60,7 @@ export const KeyResultSingleSectionGoal = ({
         <GoalIcon fill="gray.400" w={6} h={6} desc={intl.formatMessage(messages.iconDescription)} />
       </Box>
 
-      <Stack spacing={0} zIndex={theme.zIndices.tooltip}>
+      <Stack spacing={0}>
         <KeyResultSectionHeading>{intl.formatMessage(messages.heading)}</KeyResultSectionHeading>
         <Popover
           isOpen={isUpdateOpen}
