@@ -78,7 +78,7 @@ export const KeyResultSingleSectionGoal = ({
               cursor={canUpdate ? 'pointer' : 'auto'}
               color={isUpdateOpen || (canUpdate && isHovering) ? 'brand.400' : 'currentColor'}
               transition=".3s color ease-in-out"
-              fontSize="lg"
+              fontSize="md"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >

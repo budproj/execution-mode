@@ -78,7 +78,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
               isDisabled={!canUpdate}
               maxCharacters={120}
               previewProperties={{
-                fontSize: '2xl',
+                fontSize: 'xl',
                 fontWeight: 700,
                 lineHeight: '1.8rem',
                 p: 0,
