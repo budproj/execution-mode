@@ -1,10 +1,9 @@
 import { Avatar, Flex, Heading, SkeletonCircle, Text, Skeleton } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { User } from 'src/components/User/types'
-import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
 import messages from './messages'
 
@@ -23,12 +22,7 @@ export const CardHeader = ({
 }: KeyResultSectionTimelineCardCommentHeaderProperties) => {
   isLoaded ??= true
 
-  const [formattedDate, setDate] = useRelativeDate(date)
   const intl = useIntl()
-
-  useEffect(() => {
-    if (date) setDate(date)
-  }, [date, setDate])
 
   return (
     <Flex alignItems="center" gridGap={4}>
@@ -49,7 +43,13 @@ export const CardHeader = ({
           mt={isLoaded ? 'inherit' : 2}
         >
           <Text color="gray.300" fontSize="sm" fontWeight={300}>
-            {formattedDate}
+            {intl.formatDate(date, {
+              month: 'short',
+              day: 'numeric',
+              weekday: 'long',
+              hour: 'numeric',
+              minute: 'numeric',
+            })}
           </Text>
         </Skeleton>
       </Flex>
