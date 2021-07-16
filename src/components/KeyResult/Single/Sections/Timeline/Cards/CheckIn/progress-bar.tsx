@@ -48,7 +48,7 @@ const KeyResultSectionTimelineCardCheckInProgressBar = ({
         </Skeleton>
 
         <Skeleton noOfLines={1} isLoaded={isLoaded} color="gray.400" fontWeight={700}>
-          <PercentageMask value={progress} displayType="text" />
+          <PercentageMask value={progress} displayType="text" decimalScale={0} />
         </Skeleton>
       </Stack>
     </Stack>
