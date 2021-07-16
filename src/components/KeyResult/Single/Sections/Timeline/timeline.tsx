@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { useIntl } from 'react-intl'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
@@ -32,7 +31,6 @@ const KeyResultSectionTimeline = ({
   onEntryDelete,
 }: KeyResultSectionTimelineProperties) => {
   const [hasMore, setHasMore] = useState(false)
-  const intl = useIntl()
   const [timeline, setTimeline] = useRecoilState(timelineSelector(keyResultID))
   const resetTimeline = useResetRecoilState(timelineSelector(keyResultID))
   const hasTimeline = typeof timeline !== 'undefined'
