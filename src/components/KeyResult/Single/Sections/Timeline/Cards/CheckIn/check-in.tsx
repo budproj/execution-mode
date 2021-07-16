@@ -106,6 +106,8 @@ const KeyResultSectionTimelineCardCheckIn = ({
             />
           )}
 
+          <Divider borderColor={BORDER_COLOR} />
+
           {data?.comment && <KeyResultSectionTimelineCardCheckInComment comment={data.comment} />}
 
           <Divider borderColor={BORDER_COLOR} />
