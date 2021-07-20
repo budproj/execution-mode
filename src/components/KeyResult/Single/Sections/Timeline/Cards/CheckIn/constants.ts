@@ -1,1 +1,1 @@
-export const BORDER_COLOR = 'black.300'
+export const BORDER_COLOR = 'new-gray.300'

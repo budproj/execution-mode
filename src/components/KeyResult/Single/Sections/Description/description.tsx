@@ -66,7 +66,7 @@ const KeyResultSectionDescription = ({
             isSubmitting={loading}
             fontSize="md"
             color="black.800"
-            maxCharacters={250}
+            maxCharacters={170}
             isDisabled={!canUpdate}
             onSave={handleSubmit}
           />

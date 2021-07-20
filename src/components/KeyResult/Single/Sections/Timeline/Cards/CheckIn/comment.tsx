@@ -30,7 +30,12 @@ const KeyResultSectionTimelineCardCheckInComment = ({
       </Heading>
       <SkeletonText isLoaded={isLoaded} noOfLines={4}>
         <StatHelpText color="gray.500" mb={0}>
-          <ExpandableText text={comment ?? ''} fontSize="sm" color="gray.500" />
+          <ExpandableText
+            text={comment ?? ''}
+            fontSize="md"
+            color="new-gray.900"
+            maxCollapsedLength={150}
+          />
         </StatHelpText>
       </SkeletonText>
     </Flex>

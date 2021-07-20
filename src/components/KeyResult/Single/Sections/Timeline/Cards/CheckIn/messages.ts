@@ -46,8 +46,8 @@ export default defineMessages<KeyResultsSectionTimelineCardCheckInMessage>({
   },
 
   valueIncreaseLeftColumnTitle: {
-    defaultMessage: 'Neste check-in',
-    id: 'gLS6ev',
+    defaultMessage: 'Variação',
+    id: 'loAGsF',
     description:
       'This text is displayed in our check-in card, as a title for the left column in the progress increase section',
   },
