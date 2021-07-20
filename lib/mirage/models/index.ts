@@ -1,9 +1,9 @@
 import { team } from './team'
 import { user } from './user'
 
-export const factories = {
+export const models = {
   user,
   team,
 }
 
-export type Factories = typeof factories
+export type Models = typeof models
