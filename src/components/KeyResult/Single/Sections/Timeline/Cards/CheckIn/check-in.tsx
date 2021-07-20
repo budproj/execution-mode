@@ -81,8 +81,6 @@ const KeyResultSectionTimelineCardCheckIn = ({
         onDelete={handleDelete}
       >
         <Flex direction="column" gridGap={3}>
-          <Divider borderColor={BORDER_COLOR} />
-
           <Box>
             <StatLabel fontSize="lg" fontWeight={500} color="new-gray.900" pb={2}>
               {intl.formatMessage(messages.title)}
@@ -108,9 +106,12 @@ const KeyResultSectionTimelineCardCheckIn = ({
 
           <Divider borderColor={BORDER_COLOR} />
 
-          {data?.comment && <KeyResultSectionTimelineCardCheckInComment comment={data.comment} />}
-
-          <Divider borderColor={BORDER_COLOR} />
+          {data?.comment && (
+            <>
+              <KeyResultSectionTimelineCardCheckInComment comment={data.comment} />
+              <Divider borderColor={BORDER_COLOR} />
+            </>
+          )}
 
           <KeyResultSectionTimelineCardCheckInProgressBar
             progress={data?.progress}
