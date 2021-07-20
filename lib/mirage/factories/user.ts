@@ -3,17 +3,18 @@ import { Factory } from 'miragejs'
 
 import { USER_GENDER } from 'src/components/User/constants'
 
-export default Factory.extend({
-  authzSub: faker.random.uuid,
+export const user = Factory.extend({
+  // AuthzSub: faker.datatype.uuid,
   firstName: faker.name.firstName,
-  lastName: faker.name.lastName,
+  // LastName: faker.name.lastName,
   fullName: faker.name.findName,
-  nickname: faker.internet.userName,
-  about: faker.lorem.paragraph,
-  linkedInProfileAddress: faker.internet.url,
+  // Nickname: faker.internet.userName,
+  // about: faker.lorem.paragraph,
+  // linkedInProfileAddress: faker.internet.url,
   gender: () => faker.helpers.randomize([USER_GENDER.MALE, USER_GENDER.FEMALE]), // , undefined]),
   role: faker.name.jobTitle,
-  picture: () => faker.helpers.randomize([undefined, faker.image.avatar()]),
+  picture: () => faker.helpers.randomize([faker.image.avatar()]), // , undefined]),
   createdAt: faker.date.past,
-  updatedAt: faker.date.past,
+  // UpdatedAt: faker.date.past,
+  email: faker.internet.email,
 })
