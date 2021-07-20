@@ -42,7 +42,7 @@ export const CardHeader = ({
           {...buildSkeletonMinSize(isLoaded, 100, 18)}
           mt={isLoaded ? 'inherit' : 2}
         >
-          <Text color="gray.300" fontSize="sm" fontWeight={300}>
+          <Text color="new-gray.600" fontSize="md" fontWeight={300}>
             {intl.formatDate(date, {
               month: 'short',
               day: 'numeric',

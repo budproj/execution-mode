@@ -68,7 +68,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
         />
       </Skeleton>
 
-      <Stack spacing={1} flexGrow={1}>
+      <Stack spacing={0} flexGrow={1}>
         <Stack direction="row">
           <Skeleton isLoaded={isLoaded} flexGrow={1}>
             <EditableInputValue
@@ -78,9 +78,8 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
               isDisabled={!canUpdate}
               maxCharacters={120}
               previewProperties={{
-                fontSize: 'xl',
+                fontSize: 'lg',
                 fontWeight: 700,
-                lineHeight: '1.8rem',
                 p: 0,
                 as: 'h1',
               }}
@@ -101,7 +100,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           isLoaded={isLoaded}
         >
           <LastUpdateText
-            fontSize="md"
+            fontSize="sm"
             date={lastUpdateDate}
             color={isOutdated ? 'red.500' : 'gray.400'}
             prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
