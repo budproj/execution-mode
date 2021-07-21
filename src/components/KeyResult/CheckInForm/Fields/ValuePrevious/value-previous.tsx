@@ -32,8 +32,8 @@ const CheckInFormFieldValuePrevious = ({
       <Mask
         isDisabled
         value={values.valuePrevious}
-        bg="black.100"
-        _disabled={{ opacity: 1, borderColor: 'black.200' }}
+        bg="new-gray.200"
+        _disabled={{ opacity: 1, borderColor: 'new-gray.400' }}
       />
     </Box>
   )

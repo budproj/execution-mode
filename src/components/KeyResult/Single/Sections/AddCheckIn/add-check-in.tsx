@@ -56,7 +56,13 @@ const KeyResultSectionAddCheckIn = ({
       </Skeleton>
       <Collapse animateOpacity in={isOpen} style={{ overflow: 'visible' }}>
         <KeyResultSectionTimelineCardBase hideUser>
-          <Heading fontSize="lg" fontWeight={700} color="black.800" flexGrow={1}>
+          <Heading
+            fontSize="xl"
+            fontWeight={700}
+            color="new-gray.900"
+            flexGrow={1}
+            lineHeight="2rem"
+          >
             {intl.formatMessage(messages.formTitle)}
           </Heading>
 
