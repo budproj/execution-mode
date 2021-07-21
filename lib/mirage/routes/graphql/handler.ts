@@ -4,6 +4,16 @@ import Schema from 'miragejs/orm/schema' //  eslint-disable-line import/no-unres
 // TODO: fix no-unresolved lint errors in miragejs
 
 import graphQLSchema from './schema.gql'
+import { ignoreArguments } from './custom-resolvers/ignore-arguments'
+
+const customHandlers = {
+  resolvers: {
+    User: {
+      teams: ignoreArguments,
+      companies: ignoreArguments,
+    }
+  }
+}
 
 export const graphQLHandler = (mirageSchema: Schema<AnyRegistry>) =>
-  createGraphQLHandler(graphQLSchema, mirageSchema)
+  createGraphQLHandler(graphQLSchema, mirageSchema, customHandlers as any)
