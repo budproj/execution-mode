@@ -7,6 +7,7 @@ import PenIcon from 'src/components/Icon/Pen'
 import TimesIcon from 'src/components/Icon/Times'
 
 import ExpandableText from '../ExpandableText'
+import { Linkify } from '../Linkify/wrapper'
 
 import messages from './messages'
 
@@ -170,14 +171,16 @@ const EditableTextAreaValue = ({
               {...previewProperties}
             />
           ) : (
-            <Text
-              onClick={isSubmitting ? undefined : handleStartEdit}
-              onMouseEnter={handleHover}
-              onMouseLeave={handleStopHover}
-              {...previewProperties}
-            >
-              {value ?? fallbackValue}
-            </Text>
+            <Linkify>
+              <Text
+                onClick={isSubmitting ? undefined : handleStartEdit}
+                onMouseEnter={handleHover}
+                onMouseLeave={handleStopHover}
+                {...previewProperties}
+              >
+                {value ?? fallbackValue}
+              </Text>
+            </Linkify>
           )}
           <Box pt={2} display={isEditing || isSubmitting ? 'none' : 'inherit'}>
             <PenIcon
