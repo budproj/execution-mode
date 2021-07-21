@@ -11,7 +11,7 @@ const Menu = {
       borderColor: 'gray.50',
 
       '& span:first-child svg': {
-        color: 'gray.200',
+        color: 'new-gray.800',
       },
 
       _focus: {

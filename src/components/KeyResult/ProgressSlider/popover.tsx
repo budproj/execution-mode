@@ -36,13 +36,14 @@ const ProgressSliderPopover = ({ keyResultID }: ProgressSliderContentProperties)
   return (
     <PopoverContent width="sm" p={6} cursor="auto" onMouseDownCapture={handleMouseDownCapture}>
       <PopoverHeader
-        border="none"
-        fontSize="md"
+        fontSize="xl"
         fontWeight={700}
-        color="gray.400"
+        color="new-gray.900"
+        flexGrow={1}
+        lineHeight="2rem"
+        border="none"
         px={0}
         pt={0}
-        pb={6}
       >
         {intl.formatMessage(messages.popoverTitle)}
       </PopoverHeader>

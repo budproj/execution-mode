@@ -94,15 +94,13 @@ const KeyResultSectionTimelineCardCheckIn = ({
             />
           </Box>
 
-          {data?.delta?.value !== 0 && (
-            <KeyResultSectionTimelineCardCheckInValueIncrease
-              confidence={data?.confidence}
-              parentConfidence={data?.parent?.confidence}
-              valueIncrease={data?.delta?.value}
-              format={keyResult?.format}
-              type={keyResult?.type}
-            />
-          )}
+          <KeyResultSectionTimelineCardCheckInValueIncrease
+            confidence={data?.confidence}
+            parentConfidence={data?.parent?.confidence}
+            valueIncrease={data?.delta?.value}
+            format={keyResult?.format}
+            type={keyResult?.type}
+          />
 
           <Divider borderColor={BORDER_COLOR} />
 

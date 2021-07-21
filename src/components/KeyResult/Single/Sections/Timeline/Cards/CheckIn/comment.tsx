@@ -1,4 +1,4 @@
-import { Flex, Heading, SkeletonText, StatHelpText } from '@chakra-ui/react'
+import { Flex, Heading, SkeletonText } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -29,14 +29,12 @@ const KeyResultSectionTimelineCardCheckInComment = ({
         {intl.formatMessage(messages.commentTitle)}
       </Heading>
       <SkeletonText isLoaded={isLoaded} noOfLines={4}>
-        <StatHelpText color="gray.500" mb={0}>
-          <ExpandableText
-            text={comment ?? ''}
-            fontSize="md"
-            color="new-gray.900"
-            maxCollapsedLength={150}
-          />
-        </StatHelpText>
+        <ExpandableText
+          text={comment ?? ''}
+          fontSize="md"
+          color="new-gray.900"
+          maxCollapsedLength={150}
+        />
       </SkeletonText>
     </Flex>
   )

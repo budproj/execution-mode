@@ -2,7 +2,7 @@ const Texarea = {
   variants: {
     outline: () => ({
       borderWidth: 2,
-      borderColor: 'gray.100',
+      borderColor: 'new-gray.400',
       color: 'gray.500',
       borderRadius: 4,
       fontSize: 'lg',

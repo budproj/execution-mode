@@ -63,7 +63,7 @@ const SelectMenu = ({
         as={Button}
         w="100%"
         borderWidth={2}
-        borderColor="gray.100"
+        borderColor="new-gray.400"
         color="gray.500"
         borderRadius={4}
         fontWeight={300}
@@ -82,8 +82,8 @@ const SelectMenu = ({
                 isOpen ? messages.iconChevronUpDesc : messages.iconChevronDownDesc,
               )}
               fontSize="xs"
-              color="black.900"
-              stroke="black.900"
+              color="new-gray.800"
+              stroke="new-gray.800"
               transition="0.2s all ease-in"
               transform={isOpen ? 'rotate(180deg)' : 'none'}
             />
