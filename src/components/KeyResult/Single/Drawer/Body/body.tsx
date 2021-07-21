@@ -63,7 +63,6 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
         <Divider borderColor="gray.100" />
 
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
-        <Divider borderColor="gray.100" />
 
         <KeyResultSectionOwner keyResultID={keyResultID} />
       </Stack>

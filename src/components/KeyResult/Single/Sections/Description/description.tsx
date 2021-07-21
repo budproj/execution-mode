@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Box, Flex, SkeletonText, Spinner } from '@chakra-ui/react'
+import { Box, Divider, Flex, SkeletonText, Spinner } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
@@ -54,30 +54,34 @@ const KeyResultSectionDescription = ({
   isLoading ??= hasData
 
   return hasData || isLoading || canUpdate ? (
-    <Flex gridGap={2} direction="column">
-      <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
-      <Flex alignItems="center" gridGap={2}>
-        <SkeletonText isLoaded={!isLoading} noOfLines={5} spacing={2} w="100%">
-          <EditableTextAreaValue
-            isTruncated
-            value={keyResult?.description}
-            customFallbackValue={intl.formatMessage(messages.emptyStateMessage)}
-            isLoaded={!isLoading}
-            isSubmitting={loading}
-            fontSize="md"
-            color="black.800"
-            maxCharacters={170}
-            isDisabled={!canUpdate}
-            onSave={handleSubmit}
-          />
-        </SkeletonText>
-        {loading && (
-          <Box pt={2}>
-            <Spinner color="brand.400" />
-          </Box>
-        )}
+    <>
+      <Flex gridGap={2} direction="column">
+        <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
+        <Flex alignItems="center" gridGap={2}>
+          <SkeletonText isLoaded={!isLoading} noOfLines={5} spacing={2} w="100%">
+            <EditableTextAreaValue
+              isTruncated
+              value={keyResult?.description}
+              customFallbackValue={intl.formatMessage(messages.emptyStateMessage)}
+              isLoaded={!isLoading}
+              isSubmitting={loading}
+              fontSize="md"
+              color="black.800"
+              maxCharacters={170}
+              isDisabled={!canUpdate}
+              onSave={handleSubmit}
+            />
+          </SkeletonText>
+          {loading && (
+            <Box pt={2}>
+              <Spinner color="brand.400" />
+            </Box>
+          )}
+        </Flex>
       </Flex>
-    </Flex>
+
+      <Divider borderColor="gray.100" />
+    </>
   ) : // eslint-disable-next-line unicorn/no-null
   null
 }
