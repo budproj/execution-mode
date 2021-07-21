@@ -3,6 +3,8 @@ import React, { ComponentType, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { v5 as uuidv5 } from 'uuid'
 
+import { Linkify } from '../Linkify/wrapper'
+
 import { MAX_CHAR_LENGTH } from './constants'
 import messages from './messages'
 
@@ -55,26 +57,28 @@ const ExpandableText = ({
 
   return (
     <Box>
-      {paragraphs.map((paragraph) => (
-        <Wrapper
-          key={uuidv5(paragraph, uuidv5.URL)}
-          fontSize={fontSize}
-          fontWeight={fontWeight}
-          color={color}
-          transition={transition}
-          py={py}
-          borderWidth={borderWidth}
-          borderColor={borderColor}
-          _empty={{
-            height: 4,
-          }}
-          onClick={onClickPreview}
-          onMouseEnter={onMouseEnterPreview}
-          onMouseLeave={onMouseLeavePreview}
-        >
-          {paragraph}
-        </Wrapper>
-      ))}
+      <Linkify>
+        {paragraphs.map((paragraph) => (
+          <Wrapper
+            key={uuidv5(paragraph, uuidv5.URL)}
+            fontSize={fontSize}
+            fontWeight={fontWeight}
+            color={color}
+            transition={transition}
+            py={py}
+            borderWidth={borderWidth}
+            borderColor={borderColor}
+            _empty={{
+              height: 4,
+            }}
+            onClick={onClickPreview}
+            onMouseEnter={onMouseEnterPreview}
+            onMouseLeave={onMouseLeavePreview}
+          >
+            {paragraph}
+          </Wrapper>
+        ))}
+      </Linkify>
       {isTruncatedText && (
         <Button p={0} colorScheme="brand" fontWeight={400} onClick={toggleExpanded}>
           {intl.formatMessage(messages[isExpanded ? 'collapseButton' : 'expandButton'])}

@@ -92,10 +92,10 @@ const SliderWithHoverThumb = forwardRef<HTMLDivElement, SliderWithHoverThumbProp
 
     useEffect(() => {
       const marshaledValue = marshalReversedValue(value, min, max, isReversed)
-      if (value && marshaledValue !== controlledValue) {
+      if (marshaledValue !== controlledValue) {
         setControlledValue(marshaledValue)
       }
-    }, [value, min, isReversed, controlledValue, setControlledValue])
+    }, [value, min, max, isReversed, controlledValue, setControlledValue])
 
     return (
       <Slider

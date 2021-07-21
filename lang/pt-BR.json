@@ -1019,10 +1019,6 @@
     "defaultMessage": "Ajuda",
     "description": "This tooltip is displayed when the user hovers the support button"
   },
-  "gLS6ev": {
-    "defaultMessage": "Neste check-in",
-    "description": "This text is displayed in our check-in card, as a title for the left column in the progress increase section"
-  },
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
@@ -1166,6 +1162,10 @@
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
+  },
+  "loAGsF": {
+    "defaultMessage": "Variação",
+    "description": "This text is displayed in our check-in card, as a title for the left column in the progress increase section"
   },
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",
