@@ -3,6 +3,7 @@ import React from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import {
   keyResultCheckInPopoverOpen,
   keyResultCheckInProgressDraft,
@@ -22,10 +23,11 @@ const ProgressSliderWrapper = ({ id, isDisabled, isActive }: ProgressSliderWrapp
   const [isPopoverOpen, setPopoverOpen] = useRecoilState<boolean>(keyResultCheckInPopoverOpen(id))
   const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(id))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(id))
+  const keyResult = useRecoilValue(keyResultAtomFamily(id))
 
   const handleClose = () => {
     setPopoverOpen(false)
-    setDraftValue(latestKeyResultCheckIn?.value)
+    setDraftValue(latestKeyResultCheckIn?.value ?? keyResult?.initialValue)
   }
 
   return (
