@@ -40,6 +40,21 @@ type ConnectionPolicy {
   create: Effect!
 }
 
+# This object contains information regarding the pagination of a given node list
+type PageInfo {
+  # If there is a next page, this key is set to true
+  hasNextPage: Boolean!
+
+  # If there is a previous page, this key is set to true
+  hasPreviousPage: Boolean!
+
+  # The cursor ID of the first element in our nodes list
+  startCursor: String
+
+  # The cursor ID of the last element in our nodes list
+  endCursor: String
+}
+
 # The delta of an entity. In this key you're going to find the difference bet this entity and a given previous snapshot of it
 type Delta {
   # The progress difference of this entity comparing with it last week
@@ -76,6 +91,7 @@ interface EdgeInterface {
 
 # A list containing a given objective support TeamsConnection based on the provided filters and arguments
 type ObjectiveTeamsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [ObjectiveTeamEdge!]!
@@ -125,6 +141,7 @@ type ObjectiveKeyResultEdge implements EdgeInterface {
 
 # A list containing a given user key-results based on the provided filters and arguments
 type ObjectiveKeyResultsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [ObjectiveKeyResultEdge!]!
@@ -256,6 +273,7 @@ type KeyResultKeyResultCheckInEdge implements EdgeInterface {
 
 # A list containing key-results based on the provided filters and arguments
 type KeyResultKeyResultCheckInsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [KeyResultKeyResultCheckInEdge!]!
@@ -294,6 +312,7 @@ type KeyResultKeyResultCommentEdge implements EdgeInterface {
 
 # A list containing key-results based on the provided filters and arguments
 type KeyResultKeyResultCommentsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [KeyResultKeyResultCommentEdge!]!
@@ -479,6 +498,7 @@ type UserKeyResultCheckInEdge implements EdgeInterface {
 
 # A list containing a given user key-results based on the provided filters and arguments
 type UserKeyResultCheckInsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [UserKeyResultCheckInEdge!]!
@@ -507,6 +527,7 @@ type UserKeyResultEdge implements EdgeInterface {
 
 # A list containing a given user key-results based on the provided filters and arguments
 type UserKeyResultsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [UserKeyResultEdge!]!
@@ -521,6 +542,7 @@ type UserObjectiveEdge implements EdgeInterface {
 
 # A list containing a given user ObjectivesConnection based on the provided filters and arguments
 type UserObjectivesConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [UserObjectiveEdge!]!
@@ -535,6 +557,7 @@ type UserTeamEdge implements EdgeInterface {
 
 # A list containing a given user TeamsConnection based on the provided filters and arguments
 type UserTeamsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [UserTeamEdge!]!
@@ -762,6 +785,7 @@ type TeamCycleEdge implements EdgeInterface {
 
 # A list containing a given user key-results based on the provided filters and arguments
 type TeamCyclesConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [TeamCycleEdge!]!
@@ -776,6 +800,7 @@ type TeamKeyResultEdge implements EdgeInterface {
 
 # A list containing a given user key-results based on the provided filters and arguments
 type TeamKeyResultsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [TeamKeyResultEdge!]!
@@ -804,6 +829,7 @@ type TeamTeamEdge implements EdgeInterface {
 
 # A list containing a given team key-results based on the provided filters and arguments
 type TeamTeamsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [TeamTeamEdge!]!
@@ -818,6 +844,7 @@ type TeamUserEdge implements EdgeInterface {
 
 # A list containing a given user key-results based on the provided filters and arguments
 type TeamUsersConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [TeamUserEdge!]!
@@ -1112,6 +1139,7 @@ type ObjectiveRootEdge implements EdgeInterface {
 
 # A list containing ObjectivesConnection based on the provided filters and arguments
 type ObjectivesConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [ObjectiveRootEdge!]!
@@ -1126,6 +1154,7 @@ type CycleKeyResultEdge implements EdgeInterface {
 
 # A list containing a given user key-results based on the provided filters and arguments
 type CycleKeyResultsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [CycleKeyResultEdge!]!
@@ -1250,6 +1279,7 @@ type CycleCycleEdge implements EdgeInterface {
 
 # A list containing a given cycle key-results based on the provided filters and arguments
 type CycleCyclesConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [CycleCycleEdge!]!
@@ -1264,6 +1294,7 @@ type CycleRootEdge implements EdgeInterface {
 
 # A list containing CyclesConnection based on the provided filters and arguments
 type CyclesConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [CycleRootEdge!]!
@@ -1278,6 +1309,7 @@ type KeyResultCheckInRootEdge implements EdgeInterface {
 
 # A list containing key-result comments based on the provided filters and arguments
 type KeyResultCheckInsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [KeyResultCheckInRootEdge!]!
@@ -1298,6 +1330,7 @@ type KeyResultCommentRootEdge implements EdgeInterface {
 
 # A list containing key-result comments based on the provided filters and arguments
 type KeyResultCommentsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [KeyResultCommentRootEdge!]!
@@ -1312,6 +1345,7 @@ type KeyResultRootEdge implements EdgeInterface {
 
 # A list containing key-results based on the provided filters and arguments
 type KeyResultsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [KeyResultRootEdge!]!
@@ -1326,6 +1360,7 @@ type TeamRootEdge implements EdgeInterface {
 
 # A list containing TeamsConnection based on the provided filters and arguments
 type TeamsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [TeamRootEdge!]!
@@ -1340,6 +1375,7 @@ type UserRootEdge implements EdgeInterface {
 
 # A list containing UsersConnection based on the provided filters and arguments
 type UsersConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [UserRootEdge!]!
