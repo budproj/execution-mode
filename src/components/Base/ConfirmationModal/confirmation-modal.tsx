@@ -34,7 +34,12 @@ const ConfirmationModal = ({
   const intl = useIntl()
 
   return (
-    <Modal isOpen={isOpen} size="lg" onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      size="lg"
+      portalProps={{ appendToParentPortal: false }}
+      onClose={onClose}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalBody>
