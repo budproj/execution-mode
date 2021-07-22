@@ -11,6 +11,9 @@ const customHandlers = {
     User: {
       teams: ignoreArguments,
       companies: ignoreArguments,
+    },
+    Query: {
+      teams: ignoreArguments,
     }
   }
 }
