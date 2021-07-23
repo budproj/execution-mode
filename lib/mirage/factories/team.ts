@@ -13,13 +13,9 @@ export const team = Factory.extend({
   // IsCompany: false,
   // onlyCompanies: false,
   // onlyCompaniesAndDepartments: false,
-  tacticalCycle: {
-    delta: {
-      progress: 60
-    },
-  },
-  delta: {
-    progress: 50,
-    confidence: 50,
+  afterCreate(team, server) {
+    const cycle = server.create('cycle')
+
+    team.update({ tacticalCycle: cycle })
   }
 })

@@ -1,5 +1,6 @@
-import { hasMany, Model } from 'miragejs'
+import { hasMany, belongsTo, Model } from 'miragejs'
 
 export const team = Model.extend({
-  rankedDescendants: hasMany('team', { inverse: 'rankedAncestors' })
+  tacticalCycle: belongsTo('cycle'),
+  rankedDescendants: hasMany('team')
 })

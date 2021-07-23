@@ -5,26 +5,20 @@ import getConfig from 'src/config'
 
 import { Factories } from '../factories'
 import { Models } from '../models'
-import { generateRandomStatus } from './helpers'
 
 const { publicRuntimeConfig } = getConfig()
 
 export const seeds = (server: Server<Registry<Models, Factories>>) => {
   faker.seed(publicRuntimeConfig.mirage.fakerSeed)
 
-  const company = server.create('team', {
-    // order: { createdAt: 'DESC' },
-    level: 'COMPANY',
-    // onlyCompanies: true,
-    // onlyCompaniesAndDepartments: true,
-    status: generateRandomStatus(),
-  })
+  const company = server.create('team', { level: 'COMPANY' })
 
-  const team = server.create('team', {})
-  company.update({ rankedDescendants: [team] })
+  const teams = server.createList('team', 5)
 
-  const me = server.create('user', {
-    teams: [team],
-    companies: [company],
-  })
+  company.update({ rankedDescendants: teams })
+
+  const me = server.create('user', { teams: teams, companies: [company] })
+  server.db.keyResultCheckIns.update({ user: me }) // add user to all checkIns
+
+  console.log('server', server.db)
 }
