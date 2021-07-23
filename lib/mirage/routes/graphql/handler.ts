@@ -4,16 +4,19 @@ import Schema from 'miragejs/orm/schema' //  eslint-disable-line import/no-unres
 // TODO: fix no-unresolved lint errors in miragejs
 
 import graphQLSchema from './schema.gql'
-import { ignoreArguments } from './custom-resolvers/ignore-arguments'
+import { ignoreSpecificArgments } from './custom-resolvers/ignore-arguments'
 
 const customHandlers = {
   resolvers: {
     User: {
-      teams: ignoreArguments,
-      companies: ignoreArguments,
+      teams: ignoreSpecificArgments(['order']),
+      companies: ignoreSpecificArgments(['order']),
+    },
+    Team: {
+      rankedDescendants: ignoreSpecificArgments(['order']),
     },
     Query: {
-      teams: ignoreArguments,
+      teams: ignoreSpecificArgments(['order']),
     }
   }
 }

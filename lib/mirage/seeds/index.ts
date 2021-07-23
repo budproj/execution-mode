@@ -9,11 +9,12 @@ import { Models } from '../models'
 const { publicRuntimeConfig } = getConfig()
 
 export const seeds = (server: Server<Registry<Models, Factories>>) => {
+  faker.locale = 'pt_BR'
   faker.seed(publicRuntimeConfig.mirage.fakerSeed)
 
   const company = server.create('team', { level: 'COMPANY' })
 
-  const teams = server.createList('team', 5)
+  const teams = server.createList('team', 3)
 
   company.update({ rankedDescendants: teams })
 
