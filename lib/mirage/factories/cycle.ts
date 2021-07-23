@@ -12,7 +12,7 @@ export const cycle = Factory.extend({
   updatedAt: faker.date.recent(),
   afterCreate(cycle, server) {
     const status = server.create('status')
-    const delta = server.create('deltum') // miragejs tries to singularize the world delta, incorrectly
+    const delta = server.create('deltum') // miragejs tries to singularize the word delta, incorrectly
 
     cycle.update({ status, delta })
   }
