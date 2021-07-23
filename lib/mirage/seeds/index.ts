@@ -20,5 +20,4 @@ export const seeds = (server: Server<Registry<Models, Factories>>) => {
   const me = server.create('user', { teams: teams, companies: [company] })
   server.db.keyResultCheckIns.update({ user: me }) // add user to all checkIns
 
-  console.log('server', server.db)
 }
