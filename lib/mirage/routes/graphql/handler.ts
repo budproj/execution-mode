@@ -15,8 +15,12 @@ const customHandlers = {
     Team: {
       rankedDescendants: ignoreSpecificArgments(['order']),
     },
+    Cycle: {
+      keyResults: ignoreSpecificArgments(['order']),
+    },
     Query: {
       teams: ignoreSpecificArgments(['order']),
+      cycles: ignoreSpecificArgments(['order']),
     }
   }
 }

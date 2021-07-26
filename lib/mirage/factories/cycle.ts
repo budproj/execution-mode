@@ -3,7 +3,6 @@ import { Factory } from 'miragejs'
 
 export const cycle = Factory.extend({
   createdAt: faker.date.past(),
-  policy: { read: 'ALLOW', update: 'ALLOW', delete: 'ALLOW' },
   period: 'blablabla',
   cadence: () => faker.helpers.randomize(['YEARLY', 'QUARTERLY']),
   active: true,
@@ -13,8 +12,9 @@ export const cycle = Factory.extend({
   afterCreate(cycle, server) {
     const status = server.create('status')
     const delta = server.create('deltum') // miragejs tries to singularize the word delta, incorrectly
+    const policy = server.create('nodePolicy')
 
-    cycle.update({ status, delta })
+    cycle.update({ status, delta, policy })
   }
 })
 

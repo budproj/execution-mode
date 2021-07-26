@@ -19,6 +19,8 @@ export const seeds = (server: Server<Registry<Models, Factories>>) => {
   company.update({ rankedDescendants: teams })
 
   const me = server.create('user', { teams: teams, companies: [company] })
-  server.db.keyResultCheckIns.update({ user: me }) // add user to all checkIns
 
+  const myKeyResults = server.createList('keyResult', 3, { owner: me })
+
+  server.db.keyResultCheckIns.update({ user: me }) // add user to all checkIns
 }
