@@ -1,19 +1,19 @@
 import { mirageGraphQLFieldResolver } from '@miragejs/graphql'
 import { omit } from 'lodash'
 
-
-// AKA: the ignorant resolver 
+// AKA: the ignorant resolver
 // use case: when your request is a query and mirage does not need to care about the arguments,
 // you can just show all results instead
-export const ignoreArguments = (parent: any, functionArgs: any, context: any, info: any) =>
+export const ignoreArguments = (parent: any, functionArguments: any, context: any, info: any) =>
   mirageGraphQLFieldResolver(parent, {}, context, info)
 
-// AKA: the ignorant specific resolver 
+// AKA: the ignorant specific resolver
 // use case: when your request is a query and mirage should not care about an array of arguments.
 // example: an X argument is not necessary, so use ignoreSpecificArgments(['X'])
-export const ignoreSpecificArgments = (argsToIgnore: string[]) =>
-  (parent: any, functionArgs: any, context: any, info: any) => {
-    const functionArgsWithIgnoredArguments = omit(functionArgs, argsToIgnore)
+export const ignoreSpecificArgments =
+  (argumentsToIgnore: string[]) =>
+  (parent: any, functionArguments: any, context: any, info: any) => {
+    const functionArgumentsWithIgnoredArguments = omit(functionArguments, argumentsToIgnore)
 
-    return mirageGraphQLFieldResolver(parent, functionArgsWithIgnoredArguments, context, info)
+    return mirageGraphQLFieldResolver(parent, functionArgumentsWithIgnoredArguments, context, info)
   }

@@ -1,8 +1,7 @@
-
 import { belongsTo, Model } from 'miragejs'
 
 export const cycle = Model.extend({
-  status: belongsTo('status', { inverse: null }),
-  delta: belongsTo('delta', { inverse: null }),
-  policy: belongsTo('nodePolicy', { inverse: null }),
+  status: belongsTo('status'),
+  delta: belongsTo('delta'),
+  policy: belongsTo('nodePolicy'),
 })

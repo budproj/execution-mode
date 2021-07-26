@@ -1,7 +1,7 @@
 import faker from 'faker'
 import { Factory } from 'miragejs'
 
-// miragejs tries to singularize the word delta, incorrectly
+// Miragejs tries to singularize the word delta, incorrectly
 export const keyResult = Factory.extend({
   title: 'um objetivo',
   initialValue: 0,
@@ -15,5 +15,5 @@ export const keyResult = Factory.extend({
     const objective = server.create('objective')
 
     keyResult.update({ status, keyResultCheckIns, objective })
-  }
+  },
 })

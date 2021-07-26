@@ -3,8 +3,8 @@ import { AnyRegistry } from 'miragejs/-types' //  eslint-disable-line import/no-
 import Schema from 'miragejs/orm/schema' //  eslint-disable-line import/no-unresolved
 // TODO: fix no-unresolved lint errors in miragejs
 
-import graphQLSchema from './schema.gql'
 import { ignoreSpecificArgments } from './custom-resolvers/ignore-arguments'
+import graphQLSchema from './schema.gql'
 
 const customHandlers = {
   resolvers: {
@@ -21,8 +21,8 @@ const customHandlers = {
     Query: {
       teams: ignoreSpecificArgments(['order']),
       cycles: ignoreSpecificArgments(['order']),
-    }
-  }
+    },
+  },
 }
 
 export const graphQLHandler = (mirageSchema: Schema<AnyRegistry>) =>

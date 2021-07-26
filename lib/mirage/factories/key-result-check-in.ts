@@ -11,5 +11,5 @@ export const keyResultCheckIn = Factory.extend({
     const policy = server.create('nodePolicy')
 
     keyResultCheckIn.update({ policy })
-  }
+  },
 })

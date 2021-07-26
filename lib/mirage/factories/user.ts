@@ -5,9 +5,15 @@ import { USER_GENDER } from 'src/components/User/constants'
 
 export const user = Factory.extend({
   // AuthzSub: faker.datatype.uuid,
-  firstName: faker.name.firstName,
-  lastName: faker.name.lastName,
-  fullName() { return `${this.firstName} ${this.lastName}` },
+  firstName() {
+    return faker.name.firstName()
+  },
+  lastName() {
+    return faker.name.lastName()
+  },
+  fullName() {
+    return faker.name.findName(this.firstName, this.lastName)
+  },
   // Nickname: faker.internet.userName,
   // about: faker.lorem.paragraph,
   // linkedInProfileAddress: faker.internet.url,

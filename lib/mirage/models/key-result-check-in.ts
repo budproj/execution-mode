@@ -1,4 +1,3 @@
-
 import { belongsTo, Model } from 'miragejs'
 
 export const keyResultCheckIn = Model.extend({

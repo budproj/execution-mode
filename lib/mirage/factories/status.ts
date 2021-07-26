@@ -10,5 +10,5 @@ export const status = Factory.extend({
     const keyResultCheckIn = server.create('keyResultCheckIn')
 
     status.update({ latestCheckIn: keyResultCheckIn })
-  }
+  },
 })
