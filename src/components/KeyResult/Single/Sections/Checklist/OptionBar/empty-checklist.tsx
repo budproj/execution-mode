@@ -8,19 +8,22 @@ import messages from './messages'
 
 interface EmptyChecklistProperties {
   refresh: () => void
+  canCreate: boolean
   keyResultID?: string
 }
 
-export const EmptyChecklist = ({ keyResultID, refresh }: EmptyChecklistProperties) => {
+export const EmptyChecklist = ({ keyResultID, refresh, canCreate }: EmptyChecklistProperties) => {
   const intl = useIntl()
 
   return (
     <Flex flexGrow={1} justifyContent="flex-end">
-      <NewCheckMark
-        refresh={refresh}
-        keyResultID={keyResultID}
-        label={intl.formatMessage(messages.newChecklistButtonLabel)}
-      />
+      {canCreate && (
+        <NewCheckMark
+          refresh={refresh}
+          keyResultID={keyResultID}
+          label={intl.formatMessage(messages.newChecklistButtonLabel)}
+        />
+      )}
     </Flex>
   )
 }

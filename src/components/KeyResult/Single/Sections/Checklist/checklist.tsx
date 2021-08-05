@@ -12,12 +12,14 @@ interface KeyResultChecklistProperties {
   keyResultID?: string
   nodes: KeyResultCheckMarkType[]
   refresh: () => void
+  canCreate: boolean
 }
 
 export const KeyResultChecklist = ({
   nodes,
   refresh,
   keyResultID,
+  canCreate,
 }: KeyResultChecklistProperties) => {
   const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
 
@@ -31,7 +33,9 @@ export const KeyResultChecklist = ({
           draftCheckMarks={draftCheckMarks}
         />
       ))}
-      {nodes.length > 0 && <NewCheckMark refresh={refresh} keyResultID={keyResultID} />}
+      {canCreate && nodes.length > 0 && (
+        <NewCheckMark refresh={refresh} keyResultID={keyResultID} />
+      )}
     </Stack>
   )
 }

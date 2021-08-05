@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { KeyResultCheckMark } from 'src/components/KeyResult/types'
+import { GraphQLEffect } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { keyResultChecklistAtom } from 'src/state/recoil/key-result/checklist'
 
@@ -35,6 +36,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   })
 
   const isLoading = called && loading && !isChecklistLoaded
+  const canCreate = keyResultChecklist?.policy?.create === GraphQLEffect.ALLOW
   const refreshChecklist = useCallback(() => {
     getChecklist({
       variables: {
@@ -59,6 +61,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
           progress={keyResultChecklist?.progress}
           refresh={refreshChecklist}
           keyResultID={keyResultID}
+          canCreate={canCreate}
         />
       </Stack>
       {isLoading ? (
@@ -68,6 +71,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
           nodes={checklist}
           refresh={refreshChecklist}
           keyResultID={keyResultID}
+          canCreate={canCreate}
         />
       )}
     </Stack>
