@@ -18,6 +18,7 @@ import {
   Tabs,
   Drawer,
   Link,
+  Checkbox,
 } from './components'
 
 const colors = {
@@ -185,6 +186,7 @@ const theme = extendTheme({
     Tabs,
     Drawer,
     Link,
+    Checkbox,
   },
 
   fonts: {
