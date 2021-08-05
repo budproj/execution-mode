@@ -66,7 +66,7 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
 
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
 
-        <KeyResultChecklistWrapper keyResultID={keyResultID} isLoading={isLoading} />
+        <KeyResultChecklistWrapper keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
 
         <KeyResultSectionOwner keyResultID={keyResultID} />

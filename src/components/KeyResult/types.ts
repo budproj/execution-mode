@@ -70,11 +70,11 @@ enum KeyResultCheckMarkState {
   UNCHECKED = 'unchecked',
 }
 
-interface KeyResultChecklist extends GraphQLConnection<KeyResultCheckMark> {
+export interface KeyResultChecklist extends GraphQLConnection<KeyResultCheckMark> {
   progress: KeyResultChecklistProgress
 }
 
-interface KeyResultChecklistProgress {
+export interface KeyResultChecklistProgress {
   total: number
   numberOfChecked: number
   progress: number

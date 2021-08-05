@@ -16,15 +16,6 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
         create
       }
     }
-    checkList {
-      edges {
-        node {
-          id
-          description
-          state
-        }
-      }
-    }
     status {
       isOutdated
       isActive
