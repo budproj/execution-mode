@@ -12,6 +12,7 @@ export interface EditableInputFieldProperties {
   isLoaded?: boolean
   isSubmitting?: boolean
   isWaiting?: boolean
+  startWithEditView?: boolean
 }
 
 const EditableInputField = ({
@@ -23,6 +24,7 @@ const EditableInputField = ({
   isLoaded,
   isSubmitting,
   isWaiting,
+  startWithEditView,
 }: EditableInputFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
@@ -51,6 +53,7 @@ const EditableInputField = ({
           isLoaded={isLoaded}
           // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
           isSubmitting={isBeingSubmitted || isWaiting}
+          startWithEditView={startWithEditView}
           onSubmit={handleSubmit}
         />
         {(isBeingSubmitted || isWaiting) && <Spinner color="gray.200" size="sm" />}

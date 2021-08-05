@@ -11,11 +11,16 @@ import {
 import queries from './queries.gql'
 
 interface KeyResultCheckMarkProperties {
+  draftCheckMarks?: string[]
   node?: Partial<KeyResultCheckMarkType>
   refresh?: () => void
 }
 
-export const KeyResultCheckMark = ({ node, refresh }: KeyResultCheckMarkProperties) => {
+export const KeyResultCheckMark = ({
+  node,
+  refresh,
+  draftCheckMarks,
+}: KeyResultCheckMarkProperties) => {
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
   const [toggleCheckMark, { loading }] = useMutation(queries.TOGGLE_CHECK_MARK, {
     variables: {
@@ -27,6 +32,7 @@ export const KeyResultCheckMark = ({ node, refresh }: KeyResultCheckMarkProperti
   })
 
   const isLoaded = Boolean(node)
+  const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const handleChange = async () => {
     await toggleCheckMark()
     if (refresh) refresh()
@@ -40,7 +46,12 @@ export const KeyResultCheckMark = ({ node, refresh }: KeyResultCheckMarkProperti
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
       <Stack direction="row" alignItems="center">
         <Checkbox isChecked={isChecked} isDisabled={loading} onChange={handleChange} />
-        <EditableInputField isWaiting={loading} value={node?.description} isLoaded={isLoaded} />
+        <EditableInputField
+          isWaiting={loading}
+          value={node?.description}
+          isLoaded={isLoaded}
+          startWithEditView={isDraft}
+        />
       </Stack>
     </Skeleton>
   )

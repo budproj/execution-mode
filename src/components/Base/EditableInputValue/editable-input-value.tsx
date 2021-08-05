@@ -30,6 +30,7 @@ export interface EditableInputValueProperties {
   maxCharacters?: number
   isTruncated?: boolean
   isDisabled?: boolean
+  startWithEditView?: boolean
 }
 
 const truncateValue = (value?: string | null, maxCharacters?: number): string =>
@@ -47,6 +48,7 @@ const EditableInputValue = ({
   maxCharacters,
   isTruncated,
   isDisabled,
+  startWithEditView,
 }: EditableInputValueProperties) => {
   const intl = useIntl()
 
@@ -125,12 +127,14 @@ const EditableInputValue = ({
   return (
     <Skeleton
       isLoaded={isLoaded}
+      fadeDuration={0}
       {...buildSkeletonMinSize(isLoaded, skeletonWidth, skeletonHeight)}
     >
       {isLoaded ? (
         <Editable
           value={currentValue}
           isDisabled={isLocked}
+          startWithEditView={startWithEditView}
           onSubmit={handleSubmit}
           onEdit={handleEdit}
           onChange={handleChange}
