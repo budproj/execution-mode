@@ -8,7 +8,9 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
+import { KeyResultChecklist } from './checklist'
 import messages from './messages'
+import { KeyResultChecklistSkeleton } from './skeleton'
 
 interface KeyResultChecklistWrapperProperties {
   keyResultID?: string
@@ -32,6 +34,11 @@ export const KeyResultChecklistWrapper = ({
   return (
     <Stack>
       <KeyResultSectionHeading>{intl.formatMessage(messages.heading)}</KeyResultSectionHeading>
+      {isLoading || !isChecklistLoaded ? (
+        <KeyResultChecklistSkeleton />
+      ) : (
+        <KeyResultChecklist nodes={checklist} />
+      )}
     </Stack>
   )
 }

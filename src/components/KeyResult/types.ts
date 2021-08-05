@@ -57,7 +57,7 @@ interface KeyResultCheckInDelta extends Delta {
   value: number
 }
 
-interface KeyResultCheckMark extends GraphQLNode {
+export interface KeyResultCheckMark extends GraphQLNode {
   description: string
   state: KeyResultCheckMarkState
   updatedAt: string
