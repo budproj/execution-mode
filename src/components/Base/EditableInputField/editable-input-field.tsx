@@ -39,9 +39,11 @@ const EditableInputField = ({
 
   return (
     <Stack direciton="column" w="full" spacing={0} flexGrow={flexGrow}>
-      <FormLabel fontSize="sm" m={0}>
-        {label}
-      </FormLabel>
+      {Boolean(label) ?? (
+        <FormLabel fontSize="sm" m={0}>
+          {label}
+        </FormLabel>
+      )}
       <Stack direction="row" alignItems="center" gridGap={2}>
         <EditableInputValue
           value={value}
