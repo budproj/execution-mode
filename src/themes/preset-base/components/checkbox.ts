@@ -16,5 +16,12 @@ export const Checkbox = {
         },
       },
     },
+
+    label: {
+      '&[data-checked]': {
+        color: 'new-gray.600',
+        textDecoration: 'line-through',
+      },
+    },
   },
 }

@@ -667,6 +667,10 @@
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
   },
+  "PktsGq": {
+    "defaultMessage": "Check-list",
+    "description": "This is the title of our checklist section inside the key-result sidebar"
+  },
   "Q2diI+": {
     "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"

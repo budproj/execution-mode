@@ -12,6 +12,6 @@
     "github.copilot",
     "eamodio.gitlens",
     "graphql.vscode-graphql",
-  	"esbenp.prettier-vscode"
+    "esbenp.prettier-vscode"
   ]
 }
