@@ -31,6 +31,7 @@ export interface EditableInputValueProperties {
   isTruncated?: boolean
   isDisabled?: boolean
   startWithEditView?: boolean
+  autoFocus?: boolean
 }
 
 const truncateValue = (value?: string | null, maxCharacters?: number): string =>
@@ -49,6 +50,7 @@ const EditableInputValue = ({
   isTruncated,
   isDisabled,
   startWithEditView,
+  autoFocus,
 }: EditableInputValueProperties) => {
   const intl = useIntl()
 
@@ -176,6 +178,7 @@ const EditableInputValue = ({
               </Box>
 
               <EditableInput
+                autoFocus={autoFocus}
                 borderWidth={isDisabled ? 0 : components.Editable.baseStyle.input.borderWidth}
                 {...isDisableFix}
               />

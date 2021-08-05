@@ -47,6 +47,7 @@ export const KeyResultCheckMark = ({
       <Stack direction="row" alignItems="center">
         <Checkbox isChecked={isChecked} isDisabled={loading} onChange={handleChange} />
         <EditableInputField
+          autoFocus={isDraft}
           isWaiting={loading}
           value={node?.description}
           isLoaded={isLoaded}
