@@ -11,8 +11,8 @@ import {
 import queries from './queries.gql'
 
 interface KeyResultCheckMarkProperties {
-  node: Partial<KeyResultCheckMarkType>
-  refresh: () => void
+  node?: Partial<KeyResultCheckMarkType>
+  refresh?: () => void
 }
 
 export const KeyResultCheckMark = ({ node, refresh }: KeyResultCheckMarkProperties) => {
@@ -29,7 +29,7 @@ export const KeyResultCheckMark = ({ node, refresh }: KeyResultCheckMarkProperti
   const isLoaded = Boolean(node)
   const handleChange = async () => {
     await toggleCheckMark()
-    refresh()
+    if (refresh) refresh()
   }
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const KeyResultCheckMark = ({ node, refresh }: KeyResultCheckMarkProperti
   }, [node?.state, setIsChecked])
 
   return (
-    <Skeleton isLoaded={isLoaded} w="full">
+    <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
       <Stack direction="row" alignItems="center">
         <Checkbox isChecked={isChecked} isDisabled={loading} onChange={handleChange} />
         <EditableInputField isWaiting={loading} value={node?.description} isLoaded={isLoaded} />
