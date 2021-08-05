@@ -8,12 +8,18 @@ import { NonEmptyChecklist } from './non-empty-checklist'
 
 interface OptionBarWrapperProperties {
   progress?: KeyResultChecklistProgress
+  keyResultID?: string
+  refresh: () => void
 }
 
-export const OptionBarWrapper = ({ progress }: OptionBarWrapperProperties) => (
+export const OptionBarWrapper = ({
+  progress,
+  keyResultID,
+  refresh,
+}: OptionBarWrapperProperties) => (
   <Stack direction="row" flexGrow={1}>
     {progress && progress.total === 0 ? (
-      <EmptyChecklist progress={progress} />
+      <EmptyChecklist keyResultID={keyResultID} refresh={refresh} />
     ) : (
       <NonEmptyChecklist progress={progress} />
     )}

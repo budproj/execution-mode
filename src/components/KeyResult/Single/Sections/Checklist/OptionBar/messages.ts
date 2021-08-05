@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type OptionBarMessages = 'completed' | 'checkIconDescription'
+type OptionBarMessages = 'completed' | 'checkIconDescription' | 'newChecklistButtonLabel'
 
 export default defineMessages<OptionBarMessages>({
   completed: {
@@ -16,5 +16,11 @@ export default defineMessages<OptionBarMessages>({
     id: 'W37c+K',
     description:
       'This text is used by screen readers to explain the check icon in our key-result drawer checklist section',
+  },
+
+  newChecklistButtonLabel: {
+    defaultMessage: 'Adicionar uma Check-list',
+    id: 's4h8ne',
+    description: 'This text is used as a button when the key-result has no check-marks',
   },
 })

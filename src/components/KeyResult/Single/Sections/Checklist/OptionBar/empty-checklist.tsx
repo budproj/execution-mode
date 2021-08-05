@@ -1,9 +1,26 @@
+import { Flex } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
-import { KeyResultChecklistProgress } from 'src/components/KeyResult/types'
+import { NewCheckMark } from '../new-checkmark'
+
+import messages from './messages'
 
 interface EmptyChecklistProperties {
-  progress?: KeyResultChecklistProgress
+  refresh: () => void
+  keyResultID?: string
 }
 
-export const EmptyChecklist = ({ progress }: EmptyChecklistProperties) => <p>Empty</p>
+export const EmptyChecklist = ({ keyResultID, refresh }: EmptyChecklistProperties) => {
+  const intl = useIntl()
+
+  return (
+    <Flex flexGrow={1} justifyContent="flex-end">
+      <NewCheckMark
+        refresh={refresh}
+        keyResultID={keyResultID}
+        label={intl.formatMessage(messages.newChecklistButtonLabel)}
+      />
+    </Flex>
+  )
+}

@@ -12,10 +12,11 @@ import queries from './queries.gql'
 
 interface NewCheckMarkProperties {
   keyResultID?: string
+  label?: string
   refresh: () => void
 }
 
-export const NewCheckMark = ({ refresh, keyResultID }: NewCheckMarkProperties) => {
+export const NewCheckMark = ({ label, refresh, keyResultID }: NewCheckMarkProperties) => {
   const intl = useIntl()
   const [draftCheckMarks, setDraftCheckMarks] = useRecoilState(draftCheckMarksAtom(keyResultID))
   const [createCheckMark, { loading }] = useMutation(queries.CREATE_CHECK_MARK, {
@@ -50,7 +51,7 @@ export const NewCheckMark = ({ refresh, keyResultID }: NewCheckMarkProperties) =
       }
       onClick={handleNewCheckMark}
     >
-      {intl.formatMessage(messages.newCheckMarkButtonLabel)}
+      {label ?? intl.formatMessage(messages.newCheckMarkButtonLabel)}
     </Button>
   )
 }
