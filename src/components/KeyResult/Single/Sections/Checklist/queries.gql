@@ -17,3 +17,10 @@ query GET_CHECKLIST_OF_KEY_RESULT($id: ID!) {
     }
   }
 }
+
+mutation TOGGLE_CHECK_MARK($id: String!) {
+  toggleCheckMark(data: { id: $id }) {
+    id
+    state
+  }
+}

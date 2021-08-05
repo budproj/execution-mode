@@ -65,7 +65,7 @@ export interface KeyResultCheckMark extends GraphQLNode {
   userId: string
 }
 
-enum KeyResultCheckMarkState {
+export enum KeyResultCheckMarkState {
   CHECKED = 'checked',
   UNCHECKED = 'unchecked',
 }
