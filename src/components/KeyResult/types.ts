@@ -50,8 +50,32 @@ export interface KeyResult extends GraphQLNode {
   keyResultCheckIns?: GraphQLConnection<KeyResultCheckIn>
   keyResultComments?: GraphQLConnection<KeyResultComment>
   timeline?: GraphQLConnection<KeyResultTimelineEntry>
+  checkList: KeyResultChecklist
 }
 
 interface KeyResultCheckInDelta extends Delta {
   value: number
+}
+
+interface KeyResultCheckMark extends GraphQLNode {
+  description: string
+  state: KeyResultCheckMarkState
+  updatedAt: string
+  keyResultId: string
+  userId: string
+}
+
+enum KeyResultCheckMarkState {
+  CHECKED = 'checked',
+  UNCHECKED = 'unchecked',
+}
+
+interface KeyResultChecklist extends GraphQLConnection<KeyResultCheckMark> {
+  progress: KeyResultChecklistProgress
+}
+
+interface KeyResultChecklistProgress {
+  total: number
+  numberOfChecked: number
+  progress: number
 }
