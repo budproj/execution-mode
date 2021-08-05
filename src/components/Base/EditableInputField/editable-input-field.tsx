@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react'
 import EditableInputValue from 'src/components/Base/EditableInputValue'
 
 export interface EditableInputFieldProperties {
-  label: string
+  label?: string
   customFallbackValue?: string
   value?: string
   flexGrow?: StackProps['flexGrow']
   onSubmit?: EditableProps['onSubmit']
   isLoaded?: boolean
   isSubmitting?: boolean
+  isWaiting?: boolean
 }
 
 const EditableInputField = ({
@@ -21,6 +22,7 @@ const EditableInputField = ({
   onSubmit,
   isLoaded,
   isSubmitting,
+  isWaiting,
 }: EditableInputFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
@@ -28,6 +30,8 @@ const EditableInputField = ({
     setWasSubmitted(true)
     if (onSubmit) onSubmit(value)
   }
+
+  const isBeingSubmitted = isSubmitting && wasSubmitted
 
   useEffect(() => {
     if (wasSubmitted && !isSubmitting) setWasSubmitted(false)
@@ -43,10 +47,11 @@ const EditableInputField = ({
           value={value}
           customFallbackValue={customFallbackValue}
           isLoaded={isLoaded}
-          isSubmitting={isSubmitting && wasSubmitted}
+          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+          isSubmitting={isBeingSubmitted || isWaiting}
           onSubmit={handleSubmit}
         />
-        {isSubmitting && wasSubmitted && <Spinner color="gray.200" size="sm" />}
+        {(isBeingSubmitted || isWaiting) && <Spinner color="gray.200" size="sm" />}
       </Stack>
     </Stack>
   )
