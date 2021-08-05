@@ -60,7 +60,11 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
       {isLoading ? (
         <KeyResultChecklistSkeleton />
       ) : (
-        <KeyResultChecklist nodes={checklist} refresh={refreshChecklist} />
+        <KeyResultChecklist
+          nodes={checklist}
+          refresh={refreshChecklist}
+          keyResultID={keyResultID}
+        />
       )}
     </Stack>
   )
