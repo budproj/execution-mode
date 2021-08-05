@@ -11,6 +11,8 @@ import { KeyResultSingleSectionDeadline } from 'src/components/KeyResult/Single/
 import { KeyResultSingleSectionGoal } from 'src/components/KeyResult/Single/Sections/Goal/wrapper'
 import { KeyResult } from 'src/components/KeyResult/types'
 
+import { KeyResultChecklistWrapper } from '../../Sections/Checklist/wrapper'
+
 import { SCROLLBAR_ID } from './constants'
 
 export interface KeyResultDrawerBodyProperties {
@@ -63,6 +65,9 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
         <Divider borderColor="gray.100" />
 
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
+
+        <KeyResultChecklistWrapper keyResultID={keyResultID} isLoading={isLoading} />
+        <Divider borderColor="gray.100" />
 
         <KeyResultSectionOwner keyResultID={keyResultID} />
       </Stack>
