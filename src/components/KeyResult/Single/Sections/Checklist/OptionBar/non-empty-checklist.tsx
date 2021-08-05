@@ -15,6 +15,7 @@ interface NonEmptyChecklistProperties {
 
 export const NonEmptyChecklist = ({ progress }: NonEmptyChecklistProperties) => {
   const intl = useIntl()
+  const isLoaded = Boolean(progress)
 
   return (
     <Stack direction="row" alignItems="center" flexGrow={1} spacing={2}>
@@ -26,7 +27,7 @@ export const NonEmptyChecklist = ({ progress }: NonEmptyChecklistProperties) => 
             stroke="brand.500"
           />
         </Flex>
-        <Skeleton isLoaded={Boolean(progress)}>
+        <Skeleton isLoaded={isLoaded}>
           <Text color="brand.500" fontSize="sm" fontWeight={500}>
             {intl.formatMessage(messages.completed, {
               completed: progress?.numberOfChecked ?? 0,
@@ -43,8 +44,15 @@ export const NonEmptyChecklist = ({ progress }: NonEmptyChecklistProperties) => 
         fontWeight={700}
         color="new-gray.800"
       >
-        <SliderWithFilledTrack value={progress?.progress ?? 0} minW={24} />
-        <PercentageNumberMask displayType="text" value={progress?.progress ?? 0} />
+        <Skeleton isLoaded={isLoaded}>
+          <Flex>
+            <SliderWithFilledTrack value={progress?.progress ?? 0} minW={24} />
+          </Flex>
+        </Skeleton>
+
+        <Skeleton isLoaded={isLoaded}>
+          <PercentageNumberMask displayType="text" value={progress?.progress ?? 0} />
+        </Skeleton>
       </Stack>
     </Stack>
   )
