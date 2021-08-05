@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
@@ -34,20 +34,22 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
     },
   })
 
-  const isLoading = (called && loading) || !isChecklistLoaded
+  const isLoading = called && loading && !isChecklistLoaded
+  const refreshChecklist = useCallback(() => {
+    getChecklist({
+      variables: {
+        id: keyResultID,
+      },
+    })
+  }, [getChecklist, keyResultID])
 
   useEffect(() => {
     updateChecklistEdges(keyResultChecklist?.edges)
   }, [keyResultChecklist, updateChecklistEdges])
 
   useEffect(() => {
-    if (keyResultID)
-      getChecklist({
-        variables: {
-          id: keyResultID,
-        },
-      })
-  }, [keyResultID, getChecklist])
+    if (keyResultID) refreshChecklist()
+  }, [keyResultID, refreshChecklist])
 
   return (
     <Stack>
@@ -55,7 +57,11 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
         <KeyResultSectionHeading>{intl.formatMessage(messages.heading)}</KeyResultSectionHeading>
         <OptionBarWrapper progress={keyResultChecklist?.progress} />
       </Stack>
-      {isLoading ? <KeyResultChecklistSkeleton /> : <KeyResultChecklist nodes={checklist} />}
+      {isLoading ? (
+        <KeyResultChecklistSkeleton />
+      ) : (
+        <KeyResultChecklist nodes={checklist} refresh={refreshChecklist} />
+      )}
     </Stack>
   )
 }

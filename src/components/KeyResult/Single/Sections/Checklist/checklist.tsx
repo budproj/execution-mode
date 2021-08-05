@@ -7,12 +7,13 @@ import { KeyResultCheckMark } from './check-mark'
 
 interface KeyResultChecklistProperties {
   nodes: KeyResultCheckMarkType[]
+  refresh: () => void
 }
 
-export const KeyResultChecklist = ({ nodes }: KeyResultChecklistProperties) => (
+export const KeyResultChecklist = ({ nodes, refresh }: KeyResultChecklistProperties) => (
   <Stack>
-    {nodes.map((checkMark) => (
-      <KeyResultCheckMark key={checkMark.id} {...checkMark} />
+    {nodes.map((node) => (
+      <KeyResultCheckMark key={node.id} node={node} refresh={refresh} />
     ))}
   </Stack>
 )
