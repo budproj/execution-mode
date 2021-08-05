@@ -7,6 +7,7 @@ import {
   KeyResultCheckMark as KeyResultCheckMarkType,
   KeyResultCheckMarkState,
 } from 'src/components/KeyResult/types'
+import { GraphQLEffect } from 'src/components/types'
 
 import queries from './queries.gql'
 
@@ -33,6 +34,7 @@ export const KeyResultCheckMark = ({
 
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
+  const canUpdate = node?.policy?.update === GraphQLEffect.ALLOW
   const handleChange = async () => {
     await toggleCheckMark()
     if (refresh) refresh()
@@ -45,7 +47,11 @@ export const KeyResultCheckMark = ({
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
       <Stack direction="row" alignItems="center">
-        <Checkbox isChecked={isChecked} isDisabled={loading} onChange={handleChange} />
+        <Checkbox
+          isChecked={isChecked}
+          isDisabled={loading || !canUpdate}
+          onChange={handleChange}
+        />
         <EditableInputField
           autoFocus={isDraft}
           isWaiting={loading}

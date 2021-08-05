@@ -15,6 +15,9 @@ query GET_CHECKLIST_OF_KEY_RESULT($id: ID!) {
           id
           description
           state
+          policy {
+            update
+          }
         }
       }
     }
@@ -33,5 +36,8 @@ mutation CREATE_CHECK_MARK($keyResultID: ID!, $description: String!) {
     id
     description
     state
+    policy {
+      update
+    }
   }
 }

@@ -13,6 +13,7 @@ export interface GraphQLEdge<N extends GraphQLNode> {
 export interface GraphQLNode {
   id: string
   createdAt: string
+  policy: GraphQLEntityPolicy
 }
 
 export interface GraphQLConnectionPolicy {

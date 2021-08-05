@@ -15,6 +15,21 @@ export const Checkbox = {
           borderColor: 'brand.500',
         },
       },
+
+      '&[data-disabled]': {
+        bg: 'white',
+
+        '&[data-checked]': {
+          bg: 'brand.500',
+          borderColor: 'brand.500',
+          color: 'white',
+
+          '&[data-hover]': {
+            bg: 'brand.500',
+            borderColor: 'brand.500',
+          },
+        },
+      },
     },
 
     label: {
