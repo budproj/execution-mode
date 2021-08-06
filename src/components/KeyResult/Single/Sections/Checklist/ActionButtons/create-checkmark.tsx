@@ -7,8 +7,8 @@ import { useRecoilState } from 'recoil'
 import { PlusOutline } from 'src/components/Icon'
 import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
-import messages from '../messages'
-import queries from '../queries.gql'
+import messages from './messages'
+import queries from './queries.gql'
 
 interface CreateCheckMarkButtonProperties {
   keyResultID?: string

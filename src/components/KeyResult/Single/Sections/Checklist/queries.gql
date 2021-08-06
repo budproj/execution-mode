@@ -30,14 +30,3 @@ mutation TOGGLE_CHECK_MARK($id: ID!) {
     state
   }
 }
-
-mutation CREATE_CHECK_MARK($keyResultID: ID!, $description: String!) {
-  createKeyResultCheckMark(data: { keyResultId: $keyResultID, description: $description }) {
-    id
-    description
-    state
-    policy {
-      update
-    }
-  }
-}
