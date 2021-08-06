@@ -94,6 +94,7 @@ export const KeyResultCheckMark = ({
           value={node?.description}
           isLoaded={isLoaded}
           startWithEditView={isDraft}
+          isDisabled={!canUpdate}
           onSubmit={handleNewCheckMarkDescription}
         />
         <DeleteCheckMarkButton

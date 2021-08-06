@@ -122,7 +122,9 @@ const EditableInputValue = ({
         color: previewProperties?.color ?? defaultColor,
         fontSize: previewProperties?.fontSize ?? 'md',
         fontWeight: previewProperties?.fontWeight ?? 400,
-        p: previewProperties?.p,
+        px: '0.125rem',
+        py: '0.4rem',
+        cursor: 'text',
       }
     : {}
 
