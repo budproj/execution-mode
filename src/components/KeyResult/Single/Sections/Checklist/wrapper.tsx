@@ -35,7 +35,6 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
     },
   })
 
-  const isLoading = called && loading && !isChecklistLoaded
   const canCreate = keyResultChecklist?.policy?.create === GraphQLEffect.ALLOW
   const refreshChecklist = useCallback(() => {
     getChecklist({
@@ -46,8 +45,8 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   }, [getChecklist, keyResultID])
 
   useEffect(() => {
-    updateChecklistEdges(keyResultChecklist?.edges)
-  }, [keyResultChecklist, updateChecklistEdges])
+    if (called && !loading) updateChecklistEdges(keyResultChecklist?.edges)
+  }, [called, loading, keyResultChecklist, updateChecklistEdges])
 
   useEffect(() => {
     if (keyResultID) refreshChecklist()
@@ -64,15 +63,15 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
           canCreate={canCreate}
         />
       </Stack>
-      {isLoading ? (
-        <KeyResultChecklistSkeleton />
-      ) : (
+      {isChecklistLoaded ? (
         <KeyResultChecklist
           nodes={checklist}
           refresh={refreshChecklist}
           keyResultID={keyResultID}
           canCreate={canCreate}
         />
+      ) : (
+        <KeyResultChecklistSkeleton />
       )}
     </Stack>
   )

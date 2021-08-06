@@ -38,7 +38,8 @@ export const NewCheckMark = ({ label, refresh, keyResultID }: NewCheckMarkProper
   return (
     <Button
       variant="text"
-      pl={0}
+      p={0}
+      h="auto"
       colorScheme="brand"
       isDisabled={loading}
       leftIcon={

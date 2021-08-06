@@ -44,10 +44,8 @@ export const NonEmptyChecklist = ({ progress }: NonEmptyChecklistProperties) => 
         fontWeight={700}
         color="new-gray.800"
       >
-        <Skeleton isLoaded={isLoaded}>
-          <Flex>
-            <SliderWithFilledTrack value={progress?.progress ?? 0} minW={24} />
-          </Flex>
+        <Skeleton isLoaded={isLoaded} display="flex" minH={4}>
+          <SliderWithFilledTrack value={progress?.progress ?? 0} minW={24} />
         </Skeleton>
 
         <Skeleton isLoaded={isLoaded}>

@@ -1279,6 +1279,10 @@
     "defaultMessage": "Progresso",
     "description": "This message is displayed as the title of the progress section inside check-in card"
   },
+  "s4h8ne": {
+    "defaultMessage": "Adicionar uma Check-list",
+    "description": "This text is used as a button when the key-result has no check-marks"
+  },
   "s6b2FE": {
     "defaultMessage": "Data Limite",
     "description": "The heading text of the goal section in our key-result drawers"

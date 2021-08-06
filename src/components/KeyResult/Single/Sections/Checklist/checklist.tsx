@@ -23,7 +23,7 @@ export const KeyResultChecklist = ({
 }: KeyResultChecklistProperties) => {
   const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
 
-  return (
+  return nodes.length > 0 ? (
     <Stack alignItems="flex-start">
       {nodes.map((node) => (
         <KeyResultCheckMark
@@ -37,5 +37,6 @@ export const KeyResultChecklist = ({
         <NewCheckMark refresh={refresh} keyResultID={keyResultID} />
       )}
     </Stack>
-  )
+  ) : // eslint-disable-next-line unicorn/no-null
+  null
 }
