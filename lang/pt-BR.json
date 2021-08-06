@@ -1303,6 +1303,10 @@
     "defaultMessage": "Mostrar menos",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
+  "sSCvSb": {
+    "defaultMessage": "Um ícone de \"x\". Ao clicar nele você irá remover esse item da checklist",
+    "description": "This text is used by screen readers inside our key-result drawer to describe the X icon to remove a given item from the checklist"
+  },
   "sYGIlp": {
     "defaultMessage": "Minha conta",
     "description": "This label defines the text on the first menu section option"
