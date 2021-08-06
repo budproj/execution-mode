@@ -10,13 +10,17 @@ import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 import messages from '../messages'
 import queries from '../queries.gql'
 
-interface NewCheckMarkProperties {
+interface CreateCheckMarkButtonProperties {
   keyResultID?: string
   label?: string
   refresh: () => void
 }
 
-export const CreateCheckMark = ({ label, refresh, keyResultID }: NewCheckMarkProperties) => {
+export const CreateCheckMarkButton = ({
+  label,
+  refresh,
+  keyResultID,
+}: CreateCheckMarkButtonProperties) => {
   const intl = useIntl()
   const [draftCheckMarks, setDraftCheckMarks] = useRecoilState(draftCheckMarksAtom(keyResultID))
   const [createCheckMark, { loading }] = useMutation(queries.CREATE_CHECK_MARK, {

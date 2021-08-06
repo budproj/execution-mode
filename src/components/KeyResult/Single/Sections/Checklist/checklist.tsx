@@ -5,7 +5,7 @@ import { useRecoilValue } from 'recoil'
 import { KeyResultCheckMark as KeyResultCheckMarkType } from 'src/components/KeyResult/types'
 import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
-import { CreateCheckMark } from './ActionButtons/create-checkmark'
+import { CreateCheckMarkButton } from './ActionButtons/create-checkmark'
 import { KeyResultCheckMark } from './check-mark'
 
 interface KeyResultChecklistProperties {
@@ -34,7 +34,7 @@ export const KeyResultChecklist = ({
         />
       ))}
       {canCreate && nodes.length > 0 && (
-        <CreateCheckMark refresh={refresh} keyResultID={keyResultID} />
+        <CreateCheckMarkButton refresh={refresh} keyResultID={keyResultID} />
       )}
     </Stack>
   ) : // eslint-disable-next-line unicorn/no-null

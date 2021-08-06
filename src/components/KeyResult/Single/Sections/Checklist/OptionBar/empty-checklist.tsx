@@ -2,7 +2,7 @@ import { Flex } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { CreateCheckMark } from '../ActionButtons/create-checkmark'
+import { CreateCheckMarkButton } from '../ActionButtons/create-checkmark'
 
 import messages from './messages'
 
@@ -18,7 +18,7 @@ export const EmptyChecklist = ({ keyResultID, refresh, canCreate }: EmptyCheckli
   return (
     <Flex flexGrow={1} justifyContent="flex-end">
       {canCreate && (
-        <CreateCheckMark
+        <CreateCheckMarkButton
           refresh={refresh}
           keyResultID={keyResultID}
           label={intl.formatMessage(messages.newChecklistButtonLabel)}

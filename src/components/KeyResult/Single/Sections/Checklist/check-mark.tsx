@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Checkbox, Stack, Skeleton } from '@chakra-ui/react'
+import { HStack, Checkbox, Skeleton } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 import { EditableInputField } from 'src/components/Base'
@@ -9,6 +9,7 @@ import {
 } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
 
+import { DeleteCheckMarkButton } from './ActionButtons/delete-checkmark'
 import queries from './queries.gql'
 
 interface KeyResultCheckMarkProperties {
@@ -22,6 +23,7 @@ export const KeyResultCheckMark = ({
   refresh,
   draftCheckMarks,
 }: KeyResultCheckMarkProperties) => {
+  const [isHovering, setIsHovering] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
   const [toggleCheckMark, { loading }] = useMutation(queries.TOGGLE_CHECK_MARK, {
     variables: {
@@ -35,9 +37,18 @@ export const KeyResultCheckMark = ({
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const canUpdate = node?.policy?.update === GraphQLEffect.ALLOW
+
   const handleChange = async () => {
     await toggleCheckMark()
     if (refresh) refresh()
+  }
+
+  const handleMouseEnter = () => {
+    if (!isHovering) setIsHovering(true)
+  }
+
+  const handleMouseLeave = () => {
+    if (isHovering) setIsHovering(false)
   }
 
   useEffect(() => {
@@ -46,7 +57,7 @@ export const KeyResultCheckMark = ({
 
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
-      <Stack direction="row" alignItems="center">
+      <HStack alignItems="center" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <Checkbox
           isChecked={isChecked}
           isDisabled={loading || !canUpdate}
@@ -59,7 +70,8 @@ export const KeyResultCheckMark = ({
           isLoaded={isLoaded}
           startWithEditView={isDraft}
         />
-      </Stack>
+        <DeleteCheckMarkButton keyResultID={node?.id} refresh={refresh} isVisible={isHovering} />
+      </HStack>
     </Skeleton>
   )
 }
