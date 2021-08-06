@@ -28,25 +28,44 @@ export const KeyResultCheckMark = ({
   const [isHovering, setIsHovering] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
   const checkmarkIsBeingRemoved = useRecoilValue(checkMarkIsBeingRemovedAtom(node?.id))
-  const [toggleCheckMark, { loading }] = useMutation(queries.TOGGLE_CHECK_MARK, {
+
+  const [toggleCheckMark, { loading: isToggling }] = useMutation(queries.TOGGLE_CHECK_MARK, {
     variables: {
       id: node?.id,
     },
     onCompleted: (data) => {
       setIsChecked(data.toggleCheckMark.state === KeyResultCheckMarkState.CHECKED)
+      if (refresh) refresh()
     },
   })
+  const [updateCheckMarkDescription, { loading: isUpdatingDescription }] = useMutation(
+    queries.UPDATE_CHECK_MARK_DESCRIPTION,
+    {
+      onCompleted: () => {
+        if (refresh) refresh()
+      },
+    },
+  )
 
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
-  const isWaiting = loading || checkmarkIsBeingRemoved
+  const isWaiting = isToggling || isUpdatingDescription || checkmarkIsBeingRemoved
 
   const canUpdate = node?.policy?.update === GraphQLEffect.ALLOW
   const canDelete = node?.policy?.delete === GraphQLEffect.ALLOW
 
   const handleChange = async () => {
     await toggleCheckMark()
-    if (refresh) refresh()
+  }
+
+  const handleNewCheckMarkDescription = async (description: string) => {
+    if (node?.description !== description)
+      await updateCheckMarkDescription({
+        variables: {
+          id: node?.id,
+          description,
+        },
+      })
   }
 
   const handleMouseEnter = () => {
@@ -75,6 +94,7 @@ export const KeyResultCheckMark = ({
           value={node?.description}
           isLoaded={isLoaded}
           startWithEditView={isDraft}
+          onSubmit={handleNewCheckMarkDescription}
         />
         <DeleteCheckMarkButton
           checkMarkID={node?.id}

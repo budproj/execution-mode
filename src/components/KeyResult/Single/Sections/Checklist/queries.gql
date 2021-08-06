@@ -31,3 +31,9 @@ mutation TOGGLE_CHECK_MARK($id: ID!) {
     state
   }
 }
+
+mutation UPDATE_CHECK_MARK_DESCRIPTION($id: ID!, $description: String!) {
+  updateCheckMarkDescription(id: $id, data: { description: $description }) {
+    id
+  }
+}
