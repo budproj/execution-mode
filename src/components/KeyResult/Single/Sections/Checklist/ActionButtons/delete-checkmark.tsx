@@ -14,12 +14,14 @@ interface DeleteCheckMarkButtonProperties {
   checkMarkID?: string
   refresh?: () => void
   isVisible?: boolean
+  canDelete?: boolean
 }
 
 export const DeleteCheckMarkButton = ({
   checkMarkID,
   refresh,
   isVisible,
+  canDelete,
 }: DeleteCheckMarkButtonProperties) => {
   isVisible ??= true
 
@@ -37,7 +39,7 @@ export const DeleteCheckMarkButton = ({
     if (refresh) refresh()
   }
 
-  return isVisible ? (
+  return canDelete && isVisible ? (
     <IconButton
       aria-label={intl.formatMessage(messages.removeIconDescription)}
       bg="new-gray.600"

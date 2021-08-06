@@ -40,7 +40,9 @@ export const KeyResultCheckMark = ({
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const isWaiting = loading || checkmarkIsBeingRemoved
+
   const canUpdate = node?.policy?.update === GraphQLEffect.ALLOW
+  const canDelete = node?.policy?.delete === GraphQLEffect.ALLOW
 
   const handleChange = async () => {
     await toggleCheckMark()
@@ -74,7 +76,12 @@ export const KeyResultCheckMark = ({
           isLoaded={isLoaded}
           startWithEditView={isDraft}
         />
-        <DeleteCheckMarkButton checkMarkID={node?.id} refresh={refresh} isVisible={isHovering} />
+        <DeleteCheckMarkButton
+          checkMarkID={node?.id}
+          refresh={refresh}
+          isVisible={isHovering}
+          canDelete={canDelete}
+        />
       </HStack>
     </Skeleton>
   )
