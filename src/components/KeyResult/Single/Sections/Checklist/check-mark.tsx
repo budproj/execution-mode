@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { HStack, Checkbox, Skeleton } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import {
@@ -8,6 +9,7 @@ import {
   KeyResultCheckMarkState,
 } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
+import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
 import { DeleteCheckMarkButton } from './ActionButtons/delete-checkmark'
 import queries from './queries.gql'
@@ -25,6 +27,7 @@ export const KeyResultCheckMark = ({
 }: KeyResultCheckMarkProperties) => {
   const [isHovering, setIsHovering] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
+  const checkmarkIsBeingRemoved = useRecoilValue(checkMarkIsBeingRemovedAtom(node?.id))
   const [toggleCheckMark, { loading }] = useMutation(queries.TOGGLE_CHECK_MARK, {
     variables: {
       id: node?.id,
@@ -36,6 +39,7 @@ export const KeyResultCheckMark = ({
 
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
+  const isWaiting = loading || checkmarkIsBeingRemoved
   const canUpdate = node?.policy?.update === GraphQLEffect.ALLOW
 
   const handleChange = async () => {
@@ -60,12 +64,12 @@ export const KeyResultCheckMark = ({
       <HStack alignItems="center" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <Checkbox
           isChecked={isChecked}
-          isDisabled={loading || !canUpdate}
+          isDisabled={isWaiting || !canUpdate}
           onChange={handleChange}
         />
         <EditableInputField
           autoFocus={isDraft}
-          isWaiting={loading}
+          isWaiting={isWaiting}
           value={node?.description}
           isLoaded={isLoaded}
           startWithEditView={isDraft}

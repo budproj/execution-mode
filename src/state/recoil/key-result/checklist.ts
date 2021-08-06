@@ -18,3 +18,8 @@ export const draftCheckMarksAtom = atomFamily<string[], string | undefined>({
   key: `${key}::DRAFT_CHECK_MARKS`,
   default: [],
 })
+
+export const checkMarkIsBeingRemovedAtom = atomFamily<boolean, string | undefined>({
+  key: `${key}::IS_BEING_REMOVED`,
+  default: false,
+})

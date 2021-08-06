@@ -2,8 +2,10 @@ import { useMutation } from '@apollo/client'
 import { IconButton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
 import TimesIcon from 'src/components/Icon/Times'
+import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -22,6 +24,7 @@ export const DeleteCheckMarkButton = ({
   isVisible ??= true
 
   const intl = useIntl()
+  const setCheckMarkIsBeingRemoved = useSetRecoilState(checkMarkIsBeingRemovedAtom(checkMarkID))
   const [deleteCheckmark] = useMutation(queries.DELETE_CHECK_MARK, {
     variables: {
       id: checkMarkID,
@@ -29,6 +32,7 @@ export const DeleteCheckMarkButton = ({
   })
 
   const handleDelete = async () => {
+    setCheckMarkIsBeingRemoved(true)
     await deleteCheckmark()
     if (refresh) refresh()
   }
