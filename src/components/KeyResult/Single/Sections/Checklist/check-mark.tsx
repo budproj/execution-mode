@@ -70,7 +70,7 @@ export const KeyResultCheckMark = ({
           isLoaded={isLoaded}
           startWithEditView={isDraft}
         />
-        <DeleteCheckMarkButton keyResultID={node?.id} refresh={refresh} isVisible={isHovering} />
+        <DeleteCheckMarkButton checkMarkID={node?.id} refresh={refresh} isVisible={isHovering} />
       </HStack>
     </Skeleton>
   )

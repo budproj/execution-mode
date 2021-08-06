@@ -8,3 +8,9 @@ mutation CREATE_CHECK_MARK($keyResultID: ID!, $description: String!) {
     }
   }
 }
+
+mutation DELETE_CHECK_MARK($id: ID!) {
+  deleteCheckMark(id: $id) {
+    affected
+  }
+}
