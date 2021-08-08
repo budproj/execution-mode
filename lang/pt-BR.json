@@ -1251,10 +1251,6 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
-  "qYpqgw": {
-    "defaultMessage": "Novo item",
-    "description": "This is the description used as default by a check mark when we add a new item"
-  },
   "qytqsj": {
     "defaultMessage": "Trimestral",
     "description": "This text is used as prefix for our quarterly cadences"

@@ -113,7 +113,6 @@ export const KeyResultCheckMark = ({
           onChange={handleChange}
         />
         <EditableInputField
-          showControls
           autoFocus={isDraft}
           isWaiting={isWaiting}
           value={node?.description}

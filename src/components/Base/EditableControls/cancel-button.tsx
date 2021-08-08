@@ -8,10 +8,10 @@ import { EditableButton } from './base-button'
 import messages from './messages'
 
 interface CancelButtonProperties extends ButtonProps {
-  onCancel: () => void
+  onCancel?: () => void
 }
 
-export const CancelButton = ({ onCancel, ...rest }: CancelButtonProperties) => {
+export const CancelButton = ({ onCancel, onClick, ...rest }: CancelButtonProperties) => {
   const intl = useIntl()
 
   return (
@@ -21,7 +21,7 @@ export const CancelButton = ({ onCancel, ...rest }: CancelButtonProperties) => {
         color: 'white',
         bg: 'red.500',
       }}
-      onClick={onCancel}
+      onClick={onCancel ?? onClick}
       {...rest}
     >
       <TimesIcon desc={intl.formatMessage(messages.cancelButtonDesc)} fill="currentColor" />

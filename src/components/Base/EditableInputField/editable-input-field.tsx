@@ -18,7 +18,7 @@ export interface EditableInputFieldProperties {
   onPressedEnter?: () => void
   onStartEdit?: () => void
   onStopEdit?: () => void
-  showControls?: boolean
+  hideControls?: boolean
 }
 
 const EditableInputField = ({
@@ -36,7 +36,7 @@ const EditableInputField = ({
   onPressedEnter,
   onStartEdit,
   onStopEdit,
-  showControls,
+  hideControls,
 }: EditableInputFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
@@ -72,7 +72,7 @@ const EditableInputField = ({
           startWithEditView={startWithEditView}
           autoFocus={autoFocus}
           isDisabled={isDisabled}
-          showControls={showControls}
+          hideControls={hideControls}
           onSubmit={handleSubmit}
           onKeyDown={handleKeyDown}
           onStartEdit={onStartEdit}

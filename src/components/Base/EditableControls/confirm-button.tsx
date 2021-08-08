@@ -8,7 +8,7 @@ import { EditableButton } from './base-button'
 import messages from './messages'
 
 interface ConfirmButtonProperties extends ButtonProps {
-  isLoading: boolean
+  isLoading?: boolean
   isDisabled?: boolean
 }
 
