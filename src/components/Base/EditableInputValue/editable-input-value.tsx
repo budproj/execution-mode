@@ -10,7 +10,7 @@ import {
   Button,
   useTheme,
 } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, KeyboardEvent } from 'react'
 import { useIntl } from 'react-intl'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
@@ -32,6 +32,7 @@ export interface EditableInputValueProperties {
   isDisabled?: boolean
   startWithEditView?: boolean
   autoFocus?: boolean
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
 }
 
 const truncateValue = (value?: string | null, maxCharacters?: number): string =>
@@ -51,6 +52,7 @@ const EditableInputValue = ({
   isDisabled,
   startWithEditView,
   autoFocus,
+  onKeyDown,
 }: EditableInputValueProperties) => {
   const intl = useIntl()
 
@@ -182,6 +184,7 @@ const EditableInputValue = ({
               <EditableInput
                 autoFocus={autoFocus}
                 borderWidth={isDisabled ? 0 : components.Editable.baseStyle.input.borderWidth}
+                onKeyDown={onKeyDown}
                 {...isDisableFix}
               />
             </>

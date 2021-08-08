@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Button } from '@chakra-ui/react'
-import React from 'react'
+import React, { Ref } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
@@ -14,12 +14,14 @@ interface CreateCheckMarkButtonProperties {
   keyResultID?: string
   label?: string
   refresh: () => void
+  createButtonReference?: Ref<HTMLButtonElement>
 }
 
 export const CreateCheckMarkButton = ({
   label,
   refresh,
   keyResultID,
+  createButtonReference,
 }: CreateCheckMarkButtonProperties) => {
   const intl = useIntl()
   const [draftCheckMarks, setDraftCheckMarks] = useRecoilState(draftCheckMarksAtom(keyResultID))
@@ -41,6 +43,7 @@ export const CreateCheckMarkButton = ({
 
   return (
     <Button
+      ref={createButtonReference}
       variant="text"
       p={0}
       h="auto"

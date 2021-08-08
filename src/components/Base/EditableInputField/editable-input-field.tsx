@@ -1,5 +1,5 @@
 import { Stack, FormLabel, StackProps, EditableProps, Spinner } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { KeyboardEvent, useEffect, useState } from 'react'
 
 import EditableInputValue from 'src/components/Base/EditableInputValue'
 
@@ -15,6 +15,7 @@ export interface EditableInputFieldProperties {
   startWithEditView?: boolean
   autoFocus?: boolean
   isDisabled?: boolean
+  onPressedEnter?: () => void
 }
 
 const EditableInputField = ({
@@ -29,12 +30,17 @@ const EditableInputField = ({
   startWithEditView,
   autoFocus,
   isDisabled,
+  onPressedEnter,
 }: EditableInputFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
   const handleSubmit = (value: string) => {
     setWasSubmitted(true)
     if (onSubmit) onSubmit(value)
+  }
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (!isDisabled && event.key === 'Enter' && onPressedEnter) onPressedEnter()
   }
 
   const isBeingSubmitted = isSubmitting && wasSubmitted
@@ -61,6 +67,7 @@ const EditableInputField = ({
           autoFocus={autoFocus}
           isDisabled={isDisabled}
           onSubmit={handleSubmit}
+          onKeyDown={handleKeyDown}
         />
         {(isBeingSubmitted || isWaiting) && <Spinner color="gray.200" size="sm" />}
       </Stack>

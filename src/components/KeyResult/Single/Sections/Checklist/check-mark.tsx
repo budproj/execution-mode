@@ -18,12 +18,18 @@ interface KeyResultCheckMarkProperties {
   draftCheckMarks?: string[]
   node?: Partial<KeyResultCheckMarkType>
   refresh?: () => void
+  index?: number
+  checklistLength?: number
+  onCreate?: () => void
 }
 
 export const KeyResultCheckMark = ({
   node,
   refresh,
   draftCheckMarks,
+  index,
+  checklistLength,
+  onCreate,
 }: KeyResultCheckMarkProperties) => {
   const [isHovering, setIsHovering] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
@@ -76,6 +82,10 @@ export const KeyResultCheckMark = ({
     if (isHovering) setIsHovering(false)
   }
 
+  const handleEnterKey = () => {
+    if (index && checklistLength && index === checklistLength - 1 && onCreate) onCreate()
+  }
+
   useEffect(() => {
     setIsChecked(node?.state === KeyResultCheckMarkState.CHECKED)
   }, [node?.state, setIsChecked])
@@ -96,6 +106,7 @@ export const KeyResultCheckMark = ({
           startWithEditView={isDraft}
           isDisabled={!canUpdate}
           onSubmit={handleNewCheckMarkDescription}
+          onPressedEnter={handleEnterKey}
         />
         <DeleteCheckMarkButton
           checkMarkID={node?.id}

@@ -1,5 +1,5 @@
 import { Stack } from '@chakra-ui/layout'
-import React from 'react'
+import React, { useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { KeyResultCheckMark as KeyResultCheckMarkType } from 'src/components/KeyResult/types'
@@ -22,19 +22,31 @@ export const KeyResultChecklist = ({
   canCreate,
 }: KeyResultChecklistProperties) => {
   const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
+  const createButtonReference = useRef<HTMLButtonElement>(null)
+
+  const handleCreateCheckmark = () => {
+    createButtonReference.current?.click()
+  }
 
   return nodes.length > 0 ? (
     <Stack alignItems="flex-start">
-      {nodes.map((node) => (
+      {nodes.map((node, index) => (
         <KeyResultCheckMark
           key={node.id}
           node={node}
           refresh={refresh}
           draftCheckMarks={draftCheckMarks}
+          index={index}
+          checklistLength={nodes.length}
+          onCreate={handleCreateCheckmark}
         />
       ))}
       {canCreate && nodes.length > 0 && (
-        <CreateCheckMarkButton refresh={refresh} keyResultID={keyResultID} />
+        <CreateCheckMarkButton
+          refresh={refresh}
+          keyResultID={keyResultID}
+          createButtonReference={createButtonReference}
+        />
       )}
     </Stack>
   ) : // eslint-disable-next-line unicorn/no-null
