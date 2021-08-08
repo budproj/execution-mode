@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client'
-import { Stack } from '@chakra-ui/react'
-import React, { useCallback, useEffect } from 'react'
+import { Collapse, Stack } from '@chakra-ui/react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
@@ -16,12 +16,14 @@ import { KeyResultChecklist } from './checklist'
 import messages from './messages'
 import queries from './queries.gql'
 import { KeyResultChecklistSkeleton } from './skeleton'
+import { ToggleCollapse } from './toggle-collapse'
 
 interface KeyResultChecklistWrapperProperties {
   keyResultID?: string
 }
 
 export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWrapperProperties) => {
+  const [isChecklistOpen, setIsChecklistOpen] = useState(false)
   const [keyResultChecklist, setKeyResultChecklist] = useRecoilState(
     keyResultChecklistAtom(keyResultID),
   )
@@ -36,6 +38,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   })
 
   const canCreate = keyResultChecklist?.policy?.create === GraphQLEffect.ALLOW
+
   const refreshChecklist = useCallback(() => {
     getChecklist({
       variables: {
@@ -43,6 +46,9 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
       },
     })
   }, [getChecklist, keyResultID])
+  const toggleChecklistCollapse = () => {
+    setIsChecklistOpen(!isChecklistOpen)
+  }
 
   useEffect(() => {
     if (called && !loading) updateChecklistEdges(keyResultChecklist?.edges)
@@ -62,14 +68,17 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
           keyResultID={keyResultID}
           canCreate={canCreate}
         />
+        <ToggleCollapse isOpen={isChecklistOpen} onToggle={toggleChecklistCollapse} />
       </Stack>
       {isChecklistLoaded ? (
-        <KeyResultChecklist
-          nodes={checklist}
-          refresh={refreshChecklist}
-          keyResultID={keyResultID}
-          canCreate={canCreate}
-        />
+        <Collapse in={isChecklistOpen}>
+          <KeyResultChecklist
+            nodes={checklist}
+            refresh={refreshChecklist}
+            keyResultID={keyResultID}
+            canCreate={canCreate}
+          />
+        </Collapse>
       ) : (
         <KeyResultChecklistSkeleton />
       )}
