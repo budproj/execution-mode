@@ -32,6 +32,7 @@ export const KeyResultCheckMark = ({
   onCreate,
 }: KeyResultCheckMarkProperties) => {
   const [isHovering, setIsHovering] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
   const checkmarkIsBeingRemoved = useRecoilValue(checkMarkIsBeingRemovedAtom(node?.id))
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
@@ -91,6 +92,14 @@ export const KeyResultCheckMark = ({
     if (index && checklistLength && index === checklistLength - 1 && onCreate) onCreate()
   }
 
+  const handleStartEdit = () => {
+    setIsEditing(true)
+  }
+
+  const handleStopEdit = () => {
+    setIsEditing(false)
+  }
+
   useEffect(() => {
     setIsChecked(node?.state === KeyResultCheckMarkState.CHECKED)
   }, [node?.state, setIsChecked])
@@ -112,12 +121,14 @@ export const KeyResultCheckMark = ({
           isDisabled={!canUpdate}
           onSubmit={handleNewCheckMarkDescription}
           onPressedEnter={handleEnterKey}
+          onStartEdit={handleStartEdit}
+          onStopEdit={handleStopEdit}
         />
         <DeleteCheckMarkButton
           buttonRef={removeCheckmarkButton}
           checkMarkID={node?.id}
           refresh={refresh}
-          isVisible={isHovering}
+          isVisible={isHovering && !isEditing}
           canDelete={canDelete}
         />
       </HStack>

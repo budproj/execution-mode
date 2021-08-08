@@ -33,6 +33,8 @@ export interface EditableInputValueProperties {
   startWithEditView?: boolean
   autoFocus?: boolean
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
+  onStartEdit?: () => void
+  onStopEdit?: () => void
 }
 
 const truncateValue = (value?: string | null, maxCharacters?: number): string =>
@@ -53,6 +55,8 @@ const EditableInputValue = ({
   startWithEditView,
   autoFocus,
   onKeyDown,
+  onStartEdit,
+  onStopEdit,
 }: EditableInputValueProperties) => {
   const intl = useIntl()
 
@@ -83,6 +87,7 @@ const EditableInputValue = ({
 
   const handleEdit = () => {
     setIsExpanded(true)
+    if (onStartEdit) onStartEdit()
   }
 
   const handleChange = (value: string) => {
@@ -95,6 +100,11 @@ const EditableInputValue = ({
     setIsExpanded(!isTruncated)
 
     if (onSubmit) onSubmit(value)
+    if (onStopEdit) onStopEdit()
+  }
+
+  const handleCancel = () => {
+    if (onStopEdit) onStopEdit()
   }
 
   const toggleExpanded = () => {
@@ -144,6 +154,7 @@ const EditableInputValue = ({
           onSubmit={handleSubmit}
           onEdit={handleEdit}
           onChange={handleChange}
+          onCancel={handleCancel}
         >
           {({ isEditing, onEdit }) => (
             <>

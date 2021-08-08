@@ -16,6 +16,8 @@ export interface EditableInputFieldProperties {
   autoFocus?: boolean
   isDisabled?: boolean
   onPressedEnter?: () => void
+  onStartEdit?: () => void
+  onStopEdit?: () => void
 }
 
 const EditableInputField = ({
@@ -31,6 +33,8 @@ const EditableInputField = ({
   autoFocus,
   isDisabled,
   onPressedEnter,
+  onStartEdit,
+  onStopEdit,
 }: EditableInputFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
@@ -68,6 +72,8 @@ const EditableInputField = ({
           isDisabled={isDisabled}
           onSubmit={handleSubmit}
           onKeyDown={handleKeyDown}
+          onStartEdit={onStartEdit}
+          onStopEdit={onStopEdit}
         />
         {(isBeingSubmitted || isWaiting) && <Spinner color="gray.200" size="sm" />}
       </Stack>
