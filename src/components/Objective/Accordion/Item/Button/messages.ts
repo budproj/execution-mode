@@ -6,8 +6,6 @@ type ObjectiveAccordionItemMessage =
   | 'progressTagLabel'
   | 'progressTagTooltip'
   | 'progressTooltip'
-  | 'cancelButtonDesc'
-  | 'submitButtonDesc'
   | 'submitToastMessage'
   | 'unexpectedErrorToastMessage'
   | 'requiredFieldError'
@@ -46,22 +44,6 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
       'O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.',
     id: 'kFrglO',
     description: 'This tooltip explains how the progress of the objective is calculated',
-  },
-
-  cancelButtonDesc: {
-    defaultMessage:
-      'Um botão com um ícone de X. Ao clicar nele você irá cancelar a atualização do objetivo',
-    id: 'npWxt7',
-    description:
-      'This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the cancel button',
-  },
-
-  submitButtonDesc: {
-    defaultMessage:
-      'Um botão com um ícone de confirmação. Ao clicar nele você irá salvar sua atualização do objetivo',
-    id: 'xfx/rc',
-    description:
-      'This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the check button',
   },
 
   submitToastMessage: {

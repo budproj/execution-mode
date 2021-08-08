@@ -9,12 +9,15 @@ import {
   EditablePreviewProps,
   Button,
   useTheme,
+  HStack,
 } from '@chakra-ui/react'
 import React, { useEffect, useState, KeyboardEvent } from 'react'
 import { useIntl } from 'react-intl'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import PenIcon from 'src/components/Icon/Pen'
+
+import { EditableControls } from '../EditableControls/wrapper'
 
 import messages from './messages'
 
@@ -35,6 +38,7 @@ export interface EditableInputValueProperties {
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
   onStartEdit?: () => void
   onStopEdit?: () => void
+  showControls?: boolean
 }
 
 const truncateValue = (value?: string | null, maxCharacters?: number): string =>
@@ -57,6 +61,7 @@ const EditableInputValue = ({
   onKeyDown,
   onStartEdit,
   onStopEdit,
+  showControls,
 }: EditableInputValueProperties) => {
   const intl = useIntl()
 
@@ -157,7 +162,7 @@ const EditableInputValue = ({
           onCancel={handleCancel}
         >
           {({ isEditing, onEdit }) => (
-            <>
+            <HStack>
               <Box>
                 <Stack
                   direction="row"
@@ -198,7 +203,9 @@ const EditableInputValue = ({
                 onKeyDown={onKeyDown}
                 {...isDisableFix}
               />
-            </>
+
+              {showControls && isEditing && <EditableControls />}
+            </HStack>
           )}
         </Editable>
       ) : (
