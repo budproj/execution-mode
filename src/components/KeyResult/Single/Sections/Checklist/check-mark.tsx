@@ -17,7 +17,7 @@ import queries from './queries.gql'
 interface KeyResultCheckMarkProperties {
   draftCheckMarks?: string[]
   node?: Partial<KeyResultCheckMarkType>
-  refresh?: () => void
+  onUpdate?: () => void
   index?: number
   checklistLength?: number
   onCreate?: () => void
@@ -25,7 +25,7 @@ interface KeyResultCheckMarkProperties {
 
 export const KeyResultCheckMark = ({
   node,
-  refresh,
+  onUpdate,
   draftCheckMarks,
   index,
   checklistLength,
@@ -43,14 +43,14 @@ export const KeyResultCheckMark = ({
     },
     onCompleted: (data) => {
       setIsChecked(data.toggleCheckMark.state === KeyResultCheckMarkState.CHECKED)
-      if (refresh) refresh()
+      if (onUpdate) onUpdate()
     },
   })
   const [updateCheckMarkDescription, { loading: isUpdatingDescription }] = useMutation(
     queries.UPDATE_CHECK_MARK_DESCRIPTION,
     {
       onCompleted: () => {
-        if (refresh) refresh()
+        if (onUpdate) onUpdate()
       },
     },
   )
@@ -127,7 +127,7 @@ export const KeyResultCheckMark = ({
         <DeleteCheckMarkButton
           buttonRef={removeCheckmarkButton}
           checkMarkID={node?.id}
-          refresh={refresh}
+          refresh={onUpdate}
           isVisible={isHovering && !isEditing}
           canDelete={canDelete}
         />

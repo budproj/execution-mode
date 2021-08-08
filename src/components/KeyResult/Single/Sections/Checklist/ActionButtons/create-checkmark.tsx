@@ -13,32 +13,34 @@ import queries from './queries.gql'
 interface CreateCheckMarkButtonProperties {
   keyResultID?: string
   label?: string
-  refresh: () => void
+  onCreate: () => void
   createButtonReference?: Ref<HTMLButtonElement>
 }
 
 export const CreateCheckMarkButton = ({
   label,
-  refresh,
   keyResultID,
   createButtonReference,
+  onCreate,
 }: CreateCheckMarkButtonProperties) => {
   const intl = useIntl()
   const [draftCheckMarks, setDraftCheckMarks] = useRecoilState(draftCheckMarksAtom(keyResultID))
   const [createCheckMark, { loading }] = useMutation(queries.CREATE_CHECK_MARK, {
-    variables: {
-      keyResultID,
-      description: '',
-    },
     onCompleted: (data) => {
       const newDraftCheckMarks = [...draftCheckMarks, data.createKeyResultCheckMark.id]
       setDraftCheckMarks(newDraftCheckMarks)
+
+      if (onCreate) onCreate()
     },
   })
 
   const handleNewCheckMark = async () => {
-    await createCheckMark()
-    refresh()
+    await createCheckMark({
+      variables: {
+        keyResultID,
+        description: '',
+      },
+    })
   }
 
   return (

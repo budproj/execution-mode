@@ -10,18 +10,18 @@ interface OptionBarWrapperProperties {
   progress?: KeyResultChecklistProgress
   keyResultID?: string
   canCreate: boolean
-  refresh: () => void
+  onCreate: () => void
 }
 
 export const OptionBarWrapper = ({
   progress,
   keyResultID,
   canCreate,
-  refresh,
+  onCreate,
 }: OptionBarWrapperProperties) => (
   <Stack direction="row" flexGrow={1}>
     {progress && progress.total === 0 ? (
-      <EmptyChecklist keyResultID={keyResultID} refresh={refresh} canCreate={canCreate} />
+      <EmptyChecklist keyResultID={keyResultID} canCreate={canCreate} onCreate={onCreate} />
     ) : (
       <NonEmptyChecklist progress={progress} />
     )}

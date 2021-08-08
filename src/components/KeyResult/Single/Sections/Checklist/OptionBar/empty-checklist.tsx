@@ -7,21 +7,21 @@ import { CreateCheckMarkButton } from '../ActionButtons/create-checkmark'
 import messages from './messages'
 
 interface EmptyChecklistProperties {
-  refresh: () => void
+  onCreate: () => void
   canCreate: boolean
   keyResultID?: string
 }
 
-export const EmptyChecklist = ({ keyResultID, refresh, canCreate }: EmptyChecklistProperties) => {
+export const EmptyChecklist = ({ keyResultID, canCreate, onCreate }: EmptyChecklistProperties) => {
   const intl = useIntl()
 
   return (
     <Flex flexGrow={1} justifyContent="flex-end">
       {canCreate && (
         <CreateCheckMarkButton
-          refresh={refresh}
           keyResultID={keyResultID}
           label={intl.formatMessage(messages.newChecklistButtonLabel)}
+          onCreate={onCreate}
         />
       )}
     </Flex>

@@ -38,6 +38,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   })
 
   const canCreate = keyResultChecklist?.policy?.create === GraphQLEffect.ALLOW
+  const hasItems = checklist.length > 0
 
   const refreshChecklist = useCallback(() => {
     getChecklist({
@@ -46,8 +47,14 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
       },
     })
   }, [getChecklist, keyResultID])
+
   const toggleChecklistCollapse = () => {
     setIsChecklistOpen(!isChecklistOpen)
+  }
+
+  const handleChecklistCreation = () => {
+    refreshChecklist()
+    if (!isChecklistOpen) setIsChecklistOpen(true)
   }
 
   useEffect(() => {
@@ -63,20 +70,20 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
       <Stack direction="row" alignItems="center">
         <KeyResultSectionHeading>{intl.formatMessage(messages.heading)}</KeyResultSectionHeading>
         <OptionBarWrapper
-          progress={keyResultChecklist?.progress}
-          refresh={refreshChecklist}
           keyResultID={keyResultID}
+          progress={keyResultChecklist?.progress}
           canCreate={canCreate}
+          onCreate={handleChecklistCreation}
         />
-        <ToggleCollapse isOpen={isChecklistOpen} onToggle={toggleChecklistCollapse} />
+        {hasItems && <ToggleCollapse isOpen={isChecklistOpen} onToggle={toggleChecklistCollapse} />}
       </Stack>
       {isChecklistLoaded ? (
         <Collapse in={isChecklistOpen}>
           <KeyResultChecklist
             nodes={checklist}
-            refresh={refreshChecklist}
             keyResultID={keyResultID}
             canCreate={canCreate}
+            onCreateCheckmark={refreshChecklist}
           />
         </Collapse>
       ) : (
