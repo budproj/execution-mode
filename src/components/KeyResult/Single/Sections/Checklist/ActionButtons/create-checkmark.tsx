@@ -28,7 +28,7 @@ export const CreateCheckMarkButton = ({
   const [createCheckMark, { loading }] = useMutation(queries.CREATE_CHECK_MARK, {
     variables: {
       keyResultID,
-      description: intl.formatMessage(messages.draftCheckMarkDescription),
+      description: '',
     },
     onCompleted: (data) => {
       const newDraftCheckMarks = [...draftCheckMarks, data.createKeyResultCheckMark.id]

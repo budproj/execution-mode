@@ -4,7 +4,6 @@ type ActionButtonsMessages =
   | 'removeIconDescription'
   | 'newCheckMarkButtonLabel'
   | 'newCheckMarkButtonIconDescription'
-  | 'draftCheckMarkDescription'
 
 export default defineMessages<ActionButtonsMessages>({
   removeIconDescription: {
@@ -26,11 +25,5 @@ export default defineMessages<ActionButtonsMessages>({
     id: 'e2FL3I',
     description:
       'This is used by screen readers to understand the insert new check mark icon in our key-result drawer',
-  },
-
-  draftCheckMarkDescription: {
-    defaultMessage: 'Novo item',
-    id: 'qYpqgw',
-    description: 'This is the description used as default by a check mark when we add a new item',
   },
 })
