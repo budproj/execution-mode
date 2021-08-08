@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { HStack, Checkbox, Skeleton } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
@@ -34,6 +34,7 @@ export const KeyResultCheckMark = ({
   const [isHovering, setIsHovering] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
   const checkmarkIsBeingRemoved = useRecoilValue(checkMarkIsBeingRemovedAtom(node?.id))
+  const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
 
   const [toggleCheckMark, { loading: isToggling }] = useMutation(queries.TOGGLE_CHECK_MARK, {
     variables: {
@@ -65,7 +66,11 @@ export const KeyResultCheckMark = ({
   }
 
   const handleNewCheckMarkDescription = async (description: string) => {
-    if (node?.description !== description)
+    const isEmpty = !description || description.trim() === ''
+
+    if (isEmpty) removeCheckmarkButton.current?.click()
+
+    if (!isEmpty && node?.description !== description)
       await updateCheckMarkDescription({
         variables: {
           id: node?.id,
@@ -109,6 +114,7 @@ export const KeyResultCheckMark = ({
           onPressedEnter={handleEnterKey}
         />
         <DeleteCheckMarkButton
+          buttonRef={removeCheckmarkButton}
           checkMarkID={node?.id}
           refresh={refresh}
           isVisible={isHovering}

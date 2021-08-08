@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { IconButton } from '@chakra-ui/react'
-import React from 'react'
+import React, { Ref } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
@@ -15,6 +15,7 @@ interface DeleteCheckMarkButtonProperties {
   refresh?: () => void
   isVisible?: boolean
   canDelete?: boolean
+  buttonRef?: Ref<HTMLButtonElement>
 }
 
 export const DeleteCheckMarkButton = ({
@@ -22,6 +23,7 @@ export const DeleteCheckMarkButton = ({
   refresh,
   isVisible,
   canDelete,
+  buttonRef,
 }: DeleteCheckMarkButtonProperties) => {
   isVisible ??= true
 
@@ -39,8 +41,9 @@ export const DeleteCheckMarkButton = ({
     if (refresh) refresh()
   }
 
-  return canDelete && isVisible ? (
+  return canDelete ? (
     <IconButton
+      ref={buttonRef}
       aria-label={intl.formatMessage(messages.removeIconDescription)}
       bg="new-gray.600"
       borderRadius="full"
@@ -48,6 +51,7 @@ export const DeleteCheckMarkButton = ({
       minW="auto"
       p={1}
       _hover={{ bg: 'new-gray.800' }}
+      display={isVisible ? 'inherit' : 'none'}
       icon={
         <TimesIcon
           desc={intl.formatMessage(messages.removeIconDescription)}
