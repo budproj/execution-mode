@@ -93,8 +93,16 @@ export const KeyResultCheckMark = ({
     if (isHovering) setIsHovering(false)
   }
 
-  const handleEnterKey = () => {
-    if (index && checklistLength && index === checklistLength - 1 && onCreate) onCreate()
+  const handleEnterKey = (value?: string) => {
+    const isEmpty = !value || value.trim() === ''
+    if (
+      typeof index !== 'undefined' &&
+      checklistLength &&
+      index === checklistLength - 1 &&
+      !isEmpty &&
+      onCreate
+    )
+      onCreate()
   }
 
   const handleStartEdit = () => {

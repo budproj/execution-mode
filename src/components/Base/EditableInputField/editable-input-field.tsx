@@ -15,7 +15,7 @@ export interface EditableInputFieldProperties {
   startWithEditView?: boolean
   autoFocus?: boolean
   isDisabled?: boolean
-  onPressedEnter?: () => void
+  onPressedEnter?: (value?: string) => void
   onStartEdit?: () => void
   onStopEdit?: () => void
   onCancel?: (oldValue?: string) => void
@@ -48,7 +48,8 @@ const EditableInputField = ({
   }
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (!isDisabled && event.key === 'Enter' && onPressedEnter) onPressedEnter()
+    if (!isDisabled && event.key === 'Enter' && onPressedEnter)
+      onPressedEnter(event.currentTarget.value)
   }
 
   const isBeingSubmitted = isSubmitting && wasSubmitted
