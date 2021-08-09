@@ -15,11 +15,13 @@ import messages from './messages'
 export interface KeyResultSectionAddCheckInProperties {
   keyResultID?: KeyResult['id']
   onCompleted?: (data: KeyResultCheckIn) => void
+  newCheckInValue?: number
 }
 
 const KeyResultSectionAddCheckIn = ({
   keyResultID,
   onCompleted,
+  newCheckInValue,
 }: KeyResultSectionAddCheckInProperties) => {
   const [isOpen, setIsOpen] = useState(false)
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
@@ -71,6 +73,7 @@ const KeyResultSectionAddCheckIn = ({
             isCommentAlwaysEnabled
             keyResultID={keyResultID}
             afterSubmit={handleSubmit}
+            valueNew={newCheckInValue}
             onCompleted={onCompleted}
           />
         </KeyResultSectionTimelineCardBase>

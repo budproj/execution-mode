@@ -13,10 +13,12 @@ import KeyResultSectionTimelineDeleteAlert from './DeleteAlert'
 
 export interface KeyResultSectionTimelineHeaderProperties {
   keyResultID?: KeyResult['id']
+  newCheckInValue?: number
 }
 
 const KeyResultSectionTimelineHeader = ({
   keyResultID,
+  newCheckInValue,
 }: KeyResultSectionTimelineHeaderProperties) => {
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const setLatestTimelineEntry = useSetRecoilState(selectLatestTimelineEntry(keyResultID))
@@ -43,6 +45,7 @@ const KeyResultSectionTimelineHeader = ({
       <Collapse unmountOnExit in={canUpdate} style={{ overflow: 'visible' }}>
         <KeyResultSectionAddCheckIn
           keyResultID={keyResultID}
+          newCheckInValue={newCheckInValue}
           onCompleted={handleCheckInCompleted}
         />
       </Collapse>

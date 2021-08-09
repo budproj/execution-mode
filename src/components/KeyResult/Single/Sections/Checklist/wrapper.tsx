@@ -30,6 +30,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   const [checklist, updateChecklistEdges, _, isChecklistLoaded] =
     useConnectionEdges<KeyResultCheckMark>()
   const intl = useIntl()
+
   const [getChecklist, { called, loading }] = useLazyQuery(queries.GET_CHECKLIST_OF_KEY_RESULT, {
     fetchPolicy: 'network-only',
     onCompleted: (data) => {
