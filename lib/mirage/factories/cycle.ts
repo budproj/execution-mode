@@ -11,7 +11,10 @@ export const cycle = Factory.extend({
   updatedAt: faker.date.recent,
   afterCreate(cycle, server) {
     const status = server.create('status')
-    const delta = server.create('deltum') // Miragejs tries to singularize the word delta, incorrectly
+
+    // Miragejs tries to singularize the word delta, incorrectly
+    // This is caused by this: https://github.com/martinandert/inflected/issues/25
+    const delta = server.create('deltum')
     const policy = server.create('nodePolicy')
 
     cycle.update({ status, delta, policy })
