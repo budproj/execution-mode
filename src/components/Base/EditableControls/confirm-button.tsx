@@ -21,9 +21,13 @@ export const ConfirmButton = ({ isLoading, isDisabled, ...rest }: ConfirmButtonP
       isDisabled={isDisabled}
       aria-label={intl.formatMessage(messages.submitButtonDesc)}
       type="submit"
+      color="white"
+      bg="brand.500"
       _hover={{
-        color: isLoading || isDisabled ? 'gray.500' : 'white',
-        bg: isLoading || isDisabled ? 'gray.50' : 'green.500',
+        bg: isLoading || isDisabled ? 'brand.500' : 'brand.400',
+      }}
+      _active={{
+        bg: isLoading || isDisabled ? 'brand.500' : 'brand.300',
       }}
       {...rest}
     >

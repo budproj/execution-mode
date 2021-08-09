@@ -759,6 +759,10 @@
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
   },
+  "SsQRcF": {
+    "defaultMessage": "Uma seta que ao ser clicada expande a checklist deste resultado-chave",
+    "description": "This message is used by screen readers to explain the collapse icon in our key-result sidebar on the checklist section"
+  },
   "SxsVDt": {
     "defaultMessage": "Meta",
     "description": "This is the label of the check-in form that indicates the goal for her/his key result"
