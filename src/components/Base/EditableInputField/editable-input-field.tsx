@@ -60,7 +60,7 @@ const EditableInputField = ({
 
   return (
     <Stack direciton="column" w="full" spacing={0} flexGrow={flexGrow}>
-      {Boolean(label) ?? (
+      {Boolean(label) && (
         <FormLabel fontSize="sm" m={0}>
           {label}
         </FormLabel>
