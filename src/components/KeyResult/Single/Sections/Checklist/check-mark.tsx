@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { HStack, Checkbox, Skeleton, Box } from '@chakra-ui/react'
+import { HStack, Checkbox, Skeleton, Box, EditablePreviewProps } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -113,6 +113,11 @@ export const KeyResultCheckMark = ({
     setIsEditing(false)
   }
 
+  const checkedProperties: EditablePreviewProps = {
+    color: 'new-gray.600',
+    textDecoration: 'line-through',
+  }
+
   useEffect(() => {
     setIsChecked(node?.state === KeyResultCheckMarkState.CHECKED)
   }, [node?.state, setIsChecked])
@@ -138,6 +143,7 @@ export const KeyResultCheckMark = ({
           isLoaded={isLoaded}
           startWithEditView={isDraft}
           isDisabled={!canUpdate}
+          previewProperties={isChecked ? checkedProperties : undefined}
           onSubmit={handleNewCheckMarkDescription}
           onCancel={handleCancelDescription}
           onPressedEnter={handleEnterKey}

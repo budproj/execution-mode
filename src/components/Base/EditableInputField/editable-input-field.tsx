@@ -1,4 +1,11 @@
-import { Stack, FormLabel, StackProps, EditableProps, Spinner } from '@chakra-ui/react'
+import {
+  Stack,
+  FormLabel,
+  StackProps,
+  EditableProps,
+  Spinner,
+  EditablePreviewProps,
+} from '@chakra-ui/react'
 import React, { KeyboardEvent, useEffect, useState } from 'react'
 
 import EditableInputValue from 'src/components/Base/EditableInputValue'
@@ -20,6 +27,7 @@ export interface EditableInputFieldProperties {
   onStopEdit?: () => void
   onCancel?: (oldValue?: string) => void
   hideControls?: boolean
+  previewProperties?: EditablePreviewProps
 }
 
 const EditableInputField = ({
@@ -39,6 +47,7 @@ const EditableInputField = ({
   onStopEdit,
   onCancel,
   hideControls,
+  previewProperties,
 }: EditableInputFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
@@ -76,6 +85,7 @@ const EditableInputField = ({
           autoFocus={autoFocus}
           isDisabled={isDisabled}
           hideControls={hideControls}
+          previewProperties={previewProperties}
           onCancel={onCancel}
           onSubmit={handleSubmit}
           onKeyDown={handleKeyDown}
