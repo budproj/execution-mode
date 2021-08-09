@@ -37,6 +37,7 @@ export interface EditableInputValueProperties {
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
   onStartEdit?: () => void
   onStopEdit?: () => void
+  onCancel?: (oldValue?: string) => void
   hideControls?: boolean
 }
 
@@ -61,6 +62,7 @@ const EditableInputValue = ({
   onStartEdit,
   onStopEdit,
   hideControls,
+  onCancel,
 }: EditableInputValueProperties) => {
   const intl = useIntl()
 
@@ -99,21 +101,16 @@ const EditableInputValue = ({
   }
 
   const handleSubmit = (value: string) => {
-    const isSameAsExpanded = value === expandedValue
-    const isSameAsTruncated = value === truncatedValue
-    const isSame = isSameAsExpanded || isSameAsTruncated
+    setExpandedValue(value)
+    setTruncatedValue(truncateValue(value, maxCharacters))
+    setIsExpanded(!isTruncated)
 
-    if (!isSame) {
-      setExpandedValue(value)
-      setTruncatedValue(truncateValue(value, maxCharacters))
-      setIsExpanded(!isTruncated)
-
-      if (onSubmit) onSubmit(value)
-      if (onStopEdit) onStopEdit()
-    }
+    if (onSubmit) onSubmit(value)
+    if (onStopEdit) onStopEdit()
   }
 
-  const handleCancel = () => {
+  const handleCancel = (oldValue?: string) => {
+    if (onCancel) onCancel(oldValue)
     if (onStopEdit) onStopEdit()
   }
 

@@ -29,7 +29,7 @@ export const KeyResultChecklist = ({
   }
 
   return nodes.length > 0 ? (
-    <Stack alignItems="flex-start">
+    <Stack alignItems="flex-start" pt={4}>
       {nodes.map((node, index) => (
         <KeyResultCheckMark
           key={node.id}

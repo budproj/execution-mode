@@ -66,7 +66,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   }, [keyResultID, refreshChecklist])
 
   return (
-    <Stack>
+    <Stack spacing={0}>
       <Stack direction="row" alignItems="center">
         <KeyResultSectionHeading>{intl.formatMessage(messages.heading)}</KeyResultSectionHeading>
         <OptionBarWrapper

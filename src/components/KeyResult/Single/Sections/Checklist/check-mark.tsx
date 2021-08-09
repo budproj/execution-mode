@@ -80,6 +80,11 @@ export const KeyResultCheckMark = ({
       })
   }
 
+  const handleCancelDescription = (oldDescription?: string) => {
+    const isEmpty = !oldDescription || oldDescription.trim() === ''
+    if (isEmpty) removeCheckmarkButton.current?.click()
+  }
+
   const handleMouseEnter = () => {
     if (!isHovering) setIsHovering(true)
   }
@@ -120,6 +125,7 @@ export const KeyResultCheckMark = ({
           startWithEditView={isDraft}
           isDisabled={!canUpdate}
           onSubmit={handleNewCheckMarkDescription}
+          onCancel={handleCancelDescription}
           onPressedEnter={handleEnterKey}
           onStartEdit={handleStartEdit}
           onStopEdit={handleStopEdit}
@@ -127,9 +133,9 @@ export const KeyResultCheckMark = ({
         <DeleteCheckMarkButton
           buttonRef={removeCheckmarkButton}
           checkMarkID={node?.id}
-          refresh={onUpdate}
           isVisible={isHovering && !isEditing}
           canDelete={canDelete}
+          onDelete={onUpdate}
         />
       </HStack>
     </Skeleton>

@@ -17,6 +17,7 @@ export const ToggleCollapse = ({ onToggle, isOpen }: ToggleCollapseProperties) =
   return (
     <IconButton
       aria-label={intl.formatMessage(messages.collapseButtonDesc)}
+      h="auto"
       icon={
         <ChevronDown
           desc={intl.formatMessage(messages.collapseButtonDesc)}

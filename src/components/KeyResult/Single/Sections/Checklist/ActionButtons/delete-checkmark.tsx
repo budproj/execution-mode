@@ -12,7 +12,7 @@ import queries from './queries.gql'
 
 interface DeleteCheckMarkButtonProperties {
   checkMarkID?: string
-  refresh?: () => void
+  onDelete?: () => void
   isVisible?: boolean
   canDelete?: boolean
   buttonRef?: Ref<HTMLButtonElement>
@@ -20,7 +20,7 @@ interface DeleteCheckMarkButtonProperties {
 
 export const DeleteCheckMarkButton = ({
   checkMarkID,
-  refresh,
+  onDelete: refresh,
   isVisible,
   canDelete,
   buttonRef,
