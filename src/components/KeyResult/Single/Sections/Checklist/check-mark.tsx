@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { HStack, Checkbox, Skeleton } from '@chakra-ui/react'
+import { HStack, Checkbox, Skeleton, Box } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -119,12 +119,18 @@ export const KeyResultCheckMark = ({
 
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
-      <HStack alignItems="center" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <Checkbox
-          isChecked={isChecked}
-          isDisabled={isWaiting || !canUpdate}
-          onChange={handleChange}
-        />
+      <HStack
+        alignItems="flex-start"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <Box py={1}>
+          <Checkbox
+            isChecked={isChecked}
+            isDisabled={isWaiting || !canUpdate}
+            onChange={handleChange}
+          />
+        </Box>
         <EditableInputField
           autoFocus={isDraft}
           isWaiting={isWaiting}

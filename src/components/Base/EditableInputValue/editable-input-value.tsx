@@ -175,6 +175,8 @@ const EditableInputValue = ({
                   color={isHovering && !isLocked ? 'brand.500' : defaultColor}
                   fontWeight={400}
                   cursor={isLocked ? 'auto' : 'pointer'}
+                  wordBreak="break-all"
+                  py={0}
                   {...previewProperties}
                 />
                 <EditableInput

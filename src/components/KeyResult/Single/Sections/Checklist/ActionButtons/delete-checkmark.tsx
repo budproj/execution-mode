@@ -51,7 +51,7 @@ export const DeleteCheckMarkButton = ({
       minW="auto"
       p={1}
       _hover={{ bg: 'new-gray.800' }}
-      display={isVisible ? 'inherit' : 'none'}
+      opacity={isVisible ? 1 : 0}
       icon={
         <TimesIcon
           desc={intl.formatMessage(messages.removeIconDescription)}
