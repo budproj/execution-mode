@@ -4,7 +4,7 @@ import React from 'react'
 import { KeyResultCheckMark } from './check-mark'
 
 export const KeyResultChecklistSkeleton = () => (
-  <Stack>
+  <Stack pt={2}>
     <KeyResultCheckMark />
     <KeyResultCheckMark />
     <KeyResultCheckMark />

@@ -6,6 +6,10 @@ export const Checkbox = {
       borderColor: 'gray.100',
       borderWidth: 1,
 
+      '&[data-focus]': {
+        boxShadow: 'none',
+      },
+
       '&[data-checked]': {
         bg: 'brand.500',
         borderColor: 'brand.500',
