@@ -21,6 +21,10 @@ export const CancelButton = ({ onCancel, onClick, ...rest }: CancelButtonPropert
         color: 'white',
         bg: 'red.500',
       }}
+      _active={{
+        color: 'white',
+        bg: 'red.400',
+      }}
       onClick={onCancel ?? onClick}
       {...rest}
     >
