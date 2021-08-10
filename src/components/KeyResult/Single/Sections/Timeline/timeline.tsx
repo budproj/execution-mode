@@ -15,6 +15,7 @@ export interface KeyResultSectionTimelineProperties {
   limit: number
   scrollTarget: string
   keyResultID?: KeyResult['id']
+  newCheckInValue?: number
   onEntryDelete?: (entryType: string) => void
 }
 
@@ -29,6 +30,7 @@ const KeyResultSectionTimeline = ({
   limit,
   scrollTarget,
   onEntryDelete,
+  newCheckInValue,
 }: KeyResultSectionTimelineProperties) => {
   const [hasMore, setHasMore] = useState(false)
   const [timeline, setTimeline] = useRecoilState(timelineSelector(keyResultID))
@@ -76,7 +78,7 @@ const KeyResultSectionTimeline = ({
 
   return (
     <Flex direction="column" gridGap={4}>
-      <KeyResultSectionTimelineHeader keyResultID={keyResultID} />
+      <KeyResultSectionTimelineHeader keyResultID={keyResultID} newCheckInValue={newCheckInValue} />
 
       {keyResultID && hasTimeline ? (
         <KeyResultSectionTimelineContent

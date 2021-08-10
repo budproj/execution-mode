@@ -1,6 +1,5 @@
 import {
   Editable,
-  Stack,
   EditablePreview,
   EditableInput,
   Skeleton,
@@ -9,12 +8,15 @@ import {
   EditablePreviewProps,
   Button,
   useTheme,
+  HStack,
+  Stack,
 } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, KeyboardEvent } from 'react'
 import { useIntl } from 'react-intl'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import PenIcon from 'src/components/Icon/Pen'
+
+import { EditableControls } from '../EditableControls/wrapper'
 
 import messages from './messages'
 
@@ -30,6 +32,13 @@ export interface EditableInputValueProperties {
   maxCharacters?: number
   isTruncated?: boolean
   isDisabled?: boolean
+  startWithEditView?: boolean
+  autoFocus?: boolean
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void
+  onStartEdit?: () => void
+  onStopEdit?: () => void
+  onCancel?: (oldValue?: string) => void
+  hideControls?: boolean
 }
 
 const truncateValue = (value?: string | null, maxCharacters?: number): string =>
@@ -47,6 +56,13 @@ const EditableInputValue = ({
   maxCharacters,
   isTruncated,
   isDisabled,
+  startWithEditView,
+  autoFocus,
+  onKeyDown,
+  onStartEdit,
+  onStopEdit,
+  hideControls,
+  onCancel,
 }: EditableInputValueProperties) => {
   const intl = useIntl()
 
@@ -77,6 +93,7 @@ const EditableInputValue = ({
 
   const handleEdit = () => {
     setIsExpanded(true)
+    if (onStartEdit) onStartEdit()
   }
 
   const handleChange = (value: string) => {
@@ -89,6 +106,12 @@ const EditableInputValue = ({
     setIsExpanded(!isTruncated)
 
     if (onSubmit) onSubmit(value)
+    if (onStopEdit) onStopEdit()
+  }
+
+  const handleCancel = (oldValue?: string) => {
+    if (onCancel) onCancel(oldValue)
+    if (onStopEdit) onStopEdit()
   }
 
   const toggleExpanded = () => {
@@ -118,64 +141,60 @@ const EditableInputValue = ({
         color: previewProperties?.color ?? defaultColor,
         fontSize: previewProperties?.fontSize ?? 'md',
         fontWeight: previewProperties?.fontWeight ?? 400,
-        p: previewProperties?.p,
+        px: '0.125rem',
+        py: '0.4rem',
+        cursor: 'text',
       }
     : {}
 
   return (
     <Skeleton
       isLoaded={isLoaded}
+      fadeDuration={0}
       {...buildSkeletonMinSize(isLoaded, skeletonWidth, skeletonHeight)}
     >
       {isLoaded ? (
         <Editable
+          submitOnBlur={Boolean(hideControls)}
           value={currentValue}
           isDisabled={isLocked}
+          startWithEditView={startWithEditView}
+          cursor={isLocked ? 'auto' : 'pointer'}
           onSubmit={handleSubmit}
           onEdit={handleEdit}
           onChange={handleChange}
+          onCancel={handleCancel}
+          onMouseEnter={handleHover}
+          onMouseLeave={handleStopHover}
         >
-          {({ isEditing, onEdit }) => (
-            <>
-              <Box>
-                <Stack
-                  direction="row"
-                  spacing={2}
-                  alignItems="center"
+          {({ isEditing }) => (
+            <Stack alignItems="flex-start" justifyItems="center" spacing={0}>
+              <HStack w="full">
+                <EditablePreview
+                  fontSize="md"
+                  color={isHovering && !isLocked ? 'brand.500' : defaultColor}
+                  fontWeight={400}
                   cursor={isLocked ? 'auto' : 'pointer'}
-                  onMouseEnter={handleHover}
-                  onMouseLeave={handleStopHover}
-                  onClick={isLocked ? undefined : onEdit}
-                >
-                  <EditablePreview
-                    fontSize="md"
-                    color={isHovering && !isLocked ? 'brand.500' : defaultColor}
-                    fontWeight={400}
-                    cursor={isLocked ? 'auto' : 'pointer'}
-                    {...previewProperties}
-                  />
-                  <PenIcon
-                    fill="brand.400"
-                    opacity={isHovering && !isEditing && !isLocked ? 1 : 0}
-                    display={isEditing || isLocked ? 'none' : 'inherit'}
-                    transition="opacity .2s ease-out"
-                    desc={intl.formatMessage(messages.editableIconDesc)}
-                    title={intl.formatMessage(messages.editableIconTitle)}
-                  />
-                </Stack>
+                  wordBreak="break-word"
+                  py={0}
+                  {...previewProperties}
+                />
+                <EditableInput
+                  autoFocus={autoFocus}
+                  borderWidth={isDisabled ? 0 : components.Editable.baseStyle.input.borderWidth}
+                  onKeyDown={onKeyDown}
+                  {...isDisableFix}
+                />
 
-                {isTruncated && !isWithinMaxCharacters && !isEditing && (
-                  <Button p={0} colorScheme="brand" fontWeight={400} onClick={toggleExpanded}>
-                    {intl.formatMessage(messages[isExpanded ? 'collapseButton' : 'expandButton'])}
-                  </Button>
-                )}
-              </Box>
+                {!hideControls && <EditableControls isHovering={isHovering} isLocked={isLocked} />}
+              </HStack>
 
-              <EditableInput
-                borderWidth={isDisabled ? 0 : components.Editable.baseStyle.input.borderWidth}
-                {...isDisableFix}
-              />
-            </>
+              {isTruncated && !isWithinMaxCharacters && !isEditing && (
+                <Button p={0} colorScheme="brand" fontWeight={400} onClick={toggleExpanded}>
+                  {intl.formatMessage(messages[isExpanded ? 'collapseButton' : 'expandButton'])}
+                </Button>
+              )}
+            </Stack>
           )}
         </Editable>
       ) : (

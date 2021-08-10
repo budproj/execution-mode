@@ -1,5 +1,4 @@
 import { USER_GENDER } from '../../../components/User/constants'
-import { GraphQLConnection, GraphQLEdge } from '../../../components/types'
 
 import { AmplitudeUser, AmplitudeUserGroups } from './types'
 
@@ -10,14 +9,22 @@ type MinimumUser = {
   gender: USER_GENDER
   role: string
   createdAt: string
-  companies: GraphQLConnection<MinimumGroup>
-  teams: GraphQLConnection<MinimumGroup>
+  companies: MinimumConnection<MinimumGroup>
+  teams: MinimumConnection<MinimumGroup>
 }
 
-interface MinimumGroup {
+type MinimumGroup = {
   id: string
   name: string
   createdAt: string
+}
+
+type MinimumConnection<N> = {
+  edges: Array<MinimumEdge<N>>
+}
+
+type MinimumEdge<N> = {
+  node: N
 }
 
 export const marshalAmplitudeUser = (user: MinimumUser): AmplitudeUser => ({
@@ -34,5 +41,5 @@ export const marshalAmplitudeUserGroups = (user: MinimumUser): AmplitudeUserGrou
   teams: getGroupNames(user.teams.edges),
 })
 
-const getGroupNames = (groupEdges: Array<GraphQLEdge<MinimumGroup>>): string[] =>
+const getGroupNames = (groupEdges: Array<MinimumEdge<MinimumGroup>>): string[] =>
   groupEdges.map((edge) => edge.node.name)

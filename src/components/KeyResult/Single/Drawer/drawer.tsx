@@ -9,6 +9,7 @@ import {
   keyResultCheckInProgressDraft,
   keyResultLatestCheckIn,
 } from 'src/state/recoil/key-result/check-in'
+import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import KeyResultDrawerContent from './content'
@@ -22,11 +23,13 @@ const KeyResultDrawer = () => {
   const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const resetTimeline = useResetRecoilState(timelineSelector(keyResultID))
   const resetCommentEnabled = useResetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
+  const resetCheckmarkDrafts = useResetRecoilState(draftCheckMarksAtom(keyResultID))
 
   const handleClose = () => {
     resetOpenDrawer()
     resetTimeline()
     resetCommentEnabled()
+    resetCheckmarkDrafts()
     setDraftValue(latestKeyResultCheckIn?.value)
   }
 

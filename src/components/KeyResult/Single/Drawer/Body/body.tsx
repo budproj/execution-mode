@@ -1,5 +1,6 @@
 import { Box, Divider, Portal, Stack } from '@chakra-ui/react'
 import React, { useRef } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import {
   KeyResultSectionDescription,
@@ -9,7 +10,12 @@ import {
 } from 'src/components/KeyResult/Single/Sections'
 import { KeyResultSingleSectionDeadline } from 'src/components/KeyResult/Single/Sections/Deadline/wrapper'
 import { KeyResultSingleSectionGoal } from 'src/components/KeyResult/Single/Sections/Goal/wrapper'
+import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { keyResultChecklistAtom } from 'src/state/recoil/key-result/checklist'
+
+import { KeyResultChecklistWrapper } from '../../Sections/Checklist/wrapper'
 
 import { SCROLLBAR_ID } from './constants'
 
@@ -19,7 +25,16 @@ export interface KeyResultDrawerBodyProperties {
 }
 
 const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => {
+  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
+  const keyResultChecklist = useRecoilValue(keyResultChecklistAtom(keyResultID))
   const timelinePortalReference = useRef<HTMLDivElement>(null)
+
+  const newCheckInValue =
+    keyResult?.format === KEY_RESULT_FORMAT.PERCENTAGE &&
+    keyResult?.initialValue === 0 &&
+    keyResult?.goal === 100
+      ? keyResultChecklist?.progress.progress
+      : undefined
 
   return (
     <Stack
@@ -37,7 +52,11 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
 
       <Portal containerRef={timelinePortalReference}>
         <Box p={8} pt={4}>
-          <KeyResultSectionTimeline keyResultID={keyResultID} scrollTarget={SCROLLBAR_ID} />
+          <KeyResultSectionTimeline
+            keyResultID={keyResultID}
+            scrollTarget={SCROLLBAR_ID}
+            newCheckInValue={newCheckInValue}
+          />
         </Box>
       </Portal>
 
@@ -63,6 +82,9 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
         <Divider borderColor="gray.100" />
 
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
+
+        <KeyResultChecklistWrapper keyResultID={keyResultID} />
+        <Divider borderColor="gray.100" />
 
         <KeyResultSectionOwner keyResultID={keyResultID} />
       </Stack>

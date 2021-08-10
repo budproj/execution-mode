@@ -73,9 +73,16 @@ export const DeleteAction = ({ id, onDelete }: DeleteActionProperties) => {
         variant="solid"
         bg="black.100"
         color="gray.500"
+        borderColor="black.100"
         _hover={{
           bg: 'red.500',
           color: 'white',
+          borderColor: 'red.500',
+        }}
+        _active={{
+          bg: 'red.400',
+          color: 'white',
+          borderColor: 'red.400',
         }}
         onClick={handleOpen}
       >

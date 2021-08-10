@@ -1,16 +1,33 @@
-import { Stack, FormLabel, StackProps, EditableProps, Spinner } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import {
+  Stack,
+  FormLabel,
+  StackProps,
+  EditableProps,
+  Spinner,
+  EditablePreviewProps,
+} from '@chakra-ui/react'
+import React, { KeyboardEvent, useEffect, useState } from 'react'
 
 import EditableInputValue from 'src/components/Base/EditableInputValue'
 
 export interface EditableInputFieldProperties {
-  label: string
+  label?: string
   customFallbackValue?: string
   value?: string
   flexGrow?: StackProps['flexGrow']
   onSubmit?: EditableProps['onSubmit']
   isLoaded?: boolean
   isSubmitting?: boolean
+  isWaiting?: boolean
+  startWithEditView?: boolean
+  autoFocus?: boolean
+  isDisabled?: boolean
+  onPressedEnter?: (value?: string) => void
+  onStartEdit?: () => void
+  onStopEdit?: () => void
+  onCancel?: (oldValue?: string) => void
+  hideControls?: boolean
+  previewProperties?: EditablePreviewProps
 }
 
 const EditableInputField = ({
@@ -21,6 +38,16 @@ const EditableInputField = ({
   onSubmit,
   isLoaded,
   isSubmitting,
+  isWaiting,
+  startWithEditView,
+  autoFocus,
+  isDisabled,
+  onPressedEnter,
+  onStartEdit,
+  onStopEdit,
+  onCancel,
+  hideControls,
+  previewProperties,
 }: EditableInputFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
@@ -29,24 +56,43 @@ const EditableInputField = ({
     if (onSubmit) onSubmit(value)
   }
 
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (!isDisabled && event.key === 'Enter' && onPressedEnter)
+      onPressedEnter(event.currentTarget.value)
+  }
+
+  const isBeingSubmitted = isSubmitting && wasSubmitted
+
   useEffect(() => {
     if (wasSubmitted && !isSubmitting) setWasSubmitted(false)
   }, [wasSubmitted, isSubmitting, setWasSubmitted])
 
   return (
     <Stack direciton="column" w="full" spacing={0} flexGrow={flexGrow}>
-      <FormLabel fontSize="sm" m={0}>
-        {label}
-      </FormLabel>
+      {Boolean(label) && (
+        <FormLabel fontSize="sm" m={0}>
+          {label}
+        </FormLabel>
+      )}
       <Stack direction="row" alignItems="center" gridGap={2}>
         <EditableInputValue
           value={value}
           customFallbackValue={customFallbackValue}
           isLoaded={isLoaded}
-          isSubmitting={isSubmitting && wasSubmitted}
+          // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+          isSubmitting={isBeingSubmitted || isWaiting}
+          startWithEditView={startWithEditView}
+          autoFocus={autoFocus}
+          isDisabled={isDisabled}
+          hideControls={hideControls}
+          previewProperties={previewProperties}
+          onCancel={onCancel}
           onSubmit={handleSubmit}
+          onKeyDown={handleKeyDown}
+          onStartEdit={onStartEdit}
+          onStopEdit={onStopEdit}
         />
-        {isSubmitting && wasSubmitted && <Spinner color="gray.200" size="sm" />}
+        {(isBeingSubmitted || isWaiting) && <Spinner color="gray.200" size="sm" />}
       </Stack>
     </Stack>
   )

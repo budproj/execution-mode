@@ -1,7 +1,7 @@
 query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
   objective(id: $objectiveID) {
     id
-    keyResults {
+    keyResults(order: { createdAt: ASC }) {
       edges {
         node {
           id

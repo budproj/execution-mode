@@ -635,6 +635,10 @@
     "defaultMessage": "Minha conta",
     "description": "MainAppBar user menu first item option"
   },
+  "O13rH5": {
+    "defaultMessage": "{completed}/{total}",
+    "description": "This messages is displayed in our our key-result drawer above the checklist as the count of total completed checkmarks"
+  },
   "OEfoTC": {
     "defaultMessage": "Um ícone de setas entrelaçadas. Ao clicar aqui você irá editar esse campo",
     "description": "This message is used by screen readers when the user is focusing on the component which contains the user name and picture. This component is used in multiple places, like: our header, the key-result drawers, and other"
@@ -666,6 +670,10 @@
   "Pkdkh4": {
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
+  },
+  "PktsGq": {
+    "defaultMessage": "Check-list",
+    "description": "This is the title of our checklist section inside the key-result sidebar"
   },
   "Q2diI+": {
     "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
@@ -751,6 +759,10 @@
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
   },
+  "SsQRcF": {
+    "defaultMessage": "Uma seta que ao ser clicada expande a checklist deste resultado-chave",
+    "description": "This message is used by screen readers to explain the collapse icon in our key-result sidebar on the checklist section"
+  },
   "SxsVDt": {
     "defaultMessage": "Meta",
     "description": "This is the label of the check-in form that indicates the goal for her/his key result"
@@ -814,6 +826,10 @@
   "VltGNp": {
     "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawers"
+  },
+  "W37c+K": {
+    "defaultMessage": "Um ícone de check. Ele representa a quantidade de itens marcados como completo em sua checklist",
+    "description": "This text is used by screen readers to explain the check icon in our key-result drawer checklist section"
   },
   "W9swHV": {
     "defaultMessage": "Configurações",
@@ -966,6 +982,10 @@
   "dymB9a": {
     "defaultMessage": "Cada resultado-chave pertence a um objetivo",
     "description": "This tooltip explains the second column of the key result list"
+  },
+  "e2FL3I": {
+    "defaultMessage": "Um ícone do sinal de positivo que, ao clicar, irá adicionar um novo item na checklist",
+    "description": "This is used by screen readers to understand the insert new check mark icon in our key-result drawer"
   },
   "e37pvj": {
     "defaultMessage": "Uma seta para baixo, indicando que ao clicar você irá abrir a lista de ciclos",
@@ -1259,6 +1279,10 @@
     "defaultMessage": "Progresso",
     "description": "This message is displayed as the title of the progress section inside check-in card"
   },
+  "s4h8ne": {
+    "defaultMessage": "Adicionar uma Check-list",
+    "description": "This text is used as a button when the key-result has no check-marks"
+  },
   "s6b2FE": {
     "defaultMessage": "Data Limite",
     "description": "The heading text of the goal section in our key-result drawers"
@@ -1278,6 +1302,10 @@
   "sP2MCY": {
     "defaultMessage": "Mostrar menos",
     "description": "This text is displayed in the button that collapses the truncated text"
+  },
+  "sSCvSb": {
+    "defaultMessage": "Um ícone de \"x\". Ao clicar nele você irá remover esse item da checklist",
+    "description": "This text is used by screen readers inside our key-result drawer to describe the X icon to remove a given item from the checklist"
   },
   "sYGIlp": {
     "defaultMessage": "Minha conta",
@@ -1406,6 +1434,10 @@
   "ze3hqu": {
     "defaultMessage": "Estamos trabalhando em melhorias para você! :)",
     "description": "The title displayed in our under maintenance error page"
+  },
+  "zennqC": {
+    "defaultMessage": "Adicionar novo item",
+    "description": "This label appears in our key-result sidebar drawer, in the end of our checklist"
   },
   "zev4wl": {
     "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",

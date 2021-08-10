@@ -1,0 +1,39 @@
+query GET_CHECKLIST_OF_KEY_RESULT($id: ID!) {
+  keyResult(id: $id) {
+    id
+    checkList {
+      policy {
+        create
+      }
+      progress {
+        total
+        numberOfChecked
+        progress
+      }
+      edges {
+        node {
+          id
+          description
+          state
+          policy {
+            update
+            delete
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation TOGGLE_CHECK_MARK($id: ID!) {
+  toggleCheckMark(data: { id: $id }) {
+    id
+    state
+  }
+}
+
+mutation UPDATE_CHECK_MARK_DESCRIPTION($id: ID!, $description: String!) {
+  updateCheckMarkDescription(id: $id, data: { description: $description }) {
+    id
+  }
+}
