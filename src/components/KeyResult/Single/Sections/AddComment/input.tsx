@@ -27,11 +27,6 @@ const KeyResultSectionAddCommentInput = ({
     useFormikContext<KeyResultSectionAddCommentInitialValues>()
   const intl = useIntl()
 
-  const handleHeightChange = (height: number, context: TextareaAutosizeContext) => {
-    const newNumberOfRows = Math.floor(height / context.rowHeight)
-    setNumberOfRows(newNumberOfRows)
-  }
-
   const handleFocus = () => {
     setIsOnFocus(true)
   }
@@ -41,9 +36,12 @@ const KeyResultSectionAddCommentInput = ({
   }
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setValues({
-      text: event.target.value,
-    })
+    const numberOfRows = event.target.value.split('\n').length + 1
+
+    if (numberOfRows > 14) return null
+
+    setNumberOfRows(numberOfRows)
+    setValues({ text: event.target.value })
   }
 
   return (
