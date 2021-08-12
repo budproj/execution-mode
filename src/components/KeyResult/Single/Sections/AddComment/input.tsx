@@ -3,6 +3,7 @@ import { useFormikContext } from 'formik'
 import React, { ChangeEvent, useState } from 'react'
 import { useIntl } from 'react-intl'
 import TextareaAutosize from 'react-textarea-autosize'
+import { MentionsInput, Mention } from 'react-mentions'
 
 import PaperPlaneIcon from 'src/components/Icon/PaperPlane'
 
@@ -59,21 +60,24 @@ const KeyResultSectionAddCommentInput = ({
       px={4}
       py={2}
     >
-      <TextareaAutosize
+      <MentionsInput
         value={values.text}
         placeholder={intl.formatMessage(messages.placeholder)}
-        maxRows={14}
         style={{
           resize: 'none',
           width: '100%',
           outline: 'none',
         }}
-        onHeightChange={handleHeightChange as any}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        onChange={handleChange}
-      />
-
+        onChange={handleChange as any}
+      >
+        <Mention
+          trigger="@"
+          data={[]}
+        // renderSuggestion={this.renderUserSuggestion}
+        />
+      </MentionsInput>
       <IconButton
         icon={
           isLoading || isSubmitting ? (
