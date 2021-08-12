@@ -62,9 +62,11 @@ const KeyResultSectionAddCommentInput = ({
         value={values.text}
         placeholder={intl.formatMessage(messages.placeholder)}
         style={{
-          resize: 'none',
-          width: '100%',
-          outline: 'none',
+          input: {
+            resize: 'none',
+            width: '100%',
+            outline: 'none',
+          }
         }}
         onFocus={handleFocus}
         onBlur={handleBlur}
