@@ -1,14 +1,21 @@
 import { Box, IconButton, Spinner, useToken } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions'
+import { useQuery } from '@apollo/client'
 
 import PaperPlaneIcon from 'src/components/Icon/PaperPlane'
 
 import { KeyResultSectionAddCommentInitialValues } from './add-comment'
 import messages from './messages'
 import { NamedAvatar } from 'src/components/User'
+import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
+import { userAtomFamily } from 'src/state/recoil/user'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { User } from 'src/components/User/types'
+import { GetUserListQueryResult } from 'src/components/User/AllReachableUsers/wrapper'
+import queries from 'src/components/User/AllReachableUsers/queries.gql'
 
 export interface KeyResultSectionAddCommentInputProperties {
   isLoading?: boolean
@@ -63,6 +70,25 @@ const KeyResultSectionAddCommentInput = ({ isLoading }: KeyResultSectionAddComme
     setNumberOfRows(numberOfRows)
     setValues({ text: event.target.value })
   }
+
+  const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
+  const [users, setUserEdges] = useConnectionEdges<User>()
+  const [usersMention, setUsersMention] = useState<SuggestionDataItem[]>([])
+  const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)
+
+
+  useEffect(() => {
+    if (data) setUserEdges(data.users.edges)
+  }, [data])
+
+  useEffect(() => {
+    if (!users) return
+
+    const usersMentionTemp = users.map(({ id, fullName }) => ({ id, display: fullName }))
+
+    loadUsers(users)
+    setUsersMention(usersMentionTemp)
+  }, [users])
 
   return (
     <Box
@@ -126,13 +152,7 @@ const KeyResultSectionAddCommentInput = ({ isLoading }: KeyResultSectionAddComme
             textShadow: '1px 1px 1px white, 1px -1px 1px white, -1px 1px 1px white, -1px -1px 1px white',
             pointerEvents: 'none',
           }}
-          data={[
-            { id: 'b159ef12-9062-49c6-8afc-372e8848fb15', display: 'Rick Sanches' },
-            { id: 'b159ef12-9062-49c6-8afc-372e8848fb15', display: 'Rick Sanches' },
-            { id: 'f120ec45-150d-4e24-b99d-34df20a80c64', display: 'Evil Morty' },
-            { id: '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9', display: 'Jerry Smith' },
-            { id: '922ef72a-6c3c-4075-926a-3245cdeea75f', display: 'Morty Smith' },
-          ]}
+          data={usersMention}
           renderSuggestion={renderSuggestion}
           appendSpaceOnAdd={true}
         />
