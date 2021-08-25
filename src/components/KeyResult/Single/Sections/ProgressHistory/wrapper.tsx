@@ -1,616 +1,96 @@
+import { Box, useToken } from '@chakra-ui/react'
 import format from 'date-fns/format'
 import React from 'react'
 import {
   Area,
-  Line,
   Tooltip,
-  CartesianGrid,
   XAxis,
   ResponsiveContainer,
   ComposedChart,
+  YAxis,
+  CartesianGrid,
 } from 'recharts'
 
 export const ProgressHistoryChart = () => {
   const fakeData = [
     {
       time: 1616889600,
-      close: 58781,
-      high: 59380,
-      low: 54690.9,
-      open: 55852.4,
-      volumefrom: 13389.13,
-      volumeto: 766305924.19,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
+      close: 20,
     },
     {
       time: 1617148800,
-      close: 59020.7,
-      high: 60025,
-      low: 56813.8,
-      open: 58781,
-      volumefrom: 12100.94,
-      volumeto: 712906049.4,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
+      close: 40,
     },
     {
       time: 1617408000,
-      close: 59120,
-      high: 59867.1,
-      low: 56468.4,
-      open: 59020.7,
-      volumefrom: 9164.5,
-      volumeto: 534076742.62,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
+      close: 30,
     },
     {
       time: 1617667200,
-      close: 58036.9,
-      high: 59462.8,
-      low: 55460,
-      open: 59120,
-      volumefrom: 10218.09,
-      volumeto: 585532659.72,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1617926400,
-      close: 59956,
-      high: 61207,
-      low: 57538.3,
-      open: 58036.9,
-      volumefrom: 11606.49,
-      volumeto: 689418209.65,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1618185600,
-      close: 62969,
-      high: 64900,
-      low: 59420,
-      open: 59956,
-      volumefrom: 15884.73,
-      volumeto: 988728774.91,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1618444800,
-      close: 60085.2,
-      high: 63830,
-      low: 59702.4,
-      open: 62969,
-      volumefrom: 11830.78,
-      volumeto: 731045319.14,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1618704000,
-      close: 56500,
-      high: 60403.2,
-      low: 51017.1,
-      open: 60085.2,
-      volumefrom: 27031.49,
-      volumeto: 1504553858.01,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1618963200,
-      close: 51178.7,
-      high: 56805.5,
-      low: 47549.3,
-      open: 56500,
-      volumefrom: 26091.45,
-      volumeto: 1358737282.09,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1619222400,
-      close: 54051.9,
-      high: 54419.5,
-      low: 47000,
-      open: 51178.7,
-      volumefrom: 16008.01,
-      volumeto: 814088477.82,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1619481600,
-      close: 53579.6,
-      high: 56500,
-      low: 52390.2,
-      open: 54051.9,
-      volumefrom: 11428.94,
-      volumeto: 620693172.7,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1619740800,
-      close: 56618.5,
-      high: 58525.5,
-      low: 53071.6,
-      open: 53579.6,
-      volumefrom: 9876.56,
-      volumeto: 560035313.25,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1620000000,
-      close: 57497.1,
-      high: 58981.4,
-      low: 53000,
-      open: 56618.5,
-      volumefrom: 15132.18,
-      volumeto: 849598780.75,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1620259200,
-      close: 58953.8,
-      high: 59521.4,
-      low: 55309,
-      open: 57497.1,
-      volumefrom: 12626.63,
-      volumeto: 726658392.57,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1620518400,
-      close: 56747.5,
-      high: 59598.8,
-      low: 53470,
-      open: 58953.8,
-      volumefrom: 14802.64,
-      volumeto: 844197945.4,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1620777600,
-      close: 49899,
-      high: 57983.6,
-      low: 45000,
-      open: 56747.5,
-      volumefrom: 27179.19,
-      volumeto: 1383425503,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1621036800,
-      close: 43551.8,
-      high: 50827.3,
-      low: 42111.2,
-      open: 49899,
-      volumefrom: 25116.16,
-      volumeto: 1151190197.77,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1621296000,
-      close: 40614.6,
-      high: 45823.4,
-      low: 29800,
-      open: 43551.8,
-      volumefrom: 54640.75,
-      volumeto: 2140743871.61,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1621555200,
-      close: 34718.8,
-      high: 42270.6,
-      low: 31078.7,
-      open: 40614.6,
-      volumefrom: 40974.46,
-      volumeto: 1492474238.94,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1621814400,
-      close: 39283.9,
-      high: 40893.6,
-      low: 34420.8,
-      open: 34718.8,
-      volumefrom: 29528.41,
-      volumeto: 1128564632.63,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1622073600,
-      close: 34616.6,
-      high: 40398,
-      low: 33652.8,
-      open: 39283.9,
-      volumefrom: 20809.08,
-      volumeto: 762830519.18,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1622332800,
-      close: 36676.3,
-      high: 37934.3,
-      low: 33423.2,
-      open: 34616.6,
-      volumefrom: 16382.7,
-      volumeto: 592198655.04,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1622592000,
-      close: 36847.7,
-      high: 39471,
-      low: 35576.7,
-      open: 36676.3,
-      volumefrom: 16529.58,
-      volumeto: 622762365.96,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1622851200,
-      close: 33587.6,
-      high: 37935.8,
-      low: 33334.3,
-      open: 36847.7,
-      volumefrom: 14886.22,
-      volumeto: 531852711.32,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1623110400,
-      close: 36678.4,
-      high: 38399,
-      low: 31017.4,
-      open: 33587.6,
-      volumefrom: 27638.9,
-      volumeto: 958552018.96,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1623369600,
-      close: 39034.6,
-      high: 39409.4,
-      low: 34680,
-      open: 36678.4,
-      volumefrom: 17754.9,
-      volumeto: 652162847.42,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1623628800,
-      close: 38337.1,
-      high: 41341.8,
-      low: 38120,
-      open: 39034.6,
-      volumefrom: 22795.25,
-      volumeto: 906977508.64,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1623888000,
-      close: 35490.5,
-      high: 39561.4,
-      low: 34901,
-      open: 38337.1,
-      volumefrom: 17046.77,
-      volumeto: 631960758.83,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1624147200,
-      close: 32516.2,
-      high: 36112.2,
-      low: 28816.6,
-      open: 35490.5,
-      volumefrom: 33871.2,
-      volumeto: 1096647236.76,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1624406400,
-      close: 31583.7,
-      high: 35509.1,
-      low: 31278.3,
-      open: 32516.2,
-      volumefrom: 17559.01,
-      volumeto: 588446366.65,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1624665600,
-      close: 34472,
-      high: 35288.1,
-      low: 30179,
-      open: 31583.7,
-      volumefrom: 13054.59,
-      volumeto: 428545213.48,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1624924800,
-      close: 33532.4,
-      high: 36643.2,
-      low: 32717.2,
-      open: 34472,
-      volumefrom: 13715.35,
-      volumeto: 476603978.26,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1625184000,
-      close: 35305,
-      high: 35948.9,
-      low: 32721.4,
-      open: 33532.4,
-      volumefrom: 7110.72,
-      volumeto: 242977499.27,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1625443200,
-      close: 33885.1,
-      high: 35305.1,
-      low: 33080.3,
-      open: 35305,
-      volumefrom: 10019.85,
-      volumeto: 342843530.98,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1625702400,
-      close: 33522.2,
-      high: 34252.8,
-      low: 32112.6,
-      open: 33885.1,
-      volumefrom: 10995.35,
-      volumeto: 364387783.88,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1625961600,
-      close: 32722.9,
-      high: 34665.7,
-      low: 32204,
-      open: 33522.2,
-      volumefrom: 6719.72,
-      volumeto: 223770859.52,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1626220800,
-      close: 31405.9,
-      high: 33188.3,
-      low: 31050,
-      open: 32722.9,
-      volumefrom: 10302.15,
-      volumeto: 329697563.39,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1626480000,
-      close: 30820.5,
-      high: 32440.4,
-      low: 30415.1,
-      open: 31405.9,
-      volumefrom: 7259.24,
-      volumeto: 227676922.73,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1626739200,
-      close: 32283.3,
-      high: 32844.4,
-      low: 29288.6,
-      open: 30820.5,
-      volumefrom: 13309.5,
-      volumeto: 411997469.85,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1626998400,
-      close: 35413.6,
-      high: 35436,
-      low: 32015.1,
-      open: 32283.3,
-      volumefrom: 6327.14,
-      volumeto: 212748714.07,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1627257600,
-      close: 40011,
-      high: 40919.1,
-      low: 35254.9,
-      open: 35413.6,
-      volumefrom: 22549.25,
-      volumeto: 873282895.95,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1627516800,
-      close: 41488.5,
-      high: 42400,
-      low: 38345.1,
-      open: 40011,
-      volumefrom: 11267.61,
-      volumeto: 455785801.02,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1627776000,
-      close: 38163,
-      high: 42598.7,
-      low: 37655,
-      open: 41488.5,
-      volumefrom: 9904.66,
-      volumeto: 394311144.74,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1628035200,
-      close: 42823.9,
-      high: 43401.9,
-      low: 37355,
-      open: 38163,
-      volumefrom: 13190.45,
-      volumeto: 530436180.01,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1628294400,
-      close: 46307.1,
-      high: 46484.1,
-      low: 42495,
-      open: 42823.9,
-      volumefrom: 13939.26,
-      volumeto: 619929069.11,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1628553600,
-      close: 44401.1,
-      high: 46736.4,
-      low: 43800.1,
-      open: 46307.1,
-      volumefrom: 10177,
-      volumeto: 462832709.59,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1628812800,
-      close: 47019.3,
-      high: 48164,
-      low: 44251.2,
-      open: 44401.1,
-      volumefrom: 8887.71,
-      volumeto: 414498473.08,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1629072000,
-      close: 44714.7,
-      high: 48072.6,
-      low: 44250,
-      open: 47019.3,
-      volumefrom: 9245.21,
-      volumeto: 424312258.35,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1629331200,
-      close: 48865.4,
-      high: 49790,
-      low: 44000,
-      open: 44714.7,
-      volumefrom: 8866.39,
-      volumeto: 422111168.82,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1629590400,
-      close: 47725.4,
-      high: 50500,
-      low: 47601.1,
-      open: 48865.4,
-      volumefrom: 8008.73,
-      volumeto: 393966157.15,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
-    },
-    {
-      time: 1629849600,
-      close: 48989.6,
-      high: 49160,
-      low: 47146.3,
-      open: 47725.4,
-      volumefrom: 2081.8,
-      volumeto: 100132217.03,
-      conversionType: 'force_direct',
-      conversionSymbol: '',
+      close: 40,
     },
   ]
 
-  const convertDate = (timestamp: any) => format(new Date(timestamp * 1000), 'dd-mm')
+  const [brand100, brand300, brand500, newGray200, newGray400, newGray500] = useToken('colors', [
+    'brand.100',
+    'brand.300',
+    'brand.500',
+    'new-gray.200',
+    'new-gray.400',
+    'new-gray.500',
+  ])
+
+  const convertDate = (timestamp: any) => format(new Date(timestamp * 1000), 'dd/MM')
 
   return (
-    <div style={{ width: '100%', height: 300 }}>
+    <Box w="full" h={48}>
       <ResponsiveContainer>
-        <ComposedChart width={500} height={300} data={fakeData}>
+        <ComposedChart data={fakeData}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#129a74" stopOpacity={0.1} />
-              <stop offset="95%" stopColor="#FFFFFF" stopOpacity={0.1} />
+              <stop offset="5%" stopColor={brand300} />
+              <stop offset="95%" stopColor={brand100} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="time" tickFormatter={convertDate} />
-          <Tooltip />
-          <CartesianGrid vertical={false} stroke="#DDD" />
 
-          <Line
-            type="monotone"
-            unit="M"
-            strokeLinecap="round"
-            strokeWidth={2}
-            style={{ strokeDasharray: `40% 60%` }}
-            dataKey="close"
-            stroke="#006991"
-            dot={false}
-            legendType="none"
-          />
+          <CartesianGrid vertical={false} stroke={newGray200} />
+
           <Area
+            yAxisId="primary"
+            xAxisId="primary"
             type="monotone"
+            unit="%"
             dataKey="close"
             strokeWidth={2}
+            stroke={brand500}
             fillOpacity={1}
             fill="url(#colorUv)"
           />
+
+          <Tooltip />
+
+          <XAxis
+            xAxisId="primary"
+            dataKey="time"
+            tickFormatter={convertDate}
+            interval={0}
+            stroke={newGray400}
+            tickLine={false}
+            tick={{ fill: newGray500 }}
+          />
+          <XAxis orientation="top" stroke={newGray400} height={1} tickLine={false} />
+
+          <YAxis
+            yAxisId="primary"
+            type="number"
+            ticks={[25, 50, 75, 100]}
+            tickLine={false}
+            stroke={newGray400}
+            width={1}
+          />
+          <YAxis orientation="right" stroke={newGray400} width={1} tickLine={false} />
         </ComposedChart>
       </ResponsiveContainer>
-    </div>
+    </Box>
   )
 }
