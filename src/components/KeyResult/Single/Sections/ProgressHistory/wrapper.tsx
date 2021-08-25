@@ -29,6 +29,10 @@ export const ProgressHistoryChart = () => {
       time: 1617667200,
       close: 40,
     },
+    {
+      time: 1617667900,
+      close: 40,
+    },
   ]
 
   const [brand100, brand300, brand500, newGray200, newGray400, newGray500] = useToken('colors', [
@@ -73,10 +77,10 @@ export const ProgressHistoryChart = () => {
             xAxisId="primary"
             dataKey="time"
             tickFormatter={convertDate}
-            interval={0}
             stroke={newGray400}
             tickLine={false}
             tick={{ fill: newGray500 }}
+            interval="preserveStartEnd"
           />
           <XAxis orientation="top" stroke={newGray400} height={1} tickLine={false} />
 
