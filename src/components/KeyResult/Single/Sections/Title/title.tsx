@@ -14,6 +14,8 @@ import { GraphQLEffect } from 'src/components/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
+import { ProgressHistoryChart } from '../ProgressHistory/wrapper'
+
 import messages from './messages'
 import queries from './queries.gql'
 
@@ -57,71 +59,74 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   }
 
   return (
-    <Flex gridGap={4} alignItems="flex-start">
-      <Skeleton borderRadius={10} isLoaded={isLoaded}>
-        <KeyResultDynamicIcon
-          title={keyResult?.title}
-          iconSize={7}
-          boxSize={12}
-          borderRadius={8}
-          isDisabled={!isActive}
-        />
-      </Skeleton>
-
-      <Stack spacing={0} flexGrow={1}>
-        <Stack direction="row">
-          <Skeleton isLoaded={isLoaded} flexGrow={1}>
-            <EditableInputValue
-              value={keyResult?.title}
-              isLoaded={isLoaded}
-              isSubmitting={loading}
-              isDisabled={!canUpdate}
-              maxCharacters={120}
-              previewProperties={{
-                fontSize: 'lg',
-                fontWeight: 700,
-                p: 0,
-                as: 'h1',
-              }}
-              onSubmit={handleSubmit}
-            />
-          </Skeleton>
-          {loading && (
-            <Box pt={2}>
-              <Spinner color="brand.400" />
-            </Box>
-          )}
-        </Stack>
-
-        <SkeletonText
-          noOfLines={2}
-          minW="100%"
-          mt={isLoaded ? 'inherit' : '4px'}
-          isLoaded={isLoaded}
-        >
-          <LastUpdateText
-            fontSize="sm"
-            date={lastUpdateDate}
-            color={isOutdated ? 'red.500' : 'gray.400'}
-            prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
+    <Stack spacing={0}>
+      <Flex gridGap={4} alignItems="flex-start">
+        <Skeleton borderRadius={10} isLoaded={isLoaded}>
+          <KeyResultDynamicIcon
+            title={keyResult?.title}
+            iconSize={7}
+            boxSize={12}
+            borderRadius={8}
+            isDisabled={!isActive}
           />
-        </SkeletonText>
+        </Skeleton>
 
-        <Stack spacing={4} direction="row">
-          <Skeleton isLoaded={isLoaded} flexGrow={1}>
-            <ProgressSlider isDisabled id={keyResult?.id} isActive={isActive} />
-          </Skeleton>
+        <Stack spacing={0} flexGrow={1}>
+          <Stack direction="row">
+            <Skeleton isLoaded={isLoaded} flexGrow={1}>
+              <EditableInputValue
+                value={keyResult?.title}
+                isLoaded={isLoaded}
+                isSubmitting={loading}
+                isDisabled={!canUpdate}
+                maxCharacters={120}
+                previewProperties={{
+                  fontSize: 'lg',
+                  fontWeight: 700,
+                  p: 0,
+                  as: 'h1',
+                }}
+                onSubmit={handleSubmit}
+              />
+            </Skeleton>
+            {loading && (
+              <Box pt={2}>
+                <Spinner color="brand.400" />
+              </Box>
+            )}
+          </Stack>
 
-          <Skeleton noOfLines={1} isLoaded={isLoaded} color="gray.400" fontWeight={700}>
-            <PercentageMask
-              value={keyResult?.status?.progress}
-              displayType="text"
-              decimalScale={0}
+          <SkeletonText
+            noOfLines={2}
+            minW="100%"
+            mt={isLoaded ? 'inherit' : '4px'}
+            isLoaded={isLoaded}
+          >
+            <LastUpdateText
+              fontSize="sm"
+              date={lastUpdateDate}
+              color={isOutdated ? 'red.500' : 'gray.400'}
+              prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
             />
-          </Skeleton>
+          </SkeletonText>
+
+          <Stack spacing={4} direction="row">
+            <Skeleton isLoaded={isLoaded} flexGrow={1}>
+              <ProgressSlider isDisabled id={keyResult?.id} isActive={isActive} />
+            </Skeleton>
+
+            <Skeleton noOfLines={1} isLoaded={isLoaded} color="gray.400" fontWeight={700}>
+              <PercentageMask
+                value={keyResult?.status?.progress}
+                displayType="text"
+                decimalScale={0}
+              />
+            </Skeleton>
+          </Stack>
         </Stack>
-      </Stack>
-    </Flex>
+      </Flex>
+      <ProgressHistoryChart />
+    </Stack>
   )
 }
 
