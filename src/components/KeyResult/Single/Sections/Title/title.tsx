@@ -156,8 +156,8 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           </Stack>
         </Stack>
       </Flex>
-      <Collapse in={isGraphOpen}>
-        <ProgressHistoryChart />
+      <Collapse unmountOnExit in={isGraphOpen}>
+        <ProgressHistoryChart keyResultID={keyResultID} />
       </Collapse>
     </Stack>
   )

@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client'
 import { Box, useToken } from '@chakra-ui/react'
 import format from 'date-fns/format'
 import React from 'react'
@@ -13,11 +14,14 @@ import {
 } from 'recharts'
 import { Payload } from 'recharts/types/component/DefaultTooltipContent'
 
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+
 import messages from './messages'
+import queries from './queries.gql'
 
-const formatData = (value: number) => value * 100
+const formatData = (value: number) => Math.round(value * 100)
 
-const formatDate = (rawDate?: string) => {
+const formatDate = (rawDate?: string, ...rest: any) => {
   const date = rawDate && rawDate !== '' ? new Date(rawDate) : new Date()
 
   return format(date, 'dd/MM')
@@ -27,35 +31,12 @@ const formatLabel = (_: unknown, [data]: Array<Payload<string, string>>) => {
   return formatDate(data?.payload?.date)
 }
 
-export const ProgressHistoryChart = () => {
-  const fakeData = [
-    {
-      id: '027acd9a-844c-4817-ae02-206c62a62b80',
-      progress: 0.2,
-      date: '2021-03-16T14:47:48.000Z',
-    },
-    {
-      id: '027acd9a-844c-4817-ae02-206c62a62b80',
-      progress: 0.7,
-      date: '2021-04-16T14:47:48.000Z',
-    },
-    {
-      id: '027acd9a-844c-4817-ae02-206c62a62b80',
-      progress: 0.5,
-      date: '2021-05-16T14:47:48.000Z',
-    },
-    {
-      id: '027acd9a-844c-4817-ae02-206c62a62b80',
-      progress: 0.5,
-      date: '2021-06-16T14:47:48.000Z',
-    },
-    {
-      id: '027acd9a-844c-4817-ae02-206c62a62b80',
-      progress: 1,
-      date: '2021-07-16T14:47:48.000Z',
-    },
-  ]
+type ProgressHistoryChartProperties = {
+  keyResultID?: string
+}
 
+export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProperties) => {
+  const [progressHistory, setProgressHistory, _, isLoaded] = useConnectionEdges()
   const intl = useIntl()
   const [brand100, brand300, brand500, newGray200, newGray400, newGray500] = useToken('colors', [
     'brand.100',
@@ -66,10 +47,19 @@ export const ProgressHistoryChart = () => {
     'new-gray.500',
   ])
 
+  useQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
+    variables: {
+      keyResultID,
+    },
+    onCompleted: (data) => {
+      setProgressHistory(data.keyResult.progressHistory.edges)
+    },
+  })
+
   return (
     <Box w="full" h={48}>
       <ResponsiveContainer>
-        <ComposedChart data={fakeData}>
+        <ComposedChart data={progressHistory}>
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor={brand300} />
@@ -88,7 +78,7 @@ export const ProgressHistoryChart = () => {
 
           <XAxis
             xAxisId="primary"
-            dataKey="time"
+            dataKey="date"
             tickFormatter={formatDate}
             stroke={newGray400}
             tickLine={false}

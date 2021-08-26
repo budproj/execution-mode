@@ -1,0 +1,13 @@
+query GET_KEY_RESULT_PROGRESS_HISTORY($keyResultID: ID!) {
+  keyResult(id: $keyResultID) {
+    id
+    progressHistory {
+      edges {
+        node {
+          progress
+          date
+        }
+      }
+    }
+  }
+}
