@@ -9,8 +9,8 @@ export const formatDate = (rawDate?: string) => {
   return format(date, 'dd/MM')
 }
 
-export const formatTooltipLabel = (_: unknown, [data]: Array<Payload<string, string>>) => {
-  return formatDate(data?.payload?.date)
+export const formatTooltipLabel = (_: unknown, axis: Array<Payload<string, string>>) => {
+  return formatDate(axis?.[0]?.payload?.date)
 }
 
 export const distributedCopy = <T>(items: T[], n: number): T[] => {

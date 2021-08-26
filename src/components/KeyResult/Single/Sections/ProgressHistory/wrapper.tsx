@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client'
-import { addWeeks } from 'date-fns'
+import { addWeeks, endOfWeek } from 'date-fns'
 import differenceInWeeks from 'date-fns/differenceInWeeks'
-import { endOfWeek } from 'date-fns/esm'
 import React, { useMemo } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -92,14 +91,12 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
   })
 
   return (
-    isLoaded && (
-      <ProgressHistoryChartHumble
-        data={data}
-        handleDataVisualization={formatData}
-        handleLabelVisualization={formatTooltipLabel}
-        xAxisKey={xAxisKey}
-        xTicks={ticks}
-      />
-    )
+    <ProgressHistoryChartHumble
+      data={data}
+      handleDataVisualization={formatData}
+      handleLabelVisualization={formatTooltipLabel}
+      xAxisKey={xAxisKey}
+      xTicks={ticks}
+    />
   )
 }

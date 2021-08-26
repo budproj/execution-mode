@@ -34,6 +34,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     objective {
       title
       cycle {
+        dateStart
         dateEnd
       }
     }
