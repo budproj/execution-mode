@@ -78,7 +78,13 @@ export const ProgressHistoryChart = () => {
           </defs>
 
           <CartesianGrid vertical={false} stroke={newGray200} />
-          <Tooltip separator=": " formatter={formatData} labelFormatter={formatLabel} />
+
+          <Tooltip
+            separator=": "
+            formatter={formatData}
+            labelFormatter={formatLabel}
+            cursor={false}
+          />
 
           <XAxis
             xAxisId="primary"

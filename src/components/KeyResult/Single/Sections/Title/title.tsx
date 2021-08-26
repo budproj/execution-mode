@@ -1,11 +1,21 @@
 import { useMutation } from '@apollo/client'
-import { Box, Flex, Skeleton, SkeletonText, Spinner, Stack } from '@chakra-ui/react'
-import React from 'react'
+import {
+  Box,
+  Collapse,
+  Flex,
+  IconButton,
+  Skeleton,
+  SkeletonText,
+  Spinner,
+  Stack,
+} from '@chakra-ui/react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import EditableInputValue from 'src/components/Base/EditableInputValue'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
+import ChevronDownIcon from 'src/components/Icon/ChevronDown'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import PercentageMask from 'src/components/KeyResult/NumberMasks/Percentage'
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
@@ -28,6 +38,7 @@ interface UpdateKeyResultTitleMutationResult {
 }
 
 const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties) => {
+  const [isGraphOpen, setIsGraphOpen] = useState(false)
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const intl = useIntl()
@@ -56,6 +67,10 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       ...keyResult,
       title,
     })
+  }
+
+  const handleGraphToggle = () => {
+    setIsGraphOpen(!isGraphOpen)
   }
 
   return (
@@ -110,8 +125,8 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
             />
           </SkeletonText>
 
-          <Stack spacing={4} direction="row">
-            <Skeleton isLoaded={isLoaded} flexGrow={1}>
+          <Stack spacing={4} direction="row" alignItems="center">
+            <Skeleton isLoaded={isLoaded} flexGrow={1} pt={1.5}>
               <ProgressSlider isDisabled id={keyResult?.id} isActive={isActive} />
             </Skeleton>
 
@@ -122,10 +137,28 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
                 decimalScale={0}
               />
             </Skeleton>
+
+            <IconButton
+              color="new-gray.900"
+              minW="auto"
+              h="auto"
+              aria-label={intl.formatMessage(messages.openGraphIconDesc)}
+              icon={
+                <ChevronDownIcon
+                  fill="currentColor"
+                  desc={intl.formatMessage(messages.openGraphIconDesc)}
+                  transition="transform 0.3s ease-in-out"
+                  transform={isGraphOpen ? 'rotate(180deg)' : '0'}
+                />
+              }
+              onClick={handleGraphToggle}
+            />
           </Stack>
         </Stack>
       </Flex>
-      <ProgressHistoryChart />
+      <Collapse in={isGraphOpen}>
+        <ProgressHistoryChart />
+      </Collapse>
     </Stack>
   )
 }

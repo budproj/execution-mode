@@ -699,6 +699,10 @@
     "defaultMessage": "Alta Confiança",
     "description": "We use this tag to group every key result with confidence higher than 66"
   },
+  "QRn560": {
+    "defaultMessage": "Progresso",
+    "description": "This text is used inside our key-result sidebar, in the chart, as the metric name of a key-result progress"
+  },
   "QRy8b9": {
     "defaultMessage": "Um novo objetivo foi criado com sucesso",
     "description": "This message appears as a toast as soon as the the user clicks to add a new objective in the team page"
