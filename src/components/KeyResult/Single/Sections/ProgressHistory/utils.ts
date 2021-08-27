@@ -1,16 +1,32 @@
-import format from 'date-fns/format'
-import { Payload } from 'recharts/types/component/DefaultTooltipContent'
+import { FormatDateOptions, IntlShape } from 'react-intl'
+
+import { CADENCE } from 'src/components/Cycle/constants'
 
 export const formatData = (value: number) => Math.round(value * 100)
 
-export const formatDate = (rawDate?: string) => {
+export const formatDate = (
+  intl: IntlShape,
+  rawDate?: string,
+  cadence: CADENCE = CADENCE.QUARTERLY,
+) => {
   const date = rawDate && rawDate !== '' ? new Date(rawDate) : new Date()
+  const optionsHashmap: Record<string, FormatDateOptions> = {
+    [CADENCE.QUARTERLY]: {
+      day: '2-digit',
+      month: '2-digit',
+    },
+    [CADENCE.YEARLY]: {
+      month: 'short',
+    },
+  }
 
-  return format(date, 'dd/MM')
+  const options = optionsHashmap[cadence]
+
+  return intl.formatDate(date, options)
 }
 
-export const formatTooltipLabel = (_: unknown, axis: Array<Payload<string, string>>) => {
-  return formatDate(axis?.[0]?.payload?.date)
+export const formatTooltipLabel = (label: string, intl: IntlShape, cadence?: CADENCE) => {
+  return formatDate(intl, label, cadence)
 }
 
 export const distributedCopy = <T>(items: T[], n: number): T[] => {
