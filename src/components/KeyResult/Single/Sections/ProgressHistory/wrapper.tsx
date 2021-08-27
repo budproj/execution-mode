@@ -46,8 +46,6 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     [cycleTicks, numberOfTicks],
   )
 
-  console.log(progressHistoryTickHashmap, cycleTicks, 'tag')
-
   const data = useMemo(
     () =>
       cycleTicks?.map((week) => ({
@@ -103,14 +101,17 @@ const getCycleTicks = (
 ): string[] => {
   if (!dateStart) return []
 
-  const tickIndexes = [...new Array(numberOfTicks).keys()]
+  const tickIndexes = [...new Array(numberOfTicks + 1).keys()]
   const ticks = tickIndexes.map((index) => getTickDateString(dateStart, index, cadence))
 
   return ticks.map((tick) => formatDate(intl, tick, cadence))
 }
 
 const getTickDateString = (rawDate: string | Date, index: number, cadence: CADENCE): string => {
-  const date = new Date(rawDate)
+  const tzDate = new Date(rawDate)
+  const userTimezoneOffset = tzDate.getTimezoneOffset() * 60000
+  const date = new Date(tzDate.getTime() + userTimezoneOffset)
+
   const handlerHashmap = {
     [CADENCE.QUARTERLY]: () => endOfWeek(addWeeks(date, index)),
     [CADENCE.YEARLY]: () => endOfMonth(addMonths(date, index)),
