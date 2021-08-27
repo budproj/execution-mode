@@ -1,9 +1,11 @@
 import { useQuery } from '@apollo/client'
-import { addWeeks, endOfWeek } from 'date-fns'
+import { addWeeks, differenceInMonths, endOfMonth, endOfWeek } from 'date-fns'
 import differenceInWeeks from 'date-fns/differenceInWeeks'
+import { addMonths } from 'date-fns/esm'
 import React, { useMemo } from 'react'
 import { useRecoilValue } from 'recoil'
 
+import { CADENCE } from 'src/components/Cycle/constants'
 import { KeyResultProgressRecord } from 'src/components/KeyResult/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
@@ -16,30 +18,54 @@ type ProgressHistoryChartProperties = {
   keyResultID?: string
 }
 
-const getNumberOfWeeksInCycle = (dateStart?: string, dateEnd?: string): number => {
+const getNumberOfTicksInCycle = (
+  dateStart?: string,
+  dateEnd?: string,
+  cadence?: CADENCE,
+): number => {
   if (!dateStart || !dateEnd) return 0
+  const handlerHashmap = {
+    [CADENCE.QUARTERLY]: differenceInWeeks,
+    [CADENCE.YEARLY]: differenceInMonths,
+  }
+  const handler = handlerHashmap[cadence ?? CADENCE.QUARTERLY]
 
-  return differenceInWeeks(new Date(dateEnd), new Date(dateStart))
+  return handler(new Date(dateEnd), new Date(dateStart))
 }
 
-const getCycleWeeks = (numberOfWeeks: number, dateStart?: string): string[] => {
+const getCycleTicks = (
+  numberOfTicks: number,
+  dateStart?: string,
+  cadence: CADENCE = CADENCE.QUARTERLY,
+): string[] => {
   if (!dateStart) return []
 
-  const weekNumbers = [...new Array(numberOfWeeks).keys()]
-  const weekDays = weekNumbers.map((weekNumber) =>
-    endOfWeek(addWeeks(new Date(dateStart), weekNumber)).toString(),
-  )
+  const tickIndexes = [...new Array(numberOfTicks).keys()]
+  const weekDays = tickIndexes.map((index) => getTickDateString(dateStart, index, cadence))
 
   return weekDays.map((weekDay) => formatDate(weekDay))
 }
 
-const getWeekHashmapFromProgressHistory = (
+const getTickDateString = (rawDate: string | Date, index: number, cadence: CADENCE): string => {
+  const date = new Date(rawDate)
+  const handlerHashmap = {
+    [CADENCE.QUARTERLY]: () => endOfWeek(addWeeks(date, index)),
+    [CADENCE.YEARLY]: () => endOfMonth(addMonths(date, index)),
+  }
+
+  const handler = handlerHashmap[cadence]
+
+  return handler().toString()
+}
+
+const getTickHashmapFromProgressHistory = (
   progressHistory: KeyResultProgressRecord[],
+  cadence: CADENCE = CADENCE.QUARTERLY,
 ): Record<string, KeyResultProgressRecord> => {
   return progressHistory.reduce(
     (previous, current) => ({
       ...previous,
-      [formatDate(endOfWeek(new Date(current.date)).toString())]: current,
+      [formatDate(getTickDateString(current.date, 0, cadence))]: current,
     }),
     {},
   )
@@ -51,34 +77,33 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
 
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const cycle = keyResult?.objective?.cycle
-  const [progressHistory, setProgressHistory, _, isLoaded] =
-    useConnectionEdges<KeyResultProgressRecord>()
+  const [progressHistory, setProgressHistory] = useConnectionEdges<KeyResultProgressRecord>()
 
-  const cycleWeekCount = useMemo(
-    () => getNumberOfWeeksInCycle(cycle?.dateStart, cycle?.dateEnd),
+  const cycleTickCount = useMemo(
+    () => getNumberOfTicksInCycle(cycle?.dateStart, cycle?.dateEnd, cycle?.cadence),
     [cycle],
   )
-  const cycleWeeks = useMemo(
-    () => getCycleWeeks(cycleWeekCount, cycle?.dateStart),
-    [cycleWeekCount, cycle],
+  const cycleTicks = useMemo(
+    () => getCycleTicks(cycleTickCount, cycle?.dateStart, cycle?.cadence),
+    [cycleTickCount, cycle],
   )
 
-  const progressHistoryWeekHashmap = useMemo(
-    () => getWeekHashmapFromProgressHistory(progressHistory),
-    [progressHistory],
+  const progressHistoryTickHashmap = useMemo(
+    () => getTickHashmapFromProgressHistory(progressHistory, cycle?.cadence),
+    [progressHistory, cycle],
   )
-  const ticks = useMemo(
-    () => distributedCopy(cycleWeeks, numberOfTicks),
-    [cycleWeeks, numberOfTicks],
+  const visibleTicks = useMemo(
+    () => distributedCopy(cycleTicks, numberOfTicks),
+    [cycleTicks, numberOfTicks],
   )
 
   const data = useMemo(
     () =>
-      cycleWeeks?.map((week) => ({
-        ...progressHistoryWeekHashmap[week],
+      cycleTicks?.map((week) => ({
+        ...progressHistoryTickHashmap[week],
         [xAxisKey]: week,
       })),
-    [cycleWeeks, xAxisKey, progressHistoryWeekHashmap],
+    [cycleTicks, xAxisKey, progressHistoryTickHashmap],
   )
 
   useQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
@@ -96,7 +121,7 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
       handleDataVisualization={formatData}
       handleLabelVisualization={formatTooltipLabel}
       xAxisKey={xAxisKey}
-      xTicks={ticks}
+      xTicks={visibleTicks}
     />
   )
 }
