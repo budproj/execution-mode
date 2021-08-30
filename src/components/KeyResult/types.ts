@@ -79,3 +79,8 @@ export interface KeyResultChecklistProgress {
   numberOfChecked: number
   progress: number
 }
+
+export interface KeyResultProgressRecord extends GraphQLNode {
+  progress: number
+  date: Date
+}
