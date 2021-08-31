@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { addWeeks, differenceInMonths, endOfMonth, endOfWeek, addMonths } from 'date-fns'
+import { addWeeks, differenceInMonths, addMonths, startOfMonth, startOfWeek } from 'date-fns'
 import differenceInWeeks from 'date-fns/differenceInWeeks'
 import React, { useMemo } from 'react'
 import { IntlShape, useIntl } from 'react-intl'
@@ -12,6 +12,7 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import { ChartData, ProgressHistoryChartHumble } from './chart'
+import messages from './messages'
 import queries from './queries.gql'
 import { distributedCopy, formatData, formatDate } from './utils'
 
@@ -20,7 +21,8 @@ type ProgressHistoryChartProperties = {
 }
 
 export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProperties) => {
-  const xAxisKey = 'endOfWeek'
+  const timestamp = getTimezonedDate().toString()
+  const xAxisKey = 'label'
   const numberOfTicks = 6
 
   const intl = useIntl()
@@ -36,6 +38,10 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     () => getCycleTicks(cycleTickCount, intl, cycle?.dateStart, cycle?.cadence),
     [cycleTickCount, cycle, intl],
   )
+  const currentTick = useMemo(
+    () => formatDate(intl, timestamp, cycle?.cadence),
+    [intl, cycle, timestamp],
+  )
 
   const progressHistoryTickHashmap = useMemo(
     () => getTickHashmapFromProgressHistory(progressHistory, intl, cycle?.cadence),
@@ -46,16 +52,22 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     [cycleTicks, numberOfTicks],
   )
 
-  const data = useMemo(
-    () =>
-      cycleTicks?.map((week, index) => ({
-        progress: index === 0 ? 0 : undefined,
-        expectedProgress: (0.7 / cycleTicks.length) * index,
-        ...progressHistoryTickHashmap[week],
-        [xAxisKey]: week,
-      })),
-    [cycleTicks, xAxisKey, progressHistoryTickHashmap],
-  )
+  const data = useMemo(() => {
+    const currentTickIndex = cycleTicks.indexOf(currentTick)
+
+    return buildData(cycleTicks, currentTickIndex, xAxisKey, progressHistoryTickHashmap)
+  }, [cycleTicks, xAxisKey, progressHistoryTickHashmap, currentTick])
+
+  const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) => {
+    const prefixHashmap: Record<CADENCE, string> = {
+      [CADENCE.QUARTERLY]: intl.formatMessage(messages.quarterlyTooltipPrefix),
+      [CADENCE.YEARLY]: intl.formatMessage(messages.yearlyTooltipPrefix),
+    }
+    const prefix = prefixHashmap[cycle?.cadence ?? CADENCE.QUARTERLY]
+    const label: string = axis?.[0]?.payload?.label
+
+    return `${prefix} ${label}`
+  }
 
   useQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
     variables: {
@@ -107,13 +119,11 @@ const getCycleTicks = (
 }
 
 const getTickDateString = (rawDate: string | Date, index: number, cadence: CADENCE): string => {
-  const tzDate = new Date(rawDate)
-  const userTimezoneOffset = tzDate.getTimezoneOffset() * 60000
-  const date = new Date(tzDate.getTime() + userTimezoneOffset)
+  const date = getTimezonedDate(rawDate)
 
   const handlerHashmap = {
-    [CADENCE.QUARTERLY]: () => endOfWeek(addWeeks(date, index)),
-    [CADENCE.YEARLY]: () => endOfMonth(addMonths(date, index)),
+    [CADENCE.QUARTERLY]: () => startOfWeek(addWeeks(date, index)),
+    [CADENCE.YEARLY]: () => startOfMonth(addMonths(date, index)),
   }
 
   const handler = handlerHashmap[cadence]
@@ -137,5 +147,36 @@ const getTickHashmapFromProgressHistory = (
   }, {})
 }
 
-const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) =>
-  axis?.[0]?.payload?.endOfWeek
+const buildData = (
+  cycleTicks: string[],
+  currentTickIndex: number,
+  xAxisKey: string,
+  progressHistoryTickHashmap: Record<string, ChartData>,
+): ChartData[] =>
+  cycleTicks?.reduce<ChartData[]>((previous, tick, index) => {
+    const previousData = previous[index - 1]
+    const expectedProgress = (0.7 / (cycleTicks.length - 1)) * index
+    const historyData = progressHistoryTickHashmap[tick]
+
+    const isFirstTick = index === 0
+    const isBeforeOrCurrentTick = index <= currentTickIndex
+    const firstTickProgress = isFirstTick ? 0 : undefined
+    const fallbackProgress = isBeforeOrCurrentTick ? previousData?.visibleProgress : undefined
+    const visibleProgress = historyData?.progress ?? firstTickProgress ?? fallbackProgress
+
+    const currentData: ChartData = {
+      ...historyData,
+      expectedProgress,
+      visibleProgress,
+      [xAxisKey]: tick,
+    }
+
+    return [...previous, currentData]
+  }, [])
+
+const getTimezonedDate = (rawDate?: string | Date): Date => {
+  const tzDate = rawDate ? new Date(rawDate) : new Date()
+  const userTimezoneOffset = tzDate.getTimezoneOffset() * 60000
+
+  return new Date(tzDate.getTime() + userTimezoneOffset)
+}

@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl'
 
-type ProgressHistoryMessages = 'metricName' | 'expectedName'
+type ProgressHistoryMessages =
+  | 'metricName'
+  | 'expectedName'
+  | 'quarterlyTooltipPrefix'
+  | 'yearlyTooltipPrefix'
 
 export default defineMessages<ProgressHistoryMessages>({
   metricName: {
@@ -14,5 +18,19 @@ export default defineMessages<ProgressHistoryMessages>({
     defaultMessage: 'Esperado',
     id: 'nfdvr1',
     description: 'This message is displayed in the chart tooltip of our key-result sidebar',
+  },
+
+  quarterlyTooltipPrefix: {
+    defaultMessage: 'Semana de',
+    id: 'c8KQhI',
+    description:
+      'The prefix that appears in our chart tooltip in the key-result sidebar while seeing a quarterly key-result',
+  },
+
+  yearlyTooltipPrefix: {
+    defaultMessage: 'Mês de',
+    id: 'GrPUMn',
+    description:
+      'The prefix that appears in our chart tooltip in the key-result sidebar while seeing an yearly key-result',
   },
 })
