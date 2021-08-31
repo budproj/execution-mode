@@ -11,8 +11,8 @@ export default defineMessages<ProgressHistoryMessages>({
   },
 
   expectedName: {
-    defaultMessage: 'Progress esperado',
-    id: 'JAlm5q',
+    defaultMessage: 'Esperado',
+    id: 'nfdvr1',
     description: 'This message is displayed in the chart tooltip of our key-result sidebar',
   },
 })
