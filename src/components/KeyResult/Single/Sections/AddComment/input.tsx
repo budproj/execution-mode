@@ -1,21 +1,21 @@
+import { useQuery } from '@apollo/client'
 import { Box, IconButton, Spinner, useToken } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { MentionsInput, Mention, SuggestionDataItem } from 'react-mentions'
-import { useQuery } from '@apollo/client'
 
 import PaperPlaneIcon from 'src/components/Icon/PaperPlane'
+import { NamedAvatar } from 'src/components/User'
+import queries from 'src/components/User/AllReachableUsers/queries.gql'
+import { GetUserListQueryResult } from 'src/components/User/AllReachableUsers/wrapper'
+import { User } from 'src/components/User/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
+import { userAtomFamily } from 'src/state/recoil/user'
 
 import { KeyResultSectionAddCommentInitialValues } from './add-comment'
 import messages from './messages'
-import { NamedAvatar } from 'src/components/User'
-import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
-import { userAtomFamily } from 'src/state/recoil/user'
-import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
-import { User } from 'src/components/User/types'
-import { GetUserListQueryResult } from 'src/components/User/AllReachableUsers/wrapper'
-import queries from 'src/components/User/AllReachableUsers/queries.gql'
 
 export interface KeyResultSectionAddCommentInputProperties {
   isLoading?: boolean
@@ -25,26 +25,21 @@ export interface TextareaAutosizeContext {
   rowHeight: number
 }
 
-
 const renderSuggestion = (suggestion: SuggestionDataItem) => (
   <div>
     <NamedAvatar subtitleType="role" userID={suggestion.id.toString()} />
-  </div >
+  </div>
 )
 
-const KeyResultSectionAddCommentInput = ({ isLoading }: KeyResultSectionAddCommentInputProperties) => {
+const KeyResultSectionAddCommentInput = ({
+  isLoading,
+}: KeyResultSectionAddCommentInputProperties) => {
   const [isOnFocus, setIsOnFocus] = useState(false)
   const [numberOfRows, setNumberOfRows] = useState(1)
   const { values, setValues, isSubmitting } =
     useFormikContext<KeyResultSectionAddCommentInitialValues>()
   const intl = useIntl()
-  const [
-    brand500,
-    gray200,
-    gray400,
-    newGray200,
-    newGray300,
-  ] = useToken('colors', [
+  const [brand500, gray200, gray400, newGray200, newGray300]: string[] = useToken('colors', [
     'brand.500',
     'gray.200',
     'gray.400',
@@ -65,7 +60,7 @@ const KeyResultSectionAddCommentInput = ({ isLoading }: KeyResultSectionAddComme
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const numberOfRows = event.target.value.split('\n').length + 1
 
-    if (numberOfRows > 14) return null
+    if (numberOfRows > 14) return
 
     setNumberOfRows(numberOfRows)
     setValues({ text: event.target.value })
@@ -76,7 +71,6 @@ const KeyResultSectionAddCommentInput = ({ isLoading }: KeyResultSectionAddComme
   const [usersMention, setUsersMention] = useState<SuggestionDataItem[]>([])
   const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)
 
-
   useEffect(() => {
     if (data) setUserEdges(data.users.edges)
   }, [data])
@@ -84,10 +78,10 @@ const KeyResultSectionAddCommentInput = ({ isLoading }: KeyResultSectionAddComme
   useEffect(() => {
     if (!users) return
 
-    const usersMentionTemp = users.map(({ id, fullName }) => ({ id, display: fullName }))
+    const usersMentionTemporary = users.map(({ id, fullName }) => ({ id, display: fullName }))
 
     loadUsers(users)
-    setUsersMention(usersMentionTemp)
+    setUsersMention(usersMentionTemporary)
   }, [users])
 
   return (
@@ -105,6 +99,7 @@ const KeyResultSectionAddCommentInput = ({ isLoading }: KeyResultSectionAddComme
       py={2}
     >
       <MentionsInput
+        allowSuggestionsAboveCursor
         value={values.text}
         placeholder={intl.formatMessage(messages.placeholder)}
         style={{
@@ -133,28 +128,27 @@ const KeyResultSectionAddCommentInput = ({ isLoading }: KeyResultSectionAddComme
               '&focused': {
                 background: newGray200,
                 borderRadius: '8px',
-              }
-            }
-
-          }
+              },
+            },
+          },
         }}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange as any}
-        allowSuggestionsAboveCursor={true}
       >
         <Mention
+          appendSpaceOnAdd
           trigger="@"
           style={{
             position: 'relative',
             zIndex: 1,
             color: brand500,
-            textShadow: '1px 1px 1px white, 1px -1px 1px white, -1px 1px 1px white, -1px -1px 1px white',
+            textShadow:
+              '1px 1px 1px white, 1px -1px 1px white, -1px 1px 1px white, -1px -1px 1px white',
             pointerEvents: 'none',
           }}
           data={usersMention}
           renderSuggestion={renderSuggestion}
-          appendSpaceOnAdd={true}
         />
       </MentionsInput>
       <IconButton
@@ -185,7 +179,7 @@ const KeyResultSectionAddCommentInput = ({ isLoading }: KeyResultSectionAddComme
           boxShadow: 'none',
         }}
       />
-    </Box >
+    </Box>
   )
 }
 

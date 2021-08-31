@@ -1,5 +1,13 @@
 import { useMutation } from '@apollo/client'
-import { Flex, Popover, PopoverBody, PopoverContent, PopoverTrigger, SkeletonText, Text } from '@chakra-ui/react'
+import {
+  Flex,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  SkeletonText,
+  Text,
+} from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -7,21 +15,23 @@ import regexifyString from 'regexify-string'
 
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
 import { KeyResultComment } from 'src/components/KeyResult/types'
+import UserProfileCard from 'src/components/User/ProfileCard'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
 
 import messages from './messages'
 import queries from './queries.gql'
-import UserProfileCard from 'src/components/User/ProfileCard'
 
 export interface KeyResultSectionTimelineCardCommentProperties {
   data?: Partial<KeyResultComment>
   onEntryDelete?: (entryType: string) => void
 }
 
-const MarkedUser = ({ id, name }: { id?: string, name?: string }) => (
+const MarkedUser = ({ id, name }: { id?: string; name?: string }) => (
   <Popover placement="top-end" size="sm">
     <PopoverTrigger>
-      <Text as="span" color="brand.500" fontWeight="bold">{name}</Text>
+      <Text as="span" color="brand.500" fontWeight="bold">
+        {name}
+      </Text>
     </PopoverTrigger>
     <PopoverContent p={0}>
       <PopoverBody p={0}>
@@ -55,10 +65,10 @@ const KeyResultSectionTimelineCardComment = ({
   }
 
   const commentText = regexifyString({
-    pattern: /\@\[[\w ]+\]\([\w-]+\)/g,
+    pattern: /@\[[\w ]+]\([\w-]+\)/g,
     decorator: (match) => {
-      const regex = /\@\[([\w ]+)\]\(([\w-]+)\)/
-      const [, name, id] = regex.exec(match) || [, '', '']
+      const regex = /@\[([\w ]+)]\(([\w-]+)\)/
+      const [_, name, id] = regex.exec(match) ?? [undefined, '', '']
 
       return <MarkedUser id={id} name={name} />
     },
@@ -76,7 +86,9 @@ const KeyResultSectionTimelineCardComment = ({
     >
       <Flex gridGap={4} direction="column">
         <SkeletonText noOfLines={4} isLoaded={isLoaded}>
-          <Text fontSize="md" color="new-gray.900">{commentText}</Text>
+          <Text fontSize="md" color="new-gray.900">
+            {commentText}
+          </Text>
         </SkeletonText>
       </Flex>
     </KeyResultSectionTimelineCardBase>
