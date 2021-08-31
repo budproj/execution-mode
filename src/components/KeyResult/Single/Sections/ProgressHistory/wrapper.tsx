@@ -50,7 +50,7 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     () =>
       cycleTicks?.map((week, index) => ({
         progress: index === 0 ? 0 : undefined,
-        expectedProgress: (0.7 / cycleTicks.length) * index,
+        expectedProgress: (0.7 / (cycleTicks.length - 1)) * index,
         ...progressHistoryTickHashmap[week],
         [xAxisKey]: week,
       })),

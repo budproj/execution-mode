@@ -1227,6 +1227,10 @@
     "defaultMessage": "Editar",
     "description": "This message is displayer as soon as our user hovers the avatar"
   },
+  "nfdvr1": {
+    "defaultMessage": "Esperado",
+    "description": "This message is displayed in the chart tooltip of our key-result sidebar"
+  },
   "nnWr7M": {
     "defaultMessage": "Gênero",
     "description": "This is the label that goes on our user account settings page, at the sixth field to update the user informations"
