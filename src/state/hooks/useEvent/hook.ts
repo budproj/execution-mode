@@ -1,10 +1,14 @@
 import { useAmplitude } from '../useAmplitude/hook'
 
 import { EventType } from './event-type'
+import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
+import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
 import { PageViewEventData } from './events/page-view'
 
 type Event = {
   [EventType.PAGE_VIEW]: PageViewEventData
+  [EventType.KEY_RESULT_PROGRESS_CHART_VIEW]: KeyResultProgressChartViewEventData
+  [EventType.KEY_RESULT_CREATE_CHECKLIST]: KeyResultCreateChecklistEventData
 }
 
 interface EventHook<E extends keyof Event> {

@@ -6,6 +6,7 @@ import {
   Area,
   CartesianGrid,
   ComposedChart,
+  Line,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -15,8 +16,8 @@ import { Payload } from 'recharts/types/component/DefaultTooltipContent'
 
 import messages from './messages'
 
-type ChartData = {
-  progress: number
+export type ChartData = {
+  progress?: number
   date: Date
 }
 
@@ -88,6 +89,7 @@ export const ProgressHistoryChartHumble = ({
 
           <Area
             connectNulls
+            dot
             yAxisId="primary"
             xAxisId="primary"
             type="monotone"
@@ -98,6 +100,16 @@ export const ProgressHistoryChartHumble = ({
             stroke={brand500}
             fillOpacity={1}
             fill="url(#colorUv)"
+          />
+
+          <Line
+            dataKey="expectedProgress"
+            type="monotone"
+            dot={false}
+            stroke={newGray500}
+            strokeDasharray="5 5"
+            unit="%"
+            name={intl.formatMessage(messages.expectedName)}
           />
         </ComposedChart>
       </ResponsiveContainer>

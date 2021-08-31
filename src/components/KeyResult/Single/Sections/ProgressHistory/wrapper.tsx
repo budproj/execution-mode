@@ -11,9 +11,9 @@ import { KeyResultProgressRecord } from 'src/components/KeyResult/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
-import { ProgressHistoryChartHumble } from './chart'
+import { ChartData, ProgressHistoryChartHumble } from './chart'
 import queries from './queries.gql'
-import { distributedCopy, formatData, formatDate, formatTooltipLabel } from './utils'
+import { distributedCopy, formatData, formatDate } from './utils'
 
 type ProgressHistoryChartProperties = {
   keyResultID?: string
@@ -48,15 +48,14 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
 
   const data = useMemo(
     () =>
-      cycleTicks?.map((week) => ({
+      cycleTicks?.map((week, index) => ({
+        progress: index === 0 ? 0 : undefined,
+        expectedProgress: (0.7 / cycleTicks.length) * index,
         ...progressHistoryTickHashmap[week],
         [xAxisKey]: week,
       })),
     [cycleTicks, xAxisKey, progressHistoryTickHashmap],
   )
-
-  const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) =>
-    formatTooltipLabel(axis?.[0]?.payload?.date, intl, cycle?.cadence)
 
   useQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
     variables: {
@@ -126,7 +125,7 @@ const getTickHashmapFromProgressHistory = (
   progressHistory: KeyResultProgressRecord[],
   intl: IntlShape,
   cadence: CADENCE = CADENCE.QUARTERLY,
-): Record<string, KeyResultProgressRecord> => {
+): Record<string, ChartData> => {
   return progressHistory.reduce((previous, current) => {
     const date = getTickDateString(current.date, 0, cadence)
     const key = formatDate(intl, date, cadence)
@@ -137,3 +136,6 @@ const getTickHashmapFromProgressHistory = (
     }
   }, {})
 }
+
+const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) =>
+  axis?.[0]?.payload?.endOfWeek

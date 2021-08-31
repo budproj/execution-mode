@@ -21,6 +21,8 @@ import PercentageMask from 'src/components/KeyResult/NumberMasks/Percentage'
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
@@ -42,6 +44,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const intl = useIntl()
+  const { dispatch } = useEvent(EventType.KEY_RESULT_PROGRESS_CHART_VIEW)
 
   const [updateKeyResult, { loading }] = useMutation<UpdateKeyResultTitleMutationResult>(
     queries.UPDATE_KEY_RESULT_TITLE,
@@ -71,6 +74,8 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
 
   const handleGraphToggle = () => {
     setIsGraphOpen(!isGraphOpen)
+
+    if (!isGraphOpen && keyResultID) dispatch({ keyResultID })
   }
 
   return (
