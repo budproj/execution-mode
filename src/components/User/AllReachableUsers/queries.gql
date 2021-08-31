@@ -3,6 +3,10 @@ query GET_USER_LIST {
     edges {
       node {
         id
+        firstName
+        nickname
+        linkedInProfileAddress
+        about
         fullName
         role
         picture
