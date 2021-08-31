@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { addWeeks, differenceInMonths, endOfMonth, endOfWeek, addMonths } from 'date-fns'
+import { addWeeks, differenceInMonths, addMonths, startOfMonth, startOfWeek } from 'date-fns'
 import differenceInWeeks from 'date-fns/differenceInWeeks'
 import React, { useMemo } from 'react'
 import { IntlShape, useIntl } from 'react-intl'
@@ -12,6 +12,7 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import { ChartData, ProgressHistoryChartHumble } from './chart'
+import messages from './messages'
 import queries from './queries.gql'
 import { distributedCopy, formatData, formatDate } from './utils'
 
@@ -21,7 +22,7 @@ type ProgressHistoryChartProperties = {
 
 export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProperties) => {
   const timestamp = getTimezonedDate().toString()
-  const xAxisKey = 'endOfWeek'
+  const xAxisKey = 'label'
   const numberOfTicks = 6
 
   const intl = useIntl()
@@ -56,6 +57,17 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
 
     return buildData(cycleTicks, currentTickIndex, xAxisKey, progressHistoryTickHashmap)
   }, [cycleTicks, xAxisKey, progressHistoryTickHashmap, currentTick])
+
+  const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) => {
+    const prefixHashmap: Record<CADENCE, string> = {
+      [CADENCE.QUARTERLY]: intl.formatMessage(messages.quarterlyTooltipPrefix),
+      [CADENCE.YEARLY]: intl.formatMessage(messages.yearlyTooltipPrefix),
+    }
+    const prefix = prefixHashmap[cycle?.cadence ?? CADENCE.QUARTERLY]
+    const label: string = axis?.[0]?.payload?.label
+
+    return `${prefix} ${label}`
+  }
 
   useQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
     variables: {
@@ -110,8 +122,8 @@ const getTickDateString = (rawDate: string | Date, index: number, cadence: CADEN
   const date = getTimezonedDate(rawDate)
 
   const handlerHashmap = {
-    [CADENCE.QUARTERLY]: () => endOfWeek(addWeeks(date, index)),
-    [CADENCE.YEARLY]: () => endOfMonth(addMonths(date, index)),
+    [CADENCE.QUARTERLY]: () => startOfWeek(addWeeks(date, index)),
+    [CADENCE.YEARLY]: () => startOfMonth(addMonths(date, index)),
   }
 
   const handler = handlerHashmap[cadence]
@@ -135,9 +147,6 @@ const getTickHashmapFromProgressHistory = (
   }, {})
 }
 
-const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) =>
-  axis?.[0]?.payload?.endOfWeek
-
 const buildData = (
   cycleTicks: string[],
   currentTickIndex: number,
@@ -151,12 +160,14 @@ const buildData = (
 
     const isFirstTick = index === 0
     const isBeforeOrCurrentTick = index <= currentTickIndex
-    const fallbackProgress = isBeforeOrCurrentTick ? previousData?.progress : undefined
+    const firstTickProgress = isFirstTick ? 0 : undefined
+    const fallbackProgress = isBeforeOrCurrentTick ? previousData?.visibleProgress : undefined
+    const visibleProgress = historyData?.progress ?? firstTickProgress ?? fallbackProgress
 
     const currentData: ChartData = {
-      progress: isFirstTick ? 0 : fallbackProgress,
       ...historyData,
       expectedProgress,
+      visibleProgress,
       [xAxisKey]: tick,
     }
 

@@ -18,6 +18,7 @@ import messages from './messages'
 
 export type ChartData = {
   expectedProgress: number
+  visibleProgress?: number
   progress?: number
   date?: Date
 }
@@ -94,7 +95,7 @@ export const ProgressHistoryChartHumble = ({
             xAxisId="primary"
             type="monotone"
             unit="%"
-            dataKey="progress"
+            dataKey="visibleProgress"
             name={intl.formatMessage(messages.metricName)}
             strokeWidth={2}
             stroke={brand500}
