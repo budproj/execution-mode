@@ -17,8 +17,9 @@ import { Payload } from 'recharts/types/component/DefaultTooltipContent'
 import messages from './messages'
 
 export type ChartData = {
+  expectedProgress: number
   progress?: number
-  date: Date
+  date?: Date
 }
 
 type ProgressHistoryChartProperties = {
@@ -89,7 +90,6 @@ export const ProgressHistoryChartHumble = ({
 
           <Area
             connectNulls
-            dot
             yAxisId="primary"
             xAxisId="primary"
             type="monotone"

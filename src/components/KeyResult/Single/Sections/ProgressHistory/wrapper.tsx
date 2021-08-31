@@ -20,6 +20,7 @@ type ProgressHistoryChartProperties = {
 }
 
 export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProperties) => {
+  const timestamp = getTimezonedDate().toString()
   const xAxisKey = 'endOfWeek'
   const numberOfTicks = 6
 
@@ -36,6 +37,10 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     () => getCycleTicks(cycleTickCount, intl, cycle?.dateStart, cycle?.cadence),
     [cycleTickCount, cycle, intl],
   )
+  const currentTick = useMemo(
+    () => formatDate(intl, timestamp, cycle?.cadence),
+    [intl, cycle, timestamp],
+  )
 
   const progressHistoryTickHashmap = useMemo(
     () => getTickHashmapFromProgressHistory(progressHistory, intl, cycle?.cadence),
@@ -46,16 +51,11 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     [cycleTicks, numberOfTicks],
   )
 
-  const data = useMemo(
-    () =>
-      cycleTicks?.map((week, index) => ({
-        progress: index === 0 ? 0 : undefined,
-        expectedProgress: (0.7 / (cycleTicks.length - 1)) * index,
-        ...progressHistoryTickHashmap[week],
-        [xAxisKey]: week,
-      })),
-    [cycleTicks, xAxisKey, progressHistoryTickHashmap],
-  )
+  const data = useMemo(() => {
+    const currentTickIndex = cycleTicks.indexOf(currentTick)
+
+    return buildData(cycleTicks, currentTickIndex, xAxisKey, progressHistoryTickHashmap)
+  }, [cycleTicks, xAxisKey, progressHistoryTickHashmap, currentTick])
 
   useQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
     variables: {
@@ -107,9 +107,7 @@ const getCycleTicks = (
 }
 
 const getTickDateString = (rawDate: string | Date, index: number, cadence: CADENCE): string => {
-  const tzDate = new Date(rawDate)
-  const userTimezoneOffset = tzDate.getTimezoneOffset() * 60000
-  const date = new Date(tzDate.getTime() + userTimezoneOffset)
+  const date = getTimezonedDate(rawDate)
 
   const handlerHashmap = {
     [CADENCE.QUARTERLY]: () => endOfWeek(addWeeks(date, index)),
@@ -139,3 +137,35 @@ const getTickHashmapFromProgressHistory = (
 
 const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) =>
   axis?.[0]?.payload?.endOfWeek
+
+const buildData = (
+  cycleTicks: string[],
+  currentTickIndex: number,
+  xAxisKey: string,
+  progressHistoryTickHashmap: Record<string, ChartData>,
+): ChartData[] =>
+  cycleTicks?.reduce<ChartData[]>((previous, tick, index) => {
+    const previousData = previous[index - 1]
+    const expectedProgress = (0.7 / (cycleTicks.length - 1)) * index
+    const historyData = progressHistoryTickHashmap[tick]
+
+    const isFirstTick = index === 0
+    const isBeforeOrCurrentTick = index <= currentTickIndex
+    const fallbackProgress = isBeforeOrCurrentTick ? previousData?.progress : undefined
+
+    const currentData: ChartData = {
+      progress: isFirstTick ? 0 : fallbackProgress,
+      ...historyData,
+      expectedProgress,
+      [xAxisKey]: tick,
+    }
+
+    return [...previous, currentData]
+  }, [])
+
+const getTimezonedDate = (rawDate?: string | Date): Date => {
+  const tzDate = rawDate ? new Date(rawDate) : new Date()
+  const userTimezoneOffset = tzDate.getTimezoneOffset() * 60000
+
+  return new Date(tzDate.getTime() + userTimezoneOffset)
+}
