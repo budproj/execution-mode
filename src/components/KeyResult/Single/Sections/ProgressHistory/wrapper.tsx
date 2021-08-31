@@ -13,7 +13,7 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import { ChartData, ProgressHistoryChartHumble } from './chart'
 import queries from './queries.gql'
-import { distributedCopy, formatData, formatDate, formatTooltipLabel } from './utils'
+import { distributedCopy, formatData, formatDate } from './utils'
 
 type ProgressHistoryChartProperties = {
   keyResultID?: string
@@ -56,9 +56,6 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
       })),
     [cycleTicks, xAxisKey, progressHistoryTickHashmap],
   )
-
-  const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) =>
-    formatTooltipLabel(axis?.[0]?.payload?.date, intl, cycle?.cadence)
 
   useQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
     variables: {
@@ -139,3 +136,6 @@ const getTickHashmapFromProgressHistory = (
     }
   }, {})
 }
+
+const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) =>
+  axis?.[0]?.payload?.endOfWeek
