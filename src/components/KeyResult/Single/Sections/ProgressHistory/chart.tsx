@@ -15,8 +15,8 @@ import { Payload } from 'recharts/types/component/DefaultTooltipContent'
 
 import messages from './messages'
 
-type ChartData = {
-  progress: number
+export type ChartData = {
+  progress?: number
   date: Date
 }
 
