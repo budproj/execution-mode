@@ -38,10 +38,11 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     () => getCycleTicks(cycleTickCount, intl, cycle?.dateStart, cycle?.cadence),
     [cycleTickCount, cycle, intl],
   )
-  const currentTick = useMemo(
-    () => formatDate(intl, timestamp, cycle?.cadence),
-    [intl, cycle, timestamp],
-  )
+  const currentTick = useMemo(() => {
+    const currentTickDate = getTickDateString(timestamp, 0, cycle?.cadence ?? CADENCE.QUARTERLY)
+
+    return formatDate(intl, currentTickDate, cycle?.cadence)
+  }, [intl, cycle, timestamp])
 
   const progressHistoryTickHashmap = useMemo(
     () => getTickHashmapFromProgressHistory(progressHistory, intl, cycle?.cadence),
@@ -54,6 +55,7 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
 
   const data = useMemo(() => {
     const currentTickFoundIndex = cycleTicks.indexOf(currentTick)
+    console.log(currentTick, currentTickFoundIndex, 'tag')
     const currentTickIndex =
       currentTickFoundIndex === -1 ? cycleTicks.length - 1 : currentTickFoundIndex
 

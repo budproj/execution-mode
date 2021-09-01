@@ -647,6 +647,10 @@
     "defaultMessage": "{completed}/{total}",
     "description": "This messages is displayed in our our key-result drawer above the checklist as the count of total completed checkmarks"
   },
+  "O4iDCM": {
+    "defaultMessage": "Progresso",
+    "description": "The title of the progress section in our key-result sidebar"
+  },
   "OEfoTC": {
     "defaultMessage": "Um ícone de setas entrelaçadas. Ao clicar aqui você irá editar esse campo",
     "description": "This message is used by screen readers when the user is focusing on the component which contains the user name and picture. This component is used in multiple places, like: our header, the key-result drawers, and other"
