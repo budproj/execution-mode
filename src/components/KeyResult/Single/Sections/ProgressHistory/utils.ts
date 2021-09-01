@@ -8,19 +8,31 @@ export const formatDate = (
   intl: IntlShape,
   rawDate?: string,
   cadence: CADENCE = CADENCE.QUARTERLY,
+  style: 'short' | 'long' = 'short',
 ) => {
   const date = rawDate && rawDate !== '' ? new Date(rawDate) : new Date()
-  const optionsHashmap: Record<string, FormatDateOptions> = {
+  const optionsHashmap: Record<string, Record<string, FormatDateOptions>> = {
     [CADENCE.QUARTERLY]: {
-      day: '2-digit',
-      month: '2-digit',
+      short: {
+        day: '2-digit',
+        month: '2-digit',
+      },
+      long: {
+        day: '2-digit',
+        month: '2-digit',
+      },
     },
     [CADENCE.YEARLY]: {
-      month: 'short',
+      short: {
+        month: 'short',
+      },
+      long: {
+        month: 'long',
+      },
     },
   }
 
-  const options = optionsHashmap[cadence]
+  const options = optionsHashmap[cadence][style]
 
   return intl.formatDate(date, options)
 }

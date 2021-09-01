@@ -18,6 +18,7 @@ import messages from './messages'
 
 export type ChartData = {
   expectedProgress: number
+  tooltip: string
   visibleProgress?: number
   progress?: number
   date?: Date

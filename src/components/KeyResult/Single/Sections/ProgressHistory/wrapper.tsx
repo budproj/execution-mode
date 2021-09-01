@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { addWeeks, differenceInMonths, addMonths, startOfMonth, startOfWeek } from 'date-fns'
 import differenceInWeeks from 'date-fns/differenceInWeeks'
+import { zip } from 'lodash'
 import React, { useMemo } from 'react'
 import { IntlShape, useIntl } from 'react-intl'
 import { Payload } from 'recharts/types/component/DefaultTooltipContent'
@@ -35,9 +36,14 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     [cycle],
   )
   const cycleTicks = useMemo(
-    () => getCycleTicks(cycleTickCount, intl, cycle?.dateStart, cycle?.cadence),
+    () => getCycleParts(cycleTickCount, intl, cycle?.dateStart, cycle?.cadence),
     [cycleTickCount, cycle, intl],
   )
+  const cycleLabels = useMemo(
+    () => getCycleParts(cycleTickCount, intl, cycle?.dateStart, cycle?.cadence, 'long'),
+    [cycleTickCount, cycle, intl],
+  )
+
   const currentTick = useMemo(() => {
     const currentTickDate = getTickDateString(timestamp, 0, cycle?.cadence ?? CADENCE.QUARTERLY)
 
@@ -55,12 +61,17 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
 
   const data = useMemo(() => {
     const currentTickFoundIndex = cycleTicks.indexOf(currentTick)
-    console.log(currentTick, currentTickFoundIndex, 'tag')
     const currentTickIndex =
       currentTickFoundIndex === -1 ? cycleTicks.length - 1 : currentTickFoundIndex
 
-    return buildData(cycleTicks, currentTickIndex, xAxisKey, progressHistoryTickHashmap)
-  }, [cycleTicks, xAxisKey, progressHistoryTickHashmap, currentTick])
+    return buildData(
+      cycleTicks,
+      currentTickIndex,
+      xAxisKey,
+      progressHistoryTickHashmap,
+      cycleLabels,
+    )
+  }, [cycleTicks, xAxisKey, progressHistoryTickHashmap, currentTick, cycleLabels])
 
   const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) => {
     const prefixHashmap: Record<CADENCE, string> = {
@@ -68,7 +79,7 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
       [CADENCE.YEARLY]: intl.formatMessage(messages.yearlyTooltipPrefix),
     }
     const prefix = prefixHashmap[cycle?.cadence ?? CADENCE.QUARTERLY]
-    const label: string = axis?.[0]?.payload?.label
+    const label: string = axis?.[0]?.payload?.tooltip
 
     return `${prefix} ${label}`
   }
@@ -108,18 +119,20 @@ const getNumberOfTicksInCycle = (
   return handler(new Date(dateEnd), new Date(dateStart))
 }
 
-const getCycleTicks = (
-  numberOfTicks: number,
+const getCycleParts = (
+  numberOfParts: number,
   intl: IntlShape,
   dateStart?: string,
   cadence: CADENCE = CADENCE.QUARTERLY,
+  style: 'short' | 'long' = 'short',
+  // eslint-disable-next-line max-params
 ): string[] => {
   if (!dateStart) return []
 
-  const tickIndexes = [...new Array(numberOfTicks + 1).keys()]
-  const ticks = tickIndexes.map((index) => getTickDateString(dateStart, index, cadence))
+  const partIndexes = [...new Array(numberOfParts + 1).keys()]
+  const parts = partIndexes.map((index) => getTickDateString(dateStart, index, cadence))
 
-  return ticks.map((tick) => formatDate(intl, tick, cadence))
+  return parts.map((part) => formatDate(intl, part, cadence, style))
 }
 
 const getTickDateString = (rawDate: string | Date, index: number, cadence: CADENCE): string => {
@@ -156,8 +169,12 @@ const buildData = (
   currentTickIndex: number,
   xAxisKey: string,
   progressHistoryTickHashmap: Record<string, ChartData>,
-): ChartData[] =>
-  cycleTicks?.reduce<ChartData[]>((previous, tick, index) => {
+  cycleLabels: string[],
+  // eslint-disable-next-line max-params
+): ChartData[] => {
+  const zippedTicks = zip(cycleTicks, cycleLabels) as Array<[string, string]>
+
+  return zippedTicks?.reduce<ChartData[]>((previous, [tick, tooltip], index) => {
     const previousData = previous[index - 1]
     const expectedProgress = (0.7 / (cycleTicks.length - 1)) * index
     const historyData = progressHistoryTickHashmap[tick]
@@ -172,11 +189,13 @@ const buildData = (
       ...historyData,
       expectedProgress,
       visibleProgress,
+      tooltip,
       [xAxisKey]: tick,
     }
 
     return [...previous, currentData]
   }, [])
+}
 
 const getTimezonedDate = (rawDate?: string | Date): Date => {
   const tzDate = rawDate ? new Date(rawDate) : new Date()
