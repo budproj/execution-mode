@@ -77,7 +77,6 @@ export const ProgressHistoryChartHumble = ({
             ticks={xTicks}
             interval="preserveStartEnd"
           />
-          <XAxis orientation="top" stroke={newGray400} height={1} tickLine={false} />
 
           <YAxis
             yAxisId="primary"
@@ -85,9 +84,8 @@ export const ProgressHistoryChartHumble = ({
             ticks={[0.25, 0.5, 0.75, 1]}
             tickLine={false}
             stroke={newGray400}
-            width={1}
+            width={0}
           />
-          <YAxis orientation="right" stroke={newGray400} width={1} tickLine={false} />
 
           <Area
             connectNulls
@@ -104,6 +102,8 @@ export const ProgressHistoryChartHumble = ({
           />
 
           <Line
+            yAxisId="primary"
+            xAxisId="primary"
             dataKey="expectedProgress"
             type="monotone"
             dot={false}

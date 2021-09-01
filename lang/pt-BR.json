@@ -479,6 +479,10 @@
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
   },
+  "GrPUMn": {
+    "defaultMessage": "Mês de",
+    "description": "The prefix that appears in our chart tooltip in the key-result sidebar while seeing an yearly key-result"
+  },
   "Gt9Z3F": {
     "defaultMessage": "Página não encontrada | bud",
     "description": "The page title of our not found error page that is displayed in the browser tab"
@@ -958,6 +962,10 @@
   "bqCVp4": {
     "defaultMessage": "Clique aqui para começar a escrever um comentário",
     "description": "This is the title text that is displayed if the user hovers the mouse in it"
+  },
+  "c8KQhI": {
+    "defaultMessage": "Semana de",
+    "description": "The prefix that appears in our chart tooltip in the key-result sidebar while seeing a quarterly key-result"
   },
   "c8UE59": {
     "defaultMessage": "Um ícone de busca",
