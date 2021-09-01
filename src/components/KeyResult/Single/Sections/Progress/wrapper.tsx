@@ -12,6 +12,7 @@ import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
+import { KeyResultSectionHeading } from '../Heading/wrapper'
 import { ProgressHistoryChart } from '../ProgressHistory/wrapper'
 
 import messages from './messages'
@@ -38,6 +39,8 @@ export const KeyResultProgress = ({ keyResultID }: KeyResultProgressProperties) 
   return (
     <>
       <Stack spacing={4} direction="row" alignItems="center">
+        <KeyResultSectionHeading>{intl.formatMessage(messages.heading)}</KeyResultSectionHeading>
+
         <Skeleton isLoaded={isLoaded} flexGrow={1} display="flex">
           <ProgressSlider isDisabled id={keyResult?.id} isActive={isActive} />
         </Skeleton>
