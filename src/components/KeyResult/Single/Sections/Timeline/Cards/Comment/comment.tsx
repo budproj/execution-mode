@@ -1,21 +1,35 @@
 import { useMutation } from '@apollo/client'
-import { Flex, SkeletonText } from '@chakra-ui/react'
+import { Flex, Popover, PopoverBody, PopoverContent, PopoverTrigger, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
+import regexifyString from 'regexify-string'
 
-import ExpandableText from 'src/components/Base/ExpandableText'
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
 import { KeyResultComment } from 'src/components/KeyResult/types'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
 
 import messages from './messages'
 import queries from './queries.gql'
+import UserProfileCard from 'src/components/User/ProfileCard'
 
 export interface KeyResultSectionTimelineCardCommentProperties {
   data?: Partial<KeyResultComment>
   onEntryDelete?: (entryType: string) => void
 }
+
+const MarkedUser = ({ id, name }: { id?: string, name?: string }) => (
+  <Popover placement="top-end" size="sm">
+    <PopoverTrigger>
+      <Text as="span" color="brand.500" fontWeight="bold">{name}</Text>
+    </PopoverTrigger>
+    <PopoverContent p={0}>
+      <PopoverBody p={0}>
+        <UserProfileCard userID={id} />
+      </PopoverBody>
+    </PopoverContent>
+  </Popover>
+)
 
 const KeyResultSectionTimelineCardComment = ({
   data,
@@ -40,6 +54,17 @@ const KeyResultSectionTimelineCardComment = ({
     if (onEntryDelete) onEntryDelete(intlCardType)
   }
 
+  const commentText = regexifyString({
+    pattern: /\@\[[\w ]+\]\([\w-]+\)/g,
+    decorator: (match) => {
+      const regex = /\@\[([\w ]+)\]\(([\w-]+)\)/
+      const [, name, id] = regex.exec(match) || [, '', '']
+
+      return <MarkedUser id={id} name={name} />
+    },
+    input: data?.text ?? '',
+  })
+
   return (
     <KeyResultSectionTimelineCardBase
       user={data?.user}
@@ -51,7 +76,7 @@ const KeyResultSectionTimelineCardComment = ({
     >
       <Flex gridGap={4} direction="column">
         <SkeletonText noOfLines={4} isLoaded={isLoaded}>
-          <ExpandableText text={data?.text ?? ''} fontSize="md" color="new-gray.900" />
+          <Text fontSize="md" color="new-gray.900">{commentText}</Text>
         </SkeletonText>
       </Flex>
     </KeyResultSectionTimelineCardBase>

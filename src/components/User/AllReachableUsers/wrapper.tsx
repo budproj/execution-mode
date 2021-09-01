@@ -16,7 +16,7 @@ interface AllReachableUsersProperties {
   avatarSubtitleType?: NamedAvatarSubtitleType
 }
 
-interface GetUserListQueryResult {
+export interface GetUserListQueryResult {
   users: GraphQLConnection<User>
 }
 
