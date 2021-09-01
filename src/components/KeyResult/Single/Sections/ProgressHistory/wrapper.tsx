@@ -53,7 +53,9 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
   )
 
   const data = useMemo(() => {
-    const currentTickIndex = cycleTicks.indexOf(currentTick)
+    const currentTickFoundIndex = cycleTicks.indexOf(currentTick)
+    const currentTickIndex =
+      currentTickFoundIndex === -1 ? cycleTicks.length - 1 : currentTickFoundIndex
 
     return buildData(cycleTicks, currentTickIndex, xAxisKey, progressHistoryTickHashmap)
   }, [cycleTicks, xAxisKey, progressHistoryTickHashmap, currentTick])
