@@ -71,6 +71,9 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
       >
         <Divider borderColor="gray.100" />
 
+        <KeyResultProgress keyResultID={keyResultID} />
+        <Divider borderColor="gray.100" />
+
         <Stack direction="row">
           <Box flexGrow={1}>
             <KeyResultSingleSectionGoal keyResultID={keyResultID} isLoading={isLoading} />
@@ -80,9 +83,6 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
             <KeyResultSingleSectionDeadline keyResultID={keyResultID} isLoading={isLoading} />
           </Box>
         </Stack>
-        <Divider borderColor="gray.100" />
-
-        <KeyResultProgress keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
 
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
