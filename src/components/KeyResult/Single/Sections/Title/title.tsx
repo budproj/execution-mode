@@ -57,7 +57,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   return (
     <Stack spacing={0}>
       <Flex gridGap={4} alignItems="flex-start">
-        <Skeleton borderRadius={10} isLoaded={isLoaded}>
+        <Skeleton borderRadius={10} isLoaded={isLoaded} pb={4}>
           <KeyResultDynamicIcon
             title={keyResult?.title}
             iconSize={7}
