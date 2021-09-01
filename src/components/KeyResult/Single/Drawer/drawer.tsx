@@ -1,4 +1,4 @@
-import { Drawer, DrawerOverlay } from '@chakra-ui/react'
+import { Drawer, DrawerOverlay, useToken } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
@@ -35,9 +35,16 @@ const KeyResultDrawer = () => {
 
   const isOpen = Boolean(keyResultID)
 
+  const [newGray800]: string[] = useToken('colors', ['new-gray.800'])
+
+  // This is a hack to possible use transparency in our color palette
+  // B3 is the alfa channel for 70% transparency
+  // TODO: modify our color palette to use transparencies
+  const newGray800WithTransparency = `${newGray800}B3`
+
   return (
     <Drawer isOpen={isOpen} size="xl" autoFocus={false} onClose={handleClose}>
-      <DrawerOverlay>
+      <DrawerOverlay backgroundColor={newGray800WithTransparency}>
         {isOpen && typeof keyResultID !== 'undefined' && (
           <KeyResultDrawerContent keyResultID={keyResultID} />
         )}
