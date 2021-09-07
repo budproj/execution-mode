@@ -1,3 +1,4 @@
+import { uniqBy } from 'lodash'
 import { useCallback, useState } from 'react'
 import { Resetter, useRecoilState, useResetRecoilState } from 'recoil'
 
@@ -59,7 +60,11 @@ export const useCycleFilters = (id: string, initialCycles?: Cycle[]): CycleFilte
 
   const updateCycles = useCallback(
     (cycles: Cycle[] = []) => {
-      setCycles(cycles)
+      const cyclesWithParent = cycles.filter((cycle) => Boolean(cycle.parent))
+      const parents = cyclesWithParent.map((cycle) => cycle.parent) as Cycle[]
+      const flattenedCycles = uniqBy([...cycles, ...parents], 'id')
+
+      setCycles(flattenedCycles)
       setFilteredCycles(filterCycles(cycles, filters))
       if (!isLoaded) setIsLoaded(true)
     },

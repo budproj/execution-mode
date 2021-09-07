@@ -1,16 +1,17 @@
-import { useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import { addWeeks, differenceInMonths, addMonths, startOfMonth, startOfWeek } from 'date-fns'
 import differenceInWeeks from 'date-fns/differenceInWeeks'
 import { zip } from 'lodash'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { IntlShape, useIntl } from 'react-intl'
 import { Payload } from 'recharts/types/component/DefaultTooltipContent'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { CADENCE } from 'src/components/Cycle/constants'
 import { KeyResultProgressRecord } from 'src/components/KeyResult/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { selectSyncedFragment } from 'src/state/recoil/key-result/synced-fragments'
 
 import { ChartData, ProgressHistoryChartHumble } from './chart'
 import messages from './messages'
@@ -28,9 +29,15 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
 
   const intl = useIntl()
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
-  const cycle = keyResult?.objective?.cycle
   const [progressHistory, setProgressHistory] = useConnectionEdges<KeyResultProgressRecord>()
 
+  const fragmentSelector = useMemo(
+    () => selectSyncedFragment('progressHistory')(keyResultID),
+    [keyResultID],
+  )
+  const [isSynced, setIsSynced] = useRecoilState(fragmentSelector)
+
+  const cycle = keyResult?.objective?.cycle
   const cycleTickCount = useMemo(
     () => getNumberOfTicksInCycle(cycle?.dateStart, cycle?.dateEnd, cycle?.cadence),
     [cycle],
@@ -84,14 +91,21 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     return `${prefix} ${label}`
   }
 
-  useQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
+  const [fetchProgressHistory] = useLazyQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
+    fetchPolicy: 'network-only',
     variables: {
       keyResultID,
     },
     onCompleted: (data) => {
+      console.log('tag')
       setProgressHistory(data.keyResult.progressHistory.edges)
+      setIsSynced(true)
     },
   })
+
+  useEffect(() => {
+    if (!isSynced) fetchProgressHistory()
+  }, [isSynced, fetchProgressHistory])
 
   return (
     <ProgressHistoryChartHumble
