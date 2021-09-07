@@ -1,7 +1,7 @@
 import { Skeleton, Button, Collapse, Flex, Heading } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import CheckInForm from 'src/components/KeyResult/CheckInForm'
 import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
@@ -9,6 +9,7 @@ import { KeyResultSectionTimelineCardBase } from 'src/components/KeyResult/Singl
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+import { syncedFragments } from 'src/state/recoil/key-result/synced-fragments'
 
 import messages from './messages'
 
@@ -26,6 +27,7 @@ const KeyResultSectionAddCheckIn = ({
   const [isOpen, setIsOpen] = useState(false)
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
+  const resetSyncedFragments = useResetRecoilState(syncedFragments(keyResultID))
   const intl = useIntl()
 
   const isLoaded = typeof latestKeyResultCheckIn?.value !== 'undefined'
@@ -42,6 +44,7 @@ const KeyResultSectionAddCheckIn = ({
   const handleSubmit = (values: CheckInFormValues) => {
     if (values.valueNew) setDraftValue(values.valueNew)
     setIsOpen(false)
+    resetSyncedFragments()
   }
 
   return (
