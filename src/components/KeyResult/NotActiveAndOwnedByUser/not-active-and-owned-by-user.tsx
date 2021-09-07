@@ -1,13 +1,10 @@
 import { useLazyQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
-import filter from 'lodash/filter'
 import flatten from 'lodash/flatten'
 import uniqBy from 'lodash/uniqBy'
 import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { ResetButton } from 'src/components/Base'
-import CycleFilter from 'src/components/Cycle/Filter'
 import { Cycle } from 'src/components/Cycle/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { GraphQLConnection, GraphQLEdge } from 'src/components/types'
@@ -64,15 +61,11 @@ const KeyResultNotActiveAndOwnedByUser = ({
   const [loadCycles, { isLoaded: isLoadedOnRecoil }] = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
 
-  const [cycles, setCycleEdges, _, isCycleConnectionLoaded] = useConnectionEdges<Cycle>()
-  const [keyResults, setKeyResultEdges, __, isKeyResultConnectionLoaded] =
+  const [cycles, setCycleEdges, __, isCycleConnectionLoaded] = useConnectionEdges<Cycle>()
+  const [keyResults, setKeyResultEdges, ___, isKeyResultConnectionLoaded] =
     useConnectionEdges<KeyResult>()
 
-  const [
-    filteredCycles,
-    filters,
-    { applyYearFilter, applyQuarterFilter, resetFilters, updateCycles, isLoaded },
-  ] = useCycleFilters(userID)
+  const [filteredCycles, _, { updateCycles, isLoaded }] = useCycleFilters(userID)
 
   const [fetchUserActiveCycles] = useLazyQuery<GetKeyResultNotActiveAndOwnedByUserWithBindingQuery>(
     queries.GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES,
@@ -90,11 +83,6 @@ const KeyResultNotActiveAndOwnedByUser = ({
       },
     },
   )
-
-  const yearlyCycles =
-    cycles.length > 0
-      ? uniqBy(filter(cycles.map((cycle) => cycle.parent)) as Cycle[], 'id')
-      : undefined
 
   useEffect(() => {
     if (userID) fetchUserActiveCycles()
@@ -114,16 +102,6 @@ const KeyResultNotActiveAndOwnedByUser = ({
 
   return (
     <Stack direction="column" spacing={8}>
-      <Stack direction="row" alignItems="center" spacing={4}>
-        <CycleFilter
-          activeFilters={filters}
-          yearOptions={yearlyCycles}
-          onYearFilter={applyYearFilter}
-          onQuarterFilter={applyQuarterFilter}
-        />
-        <ResetButton onClick={resetFilters} />
-      </Stack>
-
       <Stack direction="column" gridGap={8}>
         {isLoaded ? (
           <KeyResultNotActiveAndOwnedByUserCyclesList
