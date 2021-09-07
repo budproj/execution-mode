@@ -42,11 +42,7 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
   const [objectiveEdges, setObjectiveEdges, _, isConnectionLoaded] = useConnectionEdges<Objective>()
   const [objectiveCycles, setCycleObjectives, cycleObjectives] = useCycleObjectives()
 
-  const [
-    filteredCycles,
-    filters,
-    { applyYearFilter, applyQuarterFilter, updateCycles, isLoaded, cycles },
-  ] = useCycleFilters(teamID)
+  const [filteredCycles, __, { updateCycles, isLoaded, cycles }] = useCycleFilters(teamID)
 
   const handleClose = () => {
     setObjectivesViewMode(ObjectivesViewMode.ACTIVE)
@@ -82,13 +78,7 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
 
   return (
     <Stack spacing={12} h="full">
-      <TimeMachineController
-        filters={filters}
-        cycles={cycles}
-        onYearFilter={applyYearFilter}
-        onQuarterFilter={applyQuarterFilter}
-        onClose={handleClose}
-      />
+      <TimeMachineController onClose={handleClose} />
 
       {isLoaded ? (
         filteredObjectiveCycles.length === 0 ? (
