@@ -38,9 +38,9 @@ const KeyResultDrawer = () => {
   const [newGray800]: string[] = useToken('colors', ['new-gray.800'])
 
   // This is a hack to possible use transparency in our color palette
-  // B3 is the alfa channel for 70% transparency
+  // 80 is the alfa channel for 50% transparency
   // TODO: modify our color palette to use transparencies
-  const newGray800WithTransparency = `${newGray800}B3`
+  const newGray800WithTransparency = `${newGray800}80`
 
   return (
     <Drawer isOpen={isOpen} size="xl" autoFocus={false} onClose={handleClose}>

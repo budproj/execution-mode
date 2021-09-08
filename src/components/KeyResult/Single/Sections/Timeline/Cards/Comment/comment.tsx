@@ -29,7 +29,7 @@ export interface KeyResultSectionTimelineCardCommentProperties {
 const MarkedUser = ({ id, name }: { id?: string; name?: string }) => (
   <Popover placement="top-end" size="sm">
     <PopoverTrigger>
-      <Text as="span" color="brand.500" fontWeight="bold">
+      <Text as="span" color="brand.500" cursor="pointer">
         {name}
       </Text>
     </PopoverTrigger>
@@ -65,9 +65,9 @@ const KeyResultSectionTimelineCardComment = ({
   }
 
   const commentText = regexifyString({
-    pattern: /@\[[\w ]+]\([\w-]+\)/g,
+    pattern: /@\[[ A-Za-z\u00C0-\u00FF]+]\([A-Za-z\u00C0-\u00FF-]+\)/g,
     decorator: (match) => {
-      const regex = /@\[([\w ]+)]\(([\w-]+)\)/
+      const regex = /@\[([ A-Za-z\u00C0-\u00FF]+)]\(([A-Za-z\u00C0-\u00FF-]+)\)/
       const [_, name, id] = regex.exec(match) ?? [undefined, '', '']
 
       return <MarkedUser id={id} name={name} />

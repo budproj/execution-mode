@@ -1,4 +1,4 @@
-import { AlertDialog, AlertDialogContent, AlertDialogOverlay } from '@chakra-ui/react'
+import { AlertDialog, AlertDialogContent, AlertDialogOverlay, useToken } from '@chakra-ui/react'
 import React, { useRef, useState } from 'react'
 
 import { ConfirmationMessage } from './confirmation-message'
@@ -25,6 +25,12 @@ export const ConfirmationDialog = ({
 }: ConfirmationDialogProperties) => {
   const [isShowingDangeousConfirmation, setIsShowingDangerousConfirmation] = useState(false)
   const cancelReference = useRef<any>()
+  const [newGray800]: string[] = useToken('colors', ['new-gray.800'])
+
+  // This is a hack to possible use transparency in our color palette
+  // 80 is the alfa channel for 50% transparency
+  // TODO: modify our color palette to use transparencies
+  const newGray800WithTransparency = `${newGray800}80`
 
   const handleDangerousConfirmation = () => {
     setIsShowingDangerousConfirmation(true)
@@ -34,7 +40,7 @@ export const ConfirmationDialog = ({
 
   return (
     <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelReference} size="2xl" onClose={onClose}>
-      <AlertDialogOverlay>
+      <AlertDialogOverlay backgroundColor={newGray800WithTransparency}>
         <AlertDialogContent px={8} py={16} display="flex" gridGap={8} alignItems="center">
           {isShowingDangeousConfirmation ? (
             <DangerousMessage
