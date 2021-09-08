@@ -27,7 +27,12 @@ export interface TextareaAutosizeContext {
 
 const renderSuggestion = (suggestion: SuggestionDataItem) => (
   <div>
-    <NamedAvatar subtitleType="role" userID={suggestion.id.toString()} />
+    <NamedAvatar
+      canHover
+      nameColor="black.900"
+      subtitleType="role"
+      userID={suggestion.id.toString()}
+    />
   </div>
 )
 
@@ -122,6 +127,8 @@ const KeyResultSectionAddCommentInput = ({
               width: '421px',
               borderRadius: '8px',
               boxShadow: shadow,
+              maxHeight: '50vh',
+              overflowY: 'auto',
             },
             item: {
               padding: '6px',
