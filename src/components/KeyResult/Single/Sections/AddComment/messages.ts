@@ -20,8 +20,8 @@ export default defineMessages<KeyResultsSectionAddCommentMessage>({
   },
 
   placeholder: {
-    defaultMessage: 'Clique aqui para comentar :)',
-    id: 'kOLcvX',
+    defaultMessage: 'Comente aqui! Para marcar alguém, use @ :)',
+    id: 'MgJJAJ',
     description:
       'This text is displayed in our comment input in our key result drawers when it has no value',
   },

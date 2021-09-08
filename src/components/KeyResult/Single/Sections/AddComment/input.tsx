@@ -44,13 +44,16 @@ const KeyResultSectionAddCommentInput = ({
   const { values, setValues, isSubmitting } =
     useFormikContext<KeyResultSectionAddCommentInitialValues>()
   const intl = useIntl()
-  const [brand500, gray200, gray400, newGray200, newGray300]: string[] = useToken('colors', [
-    'brand.500',
-    'gray.200',
-    'gray.400',
-    'new-gray.200',
-    'new-gray.300',
-  ])
+  const [brand500, gray200, gray400, newGray200, newGray300, newGray700, newGray900]: string[] =
+    useToken('colors', [
+      'brand.500',
+      'gray.200',
+      'gray.400',
+      'new-gray.200',
+      'new-gray.300',
+      'new-gray.700',
+      'new-gray.900',
+    ])
 
   const [shadow] = useToken('shadows', ['for-background.medium'])
 
@@ -95,7 +98,7 @@ const KeyResultSectionAddCommentInput = ({
       flexGrow={1}
       transition="0.2s box-shadow ease-in"
       overflow="visible"
-      fontSize="sm"
+      fontSize="md"
       color={gray400}
       borderColor={isOnFocus ? brand500 : gray200}
       boxShadow={isOnFocus ? '0 0 0 1px #6F6EFF' : 'none'}
@@ -112,6 +115,7 @@ const KeyResultSectionAddCommentInput = ({
             resize: 'none',
             width: '100%',
             outline: 'none',
+            color: newGray900,
           },
           suggestions: {
             top: 'auto',
@@ -150,6 +154,8 @@ const KeyResultSectionAddCommentInput = ({
             position: 'relative',
             zIndex: 1,
             color: brand500,
+            left: -1,
+            top: -1,
             textShadow:
               '1px 1px 1px white, 1px -1px 1px white, -1px 1px 1px white, -1px -1px 1px white',
             pointerEvents: 'none',

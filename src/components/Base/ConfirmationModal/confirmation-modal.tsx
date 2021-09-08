@@ -6,6 +6,7 @@ import {
   Button,
   Flex,
   Heading,
+  useToken,
 } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -32,6 +33,12 @@ const ConfirmationModal = ({
   cancelButtonText,
 }: ConfirmationModalProperties) => {
   const intl = useIntl()
+  const [newGray800]: string[] = useToken('colors', ['new-gray.800'])
+
+  // This is a hack to possible use transparency in our color palette
+  // 80 is the alfa channel for 50% transparency
+  // TODO: modify our color palette to use transparencies
+  const newGray800WithTransparency = `${newGray800}80`
 
   return (
     <Modal
@@ -40,7 +47,7 @@ const ConfirmationModal = ({
       portalProps={{ appendToParentPortal: false }}
       onClose={onClose}
     >
-      <ModalOverlay />
+      <ModalOverlay backgroundColor={newGray800WithTransparency} />
       <ModalContent>
         <ModalBody>
           <Flex direction="column" gridGap={12}>

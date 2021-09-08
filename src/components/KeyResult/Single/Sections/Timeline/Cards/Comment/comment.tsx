@@ -29,7 +29,7 @@ export interface KeyResultSectionTimelineCardCommentProperties {
 const MarkedUser = ({ id, name }: { id?: string; name?: string }) => (
   <Popover placement="top-end" size="sm">
     <PopoverTrigger>
-      <Text as="span" color="brand.500" fontWeight="bold">
+      <Text as="span" color="brand.500" cursor="pointer">
         {name}
       </Text>
     </PopoverTrigger>
