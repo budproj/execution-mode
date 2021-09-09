@@ -44,16 +44,10 @@ const KeyResultSectionAddCommentInput = ({
   const { values, setValues, isSubmitting } =
     useFormikContext<KeyResultSectionAddCommentInitialValues>()
   const intl = useIntl()
-  const [brand500, gray200, gray400, newGray200, newGray300, newGray700, newGray900]: string[] =
-    useToken('colors', [
-      'brand.500',
-      'gray.200',
-      'gray.400',
-      'new-gray.200',
-      'new-gray.300',
-      'new-gray.700',
-      'new-gray.900',
-    ])
+  const [brand500, gray200, gray400, newGray200, newGray300, newGray900]: string[] = useToken(
+    'colors',
+    ['brand.500', 'gray.200', 'gray.400', 'new-gray.200', 'new-gray.300', 'new-gray.900'],
+  )
 
   const [shadow] = useToken('shadows', ['for-background.medium'])
 
