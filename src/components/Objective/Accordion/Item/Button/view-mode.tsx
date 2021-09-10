@@ -34,7 +34,14 @@ export const ViewMode = ({ objective, isLoaded, teamID, isDisabled }: ViewModePr
         </Heading>
       </Skeleton>
 
-      <Stack justifyContent="flex-end" direction="row" alignItems="center" spacing="8" flexGrow={1}>
+      <Stack
+        justifyContent="flex-end"
+        direction="row"
+        alignItems="center"
+        spacing="8"
+        flexGrow={1}
+        flexShrink={0}
+      >
         {!isDisabled && (
           <Stack spacing={4} direction="row" alignItems="stretch">
             <TooltipWithDelay
