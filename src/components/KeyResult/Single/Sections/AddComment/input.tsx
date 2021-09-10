@@ -90,6 +90,8 @@ const KeyResultSectionAddCommentInput = ({
     <Box
       borderWidth={1}
       flexGrow={1}
+      maxW="full"
+      wordBreak="break-word"
       transition="0.2s box-shadow ease-in"
       overflow="visible"
       fontSize="md"
@@ -99,6 +101,7 @@ const KeyResultSectionAddCommentInput = ({
       borderRadius={numberOfRows === 1 ? 'full' : 60 / numberOfRows}
       px={4}
       py={2}
+      pr={10}
     >
       <MentionsInput
         allowSuggestionsAboveCursor
@@ -176,7 +179,7 @@ const KeyResultSectionAddCommentInput = ({
         type="submit"
         position="absolute"
         right={6}
-        bottom={4}
+        bottom="1.2rem"
         color="gray.200"
         aria-label={intl.formatMessage(messages.paperPlaneIconDesc)}
         _hover={{
