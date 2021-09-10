@@ -1,1 +1,1 @@
-export type NamedAvatarSubtitleType = 'team' | 'company' | 'role'
+export type NamedAvatarSubtitleType = 'team' | 'company' | 'role' | 'date'
