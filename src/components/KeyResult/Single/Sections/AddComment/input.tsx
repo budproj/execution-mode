@@ -90,6 +90,8 @@ const KeyResultSectionAddCommentInput = ({
     <Box
       borderWidth={1}
       flexGrow={1}
+      maxW="full"
+      wordBreak="break-word"
       transition="0.2s box-shadow ease-in"
       overflow="visible"
       fontSize="md"
