@@ -599,6 +599,10 @@
     "defaultMessage": "Insira uma descrição clicando aqui",
     "description": "This text is displayed as a placeholder for the description section of a key-result, only when that key-result don't have a description"
   },
+  "MgJJAJ": {
+    "defaultMessage": "Comente aqui! Para marcar alguém, use @ :)",
+    "description": "This text is displayed in our comment input in our key result drawers when it has no value"
+  },
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
@@ -1154,10 +1158,6 @@
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
     "description": "A brief explanation for screen readers regarding the yellow status circle"
-  },
-  "kOLcvX": {
-    "defaultMessage": "Clique aqui para comentar :)",
-    "description": "This text is displayed in our comment input in our key result drawers when it has no value"
   },
   "kXNgkQ": {
     "defaultMessage": "Progresso",
