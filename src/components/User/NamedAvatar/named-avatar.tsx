@@ -4,10 +4,11 @@ import {
   PopoverBody,
   PopoverContent,
   PopoverTrigger,
+  Portal,
   StackProps,
   TextProps,
 } from '@chakra-ui/react'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, RefObject, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -35,6 +36,7 @@ export interface NamedAvatarProperties {
   date?: Date
   showCard?: boolean
   onClick?: () => void
+  cardPortalReference?: RefObject<HTMLDivElement>
 }
 
 const NamedAvatar = ({
@@ -51,6 +53,7 @@ const NamedAvatar = ({
   date,
   showCard,
   nameColor,
+  cardPortalReference,
 }: NamedAvatarProperties): ReactElement => {
   subtitleType ??= 'company'
   avatarSize ??= 12
@@ -117,11 +120,13 @@ const NamedAvatar = ({
           onClick={onClick}
         />
       </PopoverTrigger>
-      <PopoverContent p={0}>
-        <PopoverBody p={0}>
-          <UserProfileCard userID={userID} />
-        </PopoverBody>
-      </PopoverContent>
+      <Portal containerRef={cardPortalReference}>
+        <PopoverContent p={0}>
+          <PopoverBody p={0}>
+            <UserProfileCard userID={userID} />
+          </PopoverBody>
+        </PopoverContent>
+      </Portal>
     </Popover>
   ) : (
     <NameWithAvatar

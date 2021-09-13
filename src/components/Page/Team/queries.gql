@@ -15,9 +15,13 @@ query GET_TEAM_NAME($teamId: ID!) {
       edges {
         node {
           id
+          firstName
+          nickname
           fullName
           role
           picture
+          about
+          linkedInProfileAddress
         }
       }
     }
