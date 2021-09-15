@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ColorizedDrawerOverlay } from 'src/components/Base/ColorizedDrawerOverlay/wrapper'
+import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserFromList } from 'src/components/User/SelectFromList/wrapper'
 import { User } from 'src/components/User/types'
 
@@ -56,7 +57,7 @@ export const TeamMembers = ({ isLoaded, members, onSearch }: TeamMembersProperti
       <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>
         <ColorizedDrawerOverlay>
           <DrawerContent>
-            <DrawerBody>{selectedUserID}</DrawerBody>
+            <DrawerBody>{selectedUserID && <UserProfile userID={selectedUserID} />}</DrawerBody>
           </DrawerContent>
         </ColorizedDrawerOverlay>
       </Drawer>
