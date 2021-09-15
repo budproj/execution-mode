@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Stack, Flex, FormLabel, MenuItemOption } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import EditableInputField from 'src/components/Base/EditableInputField'
 import EditableSelectField from 'src/components/Base/EditableSelectField'
@@ -11,6 +11,7 @@ import UserTeamTags from 'src/components/User/TeamTags'
 import { USER_GENDER } from 'src/components/User/constants'
 import { User } from 'src/components/User/types'
 import useIntlGender from 'src/state/hooks/useIntlGender'
+import meAtom from 'src/state/recoil/user/me'
 import userSelector from 'src/state/recoil/user/selector'
 
 import { UserProfileSectionTitle } from '../section-title'
@@ -40,6 +41,7 @@ export const UserProfileBodyPersonalInformations = ({
   userID,
   isLoaded,
 }: UserProfileBodyPersonalInformationsProperties) => {
+  const myUserID = useRecoilValue(meAtom)
   const [user, setUser] = useRecoilState(userSelector(userID))
   const intl = useIntl()
   const [intlGender, setIntlGenderValue, previousGenderValue] = useIntlGender(user?.gender)
@@ -54,6 +56,7 @@ export const UserProfileBodyPersonalInformations = ({
     },
   )
 
+  const isMyUser = myUserID === userID
   const handleValueUpdate = (key: keyof User) => async (value?: string | string[] | null) => {
     if (user?.[key] === value) return
     // eslint-disable-next-line unicorn/no-null
@@ -79,7 +82,7 @@ export const UserProfileBodyPersonalInformations = ({
     <Stack direction="column" spacing={6}>
       <UserProfileSectionTitle
         title={intl.formatMessage(messages.sectionTitle)}
-        subtitle={intl.formatMessage(messages.sectionSubtitle)}
+        subtitle={isMyUser ? intl.formatMessage(messages.sectionSubtitle) : undefined}
       />
 
       <Stack direction="column" spacing={4} maxW="xl">
@@ -140,9 +143,17 @@ export const UserProfileBodyPersonalInformations = ({
         </EditableSelectField>
 
         <EditableTextAreaField
-          label={intl.formatMessage(messages.seventhFieldLabel)}
+          label={intl.formatMessage(messages.seventhFieldLabel, {
+            isMyUser,
+            gender: user?.gender,
+            firstName: user?.firstName,
+          })}
           value={user?.about}
-          customFallbackValue={intl.formatMessage(messages.fallbackSeventhField)}
+          customFallbackValue={intl.formatMessage(messages.fallbackSeventhField, {
+            isMyUser,
+            gender: user?.gender,
+            firstName: user?.firstName,
+          })}
           isLoaded={isLoaded}
           isSubmitting={loading}
           onSubmit={handleValueUpdate('about')}

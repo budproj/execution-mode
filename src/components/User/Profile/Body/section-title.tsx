@@ -3,7 +3,7 @@ import React from 'react'
 
 export interface UserProfileBodySectionTitle {
   title: string
-  subtitle: string
+  subtitle?: string
 }
 
 export const UserProfileSectionTitle = ({ title, subtitle }: UserProfileBodySectionTitle) => (
@@ -11,8 +11,10 @@ export const UserProfileSectionTitle = ({ title, subtitle }: UserProfileBodySect
     <Heading as="h2" fontSize="sm" textTransform="uppercase" color="new-gray.800" fontWeight={700}>
       {title}
     </Heading>
-    <Text fontSize="sm" color="gray.300" fontWeight={400}>
-      {subtitle}
-    </Text>
+    {subtitle && (
+      <Text fontSize="sm" color="gray.300" fontWeight={400}>
+        {subtitle}
+      </Text>
+    )}
   </Stack>
 )
