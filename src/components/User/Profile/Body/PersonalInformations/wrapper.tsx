@@ -111,7 +111,7 @@ export const UserProfileBodyPersonalInformations = ({
         />
 
         <Stack direciton="column" spacing={2}>
-          <FormLabel fontSize="sm" m={0}>
+          <FormLabel fontSize="md" m={0}>
             {intl.formatMessage(messages.fourthFieldLabel)}
           </FormLabel>
           <UserTeamTags userID={userID} isLoaded={isLoaded} />

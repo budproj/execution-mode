@@ -35,7 +35,7 @@ const EditableTextAreaField = ({
 
   return (
     <Stack direciton="column" w="full" spacing={0} flexGrow={flexGrow}>
-      <FormLabel fontSize="sm" m={0}>
+      <FormLabel fontSize="md" m={0}>
         {label}
       </FormLabel>
       <Stack direction="row" alignItems="flex-start" gridGap={2}>

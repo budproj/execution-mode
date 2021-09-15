@@ -62,7 +62,7 @@ const EditableSelectValue = ({
         <MenuButton
           id={id}
           as={Text}
-          fontSize="md"
+          fontSize="lg"
           fontWeight={400}
           color={isHovering && !isSubmitting ? 'brand.500' : defaultColor}
           py={1}

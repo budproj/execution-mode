@@ -49,6 +49,11 @@ const EditableInputField = ({
   hideControls,
   previewProperties,
 }: EditableInputFieldProperties) => {
+  previewProperties ??= {
+    border: 0,
+    py: 1,
+  }
+
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
   const handleSubmit = (value: string) => {
@@ -70,7 +75,7 @@ const EditableInputField = ({
   return (
     <Stack direciton="column" w="full" spacing={0} flexGrow={flexGrow}>
       {Boolean(label) && (
-        <FormLabel fontSize="sm" m={0}>
+        <FormLabel fontSize="md" m={0} color="new-gray.600">
           {label}
         </FormLabel>
       )}

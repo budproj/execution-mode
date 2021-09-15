@@ -39,7 +39,7 @@ const EditableSelectField = ({
 
   return (
     <Stack direction="column" w="full" spacing={0} flexGrow={flexGrow}>
-      <FormLabel fontSize="sm" m={0}>
+      <FormLabel fontSize="md" m={0}>
         {label}
       </FormLabel>
       <Stack direction="row" alignItems="center" gridGap={2}>
