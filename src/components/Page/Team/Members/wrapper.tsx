@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { useConnectionEdges } from '../../../../state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from '../../../../state/recoil/hooks'
 import { teamAtomFamily } from '../../../../state/recoil/team'
 import { userAtomFamily } from '../../../../state/recoil/user'
-import { SelectUserFromList } from '../../../User/SelectFromList/wrapper'
 import { User } from '../../../User/types'
-import { TeamSectionWrapper } from '../Section/wrapper'
 
-import messages from './messages'
+import { TeamMembers } from './members'
 
 interface TeamMembersWrapperProperties {
   teamID?: string
@@ -18,7 +15,6 @@ interface TeamMembersWrapperProperties {
 }
 
 export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProperties) => {
-  const intl = useIntl()
   const [isLoaded, setIsLoaded] = useState(false)
   const team = useRecoilValue(teamAtomFamily(teamID))
   const [teamMembers, setTeamMemberEdges] = useConnectionEdges(team?.users?.edges)
@@ -50,20 +46,5 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
     if (isLoaded && isLoading) setIsLoaded(false)
   }, [isLoading, isLoaded, setIsLoaded])
 
-  return (
-    <TeamSectionWrapper
-      title={intl.formatMessage(messages.title, {
-        isLoaded,
-        totalMembersCount: teamMembers.length,
-      })}
-    >
-      <SelectUserFromList
-        showUserCard
-        users={teamMembers}
-        avatarSubtitleType="role"
-        isLoading={!isLoaded}
-        onSearch={handleSearch}
-      />
-    </TeamSectionWrapper>
-  )
+  return <TeamMembers isLoaded={isLoaded} members={teamMembers} onSearch={handleSearch} />
 }
