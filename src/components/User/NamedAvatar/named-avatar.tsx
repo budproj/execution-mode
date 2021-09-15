@@ -1,26 +1,25 @@
 import {
-  Avatar,
-  Text,
-  SkeletonCircle,
-  Skeleton,
-  Stack,
-  Flex,
   AvatarProps,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Portal,
   StackProps,
   TextProps,
 } from '@chakra-ui/react'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, RefObject, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import SwitchIcon from 'src/components/Icon/Switch'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import selectUser from 'src/state/recoil/user/selector'
 
-import messages from './messages'
+import UserProfileCard from '../ProfileCard'
+
+import { NameWithAvatar } from './name-with-avatar'
 import { NamedAvatarSubtitleType } from './types'
 
 export interface NamedAvatarProperties {
@@ -34,7 +33,10 @@ export interface NamedAvatarProperties {
   displaySubtitle?: boolean
   horizontalGap?: StackProps['spacing']
   nameColor?: TextProps['color']
+  date?: Date
+  showCard?: boolean
   onClick?: () => void
+  cardPortalReference?: RefObject<HTMLDivElement>
 }
 
 const NamedAvatar = ({
@@ -48,7 +50,10 @@ const NamedAvatar = ({
   avatarSize,
   displaySubtitle,
   horizontalGap,
+  date,
+  showCard,
   nameColor,
+  cardPortalReference,
 }: NamedAvatarProperties): ReactElement => {
   subtitleType ??= 'company'
   avatarSize ??= 12
@@ -64,11 +69,19 @@ const NamedAvatar = ({
   const isLoaded = Boolean(user) && !isLoading
   const company = companies?.[0]
   const team = teams?.[0]
+  const formattedDate = intl.formatDate(date, {
+    month: 'short',
+    day: 'numeric',
+    weekday: 'long',
+    hour: 'numeric',
+    minute: 'numeric',
+  })
 
-  const availableSubtitles = {
+  const availableSubtitles: Record<NamedAvatarSubtitleType, string | undefined> = {
     team: team?.name,
     company: company?.name,
     role: user?.role,
+    date: formattedDate,
   }
   const subtitle = availableSubtitles[subtitleType]
 
@@ -87,51 +100,51 @@ const NamedAvatar = ({
     }
   }, [user, setCompanyEdges, setTeamEdges])
 
-  return (
-    <Stack
-      alignItems="center"
-      direction="row"
-      spacing={horizontalGap}
-      cursor={canHover ? 'pointer' : 'auto'}
+  return showCard ? (
+    <Popover placement="top-start" size="sm" trigger="hover">
+      <PopoverTrigger>
+        <NameWithAvatar
+          user={user}
+          nameColor={nameColor}
+          horizontalGap={horizontalGap}
+          avatarSize={avatarSize}
+          isEditable={canEdit}
+          isHoverable={canHover}
+          isLoaded={isLoaded}
+          isHovering={isHovering}
+          isEditing={isEditting}
+          hasSubtitle={displaySubtitle}
+          subtitle={subtitle}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={onClick}
+        />
+      </PopoverTrigger>
+      <Portal containerRef={cardPortalReference}>
+        <PopoverContent p={0}>
+          <PopoverBody p={0}>
+            <UserProfileCard userID={userID} />
+          </PopoverBody>
+        </PopoverContent>
+      </Portal>
+    </Popover>
+  ) : (
+    <NameWithAvatar
+      user={user}
+      nameColor={nameColor}
+      horizontalGap={horizontalGap}
+      avatarSize={avatarSize}
+      isEditable={canEdit}
+      isHoverable={canHover}
+      isLoaded={isLoaded}
+      isHovering={isHovering}
+      isEditing={isEditting}
+      hasSubtitle={displaySubtitle}
+      subtitle={subtitle}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-    >
-      <SkeletonCircle isLoaded={isLoaded} w={avatarSize} h={avatarSize} fadeDuration={0}>
-        {canEdit && (isHovering || isEditting) ? (
-          <Flex
-            w={12}
-            h={12}
-            justifyContent="center"
-            alignItems="center"
-            borderColor="brand.500"
-            borderRadius="full"
-            borderWidth={2}
-            borderStyle="dashed"
-          >
-            <SwitchIcon fill="brand.500" desc={intl.formatMessage(messages.changeIconDesc)} />
-          </Flex>
-        ) : (
-          <Avatar name={user?.fullName} src={user?.picture} w={avatarSize} h={avatarSize} />
-        )}
-      </SkeletonCircle>
-
-      <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
-        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
-          <Text fontSize="lg" color={isHovering || isEditting ? 'brand.500' : nameColor}>
-            {user?.fullName}
-          </Text>
-        </Skeleton>
-
-        {displaySubtitle && (
-          <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>
-            <Text fontSize="md" color="gray.400">
-              {subtitle}
-            </Text>
-          </Skeleton>
-        )}
-      </Stack>
-    </Stack>
+    />
   )
 }
 

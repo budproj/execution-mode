@@ -58,6 +58,7 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
       })}
     >
       <SelectUserFromList
+        showUserCard
         users={teamMembers}
         avatarSubtitleType="role"
         isLoading={!isLoaded}

@@ -55,14 +55,7 @@ const KeyResultSectionTimelineCardBase = ({
     )}
 
     <Stack spacing={3}>
-      {!hideUser && (
-        <CardHeader
-          isLoaded={isLoaded}
-          fullName={user?.fullName}
-          picture={user?.picture}
-          date={new Date(date ?? 0)}
-        />
-      )}
+      {!hideUser && <CardHeader isLoaded={isLoaded} userID={user?.id} date={new Date(date ?? 0)} />}
 
       {children}
     </Stack>

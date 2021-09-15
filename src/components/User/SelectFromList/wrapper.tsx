@@ -14,6 +14,7 @@ export interface SelectUserFromListProperties {
   onSelect?: (userID: string) => void | Promise<void>
   onSearch?: (query: string) => void
   avatarSubtitleType?: NamedAvatarSubtitleType
+  showUserCard?: boolean
 }
 
 export const SelectUserFromList = ({
@@ -21,11 +22,13 @@ export const SelectUserFromList = ({
   isLoading,
   onSelect,
   onSearch,
+  showUserCard,
   avatarSubtitleType,
 }: SelectUserFromListProperties) => (
   <Stack spacing={4} maxH="full">
     <UserSearch onChange={onSearch} />
     <UserList
+      showUserCard={showUserCard}
       users={users}
       isLoading={isLoading}
       avatarSubtitleType={avatarSubtitleType}

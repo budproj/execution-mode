@@ -1,6 +1,7 @@
 import { Stack, Text } from '@chakra-ui/layout'
+import { Box } from '@chakra-ui/react'
 import { Scrollbars } from 'rc-scrollbars'
-import React from 'react'
+import React, { useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import { NamedAvatar } from 'src/components/User'
@@ -16,38 +17,46 @@ interface UserListProperties {
   onUserClick?: (userID: string) => void | Promise<void>
   avatarSubtitleType?: NamedAvatarSubtitleType
   isLoading?: boolean
+  showUserCard?: boolean
 }
 
 export const UserList = ({
   users,
   onUserClick,
   avatarSubtitleType,
+  showUserCard,
   isLoading,
 }: UserListProperties) => {
+  const cardReference = useRef<HTMLDivElement>(null)
   const intl = useIntl()
   const handleUserClick = (userID: string) => async () => {
     if (onUserClick) await onUserClick(userID)
   }
 
   return (
-    <Scrollbars autoHeight>
-      <Stack spacing={4}>
-        {isLoading ? (
-          <UserListSkeleton />
-        ) : users.length > 0 ? (
-          users.map((user) => (
-            <NamedAvatar
-              key={user.id}
-              canHover={Boolean(onUserClick)}
-              userID={user.id}
-              subtitleType={avatarSubtitleType}
-              onClick={handleUserClick(user.id)}
-            />
-          ))
-        ) : (
-          <Text color="black.600">{intl.formatMessage(messages.emptyState)}</Text>
-        )}
-      </Stack>
-    </Scrollbars>
+    <>
+      <Box ref={cardReference} />
+      <Scrollbars autoHeight>
+        <Stack spacing={4}>
+          {isLoading ? (
+            <UserListSkeleton />
+          ) : users.length > 0 ? (
+            users.map((user) => (
+              <NamedAvatar
+                key={user.id}
+                showCard={showUserCard}
+                canHover={Boolean(onUserClick)}
+                userID={user.id}
+                subtitleType={avatarSubtitleType}
+                cardPortalReference={cardReference}
+                onClick={handleUserClick(user.id)}
+              />
+            ))
+          ) : (
+            <Text color="black.600">{intl.formatMessage(messages.emptyState)}</Text>
+          )}
+        </Stack>
+      </Scrollbars>
+    </>
   )
 }
