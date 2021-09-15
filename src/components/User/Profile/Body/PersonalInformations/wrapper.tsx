@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Stack, Flex, FormLabel, MenuItemOption } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import EditableInputField from 'src/components/Base/EditableInputField'
 import EditableSelectField from 'src/components/Base/EditableSelectField'
@@ -11,7 +11,6 @@ import UserTeamTags from 'src/components/User/TeamTags'
 import { USER_GENDER } from 'src/components/User/constants'
 import { User } from 'src/components/User/types'
 import useIntlGender from 'src/state/hooks/useIntlGender'
-import meAtom from 'src/state/recoil/user/me'
 import userSelector from 'src/state/recoil/user/selector'
 
 import { UserProfileSectionTitle } from '../section-title'
@@ -21,6 +20,7 @@ import queries from './queries.gql'
 
 export interface UserProfileBodyPersonalInformationsProperties {
   isLoaded: boolean
+  isMyUser?: boolean
   userID?: User['id']
 }
 
@@ -39,9 +39,9 @@ interface UpdateUserInformationMutationResult {
 
 export const UserProfileBodyPersonalInformations = ({
   userID,
+  isMyUser,
   isLoaded,
 }: UserProfileBodyPersonalInformationsProperties) => {
-  const myUserID = useRecoilValue(meAtom)
   const [user, setUser] = useRecoilState(userSelector(userID))
   const intl = useIntl()
   const [intlGender, setIntlGenderValue, previousGenderValue] = useIntlGender(user?.gender)
@@ -56,7 +56,6 @@ export const UserProfileBodyPersonalInformations = ({
     },
   )
 
-  const isMyUser = myUserID === userID
   const handleValueUpdate = (key: keyof User) => async (value?: string | string[] | null) => {
     if (user?.[key] === value) return
     // eslint-disable-next-line unicorn/no-null

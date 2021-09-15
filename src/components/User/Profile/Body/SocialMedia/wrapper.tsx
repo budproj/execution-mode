@@ -15,6 +15,7 @@ import queries from './queries.gql'
 
 export interface UserProfileSocialMediaProperties {
   userID?: User['id']
+  isMyUser?: boolean
   isLoaded?: boolean
 }
 
@@ -27,6 +28,7 @@ interface UpdateUserSocialMediaMutationResult {
 
 export const UserProfileBodySocialMedia = ({
   userID,
+  isMyUser,
   isLoaded,
 }: UserProfileSocialMediaProperties) => {
   const [user, setUser] = useRecoilState(userSelector(userID))
@@ -61,7 +63,7 @@ export const UserProfileBodySocialMedia = ({
     <Stack direction="column" spacing={6} maxW="xl">
       <UserProfileSectionTitle
         title={intl.formatMessage(messages.sectionTitle)}
-        subtitle={intl.formatMessage(messages.sectionSubtitle)}
+        subtitle={isMyUser ? intl.formatMessage(messages.sectionSubtitle) : undefined}
       />
 
       <EditableInputField
