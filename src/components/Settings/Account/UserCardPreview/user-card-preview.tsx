@@ -2,7 +2,7 @@ import { Box, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import SettingsAccountBodySectionTitle from 'src/components/Settings/Account/Body/SectionTitle'
+import { UserProfileSectionTitle } from 'src/components/User/Profile/Body/section-title'
 import UserProfileCard from 'src/components/User/ProfileCard'
 import { User } from 'src/components/User/types'
 
@@ -17,7 +17,7 @@ const SettingsAccountUserCardPreview = ({ userID }: SettingsAccountUserCardPrevi
 
   return (
     <Stack direction="column" spacing={4}>
-      <SettingsAccountBodySectionTitle
+      <UserProfileSectionTitle
         title={intl.formatMessage(messages.title)}
         subtitle={intl.formatMessage(messages.subtitle)}
       />

@@ -8,12 +8,12 @@ import UserTeamTags from 'src/components/User/TeamTags'
 import { User } from 'src/components/User/types'
 import { userAtomFamily } from 'src/state/recoil/user'
 
-export interface SettingsAccountHeader {
+export interface UserProfileHeaderProperties {
   isLoaded: boolean
   userID?: User['id']
 }
 
-const SettingsAccountHeader = ({ userID, isLoaded }: SettingsAccountHeader) => {
+export const UserProfileHeader = ({ userID, isLoaded }: UserProfileHeaderProperties) => {
   const user = useRecoilValue(userAtomFamily(userID))
 
   return (
@@ -40,5 +40,3 @@ const SettingsAccountHeader = ({ userID, isLoaded }: SettingsAccountHeader) => {
     </Flex>
   )
 }
-
-export default SettingsAccountHeader

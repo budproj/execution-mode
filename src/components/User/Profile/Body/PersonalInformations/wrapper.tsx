@@ -7,17 +7,18 @@ import { useRecoilState } from 'recoil'
 import EditableInputField from 'src/components/Base/EditableInputField'
 import EditableSelectField from 'src/components/Base/EditableSelectField'
 import EditableTextAreaField from 'src/components/Base/EditableTextAreaField'
-import SettingsAccountBodySectionTitle from 'src/components/Settings/Account/Body/SectionTitle'
 import UserTeamTags from 'src/components/User/TeamTags'
 import { USER_GENDER } from 'src/components/User/constants'
 import { User } from 'src/components/User/types'
 import useIntlGender from 'src/state/hooks/useIntlGender'
 import userSelector from 'src/state/recoil/user/selector'
 
+import { UserProfileSectionTitle } from '../section-title'
+
 import messages from './messages'
 import queries from './queries.gql'
 
-export interface SettingsAccountBodyPersonalInformationsProperties {
+export interface UserProfileBodyPersonalInformationsProperties {
   isLoaded: boolean
   userID?: User['id']
 }
@@ -35,10 +36,10 @@ interface UpdateUserInformationMutationResult {
   }
 }
 
-const SettingsAccountBodyPersonalInformations = ({
+export const UserProfileBodyPersonalInformations = ({
   userID,
   isLoaded,
-}: SettingsAccountBodyPersonalInformationsProperties) => {
+}: UserProfileBodyPersonalInformationsProperties) => {
   const [user, setUser] = useRecoilState(userSelector(userID))
   const intl = useIntl()
   const [intlGender, setIntlGenderValue, previousGenderValue] = useIntlGender(user?.gender)
@@ -76,7 +77,7 @@ const SettingsAccountBodyPersonalInformations = ({
 
   return (
     <Stack direction="column" spacing={6}>
-      <SettingsAccountBodySectionTitle
+      <UserProfileSectionTitle
         title={intl.formatMessage(messages.sectionTitle)}
         subtitle={intl.formatMessage(messages.sectionSubtitle)}
       />
@@ -150,5 +151,3 @@ const SettingsAccountBodyPersonalInformations = ({
     </Stack>
   )
 }
-
-export default SettingsAccountBodyPersonalInformations

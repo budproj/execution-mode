@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type SettingsAccountBodySocialMediaMessage = 'sectionTitle' | 'sectionSubtitle' | 'firstFieldLabel'
+type UserProfileBodySocialMediaMessage = 'sectionTitle' | 'sectionSubtitle' | 'firstFieldLabel'
 
-export default defineMessages<SettingsAccountBodySocialMediaMessage>({
+export default defineMessages<UserProfileBodySocialMediaMessage>({
   sectionTitle: {
     defaultMessage: 'Redes sociais',
     id: 'nPCTf0',

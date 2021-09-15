@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type SettingsAccountBodyPersonalInformationsMessage =
+type UserProfileBodyPersonalInformationsMessage =
   | 'sectionTitle'
   | 'sectionSubtitle'
   | 'firstFieldLabel'
@@ -15,7 +15,7 @@ type SettingsAccountBodyPersonalInformationsMessage =
   | 'fallbackSixthField'
   | 'fallbackSeventhField'
 
-export default defineMessages<SettingsAccountBodyPersonalInformationsMessage>({
+export default defineMessages<UserProfileBodyPersonalInformationsMessage>({
   sectionTitle: {
     defaultMessage: 'Informações pessoais',
     id: 'r1mfc1',

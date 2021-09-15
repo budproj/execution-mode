@@ -5,14 +5,15 @@ import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import EditableInputField from 'src/components/Base/EditableInputField'
-import SettingsAccountBodySectionTitle from 'src/components/Settings/Account/Body/SectionTitle'
 import { User } from 'src/components/User/types'
 import { userSelector } from 'src/state/recoil/user'
+
+import { UserProfileSectionTitle } from '../section-title'
 
 import messages from './messages'
 import queries from './queries.gql'
 
-export interface SettingsAccountSocialMediaProperties {
+export interface UserProfileSocialMediaProperties {
   userID?: User['id']
   isLoaded?: boolean
 }
@@ -24,10 +25,10 @@ interface UpdateUserSocialMediaMutationResult {
   }
 }
 
-const SettingsAccountBodySocialMedia = ({
+export const UserProfileBodySocialMedia = ({
   userID,
   isLoaded,
-}: SettingsAccountSocialMediaProperties) => {
+}: UserProfileSocialMediaProperties) => {
   const [user, setUser] = useRecoilState(userSelector(userID))
   const intl = useIntl()
   const [updateUser, { loading }] = useMutation<UpdateUserSocialMediaMutationResult>(
@@ -58,7 +59,7 @@ const SettingsAccountBodySocialMedia = ({
 
   return (
     <Stack direction="column" spacing={6} maxW="xl">
-      <SettingsAccountBodySectionTitle
+      <UserProfileSectionTitle
         title={intl.formatMessage(messages.sectionTitle)}
         subtitle={intl.formatMessage(messages.sectionSubtitle)}
       />
@@ -73,5 +74,3 @@ const SettingsAccountBodySocialMedia = ({
     </Stack>
   )
 }
-
-export default SettingsAccountBodySocialMedia
