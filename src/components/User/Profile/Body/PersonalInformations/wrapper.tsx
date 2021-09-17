@@ -155,6 +155,7 @@ export const UserProfileBodyPersonalInformations = ({
             firstName: user?.firstName,
           })}
           value={user?.about}
+          isDisabled={!canUpdate}
           customFallbackValue={intl.formatMessage(messages.fallbackSeventhField, {
             isMyUser,
             gender: user?.gender,

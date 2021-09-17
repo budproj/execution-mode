@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Stack } from '@chakra-ui/react'
+import { Divider, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
@@ -44,6 +44,7 @@ export const UserProfileBodySocialMedia = ({
     },
   )
 
+  const hasNoSocialMedia = !user?.linkedInProfileAddress || user?.linkedInProfileAddress === ''
   const handleValueUpdate = (key: keyof User) => async (value: string | string[] | null) => {
     if (user?.[key] === value) return
     // eslint-disable-next-line unicorn/no-null
@@ -61,21 +62,25 @@ export const UserProfileBodySocialMedia = ({
     })
   }
 
-  return (
-    <Stack direction="column" spacing={6} maxW="xl">
-      <UserProfileSectionTitle
-        title={intl.formatMessage(messages.sectionTitle)}
-        subtitle={isMyUser ? intl.formatMessage(messages.sectionSubtitle) : undefined}
-      />
+  // eslint-disable-next-line unicorn/no-null
+  return hasNoSocialMedia ? null : (
+    <>
+      <Divider borderColor="black.200" />
+      <Stack direction="column" spacing={6} maxW="xl">
+        <UserProfileSectionTitle
+          title={intl.formatMessage(messages.sectionTitle)}
+          subtitle={isMyUser ? intl.formatMessage(messages.sectionSubtitle) : undefined}
+        />
 
-      <EditableInputField
-        label={intl.formatMessage(messages.firstFieldLabel)}
-        value={user?.linkedInProfileAddress}
-        isLoaded={isLoaded}
-        isSubmitting={loading}
-        isDisabled={!canUpdate}
-        onSubmit={handleValueUpdate('linkedInProfileAddress')}
-      />
-    </Stack>
+        <EditableInputField
+          label={intl.formatMessage(messages.firstFieldLabel)}
+          value={user?.linkedInProfileAddress}
+          isLoaded={isLoaded}
+          isSubmitting={loading}
+          isDisabled={!canUpdate}
+          onSubmit={handleValueUpdate('linkedInProfileAddress')}
+        />
+      </Stack>
+    </>
   )
 }

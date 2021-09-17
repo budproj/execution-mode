@@ -1,4 +1,4 @@
-import { Divider, Stack } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -26,7 +26,6 @@ export const UserProfileBody = ({ userID, isLoaded, canUpdate }: UserProfileBody
         isMyUser={isMyUser}
         canUpdate={canUpdate}
       />
-      <Divider borderColor="black.200" />
       <UserProfileBodySocialMedia
         userID={userID}
         isLoaded={isLoaded}

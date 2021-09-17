@@ -56,6 +56,7 @@ const EditableInputField = ({
 
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
+  const isEmpty = !value || value === ''
   const handleSubmit = (value: string) => {
     setWasSubmitted(true)
     if (onSubmit) onSubmit(value)
@@ -72,7 +73,8 @@ const EditableInputField = ({
     if (wasSubmitted && !isSubmitting) setWasSubmitted(false)
   }, [wasSubmitted, isSubmitting, setWasSubmitted])
 
-  return (
+  // eslint-disable-next-line unicorn/no-null
+  return isDisabled && isEmpty ? null : (
     <Stack direciton="column" w="full" spacing={0} flexGrow={flexGrow}>
       {Boolean(label) && (
         <FormLabel fontSize="md" m={0} color="new-gray.600">
