@@ -10,14 +10,21 @@ import { userAtomFamily } from 'src/state/recoil/user'
 export interface UserProfileHeaderProperties {
   isLoaded: boolean
   userID?: User['id']
+  canUpdate?: boolean
 }
 
-export const UserProfileHeader = ({ userID, isLoaded }: UserProfileHeaderProperties) => {
+export const UserProfileHeader = ({ userID, isLoaded, canUpdate }: UserProfileHeaderProperties) => {
   const user = useRecoilValue(userAtomFamily(userID))
 
   return (
     <Flex gridGap={4} alignItems="center">
-      <UserEditableAvatar size="xl" userID={userID} name={user?.fullName} picture={user?.picture} />
+      <UserEditableAvatar
+        isDisabled={!canUpdate}
+        size="xl"
+        userID={userID}
+        name={user?.fullName}
+        picture={user?.picture}
+      />
 
       <Flex direction="column" gridGap={4}>
         <Flex direction="column" gridGap={1}>

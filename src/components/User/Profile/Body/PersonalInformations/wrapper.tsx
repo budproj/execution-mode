@@ -22,6 +22,7 @@ export interface UserProfileBodyPersonalInformationsProperties {
   isLoaded: boolean
   isMyUser?: boolean
   userID?: User['id']
+  canUpdate?: boolean
 }
 
 interface UpdateUserInformationMutationResult {
@@ -41,6 +42,7 @@ export const UserProfileBodyPersonalInformations = ({
   userID,
   isMyUser,
   isLoaded,
+  canUpdate,
 }: UserProfileBodyPersonalInformationsProperties) => {
   const [user, setUser] = useRecoilState(userSelector(userID))
   const intl = useIntl()
@@ -87,6 +89,7 @@ export const UserProfileBodyPersonalInformations = ({
       <Stack direction="column" spacing={4} maxW="xl">
         <Flex gridGap={4}>
           <EditableInputField
+            isDisabled={!canUpdate}
             label={intl.formatMessage(messages.firstFieldLabel)}
             value={user?.firstName}
             isLoaded={isLoaded}
@@ -99,6 +102,7 @@ export const UserProfileBodyPersonalInformations = ({
             value={user?.lastName}
             isLoaded={isLoaded}
             isSubmitting={loading}
+            isDisabled={!canUpdate}
             flexGrow={1}
             onSubmit={handleValueUpdate('lastName')}
           />
@@ -109,6 +113,7 @@ export const UserProfileBodyPersonalInformations = ({
           value={user?.nickname}
           isLoaded={isLoaded}
           isSubmitting={loading}
+          isDisabled={!canUpdate}
           onSubmit={handleValueUpdate('nickname')}
         />
 
@@ -125,6 +130,7 @@ export const UserProfileBodyPersonalInformations = ({
           customFallbackValue={intl.formatMessage(messages.fallbackFifthField)}
           isLoaded={isLoaded}
           isSubmitting={loading}
+          isDisabled={!canUpdate}
           onSubmit={handleValueUpdate('role')}
         />
 
@@ -134,6 +140,7 @@ export const UserProfileBodyPersonalInformations = ({
           placeholder={intlGender}
           customFallbackPlaceholder={intl.formatMessage(messages.fallbackSixthField)}
           isLoaded={isLoaded}
+          isDisabled={!canUpdate}
           isSubmitting={loading}
           onChange={handleValueUpdate('gender')}
         >

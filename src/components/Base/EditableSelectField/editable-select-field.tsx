@@ -13,6 +13,7 @@ export interface EditableSelectFieldProperties {
   children?: MenuProps['children']
   flexGrow?: StackProps['flexGrow']
   isSubmitting?: boolean
+  isDisabled?: boolean
 }
 
 const EditableSelectField = ({
@@ -25,6 +26,7 @@ const EditableSelectField = ({
   flexGrow,
   onChange,
   isSubmitting,
+  isDisabled,
 }: EditableSelectFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
@@ -49,6 +51,7 @@ const EditableSelectField = ({
           placeholder={placeholder}
           customFallbackPlaceholder={customFallbackPlaceholder}
           isLoaded={isLoaded}
+          isDisabled={isDisabled}
           onChange={handleChange}
         >
           {children}

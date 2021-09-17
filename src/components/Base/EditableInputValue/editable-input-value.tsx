@@ -139,10 +139,10 @@ const EditableInputValue = ({
   const isDisableFix = isDisabled
     ? {
         color: previewProperties?.color ?? defaultColor,
-        fontSize: previewProperties?.fontSize ?? 'md',
+        fontSize: previewProperties?.fontSize ?? 'lg',
         fontWeight: previewProperties?.fontWeight ?? 400,
-        px: '0.125rem',
-        py: '0.4rem',
+        px: 0,
+        py: '0.3rem',
         cursor: 'text',
       }
     : {}
@@ -188,7 +188,9 @@ const EditableInputValue = ({
                   />
                 </Box>
 
-                {!hideControls && <EditableControls isHovering={isHovering} isLocked={isLocked} />}
+                {!isDisabled && !hideControls && (
+                  <EditableControls isHovering={isHovering} isLocked={isLocked} />
+                )}
               </HStack>
 
               {isTruncated && !isWithinMaxCharacters && !isEditing && (

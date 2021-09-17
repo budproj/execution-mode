@@ -4,6 +4,7 @@ import { isMatch } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 
+import { GraphQLEffect } from 'src/components/types'
 import { userSelector } from 'src/state/recoil/user'
 
 import { User } from '../types'
@@ -34,6 +35,7 @@ export const UserProfile = ({ userID }: UserProfileProperties) => {
   )
 
   const isLoaded = !loading && isRecoilSynced
+  const canUpdate = user?.policy?.update === GraphQLEffect.ALLOW
 
   useEffect(() => {
     if (userID && userID !== variables?.id) getUserData()
@@ -45,9 +47,9 @@ export const UserProfile = ({ userID }: UserProfileProperties) => {
 
   return (
     <Stack py={4} spacing={6} direction="column" flexGrow={1}>
-      <UserProfileHeader userID={userID} isLoaded={isLoaded} />
+      <UserProfileHeader userID={userID} isLoaded={isLoaded} canUpdate={canUpdate} />
       <Divider borderColor="black.200" />
-      <UserProfileBody userID={userID} isLoaded={isLoaded} />
+      <UserProfileBody userID={userID} isLoaded={isLoaded} canUpdate={canUpdate} />
     </Stack>
   )
 }

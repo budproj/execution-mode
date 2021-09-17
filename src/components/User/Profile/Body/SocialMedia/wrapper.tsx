@@ -17,6 +17,7 @@ export interface UserProfileSocialMediaProperties {
   userID?: User['id']
   isMyUser?: boolean
   isLoaded?: boolean
+  canUpdate?: boolean
 }
 
 interface UpdateUserSocialMediaMutationResult {
@@ -30,6 +31,7 @@ export const UserProfileBodySocialMedia = ({
   userID,
   isMyUser,
   isLoaded,
+  canUpdate,
 }: UserProfileSocialMediaProperties) => {
   const [user, setUser] = useRecoilState(userSelector(userID))
   const intl = useIntl()
@@ -71,6 +73,7 @@ export const UserProfileBodySocialMedia = ({
         value={user?.linkedInProfileAddress}
         isLoaded={isLoaded}
         isSubmitting={loading}
+        isDisabled={!canUpdate}
         onSubmit={handleValueUpdate('linkedInProfileAddress')}
       />
     </Stack>

@@ -11,9 +11,10 @@ import { UserProfileBodySocialMedia } from './SocialMedia/wrapper'
 export interface UserProfileBodyProperties {
   isLoaded: boolean
   userID?: User['id']
+  canUpdate?: boolean
 }
 
-export const UserProfileBody = ({ userID, isLoaded }: UserProfileBodyProperties) => {
+export const UserProfileBody = ({ userID, isLoaded, canUpdate }: UserProfileBodyProperties) => {
   const myUserID = useRecoilValue(meAtom)
   const isMyUser = myUserID === userID
 
@@ -23,9 +24,15 @@ export const UserProfileBody = ({ userID, isLoaded }: UserProfileBodyProperties)
         userID={userID}
         isLoaded={isLoaded}
         isMyUser={isMyUser}
+        canUpdate={canUpdate}
       />
       <Divider borderColor="black.200" />
-      <UserProfileBodySocialMedia userID={userID} isLoaded={isLoaded} isMyUser={isMyUser} />
+      <UserProfileBodySocialMedia
+        userID={userID}
+        isLoaded={isLoaded}
+        isMyUser={isMyUser}
+        canUpdate={canUpdate}
+      />
     </Stack>
   )
 }
