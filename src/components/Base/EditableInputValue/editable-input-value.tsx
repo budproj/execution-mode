@@ -139,10 +139,10 @@ const EditableInputValue = ({
   const isDisableFix = isDisabled
     ? {
         color: previewProperties?.color ?? defaultColor,
-        fontSize: previewProperties?.fontSize ?? 'md',
+        fontSize: previewProperties?.fontSize ?? 'lg',
         fontWeight: previewProperties?.fontWeight ?? 400,
-        px: '0.125rem',
-        py: '0.4rem',
+        px: 0,
+        py: '0.3rem',
         cursor: 'text',
       }
     : {}
@@ -170,23 +170,27 @@ const EditableInputValue = ({
           {({ isEditing }) => (
             <Stack alignItems="flex-start" justifyItems="center" spacing={0}>
               <HStack w="full">
-                <EditablePreview
-                  fontSize="md"
-                  color={isHovering && !isLocked ? 'brand.500' : defaultColor}
-                  fontWeight={400}
-                  cursor={isLocked ? 'auto' : 'pointer'}
-                  wordBreak="break-word"
-                  py={0}
-                  {...previewProperties}
-                />
-                <EditableInput
-                  autoFocus={autoFocus}
-                  borderWidth={isDisabled ? 0 : components.Editable.baseStyle.input.borderWidth}
-                  onKeyDown={onKeyDown}
-                  {...isDisableFix}
-                />
+                <Box>
+                  <EditablePreview
+                    fontSize="lg"
+                    color={isHovering && !isLocked ? 'brand.500' : defaultColor}
+                    fontWeight={400}
+                    cursor={isLocked ? 'auto' : 'pointer'}
+                    wordBreak="break-word"
+                    py={0}
+                    {...previewProperties}
+                  />
+                  <EditableInput
+                    autoFocus={autoFocus}
+                    borderWidth={isDisabled ? 0 : components.Editable.baseStyle.input.borderWidth}
+                    onKeyDown={onKeyDown}
+                    {...isDisableFix}
+                  />
+                </Box>
 
-                {!hideControls && <EditableControls isHovering={isHovering} isLocked={isLocked} />}
+                {!isDisabled && !hideControls && (
+                  <EditableControls isHovering={isHovering} isLocked={isLocked} />
+                )}
               </HStack>
 
               {isTruncated && !isWithinMaxCharacters && !isEditing && (

@@ -14,6 +14,7 @@ export const UserEditableAvatar = ({
   userID,
   name,
   picture,
+  isDisabled,
   size,
 }: UserEditableAvatarProperties) => {
   const intl = useIntl()
@@ -26,15 +27,15 @@ export const UserEditableAvatar = ({
   const isLoading = Boolean(!localPictureLoading)
 
   const handleMouseEnter = () => {
-    setIsHovering(true)
+    if (!isDisabled) setIsHovering(true)
   }
 
   const handleMouseLeave = () => {
-    setIsHovering(false)
+    if (!isDisabled) setIsHovering(false)
   }
 
   const handleClick = () => {
-    pictureInput.current?.click()
+    if (!isDisabled) pictureInput.current?.click()
   }
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +58,7 @@ export const UserEditableAvatar = ({
     <>
       <Box
         position="relative"
-        cursor="pointer"
+        cursor={isDisabled ? 'auto' : 'pointer'}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}

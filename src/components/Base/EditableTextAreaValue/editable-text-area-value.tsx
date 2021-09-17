@@ -205,7 +205,7 @@ EditableTextAreaValue.defaultProps = {
   isLoaded: true,
   skeletonNumberOfLines: 3,
   color: 'black.900',
-  fontSize: 'md',
+  fontSize: 'lg',
 }
 
 export default EditableTextAreaValue

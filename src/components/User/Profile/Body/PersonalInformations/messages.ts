@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type SettingsAccountBodyPersonalInformationsMessage =
+type UserProfileBodyPersonalInformationsMessage =
   | 'sectionTitle'
   | 'sectionSubtitle'
   | 'firstFieldLabel'
@@ -15,7 +15,7 @@ type SettingsAccountBodyPersonalInformationsMessage =
   | 'fallbackSixthField'
   | 'fallbackSeventhField'
 
-export default defineMessages<SettingsAccountBodyPersonalInformationsMessage>({
+export default defineMessages<UserProfileBodyPersonalInformationsMessage>({
   sectionTitle: {
     defaultMessage: 'Informações pessoais',
     id: 'r1mfc1',
@@ -73,8 +73,9 @@ export default defineMessages<SettingsAccountBodyPersonalInformationsMessage>({
   },
 
   seventhFieldLabel: {
-    defaultMessage: 'Sobre você',
-    id: '8EABR0',
+    defaultMessage:
+      'Sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}',
+    id: 'LDLFtf',
     description:
       'This is the label that goes on our user account settings page, at the seventh field to update the user informations',
   },
@@ -101,8 +102,9 @@ export default defineMessages<SettingsAccountBodyPersonalInformationsMessage>({
   },
 
   fallbackSeventhField: {
-    defaultMessage: 'Escreva sobre você',
-    id: 'k0fMvn',
+    defaultMessage:
+      'Escreva sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}',
+    id: 'n3PYQR',
     description:
       'This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field',
   },

@@ -101,7 +101,7 @@ const NamedAvatar = ({
   }, [user, setCompanyEdges, setTeamEdges])
 
   return showCard ? (
-    <Popover placement="top-start" size="sm" trigger="hover">
+    <Popover placement="top-start" size="sm" trigger="hover" openDelay={1000}>
       <PopoverTrigger>
         <NameWithAvatar
           user={user}

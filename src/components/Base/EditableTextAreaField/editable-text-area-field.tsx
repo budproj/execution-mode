@@ -11,6 +11,7 @@ export interface EditableTextAreaFieldProperties {
   flexGrow?: StackProps['flexGrow']
   onSubmit?: (value?: string) => void
   isSubmitting?: boolean
+  isDisabled?: boolean
 }
 
 const EditableTextAreaField = ({
@@ -21,9 +22,11 @@ const EditableTextAreaField = ({
   flexGrow,
   isSubmitting,
   onSubmit,
+  isDisabled,
 }: EditableTextAreaFieldProperties) => {
   const [wasSubmitted, setWasSubmitted] = useState(false)
 
+  const isEmpty = !value || value === ''
   const handleSave = (value?: string) => {
     setWasSubmitted(true)
     if (onSubmit) onSubmit(value)
@@ -33,9 +36,10 @@ const EditableTextAreaField = ({
     if (wasSubmitted && !isSubmitting) setWasSubmitted(false)
   }, [wasSubmitted, isSubmitting, setWasSubmitted])
 
-  return (
+  // eslint-disable-next-line unicorn/no-null
+  return isDisabled && isEmpty ? null : (
     <Stack direciton="column" w="full" spacing={0} flexGrow={flexGrow}>
-      <FormLabel fontSize="sm" m={0}>
+      <FormLabel fontSize="md" m={0}>
         {label}
       </FormLabel>
       <Stack direction="row" alignItems="flex-start" gridGap={2}>
@@ -43,6 +47,7 @@ const EditableTextAreaField = ({
           value={value}
           customFallbackValue={customFallbackValue}
           isLoaded={isLoaded}
+          isDisabled={isDisabled}
           isSubmitting={isSubmitting && wasSubmitted}
           onSave={handleSave}
         />

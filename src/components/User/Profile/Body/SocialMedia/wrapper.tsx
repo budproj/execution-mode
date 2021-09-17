@@ -1,20 +1,23 @@
 import { useMutation } from '@apollo/client'
-import { Stack } from '@chakra-ui/react'
+import { Divider, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import EditableInputField from 'src/components/Base/EditableInputField'
-import SettingsAccountBodySectionTitle from 'src/components/Settings/Account/Body/SectionTitle'
 import { User } from 'src/components/User/types'
 import { userSelector } from 'src/state/recoil/user'
+
+import { UserProfileSectionTitle } from '../section-title'
 
 import messages from './messages'
 import queries from './queries.gql'
 
-export interface SettingsAccountSocialMediaProperties {
+export interface UserProfileSocialMediaProperties {
   userID?: User['id']
+  isMyUser?: boolean
   isLoaded?: boolean
+  canUpdate?: boolean
 }
 
 interface UpdateUserSocialMediaMutationResult {
@@ -24,10 +27,12 @@ interface UpdateUserSocialMediaMutationResult {
   }
 }
 
-const SettingsAccountBodySocialMedia = ({
+export const UserProfileBodySocialMedia = ({
   userID,
+  isMyUser,
   isLoaded,
-}: SettingsAccountSocialMediaProperties) => {
+  canUpdate,
+}: UserProfileSocialMediaProperties) => {
   const [user, setUser] = useRecoilState(userSelector(userID))
   const intl = useIntl()
   const [updateUser, { loading }] = useMutation<UpdateUserSocialMediaMutationResult>(
@@ -39,6 +44,7 @@ const SettingsAccountBodySocialMedia = ({
     },
   )
 
+  const hasNoSocialMedia = !user?.linkedInProfileAddress || user?.linkedInProfileAddress === ''
   const handleValueUpdate = (key: keyof User) => async (value: string | string[] | null) => {
     if (user?.[key] === value) return
     // eslint-disable-next-line unicorn/no-null
@@ -56,22 +62,25 @@ const SettingsAccountBodySocialMedia = ({
     })
   }
 
-  return (
-    <Stack direction="column" spacing={6} maxW="xl">
-      <SettingsAccountBodySectionTitle
-        title={intl.formatMessage(messages.sectionTitle)}
-        subtitle={intl.formatMessage(messages.sectionSubtitle)}
-      />
+  // eslint-disable-next-line unicorn/no-null
+  return hasNoSocialMedia ? null : (
+    <>
+      <Divider borderColor="black.200" />
+      <Stack direction="column" spacing={6} maxW="xl">
+        <UserProfileSectionTitle
+          title={intl.formatMessage(messages.sectionTitle)}
+          subtitle={isMyUser ? intl.formatMessage(messages.sectionSubtitle) : undefined}
+        />
 
-      <EditableInputField
-        label={intl.formatMessage(messages.firstFieldLabel)}
-        value={user?.linkedInProfileAddress}
-        isLoaded={isLoaded}
-        isSubmitting={loading}
-        onSubmit={handleValueUpdate('linkedInProfileAddress')}
-      />
-    </Stack>
+        <EditableInputField
+          label={intl.formatMessage(messages.firstFieldLabel)}
+          value={user?.linkedInProfileAddress}
+          isLoaded={isLoaded}
+          isSubmitting={loading}
+          isDisabled={!canUpdate}
+          onSubmit={handleValueUpdate('linkedInProfileAddress')}
+        />
+      </Stack>
+    </>
   )
 }
-
-export default SettingsAccountBodySocialMedia

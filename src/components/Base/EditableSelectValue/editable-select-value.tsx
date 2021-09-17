@@ -4,8 +4,8 @@ import {
   MenuList,
   MenuOptionGroup,
   MenuProps,
-  Text,
   Skeleton,
+  Button,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -24,6 +24,7 @@ export interface EditableSelectValueProperties extends MenuProps {
   placeholder?: string
   customFallbackPlaceholder?: string
   isSubmitting?: boolean
+  isDisabled?: boolean
 }
 
 const EditableSelectValue = ({
@@ -35,6 +36,7 @@ const EditableSelectValue = ({
   children,
   isSubmitting,
   isLoaded,
+  isDisabled,
   skeletonWidth,
   skeletonHeight,
 }: EditableSelectValueProperties) => {
@@ -46,11 +48,11 @@ const EditableSelectValue = ({
   const defaultColor = value && !isSubmitting ? 'black.900' : 'gray.400'
 
   const handleStartHover = () => {
-    setIsHovering(true)
+    if (!isDisabled) setIsHovering(true)
   }
 
   const handleEndHover = () => {
-    setIsHovering(false)
+    if (isHovering) setIsHovering(false)
   }
 
   return (
@@ -61,13 +63,21 @@ const EditableSelectValue = ({
       <Menu>
         <MenuButton
           id={id}
-          as={Text}
-          fontSize="md"
+          as={Button}
+          fontSize="lg"
           fontWeight={400}
           color={isHovering && !isSubmitting ? 'brand.500' : defaultColor}
-          py={1}
-          cursor={isSubmitting ? 'auto' : 'pointer'}
-          isDisabled={isSubmitting}
+          cursor={isDisabled ? 'text' : 'pointer'}
+          px={0}
+          display="block"
+          isDisabled={isDisabled ?? isSubmitting}
+          _disabled={{
+            opacity: 1,
+          }}
+          _hover={{
+            opacity: 1,
+            color: isHovering && !isSubmitting ? 'brand.500' : defaultColor,
+          }}
           onMouseEnter={handleStartHover}
           onMouseLeave={handleEndHover}
         >
