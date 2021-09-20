@@ -1,6 +1,7 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React from 'react'
 
+import { TeamSelect } from 'src/components/Team/Select/wrapper'
 import TeamTag from 'src/components/Team/Tag'
 
 export const AddUserTeam = () => (
@@ -11,11 +12,13 @@ export const AddUserTeam = () => (
         py={2}
         cursor="pointer"
         _hover={{ bg: 'brand.500', color: 'white' }}
-        transition="all .3s"
+        transition="all ease-in-out .3s"
       >
         +
       </TeamTag>
     </PopoverTrigger>
-    <PopoverContent>Ok</PopoverContent>
+    <PopoverContent width="sm">
+      <TeamSelect />
+    </PopoverContent>
   </Popover>
 )
