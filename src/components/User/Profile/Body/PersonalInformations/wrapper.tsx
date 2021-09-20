@@ -23,6 +23,7 @@ export interface UserProfileBodyPersonalInformationsProperties {
   isMyUser?: boolean
   userID?: User['id']
   canUpdate?: boolean
+  canDelete?: boolean
 }
 
 interface UpdateUserInformationMutationResult {
@@ -43,6 +44,7 @@ export const UserProfileBodyPersonalInformations = ({
   isMyUser,
   isLoaded,
   canUpdate,
+  canDelete,
 }: UserProfileBodyPersonalInformationsProperties) => {
   const [user, setUser] = useRecoilState(userSelector(userID))
   const intl = useIntl()
@@ -121,7 +123,7 @@ export const UserProfileBodyPersonalInformations = ({
           <FormLabel fontSize="md" m={0}>
             {intl.formatMessage(messages.fourthFieldLabel)}
           </FormLabel>
-          <UserTeams userID={userID} isLoaded={isLoaded} isEditable={canUpdate} />
+          <UserTeams userID={userID} isLoaded={isLoaded} isEditable={canDelete} />
         </Stack>
 
         <EditableInputField

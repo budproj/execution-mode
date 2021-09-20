@@ -36,6 +36,7 @@ export const UserProfile = ({ userID }: UserProfileProperties) => {
 
   const isLoaded = !loading && isRecoilSynced
   const canUpdate = user?.policy?.update === GraphQLEffect.ALLOW
+  const canDelete = user?.policy?.delete === GraphQLEffect.ALLOW
 
   useEffect(() => {
     if (userID && userID !== variables?.id) getUserData()
@@ -49,7 +50,12 @@ export const UserProfile = ({ userID }: UserProfileProperties) => {
     <Stack py={4} spacing={6} direction="column" flexGrow={1}>
       <UserProfileHeader userID={userID} isLoaded={isLoaded} canUpdate={canUpdate} />
       <Divider borderColor="black.200" />
-      <UserProfileBody userID={userID} isLoaded={isLoaded} canUpdate={canUpdate} />
+      <UserProfileBody
+        userID={userID}
+        isLoaded={isLoaded}
+        canUpdate={canUpdate}
+        canDelete={canDelete}
+      />
     </Stack>
   )
 }

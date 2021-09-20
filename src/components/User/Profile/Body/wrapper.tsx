@@ -12,9 +12,15 @@ export interface UserProfileBodyProperties {
   isLoaded: boolean
   userID?: User['id']
   canUpdate?: boolean
+  canDelete?: boolean
 }
 
-export const UserProfileBody = ({ userID, isLoaded, canUpdate }: UserProfileBodyProperties) => {
+export const UserProfileBody = ({
+  userID,
+  isLoaded,
+  canUpdate,
+  canDelete,
+}: UserProfileBodyProperties) => {
   const myUserID = useRecoilValue(meAtom)
   const isMyUser = myUserID === userID
 
@@ -25,6 +31,7 @@ export const UserProfileBody = ({ userID, isLoaded, canUpdate }: UserProfileBody
         isLoaded={isLoaded}
         isMyUser={isMyUser}
         canUpdate={canUpdate}
+        canDelete={canDelete}
       />
       <UserProfileBodySocialMedia
         userID={userID}
