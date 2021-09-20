@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil'
 import EditableInputField from 'src/components/Base/EditableInputField'
 import EditableSelectField from 'src/components/Base/EditableSelectField'
 import EditableTextAreaField from 'src/components/Base/EditableTextAreaField'
-import UserTeamTags from 'src/components/User/TeamTags'
+import { UserTeams } from 'src/components/User/Teams/wrapper'
 import { USER_GENDER } from 'src/components/User/constants'
 import { User } from 'src/components/User/types'
 import useIntlGender from 'src/state/hooks/useIntlGender'
@@ -121,7 +121,7 @@ export const UserProfileBodyPersonalInformations = ({
           <FormLabel fontSize="md" m={0}>
             {intl.formatMessage(messages.fourthFieldLabel)}
           </FormLabel>
-          <UserTeamTags userID={userID} isLoaded={isLoaded} />
+          <UserTeams userID={userID} isLoaded={isLoaded} isEditable={canUpdate} />
         </Stack>
 
         <EditableInputField
