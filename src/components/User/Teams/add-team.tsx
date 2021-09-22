@@ -4,7 +4,11 @@ import React from 'react'
 import { TeamSelect } from 'src/components/Team/Select/wrapper'
 import TeamTag from 'src/components/Team/Tag'
 
-export const AddUserTeam = () => (
+type AddUserTeamProperties = {
+  teamIDsBlacklist: string[]
+}
+
+export const AddUserTeam = ({ teamIDsBlacklist }: AddUserTeamProperties) => (
   <Popover placement="bottom-end">
     <PopoverTrigger>
       <TeamTag
@@ -18,7 +22,7 @@ export const AddUserTeam = () => (
       </TeamTag>
     </PopoverTrigger>
     <PopoverContent width="sm">
-      <TeamSelect />
+      <TeamSelect teamIDsBlacklist={teamIDsBlacklist} />
     </PopoverContent>
   </Popover>
 )

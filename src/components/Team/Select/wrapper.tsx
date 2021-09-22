@@ -16,13 +16,14 @@ type TeamData = {
 
 type TeamTagListProperties = {
   teams?: TeamData[]
+  teamIDsBlacklist?: string[]
 }
 
 type GetReachableTeamsResponse = {
   teams: GraphQLConnection<Team>
 }
 
-export const TeamSelect = ({ teams }: TeamTagListProperties) => {
+export const TeamSelect = ({ teams, teamIDsBlacklist }: TeamTagListProperties) => {
   const [currentTeams, setCurrentTeams] = useState<TeamData[]>([])
   const [isLoaded, setIsLoaded] = useState(false)
   const [remoteTeams, setRemoteTeamEdges, _, isRemoteTeamsLoaded] = useConnectionEdges<Team>()
@@ -33,6 +34,8 @@ export const TeamSelect = ({ teams }: TeamTagListProperties) => {
       setRemoteTeamEdges(data.teams.edges)
     },
   })
+
+  const whitelistedTeams = currentTeams.filter((team) => !teamIDsBlacklist?.includes(team.id))
 
   useEffect(() => {
     if (teams) {
@@ -54,7 +57,7 @@ export const TeamSelect = ({ teams }: TeamTagListProperties) => {
 
   return (
     <Stack>
-      {currentTeams.map((team) => (
+      {whitelistedTeams.map((team) => (
         <Button
           key={team.id}
           variant="text"

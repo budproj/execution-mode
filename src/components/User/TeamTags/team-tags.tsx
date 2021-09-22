@@ -11,19 +11,22 @@ import { userAtomFamily } from 'src/state/recoil/user'
 import UserTeamTagsSkeleton from './skeleton'
 
 export interface UserTeamTagsProperties {
+  teams?: Team[]
   userID?: User['id']
   isLoaded?: boolean
   max?: number
 }
 
-const UserTeamTags = ({ userID, isLoaded, max }: UserTeamTagsProperties) => {
+const UserTeamTags = ({ teams, userID, isLoaded, max }: UserTeamTagsProperties) => {
   const user = useRecoilValue(userAtomFamily(userID))
-  const [teams, setTeamEdges] = useConnectionEdges<Team>()
-  const limitedTeams = teams?.slice(0, max)
+  const [remoteTeams, setTeamEdges] = useConnectionEdges<Team>()
+
+  const userTeams = teams ?? remoteTeams
+  const limitedTeams = userTeams?.slice(0, max)
 
   useEffect(() => {
-    if (user) setTeamEdges(user.teams?.edges)
-  }, [user, setTeamEdges])
+    if (user && !teams) setTeamEdges(user.teams?.edges)
+  }, [user, teams, setTeamEdges])
 
   return isLoaded && limitedTeams ? (
     <Wrap spacing={2}>
