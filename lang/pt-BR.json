@@ -467,6 +467,10 @@
     "defaultMessage": "Um ícone de seta para o lado direito, meramente ilustrativo",
     "description": "The alternative text explaining our arrow right icon"
   },
+  "FoCix/": {
+    "defaultMessage": "Procurar",
+    "description": "The text is displayed as the default placeholder for all our search inputs"
+  },
   "GHu/pe": {
     "defaultMessage": "Um ícone de video",
     "description": "The desc message for the Video icon. This icon is used to ilustrate our key results"
@@ -482,10 +486,6 @@
   "Gt9Z3F": {
     "defaultMessage": "Página não encontrada | bud",
     "description": "The page title of our not found error page that is displayed in the browser tab"
-  },
-  "GtgPfn": {
-    "defaultMessage": "Procurar",
-    "description": "The text is displayed as a placeholder in our search input inside the key-result drawers while the user is changing the owner of that key-result"
   },
   "H/aZym": {
     "defaultMessage": "Escolha como suas informações aparecerão para os outros usuários.",
@@ -867,6 +867,10 @@
     "defaultMessage": "Cancelar",
     "description": "This message appears as a cancel button in the modal while deleting a given resource"
   },
+  "WkvrVY": {
+    "defaultMessage": "Procurar times",
+    "description": "The text is displayed as a placeholder in any search input regarding teams"
+  },
   "X2V7x7": {
     "defaultMessage": "Confiança",
     "description": "The text of the table head related to the Confidence Level column"
@@ -966,6 +970,10 @@
   "bdkUKs": {
     "defaultMessage": "Times",
     "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
+  },
+  "biDODR": {
+    "defaultMessage": "Um ícone de lupa, indicando que este é um campo de busca",
+    "description": "This text is used by screen readers to explain the search icon in all our search inputs"
   },
   "bqCVp4": {
     "defaultMessage": "Clique aqui para começar a escrever um comentário",
@@ -1162,10 +1170,6 @@
   "kawRcN": {
     "defaultMessage": "Cancelar",
     "description": "This message is displayed in the \"CANCEL\" button in the checkin form"
-  },
-  "kpJFIH": {
-    "defaultMessage": "Um ícone de lupa, indicando que este é um campo de busca",
-    "description": "This text is used by screen readers to explain the icon to the user. It is located in the key-result drawers, inside the edit owner component, as a description for the search icon"
   },
   "kynYpx": {
     "defaultMessage": "Meus Resultados-Chave",

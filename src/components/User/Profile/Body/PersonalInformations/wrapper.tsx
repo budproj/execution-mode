@@ -51,6 +51,7 @@ export const UserProfileBodyPersonalInformations = ({
   const [intlGender, setIntlGenderValue, previousGenderValue] = useIntlGender(user?.gender)
   const [maleIntlGender] = useIntlGender(USER_GENDER.MALE)
   const [femaleIntlGender] = useIntlGender(USER_GENDER.FEMALE)
+
   const [updateUser, { loading }] = useMutation<UpdateUserInformationMutationResult>(
     queries.UPDATE_USER_INFORMATION,
     {

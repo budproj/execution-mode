@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
-import { Stack, Button } from '@chakra-ui/react'
+import { MenuItem } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 import { GraphQLConnection } from 'src/components/types'
@@ -18,13 +18,19 @@ type TeamTagListProperties = {
   filter?: string
   teams?: TeamData[]
   teamIDsBlacklist?: string[]
+  onSelect: (teamID: string) => () => void
 }
 
 type GetReachableTeamsResponse = {
   teams: GraphQLConnection<Team>
 }
 
-export const TeamSelect = ({ filter, teams, teamIDsBlacklist }: TeamTagListProperties) => {
+export const TeamSelect = ({
+  filter,
+  teams,
+  teamIDsBlacklist,
+  onSelect,
+}: TeamTagListProperties) => {
   const [currentTeams, setCurrentTeams] = useState<TeamData[]>([])
   const [isLoaded, setIsLoaded] = useState(false)
   const [remoteTeams, setRemoteTeamEdges, _, isRemoteTeamsLoaded] = useConnectionEdges<Team>()
@@ -60,23 +66,26 @@ export const TeamSelect = ({ filter, teams, teamIDsBlacklist }: TeamTagListPrope
   }, [isLoaded, teams, getReachableTeams])
 
   return (
-    <Stack>
+    <>
       {filteredTeams.map((team) => (
-        <Button
+        <MenuItem
           key={team.id}
-          variant="text"
           py={4}
           justifyContent="flex-start"
           h="full"
           fontWeight={400}
           borderBottomWidth={1}
+          color="new-gray.800"
           borderColor="new-gray.300"
           _hover={{ color: 'brand.500' }}
-          _last={{ borderBottomWidth: 0 }}
+          _focus={{ color: 'brand.500' }}
+          _active={{}}
+          _last={{ borderBottomWidth: 0, pb: 2 }}
+          onClick={onSelect(team.id)}
         >
           {team.name}
-        </Button>
+        </MenuItem>
       ))}
-    </Stack>
+    </>
   )
 }

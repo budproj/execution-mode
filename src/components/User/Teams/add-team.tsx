@@ -1,24 +1,54 @@
-import { Popover, PopoverContent, PopoverTrigger, Stack } from '@chakra-ui/react'
+import { useMutation } from '@apollo/client'
+import { MenuButton, Menu, MenuList } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 
 import { TeamSearch } from 'src/components/Team/Search/wrapper'
 import { TeamSelect } from 'src/components/Team/Select/wrapper'
 import TeamTag from 'src/components/Team/Tag'
+import { Team } from 'src/components/Team/types'
+import { GraphQLConnection } from 'src/components/types'
+import { userSelector } from 'src/state/recoil/user'
+
+import queries from './queries.gql'
 
 type AddUserTeamProperties = {
+  userID?: string
   teamIDsBlacklist: string[]
 }
 
-export const AddUserTeam = ({ teamIDsBlacklist }: AddUserTeamProperties) => {
+interface AddUserToTeamMutationResult {
+  addTeamToUser: {
+    id: string
+    teams: GraphQLConnection<Team>
+  }
+}
+
+export const AddUserTeam = ({ userID, teamIDsBlacklist }: AddUserTeamProperties) => {
   const [filter, setFilter] = useState('')
+  const setUser = useSetRecoilState(userSelector(userID))
+  const [addTeamToUser] = useMutation<AddUserToTeamMutationResult>(queries.ADD_TEAM_TO_USER, {
+    onCompleted: (data) => {
+      setUser(data.addTeamToUser)
+    },
+  })
 
   const handleSearch = (value: string) => {
     if (filter !== value) setFilter(value)
   }
 
+  const handleSelect = (teamID: string) => () => {
+    void addTeamToUser({
+      variables: {
+        userID,
+        teamID,
+      },
+    })
+  }
+
   return (
-    <Popover placement="bottom-end">
-      <PopoverTrigger>
+    <Menu closeOnSelect placement="bottom-end">
+      <MenuButton>
         <TeamTag
           p={3}
           py={2}
@@ -28,13 +58,11 @@ export const AddUserTeam = ({ teamIDsBlacklist }: AddUserTeamProperties) => {
         >
           +
         </TeamTag>
-      </PopoverTrigger>
-      <PopoverContent width="sm">
-        <Stack spacing={4}>
-          <TeamSearch onSearch={handleSearch} />
-          <TeamSelect teamIDsBlacklist={teamIDsBlacklist} filter={filter} />
-        </Stack>
-      </PopoverContent>
-    </Popover>
+      </MenuButton>
+      <MenuList p={4} boxShadow="with-stroke.light" borderColor="new-gray.200" borderWidth={1}>
+        <TeamSearch onSearch={handleSearch} />
+        <TeamSelect teamIDsBlacklist={teamIDsBlacklist} filter={filter} onSelect={handleSelect} />
+      </MenuList>
+    </Menu>
   )
 }
