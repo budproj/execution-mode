@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { MenuButton, Menu, MenuList } from '@chakra-ui/react'
+import { MenuButton, Menu, MenuList, Spinner } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 
@@ -27,11 +27,14 @@ interface AddUserToTeamMutationResult {
 export const AddUserTeam = ({ userID, teamIDsBlacklist }: AddUserTeamProperties) => {
   const [filter, setFilter] = useState('')
   const setUser = useSetRecoilState(userSelector(userID))
-  const [addTeamToUser] = useMutation<AddUserToTeamMutationResult>(queries.ADD_TEAM_TO_USER, {
-    onCompleted: (data) => {
-      setUser(data.addTeamToUser)
+  const [addTeamToUser, { loading }] = useMutation<AddUserToTeamMutationResult>(
+    queries.ADD_TEAM_TO_USER,
+    {
+      onCompleted: (data) => {
+        setUser(data.addTeamToUser)
+      },
     },
-  })
+  )
 
   const handleSearch = (value: string) => {
     if (filter !== value) setFilter(value)
@@ -49,15 +52,19 @@ export const AddUserTeam = ({ userID, teamIDsBlacklist }: AddUserTeamProperties)
   return (
     <Menu closeOnSelect placement="bottom-end">
       <MenuButton>
-        <TeamTag
-          p={3}
-          py={2}
-          cursor="pointer"
-          _hover={{ bg: 'brand.500', color: 'white' }}
-          transition="all ease-in-out .3s"
-        >
-          +
-        </TeamTag>
+        {loading ? (
+          <Spinner color="brand.500" />
+        ) : (
+          <TeamTag
+            p={3}
+            py={2}
+            cursor="pointer"
+            _hover={{ bg: 'brand.500', color: 'white' }}
+            transition="all ease-in-out .3s"
+          >
+            +
+          </TeamTag>
+        )}
       </MenuButton>
       <MenuList p={4} boxShadow="with-stroke.light" borderColor="new-gray.200" borderWidth={1}>
         <TeamSearch onSearch={handleSearch} />
