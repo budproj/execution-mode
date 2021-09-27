@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil'
 import EditableInputField from 'src/components/Base/EditableInputField'
 import EditableSelectField from 'src/components/Base/EditableSelectField'
 import EditableTextAreaField from 'src/components/Base/EditableTextAreaField'
-import UserTeamTags from 'src/components/User/TeamTags'
+import { UserTeams } from 'src/components/User/Teams/wrapper'
 import { USER_GENDER } from 'src/components/User/constants'
 import { User } from 'src/components/User/types'
 import useIntlGender from 'src/state/hooks/useIntlGender'
@@ -23,6 +23,7 @@ export interface UserProfileBodyPersonalInformationsProperties {
   isMyUser?: boolean
   userID?: User['id']
   canUpdate?: boolean
+  canDelete?: boolean
 }
 
 interface UpdateUserInformationMutationResult {
@@ -43,12 +44,14 @@ export const UserProfileBodyPersonalInformations = ({
   isMyUser,
   isLoaded,
   canUpdate,
+  canDelete,
 }: UserProfileBodyPersonalInformationsProperties) => {
   const [user, setUser] = useRecoilState(userSelector(userID))
   const intl = useIntl()
   const [intlGender, setIntlGenderValue, previousGenderValue] = useIntlGender(user?.gender)
   const [maleIntlGender] = useIntlGender(USER_GENDER.MALE)
   const [femaleIntlGender] = useIntlGender(USER_GENDER.FEMALE)
+
   const [updateUser, { loading }] = useMutation<UpdateUserInformationMutationResult>(
     queries.UPDATE_USER_INFORMATION,
     {
@@ -121,7 +124,7 @@ export const UserProfileBodyPersonalInformations = ({
           <FormLabel fontSize="md" m={0}>
             {intl.formatMessage(messages.fourthFieldLabel)}
           </FormLabel>
-          <UserTeamTags userID={userID} isLoaded={isLoaded} />
+          <UserTeams userID={userID} isLoaded={isLoaded} isEditable={canDelete} />
         </Stack>
 
         <EditableInputField

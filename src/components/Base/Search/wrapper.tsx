@@ -6,27 +6,28 @@ import SearchIcon from 'src/components/Icon/Search'
 
 import messages from './messages'
 
-export interface UserSearchProperties {
-  onChange?: (searchValue: string) => void
+export interface SearchProperties {
+  placeholder?: string
+  onSearch?: (searchValue: string) => void
 }
 
-export const UserSearch = ({ onChange }: UserSearchProperties) => {
+export const Search = ({ placeholder, onSearch }: SearchProperties) => {
   const intl = useIntl()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
 
-    if (onChange) onChange(value)
+    if (onSearch) onSearch(value)
   }
 
   return (
     <InputGroup>
       <InputLeftElement pointerEvents="none">
-        <SearchIcon fill="black.600" desc={intl.formatMessage(messages.iconDesc)} />
+        <SearchIcon fill="new-gray.600" desc={intl.formatMessage(messages.iconDesc)} />
       </InputLeftElement>
       <Input
         variant="solid"
-        placeholder={intl.formatMessage(messages.searchPlaceholder)}
+        placeholder={placeholder ?? intl.formatMessage(messages.defaultSearchPlaceholder)}
         onChange={handleChange}
       />
     </InputGroup>

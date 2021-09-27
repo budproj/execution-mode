@@ -16,8 +16,8 @@ const Input = {
     solid: {
       field: {
         borderWidth: 0,
-        bg: 'black.50',
-        color: 'black.600',
+        bg: 'new-gray.200',
+        color: 'new-gray.600',
       },
     },
   },

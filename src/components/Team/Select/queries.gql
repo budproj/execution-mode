@@ -1,0 +1,10 @@
+query GET_REACHABLE_TEAMS {
+  teams {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
+}

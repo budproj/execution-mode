@@ -3,10 +3,9 @@ import React from 'react'
 
 import { User } from 'src/components/User/types'
 
+import { Search } from '../../Base/Search/wrapper'
 import { UserList } from '../List/wrapper'
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
-
-import { UserSearch } from './search'
 
 export interface SelectUserFromListProperties {
   users: User[]
@@ -26,7 +25,7 @@ export const SelectUserFromList = ({
   avatarSubtitleType,
 }: SelectUserFromListProperties) => (
   <Stack spacing={4} maxH="full">
-    <UserSearch onChange={onSearch} />
+    <Search onSearch={onSearch} />
     <UserList
       showUserCard={showUserCard}
       users={users}
