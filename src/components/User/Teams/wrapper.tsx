@@ -28,7 +28,7 @@ export const UserTeams = ({ userID, isLoaded, isEditable }: UserTeamsProperties)
 
   return (
     <HStack>
-      <UserTeamTags userID={userID} isLoaded={isLoaded} teams={teams} />
+      <UserTeamTags isEditable={isEditable} userID={userID} isLoaded={isLoaded} teams={teams} />
       {isEditable && <AddUserTeam teamIDsBlacklist={teamIDs} userID={userID} />}
     </HStack>
   )
