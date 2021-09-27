@@ -1,27 +1,50 @@
-import { Tag, TagProps } from '@chakra-ui/react'
-import React, { forwardRef, RefObject } from 'react'
+import { Tag, TagLabel, TagProps, TagCloseButton, TagRightIcon, Spinner } from '@chakra-ui/react'
+import React, { forwardRef, RefObject, useState } from 'react'
+
+interface TeamTagProperties extends TagProps {
+  isLoading?: boolean
+  onClose?: () => void
+}
 
 const TeamTag = forwardRef(
   (
-    properties: TagProps,
+    { children, isLoading, onClose, ...rest }: TeamTagProperties,
     reference:
       | string
       | ((instance: HTMLDivElement | null) => void)
       | RefObject<HTMLDivElement>
       | null,
-  ) => (
-    <Tag
-      ref={reference}
-      bg="new-gray.300"
-      color="gray.500"
-      textTransform="uppercase"
-      fontWeight={500}
-      fontSize="sm"
-      borderRadius={4}
-      p={2}
-      {...properties}
-    />
-  ),
+  ) => {
+    const [wasClosed, setWasClosed] = useState(false)
+
+    const handleClose = () => {
+      setWasClosed(true)
+      onClose?.()
+    }
+
+    return (
+      <Tag
+        ref={reference}
+        bg="new-gray.300"
+        color="gray.500"
+        textTransform="uppercase"
+        fontWeight={500}
+        fontSize="sm"
+        borderRadius={4}
+        p={2}
+        {...rest}
+      >
+        <TagLabel>{children}</TagLabel>
+        {Boolean(onClose) && !wasClosed && <TagCloseButton opacity={1} onClick={handleClose} />}
+        {isLoading && wasClosed && <TagRightIcon as={Spinner} />}
+      </Tag>
+    )
+  },
 )
+
+TeamTag.defaultProps = {
+  isLoading: false,
+  onClose: undefined,
+}
 
 export default TeamTag

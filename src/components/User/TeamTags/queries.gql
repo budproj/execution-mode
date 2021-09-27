@@ -1,0 +1,13 @@
+mutation REMOVE_TEAM_FROM_USER($userID: ID!, $teamID: ID!) {
+  removeTeamFromUser(userID: $userID, teamID: $teamID) {
+    id
+    teams {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+}

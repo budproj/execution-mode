@@ -1,28 +1,58 @@
+import { useMutation } from '@apollo/client'
 import { Wrap, WrapItem } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import TeamTag from 'src/components/Team/Tag'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
+import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
-import { userAtomFamily } from 'src/state/recoil/user'
+import { userSelector } from 'src/state/recoil/user'
 
+import queries from './queries.gql'
 import UserTeamTagsSkeleton from './skeleton'
 
 export interface UserTeamTagsProperties {
   teams?: Team[]
   userID?: User['id']
   isLoaded?: boolean
+  isEditable?: boolean
   max?: number
 }
 
-const UserTeamTags = ({ teams, userID, isLoaded, max }: UserTeamTagsProperties) => {
-  const user = useRecoilValue(userAtomFamily(userID))
+interface RemoveTeamFromUserMutationResult {
+  removeTeamFromUser: {
+    id: string
+    teams: GraphQLConnection<Team>
+  }
+}
+
+const UserTeamTags = ({ teams, userID, isLoaded, isEditable, max }: UserTeamTagsProperties) => {
+  const [user, setUser] = useRecoilState(userSelector(userID))
   const [remoteTeams, setTeamEdges] = useConnectionEdges<Team>()
+
+  const [removeTeamFromUser, { loading }] = useMutation<RemoveTeamFromUserMutationResult>(
+    queries.REMOVE_TEAM_FROM_USER,
+    {
+      onCompleted: (data) => {
+        setUser(data.removeTeamFromUser)
+      },
+    },
+  )
 
   const userTeams = teams ?? remoteTeams
   const limitedTeams = userTeams?.slice(0, max)
+  const hasMoreThanOneTeam = limitedTeams.length > 1
+
+  const handleRemoveTeam = (teamID: string) => () => {
+    void removeTeamFromUser({
+      variables: {
+        teamID,
+        userID,
+      },
+    })
+  }
 
   useEffect(() => {
     if (user && !teams) setTeamEdges(user.teams?.edges)
@@ -32,7 +62,12 @@ const UserTeamTags = ({ teams, userID, isLoaded, max }: UserTeamTagsProperties) 
     <Wrap spacing={2}>
       {limitedTeams.map((team) => (
         <WrapItem key={team.id}>
-          <TeamTag>{team.name}</TeamTag>
+          <TeamTag
+            isLoading={loading}
+            onClose={isEditable && hasMoreThanOneTeam ? handleRemoveTeam(team.id) : undefined}
+          >
+            {team.name}
+          </TeamTag>
         </WrapItem>
       ))}
     </Wrap>
