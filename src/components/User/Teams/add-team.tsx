@@ -57,7 +57,6 @@ export const AddUserTeam = ({ userID, teamIDsBlacklist }: AddUserTeamProperties)
         ) : (
           <TeamTag
             p={3}
-            py={2}
             fontSize="md"
             cursor="pointer"
             _hover={{ bg: 'brand.500', color: 'white' }}
