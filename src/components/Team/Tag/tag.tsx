@@ -35,7 +35,11 @@ const TeamTag = forwardRef(
         {...rest}
       >
         <TagLabel>{children}</TagLabel>
-        {Boolean(onClose) && !wasClosed && <TagCloseButton opacity={1} onClick={handleClose} />}
+        {Boolean(onClose) && !wasClosed && (
+          <TagCloseButton opacity={1} fontSize="md" onClick={handleClose}>
+            ×
+          </TagCloseButton>
+        )}
         {isLoading && wasClosed && <TagRightIcon as={Spinner} />}
       </Tag>
     )
