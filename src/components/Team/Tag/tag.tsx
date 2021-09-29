@@ -32,6 +32,7 @@ const TeamTag = forwardRef(
         fontSize="sm"
         borderRadius={4}
         p={2}
+        py={1}
         {...rest}
       >
         <TagLabel>{children}</TagLabel>
