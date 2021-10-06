@@ -3,7 +3,6 @@ import { defineMessages } from 'react-intl'
 type BottomActionsMessages =
   | 'deactivateUserButtonLabel'
   | 'deactivateDialogTitle'
-  | 'deactivateDialogConfirmation'
   | 'deactivatedConfirmationToast'
 
 export default defineMessages<BottomActionsMessages>({
@@ -19,12 +18,6 @@ export default defineMessages<BottomActionsMessages>({
     id: 'NzNAs4',
     description:
       'This text is used in our delete dialog confirmation to explain to the user what will happen',
-  },
-
-  deactivateDialogConfirmation: {
-    defaultMessage: 'Desativar',
-    id: 'zrlT3z',
-    description: 'This text is displayed in our menu, as an anchor to deactivate that given user',
   },
 
   deactivatedConfirmationToast: {

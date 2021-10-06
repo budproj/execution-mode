@@ -3,7 +3,7 @@ import { IconButton, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ConfirmationDialog } from '../../../../../Base/ConfirmationDialog/wrapper'
+import { ConfirmDeleteDialog } from '../../../../../Base/ConfirmDeleteDialog/wrapper'
 import { TrashBinOutlineIcon } from '../../../../../Icon/TrashBinOutline/trash-bin-outline'
 import { DeleteResult } from '../../../../../types'
 
@@ -92,7 +92,7 @@ export const DeleteAction = ({ id, onDelete }: DeleteActionProperties) => {
         />
       </IconButton>
 
-      <ConfirmationDialog
+      <ConfirmDeleteDialog
         dangerousAction
         isOpen={isDialogOpen}
         type={intl.formatMessage(messages.deleteDialogType)}

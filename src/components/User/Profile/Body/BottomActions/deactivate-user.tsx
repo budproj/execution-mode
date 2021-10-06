@@ -6,7 +6,6 @@ import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
-import { ConfirmationModal } from 'src/components/Base'
 import { UserStatus } from 'src/components/User/types'
 import selectUser from 'src/state/recoil/user/selector'
 
@@ -61,24 +60,14 @@ export const DeactivateUser = ({ userID, onUserDeactivation }: DeactivateUserPro
   }
 
   return (
-    <>
-      <Button isDisabled={isDisabled} variant="solid" colorScheme="red" onClick={handleClick}>
-        {loading ? (
-          <Spinner />
-        ) : (
-          intl.formatMessage(messages.deactivateUserButtonLabel, {
-            gender: user?.gender,
-          })
-        )}
-      </Button>
-
-      <ConfirmationModal
-        isOpen={isConfirmationDialogOpen}
-        titleText={intl.formatMessage(messages.deactivateDialogTitle)}
-        confirmationButtonText={intl.formatMessage(messages.deactivateDialogConfirmation)}
-        onClose={handleCloseDialog}
-        onConfirmation={handleDeactivation}
-      />
-    </>
+    <Button isDisabled={isDisabled} variant="solid" colorScheme="red" onClick={handleClick}>
+      {loading ? (
+        <Spinner />
+      ) : (
+        intl.formatMessage(messages.deactivateUserButtonLabel, {
+          gender: user?.gender,
+        })
+      )}
+    </Button>
   )
 }

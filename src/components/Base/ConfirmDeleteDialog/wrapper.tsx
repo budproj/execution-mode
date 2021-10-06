@@ -14,7 +14,7 @@ interface ConfirmationDialogProperties {
   description?: string
 }
 
-export const ConfirmationDialog = ({
+export const ConfirmDeleteDialog = ({
   isOpen,
   onClose,
   type,
@@ -39,7 +39,13 @@ export const ConfirmationDialog = ({
   const handleConfirmation = dangerousAction ? handleDangerousConfirmation : onConfirm
 
   return (
-    <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelReference} size="2xl" onClose={onClose}>
+    <AlertDialog
+      isOpen={isOpen}
+      leastDestructiveRef={cancelReference}
+      size="2xl"
+      portalProps={{ appendToParentPortal: false }}
+      onClose={onClose}
+    >
       <AlertDialogOverlay backgroundColor={newGray800WithTransparency}>
         <AlertDialogContent px={8} py={16} display="flex" gridGap={8} alignItems="center">
           {isShowingDangeousConfirmation ? (

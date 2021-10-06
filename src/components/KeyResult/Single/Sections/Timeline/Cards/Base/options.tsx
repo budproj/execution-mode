@@ -2,7 +2,7 @@ import { Menu, MenuButton, MenuList, Button } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ConfirmationModal } from 'src/components/Base'
+import { ConfirmDeleteDialog } from 'src/components/Base/ConfirmDeleteDialog/wrapper'
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 
 import messages from './messages'
@@ -73,16 +73,20 @@ const KeyResultSectionTimelineCardBaseOptions = ({
         </MenuList>
       </Menu>
 
-      <ConfirmationModal
+      <ConfirmDeleteDialog
+        type={
+          intlCardType
+            ? intlCardType.toLowerCase()
+            : intl.formatMessage(messages.cardTypeFallback).toLowerCase()
+        }
         isOpen={isDeleteConfirmationModalOpen}
-        titleText={intl.formatMessage(messages.deleteModalTitle, {
+        description={intl.formatMessage(messages.deleteModalTitle, {
           type: intlCardType
             ? intlCardType.toLowerCase()
             : intl.formatMessage(messages.cardTypeFallback).toLowerCase(),
         })}
-        confirmationButtonText={intl.formatMessage(messages.removeMenuOption)}
         onClose={handleCloseDeleteConfirmationModal}
-        onConfirmation={handleDelete}
+        onConfirm={handleDelete}
       />
     </>
   )
