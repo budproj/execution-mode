@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil'
 import { User } from 'src/components/User/types'
 import meAtom from 'src/state/recoil/user/me'
 
+import { BottomActions } from './BottomActions/wrapper'
 import { UserProfileBodyPersonalInformations } from './PersonalInformations/wrapper'
 import { UserProfileBodySocialMedia } from './SocialMedia/wrapper'
 
@@ -25,7 +26,7 @@ export const UserProfileBody = ({
   const isMyUser = myUserID === userID
 
   return (
-    <Stack direction="column" spacing={6}>
+    <Stack direction="column" spacing={6} h="full">
       <UserProfileBodyPersonalInformations
         userID={userID}
         isLoaded={isLoaded}
@@ -39,6 +40,7 @@ export const UserProfileBody = ({
         isMyUser={isMyUser}
         canUpdate={canUpdate}
       />
+      <BottomActions userID={userID} />
     </Stack>
   )
 }
