@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type BottomActionsMessages = 'deactivateUserButtonLabel'
+type BottomActionsMessages =
+  | 'deactivateUserButtonLabel'
+  | 'deactivateDialogTitle'
+  | 'deactivateDialogConfirmation'
 
 export default defineMessages<BottomActionsMessages>({
   deactivateUserButtonLabel: {
@@ -8,5 +11,18 @@ export default defineMessages<BottomActionsMessages>({
     id: 'BEo9Xi',
     description:
       'This text is used in our deactivate user button in the profile sidebar in our team page',
+  },
+
+  deactivateDialogTitle: {
+    defaultMessage: 'Você tem certeza que deseja desativar esse usuário?',
+    id: 'NzNAs4',
+    description:
+      'This text is used in our delete dialog confirmation to explain to the user what will happen',
+  },
+
+  deactivateDialogConfirmation: {
+    defaultMessage: 'Desativar',
+    id: 'zrlT3z',
+    description: 'This text is displayed in our menu, as an anchor to deactivate that given user',
   },
 })

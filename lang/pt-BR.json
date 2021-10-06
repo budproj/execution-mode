@@ -367,6 +367,10 @@
     "defaultMessage": "Objetivo atualizado com sucesso",
     "description": "This text is displayed as a toast when the user clicks on the check button to update a given objective title"
   },
+  "BEo9Xi": {
+    "defaultMessage": "Desativar usuári{gender, select, MALE {o} FEMALE {a} other {o}}",
+    "description": "This text is used in our deactivate user button in the profile sidebar in our team page"
+  },
   "BYO0eO": {
     "defaultMessage": "Um ícone de lixeira. Ao clicar nele você irá remover este resultado-chave",
     "description": "This text is used by screen readers to explain our trash can icon, used to remove that line in the key-result table"
