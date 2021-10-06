@@ -47,7 +47,7 @@ export const UserProfile = ({ userID }: UserProfileProperties) => {
   }, [isRecoilSynced, setIsRecoilSynced, user, data])
 
   return (
-    <Stack py={4} spacing={6} direction="column" flexGrow={1}>
+    <Stack py={4} spacing={6} direction="column" flexGrow={1} h="full">
       <UserProfileHeader userID={userID} isLoaded={isLoaded} canUpdate={canUpdate} />
       <Divider borderColor="black.200" />
       <UserProfileBody

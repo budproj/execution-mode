@@ -10,6 +10,11 @@ export interface CustomSorting {
   keyResults: Array<KeyResult['id']>
 }
 
+export enum UserStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+}
+
 export interface User extends GraphQLNode {
   firstName: string
   fullName: string
@@ -20,6 +25,7 @@ export interface User extends GraphQLNode {
   gender?: USER_GENDER
   role?: string
   picture?: string
+  status?: UserStatus
   nickname?: string
   about?: string
   linkedInProfileAddress?: string
