@@ -4,6 +4,7 @@ type BottomActionsMessages =
   | 'deactivateUserButtonLabel'
   | 'deactivateDialogTitle'
   | 'deactivateDialogConfirmation'
+  | 'deactivatedConfirmationToast'
 
 export default defineMessages<BottomActionsMessages>({
   deactivateUserButtonLabel: {
@@ -24,5 +25,11 @@ export default defineMessages<BottomActionsMessages>({
     defaultMessage: 'Desativar',
     id: 'zrlT3z',
     description: 'This text is displayed in our menu, as an anchor to deactivate that given user',
+  },
+
+  deactivatedConfirmationToast: {
+    defaultMessage: 'Você desativou {name} com sucesso',
+    id: '0kNbEF',
+    description: 'This message is used as a toast message when we finish deactivating a given user',
   },
 })

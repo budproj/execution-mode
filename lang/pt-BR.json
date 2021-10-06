@@ -651,6 +651,10 @@
     "defaultMessage": "Minha conta",
     "description": "MainAppBar user menu first item option"
   },
+  "NzNAs4": {
+    "defaultMessage": "Você tem certeza que deseja desativar esse usuário?",
+    "description": "This text is used in our delete dialog confirmation to explain to the user what will happen"
+  },
   "O13rH5": {
     "defaultMessage": "{completed}/{total}",
     "description": "This messages is displayed in our our key-result drawer above the checklist as the count of total completed checkmarks"
@@ -1478,6 +1482,10 @@
   "znpwST": {
     "defaultMessage": "Q3",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
+  },
+  "zrlT3z": {
+    "defaultMessage": "Desativar",
+    "description": "This text is displayed in our menu, as an anchor to deactivate that given user"
   },
   "zsB72A": {
     "defaultMessage": "Pré-visualização",

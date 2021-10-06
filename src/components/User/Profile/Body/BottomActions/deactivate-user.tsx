@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { Button } from '@chakra-ui/button'
 import { Spinner } from '@chakra-ui/spinner'
+import { useToast } from '@chakra-ui/toast'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
@@ -27,6 +28,7 @@ export const DeactivateUser = ({ userID, onUserDeactivation }: DeactivateUserPro
   const intl = useIntl()
   const [isConfirmationDialogOpen, setIsConfirmationDialogOpen] = useState(false)
   const [user, updateUser] = useRecoilState(selectUser(userID))
+  const toast = useToast()
 
   const [deactivateUser, { loading }] = useMutation<DeactivateUserResult>(queries.DEACTIVATE_USER, {
     variables: {
@@ -35,6 +37,13 @@ export const DeactivateUser = ({ userID, onUserDeactivation }: DeactivateUserPro
     onCompleted: (data) => {
       updateUser(data.deactivateUser)
       if (onUserDeactivation) onUserDeactivation()
+
+      toast({
+        status: 'success',
+        title: intl.formatMessage(messages.deactivatedConfirmationToast, {
+          name: user?.firstName,
+        }),
+      })
     },
   })
 
