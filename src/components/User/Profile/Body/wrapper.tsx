@@ -14,6 +14,7 @@ export interface UserProfileBodyProperties {
   userID?: User['id']
   canUpdate?: boolean
   canDelete?: boolean
+  onUserDeactivation?: () => void
 }
 
 export const UserProfileBody = ({
@@ -21,6 +22,7 @@ export const UserProfileBody = ({
   isLoaded,
   canUpdate,
   canDelete,
+  onUserDeactivation,
 }: UserProfileBodyProperties) => {
   const myUserID = useRecoilValue(meAtom)
   const isMyUser = myUserID === userID
@@ -40,7 +42,11 @@ export const UserProfileBody = ({
         isMyUser={isMyUser}
         canUpdate={canUpdate}
       />
-      <BottomActions userID={userID} />
+      <BottomActions
+        userID={userID}
+        canDelete={canDelete}
+        onUserDeactivation={onUserDeactivation}
+      />
     </Stack>
   )
 }

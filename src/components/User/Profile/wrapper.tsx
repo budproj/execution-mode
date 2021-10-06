@@ -15,13 +15,14 @@ import queries from './queries.gql'
 
 type UserProfileProperties = {
   userID: string
+  onUserDeactivation?: () => void
 }
 
 export interface GetUserDataQuery {
   user: User
 }
 
-export const UserProfile = ({ userID }: UserProfileProperties) => {
+export const UserProfile = ({ userID, onUserDeactivation }: UserProfileProperties) => {
   const [isRecoilSynced, setIsRecoilSynced] = useState(false)
   const [user, setUser] = useRecoilState(userSelector(userID))
   const [getUserData, { loading, variables, data }] = useLazyQuery<GetUserDataQuery>(
@@ -55,6 +56,7 @@ export const UserProfile = ({ userID }: UserProfileProperties) => {
         isLoaded={isLoaded}
         canUpdate={canUpdate}
         canDelete={canDelete}
+        onUserDeactivation={onUserDeactivation}
       />
     </Stack>
   )

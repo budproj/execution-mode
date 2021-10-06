@@ -13,6 +13,7 @@ import queries from './queries.gql'
 
 type DeactivateUserProperties = {
   userID?: string
+  onUserDeactivation?: () => void
 }
 
 type DeactivateUserResult = {
@@ -21,7 +22,7 @@ type DeactivateUserResult = {
   }
 }
 
-export const DeactivateUser = ({ userID }: DeactivateUserProperties) => {
+export const DeactivateUser = ({ userID, onUserDeactivation }: DeactivateUserProperties) => {
   const intl = useIntl()
   const [user, updateUser] = useRecoilState(selectUser(userID))
 
@@ -31,10 +32,11 @@ export const DeactivateUser = ({ userID }: DeactivateUserProperties) => {
     },
     onCompleted: (data) => {
       updateUser(data.deactivateUser)
+      if (onUserDeactivation) onUserDeactivation()
     },
   })
 
-  const isDisabled = user?.status === UserStatus.INACTIVE
+  const isDisabled = user?.status === UserStatus.INACTIVE && false
 
   const handleClick = () => {
     if (!isDisabled && !loading) void deactivateUser()

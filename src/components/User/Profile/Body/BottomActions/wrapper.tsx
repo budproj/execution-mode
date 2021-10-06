@@ -3,12 +3,18 @@ import React from 'react'
 
 import { DeactivateUser } from './deactivate-user'
 
-type BottomActionsProperties = {
+interface BottomActionsProperties {
   userID?: string
+  canDelete?: boolean
+  onUserDeactivation?: () => void
 }
 
-export const BottomActions = ({ userID }: BottomActionsProperties) => (
+export const BottomActions = ({
+  userID,
+  canDelete,
+  onUserDeactivation,
+}: BottomActionsProperties) => (
   <Stack flexGrow={1} justifyContent="flex-end">
-    <DeactivateUser userID={userID} />
+    {canDelete && <DeactivateUser userID={userID} onUserDeactivation={onUserDeactivation} />}
   </Stack>
 )
