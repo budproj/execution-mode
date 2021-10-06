@@ -15,6 +15,7 @@ import queries from './queries.gql'
 
 type UserProfileProperties = {
   userID: string
+  isRemovable?: boolean
   onUserDeactivation?: () => void
 }
 
@@ -22,7 +23,9 @@ export interface GetUserDataQuery {
   user: User
 }
 
-export const UserProfile = ({ userID, onUserDeactivation }: UserProfileProperties) => {
+export const UserProfile = ({ userID, isRemovable, onUserDeactivation }: UserProfileProperties) => {
+  isRemovable ??= true
+
   const [isRecoilSynced, setIsRecoilSynced] = useState(false)
   const [user, setUser] = useRecoilState(userSelector(userID))
   const [getUserData, { loading, variables, data }] = useLazyQuery<GetUserDataQuery>(
@@ -37,7 +40,7 @@ export const UserProfile = ({ userID, onUserDeactivation }: UserProfilePropertie
 
   const isLoaded = !loading && isRecoilSynced
   const canUpdate = user?.policy?.update === GraphQLEffect.ALLOW
-  const canDelete = user?.policy?.delete === GraphQLEffect.ALLOW
+  const canDelete = isRemovable && user?.policy?.delete === GraphQLEffect.ALLOW
 
   useEffect(() => {
     if (userID && userID !== variables?.id) getUserData()
