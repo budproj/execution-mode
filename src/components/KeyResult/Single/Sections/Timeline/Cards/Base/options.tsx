@@ -2,7 +2,7 @@ import { Menu, MenuButton, MenuList, Button } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ConfirmDeleteDialog } from 'src/components/Base/ConfirmDeleteDialog/wrapper'
+import { ConfirmDeleteDialog } from 'src/components/Base/Dialogs/Confirmation/Delete/wrapper'
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 
 import messages from './messages'

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { ColorizedDrawerOverlay } from 'src/components/Base/ColorizedDrawerOverlay/wrapper'
+import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserFromList } from 'src/components/User/SelectFromList/wrapper'
 import { User } from 'src/components/User/types'
@@ -83,7 +83,7 @@ export const TeamMembers = ({ teamID, isLoaded, members, onSearch }: TeamMembers
         onSelect={handleSelect}
       />
       <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>
-        <ColorizedDrawerOverlay>
+        <ColorizedOverlay>
           <DrawerContent>
             <DrawerBody>
               {selectedUserID && (
@@ -91,7 +91,7 @@ export const TeamMembers = ({ teamID, isLoaded, members, onSearch }: TeamMembers
               )}
             </DrawerBody>
           </DrawerContent>
-        </ColorizedDrawerOverlay>
+        </ColorizedOverlay>
       </Drawer>
     </TeamSectionWrapper>
   )

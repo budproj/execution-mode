@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { teamActiveObjectives } from '../../../../state/recoil/team/active-objectives'
-import { ConfirmDeleteDialog } from '../../../Base/ConfirmDeleteDialog/wrapper'
+import { ConfirmDeleteDialog } from '../../../Base/Dialogs/Confirmation/Delete/wrapper'
 import { DeleteResult } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 

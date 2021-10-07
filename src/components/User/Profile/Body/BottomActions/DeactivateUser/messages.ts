@@ -3,6 +3,8 @@ import { defineMessages } from 'react-intl'
 type BottomActionsMessages =
   | 'deactivateUserButtonLabel'
   | 'deactivateDialogTitle'
+  | 'deactivateDialogDescription'
+  | 'deactivateDialogKeyword'
   | 'deactivatedConfirmationToast'
 
 export default defineMessages<BottomActionsMessages>({
@@ -14,10 +16,25 @@ export default defineMessages<BottomActionsMessages>({
   },
 
   deactivateDialogTitle: {
-    defaultMessage: 'Você tem certeza que deseja desativar esse usuário?',
-    id: 'NzNAs4',
+    defaultMessage:
+      'Tem certeza que deseja desativar {gender, select, MALE {o} FEMALE {a} other {o}} usuári{gender, select, MALE {o} FEMALE {a} other {o}} {name}?',
+    id: '30/f+o',
     description:
       'This text is used in our delete dialog confirmation to explain to the user what will happen',
+  },
+
+  deactivateDialogDescription: {
+    defaultMessage:
+      '{name} perderá o acesso ao Bud e será removido dos times aos quais pertence, mas manteremos o histórico de check-ins e comentários feitos por ele até aqui.',
+    id: 'AbWup6',
+    description:
+      'This message appears in the confirmation dialog when we try to deactivate an user',
+  },
+
+  deactivateDialogKeyword: {
+    defaultMessage: 'DESATIVAR',
+    id: 'HhSnBG',
+    description: 'This is the keyword that the user needs to type to deactivate a given user',
   },
 
   deactivatedConfirmationToast: {

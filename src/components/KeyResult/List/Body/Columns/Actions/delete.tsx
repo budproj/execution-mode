@@ -3,7 +3,7 @@ import { IconButton, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ConfirmDeleteDialog } from '../../../../../Base/ConfirmDeleteDialog/wrapper'
+import { ConfirmDeleteDialog } from '../../../../../Base/Dialogs/Confirmation/Delete/wrapper'
 import { TrashBinOutlineIcon } from '../../../../../Icon/TrashBinOutline/trash-bin-outline'
 import { DeleteResult } from '../../../../../types'
 

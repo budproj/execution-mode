@@ -2,7 +2,7 @@ import { Drawer } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
-import { ColorizedDrawerOverlay } from 'src/components/Base/ColorizedDrawerOverlay/wrapper'
+import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
@@ -38,11 +38,11 @@ const KeyResultDrawer = () => {
 
   return (
     <Drawer isOpen={isOpen} size="xl" autoFocus={false} onClose={handleClose}>
-      <ColorizedDrawerOverlay>
+      <ColorizedOverlay>
         {isOpen && typeof keyResultID !== 'undefined' && (
           <KeyResultDrawerContent keyResultID={keyResultID} />
         )}
-      </ColorizedDrawerOverlay>
+      </ColorizedOverlay>
     </Drawer>
   )
 }

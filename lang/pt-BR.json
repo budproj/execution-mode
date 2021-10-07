@@ -79,10 +79,6 @@
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
   },
-  "0J4rjt": {
-    "defaultMessage": "Cancelar",
-    "description": "This text is used as a fallback to the confirmation modal cancel button. It is displayed if the component did not received a custom button label"
-  },
   "0N9lO8": {
     "defaultMessage": "Central de ajuda",
     "description": "MainAppBar user menu second item option"
@@ -110,6 +106,10 @@
   "0dk0bw": {
     "defaultMessage": "O logotipo do LinkedIn. Ao clicar você irá visitar o perfil do LinkedIn deste usuário",
     "description": "This message is displayed to screen readers to explain our LinkedIn icon"
+  },
+  "0kNbEF": {
+    "defaultMessage": "Você desativou {name} com sucesso",
+    "description": "This message is used as a toast message when we finish deactivating a given user"
   },
   "0t238C": {
     "defaultMessage": "Formato do Resultado-chave",
@@ -355,6 +355,10 @@
     "defaultMessage": "Visualize seus resultados-chave e seus detalhes, atualize seu progresso e seu nível de confiança.",
     "description": "The page description that is displayed in Google and screen readers"
   },
+  "AbWup6": {
+    "defaultMessage": "{name} perderá o acesso ao Bud e será removido dos times aos quais pertence, mas manteremos o histórico de check-ins e comentários feitos por ele até aqui.",
+    "description": "This message appears in the confirmation dialog when we try to deactivate an user"
+  },
   "Afdu+X": {
     "defaultMessage": "Excluir {type}",
     "description": "This message appears as a button label on the delete confirmation button"
@@ -491,6 +495,10 @@
     "defaultMessage": "Página não encontrada | bud",
     "description": "The page title of our not found error page that is displayed in the browser tab"
   },
+  "GzrbYC": {
+    "defaultMessage": "Confirmação de segurança",
+    "description": "This message is displayed as the input label for the danger confirmation resource dialog"
+  },
   "H/aZym": {
     "defaultMessage": "Escolha como suas informações aparecerão para os outros usuários.",
     "description": "This subtitle is displayed as the subtitle of the personal informations section in our user account settings page"
@@ -507,9 +515,9 @@
     "defaultMessage": "Ciclo",
     "description": "The label text above the Cycle section in our key result single page or drawers"
   },
-  "Hfg9tY": {
-    "defaultMessage": "Confirmar",
-    "description": "This text is used as a fallback to the confirmation modal confirm button. It is displayed if the component did not received a custom button label"
+  "HhSnBG": {
+    "defaultMessage": "DESATIVAR",
+    "description": "This is the keyword that the user needs to type to deactivate a given user"
   },
   "HsEMwj": {
     "defaultMessage": "Uma seta longa para a direita, separando o progresso anterior (à esquerda) do novo progress do check-in (à direita)",
@@ -531,13 +539,13 @@
     "defaultMessage": "Responsável",
     "description": "The label text above the Owner section in our key result single page or drawers"
   },
+  "IU2bu6": {
+    "defaultMessage": "Escreva {keyword} para confirmar sua ação",
+    "description": "This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource"
+  },
   "Ii3n+d": {
     "defaultMessage": "para <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the second line of our confidence tooltip"
-  },
-  "Innace": {
-    "defaultMessage": "Um ícone de exclamação, alertando que se você confirmar a ação não poderá ser desfeita",
-    "description": "This text is used by screen readers to explain the icon"
   },
   "J+UxkH": {
     "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
@@ -1147,10 +1155,6 @@
     "defaultMessage": "O objetivo foi removido com sucesso",
     "description": "This message appears in a toast after the user removes an objective"
   },
-  "jvxLB+": {
-    "defaultMessage": "Você tem certeza que deseja fazer isso? Essa ação é irreversível",
-    "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
-  },
   "jxyYl3": {
     "defaultMessage": "Ordenada pelo progresso",
     "description": "This tooltip appears when the user hovers the first column title"
@@ -1482,10 +1486,6 @@
   "znpwST": {
     "defaultMessage": "Q3",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
-  },
-  "zrlT3z": {
-    "defaultMessage": "Desativar",
-    "description": "This text is displayed in our menu, as an anchor to deactivate that given user"
   },
   "zsB72A": {
     "defaultMessage": "Pré-visualização",
