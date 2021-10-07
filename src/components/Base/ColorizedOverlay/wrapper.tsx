@@ -1,9 +1,8 @@
-import { DrawerOverlay, DrawerProps, useToken } from '@chakra-ui/react'
-import React from 'react'
+import { DrawerOverlay, useToken, ModalOverlayProps } from '@chakra-ui/react'
+import React, { ComponentType } from 'react'
 
-type ColorizeOverlayProperties = {
-  children: DrawerProps['children']
-  Component: React.ElementType
+interface ColorizeOverlayProperties extends ModalOverlayProps {
+  Component?: ComponentType<ModalOverlayProps>
 }
 
 export const ColorizedOverlay = ({ Component, ...rest }: ColorizeOverlayProperties) => {
