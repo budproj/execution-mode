@@ -28,7 +28,7 @@ export const ConfirmationDialog = ({
       onClose={onClose}
     >
       <ColorizedOverlay Component={AlertDialogOverlay}>
-        <AlertDialogContent px={8} py={16} display="flex" gridGap={6} alignItems="center">
+        <AlertDialogContent p={12} display="flex" gridGap={6} alignItems="center">
           <Header imageURL={headerImageURL} Wrapper={HeaderImageWrapper} title={title} />
           {descriptionComponent ?? description}
           <Actions onConfirm={onConfirm} onCancel={onClose} />
