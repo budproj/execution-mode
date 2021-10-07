@@ -12,7 +12,7 @@ const SettingsAccount = () => {
 
   return (
     <Flex direction="row" w="full" gridGap={14}>
-      <UserProfile userID={myUserID} />
+      <UserProfile userID={myUserID} isRemovable={false} />
       <Divider orientation="vertical" borderColor="black.200" />
 
       <SettingsAccountUserCardPreview userID={myUserID} />

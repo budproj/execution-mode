@@ -1,0 +1,18 @@
+query GET_TEAM_MEMBERS($teamID: ID!) {
+  team(id: $teamID) {
+    users(first: 1000) {
+      edges {
+        node {
+          id
+          firstName
+          nickname
+          fullName
+          role
+          picture
+          about
+          linkedInProfileAddress
+        }
+      }
+    }
+  }
+}

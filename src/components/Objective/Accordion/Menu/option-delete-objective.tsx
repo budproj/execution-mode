@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { teamActiveObjectives } from '../../../../state/recoil/team/active-objectives'
-import { ConfirmationDialog } from '../../../Base/ConfirmationDialog/wrapper'
+import { ConfirmDeleteDialog } from '../../../Base/ConfirmDeleteDialog/wrapper'
 import { DeleteResult } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 
@@ -77,7 +77,7 @@ export const DeleteObjectiveOption = ({
   return (
     <>
       <MenuItem onClick={handleClick}>{intl.formatMessage(messages.thirdMenuOption)}</MenuItem>
-      <ConfirmationDialog
+      <ConfirmDeleteDialog
         dangerousAction
         isOpen={isDialogOpen}
         type={intl.formatMessage(messages.deleteObjectiveDialogType)}
