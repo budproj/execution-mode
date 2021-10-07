@@ -2,8 +2,10 @@ import { defineMessages } from 'react-intl'
 
 type KeyResultListBodyColumnActionsMessage =
   | 'deleteIconDesc'
-  | 'deleteDialogType'
-  | 'deleteFirstDialogDescription'
+  | 'deleteDialogKeyword'
+  | 'deleteDialogFirstStageTitle'
+  | 'deleteDialogFirstStageDescription'
+  | 'deleteDialogConfirmationLabel'
   | 'deleteSuccessToastMessage'
   | 'deleteErrorToastMessage'
 
@@ -15,18 +17,31 @@ export default defineMessages<KeyResultListBodyColumnActionsMessage>({
       'This text is used by screen readers to explain our trash can icon, used to remove that line in the key-result table',
   },
 
-  deleteDialogType: {
-    defaultMessage: 'resultado-chave',
-    id: 'h/WXZ6',
-    description:
-      'This message is used as the type to display in some of the delete dialogs while removing a given key-result',
+  deleteDialogKeyword: {
+    defaultMessage: 'EXCLUIR',
+    id: 'RwKPpx',
+    description: 'This message is used as keyword to delete a key-result',
   },
 
-  deleteFirstDialogDescription: {
+  deleteDialogFirstStageTitle: {
+    defaultMessage: 'Tem certeza que deseja excluir este resultado-chave?',
+    id: 'E+0+QH',
+    description:
+      'This message is used as the title in our first dialog while removing a key-result',
+  },
+
+  deleteDialogFirstStageDescription: {
     defaultMessage: 'Você perderá todos os check-ins e comentários feitos até aqui.',
     id: 'FRO0CY',
     description:
       'This message is used as the description in our first dialog while removing a key-result',
+  },
+
+  deleteDialogConfirmationLabel: {
+    defaultMessage: 'Excluir resultado-chave',
+    id: 'VHOea1',
+    description:
+      'This message is used as the label in the confirmation button while removing a key-result',
   },
 
   deleteSuccessToastMessage: {

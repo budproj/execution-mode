@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
+import { DangerousActionConfirmationDialog } from 'src/components/Base/Dialogs/Confirmation/DangerousAction/wrapper'
+
 import { teamActiveObjectives } from '../../../../state/recoil/team/active-objectives'
-import { ConfirmDeleteDialog } from '../../../Base/ConfirmDeleteDialog/wrapper'
 import { DeleteResult } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 
@@ -77,13 +78,14 @@ export const DeleteObjectiveOption = ({
   return (
     <>
       <MenuItem onClick={handleClick}>{intl.formatMessage(messages.thirdMenuOption)}</MenuItem>
-      <ConfirmDeleteDialog
-        dangerousAction
+      <DangerousActionConfirmationDialog
         isOpen={isDialogOpen}
-        type={intl.formatMessage(messages.deleteObjectiveDialogType)}
-        description={intl.formatMessage(messages.deleteObjectiveDescription)}
-        onClose={handleClose}
+        keyword={intl.formatMessage(messages.deleteDialogKeyword)}
+        firstStageTitle={intl.formatMessage(messages.deleteObjectiveFirstStageTitle)}
+        firstStageDescription={intl.formatMessage(messages.deleteObjectiveFirstStageDescription)}
+        confirmationLabel={intl.formatMessage(messages.deleteDialogConfirmationLabel)}
         onConfirm={handleDelete}
+        onClose={handleClose}
       />
     </>
   )

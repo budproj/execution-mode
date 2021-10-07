@@ -3,7 +3,7 @@ import { defineMessages } from 'react-intl'
 type KeyResultsSectionTimelineCardBaseMessage =
   | 'treeDotsIconDesc'
   | 'removeMenuOption'
-  | 'deleteModalTitle'
+  | 'deleteDialogTitle'
   | 'cardTypeFallback'
   | 'unknownUser'
 
@@ -20,7 +20,7 @@ export default defineMessages<KeyResultsSectionTimelineCardBaseMessage>({
     description: 'This text is displayed in our menu, as an anchor to remove that given card',
   },
 
-  deleteModalTitle: {
+  deleteDialogTitle: {
     defaultMessage: 'Você tem certeza que deseja apagar este {type}?',
     id: '5llJzq',
     description:

@@ -1,7 +1,7 @@
 import { Stack } from '@chakra-ui/layout'
 import React from 'react'
 
-import { DeactivateUser } from './deactivate-user'
+import { DeactivateUser } from './DeactivateUser/deactivate-user'
 
 interface BottomActionsProperties {
   userID?: string

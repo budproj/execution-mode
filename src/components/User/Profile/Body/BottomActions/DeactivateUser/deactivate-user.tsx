@@ -6,9 +6,11 @@ import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
+import { KeywordBasedConfirmation } from 'src/components/Base/Dialogs/Confirmation/KeywordBased/wrapper'
 import { UserStatus } from 'src/components/User/types'
 import selectUser from 'src/state/recoil/user/selector'
 
+import { DialogImageWrapper } from './dialog-image-wrapper'
 import messages from './messages'
 import queries from './queries.gql'
 
@@ -60,14 +62,31 @@ export const DeactivateUser = ({ userID, onUserDeactivation }: DeactivateUserPro
   }
 
   return (
-    <Button isDisabled={isDisabled} variant="solid" colorScheme="red" onClick={handleClick}>
-      {loading ? (
-        <Spinner />
-      ) : (
-        intl.formatMessage(messages.deactivateUserButtonLabel, {
+    <>
+      <Button isDisabled={isDisabled} variant="solid" colorScheme="red" onClick={handleClick}>
+        {loading ? (
+          <Spinner />
+        ) : (
+          intl.formatMessage(messages.deactivateUserButtonLabel, {
+            gender: user?.gender,
+          })
+        )}
+      </Button>
+      <KeywordBasedConfirmation
+        headerImageURL={user?.picture}
+        HeaderImageWrapper={DialogImageWrapper}
+        isOpen={isConfirmationDialogOpen}
+        keyword={intl.formatMessage(messages.deactivateDialogKeyword)}
+        title={intl.formatMessage(messages.deactivateDialogTitle, {
           gender: user?.gender,
-        })
-      )}
-    </Button>
+          name: user?.firstName,
+        })}
+        description={intl.formatMessage(messages.deactivateDialogDescription, {
+          name: user?.firstName,
+        })}
+        onClose={handleCloseDialog}
+        onConfirm={handleDeactivation}
+      />
+    </>
   )
 }
