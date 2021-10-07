@@ -8,6 +8,7 @@ export interface ConfirmationDialogProperties {
   HeaderImageWrapper?: ComponentWithAs<'img', ImageProps>
   title?: string
   description?: string
+  confirmationLabel?: string
   descriptionComponent?: ReactNode
   onConfirm: () => void
   onClose: () => void

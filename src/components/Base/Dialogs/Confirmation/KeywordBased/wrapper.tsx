@@ -5,8 +5,7 @@ import { ConfirmationDialog } from '../Base/wrapper'
 
 import { Description } from './description'
 
-interface KeywordBasedConfirmationProperties extends ConfirmationDialogProperties {
-  description: string
+export interface KeywordBasedConfirmationProperties extends ConfirmationDialogProperties {
   keyword: string
 }
 

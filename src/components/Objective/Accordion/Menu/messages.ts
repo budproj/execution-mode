@@ -5,8 +5,10 @@ type ObjectiveAccordionMenuMessage =
   | 'firstMenuOption'
   | 'secondMenuOption'
   | 'thirdMenuOption'
-  | 'deleteObjectiveDialogType'
-  | 'deleteObjectiveDescription'
+  | 'deleteDialogKeyword'
+  | 'deleteObjectiveFirstStageTitle'
+  | 'deleteObjectiveFirstStageDescription'
+  | 'deleteDialogConfirmationLabel'
   | 'deleteObjectiveSuccessToastMessage'
   | 'deleteObjectiveErrorToastMessage'
 
@@ -39,17 +41,29 @@ export default defineMessages<ObjectiveAccordionMenuMessage>({
       'This is the third option that appears when you open the menu of a given objective inside the accordion button',
   },
 
-  deleteObjectiveDialogType: {
-    defaultMessage: 'objetivo',
-    id: 'lf4c2p',
-    description: 'This message is used as our resource type while removing a objective',
+  deleteDialogKeyword: {
+    defaultMessage: 'EXCLUIR',
+    id: 'N8Xs+4',
+    description: 'This message is used as a keyword to remove a given objective',
   },
 
-  deleteObjectiveDescription: {
+  deleteObjectiveFirstStageTitle: {
+    defaultMessage: 'Tem certeza que deseja excluir este objetivo?',
+    id: 'QpkwoM',
+    description: 'This message is used as the first dialog title while removing an objective',
+  },
+
+  deleteObjectiveFirstStageDescription: {
     defaultMessage:
       'Você perderá todos os resultados-chave deste OKR, incluindo todos os check-ins e comentários feitos até aqui.',
     id: 'IGHT6z',
     description: 'This message is used as the modal description while removing a given objective',
+  },
+
+  deleteDialogConfirmationLabel: {
+    defaultMessage: 'Excluir objetivo',
+    id: 'Pf0TwP',
+    description: 'This message is used in the confirmation button while removing a given objective',
   },
 
   deleteObjectiveSuccessToastMessage: {

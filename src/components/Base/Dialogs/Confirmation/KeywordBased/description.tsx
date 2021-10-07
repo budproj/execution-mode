@@ -10,7 +10,7 @@ import messages from './messages'
 
 interface DescriptionProperties {
   keyword: string
-  description: string
+  description?: string
   isValid: boolean
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
