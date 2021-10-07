@@ -9,6 +9,6 @@ export interface ConfirmationDialogProperties {
   title?: string
   description?: string
   descriptionComponent?: ReactNode
-  onClose: () => void
   onConfirm: () => void
+  onClose: () => void
 }

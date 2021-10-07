@@ -3,6 +3,7 @@ import React, { useRef } from 'react'
 
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 
+import { Actions } from './Sections/actions'
 import { Header } from './Sections/header'
 import { ConfirmationDialogProperties } from './interface'
 
@@ -13,8 +14,8 @@ export const ConfirmationDialog = ({
   HeaderImageWrapper,
   description,
   descriptionComponent,
-  onClose,
   onConfirm,
+  onClose,
 }: ConfirmationDialogProperties) => {
   const cancelReference = useRef<any>()
 
@@ -30,6 +31,7 @@ export const ConfirmationDialog = ({
         <AlertDialogContent px={8} py={16} display="flex" gridGap={6} alignItems="center">
           <Header imageURL={headerImageURL} Wrapper={HeaderImageWrapper} title={title} />
           {descriptionComponent ?? description}
+          <Actions onConfirm={onConfirm} onCancel={onClose} />
         </AlertDialogContent>
       </ColorizedOverlay>
     </AlertDialog>
