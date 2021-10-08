@@ -5,6 +5,7 @@ mutation UPDATE_USER_INFORMATION($userID: ID!, $userData: UserInput!) {
     lastName
     fullName
     nickname
+    email
     role
     gender
     about
