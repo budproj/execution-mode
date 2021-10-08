@@ -4,6 +4,7 @@ query GET_USER_DATA($id: ID!) {
     firstName
     lastName
     fullName
+    email
     role
     nickname
     gender
