@@ -7,18 +7,6 @@ import { AllReachableUsers } from "src/components/User/AllReachableUsers/wrapper
 import { User } from "src/components/User/types";
 import { KeyResultTooltipSupportTeam } from "./RichTooltips";
 
-const HelpIcon = ({ children }: { children: ReactChildren}) =>
-  <TooltipWithRichText tooltip={<KeyResultTooltipSupportTeam />}>
-    <Stack alignItems="center" direction="row" cursor="help">
-      {children}
-      <InfoCircleIcon
-        fill="gray.300"
-        stroke="gray.400"
-        desc='a'
-        // desc={intl.formatMessage(messages.listHeadConfidenceLevelIconDesc)}
-      />
-    </Stack>
-  </TooltipWithRichText>
 
 const BackIcon = () => <>?</>
 
@@ -31,19 +19,21 @@ type AddNewMemberProperties = {
   toggleIsAdding: () => void
 }
 
-const AddNewMember = ({ handleUserSelect, toggleIsAdding }: AddNewMemberProperties) => <Box>
-  <PopoverHeader onClick={toggleIsAdding}>
-    <BackIcon />
-    <Text as="span" fontSize='lg' color="new-gray.900" fontWeight="400">Time de Apoio</Text>
-  </PopoverHeader>
-  <AllReachableUsers onSelect={handleUserSelect} />
-</Box>
+const AddNewMember = ({ handleUserSelect, toggleIsAdding }: AddNewMemberProperties) =>
+  <Box>
+    <PopoverHeader onClick={toggleIsAdding}>
+      <BackIcon />
+      <Text as="span" fontSize='lg' color="new-gray.900" fontWeight="400">Time de Apoio</Text>
+    </PopoverHeader>
+    <AllReachableUsers onSelect={handleUserSelect} />
+  </Box>
 
 export const SupportTeamPopover = ({ supportTeamMembers }: SupportTeamPopoverProperties) => {
   const [isAdding, setIsAdding] = useState<boolean>(false);
   const toggleIsAdding = () => setIsAdding(!isAdding)
 
   const handleUserSelect = () => {
+    // TODO: add userID: string to supportTeamMembers
     toggleIsAdding()
   }
 
@@ -53,9 +43,16 @@ export const SupportTeamPopover = ({ supportTeamMembers }: SupportTeamPopoverPro
     <AddNewMember handleUserSelect={handleUserSelect} toggleIsAdding={toggleIsAdding}/> :
     <Box>
       <PopoverHeader>
-        <HelpIcon>
-          <Text as="span" fontSize='xl' color="new-gray.900" fontWeight="400">Time de Apoio</Text>
-        </HelpIcon>
+        <TooltipWithRichText tooltip={<KeyResultTooltipSupportTeam />}>
+          <Stack alignItems="center" direction="row" cursor="help">
+            <Text as="span" fontSize='xl' color="new-gray.900" fontWeight="400">Time de Apoio</Text>
+            <InfoCircleIcon
+              fill="gray.300"
+              stroke="gray.400"
+              desc='Um círculo com um ponto de interrogação ao centro'
+            />
+          </Stack>
+        </TooltipWithRichText>
         <Text color="new-gray.600">Essas são as pessoas ajudando {owner} neste resultado-chave:</Text>
       </PopoverHeader>
       <Box>
