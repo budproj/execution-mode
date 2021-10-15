@@ -1,10 +1,25 @@
-import { Box, PopoverFooter, PopoverHeader, Text } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { Box, PopoverFooter, PopoverHeader, Stack, Text } from "@chakra-ui/react";
+import React, { ReactChildren, useState } from "react";
+import { TooltipWithRichText } from "src/components/Base";
+import InfoCircleIcon from "src/components/Icon/InfoCircle";
 import { NamedAvatar } from "src/components/User";
 import { AllReachableUsers } from "src/components/User/AllReachableUsers/wrapper";
 import { User } from "src/components/User/types";
+import { KeyResultTooltipSupportTeam } from "./RichTooltips";
 
-const HelpIcon = () => <>?</>
+const HelpIcon = ({ children }: { children: ReactChildren}) =>
+  <TooltipWithRichText tooltip={<KeyResultTooltipSupportTeam />}>
+    <Stack alignItems="center" direction="row" cursor="help">
+      {children}
+      <InfoCircleIcon
+        fill="gray.300"
+        stroke="gray.400"
+        desc='a'
+        // desc={intl.formatMessage(messages.listHeadConfidenceLevelIconDesc)}
+      />
+    </Stack>
+  </TooltipWithRichText>
+
 const BackIcon = () => <>?</>
 
 type SupportTeamPopoverProperties = {
@@ -38,7 +53,9 @@ export const SupportTeamPopover = ({ supportTeamMembers }: SupportTeamPopoverPro
     <AddNewMember handleUserSelect={handleUserSelect} toggleIsAdding={toggleIsAdding}/> :
     <Box>
       <PopoverHeader>
-        <Text as="span" fontSize='xl' color="new-gray.900" fontWeight="400">Time de Apoio</Text><HelpIcon/>
+        <HelpIcon>
+          <Text as="span" fontSize='xl' color="new-gray.900" fontWeight="400">Time de Apoio</Text>
+        </HelpIcon>
         <Text color="new-gray.600">Essas são as pessoas ajudando {owner} neste resultado-chave:</Text>
       </PopoverHeader>
       <Box>
