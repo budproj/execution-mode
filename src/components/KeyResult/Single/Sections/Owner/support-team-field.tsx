@@ -64,6 +64,7 @@ export const SupportTeamField = ({
   return (
     <Popover
       isLazy
+      enabled={hasPermitionToUpdate}
       placement="bottom-start"
       isOpen={isOpen}
       size="md"
@@ -79,7 +80,7 @@ export const SupportTeamField = ({
           onMouseLeave={handleMouseLeave}
         >
           <DynamicAvatarGroup users={supportTeamMembers ?? []} isLoaded={isLoaded} />
-          {isLoaded && (
+          {isLoaded && hasPermitionToUpdate && (
             <>
               <Flex
                 w={12}
