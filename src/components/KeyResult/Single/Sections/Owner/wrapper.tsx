@@ -1,12 +1,9 @@
 import { Popover, PopoverTrigger, PopoverContent } from '@chakra-ui/popover'
 import { Box, Flex } from '@chakra-ui/react'
-import { useToken } from '@chakra-ui/system'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useRecoilState } from 'recoil'
 
-import { DynamicAvatarGroup } from 'src/components/Base'
-import PlusIcon from 'src/components/Icon/Plus'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
@@ -52,8 +49,8 @@ export const KeyResultSingleSectionOwnerWrapper = ({
     handleClose()
   }
 
-  return keyResult && (
-
+  return (
+    keyResult && (
       <Flex direction="row" justifyContent="space-between">
         <Flex gridGap={2} direction="column" flexGrow={1}>
           <Popover
@@ -79,8 +76,13 @@ export const KeyResultSingleSectionOwnerWrapper = ({
           </Popover>
         </Flex>
         <Flex gridGap={2} direction="column" flexGrow={1}>
-        <SupportTeamField supportTeamMembers={supportTeamMembers} canUpdate={canUpdate} />
+          <SupportTeamField
+            supportTeamMembers={supportTeamMembers}
+            keyResultId={keyResultID}
+            hasPermitionToUpdate={canUpdate}
+          />
         </Flex>
       </Flex>
+    )
   )
 }
