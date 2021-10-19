@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
+import { Text, Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 
@@ -17,12 +17,14 @@ type SupportTeamFieldProperties = {
   supportTeamMembers?: User[]
   hasPermitionToUpdate?: boolean
   keyResultId?: string
+  ownerName?: string
 }
 
 export const SupportTeamField = ({
   supportTeamMembers,
   hasPermitionToUpdate,
   keyResultId,
+  ownerName,
 }: SupportTeamFieldProperties) => {
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => hasPermitionToUpdate && setIsOpen(true)
@@ -81,10 +83,11 @@ export const SupportTeamField = ({
         >
           <DynamicAvatarGroup users={supportTeamMembers ?? []} isLoaded={isLoaded} />
           {isLoaded && hasPermitionToUpdate && (
-            <>
+            <Flex alignItems="center">
               <Flex
                 w={12}
                 h={12}
+                marginRight="0.5em"
                 justifyContent="center"
                 alignItems="center"
                 background="new-gray.200"
@@ -99,16 +102,19 @@ export const SupportTeamField = ({
                   desc="adicionar time suporte"
                 />
               </Flex>
-              {supportTeamMembers?.length ? '' : 'Adicionar'}
-            </>
+              <Text color={isHovering ? 'brand.500' : 'new-gray.700'}>
+                {supportTeamMembers?.length ? '' : 'Adicionar'}
+              </Text>
+            </Flex>
           )}
         </Flex>
       </PopoverTrigger>
-      <PopoverContent width="md" h="full" overflow="hidden">
+      <PopoverContent width="md" h="full">
         <SupportTeamPopover
           supportTeamMembers={supportTeamMembers}
           addUser={addUser}
           removeUser={removeUser}
+          ownerName={ownerName}
         />
       </PopoverContent>
     </Popover>

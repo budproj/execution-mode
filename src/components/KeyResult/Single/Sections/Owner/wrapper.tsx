@@ -80,6 +80,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
             supportTeamMembers={supportTeamMembers}
             keyResultId={keyResultID}
             hasPermitionToUpdate={canUpdate}
+            ownerName={keyResult?.owner?.firstName}
           />
         </Flex>
       </Flex>

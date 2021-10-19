@@ -14,7 +14,7 @@ const TooltipHeading = (properties: HeadingProps) => (
 )
 
 export const KeyResultTooltipSupportTeam = () => (
-  <Box pb={2}>
+  <Box>
     <Text>
       O time de apoio é uma ou mais pessoas que apoiam o responsável em um resultado-chave. No Bud,
       isso significa:
