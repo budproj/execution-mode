@@ -24,7 +24,7 @@ const policySelector = buildPartialSelector<KeyResult['policy']>('policy')
 
 export const KeyResultSingleSectionOwnerWrapper = ({
   keyResultID,
-}: KeyResultSingleSectionOwnerWrapperProperties) => {
+}: KeyResultSingleSectionOwnerWrapperProperties): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
   const intl = useIntl()
   const policy = useRecoilValue(policySelector(keyResultID))
@@ -49,41 +49,41 @@ export const KeyResultSingleSectionOwnerWrapper = ({
     handleClose()
   }
 
-  return (
-    keyResult && (
-      <Flex direction="row" justifyContent="space-between">
-        <Flex gridGap={2} direction="column" flexGrow={1}>
-          <Popover
-            isLazy
-            placement="bottom-start"
-            isOpen={isOpen}
-            size="md"
-            onOpen={handleOpen}
-            onClose={handleClose}
-          >
-            <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
-            <Flex direction="row">
-              <PopoverTrigger>
-                <Box>
-                  <KeyResultSectionOwner keyResultID={keyResultID} isEditing={isOpen} />
-                </Box>
-              </PopoverTrigger>
-              <Box flexGrow={1} />
-            </Flex>
-            <PopoverContent width="md" h="full" overflow="hidden">
-              <KeyResultAvailableOwners keyResultID={keyResultID} onSelect={handleUpdate} />
-            </PopoverContent>
-          </Popover>
-        </Flex>
-        <Flex gridGap={2} direction="column" flexGrow={1}>
-          <SupportTeamField
-            supportTeamMembers={supportTeamMembers}
-            keyResultId={keyResultID}
-            hasPermitionToUpdate={canUpdate}
-            ownerName={keyResult?.owner?.firstName}
-          />
-        </Flex>
+  return keyResult ? (
+    <Flex direction="row" justifyContent="space-between">
+      <Flex gridGap={2} direction="column" flexGrow={1}>
+        <Popover
+          isLazy
+          placement="bottom-start"
+          isOpen={isOpen}
+          size="md"
+          onOpen={handleOpen}
+          onClose={handleClose}
+        >
+          <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
+          <Flex direction="row">
+            <PopoverTrigger>
+              <Box>
+                <KeyResultSectionOwner keyResultID={keyResultID} isEditing={isOpen} />
+              </Box>
+            </PopoverTrigger>
+            <Box flexGrow={1} />
+          </Flex>
+          <PopoverContent width="md" h="full" overflow="hidden">
+            <KeyResultAvailableOwners keyResultID={keyResultID} onSelect={handleUpdate} />
+          </PopoverContent>
+        </Popover>
       </Flex>
-    )
+      <Flex gridGap={2} direction="column" flexGrow={1}>
+        <SupportTeamField
+          supportTeamMembers={supportTeamMembers}
+          keyResultId={keyResultID}
+          hasPermitionToUpdate={canUpdate}
+          ownerName={keyResult?.owner?.firstName}
+        />
+      </Flex>
+    </Flex>
+  ) : (
+    <div />
   )
 }
