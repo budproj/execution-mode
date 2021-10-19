@@ -7,6 +7,13 @@ type KeyResultsSectionOwnerMessage =
   | 'addSupportTeam'
   | 'addPerson'
   | 'supportTeamDescription'
+  | 'supportTeamTooltipDescription'
+  | 'tooltipCheckIns'
+  | 'tooltipCheckInsDescription'
+  | 'tooltipEditionAccess'
+  | 'tooltipEditionAccessDescription'
+  | 'tooltipNotifications'
+  | 'tooltipNotificationsDescription'
 
 export default defineMessages<KeyResultsSectionOwnerMessage>({
   label: {
@@ -44,5 +51,50 @@ export default defineMessages<KeyResultsSectionOwnerMessage>({
     defaultMessage: 'Essas são as pessoas ajudando {name} neste resultado-chave',
     id: '5uf2Lq',
     description: 'The message to guide and describe on what is a support team',
+  },
+
+  supportTeamTooltipDescription: {
+    defaultMessage:
+      'O time de apoio é uma ou mais pessoas que apoiam o responsável em um resultado-chave. No Bud, isso significa',
+    id: 'dlYnI1',
+    description: 'The message to guide and describe on what is a support team',
+  },
+
+  tooltipCheckIns: {
+    defaultMessage: 'CHECK-INS',
+    id: 'jRsXuq',
+    description: 'The tooltip text for the check-ins text',
+  },
+
+  tooltipCheckInsDescription: {
+    defaultMessage:
+      'O time de apoio também pode fazer check-in nos resultados-chave dos quais participam.',
+    id: '6XgcX8',
+    description: 'The tooltip text for the check-ins description',
+  },
+
+  tooltipEditionAccess: {
+    defaultMessage: 'ACESSO DE EDIÇÃO',
+    id: 'iZcwRX',
+    description: 'The tooltip text for the edition access text',
+  },
+
+  tooltipEditionAccessDescription: {
+    defaultMessage: 'Também podem editar informações como título, descrição e meta.',
+    id: '3maJd0',
+    description: 'The tooltip text for the edition access description',
+  },
+
+  tooltipNotifications: {
+    defaultMessage: 'NOTIFICAÇÕES',
+    id: 'K04poX',
+    description: 'The tooltip text for the notifications text',
+  },
+
+  tooltipNotificationsDescription: {
+    defaultMessage:
+      'As notificações relacionadas a este resultado-chave, como novos comentários, também serão enviadas ao time de apoio.',
+    id: '78OHKs',
+    description: 'The tooltip text for the notifications description',
   },
 })

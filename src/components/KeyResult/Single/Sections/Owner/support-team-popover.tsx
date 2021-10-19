@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { TooltipWithRichText } from 'src/components/Base'
-import ChevronLeftIcon from 'src/components/Icon/ChevronLeft'
+import { PlusOutline } from 'src/components/Icon'
+import ChevronLeftCircleIcon from 'src/components/Icon/ChevronLeft/chevron-left-circle'
 import InfoCircleIcon from 'src/components/Icon/InfoCircle'
-import PlusIcon from 'src/components/Icon/Plus'
-import TimesIcon from 'src/components/Icon/Times'
+import TimesInvertedCircle from 'src/components/Icon/Times/times-inverted-circle'
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
 import { User } from 'src/components/User/types'
@@ -43,6 +43,7 @@ const EachMember = ({ member, handleUserRemove }: EachMemberProperties) => {
       alignItems="center"
       direction="row"
       flexWrap="nowrap"
+      marginBottom="1.2em"
       onMouseEnter={setIsHoveringGenerator(true)}
       onMouseLeave={setIsHoveringGenerator(false)}
       onClick={() => handleUserRemove(member.id)}
@@ -51,23 +52,12 @@ const EachMember = ({ member, handleUserRemove }: EachMemberProperties) => {
         <NamedAvatar nameColor="new-gray.800" subtitleType="role" userID={member.id.toString()} />
       </Flex>
       {isHovering && (
-        <Flex
-          w={6}
-          h={6}
-          marginRight="100px"
-          justifyContent="center"
-          alignItems="center"
-          borderColor="new-gray.500"
-          borderRadius="full"
-          borderWidth={2}
-          as="span"
-        >
-          <TimesIcon
-            scale={0.05}
-            fill="new-gray.500"
-            desc={intl.formatMessage(messages.addPerson)}
-          />
-        </Flex>
+        <TimesInvertedCircle
+          h="1.2em"
+          w="1.2em"
+          fill="new-gray.500"
+          desc={intl.formatMessage(messages.addPerson)}
+        />
       )}
     </Stack>
   )
@@ -78,20 +68,16 @@ const AddNewMember = ({ handleUserSelect, toggleIsAdding }: AddNewMemberProperti
 
   return (
     <Box>
-      <PopoverHeader marginBottom="1em" onClick={toggleIsAdding}>
+      <PopoverHeader marginBottom="1em" borderColor="new-gray.400" onClick={toggleIsAdding}>
         <Stack marginBottom="0.5em" alignItems="center" direction="row" cursor="pointer">
-          <Flex
-            w={5}
-            h={5}
-            justifyContent="center"
-            alignItems="center"
-            borderColor="new-gray.700"
-            borderRadius="full"
-            borderWidth={2}
-          >
-            <ChevronLeftIcon w={3} h={3} fill="new-gray.700" stroke="none" desc="voltar" />
-          </Flex>
-          <Text as="span" fontSize="lg" color="new-gray.700" fontWeight="400">
+          <ChevronLeftCircleIcon
+            h="1.3em"
+            w="1.3em"
+            stroke="none"
+            fill="new-gray.700"
+            desc="voltar"
+          />
+          <Text as="span" fontSize="lg" color="new-gray.700" fontWeight="500">
             {intl.formatMessage(messages.supportTeam)}
           </Text>
         </Stack>
@@ -129,10 +115,10 @@ export const SupportTeamPopover = ({
     <AddNewMember handleUserSelect={handleUserSelect} toggleIsAdding={toggleIsAdding} />
   ) : (
     <Box>
-      <PopoverHeader paddingBottom="1em" marginBottom="1em">
+      <PopoverHeader paddingBottom="1em" marginBottom="1em" borderColor="new-gray.400">
         <TooltipWithRichText tooltip={<KeyResultTooltipSupportTeam />}>
           <Stack alignItems="center" direction="row" cursor="help">
-            <Text as="span" fontSize="xl" color="new-gray.900" fontWeight="400">
+            <Text as="span" fontSize="xl" color="new-gray.900" fontWeight="500">
               {intl.formatMessage(messages.supportTeam)}
             </Text>
             <InfoCircleIcon
@@ -157,22 +143,14 @@ export const SupportTeamPopover = ({
           onClick={toggleIsAdding}
         >
           <Stack alignItems="center" direction="row" marginTop="1.5em">
-            <Flex
-              w={8}
-              h={8}
-              justifyContent="center"
-              alignItems="center"
-              borderColor={isHoveringAddButton ? 'brand.600' : 'brand.500'}
-              borderRadius="full"
-              borderWidth={2}
-              as="span"
-            >
-              <PlusIcon
-                scale={0.1}
-                fill={isHoveringAddButton ? 'brand.600' : 'brand.500'}
-                desc={intl.formatMessage(messages.addPerson)}
-              />
-            </Flex>
+            <PlusOutline
+              w="1.15em"
+              h="1.15em"
+              desc={intl.formatMessage(messages.addPerson)}
+              stroke={isHoveringAddButton ? 'brand.600' : 'brand.500'}
+              fill={isHoveringAddButton ? 'brand.600' : 'brand.500'}
+              fontSize="xl"
+            />
             <Text color={isHoveringAddButton ? 'brand.600' : 'brand.500'} fontWeight="500">
               {intl.formatMessage(messages.addPerson)}
             </Text>

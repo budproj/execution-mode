@@ -101,7 +101,8 @@ export const SupportTeamField = ({
                 borderStyle="dashed"
               >
                 <PlusIcon
-                  scale={0.1}
+                  w="0.6em"
+                  h="0.6em"
                   fill={isHovering ? 'brand.500' : 'new-gray.500'}
                   desc={intl.formatMessage(messages.addSupportTeam)}
                 />

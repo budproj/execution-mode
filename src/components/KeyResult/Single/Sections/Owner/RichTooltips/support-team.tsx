@@ -1,5 +1,8 @@
 import { Box, Heading, Text, HeadingProps } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
+
+import messages from '../messages'
 
 const TooltipHeading = (properties: HeadingProps) => (
   <Heading
@@ -13,25 +16,20 @@ const TooltipHeading = (properties: HeadingProps) => (
   />
 )
 
-export const KeyResultTooltipSupportTeam = () => (
-  <Box>
-    <Text>
-      O time de apoio é uma ou mais pessoas que apoiam o responsável em um resultado-chave. No Bud,
-      isso significa:
-    </Text>
+export const KeyResultTooltipSupportTeam = () => {
+  const intl = useIntl()
+  return (
+    <Box>
+      <Text>{intl.formatMessage(messages.supportTeamTooltipDescription)}:</Text>
 
-    <TooltipHeading>CHECK-INS:</TooltipHeading>
-    <Text>
-      O time de apoio tambem pode fazer check-in nos resultados-chave dos quais participam.
-    </Text>
+      <TooltipHeading>{intl.formatMessage(messages.tooltipCheckIns)}:</TooltipHeading>
+      <Text>{intl.formatMessage(messages.tooltipCheckInsDescription)}</Text>
 
-    <TooltipHeading>ACESSO DE EDIÇÃO:</TooltipHeading>
-    <Text>Tambem podem editar informações como título, descrição e meta.</Text>
+      <TooltipHeading>{intl.formatMessage(messages.tooltipEditionAccess)}:</TooltipHeading>
+      <Text>{intl.formatMessage(messages.tooltipEditionAccessDescription)}</Text>
 
-    <TooltipHeading>NOTIFICAÇÕES:</TooltipHeading>
-    <Text>
-      As notificações relacionadas a este resultado-chave, como novos comentários, também serão
-      enviadas ao time de apoio.
-    </Text>
-  </Box>
-)
+      <TooltipHeading>{intl.formatMessage(messages.tooltipNotifications)}:</TooltipHeading>
+      <Text>{intl.formatMessage(messages.tooltipNotificationsDescription)}</Text>
+    </Box>
+  )
+}
