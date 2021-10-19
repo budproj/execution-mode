@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { Text, Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { DynamicAvatarGroup } from 'src/components/Base'
@@ -10,6 +11,7 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
+import messages from './messages'
 import queries from './queries.gql'
 import { SupportTeamPopover } from './support-team-popover'
 
@@ -26,6 +28,8 @@ export const SupportTeamField = ({
   keyResultId,
   ownerName,
 }: SupportTeamFieldProperties) => {
+  const intl = useIntl()
+
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => hasPermitionToUpdate && setIsOpen(true)
   const handleClose = () => setIsOpen(false)
@@ -73,7 +77,7 @@ export const SupportTeamField = ({
       onOpen={handleOpen}
       onClose={handleClose}
     >
-      <KeyResultSectionHeading>Time de Apoio</KeyResultSectionHeading>
+      <KeyResultSectionHeading>{intl.formatMessage(messages.supportTeam)}</KeyResultSectionHeading>
       <PopoverTrigger>
         <Flex
           direction="row"
@@ -99,11 +103,11 @@ export const SupportTeamField = ({
                 <PlusIcon
                   scale={0.1}
                   fill={isHovering ? 'brand.500' : 'new-gray.500'}
-                  desc="adicionar time suporte"
+                  desc={intl.formatMessage(messages.addSupportTeam)}
                 />
               </Flex>
               <Text color={isHovering ? 'brand.500' : 'new-gray.700'}>
-                {supportTeamMembers?.length ? '' : 'Adicionar'}
+                {supportTeamMembers?.length ? '' : intl.formatMessage(messages.add)}
               </Text>
             </Flex>
           )}

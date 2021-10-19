@@ -147,6 +147,10 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
+  "2+RDgf": {
+    "defaultMessage": "Adicionar Pessoa",
+    "description": "The label text for the add button in our support team popover"
+  },
   "29ODQz": {
     "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
     "description": "The description displayed in our unknown error page"
@@ -230,6 +234,10 @@
   "5th5LY": {
     "defaultMessage": "Ué! Cadê a tela que tava aqui?",
     "description": "The title displayed in our unknown error page"
+  },
+  "5uf2Lq": {
+    "defaultMessage": "Essas são as pessoas ajudando {name} neste resultado-chave",
+    "description": "The message to guide and describe on what is a support team"
   },
   "5yQyMg": {
     "defaultMessage": "Explorar",
@@ -811,6 +819,10 @@
     "defaultMessage": "Em manutenção | bud",
     "description": "The page title of our under maintenance error page that is displayed in the browser tab"
   },
+  "U1tYhb": {
+    "defaultMessage": "Adicionar",
+    "description": "The label text for the add button in our key result single page or drawers"
+  },
   "U2EgRG": {
     "defaultMessage": "Explorar | bud",
     "description": "The page title that is displayed in the browser tab"
@@ -1119,6 +1131,10 @@
     "defaultMessage": "Um ícone de uma linha reta na horizontal, representando que sua empresa não evolui desde o último evento de check-in",
     "description": "This message is used by screen readers to explain our line icon"
   },
+  "iWDn4y": {
+    "defaultMessage": "Time de Apoio",
+    "description": "The label text above Support Team section in our key resulg single page or drawers"
+  },
   "iivI51": {
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
@@ -1258,6 +1274,10 @@
   "nrToz/": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our unknown error page"
+  },
+  "ooNWJL": {
+    "defaultMessage": "Adicionar Time de Apoio",
+    "description": "The label text for the add button icon in our key result single page or drawers"
   },
   "or8fId": {
     "defaultMessage": "Voltar",

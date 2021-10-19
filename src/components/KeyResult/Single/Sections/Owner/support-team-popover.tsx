@@ -1,5 +1,6 @@
 import { Box, Flex, PopoverHeader, Stack, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import { TooltipWithRichText } from 'src/components/Base'
 import ChevronLeftIcon from 'src/components/Icon/ChevronLeft'
@@ -11,6 +12,7 @@ import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper
 import { User } from 'src/components/User/types'
 
 import { KeyResultTooltipSupportTeam } from './RichTooltips'
+import messages from './messages'
 
 type SupportTeamPopoverProperties = {
   supportTeamMembers?: User[]
@@ -30,6 +32,8 @@ type EachMemberProperties = {
 }
 
 const EachMember = ({ member, handleUserRemove }: EachMemberProperties) => {
+  const intl = useIntl()
+
   const [isHovering, setIsHovering] = useState(false)
   const setIsHoveringGenerator = (state: boolean) => () => setIsHovering(state)
 
@@ -58,36 +62,44 @@ const EachMember = ({ member, handleUserRemove }: EachMemberProperties) => {
           borderWidth={2}
           as="span"
         >
-          <TimesIcon scale={0.05} fill="new-gray.500" desc="adicionar pessoa" />
+          <TimesIcon
+            scale={0.05}
+            fill="new-gray.500"
+            desc={intl.formatMessage(messages.addPerson)}
+          />
         </Flex>
       )}
     </Stack>
   )
 }
 
-const AddNewMember = ({ handleUserSelect, toggleIsAdding }: AddNewMemberProperties) => (
-  <Box>
-    <PopoverHeader marginBottom="1em" onClick={toggleIsAdding}>
-      <Stack alignItems="center" direction="row" cursor="pointer">
-        <Flex
-          w={5}
-          h={5}
-          justifyContent="center"
-          alignItems="center"
-          borderColor="new-gray.700"
-          borderRadius="full"
-          borderWidth={2}
-        >
-          <ChevronLeftIcon w={3} h={3} fill="new-gray.700" stroke="none" desc="voltar" />
-        </Flex>
-        <Text as="span" fontSize="lg" color="new-gray.700" fontWeight="400">
-          Time de Apoio
-        </Text>
-      </Stack>
-    </PopoverHeader>
-    <AllReachableUsers onSelect={handleUserSelect} />
-  </Box>
-)
+const AddNewMember = ({ handleUserSelect, toggleIsAdding }: AddNewMemberProperties) => {
+  const intl = useIntl()
+
+  return (
+    <Box>
+      <PopoverHeader marginBottom="1em" onClick={toggleIsAdding}>
+        <Stack marginBottom="0.5em" alignItems="center" direction="row" cursor="pointer">
+          <Flex
+            w={5}
+            h={5}
+            justifyContent="center"
+            alignItems="center"
+            borderColor="new-gray.700"
+            borderRadius="full"
+            borderWidth={2}
+          >
+            <ChevronLeftIcon w={3} h={3} fill="new-gray.700" stroke="none" desc="voltar" />
+          </Flex>
+          <Text as="span" fontSize="lg" color="new-gray.700" fontWeight="400">
+            {intl.formatMessage(messages.supportTeam)}
+          </Text>
+        </Stack>
+      </PopoverHeader>
+      <AllReachableUsers onSelect={handleUserSelect} />
+    </Box>
+  )
+}
 
 export const SupportTeamPopover = ({
   supportTeamMembers,
@@ -95,6 +107,8 @@ export const SupportTeamPopover = ({
   removeUser,
   ownerName,
 }: SupportTeamPopoverProperties) => {
+  const intl = useIntl()
+
   const [isAdding, setIsAdding] = useState<boolean>(false)
   const toggleIsAdding = () => setIsAdding(!isAdding)
 
@@ -119,17 +133,17 @@ export const SupportTeamPopover = ({
         <TooltipWithRichText tooltip={<KeyResultTooltipSupportTeam />}>
           <Stack alignItems="center" direction="row" cursor="help">
             <Text as="span" fontSize="xl" color="new-gray.900" fontWeight="400">
-              Time de Apoio
+              {intl.formatMessage(messages.supportTeam)}
             </Text>
             <InfoCircleIcon
               fill="new-gray.900"
               stroke="new-gray.900"
-              desc="Um círculo com um ponto de interrogação ao centro"
+              desc={intl.formatMessage(messages.supportTeam)}
             />
           </Stack>
         </TooltipWithRichText>
         <Text color="new-gray.600">
-          Essas são as pessoas ajudando {ownerName} neste resultado-chave:
+          {intl.formatMessage(messages.supportTeamDescription, { name: ownerName })}:
         </Text>
       </PopoverHeader>
       <Box>
@@ -156,11 +170,11 @@ export const SupportTeamPopover = ({
               <PlusIcon
                 scale={0.1}
                 fill={isHoveringAddButton ? 'brand.600' : 'brand.500'}
-                desc="adicionar pessoa"
+                desc={intl.formatMessage(messages.addPerson)}
               />
             </Flex>
             <Text color={isHoveringAddButton ? 'brand.600' : 'brand.500'} fontWeight="500">
-              Adicionar pessoa
+              {intl.formatMessage(messages.addPerson)}
             </Text>
           </Stack>
         </Box>
