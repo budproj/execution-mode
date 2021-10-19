@@ -3,13 +3,14 @@ import { defineMessages } from 'react-intl'
 type UserProfileBodyPersonalInformationsMessage =
   | 'sectionTitle'
   | 'sectionSubtitle'
-  | 'firstFieldLabel'
-  | 'secondFieldLabel'
-  | 'thirdFieldLabel'
-  | 'fourthFieldLabel'
-  | 'fifthFieldLabel'
-  | 'sixthFieldLabel'
-  | 'seventhFieldLabel'
+  | 'firstNameFieldLabel'
+  | 'lastNameFieldLabel'
+  | 'nicknameFieldLabel'
+  | 'teamsFieldLabel'
+  | 'roleFieldLabel'
+  | 'genderFieldLabel'
+  | 'aboutFieldLabel'
+  | 'emailFieldLabel'
   | 'fallbackFourthField'
   | 'fallbackFifthField'
   | 'fallbackSixthField'
@@ -30,54 +31,61 @@ export default defineMessages<UserProfileBodyPersonalInformationsMessage>({
       'This subtitle is displayed as the subtitle of the personal informations section in our user account settings page',
   },
 
-  firstFieldLabel: {
+  firstNameFieldLabel: {
     defaultMessage: 'Nome',
     id: 'Y+MtZe',
     description:
       'This is the label that goes on our user account settings page, at the first field to update the user informations',
   },
 
-  secondFieldLabel: {
+  lastNameFieldLabel: {
     defaultMessage: 'Sobrenome',
     id: 'pXeDLf',
     description:
       'This is the label that goes on our user account settings page, at the second field to update the user informations',
   },
 
-  thirdFieldLabel: {
+  nicknameFieldLabel: {
     defaultMessage: 'Apelido',
     id: 'xVR0F1',
     description:
       'This is the label that goes on our user account settings page, at the third field to update the user informations',
   },
 
-  fourthFieldLabel: {
+  teamsFieldLabel: {
     defaultMessage: 'Times',
     id: 'bdkUKs',
     description:
       'This is the label that goes on our user account settings page, at the fourth field to update the user informations',
   },
 
-  fifthFieldLabel: {
+  roleFieldLabel: {
     defaultMessage: 'Cargo',
     id: 'NYGW+N',
     description:
       'This is the label that goes on our user account settings page, at the fifth field to update the user informations',
   },
 
-  sixthFieldLabel: {
+  genderFieldLabel: {
     defaultMessage: 'Gênero',
     id: 'nnWr7M',
     description:
       'This is the label that goes on our user account settings page, at the sixth field to update the user informations',
   },
 
-  seventhFieldLabel: {
+  aboutFieldLabel: {
     defaultMessage:
       'Sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}',
     id: 'LDLFtf',
     description:
       'This is the label that goes on our user account settings page, at the seventh field to update the user informations',
+  },
+
+  emailFieldLabel: {
+    defaultMessage: 'Email',
+    id: 'Dxj0ms',
+    description:
+      'This is the label that goes on our user account settings page, at the email field to update the user informations',
   },
 
   fallbackFourthField: {

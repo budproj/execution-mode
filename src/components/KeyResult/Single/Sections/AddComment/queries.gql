@@ -5,6 +5,7 @@ mutation CREATE_KEY_RESULT_COMMENT($keyResultCommentInput: KeyResultCommentInput
     createdAt
     keyResultId
     user {
+      id
       fullName
       picture
     }

@@ -15,13 +15,17 @@ import queries from './queries.gql'
 
 type UserProfileProperties = {
   userID: string
+  isRemovable?: boolean
+  onUserDeactivation?: () => void
 }
 
 export interface GetUserDataQuery {
   user: User
 }
 
-export const UserProfile = ({ userID }: UserProfileProperties) => {
+export const UserProfile = ({ userID, isRemovable, onUserDeactivation }: UserProfileProperties) => {
+  isRemovable ??= true
+
   const [isRecoilSynced, setIsRecoilSynced] = useState(false)
   const [user, setUser] = useRecoilState(userSelector(userID))
   const [getUserData, { loading, variables, data }] = useLazyQuery<GetUserDataQuery>(
@@ -36,7 +40,7 @@ export const UserProfile = ({ userID }: UserProfileProperties) => {
 
   const isLoaded = !loading && isRecoilSynced
   const canUpdate = user?.policy?.update === GraphQLEffect.ALLOW
-  const canDelete = user?.policy?.delete === GraphQLEffect.ALLOW
+  const canDelete = isRemovable && user?.policy?.delete === GraphQLEffect.ALLOW
 
   useEffect(() => {
     if (userID && userID !== variables?.id) getUserData()
@@ -47,7 +51,7 @@ export const UserProfile = ({ userID }: UserProfileProperties) => {
   }, [isRecoilSynced, setIsRecoilSynced, user, data])
 
   return (
-    <Stack py={4} spacing={6} direction="column" flexGrow={1}>
+    <Stack py={4} spacing={6} direction="column" flexGrow={1} h="full">
       <UserProfileHeader userID={userID} isLoaded={isLoaded} canUpdate={canUpdate} />
       <Divider borderColor="black.200" />
       <UserProfileBody
@@ -55,6 +59,7 @@ export const UserProfile = ({ userID }: UserProfileProperties) => {
         isLoaded={isLoaded}
         canUpdate={canUpdate}
         canDelete={canDelete}
+        onUserDeactivation={onUserDeactivation}
       />
     </Stack>
   )

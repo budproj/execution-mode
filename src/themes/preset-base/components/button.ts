@@ -33,7 +33,7 @@ const Button = {
         _disabled: {
           bg: `${colorScheme ?? 'brand'}.500`,
           borderColor: `${colorScheme ?? 'brand'}.500`,
-          color: `${colorScheme ?? 'brand'}.500`,
+          color: 'white',
         },
       },
 

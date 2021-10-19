@@ -46,5 +46,12 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
     if (isLoaded && isLoading) setIsLoaded(false)
   }, [isLoading, isLoaded, setIsLoaded])
 
-  return <TeamMembers isLoaded={isLoaded} members={teamMembers} onSearch={handleSearch} />
+  return (
+    <TeamMembers
+      teamID={teamID}
+      isLoaded={isLoaded}
+      members={teamMembers}
+      onSearch={handleSearch}
+    />
+  )
 }

@@ -71,16 +71,16 @@ export const TeamSelect = ({
         <MenuItem
           key={team.id}
           py={4}
+          pl={0}
           justifyContent="flex-start"
           h="full"
           fontWeight={400}
-          borderBottomWidth={1}
           color="new-gray.800"
-          borderColor="new-gray.300"
+          borderBottomWidth={0}
           _hover={{ color: 'brand.500' }}
           _focus={{ color: 'brand.500' }}
+          _last={{ pb: 2 }}
           _active={{}}
-          _last={{ borderBottomWidth: 0, pb: 2 }}
           onClick={onSelect(team.id)}
         >
           {team.name}

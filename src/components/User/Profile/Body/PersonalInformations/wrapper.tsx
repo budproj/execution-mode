@@ -93,7 +93,7 @@ export const UserProfileBodyPersonalInformations = ({
         <Flex gridGap={4}>
           <EditableInputField
             isDisabled={!canUpdate}
-            label={intl.formatMessage(messages.firstFieldLabel)}
+            label={intl.formatMessage(messages.firstNameFieldLabel)}
             value={user?.firstName}
             isLoaded={isLoaded}
             isSubmitting={loading}
@@ -101,7 +101,7 @@ export const UserProfileBodyPersonalInformations = ({
             onSubmit={handleValueUpdate('firstName')}
           />
           <EditableInputField
-            label={intl.formatMessage(messages.secondFieldLabel)}
+            label={intl.formatMessage(messages.lastNameFieldLabel)}
             value={user?.lastName}
             isLoaded={isLoaded}
             isSubmitting={loading}
@@ -112,7 +112,7 @@ export const UserProfileBodyPersonalInformations = ({
         </Flex>
 
         <EditableInputField
-          label={intl.formatMessage(messages.thirdFieldLabel)}
+          label={intl.formatMessage(messages.nicknameFieldLabel)}
           value={user?.nickname}
           isLoaded={isLoaded}
           isSubmitting={loading}
@@ -120,15 +120,24 @@ export const UserProfileBodyPersonalInformations = ({
           onSubmit={handleValueUpdate('nickname')}
         />
 
+        <EditableInputField
+          label={intl.formatMessage(messages.emailFieldLabel)}
+          value={user?.email}
+          isLoaded={isLoaded}
+          isSubmitting={loading}
+          isDisabled={!canUpdate}
+          onSubmit={handleValueUpdate('email')}
+        />
+
         <Stack direciton="column" spacing={2}>
           <FormLabel fontSize="md" m={0}>
-            {intl.formatMessage(messages.fourthFieldLabel)}
+            {intl.formatMessage(messages.teamsFieldLabel)}
           </FormLabel>
           <UserTeams userID={userID} isLoaded={isLoaded} isEditable={canDelete} />
         </Stack>
 
         <EditableInputField
-          label={intl.formatMessage(messages.fifthFieldLabel)}
+          label={intl.formatMessage(messages.roleFieldLabel)}
           value={user?.role}
           customFallbackValue={intl.formatMessage(messages.fallbackFifthField)}
           isLoaded={isLoaded}
@@ -138,7 +147,7 @@ export const UserProfileBodyPersonalInformations = ({
         />
 
         <EditableSelectField
-          label={intl.formatMessage(messages.sixthFieldLabel)}
+          label={intl.formatMessage(messages.genderFieldLabel)}
           value={user?.gender}
           placeholder={intlGender}
           customFallbackPlaceholder={intl.formatMessage(messages.fallbackSixthField)}
@@ -152,7 +161,7 @@ export const UserProfileBodyPersonalInformations = ({
         </EditableSelectField>
 
         <EditableTextAreaField
-          label={intl.formatMessage(messages.seventhFieldLabel, {
+          label={intl.formatMessage(messages.aboutFieldLabel, {
             isMyUser,
             gender: user?.gender,
             firstName: user?.firstName,
