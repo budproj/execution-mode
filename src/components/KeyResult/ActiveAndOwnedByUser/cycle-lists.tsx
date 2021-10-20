@@ -1,29 +1,39 @@
+import { map, mapValues } from 'lodash'
+import groupBy from 'lodash/groupBy'
 import React from 'react'
 
 import { EmptyState } from 'src/components/Base'
-import { Cycle } from 'src/components/Cycle/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 
-import KeyResultCycleList from '../CycleList'
+import { CycleKeyResultList } from '../CycleList/cycle-key-result-list'
 
 import messages from './messages'
 
 export interface KeyResultActiveAndOwnedByUserCyclesListProperties {
-  cycles?: Cycle[]
+  keyResults?: KeyResult[]
   onLineClick?: (id: KeyResult['id']) => void
 }
 
 const KeyResultActiveAndOwnedByUserCyclesList = ({
-  cycles,
+  keyResults,
   onLineClick,
 }: KeyResultActiveAndOwnedByUserCyclesListProperties) => {
-  const cyclesWithKeyResults =
-    cycles?.filter((cycle) => cycle.keyResults && cycle.keyResults?.edges.length > 0) ?? []
+  const keyResultsGroupedByCycle = groupBy(keyResults, 'objective.cycle.id')
+  const cycles = mapValues(keyResultsGroupedByCycle, (keyResults) => ({
+    data: keyResults[0].objective.cycle,
+    keyResultIDs: keyResults.map((keyResult) => keyResult.id),
+  }))
 
-  return cyclesWithKeyResults.length > 0 ? (
+  return keyResults && keyResults.length > 0 ? (
     <>
-      {cyclesWithKeyResults.map((cycle) => (
-        <KeyResultCycleList key={cycle.id} id={cycle.id} onLineClick={onLineClick} />
+      {map(cycles, (cycle) => (
+        <CycleKeyResultList
+          isLoaded
+          isActive
+          cycle={cycle.data}
+          keyResultIDs={cycle.keyResultIDs}
+          onLineClick={onLineClick}
+        />
       ))}
     </>
   ) : (
