@@ -47,6 +47,7 @@ export interface KeyResult extends GraphQLNode {
   team: Team
   policy: GraphQLEntityPolicy
   description?: string
+  supportTeamMembers?: GraphQLConnection<User>
   keyResultCheckIns?: GraphQLConnection<KeyResultCheckIn>
   keyResultComments?: GraphQLConnection<KeyResultComment>
   timeline?: GraphQLConnection<KeyResultTimelineEntry>

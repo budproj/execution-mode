@@ -6,6 +6,16 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     goal
     initialValue
     format
+    supportTeamMembers {
+      edges {
+        node {
+          id
+          fullName
+          firstName
+          picture
+        }
+      }
+    }
     keyResultCheckIns(first: 1) {
       policy {
         create

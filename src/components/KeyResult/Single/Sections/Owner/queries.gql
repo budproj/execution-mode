@@ -27,3 +27,59 @@ mutation UPDATE_KEY_RESULT_OWNER($keyResultID: ID!, $userID: ID!) {
     }
   }
 }
+
+mutation ADD_USER($keyResultId: ID!, $userId: ID!) {
+  addUserAsSupportTeamToKeyResult(data: {keyResultId: $keyResultId, userId: $userId}) {
+    id
+    supportTeamMembers {
+      edges {
+        node {
+          id
+          firstName
+          fullName
+          nickname
+          picture
+          role
+          about
+          linkedInProfileAddress
+          teams {
+            edges {
+              node {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation REMOVE_USER($keyResultId: ID!, $userId: ID!) {
+  removeUserAsSupportTeamToKeyResult(data: {keyResultId: $keyResultId, userId: $userId}) {
+    id
+    supportTeamMembers {
+      edges {
+        node {
+          id
+          firstName
+          fullName
+          nickname
+          picture
+          role
+          about
+          linkedInProfileAddress
+          teams {
+            edges {
+              node {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

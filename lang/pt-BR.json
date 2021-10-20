@@ -147,6 +147,10 @@
     "defaultMessage": "Um ícone de mensagem",
     "description": "The desc message for the Message icon. This icon is used to ilustrate our key results"
   },
+  "2+RDgf": {
+    "defaultMessage": "Adicionar Pessoa",
+    "description": "The label text for the add button in our support team popover"
+  },
   "29ODQz": {
     "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
     "description": "The description displayed in our unknown error page"
@@ -182,6 +186,10 @@
   "3gAggt": {
     "defaultMessage": "Check-in",
     "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
+  },
+  "3maJd0": {
+    "defaultMessage": "Também podem editar informações como título, descrição e meta.",
+    "description": "The tooltip text for the edition access description"
   },
   "3n0bhJ": {
     "defaultMessage": "Esses são os resultados-chave que fazem parte desse objetivo",
@@ -235,6 +243,10 @@
     "defaultMessage": "Ué! Cadê a tela que tava aqui?",
     "description": "The title displayed in our unknown error page"
   },
+  "5uf2Lq": {
+    "defaultMessage": "Essas são as pessoas ajudando {name} neste resultado-chave",
+    "description": "The message to guide and describe on what is a support team"
+  },
   "5yQyMg": {
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
@@ -263,6 +275,10 @@
     "defaultMessage": "Novo objetivo",
     "description": "This message is used as the draft title of a new objective when an objective is created inside the team page"
   },
+  "6XgcX8": {
+    "defaultMessage": "O time de apoio também pode fazer check-in nos resultados-chave dos quais participam.",
+    "description": "The tooltip text for the check-ins description"
+  },
   "6aChVs": {
     "defaultMessage": "Nesta semana",
     "description": "This label is displayed if the date difference is 1 week or less"
@@ -282,6 +298,10 @@
   "77LX/s": {
     "defaultMessage": "Vincule seu perfil às suas redes sociais para facilitar a conexão com seus colegas!",
     "description": "This subtitle is displayed as the subtitle of the social media section in our user account settings page"
+  },
+  "78OHKs": {
+    "defaultMessage": "As notificações relacionadas a este resultado-chave, como novos comentários, também serão enviadas ao time de apoio.",
+    "description": "The tooltip text for the notifications description"
   },
   "7Yw26b": {
     "defaultMessage": "Selecione o ano",
@@ -451,6 +471,10 @@
     "defaultMessage": "Este time não possui nenhum subtime.",
     "description": "This message is displayed in our team plage inside the child teams section when that team has no child teams"
   },
+  "Dxj0ms": {
+    "defaultMessage": "Email",
+    "description": "This is the label that goes on our user account settings page, at the email field to update the user informations"
+  },
   "E+0+QH": {
     "defaultMessage": "Tem certeza que deseja excluir este resultado-chave?",
     "description": "This message is used as the title in our first dialog while removing a key-result"
@@ -582,6 +606,10 @@
   "Jkg7nT": {
     "defaultMessage": "US$ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin USD format"
+  },
+  "K04poX": {
+    "defaultMessage": "NOTIFICAÇÕES",
+    "description": "The tooltip text for the notifications text"
   },
   "KSjqcC": {
     "defaultMessage": "%",
@@ -847,6 +875,10 @@
     "defaultMessage": "Em manutenção | bud",
     "description": "The page title of our under maintenance error page that is displayed in the browser tab"
   },
+  "U1tYhb": {
+    "defaultMessage": "Adicionar",
+    "description": "The label text for the add button in our key result single page or drawers"
+  },
   "U2EgRG": {
     "defaultMessage": "Explorar | bud",
     "description": "The page title that is displayed in the browser tab"
@@ -1039,6 +1071,10 @@
     "defaultMessage": "Enviar comentário",
     "description": "This label is displayed in the submit button in our drawers"
   },
+  "dlYnI1": {
+    "defaultMessage": "O time de apoio é uma ou mais pessoas que apoiam o responsável em um resultado-chave. No Bud, isso significa",
+    "description": "The message to guide and describe on what is a support team"
+  },
   "dymB9a": {
     "defaultMessage": "Cada resultado-chave pertence a um objetivo",
     "description": "This tooltip explains the second column of the key result list"
@@ -1143,6 +1179,14 @@
     "defaultMessage": "Um ícone de uma linha reta na horizontal, representando que sua empresa não evolui desde o último evento de check-in",
     "description": "This message is used by screen readers to explain our line icon"
   },
+  "iWDn4y": {
+    "defaultMessage": "Time de Apoio",
+    "description": "The label text above Support Team section in our key resulg single page or drawers"
+  },
+  "iZcwRX": {
+    "defaultMessage": "ACESSO DE EDIÇÃO",
+    "description": "The tooltip text for the edition access text"
+  },
   "iivI51": {
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
@@ -1154,6 +1198,10 @@
   "jCjr1X": {
     "defaultMessage": "Preencha os campos obrigatórios para poder salvar este resultado-chave.",
     "description": "This message appears in an error toast after the users tries to create a key-result but there are some validation errors in the form"
+  },
+  "jRsXuq": {
+    "defaultMessage": "CHECK-INS",
+    "description": "The tooltip text for the check-ins text"
   },
   "jYw0F3": {
     "defaultMessage": "Membros do time {isLoaded, select, true {({totalMembersCount})} other{}}",
@@ -1274,6 +1322,10 @@
   "nrToz/": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our unknown error page"
+  },
+  "ooNWJL": {
+    "defaultMessage": "Adicionar Time de Apoio",
+    "description": "The label text for the add button icon in our key result single page or drawers"
   },
   "or8fId": {
     "defaultMessage": "Voltar",

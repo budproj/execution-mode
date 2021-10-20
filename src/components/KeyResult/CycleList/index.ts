@@ -1,3 +1,3 @@
-import KeyResultCycleList from './cycle-list'
+import KeyResultCycleList from './wrapper'
 
 export default KeyResultCycleList

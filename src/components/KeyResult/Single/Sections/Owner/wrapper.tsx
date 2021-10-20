@@ -13,6 +13,7 @@ import { KeyResultSectionHeading } from '../Heading/wrapper'
 
 import messages from './messages'
 import KeyResultSectionOwner from './owner'
+import { SupportTeamField } from './support-team-field'
 import { KeyResultAvailableOwners } from './user-list'
 
 interface KeyResultSingleSectionOwnerWrapperProperties {
@@ -23,13 +24,14 @@ const policySelector = buildPartialSelector<KeyResult['policy']>('policy')
 
 export const KeyResultSingleSectionOwnerWrapper = ({
   keyResultID,
-}: KeyResultSingleSectionOwnerWrapperProperties) => {
+}: KeyResultSingleSectionOwnerWrapperProperties): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
   const intl = useIntl()
   const policy = useRecoilValue(policySelector(keyResultID))
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
 
   const canUpdate = policy?.update === GraphQLEffect.ALLOW && keyResult?.status?.isActive
+  const supportTeamMembers = keyResult?.supportTeamMembers?.edges?.map(({ node }) => node)
 
   const handleOpen = () => {
     if (canUpdate && !isOpen) setIsOpen(true)
@@ -47,29 +49,43 @@ export const KeyResultSingleSectionOwnerWrapper = ({
     handleClose()
   }
 
-  return (
-    <Popover
-      isLazy
-      placement="bottom-start"
-      isOpen={isOpen}
-      size="md"
-      onOpen={handleOpen}
-      onClose={handleClose}
-    >
-      <Flex gridGap={2} direction="column">
-        <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
-        <Flex direction="row">
-          <PopoverTrigger>
-            <Box>
-              <KeyResultSectionOwner keyResultID={keyResultID} isEditing={isOpen} />
-            </Box>
-          </PopoverTrigger>
-          <Box flexGrow={1} />
-        </Flex>
+  return keyResult ? (
+    <Flex direction="row" justifyContent="space-between">
+      <Flex gridGap={2} direction="column" flexGrow={1}>
+        <Popover
+          isLazy
+          placement="bottom-start"
+          isOpen={isOpen}
+          size="md"
+          onOpen={handleOpen}
+          onClose={handleClose}
+        >
+          <KeyResultSectionHeading>{intl.formatMessage(messages.label)} </KeyResultSectionHeading>
+          <Flex direction="row">
+            <PopoverTrigger>
+              <Box>
+                <KeyResultSectionOwner keyResultID={keyResultID} isEditing={isOpen} />
+              </Box>
+            </PopoverTrigger>
+            <Box flexGrow={1} />
+          </Flex>
+          <PopoverContent width="md" h="full" overflow="hidden">
+            <KeyResultAvailableOwners keyResultID={keyResultID} onSelect={handleUpdate} />
+          </PopoverContent>
+        </Popover>
       </Flex>
-      <PopoverContent width="md" h="full" overflow="hidden">
-        <KeyResultAvailableOwners keyResultID={keyResultID} onSelect={handleUpdate} />
-      </PopoverContent>
-    </Popover>
+      {supportTeamMembers?.length || canUpdate ? (
+        <Flex gridGap={2} direction="column" flexGrow={1}>
+          <SupportTeamField
+            supportTeamMembers={supportTeamMembers}
+            keyResultId={keyResultID}
+            hasPermitionToUpdate={canUpdate}
+            ownerName={keyResult?.owner?.firstName}
+          />
+        </Flex>
+      ) : undefined}
+    </Flex>
+  ) : (
+    <div />
   )
 }

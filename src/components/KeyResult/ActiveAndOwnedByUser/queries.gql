@@ -1,65 +1,63 @@
-query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES($userID: ID!) {
-  cycles(active: true) {
-    edges {
-      node {
-        id
-        period
-        cadence
-        parent {
-          period
-        }
-        keyResults(ownerId: $userID) {
-          edges {
-            node {
+query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES {
+  me {
+    keyResults(active: true) {
+      edges {
+        node {
+          id
+          title
+          initialValue
+          goal
+          format
+          type
+          objective {
+            title
+            cycle {
               id
-              title
-              initialValue
-              goal
-              format
-              type
-              objective {
-                title
+              period
+              cadence
+              parent {
+                period
               }
-              owner {
-                id
-                firstName
-                fullName
-                nickname
-                picture
-                role
-                about
-                linkedInProfileAddress
-                teams {
-                  edges {
-                    node {
-                      id
-                      name
-                    }
-                  }
-                }
-              }
-              status {
-                isOutdated
-                isActive
-                confidence
-                progress
-                latestCheckIn {
+            }
+          }
+          owner {
+            id
+            firstName
+            fullName
+            nickname
+            picture
+            role
+            about
+            linkedInProfileAddress
+            teams {
+              edges {
+                node {
                   id
-                  value
-                  confidence
-                  progress
-                  comment
-                  createdAt
-                  user {
-                    fullName
-                  }
+                  name
                 }
               }
-              keyResultCheckIns {
-                policy {
-                  create
-                }
+            }
+          }
+          status {
+            isOutdated
+            isActive
+            confidence
+            progress
+            latestCheckIn {
+              id
+              value
+              confidence
+              progress
+              comment
+              createdAt
+              user {
+                fullName
               }
+            }
+          }
+          keyResultCheckIns {
+            policy {
+              create
             }
           }
         }
