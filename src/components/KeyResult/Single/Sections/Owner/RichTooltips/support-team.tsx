@@ -23,7 +23,7 @@ export const KeyResultTooltipSupportTeam = () => {
       <Text>{intl.formatMessage(messages.supportTeamTooltipDescription)}:</Text>
 
       <TooltipHeading>{intl.formatMessage(messages.tooltipCheckIns)}:</TooltipHeading>
-      <Text>{intl.formatMessage(messages.tooltipCheckInsDescription)}</Text>
+      <Text>{intl.formatMessage(messages.tooltipCheckInsDescription)}.</Text>
 
       <TooltipHeading>{intl.formatMessage(messages.tooltipEditionAccess)}:</TooltipHeading>
       <Text>{intl.formatMessage(messages.tooltipEditionAccessDescription)}</Text>
