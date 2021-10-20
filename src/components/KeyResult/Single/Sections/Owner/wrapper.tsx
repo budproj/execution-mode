@@ -74,14 +74,16 @@ export const KeyResultSingleSectionOwnerWrapper = ({
           </PopoverContent>
         </Popover>
       </Flex>
-      <Flex gridGap={2} direction="column" flexGrow={1}>
-        <SupportTeamField
-          supportTeamMembers={supportTeamMembers}
-          keyResultId={keyResultID}
-          hasPermitionToUpdate={canUpdate}
-          ownerName={keyResult?.owner?.firstName}
-        />
-      </Flex>
+      {supportTeamMembers?.length || canUpdate ? (
+        <Flex gridGap={2} direction="column" flexGrow={1}>
+          <SupportTeamField
+            supportTeamMembers={supportTeamMembers}
+            keyResultId={keyResultID}
+            hasPermitionToUpdate={canUpdate}
+            ownerName={keyResult?.owner?.firstName}
+          />
+        </Flex>
+      ) : undefined}
     </Flex>
   ) : (
     <div />

@@ -41,6 +41,7 @@ const EachMember = ({ member, handleUserRemove }: EachMemberProperties) => {
     <Stack
       key={member.id}
       alignItems="center"
+      cursor="pointer"
       direction="row"
       flexWrap="nowrap"
       marginBottom="1.2em"
