@@ -14,7 +14,7 @@ export type OptionGroup = {
 }
 
 export type SearchableListContextValue = {
-  items: Array<Record<string, any>>
+  items: any[]
   optionGroups: OptionGroup[]
 
   handleSearch: (value: string) => void
