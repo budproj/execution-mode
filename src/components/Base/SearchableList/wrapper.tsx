@@ -9,15 +9,17 @@ import {
 } from './context'
 
 type SearchableListWrapperProperties<T> = {
-  children: React.ReactNode
-  searchKey: keyof T
   initialItems?: T[]
+  searchKey: keyof T
+  placeholder?: string
+  children: React.ReactNode
 }
 
 export const SearchableListWrapper = <T extends Record<string, any>>({
-  children,
   searchKey,
+  placeholder,
   initialItems,
+  children,
 }: SearchableListWrapperProperties<T>) => {
   const [items, setItems] = useState(initialItems ?? [])
   const [optionGroups, setOptionGroups] = useState<OptionGroup[]>([])
@@ -69,7 +71,7 @@ export const SearchableListWrapper = <T extends Record<string, any>>({
 
   return (
     <SearchableListContext.Provider value={context}>
-      <SearchableListContent>{children}</SearchableListContent>
+      <SearchableListContent placeholder={placeholder}>{children}</SearchableListContent>
     </SearchableListContext.Provider>
   )
 }

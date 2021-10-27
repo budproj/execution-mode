@@ -37,7 +37,11 @@ export const SelectUserFromListWrapper = ({
   const intl = useIntl()
 
   return (
-    <SearchableList searchKey="fullName" initialItems={users}>
+    <SearchableList
+      placeholder={intl.formatMessage(messages.searchPlaceholder)}
+      searchKey="fullName"
+      initialItems={users}
+    >
       <SearchableListOptionGroup
         id="create-users"
         icon={

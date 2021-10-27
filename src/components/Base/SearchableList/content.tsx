@@ -7,16 +7,17 @@ import { SearchableListOptionGroups } from './options'
 import { SearchableListSearchBar } from './search-bar'
 
 type SearchableListBodyProperties = {
+  placeholder?: string
   children: React.ReactNode
 }
 
-export const SearchableListContent = ({ children }: SearchableListBodyProperties) => {
+export const SearchableListContent = ({ children, placeholder }: SearchableListBodyProperties) => {
   const { optionGroups } = useContext(SearchableListContext)
 
   return (
     <Stack spacing={4} maxH="full">
       <HStack spacing={4}>
-        <SearchableListSearchBar />
+        <SearchableListSearchBar placeholder={placeholder} />
         {optionGroups.length > 0 && <SearchableListOptionGroups />}
       </HStack>
       {children}

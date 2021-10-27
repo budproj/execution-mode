@@ -1,8 +1,17 @@
 import { defineMessages } from 'react-intl'
 
-type SelectUserFromListMessages = 'newUserOption' | 'createUserOptionGroupIconDesc'
+type SelectUserFromListMessages =
+  | 'searchPlaceholder'
+  | 'newUserOption'
+  | 'createUserOptionGroupIconDesc'
 
 export default defineMessages<SelectUserFromListMessages>({
+  searchPlaceholder: {
+    defaultMessage: 'Buscar membros',
+    id: 'wlwyTd',
+    description: 'This message is used in the search input while searching for users',
+  },
+
   newUserOption: {
     defaultMessage: 'Criar novo usuário',
     id: 'OwWiN7',
