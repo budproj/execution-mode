@@ -6,7 +6,7 @@ import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { userAtomFamily } from '../../../state/recoil/user'
 import { GraphQLConnection } from '../../types'
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
-import { SelectUserFromList } from '../SelectFromList/wrapper'
+import { SelectUserfromList } from '../SelectFromList'
 import { User } from '../types'
 
 import queries from './queries.gql'
@@ -28,17 +28,6 @@ export const AllReachableUsers = ({
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)
 
-  const handleSearch = (searchValue: string) => {
-    if (!data) return
-
-    if (!searchValue || searchValue === '') setUserEdges(data.users.edges)
-
-    const filteredUserEdges = data.users.edges.filter((edge) =>
-      edge.node.fullName.toUpperCase().includes(searchValue.toUpperCase()),
-    )
-    setUserEdges(filteredUserEdges)
-  }
-
   useEffect(() => {
     if (data) setUserEdges(data.users.edges)
   }, [data, setUserEdges])
@@ -48,11 +37,10 @@ export const AllReachableUsers = ({
   }, [users, loadUsers])
 
   return (
-    <SelectUserFromList
+    <SelectUserfromList
       users={users}
       isLoading={!data}
       avatarSubtitleType={avatarSubtitleType}
-      onSearch={handleSearch}
       onSelect={onSelect}
     />
   )

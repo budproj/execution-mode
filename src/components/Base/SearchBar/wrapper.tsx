@@ -11,7 +11,7 @@ export interface SearchProperties {
   onSearch?: (searchValue: string) => void
 }
 
-export const Search = ({ placeholder, onSearch }: SearchProperties) => {
+export const SearchBar = ({ placeholder, onSearch }: SearchProperties) => {
   const intl = useIntl()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

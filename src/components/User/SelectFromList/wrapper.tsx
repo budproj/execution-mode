@@ -1,11 +1,13 @@
-import { Stack } from '@chakra-ui/react'
 import React from 'react'
 
+import { SearchableList } from 'src/components/Base/SearchableList'
+import { SearchableListBody } from 'src/components/Base/SearchableList/body'
+import { SearchableListSearchBar } from 'src/components/Base/SearchableList/search-bar'
 import { User } from 'src/components/User/types'
 
-import { Search } from '../../Base/Search/wrapper'
-import { UserList } from '../List/wrapper'
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
+
+import { UsersInContext } from './users-in-context'
 
 export interface SelectUserFromListProperties {
   users: User[]
@@ -16,22 +18,22 @@ export interface SelectUserFromListProperties {
   showUserCard?: boolean
 }
 
-export const SelectUserFromList = ({
+export const SelectUserFromListWrapper = ({
   users,
   isLoading,
   onSelect,
-  onSearch,
   showUserCard,
   avatarSubtitleType,
 }: SelectUserFromListProperties) => (
-  <Stack spacing={4} maxH="full">
-    <Search onSearch={onSearch} />
-    <UserList
-      showUserCard={showUserCard}
-      users={users}
-      isLoading={isLoading}
-      avatarSubtitleType={avatarSubtitleType}
-      onUserClick={onSelect}
-    />
-  </Stack>
+  <SearchableList searchKey="fullName" initialItems={users}>
+    <SearchableListBody>
+      <SearchableListSearchBar />
+      <UsersInContext
+        hasUserCard={showUserCard}
+        isLoading={isLoading}
+        avatarSubtitleType={avatarSubtitleType}
+        onSelect={onSelect}
+      />
+    </SearchableListBody>
+  </SearchableList>
 )
