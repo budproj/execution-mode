@@ -719,6 +719,10 @@
     "defaultMessage": "Cancelar",
     "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field"
   },
+  "OwWiN7": {
+    "defaultMessage": "Criar novo usuário",
+    "description": "This message appears as an option in the team page while adding a new user"
+  },
   "P+AGjw": {
     "defaultMessage": "Como está o progresso dos times?",
     "description": "The title of the header section in our teams overview report"
@@ -1010,6 +1014,10 @@
   "Zn0eYa": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
     "description": "The alternative text explaining our team at work image"
+  },
+  "a8O2l+": {
+    "defaultMessage": "Um ícone com o sinal de \"mais\". Ao clicar aqui você irá abrir o menu para inserir um novo usuário",
+    "description": "This message is used in our new user button while seeing the user list"
   },
   "aKyktL": {
     "defaultMessage": "Q2",
@@ -1470,6 +1478,10 @@
   "wiFglx": {
     "defaultMessage": "Responsável",
     "description": "This label appears above the sixth input in our insert key-result drawer"
+  },
+  "wlwyTd": {
+    "defaultMessage": "Buscar membros",
+    "description": "This message is used in the search input while searching for users"
   },
   "wwt9p1": {
     "defaultMessage": "Um círculo com um ponto de interrogação ao centro",
