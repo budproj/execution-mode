@@ -72,16 +72,35 @@ export const SearchableListOptionGroups = () => {
 const SearchableListSingleOptionGroup = ({ icon, options }: OptionGroup) => {
   return (
     <Menu>
-      <MenuButton as={IconButton} icon={icon} aria-label="teste" />
-      <MenuList
-        p={0}
-        w="xs"
-        boxShadow="with-stroke.dark"
-        borderWidth={1}
-        borderColor="new-gray.200"
-      >
+      <MenuButton
+        as={IconButton}
+        icon={icon}
+        aria-label="teste"
+        size="md"
+        fontSize="sm"
+        bg="new-gray.200"
+        color="new-gray.800"
+        _hover={{
+          color: 'brand.500',
+        }}
+      />
+      <MenuList p={2} w="xs" boxShadow="with-stroke.dark" borderColor="new-gray.200">
         {options.map((option) => (
-          <MenuItem key={option.label} onClick={option.onClick}>
+          <MenuItem
+            key={option.label}
+            color="gray.500"
+            colorScheme="gray"
+            p={2}
+            fontWeight={400}
+            w="100%"
+            justifyContent="flex-start"
+            variant="ghost"
+            borderWidth={0}
+            _active={{
+              color: 'brand.500',
+            }}
+            onClick={option.onClick}
+          >
             {option.label}
           </MenuItem>
         ))}

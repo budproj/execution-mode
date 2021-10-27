@@ -40,7 +40,12 @@ export const SelectUserFromListWrapper = ({
     <SearchableList searchKey="fullName" initialItems={users}>
       <SearchableListOptionGroup
         id="create-users"
-        icon={<PlusIcon desc={intl.formatMessage(messages.createUserOptionGroupIconDesc)} />}
+        icon={
+          <PlusIcon
+            desc={intl.formatMessage(messages.createUserOptionGroupIconDesc)}
+            fill="currentColor"
+          />
+        }
       >
         <SearchableListOption onClick={handleNewUser}>
           {intl.formatMessage(messages.newUserOption)}
