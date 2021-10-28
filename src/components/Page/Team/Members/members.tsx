@@ -6,7 +6,7 @@ import { useSetRecoilState } from 'recoil'
 
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
-import { SelectUserFromList } from 'src/components/User/SelectFromList/wrapper'
+import { SelectUserfromList } from 'src/components/User/SelectFromList'
 import { User } from 'src/components/User/types'
 import { GraphQLConnection } from 'src/components/types'
 import { selectTeam } from 'src/state/recoil/team/selector'
@@ -20,7 +20,6 @@ type TeamMembersProperties = {
   teamID?: string
   isLoaded?: boolean
   members: User[]
-  onSearch?: (value: string) => void
 }
 
 type GetTeamMembersResponse = {
@@ -29,7 +28,7 @@ type GetTeamMembersResponse = {
   }
 }
 
-export const TeamMembers = ({ teamID, isLoaded, members, onSearch }: TeamMembersProperties) => {
+export const TeamMembers = ({ teamID, isLoaded, members }: TeamMembersProperties) => {
   const intl = useIntl()
   const [selectedUserID, setSelectedUserID] = useState<string>()
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
@@ -74,12 +73,11 @@ export const TeamMembers = ({ teamID, isLoaded, members, onSearch }: TeamMembers
         totalMembersCount: members.length,
       })}
     >
-      <SelectUserFromList
+      <SelectUserfromList
         showUserCard
         users={members}
         avatarSubtitleType="role"
         isLoading={!isLoaded}
-        onSearch={onSearch}
         onSelect={handleSelect}
       />
       <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>

@@ -1,12 +1,12 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { Search, SearchProperties } from 'src/components/Base/Search/wrapper'
+import { SearchBar, SearchProperties } from 'src/components/Base/SearchBar/wrapper'
 
 import messages from './messages'
 
 export const TeamSearch = ({ onSearch: onChange }: SearchProperties) => {
   const intl = useIntl()
 
-  return <Search placeholder={intl.formatMessage(messages.placeholder)} onSearch={onChange} />
+  return <SearchBar placeholder={intl.formatMessage(messages.placeholder)} onSearch={onChange} />
 }

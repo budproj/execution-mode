@@ -1,11 +1,18 @@
-import { Stack } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
+import { SearchableList } from 'src/components/Base/SearchableList'
+import {
+  SearchableListOption,
+  SearchableListOptionGroup,
+} from 'src/components/Base/SearchableList/options'
+import PlusIcon from 'src/components/Icon/Plus'
 import { User } from 'src/components/User/types'
 
-import { Search } from '../../Base/Search/wrapper'
-import { UserList } from '../List/wrapper'
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
+
+import messages from './messages'
+import { UsersInContext } from './users-in-context'
 
 export interface SelectUserFromListProperties {
   users: User[]
@@ -16,22 +23,45 @@ export interface SelectUserFromListProperties {
   showUserCard?: boolean
 }
 
-export const SelectUserFromList = ({
+const handleNewUser = () => {
+  console.log('tag')
+}
+
+export const SelectUserFromListWrapper = ({
   users,
   isLoading,
   onSelect,
-  onSearch,
   showUserCard,
   avatarSubtitleType,
-}: SelectUserFromListProperties) => (
-  <Stack spacing={4} maxH="full">
-    <Search onSearch={onSearch} />
-    <UserList
-      showUserCard={showUserCard}
-      users={users}
-      isLoading={isLoading}
-      avatarSubtitleType={avatarSubtitleType}
-      onUserClick={onSelect}
-    />
-  </Stack>
-)
+}: SelectUserFromListProperties) => {
+  const intl = useIntl()
+
+  return (
+    <SearchableList
+      placeholder={intl.formatMessage(messages.searchPlaceholder)}
+      searchKey="fullName"
+      initialItems={users}
+    >
+      <SearchableListOptionGroup
+        id="create-users"
+        icon={
+          <PlusIcon
+            desc={intl.formatMessage(messages.createUserOptionGroupIconDesc)}
+            fill="currentColor"
+          />
+        }
+      >
+        <SearchableListOption onClick={handleNewUser}>
+          {intl.formatMessage(messages.newUserOption)}
+        </SearchableListOption>
+      </SearchableListOptionGroup>
+
+      <UsersInContext
+        hasUserCard={showUserCard}
+        isLoading={isLoading}
+        avatarSubtitleType={avatarSubtitleType}
+        onSelect={onSelect}
+      />
+    </SearchableList>
+  )
+}
