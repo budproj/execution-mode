@@ -8,6 +8,7 @@ import { RecoilRoot } from 'recoil'
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
 import HotjarProvider from 'src/components/Base/HotjarProvider'
+import { LocaleSwitcher } from 'src/components/Base/LocaleSwitcher'
 import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
 import ProgressBar from 'src/components/Base/ProgressBar'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
@@ -65,6 +66,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                     <SmartlookProvider />
                     <ProgressBar />
                     <Component {...pageProps} />
+                    <LocaleSwitcher />
                   </MaintenanceGatekeeper>
                 </AuthzApolloProvider>
               </AmplitudeProvider>
