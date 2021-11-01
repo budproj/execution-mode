@@ -4,13 +4,13 @@ import { useIntl } from 'react-intl'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
-import { SettingsAccount, SettingsSidebarMenu } from 'src/components/Settings'
+import { SettingsMyProfile, SettingsSidebarMenu } from 'src/components/Settings'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
 
 import messages from './messages'
 
-const SettingsMyAccountPage = () => {
+const SettingsMyProfilePage = () => {
   const intl = useIntl()
 
   return (
@@ -25,10 +25,10 @@ const SettingsMyAccountPage = () => {
         <SettingsSidebarMenu />
         <Divider orientation="vertical" borderColor="black.200" height="auto" />
 
-        <SettingsAccount />
+        <SettingsMyProfile />
       </Flex>
     </PageContent>
   )
 }
 
-export default SettingsMyAccountPage
+export default SettingsMyProfilePage

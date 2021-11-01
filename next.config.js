@@ -33,7 +33,7 @@ const publicRuntimeConfig = {
   logLevel: LOG_LEVEL,
   maintenanceMode: {
     enabled: MAINTENANCE_MODE_ENABLED === 'true',
-    expectedReturn: new Date(MAINTENANCE_MODE_EXPECTED_RETURN)
+    expectedReturn: new Date(MAINTENANCE_MODE_EXPECTED_RETURN),
   },
 
   mirage: {
@@ -91,8 +91,8 @@ const publicRuntimeConfig = {
     },
 
     {
-      source: '/pt-BR/configuracoes/minha-conta',
-      destination: '/settings/my-account',
+      source: '/pt-BR/configuracoes/minha-perfil',
+      destination: '/settings/my-profile',
       locale: 'pt-BR',
     },
   ],
@@ -134,7 +134,7 @@ module.exports = {
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
       loader: 'graphql-tag/loader',
-    });
+    })
 
     return config
   },

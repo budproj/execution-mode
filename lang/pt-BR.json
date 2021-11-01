@@ -167,6 +167,10 @@
     "defaultMessage": "Faz tempo que ninguém interage nesse resultado-chave. Que tal compartilhar uma informação relevante com o time? :)",
     "description": "This text gives more details regarding our empty state card in the key result drawers"
   },
+  "2iSLX9": {
+    "defaultMessage": "Inglês",
+    "description": "This message is used as the label for the english language in our locale switcher"
+  },
   "2lGnmq": {
     "defaultMessage": "Minha conta | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
@@ -1470,6 +1474,10 @@
   "vJ/603": {
     "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
     "description": "The description displayed in our not found error page"
+  },
+  "vbnV7B": {
+    "defaultMessage": "Português",
+    "description": "This message is used as the label for the portuguese language in our locale switcher"
   },
   "wJjuae": {
     "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",

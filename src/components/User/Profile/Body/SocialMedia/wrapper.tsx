@@ -45,6 +45,8 @@ export const UserProfileBodySocialMedia = ({
   )
 
   const hasNoSocialMedia = !user?.linkedInProfileAddress || user?.linkedInProfileAddress === ''
+  const shouldHide = hasNoSocialMedia && !canUpdate
+
   const handleValueUpdate = (key: keyof User) => async (value: string | string[] | null) => {
     if (user?.[key] === value) return
     // eslint-disable-next-line unicorn/no-null
@@ -63,7 +65,7 @@ export const UserProfileBodySocialMedia = ({
   }
 
   // eslint-disable-next-line unicorn/no-null
-  return hasNoSocialMedia ? null : (
+  return shouldHide ? null : (
     <>
       <Divider borderColor="black.200" />
       <Stack direction="column" spacing={6} maxW="xl">

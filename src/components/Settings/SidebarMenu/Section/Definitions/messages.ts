@@ -10,8 +10,8 @@ export default defineMessages<SidebarMenuSectionPreferencesMessage>({
   },
 
   firstOptionLabel: {
-    defaultMessage: 'Minha conta',
-    id: 'sYGIlp',
+    defaultMessage: 'Meu perfil',
+    id: 'JYkjjF',
     description: 'This label defines the text on the first menu section option',
   },
 })
