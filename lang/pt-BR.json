@@ -171,10 +171,6 @@
     "defaultMessage": "Inglês",
     "description": "This message is used as the label for the english language in our locale switcher"
   },
-  "2lGnmq": {
-    "defaultMessage": "Minha conta | bud",
-    "description": "The page title that is displayed in the browser tab for the my profile page"
-  },
   "30/f+o": {
     "defaultMessage": "Tem certeza que deseja desativar {gender, select, MALE {o} FEMALE {a} other {o}} usuári{gender, select, MALE {o} FEMALE {a} other {o}} {name}?",
     "description": "This text is used in our delete dialog confirmation to explain to the user what will happen"
@@ -547,6 +543,10 @@
     "defaultMessage": "Criar Resultado Chave",
     "description": "This message appears as the title of the insert Key Result drawer"
   },
+  "HOpxw5": {
+    "defaultMessage": "Plataforma",
+    "description": "This message is used in the sidebar of our settings page"
+  },
   "HQfOOa": {
     "defaultMessage": "Ciclo",
     "description": "The label text above the Cycle section in our key result single page or drawers"
@@ -599,6 +599,10 @@
     "defaultMessage": "Essa ação não pode ser desfeita",
     "description": "This text is giving more details regarding the delete alert in our drawers"
   },
+  "JYkjjF": {
+    "defaultMessage": "Meu perfil",
+    "description": "This label defines the text on the first menu section option"
+  },
   "JZJeBS": {
     "defaultMessage": "Ontem",
     "description": "This label is displayed if the last is yesterday"
@@ -638,6 +642,10 @@
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
     "description": "This message is displayed below the current progress thumb"
+  },
+  "LvI+KK": {
+    "defaultMessage": "Idioma",
+    "description": "This message is the label of our locale switcher in the settings page"
   },
   "M0RYZa": {
     "defaultMessage": "Salvar",
@@ -698,10 +706,6 @@
   "NojznG": {
     "defaultMessage": "Subtimes {isLoaded, select, true {({totalTeamsCount})} other{}}",
     "description": "This message is displayed inside the explore page, above the child teams section"
-  },
-  "Nwj8qY": {
-    "defaultMessage": "Minha conta",
-    "description": "MainAppBar user menu first item option"
   },
   "O13rH5": {
     "defaultMessage": "{completed}/{total}",
@@ -874,6 +878,10 @@
   "TKIxVB": {
     "defaultMessage": "Definições",
     "description": "This title is displayed as the heading of the definitions menu section"
+  },
+  "TN6PhK": {
+    "defaultMessage": "Meu perfil",
+    "description": "MainAppBar user menu first item option"
   },
   "TaXVmY": {
     "defaultMessage": "Adicionar um OKR neste ciclo",
@@ -1127,6 +1135,10 @@
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
     "description": "The page description that is displayed in Google and screen readers"
   },
+  "fX4pLO": {
+    "defaultMessage": "Configurações da plataforma | bud",
+    "description": "The page title that is displayed in the browser tab for the platform settings page"
+  },
   "faL9vf": {
     "defaultMessage": "Um círculo verde, indicando que a confiança está alta",
     "description": "A brief explanation for screen readers regarding the green status circle"
@@ -1155,6 +1167,10 @@
     "defaultMessage": "Se realmente tem certeza de que deseja fazer isso, confirme sua ação escrevendo \"{keyword}” no campo abaixo:",
     "description": "This message is used as our default second stage description in our dangerous confirmation modal"
   },
+  "gioO8X": {
+    "defaultMessage": "Plataforma",
+    "description": "The page title that our users should see in the platform settings page"
+  },
   "gm1hfm": {
     "defaultMessage": "Progresso do objetivo acumulado na semana",
     "description": "This tooltip explains regarding our progress tag"
@@ -1166,10 +1182,6 @@
   "gu4aCE": {
     "defaultMessage": "Anual",
     "description": "This text is used as prefix for our yearly cadences"
-  },
-  "h4sP/q": {
-    "defaultMessage": "Minha conta",
-    "description": "The page title that our users should see in the my profile page"
   },
   "hMXuTX": {
     "defaultMessage": "Masculino",
@@ -1206,6 +1218,10 @@
   "ijCibq": {
     "defaultMessage": "Financeiro (Dólar)",
     "description": "This message is displayed inside our key-result format select as the title of the coin USD format"
+  },
+  "ilU+Uz": {
+    "defaultMessage": "Meu perfil",
+    "description": "The page title that our users should see in the my profile page"
   },
   "jCjr1X": {
     "defaultMessage": "Preencha os campos obrigatórios para poder salvar este resultado-chave.",
@@ -1415,10 +1431,6 @@
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você irá remover esse item da checklist",
     "description": "This text is used by screen readers inside our key-result drawer to describe the X icon to remove a given item from the checklist"
   },
-  "sYGIlp": {
-    "defaultMessage": "Minha conta",
-    "description": "This label defines the text on the first menu section option"
-  },
   "sp/6lg": {
     "defaultMessage": "Sobre",
     "description": "This text is displayed in our check-in card, above the user comment if it exists"
@@ -1479,6 +1491,10 @@
     "defaultMessage": "Português",
     "description": "This message is used as the label for the portuguese language in our locale switcher"
   },
+  "vm0Yuj": {
+    "defaultMessage": "Meu perfil | bud",
+    "description": "The page title that is displayed in the browser tab for the my profile page"
+  },
   "wJjuae": {
     "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",
     "description": "This tooltip explains the seventh column of the key result list"
@@ -1530,6 +1546,10 @@
   "z4STCs": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> nesse trimestre?",
     "description": "The title of the header section in our company overview report"
+  },
+  "z75EmS": {
+    "defaultMessage": "Visualize e atualize as preferências referentes a plataforma",
+    "description": "The page description that is displayed in Google and screen readers for the platform settings page"
   },
   "zEyzo8": {
     "defaultMessage": "Um círculo roxo, indicando que o resultado-chave tem uma barreira",
