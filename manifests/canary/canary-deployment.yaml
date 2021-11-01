@@ -36,7 +36,7 @@ spec:
             - name: DEFAULT_LOCALE
               value: pt-BR
             - name: SUPPORTED_LOCALES
-              value: pt-BR
+              value: pt-BR,en-US
             - name: API_GRAPHQL
               value: https://api.canary.getbud.co/business/graphql
             - name: AUTH0_CLIENT_ID_PUBLIC
