@@ -4,14 +4,14 @@ type SettingsMyAccountPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription
 
 export default defineMessages<SettingsMyAccountPageMessage>({
   pageTitle: {
-    defaultMessage: 'Minha conta',
-    id: 'h4sP/q',
+    defaultMessage: 'Meu perfil',
+    id: 'ilU+Uz',
     description: 'The page title that our users should see in the my profile page',
   },
 
   metaTitle: {
-    defaultMessage: 'Minha conta | bud ',
-    id: '2lGnmq',
+    defaultMessage: 'Meu perfil | bud ',
+    id: 'vm0Yuj',
     description: 'The page title that is displayed in the browser tab for the my profile page',
   },
 

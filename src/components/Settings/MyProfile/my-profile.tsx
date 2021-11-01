@@ -7,7 +7,7 @@ import meAtom from 'src/state/recoil/user/me'
 
 import SettingsAccountUserCardPreview from './UserCardPreview'
 
-const SettingsAccount = () => {
+const SettingsMyProfile = () => {
   const myUserID = useRecoilValue(meAtom)
 
   return (
@@ -20,4 +20,4 @@ const SettingsAccount = () => {
   )
 }
 
-export default SettingsAccount
+export default SettingsMyProfile

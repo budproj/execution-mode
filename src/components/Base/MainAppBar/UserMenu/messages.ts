@@ -4,8 +4,8 @@ type MainAppBarUserMenuMessage = 'firstOption' | 'secondOption'
 
 export default defineMessages<MainAppBarUserMenuMessage>({
   firstOption: {
-    defaultMessage: 'Minha conta',
-    id: 'Nwj8qY',
+    defaultMessage: 'Meu perfil',
+    id: 'TN6PhK',
     description: 'MainAppBar user menu first item option',
   },
 

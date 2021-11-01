@@ -52,7 +52,7 @@ const UserMenu = () => {
         borderColor="new-gray.200"
       >
         <Box p={2}>
-          <IntlLink href="/settings/my-account">
+          <IntlLink href="/settings/my-profile">
             <UserMenuButton onClickCapture={handleClickCapture}>
               {intl.formatMessage(messages.firstOption)}
             </UserMenuButton>

@@ -24,9 +24,15 @@ const SettingsSidebarMenuSectionPreferences = () => {
         {intl.formatMessage(messages.sectionTitle)}
       </Heading>
 
-      <SettingsSidebarMenuSectionButton href="/settings/my-account">
-        <IntlLink href="/settings/my-account">
+      <SettingsSidebarMenuSectionButton href="/settings/my-profile">
+        <IntlLink href="/settings/my-profile">
           {intl.formatMessage(messages.firstOptionLabel)}
+        </IntlLink>
+      </SettingsSidebarMenuSectionButton>
+
+      <SettingsSidebarMenuSectionButton href="/settings/platform">
+        <IntlLink href="/settings/platform">
+          {intl.formatMessage(messages.secondOptionLabel)}
         </IntlLink>
       </SettingsSidebarMenuSectionButton>
     </Flex>

@@ -1,0 +1,1 @@
+export { SettingsPlatform } from './platform'
