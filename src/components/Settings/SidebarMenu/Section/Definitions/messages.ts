@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type SidebarMenuSectionPreferencesMessage = 'sectionTitle' | 'firstOptionLabel'
+type SidebarMenuSectionPreferencesMessage =
+  | 'sectionTitle'
+  | 'firstOptionLabel'
+  | 'secondOptionLabel'
 
 export default defineMessages<SidebarMenuSectionPreferencesMessage>({
   sectionTitle: {
@@ -13,5 +16,11 @@ export default defineMessages<SidebarMenuSectionPreferencesMessage>({
     defaultMessage: 'Meu perfil',
     id: 'JYkjjF',
     description: 'This label defines the text on the first menu section option',
+  },
+
+  secondOptionLabel: {
+    defaultMessage: 'Plataforma',
+    id: 'HOpxw5',
+    description: 'This message is used in the sidebar of our settings page',
   },
 })

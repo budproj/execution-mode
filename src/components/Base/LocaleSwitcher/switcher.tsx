@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/button'
 import { Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup } from '@chakra-ui/menu'
 import React from 'react'
 
@@ -18,7 +19,19 @@ export const Switcher = ({ locales, currentLocale, onSwitch }: SwitcherPropertie
 
   return (
     <Menu>
-      <MenuButton>{currentLocale.label}</MenuButton>
+      <MenuButton
+        as={Button}
+        fontSize="lg"
+        fontWeight={400}
+        px={0}
+        display="block"
+        _hover={{
+          opacity: 1,
+          color: 'brand.500',
+        }}
+      >
+        {currentLocale.label}
+      </MenuButton>
       <MenuList>
         <MenuOptionGroup defaultValue={currentLocale.code} type="radio">
           {locales.map((locale) => (

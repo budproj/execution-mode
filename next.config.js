@@ -91,8 +91,14 @@ const publicRuntimeConfig = {
     },
 
     {
-      source: '/pt-BR/configuracoes/minha-perfil',
+      source: '/pt-BR/configuracoes/meu-perfil',
       destination: '/settings/my-profile',
+      locale: 'pt-BR',
+    },
+
+    {
+      source: '/pt-BR/configuracoes/plataforma',
+      destination: '/settings/platform',
       locale: 'pt-BR',
     },
   ],
