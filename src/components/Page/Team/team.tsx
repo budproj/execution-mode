@@ -14,6 +14,7 @@ import { KeyResultInsertDrawer } from '../../KeyResult/InsertDrawer/wrapper'
 import { TeamObjectives } from '../../Team/Objectives/wrapper'
 
 import { ChildTeamsWrapper } from './ChildTeams/wrapper'
+import { MenuHeader } from './Header/menu'
 import { TeamHeader } from './Header/wrapper'
 import { TeamMembersWrapper } from './Members/wrapper'
 import messages from './messages'
@@ -53,7 +54,9 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
         <Stack spacing={8}>
           <Stack direction="row">
             <TeamHeader isLoaded={called && !loading} team={data?.team} />
-            <Box w="28rem" />
+            <Box w="28rem">
+              <MenuHeader teamId={teamId} />
+            </Box>
           </Stack>
 
           <Stack direction="row" spacing={8} maxH="100%">

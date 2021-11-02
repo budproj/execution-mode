@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import React, { useEffect, useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { atom, useRecoilState, useSetRecoilState } from 'recoil'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
@@ -33,9 +33,17 @@ export interface GetTeamActiveObjectivesQuery {
   }
 }
 
+export const isUpdatedNeededOnObjectivesState = atom({
+  key: 'isUpdatedNeededOnObjectives',
+  default: false,
+})
+
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
   const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
+  const [isUpdatedNeededOnObjectives, setIsUpdatedNeededOnObjectives] = useRecoilState(
+    isUpdatedNeededOnObjectivesState,
+  )
   const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
@@ -77,6 +85,13 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     loadObjectivesOnRecoil(cycleObjectives)
   }, [cycleObjectives, loadObjectivesOnRecoil])
 
+  useEffect(() => {
+    if (isUpdatedNeededOnObjectives) {
+      void refetch({ teamID })
+      setIsUpdatedNeededOnObjectives(false)
+    }
+  }, [isUpdatedNeededOnObjectives])
+
   return (
     <Stack spacing={12} h="full">
       {isLoaded ? (
@@ -94,9 +109,6 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
               cycle={cycle}
               objectiveIDs={objectiveIDs}
               teamID={teamID}
-              isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
-              onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
-              onNewObjective={handleRefetch}
             />
           ))
         )
