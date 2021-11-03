@@ -149,17 +149,15 @@ export const MenuHeader = ({ teamId }: MenuHeaderProperties) => {
       )}
 
       {hasInactiveObjectives && !isViewingActiveObjectives && (
-        <Tooltip label="Explorar ciclos anteriores" placement="top">
-          <Button
-            bg="new-gray.300"
-            _hover={{ background: 'new-gray.400', color: 'new-gray.800' }}
-            color="new-gray.800"
-            leftIcon={<RedoIcon w="1.3em" h="1.3em" desc="teste" fill="currentColor" />}
-            onClick={handleViewOldCycles}
-          >
-            {intl.formatMessage(messages.backToPresent)}
-          </Button>
-        </Tooltip>
+        <Button
+          bg="new-gray.300"
+          _hover={{ background: 'new-gray.400', color: 'new-gray.800' }}
+          color="new-gray.800"
+          leftIcon={<RedoIcon w="1.3em" h="1.3em" desc="teste" fill="currentColor" />}
+          onClick={handleViewOldCycles}
+        >
+          {intl.formatMessage(messages.backToPresent)}
+        </Button>
       )}
 
       {isAllowedToCreateObjectives && isViewingActiveObjectives && (
