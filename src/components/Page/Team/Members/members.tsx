@@ -20,6 +20,7 @@ type TeamMembersProperties = {
   teamID?: string
   isLoaded?: boolean
   members: User[]
+  hasAddMembersPermission?: boolean
 }
 
 type GetTeamMembersResponse = {
@@ -28,7 +29,12 @@ type GetTeamMembersResponse = {
   }
 }
 
-export const TeamMembers = ({ teamID, isLoaded, members }: TeamMembersProperties) => {
+export const TeamMembers = ({
+  teamID,
+  isLoaded,
+  members,
+  hasAddMembersPermission,
+}: TeamMembersProperties) => {
   const intl = useIntl()
   const [selectedUserID, setSelectedUserID] = useState<string>()
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
@@ -78,6 +84,7 @@ export const TeamMembers = ({ teamID, isLoaded, members }: TeamMembersProperties
         users={members}
         avatarSubtitleType="role"
         isLoading={!isLoaded}
+        hasCreateNewUserPermission={hasAddMembersPermission}
         onSelect={handleSelect}
       />
       <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>

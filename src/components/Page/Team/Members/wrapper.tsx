@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
+import { GraphQLEffect } from 'src/components/types'
+
 import { useConnectionEdges } from '../../../../state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from '../../../../state/recoil/hooks'
 import { teamAtomFamily } from '../../../../state/recoil/team'
@@ -20,6 +22,8 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
   const [teamMembers, setTeamMemberEdges] = useConnectionEdges(team?.users?.edges)
   const [loadUsersOnRecoil] = useRecoilFamilyLoader<User>(userAtomFamily)
 
+  const hasAddMembersPermission = team?.users?.policy?.create === GraphQLEffect.ALLOW
+
   useEffect(() => {
     if (team) {
       setTeamMemberEdges(team.users?.edges)
@@ -35,5 +39,12 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
     if (isLoaded && isLoading) setIsLoaded(false)
   }, [isLoading, isLoaded, setIsLoaded])
 
-  return <TeamMembers teamID={teamID} isLoaded={isLoaded} members={teamMembers} />
+  return (
+    <TeamMembers
+      teamID={teamID}
+      isLoaded={isLoaded}
+      members={teamMembers}
+      hasAddMembersPermission={hasAddMembersPermission}
+    />
+  )
 }

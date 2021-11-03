@@ -26,7 +26,7 @@ export interface ExploreTeamPageProperties extends PageProperties {
 
 const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   const intl = useIntl()
-  const { data, loading, error, called } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_NAME, {
+  const { data, loading, error, called } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_DATA, {
     variables: {
       teamId,
     },

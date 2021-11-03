@@ -17,6 +17,7 @@ import { UsersInContext } from './users-in-context'
 export interface SelectUserFromListProperties {
   users: User[]
   isLoading?: boolean
+  hasCreateNewUserPermission?: boolean
   onSelect?: (userID: string) => void | Promise<void>
   onSearch?: (query: string) => void
   avatarSubtitleType?: NamedAvatarSubtitleType
@@ -33,6 +34,7 @@ export const SelectUserFromListWrapper = ({
   onSelect,
   showUserCard,
   avatarSubtitleType,
+  hasCreateNewUserPermission,
 }: SelectUserFromListProperties) => {
   const intl = useIntl()
 
@@ -42,19 +44,21 @@ export const SelectUserFromListWrapper = ({
       searchKey="fullName"
       initialItems={users}
     >
-      <SearchableListOptionGroup
-        id="create-users"
-        icon={
-          <PlusIcon
-            desc={intl.formatMessage(messages.createUserOptionGroupIconDesc)}
-            fill="currentColor"
-          />
-        }
-      >
-        <SearchableListOption onClick={handleNewUser}>
-          {intl.formatMessage(messages.newUserOption)}
-        </SearchableListOption>
-      </SearchableListOptionGroup>
+      {hasCreateNewUserPermission && (
+        <SearchableListOptionGroup
+          id="create-users"
+          icon={
+            <PlusIcon
+              desc={intl.formatMessage(messages.createUserOptionGroupIconDesc)}
+              fill="currentColor"
+            />
+          }
+        >
+          <SearchableListOption onClick={handleNewUser}>
+            {intl.formatMessage(messages.newUserOption)}
+          </SearchableListOption>
+        </SearchableListOptionGroup>
+      )}
 
       <UsersInContext
         hasUserCard={showUserCard}
