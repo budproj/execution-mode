@@ -12,7 +12,7 @@ const SupportButton = () => {
   const intl = useIntl()
 
   return (
-    <IntlLink href="/settings/my-account">
+    <IntlLink href="/settings/my-profile">
       <TooltipWithDelay label={intl.formatMessage(messages.tooltip)}>
         <IconButton
           aria-label={intl.formatMessage(messages.iconDesc)}
