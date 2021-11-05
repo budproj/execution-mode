@@ -8,7 +8,6 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { Cycle } from 'src/components/Cycle/types'
 import HistoryIcon from 'src/components/Icon/History'
 import RedoIcon from 'src/components/Icon/Redo'
-import { isUpdatedNeededOnObjectivesState } from 'src/components/Team/ActiveObjectives/wrapper'
 import { Team } from 'src/components/Team/types'
 import {
   Delta,
@@ -20,6 +19,7 @@ import {
 } from 'src/components/types'
 import useCadence from 'src/state/hooks/useCadence'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { isReloadNecessary } from 'src/state/recoil/objective'
 import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import {
   ObjectivesViewMode,
@@ -62,7 +62,7 @@ export const MenuHeader = ({ teamId }: MenuHeaderProperties) => {
   )
   const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
   const ownerID = useRecoilValue(meAtom)
-  const setIsUpdatedNeededOnObjectives = useSetRecoilState(isUpdatedNeededOnObjectivesState)
+  const setIsReloadNecessary = useSetRecoilState(isReloadNecessary)
 
   const [activeCycles, setActiveCycleEdges] = useConnectionEdges<Cycle>()
 
@@ -88,7 +88,7 @@ export const MenuHeader = ({ teamId }: MenuHeaderProperties) => {
       },
       onCompleted: async (data) => {
         setObjectiveIDToEditMode(data.createObjective.id)
-        setIsUpdatedNeededOnObjectives(true)
+        setIsReloadNecessary(true)
       },
       onError: () => {
         toast({

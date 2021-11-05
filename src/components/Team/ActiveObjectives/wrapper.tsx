@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/layout'
 import React, { useEffect, useState } from 'react'
-import { atom, useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
@@ -36,9 +36,8 @@ export interface GetTeamActiveObjectivesQuery {
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
   const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
-  const [isUpdatedNeededOnObjectives, setIsUpdatedNeededOnObjectives] = useRecoilState(
-    isReloadNecessary,
-  )
+  const [isUpdatedNeededOnObjectives, setIsUpdatedNeededOnObjectives] =
+    useRecoilState(isReloadNecessary)
   const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
