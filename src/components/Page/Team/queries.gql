@@ -41,3 +41,65 @@ query GET_TEAM_DATA($teamId: ID!) {
     }
   }
 }
+
+query GET_CYCLES {
+  cycles(active: true) {
+    edges {
+      node {
+        id
+        period
+        cadence
+        parent {
+          period
+        }
+      }
+    }
+  }
+
+  inactiveCycles: cycles(active: false, first: 1) {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+
+  team {
+    objectives(first: 0) {
+      policy {
+        create
+      }
+    }
+  }
+
+}
+
+
+mutation CREATE_DRAFT_OBJECTIVE($title: String!, $teamID: ID!, $cycleID: ID! $ownerID: ID!) {
+  createObjective(data: {
+    title: $title,
+    teamId: $teamID,
+    cycleId: $cycleID,
+    ownerId: $ownerID,
+  }) {
+    id
+    title
+    cycle {
+      id
+      period
+      cadence
+      dateEnd
+    }
+    status {
+      progress
+      confidence
+    }
+    delta {
+      progress
+    }
+    policy {
+      update
+      delete
+    }
+  }
+}

@@ -463,6 +463,10 @@
     "defaultMessage": "Nenhuma pessoa encontrada",
     "description": "This message is displayed when the key-result drawers update owner option user list has no users to display. This usually happens when the user tries to search but there is no results"
   },
+  "DMwbJe": {
+    "defaultMessage": "Criar OKR",
+    "description": "create new key result"
+  },
   "Dnh8iG": {
     "defaultMessage": "de <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the first line of our confidence tooltip"
@@ -1275,6 +1279,10 @@
     "defaultMessage": "CHECK-INS",
     "description": "The tooltip text for the check-ins text"
   },
+  "jXZZd6": {
+    "defaultMessage": "Voltar ao presente",
+    "description": "go back to the present button description"
+  },
   "jYw0F3": {
     "defaultMessage": "Membros do time {isLoaded, select, true {({totalMembersCount})} other{}}",
     "description": "This message is displayed inside the explore page, above the members section"
@@ -1378,6 +1386,10 @@
   "nPjrcU": {
     "defaultMessage": "Editar",
     "description": "This message is displayer as soon as our user hovers the avatar"
+  },
+  "na6BgW": {
+    "defaultMessage": "Histórico",
+    "description": "History, historic, archived items"
   },
   "nfdvr1": {
     "defaultMessage": "Esperado",
