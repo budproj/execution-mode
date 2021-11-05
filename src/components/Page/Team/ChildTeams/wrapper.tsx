@@ -6,11 +6,11 @@ import { useConnectionEdges } from '../../../../state/hooks/useConnectionEdges/h
 import { useRecoilFamilyLoader } from '../../../../state/recoil/hooks'
 import { teamAtomFamily } from '../../../../state/recoil/team'
 import { EmptyState } from '../../../Base'
-import { TeamList } from '../../../Team/List/wrapper'
 import { Team } from '../../../Team/types'
 import { TeamSectionWrapper } from '../Section/wrapper'
 
 import messages from './messages'
+import { TeamListSearchable } from './team-list-searchable'
 
 interface ChildTeamsWrapperProperties {
   teamID?: string
@@ -51,7 +51,7 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
       {isLoaded && childTeams.length === 0 ? (
         <EmptyState imageKey="empty-folder" labelMessage={messages.emptyState} py={8} />
       ) : (
-        <TeamList teams={childTeams} isLoading={!isLoaded} />
+        <TeamListSearchable teams={childTeams} isLoading={!isLoaded} />
       )}
     </TeamSectionWrapper>
   )
