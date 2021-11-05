@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { SearchableList } from 'src/components/Base/SearchableList'
@@ -9,6 +9,7 @@ import {
 import PlusIcon from 'src/components/Icon/Plus'
 import { User } from 'src/components/User/types'
 
+import { CreateUserSidebar } from '../Create/Sidebar'
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
 
 import messages from './messages'
@@ -24,10 +25,6 @@ export interface SelectUserFromListProperties {
   showUserCard?: boolean
 }
 
-const handleNewUser = () => {
-  console.log('tag')
-}
-
 export const SelectUserFromListWrapper = ({
   users,
   isLoading,
@@ -36,7 +33,16 @@ export const SelectUserFromListWrapper = ({
   avatarSubtitleType,
   hasCreateNewUserPermission,
 }: SelectUserFromListProperties) => {
+  const [isCreateSidebarOpen, setIsCreateSidebarOpen] = useState(false)
   const intl = useIntl()
+
+  const handleCreateSidebarOpen = () => {
+    if (!isCreateSidebarOpen) setIsCreateSidebarOpen(true)
+  }
+
+  const handleCreateSidebarClose = () => {
+    if (isCreateSidebarOpen) setIsCreateSidebarOpen(false)
+  }
 
   return (
     <SearchableList
@@ -54,7 +60,7 @@ export const SelectUserFromListWrapper = ({
             />
           }
         >
-          <SearchableListOption onClick={handleNewUser}>
+          <SearchableListOption onClick={handleCreateSidebarOpen}>
             {intl.formatMessage(messages.newUserOption)}
           </SearchableListOption>
         </SearchableListOptionGroup>
@@ -66,6 +72,8 @@ export const SelectUserFromListWrapper = ({
         avatarSubtitleType={avatarSubtitleType}
         onSelect={onSelect}
       />
+
+      <CreateUserSidebar isOpen={isCreateSidebarOpen} onClose={handleCreateSidebarClose} />
     </SearchableList>
   )
 }
