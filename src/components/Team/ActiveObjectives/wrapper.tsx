@@ -6,7 +6,7 @@ import { atom, useRecoilState, useSetRecoilState } from 'recoil'
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
-import { objectiveAtomFamily } from '../../../state/recoil/objective'
+import { isReloadNecessary, objectiveAtomFamily } from '../../../state/recoil/objective'
 import { teamActiveObjectives } from '../../../state/recoil/team/active-objectives'
 import {
   ObjectivesViewMode,
@@ -33,16 +33,11 @@ export interface GetTeamActiveObjectivesQuery {
   }
 }
 
-export const isUpdatedNeededOnObjectivesState = atom({
-  key: 'isUpdatedNeededOnObjectives',
-  default: false,
-})
-
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
   const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [isUpdatedNeededOnObjectives, setIsUpdatedNeededOnObjectives] = useRecoilState(
-    isUpdatedNeededOnObjectivesState,
+    isReloadNecessary,
   )
   const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
