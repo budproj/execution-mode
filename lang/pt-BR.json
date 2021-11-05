@@ -743,6 +743,10 @@
     "defaultMessage": "Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave",
     "description": "This message is displayed for screen readers as the description of the arrow down icon inside the key-result drawers. That icon is only displayed when the user hovers the mouse over the goal"
   },
+  "PSCS+h": {
+    "defaultMessage": "Nome",
+    "description": "The label of the first name field in the create user form"
+  },
   "PYLIcI": {
     "defaultMessage": "Meta",
     "description": "This message is displayed below the goal thumb"
@@ -758,6 +762,10 @@
   "PktsGq": {
     "defaultMessage": "Check-list",
     "description": "This is the title of our checklist section inside the key-result sidebar"
+  },
+  "PxWBQZ": {
+    "defaultMessage": "Cargo",
+    "description": "The label of the role field in the create user form"
   },
   "Q2diI+": {
     "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
@@ -827,6 +835,14 @@
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
     "description": "This message appears when the user tries to remove a given objective, but receives an error"
   },
+  "SL45P4": {
+    "defaultMessage": "Gênero",
+    "description": "The label of the gender field in the create user form"
+  },
+  "SRIfUY": {
+    "defaultMessage": "Time",
+    "description": "The label of the team field in the create user form"
+  },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
@@ -854,6 +870,10 @@
   "SpAXmO": {
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
+  },
+  "SrOZ1m": {
+    "defaultMessage": "Criar usuário",
+    "description": "The sidebar title on our create user sidebar"
   },
   "SsQRcF": {
     "defaultMessage": "Uma seta que ao ser clicada expande a checklist deste resultado-chave",
@@ -1079,6 +1099,10 @@
     "defaultMessage": "Explorar",
     "description": "MainAppBar menu item that links to teams \"Explore\" page"
   },
+  "cz6EUM": {
+    "defaultMessage": "Foto",
+    "description": "The label of the picture field in the create user form"
+  },
   "d7EKd5": {
     "defaultMessage": "Editar este OKR",
     "description": "This is the second option that appears when you open the menu of a given objective inside the accordion button"
@@ -1118,6 +1142,10 @@
   "eUCb55": {
     "defaultMessage": "Fim",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawers"
+  },
+  "eVsyB5": {
+    "defaultMessage": "Email",
+    "description": "The label of the email field in the create user form"
   },
   "eYhGZW": {
     "defaultMessage": "Nenhuma opção disponível",
@@ -1538,6 +1566,10 @@
   "ytvOyM": {
     "defaultMessage": "Meus Resultados-Chave",
     "description": "MainAppBar menu item that links to \"My Key Results\" page"
+  },
+  "yw+DGB": {
+    "defaultMessage": "Sobrenome",
+    "description": "The label of the last name field in the create user form"
   },
   "z4Qy+J": {
     "defaultMessage": "O desenho de uma caixa fechada, ilustrando que estamos em manutenção",
