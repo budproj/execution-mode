@@ -74,6 +74,7 @@ const SelectMenu = ({
         textAlign="left"
         py={6}
         px={3}
+        pr={6}
         fontSize="lg"
         _hover={{
           color: 'black.900',

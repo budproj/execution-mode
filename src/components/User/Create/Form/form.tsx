@@ -13,18 +13,12 @@ import { USER_GENDER } from '../../constants'
 
 import messages from './messages'
 
-type UserTeam = {
-  id: string
-  name: string
-}
-
 export type CreateUserFormValues = {
   firstName: string
   lastName: string
   email: string
   role: string
   gender?: USER_GENDER
-  team: UserTeam[]
 }
 
 type CreateUserFormProperties = {
@@ -36,13 +30,12 @@ type CreateUserFormProperties = {
   ) => Promise<void>
 }
 
-const defaultInitialValues: CreateUserFormValues = {
+export const defaultInitialValues: CreateUserFormValues = {
   firstName: '',
   lastName: '',
   email: '',
   role: '',
   gender: undefined,
-  team: [],
 }
 
 export const CreateUserForm = ({ initialValues, onCancel, onSubmit }: CreateUserFormProperties) => {

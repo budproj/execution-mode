@@ -81,6 +81,7 @@ export const TeamMembers = ({
     >
       <SelectUserfromList
         showUserCard
+        teamID={teamID}
         users={members}
         avatarSubtitleType="role"
         isLoading={!isLoaded}

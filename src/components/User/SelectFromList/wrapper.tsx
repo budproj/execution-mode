@@ -19,6 +19,7 @@ export interface SelectUserFromListProperties {
   users: User[]
   isLoading?: boolean
   hasCreateNewUserPermission?: boolean
+  teamID?: string
   onSelect?: (userID: string) => void | Promise<void>
   onSearch?: (query: string) => void
   avatarSubtitleType?: NamedAvatarSubtitleType
@@ -26,6 +27,7 @@ export interface SelectUserFromListProperties {
 }
 
 export const SelectUserFromListWrapper = ({
+  teamID,
   users,
   isLoading,
   onSelect,
@@ -73,7 +75,11 @@ export const SelectUserFromListWrapper = ({
         onSelect={onSelect}
       />
 
-      <CreateUserSidebar isOpen={isCreateSidebarOpen} onClose={handleCreateSidebarClose} />
+      <CreateUserSidebar
+        teamID={teamID}
+        isOpen={isCreateSidebarOpen}
+        onClose={handleCreateSidebarClose}
+      />
     </SearchableList>
   )
 }
