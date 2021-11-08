@@ -30,6 +30,7 @@ export interface SelectMenuProperties {
   placement?: MenuProps['placement']
   placeholder?: ReactElement | string
   valueLabel?: ReactElement | string
+  isInvalid?: boolean
 }
 
 const SelectMenu = ({
@@ -47,6 +48,7 @@ const SelectMenu = ({
   onClose,
   placement,
   valueLabel,
+  isInvalid,
 }: SelectMenuProperties) => {
   const intl = useIntl()
 
@@ -66,8 +68,8 @@ const SelectMenu = ({
         id={id}
         as={Button}
         w="100%"
-        borderWidth={2}
-        borderColor="new-gray.400"
+        borderWidth={isInvalid ? 3 : 2}
+        borderColor={isInvalid ? 'red.500' : 'new-gray.400'}
         color="gray.500"
         borderRadius={4}
         fontWeight={300}

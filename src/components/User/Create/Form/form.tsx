@@ -12,6 +12,7 @@ import { SelectMenu } from 'src/components/Base'
 import { USER_GENDER } from '../../constants'
 
 import messages from './messages'
+import { NewUserSchema } from './schema'
 
 export type CreateUserFormValues = {
   firstName: string
@@ -44,8 +45,8 @@ export const CreateUserForm = ({ initialValues, onCancel, onSubmit }: CreateUser
   const intl = useIntl()
 
   return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      {({ values }) => (
+    <Formik initialValues={initialValues} validationSchema={NewUserSchema} onSubmit={onSubmit}>
+      {({ values, errors }) => (
         <Form style={{ height: '100%' }}>
           <FormControl h="full">
             <Stack spacing={8} h="full">
@@ -61,6 +62,7 @@ export const CreateUserForm = ({ initialValues, onCancel, onSubmit }: CreateUser
               <CreateUserTextField id="role" label={intl.formatMessage(messages.roleLabel)} />
 
               <CreateUserSelectField
+                id="gender"
                 selectedOptionID={values.gender}
                 label={intl.formatMessage(messages.genderLabel)}
                 options={[
@@ -92,26 +94,34 @@ export const CreateUserForm = ({ initialValues, onCancel, onSubmit }: CreateUser
 }
 
 type CreateUserTextField = {
-  id: string
+  id: keyof CreateUserFormValues
   label: string
 }
 
 const CreateUserTextField = ({ id, label }: CreateUserTextField) => {
-  const { setFieldValue } = useFormikContext<CreateUserFormValues>()
+  const { setFieldValue, setFieldTouched, errors, touched } =
+    useFormikContext<CreateUserFormValues>()
 
-  const handleBlur = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleBlur = async (event: ChangeEvent<HTMLInputElement>) => {
     setFieldValue(id, event.target.value)
+    // Seems that using setTimeout is the only way to trigger the validation after changing the field value. As seen in: https://github.com/formium/formik/issues/2059
+    setTimeout(() => setFieldTouched(id))
   }
+
+  const wasTouched = Boolean(touched[id])
+  const hasErrors = typeof errors[id] !== 'undefined'
+  const isInvalid = wasTouched && hasErrors
 
   return (
     <Stack spacing={0}>
       <FormLabel>{label}</FormLabel>
-      <Field name={id} component={Input} onBlur={handleBlur} />
+      <Field name={id} component={Input} isInvalid={isInvalid} onBlur={handleBlur} />
     </Stack>
   )
 }
 
 type CreateUserSelectField = {
+  id: keyof CreateUserFormValues
   options: CreateUserSelectOption[]
   selectedOptionID?: string
   label: string
@@ -122,14 +132,25 @@ type CreateUserSelectOption = {
   label: string
 }
 
-const CreateUserSelectField = ({ options, selectedOptionID, label }: CreateUserSelectField) => {
-  const { setFieldValue } = useFormikContext<CreateUserFormValues>()
+const CreateUserSelectField = ({ id, options, selectedOptionID, label }: CreateUserSelectField) => {
+  const { setFieldValue, setFieldTouched, errors, touched } =
+    useFormikContext<CreateUserFormValues>()
+
+  const handleClose = () => {
+    // Seems that using setTimeout is the only way to trigger the validation after changing the field value. As seen in: https://github.com/formium/formik/issues/2059
+    setTimeout(() => setFieldTouched(id))
+  }
 
   const handleChange = (newValue: string | string[]) => {
-    setFieldValue('gender', newValue)
+    setFieldValue(id, newValue)
+    handleClose()
   }
 
   const selectedOption = options.find((option) => option.id === selectedOptionID)
+
+  const wasTouched = Boolean(touched[id])
+  const hasErrors = typeof errors[id] !== 'undefined'
+  const isInvalid = wasTouched && hasErrors
 
   return (
     <Stack spacing={0}>
@@ -138,7 +159,9 @@ const CreateUserSelectField = ({ options, selectedOptionID, label }: CreateUserS
         matchWidth
         value={selectedOptionID}
         valueLabel={selectedOption?.label}
+        isInvalid={isInvalid}
         onChange={handleChange}
+        onClose={handleClose}
       >
         {options.map((option) => (
           <MenuItemOption key={option.id} value={option.id}>

@@ -371,6 +371,10 @@
     "defaultMessage": "Selecione seu gênero",
     "description": "This is the fallback value that goes on our user account settings page, at the sixth field to update the user informations. The fallback value appears if the user has no data at that field"
   },
+  "A+zcmM": {
+    "defaultMessage": "Selecionar",
+    "description": "This is the default placeholder while selecting a given value in a select menu"
+  },
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
@@ -575,6 +579,10 @@
     "defaultMessage": "Responsável",
     "description": "The label text above the Owner section in our key result single page or drawers"
   },
+  "INrEzv": {
+    "defaultMessage": "Masculino",
+    "description": "This is the male option while selecting a gender to create a new user"
+  },
   "IU2bu6": {
     "defaultMessage": "Escreva {keyword} para confirmar sua ação",
     "description": "This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource"
@@ -634,6 +642,10 @@
   "L0c5bp": {
     "defaultMessage": "Meta",
     "description": "This label appears above the fifth input in our insert key-result drawer"
+  },
+  "L5w0P3": {
+    "defaultMessage": "Feminino",
+    "description": "This is the female option while selecting a gender to create a new user"
   },
   "LDLFtf": {
     "defaultMessage": "Sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}",
@@ -1063,6 +1075,10 @@
     "defaultMessage": "100%",
     "description": "This message is displayed inside our key-result format select as the example of the percent format"
   },
+  "acrz2t": {
+    "defaultMessage": "Cancelar",
+    "description": "The label of the cancel button of the create user form"
+  },
   "bZYEAl": {
     "defaultMessage": "Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo",
     "description": "This desc message explains the neutral icon for screen readers"
@@ -1459,6 +1475,10 @@
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você irá remover esse item da checklist",
     "description": "This text is used by screen readers inside our key-result drawer to describe the X icon to remove a given item from the checklist"
   },
+  "sgr1cM": {
+    "defaultMessage": "Criar usuári{gender, select, MALE {o} FEMALE {a} other {o}}",
+    "description": "The label of the submit button of the create user form"
+  },
   "sp/6lg": {
     "defaultMessage": "Sobre",
     "description": "This text is displayed in our check-in card, above the user comment if it exists"
@@ -1558,10 +1578,6 @@
   "xfx/rc": {
     "defaultMessage": "Um botão com um ícone de confirmação. Ao clicar nele você irá salvar sua atualização do objetivo",
     "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the check button"
-  },
-  "xw3Bb5": {
-    "defaultMessage": "Criar usuári{gender, select, MALE {o} FEMALE {a} other {o}}",
-    "description": "The label of the submit button of our form"
   },
   "xywRWB": {
     "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",
