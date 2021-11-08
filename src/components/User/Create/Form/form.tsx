@@ -46,7 +46,7 @@ export const CreateUserForm = ({ initialValues, onCancel, onSubmit }: CreateUser
 
   return (
     <Formik initialValues={initialValues} validationSchema={NewUserSchema} onSubmit={onSubmit}>
-      {({ values, errors }) => (
+      {({ values }) => (
         <Form style={{ height: '100%' }}>
           <FormControl h="full">
             <Stack spacing={8} h="full">
