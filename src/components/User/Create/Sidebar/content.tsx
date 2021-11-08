@@ -5,11 +5,15 @@ import { CreateUserForm } from '../Form'
 
 import { CreateUserSidebarHeader } from './header'
 
-export const CreateUserSidebarContent = () => (
+type CreateUserSidebarContentProperties = {
+  onClose: () => void
+}
+
+export const CreateUserSidebarContent = ({ onClose }: CreateUserSidebarContentProperties) => (
   <DrawerContent>
     <CreateUserSidebarHeader />
     <DrawerBody py={6}>
-      <CreateUserForm />
+      <CreateUserForm onCancel={onClose} onSubmit={onClose} />
     </DrawerBody>
   </DrawerContent>
 )

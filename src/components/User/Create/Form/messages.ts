@@ -8,7 +8,10 @@ type CreateUserFormMessage =
   | 'genderLabel'
   | 'teamLabel'
   | 'pictureLabel'
+  | 'maleGenderOption'
+  | 'femaleGenderOption'
   | 'submitButtonLabel'
+  | 'cancelButtonLabel'
 
 export default defineMessages<CreateUserFormMessage>({
   firstNameLabel: {
@@ -53,9 +56,27 @@ export default defineMessages<CreateUserFormMessage>({
     description: 'The label of the picture field in the create user form',
   },
 
+  maleGenderOption: {
+    defaultMessage: 'Masculino',
+    id: 'INrEzv',
+    description: 'This is the male option while selecting a gender to create a new user',
+  },
+
+  femaleGenderOption: {
+    defaultMessage: 'Feminino',
+    id: 'L5w0P3',
+    description: 'This is the female option while selecting a gender to create a new user',
+  },
+
   submitButtonLabel: {
     defaultMessage: 'Criar usuári{gender, select, MALE {o} FEMALE {a} other {o}}',
-    id: 'xw3Bb5',
-    description: 'The label of the submit button of our form',
+    id: 'sgr1cM',
+    description: 'The label of the submit button of the create user form',
+  },
+
+  cancelButtonLabel: {
+    defaultMessage: 'Cancelar',
+    id: 'acrz2t',
+    description: 'The label of the cancel button of the create user form',
   },
 })

@@ -2,9 +2,12 @@ import { Button } from '@chakra-ui/button'
 import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
 import { HStack, Stack } from '@chakra-ui/layout'
+import { MenuItemOption } from '@chakra-ui/menu'
 import { Field, Form, Formik, FormikHelpers, useFormikContext } from 'formik'
 import React, { ChangeEvent } from 'react'
 import { useIntl } from 'react-intl'
+
+import { SelectMenu } from 'src/components/Base'
 
 import { USER_GENDER } from '../../constants'
 
@@ -26,6 +29,7 @@ export type CreateUserFormValues = {
 
 type CreateUserFormProperties = {
   initialValues?: CreateUserFormValues
+  onCancel: () => void
   onSubmit: (
     values: CreateUserFormValues,
     actions: FormikHelpers<CreateUserFormValues>,
@@ -41,7 +45,7 @@ const defaultInitialValues: CreateUserFormValues = {
   team: [],
 }
 
-export const CreateUserForm = ({ initialValues, onSubmit }: CreateUserFormProperties) => {
+export const CreateUserForm = ({ initialValues, onCancel, onSubmit }: CreateUserFormProperties) => {
   initialValues ??= defaultInitialValues
 
   const intl = useIntl()
@@ -63,8 +67,26 @@ export const CreateUserForm = ({ initialValues, onSubmit }: CreateUserFormProper
               <CreateUserTextField id="email" label={intl.formatMessage(messages.emailLabel)} />
               <CreateUserTextField id="role" label={intl.formatMessage(messages.roleLabel)} />
 
+              <CreateUserSelectField
+                selectedOptionID={values.gender}
+                label={intl.formatMessage(messages.genderLabel)}
+                options={[
+                  {
+                    id: USER_GENDER.MALE,
+                    label: intl.formatMessage(messages.maleGenderOption),
+                  },
+                  {
+                    id: USER_GENDER.FEMALE,
+                    label: intl.formatMessage(messages.femaleGenderOption),
+                  },
+                ]}
+              />
+
               <HStack flexGrow={1} alignItems="flex-end">
-                <Button variant="solid" colorScheme="brand" type="submit">
+                <Button variant="outline" colorScheme="brand" flexGrow={1} onClick={onCancel}>
+                  {intl.formatMessage(messages.cancelButtonLabel)}
+                </Button>
+                <Button variant="solid" colorScheme="brand" type="submit" flexGrow={1}>
                   {intl.formatMessage(messages.submitButtonLabel, { gender: values.gender })}
                 </Button>
               </HStack>
@@ -92,6 +114,45 @@ const CreateUserTextField = ({ id, label }: CreateUserTextField) => {
     <Stack spacing={0}>
       <FormLabel>{label}</FormLabel>
       <Field name={id} component={Input} onBlur={handleBlur} />
+    </Stack>
+  )
+}
+
+type CreateUserSelectField = {
+  options: CreateUserSelectOption[]
+  selectedOptionID?: string
+  label: string
+}
+
+type CreateUserSelectOption = {
+  id: string
+  label: string
+}
+
+const CreateUserSelectField = ({ options, selectedOptionID, label }: CreateUserSelectField) => {
+  const { setFieldValue } = useFormikContext<CreateUserFormValues>()
+
+  const handleChange = (newValue: string | string[]) => {
+    setFieldValue('gender', newValue)
+  }
+
+  const selectedOption = options.find((option) => option.id === selectedOptionID)
+
+  return (
+    <Stack spacing={0}>
+      <FormLabel>{label}</FormLabel>
+      <SelectMenu
+        matchWidth
+        value={selectedOptionID}
+        valueLabel={selectedOption?.label}
+        onChange={handleChange}
+      >
+        {options.map((option) => (
+          <MenuItemOption key={option.id} value={option.id}>
+            {option.label}
+          </MenuItemOption>
+        ))}
+      </SelectMenu>
     </Stack>
   )
 }

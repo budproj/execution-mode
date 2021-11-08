@@ -16,8 +16,7 @@ import ChevronDownIcon from 'src/components/Icon/ChevronDown'
 import messages from './messages'
 
 export interface SelectMenuProperties {
-  placeholder: ReactElement | string
-  value: string | undefined
+  value?: string
   onChange: (value: string | string[]) => void
   children: MenuProps['children']
   id?: MenuProps['id']
@@ -29,6 +28,8 @@ export interface SelectMenuProperties {
   onOpen?: MenuProps['onOpen']
   onClose?: MenuProps['onClose']
   placement?: MenuProps['placement']
+  placeholder?: ReactElement | string
+  valueLabel?: ReactElement | string
 }
 
 const SelectMenu = ({
@@ -45,8 +46,11 @@ const SelectMenu = ({
   onOpen,
   onClose,
   placement,
+  valueLabel,
 }: SelectMenuProperties) => {
   const intl = useIntl()
+
+  placeholder ??= intl.formatMessage(messages.defaultPlaceholder)
 
   return (
     <Menu
@@ -91,7 +95,7 @@ const SelectMenu = ({
         }
         transition="none"
       >
-        {placeholder}
+        {valueLabel ?? placeholder}
       </MenuButton>
       <MenuList
         boxShadow="with-stroke.light"

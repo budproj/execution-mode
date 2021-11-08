@@ -16,7 +16,7 @@ export const CreateUserSidebarWrapper = ({
 }: CreateUserSidebarWrapperProperties) => (
   <Drawer isOpen={isOpen} size="xl" onClose={onClose}>
     <ColorizedOverlay>
-      <CreateUserSidebarContent />
+      <CreateUserSidebarContent onClose={onClose} />
     </ColorizedOverlay>
   </Drawer>
 )
