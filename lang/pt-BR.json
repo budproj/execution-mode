@@ -39,6 +39,10 @@
     "defaultMessage": "Último check-in",
     "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
+  "/H4hHb": {
+    "defaultMessage": "Buscar subtimes",
+    "description": "This message is displayed inside the child teams section, on the search bar"
+  },
   "/K30xB": {
     "defaultMessage": "Você não tem nenhum resultado-chave",
     "description": "The label message that is displayed below our team at work image when the user has no key results in her/his key result view list"
