@@ -2,11 +2,6 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { SearchableList } from 'src/components/Base/SearchableList'
-import {
-  SearchableListOption,
-  SearchableListOptionGroup,
-} from 'src/components/Base/SearchableList/options'
-import PlusIcon from 'src/components/Icon/Plus'
 import { User } from 'src/components/User/types'
 
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
@@ -21,10 +16,6 @@ export interface SelectUserFromListProperties {
   onSearch?: (query: string) => void
   avatarSubtitleType?: NamedAvatarSubtitleType
   showUserCard?: boolean
-}
-
-const handleNewUser = () => {
-  console.log('tag')
 }
 
 export const SelectUserFromListWrapper = ({
@@ -42,20 +33,6 @@ export const SelectUserFromListWrapper = ({
       searchKey="fullName"
       initialItems={users}
     >
-      <SearchableListOptionGroup
-        id="create-users"
-        icon={
-          <PlusIcon
-            desc={intl.formatMessage(messages.createUserOptionGroupIconDesc)}
-            fill="currentColor"
-          />
-        }
-      >
-        <SearchableListOption onClick={handleNewUser}>
-          {intl.formatMessage(messages.newUserOption)}
-        </SearchableListOption>
-      </SearchableListOptionGroup>
-
       <UsersInContext
         hasUserCard={showUserCard}
         isLoading={isLoading}

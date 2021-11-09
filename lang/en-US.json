@@ -55,6 +55,10 @@
     "defaultMessage": "Latest check-in",
     "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
+  "/H4hHb": {
+    "defaultMessage": "Search subteam",
+    "description": "This message is displayed inside the child teams section, on the search bar"
+  },
   "/K30xB": {
     "defaultMessage": "You don't have any key result",
     "description": "The label message that is displayed below our team at work image when the user has no key results in her/his key result view list"
@@ -579,6 +583,10 @@
     "defaultMessage": "The Support Team is made up of one or more people who help the owner of a key result. On Bud, this means",
     "description": "The message to guide and describe on what is a support team"
   },
+  "DMwbJe": {
+    "defaultMessage": "Create OKR",
+    "description": "create new key result"
+  },
   "Dnh8iG": {
     "defaultMessage": "of <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the first line of our confidence tooltip"
@@ -692,7 +700,7 @@
     "description": "This tooltip is displayed when the user hovers the support button"
   },
   "fX4pLO": {
-    "defaultMessage": "",
+    "defaultMessage": "Platform settings | bud",
     "description": "The page title that is displayed in the browser tab for the platform settings page"
   },
   "fZZOsX": {
@@ -911,6 +919,10 @@
     "defaultMessage": "Sorted by progress",
     "description": "This tooltip appears when the user hovers the first column title"
   },
+  "jXZZd6": {
+    "defaultMessage": "Return to the present",
+    "description": "go back to the present button description"
+  },
   "JYkjjF": {
     "defaultMessage": "My account",
     "description": "This label defines the text on the first menu section option"
@@ -1082,6 +1094,10 @@
   "N8Xs+4": {
     "defaultMessage": "DELETE",
     "description": "This message is used as a keyword to remove a given objective"
+  },
+  "na6BgW": {
+    "defaultMessage": "History",
+    "description": "History, historic, archived items"
   },
   "NADPP1": {
     "defaultMessage": "Trash can icon",
@@ -1772,7 +1788,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2021-11-03T05:17:09Z",
+    "defaultMessage": "2021-11-08T17:53:50Z",
     "description": null
   }
 }
