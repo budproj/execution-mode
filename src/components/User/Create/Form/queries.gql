@@ -1,0 +1,21 @@
+mutation CREATE_USER(
+  $firstName: String!
+  $lastName: String!
+  $email: String!
+  $role: String
+  $gender: UserGender!
+  $teamID: ID!
+) {
+  createUser(
+    data: {
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      role: $role
+      gender: $gender
+      teamID: $teamID
+    }
+  ) {
+    id
+  }
+}
