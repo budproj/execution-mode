@@ -1,1 +1,1 @@
-export const HELPDESK_URL = 'https://getbud.co/helpdesk'
+export const HELPDESK_URL = 'https://appbud.webflow.io/helpdesk'
