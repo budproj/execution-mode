@@ -163,6 +163,10 @@
     "defaultMessage": "Agora há pouco",
     "description": "This label is displayed if the date difference is less than 1 minute"
   },
+  "2QbXJB": {
+    "defaultMessage": "Desculpe, aconteceu um erro inesperado. Tente novamente mais tarde",
+    "description": "This message appears as an error toast when we have an unknown error while creating a new user"
+  },
   "2RoJ81": {
     "defaultMessage": "Feminino",
     "description": "This text is used accross our platform to identify the female gender"
@@ -226,6 +230,10 @@
   "4f4cWE": {
     "defaultMessage": "Alto",
     "description": "We use this tag to group every key result with confidence higher than 66"
+  },
+  "4npgR9": {
+    "defaultMessage": "Usuári{gender, select, MALE {o} FEMALE {a} other {o}} criad{gender, select, MALE {o} FEMALE {a} other {o}} com sucesso",
+    "description": "This message appears when we create a new user as a toast"
   },
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
@@ -522,6 +530,10 @@
   "FoCix/": {
     "defaultMessage": "Procurar",
     "description": "The text is displayed as the default placeholder for all our search inputs"
+  },
+  "GBh0Xf": {
+    "defaultMessage": "Desculpe, mas já existe um usuário com este e-mail",
+    "description": "This message is used as an toast error message when we try to create an user with an existing e-mail"
   },
   "GHu/pe": {
     "defaultMessage": "Um ícone de video",
