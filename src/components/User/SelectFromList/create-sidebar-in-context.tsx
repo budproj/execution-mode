@@ -9,8 +9,9 @@ import queries from './queries.gql'
 
 type SidebarInContextProperties = {
   isOpen: boolean
-  onClose: () => void
   teamID?: string
+  onClose: () => void
+  onSelect?: (userID: string) => void | Promise<void>
 }
 
 type GetUserResponse = {
@@ -26,11 +27,17 @@ type GetUserResponse = {
   }
 }
 
-export const CreateSidebarInContext = ({ teamID, isOpen, onClose }: SidebarInContextProperties) => {
+export const CreateSidebarInContext = ({
+  teamID,
+  isOpen,
+  onClose,
+  onSelect,
+}: SidebarInContextProperties) => {
   const { handleNewItem } = useContext(SearchableListContext)
   const [getUserData] = useLazyQuery<GetUserResponse>(queries.GET_USER_DATA, {
     onCompleted: (data) => {
       handleNewItem(data.user)
+      if (onSelect) void onSelect(data.user.id)
     },
   })
 

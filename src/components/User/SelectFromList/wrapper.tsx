@@ -79,6 +79,7 @@ export const SelectUserFromListWrapper = ({
         teamID={teamID}
         isOpen={isCreateSidebarOpen}
         onClose={handleCreateSidebarClose}
+        onSelect={onSelect}
       />
     </SearchableList>
   )
