@@ -47,6 +47,19 @@ export const CreateUserFormWrapper = ({
       })
       if (onCreate) void onCreate(data.createUser.id)
     },
+    onError: (data) => {
+      const knownErrors: Record<string, string> = {
+        'The user already exists.': intl.formatMessage(messages.existingUserErrorToastMessage),
+      }
+
+      const title =
+        knownErrors?.[data.message] ?? intl.formatMessage(messages.unknownErrorToastMessage)
+
+      toast({
+        title,
+        status: 'error',
+      })
+    },
   })
 
   const handleFormSubmission = async (values: CreateUserFormValues) => {

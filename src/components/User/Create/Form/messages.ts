@@ -13,6 +13,8 @@ type CreateUserFormMessage =
   | 'submitButtonLabel'
   | 'cancelButtonLabel'
   | 'successToastMessage'
+  | 'existingUserErrorToastMessage'
+  | 'unknownErrorToastMessage'
 
 export default defineMessages<CreateUserFormMessage>({
   firstNameLabel: {
@@ -86,5 +88,19 @@ export default defineMessages<CreateUserFormMessage>({
       'Usuári{gender, select, MALE {o} FEMALE {a} other {o}} criad{gender, select, MALE {o} FEMALE {a} other {o}} com sucesso',
     id: '4npgR9',
     description: 'This message appears when we create a new user as a toast',
+  },
+
+  unknownErrorToastMessage: {
+    defaultMessage: 'Desculpe, aconteceu um erro inesperado. Tente novamente mais tarde',
+    id: '2QbXJB',
+    description:
+      'This message appears as an error toast when we have an unknown error while creating a new user',
+  },
+
+  existingUserErrorToastMessage: {
+    defaultMessage: 'Desculpe, mas já existe um usuário com este e-mail',
+    id: 'GBh0Xf',
+    description:
+      'This message is used as an toast error message when we try to create an user with an existing e-mail',
   },
 })
