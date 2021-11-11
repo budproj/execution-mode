@@ -8,6 +8,7 @@ import { RecoilRoot } from 'recoil'
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
 import HotjarProvider from 'src/components/Base/HotjarProvider'
+import { HubSpotProvider } from 'src/components/Base/HubSpotProvider/wrapper'
 import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
 import ProgressBar from 'src/components/Base/ProgressBar'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
@@ -63,6 +64,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                   <MaintenanceGatekeeper>
                     <HotjarProvider />
                     <SmartlookProvider />
+                    <HubSpotProvider />
                     <ProgressBar />
                     <Component {...pageProps} />
                   </MaintenanceGatekeeper>
