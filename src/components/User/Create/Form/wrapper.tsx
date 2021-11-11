@@ -1,7 +1,12 @@
 import { useMutation } from '@apollo/client'
+import { useToast } from '@chakra-ui/toast'
 import React from 'react'
+import { useIntl } from 'react-intl'
+
+import { USER_GENDER } from '../../constants'
 
 import { CreateUserForm, CreateUserFormValues, defaultInitialValues } from './form'
+import messages from './messages'
 import queries from './queries.gql'
 
 type CreateUserFormWrapperProperties = {
@@ -15,6 +20,7 @@ type CreateUserFormWrapperProperties = {
 type CreatUserResponse = {
   createUser: {
     id: string
+    gender: USER_GENDER
   }
 }
 
@@ -25,11 +31,20 @@ export const CreateUserFormWrapper = ({
   onCancel,
   onCreate,
 }: CreateUserFormWrapperProperties) => {
+  const toast = useToast()
+  const intl = useIntl()
+
   const [createUser, { loading }] = useMutation<CreatUserResponse>(queries.CREATE_USER, {
     variables: {
       teamID,
     },
     onCompleted: async (data) => {
+      toast({
+        status: 'success',
+        title: intl.formatMessage(messages.successToastMessage, {
+          gender: data.createUser.gender,
+        }),
+      })
       if (onCreate) void onCreate(data.createUser.id)
     },
   })

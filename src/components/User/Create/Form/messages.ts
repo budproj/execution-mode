@@ -12,6 +12,7 @@ type CreateUserFormMessage =
   | 'femaleGenderOption'
   | 'submitButtonLabel'
   | 'cancelButtonLabel'
+  | 'successToastMessage'
 
 export default defineMessages<CreateUserFormMessage>({
   firstNameLabel: {
@@ -78,5 +79,12 @@ export default defineMessages<CreateUserFormMessage>({
     defaultMessage: 'Cancelar',
     id: 'acrz2t',
     description: 'The label of the cancel button of the create user form',
+  },
+
+  successToastMessage: {
+    defaultMessage:
+      'Usuári{gender, select, MALE {o} FEMALE {a} other {o}} criad{gender, select, MALE {o} FEMALE {a} other {o}} com sucesso',
+    id: '4npgR9',
+    description: 'This message appears when we create a new user as a toast',
   },
 })

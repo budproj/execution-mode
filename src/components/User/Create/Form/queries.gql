@@ -17,5 +17,6 @@ mutation CREATE_USER(
     }
   ) {
     id
+    gender
   }
 }
