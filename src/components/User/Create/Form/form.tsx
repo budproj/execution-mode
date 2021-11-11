@@ -3,6 +3,7 @@ import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
 import { HStack, Stack } from '@chakra-ui/layout'
 import { MenuItemOption } from '@chakra-ui/menu'
+import { Spinner } from '@chakra-ui/react'
 import { Field, Form, Formik, FormikHelpers, useFormikContext } from 'formik'
 import React, { ChangeEvent } from 'react'
 import { useIntl } from 'react-intl'
@@ -24,6 +25,7 @@ export type CreateUserFormValues = {
 
 type CreateUserFormProperties = {
   initialValues?: CreateUserFormValues
+  isLoading?: boolean
   onCancel: () => void
   onSubmit: (
     values: CreateUserFormValues,
@@ -39,7 +41,12 @@ export const defaultInitialValues: CreateUserFormValues = {
   gender: undefined,
 }
 
-export const CreateUserForm = ({ initialValues, onCancel, onSubmit }: CreateUserFormProperties) => {
+export const CreateUserForm = ({
+  initialValues,
+  onCancel,
+  onSubmit,
+  isLoading,
+}: CreateUserFormProperties) => {
   initialValues ??= defaultInitialValues
 
   const intl = useIntl()
@@ -78,11 +85,28 @@ export const CreateUserForm = ({ initialValues, onCancel, onSubmit }: CreateUser
               />
 
               <HStack flexGrow={1} alignItems="flex-end">
-                <Button variant="outline" colorScheme="brand" flexGrow={1} onClick={onCancel}>
+                <Button
+                  variant="outline"
+                  colorScheme="brand"
+                  flexGrow={1}
+                  flexBasis={0}
+                  onClick={onCancel}
+                >
                   {intl.formatMessage(messages.cancelButtonLabel)}
                 </Button>
-                <Button variant="solid" colorScheme="brand" type="submit" flexGrow={1}>
-                  {intl.formatMessage(messages.submitButtonLabel, { gender: values.gender })}
+                <Button
+                  isDisabled={isLoading}
+                  variant="solid"
+                  colorScheme="brand"
+                  type="submit"
+                  flexGrow={1}
+                  flexBasis={0}
+                >
+                  {isLoading ? (
+                    <Spinner h={7} w={7} />
+                  ) : (
+                    intl.formatMessage(messages.submitButtonLabel, { gender: values.gender })
+                  )}
                 </Button>
               </HStack>
             </Stack>

@@ -9,16 +9,25 @@ type CreateUserSidebarWrapperProperties = {
   teamID?: string
   isOpen: boolean
   onClose: () => void
+  onCreate?: (userID: string) => Promise<void> | void
 }
 
 export const CreateUserSidebarWrapper = ({
   teamID,
   isOpen,
   onClose,
-}: CreateUserSidebarWrapperProperties) => (
-  <Drawer isOpen={isOpen} size="xl" onClose={onClose}>
-    <ColorizedOverlay>
-      <CreateUserSidebarContent teamID={teamID} onClose={onClose} />
-    </ColorizedOverlay>
-  </Drawer>
-)
+  onCreate,
+}: CreateUserSidebarWrapperProperties) => {
+  const handleCreatedUser = async (userID: string) => {
+    if (onCreate) void onCreate(userID)
+    onClose()
+  }
+
+  return (
+    <Drawer isOpen={isOpen} size="xl" onClose={onClose}>
+      <ColorizedOverlay>
+        <CreateUserSidebarContent teamID={teamID} onClose={onClose} onCreate={handleCreatedUser} />
+      </ColorizedOverlay>
+    </Drawer>
+  )
+}

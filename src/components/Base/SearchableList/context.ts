@@ -20,6 +20,7 @@ export type SearchableListContextValue = {
   handleSearch: (value: string) => void
   handleNewOptionGroup: (id: string, icon: JSX.Element) => void
   handleNewOptionInGroup: (option: SearchOption, groupID: string) => void
+  handleNewItem: (item: any) => void
 }
 
 export const SearchableListContext = createContext<SearchableListContextValue>(defaultContext)

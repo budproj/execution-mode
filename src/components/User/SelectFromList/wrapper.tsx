@@ -9,9 +9,9 @@ import {
 import PlusIcon from 'src/components/Icon/Plus'
 import { User } from 'src/components/User/types'
 
-import { CreateUserSidebar } from '../Create/Sidebar'
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
 
+import { CreateSidebarInContext } from './create-sidebar-in-context'
 import messages from './messages'
 import { UsersInContext } from './users-in-context'
 
@@ -75,7 +75,7 @@ export const SelectUserFromListWrapper = ({
         onSelect={onSelect}
       />
 
-      <CreateUserSidebar
+      <CreateSidebarInContext
         teamID={teamID}
         isOpen={isCreateSidebarOpen}
         onClose={handleCreateSidebarClose}

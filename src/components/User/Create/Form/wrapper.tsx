@@ -9,6 +9,7 @@ type CreateUserFormWrapperProperties = {
   initialValues?: Partial<CreateUserFormValues>
   onCancel: () => void
   onSubmit?: (values: CreateUserFormValues) => Promise<void> | void
+  onCreate?: (userID: string) => Promise<void> | void
 }
 
 type CreatUserResponse = {
@@ -22,10 +23,14 @@ export const CreateUserFormWrapper = ({
   initialValues,
   onSubmit,
   onCancel,
+  onCreate,
 }: CreateUserFormWrapperProperties) => {
-  const [createUser] = useMutation<CreatUserResponse>(queries.CREATE_USER, {
+  const [createUser, { loading }] = useMutation<CreatUserResponse>(queries.CREATE_USER, {
     variables: {
       teamID,
+    },
+    onCompleted: async (data) => {
+      if (onCreate) void onCreate(data.createUser.id)
     },
   })
 
@@ -44,6 +49,7 @@ export const CreateUserFormWrapper = ({
 
   return (
     <CreateUserForm
+      isLoading={loading}
       initialValues={normalizedInitialValues}
       onSubmit={handleFormSubmission}
       onCancel={onCancel}
