@@ -97,7 +97,11 @@ export const TeamOKRsEmptyState = ({
       </Stack>
 
       <Flex bg="white" w="full" h="full" alignContent="center" justifyContent="center" p={16}>
-        <EmptyState imageKey="people-with-pages" labelMessage={messages.emptyStateMessage} />
+        <EmptyState
+          imageKey="people-with-pages"
+          labelMessage={messages.emptyStateMessage}
+          maxW="md"
+        />
       </Flex>
     </Stack>
   )

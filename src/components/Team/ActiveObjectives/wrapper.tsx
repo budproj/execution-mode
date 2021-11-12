@@ -84,6 +84,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
       void refetch({ teamID })
       setIsUpdatedNeededOnObjectives(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUpdatedNeededOnObjectives])
 
   return (
