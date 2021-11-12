@@ -17,4 +17,7 @@ export const defaultContext: SearchableListContextValue = {
       'You must implement a handle new option in group function for your SearchableList context',
     )
   },
+  handleNewItem: (_item: any) => {
+    throw new Error('You must implement a handle new item function for your SearchableList context')
+  },
 }

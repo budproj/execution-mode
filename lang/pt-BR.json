@@ -163,6 +163,10 @@
     "defaultMessage": "Agora há pouco",
     "description": "This label is displayed if the date difference is less than 1 minute"
   },
+  "2QbXJB": {
+    "defaultMessage": "Desculpe, aconteceu um erro inesperado. Tente novamente mais tarde",
+    "description": "This message appears as an error toast when we have an unknown error while creating a new user"
+  },
   "2RoJ81": {
     "defaultMessage": "Feminino",
     "description": "This text is used accross our platform to identify the female gender"
@@ -226,6 +230,10 @@
   "4f4cWE": {
     "defaultMessage": "Alto",
     "description": "We use this tag to group every key result with confidence higher than 66"
+  },
+  "4npgR9": {
+    "defaultMessage": "Usuári{gender, select, MALE {o} FEMALE {a} other {o}} criad{gender, select, MALE {o} FEMALE {a} other {o}} com sucesso",
+    "description": "This message appears when we create a new user as a toast"
   },
   "5XBq+p": {
     "defaultMessage": "Meus Resultados-Chave | bud",
@@ -375,6 +383,10 @@
     "defaultMessage": "Selecione seu gênero",
     "description": "This is the fallback value that goes on our user account settings page, at the sixth field to update the user informations. The fallback value appears if the user has no data at that field"
   },
+  "A+zcmM": {
+    "defaultMessage": "Selecionar",
+    "description": "This is the default placeholder while selecting a given value in a select menu"
+  },
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
@@ -519,6 +531,10 @@
     "defaultMessage": "Procurar",
     "description": "The text is displayed as the default placeholder for all our search inputs"
   },
+  "GBh0Xf": {
+    "defaultMessage": "Desculpe, mas já existe um usuário com este e-mail",
+    "description": "This message is used as an toast error message when we try to create an user with an existing e-mail"
+  },
   "GHu/pe": {
     "defaultMessage": "Um ícone de video",
     "description": "The desc message for the Video icon. This icon is used to ilustrate our key results"
@@ -583,6 +599,10 @@
     "defaultMessage": "Responsável",
     "description": "The label text above the Owner section in our key result single page or drawers"
   },
+  "INrEzv": {
+    "defaultMessage": "Masculino",
+    "description": "This is the male option while selecting a gender to create a new user"
+  },
   "IU2bu6": {
     "defaultMessage": "Escreva {keyword} para confirmar sua ação",
     "description": "This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource"
@@ -642,6 +662,10 @@
   "L0c5bp": {
     "defaultMessage": "Meta",
     "description": "This label appears above the fifth input in our insert key-result drawer"
+  },
+  "L5w0P3": {
+    "defaultMessage": "Feminino",
+    "description": "This is the female option while selecting a gender to create a new user"
   },
   "LDLFtf": {
     "defaultMessage": "Sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}",
@@ -751,6 +775,10 @@
     "defaultMessage": "Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave",
     "description": "This message is displayed for screen readers as the description of the arrow down icon inside the key-result drawers. That icon is only displayed when the user hovers the mouse over the goal"
   },
+  "PSCS+h": {
+    "defaultMessage": "Nome",
+    "description": "The label of the first name field in the create user form"
+  },
   "PYLIcI": {
     "defaultMessage": "Meta",
     "description": "This message is displayed below the goal thumb"
@@ -766,6 +794,10 @@
   "PktsGq": {
     "defaultMessage": "Check-list",
     "description": "This is the title of our checklist section inside the key-result sidebar"
+  },
+  "PxWBQZ": {
+    "defaultMessage": "Cargo",
+    "description": "The label of the role field in the create user form"
   },
   "Q2diI+": {
     "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
@@ -835,6 +867,14 @@
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
     "description": "This message appears when the user tries to remove a given objective, but receives an error"
   },
+  "SL45P4": {
+    "defaultMessage": "Gênero",
+    "description": "The label of the gender field in the create user form"
+  },
+  "SRIfUY": {
+    "defaultMessage": "Time",
+    "description": "The label of the team field in the create user form"
+  },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
@@ -862,6 +902,10 @@
   "SpAXmO": {
     "defaultMessage": "Um ícone de calendário. Ele indica que nesse campo fica o prazo do objetivo",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
+  },
+  "SrOZ1m": {
+    "defaultMessage": "Criar usuário",
+    "description": "The sidebar title on our create user sidebar"
   },
   "SsQRcF": {
     "defaultMessage": "Uma seta que ao ser clicada expande a checklist deste resultado-chave",
@@ -1051,6 +1095,10 @@
     "defaultMessage": "100%",
     "description": "This message is displayed inside our key-result format select as the example of the percent format"
   },
+  "acrz2t": {
+    "defaultMessage": "Cancelar",
+    "description": "The label of the cancel button of the create user form"
+  },
   "bZYEAl": {
     "defaultMessage": "Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo",
     "description": "This desc message explains the neutral icon for screen readers"
@@ -1086,6 +1134,10 @@
   "ciNUJf": {
     "defaultMessage": "Explorar",
     "description": "MainAppBar menu item that links to teams \"Explore\" page"
+  },
+  "cz6EUM": {
+    "defaultMessage": "Foto",
+    "description": "The label of the picture field in the create user form"
   },
   "d7EKd5": {
     "defaultMessage": "Editar este OKR",
@@ -1126,6 +1178,10 @@
   "eUCb55": {
     "defaultMessage": "Fim",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawers"
+  },
+  "eVsyB5": {
+    "defaultMessage": "Email",
+    "description": "The label of the email field in the create user form"
   },
   "eYhGZW": {
     "defaultMessage": "Nenhuma opção disponível",
@@ -1447,6 +1503,10 @@
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você irá remover esse item da checklist",
     "description": "This text is used by screen readers inside our key-result drawer to describe the X icon to remove a given item from the checklist"
   },
+  "sgr1cM": {
+    "defaultMessage": "Criar usuári{gender, select, MALE {o} FEMALE {a} other {o}}",
+    "description": "The label of the submit button of the create user form"
+  },
   "sp/6lg": {
     "defaultMessage": "Sobre",
     "description": "This text is displayed in our check-in card, above the user comment if it exists"
@@ -1554,6 +1614,10 @@
   "ytvOyM": {
     "defaultMessage": "Meus Resultados-Chave",
     "description": "MainAppBar menu item that links to \"My Key Results\" page"
+  },
+  "yw+DGB": {
+    "defaultMessage": "Sobrenome",
+    "description": "The label of the last name field in the create user form"
   },
   "z4Qy+J": {
     "defaultMessage": "O desenho de uma caixa fechada, ilustrando que estamos em manutenção",

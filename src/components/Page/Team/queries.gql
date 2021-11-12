@@ -1,4 +1,4 @@
-query GET_TEAM_NAME($teamId: ID!) {
+query GET_TEAM_DATA($teamId: ID!) {
   team(id: $teamId) {
     id
     name
@@ -23,6 +23,9 @@ query GET_TEAM_NAME($teamId: ID!) {
           about
           linkedInProfileAddress
         }
+      }
+      policy {
+        create
       }
     }
     teams {

@@ -16,8 +16,7 @@ import ChevronDownIcon from 'src/components/Icon/ChevronDown'
 import messages from './messages'
 
 export interface SelectMenuProperties {
-  placeholder: ReactElement | string
-  value: string | undefined
+  value?: string
   onChange: (value: string | string[]) => void
   children: MenuProps['children']
   id?: MenuProps['id']
@@ -29,6 +28,9 @@ export interface SelectMenuProperties {
   onOpen?: MenuProps['onOpen']
   onClose?: MenuProps['onClose']
   placement?: MenuProps['placement']
+  placeholder?: ReactElement | string
+  valueLabel?: ReactElement | string
+  isInvalid?: boolean
 }
 
 const SelectMenu = ({
@@ -45,8 +47,12 @@ const SelectMenu = ({
   onOpen,
   onClose,
   placement,
+  valueLabel,
+  isInvalid,
 }: SelectMenuProperties) => {
   const intl = useIntl()
+
+  placeholder ??= intl.formatMessage(messages.defaultPlaceholder)
 
   return (
     <Menu
@@ -62,14 +68,15 @@ const SelectMenu = ({
         id={id}
         as={Button}
         w="100%"
-        borderWidth={2}
-        borderColor="new-gray.400"
+        borderWidth={isInvalid ? 3 : 2}
+        borderColor={isInvalid ? 'red.500' : 'new-gray.400'}
         color="gray.500"
         borderRadius={4}
         fontWeight={300}
         textAlign="left"
         py={6}
         px={3}
+        pr={6}
         fontSize="lg"
         _hover={{
           color: 'black.900',
@@ -91,7 +98,7 @@ const SelectMenu = ({
         }
         transition="none"
       >
-        {placeholder}
+        {valueLabel ?? placeholder}
       </MenuButton>
       <MenuList
         boxShadow="with-stroke.light"

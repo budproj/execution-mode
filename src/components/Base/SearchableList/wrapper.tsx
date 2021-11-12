@@ -56,6 +56,11 @@ export const SearchableListWrapper = <T extends Record<string, any>>({
     setOptionGroups(optionGroups)
   }
 
+  const handleNewItem = (item: T): void => {
+    const newItems = [item, ...items]
+    setItems(newItems)
+  }
+
   const context: SearchableListContextValue = {
     items,
     optionGroups,
@@ -63,6 +68,7 @@ export const SearchableListWrapper = <T extends Record<string, any>>({
     handleSearch,
     handleNewOptionGroup,
     handleNewOptionInGroup,
+    handleNewItem,
   }
 
   useEffect(() => {

@@ -17,6 +17,10 @@ const Menu = {
       _focus: {
         bg: 'black.50',
       },
+
+      _active: {
+        bg: 'brand.50',
+      },
     },
   },
 
