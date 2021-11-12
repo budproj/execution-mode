@@ -191,6 +191,10 @@
     "defaultMessage": "My bud account",
     "description": "The page title that is displayed in the browser tab for the my profile page"
   },
+  "2QbXJB": {
+    "defaultMessage": "Oops! An unexpected error occurred. Please try again.",
+    "description": "This message appears as an error toast when we have an unknown error while creating a new user"
+  },
   "2RoJ81": {
     "defaultMessage": "Female",
     "description": "This text is used accross our platform to identify the female gender"
@@ -242,6 +246,10 @@
   "4N1d+U": {
     "defaultMessage": "Latest activities",
     "description": "This text is displayed at the top of our timeline, as its title"
+  },
+  "4npgR9": {
+    "defaultMessage": "User successfully created!",
+    "description": "This message appears when we create a new user as a toast"
   },
   "4XHRhd": {
     "defaultMessage": "Goal",
@@ -403,6 +411,10 @@
     "defaultMessage": "Select your gender",
     "description": "This is the fallback value that goes on our user account settings page, at the sixth field to update the user informations. The fallback value appears if the user has no data at that field"
   },
+  "A+zcmM": {
+    "defaultMessage": "Select",
+    "description": "This is the default placeholder while selecting a given value in a select menu"
+  },
   "A5ct4X": {
     "defaultMessage": "Text document icon",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
@@ -418,6 +430,10 @@
   "AbWup6": {
     "defaultMessage": "{name} will lose access to Bud and will be removed any teams, but we will keep any records of previous check-ins or comments made so far.",
     "description": "This message appears in the confirmation dialog when we try to deactivate an user"
+  },
+  "acrz2t": {
+    "defaultMessage": "Cancel",
+    "description": "The label of the cancel button of the create user form"
   },
   "Afdu+X": {
     "defaultMessage": "Delete {type}",
@@ -547,6 +563,10 @@
     "defaultMessage": "No information provided",
     "description": "The fallback value appears if no value is defined for that text area. This text area is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
   },
+  "cz6EUM": {
+    "defaultMessage": "Picture",
+    "description": "The label of the picture field in the create user form"
+  },
   "d7EKd5": {
     "defaultMessage": "Edit this OKR",
     "description": "This is the second option that appears when you open the menu of a given objective inside the accordion button"
@@ -635,6 +655,10 @@
     "defaultMessage": "End",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawers"
   },
+  "eVsyB5": {
+    "defaultMessage": "Email",
+    "description": "The label of the email field in the create user form"
+  },
   "eYhGZW": {
     "defaultMessage": "No option available",
     "description": "This message is displayed when the user tries to list the cycles, but none is defined"
@@ -706,6 +730,10 @@
   "fZZOsX": {
     "defaultMessage": "End",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawer"
+  },
+  "GBh0Xf": {
+    "defaultMessage": "We're sorry, but there's already an user linked to this email address",
+    "description": "This message is used as an toast error message when we try to create an user with an existing e-mail"
   },
   "gbO+eS": {
     "defaultMessage": "If you are certain you want to do this, please confirm your action by writing \"{keyword}\" in the field below:",
@@ -859,6 +887,10 @@
     "defaultMessage": "Exclamation icon alerting that if you confirm it, the action cannot be undone",
     "description": "This text is used by screen readers to explain the icon"
   },
+  "INrEzv": {
+    "defaultMessage": "Male",
+    "description": "This is the male option while selecting a gender to create a new user"
+  },
   "iPv+uj": {
     "defaultMessage": "Horizontal straight line icon illustrating that your company hasn't evolve since the last check in event",
     "description": "This message is used by screen readers to explain our line icon"
@@ -994,6 +1026,10 @@
   "L0c5bp": {
     "defaultMessage": "Goal",
     "description": "This label appears above the fifth input in our insert key-result drawer"
+  },
+  "L5w0P3": {
+    "defaultMessage": "Female",
+    "description": "This is the female option while selecting a gender to create a new user"
   },
   "lApj0K": {
     "defaultMessage": "Wallet icon",
@@ -1239,6 +1275,10 @@
     "defaultMessage": "Circular stroke icon with a symbol inside",
     "description": "This is the desc text that is displayed for screen readers"
   },
+  "PSCS+h": {
+    "defaultMessage": "Name",
+    "description": "The label of the first name field in the create user form"
+  },
   "pTXAs1": {
     "defaultMessage": "An icon of an arrow pointing right. By clicking here you will be sent to this team's page",
     "description": "This message is used by screen readers to explain the right arrow at our team lists component"
@@ -1250,6 +1290,10 @@
   "pXeDLf": {
     "defaultMessage": "Surname",
     "description": "This is the label that goes on our user account settings page, at the second field to update the user informations"
+  },
+  "PxWBQZ": {
+    "defaultMessage": "Title",
+    "description": "The label of the role field in the create user form"
   },
   "PYLIcI": {
     "defaultMessage": "Goal",
@@ -1375,9 +1419,17 @@
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
   },
+  "sgr1cM": {
+    "defaultMessage": "Create user",
+    "description": "The label of the submit button of the create user form"
+  },
   "SiJuyU": {
     "defaultMessage": "Calendar icon indicating that here you can filter the year you want.",
     "description": "This message is used by screen readers to explain the icon to the user"
+  },
+  "SL45P4": {
+    "defaultMessage": "Gender",
+    "description": "The label of the gender field in the create user form"
   },
   "Sm4xi7": {
     "defaultMessage": "Time machine",
@@ -1406,6 +1458,14 @@
   "SpAXmO": {
     "defaultMessage": "Calendar icon. It indicates that here you have the objective's deadline",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
+  },
+  "SRIfUY": {
+    "defaultMessage": "Team",
+    "description": "The label of the team field in the create user form"
+  },
+  "SrOZ1m": {
+    "defaultMessage": "Create user",
+    "description": "The sidebar title on our create user sidebar"
   },
   "sSCvSb": {
     "defaultMessage": "An icon of the letter X. By clicking on it you will remove this item from the check-list",
@@ -1703,6 +1763,10 @@
     "defaultMessage": "Entry",
     "description": "It is used as a fallback if the component has no card type defined for it"
   },
+  "yw+DGB": {
+    "defaultMessage": "Last name",
+    "description": "The label of the last name field in the create user form"
+  },
   "YxNkP6": {
     "defaultMessage": "Check-in",
     "description": "This text is displayed in some places in our timeline card, showing the type of the card in a friendly name"
@@ -1788,7 +1852,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2021-11-08T17:53:50Z",
+    "defaultMessage": "2021-11-12T16:13:07Z",
     "description": null
   }
 }
