@@ -1,12 +1,16 @@
+import { Text } from '@chakra-ui/layout'
 import React, { useContext, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 
 import { SearchableListContext } from 'src/components/Base/SearchableList/context'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { userAtomFamily } from 'src/state/recoil/user'
 
-import { UserList } from '../List/wrapper'
-import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
-import { User } from '../types'
+import { UserList } from '../../List/wrapper'
+import { NamedAvatarSubtitleType } from '../../NamedAvatar/types'
+import { User } from '../../types'
+
+import messages from './messages'
 
 type UsersInContextProperties = {
   avatarSubtitleType?: NamedAvatarSubtitleType
@@ -23,6 +27,9 @@ export const UsersInContext = ({
 }: UsersInContextProperties) => {
   const { items } = useContext(SearchableListContext)
   const [loadUsers] = useRecoilFamilyLoader<User>(userAtomFamily)
+  const intl = useIntl()
+
+  const emptyState = <Text color="black.600">{intl.formatMessage(messages.emptySearchState)}</Text>
 
   useEffect(() => {
     loadUsers(items)
@@ -35,6 +42,7 @@ export const UsersInContext = ({
       showUserCard={hasUserCard}
       isLoading={isLoading}
       avatarSubtitleType={avatarSubtitleType}
+      emptyState={emptyState}
       onUserClick={onSelect}
     />
   )

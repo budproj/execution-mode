@@ -13,18 +13,24 @@ type SearchableListWrapperProperties<T> = {
   searchKey: keyof T
   placeholder?: string
   children: React.ReactNode
+  isSearchBarVisible?: boolean
 }
 
 export const SearchableListWrapper = <T extends Record<string, any>>({
   searchKey,
   placeholder,
   initialItems,
+  isSearchBarVisible,
   children,
 }: SearchableListWrapperProperties<T>) => {
+  isSearchBarVisible ??= true
+
   const [items, setItems] = useState(initialItems ?? [])
   const [optionGroups, setOptionGroups] = useState<OptionGroup[]>([])
+  const [query, setQuery] = useState('')
 
   const handleSearch = (value: string): void => {
+    setQuery(value)
     setItems(
       initialItems?.filter((item) => item[searchKey].toLowerCase().includes(value.toLowerCase())) ??
         [],
@@ -64,6 +70,7 @@ export const SearchableListWrapper = <T extends Record<string, any>>({
   const context: SearchableListContextValue = {
     items,
     optionGroups,
+    query,
 
     handleSearch,
     handleNewOptionGroup,
@@ -77,7 +84,9 @@ export const SearchableListWrapper = <T extends Record<string, any>>({
 
   return (
     <SearchableListContext.Provider value={context}>
-      <SearchableListContent placeholder={placeholder}>{children}</SearchableListContent>
+      <SearchableListContent placeholder={placeholder} isSearchBarVisible={isSearchBarVisible}>
+        {children}
+      </SearchableListContent>
     </SearchableListContext.Provider>
   )
 }

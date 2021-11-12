@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type EmptyStateMessage = 'workingTeamAlt' | 'emptyFolderAlt' | 'pagesAlt'
+type EmptyStateMessage = 'workingTeamAlt' | 'emptyFolderAlt' | 'pagesAlt' | 'emptyBenchAlt'
 
 export default defineMessages<EmptyStateMessage>({
   workingTeamAlt: {
@@ -20,5 +20,11 @@ export default defineMessages<EmptyStateMessage>({
     defaultMessage: 'Algumas páginas, exibindo também alguns ícones e outros desenhos',
     id: '1rAwNV',
     description: 'The alternative text explaining the pages image',
+  },
+
+  emptyBenchAlt: {
+    defaultMessage: 'Um banco vazio, representando que não tem ninguém aqui',
+    id: 'zUEhBk',
+    description: 'The alternative text explaining the empty bench image',
   },
 })

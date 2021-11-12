@@ -10,22 +10,26 @@ export interface EmptyStateProperties {
   maxW?: ImageProps['maxW']
   h?: FlexProps['h']
   py?: FlexProps['py']
+  gridGap?: FlexProps['gridGap']
 }
 
 const imageKeys = {
   'working-team': '/images/bud-team-at-work.png',
   'empty-folder': '/images/bud-empty-folder.png',
   'people-with-pages': '/images/bud-people-with-pages.png',
+  'empty-bench': '/images/bud-empty-bench.png',
 }
 
 const imageAlts = {
   'working-team': messages.workingTeamAlt,
   'empty-folder': messages.emptyFolderAlt,
   'people-with-pages': messages.pagesAlt,
+  'empty-bench': messages.emptyBenchAlt,
 }
 
-const EmptyState = ({ labelMessage, imageKey, h, py, maxW }: EmptyStateProperties) => {
-  maxW ??= 'xs'
+const EmptyState = ({ labelMessage, imageKey, h, py, maxW, gridGap }: EmptyStateProperties) => {
+  maxW ??= 52
+  gridGap ??= 8
 
   const intl = useIntl()
 
@@ -33,7 +37,14 @@ const EmptyState = ({ labelMessage, imageKey, h, py, maxW }: EmptyStatePropertie
   const imageAlt = imageAlts[imageKey]
 
   return (
-    <Flex alignItems="center" justifyContent="center" gridGap={8} direction="column" h={h} py={py}>
+    <Flex
+      alignItems="center"
+      justifyContent="center"
+      gridGap={gridGap}
+      direction="column"
+      h={h}
+      py={py}
+    >
       <Box>
         <Image src={imageURL} alt={intl.formatMessage(imageAlt)} maxW={maxW} />
       </Box>

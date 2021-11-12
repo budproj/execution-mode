@@ -86,6 +86,7 @@ export const TeamMembers = ({
         avatarSubtitleType="role"
         isLoading={!isLoaded}
         hasCreateNewUserPermission={hasAddMembersPermission}
+        emptyStateTitle={messages.emptyStateTitle}
         onSelect={handleSelect}
       />
       <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>

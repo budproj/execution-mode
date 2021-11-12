@@ -4,9 +4,8 @@ type UserListMessages = 'emptyState'
 
 export default defineMessages<UserListMessages>({
   emptyState: {
-    defaultMessage: 'Nenhuma pessoa encontrada',
-    id: 'DJm8nF',
-    description:
-      'This message is displayed when the key-result drawers update owner option user list has no users to display. This usually happens when the user tries to search but there is no results',
+    defaultMessage: 'Nenhuma pessoa',
+    id: '8+y0VC',
+    description: 'This message appears when there is no user to display in a given user list',
   },
 })
