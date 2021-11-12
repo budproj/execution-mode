@@ -17,6 +17,7 @@ export interface SelectUserFromListProperties {
   teamID?: string
   onSelect?: (userID: string) => void | Promise<void>
   onSearch?: (query: string) => void
+  onCreateUser?: (userID: string) => Promise<void> | void
   avatarSubtitleType?: NamedAvatarSubtitleType
   showUserCard?: boolean
   emptyStateTitle?: MessageDescriptor
@@ -27,6 +28,7 @@ export const SelectUserFromListWrapper = ({
   users,
   isLoading,
   onSelect,
+  onCreateUser,
   showUserCard,
   avatarSubtitleType,
   hasCreateNewUserPermission,
@@ -68,6 +70,7 @@ export const SelectUserFromListWrapper = ({
         isOpen={isCreateSidebarOpen}
         onClose={handleCreateSidebarClose}
         onSelect={onSelect}
+        onCreate={onCreateUser}
       />
     </SearchableList>
   )
