@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { SearchableList } from 'src/components/Base/SearchableList'
+import {
+  SearchableListOption,
+  SearchableListOptionGroup,
+} from 'src/components/Base/SearchableList/options'
+import PlusIcon from 'src/components/Icon/Plus'
 import { User } from 'src/components/User/types'
 
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
