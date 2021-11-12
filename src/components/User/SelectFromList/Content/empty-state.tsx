@@ -21,7 +21,7 @@ export const SelectUserFromListEmptyState = ({
   const intl = useIntl()
 
   return (
-    <Stack pt={4} pb={8} spacing={0}>
+    <Stack pt={2} pb={8} spacing={0}>
       <UserEmptyState title={title} py={0} />
       {hasCreatePermission && (
         <Button variant="text" colorScheme="brand" onClick={onCreateStart}>

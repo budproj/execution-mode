@@ -4,6 +4,7 @@ type SelectUserFromListContentMessages =
   | 'newUserOption'
   | 'createUserOptionGroupIconDesc'
   | 'emptySearchState'
+  | 'createNewUserButtonLabel'
 
 export default defineMessages<SelectUserFromListContentMessages>({
   newUserOption: {
@@ -24,5 +25,11 @@ export default defineMessages<SelectUserFromListContentMessages>({
     id: '+ajAuo',
     description:
       'This message appears in our user search when we try to search for a given user without any results',
+  },
+
+  createNewUserButtonLabel: {
+    defaultMessage: 'Adicionar usuário',
+    id: 'qE2WRH',
+    description: 'This message appears as a button when a team has no members yet',
   },
 })

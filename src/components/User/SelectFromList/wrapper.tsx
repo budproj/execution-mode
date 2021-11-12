@@ -7,7 +7,6 @@ import { User } from 'src/components/User/types'
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
 
 import { SelectUserFromListContent } from './Content/wrapper'
-import { SelectUserFromListEmptyState } from './EmptyState/wrapper'
 import { CreateSidebarInContext } from './create-sidebar-in-context'
 import messages from './messages'
 
@@ -50,25 +49,19 @@ export const SelectUserFromListWrapper = ({
     <SearchableList
       placeholder={intl.formatMessage(messages.searchPlaceholder)}
       searchKey="fullName"
+      isLoading={isLoading}
       initialItems={users}
-      isSearchBarVisible={hasUsers}
+      isSearchBarInitiallyVisible={hasUsers}
     >
-      {hasUsers ? (
-        <SelectUserFromListContent
-          hasCreatePermission={hasCreateNewUserPermission}
-          hasUserCard={showUserCard}
-          isLoading={isLoading}
-          avatarSubtitleType={avatarSubtitleType}
-          onCreateStart={handleCreateSidebarOpen}
-          onSelect={onSelect}
-        />
-      ) : (
-        <SelectUserFromListEmptyState
-          title={emptyStateTitle}
-          hasCreatePermission={hasCreateNewUserPermission}
-          onCreateStart={handleCreateSidebarOpen}
-        />
-      )}
+      <SelectUserFromListContent
+        hasCreatePermission={hasCreateNewUserPermission}
+        hasUserCard={showUserCard}
+        isLoading={isLoading}
+        avatarSubtitleType={avatarSubtitleType}
+        emptyStateTitle={emptyStateTitle}
+        onCreateStart={handleCreateSidebarOpen}
+        onSelect={onSelect}
+      />
 
       <CreateSidebarInContext
         teamID={teamID}

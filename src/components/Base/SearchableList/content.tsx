@@ -23,7 +23,7 @@ export const SearchableListContent = ({
     <Stack spacing={4} maxH="full">
       <HStack spacing={2}>
         {isSearchBarVisible && <SearchableListSearchBar placeholder={placeholder} />}
-        {optionGroups.length > 0 && <SearchableListOptionGroups />}
+        {optionGroups.length > 0 && isSearchBarVisible && <SearchableListOptionGroups />}
       </HStack>
       {children}
     </Stack>

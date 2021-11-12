@@ -13,21 +13,24 @@ type SearchableListWrapperProperties<T> = {
   searchKey: keyof T
   placeholder?: string
   children: React.ReactNode
-  isSearchBarVisible?: boolean
+  isSearchBarInitiallyVisible?: boolean
+  isLoading?: boolean
 }
 
 export const SearchableListWrapper = <T extends Record<string, any>>({
   searchKey,
   placeholder,
   initialItems,
-  isSearchBarVisible,
+  isSearchBarInitiallyVisible,
+  isLoading,
   children,
 }: SearchableListWrapperProperties<T>) => {
-  isSearchBarVisible ??= true
+  isLoading ??= false
 
   const [items, setItems] = useState(initialItems ?? [])
   const [optionGroups, setOptionGroups] = useState<OptionGroup[]>([])
   const [query, setQuery] = useState('')
+  const [isSearchBarVisible, setIsSearchBarVisible] = useState(isSearchBarInitiallyVisible ?? true)
 
   const handleSearch = (value: string): void => {
     setQuery(value)
@@ -65,6 +68,7 @@ export const SearchableListWrapper = <T extends Record<string, any>>({
   const handleNewItem = (item: T): void => {
     const newItems = [item, ...items]
     setItems(newItems)
+    setIsSearchBarVisible(true)
   }
 
   const context: SearchableListContextValue = {
@@ -82,9 +86,16 @@ export const SearchableListWrapper = <T extends Record<string, any>>({
     setItems(initialItems ?? [])
   }, [initialItems, setItems])
 
+  useEffect(() => {
+    setIsSearchBarVisible(isSearchBarInitiallyVisible ?? true)
+  }, [isSearchBarInitiallyVisible, setIsSearchBarVisible])
+
   return (
     <SearchableListContext.Provider value={context}>
-      <SearchableListContent placeholder={placeholder} isSearchBarVisible={isSearchBarVisible}>
+      <SearchableListContent
+        placeholder={placeholder}
+        isSearchBarVisible={isSearchBarVisible || isLoading}
+      >
         {children}
       </SearchableListContent>
     </SearchableListContext.Provider>

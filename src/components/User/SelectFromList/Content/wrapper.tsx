@@ -1,19 +1,17 @@
-import React from 'react'
-import { useIntl } from 'react-intl'
+import React, { useContext } from 'react'
+import { MessageDescriptor } from 'react-intl'
 
-import {
-  SearchableListOption,
-  SearchableListOptionGroup,
-} from 'src/components/Base/SearchableList/options'
-import PlusIcon from 'src/components/Icon/Plus'
+import { SearchableListContext } from 'src/components/Base/SearchableList/context'
 
 import { NamedAvatarSubtitleType } from '../../NamedAvatar/types'
 
-import messages from './messages'
+import { SelectUserFromListEmptyState } from './empty-state'
+import { SelectUserFromListOptions } from './options'
 import { UsersInContext } from './users-in-context'
 
 type SelectFromListContentProperties = {
   onCreateStart: () => void
+  emptyStateTitle?: MessageDescriptor
   hasUserCard?: boolean
   isLoading?: boolean
   hasCreatePermission?: boolean
@@ -28,26 +26,15 @@ export const SelectUserFromListContent = ({
   isLoading,
   avatarSubtitleType,
   onSelect,
+  emptyStateTitle,
 }: SelectFromListContentProperties) => {
-  const intl = useIntl()
+  const { items } = useContext(SearchableListContext)
 
-  return (
+  const hasMembers = items.length > 0
+
+  return hasMembers || isLoading ? (
     <>
-      {hasCreatePermission && (
-        <SearchableListOptionGroup
-          id="create-users"
-          icon={
-            <PlusIcon
-              desc={intl.formatMessage(messages.createUserOptionGroupIconDesc)}
-              fill="currentColor"
-            />
-          }
-        >
-          <SearchableListOption onClick={onCreateStart}>
-            {intl.formatMessage(messages.newUserOption)}
-          </SearchableListOption>
-        </SearchableListOptionGroup>
-      )}
+      {hasCreatePermission && <SelectUserFromListOptions onCreateStart={onCreateStart} />}
       <UsersInContext
         hasUserCard={hasUserCard}
         isLoading={isLoading}
@@ -55,5 +42,11 @@ export const SelectUserFromListContent = ({
         onSelect={onSelect}
       />
     </>
+  ) : (
+    <SelectUserFromListEmptyState
+      title={emptyStateTitle}
+      hasCreatePermission={hasCreatePermission}
+      onCreateStart={onCreateStart}
+    />
   )
 }
