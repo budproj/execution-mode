@@ -1,7 +1,7 @@
 import { Stack, Text } from '@chakra-ui/layout'
 import { Box } from '@chakra-ui/react'
 import { Scrollbars } from 'rc-scrollbars'
-import React, { useRef } from 'react'
+import React, { ReactElement, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import { NamedAvatar } from 'src/components/User'
@@ -18,6 +18,7 @@ interface UserListProperties {
   avatarSubtitleType?: NamedAvatarSubtitleType
   isLoading?: boolean
   showUserCard?: boolean
+  emptyState?: ReactElement
 }
 
 export const UserList = ({
@@ -26,12 +27,15 @@ export const UserList = ({
   avatarSubtitleType,
   showUserCard,
   isLoading,
+  emptyState,
 }: UserListProperties) => {
   const cardReference = useRef<HTMLDivElement>(null)
   const intl = useIntl()
   const handleUserClick = (userID: string) => async () => {
     if (onUserClick) await onUserClick(userID)
   }
+
+  emptyState ??= <Text color="black.600">{intl.formatMessage(messages.emptyState)}</Text>
 
   return (
     <>
@@ -53,7 +57,7 @@ export const UserList = ({
               />
             ))
           ) : (
-            <Text color="black.600">{intl.formatMessage(messages.emptyState)}</Text>
+            emptyState
           )}
         </Stack>
       </Scrollbars>

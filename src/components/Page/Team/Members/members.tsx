@@ -38,6 +38,7 @@ export const TeamMembers = ({
   const intl = useIntl()
   const [selectedUserID, setSelectedUserID] = useState<string>()
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
+  const [numberOfCreatedMembers, setNumberOfCreatedMembers] = useState(0)
   const updateTeam = useSetRecoilState(selectTeam(teamID))
 
   const [refreshTeamMembers] = useLazyQuery<GetTeamMembersResponse>(queries.GET_TEAM_MEMBERS, {
@@ -63,6 +64,10 @@ export const TeamMembers = ({
     handleClose()
   }
 
+  const handleCreatedUser = () => {
+    setNumberOfCreatedMembers(numberOfCreatedMembers + 1)
+  }
+
   useEffect(() => {
     setIsUserSidebarOpen(Boolean(selectedUserID))
   }, [selectedUserID, setIsUserSidebarOpen])
@@ -76,7 +81,7 @@ export const TeamMembers = ({
     <TeamSectionWrapper
       title={intl.formatMessage(messages.title, {
         isLoaded,
-        totalMembersCount: members.length,
+        totalMembersCount: members.length + numberOfCreatedMembers,
       })}
     >
       <SelectUserfromList
@@ -86,7 +91,9 @@ export const TeamMembers = ({
         avatarSubtitleType="role"
         isLoading={!isLoaded}
         hasCreateNewUserPermission={hasAddMembersPermission}
+        emptyStateTitle={messages.emptyStateTitle}
         onSelect={handleSelect}
+        onCreateUser={handleCreatedUser}
       />
       <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>
         <ColorizedOverlay>

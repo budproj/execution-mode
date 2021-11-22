@@ -1,19 +1,14 @@
 import React, { useState } from 'react'
-import { useIntl } from 'react-intl'
+import { MessageDescriptor, useIntl } from 'react-intl'
 
 import { SearchableList } from 'src/components/Base/SearchableList'
-import {
-  SearchableListOption,
-  SearchableListOptionGroup,
-} from 'src/components/Base/SearchableList/options'
-import PlusIcon from 'src/components/Icon/Plus'
 import { User } from 'src/components/User/types'
 
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
 
+import { SelectUserFromListContent } from './Content/wrapper'
 import { CreateSidebarInContext } from './create-sidebar-in-context'
 import messages from './messages'
-import { UsersInContext } from './users-in-context'
 
 export interface SelectUserFromListProperties {
   users: User[]
@@ -22,8 +17,10 @@ export interface SelectUserFromListProperties {
   teamID?: string
   onSelect?: (userID: string) => void | Promise<void>
   onSearch?: (query: string) => void
+  onCreateUser?: (userID: string) => Promise<void> | void
   avatarSubtitleType?: NamedAvatarSubtitleType
   showUserCard?: boolean
+  emptyStateTitle?: MessageDescriptor
 }
 
 export const SelectUserFromListWrapper = ({
@@ -31,9 +28,11 @@ export const SelectUserFromListWrapper = ({
   users,
   isLoading,
   onSelect,
+  onCreateUser,
   showUserCard,
   avatarSubtitleType,
   hasCreateNewUserPermission,
+  emptyStateTitle,
 }: SelectUserFromListProperties) => {
   const [isCreateSidebarOpen, setIsCreateSidebarOpen] = useState(false)
   const intl = useIntl()
@@ -46,31 +45,23 @@ export const SelectUserFromListWrapper = ({
     if (isCreateSidebarOpen) setIsCreateSidebarOpen(false)
   }
 
+  const hasUsers = users.length > 0
+
   return (
     <SearchableList
       placeholder={intl.formatMessage(messages.searchPlaceholder)}
       searchKey="fullName"
+      isLoading={isLoading}
       initialItems={users}
+      isSearchBarInitiallyVisible={hasUsers}
     >
-      {hasCreateNewUserPermission && (
-        <SearchableListOptionGroup
-          id="create-users"
-          icon={
-            <PlusIcon
-              desc={intl.formatMessage(messages.createUserOptionGroupIconDesc)}
-              fill="currentColor"
-            />
-          }
-        >
-          <SearchableListOption onClick={handleCreateSidebarOpen}>
-            {intl.formatMessage(messages.newUserOption)}
-          </SearchableListOption>
-        </SearchableListOptionGroup>
-      )}
-      <UsersInContext
+      <SelectUserFromListContent
+        hasCreatePermission={hasCreateNewUserPermission}
         hasUserCard={showUserCard}
         isLoading={isLoading}
         avatarSubtitleType={avatarSubtitleType}
+        emptyStateTitle={emptyStateTitle}
+        onCreateStart={handleCreateSidebarOpen}
         onSelect={onSelect}
       />
 
@@ -79,6 +70,7 @@ export const SelectUserFromListWrapper = ({
         isOpen={isCreateSidebarOpen}
         onClose={handleCreateSidebarClose}
         onSelect={onSelect}
+        onCreate={onCreateUser}
       />
     </SearchableList>
   )

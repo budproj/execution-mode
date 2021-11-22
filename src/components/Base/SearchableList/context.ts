@@ -16,6 +16,7 @@ export type OptionGroup = {
 export type SearchableListContextValue = {
   items: any[]
   optionGroups: OptionGroup[]
+  query: string
 
   handleSearch: (value: string) => void
   handleNewOptionGroup: (id: string, icon: JSX.Element) => void

@@ -12,6 +12,7 @@ type SidebarInContextProperties = {
   teamID?: string
   onClose: () => void
   onSelect?: (userID: string) => void | Promise<void>
+  onCreate?: (userID: string) => Promise<void> | void
 }
 
 type GetUserResponse = {
@@ -32,6 +33,7 @@ export const CreateSidebarInContext = ({
   isOpen,
   onClose,
   onSelect,
+  onCreate,
 }: SidebarInContextProperties) => {
   const { handleNewItem } = useContext(SearchableListContext)
   const [getUserData] = useLazyQuery<GetUserResponse>(queries.GET_USER_DATA, {
@@ -43,6 +45,7 @@ export const CreateSidebarInContext = ({
 
   const handleCreatedUser = (userID: string) => {
     getUserData({ variables: { id: userID } })
+    if (onCreate) void onCreate(userID)
   }
 
   return (

@@ -3,6 +3,7 @@ import { SearchableListContextValue, SearchOption } from './context'
 export const defaultContext: SearchableListContextValue = {
   items: [],
   optionGroups: [],
+  query: '',
 
   handleSearch: () => {
     throw new Error('You must implement a handle search function for your SearchableList context')
