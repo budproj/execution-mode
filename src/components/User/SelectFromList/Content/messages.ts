@@ -28,8 +28,8 @@ export default defineMessages<SelectUserFromListContentMessages>({
   },
 
   createNewUserButtonLabel: {
-    defaultMessage: 'Adicionar usuário',
-    id: 'qE2WRH',
+    defaultMessage: 'Criar um usuário',
+    id: 'pbVToL',
     description: 'This message appears as a button when a team has no members yet',
   },
 })

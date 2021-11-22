@@ -19,6 +19,10 @@
     "defaultMessage": "Última atualização",
     "description": "This prefix is displayed as default in our last updated component"
   },
+  "+ajAuo": {
+    "defaultMessage": "Nenhuma pessoa encontrada",
+    "description": "This message appears in our user search when we try to search for a given user without any results"
+  },
   "+r3NGz": {
     "defaultMessage": "Progresso",
     "description": "The title of the second column in our body table at the teams overview report in our dashboard"
@@ -94,6 +98,10 @@
   "0OHE6C": {
     "defaultMessage": "Numérico",
     "description": "This message is displayed inside our key-result format select as the title of the number format"
+  },
+  "0PaRUc": {
+    "defaultMessage": "Não tem ninguém aqui",
+    "description": "This message appears when there is no user in a given list"
   },
   "0R+aEr": {
     "defaultMessage": "O resultado-chave foi removido com sucesso",
@@ -327,6 +335,10 @@
     "defaultMessage": "Adicionar resultado-chave",
     "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
   },
+  "8+y0VC": {
+    "defaultMessage": "Nenhuma pessoa",
+    "description": "This message appears when there is no user to display in a given user list"
+  },
   "8/Eg3L": {
     "defaultMessage": "100",
     "description": "This message is displayed inside our key-result format select as the example of the number format"
@@ -470,10 +482,6 @@
   "DHoDPU": {
     "defaultMessage": "Salvar",
     "description": "This text is displayed as the button that will save the update for our goal update popover inside the key-result drawers"
-  },
-  "DJm8nF": {
-    "defaultMessage": "Nenhuma pessoa encontrada",
-    "description": "This message is displayed when the key-result drawers update owner option user list has no users to display. This usually happens when the user tries to search but there is no results"
   },
   "DMwbJe": {
     "defaultMessage": "Criar OKR",
@@ -686,6 +694,10 @@
   "M9Jejl": {
     "defaultMessage": "Painel | bud",
     "description": "The page title that is displayed in the browser tab"
+  },
+  "MHv/ZI": {
+    "defaultMessage": "Este time não possui membros",
+    "description": "This message is displayed when there is no users in a given team"
   },
   "MNn3/r": {
     "defaultMessage": "Insira uma descrição clicando aqui",
@@ -1447,6 +1459,10 @@
     "defaultMessage": "Sobrenome",
     "description": "This is the label that goes on our user account settings page, at the second field to update the user informations"
   },
+  "pbVToL": {
+    "defaultMessage": "Criar um usuário",
+    "description": "This message appears as a button when a team has no members yet"
+  },
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
@@ -1642,6 +1658,10 @@
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",
     "description": "The title text of our notification bell, it is displayed when an user hover the icon itself"
+  },
+  "zUEhBk": {
+    "defaultMessage": "Um banco vazio, representando que não tem ninguém aqui",
+    "description": "The alternative text explaining the empty bench image"
   },
   "ze3hqu": {
     "defaultMessage": "Estamos trabalhando em melhorias para você! :)",
