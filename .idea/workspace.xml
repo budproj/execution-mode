@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/User/Profile/Body/PersonalInformations/queries.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Profile/Body/PersonalInformations/queries.gql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/User/Profile/Body/SocialMedia/queries.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Profile/Body/SocialMedia/queries.gql" afterDir="false" />
-    </list>
+    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="chore: adds Idea data" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +10,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/.vscode/launch.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/User/Profile/Body/PersonalInformations/queries.gql" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/User/Profile/Body/SocialMedia/queries.gql" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/User/Profile/queries.gql" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="21HzxvQ14fTxBKHEMx4ZYcOK88r" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -21,8 +23,10 @@
     <option name="sortByType" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -38,11 +42,42 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1637613050184</updated>
-      <workItem from="1637613051565" duration="213000" />
+      <workItem from="1637613051565" duration="313000" />
     </task>
+    <task id="LOCAL-00001" summary="bugfix(user): fixes query input type">
+      <created>1637613341897</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1637613341897</updated>
+    </task>
+    <task id="LOCAL-00002" summary="chore: adds Idea data">
+      <created>1637613358357</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1637613358357</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="bugfix(user): fixes query input type" />
+    <MESSAGE value="chore: adds Idea data" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: adds Idea data" />
   </component>
 </project>
