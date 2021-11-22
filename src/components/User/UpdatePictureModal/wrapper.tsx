@@ -79,6 +79,8 @@ export const UserUpdatePictureModal = ({
         file,
       },
     })
+
+    handleClose()
   }
 
   useEffect(() => {
