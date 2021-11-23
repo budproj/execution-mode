@@ -7,6 +7,10 @@
     "defaultMessage": "Click here to comment :)",
     "description": "This text is displayed in our comment input in our key result drawer when it has no value"
   },
+  "+ajAuo": {
+    "defaultMessage": "",
+    "description": "This message appears in our user search when we try to search for a given user without any results"
+  },
   "+CyB1n": {
     "defaultMessage": "Deadline",
     "description": "The heading text of the goal section in our key-result drawer"
@@ -80,7 +84,7 @@
     "description": "This message is displayed as the label for the second input in our insert key-result drawer"
   },
   "0/VsDs": {
-    "defaultMessage": "I have an impediment",
+    "defaultMessage": "Roadblock",
     "description": "We use this tag to group every key result with confidence lower than 0"
   },
   "02eAuB": {
@@ -123,12 +127,16 @@
     "defaultMessage": "Numeric",
     "description": "This message is displayed inside our key-result format select as the title of the number format"
   },
+  "0PaRUc": {
+    "defaultMessage": "",
+    "description": "This message appears when there is no user in a given list"
+  },
   "0R+aEr": {
     "defaultMessage": "The key result has been successfully removed.",
     "description": "This message appears in a toast after the user removes a key-result"
   },
   "0SQt21": {
-    "defaultMessage": "New entry",
+    "defaultMessage": "New value",
     "description": "This is the label of the check-in form that indicates to which value the user would update her/his key result"
   },
   "0t238C": {
@@ -346,6 +354,10 @@
   "7Yw26b": {
     "defaultMessage": "Select the year",
     "description": "This message is displayed when no year filter was selected"
+  },
+  "8+y0VC": {
+    "defaultMessage": "",
+    "description": "This message appears when there is no user to display in a given user list"
   },
   "8/Eg3L": {
     "defaultMessage": "100",
@@ -1103,6 +1115,10 @@
     "defaultMessage": "Comment here! To tag someone, use @ :)",
     "description": "This text is displayed in our comment input in our key result drawers when it has no value"
   },
+  "MHv/ZI": {
+    "defaultMessage": "",
+    "description": "This message is displayed when there is no users in a given team"
+  },
   "mkxm93": {
     "defaultMessage": "Bud is the most friendly and collaborative OKRs engagement platform.",
     "description": "The default description for our page head meta description value"
@@ -1250,6 +1266,10 @@
   "Pb0Tht": {
     "defaultMessage": "About this check-in",
     "description": "This text is displayed in our check-in card, above the user comment if it exists"
+  },
+  "pbVToL": {
+    "defaultMessage": "",
+    "description": "This message appears as a button when a team has no members yet"
   },
   "Pf0TwP": {
     "defaultMessage": "Delete objective",
@@ -1684,7 +1704,7 @@
     "description": "This text is displayed as the button that will cancel the update for ou goal update popover inside the key-result drawers"
   },
   "XEey8C": {
-    "defaultMessage": "Drag to the new value to start check-in",
+    "defaultMessage": "Drag to the new value to start a new check-in",
     "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
   },
   "XENgso": {
@@ -1728,7 +1748,7 @@
     "description": "This message is displayed as the title for the danger confirmation modal while removing a given resource"
   },
   "xXxjVp": {
-    "defaultMessage": "There is an external and inconvenient factor blocking our progress concerning this key result",
+    "defaultMessage": "There is an external factor blocking our progress in this key result",
     "description": "This text explains our tag to the user"
   },
   "XYg5xf": {
@@ -1808,7 +1828,7 @@
     "description": "This is a message explaining the flag icon in our check-in form"
   },
   "zEyzo8": {
-    "defaultMessage": "A purple circle indicating that there is a hurdle impacting this key result progress",
+    "defaultMessage": "A purple circle indicating that there is a roadblock preventing the progress of this key result",
     "description": "A brief explanation for screen readers regarding the purple status circle"
   },
   "zHAPqJ": {
@@ -1843,6 +1863,10 @@
     "defaultMessage": "Preview",
     "description": "This title is displayed as the heading of the user card preview section in our user account settings page"
   },
+  "zUEhBk": {
+    "defaultMessage": "",
+    "description": "The alternative text explaining the empty bench image"
+  },
   "ZVTdlV": {
     "defaultMessage": "Cinema ticket icon",
     "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
@@ -1852,7 +1876,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2021-11-12T16:13:07Z",
+    "defaultMessage": "2021-11-23T17:22:03Z",
     "description": null
   }
 }
