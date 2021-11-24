@@ -62,7 +62,7 @@ export const SearchableListWrapper = <T extends Record<string, any>>({
     if (hasOption) return
 
     optionGroups[groupIndex].options = [...group.options, newOption]
-    setOptionGroups(optionGroups)
+    setOptionGroups([...optionGroups])
   }
 
   const handleNewItem = (item: T): void => {
