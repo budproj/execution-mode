@@ -65,9 +65,9 @@ const KeyResultSectionTimelineCardComment = ({
   }
 
   const commentText = regexifyString({
-    pattern: /@\[[\w \u00C0-\u00FF]+]\([\da-f-]+\)/g,
+    pattern: /@\[[\w \u00C0-\u00FF-]+]\([\da-f-]+\)/g,
     decorator: (match) => {
-      const regex = /@\[([\w \u00C0-\u00FF]+)]\(([\da-f-]+)\)/
+      const regex = /@\[([\w \u00C0-\u00FF-]+)]\(([\da-f-]+)\)/
       const [_, name, id] = regex.exec(match) ?? [undefined, '', '']
 
       return <MarkedUser id={id} name={name} />
