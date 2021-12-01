@@ -4,7 +4,7 @@
   <br>
 </p>
 <p align="center">
-Web interface for Bud's execution mode
+Web interface for Bud's execution mode.
 </p>
 
 ## 📖 About this
