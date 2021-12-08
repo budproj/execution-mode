@@ -1,0 +1,10 @@
+query GET_TEAM_LIST {
+  teams(first: 1000) {
+    edges {
+      node {
+        id
+        name
+      }
+    }
+  }
+}

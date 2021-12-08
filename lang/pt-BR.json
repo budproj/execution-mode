@@ -507,6 +507,10 @@
     "defaultMessage": "Tem certeza que deseja excluir este resultado-chave?",
     "description": "This message is used as the title in our first dialog while removing a key-result"
   },
+  "EkoIl2": {
+    "defaultMessage": "Criar novo subtime",
+    "description": "This message appears as an option in the team page while adding a new user"
+  },
   "ErVh0y": {
     "defaultMessage": "Valor atual",
     "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
@@ -1634,6 +1638,10 @@
   "yw+DGB": {
     "defaultMessage": "Sobrenome",
     "description": "The label of the last name field in the create user form"
+  },
+  "z2jAqq": {
+    "defaultMessage": "Um ícone com o sinal de \"mais\". Ao clicar aqui você irá abrir o menu para inserir um novo subtime",
+    "description": "This message is used in our new subteam button while seeing the team list"
   },
   "z4Qy+J": {
     "defaultMessage": "O desenho de uma caixa fechada, ilustrando que estamos em manutenção",
