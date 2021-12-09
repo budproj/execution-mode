@@ -1,11 +1,13 @@
 import { useMutation } from '@apollo/client/react/hooks'
 import {
+  Box,
   Button,
   Flex,
   FormControl,
   FormLabel,
   Heading,
   Input,
+  MenuItem,
   Modal,
   ModalBody,
   ModalContent,
@@ -14,12 +16,13 @@ import {
   ModalOverlay,
   Textarea,
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { SelectMenu } from 'src/components/Base'
 import { KeyResultOwnerSelectMenu } from 'src/components/KeyResult/OwnerSelectMenu/wrapper'
-import { isReloadNecessary } from 'src/state/recoil/team'
+import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 import meAtom from 'src/state/recoil/user/me'
 
 import { TeamSelect } from '../Select/wrapper'
@@ -42,12 +45,30 @@ interface AddSubteamMutationResult {
   }
 }
 
+interface TeamState {
+  id?: string
+  name?: string
+}
+
 export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
+  const router = useRouter()
+  if (Array.isArray(router.query.id)) throw new Error('Cannot parse string array')
+  const preloadedTeamId = router.query.id
+
   const currentUserID = useRecoilValue(meAtom)
+  const preloadedTeam = useRecoilValue(teamAtomFamily(preloadedTeamId))
   const [owner, setOwner] = useState(currentUserID)
-  const [teamId, setTeamId] = useState<string>()
+  const [team, setTeam] = useState<TeamState>(preloadedTeam ?? {})
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
+
+  useEffect(() => {
+    if (preloadedTeam) setTeam(preloadedTeam)
+  }, [preloadedTeam])
+
+  useEffect(() => {
+    if (currentUserID) setOwner(currentUserID)
+  }, [currentUserID])
 
   const setShouldUpdateObjectives = useSetRecoilState(isReloadNecessary)
 
@@ -58,9 +79,9 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
     },
   })
 
-  const handleChangeTeam = (teamId: string | string[]) => {
-    if (Array.isArray(teamId)) throw new Error('Cannot parse string array')
-    setTeamId(teamId)
+  const handleChangeTeam = (id: string | string[], name?: string | string[]) => {
+    if (Array.isArray(id) || Array.isArray(name)) throw new Error('Cannot parse string array')
+    setTeam({ id, name })
   }
 
   const executeAddTeam = () => {
@@ -70,7 +91,7 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
         description,
         gender: TEAM_GENDER.NEUTRAL,
         ownerID: owner,
-        parentID: teamId,
+        parentID: team.id,
       },
     })
     void addSubteam({
@@ -79,7 +100,7 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
         description,
         gender: TEAM_GENDER.NEUTRAL,
         ownerID: owner,
-        parentID: teamId,
+        parentID: team.id,
       },
     })
   }
@@ -120,8 +141,16 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
 
           <FormControl>
             <FormLabel>Este time está dentro de:</FormLabel>
-            <SelectMenu value={teamId} onChange={handleChangeTeam}>
-              <TeamSelect onSelect={(teamId) => () => handleChangeTeam(teamId)} />
+            <SelectMenu
+              matchWidth
+              isLazy
+              placeholder={<MenuItem color="new-gray.800">{team.name}</MenuItem>}
+              value={team.name}
+              onChange={handleChangeTeam}
+            >
+              <Box p={4} maxH="full" h="full">
+                <TeamSelect onSelect={(id, name) => () => handleChangeTeam(id, name)} />
+              </Box>
             </SelectMenu>
           </FormControl>
         </ModalBody>

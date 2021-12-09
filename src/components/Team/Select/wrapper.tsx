@@ -18,7 +18,7 @@ type TeamTagListProperties = {
   filter?: string
   teams?: TeamData[]
   teamIDsBlacklist?: string[]
-  onSelect: (teamID: string) => () => void
+  onSelect: (teamID: string, teamName?: string) => () => void
 }
 
 type GetReachableTeamsResponse = {
@@ -81,7 +81,7 @@ export const TeamSelect = ({
           _focus={{ color: 'brand.500' }}
           _last={{ pb: 2 }}
           _active={{}}
-          onClick={onSelect(team.id)}
+          onClick={onSelect(team.id, team.name)}
         >
           {team.name}
         </MenuItem>
