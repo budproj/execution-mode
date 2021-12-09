@@ -14,6 +14,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Stack,
   Textarea,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
@@ -120,43 +121,45 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
         </ModalHeader>
 
         <ModalBody pl="2.3em" pr="2.3em">
-          <FormControl>
-            <FormLabel>{intl.formatMessage(messages.teamNameLabel)}</FormLabel>
-            <Input onChange={(event) => setName(event.target.value)} />
-          </FormControl>
+          <Stack spacing={6}>
+            <FormControl>
+              <FormLabel>{intl.formatMessage(messages.teamNameLabel)}</FormLabel>
+              <Input onChange={(event) => setName(event.target.value)} />
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>{intl.formatMessage(messages.descriptionLabel)}</FormLabel>
-            <Textarea
-              placeholder="Em uma frase, qual é a missão deste time?"
-              onChange={(event) => setDescription(event.target.value)}
-            />
-          </FormControl>
+            <FormControl>
+              <FormLabel>{intl.formatMessage(messages.descriptionLabel)}</FormLabel>
+              <Textarea
+                placeholder="Em uma frase, qual é a missão deste time?"
+                onChange={(event) => setDescription(event.target.value)}
+              />
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>{intl.formatMessage(messages.leaderLabel)}</FormLabel>
-            <KeyResultOwnerSelectMenu
-              value={owner}
-              avatarSubtitleType="role"
-              placement="top"
-              onChange={setOwner}
-            />
-          </FormControl>
+            <FormControl>
+              <FormLabel>{intl.formatMessage(messages.leaderLabel)}</FormLabel>
+              <KeyResultOwnerSelectMenu
+                value={owner}
+                avatarSubtitleType="role"
+                placement="top"
+                onChange={setOwner}
+              />
+            </FormControl>
 
-          <FormControl>
-            <FormLabel>{intl.formatMessage(messages.parentTeam)}</FormLabel>
-            <SelectMenu
-              matchWidth
-              isLazy
-              placeholder={<MenuItem color="new-gray.800">{team.name}</MenuItem>}
-              value={team.name}
-              onChange={handleChangeTeam}
-            >
-              <Box p={4} maxH="full" h="full">
-                <TeamSelect onSelect={(id, name) => () => handleChangeTeam(id, name)} />
-              </Box>
-            </SelectMenu>
-          </FormControl>
+            <FormControl>
+              <FormLabel>{intl.formatMessage(messages.parentTeam)}</FormLabel>
+              <SelectMenu
+                matchWidth
+                isLazy
+                placeholder={<MenuItem color="new-gray.800">{team.name}</MenuItem>}
+                value={team.name}
+                onChange={handleChangeTeam}
+              >
+                <Box p={4} maxH="full" h="full">
+                  <TeamSelect onSelect={(id, name) => () => handleChangeTeam(id, name)} />
+                </Box>
+              </SelectMenu>
+            </FormControl>
+          </Stack>
         </ModalBody>
 
         <ModalFooter>
