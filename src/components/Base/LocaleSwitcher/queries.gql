@@ -1,0 +1,5 @@
+mutation UPDATE_USER_LOCALE($userID: ID!, $locale: String!) {
+  updateUserSetting(userID: $userID, key: LOCALE, value: $locale) {
+    value
+  }
+}

@@ -10,16 +10,18 @@ export type Locale = {
 type SwitcherProperties = {
   locales?: Locale[]
   currentLocale?: Locale
+  isLoading?: boolean
   onSwitch: (locale: string) => void
 }
 
-export const Switcher = ({ locales, currentLocale, onSwitch }: SwitcherProperties) => {
+export const Switcher = ({ locales, currentLocale, onSwitch, isLoading }: SwitcherProperties) => {
   locales ??= []
   currentLocale ??= locales[0]
 
   return (
     <Menu>
       <MenuButton
+        isLoading={isLoading}
         as={Button}
         fontSize="lg"
         fontWeight={400}

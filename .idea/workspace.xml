@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="chore: updates IDE configs">
-      <change afterPath="$PROJECT_DIR$/src/components/Base/RecoilIntlProvider/queries.gql" afterDir="false" />
+    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(base): integrates locale with backend">
+      <change afterPath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/queries.gql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Base/RecoilIntlProvider/recoil-intl-provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Base/RecoilIntlProvider/recoil-intl-provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/switcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/switcher.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/wrapper.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +92,9 @@
       <workItem from="1638988306006" duration="2460000" />
       <workItem from="1638993591334" duration="608000" />
       <workItem from="1639076680856" duration="494000" />
-      <workItem from="1639077182786" duration="1372000" />
+      <workItem from="1639077182786" duration="2292000" />
+      <workItem from="1639083791774" duration="96000" />
+      <workItem from="1639083893790" duration="544000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>
@@ -101,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638990075855</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat(base): integrates locale with backend">
+      <created>1639078730819</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1639078730819</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,7 +129,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: updates IDE configs" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: updates IDE configs" />
+    <MESSAGE value="feat(base): integrates locale with backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(base): integrates locale with backend" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
