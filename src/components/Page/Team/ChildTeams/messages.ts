@@ -6,6 +6,7 @@ type ExploreTeamChildTeamsMessage =
   | 'searchPlaceholder'
   | 'createSubteamOptionGroupIconDesc'
   | 'newSubeamOption'
+  | 'createSubteamButtonText'
 
 export default defineMessages<ExploreTeamChildTeamsMessage>({
   title: {
@@ -38,5 +39,12 @@ export default defineMessages<ExploreTeamChildTeamsMessage>({
     defaultMessage: 'Criar novo subtime',
     id: 'EkoIl2',
     description: 'This message appears as an option in the team page while adding a new user',
+  },
+
+  createSubteamButtonText: {
+    defaultMessage: 'Criar um subtime',
+    id: '0kb3ea',
+    description:
+      'This text appears inside the create subteam empty state, a button to create subteams',
   },
 })

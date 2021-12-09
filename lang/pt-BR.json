@@ -123,6 +123,10 @@
     "defaultMessage": "Você desativou {name} com sucesso",
     "description": "This message is used as a toast message when we finish deactivating a given user"
   },
+  "0kb3ea": {
+    "defaultMessage": "Criar um subtime",
+    "description": "This text appears inside the create subteam empty state, a button to create subteams"
+  },
   "0t238C": {
     "defaultMessage": "Formato do Resultado-chave",
     "description": "This label appears above the third input in our insert key-result drawer"

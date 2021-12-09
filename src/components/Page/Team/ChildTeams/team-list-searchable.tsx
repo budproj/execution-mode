@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
 import { SearchableList } from 'src/components/Base/SearchableList'
@@ -9,7 +9,6 @@ import {
 } from 'src/components/Base/SearchableList/options'
 import PlusIcon from 'src/components/Icon/Plus'
 import { TeamList } from 'src/components/Team/List/wrapper'
-import SaveTeamModal from 'src/components/Team/SaveTeamModal'
 import { Team } from 'src/components/Team/types'
 
 import messages from './messages'
@@ -17,6 +16,7 @@ import messages from './messages'
 interface TeamListSearchableProperties {
   teams: Team[]
   isLoading: boolean
+  openModal: () => void
 }
 
 interface TeamsInContextProperties {
@@ -29,12 +29,12 @@ const TeamsInContext = ({ isLoading }: TeamsInContextProperties) => {
   return <TeamList teams={items} isLoading={isLoading} />
 }
 
-export const TeamListSearchable = ({ teams, isLoading }: TeamListSearchableProperties) => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+export const TeamListSearchable = ({
+  teams,
+  isLoading,
+  openModal,
+}: TeamListSearchableProperties) => {
   const intl = useIntl()
-
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
 
   return (
     <SearchableList
@@ -55,7 +55,6 @@ export const TeamListSearchable = ({ teams, isLoading }: TeamListSearchablePrope
           {intl.formatMessage(messages.newSubeamOption)}
         </SearchableListOption>
       </SearchableListOptionGroup>
-      <SaveTeamModal isOpen={isModalOpen} onClose={closeModal} />
       <TeamsInContext isLoading={isLoading} />
     </SearchableList>
   )
