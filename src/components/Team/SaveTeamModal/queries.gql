@@ -1,19 +1,11 @@
-mutation CREATE_TEAM($name: String!, $description: String!, $teamGender: TeamGender! $parentID: ID!) {
-  createObjective(data: {
+mutation CREATE_TEAM($name: String!, $description: String!, $gender: TeamGender!, $ownerID: ID!, $parentID: ID!) {
+  createTeam(data: {
     name: $name,
     description: $description,
-    teamGender: $TeamGender,
-    parentId: $parentID,
+    gender: $gender,
+    ownerID: $ownerID,
+    parentID: $parentID,
   }) {
-    name
-    description
-    teamGender
-    delta {
-      progress
-    }
-    policy {
-      update
-      delete
-    }
+    id
   }
 }

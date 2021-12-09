@@ -3,7 +3,10 @@ import { useIntl } from 'react-intl'
 
 import { SearchableList } from 'src/components/Base/SearchableList'
 import { SearchableListContext } from 'src/components/Base/SearchableList/context'
-import { SearchableListOption, SearchableListOptionGroup } from 'src/components/Base/SearchableList/options'
+import {
+  SearchableListOption,
+  SearchableListOptionGroup,
+} from 'src/components/Base/SearchableList/options'
 import PlusIcon from 'src/components/Icon/Plus'
 import { TeamList } from 'src/components/Team/List/wrapper'
 import SaveTeamModal from 'src/components/Team/SaveTeamModal'
