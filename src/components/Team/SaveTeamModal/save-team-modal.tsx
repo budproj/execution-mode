@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { SelectMenu } from 'src/components/Base'
@@ -28,6 +29,7 @@ import meAtom from 'src/state/recoil/user/me'
 import { TeamSelect } from '../Select/wrapper'
 import { TEAM_GENDER } from '../constants'
 
+import messages from './messages'
 import queries from './queries.gql'
 
 interface SaveTeamModalProperties {
@@ -54,6 +56,8 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
   const router = useRouter()
   if (Array.isArray(router.query.id)) throw new Error('Cannot parse string array')
   const preloadedTeamId = router.query.id
+
+  const intl = useIntl()
 
   const currentUserID = useRecoilValue(meAtom)
   const preloadedTeam = useRecoilValue(teamAtomFamily(preloadedTeamId))
@@ -111,18 +115,18 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
       <ModalContent maxW="33em">
         <ModalHeader p="1.85em 2.3em 0 2.3em">
           <Heading as="h1" fontSize="3xl" color="black.900" fontWeight="400">
-            Adicionar subtime
+            {intl.formatMessage(messages.addSubteamHeader)}
           </Heading>
         </ModalHeader>
 
         <ModalBody pl="2.3em" pr="2.3em">
           <FormControl>
-            <FormLabel>Nome do time:</FormLabel>
+            <FormLabel>{intl.formatMessage(messages.teamNameLabel)}</FormLabel>
             <Input onChange={(event) => setName(event.target.value)} />
           </FormControl>
 
           <FormControl>
-            <FormLabel>Descrição:</FormLabel>
+            <FormLabel>{intl.formatMessage(messages.descriptionLabel)}</FormLabel>
             <Textarea
               placeholder="Em uma frase, qual é a missão deste time?"
               onChange={(event) => setDescription(event.target.value)}
@@ -130,7 +134,7 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
           </FormControl>
 
           <FormControl>
-            <FormLabel>Líder:</FormLabel>
+            <FormLabel>{intl.formatMessage(messages.leaderLabel)}</FormLabel>
             <KeyResultOwnerSelectMenu
               value={owner}
               avatarSubtitleType="role"
@@ -140,7 +144,7 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
           </FormControl>
 
           <FormControl>
-            <FormLabel>Este time está dentro de:</FormLabel>
+            <FormLabel>{intl.formatMessage(messages.parentTeam)}</FormLabel>
             <SelectMenu
               matchWidth
               isLazy
@@ -167,7 +171,7 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
               fontWeight="400"
               onClick={onClose}
             >
-              Cancelar
+              {intl.formatMessage(messages.cancel)}
             </Button>
             <Button
               pr="5em"
@@ -180,7 +184,7 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
               isLoading={loading}
               onClick={executeAddTeam}
             >
-              Salvar
+              {intl.formatMessage(messages.save)}
             </Button>
           </Flex>
         </ModalFooter>

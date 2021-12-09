@@ -475,6 +475,10 @@
     "defaultMessage": "Meta",
     "description": "This tooltip is displayed when the user hovers the right side value of our progress bar"
   },
+  "DB7Ai9": {
+    "defaultMessage": "Salvar",
+    "description": "Text in the save action button"
+  },
   "DEMBaq": {
     "defaultMessage": "Um ícone com o sinal de positivo, indicando que ao clicar aqui você irá abrir o painel para inserir um resultado-chave",
     "description": "This message is used inside the objective accordion panel, on the insert key-result button"
@@ -654,6 +658,10 @@
   "Jkg7nT": {
     "defaultMessage": "US$ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin USD format"
+  },
+  "Jx/tRY": {
+    "defaultMessage": "Nome do time:",
+    "description": "The label to the team name field in team add/edit modal"
   },
   "K04poX": {
     "defaultMessage": "NOTIFICAÇÕES",
@@ -1303,6 +1311,10 @@
     "defaultMessage": "Meu perfil",
     "description": "The page title that our users should see in the my profile page"
   },
+  "j/Fraf": {
+    "defaultMessage": "Adicionar subtime",
+    "description": "The text is displayed as a heading in the add subteam modal"
+  },
   "jCjr1X": {
     "defaultMessage": "Preencha os campos obrigatórios para poder salvar este resultado-chave.",
     "description": "This message appears in an error toast after the users tries to create a key-result but there are some validation errors in the form"
@@ -1575,6 +1587,10 @@
     "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
     "description": "This message is displayed as a description in our under maintenance error page"
   },
+  "vCWYpE": {
+    "defaultMessage": "Este time está dentro de:",
+    "description": "The label to the parent team field in team add/edit modal"
+  },
   "vDa/w5": {
     "defaultMessage": "Está silencioso por aqui",
     "description": "This text is the title of our empty state card inside our key result drawers"
@@ -1591,6 +1607,10 @@
     "defaultMessage": "Meu perfil | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
   },
+  "w/3frD": {
+    "defaultMessage": "Líder:",
+    "description": "The label to the leader field in team add/edit modal"
+  },
   "wJjuae": {
     "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",
     "description": "This tooltip explains the seventh column of the key result list"
@@ -1602,6 +1622,10 @@
   "wlwyTd": {
     "defaultMessage": "Buscar membros",
     "description": "This message is used in the search input while searching for users"
+  },
+  "wtGWF6": {
+    "defaultMessage": "Descrição:",
+    "description": "The label to the description field in team add/edit modal"
   },
   "wwt9p1": {
     "defaultMessage": "Um círculo com um ponto de interrogação ao centro",
@@ -1630,6 +1654,10 @@
   "xywRWB": {
     "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
+  },
+  "yfhIM+": {
+    "defaultMessage": "Cancelar",
+    "description": "Text in the cancel action button"
   },
   "ytvOyM": {
     "defaultMessage": "Meus Resultados-Chave",
