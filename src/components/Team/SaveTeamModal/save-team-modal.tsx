@@ -16,6 +16,7 @@ import {
   ModalOverlay,
   Stack,
   Textarea,
+  Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
@@ -118,6 +119,9 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
           <Heading as="h1" fontSize="3xl" color="black.900" fontWeight="400">
             {intl.formatMessage(messages.addSubteamHeader)}
           </Heading>
+          <Text color="new-gray.900" fontWeight="400" fontSize="lg">
+            {intl.formatMessage(messages.addSubteamHeaderDescription, { teamname: team.name })}
+          </Text>
         </ModalHeader>
 
         <ModalBody pl="2.3em" pr="2.3em">
@@ -145,24 +149,26 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
               />
             </FormControl>
 
-            <FormControl>
-              <FormLabel>{intl.formatMessage(messages.parentTeam)}</FormLabel>
-              <SelectMenu
-                matchWidth
-                isLazy
-                placeholder={<MenuItem color="new-gray.800">{team.name}</MenuItem>}
-                value={team.name}
-                onChange={handleChangeTeam}
-              >
-                <Box p={4} maxH="full" h="full">
-                  <TeamSelect onSelect={(id, name) => () => handleChangeTeam(id, name)} />
-                </Box>
-              </SelectMenu>
-            </FormControl>
+            {false && (
+              <FormControl>
+                <FormLabel>{intl.formatMessage(messages.parentTeam)}</FormLabel>
+                <SelectMenu
+                  matchWidth
+                  isLazy
+                  placeholder={<MenuItem color="new-gray.800">{team.name}</MenuItem>}
+                  value={team.name}
+                  onChange={handleChangeTeam}
+                >
+                  <Box p={4} maxH="full" h="full">
+                    <TeamSelect onSelect={(id, name) => () => handleChangeTeam(id, name)} />
+                  </Box>
+                </SelectMenu>
+              </FormControl>
+            )}
           </Stack>
         </ModalBody>
 
-        <ModalFooter>
+        <ModalFooter pb="2.3em">
           <Flex w="100%" justifyContent="space-around">
             <Button
               pr="5em"

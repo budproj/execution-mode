@@ -8,12 +8,19 @@ type TeamSearchMessage =
   | 'parentTeam'
   | 'cancel'
   | 'save'
+  | 'addSubteamHeaderDescription'
 
 export default defineMessages<TeamSearchMessage>({
   addSubteamHeader: {
-    defaultMessage: 'Adicionar subtime',
-    id: 'j/Fraf',
-    description: 'The text is displayed as a heading in the add subteam modal',
+    defaultMessage: 'Criar time',
+    id: 'hohkHN',
+    description: 'The text is displayed as a heading in the add team modal',
+  },
+
+  addSubteamHeaderDescription: {
+    defaultMessage: 'Este time estará vinculado a {teamname}',
+    id: 'GeIXxi',
+    description: 'The text is displayed as header description in the add team modal',
   },
 
   teamNameLabel: {
