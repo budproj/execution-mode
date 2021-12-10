@@ -9,6 +9,7 @@ type TeamSearchMessage =
   | 'cancel'
   | 'save'
   | 'addSubteamHeaderDescription'
+  | 'descriptionPlaceholder'
 
 export default defineMessages<TeamSearchMessage>({
   addSubteamHeader: {
@@ -33,6 +34,12 @@ export default defineMessages<TeamSearchMessage>({
     defaultMessage: 'Descrição:',
     id: 'wtGWF6',
     description: 'The label to the description field in team add/edit modal',
+  },
+
+  descriptionPlaceholder: {
+    defaultMessage: 'Em uma frase, qual é a missão deste time?',
+    id: 'qrgfik',
+    description: 'The placeholder to the description field in team add/edit modal',
   },
 
   leaderLabel: {

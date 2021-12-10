@@ -18,7 +18,7 @@ import {
   Textarea,
   Text,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
+import { NextRouter, useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -35,6 +35,7 @@ import messages from './messages'
 import queries from './queries.gql'
 
 interface SaveTeamModalProperties {
+  teamId?: string
   isOpen: boolean
   onClose: () => void
 }
@@ -54,10 +55,14 @@ interface TeamState {
   name?: string
 }
 
-export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
-  const router = useRouter()
+const getTeamIdFromRouter = (router: NextRouter) => {
   if (Array.isArray(router.query.id)) throw new Error('Cannot parse string array')
-  const preloadedTeamId = router.query.id
+  return router.query.id
+}
+
+export const SaveTeamModal = ({ teamId, isOpen, onClose }: SaveTeamModalProperties) => {
+  const router = useRouter()
+  const preloadedTeamId = teamId ?? getTeamIdFromRouter(router)
 
   const intl = useIntl()
 
@@ -134,7 +139,7 @@ export const SaveTeamModal = ({ isOpen, onClose }: SaveTeamModalProperties) => {
             <FormControl>
               <FormLabel>{intl.formatMessage(messages.descriptionLabel)}</FormLabel>
               <Textarea
-                placeholder="Em uma frase, qual é a missão deste time?"
+                placeholder={intl.formatMessage(messages.descriptionPlaceholder)}
                 onChange={(event) => setDescription(event.target.value)}
               />
             </FormControl>

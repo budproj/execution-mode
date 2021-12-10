@@ -23,6 +23,10 @@
     "defaultMessage": "Nenhuma pessoa encontrada",
     "description": "This message appears in our user search when we try to search for a given user without any results"
   },
+  "+kQOSG": {
+    "defaultMessage": "Procurar Times",
+    "description": "The placeholder in explore page"
+  },
   "+r3NGz": {
     "defaultMessage": "Progresso",
     "description": "The title of the second column in our body table at the teams overview report in our dashboard"
@@ -503,6 +507,10 @@
     "defaultMessage": "Clique aqui para fechar o formulário de check-in",
     "description": "This message is displayed as the alternative text for the close button in our check-in form"
   },
+  "DrWtMs": {
+    "defaultMessage": "Criar time",
+    "description": "The text displayed inside create team button in explore page"
+  },
   "DsPsDZ": {
     "defaultMessage": "Este time não possui nenhum subtime.",
     "description": "This message is displayed in our team plage inside the child teams section when that team has no child teams"
@@ -562,6 +570,10 @@
   "GeAU92": {
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
+  },
+  "GeIXxi": {
+    "defaultMessage": "Este time estará vinculado a {teamname}",
+    "description": "The text is displayed as header description in the add team modal"
   },
   "GrPUMn": {
     "defaultMessage": "Mês de",
@@ -1287,6 +1299,10 @@
     "defaultMessage": "Progresso acumulado dessa semana",
     "description": "This helper texts explains since when we are calculating your company progress"
   },
+  "hohkHN": {
+    "defaultMessage": "Criar time",
+    "description": "The text is displayed as a heading in the add team modal"
+  },
   "i9bdpU": {
     "defaultMessage": "Houve um erro inesperado ao criar seu objetivo. Tente novamente mais tarde",
     "description": "This message appears as an error toast when the users tries to create a new objective but an error appears"
@@ -1314,10 +1330,6 @@
   "ilU+Uz": {
     "defaultMessage": "Meu perfil",
     "description": "The page title that our users should see in the my profile page"
-  },
-  "j/Fraf": {
-    "defaultMessage": "Adicionar subtime",
-    "description": "The text is displayed as a heading in the add subteam modal"
   },
   "jCjr1X": {
     "defaultMessage": "Preencha os campos obrigatórios para poder salvar este resultado-chave.",
@@ -1486,6 +1498,10 @@
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
+  },
+  "qrgfik": {
+    "defaultMessage": "Em uma frase, qual é a missão deste time?",
+    "description": "The placeholder to the description field in team add/edit modal"
   },
   "qytqsj": {
     "defaultMessage": "Trimestral",
