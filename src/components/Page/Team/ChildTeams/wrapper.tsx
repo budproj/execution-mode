@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import SaveTeamModal from 'src/components/Team/SaveTeamModal'
+import { GraphQLEffect } from 'src/components/types'
 
 import { useConnectionEdges } from '../../../../state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from '../../../../state/recoil/hooks'
@@ -28,6 +29,8 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
   const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const hasCreateTeamPermission = team?.users?.policy?.create === GraphQLEffect.ALLOW
 
   const openModal = () => setIsModalOpen(true)
   const closeModal = () => setIsModalOpen(false)
@@ -58,9 +61,11 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
       {isLoaded && childTeams.length === 0 ? (
         <Stack pt={2} pb={8} spacing={0}>
           <EmptyState imageKey="empty-folder" labelMessage={messages.emptyState} py={0} />
-          <Button variant="text" colorScheme="brand" onClick={openModal}>
-            {intl.formatMessage(messages.createSubteamButtonText)}
-          </Button>
+          {hasCreateTeamPermission && (
+            <Button variant="text" colorScheme="brand" onClick={openModal}>
+              {intl.formatMessage(messages.createSubteamButtonText)}
+            </Button>
+          )}
         </Stack>
       ) : (
         <TeamListSearchable teams={childTeams} isLoading={!isLoaded} openModal={openModal} />
