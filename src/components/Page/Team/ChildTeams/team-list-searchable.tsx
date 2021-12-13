@@ -14,6 +14,7 @@ import { Team } from 'src/components/Team/types'
 import messages from './messages'
 
 interface TeamListSearchableProperties {
+  hasPermission: boolean
   teams: Team[]
   isLoading: boolean
   openModal: () => void
@@ -33,6 +34,7 @@ export const TeamListSearchable = ({
   teams,
   isLoading,
   openModal,
+  hasPermission,
 }: TeamListSearchableProperties) => {
   const intl = useIntl()
 
@@ -42,19 +44,21 @@ export const TeamListSearchable = ({
       searchKey="name"
       initialItems={teams}
     >
-      <SearchableListOptionGroup
-        id="create-users"
-        icon={
-          <PlusIcon
-            desc={intl.formatMessage(messages.createSubteamOptionGroupIconDesc)}
-            fill="currentColor"
-          />
-        }
-      >
-        <SearchableListOption onClick={openModal}>
-          {intl.formatMessage(messages.newSubeamOption)}
-        </SearchableListOption>
-      </SearchableListOptionGroup>
+      {hasPermission && (
+        <SearchableListOptionGroup
+          id="create-users"
+          icon={
+            <PlusIcon
+              desc={intl.formatMessage(messages.createSubteamOptionGroupIconDesc)}
+              fill="currentColor"
+            />
+          }
+        >
+          <SearchableListOption onClick={openModal}>
+            {intl.formatMessage(messages.newSubeamOption)}
+          </SearchableListOption>
+        </SearchableListOptionGroup>
+      )}
       <TeamsInContext isLoading={isLoading} />
     </SearchableList>
   )

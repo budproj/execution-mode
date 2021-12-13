@@ -68,7 +68,12 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
           )}
         </Stack>
       ) : (
-        <TeamListSearchable teams={childTeams} isLoading={!isLoaded} openModal={openModal} />
+        <TeamListSearchable
+          teams={childTeams}
+          isLoading={!isLoaded}
+          openModal={openModal}
+          hasPermission={hasCreateTeamPermission}
+        />
       )}
       <SaveTeamModal isOpen={isModalOpen} onClose={closeModal} />
     </TeamSectionWrapper>
