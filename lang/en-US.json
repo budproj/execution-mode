@@ -8,7 +8,7 @@
     "description": "This text is displayed in our comment input in our key result drawer when it has no value"
   },
   "+ajAuo": {
-    "defaultMessage": "",
+    "defaultMessage": "No user found",
     "description": "This message appears in our user search when we try to search for a given user without any results"
   },
   "+CyB1n": {
@@ -22,6 +22,10 @@
   "+IK11v": {
     "defaultMessage": "A ghost's drawing, illustrating that you are on a page that doesn't exist",
     "description": "This message is the alt message for our box drawing in the unknown error page"
+  },
+  "+kQOSG": {
+    "defaultMessage": "Search teams",
+    "description": "The placeholder in explore page"
   },
   "+O5SW4": {
     "defaultMessage": "An icon made with vertical strokes. Click and drag to change the order of your key results",
@@ -111,6 +115,10 @@
     "defaultMessage": "Cancel",
     "description": "This text is used as a fallback to the confirmation modal cancel button. It is displayed if the component did not received a custom button label"
   },
+  "0kb3ea": {
+    "defaultMessage": "Create a subteam",
+    "description": "This text appears inside the create subteam empty state, a button to create subteams"
+  },
   "0kNbEF": {
     "defaultMessage": "You have successfully deactivated {name}.",
     "description": "This message is used as a toast message when we finish deactivating a given user"
@@ -128,7 +136,7 @@
     "description": "This message is displayed inside our key-result format select as the title of the number format"
   },
   "0PaRUc": {
-    "defaultMessage": "",
+    "defaultMessage": "There's no one here",
     "description": "This message appears when there is no user in a given list"
   },
   "0R+aEr": {
@@ -356,7 +364,7 @@
     "description": "This message is displayed when no year filter was selected"
   },
   "8+y0VC": {
-    "defaultMessage": "",
+    "defaultMessage": "No users",
     "description": "This message appears when there is no user to display in a given user list"
   },
   "8/Eg3L": {
@@ -595,6 +603,10 @@
     "defaultMessage": "Calculated by the average progress of the team and sub times goals",
     "description": "This tooltip appears when the user hovers the second column title"
   },
+  "DB7Ai9": {
+    "defaultMessage": "Save",
+    "description": "Text in the save action button"
+  },
   "DEMBaq": {
     "defaultMessage": "An icon of a plus sign, indicating that by clicking here you will open the sidebar for creating a key result",
     "description": "This message is used inside the objective accordion panel, on the insert key-result button"
@@ -627,6 +639,10 @@
     "defaultMessage": "Click here to close the check-in form",
     "description": "This message is displayed as the alternative text for the close button in our check-in form"
   },
+  "DrWtMs": {
+    "defaultMessage": "Create team",
+    "description": "The text displayed inside create team button in explore page"
+  },
   "DsPsDZ": {
     "defaultMessage": "This team has no subteam. ",
     "description": "This message is displayed in our team plage inside the child teams section when that team has no child teams"
@@ -658,6 +674,10 @@
   "eI6jYw": {
     "defaultMessage": "No information provided",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
+  },
+  "EkoIl2": {
+    "defaultMessage": "Create new subteam",
+    "description": "This message appears as an option in the team page while adding a new user"
   },
   "ErVh0y": {
     "defaultMessage": "Current value",
@@ -755,6 +775,10 @@
     "defaultMessage": "Settings icon. By clicking on it you will be taken to the settings screen",
     "description": "The alternative text explaining our settings icon"
   },
+  "GeIXxi": {
+    "defaultMessage": "This team will be linked to {teamname}",
+    "description": "The text is displayed as header description in the add team modal"
+  },
   "GHeIgq": {
     "defaultMessage": "Nobody has interacted here in a while. How about sharing something about the progress of this key result? :)",
     "description": "This text gives more details regarding our empty state card in the key result drawer"
@@ -834,6 +858,10 @@
   "hn3cE7": {
     "defaultMessage": "Progress made so far this week",
     "description": "This helper texts explains since when we are calculating your company progress"
+  },
+  "hohkHN": {
+    "defaultMessage": "Create team",
+    "description": "The text is displayed as a heading in the add team modal"
   },
   "HOpxw5": {
     "defaultMessage": "Platform",
@@ -920,7 +948,7 @@
     "description": "The tooltip text for the edition access text"
   },
   "J+UxkH": {
-    "defaultMessage": "{progress, select, 0 {No variation} other {<highlight>{signal}{progress} so far this week</highlight>}}",
+    "defaultMessage": "{progress, select, 0 {No variation} other {<highlight>{signal}{progress}% so far this week</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
   },
   "J8dAid": {
@@ -958,6 +986,10 @@
   "jvxLB+": {
     "defaultMessage": "Are you sure that you want to do it? This action is irreversible",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
+  },
+  "Jx/tRY": {
+    "defaultMessage": "Team name:",
+    "description": "The label to the team name field in team add/edit modal"
   },
   "jxyYl3": {
     "defaultMessage": "Sorted by progress",
@@ -1116,7 +1148,7 @@
     "description": "This text is displayed in our comment input in our key result drawers when it has no value"
   },
   "MHv/ZI": {
-    "defaultMessage": "",
+    "defaultMessage": "This team has no members",
     "description": "This message is displayed when there is no users in a given team"
   },
   "mkxm93": {
@@ -1268,7 +1300,7 @@
     "description": "This text is displayed in our check-in card, above the user comment if it exists"
   },
   "pbVToL": {
-    "defaultMessage": "",
+    "defaultMessage": "Create user",
     "description": "This message appears as a button when a team has no members yet"
   },
   "Pf0TwP": {
@@ -1350,6 +1382,10 @@
   "QpkwoM": {
     "defaultMessage": "Are you sure you want to delete this objective?",
     "description": "This message is used as the first dialog title while removing an objective"
+  },
+  "qrgfik": {
+    "defaultMessage": "In a short sentence, what is this team's mission?",
+    "description": "The placeholder to the description field in team add/edit modal"
   },
   "QRn560": {
     "defaultMessage": "Progress",
@@ -1540,7 +1576,7 @@
     "description": "This label is displayed if the date is today"
   },
   "TIorHN": {
-    "defaultMessage": "There is a risk that we will not achieve the key result. But we keep optimistic",
+    "defaultMessage": "There is a chance we will not achieve the key result, but we remain optimistic",
     "description": "This text explains our tag to the user"
   },
   "TIXwh1": {
@@ -1615,6 +1651,10 @@
     "defaultMessage": "Portuguese",
     "description": "This message is used as the label for the portuguese language in our locale switcher"
   },
+  "vCWYpE": {
+    "defaultMessage": "This team is a part of:",
+    "description": "The label to the parent team field in team add/edit modal"
+  },
   "vDa/w5": {
     "defaultMessage": "It's quiet over here!",
     "description": "This text is the title of our empty state card inside our key result drawers"
@@ -1651,6 +1691,10 @@
     "defaultMessage": "Cancel",
     "description": "This is a button label displayed inside the insert key-result drawer. This is the first button"
   },
+  "w/3frD": {
+    "defaultMessage": "Team leader:",
+    "description": "The label to the leader field in team add/edit modal"
+  },
   "W37c+K": {
     "defaultMessage": "A check sign. It represents the amount of items marked as complete in the check-list",
     "description": "This text is used by screen readers to explain the check icon in our key-result drawer checklist section"
@@ -1686,6 +1730,10 @@
   "wlwyTd": {
     "defaultMessage": "Search users",
     "description": "This message is used in the search input while searching for users"
+  },
+  "wtGWF6": {
+    "defaultMessage": "Description:",
+    "description": "The label to the description field in team add/edit modal"
   },
   "wwt9p1": {
     "defaultMessage": "A circle with a question mark inside icon",
@@ -1767,6 +1815,10 @@
     "defaultMessage": "Up arrow icon indicating that progress has increased",
     "description": "This desc message explains the increase icon for screen readers"
   },
+  "yfhIM+": {
+    "defaultMessage": "Cancel",
+    "description": "Text in the cancel action button"
+  },
   "Ykg0Jh": {
     "defaultMessage": "Performed by <highlight>{author}</highlight> {unit, select, fallback {em} other {}} {time}",
     "description": "This text is displayed as a helper text, below the check-in card title"
@@ -1802,6 +1854,10 @@
   "z1FXkV": {
     "defaultMessage": "Cycle",
     "description": "The label text above the Cycle section in our key result single page or drawer"
+  },
+  "z2jAqq": {
+    "defaultMessage": "An icon with a plus sign. By clicking on it you will open the menu to create e new subteam",
+    "description": "This message is used in our new subteam button while seeing the team list"
   },
   "z4Qy+J": {
     "defaultMessage": "The illustration of a closed box, indicating that we are undergoing maintenance",
@@ -1864,7 +1920,7 @@
     "description": "This title is displayed as the heading of the user card preview section in our user account settings page"
   },
   "zUEhBk": {
-    "defaultMessage": "",
+    "defaultMessage": "An empty bench, meaning there are no users on this team",
     "description": "The alternative text explaining the empty bench image"
   },
   "ZVTdlV": {
@@ -1876,7 +1932,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2021-11-23T17:22:03Z",
+    "defaultMessage": "2021-12-14T20:50:22Z",
     "description": null
   }
 }
