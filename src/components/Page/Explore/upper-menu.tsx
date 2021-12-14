@@ -1,14 +1,16 @@
+import { useLazyQuery } from '@apollo/client'
 import { Button } from '@chakra-ui/button'
 import { Box, Stack } from '@chakra-ui/layout'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
 
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
-import { GraphQLEffect } from 'src/components/types'
-import { teamAtomFamily } from 'src/state/recoil/team'
+import { GraphQLConnectionPolicy, GraphQLEffect } from 'src/components/types'
+
+import { GetTeamMembersResponse } from '../Team/Members/members'
 
 import messages from './messages'
+import queries from './queries.gql'
 
 interface UpperMenuProperties {
   openModal: () => void
@@ -18,9 +20,26 @@ interface UpperMenuProperties {
 
 const UpperMenu = ({ openModal, setTeamFilter, teamId }: UpperMenuProperties) => {
   const intl = useIntl()
+  const [policy, setPolicy] = useState<GraphQLConnectionPolicy>()
 
-  const team = useRecoilValue(teamAtomFamily(teamId))
-  const hasCreateTeamPermission = team?.users?.policy?.create === GraphQLEffect.ALLOW
+  const [refreshTeamPolicy] = useLazyQuery<GetTeamMembersResponse>(
+    queries.GET_TEAM_MEMBERS_POLICY,
+    {
+      fetchPolicy: 'network-only',
+      variables: {
+        teamID: teamId,
+      },
+      onCompleted: (data) => {
+        setPolicy(data.team?.users?.policy)
+      },
+    },
+  )
+
+  useEffect(() => {
+    if (teamId) refreshTeamPolicy()
+  }, [teamId, refreshTeamPolicy])
+
+  const hasCreateTeamPermission = policy?.create === GraphQLEffect.ALLOW
 
   return (
     <Stack direction="row" justifyContent="flex-end" marginTop="0.8em">
