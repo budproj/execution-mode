@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(base): integrates locale with backend">
-      <change afterPath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/queries.gql" afterDir="false" />
+    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(locale-switcher): moves it to inside the user edit sidebar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/queries.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/queries.gql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/switcher.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/switcher.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Base/LocaleSwitcher/wrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Page/Platform/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Page/Platform/messages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Page/Platform/platform.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Settings/Platform/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Settings/Platform/messages.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Settings/Platform/platform.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Settings/SidebarMenu/Section/Definitions/definitions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Settings/SidebarMenu/Section/Definitions/definitions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/Profile/Body/PersonalInformations/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Profile/Body/PersonalInformations/messages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/Profile/Body/PersonalInformations/wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Profile/Body/PersonalInformations/wrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/settings/platform.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +105,11 @@
       <workItem from="1639076680856" duration="494000" />
       <workItem from="1639077182786" duration="2292000" />
       <workItem from="1639083791774" duration="96000" />
-      <workItem from="1639083893790" duration="544000" />
+      <workItem from="1639083893790" duration="1317000" />
+      <workItem from="1639161899415" duration="8000" />
+      <workItem from="1639509994833" duration="13000" />
+      <workItem from="1639510014678" duration="8000" />
+      <workItem from="1639597837034" duration="1959000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>
@@ -110,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639078730819</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat(locale-switcher): integrates with backend">
+      <created>1639084486370</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1639084486370</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,7 +152,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: updates IDE configs" />
     <MESSAGE value="feat(base): integrates locale with backend" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(base): integrates locale with backend" />
+    <MESSAGE value="feat(locale-switcher): integrates with backend" />
+    <MESSAGE value="feat(locale-switcher): moves it to inside the user edit sidebar" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(locale-switcher): moves it to inside the user edit sidebar" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

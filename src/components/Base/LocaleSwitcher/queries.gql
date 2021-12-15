@@ -3,3 +3,15 @@ mutation UPDATE_USER_LOCALE($userID: ID!, $locale: String!) {
     value
   }
 }
+
+query GET_USER_LOCALE($userID: ID!) {
+  user(id: $userID) {
+    settings(keys: [LOCALE]) {
+      edges {
+        node {
+          value
+        }
+      }
+    }
+  }
+}

@@ -15,6 +15,7 @@ type UserProfileBodyPersonalInformationsMessage =
   | 'fallbackFifthField'
   | 'fallbackSixthField'
   | 'fallbackSeventhField'
+  | 'localeSwitcherLabel'
 
 export default defineMessages<UserProfileBodyPersonalInformationsMessage>({
   sectionTitle: {
@@ -115,5 +116,11 @@ export default defineMessages<UserProfileBodyPersonalInformationsMessage>({
     id: 'n3PYQR',
     description:
       'This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field',
+  },
+
+  localeSwitcherLabel: {
+    defaultMessage: 'Idioma',
+    id: 'LvI+KK',
+    description: 'This message is the label of our locale switcher in the settings page',
   },
 })

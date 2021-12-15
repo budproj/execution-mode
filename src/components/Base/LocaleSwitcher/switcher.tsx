@@ -26,7 +26,8 @@ export const Switcher = ({ locales, currentLocale, onSwitch, isLoading }: Switch
         fontSize="lg"
         fontWeight={400}
         px={0}
-        display="block"
+        maxW="xs"
+        textAlign="left"
         _hover={{
           opacity: 1,
           color: 'brand.500',
@@ -34,8 +35,8 @@ export const Switcher = ({ locales, currentLocale, onSwitch, isLoading }: Switch
       >
         {currentLocale.label}
       </MenuButton>
-      <MenuList>
-        <MenuOptionGroup defaultValue={currentLocale.code} type="radio">
+      <MenuList boxShadow="with-stroke.dark" borderWidth={1} borderColor="new-gray.200">
+        <MenuOptionGroup value={currentLocale.code} type="radio">
           {locales.map((locale) => (
             <MenuItemOption
               key={locale.code}

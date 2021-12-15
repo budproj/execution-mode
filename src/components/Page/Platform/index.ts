@@ -1,1 +1,0 @@
-export { SettingsPlatformPage } from './platform'
