@@ -23,7 +23,9 @@ const TeamCardList = ({ teamFilter, numEmptyStateCards }: TeamCardListProperties
   const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const [teams, setEdges] = useConnectionEdges<Team>()
 
-  const filtredTeams = teams.filter((team) => team.name.toLocaleLowerCase().includes(teamFilter))
+  const filtredTeams = teams.filter((team) =>
+    team.name.toLocaleLowerCase().includes(teamFilter.toLocaleLowerCase()),
+  )
 
   const orderedTeams = orderBy(filtredTeams, ['isCompany', 'name'], ['desc', 'asc'])
   const wereTeamsLoaded = !loading && Boolean(teams)
