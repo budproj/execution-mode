@@ -1,6 +1,12 @@
 import { defineMessages } from 'react-intl'
 
-type ExploreTeamChildTeamsMessage = 'title' | 'emptyState' | 'searchPlaceholder'
+type ExploreTeamChildTeamsMessage =
+  | 'title'
+  | 'emptyState'
+  | 'searchPlaceholder'
+  | 'createSubteamOptionGroupIconDesc'
+  | 'newSubeamOption'
+  | 'createSubteamButtonText'
 
 export default defineMessages<ExploreTeamChildTeamsMessage>({
   title: {
@@ -20,5 +26,25 @@ export default defineMessages<ExploreTeamChildTeamsMessage>({
     defaultMessage: 'Buscar subtimes',
     id: '/H4hHb',
     description: 'This message is displayed inside the child teams section, on the search bar',
+  },
+
+  createSubteamOptionGroupIconDesc: {
+    defaultMessage:
+      'Um ícone com o sinal de "mais". Ao clicar aqui você irá abrir o menu para inserir um novo subtime',
+    id: 'z2jAqq',
+    description: 'This message is used in our new subteam button while seeing the team list',
+  },
+
+  newSubeamOption: {
+    defaultMessage: 'Criar novo subtime',
+    id: 'EkoIl2',
+    description: 'This message appears as an option in the team page while adding a new user',
+  },
+
+  createSubteamButtonText: {
+    defaultMessage: 'Criar um subtime',
+    id: '0kb3ea',
+    description:
+      'This text appears inside the create subteam empty state, a button to create subteams',
   },
 })

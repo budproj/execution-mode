@@ -1,0 +1,9 @@
+query GET_TEAM_MEMBERS_POLICY($teamID: ID!) {
+  team(id: $teamID) {
+    users {
+      policy {
+        create
+      }
+    }
+  }
+}

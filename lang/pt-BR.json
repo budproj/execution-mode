@@ -23,6 +23,10 @@
     "defaultMessage": "Nenhuma pessoa encontrada",
     "description": "This message appears in our user search when we try to search for a given user without any results"
   },
+  "+kQOSG": {
+    "defaultMessage": "Procurar Times",
+    "description": "The placeholder in explore page"
+  },
   "+r3NGz": {
     "defaultMessage": "Progresso",
     "description": "The title of the second column in our body table at the teams overview report in our dashboard"
@@ -122,6 +126,10 @@
   "0kNbEF": {
     "defaultMessage": "Você desativou {name} com sucesso",
     "description": "This message is used as a toast message when we finish deactivating a given user"
+  },
+  "0kb3ea": {
+    "defaultMessage": "Criar um subtime",
+    "description": "This text appears inside the create subteam empty state, a button to create subteams"
   },
   "0t238C": {
     "defaultMessage": "Formato do Resultado-chave",
@@ -475,6 +483,10 @@
     "defaultMessage": "Meta",
     "description": "This tooltip is displayed when the user hovers the right side value of our progress bar"
   },
+  "DB7Ai9": {
+    "defaultMessage": "Salvar",
+    "description": "Text in the save action button"
+  },
   "DEMBaq": {
     "defaultMessage": "Um ícone com o sinal de positivo, indicando que ao clicar aqui você irá abrir o painel para inserir um resultado-chave",
     "description": "This message is used inside the objective accordion panel, on the insert key-result button"
@@ -495,6 +507,10 @@
     "defaultMessage": "Clique aqui para fechar o formulário de check-in",
     "description": "This message is displayed as the alternative text for the close button in our check-in form"
   },
+  "DrWtMs": {
+    "defaultMessage": "Criar time",
+    "description": "The text displayed inside create team button in explore page"
+  },
   "DsPsDZ": {
     "defaultMessage": "Este time não possui nenhum subtime.",
     "description": "This message is displayed in our team plage inside the child teams section when that team has no child teams"
@@ -506,6 +522,10 @@
   "E+0+QH": {
     "defaultMessage": "Tem certeza que deseja excluir este resultado-chave?",
     "description": "This message is used as the title in our first dialog while removing a key-result"
+  },
+  "EkoIl2": {
+    "defaultMessage": "Criar novo subtime",
+    "description": "This message appears as an option in the team page while adding a new user"
   },
   "ErVh0y": {
     "defaultMessage": "Valor atual",
@@ -550,6 +570,10 @@
   "GeAU92": {
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
+  },
+  "GeIXxi": {
+    "defaultMessage": "Este time estará vinculado a {teamname}",
+    "description": "The text is displayed as header description in the add team modal"
   },
   "GrPUMn": {
     "defaultMessage": "Mês de",
@@ -650,6 +674,10 @@
   "Jkg7nT": {
     "defaultMessage": "US$ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin USD format"
+  },
+  "Jx/tRY": {
+    "defaultMessage": "Nome do time:",
+    "description": "The label to the team name field in team add/edit modal"
   },
   "K04poX": {
     "defaultMessage": "NOTIFICAÇÕES",
@@ -1271,6 +1299,10 @@
     "defaultMessage": "Progresso acumulado dessa semana",
     "description": "This helper texts explains since when we are calculating your company progress"
   },
+  "hohkHN": {
+    "defaultMessage": "Criar time",
+    "description": "The text is displayed as a heading in the add team modal"
+  },
   "i9bdpU": {
     "defaultMessage": "Houve um erro inesperado ao criar seu objetivo. Tente novamente mais tarde",
     "description": "This message appears as an error toast when the users tries to create a new objective but an error appears"
@@ -1471,6 +1503,10 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
+  "qrgfik": {
+    "defaultMessage": "Em uma frase, qual é a missão deste time?",
+    "description": "The placeholder to the description field in team add/edit modal"
+  },
   "qytqsj": {
     "defaultMessage": "Trimestral",
     "description": "This text is used as prefix for our quarterly cadences"
@@ -1575,6 +1611,10 @@
     "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
     "description": "This message is displayed as a description in our under maintenance error page"
   },
+  "vCWYpE": {
+    "defaultMessage": "Este time está dentro de:",
+    "description": "The label to the parent team field in team add/edit modal"
+  },
   "vDa/w5": {
     "defaultMessage": "Está silencioso por aqui",
     "description": "This text is the title of our empty state card inside our key result drawers"
@@ -1591,6 +1631,10 @@
     "defaultMessage": "Meu perfil | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
   },
+  "w/3frD": {
+    "defaultMessage": "Líder:",
+    "description": "The label to the leader field in team add/edit modal"
+  },
   "wJjuae": {
     "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",
     "description": "This tooltip explains the seventh column of the key result list"
@@ -1602,6 +1646,10 @@
   "wlwyTd": {
     "defaultMessage": "Buscar membros",
     "description": "This message is used in the search input while searching for users"
+  },
+  "wtGWF6": {
+    "defaultMessage": "Descrição:",
+    "description": "The label to the description field in team add/edit modal"
   },
   "wwt9p1": {
     "defaultMessage": "Um círculo com um ponto de interrogação ao centro",
@@ -1631,6 +1679,10 @@
     "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
   },
+  "yfhIM+": {
+    "defaultMessage": "Cancelar",
+    "description": "Text in the cancel action button"
+  },
   "ytvOyM": {
     "defaultMessage": "Meus Resultados-Chave",
     "description": "MainAppBar menu item that links to \"My Key Results\" page"
@@ -1638,6 +1690,10 @@
   "yw+DGB": {
     "defaultMessage": "Sobrenome",
     "description": "The label of the last name field in the create user form"
+  },
+  "z2jAqq": {
+    "defaultMessage": "Um ícone com o sinal de \"mais\". Ao clicar aqui você irá abrir o menu para inserir um novo subtime",
+    "description": "This message is used in our new subteam button while seeing the team list"
   },
   "z4Qy+J": {
     "defaultMessage": "O desenho de uma caixa fechada, ilustrando que estamos em manutenção",

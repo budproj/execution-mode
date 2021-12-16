@@ -23,7 +23,7 @@ type TeamMembersProperties = {
   hasAddMembersPermission?: boolean
 }
 
-type GetTeamMembersResponse = {
+export type GetTeamMembersResponse = {
   team: {
     users: GraphQLConnection<User>
   }

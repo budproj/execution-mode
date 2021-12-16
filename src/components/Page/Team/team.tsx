@@ -2,13 +2,14 @@ import { useQuery } from '@apollo/client'
 import { Box, Stack } from '@chakra-ui/layout'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilState } from 'recoil'
 
 import { ApolloQueryErrorBoundary, PageContent, PageMetaHead } from 'src/components/Base'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { PageProperties } from 'src/components/Page/types'
 import { Team } from 'src/components/Team/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
-import { teamAtomFamily } from 'src/state/recoil/team'
+import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 
 import { KeyResultInsertDrawer } from '../../KeyResult/InsertDrawer/wrapper'
 import { TeamObjectives } from '../../Team/Objectives/wrapper'
@@ -27,18 +28,27 @@ export interface ExploreTeamPageProperties extends PageProperties {
 
 const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   const intl = useIntl()
-  const { data, loading, error, called } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_DATA, {
-    variables: {
-      teamId,
-    },
-  })
+  const { data, loading, error, called, refetch } = useQuery<GetTeamNameQuery>(
+    queries.GET_TEAM_DATA,
+    { variables: { teamId } },
+  )
   const [loadTeamOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const metaTitleLoadingFallback = intl.formatMessage(messages.metaTitleLoadingFallback)
   const isLoading = loading || !called
 
+  const [shouldUpdateTeams, setShouldUpdateTeams] = useRecoilState(isReloadNecessary)
+
   useEffect(() => {
     if (!loading && data) loadTeamOnRecoil(data.team)
   }, [data, loading, loadTeamOnRecoil])
+
+  useEffect(() => {
+    if (shouldUpdateTeams) {
+      void refetch({ teamId })
+      setShouldUpdateTeams(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [shouldUpdateTeams])
 
   return (
     <ApolloQueryErrorBoundary error={error}>

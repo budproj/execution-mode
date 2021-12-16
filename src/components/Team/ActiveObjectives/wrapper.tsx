@@ -36,8 +36,7 @@ export interface GetTeamActiveObjectivesQuery {
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
   const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
-  const [isUpdatedNeededOnObjectives, setIsUpdatedNeededOnObjectives] =
-    useRecoilState(isReloadNecessary)
+  const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
   const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
@@ -80,12 +79,12 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
   }, [cycleObjectives, loadObjectivesOnRecoil])
 
   useEffect(() => {
-    if (isUpdatedNeededOnObjectives) {
+    if (shouldUpdateObjectives) {
       void refetch({ teamID })
-      setIsUpdatedNeededOnObjectives(false)
+      setShouldUpdateObjectives(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isUpdatedNeededOnObjectives])
+  }, [shouldUpdateObjectives])
 
   return (
     <Stack spacing={12} h="full">
