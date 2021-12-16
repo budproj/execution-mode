@@ -50,7 +50,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
       domain={config.publicRuntimeConfig.auth0.domain}
       clientId={config.publicRuntimeConfig.auth0.clientID}
       scope={config.publicRuntimeConfig.auth0.scope}
-      redirectUri={window ? window.location.toString() : ''}
+      redirectUri={typeof window === 'undefined' ? '' : window.location.toString()}
       cacheLocation="localstorage"
       onRedirectCallback={onAuth0RedirectCallback}
     >
