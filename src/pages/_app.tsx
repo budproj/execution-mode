@@ -36,7 +36,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
   const router = useRouter()
 
   const onAuth0RedirectCallback = async (appState: AppState): Promise<void> => {
-    await router.replace(appState?.returnTo ?? window.location.pathname)
+    await router.replace(appState?.returnTo ?? '/')
   }
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
       domain={config.publicRuntimeConfig.auth0.domain}
       clientId={config.publicRuntimeConfig.auth0.clientID}
       scope={config.publicRuntimeConfig.auth0.scope}
-      redirectUri={typeof window === 'undefined' ? '' : window.location.toString()}
+      redirectUri={typeof window === 'undefined' ? '' : window.location.origin}
       cacheLocation="localstorage"
       onRedirectCallback={onAuth0RedirectCallback}
     >
