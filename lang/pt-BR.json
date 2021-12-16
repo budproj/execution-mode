@@ -811,6 +811,10 @@
     "defaultMessage": "Cargo",
     "description": "The label of the role field in the create user form"
   },
+  "Q+5Uuc": {
+    "defaultMessage": "Português",
+    "description": "This is the name of the portuguese language while we are creating a new user"
+  },
   "Q2diI+": {
     "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
@@ -850,6 +854,10 @@
   "QpkwoM": {
     "defaultMessage": "Tem certeza que deseja excluir este objetivo?",
     "description": "This message is used as the first dialog title while removing an objective"
+  },
+  "Qt52rN": {
+    "defaultMessage": "Idioma",
+    "description": "This message appears as a label while we are creating a new user"
   },
   "R8hOYh": {
     "defaultMessage": "Este time não possui OKRs",
@@ -1211,10 +1219,6 @@
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
     "description": "The page description that is displayed in Google and screen readers"
   },
-  "fX4pLO": {
-    "defaultMessage": "Configurações da plataforma | bud",
-    "description": "The page title that is displayed in the browser tab for the platform settings page"
-  },
   "faL9vf": {
     "defaultMessage": "Um círculo verde, indicando que a confiança está alta",
     "description": "A brief explanation for screen readers regarding the green status circle"
@@ -1242,10 +1246,6 @@
   "gbO+eS": {
     "defaultMessage": "Se realmente tem certeza de que deseja fazer isso, confirme sua ação escrevendo \"{keyword}” no campo abaixo:",
     "description": "This message is used as our default second stage description in our dangerous confirmation modal"
-  },
-  "gioO8X": {
-    "defaultMessage": "Plataforma",
-    "description": "The page title that our users should see in the platform settings page"
   },
   "gm1hfm": {
     "defaultMessage": "Progresso do objetivo acumulado na semana",
@@ -1366,6 +1366,10 @@
   "lMYmAU": {
     "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
     "description": "This message is displayed above the button in our not found error page"
+  },
+  "lMwPEm": {
+    "defaultMessage": "Inglês",
+    "description": "This is the name of the english language while we are creating a new user"
   },
   "lMxUF9": {
     "defaultMessage": "Um ícone de seta para baixo, indicando que o progresso reduziu",
@@ -1642,10 +1646,6 @@
   "z4STCs": {
     "defaultMessage": "Como vai o desempenho d{gender, select, MALE {o} FEMALE {a} other {o}} <highlight>{company}</highlight> nesse trimestre?",
     "description": "The title of the header section in our company overview report"
-  },
-  "z75EmS": {
-    "defaultMessage": "Visualize e atualize as preferências referentes a plataforma",
-    "description": "The page description that is displayed in Google and screen readers for the platform settings page"
   },
   "zEyzo8": {
     "defaultMessage": "Um círculo roxo, indicando que o resultado-chave tem uma barreira",

@@ -1,3 +1,4 @@
+import { useLazyQuery } from '@apollo/client'
 import { Button } from '@chakra-ui/button'
 import { FormControl, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
@@ -5,14 +6,17 @@ import { HStack, Stack } from '@chakra-ui/layout'
 import { MenuItemOption } from '@chakra-ui/menu'
 import { Spinner } from '@chakra-ui/react'
 import { Field, Form, Formik, FormikHelpers, useFormikContext } from 'formik'
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import { SelectMenu } from 'src/components/Base'
 
+import meAtom from '../../../../state/recoil/user/me'
 import { USER_GENDER } from '../../constants'
 
 import messages from './messages'
+import queries from './queries.gql'
 import { NewUserSchema } from './schema'
 
 export type CreateUserFormValues = {
@@ -21,6 +25,7 @@ export type CreateUserFormValues = {
   email: string
   role: string
   gender?: USER_GENDER
+  locale?: string
 }
 
 type CreateUserFormProperties = {
@@ -39,6 +44,7 @@ export const defaultInitialValues: CreateUserFormValues = {
   email: '',
   role: '',
   gender: undefined,
+  locale: undefined,
 }
 
 export const CreateUserForm = ({
@@ -83,6 +89,8 @@ export const CreateUserForm = ({
                   },
                 ]}
               />
+
+              <CreateUserLocaleField />
 
               <HStack flexGrow={1} alignItems="flex-end">
                 <Button
@@ -194,5 +202,47 @@ const CreateUserSelectField = ({ id, options, selectedOptionID, label }: CreateU
         ))}
       </SelectMenu>
     </Stack>
+  )
+}
+
+const CreateUserLocaleField = () => {
+  const [defaultLocaleID, setDefaultLocaleID] = useState('pt-BR')
+  const intl = useIntl()
+  const myID = useRecoilValue(meAtom)
+  const { values, setFieldValue } = useFormikContext<CreateUserFormValues>()
+  const [getCurrentLocale] = useLazyQuery(queries.GET_USER_LOCALE, {
+    variables: {
+      userID: myID,
+    },
+    onCompleted: (data) => {
+      const locale = data?.user.settings.edges[0]?.node.value
+      if (locale) setDefaultLocaleID(locale)
+    },
+  })
+
+  useEffect(() => {
+    if (myID) getCurrentLocale()
+  }, [myID, getCurrentLocale])
+
+  useEffect(() => {
+    if (defaultLocaleID) setFieldValue('locale', defaultLocaleID)
+  }, [defaultLocaleID, setFieldValue])
+
+  return (
+    <CreateUserSelectField
+      id="locale"
+      selectedOptionID={values.locale}
+      label={intl.formatMessage(messages.localeLabel)}
+      options={[
+        {
+          id: 'pt-BR',
+          label: intl.formatMessage(messages.portugueseLocale),
+        },
+        {
+          id: 'en-US',
+          label: intl.formatMessage(messages.englishLocale),
+        },
+      ]}
+    />
   )
 }
