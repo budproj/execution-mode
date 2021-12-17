@@ -1,19 +1,37 @@
-FROM node:15.5.1-alpine3.10
+FROM node:15.5.1-alpine3.10 AS build
+
+ARG GITHUB_TOKEN
+
+WORKDIR /build
+
+COPY ./package.json ./
+COPY ./package-lock.json ./
+COPY ./.npmrc ./
+COPY ./bin ./bin
+RUN npm ci
+
+COPY . ./
+
+RUN npm run build
+
+
+FROM node:15.5.1-alpine3.10 AS final
 
 ENV NODE_ENV="production"
 
 WORKDIR /usr/app
 
-COPY package.json ./
-COPY package-lock.json ./
-COPY bin bin
+COPY --from=build /build/package.json ./
+COPY --from=build /build/package-lock.json ./
+
+RUN npm i next
+
+COPY --from=build /build/dist dist
+COPY --from=build /build/bin bin
+COPY --from=build /build/compiled-lang compiled-lang
+COPY --from=build /build/public public
+COPY --from=build /build/next.config.js .
+COPY --from=build /build/.next .next
+
 RUN chmod +x ./bin/postinstall
-RUN npm install --ignore-scripts
-
-COPY dist dist
-COPY .next .next
-COPY compiled-lang compiled-lang
-COPY public public
-COPY next.config.js .
-
 CMD [ "npm", "start" ]
