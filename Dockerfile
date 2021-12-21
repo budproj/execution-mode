@@ -2,6 +2,9 @@ FROM node:15.5.1-alpine3.10 AS build
 
 ARG GITHUB_TOKEN
 
+ENV NODE_ENV="production"
+ENV LOCALE_OVERRIDE="pt-BR"
+
 WORKDIR /build
 
 COPY ./package.json ./
