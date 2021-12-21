@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Stack, Flex, FormLabel, MenuItemOption } from '@chakra-ui/react'
+import { Flex, FormLabel, MenuItemOption, Stack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
@@ -13,6 +13,7 @@ import { User } from 'src/components/User/types'
 import useIntlGender from 'src/state/hooks/useIntlGender'
 import userSelector from 'src/state/recoil/user/selector'
 
+import { LocaleSwitcher } from '../../../../Base/LocaleSwitcher'
 import { UserProfileSectionTitle } from '../section-title'
 
 import messages from './messages'
@@ -128,6 +129,13 @@ export const UserProfileBodyPersonalInformations = ({
           isDisabled={!canUpdate}
           onSubmit={handleValueUpdate('email')}
         />
+
+        <Stack spacing={0}>
+          <FormLabel fontSize="md" m={0}>
+            {intl.formatMessage(messages.localeSwitcherLabel)}
+          </FormLabel>
+          <LocaleSwitcher userID={userID} />
+        </Stack>
 
         <Stack direciton="column" spacing={2}>
           <FormLabel fontSize="md" m={0}>

@@ -8,4 +8,5 @@ export const NewUserSchema = Yup.object().shape({
   email: Yup.string().email().required(),
   role: Yup.string().min(2),
   gender: Yup.mixed().oneOf(Object.values(USER_GENDER)).required(),
+  locale: Yup.mixed().oneOf(['pt-BR', 'en-US']).required(),
 })

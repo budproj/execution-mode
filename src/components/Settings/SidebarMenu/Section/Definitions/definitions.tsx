@@ -29,12 +29,6 @@ const SettingsSidebarMenuSectionPreferences = () => {
           {intl.formatMessage(messages.firstOptionLabel)}
         </IntlLink>
       </SettingsSidebarMenuSectionButton>
-
-      <SettingsSidebarMenuSectionButton href="/settings/platform">
-        <IntlLink href="/settings/platform">
-          {intl.formatMessage(messages.secondOptionLabel)}
-        </IntlLink>
-      </SettingsSidebarMenuSectionButton>
     </Flex>
   )
 }

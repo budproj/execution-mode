@@ -15,6 +15,9 @@ type CreateUserFormMessage =
   | 'successToastMessage'
   | 'existingUserErrorToastMessage'
   | 'unknownErrorToastMessage'
+  | 'localeLabel'
+  | 'portugueseLocale'
+  | 'englishLocale'
 
 export default defineMessages<CreateUserFormMessage>({
   firstNameLabel: {
@@ -102,5 +105,23 @@ export default defineMessages<CreateUserFormMessage>({
     id: 'GBh0Xf',
     description:
       'This message is used as an toast error message when we try to create an user with an existing e-mail',
+  },
+
+  localeLabel: {
+    defaultMessage: 'Idioma',
+    id: 'Qt52rN',
+    description: 'This message appears as a label while we are creating a new user',
+  },
+
+  portugueseLocale: {
+    defaultMessage: 'Português',
+    id: 'Q+5Uuc',
+    description: 'This is the name of the portuguese language while we are creating a new user',
+  },
+
+  englishLocale: {
+    defaultMessage: 'Inglês',
+    id: 'lMwPEm',
+    description: 'This is the name of the english language while we are creating a new user',
   },
 })

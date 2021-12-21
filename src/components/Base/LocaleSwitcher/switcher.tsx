@@ -10,21 +10,24 @@ export type Locale = {
 type SwitcherProperties = {
   locales?: Locale[]
   currentLocale?: Locale
+  isLoading?: boolean
   onSwitch: (locale: string) => void
 }
 
-export const Switcher = ({ locales, currentLocale, onSwitch }: SwitcherProperties) => {
+export const Switcher = ({ locales, currentLocale, onSwitch, isLoading }: SwitcherProperties) => {
   locales ??= []
   currentLocale ??= locales[0]
 
   return (
     <Menu>
       <MenuButton
+        isLoading={isLoading}
         as={Button}
         fontSize="lg"
         fontWeight={400}
         px={0}
-        display="block"
+        maxW="xs"
+        textAlign="left"
         _hover={{
           opacity: 1,
           color: 'brand.500',
@@ -32,8 +35,8 @@ export const Switcher = ({ locales, currentLocale, onSwitch }: SwitcherPropertie
       >
         {currentLocale.label}
       </MenuButton>
-      <MenuList>
-        <MenuOptionGroup defaultValue={currentLocale.code} type="radio">
+      <MenuList boxShadow="with-stroke.dark" borderWidth={1} borderColor="new-gray.200">
+        <MenuOptionGroup value={currentLocale.code} type="radio">
           {locales.map((locale) => (
             <MenuItemOption
               key={locale.code}

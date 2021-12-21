@@ -1,32 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="" />
+    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(locale-switcher): moves it to inside the user edit sidebar">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/pt-BR.json" beforeDir="false" afterPath="$PROJECT_DIR$/lang/pt-BR.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/Create/Form/form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Create/Form/form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/Create/Form/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Create/Form/messages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/Create/Form/queries.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Create/Form/queries.gql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/Create/Form/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Create/Form/schema.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="ProjectId" id="21HzxvQ14fTxBKHEMx4ZYcOK88r" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
     <option name="sortByType" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Compound.Launch and Debug">
+    <list>
+      <item itemvalue="Compound.Launch and Debug" />
+      <item itemvalue="JavaScript Debug.Debug on Chrome" />
+      <item itemvalue="npm.start:develop" />
+    </list>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="" />
@@ -36,10 +89,68 @@
       <updated>1637613050184</updated>
       <workItem from="1637613051565" duration="213000" />
       <workItem from="1637688362940" duration="66000" />
+      <workItem from="1638988257609" duration="17000" />
+      <workItem from="1638988282091" duration="13000" />
+      <workItem from="1638988306006" duration="2460000" />
+      <workItem from="1638993591334" duration="608000" />
+      <workItem from="1639076680856" duration="494000" />
+      <workItem from="1639077182786" duration="2292000" />
+      <workItem from="1639083791774" duration="96000" />
+      <workItem from="1639083893790" duration="1317000" />
+      <workItem from="1639161899415" duration="8000" />
+      <workItem from="1639509994833" duration="13000" />
+      <workItem from="1639510014678" duration="8000" />
+      <workItem from="1639597837034" duration="1959000" />
+      <workItem from="1639662107416" duration="1818000" />
+      <workItem from="1639666749271" duration="1230000" />
     </task>
+    <task id="LOCAL-00001" summary="chore: updates IDE configs">
+      <created>1638990075855</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1638990075855</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat(base): integrates locale with backend">
+      <created>1639078730819</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1639078730819</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat(locale-switcher): integrates with backend">
+      <created>1639084486370</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1639084486370</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chore: updates IDE configs" />
+    <MESSAGE value="feat(base): integrates locale with backend" />
+    <MESSAGE value="feat(locale-switcher): integrates with backend" />
+    <MESSAGE value="feat(locale-switcher): moves it to inside the user edit sidebar" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(locale-switcher): moves it to inside the user edit sidebar" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

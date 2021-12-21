@@ -12,7 +12,7 @@
       "type": "node",
       "request": "launch",
       "console": "integratedTerminal",
-      "envFile": "${workspaceFolder}/.env.local",
+      "envFile": "${workspaceFolder}/.env",
       "runtimeExecutable": "npm",
       "port": 9229,
       "timeout": 15000,

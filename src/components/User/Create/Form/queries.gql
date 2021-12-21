@@ -5,6 +5,7 @@ mutation CREATE_USER(
   $role: String
   $gender: UserGender!
   $teamID: ID!
+  $locale: String
 ) {
   createUser(
     data: {
@@ -14,9 +15,22 @@ mutation CREATE_USER(
       role: $role
       gender: $gender
       teamID: $teamID
+      locale: $locale
     }
   ) {
     id
     gender
+  }
+}
+
+query GET_USER_LOCALE($userID: ID!) {
+  user(id: $userID) {
+    settings(keys: [LOCALE]) {
+      edges {
+        node {
+          value
+        }
+      }
+    }
   }
 }

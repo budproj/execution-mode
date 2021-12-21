@@ -56,11 +56,11 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
     >
       <RecoilRoot>
         <RecoilDebugObserver />
-        <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
-          <ChakraProvider theme={theme}>
-            <AuthzGatekeeper>
-              <AmplitudeProvider>
-                <AuthzApolloProvider pageProps={pageProps}>
+        <ChakraProvider theme={theme}>
+          <AuthzGatekeeper>
+            <AmplitudeProvider>
+              <AuthzApolloProvider pageProps={pageProps}>
+                <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
                   <MaintenanceGatekeeper>
                     <HotjarProvider />
                     <SmartlookProvider />
@@ -68,11 +68,11 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                     <ProgressBar />
                     <Component {...pageProps} />
                   </MaintenanceGatekeeper>
-                </AuthzApolloProvider>
-              </AmplitudeProvider>
-            </AuthzGatekeeper>
-          </ChakraProvider>
-        </RecoilIntlProvider>
+                </RecoilIntlProvider>
+              </AuthzApolloProvider>
+            </AmplitudeProvider>
+          </AuthzGatekeeper>
+        </ChakraProvider>
       </RecoilRoot>
     </Auth0Provider>
   )

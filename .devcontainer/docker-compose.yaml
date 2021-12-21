@@ -6,8 +6,6 @@ services:
     command: tail -f /dev/null
     user: 1000:1000
     env_file:
-      - ../.env.local
-      - ../.env.development
       - ../.env
     volumes:
       - ..:/workspace:cached
