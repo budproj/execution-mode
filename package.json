@@ -37,7 +37,7 @@
     "waypoint:build": "waypoint build -var=\"GITHUB_TOKEN=$GITHUB_TOKEN\"",
     "waypoint:deploy": "waypoint deploy",
     "waypoint:up": "waypoint up",
-    "prepare": "[ \"$NODE_ENV\" = production ] && exit 0; husky install"
+    "prepare": "husky install"
   },
   "author": "delucca <delucca@pm.me>",
   "license": "Apache-2.0",
