@@ -14,3 +14,13 @@ node_modules
 # Deployment
 # --------------------------------------------------------------------------------------------------
 .waypoint
+.next
+compiled-lang
+dist
+
+# Dockerfile
+Dockerfile
+
+
+# Git
+.git

@@ -1,10 +1,19 @@
 project = "execution-mode"
 
+variable "GITHUB_TOKEN" {
+  type = string
+  default = ""
+}
+
 app "app" {
   build {
-    use "docker" {}
+    use "docker" {
+      build_args = {
+        "GITHUB_TOKEN" = var.GITHUB_TOKEN
+      }
+    }
 
-    registry {
+  registry {
       use "aws-ecr" {
         region = "sa-east-1"
         repository = "execution-mode"
