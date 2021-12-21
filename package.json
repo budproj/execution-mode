@@ -4,7 +4,6 @@
   "description": "Web interface for Bud's execution mode",
   "main": "src/server/index.js",
   "scripts": {
-    "postinstall": "sh ./bin/postinstall",
     "start": "NODE_ENV=production node ./dist/index.js",
     "start:dev": "npm-run-all -s intl:refresh start:watch",
     "start:debug": "NODE_OPTIONS='--inspect' npm run start:dev",
