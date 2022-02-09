@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { HStack, Checkbox, Skeleton, Box, EditablePreviewProps } from '@chakra-ui/react'
+import { HStack, Checkbox, Skeleton, Box, EditablePreviewProps, VStack } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -124,11 +124,7 @@ export const KeyResultCheckMark = ({
 
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
-      <HStack
-        alignItems="flex-start"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <HStack alignItems="center" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Checkbox
             isChecked={isChecked}
@@ -136,20 +132,25 @@ export const KeyResultCheckMark = ({
             onChange={handleChange}
           />
         </Box>
-        <EditableInputField
-          autoFocus={isDraft}
-          isWaiting={isWaiting}
-          value={node?.description}
-          isLoaded={isLoaded}
-          startWithEditView={isDraft}
-          isDisabled={!canUpdate}
-          previewProperties={isChecked ? checkedProperties : undefined}
-          onSubmit={handleNewCheckMarkDescription}
-          onCancel={handleCancelDescription}
-          onPressedEnter={handleEnterKey}
-          onStartEdit={handleStartEdit}
-          onStopEdit={handleStopEdit}
-        />
+        <VStack spacing={0} align="stretch" w="full">
+          <EditableInputField
+            autoFocus={isDraft}
+            isWaiting={isWaiting}
+            value={node?.description}
+            isLoaded={isLoaded}
+            startWithEditView={isDraft}
+            isDisabled={!canUpdate}
+            previewProperties={isChecked ? checkedProperties : undefined}
+            onSubmit={handleNewCheckMarkDescription}
+            onCancel={handleCancelDescription}
+            onPressedEnter={handleEnterKey}
+            onStartEdit={handleStartEdit}
+            onStopEdit={handleStopEdit}
+          />
+          <Box color="new-gray.600" display={isEditing ? 'none' : undefined}>
+            {node?.assignedUser?.fullName}
+          </Box>
+        </VStack>
         <DeleteCheckMarkButton
           buttonRef={removeCheckmarkButton}
           checkMarkID={node?.id}
