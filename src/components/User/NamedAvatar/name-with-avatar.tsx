@@ -20,6 +20,7 @@ type NameWithAvatarProperties = {
   isLoaded: boolean
   isHovering?: boolean
   isEditing?: boolean
+  showName?: boolean
   hasSubtitle?: boolean
   subtitle?: string
   onMouseEnter?: () => void
@@ -39,6 +40,7 @@ export const NameWithAvatar = forwardRef(
       isHovering,
       isEditing,
       avatarSize,
+      showName = true,
       hasSubtitle,
       onMouseEnter,
       onMouseLeave,
@@ -63,8 +65,8 @@ export const NameWithAvatar = forwardRef(
         <SkeletonCircle isLoaded={isLoaded} w={avatarSize} h={avatarSize} fadeDuration={0}>
           {isEditable && (isHovering || isEditing) ? (
             <Flex
-              w={12}
-              h={12}
+              w={avatarSize}
+              h={avatarSize}
               justifyContent="center"
               alignItems="center"
               borderColor="brand.500"
@@ -80,11 +82,13 @@ export const NameWithAvatar = forwardRef(
         </SkeletonCircle>
 
         <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
-          <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
-            <Text fontSize="lg" color={isHovering || isEditing ? 'brand.500' : nameColor}>
-              {user?.fullName}
-            </Text>
-          </Skeleton>
+          {showName && (
+            <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
+              <Text fontSize="lg" color={isHovering || isEditing ? 'brand.500' : nameColor}>
+                {user?.fullName}
+              </Text>
+            </Skeleton>
+          )}
 
           {hasSubtitle && (
             <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>

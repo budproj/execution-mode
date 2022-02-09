@@ -11,6 +11,7 @@ import {
 import { GraphQLEffect } from 'src/components/types'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
+import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
 import { DeleteCheckMarkButton } from './ActionButtons/delete-checkmark'
 import queries from './queries.gql'
 
@@ -158,6 +159,7 @@ export const KeyResultCheckMark = ({
           canDelete={canDelete}
           onDelete={onUpdate}
         />
+        <ChangeAssignedCheckMarkButton assignedUserId={node?.assignedUser?.id} />
       </HStack>
     </Skeleton>
   )
