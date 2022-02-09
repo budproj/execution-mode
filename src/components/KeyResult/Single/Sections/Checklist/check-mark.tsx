@@ -129,7 +129,7 @@ export const KeyResultCheckMark = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <Box py={1}>
+        <Box py={1} display={isEditing ? 'none' : undefined}>
           <Checkbox
             isChecked={isChecked}
             isDisabled={isWaiting || !canUpdate}

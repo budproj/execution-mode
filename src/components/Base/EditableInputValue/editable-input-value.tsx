@@ -170,7 +170,7 @@ const EditableInputValue = ({
           {({ isEditing }) => (
             <Stack alignItems="flex-start" justifyItems="center" spacing={0}>
               <HStack w="full">
-                <Box>
+                <Box w="full">
                   <EditablePreview
                     fontSize="lg"
                     color={isHovering && !isLocked ? 'brand.500' : defaultColor}
