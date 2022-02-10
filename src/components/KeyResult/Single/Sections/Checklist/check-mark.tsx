@@ -37,7 +37,10 @@ export const KeyResultCheckMark = ({
   checklistLength,
   onCreate,
 }: KeyResultCheckMarkProperties) => {
-  const { dispatch } = useEvent(EventType.TOGGLED_KEY_RESULT_CHECK_MARK)
+  const { dispatch: dispatchToggleEvent } = useEvent(EventType.TOGGLED_KEY_RESULT_CHECK_MARK)
+  const { dispatch: dispatchUpdateTitleEvent } = useEvent(
+    EventType.UPDATED_KEY_RESULT_CHECK_MARK_TITLE,
+  )
   const [isHovering, setIsHovering] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
@@ -70,7 +73,7 @@ export const KeyResultCheckMark = ({
   const canDelete = node?.policy?.delete === GraphQLEffect.ALLOW
 
   const handleChange = async () => {
-    dispatch({
+    dispatchToggleEvent({
       keyResultID,
       checkmarkID: node?.id,
       previousState: isChecked
@@ -93,6 +96,13 @@ export const KeyResultCheckMark = ({
           id: node?.id,
           description,
         },
+      })
+
+    if (description !== node?.description)
+      dispatchUpdateTitleEvent({
+        keyResultID,
+        checkmarkID: node?.id,
+        newTitleLength: description.length,
       })
   }
 
