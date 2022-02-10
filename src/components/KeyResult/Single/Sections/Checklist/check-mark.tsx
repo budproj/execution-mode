@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { HStack, Checkbox, Skeleton, Box, EditablePreviewProps, VStack } from '@chakra-ui/react'
+import { Box, Checkbox, EditablePreviewProps, HStack, Skeleton, VStack } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -11,11 +11,15 @@ import {
 import { GraphQLEffect } from 'src/components/types'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
+import { EventType } from '../../../../../state/hooks/useEvent/event-type'
+import { useEvent } from '../../../../../state/hooks/useEvent/hook'
+
 import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
 import { DeleteCheckMarkButton } from './ActionButtons/delete-checkmark'
 import queries from './queries.gql'
 
 interface KeyResultCheckMarkProperties {
+  keyResultID?: string
   draftCheckMarks?: string[]
   node?: Partial<KeyResultCheckMarkType>
   onUpdate?: () => void
@@ -25,6 +29,7 @@ interface KeyResultCheckMarkProperties {
 }
 
 export const KeyResultCheckMark = ({
+  keyResultID,
   node,
   onUpdate,
   draftCheckMarks,
@@ -32,6 +37,7 @@ export const KeyResultCheckMark = ({
   checklistLength,
   onCreate,
 }: KeyResultCheckMarkProperties) => {
+  const { dispatch } = useEvent(EventType.TOGGLED_KEY_RESULT_CHECK_MARK)
   const [isHovering, setIsHovering] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
@@ -64,6 +70,15 @@ export const KeyResultCheckMark = ({
   const canDelete = node?.policy?.delete === GraphQLEffect.ALLOW
 
   const handleChange = async () => {
+    dispatch({
+      keyResultID,
+      checkmarkID: node?.id,
+      previousState: isChecked
+        ? KeyResultCheckMarkState.CHECKED
+        : KeyResultCheckMarkState.UNCHECKED,
+      newState: isChecked ? KeyResultCheckMarkState.UNCHECKED : KeyResultCheckMarkState.CHECKED,
+    })
+
     await toggleCheckMark()
   }
 

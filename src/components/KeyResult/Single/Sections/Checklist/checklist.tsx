@@ -34,6 +34,7 @@ export const KeyResultChecklist = ({
         <KeyResultCheckMark
           key={node.id}
           node={node}
+          keyResultID={keyResultID}
           draftCheckMarks={draftCheckMarks}
           index={index}
           checklistLength={nodes.length}
@@ -43,7 +44,6 @@ export const KeyResultChecklist = ({
       ))}
       {canCreate && nodes.length > 0 && nodes.length < 16 && (
         <CreateCheckMarkButton
-          keyResultID={keyResultID}
           createButtonReference={createButtonReference}
           onCreate={onCreateCheckmark}
         />

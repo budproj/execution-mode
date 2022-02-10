@@ -4,4 +4,5 @@ export enum EventType {
   KEY_RESULT_CREATE_CHECKLIST = 'KeyResultCreateCheckList',
   OPENED_KEY_RESULT_DRAWER = 'OpenedKeyResultDrawer',
   OPENED_KEY_RESULT_CHECKLIST = 'OpenedKeyResultChecklist',
+  TOGGLED_KEY_RESULT_CHECK_MARK = 'ToggledKeyResultCheckMark',
 }
