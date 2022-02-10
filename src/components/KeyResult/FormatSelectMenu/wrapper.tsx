@@ -1,5 +1,4 @@
-import { Text } from '@chakra-ui/layout'
-import { Heading, MenuItemOption } from '@chakra-ui/react'
+import { Text, Heading, MenuItemOption } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 

@@ -1,5 +1,4 @@
-import { Button } from '@chakra-ui/button'
-import { Stack } from '@chakra-ui/layout'
+import { Button, Stack } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'

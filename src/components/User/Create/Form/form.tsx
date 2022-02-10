@@ -1,10 +1,14 @@
 import { useLazyQuery } from '@apollo/client'
-import { Button } from '@chakra-ui/button'
-import { FormControl, FormLabel } from '@chakra-ui/form-control'
-import { Input } from '@chakra-ui/input'
-import { HStack, Stack } from '@chakra-ui/layout'
-import { MenuItemOption } from '@chakra-ui/menu'
-import { Spinner } from '@chakra-ui/react'
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  HStack,
+  Stack,
+  MenuItemOption,
+  Spinner,
+} from '@chakra-ui/react'
 import { Field, Form, Formik, FormikHelpers, useFormikContext } from 'formik'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'

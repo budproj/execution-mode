@@ -1,5 +1,4 @@
-import { Box, Stack } from '@chakra-ui/layout'
-import { BoxProps } from '@chakra-ui/react'
+import { Box, Stack, BoxProps } from '@chakra-ui/react'
 import React from 'react'
 
 import { TeamSectionHeading } from './SectionHeading/wrapper'

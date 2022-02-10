@@ -1,5 +1,4 @@
-import { Box } from '@chakra-ui/layout'
-import { MenuProps } from '@chakra-ui/react'
+import { Box, MenuProps } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 import SelectMenu from '../../Base/SelectMenu'

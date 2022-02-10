@@ -1,5 +1,4 @@
-import { Flex, Stack } from '@chakra-ui/layout'
-import { Drawer, DrawerContent, DrawerOverlay, useToast } from '@chakra-ui/react'
+import { Flex, Stack, Drawer, DrawerContent, DrawerOverlay, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState } from 'recoil'

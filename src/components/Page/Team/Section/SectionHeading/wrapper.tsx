@@ -1,5 +1,4 @@
-import { HeadingProps } from '@chakra-ui/layout'
-import { Heading } from '@chakra-ui/react'
+import { HeadingProps, Heading } from '@chakra-ui/react'
 import React from 'react'
 
 export const TeamSectionHeading = (properties: HeadingProps) => (

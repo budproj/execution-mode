@@ -1,4 +1,4 @@
-import { ButtonGroup, ButtonGroupProps } from '@chakra-ui/button'
+import { ButtonGroup, ButtonGroupProps } from '@chakra-ui/react'
 import xor from 'lodash/xor'
 import React, { useState } from 'react'
 

@@ -1,5 +1,4 @@
-import { Box, Stack } from '@chakra-ui/layout'
-import { Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/popover'
+import { Box, Stack, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'

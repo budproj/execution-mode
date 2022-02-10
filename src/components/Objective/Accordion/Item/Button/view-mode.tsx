@@ -1,5 +1,4 @@
-import { Stack } from '@chakra-ui/layout'
-import { AccordionIcon, Heading, Skeleton } from '@chakra-ui/react'
+import { Stack, AccordionIcon, Heading, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 

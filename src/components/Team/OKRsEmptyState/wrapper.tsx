@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Flex, Stack } from '@chakra-ui/layout'
-import { Heading, useToast } from '@chakra-ui/react'
+import { Flex, Stack, Heading, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'

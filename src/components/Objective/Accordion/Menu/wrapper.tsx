@@ -1,5 +1,4 @@
-import { Menu, MenuButton, MenuList } from '@chakra-ui/menu'
-import { Skeleton } from '@chakra-ui/react'
+import { Menu, MenuButton, MenuList, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'

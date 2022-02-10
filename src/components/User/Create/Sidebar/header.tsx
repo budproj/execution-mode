@@ -1,5 +1,4 @@
-import { Heading } from '@chakra-ui/layout'
-import { DrawerHeader } from '@chakra-ui/modal'
+import { Heading, DrawerHeader } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 

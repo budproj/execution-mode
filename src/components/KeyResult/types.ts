@@ -64,6 +64,8 @@ export interface KeyResultCheckMark extends GraphQLNode {
   updatedAt: string
   keyResultId: string
   userId: string
+  assignedUserId: string
+  assignedUser: User
 }
 
 export enum KeyResultCheckMarkState {

@@ -1,7 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Button } from '@chakra-ui/button'
-import { Spinner } from '@chakra-ui/spinner'
-import { useToast } from '@chakra-ui/toast'
+import { Button, Spinner, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'

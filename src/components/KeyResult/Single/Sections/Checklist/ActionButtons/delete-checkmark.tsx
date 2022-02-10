@@ -1,10 +1,10 @@
 import { useMutation } from '@apollo/client'
 import { IconButton } from '@chakra-ui/react'
-import React, { Ref } from 'react'
+import React, { Ref, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import TimesIcon from 'src/components/Icon/Times'
+import TrashIcon from 'src/components/Icon/Trash'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
 import messages from './messages'
@@ -41,26 +41,31 @@ export const DeleteCheckMarkButton = ({
     if (refresh) refresh()
   }
 
+  const [isMouseOver, setIsMouseOver] = useState<boolean>(false)
+  const onMouseEnter = () => setIsMouseOver(true)
+  const onMouseLeave = () => setIsMouseOver(false)
+
   return canDelete ? (
     <IconButton
       ref={buttonRef}
       aria-label={intl.formatMessage(messages.removeIconDescription)}
-      bg="new-gray.600"
-      borderRadius="full"
-      h="auto"
-      minW="auto"
-      p={1}
-      _hover={{ bg: 'new-gray.800' }}
       opacity={isVisible ? 1 : 0}
       icon={
-        <TimesIcon
-          desc={intl.formatMessage(messages.removeIconDescription)}
-          fill="white"
-          stroke="white"
-          fontSize="xs"
-        />
+        isMouseOver ? (
+          <TrashIcon
+            h="2em"
+            w="2em"
+            color="white"
+            circleColor="#FF616A"
+            desc={intl.formatMessage(messages.removeIconDescription)}
+          />
+        ) : (
+          <TrashIcon h="2em" w="2em" desc={intl.formatMessage(messages.removeIconDescription)} />
+        )
       }
       onClick={handleDelete}
+      onMouseLeave={onMouseLeave}
+      onMouseEnter={onMouseEnter}
     />
   ) : // eslint-disable-next-line unicorn/no-null
   null

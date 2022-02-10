@@ -14,3 +14,9 @@ mutation DELETE_CHECK_MARK($id: ID!) {
     affected
   }
 }
+
+mutation UPDATE_ASSIGNED_CHECKMARK($checkMarkId: ID!, $assignedUserId: ID!) {
+  updateCheckMarkAssignee(id: $checkMarkId, data: { assignedUserId: $assignedUserId }) {
+    id
+  }
+}

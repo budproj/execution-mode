@@ -1,6 +1,4 @@
-import { Input } from '@chakra-ui/input'
-import { Box, Stack } from '@chakra-ui/layout'
-import { FormLabel } from '@chakra-ui/react'
+import { Input, Box, Stack, FormLabel } from '@chakra-ui/react'
 import React, { ChangeEvent } from 'react'
 import { useIntl } from 'react-intl'
 

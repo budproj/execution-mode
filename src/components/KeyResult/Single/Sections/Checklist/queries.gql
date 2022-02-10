@@ -15,6 +15,10 @@ query GET_CHECKLIST_OF_KEY_RESULT($id: ID!) {
           id
           description
           state
+          assignedUser {
+            id
+            fullName
+          }
           policy {
             update
             delete

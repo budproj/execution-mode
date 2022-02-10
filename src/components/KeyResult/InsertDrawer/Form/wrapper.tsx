@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Stack } from '@chakra-ui/layout'
-import { FormControl } from '@chakra-ui/react'
+import { Stack, FormControl } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'

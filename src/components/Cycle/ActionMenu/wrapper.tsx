@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
-import { Menu, MenuButton, MenuList } from '@chakra-ui/menu'
+import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 

@@ -35,6 +35,7 @@ export interface NamedAvatarProperties {
   nameColor?: TextProps['color']
   date?: Date
   showCard?: boolean
+  showName?: boolean
   onClick?: () => void
   cardPortalReference?: RefObject<HTMLDivElement>
 }
@@ -52,6 +53,7 @@ const NamedAvatar = ({
   horizontalGap,
   date,
   showCard,
+  showName = true,
   nameColor,
   cardPortalReference,
 }: NamedAvatarProperties): ReactElement => {
@@ -108,6 +110,7 @@ const NamedAvatar = ({
           nameColor={nameColor}
           horizontalGap={horizontalGap}
           avatarSize={avatarSize}
+          showName={showName}
           isEditable={canEdit}
           isHoverable={canHover}
           isLoaded={isLoaded}
@@ -134,6 +137,7 @@ const NamedAvatar = ({
       nameColor={nameColor}
       horizontalGap={horizontalGap}
       avatarSize={avatarSize}
+      showName={showName}
       isEditable={canEdit}
       isHoverable={canHover}
       isLoaded={isLoaded}

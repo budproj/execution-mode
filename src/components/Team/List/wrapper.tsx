@@ -1,5 +1,4 @@
-import { Stack } from '@chakra-ui/layout'
-import { Divider } from '@chakra-ui/react'
+import { Stack, Divider } from '@chakra-ui/react'
 import { Scrollbars } from 'rc-scrollbars'
 import React from 'react'
 

@@ -1,6 +1,14 @@
 import { useLazyQuery, useMutation } from '@apollo/client'
-import { Stack } from '@chakra-ui/layout'
-import { Button, Menu, MenuButton, MenuItem, MenuList, Tooltip, useToast } from '@chakra-ui/react'
+import {
+  Stack,
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Tooltip,
+  useToast,
+} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'

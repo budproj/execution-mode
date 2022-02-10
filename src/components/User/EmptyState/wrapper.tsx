@@ -1,4 +1,4 @@
-import { FlexProps } from '@chakra-ui/layout'
+import { FlexProps } from '@chakra-ui/react'
 import { MessageDescriptor } from '@formatjs/intl'
 import React from 'react'
 

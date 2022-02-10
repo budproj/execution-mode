@@ -1,4 +1,4 @@
-import { DrawerBody, DrawerContent } from '@chakra-ui/modal'
+import { DrawerBody, DrawerContent } from '@chakra-ui/react'
 import React from 'react'
 
 import { CreateUserForm } from '../Form'

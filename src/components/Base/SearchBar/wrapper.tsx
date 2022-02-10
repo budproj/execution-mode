@@ -1,4 +1,4 @@
-import { Input, InputGroup, InputLeftElement } from '@chakra-ui/input'
+import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 import React, { ChangeEvent } from 'react'
 import { useIntl } from 'react-intl'
 
