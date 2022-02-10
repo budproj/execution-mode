@@ -19,11 +19,15 @@ import {
 import { GraphQLEffect } from 'src/components/types'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
+import { EventType } from '../../../../../state/hooks/useEvent/event-type'
+import { useEvent } from '../../../../../state/hooks/useEvent/hook'
+
 import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
 import { DeleteCheckMarkButton } from './ActionButtons/delete-checkmark'
 import queries from './queries.gql'
 
 interface KeyResultCheckMarkProperties {
+  keyResultID?: string
   draftCheckMarks?: string[]
   node?: Partial<KeyResultCheckMarkType>
   onUpdate?: () => void
@@ -33,6 +37,7 @@ interface KeyResultCheckMarkProperties {
 }
 
 export const KeyResultCheckMark = ({
+  keyResultID,
   node,
   onUpdate,
   draftCheckMarks,
@@ -40,6 +45,10 @@ export const KeyResultCheckMark = ({
   checklistLength,
   onCreate,
 }: KeyResultCheckMarkProperties) => {
+  const { dispatch: dispatchToggleEvent } = useEvent(EventType.TOGGLED_KEY_RESULT_CHECK_MARK)
+  const { dispatch: dispatchUpdateTitleEvent } = useEvent(
+    EventType.UPDATED_KEY_RESULT_CHECK_MARK_TITLE,
+  )
   const [isHovering, setIsHovering] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
@@ -72,6 +81,15 @@ export const KeyResultCheckMark = ({
   const canDelete = node?.policy?.delete === GraphQLEffect.ALLOW
 
   const handleChange = async () => {
+    dispatchToggleEvent({
+      keyResultID,
+      checkMarkID: node?.id,
+      previousState: isChecked
+        ? KeyResultCheckMarkState.CHECKED
+        : KeyResultCheckMarkState.UNCHECKED,
+      newState: isChecked ? KeyResultCheckMarkState.UNCHECKED : KeyResultCheckMarkState.CHECKED,
+    })
+
     await toggleCheckMark()
   }
 
@@ -86,6 +104,13 @@ export const KeyResultCheckMark = ({
           id: node?.id,
           description,
         },
+      })
+
+    if (description !== node?.description)
+      dispatchUpdateTitleEvent({
+        keyResultID,
+        checkMarkID: node?.id,
+        newTitleLength: description.length,
       })
   }
 
@@ -163,12 +188,14 @@ export const KeyResultCheckMark = ({
         <Flex gap={2} alignItems="center" display={isEditing ? 'none' : undefined}>
           <DeleteCheckMarkButton
             buttonRef={removeCheckmarkButton}
+            keyResultID={keyResultID}
             checkMarkID={node?.id}
             isVisible={isHovering && !isEditing}
             canDelete={canDelete}
             onDelete={onUpdate}
           />
           <ChangeAssignedCheckMarkButton
+            keyResultID={keyResultID}
             checkMarkId={node?.id}
             assignedUserId={node?.assignedUser?.id}
             canUpdate={canUpdate}

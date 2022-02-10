@@ -7,10 +7,14 @@ import { useSetRecoilState } from 'recoil'
 import TrashIcon from 'src/components/Icon/Trash'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
+import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
+import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
+
 import messages from './messages'
 import queries from './queries.gql'
 
 interface DeleteCheckMarkButtonProperties {
+  keyResultID?: string
   checkMarkID?: string
   onDelete?: () => void
   isVisible?: boolean
@@ -19,6 +23,7 @@ interface DeleteCheckMarkButtonProperties {
 }
 
 export const DeleteCheckMarkButton = ({
+  keyResultID,
   checkMarkID,
   onDelete: refresh,
   isVisible,
@@ -26,6 +31,8 @@ export const DeleteCheckMarkButton = ({
   buttonRef,
 }: DeleteCheckMarkButtonProperties) => {
   isVisible ??= true
+
+  const { dispatch } = useEvent(EventType.DELETED_KEY_RESULT_CHECK_MARK)
 
   const intl = useIntl()
   const setCheckMarkIsBeingRemoved = useSetRecoilState(checkMarkIsBeingRemovedAtom(checkMarkID))
@@ -38,6 +45,12 @@ export const DeleteCheckMarkButton = ({
   const handleDelete = async () => {
     setCheckMarkIsBeingRemoved(true)
     await deleteCheckmark()
+
+    dispatch({
+      keyResultID,
+      checkMarkID,
+    })
+
     if (refresh) refresh()
   }
 
