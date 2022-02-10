@@ -153,21 +153,21 @@ const colors = {
   },
 }
 
-const theme = extendTheme({
+const theme = extendTheme((theme) => ({
   colors,
 
   styles: {
-    global: (properties) => ({
+    global: {
       ':root': {
         fontSize: '14px',
       },
 
-      [`@media (min-width: ${properties.theme.breakpoints[5] as string})`]: {
+      [`@media (min-width: ${theme.breakpoints[5] as string})`]: {
         ':root': {
           fontSize: '16px',
         },
       },
-    }),
+    },
   },
 
   components: {
@@ -214,6 +214,6 @@ const theme = extendTheme({
   fontSizes: {
     '2xs': '0.625rem',
   },
-})
+}))
 
 export default theme
