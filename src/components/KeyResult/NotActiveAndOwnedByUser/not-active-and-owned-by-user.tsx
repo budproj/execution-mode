@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
-import { Stack } from '@chakra-ui/layout'
+import { Stack } from '@chakra-ui/react'
 import flatten from 'lodash/flatten'
 import uniqBy from 'lodash/uniqBy'
 import React, { useEffect } from 'react'

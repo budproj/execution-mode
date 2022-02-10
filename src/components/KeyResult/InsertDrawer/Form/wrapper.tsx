@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Stack } from '@chakra-ui/layout'
+import { Stack } from '@chakra-ui/react'
 import { FormControl } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import React, { useEffect, useState } from 'react'

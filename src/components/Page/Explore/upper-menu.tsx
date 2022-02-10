@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client'
-import { Button } from '@chakra-ui/button'
-import { Box, Stack } from '@chakra-ui/layout'
+import { Button } from '@chakra-ui/react'
+import { Box, Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 

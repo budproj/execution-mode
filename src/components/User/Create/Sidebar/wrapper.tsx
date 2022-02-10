@@ -1,4 +1,4 @@
-import { Drawer } from '@chakra-ui/modal'
+import { Drawer } from '@chakra-ui/react'
 import React from 'react'
 
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'

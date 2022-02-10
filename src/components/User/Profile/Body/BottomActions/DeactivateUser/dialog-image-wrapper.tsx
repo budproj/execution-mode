@@ -1,6 +1,6 @@
-import { Avatar } from '@chakra-ui/avatar'
-import { ImageProps } from '@chakra-ui/image'
-import { ComponentWithAs } from '@chakra-ui/system'
+import { Avatar } from '@chakra-ui/react'
+import { ImageProps } from '@chakra-ui/react'
+import { ComponentWithAs } from '@chakra-ui/react'
 import React from 'react'
 
 export const DialogImageWrapper: ComponentWithAs<'img', ImageProps> = ({ src }: ImageProps) => {

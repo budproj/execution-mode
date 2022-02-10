@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/layout'
+import { Stack } from '@chakra-ui/react'
 import React, { useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 

@@ -1,4 +1,4 @@
-import { Stack, Text } from '@chakra-ui/layout'
+import { Stack, Text } from '@chakra-ui/react'
 import { Box } from '@chakra-ui/react'
 import { Scrollbars } from 'rc-scrollbars'
 import React, { ReactElement, useRef } from 'react'

@@ -1,4 +1,4 @@
-import { SkeletonProps } from '@chakra-ui/skeleton'
+import { SkeletonProps } from '@chakra-ui/react'
 import deepmerge from 'deepmerge'
 import random from 'lodash/random'
 

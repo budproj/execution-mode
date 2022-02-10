@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/layout'
+import { Stack } from '@chakra-ui/react'
 import React from 'react'
 
 import { DeactivateUser } from './DeactivateUser/deactivate-user'

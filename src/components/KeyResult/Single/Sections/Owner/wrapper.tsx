@@ -1,4 +1,4 @@
-import { Popover, PopoverTrigger, PopoverContent } from '@chakra-ui/popover'
+import { Popover, PopoverTrigger, PopoverContent } from '@chakra-ui/react'
 import { Box, Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'

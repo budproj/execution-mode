@@ -1,5 +1,5 @@
-import { Button } from '@chakra-ui/button'
-import { Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup } from '@chakra-ui/menu'
+import { Button } from '@chakra-ui/react'
+import { Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup } from '@chakra-ui/react'
 import React from 'react'
 
 export type Locale = {

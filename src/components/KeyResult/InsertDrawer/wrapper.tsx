@@ -1,4 +1,4 @@
-import { Flex, Stack } from '@chakra-ui/layout'
+import { Flex, Stack } from '@chakra-ui/react'
 import { Drawer, DrawerContent, DrawerOverlay, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'

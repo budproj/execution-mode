@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Stack } from '@chakra-ui/layout'
+import { Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 

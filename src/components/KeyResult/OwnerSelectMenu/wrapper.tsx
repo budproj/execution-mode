@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/layout'
+import { Box } from '@chakra-ui/react'
 import { MenuProps } from '@chakra-ui/react'
 import React, { useState } from 'react'
 

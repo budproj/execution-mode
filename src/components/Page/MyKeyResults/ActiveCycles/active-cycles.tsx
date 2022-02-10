@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Box } from '@chakra-ui/layout'
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'

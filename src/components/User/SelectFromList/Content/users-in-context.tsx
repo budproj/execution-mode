@@ -1,4 +1,4 @@
-import { Text } from '@chakra-ui/layout'
+import { Text } from '@chakra-ui/react'
 import React, { useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 

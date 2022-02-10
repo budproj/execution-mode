@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { useToast } from '@chakra-ui/toast'
+import { useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 

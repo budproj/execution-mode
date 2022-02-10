@@ -1,4 +1,4 @@
-import { PopoverProps } from '@chakra-ui/popover'
+import { PopoverProps } from '@chakra-ui/react'
 
 import tooltipTheme from './tooltip'
 

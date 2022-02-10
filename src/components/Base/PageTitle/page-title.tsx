@@ -1,4 +1,4 @@
-import { HeadingProps } from '@chakra-ui/layout'
+import { HeadingProps } from '@chakra-ui/react'
 import { Heading, Skeleton } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 

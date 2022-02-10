@@ -1,6 +1,6 @@
-import { Stack } from '@chakra-ui/layout'
+import { Stack } from '@chakra-ui/react'
 import { IconButton, Skeleton } from '@chakra-ui/react'
-import { Collapse } from '@chakra-ui/transition'
+import { Collapse } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
