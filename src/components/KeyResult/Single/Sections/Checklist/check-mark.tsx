@@ -186,6 +186,7 @@ export const KeyResultCheckMark = ({
           onDelete={onUpdate}
         />
         <ChangeAssignedCheckMarkButton
+          keyResultID={keyResultID}
           checkMarkId={node?.id}
           assignedUserId={node?.assignedUser?.id}
           canUpdate={canUpdate}

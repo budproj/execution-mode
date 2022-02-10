@@ -7,4 +7,5 @@ export enum EventType {
   TOGGLED_KEY_RESULT_CHECK_MARK = 'ToggledKeyResultCheckMark',
   UPDATED_KEY_RESULT_CHECK_MARK_TITLE = 'UpdatedKeyResultCheckMarkTitle',
   DELETED_KEY_RESULT_CHECK_MARK = 'DeletedKeyResultCheckMark',
+  UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE = 'UpdatedKeyResultCheckMarkAssignee',
 }
