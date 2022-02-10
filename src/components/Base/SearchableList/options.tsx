@@ -89,12 +89,10 @@ const SearchableListSingleOptionGroup = ({ icon, options }: OptionGroup) => {
           <MenuItem
             key={option.label}
             color="gray.500"
-            colorScheme="gray"
             p={2}
             fontWeight={400}
             w="100%"
             justifyContent="flex-start"
-            variant="ghost"
             borderWidth={0}
             _active={{
               color: 'brand.500',

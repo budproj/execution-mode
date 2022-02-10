@@ -70,7 +70,6 @@ export const SupportTeamField = ({
   return (
     <Popover
       isLazy
-      enabled={hasPermitionToUpdate}
       placement="bottom-start"
       isOpen={isOpen}
       size="md"

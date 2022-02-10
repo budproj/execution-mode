@@ -209,7 +209,7 @@ const AddOKROnRelatedCycleOption = ({
   const [cadence] = useCadence(cycle.cadence)
 
   return (
-    <MenuItem enabled={isEnabled} onClick={() => isEnabled && onCreateOKR(cycle.id)}>
+    <MenuItem disabled={!isEnabled} onClick={() => isEnabled && onCreateOKR(cycle.id)}>
       {intl
         .formatMessage(messages.createOKRInRelatedCycleOption, {
           cadence: cadence.prefix?.toLowerCase(),

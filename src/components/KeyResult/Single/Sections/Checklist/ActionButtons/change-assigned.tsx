@@ -11,7 +11,7 @@ interface ChangeAssignedCheckMarkButtonProperties {
   checkMarkId?: string
   assignedUserId?: string
   canUpdate?: boolean
-  onUpdate: () => void
+  onUpdate?: () => void
 }
 
 export const ChangeAssignedCheckMarkButton = ({
@@ -34,7 +34,7 @@ export const ChangeAssignedCheckMarkButton = ({
       },
     })
 
-    onUpdate()
+    if (onUpdate) onUpdate()
 
     onClose()
   }

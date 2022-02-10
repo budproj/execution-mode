@@ -137,7 +137,7 @@ export const UserProfileBodyPersonalInformations = ({
           <LocaleSwitcher userID={userID} />
         </Stack>
 
-        <Stack direciton="column" spacing={2}>
+        <Stack direction="column" spacing={2}>
           <FormLabel fontSize="md" m={0}>
             {intl.formatMessage(messages.teamsFieldLabel)}
           </FormLabel>
