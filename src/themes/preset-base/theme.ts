@@ -3,22 +3,22 @@ import { extendTheme } from '@chakra-ui/react'
 import tokens from 'src/themes/tokens'
 
 import {
-  Button,
-  Skeleton,
-  Tooltip,
-  FormLabel,
-  Input,
-  Popover,
-  Textarea,
-  Menu,
-  Modal,
   Alert,
   Avatar,
-  Editable,
-  Tabs,
-  Drawer,
-  Link,
+  Button,
   Checkbox,
+  Drawer,
+  Editable,
+  FormLabel,
+  Input,
+  Link,
+  Menu,
+  Modal,
+  Popover,
+  Skeleton,
+  Tabs,
+  Textarea,
+  Tooltip,
 } from './components'
 
 const colors = {
@@ -157,12 +157,12 @@ const theme = extendTheme({
   colors,
 
   styles: {
-    global: (properties: { theme: { breakpoints: string[] } }) => ({
+    global: (properties) => ({
       ':root': {
         fontSize: '14px',
       },
 
-      [`@media (min-width: ${properties.theme.breakpoints[5]})`]: {
+      [`@media (min-width: ${properties.theme.breakpoints[5] as string})`]: {
         ':root': {
           fontSize: '16px',
         },

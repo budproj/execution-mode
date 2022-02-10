@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds deleted check mark event">
-      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/updated-key-result-check-mark-assignee.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/change-assigned.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/change-assigned.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/check-mark.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/check-mark.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/events/deleted-key-result-check-mark.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/deleted-key-result-check-mark.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/events/opened-key-result-checklist.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/opened-key-result-checklist.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/events/opened-key-result-drawer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/opened-key-result-drawer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/events/toggled-key-result-check-mark.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/toggled-key-result-check-mark.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/events/updated-key-result-check-mark-assignee.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/updated-key-result-check-mark-assignee.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/events/updated-key-result-check-mark-title.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/updated-key-result-check-mark-title.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/hook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/hook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/themes/preset-base/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/themes/preset-base/theme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +56,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/state/hooks/useEvent/events" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -105,6 +109,7 @@
       <workItem from="1639666749271" duration="1230000" />
       <workItem from="1644518303989" duration="5000" />
       <workItem from="1644518322619" duration="4924000" />
+      <workItem from="1644524146684" duration="370000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>
