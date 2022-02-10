@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(locale-switcher): moves it to inside the user edit sidebar">
-      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/opened-key-result-drawer.ts" afterDir="false" />
+    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds open sidebar event">
+      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/opened-key-result-checklist.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Drawer/drawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Drawer/drawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/wrapper.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +103,7 @@
       <workItem from="1639662107416" duration="1818000" />
       <workItem from="1639666749271" duration="1230000" />
       <workItem from="1644518303989" duration="5000" />
-      <workItem from="1644518322619" duration="1946000" />
+      <workItem from="1644518322619" duration="2242000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>
@@ -126,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639084486370</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat(events): adds open sidebar event">
+      <created>1644520718890</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1644520718890</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +155,8 @@
     <MESSAGE value="feat(base): integrates locale with backend" />
     <MESSAGE value="feat(locale-switcher): integrates with backend" />
     <MESSAGE value="feat(locale-switcher): moves it to inside the user edit sidebar" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(locale-switcher): moves it to inside the user edit sidebar" />
+    <MESSAGE value="feat(events): adds open sidebar event" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(events): adds open sidebar event" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
