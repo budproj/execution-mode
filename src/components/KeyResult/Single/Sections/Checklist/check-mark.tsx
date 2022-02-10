@@ -159,7 +159,12 @@ export const KeyResultCheckMark = ({
           canDelete={canDelete}
           onDelete={onUpdate}
         />
-        <ChangeAssignedCheckMarkButton assignedUserId={node?.assignedUser?.id} />
+        <ChangeAssignedCheckMarkButton
+          checkMarkId={node?.id}
+          assignedUserId={node?.assignedUser?.id}
+          canUpdate={canUpdate}
+          onUpdate={onUpdate}
+        />
       </HStack>
     </Skeleton>
   )
