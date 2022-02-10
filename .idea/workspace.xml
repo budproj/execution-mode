@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(locale-switcher): moves it to inside the user edit sidebar">
+      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/opened-key-result-drawer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lang/pt-BR.json" beforeDir="false" afterPath="$PROJECT_DIR$/lang/pt-BR.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/User/Create/Form/form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Create/Form/form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/User/Create/Form/messages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Create/Form/messages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/User/Create/Form/queries.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Create/Form/queries.gql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/User/Create/Form/schema.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Create/Form/schema.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Drawer/drawer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Drawer/drawer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +51,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/state/hooks/useEvent/events" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -66,6 +64,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/state/hooks/useEvent/events" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -103,6 +102,8 @@
       <workItem from="1639597837034" duration="1959000" />
       <workItem from="1639662107416" duration="1818000" />
       <workItem from="1639666749271" duration="1230000" />
+      <workItem from="1644518303989" duration="5000" />
+      <workItem from="1644518322619" duration="1946000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>

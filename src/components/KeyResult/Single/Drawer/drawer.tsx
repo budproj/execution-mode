@@ -1,5 +1,5 @@
 import { Drawer } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
@@ -13,6 +13,9 @@ import {
 import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
+import { EventType } from '../../../../state/hooks/useEvent/event-type'
+import { useEvent } from '../../../../state/hooks/useEvent/hook'
+
 import KeyResultDrawerContent from './content'
 
 const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
@@ -25,6 +28,7 @@ const KeyResultDrawer = () => {
   const resetTimeline = useResetRecoilState(timelineSelector(keyResultID))
   const resetCommentEnabled = useResetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
   const resetCheckmarkDrafts = useResetRecoilState(draftCheckMarksAtom(keyResultID))
+  const { dispatch } = useEvent(EventType.OPENED_KEY_RESULT_DRAWER)
 
   const handleClose = () => {
     resetOpenDrawer()
@@ -35,6 +39,13 @@ const KeyResultDrawer = () => {
   }
 
   const isOpen = Boolean(keyResultID)
+
+  useEffect(() => {
+    if (keyResultID) {
+      dispatch({ keyResultID })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyResultID])
 
   return (
     <Drawer isOpen={isOpen} size="xl" autoFocus={false} onClose={handleClose}>
