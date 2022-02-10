@@ -75,7 +75,7 @@ export const KeyResultCheckMark = ({
   const handleChange = async () => {
     dispatchToggleEvent({
       keyResultID,
-      checkmarkID: node?.id,
+      checkMarkID: node?.id,
       previousState: isChecked
         ? KeyResultCheckMarkState.CHECKED
         : KeyResultCheckMarkState.UNCHECKED,
@@ -101,7 +101,7 @@ export const KeyResultCheckMark = ({
     if (description !== node?.description)
       dispatchUpdateTitleEvent({
         keyResultID,
-        checkmarkID: node?.id,
+        checkMarkID: node?.id,
         newTitleLength: description.length,
       })
   }
@@ -179,6 +179,7 @@ export const KeyResultCheckMark = ({
         </VStack>
         <DeleteCheckMarkButton
           buttonRef={removeCheckmarkButton}
+          keyResultID={keyResultID}
           checkMarkID={node?.id}
           isVisible={isHovering && !isEditing}
           canDelete={canDelete}

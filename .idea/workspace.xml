@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds toggle checklist event">
-      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/updated-key-result-check-mark-title.ts" afterDir="false" />
+    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds updated title of check mark event">
+      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/deleted-key-result-check-mark.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Base/Page/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Base/Page/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/delete-checkmark.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/delete-checkmark.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/check-mark.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/check-mark.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Progress/wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Progress/wrapper.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/events/toggled-key-result-check-mark.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/toggled-key-result-check-mark.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/events/updated-key-result-check-mark-title.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/updated-key-result-check-mark-title.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +106,7 @@
       <workItem from="1639662107416" duration="1818000" />
       <workItem from="1639666749271" duration="1230000" />
       <workItem from="1644518303989" duration="5000" />
-      <workItem from="1644518322619" duration="4318000" />
+      <workItem from="1644518322619" duration="4628000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>
@@ -149,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644522689058</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat(events): adds updated title of check mark event">
+      <created>1644523055860</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1644523055860</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,7 +182,8 @@
     <MESSAGE value="feat(events): adds open sidebar event" />
     <MESSAGE value="feat(events): adds open checklist event" />
     <MESSAGE value="feat(events): adds toggle checklist event" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(events): adds toggle checklist event" />
+    <MESSAGE value="feat(events): adds updated title of check mark event" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(events): adds updated title of check mark event" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
