@@ -1,5 +1,4 @@
-import { Box } from '@chakra-ui/react'
-import { useToken } from '@chakra-ui/react'
+import { Box, useToken } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import {

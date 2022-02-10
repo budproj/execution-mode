@@ -1,6 +1,4 @@
-import { Image, ImageProps } from '@chakra-ui/react'
-import { Stack, Text } from '@chakra-ui/react'
-import { ComponentWithAs } from '@chakra-ui/react'
+import { Image, ImageProps, Stack, Text, ComponentWithAs } from '@chakra-ui/react'
 import React from 'react'
 
 type HeaderProperties = {

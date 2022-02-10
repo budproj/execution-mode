@@ -1,5 +1,4 @@
-import { Stack } from '@chakra-ui/react'
-import { HStack } from '@chakra-ui/react'
+import { Stack, HStack } from '@chakra-ui/react'
 import React, { useContext } from 'react'
 
 import { SearchableListContext } from './context'

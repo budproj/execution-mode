@@ -1,5 +1,4 @@
-import { ImageProps } from '@chakra-ui/react'
-import { ComponentWithAs } from '@chakra-ui/react'
+import { ImageProps, ComponentWithAs } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
 export interface ConfirmationDialogProperties {

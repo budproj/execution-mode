@@ -1,5 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
-import { Spinner } from '@chakra-ui/react'
+import { Box, Flex, Text, Spinner } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 

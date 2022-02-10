@@ -1,5 +1,4 @@
-import { Button } from '@chakra-ui/react'
-import { Box } from '@chakra-ui/react'
+import { Button, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'

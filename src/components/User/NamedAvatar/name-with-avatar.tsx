@@ -1,5 +1,15 @@
-import { Flex, Stack, StackProps, Text, TextProps } from '@chakra-ui/react'
-import { Avatar, AvatarProps, forwardRef, Skeleton, SkeletonCircle } from '@chakra-ui/react'
+import {
+  Flex,
+  Stack,
+  StackProps,
+  Text,
+  TextProps,
+  Avatar,
+  AvatarProps,
+  forwardRef,
+  Skeleton,
+  SkeletonCircle,
+} from '@chakra-ui/react'
 import React, { RefObject } from 'react'
 import { useIntl } from 'react-intl'
 

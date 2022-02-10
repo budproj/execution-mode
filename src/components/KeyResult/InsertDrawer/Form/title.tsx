@@ -1,5 +1,4 @@
-import { Input, InputGroup } from '@chakra-ui/react'
-import { InputRightElement } from '@chakra-ui/react'
+import { Input, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { Field, useFormikContext } from 'formik'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'

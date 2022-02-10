@@ -1,5 +1,4 @@
-import { Flex } from '@chakra-ui/react'
-import { BoxProps } from '@chakra-ui/react'
+import { Flex, BoxProps } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
 

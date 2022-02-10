@@ -1,5 +1,4 @@
-import { Box, Stack } from '@chakra-ui/react'
-import { Skeleton, SkeletonText, Text } from '@chakra-ui/react'
+import { Box, Stack, Skeleton, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 

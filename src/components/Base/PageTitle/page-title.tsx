@@ -1,5 +1,4 @@
-import { HeadingProps } from '@chakra-ui/react'
-import { Heading, Skeleton } from '@chakra-ui/react'
+import { HeadingProps, Heading, Skeleton } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'

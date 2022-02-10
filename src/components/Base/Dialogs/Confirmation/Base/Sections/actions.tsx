@@ -1,5 +1,4 @@
-import { Button } from '@chakra-ui/react'
-import { Stack } from '@chakra-ui/react'
+import { Button, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
