@@ -38,7 +38,7 @@ const EditableTextAreaField = ({
 
   // eslint-disable-next-line unicorn/no-null
   return isDisabled && isEmpty ? null : (
-    <Stack direciton="column" w="full" spacing={0} flexGrow={flexGrow}>
+    <Stack direction="column" w="full" spacing={0} flexGrow={flexGrow}>
       <FormLabel fontSize="md" m={0}>
         {label}
       </FormLabel>
