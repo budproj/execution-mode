@@ -1,5 +1,13 @@
 import { useMutation } from '@apollo/client'
-import { HStack, Checkbox, Skeleton, Box, EditablePreviewProps, VStack } from '@chakra-ui/react'
+import {
+  HStack,
+  Checkbox,
+  Skeleton,
+  Box,
+  EditablePreviewProps,
+  VStack,
+  Flex,
+} from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -125,7 +133,7 @@ export const KeyResultCheckMark = ({
 
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
-      <HStack alignItems="center" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <HStack alignItems="start" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Checkbox
             isChecked={isChecked}
@@ -133,7 +141,7 @@ export const KeyResultCheckMark = ({
             onChange={handleChange}
           />
         </Box>
-        <VStack spacing={0} align="stretch" w="full">
+        <VStack marginLeft={0} spacing={0} align="stretch" w="full">
           <EditableInputField
             autoFocus={isDraft}
             isWaiting={isWaiting}
@@ -152,19 +160,21 @@ export const KeyResultCheckMark = ({
             {node?.assignedUser?.fullName}
           </Box>
         </VStack>
-        <DeleteCheckMarkButton
-          buttonRef={removeCheckmarkButton}
-          checkMarkID={node?.id}
-          isVisible={isHovering && !isEditing}
-          canDelete={canDelete}
-          onDelete={onUpdate}
-        />
-        <ChangeAssignedCheckMarkButton
-          checkMarkId={node?.id}
-          assignedUserId={node?.assignedUser?.id}
-          canUpdate={canUpdate}
-          onUpdate={onUpdate}
-        />
+        <Flex gap={2} alignItems="center" display={isEditing ? 'none' : undefined}>
+          <DeleteCheckMarkButton
+            buttonRef={removeCheckmarkButton}
+            checkMarkID={node?.id}
+            isVisible={isHovering && !isEditing}
+            canDelete={canDelete}
+            onDelete={onUpdate}
+          />
+          <ChangeAssignedCheckMarkButton
+            checkMarkId={node?.id}
+            assignedUserId={node?.assignedUser?.id}
+            canUpdate={canUpdate}
+            onUpdate={onUpdate}
+          />
+        </Flex>
       </HStack>
     </Skeleton>
   )
