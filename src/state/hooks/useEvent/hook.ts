@@ -1,6 +1,7 @@
 import { useAmplitude } from '../useAmplitude/hook'
 
 import { EventType } from './event-type'
+import { CreatedKeyResultCheckMarkEventData } from './events/created-key-result-check-mark'
 import { DeletedKeyResultCheckMarkEventData } from './events/deleted-key-result-check-mark'
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
@@ -21,6 +22,7 @@ type Event = {
   [EventType.UPDATED_KEY_RESULT_CHECK_MARK_TITLE]: UpdatedKeyResultCheckMarkTitleEventData
   [EventType.DELETED_KEY_RESULT_CHECK_MARK]: DeletedKeyResultCheckMarkEventData
   [EventType.UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE]: UpdatedKeyResultCheckMarkAssigneeEventData
+  [EventType.CREATED_KEY_RESULT_CHECK_MARK]: CreatedKeyResultCheckMarkEventData
 }
 
 interface EventHook<E extends keyof Event> {
