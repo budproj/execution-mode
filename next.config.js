@@ -16,6 +16,7 @@ const {
   AUTH0_DOMAIN,
   AUTH0_SCOPE,
   AUTH0_AUDIENCE,
+  AUTH0_API_DOMAIN,
   HOTJAR_ID,
   HOTJAR_SV,
   MIRAGE_ENABLED,
@@ -46,6 +47,7 @@ const publicRuntimeConfig = {
     domain: AUTH0_DOMAIN,
     scope: AUTH0_SCOPE,
     audience: AUTH0_AUDIENCE,
+    apiDomain: AUTH0_API_DOMAIN,
   },
 
   hotjar: {

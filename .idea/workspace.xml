@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds event grouping options">
+    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds event origin options">
+      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/hooks/useAmplitude/log-event-factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useAmplitude/log-event-factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifests/canary/canary-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/manifests/canary/canary-deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifests/stable/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/manifests/stable/deployment.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/User/Me/me.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Me/me.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useAmplitude/marshal-amplitude-user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useAmplitude/marshal-amplitude-user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useAmplitude/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useAmplitude/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +117,7 @@
       <workItem from="1644859070758" duration="8000" />
       <workItem from="1644859098728" duration="627000" />
       <workItem from="1644859733708" duration="92000" />
-      <workItem from="1644859834520" duration="2687000" />
+      <workItem from="1644859834520" duration="3592000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>
@@ -189,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644861781423</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat(events): adds event origin options">
+      <created>1644862572459</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1644862572459</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +233,8 @@
     <MESSAGE value="feat(events): adds created check mark event" />
     <MESSAGE value="bugfix(checkmark): fixes not being able to create new checkmarks" />
     <MESSAGE value="feat(events): adds event grouping options" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(events): adds event grouping options" />
+    <MESSAGE value="feat(events): adds event origin options" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(events): adds event origin options" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

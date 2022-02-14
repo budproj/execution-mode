@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { useAuth0 } from '@auth0/auth0-react'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 
@@ -7,6 +8,7 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
+import getConfig from '../../../config'
 import { useAmplitude } from '../../../state/hooks/useAmplitude/hook'
 import {
   marshalAmplitudeUser,
@@ -34,6 +36,8 @@ export interface GetUserNamedAvatarDataQuery {
 }
 
 const Me = () => {
+  const { user } = useAuth0()
+  const { publicRuntimeConfig } = getConfig()
   const { identify } = useAmplitude()
   const [me, setMe] = useRecoilState(meAtom)
   const [loadUser] = useRecoilFamilyLoader(userAtomFamily)
@@ -42,7 +46,13 @@ const Me = () => {
       setMe(data.me.id)
       loadUser(data.me)
 
-      identify(data.me.id, marshalAmplitudeUser(data.me), marshalAmplitudeUserGroups(data.me))
+      const { apiDomain } = publicRuntimeConfig.auth0
+      const userData = {
+        ...data.me,
+        permissions: user?.[`${apiDomain}/roles`],
+      }
+
+      identify(userData.id, marshalAmplitudeUser(userData), marshalAmplitudeUserGroups(userData))
     },
   })
 
