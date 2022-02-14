@@ -8,6 +8,7 @@ import TrashIcon from 'src/components/Icon/Trash'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
+import { Feature } from '../../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
 
 import messages from './messages'
@@ -32,7 +33,9 @@ export const DeleteCheckMarkButton = ({
 }: DeleteCheckMarkButtonProperties) => {
   isVisible ??= true
 
-  const { dispatch } = useEvent(EventType.DELETED_KEY_RESULT_CHECK_MARK)
+  const { dispatch } = useEvent(EventType.DELETED_KEY_RESULT_CHECK_MARK, {
+    feature: Feature.CHECK_MARK,
+  })
 
   const intl = useIntl()
   const setCheckMarkIsBeingRemoved = useSetRecoilState(checkMarkIsBeingRemovedAtom(checkMarkID))

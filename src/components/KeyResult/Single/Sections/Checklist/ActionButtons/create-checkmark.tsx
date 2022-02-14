@@ -8,6 +8,7 @@ import { PlusOutline } from 'src/components/Icon'
 import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
+import { Feature } from '../../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
 
 import messages from './messages'
@@ -26,7 +27,9 @@ export const CreateCheckMarkButton = ({
   createButtonReference,
   onCreate,
 }: CreateCheckMarkButtonProperties) => {
-  const { dispatch } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_MARK)
+  const { dispatch } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_MARK, {
+    feature: Feature.CHECK_MARK,
+  })
 
   const intl = useIntl()
   const [draftCheckMarks, setDraftCheckMarks] = useRecoilState(draftCheckMarksAtom(keyResultID))

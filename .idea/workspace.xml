@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds created check mark event">
-      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/checklist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/checklist.tsx" afterDir="false" />
+    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="bugfix(checkmark): fixes not being able to create new checkmarks">
+      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/event.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/feature.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/change-assigned.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/change-assigned.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/create-checkmark.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/create-checkmark.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/delete-checkmark.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/delete-checkmark.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/OptionBar/empty-checklist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/OptionBar/empty-checklist.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/check-mark.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/check-mark.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/wrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useAmplitude/hook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useAmplitude/hook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useAmplitude/log-event-factory.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useAmplitude/log-event-factory.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/hook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/hook.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +75,9 @@
       <recent name="$PROJECT_DIR$/src/state/hooks/useEvent/events" />
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="$PROJECT_DIR$/src/state/hooks/useEvent/event.ts" />
+    </key>
   </component>
   <component name="RunManager" selected="Compound.Launch and Debug">
     <list>
@@ -104,7 +118,9 @@
       <workItem from="1644524146684" duration="1240000" />
       <workItem from="1644525756889" duration="130000" />
       <workItem from="1644859070758" duration="8000" />
-      <workItem from="1644859098728" duration="463000" />
+      <workItem from="1644859098728" duration="627000" />
+      <workItem from="1644859733708" duration="92000" />
+      <workItem from="1644859834520" duration="1735000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>
@@ -169,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644859478073</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="bugfix(checkmark): fixes not being able to create new checkmarks">
+      <created>1644859723359</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1644859723359</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,7 +220,8 @@
     <MESSAGE value="feat(events): adds updated title of check mark event" />
     <MESSAGE value="feat(events): adds deleted check mark event" />
     <MESSAGE value="feat(events): adds created check mark event" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(events): adds created check mark event" />
+    <MESSAGE value="bugfix(checkmark): fixes not being able to create new checkmarks" />
+    <option name="LAST_COMMIT_MESSAGE" value="bugfix(checkmark): fixes not being able to create new checkmarks" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

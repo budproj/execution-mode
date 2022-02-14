@@ -5,12 +5,16 @@ import { AmplitudeContext } from '../../../components/Base/AmplitudeProvider/con
 
 import { getStaticAttributes } from './get-static-attributes'
 import { identifyFactory } from './identify-factory'
-import { logEventFactory } from './log-event-factory'
+import { logEventFactory, LogEventOptions } from './log-event-factory'
 import { AmplitudeStaticAttributes, AmplitudeUser, AmplitudeUserGroups } from './types'
 
 export type AmplitudeHook = {
   identify: (userID: string, userData: AmplitudeUser, userGroups?: AmplitudeUserGroups) => void
-  logEvent: (eventType: string, eventProperties?: Record<string, any>) => void
+  logEvent: (
+    eventType: string,
+    eventProperties?: Record<string, any>,
+    options?: LogEventOptions,
+  ) => void
 } & AmplitudeStaticAttributes
 
 export const useAmplitude = (project?: string): AmplitudeHook => {
