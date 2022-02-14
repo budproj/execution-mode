@@ -6,6 +6,7 @@ import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
+import { Feature } from '../../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
 
 import queries from './queries.gql'
@@ -25,7 +26,9 @@ export const ChangeAssignedCheckMarkButton = ({
   canUpdate,
   onUpdate,
 }: ChangeAssignedCheckMarkButtonProperties) => {
-  const { dispatch } = useEvent(EventType.UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE)
+  const { dispatch } = useEvent(EventType.UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE, {
+    feature: Feature.CHECK_MARK,
+  })
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const [changeAssigned] = useMutation(queries.UPDATE_ASSIGNED_CHECKMARK)

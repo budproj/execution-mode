@@ -10,6 +10,7 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { keyResultChecklistAtom } from 'src/state/recoil/key-result/checklist'
 
 import { EventType } from '../../../../../state/hooks/useEvent/event-type'
+import { Feature } from '../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../state/hooks/useEvent/hook'
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
@@ -25,7 +26,9 @@ interface KeyResultChecklistWrapperProperties {
 }
 
 export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWrapperProperties) => {
-  const { dispatch } = useEvent(EventType.OPENED_KEY_RESULT_CHECKLIST)
+  const { dispatch } = useEvent(EventType.OPENED_KEY_RESULT_CHECKLIST, {
+    feature: Feature.CHECK_MARK,
+  })
   const [isChecklistOpen, setIsChecklistOpen] = useState(false)
   const [keyResultChecklist, setKeyResultChecklist] = useRecoilState(
     keyResultChecklistAtom(keyResultID),

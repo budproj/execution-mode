@@ -1,12 +1,12 @@
 import { useMutation } from '@apollo/client'
 import {
-  HStack,
-  Checkbox,
-  Skeleton,
   Box,
+  Checkbox,
   EditablePreviewProps,
-  VStack,
   Flex,
+  HStack,
+  Skeleton,
+  VStack,
 } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
@@ -20,6 +20,7 @@ import { GraphQLEffect } from 'src/components/types'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
 import { EventType } from '../../../../../state/hooks/useEvent/event-type'
+import { Feature } from '../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../state/hooks/useEvent/hook'
 
 import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
@@ -45,9 +46,14 @@ export const KeyResultCheckMark = ({
   checklistLength,
   onCreate,
 }: KeyResultCheckMarkProperties) => {
-  const { dispatch: dispatchToggleEvent } = useEvent(EventType.TOGGLED_KEY_RESULT_CHECK_MARK)
+  const { dispatch: dispatchToggleEvent } = useEvent(EventType.TOGGLED_KEY_RESULT_CHECK_MARK, {
+    feature: Feature.CHECK_MARK,
+  })
   const { dispatch: dispatchUpdateTitleEvent } = useEvent(
     EventType.UPDATED_KEY_RESULT_CHECK_MARK_TITLE,
+    {
+      feature: Feature.CHECK_MARK,
+    },
   )
   const [isHovering, setIsHovering] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
