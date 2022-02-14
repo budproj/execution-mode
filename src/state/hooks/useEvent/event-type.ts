@@ -8,4 +8,5 @@ export enum EventType {
   UPDATED_KEY_RESULT_CHECK_MARK_TITLE = 'UpdatedKeyResultCheckMarkTitle',
   DELETED_KEY_RESULT_CHECK_MARK = 'DeletedKeyResultCheckMark',
   UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE = 'UpdatedKeyResultCheckMarkAssignee',
+  CREATED_KEY_RESULT_CHECK_MARK = 'CreatedKeyResultCheckMark',
 }

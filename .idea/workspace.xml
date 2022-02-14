@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds deleted check mark event">
+      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/created-key-result-check-mark.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/themes/preset-base/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/themes/preset-base/theme.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/create-checkmark.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/create-checkmark.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/hook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/hook.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +52,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/state/hooks/useEvent/events" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -104,6 +107,8 @@
       <workItem from="1644518322619" duration="4924000" />
       <workItem from="1644524146684" duration="1240000" />
       <workItem from="1644525756889" duration="130000" />
+      <workItem from="1644859070758" duration="8000" />
+      <workItem from="1644859098728" duration="134000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>

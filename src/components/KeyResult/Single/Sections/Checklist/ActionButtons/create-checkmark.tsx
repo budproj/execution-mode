@@ -7,6 +7,9 @@ import { useRecoilState } from 'recoil'
 import { PlusOutline } from 'src/components/Icon'
 import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
+import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
+import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
+
 import messages from './messages'
 import queries from './queries.gql'
 
@@ -23,6 +26,8 @@ export const CreateCheckMarkButton = ({
   createButtonReference,
   onCreate,
 }: CreateCheckMarkButtonProperties) => {
+  const { dispatch } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_MARK)
+
   const intl = useIntl()
   const [draftCheckMarks, setDraftCheckMarks] = useRecoilState(draftCheckMarksAtom(keyResultID))
   const [createCheckMark, { loading }] = useMutation(queries.CREATE_CHECK_MARK, {
@@ -41,6 +46,8 @@ export const CreateCheckMarkButton = ({
         description: '',
       },
     })
+
+    dispatch({ keyResultID })
   }
 
   return (
