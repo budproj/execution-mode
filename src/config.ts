@@ -62,6 +62,7 @@ export interface Auth0Config {
   domain: string
   scope: string
   audience: string
+  apiDomain: string
 }
 
 export interface HotjarConfig {

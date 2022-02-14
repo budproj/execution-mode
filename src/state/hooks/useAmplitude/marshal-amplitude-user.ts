@@ -11,6 +11,7 @@ type MinimumUser = {
   createdAt: string
   companies: MinimumConnection<MinimumGroup>
   teams: MinimumConnection<MinimumGroup>
+  permissions: string[]
 }
 
 type MinimumGroup = {
@@ -39,6 +40,7 @@ export const marshalAmplitudeUser = (user: MinimumUser): AmplitudeUser => ({
 export const marshalAmplitudeUserGroups = (user: MinimumUser): AmplitudeUserGroups => ({
   companies: getGroupNames(user.companies.edges),
   teams: getGroupNames(user.teams.edges),
+  permissions: user.permissions,
 })
 
 const getGroupNames = (groupEdges: Array<MinimumEdge<MinimumGroup>>): string[] =>

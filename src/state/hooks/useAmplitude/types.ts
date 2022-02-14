@@ -12,6 +12,7 @@ export type AmplitudeUser = {
 export type AmplitudeUserGroups = {
   companies: string[]
   teams: string[]
+  permissions: string[]
 }
 
 export type AmplitudeStaticAttributes = {

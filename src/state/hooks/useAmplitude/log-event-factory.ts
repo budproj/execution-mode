@@ -18,16 +18,23 @@ export const logEventFactory =
     ensureInitialized(client)
     client.logEvent(eventType, eventProperties)
 
-    if (options.feature) handleFeatureUse(options.feature, client, eventProperties)
+    if (options.feature)
+      handleFeatureUse(options.feature, client, { type: eventType, properties: eventProperties })
   }
+
+type HandleFeatureUseEventOriginOptions = {
+  type: string
+  properties?: Record<string, any>
+}
 
 const handleFeatureUse = (
   feature: string,
   client: AmplitudeClient,
-  eventProperties?: Record<string, any>,
+  eventOrigin: HandleFeatureUseEventOriginOptions,
 ) => {
   client.logEvent('UsedFeature', {
-    ...eventProperties,
+    ...eventOrigin.properties,
+    eventOriginType: eventOrigin.type,
     feature,
   })
 }
