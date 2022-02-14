@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds deleted check mark event">
-      <change afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/events/created-key-result-check-mark.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/create-checkmark.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/ActionButtons/create-checkmark.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/event-type.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/hooks/useEvent/hook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useEvent/hook.ts" afterDir="false" />
+    <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds created check mark event">
+      <change beforePath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/checklist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/KeyResult/Single/Sections/Checklist/checklist.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +104,7 @@
       <workItem from="1644524146684" duration="1240000" />
       <workItem from="1644525756889" duration="130000" />
       <workItem from="1644859070758" duration="8000" />
-      <workItem from="1644859098728" duration="134000" />
+      <workItem from="1644859098728" duration="463000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>
@@ -166,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1644523404026</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat(events): adds created check mark event">
+      <created>1644859478073</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1644859478073</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,7 +196,8 @@
     <MESSAGE value="feat(events): adds toggle checklist event" />
     <MESSAGE value="feat(events): adds updated title of check mark event" />
     <MESSAGE value="feat(events): adds deleted check mark event" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(events): adds deleted check mark event" />
+    <MESSAGE value="feat(events): adds created check mark event" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(events): adds created check mark event" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
