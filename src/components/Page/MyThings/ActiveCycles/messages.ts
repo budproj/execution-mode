@@ -9,14 +9,14 @@ type MyKeyResultsActiveCyclesPageMessage =
 
 export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   pageTitle: {
-    defaultMessage: 'Meus Resultados-Chave',
-    id: 'kynYpx',
-    description: 'The page title that our users should see in the my key results page',
+    defaultMessage: 'Minhas Coisas',
+    id: 'eVkwyH',
+    description: 'The page title that our users should see in the my things page',
   },
 
   metaTitle: {
-    defaultMessage: 'Meus Resultados-Chave | bud ',
-    id: '5XBq+p',
+    defaultMessage: 'Minhas Coisas | bud ',
+    id: 'p2UjMZ',
     description: 'The page title that is displayed in the browser tab',
   },
 

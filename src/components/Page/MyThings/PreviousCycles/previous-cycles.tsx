@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client'
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -6,25 +5,21 @@ import { useSetRecoilState } from 'recoil'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
-import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
+import { KeyResultNotActiveAndOwnedByUser } from 'src/components/KeyResult'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
-import MyKeyResultsPageSwitcher from 'src/components/Page/MyKeyResults/Switcher'
-import MyKeyResultsPageSwitcherSkeleton from 'src/components/Page/MyKeyResults/Switcher/skeleton'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
+import PageSwitcher from '../Switcher'
 
 import messages from './messages'
-import queries from './queries.gql'
 
-const MyKeyResultsActiveCyclesPage = () => {
+const PreviousCyclesPage = () => {
   const intl = useIntl()
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-  const { data, loading } = useQuery(queries.LIST_NOT_ACTIVE_CYCLES)
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
-  const hasInactiveCycles = data?.cycles?.edges.length > 0
 
   return (
     <PageContent>
@@ -36,16 +31,12 @@ const MyKeyResultsActiveCyclesPage = () => {
       </PageHeader>
 
       <Box pb={8}>
-        {loading ? (
-          <MyKeyResultsPageSwitcherSkeleton />
-        ) : (
-          Boolean(hasInactiveCycles) && <MyKeyResultsPageSwitcher />
-        )}
+        <PageSwitcher />
       </Box>
 
-      <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+      <KeyResultNotActiveAndOwnedByUser onLineClick={handleLineClick} />
     </PageContent>
   )
 }
 
-export default MyKeyResultsActiveCyclesPage
+export default PreviousCyclesPage

@@ -20,9 +20,9 @@ export default defineMessages<MainAppBarMessage>({
   },
 
   secondMenuItem: {
-    defaultMessage: 'Meus Resultados-Chave',
-    id: 'ytvOyM',
-    description: 'MainAppBar menu item that links to "My Key Results" page',
+    defaultMessage: 'Minhas Coisas',
+    id: 'K8KvrI',
+    description: 'MainAppBar menu item that links to "My Things" page',
   },
 
   thirdMenuItem: {

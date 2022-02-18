@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client'
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -5,21 +6,25 @@ import { useSetRecoilState } from 'recoil'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
-import { KeyResultNotActiveAndOwnedByUser } from 'src/components/KeyResult'
+import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
+import PageSwitcher from 'src/components/Page/MyThings/Switcher'
+import PageSwitcherSkeleton from 'src/components/Page/MyThings/Switcher/skeleton'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
-import MyKeyResultsPageSwitcher from '../Switcher'
 
 import messages from './messages'
+import queries from './queries.gql'
 
-const MyKeyResultsPreviousCyclesPage = () => {
+const ActiveCyclesPage = () => {
   const intl = useIntl()
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+  const { data, loading } = useQuery(queries.LIST_NOT_ACTIVE_CYCLES)
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
+  const hasInactiveCycles = data?.cycles?.edges.length > 0
 
   return (
     <PageContent>
@@ -31,12 +36,12 @@ const MyKeyResultsPreviousCyclesPage = () => {
       </PageHeader>
 
       <Box pb={8}>
-        <MyKeyResultsPageSwitcher />
+        {loading ? <PageSwitcherSkeleton /> : Boolean(hasInactiveCycles) && <PageSwitcher />}
       </Box>
 
-      <KeyResultNotActiveAndOwnedByUser onLineClick={handleLineClick} />
+      <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
     </PageContent>
   )
 }
 
-export default MyKeyResultsPreviousCyclesPage
+export default ActiveCyclesPage
