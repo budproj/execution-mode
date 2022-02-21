@@ -57,8 +57,6 @@ export const CycleKeyResultList = ({
         templateColumns="7fr 6fr 4fr 6fr 1fr 2fr"
         columns={[
           KEY_RESULT_LIST_COLUMN.KEY_RESULT,
-          KEY_RESULT_LIST_COLUMN.OBJECTIVE,
-          KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL,
           KEY_RESULT_LIST_COLUMN.PROGRESS,
           KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS,
           KEY_RESULT_LIST_COLUMN.OWNER,
@@ -78,12 +76,10 @@ export const CycleKeyResultList = ({
           [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
             isActive,
             isDisabled,
-          },
-          [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: {
-            isDisabled,
+            withConfidenceTag: true,
           },
           [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
-            isDisabled,
+            hidden: true,
           },
           [KEY_RESULT_LIST_COLUMN.OWNER]: {
             justifyContent: 'flex-end',
