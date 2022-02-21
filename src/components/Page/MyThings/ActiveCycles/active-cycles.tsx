@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Box } from '@chakra-ui/react'
+import { Box, Divider, HStack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -39,7 +39,17 @@ const ActiveCyclesPage = () => {
         {loading ? <PageSwitcherSkeleton /> : Boolean(hasInactiveCycles) && <PageSwitcher />}
       </Box>
 
-      <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+      <HStack align="stretch" justify="stretch" spacing="4rem">
+        <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+
+        <Box>
+          <Divider orientation="vertical" h="full" />
+        </Box>
+        <Text color="gray.500" backgroundColor="black">
+          Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing
+          industries for previewing layouts and visual mockups.
+        </Text>
+      </HStack>
     </PageContent>
   )
 }

@@ -683,6 +683,10 @@
     "defaultMessage": "NOTIFICAÇÕES",
     "description": "The tooltip text for the notifications text"
   },
+  "K8KvrI": {
+    "defaultMessage": "Minhas Coisas",
+    "description": "MainAppBar menu item that links to \"My Things\" page"
+  },
   "KSjqcC": {
     "defaultMessage": "%",
     "description": "The text of the table head related to the percentual progress column"
@@ -1155,6 +1159,10 @@
     "defaultMessage": "Times",
     "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
   },
+  "bh8jgN": {
+    "defaultMessage": "novo!",
+    "description": "The text inside the tag to inform new buttons"
+  },
   "biDODR": {
     "defaultMessage": "Um ícone de lupa, indicando que este é um campo de busca",
     "description": "This text is used by screen readers to explain the search icon in all our search inputs"
@@ -1226,6 +1234,10 @@
   "eUCb55": {
     "defaultMessage": "Fim",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawers"
+  },
+  "eVkwyH": {
+    "defaultMessage": "Minhas Coisas",
+    "description": "The page title that our users should see in the my things page"
   },
   "eVsyB5": {
     "defaultMessage": "Email",
@@ -1479,6 +1491,10 @@
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
   },
+  "p2UjMZ": {
+    "defaultMessage": "Minhas Coisas | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
@@ -1682,10 +1698,6 @@
   "yfhIM+": {
     "defaultMessage": "Cancelar",
     "description": "Text in the cancel action button"
-  },
-  "ytvOyM": {
-    "defaultMessage": "Meus Resultados-Chave",
-    "description": "MainAppBar menu item that links to \"My Key Results\" page"
   },
   "yw+DGB": {
     "defaultMessage": "Sobrenome",
