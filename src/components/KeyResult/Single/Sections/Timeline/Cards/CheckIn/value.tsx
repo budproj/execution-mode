@@ -16,6 +16,7 @@ export interface KeyResultSectionTimelineCardCheckInProgressProperties {
   confidence?: KeyResultCheckIn['confidence']
   parent?: KeyResultCheckIn | null
   format?: KEY_RESULT_FORMAT
+  initialValue?: number
 }
 
 export const KeyResultSectionTimelineCardCheckInValue = ({
@@ -23,6 +24,7 @@ export const KeyResultSectionTimelineCardCheckInValue = ({
   confidence,
   parent,
   format,
+  initialValue,
 }: KeyResultSectionTimelineCardCheckInProgressProperties) => {
   const intl = useIntl()
   const [confidenceTag, setConfidence] = useConfidenceTag(confidence)
@@ -40,7 +42,7 @@ export const KeyResultSectionTimelineCardCheckInValue = ({
   return (
     <Flex alignItems="center" gridGap={4}>
       <Skeleton isLoaded={isLoaded} fontSize="3xl" color="gray.300" lineHeight={1} fontWeight={500}>
-        <NumberMask value={parent?.value} displayType="text" />
+        <NumberMask value={parent?.value ?? initialValue} displayType="text" />
       </Skeleton>
       {!isSameAsParent && (
         <>
