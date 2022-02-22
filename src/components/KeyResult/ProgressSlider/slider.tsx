@@ -56,7 +56,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
 
     const handleSliderUpdate = useCallback(
       (valueNew?: number): void => {
-        if (valueNew) {
+        if (typeof valueNew !== undefined) {
           setDraftValue(valueNew)
           setIsChanging(true)
         }
@@ -68,7 +68,7 @@ const ProgressSliderSlider = forwardRef<HTMLDivElement, ProgressSliderSliderProp
 
     const handleSliderUpdateEnd = useCallback(
       (newValue: number) => {
-        if (isChanging && newValue && newValue === draftValue) {
+        if (isChanging && typeof newValue !== undefined && newValue === draftValue) {
           setOpenedPopover(true)
           setIsChanging(false)
         }
