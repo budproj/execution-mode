@@ -91,6 +91,7 @@ const KeyResultSectionTimelineCardCheckIn = ({
               confidence={data?.confidence}
               parent={data?.parent}
               format={keyResult?.format}
+              initialValue={keyResult?.initialValue}
             />
           </Box>
 
