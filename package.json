@@ -4,7 +4,7 @@
   "description": "Web interface for Bud's execution mode",
   "scripts": {
     "start": "NODE_ENV=production node ./dist/index.js",
-    "start:dev": "npm-run-all -s intl:refresh start:watch",
+    "start:dev": "TS_NODE_TRANSPILE_ONLY=true npm-run-all -s intl:refresh start:watch",
     "start:debug": "NODE_OPTIONS='--inspect' npm run start:dev",
     "start:watch": "next dev",
     "build": "npm-run-all -s clean compile:intl build:app",
