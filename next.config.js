@@ -125,13 +125,15 @@ module.exports = {
 
   webpack: (config, { isServer }) => {
     if (!isServer) {
-      config.node = {
-        fs: 'empty',
-      }
+      Object.assign(config.resolve, {
+        fallback: {
+          fs: false,
+        },
+      })
     }
 
     const libDir = path.join(__dirname, '../lib')
-    config.module.rules[0].include.push(libDir)
+    config.module.rules[0].include = [libDir]
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
