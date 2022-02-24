@@ -3,13 +3,15 @@
     "@budproj/eslint-config-base-ts",
     "@budproj/eslint-config-prettier-ts",
     "@budproj/eslint-config-intl",
-    "@budproj/eslint-config-react"
+    "@budproj/eslint-config-react",
+    "plugin:@next/next/recommended"
   ],
   "rules": {
     "import/no-unresolved": ["error", { "ignore": ["miragejs/db-collection"] }],
     "react/jsx-indent": "off",
     "react/jsx-curly-newline": "off",
-    "unicorn/no-nested-ternary": "off"
+    "unicorn/no-nested-ternary": "off",
+    "@typescript-eslint/no-floating-promises": "off"
   },
   "settings": {
     "import/resolver": {
