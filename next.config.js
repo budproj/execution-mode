@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path')
 const _ = require('lodash')
+const { ProvidePlugin } = require('webpack')
 
 const {
   URL,
@@ -125,18 +126,31 @@ module.exports = {
 
   webpack: (config, { isServer }) => {
     if (!isServer) {
-      config.node = {
-        fs: 'empty',
-      }
+      Object.assign(config.resolve, {
+        fallback: {
+          fs: false,
+          buffer: require.resolve('buffer'),
+        },
+      })
     }
 
     const libDir = path.join(__dirname, '../lib')
-    config.module.rules[0].include.push(libDir)
+    config.module.rules[0].include = [libDir]
     config.module.rules.push({
       test: /\.(graphql|gql)$/,
       exclude: /node_modules/,
       loader: 'graphql-tag/loader',
     })
+
+    config.plugins = [
+      ...config.plugins,
+      new ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
+      }),
+      new ProvidePlugin({
+        process: 'process/browser',
+      }),
+    ]
 
     return config
   },

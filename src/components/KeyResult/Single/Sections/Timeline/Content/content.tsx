@@ -18,8 +18,8 @@ export interface KeyResultSectionTimelineContentProperties {
   limit: number
   initialHasMore: boolean
   scrollTarget: string
-  fetchMore: <K extends string>(
-    options: FetchMoreQueryOptions<Record<string, any>, K, GetKeyResultTimelineWithIDQuery>,
+  fetchMore: (
+    options: FetchMoreQueryOptions<Record<string, any>, GetKeyResultTimelineWithIDQuery>,
   ) => Promise<ApolloQueryResult<GetKeyResultTimelineWithIDQuery>>
   onEntryDelete?: (entryType: string) => void
 }

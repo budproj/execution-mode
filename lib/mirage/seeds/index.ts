@@ -3,7 +3,6 @@ import flatten from 'lodash/flatten'
 import orderBy from 'lodash/orderBy'
 import { Registry, Server } from 'miragejs'
 
-import logger from 'lib/logger'
 import Factories from 'lib/mirage/factories'
 import Models from 'lib/mirage/models'
 import { CADENCE } from 'src/components/Cycle/constants'
@@ -437,7 +436,7 @@ function seeds(server: Server<Registry<typeof Models, typeof Factories>>) {
   cycles.inactive.old.YEARLY.update('keyResults', oldStrategicKeyResults as any)
   cycles.inactive.old.QUARTERLY.update('keyResults', oldTacticalKeyResults as any)
 
-  logger.debug('Inserted fake data on MirageJS server', {
+  console.log('Inserted fake data on MirageJS server', {
     data: {
       company,
       strategicObjectives,

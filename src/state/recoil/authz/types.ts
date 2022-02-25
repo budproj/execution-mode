@@ -1,4 +1,4 @@
-import { User } from '@auth0/auth0-react'
+import { User } from '@auth0/auth0-spa-js'
 
 import { AUTHZ_ROLES, AUTHZ_TENANT_ROLE } from './constants'
 

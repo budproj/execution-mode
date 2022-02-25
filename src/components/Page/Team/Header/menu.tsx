@@ -84,7 +84,9 @@ export const MenuHeader = ({ teamId }: MenuHeaderProperties) => {
     },
   })
 
-  useEffect(fetchCycles, [fetchCycles])
+  useEffect(() => {
+    void fetchCycles()
+  }, [fetchCycles])
 
   const [createDraftObjective] = useMutation<CreateDraftObjectiveQueryResult>(
     queries.CREATE_DRAFT_OBJECTIVE,

@@ -3,7 +3,6 @@ import { DrawerContent, Flex } from '@chakra-ui/react'
 import React from 'react'
 import { useSetRecoilState } from 'recoil'
 
-import logger from 'lib/logger'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Scope } from 'src/components/types'
 import selectKeyResult from 'src/state/recoil/key-result/key-result'
@@ -38,7 +37,7 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
     },
   )
 
-  logger.debug('Rerendered key result drawers contents. Take a look at our new data:', {
+  console.log('Rerendered key result drawers contents. Take a look at our new data:', {
     component,
     data: {
       data,

@@ -77,7 +77,7 @@ export const LocaleSwitcherWrapper = ({
   }
 
   useEffect(() => {
-    if (userID) getCurrentLocale()
+    if (userID) void getCurrentLocale()
   }, [userID, getCurrentLocale])
 
   return (
