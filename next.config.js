@@ -98,6 +98,12 @@ const publicRuntimeConfig = {
       destination: '/settings/my-profile',
       locale: 'pt-BR',
     },
+
+    {
+      source: '/pt-BR/novo-ambiente',
+      destination: '/new-workspace',
+      locale: 'pt-BR',
+    },
   ],
 }
 

@@ -1,0 +1,15 @@
+{
+  "name": "Business GraphQL Schema",
+  "schemaPath": "../business/dist/src/interfac/graphql/schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default": {
+        "url": "http://localhost:8080/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}
