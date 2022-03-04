@@ -1,5 +1,5 @@
-import { Box, Divider, Stack } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Divider, Portal, Stack } from '@chakra-ui/react'
+import React, { useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import {
@@ -28,6 +28,7 @@ export interface KeyResultDrawerBodyProperties {
 const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => {
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const keyResultChecklist = useRecoilValue(keyResultChecklistAtom(keyResultID))
+  const timelinePortalReference = useRef<HTMLDivElement>(null)
 
   const newCheckInValue =
     keyResult?.format === KEY_RESULT_FORMAT.PERCENTAGE &&
@@ -49,6 +50,16 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
       <Box pt={8} px={8} pb={2} bg="white">
         <KeyResultSectionTitle keyResultID={keyResultID} />
       </Box>
+
+      <Portal containerRef={timelinePortalReference}>
+        <Box p={8} pt={4}>
+          <KeyResultSectionTimeline
+            keyResultID={keyResultID}
+            scrollTarget={SCROLLBAR_ID}
+            newCheckInValue={newCheckInValue}
+          />
+        </Box>
+      </Portal>
 
       <Stack
         spacing={4}
@@ -82,13 +93,7 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
         <KeyResultSectionOwner keyResultID={keyResultID} />
       </Stack>
 
-      <Box p={8} pt={4}>
-        <KeyResultSectionTimeline
-          keyResultID={keyResultID}
-          scrollTarget={SCROLLBAR_ID}
-          newCheckInValue={newCheckInValue}
-        />
-      </Box>
+      <Box ref={timelinePortalReference} />
     </Stack>
   )
 }
