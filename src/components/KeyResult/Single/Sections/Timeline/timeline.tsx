@@ -88,9 +88,8 @@ const KeyResultSectionTimeline = ({
           scrollTarget={scrollTarget}
           onEntryDelete={handleEntryDelete}
         />
-      ) : (
-        ''
-      )}
+      ) : // eslint-disable-next-line unicorn/no-null
+      null}
     </Flex>
   )
 }
