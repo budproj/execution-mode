@@ -28,23 +28,22 @@ export const UserProfile = ({ userID, isRemovable, onUserDeactivation }: UserPro
 
   const [isRecoilSynced, setIsRecoilSynced] = useState(false)
   const [user, setUser] = useRecoilState(userSelector(userID))
-  const [getUserData, { loading, variables, data }] = useLazyQuery<GetUserDataQuery>(
-    queries.GET_USER_DATA,
-    {
-      onCompleted: (data) => setUser(data.user),
-      variables: {
-        id: userID,
-      },
+  const [getUserData, { loading, data }] = useLazyQuery<GetUserDataQuery>(queries.GET_USER_DATA, {
+    onCompleted: (data) => setUser(data.user),
+    variables: {
+      id: userID,
     },
-  )
+  })
 
   const isLoaded = !loading && isRecoilSynced
   const canUpdate = user?.policy?.update === GraphQLEffect.ALLOW
   const canDelete = isRemovable && user?.policy?.delete === GraphQLEffect.ALLOW
 
   useEffect(() => {
-    if (userID && userID !== variables?.id) getUserData()
-  }, [userID, getUserData, variables])
+    if (userID && userID !== data?.user?.id) {
+      getUserData()
+    }
+  }, [userID, getUserData, data])
 
   useEffect(() => {
     if (!isRecoilSynced && data && user && isMatch(user, data.user)) setIsRecoilSynced(true)
