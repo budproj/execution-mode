@@ -195,6 +195,10 @@
     "defaultMessage": "Inglês",
     "description": "This message is used as the label for the english language in our locale switcher"
   },
+  "2leAvr": {
+    "defaultMessage": "Minhas Tarefas",
+    "description": "The header in my tasks title, inside my things page"
+  },
   "30/f+o": {
     "defaultMessage": "Tem certeza que deseja desativar {gender, select, MALE {o} FEMALE {a} other {o}} usuári{gender, select, MALE {o} FEMALE {a} other {o}} {name}?",
     "description": "This text is used in our delete dialog confirmation to explain to the user what will happen"
@@ -574,6 +578,10 @@
   "GeIXxi": {
     "defaultMessage": "Este time estará vinculado a {teamname}",
     "description": "The text is displayed as header description in the add team modal"
+  },
+  "Gk28Al": {
+    "defaultMessage": "novo!",
+    "description": "Tag new item"
   },
   "GrPUMn": {
     "defaultMessage": "Mês de",

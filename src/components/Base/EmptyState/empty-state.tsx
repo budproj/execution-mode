@@ -6,6 +6,7 @@ import messages from './messages'
 
 export interface EmptyStateProperties {
   labelMessage: MessageDescriptor
+  headerMessage?: MessageDescriptor
   imageKey: keyof typeof imageKeys
   maxW?: ImageProps['maxW']
   h?: FlexProps['h']
@@ -18,6 +19,7 @@ const imageKeys = {
   'empty-folder': '/images/bud-empty-folder.png',
   'people-with-pages': '/images/bud-people-with-pages.png',
   'empty-bench': '/images/bud-empty-bench.png',
+  'check-item': '/images/check-item.png',
 }
 
 const imageAlts = {
@@ -25,9 +27,18 @@ const imageAlts = {
   'empty-folder': messages.emptyFolderAlt,
   'people-with-pages': messages.pagesAlt,
   'empty-bench': messages.emptyBenchAlt,
+  'check-item': messages.checkItem,
 }
 
-const EmptyState = ({ labelMessage, imageKey, h, py, maxW, gridGap }: EmptyStateProperties) => {
+const EmptyState = ({
+  labelMessage,
+  headerMessage,
+  imageKey,
+  h,
+  py,
+  maxW,
+  gridGap,
+}: EmptyStateProperties) => {
   maxW ??= 52
   gridGap ??= 8
 
@@ -48,6 +59,11 @@ const EmptyState = ({ labelMessage, imageKey, h, py, maxW, gridGap }: EmptyState
       <Box>
         <Image src={imageURL} alt={intl.formatMessage(imageAlt)} maxW={maxW} />
       </Box>
+      {headerMessage && (
+        <Text color="new-gray.700" fontSize="lg" fontWeight="bold" textAlign="center">
+          {intl.formatMessage(headerMessage)}
+        </Text>
+      )}
       <Text color="gray.300" textAlign="center">
         {intl.formatMessage(labelMessage)}
       </Text>
