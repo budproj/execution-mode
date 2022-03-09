@@ -87,7 +87,13 @@ export const NameWithAvatar = forwardRef(
               <SwitchIcon fill="brand.500" desc={intl.formatMessage(messages.changeIconDesc)} />
             </Flex>
           ) : (
-            <Avatar name={user?.fullName} src={user?.picture} w={avatarSize} h={avatarSize} />
+            <Avatar
+              name={user?.fullName}
+              src={user?.picture}
+              w={avatarSize}
+              h={avatarSize}
+              loading="lazy"
+            />
           )}
         </SkeletonCircle>
 
