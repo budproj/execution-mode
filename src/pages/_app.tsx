@@ -17,7 +17,6 @@ import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
 
 import { AmplitudeProvider } from '../components/Base/AmplitudeProvider/amplitude-provider'
-import { SmartlookProvider } from '../components/Base/SmartlookProvider/smartlook-provider'
 
 type IntlMessage = Record<string, string>
 
@@ -63,7 +62,6 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                 <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
                   <MaintenanceGatekeeper>
                     <HotjarProvider />
-                    <SmartlookProvider />
                     <HubSpotProvider />
                     <ProgressBar />
                     <Component {...pageProps} />
