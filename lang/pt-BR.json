@@ -579,6 +579,10 @@
     "defaultMessage": "Este time estará vinculado a {teamname}",
     "description": "The text is displayed as header description in the add team modal"
   },
+  "GepLaP": {
+    "defaultMessage": "Uma mão apertando um botão com um icone de seleção de uma tarefa",
+    "description": "The alternative text explaining the check item image"
+  },
   "Gk28Al": {
     "defaultMessage": "novo!",
     "description": "Tag new item"
@@ -654,6 +658,10 @@
   "J+UxkH": {
     "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
+  "J5Rfuu": {
+    "defaultMessage": "Crie novas tarefas pela barra lateral dos resultados-chave em que você atua.",
+    "description": "The empty state message when you have no tasks"
   },
   "J8dAid": {
     "defaultMessage": "Este objetivo não tem nenhum resultado-chave",
@@ -1054,6 +1062,10 @@
   "WKevJy": {
     "defaultMessage": "Clique aqui para editar esse campo",
     "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
+  },
+  "WR43/0": {
+    "defaultMessage": "Você ainda não tem nenhuma tarefa.",
+    "description": "The empty state message header when you have no tasks"
   },
   "WiYOXK": {
     "defaultMessage": "Valor Inicial",

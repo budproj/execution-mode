@@ -60,7 +60,7 @@ const EmptyState = ({
         <Image src={imageURL} alt={intl.formatMessage(imageAlt)} maxW={maxW} />
       </Box>
       {headerMessage && (
-        <Text color="new-gray.700" fontSize="lg" fontWeight="bold" textAlign="center">
+        <Text color="new-gray.700" fontSize="lg" fontWeight="bold" textAlign="center" mb="-15px">
           {intl.formatMessage(headerMessage)}
         </Text>
       )}

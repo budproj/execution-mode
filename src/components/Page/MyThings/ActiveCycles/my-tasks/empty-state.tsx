@@ -7,7 +7,7 @@ import messages from './messages'
 
 const MyTasksEmptyState = () => {
   return (
-    <Box mt={20}>
+    <Box mt={20} maxWidth="300px" mx="auto">
       <EmptyState
         imageKey="check-item"
         headerMessage={messages.tasksEmptyStateHeader}

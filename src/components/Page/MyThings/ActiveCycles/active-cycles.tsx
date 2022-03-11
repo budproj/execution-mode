@@ -30,14 +30,18 @@ const ActiveCyclesPage = () => {
         <PageTitle>{intl.formatMessage(messages.pageTitle)}</PageTitle>
       </PageHeader>
 
-      <HStack align="stretch" justify="stretch" spacing="4rem">
-        <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+      <HStack align="stretch" spacing="4rem" flex="1">
+        <Box maxWidth="60%">
+          <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+        </Box>
 
         <Box>
           <Divider orientation="vertical" h="full" />
         </Box>
 
-        <MyTasks />
+        <Box flex="1">
+          <MyTasks />
+        </Box>
       </HStack>
     </PageContent>
   )

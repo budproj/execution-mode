@@ -17,7 +17,7 @@ import queries from './queries.gql'
 interface CreateCheckMarkButtonProperties {
   keyResultID?: string
   label?: string
-  onCreate: () => void
+  onCreate?: () => void
   createButtonReference?: Ref<HTMLButtonElement>
 }
 

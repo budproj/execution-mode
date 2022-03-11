@@ -11,7 +11,7 @@ import { KeyResultCheckMark } from './check-mark'
 interface KeyResultChecklistProperties {
   keyResultID?: string
   nodes: KeyResultCheckMarkType[]
-  onCreateCheckmark: () => void
+  onCreateCheckmark?: () => void
   canCreate: boolean
 }
 
