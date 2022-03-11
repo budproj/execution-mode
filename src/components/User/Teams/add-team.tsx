@@ -68,7 +68,12 @@ export const AddUserTeam = ({ userID, teamIDsBlacklist }: AddUserTeamProperties)
       </MenuButton>
       <MenuList p={4} boxShadow="with-stroke.light" borderColor="new-gray.200" borderWidth={1}>
         <TeamSearch onSearch={handleSearch} />
-        <TeamSelect teamIDsBlacklist={teamIDsBlacklist} filter={filter} onSelect={handleSelect} />
+        <TeamSelect
+          hasScroll
+          teamIDsBlacklist={teamIDsBlacklist}
+          filter={filter}
+          onSelect={handleSelect}
+        />
       </MenuList>
     </Menu>
   )
