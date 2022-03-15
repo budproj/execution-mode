@@ -1,4 +1,4 @@
-import { Box, Flex, Skeleton, Text } from '@chakra-ui/react'
+import { Box, Flex, Skeleton, Text, HStack } from '@chakra-ui/react'
 import React, { ReactElement, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -11,10 +11,7 @@ import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/se
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
 import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
-import {
-  keyResultCheckInIsSlidding,
-  keyResultCheckInProgressDraft,
-} from 'src/state/recoil/key-result/check-in'
+import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
 import { keyResultAtomFamily } from '../../../../../../state/recoil/key-result'
@@ -43,7 +40,6 @@ const KeyResultListBodyColumnProgress = ({
 }: KeyResultListBodyColumnProgressProperties): ReactElement => {
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(id))
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
-  const isSliding = useRecoilValue(keyResultCheckInIsSlidding(id))
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
   const intl = useIntl()
@@ -51,6 +47,7 @@ const KeyResultListBodyColumnProgress = ({
   const ProgressMask = selectMaskBasedOnFormat(keyResult?.format)
   const isKeyResultLoaded = Boolean(id)
   const canCreateCheckIn = keyResult?.keyResultCheckIns?.policy?.create === GraphQLEffect.ALLOW
+  const progress = latestKeyResultCheckIn?.progress ?? 0
 
   useEffect(() => {
     if (latestKeyResultCheckIn?.confidence) setConfidence(latestKeyResultCheckIn?.confidence)
@@ -62,11 +59,21 @@ const KeyResultListBodyColumnProgress = ({
         <Box w="100%">
           {withConfidenceTag && (
             <Skeleton isLoaded={isKeyResultLoaded}>
-              <ConfidenceTag
-                showTooltip
-                confidenceValue={latestKeyResultCheckIn?.confidence}
-                isDisabled={isDisabled}
-              />
+              <HStack justify="space-between">
+                <ConfidenceTag
+                  showTooltip
+                  confidenceValue={latestKeyResultCheckIn?.confidence}
+                  isDisabled={isDisabled}
+                />
+
+                <Text
+                  fontSize="md"
+                  color={isDisabled ? 'gray.400' : confidenceTag.color.primary}
+                  fontWeight={500}
+                >
+                  {intl.formatNumber(progress / 100, { style: 'percent' })}
+                </Text>
+              </HStack>
             </Skeleton>
           )}
 
@@ -79,7 +86,7 @@ const KeyResultListBodyColumnProgress = ({
           </Skeleton>
         </Box>
 
-        <Flex>
+        <HStack justify="space-between">
           <Box>
             {!hideCurrentValue && (
               <Skeleton
@@ -97,7 +104,7 @@ const KeyResultListBodyColumnProgress = ({
                       placement="bottom-start"
                     >
                       <Text
-                        color={isSliding ? confidenceTag.color.primary : 'gray.300'}
+                        color={isDisabled ? 'gray.400' : confidenceTag.color.primary}
                         cursor="help"
                       >
                         {value}
@@ -108,8 +115,6 @@ const KeyResultListBodyColumnProgress = ({
               </Skeleton>
             )}
           </Box>
-
-          <Box flexGrow={1} />
 
           <Box>
             {!hideGoal && (
@@ -136,7 +141,7 @@ const KeyResultListBodyColumnProgress = ({
               </Skeleton>
             )}
           </Box>
-        </Flex>
+        </HStack>
       </Flex>
     </KeyResultListBodyColumnBase>
   )
