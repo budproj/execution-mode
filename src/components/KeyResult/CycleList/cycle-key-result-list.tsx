@@ -58,7 +58,6 @@ export const CycleKeyResultList = ({
         columns={[
           KEY_RESULT_LIST_COLUMN.KEY_RESULT,
           KEY_RESULT_LIST_COLUMN.PROGRESS,
-          KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS,
           KEY_RESULT_LIST_COLUMN.OWNER,
         ]}
         headProperties={{
@@ -77,9 +76,6 @@ export const CycleKeyResultList = ({
             isActive,
             isDisabled,
             withConfidenceTag: true,
-          },
-          [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
-            hidden: true,
           },
           [KEY_RESULT_LIST_COLUMN.OWNER]: {
             justifyContent: 'flex-end',
