@@ -43,10 +43,6 @@
     "defaultMessage": "Status",
     "description": "This text is displayed in our check-in card, as a title for the right column in the progress increase section"
   },
-  "/DyxUT": {
-    "defaultMessage": "Último check-in",
-    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
-  },
   "/H4hHb": {
     "defaultMessage": "Buscar subtimes",
     "description": "This message is displayed inside the child teams section, on the search bar"
@@ -631,6 +627,10 @@
     "defaultMessage": "Ver menos...",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
+  "I8NCD3": {
+    "defaultMessage": "Check-in realizado",
+    "description": "This string is used as the description for the icon that indicates that the key-result is updated"
+  },
   "IGHT6z": {
     "defaultMessage": "Você perderá todos os resultados-chave deste OKR, incluindo todos os check-ins e comentários feitos até aqui.",
     "description": "This message is used as the modal description while removing a given objective"
@@ -654,6 +654,10 @@
   "Ii3n+d": {
     "defaultMessage": "para <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the second line of our confidence tooltip"
+  },
+  "ItLQef": {
+    "defaultMessage": "Check-in realizado",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
   "J+UxkH": {
     "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
@@ -738,6 +742,10 @@
   "M0RYZa": {
     "defaultMessage": "Salvar",
     "description": "This is a button label displayed inside the insert key-result drawer. This is the second button"
+  },
+  "M2QJC/": {
+    "defaultMessage": "Sem check-in",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
   "M9Jejl": {
     "defaultMessage": "Painel | bud",
@@ -1042,6 +1050,10 @@
   "VNHZWm": {
     "defaultMessage": "Período",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
+  },
+  "VSS4F8": {
+    "defaultMessage": "{unit, select, fallback {desde {date}} other {{date}}}",
+    "description": "This text displays the latest report status for a given component, using a given date logic"
   },
   "VUKPKt": {
     "defaultMessage": "Cancelar",
@@ -1583,10 +1595,6 @@
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
   },
-  "sObsR1": {
-    "defaultMessage": "{unit, select, fallback {em {date}} other {{date}}}",
-    "description": "This text displays the latest report status for a given component, using a given date logic"
-  },
   "sP2MCY": {
     "defaultMessage": "Mostrar menos",
     "description": "This text is displayed in the button that collapses the truncated text"
@@ -1662,6 +1670,10 @@
   "vbnV7B": {
     "defaultMessage": "Português",
     "description": "This message is used as the label for the portuguese language in our locale switcher"
+  },
+  "vgU7fC": {
+    "defaultMessage": "Check-in pendente",
+    "description": "This string is used as the description for the icon that indicates that the key-result has not been updated"
   },
   "vm0Yuj": {
     "defaultMessage": "Meu perfil | bud",
