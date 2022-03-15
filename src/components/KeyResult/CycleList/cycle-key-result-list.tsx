@@ -54,17 +54,12 @@ export const CycleKeyResultList = ({
         type={KEY_RESULT_LIST_TYPE.STATIC}
         keyResultIDs={keyResultIDs}
         isLoading={!isLoaded}
-        templateColumns="7fr 6fr 4fr 6fr 1fr 2fr"
+        templateColumns="2fr 1fr 120px"
         columns={[
           KEY_RESULT_LIST_COLUMN.KEY_RESULT,
           KEY_RESULT_LIST_COLUMN.PROGRESS,
           KEY_RESULT_LIST_COLUMN.OWNER,
         ]}
-        headProperties={{
-          [KEY_RESULT_LIST_COLUMN.OWNER]: {
-            justifySelf: 'flex-end',
-          },
-        }}
         bodyProperties={{
           [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
             withDynamicIcon: true,
