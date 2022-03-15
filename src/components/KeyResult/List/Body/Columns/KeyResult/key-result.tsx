@@ -1,9 +1,10 @@
-import { Flex, Box, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
+import { Flex, Box, Text, Skeleton, SkeletonText, useToken } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
+import { Check, Clock } from 'src/components/Icon'
 import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
@@ -41,6 +42,11 @@ const KeyResultListBodyColumnKeyResult = ({
 
   const isKeyResultLoaded = Boolean(title)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
+  const updateTextColor = status?.isOutdated && !isDisabled ? 'red.500' : 'gray.300'
+  const [updateTextColorToken] = useToken('colors', [updateTextColor])
+  const prefixMessage = status?.isOutdated
+    ? messages.outdatedUpdateTextPrefix
+    : messages.lastUpdateTextPrefix
 
   return (
     <KeyResultListBodyColumnBase
@@ -51,6 +57,7 @@ const KeyResultListBodyColumnKeyResult = ({
       h="full"
       alignItems="center"
       display="flex"
+      minWidth="320px"
     >
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
@@ -71,11 +78,28 @@ const KeyResultListBodyColumnKeyResult = ({
               mt={isKeyResultLoaded ? 'inherit' : '4px'}
               isLoaded={isKeyResultLoaded}
             >
-              <LastUpdateText
-                date={lastUpdateDate}
-                color={status?.isOutdated && !isDisabled ? 'red.500' : 'gray.300'}
-                prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
-              />
+              <Flex alignItems="center">
+                {status?.isOutdated ? (
+                  <Clock
+                    desc={intl.formatMessage(messages.outdatedUpdateIconDescription)}
+                    width="12px"
+                    height="12px"
+                    fill="transparent"
+                    stroke={updateTextColorToken}
+                    mr={1}
+                  />
+                ) : (
+                  <Check
+                    desc={intl.formatMessage(messages.upToDateUpdateIconDescription)}
+                    fill={updateTextColorToken}
+                  />
+                )}
+                <LastUpdateText
+                  date={lastUpdateDate}
+                  color={updateTextColor}
+                  prefix={intl.formatMessage(prefixMessage)}
+                />
+              </Flex>
             </SkeletonText>
           )}
         </Box>
