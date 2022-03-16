@@ -11,13 +11,13 @@ import { KeyResultCheckMark } from './check-mark'
 interface KeyResultChecklistProperties {
   keyResultID?: string
   nodes: KeyResultCheckMarkType[]
-  onCreateCheckmark?: () => void
+  onUpdate?: () => void
   canCreate: boolean
 }
 
 export const KeyResultChecklist = ({
   nodes,
-  onCreateCheckmark,
+  onUpdate,
   keyResultID,
   canCreate,
 }: KeyResultChecklistProperties) => {
@@ -38,7 +38,7 @@ export const KeyResultChecklist = ({
           draftCheckMarks={draftCheckMarks}
           index={index}
           checklistLength={nodes.length}
-          onUpdate={onCreateCheckmark}
+          onUpdate={onUpdate}
           onCreate={handleCreateCheckmark}
         />
       ))}
@@ -46,7 +46,7 @@ export const KeyResultChecklist = ({
         <CreateCheckMarkButton
           keyResultID={keyResultID}
           createButtonReference={createButtonReference}
-          onCreate={onCreateCheckmark}
+          onCreate={onUpdate}
         />
       )}
     </Stack>

@@ -1,27 +1,30 @@
+import { useQuery } from '@apollo/client'
 import { Tag, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { KeyResult, KeyResultCheckMark } from 'src/components/KeyResult/types'
+import { KeyResult } from 'src/components/KeyResult/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import MyTasksEmptyState from './empty-state'
 import messages from './messages'
+import queries from './queries.gql'
 import Tasks from './tasks'
 
 const MyTasks = () => {
   const intl = useIntl()
-  const checkmarks: Array<Partial<KeyResultCheckMark>> = [
-    { id: '19239123', description: 'blablabla' },
-  ]
-  const data = [
-    {
-      id: 'biruleibe',
-      title: 'blablabla',
-      checkList: {
-        edges: checkmarks.map((item) => ({ node: item })),
-      },
+
+  const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
+  const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
+
+  const { refetch } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
+    onCompleted: (data) => {
+      setKeyResults(data.me.keyResults.edges)
+      loadKeyResults(keyResults)
     },
-  ] as Array<Partial<KeyResult>>
+  })
 
   return (
     <>
@@ -37,7 +40,11 @@ const MyTasks = () => {
           {intl.formatMessage(messages.newTag)}
         </Tag>
       </Text>
-      {data.length > 0 ? <Tasks items={data} /> : <MyTasksEmptyState />}
+      {keyResults.length > 0 ? (
+        <Tasks items={keyResults} onUpdate={refetch} />
+      ) : (
+        <MyTasksEmptyState />
+      )}
     </>
   )
 }

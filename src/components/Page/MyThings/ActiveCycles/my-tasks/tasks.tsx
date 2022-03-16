@@ -8,13 +8,15 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 
 interface TasksProperties {
   items: Array<Partial<KeyResult>>
+  onUpdate: () => void
 }
 
 interface KeyResultTasksProperties {
   keyResult: Partial<KeyResult>
+  onUpdate: () => void
 }
 
-const KeyResultTasks = ({ keyResult }: KeyResultTasksProperties) => {
+const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
   const [checklist, updateChecklistEdges] = useConnectionEdges<KeyResultCheckMark>()
 
   useEffect(() => {
@@ -28,18 +30,23 @@ const KeyResultTasks = ({ keyResult }: KeyResultTasksProperties) => {
         <Text pl="0.5rem">{keyResult.title}</Text>
       </HStack>
       <Box pl="4rem">
-        <KeyResultChecklist keyResultID={keyResult.id} nodes={checklist} canCreate={false} />
+        <KeyResultChecklist
+          keyResultID={keyResult.id}
+          nodes={checklist}
+          canCreate={false}
+          onUpdate={onUpdate}
+        />
       </Box>
     </Box>
   )
 }
 
-const Tasks = ({ items }: TasksProperties) => (
+const Tasks = ({ items, onUpdate }: TasksProperties) => (
   <Stack align="stretch">
     {items.map((item) => (
       <Box key={item.id}>
         <Divider my={9} />
-        <KeyResultTasks keyResult={item} />
+        <KeyResultTasks keyResult={item} onUpdate={onUpdate} />
       </Box>
     ))}
   </Stack>

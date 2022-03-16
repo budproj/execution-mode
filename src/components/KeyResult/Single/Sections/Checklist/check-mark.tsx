@@ -73,6 +73,7 @@ export const KeyResultCheckMark = ({
   const [updateCheckMarkDescription, { loading: isUpdatingDescription }] = useMutation(
     queries.UPDATE_CHECK_MARK_DESCRIPTION,
     {
+      refetchQueries: 'active',
       onCompleted: () => {
         if (onUpdate) onUpdate()
       },

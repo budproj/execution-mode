@@ -34,6 +34,7 @@ export const CreateCheckMarkButton = ({
   const intl = useIntl()
   const [draftCheckMarks, setDraftCheckMarks] = useRecoilState(draftCheckMarksAtom(keyResultID))
   const [createCheckMark, { loading }] = useMutation(queries.CREATE_CHECK_MARK, {
+    refetchQueries: 'active',
     onCompleted: (data) => {
       const newDraftCheckMarks = [...draftCheckMarks, data.createKeyResultCheckMark.id]
       setDraftCheckMarks(newDraftCheckMarks)

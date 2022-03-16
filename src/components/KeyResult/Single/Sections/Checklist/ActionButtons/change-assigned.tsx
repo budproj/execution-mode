@@ -31,7 +31,9 @@ export const ChangeAssignedCheckMarkButton = ({
   })
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
-  const [changeAssigned] = useMutation(queries.UPDATE_ASSIGNED_CHECKMARK)
+  const [changeAssigned] = useMutation(queries.UPDATE_ASSIGNED_CHECKMARK, {
+    refetchQueries: 'active',
+  })
 
   const handleChange = async (newAssignedUserId: string | string[]) => {
     if (Array.isArray(newAssignedUserId)) throw new Error('Cannot parse string array')

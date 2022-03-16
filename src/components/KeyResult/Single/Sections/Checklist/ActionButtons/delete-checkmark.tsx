@@ -40,6 +40,7 @@ export const DeleteCheckMarkButton = ({
   const intl = useIntl()
   const setCheckMarkIsBeingRemoved = useSetRecoilState(checkMarkIsBeingRemovedAtom(checkMarkID))
   const [deleteCheckmark] = useMutation(queries.DELETE_CHECK_MARK, {
+    refetchQueries: 'active',
     variables: {
       id: checkMarkID,
     },
