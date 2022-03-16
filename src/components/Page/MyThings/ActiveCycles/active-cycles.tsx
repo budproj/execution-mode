@@ -31,7 +31,7 @@ const ActiveCyclesPage = () => {
       </PageHeader>
 
       <HStack align="stretch" spacing="4rem" flex="1">
-        <Box flexBasis="60%">
+        <Box flexBasis="60%" maxWidth="60%">
           <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
         </Box>
 

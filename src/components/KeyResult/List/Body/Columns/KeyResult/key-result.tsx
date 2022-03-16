@@ -56,7 +56,7 @@ const KeyResultListBodyColumnKeyResult = ({
       h="full"
       alignItems="center"
       display="flex"
-      minWidth="320px"
+      minWidth="280px"
     >
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (

@@ -60,7 +60,7 @@ export const CycleKeyResultList = ({
         type={KEY_RESULT_LIST_TYPE.STATIC}
         keyResultIDs={keyResultIDs}
         isLoading={!isLoaded}
-        templateColumns="2fr 1fr 120px"
+        templateColumns="2fr 1fr 80px"
         borderColor="new-gray.400"
         headProperties={{
           [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
