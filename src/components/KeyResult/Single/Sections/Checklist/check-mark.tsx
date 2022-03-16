@@ -36,6 +36,7 @@ interface KeyResultCheckMarkProperties {
   index?: number
   checklistLength?: number
   onCreate?: () => void
+  isEditable?: boolean
 }
 
 export const KeyResultCheckMark = ({
@@ -46,6 +47,7 @@ export const KeyResultCheckMark = ({
   index,
   checklistLength,
   onCreate,
+  isEditable = true,
 }: KeyResultCheckMarkProperties) => {
   const { dispatch: dispatchToggleEvent } = useEvent(EventType.TOGGLED_KEY_RESULT_CHECK_MARK, {
     feature: Feature.CHECK_MARK,
@@ -181,7 +183,7 @@ export const KeyResultCheckMark = ({
             value={node?.description}
             isLoaded={isLoaded}
             startWithEditView={isDraft}
-            isDisabled={!canUpdate}
+            isDisabled={!isEditable || !canUpdate}
             previewProperties={isChecked ? checkedProperties : undefined}
             onSubmit={handleNewCheckMarkDescription}
             onCancel={handleCancelDescription}

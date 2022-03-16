@@ -33,6 +33,7 @@ export const KeyResultChecklist = ({
       {nodes.map((node, index) => (
         <KeyResultCheckMark
           key={node.id}
+          isEditable={false}
           node={node}
           keyResultID={keyResultID}
           draftCheckMarks={draftCheckMarks}
