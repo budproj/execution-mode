@@ -1,10 +1,9 @@
-import { Flex, Box, Text, Skeleton, SkeletonText, useToken } from '@chakra-ui/react'
+import { Flex, Box, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
-import { Check, Clock } from 'src/components/Icon'
 import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
@@ -14,6 +13,7 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
 import messages from './messages'
+import { UpdateIcon } from './update-icon'
 
 export interface KeyResultListBodyColumnKeyResultProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -43,7 +43,6 @@ const KeyResultListBodyColumnKeyResult = ({
   const isKeyResultLoaded = Boolean(title)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
   const updateTextColor = status?.isOutdated && !isDisabled ? 'red.500' : 'gray.300'
-  const [updateTextColorToken] = useToken('colors', [updateTextColor])
   const prefixMessage = status?.isOutdated
     ? messages.outdatedUpdateTextPrefix
     : messages.lastUpdateTextPrefix
@@ -79,21 +78,9 @@ const KeyResultListBodyColumnKeyResult = ({
               isLoaded={isKeyResultLoaded}
             >
               <Flex alignItems="center">
-                {status?.isOutdated ? (
-                  <Clock
-                    desc={intl.formatMessage(messages.outdatedUpdateIconDescription)}
-                    width="12px"
-                    height="12px"
-                    fill="transparent"
-                    stroke={updateTextColorToken}
-                    mr={1}
-                  />
-                ) : (
-                  <Check
-                    desc={intl.formatMessage(messages.upToDateUpdateIconDescription)}
-                    fill={updateTextColorToken}
-                  />
-                )}
+                {lastUpdateDate ? (
+                  <UpdateIcon isOutdated={status?.isOutdated} updateTextColor={updateTextColor} />
+                ) : undefined}
                 <LastUpdateText
                   date={lastUpdateDate}
                   color={updateTextColor}
