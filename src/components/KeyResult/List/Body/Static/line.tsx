@@ -11,7 +11,6 @@ import {
   KeyResultListBodyColumnConfidenceLevel,
   KeyResultListBodyColumnConfidenceLevelColor,
   KeyResultListBodyColumnKeyResult,
-  KeyResultListBodyColumnPercentualProgress,
   KeyResultListBodyColumnActions,
 } from 'src/components/KeyResult/List/Body/Columns'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
@@ -52,7 +51,6 @@ const KeyResultListBodyStaticLine = ({
     [KEY_RESULT_LIST_COLUMN.CYCLE]: KeyResultListBodyColumnCycle,
     [KEY_RESULT_LIST_COLUMN.OWNER]: KeyResultListBodyColumnOwner,
     [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]: KeyResultListBodyColumnConfidenceLevelColor,
-    [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: KeyResultListBodyColumnPercentualProgress,
     [KEY_RESULT_LIST_COLUMN.ACTIONS]: KeyResultListBodyColumnActions,
   }
 
