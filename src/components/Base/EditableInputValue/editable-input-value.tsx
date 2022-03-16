@@ -172,7 +172,8 @@ const EditableInputValue = ({
               <HStack w="full">
                 <Box w="full">
                   <EditablePreview
-                    fontSize="lg"
+                    lineHeight="1.25rem"
+                    fontSize="md"
                     color={isHovering && !isLocked ? 'brand.500' : defaultColor}
                     fontWeight={400}
                     cursor={isLocked ? 'auto' : 'pointer'}

@@ -7,6 +7,7 @@ import {
   HStack,
   Skeleton,
   VStack,
+  Text,
 } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
@@ -155,7 +156,7 @@ export const KeyResultCheckMark = ({
   }
 
   const checkedProperties: EditablePreviewProps = {
-    color: 'new-gray.600',
+    color: 'new-gray.800',
     textDecoration: 'line-through',
   }
 
@@ -188,9 +189,14 @@ export const KeyResultCheckMark = ({
             onStartEdit={handleStartEdit}
             onStopEdit={handleStopEdit}
           />
-          <Box color="new-gray.600" display={isEditing ? 'none' : undefined}>
+          <Text
+            fontSize="sm"
+            color="new-gray.600"
+            display={isEditing ? 'none' : undefined}
+            lineHeight="0.7rem"
+          >
             {node?.assignedUser?.fullName}
-          </Box>
+          </Text>
         </VStack>
         <Flex gap={2} alignItems="center" display={isEditing ? 'none' : undefined}>
           <DeleteCheckMarkButton
