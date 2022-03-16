@@ -101,6 +101,15 @@ export const ObjectiveKeyResults = ({
       columns={columns}
       emptyStateMessage={messages.keyResultListEmptyStateMessage}
       headProperties={{
+        [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
+          hidden: true,
+        },
+        [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+          hidden: true,
+        },
+        [KEY_RESULT_LIST_COLUMN.OWNER]: {
+          hidden: true,
+        },
         [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
           hidden: true,
         },

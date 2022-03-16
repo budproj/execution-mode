@@ -55,6 +55,17 @@ export const CycleKeyResultList = ({
         keyResultIDs={keyResultIDs}
         isLoading={!isLoaded}
         templateColumns="2fr 1fr 120px"
+        headProperties={{
+          [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
+            hidden: true,
+          },
+          [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+            hidden: true,
+          },
+          [KEY_RESULT_LIST_COLUMN.OWNER]: {
+            hidden: true,
+          },
+        }}
         columns={[
           KEY_RESULT_LIST_COLUMN.KEY_RESULT,
           KEY_RESULT_LIST_COLUMN.PROGRESS,
