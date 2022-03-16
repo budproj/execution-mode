@@ -74,7 +74,6 @@ export const CycleKeyResultList = ({
         bodyProperties={{
           [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
             withDynamicIcon: true,
-            withRightBorder: true,
             withLastUpdateInfo: true,
             isDisabled,
           },
