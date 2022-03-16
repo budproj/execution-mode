@@ -39,7 +39,13 @@ export const CycleKeyResultList = ({
   return (
     <Stack direction="column" gridGap={8}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded ?? true, 300, 21)}>
-        <Heading as="h2" fontSize="md" color="gray.500" fontWeight={700} textTransform="uppercase">
+        <Heading
+          as="h2"
+          fontSize="xl"
+          color="new-gray.800"
+          fontWeight="bold"
+          textTransform="uppercase"
+        >
           {intl
             .formatMessage(messages.title, {
               prefix: cadence.prefix,
@@ -55,6 +61,7 @@ export const CycleKeyResultList = ({
         keyResultIDs={keyResultIDs}
         isLoading={!isLoaded}
         templateColumns="2fr 1fr 120px"
+        borderColor="new-gray.400"
         headProperties={{
           [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
             hidden: true,

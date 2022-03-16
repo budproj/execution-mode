@@ -36,7 +36,7 @@ const ActiveCyclesPage = () => {
         </Box>
 
         <Box>
-          <Divider orientation="vertical" h="full" />
+          <Divider orientation="vertical" h="full" borderColor="new-gray.400" opacity="1" />
         </Box>
 
         <Box flex="1">

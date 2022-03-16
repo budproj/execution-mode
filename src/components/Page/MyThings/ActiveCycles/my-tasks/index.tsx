@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Tag, Text } from '@chakra-ui/react'
+import { Tag, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -28,7 +28,8 @@ const MyTasks = () => {
 
   return (
     <>
-      <Text
+      <Heading
+        as="h2"
         fontSize="xl"
         lineHeight="1.6rem"
         textTransform="uppercase"
@@ -39,7 +40,7 @@ const MyTasks = () => {
         <Tag variant="solid" colorScheme="brand" ml={3} textTransform="lowercase" fontWeight="bold">
           {intl.formatMessage(messages.newTag)}
         </Tag>
-      </Text>
+      </Heading>
       {keyResults.length > 0 ? (
         <Tasks items={keyResults} onUpdate={refetch} />
       ) : (
