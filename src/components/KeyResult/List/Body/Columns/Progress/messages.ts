@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultListBodyColumnProgressMessage = 'leftSideValueTooltip' | 'rightSideValueTooltip'
+type KeyResultListBodyColumnProgressMessage =
+  | 'leftSideValueTooltip'
+  | 'rightSideValueTooltip'
+  | 'progressTooltip'
 
 export default defineMessages<KeyResultListBodyColumnProgressMessage>({
   leftSideValueTooltip: {
@@ -15,5 +18,12 @@ export default defineMessages<KeyResultListBodyColumnProgressMessage>({
     id: 'D9XMWI',
     description:
       'This tooltip is displayed when the user hovers the right side value of our progress bar',
+  },
+
+  progressTooltip: {
+    defaultMessage: 'Progresso atual',
+    id: 'TYmE01',
+    description:
+      'This tooltip is displayed when the user hovers the percentage progress above the bar',
   },
 })

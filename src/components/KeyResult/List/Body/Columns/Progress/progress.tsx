@@ -66,13 +66,18 @@ const KeyResultListBodyColumnProgress = ({
                   isDisabled={isDisabled}
                 />
 
-                <Text
-                  fontSize="md"
-                  color={isDisabled ? 'gray.400' : confidenceTag.color.primary}
-                  fontWeight={500}
+                <TooltipWithDelay
+                  label={intl.formatMessage(messages.progressTooltip)}
+                  placement="bottom-start"
                 >
-                  {intl.formatNumber(progress / 100, { style: 'percent' })}
-                </Text>
+                  <Text
+                    fontSize="md"
+                    color={isDisabled ? 'gray.400' : confidenceTag.color.primary}
+                    fontWeight={500}
+                  >
+                    {intl.formatNumber(progress / 100, { style: 'percent' })}
+                  </Text>
+                </TooltipWithDelay>
               </HStack>
             </Skeleton>
           )}
