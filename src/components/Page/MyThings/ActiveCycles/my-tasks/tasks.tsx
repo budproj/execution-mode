@@ -27,7 +27,9 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
     <Box>
       <HStack key={keyResult.id}>
         <KeyResultDynamicIcon title={keyResult.title} boxSize="30px" iconSize="16px" />
-        <Text pl="0.5rem">{keyResult.title}</Text>
+        <Text maxWidth="calc(100% - 50px)" fontWeight="bold" pl="0.5rem">
+          {keyResult.title}
+        </Text>
       </HStack>
       <Box pl="4rem">
         <KeyResultChecklist

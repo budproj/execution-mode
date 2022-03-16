@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Tag, Heading } from '@chakra-ui/react'
+import { Tag, Heading, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -27,7 +27,7 @@ const MyTasks = () => {
   })
 
   return (
-    <>
+    <Box pr={4}>
       <Heading
         as="h2"
         fontSize="xl"
@@ -46,7 +46,7 @@ const MyTasks = () => {
       ) : (
         <MyTasksEmptyState />
       )}
-    </>
+    </Box>
   )
 }
 

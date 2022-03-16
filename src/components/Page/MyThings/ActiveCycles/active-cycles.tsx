@@ -1,4 +1,5 @@
 import { Box, Divider, HStack } from '@chakra-ui/react'
+import { Scrollbars } from 'rc-scrollbars'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -32,7 +33,9 @@ const ActiveCyclesPage = () => {
 
       <HStack align="stretch" spacing="4rem" flex="1">
         <Box flexBasis="60%" maxWidth="60%">
-          <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+          <Scrollbars>
+            <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+          </Scrollbars>
         </Box>
 
         <Box>
@@ -40,7 +43,9 @@ const ActiveCyclesPage = () => {
         </Box>
 
         <Box flex="1">
-          <MyTasks />
+          <Scrollbars>
+            <MyTasks />
+          </Scrollbars>
         </Box>
       </HStack>
     </PageContent>
