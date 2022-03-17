@@ -11,6 +11,7 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import MyTasksEmptyState from './empty-state'
 import messages from './messages'
 import queries from './queries.gql'
+import { TaskSkeletons } from './skeletons'
 import Tasks from './tasks'
 
 const MyTasks = () => {
@@ -19,7 +20,7 @@ const MyTasks = () => {
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
 
-  const { refetch } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
+  const { refetch, loading } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
     onCompleted: (data) => {
       setKeyResults(data.me.keyResults.edges)
       loadKeyResults(keyResults)
@@ -41,7 +42,9 @@ const MyTasks = () => {
           {intl.formatMessage(messages.newTag)}
         </Tag>
       </Heading>
-      {keyResults.length > 0 ? (
+      {loading ? (
+        <TaskSkeletons isLoaded={!loading} />
+      ) : keyResults.length > 0 ? (
         <Tasks items={keyResults} onUpdate={refetch} />
       ) : (
         <MyTasksEmptyState />
