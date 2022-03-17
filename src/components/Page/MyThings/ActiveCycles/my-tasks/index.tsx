@@ -28,7 +28,7 @@ const MyTasks = () => {
   })
 
   return (
-    <Box pr={4}>
+    <Box pr={6}>
       <Heading
         as="h2"
         fontSize="xl"

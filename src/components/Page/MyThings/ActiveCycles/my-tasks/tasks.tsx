@@ -31,7 +31,7 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
           {keyResult.title}
         </Text>
       </HStack>
-      <Box pl="4rem">
+      <Box pl="3.2rem">
         <KeyResultChecklist
           keyResultID={keyResult.id}
           nodes={checklist}
