@@ -1011,6 +1011,10 @@
     "defaultMessage": "Meu perfil",
     "description": "MainAppBar user menu first item option"
   },
+  "TYmE01": {
+    "defaultMessage": "Progresso atual",
+    "description": "This tooltip is displayed when the user hovers the percentage progress above the bar"
+  },
   "TaXVmY": {
     "defaultMessage": "Adicionar um OKR neste ciclo",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
