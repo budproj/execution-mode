@@ -150,11 +150,11 @@ export const KeyResultCheckMark = ({
   }
 
   const handleStartEdit = () => {
-    setIsEditing(true)
+    if (isEditable) setIsEditing(true)
   }
 
   const handleStopEdit = () => {
-    setIsEditing(false)
+    if (isEditable) setIsEditing(false)
   }
 
   const checkedProperties: EditablePreviewProps = {
