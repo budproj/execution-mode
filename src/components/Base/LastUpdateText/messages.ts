@@ -10,8 +10,8 @@ export default defineMessages<LastUpdateTextMessage>({
   },
 
   date: {
-    defaultMessage: '{unit, select, fallback {em {date}} other {{date}}}',
-    id: 'sObsR1',
+    defaultMessage: '{unit, select, fallback {desde {date}} other {{date}}}',
+    id: 'VSS4F8',
     description:
       'This text displays the latest report status for a given component, using a given date logic',
   },

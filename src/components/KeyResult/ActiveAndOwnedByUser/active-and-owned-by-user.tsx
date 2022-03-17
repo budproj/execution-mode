@@ -43,7 +43,7 @@ const KeyResultActiveAndOwnedByUser = ({
   }, [keyResults, isLoaded])
 
   return (
-    <Stack direction="column" gridGap={8}>
+    <Stack direction="column" gridGap={8} pr={6}>
       {isLoaded ? (
         <KeyResultActiveAndOwnedByUserCyclesList
           keyResults={keyResults}

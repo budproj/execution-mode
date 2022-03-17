@@ -61,12 +61,11 @@ export const ObjectiveKeyResults = ({
   const isEditing = mode === ObjectiveMode.EDIT
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
-  const templateColumns = isEditing ? '2fr 1fr 0.1fr 0.68fr 0.25fr' : '2fr 1fr 0.1fr 1fr'
+  const templateColumns = isEditing ? '2fr 1fr 0.68fr 0.25fr' : '2fr 1fr 1fr'
   const columns = without(
     [
       KEY_RESULT_LIST_COLUMN.KEY_RESULT,
       KEY_RESULT_LIST_COLUMN.PROGRESS,
-      KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS,
       KEY_RESULT_LIST_COLUMN.OWNER,
       isEditing && KEY_RESULT_LIST_COLUMN.ACTIONS,
     ],
@@ -102,7 +101,13 @@ export const ObjectiveKeyResults = ({
       columns={columns}
       emptyStateMessage={messages.keyResultListEmptyStateMessage}
       headProperties={{
-        [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
+        [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
+          hidden: true,
+        },
+        [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+          hidden: true,
+        },
+        [KEY_RESULT_LIST_COLUMN.OWNER]: {
           hidden: true,
         },
         [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
@@ -118,9 +123,6 @@ export const ObjectiveKeyResults = ({
         [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
           withConfidenceTag: true,
           isActive: !isDisabled,
-          isDisabled,
-        },
-        [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
           isDisabled,
         },
         [KEY_RESULT_LIST_COLUMN.OWNER]: {

@@ -157,6 +157,7 @@ const EditableInputValue = ({
         <Editable
           submitOnBlur={Boolean(hideControls)}
           value={currentValue}
+          isPreviewFocusable={!isLocked}
           isDisabled={isLocked}
           startWithEditView={startWithEditView}
           cursor={isLocked ? 'auto' : 'pointer'}
@@ -172,7 +173,8 @@ const EditableInputValue = ({
               <HStack w="full">
                 <Box w="full">
                   <EditablePreview
-                    fontSize="lg"
+                    lineHeight="1.25rem"
+                    fontSize="md"
                     color={isHovering && !isLocked ? 'brand.500' : defaultColor}
                     fontWeight={400}
                     cursor={isLocked ? 'auto' : 'pointer'}

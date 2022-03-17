@@ -37,8 +37,9 @@ const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
           <Flex gridGap={20} flexGrow={1}>
             <MainAppBarMenuItem label={intl.formatMessage(messages.firstMenuItem)} href="/" />
             <MainAppBarMenuItem
+              isNew
               label={intl.formatMessage(messages.secondMenuItem)}
-              href="/my-key-results"
+              href="/my-things"
             />
             <MainAppBarMenuItem
               label={intl.formatMessage(messages.thirdMenuItem)}

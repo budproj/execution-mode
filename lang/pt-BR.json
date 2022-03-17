@@ -43,10 +43,6 @@
     "defaultMessage": "Status",
     "description": "This text is displayed in our check-in card, as a title for the right column in the progress increase section"
   },
-  "/DyxUT": {
-    "defaultMessage": "Último check-in",
-    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
-  },
   "/H4hHb": {
     "defaultMessage": "Buscar subtimes",
     "description": "This message is displayed inside the child teams section, on the search bar"
@@ -194,6 +190,10 @@
   "2iSLX9": {
     "defaultMessage": "Inglês",
     "description": "This message is used as the label for the english language in our locale switcher"
+  },
+  "2leAvr": {
+    "defaultMessage": "Minhas Tarefas",
+    "description": "The header in my tasks title, inside my things page"
   },
   "30/f+o": {
     "defaultMessage": "Tem certeza que deseja desativar {gender, select, MALE {o} FEMALE {a} other {o}} usuári{gender, select, MALE {o} FEMALE {a} other {o}} {name}?",
@@ -575,6 +575,14 @@
     "defaultMessage": "Este time estará vinculado a {teamname}",
     "description": "The text is displayed as header description in the add team modal"
   },
+  "GepLaP": {
+    "defaultMessage": "Uma mão apertando um botão com um icone de seleção de uma tarefa",
+    "description": "The alternative text explaining the check item image"
+  },
+  "Gk28Al": {
+    "defaultMessage": "novo!",
+    "description": "Tag new item"
+  },
   "GrPUMn": {
     "defaultMessage": "Mês de",
     "description": "The prefix that appears in our chart tooltip in the key-result sidebar while seeing an yearly key-result"
@@ -619,6 +627,10 @@
     "defaultMessage": "Ver menos...",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
+  "I8NCD3": {
+    "defaultMessage": "Check-in realizado",
+    "description": "This string is used as the description for the icon that indicates that the key-result is updated"
+  },
   "IGHT6z": {
     "defaultMessage": "Você perderá todos os resultados-chave deste OKR, incluindo todos os check-ins e comentários feitos até aqui.",
     "description": "This message is used as the modal description while removing a given objective"
@@ -643,9 +655,17 @@
     "defaultMessage": "para <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the second line of our confidence tooltip"
   },
+  "ItLQef": {
+    "defaultMessage": "Check-in realizado",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
+  },
   "J+UxkH": {
     "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
+  "J5Rfuu": {
+    "defaultMessage": "Crie novas tarefas pela barra lateral dos resultados-chave em que você atua.",
+    "description": "The empty state message when you have no tasks"
   },
   "J8dAid": {
     "defaultMessage": "Este objetivo não tem nenhum resultado-chave",
@@ -683,6 +703,10 @@
     "defaultMessage": "NOTIFICAÇÕES",
     "description": "The tooltip text for the notifications text"
   },
+  "K8KvrI": {
+    "defaultMessage": "Minhas Coisas",
+    "description": "MainAppBar menu item that links to \"My Things\" page"
+  },
   "KSjqcC": {
     "defaultMessage": "%",
     "description": "The text of the table head related to the percentual progress column"
@@ -718,6 +742,10 @@
   "M0RYZa": {
     "defaultMessage": "Salvar",
     "description": "This is a button label displayed inside the insert key-result drawer. This is the second button"
+  },
+  "M2QJC/": {
+    "defaultMessage": "Sem check-in",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
   "M9Jejl": {
     "defaultMessage": "Painel | bud",
@@ -983,6 +1011,10 @@
     "defaultMessage": "Meu perfil",
     "description": "MainAppBar user menu first item option"
   },
+  "TYmE01": {
+    "defaultMessage": "Progresso atual",
+    "description": "This tooltip is displayed when the user hovers the percentage progress above the bar"
+  },
   "TaXVmY": {
     "defaultMessage": "Adicionar um OKR neste ciclo",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
@@ -1023,6 +1055,10 @@
     "defaultMessage": "Período",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
   },
+  "VSS4F8": {
+    "defaultMessage": "{unit, select, fallback {desde {date}} other {{date}}}",
+    "description": "This text displays the latest report status for a given component, using a given date logic"
+  },
   "VUKPKt": {
     "defaultMessage": "Cancelar",
     "description": "This is a button label displayed inside the insert key-result drawer. This is the first button"
@@ -1042,6 +1078,10 @@
   "WKevJy": {
     "defaultMessage": "Clique aqui para editar esse campo",
     "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
+  },
+  "WR43/0": {
+    "defaultMessage": "Você ainda não tem nenhuma tarefa.",
+    "description": "The empty state message header when you have no tasks"
   },
   "WiYOXK": {
     "defaultMessage": "Valor Inicial",
@@ -1155,6 +1195,10 @@
     "defaultMessage": "Times",
     "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
   },
+  "bh8jgN": {
+    "defaultMessage": "novo!",
+    "description": "The text inside the tag to inform new buttons"
+  },
   "biDODR": {
     "defaultMessage": "Um ícone de lupa, indicando que este é um campo de busca",
     "description": "This text is used by screen readers to explain the search icon in all our search inputs"
@@ -1226,6 +1270,10 @@
   "eUCb55": {
     "defaultMessage": "Fim",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawers"
+  },
+  "eVkwyH": {
+    "defaultMessage": "Minhas Coisas",
+    "description": "The page title that our users should see in the my things page"
   },
   "eVsyB5": {
     "defaultMessage": "Email",
@@ -1479,6 +1527,10 @@
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
   },
+  "p2UjMZ": {
+    "defaultMessage": "Minhas Coisas | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
@@ -1546,10 +1598,6 @@
   "sFYaLE": {
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
-  },
-  "sObsR1": {
-    "defaultMessage": "{unit, select, fallback {em {date}} other {{date}}}",
-    "description": "This text displays the latest report status for a given component, using a given date logic"
   },
   "sP2MCY": {
     "defaultMessage": "Mostrar menos",
@@ -1627,6 +1675,10 @@
     "defaultMessage": "Português",
     "description": "This message is used as the label for the portuguese language in our locale switcher"
   },
+  "vgU7fC": {
+    "defaultMessage": "Check-in pendente",
+    "description": "This string is used as the description for the icon that indicates that the key-result has not been updated"
+  },
   "vm0Yuj": {
     "defaultMessage": "Meu perfil | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
@@ -1682,10 +1734,6 @@
   "yfhIM+": {
     "defaultMessage": "Cancelar",
     "description": "Text in the cancel action button"
-  },
-  "ytvOyM": {
-    "defaultMessage": "Meus Resultados-Chave",
-    "description": "MainAppBar menu item that links to \"My Key Results\" page"
   },
   "yw+DGB": {
     "defaultMessage": "Sobrenome",

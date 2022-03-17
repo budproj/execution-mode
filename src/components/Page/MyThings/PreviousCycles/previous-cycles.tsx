@@ -11,11 +11,11 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
-import MyKeyResultsPageSwitcher from '../Switcher'
+import PageSwitcher from '../Switcher'
 
 import messages from './messages'
 
-const MyKeyResultsPreviousCyclesPage = () => {
+const PreviousCyclesPage = () => {
   const intl = useIntl()
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 
@@ -31,7 +31,7 @@ const MyKeyResultsPreviousCyclesPage = () => {
       </PageHeader>
 
       <Box pb={8}>
-        <MyKeyResultsPageSwitcher />
+        <PageSwitcher />
       </Box>
 
       <KeyResultNotActiveAndOwnedByUser onLineClick={handleLineClick} />
@@ -39,4 +39,4 @@ const MyKeyResultsPreviousCyclesPage = () => {
   )
 }
 
-export default MyKeyResultsPreviousCyclesPage
+export default PreviousCyclesPage

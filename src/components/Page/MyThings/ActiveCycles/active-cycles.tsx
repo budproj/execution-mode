@@ -1,5 +1,5 @@
-import { useQuery } from '@apollo/client'
-import { Box } from '@chakra-ui/react'
+import { Box, Divider, HStack } from '@chakra-ui/react'
+import { Scrollbars } from 'rc-scrollbars'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -9,22 +9,18 @@ import PageContent from 'src/components/Base/PageContent'
 import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
-import MyKeyResultsPageSwitcher from 'src/components/Page/MyKeyResults/Switcher'
-import MyKeyResultsPageSwitcherSkeleton from 'src/components/Page/MyKeyResults/Switcher/skeleton'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
 
 import messages from './messages'
-import queries from './queries.gql'
+import MyTasks from './my-tasks'
 
-const MyKeyResultsActiveCyclesPage = () => {
+const ActiveCyclesPage = () => {
   const intl = useIntl()
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-  const { data, loading } = useQuery(queries.LIST_NOT_ACTIVE_CYCLES)
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
-  const hasInactiveCycles = data?.cycles?.edges.length > 0
 
   return (
     <PageContent>
@@ -35,17 +31,25 @@ const MyKeyResultsActiveCyclesPage = () => {
         <PageTitle>{intl.formatMessage(messages.pageTitle)}</PageTitle>
       </PageHeader>
 
-      <Box pb={8}>
-        {loading ? (
-          <MyKeyResultsPageSwitcherSkeleton />
-        ) : (
-          Boolean(hasInactiveCycles) && <MyKeyResultsPageSwitcher />
-        )}
-      </Box>
+      <HStack align="stretch" spacing="4rem" flex="1">
+        <Box flexBasis="60%" maxWidth="60%">
+          <Scrollbars>
+            <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+          </Scrollbars>
+        </Box>
 
-      <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+        <Box>
+          <Divider orientation="vertical" h="full" borderColor="new-gray.400" opacity="1" />
+        </Box>
+
+        <Box flex="1">
+          <Scrollbars>
+            <MyTasks />
+          </Scrollbars>
+        </Box>
+      </HStack>
     </PageContent>
   )
 }
 
-export default MyKeyResultsActiveCyclesPage
+export default ActiveCyclesPage

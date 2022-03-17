@@ -11,15 +11,17 @@ import { KeyResultCheckMark } from './check-mark'
 interface KeyResultChecklistProperties {
   keyResultID?: string
   nodes: KeyResultCheckMarkType[]
-  onCreateCheckmark: () => void
+  onUpdate?: () => void
   canCreate: boolean
+  isEditable?: boolean
 }
 
 export const KeyResultChecklist = ({
   nodes,
-  onCreateCheckmark,
+  onUpdate,
   keyResultID,
   canCreate,
+  isEditable = true,
 }: KeyResultChecklistProperties) => {
   const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
   const createButtonReference = useRef<HTMLButtonElement>(null)
@@ -33,12 +35,13 @@ export const KeyResultChecklist = ({
       {nodes.map((node, index) => (
         <KeyResultCheckMark
           key={node.id}
+          isEditable={isEditable}
           node={node}
           keyResultID={keyResultID}
           draftCheckMarks={draftCheckMarks}
           index={index}
           checklistLength={nodes.length}
-          onUpdate={onCreateCheckmark}
+          onUpdate={onUpdate}
           onCreate={handleCreateCheckmark}
         />
       ))}
@@ -46,7 +49,7 @@ export const KeyResultChecklist = ({
         <CreateCheckMarkButton
           keyResultID={keyResultID}
           createButtonReference={createButtonReference}
-          onCreate={onCreateCheckmark}
+          onCreate={onUpdate}
         />
       )}
     </Stack>

@@ -91,7 +91,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
             nodes={checklist}
             keyResultID={keyResultID}
             canCreate={canCreate}
-            onCreateCheckmark={refreshChecklist}
+            onUpdate={refreshChecklist}
           />
         </Collapse>
       ) : // eslint-disable-next-line unicorn/no-null

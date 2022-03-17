@@ -10,6 +10,7 @@ type MainAppBarMessage =
   | 'notificationBellIconDesc'
   | 'settingsIconTitle'
   | 'settingsIconDesc'
+  | 'newItem'
 
 export default defineMessages<MainAppBarMessage>({
   firstMenuItem: {
@@ -19,9 +20,9 @@ export default defineMessages<MainAppBarMessage>({
   },
 
   secondMenuItem: {
-    defaultMessage: 'Meus Resultados-Chave',
-    id: 'ytvOyM',
-    description: 'MainAppBar menu item that links to "My Key Results" page',
+    defaultMessage: 'Minhas Coisas',
+    id: 'K8KvrI',
+    description: 'MainAppBar menu item that links to "My Things" page',
   },
 
   thirdMenuItem: {
@@ -68,5 +69,11 @@ export default defineMessages<MainAppBarMessage>({
       'Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma',
     id: 'GeAU92',
     description: 'The alternative text explaining our settings icon',
+  },
+
+  newItem: {
+    defaultMessage: 'novo!',
+    id: 'bh8jgN',
+    description: 'The text inside the tag to inform new buttons',
   },
 })

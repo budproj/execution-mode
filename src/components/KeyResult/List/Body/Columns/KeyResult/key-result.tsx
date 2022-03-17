@@ -13,6 +13,7 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
 import messages from './messages'
+import { UpdateIcon } from './update-icon'
 
 export interface KeyResultListBodyColumnKeyResultProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -41,6 +42,10 @@ const KeyResultListBodyColumnKeyResult = ({
 
   const isKeyResultLoaded = Boolean(title)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
+  const updateTextColor = status?.isOutdated && !isDisabled ? 'red.500' : 'gray.300'
+  const prefixMessage = status?.isOutdated
+    ? messages.outdatedUpdateTextPrefix
+    : messages.lastUpdateTextPrefix
 
   return (
     <KeyResultListBodyColumnBase
@@ -51,6 +56,7 @@ const KeyResultListBodyColumnKeyResult = ({
       h="full"
       alignItems="center"
       display="flex"
+      minWidth="280px"
     >
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
@@ -71,11 +77,16 @@ const KeyResultListBodyColumnKeyResult = ({
               mt={isKeyResultLoaded ? 'inherit' : '4px'}
               isLoaded={isKeyResultLoaded}
             >
-              <LastUpdateText
-                date={lastUpdateDate}
-                color={status?.isOutdated && !isDisabled ? 'red.500' : 'gray.300'}
-                prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
-              />
+              <Flex alignItems="center">
+                {lastUpdateDate ? (
+                  <UpdateIcon isOutdated={status?.isOutdated} updateTextColor={updateTextColor} />
+                ) : undefined}
+                <LastUpdateText
+                  date={lastUpdateDate}
+                  color={updateTextColor}
+                  prefix={intl.formatMessage(prefixMessage)}
+                />
+              </Flex>
             </SkeletonText>
           )}
         </Box>

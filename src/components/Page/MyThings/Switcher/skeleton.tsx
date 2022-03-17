@@ -1,7 +1,7 @@
 import { Skeleton, Stack, useTheme } from '@chakra-ui/react'
 import React from 'react'
 
-const MyKeyResultsPageSwitcherSkeleton = () => {
+const PageSwitcherSkeleton = () => {
   const { colors } = useTheme()
 
   return (
@@ -17,4 +17,4 @@ const MyKeyResultsPageSwitcherSkeleton = () => {
   )
 }
 
-export default MyKeyResultsPageSwitcherSkeleton
+export default PageSwitcherSkeleton

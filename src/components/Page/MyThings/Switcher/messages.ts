@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type MyKeyResultsSwitcherMessage = 'firstTab' | 'secondTab'
+type SwitcherMessage = 'firstTab' | 'secondTab'
 
-export default defineMessages<MyKeyResultsSwitcherMessage>({
+export default defineMessages<SwitcherMessage>({
   firstTab: {
     defaultMessage: 'Ciclos ativos',
     id: 'mdG+CG',
