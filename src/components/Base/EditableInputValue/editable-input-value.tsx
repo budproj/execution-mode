@@ -83,14 +83,6 @@ const EditableInputValue = ({
   const isWithinMaxCharacters = maxCharacters ? expandedValue.length <= maxCharacters : true
   const isLocked = isDisabled ?? isSubmitting
 
-  const handleHover = () => {
-    if (!isHovering) setIsHovering(true)
-  }
-
-  const handleStopHover = () => {
-    if (isHovering) setIsHovering(false)
-  }
-
   const handleEdit = () => {
     setIsExpanded(true)
     if (onStartEdit) onStartEdit()
@@ -157,6 +149,7 @@ const EditableInputValue = ({
         <Editable
           submitOnBlur={Boolean(hideControls)}
           value={currentValue}
+          isPreviewFocusable={!isLocked}
           isDisabled={isLocked}
           startWithEditView={startWithEditView}
           cursor={isLocked ? 'auto' : 'pointer'}
