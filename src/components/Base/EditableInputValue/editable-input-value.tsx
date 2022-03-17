@@ -164,8 +164,6 @@ const EditableInputValue = ({
           onEdit={handleEdit}
           onChange={handleChange}
           onCancel={handleCancel}
-          onMouseEnter={handleHover}
-          onMouseLeave={handleStopHover}
         >
           {({ isEditing }) => (
             <Stack alignItems="flex-start" justifyItems="center" spacing={0}>

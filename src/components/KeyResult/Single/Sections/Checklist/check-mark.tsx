@@ -9,6 +9,7 @@ import {
   VStack,
   Text,
 } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React, { useEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -39,6 +40,16 @@ interface KeyResultCheckMarkProperties {
   isEditable?: boolean
 }
 
+const StyledKeyResultCheckMark = styled(HStack)`
+  & .deleteCheckMarkButton {
+    opacity: 0;
+  }
+
+  &:hover .deleteCheckMarkButton {
+    opacity: 1;
+  }
+`
+
 export const KeyResultCheckMark = ({
   keyResultID,
   node,
@@ -58,7 +69,6 @@ export const KeyResultCheckMark = ({
       feature: Feature.CHECK_MARK,
     },
   )
-  const [isHovering, setIsHovering] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
   const checkmarkIsBeingRemoved = useRecoilValue(checkMarkIsBeingRemovedAtom(node?.id))
@@ -129,14 +139,6 @@ export const KeyResultCheckMark = ({
     if (isEmpty) removeCheckmarkButton.current?.click()
   }
 
-  const handleMouseEnter = () => {
-    if (!isHovering) setIsHovering(true)
-  }
-
-  const handleMouseLeave = () => {
-    if (isHovering) setIsHovering(false)
-  }
-
   const handleEnterKey = (value?: string) => {
     const isEmpty = !value || value.trim() === ''
     if (
@@ -168,7 +170,7 @@ export const KeyResultCheckMark = ({
 
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
-      <HStack alignItems="start" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <StyledKeyResultCheckMark alignItems="start">
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Checkbox
             isChecked={isChecked}
@@ -203,9 +205,9 @@ export const KeyResultCheckMark = ({
         <Flex gap={2} alignItems="center" display={isEditing ? 'none' : undefined}>
           <DeleteCheckMarkButton
             buttonRef={removeCheckmarkButton}
+            className="deleteCheckMarkButton"
             keyResultID={keyResultID}
             checkMarkID={node?.id}
-            isVisible={isHovering && !isEditing}
             canDelete={canDelete}
             onDelete={onUpdate}
           />
@@ -217,7 +219,7 @@ export const KeyResultCheckMark = ({
             onUpdate={onUpdate}
           />
         </Flex>
-      </HStack>
+      </StyledKeyResultCheckMark>
     </Skeleton>
   )
 }
