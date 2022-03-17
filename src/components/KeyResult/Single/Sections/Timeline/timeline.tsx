@@ -9,7 +9,6 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 import KeyResultSectionTimelineContent from './Content'
 import KeyResultSectionTimelineHeader from './Header/header'
 import queries from './queries.gql'
-import KeyResultSectionTimelineSkeleton from './skeleton'
 
 export interface KeyResultSectionTimelineProperties {
   limit: number
@@ -89,9 +88,8 @@ const KeyResultSectionTimeline = ({
           scrollTarget={scrollTarget}
           onEntryDelete={handleEntryDelete}
         />
-      ) : (
-        <KeyResultSectionTimelineSkeleton />
-      )}
+      ) : // eslint-disable-next-line unicorn/no-null
+      null}
     </Flex>
   )
 }

@@ -8,6 +8,7 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { Team } from '../types'
 
 import queries from './queries.gql'
+import { StyledTeamSelectWrapper } from './styled-wrapper'
 
 type TeamData = {
   id: string
@@ -15,6 +16,7 @@ type TeamData = {
 }
 
 type TeamTagListProperties = {
+  hasScroll?: boolean
   filter?: string
   teams?: TeamData[]
   teamIDsBlacklist?: string[]
@@ -26,6 +28,7 @@ type GetReachableTeamsResponse = {
 }
 
 export const TeamSelect = ({
+  hasScroll,
   filter,
   teams,
   teamIDsBlacklist,
@@ -66,7 +69,7 @@ export const TeamSelect = ({
   }, [isLoaded, teams, getReachableTeams])
 
   return (
-    <>
+    <StyledTeamSelectWrapper hasScroll={hasScroll}>
       {filteredTeams.map((team) => (
         <MenuItem
           key={team.id}
@@ -86,6 +89,6 @@ export const TeamSelect = ({
           {team.name}
         </MenuItem>
       ))}
-    </>
+    </StyledTeamSelectWrapper>
   )
 }

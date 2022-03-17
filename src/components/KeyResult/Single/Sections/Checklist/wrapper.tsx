@@ -18,7 +18,6 @@ import { OptionBarWrapper } from './OptionBar/wrapper'
 import { KeyResultChecklist } from './checklist'
 import messages from './messages'
 import queries from './queries.gql'
-import { KeyResultChecklistSkeleton } from './skeleton'
 import { ToggleCollapse } from './toggle-collapse'
 
 interface KeyResultChecklistWrapperProperties {
@@ -95,9 +94,8 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
             onCreateCheckmark={refreshChecklist}
           />
         </Collapse>
-      ) : (
-        <KeyResultChecklistSkeleton />
-      )}
+      ) : // eslint-disable-next-line unicorn/no-null
+      null}
     </Stack>
   )
 }

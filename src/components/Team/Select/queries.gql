@@ -1,5 +1,5 @@
 query GET_REACHABLE_TEAMS {
-  teams {
+  teams(first: 1000) {
     edges {
       node {
         id
