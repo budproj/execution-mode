@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import TrashIcon from 'src/components/Icon/Trash'
+import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
@@ -53,7 +54,7 @@ export const DeleteCheckMarkButton = ({
   const intl = useIntl()
   const setCheckMarkIsBeingRemoved = useSetRecoilState(checkMarkIsBeingRemovedAtom(checkMarkID))
   const [deleteCheckmark] = useMutation(queries.DELETE_CHECK_MARK, {
-    refetchQueries: 'active',
+    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS],
     variables: {
       id: checkMarkID,
     },

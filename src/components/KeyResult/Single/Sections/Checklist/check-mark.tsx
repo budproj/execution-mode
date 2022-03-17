@@ -18,6 +18,7 @@ import {
   KeyResultCheckMark as KeyResultCheckMarkType,
   KeyResultCheckMarkState,
 } from 'src/components/KeyResult/types'
+import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { GraphQLEffect } from 'src/components/types'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
@@ -86,7 +87,7 @@ export const KeyResultCheckMark = ({
   const [updateCheckMarkDescription, { loading: isUpdatingDescription }] = useMutation(
     queries.UPDATE_CHECK_MARK_DESCRIPTION,
     {
-      refetchQueries: 'active',
+      refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS],
       onCompleted: () => {
         if (onUpdate) onUpdate()
       },

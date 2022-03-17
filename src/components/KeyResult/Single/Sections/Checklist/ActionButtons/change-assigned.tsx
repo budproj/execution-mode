@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Box, Popover, PopoverBody, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
+import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
 
@@ -32,7 +33,7 @@ export const ChangeAssignedCheckMarkButton = ({
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const [changeAssigned] = useMutation(queries.UPDATE_ASSIGNED_CHECKMARK, {
-    refetchQueries: 'active',
+    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS],
   })
 
   const handleChange = async (newAssignedUserId: string | string[]) => {

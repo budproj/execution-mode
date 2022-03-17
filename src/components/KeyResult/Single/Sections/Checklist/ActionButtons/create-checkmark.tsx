@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { PlusOutline } from 'src/components/Icon'
+import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
@@ -34,7 +35,7 @@ export const CreateCheckMarkButton = ({
   const intl = useIntl()
   const [draftCheckMarks, setDraftCheckMarks] = useRecoilState(draftCheckMarksAtom(keyResultID))
   const [createCheckMark, { loading }] = useMutation(queries.CREATE_CHECK_MARK, {
-    refetchQueries: 'active',
+    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS],
     onCompleted: (data) => {
       const newDraftCheckMarks = [...draftCheckMarks, data.createKeyResultCheckMark.id]
       setDraftCheckMarks(newDraftCheckMarks)
