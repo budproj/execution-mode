@@ -83,6 +83,14 @@ const EditableInputValue = ({
   const isWithinMaxCharacters = maxCharacters ? expandedValue.length <= maxCharacters : true
   const isLocked = isDisabled ?? isSubmitting
 
+  const handleHover = () => {
+    if (!isHovering) setIsHovering(true)
+  }
+
+  const handleStopHover = () => {
+    if (isHovering) setIsHovering(false)
+  }
+
   const handleEdit = () => {
     setIsExpanded(true)
     if (onStartEdit) onStartEdit()
@@ -157,6 +165,8 @@ const EditableInputValue = ({
           onEdit={handleEdit}
           onChange={handleChange}
           onCancel={handleCancel}
+          onMouseEnter={handleHover}
+          onMouseLeave={handleStopHover}
         >
           {({ isEditing }) => (
             <Stack alignItems="flex-start" justifyItems="center" spacing={0}>
