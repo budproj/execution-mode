@@ -8,7 +8,7 @@
     "description": "This text is displayed in our comment input in our key result drawer when it has no value"
   },
   "+ajAuo": {
-    "defaultMessage": "{\"defaultMessage\"=>\"No user found\", \"description\"=>\"This message appears in our user search when we try to search for a given user without any results\"}",
+    "defaultMessage": "No user found",
     "description": "This message appears in our user search when we try to search for a given user without any results"
   },
   "+CyB1n": {
