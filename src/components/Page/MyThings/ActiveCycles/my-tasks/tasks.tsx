@@ -36,6 +36,7 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
           keyResultID={keyResult.id}
           nodes={checklist}
           canCreate={false}
+          isEditable={false}
           onUpdate={onUpdate}
         />
       </Box>

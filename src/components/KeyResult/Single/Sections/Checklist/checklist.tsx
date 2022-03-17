@@ -13,6 +13,7 @@ interface KeyResultChecklistProperties {
   nodes: KeyResultCheckMarkType[]
   onUpdate?: () => void
   canCreate: boolean
+  isEditable?: boolean
 }
 
 export const KeyResultChecklist = ({
@@ -20,6 +21,7 @@ export const KeyResultChecklist = ({
   onUpdate,
   keyResultID,
   canCreate,
+  isEditable = true,
 }: KeyResultChecklistProperties) => {
   const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
   const createButtonReference = useRef<HTMLButtonElement>(null)
@@ -33,7 +35,7 @@ export const KeyResultChecklist = ({
       {nodes.map((node, index) => (
         <KeyResultCheckMark
           key={node.id}
-          isEditable={false}
+          isEditable={isEditable}
           node={node}
           keyResultID={keyResultID}
           draftCheckMarks={draftCheckMarks}
