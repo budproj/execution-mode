@@ -55,7 +55,7 @@
     "@budproj/eslint-config-prettier-ts": "^1.0.0",
     "@budproj/eslint-config-react": "^1.0.0",
     "@budproj/prettier-config": "^1.0.0",
-    "@formatjs/cli": "^2.13.5",
+    "@formatjs/cli": "^2.15.0",
     "@miragejs/graphql": "^0.1.9",
     "@next/eslint-plugin-next": "^12.1.0",
     "@tsconfig/recommended": "^1.0.1",
