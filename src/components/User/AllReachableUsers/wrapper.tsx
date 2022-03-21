@@ -33,7 +33,7 @@ export const AllReachableUsers = ({
   }, [data, setUserEdges])
 
   useEffect(() => {
-    if (users) loadUsers(users)
+    if (!users) loadUsers(users)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users])
 
