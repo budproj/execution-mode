@@ -1,4 +1,4 @@
-import { Box, FormLabel, Input, MenuItemOption, Stack } from '@chakra-ui/react'
+import { Box, FormLabel, HStack, Input, MenuItemOption, Stack } from '@chakra-ui/react'
 import { Field, useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -43,7 +43,6 @@ export const CreateUserInWorkspaceFields = () => {
       <Box>
         <FormLabel>{intl.formatMessage(messages.userLastNameLabel)}</FormLabel>
         <Field
-          autoFocus
           name="userLastName"
           placeholder={intl.formatMessage(messages.userLastNamePlaceholder)}
           as={Input}
@@ -53,7 +52,6 @@ export const CreateUserInWorkspaceFields = () => {
       <Box>
         <FormLabel>{intl.formatMessage(messages.userEmailLabel)}</FormLabel>
         <Field
-          autoFocus
           name="userEmail"
           placeholder={intl.formatMessage(messages.userEmailPlaceholder)}
           as={Input}
@@ -63,7 +61,6 @@ export const CreateUserInWorkspaceFields = () => {
       <Box>
         <FormLabel>{intl.formatMessage(messages.userRoleLabel)}</FormLabel>
         <Field
-          autoFocus
           name="userRole"
           placeholder={intl.formatMessage(messages.userRolePlaceholder)}
           as={Input}
@@ -109,6 +106,11 @@ export const CreateUserInWorkspaceFields = () => {
           </MenuItemOption>
         </SelectMenu>
       </Box>
+
+      <HStack>
+        <Field type="checkbox" name="optionsAutoInvite" />
+        <FormLabel>{intl.formatMessage(messages.userAutoInviteLabel)}</FormLabel>
+      </HStack>
     </Stack>
   )
 }

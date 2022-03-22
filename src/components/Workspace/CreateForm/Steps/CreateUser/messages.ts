@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type CreateTeamMessage =
+type CreateUserMessage =
   | 'userFirstNameLabel'
   | 'userFirstNamePlaceholder'
   | 'userLastNameLabel'
@@ -17,8 +17,9 @@ type CreateTeamMessage =
   | 'userLocalePlaceholder'
   | 'userLocalePTBROption'
   | 'userLocaleENUSOption'
+  | 'userAutoInviteLabel'
 
-export default defineMessages<CreateTeamMessage>({
+export default defineMessages<CreateUserMessage>({
   userFirstNameLabel: {
     defaultMessage: 'Nome do usuário inicial',
     id: 'vv49le',
@@ -113,5 +114,12 @@ export default defineMessages<CreateTeamMessage>({
     defaultMessage: 'Inglês',
     id: 'loTYpj',
     description: 'The user locale en-US option while creating a new workspace',
+  },
+
+  userAutoInviteLabel: {
+    defaultMessage: 'Convidar usuário automaticamente',
+    id: '/Duwsm',
+    description:
+      'This is the label that defines if we should automatically invite the new user while creating a new workspace',
   },
 })

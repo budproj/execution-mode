@@ -41,11 +41,11 @@ const initialValues: CreateWorkspaceFormValues = {
   userEmail: '',
   userLocale: LOCALE['pt-BR'],
   yearlyCyclePeriod: new Date().getFullYear().toString(),
-  yearlyCycleDateStart: new Date(new Date().getFullYear(), 0, 1).toString(),
-  yearlyCycleDateEnd: new Date(new Date().getFullYear(), 11, 31).toString(),
+  yearlyCycleDateStart: new Date(new Date().getFullYear(), 0, 1).toISOString(),
+  yearlyCycleDateEnd: new Date(new Date().getFullYear(), 11, 31).toISOString(),
   quarterlyCyclePeriod: '',
-  quarterlyCycleDateStart: new Date(new Date().getFullYear(), 0, 1).toString(),
-  quarterlyCycleDateEnd: new Date(new Date().getFullYear(), 11, 31).toString(),
+  quarterlyCycleDateStart: new Date(new Date().getFullYear(), 0, 1).toISOString(),
+  quarterlyCycleDateEnd: new Date(new Date().getFullYear(), 11, 31).toISOString(),
   optionsAutoInvite: true,
 }
 
