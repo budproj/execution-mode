@@ -1,5 +1,5 @@
-import { HeadingProps } from '@chakra-ui/react'
+import { HeadingProps, StyleProps } from '@chakra-ui/react'
 
-export interface KeyResultSectionHeadingProperties {
+export interface KeyResultSectionHeadingProperties extends StyleProps {
   children: HeadingProps['children']
 }
