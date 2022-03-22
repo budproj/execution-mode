@@ -31,6 +31,7 @@ export const EmptyChecklist = ({ keyResultID, canCreate, onCreate }: EmptyCheckl
     <Flex flexGrow={1} justifyContent="flex-end">
       {canCreate && (
         <CreateCheckMarkButton
+          isAbsolute
           keyResultID={keyResultID}
           label={intl.formatMessage(messages.newChecklistButtonLabel)}
           onCreate={handleOnCreate}
