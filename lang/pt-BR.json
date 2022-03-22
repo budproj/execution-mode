@@ -91,6 +91,10 @@
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
   },
+  "0GnOhy": {
+    "defaultMessage": "Criar novo ambiente",
+    "description": "The page title that our users should see in this page"
+  },
   "0N9lO8": {
     "defaultMessage": "Central de ajuda",
     "description": "MainAppBar user menu second item option"

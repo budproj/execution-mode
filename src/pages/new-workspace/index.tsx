@@ -3,6 +3,7 @@ import { Flex, Spinner } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 
+import NewWorkspacePage from '../../components/Page/NewWorkspace'
 import { GraphQLEffect } from '../../components/types'
 
 import queries from './queries.gql'
@@ -18,11 +19,9 @@ const NewWorkspaceIndex = () => {
     },
   })
 
-  return isAuthorized ? (
-    <p />
-  ) : (
+  return (
     <Flex pt={8} justifyContent="center" alignItems="center">
-      <Spinner size="lg" color="brand.500" />
+      {isAuthorized ? <NewWorkspacePage /> : <Spinner size="lg" color="brand.500" />}
     </Flex>
   )
 }
