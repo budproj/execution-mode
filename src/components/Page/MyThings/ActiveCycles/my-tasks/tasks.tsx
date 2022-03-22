@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResultChecklist } from 'src/components/KeyResult/Single/Sections/Checklist/checklist'
 import { KeyResult, KeyResultCheckMark } from 'src/components/KeyResult/types'
+import { GraphQLEffect } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 
 interface TasksProperties {
@@ -18,6 +19,7 @@ interface KeyResultTasksProperties {
 
 const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
   const [checklist, updateChecklistEdges] = useConnectionEdges<KeyResultCheckMark>()
+  const canCreate = keyResult.checkList?.policy?.create === GraphQLEffect.ALLOW
 
   useEffect(() => {
     updateChecklistEdges(keyResult.checkList?.edges)
@@ -35,7 +37,7 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
         <KeyResultChecklist
           keyResultID={keyResult.id}
           nodes={checklist}
-          canCreate={false}
+          canCreate={canCreate}
           isEditable={false}
           onUpdate={onUpdate}
         />
