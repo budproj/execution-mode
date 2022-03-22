@@ -2,8 +2,8 @@ name: deployToCanary
 
 on:
   push:
-    branches:
-      - 'main'
+    tags:
+      - canary
 
 jobs:
   DeployToCanary:
