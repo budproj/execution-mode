@@ -20,7 +20,7 @@ const NewWorkspaceIndex = () => {
   })
 
   return (
-    <Flex pt={8} justifyContent="center" alignItems="center">
+    <Flex py={8} justifyContent="center" alignItems="center">
       {isAuthorized ? <NewWorkspacePage /> : <Spinner size="lg" color="brand.500" />}
     </Flex>
   )

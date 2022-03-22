@@ -4,7 +4,9 @@ import { Form, Formik } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { LOCALE } from '../../../config'
 import { TEAM_GENDER } from '../../Team/constants'
+import { USER_GENDER } from '../../User/constants'
 
 import CreateCycle from './Steps/CreateCycle'
 import CreateTeam from './Steps/CreateTeam'
@@ -14,6 +16,12 @@ import messages from './messages'
 export type CreateWorkspaceFormValues = {
   teamName: string
   teamGender: TEAM_GENDER
+  userFirstName: string
+  userLastName: string
+  userRole: string
+  userGender: USER_GENDER
+  userEmail: string
+  userLocale: LOCALE
   yearlyCyclePeriod: string
   yearlyCycleDateStart: string
   yearlyCycleDateEnd: string
@@ -26,6 +34,12 @@ export type CreateWorkspaceFormValues = {
 const initialValues: CreateWorkspaceFormValues = {
   teamName: '',
   teamGender: TEAM_GENDER.NEUTRAL,
+  userFirstName: '',
+  userLastName: '',
+  userRole: '',
+  userGender: USER_GENDER.MALE,
+  userEmail: '',
+  userLocale: LOCALE['pt-BR'],
   yearlyCyclePeriod: new Date().getFullYear().toString(),
   yearlyCycleDateStart: new Date(new Date().getFullYear(), 0, 1).toString(),
   yearlyCycleDateEnd: new Date(new Date().getFullYear(), 11, 31).toString(),
