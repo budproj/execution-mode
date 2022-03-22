@@ -1,7 +1,8 @@
-import { Box, Button, Flex, HStack } from '@chakra-ui/react'
+import { useMutation } from '@apollo/client'
+import { Box, Button, Flex, HStack, Spinner, useToast } from '@chakra-ui/react'
 import { Step, Steps, useSteps } from 'chakra-ui-steps'
 import { Form, Formik } from 'formik'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { LOCALE } from '../../../config'
@@ -12,6 +13,7 @@ import CreateCycle from './Steps/CreateCycle'
 import CreateTeam from './Steps/CreateTeam'
 import CreateUser from './Steps/CreateUser'
 import messages from './messages'
+import queries from './queries.gql'
 
 export type CreateWorkspaceFormValues = {
   teamName: string
@@ -51,6 +53,8 @@ const initialValues: CreateWorkspaceFormValues = {
 
 export const CreateFormWrapper = () => {
   const intl = useIntl()
+  const toast = useToast()
+  const [createWorkspace, { data, error, loading }] = useMutation(queries.CREATE_WORKSPACE)
 
   const { nextStep, prevStep, activeStep } = useSteps({
     initialStep: 0,
@@ -62,11 +66,57 @@ export const CreateFormWrapper = () => {
     { label: intl.formatMessage(messages.stepThreeLabel), Content: CreateCycle },
   ]
   const isFirstStep = activeStep === 0
-  const isLastStep = activeStep === steps.length
+  const isLastStep = activeStep >= steps.length - 1
+  const isFinished = activeStep >= steps.length
 
-  const handleSubmit = (p) => {
-    debugger
+  const handleSubmit = async (values: CreateWorkspaceFormValues) => {
+    const data = {
+      team: {
+        name: values.teamName,
+        gender: values.teamGender,
+      },
+      user: {
+        firstName: values.userFirstName,
+        lastName: values.userLastName,
+        role: values.userRole,
+        gender: values.userGender,
+        email: values.userEmail,
+        locale: values.userLocale,
+      },
+      yearlyCycle: {
+        period: values.yearlyCyclePeriod,
+        dateStart: values.yearlyCycleDateStart,
+        dateEnd: values.yearlyCycleDateEnd,
+      },
+      quarterlyCycle: {
+        period: values.quarterlyCyclePeriod,
+        dateStart: values.quarterlyCycleDateStart,
+        dateEnd: values.quarterlyCycleDateEnd,
+      },
+      options: {
+        autoInvite: values.optionsAutoInvite,
+      },
+    }
+
+    await createWorkspace({
+      variables: {
+        data,
+      },
+    })
   }
+
+  useEffect(() => {
+    if (data && !error)
+      toast({
+        status: 'success',
+        title: intl.formatMessage(messages.successToastTitle),
+      })
+    if (error)
+      toast({
+        status: 'error',
+        title: intl.formatMessage(messages.errorToastTitle),
+      })
+  }, [data, error])
 
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
@@ -80,19 +130,32 @@ export const CreateFormWrapper = () => {
             ))}
           </Steps>
 
-          <HStack pt={8}>
+          {loading && (
+            <Flex justifyContent="center">
+              <Spinner size="xl" color="brand.500" />
+            </Flex>
+          )}
+
+          <HStack pt={8} opacity={isFinished ? 0 : 1}>
             <Button isDisabled={isFirstStep} variant="solid" colorScheme="gray" onClick={prevStep}>
               {intl.formatMessage(messages.backButtonLabel)}
             </Button>
             <Box flexGrow={1} />
-            <Button
-              variant="solid"
-              colorScheme="brand"
-              type={isLastStep ? 'submit' : 'button'}
-              onClick={nextStep}
-            >
-              {intl.formatMessage(messages.forwardButtonLabel)}
-            </Button>
+            {!isLastStep && (
+              <Button variant="solid" colorScheme="brand" onClick={nextStep}>
+                {intl.formatMessage(messages.forwardButtonLabel)}
+              </Button>
+            )}
+            {
+              // We can't join both on a ternary because Formik see them as a single
+              // button and, them, it submits the form automatically as soon as the
+              // submit button appears on the screen (upon last step start)
+              isLastStep && (
+                <Button variant="solid" colorScheme="brand" type="submit" onClick={nextStep}>
+                  {intl.formatMessage(messages.submitButtonLabel)}
+                </Button>
+              )
+            }
           </HStack>
         </Flex>
       </Form>

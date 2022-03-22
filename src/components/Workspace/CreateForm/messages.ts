@@ -6,6 +6,9 @@ type CreateFormMessage =
   | 'stepThreeLabel'
   | 'backButtonLabel'
   | 'forwardButtonLabel'
+  | 'submitButtonLabel'
+  | 'successToastTitle'
+  | 'errorToastTitle'
 
 export default defineMessages<CreateFormMessage>({
   stepOneLabel: {
@@ -32,5 +35,24 @@ export default defineMessages<CreateFormMessage>({
     defaultMessage: 'Próximo',
     id: 'hdWCC9',
     description: 'The label of the button used to go forward while creating a new workspace',
+  },
+
+  submitButtonLabel: {
+    defaultMessage: 'Enviar',
+    id: 'LhZDKa',
+    description: 'The label of the button used to submit a new workspace',
+  },
+
+  successToastTitle: {
+    defaultMessage: 'Ambiente criado com sucesso',
+    id: 'G/bGAZ',
+    description: 'The title of the toast that appears when we create a new workspace',
+  },
+
+  errorToastTitle: {
+    defaultMessage: 'Erro ao criar o ambiente',
+    id: 'hFma0o',
+    description:
+      'The title of the toast that appears when we have an error while creating a new workspace',
   },
 })
