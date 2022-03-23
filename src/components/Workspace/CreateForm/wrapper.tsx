@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Box, Button, Flex, HStack, Spinner, useToast } from '@chakra-ui/react'
 import { Step, Steps, useSteps } from 'chakra-ui-steps'
 import { Form, Formik } from 'formik'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { LOCALE } from '../../../config'
@@ -54,7 +54,30 @@ const initialValues: CreateWorkspaceFormValues = {
 export const CreateFormWrapper = () => {
   const intl = useIntl()
   const toast = useToast()
-  const [createWorkspace, { data, error, loading }] = useMutation(queries.CREATE_WORKSPACE)
+  const [addConsultant, { loading: addingConsultant }] = useMutation(queries.ADD_CONSULTANT, {
+    onCompleted: () => {
+      toast({
+        status: 'success',
+        title: intl.formatMessage(messages.successToastTitle),
+      })
+    },
+  })
+  const [createWorkspace, { loading: creatingWorkspace }] = useMutation(queries.CREATE_WORKSPACE, {
+    onError: () => {
+      toast({
+        status: 'error',
+        title: intl.formatMessage(messages.errorToastTitle),
+      })
+    },
+    onCompleted: async (data) => {
+      void addConsultant({
+        variables: {
+          email: `marina+${data.createWorkspace.id}@getbud.co`,
+          teamID: data.createWorkspace.id,
+        },
+      })
+    },
+  })
 
   const { nextStep, prevStep, activeStep } = useSteps({
     initialStep: 0,
@@ -105,19 +128,6 @@ export const CreateFormWrapper = () => {
     })
   }
 
-  useEffect(() => {
-    if (data && !error)
-      toast({
-        status: 'success',
-        title: intl.formatMessage(messages.successToastTitle),
-      })
-    if (error)
-      toast({
-        status: 'error',
-        title: intl.formatMessage(messages.errorToastTitle),
-      })
-  }, [data, error])
-
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
       <Form style={{ width: '100%' }}>
@@ -130,7 +140,7 @@ export const CreateFormWrapper = () => {
             ))}
           </Steps>
 
-          {loading && (
+          {(addingConsultant || creatingWorkspace) && (
             <Flex justifyContent="center">
               <Spinner size="xl" color="brand.500" />
             </Flex>
