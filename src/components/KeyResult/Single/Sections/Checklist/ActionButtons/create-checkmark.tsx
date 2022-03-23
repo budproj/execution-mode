@@ -1,15 +1,13 @@
 import { useMutation } from '@apollo/client'
-import { Button, Box } from '@chakra-ui/react'
+import { Button, Box, Spinner } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { Ref, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
 import { KeyResultCheckMark } from 'src/components/KeyResult/types'
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
-import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
 import { Feature } from '../../../../../../state/hooks/useEvent/feature'
@@ -26,7 +24,7 @@ interface CreateCheckMarkButtonProperties {
   createButtonReference?: Ref<HTMLButtonElement>
 }
 
-const StyledEditableInput = styled(Box)`
+const StyledEditableWrapper = styled(Box)`
   ${({ isAbsolute }) =>
     isAbsolute &&
     `
@@ -51,21 +49,13 @@ export const CreateCheckMarkButton = ({
   const [isAdding, setIsAdding] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const intl = useIntl()
-  const [draftCheckMarks, setDraftCheckMarks] = useRecoilState(draftCheckMarksAtom(keyResultID))
-  const [createCheckMark, { loading }] = useMutation(queries.CREATE_CHECK_MARK, {
-    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS],
-    onCompleted: (data) => {
-      const newDraftCheckMarks = [...draftCheckMarks, data.createKeyResultCheckMark.id]
-      setDraftCheckMarks(newDraftCheckMarks)
 
+  const [createCheckMark] = useMutation(queries.CREATE_CHECK_MARK, {
+    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS],
+    onCompleted: () => {
       if (onCreate) onCreate()
     },
   })
-
-  const resetTaskAdition = () => {
-    setIsSubmitting(false)
-    toggleAdd()
-  }
 
   const handleNewCheckMark = async (description: KeyResultCheckMark['description']) => {
     if (isSubmitting) return
@@ -80,25 +70,32 @@ export const CreateCheckMarkButton = ({
     })
 
     dispatch({ keyResultID })
-    resetTaskAdition()
+    setIsSubmitting(false)
+    toggleAdd()
   }
 
   const toggleAdd = () => {
     setIsAdding((isAdding) => !isAdding)
   }
 
+  const previewProperties = {
+    border: '2px solid #E3E8EE',
+    width: '100%',
+    padding: '0.5rem',
+  }
+
   return (
     <Box width="100%" pt={isAdding && isAbsolute ? 14 : 0}>
       {isAdding && (
-        <StyledEditableInput isAbsolute={isAbsolute}>
+        <StyledEditableWrapper isAbsolute={isAbsolute}>
           <EditableInputField
             startWithEditView
             value=""
+            previewProperties={previewProperties}
             onSubmit={handleNewCheckMark}
-            onPressedEnter={handleNewCheckMark}
             onCancel={toggleAdd}
           />
-        </StyledEditableInput>
+        </StyledEditableWrapper>
       )}
       <Button
         ref={createButtonReference}
@@ -106,14 +103,17 @@ export const CreateCheckMarkButton = ({
         p={0}
         h="auto"
         colorScheme="brand"
-        isDisabled={loading}
+        isDisabled={isSubmitting}
         leftIcon={
-          <PlusOutline
-            desc={intl.formatMessage(messages.newCheckMarkButtonIconDescription)}
-            stroke="currentColor"
-            fill="currentColor"
-            fontSize="xl"
-          />
+          <>
+            {isSubmitting && <Spinner color="brand.400" size="sm" mr={3} mt="0.1rem" />}
+            <PlusOutline
+              desc={intl.formatMessage(messages.newCheckMarkButtonIconDescription)}
+              stroke="currentColor"
+              fill="currentColor"
+              fontSize="xl"
+            />
+          </>
         }
         onClick={toggleAdd}
       >
