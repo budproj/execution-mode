@@ -29,3 +29,5 @@ export { default as Drawer } from './drawer'
 export { default as Link } from './link'
 
 export { Checkbox } from './checkbox'
+
+export { default as Steps } from './steps'

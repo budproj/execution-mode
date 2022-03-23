@@ -16,6 +16,7 @@ import {
   Modal,
   Popover,
   Skeleton,
+  Steps,
   Tabs,
   Textarea,
   Tooltip,
@@ -171,6 +172,7 @@ const theme = extendTheme({
   },
 
   components: {
+    Steps,
     Button,
     Skeleton,
     Tooltip,

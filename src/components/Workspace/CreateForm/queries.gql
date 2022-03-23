@@ -1,0 +1,19 @@
+mutation CREATE_WORKSPACE($data: WorkspaceCreateInput!) {
+  createWorkspace(data: $data) {
+    id
+  }
+}
+
+mutation ADD_CONSULTANT($email: String!, $teamID: ID!) {
+  createUser(data: {
+    firstName: "Marina",
+    lastName: "Lopes",
+    role: "Consultora Bud",
+    gender: FEMALE,
+    email: $email,
+    teamID: $teamID,
+    locale: "pt-BR",
+  }) {
+    id
+  }
+}

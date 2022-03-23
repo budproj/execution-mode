@@ -39,9 +39,21 @@
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
   },
+  "/6mxm9": {
+    "defaultMessage": "Nome da empresa",
+    "description": "The label of the company name while creating a new workspace"
+  },
   "/9JMMz": {
     "defaultMessage": "Status",
     "description": "This text is displayed in our check-in card, as a title for the right column in the progress increase section"
+  },
+  "/Duwsm": {
+    "defaultMessage": "Convidar usuário automaticamente",
+    "description": "This is the label that defines if we should automatically invite the new user while creating a new workspace"
+  },
+  "/DyxUT": {
+    "defaultMessage": "Último check-in",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
   "/H4hHb": {
     "defaultMessage": "Buscar subtimes",
@@ -86,6 +98,10 @@
   "03yPkn": {
     "defaultMessage": "Um ícone de bussúla",
     "description": "The desc message for the Discovery icon. This icon is used to ilustrate our key results"
+  },
+  "0GnOhy": {
+    "defaultMessage": "Criar novo ambiente",
+    "description": "The page title that our users should see in this page"
   },
   "0N9lO8": {
     "defaultMessage": "Central de ajuda",
@@ -183,6 +199,10 @@
     "defaultMessage": "Feminino",
     "description": "This text is used accross our platform to identify the female gender"
   },
+  "2ao/tW": {
+    "defaultMessage": "Sobrenome do usuário inicial",
+    "description": "The user last name while creating a new workspace"
+  },
   "2chQA0": {
     "defaultMessage": "Faz tempo que ninguém interage nesse resultado-chave. Que tal compartilhar uma informação relevante com o time? :)",
     "description": "This text gives more details regarding our empty state card in the key result drawers"
@@ -202,6 +222,10 @@
   "39q6ig": {
     "defaultMessage": "OKRs",
     "description": "This message is displayed above the empty state inside the active cycles section at the Team page"
+  },
+  "3XEc2H": {
+    "defaultMessage": "Gênero do usuário inicial",
+    "description": "The user gender while creating a new workspace"
   },
   "3e+zPY": {
     "defaultMessage": "Finalizar",
@@ -283,6 +307,10 @@
     "defaultMessage": "Adicionar um OKR {cadence} no ciclo {cycle} {parent}",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
   },
+  "68qL+a": {
+    "defaultMessage": "Gênero da empresa",
+    "description": "The label of the company gender while creating a new workspace"
+  },
   "6BeRhq": {
     "defaultMessage": "Excluir este OKR",
     "description": "This is the third option that appears when you open the menu of a given objective inside the accordion button"
@@ -343,6 +371,10 @@
     "defaultMessage": "Adicionar resultado-chave",
     "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
   },
+  "7uQQbf": {
+    "defaultMessage": "Nome do período anual",
+    "description": "The label of the company yearly period while creating a new workspace"
+  },
   "8+y0VC": {
     "defaultMessage": "Nenhuma pessoa",
     "description": "This message appears when there is no user to display in a given user list"
@@ -371,6 +403,10 @@
     "defaultMessage": "Cancelar",
     "description": "This message is used in the cancel button when we are in the confirmation dialog"
   },
+  "8EZRzi": {
+    "defaultMessage": "Dia de início do período trimestral",
+    "description": "The label of the company quarterly date start while creating a new workspace"
+  },
   "8LTdv4": {
     "defaultMessage": "Objetivo",
     "description": "The text of the table head related to the Objective column"
@@ -391,9 +427,17 @@
     "defaultMessage": "Explorar",
     "description": "The name of the Explore page, located at \"/explore\""
   },
+  "9OSi6W": {
+    "defaultMessage": "Data de fim",
+    "description": "The company quarterly date end input placeholder while creating a new workspace"
+  },
   "9dXuLd": {
     "defaultMessage": "R$ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin BRL format"
+  },
+  "9eQWJv": {
+    "defaultMessage": "Email do usuário inicial",
+    "description": "The user email while creating a new workspace"
   },
   "9iN0R8": {
     "defaultMessage": "Atenção! Essa ação não pode ser desfeita",
@@ -463,6 +507,10 @@
     "defaultMessage": "Posição do time",
     "description": "The title of the first column in our body table at the teams overview report in our dashboard"
   },
+  "Cli69X": {
+    "defaultMessage": "Data de início",
+    "description": "The company quarterly date start input placeholder while creating a new workspace"
+  },
   "CmE1a+": {
     "defaultMessage": "Um ícone de busca. Ao clicar nele uma barra de busca se abrirá para você",
     "description": "The alternative text explaining our search icon"
@@ -499,6 +547,10 @@
     "defaultMessage": "Criar OKR",
     "description": "create new key result"
   },
+  "DWCNAb": {
+    "defaultMessage": "Passo 3",
+    "description": "The label of the third step while creating a new workspace"
+  },
   "Dnh8iG": {
     "defaultMessage": "de <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the first line of our confidence tooltip"
@@ -522,6 +574,10 @@
   "E+0+QH": {
     "defaultMessage": "Tem certeza que deseja excluir este resultado-chave?",
     "description": "This message is used as the title in our first dialog while removing a key-result"
+  },
+  "EZ8KCj": {
+    "defaultMessage": "Email",
+    "description": "The user email input placeholder while creating a new workspace"
   },
   "EkoIl2": {
     "defaultMessage": "Criar novo subtime",
@@ -558,6 +614,10 @@
   "FoCix/": {
     "defaultMessage": "Procurar",
     "description": "The text is displayed as the default placeholder for all our search inputs"
+  },
+  "G/bGAZ": {
+    "defaultMessage": "Ambiente criado com sucesso",
+    "description": "The title of the toast that appears when we create a new workspace"
   },
   "GBh0Xf": {
     "defaultMessage": "Desculpe, mas já existe um usuário com este e-mail",
@@ -699,9 +759,17 @@
     "defaultMessage": "Nome do time:",
     "description": "The label to the team name field in team add/edit modal"
   },
+  "K03Z5V": {
+    "defaultMessage": "Período",
+    "description": "The company quarterly period input placeholder while creating a new workspace"
+  },
   "K04poX": {
     "defaultMessage": "NOTIFICAÇÕES",
     "description": "The tooltip text for the notifications text"
+  },
+  "KGQV/U": {
+    "defaultMessage": "Nome",
+    "description": "The company name input placeholder while creating a new workspace"
   },
   "K8KvrI": {
     "defaultMessage": "Minhas Coisas",
@@ -734,6 +802,14 @@
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
     "description": "This message is displayed below the current progress thumb"
+  },
+  "LhZDKa": {
+    "defaultMessage": "Enviar",
+    "description": "The label of the button used to submit a new workspace"
+  },
+  "Ln2GmC": {
+    "defaultMessage": "Gênero",
+    "description": "The user gender input placeholder while creating a new workspace"
   },
   "LvI+KK": {
     "defaultMessage": "Idioma",
@@ -823,6 +899,10 @@
     "defaultMessage": "Um ícone de tres pontos, indicando que ao clicar aqui um menu se expandirá",
     "description": "The description for screen readers regarding the three dots above the objectives accordion"
   },
+  "OMUZ7w": {
+    "defaultMessage": "Feminino",
+    "description": "The female gender for the company while creating a new workspace"
+  },
   "ObFHxY": {
     "defaultMessage": "Cancelar",
     "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field"
@@ -838,6 +918,10 @@
   "P/ujgo": {
     "defaultMessage": "Um ícone de controle de video game",
     "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
+  },
+  "P0g9QE": {
+    "defaultMessage": "Dia de início do período anual",
+    "description": "The label of the company yearly date start while creating a new workspace"
   },
   "PFysOr": {
     "defaultMessage": "Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave",
@@ -863,6 +947,10 @@
     "defaultMessage": "Check-list",
     "description": "This is the title of our checklist section inside the key-result sidebar"
   },
+  "PtUosx": {
+    "defaultMessage": "Masculino",
+    "description": "The user gender male option while creating a new workspace"
+  },
   "PxWBQZ": {
     "defaultMessage": "Cargo",
     "description": "The label of the role field in the create user form"
@@ -874,6 +962,10 @@
   "Q2diI+": {
     "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
+  },
+  "Q70h6c": {
+    "defaultMessage": "Português",
+    "description": "The user locale pt-BR option while creating a new workspace"
   },
   "QEsnT8": {
     "defaultMessage": "Percentual de progresso entre o valor inicial e a meta",
@@ -954,6 +1046,10 @@
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
+  },
+  "Sau4Na": {
+    "defaultMessage": "Nome",
+    "description": "The user first name input placeholder while creating a new workspace"
   },
   "SenoB2": {
     "defaultMessage": "A página que você está procurando não foi encontrada!",
@@ -1039,6 +1135,10 @@
     "defaultMessage": "Este time é uma empresa",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
+  "UZnhGI": {
+    "defaultMessage": "Passo 1",
+    "description": "The label of the first step while creating a new workspace"
+  },
   "Uu0OJV": {
     "defaultMessage": "Um ícone de imagem. Ele indica que nesse campo fica seu avatar",
     "description": "The alternative text explaining our image icon in the settings account page"
@@ -1075,6 +1175,10 @@
     "defaultMessage": "Configurações",
     "description": "This tooltip is displayed when the user hovers the settings icon"
   },
+  "WIR0FJ": {
+    "defaultMessage": "Masculino",
+    "description": "The male gender for the company while creating a new workspace"
+  },
   "WKevJy": {
     "defaultMessage": "Clique aqui para editar esse campo",
     "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
@@ -1102,6 +1206,10 @@
   "XEey8C": {
     "defaultMessage": "Arraste até o novo valor para iniciar um check-in",
     "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
+  },
+  "XN0ZEi": {
+    "defaultMessage": "Passo 2",
+    "description": "The label of the second step while creating a new workspace"
   },
   "XNkzYe": {
     "defaultMessage": "Um ícone de pin de localização",
@@ -1171,6 +1279,10 @@
     "defaultMessage": "Um ícone com o sinal de \"mais\". Ao clicar aqui você irá abrir o menu para inserir um novo usuário",
     "description": "This message is used in our new user button while seeing the user list"
   },
+  "aIGly+": {
+    "defaultMessage": "Gênero",
+    "description": "The company gender input placeholder while creating a new workspace"
+  },
   "aKyktL": {
     "defaultMessage": "Q2",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
@@ -1186,6 +1298,10 @@
   "acrz2t": {
     "defaultMessage": "Cancelar",
     "description": "The label of the cancel button of the create user form"
+  },
+  "ah2n1K": {
+    "defaultMessage": "Nome do período trimestral",
+    "description": "The label of the company quarterly period while creating a new workspace"
   },
   "bZYEAl": {
     "defaultMessage": "Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo",
@@ -1287,6 +1403,10 @@
     "defaultMessage": "Esse é o progresso acumulado dessa semana",
     "description": "This tooltip appears when the user hovers the third column title"
   },
+  "fFkPeH": {
+    "defaultMessage": "Cargo",
+    "description": "The user role input placeholder while creating a new workspace"
+  },
   "fI4P80": {
     "defaultMessage": "Q1",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
@@ -1335,6 +1455,14 @@
     "defaultMessage": "Anual",
     "description": "This text is used as prefix for our yearly cadences"
   },
+  "hFma0o": {
+    "defaultMessage": "Erro ao criar o ambiente",
+    "description": "The title of the toast that appears when we have an error while creating a new workspace"
+  },
+  "hMD8CO": {
+    "defaultMessage": "Anterior",
+    "description": "The label of the button used to go back while creating a new workspace"
+  },
   "hMXuTX": {
     "defaultMessage": "Masculino",
     "description": "This text is used accross our platform to identify the male gender"
@@ -1342,6 +1470,14 @@
   "hPJxpx": {
     "defaultMessage": "Média Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
+  },
+  "hdWCC9": {
+    "defaultMessage": "Próximo",
+    "description": "The label of the button used to go forward while creating a new workspace"
+  },
+  "hhH9fH": {
+    "defaultMessage": "Cargo do usuário inicial",
+    "description": "The user role while creating a new workspace"
   },
   "hn3cE7": {
     "defaultMessage": "Progresso acumulado dessa semana",
@@ -1407,6 +1543,10 @@
     "defaultMessage": "O nível de confiança descreve como você vê suas chances de alcançar esse resultado-chave dentro do prazo",
     "description": "The tooltip of the check-in form. It appears when the user hovers the question mark icon"
   },
+  "k4LTU8": {
+    "defaultMessage": "Dia de fim do período trimestral",
+    "description": "The label of the company quarterly date end while creating a new workspace"
+  },
   "kFrglO": {
     "defaultMessage": "O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.",
     "description": "This tooltip explains how the progress of the objective is calculated"
@@ -1439,6 +1579,10 @@
     "defaultMessage": "Descreve o quão confiante a pessoa responsável por um resultado-chave está:",
     "description": "This message is displayed as an introduction to our rich tooltip regarding the confidence level at the head of our key-results table"
   },
+  "lCQz97": {
+    "defaultMessage": "Período",
+    "description": "The company yearly period input placeholder while creating a new workspace"
+  },
   "lI5vJI": {
     "defaultMessage": "Um ícone com três pontos. Ao clicar nele você abrirá algumas opções",
     "description": "This text is displayed as the tree dots desc text in our timeline cards"
@@ -1463,6 +1607,10 @@
     "defaultMessage": "Variação",
     "description": "This text is displayed in our check-in card, as a title for the left column in the progress increase section"
   },
+  "loTYpj": {
+    "defaultMessage": "Inglês",
+    "description": "The user locale en-US option while creating a new workspace"
+  },
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",
     "description": "This is the label text that is displayed as a button as soon the check in form is displayed"
@@ -1470,6 +1618,10 @@
   "m8Extk": {
     "defaultMessage": "Um ícone de scanner",
     "description": "The desc message for the Scan icon. This icon is used to ilustrate our key results"
+  },
+  "mK9HFR": {
+    "defaultMessage": "Dia de fim do período anual",
+    "description": "The label of the company yearly date end while creating a new workspace"
   },
   "mdG+CG": {
     "defaultMessage": "Ciclos ativos",
@@ -1498,6 +1650,10 @@
   "nPjrcU": {
     "defaultMessage": "Editar",
     "description": "This message is displayer as soon as our user hovers the avatar"
+  },
+  "nWz8Nt": {
+    "defaultMessage": "Neutro",
+    "description": "The neutral gender for the company while creating a new workspace"
   },
   "na6BgW": {
     "defaultMessage": "Histórico",
@@ -1635,6 +1791,10 @@
     "defaultMessage": "Hoje",
     "description": "This label is displayed if the date is today"
   },
+  "txi+kN": {
+    "defaultMessage": "Idioma",
+    "description": "The user locale input placeholder while creating a new workspace"
+  },
   "u4rqek": {
     "defaultMessage": "Q4",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
@@ -1675,6 +1835,10 @@
     "defaultMessage": "Português",
     "description": "This message is used as the label for the portuguese language in our locale switcher"
   },
+  "vhq3gt": {
+    "defaultMessage": "Feminino",
+    "description": "The user gender female option while creating a new workspace"
+  },
   "vgU7fC": {
     "defaultMessage": "Check-in pendente",
     "description": "This string is used as the description for the icon that indicates that the key-result has not been updated"
@@ -1683,6 +1847,10 @@
     "defaultMessage": "Meu perfil | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
   },
+  "vv49le": {
+    "defaultMessage": "Nome do usuário inicial",
+    "description": "The user first name while creating a new workspace"
+  },
   "w/3frD": {
     "defaultMessage": "Líder:",
     "description": "The label to the leader field in team add/edit modal"
@@ -1690,6 +1858,10 @@
   "wJjuae": {
     "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",
     "description": "This tooltip explains the seventh column of the key result list"
+  },
+  "waPxPB": {
+    "defaultMessage": "Idioma do usuário inicial",
+    "description": "The user locale while creating a new workspace"
   },
   "wiFglx": {
     "defaultMessage": "Responsável",
@@ -1723,6 +1895,10 @@
     "defaultMessage": "Existe um fator externo impedindo o progresso desse resultado-chave",
     "description": "This text explains our tag to the user"
   },
+  "xaHzA0": {
+    "defaultMessage": "Sobrenome",
+    "description": "The user last name input placeholder while creating a new workspace"
+  },
   "xfx/rc": {
     "defaultMessage": "Um botão com um ícone de confirmação. Ao clicar nele você irá salvar sua atualização do objetivo",
     "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the check button"
@@ -1730,6 +1906,10 @@
   "xywRWB": {
     "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
+  },
+  "yK87+y": {
+    "defaultMessage": "Data de início",
+    "description": "The company yearly date start input placeholder while creating a new workspace"
   },
   "yfhIM+": {
     "defaultMessage": "Cancelar",
@@ -1754,6 +1934,10 @@
   "zEyzo8": {
     "defaultMessage": "Um círculo roxo, indicando que o resultado-chave tem uma barreira",
     "description": "A brief explanation for screen readers regarding the purple status circle"
+  },
+  "zFQPs9": {
+    "defaultMessage": "Data de fim",
+    "description": "The company yearly date end input placeholder while creating a new workspace"
   },
   "zHAPqJ": {
     "defaultMessage": "LinkedIn",
