@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds event origin options">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manifests/canary/canary-deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/manifests/canary/canary-deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manifests/stable/deployment.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/manifests/stable/deployment.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/User/Me/me.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/User/Me/me.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/hooks/useAmplitude/marshal-amplitude-user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useAmplitude/marshal-amplitude-user.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/state/hooks/useAmplitude/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/state/hooks/useAmplitude/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lang/pt-BR.json" beforeDir="false" afterPath="$PROJECT_DIR$/lang/pt-BR.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Workspace/CreateForm/queries.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/queries.gql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Workspace/CreateForm/wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/wrapper.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +38,7 @@
     <option name="myRunOnSave" value="true" />
   </component>
   <component name="ProjectId" id="21HzxvQ14fTxBKHEMx4ZYcOK88r" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -56,30 +51,39 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/state/hooks/useEvent/events" />
+    <property name="javascript.nodejs.core.library.configured.version" value="15.5.1" />
+    <property name="javascript.nodejs.core.library.typings.version" value="15.14.9" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateCycle" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs_interpreter_path" value="wsl://Fedora@/home/delucca/.nvm/versions/node/v15.5.1/bin/node" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="ts.external.directory.path" value="\\wsl$\Fedora\home\delucca\src\delucca\workspaces\execution-mode\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/state/hooks/useEvent/events" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="\\wsl$\Fedora\home\delucca\src\delucca\workspaces\execution-mode\src\components\Workspace\CreateForm\Steps\CreateCycle" />
+      <recent name="\\wsl$\Fedora\home\delucca\src\delucca\workspaces\execution-mode\src\components\Workspace\CreateForm\Steps\CreateUser" />
+      <recent name="\\wsl$\Fedora\home\delucca\src\delucca\workspaces\execution-mode\src\components\Workspace\CreateForm\Steps\CreateTeam" />
+      <recent name="\\wsl$\Fedora\home\delucca\src\delucca\workspaces\execution-mode\src\components\Workspace\CreateForm" />
+      <recent name="\\wsl$\Fedora\home\delucca\src\delucca\workspaces\execution-mode\src\components\Page\NewWorkspace" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/src/state/hooks/useEvent/event.ts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Fedora\home\delucca\src\delucca\workspaces\execution-mode" />
     </key>
   </component>
   <component name="RunManager" selected="Compound.Launch and Debug">
     <list>
       <item itemvalue="Compound.Launch and Debug" />
-      <item itemvalue="JavaScript Debug.Debug on Chrome" />
+      <item itemvalue="JavaScript Debug.Debug on Browser" />
       <item itemvalue="npm.start:develop" />
     </list>
   </component>
@@ -118,6 +122,21 @@
       <workItem from="1644859098728" duration="627000" />
       <workItem from="1644859733708" duration="92000" />
       <workItem from="1644859834520" duration="3592000" />
+      <workItem from="1645564859244" duration="6000" />
+      <workItem from="1646337369589" duration="221000" />
+      <workItem from="1646337912672" duration="35000" />
+      <workItem from="1646337963997" duration="5000" />
+      <workItem from="1646337986764" duration="25000" />
+      <workItem from="1646338075110" duration="1762000" />
+      <workItem from="1646340394361" duration="1672000" />
+      <workItem from="1646342282847" duration="17000" />
+      <workItem from="1646342301356" duration="37000" />
+      <workItem from="1646342340250" duration="19000" />
+      <workItem from="1646342369567" duration="54000" />
+      <workItem from="1647546237383" duration="3514000" />
+      <workItem from="1647972764601" duration="481000" />
+      <workItem from="1647973262710" duration="10862000" />
+      <workItem from="1648062699282" duration="1002000" />
     </task>
     <task id="LOCAL-00001" summary="chore: updates IDE configs">
       <created>1638990075855</created>
