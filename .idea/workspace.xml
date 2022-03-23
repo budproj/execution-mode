@@ -113,8 +113,8 @@
   <component name="RunManager" selected="Compound.Launch and Debug">
     <list>
       <item itemvalue="Compound.Launch and Debug" />
-      <item itemvalue="npm.start:develop" />
       <item itemvalue="JavaScript Debug.Debug on Browser" />
+      <item itemvalue="npm.start:develop" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

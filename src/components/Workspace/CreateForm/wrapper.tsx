@@ -72,6 +72,7 @@ export const CreateFormWrapper = () => {
     onCompleted: async (data) => {
       void addConsultant({
         variables: {
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
           email: `marina+${data.createWorkspace.id}@getbud.co`,
           teamID: data.createWorkspace.id,
         },
