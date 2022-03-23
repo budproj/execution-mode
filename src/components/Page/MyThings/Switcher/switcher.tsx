@@ -5,7 +5,7 @@ import { RouteTab, RouteTabs } from 'src/components/Base'
 
 import messages from './messages'
 
-const MyKeyResultsPageSwitcher = () => {
+const PageSwitcher = () => {
   const intl = useIntl()
 
   return (
@@ -18,4 +18,4 @@ const MyKeyResultsPageSwitcher = () => {
   )
 }
 
-export default MyKeyResultsPageSwitcher
+export default PageSwitcher

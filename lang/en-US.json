@@ -203,6 +203,10 @@
     "defaultMessage": "English",
     "description": "This message is used as the label for the english language in our locale switcher"
   },
+  "2leAvr": {
+    "defaultMessage": "My Tasks",
+    "description": "The header in my tasks title, inside my things page"
+  },
   "2lGnmq": {
     "defaultMessage": "My bud account",
     "description": "The page title that is displayed in the browser tab for the my profile page"
@@ -503,6 +507,10 @@
     "defaultMessage": "Deactivate user",
     "description": "This text is used in our deactivate user button in the profile sidebar in our team page"
   },
+  "bh8jgN": {
+    "defaultMessage": "new!",
+    "description": "The text inside the tag to inform new buttons"
+  },
   "biDODR": {
     "defaultMessage": "An icon for a magnifying glass, indicating this is a search field",
     "description": "This text is used by screen readers to explain the search icon in all our search inputs"
@@ -687,6 +695,10 @@
     "defaultMessage": "End",
     "description": "The label text inside the Cycle section, above the end date in our key result single page or drawers"
   },
+  "eVkwyH": {
+    "defaultMessage": "My Things",
+    "description": "The page title that our users should see in the my things page"
+  },
   "eVsyB5": {
     "defaultMessage": "Email",
     "description": "The label of the email field in the create user form"
@@ -779,6 +791,10 @@
     "defaultMessage": "This team will be linked to {teamname}",
     "description": "The text is displayed as header description in the add team modal"
   },
+  "GepLaP": {
+    "defaultMessage": "A hand pressing a button with the icon of a checkbox for a task",
+    "description": "The alternative text explaining the check item image"
+  },
   "GHeIgq": {
     "defaultMessage": "Nobody has interacted here in a while. How about sharing something about the progress of this key result? :)",
     "description": "This text gives more details regarding our empty state card in the key result drawer"
@@ -790,6 +806,10 @@
   "gioO8X": {
     "defaultMessage": "Platform",
     "description": "The page title that our users should see in the platform settings page"
+  },
+  "Gk28Al": {
+    "defaultMessage": "new!",
+    "description": "Tag new item"
   },
   "gm1hfm": {
     "defaultMessage": "Progress of this objective so far this week",
@@ -887,6 +907,10 @@
     "defaultMessage": "Show Less...",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
+  "I8NCD3": {
+    "defaultMessage": "Check-in made",
+    "description": "This string is used as the description for the icon that indicates that the key-result is updated"
+  },
   "i9bdpU": {
     "defaultMessage": "An unexpected error occurred when creating your objective. Please try again.",
     "description": "This message appears as an error toast when the users tries to create a new objective but an error appears"
@@ -935,6 +959,10 @@
     "defaultMessage": "Horizontal straight line icon illustrating that your company hasn't evolve since the last check in event",
     "description": "This message is used by screen readers to explain our line icon"
   },
+  "ItLQef": {
+    "defaultMessage": "Check-in made",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
+  },
   "IU2bu6": {
     "defaultMessage": "Write {keyword} to confirm your action",
     "description": "This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource"
@@ -950,6 +978,10 @@
   "J+UxkH": {
     "defaultMessage": "{progress, select, 0 {No variation} other {<highlight>{signal}{progress}% so far this week</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
+  "J5Rfuu": {
+    "defaultMessage": "Create new tasks by navigating to the sidebar of your key results.",
+    "description": "The empty state message when you have no tasks"
   },
   "J8dAid": {
     "defaultMessage": "This objective has no key results",
@@ -1022,6 +1054,10 @@
   "k3EFXK": {
     "defaultMessage": "The confidence level describes how you feel about your odds of achieving this key result before its deadline",
     "description": "The tooltip of the check-in form. It appears when the user hovers the question mark icon"
+  },
+  "K8KvrI": {
+    "defaultMessage": "My Things",
+    "description": "MainAppBar menu item that links to \"My Things\" page"
   },
   "kawRcN": {
     "defaultMessage": "Cancel",
@@ -1103,6 +1139,10 @@
     "defaultMessage": "Calendar icon",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
   },
+  "lMwPEm": {
+    "defaultMessage": "English",
+    "description": "This is the name of the english language while we are creating a new user"
+  },
   "lMxUF9": {
     "defaultMessage": "Down arrow icon indicating a decreased on progress",
     "description": "This desc message explains the decrease icon for screen readers"
@@ -1122,6 +1162,10 @@
   "M0RYZa": {
     "defaultMessage": "Save",
     "description": "This is a button label displayed inside the insert key-result drawer. This is the second button"
+  },
+  "M2QJC/": {
+    "defaultMessage": "No check-in",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
   "m4igWj": {
     "defaultMessage": "Add Comment",
@@ -1295,6 +1339,10 @@
     "defaultMessage": "Video game joystick icon",
     "description": "The desc message for the Game icon. This icon is used to ilustrate our key results"
   },
+  "p2UjMZ": {
+    "defaultMessage": "My Things | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "Pb0Tht": {
     "defaultMessage": "About this check-in",
     "description": "This text is displayed in our check-in card, above the user comment if it exists"
@@ -1351,6 +1399,10 @@
     "defaultMessage": "Goal",
     "description": "This message is displayed below the goal thumb"
   },
+  "Q+5Uuc": {
+    "defaultMessage": "Portuguese",
+    "description": "This is the name of the portuguese language while we are creating a new user"
+  },
   "Q2diI+": {
     "defaultMessage": "Floater icon. By clicking on it you will be directed to our support page",
     "description": "SupportButton icon desc. This is used by screen readers for accessibility"
@@ -1394,6 +1446,10 @@
   "QRy8b9": {
     "defaultMessage": "New objective successfully created",
     "description": "This message appears as a toast as soon as the the user clicks to add a new objective in the team page"
+  },
+  "Qt52rN": {
+    "defaultMessage": "Language",
+    "description": "This message appears as a label while we are creating a new user"
   },
   "qYpqgw": {
     "defaultMessage": "New item",
@@ -1663,6 +1719,10 @@
     "defaultMessage": "Show more",
     "description": "This text is displayed in the button that expands a truncated text"
   },
+  "vgU7fC": {
+    "defaultMessage": "First check-in pending",
+    "description": "This string is used as the description for the icon that indicates that the key-result has not been updated"
+  },
   "VhgGax": {
     "defaultMessage": "How are your priorities d{gender, select, MALE {o} FEMALE {a} other {o}} {team}?",
     "description": "The title of the header section in our objectives overview report"
@@ -1686,6 +1746,10 @@
   "VNHZWm": {
     "defaultMessage": "Period",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
+  },
+  "VSS4F8": {
+    "defaultMessage": "{unit, select, fallback {since {date}} other {{date}}}",
+    "description": "This text displays the latest report status for a given component, using a given date logic"
   },
   "VUKPKt": {
     "defaultMessage": "Cancel",
@@ -1730,6 +1794,10 @@
   "wlwyTd": {
     "defaultMessage": "Search users",
     "description": "This message is used in the search input while searching for users"
+  },
+  "WR43/0": {
+    "defaultMessage": "You don't have any tasks yet.",
+    "description": "The empty state message header when you have no tasks"
   },
   "wtGWF6": {
     "defaultMessage": "Description:",
@@ -1932,7 +2000,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2021-12-14T20:50:22Z",
+    "defaultMessage": "2022-03-17T14:23:55Z",
     "description": null
   }
 }

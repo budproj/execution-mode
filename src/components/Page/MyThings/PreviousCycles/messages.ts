@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type MyKeyResultsPreviousCyclesPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription'
+type PreviousCyclesPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription'
 
-export default defineMessages<MyKeyResultsPreviousCyclesPageMessage>({
+export default defineMessages<PreviousCyclesPageMessage>({
   pageTitle: {
     defaultMessage: 'Meus Resultados-Chave',
     id: 'kynYpx',

@@ -39,7 +39,13 @@ export const CycleKeyResultList = ({
   return (
     <Stack direction="column" gridGap={8}>
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded ?? true, 300, 21)}>
-        <Heading as="h2" fontSize="md" color="gray.500" fontWeight={700} textTransform="uppercase">
+        <Heading
+          as="h2"
+          fontSize="xl"
+          color="new-gray.800"
+          fontWeight="bold"
+          textTransform="uppercase"
+        >
           {intl
             .formatMessage(messages.title, {
               prefix: cadence.prefix,
@@ -54,36 +60,34 @@ export const CycleKeyResultList = ({
         type={KEY_RESULT_LIST_TYPE.STATIC}
         keyResultIDs={keyResultIDs}
         isLoading={!isLoaded}
-        templateColumns="7fr 6fr 4fr 6fr 1fr 2fr"
-        columns={[
-          KEY_RESULT_LIST_COLUMN.KEY_RESULT,
-          KEY_RESULT_LIST_COLUMN.OBJECTIVE,
-          KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL,
-          KEY_RESULT_LIST_COLUMN.PROGRESS,
-          KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS,
-          KEY_RESULT_LIST_COLUMN.OWNER,
-        ]}
+        templateColumns="2fr 1fr 80px"
+        borderColor="new-gray.400"
         headProperties={{
+          [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
+            hidden: true,
+          },
+          [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+            hidden: true,
+          },
           [KEY_RESULT_LIST_COLUMN.OWNER]: {
-            justifySelf: 'flex-end',
+            hidden: true,
           },
         }}
+        columns={[
+          KEY_RESULT_LIST_COLUMN.KEY_RESULT,
+          KEY_RESULT_LIST_COLUMN.PROGRESS,
+          KEY_RESULT_LIST_COLUMN.OWNER,
+        ]}
         bodyProperties={{
           [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
             withDynamicIcon: true,
-            withRightBorder: true,
             withLastUpdateInfo: true,
             isDisabled,
           },
           [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
             isActive,
             isDisabled,
-          },
-          [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL]: {
-            isDisabled,
-          },
-          [KEY_RESULT_LIST_COLUMN.PERCENTUAL_PROGRESS]: {
-            isDisabled,
+            withConfidenceTag: true,
           },
           [KEY_RESULT_LIST_COLUMN.OWNER]: {
             justifyContent: 'flex-end',

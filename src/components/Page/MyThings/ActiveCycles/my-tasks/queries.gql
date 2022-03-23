@@ -1,0 +1,29 @@
+query GET_KRS_WITH_MY_CHECKMARKS {
+  me {
+    keyResults(hasUserCheckMarks: true) {
+      edges {
+        node {
+          id
+          title
+          checkList(first: 1000, onlyAssignedToMe: true) {
+            edges {
+              node {
+                id
+                description
+                state
+                assignedUser {
+                  id
+                  fullName
+                }
+                policy {
+                  update
+                  delete
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

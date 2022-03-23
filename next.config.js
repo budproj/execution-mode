@@ -68,10 +68,25 @@ const publicRuntimeConfig = {
     graphql: API_GRAPHQL,
   },
 
-  intlRoutes: [
+  intlRedirects: [
+    {
+      source: '/meus-resultados-chave',
+      destination: '/minhas-coisas',
+    },
     {
       source: '/pt-BR/meus-resultados-chave',
-      destination: '/my-key-results',
+      destination: '/pt-BR/minhas-coisas',
+    },
+    {
+      source: '/my-key-results',
+      destination: '/my-things',
+    },
+  ],
+
+  intlRoutes: [
+    {
+      source: '/pt-BR/minhas-coisas',
+      destination: '/my-things',
       locale: 'pt-BR',
     },
 
@@ -127,6 +142,14 @@ module.exports = {
     return publicRuntimeConfig.intlRoutes.map((route) => ({
       ...route,
       locale: false,
+    }))
+  },
+
+  async redirects() {
+    return publicRuntimeConfig.intlRedirects.map((route) => ({
+      ...route,
+      locale: false,
+      permanent: true,
     }))
   },
 
