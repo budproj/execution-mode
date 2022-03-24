@@ -60,6 +60,15 @@ query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES {
               create
             }
           }
+          supportTeamMembers {
+            edges {
+              node {
+                id
+                fullName
+                picture
+              }
+            }
+          }
         }
       }
     }

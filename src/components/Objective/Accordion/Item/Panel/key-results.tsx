@@ -61,7 +61,7 @@ export const ObjectiveKeyResults = ({
   const isEditing = mode === ObjectiveMode.EDIT
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
-  const templateColumns = isEditing ? '2fr 1fr 0.68fr 0.25fr' : '2fr 1fr 1fr'
+  const templateColumns = isEditing ? '2fr 1fr 80px 60px' : '2fr 1fr 80px'
   const columns = without(
     [
       KEY_RESULT_LIST_COLUMN.KEY_RESULT,
@@ -124,11 +124,6 @@ export const ObjectiveKeyResults = ({
           withConfidenceTag: true,
           isActive: !isDisabled,
           isDisabled,
-        },
-        [KEY_RESULT_LIST_COLUMN.OWNER]: {
-          displayName: true,
-          displayRole: true,
-          displayPicture: !isEditing,
         },
         [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
           onDelete: handleKeyResultDelete,
