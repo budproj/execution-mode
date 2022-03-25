@@ -88,15 +88,15 @@ export const NameWithAvatar = forwardRef(
         onClick={onClick}
       >
         <SkeletonCircle isLoaded={isLoaded} w={avatarSize} h={avatarSize} fadeDuration={0}>
-          {isEditable && (
-            <StyledAvatarWrapper isEditing={isEditing}>
-              <Avatar
-                name={user?.fullName}
-                src={user?.picture}
-                w={avatarSize}
-                h={avatarSize}
-                loading="lazy"
-              />
+          <StyledAvatarWrapper isEditing={isEditing}>
+            <Avatar
+              name={user?.fullName}
+              src={user?.picture}
+              w={avatarSize}
+              h={avatarSize}
+              loading="lazy"
+            />
+            {isEditable && (
               <Flex
                 w={avatarSize}
                 h={avatarSize}
@@ -112,8 +112,8 @@ export const NameWithAvatar = forwardRef(
               >
                 <SwitchIcon fill="brand.500" desc={intl.formatMessage(messages.changeIconDesc)} />
               </Flex>
-            </StyledAvatarWrapper>
-          )}
+            )}
+          </StyledAvatarWrapper>
         </SkeletonCircle>
 
         <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
