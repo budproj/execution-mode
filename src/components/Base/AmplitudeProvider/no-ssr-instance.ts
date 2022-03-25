@@ -10,6 +10,6 @@ const amplitudeInstance = (project?: string): AmplitudeClient => {
   // Since Amplitude does not provide a simple way to handle SSR, we need to dynamically
   // import it
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const amplitude = require('amplitude-js')
+  const { default: amplitude } = require('amplitude-js')
   return amplitude.getInstance(project)
 }

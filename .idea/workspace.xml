@@ -2,10 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="394f2098-4111-44a9-8a52-53ddebfa6247" name="Changes" comment="feat(events): adds event origin options">
+      <change afterPath="$PROJECT_DIR$/.graphqlconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/Debug_on_Browser.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Page/NewWorkspace/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Page/NewWorkspace/messages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Page/NewWorkspace/wrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateCycle/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateCycle/messages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateCycle/wrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateTeam/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateTeam/messages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateTeam/wrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateUser/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateUser/messages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/Steps/CreateUser/wrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/index.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/messages.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/queries.gql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/wrapper.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/new-workspace/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/new-workspace/queries.gql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/themes/preset-base/components/steps.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Debug_on_Chrome.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Launch_and_Debug.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Launch_and_Debug.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/start_develop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/start_develop.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lang/pt-BR.json" beforeDir="false" afterPath="$PROJECT_DIR$/lang/pt-BR.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Workspace/CreateForm/queries.gql" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/queries.gql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Workspace/CreateForm/wrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Workspace/CreateForm/wrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/themes/preset-base/components/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/themes/preset-base/components/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/themes/preset-base/theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/themes/preset-base/theme.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
