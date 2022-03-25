@@ -1,5 +1,12 @@
 import { useMutation } from '@apollo/client'
-import { Box, Popover, PopoverBody, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
+import {
+  Box,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  useDisclosure,
+} from '@chakra-ui/react'
 import React from 'react'
 
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
@@ -27,6 +34,7 @@ export const ChangeAssignedCheckMarkButton = ({
   canUpdate,
   onUpdate,
 }: ChangeAssignedCheckMarkButtonProperties) => {
+  const { onOpen, onClose, isOpen } = useDisclosure()
   const { dispatch } = useEvent(EventType.UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE, {
     feature: Feature.CHECK_MARK,
   })
@@ -56,7 +64,14 @@ export const ChangeAssignedCheckMarkButton = ({
   }
 
   return (
-    <Popover isLazy placement="bottom-end" size="md">
+    <Popover
+      isLazy
+      placement="bottom-end"
+      size="md"
+      isOpen={isOpen}
+      onOpen={onOpen}
+      onClose={onClose}
+    >
       <PopoverTrigger>
         <Box>
           <NamedAvatar
@@ -68,6 +83,7 @@ export const ChangeAssignedCheckMarkButton = ({
             showName={false}
             canEdit={canUpdate}
             canHover={canUpdate}
+            isEditting={isOpen}
           />
         </Box>
       </PopoverTrigger>
