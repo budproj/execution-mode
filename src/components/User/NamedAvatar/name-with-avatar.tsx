@@ -10,6 +10,7 @@ import {
   Skeleton,
   SkeletonCircle,
 } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React, { RefObject } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -37,6 +38,20 @@ type NameWithAvatarProperties = {
   onMouseLeave?: () => void
   onClick?: () => void
 }
+
+const StyledAvatarWrapper = styled(Flex)`
+  position: relative;
+  & .swap-icon {
+    opacity: ${({ isEditing }) => (isEditing ? 1 : 0)};
+    transition: opacity 0.1s;
+    will-change: opacity;
+    transform: scale(1.01);
+  }
+
+  &:hover .swap-icon {
+    opacity: 1;
+  }
+`
 
 export const NameWithAvatar = forwardRef(
   (
@@ -73,27 +88,31 @@ export const NameWithAvatar = forwardRef(
         onClick={onClick}
       >
         <SkeletonCircle isLoaded={isLoaded} w={avatarSize} h={avatarSize} fadeDuration={0}>
-          {isEditable && (isHovering || isEditing) ? (
-            <Flex
-              w={avatarSize}
-              h={avatarSize}
-              justifyContent="center"
-              alignItems="center"
-              borderColor="brand.500"
-              borderRadius="full"
-              borderWidth={2}
-              borderStyle="dashed"
-            >
-              <SwitchIcon fill="brand.500" desc={intl.formatMessage(messages.changeIconDesc)} />
-            </Flex>
-          ) : (
-            <Avatar
-              name={user?.fullName}
-              src={user?.picture}
-              w={avatarSize}
-              h={avatarSize}
-              loading="lazy"
-            />
+          {isEditable && (
+            <StyledAvatarWrapper isEditing={isEditing}>
+              <Avatar
+                name={user?.fullName}
+                src={user?.picture}
+                w={avatarSize}
+                h={avatarSize}
+                loading="lazy"
+              />
+              <Flex
+                w={avatarSize}
+                h={avatarSize}
+                justifyContent="center"
+                alignItems="center"
+                borderColor="brand.500"
+                borderRadius="full"
+                borderWidth={2}
+                borderStyle="dashed"
+                className="swap-icon"
+                position="absolute"
+                bg="white"
+              >
+                <SwitchIcon fill="brand.500" desc={intl.formatMessage(messages.changeIconDesc)} />
+              </Flex>
+            </StyledAvatarWrapper>
           )}
         </SkeletonCircle>
 
