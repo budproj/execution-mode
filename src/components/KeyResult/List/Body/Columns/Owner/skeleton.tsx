@@ -1,4 +1,4 @@
-import { Flex, SkeletonCircle, Skeleton } from '@chakra-ui/react'
+import { Flex, SkeletonCircle } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
 import KeyResultListBodyColumnBase from 'src/components/KeyResult/List/Body/Columns/Base'
@@ -10,7 +10,6 @@ const handleMouseDownCapture = (event: React.MouseEvent<HTMLElement, MouseEvent>
 }
 
 const KeyResultListBodyColumnOwnerSkeleton = ({
-  displayName,
   justifyContent,
 }: KeyResultListBodyColumnOwnerProperties): ReactElement => (
   <KeyResultListBodyColumnBase
@@ -23,8 +22,6 @@ const KeyResultListBodyColumnOwnerSkeleton = ({
   >
     <Flex alignItems="center" gridGap={4}>
       <SkeletonCircle size="48px" />
-
-      {displayName && <Skeleton display="flex" alignItems="center" h={4} w={20} />}
     </Flex>
   </KeyResultListBodyColumnBase>
 )
