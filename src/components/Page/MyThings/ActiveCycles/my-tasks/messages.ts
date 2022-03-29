@@ -1,24 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type myTasksMessages =
-  | 'myTasksTitle'
-  | 'newTag'
-  | 'tasksEmptyStateHeader'
-  | 'tasksEmptyStateMessage'
+type myTasksMessages = 'tasksEmptyStateHeader' | 'tasksEmptyStateMessage'
 
 export default defineMessages<myTasksMessages>({
-  myTasksTitle: {
-    defaultMessage: 'Minhas Tarefas',
-    id: '2leAvr',
-    description: 'The header in my tasks title, inside my things page',
-  },
-
-  newTag: {
-    defaultMessage: 'novo!',
-    id: 'Gk28Al',
-    description: 'Tag new item',
-  },
-
   tasksEmptyStateHeader: {
     defaultMessage: 'Você ainda não tem nenhuma tarefa.',
     id: 'WR43/0',

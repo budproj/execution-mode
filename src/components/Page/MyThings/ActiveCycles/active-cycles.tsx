@@ -1,4 +1,4 @@
-import { Box, Divider, HStack } from '@chakra-ui/react'
+import { Box, Divider, HStack, Heading, Tag } from '@chakra-ui/react'
 import { Scrollbars } from 'rc-scrollbars'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -14,6 +14,7 @@ import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-resul
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
 
 import messages from './messages'
+import MyPersonalTasks from './my-personal-tasks'
 import MyTasks from './my-tasks'
 
 const ActiveCyclesPage = () => {
@@ -43,8 +44,33 @@ const ActiveCyclesPage = () => {
         </Box>
 
         <Box flex="1">
+          <Heading
+            as="h2"
+            fontSize="xl"
+            lineHeight="1.6rem"
+            textTransform="uppercase"
+            fontWeight="bold"
+            color="new-gray.800"
+          >
+            {intl.formatMessage(messages.myTasksTitle)}
+            <Tag
+              variant="solid"
+              colorScheme="brand"
+              ml={3}
+              textTransform="lowercase"
+              fontWeight="bold"
+            >
+              {intl.formatMessage(messages.newTag)}
+            </Tag>
+          </Heading>
+
           <Scrollbars>
-            <MyTasks />
+            <Box pr={6}>
+              <Divider mt={14} mb={6} borderColor="new-gray.400" opacity="1" />
+              <MyPersonalTasks />
+              <Divider mt={6} mb={9} borderColor="new-gray.400" opacity="1" />
+              <MyTasks />
+            </Box>
           </Scrollbars>
         </Box>
       </HStack>

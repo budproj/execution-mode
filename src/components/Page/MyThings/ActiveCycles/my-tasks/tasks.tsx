@@ -47,10 +47,10 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
 }
 
 const Tasks = ({ items, onUpdate }: TasksProperties) => (
-  <Stack align="stretch" pt="1.2rem">
-    {items.map((item) => (
+  <Stack align="stretch">
+    {items.map((item, index) => (
       <Box key={item.id}>
-        <Divider my={9} borderColor="new-gray.400" opacity="1" />
+        {index > 0 ? <Divider my={9} borderColor="new-gray.400" opacity="1" /> : undefined}
         <KeyResultTasks keyResult={item} onUpdate={onUpdate} />
       </Box>
     ))}
