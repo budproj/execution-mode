@@ -58,6 +58,15 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
               create
             }
           }
+          supportTeamMembers {
+            edges {
+              node {
+                id
+                fullName
+                picture
+              }
+            }
+          }
         }
       }
     }
