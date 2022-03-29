@@ -22,7 +22,7 @@ export interface EditableInputFieldProperties {
   startWithEditView?: boolean
   autoFocus?: boolean
   isDisabled?: boolean
-  onPressedEnter?: (value?: string) => void
+  onPressedEnter?: EditableProps['onSubmit']
   onStartEdit?: () => void
   onStopEdit?: () => void
   onCancel?: (oldValue?: string) => void
