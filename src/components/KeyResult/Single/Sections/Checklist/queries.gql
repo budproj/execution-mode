@@ -1,7 +1,7 @@
 query GET_CHECKLIST_OF_KEY_RESULT($id: ID!) {
   keyResult(id: $id) {
     id
-    checkList {
+    checkList(first: 1000) {
       policy {
         create
       }
