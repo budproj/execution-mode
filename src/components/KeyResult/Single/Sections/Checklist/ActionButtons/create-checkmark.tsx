@@ -60,6 +60,11 @@ export const CreateCheckMarkButton = ({
   const handleNewCheckMark = async (description: KeyResultCheckMark['description']) => {
     if (isSubmitting) return
 
+    if (description === '') {
+      toggleAdd()
+      return
+    }
+
     setIsSubmitting(true)
 
     await createCheckMark({

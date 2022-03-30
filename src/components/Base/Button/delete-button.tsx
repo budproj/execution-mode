@@ -1,6 +1,6 @@
 import { IconButton } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { Ref } from 'react'
 
 import TrashIcon from 'src/components/Icon/Trash'
 
@@ -10,6 +10,7 @@ interface DeleteButtonProperties {
   canDelete?: boolean
   className?: string
   description?: string
+  buttonRef?: Ref<HTMLButtonElement>
 }
 
 const StyledTrashIcon = styled(TrashIcon)`
