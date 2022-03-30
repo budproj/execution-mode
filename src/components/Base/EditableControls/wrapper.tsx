@@ -26,6 +26,7 @@ export const EditableControls = ({ isHovering, isLocked }: EditableControlsPrope
     </HStack>
   ) : (
     <EditButton
+      className="editable-input-value__edit-button"
       isHovering={isHovering}
       isLocked={isLocked}
       {...getEditButtonProps()}

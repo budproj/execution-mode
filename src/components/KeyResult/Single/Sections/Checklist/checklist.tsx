@@ -1,4 +1,5 @@
 import { Stack } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React, { useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -8,6 +9,12 @@ import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
 import { CreateCheckMarkButton } from './ActionButtons/create-checkmark'
 import { KeyResultCheckMark } from './check-mark'
+
+const StyledStack = styled(Stack)`
+  & .editable-input-value__edit-button {
+    transform: translateY(6px);
+  }
+`
 
 interface KeyResultChecklistProperties {
   keyResultID?: string
@@ -35,7 +42,7 @@ export const KeyResultChecklist = ({
   }
 
   return nodes.length > 0 ? (
-    <Stack alignItems="flex-start" pt={4}>
+    <StyledStack alignItems="flex-start" pt={4}>
       {nodes.map((node, index) => (
         <KeyResultCheckMark
           key={node.id}
@@ -56,7 +63,7 @@ export const KeyResultChecklist = ({
           onCreate={onUpdate}
         />
       )}
-    </Stack>
+    </StyledStack>
   ) : // eslint-disable-next-line unicorn/no-null
   null
 }
