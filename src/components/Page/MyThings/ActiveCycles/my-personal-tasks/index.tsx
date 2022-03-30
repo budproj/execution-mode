@@ -47,6 +47,7 @@ const MyPersonalTasks = () => {
             tasks.map((task: Task) => (
               <SingleTask
                 key={task.id}
+                taskId={task.id}
                 description={task.description}
                 toggleCheckmark={toggleCheckmark}
               />

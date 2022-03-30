@@ -3,15 +3,13 @@ import styled from '@emotion/styled'
 import React, { useState } from 'react'
 
 import { EditableInputField } from 'src/components/Base'
+import { useChangeTaskDescription } from 'src/components/Task/hooks/changeTaskDescription/change-task-description'
 
 interface KeyResultCheckMarkProperties {
+  taskId: string
   description: string
   isLoaded?: boolean
   toggleCheckmark: () => void
-}
-
-const handleSubmit = (taskName: string | undefined) => {
-  console.log('task updated', taskName)
 }
 
 const StyledKeyResultCheckMark = styled(HStack)`
@@ -25,12 +23,14 @@ const StyledKeyResultCheckMark = styled(HStack)`
 `
 
 export const SingleTask = ({
+  taskId,
   description,
   isLoaded = true,
   toggleCheckmark: customToogleCheckmark,
 }: KeyResultCheckMarkProperties) => {
   const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
+  const { changeDescription } = useChangeTaskDescription()
 
   const handleStartEdit = () => {
     setIsEditing(true)
@@ -45,6 +45,12 @@ export const SingleTask = ({
 
     if (customToogleCheckmark) {
       customToogleCheckmark()
+    }
+  }
+
+  const handleSubmit = (taskName: string | undefined) => {
+    if (taskName) {
+      changeDescription({ variables: { id: taskId, description: taskName } })
     }
   }
 

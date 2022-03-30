@@ -35,10 +35,10 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
       </HStack>
       <Box pl="3.2rem">
         <KeyResultChecklist
+          isEditable
           keyResultID={keyResult.id}
           nodes={checklist}
           canCreate={canCreate}
-          isEditable={false}
           onUpdate={onUpdate}
         />
       </Box>

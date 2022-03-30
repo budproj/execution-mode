@@ -3,6 +3,7 @@ import React, { useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { KeyResultCheckMark as KeyResultCheckMarkType } from 'src/components/KeyResult/types'
+import { GraphQLEffect } from 'src/components/types'
 import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
 import { CreateCheckMarkButton } from './ActionButtons/create-checkmark'
@@ -26,6 +27,9 @@ export const KeyResultChecklist = ({
   const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
   const createButtonReference = useRef<HTMLButtonElement>(null)
 
+  const canUserEdit = (node: KeyResultCheckMarkType) =>
+    isEditable && node.policy?.update === GraphQLEffect.ALLOW
+
   const handleCreateCheckmark = () => {
     createButtonReference.current?.click()
   }
@@ -35,7 +39,7 @@ export const KeyResultChecklist = ({
       {nodes.map((node, index) => (
         <KeyResultCheckMark
           key={node.id}
-          isEditable={isEditable}
+          isEditable={isEditable && canUserEdit(node)}
           node={node}
           keyResultID={keyResultID}
           draftCheckMarks={draftCheckMarks}
