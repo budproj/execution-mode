@@ -5,6 +5,7 @@ query GET_MY_TASKS {
         node {
           id
           description
+          state
         }
       }
     }
