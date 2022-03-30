@@ -10,6 +10,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import SingleTask from 'src/components/Task'
+import { AddTask } from 'src/components/Task/add-task'
 import { useGetMyTasks } from 'src/components/Task/hooks/getTasks/get-tasks'
 import { SingleTaskSkeleton } from 'src/components/Task/skeletons/single-task'
 import { Task } from 'src/components/Task/types'
@@ -53,6 +54,7 @@ const MyPersonalTasks = () => {
           ) : (
             <SingleTaskSkeleton repeat={3} />
           )}
+          <AddTask buttonText={intl.formatMessage(messages.addPersonalTasksButtonLabel)} />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
