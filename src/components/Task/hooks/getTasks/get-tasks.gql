@@ -1,6 +1,6 @@
 query GET_MY_TASKS {
   me {
-    tasks {
+    tasks(order: {createdAt: ASC}) {
       edges {
         node {
           id

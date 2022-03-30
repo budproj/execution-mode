@@ -11,6 +11,7 @@ import { useIntl } from 'react-intl'
 
 import SingleTask from 'src/components/Task'
 import { AddTask } from 'src/components/Task/add-task'
+import { useDeleteTask } from 'src/components/Task/hooks/deleteTask/delete-task'
 import { useGetMyTasks } from 'src/components/Task/hooks/getTasks/get-tasks'
 import { useToggleTask } from 'src/components/Task/hooks/toggleTask/toggle-task'
 import { SingleTaskSkeleton } from 'src/components/Task/skeletons/single-task'
@@ -21,12 +22,17 @@ import messages from './messages'
 const MyPersonalTasks = () => {
   const { tasks, loading, called } = useGetMyTasks()
   const { toggleTask } = useToggleTask()
+  const { deleteTask } = useDeleteTask()
   const intl = useIntl()
 
   const isLoaded = called && !loading
 
   const onCheckboxClick = (taskId: Task['id']) => {
     toggleTask({ variables: { id: taskId } })
+  }
+
+  const onTaskDelete = (taskId: Task['id']) => {
+    deleteTask({ variables: { id: taskId } })
   }
 
   return (
@@ -47,7 +53,12 @@ const MyPersonalTasks = () => {
         <AccordionPanel pb={0}>
           {isLoaded ? (
             tasks.map((task: Task) => (
-              <SingleTask key={task.id} task={task} onCheckboxClick={onCheckboxClick} />
+              <SingleTask
+                key={task.id}
+                task={task}
+                onCheckboxClick={onCheckboxClick}
+                onTaskDelete={onTaskDelete}
+              />
             ))
           ) : (
             <SingleTaskSkeleton repeat={3} />

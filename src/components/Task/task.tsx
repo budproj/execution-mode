@@ -7,10 +7,13 @@ import { TASK_STATUS } from 'src/components/Task/constants'
 import { useChangeTaskDescription } from 'src/components/Task/hooks/changeTaskDescription/change-task-description'
 import { Task } from 'src/components/Task/types'
 
+import { DeleteButton } from '../Base/Button/delete-button'
+
 interface SingleTaskProperties {
   task: Task
   isLoaded?: boolean
   onCheckboxClick?: (taskId: Task['id']) => void
+  onTaskDelete?: (taskId: Task['id']) => void
 }
 
 const StyledSingleTask = styled(HStack)`
@@ -23,7 +26,12 @@ const StyledSingleTask = styled(HStack)`
   }
 `
 
-export const SingleTask = ({ task, isLoaded = true, onCheckboxClick }: SingleTaskProperties) => {
+export const SingleTask = ({
+  task,
+  isLoaded = true,
+  onCheckboxClick,
+  onTaskDelete,
+}: SingleTaskProperties) => {
   const [isEditing, setIsEditing] = useState(false)
   const { changeDescription } = useChangeTaskDescription()
 
@@ -40,6 +48,12 @@ export const SingleTask = ({ task, isLoaded = true, onCheckboxClick }: SingleTas
   const toggleTask = () => {
     if (onCheckboxClick) {
       onCheckboxClick(task.id)
+    }
+  }
+
+  const onDeleteClick = () => {
+    if (onTaskDelete) {
+      onTaskDelete(task.id)
     }
   }
 
@@ -74,6 +88,7 @@ export const SingleTask = ({ task, isLoaded = true, onCheckboxClick }: SingleTas
           onStartEdit={handleStartEdit}
           onStopEdit={handleStopEdit}
         />
+        <DeleteButton canDelete onDelete={onDeleteClick} />
       </StyledSingleTask>
     </Skeleton>
   )
