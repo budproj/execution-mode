@@ -12,20 +12,22 @@ import { useIntl } from 'react-intl'
 import SingleTask from 'src/components/Task'
 import { AddTask } from 'src/components/Task/add-task'
 import { useGetMyTasks } from 'src/components/Task/hooks/getTasks/get-tasks'
+import { useToggleTask } from 'src/components/Task/hooks/toggleTask/toggle-task'
 import { SingleTaskSkeleton } from 'src/components/Task/skeletons/single-task'
 import { Task } from 'src/components/Task/types'
 
 import messages from './messages'
 
-const toggleCheckmark = () => {
-  console.log('task updated')
-}
-
 const MyPersonalTasks = () => {
   const { tasks, loading, called } = useGetMyTasks()
+  const { toggleTask } = useToggleTask()
   const intl = useIntl()
 
   const isLoaded = called && !loading
+
+  const onCheckboxClick = (taskId: Task['id']) => {
+    toggleTask({ variables: { id: taskId } })
+  }
 
   return (
     <Accordion allowToggle reduceMotion defaultIndex={0}>
@@ -45,12 +47,7 @@ const MyPersonalTasks = () => {
         <AccordionPanel pb={0}>
           {isLoaded ? (
             tasks.map((task: Task) => (
-              <SingleTask
-                key={task.id}
-                taskId={task.id}
-                description={task.description}
-                toggleCheckmark={toggleCheckmark}
-              />
+              <SingleTask key={task.id} task={task} onCheckboxClick={onCheckboxClick} />
             ))
           ) : (
             <SingleTaskSkeleton repeat={3} />
