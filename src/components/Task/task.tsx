@@ -88,7 +88,7 @@ export const SingleTask = ({
           onStartEdit={handleStartEdit}
           onStopEdit={handleStopEdit}
         />
-        <DeleteButton canDelete onDelete={onDeleteClick} />
+        <DeleteButton canDelete className="deleteCheckMarkButton" onDelete={onDeleteClick} />
       </StyledSingleTask>
     </Skeleton>
   )

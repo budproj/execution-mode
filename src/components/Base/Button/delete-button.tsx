@@ -25,7 +25,7 @@ const StyledTrashIcon = styled(TrashIcon)`
 
 export const DeleteButton = ({
   onDelete,
-  isVisible = true,
+  isVisible,
   canDelete,
   description = '',
   ...rest
