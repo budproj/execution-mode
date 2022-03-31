@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 import { Button, BUTTON_ICON_OPTIONS } from 'src/components/Base/Button'
-import { useCreateTask } from 'src/components/Task/hooks/createTask/create-task'
+import { useCreateTask } from 'src/components/Task/hooks'
 
 import { EditableInputField } from '../Base'
 

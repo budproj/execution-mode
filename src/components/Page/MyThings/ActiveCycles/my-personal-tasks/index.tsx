@@ -1,20 +1,11 @@
-import {
-  Text,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
-} from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { Accordion } from 'src/components/Base/Accordion/index'
 import SingleTask from 'src/components/Task'
 import { AddTask } from 'src/components/Task/add-task'
 import { TASK_STATUS } from 'src/components/Task/constants'
-import { useDeleteTask } from 'src/components/Task/hooks/deleteTask/delete-task'
-import { useGetMyTasks } from 'src/components/Task/hooks/getTasks/get-tasks'
-import { useToggleTask } from 'src/components/Task/hooks/toggleTask/toggle-task'
+import { useDeleteTask, useGetMyTasks, useToggleTask } from 'src/components/Task/hooks'
 import { SingleTaskSkeleton } from 'src/components/Task/skeletons/single-task'
 import { Task } from 'src/components/Task/types'
 
@@ -42,36 +33,20 @@ const MyPersonalTasks = ({ taskState }: MyPersonalTasksProperties) => {
   }
 
   return (
-    <Accordion allowToggle reduceMotion defaultIndex={0}>
-      <AccordionItem border={0}>
-        <AccordionButton
-          p={0}
-          mb={3}
-          _hover={{}}
-          _focus={{ boxShadow: 'none' }}
-          justifyContent="space-between"
-        >
-          <Text fontWeight={600} pl="0.5rem">
-            {intl.formatMessage(messages.personalTasksHeading)}
-          </Text>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel pb={0}>
-          {isLoaded ? (
-            tasks.map((task: Task) => (
-              <SingleTask
-                key={task.id}
-                task={task}
-                onCheckboxClick={onCheckboxClick}
-                onTaskDelete={onTaskDelete}
-              />
-            ))
-          ) : (
-            <SingleTaskSkeleton repeat={3} />
-          )}
-          <AddTask buttonText={intl.formatMessage(messages.addPersonalTasksButtonLabel)} />
-        </AccordionPanel>
-      </AccordionItem>
+    <Accordion title={intl.formatMessage(messages.personalTasksHeading)}>
+      {isLoaded ? (
+        tasks.map((task: Task) => (
+          <SingleTask
+            key={task.id}
+            task={task}
+            onCheckboxClick={onCheckboxClick}
+            onTaskDelete={onTaskDelete}
+          />
+        ))
+      ) : (
+        <SingleTaskSkeleton repeat={3} />
+      )}
+      <AddTask buttonText={intl.formatMessage(messages.addPersonalTasksButtonLabel)} />
     </Accordion>
   )
 }

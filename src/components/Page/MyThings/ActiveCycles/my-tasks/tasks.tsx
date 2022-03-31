@@ -1,6 +1,7 @@
 import { Stack, Text, Box, HStack, Divider } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 
+import { Accordion } from 'src/components/Base/Accordion'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResultChecklist } from 'src/components/KeyResult/Single/Sections/Checklist/checklist'
 import { KeyResult, KeyResultCheckMark } from 'src/components/KeyResult/types'
@@ -26,13 +27,16 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
   }, [keyResult.checkList?.edges, updateChecklistEdges])
 
   return (
-    <Box>
-      <HStack key={keyResult.id}>
-        <KeyResultDynamicIcon title={keyResult.title} boxSize="30px" iconSize="16px" />
-        <Text maxWidth="calc(100% - 50px)" fontWeight={600} pl="0.5rem">
-          {keyResult.title}
-        </Text>
-      </HStack>
+    <Accordion
+      title={
+        <HStack key={keyResult.id} textAlign="left">
+          <KeyResultDynamicIcon title={keyResult.title} boxSize="30px" iconSize="16px" />
+          <Text maxWidth="calc(100% - 50px)" fontWeight={600} pl="0.5rem">
+            {keyResult.title}
+          </Text>
+        </HStack>
+      }
+    >
       <Box pl="3.2rem">
         <KeyResultChecklist
           isEditable
@@ -42,7 +46,24 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
           onUpdate={onUpdate}
         />
       </Box>
-    </Box>
+    </Accordion>
+    // <Box>
+    //   <HStack key={keyResult.id}>
+    //     <KeyResultDynamicIcon title={keyResult.title} boxSize="30px" iconSize="16px" />
+    //     <Text maxWidth="calc(100% - 50px)" fontWeight={600} pl="0.5rem">
+    //       {keyResult.title}
+    //     </Text>
+    //   </HStack>
+    //   <Box pl="3.2rem">
+    //     <KeyResultChecklist
+    //       isEditable
+    //       keyResultID={keyResult.id}
+    //       nodes={checklist}
+    //       canCreate={canCreate}
+    //       onUpdate={onUpdate}
+    //     />
+    //   </Box>
+    // </Box>
   )
 }
 

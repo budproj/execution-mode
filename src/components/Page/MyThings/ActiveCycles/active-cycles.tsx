@@ -48,6 +48,8 @@ const ActiveCyclesPage = () => {
     setTaskState(taskState)
   }
 
+  const toggleOpen = () => setIsOpen(!isOpen)
+
   return (
     <PageContent>
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
@@ -90,7 +92,7 @@ const ActiveCyclesPage = () => {
               </Tag>
             </Heading>
 
-            <Menu onOpen={() => setIsOpen(!isOpen)}>
+            <Menu onOpen={toggleOpen} onClose={toggleOpen}>
               <MenuButton
                 as={Button}
                 borderWidth={1}

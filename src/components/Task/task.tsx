@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 
 import { EditableInputField } from 'src/components/Base'
 import { TASK_STATUS } from 'src/components/Task/constants'
-import { useChangeTaskDescription } from 'src/components/Task/hooks/changeTaskDescription/change-task-description'
+import { useChangeTaskDescription } from 'src/components/Task/hooks'
 import { Task } from 'src/components/Task/types'
 
 import { DeleteButton } from '../Base/Button/delete-button'
