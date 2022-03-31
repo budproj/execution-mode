@@ -7,6 +7,7 @@ import {
   Button,
   Stack,
   Spinner,
+  StyleProps,
 } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
@@ -15,7 +16,7 @@ import ChevronDownIcon from 'src/components/Icon/ChevronDown'
 
 import messages from './messages'
 
-export interface SelectMenuProperties {
+export interface SelectMenuProperties extends StyleProps {
   value?: string
   onChange: (value: string | string[]) => void
   children: MenuProps['children']
@@ -31,6 +32,9 @@ export interface SelectMenuProperties {
   placeholder?: ReactElement | string
   valueLabel?: ReactElement | string
   isInvalid?: boolean
+  style?: any
+  _hover?: any
+  chevronStyle?: any
 }
 
 const SelectMenu = ({
@@ -49,6 +53,8 @@ const SelectMenu = ({
   placement,
   valueLabel,
   isInvalid,
+  chevronStyle,
+  ...rest
 }: SelectMenuProperties) => {
   const intl = useIntl()
 
@@ -76,7 +82,6 @@ const SelectMenu = ({
         textAlign="left"
         py={6}
         px={3}
-        pr={6}
         fontSize="lg"
         _hover={{
           color: 'black.900',
@@ -93,10 +98,12 @@ const SelectMenu = ({
               stroke="new-gray.800"
               transition="0.2s all ease-in"
               transform={isOpen ? 'rotate(180deg)' : 'none'}
+              {...chevronStyle}
             />
           </Stack>
         }
         transition="none"
+        {...rest}
       >
         {valueLabel ?? placeholder}
       </MenuButton>
@@ -105,6 +112,7 @@ const SelectMenu = ({
         borderColor="new-gray.200"
         borderWidth={1}
         overflow="hidden"
+        zIndex={999}
       >
         <MenuOptionGroup value={value} type="radio" onChange={onChange}>
           {children}

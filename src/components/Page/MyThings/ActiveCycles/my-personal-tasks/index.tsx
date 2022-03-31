@@ -11,6 +11,7 @@ import { useIntl } from 'react-intl'
 
 import SingleTask from 'src/components/Task'
 import { AddTask } from 'src/components/Task/add-task'
+import { TASK_STATUS } from 'src/components/Task/constants'
 import { useDeleteTask } from 'src/components/Task/hooks/deleteTask/delete-task'
 import { useGetMyTasks } from 'src/components/Task/hooks/getTasks/get-tasks'
 import { useToggleTask } from 'src/components/Task/hooks/toggleTask/toggle-task'
@@ -19,8 +20,13 @@ import { Task } from 'src/components/Task/types'
 
 import messages from './messages'
 
-const MyPersonalTasks = () => {
-  const { tasks, loading, called } = useGetMyTasks()
+interface MyPersonalTasksProperties {
+  taskState?: string
+}
+
+const MyPersonalTasks = ({ taskState }: MyPersonalTasksProperties) => {
+  const stateCheck = taskState === TASK_STATUS.UNCHECKED
+  const { tasks, loading, called } = useGetMyTasks({ onlyUnchecked: stateCheck })
   const { toggleTask } = useToggleTask()
   const { deleteTask } = useDeleteTask()
   const intl = useIntl()

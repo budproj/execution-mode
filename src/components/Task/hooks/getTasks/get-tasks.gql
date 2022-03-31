@@ -1,6 +1,6 @@
-query GET_MY_TASKS {
+query GET_MY_TASKS($onlyUnchecked: Boolean) {
   me {
-    tasks(order: {createdAt: ASC}) {
+    tasks(order: {createdAt: ASC}, onlyUnchecked: $onlyUnchecked) {
       edges {
         node {
           id
