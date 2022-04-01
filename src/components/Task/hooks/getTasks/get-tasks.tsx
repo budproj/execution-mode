@@ -1,4 +1,7 @@
 import { useQuery } from '@apollo/client'
+import { useRecoilValue } from 'recoil'
+
+import { myThingsTasksQuery } from 'src/state/recoil/task'
 
 import { TaskMeQuery } from '../../types'
 
@@ -8,9 +11,10 @@ export interface useGetMyTasksProperties {
   onlyUnchecked?: boolean
 }
 
-export const useGetMyTasks = ({ onlyUnchecked = true }: useGetMyTasksProperties) => {
+export const useGetMyTasks = () => {
+  const query = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
   const { data, loading, called } = useQuery<TaskMeQuery>(GET_MY_TASKS, {
-    variables: { onlyUnchecked },
+    variables: query,
   })
 
   const tasks = data?.me?.tasks?.edges?.map(({ node }) => node) ?? []

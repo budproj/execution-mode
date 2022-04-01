@@ -23,6 +23,7 @@ import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { TASK_STATUS } from 'src/components/Task/constants'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
+import { myThingsTasksQuery } from 'src/state/recoil/task'
 
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
 
@@ -33,6 +34,7 @@ import MyTasks from './my-tasks'
 const ActiveCyclesPage = () => {
   const intl = useIntl()
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+  const setTasksQuery = useSetRecoilState(myThingsTasksQuery)
 
   const statesLabels = new Map([
     [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
@@ -45,6 +47,7 @@ const ActiveCyclesPage = () => {
 
   const handleTaskFilterChange = (taskState: TASK_STATUS) => {
     setTaskState(taskState)
+    setTasksQuery({ onlyUnchecked: taskState === TASK_STATUS.UNCHECKED })
   }
 
   return (
@@ -157,7 +160,7 @@ const ActiveCyclesPage = () => {
 
           <Scrollbars style={{ maxHeight: '85%' }}>
             <Box pr={6}>
-              <MyPersonalTasks taskState={taskState} />
+              <MyPersonalTasks />
               <Divider mt={6} mb={9} borderColor="new-gray.400" opacity="1" />
               <MyTasks />
             </Box>
