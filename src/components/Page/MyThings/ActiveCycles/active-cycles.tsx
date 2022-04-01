@@ -39,7 +39,6 @@ const ActiveCyclesPage = () => {
     [TASK_STATUS.CHECKED, intl.formatMessage(messages.allTasks)],
   ])
 
-  const [isOpen, setIsOpen] = useState(false)
   const [taskState, setTaskState] = useState(TASK_STATUS.UNCHECKED)
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
@@ -47,8 +46,6 @@ const ActiveCyclesPage = () => {
   const handleTaskFilterChange = (taskState: TASK_STATUS) => {
     setTaskState(taskState)
   }
-
-  const toggleOpen = () => setIsOpen(!isOpen)
 
   return (
     <PageContent>
@@ -92,63 +89,67 @@ const ActiveCyclesPage = () => {
               </Tag>
             </Heading>
 
-            <Menu onOpen={toggleOpen} onClose={toggleOpen}>
-              <MenuButton
-                as={Button}
-                borderWidth={1}
-                borderColor="new-gray.600"
-                color="new-gray.600"
-                borderRadius={4}
-                px="0.75rem"
-                py="0.35rem"
-                h="auto"
-                fontSize="sm"
-                iconSpacing={6}
-                rightIcon={
-                  <ChevronDown
-                    desc="menu"
-                    fontSize="xs"
-                    color="new-gray.200"
-                    stroke="new-gray.200"
-                    transition="0.2s transform ease-in"
-                    transform={isOpen ? 'rotate(180deg)' : 'none'}
-                  />
-                }
-                transition="0.2s background-color, 0.2s color"
-                _hover={{
-                  backgroundColor: 'gray.50',
-                  color: 'new-gray.800',
-                }}
-              >
-                {statesLabels.get(taskState)}
-              </MenuButton>
-              <MenuList
-                boxShadow="lg"
-                borderColor="new-gray.200"
-                borderWidth={1}
-                overflow="hidden"
-                zIndex={999}
-                minWidth="auto"
-              >
-                {[...statesLabels].map(([labelEnum]) => (
-                  <MenuItem
-                    key={labelEnum}
-                    p="0.35rem 3rem 0.35rem 0.75rem"
+            <Menu>
+              {({ isOpen }) => (
+                <>
+                  <MenuButton
+                    as={Button}
+                    borderWidth={1}
+                    borderColor="new-gray.600"
                     color="new-gray.600"
+                    borderRadius={4}
+                    px="0.75rem"
+                    py="0.35rem"
                     h="auto"
                     fontSize="sm"
-                    fontWeight={500}
+                    iconSpacing={6}
+                    rightIcon={
+                      <ChevronDown
+                        desc="menu"
+                        fontSize="xs"
+                        color="new-gray.200"
+                        stroke="new-gray.200"
+                        transition="0.2s transform ease-in"
+                        transform={isOpen ? 'rotate(180deg)' : 'none'}
+                      />
+                    }
                     transition="0.2s background-color, 0.2s color"
                     _hover={{
                       backgroundColor: 'gray.50',
                       color: 'new-gray.800',
                     }}
-                    onClick={() => handleTaskFilterChange(labelEnum)}
                   >
-                    {statesLabels.get(labelEnum)}
-                  </MenuItem>
-                ))}
-              </MenuList>
+                    {statesLabels.get(taskState)}
+                  </MenuButton>
+                  <MenuList
+                    boxShadow="lg"
+                    borderColor="new-gray.200"
+                    borderWidth={1}
+                    overflow="hidden"
+                    zIndex={999}
+                    minWidth="auto"
+                  >
+                    {[...statesLabels].map(([labelEnum]) => (
+                      <MenuItem
+                        key={labelEnum}
+                        p="0.35rem 3rem 0.35rem 0.75rem"
+                        color="new-gray.600"
+                        h="auto"
+                        fontSize="sm"
+                        fontWeight={500}
+                        transition="0.2s background-color, 0.2s color"
+                        _hover={{
+                          backgroundColor: 'gray.50',
+                          color: 'new-gray.800',
+                        }}
+                        onClick={() => handleTaskFilterChange(labelEnum)}
+                      >
+                        {statesLabels.get(labelEnum)}
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                </>
+              )}
             </Menu>
           </Box>
 
