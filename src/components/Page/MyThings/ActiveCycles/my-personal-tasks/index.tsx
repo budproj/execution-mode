@@ -16,20 +16,20 @@ interface MyPersonalTasksProperties {
 }
 
 const MyPersonalTasks = ({ taskState }: MyPersonalTasksProperties) => {
-  const stateCheck = taskState === TASK_STATUS.UNCHECKED
-  const { tasks, loading, called } = useGetMyTasks({ onlyUnchecked: stateCheck })
-  const { toggleTask } = useToggleTask()
-  const { deleteTask } = useDeleteTask()
+  const onlyUnchecked = taskState === TASK_STATUS.UNCHECKED
+  const { tasks, loading, called } = useGetMyTasks({ onlyUnchecked })
+  const { toggleTask } = useToggleTask({ onlyUnchecked })
+  const { deleteTask } = useDeleteTask({ onlyUnchecked })
   const intl = useIntl()
 
   const isLoaded = called && !loading
 
-  const onCheckboxClick = (taskId: Task['id']) => {
-    toggleTask({ variables: { id: taskId } })
+  const onCheckboxClick = async (taskId: Task['id']) => {
+    await toggleTask({ variables: { id: taskId } })
   }
 
-  const onTaskDelete = (taskId: Task['id']) => {
-    deleteTask({ variables: { id: taskId } })
+  const onTaskDelete = async (taskId: Task['id']) => {
+    await deleteTask({ variables: { id: taskId } })
   }
 
   return (
@@ -39,6 +39,7 @@ const MyPersonalTasks = ({ taskState }: MyPersonalTasksProperties) => {
           <SingleTask
             key={task.id}
             task={task}
+            taskState={taskState}
             onCheckboxClick={onCheckboxClick}
             onTaskDelete={onTaskDelete}
           />

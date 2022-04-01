@@ -11,9 +11,10 @@ import { DeleteButton } from '../Base/Button/delete-button'
 
 interface SingleTaskProperties {
   task: Task
+  taskState?: string
   isLoaded?: boolean
-  onCheckboxClick?: (taskId: Task['id']) => void
-  onTaskDelete?: (taskId: Task['id']) => void
+  onCheckboxClick?: (taskId: Task['id']) => Promise<void>
+  onTaskDelete?: (taskId: Task['id']) => Promise<void>
 }
 
 const StyledSingleTask = styled(HStack)`
@@ -31,11 +32,13 @@ export const SingleTask = ({
   isLoaded = true,
   onCheckboxClick,
   onTaskDelete,
+  taskState,
 }: SingleTaskProperties) => {
+  const onlyUnchecked = taskState === TASK_STATUS.UNCHECKED
+  const [isLoading, setIsLoading] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
-  const { changeDescription } = useChangeTaskDescription()
-
-  const isChecked = task.state === TASK_STATUS.CHECKED
+  const [isChecked, setIsChecked] = useState(task.state === TASK_STATUS.CHECKED)
+  const { changeDescription } = useChangeTaskDescription({ onlyUnchecked })
 
   const handleStartEdit = () => {
     setIsEditing(true)
@@ -45,16 +48,25 @@ export const SingleTask = ({
     setIsEditing(false)
   }
 
-  const toggleTask = () => {
+  const toggleTask = async () => {
+    setIsLoading(true)
+    setIsChecked(!isChecked)
+
     if (onCheckboxClick) {
-      onCheckboxClick(task.id)
+      await onCheckboxClick(task.id)
     }
+
+    setIsLoading(false)
   }
 
-  const onDeleteClick = () => {
+  const onDeleteClick = async () => {
+    setIsLoading(true)
+
     if (onTaskDelete) {
-      onTaskDelete(task.id)
+      await onTaskDelete(task.id)
     }
+
+    setIsLoading(false)
   }
 
   const handleSubmit = (taskName: Task['description'] | undefined) => {
@@ -77,7 +89,7 @@ export const SingleTask = ({
         <EditableInputField
           isLoaded={isLoaded}
           autoFocus={false}
-          isWaiting={false}
+          isWaiting={isLoading}
           value={task.description}
           startWithEditView={false}
           isDisabled={false}
