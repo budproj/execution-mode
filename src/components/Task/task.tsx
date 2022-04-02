@@ -38,7 +38,7 @@ export const SingleTask = ({
   const [isLoading, setIsLoading] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(task.state === TASK_STATUS.CHECKED)
-  const { changeDescription } = useChangeTaskDescription({ onlyUnchecked })
+  const { changeDescription } = useChangeTaskDescription()
 
   const handleStartEdit = () => {
     setIsEditing(true)
