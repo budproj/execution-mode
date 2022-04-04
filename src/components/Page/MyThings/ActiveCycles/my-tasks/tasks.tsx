@@ -43,27 +43,11 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
           keyResultID={keyResult.id}
           nodes={checklist}
           canCreate={canCreate}
+          wrapperProps={{ pt: 0 }}
           onUpdate={onUpdate}
         />
       </Box>
     </Accordion>
-    // <Box>
-    //   <HStack key={keyResult.id}>
-    //     <KeyResultDynamicIcon title={keyResult.title} boxSize="30px" iconSize="16px" />
-    //     <Text maxWidth="calc(100% - 50px)" fontWeight={600} pl="0.5rem">
-    //       {keyResult.title}
-    //     </Text>
-    //   </HStack>
-    //   <Box pl="3.2rem">
-    //     <KeyResultChecklist
-    //       isEditable
-    //       keyResultID={keyResult.id}
-    //       nodes={checklist}
-    //       canCreate={canCreate}
-    //       onUpdate={onUpdate}
-    //     />
-    //   </Box>
-    // </Box>
   )
 }
 
