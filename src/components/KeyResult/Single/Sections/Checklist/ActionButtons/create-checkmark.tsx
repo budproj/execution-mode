@@ -28,9 +28,10 @@ const StyledEditableWrapper = styled(Box)`
   ${({ isAbsolute }) =>
     isAbsolute &&
     `
+    text-align: left;
     width: 100%;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
   `};
 `
@@ -90,7 +91,7 @@ export const CreateCheckMarkButton = ({
   }
 
   return (
-    <Box width="100%" pt={isAdding && isAbsolute ? 14 : 0}>
+    <Box width="100%" pb={isAdding && isAbsolute ? 14 : 0}>
       {isAdding && (
         <StyledEditableWrapper isAbsolute={isAbsolute}>
           <EditableInputField

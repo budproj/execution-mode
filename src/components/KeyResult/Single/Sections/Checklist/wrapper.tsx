@@ -75,8 +75,8 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
 
   return (
     <Stack spacing={0}>
-      <Stack direction="row" alignItems="flex-end" position="relative">
-        <KeyResultSectionHeading mb="0.2rem">
+      <Stack direction="row" alignItems="flex-start" position="relative">
+        <KeyResultSectionHeading mt="0.3rem">
           {intl.formatMessage(messages.heading)}
         </KeyResultSectionHeading>
         <OptionBarWrapper

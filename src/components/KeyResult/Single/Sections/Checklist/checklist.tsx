@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react'
+import { Stack, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useRef } from 'react'
 import { useRecoilValue } from 'recoil'
@@ -22,6 +22,7 @@ interface KeyResultChecklistProperties {
   onUpdate?: () => void
   canCreate: boolean
   isEditable?: boolean
+  wrapperProps?: StyleProps
 }
 
 export const KeyResultChecklist = ({
@@ -30,6 +31,7 @@ export const KeyResultChecklist = ({
   keyResultID,
   canCreate,
   isEditable = true,
+  wrapperProps,
 }: KeyResultChecklistProperties) => {
   const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
   const createButtonReference = useRef<HTMLButtonElement>(null)
@@ -42,7 +44,7 @@ export const KeyResultChecklist = ({
   }
 
   return nodes.length > 0 ? (
-    <StyledStack alignItems="flex-start" pt={4}>
+    <StyledStack alignItems="flex-start" pt={4} {...wrapperProps}>
       {nodes.map((node, index) => (
         <KeyResultCheckMark
           key={node.id}
