@@ -11,7 +11,6 @@ import { DeleteButton } from '../Base/Button/delete-button'
 
 interface SingleTaskProperties {
   task: Task
-  taskState?: string
   isLoaded?: boolean
   onCheckboxClick?: (taskId: Task['id']) => Promise<void>
   onTaskDelete?: (taskId: Task['id']) => Promise<void>
@@ -32,9 +31,7 @@ export const SingleTask = ({
   isLoaded = true,
   onCheckboxClick,
   onTaskDelete,
-  taskState,
 }: SingleTaskProperties) => {
-  const onlyUnchecked = taskState === TASK_STATUS.UNCHECKED
   const [isLoading, setIsLoading] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(task.state === TASK_STATUS.CHECKED)
