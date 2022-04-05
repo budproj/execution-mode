@@ -9,6 +9,7 @@ import GET_MY_TASKS from './get-tasks.gql'
 
 export interface useGetMyTasksProperties {
   onlyUnchecked?: boolean
+  limit?: number
 }
 
 export const useGetMyTasks = () => {

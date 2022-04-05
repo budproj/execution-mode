@@ -8,5 +8,6 @@ export const myThingsTasksQuery = atom<useGetMyTasksProperties>({
   key: `${PREFIX}::MY_THINGS_QUERY`,
   default: {
     onlyUnchecked: false,
+    limit: 1000,
   },
 })

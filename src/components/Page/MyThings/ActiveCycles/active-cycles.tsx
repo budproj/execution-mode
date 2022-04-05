@@ -47,7 +47,10 @@ const ActiveCyclesPage = () => {
 
   const handleTaskFilterChange = (taskState: TASK_STATUS) => {
     setTaskState(taskState)
-    setTasksQuery({ onlyUnchecked: taskState === TASK_STATUS.UNCHECKED })
+    setTasksQuery((previousQuery) => ({
+      ...previousQuery,
+      onlyUnchecked: taskState === TASK_STATUS.UNCHECKED,
+    }))
   }
 
   return (
