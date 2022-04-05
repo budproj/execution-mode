@@ -1,10 +1,13 @@
 import { useQuery } from '@apollo/client'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultCheckMarkState } from 'src/components/KeyResult/types'
+import { useGetMyTasksProperties } from 'src/components/Task/hooks/getTasks'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { myThingsTasksQuery } from 'src/state/recoil/task'
 
 import MyTasksEmptyState from './empty-state'
 import queries from './queries.gql'
@@ -14,6 +17,8 @@ import Tasks from './tasks'
 const MyTasks = () => {
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
+  const { onlyUnchecked } = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
+  const [filteredKeyResults, setFilteredKeyResults] = useState(keyResults)
 
   const { refetch, loading } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
     onCompleted: (data) => {
@@ -22,12 +27,30 @@ const MyTasks = () => {
     },
   })
 
+  useEffect(() => {
+    const filteredKeyResults = keyResults.map((keyResult) => {
+      const checkListToShow = keyResult.checkList.edges.filter((checklist) =>
+        onlyUnchecked ? checklist.node.state === KeyResultCheckMarkState.UNCHECKED : true,
+      )
+
+      return {
+        ...keyResult,
+        checkList: {
+          ...keyResult.checkList,
+          edges: checkListToShow,
+        },
+      }
+    })
+
+    setFilteredKeyResults(filteredKeyResults)
+  }, [keyResults, setFilteredKeyResults, onlyUnchecked])
+
   if (loading) {
     return <TaskSkeletons isLoaded={!loading} />
   }
 
   return keyResults.length > 0 ? (
-    <Tasks items={keyResults} onUpdate={refetch} />
+    <Tasks items={filteredKeyResults} onUpdate={refetch} />
   ) : (
     <MyTasksEmptyState />
   )

@@ -43,29 +43,34 @@ export const KeyResultChecklist = ({
     createButtonReference.current?.click()
   }
 
-  return nodes.length > 0 ? (
-    <StyledStack alignItems="flex-start" pt={4} {...wrapperProps}>
-      {nodes.map((node, index) => (
-        <KeyResultCheckMark
-          key={node.id}
-          isEditable={isEditable && canUserEdit(node)}
-          node={node}
-          keyResultID={keyResultID}
-          draftCheckMarks={draftCheckMarks}
-          index={index}
-          checklistLength={nodes.length}
-          onUpdate={onUpdate}
-          onCreate={handleCreateCheckmark}
-        />
-      ))}
-      {canCreate && nodes.length > 0 && (
+  return (
+    <>
+      {nodes.length > 0 && (
+        <StyledStack alignItems="flex-start" pt={4} {...wrapperProps}>
+          {nodes.map((node, index) => (
+            <KeyResultCheckMark
+              key={node.id}
+              isEditable={isEditable && canUserEdit(node)}
+              node={node}
+              keyResultID={keyResultID}
+              draftCheckMarks={draftCheckMarks}
+              index={index}
+              checklistLength={nodes.length}
+              onUpdate={onUpdate}
+              onCreate={handleCreateCheckmark}
+            />
+          ))}
+        </StyledStack>
+      )}
+
+      {canCreate && (
         <CreateCheckMarkButton
+          mt={3}
           keyResultID={keyResultID}
           createButtonReference={createButtonReference}
           onCreate={onUpdate}
         />
       )}
-    </StyledStack>
-  ) : // eslint-disable-next-line unicorn/no-null
-  null
+    </>
+  )
 }
