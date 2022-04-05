@@ -41,7 +41,7 @@ const ActiveCyclesPage = () => {
     [TASK_STATUS.CHECKED, intl.formatMessage(messages.allTasks)],
   ])
 
-  const [taskState, setTaskState] = useState(TASK_STATUS.UNCHECKED)
+  const [taskState, setTaskState] = useState(TASK_STATUS.CHECKED)
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
