@@ -1,7 +1,10 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { Accordion } from 'src/components/Base/Accordion/index'
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
+import InfoCircleIcon from 'src/components/Icon/InfoCircle'
 import SingleTask from 'src/components/Task'
 import { AddTask } from 'src/components/Task/add-task'
 import { useDeleteTask, useGetMyTasks, useToggleTask } from 'src/components/Task/hooks'
@@ -27,7 +30,29 @@ const MyPersonalTasks = () => {
   }
 
   return (
-    <Accordion title={intl.formatMessage(messages.personalTasksHeading)}>
+    <Accordion
+      title={
+        <>
+          {intl.formatMessage(messages.personalTasksHeading)}
+          <TooltipWithDelay
+            mt={2}
+            label={intl.formatMessage(messages.personalTasksTooltip)}
+            placement="bottom"
+            offset={[0, -2]}
+            maxW="430px"
+          >
+            <Box display="inline-block" transform="translate(10px, -2px)">
+              <InfoCircleIcon
+                fill="gray.400"
+                stroke="gray.400"
+                cursor="help"
+                desc={intl.formatMessage(messages.personalTasksTooltip)}
+              />
+            </Box>
+          </TooltipWithDelay>
+        </>
+      }
+    >
       {isLoaded ? (
         tasks.map((task: Task) => (
           <SingleTask

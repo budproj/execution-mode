@@ -1043,6 +1043,10 @@
     "defaultMessage": "Owner",
     "description": "The label text above the Owner section in our key result single page or drawer"
   },
+  "iLO8sl": {
+    "defaultMessage": "These tasks are not directed related to a key result. Use it to better organize your day and make it more productive. :)",
+    "description": "The tooltip that shows when hovering over the personal tasks accordion title"
+  },
   "ilU+Uz": {
     "defaultMessage": "My account",
     "description": "The page title that our users should see in the my profile page"
@@ -2200,7 +2204,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-04-06T16:42:57Z",
+    "defaultMessage": "2022-04-06T18:12:30Z",
     "description": null
   }
 }

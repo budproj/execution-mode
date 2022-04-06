@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type myPersonalTasksMessages = 'personalTasksHeading' | 'addPersonalTasksButtonLabel'
+type myPersonalTasksMessages =
+  | 'personalTasksHeading'
+  | 'addPersonalTasksButtonLabel'
+  | 'personalTasksTooltip'
 
 export default defineMessages<myPersonalTasksMessages>({
   personalTasksHeading: {
@@ -12,5 +15,11 @@ export default defineMessages<myPersonalTasksMessages>({
     defaultMessage: 'Adicionar nova tarefa',
     id: 'FZVBXg',
     description: 'The add new personal task button label',
+  },
+  personalTasksTooltip: {
+    defaultMessage:
+      'Estas tarefas não estão relacionadas diretamente a um resultado-chave. Use-as para organizar melhor seu dia e deixá-lo mais produtivo :)',
+    id: 'iLO8sl',
+    description: 'The tooltip that shows when hovering over the personal tasks accordion title',
   },
 })
