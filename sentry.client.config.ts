@@ -3,7 +3,6 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from '@sentry/nextjs'
-import { BrowserTracing } from '@sentry/tracing'
 import { excludeGraphQLFetch } from 'apollo-link-sentry'
 import getConfig from 'next/config'
 
