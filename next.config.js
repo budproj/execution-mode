@@ -28,6 +28,7 @@ const {
   MAINTENANCE_MODE_EXPECTED_RETURN,
   SMARTLOOK_API_KEY,
   AMPLITUDE_API_KEY,
+  SENTRY_DSN,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -68,6 +69,10 @@ const publicRuntimeConfig = {
 
   api: {
     graphql: API_GRAPHQL,
+  },
+
+  sentry: {
+    dsn: SENTRY_DSN,
   },
 
   intlRedirects: [
@@ -128,6 +133,9 @@ const serverRuntimeConfig = {
   url: URL,
   host: HOST,
   supportedLocales: LOCALE_OVERRIDE ? [LOCALE_OVERRIDE] : SUPPORTED_LOCALES.split(','),
+  sentry: {
+    dsn: SENTRY_DSN,
+  },
 }
 
 const i18n = {

@@ -3,11 +3,12 @@
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from '@sentry/nextjs'
+import getConfig from 'next/config'
 
-const { SENTRY_DSN } = process.env
+const { serverRuntimeConfig } = getConfig()
 
 Sentry.init({
-  dsn: SENTRY_DSN,
+  dsn: serverRuntimeConfig.sentry.dsn,
   // Adjust this value in production, or use tracesSampler for greater control
   tracesSampleRate: 1,
   // ...
