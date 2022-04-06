@@ -26,6 +26,8 @@ export { default as Crown } from './Crown'
 
 export { default as TrashBin } from './TrashBin'
 
+export { default as Trash } from './Trash'
+
 export { default as Discovery } from './Discovery'
 
 export { default as Document } from './Document'

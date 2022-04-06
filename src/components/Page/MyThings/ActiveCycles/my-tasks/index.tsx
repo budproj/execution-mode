@@ -1,24 +1,24 @@
 import { useQuery } from '@apollo/client'
-import { Tag, Heading, Box } from '@chakra-ui/react'
-import React from 'react'
-import { useIntl } from 'react-intl'
+import React, { useState, useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 
-import { KeyResult } from 'src/components/KeyResult/types'
+import { KeyResult, KeyResultCheckMarkState } from 'src/components/KeyResult/types'
+import { useGetMyTasksProperties } from 'src/components/Task/hooks/getTasks'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { myThingsTasksQuery } from 'src/state/recoil/task'
 
 import MyTasksEmptyState from './empty-state'
-import messages from './messages'
 import queries from './queries.gql'
 import { TaskSkeletons } from './skeletons'
 import Tasks from './tasks'
 
 const MyTasks = () => {
-  const intl = useIntl()
-
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
+  const { onlyUnchecked } = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
+  const [filteredKeyResults, setFilteredKeyResults] = useState(keyResults)
 
   const { refetch, loading } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
     onCompleted: (data) => {
@@ -27,29 +27,32 @@ const MyTasks = () => {
     },
   })
 
-  return (
-    <Box pr={6}>
-      <Heading
-        as="h2"
-        fontSize="xl"
-        lineHeight="1.6rem"
-        textTransform="uppercase"
-        fontWeight="bold"
-        color="new-gray.800"
-      >
-        {intl.formatMessage(messages.myTasksTitle)}
-        <Tag variant="solid" colorScheme="brand" ml={3} textTransform="lowercase" fontWeight="bold">
-          {intl.formatMessage(messages.newTag)}
-        </Tag>
-      </Heading>
-      {loading ? (
-        <TaskSkeletons isLoaded={!loading} />
-      ) : keyResults.length > 0 ? (
-        <Tasks items={keyResults} onUpdate={refetch} />
-      ) : (
-        <MyTasksEmptyState />
-      )}
-    </Box>
+  useEffect(() => {
+    const filteredKeyResults = keyResults.map((keyResult) => {
+      const checkListToShow = keyResult.checkList.edges.filter((checklist) =>
+        onlyUnchecked ? checklist.node.state === KeyResultCheckMarkState.UNCHECKED : true,
+      )
+
+      return {
+        ...keyResult,
+        checkList: {
+          ...keyResult.checkList,
+          edges: checkListToShow,
+        },
+      }
+    })
+
+    setFilteredKeyResults(filteredKeyResults)
+  }, [keyResults, setFilteredKeyResults, onlyUnchecked])
+
+  if (loading) {
+    return <TaskSkeletons isLoaded={!loading} />
+  }
+
+  return keyResults.length > 0 ? (
+    <Tasks items={filteredKeyResults} onUpdate={refetch} />
+  ) : (
+    <MyTasksEmptyState />
   )
 }
 

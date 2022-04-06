@@ -1,0 +1,7 @@
+mutation CREATE_TASK($description: String!) {
+  createTask(description: $description) {
+    id
+    description
+    state
+  }
+}

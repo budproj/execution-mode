@@ -1,11 +1,9 @@
 import { useMutation } from '@apollo/client'
-import { IconButton } from '@chakra-ui/react'
-import styled from '@emotion/styled'
 import React, { Ref } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import TrashIcon from 'src/components/Icon/Trash'
+import { DeleteButton } from 'src/components/Base/Button/delete-button'
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
 
@@ -26,23 +24,12 @@ interface DeleteCheckMarkButtonProperties {
   className?: string
 }
 
-const StyledTrashIcon = styled(TrashIcon)`
-  &:hover path {
-    fill: white;
-  }
-
-  &:hover rect {
-    fill: #ff616a;
-  }
-`
-
 export const DeleteCheckMarkButton = ({
   keyResultID,
   checkMarkID,
   onDelete: refresh,
   isVisible,
   canDelete,
-  buttonRef,
   ...rest
 }: DeleteCheckMarkButtonProperties) => {
   isVisible ??= true
@@ -73,18 +60,11 @@ export const DeleteCheckMarkButton = ({
   }
 
   return canDelete ? (
-    <IconButton
-      ref={buttonRef}
-      aria-label={intl.formatMessage(messages.removeIconDescription)}
-      opacity={isVisible ? 1 : 0}
-      icon={
-        <StyledTrashIcon
-          h="2em"
-          w="2em"
-          desc={intl.formatMessage(messages.removeIconDescription)}
-        />
-      }
-      onClick={handleDelete}
+    <DeleteButton
+      canDelete={canDelete}
+      description={intl.formatMessage(messages.removeIconDescription)}
+      isVisible={isVisible}
+      onDelete={handleDelete}
       {...rest}
     />
   ) : // eslint-disable-next-line unicorn/no-null

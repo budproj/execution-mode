@@ -1,0 +1,5 @@
+mutation CHANGE_DESCRIPTION($id: ID!, $description: String!) {
+  updateTaskDescription(id: $id, description: $description) {
+    id
+  }
+}
