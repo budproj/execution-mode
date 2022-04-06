@@ -25,3 +25,6 @@ compiled-lang
 .waypoint
 dist
 data.db
+
+# Sentry
+.sentryclirc

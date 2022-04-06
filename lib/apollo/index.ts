@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react'
+import { SentryLink } from 'apollo-link-sentry'
 import { createUploadLink } from 'apollo-upload-client'
 import merge from 'deepmerge'
 import { AppProps } from 'next/app'
@@ -48,10 +49,16 @@ const linkWithServer = (authzClient: Auth0ContextInterface, amplitude: Amplitude
   const uploadLink = createUploadLink({
     uri: publicRuntimeConfig.api.graphql,
   })
+  const sentryLink = new SentryLink({
+    attachBreadcrumbs: {
+      includeQuery: true,
+      includeVariables: true,
+    },
+  })
 
   return shouldMockServer
     ? { uri: publicRuntimeConfig.api.graphql }
-    : { link: ApolloLink.from([authLink, amplitudeLink, uploadLink]) }
+    : { link: ApolloLink.from([sentryLink, authLink, amplitudeLink, uploadLink]) }
 }
 
 const createApolloClient = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) =>
