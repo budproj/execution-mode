@@ -2,10 +2,12 @@
 const path = require('path')
 const _ = require('lodash')
 const { ProvidePlugin } = require('webpack')
+const { withSentryConfig } = require('@sentry/nextjs')
 
 const {
   URL,
   HOST,
+  APP_VERSION,
   APP_ENV,
   LOCALE_OVERRIDE,
   DEFAULT_LOCALE,
@@ -133,7 +135,7 @@ const i18n = {
   defaultLocale: publicRuntimeConfig.defaultLocale,
 }
 
-module.exports = {
+const moduleExports = {
   serverRuntimeConfig,
   publicRuntimeConfig,
   i18n,
@@ -184,3 +186,20 @@ module.exports = {
     return config
   },
 }
+
+
+const sentryWebpackPluginOptions = {
+  // Additional config options for the Sentry Webpack plugin. Keep in mind that
+  // the following options are set automatically, and overriding them is not
+  // recommended:
+  //   release, url, org, project, authToken, configFile, stripPrefix,
+  //   urlPrefix, include, ignore
+
+  release: APP_VERSION || 'development',
+
+  silent: true, // Suppresses all logs
+  // For all available options, see:
+  // https://github.com/getsentry/sentry-webpack-plugin#options.
+};
+
+module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
