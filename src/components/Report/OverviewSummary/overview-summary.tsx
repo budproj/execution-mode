@@ -1,14 +1,10 @@
 import { Flex, Box, Heading, Text, StyleProps } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { PercentageProgressIncreaseTag } from 'src/components/Base'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import SliderWithDetails from 'src/components/Base/SliderWithDetails'
-import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
-import { Cycle } from 'src/components/Cycle/types'
-import InfoCircleIcon from 'src/components/Icon/InfoCircle'
-import { useGetProjectedProgress } from 'src/components/Team/hooks'
 
 import { OverviewSummaryEmptyState } from './empty'
 import messages from './messages'
@@ -16,67 +12,47 @@ import { OverviewSummarySkeleton } from './skeleton'
 
 interface OverviewSummaryProperties extends StyleProps {
   title: string
+  progress: number | undefined
+  deltaProgress: number
   isLoading?: boolean
-  cycle: Cycle | undefined
+  checkInDate?: Date
 }
 
 export const OverviewSummary = ({
   title,
+  progress,
+  deltaProgress,
   isLoading,
-  cycle,
+  checkInDate,
   ...rest
 }: OverviewSummaryProperties) => {
   const intl = useIntl()
 
-  const { percentualProjectedProgress } = useGetProjectedProgress({
-    dateStart: cycle?.dateStart,
-    dateEnd: cycle?.dateEnd,
-  })
-
-  const progress = cycle?.status?.progress ?? 0
-  const deltaProgress = cycle?.delta?.progress ?? 0
-  const latestCheckIn = cycle?.status?.latestCheckIn
-  const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
-
-  const updateTextColor = cycle?.status?.isOutdated ? 'red.500' : 'new-gray.500'
-  const prefixMessage = cycle?.status?.isOutdated
-    ? messages.outdatedUpdateTextPrefix
-    : messages.lastUpdateTextPrefix
+  const [projectedProgress] = useState(50)
 
   return (
-    <Box p={9} bg="white" shadow="for-background.light" borderRadius="lg" {...rest}>
+    <Box p={9} bg="white" shadow="lg" borderRadius="lg" {...rest}>
       {isLoading ? (
         <OverviewSummarySkeleton />
-      ) : cycle ? (
+      ) : progress ? (
         <>
           <Flex justifyContent="space-between">
             <Box>
               <Flex alignItems="center">
                 <Heading size="lg">{title}</Heading>
-
-                <TooltipWithDelay label={intl.formatMessage(messages.accumulatedProgressTooltip)}>
-                  <Box>
-                    <PercentageProgressIncreaseTag
-                      forcePositiveSignal
-                      showSignalArrow
-                      value={deltaProgress}
-                      fontSize="sm"
-                      p={2}
-                      gridGap={1}
-                      ml={6}
-                    />
-                  </Box>
-                </TooltipWithDelay>
+                <PercentageProgressIncreaseTag
+                  forcePositiveSignal
+                  showSignalArrow
+                  value={deltaProgress}
+                  bg="green.50"
+                  fontSize="sm"
+                  p={2}
+                  gridGap={1}
+                  ml={6}
+                />
               </Flex>
 
-              <LastUpdateText
-                date={lastUpdateDate}
-                author={latestCheckIn?.user?.fullName}
-                color={updateTextColor}
-                fontSize="1rem"
-                prefix={intl.formatMessage(prefixMessage)}
-                mt={2}
-              />
+              <LastUpdateText date={checkInDate} color="new-gray.500" fontSize="1rem" mt={2} />
             </Box>
 
             <Box>
@@ -87,47 +63,33 @@ export const OverviewSummary = ({
                 color="brand.500"
                 textAlign="right"
               >
-                {progress.toFixed() ?? '-'}%
+                {progress}%
               </Text>
-              <Flex alignItems="center" justifyContent="flex-end" mt={3}>
-                <Text color="new-gray.600" mr={1}>
-                  {intl.formatMessage(messages.projectProgress, {
-                    progress: percentualProjectedProgress.toFixed(),
-                  })}
-                </Text>
-                <TooltipWithDelay
-                  label={intl.formatMessage(messages.projectProgressTooltip, {
-                    progress: percentualProjectedProgress.toFixed(),
-                  })}
-                  placement="bottom-start"
-                  maxWidth="470px"
-                >
-                  <Flex transform="translateY(-1px)">
-                    <InfoCircleIcon
-                      fill="new-gray.600"
-                      stroke="new-gray.600"
-                      desc={intl.formatMessage(messages.projectProgressTooltip, {
-                        progress: percentualProjectedProgress.toFixed(),
-                      })}
-                      cursor="help"
-                    />
-                  </Flex>
-                </TooltipWithDelay>
-              </Flex>
+              <Text color="new-gray.600" mt={3}>
+                {intl.formatMessage(messages.projectProgress, { progress: projectedProgress })}
+              </Text>
             </Box>
           </Flex>
 
           <Box position="relative" mt={3}>
             <SliderWithDetails
               value={progress}
-              projectedProgress={percentualProjectedProgress}
               trackThickness={4}
-              thumbWeight="5px"
               thumbHeight={8}
               showSliderDetails={false}
               showThumb={false}
               mt={4}
               thumbColor="new-gray.600"
+            />
+
+            <Box
+              position="absolute"
+              bg="new-gray.600"
+              w="4px"
+              h={8}
+              borderRadius="xl"
+              top={0}
+              left={`${projectedProgress}%`}
             />
           </Box>
         </>
