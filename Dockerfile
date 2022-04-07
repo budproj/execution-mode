@@ -11,6 +11,7 @@ WORKDIR /build
 COPY ./package.json ./
 COPY ./package-lock.json ./
 COPY ./.npmrc ./
+COPY ./sentry.properties ./
 COPY ./bin ./bin
 RUN npm ci
 
