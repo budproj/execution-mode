@@ -51,10 +51,6 @@
     "defaultMessage": "Convidar usuário automaticamente",
     "description": "This is the label that defines if we should automatically invite the new user while creating a new workspace"
   },
-  "/DyxUT": {
-    "defaultMessage": "Último check-in",
-    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
-  },
   "/H4hHb": {
     "defaultMessage": "Buscar subtimes",
     "description": "This message is displayed inside the child teams section, on the search bar"
@@ -767,13 +763,13 @@
     "defaultMessage": "NOTIFICAÇÕES",
     "description": "The tooltip text for the notifications text"
   },
-  "KGQV/U": {
-    "defaultMessage": "Nome",
-    "description": "The company name input placeholder while creating a new workspace"
-  },
   "K8KvrI": {
     "defaultMessage": "Minhas Coisas",
     "description": "MainAppBar menu item that links to \"My Things\" page"
+  },
+  "KGQV/U": {
+    "defaultMessage": "Nome",
+    "description": "The company name input placeholder while creating a new workspace"
   },
   "KSjqcC": {
     "defaultMessage": "%",
@@ -1835,13 +1831,13 @@
     "defaultMessage": "Português",
     "description": "This message is used as the label for the portuguese language in our locale switcher"
   },
-  "vhq3gt": {
-    "defaultMessage": "Feminino",
-    "description": "The user gender female option while creating a new workspace"
-  },
   "vgU7fC": {
     "defaultMessage": "Check-in pendente",
     "description": "This string is used as the description for the icon that indicates that the key-result has not been updated"
+  },
+  "vhq3gt": {
+    "defaultMessage": "Feminino",
+    "description": "The user gender female option while creating a new workspace"
   },
   "vm0Yuj": {
     "defaultMessage": "Meu perfil | bud",
