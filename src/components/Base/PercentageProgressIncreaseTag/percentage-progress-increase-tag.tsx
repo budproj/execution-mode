@@ -1,4 +1,4 @@
-import { Tag, TagProps } from '@chakra-ui/react'
+import { StyleProps, Tag } from '@chakra-ui/react'
 import React from 'react'
 import { FormatNumberOptions, useIntl } from 'react-intl'
 
@@ -6,28 +6,22 @@ import ProgressIndicator from 'src/components/Base/ProgressIndicator'
 
 import { selectBackgroundColor, selectLabelColor } from './selectors'
 
-export interface PercentageProgressIncreaseTagProperties {
+export interface PercentageProgressIncreaseTagProperties extends StyleProps {
   value: number
-  fontSize: TagProps['fontSize']
-  bg?: TagProps['bg']
-  px?: TagProps['px']
   forcePositiveSignal?: boolean
   showSignalArrow?: boolean
   minimumIntegerDigits?: FormatNumberOptions['minimumIntegerDigits']
   prefix?: string
-  h?: TagProps['h']
 }
 
 const PercentageProgressIncreaseTag = ({
   value,
-  fontSize,
   bg,
-  px,
   forcePositiveSignal,
   showSignalArrow,
   minimumIntegerDigits,
   prefix,
-  h,
+  ...rest
 }: PercentageProgressIncreaseTagProperties) => {
   const intl = useIntl()
 
@@ -46,16 +40,7 @@ const PercentageProgressIncreaseTag = ({
   const normalizedMinimumIntegerDigits = roundedValue === 0 ? 1 : minimumIntegerDigits
 
   return (
-    <Tag
-      borderRadius="4"
-      py={3}
-      px={px ?? 3}
-      bg={bgColor}
-      color={labelColor}
-      gridGap={2}
-      fontSize={fontSize}
-      h={h}
-    >
+    <Tag borderRadius="4" py={3} px={3} bg={bgColor} color={labelColor} gridGap={2} {...rest}>
       {showSignalArrow && <ProgressIndicator type={arrowType} color={arrowColor} />}
       {prefix && `${prefix.trim()} `}
       {forcePositiveSignal && roundedValue > 0 && '+'}

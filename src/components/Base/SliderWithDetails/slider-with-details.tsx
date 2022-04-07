@@ -7,6 +7,7 @@ import {
   SliderThumbProps,
   SliderTrack,
   SliderTrackProps,
+  SliderMark,
   Text,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -17,7 +18,10 @@ import messages from './messages'
 export interface SliderWithDetailsProperties extends SliderProps {
   trackThickness: SliderTrackProps['h']
   trackColor: SliderTrackProps['color']
-  thumbHeight: SliderThumbProps['h']
+  thumbHeight?: SliderThumbProps['h']
+  thumbColor?: SliderTrackProps['color']
+  showSliderDetails?: boolean
+  showThumb?: boolean
 }
 
 const SliderWithDetails = ({
@@ -26,6 +30,9 @@ const SliderWithDetails = ({
   thumbHeight,
   value,
   isDisabled,
+  thumbColor,
+  showSliderDetails = true,
+  showThumb = true,
   ...rest
 }: SliderWithDetailsProperties) => {
   const intl = useIntl()
@@ -49,49 +56,42 @@ const SliderWithDetails = ({
         <SliderFilledTrack bg={trackColor} borderRadius="full" borderRightRadius="0" />
       </SliderTrack>
 
-      <SliderThumb
-        bg={trackColor}
-        w="4px"
-        h={thumbHeight}
-        _disabled={{ opacity: 1 }}
-        _focus={{ boxShadow: 'none', outline: 'none' }}
-      >
-        <Box
-          position="absolute"
-          top={thumbHeight}
-          left={isAlmostAtTheEndOfTheTrack ? '-80px' : '5px'}
-          textAlign={isAlmostAtTheEndOfTheTrack ? 'right' : 'left'}
+      {showThumb && (
+        <SliderThumb
+          bg={thumbColor ?? trackColor}
+          w="4px"
+          h={thumbHeight}
+          _disabled={{ opacity: 1 }}
+          _focus={{ boxShadow: 'none', outline: 'none' }}
         >
-          <Text color={trackColor} fontWeight={700}>
-            {Math.round(value ?? 0)}%
-          </Text>
+          <Box
+            position="absolute"
+            top={thumbHeight}
+            left={isAlmostAtTheEndOfTheTrack ? '-80px' : '5px'}
+            textAlign={isAlmostAtTheEndOfTheTrack ? 'right' : 'left'}
+          >
+            <Text color={trackColor} fontWeight={700}>
+              {Math.round(value ?? 0)}%
+            </Text>
 
-          <Text fontSize="xs" color="gray.300" fontWeight={400} width="max-content">
-            {intl.formatMessage(messages.progress)}
-          </Text>
-        </Box>
-      </SliderThumb>
+            <Text fontSize="xs" color="gray.300" fontWeight={400} width="max-content">
+              {intl.formatMessage(messages.progress)}
+            </Text>
+          </Box>
+        </SliderThumb>
+      )}
 
-      <Text
-        color="black.500"
-        fontWeight={700}
-        position="absolute"
-        top={thumbHeight}
-        visibility={isAlmostAtTheBeginningOfTheTrack ? 'hidden' : 'visible'}
-      >
-        0%
-      </Text>
+      {showSliderDetails && !isAlmostAtTheBeginningOfTheTrack && (
+        <SliderMark value={0} mt={3} color="black.500" fontWeight={700}>
+          0%
+        </SliderMark>
+      )}
 
-      <Text
-        color="black.500"
-        fontWeight={700}
-        position="absolute"
-        top={thumbHeight}
-        right={0}
-        visibility={isAlmostAtTheEndOfTheTrack ? 'hidden' : 'visible'}
-      >
-        100%
-      </Text>
+      {showSliderDetails && !isAlmostAtTheEndOfTheTrack && (
+        <SliderMark value={100} mt={3} ml="-2.5rem" color="black.500" fontWeight={700}>
+          100%
+        </SliderMark>
+      )}
     </Slider>
   )
 }
