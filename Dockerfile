@@ -1,6 +1,7 @@
 FROM node:15.5.1-alpine3.10 AS build
 
 ARG GITHUB_TOKEN
+ARG SENTRY_TOKEN_AUTH
 
 ENV NODE_ENV="development"
 ENV LOCALE_OVERRIDE="pt-BR"
