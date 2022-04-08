@@ -5,6 +5,8 @@ import React from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { KeyResult, KeyResultComment } from 'src/components/KeyResult/types'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import selectLatestTimelineEntry from 'src/state/recoil/key-result/timeline/latest-entry'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
@@ -25,6 +27,7 @@ export interface KeyResultSectionAddCommentInitialValues {
 }
 
 const KeyResultSectionAddComment = ({ keyResultID }: KeyResultSectionAddCommentProperties) => {
+  const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_COMMENT)
   const userID = useRecoilValue(meAtom)
   const [user, updateUser] = useRecoilState(selectUser(userID))
   const setLatestTimelineEntry = useSetRecoilState(selectLatestTimelineEntry(keyResultID))
@@ -35,6 +38,7 @@ const KeyResultSectionAddComment = ({ keyResultID }: KeyResultSectionAddCommentP
       onCompleted: (data) => {
         setLatestTimelineEntry(data.createKeyResultComment)
         updateUser(data.createKeyResultComment.user)
+        dispatchEvent({})
       },
     },
   )

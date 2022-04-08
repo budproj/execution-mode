@@ -66,7 +66,7 @@ const CheckInForm = ({
       onCompleted: (data) => {
         setLatestKeyResultCheckIn(data.createKeyResultCheckIn)
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
-        dispatchEvent()
+        dispatchEvent({})
       },
     },
   )

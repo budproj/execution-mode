@@ -10,4 +10,5 @@ export enum EventType {
   UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE = 'UpdatedKeyResultCheckMarkAssignee',
   CREATED_KEY_RESULT_CHECK_MARK = 'CreatedKeyResultCheckMark',
   CREATED_KEY_RESULT_CHECK_IN = 'CreatedKeyResultCheckIn',
+  CREATED_KEY_RESULT_COMMENT = 'CreatedKeyResultComment',
 }
