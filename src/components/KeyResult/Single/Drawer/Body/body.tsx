@@ -52,7 +52,7 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
       </Box>
 
       <Portal containerRef={timelinePortalReference}>
-        <Box p={8} pt={4}>
+        <Box px={8} pt={4}>
           <KeyResultSectionTimeline
             keyResultID={keyResultID}
             scrollTarget={SCROLLBAR_ID}

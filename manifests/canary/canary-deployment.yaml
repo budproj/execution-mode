@@ -29,6 +29,8 @@ spec:
           env:
             - name: APP_ENV
               value: develop
+            - name: APP_VERSION
+              value: $ECR_TAG
             - name: HOST
               value: app.canary.getbud.co
             - name: PORT

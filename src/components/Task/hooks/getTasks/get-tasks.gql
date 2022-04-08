@@ -1,0 +1,13 @@
+query GET_MY_TASKS($onlyUnchecked: Boolean, $limit: Int) {
+  me {
+    tasks(order: {createdAt: ASC}, onlyUnchecked: $onlyUnchecked, first: $limit) {
+      edges {
+        node {
+          id
+          description
+          state
+        }
+      }
+    }
+  }
+}

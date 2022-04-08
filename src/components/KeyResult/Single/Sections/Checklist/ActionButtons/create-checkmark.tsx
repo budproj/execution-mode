@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Button, Box, Spinner } from '@chakra-ui/react'
+import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { Ref, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -16,7 +16,7 @@ import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
 import messages from './messages'
 import queries from './queries.gql'
 
-interface CreateCheckMarkButtonProperties {
+interface CreateCheckMarkButtonProperties extends StyleProps {
   keyResultID?: string
   label?: string
   isAbsolute?: boolean
@@ -28,9 +28,10 @@ const StyledEditableWrapper = styled(Box)`
   ${({ isAbsolute }) =>
     isAbsolute &&
     `
+    text-align: left;
     width: 100%;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
   `};
 `
@@ -41,6 +42,7 @@ export const CreateCheckMarkButton = ({
   createButtonReference,
   isAbsolute,
   onCreate,
+  ...rest
 }: CreateCheckMarkButtonProperties) => {
   const { dispatch } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_MARK, {
     feature: Feature.CHECK_MARK,
@@ -59,6 +61,11 @@ export const CreateCheckMarkButton = ({
 
   const handleNewCheckMark = async (description: KeyResultCheckMark['description']) => {
     if (isSubmitting) return
+
+    if (description === '') {
+      toggleAdd()
+      return
+    }
 
     setIsSubmitting(true)
 
@@ -85,7 +92,7 @@ export const CreateCheckMarkButton = ({
   }
 
   return (
-    <Box width="100%" pt={isAdding && isAbsolute ? 14 : 0}>
+    <Box width="100%" pb={isAdding && isAbsolute ? 14 : 0} {...rest}>
       {isAdding && (
         <StyledEditableWrapper isAbsolute={isAbsolute}>
           <EditableInputField

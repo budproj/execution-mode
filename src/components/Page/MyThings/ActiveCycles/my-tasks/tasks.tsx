@@ -1,6 +1,7 @@
 import { Stack, Text, Box, HStack, Divider } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 
+import { Accordion } from 'src/components/Base/Accordion'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResultChecklist } from 'src/components/KeyResult/Single/Sections/Checklist/checklist'
 import { KeyResult, KeyResultCheckMark } from 'src/components/KeyResult/types'
@@ -26,31 +27,35 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
   }, [keyResult.checkList?.edges, updateChecklistEdges])
 
   return (
-    <Box>
-      <HStack key={keyResult.id}>
-        <KeyResultDynamicIcon title={keyResult.title} boxSize="30px" iconSize="16px" />
-        <Text maxWidth="calc(100% - 50px)" fontWeight={600} pl="0.5rem">
-          {keyResult.title}
-        </Text>
-      </HStack>
+    <Accordion
+      title={
+        <HStack key={keyResult.id} textAlign="left">
+          <KeyResultDynamicIcon title={keyResult.title} boxSize="30px" iconSize="16px" />
+          <Text maxWidth="calc(100% - 50px)" fontWeight={600} pl="0.5rem">
+            {keyResult.title}
+          </Text>
+        </HStack>
+      }
+    >
       <Box pl="3.2rem">
         <KeyResultChecklist
+          isEditable
           keyResultID={keyResult.id}
           nodes={checklist}
           canCreate={canCreate}
-          isEditable={false}
+          wrapperProps={{ pt: 0 }}
           onUpdate={onUpdate}
         />
       </Box>
-    </Box>
+    </Accordion>
   )
 }
 
 const Tasks = ({ items, onUpdate }: TasksProperties) => (
-  <Stack align="stretch" pt="1.2rem">
-    {items.map((item) => (
+  <Stack align="stretch">
+    {items.map((item, index) => (
       <Box key={item.id}>
-        <Divider my={9} borderColor="new-gray.400" opacity="1" />
+        {index > 0 ? <Divider my={9} borderColor="new-gray.400" opacity="1" /> : undefined}
         <KeyResultTasks keyResult={item} onUpdate={onUpdate} />
       </Box>
     ))}
