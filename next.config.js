@@ -29,6 +29,7 @@ const {
   SMARTLOOK_API_KEY,
   AMPLITUDE_API_KEY,
   SENTRY_DSN,
+  SENTRY_AUTH_TOKEN,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -202,7 +203,10 @@ const sentryWebpackPluginOptions = {
   // recommended:
   //   release, url, org, project, authToken, configFile, stripPrefix,
   //   urlPrefix, include, ignore
-
+  authToken: SENTRY_AUTH_TOKEN,
+  org: 'bud-xs',
+  project: 'execution-mode',
+  ignore: ['node_modules'],
   release: APP_VERSION || 'development',
 
   silent: true, // Suppresses all logs
