@@ -1,45 +1,28 @@
-import { isAfter, differenceInSeconds, parseISO } from 'date-fns'
+import { isAfter, differenceInSeconds } from 'date-fns'
 import { useMemo } from 'react'
 
-import { Cycle } from 'src/components/Cycle/types'
+import { Team } from 'src/components/Team/types'
 
 interface useGetProjectedProgressProperties {
-  dateStart: Cycle['dateStart'] | undefined
-  dateEnd: Cycle['dateEnd'] | undefined
-}
-
-interface useGetProjectedProgressReturns {
-  absoluteProjectedProgress: number
-  percentualProjectedProgress: number
+  dateStart: Team['tacticalCycle']['dateStart']
+  dateEnd: Team['tacticalCycle']['dateEnd']
 }
 
 export const useGetProjectedProgress = ({
   dateStart,
   dateEnd,
-}: useGetProjectedProgressProperties): useGetProjectedProgressReturns => {
-  const absoluteProjectedProgress = useMemo(() => {
-    if (!dateStart || !dateEnd) {
-      return 0
-    }
-
+}: useGetProjectedProgressProperties) => {
+  const projectedProgress = useMemo(() => {
     const currentDate = new Date()
-    const parsedDateStart = parseISO(dateStart)
-    const parsedDateEnd = parseISO(dateEnd)
 
-    if (isAfter(parsedDateStart, currentDate)) return 0
-    if (isAfter(currentDate, parsedDateEnd)) return 1
+    if (isAfter(dateStart, currentDate)) return 0
+    if (isAfter(currentDate, dateEnd)) return 1
 
-    const deltaStartFinish = differenceInSeconds(parsedDateStart, parsedDateEnd)
-    const deltaStartCurrent = differenceInSeconds(parsedDateStart, currentDate)
-
+    const deltaStartFinish = differenceInSeconds(dateStart, dateEnd)
+    const deltaStartCurrent = differenceInSeconds(dateStart, currentDate)
     const projectedProgress = deltaStartCurrent / deltaStartFinish
     return projectedProgress
   }, [dateStart, dateEnd])
 
-  const percentualProjectedProgress = useMemo(
-    () => absoluteProjectedProgress * 100,
-    [absoluteProjectedProgress],
-  )
-
-  return { absoluteProjectedProgress, percentualProjectedProgress }
+  return { projectedProgress }
 }

@@ -31,7 +31,7 @@ export const OverviewSummary = ({
   const [projectedProgress] = useState(50)
 
   return (
-    <Box p={9} bg="white" shadow="lg" borderRadius="lg" {...rest}>
+    <Box p={9} bg="white" shadow="for-background.light" borderRadius="lg" {...rest}>
       {isLoading ? (
         <OverviewSummarySkeleton />
       ) : progress ? (
@@ -44,7 +44,6 @@ export const OverviewSummary = ({
                   forcePositiveSignal
                   showSignalArrow
                   value={deltaProgress}
-                  bg="green.50"
                   fontSize="sm"
                   p={2}
                   gridGap={1}
@@ -74,22 +73,13 @@ export const OverviewSummary = ({
           <Box position="relative" mt={3}>
             <SliderWithDetails
               value={progress}
+              projectedProgress={projectedProgress}
               trackThickness={4}
               thumbHeight={8}
               showSliderDetails={false}
               showThumb={false}
               mt={4}
               thumbColor="new-gray.600"
-            />
-
-            <Box
-              position="absolute"
-              bg="new-gray.600"
-              w="4px"
-              h={8}
-              borderRadius="xl"
-              top={0}
-              left={`${projectedProgress}%`}
             />
           </Box>
         </>

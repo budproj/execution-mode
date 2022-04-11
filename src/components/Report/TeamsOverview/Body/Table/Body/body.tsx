@@ -15,7 +15,7 @@ export interface TeamsOverviewBodyTableBodyProperties {
 
 const TeamsOverviewBodyTableBody = ({ teamsRanking }: TeamsOverviewBodyTableBodyProperties) => (
   <>
-    {teamsRanking.map((team, index) => (
+    {[...teamsRanking, ...teamsRanking, ...teamsRanking, ...teamsRanking].map((team, index) => (
       <TeamsOverviewBodyTableLineTemplate key={team?.id ?? Math.random()}>
         <TeamsOverviewBodyTableBodyPositionBadge order={index + 1} />
         <TeamsOverviewBodyTableBodyColumnProgress team={team} />

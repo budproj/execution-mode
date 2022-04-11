@@ -10,18 +10,17 @@ import { Team } from 'src/components/Team/types'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
   team?: Team
+  checkInDate?: Date
 }
 
 const TeamsOverviewBodyTableBodyColumnProgress = ({
   team,
+  checkInDate,
 }: TeamsOverviewBodyTableBodyColumnProgressProperties) => {
   const isLoaded = Boolean(team)
   const progress = team?.status?.progress ?? 0
   const { dateStart, dateEnd } = team?.tacticalCycle ?? {}
-  const { percentualProjectedProgress } = useGetProjectedProgress({ dateStart, dateEnd })
-  const lastCheckinDate = team?.status?.latestCheckIn?.createdAt
-    ? new Date(team?.status?.latestCheckIn?.createdAt)
-    : undefined
+  const { projectedProgress } = useGetProjectedProgress({ dateStart, dateEnd })
 
   return (
     <GridItem>
@@ -35,13 +34,13 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
         </Skeleton>
 
         <Text as="h3" fontSize="lg" fontWeight={700} color="brand.500">
-          {progress.toFixed()}%
+          {progress}%
         </Text>
       </Flex>
 
       <SliderWithDetails
         value={progress}
-        projectedProgress={percentualProjectedProgress}
+        projectedProgress={projectedProgress}
         trackThickness={2}
         thumbWeight="5px"
         thumbHeight="17px"
@@ -52,7 +51,7 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
         thumbColor="new-gray.600"
       />
 
-      <LastUpdateText date={lastCheckinDate} color="new-gray.500" fontSize="1rem" />
+      <LastUpdateText date={checkInDate} color="new-gray.500" fontSize="1rem" />
     </GridItem>
   )
 }

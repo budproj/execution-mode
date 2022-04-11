@@ -41,14 +41,14 @@ const TeamsOverviewBodyTableBodyPositionBadge = ({
     [2, 'new-gray.500'],
     [3, '#E3AE7C'],
   ])
-  const ribbonPosition = order <= 3
+  const ribbonPosition = order > 3
   const badgeBackgroundColor = coloredRanking.get(order) ?? 'white'
-  const badgeTextColor = ribbonPosition ? 'white' : 'brand.500'
-  const BadgeElement = ribbonPosition ? BadgeWithRibbon : Flex
+  const badgeTextColor = ribbonPosition ? 'brand.500' : 'white'
+  const BadgeElement = ribbonPosition ? Flex : BadgeWithRibbon
   const [ribbonColor] = useToken('colors', ['new-gray.800'])
 
   return (
-    <GridItem zIndex={1} transform={ribbonPosition ? 'translateY(-10px)' : undefined}>
+    <GridItem zIndex={1}>
       <BadgeElement
         borderRadius="full"
         bg={badgeBackgroundColor}
