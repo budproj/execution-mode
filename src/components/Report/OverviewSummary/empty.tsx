@@ -12,21 +12,22 @@ export const OverviewSummaryEmptyState = ({ title }: OverviewSummaryProperties) 
   const intl = useIntl()
 
   return (
-    <Flex justifyContent="space-between">
-      <Box>
-        <Heading size="lg">{title}</Heading>
-        <Text color="new-gray.500" mt={2}>
-          {intl.formatMessage(messages.emptyMessage)}
-        </Text>
-      </Box>
+    <>
+      <Flex justifyContent="space-between">
+        <Box>
+          <Heading size="lg">{title}</Heading>
+          <Text color="new-gray.500" mt={2}>
+            {intl.formatMessage(messages.emptyMessage)}
+          </Text>
+        </Box>
 
-      <Image
-        src="/images/bud-team-at-work.png"
-        alt={intl.formatMessage(messages.emptyMessage)}
-        maxW="110px"
-        transform="scale(1.5)"
-        mr={6}
-      />
-    </Flex>
+        <Image
+          src="/images/box-drawing-open.svg"
+          alt={intl.formatMessage(messages.emptyMessage)}
+          maxW="110px"
+        />
+      </Flex>
+      <Box h={4} w="100%" bg="new-gray.300" mt={4} borderRadius="lg" />
+    </>
   )
 }
