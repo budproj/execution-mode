@@ -13,17 +13,18 @@ const TeamsOverviewBodyTableBodyColumnProgressIncrease = ({
   team,
 }: TeamsOverviewBodyTableBodyColumnProgressIncreaseProperties) => {
   const isLoaded = Boolean(team)
+  const progress = team?.delta.progress ?? 0
 
   return (
-    <GridItem>
+    <GridItem textAlign="right">
       <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 70, 21)}>
         <PercentageProgressIncreaseTag
           forcePositiveSignal
           showSignalArrow
-          value={team?.delta.progress}
-          bg="transparent"
-          fontSize="md"
-          px={0}
+          value={progress}
+          fontSize="sm"
+          p={2}
+          gridGap={2}
         />
       </Skeleton>
     </GridItem>
