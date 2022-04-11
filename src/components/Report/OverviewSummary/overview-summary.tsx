@@ -5,6 +5,8 @@ import { useIntl } from 'react-intl'
 import { PercentageProgressIncreaseTag } from 'src/components/Base'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import SliderWithDetails from 'src/components/Base/SliderWithDetails'
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
+import InfoCircleIcon from 'src/components/Icon/InfoCircle'
 
 import { OverviewSummaryEmptyState } from './empty'
 import messages from './messages'
@@ -72,9 +74,25 @@ export const OverviewSummary = ({
               >
                 {progress}%
               </Text>
-              <Text color="new-gray.600" mt={3}>
-                {intl.formatMessage(messages.projectProgress, { progress: projectedProgress })}
-              </Text>
+              <Flex alignItems="center" mt={3}>
+                <Text color="new-gray.600" mr={1}>
+                  {intl.formatMessage(messages.projectProgress, { progress: projectedProgress })}
+                </Text>
+                <TooltipWithDelay
+                  label={intl.formatMessage(messages.projectProgressTooltip)}
+                  placement="bottom-start"
+                  maxWidth="470px"
+                >
+                  <Flex transform="translateY(-1px)">
+                    <InfoCircleIcon
+                      fill="new-gray.600"
+                      stroke="new-gray.600"
+                      desc={intl.formatMessage(messages.projectProgressTooltip)}
+                      cursor="help"
+                    />
+                  </Flex>
+                </TooltipWithDelay>
+              </Flex>
             </Box>
           </Flex>
 
