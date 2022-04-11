@@ -5,7 +5,6 @@ import { useIntl } from 'react-intl'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
-import CompanyProgressOverview from 'src/components/Report/CompanyProgressOverview'
 import { OverviewSummary } from 'src/components/Report/OverviewSummary'
 import TeamsOverview from 'src/components/Report/TeamsOverview'
 
@@ -64,10 +63,7 @@ const DashboardPage = () => {
         />
       </Flex>
 
-      <Flex gridGap={10} direction="column">
-        <CompanyProgressOverview />
-        <TeamsOverview />
-      </Flex>
+      <TeamsOverview mt={10} />
     </PageContent>
   )
 }

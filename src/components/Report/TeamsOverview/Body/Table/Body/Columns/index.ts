@@ -1,4 +1,4 @@
-export { default as TeamsOverviewBodyTableBodyColumnNameAndOrder } from './NameAndOrder'
+export { default as TeamsOverviewBodyTableBodyPositionBadge } from './PositionBedge'
 
 export { default as TeamsOverviewBodyTableBodyColumnProgress } from './Progress'
 
