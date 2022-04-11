@@ -83,6 +83,7 @@ export const OverviewSummary = ({
               value={progress}
               projectedProgress={projectedProgress}
               trackThickness={4}
+              thumbWeight="5px"
               thumbHeight={8}
               showSliderDetails={false}
               showThumb={false}
