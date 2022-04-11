@@ -16,6 +16,7 @@ interface OverviewSummaryProperties extends StyleProps {
   deltaProgress: number
   isLoading?: boolean
   checkInDate?: Date
+  author?: string
 }
 
 export const OverviewSummary = ({
@@ -24,6 +25,7 @@ export const OverviewSummary = ({
   deltaProgress,
   isLoading,
   checkInDate,
+  author,
   ...rest
 }: OverviewSummaryProperties) => {
   const intl = useIntl()
@@ -51,7 +53,13 @@ export const OverviewSummary = ({
                 />
               </Flex>
 
-              <LastUpdateText date={checkInDate} color="new-gray.500" fontSize="1rem" mt={2} />
+              <LastUpdateText
+                date={checkInDate}
+                author={author}
+                color="new-gray.500"
+                fontSize="1rem"
+                mt={2}
+              />
             </Box>
 
             <Box>
