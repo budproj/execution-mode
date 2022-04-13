@@ -14,6 +14,8 @@ import {
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
+
 import messages from './messages'
 
 export interface SliderWithDetailsProperties extends SliderProps {
@@ -101,17 +103,28 @@ const SliderWithDetails = ({
           </SliderMark>
         )}
       </Slider>
-      <Box
-        position="absolute"
-        bg="new-gray.600"
-        w={thumbWeight}
-        h={thumbHeight}
-        borderRadius="xl"
-        border="1px solid"
-        borderColor="white"
-        top={thumbPositionTop}
-        left={`${projectedProgress.toFixed()}%`}
-      />
+
+      {projectedProgress ? (
+        <TooltipWithDelay
+          label={intl.formatMessage(messages.projectProgressTooltip, {
+            progress: projectedProgress.toFixed(),
+          })}
+          placement="bottom-end"
+          maxWidth="470px"
+        >
+          <Box
+            position="absolute"
+            bg="new-gray.600"
+            w={thumbWeight}
+            h={thumbHeight}
+            borderRadius="xl"
+            border="1px solid"
+            borderColor="white"
+            top={thumbPositionTop}
+            left={`${projectedProgress.toFixed()}%`}
+          />
+        </TooltipWithDelay>
+      ) : undefined}
     </Flex>
   )
 }
