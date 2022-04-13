@@ -14,6 +14,8 @@ import {
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
+
 import messages from './messages'
 
 export interface SliderWithDetailsProperties extends SliderProps {
@@ -79,7 +81,7 @@ const SliderWithDetails = ({
               textAlign={isAlmostAtTheEndOfTheTrack ? 'right' : 'left'}
             >
               <Text color={trackColor} fontWeight={700}>
-                {Math.round(value ?? 0)}%
+                {value?.toFixed() ?? '-'}%
               </Text>
 
               <Text fontSize="xs" color="gray.300" fontWeight={400} width="max-content">
@@ -101,17 +103,28 @@ const SliderWithDetails = ({
           </SliderMark>
         )}
       </Slider>
-      <Box
-        position="absolute"
-        bg="new-gray.600"
-        w={thumbWeight}
-        h={thumbHeight}
-        borderRadius="xl"
-        border="1px solid"
-        borderColor="white"
-        top={thumbPositionTop}
-        left={`${projectedProgress}%`}
-      />
+
+      {projectedProgress ? (
+        <TooltipWithDelay
+          label={intl.formatMessage(messages.projectProgressTooltip, {
+            progress: projectedProgress.toFixed(),
+          })}
+          placement="bottom-end"
+          maxWidth="470px"
+        >
+          <Box
+            position="absolute"
+            bg="new-gray.600"
+            w={thumbWeight}
+            h={thumbHeight}
+            borderRadius="xl"
+            border="1px solid"
+            borderColor="white"
+            top={thumbPositionTop}
+            left={`${projectedProgress.toFixed()}%`}
+          />
+        </TooltipWithDelay>
+      ) : undefined}
     </Flex>
   )
 }

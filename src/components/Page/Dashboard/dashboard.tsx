@@ -1,42 +1,29 @@
 import { useQuery } from '@apollo/client'
 import { Flex } from '@chakra-ui/react'
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
+import { CADENCE } from 'src/components/Cycle/constants'
 import BoardsOverview from 'src/components/Report/BoardsOverview'
 import { OverviewSummary } from 'src/components/Report/OverviewSummary'
 import TeamsOverview from 'src/components/Report/TeamsOverview'
+import { useGetCompanyCycles } from 'src/components/Report/hooks'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
 
 import messages from './messages'
 import queries from './queries.gql'
 
-const getCurrentDateInfo = () => {
-  const currentDate = new Date()
-
-  return {
-    currentYear: currentDate.getFullYear(),
-    currentMonth: currentDate.getMonth(),
-  }
-}
-
 const DashboardPage = () => {
   const intl = useIntl()
   const { data, loading, called } = useQuery(queries.GET_USER_NAME_AND_GENDER)
+  const { data: companyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
   const { firstName, gender } = data?.me ?? {}
 
-  const currentYear = useMemo(() => getCurrentDateInfo().currentYear, [])
-  const currentMonth = useMemo(() => getCurrentDateInfo().currentMonth, [])
-  const currentQuarter = useMemo(() => {
-    if (currentMonth < 3) return 'Q1'
-    if (currentMonth < 6) return 'Q2'
-    if (currentMonth < 9) return 'Q3'
-    if (currentMonth < 12) return 'Q4'
-    return ''
-  }, [currentMonth])
+  const yearly = companyCycles.find((cycle) => cycle.cadence === CADENCE.YEARLY)
+  const quarter = companyCycles.find((cycle) => cycle.cadence === CADENCE.QUARTERLY)
 
   const pageTitle =
     called && !loading && intl.formatMessage(messages.greeting, { name: firstName, gender })
@@ -51,22 +38,21 @@ const DashboardPage = () => {
 
       <Flex gridGap="3rem">
         <OverviewSummary
-          title={intl.formatMessage(messages.yearlySummaryTitle, { year: currentYear })}
-          progress={undefined}
-          deltaProgress={6}
+          title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
+          cycle={yearly}
+          isLoading={companyCyclesLoading}
           flex="1"
         />
         <OverviewSummary
-          title={intl.formatMessage(messages.quarterlySummaryTitle, { quarter: currentQuarter })}
-          progress={30}
-          deltaProgress={4}
+          title={intl.formatMessage(messages.quarterlySummaryTitle, { quarter: quarter?.period })}
+          cycle={quarter}
+          isLoading={companyCyclesLoading}
           flex="1"
         />
       </Flex>
 
       <BoardsOverview />
-
-      <TeamsOverview mt={10} />
+      <TeamsOverview mt={10} quarter={quarter?.period} />
     </PageContent>
   )
 }
