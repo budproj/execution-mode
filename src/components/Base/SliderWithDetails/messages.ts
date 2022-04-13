@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type SliderWithDetailsMessage = 'progress' | 'goal'
+type SliderWithDetailsMessage = 'progress' | 'goal' | 'projectProgressTooltip'
 
 export default defineMessages<SliderWithDetailsMessage>({
   progress: {
@@ -13,5 +13,10 @@ export default defineMessages<SliderWithDetailsMessage>({
     defaultMessage: 'Meta',
     id: 'PYLIcI',
     description: 'This message is displayed below the goal thumb',
+  },
+  projectProgressTooltip: {
+    defaultMessage: 'Progresso esperado: {progress}%',
+    id: 'Jc/lcm',
+    description: 'The tooltip content for the projected progress thumb',
   },
 })
