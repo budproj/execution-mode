@@ -1,12 +1,14 @@
 import { Flex, Box, Heading, Text, StyleProps } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { PercentageProgressIncreaseTag } from 'src/components/Base'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import SliderWithDetails from 'src/components/Base/SliderWithDetails'
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
+import { Cycle } from 'src/components/Cycle/types'
 import InfoCircleIcon from 'src/components/Icon/InfoCircle'
+import { useGetProjectedProgress } from 'src/components/Team/hooks'
 
 import { OverviewSummaryEmptyState } from './empty'
 import messages from './messages'
@@ -14,31 +16,38 @@ import { OverviewSummarySkeleton } from './skeleton'
 
 interface OverviewSummaryProperties extends StyleProps {
   title: string
-  progress: number | undefined
-  deltaProgress: number
   isLoading?: boolean
-  checkInDate?: Date
-  author?: string
+  cycle: Cycle | undefined
 }
 
 export const OverviewSummary = ({
   title,
-  progress,
-  deltaProgress,
   isLoading,
-  checkInDate,
-  author,
+  cycle,
   ...rest
 }: OverviewSummaryProperties) => {
   const intl = useIntl()
 
-  const [projectedProgress] = useState(50)
+  const { percentualProjectedProgress } = useGetProjectedProgress({
+    dateStart: cycle?.dateStart,
+    dateEnd: cycle?.dateEnd,
+  })
+
+  const progress = cycle?.status?.progress ?? 0
+  const deltaProgress = cycle?.delta?.progress ?? 0
+  const latestCheckIn = cycle?.status?.latestCheckIn
+  const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
+
+  const updateTextColor = cycle?.status?.isOutdated ? 'red.500' : 'new-gray.500'
+  const prefixMessage = cycle?.status?.isOutdated
+    ? messages.outdatedUpdateTextPrefix
+    : messages.lastUpdateTextPrefix
 
   return (
     <Box p={9} bg="white" shadow="for-background.light" borderRadius="lg" {...rest}>
       {isLoading ? (
         <OverviewSummarySkeleton />
-      ) : progress ? (
+      ) : cycle ? (
         <>
           <Flex justifyContent="space-between">
             <Box>
@@ -56,10 +65,11 @@ export const OverviewSummary = ({
               </Flex>
 
               <LastUpdateText
-                date={checkInDate}
-                author={author}
-                color="new-gray.500"
+                date={lastUpdateDate}
+                author={latestCheckIn?.user?.fullName}
+                color={updateTextColor}
                 fontSize="1rem"
+                prefix={intl.formatMessage(prefixMessage)}
                 mt={2}
               />
             </Box>
@@ -72,11 +82,13 @@ export const OverviewSummary = ({
                 color="brand.500"
                 textAlign="right"
               >
-                {progress}%
+                {progress.toFixed() ?? '-'}%
               </Text>
-              <Flex alignItems="center" mt={3}>
+              <Flex alignItems="center" justifyContent="flex-end" mt={3}>
                 <Text color="new-gray.600" mr={1}>
-                  {intl.formatMessage(messages.projectProgress, { progress: projectedProgress })}
+                  {intl.formatMessage(messages.projectProgress, {
+                    progress: percentualProjectedProgress.toFixed(),
+                  })}
                 </Text>
                 <TooltipWithDelay
                   label={intl.formatMessage(messages.projectProgressTooltip)}
@@ -99,7 +111,7 @@ export const OverviewSummary = ({
           <Box position="relative" mt={3}>
             <SliderWithDetails
               value={progress}
-              projectedProgress={projectedProgress}
+              projectedProgress={percentualProjectedProgress}
               trackThickness={4}
               thumbWeight="5px"
               thumbHeight={8}
