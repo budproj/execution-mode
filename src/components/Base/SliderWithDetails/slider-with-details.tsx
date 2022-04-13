@@ -79,7 +79,7 @@ const SliderWithDetails = ({
               textAlign={isAlmostAtTheEndOfTheTrack ? 'right' : 'left'}
             >
               <Text color={trackColor} fontWeight={700}>
-                {Math.round(value ?? 0)}%
+                {value?.toFixed() ?? '-'}%
               </Text>
 
               <Text fontSize="xs" color="gray.300" fontWeight={400} width="max-content">
@@ -110,7 +110,7 @@ const SliderWithDetails = ({
         border="1px solid"
         borderColor="white"
         top={thumbPositionTop}
-        left={`${projectedProgress}%`}
+        left={`${projectedProgress.toFixed()}%`}
       />
     </Flex>
   )
