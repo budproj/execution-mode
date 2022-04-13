@@ -20,7 +20,7 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
   const isLoaded = Boolean(team)
   const progress = team?.status?.progress ?? 0
   const { dateStart, dateEnd } = team?.tacticalCycle ?? {}
-  const { projectedProgress } = useGetProjectedProgress({ dateStart, dateEnd })
+  const { percentualProjectedProgress } = useGetProjectedProgress({ dateStart, dateEnd })
 
   return (
     <GridItem>
@@ -34,13 +34,13 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
         </Skeleton>
 
         <Text as="h3" fontSize="lg" fontWeight={700} color="brand.500">
-          {progress}%
+          {progress.toFixed()}%
         </Text>
       </Flex>
 
       <SliderWithDetails
         value={progress}
-        projectedProgress={projectedProgress}
+        projectedProgress={percentualProjectedProgress}
         trackThickness={2}
         thumbWeight="5px"
         thumbHeight="17px"
