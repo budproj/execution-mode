@@ -22,8 +22,8 @@ export default defineMessages<CreateFormMessage>({
 
   projectProgressTooltip: {
     defaultMessage:
-      'Em OKRs, costuma-se mirar em atingir ao menos 70% das metas. Para atingir esse patamar até o fim do ciclo, o progresso atual esperado é de 67%.',
-    id: 'YETxgV',
+      'Em OKRs, costuma-se mirar em atingir ao menos 70% das metas. Para atingir esse patamar até o fim do ciclo, o progresso atual esperado é de {progress}%.',
+    id: 'xe74UT',
     description: 'Tooltip message to show when hovering the help icon on projected progress',
   },
 
