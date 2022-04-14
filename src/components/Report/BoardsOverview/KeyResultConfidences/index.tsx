@@ -8,9 +8,9 @@ import { confidenceTexts } from './constants'
 
 const BoardsOverview = ({ ...rest }) => {
   return (
-    <Flex bg="white" width="100%" paddingY={15} paddingX={18} {...rest}>
+    <Flex borderRadius="9px" bg="white" width="100%" paddingY={15} paddingX={18} {...rest}>
       <Board title="Resultados-Chave" number="81" bg="new-gray.300" minWidth="175px" size="lg" />
-      <Box w="100%" paddingX="23px">
+      <Box w="100%" marginLeft="24px">
         <Flex justifyContent="space-between" gridGap="24px">
           {confidenceTexts.map((confidence) => {
             return (
