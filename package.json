@@ -33,6 +33,7 @@
     "waypoint:build": "waypoint build -var=\"GITHUB_TOKEN=$GITHUB_TOKEN\"",
     "waypoint:deploy": "waypoint deploy",
     "waypoint:up": "waypoint up -var=\"GITHUB_TOKEN=$GITHUB_TOKEN\"",
+    "postinstall": "sh bin/install.sh",
     "prepare": "husky install"
   },
   "author": "delucca <delucca@pm.me>",
