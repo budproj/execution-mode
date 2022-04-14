@@ -6,6 +6,7 @@ type CreateFormMessage =
   | 'projectProgressTooltip'
   | 'lastUpdateTextPrefix'
   | 'outdatedUpdateTextPrefix'
+  | 'accumulatedProgressTooltip'
 
 export default defineMessages<CreateFormMessage>({
   emptyMessage: {
@@ -39,5 +40,11 @@ export default defineMessages<CreateFormMessage>({
     id: 'M2QJC/',
     description:
       'This message is displayed alongisde with the key-result name, as the prefix for our last update text component',
+  },
+
+  accumulatedProgressTooltip: {
+    defaultMessage: 'Progresso acumulado dessa semana',
+    id: 'EvtBM8',
+    description: 'This message is displayed weekly progress tag',
   },
 })
