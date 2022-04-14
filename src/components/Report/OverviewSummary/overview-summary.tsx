@@ -91,7 +91,9 @@ export const OverviewSummary = ({
                   })}
                 </Text>
                 <TooltipWithDelay
-                  label={intl.formatMessage(messages.projectProgressTooltip)}
+                  label={intl.formatMessage(messages.projectProgressTooltip, {
+                    progress: percentualProjectedProgress.toFixed(),
+                  })}
                   placement="bottom-start"
                   maxWidth="470px"
                 >
@@ -99,7 +101,9 @@ export const OverviewSummary = ({
                     <InfoCircleIcon
                       fill="new-gray.600"
                       stroke="new-gray.600"
-                      desc={intl.formatMessage(messages.projectProgressTooltip)}
+                      desc={intl.formatMessage(messages.projectProgressTooltip, {
+                        progress: percentualProjectedProgress.toFixed(),
+                      })}
                       cursor="help"
                     />
                   </Flex>
