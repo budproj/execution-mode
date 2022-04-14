@@ -53,15 +53,20 @@ export const OverviewSummary = ({
             <Box>
               <Flex alignItems="center">
                 <Heading size="lg">{title}</Heading>
-                <PercentageProgressIncreaseTag
-                  forcePositiveSignal
-                  showSignalArrow
-                  value={deltaProgress}
-                  fontSize="sm"
-                  p={2}
-                  gridGap={1}
-                  ml={6}
-                />
+
+                <TooltipWithDelay label={intl.formatMessage(messages.accumulatedProgressTooltip)}>
+                  <Box>
+                    <PercentageProgressIncreaseTag
+                      forcePositiveSignal
+                      showSignalArrow
+                      value={deltaProgress}
+                      fontSize="sm"
+                      p={2}
+                      gridGap={1}
+                      ml={6}
+                    />
+                  </Box>
+                </TooltipWithDelay>
               </Flex>
 
               <LastUpdateText
