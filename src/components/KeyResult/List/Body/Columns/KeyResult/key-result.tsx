@@ -2,6 +2,7 @@ import { Flex, Box, Text, Skeleton, SkeletonText } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
+import { PercentageProgressIncreaseTag } from 'src/components/Base'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
@@ -26,6 +27,7 @@ export interface KeyResultListBodyColumnKeyResultProperties
 
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
 const statusSelector = buildPartialSelector<KeyResult['status']>('status')
+const deltaSelector = buildPartialSelector<KeyResult['delta']>('delta')
 
 const KeyResultListBodyColumnKeyResult = ({
   id,
@@ -38,6 +40,7 @@ const KeyResultListBodyColumnKeyResult = ({
   const title = useRecoilValue(titleSelector(id))
   const status = useRecoilValue(statusSelector(id))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(id))
+  const delta = useRecoilValue(deltaSelector(id))
   const intl = useIntl()
 
   const isKeyResultLoaded = Boolean(title)
@@ -46,7 +49,6 @@ const KeyResultListBodyColumnKeyResult = ({
   const prefixMessage = status?.isOutdated
     ? messages.outdatedUpdateTextPrefix
     : messages.lastUpdateTextPrefix
-
   return (
     <KeyResultListBodyColumnBase
       borderRight={withRightBorder ? 1 : 0}
@@ -60,8 +62,28 @@ const KeyResultListBodyColumnKeyResult = ({
     >
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
-          <Skeleton borderRadius={10} isLoaded={isKeyResultLoaded}>
+          <Skeleton
+            borderRadius={10}
+            alignContent="center"
+            flexDirection="column"
+            display="flex"
+            isLoaded={isKeyResultLoaded}
+          >
             <KeyResultDynamicIcon title={title} isDisabled={isDisabled} />
+            {delta && delta?.progress !== 0 && (
+              <PercentageProgressIncreaseTag
+                forcePositiveSignal
+                showSignalArrow
+                value={delta?.progress}
+                fontSize="10px"
+                border="1px solid"
+                borderColor="white"
+                transform="scale(0.95)"
+                p={1}
+                gridGap={1}
+                mt={-2}
+              />
+            )}
           </Skeleton>
         )}
 

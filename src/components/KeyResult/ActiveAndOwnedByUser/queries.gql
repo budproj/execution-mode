@@ -9,6 +9,9 @@ query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES {
           goal
           format
           type
+          delta {
+            progress
+          }
           objective {
             title
             cycle {
