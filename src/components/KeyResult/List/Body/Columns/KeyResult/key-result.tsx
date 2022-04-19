@@ -62,13 +62,7 @@ const KeyResultListBodyColumnKeyResult = ({
     >
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
-          <Skeleton
-            borderRadius={10}
-            alignContent="center"
-            flexDirection="column"
-            display="flex"
-            isLoaded={isKeyResultLoaded}
-          >
+          <Skeleton borderRadius={10} position="relative" isLoaded={isKeyResultLoaded}>
             <KeyResultDynamicIcon title={title} isDisabled={isDisabled} />
             {delta && delta?.progress !== 0 && (
               <PercentageProgressIncreaseTag
@@ -76,12 +70,13 @@ const KeyResultListBodyColumnKeyResult = ({
                 showSignalArrow
                 value={delta?.progress}
                 fontSize="10px"
+                position="absolute"
                 border="1px solid"
                 borderColor="white"
-                transform="scale(0.95)"
+                left="50%"
+                transform="translate(-50%, -35%) scale(0.95)"
                 p={1}
                 gridGap={1}
-                mt={-2}
               />
             )}
           </Skeleton>
