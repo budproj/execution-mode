@@ -1,7 +1,9 @@
+import { Flex, Skeleton, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { ReactElement, useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { DynamicAvatarGroup } from 'src/components/Base'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
@@ -14,6 +16,8 @@ import selectUser from 'src/state/recoil/user/selector'
 export interface KeyResultListBodyColumnOwnerProperties
   extends KeyResultListBodyColumnBaseProperties {
   id?: KeyResult['id']
+  displayName?: boolean
+  displayRole?: boolean
 }
 
 interface StyledAvatarGroupWrapperProperties {
@@ -36,6 +40,8 @@ const supportTeamMembersSelector =
 const KeyResultListBodyColumnOwner = ({
   id,
   justifyContent,
+  displayName,
+  displayRole,
 }: KeyResultListBodyColumnOwnerProperties): ReactElement => {
   const owner = useRecoilValue(ownerSelector(id))
   const supportTeamMembersAtoms = useRecoilValue(supportTeamMembersSelector(id))
@@ -74,6 +80,32 @@ const KeyResultListBodyColumnOwner = ({
           max={currentUserIsOwner ? 1 : 2}
         />
       </StyledAvatarGroupWrapper>
+
+      {displayName || displayRole ? (
+        <Flex direction="column" ml={3}>
+          {displayName && (
+            <Skeleton
+              display="flex"
+              alignItems="center"
+              isLoaded={isOwnerLoaded}
+              {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}
+            >
+              <Text color="gray.500">{owner?.fullName}</Text>
+            </Skeleton>
+          )}
+
+          {displayRole && (
+            <Skeleton
+              display="flex"
+              alignItems="center"
+              isLoaded={isOwnerLoaded}
+              {...buildSkeletonMinSize(isOwnerLoaded, 100, 26)}
+            >
+              <Text color="gray.400">{owner?.role}</Text>
+            </Skeleton>
+          )}
+        </Flex>
+      ) : undefined}
     </KeyResultListBodyColumnBase>
   )
 }
