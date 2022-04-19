@@ -14,6 +14,9 @@ import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
+import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedByUser/queries.gql'
+import accordionItemPanelQuery from 'src/components/Objective/Accordion/Item/Panel/queries.gql'
+
 import {
   CheckInFormFieldConfidence,
   CheckInFormFieldValueNew,
