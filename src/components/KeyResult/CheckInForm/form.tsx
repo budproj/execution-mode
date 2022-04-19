@@ -12,6 +12,9 @@ import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
+import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedByUser/queries.gql'
+import accordionItemPanelQuery from 'src/components/Objective/Accordion/Item/Panel/queries.gql'
+
 import {
   CheckInFormFieldConfidence,
   CheckInFormFieldValueNew,
@@ -68,6 +71,10 @@ const CheckInForm = ({
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
         dispatchEvent({})
       },
+      refetchQueries: [
+        activeAndOwnedByUserQuery.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
+        accordionItemPanelQuery.GET_OBJECTIVE_KEY_RESULTS,
+      ],
     },
   )
 
