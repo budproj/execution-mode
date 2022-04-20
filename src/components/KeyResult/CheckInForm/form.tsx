@@ -19,6 +19,8 @@ import {
 import CheckInFormFieldComment from './Fields/Comment'
 import Actions from './actions'
 import queries from './queries.gql'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
 
 export interface CheckInFormProperties {
   showGoal: boolean
@@ -52,6 +54,7 @@ const CheckInForm = ({
   onCompleted,
   valueNew,
 }: CheckInFormProperties) => {
+  const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_IN)
   const [latestKeyResultCheckIn, setLatestKeyResultCheckIn] = useRecoilState(
     selectLatestCheckIn(keyResultID),
   )
@@ -63,6 +66,7 @@ const CheckInForm = ({
       onCompleted: (data) => {
         setLatestKeyResultCheckIn(data.createKeyResultCheckIn)
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
+        dispatchEvent({})
       },
     },
   )
