@@ -1,5 +1,7 @@
 import { EventType } from './event-type'
+import { CreatedKeyResultCheckInData } from './events/created-key-result-check-in'
 import { CreatedKeyResultCheckMarkEventData } from './events/created-key-result-check-mark'
+import { CreatedKeyResultCommentData } from './events/created-key-result-comment'
 import { DeletedKeyResultCheckMarkEventData } from './events/deleted-key-result-check-mark'
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
@@ -21,4 +23,6 @@ export type Event = {
   [EventType.DELETED_KEY_RESULT_CHECK_MARK]: DeletedKeyResultCheckMarkEventData
   [EventType.UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE]: UpdatedKeyResultCheckMarkAssigneeEventData
   [EventType.CREATED_KEY_RESULT_CHECK_MARK]: CreatedKeyResultCheckMarkEventData
+  [EventType.CREATED_KEY_RESULT_CHECK_IN]: CreatedKeyResultCheckInData
+  [EventType.CREATED_KEY_RESULT_COMMENT]: CreatedKeyResultCommentData
 }
