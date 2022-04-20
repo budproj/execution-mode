@@ -14,8 +14,8 @@ export default defineMessages<ActionButtonsMessages>({
   },
 
   newCheckMarkButtonLabel: {
-    defaultMessage: 'Adicionar novo item',
-    id: 'zennqC',
+    defaultMessage: 'Adicionar nova tarefa',
+    id: '1C5Zpe',
     description: 'This label appears in our key-result sidebar drawer, in the end of our checklist',
   },
 
