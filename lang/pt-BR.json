@@ -67,10 +67,6 @@
     "defaultMessage": "Convidar usuário automaticamente",
     "description": "This is the label that defines if we should automatically invite the new user while creating a new workspace"
   },
-  "/DyxUT": {
-    "defaultMessage": "Último check-in",
-    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
-  },
   "/H4hHb": {
     "defaultMessage": "Buscar subtimes",
     "description": "This message is displayed inside the child teams section, on the search bar"
@@ -1914,6 +1910,10 @@
   "VltGNp": {
     "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawers"
+  },
+  "vhq3gt": {
+    "defaultMessage": "Feminino",
+    "description": "The user gender female option while creating a new workspace"
   },
   "vm0Yuj": {
     "defaultMessage": "Meu perfil | bud",
