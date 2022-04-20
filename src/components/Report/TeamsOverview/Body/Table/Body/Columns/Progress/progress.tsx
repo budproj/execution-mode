@@ -10,15 +10,14 @@ import { Team } from 'src/components/Team/types'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
   team?: Team
-  checkInDate?: Date
 }
 
 const TeamsOverviewBodyTableBodyColumnProgress = ({
   team,
-  checkInDate,
 }: TeamsOverviewBodyTableBodyColumnProgressProperties) => {
   const isLoaded = Boolean(team)
-  const progress = team?.status?.progress ?? 0
+  const { latestCheckIn, progress = 0 } = team?.status ?? {}
+  const { createdAt: checkInDate, user } = latestCheckIn ?? {}
   const { dateStart, dateEnd } = team?.tacticalCycle ?? {}
   const { percentualProjectedProgress } = useGetProjectedProgress({ dateStart, dateEnd })
 
@@ -51,7 +50,12 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
         thumbColor="new-gray.600"
       />
 
-      <LastUpdateText date={checkInDate} color="new-gray.500" fontSize="1rem" />
+      <LastUpdateText
+        date={checkInDate ? new Date(checkInDate) : undefined}
+        author={user?.fullName}
+        color="new-gray.500"
+        fontSize="1rem"
+      />
     </GridItem>
   )
 }

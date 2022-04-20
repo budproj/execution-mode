@@ -8,9 +8,21 @@ query GET_COMPANY_TEAMS {
             node {
               id
               name
+              tacticalCycle {
+                dateStart
+                dateEnd
+              }
               status {
                 progress
                 confidence
+                latestCheckIn {
+                  id
+                  createdAt
+                  user {
+                    id
+                    fullName
+                  }
+                }
               }
               delta {
                 progress
