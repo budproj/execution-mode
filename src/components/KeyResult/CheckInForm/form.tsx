@@ -7,6 +7,8 @@ import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
@@ -19,8 +21,6 @@ import {
 import CheckInFormFieldComment from './Fields/Comment'
 import Actions from './actions'
 import queries from './queries.gql'
-import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { EventType } from 'src/state/hooks/useEvent/event-type'
 
 export interface CheckInFormProperties {
   showGoal: boolean
