@@ -18,7 +18,7 @@ const MyTasks = () => {
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
   const { onlyUnchecked } = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
-  const [filteredKeyResults, setFilteredKeyResults] = useState(keyResults)
+  const [filteredKeyResults, setFilteredKeyResults] = useState([] as KeyResult[])
 
   const { refetch, loading } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
     onCompleted: (data) => {
