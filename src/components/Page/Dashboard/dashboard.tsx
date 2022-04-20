@@ -52,7 +52,7 @@ const DashboardPage = () => {
       </Flex>
 
       <BoardsOverview />
-      <TeamsOverview mt="36px" quarter={quarter?.period} />
+      <TeamsOverview mt={10} quarter={quarter?.period} />
     </PageContent>
   )
 }
