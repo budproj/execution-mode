@@ -175,10 +175,6 @@
     "defaultMessage": "Goal",
     "description": "This text is used as a label on the update goal form inside the key-result drawers. That is the second label of that form"
   },
-  "1C5Zpe": {
-    "defaultMessage": "Add new task",
-    "description": "This label appears in our key-result sidebar drawer, in the end of our checklist"
-  },
   "1Dc9iL": {
     "defaultMessage": "Over the last hour",
     "description": "This label is displayed if the date difference is less than 1 hour"
@@ -2208,7 +2204,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-04-07T13:50:20Z",
+    "defaultMessage": "2022-04-06T18:12:30Z",
     "description": null
   }
 }

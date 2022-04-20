@@ -11,19 +11,9 @@ query GET_COMPANY_TEAMS {
               status {
                 progress
                 confidence
-                latestCheckIn {
-                  createdAt
-                  user {
-                    fullName
-                  }
-                }
               }
               delta {
                 progress
-              }
-              tacticalCycle {
-                dateStart
-                dateEnd
               }
             }
           }

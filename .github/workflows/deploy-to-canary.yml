@@ -27,10 +27,9 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.REPO_NAME }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         run: |
           # Build a docker container and push it to ECR 
-          docker build --build-arg GITHUB_TOKEN --build-arg SENTRY_AUTH_TOKEN -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA .
+          docker build --build-arg GITHUB_TOKEN -t $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA .
           echo "Pushing image to ECR..."
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$GITHUB_SHA"

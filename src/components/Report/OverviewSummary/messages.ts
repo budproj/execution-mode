@@ -6,7 +6,6 @@ type CreateFormMessage =
   | 'projectProgressTooltip'
   | 'lastUpdateTextPrefix'
   | 'outdatedUpdateTextPrefix'
-  | 'accumulatedProgressTooltip'
 
 export default defineMessages<CreateFormMessage>({
   emptyMessage: {
@@ -23,8 +22,8 @@ export default defineMessages<CreateFormMessage>({
 
   projectProgressTooltip: {
     defaultMessage:
-      'Em OKRs, costuma-se mirar em atingir ao menos 70% das metas. Para atingir esse patamar até o fim do ciclo, o progresso atual esperado é de {progress}%.',
-    id: 'xe74UT',
+      'Em OKRs, costuma-se mirar em atingir ao menos 70% das metas. Para atingir esse patamar até o fim do ciclo, o progresso atual esperado é de 67%.',
+    id: 'YETxgV',
     description: 'Tooltip message to show when hovering the help icon on projected progress',
   },
 
@@ -40,11 +39,5 @@ export default defineMessages<CreateFormMessage>({
     id: 'M2QJC/',
     description:
       'This message is displayed alongisde with the key-result name, as the prefix for our last update text component',
-  },
-
-  accumulatedProgressTooltip: {
-    defaultMessage: 'Progresso acumulado dessa semana',
-    id: 'EvtBM8',
-    description: 'This message is displayed weekly progress tag',
   },
 })

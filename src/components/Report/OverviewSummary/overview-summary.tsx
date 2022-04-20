@@ -53,20 +53,15 @@ export const OverviewSummary = ({
             <Box>
               <Flex alignItems="center">
                 <Heading size="lg">{title}</Heading>
-
-                <TooltipWithDelay label={intl.formatMessage(messages.accumulatedProgressTooltip)}>
-                  <Box>
-                    <PercentageProgressIncreaseTag
-                      forcePositiveSignal
-                      showSignalArrow
-                      value={deltaProgress}
-                      fontSize="sm"
-                      p={2}
-                      gridGap={1}
-                      ml={6}
-                    />
-                  </Box>
-                </TooltipWithDelay>
+                <PercentageProgressIncreaseTag
+                  forcePositiveSignal
+                  showSignalArrow
+                  value={deltaProgress}
+                  fontSize="sm"
+                  p={2}
+                  gridGap={1}
+                  ml={6}
+                />
               </Flex>
 
               <LastUpdateText
@@ -96,9 +91,7 @@ export const OverviewSummary = ({
                   })}
                 </Text>
                 <TooltipWithDelay
-                  label={intl.formatMessage(messages.projectProgressTooltip, {
-                    progress: percentualProjectedProgress.toFixed(),
-                  })}
+                  label={intl.formatMessage(messages.projectProgressTooltip)}
                   placement="bottom-start"
                   maxWidth="470px"
                 >
@@ -106,9 +99,7 @@ export const OverviewSummary = ({
                     <InfoCircleIcon
                       fill="new-gray.600"
                       stroke="new-gray.600"
-                      desc={intl.formatMessage(messages.projectProgressTooltip, {
-                        progress: percentualProjectedProgress.toFixed(),
-                      })}
+                      desc={intl.formatMessage(messages.projectProgressTooltip)}
                       cursor="help"
                     />
                   </Flex>
