@@ -40,6 +40,7 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
       <Box pl="3.2rem">
         <KeyResultChecklist
           isEditable
+          checkPolicy={false}
           keyResultID={keyResult.id}
           nodes={checklist}
           canCreate={canCreate}
