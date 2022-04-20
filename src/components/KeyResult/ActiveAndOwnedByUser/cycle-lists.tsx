@@ -1,6 +1,6 @@
 import { map, mapValues } from 'lodash'
 import groupBy from 'lodash/groupBy'
-import React from 'react'
+import React, { memo } from 'react'
 
 import { EmptyState } from 'src/components/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
@@ -41,4 +41,4 @@ const KeyResultActiveAndOwnedByUserCyclesList = ({
   )
 }
 
-export default KeyResultActiveAndOwnedByUserCyclesList
+export default memo(KeyResultActiveAndOwnedByUserCyclesList)
