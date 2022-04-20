@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useIntl } from 'react-intl'
 
 import { Accordion } from 'src/components/Base/Accordion/index'
@@ -21,13 +21,19 @@ const MyPersonalTasks = () => {
 
   const isLoaded = called && !loading
 
-  const onCheckboxClick = async (taskId: Task['id']) => {
-    await toggleTask({ variables: { id: taskId } })
-  }
+  const onCheckboxClick = useCallback(
+    async (taskId: Task['id']) => {
+      await toggleTask({ variables: { id: taskId } })
+    },
+    [toggleTask],
+  )
 
-  const onTaskDelete = async (taskId: Task['id']) => {
-    await deleteTask({ variables: { id: taskId } })
-  }
+  const onTaskDelete = useCallback(
+    async (taskId: Task['id']) => {
+      await deleteTask({ variables: { id: taskId } })
+    },
+    [deleteTask],
+  )
 
   return (
     <Accordion
