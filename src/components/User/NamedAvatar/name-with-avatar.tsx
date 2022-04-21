@@ -9,6 +9,7 @@ import {
   forwardRef,
   Skeleton,
   SkeletonCircle,
+  useToken,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { RefObject } from 'react'
@@ -52,6 +53,13 @@ const StyledAvatarWrapper = styled(Flex)`
     opacity: 1;
   }
 `
+const StyledText = styled(Text)`
+  color: ${({ color }) => color};
+
+  &:hover {
+    color: ${({ brandColor }) => brandColor};
+  }
+`
 
 export const NameWithAvatar = forwardRef(
   (
@@ -62,7 +70,6 @@ export const NameWithAvatar = forwardRef(
       isHoverable,
       isLoaded,
       isEditable,
-      isHovering,
       isEditing,
       avatarSize,
       showName = true,
@@ -75,6 +82,7 @@ export const NameWithAvatar = forwardRef(
     reference?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null,
   ) => {
     const intl = useIntl()
+    const [brand500] = useToken('colors', ['brand.500'])
 
     return (
       <Stack
@@ -119,9 +127,9 @@ export const NameWithAvatar = forwardRef(
         <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
           {showName && (
             <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
-              <Text fontSize="lg" color={isHovering || isEditing ? 'brand.500' : nameColor}>
+              <StyledText fontSize="lg" color={nameColor} brandColor={brand500}>
                 {user?.fullName}
-              </Text>
+              </StyledText>
             </Skeleton>
           )}
 
