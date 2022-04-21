@@ -1,5 +1,5 @@
 import { Box, Flex, Skeleton, Text, HStack } from '@chakra-ui/react'
-import React, { ReactElement, useEffect } from 'react'
+import React, { ReactElement, useEffect, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -44,7 +44,11 @@ const KeyResultListBodyColumnProgress = ({
   const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
   const intl = useIntl()
 
-  const ProgressMask = selectMaskBasedOnFormat(keyResult?.format)
+  const ProgressMask = useMemo(
+    () => selectMaskBasedOnFormat(keyResult?.format),
+    [keyResult?.format],
+  )
+
   const isKeyResultLoaded = Boolean(id)
   const canCreateCheckIn = keyResult?.keyResultCheckIns?.policy?.create === GraphQLEffect.ALLOW
   const progress = latestKeyResultCheckIn?.progress ?? 0

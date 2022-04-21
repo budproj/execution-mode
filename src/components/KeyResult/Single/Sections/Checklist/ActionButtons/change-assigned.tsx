@@ -61,6 +61,7 @@ export const ChangeAssignedCheckMarkButton = ({
     })
 
     if (onUpdate) onUpdate()
+    onClose()
   }
 
   return (
@@ -68,7 +69,7 @@ export const ChangeAssignedCheckMarkButton = ({
       isLazy
       placement="bottom-end"
       size="md"
-      isOpen={isOpen}
+      isOpen={canUpdate && isOpen}
       onOpen={onOpen}
       onClose={onClose}
     >

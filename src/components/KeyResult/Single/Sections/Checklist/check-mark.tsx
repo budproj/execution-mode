@@ -39,6 +39,7 @@ interface KeyResultCheckMarkProperties {
   checklistLength?: number
   onCreate?: () => void
   isEditable?: boolean
+  checkPolicy?: boolean
 }
 
 const StyledKeyResultCheckMark = styled(HStack)`
@@ -60,6 +61,7 @@ export const KeyResultCheckMark = ({
   checklistLength,
   onCreate,
   isEditable = true,
+  checkPolicy = true,
 }: KeyResultCheckMarkProperties) => {
   const { dispatch: dispatchToggleEvent } = useEvent(EventType.TOGGLED_KEY_RESULT_CHECK_MARK, {
     feature: Feature.CHECK_MARK,
@@ -98,8 +100,8 @@ export const KeyResultCheckMark = ({
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const isWaiting = isToggling || isUpdatingDescription || checkmarkIsBeingRemoved
 
-  const canUpdate = node?.policy?.update === GraphQLEffect.ALLOW
-  const canDelete = node?.policy?.delete === GraphQLEffect.ALLOW
+  const canUpdate = checkPolicy ? node?.policy?.update === GraphQLEffect.ALLOW : true
+  const canDelete = checkPolicy ? node?.policy?.delete === GraphQLEffect.ALLOW : true
 
   const handleChange = async () => {
     dispatchToggleEvent({
@@ -216,7 +218,7 @@ export const KeyResultCheckMark = ({
             keyResultID={keyResultID}
             checkMarkId={node?.id}
             assignedUserId={node?.assignedUser?.id}
-            canUpdate={canUpdate}
+            canUpdate={checkPolicy ? canUpdate : false}
             onUpdate={onUpdate}
           />
         </Flex>

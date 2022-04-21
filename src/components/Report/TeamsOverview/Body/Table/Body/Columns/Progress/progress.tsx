@@ -1,8 +1,11 @@
-import { Flex, GridItem, Text, Skeleton } from '@chakra-ui/react'
+import { Flex, GridItem, Text, Skeleton, Heading } from '@chakra-ui/react'
 import React from 'react'
-import { useIntl } from 'react-intl'
 
-import { SliderWithFilledTrack } from 'src/components/Base'
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import { IntlLink } from 'src/components/Base'
+import LastUpdateText from 'src/components/Base/LastUpdateText'
+import SliderWithDetails from 'src/components/Base/SliderWithDetails'
+import { useGetProjectedProgress } from 'src/components/Team/hooks'
 import { Team } from 'src/components/Team/types'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
@@ -12,30 +15,44 @@ export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
 const TeamsOverviewBodyTableBodyColumnProgress = ({
   team,
 }: TeamsOverviewBodyTableBodyColumnProgressProperties) => {
-  const intl = useIntl()
-
   const isLoaded = Boolean(team)
   const progress = team?.status?.progress ?? 0
+  const { dateStart, dateEnd } = team?.tacticalCycle ?? {}
+  const { percentualProjectedProgress } = useGetProjectedProgress({ dateStart, dateEnd })
+  const lastCheckinDate = team?.status?.latestCheckIn?.createdAt
+    ? new Date(team?.status?.latestCheckIn?.createdAt)
+    : undefined
 
   return (
     <GridItem>
-      <Flex gridGap={4} alignItems="center">
-        <Skeleton
-          isLoaded={isLoaded}
-          display="flex"
-          alignItems="center"
-          w="100%"
-          h={isLoaded ? 'auto' : 2}
-        >
-          <SliderWithFilledTrack value={progress} trackThickness={2} />
+      <Flex justifyContent="space-between">
+        <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 21)}>
+          <IntlLink href={`/explore/${team?.id ?? ''}`}>
+            <Heading as="h3" fontSize="lg" fontWeight={400} color="black.900">
+              {team?.name}
+            </Heading>
+          </IntlLink>
         </Skeleton>
 
-        <Skeleton isLoaded={isLoaded}>
-          <Text color="black.600">
-            {intl.formatNumber(Math.round(progress) / 100, { style: 'percent' })}
-          </Text>
-        </Skeleton>
+        <Text as="h3" fontSize="lg" fontWeight={700} color="brand.500">
+          {progress.toFixed()}%
+        </Text>
       </Flex>
+
+      <SliderWithDetails
+        value={progress}
+        projectedProgress={percentualProjectedProgress}
+        trackThickness={2}
+        thumbWeight="5px"
+        thumbHeight="17px"
+        thumbPositionTop={0.5}
+        showSliderDetails={false}
+        showThumb={false}
+        my={3}
+        thumbColor="new-gray.600"
+      />
+
+      <LastUpdateText date={lastCheckinDate} color="new-gray.500" fontSize="1rem" />
     </GridItem>
   )
 }

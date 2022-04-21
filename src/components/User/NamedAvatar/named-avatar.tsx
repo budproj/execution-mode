@@ -8,7 +8,7 @@ import {
   StackProps,
   TextProps,
 } from '@chakra-ui/react'
-import React, { ReactElement, RefObject, useEffect, useState } from 'react'
+import React, { ReactElement, RefObject, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -62,7 +62,6 @@ const NamedAvatar = ({
   displaySubtitle ??= true
   horizontalGap ??= 4
 
-  const [isHovering, setIsHovering] = useState(false)
   const user = useRecoilValue(selectUser(userID))
   const [companies, setCompanyEdges] = useConnectionEdges<Team>()
   const [teams, setTeamEdges] = useConnectionEdges<Team>()
@@ -87,14 +86,6 @@ const NamedAvatar = ({
   }
   const subtitle = availableSubtitles[subtitleType]
 
-  const handleMouseEnter = () => {
-    if (!isHovering && canHover) setIsHovering(true)
-  }
-
-  const handleMouseLeave = () => {
-    if (isHovering && canHover) setIsHovering(false)
-  }
-
   useEffect(() => {
     if (user) {
       setCompanyEdges(user?.companies?.edges)
@@ -114,12 +105,9 @@ const NamedAvatar = ({
           isEditable={canEdit}
           isHoverable={canHover}
           isLoaded={isLoaded}
-          isHovering={isHovering}
           isEditing={isEditting}
           hasSubtitle={displaySubtitle}
           subtitle={subtitle}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
           onClick={onClick}
         />
       </PopoverTrigger>
@@ -141,12 +129,9 @@ const NamedAvatar = ({
       isEditable={canEdit}
       isHoverable={canHover}
       isLoaded={isLoaded}
-      isHovering={isHovering}
       isEditing={isEditting}
       hasSubtitle={displaySubtitle}
       subtitle={subtitle}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       onClick={onClick}
     />
   )

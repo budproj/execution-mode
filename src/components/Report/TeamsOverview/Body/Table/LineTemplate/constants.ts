@@ -1,1 +1,1 @@
-export const TABLE_GRID_COLUMNS = 'minmax(0, 2fr) minmax(0, 3fr) minmax(0, 1fr)'
+export const TABLE_GRID_COLUMNS = '40px 1fr 70px'

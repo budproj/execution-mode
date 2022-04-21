@@ -15,10 +15,6 @@ query GET_KRS_WITH_MY_CHECKMARKS {
                   id
                   fullName
                 }
-                policy {
-                  update
-                  delete
-                }
               }
             }
             policy {

@@ -1,6 +1,11 @@
 import { defineMessages } from 'react-intl'
 
-type DashboardPageMessage = 'greeting' | 'metaTitle' | 'metaDescription'
+type DashboardPageMessage =
+  | 'greeting'
+  | 'metaTitle'
+  | 'metaDescription'
+  | 'yearlySummaryTitle'
+  | 'quarterlySummaryTitle'
 
 export default defineMessages<DashboardPageMessage>({
   greeting: {
@@ -20,5 +25,17 @@ export default defineMessages<DashboardPageMessage>({
       'Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.',
     id: '6vXlkc',
     description: 'The page description that is displayed in Google and screen readers',
+  },
+
+  yearlySummaryTitle: {
+    defaultMessage: 'OKRs Anuais {year}',
+    id: 'eG8Ohg',
+    description: 'The summary title for the yearly OKRs',
+  },
+
+  quarterlySummaryTitle: {
+    defaultMessage: 'OKRs Trimestrais {quarter}',
+    id: 'nEQaGP',
+    description: 'The summery title for the quarterly OKRs',
   },
 })

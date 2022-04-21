@@ -11,4 +11,8 @@ export enum EventType {
   CREATED_KEY_RESULT_CHECK_MARK = 'CreatedKeyResultCheckMark',
   CREATED_KEY_RESULT_CHECK_IN = 'CreatedKeyResultCheckIn',
   CREATED_KEY_RESULT_COMMENT = 'CreatedKeyResultComment',
+  CREATED_PERSONAL_TASK = 'CreatedPersonalTask',
+  DELETED_PERSONAL_TASK = 'DeletedPersonalTask',
+  TOGGLED_PERSONAL_TASK = 'ToggledPersonalTask',
+  UPDATED_PERSONAL_TASK_TITLE = 'UpdatedPersonalTaskTitle',
 }

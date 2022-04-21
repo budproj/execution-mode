@@ -1,9 +1,11 @@
 import { useQuery } from '@apollo/client'
 import { useRecoilValue } from 'recoil'
 
-import { myThingsTasksQuery } from 'src/state/recoil/task'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
+import { myThingsTasksQuery, taskAtomFamily } from 'src/state/recoil/task'
 
-import { TaskMeQuery } from '../../types'
+import { TaskMeQuery, Task } from '../../types'
 
 import GET_MY_TASKS from './get-tasks.gql'
 
@@ -13,11 +15,17 @@ export interface useGetMyTasksProperties {
 }
 
 export const useGetMyTasks = () => {
+  const [loadTasks] = useRecoilFamilyLoader<Task>(taskAtomFamily)
+  const [tasks, setTasks] = useConnectionEdges<Task>()
+
   const query = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
-  const { data, loading, called } = useQuery<TaskMeQuery>(GET_MY_TASKS, {
+  const { loading, called } = useQuery<TaskMeQuery>(GET_MY_TASKS, {
     variables: query,
+    onCompleted: (data) => {
+      setTasks(data.me.tasks.edges)
+      loadTasks(tasks)
+    },
   })
 
-  const tasks = data?.me?.tasks?.edges?.map(({ node }) => node) ?? []
   return { tasks, loading, called }
 }

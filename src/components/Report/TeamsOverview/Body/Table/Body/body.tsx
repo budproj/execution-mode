@@ -4,7 +4,7 @@ import TeamsOverviewBodyTableLineTemplate from 'src/components/Report/TeamsOverv
 import { Team } from 'src/components/Team/types'
 
 import {
-  TeamsOverviewBodyTableBodyColumnNameAndOrder,
+  TeamsOverviewBodyTableBodyPositionBadge,
   TeamsOverviewBodyTableBodyColumnProgress,
   TeamsOverviewBodyTableBodyColumnProgressIncrease,
 } from './Columns'
@@ -17,7 +17,7 @@ const TeamsOverviewBodyTableBody = ({ teamsRanking }: TeamsOverviewBodyTableBody
   <>
     {teamsRanking.map((team, index) => (
       <TeamsOverviewBodyTableLineTemplate key={team?.id ?? Math.random()}>
-        <TeamsOverviewBodyTableBodyColumnNameAndOrder team={team} order={index + 1} />
+        <TeamsOverviewBodyTableBodyPositionBadge order={index + 1} />
         <TeamsOverviewBodyTableBodyColumnProgress team={team} />
         <TeamsOverviewBodyTableBodyColumnProgressIncrease team={team} />
       </TeamsOverviewBodyTableLineTemplate>

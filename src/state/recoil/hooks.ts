@@ -6,12 +6,13 @@ import { overwriteMerge } from 'lib/deepmerge/merge-strategies'
 import { Cycle } from 'src/components/Cycle/types'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
+import { Task } from 'src/components/Task/types'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 
 import { RecoilInterfaceCallback } from './types'
 
-type RecoilEntity = Team | Objective | KeyResult | User | Cycle
+type RecoilEntity = Team | Objective | KeyResult | User | Cycle | Task
 type RecoilEntityParameterKey = 'id'
 type RecoilFamilyParameter = Team['id']
 type RecoilFamily<E> = (parameter?: RecoilFamilyParameter) => RecoilState<Partial<E> | undefined>
