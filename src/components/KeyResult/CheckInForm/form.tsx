@@ -6,14 +6,13 @@ import omitBy from 'lodash/omitBy'
 import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
+import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedByUser/queries.gql'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
+import accordionItemPanelQuery from 'src/components/Objective/Accordion/Item/Panel/queries.gql'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
-
-import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedByUser/queries.gql'
-import accordionItemPanelQuery from 'src/components/Objective/Accordion/Item/Panel/queries.gql'
 
 import {
   CheckInFormFieldConfidence,
