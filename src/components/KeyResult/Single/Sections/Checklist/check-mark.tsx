@@ -218,7 +218,7 @@ export const KeyResultCheckMark = ({
             keyResultID={keyResultID}
             checkMarkId={node?.id}
             assignedUserId={node?.assignedUser?.id}
-            canUpdate={canUpdate}
+            canUpdate={checkPolicy ? canUpdate : false}
             onUpdate={onUpdate}
           />
         </Flex>
