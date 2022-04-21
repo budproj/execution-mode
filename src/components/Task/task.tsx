@@ -6,6 +6,8 @@ import { EditableInputField } from 'src/components/Base'
 import { TASK_STATUS } from 'src/components/Task/constants'
 import { useChangeTaskDescription } from 'src/components/Task/hooks'
 import { Task } from 'src/components/Task/types'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import { DeleteButton } from '../Base/Button/delete-button'
 
@@ -36,6 +38,9 @@ export const SingleTask = ({
   const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(task.state === TASK_STATUS.CHECKED)
   const { changeDescription } = useChangeTaskDescription()
+  const { dispatch: dispatchUpdateTitleEvent } = useEvent(EventType.UPDATED_PERSONAL_TASK_TITLE)
+  const { dispatch: dispatchToggleEvent } = useEvent(EventType.TOGGLED_PERSONAL_TASK)
+  const { dispatch: dispatchDeleteEvent } = useEvent(EventType.DELETED_PERSONAL_TASK)
 
   const handleStartEdit = () => {
     setIsEditing(true)
@@ -47,6 +52,13 @@ export const SingleTask = ({
 
   const toggleTask = async () => {
     setIsLoading(true)
+
+    dispatchToggleEvent({
+      taskId: task.id,
+      previousState: isChecked ? 'checked' : 'unchecked',
+      newState: isChecked ? 'unchecked' : 'checked',
+    })
+
     setIsChecked(!isChecked)
 
     if (onCheckboxClick) {
@@ -58,6 +70,9 @@ export const SingleTask = ({
 
   const onDeleteClick = async () => {
     setIsLoading(true)
+    dispatchDeleteEvent({
+      taskId: task.id,
+    })
 
     if (onTaskDelete) {
       await onTaskDelete(task.id)
@@ -67,6 +82,11 @@ export const SingleTask = ({
   }
 
   const handleSubmit = (taskName: Task['description'] | undefined) => {
+    dispatchUpdateTitleEvent({
+      taskId: task.id,
+      newTitleLength: taskName?.length ?? 0,
+    })
+
     if (taskName) {
       changeDescription({ variables: { id: task.id, description: taskName } })
     }

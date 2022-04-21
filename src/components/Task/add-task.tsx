@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 
 import { Button, BUTTON_ICON_OPTIONS } from 'src/components/Base/Button'
 import { useCreateTask } from 'src/components/Task/hooks'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import { EditableInputField } from '../Base'
 
@@ -17,11 +19,13 @@ export const AddTask = ({ buttonText, hasIcon = true }: AddTaskProperties) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isAdding, setIsAdding] = useState(false)
   const { createTask } = useCreateTask()
+  const { dispatch } = useEvent(EventType.CREATED_PERSONAL_TASK)
 
   const handleCreate = async (description: Task['description']) => {
     if (isSubmitting) return
 
     setIsSubmitting(true)
+    dispatch({})
 
     await createTask({
       variables: {
