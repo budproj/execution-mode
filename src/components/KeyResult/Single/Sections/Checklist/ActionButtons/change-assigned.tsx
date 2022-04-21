@@ -61,6 +61,7 @@ export const ChangeAssignedCheckMarkButton = ({
     })
 
     if (onUpdate) onUpdate()
+    onClose()
   }
 
   return (
