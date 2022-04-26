@@ -67,6 +67,10 @@
     "defaultMessage": "Convidar usuário automaticamente",
     "description": "This is the label that defines if we should automatically invite the new user while creating a new workspace"
   },
+  "/DyxUT": {
+    "defaultMessage": "Último check-in",
+    "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
+  },
   "/H4hHb": {
     "defaultMessage": "Buscar subtimes",
     "description": "This message is displayed inside the child teams section, on the search bar"
@@ -271,6 +275,10 @@
     "defaultMessage": "Gênero do usuário inicial",
     "description": "The user gender while creating a new workspace"
   },
+  "3xZZCI": {
+    "defaultMessage": "Esperado: {progress}%",
+    "description": "Message to show the expetected progress of the project"
+  },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -474,6 +482,10 @@
   "9lxU9H": {
     "defaultMessage": "Escreva {keyword} para confirmar a exclusão",
     "description": "This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource"
+  },
+  "9O5Xaa": {
+    "defaultMessage": "Seu time ainda não tem nenhum resultado-chave anual",
+    "description": "Message to show when there are no summary results"
   },
   "9OSi6W": {
     "defaultMessage": "Data de fim",
@@ -743,6 +755,10 @@
     "defaultMessage": "por {author}",
     "description": "This message displays the latest report author for a given component"
   },
+  "eG8Ohg": {
+    "defaultMessage": "OKRs Anuais {year}",
+    "description": "The summary title for the yearly OKRs"
+  },
   "eI6jYw": {
     "defaultMessage": "Nenhuma informação",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
@@ -766,6 +782,10 @@
   "eVsyB5": {
     "defaultMessage": "Email",
     "description": "The label of the email field in the create user form"
+  },
+  "EvtBM8": {
+    "defaultMessage": "Progresso acumulado dessa semana",
+    "description": "This message is displayed weekly progress tag"
   },
   "eYhGZW": {
     "defaultMessage": "Nenhuma opção disponível",
@@ -1095,6 +1115,10 @@
     "defaultMessage": "Explorar ciclos anteriores",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
   },
+  "Jc/lcm": {
+    "defaultMessage": "Progresso esperado: {progress}%",
+    "description": "The tooltip content for the projected progress thumb"
+  },
   "jCjr1X": {
     "defaultMessage": "Preencha os campos obrigatórios para poder salvar este resultado-chave.",
     "description": "This message appears in an error toast after the users tries to create a key-result but there are some validation errors in the form"
@@ -1378,6 +1402,10 @@
   "ND5T6U": {
     "defaultMessage": "Uma seta para cima. Ao clicar nela você fechará o menu de seleção",
     "description": "This is the desc attribute of our chevron up icon. It is used by screen readers"
+  },
+  "nEQaGP": {
+    "defaultMessage": "OKRs Trimestrais {quarter}",
+    "description": "The summery title for the quarterly OKRs"
   },
   "nfdvr1": {
     "defaultMessage": "Esperado",
@@ -1843,6 +1871,10 @@
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
   },
+  "ucALDM": {
+    "defaultMessage": "Ranking de Times do {quarter}",
+    "description": "Title to show on the team ranking page"
+  },
   "ui441M": {
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
@@ -1914,10 +1946,6 @@
   "VltGNp": {
     "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawers"
-  },
-  "vhq3gt": {
-    "defaultMessage": "Feminino",
-    "description": "The user gender female option while creating a new workspace"
   },
   "vm0Yuj": {
     "defaultMessage": "Meu perfil | bud",
@@ -2015,6 +2043,10 @@
     "defaultMessage": "Sobrenome",
     "description": "The user last name input placeholder while creating a new workspace"
   },
+  "xe74UT": {
+    "defaultMessage": "Em OKRs, costuma-se mirar em atingir ao menos 70% das metas. Para atingir esse patamar até o fim do ciclo, o progresso atual esperado é de {progress}%.",
+    "description": "Tooltip message to show when hovering the help icon on projected progress"
+  },
   "XEey8C": {
     "defaultMessage": "Arraste até o novo valor para iniciar um check-in",
     "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
@@ -2082,6 +2114,10 @@
   "Y1oyYG": {
     "defaultMessage": "Um ícone de seta para cima, indicando que o progresso aumentou",
     "description": "This desc message explains the increase icon for screen readers"
+  },
+  "YETxgV": {
+    "defaultMessage": "Em OKRs, costuma-se mirar em atingir ao menos 70% das metas. Para atingir esse patamar até o fim do ciclo, o progresso atual esperado é de 67%.",
+    "description": "Tooltip message to show when hovering the help icon on projected progress"
   },
   "yfhIM+": {
     "defaultMessage": "Cancelar",
@@ -2208,7 +2244,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-04-07T13:50:40Z",
+    "defaultMessage": "2022-04-26T19:44:44Z",
     "description": null
   }
 }
