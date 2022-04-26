@@ -1,20 +1,25 @@
 import { Flex, StyleProps, Box } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useMemo } from 'react'
+
+import { HealthConfidenceQuantites } from '../KeyResultConfidences/index'
+
+import { StackedProgressBarSkeleton } from './skeleton'
 
 interface StackedProgressBarProperties extends StyleProps {
-  total: number
-  confidences: Confidences[]
+  total?: number
+  confidences: Confidence[]
+  quantities: HealthConfidenceQuantites
+  isLoading?: boolean
 }
 
-interface Confidences {
-  name: string
+export interface Confidence {
+  name: 'highConfidence' | 'mediumConfidence' | 'lowConfidence' | 'barrier'
   color: string
   bg: string
-  number: number
 }
 function percentage(partialValue: number, totalValue: number) {
-  return `${Math.floor((100 * partialValue) / totalValue)}%`
+  return `${Math.ceil((100 * partialValue) / totalValue)}%`
 }
 
 const StyledBarPiece = styled(Box)`
@@ -23,8 +28,33 @@ const StyledBarPiece = styled(Box)`
   }
 `
 
-const StackedProgressBar = ({ confidences, total, ...rest }: StackedProgressBarProperties) => {
-  return (
+const getConfidenceQuantities =
+  (quantities: HealthConfidenceQuantites) => (confidence: Confidence) => {
+    const number = quantities?.[confidence.name] ?? 0
+
+    return {
+      ...confidence,
+      quantity: number,
+    }
+  }
+
+const StackedProgressBar = ({
+  isLoading,
+  confidences,
+  total = 0,
+  quantities,
+  ...rest
+}: StackedProgressBarProperties) => {
+  const confidencesToRender = useMemo(
+    () =>
+      confidences
+        .map(getConfidenceQuantities(quantities))
+        .filter((confidence) => confidence.quantity > 0),
+    [confidences, quantities],
+  )
+  return isLoading ? (
+    <StackedProgressBarSkeleton />
+  ) : (
     <Flex
       bg="transparent"
       borderRadius="18px"
@@ -34,14 +64,17 @@ const StackedProgressBar = ({ confidences, total, ...rest }: StackedProgressBarP
       overflow="hidden"
       {...rest}
     >
-      {confidences.map((confidence) => {
+      {confidencesToRender.map((confidence) => {
+        const { name, color, quantity } = confidence
+
         return (
           <StyledBarPiece
-            key={confidence.name}
-            w={`${percentage(confidence.number, total)}`}
-            bg={confidence.color}
+            key={name}
+            w={`${percentage(quantity, total) ? percentage(quantity, total) : 1}`}
+            maxHeight="21px"
+            bg={color}
             paddingLeft="10px"
-            confidenceNumber={`${percentage(confidence.number, total)}`}
+            confidenceNumber={`${percentage(quantity, total)}`}
             fontSize="14px"
           />
         )

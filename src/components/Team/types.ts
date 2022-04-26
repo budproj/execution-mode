@@ -27,3 +27,20 @@ export interface Team extends GraphQLNode {
   allObjectives?: GraphQLConnection<Objective>
   keyResults?: GraphQLConnection<KeyResult>
 }
+
+export interface HealthConfidenceQuantities {
+  me: {
+    companies: {
+      quantities: Quantities
+    }
+  }
+}
+
+export interface Quantities {
+  keyResultsQuantity: number
+  objectivesQuantity: number
+  highConfidence: number
+  mediumConfidence: number
+  lowConfidence: number
+  barrier: number
+}

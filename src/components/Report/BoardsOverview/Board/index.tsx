@@ -1,13 +1,16 @@
 import { Flex, StyleProps, Text } from '@chakra-ui/react'
 import React from 'react'
 
+import { BoardSkeleton } from './skeleton'
+
 interface BoardProperties extends StyleProps {
   title: string
-  number: string | number
+  number?: string | number
   bg?: string
   color?: string
   uppercase?: boolean
   size?: 'lg' | 'md'
+  isLoading?: boolean
 }
 
 const Board = ({
@@ -17,6 +20,7 @@ const Board = ({
   color,
   uppercase = false,
   size = 'md',
+  isLoading,
   ...rest
 }: BoardProperties) => {
   const sizes = new Map([
@@ -31,6 +35,7 @@ const Board = ({
       borderRadius={9}
       flexDir="column"
       textAlign="center"
+      alignItems="center"
       justifyContent="center"
       bg={bg}
       shadow="for-background.light"
@@ -46,15 +51,19 @@ const Board = ({
       >
         {title}
       </Text>
-      <Text
-        textTransform={uppercase ? 'uppercase' : 'initial'}
-        fontSize={fontSizeInfo?.number}
-        lineHeight="1"
-        fontWeight={600}
-        color={color ?? 'brand.500'}
-      >
-        {number}
-      </Text>
+      {isLoading ? (
+        <BoardSkeleton startColor={color} />
+      ) : (
+        <Text
+          textTransform={uppercase ? 'uppercase' : 'initial'}
+          fontSize={fontSizeInfo?.number}
+          lineHeight="1"
+          fontWeight={600}
+          color={color ?? 'brand.500'}
+        >
+          {number}
+        </Text>
+      )}
     </Flex>
   )
 }
