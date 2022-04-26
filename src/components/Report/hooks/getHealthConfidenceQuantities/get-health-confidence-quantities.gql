@@ -1,0 +1,14 @@
+query GET_HEALTH_CONFIDENCE_QUANTITIES {
+  me {
+    companies {
+      quantities {
+        keyResultsQuantity
+        objectivesQuantity
+        highConfidence
+        mediumConfidence
+        lowConfidence
+        barrier
+      }
+    }
+  }
+}

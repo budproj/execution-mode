@@ -1,26 +1,28 @@
-export const confidenceTexts = [
+export interface Confidence {
+  name: 'highConfidence' | 'mediumConfidence' | 'lowConfidence' | 'barrier'
+  color: string
+  bg: string
+}
+
+export const confidenceTexts: Confidence[] = [
   {
-    name: 'Alta confiança',
+    name: 'highConfidence',
     color: 'green.500',
     bg: 'green.50',
-    number: 43,
   },
   {
-    name: 'Média confiança',
+    name: 'mediumConfidence',
     color: 'yellow.600',
     bg: 'yellow.100',
-    number: 24,
   },
   {
-    name: 'Baixa confiança',
+    name: 'lowConfidence',
     color: 'red.500',
     bg: 'red.50',
-    number: 15,
   },
   {
-    name: 'Com barreira',
+    name: 'barrier',
     color: 'purple.500',
     bg: 'purple.50',
-    number: 7,
   },
 ]
