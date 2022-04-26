@@ -69,14 +69,19 @@ const KeyResultListBodyColumnKeyResult = ({
                 forcePositiveSignal
                 showSignalArrow
                 value={delta?.progress}
-                fontSize="10px"
+                fontSize="12px"
+                fontWeight="medium"
+                alignItems="center"
+                justifyContent="center"
+                display="flex"
+                minWidth="100%"
                 position="absolute"
                 border="1px solid"
                 borderColor="white"
                 left="50%"
-                transform="translate(-50%, -35%) scale(0.95)"
-                p={1}
-                gridGap={1}
+                transform="translate(-50%, 25%)"
+                padding={1}
+                gridGap={0.5}
               />
             )}
           </Skeleton>
