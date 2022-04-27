@@ -1,8 +1,6 @@
 import { Flex, StyleProps, Text } from '@chakra-ui/react'
 import React from 'react'
 
-import { BoardSkeleton } from './skeleton'
-
 interface BoardProperties extends StyleProps {
   title: string
   number?: string | number
@@ -52,7 +50,16 @@ const Board = ({
         {title}
       </Text>
       {isLoading ? (
-        <BoardSkeleton startColor={color} />
+        <Text
+          textTransform={uppercase ? 'uppercase' : 'initial'}
+          fontSize={fontSizeInfo?.number}
+          lineHeight="1"
+          fontWeight={600}
+          color={color ?? 'brand.500'}
+          opacity={0.2}
+        >
+          0
+        </Text>
       ) : (
         <Text
           textTransform={uppercase ? 'uppercase' : 'initial'}
