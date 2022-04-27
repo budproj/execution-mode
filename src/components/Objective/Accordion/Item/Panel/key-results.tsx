@@ -128,6 +128,7 @@ export const ObjectiveKeyResults = ({
         [KEY_RESULT_LIST_COLUMN.OWNER]: {
           displayName: true,
           displayRole: true,
+          showOnlyOwner: true,
         },
         [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
           onDelete: handleKeyResultDelete,
