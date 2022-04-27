@@ -58,7 +58,7 @@ const Board = ({
           color={color ?? 'brand.500'}
           opacity={0.2}
         >
-          0
+          -
         </Text>
       ) : (
         <Text

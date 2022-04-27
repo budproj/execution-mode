@@ -19,7 +19,7 @@ export interface Confidence {
   bg: string
 }
 function percentage(partialValue: number, totalValue: number) {
-  return `${Math.ceil((100 * partialValue) / totalValue)}%`
+  return `${((100 * partialValue) / totalValue).toFixed(0)}%`
 }
 
 const StyledBarPiece = styled(Box)`
