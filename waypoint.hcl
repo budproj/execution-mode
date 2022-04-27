@@ -5,11 +5,17 @@ variable "GITHUB_TOKEN" {
   default = ""
 }
 
+variable "SENTRY_AUTH_TOKEN" {
+  type = string
+  default = ""
+}
+
 app "app" {
   build {
     use "docker" {
       build_args = {
         "GITHUB_TOKEN" = var.GITHUB_TOKEN
+        "SENTRY_AUTH_TOKEN" = var.SENTRY_AUTH_TOKEN
       }
     }
 
