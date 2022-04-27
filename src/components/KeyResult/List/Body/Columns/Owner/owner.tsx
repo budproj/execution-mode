@@ -9,6 +9,7 @@ import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { UserAvatar } from 'src/components/User'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
@@ -18,6 +19,7 @@ export interface KeyResultListBodyColumnOwnerProperties
   id?: KeyResult['id']
   displayName?: boolean
   displayRole?: boolean
+  showOnlyOwner?: boolean
 }
 
 interface StyledAvatarGroupWrapperProperties {
@@ -42,6 +44,7 @@ const KeyResultListBodyColumnOwner = ({
   justifyContent,
   displayName,
   displayRole,
+  showOnlyOwner,
 }: KeyResultListBodyColumnOwnerProperties): ReactElement => {
   const owner = useRecoilValue(ownerSelector(id))
   const supportTeamMembersAtoms = useRecoilValue(supportTeamMembersSelector(id))
@@ -73,12 +76,22 @@ const KeyResultListBodyColumnOwner = ({
       justifyContent={justifyContent}
     >
       <StyledAvatarGroupWrapper currentUserIsOwner={currentUserIsOwner}>
-        <DynamicAvatarGroup
-          isLoaded={isOwnerLoaded}
-          size="md"
-          users={usersToLoad}
-          max={currentUserIsOwner ? 1 : 2}
-        />
+        {showOnlyOwner ? (
+          <UserAvatar
+            name={owner?.fullName}
+            src={owner?.picture}
+            cursor="pointer"
+            data-action="open-user-card"
+            variant="rounded"
+          />
+        ) : (
+          <DynamicAvatarGroup
+            isLoaded={isOwnerLoaded}
+            size="md"
+            users={usersToLoad}
+            max={currentUserIsOwner ? 1 : 2}
+          />
+        )}
       </StyledAvatarGroupWrapper>
 
       {displayName || displayRole ? (
