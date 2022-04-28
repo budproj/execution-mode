@@ -37,3 +37,5 @@ export {
   KeyResultListBodyColumnActionsSkeleton,
   default as KeyResultListBodyColumnActions,
 } from './Actions'
+
+export { KeyResultListBodyColumnTeamSkeleton, default as KeyResultListBodyColumnTeam } from './Team'

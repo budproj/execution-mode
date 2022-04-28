@@ -4,11 +4,10 @@ import React from 'react'
 interface BoardProperties extends StyleProps {
   title: string
   number?: string | number
-  bg?: string
-  color?: string
   uppercase?: boolean
   size?: 'lg' | 'md'
   isLoading?: boolean
+  onClick?: () => void
 }
 
 const Board = ({

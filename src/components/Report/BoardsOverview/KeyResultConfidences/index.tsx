@@ -1,6 +1,9 @@
 import { Box, Flex } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
+
+import { krHealthStatusAtom } from 'src/state/recoil/key-result'
 
 import Board from '../Board'
 import StackedProgressBar from '../StackedProgressBar'
@@ -14,8 +17,8 @@ export interface BoardsOverviewProperties {
 }
 
 const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProperties) => {
-  console.log(quantities)
   const intl = useIntl()
+  const setKrHealthStatus = useSetRecoilState(krHealthStatusAtom)
 
   const confidencesToRender = useMemo(
     () => confidenceTexts.map(getConfidenceQuantities(quantities)),
@@ -46,6 +49,8 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
                 number={confidence.quantity}
                 bg={confidence.bg}
                 paddingX={30}
+                cursor="pointer"
+                onClick={() => setKrHealthStatus(confidence.name)}
               />
             )
           })}
