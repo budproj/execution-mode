@@ -2,7 +2,7 @@ import { Flex } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQuantities/index'
+import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQuantities'
 
 import Board from './Board'
 import KeyResultConfidence from './KeyResultConfidences'

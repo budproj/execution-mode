@@ -4,39 +4,14 @@ import { useIntl } from 'react-intl'
 
 import Board from '../Board'
 import StackedProgressBar from '../StackedProgressBar'
+import { confidenceTexts, getConfidenceQuantities } from '../constants'
 import messages from '../messages'
-
-import { confidenceTexts } from './constants'
-
-export interface HealthConfidenceQuantites {
-  keyResultsQuantity: number
-  objectivesQuantity: number
-  highConfidence: number
-  mediumConfidence: number
-  lowConfidence: number
-  barrier: number
-}
+import { HealthConfidenceQuantites } from '../types'
 
 export interface BoardsOverviewProperties {
   quantities: HealthConfidenceQuantites
   isLoading?: boolean
 }
-
-export interface Confidence {
-  name: 'highConfidence' | 'mediumConfidence' | 'lowConfidence' | 'barrier'
-  color: string
-  bg: string
-}
-
-const getConfidenceQuantities =
-  (quantities: HealthConfidenceQuantites) => (confidence: Confidence) => {
-    const number = quantities?.[confidence.name]
-
-    return {
-      ...confidence,
-      quantity: number,
-    }
-  }
 
 const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProperties) => {
   console.log(quantities)

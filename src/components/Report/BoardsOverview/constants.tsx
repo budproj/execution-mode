@@ -1,8 +1,14 @@
-export interface Confidence {
-  name: 'highConfidence' | 'mediumConfidence' | 'lowConfidence' | 'barrier'
-  color: string
-  bg: string
-}
+import { Confidence, HealthConfidenceQuantites } from './types'
+
+export const getConfidenceQuantities =
+  (quantities: HealthConfidenceQuantites) => (confidence: Confidence) => {
+    const number = quantities?.[confidence.name] ?? 0
+
+    return {
+      ...confidence,
+      quantity: number,
+    }
+  }
 
 export const confidenceTexts: Confidence[] = [
   {

@@ -49,28 +49,16 @@ const Board = ({
       >
         {title}
       </Text>
-      {isLoading ? (
-        <Text
-          textTransform={uppercase ? 'uppercase' : 'initial'}
-          fontSize={fontSizeInfo?.number}
-          lineHeight="1"
-          fontWeight={600}
-          color={color ?? 'brand.500'}
-          opacity={0.2}
-        >
-          -
-        </Text>
-      ) : (
-        <Text
-          textTransform={uppercase ? 'uppercase' : 'initial'}
-          fontSize={fontSizeInfo?.number}
-          lineHeight="1"
-          fontWeight={600}
-          color={color ?? 'brand.500'}
-        >
-          {number}
-        </Text>
-      )}
+      <Text
+        textTransform={uppercase ? 'uppercase' : 'initial'}
+        fontSize={fontSizeInfo?.number}
+        lineHeight="1"
+        fontWeight={600}
+        color={color ?? 'brand.500'}
+        {...(isLoading ? { opacity: 0.2 } : {})}
+      >
+        {isLoading ? '-' : number}
+      </Text>
     </Flex>
   )
 }

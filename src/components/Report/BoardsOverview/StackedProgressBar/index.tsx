@@ -2,7 +2,8 @@ import { Flex, StyleProps, Box } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 
-import { HealthConfidenceQuantites } from '../KeyResultConfidences/index'
+import { getConfidenceQuantities } from '../constants'
+import { Confidence, HealthConfidenceQuantites } from '../types'
 
 import { StackedProgressBarSkeleton } from './skeleton'
 
@@ -13,11 +14,6 @@ interface StackedProgressBarProperties extends StyleProps {
   isLoading?: boolean
 }
 
-export interface Confidence {
-  name: 'highConfidence' | 'mediumConfidence' | 'lowConfidence' | 'barrier'
-  color: string
-  bg: string
-}
 function percentage(partialValue: number, totalValue: number) {
   return `${((100 * partialValue) / totalValue).toFixed(0)}%`
 }
@@ -27,16 +23,6 @@ const StyledBarPiece = styled(Box)`
     content: '${({ confidenceNumber }) => confidenceNumber}';
   }
 `
-
-const getConfidenceQuantities =
-  (quantities: HealthConfidenceQuantites) => (confidence: Confidence) => {
-    const number = quantities?.[confidence.name] ?? 0
-
-    return {
-      ...confidence,
-      quantity: number,
-    }
-  }
 
 const StackedProgressBar = ({
   isLoading,
