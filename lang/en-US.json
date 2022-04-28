@@ -275,6 +275,10 @@
     "defaultMessage": "Gender of first user",
     "description": "The user gender while creating a new workspace"
   },
+  "3xZZCI": {
+    "defaultMessage": "Expected: {progress}%",
+    "description": "Message to show the expetected progress of the project"
+  },
   "44uWtn": {
     "defaultMessage": "A rounded icon with a line chart in the center",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -478,6 +482,10 @@
   "9lxU9H": {
     "defaultMessage": "Write {keyword} to confirm the deletion",
     "description": "This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource"
+  },
+  "9O5Xaa": {
+    "defaultMessage": "Your team doesn't have annual OKRs",
+    "description": "Message to show when there are no summary results"
   },
   "9OSi6W": {
     "defaultMessage": "End date",
@@ -747,6 +755,10 @@
     "defaultMessage": "by {author}",
     "description": "This message displays the latest report author for a given component"
   },
+  "eG8Ohg": {
+    "defaultMessage": "Annual OKRs {year}",
+    "description": "The summary title for the yearly OKRs"
+  },
   "eI6jYw": {
     "defaultMessage": "No information provided",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
@@ -770,6 +782,10 @@
   "eVsyB5": {
     "defaultMessage": "Email",
     "description": "The label of the email field in the create user form"
+  },
+  "EvtBM8": {
+    "defaultMessage": "Progress made this week",
+    "description": "This message is displayed weekly progress tag"
   },
   "eYhGZW": {
     "defaultMessage": "No option available",
@@ -1099,6 +1115,10 @@
     "defaultMessage": "Explore previous cycles",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
   },
+  "Jc/lcm": {
+    "defaultMessage": "Expected progress: {progress}%",
+    "description": "The tooltip content for the projected progress thumb"
+  },
   "jCjr1X": {
     "defaultMessage": "Please complete the mandatory fields to save this key result.",
     "description": "This message appears in an error toast after the users tries to create a key-result but there are some validation errors in the form"
@@ -1382,6 +1402,10 @@
   "ND5T6U": {
     "defaultMessage": "Up arrow. By clicking on it you close the selection menu",
     "description": "This is the desc attribute of our chevron up icon. It is used by screen readers"
+  },
+  "nEQaGP": {
+    "defaultMessage": "Quarterly OKRs {quarter}",
+    "description": "The summery title for the quarterly OKRs"
   },
   "nfdvr1": {
     "defaultMessage": "Expected",
@@ -1847,6 +1871,10 @@
     "defaultMessage": "Many layers icon, one over another",
     "description": "The alternative text explaining our stack icon"
   },
+  "ucALDM": {
+    "defaultMessage": "Team Ranking for {quarter}",
+    "description": "Title to show on the team ranking page"
+  },
   "ui441M": {
     "defaultMessage": "Rounded corners square icon with a pencil inside",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
@@ -2015,6 +2043,10 @@
     "defaultMessage": "Last name",
     "description": "The user last name input placeholder while creating a new workspace"
   },
+  "xe74UT": {
+    "defaultMessage": "In OKRs, the general rule is to aim for a progress of at least 70%. To achieve this by the end of the cycle, the current progress is expected to be at {progress}%.",
+    "description": "Tooltip message to show when hovering the help icon on projected progress"
+  },
   "XEey8C": {
     "defaultMessage": "Drag to the new value to start a new check-in",
     "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
@@ -2082,6 +2114,10 @@
   "Y1oyYG": {
     "defaultMessage": "Up arrow icon indicating that progress has increased",
     "description": "This desc message explains the increase icon for screen readers"
+  },
+  "YETxgV": {
+    "defaultMessage": "In OKRs, the general rule is to aim for a progress of at least 70%. To achieve this by the end of the cycle, the current progress is expected to be at {progress}%.",
+    "description": "Tooltip message to show when hovering the help icon on projected progress"
   },
   "yfhIM+": {
     "defaultMessage": "Cancel",
@@ -2208,7 +2244,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-04-07T13:50:20Z",
+    "defaultMessage": "2022-04-26T19:44:25Z",
     "description": null
   }
 }

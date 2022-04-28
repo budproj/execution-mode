@@ -8,6 +8,9 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
           title
           format
           type
+          delta{
+            progress
+          }
           goal
           initialValue
           status {
