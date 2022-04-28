@@ -6,7 +6,9 @@ import omitBy from 'lodash/omitBy'
 import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
+import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedByUser/queries.gql'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
+import accordionItemPanelQuery from 'src/components/Objective/Accordion/Item/Panel/queries.gql'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
@@ -68,6 +70,10 @@ const CheckInForm = ({
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
         dispatchEvent({})
       },
+      refetchQueries: [
+        activeAndOwnedByUserQuery.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
+        accordionItemPanelQuery.GET_OBJECTIVE_KEY_RESULTS,
+      ],
     },
   )
 
