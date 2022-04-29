@@ -1,4 +1,4 @@
-import { Box, Flex } from '@chakra-ui/react'
+import { Box, Flex, StyleProps } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -11,7 +11,7 @@ import { confidenceTexts, getConfidenceQuantities } from '../constants'
 import messages from '../messages'
 import { HealthConfidenceQuantites } from '../types'
 
-export interface BoardsOverviewProperties {
+export interface BoardsOverviewProperties extends StyleProps {
   quantities: HealthConfidenceQuantites
   isLoading?: boolean
 }

@@ -35,7 +35,6 @@ const Board = ({
       alignItems="center"
       justifyContent="center"
       bg={bg}
-      shadow="for-background.light"
       paddingY="18"
       {...rest}
     >
