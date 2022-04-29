@@ -5,8 +5,8 @@ type DashboardKeyResultsModalMessage = 'modalTitle'
 export default defineMessages<DashboardKeyResultsModalMessage>({
   modalTitle: {
     defaultMessage:
-      '{confidence, select, roadblock {All key results with {confidence}} other {All {confidence} key results}}',
-    id: 'Tp/cz3',
+      '{confidence, select, roadblock {Todos os resultados-chave {confidence}} other {Todos os resultados-chave de {confidence}}}',
+    id: 'fv5OeR',
     description: 'The title for the dashboard key results modal',
   },
 })
