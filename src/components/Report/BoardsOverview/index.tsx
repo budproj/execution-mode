@@ -32,8 +32,12 @@ const BoardsOverview = ({ ...rest }) => {
       </Flex>
 
       {krHealthStatus && (
-        // eslint-disable-next-line unicorn/no-useless-undefined
-        <KeyResultListingModal isOpen onClose={() => setKrHealthStatus(undefined)} />
+        <KeyResultListingModal
+          isOpen
+          krHealthStatus={krHealthStatus}
+          // eslint-disable-next-line unicorn/no-useless-undefined
+          onClose={() => setKrHealthStatus(undefined)}
+        />
       )}
     </>
   )

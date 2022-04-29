@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-import { Confidence } from 'src/components/Report/BoardsOverview/KeyResultConfidences'
+import { Confidence } from 'src/components/Report/BoardsOverview/KeyResultConfidences/types'
 
 import { PREFIX } from './constants'
 
