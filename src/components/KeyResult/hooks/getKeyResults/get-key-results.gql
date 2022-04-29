@@ -9,6 +9,10 @@ query GET_KEY_RESULTS {
           goal
           format
           type
+          delta {
+            progress
+            confidence
+          }
           team {
             name
           }
