@@ -4,9 +4,9 @@ query GET_HEALTH_CONFIDENCE_QUANTITIES {
       quantities {
         keyResultsQuantity
         objectivesQuantity
-        highConfidence
-        mediumConfidence
-        lowConfidence
+        high
+        medium
+        low
         barrier
       }
     }

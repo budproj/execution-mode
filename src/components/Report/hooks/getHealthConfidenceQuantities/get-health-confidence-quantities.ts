@@ -12,9 +12,9 @@ interface GetHealthConfidencesQuantities {
 const emptyQuantities: Quantities = {
   keyResultsQuantity: 0,
   objectivesQuantity: 0,
-  highConfidence: 0,
-  mediumConfidence: 0,
-  lowConfidence: 0,
+  high: 0,
+  medium: 0,
+  low: 0,
   barrier: 0,
 }
 

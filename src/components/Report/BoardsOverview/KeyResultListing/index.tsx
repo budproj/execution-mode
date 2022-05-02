@@ -8,7 +8,7 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useMemo, useEffect } from 'react'
+import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 
 import KeyResultList from 'src/components/KeyResult/List'
@@ -17,14 +17,11 @@ import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
 import { useGetKeyResults } from 'src/components/KeyResult/hooks'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 
-import { Confidence } from '../KeyResultConfidences/types'
-
 import messages from './messages'
-import { ConfidenceMapper } from './types'
 
 export interface BoardsOverviewProperties {
   isOpen: boolean
-  krHealthStatus: Confidence['name']
+  confidence: number
   onClose: () => void
 }
 
@@ -35,11 +32,11 @@ const StyledModal = styled(ModalContent)`
 
 export const KeyResultListingModal = ({
   isOpen,
-  krHealthStatus,
+  confidence,
   onClose,
 }: BoardsOverviewProperties) => {
   const { data, loading } = useGetKeyResults()
-  const [currentConfidenceTag, setCurrentConfidenceTag] = useConfidenceTag()
+  const [currentConfidenceTag] = useConfidenceTag(confidence)
   const intl = useIntl()
 
   const keyResultIds = useMemo(() => data.map(({ id }) => id), [data])
@@ -47,11 +44,6 @@ export const KeyResultListingModal = ({
     () => currentConfidenceTag.messages.long.toLowerCase(),
     [currentConfidenceTag],
   )
-
-  useEffect(() => {
-    const confidence = ConfidenceMapper[krHealthStatus]
-    setCurrentConfidenceTag(confidence)
-  }, [krHealthStatus, setCurrentConfidenceTag])
 
   return (
     <Modal isOpen={isOpen} size="100%" onClose={onClose}>

@@ -10,11 +10,14 @@ import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQu
 import Board from './Board'
 import KeyResultConfidence from './KeyResultConfidences'
 import { KeyResultListingModal } from './KeyResultListing'
+import { ConfidenceMapper } from './KeyResultListing/types'
 import messages from './messages'
 
 const BoardsOverview = ({ ...rest }) => {
   const { data, loading } = useGetHealthConfidenceQuantities()
   const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
+  const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
+
   const intl = useIntl()
 
   return (
@@ -35,7 +38,7 @@ const BoardsOverview = ({ ...rest }) => {
       {krHealthStatus && (
         <KeyResultListingModal
           isOpen
-          krHealthStatus={krHealthStatus}
+          confidence={confidence}
           // eslint-disable-next-line unicorn/no-useless-undefined
           onClose={() => setKrHealthStatus(undefined)}
         />

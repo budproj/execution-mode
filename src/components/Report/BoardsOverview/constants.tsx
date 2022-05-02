@@ -12,17 +12,17 @@ export const getConfidenceQuantities =
 
 export const confidenceTexts: Confidence[] = [
   {
-    name: 'highConfidence',
+    name: 'high',
     color: 'green.500',
     bg: 'green.50',
   },
   {
-    name: 'mediumConfidence',
+    name: 'medium',
     color: 'yellow.600',
     bg: 'yellow.100',
   },
   {
-    name: 'lowConfidence',
+    name: 'low',
     color: 'red.500',
     bg: 'red.50',
   },

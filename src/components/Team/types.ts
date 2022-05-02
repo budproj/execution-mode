@@ -39,8 +39,8 @@ export interface HealthConfidenceQuantities {
 export interface Quantities {
   keyResultsQuantity: number
   objectivesQuantity: number
-  highConfidence: number
-  mediumConfidence: number
-  lowConfidence: number
+  high: number
+  medium: number
+  low: number
   barrier: number
 }

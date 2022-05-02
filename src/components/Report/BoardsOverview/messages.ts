@@ -3,9 +3,9 @@ import { defineMessages } from 'react-intl'
 type CreateFormMessage =
   | 'objectivesTitle'
   | 'keyResultsTitle'
-  | 'highConfidence'
-  | 'mediumConfidence'
-  | 'lowConfidence'
+  | 'high'
+  | 'medium'
+  | 'low'
   | 'barrier'
 
 export default defineMessages<CreateFormMessage>({
@@ -19,17 +19,17 @@ export default defineMessages<CreateFormMessage>({
     id: 'GyV44g',
     description: 'Title of key results',
   },
-  highConfidence: {
+  high: {
     defaultMessage: 'Alta confiança',
     id: 'ub6rlW',
     description: 'Title of high confidence health strategy',
   },
-  mediumConfidence: {
+  medium: {
     defaultMessage: 'Média confiança',
     id: 'Wa22G2',
     description: 'Title of medium confidence health strategy',
   },
-  lowConfidence: {
+  low: {
     defaultMessage: 'Baixa confiança',
     id: 'gXiIKg',
     description: 'Title of low confidence health strategy',
