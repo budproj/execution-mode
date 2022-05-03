@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl'
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { CADENCE } from 'src/components/Cycle/constants'
+import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import BoardsOverview from 'src/components/Report/BoardsOverview'
 import { OverviewSummary } from 'src/components/Report/OverviewSummary'
 import TeamsOverview from 'src/components/Report/TeamsOverview'
@@ -53,6 +54,8 @@ const DashboardPage = () => {
 
       <BoardsOverview />
       <TeamsOverview mt="36px" quarter={quarter?.period} />
+
+      <KeyResultSingleDrawer />
     </PageContent>
   )
 }

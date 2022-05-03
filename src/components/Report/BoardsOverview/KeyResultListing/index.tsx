@@ -10,12 +10,15 @@ import {
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
 import { useGetKeyResults } from 'src/components/KeyResult/hooks'
+import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
+import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import messages from './messages'
 
@@ -32,6 +35,7 @@ const StyledModal = styled(ModalContent)`
 
 const StyledTableWrapper = styled(Flex)`
   max-height: calc(100vh - 200px);
+  border-radius: 15px;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -52,6 +56,7 @@ export const KeyResultListingModal = ({
   onClose,
 }: BoardsOverviewProperties) => {
   const { data, loading } = useGetKeyResults()
+  const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const [currentConfidenceTag] = useConfidenceTag(confidence)
   const intl = useIntl()
 
@@ -61,8 +66,10 @@ export const KeyResultListingModal = ({
     [currentConfidenceTag],
   )
 
+  const onLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
+
   return (
-    <Modal isOpen={isOpen} size="100%" onClose={onClose}>
+    <Modal isOpen={isOpen} size="100%" autoFocus={false} onClose={onClose}>
       <ModalOverlay />
       <StyledModal>
         <ModalBody p="40px">
@@ -119,6 +126,7 @@ export const KeyResultListingModal = ({
                   withConfidenceTag: true,
                 },
               }}
+              onLineClick={onLineClick}
             />
           </StyledTableWrapper>
         </ModalBody>
