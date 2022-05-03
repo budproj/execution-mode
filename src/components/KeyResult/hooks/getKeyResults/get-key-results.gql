@@ -17,6 +17,7 @@ query GET_KEY_RESULTS($confidence: String) {
                   confidence
                 }
                 team {
+                  id
                   name
                 }
                 objective {
