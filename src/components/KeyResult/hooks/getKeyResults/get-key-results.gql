@@ -3,7 +3,7 @@ query GET_KEY_RESULTS($confidence: String) {
     companies {
       edges {
         node {
-          keyResults(confidence: $confidence) {
+          keyResults(first: 1000, confidence: $confidence) {
             edges {
               node {
                 id
