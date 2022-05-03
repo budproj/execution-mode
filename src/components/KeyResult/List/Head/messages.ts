@@ -118,8 +118,8 @@ export default defineMessages<KeyResultListHeadMessage>({
   },
 
   listHeadTeam: {
-    defaultMessage: 'Team',
-    id: 'yROxQI',
+    defaultMessage: 'Time',
+    id: 'UYwpSr',
     description:
       'This message is displayed as the column header for the key-result table in the team column',
   },
