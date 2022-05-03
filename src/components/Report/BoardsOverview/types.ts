@@ -2,6 +2,7 @@ export interface Confidence {
   name: 'high' | 'medium' | 'low' | 'barrier'
   color: string
   bg: string
+  quantity?: number
 }
 
 export interface HealthConfidenceQuantites {
