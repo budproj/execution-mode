@@ -39,7 +39,7 @@ const KeyResultListBodyColumnObjective = ({
             isLoaded={isObjectiveLoaded}
             {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
           >
-            <Text color="gray.300">{objective?.title}</Text>
+            <Text color="new-gray.700">{objective?.title}</Text>
           </Skeleton>
         </Box>
       </Flex>
