@@ -31,11 +31,11 @@ export interface BoardsOverviewProperties {
 const StyledModal = styled(ModalContent)`
   width: 90%;
   max-width: 1200px;
+  border-radius: 15px;
 `
 
 const StyledTableWrapper = styled(Flex)`
   max-height: calc(100vh - 200px);
-  border-radius: 15px;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
