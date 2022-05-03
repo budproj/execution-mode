@@ -73,9 +73,12 @@ export const KeyResultListingModal = ({
       <ModalOverlay />
       <StyledModal>
         <ModalBody p="40px">
-          <Flex mb={6} justifyContent="space-between" alignItems="center">
+          <Flex mb={12} justifyContent="space-between" alignItems="center">
             <Heading color="new-gray.900" fontWeight={500} as="h3" size="lg">
-              {intl.formatMessage(messages.modalTitle, { confidence: confidenceText })}
+              {intl.formatMessage(messages.modalTitle, {
+                confidence: confidence === -1 ? 'barrier' : confidence,
+                confidencetext: confidenceText,
+              })}
             </Heading>
             <ModalCloseButton
               bg="black.100"
