@@ -82,6 +82,7 @@ export const KeyResultListingModal = ({
               color="new-gray.600"
               borderRadius="50%"
               position="relative"
+              top="0"
             />
           </Flex>
 
