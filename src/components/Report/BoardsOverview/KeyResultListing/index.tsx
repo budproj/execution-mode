@@ -118,9 +118,6 @@ export const KeyResultListingModal = ({
                 [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
                   withConfidenceTag: true,
                 },
-                [KEY_RESULT_LIST_COLUMN.OWNER]: {
-                  justifyContent: 'flex-end',
-                },
               }}
             />
           </StyledTableWrapper>
