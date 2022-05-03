@@ -15,7 +15,8 @@ interface StackedProgressBarProperties extends StyleProps {
 }
 
 function percentage(partialValue: number, totalValue: number) {
-  return `${((100 * partialValue) / totalValue).toFixed(0)}%`
+  const percentage = (partialValue * 100) / totalValue
+  return `${percentage < 1 ? Math.ceil(percentage) : percentage.toFixed(0)}%`
 }
 
 const StyledBarPiece = styled(Box)`
