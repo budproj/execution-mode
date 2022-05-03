@@ -9,7 +9,7 @@ import Board from '../Board'
 import StackedProgressBar from '../StackedProgressBar'
 import { confidenceTexts, getConfidenceQuantities } from '../constants'
 import messages from '../messages'
-import { HealthConfidenceQuantites } from '../types'
+import { Confidence, HealthConfidenceQuantites } from '../types'
 
 export interface BoardsOverviewProperties extends StyleProps {
   quantities: HealthConfidenceQuantites
@@ -24,6 +24,12 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
     () => confidenceTexts.map(getConfidenceQuantities(quantities)),
     [quantities],
   )
+
+  const onClick = (confidence: Confidence) => {
+    if (confidence.quantity) {
+      setKrHealthStatus(confidence.name)
+    }
+  }
 
   return (
     <Flex borderRadius="9px" bg="white" width="100%" paddingY={15} paddingX={18} {...rest}>
@@ -49,8 +55,8 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
                 number={confidence.quantity}
                 bg={confidence.bg}
                 paddingX={30}
-                cursor="pointer"
-                onClick={() => setKrHealthStatus(confidence.name)}
+                cursor={confidence.quantity > 0 ? 'pointer' : 'auto'}
+                onClick={() => onClick(confidence)}
               />
             )
           })}
