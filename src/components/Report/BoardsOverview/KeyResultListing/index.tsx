@@ -65,7 +65,7 @@ export const KeyResultListingModal = ({
     <Modal isOpen={isOpen} size="100%" onClose={onClose}>
       <ModalOverlay />
       <StyledModal>
-        <ModalBody>
+        <ModalBody p="40px">
           <Flex mb={6} justifyContent="space-between" alignItems="center">
             <Heading color="new-gray.900" fontWeight={500} as="h3" size="lg">
               {intl.formatMessage(messages.modalTitle, { confidence: confidenceText })}
