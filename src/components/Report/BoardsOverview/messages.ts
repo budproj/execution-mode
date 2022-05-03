@@ -7,6 +7,8 @@ type CreateFormMessage =
   | 'medium'
   | 'low'
   | 'barrier'
+  | 'highConfidenceTooltip'
+  | 'confidenceWithoutKeyResultsTooltip'
 
 export default defineMessages<CreateFormMessage>({
   objectivesTitle: {
@@ -38,5 +40,16 @@ export default defineMessages<CreateFormMessage>({
     defaultMessage: 'Com barreira',
     id: '7xrfSX',
     description: 'Title of barrier health strategy',
+  },
+  highConfidenceTooltip: {
+    defaultMessage:
+      'Tudo certo por aqui! Navegue pelos times para explorar os resultados-chave com alta confiança.',
+    id: 'y18Ymm',
+    description: 'Tooltip content for high confidence health strategy box',
+  },
+  confidenceWithoutKeyResultsTooltip: {
+    defaultMessage: 'Não existem resultados-chave com esse Nível de confiança.',
+    id: 'lWcm/y',
+    description: 'Tooltip content for health strategy box without key results',
   },
 })

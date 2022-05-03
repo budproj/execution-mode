@@ -30,7 +30,8 @@ const BoardsOverview = ({ ...rest }) => {
           paddingX={55}
           size="lg"
           color="new-gray.800"
-          bgHover="new-gray.800"
+          bgColor="white"
+          bgHover="white"
           shadow="for-background.light"
         />
         <KeyResultConfidence isLoading={loading} quantities={data} shadow="for-background.light" />

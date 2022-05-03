@@ -3,6 +3,7 @@ import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
 
 import Board from '../Board'
@@ -49,20 +50,32 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
         <Flex justifyContent="space-between" gridGap="24px">
           {confidencesToRender.map((confidence) => {
             return (
-              <Board
+              <TooltipWithDelay
                 key={confidence.name}
-                uppercase
-                isLoading={isLoading}
-                flex="1"
-                title={intl.formatMessage(messages[`${confidence.name}`])}
-                color={confidence.color}
-                number={confidence.quantity}
-                bgColor={confidence.bg}
-                bgHover={confidence.bgHover}
-                paddingX={30}
-                cursor={confidence.isListable ? 'pointer' : 'auto'}
-                onClick={() => onClick(confidence)}
-              />
+                isDisabled={confidence.isListable}
+                label={intl.formatMessage(
+                  messages[
+                    confidence.name === 'high'
+                      ? 'highConfidenceTooltip'
+                      : 'confidenceWithoutKeyResultsTooltip'
+                  ],
+                )}
+              >
+                <Box flex="1">
+                  <Board
+                    uppercase
+                    isLoading={isLoading}
+                    title={intl.formatMessage(messages[`${confidence.name}`])}
+                    color={confidence.color}
+                    number={confidence.quantity}
+                    bgColor={confidence.bg}
+                    bgHover={confidence.bgHover}
+                    paddingX={30}
+                    cursor={confidence.isListable ? 'pointer' : 'auto'}
+                    onClick={() => onClick(confidence)}
+                  />
+                </Box>
+              </TooltipWithDelay>
             )
           })}
         </Flex>
