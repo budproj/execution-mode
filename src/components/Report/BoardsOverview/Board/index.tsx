@@ -1,8 +1,18 @@
-import { Flex, StyleProps, Text } from '@chakra-ui/react'
+import { Flex, StyleProps, Text, useToken } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React from 'react'
+
+const StyledFlex = styled(Flex)`
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: ${({ bgHover }) => bgHover}};
+  }
+`
 
 interface BoardProperties extends StyleProps {
   title: string
+  bgHover: string
   number?: string | number
   uppercase?: boolean
   size?: 'lg' | 'md'
@@ -13,7 +23,7 @@ interface BoardProperties extends StyleProps {
 const Board = ({
   number,
   title,
-  bg = 'white',
+  bgHover = 'white',
   color,
   uppercase = false,
   size = 'md',
@@ -25,16 +35,17 @@ const Board = ({
     ['md', { title: '0.875rem', number: '2.25rem' }],
   ])
 
+  const [bgHoverColor]: string[] = useToken('colors', [bgHover])
   const fontSizeInfo = sizes.get(size)
 
   return (
-    <Flex
+    <StyledFlex
       borderRadius={9}
       flexDir="column"
       textAlign="center"
       alignItems="center"
       justifyContent="center"
-      bg={bg}
+      bgHover={bgHoverColor}
       paddingY="18"
       {...rest}
     >
@@ -57,7 +68,7 @@ const Board = ({
       >
         {isLoading ? '-' : number}
       </Text>
-    </Flex>
+    </StyledFlex>
   )
 }
 

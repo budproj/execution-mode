@@ -10,25 +10,40 @@ export const getConfidenceQuantities =
     }
   }
 
+export const getIsListable = (confidence: Confidence): Confidence => {
+  const isEmpty = confidence.quantity === 0
+  const isHighConfidence = confidence.name === 'high'
+  const isListable = !isEmpty && !isHighConfidence
+
+  return {
+    ...confidence,
+    isListable,
+  }
+}
+
 export const confidenceTexts: Confidence[] = [
   {
     name: 'high',
     color: 'green.500',
     bg: 'green.50',
+    bgHover: 'green.50',
   },
   {
     name: 'medium',
     color: 'yellow.600',
     bg: 'yellow.100',
+    bgHover: 'yellow.200',
   },
   {
     name: 'low',
     color: 'red.500',
     bg: 'red.50',
+    bgHover: 'red.100',
   },
   {
     name: 'barrier',
     color: 'purple.500',
     bg: 'purple.50',
+    bgHover: 'purple.100',
   },
 ]

@@ -7,7 +7,7 @@ import { krHealthStatusAtom } from 'src/state/recoil/key-result'
 
 import Board from '../Board'
 import StackedProgressBar from '../StackedProgressBar'
-import { confidenceTexts, getConfidenceQuantities } from '../constants'
+import { confidenceTexts, getConfidenceQuantities, getIsListable } from '../constants'
 import messages from '../messages'
 import { Confidence, HealthConfidenceQuantites } from '../types'
 
@@ -21,12 +21,15 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
   const setKrHealthStatus = useSetRecoilState(krHealthStatusAtom)
 
   const confidencesToRender = useMemo(
-    () => confidenceTexts.map(getConfidenceQuantities(quantities)),
+    () =>
+      confidenceTexts
+        .map(getConfidenceQuantities(quantities))
+        .map((confidence) => getIsListable(confidence)),
     [quantities],
   )
 
   const onClick = (confidence: Confidence) => {
-    if (confidence.quantity) {
+    if (confidence.isListable) {
       setKrHealthStatus(confidence.name)
     }
   }
@@ -38,6 +41,7 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
         title={intl.formatMessage(messages.keyResultsTitle)}
         number={quantities?.keyResultsQuantity}
         bg="new-gray.300"
+        bgHover="new-gray.300"
         minWidth="175px"
         size="lg"
       />
@@ -53,9 +57,10 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
                 title={intl.formatMessage(messages[`${confidence.name}`])}
                 color={confidence.color}
                 number={confidence.quantity}
-                bg={confidence.bg}
+                bgColor={confidence.bg}
+                bgHover={confidence.bgHover}
                 paddingX={30}
-                cursor={confidence.quantity > 0 ? 'pointer' : 'auto'}
+                cursor={confidence.isListable ? 'pointer' : 'auto'}
                 onClick={() => onClick(confidence)}
               />
             )

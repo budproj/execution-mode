@@ -2,7 +2,9 @@ export interface Confidence {
   name: 'high' | 'medium' | 'low' | 'barrier'
   color: string
   bg: string
+  bgHover: string
   quantity?: number
+  isListable?: boolean
 }
 
 export interface HealthConfidenceQuantites {
