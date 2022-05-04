@@ -184,7 +184,7 @@
     "description": "This label is displayed if the date difference is less than 1 hour"
   },
   "1HBRw6": {
-    "defaultMessage": "No recent update",
+    "defaultMessage": "No check-in yet",
     "description": "This label is displayed if we do not have any update date to display"
   },
   "1IAVGz": {
@@ -406,6 +406,10 @@
   "7uQQbf": {
     "defaultMessage": "Name of the annual cycle",
     "description": "The label of the company yearly period while creating a new workspace"
+  },
+  "7xrfSX": {
+    "defaultMessage": "Roadblock",
+    "description": "Title of barrier health strategy"
   },
   "7Yw26b": {
     "defaultMessage": "Select the year",
@@ -843,6 +847,10 @@
     "defaultMessage": "You will lose every check-in and comment made up until this point.",
     "description": "This message is used as the description in our first dialog while removing a key-result"
   },
+  "fv5OeR": {
+    "defaultMessage": "{confidence, select, roadblock {All key results with a {confidence}} other {All key results with {confidence}}}",
+    "description": "The title for the dashboard key results modal"
+  },
   "FVnpVq": {
     "defaultMessage": "An icon of an arrow pointing to the right",
     "description": "The alternative text explaining our arrow right icon"
@@ -854,6 +862,10 @@
   "fwIpqP": {
     "defaultMessage": "View and update your profile preferences",
     "description": "The page description that is displayed in Google and screen readers for the my profile page"
+  },
+  "FWsiRf": {
+    "defaultMessage": "{confidence, select, barrier {All key results with a {confidencetext}} other {All key results with {confidencetext}}}",
+    "description": "The title for the dashboard key results modal"
   },
   "fx39XE": {
     "defaultMessage": "Help",
@@ -938,6 +950,14 @@
   "gu4aCE": {
     "defaultMessage": "Annual",
     "description": "This text is used as prefix for our yearly cadences"
+  },
+  "gXiIKg": {
+    "defaultMessage": "Low confidence",
+    "description": "Title of low confidence health strategy"
+  },
+  "GyV44g": {
+    "defaultMessage": "Key Results",
+    "description": "Title of key results"
   },
   "GzrbYC": {
     "defaultMessage": "Safety confirmation",
@@ -1315,12 +1335,16 @@
     "defaultMessage": "Language",
     "description": "This message is the label of our locale switcher in the settings page"
   },
+  "lWcm/y": {
+    "defaultMessage": "There are no key results with this confidence level.",
+    "description": "Tooltip content for health strategy box without key results"
+  },
   "M0RYZa": {
     "defaultMessage": "Save",
     "description": "This is a button label displayed inside the insert key-result drawer. This is the second button"
   },
   "M2QJC/": {
-    "defaultMessage": "No check-in",
+    "defaultMessage": "Last check-in",
     "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
   },
   "m4igWj": {
@@ -1643,6 +1667,10 @@
     "defaultMessage": "Quarterly",
     "description": "This text is used as prefix for our quarterly cadences"
   },
+  "R/9LlP": {
+    "defaultMessage": "Objectives",
+    "description": "Title of objectives"
+  },
   "r1mfc1": {
     "defaultMessage": "Personal Information",
     "description": "This title is displayed as the heading of the personal informations section in our user account settings page"
@@ -1839,6 +1867,10 @@
     "defaultMessage": "My account",
     "description": "MainAppBar user menu first item option"
   },
+  "Tp/cz3": {
+    "defaultMessage": "{confidence, select, roadblock {All key results with a {confidence}} other {All key results with {confidence}}}",
+    "description": "The title for the dashboard key results modal"
+  },
   "txi+kN": {
     "defaultMessage": "Language",
     "description": "The user locale input placeholder while creating a new workspace"
@@ -1866,6 +1898,10 @@
   "u7Yaxx": {
     "defaultMessage": "Owner",
     "description": "The text of the table head related to the Owner column"
+  },
+  "ub6rlW": {
+    "defaultMessage": "High confidence",
+    "description": "Title of high confidence health strategy"
   },
   "UBruoq": {
     "defaultMessage": "Many layers icon, one over another",
@@ -1902,6 +1938,10 @@
   "uXQE/x": {
     "defaultMessage": "View, through the progress bars, the general progress of all companies areas, and related teams and sub-teams.",
     "description": "The page description that is displayed in Google and screen readers"
+  },
+  "UYwpSr": {
+    "defaultMessage": "Team",
+    "description": "This message is displayed as the column header for the key-result table in the team column"
   },
   "UZnhGI": {
     "defaultMessage": "Step 1",
@@ -1978,6 +2018,10 @@
   "W9swHV": {
     "defaultMessage": "Settings",
     "description": "This tooltip is displayed when the user hovers the settings icon"
+  },
+  "Wa22G2": {
+    "defaultMessage": "Medium Confidence",
+    "description": "Title of medium confidence health strategy"
   },
   "waPxPB": {
     "defaultMessage": "First user's language",
@@ -2111,6 +2155,10 @@
     "defaultMessage": "Name",
     "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
   },
+  "y18Ymm": {
+    "defaultMessage": "All is well here! Navigate through team pages to explore key results with high confidence.",
+    "description": "Tooltip content for high confidence health strategy box"
+  },
   "Y1oyYG": {
     "defaultMessage": "Up arrow icon indicating that progress has increased",
     "description": "This desc message explains the increase icon for screen readers"
@@ -2134,6 +2182,10 @@
   "yq7/PT": {
     "defaultMessage": "Support content",
     "description": "MainAppBar user menu second item option"
+  },
+  "yROxQI": {
+    "defaultMessage": "Team",
+    "description": "This message is displayed as the column header for the key-result table in the team column"
   },
   "ytvOyM": {
     "defaultMessage": "My Key Results",
@@ -2244,7 +2296,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-04-26T19:44:25Z",
+    "defaultMessage": "2022-05-04T16:31:10Z",
     "description": null
   }
 }
