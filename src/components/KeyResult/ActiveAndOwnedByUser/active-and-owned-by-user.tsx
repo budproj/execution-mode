@@ -13,17 +13,19 @@ import queries from './queries.gql'
 import KeyResultActiveAndOwnedByUserSkeleton from './skeleton'
 
 export interface KeyResultActiveAndOwnedByUserProperties {
+  userID: string
   onLineClick?: (id: KeyResult['id']) => void
 }
 
 export interface GetKeyResultActiveAndOwnedByUserWithBindingQuery {
-  me: {
+  user: {
     keyResults: GraphQLConnection<KeyResult>
   }
 }
 
 const KeyResultActiveAndOwnedByUser = ({
   onLineClick,
+  userID,
 }: KeyResultActiveAndOwnedByUserProperties) => {
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [keyResults, setKeyResultEdges, _, isLoaded] = useConnectionEdges<KeyResult>()
@@ -31,8 +33,11 @@ const KeyResultActiveAndOwnedByUser = ({
   useQuery<GetKeyResultActiveAndOwnedByUserWithBindingQuery>(
     queries.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
     {
+      variables: {
+        userID,
+      },
       onCompleted: (data) => {
-        setKeyResultEdges(data.me.keyResults.edges)
+        setKeyResultEdges(data.user.keyResults.edges)
       },
     },
   )
