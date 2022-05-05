@@ -14,15 +14,20 @@ import queries from './queries.gql'
 import { TaskSkeletons } from './skeletons'
 import Tasks from './tasks'
 
-const MyTasks = () => {
+interface MyTasksInterface {
+  userID: string
+}
+
+const MyTasks = ({ userID }: MyTasksInterface) => {
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
   const { onlyUnchecked } = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
   const [filteredKeyResults, setFilteredKeyResults] = useState([] as KeyResult[])
 
   const { refetch, loading } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
+    variables: { userID },
     onCompleted: (data) => {
-      setKeyResults(data.me.keyResults.edges)
+      setKeyResults(data.user.keyResults.edges)
       loadKeyResults(keyResults)
     },
   })

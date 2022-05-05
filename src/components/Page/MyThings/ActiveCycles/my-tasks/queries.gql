@@ -1,11 +1,11 @@
-query GET_KRS_WITH_MY_CHECKMARKS {
-  me {
+query GET_KRS_WITH_MY_CHECKMARKS($userID: ID) {
+  user(id: $userID) {
     keyResults(hasUserCheckMarks: true) {
       edges {
         node {
           id
           title
-          checkList(first: 1000, onlyAssignedToMe: true) {
+          checkList(first: 1000, userId: $userID) {
             edges {
               node {
                 id

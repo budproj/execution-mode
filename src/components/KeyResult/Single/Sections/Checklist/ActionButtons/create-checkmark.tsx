@@ -3,11 +3,13 @@ import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { Ref, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
 import { KeyResultCheckMark } from 'src/components/KeyResult/types'
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
+import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
 import { Feature } from '../../../../../../state/hooks/useEvent/feature'
@@ -51,9 +53,10 @@ export const CreateCheckMarkButton = ({
   const [isAdding, setIsAdding] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const intl = useIntl()
+  const userID = useRecoilValue(meAtom)
 
   const [createCheckMark] = useMutation(queries.CREATE_CHECK_MARK, {
-    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS],
+    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS, { variables: userID }],
     onCompleted: () => {
       if (onCreate) onCreate()
     },
