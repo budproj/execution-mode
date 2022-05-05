@@ -246,7 +246,13 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
         <HStack align="stretch" gap="40px" flex="1">
           <Box flexBasis="60%" maxWidth="60%">
             <Scrollbars>
-              <KeyResultsActiveAndOwnedByUser user={userData} onLineClick={handleLineClick} />
+              {userData?.id && (
+                <KeyResultsActiveAndOwnedByUser
+                  userID={userData.id}
+                  username={userData?.firstName}
+                  onLineClick={handleLineClick}
+                />
+              )}
             </Scrollbars>
           </Box>
 
@@ -268,9 +274,11 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
             <Divider mt="3.3rem" mb={6} borderColor="new-gray.400" opacity="1" />
 
             <Scrollbars style={{ maxHeight: '85%' }}>
-              <Box pr={6}>
-                <MyTasks userID={userData?.id ?? ''} username={userData?.firstName} />
-              </Box>
+              {userData?.id && (
+                <Box pr={6}>
+                  <MyTasks userID={userData.id} username={userData?.firstName} />
+                </Box>
+              )}
             </Scrollbars>
           </Box>
         </HStack>

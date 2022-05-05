@@ -12,13 +12,13 @@ import messages from './messages'
 
 export interface KeyResultActiveAndOwnedByUserCyclesListProperties {
   keyResults?: KeyResult[]
-  user?: User | undefined
+  username?: User['firstName'] | undefined
   onLineClick?: (id: KeyResult['id']) => void
 }
 
 const KeyResultActiveAndOwnedByUserCyclesList = ({
   keyResults,
-  user,
+  username,
   onLineClick,
 }: KeyResultActiveAndOwnedByUserCyclesListProperties) => {
   const keyResultsGroupedByCycle = groupBy(keyResults, 'objective.cycle.id')
@@ -26,7 +26,7 @@ const KeyResultActiveAndOwnedByUserCyclesList = ({
     data: keyResults[0].objective.cycle,
     keyResultIDs: keyResults.map((keyResult) => keyResult.id),
   }))
-  const labelMessage = user ? messages.userTasksEmptyStateMessage : messages.emptyStateLabel
+  const labelMessage = username ? messages.userTasksEmptyStateMessage : messages.emptyStateLabel
 
   return keyResults && keyResults.length > 0 ? (
     <>
@@ -41,10 +41,7 @@ const KeyResultActiveAndOwnedByUserCyclesList = ({
       ))}
     </>
   ) : (
-    <EmptyState
-      labelMessage={labelMessage}
-      messageTranslationOptions={{ username: user?.firstName }}
-    />
+    <EmptyState labelMessage={labelMessage} messageTranslationOptions={{ username }} />
   )
 }
 

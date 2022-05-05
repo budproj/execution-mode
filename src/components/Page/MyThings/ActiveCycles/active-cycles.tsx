@@ -67,7 +67,7 @@ const ActiveCyclesPage = () => {
       <HStack align="stretch" spacing="4rem" flex="1">
         <Box flexBasis="60%" maxWidth="60%">
           <Scrollbars>
-            <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
+            <KeyResultsActiveAndOwnedByUser userID={userID} onLineClick={handleLineClick} />
           </Scrollbars>
         </Box>
 
