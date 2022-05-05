@@ -269,7 +269,7 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
 
             <Scrollbars style={{ maxHeight: '85%' }}>
               <Box pr={6}>
-                <MyTasks username={userData?.firstName} />
+                <MyTasks userID={userData?.id ?? ''} username={userData?.firstName} />
               </Box>
             </Scrollbars>
           </Box>

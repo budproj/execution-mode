@@ -16,18 +16,20 @@ import { TaskSkeletons } from './skeletons'
 import Tasks from './tasks'
 
 interface UserTasksProperties {
+  userID: User['id']
   username?: User['firstName']
 }
 
-const MyTasks = ({ username }: UserTasksProperties) => {
+const MyTasks = ({ userID, username }: UserTasksProperties) => {
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
   const { onlyUnchecked } = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
   const [filteredKeyResults, setFilteredKeyResults] = useState([] as KeyResult[])
 
   const { refetch, loading } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
+    variables: { userID },
     onCompleted: (data) => {
-      setKeyResults(data.me.keyResults.edges)
+      setKeyResults(data.user.keyResults.edges)
       loadKeyResults(keyResults)
     },
   })

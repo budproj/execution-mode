@@ -13,7 +13,7 @@ import {
 import { Scrollbars } from 'rc-scrollbars'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
@@ -24,6 +24,7 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { TASK_STATUS } from 'src/components/Task/constants'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { myThingsTasksQuery } from 'src/state/recoil/task'
+import meAtom from 'src/state/recoil/user/me'
 
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
 
@@ -35,6 +36,7 @@ const ActiveCyclesPage = () => {
   const intl = useIntl()
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const setTasksQuery = useSetRecoilState(myThingsTasksQuery)
+  const userID = useRecoilValue(meAtom)
 
   const statesLabels = new Map([
     [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
@@ -165,7 +167,7 @@ const ActiveCyclesPage = () => {
             <Box pr={6}>
               <MyPersonalTasks />
               <Divider mt={6} mb={9} borderColor="new-gray.400" opacity="1" />
-              <MyTasks />
+              <MyTasks userID={userID} />
             </Box>
           </Scrollbars>
         </Box>
