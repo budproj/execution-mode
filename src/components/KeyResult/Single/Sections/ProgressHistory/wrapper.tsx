@@ -97,7 +97,6 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
       keyResultID,
     },
     onCompleted: (data) => {
-      console.log('tag')
       setProgressHistory(data?.keyResult?.progressHistory?.edges ?? [])
       setIsSynced(true)
     },

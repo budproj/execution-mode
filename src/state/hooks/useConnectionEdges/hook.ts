@@ -21,9 +21,10 @@ export const useConnectionEdges = <N extends GraphQLNode>(
   const nodes = useMemo(() => marshalEdges(edges), [edges])
 
   const update = useCallback(
-    (newEdges?: Array<GraphQLEdge<N>>) => {
+    (newEdges?: Array<GraphQLEdge<N>>): N[] => {
       setEdges(newEdges)
       if (!isLoaded) setIsLoaded(true)
+      return marshalEdges(newEdges)
     },
     [isLoaded, setEdges, setIsLoaded],
   )

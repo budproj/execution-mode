@@ -46,6 +46,7 @@ const KeyResultListHead = ({
     [KEY_RESULT_LIST_COLUMN.OWNER]: messages.listHeadOwner,
     [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]: messages.listHeadConfidenceLevelColor,
     [KEY_RESULT_LIST_COLUMN.ACTIONS]: messages.listHeadActions,
+    [KEY_RESULT_LIST_COLUMN.TEAM]: messages.listHeadTeam,
   }
 
   const columnWrappers = {
@@ -107,6 +108,7 @@ const KeyResultListHead = ({
       <Box>{children}</Box>
     ),
     [KEY_RESULT_LIST_COLUMN.ACTIONS]: ({ children }: BoxProps) => <Box>{children}</Box>,
+    [KEY_RESULT_LIST_COLUMN.TEAM]: ({ children }: BoxProps) => <Box>{children}</Box>,
   }
 
   return (

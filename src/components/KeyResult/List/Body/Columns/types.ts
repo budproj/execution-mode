@@ -6,6 +6,7 @@ import { KeyResultListBodyColumnKeyResultProperties } from './KeyResult/key-resu
 import { KeyResultListBodyColumnObjectiveProperties } from './Objective/objective'
 import { KeyResultListBodyColumnOwnerProperties } from './Owner/owner'
 import { KeyResultListBodyColumnProgressProperties } from './Progress/progress'
+import { KeyResultListBodyColumnTeamProperties } from './Team/team'
 import { KEY_RESULT_LIST_COLUMN } from './constants'
 
 export interface KeyResultListBodyColumnProperties {
@@ -17,4 +18,5 @@ export interface KeyResultListBodyColumnProperties {
   [KEY_RESULT_LIST_COLUMN.OWNER]?: KeyResultListBodyColumnOwnerProperties
   [KEY_RESULT_LIST_COLUMN.CONFIDENCE_LEVEL_COLOR]?: KeyResultListBodyColumnConfidenceLevelColorProperties
   [KEY_RESULT_LIST_COLUMN.ACTIONS]?: KeyResultListBodyColumnActionsProperties
+  [KEY_RESULT_LIST_COLUMN.TEAM]?: KeyResultListBodyColumnTeamProperties
 }

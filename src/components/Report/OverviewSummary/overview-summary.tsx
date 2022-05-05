@@ -38,7 +38,7 @@ export const OverviewSummary = ({
   const latestCheckIn = cycle?.status?.latestCheckIn
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
 
-  const updateTextColor = cycle?.status?.isOutdated ? 'red.500' : 'new-gray.500'
+  const updateTextColor = cycle?.status?.isOutdated ? 'red.500' : 'new-gray.600'
   const prefixMessage = cycle?.status?.isOutdated
     ? messages.outdatedUpdateTextPrefix
     : messages.lastUpdateTextPrefix
