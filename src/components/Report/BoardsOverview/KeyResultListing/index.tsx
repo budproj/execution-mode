@@ -18,11 +18,11 @@ import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
 import { useGetKeyResults } from 'src/components/KeyResult/hooks'
 import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import messages from './messages'
-import { EventType } from 'src/state/hooks/useEvent/event-type'
-import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 export interface BoardsOverviewProperties {
   isOpen: boolean
