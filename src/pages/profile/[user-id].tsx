@@ -5,9 +5,9 @@ import ProfilePage from 'src/components/Page/Profile'
 
 const MyThingsIndex = () => {
   const router = useRouter()
-  const { id } = router.query
+  const userId = router.query?.['user-id']
 
-  return <ProfilePage userId={id as string} />
+  return <ProfilePage userId={userId as string} />
 }
 
 export default MyThingsIndex
