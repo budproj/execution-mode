@@ -8,7 +8,7 @@ import {
   Flex,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
@@ -18,6 +18,8 @@ import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
 import { useGetKeyResults } from 'src/components/KeyResult/hooks'
 import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import messages from './messages'
@@ -59,12 +61,17 @@ export const KeyResultListingModal = ({
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const [currentConfidenceTag] = useConfidenceTag(confidence)
   const intl = useIntl()
+  const { dispatch: dispatchEvent } = useEvent(EventType.OPENED_KEY_RESULT_REPORT_CONFIDANCE)
 
   const keyResultIds = useMemo(() => data.map(({ id }) => id), [data])
   const confidenceText = useMemo(
     () => currentConfidenceTag.messages.long.toLowerCase(),
     [currentConfidenceTag],
   )
+
+  useEffect(() => {
+    dispatchEvent({ confidence: currentConfidenceTag.tag })
+  }, [])
 
   const onLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 

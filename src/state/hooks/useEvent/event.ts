@@ -9,6 +9,7 @@ import { KeyResultCreateChecklistEventData } from './events/key-result-create-ch
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
 import { OpenedKeyResultChecklistEventData } from './events/opened-key-result-checklist'
 import { OpenedKeyResultDrawerEventData } from './events/opened-key-result-drawer'
+import { OpenedKeyResultReportConfidanceData } from './events/opened-key-result-report-confidance-data'
 import { PageViewEventData } from './events/page-view'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
 import { ToggledPersonalTaskEventData } from './events/toggled-personal-task'
@@ -33,4 +34,5 @@ export type Event = {
   [EventType.DELETED_PERSONAL_TASK]: DeletedPersonalTaskEventData
   [EventType.TOGGLED_PERSONAL_TASK]: ToggledPersonalTaskEventData
   [EventType.UPDATED_PERSONAL_TASK_TITLE]: UpdatedPersonalTaskTitleEventData
+  [EventType.OPENED_KEY_RESULT_REPORT_CONFIDANCE]: OpenedKeyResultReportConfidanceData
 }

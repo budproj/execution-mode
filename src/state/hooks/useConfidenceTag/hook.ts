@@ -7,6 +7,7 @@ import messages from './messages'
 
 export interface ConfidenceTag {
   messages: ConfidenceTagMessages
+  tag: string
   color: ConfidenceTagColor
 }
 
@@ -78,6 +79,7 @@ export const useConfidenceTag = (
         icon: intl.formatMessage(messages.highIcon),
         helper: intl.formatMessage(messages.highHelperText),
       },
+      tag: 'CONFIDENCE_HIGH',
       color: {
         scheme: 'green',
         primary: 'green.500',
@@ -98,6 +100,7 @@ export const useConfidenceTag = (
         icon: intl.formatMessage(messages.mediumIcon),
         helper: intl.formatMessage(messages.mediumHelperText),
       },
+      tag: 'CONFIDENCE_MEDIUM',
       color: {
         scheme: 'yellow',
         primary: 'yellow.600',
@@ -118,6 +121,7 @@ export const useConfidenceTag = (
         icon: intl.formatMessage(messages.lowIcon),
         helper: intl.formatMessage(messages.lowHelperText),
       },
+      tag: 'CONFIDENCE_LOW',
       color: {
         scheme: 'red',
         primary: 'red.500',
@@ -138,6 +142,7 @@ export const useConfidenceTag = (
         icon: intl.formatMessage(messages.barrierIcon),
         helper: intl.formatMessage(messages.barrierHelperText),
       },
+      tag: 'CONFIDENCE_BARRIER',
       color: {
         scheme: 'purple',
         primary: 'purple.500',
