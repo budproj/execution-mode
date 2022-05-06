@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type myTasksMessages = 'tasksEmptyStateHeader' | 'tasksEmptyStateMessage'
+type myTasksMessages =
+  | 'tasksEmptyStateHeader'
+  | 'tasksEmptyStateMessage'
+  | 'userTasksEmptyStateMessage'
 
 export default defineMessages<myTasksMessages>({
   tasksEmptyStateHeader: {
@@ -13,5 +16,11 @@ export default defineMessages<myTasksMessages>({
     defaultMessage: 'Crie novas tarefas pela barra lateral dos resultados-chave em que você atua.',
     id: 'J5Rfuu',
     description: 'The empty state message when you have no tasks',
+  },
+
+  userTasksEmptyStateMessage: {
+    defaultMessage: '{username} ainda não tem nenhuma tarefa em seu nome nos OKRs da empresa.',
+    id: 'VBdX86',
+    description: 'The empty state message header when a user have no tasks',
   },
 })

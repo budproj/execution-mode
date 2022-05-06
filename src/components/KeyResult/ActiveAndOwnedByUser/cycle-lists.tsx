@@ -4,6 +4,7 @@ import React, { memo } from 'react'
 
 import { EmptyState } from 'src/components/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { User } from 'src/components/User/types'
 
 import { CycleKeyResultList } from '../CycleList/cycle-key-result-list'
 
@@ -11,11 +12,13 @@ import messages from './messages'
 
 export interface KeyResultActiveAndOwnedByUserCyclesListProperties {
   keyResults?: KeyResult[]
+  user?: User | undefined
   onLineClick?: (id: KeyResult['id']) => void
 }
 
 const KeyResultActiveAndOwnedByUserCyclesList = ({
   keyResults,
+  user,
   onLineClick,
 }: KeyResultActiveAndOwnedByUserCyclesListProperties) => {
   const keyResultsGroupedByCycle = groupBy(keyResults, 'objective.cycle.id')
@@ -23,6 +26,7 @@ const KeyResultActiveAndOwnedByUserCyclesList = ({
     data: keyResults[0].objective.cycle,
     keyResultIDs: keyResults.map((keyResult) => keyResult.id),
   }))
+  const labelMessage = user ? messages.userTasksEmptyStateMessage : messages.emptyStateLabel
 
   return keyResults && keyResults.length > 0 ? (
     <>
@@ -37,7 +41,10 @@ const KeyResultActiveAndOwnedByUserCyclesList = ({
       ))}
     </>
   ) : (
-    <EmptyState labelMessage={messages.emptyStateLabel} />
+    <EmptyState
+      labelMessage={labelMessage}
+      messageTranslationOptions={{ username: user?.firstName }}
+    />
   )
 }
 

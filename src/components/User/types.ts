@@ -29,10 +29,16 @@ export interface User extends GraphQLNode {
   nickname?: string
   about?: string
   linkedInProfileAddress?: string
+  yearlyProgress?: number
+  quarterlyProgress?: number
   companies?: GraphQLConnection<Team>
   teams?: GraphQLConnection<Team>
   ownedTeams?: GraphQLConnection<Team>
   objectives?: GraphQLConnection<Objective>
   keyResults?: GraphQLConnection<KeyResult>
   keyResultCheckIns?: GraphQLConnection<KeyResult>
+}
+
+export interface UserQuery {
+  user: User
 }

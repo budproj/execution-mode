@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil'
 
 import { KeyResult, KeyResultCheckMarkState } from 'src/components/KeyResult/types'
 import { useGetMyTasksProperties } from 'src/components/Task/hooks/getTasks'
+import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
@@ -14,7 +15,11 @@ import queries from './queries.gql'
 import { TaskSkeletons } from './skeletons'
 import Tasks from './tasks'
 
-const MyTasks = () => {
+interface UserTasksProperties {
+  username?: User['firstName']
+}
+
+const MyTasks = ({ username }: UserTasksProperties) => {
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
   const { onlyUnchecked } = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
@@ -52,7 +57,7 @@ const MyTasks = () => {
   return keyResults.length > 0 ? (
     <Tasks items={filteredKeyResults} onUpdate={refetch} />
   ) : (
-    <MyTasksEmptyState />
+    <MyTasksEmptyState username={username} />
   )
 }
 
