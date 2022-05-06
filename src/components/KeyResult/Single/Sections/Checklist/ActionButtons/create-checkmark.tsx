@@ -56,7 +56,14 @@ export const CreateCheckMarkButton = ({
   const userID = useRecoilValue(meAtom)
 
   const [createCheckMark] = useMutation(queries.CREATE_CHECK_MARK, {
-    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS, { variables: userID }],
+    refetchQueries: [
+      myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
+      {
+        variables: {
+          ...(userID ? { userID } : {}),
+        },
+      },
+    ],
     onCompleted: () => {
       if (onCreate) onCreate()
     },

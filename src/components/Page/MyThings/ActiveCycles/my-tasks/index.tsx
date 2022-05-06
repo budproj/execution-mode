@@ -27,7 +27,9 @@ const MyTasks = ({ userID, username }: UserTasksProperties) => {
   const [filteredKeyResults, setFilteredKeyResults] = useState([] as KeyResult[])
 
   const { refetch, loading } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
-    variables: { userID },
+    variables: {
+      ...(userID ? { userID } : {}),
+    },
     onCompleted: (data) => {
       setKeyResults(data.user.keyResults.edges)
       loadKeyResults(keyResults)

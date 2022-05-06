@@ -90,7 +90,14 @@ export const KeyResultCheckMark = ({
   const [updateCheckMarkDescription, { loading: isUpdatingDescription }] = useMutation(
     queries.UPDATE_CHECK_MARK_DESCRIPTION,
     {
-      refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS, { variables: { userID } }],
+      refetchQueries: [
+        myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
+        {
+          variables: {
+            ...(userID ? { userID } : {}),
+          },
+        },
+      ],
       onCompleted: () => {
         if (onUpdate) onUpdate()
       },

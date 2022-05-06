@@ -43,7 +43,14 @@ export const ChangeAssignedCheckMarkButton = ({
   const userID = useRecoilValue(meAtom)
 
   const [changeAssigned] = useMutation(queries.UPDATE_ASSIGNED_CHECKMARK, {
-    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS, { variables: { userID } }],
+    refetchQueries: [
+      myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
+      {
+        variables: {
+          ...(userID ? { userID } : {}),
+        },
+      },
+    ],
   })
 
   const handleChange = async (newAssignedUserId: string | string[]) => {

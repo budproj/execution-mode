@@ -44,7 +44,10 @@ export const DeleteCheckMarkButton = ({
 
   const setCheckMarkIsBeingRemoved = useSetRecoilState(checkMarkIsBeingRemovedAtom(checkMarkID))
   const [deleteCheckmark] = useMutation(queries.DELETE_CHECK_MARK, {
-    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS, { variables: { userID } }],
+    refetchQueries: [
+      myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
+      { variables: { ...(userID ? { userID } : {}) } },
+    ],
     variables: {
       id: checkMarkID,
     },

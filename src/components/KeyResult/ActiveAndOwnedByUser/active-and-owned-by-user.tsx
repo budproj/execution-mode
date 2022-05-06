@@ -38,7 +38,7 @@ const KeyResultActiveAndOwnedByUser = ({
     queries.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
     {
       variables: {
-        userID,
+        ...(userID ? { userID } : {}),
       },
       onCompleted: (data) => {
         setKeyResultEdges(data.user.keyResults.edges)
