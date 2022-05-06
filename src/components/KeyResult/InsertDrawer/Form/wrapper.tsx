@@ -10,10 +10,10 @@ import { KEY_RESULT_FORMAT, KEY_RESULT_TYPE } from '../../constants'
 import { KeyResult } from '../../types'
 
 import { FormActions } from './actions'
-import { DescriptionInput } from './description'
 import { FormatInput } from './format'
 import { GoalInput } from './goal'
 import { InitialValueInput } from './initial-value'
+import { OkrExampleLink } from './okr-example-link'
 import { OwnerInput } from './owner'
 import queries from './queries.gql'
 import { TitleInput } from './title'
@@ -116,7 +116,8 @@ export const InsertKeyResultForm = ({
           h="full"
         >
           <TitleInput hasValidationErrors={validationErrors.includes('title')} />
-          <DescriptionInput />
+          {/* <DescriptionInput /> */}
+          <OkrExampleLink />
           <FormatInput />
 
           <Stack direction="row" spacing={4}>
