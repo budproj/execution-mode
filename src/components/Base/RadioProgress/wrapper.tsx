@@ -22,7 +22,6 @@ export const RadioProgress = ({
   isDisabled,
   ...rest
 }: RadioProgressProperties) => {
-  progress ??= 0
   size ??= 14
   isLoaded ??= true
 
@@ -38,7 +37,7 @@ export const RadioProgress = ({
         size={size}
         {...rest}
       >
-        {progress ? (
+        {typeof progress === 'number' ? (
           <CircularProgressLabel
             color={isDisabled ? 'gray.300' : color}
             fontWeight={700}
