@@ -17,6 +17,7 @@ type KeyResultListHeadMessage =
   | 'listHeadPercentualProgress'
   | 'listHeadPercentualProgressTooltip'
   | 'listHeadActions'
+  | 'listHeadTeam'
 
 export default defineMessages<KeyResultListHeadMessage>({
   listHeadKeyResult: {
@@ -114,5 +115,12 @@ export default defineMessages<KeyResultListHeadMessage>({
     id: 'QKkwxU',
     description:
       'This message is displayed as the column header for the key-result table in the actions column',
+  },
+
+  listHeadTeam: {
+    defaultMessage: 'Time',
+    id: 'UYwpSr',
+    description:
+      'This message is displayed as the column header for the key-result table in the team column',
   },
 })

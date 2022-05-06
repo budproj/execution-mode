@@ -1,0 +1,1 @@
+export { useGetKeyResults } from './getKeyResults'

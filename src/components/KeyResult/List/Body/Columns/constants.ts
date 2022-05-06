@@ -7,4 +7,5 @@ export enum KEY_RESULT_LIST_COLUMN {
   OWNER = 'owner',
   CONFIDENCE_LEVEL_COLOR = 'confidence-level-color',
   ACTIONS = 'actions',
+  TEAM = 'team',
 }

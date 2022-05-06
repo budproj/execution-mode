@@ -52,7 +52,7 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
         thumbColor="new-gray.600"
       />
 
-      <LastUpdateText date={lastCheckinDate} color="new-gray.500" fontSize="1rem" />
+      <LastUpdateText date={lastCheckinDate} color="new-gray.600" fontSize="1rem" />
     </GridItem>
   )
 }

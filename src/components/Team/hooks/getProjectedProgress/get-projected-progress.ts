@@ -25,14 +25,15 @@ export const useGetProjectedProgress = ({
     const currentDate = new Date()
     const parsedDateStart = parseISO(dateStart)
     const parsedDateEnd = parseISO(dateEnd)
+    const expectedGoal = 0.7
 
     if (isAfter(parsedDateStart, currentDate)) return 0
-    if (isAfter(currentDate, parsedDateEnd)) return 1
+    if (isAfter(currentDate, parsedDateEnd)) return expectedGoal
 
     const deltaStartFinish = differenceInSeconds(parsedDateStart, parsedDateEnd)
     const deltaStartCurrent = differenceInSeconds(parsedDateStart, currentDate)
 
-    const projectedProgress = deltaStartCurrent / deltaStartFinish
+    const projectedProgress = (deltaStartCurrent / deltaStartFinish) * expectedGoal
     return projectedProgress
   }, [dateStart, dateEnd])
 

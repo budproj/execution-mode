@@ -216,6 +216,10 @@ const theme = extendTheme({
   fontSizes: {
     '2xs': '0.625rem',
   },
+
+  zIndices: {
+    overlay: '1400',
+  },
 })
 
 export default theme
