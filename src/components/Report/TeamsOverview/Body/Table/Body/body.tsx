@@ -11,13 +11,20 @@ import {
 
 export interface TeamsOverviewBodyTableBodyProperties {
   teamsRanking: Team[]
+  isGameficationDisabled?: boolean
 }
 
-const TeamsOverviewBodyTableBody = ({ teamsRanking }: TeamsOverviewBodyTableBodyProperties) => (
+const TeamsOverviewBodyTableBody = ({
+  teamsRanking,
+  isGameficationDisabled,
+}: TeamsOverviewBodyTableBodyProperties) => (
   <>
     {teamsRanking.map((team, index) => (
       <TeamsOverviewBodyTableLineTemplate key={team?.id ?? Math.random()}>
-        <TeamsOverviewBodyTableBodyPositionBadge order={index + 1} />
+        <TeamsOverviewBodyTableBodyPositionBadge
+          order={index + 1}
+          isGameficationDisabled={isGameficationDisabled}
+        />
         <TeamsOverviewBodyTableBodyColumnProgress team={team} />
         <TeamsOverviewBodyTableBodyColumnProgressIncrease team={team} />
       </TeamsOverviewBodyTableLineTemplate>

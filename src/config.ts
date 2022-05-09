@@ -1,5 +1,7 @@
 import getNextConfig from 'next/config'
 
+import { Team } from 'src/components/Team/types'
+
 export interface BudConfig {
   publicRuntimeConfig: BudPublicConfig
   serverRuntimeConfig: BudServerConfig
@@ -9,6 +11,7 @@ export interface BudPublicConfig {
   environment: ENVIRONMENT
   nodeEnv: NodeEnvironment
   defaultLocale: LOCALE
+  noGamificationCompaniesIds: Array<Team['id']>
   intlRoutes: Route[]
   logLevel: LogLevel
   api: BudAPIs
