@@ -1,6 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
 import uniqueId from 'lodash/uniqueId'
-import without from 'lodash/without'
 import React, { useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -61,16 +60,13 @@ export const ObjectiveKeyResults = ({
   const isEditing = mode === ObjectiveMode.EDIT
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
-  const templateColumns = isEditing ? '2fr 1fr 0.8fr 60px' : '2fr 1fr 0.8fr'
-  const columns = without(
-    [
-      KEY_RESULT_LIST_COLUMN.KEY_RESULT,
-      KEY_RESULT_LIST_COLUMN.PROGRESS,
-      KEY_RESULT_LIST_COLUMN.OWNER,
-      isEditing && KEY_RESULT_LIST_COLUMN.ACTIONS,
-    ],
-    false,
-  ) as KEY_RESULT_LIST_COLUMN[]
+  const templateColumns = '2fr 1fr 0.8fr 40px'
+  const columns = [
+    KEY_RESULT_LIST_COLUMN.KEY_RESULT,
+    KEY_RESULT_LIST_COLUMN.PROGRESS,
+    KEY_RESULT_LIST_COLUMN.OWNER,
+    KEY_RESULT_LIST_COLUMN.ACTIONS,
+  ]
 
   const handleKeyResultDelete = (id?: string) => {
     if (!id) return

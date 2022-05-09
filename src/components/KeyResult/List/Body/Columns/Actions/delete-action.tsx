@@ -1,11 +1,10 @@
 import { useMutation } from '@apollo/client'
-import { IconButton, useToast } from '@chakra-ui/react'
+import { MenuItem, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { DangerousActionConfirmationDialog } from 'src/components/Base/Dialogs/Confirmation/DangerousAction/wrapper'
 
-import { TrashBinOutlineIcon } from '../../../../../Icon/TrashBinOutline/trash-bin-outline'
 import { DeleteResult } from '../../../../../types'
 
 import messages from './messages'
@@ -66,33 +65,7 @@ export const DeleteAction = ({ id, onDelete }: DeleteActionProperties) => {
 
   return (
     <>
-      <IconButton
-        aria-label={intl.formatMessage(messages.deleteIconDesc)}
-        fontSize="lg"
-        w={12}
-        h={12}
-        variant="solid"
-        bg="black.100"
-        color="gray.500"
-        borderColor="black.100"
-        _hover={{
-          bg: 'red.500',
-          color: 'white',
-          borderColor: 'red.500',
-        }}
-        _active={{
-          bg: 'red.400',
-          color: 'white',
-          borderColor: 'red.400',
-        }}
-        onClick={handleOpen}
-      >
-        <TrashBinOutlineIcon
-          desc={intl.formatMessage(messages.deleteIconDesc)}
-          fill="currentColor"
-        />
-      </IconButton>
-
+      <MenuItem onClick={handleOpen}>{intl.formatMessage(messages.deleteButtonMessage)}</MenuItem>
       <DangerousActionConfirmationDialog
         isOpen={isDialogOpen}
         keyword={intl.formatMessage(messages.deleteDialogKeyword)}

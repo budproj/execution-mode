@@ -1,6 +1,8 @@
+import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
+import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
@@ -9,7 +11,8 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultAtomFamily } from '../../../../../../state/recoil/key-result'
 import { GraphQLEffect } from '../../../../../types'
 
-import { DeleteAction } from './delete'
+import { CopyAction } from './copy-action'
+import { DeleteAction } from './delete-action'
 
 export interface KeyResultListBodyColumnActionsProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -25,9 +28,19 @@ const KeyResultListBodyColumnActions = ({
 
   const canDelete = keyResult?.policy?.delete === GraphQLEffect.ALLOW
 
+  console.log({ keyResult })
+
   return (
     <KeyResultListBodyColumnBase preventLineClick>
-      {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
+      <Menu placement="bottom-end" variant="action-list">
+        <MenuButton transform="rotate(90deg)">
+          <TreeDotsIcon desc="teste" fill="#6F6EFF" rotate={160} width="16px" height="16px" />
+        </MenuButton>
+        <MenuList>
+          {keyResult?.title && <CopyAction keyResultTitle={keyResult.title} />}
+          {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
+        </MenuList>
+      </Menu>
     </KeyResultListBodyColumnBase>
   )
 }
