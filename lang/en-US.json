@@ -83,6 +83,10 @@
     "defaultMessage": "An arrow inside a circle, demonstrating that when you click on it you will redefine this action",
     "description": "This is the desc attribute of our reset icon. It is used by screen readers"
   },
+  "/uYO8t": {
+    "defaultMessage": "",
+    "description": "The page meta title"
+  },
   "/vJzGe": {
     "defaultMessage": "A bookmark icon",
     "description": "The desc message for the Bookmark icon. This icon is used to ilustrate our key results"
@@ -294,6 +298,10 @@
   "4f4cWE": {
     "defaultMessage": "High",
     "description": "We use this tag to group every key result with confidence higher than 66"
+  },
+  "4MCOg+": {
+    "defaultMessage": "",
+    "description": "User's yearly progress title"
   },
   "4N1d+U": {
     "defaultMessage": "Latest activities",
@@ -591,6 +599,10 @@
     "defaultMessage": "We're sorry! An unexpected error occurred. Please try again.",
     "description": "This text is displayed as a toast when the user tries to update an objective but an error occur"
   },
+  "BOJlqi": {
+    "defaultMessage": "",
+    "description": "User's quarterly progress title"
+  },
   "bqCVp4": {
     "defaultMessage": "Click here to start typing your comment",
     "description": "This is the title text that is displayed if the user hovers the mouse in it"
@@ -698,6 +710,10 @@
   "dgMLta": {
     "defaultMessage": "Send comment",
     "description": "This label is displayed in the submit button in our drawers"
+  },
+  "dH7eW3": {
+    "defaultMessage": "Team's progress in {quarter}",
+    "description": "Title to show on the team ranking page when gamification is disabled"
   },
   "DHoDPU": {
     "defaultMessage": "Save",
@@ -971,6 +987,10 @@
     "defaultMessage": "key result",
     "description": "This message is used as the type to display in some of the delete dialogs while removing a given key-result"
   },
+  "H0xYvz": {
+    "defaultMessage": "",
+    "description": "The page subtitle for users profile"
+  },
   "h4sP/q": {
     "defaultMessage": "My Account",
     "description": "The page title that our users should see in the my profile page"
@@ -1002,6 +1022,10 @@
   "HhSnBG": {
     "defaultMessage": "DEACTIVATE",
     "description": "This is the keyword that the user needs to type to deactivate a given user"
+  },
+  "hL/jUm": {
+    "defaultMessage": "",
+    "description": "The title for tasks section in the profile page"
   },
   "hMD8CO": {
     "defaultMessage": "Previous",
@@ -1150,6 +1174,10 @@
   "JHyn+l": {
     "defaultMessage": "This action cannot be undone",
     "description": "This text is giving more details regarding the delete alert in our drawers"
+  },
+  "JItuU0": {
+    "defaultMessage": "",
+    "description": "The page title for users profile"
   },
   "jjr+Ye": {
     "defaultMessage": "Objective successfully removed",
@@ -1947,6 +1975,10 @@
     "defaultMessage": "Step 1",
     "description": "The label of the first step while creating a new workspace"
   },
+  "VBdX86": {
+    "defaultMessage": "",
+    "description": "The empty state message header when a user have no tasks"
+  },
   "vbnV7B": {
     "defaultMessage": "Portuguese",
     "description": "This message is used as the label for the portuguese language in our locale switcher"
@@ -2079,6 +2111,10 @@
     "defaultMessage": "Click here to search buddy",
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
   },
+  "x7doNg": {
+    "defaultMessage": "",
+    "description": "The page meta description"
+  },
   "x8ytCP": {
     "defaultMessage": "Cancel",
     "description": "This text is displayed as the button that will cancel the update for ou goal update popover inside the key-result drawers"
@@ -2186,6 +2222,10 @@
   "yROxQI": {
     "defaultMessage": "Team",
     "description": "This message is displayed as the column header for the key-result table in the team column"
+  },
+  "yRU1Bz": {
+    "defaultMessage": "",
+    "description": "The label message that is displayed below our team at work image when a user has no key results in her/his key result view list"
   },
   "ytvOyM": {
     "defaultMessage": "My Key Results",
@@ -2296,7 +2336,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-05-04T16:31:10Z",
+    "defaultMessage": "2022-05-09T18:19:48Z",
     "description": null
   }
 }
