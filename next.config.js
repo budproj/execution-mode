@@ -30,6 +30,7 @@ const {
   AMPLITUDE_API_KEY,
   SENTRY_DSN,
   SENTRY_AUTH_TOKEN,
+  NO_GAMIFICATION_COMPANIES_IDS,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -37,6 +38,9 @@ const publicRuntimeConfig = {
   nodeEnv: NODE_ENV,
   defaultLocale: LOCALE_OVERRIDE ?? DEFAULT_LOCALE,
   logLevel: LOG_LEVEL,
+  noGamificationCompaniesIds: NO_GAMIFICATION_COMPANIES_IDS
+    ? NO_GAMIFICATION_COMPANIES_IDS.split(',')
+    : [],
   maintenanceMode: {
     enabled: MAINTENANCE_MODE_ENABLED === 'true',
     expectedReturn: new Date(MAINTENANCE_MODE_EXPECTED_RETURN),
@@ -127,6 +131,12 @@ const publicRuntimeConfig = {
       destination: '/new-workspace',
       locale: 'pt-BR',
     },
+
+    {
+      source: '/pt-BR/perfil',
+      destination: '/profile',
+      locale: 'pt-BR',
+    },
   ],
 }
 
@@ -196,7 +206,6 @@ const moduleExports = {
   },
 }
 
-
 const sentryWebpackPluginOptions = {
   // Additional config options for the Sentry Webpack plugin. Keep in mind that
   // the following options are set automatically, and overriding them is not
@@ -212,6 +221,6 @@ const sentryWebpackPluginOptions = {
   silent: true, // Suppresses all logs
   // For all available options, see:
   // https://github.com/getsentry/sentry-webpack-plugin#options.
-};
+}
 
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
+module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions)

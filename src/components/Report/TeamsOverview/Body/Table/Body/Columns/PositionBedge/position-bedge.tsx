@@ -31,24 +31,51 @@ const BadgeWithRibbon = styled(Flex)`
 
 export interface TeamsOverviewBodyTableBodyPositionBadgeProperties {
   order: number
+  isGameficationDisabled?: boolean
 }
 
 const TeamsOverviewBodyTableBodyPositionBadge = ({
   order,
+  isGameficationDisabled,
 }: TeamsOverviewBodyTableBodyPositionBadgeProperties) => {
+  const ribbonPosition = order <= 3
   const coloredRanking = new Map([
     [1, 'yellow.600'],
     [2, 'new-gray.500'],
     [3, '#E3AE7C'],
   ])
-  const ribbonPosition = order <= 3
-  const badgeBackgroundColor = coloredRanking.get(order) ?? 'white'
-  const badgeTextColor = ribbonPosition ? 'white' : 'brand.500'
-  const BadgeElement = ribbonPosition ? BadgeWithRibbon : Flex
+
+  const colorSchemaOptions = new Map([
+    [
+      'gamificationOn',
+      {
+        badgeBackgroundColor: coloredRanking.get(order) ?? 'white',
+        badgeTextColor: ribbonPosition ? 'white' : 'brand.500',
+        badgeElement: ribbonPosition ? BadgeWithRibbon : Flex,
+      },
+    ],
+    [
+      'gamificationOff',
+      {
+        badgeBackgroundColor: 'white',
+        badgeTextColor: 'brand.500',
+        badgeElement: Flex,
+      },
+    ],
+  ])
+
+  const colorSchemaOption = isGameficationDisabled ? 'gamificationOff' : 'gamificationOn'
+  const colorSchema = colorSchemaOptions.get(colorSchemaOption)
+  const badgeBackgroundColor = colorSchema?.badgeBackgroundColor
+  const badgeTextColor = colorSchema?.badgeTextColor
+  const BadgeElement = colorSchema?.badgeElement ?? Flex
   const [ribbonColor] = useToken('colors', ['new-gray.800'])
 
   return (
-    <GridItem zIndex={1} transform={ribbonPosition ? 'translateY(-10px)' : undefined}>
+    <GridItem
+      zIndex={1}
+      transform={!isGameficationDisabled && ribbonPosition ? 'translateY(-10px)' : undefined}
+    >
       <BadgeElement
         borderRadius="full"
         bg={badgeBackgroundColor}
