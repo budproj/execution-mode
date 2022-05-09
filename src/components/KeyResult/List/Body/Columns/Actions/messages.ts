@@ -8,6 +8,9 @@ type KeyResultListBodyColumnActionsMessage =
   | 'deleteDialogConfirmationLabel'
   | 'deleteSuccessToastMessage'
   | 'deleteErrorToastMessage'
+  | 'deleteButtonMessage'
+  | 'successfulCopyMessage'
+  | 'copyButtonMessage'
 
 export default defineMessages<KeyResultListBodyColumnActionsMessage>({
   deleteIconDesc: {
@@ -55,5 +58,21 @@ export default defineMessages<KeyResultListBodyColumnActionsMessage>({
     id: 'cRj0sI',
     description:
       'This message appears when the user tries to remove a given key-result, but receives an error',
+  },
+  deleteButtonMessage: {
+    defaultMessage: 'Excluir este Resultado-Chave',
+    id: 'IsUZSc',
+    description: 'This message appears in the button that deletes the key result',
+  },
+  copyButtonMessage: {
+    defaultMessage: 'Copiar título deste Resultado-Chave',
+    id: 'AO/RyT',
+    description: 'This message appears in the button that copies the title of the key result',
+  },
+  successfulCopyMessage: {
+    defaultMessage: 'Título copiado com sucesso.',
+    id: 'VFj8OD',
+    description:
+      'This message appears in the toast when you successfully copies the title of the key result',
   },
 })
