@@ -5,8 +5,6 @@ type MyKeyResultsActiveCyclesPageMessage =
   | 'metaDescription'
   | 'pageTitle'
   | 'pageSubtitle'
-  | 'yearlyProgress'
-  | 'quarterlyProgress'
   | 'taskTitle'
 
 export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
@@ -33,18 +31,6 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     defaultMessage: 'Estes são os resultados-chave e as tarefas atribuídos a {username}.',
     id: 'H0xYvz',
     description: 'The page subtitle for users profile',
-  },
-
-  yearlyProgress: {
-    defaultMessage: 'Progresso Anual',
-    id: '4MCOg+',
-    description: "User's yearly progress title",
-  },
-
-  quarterlyProgress: {
-    defaultMessage: 'Progresso Trimestral',
-    id: 'BOJlqi',
-    description: "User's quarterly progress title",
   },
 
   taskTitle: {
