@@ -168,19 +168,7 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
           </Box>
 
           <Box flex="1">
-            <Heading
-              as="h2"
-              fontSize="xl"
-              lineHeight="1.6rem"
-              fontWeight="bold"
-              color="new-gray.800"
-            >
-              {intl.formatMessage(messages.taskTitle)}
-            </Heading>
-
-            <Divider mt="3.3rem" mb={6} borderColor="new-gray.400" opacity="1" />
-
-            <Scrollbars style={{ maxHeight: '85%' }}>
+            <Scrollbars>
               <Box pr={6}>
                 <MyTasks userID={userData?.id ?? ''} username={userData?.firstName} />
               </Box>

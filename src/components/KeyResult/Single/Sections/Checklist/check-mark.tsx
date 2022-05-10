@@ -181,7 +181,7 @@ export const KeyResultCheckMark = ({
 
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
-      <StyledKeyResultCheckMark alignItems="start">
+      <StyledKeyResultCheckMark alignItems="center">
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Checkbox
             isChecked={isChecked}

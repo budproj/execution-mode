@@ -65,47 +65,51 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
         </Flex>
 
         <Flex>
-          <Flex direction="column">
-            <RadioProgress
-              isIndeterminate={isUserLoading}
-              size="64px"
-              progress={userData?.yearlyProgress}
-              color="brand.500"
-              trackColor="brand.100"
-            />
-            <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
-              <Text
-                color="new-gray.700"
-                fontWeight={700}
-                maxWidth="64px"
-                textAlign="center"
-                fontSize="0.85rem"
-              >
-                {intl.formatMessage(messages.yearlyProgress)}
-              </Text>
-            </Skeleton>
-          </Flex>
+          {userData?.yearlyProgress ? (
+            <Flex direction="column">
+              <RadioProgress
+                isIndeterminate={isUserLoading}
+                size="64px"
+                progress={userData?.yearlyProgress}
+                color="brand.500"
+                trackColor="brand.100"
+              />
+              <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
+                <Text
+                  color="new-gray.700"
+                  fontWeight={700}
+                  maxWidth="64px"
+                  textAlign="center"
+                  fontSize="0.85rem"
+                >
+                  {intl.formatMessage(messages.yearlyProgress)}
+                </Text>
+              </Skeleton>
+            </Flex>
+          ) : undefined}
 
-          <Flex direction="column" ml="35px">
-            <RadioProgress
-              isIndeterminate={isUserLoading}
-              size="64px"
-              progress={userData?.quarterlyProgress}
-              color="brand.500"
-              trackColor="brand.100"
-            />
-            <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
-              <Text
-                color="new-gray.700"
-                fontWeight={700}
-                maxWidth="64px"
-                textAlign="center"
-                fontSize="0.85rem"
-              >
-                {intl.formatMessage(messages.quarterlyProgress)}
-              </Text>
-            </Skeleton>
-          </Flex>
+          {userData?.quarterlyProgress ? (
+            <Flex direction="column" ml="35px">
+              <RadioProgress
+                isIndeterminate={isUserLoading}
+                size="64px"
+                progress={userData?.quarterlyProgress}
+                color="brand.500"
+                trackColor="brand.100"
+              />
+              <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
+                <Text
+                  color="new-gray.700"
+                  fontWeight={700}
+                  maxWidth="64px"
+                  textAlign="center"
+                  fontSize="0.85rem"
+                >
+                  {intl.formatMessage(messages.quarterlyProgress)}
+                </Text>
+              </Skeleton>
+            </Flex>
+          ) : undefined}
         </Flex>
       </Flex>
     </PageContent>

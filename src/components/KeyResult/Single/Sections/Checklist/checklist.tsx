@@ -24,6 +24,7 @@ interface KeyResultChecklistProperties {
   isEditable?: boolean
   wrapperProps?: StyleProps
   checkPolicy?: boolean
+  createTaskLabel?: string
 }
 
 export const KeyResultChecklist = ({
@@ -34,6 +35,7 @@ export const KeyResultChecklist = ({
   isEditable = true,
   wrapperProps,
   checkPolicy = true,
+  createTaskLabel,
 }: KeyResultChecklistProperties) => {
   const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
   const createButtonReference = useRef<HTMLButtonElement>(null)
@@ -68,9 +70,10 @@ export const KeyResultChecklist = ({
 
       {canCreate && (
         <CreateCheckMarkButton
-          mt={3}
+          mt={5}
           keyResultID={keyResultID}
           createButtonReference={createButtonReference}
+          label={createTaskLabel}
           onCreate={onUpdate}
         />
       )}

@@ -1,5 +1,6 @@
-import { Stack, Text, Box, HStack, Divider } from '@chakra-ui/react'
+import { Stack, Text, Box, HStack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
+import { useIntl } from 'react-intl'
 
 import { Accordion } from 'src/components/Base/Accordion'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
@@ -8,6 +9,8 @@ import { KeyResult, KeyResultCheckMark } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 
+import messages from './messages'
+
 interface TasksProperties {
   items: Array<Partial<KeyResult>>
   onUpdate: () => void
@@ -15,10 +18,11 @@ interface TasksProperties {
 
 interface KeyResultTasksProperties {
   keyResult: Partial<KeyResult>
+  createTaskLabel: string
   onUpdate: () => void
 }
 
-const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
+const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasksProperties) => {
   const [checklist, updateChecklistEdges] = useConnectionEdges<KeyResultCheckMark>()
   const canCreate = keyResult.checkList?.policy?.create === GraphQLEffect.ALLOW
 
@@ -29,7 +33,7 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
   return (
     <Accordion
       title={
-        <HStack key={keyResult.id} textAlign="left">
+        <HStack key={keyResult.id} py={3} textAlign="left">
           <KeyResultDynamicIcon title={keyResult.title} boxSize="30px" iconSize="16px" />
           <Text maxWidth="calc(100% - 50px)" fontWeight={600} pl="0.5rem">
             {keyResult.title}
@@ -37,7 +41,7 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
         </HStack>
       }
     >
-      <Box pl="3.2rem">
+      <Box transform="translateY(-10px)" pl="3.2rem">
         <KeyResultChecklist
           isEditable
           checkPolicy={false}
@@ -45,6 +49,7 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
           nodes={checklist}
           canCreate={canCreate}
           wrapperProps={{ pt: 0 }}
+          createTaskLabel={createTaskLabel}
           onUpdate={onUpdate}
         />
       </Box>
@@ -52,15 +57,22 @@ const KeyResultTasks = ({ keyResult, onUpdate }: KeyResultTasksProperties) => {
   )
 }
 
-const Tasks = ({ items, onUpdate }: TasksProperties) => (
-  <Stack align="stretch">
-    {items.map((item, index) => (
-      <Box key={item.id}>
-        {index > 0 ? <Divider my={9} borderColor="new-gray.400" opacity="1" /> : undefined}
-        <KeyResultTasks keyResult={item} onUpdate={onUpdate} />
-      </Box>
-    ))}
-  </Stack>
-)
+const Tasks = ({ items, onUpdate }: TasksProperties) => {
+  const intl = useIntl()
+  const createTaskLabel = intl.formatMessage(messages.createTaskLabel)
+
+  return (
+    <Stack align="stretch">
+      {items.map((item) => (
+        <KeyResultTasks
+          key={item.id}
+          keyResult={item}
+          createTaskLabel={createTaskLabel}
+          onUpdate={onUpdate}
+        />
+      ))}
+    </Stack>
+  )
+}
 
 export default Tasks

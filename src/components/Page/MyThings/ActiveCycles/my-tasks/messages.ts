@@ -4,6 +4,7 @@ type myTasksMessages =
   | 'tasksEmptyStateHeader'
   | 'tasksEmptyStateMessage'
   | 'userTasksEmptyStateMessage'
+  | 'createTaskLabel'
 
 export default defineMessages<myTasksMessages>({
   tasksEmptyStateHeader: {
@@ -22,5 +23,11 @@ export default defineMessages<myTasksMessages>({
     defaultMessage: '{username} ainda não tem nenhuma tarefa em seu nome nos OKRs da empresa.',
     id: 'VBdX86',
     description: 'The empty state message header when a user have no tasks',
+  },
+
+  createTaskLabel: {
+    defaultMessage: 'Adicionar nova tarefa a este KR',
+    id: 'LAEhNz',
+    description: 'The label for create KR task button',
   },
 })

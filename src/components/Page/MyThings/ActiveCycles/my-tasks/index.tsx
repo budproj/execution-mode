@@ -1,4 +1,13 @@
 import { useQuery } from '@apollo/client'
+import {
+  Flex,
+  Heading,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionIcon,
+  AccordionPanel,
+} from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -58,10 +67,38 @@ const MyTasks = ({ userID, username }: UserTasksProperties) => {
     return <TaskSkeletons isLoaded={!loading} />
   }
 
-  return keyResults.length > 0 ? (
-    <Tasks items={filteredKeyResults} onUpdate={refetch} />
-  ) : (
-    <MyTasksEmptyState username={username} />
+  return (
+    <Accordion allowToggle defaultIndex={0}>
+      <AccordionItem border={0}>
+        <AccordionButton
+          _hover={{}}
+          _focus={{ boxShadow: 'none' }}
+          borderBottom="1px solid"
+          borderBottomColor="new-gray.400"
+          py={4}
+        >
+          <Flex flex="1" textAlign="left">
+            <Heading
+              as="h2"
+              fontSize="xl"
+              textTransform="uppercase"
+              fontWeight="bold"
+              color="new-gray.800"
+            >
+              Tarefas em OKRs
+            </Heading>
+          </Flex>
+          <AccordionIcon />
+        </AccordionButton>
+        <AccordionPanel pb={4}>
+          {keyResults.length > 0 ? (
+            <Tasks items={filteredKeyResults} onUpdate={refetch} />
+          ) : (
+            <MyTasksEmptyState username={username} />
+          )}
+        </AccordionPanel>
+      </AccordionItem>
+    </Accordion>
   )
 }
 
