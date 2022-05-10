@@ -2,13 +2,13 @@ import { Box, BoxProps, BorderProps, BackgroundProps, Stack } from '@chakra-ui/r
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
+import { IntlLink } from 'src/components/Base'
 import { User } from 'src/components/User/types'
 import { GraphQLEffect, GraphQLEntityPolicy } from 'src/components/types'
+import meAtom from 'src/state/recoil/user/me'
 
 import { CardHeader } from './header'
 import KeyResultSectionTimelineCardBaseOptions from './options'
-import { IntlLink } from 'src/components/Base'
-import meAtom from 'src/state/recoil/user/me'
 
 export interface KeyResultSectionTimelineCardBaseProperties {
   children: ReactElement | ReactElement[]
@@ -65,7 +65,7 @@ const KeyResultSectionTimelineCardBase = ({
 
       <Stack spacing={3}>
         {!hideUser && (
-          <IntlLink href={user?.id !== myID ? `/profile/${user?.id}` : `/settings/my-profile`}>
+          <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
             <CardHeader isLoaded={isLoaded} userID={user?.id} date={new Date(date ?? 0)} />
           </IntlLink>
         )}
@@ -74,6 +74,7 @@ const KeyResultSectionTimelineCardBase = ({
     </Box>
   )
 }
+
 KeyResultSectionTimelineCardBase.defaultProps = {
   borderRadius: 6,
   borderWidth: 1,

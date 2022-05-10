@@ -110,9 +110,7 @@ const KeyResultListBodyColumnOwner = ({
               isLoaded={isOwnerLoaded}
               {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}
             >
-              <IntlLink
-                href={owner?.id !== userID ? `/profile/${owner?.id}` : `/settings/my-profile`}
-              >
+              <IntlLink href={owner?.id === userID ? '/my-things' : `/profile/${owner?.id ?? ''}`}>
                 <Text color="gray.500" _hover={{ color: 'brand.500' }} cursor="pointer">
                   {owner?.fullName}
                 </Text>

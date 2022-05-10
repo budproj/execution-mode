@@ -16,16 +16,16 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import { IntlLink } from 'src/components/Base'
+import { ArrowRightLong } from 'src/components/Icon'
 import LinkedInIcon from 'src/components/Icon/LinkedIn'
 import UserAvatar from 'src/components/User/Avatar'
 import UserTeamTags from 'src/components/User/TeamTags'
 import { User } from 'src/components/User/types'
+import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
 import messages from './messages'
-import { ArrowRightLong } from 'src/components/Icon'
-import { IntlLink } from 'src/components/Base'
-import meAtom from 'src/state/recoil/user/me'
 
 export interface UserProfileCardProperties {
   userID?: User['id']
@@ -110,7 +110,7 @@ const UserProfileCard = ({ userID, redirectToProfile = false }: UserProfileCardP
       {redirectToProfile && user?.id !== myID && (
         <Stack direction="column" spacing={0}>
           <Divider />
-          <IntlLink href={`/profile/${user?.id}`}>
+          <IntlLink href={`/profile/${user?.id ?? ''}`}>
             <Button
               color="brand.500"
               display="flex"

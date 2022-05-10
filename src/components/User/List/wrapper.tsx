@@ -2,18 +2,18 @@ import { Stack, Text, Box, Menu, MenuButton, MenuItem, MenuList } from '@chakra-
 import { Scrollbars } from 'rc-scrollbars'
 import React, { ReactElement, useRef } from 'react'
 import { useIntl } from 'react-intl'
-import TreeDotsIcon from 'src/components/Icon/TreeDots'
+import { useRecoilValue } from 'recoil'
 
-import { NamedAvatar } from 'src/components/User'
 import { IntlLink } from 'src/components/Base'
+import TreeDotsIcon from 'src/components/Icon/TreeDots'
+import { NamedAvatar } from 'src/components/User'
+import meAtom from 'src/state/recoil/user/me'
 
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
 import { User } from '../types'
 
 import messages from './messages'
 import { UserListSkeleton } from './skeleton'
-import { useRecoilValue } from 'recoil'
-import meAtom from 'src/state/recoil/user/me'
 
 interface UserListProperties {
   users: User[]
@@ -56,12 +56,12 @@ export const UserList = ({
               users.map((user) => (
                 <NamedAvatar
                   key={user.id}
+                  redirectToProfile
                   showCard={showUserCard}
                   canHover={Boolean(onUserClick)}
                   userID={user.id}
                   subtitleType={avatarSubtitleType}
                   cardPortalReference={cardReference}
-                  redirectToProfile
                 >
                   <Menu isLazy placement="start" variant="action-list">
                     <MenuButton
@@ -79,9 +79,7 @@ export const UserList = ({
                       />
                     </MenuButton>
                     <MenuList>
-                      <IntlLink
-                        href={user?.id !== myID ? `/profile/${user?.id}` : `/settings/my-profile`}
-                      >
+                      <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id}`}>
                         <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
                       </IntlLink>
                       <MenuItem onClick={handleUserClick(user.id)}>

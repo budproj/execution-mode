@@ -15,16 +15,16 @@ import {
 import styled from '@emotion/styled'
 import React, { ReactElement, RefObject, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import { IntlLink } from 'src/components/Base'
 import SwitchIcon from 'src/components/Icon/Switch'
+import meAtom from 'src/state/recoil/user/me'
 
 import { User } from '../types'
 
 import messages from './messages'
-import { IntlLink } from 'src/components/Base'
-import { useRecoilValue } from 'recoil'
-import meAtom from 'src/state/recoil/user/me'
 
 interface NameWithAvatarProperties {
   user?: Partial<User>
@@ -145,9 +145,7 @@ export const NameWithAvatar = forwardRef(
             {showName && (
               <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
                 {redirectToProfile ? (
-                  <IntlLink
-                    href={user?.id !== myID ? `/profile/${user?.id}` : `/settings/my-profile`}
-                  >
+                  <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
                     <StyledText fontSize="lg" color={nameColor} brandColor={brand500}>
                       {user?.fullName}
                     </StyledText>
