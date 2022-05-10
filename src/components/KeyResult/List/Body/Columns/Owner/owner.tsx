@@ -5,7 +5,7 @@ import React, { ReactElement, useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import { DynamicAvatarGroup } from 'src/components/Base'
+import { DynamicAvatarGroup, IntlLink } from 'src/components/Base'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
@@ -110,7 +110,13 @@ const KeyResultListBodyColumnOwner = ({
               isLoaded={isOwnerLoaded}
               {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}
             >
-              <Text color="gray.500">{owner?.fullName}</Text>
+              <IntlLink
+                href={owner?.id !== userID ? `/profile/${owner?.id}` : `/settings/my-profile`}
+              >
+                <Text color="gray.500" _hover={{ color: 'brand.500' }} cursor="pointer">
+                  {owner?.fullName}
+                </Text>
+              </IntlLink>
             </Skeleton>
           )}
 

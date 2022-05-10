@@ -1,4 +1,15 @@
-import { Stack, Skeleton, Text, AspectRatio, Heading, SkeletonText, Flex } from '@chakra-ui/react'
+import {
+  Stack,
+  Skeleton,
+  Text,
+  AspectRatio,
+  Heading,
+  SkeletonText,
+  Flex,
+  Divider,
+  Button,
+  Circle,
+} from '@chakra-ui/react'
 import Link from 'next/link'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -12,14 +23,19 @@ import { User } from 'src/components/User/types'
 import selectUser from 'src/state/recoil/user/selector'
 
 import messages from './messages'
+import { ArrowRightLong } from 'src/components/Icon'
+import { IntlLink } from 'src/components/Base'
+import meAtom from 'src/state/recoil/user/me'
 
 export interface UserProfileCardProperties {
   userID?: User['id']
+  redirectToProfile?: boolean
 }
 
-const UserProfileCard = ({ userID }: UserProfileCardProperties) => {
+const UserProfileCard = ({ userID, redirectToProfile = false }: UserProfileCardProperties) => {
   const intl = useIntl()
   const user = useRecoilValue(selectUser(userID))
+  const myID = useRecoilValue(meAtom)
 
   const isUserLoaded = Boolean(user)
 
@@ -89,6 +105,36 @@ const UserProfileCard = ({ userID }: UserProfileCardProperties) => {
               {user?.about}
             </Text>
           </SkeletonText>
+        </Stack>
+      )}
+      {redirectToProfile && user?.id !== myID && (
+        <Stack direction="column" spacing={0}>
+          <Divider />
+          <IntlLink href={`/profile/${user?.id}`}>
+            <Button
+              color="brand.500"
+              display="flex"
+              p={0}
+              _hover={{
+                color: 'brand.400',
+              }}
+              rightIcon={
+                <Circle border="1.5px solid" borderColor="currentColor" size={4}>
+                  <ArrowRightLong
+                    desc={intl.formatMessage(messages.arrowRightLongIconDesc)}
+                    stroke="currentColor"
+                    fill="currentColor"
+                    fontSize="medium"
+                    transform="scale(0.5)"
+                  />
+                </Circle>
+              }
+            >
+              {intl.formatMessage(messages.redirectToUserProfileButtonText, {
+                userName: user?.firstName,
+              })}
+            </Button>
+          </IntlLink>
         </Stack>
       )}
     </Stack>

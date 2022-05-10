@@ -1,9 +1,11 @@
-import { Stack, Text, Box } from '@chakra-ui/react'
+import { Stack, Text, Box, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import { Scrollbars } from 'rc-scrollbars'
 import React, { ReactElement, useRef } from 'react'
 import { useIntl } from 'react-intl'
+import TreeDotsIcon from 'src/components/Icon/TreeDots'
 
 import { NamedAvatar } from 'src/components/User'
+import { IntlLink } from 'src/components/Base'
 
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
 import { User } from '../types'
@@ -30,6 +32,7 @@ export const UserList = ({
 }: UserListProperties) => {
   const cardReference = useRef<HTMLDivElement>(null)
   const intl = useIntl()
+
   const handleUserClick = (userID: string) => async () => {
     if (onUserClick) await onUserClick(userID)
   }
@@ -45,15 +48,47 @@ export const UserList = ({
             <UserListSkeleton />
           ) : users.length > 0 ? (
             users.map((user) => (
-              <NamedAvatar
-                key={user.id}
-                showCard={showUserCard}
-                canHover={Boolean(onUserClick)}
-                userID={user.id}
-                subtitleType={avatarSubtitleType}
-                cardPortalReference={cardReference}
-                onClick={handleUserClick(user.id)}
-              />
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+                cursor="pointer"
+              >
+                <IntlLink href={`/profile/${user.id}`}>
+                  <NamedAvatar
+                    key={user.id}
+                    showCard={showUserCard}
+                    canHover={Boolean(onUserClick)}
+                    userID={user.id}
+                    subtitleType={avatarSubtitleType}
+                    cardPortalReference={cardReference}
+                  />
+                </IntlLink>
+                <Menu isLazy placement="start" variant="action-list">
+                  <MenuButton
+                    color="new-gray.600"
+                    _hover={{
+                      color: 'new-gray.900',
+                    }}
+                    mr={2}
+                  >
+                    <TreeDotsIcon
+                      fill="currentColor"
+                      fontSize="2xl"
+                      style={{ transform: 'rotate(90deg)' }}
+                      desc={intl.formatMessage(messages.optionsButtonDesc)}
+                    />
+                  </MenuButton>
+                  <MenuList>
+                    <IntlLink href={`/profile/${user.id}`}>
+                      <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
+                    </IntlLink>
+                    <MenuItem onClick={handleUserClick(user.id)}>
+                      {intl.formatMessage(messages.secondMenuItemOption)}
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </Box>
             ))
           ) : (
             emptyState

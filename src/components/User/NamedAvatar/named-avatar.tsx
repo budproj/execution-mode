@@ -114,7 +114,7 @@ const NamedAvatar = ({
       <Portal containerRef={cardPortalReference}>
         <PopoverContent p={0}>
           <PopoverBody p={0}>
-            <UserProfileCard userID={userID} />
+            <UserProfileCard redirectToProfile userID={userID} />
           </PopoverBody>
         </PopoverContent>
       </Portal>
