@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil'
 
 import { PageMetaHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
