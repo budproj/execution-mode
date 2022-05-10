@@ -12,8 +12,8 @@ import { GraphQLEffect } from 'src/components/types'
 import messages from './messages'
 
 interface DetailedHeaderProperties {
-  userData: User | undefined
-  isUserLoading: boolean
+  userData: Partial<User> | undefined
+  isUserLoading?: boolean
 }
 
 export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProperties) => {
