@@ -14,7 +14,7 @@ import queries from './queries.gql'
 import KeyResultActiveAndOwnedByUserSkeleton from './skeleton'
 
 export interface KeyResultActiveAndOwnedByUserProperties {
-  userID: User['id']
+  userID?: User['id']
   username?: User['firstName'] | undefined
   onLineClick?: (id: KeyResult['id']) => void
 }
