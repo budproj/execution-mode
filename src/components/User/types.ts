@@ -29,14 +29,19 @@ export interface User extends GraphQLNode {
   nickname?: string
   about?: string
   linkedInProfileAddress?: string
-  yearlyProgress?: number
-  quarterlyProgress?: number
+  yearlyProgress?: UserProgress
+  quarterlyProgress?: UserProgress
   companies?: GraphQLConnection<Team>
   teams?: GraphQLConnection<Team>
   ownedTeams?: GraphQLConnection<Team>
   objectives?: GraphQLConnection<Objective>
   keyResults?: GraphQLConnection<KeyResult>
   keyResultCheckIns?: GraphQLConnection<KeyResult>
+}
+
+export interface UserProgress {
+  showProgress: boolean
+  progress: number
 }
 
 export interface UserQuery {

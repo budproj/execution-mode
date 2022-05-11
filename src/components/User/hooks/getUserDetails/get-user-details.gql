@@ -5,8 +5,14 @@ query GET_USER_DETAILS($userId: ID) {
     fullName
     firstName
     role
-    yearlyProgress
-    quarterlyProgress
+    yearlyProgress {
+      showProgress
+      progress
+    }
+    quarterlyProgress {
+      showProgress
+      progress
+    }
     teams {
       edges {
         node {

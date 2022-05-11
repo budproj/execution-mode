@@ -65,12 +65,12 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
         </Flex>
 
         <Flex>
-          {userData?.yearlyProgress ? (
+          {userData?.yearlyProgress?.showProgress ? (
             <Flex direction="column">
               <RadioProgress
                 isIndeterminate={isUserLoading}
                 size="64px"
-                progress={userData?.yearlyProgress}
+                progress={userData?.yearlyProgress?.progress}
                 color="brand.500"
                 trackColor="brand.100"
               />
@@ -88,12 +88,12 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
             </Flex>
           ) : undefined}
 
-          {userData?.quarterlyProgress ? (
+          {userData?.quarterlyProgress?.showProgress ? (
             <Flex direction="column" ml="35px">
               <RadioProgress
                 isIndeterminate={isUserLoading}
                 size="64px"
-                progress={userData?.quarterlyProgress}
+                progress={userData?.quarterlyProgress?.progress}
                 color="brand.500"
                 trackColor="brand.100"
               />
