@@ -21,6 +21,7 @@ export interface SelectUserFromListProperties {
   avatarSubtitleType?: NamedAvatarSubtitleType
   showUserCard?: boolean
   emptyStateTitle?: MessageDescriptor
+  hasMenu?: boolean
 }
 
 export const SelectUserFromListWrapper = ({
@@ -33,6 +34,7 @@ export const SelectUserFromListWrapper = ({
   avatarSubtitleType,
   hasCreateNewUserPermission,
   emptyStateTitle,
+  hasMenu,
 }: SelectUserFromListProperties) => {
   const [isCreateSidebarOpen, setIsCreateSidebarOpen] = useState(false)
   const intl = useIntl()
@@ -63,6 +65,7 @@ export const SelectUserFromListWrapper = ({
         emptyStateTitle={emptyStateTitle}
         onCreateStart={handleCreateSidebarOpen}
         onSelect={onSelect}
+        hasMenu={hasMenu}
       />
 
       <CreateSidebarInContext

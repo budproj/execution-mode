@@ -36,7 +36,9 @@ export interface NamedAvatarProperties {
   date?: Date
   showCard?: boolean
   showName?: boolean
+  redirectToProfile?: boolean
   onClick?: () => void
+  children?: string | ReactElement
   cardPortalReference?: RefObject<HTMLDivElement>
 }
 
@@ -56,6 +58,8 @@ const NamedAvatar = ({
   showName = true,
   nameColor,
   cardPortalReference,
+  children,
+  redirectToProfile,
 }: NamedAvatarProperties): ReactElement => {
   subtitleType ??= 'company'
   avatarSize ??= 12
@@ -109,6 +113,8 @@ const NamedAvatar = ({
           hasSubtitle={displaySubtitle}
           subtitle={subtitle}
           onClick={onClick}
+          redirectToProfile={redirectToProfile}
+          children={children}
         />
       </PopoverTrigger>
       <Portal containerRef={cardPortalReference}>
@@ -133,6 +139,8 @@ const NamedAvatar = ({
       hasSubtitle={displaySubtitle}
       subtitle={subtitle}
       onClick={onClick}
+      redirectToProfile={redirectToProfile}
+      children={children}
     />
   )
 }

@@ -12,6 +12,8 @@ import { User } from '../types'
 
 import messages from './messages'
 import { UserListSkeleton } from './skeleton'
+import { useRecoilValue } from 'recoil'
+import meAtom from 'src/state/recoil/user/me'
 
 interface UserListProperties {
   users: User[]
@@ -20,6 +22,7 @@ interface UserListProperties {
   isLoading?: boolean
   showUserCard?: boolean
   emptyState?: ReactElement
+  hasMenu?: boolean
 }
 
 export const UserList = ({
@@ -29,9 +32,11 @@ export const UserList = ({
   showUserCard,
   isLoading,
   emptyState,
+  hasMenu = false,
 }: UserListProperties) => {
   const cardReference = useRef<HTMLDivElement>(null)
   const intl = useIntl()
+  const myID = useRecoilValue(meAtom)
 
   const handleUserClick = (userID: string) => async () => {
     if (onUserClick) await onUserClick(userID)
@@ -47,49 +52,58 @@ export const UserList = ({
           {isLoading ? (
             <UserListSkeleton />
           ) : users.length > 0 ? (
-            users.map((user) => (
-              <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="space-between"
-                cursor="pointer"
-              >
-                <IntlLink href={`/profile/${user.id}`}>
-                  <NamedAvatar
-                    key={user.id}
-                    showCard={showUserCard}
-                    canHover={Boolean(onUserClick)}
-                    userID={user.id}
-                    subtitleType={avatarSubtitleType}
-                    cardPortalReference={cardReference}
-                  />
-                </IntlLink>
-                <Menu isLazy placement="start" variant="action-list">
-                  <MenuButton
-                    color="new-gray.600"
-                    _hover={{
-                      color: 'new-gray.900',
-                    }}
-                    mr={2}
-                  >
-                    <TreeDotsIcon
-                      fill="currentColor"
-                      fontSize="2xl"
-                      style={{ transform: 'rotate(90deg)' }}
-                      desc={intl.formatMessage(messages.optionsButtonDesc)}
-                    />
-                  </MenuButton>
-                  <MenuList>
-                    <IntlLink href={`/profile/${user.id}`}>
-                      <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
-                    </IntlLink>
-                    <MenuItem onClick={handleUserClick(user.id)}>
-                      {intl.formatMessage(messages.secondMenuItemOption)}
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
-              </Box>
-            ))
+            hasMenu ? (
+              users.map((user) => (
+                <NamedAvatar
+                  key={user.id}
+                  showCard={showUserCard}
+                  canHover={Boolean(onUserClick)}
+                  userID={user.id}
+                  subtitleType={avatarSubtitleType}
+                  cardPortalReference={cardReference}
+                  redirectToProfile
+                >
+                  <Menu isLazy placement="start" variant="action-list">
+                    <MenuButton
+                      color="new-gray.600"
+                      _hover={{
+                        color: 'new-gray.900',
+                      }}
+                      mr={2}
+                    >
+                      <TreeDotsIcon
+                        fill="currentColor"
+                        fontSize="2xl"
+                        style={{ transform: 'rotate(90deg)' }}
+                        desc={intl.formatMessage(messages.optionsButtonDesc)}
+                      />
+                    </MenuButton>
+                    <MenuList>
+                      <IntlLink
+                        href={user?.id !== myID ? `/profile/${user?.id}` : `/settings/my-profile`}
+                      >
+                        <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
+                      </IntlLink>
+                      <MenuItem onClick={handleUserClick(user.id)}>
+                        {intl.formatMessage(messages.secondMenuItemOption)}
+                      </MenuItem>
+                    </MenuList>
+                  </Menu>
+                </NamedAvatar>
+              ))
+            ) : (
+              users.map((user) => (
+                <NamedAvatar
+                  key={user.id}
+                  showCard={showUserCard}
+                  canHover={Boolean(onUserClick)}
+                  userID={user.id}
+                  subtitleType={avatarSubtitleType}
+                  cardPortalReference={cardReference}
+                  onClick={handleUserClick(user.id)}
+                />
+              ))
+            )
           ) : (
             emptyState
           )}

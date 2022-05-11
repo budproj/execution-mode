@@ -93,6 +93,7 @@ export const TeamMembers = ({
         emptyStateTitle={messages.emptyStateTitle}
         onSelect={handleSelect}
         onCreateUser={handleCreatedUser}
+        hasMenu
       />
       <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>
         <ColorizedOverlay>
