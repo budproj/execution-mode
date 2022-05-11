@@ -97,8 +97,9 @@ export const NameWithAvatar = forwardRef(
     return (
       <Stack
         direction="row"
-        cursor={isHoverable ? 'pointer' : 'auto'}
+        alignItems="center"
         justifyContent="space-between"
+        cursor={isHoverable ? 'pointer' : 'auto'}
         onMouseEnter={() => setShowButton(true)}
         onMouseLeave={() => setShowButton(false)}
       >
@@ -168,7 +169,7 @@ export const NameWithAvatar = forwardRef(
             )}
           </Stack>
         </Stack>
-        {showButton && <Box cursor="pointer">{children}</Box>}
+        {children && showButton && <Box cursor="pointer">{children}</Box>}
       </Stack>
     )
   },
