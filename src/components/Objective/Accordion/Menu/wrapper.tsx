@@ -5,7 +5,6 @@ import { useRecoilValue } from 'recoil'
 
 import { objectiveAtomFamily } from '../../../../state/recoil/objective'
 import { teamAtomFamily } from '../../../../state/recoil/team'
-import LargeTreeDotsIcon from 'src/components/Icon/LargeTreeDots'
 import { GraphQLEffect } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 
@@ -13,6 +12,7 @@ import messages from './messages'
 import { CreateKeyResultOption } from './option-create-key-result'
 import { DeleteObjectiveOption } from './option-delete-objective'
 import { UpdateObjectiveOption } from './option-update-objective'
+import TreeDotsIcon from 'src/components/Icon/TreeDots'
 
 interface ObjectiveAccordionMenuProperties {
   teamID?: string
@@ -41,6 +41,7 @@ export const ObjectiveAccordionMenu = ({
           bg="black.100"
           borderRadius={4}
           color="gray.500"
+          p={2}
           _hover={{
             bg: 'brand.100',
             color: 'brand.500',
@@ -51,11 +52,10 @@ export const ObjectiveAccordionMenu = ({
           }}
           onClick={stopAccordionOpen}
         >
-          <LargeTreeDotsIcon
+          <TreeDotsIcon
             desc={intl.formatMessage(messages.optionsButtonIconDesc)}
             fill="currentColor"
-            width={'36px'}
-            height={'36px'}
+            fontSize="2xl"
           />
         </MenuButton>
         <MenuList>

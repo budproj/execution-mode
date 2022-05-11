@@ -25,14 +25,14 @@ export const CardGuide = ({ iconKey, title, description }: CardGuideProps) => {
       justifyContent="center"
       border="2px solid #EEF2FC"
       borderRadius="10px"
-      padding="22px"
+      padding={6}
       width="100%"
     >
-      <Image mb="10px" flex={1} src={iconURL} />
-      <Text color="#99A4C2" fontSize="14px" fontWeight="bold" lineHeight="19.6px">
+      <Image mb={2} flex={1} src={iconURL} />
+      <Text color="#99A4C2" fontSize="14px" fontWeight="bold">
         {intl.formatMessage(title)}
       </Text>
-      <Text color="#99A4C2" fontSize="12px" fontWeight="regular" lineHeight="16.8px">
+      <Text color="#99A4C2" fontSize="12px" fontWeight="regular" mt={1}>
         {intl.formatMessage(description)}
       </Text>
     </Flex>

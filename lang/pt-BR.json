@@ -2079,10 +2079,6 @@
     "defaultMessage": "O objetivo foi removido com sucesso",
     "description": "This message appears in a toast after the user removes an objective"
   },
-  "joVcuU": {
-    "defaultMessage": "Escreva um título significativo, audacioso e inspirador para seu novo objetivo",
-    "description": "This is used by screen readers to explain the X that appears when the users types a non-valid data in a given controlled field"
-  },
   "jxyYl3": {
     "defaultMessage": "Ordenada pelo progresso",
     "description": "This tooltip appears when the user hovers the first column title"
