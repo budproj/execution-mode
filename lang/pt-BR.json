@@ -1127,6 +1127,10 @@
     "defaultMessage": "Nome",
     "description": "The user first name input placeholder while creating a new workspace"
   },
+  "Sb6dkV": {
+    "defaultMessage": "Ver detalhes",
+    "description": "This option will show a sidebar with the details of the selected user."
+  },
   "SenoB2": {
     "defaultMessage": "A página que você está procurando não foi encontrada!",
     "description": "The title displayed in our not found error page"
@@ -1330,6 +1334,10 @@
   "Y1oyYG": {
     "defaultMessage": "Um ícone de seta para cima, indicando que o progresso aumentou",
     "description": "This desc message explains the increase icon for screen readers"
+  },
+  "YFb9UA": {
+    "defaultMessage": "Ir para o perfil",
+    "description": "This option will redirect the user to the selected user profile."
   },
   "YUvWwS": {
     "defaultMessage": "Registro",
@@ -1659,6 +1667,10 @@
     "defaultMessage": "Ordenada pelo progresso",
     "description": "This tooltip appears when the user hovers the first column title"
   },
+  "jzx+Hl": {
+    "defaultMessage": "Botão de opções",
+    "description": "This button allows you to choose an option that directs the user to the users profile or details."
+  },
   "k3EFXK": {
     "defaultMessage": "O nível de confiança descreve como você vê suas chances de alcançar esse resultado-chave dentro do prazo",
     "description": "The tooltip of the check-in form. It appears when the user hovers the question mark icon"
@@ -1838,6 +1850,10 @@
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
+  },
+  "qp4Qmm": {
+    "defaultMessage": "Ir para o perfil de {username}",
+    "description": "This button redirects to the selected user."
   },
   "qrgfik": {
     "defaultMessage": "Em uma frase, qual é a missão deste time?",

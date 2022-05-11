@@ -131,7 +131,7 @@ const UserProfileCard = ({ userID, redirectToProfile = false }: UserProfileCardP
               }
             >
               {intl.formatMessage(messages.redirectToUserProfileButtonText, {
-                userName: user?.firstName,
+                username: user?.firstName,
               })}
             </Button>
           </IntlLink>

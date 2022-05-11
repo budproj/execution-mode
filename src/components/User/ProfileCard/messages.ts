@@ -27,8 +27,8 @@ export default defineMessages<ProfileCardMessage>({
   },
 
   redirectToUserProfileButtonText: {
-    defaultMessage: 'Ir para o perfil de {userName}',
-    id: 'peVkKg',
-    description: 'The alternative text explaining our arrow right icon',
+    defaultMessage: 'Ir para o perfil de {username}',
+    id: 'qp4Qmm',
+    description: 'This button redirects to the selected user.',
   },
 })
