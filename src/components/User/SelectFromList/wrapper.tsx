@@ -63,9 +63,9 @@ export const SelectUserFromListWrapper = ({
         isLoading={isLoading}
         avatarSubtitleType={avatarSubtitleType}
         emptyStateTitle={emptyStateTitle}
+        hasMenu={hasMenu}
         onCreateStart={handleCreateSidebarOpen}
         onSelect={onSelect}
-        hasMenu={hasMenu}
       />
 
       <CreateSidebarInContext

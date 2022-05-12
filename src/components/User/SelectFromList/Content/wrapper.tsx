@@ -41,9 +41,9 @@ export const SelectUserFromListContent = ({
       <UsersInContext
         hasUserCard={hasUserCard}
         isLoading={isLoading}
+        hasMenu={hasMenu}
         avatarSubtitleType={avatarSubtitleType}
         onSelect={onSelect}
-        hasMenu={hasMenu}
       />
     </>
   ) : (

@@ -44,9 +44,9 @@ export const UsersInContext = ({
       showUserCard={hasUserCard}
       isLoading={isLoading}
       avatarSubtitleType={avatarSubtitleType}
+      hasMenu={hasMenu}
       emptyState={emptyState}
       onUserClick={onSelect}
-      hasMenu={hasMenu}
     />
   )
 }
