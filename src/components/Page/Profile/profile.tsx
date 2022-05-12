@@ -12,7 +12,6 @@ import {
   Text,
   Skeleton,
 } from '@chakra-ui/react'
-import { Scrollbars } from 'rc-scrollbars'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -154,13 +153,11 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
 
         <HStack align="stretch" gap="40px" flex="1">
           <Box flexBasis="60%" maxWidth="60%">
-            <Scrollbars>
-              <KeyResultsActiveAndOwnedByUser
-                userID={userId}
-                username={userData?.firstName}
-                onLineClick={handleLineClick}
-              />
-            </Scrollbars>
+            <KeyResultsActiveAndOwnedByUser
+              userID={userId}
+              username={userData?.firstName}
+              onLineClick={handleLineClick}
+            />
           </Box>
 
           <Box>
@@ -168,11 +165,7 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
           </Box>
 
           <Box flex="1">
-            <Scrollbars>
-              <Box pr={6}>
-                <MyTasks userID={userId} username={userData?.firstName} />
-              </Box>
-            </Scrollbars>
+            <MyTasks userID={userId} username={userData?.firstName} />
           </Box>
         </HStack>
       </PageContent>
