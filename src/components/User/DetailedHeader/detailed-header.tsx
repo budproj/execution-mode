@@ -45,7 +45,7 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
                 {userData?.fullName}
               </Heading>
             </Skeleton>
-            <Skeleton isLoaded={!isUserLoading} width="100px" height="21px" mb="0.7rem">
+            <Skeleton isLoaded={!isUserLoading} minWidth="100px" height="21px" mb="0.7rem">
               <Heading as="h3" color="gray.400" fontWeight={400} fontSize="1.23rem">
                 {userData?.role}
               </Heading>
