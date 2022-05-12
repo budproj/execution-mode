@@ -10,10 +10,16 @@ import React, { ReactNode } from 'react'
 
 interface AccordionProperties {
   title: string | ReactNode
+  textPadding?: string
   children: ReactNode
 }
 
-export const Accordion = ({ title, children, ...rest }: AccordionProperties) => {
+export const Accordion = ({
+  title,
+  textPadding = '0.5rem',
+  children,
+  ...rest
+}: AccordionProperties) => {
   return (
     <ChakraAccordion {...rest} allowToggle defaultIndex={0}>
       <AccordionItem border={0}>
@@ -24,7 +30,7 @@ export const Accordion = ({ title, children, ...rest }: AccordionProperties) => 
           _focus={{ boxShadow: 'none' }}
           justifyContent="space-between"
         >
-          <Text fontWeight={600} pl="0.5rem" flex={1} textAlign="left">
+          <Text fontWeight={600} pl={textPadding} flex={1} textAlign="left">
             {title}
           </Text>
           <AccordionIcon />

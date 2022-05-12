@@ -53,6 +53,7 @@ const MyPersonalTasks = () => {
           borderBottom="1px solid"
           borderBottomColor="new-gray.400"
           py={4}
+          px={0}
         >
           <Flex flex="1" textAlign="left">
             <Heading
@@ -84,7 +85,7 @@ const MyPersonalTasks = () => {
           </Flex>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel pb={4}>
+        <AccordionPanel pb={4} px={0}>
           {isLoaded && tasks.length > 0 ? (
             <>
               {tasks.map((task: Task) => (
