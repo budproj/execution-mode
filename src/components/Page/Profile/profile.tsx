@@ -44,8 +44,8 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
   const { data: userData, loading: isUserLoading } = useGetMyTasks(userId)
 
   const statesLabels = new Map([
-    [TASK_STATUS.UNCHECKED, intl.formatMessage(tasksMessages.pendingTasks)],
     [TASK_STATUS.CHECKED, intl.formatMessage(tasksMessages.allTasks)],
+    [TASK_STATUS.UNCHECKED, intl.formatMessage(tasksMessages.pendingTasks)],
   ])
 
   const [taskState, setTaskState] = useState(TASK_STATUS.CHECKED)

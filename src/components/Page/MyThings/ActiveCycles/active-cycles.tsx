@@ -42,8 +42,8 @@ const ActiveCyclesPage = () => {
   const user = useRecoilValue(selectUser(userID))
 
   const statesLabels = new Map([
-    [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
     [TASK_STATUS.CHECKED, intl.formatMessage(messages.allTasks)],
+    [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
   ])
 
   const [taskState, setTaskState] = useState(TASK_STATUS.CHECKED)
