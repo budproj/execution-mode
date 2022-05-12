@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { Button } from 'src/components/Base/Button'
 import PageContent from 'src/components/Base/PageContent'
 import { RadioProgress } from 'src/components/Base/RadioProgress/wrapper'
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import TeamTag from 'src/components/Team/Tag'
 import { UserEditableAvatar } from 'src/components/User/EditableAvatar/wrapper'
 import { User } from 'src/components/User/types'
@@ -51,7 +52,7 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
                 {userData?.fullName}
               </Heading>
             </Skeleton>
-            <Skeleton isLoaded={!isUserLoading} width="100px" height="21px" mb="0.7rem">
+            <Skeleton isLoaded={!isUserLoading} minWidth="100px" height="21px" mb="0.7rem">
               <Heading as="h3" color="gray.400" fontWeight={400} fontSize="1.23rem">
                 {userData?.role}
               </Heading>
@@ -71,50 +72,61 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
           </Flex>
         </Flex>
         <Flex>
-          {userData?.yearlyProgress ? (
-            <Flex direction="column">
-              <RadioProgress
-                isIndeterminate={isUserLoading}
-                size="64px"
-                progress={userData?.yearlyProgress}
-                color="brand.500"
-                trackColor="brand.100"
-              />
-              <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
-                <Text
-                  color="new-gray.700"
-                  fontWeight={700}
-                  maxWidth="64px"
-                  textAlign="center"
-                  fontSize="0.85rem"
-                >
-                  {intl.formatMessage(messages.yearlyProgress)}
-                </Text>
-              </Skeleton>
-            </Flex>
+          {userData?.yearlyProgress?.showProgress ? (
+            <TooltipWithDelay
+              label={intl.formatMessage(messages.yearlyProgressTooltip)}
+              textAlign="center"
+            >
+              <Flex direction="column">
+                <RadioProgress
+                  isIndeterminate={isUserLoading}
+                  size="64px"
+                  progress={userData?.yearlyProgress?.progress}
+                  color="brand.500"
+                  trackColor="brand.100"
+                />
+                <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
+                  <Text
+                    color="new-gray.700"
+                    fontWeight={700}
+                    maxWidth="64px"
+                    textAlign="center"
+                    fontSize="0.85rem"
+                  >
+                    {intl.formatMessage(messages.yearlyProgress)}
+                  </Text>
+                </Skeleton>
+              </Flex>
+            </TooltipWithDelay>
           ) : undefined}
 
-          {userData?.quarterlyProgress ? (
-            <Flex direction="column" ml="35px">
-              <RadioProgress
-                isIndeterminate={isUserLoading}
-                size="64px"
-                progress={userData?.quarterlyProgress}
-                color="brand.500"
-                trackColor="brand.100"
-              />
-              <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
-                <Text
-                  color="new-gray.700"
-                  fontWeight={700}
-                  maxWidth="64px"
-                  textAlign="center"
-                  fontSize="0.85rem"
-                >
-                  {intl.formatMessage(messages.quarterlyProgress)}
-                </Text>
-              </Skeleton>
-            </Flex>
+          {userData?.quarterlyProgress?.showProgress ? (
+            <TooltipWithDelay
+              label={intl.formatMessage(messages.quarterlyProgressTooltip)}
+              textAlign="center"
+              placement="bottom-end"
+            >
+              <Flex direction="column" ml="35px">
+                <RadioProgress
+                  isIndeterminate={isUserLoading}
+                  size="64px"
+                  progress={userData?.quarterlyProgress?.progress}
+                  color="brand.500"
+                  trackColor="brand.100"
+                />
+                <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
+                  <Text
+                    color="new-gray.700"
+                    fontWeight={700}
+                    maxWidth="64px"
+                    textAlign="center"
+                    fontSize="0.85rem"
+                  >
+                    {intl.formatMessage(messages.quarterlyProgress)}
+                  </Text>
+                </Skeleton>
+              </Flex>
+            </TooltipWithDelay>
           ) : undefined}
         </Flex>
       </Flex>

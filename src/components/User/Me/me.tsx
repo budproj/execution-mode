@@ -17,22 +17,27 @@ import {
 import { Team } from '../../Team/types'
 import { GraphQLConnection } from '../../types'
 import { USER_GENDER } from '../constants'
+import { UserProgress } from '../types'
 
 import queries from './queries.gql'
 
+export interface UserNamedAvatarDataQuery {
+  id: string
+  firstName: string
+  fullName: string
+  picture: string
+  email: string
+  gender: USER_GENDER
+  role: string
+  createdAt: string
+  companies: GraphQLConnection<Team>
+  teams: GraphQLConnection<Team>
+  yearlyProgress: UserProgress
+  quarterlyProgress: UserProgress
+}
+
 export interface GetUserNamedAvatarDataQuery {
-  me: {
-    id: string
-    firstName: string
-    fullName: string
-    picture: string
-    email: string
-    gender: USER_GENDER
-    role: string
-    createdAt: string
-    companies: GraphQLConnection<Team>
-    teams: GraphQLConnection<Team>
-  }
+  me: UserNamedAvatarDataQuery
 }
 
 const Me = () => {

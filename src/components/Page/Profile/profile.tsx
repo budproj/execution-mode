@@ -156,7 +156,7 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
           <Box flexBasis="60%" maxWidth="60%">
             <Scrollbars>
               <KeyResultsActiveAndOwnedByUser
-                userID={userData?.id ?? ''}
+                userID={userId}
                 username={userData?.firstName}
                 onLineClick={handleLineClick}
               />
@@ -170,7 +170,7 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
           <Box flex="1">
             <Scrollbars>
               <Box pr={6}>
-                <MyTasks userID={userData?.id ?? ''} username={userData?.firstName} />
+                <MyTasks userID={userId} username={userData?.firstName} />
               </Box>
             </Scrollbars>
           </Box>

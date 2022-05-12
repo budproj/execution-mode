@@ -1,18 +1,6 @@
-import { USER_GENDER } from '../../../components/User/constants'
+import { UserNamedAvatarDataQuery } from 'src/components/User/Me/me'
 
 import { AmplitudeUser, AmplitudeUserGroups } from './types'
-
-type MinimumUser = {
-  id: string
-  fullName: string
-  email: string
-  gender: USER_GENDER
-  role: string
-  createdAt: string
-  companies: MinimumConnection<MinimumGroup>
-  teams: MinimumConnection<MinimumGroup>
-  permissions: string[]
-}
 
 type MinimumGroup = {
   id: string
@@ -20,15 +8,11 @@ type MinimumGroup = {
   createdAt: string
 }
 
-type MinimumConnection<N> = {
-  edges: Array<MinimumEdge<N>>
-}
-
 type MinimumEdge<N> = {
   node: N
 }
 
-export const marshalAmplitudeUser = (user: MinimumUser): AmplitudeUser => ({
+export const marshalAmplitudeUser = (user: UserNamedAvatarDataQuery): AmplitudeUser => ({
   id: user.id,
   name: user.fullName,
   email: user.email,
@@ -37,10 +21,11 @@ export const marshalAmplitudeUser = (user: MinimumUser): AmplitudeUser => ({
   createdAt: user.createdAt,
 })
 
-export const marshalAmplitudeUserGroups = (user: MinimumUser): AmplitudeUserGroups => ({
+export const marshalAmplitudeUserGroups = (
+  user: UserNamedAvatarDataQuery,
+): AmplitudeUserGroups => ({
   companies: getGroupNames(user.companies.edges),
   teams: getGroupNames(user.teams.edges),
-  permissions: user.permissions,
 })
 
 const getGroupNames = (groupEdges: Array<MinimumEdge<MinimumGroup>>): string[] =>

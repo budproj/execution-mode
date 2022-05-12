@@ -14,7 +14,7 @@ import {
 import { Scrollbars } from 'rc-scrollbars'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState, useRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { PageMetaHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
@@ -40,7 +40,7 @@ const ActiveCyclesPage = () => {
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const setTasksQuery = useSetRecoilState(myThingsTasksQuery)
   const userID = useRecoilValue(meAtom)
-  const [user] = useRecoilState(selectUser(userID))
+  const user = useRecoilValue(selectUser(userID))
 
   const statesLabels = new Map([
     [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
@@ -61,7 +61,7 @@ const ActiveCyclesPage = () => {
 
   return (
     <>
-      <DetailedHeader userData={user} isUserLoading={false} />
+      <DetailedHeader userData={user} />
       <PageContent>
         <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
         <KeyResultSingleDrawer />
@@ -148,7 +148,9 @@ const ActiveCyclesPage = () => {
         <HStack align="stretch" spacing="4rem" flex="1">
           <Box flexBasis="60%" maxWidth="60%">
             <Scrollbars>
-              <KeyResultsActiveAndOwnedByUser userID={userID} onLineClick={handleLineClick} />
+              {userID ? (
+                <KeyResultsActiveAndOwnedByUser userID={userID} onLineClick={handleLineClick} />
+              ) : undefined}
             </Scrollbars>
           </Box>
 
@@ -160,7 +162,7 @@ const ActiveCyclesPage = () => {
             <Scrollbars>
               <Box pr={6}>
                 <MyPersonalTasks />
-                <MyTasks userID={userID} />
+                {userID ? <MyTasks userID={userID} /> : undefined}
               </Box>
             </Scrollbars>
           </Box>
