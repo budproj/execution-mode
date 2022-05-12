@@ -32,6 +32,7 @@ const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasks
 
   return (
     <Accordion
+      textPadding="0"
       title={
         <HStack key={keyResult.id} py={3} textAlign="left">
           <KeyResultDynamicIcon title={keyResult.title} boxSize="30px" iconSize="16px" />
@@ -41,7 +42,7 @@ const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasks
         </HStack>
       }
     >
-      <Box transform="translateY(-10px)" pl="3.2rem">
+      <Box transform="translateY(-10px)" pl="2.2rem">
         <KeyResultChecklist
           isEditable
           checkPolicy={false}

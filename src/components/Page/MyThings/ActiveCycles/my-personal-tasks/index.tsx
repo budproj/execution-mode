@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   Heading,
-  Tag,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -54,6 +53,7 @@ const MyPersonalTasks = () => {
           borderBottom="1px solid"
           borderBottomColor="new-gray.400"
           py={4}
+          px={0}
         >
           <Flex flex="1" textAlign="left">
             <Heading
@@ -82,20 +82,10 @@ const MyPersonalTasks = () => {
                 />
               </Box>
             </TooltipWithDelay>
-
-            <Tag
-              variant="solid"
-              colorScheme="brand"
-              ml={4}
-              textTransform="lowercase"
-              fontWeight="bold"
-            >
-              {intl.formatMessage(messages.newTag)}
-            </Tag>
           </Flex>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel pb={4}>
+        <AccordionPanel pb={4} px={0}>
           {isLoaded && tasks.length > 0 ? (
             <>
               {tasks.map((task: Task) => (

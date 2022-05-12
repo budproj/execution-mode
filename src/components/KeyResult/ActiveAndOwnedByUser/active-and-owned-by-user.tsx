@@ -48,7 +48,8 @@ const KeyResultActiveAndOwnedByUser = ({
 
   useEffect(() => {
     if (isLoaded) loadKeyResults(keyResults)
-  }, [keyResults, isLoaded, loadKeyResults])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyResults, isLoaded])
 
   return (
     <Stack direction="column" gridGap={8} pr={6} height="100%" justifyContent={stackJustify}>

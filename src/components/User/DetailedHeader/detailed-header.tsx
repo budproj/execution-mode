@@ -75,7 +75,8 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
           {userData?.yearlyProgress?.showProgress ? (
             <TooltipWithDelay
               label={intl.formatMessage(messages.yearlyProgressTooltip)}
-              textAlign="center"
+              maxWidth="unset"
+              placement="bottom-end"
             >
               <Flex direction="column">
                 <RadioProgress
@@ -103,7 +104,7 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
           {userData?.quarterlyProgress?.showProgress ? (
             <TooltipWithDelay
               label={intl.formatMessage(messages.quarterlyProgressTooltip)}
-              textAlign="center"
+              maxWidth="unset"
               placement="bottom-end"
             >
               <Flex direction="column" ml="35px">

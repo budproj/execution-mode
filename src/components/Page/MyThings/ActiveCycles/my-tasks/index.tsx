@@ -76,6 +76,7 @@ const MyTasks = ({ userID, username }: UserTasksProperties) => {
           borderBottom="1px solid"
           borderBottomColor="new-gray.400"
           py={4}
+          px={0}
         >
           <Flex flex="1" textAlign="left">
             <Heading
@@ -90,7 +91,7 @@ const MyTasks = ({ userID, username }: UserTasksProperties) => {
           </Flex>
           <AccordionIcon />
         </AccordionButton>
-        <AccordionPanel pb={4}>
+        <AccordionPanel pb={4} px={0}>
           {keyResults.length > 0 ? (
             <Tasks items={filteredKeyResults} onUpdate={refetch} />
           ) : (

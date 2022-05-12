@@ -11,7 +11,6 @@ import {
   MenuButton,
   MenuList,
 } from '@chakra-ui/react'
-import { Scrollbars } from 'rc-scrollbars'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -43,8 +42,8 @@ const ActiveCyclesPage = () => {
   const user = useRecoilValue(selectUser(userID))
 
   const statesLabels = new Map([
-    [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
     [TASK_STATUS.CHECKED, intl.formatMessage(messages.allTasks)],
+    [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
   ])
 
   const [taskState, setTaskState] = useState(TASK_STATUS.CHECKED)
@@ -147,11 +146,9 @@ const ActiveCyclesPage = () => {
 
         <HStack align="stretch" spacing="4rem" flex="1">
           <Box flexBasis="60%" maxWidth="60%">
-            <Scrollbars>
-              {userID ? (
-                <KeyResultsActiveAndOwnedByUser userID={userID} onLineClick={handleLineClick} />
-              ) : undefined}
-            </Scrollbars>
+            {userID ? (
+              <KeyResultsActiveAndOwnedByUser userID={userID} onLineClick={handleLineClick} />
+            ) : undefined}
           </Box>
 
           <Box>
@@ -159,12 +156,8 @@ const ActiveCyclesPage = () => {
           </Box>
 
           <Box flex="1">
-            <Scrollbars>
-              <Box pr={6}>
-                <MyPersonalTasks />
-                {userID ? <MyTasks userID={userID} /> : undefined}
-              </Box>
-            </Scrollbars>
+            <MyPersonalTasks />
+            {userID ? <MyTasks userID={userID} /> : undefined}
           </Box>
         </HStack>
       </PageContent>
