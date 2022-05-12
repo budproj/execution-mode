@@ -135,7 +135,11 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
       <Flex>
         <Button
           padding="15px 30px"
-          label="OKRs na Empresa"
+          label={intl.formatMessage(messages.companyOKRTitle, {
+            company: userData?.companies?.edges[0].node.name
+              ? userData?.companies?.edges[0].node.name
+              : '',
+          })}
           borderRadius="0"
           color={keyResultType === KeyResultType.COMPANY ? 'brand.500' : '#525F7F'}
           borderBottom={keyResultType === KeyResultType.COMPANY ? '2px solid #6F6EFF' : undefined}
@@ -144,7 +148,7 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
 
         <Button
           padding="15px 30px"
-          label="OKRs Individuais"
+          label={intl.formatMessage(messages.individualOKRTitle)}
           borderRadius="0"
           color={keyResultType === KeyResultType.PERSONAL ? 'brand.500' : '#525F7F'}
           borderBottom={keyResultType === KeyResultType.PERSONAL ? '2px solid #6F6EFF' : undefined}
