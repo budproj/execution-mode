@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   Heading,
-  Tag,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -82,16 +81,6 @@ const MyPersonalTasks = () => {
                 />
               </Box>
             </TooltipWithDelay>
-
-            <Tag
-              variant="solid"
-              colorScheme="brand"
-              ml={4}
-              textTransform="lowercase"
-              fontWeight="bold"
-            >
-              {intl.formatMessage(messages.newTag)}
-            </Tag>
           </Flex>
           <AccordionIcon />
         </AccordionButton>
