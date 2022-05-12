@@ -22,11 +22,11 @@ export const CardHeader = ({
     <Stack spacing={4}>
       <NamedAvatar
         showCard
+        canHover
         userID={userID}
         isLoading={!isLoaded}
         date={date}
         subtitleType="date"
-        canHover
       />
       <Divider borderColor={BORDER_COLOR} />
     </Stack>

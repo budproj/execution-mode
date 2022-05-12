@@ -112,10 +112,11 @@ const NamedAvatar = ({
           isEditing={isEditting}
           hasSubtitle={displaySubtitle}
           subtitle={subtitle}
-          onClick={onClick}
           redirectToProfile={redirectToProfile}
-          children={children}
-        />
+          onClick={onClick}
+        >
+          {children}
+        </NameWithAvatar>
       </PopoverTrigger>
       <Portal containerRef={cardPortalReference}>
         <PopoverContent p={0}>
@@ -138,10 +139,11 @@ const NamedAvatar = ({
       isEditing={isEditting}
       hasSubtitle={displaySubtitle}
       subtitle={subtitle}
-      onClick={onClick}
       redirectToProfile={redirectToProfile}
-      children={children}
-    />
+      onClick={onClick}
+    >
+      {children}
+    </NameWithAvatar>
   )
 }
 
