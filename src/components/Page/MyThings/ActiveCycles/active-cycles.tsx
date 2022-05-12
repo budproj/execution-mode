@@ -23,7 +23,9 @@ import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { TASK_STATUS } from 'src/components/Task/constants'
 import { DetailedHeader } from 'src/components/User/DetailedHeader'
+import { keyResultTypeAtom } from 'src/state/recoil/key-result'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
+import { KeyResultType } from 'src/state/recoil/key-result/key-result-type'
 import { myThingsTasksQuery } from 'src/state/recoil/task'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
@@ -38,6 +40,8 @@ const ActiveCyclesPage = () => {
   const intl = useIntl()
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const setTasksQuery = useSetRecoilState(myThingsTasksQuery)
+  const keyResultType = useRecoilValue(keyResultTypeAtom)
+
   const userID = useRecoilValue(meAtom)
   const user = useRecoilValue(selectUser(userID))
 
@@ -67,14 +71,29 @@ const ActiveCyclesPage = () => {
 
         <PageHeader>
           <Flex alignItems="center" justifyContent="space-between">
-            <Box>
-              <Heading color="new-gray.800" mt={1}>
-                {intl.formatMessage(messages.pageTitle)}
-              </Heading>
-              <Text color="new-gray.600" fontWeight={500} mt={3}>
-                {intl.formatMessage(messages.pageSubTitle)}
-              </Text>
-            </Box>
+            {keyResultType === KeyResultType.COMPANY && (
+              <Box>
+                <Heading color="new-gray.800" mt={1}>
+                  {intl.formatMessage(messages.companyOKRTitle, {
+                    company: user?.companies?.edges[0].node.name,
+                  })}
+                </Heading>
+                <Text color="new-gray.600" fontWeight={500} mt={3}>
+                  {intl.formatMessage(messages.companyOKRSubTitle)}
+                </Text>
+              </Box>
+            )}
+
+            {keyResultType === KeyResultType.PERSONAL && (
+              <Box>
+                <Heading color="new-gray.800" mt={1}>
+                  {intl.formatMessage(messages.individualOKRTitle)}
+                </Heading>
+                <Text color="new-gray.600" fontWeight={500} mt={3}>
+                  {intl.formatMessage(messages.individualOKRSubTitle)}
+                </Text>
+              </Box>
+            )}
 
             <Box>
               <Menu>

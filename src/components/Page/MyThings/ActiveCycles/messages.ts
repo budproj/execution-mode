@@ -1,8 +1,10 @@
 import { defineMessages } from 'react-intl'
 
 type MyKeyResultsActiveCyclesPageMessage =
-  | 'pageTitle'
-  | 'pageSubTitle'
+  | 'companyOKRTitle'
+  | 'individualOKRTitle'
+  | 'companyOKRSubTitle'
+  | 'individualOKRSubTitle'
   | 'metaTitle'
   | 'metaDescription'
   | 'firstTab'
@@ -12,18 +14,27 @@ type MyKeyResultsActiveCyclesPageMessage =
   | 'allTasks'
 
 export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
-  pageTitle: {
-    defaultMessage: 'Minhas Coisas',
-    id: 'eVkwyH',
-    description: 'The page title that our users should see in the my things page',
+  companyOKRTitle: {
+    defaultMessage: 'OKRs da {company}',
+    id: 'EG9UsD',
+    description: 'Company OKR title of the page',
   },
-
-  pageSubTitle: {
-    defaultMessage: 'Estes são os resultados-chave e as tarefas atribuídos a você.',
-    id: 'W3eJuC',
-    description: 'The page sub title that our users should see in the my things page',
+  companyOKRSubTitle: {
+    defaultMessage: 'Veja seus resultados-chave e tarefas relacionadas à estratégia da empresa.',
+    id: '608lDc',
+    description: 'Company OKR subtitle of the page',
   },
-
+  individualOKRTitle: {
+    defaultMessage: 'OKRs Individuais',
+    id: 'jVVtSO',
+    description: 'Individual OKR title of the page',
+  },
+  individualOKRSubTitle: {
+    defaultMessage:
+      'OKRs Individuais são definidos por você. Eles não interferem no progresso da empresa, mas podem ser vistos por seus colegas.',
+    id: 'MsuYNU',
+    description: 'Individual OKR subtitle of the page',
+  },
   metaTitle: {
     defaultMessage: 'Minhas Coisas | bud ',
     id: 'p2UjMZ',

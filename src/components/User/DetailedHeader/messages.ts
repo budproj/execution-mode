@@ -5,6 +5,8 @@ type MyKeyResultsActiveCyclesPageMessage =
   | 'yearlyProgressTooltip'
   | 'quarterlyProgress'
   | 'quarterlyProgressTooltip'
+  | 'companyOKRTitle'
+  | 'individualOKRTitle'
 
 export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   yearlyProgress: {
@@ -30,5 +32,15 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
       'Média do progresso de todos os seus resultados-chave no ciclo trimestral atual',
     id: 'P0ljMC',
     description: 'Quarterly progress chart tooltip message',
+  },
+  companyOKRTitle: {
+    defaultMessage: 'OKRs da {company}',
+    id: 'CmpXX/',
+    description: 'Company OKR title on the navigation tab',
+  },
+  individualOKRTitle: {
+    defaultMessage: 'OKRs Individuais',
+    id: 'Mtn4v3',
+    description: 'Individual OKR title on the navigation tab',
   },
 })
