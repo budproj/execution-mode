@@ -1,13 +1,17 @@
-import { Box, Flex, Heading, Text, Skeleton } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text, Skeleton, Divider } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { Button } from 'src/components/Base/Button'
 import PageContent from 'src/components/Base/PageContent'
 import { RadioProgress } from 'src/components/Base/RadioProgress/wrapper'
 import TeamTag from 'src/components/Team/Tag'
 import { UserEditableAvatar } from 'src/components/User/EditableAvatar/wrapper'
 import { User } from 'src/components/User/types'
 import { GraphQLEffect } from 'src/components/types'
+import { keyResultTypeAtom } from 'src/state/recoil/key-result'
+import { KeyResultType } from 'src/state/recoil/key-result/key-result-type'
 
 import messages from './messages'
 
@@ -17,16 +21,19 @@ interface DetailedHeaderProperties {
 }
 
 export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProperties) => {
+  const keyResultType = useRecoilValue(keyResultTypeAtom)
+  const setKeyResultType = useSetRecoilState(keyResultTypeAtom)
+
   const intl = useIntl()
 
   return (
     <PageContent
-      borderBottom="1px solid"
+      paddingBottom="0"
       borderColor="new-gray.400"
       flex="unset"
       boxShadow="0px 6px 15px 0px rgb(217 226 246 / 35%)"
     >
-      <Flex alignItems="center" justifyContent="space-between">
+      <Flex alignItems="center" justifyContent="space-between" paddingBottom={10}>
         <Flex alignItems="flex-start" gap="20px">
           <Skeleton isLoaded={!isUserLoading}>
             <UserEditableAvatar
@@ -63,7 +70,6 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
             )}
           </Flex>
         </Flex>
-
         <Flex>
           {userData?.yearlyProgress ? (
             <Flex direction="column">
@@ -111,6 +117,26 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
             </Flex>
           ) : undefined}
         </Flex>
+      </Flex>
+      <Divider />
+      <Flex>
+        <Button
+          padding="15px 30px"
+          label="OKRs na Empresa"
+          borderRadius="0"
+          color={keyResultType === KeyResultType.COMPANY ? 'brand.500' : '#525F7F'}
+          borderBottom={keyResultType === KeyResultType.COMPANY ? '2px solid #6F6EFF' : undefined}
+          onClick={() => setKeyResultType(KeyResultType.COMPANY)}
+        />
+
+        <Button
+          padding="15px 30px"
+          label="OKRs Individuais"
+          borderRadius="0"
+          color={keyResultType === KeyResultType.PERSONAL ? 'brand.500' : '#525F7F'}
+          borderBottom={keyResultType === KeyResultType.PERSONAL ? '2px solid #6F6EFF' : undefined}
+          onClick={() => setKeyResultType(KeyResultType.PERSONAL)}
+        />
       </Flex>
     </PageContent>
   )
