@@ -25,7 +25,7 @@ import { TaskSkeletons } from './skeletons'
 import Tasks from './tasks'
 
 interface UserTasksProperties {
-  userID?: User['id']
+  userID: User['id']
   username?: User['firstName']
 }
 
