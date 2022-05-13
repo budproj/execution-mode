@@ -44,8 +44,8 @@ export default defineMessages<ActionMenuMessage>({
   },
 
   createOKRInRelatedCycleOption: {
-    defaultMessage: 'Adicionar um OKR {cadence} no ciclo {cycle} {parent}',
-    id: '612Wwz',
+    defaultMessage: 'No ciclo {cadence} {cycle} {parent}',
+    id: 'FMvbXp',
     description: 'This message is displayed inside the team page, on the options menu of a cycle',
   },
 
