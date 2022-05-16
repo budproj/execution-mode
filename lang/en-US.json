@@ -615,7 +615,7 @@
     "defaultMessage": "We're sorry! An unexpected error occurred. Please try again.",
     "description": "This text is displayed as a toast when the user tries to update an objective but an error occur"
   },
-  "BOJlqi": 
+  "BOJlqi": {
     "defaultMessage": "Quarterly Progress",
     "description": "User's quarterly progress title"
   },
