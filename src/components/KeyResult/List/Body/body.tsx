@@ -26,6 +26,8 @@ const StyledSpan = styled.span`
   height: 23px;
   transform: translateY(-3px);
   margin: 0 3px;
+  color: #525f7f;
+  font-weight: bold;
 `
 
 export interface KeyResultListBodyProperties {
