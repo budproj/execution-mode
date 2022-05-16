@@ -8,10 +8,12 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
 
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
+import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
 import { Feature } from '../../../../../../state/hooks/useEvent/feature'
@@ -38,9 +40,17 @@ export const ChangeAssignedCheckMarkButton = ({
   const { dispatch } = useEvent(EventType.UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE, {
     feature: Feature.CHECK_MARK,
   })
+  const userID = useRecoilValue(meAtom)
 
   const [changeAssigned] = useMutation(queries.UPDATE_ASSIGNED_CHECKMARK, {
-    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS],
+    refetchQueries: [
+      myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
+      {
+        variables: {
+          ...(userID ? { userID } : {}),
+        },
+      },
+    ],
   })
 
   const handleChange = async (newAssignedUserId: string | string[]) => {

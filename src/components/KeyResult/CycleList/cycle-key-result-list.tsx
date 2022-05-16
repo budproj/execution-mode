@@ -62,6 +62,7 @@ export const CycleKeyResultList = ({
         isLoading={!isLoaded}
         templateColumns="2fr 1fr 80px"
         borderColor="new-gray.400"
+        mt="-0.8rem !important"
         headProperties={{
           [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
             hidden: true,

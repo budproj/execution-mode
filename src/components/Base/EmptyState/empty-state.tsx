@@ -12,6 +12,8 @@ export interface EmptyStateProperties {
   h?: FlexProps['h']
   py?: FlexProps['py']
   gridGap?: FlexProps['gridGap']
+  headerTranslationOptions?: any
+  messageTranslationOptions?: any
 }
 
 const imageKeys = {
@@ -38,6 +40,8 @@ const EmptyState = ({
   py,
   maxW,
   gridGap,
+  headerTranslationOptions = {},
+  messageTranslationOptions = {},
 }: EmptyStateProperties) => {
   maxW ??= 52
   gridGap ??= 8
@@ -61,11 +65,11 @@ const EmptyState = ({
       </Box>
       {headerMessage && (
         <Text color="new-gray.700" fontSize="lg" fontWeight="bold" textAlign="center" mb="-15px">
-          {intl.formatMessage(headerMessage)}
+          {intl.formatMessage(headerMessage, headerTranslationOptions)}
         </Text>
       )}
       <Text color="gray.300" textAlign="center">
-        {intl.formatMessage(labelMessage)}
+        {intl.formatMessage(labelMessage, messageTranslationOptions)}
       </Text>
     </Flex>
   )

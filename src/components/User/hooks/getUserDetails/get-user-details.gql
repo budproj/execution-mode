@@ -1,13 +1,10 @@
-query GET_USER_NAMED_AVATAR_DATA {
-  me {
+query GET_USER_DETAILS($userId: ID) {
+  user(id: $userId) {
     id
-    firstName
-    fullName
     picture
-    email
-    gender
+    fullName
+    firstName
     role
-    createdAt
     yearlyProgress {
       showProgress
       progress
@@ -16,18 +13,9 @@ query GET_USER_NAMED_AVATAR_DATA {
       showProgress
       progress
     }
-    companies(first: 1) {
-      edges {
-        node {
-          id
-          name
-        }
-      }
-    }
     teams {
       edges {
         node {
-          id
           name
         }
       }

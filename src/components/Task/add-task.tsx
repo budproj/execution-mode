@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, StyleProps } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 import { Button, BUTTON_ICON_OPTIONS } from 'src/components/Base/Button'
@@ -10,12 +10,12 @@ import { EditableInputField } from '../Base'
 
 import { Task } from './types'
 
-interface AddTaskProperties {
+interface AddTaskProperties extends StyleProps {
   buttonText: string
   hasIcon?: boolean
 }
 
-export const AddTask = ({ buttonText, hasIcon = true }: AddTaskProperties) => {
+export const AddTask = ({ buttonText, hasIcon = true, ...rest }: AddTaskProperties) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isAdding, setIsAdding] = useState(false)
   const { createTask } = useCreateTask()
@@ -48,7 +48,7 @@ export const AddTask = ({ buttonText, hasIcon = true }: AddTaskProperties) => {
   }
 
   return (
-    <Box>
+    <Box {...rest}>
       {isAdding && (
         <EditableInputField
           startWithEditView

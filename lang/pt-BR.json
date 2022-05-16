@@ -407,6 +407,10 @@
     "defaultMessage": "Uma seta para cima, indicando que o menu de seleção de ciclos está aberto",
     "description": "This message is displayed to the user screen reader when the year select menu is opened"
   },
+  "7fTFkO": {
+    "defaultMessage": "Média do progresso de todos os seus resultados-chave no ciclo anual atual",
+    "description": "Yearly progress chart tooltip message"
+  },
   "7tvIOz": {
     "defaultMessage": "Adicionar resultado-chave",
     "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
@@ -475,6 +479,10 @@
     "defaultMessage": "Financeiro (Real)",
     "description": "This message is displayed inside our key-result format select as the title of the coin BRL format"
   },
+  "97e4V+": {
+    "defaultMessage": "Vamos criar uma tarefa pessoal?",
+    "description": "Personal tasks empty state title"
+  },
   "987MLd": {
     "defaultMessage": "Explorar",
     "description": "The name of the Explore page, located at \"/explore\""
@@ -535,6 +543,10 @@
     "defaultMessage": "Excluir {type}",
     "description": "This message appears as a button label on the delete confirmation button"
   },
+  "agW42K": {
+    "defaultMessage": "Comece com um verbo de ação (atingir, alcançar, conquistar...) Torne mensurável definindo um número como indicador de sucesso Defina um desafio agressivo porém realista",
+    "description": "The description of the tip when you are creating a KR."
+  },
   "ah2n1K": {
     "defaultMessage": "Nome do período trimestral",
     "description": "The label of the company quarterly period while creating a new workspace"
@@ -558,6 +570,10 @@
   "aO+w74": {
     "defaultMessage": "A confiança mudou neste check-in:",
     "description": "This text is the first line of our icon tooltip when the check-in has a different confidence from the previous check-in"
+  },
+  "AO/RyT": {
+    "defaultMessage": "Copiar título deste Resultado-Chave",
+    "description": "This message appears in the button that copies the title of the key result"
   },
   "aT1RWB": {
     "defaultMessage": "Confirme sua ação",
@@ -618,6 +634,10 @@
   "bZYEAl": {
     "defaultMessage": "Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo",
     "description": "This desc message explains the neutral icon for screen readers"
+  },
+  "C6YmFo": {
+    "defaultMessage": "Dicas para escrever um bom resultado-chave:",
+    "description": "The title of the tip when you are creating a KR."
   },
   "c8KQhI": {
     "defaultMessage": "Semana de",
@@ -1015,6 +1035,10 @@
     "defaultMessage": "Erro ao criar o ambiente",
     "description": "The title of the toast that appears when we have an error while creating a new workspace"
   },
+  "hfxyjh": {
+    "defaultMessage": "Veja nossos exemplos de OKRs",
+    "description": "This is a external link that goes to OKR examples made by Bud."
+  },
   "hhH9fH": {
     "defaultMessage": "Cargo do usuário inicial",
     "description": "The user role while creating a new workspace"
@@ -1127,6 +1151,10 @@
     "defaultMessage": "Um ícone de uma linha reta na horizontal, representando que sua empresa não evolui desde o último evento de check-in",
     "description": "This message is used by screen readers to explain our line icon"
   },
+  "IsUZSc": {
+    "defaultMessage": "Excluir este Resultado-Chave",
+    "description": "This message appears in the button that deletes the key result"
+  },
   "ItLQef": {
     "defaultMessage": "Check-in realizado",
     "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
@@ -1219,6 +1247,10 @@
     "defaultMessage": "Ontem",
     "description": "This label is displayed if the last is yesterday"
   },
+  "jzx+Hl": {
+    "defaultMessage": "Botão de opções",
+    "description": "This button allows you to choose an option that directs the user to the users profile or details."
+  },
   "K03Z5V": {
     "defaultMessage": "Período",
     "description": "The company quarterly period input placeholder while creating a new workspace"
@@ -1298,6 +1330,10 @@
   "L5w0P3": {
     "defaultMessage": "Feminino",
     "description": "This is the female option while selecting a gender to create a new user"
+  },
+  "LAEhNz": {
+    "defaultMessage": "Adicionar nova tarefa a este KR",
+    "description": "The label for create KR task button"
   },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
@@ -1567,6 +1603,10 @@
     "defaultMessage": "Dia de início do período anual",
     "description": "The label of the company yearly date start while creating a new workspace"
   },
+  "P0ljMC": {
+    "defaultMessage": "Média do progresso de todos os seus resultados-chave no ciclo trimestral atual",
+    "description": "Quarterly progress chart tooltip message"
+  },
   "p2UjMZ": {
     "defaultMessage": "Minhas Coisas | bud",
     "description": "The page title that is displayed in the browser tab"
@@ -1663,6 +1703,10 @@
     "defaultMessage": "Área",
     "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
   },
+  "qp4Qmm": {
+    "defaultMessage": "Ir para o perfil de {username}",
+    "description": "This button redirects to the selected user."
+  },
   "QPGUqB": {
     "defaultMessage": "Alta Confiança",
     "description": "We use this tag to group every key result with confidence higher than 66"
@@ -1682,6 +1726,10 @@
   "QRy8b9": {
     "defaultMessage": "Um novo objetivo foi criado com sucesso",
     "description": "This message appears as a toast as soon as the the user clicks to add a new objective in the team page"
+  },
+  "qsn7TW": {
+    "defaultMessage": "Adicionar nova tarefa pessoal",
+    "description": "The add new personal task button label"
   },
   "Qt52rN": {
     "defaultMessage": "Idioma",
@@ -1762,6 +1810,10 @@
   "Sau4Na": {
     "defaultMessage": "Nome",
     "description": "The user first name input placeholder while creating a new workspace"
+  },
+  "Sb6dkV": {
+    "defaultMessage": "Ver detalhes",
+    "description": "This option will show a sidebar with the details of the selected user."
   },
   "SDzYq9": {
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
@@ -1995,6 +2047,10 @@
     "defaultMessage": "Mostrar mais",
     "description": "This text is displayed in the button that expands a truncated text"
   },
+  "VFj8OD": {
+    "defaultMessage": "Título copiado com sucesso.",
+    "description": "This message appears in the toast when you successfully copies the title of the key result"
+  },
   "vgU7fC": {
     "defaultMessage": "Check-in pendente",
     "description": "This string is used as the description for the icon that indicates that the key-result has not been updated"
@@ -2047,6 +2103,10 @@
     "defaultMessage": "Um ícone de check. Ele representa a quantidade de itens marcados como completo em sua checklist",
     "description": "This text is used by screen readers to explain the check icon in our key-result drawer checklist section"
   },
+  "W3eJuC": {
+    "defaultMessage": "Estes são os resultados-chave e as tarefas atribuídos a você.",
+    "description": "The page sub title that our users should see in the my things page"
+  },
   "W9swHV": {
     "defaultMessage": "Configurações",
     "description": "This tooltip is displayed when the user hovers the settings icon"
@@ -2058,6 +2118,10 @@
   "waPxPB": {
     "defaultMessage": "Idioma do usuário inicial",
     "description": "The user locale while creating a new workspace"
+  },
+  "WEXvlm": {
+    "defaultMessage": "Experimente usar esse espaço para listar suas prioridades do dia, por exemplo :)",
+    "description": "Personal tasks empty state sub title"
   },
   "wiFglx": {
     "defaultMessage": "Responsável",
@@ -2203,6 +2267,10 @@
     "defaultMessage": "Em OKRs, costuma-se mirar em atingir ao menos 70% das metas. Para atingir esse patamar até o fim do ciclo, o progresso atual esperado é de 67%.",
     "description": "Tooltip message to show when hovering the help icon on projected progress"
   },
+  "YFb9UA": {
+    "defaultMessage": "Ir para o perfil",
+    "description": "This option will redirect the user to the selected user profile."
+  },
   "yfhIM+": {
     "defaultMessage": "Cancelar",
     "description": "Text in the cancel action button"
@@ -2336,7 +2404,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-05-09T18:20:10Z",
+    "defaultMessage": "2022-05-13T00:15:12Z",
     "description": null
   }
 }

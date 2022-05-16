@@ -2,48 +2,50 @@ import {
   Box,
   Button,
   Divider,
-  Flex,
-  Text,
   HStack,
+  Flex,
   Heading,
   MenuItem,
   Menu,
   MenuButton,
   MenuList,
+  Text,
+  Skeleton,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 import { PageMetaHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
+import { PageHeader } from 'src/components/Base/PageHeader/wrapper'
 import { ChevronDown } from 'src/components/Icon'
 import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
+import tasksMessages from 'src/components/Page/MyThings/ActiveCycles/messages'
+import MyTasks from 'src/components/Page/MyThings/ActiveCycles/my-tasks'
 import { TASK_STATUS } from 'src/components/Task/constants'
 import { DetailedHeader } from 'src/components/User/DetailedHeader'
+import { useGetMyTasks } from 'src/components/User/hooks'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { myThingsTasksQuery } from 'src/state/recoil/task'
-import meAtom from 'src/state/recoil/user/me'
-import selectUser from 'src/state/recoil/user/selector'
-
-import { PageHeader } from '../../../Base/PageHeader/wrapper'
 
 import messages from './messages'
-import MyPersonalTasks from './my-personal-tasks'
-import MyTasks from './my-tasks'
 
-const ActiveCyclesPage = () => {
+interface ProfilePageProperties {
+  userId: string
+}
+
+const ProfilePage = ({ userId }: ProfilePageProperties) => {
   const intl = useIntl()
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const setTasksQuery = useSetRecoilState(myThingsTasksQuery)
-  const userID = useRecoilValue(meAtom)
-  const user = useRecoilValue(selectUser(userID))
+  const { data: userData, loading: isUserLoading } = useGetMyTasks(userId)
 
   const statesLabels = new Map([
-    [TASK_STATUS.CHECKED, intl.formatMessage(messages.allTasks)],
-    [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
+    [TASK_STATUS.CHECKED, intl.formatMessage(tasksMessages.allTasks)],
+    [TASK_STATUS.UNCHECKED, intl.formatMessage(tasksMessages.pendingTasks)],
   ])
 
   const [taskState, setTaskState] = useState(TASK_STATUS.CHECKED)
@@ -60,20 +62,25 @@ const ActiveCyclesPage = () => {
 
   return (
     <>
-      <DetailedHeader userData={user} />
+      <DetailedHeader userData={userData} isUserLoading={isUserLoading} />
       <PageContent>
         <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
+
         <KeyResultSingleDrawer />
 
-        <PageHeader>
+        <PageHeader mb={6}>
           <Flex alignItems="center" justifyContent="space-between">
             <Box>
-              <Heading color="new-gray.800" mt={1}>
-                {intl.formatMessage(messages.pageTitle)}
-              </Heading>
-              <Text color="new-gray.600" fontWeight={500} mt={3}>
-                {intl.formatMessage(messages.pageSubTitle)}
-              </Text>
+              <Skeleton isLoaded={!isUserLoading} mt={1}>
+                <Heading color="new-gray.800">
+                  {intl.formatMessage(messages.pageTitle, { username: userData?.firstName })}
+                </Heading>
+              </Skeleton>
+              <Skeleton isLoaded={!isUserLoading} mt={1}>
+                <Text color="new-gray.600" fontWeight={500} mt={2}>
+                  {intl.formatMessage(messages.pageSubtitle, { username: userData?.firstName })}
+                </Text>
+              </Skeleton>
             </Box>
 
             <Box>
@@ -144,11 +151,13 @@ const ActiveCyclesPage = () => {
           </Flex>
         </PageHeader>
 
-        <HStack align="stretch" spacing="4rem" flex="1">
+        <HStack align="stretch" gap="40px" flex="1">
           <Box flexBasis="60%" maxWidth="60%">
-            {userID ? (
-              <KeyResultsActiveAndOwnedByUser userID={userID} onLineClick={handleLineClick} />
-            ) : undefined}
+            <KeyResultsActiveAndOwnedByUser
+              userID={userId}
+              username={userData?.firstName}
+              onLineClick={handleLineClick}
+            />
           </Box>
 
           <Box>
@@ -156,8 +165,7 @@ const ActiveCyclesPage = () => {
           </Box>
 
           <Box flex="1">
-            <MyPersonalTasks />
-            {userID ? <MyTasks userID={userID} /> : undefined}
+            <MyTasks userID={userId} username={userData?.firstName} />
           </Box>
         </HStack>
       </PageContent>
@@ -165,4 +173,4 @@ const ActiveCyclesPage = () => {
   )
 }
 
-export default ActiveCyclesPage
+export default ProfilePage
