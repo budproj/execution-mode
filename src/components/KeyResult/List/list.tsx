@@ -19,6 +19,7 @@ import {
   GRID_TEMPLATE_COLUMNS,
   KEY_RESULT_LIST_TYPE,
 } from './constants'
+import { ObjectiveMode } from 'src/state/recoil/objective/context'
 
 export interface KeyResultListProperties extends BoxProps {
   id: string
@@ -34,6 +35,7 @@ export interface KeyResultListProperties extends BoxProps {
   onLineClick?: (id: KeyResult['id']) => void
   onLineDragEnd?: (result: DropResult) => void
   isLoading?: boolean
+  mode?: ObjectiveMode
 }
 
 const KeyResultList = ({
@@ -50,6 +52,7 @@ const KeyResultList = ({
   columnGap,
   isLoading,
   emptyStateMessage,
+  mode,
   ...rest
 }: KeyResultListProperties): ReactElement => (
   <Box {...rest}>
@@ -84,6 +87,8 @@ const KeyResultList = ({
         handleDragEnd={onLineDragEnd}
         emptyStateMessage={emptyStateMessage}
         onLineClick={onLineClick}
+        mode={mode}
+        {...rest}
       />
     )}
   </Box>

@@ -22,8 +22,9 @@ export default defineMessages<ObjectiveAccordionPanelMessage>({
   },
 
   keyResultListEmptyStateMessage: {
-    defaultMessage: 'Este objetivo não tem nenhum resultado-chave',
-    id: 'J8dAid',
+    defaultMessage:
+      'Clique no botão de opções para criar o primeiro resultado-chave deste objetivo.',
+    id: 'Fl1Zcg',
     description:
       'This message is displayed in the key-results empty state inside the team page when an objective has no key-results',
   },

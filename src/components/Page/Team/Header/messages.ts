@@ -24,8 +24,8 @@ export default defineMessages<ActionMenuMessage>({
   },
 
   createItem: {
-    defaultMessage: 'Criar OKR',
-    id: 'DMwbJe',
+    defaultMessage: 'Criar Objetivo ',
+    id: 'gAgkzF',
     description: 'create new key result',
   },
 

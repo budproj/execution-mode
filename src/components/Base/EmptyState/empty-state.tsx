@@ -22,6 +22,7 @@ const imageKeys = {
   'people-with-pages': '/images/bud-people-with-pages.png',
   'empty-bench': '/images/bud-empty-bench.png',
   'check-item': '/images/check-item.png',
+  'empty-krs': '/images/bud-empty-object-krs.png',
 }
 
 const imageAlts = {
@@ -30,6 +31,7 @@ const imageAlts = {
   'people-with-pages': messages.pagesAlt,
   'empty-bench': messages.emptyBenchAlt,
   'check-item': messages.checkItem,
+  'empty-krs': messages.emptyFolderAlt,
 }
 
 const EmptyState = ({

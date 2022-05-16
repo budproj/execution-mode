@@ -37,6 +37,7 @@ export const ObjectiveKeyResults = ({
   objectiveID,
   mode,
   isDisabled,
+  ...rest
 }: ObjectiveKeyResultsProperties) => {
   const lastInsertedKeyResultID = useRecoilValue(lastInsertedKeyResultIDAtom)
   const [loadObjective] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
@@ -135,6 +136,8 @@ export const ObjectiveKeyResults = ({
         },
       }}
       onLineClick={handleLineClick}
+      mode={mode}
+      {...rest}
     />
   )
 }
