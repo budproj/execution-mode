@@ -135,8 +135,8 @@ export const ObjectiveKeyResults = ({
           onDelete: handleKeyResultDelete,
         },
       }}
-      onLineClick={handleLineClick}
       mode={mode}
+      onLineClick={handleLineClick}
       {...rest}
     />
   )

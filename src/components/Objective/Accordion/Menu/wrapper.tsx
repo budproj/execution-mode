@@ -3,6 +3,8 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import TreeDotsIcon from 'src/components/Icon/TreeDots'
+
 import { objectiveAtomFamily } from '../../../../state/recoil/objective'
 import { teamAtomFamily } from '../../../../state/recoil/team'
 import { GraphQLEffect } from '../../../types'
@@ -12,7 +14,6 @@ import messages from './messages'
 import { CreateKeyResultOption } from './option-create-key-result'
 import { DeleteObjectiveOption } from './option-delete-objective'
 import { UpdateObjectiveOption } from './option-update-objective'
-import TreeDotsIcon from 'src/components/Icon/TreeDots'
 
 interface ObjectiveAccordionMenuProperties {
   teamID?: string

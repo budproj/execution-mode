@@ -1,16 +1,17 @@
-import React from 'react'
 import { Flex, Text, Button, Heading, Link, Circle } from '@chakra-ui/react'
+import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { CardGuide } from 'src/components/Base/CardGuide/card-guide'
-import messages from './messages'
-import { useIntl } from 'react-intl'
 import { ArrowRightLong } from 'src/components/Icon'
+
+import messages from './messages'
 
 const GuideListCreateOkr = () => {
   const intl = useIntl()
 
   return (
-    <Flex mt={18} gap={15} flexDir={'column'}>
+    <Flex mt={18} gap={15} flexDir="column">
       <Heading display="flex" alignItems="center" justifyContent="space-between">
         <Text fontSize={14} fontWeight="medium" color="#8491B0">
           {intl.formatMessage(messages.guideListCreateOkrHeadTitle)}
@@ -18,7 +19,7 @@ const GuideListCreateOkr = () => {
         <Link href="https://www.exemplosdeokr.com.br/" target="_blank" rel="noreferrer noopener">
           <Button
             color="brand.500"
-            display={'flex'}
+            display="flex"
             p={1}
             _hover={{
               color: 'brand.400',

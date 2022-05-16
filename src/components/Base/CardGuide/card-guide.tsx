@@ -1,8 +1,8 @@
-import React from 'react'
 import { Flex, Image, Text } from '@chakra-ui/react'
+import React from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
-interface CardGuideProps {
+interface CardGuideProperties {
   iconKey: keyof typeof iconKeys
   title: MessageDescriptor
   description: MessageDescriptor
@@ -14,7 +14,7 @@ const iconKeys = {
   circles: '/images/circles.svg',
 }
 
-export const CardGuide = ({ iconKey, title, description }: CardGuideProps) => {
+export const CardGuide = ({ iconKey, title, description }: CardGuideProperties) => {
   const iconURL = iconKeys[iconKey]
   const intl = useIntl()
 

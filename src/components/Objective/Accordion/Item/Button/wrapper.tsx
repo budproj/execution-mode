@@ -35,7 +35,7 @@ export const ObjectiveAccordionButton = ({
   const roundedProgress = Math.round(objective?.status?.progress ?? 0)
 
   return (
-    <AccordionButton maxWidth={'100%'} p={0} gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
+    <AccordionButton maxWidth="100%" p={0} gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
       {context.mode === ObjectiveMode.EDIT && !isDisabled ? (
         <EditMode objective={objective} />
       ) : (

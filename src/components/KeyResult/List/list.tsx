@@ -7,6 +7,7 @@ import { MessageDescriptor } from 'react-intl'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResultListBodyColumnProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { ObjectiveMode } from 'src/state/recoil/objective/context'
 
 import KeyResultListBody from './Body'
 import KeyResultListBodySkeleton from './Body/Skeleton'
@@ -19,7 +20,6 @@ import {
   GRID_TEMPLATE_COLUMNS,
   KEY_RESULT_LIST_TYPE,
 } from './constants'
-import { ObjectiveMode } from 'src/state/recoil/objective/context'
 
 export interface KeyResultListProperties extends BoxProps {
   id: string
@@ -86,8 +86,8 @@ const KeyResultList = ({
         keyResultIDs={keyResultIDs}
         handleDragEnd={onLineDragEnd}
         emptyStateMessage={emptyStateMessage}
-        onLineClick={onLineClick}
         mode={mode}
+        onLineClick={onLineClick}
         {...rest}
       />
     )}

@@ -22,15 +22,13 @@ export const ObjectiveAccordionPanel = ({
   const context = useRecoilValue(objectiveContext(objectiveID))
 
   return (
-    <AccordionPanel p={0} maxWidth={'100%'}>
+    <AccordionPanel p={0} maxWidth="100%">
       {isExpanded && (
-        <>
-          <ObjectiveKeyResults
-            objectiveID={objectiveID}
-            mode={context.mode}
-            isDisabled={isDisabled}
-          />
-        </>
+        <ObjectiveKeyResults
+          objectiveID={objectiveID}
+          mode={context.mode}
+          isDisabled={isDisabled}
+        />
       )}
     </AccordionPanel>
   )
