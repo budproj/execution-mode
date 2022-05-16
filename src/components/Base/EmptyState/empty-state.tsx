@@ -1,10 +1,10 @@
-import { Box, Flex, FlexProps, Image, Text, ImageProps } from '@chakra-ui/react'
+import { Box, Flex, FlexProps, Image, Text, ImageProps, StyleProps } from '@chakra-ui/react'
 import React from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
 import messages from './messages'
 
-export interface EmptyStateProperties {
+export interface EmptyStateProperties extends StyleProps {
   labelMessage: MessageDescriptor
   headerMessage?: MessageDescriptor
   imageKey: keyof typeof imageKeys
@@ -44,6 +44,7 @@ const EmptyState = ({
   gridGap,
   headerTranslationOptions = {},
   messageTranslationOptions = {},
+  ...rest
 }: EmptyStateProperties) => {
   maxW ??= 52
   gridGap ??= 8
@@ -61,6 +62,7 @@ const EmptyState = ({
       direction="column"
       h={h}
       py={py}
+      {...rest}
     >
       <Box>
         <Image src={imageURL} alt={intl.formatMessage(imageAlt)} maxW={maxW} />
