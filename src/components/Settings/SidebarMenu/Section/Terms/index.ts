@@ -1,0 +1,3 @@
+import SettingsSidebarTermsMenuSectionPreferences from './terms'
+
+export default SettingsSidebarTermsMenuSectionPreferences

@@ -1,21 +1,23 @@
 import { Divider, Flex } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
-import { SettingsMyProfile, SettingsSidebarMenu } from 'src/components/Settings'
+import { SettingsCycles, SettingsMyProfile, SettingsSidebarMenu } from 'src/components/Settings'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
 
 import messages from './messages'
 
-function consoleRoute(data: string) {
-  console.log({ data })
-}
-
-const SettingsMyProfilePage = () => {
+const SettingsPage = () => {
   const intl = useIntl()
+  const [selectedRoute, setSelectedRoute] = useState<string>('/settings/my-profile')
+
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  function consoleRoute(route: string) {
+    setSelectedRoute(() => route)
+  }
 
   return (
     <PageContent>
@@ -28,11 +30,12 @@ const SettingsMyProfilePage = () => {
       <Flex gridGap={16}>
         <SettingsSidebarMenu props={consoleRoute} />
         <Divider orientation="vertical" borderColor="black.200" height="auto" />
-
-        <SettingsMyProfile />
+        {selectedRoute === '/settings/my-profile' ||
+          (selectedRoute === '/settings' && <SettingsMyProfile />)}
+        {selectedRoute === '/settings/cycles' && <SettingsCycles />}
       </Flex>
     </PageContent>
   )
 }
 
-export default SettingsMyProfilePage
+export default SettingsPage

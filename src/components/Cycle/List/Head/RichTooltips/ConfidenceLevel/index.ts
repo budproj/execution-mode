@@ -1,0 +1,3 @@
+import CycleListHeadTooltipWithRichTextsConfidenceLevel from './confidence-level'
+
+export default CycleListHeadTooltipWithRichTextsConfidenceLevel

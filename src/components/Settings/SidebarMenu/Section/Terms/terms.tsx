@@ -8,7 +8,7 @@ import SettingsSidebarMenuSectionButton from '../Button'
 
 import messages from './messages'
 
-const SettingsSidebarMenuSectionPreferences = () => {
+const SettingsSidebarTermsMenuSectionPreferences = () => {
   const intl = useIntl()
 
   return (
@@ -24,13 +24,11 @@ const SettingsSidebarMenuSectionPreferences = () => {
         {intl.formatMessage(messages.sectionTitle)}
       </Heading>
 
-      <SettingsSidebarMenuSectionButton href="/settings/my-profile">
-        <IntlLink href="/settings/my-profile">
-          {intl.formatMessage(messages.firstOptionLabel)}
-        </IntlLink>
+      <SettingsSidebarMenuSectionButton>
+        <IntlLink href="#">{intl.formatMessage(messages.firstOptionLabel)}</IntlLink>
       </SettingsSidebarMenuSectionButton>
     </Flex>
   )
 }
 
-export default SettingsSidebarMenuSectionPreferences
+export default SettingsSidebarTermsMenuSectionPreferences

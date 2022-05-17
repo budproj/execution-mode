@@ -7,20 +7,20 @@ type SidebarMenuSectionPreferencesMessage =
 
 export default defineMessages<SidebarMenuSectionPreferencesMessage>({
   sectionTitle: {
-    defaultMessage: 'Definições',
-    id: 'TKIxVB',
+    defaultMessage: 'Empresa',
+    id: '4iiGjr',
     description: 'This title is displayed as the heading of the definitions menu section',
   },
 
   firstOptionLabel: {
-    defaultMessage: 'Meu perfil',
-    id: 'JYkjjF',
+    defaultMessage: 'Usuários',
+    id: 'UozvhV',
     description: 'This label defines the text on the first menu section option',
   },
 
   secondOptionLabel: {
-    defaultMessage: 'Plataforma',
-    id: 'HOpxw5',
-    description: 'This message is used in the sidebar of our settings page',
+    defaultMessage: 'Ciclos de OKR',
+    id: 'ulnySu',
+    description: 'This label defines the text on the first menu section option',
   },
 })

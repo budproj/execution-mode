@@ -1,8 +1,8 @@
 import { defineMessages } from 'react-intl'
 
-type SettingsMyAccountPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription'
+type SettingsCyclesPageMessage = 'pageTitle' | 'metaTitle' | 'metaDescription'
 
-export default defineMessages<SettingsMyAccountPageMessage>({
+export default defineMessages<SettingsCyclesPageMessage>({
   pageTitle: {
     defaultMessage: 'Configurações',
     id: 'HZeOLc',
@@ -10,14 +10,14 @@ export default defineMessages<SettingsMyAccountPageMessage>({
   },
 
   metaTitle: {
-    defaultMessage: 'Meu perfil | bud ',
-    id: 'vm0Yuj',
+    defaultMessage: 'Cycles | bud ',
+    id: 'tygJHd',
     description: 'The page title that is displayed in the browser tab for the my profile page',
   },
 
   metaDescription: {
-    defaultMessage: 'Visualize e atualize as preferências do seu perfil',
-    id: 'fwIpqP',
+    defaultMessage: 'Visualize e configure os ciclos',
+    id: 'kfZAcb',
     description:
       'The page description that is displayed in Google and screen readers for the my profile page',
   },
