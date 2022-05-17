@@ -3,9 +3,10 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import TreeDotsIcon from 'src/components/Icon/TreeDots'
+
 import { objectiveAtomFamily } from '../../../../state/recoil/objective'
 import { teamAtomFamily } from '../../../../state/recoil/team'
-import TreeDotsIcon from '../../../Icon/TreeDots'
 import { GraphQLEffect } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 
@@ -40,10 +41,8 @@ export const ObjectiveAccordionMenu = ({
         <MenuButton
           bg="black.100"
           borderRadius={4}
-          px={3}
-          py={2}
-          h="full"
           color="gray.500"
+          p={2}
           _hover={{
             bg: 'brand.100',
             color: 'brand.500',
@@ -57,6 +56,7 @@ export const ObjectiveAccordionMenu = ({
           <TreeDotsIcon
             desc={intl.formatMessage(messages.optionsButtonIconDesc)}
             fill="currentColor"
+            fontSize="2xl"
           />
         </MenuButton>
         <MenuList>

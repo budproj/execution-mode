@@ -50,15 +50,21 @@ export const ViewMode = ({ objective, isLoaded, teamID, isDisabled }: ViewModePr
               <Skeleton
                 isLoaded={isLoaded}
                 borderRadius={4}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
                 w={isLoaded ? 'auto' : 140}
                 h={isLoaded ? 'auto' : 33}
               >
                 <PercentageProgressIncreaseTag
                   forcePositiveSignal
-                  bg="black.100"
-                  h="full"
+                  showSignalArrow
                   value={objective?.delta?.progress}
-                  prefix={intl.formatMessage(messages.progressTagLabel)}
+                  fontSize="12px"
+                  fontWeight="medium"
+                  border="1px solid"
+                  borderColor="white"
+                  p={1.5}
                 />
               </Skeleton>
             </TooltipWithDelay>
