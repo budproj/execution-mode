@@ -16,13 +16,14 @@ export interface EmptyStateProperties extends StyleProps {
   messageTranslationOptions?: any
 }
 
-const imageKeys = {
+export const imageKeys = {
   'working-team': '/images/bud-team-at-work.png',
   'empty-folder': '/images/bud-empty-folder.png',
   'people-with-pages': '/images/bud-people-with-pages.png',
   'empty-bench': '/images/bud-empty-bench.png',
   'check-item': '/images/check-item.png',
   'empty-krs': '/images/bud-empty-object-krs.png',
+  'empty-personal-okrs-tab': '/images/empty-personal-okrs-tab.png',
 }
 
 const imageAlts = {
@@ -32,6 +33,7 @@ const imageAlts = {
   'empty-bench': messages.emptyBenchAlt,
   'check-item': messages.checkItem,
   'empty-krs': messages.emptyFolderAlt,
+  'empty-personal-okrs-tab': messages.emptyPersonalObjectives,
 }
 
 const EmptyState = ({
@@ -72,7 +74,7 @@ const EmptyState = ({
           {intl.formatMessage(headerMessage, headerTranslationOptions)}
         </Text>
       )}
-      <Text color="gray.300" textAlign="center">
+      <Text fontSize={16} fontWeight={400} color="new-gray.700" textAlign="center">
         {intl.formatMessage(labelMessage, messageTranslationOptions)}
       </Text>
     </Flex>
