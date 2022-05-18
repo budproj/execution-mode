@@ -3,6 +3,8 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { Objective } from 'src/components/Objective/types'
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
 import { objectiveContext } from 'src/state/recoil/objective/context'
 
 import { ObjectiveKeyResults } from './key-results'
@@ -10,7 +12,8 @@ import { ObjectiveKeyResults } from './key-results'
 export interface ObjectiveAccordionPanelProperties {
   isExpanded: boolean
   objectiveID?: Objective['id']
-  teamID?: string
+  userID?: User['id']
+  teamID?: Team['id']
   isDisabled?: boolean
 }
 

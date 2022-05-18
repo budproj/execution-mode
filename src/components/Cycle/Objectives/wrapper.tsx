@@ -2,9 +2,12 @@ import { Stack, Heading, Skeleton } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
+import { ObjectiveAccordion } from 'src/components/Objective/Accordion/wrapper'
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
+
 import buildSkeletonMinSize from '../../../../lib/chakra/build-skeleton-min-size'
 import useCadence from '../../../state/hooks/useCadence'
-import { ObjectiveAccordion } from '../../Objective/Accordion/wrapper'
 import { Cycle } from '../types'
 
 import messages from './messages'
@@ -12,7 +15,8 @@ import messages from './messages'
 export interface ObjectivesFromCycleProperties {
   cycle?: Cycle
   objectiveIDs: string[]
-  teamID?: string
+  teamID?: Team['id']
+  userID?: User['id']
   isDisabled?: boolean
 }
 
@@ -20,6 +24,7 @@ export const CycleObjectives = ({
   cycle,
   objectiveIDs,
   teamID,
+  userID,
   isDisabled,
 }: ObjectivesFromCycleProperties) => {
   const intl = useIntl()
@@ -51,6 +56,7 @@ export const CycleObjectives = ({
         isLoaded={isLoaded}
         objectiveIDs={objectiveIDs}
         teamID={teamID}
+        userID={userID}
         accordionID={cycle?.id}
         isDisabled={isDisabled}
       />
