@@ -4,6 +4,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { imageKeys } from 'src/components/Base/EmptyState/empty-state'
 import { Action, ActionMenu } from 'src/components/Cycle/ActionMenu/wrapper'
 import { Cycle } from 'src/components/Cycle/types'
 import { Team } from 'src/components/Team/types'
@@ -20,6 +21,7 @@ import queries from './queries.gql'
 type OKRsEmptyStateProperties = {
   teamID: Team['id']
   userID: User['id']
+  imageKey?: keyof typeof imageKeys
   isAllowedToCreateObjectives?: boolean
   onViewOldCycles?: Action
   onNewObjective?: Action
@@ -41,6 +43,7 @@ export const OKRsEmptyState = ({
   userID,
   onViewOldCycles,
   onNewObjective,
+  imageKey,
   isAllowedToCreateObjectives,
 }: OKRsEmptyStateProperties) => {
   const intl = useIntl()
@@ -87,8 +90,10 @@ export const OKRsEmptyState = ({
   return (
     <Stack spacing={4} h="full">
       <Stack direction="row" alignItems="center">
-        <Heading fontSize="sm" color="gray.500" textTransform="uppercase" flexGrow={1}>
-          {intl.formatMessage(messages.emptyStateTitle)}
+        <Heading fontSize={16} color="gray.500" flexGrow={1}>
+          {userID
+            ? intl.formatMessage(messages.teamObjectivesEmptyStateTitle)
+            : intl.formatMessage(messages.personalObjectivesEmptyStateTitle)}
         </Heading>
 
         {shouldDisplayActionMenu && (
@@ -99,10 +104,22 @@ export const OKRsEmptyState = ({
         )}
       </Stack>
 
-      <Flex bg="white" w="full" h="full" alignContent="center" justifyContent="center" p={16}>
+      <Flex
+        bg="white"
+        w="full"
+        h="full"
+        alignContent="center"
+        justifyContent="center"
+        p={16}
+        borderRadius={10}
+      >
         <EmptyState
-          imageKey="people-with-pages"
-          labelMessage={messages.emptyStateMessage}
+          imageKey={imageKey}
+          labelMessage={
+            userID
+              ? messages.teamObjectivesEmptyStateMessage
+              : messages.personalObjectivesEmptyStateMessage
+          }
           maxW="md"
         />
       </Flex>

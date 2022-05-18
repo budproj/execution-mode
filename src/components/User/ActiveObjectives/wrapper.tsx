@@ -23,18 +23,18 @@ import { User } from '../types'
 
 import queries from './queries.gql'
 
-export interface TeamActiveObjectivesProperties {
+export interface UserActiveObjectivesProperties {
   teamID: Team['id']
   userID: User['id']
 }
 
-export interface GetTeamActiveObjectivesQuery {
+export interface GetUserActiveObjectivesQuery {
   objectives: {
     edges: Array<GraphQLEdge<Objective>>
   }
 }
 
-export const ActiveObjectives = ({ teamID, userID }: TeamActiveObjectivesProperties) => {
+export const UserActiveObjectives = ({ teamID, userID }: UserActiveObjectivesProperties) => {
   const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
@@ -45,7 +45,7 @@ export const ActiveObjectives = ({ teamID, userID }: TeamActiveObjectivesPropert
   const [objectiveEdges, setObjectiveEdges, _, isRemoteDataLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
 
-  const { called, refetch } = useQuery<GetTeamActiveObjectivesQuery>(queries.GET_OBJECTIVES, {
+  const { called, refetch } = useQuery<GetUserActiveObjectivesQuery>(queries.GET_OBJECTIVES, {
     fetchPolicy: 'no-cache',
     variables: {
       teamId: teamID,
@@ -93,6 +93,7 @@ export const ActiveObjectives = ({ teamID, userID }: TeamActiveObjectivesPropert
           <OKRsEmptyState
             userID={userID}
             teamID={teamID}
+            imageKey="empty-personal-okrs-tab"
             isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
             onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
             onNewObjective={handleRefetch}

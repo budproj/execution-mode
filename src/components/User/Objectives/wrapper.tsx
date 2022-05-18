@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ObjectivesViewMode } from 'src/state/recoil/team/objectives-view-mode'
 
-import { ActiveObjectives } from '../ActiveObjectives/wrapper'
+import { UserActiveObjectives } from '../ActiveObjectives/wrapper'
 
 interface TeamObjectivesProperties {
   teamID: string
@@ -12,8 +12,8 @@ interface TeamObjectivesProperties {
 
 export const UserObjectives = ({ teamID, userID, viewType }: TeamObjectivesProperties) => {
   const ViewModeComponentHashmap = {
-    [ObjectivesViewMode.ACTIVE]: ActiveObjectives,
-    [ObjectivesViewMode.NOT_ACTIVE]: ActiveObjectives,
+    [ObjectivesViewMode.ACTIVE]: UserActiveObjectives,
+    [ObjectivesViewMode.NOT_ACTIVE]: UserActiveObjectives,
   }
   const View = ViewModeComponentHashmap[viewType]
 

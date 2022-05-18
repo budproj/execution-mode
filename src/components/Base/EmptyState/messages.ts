@@ -6,6 +6,7 @@ type EmptyStateMessage =
   | 'pagesAlt'
   | 'emptyBenchAlt'
   | 'checkItem'
+  | 'emptyPersonalObjectives'
 
 export default defineMessages<EmptyStateMessage>({
   workingTeamAlt: {
@@ -37,5 +38,11 @@ export default defineMessages<EmptyStateMessage>({
     defaultMessage: 'Uma mão apertando um botão com um icone de seleção de uma tarefa',
     id: 'GepLaP',
     description: 'The alternative text explaining the check item image',
+  },
+
+  emptyPersonalObjectives: {
+    defaultMessage: 'Uma mulher analisando gráficos e apontando com um dedo.',
+    id: 'XZcPVc',
+    description: 'The alternative text explaining the empty item image',
   },
 })
