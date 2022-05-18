@@ -14,7 +14,9 @@ type KeyResultInsertDrawerFormMessage =
   | 'invalidIconDesc'
   | 'okrExampleLink'
   | 'tipTitle'
-  | 'tipDescription'
+  | 'firstTipDescription'
+  | 'secondTipDescription'
+  | 'thirdTipDescription'
 
 export default defineMessages<KeyResultInsertDrawerFormMessage>({
   firstInputLabel: {
@@ -99,10 +101,19 @@ export default defineMessages<KeyResultInsertDrawerFormMessage>({
     id: 'C6YmFo',
     description: 'The title of the tip when you are creating a KR.',
   },
-  tipDescription: {
-    defaultMessage:
-      'Comece com um verbo de ação (atingir, alcançar, conquistar...) Torne mensurável definindo um número como indicador de sucesso Defina um desafio agressivo porém realista',
-    id: 'agW42K',
-    description: 'The description of the tip when you are creating a KR.',
+  firstTipDescription: {
+    defaultMessage: 'Comece com um verbo de ação (atingir, alcançar, conquistar...).',
+    id: '+14i/d',
+    description: 'The  first description of the tip when you are creating a KR.',
+  },
+  secondTipDescription: {
+    defaultMessage: 'Torne mensurável definindo um número como indicador de sucesso.',
+    id: 'vfstY8',
+    description: 'The second description of the tip when you are creating a KR.',
+  },
+  thirdTipDescription: {
+    defaultMessage: 'Defina um desafio agressivo porém realista.',
+    id: 'DRyY0A',
+    description: 'The third description of the tip when you are creating a KR.',
   },
 })

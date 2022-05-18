@@ -11,6 +11,7 @@ type KeyResultListBodyColumnActionsMessage =
   | 'deleteButtonMessage'
   | 'successfulCopyMessage'
   | 'copyButtonMessage'
+  | 'optionsButtonDesc'
 
 export default defineMessages<KeyResultListBodyColumnActionsMessage>({
   deleteIconDesc: {
@@ -74,5 +75,11 @@ export default defineMessages<KeyResultListBodyColumnActionsMessage>({
     id: 'VFj8OD',
     description:
       'This message appears in the toast when you successfully copies the title of the key result',
+  },
+  optionsButtonDesc: {
+    defaultMessage: 'Botão de opções',
+    id: 'XCDzMo',
+    description:
+      'This button allows you to choose an option that can allow you to copy the title ou exclude the KR.',
   },
 })

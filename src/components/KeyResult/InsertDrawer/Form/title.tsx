@@ -53,7 +53,11 @@ export const TitleInput = ({ hasValidationErrors }: TitleInputProperties) => {
         {intl.formatMessage(messages.tipTitle)}
       </Text>
       <Text fontSize="14px" color="#99A4C2">
-        {intl.formatMessage(messages.tipDescription)}
+        {intl.formatMessage(messages.firstTipDescription)}
+        <br />
+        {intl.formatMessage(messages.secondTipDescription)}
+        <br />
+        {intl.formatMessage(messages.thirdTipDescription)}
       </Text>
     </FormInputBase>
   )

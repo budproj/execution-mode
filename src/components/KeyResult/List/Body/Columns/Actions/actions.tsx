@@ -1,5 +1,6 @@
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
@@ -13,6 +14,7 @@ import { GraphQLEffect } from '../../../../../types'
 
 import { CopyAction } from './copy-action'
 import { DeleteAction } from './delete-action'
+import messages from './messages'
 
 export interface KeyResultListBodyColumnActionsProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -25,6 +27,7 @@ const KeyResultListBodyColumnActions = ({
   onDelete,
 }: KeyResultListBodyColumnActionsProperties): ReactElement => {
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
+  const intl = useIntl()
 
   const canDelete = keyResult?.policy?.delete === GraphQLEffect.ALLOW
 
@@ -33,8 +36,19 @@ const KeyResultListBodyColumnActions = ({
   return (
     <KeyResultListBodyColumnBase preventLineClick>
       <Menu placement="bottom-end" variant="action-list">
-        <MenuButton transform="rotate(90deg)">
-          <TreeDotsIcon desc="teste" fill="#6F6EFF" rotate={160} width="16px" height="16px" />
+        <MenuButton
+          color="new-gray.600"
+          _hover={{
+            color: 'new-gray.900',
+          }}
+          mr={2}
+        >
+          <TreeDotsIcon
+            fill="currentColor"
+            fontSize="2xl"
+            style={{ transform: 'rotate(90deg)' }}
+            desc={intl.formatMessage(messages.optionsButtonDesc)}
+          />
         </MenuButton>
         <MenuList>
           {keyResult?.title && <CopyAction keyResultTitle={keyResult.title} />}
