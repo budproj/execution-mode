@@ -2,6 +2,8 @@ import { Accordion } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
 import {
   objectiveAccordion,
   objectiveAccordionExpandedIndexes,
@@ -14,13 +16,15 @@ interface ObjectiveAccordionProperties {
   isLoaded: boolean
   objectiveIDs: string[]
   accordionID?: string
-  teamID?: string
+  userID?: User['id']
+  teamID?: Team['id']
   isDisabled?: boolean
 }
 
 export const ObjectiveAccordion = ({
   isLoaded,
   objectiveIDs,
+  userID,
   teamID,
   accordionID,
   isDisabled,
@@ -50,6 +54,7 @@ export const ObjectiveAccordion = ({
             key={objectiveID}
             objectiveID={objectiveID}
             teamID={teamID}
+            userID={userID}
             isDisabled={isDisabled}
           />
         ))
