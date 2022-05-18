@@ -63,21 +63,27 @@ const KeyResultListBodyColumnKeyResult = ({
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
           <Skeleton borderRadius={10} position="relative" isLoaded={isKeyResultLoaded}>
-            <Flex alignItems="center" flexDirection="column">
-              <KeyResultDynamicIcon title={title} isDisabled={isDisabled} />
-              {delta && delta?.progress !== 0 && (
-                <PercentageProgressIncreaseTag
-                  forcePositiveSignal
-                  showSignalArrow
-                  value={delta?.progress}
-                  py={1}
-                  px={2}
-                  gridGap={0.5}
-                  maxWidth="unset"
-                  mt={2}
-                />
-              )}
-            </Flex>
+            <KeyResultDynamicIcon title={title} isDisabled={isDisabled} />
+            {delta && delta?.progress !== 0 && (
+              <PercentageProgressIncreaseTag
+                forcePositiveSignal
+                showSignalArrow
+                value={delta?.progress}
+                fontSize="12px"
+                fontWeight="medium"
+                alignItems="center"
+                justifyContent="center"
+                display="flex"
+                minWidth="100%"
+                position="relative"
+                border="1px solid"
+                borderColor="white"
+                left="50%"
+                transform="translate(-50%, 25%)"
+                padding={1}
+                gridGap={0.5}
+              />
+            )}
           </Skeleton>
         )}
 

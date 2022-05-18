@@ -85,6 +85,7 @@ export const TeamMembers = ({
       })}
     >
       <SelectUserfromList
+        hasMenu
         teamID={teamID}
         users={members}
         avatarSubtitleType="role"

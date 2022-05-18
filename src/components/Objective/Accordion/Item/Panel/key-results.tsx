@@ -36,6 +36,7 @@ export const ObjectiveKeyResults = ({
   objectiveID,
   mode,
   isDisabled,
+  ...rest
 }: ObjectiveKeyResultsProperties) => {
   const lastInsertedKeyResultID = useRecoilValue(lastInsertedKeyResultIDAtom)
   const [loadObjective] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
@@ -57,7 +58,6 @@ export const ObjectiveKeyResults = ({
   )
 
   const keyResultIDs = selectKeyResultIDs(keyResults)
-  const isEditing = mode === ObjectiveMode.EDIT
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
   const templateColumns = '2fr 1fr 0.8fr 40px'
@@ -130,7 +130,9 @@ export const ObjectiveKeyResults = ({
           onDelete: handleKeyResultDelete,
         },
       }}
+      mode={mode}
       onLineClick={handleLineClick}
+      {...rest}
     />
   )
 }

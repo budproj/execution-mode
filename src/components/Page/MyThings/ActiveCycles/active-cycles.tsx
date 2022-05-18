@@ -2,28 +2,31 @@ import {
   Box,
   Button,
   Divider,
+  Flex,
+  Text,
   HStack,
   Heading,
-  Tag,
   MenuItem,
   Menu,
   MenuButton,
   MenuList,
 } from '@chakra-ui/react'
-import { Scrollbars } from 'rc-scrollbars'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { PageMetaHead, PageTitle } from 'src/components/Base'
+import { PageMetaHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { ChevronDown } from 'src/components/Icon'
 import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { TASK_STATUS } from 'src/components/Task/constants'
+import { DetailedHeader } from 'src/components/User/DetailedHeader'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { myThingsTasksQuery } from 'src/state/recoil/task'
+import meAtom from 'src/state/recoil/user/me'
+import selectUser from 'src/state/recoil/user/selector'
 
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
 
@@ -35,10 +38,12 @@ const ActiveCyclesPage = () => {
   const intl = useIntl()
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const setTasksQuery = useSetRecoilState(myThingsTasksQuery)
+  const userID = useRecoilValue(meAtom)
+  const user = useRecoilValue(selectUser(userID))
 
   const statesLabels = new Map([
-    [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
     [TASK_STATUS.CHECKED, intl.formatMessage(messages.allTasks)],
+    [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
   ])
 
   const [taskState, setTaskState] = useState(TASK_STATUS.CHECKED)
@@ -54,123 +59,109 @@ const ActiveCyclesPage = () => {
   }
 
   return (
-    <PageContent>
-      <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
-      <KeyResultSingleDrawer />
+    <>
+      <DetailedHeader userData={user} />
+      <PageContent>
+        <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
+        <KeyResultSingleDrawer />
 
-      <PageHeader>
-        <PageTitle>{intl.formatMessage(messages.pageTitle)}</PageTitle>
-      </PageHeader>
+        <PageHeader>
+          <Flex alignItems="center" justifyContent="space-between">
+            <Box>
+              <Heading color="new-gray.800" mt={1}>
+                {intl.formatMessage(messages.pageTitle)}
+              </Heading>
+              <Text color="new-gray.600" fontWeight={500} mt={3}>
+                {intl.formatMessage(messages.pageSubTitle)}
+              </Text>
+            </Box>
 
-      <HStack align="stretch" spacing="4rem" flex="1">
-        <Box flexBasis="60%" maxWidth="60%">
-          <Scrollbars>
-            <KeyResultsActiveAndOwnedByUser onLineClick={handleLineClick} />
-          </Scrollbars>
-        </Box>
+            <Box>
+              <Menu>
+                {({ isOpen }) => (
+                  <>
+                    <MenuButton
+                      as={Button}
+                      borderWidth={2}
+                      borderColor="new-gray.400"
+                      color="new-gray.800"
+                      borderRadius={4}
+                      px="16px"
+                      py="11px"
+                      h="auto"
+                      fontSize="md"
+                      iconSpacing={6}
+                      rightIcon={
+                        <ChevronDown
+                          desc="menu"
+                          fontSize="xs"
+                          color="new-gray.200"
+                          stroke="new-gray.200"
+                          transition="0.2s transform ease-in"
+                          transform={isOpen ? 'rotate(180deg)' : 'none'}
+                        />
+                      }
+                      transition="0.2s background-color, 0.2s color"
+                      _hover={{
+                        backgroundColor: 'gray.50',
+                        color: 'new-gray.800',
+                      }}
+                    >
+                      {statesLabels.get(taskState)}
+                    </MenuButton>
+                    <MenuList
+                      boxShadow="lg"
+                      borderColor="new-gray.200"
+                      borderWidth={1}
+                      overflow="hidden"
+                      zIndex={999}
+                    >
+                      {[...statesLabels].map(([labelEnum]) => (
+                        <MenuItem
+                          key={labelEnum}
+                          px="16px"
+                          py="11px"
+                          color="new-gray.800"
+                          h="auto"
+                          w="100%"
+                          fontSize="md"
+                          fontWeight={500}
+                          transition="0.2s background-color, 0.2s color"
+                          _hover={{
+                            backgroundColor: 'gray.50',
+                            color: 'new-gray.800',
+                          }}
+                          onClick={() => handleTaskFilterChange(labelEnum)}
+                        >
+                          {statesLabels.get(labelEnum)}
+                        </MenuItem>
+                      ))}
+                    </MenuList>
+                  </>
+                )}
+              </Menu>
+            </Box>
+          </Flex>
+        </PageHeader>
 
-        <Box>
-          <Divider orientation="vertical" h="full" borderColor="new-gray.400" opacity="1" />
-        </Box>
-
-        <Box flex="1">
-          <Box display="flex" flexDir="row" alignItems="center" justifyContent="space-between">
-            <Heading
-              as="h2"
-              fontSize="xl"
-              lineHeight="1.6rem"
-              textTransform="uppercase"
-              fontWeight="bold"
-              color="new-gray.800"
-            >
-              {intl.formatMessage(messages.myTasksTitle)}
-              <Tag
-                variant="solid"
-                colorScheme="brand"
-                ml={3}
-                textTransform="lowercase"
-                fontWeight="bold"
-              >
-                {intl.formatMessage(messages.newTag)}
-              </Tag>
-            </Heading>
-
-            <Menu>
-              {({ isOpen }) => (
-                <>
-                  <MenuButton
-                    as={Button}
-                    borderWidth={1}
-                    borderColor="new-gray.600"
-                    color="new-gray.600"
-                    borderRadius={4}
-                    px="0.75rem"
-                    py="0.35rem"
-                    h="auto"
-                    fontSize="sm"
-                    iconSpacing={6}
-                    rightIcon={
-                      <ChevronDown
-                        desc="menu"
-                        fontSize="xs"
-                        color="new-gray.200"
-                        stroke="new-gray.200"
-                        transition="0.2s transform ease-in"
-                        transform={isOpen ? 'rotate(180deg)' : 'none'}
-                      />
-                    }
-                    transition="0.2s background-color, 0.2s color"
-                    _hover={{
-                      backgroundColor: 'gray.50',
-                      color: 'new-gray.800',
-                    }}
-                  >
-                    {statesLabels.get(taskState)}
-                  </MenuButton>
-                  <MenuList
-                    boxShadow="lg"
-                    borderColor="new-gray.200"
-                    borderWidth={1}
-                    overflow="hidden"
-                    zIndex={999}
-                    minWidth="auto"
-                  >
-                    {[...statesLabels].map(([labelEnum]) => (
-                      <MenuItem
-                        key={labelEnum}
-                        p="0.35rem 3rem 0.35rem 0.75rem"
-                        color="new-gray.600"
-                        h="auto"
-                        fontSize="sm"
-                        fontWeight={500}
-                        transition="0.2s background-color, 0.2s color"
-                        _hover={{
-                          backgroundColor: 'gray.50',
-                          color: 'new-gray.800',
-                        }}
-                        onClick={() => handleTaskFilterChange(labelEnum)}
-                      >
-                        {statesLabels.get(labelEnum)}
-                      </MenuItem>
-                    ))}
-                  </MenuList>
-                </>
-              )}
-            </Menu>
+        <HStack align="stretch" spacing="4rem" flex="1">
+          <Box flexBasis="60%" maxWidth="60%">
+            {userID ? (
+              <KeyResultsActiveAndOwnedByUser userID={userID} onLineClick={handleLineClick} />
+            ) : undefined}
           </Box>
 
-          <Divider mt="3.3rem" mb={6} borderColor="new-gray.400" opacity="1" />
+          <Box>
+            <Divider orientation="vertical" h="full" borderColor="new-gray.400" opacity="1" />
+          </Box>
 
-          <Scrollbars style={{ maxHeight: '85%' }}>
-            <Box pr={6}>
-              <MyPersonalTasks />
-              <Divider mt={6} mb={9} borderColor="new-gray.400" opacity="1" />
-              <MyTasks />
-            </Box>
-          </Scrollbars>
-        </Box>
-      </HStack>
-    </PageContent>
+          <Box flex="1">
+            <MyPersonalTasks />
+            {userID ? <MyTasks userID={userID} /> : undefined}
+          </Box>
+        </HStack>
+      </PageContent>
+    </>
   )
 }
 

@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { Cycle } from 'src/components/Cycle/types'
+import { useGetGamificationDetails } from 'src/components/Team/hooks'
 import { Team } from 'src/components/Team/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -24,6 +25,7 @@ export interface TeamsOverviewProperties extends StyleProps {
 
 const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   const intl = useIntl()
+  const { isGameficationDisabled } = useGetGamificationDetails()
 
   const { data, loading } = useQuery<GetCompanyTeamsQuery>(queries.GET_COMPANY_TEAMS, {
     fetchPolicy: 'network-only',
@@ -32,6 +34,10 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
 
   const [loadTeam] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const company = data?.teams?.edges?.[0]?.node
+
+  const orderedTeams = isGameficationDisabled
+    ? rankedTeams.sort((a, b) => (a.name > b.name ? 1 : -1))
+    : rankedTeams
 
   useEffect(() => {
     if (company) setRankedTeamsEdges(company?.rankedDescendants?.edges)
@@ -45,13 +51,21 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
     <Box bg="white" borderRadius="lg" shadow="for-background.light" p={9} pb={4} {...rest}>
       <Skeleton isLoaded={!loading}>
         <Heading as="h3" size="md" mb={6}>
-          {intl.formatMessage(messages.teamRankingTitle, { quarter })}
+          {intl.formatMessage(
+            isGameficationDisabled
+              ? messages.teamRankingTitleWithoutGamification
+              : messages.teamRankingTitle,
+            { quarter },
+          )}
         </Heading>
       </Skeleton>
-      {rankedTeams.length === 0 ? (
+      {orderedTeams.length === 0 ? (
         <TeamsOverviewBodyTableSkeleton />
       ) : (
-        <TeamsOverviewBodyTableBody teamsRanking={rankedTeams} />
+        <TeamsOverviewBodyTableBody
+          isGameficationDisabled={isGameficationDisabled}
+          teamsRanking={orderedTeams}
+        />
       )}
     </Box>
   )

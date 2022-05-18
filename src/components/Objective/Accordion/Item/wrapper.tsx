@@ -34,7 +34,7 @@ export const ObjectiveAccordionItem = ({
       borderColor="transparent"
       bg="white"
       boxShadow="for-background.light"
-      p={4}
+      p={6}
       borderRadius="10"
     >
       {({ isExpanded }) => (

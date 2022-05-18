@@ -1,5 +1,5 @@
-query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES {
-  me {
+query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES($userID: ID) {
+  user(id: $userID) {
     keyResults(active: true) {
       edges {
         node {

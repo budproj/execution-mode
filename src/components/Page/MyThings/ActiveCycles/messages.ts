@@ -2,12 +2,12 @@ import { defineMessages } from 'react-intl'
 
 type MyKeyResultsActiveCyclesPageMessage =
   | 'pageTitle'
+  | 'pageSubTitle'
   | 'metaTitle'
   | 'metaDescription'
   | 'firstTab'
   | 'secondTab'
   | 'myTasksTitle'
-  | 'newTag'
   | 'pendingTasks'
   | 'allTasks'
 
@@ -16,6 +16,12 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     defaultMessage: 'Minhas Coisas',
     id: 'eVkwyH',
     description: 'The page title that our users should see in the my things page',
+  },
+
+  pageSubTitle: {
+    defaultMessage: 'Estes são os resultados-chave e as tarefas atribuídos a você.',
+    id: 'W3eJuC',
+    description: 'The page sub title that our users should see in the my things page',
   },
 
   metaTitle: {
@@ -49,12 +55,6 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     defaultMessage: 'Minhas Tarefas',
     id: '2leAvr',
     description: 'The header in my tasks title, inside my things page',
-  },
-
-  newTag: {
-    defaultMessage: 'novo!',
-    id: 'Gk28Al',
-    description: 'Tag new item',
   },
 
   pendingTasks: {
