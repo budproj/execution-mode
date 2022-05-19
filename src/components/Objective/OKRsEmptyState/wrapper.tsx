@@ -92,8 +92,8 @@ export const OKRsEmptyState = ({
       <Stack direction="row" alignItems="center">
         <Heading fontSize={16} color="gray.500" flexGrow={1}>
           {userID
-            ? intl.formatMessage(messages.teamObjectivesEmptyStateTitle)
-            : intl.formatMessage(messages.personalObjectivesEmptyStateTitle)}
+            ? intl.formatMessage(messages.personalObjectivesEmptyStateTitle)
+            : intl.formatMessage(messages.teamObjectivesEmptyStateTitle)}
         </Heading>
 
         {shouldDisplayActionMenu && (
@@ -117,8 +117,8 @@ export const OKRsEmptyState = ({
           imageKey={imageKey}
           labelMessage={
             userID
-              ? messages.teamObjectivesEmptyStateMessage
-              : messages.personalObjectivesEmptyStateMessage
+              ? messages.personalObjectivesEmptyStateMessage
+              : messages.teamObjectivesEmptyStateMessage
           }
           maxW="md"
         />

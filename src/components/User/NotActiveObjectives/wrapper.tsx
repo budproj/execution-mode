@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil'
 
 import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
 import { OKRsSkeleton } from 'src/components/Objective/OKRsSkeleton/wrapper'
+import { Team } from 'src/components/Team/types'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleFilters } from '../../../state/hooks/useCycleFilters/hook'
@@ -20,21 +21,22 @@ import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLEdge } from '../../types'
 import queries from '../ActiveObjectives/queries.gql'
+import { User } from '../types'
 
 import { TimeMachineController } from './time-machine-controller'
 
-interface TeamNotActiveObjectivesProperties {
-  teamID: string
-  userID: string
+interface UserNotActiveObjectivesProperties {
+  teamID: Team['id']
+  userID: User['id']
 }
 
-export interface GetTeamNotActiveObjectivesQuery {
+export interface GetUserNotActiveObjectivesQuery {
   objectives: {
     edges: Array<GraphQLEdge<Objective>>
   }
 }
 
-export const TeamNotActiveObjectives = ({ teamID, userID }: TeamNotActiveObjectivesProperties) => {
+export const UserNotActiveObjectives = ({ teamID, userID }: UserNotActiveObjectivesProperties) => {
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const [loadCyclesOnRecoil] = useRecoilFamilyLoader<Objective>(cycleAtomFamily)
@@ -53,7 +55,7 @@ export const TeamNotActiveObjectives = ({ teamID, userID }: TeamNotActiveObjecti
     filteredCycleIDs.has(cycle.id),
   )
 
-  useQuery<GetTeamNotActiveObjectivesQuery>(queries.GET_OBJECTIVES, {
+  useQuery<GetUserNotActiveObjectivesQuery>(queries.GET_OBJECTIVES, {
     variables: {
       teamId: teamID,
       ownerId: userID,
@@ -86,7 +88,7 @@ export const TeamNotActiveObjectives = ({ teamID, userID }: TeamNotActiveObjecti
 
       {isLoaded ? (
         filteredObjectiveCycles.length === 0 ? (
-          <OKRsEmptyState userID={userID} teamID={teamID} />
+          <OKRsEmptyState userID={userID} teamID={teamID} imageKey="empty-personal-okrs-tab" />
         ) : (
           filteredObjectiveCycles.map(([cycle, objectiveIDs]) => (
             <CycleObjectives

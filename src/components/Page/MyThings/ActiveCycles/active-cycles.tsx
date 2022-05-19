@@ -18,13 +18,13 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { PageMetaHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { ChevronDown } from 'src/components/Icon'
+import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { TASK_STATUS } from 'src/components/Task/constants'
 import { DetailedHeader } from 'src/components/User/DetailedHeader'
-import { UserObjectives } from 'src/components/User/Objectives/wrapper'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { myThingsTasksQuery } from 'src/state/recoil/task'
-import { ObjectivesViewMode } from 'src/state/recoil/team/objectives-view-mode'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
@@ -48,7 +48,7 @@ const ActiveCyclesPage = () => {
 
   const [taskState, setTaskState] = useState(TASK_STATUS.CHECKED)
 
-  // Const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
+  const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
   const handleTaskFilterChange = (taskState: TASK_STATUS) => {
     setTaskState(taskState)
@@ -147,12 +147,7 @@ const ActiveCyclesPage = () => {
         <HStack align="stretch" spacing="4rem" flex="1">
           <Box flexBasis="60%" maxWidth="60%">
             {userID ? (
-              // <KeyResultsActiveAndOwnedByUser userID={userID} onLineClick={handleLineClick} />
-              <UserObjectives
-                userID={userID}
-                teamID="92c82e64-836c-44a5-a8c1-0db63cd340b3"
-                viewType={ObjectivesViewMode.ACTIVE}
-              />
+              <KeyResultsActiveAndOwnedByUser userID={userID} onLineClick={handleLineClick} />
             ) : undefined}
           </Box>
 

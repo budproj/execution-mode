@@ -5,17 +5,19 @@ import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { DangerousActionConfirmationDialog } from 'src/components/Base/Dialogs/Confirmation/DangerousAction/wrapper'
+import { Team } from 'src/components/Team/types'
 
 import { teamActiveObjectives } from '../../../../state/recoil/team/active-objectives'
 import { DeleteResult } from '../../../types'
+import { Objective } from '../../types'
 import { stopAccordionOpen } from '../handlers'
 
 import messages from './messages'
 import queries from './queries.gql'
 
 interface DeleteObjectiveOptionProperties {
-  objectiveID?: string
-  teamID?: string
+  objectiveID?: Objective['id']
+  teamID?: Team['id']
   onDelete?: (id?: string) => void
 }
 
