@@ -3,6 +3,9 @@ import { Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
+import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
+import { OKRsSkeleton } from 'src/components/Objective/OKRsSkeleton/wrapper'
+
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
@@ -15,8 +18,6 @@ import {
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnection, GraphQLConnectionPolicy, GraphQLEffect } from '../../types'
-import { TeamOKRsEmptyState } from '../OKRsEmptyState/wrapper'
-import { TeamOKRsSkeleton } from '../OKRsSkeleton/wrapper'
 
 import queries from './queries.gql'
 
@@ -90,7 +91,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     <Stack spacing={12} h="full">
       {isLoaded ? (
         cycles.length === 0 ? (
-          <TeamOKRsEmptyState
+          <OKRsEmptyState
             teamID={teamID}
             isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
             onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
@@ -107,7 +108,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
           ))
         )
       ) : (
-        <TeamOKRsSkeleton />
+        <OKRsSkeleton />
       )}
     </Stack>
   )
