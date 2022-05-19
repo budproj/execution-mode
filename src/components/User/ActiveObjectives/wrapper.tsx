@@ -91,7 +91,7 @@ export const UserActiveObjectives = ({ teamID, userID }: UserActiveObjectivesPro
       {isLoaded ? (
         cycles.length === 0 ? (
           <OKRsEmptyState
-            userID={userID}
+            isPersonalObjective
             teamID={teamID}
             imageKey="empty-personal-okrs-tab"
             isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}

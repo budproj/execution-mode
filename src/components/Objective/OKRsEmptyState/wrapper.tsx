@@ -8,7 +8,6 @@ import { imageKeys } from 'src/components/Base/EmptyState/empty-state'
 import { Action, ActionMenu } from 'src/components/Cycle/ActionMenu/wrapper'
 import { Cycle } from 'src/components/Cycle/types'
 import { Team } from 'src/components/Team/types'
-import { User } from 'src/components/User/types'
 import { Delta, GraphQLEntityPolicy, Status } from 'src/components/types'
 import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import meAtom from 'src/state/recoil/user/me'
@@ -19,10 +18,10 @@ import messages from './messages'
 import queries from './queries.gql'
 
 type OKRsEmptyStateProperties = {
-  teamID: Team['id']
-  userID: User['id']
+  teamID: Team['id'] | null
   imageKey?: keyof typeof imageKeys
   isAllowedToCreateObjectives?: boolean
+  isPersonalObjective?: boolean
   onViewOldCycles?: Action
   onNewObjective?: Action
 }
@@ -40,7 +39,7 @@ type CreateDraftObjectiveQueryResult = {
 
 export const OKRsEmptyState = ({
   teamID,
-  userID,
+  isPersonalObjective,
   onViewOldCycles,
   onNewObjective,
   imageKey,
@@ -56,7 +55,7 @@ export const OKRsEmptyState = ({
     {
       variables: {
         title: intl.formatMessage(messages.draftObjectiveTitle),
-        ownerID: userID ?? ownerID,
+        ownerID,
         teamID,
       },
       onCompleted: async (data) => {
@@ -91,7 +90,7 @@ export const OKRsEmptyState = ({
     <Stack spacing={4} h="full">
       <Stack direction="row" alignItems="center">
         <Heading fontSize={16} color="gray.500" flexGrow={1}>
-          {userID
+          {isPersonalObjective
             ? intl.formatMessage(messages.personalObjectivesEmptyStateTitle)
             : intl.formatMessage(messages.teamObjectivesEmptyStateTitle)}
         </Heading>
@@ -116,7 +115,7 @@ export const OKRsEmptyState = ({
         <EmptyState
           imageKey={imageKey}
           labelMessage={
-            userID
+            isPersonalObjective
               ? messages.personalObjectivesEmptyStateMessage
               : messages.teamObjectivesEmptyStateMessage
           }
