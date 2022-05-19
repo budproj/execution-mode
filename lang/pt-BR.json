@@ -1435,6 +1435,10 @@
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
   },
+  "XZcPVc": {
+    "defaultMessage": "Uma mulher analisando gráficos e apontando com um dedo.",
+    "description": "The alternative text explaining the empty item image"
+  },
   "XiSFEr": {
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
@@ -1926,6 +1930,10 @@
   "iZcwRX": {
     "defaultMessage": "ACESSO DE EDIÇÃO",
     "description": "The tooltip text for the edition access text"
+  },
+  "ifl8WA": {
+    "defaultMessage": "Você ainda não criou nenhum OKR Individual.",
+    "description": "This message is displayed as the empty state message inside the User page"
   },
   "iivI51": {
     "defaultMessage": "Neste mês",
@@ -2474,6 +2482,10 @@
   "sYGIlp": {
     "defaultMessage": "Minha conta",
     "description": "This label defines the text on the first menu section option"
+  },
+  "ssVHza": {
+    "defaultMessage": "OKRs INDIVIDUAIS",
+    "description": "This message is displayed above the empty state inside the active cycles section at the User page"
   },
   "t0YKyV": {
     "defaultMessage": "Confirmar",

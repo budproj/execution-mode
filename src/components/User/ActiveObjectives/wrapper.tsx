@@ -49,7 +49,7 @@ export const UserActiveObjectives = ({ teamID, userID }: UserActiveObjectivesPro
     fetchPolicy: 'no-cache',
     variables: {
       teamId: teamID,
-      onwerId: userID,
+      ownerId: userID,
       active: true,
     },
     notifyOnNetworkStatusChange: true,

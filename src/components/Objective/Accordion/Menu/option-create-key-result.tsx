@@ -4,12 +4,13 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { keyResultInsertDrawerObjectiveID } from '../../../../state/recoil/key-result/drawers/insert/objective-id'
+import { Objective } from '../../types'
 import { stopAccordionOpen } from '../handlers'
 
 import messages from './messages'
 
 interface CreateKeyResultOptionProperties {
-  objectiveID?: string
+  objectiveID?: Objective['id']
 }
 
 export const CreateKeyResultOption = ({ objectiveID }: CreateKeyResultOptionProperties) => {
