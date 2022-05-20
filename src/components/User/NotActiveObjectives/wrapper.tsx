@@ -88,7 +88,7 @@ export const UserNotActiveObjectives = ({ teamID, userID }: UserNotActiveObjecti
 
       {isLoaded ? (
         filteredObjectiveCycles.length === 0 ? (
-          <OKRsEmptyState userID={userID} teamID={teamID} imageKey="empty-personal-okrs-tab" />
+          <OKRsEmptyState isPersonalObjective imageKey="empty-personal-okrs-tab" />
         ) : (
           filteredObjectiveCycles.map(([cycle, objectiveIDs]) => (
             <CycleObjectives

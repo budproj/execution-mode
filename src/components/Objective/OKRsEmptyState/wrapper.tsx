@@ -18,7 +18,7 @@ import messages from './messages'
 import queries from './queries.gql'
 
 type OKRsEmptyStateProperties = {
-  teamID: Team['id'] | null
+  teamID?: Team['id']
   imageKey?: keyof typeof imageKeys
   isAllowedToCreateObjectives?: boolean
   isPersonalObjective?: boolean
@@ -56,7 +56,8 @@ export const OKRsEmptyState = ({
       variables: {
         title: intl.formatMessage(messages.draftObjectiveTitle),
         ownerID,
-        teamID,
+        // eslint-disable-next-line unicorn/no-null
+        teamID: teamID ?? null,
       },
       onCompleted: async (data) => {
         toast({
