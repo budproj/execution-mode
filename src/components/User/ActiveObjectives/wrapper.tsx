@@ -35,7 +35,7 @@ export interface GetUserActiveObjectivesQuery {
 }
 
 export const UserActiveObjectives = ({ teamID, userID }: UserActiveObjectivesProperties) => {
-  const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
+  const [objectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
   const [hasNotActiveObjectives] = useState(false)
@@ -92,7 +92,6 @@ export const UserActiveObjectives = ({ teamID, userID }: UserActiveObjectivesPro
         cycles.length === 0 ? (
           <OKRsEmptyState
             isPersonalObjective
-            teamID={teamID}
             imageKey="empty-personal-okrs-tab"
             isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
             onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
