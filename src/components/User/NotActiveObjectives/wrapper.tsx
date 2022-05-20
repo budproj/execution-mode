@@ -5,7 +5,6 @@ import { useSetRecoilState } from 'recoil'
 
 import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
 import { OKRsSkeleton } from 'src/components/Objective/OKRsSkeleton/wrapper'
-import { Team } from 'src/components/Team/types'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleFilters } from '../../../state/hooks/useCycleFilters/hook'
@@ -15,8 +14,8 @@ import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../state/recoil/objective'
 import {
   ObjectivesViewMode,
-  teamObjectivesViewMode,
-} from '../../../state/recoil/team/objectives-view-mode'
+  userObjectivesViewMode,
+} from '../../../state/recoil/user/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLEdge } from '../../types'
@@ -26,7 +25,6 @@ import { User } from '../types'
 import { TimeMachineController } from './time-machine-controller'
 
 interface UserNotActiveObjectivesProperties {
-  teamID: Team['id']
   userID: User['id']
 }
 
@@ -36,15 +34,15 @@ export interface GetUserNotActiveObjectivesQuery {
   }
 }
 
-export const UserNotActiveObjectives = ({ teamID, userID }: UserNotActiveObjectivesProperties) => {
-  const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
+export const UserNotActiveObjectives = ({ userID }: UserNotActiveObjectivesProperties) => {
+  const setObjectivesViewMode = useSetRecoilState(userObjectivesViewMode(userID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const [loadCyclesOnRecoil] = useRecoilFamilyLoader<Objective>(cycleAtomFamily)
 
   const [objectiveEdges, setObjectiveEdges, _, isConnectionLoaded] = useConnectionEdges<Objective>()
   const [objectiveCycles, setCycleObjectives, cycleObjectives] = useCycleObjectives()
 
-  const [filteredCycles, __, { updateCycles, isLoaded, cycles }] = useCycleFilters(teamID)
+  const [filteredCycles, __, { updateCycles, isLoaded, cycles }] = useCycleFilters(userID)
 
   const handleClose = () => {
     setObjectivesViewMode(ObjectivesViewMode.ACTIVE)
@@ -57,7 +55,8 @@ export const UserNotActiveObjectives = ({ teamID, userID }: UserNotActiveObjecti
 
   useQuery<GetUserNotActiveObjectivesQuery>(queries.GET_OBJECTIVES, {
     variables: {
-      teamId: teamID,
+      // eslint-disable-next-line unicorn/no-null
+      teamId: null,
       ownerId: userID,
       active: false,
     },
@@ -96,7 +95,6 @@ export const UserNotActiveObjectives = ({ teamID, userID }: UserNotActiveObjecti
               isDisabled
               cycle={cycle}
               objectiveIDs={objectiveIDs}
-              teamID={teamID}
               userID={userID}
             />
           ))
