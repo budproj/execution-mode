@@ -7,3 +7,20 @@ query LIST_NOT_ACTIVE_CYCLES {
     }
   }
 }
+query LIST_USERS_WITH_INDIVIDUAL_OKR {
+  users(onlyWithIndividualObjectives: true) {
+  edges {
+    node {
+      id
+      firstName
+      nickname
+      fullName
+      role
+      picture
+      about
+      linkedInProfileAddress
+    }
+  }
+  }
+}
+  
