@@ -20,5 +20,13 @@ query GET_USER_DETAILS($userId: ID) {
         }
       }
     }
+    companies {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
   }
 }

@@ -12,6 +12,7 @@ interface UserObjectivesProperties {
 }
 
 export const UserObjectives = ({ userID, viewType }: UserObjectivesProperties) => {
+  console.log({ userID })
   const ViewModeComponentHashmap = {
     [ObjectivesViewMode.ACTIVE]: UserActiveObjectives,
     [ObjectivesViewMode.NOT_ACTIVE]: UserNotActiveObjectives,
