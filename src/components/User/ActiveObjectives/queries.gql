@@ -1,0 +1,28 @@
+query GET_OBJECTIVES($ownerId: ID, $teamId: ID, $active: Boolean) {
+  objectives(ownerId: $ownerId, teamId: $teamId, active: $active) {
+    edges {
+      node {
+        id
+        title
+        ownerId
+        cycle {
+          id
+          period
+          cadence
+          dateEnd
+        }
+        status {
+          progress
+          confidence
+        }
+        delta {
+          progress
+        }
+        policy {
+          update
+          delete
+        }
+      }
+    }
+  }
+}

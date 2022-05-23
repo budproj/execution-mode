@@ -3,9 +3,13 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import TreeDotsIcon from 'src/components/Icon/TreeDots'
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
+import { userAtomFamily } from 'src/state/recoil/user'
+
 import { objectiveAtomFamily } from '../../../../state/recoil/objective'
 import { teamAtomFamily } from '../../../../state/recoil/team'
-import TreeDotsIcon from '../../../Icon/TreeDots'
 import { GraphQLEffect } from '../../../types'
 import { stopAccordionOpen } from '../handlers'
 
@@ -15,21 +19,25 @@ import { DeleteObjectiveOption } from './option-delete-objective'
 import { UpdateObjectiveOption } from './option-update-objective'
 
 interface ObjectiveAccordionMenuProperties {
-  teamID?: string
+  teamID?: Team['id']
+  userID?: User['id']
   objectiveID?: string
   isLoaded?: boolean
 }
 
 export const ObjectiveAccordionMenu = ({
   teamID,
+  userID,
   objectiveID,
   isLoaded,
 }: ObjectiveAccordionMenuProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(teamID))
+  const user = useRecoilValue(userAtomFamily(userID))
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
 
-  const canCreateKeyResult = team?.keyResults?.policy?.create === GraphQLEffect.ALLOW
+  const policyHolder = userID ? user : team
+  const canCreateKeyResult = policyHolder?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
   const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
   const hasAnyOptions = !isLoaded || canCreateKeyResult || canUpdateObjective || canDeleteObjective
@@ -40,10 +48,8 @@ export const ObjectiveAccordionMenu = ({
         <MenuButton
           bg="black.100"
           borderRadius={4}
-          px={3}
-          py={2}
-          h="full"
           color="gray.500"
+          p={2}
           _hover={{
             bg: 'brand.100',
             color: 'brand.500',
@@ -57,13 +63,14 @@ export const ObjectiveAccordionMenu = ({
           <TreeDotsIcon
             desc={intl.formatMessage(messages.optionsButtonIconDesc)}
             fill="currentColor"
+            fontSize="2xl"
           />
         </MenuButton>
         <MenuList>
           {canCreateKeyResult && <CreateKeyResultOption objectiveID={objectiveID} />}
           {canUpdateObjective && <UpdateObjectiveOption objectiveID={objectiveID} />}
           {canDeleteObjective && (
-            <DeleteObjectiveOption objectiveID={objectiveID} teamID={teamID} />
+            <DeleteObjectiveOption objectiveID={objectiveID} userID={userID} teamID={teamID} />
           )}
         </MenuList>
       </Menu>

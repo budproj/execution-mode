@@ -4,8 +4,10 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { imageKeys } from 'src/components/Base/EmptyState/empty-state'
 import { Action, ActionMenu } from 'src/components/Cycle/ActionMenu/wrapper'
 import { Cycle } from 'src/components/Cycle/types'
+import { Team } from 'src/components/Team/types'
 import { Delta, GraphQLEntityPolicy, Status } from 'src/components/types'
 import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import meAtom from 'src/state/recoil/user/me'
@@ -15,9 +17,11 @@ import { EmptyState } from '../../Base'
 import messages from './messages'
 import queries from './queries.gql'
 
-type TeamOKRsEmptyStateProperties = {
-  teamID: string
+type OKRsEmptyStateProperties = {
+  teamID?: Team['id']
+  imageKey?: keyof typeof imageKeys
   isAllowedToCreateObjectives?: boolean
+  isPersonalObjective?: boolean
   onViewOldCycles?: Action
   onNewObjective?: Action
 }
@@ -33,12 +37,14 @@ type CreateDraftObjectiveQueryResult = {
   }
 }
 
-export const TeamOKRsEmptyState = ({
+export const OKRsEmptyState = ({
   teamID,
+  isPersonalObjective,
   onViewOldCycles,
   onNewObjective,
+  imageKey,
   isAllowedToCreateObjectives,
-}: TeamOKRsEmptyStateProperties) => {
+}: OKRsEmptyStateProperties) => {
   const intl = useIntl()
   const toast = useToast()
   const ownerID = useRecoilValue(meAtom)
@@ -50,7 +56,8 @@ export const TeamOKRsEmptyState = ({
       variables: {
         title: intl.formatMessage(messages.draftObjectiveTitle),
         ownerID,
-        teamID,
+        // eslint-disable-next-line unicorn/no-null
+        teamID: teamID ?? null,
       },
       onCompleted: async (data) => {
         toast({
@@ -83,8 +90,10 @@ export const TeamOKRsEmptyState = ({
   return (
     <Stack spacing={4} h="full">
       <Stack direction="row" alignItems="center">
-        <Heading fontSize="sm" color="gray.500" textTransform="uppercase" flexGrow={1}>
-          {intl.formatMessage(messages.emptyStateTitle)}
+        <Heading fontSize={16} color="gray.500" flexGrow={1}>
+          {isPersonalObjective
+            ? intl.formatMessage(messages.personalObjectivesEmptyStateTitle)
+            : intl.formatMessage(messages.teamObjectivesEmptyStateTitle)}
         </Heading>
 
         {shouldDisplayActionMenu && (
@@ -95,10 +104,22 @@ export const TeamOKRsEmptyState = ({
         )}
       </Stack>
 
-      <Flex bg="white" w="full" h="full" alignContent="center" justifyContent="center" p={16}>
+      <Flex
+        bg="white"
+        w="full"
+        h="full"
+        alignContent="center"
+        justifyContent="center"
+        p={16}
+        borderRadius={10}
+      >
         <EmptyState
-          imageKey="people-with-pages"
-          labelMessage={messages.emptyStateMessage}
+          imageKey={imageKey}
+          labelMessage={
+            isPersonalObjective
+              ? messages.personalObjectivesEmptyStateMessage
+              : messages.teamObjectivesEmptyStateMessage
+          }
           maxW="md"
         />
       </Flex>

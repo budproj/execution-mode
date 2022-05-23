@@ -259,6 +259,10 @@
     "defaultMessage": "Esperado: {progress}%",
     "description": "Message to show the expetected progress of the project"
   },
+  "3ye3aF": {
+    "defaultMessage": "Significativos",
+    "description": "This title guides the creation of Objectives."
+  },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -327,10 +331,6 @@
     "defaultMessage": "Gênero da empresa",
     "description": "The label of the company gender while creating a new workspace"
   },
-  "6BeRhq": {
-    "defaultMessage": "Excluir este OKR",
-    "description": "This is the third option that appears when you open the menu of a given objective inside the accordion button"
-  },
   "6E9X3c": {
     "defaultMessage": "Redefinir",
     "description": "This is the button label that is displayed in our reset button"
@@ -390,10 +390,6 @@
   "7fTFkO": {
     "defaultMessage": "Média do progresso de todos os seus resultados-chave no ciclo anual atual",
     "description": "Yearly progress chart tooltip message"
-  },
-  "7tvIOz": {
-    "defaultMessage": "Adicionar resultado-chave",
-    "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
   },
   "7uQQbf": {
     "defaultMessage": "Nome do período anual",
@@ -511,6 +507,10 @@
     "defaultMessage": "Objetivo atualizado com sucesso",
     "description": "This text is displayed as a toast when the user clicks on the check button to update a given objective title"
   },
+  "B7ryNb": {
+    "defaultMessage": "Editar título do Objetivo",
+    "description": "This is the second option that appears when you open the menu of a given objective inside the accordion button"
+  },
   "BEo9Xi": {
     "defaultMessage": "Desativar usuári{gender, select, MALE {o} FEMALE {a} other {o}}",
     "description": "This text is used in our deactivate user button in the profile sidebar in our team page"
@@ -518,6 +518,10 @@
   "BOJlqi": {
     "defaultMessage": "Progresso Trimestral",
     "description": "User's quarterly progress title"
+  },
+  "BTaFbJ": {
+    "defaultMessage": "São ousados, desafiadores e devem gerar um certo nível de desconforto por não serem fáceis de alcançar.",
+    "description": "This card guides the creation of Objectives."
   },
   "BYO0eO": {
     "defaultMessage": "Um ícone de lixeira. Ao clicar nele você irá remover este resultado-chave",
@@ -583,9 +587,9 @@
     "defaultMessage": "Salvar",
     "description": "This text is displayed as the button that will save the update for our goal update popover inside the key-result drawers"
   },
-  "DMwbJe": {
-    "defaultMessage": "Criar OKR",
-    "description": "create new key result"
+  "DWCNAb": {
+    "defaultMessage": "Passo 3",
+    "description": "The label of the third step while creating a new workspace"
   },
   "DWCNAb": {
     "defaultMessage": "Passo 3",
@@ -639,6 +643,10 @@
     "defaultMessage": "Salvar",
     "description": "This message is displayed in the \"SAVE\" button in the checkin form"
   },
+  "FMvbXp": {
+    "defaultMessage": "No ciclo {cadence} {cycle} {parent}",
+    "description": "This message is displayed inside the team page, on the options menu of a cycle"
+  },
   "FPhsI3": {
     "defaultMessage": "Selecione seus times",
     "description": "This is the fallback value that goes on our user account settings page, at the fourth field to update the user informations. The fallback value appears if the user has no data at that field"
@@ -658,6 +666,10 @@
   "FWsiRf": {
     "defaultMessage": "{confidence, select, barrier {Todos os resultados-chave {confidencetext}} other {Todos os resultados-chave de {confidencetext}}}",
     "description": "The title for the dashboard key results modal"
+  },
+  "Fb0ZAK": {
+    "defaultMessage": "Devem descrever uma visão de futuro atraente e motivante que valha a pena o esforço para alcançar.",
+    "description": "This card guides the creation of Objectives."
   },
   "FoCix/": {
     "defaultMessage": "Procurar",
@@ -783,10 +795,6 @@
     "defaultMessage": "Crie novas tarefas pela barra lateral dos resultados-chave em que você atua.",
     "description": "The empty state message when you have no tasks"
   },
-  "J8dAid": {
-    "defaultMessage": "Este objetivo não tem nenhum resultado-chave",
-    "description": "This message is displayed in the key-results empty state inside the team page when an objective has no key-results"
-  },
   "JBA9+L": {
     "defaultMessage": "Explorar ciclos anteriores",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
@@ -798,6 +806,10 @@
   "JItuU0": {
     "defaultMessage": "Coisas de {username}",
     "description": "The page title for users profile"
+  },
+  "JNiINj": {
+    "defaultMessage": "Veja nossos exemplos de OKRs",
+    "description": "This button redirects to the page that teaches about OKRs."
   },
   "JYkjjF": {
     "defaultMessage": "Meu perfil",
@@ -1119,6 +1131,10 @@
     "defaultMessage": "Time",
     "description": "The label of the team field in the create user form"
   },
+  "SU+pQ8": {
+    "defaultMessage": "Clique no botão <span>...</span> para criar o primeiro resultado-chave deste objetivo.",
+    "description": "This message is displayed in the key-results empty state inside the team page when an objective has no key-results"
+  },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
@@ -1126,6 +1142,10 @@
   "Sau4Na": {
     "defaultMessage": "Nome",
     "description": "The user first name input placeholder while creating a new workspace"
+  },
+  "Sb6dkV": {
+    "defaultMessage": "Ver detalhes",
+    "description": "This option will show a sidebar with the details of the selected user."
   },
   "SenoB2": {
     "defaultMessage": "A página que você está procurando não foi encontrada!",
@@ -1315,6 +1335,10 @@
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
   },
+  "XZcPVc": {
+    "defaultMessage": "Uma mulher analisando gráficos e apontando com um dedo.",
+    "description": "The alternative text explaining the empty item image"
+  },
   "XiSFEr": {
     "defaultMessage": "Erro inesperado | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
@@ -1330,6 +1354,10 @@
   "Y1oyYG": {
     "defaultMessage": "Um ícone de seta para cima, indicando que o progresso aumentou",
     "description": "This desc message explains the increase icon for screen readers"
+  },
+  "YFb9UA": {
+    "defaultMessage": "Ir para o perfil",
+    "description": "This option will redirect the user to the selected user profile."
   },
   "YUvWwS": {
     "defaultMessage": "Registro",
@@ -1350,6 +1378,10 @@
   "YznDPX": {
     "defaultMessage": "Resultado-chave criado com sucesso!",
     "description": "This message appears after the user creates a new key-result as a toast"
+  },
+  "ZMT2Ze": {
+    "defaultMessage": "Criar novo Resultado-Chave",
+    "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
   },
   "ZPSK4M": {
     "defaultMessage": "Insira um título para este Resultado-chave",
@@ -1419,6 +1451,10 @@
     "defaultMessage": "Clique aqui para começar a escrever um comentário",
     "description": "This is the title text that is displayed if the user hovers the mouse in it"
   },
+  "c6ySN2": {
+    "defaultMessage": "Excluir este Objetivo e seus KRs",
+    "description": "This is the third option that appears when you open the menu of a given objective inside the accordion button"
+  },
   "c8KQhI": {
     "defaultMessage": "Semana de",
     "description": "The prefix that appears in our chart tooltip in the key-result sidebar while seeing a quarterly key-result"
@@ -1442,10 +1478,6 @@
   "cz6EUM": {
     "defaultMessage": "Foto",
     "description": "The label of the picture field in the create user form"
-  },
-  "d7EKd5": {
-    "defaultMessage": "Editar este OKR",
-    "description": "This is the second option that appears when you open the menu of a given objective inside the accordion button"
   },
   "dB4Sbq": {
     "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
@@ -1539,6 +1571,10 @@
     "defaultMessage": "Ajuda",
     "description": "This tooltip is displayed when the user hovers the support button"
   },
+  "gAgkzF": {
+    "defaultMessage": "Criar Objetivo",
+    "description": "create new key result"
+  },
   "gODdaE": {
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
@@ -1623,6 +1659,10 @@
     "defaultMessage": "ACESSO DE EDIÇÃO",
     "description": "The tooltip text for the edition access text"
   },
+  "ifl8WA": {
+    "defaultMessage": "Você ainda não criou nenhum OKR Individual.",
+    "description": "This message is displayed as the empty state message inside the User page"
+  },
   "iivI51": {
     "defaultMessage": "Neste mês",
     "description": "This label is displayed if the date difference is 1 month or less"
@@ -1658,6 +1698,10 @@
   "jxyYl3": {
     "defaultMessage": "Ordenada pelo progresso",
     "description": "This tooltip appears when the user hovers the first column title"
+  },
+  "jzx+Hl": {
+    "defaultMessage": "Botão de opções",
+    "description": "This button allows you to choose an option that directs the user to the users profile or details."
   },
   "k3EFXK": {
     "defaultMessage": "O nível de confiança descreve como você vê suas chances de alcançar esse resultado-chave dentro do prazo",
@@ -1718,6 +1762,10 @@
   "lMxUF9": {
     "defaultMessage": "Um ícone de seta para baixo, indicando que o progresso reduziu",
     "description": "This desc message explains the decrease icon for screen readers"
+  },
+  "lQkUTL": {
+    "defaultMessage": "Inspiradores",
+    "description": "This title guides the creation of Objectives."
   },
   "lWcm/y": {
     "defaultMessage": "Não existem resultados-chave com esse Nível de confiança.",
@@ -1839,6 +1887,14 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
+  "qhchMM": {
+    "defaultMessage": "Representam as mais altas prioridades e comunicam essa direção com bastante clareza.",
+    "description": "This card guides the creation of Objectives."
+  },
+  "qp4Qmm": {
+    "defaultMessage": "Ir para o perfil de {username}",
+    "description": "This button redirects to the selected user."
+  },
   "qrgfik": {
     "defaultMessage": "Em uma frase, qual é a missão deste time?",
     "description": "The placeholder to the description field in team add/edit modal"
@@ -1903,6 +1959,10 @@
     "defaultMessage": "Sobre",
     "description": "This text is displayed in our check-in card, above the user comment if it exists"
   },
+  "ssVHza": {
+    "defaultMessage": "OKRs INDIVIDUAIS",
+    "description": "This message is displayed above the empty state inside the active cycles section at the User page"
+  },
   "t0YKyV": {
     "defaultMessage": "Confirmar",
     "description": "This message is used as the confirmation button when we are in the confirmation dialog"
@@ -1922,6 +1982,10 @@
   "th1Ney": {
     "defaultMessage": "Hoje",
     "description": "This label is displayed if the date is today"
+  },
+  "tj3TRS": {
+    "defaultMessage": "Audaciosos",
+    "description": "This title guides the creation of Objectives."
   },
   "txi+kN": {
     "defaultMessage": "Idioma",
@@ -1991,6 +2055,10 @@
     "defaultMessage": "Nome do usuário inicial",
     "description": "The user first name while creating a new workspace"
   },
+  "vzHp1e": {
+    "defaultMessage": "Precisando de inspiração? Lembre-se: os melhores objetivos são...",
+    "description": "This is the title presented in the component that guides you in creating Objectives."
+  },
   "w/3frD": {
     "defaultMessage": "Líder:",
     "description": "The label to the leader field in team add/edit modal"
@@ -2018,6 +2086,10 @@
   "wwt9p1": {
     "defaultMessage": "Um círculo com um ponto de interrogação ao centro",
     "description": "This message describes the info circle icon to our screen readers"
+  },
+  "x/2y46": {
+    "defaultMessage": "Veja nossos exemplos de OKRs",
+    "description": "This link takes you to the page with guidelines on creating OKRs."
   },
   "x30AaU": {
     "defaultMessage": "Clique aqui para fazer uma busca",

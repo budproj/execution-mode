@@ -3,11 +3,11 @@ import React from 'react'
 
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 
-export interface ChildTeamsObjectivesSkeletonProperties {
+export interface ChildObjectivesSkeletonProperties {
   numOfSkeletons?: number
 }
 
-export const TeamOKRsSkeleton = ({ numOfSkeletons }: ChildTeamsObjectivesSkeletonProperties) => {
+export const OKRsSkeleton = ({ numOfSkeletons }: ChildObjectivesSkeletonProperties) => {
   numOfSkeletons ??= 1
 
   return (

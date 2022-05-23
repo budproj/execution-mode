@@ -2,6 +2,9 @@ import { Stack, AccordionIcon, Heading, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
+
 import buildSkeletonMinSize from '../../../../../../lib/chakra/build-skeleton-min-size'
 import { PercentageProgressIncreaseTag } from '../../../../Base'
 import TooltipWithDelay from '../../../../Base/TooltipWithDelay'
@@ -13,11 +16,18 @@ import messages from './messages'
 interface ViewModeProperties {
   isLoaded?: boolean
   objective?: Partial<Objective>
-  teamID?: string
+  userID?: User['id']
+  teamID?: Team['id']
   isDisabled?: boolean
 }
 
-export const ViewMode = ({ objective, isLoaded, teamID, isDisabled }: ViewModeProperties) => {
+export const ViewMode = ({
+  objective,
+  isLoaded,
+  userID,
+  teamID,
+  isDisabled,
+}: ViewModeProperties) => {
   const intl = useIntl()
 
   return (
@@ -50,21 +60,28 @@ export const ViewMode = ({ objective, isLoaded, teamID, isDisabled }: ViewModePr
               <Skeleton
                 isLoaded={isLoaded}
                 borderRadius={4}
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
                 w={isLoaded ? 'auto' : 140}
                 h={isLoaded ? 'auto' : 33}
               >
                 <PercentageProgressIncreaseTag
                   forcePositiveSignal
-                  bg="black.100"
-                  h="full"
+                  showSignalArrow
                   value={objective?.delta?.progress}
-                  prefix={intl.formatMessage(messages.progressTagLabel)}
+                  fontSize="12px"
+                  fontWeight="medium"
+                  border="1px solid"
+                  borderColor="white"
+                  p={1.5}
                 />
               </Skeleton>
             </TooltipWithDelay>
 
             <ObjectiveAccordionMenu
               teamID={teamID}
+              userID={userID}
               objectiveID={objective?.id}
               isLoaded={isLoaded}
             />

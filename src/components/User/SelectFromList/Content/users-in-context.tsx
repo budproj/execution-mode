@@ -17,6 +17,7 @@ type UsersInContextProperties = {
   isLoading?: boolean
   hasUserCard?: boolean
   onSelect?: (userID: string) => void | Promise<void>
+  hasMenu?: boolean
 }
 
 export const UsersInContext = ({
@@ -24,6 +25,7 @@ export const UsersInContext = ({
   isLoading,
   hasUserCard,
   onSelect,
+  hasMenu,
 }: UsersInContextProperties) => {
   const { items } = useContext(SearchableListContext)
   const [loadUsers] = useRecoilFamilyLoader<User>(userAtomFamily)
@@ -42,6 +44,7 @@ export const UsersInContext = ({
       showUserCard={hasUserCard}
       isLoading={isLoading}
       avatarSubtitleType={avatarSubtitleType}
+      hasMenu={hasMenu}
       emptyState={emptyState}
       onUserClick={onSelect}
     />

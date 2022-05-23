@@ -21,22 +21,22 @@ export default defineMessages<ObjectiveAccordionMenuMessage>({
   },
 
   firstMenuOption: {
-    defaultMessage: 'Adicionar resultado-chave',
-    id: '7tvIOz',
+    defaultMessage: 'Criar novo Resultado-Chave',
+    id: 'ZMT2Ze',
     description:
       'This is the first option that appears when you open the menu of a given objective inside the accordion button',
   },
 
   secondMenuOption: {
-    defaultMessage: 'Editar este OKR',
-    id: 'd7EKd5',
+    defaultMessage: 'Editar título do Objetivo',
+    id: 'B7ryNb',
     description:
       'This is the second option that appears when you open the menu of a given objective inside the accordion button',
   },
 
   thirdMenuOption: {
-    defaultMessage: 'Excluir este OKR',
-    id: '6BeRhq',
+    defaultMessage: 'Excluir este Objetivo e seus KRs',
+    id: 'c6ySN2',
     description:
       'This is the third option that appears when you open the menu of a given objective inside the accordion button',
   },

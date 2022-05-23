@@ -4,6 +4,8 @@ import { Form, Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { Team } from 'src/components/Team/types'
+
 import { lastInsertedKeyResultIDAtom } from '../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
 import meAtom from '../../../../state/recoil/user/me'
 import { KEY_RESULT_FORMAT, KEY_RESULT_TYPE } from '../../constants'
@@ -20,7 +22,7 @@ import { TitleInput } from './title'
 
 export type FormValues = {
   objectiveID?: string
-  teamID?: string
+  teamID?: Team['id'] | null
   title: string
   description: string
   format: KEY_RESULT_FORMAT
@@ -35,7 +37,8 @@ interface InsertKeyResultFormProperties {
   onError?: () => void
   onValidationError?: () => void
   objectiveID?: string
-  teamID?: string
+  teamID?: Team['id'] | null
+  isPersonalKR?: boolean
 }
 
 interface CreateKeyResultMutationResult {
@@ -53,6 +56,7 @@ export const InsertKeyResultForm = ({
   onValidationError,
   objectiveID,
   teamID,
+  isPersonalKR,
 }: InsertKeyResultFormProperties) => {
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
   const currentUserID = useRecoilValue(meAtom)
@@ -124,7 +128,7 @@ export const InsertKeyResultForm = ({
             <GoalInput />
           </Stack>
 
-          <OwnerInput />
+          {isPersonalKR ? undefined : <OwnerInput />}
 
           <FormActions onClose={onClose} />
         </FormControl>

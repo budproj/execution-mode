@@ -10,61 +10,64 @@ import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { isReloadNecessary, objectiveAtomFamily } from '../../../state/recoil/objective'
-import { teamActiveObjectives } from '../../../state/recoil/team/active-objectives'
+import { userActiveObjectives } from '../../../state/recoil/user/active-objectives'
 import {
   ObjectivesViewMode,
-  teamObjectivesViewMode,
-} from '../../../state/recoil/team/objectives-view-mode'
+  userObjectivesViewMode,
+} from '../../../state/recoil/user/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
-import { GraphQLConnection, GraphQLConnectionPolicy, GraphQLEffect } from '../../types'
+import { GraphQLConnectionPolicy, GraphQLEdge, GraphQLEffect } from '../../types'
+import { User } from '../types'
 
 import queries from './queries.gql'
 
-export interface TeamActiveObjectivesProperties {
-  teamID: string
+export interface UserActiveObjectivesProperties {
+  userID: User['id']
 }
 
-export interface GetTeamActiveObjectivesQuery {
-  team: {
-    id: string
-    name: string
-    activeObjectives: GraphQLConnection<Objective>
-    notActiveObjectives: GraphQLConnection<Objective>
+export interface GetUserActiveObjectivesQuery {
+  objectives: {
+    edges: Array<GraphQLEdge<Objective>>
   }
 }
 
-export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
-  const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
-  const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
+export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties) => {
+  const [objectivesPolicy] = useState<GraphQLConnectionPolicy>()
+  const [activeObjectives, setActiveObjectives] = useRecoilState(userActiveObjectives(userID))
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
-  const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
-  const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
+  const [hasNotActiveObjectives] = useState(false)
+  const setObjectivesViewMode = useSetRecoilState(userObjectivesViewMode(userID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
 
   const [objectiveEdges, setObjectiveEdges, _, isRemoteDataLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
 
-  const { called, refetch } = useQuery<GetTeamActiveObjectivesQuery>(
-    queries.GET_TEAM_ACTIVE_OBJECTIVES,
-    {
-      fetchPolicy: 'no-cache',
-      variables: { teamID },
-      notifyOnNetworkStatusChange: true,
-      onCompleted: ({ team }) => {
-        setObjectivesPolicy(team.activeObjectives.policy)
-        setActiveObjectives(team.activeObjectives?.edges ?? [])
-        setHasNotActiveObjectives(team.notActiveObjectives.edges.length > 0)
-      },
+  const { called, refetch } = useQuery<GetUserActiveObjectivesQuery>(queries.GET_OBJECTIVES, {
+    fetchPolicy: 'no-cache',
+    variables: {
+      // eslint-disable-next-line unicorn/no-null
+      teamId: null,
+      ownerId: userID,
+      active: true,
     },
-  )
+    notifyOnNetworkStatusChange: true,
+    onCompleted: ({ objectives }) => {
+      setActiveObjectives(objectives?.edges ?? [])
+    },
+  })
 
   const handleViewOldCycles = () => {
     setObjectivesViewMode(ObjectivesViewMode.NOT_ACTIVE)
   }
 
   const handleRefetch = async () => {
-    void refetch({ teamID })
+    void refetch({
+      // eslint-disable-next-line unicorn/no-null
+      teamId: null,
+      ownerId: userID,
+      active: true,
+    })
   }
 
   useEffect(() => {
@@ -81,7 +84,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
 
   useEffect(() => {
     if (shouldUpdateObjectives) {
-      void refetch({ teamID })
+      handleRefetch()
       setShouldUpdateObjectives(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,7 +95,8 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
       {isLoaded ? (
         cycles.length === 0 ? (
           <OKRsEmptyState
-            teamID={teamID}
+            isPersonalObjective
+            imageKey="empty-personal-okrs-tab"
             isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
             onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
             onNewObjective={handleRefetch}
@@ -103,7 +107,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
               key={cycle.id}
               cycle={cycle}
               objectiveIDs={objectiveIDs}
-              teamID={teamID}
+              userID={userID}
             />
           ))
         )

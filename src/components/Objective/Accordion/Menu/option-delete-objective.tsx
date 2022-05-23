@@ -5,17 +5,22 @@ import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { DangerousActionConfirmationDialog } from 'src/components/Base/Dialogs/Confirmation/DangerousAction/wrapper'
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
+import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
 
 import { teamActiveObjectives } from '../../../../state/recoil/team/active-objectives'
 import { DeleteResult } from '../../../types'
+import { Objective } from '../../types'
 import { stopAccordionOpen } from '../handlers'
 
 import messages from './messages'
 import queries from './queries.gql'
 
 interface DeleteObjectiveOptionProperties {
-  objectiveID?: string
-  teamID?: string
+  objectiveID?: Objective['id']
+  userID?: User['id']
+  teamID?: Team['id']
   onDelete?: (id?: string) => void
 }
 
@@ -25,11 +30,14 @@ interface DeleteObjectiveMutationResult {
 
 export const DeleteObjectiveOption = ({
   objectiveID,
+  userID,
   teamID,
   onDelete,
 }: DeleteObjectiveOptionProperties) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
+  const [activeObjectives, setActiveObjectives] = useRecoilState(
+    userID ? userActiveObjectives(userID) : teamActiveObjectives(teamID),
+  )
   const toast = useToast()
   const intl = useIntl()
   const [deleteObjective, { data, error }] = useMutation<DeleteObjectiveMutationResult>(
