@@ -47,7 +47,7 @@ export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties)
     fetchPolicy: 'no-cache',
     variables: {
       // eslint-disable-next-line unicorn/no-null
-      teamId: null,
+      teamId: '0788abd6-4996-4224-8f24-094b2d3c0d3a',
       ownerId: userID,
       active: true,
     },

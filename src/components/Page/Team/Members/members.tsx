@@ -77,9 +77,6 @@ export const TeamMembers = ({
     if (!isUserSidebarOpen) setSelectedUserID(undefined)
   }, [isUserSidebarOpen, setSelectedUserID])
 
-  console.log({ members })
-  console.log('members')
-
   return (
     <TeamSectionWrapper
       title={intl.formatMessage(messages.title, {

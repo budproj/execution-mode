@@ -12,6 +12,10 @@ type MyKeyResultsActiveCyclesPageMessage =
   | 'myTasksTitle'
   | 'pendingTasks'
   | 'allTasks'
+  | 'historyIconDescription'
+  | 'historyButtonTitle'
+  | 'individualOkrsCompanyMembersTitle'
+  | 'createObjectiveButtonTitle'
 
 export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   companyOKRTitle: {
@@ -25,14 +29,14 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     description: 'Company OKR subtitle of the page',
   },
   individualOKRTitle: {
-    defaultMessage: 'OKRs Individuais',
-    id: 'jVVtSO',
+    defaultMessage: 'Planejamento individual',
+    id: 'YxKyjP',
     description: 'Individual OKR title of the page',
   },
   individualOKRSubTitle: {
     defaultMessage:
-      'OKRs Individuais são definidos por você. Eles não interferem no progresso da empresa, mas podem ser vistos por seus colegas.',
-    id: 'MsuYNU',
+      'O planejamento individual é definido por você. Eles não interferem no progresso da empresa, mas podem ser vistos por seus colegas.',
+    id: 'kEofXd',
     description: 'Individual OKR subtitle of the page',
   },
   metaTitle: {
@@ -78,5 +82,25 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     defaultMessage: 'Todas as tarefas',
     id: '728+oa',
     description: 'Label for all tasks selector item',
+  },
+  historyIconDescription: {
+    defaultMessage: 'Ícone de histórico',
+    id: 'ShzOP9',
+    description: 'Icon description for history icon',
+  },
+  historyButtonTitle: {
+    defaultMessage: 'Histórico',
+    id: 'K4Rjji',
+    description: 'Title of the history button',
+  },
+  createObjectiveButtonTitle: {
+    defaultMessage: 'Criar objetivo',
+    id: 'Jk/gDc',
+    description: 'Title of the create objective button',
+  },
+  individualOkrsCompanyMembersTitle: {
+    defaultMessage: 'Colegas com planejamento individual',
+    id: 'SmMx3s',
+    description: 'Friends with individual OKRs title',
   },
 })
