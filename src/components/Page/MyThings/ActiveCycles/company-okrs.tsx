@@ -57,7 +57,7 @@ const CompanyOkrPage = ({ handleLineClick, intl, userID }: CompanyOkrPagePropert
   }
 
   return (
-    <PageContent background="new-gray.50">
+    <PageContent>
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
       <KeyResultSingleDrawer />
 
