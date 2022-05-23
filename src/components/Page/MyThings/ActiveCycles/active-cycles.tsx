@@ -27,11 +27,12 @@ const ActiveCyclesPage = () => {
   return (
     <>
       <DetailedHeader userData={user} />
+
       {keyResultType === KeyResultType.COMPANY && (
         <CompanyOkrPage handleLineClick={handleLineClick} intl={intl} userID={userID} />
       )}
       {keyResultType === KeyResultType.PERSONAL && (
-        <IndividualOkrPage handleLineClick={handleLineClick} intl={intl} userID={userID} />
+        <IndividualOkrPage intl={intl} userID={userID} />
       )}
     </>
   )

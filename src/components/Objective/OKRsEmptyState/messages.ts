@@ -18,8 +18,8 @@ export default defineMessages<ActiveObjectivesMessages>({
   },
 
   personalObjectivesEmptyStateTitle: {
-    defaultMessage: 'OKRs INDIVIDUAIS',
-    id: 'ssVHza',
+    defaultMessage: 'PLANO INDIVIDUAL',
+    id: 'NPR3JP',
     description:
       'This message is displayed above the empty state inside the active cycles section at the User page',
   },
