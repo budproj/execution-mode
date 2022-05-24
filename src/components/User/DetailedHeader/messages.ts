@@ -39,8 +39,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     description: 'Company OKR title on the navigation tab',
   },
   individualOKRTitle: {
-    defaultMessage: 'Planejamento individual',
-    id: 'tBBHmo',
+    defaultMessage: 'Planejamento Individual',
+    id: 'bgdTCS',
     description: 'Individual OKR title on the navigation tab',
   },
 })
