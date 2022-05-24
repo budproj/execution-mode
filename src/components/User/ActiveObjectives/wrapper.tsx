@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -18,9 +17,8 @@ import {
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnectionPolicy, GraphQLEffect } from '../../types'
+import { useGetUserObjectives } from '../hooks/getUserObjectives'
 import { User } from '../types'
-
-import queries from './queries.gql'
 
 export interface UserActiveObjectivesProperties {
   userID: User['id']
@@ -37,30 +35,13 @@ export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties)
   const [hasNotActiveObjectives] = useState(false)
   const setObjectivesViewMode = useSetRecoilState(userObjectivesViewMode(userID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
+  const { called, refetch } = useGetUserObjectives(
+    { ownerId: userID },
+    { setObjetives: setActiveObjectives, setObjectivesPolicy },
+  )
 
   const [objectiveEdges, setObjectiveEdges, _, isRemoteDataLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
-
-  const { called, refetch } = useQuery<GetUserActiveObjectivesQuery>(queries.GET_OBJECTIVES, {
-    fetchPolicy: 'no-cache',
-    variables: {
-      // eslint-disable-next-line unicorn/no-null
-      teamId: '0788abd6-4996-4224-8f24-094b2d3c0d3a',
-      ownerId: userID,
-      active: true,
-    },
-    notifyOnNetworkStatusChange: true,
-    onCompleted: ({ me }) => {
-      const userCompany = me?.companies?.edges[0]
-      const objectives = userCompany?.node?.objectives?.edges ?? []
-      setActiveObjectives(objectives)
-
-      const objectivePolicy = userCompany?.node?.objectives?.policy
-      if (objectivePolicy) {
-        setObjectivesPolicy(objectivePolicy)
-      }
-    },
-  })
 
   const handleViewOldCycles = () => {
     setObjectivesViewMode(ObjectivesViewMode.NOT_ACTIVE)
