@@ -118,7 +118,7 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
         title: intl.formatMessage(objectiveMessages.draftObjectiveTitle),
         ownerID: userID,
         // eslint-disable-next-line unicorn/no-null
-        teamID: '0788abd6-4996-4224-8f24-094b2d3c0d3a',
+        teamID: null,
       },
       onCompleted: async (data) => {
         toast({
