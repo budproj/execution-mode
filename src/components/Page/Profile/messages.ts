@@ -9,11 +9,11 @@ type MyKeyResultsActiveCyclesPageMessage =
   | 'historyIconDescription'
   | 'historyButtonTitle'
   | 'individualOkrsCompanyMembersTitle'
-  | 'createObjectiveButtonTitle'
   | 'individualOKRSubTitle'
   | 'individualOKRTitle'
   | 'companyOKRTitle'
   | 'individualOKRTitle'
+  | 'backToThePresentButtonTitle'
 
 export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   metaTitle: {
@@ -71,14 +71,14 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     id: 'K4Rjji',
     description: 'Title of the history button',
   },
-  createObjectiveButtonTitle: {
-    defaultMessage: 'Criar objetivo',
-    id: 'Jk/gDc',
-    description: 'Title of the create objective button',
-  },
   individualOkrsCompanyMembersTitle: {
     defaultMessage: 'Colegas com planejamento individual',
     id: 'SmMx3s',
     description: 'Friends with individual OKRs title',
+  },
+  backToThePresentButtonTitle: {
+    defaultMessage: 'Voltar ao presente',
+    id: 't0t6MQ',
+    description: 'The button title to go back to the present',
   },
 })
