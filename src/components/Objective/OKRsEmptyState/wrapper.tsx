@@ -26,7 +26,7 @@ type OKRsEmptyStateProperties = {
   onNewObjective?: Action
 }
 
-type CreateDraftObjectiveQueryResult = {
+export type CreateDraftObjectiveQueryResult = {
   createObjective: {
     id: string
     title: string
