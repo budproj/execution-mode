@@ -18,7 +18,6 @@ import {
 } from '../../../state/recoil/user/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
-import { GraphQLEdge } from '../../types'
 import queries from '../ActiveObjectives/queries.gql'
 import { User } from '../types'
 
@@ -29,9 +28,7 @@ interface UserNotActiveObjectivesProperties {
 }
 
 export interface GetUserNotActiveObjectivesQuery {
-  objectives: {
-    edges: Array<GraphQLEdge<Objective>>
-  }
+  me: User
 }
 
 export const UserNotActiveObjectives = ({ userID }: UserNotActiveObjectivesProperties) => {
@@ -60,8 +57,10 @@ export const UserNotActiveObjectives = ({ userID }: UserNotActiveObjectivesPrope
       ownerId: userID,
       active: false,
     },
-    onCompleted: (data) => {
-      setObjectiveEdges(data?.objectives?.edges ?? [])
+    onCompleted: ({ me }) => {
+      const userCompany = me?.companies?.edges[0]
+      const objectives = userCompany?.node?.objectives?.edges ?? []
+      setObjectiveEdges(objectives)
     },
   })
 

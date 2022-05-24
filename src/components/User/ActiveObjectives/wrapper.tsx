@@ -17,7 +17,7 @@ import {
 } from '../../../state/recoil/user/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
-import { GraphQLConnectionPolicy, GraphQLEdge, GraphQLEffect } from '../../types'
+import { GraphQLConnectionPolicy, GraphQLEffect } from '../../types'
 import { User } from '../types'
 
 import queries from './queries.gql'
@@ -27,13 +27,11 @@ export interface UserActiveObjectivesProperties {
 }
 
 export interface GetUserActiveObjectivesQuery {
-  objectives: {
-    edges: Array<GraphQLEdge<Objective>>
-  }
+  me: User
 }
 
 export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties) => {
-  const [objectivesPolicy] = useState<GraphQLConnectionPolicy>()
+  const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(userActiveObjectives(userID))
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
   const [hasNotActiveObjectives] = useState(false)
@@ -52,8 +50,15 @@ export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties)
       active: true,
     },
     notifyOnNetworkStatusChange: true,
-    onCompleted: ({ objectives }) => {
-      setActiveObjectives(objectives?.edges ?? [])
+    onCompleted: ({ me }) => {
+      const userCompany = me?.companies?.edges[0]
+      const objectives = userCompany?.node?.objectives?.edges ?? []
+      setActiveObjectives(objectives)
+
+      const objectivePolicy = userCompany?.node?.objectives?.policy
+      if (objectivePolicy) {
+        setObjectivesPolicy(objectivePolicy)
+      }
     },
   })
 
