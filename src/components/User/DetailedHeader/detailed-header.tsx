@@ -32,7 +32,7 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
           <Skeleton isLoaded={!isUserLoading}>
             <UserEditableAvatar
               size="xl"
-              isDisabled={userData?.policy?.update === GraphQLEffect.ALLOW}
+              isDisabled={userData?.policy?.update === GraphQLEffect.DENY}
               userID={userData?.id}
               name={userData?.fullName}
               picture={userData?.picture}

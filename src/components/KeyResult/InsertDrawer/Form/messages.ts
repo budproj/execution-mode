@@ -12,6 +12,11 @@ type KeyResultInsertDrawerFormMessage =
   | 'firstActionButtonLabel'
   | 'secondActionButtonLabel'
   | 'invalidIconDesc'
+  | 'okrExampleLink'
+  | 'tipTitle'
+  | 'firstTipDescription'
+  | 'secondTipDescription'
+  | 'thirdTipDescription'
 
 export default defineMessages<KeyResultInsertDrawerFormMessage>({
   firstInputLabel: {
@@ -85,5 +90,30 @@ export default defineMessages<KeyResultInsertDrawerFormMessage>({
     id: 't3VVHw',
     description:
       'This is used by screen readers to explain the X that appears when the users types a non-valid data in a given controlled field',
+  },
+  okrExampleLink: {
+    defaultMessage: 'Veja nossos exemplos de OKRs',
+    id: 'hfxyjh',
+    description: 'This is a external link that goes to OKR examples made by Bud.',
+  },
+  tipTitle: {
+    defaultMessage: 'Dicas para escrever um bom resultado-chave:',
+    id: 'C6YmFo',
+    description: 'The title of the tip when you are creating a KR.',
+  },
+  firstTipDescription: {
+    defaultMessage: 'Comece com um verbo de ação (atingir, alcançar, conquistar...).',
+    id: '+14i/d',
+    description: 'The  first description of the tip when you are creating a KR.',
+  },
+  secondTipDescription: {
+    defaultMessage: 'Torne mensurável definindo um número como indicador de sucesso.',
+    id: 'vfstY8',
+    description: 'The second description of the tip when you are creating a KR.',
+  },
+  thirdTipDescription: {
+    defaultMessage: 'Defina um desafio agressivo porém realista.',
+    id: 'DRyY0A',
+    description: 'The third description of the tip when you are creating a KR.',
   },
 })

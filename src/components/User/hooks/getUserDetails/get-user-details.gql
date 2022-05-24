@@ -20,5 +20,8 @@ query GET_USER_DETAILS($userId: ID) {
         }
       }
     }
+    policy {
+      update
+    }
   }
 }
