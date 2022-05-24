@@ -351,6 +351,10 @@
     "defaultMessage": "Explore",
     "description": "The page title that our users should see in the teams explore page"
   },
+  "608lDc": {
+    "defaultMessage": "",
+    "description": "Company OKR subtitle of the page"
+  },
   "612Wwz": {
     "defaultMessage": "Create an OKR in the {cycle} {parent} cycle.",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
@@ -691,6 +695,10 @@
     "defaultMessage": "Send comment",
     "description": "The title displayed in the tooltip when the user hovers our paper plane icon in our add comment form"
   },
+  "CmpXX/": {
+    "defaultMessage": "",
+    "description": "Company OKR title on the navigation tab"
+  },
   "cPGOoL": {
     "defaultMessage": "Talk to our tech support",
     "description": "MainAppBar user menu third item option"
@@ -822,6 +830,10 @@
   "eG8Ohg": {
     "defaultMessage": "Annual OKRs {year}",
     "description": "The summary title for the yearly OKRs"
+  },
+  "EG9UsD": {
+    "defaultMessage": "",
+    "description": "Company OKR title of the page"
   },
   "eI6jYw": {
     "defaultMessage": "No information provided",
@@ -1019,6 +1031,10 @@
     "defaultMessage": "Search",
     "description": "The text is displayed as a placeholder in our search input inside the key-result drawers while the user is changing the owner of that key-result"
   },
+  "gTym4f": {
+    "defaultMessage": "Individual progress based on the average of the key results in the current year",
+    "description": "Yearly progress chart tooltip message"
+  },
   "gu4aCE": {
     "defaultMessage": "Annual",
     "description": "This text is used as prefix for our yearly cadences"
@@ -1139,6 +1155,10 @@
     "defaultMessage": "An unexpected error occurred when creating your objective. Please try again.",
     "description": "This message appears as an error toast when the users tries to create a new objective but an error appears"
   },
+  "ifl8WA": {
+    "defaultMessage": "",
+    "description": "This message is displayed as the empty state message inside the User page"
+  },
   "IGHT6z": {
     "defaultMessage": "You will lose every key result in this OKR, including every check-in and comment made so far.",
     "description": "This message is used as the modal description while removing a given objective"
@@ -1247,6 +1267,10 @@
     "defaultMessage": "Objective successfully removed",
     "description": "This message appears in a toast after the user removes an objective"
   },
+  "Jk/gDc": {
+    "defaultMessage": "",
+    "description": "Title of the create objective button"
+  },
   "Jkg7nT": {
     "defaultMessage": "US$ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin USD format"
@@ -1311,6 +1335,10 @@
     "defaultMessage": "End date for the quarterly cycle",
     "description": "The label of the company quarterly date end while creating a new workspace"
   },
+  "K4Rjji": {
+    "defaultMessage": "",
+    "description": "Title of the history button"
+  },
   "K8KvrI": {
     "defaultMessage": "My Things",
     "description": "MainAppBar menu item that links to \"My Things\" page"
@@ -1322,6 +1350,10 @@
   "KdYFbe": {
     "defaultMessage": "Delete",
     "description": "This text is displayed in our menu, as an anchor to remove that given card"
+  },
+  "kEofXd": {
+    "defaultMessage": "",
+    "description": "Individual OKR subtitle of the page"
   },
   "kFrglO": {
     "defaultMessage": "The objective's progress is calculated by the average evolution of all key results related to it. It is necessary to reach all these key results to reach the objective above. Therefore, the color of this indicator represents the lower confidence inside among those key results.",
@@ -1511,6 +1543,10 @@
     "defaultMessage": "Write about {isMyUser, select, true {you} other {{firstName}}}",
     "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
   },
+  "N70n39": {
+    "defaultMessage": "Individual progress based on the average of the key results in the current quarter",
+    "description": "Quarterly progress chart tooltip message"
+  },
   "N8Xs+4": {
     "defaultMessage": "DELETE",
     "description": "This message is used as a keyword to remove a given objective"
@@ -1570,6 +1606,10 @@
   "nPjrcU": {
     "defaultMessage": "Update",
     "description": "This message is displayer as soon as our user hovers the avatar"
+  },
+  "NPR3JP": {
+    "defaultMessage": "",
+    "description": "This message is displayed above the empty state inside the active cycles section at the User page"
   },
   "npWxt7": {
     "defaultMessage": "A button with an X symbol. By clicking on it you will cancel editing the objective",
@@ -1879,6 +1919,10 @@
     "defaultMessage": "Create user",
     "description": "The label of the submit button of the create user form"
   },
+  "ShzOP9": {
+    "defaultMessage": "",
+    "description": "Icon description for history icon"
+  },
   "SiJuyU": {
     "defaultMessage": "Calendar icon indicating that here you can filter the year you want.",
     "description": "This message is used by screen readers to explain the icon to the user"
@@ -1890,6 +1934,10 @@
   "Sm4xi7": {
     "defaultMessage": "Time machine",
     "description": "This message is displayed as the title of the time machine section in a team's page"
+  },
+  "SmMx3s": {
+    "defaultMessage": "",
+    "description": "Friends with individual OKRs title"
   },
   "Smwz9L": {
     "defaultMessage": "It describes the period in which this key result makes part",
@@ -1970,6 +2018,10 @@
   "TaXVmY": {
     "defaultMessage": "Add an OKR in this cycle",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
+  },
+  "tBBHmo": {
+    "defaultMessage": "",
+    "description": "Individual OKR title on the navigation tab"
   },
   "tcWO3v": {
     "defaultMessage": "Bud logotype. It been just the Bud written in lower case in purple",
@@ -2323,6 +2375,10 @@
     "defaultMessage": "A check icon. By clicking on it you will save your changes",
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
   },
+  "XZcPVc": {
+    "defaultMessage": "",
+    "description": "The alternative text explaining the empty item image"
+  },
   "Y+MtZe": {
     "defaultMessage": "Name",
     "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
@@ -2378,6 +2434,10 @@
   "yw+DGB": {
     "defaultMessage": "Last name",
     "description": "The label of the last name field in the create user form"
+  },
+  "YxKyjP": {
+    "defaultMessage": "",
+    "description": "Individual OKR title of the page"
   },
   "YxNkP6": {
     "defaultMessage": "Check-in",
@@ -2480,7 +2540,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-05-23T13:18:19Z",
+    "defaultMessage": "2022-05-24T14:38:42Z",
     "description": null
   }
 }

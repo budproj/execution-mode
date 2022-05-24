@@ -351,6 +351,10 @@
     "defaultMessage": "Explorar",
     "description": "The page title that our users should see in the teams explore page"
   },
+  "608lDc": {
+    "defaultMessage": "Veja seus resultados-chave e tarefas relacionadas à estratégia da empresa.",
+    "description": "Company OKR subtitle of the page"
+  },
   "612Wwz": {
     "defaultMessage": "Adicionar um OKR {cadence} no ciclo {cycle} {parent}",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
@@ -691,6 +695,10 @@
     "defaultMessage": "Enviar comentário",
     "description": "The title displayed in the tooltip when the user hovers our paper plane icon in our add comment form"
   },
+  "CmpXX/": {
+    "defaultMessage": "OKRs da {company}",
+    "description": "Company OKR title on the navigation tab"
+  },
   "cPGOoL": {
     "defaultMessage": "Fale com nosso suporte técnico",
     "description": "MainAppBar user menu third item option"
@@ -822,6 +830,10 @@
   "eG8Ohg": {
     "defaultMessage": "OKRs Anuais {year}",
     "description": "The summary title for the yearly OKRs"
+  },
+  "EG9UsD": {
+    "defaultMessage": "OKRs da {company}",
+    "description": "Company OKR title of the page"
   },
   "eI6jYw": {
     "defaultMessage": "Nenhuma informação",
@@ -1019,6 +1031,10 @@
     "defaultMessage": "Procurar",
     "description": "The text is displayed as a placeholder in our search input inside the key-result drawers while the user is changing the owner of that key-result"
   },
+  "gTym4f": {
+    "defaultMessage": "Progresso individual com base na média dos resultados-chave deste ano",
+    "description": "Yearly progress chart tooltip message"
+  },
   "gu4aCE": {
     "defaultMessage": "Anual",
     "description": "This text is used as prefix for our yearly cadences"
@@ -1139,6 +1155,10 @@
     "defaultMessage": "Houve um erro inesperado ao criar seu objetivo. Tente novamente mais tarde",
     "description": "This message appears as an error toast when the users tries to create a new objective but an error appears"
   },
+  "ifl8WA": {
+    "defaultMessage": "Você ainda não criou nenhum OKR Individual.",
+    "description": "This message is displayed as the empty state message inside the User page"
+  },
   "IGHT6z": {
     "defaultMessage": "Você perderá todos os resultados-chave deste OKR, incluindo todos os check-ins e comentários feitos até aqui.",
     "description": "This message is used as the modal description while removing a given objective"
@@ -1247,6 +1267,10 @@
     "defaultMessage": "O objetivo foi removido com sucesso",
     "description": "This message appears in a toast after the user removes an objective"
   },
+  "Jk/gDc": {
+    "defaultMessage": "Criar objetivo",
+    "description": "Title of the create objective button"
+  },
   "Jkg7nT": {
     "defaultMessage": "US$ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin USD format"
@@ -1311,6 +1335,10 @@
     "defaultMessage": "Dia de fim do período trimestral",
     "description": "The label of the company quarterly date end while creating a new workspace"
   },
+  "K4Rjji": {
+    "defaultMessage": "Histórico",
+    "description": "Title of the history button"
+  },
   "K8KvrI": {
     "defaultMessage": "Minhas Coisas",
     "description": "MainAppBar menu item that links to \"My Things\" page"
@@ -1322,6 +1350,10 @@
   "KdYFbe": {
     "defaultMessage": "Apagar",
     "description": "This text is displayed in our menu, as an anchor to remove that given card"
+  },
+  "kEofXd": {
+    "defaultMessage": "O planejamento individual é definido por você. Eles não interferem no progresso da empresa, mas podem ser vistos por seus colegas.",
+    "description": "Individual OKR subtitle of the page"
   },
   "kFrglO": {
     "defaultMessage": "O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.",
@@ -1511,6 +1543,10 @@
     "defaultMessage": "Escreva sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}",
     "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
   },
+  "N70n39": {
+    "defaultMessage": "Progresso individual com base na média dos resultados-chave deste trimestre",
+    "description": "Quarterly progress chart tooltip message"
+  },
   "N8Xs+4": {
     "defaultMessage": "EXCLUIR",
     "description": "This message is used as a keyword to remove a given objective"
@@ -1570,6 +1606,10 @@
   "nPjrcU": {
     "defaultMessage": "Editar",
     "description": "This message is displayer as soon as our user hovers the avatar"
+  },
+  "NPR3JP": {
+    "defaultMessage": "PLANO INDIVIDUAL",
+    "description": "This message is displayed above the empty state inside the active cycles section at the User page"
   },
   "npWxt7": {
     "defaultMessage": "Um botão com um ícone de X. Ao clicar nele você irá cancelar a atualização do objetivo",
@@ -1879,6 +1919,10 @@
     "defaultMessage": "Criar usuári{gender, select, MALE {o} FEMALE {a} other {o}}",
     "description": "The label of the submit button of the create user form"
   },
+  "ShzOP9": {
+    "defaultMessage": "Ícone de histórico",
+    "description": "Icon description for history icon"
+  },
   "SiJuyU": {
     "defaultMessage": "Um ícone de calendário, indicando que aqui você seleciona o ano que deseja filtrar",
     "description": "This message is used by screen readers to explain the icon to the user"
@@ -1890,6 +1934,10 @@
   "Sm4xi7": {
     "defaultMessage": "Máquina do tempo",
     "description": "This message is displayed as the title of the time machine section in a team's page"
+  },
+  "SmMx3s": {
+    "defaultMessage": "Colegas com planejamento individual",
+    "description": "Friends with individual OKRs title"
   },
   "Smwz9L": {
     "defaultMessage": "Descreve o período no qual esse resultado-chave faz parte",
@@ -1970,6 +2018,10 @@
   "TaXVmY": {
     "defaultMessage": "Adicionar um OKR neste ciclo",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
+  },
+  "tBBHmo": {
+    "defaultMessage": "Planejamento individual",
+    "description": "Individual OKR title on the navigation tab"
   },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
@@ -2323,6 +2375,10 @@
     "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
   },
+  "XZcPVc": {
+    "defaultMessage": "Uma mulher analisando gráficos e apontando com um dedo.",
+    "description": "The alternative text explaining the empty item image"
+  },
   "Y+MtZe": {
     "defaultMessage": "Nome",
     "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
@@ -2378,6 +2434,10 @@
   "yw+DGB": {
     "defaultMessage": "Sobrenome",
     "description": "The label of the last name field in the create user form"
+  },
+  "YxKyjP": {
+    "defaultMessage": "Planejamento individual",
+    "description": "Individual OKR title of the page"
   },
   "YxNkP6": {
     "defaultMessage": "Check-in",
@@ -2480,7 +2540,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-05-23T13:18:42Z",
+    "defaultMessage": "2022-05-24T14:39:05Z",
     "description": null
   }
 }
