@@ -8,8 +8,8 @@ interface TeamSectionWrapperProperties extends BoxProps {
 }
 
 export const TeamSectionWrapper = ({ title, children, ...rest }: TeamSectionWrapperProperties) => (
-  <Stack spacing={4} maxH="md">
-    <TeamSectionHeading>{title}</TeamSectionHeading>
+  <Stack spacing={4} maxH="md" flex="1">
+    <TeamSectionHeading fontSize="14px">{title}</TeamSectionHeading>
     <Box
       bg="white"
       borderRadius="10"
