@@ -14,8 +14,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   },
 
   yearlyProgressTooltip: {
-    defaultMessage: 'Média do progresso de todos os seus resultados-chave no ciclo anual atual',
-    id: '7fTFkO',
+    defaultMessage: 'Progresso individual com base na média dos resultados-chave deste ano',
+    id: 'gTym4f',
     description: 'Yearly progress chart tooltip message',
   },
 
@@ -26,9 +26,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   },
 
   quarterlyProgressTooltip: {
-    defaultMessage:
-      'Média do progresso de todos os seus resultados-chave no ciclo trimestral atual',
-    id: 'P0ljMC',
+    defaultMessage: 'Progresso individual com base na média dos resultados-chave deste trimestre',
+    id: 'N70n39',
     description: 'Quarterly progress chart tooltip message',
   },
 })
