@@ -28,9 +28,11 @@ import { CreateDraftObjectiveQueryResult } from 'src/components/Objective/OKRsEm
 import { UserObjectives } from 'src/components/User/Objectives/wrapper'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserfromList } from 'src/components/User/SelectFromList'
+import { useGetUserObjectives } from 'src/components/User/hooks/getUserObjectives'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
 import {
   ObjectivesViewMode,
   userObjectivesViewMode,
@@ -53,7 +55,12 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
   const [users, setUsers] = useConnectionEdges<User>(data?.users?.edges)
   const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userID))
+  const setActiveObjectives = useSetRecoilState(userActiveObjectives(userID))
   const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
+  const { refetch } = useGetUserObjectives(
+    { ownerId: userID },
+    { setObjetives: setActiveObjectives },
+  )
 
   const toast = useToast()
 
@@ -135,6 +142,11 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
       variables: {
         cycleID,
       },
+    })
+
+    void refetch({
+      ownerId: userID,
+      active: viewMode === ObjectivesViewMode.ACTIVE,
     })
   }
 

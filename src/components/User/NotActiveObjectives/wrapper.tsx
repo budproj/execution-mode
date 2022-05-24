@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
@@ -18,7 +17,7 @@ import {
 } from '../../../state/recoil/user/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
-import queries from '../ActiveObjectives/queries.gql'
+import { useGetUserObjectives } from '../hooks/getUserObjectives'
 import { User } from '../types'
 
 import { TimeMachineController } from './time-machine-controller'
@@ -38,8 +37,9 @@ export const UserNotActiveObjectives = ({ userID }: UserNotActiveObjectivesPrope
 
   const [objectiveEdges, setObjectiveEdges, _, isConnectionLoaded] = useConnectionEdges<Objective>()
   const [objectiveCycles, setCycleObjectives, cycleObjectives] = useCycleObjectives()
-
   const [filteredCycles, __, { updateCycles, isLoaded, cycles }] = useCycleFilters(userID)
+
+  useGetUserObjectives({ ownerId: userID, active: false }, { setObjetives: setObjectiveEdges })
 
   const handleClose = () => {
     setObjectivesViewMode(ObjectivesViewMode.ACTIVE)
@@ -49,20 +49,6 @@ export const UserNotActiveObjectives = ({ userID }: UserNotActiveObjectivesPrope
   const filteredObjectiveCycles = objectiveCycles.filter(([cycle]) =>
     filteredCycleIDs.has(cycle.id),
   )
-
-  useQuery<GetUserNotActiveObjectivesQuery>(queries.GET_OBJECTIVES, {
-    variables: {
-      // eslint-disable-next-line unicorn/no-null
-      teamId: null,
-      ownerId: userID,
-      active: false,
-    },
-    onCompleted: ({ me }) => {
-      const userCompany = me?.companies?.edges[0]
-      const objectives = userCompany?.node?.objectives?.edges ?? []
-      setObjectiveEdges(objectives)
-    },
-  })
 
   useEffect(() => {
     if (objectiveEdges) setCycleObjectives(objectiveEdges)
