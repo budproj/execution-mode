@@ -156,7 +156,12 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
       <KeyResultSingleDrawer />
 
       <PageHeader>
-        <Flex alignItems="center" justifyContent="space-between">
+        <Flex
+          alignItems={['flex-start', 'flex-start', 'flex-start', 'center']}
+          justifyContent={['flex-start', 'flex-start', 'flex-start', 'space-between']}
+          direction={['column', 'column', 'column', 'row']}
+          gap={6}
+        >
           <Box>
             <Heading color="new-gray.800" mt={1}>
               {intl.formatMessage(messages.individualOKRTitle)}
