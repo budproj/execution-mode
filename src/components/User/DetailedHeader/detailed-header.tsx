@@ -1,9 +1,9 @@
-import { Box, Flex, Heading, Text, Skeleton, Divider } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text, Skeleton, Divider, Tag, Button } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { Button } from 'src/components/Base/Button'
+import newTagMessages from 'src/components/Base/MainAppBar/messages'
 import PageContent from 'src/components/Base/PageContent'
 import { RadioProgress } from 'src/components/Base/RadioProgress/wrapper'
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
@@ -134,26 +134,36 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
       <Divider />
       <Flex>
         <Button
+          h="auto"
           padding="15px 30px"
-          label={intl.formatMessage(messages.companyOKRTitle, {
-            company: userData?.companies?.edges[0].node.name
-              ? userData?.companies?.edges[0].node.name
-              : '',
-          })}
+          fontSize="16px"
           borderRadius="0"
           color={keyResultType === KeyResultType.COMPANY ? 'brand.500' : '#525F7F'}
           borderBottom={keyResultType === KeyResultType.COMPANY ? '2px solid #6F6EFF' : undefined}
           onClick={() => setKeyResultType(KeyResultType.COMPANY)}
-        />
+        >
+          {intl.formatMessage(messages.companyOKRTitle, {
+            company: userData?.companies?.edges[0].node.name
+              ? userData?.companies?.edges[0].node.name
+              : '',
+          })}
+        </Button>
 
         <Button
-          padding="15px 30px"
-          label={intl.formatMessage(messages.individualOKRTitle)}
+          h="auto"
+          padding="18px 30px"
+          fontSize="16px"
           borderRadius="0"
           color={keyResultType === KeyResultType.PERSONAL ? 'brand.500' : '#525F7F'}
           borderBottom={keyResultType === KeyResultType.PERSONAL ? '2px solid #6F6EFF' : undefined}
           onClick={() => setKeyResultType(KeyResultType.PERSONAL)}
-        />
+        >
+          {intl.formatMessage(messages.individualOKRTitle)}
+
+          <Tag size="sm" variant="solid" colorScheme="brand" ml={4}>
+            {intl.formatMessage(newTagMessages.newItem)}
+          </Tag>
+        </Button>
       </Flex>
     </PageContent>
   )
