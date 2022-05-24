@@ -14,6 +14,7 @@ type MyKeyResultsActiveCyclesPageMessage =
   | 'allTasks'
   | 'historyIconDescription'
   | 'historyButtonTitle'
+  | 'backToThePresentButtonTitle'
   | 'individualOkrsCompanyMembersTitle'
   | 'createObjectiveButtonTitle'
 
@@ -102,5 +103,10 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     defaultMessage: 'Colegas com planejamento individual',
     id: 'SmMx3s',
     description: 'Friends with individual OKRs title',
+  },
+  backToThePresentButtonTitle: {
+    defaultMessage: 'Voltar ao presente',
+    id: 't0t6MQ',
+    description: 'The button title to go back to the present',
   },
 })

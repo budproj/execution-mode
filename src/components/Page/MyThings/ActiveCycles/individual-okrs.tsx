@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilState } from 'recoil'
 
 import { PageMetaHead } from 'src/components/Base'
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
@@ -24,7 +25,10 @@ import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserfromList } from 'src/components/User/SelectFromList'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
-import { ObjectivesViewMode } from 'src/state/recoil/user/objectives-view-mode'
+import {
+  ObjectivesViewMode,
+  userObjectivesViewMode,
+} from 'src/state/recoil/user/objectives-view-mode'
 
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
 import { TeamSectionWrapper } from '../../Team/Section/wrapper'
@@ -42,6 +46,26 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
   const [selectedUserID, setSelectedUserID] = useState<string>()
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
   const [users, setUsers] = useConnectionEdges<User>(data?.users?.edges)
+  const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userID))
+
+  const viewModeOptions = new Map([
+    [
+      ObjectivesViewMode.ACTIVE,
+      {
+        label: intl.formatMessage(messages.historyButtonTitle),
+        action: () => setViewMode(ObjectivesViewMode.NOT_ACTIVE),
+      },
+    ],
+    [
+      ObjectivesViewMode.NOT_ACTIVE,
+      {
+        label: intl.formatMessage(messages.backToThePresentButtonTitle),
+        action: () => setViewMode(ObjectivesViewMode.ACTIVE),
+      },
+    ],
+  ])
+
+  const viewModeConfig = viewModeOptions.get(viewMode)
 
   const handleClose = () => {
     if (isUserSidebarOpen) setIsUserSidebarOpen(false)
@@ -97,8 +121,9 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
                   desc={intl.formatMessage(messages.historyIconDescription)}
                 />
               }
+              onClick={viewModeConfig?.action}
             >
-              {intl.formatMessage(messages.historyButtonTitle)}
+              {viewModeConfig?.label}
             </Button>
             <Button background="brand.500" color="white">
               {intl.formatMessage(messages.createObjectiveButtonTitle)}
@@ -109,9 +134,7 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
 
       <HStack align="stretch" spacing="4rem" flex="1" w="100%">
         <Box flexBasis="60%" maxWidth="60%">
-          {userID ? (
-            <UserObjectives userID={userID} viewType={ObjectivesViewMode.ACTIVE} />
-          ) : undefined}
+          {userID ? <UserObjectives userID={userID} viewType={viewMode} /> : undefined}
         </Box>
 
         <Box>
