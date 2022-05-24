@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import {
   Button,
   Flex,
@@ -10,21 +10,27 @@ import {
   Drawer,
   DrawerContent,
   DrawerBody,
+  useToast,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { PageMetaHead } from 'src/components/Base'
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 import PageContent from 'src/components/Base/PageContent'
+import { ActionMenu } from 'src/components/Cycle/ActionMenu/wrapper'
 import HistoryIcon from 'src/components/Icon/History'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
+import objectiveMessages from 'src/components/Objective/OKRsEmptyState/messages'
+import objectiveQueries from 'src/components/Objective/OKRsEmptyState/queries.gql'
+import { CreateDraftObjectiveQueryResult } from 'src/components/Objective/OKRsEmptyState/wrapper'
 import { UserObjectives } from 'src/components/User/Objectives/wrapper'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserfromList } from 'src/components/User/SelectFromList'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import {
   ObjectivesViewMode,
   userObjectivesViewMode,
@@ -47,6 +53,9 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
   const [users, setUsers] = useConnectionEdges<User>(data?.users?.edges)
   const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userID))
+  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
+
+  const toast = useToast()
 
   const viewModeOptions = new Map([
     [
@@ -95,6 +104,40 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
     }
   }, [data, setUsers, userID])
 
+  const [createDraftObjective] = useMutation<CreateDraftObjectiveQueryResult>(
+    objectiveQueries.CREATE_DRAFT_OBJECTIVE,
+    {
+      variables: {
+        title: intl.formatMessage(objectiveMessages.draftObjectiveTitle),
+        ownerID: userID,
+        // eslint-disable-next-line unicorn/no-null
+        teamID: '0788abd6-4996-4224-8f24-094b2d3c0d3a',
+      },
+      onCompleted: async (data) => {
+        toast({
+          title: intl.formatMessage(objectiveMessages.draftObjectiveSuccessToastMessage),
+          status: 'success',
+        })
+
+        setObjectiveIDToEditMode(data.createObjective.id)
+      },
+      onError: () => {
+        toast({
+          title: intl.formatMessage(objectiveMessages.draftObjectiveErrorToastMessage),
+          status: 'error',
+        })
+      },
+    },
+  )
+
+  const handleDraftObjectiveCreation = (cycleID?: string) => {
+    void createDraftObjective({
+      variables: {
+        cycleID,
+      },
+    })
+  }
+
   return (
     <PageContent background="new-gray.50">
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
@@ -125,9 +168,12 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
             >
               {viewModeConfig?.label}
             </Button>
-            <Button background="brand.500" color="white">
-              {intl.formatMessage(messages.createObjectiveButtonTitle)}
-            </Button>
+
+            <ActionMenu onCreateOKR={handleDraftObjectiveCreation}>
+              <Button background="brand.500" color="white">
+                {intl.formatMessage(messages.createObjectiveButtonTitle)}
+              </Button>
+            </ActionMenu>
           </Flex>
         </Flex>
       </PageHeader>

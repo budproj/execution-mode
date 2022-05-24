@@ -40,8 +40,6 @@ export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties)
   const setObjectivesViewMode = useSetRecoilState(userObjectivesViewMode(userID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
 
-  console.log({ userID })
-
   const [objectiveEdges, setObjectiveEdges, _, isRemoteDataLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
 
