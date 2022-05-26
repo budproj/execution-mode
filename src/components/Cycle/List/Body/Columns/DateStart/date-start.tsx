@@ -7,15 +7,14 @@ import CyclesListBodyColumnBase, {
 } from 'src/components/Cycle/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
 
-export interface CyclesListBodyColumnInitialDateProperties
+export interface CyclesListBodyColumnDateStartProperties
   extends CyclesListBodyColumnBaseProperties {
   id?: KeyResult['id']
-  isDisabled?: boolean
 }
 
-const CyclesListBodyColumnInitialDate = ({
+const CyclesListBodyColumnDateStart = ({
   id,
-}: CyclesListBodyColumnInitialDateProperties): ReactElement => {
+}: CyclesListBodyColumnDateStartProperties): ReactElement => {
   const intl = useIntl()
 
   return (
@@ -27,4 +26,4 @@ const CyclesListBodyColumnInitialDate = ({
   )
 }
 
-export default CyclesListBodyColumnInitialDate
+export default CyclesListBodyColumnDateStart

@@ -2,8 +2,8 @@ import { CYCLE_LIST_COLUMN } from 'src/components/Cycle/List/Body/Columns/consta
 
 export const BORDER_COLOR_DEFAULT = 'black.200'
 export const GRID_TEMPLATE_COLUMNS =
-  'minmax(0, 4fr) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 2fr) minmax(0, 2fr)'
-export const GRID_COLUMN_GAP = 40
+  'minmax(0, 3fr) minmax(0, 3fr) minmax(0, 3fr) minmax(0,3fr) minmax(0,3fr) minmax(0, 2fr)'
+export const GRID_COLUMN_GAP = 45
 
 export const COLUMNS_DEFAULT = [
   CYCLE_LIST_COLUMN.CYCLE,
@@ -13,7 +13,3 @@ export const COLUMNS_DEFAULT = [
   CYCLE_LIST_COLUMN.STATUS,
   CYCLE_LIST_COLUMN.ACTIONS,
 ]
-
-export enum CYCLE_LIST_TYPE {
-  STATIC = 'static',
-}

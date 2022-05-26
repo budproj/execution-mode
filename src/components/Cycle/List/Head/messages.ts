@@ -4,98 +4,50 @@ type CycleListHeadMessage =
   | 'listHeadCycle'
   | 'listHeadActions'
   | 'listHeadCadenceLevel'
-  | 'listHeadInitialDate'
+  | 'listHeadDateStart'
   | 'listHeadEndDate'
   | 'listHeadStatus'
-  | 'listHeadCycleTooltip'
-  | 'listHeadObjectiveTooltip'
-  | 'listHeadProgressTooltip'
-  | 'listHeadCadenceLevelTooltip'
-  | 'listHeadCycleTooltip'
-  | 'listHeadStatusTooltip'
-  | 'listHeadInitialDateTooltip'
-  | 'listHeadEndDateTooltip'
 
 export default defineMessages<CycleListHeadMessage>({
   listHeadCycle: {
     defaultMessage: 'Nome do Ciclo',
-    id: 'F799As',
-    description: 'The text of the table head related to the Cycle column',
+    id: 'tjSA87',
+    description:
+      'This message is displayed as the column header for the cycle table in the cycle name column',
   },
 
   listHeadActions: {
     defaultMessage: 'Ações',
-    id: 'QKkwxU',
+    id: 'F9UdBv',
     description:
-      'This message is displayed as the column header for the key-result table in the actions column',
+      'This message is displayed as the column header for the cycle table in the actions column',
   },
 
   listHeadCadenceLevel: {
     defaultMessage: 'Cadência',
-    id: 'fJX5q1',
+    id: 'ZvutBL',
     description:
-      'This message is displayed as the column header for the key-result table in the team column',
+      'This message is displayed as the column header for the cycles table in the cadence column',
   },
 
   listHeadStatus: {
     defaultMessage: 'Status',
-    id: 'MeJoZG',
+    id: '8gbub2',
     description:
-      'This message is displayed as the column header for the key-result table in the team column',
+      'This message is displayed as the column header for the cycle table in the status column',
   },
 
-  listHeadInitialDate: {
+  listHeadDateStart: {
     defaultMessage: 'Início',
-    id: '8OLoaN',
+    id: 'f2OulU',
     description:
-      'This message is displayed as the column header for the key-result table in the team column',
+      'This message is displayed as the column header for the cycle table in the date start column',
   },
 
   listHeadEndDate: {
     defaultMessage: 'Fim',
-    id: 'w7obzY',
+    id: 'Lt+YEZ',
     description:
-      'This message is displayed as the column header for the key-result table in the team column',
-  },
-
-  listHeadCycleTooltip: {
-    defaultMessage: 'list head cycle tooltip',
-    id: 'dhhB4+',
-    description: 'mudar',
-  },
-
-  listHeadObjectiveTooltip: {
-    defaultMessage: 'list head objective tooltip',
-    id: 'L4pSwX',
-    description: 'mudar',
-  },
-  listHeadProgressTooltip: {
-    defaultMessage: 'list head progress tooltip',
-    id: '1q3tFT',
-    description: 'mudar',
-  },
-
-  listHeadCadenceLevelTooltip: {
-    defaultMessage: 'list cadence level tooltip',
-    id: 'vs//wP',
-    description: 'mudar',
-  },
-
-  listHeadStatusTooltip: {
-    defaultMessage: 'list status tooltip',
-    id: '0VBpVT',
-    description: 'mudar',
-  },
-
-  listHeadInitialDateTooltip: {
-    defaultMessage: 'list initial date tooltip',
-    id: '6K0+rp',
-    description: 'mudar',
-  },
-
-  listHeadEndDateTooltip: {
-    defaultMessage: 'list end date tooltip',
-    id: 'flhqtR',
-    description: 'mudar',
+      'This message is displayed as the column header for the cycle table in the date end column',
   },
 })

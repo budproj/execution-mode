@@ -6,8 +6,8 @@ import React from 'react'
 import {
   CyclesListBodyColumnCyclesSkeleton,
   CyclesListBodyColumnStatusSkeleton,
-  CyclesListBodyColumnInitialDateSkeleton,
-  CyclesListBodyColumnEndDateSkeleton,
+  CyclesListBodyColumnDateStartSkeleton,
+  CyclesListBodyColumnDateEndSkeleton,
   CyclesListBodyColumnCadenceLevelSkeleton,
   CyclesListBodyColumnActionsSkeleton,
 } from 'src/components/Cycle/List/Body/Columns'
@@ -45,8 +45,8 @@ const CyclesListBodyStaticSkeletonLine = ({
     [CYCLE_LIST_COLUMN.CYCLE]: CyclesListBodyColumnCyclesSkeleton,
     [CYCLE_LIST_COLUMN.STATUS]: CyclesListBodyColumnStatusSkeleton,
     [CYCLE_LIST_COLUMN.CADENCE_LEVEL]: CyclesListBodyColumnCadenceLevelSkeleton,
-    [CYCLE_LIST_COLUMN.INITIAL_DATE]: CyclesListBodyColumnInitialDateSkeleton,
-    [CYCLE_LIST_COLUMN.END_DATE]: CyclesListBodyColumnEndDateSkeleton,
+    [CYCLE_LIST_COLUMN.INITIAL_DATE]: CyclesListBodyColumnDateStartSkeleton,
+    [CYCLE_LIST_COLUMN.END_DATE]: CyclesListBodyColumnDateEndSkeleton,
     [CYCLE_LIST_COLUMN.ACTIONS]: CyclesListBodyColumnActionsSkeleton,
   }
 
@@ -74,7 +74,6 @@ const CyclesListBodyStaticSkeletonLine = ({
         return (
           <ColumnComponent
             key={`${listID}_CYCLE_LIST_BODY_LINE_${cyclesID ?? uniqueId()}_COLUMN_${column}`}
-            status
             id={cyclesID}
             borderColor={borderColor}
             {...columnProperties}

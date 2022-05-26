@@ -13,10 +13,10 @@ export {
 } from './Actions'
 
 export {
-  CyclesListBodyColumnInitialDateSkeleton,
-  default as CyclesListBodyColumnInitialDate,
-} from './InitialDate'
+  CyclesListBodyColumnDateStartSkeleton,
+  default as CyclesListBodyColumnDateStart,
+} from './DateStart'
 export {
-  CyclesListBodyColumnEndDateSkeleton,
+  CyclesListBodyColumnDateEndSkeleton,
   default as CyclesListBodyColumnEndDate,
-} from './EndDate'
+} from './DateEnd'

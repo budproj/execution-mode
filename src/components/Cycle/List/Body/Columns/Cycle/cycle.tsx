@@ -10,9 +10,7 @@ export interface CyclesListBodyColumnCyclesProperties extends CyclesListBodyColu
   id?: Cycle['id']
 }
 
-const KeyResultListBodyColumnCycle = ({
-  id,
-}: CyclesListBodyColumnCyclesProperties): ReactElement => {
+const CycleListBodyColumnCycle = ({ id }: CyclesListBodyColumnCyclesProperties): ReactElement => {
   return (
     <CyclesListBodyColumnBase>
       <Text fontWeight={400} color="#525F7F" fontSize="14px">
@@ -22,4 +20,4 @@ const KeyResultListBodyColumnCycle = ({
   )
 }
 
-export default KeyResultListBodyColumnCycle
+export default CycleListBodyColumnCycle

@@ -1,5 +1,4 @@
 import { Grid } from '@chakra-ui/react'
-import remove from 'lodash/remove'
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
@@ -7,7 +6,7 @@ import {
   CyclesListBodyColumnCycle,
   CyclesListBodyColumnActions,
   CyclesListBodyColumnCadenceLevel,
-  CyclesListBodyColumnInitialDate,
+  CyclesListBodyColumnDateStart,
   CyclesListBodyColumnEndDate,
   CyclesListBodyColumnStatus,
 } from 'src/components/Cycle/List/Body/Columns'
@@ -23,33 +22,20 @@ export interface CyclesListBodyStaticLineProperties extends CyclesListBodyStatic
 const CyclesListBodyStaticLine = ({
   listID,
   cycleID,
-  onLineClick,
   borderColor,
   templateColumns,
   columnGap,
   columns,
   bodyProperties,
 }: CyclesListBodyStaticLineProperties) => {
-  const handleLineClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const target = event.target as HTMLDivElement
-    const actions = remove([
-      target.getAttribute('data-action'),
-      target.parentElement?.getAttribute('data-action'),
-    ])
-    const allowLineClick = actions.length === 0
-
-    if (onLineClick && cycleID && allowLineClick) onLineClick(cycleID)
-  }
-
   const columnComponents = {
     [CYCLE_LIST_COLUMN.CYCLE]: CyclesListBodyColumnCycle,
     [CYCLE_LIST_COLUMN.CADENCE_LEVEL]: CyclesListBodyColumnCadenceLevel,
-    [CYCLE_LIST_COLUMN.INITIAL_DATE]: CyclesListBodyColumnInitialDate,
+    [CYCLE_LIST_COLUMN.INITIAL_DATE]: CyclesListBodyColumnDateStart,
     [CYCLE_LIST_COLUMN.END_DATE]: CyclesListBodyColumnEndDate,
     [CYCLE_LIST_COLUMN.ACTIONS]: CyclesListBodyColumnActions,
     [CYCLE_LIST_COLUMN.STATUS]: CyclesListBodyColumnStatus,
   }
-  console.log({ columns })
 
   return (
     <Grid
@@ -61,9 +47,6 @@ const CyclesListBodyStaticLine = ({
       borderColor="transparent"
       borderBottomColor={borderColor}
       borderStyle="solid"
-      cursor={onLineClick ? 'pointer' : 'auto'}
-      _hover={onLineClick ? { background: 'black.50' } : {}}
-      onMouseDown={handleLineClick}
     >
       {columns.map((column) => {
         const ColumnComponent = columnComponents[column]
@@ -73,7 +56,6 @@ const CyclesListBodyStaticLine = ({
         return (
           <ColumnComponent
             key={`${listID}_CYCLE_LIST_BODY_LINE_${cycleID ?? uniqueId()}_COLUMN_${column}`}
-            status
             id={cycleID}
             borderColor={borderColor}
             {...columnProperties}

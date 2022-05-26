@@ -10,7 +10,7 @@ export interface CyclesListBodyStaticProperties extends CyclesListBodyProperties
   cyclesIDs: Array<Cycle['id']>
 }
 
-const CyclesListBodyStatic = ({ cyclesIDs, listID, ...rest }: CyclesListBodyStaticProperties) => (
+const CyclesListBody = ({ cyclesIDs, listID, ...rest }: CyclesListBodyStaticProperties) => (
   <>
     {cyclesIDs.map((cyclesID: Cycle['id']) => (
       <CyclesBodyStaticLine
@@ -24,4 +24,4 @@ const CyclesListBodyStatic = ({ cyclesIDs, listID, ...rest }: CyclesListBodyStat
   </>
 )
 
-export default CyclesListBodyStatic
+export default CyclesListBody

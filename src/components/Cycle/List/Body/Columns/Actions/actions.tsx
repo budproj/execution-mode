@@ -1,32 +1,46 @@
+import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useIntl } from 'react-intl'
 
 import CyclesListBodyColumnBase, {
   CyclesListBodyColumnBaseProperties,
 } from 'src/components/Cycle/List/Body/Columns/Base'
 import { Cycle } from 'src/components/Cycle/types'
+import TreeDotsIcon from 'src/components/Icon/TreeDots'
 
-import { keyResultAtomFamily } from '../../../../../../state/recoil/key-result'
-import { GraphQLEffect } from '../../../../../types'
-
-import { DeleteAction } from './delete'
+import messages from './messages'
 
 export interface CyclesListBodyColumnActionsProperties extends CyclesListBodyColumnBaseProperties {
   id?: Cycle['id']
-  onDelete?: (id?: string) => void
 }
 
 const CyclesListBodyColumnActions = ({
   id,
-  onDelete,
 }: CyclesListBodyColumnActionsProperties): ReactElement => {
-  const keyResult = useRecoilValue(keyResultAtomFamily(id))
-
-  const canDelete = keyResult?.policy?.delete === GraphQLEffect.ALLOW
+  const intl = useIntl()
 
   return (
     <CyclesListBodyColumnBase preventLineClick>
-      {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
+      <Menu isLazy placement="auto-end" variant="action-list">
+        <MenuButton
+          ml={2.5}
+          color="new-gray.500"
+          _hover={{
+            color: 'brand.500',
+          }}
+        >
+          <TreeDotsIcon
+            fill="currentColor"
+            fontSize="2xl"
+            style={{ transform: 'rotate(90deg)' }}
+            desc={intl.formatMessage(messages.optionsButtonDesc)}
+          />
+        </MenuButton>
+        <MenuList>
+          <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
+          <MenuItem>{intl.formatMessage(messages.secondMenuItemOption)}</MenuItem>
+        </MenuList>
+      </Menu>
     </CyclesListBodyColumnBase>
   )
 }

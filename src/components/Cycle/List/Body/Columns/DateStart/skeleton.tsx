@@ -3,10 +3,10 @@ import React, { ReactElement } from 'react'
 
 import CyclesListBodyColumnBase from 'src/components/Cycle/List/Body/Columns/Base'
 
-import { CyclesListBodyColumnCadenceLevelProperties } from './cadence-level'
+import { CyclesListBodyColumnDateStartProperties } from './date-start'
 
-const CyclesListBodyColumnCadenceLevelSkeleton = (
-  _properties: CyclesListBodyColumnCadenceLevelProperties,
+const CyclesListBodyColumnDateStartSkeleton = (
+  _properties: CyclesListBodyColumnDateStartProperties,
 ): ReactElement => (
   <CyclesListBodyColumnBase>
     <Flex gridGap={2} flexDir="column">
@@ -15,4 +15,4 @@ const CyclesListBodyColumnCadenceLevelSkeleton = (
   </CyclesListBodyColumnBase>
 )
 
-export default CyclesListBodyColumnCadenceLevelSkeleton
+export default CyclesListBodyColumnDateStartSkeleton

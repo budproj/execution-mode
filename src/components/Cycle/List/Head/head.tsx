@@ -1,8 +1,7 @@
-import { Grid, GridItem, GridProps, Text, TooltipProps, BoxProps, Box } from '@chakra-ui/react'
+import { Grid, GridItem, GridProps, Text, BoxProps, Box, TextProps } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { CYCLE_LIST_COLUMN } from 'src/components/Cycle/List/Body/Columns/constants'
 
 import messages from './messages'
@@ -28,60 +27,18 @@ const CycleListHead = ({
     [CYCLE_LIST_COLUMN.CYCLE]: messages.listHeadCycle,
     [CYCLE_LIST_COLUMN.CADENCE_LEVEL]: messages.listHeadCadenceLevel,
     [CYCLE_LIST_COLUMN.STATUS]: messages.listHeadStatus,
-    [CYCLE_LIST_COLUMN.INITIAL_DATE]: messages.listHeadInitialDate,
+    [CYCLE_LIST_COLUMN.INITIAL_DATE]: messages.listHeadDateStart,
     [CYCLE_LIST_COLUMN.END_DATE]: messages.listHeadEndDate,
     [CYCLE_LIST_COLUMN.ACTIONS]: messages.listHeadActions,
   }
 
   const columnWrappers = {
-    [CYCLE_LIST_COLUMN.CYCLE]: ({ children }: TooltipProps) => (
-      <TooltipWithDelay
-        label={intl.formatMessage(messages.listHeadCycleTooltip)}
-        placement="bottom-start"
-      >
-        {children}
-      </TooltipWithDelay>
-    ),
-    [CYCLE_LIST_COLUMN.CYCLE]: ({ children }: TooltipProps) => (
-      <TooltipWithDelay
-        label={intl.formatMessage(messages.listHeadObjectiveTooltip)}
-        placement="bottom-start"
-      >
-        {children}
-      </TooltipWithDelay>
-    ),
-    [CYCLE_LIST_COLUMN.CADENCE_LEVEL]: ({ children }: TooltipProps) => (
-      <TooltipWithDelay
-        label={intl.formatMessage(messages.listHeadCadenceLevelTooltip)}
-        placement="bottom-start"
-      >
-        {children}
-      </TooltipWithDelay>
-    ),
-    [CYCLE_LIST_COLUMN.INITIAL_DATE]: ({ children }: TooltipProps) => (
-      <TooltipWithDelay
-        label={intl.formatMessage(messages.listHeadInitialDateTooltip)}
-        placement="bottom-start"
-      >
-        {children}
-      </TooltipWithDelay>
-    ),
-    [CYCLE_LIST_COLUMN.END_DATE]: ({ children }: TooltipProps) => (
-      <TooltipWithDelay
-        label={intl.formatMessage(messages.listHeadEndDateTooltip)}
-        placement="bottom-start"
-      >
-        {children}
-      </TooltipWithDelay>
-    ),
-    [CYCLE_LIST_COLUMN.STATUS]: ({ children }: TooltipProps) => (
-      <TooltipWithDelay
-        label={intl.formatMessage(messages.listHeadStatusTooltip)}
-        placement="bottom-start"
-      >
-        {children}
-      </TooltipWithDelay>
-    ),
+    [CYCLE_LIST_COLUMN.CYCLE]: ({ children }: TextProps) => <Text>{children}</Text>,
+
+    [CYCLE_LIST_COLUMN.CADENCE_LEVEL]: ({ children }: TextProps) => <Text>{children}</Text>,
+    [CYCLE_LIST_COLUMN.INITIAL_DATE]: ({ children }: TextProps) => <Text>{children}</Text>,
+    [CYCLE_LIST_COLUMN.END_DATE]: ({ children }: TextProps) => <Text>{children}</Text>,
+    [CYCLE_LIST_COLUMN.STATUS]: ({ children }: TextProps) => <Text>{children}</Text>,
     [CYCLE_LIST_COLUMN.ACTIONS]: ({ children }: BoxProps) => <Box>{children}</Box>,
   }
 
@@ -107,10 +64,10 @@ const CycleListHead = ({
             <Wrapper>
               <Text
                 hidden={columnProperties?.hidden}
-                color="gray.300"
-                cursor="help"
-                textTransform="uppercase"
-                fontSize="xs"
+                color="#8193AB"
+                cursor="default"
+                fontSize={14}
+                fontWeight={400}
               >
                 {intl.formatMessage(columnMessages[column])}
               </Text>

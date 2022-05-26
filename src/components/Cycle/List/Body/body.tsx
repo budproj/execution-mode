@@ -3,15 +3,13 @@ import React from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { MessageDescriptor } from 'react-intl'
 
-import CyclesBodyStatic from 'src/components/Cycle/List/Body/Static'
-import { CYCLE_LIST_TYPE } from 'src/components/Cycle/List/constants'
+import CyclesBody from 'src/components/Cycle/List/Body/Static'
 import { Cycle } from 'src/components/Cycle/types'
 
 import { CYCLE_LIST_COLUMN } from './Columns/constants'
 import { CyclesListBodyColumnProperties } from './Columns/types'
 
 export interface CyclesListBodyProperties {
-  type: CYCLE_LIST_TYPE
   listID: string
   columns: CYCLE_LIST_COLUMN[]
   templateColumns: GridProps['templateColumns']
@@ -25,12 +23,10 @@ export interface CyclesListBodyProperties {
 }
 
 // TODO: tirar o array default de **cyclesIDs**
-const CyclesListBody = ({ type, cyclesIDs = ['1'], ...rest }: CyclesListBodyProperties) => {
-  const BodyComponent = CyclesBodyStatic
-
-  // Return cyclesIDs && <BodyComponent cyclesIDs={cyclesIDs} type={type} {...rest} />
+const CyclesListBody = ({ cyclesIDs = ['1'], ...rest }: CyclesListBodyProperties) => {
+  // Return cyclesIDs && <CyclesBody cyclesIDs={cyclesIDs} {...rest} />
   return cyclesIDs && cyclesIDs.length > 0 ? (
-    <BodyComponent cyclesIDs={cyclesIDs} type={type} {...rest} />
+    <CyclesBody cyclesIDs={cyclesIDs} {...rest} />
   ) : (
     <Box />
   )

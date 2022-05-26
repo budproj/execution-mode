@@ -9,10 +9,9 @@ import { KeyResult } from 'src/components/KeyResult/types'
 
 export interface CyclesListBodyColumnEndDateProperties extends CyclesListBodyColumnBaseProperties {
   id?: KeyResult['id']
-  isDisabled?: boolean
 }
 
-const CyclesListBodyColumnEndDate = ({
+const CyclesListBodyColumnDateEnd = ({
   id,
 }: CyclesListBodyColumnEndDateProperties): ReactElement => {
   const intl = useIntl()
@@ -28,4 +27,4 @@ const CyclesListBodyColumnEndDate = ({
   )
 }
 
-export default CyclesListBodyColumnEndDate
+export default CyclesListBodyColumnDateEnd
