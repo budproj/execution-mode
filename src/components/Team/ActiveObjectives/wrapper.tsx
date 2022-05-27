@@ -17,7 +17,7 @@ import {
 } from '../../../state/recoil/team/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
-import { GraphQLConnection, GraphQLConnectionPolicy, GraphQLEffect } from '../../types'
+import { GraphQLConnection, GraphQLConnectionPolicy } from '../../types'
 
 import queries from './queries.gql'
 
@@ -91,12 +91,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     <Stack spacing={12} h="full">
       {isLoaded ? (
         cycles.length === 0 ? (
-          <OKRsEmptyState
-            teamID={teamID}
-            isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
-            onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
-            onNewObjective={handleRefetch}
-          />
+          <OKRsEmptyState />
         ) : (
           cycles.map(([cycle, objectiveIDs]) => (
             <CycleObjectives
