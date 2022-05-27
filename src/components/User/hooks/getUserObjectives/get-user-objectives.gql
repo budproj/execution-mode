@@ -9,6 +9,11 @@ query GET_OBJECTIVES($ownerId: ID, $teamId: ID, $active: Boolean) {
                 id
                 title
                 ownerId
+                keyResults {
+                  policy {
+                    create
+                  }
+                }
                 cycle {
                   id
                   period

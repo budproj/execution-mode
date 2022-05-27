@@ -27,6 +27,8 @@ import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserfromList } from 'src/components/User/SelectFromList'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import {
   ObjectivesViewMode,
   userObjectivesViewMode,
@@ -46,6 +48,7 @@ const IndividualOkrPage = ({ intl, userData }: IndividualOkrPageProperties) => {
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
   const [users, setUsers] = useConnectionEdges<User>(data?.users?.edges)
   const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userData.id))
+  const { dispatch } = useEvent(EventType.PAGE_VIEW)
 
   const viewModeOptions = new Map([
     [
@@ -93,6 +96,10 @@ const IndividualOkrPage = ({ intl, userData }: IndividualOkrPageProperties) => {
       setUsers(filteredData)
     }
   }, [data, setUsers, userData])
+
+  useEffect(() => {
+    dispatch({ pathname: '/profile#individual-plan' })
+  }, [dispatch])
 
   return (
     <PageContent background="new-gray.50">

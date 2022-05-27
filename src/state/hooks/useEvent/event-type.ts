@@ -16,4 +16,6 @@ export enum EventType {
   TOGGLED_PERSONAL_TASK = 'ToggledPersonalTask',
   UPDATED_PERSONAL_TASK_TITLE = 'UpdatedPersonalTaskTitle',
   OPENED_KEY_RESULT_REPORT_CONFIDANCE = 'OpenedKeyResultReportConfidance',
+  CREATED_OBJECTIVE = 'CreatedObjective',
+  CREATED_KEY_RESULT = 'CreatedKeyResult',
 }

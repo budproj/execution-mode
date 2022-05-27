@@ -4,6 +4,8 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
 
@@ -22,17 +24,20 @@ export const KeyResultInsertDrawer = ({
 }: KeyResultInsertDrawerProperties) => {
   const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
   const resetDrawerObjectiveID = useResetRecoilState(keyResultInsertDrawerObjectiveID)
+  const { dispatch: dispatchCreatedObjective } = useEvent(EventType.CREATED_OBJECTIVE)
   const intl = useIntl()
   const toast = useToast()
 
   const isOpen = Boolean(drawerObjectiveID)
 
-  const handleSuccess = () => {
+  const handleSuccess = (currentUserID: string) => {
     resetDrawerObjectiveID()
     toast({
       title: intl.formatMessage(messages.successToastMessage),
       status: 'success',
     })
+
+    dispatchCreatedObjective({ isPersonal: !teamID, userId: currentUserID })
   }
 
   const handleError = () => {

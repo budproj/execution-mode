@@ -33,7 +33,7 @@ export type FormValues = {
 
 interface InsertKeyResultFormProperties {
   onClose?: () => void
-  onSuccess?: () => void
+  onSuccess?: (currentUserID: string) => void
   onError?: () => void
   onValidationError?: () => void
   objectiveID?: string
@@ -104,10 +104,10 @@ export const InsertKeyResultForm = ({
 
   useEffect(() => {
     if (data && !error) {
-      if (onSuccess) onSuccess()
+      if (onSuccess) onSuccess(currentUserID)
       setLastInsertedKeyResultID(data.createKeyResult.id)
     }
-  }, [data, error, onSuccess, setLastInsertedKeyResultID])
+  }, [data, error, currentUserID, onSuccess, setLastInsertedKeyResultID])
 
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>

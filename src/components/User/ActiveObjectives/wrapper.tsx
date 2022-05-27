@@ -4,6 +4,8 @@ import { useRecoilState } from 'recoil'
 
 import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
 import { OKRsSkeleton } from 'src/components/Objective/OKRsSkeleton/wrapper'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
@@ -33,6 +35,7 @@ export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties)
     { ownerId: userID },
     { setObjetives: setActiveObjectives, setObjectivesPolicy },
   )
+  const { dispatch: dispatchCreatedObjective } = useEvent(EventType.CREATED_OBJECTIVE)
 
   const [objectiveEdges, setObjectiveEdges, _, isRemoteDataLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
@@ -44,6 +47,8 @@ export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties)
       ownerId: userID,
       active: true,
     })
+
+    dispatchCreatedObjective({ isPersonal: true, userId: userID })
   }
 
   useEffect(() => {
