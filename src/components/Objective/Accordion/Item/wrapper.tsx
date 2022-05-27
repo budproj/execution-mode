@@ -55,7 +55,6 @@ export const ObjectiveAccordionItem = ({
             isExpanded={isExpanded}
             objectiveID={objectiveID}
             teamID={teamID}
-            userID={userID}
             isDisabled={isDisabled}
           />
         </>
