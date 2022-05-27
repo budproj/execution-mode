@@ -31,6 +31,8 @@ import { SelectUserfromList } from 'src/components/User/SelectFromList'
 import { useGetUserObjectives } from 'src/components/User/hooks/getUserObjectives'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
 import {
@@ -63,6 +65,8 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
   )
 
   const toast = useToast()
+  const { dispatch: dispatchPageView } = useEvent(EventType.PAGE_VIEW)
+  const { dispatch: dispatchCreatedObjective } = useEvent(EventType.CREATED_OBJECTIVE)
 
   const viewModeOptions = new Map([
     [
@@ -96,6 +100,11 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
     if (!isUserSidebarOpen) setSelectedUserID(undefined)
   }, [isUserSidebarOpen, setSelectedUserID])
 
+  useEffect(() => {
+    dispatchPageView({ pathname: '/my-things#individual-plan' })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleUserDeactivation = async () => {
     handleClose()
   }
@@ -127,6 +136,7 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
         })
 
         setObjectiveIDToEditMode(data.createObjective.id)
+        dispatchCreatedObjective({ isPersonal: true, userId: userID })
       },
       onError: () => {
         toast({
