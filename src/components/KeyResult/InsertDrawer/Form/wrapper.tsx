@@ -66,7 +66,8 @@ export const InsertKeyResultForm = ({
   )
   const initialValues: FormValues = {
     objectiveID,
-    teamID,
+    // eslint-disable-next-line unicorn/no-null
+    teamID: teamID ?? null,
     title: '',
     description: '',
     format: KEY_RESULT_FORMAT.PERCENTAGE,
