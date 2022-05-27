@@ -2,6 +2,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { KeyResultInsertDrawer } from 'src/components/KeyResult/InsertDrawer/wrapper'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { DetailedHeader } from 'src/components/User/DetailedHeader'
 import { keyResultTypeAtom } from 'src/state/recoil/key-result'
@@ -26,6 +27,8 @@ const ActiveCyclesPage = () => {
 
   return (
     <>
+      <KeyResultInsertDrawer isPersonalKR />
+
       <DetailedHeader userData={user} />
 
       {keyResultType === KeyResultType.COMPANY && (
