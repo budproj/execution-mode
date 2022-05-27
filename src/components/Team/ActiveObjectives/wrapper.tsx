@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
@@ -17,7 +17,7 @@ import {
 } from '../../../state/recoil/team/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
-import { GraphQLConnection, GraphQLConnectionPolicy } from '../../types'
+import { GraphQLConnection } from '../../types'
 
 import queries from './queries.gql'
 
