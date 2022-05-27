@@ -35,10 +35,8 @@ export interface GetTeamActiveObjectivesQuery {
 }
 
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
-  const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
-  const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
   const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
 
@@ -52,9 +50,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
       variables: { teamID },
       notifyOnNetworkStatusChange: true,
       onCompleted: ({ team }) => {
-        setObjectivesPolicy(team.activeObjectives.policy)
         setActiveObjectives(team.activeObjectives?.edges ?? [])
-        setHasNotActiveObjectives(team.notActiveObjectives.edges.length > 0)
       },
     },
   )
