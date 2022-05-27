@@ -32,7 +32,8 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
       paddingBottom="0"
       borderColor="new-gray.400"
       flex="unset"
-      boxShadow="0px 6px 15px 0px rgb(217 226 246 / 35%)"
+      boxShadow="with-stroke.dark"
+      borderBottom="1px solid #D9E2F6"
     >
       <Flex alignItems="center" justifyContent="space-between" paddingBottom={10}>
         <Flex alignItems="flex-start" gap="20px">
@@ -71,65 +72,66 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
             )}
           </Flex>
         </Flex>
-        <Flex>
-          {userData?.yearlyProgress?.showProgress ? (
-            <TooltipWithDelay
-              label={intl.formatMessage(messages.yearlyProgressTooltip)}
-              maxWidth="unset"
-              placement="bottom-end"
-            >
-              <Flex direction="column">
-                <RadioProgress
-                  isIndeterminate={isUserLoading}
-                  size="64px"
-                  progress={userData?.yearlyProgress?.progress}
-                  color="brand.500"
-                  trackColor="brand.100"
-                />
-                <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
-                  <Text
-                    color="new-gray.700"
-                    fontWeight={700}
-                    maxWidth="64px"
-                    textAlign="center"
-                    fontSize="0.85rem"
-                  >
-                    {intl.formatMessage(messages.yearlyProgress)}
-                  </Text>
-                </Skeleton>
-              </Flex>
-            </TooltipWithDelay>
-          ) : undefined}
-
-          {userData?.quarterlyProgress?.showProgress ? (
-            <TooltipWithDelay
-              label={intl.formatMessage(messages.quarterlyProgressTooltip)}
-              maxWidth="unset"
-              placement="bottom-end"
-            >
-              <Flex direction="column" ml="35px">
-                <RadioProgress
-                  isIndeterminate={isUserLoading}
-                  size="64px"
-                  progress={userData?.quarterlyProgress?.progress}
-                  color="brand.500"
-                  trackColor="brand.100"
-                />
-                <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
-                  <Text
-                    color="new-gray.700"
-                    fontWeight={700}
-                    maxWidth="64px"
-                    textAlign="center"
-                    fontSize="0.85rem"
-                  >
-                    {intl.formatMessage(messages.quarterlyProgress)}
-                  </Text>
-                </Skeleton>
-              </Flex>
-            </TooltipWithDelay>
-          ) : undefined}
-        </Flex>
+        {keyResultType === KeyResultType.COMPANY && (
+          <Flex>
+            {userData?.yearlyProgress?.showProgress ? (
+              <TooltipWithDelay
+                label={intl.formatMessage(messages.yearlyProgressTooltip)}
+                maxWidth="unset"
+                placement="bottom-end"
+              >
+                <Flex direction="column">
+                  <RadioProgress
+                    isIndeterminate={isUserLoading}
+                    size="64px"
+                    progress={userData?.yearlyProgress?.progress}
+                    color="brand.500"
+                    trackColor="brand.100"
+                  />
+                  <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
+                    <Text
+                      color="new-gray.700"
+                      fontWeight={700}
+                      maxWidth="64px"
+                      textAlign="center"
+                      fontSize="0.85rem"
+                    >
+                      {intl.formatMessage(messages.yearlyProgress)}
+                    </Text>
+                  </Skeleton>
+                </Flex>
+              </TooltipWithDelay>
+            ) : undefined}
+            {userData?.quarterlyProgress?.showProgress ? (
+              <TooltipWithDelay
+                label={intl.formatMessage(messages.quarterlyProgressTooltip)}
+                maxWidth="unset"
+                placement="bottom-end"
+              >
+                <Flex direction="column" ml="35px">
+                  <RadioProgress
+                    isIndeterminate={isUserLoading}
+                    size="64px"
+                    progress={userData?.quarterlyProgress?.progress}
+                    color="brand.500"
+                    trackColor="brand.100"
+                  />
+                  <Skeleton isLoaded={!isUserLoading} width="64px" mt={1}>
+                    <Text
+                      color="new-gray.700"
+                      fontWeight={700}
+                      maxWidth="64px"
+                      textAlign="center"
+                      fontSize="0.85rem"
+                    >
+                      {intl.formatMessage(messages.quarterlyProgress)}
+                    </Text>
+                  </Skeleton>
+                </Flex>
+              </TooltipWithDelay>
+            ) : undefined}
+          </Flex>
+        )}
       </Flex>
       <Divider />
       <Flex>
@@ -140,6 +142,10 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
           borderRadius="0"
           color={keyResultType === KeyResultType.COMPANY ? 'brand.500' : '#525F7F'}
           borderBottom={keyResultType === KeyResultType.COMPANY ? '2px solid #6F6EFF' : undefined}
+          _hover={{
+            color: keyResultType === KeyResultType.COMPANY ? 'brand.300' : 'new-gray.700',
+            borderBottom: keyResultType === KeyResultType.COMPANY ? '2px solid #A9A8FF' : undefined,
+          }}
           onClick={() => setKeyResultType(KeyResultType.COMPANY)}
         >
           {intl.formatMessage(messages.companyOKRTitle, {
@@ -156,6 +162,11 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
           borderRadius="0"
           color={keyResultType === KeyResultType.PERSONAL ? 'brand.500' : '#525F7F'}
           borderBottom={keyResultType === KeyResultType.PERSONAL ? '2px solid #6F6EFF' : undefined}
+          _hover={{
+            color: keyResultType === KeyResultType.PERSONAL ? 'brand.300' : 'new-gray.700',
+            borderBottom:
+              keyResultType === KeyResultType.PERSONAL ? '2px solid #A9A8FF' : undefined,
+          }}
           onClick={() => setKeyResultType(KeyResultType.PERSONAL)}
         >
           {intl.formatMessage(messages.individualOKRTitle)}

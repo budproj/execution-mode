@@ -18,8 +18,8 @@ export default defineMessages<ActiveObjectivesMessages>({
   },
 
   personalObjectivesEmptyStateTitle: {
-    defaultMessage: 'PLANO INDIVIDUAL',
-    id: 'NPR3JP',
+    defaultMessage: 'OKRs',
+    id: 'VPJIpc',
     description:
       'This message is displayed above the empty state inside the active cycles section at the User page',
   },
@@ -31,8 +31,8 @@ export default defineMessages<ActiveObjectivesMessages>({
   },
 
   personalObjectivesEmptyStateMessage: {
-    defaultMessage: 'Você ainda não criou nenhum OKR Individual.',
-    id: 'ifl8WA',
+    defaultMessage: 'Você ainda não criou nenhum OKR no seu Plano Individual.',
+    id: 'uL69e4',
     description: 'This message is displayed as the empty state message inside the User page',
   },
 

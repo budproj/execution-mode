@@ -1,6 +1,6 @@
 import { Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
 import { OKRsSkeleton } from 'src/components/Objective/OKRsSkeleton/wrapper'
@@ -12,13 +12,9 @@ import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { isReloadNecessary, objectiveAtomFamily } from '../../../state/recoil/objective'
 import { userActiveObjectives } from '../../../state/recoil/user/active-objectives'
-import {
-  ObjectivesViewMode,
-  userObjectivesViewMode,
-} from '../../../state/recoil/user/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
-import { GraphQLConnectionPolicy, GraphQLEffect } from '../../types'
+import { GraphQLConnectionPolicy } from '../../types'
 import { useGetUserObjectives } from '../hooks/getUserObjectives'
 import { User } from '../types'
 
@@ -34,8 +30,6 @@ export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties)
   const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(userActiveObjectives(userID))
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
-  const [hasNotActiveObjectives] = useState(false)
-  const setObjectivesViewMode = useSetRecoilState(userObjectivesViewMode(userID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const { called, refetch } = useGetUserObjectives(
     { ownerId: userID },
@@ -45,10 +39,6 @@ export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties)
 
   const [objectiveEdges, setObjectiveEdges, _, isRemoteDataLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
-
-  const handleViewOldCycles = () => {
-    setObjectivesViewMode(ObjectivesViewMode.NOT_ACTIVE)
-  }
 
   const handleRefetch = async () => {
     void refetch({
@@ -85,13 +75,7 @@ export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties)
     <Stack spacing={12} h="full">
       {isLoaded ? (
         cycles.length === 0 ? (
-          <OKRsEmptyState
-            isPersonalObjective
-            imageKey="empty-personal-okrs-tab"
-            isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
-            onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
-            onNewObjective={handleRefetch}
-          />
+          <OKRsEmptyState isPersonalObjective imageKey="empty-personal-okrs-tab" />
         ) : (
           cycles.map(([cycle, objectiveIDs]) => (
             <CycleObjectives
