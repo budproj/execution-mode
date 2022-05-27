@@ -27,8 +27,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     description: 'Company OKR title of the page',
   },
   individualOKRTitle: {
-    defaultMessage: 'Planejamento individual',
-    id: 'YxKyjP',
+    defaultMessage: 'Plano individual',
+    id: 'LwoUMm',
     description: 'Individual OKR title of the page',
   },
 
@@ -72,8 +72,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     description: 'Title of the history button',
   },
   individualOkrsCompanyMembersTitle: {
-    defaultMessage: 'Colegas com planejamento individual',
-    id: 'SmMx3s',
+    defaultMessage: 'Colegas com plano individual',
+    id: 'oGyXN5',
     description: 'Friends with individual OKRs title',
   },
   backToThePresentButtonTitle: {

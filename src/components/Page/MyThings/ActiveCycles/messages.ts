@@ -30,14 +30,14 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     description: 'Company OKR subtitle of the page',
   },
   individualOKRTitle: {
-    defaultMessage: 'Planejamento individual',
-    id: 'YxKyjP',
+    defaultMessage: 'Plano Individual',
+    id: 'GuD4W6',
     description: 'Individual OKR title of the page',
   },
   individualOKRSubTitle: {
     defaultMessage:
-      'O planejamento individual é definido por você. Eles não interferem no progresso da empresa, mas podem ser vistos por seus colegas.',
-    id: 'kEofXd',
+      'Os OKRs do Plano Individual são definido por você. Eles não interferem no progresso da empresa.',
+    id: 'vppqyA',
     description: 'Individual OKR subtitle of the page',
   },
   metaTitle: {
@@ -100,8 +100,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     description: 'Title of the create objective button',
   },
   individualOkrsCompanyMembersTitle: {
-    defaultMessage: 'Colegas com planejamento individual',
-    id: 'SmMx3s',
+    defaultMessage: 'Colegas com plano individual',
+    id: 'oGyXN5',
     description: 'Friends with individual OKRs title',
   },
   backToThePresentButtonTitle: {

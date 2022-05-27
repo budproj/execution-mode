@@ -3,7 +3,6 @@ import {
   Button,
   Flex,
   Box,
-  Divider,
   Text,
   HStack,
   Heading,
@@ -195,17 +194,15 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
         </Flex>
       </PageHeader>
 
-      <HStack align="stretch" spacing="4rem" flex="1" w="100%">
-        <Box flexBasis="60%" maxWidth="60%">
+      <HStack align="stretch" spacing={8} maxH="100%">
+        <Box flexGrow={1}>
           {userID ? <UserObjectives userID={userID} viewType={viewMode} /> : undefined}
         </Box>
 
-        <Box>
-          <Divider orientation="vertical" h="full" borderColor="new-gray.400" opacity="1" />
-        </Box>
-
         <TeamSectionWrapper
-          minWidth="367px"
+          w="md"
+          minW="md"
+          maxH="4xl"
           title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle)}
         >
           <SelectUserfromList
