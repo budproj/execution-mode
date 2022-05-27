@@ -6,7 +6,6 @@ import { useRecoilValue } from 'recoil'
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
-import { userAtomFamily } from 'src/state/recoil/user'
 
 import { objectiveAtomFamily } from '../../../../state/recoil/objective'
 import { teamAtomFamily } from '../../../../state/recoil/team'
@@ -33,10 +32,9 @@ export const ObjectiveAccordionMenu = ({
 }: ObjectiveAccordionMenuProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(teamID))
-  const user = useRecoilValue(userAtomFamily(userID))
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
 
-  const policyHolder = userID ? user : team
+  const policyHolder = userID ? objective : team
   const canCreateKeyResult = policyHolder?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
   const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
