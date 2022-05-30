@@ -27,6 +27,8 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
 
   const intl = useIntl()
 
+  const companyName = userData?.companies?.edges[0].node.name ?? ''
+
   return (
     <PageContent
       paddingBottom="0"
@@ -148,11 +150,13 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
           }}
           onClick={() => setKeyResultType(KeyResultType.COMPANY)}
         >
-          {intl.formatMessage(messages.companyOKRTitle, {
-            company: userData?.companies?.edges[0].node.name
-              ? userData?.companies?.edges[0].node.name
-              : '',
-          })}
+          {companyName ? (
+            intl.formatMessage(messages.companyOKRTitle, {
+              company: companyName,
+            })
+          ) : (
+            <Skeleton isLoaded={false} width="100px" height="20px" />
+          )}
         </Button>
 
         <Button
