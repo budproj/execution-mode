@@ -3,14 +3,10 @@ import React, { ReactElement } from 'react'
 
 import CyclesListBodyColumnBase from 'src/components/Cycle/List/Body/Columns/Base'
 
-import { CyclesListBodyColumnDateStartProperties } from './date-start'
-
-const CyclesListBodyColumnDateStartSkeleton = (
-  _properties: CyclesListBodyColumnDateStartProperties,
-): ReactElement => (
+const CyclesListBodyColumnDateStartSkeleton = (): ReactElement => (
   <CyclesListBodyColumnBase>
     <Flex gridGap={2} flexDir="column">
-      <Skeleton w={40} h={8} />
+      <Skeleton w="full" h={8} />
     </Flex>
   </CyclesListBodyColumnBase>
 )

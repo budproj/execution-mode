@@ -29,7 +29,7 @@ const CyclesListBodyColumnDateStart = ({
       <Flex gridGap={2} flexDir="column">
         <Skeleton
           isLoaded={isdateStartLoaded}
-          {...buildSkeletonMinSize(isdateStartLoaded, 100, 20)}
+          {...buildSkeletonMinSize(isdateStartLoaded, 100, 28)}
         >
           <Text>{intl.formatDate(dateStart)}</Text>
         </Skeleton>

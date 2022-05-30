@@ -17,12 +17,12 @@ import { Cycle } from 'src/components/Cycle/types'
 import { CyclesListBodyStaticProperties } from './static'
 
 export interface CyclesListBodyStaticSkeletonLineProperties extends CyclesListBodyStaticProperties {
-  cyclesID?: Cycle['id']
+  cycleID?: Cycle['id']
 }
 
 const CyclesListBodyStaticSkeletonLine = ({
   listID,
-  cyclesID,
+  cycleID,
   onLineClick,
   borderColor,
   templateColumns,
@@ -38,7 +38,7 @@ const CyclesListBodyStaticSkeletonLine = ({
     ])
     const allowLineClick = actions.length === 0
 
-    if (onLineClick && cyclesID && allowLineClick) onLineClick(cyclesID)
+    if (onLineClick && cycleID && allowLineClick) onLineClick(cycleID)
   }
 
   const columnComponents = {
@@ -73,8 +73,8 @@ const CyclesListBodyStaticSkeletonLine = ({
 
         return (
           <ColumnComponent
-            key={`${listID}_CYCLE_LIST_BODY_LINE_${cyclesID ?? uniqueId()}_COLUMN_${column}`}
-            id={cyclesID}
+            key={`${listID}_CYCLE_LIST_BODY_LINE_${cycleID ?? uniqueId()}_COLUMN_${column}`}
+            id={cycleID}
             borderColor={borderColor}
             {...columnProperties}
           />

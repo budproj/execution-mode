@@ -19,7 +19,7 @@ const CyclesListBodyColumnCadenceLevel = ({
   const cadenceLevel = useRecoilValue(cadenceLevelSelector(id))
   const isCadenceLevelLoaded = Boolean(cadenceLevel)
 
-  const cadenceLevelFormated = new Map([
+  const cadenceLevelFormateted = new Map([
     [CADENCE.QUARTERLY, 'Trimestral'],
     [CADENCE.YEARLY, 'Anual'],
   ])
@@ -29,10 +29,10 @@ const CyclesListBodyColumnCadenceLevel = ({
       <Flex gridGap={2} flexDir="column">
         <Skeleton
           isLoaded={isCadenceLevelLoaded}
-          {...buildSkeletonMinSize(isCadenceLevelLoaded, 40, 8)}
+          {...buildSkeletonMinSize(isCadenceLevelLoaded, 40, 28)}
         >
           <Text color="#6B7B90" fontSize="14px" fontWeight={400}>
-            {cadenceLevel && cadenceLevelFormated.get(cadenceLevel)}
+            {cadenceLevel && cadenceLevelFormateted.get(cadenceLevel)}
           </Text>
         </Skeleton>
       </Flex>

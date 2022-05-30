@@ -23,7 +23,7 @@ const CycleListBodyColumnCycle = ({ id }: CyclesListBodyColumnCyclesProperties):
     <CyclesListBodyColumnBase>
       <Skeleton
         isLoaded={isCyclePeriodLoaded}
-        {...buildSkeletonMinSize(isCyclePeriodLoaded, 150, 20)}
+        {...buildSkeletonMinSize(isCyclePeriodLoaded, 150, 28)}
       >
         <Text fontWeight={400} color="#525F7F" fontSize="14px">
           {cyclePeriod}

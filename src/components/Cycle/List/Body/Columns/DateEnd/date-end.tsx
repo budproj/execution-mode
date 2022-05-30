@@ -26,7 +26,7 @@ const CyclesListBodyColumnDateEnd = ({
   return (
     <CyclesListBodyColumnBase>
       <Flex gridGap={2} flexDir="column">
-        <Skeleton isLoaded={isdateEndLoaded} {...buildSkeletonMinSize(isdateEndLoaded, 100, 20)}>
+        <Skeleton isLoaded={isdateEndLoaded} {...buildSkeletonMinSize(isdateEndLoaded, 100, 28)}>
           <Text>{intl.formatDate(dateEnd)}</Text>
         </Skeleton>
       </Flex>

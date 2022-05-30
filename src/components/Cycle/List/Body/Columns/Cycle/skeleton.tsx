@@ -3,13 +3,9 @@ import React, { ReactElement } from 'react'
 
 import CyclesListBodyColumnBase from 'src/components/Cycle/List/Body/Columns/Base'
 
-import { CyclesListBodyColumnCyclesProperties } from './cycle'
-
-const CyclesListBodyColumnCyclesSkeleton = (
-  _properties: CyclesListBodyColumnCyclesProperties,
-): ReactElement => (
+const CyclesListBodyColumnCyclesSkeleton = (): ReactElement => (
   <CyclesListBodyColumnBase>
-    <Skeleton h={4} w="full" />
+    <Skeleton h={8} w="full" />
   </CyclesListBodyColumnBase>
 )
 
