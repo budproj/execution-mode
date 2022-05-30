@@ -3,7 +3,6 @@ import {
   Button,
   Flex,
   Box,
-  Divider,
   Text,
   HStack,
   Heading,
@@ -138,10 +137,6 @@ const IndividualOkrPage = ({ intl, userData }: IndividualOkrPageProperties) => {
       <HStack align="stretch" spacing="4rem" flex="1" w="100%">
         <Box flexBasis="60%" maxWidth="60%">
           {userData ? <UserObjectives userID={userData.id} viewType={viewMode} /> : undefined}
-        </Box>
-
-        <Box>
-          <Divider orientation="vertical" h="full" borderColor="new-gray.400" opacity="1" />
         </Box>
 
         <TeamSectionWrapper

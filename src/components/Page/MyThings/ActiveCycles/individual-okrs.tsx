@@ -204,15 +204,13 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
         </Flex>
       </PageHeader>
 
-      <HStack align="stretch" spacing={8} maxH="100%">
+      <HStack align="stretch" spacing={8} flex="1" w="100%">
         <Box flexGrow={1}>
           {userID ? <UserObjectives userID={userID} viewType={viewMode} /> : undefined}
         </Box>
 
         <TeamSectionWrapper
-          w="md"
-          minW="md"
-          maxH="4xl"
+          minWidth="367px"
           title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle)}
         >
           <SelectUserfromList
