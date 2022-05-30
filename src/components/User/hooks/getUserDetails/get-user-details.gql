@@ -20,6 +20,14 @@ query GET_USER_DETAILS($userId: ID) {
         }
       }
     }
+    companies(first: 1) {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
     policy {
       update
     }
