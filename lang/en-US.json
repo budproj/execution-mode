@@ -352,7 +352,7 @@
     "description": "The page title that our users should see in the teams explore page"
   },
   "608lDc": {
-    "defaultMessage": "",
+    "defaultMessage": "See your key results and tasks related to the company's strategy.",
     "description": "Company OKR subtitle of the page"
   },
   "612Wwz": {
@@ -619,6 +619,10 @@
     "defaultMessage": "Deactivate user",
     "description": "This text is used in our deactivate user button in the profile sidebar in our team page"
   },
+  "bgdTCS": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title on the navigation tab"
+  },
   "bh8jgN": {
     "defaultMessage": "new!",
     "description": "The text inside the tag to inform new buttons"
@@ -696,7 +700,7 @@
     "description": "The title displayed in the tooltip when the user hovers our paper plane icon in our add comment form"
   },
   "CmpXX/": {
-    "defaultMessage": "",
+    "defaultMessage": "{company}'s OKR",
     "description": "Company OKR title on the navigation tab"
   },
   "cPGOoL": {
@@ -832,7 +836,7 @@
     "description": "The summary title for the yearly OKRs"
   },
   "EG9UsD": {
-    "defaultMessage": "",
+    "defaultMessage": "{company}'s OKR",
     "description": "Company OKR title of the page"
   },
   "eI6jYw": {
@@ -1039,6 +1043,10 @@
     "defaultMessage": "Annual",
     "description": "This text is used as prefix for our yearly cadences"
   },
+  "GuD4W6": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title of the page"
+  },
   "gXiIKg": {
     "defaultMessage": "Low confidence",
     "description": "Title of low confidence health strategy"
@@ -1156,7 +1164,7 @@
     "description": "This message appears as an error toast when the users tries to create a new objective but an error appears"
   },
   "ifl8WA": {
-    "defaultMessage": "",
+    "defaultMessage": "You haven't created any individual OKR yet",
     "description": "This message is displayed as the empty state message inside the User page"
   },
   "IGHT6z": {
@@ -1268,7 +1276,7 @@
     "description": "This message appears in a toast after the user removes an objective"
   },
   "Jk/gDc": {
-    "defaultMessage": "",
+    "defaultMessage": "Create Objective",
     "description": "Title of the create objective button"
   },
   "Jkg7nT": {
@@ -1336,7 +1344,7 @@
     "description": "The label of the company quarterly date end while creating a new workspace"
   },
   "K4Rjji": {
-    "defaultMessage": "",
+    "defaultMessage": "History",
     "description": "Title of the history button"
   },
   "K8KvrI": {
@@ -1352,7 +1360,7 @@
     "description": "This text is displayed in our menu, as an anchor to remove that given card"
   },
   "kEofXd": {
-    "defaultMessage": "",
+    "defaultMessage": "Individual planning is defined by you. They do not interfere with the company's progress but can be seen by your colleagues.",
     "description": "Individual OKR subtitle of the page"
   },
   "kFrglO": {
@@ -1478,6 +1486,10 @@
   "lWcm/y": {
     "defaultMessage": "There are no key results with this confidence level.",
     "description": "Tooltip content for health strategy box without key results"
+  },
+  "LwoUMm": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title of the page"
   },
   "M0RYZa": {
     "defaultMessage": "Save",
@@ -1608,7 +1620,7 @@
     "description": "This message is displayer as soon as our user hovers the avatar"
   },
   "NPR3JP": {
-    "defaultMessage": "",
+    "defaultMessage": "INDIVIDUAL PLAN",
     "description": "This message is displayed above the empty state inside the active cycles section at the User page"
   },
   "npWxt7": {
@@ -1654,6 +1666,10 @@
   "OErdYA": {
     "defaultMessage": "An icon with three dots, indicating that by clicking here a menu will expand",
     "description": "The description for screen readers regarding the three dots above the objectives accordion"
+  },
+  "oGyXN5": {
+    "defaultMessage": "Friends with Individual Plan",
+    "description": "Friends with individual OKRs title"
   },
   "OMUZ7w": {
     "defaultMessage": "Female",
@@ -1920,7 +1936,7 @@
     "description": "The label of the submit button of the create user form"
   },
   "ShzOP9": {
-    "defaultMessage": "",
+    "defaultMessage": "History Icon",
     "description": "Icon description for history icon"
   },
   "SiJuyU": {
@@ -1936,7 +1952,7 @@
     "description": "This message is displayed as the title of the time machine section in a team's page"
   },
   "SmMx3s": {
-    "defaultMessage": "",
+    "defaultMessage": "Friends with individual plan",
     "description": "Friends with individual OKRs title"
   },
   "Smwz9L": {
@@ -1995,6 +2011,10 @@
     "defaultMessage": "My account",
     "description": "This label defines the text on the first menu section option"
   },
+  "t0t6MQ": {
+    "defaultMessage": "Back to the present",
+    "description": "The button title to go back to the present"
+  },
   "t0YKyV": {
     "defaultMessage": "Confirm",
     "description": "This message is used as the confirmation button when we are in the confirmation dialog"
@@ -2020,7 +2040,7 @@
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
   },
   "tBBHmo": {
-    "defaultMessage": "",
+    "defaultMessage": "Individual Plan",
     "description": "Individual OKR title on the navigation tab"
   },
   "tcWO3v": {
@@ -2058,6 +2078,10 @@
   "Tp/cz3": {
     "defaultMessage": "{confidence, select, roadblock {All key results with a {confidence}} other {All key results with {confidence}}}",
     "description": "The title for the dashboard key results modal"
+  },
+  "Tsd4ry": {
+    "defaultMessage": "See the Individual OKRs for { username }. They do not interfere with the company's overall progress.",
+    "description": "Individual OKR subtitle of the page"
   },
   "txi+kN": {
     "defaultMessage": "Language",
@@ -2102,6 +2126,10 @@
   "ui441M": {
     "defaultMessage": "Rounded corners square icon with a pencil inside",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
+  },
+  "uL69e4": {
+    "defaultMessage": "You haven't created any OKR for your individual plan.",
+    "description": "This message is displayed as the empty state message inside the User page"
   },
   "UN5BY2": {
     "defaultMessage": "DELETE",
@@ -2194,6 +2222,14 @@
   "VNHZWm": {
     "defaultMessage": "Period",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
+  },
+  "VPJIpc": {
+    "defaultMessage": "OKRs",
+    "description": "This message is displayed above the empty state inside the active cycles section at the User page"
+  },
+  "vppqyA": {
+    "defaultMessage": "Individual Plan OKRs are set by you. They do not interfere with the company's progress.",
+    "description": "Individual OKR subtitle of the page"
   },
   "VSS4F8": {
     "defaultMessage": "{unit, select, fallback {since {date}} other {{date}}}",
@@ -2376,7 +2412,7 @@
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
   },
   "XZcPVc": {
-    "defaultMessage": "",
+    "defaultMessage": "A woman analyzing a chart and pointing to something on the screen",
     "description": "The alternative text explaining the empty item image"
   },
   "Y+MtZe": {
@@ -2390,6 +2426,10 @@
   "Y1oyYG": {
     "defaultMessage": "Up arrow icon indicating that progress has increased",
     "description": "This desc message explains the increase icon for screen readers"
+  },
+  "Y8TWo2": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title on the navigation tab"
   },
   "YETxgV": {
     "defaultMessage": "In OKRs, the general rule is to aim for a progress of at least 70%. To achieve this by the end of the cycle, the current progress is expected to be at {progress}%.",
@@ -2436,7 +2476,7 @@
     "description": "The label of the last name field in the create user form"
   },
   "YxKyjP": {
-    "defaultMessage": "",
+    "defaultMessage": "Individual Plan",
     "description": "Individual OKR title of the page"
   },
   "YxNkP6": {
@@ -2540,7 +2580,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-05-24T14:38:42Z",
+    "defaultMessage": "2022-05-30T20:49:03Z",
     "description": null
   }
 }
