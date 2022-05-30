@@ -16,7 +16,7 @@ import { Cycle } from 'src/components/Cycle/types'
 import { CyclesListBodyStaticProperties } from './static'
 
 export interface CyclesListBodyStaticLineProperties extends CyclesListBodyStaticProperties {
-  cycleID?: Cycle['id']
+  cycleID: Cycle['id']
 }
 
 const CyclesListBodyStaticLine = ({
@@ -51,7 +51,6 @@ const CyclesListBodyStaticLine = ({
       {columns.map((column) => {
         const ColumnComponent = columnComponents[column]
         const columnProperties = bodyProperties[column]
-        console.log({ column })
 
         return (
           <ColumnComponent

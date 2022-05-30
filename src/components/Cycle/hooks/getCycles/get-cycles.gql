@@ -1,2 +1,23 @@
-query GET_CYCLES() {
+query GET_CYCLES {
+  me {
+    companies(first: 1) {
+      edges {
+        node {
+          id
+          cycles {
+            edges {
+              node {
+                id
+                period
+                cadence
+                active
+                dateStart
+                dateEnd
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

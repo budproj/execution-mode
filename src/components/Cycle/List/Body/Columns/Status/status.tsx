@@ -1,13 +1,26 @@
-import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Skeleton,
+  Text,
+} from '@chakra-ui/react'
 import React, { ReactElement, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import CyclesListBodyColumnBase, {
   CyclesListBodyColumnBaseProperties,
 } from 'src/components/Cycle/List/Body/Columns/Base'
 import { CYCLE_STATUS } from 'src/components/Cycle/constants'
 import { Cycle } from 'src/components/Cycle/types'
 import { Check, ChevronDown } from 'src/components/Icon'
+import buildPartialSelector from 'src/state/recoil/cycle/build-partial-selector'
 
 import messages from './messages'
 
@@ -15,12 +28,17 @@ export interface CyclesListBodyColumnStatusProperties extends CyclesListBodyColu
   id?: Cycle['id']
 }
 
-// Const statusSelector = buildPartialSelector<Cycle>['status']>('status')
+const statusSelector = buildPartialSelector<Cycle['active']>('active')
 
 const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties): ReactElement => {
-  // Const status = useRecoilValue(statusSelector(id))
   const intl = useIntl()
-  const [statusState, setStatusState] = useState(CYCLE_STATUS.ACTIVE)
+
+  const cycleStatus = useRecoilValue(statusSelector(id))
+    ? CYCLE_STATUS.ACTIVE
+    : CYCLE_STATUS.NOT_ACTIVE
+
+  const isStatusLoaded = Boolean(cycleStatus)
+  const [statusState, setStatusState] = useState(cycleStatus)
 
   const titleStatesLabels = new Map([
     [CYCLE_STATUS.ACTIVE, intl.formatMessage(messages.activeCycleTitleOption)],
@@ -48,7 +66,10 @@ const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties
       <Flex alignItems="center">
         <Menu placement="bottom-end">
           {({ isOpen }) => (
-            <>
+            <Skeleton
+              isLoaded={Boolean(statusState)}
+              {...buildSkeletonMinSize(isStatusLoaded, 150, 20)}
+            >
               <MenuButton
                 as={Button}
                 borderWidth={1}
@@ -62,14 +83,15 @@ const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties
                 py="0.35rem"
                 h="auto"
                 fontSize="sm"
+                width={110}
                 iconSpacing={12}
                 rightIcon={
                   <ChevronDown
                     desc="menu"
+                    ml={5}
                     fontSize="xs"
                     fill="current"
                     stroke="current"
-                    right={2}
                     transition="0.2s transform ease-in"
                     transform={isOpen ? 'rotate(180deg)' : 'none'}
                   />
@@ -118,7 +140,7 @@ const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties
                   </MenuItem>
                 ))}
               </MenuList>
-            </>
+            </Skeleton>
           )}
         </Menu>
       </Flex>

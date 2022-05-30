@@ -22,14 +22,8 @@ export interface CyclesListBodyProperties {
   handleDragEnd?: (result: DropResult) => void
 }
 
-// TODO: tirar o array default de **cyclesIDs**
-const CyclesListBody = ({ cyclesIDs = ['1'], ...rest }: CyclesListBodyProperties) => {
-  // Return cyclesIDs && <CyclesBody cyclesIDs={cyclesIDs} {...rest} />
-  return cyclesIDs && cyclesIDs.length > 0 ? (
-    <CyclesBody cyclesIDs={cyclesIDs} {...rest} />
-  ) : (
-    <Box />
-  )
+const CyclesListBody = ({ cyclesIDs, ...rest }: CyclesListBodyProperties) => {
+  return cyclesIDs ? <CyclesBody cyclesIDs={cyclesIDs} {...rest} /> : <Box />
 }
 
 export default CyclesListBody

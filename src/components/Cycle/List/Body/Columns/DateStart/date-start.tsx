@@ -1,26 +1,38 @@
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Skeleton, Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
+import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import CyclesListBodyColumnBase, {
   CyclesListBodyColumnBaseProperties,
 } from 'src/components/Cycle/List/Body/Columns/Base'
-import { KeyResult } from 'src/components/KeyResult/types'
+import { Cycle } from 'src/components/Cycle/types'
+import buildPartialSelector from 'src/state/recoil/cycle/build-partial-selector'
 
 export interface CyclesListBodyColumnDateStartProperties
   extends CyclesListBodyColumnBaseProperties {
-  id?: KeyResult['id']
+  id?: Cycle['id']
 }
+
+const dateStartSelector = buildPartialSelector<Cycle['dateStart']>('dateStart')
 
 const CyclesListBodyColumnDateStart = ({
   id,
 }: CyclesListBodyColumnDateStartProperties): ReactElement => {
   const intl = useIntl()
+  const dateStart = useRecoilValue(dateStartSelector(id))
+  const isdateStartLoaded = Boolean(dateStart)
 
   return (
     <CyclesListBodyColumnBase>
       <Flex gridGap={2} flexDir="column">
-        <Text>{intl.formatDate('2022-01-01T03:00:00.000Z')}</Text>
+        <Skeleton
+          isLoaded={isdateStartLoaded}
+          {...buildSkeletonMinSize(isdateStartLoaded, 100, 20)}
+        >
+          <Text>{intl.formatDate(dateStart)}</Text>
+        </Skeleton>
       </Flex>
     </CyclesListBodyColumnBase>
   )

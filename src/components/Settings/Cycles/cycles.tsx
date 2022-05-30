@@ -1,18 +1,18 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
 import { without } from 'lodash'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 
 import CyclesList from 'src/components/Cycle/List'
 import { CYCLE_LIST_COLUMN } from 'src/components/Cycle/List/Body/Columns/constants'
+import { useGetCycle } from 'src/components/Cycle/hooks'
 
 import messages from './messages'
-// Import { useGetCycle } from 'src/components/Cycle/hooks'
 
 const SettingsCycles = () => {
-  // Const { data, loading } = useGetCycle()
+  const { data: cycles, loading: cyclesLoading } = useGetCycle()
 
-  // const cycleIds = useMemo(() => data.map(({ id }) => id), [data])
+  const cycleIds = useMemo(() => cycles.map(({ id }) => id), [cycles])
   const intl = useIntl()
 
   const columns = without([
@@ -45,7 +45,7 @@ const SettingsCycles = () => {
           {intl.formatMessage(messages.createCycleButton)}
         </Button>
       </Heading>
-      <CyclesList pt={10} columns={columns} />
+      <CyclesList pt={10} cycleIDs={cycleIds} isLoading={cyclesLoading} columns={columns} />
     </Flex>
   )
 }
