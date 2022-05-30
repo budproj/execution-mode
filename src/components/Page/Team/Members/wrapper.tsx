@@ -20,7 +20,6 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
   const [isLoaded, setIsLoaded] = useState(false)
   const team = useRecoilValue(teamAtomFamily(teamID))
   const [teamMembers, setTeamMemberEdges] = useConnectionEdges(team?.users?.edges)
-  console.log({ teamMembers })
   const [loadUsersOnRecoil] = useRecoilFamilyLoader<User>(userAtomFamily)
 
   const hasAddMembersPermission = team?.users?.policy?.create === GraphQLEffect.ALLOW
