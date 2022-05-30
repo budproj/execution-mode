@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
 import { OKRsSkeleton } from 'src/components/Objective/OKRsSkeleton/wrapper'
@@ -10,11 +10,6 @@ import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { isReloadNecessary, objectiveAtomFamily } from '../../../state/recoil/objective'
-import { teamActiveObjectives } from '../../../state/recoil/team/active-objectives'
-import {
-  ObjectivesViewMode,
-  teamObjectivesViewMode,
-} from '../../../state/recoil/team/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnection } from '../../types'
@@ -35,37 +30,17 @@ export interface GetTeamActiveObjectivesQuery {
 }
 
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
-  const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
-  const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
 
-  const [objectiveEdges, setObjectiveEdges, _, isRemoteDataLoaded] = useConnectionEdges<Objective>()
+  const [objectiveEdges, _, __, isRemoteDataLoaded] = useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
 
-  const { called, refetch } = useQuery<GetTeamActiveObjectivesQuery>(
-    queries.GET_TEAM_ACTIVE_OBJECTIVES,
-    {
-      fetchPolicy: 'no-cache',
-      variables: { teamID },
-      notifyOnNetworkStatusChange: true,
-      onCompleted: ({ team }) => {
-        setActiveObjectives(team.activeObjectives?.edges ?? [])
-      },
-    },
-  )
-
-  const handleViewOldCycles = () => {
-    setObjectivesViewMode(ObjectivesViewMode.NOT_ACTIVE)
-  }
-
-  const handleRefetch = async () => {
-    void refetch({ teamID })
-  }
-
-  useEffect(() => {
-    if (called && activeObjectives) setObjectiveEdges(activeObjectives)
-  }, [called, activeObjectives, setObjectiveEdges])
+  const { refetch } = useQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
+    fetchPolicy: 'no-cache',
+    variables: { teamID },
+    notifyOnNetworkStatusChange: true,
+  })
 
   useEffect(() => {
     if (isRemoteDataLoaded) setCycleObjectives(objectiveEdges)

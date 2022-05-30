@@ -1,5 +1,5 @@
 import { Stack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
 import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
@@ -14,7 +14,6 @@ import { isReloadNecessary, objectiveAtomFamily } from '../../../state/recoil/ob
 import { userActiveObjectives } from '../../../state/recoil/user/active-objectives'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
-import { GraphQLConnectionPolicy } from '../../types'
 import { useGetUserObjectives } from '../hooks/getUserObjectives'
 import { User } from '../types'
 
@@ -27,13 +26,12 @@ export interface GetUserActiveObjectivesQuery {
 }
 
 export const UserActiveObjectives = ({ userID }: UserActiveObjectivesProperties) => {
-  const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [activeObjectives, setActiveObjectives] = useRecoilState(userActiveObjectives(userID))
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const { called, refetch } = useGetUserObjectives(
     { ownerId: userID },
-    { setObjetives: setActiveObjectives, setObjectivesPolicy },
+    { setObjetives: setActiveObjectives },
   )
   const { dispatch: dispatchCreatedObjective } = useEvent(EventType.CREATED_OBJECTIVE)
 
