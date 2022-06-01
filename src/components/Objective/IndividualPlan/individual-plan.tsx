@@ -15,15 +15,16 @@ import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import { PageMetaHead } from 'src/components/Base'
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 import PageContent from 'src/components/Base/PageContent'
+import { PageHeader } from 'src/components/Base/PageHeader/wrapper'
 import { ActionMenu } from 'src/components/Cycle/ActionMenu/wrapper'
 import HistoryIcon from 'src/components/Icon/History'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import objectiveMessages from 'src/components/Objective/OKRsEmptyState/messages'
 import objectiveQueries from 'src/components/Objective/OKRsEmptyState/queries.gql'
 import { CreateDraftObjectiveQueryResult } from 'src/components/Objective/OKRsEmptyState/wrapper'
+import { TeamSectionWrapper } from 'src/components/Page/Team/Section/wrapper'
 import { UserObjectives } from 'src/components/User/Objectives/wrapper'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserfromList } from 'src/components/User/SelectFromList'
@@ -39,9 +40,6 @@ import {
   userObjectivesViewMode,
 } from 'src/state/recoil/user/objectives-view-mode'
 
-import { PageHeader } from '../../../Base/PageHeader/wrapper'
-import { TeamSectionWrapper } from '../../Team/Section/wrapper'
-
 import messages from './messages'
 import queries from './queries.gql'
 
@@ -50,7 +48,7 @@ interface IndividualOkrPageProperties {
   userID: string
 }
 
-const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
+export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
   const { data } = useQuery(queries.LIST_USERS_WITH_INDIVIDUAL_OKR)
   const [selectedUserID, setSelectedUserID] = useState<string>()
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
@@ -161,7 +159,6 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
 
   return (
     <PageContent background="new-gray.50">
-      <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
       <KeyResultSingleDrawer />
 
       <PageHeader>
@@ -238,5 +235,3 @@ const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
     </PageContent>
   )
 }
-
-export default IndividualOkrPage

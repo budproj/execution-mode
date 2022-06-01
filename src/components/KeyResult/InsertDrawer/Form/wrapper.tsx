@@ -1,6 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { Stack, FormControl } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -64,6 +65,12 @@ export const InsertKeyResultForm = ({
   const [createKeyResult, { data, error }] = useMutation<CreateKeyResultMutationResult>(
     queries.CREATE_KEY_RESULT,
   )
+  const router = useRouter()
+
+  const userIdQuery = router.query?.['user-id']
+  const userId = Array.isArray(userIdQuery) ? userIdQuery[0] : userIdQuery
+  const ownerID = isPersonalKR ? userId ?? currentUserID : currentUserID
+
   const initialValues: FormValues = {
     objectiveID,
     // eslint-disable-next-line unicorn/no-null
@@ -73,7 +80,7 @@ export const InsertKeyResultForm = ({
     format: KEY_RESULT_FORMAT.PERCENTAGE,
     initialValue: 0,
     goal: 100,
-    ownerID: currentUserID,
+    ownerID,
   }
 
   const validateFields = (values: FormValues): boolean => {
