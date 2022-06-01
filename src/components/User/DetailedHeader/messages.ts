@@ -33,8 +33,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     description: 'Quarterly progress chart tooltip message',
   },
   companyOKRTitle: {
-    defaultMessage: 'OKRs da {company}',
-    id: 'CmpXX/',
+    defaultMessage: 'OKRs {companypreposition} {company}',
+    id: '30/oaM',
     description: 'Company OKR title on the navigation tab',
   },
   individualOKRTitle: {

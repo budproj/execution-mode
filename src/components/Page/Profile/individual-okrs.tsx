@@ -134,36 +134,36 @@ const IndividualOkrPage = ({ intl, userData }: IndividualOkrPageProperties) => {
         </Flex>
       </PageHeader>
 
-      <HStack align="stretch" spacing="4rem" flex="1" w="100%">
-        <Box flexBasis="60%" maxWidth="60%">
+      <HStack align="stretch" spacing={8} flex="1" w="100%">
+        <Box flexGrow={1}>
           {userData ? <UserObjectives userID={userData.id} viewType={viewMode} /> : undefined}
         </Box>
-
-        <TeamSectionWrapper
-          minWidth="367px"
-          title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle)}
-        >
-          <SelectUserfromList
-            hasMenu
-            users={users}
-            avatarSubtitleType="role"
-            onSelect={handleSelect}
-          />
-          <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>
-            <ColorizedOverlay>
-              <DrawerContent>
-                <DrawerBody>
-                  {selectedUserID && (
-                    <UserProfile
-                      userID={selectedUserID}
-                      onUserDeactivation={handleUserDeactivation}
-                    />
-                  )}
-                </DrawerBody>
-              </DrawerContent>
-            </ColorizedOverlay>
-          </Drawer>
-        </TeamSectionWrapper>
+        <Box w="md" minW="md">
+          <TeamSectionWrapper
+            title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle)}
+          >
+            <SelectUserfromList
+              hasMenu
+              users={users}
+              avatarSubtitleType="role"
+              onSelect={handleSelect}
+            />
+            <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>
+              <ColorizedOverlay>
+                <DrawerContent>
+                  <DrawerBody>
+                    {selectedUserID && (
+                      <UserProfile
+                        userID={selectedUserID}
+                        onUserDeactivation={handleUserDeactivation}
+                      />
+                    )}
+                  </DrawerBody>
+                </DrawerContent>
+              </ColorizedOverlay>
+            </Drawer>
+          </TeamSectionWrapper>
+        </Box>
       </HStack>
     </PageContent>
   )

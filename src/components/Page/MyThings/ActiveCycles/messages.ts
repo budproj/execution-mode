@@ -20,8 +20,8 @@ type MyKeyResultsActiveCyclesPageMessage =
 
 export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   companyOKRTitle: {
-    defaultMessage: 'OKRs da {company}',
-    id: 'EG9UsD',
+    defaultMessage: 'OKRs {companypreposition} {company}',
+    id: 'dbh5MZ',
     description: 'Company OKR title of the page',
   },
   companyOKRSubTitle: {
@@ -36,8 +36,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   },
   individualOKRSubTitle: {
     defaultMessage:
-      'Os OKRs do Plano Individual são definido por você. Eles não interferem no progresso da empresa.',
-    id: 'vppqyA',
+      'Os OKRs do Plano Individual são definidos por você. Eles não interferem no progresso da empresa.',
+    id: '2j8jNS',
     description: 'Individual OKR subtitle of the page',
   },
   metaTitle: {

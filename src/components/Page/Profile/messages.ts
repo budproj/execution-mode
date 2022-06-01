@@ -22,13 +22,13 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     description: 'The page meta title',
   },
   companyOKRTitle: {
-    defaultMessage: 'OKRs da {company}',
-    id: 'EG9UsD',
+    defaultMessage: 'OKRs {companypreposition} {company}',
+    id: 'dbh5MZ',
     description: 'Company OKR title of the page',
   },
   individualOKRTitle: {
-    defaultMessage: 'Plano individual',
-    id: 'LwoUMm',
+    defaultMessage: 'Plano Individual',
+    id: 'GuD4W6',
     description: 'Individual OKR title of the page',
   },
 
@@ -52,8 +52,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   },
   individualOKRSubTitle: {
     defaultMessage:
-      'Veja os OKRs Individuais de { username }. Eles não interferem no progresso geral da empresa.',
-    id: 'Tsd4ry',
+      'Os OKRs do Plano Individual são definidos por cada pessoa. Eles não interferem no progresso da empresa.',
+    id: '32YYOa',
     description: 'Individual OKR subtitle of the page',
   },
   taskTitle: {

@@ -26,6 +26,7 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import tasksMessages from 'src/components/Page/MyThings/ActiveCycles/messages'
 import MyTasks from 'src/components/Page/MyThings/ActiveCycles/my-tasks'
 import { TASK_STATUS } from 'src/components/Task/constants'
+import { companyPreposition } from 'src/components/User/DetailedHeader/constants'
 import { User } from 'src/components/User/types'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { myThingsTasksQuery } from 'src/state/recoil/task'
@@ -72,6 +73,7 @@ const CompanyOkrPage = ({ userData, isUserLoading, intl }: ProfilePageProperties
               <Heading color="new-gray.800">
                 {intl.formatMessage(messages.companyOKRTitle, {
                   company: userData?.companies?.edges[0].node.name,
+                  companypreposition: companyPreposition(userData?.companies?.edges[0].node.gender),
                 })}
               </Heading>
             </Skeleton>

@@ -22,6 +22,7 @@ import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOw
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { TASK_STATUS } from 'src/components/Task/constants'
+import { companyPreposition } from 'src/components/User/DetailedHeader/constants'
 import { myThingsTasksQuery } from 'src/state/recoil/task'
 import selectUser from 'src/state/recoil/user/selector'
 
@@ -67,6 +68,7 @@ const CompanyOkrPage = ({ handleLineClick, intl, userID }: CompanyOkrPagePropert
             <Heading color="new-gray.800" mt={1}>
               {intl.formatMessage(messages.companyOKRTitle, {
                 company: user?.companies?.edges[0].node.name,
+                companypreposition: companyPreposition(user?.companies?.edges[0].node.gender),
               })}
             </Heading>
             <Text color="new-gray.600" fontWeight={500} mt={3}>

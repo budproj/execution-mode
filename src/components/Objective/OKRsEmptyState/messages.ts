@@ -31,8 +31,8 @@ export default defineMessages<ActiveObjectivesMessages>({
   },
 
   personalObjectivesEmptyStateMessage: {
-    defaultMessage: 'Você ainda não criou nenhum OKR no seu Plano Individual.',
-    id: 'uL69e4',
+    defaultMessage: 'Ainda não foram criados OKRs neste Plano Individual ',
+    id: 'OwHPoA',
     description: 'This message is displayed as the empty state message inside the User page',
   },
 

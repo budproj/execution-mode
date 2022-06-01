@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Text, Skeleton, Divider, Tag, Button } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text, Skeleton, Tag, Button, Divider } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -14,6 +14,7 @@ import { GraphQLEffect } from 'src/components/types'
 import { keyResultTypeAtom } from 'src/state/recoil/key-result'
 import { KeyResultType } from 'src/state/recoil/key-result/key-result-type'
 
+import { companyPreposition } from './constants'
 import messages from './messages'
 
 interface DetailedHeaderProperties {
@@ -34,7 +35,7 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
       paddingBottom="0"
       borderColor="new-gray.400"
       flex="unset"
-      boxShadow="with-stroke.dark"
+      boxShadow="md"
       borderBottom="1px solid #D9E2F6"
     >
       <Flex alignItems="center" justifyContent="space-between" paddingBottom={10}>
@@ -134,6 +135,10 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
             ) : undefined}
           </Flex>
         )}
+        {/* TODO: Quando o progresso individual for feito, substituir esta Flex abaixo. */}
+        {keyResultType === KeyResultType.PERSONAL && (
+          <Flex width="64px" height="101px" bg="transparent" />
+        )}
       </Flex>
       <Divider />
       <Flex>
@@ -153,6 +158,7 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
           {companyName ? (
             intl.formatMessage(messages.companyOKRTitle, {
               company: companyName,
+              companypreposition: companyPreposition(userData?.companies?.edges[0].node.gender),
             })
           ) : (
             <Skeleton isLoaded={false} width="100px" height="20px" />
