@@ -205,32 +205,33 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
         <Box flexGrow={1}>
           {userID ? <UserObjectives userID={userID} viewType={viewMode} /> : undefined}
         </Box>
-
-        <TeamSectionWrapper
-          minWidth="367px"
-          title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle)}
-        >
-          <SelectUserfromList
-            hasMenu
-            users={users}
-            avatarSubtitleType="role"
-            onSelect={handleSelect}
-          />
-          <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>
-            <ColorizedOverlay>
-              <DrawerContent>
-                <DrawerBody>
-                  {selectedUserID && (
-                    <UserProfile
-                      userID={selectedUserID}
-                      onUserDeactivation={handleUserDeactivation}
-                    />
-                  )}
-                </DrawerBody>
-              </DrawerContent>
-            </ColorizedOverlay>
-          </Drawer>
-        </TeamSectionWrapper>
+        <Box w="md" minW="md">
+          <TeamSectionWrapper
+            minWidth="367px"
+            title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle)}
+          >
+            <SelectUserfromList
+              hasMenu
+              users={users}
+              avatarSubtitleType="role"
+              onSelect={handleSelect}
+            />
+            <Drawer isOpen={isUserSidebarOpen} size="xl" onClose={handleClose}>
+              <ColorizedOverlay>
+                <DrawerContent>
+                  <DrawerBody>
+                    {selectedUserID && (
+                      <UserProfile
+                        userID={selectedUserID}
+                        onUserDeactivation={handleUserDeactivation}
+                      />
+                    )}
+                  </DrawerBody>
+                </DrawerContent>
+              </ColorizedOverlay>
+            </Drawer>
+          </TeamSectionWrapper>
+        </Box>
       </HStack>
     </PageContent>
   )
