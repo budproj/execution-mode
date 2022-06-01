@@ -2,6 +2,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { PageMetaHead } from 'src/components/Base'
 import { KeyResultInsertDrawer } from 'src/components/KeyResult/InsertDrawer/wrapper'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { IndividualOkrPage } from 'src/components/Objective/IndividualPlan'
@@ -13,6 +14,7 @@ import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
 import CompanyOkrPage from './company-okrs'
+import messages from './messages'
 
 const ActiveCyclesPage = () => {
   const keyResultType = useRecoilValue(keyResultTypeAtom)
@@ -27,6 +29,7 @@ const ActiveCyclesPage = () => {
 
   return (
     <>
+      <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
       <KeyResultInsertDrawer isPersonalKR />
 
       <DetailedHeader userData={user} />
