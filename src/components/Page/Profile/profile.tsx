@@ -2,6 +2,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import { KeyResultInsertDrawer } from 'src/components/KeyResult/InsertDrawer/wrapper'
 import { DetailedHeader } from 'src/components/User/DetailedHeader'
 import { useGetMyTasks } from 'src/components/User/hooks'
 import { keyResultTypeAtom } from 'src/state/recoil/key-result'
@@ -21,6 +22,8 @@ const ProfilePage = ({ userId }: ProfilePageProperties) => {
 
   return (
     <>
+      <KeyResultInsertDrawer isPersonalKR />
+
       <DetailedHeader userData={userData} isUserLoading={isUserLoading} />
 
       {keyResultType === KeyResultType.COMPANY &&
