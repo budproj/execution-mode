@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import {
   Button,
   Flex,
@@ -9,25 +9,32 @@ import {
   Drawer,
   DrawerContent,
   DrawerBody,
+  useToast,
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import { PageMetaHead } from 'src/components/Base'
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 import PageContent from 'src/components/Base/PageContent'
 import { PageHeader } from 'src/components/Base/PageHeader/wrapper'
+import { ActionMenu } from 'src/components/Cycle/ActionMenu/wrapper'
 import HistoryIcon from 'src/components/Icon/History'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
+import objectiveMessages from 'src/components/Objective/OKRsEmptyState/messages'
+import objectiveQueries from 'src/components/Objective/OKRsEmptyState/queries.gql'
+import { CreateDraftObjectiveQueryResult } from 'src/components/Objective/OKRsEmptyState/wrapper'
 import { TeamSectionWrapper } from 'src/components/Page/Team/Section/wrapper'
 import { UserObjectives } from 'src/components/User/Objectives/wrapper'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserfromList } from 'src/components/User/SelectFromList'
+import { useGetUserObjectives } from 'src/components/User/hooks/getUserObjectives'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
 import {
   ObjectivesViewMode,
   userObjectivesViewMode,
@@ -38,16 +45,25 @@ import queries from './queries.gql'
 
 interface IndividualOkrPageProperties {
   intl: ReturnType<typeof useIntl>
-  userData: User
+  userID: string
 }
 
-const IndividualOkrPage = ({ intl, userData }: IndividualOkrPageProperties) => {
+export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
   const { data } = useQuery(queries.LIST_USERS_WITH_INDIVIDUAL_OKR)
   const [selectedUserID, setSelectedUserID] = useState<string>()
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
   const [users, setUsers] = useConnectionEdges<User>(data?.users?.edges)
-  const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userData.id))
-  const { dispatch } = useEvent(EventType.PAGE_VIEW)
+  const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userID))
+  const setActiveObjectives = useSetRecoilState(userActiveObjectives(userID))
+  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
+  const { refetch } = useGetUserObjectives(
+    { ownerId: userID },
+    { setObjetives: setActiveObjectives },
+  )
+
+  const toast = useToast()
+  const { dispatch: dispatchPageView } = useEvent(EventType.PAGE_VIEW)
+  const { dispatch: dispatchCreatedObjective } = useEvent(EventType.CREATED_OBJECTIVE)
 
   const viewModeOptions = new Map([
     [
@@ -81,6 +97,11 @@ const IndividualOkrPage = ({ intl, userData }: IndividualOkrPageProperties) => {
     if (!isUserSidebarOpen) setSelectedUserID(undefined)
   }, [isUserSidebarOpen, setSelectedUserID])
 
+  useEffect(() => {
+    dispatchPageView({ pathname: '/my-things#individual-plan' })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const handleUserDeactivation = async () => {
     handleClose()
   }
@@ -91,28 +112,68 @@ const IndividualOkrPage = ({ intl, userData }: IndividualOkrPageProperties) => {
 
   useEffect(() => {
     if (data) {
-      const filteredData = data.users.edges.filter((edge: any) => edge.node.id !== userData?.id)
+      const filteredData = data.users.edges.filter((edge: any) => edge.node.id !== userID)
       setUsers(filteredData)
     }
-  }, [data, setUsers, userData])
+  }, [data, setUsers, userID])
 
-  useEffect(() => {
-    dispatch({ pathname: '/profile#individual-plan' })
-  }, [dispatch])
+  const [createDraftObjective] = useMutation<CreateDraftObjectiveQueryResult>(
+    objectiveQueries.CREATE_DRAFT_OBJECTIVE,
+    {
+      variables: {
+        title: intl.formatMessage(objectiveMessages.draftObjectiveTitle),
+        ownerID: userID,
+        // eslint-disable-next-line unicorn/no-null
+        teamID: null,
+      },
+      onCompleted: async (data) => {
+        toast({
+          title: intl.formatMessage(objectiveMessages.draftObjectiveSuccessToastMessage),
+          status: 'success',
+        })
+
+        setObjectiveIDToEditMode(data.createObjective.id)
+        dispatchCreatedObjective({ isPersonal: true, userId: userID })
+      },
+      onError: () => {
+        toast({
+          title: intl.formatMessage(objectiveMessages.draftObjectiveErrorToastMessage),
+          status: 'error',
+        })
+      },
+    },
+  )
+
+  const handleDraftObjectiveCreation = (cycleID?: string) => {
+    void createDraftObjective({
+      variables: {
+        cycleID,
+      },
+    })
+
+    void refetch({
+      ownerId: userID,
+      active: viewMode === ObjectivesViewMode.ACTIVE,
+    })
+  }
 
   return (
     <PageContent background="new-gray.50">
-      <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
       <KeyResultSingleDrawer />
 
       <PageHeader>
-        <Flex alignItems="center" justifyContent="space-between">
+        <Flex
+          alignItems={['flex-start', 'flex-start', 'flex-start', 'center']}
+          justifyContent={['flex-start', 'flex-start', 'flex-start', 'space-between']}
+          direction={['column', 'column', 'column', 'row']}
+          gap={6}
+        >
           <Box>
             <Heading color="new-gray.800" mt={1}>
               {intl.formatMessage(messages.individualOKRTitle)}
             </Heading>
             <Text color="new-gray.600" fontWeight={500} mt={3}>
-              {intl.formatMessage(messages.individualOKRSubTitle, { username: userData.firstName })}
+              {intl.formatMessage(messages.individualOKRSubTitle)}
             </Text>
           </Box>
 
@@ -130,13 +191,19 @@ const IndividualOkrPage = ({ intl, userData }: IndividualOkrPageProperties) => {
             >
               {viewModeConfig?.label}
             </Button>
+
+            <ActionMenu onCreateOKR={handleDraftObjectiveCreation}>
+              <Button background="brand.500" color="white">
+                {intl.formatMessage(messages.createObjectiveButtonTitle)}
+              </Button>
+            </ActionMenu>
           </Flex>
         </Flex>
       </PageHeader>
 
-      <HStack align="stretch" spacing="4rem" flex="1" w="100%">
-        <Box flexBasis="60%" maxWidth="60%">
-          {userData ? <UserObjectives userID={userData.id} viewType={viewMode} /> : undefined}
+      <HStack align="stretch" spacing={8} flex="1" w="100%">
+        <Box flexGrow={1}>
+          {userID ? <UserObjectives userID={userID} viewType={viewMode} /> : undefined}
         </Box>
 
         <TeamSectionWrapper
@@ -168,5 +235,3 @@ const IndividualOkrPage = ({ intl, userData }: IndividualOkrPageProperties) => {
     </PageContent>
   )
 }
-
-export default IndividualOkrPage
