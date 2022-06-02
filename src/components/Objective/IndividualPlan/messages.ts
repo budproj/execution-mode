@@ -17,8 +17,8 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   },
   individualOKRSubTitle: {
     defaultMessage:
-      'Os OKRs do Plano Individual são definido por você. Eles não interferem no progresso da empresa.',
-    id: 'vppqyA',
+      'Os OKRs do Plano Individual são definidos por cada pessoa. Eles não interferem no progresso da empresa.',
+    id: '32YYOa',
     description: 'Individual OKR subtitle of the page',
   },
 

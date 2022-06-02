@@ -35,7 +35,7 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
       paddingBottom="0"
       borderColor="new-gray.400"
       flex="unset"
-      boxShadow="md"
+      boxShadow="0px 0px 50px rgba(83, 83, 191, 0.1)"
       borderBottom="1px solid #D9E2F6"
     >
       <Flex alignItems="center" justifyContent="space-between" paddingBottom={10}>

@@ -1,12 +1,3 @@
-query LIST_NOT_ACTIVE_CYCLES {
-  cycles(active: false) {
-    edges {
-      node {
-        id
-      }
-    }
-  }
-}
 query LIST_USERS_WITH_INDIVIDUAL_OKR {
   users(onlyWithIndividualObjectives: true) {
   edges {
@@ -21,5 +12,22 @@ query LIST_USERS_WITH_INDIVIDUAL_OKR {
       linkedInProfileAddress
     }
   }
+  }
+}
+
+query GET_USER_ACCESS_TO_CREATE_OBJECTIVES {
+  me {
+    id
+    companies {
+      edges {
+        node {
+          objectives {
+            policy {
+              create
+            }
+          }
+        }
+      }
+    }
   }
 }

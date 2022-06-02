@@ -21,6 +21,7 @@ query GET_USER_NAMED_AVATAR_DATA {
         node {
           id
           name
+          gender
         }
       }
     }
