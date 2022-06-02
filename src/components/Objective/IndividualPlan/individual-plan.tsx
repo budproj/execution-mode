@@ -231,7 +231,6 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
         </Box>
         <Box w="md" minW="md">
           <TeamSectionWrapper
-            minWidth="367px"
             title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle)}
           >
             <SelectUserfromList
