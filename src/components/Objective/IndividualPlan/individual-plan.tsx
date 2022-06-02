@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import {
   Button,
   Flex,
@@ -30,6 +30,7 @@ import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserfromList } from 'src/components/User/SelectFromList'
 import { useGetUserObjectives } from 'src/components/User/hooks/getUserObjectives'
 import { User } from 'src/components/User/types'
+import { GraphQLEffect } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
@@ -48,10 +49,15 @@ interface IndividualOkrPageProperties {
   userID: string
 }
 
+type GetUserAccessToCreateObjectivesResult = {
+  me: User
+}
+
 export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
   const { data } = useQuery(queries.LIST_USERS_WITH_INDIVIDUAL_OKR)
   const [selectedUserID, setSelectedUserID] = useState<string>()
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
+  const [canCreateObjectives, setCanCreateObjectives] = useState(false)
   const [users, setUsers] = useConnectionEdges<User>(data?.users?.edges)
   const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userID))
   const setActiveObjectives = useSetRecoilState(userActiveObjectives(userID))
@@ -69,6 +75,7 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
     [
       ObjectivesViewMode.ACTIVE,
       {
+        isObjectiveCreationPossible: true,
         label: intl.formatMessage(messages.historyButtonTitle),
         action: () => setViewMode(ObjectivesViewMode.NOT_ACTIVE),
       },
@@ -76,6 +83,7 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
     [
       ObjectivesViewMode.NOT_ACTIVE,
       {
+        isObjectiveCreationPossible: false,
         label: intl.formatMessage(messages.backToThePresentButtonTitle),
         action: () => setViewMode(ObjectivesViewMode.ACTIVE),
       },
@@ -96,11 +104,6 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
     // eslint-disable-next-line unicorn/no-useless-undefined
     if (!isUserSidebarOpen) setSelectedUserID(undefined)
   }, [isUserSidebarOpen, setSelectedUserID])
-
-  useEffect(() => {
-    dispatchPageView({ pathname: '/my-things#individual-plan' })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   const handleUserDeactivation = async () => {
     handleClose()
@@ -144,6 +147,19 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
     },
   )
 
+  const [fetchActiveCycles] = useLazyQuery<GetUserAccessToCreateObjectivesResult>(
+    queries.GET_USER_ACCESS_TO_CREATE_OBJECTIVES,
+    {
+      onCompleted: ({ me }) => {
+        const isSameUser = userID === me.id
+        const isUserAllowedToCreateObjectiveInCompany =
+          me?.companies?.edges[0].node.objectives?.policy.create === GraphQLEffect.ALLOW
+
+        setCanCreateObjectives(isSameUser || isUserAllowedToCreateObjectiveInCompany)
+      },
+    },
+  )
+
   const handleDraftObjectiveCreation = (cycleID?: string) => {
     void createDraftObjective({
       variables: {
@@ -156,6 +172,12 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
       active: viewMode === ObjectivesViewMode.ACTIVE,
     })
   }
+
+  useEffect(() => {
+    dispatchPageView({ pathname: '/my-things#individual-plan' })
+    fetchActiveCycles()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <PageContent background="new-gray.50">
@@ -192,11 +214,13 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
               {viewModeConfig?.label}
             </Button>
 
-            <ActionMenu onCreateOKR={handleDraftObjectiveCreation}>
-              <Button background="brand.500" color="white">
-                {intl.formatMessage(messages.createObjectiveButtonTitle)}
-              </Button>
-            </ActionMenu>
+            {viewModeConfig?.isObjectiveCreationPossible && canCreateObjectives && (
+              <ActionMenu onCreateOKR={handleDraftObjectiveCreation}>
+                <Button background="brand.500" color="white">
+                  {intl.formatMessage(messages.createObjectiveButtonTitle)}
+                </Button>
+              </ActionMenu>
+            )}
           </Flex>
         </Flex>
       </PageHeader>
