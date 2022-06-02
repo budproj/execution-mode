@@ -1,4 +1,4 @@
-query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
+query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!, $withTeams: Boolean! = true) {
   objective(id: $objectiveID) {
     id
     keyResults(order: { createdAt: ASC }) {
@@ -8,7 +8,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
           title
           format
           type
-          delta{
+          delta {
             progress
           }
           goal
@@ -42,7 +42,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!) {
               }
             }
           }
-          team {
+          team @include(if: $withTeams) {
             name
           }
           objective {

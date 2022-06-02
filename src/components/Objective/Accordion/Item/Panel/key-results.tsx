@@ -7,6 +7,7 @@ import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
+import { Team } from 'src/components/Team/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
@@ -23,6 +24,7 @@ export interface ObjectiveKeyResultsProperties {
   objectiveID?: Objective['id']
   mode: ObjectiveMode
   isDisabled?: boolean
+  teamID?: Team['id']
 }
 
 export interface GetObjectiveKeyResultsQuery {
@@ -34,6 +36,7 @@ const selectKeyResultIDs = (keyResults?: KeyResult[]) =>
 
 export const ObjectiveKeyResults = ({
   objectiveID,
+  teamID,
   mode,
   isDisabled,
   ...rest
@@ -49,6 +52,7 @@ export const ObjectiveKeyResults = ({
       fetchPolicy: 'network-only',
       variables: {
         objectiveID,
+        withTeams: Boolean(teamID),
       },
       onCompleted: (data) => {
         loadObjective(data.objective)

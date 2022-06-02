@@ -3,6 +3,9 @@ import { Stack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 
+import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
+import { OKRsSkeleton } from 'src/components/Objective/OKRsSkeleton/wrapper'
+
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleFilters } from '../../../state/hooks/useCycleFilters/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
@@ -16,8 +19,6 @@ import {
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnection } from '../../types'
-import { TeamOKRsEmptyState } from '../OKRsEmptyState/wrapper'
-import { TeamOKRsSkeleton } from '../OKRsSkeleton/wrapper'
 
 import queries from './queries.gql'
 import { TimeMachineController } from './time-machine-controller'
@@ -82,7 +83,7 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
 
       {isLoaded ? (
         filteredObjectiveCycles.length === 0 ? (
-          <TeamOKRsEmptyState teamID={teamID} />
+          <OKRsEmptyState />
         ) : (
           filteredObjectiveCycles.map(([cycle, objectiveIDs]) => (
             <CycleObjectives
@@ -95,7 +96,7 @@ export const TeamNotActiveObjectives = ({ teamID }: TeamNotActiveObjectivesPrope
           ))
         )
       ) : (
-        <TeamOKRsSkeleton />
+        <OKRsSkeleton />
       )}
     </Stack>
   )

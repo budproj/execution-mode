@@ -1,9 +1,0 @@
-query LIST_NOT_ACTIVE_CYCLES {
-  cycles(active: false) {
-    edges {
-      node {
-        id
-      }
-    }
-  }
-}

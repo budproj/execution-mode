@@ -2,6 +2,9 @@ import { Stack, AccordionIcon, Heading, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
+
 import buildSkeletonMinSize from '../../../../../../lib/chakra/build-skeleton-min-size'
 import { PercentageProgressIncreaseTag } from '../../../../Base'
 import TooltipWithDelay from '../../../../Base/TooltipWithDelay'
@@ -13,11 +16,18 @@ import messages from './messages'
 interface ViewModeProperties {
   isLoaded?: boolean
   objective?: Partial<Objective>
-  teamID?: string
+  userID?: User['id']
+  teamID?: Team['id']
   isDisabled?: boolean
 }
 
-export const ViewMode = ({ objective, isLoaded, teamID, isDisabled }: ViewModeProperties) => {
+export const ViewMode = ({
+  objective,
+  isLoaded,
+  userID,
+  teamID,
+  isDisabled,
+}: ViewModeProperties) => {
   const intl = useIntl()
 
   return (
@@ -71,6 +81,7 @@ export const ViewMode = ({ objective, isLoaded, teamID, isDisabled }: ViewModePr
 
             <ObjectiveAccordionMenu
               teamID={teamID}
+              userID={userID}
               objectiveID={objective?.id}
               isLoaded={isLoaded}
             />

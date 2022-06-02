@@ -5,6 +5,8 @@ import { useRecoilValue } from 'recoil'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { Objective } from 'src/components/Objective/types'
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
 import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
 import { objectiveContext, ObjectiveMode } from 'src/state/recoil/objective/context'
 
@@ -16,7 +18,8 @@ import { ViewMode } from './view-mode'
 
 export interface ObjectiveAccordionButtonProperties {
   objective?: Partial<Objective>
-  teamID?: string
+  userID?: User['id']
+  teamID?: Team['id']
   confidenceTag?: ConfidenceTag
   isLoaded?: boolean
   isDisabled?: boolean
@@ -24,6 +27,7 @@ export interface ObjectiveAccordionButtonProperties {
 
 export const ObjectiveAccordionButton = ({
   objective,
+  userID,
   teamID,
   confidenceTag,
   isLoaded,
@@ -58,6 +62,7 @@ export const ObjectiveAccordionButton = ({
           <ViewMode
             isLoaded={isLoaded}
             teamID={teamID}
+            userID={userID}
             objective={objective}
             isDisabled={isDisabled}
           />

@@ -1,8 +1,11 @@
 import { useMutation } from '@apollo/client'
 import { Stack, FormControl } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+
+import { Team } from 'src/components/Team/types'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
 import meAtom from '../../../../state/recoil/user/me'
@@ -20,7 +23,7 @@ import { TitleInput } from './title'
 
 export type FormValues = {
   objectiveID?: string
-  teamID?: string
+  teamID?: Team['id'] | null
   title: string
   description: string
   format: KEY_RESULT_FORMAT
@@ -31,11 +34,12 @@ export type FormValues = {
 
 interface InsertKeyResultFormProperties {
   onClose?: () => void
-  onSuccess?: () => void
+  onSuccess?: (currentUserID: string) => void
   onError?: () => void
   onValidationError?: () => void
   objectiveID?: string
-  teamID?: string
+  teamID?: Team['id'] | null
+  isPersonalKR?: boolean
 }
 
 interface CreateKeyResultMutationResult {
@@ -53,6 +57,7 @@ export const InsertKeyResultForm = ({
   onValidationError,
   objectiveID,
   teamID,
+  isPersonalKR,
 }: InsertKeyResultFormProperties) => {
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
   const currentUserID = useRecoilValue(meAtom)
@@ -60,15 +65,22 @@ export const InsertKeyResultForm = ({
   const [createKeyResult, { data, error }] = useMutation<CreateKeyResultMutationResult>(
     queries.CREATE_KEY_RESULT,
   )
+  const router = useRouter()
+
+  const userIdQuery = router.query?.['user-id']
+  const userId = Array.isArray(userIdQuery) ? userIdQuery[0] : userIdQuery
+  const ownerID = isPersonalKR ? userId ?? currentUserID : currentUserID
+
   const initialValues: FormValues = {
     objectiveID,
-    teamID,
+    // eslint-disable-next-line unicorn/no-null
+    teamID: teamID ?? null,
     title: '',
     description: '',
     format: KEY_RESULT_FORMAT.PERCENTAGE,
     initialValue: 0,
     goal: 100,
-    ownerID: currentUserID,
+    ownerID,
   }
 
   const validateFields = (values: FormValues): boolean => {
@@ -99,10 +111,10 @@ export const InsertKeyResultForm = ({
 
   useEffect(() => {
     if (data && !error) {
-      if (onSuccess) onSuccess()
+      if (onSuccess) onSuccess(currentUserID)
       setLastInsertedKeyResultID(data.createKeyResult.id)
     }
-  }, [data, error, onSuccess, setLastInsertedKeyResultID])
+  }, [data, error, currentUserID, onSuccess, setLastInsertedKeyResultID])
 
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
@@ -125,7 +137,7 @@ export const InsertKeyResultForm = ({
             <GoalInput />
           </Stack>
 
-          <OwnerInput />
+          {isPersonalKR ? undefined : <OwnerInput />}
 
           <FormActions onClose={onClose} />
         </FormControl>

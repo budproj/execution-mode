@@ -619,6 +619,10 @@
     "defaultMessage": "Desativar usuári{gender, select, MALE {o} FEMALE {a} other {o}}",
     "description": "This text is used in our deactivate user button in the profile sidebar in our team page"
   },
+  "bgdTCS": {
+    "defaultMessage": "Planejamento Individual",
+    "description": "Individual OKR title on the navigation tab"
+  },
   "bh8jgN": {
     "defaultMessage": "novo!",
     "description": "The text inside the tag to inform new buttons"
@@ -1038,6 +1042,10 @@
   "gu4aCE": {
     "defaultMessage": "Anual",
     "description": "This text is used as prefix for our yearly cadences"
+  },
+  "GuD4W6": {
+    "defaultMessage": "Plano Individual",
+    "description": "Individual OKR title of the page"
   },
   "gXiIKg": {
     "defaultMessage": "Baixa confiança",
@@ -1479,6 +1487,10 @@
     "defaultMessage": "Não existem resultados-chave com esse Nível de confiança.",
     "description": "Tooltip content for health strategy box without key results"
   },
+  "LwoUMm": {
+    "defaultMessage": "Plano individual",
+    "description": "Individual OKR title of the page"
+  },
   "M0RYZa": {
     "defaultMessage": "Salvar",
     "description": "This is a button label displayed inside the insert key-result drawer. This is the second button"
@@ -1654,6 +1666,10 @@
   "OErdYA": {
     "defaultMessage": "Um ícone de tres pontos, indicando que ao clicar aqui um menu se expandirá",
     "description": "The description for screen readers regarding the three dots above the objectives accordion"
+  },
+  "oGyXN5": {
+    "defaultMessage": "Colegas com plano individual",
+    "description": "Friends with individual OKRs title"
   },
   "OMUZ7w": {
     "defaultMessage": "Feminino",
@@ -1995,6 +2011,10 @@
     "defaultMessage": "Minha conta",
     "description": "This label defines the text on the first menu section option"
   },
+  "t0t6MQ": {
+    "defaultMessage": "Voltar ao presente",
+    "description": "The button title to go back to the present"
+  },
   "t0YKyV": {
     "defaultMessage": "Confirmar",
     "description": "This message is used as the confirmation button when we are in the confirmation dialog"
@@ -2059,6 +2079,10 @@
     "defaultMessage": "{confidence, select, roadblock {All key results with {confidence}} other {All {confidence} key results}}",
     "description": "The title for the dashboard key results modal"
   },
+  "Tsd4ry": {
+    "defaultMessage": "Veja os OKRs Individuais de { username }. Eles não interferem no progresso geral da empresa.",
+    "description": "Individual OKR subtitle of the page"
+  },
   "txi+kN": {
     "defaultMessage": "Idioma",
     "description": "The user locale input placeholder while creating a new workspace"
@@ -2102,6 +2126,10 @@
   "ui441M": {
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
+  },
+  "uL69e4": {
+    "defaultMessage": "Você ainda não criou nenhum OKR no seu Plano Individual.",
+    "description": "This message is displayed as the empty state message inside the User page"
   },
   "UN5BY2": {
     "defaultMessage": "EXCLUIR",
@@ -2194,6 +2222,14 @@
   "VNHZWm": {
     "defaultMessage": "Período",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
+  },
+  "VPJIpc": {
+    "defaultMessage": "OKRs",
+    "description": "This message is displayed above the empty state inside the active cycles section at the User page"
+  },
+  "vppqyA": {
+    "defaultMessage": "Os OKRs do Plano Individual são definido por você. Eles não interferem no progresso da empresa.",
+    "description": "Individual OKR subtitle of the page"
   },
   "VSS4F8": {
     "defaultMessage": "{unit, select, fallback {desde {date}} other {{date}}}",
@@ -2391,6 +2427,10 @@
     "defaultMessage": "Um ícone de seta para cima, indicando que o progresso aumentou",
     "description": "This desc message explains the increase icon for screen readers"
   },
+  "Y8TWo2": {
+    "defaultMessage": "Plano Individual",
+    "description": "Individual OKR title on the navigation tab"
+  },
   "YETxgV": {
     "defaultMessage": "Em OKRs, costuma-se mirar em atingir ao menos 70% das metas. Para atingir esse patamar até o fim do ciclo, o progresso atual esperado é de 67%.",
     "description": "Tooltip message to show when hovering the help icon on projected progress"
@@ -2540,7 +2580,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-05-24T14:39:05Z",
+    "defaultMessage": "2022-05-30T20:49:24Z",
     "description": null
   }
 }

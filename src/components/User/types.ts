@@ -47,3 +47,7 @@ export interface UserProgress {
 export interface UserQuery {
   user: User
 }
+
+export interface UserMeQuery {
+  me: User
+}

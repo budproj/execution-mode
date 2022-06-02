@@ -4,6 +4,8 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
 
 import { objectiveAtomFamily } from '../../../../state/recoil/objective'
 import { teamAtomFamily } from '../../../../state/recoil/team'
@@ -16,13 +18,15 @@ import { DeleteObjectiveOption } from './option-delete-objective'
 import { UpdateObjectiveOption } from './option-update-objective'
 
 interface ObjectiveAccordionMenuProperties {
-  teamID?: string
+  teamID?: Team['id']
+  userID?: User['id']
   objectiveID?: string
   isLoaded?: boolean
 }
 
 export const ObjectiveAccordionMenu = ({
   teamID,
+  userID,
   objectiveID,
   isLoaded,
 }: ObjectiveAccordionMenuProperties) => {
@@ -30,7 +34,8 @@ export const ObjectiveAccordionMenu = ({
   const team = useRecoilValue(teamAtomFamily(teamID))
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
 
-  const canCreateKeyResult = team?.keyResults?.policy?.create === GraphQLEffect.ALLOW
+  const policyHolder = userID ? objective : team
+  const canCreateKeyResult = policyHolder?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
   const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
   const hasAnyOptions = !isLoaded || canCreateKeyResult || canUpdateObjective || canDeleteObjective
@@ -63,7 +68,7 @@ export const ObjectiveAccordionMenu = ({
           {canCreateKeyResult && <CreateKeyResultOption objectiveID={objectiveID} />}
           {canUpdateObjective && <UpdateObjectiveOption objectiveID={objectiveID} />}
           {canDeleteObjective && (
-            <DeleteObjectiveOption objectiveID={objectiveID} teamID={teamID} />
+            <DeleteObjectiveOption objectiveID={objectiveID} userID={userID} teamID={teamID} />
           )}
         </MenuList>
       </Menu>
