@@ -41,8 +41,8 @@ export default defineMessages<ObjectiveAccordionItemMessage>({
 
   progressTooltip: {
     defaultMessage:
-      'O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.',
-    id: 'kFrglO',
+      'O progresso do objetivo reflete a média dos seus resultados-chave e a menor confiança entre eles.',
+    id: 'A6+vC/',
     description: 'This tooltip explains how the progress of the objective is calculated',
   },
 
