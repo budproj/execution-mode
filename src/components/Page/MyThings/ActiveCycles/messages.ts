@@ -13,8 +13,8 @@ type MyKeyResultsActiveCyclesPageMessage =
 
 export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
   companyOKRTitle: {
-    defaultMessage: 'OKRs da {company}',
-    id: 'EG9UsD',
+    defaultMessage: 'OKRs {companypreposition} {company}',
+    id: 'dbh5MZ',
     description: 'Company OKR title of the page',
   },
   companyOKRSubTitle: {
