@@ -1,4 +1,5 @@
 import { Flex, Heading, Text, useToast } from '@chakra-ui/react'
+import { FormikHelpers } from 'formik'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -33,7 +34,10 @@ export const CreateCycle = ({
   const toast = useToast()
   const { createCycle, loading, error, data } = useCreateCycle()
 
-  const handleFormSubmission = async (values: CreateCycleFormValues) => {
+  const handleFormSubmission = async (
+    values: CreateCycleFormValues,
+    actions: FormikHelpers<CreateCycleFormValues>,
+  ) => {
     await createCycle({
       variables: {
         teamId,
@@ -41,6 +45,8 @@ export const CreateCycle = ({
         active: values.active === CYCLE_STATUS.ACTIVE,
       },
     })
+
+    actions.resetForm()
   }
 
   useEffect(() => {
