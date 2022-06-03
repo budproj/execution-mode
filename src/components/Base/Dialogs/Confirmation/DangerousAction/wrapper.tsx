@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ConfirmationDialogProperties } from '../Base/interface'
@@ -16,7 +16,7 @@ interface DangeousActionConfirmationProperties
   firstStageTitle: string
   firstStageDescription: string
   firstStageHeaderImageURL?: string
-  secondStageTitle?: string
+  secondStageTitle?: string | ReactNode
   secondStageDescription?: string
   secondStageHeaderImageURL?: string
 }

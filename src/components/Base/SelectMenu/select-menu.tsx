@@ -9,6 +9,7 @@ import {
   Spinner,
   StyleProps,
 } from '@chakra-ui/react'
+import Scrollbars from 'rc-scrollbars'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -114,9 +115,11 @@ const SelectMenu = ({
         overflow="hidden"
         zIndex={999}
       >
-        <MenuOptionGroup value={value} type="radio" onChange={onChange}>
-          {children}
-        </MenuOptionGroup>
+        <Scrollbars autoHeight>
+          <MenuOptionGroup value={value} type="radio" onChange={onChange}>
+            {children}
+          </MenuOptionGroup>
+        </Scrollbars>
       </MenuList>
     </Menu>
   )

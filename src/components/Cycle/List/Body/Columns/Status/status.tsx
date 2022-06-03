@@ -8,6 +8,7 @@ import {
   MenuList,
   Skeleton,
   Text,
+  useToast,
 } from '@chakra-ui/react'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -18,6 +19,7 @@ import CyclesListBodyColumnBase, {
   CyclesListBodyColumnBaseProperties,
 } from 'src/components/Cycle/List/Body/Columns/Base'
 import { CYCLE_STATUS } from 'src/components/Cycle/constants'
+import { useUpdateCycle } from 'src/components/Cycle/hooks'
 import { Cycle } from 'src/components/Cycle/types'
 import { Check, ChevronDown } from 'src/components/Icon'
 import buildPartialSelector from 'src/state/recoil/cycle/build-partial-selector'
@@ -32,6 +34,8 @@ const statusSelector = buildPartialSelector<Cycle['active']>('active')
 
 const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties): ReactElement => {
   const intl = useIntl()
+  const { updateCycle, loading, error, data } = useUpdateCycle()
+  const toast = useToast()
 
   const cycleStatus = useRecoilValue(statusSelector(id))
     ? CYCLE_STATUS.ACTIVE
@@ -40,6 +44,15 @@ const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties
   const isStatusLoaded = Boolean(cycleStatus)
 
   const [statusState, setStatusState] = useState<CYCLE_STATUS>()
+
+  const handleChangeCycleStatus = async (statusState: CYCLE_STATUS) => {
+    await updateCycle({
+      variables: {
+        id,
+        active: statusState === CYCLE_STATUS.ACTIVE,
+      },
+    })
+  }
 
   useEffect(() => {
     setStatusState(cycleStatus)
@@ -55,9 +68,28 @@ const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties
     [CYCLE_STATUS.NOT_ACTIVE, intl.formatMessage(messages.notActiveCycleDescriptionOption)],
   ])
 
-  const handleTaskFilterChange = (statusState: CYCLE_STATUS) => {
+  const handleSelectStatus = (statusState: CYCLE_STATUS) => {
     setStatusState(statusState)
+    handleChangeCycleStatus(statusState)
   }
+
+  useEffect(() => {
+    if (!loading) {
+      if (error) {
+        toast({
+          title: intl.formatMessage(messages.unknownErrorToastMessage),
+          status: 'error',
+        })
+      } else if (data) {
+        toast({
+          status: 'success',
+          title: intl.formatMessage(messages.successEditToastMessage, {
+            period: data.updateCycle.period,
+          }),
+        })
+      }
+    }
+  }, [loading, error, data, toast, intl])
 
   return (
     <CyclesListBodyColumnBase
@@ -125,7 +157,7 @@ const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties
                       fontSize="sm"
                       fontWeight={500}
                       transition="0.2s background-color, 0.2s color"
-                      onClick={() => handleTaskFilterChange(labelEnum)}
+                      onClick={() => handleSelectStatus(labelEnum)}
                     >
                       <Box>
                         <Flex gap={2}>

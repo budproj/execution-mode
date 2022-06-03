@@ -13,6 +13,8 @@ query GET_CYCLES {
                 active
                 dateStart
                 dateEnd
+                parentId     
+                teamId
               }
             }
           }

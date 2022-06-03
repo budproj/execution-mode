@@ -1,18 +1,32 @@
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
 import { without } from 'lodash'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilState } from 'recoil'
 
+import { CreateCycleModal } from 'src/components/Cycle/ActionModals/CreateCycleModal'
+import { UpdateCycleModal } from 'src/components/Cycle/ActionModals/UpdateCycleModal'
 import CyclesList from 'src/components/Cycle/List'
 import { CYCLE_LIST_COLUMN } from 'src/components/Cycle/List/Body/Columns/constants'
 import { useGetCycle } from 'src/components/Cycle/hooks'
+import { cyclesEditModalViewMode } from 'src/state/recoil/cycle/cycle-edit-modal-view-mode'
 
 import messages from './messages'
 
 const SettingsCycles = () => {
   const { data: cycles, loading: cyclesLoading } = useGetCycle()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const [{ cycleId, isOpened }, setIsOpened] = useRecoilState(cyclesEditModalViewMode)
+
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
+
+  const closeEditModal = () => setIsOpened({ cycleId: '', isOpened: false })
 
   const cycleIds = useMemo(() => cycles.map(({ id }) => id), [cycles])
+  const parents = useMemo(() => cycles.map(({ id, period }) => ({ id, label: period })), [cycles])
+
   const intl = useIntl()
 
   const columns = without([
@@ -41,11 +55,19 @@ const SettingsCycles = () => {
           bg="brand.500"
           color="black.50"
           _hover={{ background: 'brand.400', color: 'black.50' }}
+          onClick={openModal}
         >
           {intl.formatMessage(messages.createCycleButton)}
         </Button>
       </Heading>
       <CyclesList pt={10} cycleIDs={cycleIds} isLoading={cyclesLoading} columns={columns} />
+      <CreateCycleModal isOpen={isModalOpen} onCancel={closeModal} />
+      <UpdateCycleModal
+        isOpen={isOpened}
+        cycleId={cycleId}
+        parents={parents}
+        onCancel={closeEditModal}
+      />
     </Flex>
   )
 }
