@@ -255,6 +255,14 @@
     "defaultMessage": "Are you sure you want to to deactivate the user {name}?",
     "description": "This text is used in our delete dialog confirmation to explain to the user what will happen"
   },
+  "30/oaM": {
+    "defaultMessage": "{company}'s OKRs",
+    "description": "Company OKR title on the navigation tab"
+  },
+  "32YYOa": {
+    "defaultMessage": "The OKRs in Individual Plans are set by each person. They do not impact the progress of the company.",
+    "description": "Individual OKR subtitle of the page"
+  },
   "39q6ig": {
     "defaultMessage": "OKRs",
     "description": "This message is displayed above the empty state inside the active cycles section at the Team page"
@@ -535,6 +543,10 @@
     "defaultMessage": "Text document icon",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
   },
+  "A6+vC/": {
+    "defaultMessage": "The progress of the objective reflects the average of its key results and the lowest confidence level among them.",
+    "description": "This tooltip explains how the progress of the objective is calculated"
+  },
   "A6/DXF": {
     "defaultMessage": "Save",
     "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to save the edition of that field"
@@ -754,6 +766,10 @@
   "DB7Ai9": {
     "defaultMessage": "Save",
     "description": "Text in the save action button"
+  },
+  "dbh5MZ": {
+    "defaultMessage": "{company}’s OKRs",
+    "description": "Company OKR title of the page"
   },
   "DEMBaq": {
     "defaultMessage": "An icon of a plus sign, indicating that by clicking here you will open the sidebar for creating a key result",
@@ -1196,7 +1212,7 @@
     "description": "The label text above the Owner section in our key result single page or drawer"
   },
   "iLO8sl": {
-    "defaultMessage": "These tasks are not directed related to a key result. Use it to better organize your day and make it more productive. :)",
+    "defaultMessage": "These tasks are not directly related to a key result. Use them to better organize your day and make it more productive :)",
     "description": "The tooltip that shows when hovering over the personal tasks accordion title"
   },
   "ilU+Uz": {
@@ -1668,7 +1684,7 @@
     "description": "The description for screen readers regarding the three dots above the objectives accordion"
   },
   "oGyXN5": {
-    "defaultMessage": "Friends with Individual Plan",
+    "defaultMessage": "Colleagues with Individual Plan",
     "description": "Friends with individual OKRs title"
   },
   "OMUZ7w": {
@@ -1682,6 +1698,10 @@
   "or8fId": {
     "defaultMessage": "Back",
     "description": "This message is displayed as a label in the button on our not found error page"
+  },
+  "OwHPoA": {
+    "defaultMessage": "No OKRs have been created in this Individual Plan yet",
+    "description": "This message is displayed as the empty state message inside the User page"
   },
   "OwWiN7": {
     "defaultMessage": "Create new user",
@@ -1952,7 +1972,7 @@
     "description": "This message is displayed as the title of the time machine section in a team's page"
   },
   "SmMx3s": {
-    "defaultMessage": "Friends with individual plan",
+    "defaultMessage": "Colleagues with individual plan",
     "description": "Friends with individual OKRs title"
   },
   "Smwz9L": {
@@ -2580,7 +2600,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-05-30T20:49:03Z",
+    "defaultMessage": "2022-06-06T13:40:43Z",
     "description": null
   }
 }

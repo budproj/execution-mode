@@ -255,6 +255,14 @@
     "defaultMessage": "Tem certeza que deseja desativar {gender, select, MALE {o} FEMALE {a} other {o}} usuári{gender, select, MALE {o} FEMALE {a} other {o}} {name}?",
     "description": "This text is used in our delete dialog confirmation to explain to the user what will happen"
   },
+  "30/oaM": {
+    "defaultMessage": "OKRs {companypreposition} {company}",
+    "description": "Company OKR title on the navigation tab"
+  },
+  "32YYOa": {
+    "defaultMessage": "Os OKRs do Plano Individual são definidos por cada pessoa. Eles não interferem no progresso da empresa.",
+    "description": "Individual OKR subtitle of the page"
+  },
   "39q6ig": {
     "defaultMessage": "OKRs",
     "description": "This message is displayed above the empty state inside the active cycles section at the Team page"
@@ -535,6 +543,10 @@
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
   },
+  "A6+vC/": {
+    "defaultMessage": "O progresso do objetivo reflete a média dos seus resultados-chave e a menor confiança entre eles.",
+    "description": "This tooltip explains how the progress of the objective is calculated"
+  },
   "A6/DXF": {
     "defaultMessage": "Salvar",
     "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to save the edition of that field"
@@ -754,6 +766,10 @@
   "DB7Ai9": {
     "defaultMessage": "Salvar",
     "description": "Text in the save action button"
+  },
+  "dbh5MZ": {
+    "defaultMessage": "OKRs {companypreposition} {company}",
+    "description": "Company OKR title of the page"
   },
   "DEMBaq": {
     "defaultMessage": "Um ícone com o sinal de positivo, indicando que ao clicar aqui você irá abrir o painel para inserir um resultado-chave",
@@ -1683,6 +1699,10 @@
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
   },
+  "OwHPoA": {
+    "defaultMessage": "Ainda não foram criados OKRs neste Plano Individual",
+    "description": "This message is displayed as the empty state message inside the User page"
+  },
   "OwWiN7": {
     "defaultMessage": "Criar novo usuário",
     "description": "This message appears as an option in the team page while adding a new user"
@@ -2580,7 +2600,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-05-30T20:49:24Z",
+    "defaultMessage": "2022-06-06T13:41:09Z",
     "description": null
   }
 }
