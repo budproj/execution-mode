@@ -18,7 +18,7 @@ import {
 import messages from './messages'
 
 interface CreateCycleProperties {
-  teamId: Team['id']
+  teamId?: Team['id']
   initialValues?: Partial<CreateCycleFormValues>
   cycleParents: SelectCycleParents[]
   onCancel: () => void

@@ -2,6 +2,8 @@ import { Modal, ModalBody, ModalContent, ModalOverlay } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useMemo } from 'react'
 
+import { Team } from 'src/components/Team/types'
+
 import { useGetCycle } from '../../hooks'
 
 import { CreateCycle } from './create-cycle'
@@ -13,10 +15,11 @@ const StyledModal = styled(ModalContent)`
 `
 interface CycleActionModalProperties {
   isOpen: boolean
+  teamId?: Team['id']
   onCancel: () => void
 }
 
-export const CreateCycleModal = ({ isOpen, onCancel }: CycleActionModalProperties) => {
+export const CreateCycleModal = ({ isOpen, teamId, onCancel }: CycleActionModalProperties) => {
   const { data: cycles } = useGetCycle()
 
   const parents = useMemo(
@@ -27,17 +30,13 @@ export const CreateCycleModal = ({ isOpen, onCancel }: CycleActionModalPropertie
       })),
     [cycles],
   )
-  // TODO: remover TeamID
+
   return (
     <Modal autoFocus isOpen={isOpen} size="100%" onClose={() => onCancel()}>
       <ModalOverlay />
       <StyledModal>
         <ModalBody p="40px">
-          <CreateCycle
-            cycleParents={parents}
-            teamId="0788abd6-4996-4224-8f24-094b2d3c0d3a"
-            onCancel={onCancel}
-          />
+          <CreateCycle cycleParents={parents} teamId={teamId} onCancel={onCancel} />
         </ModalBody>
       </StyledModal>
     </Modal>

@@ -36,7 +36,6 @@ export type ParentsSelectProperties = {
 
 type UpdateCycleFormProperties = {
   initialValues?: UpdateCycleFormValues
-  isLoading?: boolean
   parents: ParentsSelectProperties[]
   onCancel: () => void
   onSubmit: (
@@ -59,7 +58,6 @@ export const UpdateCycleModalForm = ({
   parents,
   onCancel,
   onSubmit,
-  isLoading,
 }: UpdateCycleFormProperties) => {
   initialValues ??= defaultInitialValues
   const intl = useIntl()
@@ -68,7 +66,7 @@ export const UpdateCycleModalForm = ({
     <Formik initialValues={initialValues} validationSchema={CycleSchema} onSubmit={onSubmit}>
       {({ values }) => (
         <Form>
-          <FormControl id={`key-result-checkin-s''}`}>
+          <FormControl id={`update-cycle''}`}>
             <Flex columnGap={8} rowGap={5} flexWrap="wrap" mb={8}>
               <UpdateCycleTextField
                 id="period"
@@ -140,7 +138,6 @@ export const UpdateCycleModalForm = ({
 type UpdateCycleTextField = {
   id: keyof UpdateCycleFormValues
   label: string
-  // eslint-disable-next-line react/no-unused-prop-types
   fieldValue?: string
 }
 

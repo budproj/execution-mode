@@ -36,7 +36,6 @@ export type CreateCycleFormValues = {
 
 type CreateCycleFormProperties = {
   initialValues?: CreateCycleFormValues
-  isLoading?: boolean
   cycleParents: SelectCycleParents[]
   onCancel: () => void
   onSubmit: (
@@ -59,7 +58,6 @@ export const CreateCycleModalForm = ({
   cycleParents,
   onCancel,
   onSubmit,
-  isLoading,
 }: CreateCycleFormProperties) => {
   initialValues ??= defaultInitialValues
   const intl = useIntl()
@@ -68,7 +66,7 @@ export const CreateCycleModalForm = ({
     <Formik initialValues={initialValues} validationSchema={NewCycleSchema} onSubmit={onSubmit}>
       {({ values }) => (
         <Form>
-          <FormControl id={`key-result-checkin-s''}`}>
+          <FormControl id={`create-cycle''}`}>
             <Flex columnGap={8} rowGap={5} flexWrap="wrap" mb={8}>
               <CreateCycleTextField
                 id="period"

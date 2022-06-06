@@ -2,7 +2,7 @@ import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
 import { without } from 'lodash'
 import React, { useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { CreateCycleModal } from 'src/components/Cycle/ActionModals/CreateCycleModal'
 import { UpdateCycleModal } from 'src/components/Cycle/ActionModals/UpdateCycleModal'
@@ -10,12 +10,17 @@ import CyclesList from 'src/components/Cycle/List'
 import { CYCLE_LIST_COLUMN } from 'src/components/Cycle/List/Body/Columns/constants'
 import { useGetCycle } from 'src/components/Cycle/hooks'
 import { cyclesEditModalViewMode } from 'src/state/recoil/cycle/cycle-edit-modal-view-mode'
+import { userAtomFamily } from 'src/state/recoil/user'
+import meAtom from 'src/state/recoil/user/me'
 
 import messages from './messages'
 
 const SettingsCycles = () => {
   const { data: cycles, loading: cyclesLoading } = useGetCycle()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const myID = useRecoilValue(meAtom)
+  const user = useRecoilValue(userAtomFamily(myID))
+  const teamId = user?.companies?.edges[0]?.node.id
 
   const [{ cycleId, isOpened }, setIsOpened] = useRecoilState(cyclesEditModalViewMode)
 
@@ -61,9 +66,10 @@ const SettingsCycles = () => {
         </Button>
       </Heading>
       <CyclesList pt={10} cycleIDs={cycleIds} isLoading={cyclesLoading} columns={columns} />
-      <CreateCycleModal isOpen={isModalOpen} onCancel={closeModal} />
+      <CreateCycleModal teamId={teamId} isOpen={isModalOpen} onCancel={closeModal} />
       <UpdateCycleModal
         isOpen={isOpened}
+        teamId={teamId}
         cycleId={cycleId}
         parents={parents}
         onCancel={closeEditModal}

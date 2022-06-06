@@ -2,6 +2,8 @@ import { Modal, ModalBody, ModalContent, ModalOverlay } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React from 'react'
 
+import { Team } from 'src/components/Team/types'
+
 import { Cycle } from '../../types'
 
 import { ParentsSelectProperties } from './Form'
@@ -14,6 +16,7 @@ const StyledModal = styled(ModalContent)`
 `
 interface CycleActionModalProperties {
   isOpen: boolean
+  teamId?: Team['id']
   parents: ParentsSelectProperties[]
   cycleId?: Cycle['id']
   onCancel: () => void
@@ -23,20 +26,15 @@ export const UpdateCycleModal = ({
   isOpen,
   parents,
   cycleId,
+  teamId,
   onCancel,
 }: CycleActionModalProperties) => {
-  // TODO: remover TeamID
   return (
     <Modal autoFocus isOpen={isOpen} size="100%" onClose={onCancel}>
       <ModalOverlay />
       <StyledModal>
         <ModalBody p="40px">
-          <UpdateCycle
-            parents={parents}
-            cycleId={cycleId}
-            teamId="0788abd6-4996-4224-8f24-094b2d3c0d3a"
-            onCancel={onCancel}
-          />
+          <UpdateCycle parents={parents} cycleId={cycleId} teamId={teamId} onCancel={onCancel} />
         </ModalBody>
       </StyledModal>
     </Modal>

@@ -15,7 +15,7 @@ import { ParentsSelectProperties, UpdateCycleFormValues, UpdateCycleModalForm } 
 import messages from './messages'
 
 interface UpdateCycleProperties {
-  teamId: Team['id']
+  teamId?: Team['id']
   parents: ParentsSelectProperties[]
   cycleId?: Cycle['id']
   onCancel: () => void
