@@ -24,7 +24,7 @@ export const KeyResultInsertDrawer = ({
 }: KeyResultInsertDrawerProperties) => {
   const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
   const resetDrawerObjectiveID = useResetRecoilState(keyResultInsertDrawerObjectiveID)
-  const { dispatch: dispatchCreatedObjective } = useEvent(EventType.CREATED_OBJECTIVE)
+  const { dispatch: dispatchCreateKeyResult } = useEvent(EventType.CREATED_KEY_RESULT)
   const intl = useIntl()
   const toast = useToast()
 
@@ -37,7 +37,7 @@ export const KeyResultInsertDrawer = ({
       status: 'success',
     })
 
-    dispatchCreatedObjective({ isPersonal: !teamID, userId: currentUserID })
+    dispatchCreateKeyResult({ isPersonal: !teamID, userId: currentUserID })
   }
 
   const handleError = () => {
