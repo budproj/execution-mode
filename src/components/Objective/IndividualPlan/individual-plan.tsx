@@ -11,6 +11,7 @@ import {
   DrawerBody,
   useToast,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -67,6 +68,7 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
     { setObjetives: setActiveObjectives },
   )
 
+  const router = useRouter()
   const toast = useToast()
   const { dispatch: dispatchPageView } = useEvent(EventType.PAGE_VIEW)
   const { dispatch: dispatchCreatedObjective } = useEvent(EventType.CREATED_OBJECTIVE)
@@ -174,7 +176,10 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
   }
 
   useEffect(() => {
-    dispatchPageView({ pathname: '/my-things#individual-plan' })
+    const { pathname } = router
+    const [_, path] = pathname.split('/')
+
+    dispatchPageView({ pathname: `/${path}#individual-plan` })
     fetchActiveCycles()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
