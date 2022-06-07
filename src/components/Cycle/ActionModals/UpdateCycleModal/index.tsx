@@ -5,8 +5,8 @@ import React from 'react'
 import { Team } from 'src/components/Team/types'
 
 import { Cycle } from '../../types'
+import { CycleSelectOption } from '../FormCycle'
 
-import { ParentsSelectProperties } from './Form'
 import { UpdateCycle } from './update-cycle'
 
 const StyledModal = styled(ModalContent)`
@@ -17,7 +17,7 @@ const StyledModal = styled(ModalContent)`
 interface CycleActionModalProperties {
   isOpen: boolean
   teamId?: Team['id']
-  parents: ParentsSelectProperties[]
+  parents: CycleSelectOption[]
   cycleId?: Cycle['id']
   onCancel: () => void
 }

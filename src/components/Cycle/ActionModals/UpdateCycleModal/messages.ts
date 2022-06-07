@@ -8,6 +8,8 @@ type ActionMenuMessage =
   | 'successEditToastMessage'
   | 'existingUserErrorToastMessage'
   | 'unknownErrorToastMessage'
+  | 'closeModalButton'
+  | 'saveEditCycleButton'
 
 export default defineMessages<ActionMenuMessage>({
   crateCycleModalTitle: {
@@ -50,5 +52,17 @@ export default defineMessages<ActionMenuMessage>({
     id: 'cGFQsk',
     description:
       'This message appears as an error toast when we have an unknown error while creating a new cycle',
+  },
+
+  closeModalButton: {
+    defaultMessage: 'Cancelar',
+    id: 'ej/Q3X',
+    description: 'The button to close the modal cycle',
+  },
+
+  saveEditCycleButton: {
+    defaultMessage: 'Salvar',
+    id: 'TGP9cN',
+    description: 'The button to create or edit a cycle on modal',
   },
 })

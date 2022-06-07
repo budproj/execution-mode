@@ -10,13 +10,14 @@ import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import { CYCLE_STATUS } from '../../constants'
 import { useUpdateCycle } from '../../hooks'
 import { Cycle } from '../../types'
+import { CycleModalForm, CycleFormValues, CycleSelectOption } from '../FormCycle'
 
-import { ParentsSelectProperties, UpdateCycleFormValues, UpdateCycleModalForm } from './Form'
+import { UpdateCycleModalActions } from './actions'
 import messages from './messages'
 
 interface UpdateCycleProperties {
   teamId?: Team['id']
-  parents: ParentsSelectProperties[]
+  parents: CycleSelectOption[]
   cycleId?: Cycle['id']
   onCancel: () => void
 }
@@ -29,7 +30,7 @@ export const UpdateCycle = ({ teamId, parents, cycleId, onCancel }: UpdateCycleP
 
   const filterdParents = parents.filter((parent) => parent.id !== cycleId)
 
-  const handleFormSubmission = async (values: UpdateCycleFormValues) => {
+  const handleFormSubmission = async (values: CycleFormValues) => {
     await updateCycle({
       variables: {
         cycleId,
@@ -58,8 +59,9 @@ export const UpdateCycle = ({ teamId, parents, cycleId, onCancel }: UpdateCycleP
     }
   }, [loading, error, data, toast, intl])
 
-  const normalizedInitialValues: UpdateCycleFormValues = {
+  const normalizedInitialValues: CycleFormValues = {
     ...cycle,
+    period: cycle?.period ?? '',
     active: cycle?.active ? CYCLE_STATUS.ACTIVE : CYCLE_STATUS.NOT_ACTIVE,
   }
 
@@ -76,12 +78,13 @@ export const UpdateCycle = ({ teamId, parents, cycleId, onCancel }: UpdateCycleP
           })}
         </Text>
       </Heading>
-      <UpdateCycleModalForm
-        parents={filterdParents}
+      <CycleModalForm
+        cycleParents={filterdParents}
         initialValues={normalizedInitialValues}
-        onCancel={onCancel}
         onSubmit={handleFormSubmission}
-      />
+      >
+        <UpdateCycleModalActions onClose={onCancel} />
+      </CycleModalForm>
     </Flex>
   )
 }

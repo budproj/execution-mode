@@ -8,19 +8,21 @@ import { Team } from 'src/components/Team/types'
 
 import { CYCLE_STATUS } from '../../constants'
 import { useCreateCycle } from '../../hooks'
-
 import {
-  CreateCycleFormValues,
-  CreateCycleModalForm,
-  defaultInitialValues,
-  SelectCycleParents,
-} from './Form'
+  CycleModalForm,
+  CycleFormProperties,
+  CycleFormValues,
+  CycleSelectOption,
+  cycleFormInitialValues,
+} from '../FormCycle'
+
+import { CreateCycleModalActions } from './actions'
 import messages from './messages'
 
 interface CreateCycleProperties {
   teamId?: Team['id']
-  initialValues?: Partial<CreateCycleFormValues>
-  cycleParents: SelectCycleParents[]
+  initialValues?: Partial<CycleFormProperties>
+  cycleParents: CycleSelectOption[]
   onCancel: () => void
 }
 
@@ -35,8 +37,8 @@ export const CreateCycle = ({
   const { createCycle, loading, error, data } = useCreateCycle()
 
   const handleFormSubmission = async (
-    values: CreateCycleFormValues,
-    actions: FormikHelpers<CreateCycleFormValues>,
+    values: CycleFormValues,
+    actions: FormikHelpers<CycleFormValues>,
   ) => {
     await createCycle({
       variables: {
@@ -69,8 +71,8 @@ export const CreateCycle = ({
     }
   }, [loading, error, data, toast, intl])
 
-  const normalizedInitialValues: CreateCycleFormValues = {
-    ...defaultInitialValues,
+  const normalizedInitialValues: CycleFormValues = {
+    ...cycleFormInitialValues,
     ...initialValues,
   }
 
@@ -87,12 +89,13 @@ export const CreateCycle = ({
           })}
         </Text>
       </Heading>
-      <CreateCycleModalForm
+      <CycleModalForm
         cycleParents={cycleParents}
         initialValues={normalizedInitialValues}
-        onCancel={onCancel}
         onSubmit={handleFormSubmission}
-      />
+      >
+        <CreateCycleModalActions onClose={onCancel} />
+      </CycleModalForm>
     </Flex>
   )
 }
