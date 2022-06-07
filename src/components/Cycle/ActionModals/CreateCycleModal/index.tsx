@@ -1,10 +1,10 @@
 import { Modal, ModalBody, ModalContent, ModalOverlay } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import { Team } from 'src/components/Team/types'
 
-import { useGetCycle } from '../../hooks'
+import { ParentsSelectProperties } from '../UpdateCycleModal/Form'
 
 import { CreateCycle } from './create-cycle'
 
@@ -16,21 +16,16 @@ const StyledModal = styled(ModalContent)`
 interface CycleActionModalProperties {
   isOpen: boolean
   teamId?: Team['id']
+  parents: ParentsSelectProperties[]
   onCancel: () => void
 }
 
-export const CreateCycleModal = ({ isOpen, teamId, onCancel }: CycleActionModalProperties) => {
-  const { data: cycles } = useGetCycle()
-
-  const parents = useMemo(
-    () =>
-      cycles.map(({ id, period }) => ({
-        id,
-        label: period,
-      })),
-    [cycles],
-  )
-
+export const CreateCycleModal = ({
+  isOpen,
+  teamId,
+  parents,
+  onCancel,
+}: CycleActionModalProperties) => {
   return (
     <Modal autoFocus isOpen={isOpen} size="100%" onClose={() => onCancel()}>
       <ModalOverlay />
