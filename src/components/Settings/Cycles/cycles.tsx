@@ -8,6 +8,7 @@ import { CreateCycleModal } from 'src/components/Cycle/ActionModals/CreateCycleM
 import { UpdateCycleModal } from 'src/components/Cycle/ActionModals/UpdateCycleModal'
 import CyclesList from 'src/components/Cycle/List'
 import { CYCLE_LIST_COLUMN } from 'src/components/Cycle/List/Body/Columns/constants'
+import { CADENCE } from 'src/components/Cycle/constants'
 import { useGetCycle } from 'src/components/Cycle/hooks'
 import { cyclesEditModalViewMode } from 'src/state/recoil/cycle/cycle-edit-modal-view-mode'
 import { userAtomFamily } from 'src/state/recoil/user'
@@ -30,7 +31,13 @@ const SettingsCycles = () => {
   const closeEditModal = () => setIsOpened({ cycleId: '', isOpened: false })
 
   const cycleIds = useMemo(() => cycles.map(({ id }) => id), [cycles])
-  const parents = useMemo(() => cycles.map(({ id, period }) => ({ id, label: period })), [cycles])
+  const parents = useMemo(
+    () =>
+      cycles
+        .filter((cycle) => cycle.cadence === CADENCE.YEARLY)
+        .map(({ id, period }) => ({ id, label: period })),
+    [cycles],
+  )
 
   const intl = useIntl()
 
@@ -66,7 +73,12 @@ const SettingsCycles = () => {
         </Button>
       </Heading>
       <CyclesList pt={10} cycleIDs={cycleIds} isLoading={cyclesLoading} columns={columns} />
-      <CreateCycleModal teamId={teamId} isOpen={isModalOpen} onCancel={closeModal} />
+      <CreateCycleModal
+        teamId={teamId}
+        isOpen={isModalOpen}
+        parents={parents}
+        onCancel={closeModal}
+      />
       <UpdateCycleModal
         isOpen={isOpened}
         teamId={teamId}
