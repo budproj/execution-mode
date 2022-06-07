@@ -2,7 +2,7 @@ import { Image, ImageProps, Stack, Text, ComponentWithAs } from '@chakra-ui/reac
 import React from 'react'
 
 type HeaderProperties = {
-  title?: string
+  title?: string | React.ReactNode
   imageURL?: string
   Wrapper?: ComponentWithAs<'img', ImageProps>
 }

@@ -1,4 +1,4 @@
-import { Menu, MenuButton, MenuItem, MenuList, useToast } from '@chakra-ui/react'
+import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import React, { ReactElement, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -24,24 +24,18 @@ const CyclesListBodyColumnActions = ({
   id,
 }: CyclesListBodyColumnActionsProperties): ReactElement => {
   const intl = useIntl()
-  const { deleteCycle, loading, error } = useDeleteCycle()
+  const { deleteCycle } = useDeleteCycle()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [isOpened, setIsOpened] = useRecoilState(cyclesEditModalViewMode)
+  const [_, setIsOpened] = useRecoilState(cyclesEditModalViewMode)
 
   const cyclePeriod = useRecoilValue(cyclePeriodSelector(id))
 
-  const toast = useToast()
-
-  const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleClick = () => {
     if (!isDialogOpen) setIsDialogOpen(true)
   }
 
-  const handleOpenModal = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleOpenModal = () => {
     setIsOpened({ isOpened: true, cycleId: id })
-  }
-
-  const handleCloseModal = () => {
-    if (isOpened) setIsOpened({ isOpened: false, cycleId: '' })
   }
 
   const handleClose = () => {
@@ -51,17 +45,6 @@ const CyclesListBodyColumnActions = ({
   const handleDelete = async () => {
     await deleteCycle({ variables: { cycleID: id } })
   }
-
-  // UseEffect(() => {
-  //   if (loading && !error) {
-  //     toast({
-  //       title: intl.formatMessage(messages.deleteCycleSuccessToastMessage, {
-  //         period: cyclePeriod,
-  //       }),
-  //       status: 'success',
-  //     })
-  //   }
-  // }, [loading, error, toast, intl, cyclePeriod])
 
   return (
     <>
