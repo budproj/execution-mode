@@ -3,6 +3,10 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
+import { Team } from 'src/components/Team/types'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
+
 import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
 
 import { InsertKeyResultForm } from './Form/wrapper'
@@ -10,23 +14,30 @@ import { KeyResultInsertDrawerHeader } from './header'
 import messages from './messages'
 
 interface KeyResultInsertDrawerProperties {
-  teamID?: string
+  teamID?: Team['id'] | null
+  isPersonalKR?: boolean
 }
 
-export const KeyResultInsertDrawer = ({ teamID }: KeyResultInsertDrawerProperties) => {
+export const KeyResultInsertDrawer = ({
+  teamID,
+  isPersonalKR,
+}: KeyResultInsertDrawerProperties) => {
   const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
   const resetDrawerObjectiveID = useResetRecoilState(keyResultInsertDrawerObjectiveID)
+  const { dispatch: dispatchCreateKeyResult } = useEvent(EventType.CREATED_KEY_RESULT)
   const intl = useIntl()
   const toast = useToast()
 
   const isOpen = Boolean(drawerObjectiveID)
 
-  const handleSuccess = () => {
+  const handleSuccess = (currentUserID: string) => {
     resetDrawerObjectiveID()
     toast({
       title: intl.formatMessage(messages.successToastMessage),
       status: 'success',
     })
+
+    dispatchCreateKeyResult({ isPersonal: !teamID, userId: currentUserID })
   }
 
   const handleError = () => {
@@ -51,6 +62,7 @@ export const KeyResultInsertDrawer = ({ teamID }: KeyResultInsertDrawerPropertie
           <KeyResultInsertDrawerHeader />
           <Flex flexGrow={1}>
             <InsertKeyResultForm
+              isPersonalKR={isPersonalKR}
               objectiveID={drawerObjectiveID}
               teamID={teamID}
               onClose={resetDrawerObjectiveID}

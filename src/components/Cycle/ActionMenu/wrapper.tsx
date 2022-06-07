@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client'
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { Cycle } from 'src/components/Cycle/types'
@@ -20,13 +20,19 @@ interface ActionMenuProperties {
   cycleID?: string
   onViewOldCycles?: Action
   onCreateOKR?: Action
+  children?: ReactNode
 }
 
 type GetActiveCyclesQueryResult = {
   cycles: GraphQLConnection<Cycle>
 }
 
-export const ActionMenu = ({ cycleID, onViewOldCycles, onCreateOKR }: ActionMenuProperties) => {
+export const ActionMenu = ({
+  cycleID,
+  onViewOldCycles,
+  onCreateOKR,
+  children,
+}: ActionMenuProperties) => {
   const intl = useIntl()
   const [isOpen, setIsOpen] = useState(false)
   const [relatedCycles, setRelatedCycles] = useState<Cycle[]>()
@@ -65,10 +71,12 @@ export const ActionMenu = ({ cycleID, onViewOldCycles, onCreateOKR }: ActionMenu
       onOpen={handleOpenMenu}
     >
       <MenuButton>
-        <TreeDotsIcon
-          desc={intl.formatMessage(messages.optionsButtonIconDesc)}
-          fill="currentColor"
-        />
+        {children ?? (
+          <TreeDotsIcon
+            desc={intl.formatMessage(messages.optionsButtonIconDesc)}
+            fill="currentColor"
+          />
+        )}
       </MenuButton>
       <MenuList>
         {shouldShowLoadingSpinner ? (

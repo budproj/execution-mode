@@ -16,6 +16,7 @@ type SelectFromListContentProperties = {
   isLoading?: boolean
   hasCreatePermission?: boolean
   avatarSubtitleType?: NamedAvatarSubtitleType
+  hasMenu?: boolean
   onSelect?: (userID: string) => void | Promise<void>
 }
 
@@ -27,6 +28,7 @@ export const SelectUserFromListContent = ({
   avatarSubtitleType,
   onSelect,
   emptyStateTitle,
+  hasMenu,
 }: SelectFromListContentProperties) => {
   const { items } = useContext(SearchableListContext)
 
@@ -35,9 +37,11 @@ export const SelectUserFromListContent = ({
   return hasMembers || isLoading ? (
     <>
       {hasCreatePermission && <SelectUserFromListOptions onCreateStart={onCreateStart} />}
+
       <UsersInContext
         hasUserCard={hasUserCard}
         isLoading={isLoading}
+        hasMenu={hasMenu}
         avatarSubtitleType={avatarSubtitleType}
         onSelect={onSelect}
       />

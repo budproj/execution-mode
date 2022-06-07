@@ -181,7 +181,7 @@ export const MenuHeader = ({ teamId }: MenuHeaderProperties) => {
             {intl.formatMessage(messages.createItem)}
           </MenuButton>
           <MenuList>
-            {activeCycles.map((cycle) => (
+            {activeCycles.reverse().map((cycle) => (
               <AddOKROnRelatedCycleOption
                 key={cycle.id}
                 cycle={cycle}
@@ -214,7 +214,7 @@ const AddOKROnRelatedCycleOption = ({
     <MenuItem disabled={!isEnabled} onClick={() => isEnabled && onCreateOKR(cycle.id)}>
       {intl
         .formatMessage(messages.createOKRInRelatedCycleOption, {
-          cadence: cadence.prefix?.toLowerCase(),
+          cadence: cadence.prefix,
           cycle: cycle.period,
           parent: cycle.parent?.period,
         })

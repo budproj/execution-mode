@@ -1,0 +1,35 @@
+query GET_USER_DETAILS($userId: ID) {
+  user(id: $userId) {
+    id
+    picture
+    fullName
+    firstName
+    role
+    yearlyProgress {
+      showProgress
+      progress
+    }
+    quarterlyProgress {
+      showProgress
+      progress
+    }
+    teams {
+      edges {
+        node {
+          name
+        }
+      }
+    }
+    companies(first: 1) {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+    policy {
+      update
+    }
+  }
+}

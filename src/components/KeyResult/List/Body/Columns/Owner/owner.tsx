@@ -1,10 +1,11 @@
 import { Flex, Skeleton, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import { DynamicAvatarGroup } from 'src/components/Base'
+import { DynamicAvatarGroup, IntlLink } from 'src/components/Base'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
@@ -49,15 +50,21 @@ const KeyResultListBodyColumnOwner = ({
   const owner = useRecoilValue(ownerSelector(id))
   const supportTeamMembersAtoms = useRecoilValue(supportTeamMembersSelector(id))
   const userID = useRecoilValue(meAtom)
-
+  const router = useRouter()
   const setUser = useSetRecoilState(selectUser(owner?.id))
 
   const isOwnerLoaded = Boolean(owner)
+  const userId = router.query?.['user-id']
   const supportTeamMembers = supportTeamMembersAtoms?.edges?.map(({ node }) => node) ?? []
-  const currentUserIsOwner = owner?.id === userID
+  const currentUserIsOwner = owner?.id === userID && !userId
   const usersToLoad = currentUserIsOwner
     ? [...supportTeamMembers]
     : [...supportTeamMembers.filter(({ id }) => id === userID)]
+
+  if (userId) {
+    const userFromProfile = supportTeamMembers.find(({ id }) => id === userId)
+    if (userFromProfile) usersToLoad.unshift(userFromProfile)
+  }
 
   if (owner) {
     usersToLoad.unshift(owner)
@@ -103,7 +110,11 @@ const KeyResultListBodyColumnOwner = ({
               isLoaded={isOwnerLoaded}
               {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}
             >
-              <Text color="gray.500">{owner?.fullName}</Text>
+              <IntlLink href={owner?.id === userID ? '/my-things' : `/profile/${owner?.id ?? ''}`}>
+                <Text color="gray.500" _hover={{ color: 'brand.500' }} cursor="pointer">
+                  {owner?.fullName}
+                </Text>
+              </IntlLink>
             </Skeleton>
           )}
 

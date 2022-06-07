@@ -3,6 +3,8 @@ import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { Objective } from 'src/components/Objective/types'
+import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
@@ -11,13 +13,15 @@ import { ObjectiveAccordionPanel } from './Panel/wrapper'
 
 export interface ObjectiveAccordionItemProperties {
   objectiveID?: Objective['id']
-  teamID?: string
+  userID?: User['id']
+  teamID?: Team['id']
   isDisabled?: boolean
 }
 
 export const ObjectiveAccordionItem = ({
   objectiveID,
   teamID,
+  userID,
   isDisabled,
 }: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
@@ -34,7 +38,7 @@ export const ObjectiveAccordionItem = ({
       borderColor="transparent"
       bg="white"
       boxShadow="for-background.light"
-      p={4}
+      p={6}
       borderRadius="10"
     >
       {({ isExpanded }) => (
@@ -43,6 +47,7 @@ export const ObjectiveAccordionItem = ({
             objective={objective}
             confidenceTag={confidenceTag}
             teamID={teamID}
+            userID={userID}
             isLoaded={isLoaded}
             isDisabled={isDisabled}
           />

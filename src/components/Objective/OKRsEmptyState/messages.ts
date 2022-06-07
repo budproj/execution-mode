@@ -1,24 +1,39 @@
 import { defineMessages } from 'react-intl'
 
-type TeamActiveObjectivesMessages =
-  | 'emptyStateTitle'
-  | 'emptyStateMessage'
+type ActiveObjectivesMessages =
+  | 'teamObjectivesEmptyStateTitle'
+  | 'personalObjectivesEmptyStateTitle'
+  | 'teamObjectivesEmptyStateMessage'
+  | 'personalObjectivesEmptyStateMessage'
   | 'draftObjectiveTitle'
   | 'draftObjectiveSuccessToastMessage'
   | 'draftObjectiveErrorToastMessage'
 
-export default defineMessages<TeamActiveObjectivesMessages>({
-  emptyStateTitle: {
+export default defineMessages<ActiveObjectivesMessages>({
+  teamObjectivesEmptyStateTitle: {
     defaultMessage: 'OKRs',
     id: '39q6ig',
     description:
       'This message is displayed above the empty state inside the active cycles section at the Team page',
   },
 
-  emptyStateMessage: {
+  personalObjectivesEmptyStateTitle: {
+    defaultMessage: 'OKRs',
+    id: 'VPJIpc',
+    description:
+      'This message is displayed above the empty state inside the active cycles section at the User page',
+  },
+
+  teamObjectivesEmptyStateMessage: {
     defaultMessage: 'Este time não possui OKRs',
     id: 'R8hOYh',
     description: 'This message is displayed as the empty state message inside the team page',
+  },
+
+  personalObjectivesEmptyStateMessage: {
+    defaultMessage: 'Ainda não foram criados OKRs neste Plano Individual ',
+    id: 'OwHPoA',
+    description: 'This message is displayed as the empty state message inside the User page',
   },
 
   draftObjectiveTitle: {

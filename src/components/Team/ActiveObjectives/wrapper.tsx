@@ -1,22 +1,18 @@
 import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import React, { useEffect } from 'react'
+import { useRecoilState } from 'recoil'
+
+import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
+import { OKRsSkeleton } from 'src/components/Objective/OKRsSkeleton/wrapper'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { isReloadNecessary, objectiveAtomFamily } from '../../../state/recoil/objective'
-import { teamActiveObjectives } from '../../../state/recoil/team/active-objectives'
-import {
-  ObjectivesViewMode,
-  teamObjectivesViewMode,
-} from '../../../state/recoil/team/objectives-view-mode'
 import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
-import { GraphQLConnection, GraphQLConnectionPolicy, GraphQLEffect } from '../../types'
-import { TeamOKRsEmptyState } from '../OKRsEmptyState/wrapper'
-import { TeamOKRsSkeleton } from '../OKRsSkeleton/wrapper'
+import { GraphQLConnection } from '../../types'
 
 import queries from './queries.gql'
 
@@ -34,41 +30,21 @@ export interface GetTeamActiveObjectivesQuery {
 }
 
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
-  const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
-  const [activeObjectives, setActiveObjectives] = useRecoilState(teamActiveObjectives(teamID))
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
-  const [hasNotActiveObjectives, setHasNotActiveObjectives] = useState(false)
-  const setObjectivesViewMode = useSetRecoilState(teamObjectivesViewMode(teamID))
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
 
-  const [objectiveEdges, setObjectiveEdges, _, isRemoteDataLoaded] = useConnectionEdges<Objective>()
+  const [objectiveEdges, setActiveObjectives, _, isRemoteDataLoaded] =
+    useConnectionEdges<Objective>()
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
 
-  const { called, refetch } = useQuery<GetTeamActiveObjectivesQuery>(
-    queries.GET_TEAM_ACTIVE_OBJECTIVES,
-    {
-      fetchPolicy: 'no-cache',
-      variables: { teamID },
-      notifyOnNetworkStatusChange: true,
-      onCompleted: ({ team }) => {
-        setObjectivesPolicy(team.activeObjectives.policy)
-        setActiveObjectives(team.activeObjectives?.edges ?? [])
-        setHasNotActiveObjectives(team.notActiveObjectives.edges.length > 0)
-      },
+  const { refetch } = useQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
+    fetchPolicy: 'no-cache',
+    variables: { teamID },
+    notifyOnNetworkStatusChange: true,
+    onCompleted: ({ team }) => {
+      setActiveObjectives(team.activeObjectives?.edges ?? [])
     },
-  )
-
-  const handleViewOldCycles = () => {
-    setObjectivesViewMode(ObjectivesViewMode.NOT_ACTIVE)
-  }
-
-  const handleRefetch = async () => {
-    void refetch({ teamID })
-  }
-
-  useEffect(() => {
-    if (called && activeObjectives) setObjectiveEdges(activeObjectives)
-  }, [called, activeObjectives, setObjectiveEdges])
+  })
 
   useEffect(() => {
     if (isRemoteDataLoaded) setCycleObjectives(objectiveEdges)
@@ -90,12 +66,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
     <Stack spacing={12} h="full">
       {isLoaded ? (
         cycles.length === 0 ? (
-          <TeamOKRsEmptyState
-            teamID={teamID}
-            isAllowedToCreateObjectives={objectivesPolicy?.create === GraphQLEffect.ALLOW}
-            onViewOldCycles={hasNotActiveObjectives ? handleViewOldCycles : undefined}
-            onNewObjective={handleRefetch}
-          />
+          <OKRsEmptyState />
         ) : (
           cycles.map(([cycle, objectiveIDs]) => (
             <CycleObjectives
@@ -107,7 +78,7 @@ export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties)
           ))
         )
       ) : (
-        <TeamOKRsSkeleton />
+        <OKRsSkeleton />
       )}
     </Stack>
   )

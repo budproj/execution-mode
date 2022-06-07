@@ -20,7 +20,14 @@ export const CardHeader = ({
 
   return (
     <Stack spacing={4}>
-      <NamedAvatar showCard userID={userID} isLoading={!isLoaded} date={date} subtitleType="date" />
+      <NamedAvatar
+        showCard
+        canHover
+        userID={userID}
+        isLoading={!isLoaded}
+        date={date}
+        subtitleType="date"
+      />
       <Divider borderColor={BORDER_COLOR} />
     </Stack>
   )

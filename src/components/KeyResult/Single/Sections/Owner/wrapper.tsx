@@ -29,7 +29,10 @@ export const KeyResultSingleSectionOwnerWrapper = ({
   const policy = useRecoilValue(policySelector(keyResultID))
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
 
-  const canUpdate = policy?.update === GraphQLEffect.ALLOW && keyResult?.status?.isActive
+  const canUserUpdate = policy?.update === GraphQLEffect.ALLOW
+  const isKeyResultActive = keyResult?.status?.isActive
+  const isIndividualKeyResult = keyResult?.team?.id === undefined
+  const canUpdate = canUserUpdate && isKeyResultActive && !isIndividualKeyResult
   const supportTeamMembers = keyResult?.supportTeamMembers?.edges?.map(({ node }) => node)
 
   const handleOpen = () => {
@@ -63,7 +66,11 @@ export const KeyResultSingleSectionOwnerWrapper = ({
           <Flex direction="row">
             <PopoverTrigger>
               <Box>
-                <KeyResultSectionOwner keyResultID={keyResultID} isEditing={isOpen} />
+                <KeyResultSectionOwner
+                  keyResultID={keyResultID}
+                  isEditing={isOpen}
+                  isIndividualKeyResult={isIndividualKeyResult}
+                />
               </Box>
             </PopoverTrigger>
             <Box flexGrow={1} />

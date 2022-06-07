@@ -1,0 +1,33 @@
+query LIST_USERS_WITH_INDIVIDUAL_OKR {
+  users(onlyWithIndividualObjectives: true) {
+  edges {
+    node {
+      id
+      firstName
+      nickname
+      fullName
+      role
+      picture
+      about
+      linkedInProfileAddress
+    }
+  }
+  }
+}
+
+query GET_USER_ACCESS_TO_CREATE_OBJECTIVES {
+  me {
+    id
+    companies {
+      edges {
+        node {
+          objectives {
+            policy {
+              create
+            }
+          }
+        }
+      }
+    }
+  }
+}

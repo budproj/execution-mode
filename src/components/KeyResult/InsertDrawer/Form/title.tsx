@@ -1,4 +1,4 @@
-import { Input, InputGroup, InputRightElement } from '@chakra-ui/react'
+import { Input, InputGroup, InputRightElement, Text } from '@chakra-ui/react'
 import { Field, useFormikContext } from 'formik'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -34,7 +34,7 @@ export const TitleInput = ({ hasValidationErrors }: TitleInputProperties) => {
 
   return (
     <FormInputBase title={intl.formatMessage(messages.firstInputLabel)}>
-      <InputGroup onBlurCapture={handleBlur} onFocusCapture={handleFocus}>
+      <InputGroup marginBottom="17px" onBlurCapture={handleBlur} onFocusCapture={handleFocus}>
         <Field
           name="title"
           as={Input}
@@ -49,6 +49,16 @@ export const TitleInput = ({ hasValidationErrors }: TitleInputProperties) => {
           <CancelIcon fill="red.500" desc={intl.formatMessage(messages.invalidIconDesc)} />
         </InputRightElement>
       </InputGroup>
+      <Text fontWeight="bold" fontSize="14px" color="#99A4C2" marginBottom="5px">
+        {intl.formatMessage(messages.tipTitle)}
+      </Text>
+      <Text fontSize="14px" color="#99A4C2">
+        {intl.formatMessage(messages.firstTipDescription)}
+        <br />
+        {intl.formatMessage(messages.secondTipDescription)}
+        <br />
+        {intl.formatMessage(messages.thirdTipDescription)}
+      </Text>
     </FormInputBase>
   )
 }

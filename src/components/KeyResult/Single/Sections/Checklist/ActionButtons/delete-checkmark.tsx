@@ -1,11 +1,12 @@
 import { useMutation } from '@apollo/client'
 import React, { Ref } from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { DeleteButton } from 'src/components/Base/Button/delete-button'
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
+import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
 import { Feature } from '../../../../../../state/hooks/useEvent/feature'
@@ -39,9 +40,14 @@ export const DeleteCheckMarkButton = ({
   })
 
   const intl = useIntl()
+  const userID = useRecoilValue(meAtom)
+
   const setCheckMarkIsBeingRemoved = useSetRecoilState(checkMarkIsBeingRemovedAtom(checkMarkID))
   const [deleteCheckmark] = useMutation(queries.DELETE_CHECK_MARK, {
-    refetchQueries: [myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS],
+    refetchQueries: [
+      myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
+      { variables: { ...(userID ? { userID } : {}) } },
+    ],
     variables: {
       id: checkMarkID,
     },

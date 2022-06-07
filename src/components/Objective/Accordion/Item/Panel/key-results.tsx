@@ -1,6 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
 import uniqueId from 'lodash/uniqueId'
-import without from 'lodash/without'
 import React, { useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -8,6 +7,7 @@ import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
+import { Team } from 'src/components/Team/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
@@ -24,6 +24,7 @@ export interface ObjectiveKeyResultsProperties {
   objectiveID?: Objective['id']
   mode: ObjectiveMode
   isDisabled?: boolean
+  teamID?: Team['id']
 }
 
 export interface GetObjectiveKeyResultsQuery {
@@ -35,8 +36,10 @@ const selectKeyResultIDs = (keyResults?: KeyResult[]) =>
 
 export const ObjectiveKeyResults = ({
   objectiveID,
+  teamID,
   mode,
   isDisabled,
+  ...rest
 }: ObjectiveKeyResultsProperties) => {
   const lastInsertedKeyResultID = useRecoilValue(lastInsertedKeyResultIDAtom)
   const [loadObjective] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
@@ -49,6 +52,7 @@ export const ObjectiveKeyResults = ({
       fetchPolicy: 'network-only',
       variables: {
         objectiveID,
+        withTeams: Boolean(teamID),
       },
       onCompleted: (data) => {
         loadObjective(data.objective)
@@ -58,19 +62,15 @@ export const ObjectiveKeyResults = ({
   )
 
   const keyResultIDs = selectKeyResultIDs(keyResults)
-  const isEditing = mode === ObjectiveMode.EDIT
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
-  const templateColumns = isEditing ? '2fr 1fr 0.8fr 60px' : '2fr 1fr 0.8fr'
-  const columns = without(
-    [
-      KEY_RESULT_LIST_COLUMN.KEY_RESULT,
-      KEY_RESULT_LIST_COLUMN.PROGRESS,
-      KEY_RESULT_LIST_COLUMN.OWNER,
-      isEditing && KEY_RESULT_LIST_COLUMN.ACTIONS,
-    ],
-    false,
-  ) as KEY_RESULT_LIST_COLUMN[]
+  const templateColumns = '2fr 1fr 0.8fr 40px'
+  const columns = [
+    KEY_RESULT_LIST_COLUMN.KEY_RESULT,
+    KEY_RESULT_LIST_COLUMN.PROGRESS,
+    KEY_RESULT_LIST_COLUMN.OWNER,
+    KEY_RESULT_LIST_COLUMN.ACTIONS,
+  ]
 
   const handleKeyResultDelete = (id?: string) => {
     if (!id) return
@@ -134,7 +134,9 @@ export const ObjectiveKeyResults = ({
           onDelete: handleKeyResultDelete,
         },
       }}
+      mode={mode}
       onLineClick={handleLineClick}
+      {...rest}
     />
   )
 }

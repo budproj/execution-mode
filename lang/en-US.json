@@ -3,6 +3,10 @@
     "defaultMessage": "Your avatar",
     "description": "The title text of our image icon in our settings account page, it is displayed when an user hover the icon itself"
   },
+  "+14i/d": {
+    "defaultMessage": "Start with an action verb (reach, achieve, accomplish...)",
+    "description": "The  first description of the tip when you are creating a KR."
+  },
   "+6p/sC": {
     "defaultMessage": "Click here to comment :)",
     "description": "This text is displayed in our comment input in our key result drawer when it has no value"
@@ -84,7 +88,7 @@
     "description": "This is the desc attribute of our reset icon. It is used by screen readers"
   },
   "/uYO8t": {
-    "defaultMessage": "",
+    "defaultMessage": "Profile",
     "description": "The page meta title"
   },
   "/vJzGe": {
@@ -251,6 +255,14 @@
     "defaultMessage": "Are you sure you want to to deactivate the user {name}?",
     "description": "This text is used in our delete dialog confirmation to explain to the user what will happen"
   },
+  "30/oaM": {
+    "defaultMessage": "{company}'s OKRs",
+    "description": "Company OKR title on the navigation tab"
+  },
+  "32YYOa": {
+    "defaultMessage": "The OKRs in Individual Plans are set by each person. They do not impact the progress of the company.",
+    "description": "Individual OKR subtitle of the page"
+  },
   "39q6ig": {
     "defaultMessage": "OKRs",
     "description": "This message is displayed above the empty state inside the active cycles section at the Team page"
@@ -283,6 +295,10 @@
     "defaultMessage": "Expected: {progress}%",
     "description": "Message to show the expetected progress of the project"
   },
+  "3ye3aF": {
+    "defaultMessage": "Meaningful",
+    "description": "This title guides the creation of Objectives."
+  },
   "44uWtn": {
     "defaultMessage": "A rounded icon with a line chart in the center",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -300,7 +316,7 @@
     "description": "We use this tag to group every key result with confidence higher than 66"
   },
   "4MCOg+": {
-    "defaultMessage": "",
+    "defaultMessage": "Yearly Progress",
     "description": "User's yearly progress title"
   },
   "4N1d+U": {
@@ -342,6 +358,10 @@
   "5yQyMg": {
     "defaultMessage": "Explore",
     "description": "The page title that our users should see in the teams explore page"
+  },
+  "608lDc": {
+    "defaultMessage": "See your key results and tasks related to the company's strategy.",
+    "description": "Company OKR subtitle of the page"
   },
   "612Wwz": {
     "defaultMessage": "Create an OKR in the {cycle} {parent} cycle.",
@@ -406,6 +426,10 @@
   "7d+540": {
     "defaultMessage": "Up arrow icon indicating that the cycle's selection menu is open",
     "description": "This message is displayed to the user screen reader when the year select menu is opened"
+  },
+  "7fTFkO": {
+    "defaultMessage": "Average of the progress of your key results in the current annual cycle",
+    "description": "Yearly progress chart tooltip message"
   },
   "7tvIOz": {
     "defaultMessage": "Create key result",
@@ -475,6 +499,10 @@
     "defaultMessage": "Financial (BRL)",
     "description": "This message is displayed inside our key-result format select as the title of the coin BRL format"
   },
+  "97e4V+": {
+    "defaultMessage": "Average of the progress of your key results in the current quarterly cycle",
+    "description": "Personal tasks empty state title"
+  },
   "987MLd": {
     "defaultMessage": "Explore",
     "description": "The name of the Explore page, located at \"/explore\""
@@ -515,6 +543,10 @@
     "defaultMessage": "Text document icon",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
   },
+  "A6+vC/": {
+    "defaultMessage": "The progress of the objective reflects the average of its key results and the lowest confidence level among them.",
+    "description": "This tooltip explains how the progress of the objective is calculated"
+  },
   "A6/DXF": {
     "defaultMessage": "Save",
     "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to save the edition of that field"
@@ -534,6 +566,10 @@
   "Afdu+X": {
     "defaultMessage": "Delete {type}",
     "description": "This message appears as a button label on the delete confirmation button"
+  },
+  "agW42K": {
+    "defaultMessage": "Start with an action verb (reach, achieve, accomplish…) Make it measurable by using a number to define success Set a challenge that is both aggressive and realistic",
+    "description": "The description of the tip when you are creating a KR."
   },
   "ah2n1K": {
     "defaultMessage": "Name of quarterly cycle",
@@ -559,6 +595,10 @@
     "defaultMessage": "The confidence level has changed in this check-in:",
     "description": "This text is the first line of our icon tooltip when the check-in has a different confidence from the previous check-in"
   },
+  "AO/RyT": {
+    "defaultMessage": "Copy the title of this key result",
+    "description": "This message appears in the button that copies the title of the key result"
+  },
   "aT1RWB": {
     "defaultMessage": "Confirm your action",
     "description": "This message is displayed as the input label for the danger delete resource dialog"
@@ -575,6 +615,10 @@
     "defaultMessage": "Objective updated successfully",
     "description": "This text is displayed as a toast when the user clicks on the check button to update a given objective title"
   },
+  "B7ryNb": {
+    "defaultMessage": "Edit title of this objective",
+    "description": "This is the second option that appears when you open the menu of a given objective inside the accordion button"
+  },
   "Ba8bU1": {
     "defaultMessage": "Send comment",
     "description": "This label is displayed in the submit button in our drawer"
@@ -586,6 +630,10 @@
   "BEo9Xi": {
     "defaultMessage": "Deactivate user",
     "description": "This text is used in our deactivate user button in the profile sidebar in our team page"
+  },
+  "bgdTCS": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title on the navigation tab"
   },
   "bh8jgN": {
     "defaultMessage": "new!",
@@ -600,12 +648,16 @@
     "description": "This text is displayed as a toast when the user tries to update an objective but an error occur"
   },
   "BOJlqi": {
-    "defaultMessage": "",
+    "defaultMessage": "Quarterly Progress",
     "description": "User's quarterly progress title"
   },
   "bqCVp4": {
     "defaultMessage": "Click here to start typing your comment",
     "description": "This is the title text that is displayed if the user hovers the mouse in it"
+  },
+  "BTaFbJ": {
+    "defaultMessage": "They are daring, challenging and should generate some level of discomfort for not being easy to achieve.",
+    "description": "This card guides the creation of Objectives."
   },
   "BydeYi": {
     "defaultMessage": "Start",
@@ -618,6 +670,14 @@
   "bZYEAl": {
     "defaultMessage": "A subtraction sign within a circle indicating that progress is still the same",
     "description": "This desc message explains the neutral icon for screen readers"
+  },
+  "C6YmFo": {
+    "defaultMessage": "Tips on writing a good key result:",
+    "description": "The title of the tip when you are creating a KR."
+  },
+  "c6ySN2": {
+    "defaultMessage": "Delete this Objective and its KRs",
+    "description": "This is the third option that appears when you open the menu of a given objective inside the accordion button"
   },
   "c8KQhI": {
     "defaultMessage": "Week of",
@@ -650,6 +710,10 @@
   "CMMxiV": {
     "defaultMessage": "Send comment",
     "description": "The title displayed in the tooltip when the user hovers our paper plane icon in our add comment form"
+  },
+  "CmpXX/": {
+    "defaultMessage": "{company}'s OKR",
+    "description": "Company OKR title on the navigation tab"
   },
   "cPGOoL": {
     "defaultMessage": "Talk to our tech support",
@@ -703,6 +767,10 @@
     "defaultMessage": "Save",
     "description": "Text in the save action button"
   },
+  "dbh5MZ": {
+    "defaultMessage": "{company}’s OKRs",
+    "description": "Company OKR title of the page"
+  },
   "DEMBaq": {
     "defaultMessage": "An icon of a plus sign, indicating that by clicking here you will open the sidebar for creating a key result",
     "description": "This message is used inside the objective accordion panel, on the insert key-result button"
@@ -743,6 +811,10 @@
     "defaultMessage": "Create team",
     "description": "The text displayed inside create team button in explore page"
   },
+  "DRyY0A": {
+    "defaultMessage": "Define a challenge that is both aggressive and realistic.",
+    "description": "The third description of the tip when you are creating a KR."
+  },
   "DsPsDZ": {
     "defaultMessage": "This team has no subteam. ",
     "description": "This message is displayed in our team plage inside the child teams section when that team has no child teams"
@@ -778,6 +850,10 @@
   "eG8Ohg": {
     "defaultMessage": "Annual OKRs {year}",
     "description": "The summary title for the yearly OKRs"
+  },
+  "EG9UsD": {
+    "defaultMessage": "{company}'s OKR",
+    "description": "Company OKR title of the page"
   },
   "eI6jYw": {
     "defaultMessage": "No information provided",
@@ -827,6 +903,10 @@
     "defaultMessage": "Green circle indicating a high confidence level",
     "description": "A brief explanation for screen readers regarding the green status circle"
   },
+  "Fb0ZAK": {
+    "defaultMessage": "They describe a vision of the future that’s attractive, motivating and worth the effort.",
+    "description": "This card guides the creation of Objectives."
+  },
   "fd6kjy": {
     "defaultMessage": "Key result",
     "description": "The text of the table head related to the KeyResult column"
@@ -846,6 +926,10 @@
   "fI4P80": {
     "defaultMessage": "Q1",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
+  },
+  "FMvbXp": {
+    "defaultMessage": "In the {cadence} {cycle} {parent} cycle",
+    "description": "This message is displayed inside the team page, on the options menu of a cycle"
   },
   "FoCix/": {
     "defaultMessage": "Search",
@@ -902,6 +986,10 @@
   "G/bGAZ": {
     "defaultMessage": "Workspace successfully created",
     "description": "The title of the toast that appears when we create a new workspace"
+  },
+  "gAgkzF": {
+    "defaultMessage": "Create Objective",
+    "description": "create new key result"
   },
   "GBh0Xf": {
     "defaultMessage": "We're sorry, but there's already an user linked to this email address",
@@ -963,9 +1051,17 @@
     "defaultMessage": "Search",
     "description": "The text is displayed as a placeholder in our search input inside the key-result drawers while the user is changing the owner of that key-result"
   },
+  "gTym4f": {
+    "defaultMessage": "Individual progress based on the average of the key results in the current year",
+    "description": "Yearly progress chart tooltip message"
+  },
   "gu4aCE": {
     "defaultMessage": "Annual",
     "description": "This text is used as prefix for our yearly cadences"
+  },
+  "GuD4W6": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title of the page"
   },
   "gXiIKg": {
     "defaultMessage": "Low confidence",
@@ -988,7 +1084,7 @@
     "description": "This message is used as the type to display in some of the delete dialogs while removing a given key-result"
   },
   "H0xYvz": {
-    "defaultMessage": "",
+    "defaultMessage": "These are the key results and tasks assigned to {username}",
     "description": "The page subtitle for users profile"
   },
   "h4sP/q": {
@@ -1015,6 +1111,10 @@
     "defaultMessage": "Error creating workspace",
     "description": "The title of the toast that appears when we have an error while creating a new workspace"
   },
+  "hfxyjh": {
+    "defaultMessage": "Check out our OKR examples",
+    "description": "This is a external link that goes to OKR examples made by Bud."
+  },
   "hhH9fH": {
     "defaultMessage": "First user's job title",
     "description": "The user role while creating a new workspace"
@@ -1024,7 +1124,7 @@
     "description": "This is the keyword that the user needs to type to deactivate a given user"
   },
   "hL/jUm": {
-    "defaultMessage": "",
+    "defaultMessage": "TASKS IN OKRs",
     "description": "The title for tasks section in the profile page"
   },
   "hMD8CO": {
@@ -1079,6 +1179,10 @@
     "defaultMessage": "An unexpected error occurred when creating your objective. Please try again.",
     "description": "This message appears as an error toast when the users tries to create a new objective but an error appears"
   },
+  "ifl8WA": {
+    "defaultMessage": "You haven't created any individual OKR yet",
+    "description": "This message is displayed as the empty state message inside the User page"
+  },
   "IGHT6z": {
     "defaultMessage": "You will lose every key result in this OKR, including every check-in and comment made so far.",
     "description": "This message is used as the modal description while removing a given objective"
@@ -1108,7 +1212,7 @@
     "description": "The label text above the Owner section in our key result single page or drawer"
   },
   "iLO8sl": {
-    "defaultMessage": "These tasks are not directed related to a key result. Use it to better organize your day and make it more productive. :)",
+    "defaultMessage": "These tasks are not directly related to a key result. Use them to better organize your day and make it more productive :)",
     "description": "The tooltip that shows when hovering over the personal tasks accordion title"
   },
   "ilU+Uz": {
@@ -1126,6 +1230,10 @@
   "iPv+uj": {
     "defaultMessage": "Horizontal straight line icon illustrating that your company hasn't evolve since the last check in event",
     "description": "This message is used by screen readers to explain our line icon"
+  },
+  "IsUZSc": {
+    "defaultMessage": "Delete this Key Result",
+    "description": "This message appears in the button that deletes the key result"
   },
   "ItLQef": {
     "defaultMessage": "Check-in made",
@@ -1176,16 +1284,24 @@
     "description": "This text is giving more details regarding the delete alert in our drawers"
   },
   "JItuU0": {
-    "defaultMessage": "",
+    "defaultMessage": "{username}'s Things",
     "description": "The page title for users profile"
   },
   "jjr+Ye": {
     "defaultMessage": "Objective successfully removed",
     "description": "This message appears in a toast after the user removes an objective"
   },
+  "Jk/gDc": {
+    "defaultMessage": "Create Objective",
+    "description": "Title of the create objective button"
+  },
   "Jkg7nT": {
     "defaultMessage": "US$ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin USD format"
+  },
+  "JNiINj": {
+    "defaultMessage": "Check out our OKR examples",
+    "description": "This button redirects to the page that teaches about OKRs."
   },
   "jRsXuq": {
     "defaultMessage": "CHECK-IN",
@@ -1219,6 +1335,10 @@
     "defaultMessage": "Yesterday",
     "description": "This label is displayed if the last is yesterday"
   },
+  "jzx+Hl": {
+    "defaultMessage": "Options button",
+    "description": "This button allows you to choose an option that directs the user to the users profile or details."
+  },
   "K03Z5V": {
     "defaultMessage": "Cycle",
     "description": "The company quarterly period input placeholder while creating a new workspace"
@@ -1239,6 +1359,10 @@
     "defaultMessage": "End date for the quarterly cycle",
     "description": "The label of the company quarterly date end while creating a new workspace"
   },
+  "K4Rjji": {
+    "defaultMessage": "History",
+    "description": "Title of the history button"
+  },
   "K8KvrI": {
     "defaultMessage": "My Things",
     "description": "MainAppBar menu item that links to \"My Things\" page"
@@ -1250,6 +1374,10 @@
   "KdYFbe": {
     "defaultMessage": "Delete",
     "description": "This text is displayed in our menu, as an anchor to remove that given card"
+  },
+  "kEofXd": {
+    "defaultMessage": "Individual planning is defined by you. They do not interfere with the company's progress but can be seen by your colleagues.",
+    "description": "Individual OKR subtitle of the page"
   },
   "kFrglO": {
     "defaultMessage": "The objective's progress is calculated by the average evolution of all key results related to it. It is necessary to reach all these key results to reach the objective above. Therefore, the color of this indicator represents the lower confidence inside among those key results.",
@@ -1298,6 +1426,10 @@
   "L5w0P3": {
     "defaultMessage": "Female",
     "description": "This is the female option while selecting a gender to create a new user"
+  },
+  "LAEhNz": {
+    "defaultMessage": "Add a new task to this KR",
+    "description": "The label for create KR task button"
   },
   "lApj0K": {
     "defaultMessage": "Wallet icon",
@@ -1359,6 +1491,10 @@
     "defaultMessage": "English",
     "description": "The user locale en-US option while creating a new workspace"
   },
+  "lQkUTL": {
+    "defaultMessage": "Inspiring",
+    "description": "This title guides the creation of Objectives."
+  },
   "LvI+KK": {
     "defaultMessage": "Language",
     "description": "This message is the label of our locale switcher in the settings page"
@@ -1366,6 +1502,10 @@
   "lWcm/y": {
     "defaultMessage": "There are no key results with this confidence level.",
     "description": "Tooltip content for health strategy box without key results"
+  },
+  "LwoUMm": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title of the page"
   },
   "M0RYZa": {
     "defaultMessage": "Save",
@@ -1431,6 +1571,10 @@
     "defaultMessage": "Write about {isMyUser, select, true {you} other {{firstName}}}",
     "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
   },
+  "N70n39": {
+    "defaultMessage": "Individual progress based on the average of the key results in the current quarter",
+    "description": "Quarterly progress chart tooltip message"
+  },
   "N8Xs+4": {
     "defaultMessage": "DELETE",
     "description": "This message is used as a keyword to remove a given objective"
@@ -1491,6 +1635,10 @@
     "defaultMessage": "Update",
     "description": "This message is displayer as soon as our user hovers the avatar"
   },
+  "NPR3JP": {
+    "defaultMessage": "INDIVIDUAL PLAN",
+    "description": "This message is displayed above the empty state inside the active cycles section at the User page"
+  },
   "npWxt7": {
     "defaultMessage": "A button with an X symbol. By clicking on it you will cancel editing the objective",
     "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the cancel button"
@@ -1535,6 +1683,10 @@
     "defaultMessage": "An icon with three dots, indicating that by clicking here a menu will expand",
     "description": "The description for screen readers regarding the three dots above the objectives accordion"
   },
+  "oGyXN5": {
+    "defaultMessage": "Colleagues with Individual Plan",
+    "description": "Friends with individual OKRs title"
+  },
   "OMUZ7w": {
     "defaultMessage": "Female",
     "description": "The female gender for the company while creating a new workspace"
@@ -1546,6 +1698,10 @@
   "or8fId": {
     "defaultMessage": "Back",
     "description": "This message is displayed as a label in the button on our not found error page"
+  },
+  "OwHPoA": {
+    "defaultMessage": "No OKRs have been created in this Individual Plan yet",
+    "description": "This message is displayed as the empty state message inside the User page"
   },
   "OwWiN7": {
     "defaultMessage": "Create new user",
@@ -1566,6 +1722,10 @@
   "P0g9QE": {
     "defaultMessage": "Start date for the annual cycle",
     "description": "The label of the company yearly date start while creating a new workspace"
+  },
+  "P0ljMC": {
+    "defaultMessage": "Average of the progress of your key results in the current quarterly cycle",
+    "description": "Quarterly progress chart tooltip message"
   },
   "p2UjMZ": {
     "defaultMessage": "My Things | bud",
@@ -1651,6 +1811,10 @@
     "defaultMessage": "Progress percentage between the initial value and the goal",
     "description": "This tooltip explains the fifth column of the key result list"
   },
+  "qhchMM": {
+    "defaultMessage": "They represent the highest priorities and communicate that direction very clearly.",
+    "description": "This card guides the creation of Objectives."
+  },
   "QKkwxU": {
     "defaultMessage": "Actions",
     "description": "This message is displayed as the column header for the key-result table in the actions column"
@@ -1662,6 +1826,10 @@
   "QMM2q6": {
     "defaultMessage": "Area",
     "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
+  },
+  "qp4Qmm": {
+    "defaultMessage": "Go to {username}'s profile",
+    "description": "This button redirects to the selected user."
   },
   "QPGUqB": {
     "defaultMessage": "High Confidence",
@@ -1682,6 +1850,10 @@
   "QRy8b9": {
     "defaultMessage": "New objective successfully created",
     "description": "This message appears as a toast as soon as the the user clicks to add a new objective in the team page"
+  },
+  "qsn7TW": {
+    "defaultMessage": "Add new personal task",
+    "description": "The add new personal task button label"
   },
   "Qt52rN": {
     "defaultMessage": "Language",
@@ -1763,6 +1935,10 @@
     "defaultMessage": "Name",
     "description": "The user first name input placeholder while creating a new workspace"
   },
+  "Sb6dkV": {
+    "defaultMessage": "See details",
+    "description": "This option will show a sidebar with the details of the selected user."
+  },
   "SDzYq9": {
     "defaultMessage": "We're sorry! There's been an unexpected error. Please try again",
     "description": "This message appears when the user tries to remove a given objective, but receives an error"
@@ -1779,6 +1955,10 @@
     "defaultMessage": "Create user",
     "description": "The label of the submit button of the create user form"
   },
+  "ShzOP9": {
+    "defaultMessage": "History Icon",
+    "description": "Icon description for history icon"
+  },
   "SiJuyU": {
     "defaultMessage": "Calendar icon indicating that here you can filter the year you want.",
     "description": "This message is used by screen readers to explain the icon to the user"
@@ -1790,6 +1970,10 @@
   "Sm4xi7": {
     "defaultMessage": "Time machine",
     "description": "This message is displayed as the title of the time machine section in a team's page"
+  },
+  "SmMx3s": {
+    "defaultMessage": "Colleagues with individual plan",
+    "description": "Friends with individual OKRs title"
   },
   "Smwz9L": {
     "defaultMessage": "It describes the period in which this key result makes part",
@@ -1831,6 +2015,10 @@
     "defaultMessage": "An arrow icon that expands the check-list",
     "description": "This message is used by screen readers to explain the collapse icon in our key-result sidebar on the checklist section"
   },
+  "SU+pQ8": {
+    "defaultMessage": "Click on the <span>...</span> button to create the first key result of this objective.",
+    "description": "This message is displayed in the key-results empty state inside the team page when an objective has no key-results"
+  },
   "SWl7UB": {
     "defaultMessage": " \"x\" icon. By clicking on it you will close the progress box",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
@@ -1842,6 +2030,10 @@
   "sYGIlp": {
     "defaultMessage": "My account",
     "description": "This label defines the text on the first menu section option"
+  },
+  "t0t6MQ": {
+    "defaultMessage": "Back to the present",
+    "description": "The button title to go back to the present"
   },
   "t0YKyV": {
     "defaultMessage": "Confirm",
@@ -1867,6 +2059,10 @@
     "defaultMessage": "Add an OKR in this cycle",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
   },
+  "tBBHmo": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title on the navigation tab"
+  },
   "tcWO3v": {
     "defaultMessage": "Bud logotype. It been just the Bud written in lower case in purple",
     "description": "The alternative text explaining our logotype"
@@ -1887,6 +2083,10 @@
     "defaultMessage": "It's quiet... Too quiet.",
     "description": "This text is the title of our empty state card inside our key result drawer"
   },
+  "tj3TRS": {
+    "defaultMessage": "Audacious",
+    "description": "This title guides the creation of Objectives."
+  },
   "TKIxVB": {
     "defaultMessage": "Settings",
     "description": "This title is displayed as the heading of the definitions menu section"
@@ -1898,6 +2098,10 @@
   "Tp/cz3": {
     "defaultMessage": "{confidence, select, roadblock {All key results with a {confidence}} other {All key results with {confidence}}}",
     "description": "The title for the dashboard key results modal"
+  },
+  "Tsd4ry": {
+    "defaultMessage": "See the Individual OKRs for { username }. They do not interfere with the company's overall progress.",
+    "description": "Individual OKR subtitle of the page"
   },
   "txi+kN": {
     "defaultMessage": "Language",
@@ -1943,6 +2147,10 @@
     "defaultMessage": "Rounded corners square icon with a pencil inside",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
   },
+  "uL69e4": {
+    "defaultMessage": "You haven't created any OKR for your individual plan.",
+    "description": "This message is displayed as the empty state message inside the User page"
+  },
   "UN5BY2": {
     "defaultMessage": "DELETE",
     "description": "This message is used as the default keyword to type to confirm while removing a given resource"
@@ -1976,7 +2184,7 @@
     "description": "The label of the first step while creating a new workspace"
   },
   "VBdX86": {
-    "defaultMessage": "",
+    "defaultMessage": "{username} still doesn't have any assigned tasks in the OKRs of the company",
     "description": "The empty state message header when a user have no tasks"
   },
   "vbnV7B": {
@@ -1994,6 +2202,14 @@
   "VDLkuO": {
     "defaultMessage": "Show more",
     "description": "This text is displayed in the button that expands a truncated text"
+  },
+  "VFj8OD": {
+    "defaultMessage": "Title copied successfully",
+    "description": "This message appears in the toast when you successfully copies the title of the key result"
+  },
+  "vfstY8": {
+    "defaultMessage": "Make it measurable by using a number to define success",
+    "description": "The second description of the tip when you are creating a KR."
   },
   "vgU7fC": {
     "defaultMessage": "First check-in pending",
@@ -2027,6 +2243,14 @@
     "defaultMessage": "Period",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
   },
+  "VPJIpc": {
+    "defaultMessage": "OKRs",
+    "description": "This message is displayed above the empty state inside the active cycles section at the User page"
+  },
+  "vppqyA": {
+    "defaultMessage": "Individual Plan OKRs are set by you. They do not interfere with the company's progress.",
+    "description": "Individual OKR subtitle of the page"
+  },
   "VSS4F8": {
     "defaultMessage": "{unit, select, fallback {since {date}} other {{date}}}",
     "description": "This text displays the latest report status for a given component, using a given date logic"
@@ -2039,6 +2263,10 @@
     "defaultMessage": "First user's name",
     "description": "The user first name while creating a new workspace"
   },
+  "vzHp1e": {
+    "defaultMessage": "Need inspiration? Remember: the best objectives are...",
+    "description": "This is the title presented in the component that guides you in creating Objectives."
+  },
   "w/3frD": {
     "defaultMessage": "Team leader:",
     "description": "The label to the leader field in team add/edit modal"
@@ -2046,6 +2274,10 @@
   "W37c+K": {
     "defaultMessage": "A check sign. It represents the amount of items marked as complete in the check-list",
     "description": "This text is used by screen readers to explain the check icon in our key-result drawer checklist section"
+  },
+  "W3eJuC": {
+    "defaultMessage": "These are the key results and tasks assigned to you.",
+    "description": "The page sub title that our users should see in the my things page"
   },
   "W9swHV": {
     "defaultMessage": "Settings",
@@ -2058,6 +2290,10 @@
   "waPxPB": {
     "defaultMessage": "First user's language",
     "description": "The user locale while creating a new workspace"
+  },
+  "WEXvlm": {
+    "defaultMessage": "Try using this space to list your priorities for the day, for example :)",
+    "description": "Personal tasks empty state sub title"
   },
   "wiFglx": {
     "defaultMessage": "Owner",
@@ -2103,6 +2339,10 @@
     "defaultMessage": "A circle with a question mark inside icon",
     "description": "This message describes the info circle icon to our screen readers"
   },
+  "x/2y46": {
+    "defaultMessage": "Check out our OKR examples",
+    "description": "This link takes you to the page with guidelines on creating OKRs."
+  },
   "X2V7x7": {
     "defaultMessage": "Confidence",
     "description": "The text of the table head related to the Confidence Level column"
@@ -2112,7 +2352,7 @@
     "description": "The title text of our search icon, it is displayed when an user hover the icon itself"
   },
   "x7doNg": {
-    "defaultMessage": "",
+    "defaultMessage": "Visualize the profile of other members of your company, interact with their key results and tasks, and explore their personal OKRs",
     "description": "The page meta description"
   },
   "x8ytCP": {
@@ -2122,6 +2362,10 @@
   "xaHzA0": {
     "defaultMessage": "Last name",
     "description": "The user last name input placeholder while creating a new workspace"
+  },
+  "XCDzMo": {
+    "defaultMessage": "Options button",
+    "description": "This button allows you to choose an option that can allow you to copy the title ou exclude the KR."
   },
   "xe74UT": {
     "defaultMessage": "In OKRs, the general rule is to aim for a progress of at least 70%. To achieve this by the end of the cycle, the current progress is expected to be at {progress}%.",
@@ -2187,6 +2431,10 @@
     "defaultMessage": "A check icon. By clicking on it you will save your changes",
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
   },
+  "XZcPVc": {
+    "defaultMessage": "A woman analyzing a chart and pointing to something on the screen",
+    "description": "The alternative text explaining the empty item image"
+  },
   "Y+MtZe": {
     "defaultMessage": "Name",
     "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
@@ -2199,9 +2447,17 @@
     "defaultMessage": "Up arrow icon indicating that progress has increased",
     "description": "This desc message explains the increase icon for screen readers"
   },
+  "Y8TWo2": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title on the navigation tab"
+  },
   "YETxgV": {
     "defaultMessage": "In OKRs, the general rule is to aim for a progress of at least 70%. To achieve this by the end of the cycle, the current progress is expected to be at {progress}%.",
     "description": "Tooltip message to show when hovering the help icon on projected progress"
+  },
+  "YFb9UA": {
+    "defaultMessage": "Go to profile",
+    "description": "This option will redirect the user to the selected user profile."
   },
   "yfhIM+": {
     "defaultMessage": "Cancel",
@@ -2224,7 +2480,7 @@
     "description": "This message is displayed as the column header for the key-result table in the team column"
   },
   "yRU1Bz": {
-    "defaultMessage": "",
+    "defaultMessage": "{username} is not yet involved in any key result.",
     "description": "The label message that is displayed below our team at work image when a user has no key results in her/his key result view list"
   },
   "ytvOyM": {
@@ -2238,6 +2494,10 @@
   "yw+DGB": {
     "defaultMessage": "Last name",
     "description": "The label of the last name field in the create user form"
+  },
+  "YxKyjP": {
+    "defaultMessage": "Individual Plan",
+    "description": "Individual OKR title of the page"
   },
   "YxNkP6": {
     "defaultMessage": "Check-in",
@@ -2303,6 +2563,10 @@
     "defaultMessage": "Close",
     "description": "This message is displayed as the title text for our close icon in our check-in form"
   },
+  "ZMT2Ze": {
+    "defaultMessage": "Create new Key Result",
+    "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
+  },
   "Zn0eYa": {
     "defaultMessage": "A couple draw, each of them holding a puzzle piece and collaborating to assemble it",
     "description": "The alternative text explaining our team at work image"
@@ -2336,7 +2600,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-05-09T18:19:48Z",
+    "defaultMessage": "2022-06-06T13:40:43Z",
     "description": null
   }
 }

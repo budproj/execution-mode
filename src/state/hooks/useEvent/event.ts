@@ -1,4 +1,6 @@
 import { EventType } from './event-type'
+import { CreatedKeyResultData } from './events/create-key-result-data'
+import { CreatedObjectiveData } from './events/create-objective-data'
 import { CreatedKeyResultCheckInData } from './events/created-key-result-check-in'
 import { CreatedKeyResultCheckMarkEventData } from './events/created-key-result-check-mark'
 import { CreatedKeyResultCommentData } from './events/created-key-result-comment'
@@ -35,4 +37,6 @@ export type Event = {
   [EventType.TOGGLED_PERSONAL_TASK]: ToggledPersonalTaskEventData
   [EventType.UPDATED_PERSONAL_TASK_TITLE]: UpdatedPersonalTaskTitleEventData
   [EventType.OPENED_KEY_RESULT_REPORT_CONFIDANCE]: OpenedKeyResultReportConfidanceData
+  [EventType.CREATED_OBJECTIVE]: CreatedObjectiveData
+  [EventType.CREATED_KEY_RESULT]: CreatedKeyResultData
 }

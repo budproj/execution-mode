@@ -7,12 +7,9 @@ import {
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-interface RadioProgressProperties {
-  color?: CircularProgressProps['color']
-  trackColor?: CircularProgressProps['trackColor']
+interface RadioProgressProperties extends CircularProgressProps {
   progress?: number
   isLoaded?: boolean
-  size?: CircularProgressProps['size']
   isDisabled?: boolean
 }
 
@@ -23,8 +20,8 @@ export const RadioProgress = ({
   color,
   trackColor,
   isDisabled,
+  ...rest
 }: RadioProgressProperties) => {
-  progress ??= 0
   size ??= 14
   isLoaded ??= true
 
@@ -38,14 +35,17 @@ export const RadioProgress = ({
         color={isDisabled ? 'gray.200' : color}
         trackColor={isDisabled ? 'gray.100' : trackColor}
         size={size}
+        {...rest}
       >
-        <CircularProgressLabel
-          color={isDisabled ? 'gray.300' : color}
-          fontWeight={700}
-          fontSize="md"
-        >
-          {intl.formatNumber(progress / 100, { style: 'percent' })}
-        </CircularProgressLabel>
+        {typeof progress === 'number' ? (
+          <CircularProgressLabel
+            color={isDisabled ? 'gray.300' : color}
+            fontWeight={700}
+            fontSize="md"
+          >
+            {intl.formatNumber(progress / 100, { style: 'percent' })}
+          </CircularProgressLabel>
+        ) : undefined}
       </CircularProgress>
     </SkeletonCircle>
   )

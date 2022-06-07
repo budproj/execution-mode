@@ -1,10 +1,10 @@
-import { Box, Flex, FlexProps, Image, Text, ImageProps } from '@chakra-ui/react'
+import { Box, Flex, FlexProps, Image, Text, ImageProps, StyleProps } from '@chakra-ui/react'
 import React from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
 import messages from './messages'
 
-export interface EmptyStateProperties {
+export interface EmptyStateProperties extends StyleProps {
   labelMessage: MessageDescriptor
   headerMessage?: MessageDescriptor
   imageKey: keyof typeof imageKeys
@@ -12,14 +12,18 @@ export interface EmptyStateProperties {
   h?: FlexProps['h']
   py?: FlexProps['py']
   gridGap?: FlexProps['gridGap']
+  headerTranslationOptions?: any
+  messageTranslationOptions?: any
 }
 
-const imageKeys = {
+export const imageKeys = {
   'working-team': '/images/bud-team-at-work.png',
   'empty-folder': '/images/bud-empty-folder.png',
   'people-with-pages': '/images/bud-people-with-pages.png',
   'empty-bench': '/images/bud-empty-bench.png',
   'check-item': '/images/check-item.png',
+  'empty-krs': '/images/bud-empty-object-krs.png',
+  'empty-personal-okrs-tab': '/images/empty-personal-okrs-tab.png',
 }
 
 const imageAlts = {
@@ -28,6 +32,8 @@ const imageAlts = {
   'people-with-pages': messages.pagesAlt,
   'empty-bench': messages.emptyBenchAlt,
   'check-item': messages.checkItem,
+  'empty-krs': messages.emptyFolderAlt,
+  'empty-personal-okrs-tab': messages.emptyPersonalObjectives,
 }
 
 const EmptyState = ({
@@ -38,6 +44,9 @@ const EmptyState = ({
   py,
   maxW,
   gridGap,
+  headerTranslationOptions = {},
+  messageTranslationOptions = {},
+  ...rest
 }: EmptyStateProperties) => {
   maxW ??= 52
   gridGap ??= 8
@@ -55,17 +64,18 @@ const EmptyState = ({
       direction="column"
       h={h}
       py={py}
+      {...rest}
     >
       <Box>
         <Image src={imageURL} alt={intl.formatMessage(imageAlt)} maxW={maxW} />
       </Box>
       {headerMessage && (
         <Text color="new-gray.700" fontSize="lg" fontWeight="bold" textAlign="center" mb="-15px">
-          {intl.formatMessage(headerMessage)}
+          {intl.formatMessage(headerMessage, headerTranslationOptions)}
         </Text>
       )}
-      <Text color="gray.300" textAlign="center">
-        {intl.formatMessage(labelMessage)}
+      <Text fontSize={16} fontWeight={400} color="new-gray.700" textAlign="center">
+        {intl.formatMessage(labelMessage, messageTranslationOptions)}
       </Text>
     </Flex>
   )

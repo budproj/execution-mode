@@ -10,19 +10,23 @@ import {
   Skeleton,
   SkeletonCircle,
   useToken,
+  Box,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { RefObject } from 'react'
+import React, { ReactElement, RefObject, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import { IntlLink } from 'src/components/Base'
 import SwitchIcon from 'src/components/Icon/Switch'
+import meAtom from 'src/state/recoil/user/me'
 
 import { User } from '../types'
 
 import messages from './messages'
 
-type NameWithAvatarProperties = {
+interface NameWithAvatarProperties {
   user?: Partial<User>
   nameColor?: TextProps['color']
   horizontalGap?: StackProps['spacing']
@@ -35,6 +39,8 @@ type NameWithAvatarProperties = {
   showName?: boolean
   hasSubtitle?: boolean
   subtitle?: string
+  children?: string | ReactElement
+  redirectToProfile?: boolean
   onMouseEnter?: () => void
   onMouseLeave?: () => void
   onClick?: () => void
@@ -78,69 +84,90 @@ export const NameWithAvatar = forwardRef(
       onMouseLeave,
       subtitle,
       onClick,
+      redirectToProfile,
+      children,
     }: NameWithAvatarProperties,
     reference?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null,
   ) => {
     const intl = useIntl()
+    const myID = useRecoilValue(meAtom)
     const [brand500] = useToken('colors', ['brand.500'])
+    const [showButton, setShowButton] = useState(false)
 
     return (
       <Stack
-        ref={reference}
-        alignItems="center"
         direction="row"
-        spacing={horizontalGap}
+        alignItems="center"
+        justifyContent="space-between"
         cursor={isHoverable ? 'pointer' : 'auto'}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        onClick={onClick}
+        onMouseEnter={() => setShowButton(true)}
+        onMouseLeave={() => setShowButton(false)}
       >
-        <SkeletonCircle isLoaded={isLoaded} w={avatarSize} h={avatarSize} fadeDuration={0}>
-          <StyledAvatarWrapper isEditing={isEditing}>
-            <Avatar
-              name={user?.fullName}
-              src={user?.picture}
-              w={avatarSize}
-              h={avatarSize}
-              loading="lazy"
-            />
-            {isEditable && (
-              <Flex
+        <Stack
+          ref={reference}
+          alignItems="center"
+          direction="row"
+          spacing={horizontalGap}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          onClick={onClick}
+        >
+          <SkeletonCircle isLoaded={isLoaded} w={avatarSize} h={avatarSize} fadeDuration={0}>
+            <StyledAvatarWrapper isEditing={isEditing}>
+              <Avatar
+                name={user?.fullName}
+                src={user?.picture}
                 w={avatarSize}
                 h={avatarSize}
-                justifyContent="center"
-                alignItems="center"
-                borderColor="brand.500"
-                borderRadius="full"
-                borderWidth={2}
-                borderStyle="dashed"
-                className="swap-icon"
-                position="absolute"
-                bg="white"
-              >
-                <SwitchIcon fill="brand.500" desc={intl.formatMessage(messages.changeIconDesc)} />
-              </Flex>
+                loading="lazy"
+              />
+              {isEditable && (
+                <Flex
+                  w={avatarSize}
+                  h={avatarSize}
+                  justifyContent="center"
+                  alignItems="center"
+                  borderColor="brand.500"
+                  borderRadius="full"
+                  borderWidth={2}
+                  borderStyle="dashed"
+                  className="swap-icon"
+                  position="absolute"
+                  bg="white"
+                >
+                  <SwitchIcon fill="brand.500" desc={intl.formatMessage(messages.changeIconDesc)} />
+                </Flex>
+              )}
+            </StyledAvatarWrapper>
+          </SkeletonCircle>
+
+          <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
+            {showName && (
+              <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
+                {redirectToProfile ? (
+                  <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
+                    <StyledText fontSize="lg" color={nameColor} brandColor={brand500}>
+                      {user?.fullName}
+                    </StyledText>
+                  </IntlLink>
+                ) : (
+                  <StyledText fontSize="lg" color={nameColor} brandColor={brand500}>
+                    {user?.fullName}
+                  </StyledText>
+                )}
+              </Skeleton>
             )}
-          </StyledAvatarWrapper>
-        </SkeletonCircle>
 
-        <Stack spacing={isLoaded ? 0 : 2} textAlign="left">
-          {showName && (
-            <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
-              <StyledText fontSize="lg" color={nameColor} brandColor={brand500}>
-                {user?.fullName}
-              </StyledText>
-            </Skeleton>
-          )}
-
-          {hasSubtitle && (
-            <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>
-              <Text fontSize="md" color="gray.400">
-                {subtitle}
-              </Text>
-            </Skeleton>
-          )}
+            {hasSubtitle && (
+              <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>
+                <Text fontSize="md" color="gray.400">
+                  {subtitle}
+                </Text>
+              </Skeleton>
+            )}
+          </Stack>
         </Stack>
+        {children && showButton && <Box cursor="pointer">{children}</Box>}
       </Stack>
     )
   },

@@ -8,11 +8,20 @@ query GET_USER_NAMED_AVATAR_DATA {
     gender
     role
     createdAt
+    yearlyProgress {
+      showProgress
+      progress
+    }
+    quarterlyProgress {
+      showProgress
+      progress
+    }
     companies(first: 1) {
       edges {
         node {
           id
           name
+          gender
         }
       }
     }

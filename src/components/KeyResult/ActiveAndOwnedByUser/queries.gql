@@ -1,6 +1,6 @@
-query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES {
-  me {
-    keyResults(active: true) {
+query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES($userID: ID) {
+  user(id: $userID) {
+    keyResults(active: true, onlyKeyResultsFromCompany: true) {
       edges {
         node {
           id
