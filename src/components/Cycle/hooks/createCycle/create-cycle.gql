@@ -5,7 +5,7 @@ mutation CREATE_CYCLE(
   $dateStart: DateTime!
   $dateEnd: DateTime!
   $active: Boolean!
-  $parentId: String!
+  $parentId: String
 ) {
   createCycle(
     data: {

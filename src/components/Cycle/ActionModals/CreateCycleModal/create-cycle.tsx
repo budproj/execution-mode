@@ -42,6 +42,8 @@ export const CreateCycle = ({
       variables: {
         teamId,
         ...values,
+        // eslint-disable-next-line unicorn/no-null
+        parentId: values.parentId === '' ? null : values.parentId,
         active: values.active === CYCLE_STATUS.ACTIVE,
       },
     })

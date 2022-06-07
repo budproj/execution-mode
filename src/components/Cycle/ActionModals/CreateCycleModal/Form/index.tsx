@@ -26,7 +26,7 @@ export type SelectCycleParents = {
 }
 
 export type CreateCycleFormValues = {
-  parentId: string
+  parentId?: string
   period: Cycle['period']
   cadence?: Cycle['cadence']
   dateStart?: Cycle['dateStart']
@@ -45,7 +45,7 @@ type CreateCycleFormProperties = {
 }
 
 export const defaultInitialValues: CreateCycleFormValues = {
-  parentId: '',
+  parentId: undefined,
   period: '',
   cadence: undefined,
   dateStart: undefined,
