@@ -36,6 +36,7 @@ export interface SelectMenuProperties extends StyleProps {
   style?: any
   _hover?: any
   chevronStyle?: any
+  isDisabled?: boolean
 }
 
 const SelectMenu = ({
@@ -55,9 +56,11 @@ const SelectMenu = ({
   valueLabel,
   isInvalid,
   chevronStyle,
+  isDisabled,
   ...rest
 }: SelectMenuProperties) => {
   const intl = useIntl()
+  const open = !isDisabled && isOpen
 
   placeholder ??= intl.formatMessage(messages.defaultPlaceholder)
 
@@ -65,7 +68,7 @@ const SelectMenu = ({
     <Menu
       matchWidth={matchWidth}
       isLazy={isLazy}
-      isOpen={isOpen}
+      isOpen={open}
       closeOnSelect={closeOnSelect}
       placement={placement}
       onOpen={onOpen}
@@ -77,7 +80,9 @@ const SelectMenu = ({
         w="100%"
         borderWidth={isInvalid ? 3 : 2}
         borderColor={isInvalid ? 'red.500' : 'new-gray.400'}
-        color="gray.500"
+        color={isDisabled ? 'gray.400' : 'gray.500'}
+        backgroundColor={isDisabled ? 'new-gray.300' : undefined}
+        cursor={isDisabled ? 'default' : undefined}
         borderRadius={4}
         fontWeight={300}
         textAlign="left"
@@ -85,20 +90,19 @@ const SelectMenu = ({
         px={3}
         fontSize="lg"
         _hover={{
-          color: 'black.900',
+          color: isDisabled ? 'gray.400' : 'black.900',
         }}
         rightIcon={
           <Stack direction="row" alignItems="center">
             {isLoading && <Spinner size="sm" color="black.100" />}
             <ChevronDownIcon
               desc={intl.formatMessage(
-                isOpen ? messages.iconChevronUpDesc : messages.iconChevronDownDesc,
+                open ? messages.iconChevronUpDesc : messages.iconChevronDownDesc,
               )}
               fontSize="xs"
-              color="new-gray.800"
-              stroke="new-gray.800"
+              stroke={isDisabled ? 'new-gray.400' : 'new-gray.800'}
               transition="0.2s all ease-in"
-              transform={isOpen ? 'rotate(180deg)' : 'none'}
+              transform={open ? 'rotate(180deg)' : 'none'}
               {...chevronStyle}
             />
           </Stack>

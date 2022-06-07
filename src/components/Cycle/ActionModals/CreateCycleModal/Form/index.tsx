@@ -14,7 +14,7 @@ import messages from './messages'
 import { NewCycleSchema } from './schema'
 
 const StyledDateInput = styled(Field)`
-  -webkit-calendar-picker-indicator {
+  &::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
   }
@@ -103,11 +103,13 @@ export const CreateCycleModalForm = ({
                   },
                 ]}
               />
+
               <CreateCycleSelectField
                 id="parentId"
                 selectedOptionID={values.parentId}
                 label={intl.formatMessage(messages.parenteCycleField)}
                 options={cycleParents}
+                isDisabled={values.cadence === CADENCE.YEARLY}
               />
 
               <CreateCycleDateField
@@ -172,6 +174,7 @@ type CreateCycleSelectField = {
   options: CreateCycleSelectOption[]
   selectedOptionID?: string
   label: string
+  isDisabled?: boolean
 }
 
 const CreateCycleSelectField = ({
@@ -179,6 +182,7 @@ const CreateCycleSelectField = ({
   options,
   selectedOptionID,
   label,
+  isDisabled,
 }: CreateCycleSelectField) => {
   const { setFieldValue, setFieldTouched, errors, touched } =
     useFormikContext<CreateCycleFormValues>()
@@ -211,6 +215,7 @@ const CreateCycleSelectField = ({
         height="44px"
         valueLabel={selectedOption?.label}
         isInvalid={isInvalid}
+        isDisabled={isDisabled}
         onChange={handleChange}
         onClose={handleClose}
       >
