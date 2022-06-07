@@ -109,6 +109,7 @@ export const UpdateCycleModalForm = ({
                 selectedOptionID={values.parentId ?? defaultInitialValues.period}
                 label={intl.formatMessage(messages.parenteCycleField)}
                 options={parents}
+                isDisabled={values.cadence === CADENCE.YEARLY}
               />
 
               <UpdateCycleDateField
@@ -188,6 +189,7 @@ type UpdateCycleSelectField = {
   options: UpdateCycleSelectOption[]
   selectedOptionID?: string
   label: string
+  isDisabled?: boolean
 }
 
 const UpdateCycleSelectField = ({
@@ -195,6 +197,7 @@ const UpdateCycleSelectField = ({
   options,
   selectedOptionID,
   label,
+  isDisabled,
 }: UpdateCycleSelectField) => {
   const { setFieldValue, setFieldTouched, errors, touched } =
     useFormikContext<UpdateCycleFormValues>()
@@ -227,6 +230,7 @@ const UpdateCycleSelectField = ({
         height="44px"
         valueLabel={selectedOption?.label}
         isInvalid={isInvalid}
+        isDisabled={isDisabled}
         onChange={handleChange}
         onClose={handleClose}
       >
