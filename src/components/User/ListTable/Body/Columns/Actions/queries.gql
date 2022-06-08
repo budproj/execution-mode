@@ -1,0 +1,5 @@
+mutation DELETE_CYCLE($cycleID: ID!) {
+  deleteCycle(id: $cycleID) {
+    affected
+  }
+}

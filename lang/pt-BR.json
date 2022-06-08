@@ -219,6 +219,10 @@
     "defaultMessage": "Minhas Tarefas",
     "description": "The header in my tasks title, inside my things page"
   },
+  "2nlZ3v": {
+    "defaultMessage": "Visualize e altere as configurações de sua conta.",
+    "description": "The page description that is displayed in Google and screen readers for the settings page."
+  },
   "2yQ5iH": {
     "defaultMessage": "Termo de Privacidade",
     "description": "This label defines the text on the first menu section option"
@@ -250,6 +254,10 @@
   "3n0bhJ": {
     "defaultMessage": "Esses são os resultados-chave que fazem parte desse objetivo",
     "description": "This tooltip explains the first column of the key result list"
+  },
+  "3q/E0t": {
+    "defaultMessage": "Ciclos de OKR",
+    "description": "The subtitle page."
   },
   "3rnKj8": {
     "defaultMessage": "Confira como seu card aparecerá para outros usuários.",
@@ -379,6 +387,10 @@
     "defaultMessage": "As notificações relacionadas a este resultado-chave, como novos comentários, também serão enviadas ao time de apoio.",
     "description": "The tooltip text for the notifications description"
   },
+  "7GDhfH": {
+    "defaultMessage": "O ciclo está ativo, a funcionalidade de check-in está disponível, e o progresso está sendo mensurado.",
+    "description": "This string is used to describe the cycles active status option."
+  },
   "7Yw26b": {
     "defaultMessage": "Selecione o ano",
     "description": "This message is displayed when no year filter was selected"
@@ -386,10 +398,6 @@
   "7d+540": {
     "defaultMessage": "Uma seta para cima, indicando que o menu de seleção de ciclos está aberto",
     "description": "This message is displayed to the user screen reader when the year select menu is opened"
-  },
-  "7j5aFU": {
-    "defaultMessage": "Visualize ou altere suas configurações.",
-    "description": "The page description that is displayed in Google and screen readers for the my profile page"
   },
   "7tvIOz": {
     "defaultMessage": "Adicionar resultado-chave",
@@ -427,6 +435,10 @@
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
   },
+  "8B+4Un": {
+    "defaultMessage": "Use este painel para configurar os usuários da plataforma.",
+    "description": "The description page."
+  },
   "8CjDR7": {
     "defaultMessage": "Cancelar",
     "description": "This message is used in the cancel button when we are in the confirmation dialog"
@@ -442,6 +454,10 @@
   "8YI1Fn": {
     "defaultMessage": "Financeiro (Real)",
     "description": "This message is displayed inside our key-result format select as the title of the coin BRL format"
+  },
+  "8gbub2": {
+    "defaultMessage": "Status",
+    "description": "This message is displayed as the column header for the cycle table in the status column"
   },
   "8kcr+g": {
     "defaultMessage": "Usuário",
@@ -462,6 +478,10 @@
   "9OSi6W": {
     "defaultMessage": "Data de fim",
     "description": "The company quarterly date end input placeholder while creating a new workspace"
+  },
+  "9Y9dS0": {
+    "defaultMessage": "Nome do ciclo",
+    "description": "The description for name cycle field"
   },
   "9dXuLd": {
     "defaultMessage": "R$ 100",
@@ -515,6 +535,10 @@
     "defaultMessage": "Um ícone de lixeira. Ao clicar nele você irá remover este resultado-chave",
     "description": "This text is used by screen readers to explain our trash can icon, used to remove that line in the key-result table"
   },
+  "BeFobb": {
+    "defaultMessage": "Isso também excluirá todos os OKRs criados neste ciclo. Essa ação não pode ser desfeita.",
+    "description": "This message is used as the description in our first dialog while removing a cycle"
+  },
   "BipZgy": {
     "defaultMessage": "Desculpe, mas aconteceu um erro inesperado. Tente novamente mais tarde",
     "description": "This text is displayed as a toast when the user tries to update an objective but an error occur"
@@ -522,6 +546,10 @@
   "BydeYi": {
     "defaultMessage": "Início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawers"
+  },
+  "CDO5jp": {
+    "defaultMessage": "Inativo",
+    "description": "This option makes an not-active cycle"
   },
   "CEhx3c": {
     "defaultMessage": "Informações pessoais",
@@ -534,6 +562,14 @@
   "CQAFfW": {
     "defaultMessage": "Se tudo continuar assim, esperamos alcançar o resultado",
     "description": "This text explains our tag to the user"
+  },
+  "CQPpEV": {
+    "defaultMessage": "Ativo",
+    "description": "This string is used to select the active cycles option."
+  },
+  "CS3a8I": {
+    "defaultMessage": "Ativo",
+    "description": "This option makes an active cycle"
   },
   "CWzl6a": {
     "defaultMessage": "Nenhuma informação",
@@ -631,6 +667,10 @@
     "defaultMessage": "Cor do Nível de Confiança",
     "description": "The text of the table head related to the Confidence Level color column"
   },
+  "F9UdBv": {
+    "defaultMessage": "Ações",
+    "description": "This message is displayed as the column header for the cycle table in the actions column"
+  },
   "FEd9u8": {
     "defaultMessage": "Salvar",
     "description": "This message is displayed in the \"SAVE\" button in the checkin form"
@@ -723,10 +763,6 @@
     "defaultMessage": "Ciclo",
     "description": "The label text above the Cycle section in our key result single page or drawers"
   },
-  "HZeOLc": {
-    "defaultMessage": "Configurações",
-    "description": "The page title that our users should see in the my profile page"
-  },
   "HhSnBG": {
     "defaultMessage": "DESATIVAR",
     "description": "This is the keyword that the user needs to type to deactivate a given user"
@@ -774,6 +810,10 @@
   "J+UxkH": {
     "defaultMessage": "{progress, select, 0 {Sem variação} other {Variação de <highlight>{signal}{progress}%</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
+  },
+  "J0sAff": {
+    "defaultMessage": "Ciclo {period} excluído com sucesso.",
+    "description": "This message appears in a toast after the user removes an cycle."
   },
   "J5Rfuu": {
     "defaultMessage": "Crie novas tarefas pela barra lateral dos resultados-chave em que você atua.",
@@ -823,6 +863,10 @@
     "defaultMessage": "Minhas Coisas",
     "description": "MainAppBar menu item that links to \"My Things\" page"
   },
+  "KDE9dq": {
+    "defaultMessage": "Se realmente tem certeza de que deseja excluir o ciclo {period} e todos os seus OKRs, confirme sua ação escrevendo “EXCLUIR” no campo abaixo:",
+    "description": "This message is used as the description in our  second dialog while removing a cycle"
+  },
   "KGQV/U": {
     "defaultMessage": "Nome",
     "description": "The company name input placeholder while creating a new workspace"
@@ -842,6 +886,10 @@
   "L0c5bp": {
     "defaultMessage": "Meta",
     "description": "This label appears above the fifth input in our insert key-result drawer"
+  },
+  "L3D4+H": {
+    "defaultMessage": "Use os campos abaixo para fazer{breakline} alterações neste ciclo:",
+    "description": "The description for cycle modal"
   },
   "L5w0P3": {
     "defaultMessage": "Feminino",
@@ -863,9 +911,17 @@
     "defaultMessage": "Gênero",
     "description": "The user gender input placeholder while creating a new workspace"
   },
+  "Lt+YEZ": {
+    "defaultMessage": "Fim",
+    "description": "This message is displayed as the column header for the cycle table in the date end column"
+  },
   "LvI+KK": {
     "defaultMessage": "Idioma",
     "description": "This message is the label of our locale switcher in the settings page"
+  },
+  "Lxrv+d": {
+    "defaultMessage": "Criar Ciclo",
+    "description": "This button is used to create a new cycle."
   },
   "M0RYZa": {
     "defaultMessage": "Salvar",
@@ -894,6 +950,10 @@
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
+  },
+  "MyqmeF": {
+    "defaultMessage": "Não foi possível criar o ciclo.",
+    "description": "This message is used as an toast error message when we try to create an cycle"
   },
   "N+Tad7": {
     "defaultMessage": "Ícone de uma engrenagem. Ao clicar nele você irá para nossa página de configurações",
@@ -935,6 +995,10 @@
     "defaultMessage": "Subtimes {isLoaded, select, true {({totalTeamsCount})} other{}}",
     "description": "This message is displayed inside the explore page, above the child teams section"
   },
+  "Ny2Pia": {
+    "defaultMessage": "Ciclos são os horizontes de tempo definidos para a estratégia.{breakingline}Recomendamos a criação de um ciclo anual para a empresa e um ciclo trimestral para os times.",
+    "description": "The description page."
+  },
   "O13rH5": {
     "defaultMessage": "{completed}/{total}",
     "description": "This messages is displayed in our our key-result drawer above the checklist as the count of total completed checkmarks"
@@ -954,6 +1018,10 @@
   "OMUZ7w": {
     "defaultMessage": "Feminino",
     "description": "The female gender for the company while creating a new workspace"
+  },
+  "OS8mCA": {
+    "defaultMessage": "Cadência",
+    "description": "The description for cadence cycle field"
   },
   "ObFHxY": {
     "defaultMessage": "Cancelar",
@@ -1151,6 +1219,10 @@
     "defaultMessage": "{prefix} {cycle} {suffix}",
     "description": "This message displays the cycle name with a given prefix"
   },
+  "TGP9cN": {
+    "defaultMessage": "Salvar",
+    "description": "The button to create or edit a cycle on modal"
+  },
   "TIXwh1": {
     "defaultMessage": "Objetivo",
     "description": "The label text above the Objective section in our key result single page or drawers"
@@ -1231,6 +1303,10 @@
     "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawers"
   },
+  "Vytr8A": {
+    "defaultMessage": "Editar ciclo",
+    "description": "The title for cycle modal"
+  },
   "W2Rb+N": {
     "defaultMessage": "Legal",
     "description": "This title is displayed as the heading of the definitions menu section"
@@ -1299,6 +1375,10 @@
     "defaultMessage": "Um ícone de tres pontos, indicando que ao clicar aqui um menu se expandirá",
     "description": "The description for screen readers regarding the three dots icon in the objectives accordion"
   },
+  "XyhQJo": {
+    "defaultMessage": "O ciclo foi removido com sucesso",
+    "description": "This message appears in a toast after the user removes a cycle"
+  },
   "Y+MtZe": {
     "defaultMessage": "Nome",
     "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
@@ -1327,6 +1407,10 @@
     "defaultMessage": "Resultado-chave criado com sucesso!",
     "description": "This message appears after the user creates a new key-result as a toast"
   },
+  "ZCWI2f": {
+    "defaultMessage": "Criar novo ciclo",
+    "description": "The title for cycle modal"
+  },
   "ZPSK4M": {
     "defaultMessage": "Insira um título para este Resultado-chave",
     "description": "The placeholder for the first input in our key-result insert drawer form"
@@ -1343,9 +1427,17 @@
     "defaultMessage": "Fechar",
     "description": "This message is displayed as the title text for our close icon in our check-in form"
   },
+  "Zmw2VE": {
+    "defaultMessage": "Usuários",
+    "description": "The subtitle page."
+  },
   "Zn0eYa": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
     "description": "The alternative text explaining our team at work image"
+  },
+  "ZvutBL": {
+    "defaultMessage": "Cadência",
+    "description": "This message is displayed as the column header for the cycles table in the cadence column"
   },
   "a8O2l+": {
     "defaultMessage": "Um ícone com o sinal de \"mais\". Ao clicar aqui você irá abrir o menu para inserir um novo usuário",
@@ -1374,6 +1466,14 @@
   "ah2n1K": {
     "defaultMessage": "Nome do período trimestral",
     "description": "The label of the company quarterly period while creating a new workspace"
+  },
+  "az3ncM": {
+    "defaultMessage": "Atenção!{breakline}Esta ação não pode ser desfeita.",
+    "description": "This message is used as the title in our second dialog while removing a cycle"
+  },
+  "bPInC0": {
+    "defaultMessage": "Editar ciclo",
+    "description": "This message is the description of the edit cycle option."
   },
   "bZYEAl": {
     "defaultMessage": "Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo",
@@ -1406,6 +1506,10 @@
   "c8x6gV": {
     "defaultMessage": "Explorar ciclos anteriores",
     "description": "This message is displayed when the user opens the menu inside a given cycle at the team page"
+  },
+  "cGFQsk": {
+    "defaultMessage": "Desculpe, aconteceu um erro inesperado. Tente novamente mais tarde",
+    "description": "This message appears as an error toast when we have an unknown error while creating a new cycle"
   },
   "cRj0sI": {
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
@@ -1479,6 +1583,18 @@
     "defaultMessage": "Nenhuma opção disponível",
     "description": "This message is displayed when the user tries to list the cycles, but none is defined"
   },
+  "ej/Q3X": {
+    "defaultMessage": "Cancelar",
+    "description": "The button to close the modal cycle"
+  },
+  "epM1Xt": {
+    "defaultMessage": "Adicionar",
+    "description": "This button is used to create a new cycle."
+  },
+  "f2OulU": {
+    "defaultMessage": "Início",
+    "description": "This message is displayed as the column header for the cycle table in the date start column"
+  },
   "f6/kwR": {
     "defaultMessage": "Esse é o progresso acumulado dessa semana",
     "description": "This tooltip appears when the user hovers the third column title"
@@ -1490,10 +1606,6 @@
   "fI4P80": {
     "defaultMessage": "Q1",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
-  },
-  "fJX5q1": {
-    "defaultMessage": "Cadência",
-    "description": "This message is displayed as the column header for the key-result table in the team column"
   },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
@@ -1511,10 +1623,6 @@
     "defaultMessage": "Baixa Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
   },
-  "fwIpqP": {
-    "defaultMessage": "Visualize e atualize as preferências do seu perfil",
-    "description": "The page description that is displayed in Google and screen readers for the my profile page"
-  },
   "fx39XE": {
     "defaultMessage": "Ajuda",
     "description": "This tooltip is displayed when the user hovers the support button"
@@ -1526,6 +1634,10 @@
   "gXiIKg": {
     "defaultMessage": "Baixa confiança",
     "description": "Title of low confidence health strategy"
+  },
+  "ganP5k": {
+    "defaultMessage": "Settings | bud",
+    "description": "The page title that is displayed in the browser tab for the settings page"
   },
   "gbO+eS": {
     "defaultMessage": "Se realmente tem certeza de que deseja fazer isso, confirme sua ação escrevendo \"{keyword}” no campo abaixo:",
@@ -1615,6 +1727,10 @@
     "defaultMessage": "CHECK-INS",
     "description": "The tooltip text for the check-ins text"
   },
+  "jV4VhD": {
+    "defaultMessage": "Excluir ciclo",
+    "description": "This message is used as the label in the confirmation button while removing a cycle"
+  },
   "jXZZd6": {
     "defaultMessage": "Voltar ao presente",
     "description": "go back to the present button description"
@@ -1639,6 +1755,10 @@
     "defaultMessage": "Dia de fim do período trimestral",
     "description": "The label of the company quarterly date end while creating a new workspace"
   },
+  "kDC8d3": {
+    "defaultMessage": "Configurações",
+    "description": "The page title that our users should see in the settings page"
+  },
   "kFrglO": {
     "defaultMessage": "O progresso do objetivo é calculado pela média de evolução dos seus resultados-chave. É preciso atingir todos esses resultados para alcançar o objetivo. Por isso, a cor desse indicador reflete a menor confiança entre seus resultados-chave.",
     "description": "This tooltip explains how the progress of the objective is calculated"
@@ -1658,10 +1778,6 @@
   "kawRcN": {
     "defaultMessage": "Cancelar",
     "description": "This message is displayed in the \"CANCEL\" button in the checkin form"
-  },
-  "kfZAcb": {
-    "defaultMessage": "Visualize e configure os ciclos",
-    "description": "The page description that is displayed in Google and screen readers for the my profile page"
   },
   "kynYpx": {
     "defaultMessage": "Meus Resultados-Chave",
@@ -1699,6 +1815,10 @@
     "defaultMessage": "Não existem resultados-chave com esse Nível de confiança.",
     "description": "Tooltip content for health strategy box without key results"
   },
+  "ll4kYl": {
+    "defaultMessage": "Data de fim",
+    "description": "The description for date-end cycle field"
+  },
   "lm9HAr": {
     "defaultMessage": "Um ícone de calendário",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
@@ -1722,6 +1842,10 @@
   "mK9HFR": {
     "defaultMessage": "Dia de fim do período anual",
     "description": "The label of the company yearly date end while creating a new workspace"
+  },
+  "mbJq/U": {
+    "defaultMessage": "Tem certeza que deseja excluir o ciclo {period}?",
+    "description": "This message is used as the title in our first dialog while removing a cycle"
   },
   "mdG+CG": {
     "defaultMessage": "Ciclos ativos",
@@ -1779,6 +1903,10 @@
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our unknown error page"
   },
+  "oh+3Gh": {
+    "defaultMessage": "Anual",
+    "description": "This option makes an cycle with yearly cadence"
+  },
   "ooNWJL": {
     "defaultMessage": "Adicionar Time de Apoio",
     "description": "The label text for the add button icon in our key result single page or drawers"
@@ -1794,6 +1922,10 @@
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
+  },
+  "pQnPZP": {
+    "defaultMessage": "Ciclo pai",
+    "description": "The description for parent cycle field"
   },
   "pTXAs1": {
     "defaultMessage": "Um ícone de seta para a direita. Ao clicar aqui voce será enviado para a página deste time",
@@ -1815,6 +1947,14 @@
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
   },
+  "qGLpBy": {
+    "defaultMessage": "Date de início",
+    "description": "The description for date-start cycle field"
+  },
+  "ql0LOi": {
+    "defaultMessage": "Procurar pessoas",
+    "description": "This message appears as a label in users search input."
+  },
   "qrgfik": {
     "defaultMessage": "Em uma frase, qual é a missão deste time?",
     "description": "The placeholder to the description field in team add/edit modal"
@@ -1826,6 +1966,10 @@
   "r1mfc1": {
     "defaultMessage": "Informações pessoais",
     "description": "This title is displayed as the heading of the personal informations section in our user account settings page"
+  },
+  "rFUuVv": {
+    "defaultMessage": "Para criar um novo ciclo de OKRs,{breakline} preencha os campos abaixo:",
+    "description": "The description for cycle modal"
   },
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
@@ -1867,10 +2011,6 @@
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você irá remover esse item da checklist",
     "description": "This text is used by screen readers inside our key-result drawer to describe the X icon to remove a given item from the checklist"
   },
-  "sgir8z": {
-    "defaultMessage": "Settings | bud",
-    "description": "The page title that is displayed in the browser tab for the my profile page"
-  },
   "sgr1cM": {
     "defaultMessage": "Criar usuári{gender, select, MALE {o} FEMALE {a} other {o}}",
     "description": "The label of the submit button of the create user form"
@@ -1891,6 +2031,10 @@
     "defaultMessage": "Um ícone de seta para cima, representando o quanto sua empresa evolui na última semana",
     "description": "This message is used by screen readers to explain our arrow up icon"
   },
+  "t7xKJo": {
+    "defaultMessage": "Ciclo {period} editado com sucesso!",
+    "description": "This message appears when we create a new cycle as a toast"
+  },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
     "description": "The alternative text explaining our logotype"
@@ -1899,13 +2043,13 @@
     "defaultMessage": "Hoje",
     "description": "This label is displayed if the date is today"
   },
+  "tjSA87": {
+    "defaultMessage": "Nome do Ciclo",
+    "description": "This message is displayed as the column header for the cycle table in the cycle name column"
+  },
   "txi+kN": {
     "defaultMessage": "Idioma",
     "description": "The user locale input placeholder while creating a new workspace"
-  },
-  "tygJHd": {
-    "defaultMessage": "Cycles | bud",
-    "description": "The page title that is displayed in the browser tab for the my profile page"
   },
   "u4rqek": {
     "defaultMessage": "Q4",
@@ -1914,6 +2058,10 @@
   "u7Yaxx": {
     "defaultMessage": "Responsável",
     "description": "The text of the table head related to the Owner column"
+  },
+  "uUn4LH": {
+    "defaultMessage": "EXCLUIR",
+    "description": "This message is used as keyword to delete a cycle"
   },
   "uXQE/x": {
     "defaultMessage": "Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.",
@@ -1943,6 +2091,10 @@
     "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
     "description": "This message is displayed as a description in our under maintenance error page"
   },
+  "usAoP+": {
+    "defaultMessage": "Trimestral",
+    "description": "This option makes an cycle with quarterly cadence"
+  },
   "vCWYpE": {
     "defaultMessage": "Este time está dentro de:",
     "description": "The label to the parent team field in team add/edit modal"
@@ -1951,9 +2103,17 @@
     "defaultMessage": "Está silencioso por aqui",
     "description": "This text is the title of our empty state card inside our key result drawers"
   },
+  "vHTPEb": {
+    "defaultMessage": "Ciclo {period} criado com sucesso!",
+    "description": "This message appears when we create a new cycle as a toast"
+  },
   "vJ/603": {
     "defaultMessage": "Esse link pode estar expirado ou a URL está errada.",
     "description": "The description displayed in our not found error page"
+  },
+  "vO+kQj": {
+    "defaultMessage": "O ciclo está fechado. Não é possível editar nem atualizar os OKRs, mas eles podem ser consultados pelo histórico.",
+    "description": "This string is used to describe the cycles not-active status option."
   },
   "vbnV7B": {
     "defaultMessage": "Português",
@@ -1967,13 +2127,13 @@
     "defaultMessage": "Feminino",
     "description": "The user gender female option while creating a new workspace"
   },
-  "vm0Yuj": {
-    "defaultMessage": "Meu perfil | bud",
-    "description": "The page title that is displayed in the browser tab for the my profile page"
-  },
   "vv49le": {
     "defaultMessage": "Nome do usuário inicial",
     "description": "The user first name while creating a new workspace"
+  },
+  "vyGEtA": {
+    "defaultMessage": "Estado atual",
+    "description": "The description for state cycle field"
   },
   "w/3frD": {
     "defaultMessage": "Líder:",
@@ -2010,6 +2170,10 @@
   "x8ytCP": {
     "defaultMessage": "Cancelar",
     "description": "This text is displayed as the button that will cancel the update for ou goal update popover inside the key-result drawers"
+  },
+  "xJJ9uE": {
+    "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
+    "description": "This message appears when the user tries to remove a given cycle, but receives an error"
   },
   "xVR0F1": {
     "defaultMessage": "Apelido",
@@ -2051,6 +2215,10 @@
     "defaultMessage": "Sobrenome",
     "description": "The label of the last name field in the create user form"
   },
+  "ywBP21": {
+    "defaultMessage": "Inativo",
+    "description": "This string is used to select the not-active cycles option."
+  },
   "z2jAqq": {
     "defaultMessage": "Um ícone com o sinal de \"mais\". Ao clicar aqui você irá abrir o menu para inserir um novo subtime",
     "description": "This message is used in our new subteam button while seeing the team list"
@@ -2083,6 +2251,14 @@
     "defaultMessage": "Um banco vazio, representando que não tem ninguém aqui",
     "description": "The alternative text explaining the empty bench image"
   },
+  "zWpOXa": {
+    "defaultMessage": "Criar",
+    "description": "The button to create or edit a cycle on modal"
+  },
+  "zcIxrk": {
+    "defaultMessage": "Excluir ciclo",
+    "description": "This message is the description of the option to delete a cycle."
+  },
   "ze3hqu": {
     "defaultMessage": "Estamos trabalhando em melhorias para você! :)",
     "description": "The title displayed in our under maintenance error page"
@@ -2094,10 +2270,6 @@
   "znpwST": {
     "defaultMessage": "Q3",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
-  },
-  "zpmcgF": {
-    "defaultMessage": "Data",
-    "description": "This message is displayed as the column header for the key-result table in the team column"
   },
   "zsB72A": {
     "defaultMessage": "Pré-visualização",
