@@ -83,8 +83,11 @@ const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties
       } else if (data) {
         toast({
           status: 'success',
-          title: intl.formatMessage(messages.successEditToastMessage, {
+          title: intl.formatMessage(messages.successParcialEditToastMessage, {
             period: data.updateCycle.period,
+            status: data.updateCycle.active
+              ? messages.inactiveCycleStatus.defaultMessage
+              : messages.activeCycleStatus.defaultMessage,
           }),
         })
       }

@@ -5,8 +5,10 @@ type CyclesListBodyColumnStatusMessage =
   | 'notActiveCycleTitleOption'
   | 'activeCycleDescriptionOption'
   | 'notActiveCycleDescriptionOption'
-  | 'successEditToastMessage'
+  | 'successParcialEditToastMessage'
   | 'unknownErrorToastMessage'
+  | 'activeCycleStatus'
+  | 'inactiveCycleStatus'
 
 export default defineMessages<CyclesListBodyColumnStatusMessage>({
   activeCycleTitleOption: {
@@ -33,9 +35,9 @@ export default defineMessages<CyclesListBodyColumnStatusMessage>({
     description: 'This string is used to describe the cycles not-active status option.',
   },
 
-  successEditToastMessage: {
-    defaultMessage: 'Ciclo {period} editado com sucesso!',
-    id: 't7xKJo',
+  successParcialEditToastMessage: {
+    defaultMessage: 'Ciclo {period} {status} com sucesso!',
+    id: 'i3PQl+',
     description: 'This message appears when we create a new cycle as a toast',
   },
 
@@ -44,5 +46,17 @@ export default defineMessages<CyclesListBodyColumnStatusMessage>({
     id: 'cGFQsk',
     description:
       'This message appears as an error toast when we have an unknown error while creating a new cycle',
+  },
+
+  activeCycleStatus: {
+    defaultMessage: 'desativado',
+    id: 'UNfjU2',
+    description: 'This message appears when we have successfully activate/deactivate a cycle.',
+  },
+
+  inactiveCycleStatus: {
+    defaultMessage: 'ativado',
+    id: 'zaC3Cb',
+    description: 'This message appears when we are unable to activate/deactivate a cycle',
   },
 })
