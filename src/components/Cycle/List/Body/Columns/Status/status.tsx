@@ -28,11 +28,15 @@ import messages from './messages'
 
 export interface CyclesListBodyColumnStatusProperties extends CyclesListBodyColumnBaseProperties {
   id?: Cycle['id']
+  canEdit: boolean
 }
 
 const statusSelector = buildPartialSelector<Cycle['active']>('active')
 
-const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties): ReactElement => {
+const CyclesListBodyColumnStatus = ({
+  id,
+  canEdit,
+}: CyclesListBodyColumnStatusProperties): ReactElement => {
   const intl = useIntl()
   const { updateCycle, loading, error, data } = useUpdateCycle()
   const toast = useToast()
@@ -112,6 +116,8 @@ const CyclesListBodyColumnStatus = ({ id }: CyclesListBodyColumnStatusProperties
                   as={Button}
                   borderWidth={1}
                   backgroundColor="brand.50"
+                  cursor={canEdit ? 'pointer' : 'default'}
+                  disabled={!canEdit}
                   borderColor={`${
                     statusState === CYCLE_STATUS.ACTIVE ? 'brand.500' : 'new-gray.600'
                   }`}

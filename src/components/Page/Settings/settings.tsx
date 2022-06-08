@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl'
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { SettingsCycles, SettingsMyProfile, SettingsSidebarMenu } from 'src/components/Settings'
+import { CompanyMenuProperties } from 'src/components/Settings/SidebarMenu/Section/Company/company'
 import { SETTINGS_PATHS } from 'src/components/Settings/constants'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
@@ -13,14 +14,19 @@ import messages from './messages'
 
 interface SettingsPageProperties {
   path?: SETTINGS_PATHS
+  permissions?: CompanyMenuProperties['permissions']
 }
+
 const pageContentElement = new Map()
 
-const SettingsPage = ({ path }: SettingsPageProperties) => {
+const SettingsPage = ({ path, permissions }: SettingsPageProperties) => {
   const intl = useIntl()
 
   pageContentElement.set(SETTINGS_PATHS.MY_PROFILE, <SettingsMyProfile />)
-  pageContentElement.set(SETTINGS_PATHS.CYCLES, <SettingsCycles />)
+  pageContentElement.set(
+    SETTINGS_PATHS.CYCLES,
+    permissions ? <SettingsCycles permissions={permissions} /> : React.Fragment,
+  )
 
   return (
     <PageContent>

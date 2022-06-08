@@ -17,11 +17,13 @@ import messages from './messages'
 
 export interface CyclesListBodyColumnActionsProperties extends CyclesListBodyColumnBaseProperties {
   id?: Cycle['id']
+  canEdit: boolean
 }
 
 const cyclePeriodSelector = buildPartialSelector<Cycle['period']>('period')
 const CyclesListBodyColumnActions = ({
   id,
+  canEdit,
 }: CyclesListBodyColumnActionsProperties): ReactElement => {
   const intl = useIntl()
   const { deleteCycle } = useDeleteCycle()
@@ -53,6 +55,7 @@ const CyclesListBodyColumnActions = ({
           <MenuButton
             ml={2.5}
             color="new-gray.500"
+            disabled={!canEdit}
             _hover={{
               color: 'brand.500',
             }}

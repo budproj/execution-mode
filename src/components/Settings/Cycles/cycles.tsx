@@ -10,13 +10,16 @@ import CyclesList from 'src/components/Cycle/List'
 import { CYCLE_LIST_COLUMN } from 'src/components/Cycle/List/Body/Columns/constants'
 import { CADENCE } from 'src/components/Cycle/constants'
 import { useGetCycle } from 'src/components/Cycle/hooks'
+import { GraphQLEffect } from 'src/components/types'
 import { cyclesEditModalViewMode } from 'src/state/recoil/cycle/cycle-edit-modal-view-mode'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
+import { CompanyMenuProperties } from '../SidebarMenu/Section/Company/company'
+
 import messages from './messages'
 
-const SettingsCycles = () => {
+const SettingsCycles = ({ permissions }: CompanyMenuProperties) => {
   const { data: cycles, loading: cyclesLoading } = useGetCycle()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const myID = useRecoilValue(meAtom)
@@ -63,16 +66,24 @@ const SettingsCycles = () => {
             })}
           </Text>
         </Box>
-        <Button
-          bg="brand.500"
-          color="black.50"
-          _hover={{ background: 'brand.400', color: 'black.50' }}
-          onClick={openModal}
-        >
-          {intl.formatMessage(messages.createCycleButton)}
-        </Button>
+        {permissions.cycle.create === GraphQLEffect.ALLOW && (
+          <Button
+            bg="brand.500"
+            color="black.50"
+            _hover={{ background: 'brand.400', color: 'black.50' }}
+            onClick={openModal}
+          >
+            {intl.formatMessage(messages.createCycleButton)}
+          </Button>
+        )}
       </Heading>
-      <CyclesList pt={10} cycleIDs={cycleIds} isLoading={cyclesLoading} columns={columns} />
+      <CyclesList
+        pt={10}
+        cycleIDs={cycleIds}
+        isLoading={cyclesLoading}
+        columns={columns}
+        canEdit={permissions.cycle.create === GraphQLEffect.ALLOW}
+      />
       <CreateCycleModal
         teamId={teamId}
         isOpen={isModalOpen}

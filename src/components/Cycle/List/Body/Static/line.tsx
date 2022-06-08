@@ -17,6 +17,7 @@ import { CyclesListBodyStaticProperties } from './static'
 
 export interface CyclesListBodyStaticLineProperties extends CyclesListBodyStaticProperties {
   cycleID: Cycle['id']
+  canEdit: boolean
 }
 
 const CyclesListBodyStaticLine = ({
@@ -27,6 +28,7 @@ const CyclesListBodyStaticLine = ({
   columnGap,
   columns,
   bodyProperties,
+  canEdit,
 }: CyclesListBodyStaticLineProperties) => {
   const columnComponents = {
     [CYCLE_LIST_COLUMN.CYCLE]: CyclesListBodyColumnCycle,
@@ -57,6 +59,7 @@ const CyclesListBodyStaticLine = ({
             key={`${listID}_CYCLE_LIST_BODY_LINE_${cycleID ?? uniqueId()}_COLUMN_${column}`}
             id={cycleID}
             borderColor={borderColor}
+            canEdit={canEdit}
             {...columnProperties}
           />
         )

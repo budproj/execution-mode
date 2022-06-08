@@ -1,6 +1,9 @@
 query GET_USER_SIDEBAR_PERMISSIONS {
-	permissions(scope: ANY){
-    cycle{
+  permissions(scope: COMPANY) {
+    cycle {
+      read
+    }
+    user {
       read
     }
   }

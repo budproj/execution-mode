@@ -9,14 +9,21 @@ import {
   SettingsSidebarMyAccountMenuSectionPreferences,
   SettingsSidebarTermsMenuSectionPreferences,
 } from './Section'
+import { CompanyMenuProperties } from './Section/Company/company'
 import queries from './queries.gql'
 
 const SettingsSidebarMenu = () => {
   const [isAuthorized, setIsAuthorized] = useState(false)
+  const [permissions, setPermissions] = useState<CompanyMenuProperties['permissions']>()
 
-  useQuery(queries.GET_USER_SIDEBAR_PERMISSIONS, {
+  useQuery<CompanyMenuProperties>(queries.GET_USER_SIDEBAR_PERMISSIONS, {
     onCompleted: (data) => {
-      if (data.permissions.cycle.read === GraphQLEffect.ALLOW) setIsAuthorized(true)
+      const { permissions } = data
+      const isAuthroziedToSeeCompanyMenu = Object.values(permissions).some((permission) => {
+        return permission.read === GraphQLEffect.ALLOW
+      })
+      if (isAuthroziedToSeeCompanyMenu) setIsAuthorized(true)
+      setPermissions(permissions)
     },
   })
 
@@ -24,7 +31,9 @@ const SettingsSidebarMenu = () => {
     <Box width="xs" py={4}>
       <Flex gridGap={3} direction="column" gap={12}>
         <SettingsSidebarMyAccountMenuSectionPreferences />
-        {isAuthorized && <SettingsSidebarCompanyMenuSectionPreferences />}
+        {isAuthorized && permissions && (
+          <SettingsSidebarCompanyMenuSectionPreferences permissions={permissions} />
+        )}
         <SettingsSidebarTermsMenuSectionPreferences />
       </Flex>
     </Box>

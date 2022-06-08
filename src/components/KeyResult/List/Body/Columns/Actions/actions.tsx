@@ -31,8 +31,6 @@ const KeyResultListBodyColumnActions = ({
 
   const canDelete = keyResult?.policy?.delete === GraphQLEffect.ALLOW
 
-  console.log({ keyResult })
-
   return (
     <KeyResultListBodyColumnBase preventLineClick>
       <Menu placement="bottom-end" variant="action-list">

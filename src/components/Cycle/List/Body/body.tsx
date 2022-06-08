@@ -16,6 +16,7 @@ export interface CyclesListBodyProperties {
   columnGap: GridProps['gridColumnGap']
   borderColor: GridProps['borderColor']
   bodyProperties: CyclesListBodyColumnProperties
+  canEdit: boolean
   emptyStateMessage?: MessageDescriptor
   cyclesIDs?: Array<Cycle['id']>
   onLineClick?: (id: Cycle['id']) => void

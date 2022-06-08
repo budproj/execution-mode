@@ -3,12 +3,26 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { IntlLink } from 'src/components/Base'
+import { GraphQLEffect } from 'src/components/types'
 
 import SettingsSidebarMenuSectionButton from '../Button'
 
 import messages from './messages'
 
-const SettingsSidebarCompanyMenuSectionPreferences = () => {
+export interface CompanyMenuProperties {
+  permissions: {
+    user: {
+      read?: GraphQLEffect
+      create?: GraphQLEffect
+    }
+    cycle: {
+      read?: GraphQLEffect
+      create?: GraphQLEffect
+    }
+  }
+}
+
+const SettingsSidebarCompanyMenuSectionPreferences = ({ permissions }: CompanyMenuProperties) => {
   const intl = useIntl()
 
   return (
@@ -24,14 +38,19 @@ const SettingsSidebarCompanyMenuSectionPreferences = () => {
         {intl.formatMessage(messages.sectionTitle)}
       </Heading>
 
-      <SettingsSidebarMenuSectionButton>
-        <IntlLink href="#">{intl.formatMessage(messages.firstOptionLabel)}</IntlLink>
-      </SettingsSidebarMenuSectionButton>
-      <SettingsSidebarMenuSectionButton href="/settings/cycles">
-        <IntlLink href="/settings/cycles">
-          {intl.formatMessage(messages.secondOptionLabel)}
-        </IntlLink>
-      </SettingsSidebarMenuSectionButton>
+      {permissions?.user?.read === GraphQLEffect.ALLOW && (
+        <SettingsSidebarMenuSectionButton>
+          <IntlLink href="#">{intl.formatMessage(messages.firstOptionLabel)}</IntlLink>
+        </SettingsSidebarMenuSectionButton>
+      )}
+
+      {permissions?.cycle?.read === GraphQLEffect.ALLOW && (
+        <SettingsSidebarMenuSectionButton href="/settings/cycles">
+          <IntlLink href="/settings/cycles">
+            {intl.formatMessage(messages.secondOptionLabel)}
+          </IntlLink>
+        </SettingsSidebarMenuSectionButton>
+      )}
     </Flex>
   )
 }

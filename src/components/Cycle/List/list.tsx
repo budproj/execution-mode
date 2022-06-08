@@ -28,6 +28,7 @@ export interface CycleListProperties extends BoxProps {
   cycleIDs?: Array<Cycle['id']>
   onLineClick?: (id: Cycle['id']) => void
   isLoading?: boolean
+  canEdit: boolean
 }
 
 const CycleList = ({
@@ -41,6 +42,7 @@ const CycleList = ({
   templateColumns,
   columnGap,
   isLoading,
+  canEdit,
   ...rest
 }: CycleListProperties): ReactElement => (
   <Box {...rest}>
@@ -60,6 +62,7 @@ const CycleList = ({
         borderColor={borderColor}
         bodyProperties={bodyProperties}
         cyclesIDs={[]}
+        canEdit={canEdit}
       />
     ) : (
       <CycleListBody
@@ -70,6 +73,7 @@ const CycleList = ({
         bodyProperties={bodyProperties}
         borderColor={borderColor}
         cyclesIDs={cycleIDs}
+        canEdit={canEdit}
         onLineClick={onLineClick}
       />
     )}
