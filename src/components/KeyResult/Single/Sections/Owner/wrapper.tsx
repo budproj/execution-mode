@@ -31,7 +31,7 @@ export const KeyResultSingleSectionOwnerWrapper = ({
 
   const canUserUpdate = policy?.update === GraphQLEffect.ALLOW
   const isKeyResultActive = keyResult?.status?.isActive
-  const isIndividualKeyResult = Boolean(keyResult?.teamId)
+  const isIndividualKeyResult = keyResult?.teamId === null
   const canUpdate = canUserUpdate && isKeyResultActive && !isIndividualKeyResult
   const supportTeamMembers = keyResult?.supportTeamMembers?.edges?.map(({ node }) => node)
 
