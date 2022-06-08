@@ -7,7 +7,7 @@ import { Calendar } from 'src/components/Icon'
 import { Team } from 'src/components/Team/types'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 
-import { CYCLE_STATUS } from '../../constants'
+import { CADENCE, CYCLE_STATUS } from '../../constants'
 import { useUpdateCycle } from '../../hooks'
 import { Cycle } from '../../types'
 import { CycleModalForm, CycleFormValues, CycleSelectOption } from '../FormCycle'
@@ -36,6 +36,8 @@ export const UpdateCycle = ({ teamId, parents, cycleId, onCancel }: UpdateCycleP
         cycleId,
         teamId,
         ...values,
+        // eslint-disable-next-line unicorn/no-null
+        parentId: values.cadence === CADENCE.YEARLY ? null : values.parentId,
         active: values.active === CYCLE_STATUS.ACTIVE,
       },
     })
@@ -62,6 +64,7 @@ export const UpdateCycle = ({ teamId, parents, cycleId, onCancel }: UpdateCycleP
   const normalizedInitialValues: CycleFormValues = {
     ...cycle,
     period: cycle?.period ?? '',
+    parentId: cycle?.cadence === CADENCE.YEARLY ? undefined : cycle?.parentId,
     active: cycle?.active ? CYCLE_STATUS.ACTIVE : CYCLE_STATUS.NOT_ACTIVE,
   }
 

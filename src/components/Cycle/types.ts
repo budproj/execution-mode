@@ -17,6 +17,7 @@ export interface Cycle extends GraphQLNode {
   delta: Delta
   team: Team
   parent?: Cycle
+  parentId?: Cycle['id']
   cycles?: GraphQLConnection<Cycle>
   objectives?: GraphQLConnection<Objective>
   keyResults?: GraphQLConnection<KeyResult>
