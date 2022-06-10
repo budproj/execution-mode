@@ -1,25 +1,31 @@
-import { Text } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
+import NamedAvatar from 'src/components/User/NamedAvatar'
 import UsersTableListBodyColumnBase, {
   UsersTableListBodyColumnBaseProperties,
 } from 'src/components/User/TableList/Body/Columns/Base'
-import NamedAvatar from 'src/components/User/NamedAvatar'
 import { User } from 'src/components/User/types'
 
 export interface UsersTableListBodyColumnNameProperties
   extends UsersTableListBodyColumnBaseProperties {
   id?: User['id']
+  isActive?: boolean
 }
 
 const UsersTableListBodyColumnName = ({
   id,
+  isActive,
 }: UsersTableListBodyColumnNameProperties): ReactElement => {
   return (
     <UsersTableListBodyColumnBase>
-      <Text fontWeight={400} color="#525F7F" fontSize="14px">
-        <NamedAvatar subtitleType="role" userID={id} isEditting={false} />
-      </Text>
+      <NamedAvatar
+        isStatic
+        subtitleType="role"
+        userID={id}
+        canHover={false}
+        nameColor={isActive ? '#525F7F' : 'new-gray.500'}
+        isUserActive={isActive}
+      />
     </UsersTableListBodyColumnBase>
   )
 }

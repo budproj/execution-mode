@@ -10,12 +10,14 @@ import buildPartialSelector from 'src/state/recoil/user/build-partial-selector'
 
 export interface UsersTableListBodyColumnTeamsProperties {
   id: User['id']
+  isActive?: boolean
 }
 
 const userTeamsSelector = buildPartialSelector<User['teams']>('teams')
 
 const UsersTableListBodyColumnTeams = ({
   id,
+  isActive,
 }: UsersTableListBodyColumnTeamsProperties): ReactElement => {
   const userTeams = useRecoilValue(userTeamsSelector(id))
 
@@ -30,11 +32,11 @@ const UsersTableListBodyColumnTeams = ({
       <Flex gridGap={2} flexDir="column">
         <Skeleton isLoaded={isTeamsLoaded} {...buildSkeletonMinSize(isTeamsLoaded, 140, 28)}>
           <UserTeamTags
-            isEditable
             teams={arrayUserTeams}
             userID={id}
             max={2}
             isLoaded={isTeamsLoaded}
+            isActive={isActive}
           />
         </Skeleton>
       </Flex>

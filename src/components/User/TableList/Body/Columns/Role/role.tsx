@@ -20,6 +20,7 @@ const userRoleSelector = buildPartialSelector<User['role']>('role')
 
 const UsersTableListBodyColumnRole = ({
   id,
+  isActive,
   canEdit = true,
 }: UsersTableListBodyColumnRoleProperties): ReactElement => {
   // Const userRole = useRecoilValue(userRoleSelector(id))
@@ -68,9 +69,9 @@ const UsersTableListBodyColumnRole = ({
             <>
               <MenuButton
                 as={Button}
+                disabled={!isActive}
                 borderWidth={1}
                 cursor={canEdit ? 'pointer' : 'default'}
-                disabled={!canEdit}
                 borderColor="new-gray.500"
                 color="new-gray.800"
                 borderRadius={4}
