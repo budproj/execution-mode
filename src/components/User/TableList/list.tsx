@@ -2,7 +2,7 @@ import { Box, BoxProps, GridProps } from '@chakra-ui/react'
 import uniqueId from 'lodash/uniqueId'
 import React, { ReactElement } from 'react'
 
-import { UsersTableListBodyColumnProperties } from 'src/components/User/ListTable/Body/Columns/types'
+import { UsersTableListBodyColumnProperties } from 'src/components/User/TableList/Body/Columns/types'
 
 import { User } from '../types'
 

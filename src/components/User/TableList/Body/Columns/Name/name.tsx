@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 
 import UsersTableListBodyColumnBase, {
   UsersTableListBodyColumnBaseProperties,
-} from 'src/components/User/ListTable/Body/Columns/Base'
+} from 'src/components/User/TableList/Body/Columns/Base'
 import NamedAvatar from 'src/components/User/NamedAvatar'
 import { User } from 'src/components/User/types'
 

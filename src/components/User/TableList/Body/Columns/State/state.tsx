@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import UsersTableListBodyColumnBase from 'src/components/User/ListTable/Body/Columns/Base'
+import UsersTableListBodyColumnBase from 'src/components/User/TableList/Body/Columns/Base'
 import { User, UserStatus } from 'src/components/User/types'
 import buildPartialSelector from 'src/state/recoil/user/build-partial-selector'
 

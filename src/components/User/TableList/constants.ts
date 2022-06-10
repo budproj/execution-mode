@@ -1,4 +1,4 @@
-import { USERS_TABLE_COLUMN } from 'src/components/User/ListTable/Body/Columns/constants'
+import { USERS_TABLE_COLUMN } from 'src/components/User/TableList/Body/Columns/constants'
 
 export const BORDER_COLOR_DEFAULT = 'black.200'
 export const GRID_TEMPLATE_COLUMNS =

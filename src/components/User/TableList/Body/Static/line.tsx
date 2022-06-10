@@ -8,7 +8,7 @@ import {
   UsersTableListBodyColumnRole,
   UsersTableListBodyColumnState,
   CyclesListBodyColumnActions,
-} from 'src/components/User/ListTable/Body/Columns'
+} from 'src/components/User/TableList/Body/Columns'
 import { User } from 'src/components/User/types'
 
 import { USERS_TABLE_COLUMN } from '../Columns/constants'

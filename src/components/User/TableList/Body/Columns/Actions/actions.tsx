@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import UsersTableListBodyColumnBase, {
   UsersTableListBodyColumnBaseProperties,
-} from 'src/components/User/ListTable/Body/Columns/Base'
+} from 'src/components/User/TableList/Body/Columns/Base'
 import { User } from 'src/components/User/types'
 
 import messages from './messages'

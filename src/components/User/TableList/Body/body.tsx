@@ -3,7 +3,7 @@ import React from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { MessageDescriptor } from 'react-intl'
 
-import UsersTableListBodyStatic from 'src/components/User/ListTable/Body/Static'
+import UsersTableListBodyStatic from 'src/components/User/TableList/Body/Static'
 
 import { User } from '../../types'
 import { userInfo } from '../list'

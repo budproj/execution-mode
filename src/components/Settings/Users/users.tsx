@@ -3,8 +3,8 @@ import React, { useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
-import UsersTableList from 'src/components/User/ListTable'
-import { USERS_TABLE_COLUMN } from 'src/components/User/ListTable/Body/Columns/constants'
+import UsersTableList from 'src/components/User/TableList'
+import { USERS_TABLE_COLUMN } from 'src/components/User/TableList/Body/Columns/constants'
 import { useGetUsers } from 'src/components/User/hooks/getUsers'
 import { UserStatus } from 'src/components/User/types'
 

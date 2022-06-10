@@ -1,8 +1,8 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 
-import UsersTableListBodyStaticSkeletonLine from 'src/components/User/ListTable/Body/Static/skeleton-line'
-import { UsersTableListBodyProperties } from 'src/components/User/ListTable/Body/body'
+import UsersTableListBodyStaticSkeletonLine from 'src/components/User/TableList/Body/Static/skeleton-line'
+import { UsersTableListBodyProperties } from 'src/components/User/TableList/Body/body'
 
 import { userInfo } from '../../list'
 

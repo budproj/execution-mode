@@ -1,7 +1,7 @@
 import { uniqueId } from 'lodash'
 import React from 'react'
 
-import { UsersTableListBodyProperties } from 'src/components/User/ListTable/Body/body'
+import { UsersTableListBodyProperties } from 'src/components/User/TableList/Body/body'
 
 import { userInfo } from '../../list'
 

@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import UsersTableListBodyColumnBase from 'src/components/User/ListTable/Body/Columns/Base'
+import UsersTableListBodyColumnBase from 'src/components/User/TableList/Body/Columns/Base'
 import UserTeamTags from 'src/components/User/TeamTags'
 import { User } from 'src/components/User/types'
 import buildPartialSelector from 'src/state/recoil/user/build-partial-selector'
