@@ -39,8 +39,10 @@ const SettingsSidebarCompanyMenuSectionPreferences = ({ permissions }: CompanyMe
       </Heading>
 
       {permissions?.user?.read === GraphQLEffect.ALLOW && (
-        <SettingsSidebarMenuSectionButton>
-          <IntlLink href="#">{intl.formatMessage(messages.firstOptionLabel)}</IntlLink>
+        <SettingsSidebarMenuSectionButton href="/settings/users">
+          <IntlLink href="/settings/users">
+            {intl.formatMessage(messages.firstOptionLabel)}
+          </IntlLink>
         </SettingsSidebarMenuSectionButton>
       )}
 
