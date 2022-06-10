@@ -1,18 +1,27 @@
 import { Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import UsersTableList from 'src/components/User/ListTable'
 import { USERS_TABLE_COLUMN } from 'src/components/User/ListTable/Body/Columns/constants'
+import { useGetUsers } from 'src/components/User/hooks/getUsers'
+import { UserStatus } from 'src/components/User/types'
 
 import messages from './messages'
 
 const SettingsUsers = () => {
   const intl = useIntl()
+  const { data: users, loading } = useGetUsers()
 
-  // TODO: mocked user id
-  const userIds = ['9ce87eda-64d1-4bfb-80a5-aa7811a04ea9', '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9']
+  const [usersFilter, setUsersFilter] = useState('')
+  const filteredUsers = users.filter((user) =>
+    user.fullName.toLocaleLowerCase().includes(usersFilter.toLocaleLowerCase()),
+  )
+  const usersInfos = useMemo(
+    () => filteredUsers.map(({ id, status }) => ({ id, isActive: status === UserStatus.ACTIVE })),
+    [filteredUsers],
+  )
 
   const columns = [
     USERS_TABLE_COLUMN.NAME,
@@ -37,7 +46,10 @@ const SettingsUsers = () => {
         </Box>
         <Stack direction="row" gap={2}>
           <Box w="15rem">
-            <SearchBar placeholder={intl.formatMessage(messages.searchUserInput)} />
+            <SearchBar
+              placeholder={intl.formatMessage(messages.searchUserInput)}
+              onSearch={setUsersFilter}
+            />
           </Box>
           <Button
             bg="brand.500"
@@ -48,7 +60,7 @@ const SettingsUsers = () => {
           </Button>
         </Stack>
       </Heading>
-      <UsersTableList pt={10} usersIDs={userIds} isLoading={false} columns={columns} />
+      <UsersTableList isLoading={loading} usersInfo={usersInfos} pt={10} columns={columns} />
     </Flex>
   )
 }
