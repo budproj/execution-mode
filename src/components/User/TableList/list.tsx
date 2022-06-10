@@ -58,7 +58,6 @@ const UsersTableList = ({
       borderColor={borderColor}
     />
     {isLoading ? (
-      // TODO: resolver a parada do array vazio
       <UsersTableListBodySkeleton
         listID={id}
         templateColumns={templateColumns}
