@@ -4,27 +4,28 @@ import { DropResult } from 'react-beautiful-dnd'
 import { MessageDescriptor } from 'react-intl'
 
 import UsersTableListBodyStatic from 'src/components/User/ListTable/Body/Static'
-import { Cycle } from 'src/components/Cycle/types'
+
 import { User } from '../../types'
+import { userInfo } from '../list'
 
 import { USERS_TABLE_COLUMN } from './Columns/constants'
-import { CyclesListBodyColumnProperties } from './Columns/types'
+import { UsersTableListBodyColumnProperties } from './Columns/types'
 
-export interface CyclesListBodyProperties {
+export interface UsersTableListBodyProperties {
   listID: string
   columns: USERS_TABLE_COLUMN[]
+  usersInfo: userInfo[]
   templateColumns: GridProps['templateColumns']
   columnGap: GridProps['gridColumnGap']
   borderColor: GridProps['borderColor']
-  bodyProperties: CyclesListBodyColumnProperties
+  bodyProperties: UsersTableListBodyColumnProperties
   emptyStateMessage?: MessageDescriptor
-  usersIDs?: Array<User['id']>
-  onLineClick?: (id: Cycle['id']) => void
+  onLineClick?: (id: User['id']) => void
   handleDragEnd?: (result: DropResult) => void
 }
 
-const UsersTableListBody = ({ usersIDs, ...rest }: CyclesListBodyProperties) => {
-  return usersIDs ? <UsersTableListBodyStatic cyclesIDs={usersIDs} {...rest} /> : <Box />
+const UsersTableListBody = ({ usersInfo, ...rest }: UsersTableListBodyProperties) => {
+  return usersInfo ? <UsersTableListBodyStatic usersInfo={usersInfo} {...rest} /> : <Box />
 }
 
 export default UsersTableListBody

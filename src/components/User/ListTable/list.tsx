@@ -2,40 +2,42 @@ import { Box, BoxProps, GridProps } from '@chakra-ui/react'
 import uniqueId from 'lodash/uniqueId'
 import React, { ReactElement } from 'react'
 
-import { CyclesListBodyColumnProperties } from 'src/components/Cycle/List/Body/Columns/types'
-import { Cycle } from 'src/components/Cycle/types'
+import { UsersTableListBodyColumnProperties } from 'src/components/User/ListTable/Body/Columns/types'
 
 import { User } from '../types'
 
-import CycleListBody from './Body'
 import { USERS_TABLE_COLUMN } from './Body/Columns/constants'
-import CycleListBodySkeleton from './Body/Skeleton'
-import CycleListHead from './Head'
-import { CycleListColumnHeadProperties } from './Head/types'
+import UsersTableListBodySkeleton from './Body/Skeleton/body'
+import UsersTableListBody from './Body/body'
+import UsersTableListHead from './Head/head'
+import { UsersTableListColumnHeadProperties } from './Head/types'
 import {
   BORDER_COLOR_DEFAULT,
   COLUMNS_DEFAULT,
   GRID_COLUMN_GAP,
   GRID_TEMPLATE_COLUMNS,
 } from './constants'
-import UsersTableListHead from './Head/head'
 
-export interface CycleListProperties extends BoxProps {
+export type userInfo = {
+  id: User['id']
+  isActive?: boolean
+}
+
+export interface UsersTableListProperties extends BoxProps {
   id: string
   columns: USERS_TABLE_COLUMN[]
-  bodyProperties: CyclesListBodyColumnProperties
-  headProperties: CycleListColumnHeadProperties
+  bodyProperties: UsersTableListBodyColumnProperties
+  headProperties: UsersTableListColumnHeadProperties
   borderColor: GridProps['borderColor']
   templateColumns: GridProps['templateColumns']
   columnGap: GridProps['gridColumnGap']
-  usersIDs?: Array<User['id']>
-  onLineClick?: (id: Cycle['id']) => void
+  usersInfo: userInfo[]
+  onLineClick?: (id: User['id']) => void
   isLoading?: boolean
 }
 
 const UsersTableList = ({
   id,
-  usersIDs,
   onLineClick,
   borderColor,
   columns,
@@ -43,9 +45,10 @@ const UsersTableList = ({
   headProperties,
   templateColumns,
   columnGap,
+  usersInfo,
   isLoading,
   ...rest
-}: CycleListProperties): ReactElement => (
+}: UsersTableListProperties): ReactElement => (
   <Box {...rest}>
     <UsersTableListHead
       columns={columns}
@@ -55,31 +58,32 @@ const UsersTableList = ({
       borderColor={borderColor}
     />
     {isLoading ? (
-      <CycleListBodySkeleton
+      // TODO: resolver a parada do array vazio
+      <UsersTableListBodySkeleton
         listID={id}
         templateColumns={templateColumns}
         columnGap={columnGap}
         columns={columns}
         borderColor={borderColor}
         bodyProperties={bodyProperties}
-        cyclesIDs={[]}
+        usersInfo={usersInfo}
       />
     ) : (
-      <CycleListBody
+      <UsersTableListBody
         listID={id}
         columns={columns}
         templateColumns={templateColumns}
         columnGap={columnGap}
         bodyProperties={bodyProperties}
         borderColor={borderColor}
-        usersIDs={usersIDs}
+        usersInfo={usersInfo}
         onLineClick={onLineClick}
       />
     )}
   </Box>
 )
 
-CycleList.defaultProps = {
+UsersTableList.defaultProps = {
   borderColor: BORDER_COLOR_DEFAULT,
   templateColumns: GRID_TEMPLATE_COLUMNS,
   columnGap: GRID_COLUMN_GAP,

@@ -1,16 +1,16 @@
 import { GridItem, GridItemProps, GridProps } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-export interface CyclesListBodyColumnBaseProperties extends GridItemProps {
+export interface UsersTableListBodyColumnBaseProperties extends GridItemProps {
   borderColor?: GridProps['borderColor']
   preventLineClick?: boolean
 }
 
-const CyclesListBodyColumnBase = ({
+const UsersTableListBodyColumnBase = ({
   children,
   preventLineClick,
   ...rest
-}: CyclesListBodyColumnBaseProperties): ReactElement => {
+}: UsersTableListBodyColumnBaseProperties): ReactElement => {
   const preventLineClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (preventLineClick) event.stopPropagation()
   }
@@ -22,4 +22,4 @@ const CyclesListBodyColumnBase = ({
   )
 }
 
-export default CyclesListBodyColumnBase
+export default UsersTableListBodyColumnBase

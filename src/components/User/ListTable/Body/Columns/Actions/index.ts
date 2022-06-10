@@ -1,5 +1,5 @@
-import CyclesListBodyColumnActions from './actions'
+import UsersTableListBodyColumnActions from './actions'
 
-export { default as CyclesListBodyColumnActionsSkeleton } from './skeleton'
+export { default as UsersTableListBodyColumnActionsSkeleton } from './skeleton'
 
-export default CyclesListBodyColumnActions
+export default UsersTableListBodyColumnActions

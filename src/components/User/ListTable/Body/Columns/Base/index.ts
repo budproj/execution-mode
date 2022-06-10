@@ -1,5 +1,5 @@
-import CyclesListBodyColumnBase from './base'
+import UsersTableListBodyColumnBase from './base'
 
 export * from './base'
 
-export default CyclesListBodyColumnBase
+export default UsersTableListBodyColumnBase

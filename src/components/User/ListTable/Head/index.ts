@@ -1,3 +1,3 @@
-import CycleListHead from './head'
+import UsersTableListHead from './head'
 
-export default CycleListHead
+export default UsersTableListHead

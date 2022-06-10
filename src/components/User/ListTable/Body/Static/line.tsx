@@ -3,36 +3,37 @@ import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
 import {
-  CyclesListBodyColumnCycle,
+  UsersTableListBodyColumnName,
+  UsersTableListBodyColumnTeams,
+  UsersTableListBodyColumnRole,
+  UsersTableListBodyColumnState,
   CyclesListBodyColumnActions,
-  CyclesListBodyColumnCadenceLevel,
-  CyclesListBodyColumnDateStart,
-  CyclesListBodyColumnEndDate,
-} from 'src/components/Cycle/List/Body/Columns'
+} from 'src/components/User/ListTable/Body/Columns'
 import { User } from 'src/components/User/types'
 
 import { USERS_TABLE_COLUMN } from '../Columns/constants'
+import { UsersTableListBodyProperties } from '../body'
 
-import { CyclesListBodyStaticProperties } from './static'
-
-export interface CyclesListBodyStaticLineProperties extends CyclesListBodyStaticProperties {
+export interface UsersTableListBodyStaticLineProperties extends UsersTableListBodyProperties {
   userID: User['id']
+  isActive?: boolean
 }
 
-const CyclesListBodyStaticLine = ({
+const UsersTableListBodyStaticLine = ({
   listID,
   userID,
   borderColor,
   templateColumns,
+  isActive,
   columnGap,
   columns,
   bodyProperties,
-}: CyclesListBodyStaticLineProperties) => {
+}: UsersTableListBodyStaticLineProperties) => {
   const columnComponents = {
-    [USERS_TABLE_COLUMN.NAME]: CyclesListBodyColumnCycle,
-    [USERS_TABLE_COLUMN.TEAMS]: CyclesListBodyColumnCadenceLevel,
-    [USERS_TABLE_COLUMN.ROLES]: CyclesListBodyColumnDateStart,
-    [USERS_TABLE_COLUMN.STATE]: CyclesListBodyColumnEndDate,
+    [USERS_TABLE_COLUMN.NAME]: UsersTableListBodyColumnName,
+    [USERS_TABLE_COLUMN.TEAMS]: UsersTableListBodyColumnTeams,
+    [USERS_TABLE_COLUMN.ROLES]: UsersTableListBodyColumnRole,
+    [USERS_TABLE_COLUMN.STATE]: UsersTableListBodyColumnState,
     [USERS_TABLE_COLUMN.ACTIONS]: CyclesListBodyColumnActions,
   }
 
@@ -54,6 +55,7 @@ const CyclesListBodyStaticLine = ({
         return (
           <ColumnComponent
             key={`${listID}_CYCLE_LIST_BODY_LINE_${userID ?? uniqueId()}_COLUMN_${column}`}
+            isActive={isActive}
             id={userID}
             borderColor={borderColor}
             {...columnProperties}
@@ -64,4 +66,4 @@ const CyclesListBodyStaticLine = ({
   )
 }
 
-export default CyclesListBodyStaticLine
+export default UsersTableListBodyStaticLine

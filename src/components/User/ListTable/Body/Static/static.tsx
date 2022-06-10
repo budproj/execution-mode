@@ -1,23 +1,20 @@
 import { uniqueId } from 'lodash'
 import React from 'react'
 
-import { CyclesListBodyProperties } from 'src/components/Cycle/List/Body/body'
-import { Cycle } from 'src/components/Cycle/types'
-import { User } from 'src/components/User/types'
+import { UsersTableListBodyProperties } from 'src/components/User/ListTable/Body/body'
+
+import { userInfo } from '../../list'
 
 import UsersTableListBodyStaticLine from './line'
 
-export interface UsersTableListBodyProperties extends CyclesListBodyProperties {
-  usersIDs: Array<User['id']>
-}
-
-const UsersTableListBody = ({ usersIDs, listID, ...rest }: UsersTableListBodyProperties) => (
+const UsersTableListBodyStatic = ({ listID, usersInfo, ...rest }: UsersTableListBodyProperties) => (
   <>
-    {usersIDs.map((userID: Cycle['id']) => (
+    {usersInfo.map((userInfo: userInfo) => (
       <UsersTableListBodyStaticLine
-        key={`${listID ?? uniqueId()}_USERS_TABLE_LIST_BODY_LINE_${userID ?? uniqueId()}`}
-        userID={userID}
-        usersIDs={usersIDs}
+        key={`${listID ?? uniqueId()}_USERS_TABLE_LIST_BODY_LINE_${userInfo.id ?? uniqueId()}`}
+        usersInfo={usersInfo}
+        userID={userInfo.id}
+        isActive={userInfo.isActive}
         listID={listID}
         {...rest}
       />
@@ -25,4 +22,4 @@ const UsersTableListBody = ({ usersIDs, listID, ...rest }: UsersTableListBodyPro
   </>
 )
 
-export default UsersTableListBody
+export default UsersTableListBodyStatic

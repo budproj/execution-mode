@@ -3,33 +3,32 @@ import remove from 'lodash/remove'
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
+import { userInfo } from '../../list'
 import {
-  CyclesListBodyColumnCyclesSkeleton,
-  CyclesListBodyColumnStatusSkeleton,
-  CyclesListBodyColumnDateStartSkeleton,
-  CyclesListBodyColumnDateEndSkeleton,
-  CyclesListBodyColumnCadenceLevelSkeleton,
-  CyclesListBodyColumnActionsSkeleton,
-} from 'src/components/Cycle/List/Body/Columns'
-import { CYCLE_LIST_COLUMN } from 'src/components/Cycle/List/Body/Columns/constants'
-import { Cycle } from 'src/components/Cycle/types'
+  UsersTableListBodyColumnNameSkeleton,
+  UsersTableListBodyColumnRoleSkeleton,
+  UsersTableListBodyColumnStateSkeleton,
+  UsersTableListBodyColumnTeamsSkeleton,
+  UsersTableListBodyColumnActionsSkeleton,
+} from '../Columns'
+import { USERS_TABLE_COLUMN } from '../Columns/constants'
+import { UsersTableListBodyProperties } from '../body'
 
-import { CyclesListBodyStaticProperties } from './static'
-
-export interface CyclesListBodyStaticSkeletonLineProperties extends CyclesListBodyStaticProperties {
-  cycleID?: Cycle['id']
+export interface UsesTableListBodyStaticSkeletonLineProperties
+  extends UsersTableListBodyProperties {
+  userID?: userInfo['id']
 }
 
-const CyclesListBodyStaticSkeletonLine = ({
+const UsersTableListBodyStaticSkeletonLine = ({
   listID,
-  cycleID,
+  userID,
   onLineClick,
   borderColor,
   templateColumns,
   columnGap,
   columns,
   bodyProperties,
-}: CyclesListBodyStaticSkeletonLineProperties) => {
+}: UsesTableListBodyStaticSkeletonLineProperties) => {
   const handleLineClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const target = event.target as HTMLDivElement
     const actions = remove([
@@ -38,16 +37,15 @@ const CyclesListBodyStaticSkeletonLine = ({
     ])
     const allowLineClick = actions.length === 0
 
-    if (onLineClick && cycleID && allowLineClick) onLineClick(cycleID)
+    if (onLineClick && userID && allowLineClick) onLineClick(userID)
   }
 
   const columnComponents = {
-    [CYCLE_LIST_COLUMN.CYCLE]: CyclesListBodyColumnCyclesSkeleton,
-    [CYCLE_LIST_COLUMN.STATUS]: CyclesListBodyColumnStatusSkeleton,
-    [CYCLE_LIST_COLUMN.CADENCE_LEVEL]: CyclesListBodyColumnCadenceLevelSkeleton,
-    [CYCLE_LIST_COLUMN.INITIAL_DATE]: CyclesListBodyColumnDateStartSkeleton,
-    [CYCLE_LIST_COLUMN.END_DATE]: CyclesListBodyColumnDateEndSkeleton,
-    [CYCLE_LIST_COLUMN.ACTIONS]: CyclesListBodyColumnActionsSkeleton,
+    [USERS_TABLE_COLUMN.NAME]: UsersTableListBodyColumnNameSkeleton,
+    [USERS_TABLE_COLUMN.TEAMS]: UsersTableListBodyColumnTeamsSkeleton,
+    [USERS_TABLE_COLUMN.ROLES]: UsersTableListBodyColumnRoleSkeleton,
+    [USERS_TABLE_COLUMN.STATE]: UsersTableListBodyColumnStateSkeleton,
+    [USERS_TABLE_COLUMN.ACTIONS]: UsersTableListBodyColumnActionsSkeleton,
   }
 
   return (
@@ -73,9 +71,7 @@ const CyclesListBodyStaticSkeletonLine = ({
 
         return (
           <ColumnComponent
-            key={`${listID}_CYCLE_LIST_BODY_LINE_${cycleID ?? uniqueId()}_COLUMN_${column}`}
-            id={cycleID}
-            borderColor={borderColor}
+            key={`${listID}_USERS_TABLE_LIST_BODY_LINE_${userID ?? uniqueId()}_COLUMN_${column}`}
             {...columnProperties}
           />
         )
@@ -84,4 +80,4 @@ const CyclesListBodyStaticSkeletonLine = ({
   )
 }
 
-export default CyclesListBodyStaticSkeletonLine
+export default UsersTableListBodyStaticSkeletonLine

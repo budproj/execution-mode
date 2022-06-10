@@ -24,11 +24,11 @@ const UsersTableListHead = ({
 }: UsersTableListHeadProperties) => {
   const intl = useIntl()
   const columnMessages = {
-    [USERS_TABLE_COLUMN.NAME]: messages.listHeadCycle,
-    [USERS_TABLE_COLUMN.TEAMS]: messages.listHeadCadenceLevel,
-    [USERS_TABLE_COLUMN.ROLES]: messages.listHeadStatus,
-    [USERS_TABLE_COLUMN.STATE]: messages.listHeadDateStart,
-    [USERS_TABLE_COLUMN.ACTIONS]: messages.listHeadEndDate,
+    [USERS_TABLE_COLUMN.NAME]: messages.listHeadName,
+    [USERS_TABLE_COLUMN.TEAMS]: messages.listHeadTeams,
+    [USERS_TABLE_COLUMN.ROLES]: messages.listHeadRole,
+    [USERS_TABLE_COLUMN.STATE]: messages.listHeadState,
+    [USERS_TABLE_COLUMN.ACTIONS]: messages.listHeadActions,
   }
 
   const columnWrappers = {

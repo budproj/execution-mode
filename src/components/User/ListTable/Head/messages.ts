@@ -1,53 +1,45 @@
 import { defineMessages } from 'react-intl'
 
-type CycleListHeadMessage =
-  | 'listHeadCycle'
+type UsersTableListHeadMessage =
+  | 'listHeadName'
   | 'listHeadActions'
-  | 'listHeadCadenceLevel'
-  | 'listHeadDateStart'
-  | 'listHeadEndDate'
-  | 'listHeadStatus'
+  | 'listHeadTeams'
+  | 'listHeadRole'
+  | 'listHeadState'
 
-export default defineMessages<CycleListHeadMessage>({
-  listHeadCycle: {
-    defaultMessage: 'Nome do Ciclo',
-    id: 'tjSA87',
+export default defineMessages<UsersTableListHeadMessage>({
+  listHeadName: {
+    defaultMessage: 'Nome',
+    id: 'wat5HS',
     description:
-      'This message is displayed as the column header for the cycle table in the cycle name column',
+      'This message is displayed as the column header for the users table in the user name column',
   },
 
   listHeadActions: {
     defaultMessage: 'Ações',
-    id: 'F9UdBv',
+    id: 'f6KTde',
     description:
-      'This message is displayed as the column header for the cycle table in the actions column',
+      'This message is displayed as the column header for the users table in the actions column',
   },
 
-  listHeadCadenceLevel: {
-    defaultMessage: 'Cadência',
-    id: 'ZvutBL',
+  listHeadTeams: {
+    defaultMessage: 'Times',
+    id: 'vEzcix',
     description:
-      'This message is displayed as the column header for the cycles table in the cadence column',
+      'This message is displayed as the column header for the users table in the teams column',
   },
 
-  listHeadStatus: {
-    defaultMessage: 'Status',
-    id: '8gbub2',
+  listHeadRole: {
+    defaultMessage: 'Papel',
+    id: 'zmPWcg',
     description:
-      'This message is displayed as the column header for the cycle table in the status column',
+      'This message is displayed as the column header for the users table in the role column',
   },
 
-  listHeadDateStart: {
-    defaultMessage: 'Início',
-    id: 'f2OulU',
+  listHeadState: {
+    defaultMessage: 'Estado',
+    id: 'tmyaek',
     description:
-      'This message is displayed as the column header for the cycle table in the date start column',
-  },
-
-  listHeadEndDate: {
-    defaultMessage: 'Fim',
-    id: 'Lt+YEZ',
-    description:
-      'This message is displayed as the column header for the cycle table in the date end column',
+      'This message is displayed as the column header for the users table in the state column',
   },
 })

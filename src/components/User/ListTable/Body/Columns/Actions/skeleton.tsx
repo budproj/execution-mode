@@ -1,12 +1,12 @@
 import { Skeleton } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 
-import CycleListBodyColumnBase from 'src/components/Cycle/List/Body/Columns/Base'
+import UsersTableListBodyColumnBase from 'src/components/User/ListTable/Body/Columns/Base'
 
-const CyclesListBodyColumnActionsSkeleton = (): ReactElement => (
-  <CycleListBodyColumnBase preventLineClick>
+const UsersTableListBodyColumnActionsSkeleton = (): ReactElement => (
+  <UsersTableListBodyColumnBase preventLineClick>
     <Skeleton w={12} h={12} borderRadius={4} />
-  </CycleListBodyColumnBase>
+  </UsersTableListBodyColumnBase>
 )
 
-export default CyclesListBodyColumnActionsSkeleton
+export default UsersTableListBodyColumnActionsSkeleton

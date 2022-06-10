@@ -1,16 +1,14 @@
-import { CyclesListBodyColumnActionsProperties } from './Actions/actions'
-import { CyclesListBodyColumnCadenceLevelProperties } from './CadenceLevel/cadence-level'
-import { CyclesListBodyColumnCyclesProperties } from './Cycle/cycle'
-import { CyclesListBodyColumnEndDateProperties } from './DateEnd'
-import { CyclesListBodyColumnDateStartProperties } from './DateStart'
-import { CyclesListBodyColumnStatusProperties } from './Status/status'
-import { CYCLE_LIST_COLUMN } from './constants'
+import { UsersTableListBodyColumnActionsProperties } from './Actions/actions'
+import { UsersTableListBodyColumnNameProperties } from './Name/name'
+import { UsersTableListBodyColumnRoleProperties } from './Role/role'
+import { UsersTableListBodyColumnStateProperties } from './State/state'
+import { UsersTableListBodyColumnTeamsProperties } from './Teams/teams'
+import { USERS_TABLE_COLUMN } from './constants'
 
-export interface CyclesListBodyColumnProperties {
-  [CYCLE_LIST_COLUMN.CYCLE]?: CyclesListBodyColumnCyclesProperties
-  [CYCLE_LIST_COLUMN.INITIAL_DATE]?: CyclesListBodyColumnDateStartProperties
-  [CYCLE_LIST_COLUMN.END_DATE]?: CyclesListBodyColumnEndDateProperties
-  [CYCLE_LIST_COLUMN.CADENCE_LEVEL]?: CyclesListBodyColumnCadenceLevelProperties
-  [CYCLE_LIST_COLUMN.STATUS]?: CyclesListBodyColumnStatusProperties
-  [CYCLE_LIST_COLUMN.ACTIONS]?: CyclesListBodyColumnActionsProperties
+export interface UsersTableListBodyColumnProperties {
+  [USERS_TABLE_COLUMN.NAME]?: UsersTableListBodyColumnNameProperties
+  [USERS_TABLE_COLUMN.TEAMS]?: UsersTableListBodyColumnTeamsProperties
+  [USERS_TABLE_COLUMN.ROLES]?: UsersTableListBodyColumnRoleProperties
+  [USERS_TABLE_COLUMN.STATE]?: UsersTableListBodyColumnStateProperties
+  [USERS_TABLE_COLUMN.ACTIONS]?: UsersTableListBodyColumnActionsProperties
 }

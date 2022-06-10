@@ -1,3 +1,3 @@
-import CyclesListBodySkeleton from './body'
+import UsersTableListBodySkeleton from './body'
 
-export default CyclesListBodySkeleton
+export default UsersTableListBodySkeleton
