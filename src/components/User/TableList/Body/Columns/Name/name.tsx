@@ -24,7 +24,7 @@ const UsersTableListBodyColumnName = ({
         userID={id}
         canHover={false}
         nameColor={isActive ? '#525F7F' : 'new-gray.500'}
-        isUserActive={isActive}
+        isUserNotActive={!isActive}
       />
     </UsersTableListBodyColumnBase>
   )

@@ -27,7 +27,6 @@ const UsersTableListBodyColumnState = ({
       ? intl.formatMessage(messages.userAccountIsActiveTitleOption)
       : intl.formatMessage(messages.userAccountIsNotActiveTitleOption)
 
-  console.log({ stateOfUser })
   const isStateOfUserLoaded = Boolean(stateOfUser)
 
   return (

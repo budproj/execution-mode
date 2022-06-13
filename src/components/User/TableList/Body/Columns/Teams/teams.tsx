@@ -25,8 +25,6 @@ const UsersTableListBodyColumnTeams = ({
 
   const isTeamsLoaded = Boolean(arrayUserTeams)
 
-  console.log({ arrayUserTeams })
-
   return (
     <UsersTableListBodyColumnBase>
       <Flex gridGap={2} flexDir="column">
