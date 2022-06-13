@@ -8,7 +8,7 @@ import { GraphQLEffect } from 'src/components/types'
 
 import queries from './queries.gql'
 
-const SettingsCyclesIndex = () => {
+const SettingsUsersIndex = () => {
   const [isAuthorized, setIsAuthorized] = useState(false)
   const { push } = useRouter()
 
@@ -22,4 +22,4 @@ const SettingsCyclesIndex = () => {
   return isAuthorized && <SettingsPage path={SETTINGS_PATHS.USERS} />
 }
 
-export default SettingsCyclesIndex
+export default SettingsUsersIndex
