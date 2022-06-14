@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
 import Logotype from 'src/components/Base/Logotype'
+import { useGetConfiguration } from 'src/components/Settings/hooks/getCompanyConfiguration'
 
 import MainAppBarHelperButtons from './HelperButtons'
 import MainAppBarMenuItem from './MenuItem'
@@ -18,6 +19,8 @@ export interface MainAppBarProperties {
 
 const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
   const intl = useIntl()
+
+  const { isTimelineEnabled } = useGetConfiguration()
 
   return (
     <Flex
@@ -45,6 +48,12 @@ const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
               label={intl.formatMessage(messages.thirdMenuItem)}
               href="/explore"
             />
+            {isTimelineEnabled && (
+              <MainAppBarMenuItem
+                label={intl.formatMessage(messages.fourthMenuItem)}
+                href="/timeline"
+              />
+            )}
           </Flex>
 
           <Flex
