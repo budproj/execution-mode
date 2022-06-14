@@ -7,6 +7,9 @@ import messages from './messages'
 export const Timeline = () => (
   <PageContent>
     <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
-    <iframe style={{ height: '100vh' }} src="https://www.getbud.co/" />
+    <iframe
+      style={{ height: '100vh' }}
+      src="https://coda.io/embed/ep7fzzsAJg/_sukdv?viewMode=embedplay"
+    />
   </PageContent>
 )
