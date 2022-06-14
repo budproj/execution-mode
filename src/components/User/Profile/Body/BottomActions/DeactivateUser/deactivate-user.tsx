@@ -14,6 +14,7 @@ import queries from './queries.gql'
 
 interface DeactivateUserProperties {
   userID?: string
+  confirmationLabel?: string
   showButton?: boolean
   isOpen?: boolean
   onClose?: () => void
@@ -29,6 +30,7 @@ type DeactivateUserResult = {
 export const DeactivateUser = ({
   userID,
   isOpen,
+  confirmationLabel,
   onClose,
   onUserDeactivation,
   showButton = true,
@@ -86,6 +88,7 @@ export const DeactivateUser = ({
         HeaderImageWrapper={DialogImageWrapper}
         isOpen={isOpen ?? isConfirmationDialogOpen}
         keyword={intl.formatMessage(messages.deactivateDialogKeyword)}
+        confirmationLabel={confirmationLabel}
         title={intl.formatMessage(messages.deactivateDialogTitle, {
           gender: user?.gender,
           name: user?.firstName,
