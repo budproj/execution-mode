@@ -1,15 +1,17 @@
 import { Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react'
 import React, { useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import { CreateUserSidebar } from 'src/components/User/Create/Sidebar'
 import UsersTableList from 'src/components/User/TableList'
+import { SeeDetailsAction } from 'src/components/User/TableList/Body/Columns/Actions/see-details-action'
 import { USERS_TABLE_COLUMN } from 'src/components/User/TableList/Body/Columns/constants'
 import { useGetUsers } from 'src/components/User/hooks/getUsers'
 import { UserStatus } from 'src/components/User/types'
 import meAtom from 'src/state/recoil/user/me'
+import { seeDetailsUserSidebarViewMode } from 'src/state/recoil/user/see-deatils-user-sidebar-view-mode'
 
 import messages from './messages'
 
@@ -17,8 +19,11 @@ const SettingsUsers = () => {
   const intl = useIntl()
   const { data: users, loading, refetch } = useGetUsers()
   const [isCreateSidebarOpen, setIsCreateSidebarOpen] = useState(false)
+  const [{ userId, isOpened }, setIsOpened] = useRecoilState(seeDetailsUserSidebarViewMode)
 
   const myID = useRecoilValue(meAtom)
+
+  const closeUserDetailsSidebar = () => setIsOpened({ userId: '', isOpened: false })
 
   const user = users.find((user) => user.id === myID)
   const companyId = user?.companies?.edges[0]?.node.id
@@ -32,7 +37,7 @@ const SettingsUsers = () => {
     [filteredUsers],
   )
 
-  const onCreate = async () => refetch()
+  const onChanges = async () => refetch()
 
   const handleCreateSidebarOpen = () => {
     if (!isCreateSidebarOpen) setIsCreateSidebarOpen(true)
@@ -87,7 +92,13 @@ const SettingsUsers = () => {
         teamID={companyId}
         isOpen={isCreateSidebarOpen}
         onClose={handleCreateSidebarClose}
-        onCreate={onCreate}
+        onCreate={onChanges}
+      />
+      <SeeDetailsAction
+        isOpen={isOpened}
+        id={userId}
+        onClose={closeUserDetailsSidebar}
+        onUserDeactivation={onChanges}
       />
     </>
   )

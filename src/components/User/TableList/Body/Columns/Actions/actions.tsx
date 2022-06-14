@@ -1,12 +1,15 @@
 import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilState } from 'recoil'
 
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
+import { DeactivateUser } from 'src/components/User/Profile/Body/BottomActions/DeactivateUser/deactivate-user'
 import UsersTableListBodyColumnBase, {
   UsersTableListBodyColumnBaseProperties,
 } from 'src/components/User/TableList/Body/Columns/Base'
 import { User } from 'src/components/User/types'
+import { seeDetailsUserSidebarViewMode } from 'src/state/recoil/user/see-deatils-user-sidebar-view-mode'
 
 import messages from './messages'
 
@@ -20,6 +23,20 @@ const UsersTableListBodyColumnActions = ({
   id,
 }: UsersTableListBodyColumnActionsProperties): ReactElement => {
   const intl = useIntl()
+  const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false)
+  const [_, setIsOpened] = useRecoilState(seeDetailsUserSidebarViewMode)
+
+  const openDeactivateModal = () => {
+    if (!isDeactivateModalOpen) setIsDeactivateModalOpen(true)
+  }
+
+  const closeDeactivateModal = () => {
+    if (isDeactivateModalOpen) setIsDeactivateModalOpen(false)
+  }
+
+  const openSeeDatailsUserSidebar = () => {
+    setIsOpened({ isOpened: true, userId: id })
+  }
 
   return (
     <UsersTableListBodyColumnBase preventLineClick>
@@ -39,11 +56,22 @@ const UsersTableListBodyColumnActions = ({
           />
         </MenuButton>
         <MenuList>
-          <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
+          <MenuItem onClick={openSeeDatailsUserSidebar}>
+            {intl.formatMessage(messages.firstMenuItemOption)}
+          </MenuItem>
           <MenuItem>{intl.formatMessage(messages.secondMenuItemOption)}</MenuItem>
-          <MenuItem>{intl.formatMessage(messages.thirdMenuItemOption)}</MenuItem>
+          <MenuItem onClick={openDeactivateModal}>
+            {intl.formatMessage(messages.thirdMenuItemOption)}
+          </MenuItem>
         </MenuList>
       </Menu>
+
+      <DeactivateUser
+        userID={id}
+        showButton={false}
+        isOpen={isDeactivateModalOpen}
+        onClose={closeDeactivateModal}
+      />
     </UsersTableListBodyColumnBase>
   )
 }
