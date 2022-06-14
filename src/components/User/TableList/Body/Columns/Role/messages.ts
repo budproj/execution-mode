@@ -1,48 +1,50 @@
 import { defineMessages } from 'react-intl'
 
-type CyclesListBodyColumnStatusMessage =
-  | 'activeCycleTitleOption'
-  | 'notActiveCycleTitleOption'
-  | 'activeCycleDescriptionOption'
-  | 'notActiveCycleDescriptionOption'
-  | 'successEditToastMessage'
-  | 'unknownErrorToastMessage'
+type UsersTableListBodyColumnRoleMessage =
+  | 'userDefaultRoleTitle'
+  | 'userDefaultRoleDescription'
+  | 'userEditionRoleTitle'
+  | 'userEditionRoleDescription'
+  | 'userAdminUserRoleTitle'
+  | 'userAdminRoleDescription'
 
-export default defineMessages<CyclesListBodyColumnStatusMessage>({
-  activeCycleTitleOption: {
-    defaultMessage: 'Ativo',
-    id: 'CQPpEV',
-    description: 'This string is used to select the active cycles option.',
+export default defineMessages<UsersTableListBodyColumnRoleMessage>({
+  userDefaultRoleTitle: {
+    defaultMessage: 'Padrão',
+    id: 'bZXWCR',
+    description: 'This string is used to select the user default role.',
   },
 
-  notActiveCycleTitleOption: {
-    defaultMessage: 'Inativo',
-    id: 'ywBP21',
-    description: 'This string is used to select the not-active cycles option.',
-  },
-  activeCycleDescriptionOption: {
+  userDefaultRoleDescription: {
     defaultMessage:
-      'O ciclo está ativo, a funcionalidade de check-in está disponível, e o progresso está sendo mensurado.',
-    id: '7GDhfH',
-    description: 'This string is used to describe the cycles active status option.',
+      'Usuários com essa permissão podem editar e fazer check-in apenas dos resultados-chave que fazem parte.',
+    id: 'Z9w45E',
+    description: 'This string is used to describe the user default role selection.',
   },
-  notActiveCycleDescriptionOption: {
+
+  userEditionRoleTitle: {
+    defaultMessage: 'Edição',
+    id: 'rUIF8T',
+    description: 'This string is used to select the user edit role.',
+  },
+
+  userEditionRoleDescription: {
     defaultMessage:
-      'O ciclo está fechado. Não é possível editar nem atualizar os OKRs, mas eles podem ser consultados pelo histórico.',
-    id: 'vO+kQj',
-    description: 'This string is used to describe the cycles not-active status option.',
+      'Editores podem criar, editar e excluir qualquer objetivo ou resultado-chave no Bud.',
+    id: '8ZPaMq',
+    description: 'This string is used to describe the user edit role selection.',
   },
 
-  successEditToastMessage: {
-    defaultMessage: 'Ciclo {period} editado com sucesso!',
-    id: 't7xKJo',
-    description: 'This message appears when we create a new cycle as a toast',
+  userAdminUserRoleTitle: {
+    defaultMessage: 'Admin',
+    id: 'ndABHM',
+    description: 'This string is used to select the user admin role.',
   },
 
-  unknownErrorToastMessage: {
-    defaultMessage: 'Desculpe, aconteceu um erro inesperado. Tente novamente mais tarde',
-    id: 'cGFQsk',
-    description:
-      'This message appears as an error toast when we have an unknown error while creating a new cycle',
+  userAdminRoleDescription: {
+    defaultMessage:
+      'Administradores possuem acesso total de criação, edição e exclusão de OKRs, usuários e ciclos de estratégia.',
+    id: 'Jj0rRJ',
+    description: 'This string is used to describe the user admin role selection.',
   },
 })

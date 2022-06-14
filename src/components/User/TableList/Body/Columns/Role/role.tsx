@@ -1,5 +1,6 @@
 import { Box, Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
 import React, { ReactElement, useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import CyclesListBodyColumnBase from 'src/components/Cycle/List/Body/Columns/Base'
 import { Check, ChevronDown } from 'src/components/Icon'
@@ -8,6 +9,8 @@ import buildPartialSelector from 'src/state/recoil/user/build-partial-selector'
 
 import { USER_ROLES } from '../../../constants'
 import { UsersTableListBodyColumnBaseProperties } from '../Base'
+
+import messages from './messages'
 
 export interface UsersTableListBodyColumnRoleProperties
   extends UsersTableListBodyColumnBaseProperties {
@@ -24,30 +27,23 @@ const UsersTableListBodyColumnRole = ({
   canEdit = true,
 }: UsersTableListBodyColumnRoleProperties): ReactElement => {
   // Const userRole = useRecoilValue(userRoleSelector(id))
+  const intl = useIntl()
 
   const [userRole, setUserRole] = useState<USER_ROLES>(USER_ROLES.DEFAULT)
 
   const isRoleLoaded = Boolean(userRole)
 
   const titleRolesLabels = new Map([
-    [USER_ROLES.DEFAULT, 'Padrão'],
-    [USER_ROLES.EDITION, 'Edição'],
-    [USER_ROLES.ADMIN, 'Admin'],
+    [USER_ROLES.DEFAULT, intl.formatMessage(messages.userDefaultRoleTitle)],
+    [USER_ROLES.EDITION, intl.formatMessage(messages.userEditionRoleTitle)],
+    [USER_ROLES.ADMIN, intl.formatMessage(messages.userAdminUserRoleTitle)],
   ])
 
   const descriptionRolesLabels = new Map([
-    [
-      USER_ROLES.DEFAULT,
-      'Usuários com essa permissão podem editar e fazer check-in apenas dos resultados-chave que fazem parte.',
-    ],
-    [
-      USER_ROLES.EDITION,
-      'Editores podem criar, editar e excluir qualquer objetivo ou resultado-chave no Bud.',
-    ],
-    [
-      USER_ROLES.ADMIN,
-      'Administradores possuem acesso total de criação, edição e exclusão de OKRs, usuários e ciclos de estratégia.',
-    ],
+    [USER_ROLES.DEFAULT, intl.formatMessage(messages.userDefaultRoleDescription)],
+    [USER_ROLES.EDITION, intl.formatMessage(messages.userEditionRoleDescription)],
+
+    [USER_ROLES.ADMIN, intl.formatMessage(messages.userAdminRoleDescription)],
   ])
 
   const handleSelectUserRole = (userRole: USER_ROLES) => {
@@ -69,9 +65,9 @@ const UsersTableListBodyColumnRole = ({
             <>
               <MenuButton
                 as={Button}
-                disabled={!isActive}
+                disabled={!isActive || !canEdit}
                 borderWidth={1}
-                cursor={canEdit ? 'pointer' : 'default'}
+                cursor={isActive || canEdit ? 'pointer' : 'default'}
                 borderColor="new-gray.500"
                 color="new-gray.800"
                 borderRadius={4}
