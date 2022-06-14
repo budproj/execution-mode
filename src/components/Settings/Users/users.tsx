@@ -10,12 +10,15 @@ import { SeeDetailsAction } from 'src/components/User/TableList/Body/Columns/Act
 import { USERS_TABLE_COLUMN } from 'src/components/User/TableList/Body/Columns/constants'
 import { useGetUsers } from 'src/components/User/hooks/getUsers'
 import { UserStatus } from 'src/components/User/types'
+import { GraphQLEffect } from 'src/components/types'
 import meAtom from 'src/state/recoil/user/me'
 import { seeDetailsUserSidebarViewMode } from 'src/state/recoil/user/see-deatils-user-sidebar-view-mode'
 
+import { CompanyMenuProperties } from '../SidebarMenu/Section/Company/company'
+
 import messages from './messages'
 
-const SettingsUsers = () => {
+const SettingsUsers = ({ permissions }: CompanyMenuProperties) => {
   const intl = useIntl()
   const { data: users, loading, refetch } = useGetUsers()
   const [isCreateSidebarOpen, setIsCreateSidebarOpen] = useState(false)
@@ -76,17 +79,25 @@ const SettingsUsers = () => {
                 onSearch={setUsersFilter}
               />
             </Box>
-            <Button
-              bg="brand.500"
-              color="black.50"
-              _hover={{ background: 'brand.400', color: 'black.50' }}
-              onClick={handleCreateSidebarOpen}
-            >
-              {intl.formatMessage(messages.createUserButton)}
-            </Button>
+            {permissions.user.create === GraphQLEffect.ALLOW && (
+              <Button
+                bg="brand.500"
+                color="black.50"
+                _hover={{ background: 'brand.400', color: 'black.50' }}
+                onClick={handleCreateSidebarOpen}
+              >
+                {intl.formatMessage(messages.createUserButton)}
+              </Button>
+            )}
           </Stack>
         </Heading>
-        <UsersTableList isLoading={loading} usersInfo={usersInfos} pt={10} columns={columns} />
+        <UsersTableList
+          canEdit={permissions.user.create === GraphQLEffect.ALLOW}
+          isLoading={loading}
+          usersInfo={usersInfos}
+          pt={10}
+          columns={columns}
+        />
       </Flex>
       <CreateUserSidebar
         teamID={companyId}

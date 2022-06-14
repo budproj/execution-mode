@@ -32,7 +32,10 @@ const SettingsPage = ({ path, permissions }: SettingsPageProperties) => {
     SETTINGS_PATHS.CYCLES,
     permissions ? <SettingsCycles permissions={permissions} /> : React.Fragment,
   )
-  pageContentElement.set(SETTINGS_PATHS.USERS, <SettingsUsers />)
+  pageContentElement.set(
+    SETTINGS_PATHS.USERS,
+    permissions ? <SettingsUsers permissions={permissions} /> : React.Fragment,
+  )
 
   return (
     <PageContent>

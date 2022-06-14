@@ -34,6 +34,7 @@ export interface UsersTableListProperties extends BoxProps {
   usersInfo: userInfo[]
   onLineClick?: (id: User['id']) => void
   isLoading?: boolean
+  canEdit: boolean
 }
 
 const UsersTableList = ({
@@ -45,6 +46,7 @@ const UsersTableList = ({
   headProperties,
   templateColumns,
   columnGap,
+  canEdit,
   usersInfo,
   isLoading,
   ...rest
@@ -64,6 +66,7 @@ const UsersTableList = ({
         columnGap={columnGap}
         columns={columns}
         borderColor={borderColor}
+        canEdit={canEdit}
         bodyProperties={bodyProperties}
         usersInfo={usersInfo}
       />
@@ -76,6 +79,7 @@ const UsersTableList = ({
         bodyProperties={bodyProperties}
         borderColor={borderColor}
         usersInfo={usersInfo}
+        canEdit={canEdit}
         onLineClick={onLineClick}
       />
     )}

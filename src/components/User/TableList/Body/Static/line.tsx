@@ -16,6 +16,7 @@ import { UsersTableListBodyProperties } from '../body'
 
 export interface UsersTableListBodyStaticLineProperties extends UsersTableListBodyProperties {
   userID: User['id']
+  canEdit: boolean
   isActive?: boolean
 }
 
@@ -26,6 +27,7 @@ const UsersTableListBodyStaticLine = ({
   templateColumns,
   isActive,
   columnGap,
+  canEdit,
   columns,
   bodyProperties,
 }: UsersTableListBodyStaticLineProperties) => {
@@ -57,6 +59,7 @@ const UsersTableListBodyStaticLine = ({
             key={`${listID}_CYCLE_LIST_BODY_LINE_${userID ?? uniqueId()}_COLUMN_${column}`}
             isActive={isActive}
             id={userID}
+            canEdit={canEdit}
             borderColor={borderColor}
             {...columnProperties}
           />

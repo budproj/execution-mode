@@ -15,6 +15,7 @@ export interface UsersTableListBodyProperties {
   listID: string
   columns: USERS_TABLE_COLUMN[]
   usersInfo: userInfo[]
+  canEdit: boolean
   templateColumns: GridProps['templateColumns']
   columnGap: GridProps['gridColumnGap']
   borderColor: GridProps['borderColor']

@@ -15,6 +15,11 @@ export enum UserStatus {
   INACTIVE = 'INACTIVE',
 }
 
+export interface AuthzRole {
+  id: string
+  name: string
+  description?: string
+}
 export interface User extends GraphQLNode {
   firstName: string
   fullName: string
@@ -24,6 +29,7 @@ export interface User extends GraphQLNode {
   lastName?: string
   gender?: USER_GENDER
   role?: string
+  authzRole?: AuthzRole
   picture?: string
   status?: UserStatus
   nickname?: string
