@@ -57,9 +57,10 @@ export const UpdateCycle = ({ teamId, parents, cycleId, onCancel }: UpdateCycleP
             period: data.updateCycle.period,
           }),
         })
+        onCancel()
       }
     }
-  }, [loading, error, data, toast, intl])
+  }, [loading, error, data, toast, intl, onCancel])
 
   const normalizedInitialValues: CycleFormValues = {
     ...cycle,

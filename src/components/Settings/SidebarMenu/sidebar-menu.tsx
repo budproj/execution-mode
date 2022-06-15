@@ -7,7 +7,6 @@ import { GraphQLEffect } from 'src/components/types'
 import {
   SettingsSidebarCompanyMenuSectionPreferences,
   SettingsSidebarMyAccountMenuSectionPreferences,
-  SettingsSidebarTermsMenuSectionPreferences,
 } from './Section'
 import { CompanyMenuProperties } from './Section/Company/company'
 import queries from './queries.gql'
@@ -34,7 +33,6 @@ const SettingsSidebarMenu = () => {
         {isAuthorized && permissions && (
           <SettingsSidebarCompanyMenuSectionPreferences permissions={permissions} />
         )}
-        <SettingsSidebarTermsMenuSectionPreferences />
       </Flex>
     </Box>
   )

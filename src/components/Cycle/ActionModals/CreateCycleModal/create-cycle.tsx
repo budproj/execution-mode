@@ -67,9 +67,10 @@ export const CreateCycle = ({
             period: data.createCycle.period,
           }),
         })
+        onCancel()
       }
     }
-  }, [loading, error, data, toast, intl])
+  }, [loading, error, data, toast, intl, onCancel])
 
   const normalizedInitialValues: CycleFormValues = {
     ...cycleFormInitialValues,
