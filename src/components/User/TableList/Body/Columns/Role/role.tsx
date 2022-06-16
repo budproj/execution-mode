@@ -18,7 +18,7 @@ import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import CyclesListBodyColumnBase from 'src/components/Cycle/List/Body/Columns/Base'
 import { Check, ChevronDown } from 'src/components/Icon'
 import { useChangeUserRole } from 'src/components/User/hooks/changeUserRole'
-import { AuthzUserRoles, User } from 'src/components/User/types'
+import { AuthzUserRoles, User, UserStatus } from 'src/components/User/types'
 import buildPartialSelector from 'src/state/recoil/user/build-partial-selector'
 
 import { UsersTableListBodyColumnBaseProperties } from '../Base'
@@ -28,18 +28,18 @@ import messages from './messages'
 export interface UsersTableListBodyColumnRoleProperties
   extends UsersTableListBodyColumnBaseProperties {
   id?: User['id']
-  isActive?: boolean
   canEdit?: boolean
 }
 
 const userAuthzRoleSelector = buildPartialSelector<User['authzRole']>('authzRole')
+const stateOfUserSelector = buildPartialSelector<User['status']>('status')
 
 const UsersTableListBodyColumnRole = ({
   id,
-  isActive,
   canEdit = true,
 }: UsersTableListBodyColumnRoleProperties): ReactElement => {
   const userAuthzRole = useRecoilValue(userAuthzRoleSelector(id))
+  const isActive = useRecoilValue(stateOfUserSelector(id)) === UserStatus.ACTIVE
   const { updateUserRole, data, loading, error } = useChangeUserRole()
 
   const toast = useToast()

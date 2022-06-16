@@ -3,12 +3,11 @@ import React from 'react'
 
 import UsersTableListBodyStaticSkeletonLine from 'src/components/User/TableList/Body/Static/skeleton-line'
 import { UsersTableListBodyProperties } from 'src/components/User/TableList/Body/body'
-
-import { userInfo } from '../../list'
+import { User } from 'src/components/User/types'
 
 export interface UsersTableListBodySkeletonProperties extends UsersTableListBodyProperties {
   amountOfLines: number
-  userIDs?: userInfo[]
+  userIDs?: Array<User['id']>
 }
 
 const UsersTableListBodySkeleton = ({

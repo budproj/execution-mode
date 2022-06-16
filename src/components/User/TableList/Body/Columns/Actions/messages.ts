@@ -5,8 +5,10 @@ type CyclesListBodyColumnActionsMessage =
   | 'firstMenuItemOption'
   | 'secondMenuItemOption'
   | 'thirdMenuItemOption'
+  | 'thirdMenuItemOptionII'
   | 'unknownErrorToastMessage'
   | 'successSendEmailToResetPasswordToastMessage'
+  | 'successReactivateUserToastMessage'
   | 'confirmationDeactivateUserLabel'
 
 export default defineMessages<CyclesListBodyColumnActionsMessage>({
@@ -35,6 +37,12 @@ export default defineMessages<CyclesListBodyColumnActionsMessage>({
     description: 'This message is the description of the option to deactivate a user account.',
   },
 
+  thirdMenuItemOptionII: {
+    defaultMessage: 'Reativar conta',
+    id: 'xIe3i6',
+    description: 'This message is the description of the option to reactivate a user account.',
+  },
+
   unknownErrorToastMessage: {
     defaultMessage: 'Desculpe, aconteceu um erro inesperado. Tente novamente mais tarde',
     id: 'cGFQsk',
@@ -46,6 +54,12 @@ export default defineMessages<CyclesListBodyColumnActionsMessage>({
     defaultMessage: 'Email de redefinição de senha enviado com sucesso.',
     id: 'VW9LHA',
     description: 'This message appears in a toast after the user ask to reset password.',
+  },
+
+  successReactivateUserToastMessage: {
+    defaultMessage: 'Você reativou {name} com sucesso.',
+    id: 'AQkkKh',
+    description: 'This message appears in a toast after reactivating a user.',
   },
 
   confirmationDeactivateUserLabel: {

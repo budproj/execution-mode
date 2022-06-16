@@ -9,7 +9,6 @@ import UsersTableList from 'src/components/User/TableList'
 import { SeeDetailsAction } from 'src/components/User/TableList/Body/Columns/Actions/see-details-action'
 import { USERS_TABLE_COLUMN } from 'src/components/User/TableList/Body/Columns/constants'
 import { useGetUsers } from 'src/components/User/hooks/getUsers'
-import { UserStatus } from 'src/components/User/types'
 import { GraphQLEffect } from 'src/components/types'
 import meAtom from 'src/state/recoil/user/me'
 import { seeDetailsUserSidebarViewMode } from 'src/state/recoil/user/see-deatils-user-sidebar-view-mode'
@@ -35,10 +34,7 @@ const SettingsUsers = ({ permissions }: CompanyMenuProperties) => {
   const filteredUsers = users.filter((user) =>
     user.fullName.toLocaleLowerCase().includes(usersFilter.toLocaleLowerCase()),
   )
-  const usersInfos = useMemo(
-    () => filteredUsers.map(({ id, status }) => ({ id, isActive: status === UserStatus.ACTIVE })),
-    [filteredUsers],
-  )
+  const usersIds = useMemo(() => filteredUsers.map(({ id }) => id), [filteredUsers])
 
   const onChanges = async () => refetch()
 
@@ -94,7 +90,7 @@ const SettingsUsers = ({ permissions }: CompanyMenuProperties) => {
         <UsersTableList
           canEdit={permissions.user.create === GraphQLEffect.ALLOW}
           isLoading={loading}
-          usersInfo={usersInfos}
+          usersIds={usersIds}
           pt={10}
           columns={columns}
         />

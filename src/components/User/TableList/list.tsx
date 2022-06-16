@@ -18,11 +18,6 @@ import {
   GRID_TEMPLATE_COLUMNS,
 } from './constants'
 
-export type userInfo = {
-  id: User['id']
-  isActive?: boolean
-}
-
 export interface UsersTableListProperties extends BoxProps {
   id: string
   columns: USERS_TABLE_COLUMN[]
@@ -31,7 +26,7 @@ export interface UsersTableListProperties extends BoxProps {
   borderColor: GridProps['borderColor']
   templateColumns: GridProps['templateColumns']
   columnGap: GridProps['gridColumnGap']
-  usersInfo: userInfo[]
+  usersIds: Array<User['id']>
   onLineClick?: (id: User['id']) => void
   isLoading?: boolean
   canEdit: boolean
@@ -47,7 +42,7 @@ const UsersTableList = ({
   templateColumns,
   columnGap,
   canEdit,
-  usersInfo,
+  usersIds,
   isLoading,
   ...rest
 }: UsersTableListProperties): ReactElement => (
@@ -68,7 +63,7 @@ const UsersTableList = ({
         borderColor={borderColor}
         canEdit={canEdit}
         bodyProperties={bodyProperties}
-        usersInfo={usersInfo}
+        usersIds={usersIds}
       />
     ) : (
       <UsersTableListBody
@@ -78,7 +73,7 @@ const UsersTableList = ({
         columnGap={columnGap}
         bodyProperties={bodyProperties}
         borderColor={borderColor}
-        usersInfo={usersInfo}
+        usersIds={usersIds}
         canEdit={canEdit}
         onLineClick={onLineClick}
       />

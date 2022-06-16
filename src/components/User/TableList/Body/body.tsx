@@ -6,7 +6,6 @@ import { MessageDescriptor } from 'react-intl'
 import UsersTableListBodyStatic from 'src/components/User/TableList/Body/Static'
 
 import { User } from '../../types'
-import { userInfo } from '../list'
 
 import { USERS_TABLE_COLUMN } from './Columns/constants'
 import { UsersTableListBodyColumnProperties } from './Columns/types'
@@ -14,7 +13,7 @@ import { UsersTableListBodyColumnProperties } from './Columns/types'
 export interface UsersTableListBodyProperties {
   listID: string
   columns: USERS_TABLE_COLUMN[]
-  usersInfo: userInfo[]
+  usersIds: Array<User['id']>
   canEdit: boolean
   templateColumns: GridProps['templateColumns']
   columnGap: GridProps['gridColumnGap']
@@ -25,8 +24,8 @@ export interface UsersTableListBodyProperties {
   handleDragEnd?: (result: DropResult) => void
 }
 
-const UsersTableListBody = ({ usersInfo, ...rest }: UsersTableListBodyProperties) => {
-  return usersInfo ? <UsersTableListBodyStatic usersInfo={usersInfo} {...rest} /> : <Box />
+const UsersTableListBody = ({ usersIds, ...rest }: UsersTableListBodyProperties) => {
+  return usersIds ? <UsersTableListBodyStatic usersIds={usersIds} {...rest} /> : <Box />
 }
 
 export default UsersTableListBody

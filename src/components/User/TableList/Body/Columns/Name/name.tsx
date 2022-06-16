@@ -1,21 +1,25 @@
 import React, { ReactElement } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import NamedAvatar from 'src/components/User/NamedAvatar'
 import UsersTableListBodyColumnBase, {
   UsersTableListBodyColumnBaseProperties,
 } from 'src/components/User/TableList/Body/Columns/Base'
-import { User } from 'src/components/User/types'
+import { User, UserStatus } from 'src/components/User/types'
+import buildPartialSelector from 'src/state/recoil/user/build-partial-selector'
 
 export interface UsersTableListBodyColumnNameProperties
   extends UsersTableListBodyColumnBaseProperties {
   id?: User['id']
-  isActive?: boolean
 }
+
+const stateOfUserSelector = buildPartialSelector<User['status']>('status')
 
 const UsersTableListBodyColumnName = ({
   id,
-  isActive,
 }: UsersTableListBodyColumnNameProperties): ReactElement => {
+  const isActive = useRecoilValue(stateOfUserSelector(id)) === UserStatus.ACTIVE
+
   return (
     <UsersTableListBodyColumnBase>
       <NamedAvatar

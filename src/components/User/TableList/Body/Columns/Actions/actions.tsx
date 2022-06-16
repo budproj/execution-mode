@@ -1,36 +1,36 @@
 import { Menu, MenuButton, MenuItem, MenuList, useToast } from '@chakra-ui/react'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import { DeactivateUser } from 'src/components/User/Profile/Body/BottomActions/DeactivateUser/deactivate-user'
 import UsersTableListBodyColumnBase, {
   UsersTableListBodyColumnBaseProperties,
 } from 'src/components/User/TableList/Body/Columns/Base'
-import { useGetUsers } from 'src/components/User/hooks/getUsers'
 import { useResetUserPassword } from 'src/components/User/hooks/resetUserPassword'
-import { User } from 'src/components/User/types'
+import { User, UserStatus } from 'src/components/User/types'
+import buildPartialSelector from 'src/state/recoil/user/build-partial-selector'
 import { seeDetailsUserSidebarViewMode } from 'src/state/recoil/user/see-deatils-user-sidebar-view-mode'
 
 import messages from './messages'
+import { ReactivateUser } from './reactivate-action'
 
 export interface UsersTableListBodyColumnActionsProperties
   extends UsersTableListBodyColumnBaseProperties {
   id?: User['id']
   canEdit: boolean
-  isActive?: boolean
 }
 
+const stateOfUserSelector = buildPartialSelector<User['status']>('status')
 const UsersTableListBodyColumnActions = ({
   id,
-  isActive,
   canEdit,
 }: UsersTableListBodyColumnActionsProperties): ReactElement => {
   const intl = useIntl()
   const { resetUserPassword, loading, error, data } = useResetUserPassword()
+  const isActive = useRecoilValue(stateOfUserSelector(id)) === UserStatus.ACTIVE
   const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false)
-  const { refetch } = useGetUsers()
   const [_, setIsOpened] = useRecoilState(seeDetailsUserSidebarViewMode)
   const toast = useToast()
 
@@ -49,8 +49,6 @@ const UsersTableListBodyColumnActions = ({
   const handleResetUserPassoword = async () => {
     await resetUserPassword({ variables: { id } })
   }
-
-  const onUserDeactivation = async () => refetch()
 
   useEffect(() => {
     if (!loading) {
@@ -72,17 +70,13 @@ const UsersTableListBodyColumnActions = ({
     <UsersTableListBodyColumnBase preventLineClick>
       <Menu isLazy placement="auto-end" variant="action-list">
         <MenuButton
-          disabled={!isActive || !canEdit}
-          cursor={isActive && canEdit ? 'pointer' : 'default'}
+          disabled={!canEdit}
+          cursor={canEdit ? 'pointer' : 'default'}
           ml={2.5}
           color="new-gray.500"
-          _hover={
-            isActive && canEdit
-              ? {
-                  color: 'brand.500',
-                }
-              : undefined
-          }
+          _hover={{
+            color: 'brand.500',
+          }}
         >
           <TreeDotsIcon
             fill="currentColor"
@@ -92,15 +86,23 @@ const UsersTableListBodyColumnActions = ({
           />
         </MenuButton>
         <MenuList>
-          <MenuItem onClick={openSeeDatailsUserSidebar}>
-            {intl.formatMessage(messages.firstMenuItemOption)}
-          </MenuItem>
-          <MenuItem onClick={handleResetUserPassoword}>
-            {intl.formatMessage(messages.secondMenuItemOption)}
-          </MenuItem>
-          <MenuItem onClick={openDeactivateModal}>
-            {intl.formatMessage(messages.thirdMenuItemOption)}
-          </MenuItem>
+          {isActive && (
+            <>
+              <MenuItem onClick={openSeeDatailsUserSidebar}>
+                {intl.formatMessage(messages.firstMenuItemOption)}
+              </MenuItem>
+              <MenuItem onClick={handleResetUserPassoword}>
+                {intl.formatMessage(messages.secondMenuItemOption)}
+              </MenuItem>
+            </>
+          )}
+          {isActive ? (
+            <MenuItem onClick={openDeactivateModal}>
+              {intl.formatMessage(messages.thirdMenuItemOption)}
+            </MenuItem>
+          ) : (
+            <ReactivateUser id={id} />
+          )}
         </MenuList>
       </Menu>
 
@@ -110,7 +112,6 @@ const UsersTableListBodyColumnActions = ({
         isOpen={isDeactivateModalOpen}
         confirmationLabel={intl.formatMessage(messages.confirmationDeactivateUserLabel)}
         onClose={closeDeactivateModal}
-        onUserDeactivation={onUserDeactivation}
       />
     </UsersTableListBodyColumnBase>
   )

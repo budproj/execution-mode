@@ -3,7 +3,8 @@ import remove from 'lodash/remove'
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
-import { userInfo } from '../../list'
+import { User } from 'src/components/User/types'
+
 import {
   UsersTableListBodyColumnNameSkeleton,
   UsersTableListBodyColumnRoleSkeleton,
@@ -16,7 +17,7 @@ import { UsersTableListBodyProperties } from '../body'
 
 export interface UsesTableListBodyStaticSkeletonLineProperties
   extends UsersTableListBodyProperties {
-  userID?: userInfo['id']
+  userID?: User['id']
 }
 
 const UsersTableListBodyStaticSkeletonLine = ({

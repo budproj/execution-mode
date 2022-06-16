@@ -2,19 +2,17 @@ import { uniqueId } from 'lodash'
 import React from 'react'
 
 import { UsersTableListBodyProperties } from 'src/components/User/TableList/Body/body'
-
-import { userInfo } from '../../list'
+import { User } from 'src/components/User/types'
 
 import UsersTableListBodyStaticLine from './line'
 
-const UsersTableListBodyStatic = ({ listID, usersInfo, ...rest }: UsersTableListBodyProperties) => (
+const UsersTableListBodyStatic = ({ listID, usersIds, ...rest }: UsersTableListBodyProperties) => (
   <>
-    {usersInfo.map((userInfo: userInfo) => (
+    {usersIds.map((id: User['id']) => (
       <UsersTableListBodyStaticLine
-        key={`${listID ?? uniqueId()}_USERS_TABLE_LIST_BODY_LINE_${userInfo.id ?? uniqueId()}`}
-        usersInfo={usersInfo}
-        userID={userInfo.id}
-        isActive={userInfo.isActive}
+        key={`${listID ?? uniqueId()}_USERS_TABLE_LIST_BODY_LINE_${id ?? uniqueId()}`}
+        usersIds={usersIds}
+        userID={id}
         listID={listID}
         {...rest}
       />

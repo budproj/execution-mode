@@ -10,7 +10,7 @@ type CreateUserSidebarWrapperProperties = {
   teamID?: string
   isOpen: boolean
   onClose: () => void
-  onCreate?: (userID?: string) => Promise<void> | void | Promise<ApolloQueryResult<any>>
+  onCreate?: (userID: string) => Promise<void> | void | Promise<ApolloQueryResult<any>>
 }
 
 export const CreateUserSidebarWrapper = ({
