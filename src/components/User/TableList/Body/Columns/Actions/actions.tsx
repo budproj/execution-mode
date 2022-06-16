@@ -8,7 +8,8 @@ import { DeactivateUser } from 'src/components/User/Profile/Body/BottomActions/D
 import UsersTableListBodyColumnBase, {
   UsersTableListBodyColumnBaseProperties,
 } from 'src/components/User/TableList/Body/Columns/Base'
-import { useResetUserPassword } from 'src/components/User/hooks/changeUserRole'
+import { useGetUsers } from 'src/components/User/hooks/getUsers'
+import { useResetUserPassword } from 'src/components/User/hooks/resetUserPassword'
 import { User } from 'src/components/User/types'
 import { seeDetailsUserSidebarViewMode } from 'src/state/recoil/user/see-deatils-user-sidebar-view-mode'
 
@@ -23,11 +24,13 @@ export interface UsersTableListBodyColumnActionsProperties
 
 const UsersTableListBodyColumnActions = ({
   id,
+  isActive,
   canEdit,
 }: UsersTableListBodyColumnActionsProperties): ReactElement => {
   const intl = useIntl()
   const { resetUserPassword, loading, error, data } = useResetUserPassword()
   const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false)
+  const { refetch } = useGetUsers()
   const [_, setIsOpened] = useRecoilState(seeDetailsUserSidebarViewMode)
   const toast = useToast()
 
@@ -46,6 +49,8 @@ const UsersTableListBodyColumnActions = ({
   const handleResetUserPassoword = async () => {
     await resetUserPassword({ variables: { id } })
   }
+
+  const onUserDeactivation = async () => refetch()
 
   useEffect(() => {
     if (!loading) {
@@ -67,12 +72,17 @@ const UsersTableListBodyColumnActions = ({
     <UsersTableListBodyColumnBase preventLineClick>
       <Menu isLazy placement="auto-end" variant="action-list">
         <MenuButton
+          disabled={!isActive || !canEdit}
+          cursor={isActive && canEdit ? 'pointer' : 'default'}
           ml={2.5}
           color="new-gray.500"
-          disabled={!canEdit}
-          _hover={{
-            color: 'brand.500',
-          }}
+          _hover={
+            isActive && canEdit
+              ? {
+                  color: 'brand.500',
+                }
+              : undefined
+          }
         >
           <TreeDotsIcon
             fill="currentColor"
@@ -100,6 +110,7 @@ const UsersTableListBodyColumnActions = ({
         isOpen={isDeactivateModalOpen}
         confirmationLabel={intl.formatMessage(messages.confirmationDeactivateUserLabel)}
         onClose={closeDeactivateModal}
+        onUserDeactivation={onUserDeactivation}
       />
     </UsersTableListBodyColumnBase>
   )

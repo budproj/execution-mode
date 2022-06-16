@@ -121,7 +121,7 @@ export const NameWithAvatar = forwardRef(
               <Avatar
                 name={user?.fullName}
                 src={user?.picture}
-                style={isUserNotActive === true ? { filter: 'grayscale(95%)' } : undefined}
+                opacity={isUserNotActive === true ? 0.5 : undefined}
                 w={avatarSize}
                 h={avatarSize}
                 loading="lazy"
@@ -169,7 +169,7 @@ export const NameWithAvatar = forwardRef(
 
             {hasSubtitle && (
               <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>
-                <Text fontSize="md" color={isUserNotActive === true ? 'gray.400' : 'new-gray.500'}>
+                <Text fontSize="md" color={isUserNotActive ? 'new-gray.500' : '#6B7B90'}>
                   {subtitle}
                 </Text>
               </Skeleton>

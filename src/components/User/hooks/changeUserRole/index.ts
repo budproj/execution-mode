@@ -1,1 +1,1 @@
-export { useResetUserPassword } from './reset-user-password'
+export { useChangeUserRole } from './change-user-role'

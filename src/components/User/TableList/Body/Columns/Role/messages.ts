@@ -3,10 +3,14 @@ import { defineMessages } from 'react-intl'
 type UsersTableListBodyColumnRoleMessage =
   | 'userDefaultRoleTitle'
   | 'userDefaultRoleDescription'
-  | 'userEditionRoleTitle'
-  | 'userEditionRoleDescription'
+  | 'userLeaderRoleTitle'
+  | 'userLeaderRoleDescription'
+  | 'userOkrMasterRoleTitle'
+  | 'userOkrMasteRoleDescription'
   | 'userAdminUserRoleTitle'
   | 'userAdminRoleDescription'
+  | 'unknownErrorToastMessage'
+  | 'successUpdateUserRoleToastMessage'
 
 export default defineMessages<UsersTableListBodyColumnRoleMessage>({
   userDefaultRoleTitle: {
@@ -22,16 +26,29 @@ export default defineMessages<UsersTableListBodyColumnRoleMessage>({
     description: 'This string is used to describe the user default role selection.',
   },
 
-  userEditionRoleTitle: {
-    defaultMessage: 'Edição',
-    id: 'rUIF8T',
+  userLeaderRoleTitle: {
+    defaultMessage: 'Líder',
+    id: 'pmuG/e',
     description: 'This string is used to select the user edit role.',
   },
 
-  userEditionRoleDescription: {
+  userLeaderRoleDescription: {
     defaultMessage:
-      'Editores podem criar, editar e excluir qualquer objetivo ou resultado-chave no Bud.',
-    id: '8ZPaMq',
+      'Líderes podem criar, editar e excluir objetivos e resultados-chave dos times aos quais pertencem.',
+    id: 'i915bK',
+    description: 'This string is used to describe the user edit role selection.',
+  },
+
+  userOkrMasterRoleTitle: {
+    defaultMessage: 'OKR Master',
+    id: 'J3ARiQ',
+    description: 'This string is used to select the user edit role.',
+  },
+
+  userOkrMasteRoleDescription: {
+    defaultMessage:
+      'Esses usuários podem criar, editar e excluir qualquer objetivo ou resultado-chave no Bud.',
+    id: 'R6SREn',
     description: 'This string is used to describe the user edit role selection.',
   },
 
@@ -46,5 +63,18 @@ export default defineMessages<UsersTableListBodyColumnRoleMessage>({
       'Administradores possuem acesso total de criação, edição e exclusão de OKRs, usuários e ciclos de estratégia.',
     id: 'Jj0rRJ',
     description: 'This string is used to describe the user admin role selection.',
+  },
+
+  unknownErrorToastMessage: {
+    defaultMessage: 'Desculpe, aconteceu um erro inesperado. Tente novamente mais tarde',
+    id: 'SZONnG',
+    description:
+      'This message appears as an error toast when we have an unknown error while updater the user role',
+  },
+
+  successUpdateUserRoleToastMessage: {
+    defaultMessage: 'Papel do usuário {user} alterado com sucesso!',
+    id: 'Xv5t+7',
+    description: 'This message appears when we updating the user role with success.',
   },
 })

@@ -15,6 +15,12 @@ export enum UserStatus {
   INACTIVE = 'INACTIVE',
 }
 
+export const AuthzUserRoles = {
+  teamMember: 'Team Member',
+  leader: 'Leader',
+  squadMember: 'Squad Member',
+  admin: 'Admin',
+}
 export interface AuthzRole {
   id: string
   name: string

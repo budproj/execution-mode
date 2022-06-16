@@ -3,7 +3,7 @@ query GET_USERS {
     companies(first: 1) {
       edges {
         node {
-          users(first: 1000) {
+          users(first: 1000, withInactives: true) {
             edges {
               node {
                 id
