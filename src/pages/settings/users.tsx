@@ -15,13 +15,13 @@ const SettingsUsersIndex = () => {
 
   useQuery(queries.GET_USER_SETTINGS_PERMISSIONS, {
     onCompleted: (data) => {
-      if (data.permissions.user.read === GraphQLEffect.DENY) push('/')
+      if (data.permissions.user.update === GraphQLEffect.DENY) push('/')
       setPermissions(data.permissions)
     },
   })
 
   return (
-    permissions?.cycle?.read === GraphQLEffect.ALLOW && (
+    permissions?.cycle?.update === GraphQLEffect.ALLOW && (
       <SettingsPage path={SETTINGS_PATHS.USERS} permissions={permissions} />
     )
   )
