@@ -5,15 +5,16 @@ import getConfig from 'src/config'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
-interface useGetGamificationDetailsReturns {
+interface useGetTimelineCompaniesReturns {
   isGameficationDisabled: boolean
+  isTimelineEnabled: boolean
 }
 
-export const useGetGamificationDetails = (companies?: Team[]): useGetGamificationDetailsReturns => {
+export const useGetConfiguration = (companies?: Team[]): useGetTimelineCompaniesReturns => {
   const userID = useRecoilValue(meAtom)
   const currentUserData = useRecoilValue(selectUser(userID))
   const { publicRuntimeConfig } = getConfig()
-  const { noGamificationCompaniesIds } = publicRuntimeConfig
+  const { noGamificationCompaniesIds, timelineCompaniesIds } = publicRuntimeConfig
 
   const companiesToConsider =
     companies ?? currentUserData?.companies?.edges?.map(({ node }) => node) ?? []
@@ -22,5 +23,9 @@ export const useGetGamificationDetails = (companies?: Team[]): useGetGamificatio
     noGamificationCompaniesIds.includes(company.id),
   )
 
-  return { isGameficationDisabled }
+  const isTimelineEnabled = companiesToConsider.some((company) =>
+    timelineCompaniesIds.includes(company.id),
+  )
+
+  return { isGameficationDisabled, isTimelineEnabled }
 }

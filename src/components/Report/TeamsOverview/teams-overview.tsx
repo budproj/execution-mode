@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { Cycle } from 'src/components/Cycle/types'
-import { useGetGamificationDetails } from 'src/components/Team/hooks'
+import { useGetConfiguration } from 'src/components/Settings/hooks'
 import { Team } from 'src/components/Team/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -25,7 +25,7 @@ export interface TeamsOverviewProperties extends StyleProps {
 
 const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   const intl = useIntl()
-  const { isGameficationDisabled } = useGetGamificationDetails()
+  const { isGameficationDisabled } = useGetConfiguration()
 
   const { data, loading } = useQuery<GetCompanyTeamsQuery>(queries.GET_COMPANY_TEAMS, {
     fetchPolicy: 'network-only',
@@ -60,7 +60,7 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
         </Heading>
       </Skeleton>
       {orderedTeams.length === 0 ? (
-        <TeamsOverviewBodyTableSkeleton />
+        <TeamsOverviewBodyTableSkeleton isGameficationDisabled={isGameficationDisabled} />
       ) : (
         <TeamsOverviewBodyTableBody
           isGameficationDisabled={isGameficationDisabled}

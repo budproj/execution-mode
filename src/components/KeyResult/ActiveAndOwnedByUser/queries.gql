@@ -9,6 +9,7 @@ query GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES($userID: ID) {
           goal
           format
           type
+          teamId
           delta {
             progress
           }
