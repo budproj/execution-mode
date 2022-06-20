@@ -31,6 +31,7 @@ const {
   SENTRY_DSN,
   SENTRY_AUTH_TOKEN,
   NO_GAMIFICATION_COMPANIES_IDS,
+  TIMELINE_COMPANIES_IDS,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -41,6 +42,7 @@ const publicRuntimeConfig = {
   noGamificationCompaniesIds: NO_GAMIFICATION_COMPANIES_IDS
     ? NO_GAMIFICATION_COMPANIES_IDS.split(',')
     : [],
+  timelineCompaniesIds: TIMELINE_COMPANIES_IDS ? TIMELINE_COMPANIES_IDS.split(',') : [],
   maintenanceMode: {
     enabled: MAINTENANCE_MODE_ENABLED === 'true',
     expectedReturn: new Date(MAINTENANCE_MODE_EXPECTED_RETURN),

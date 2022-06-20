@@ -45,6 +45,7 @@ export interface KeyResult extends GraphQLNode {
   owner: User
   objective: Objective
   team: Team
+  teamId?: Team['id']
   policy: GraphQLEntityPolicy
   description?: string
   supportTeamMembers?: GraphQLConnection<User>
