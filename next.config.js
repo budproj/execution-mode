@@ -129,6 +129,12 @@ const publicRuntimeConfig = {
     },
 
     {
+      source: '/pt-BR/configuracoes',
+      destination: '/settings',
+      locale: 'pt-BR',
+    },
+
+    {
       source: '/pt-BR/novo-ambiente',
       destination: '/new-workspace',
       locale: 'pt-BR',

@@ -5,7 +5,7 @@ export interface ConfirmationDialogProperties {
   isOpen: boolean
   headerImageURL?: string
   HeaderImageWrapper?: ComponentWithAs<'img', ImageProps>
-  title?: string
+  title?: string | ReactNode
   description?: string
   confirmationLabel?: string
   descriptionComponent?: ReactNode

@@ -1,0 +1,3 @@
+import SettingsSidebarMyAccountMenuSectionPreferences from './my-account'
+
+export default SettingsSidebarMyAccountMenuSectionPreferences

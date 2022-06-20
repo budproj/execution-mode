@@ -1,0 +1,10 @@
+query GET_USER_SIDEBAR_PERMISSIONS {
+  permissions(scope: COMPANY) {
+    cycle {
+      update
+    }
+    user {
+      update
+    }
+  }
+}

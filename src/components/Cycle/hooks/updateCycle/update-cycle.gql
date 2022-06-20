@@ -1,0 +1,31 @@
+mutation UPDATE_CYCLE(
+  $id: ID!
+  $teamId: ID
+  $period: String
+  $cadence: Cadence
+  $dateStart: DateTime
+  $dateEnd: DateTime
+  $active: Boolean
+  $parentId: ID
+) {
+  updateCycle(
+    id: $id
+    data: {
+      teamId: $teamId
+      period: $period
+      cadence: $cadence
+      dateStart: $dateStart
+      dateEnd: $dateEnd
+      active: $active
+      parentId: $parentId
+    }
+  ) {
+    id
+    period
+    cadence
+    dateStart
+    dateEnd
+    active
+    parentId
+  }
+}

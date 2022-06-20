@@ -1,4 +1,5 @@
 import { Flex, Heading } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -8,8 +9,9 @@ import SettingsSidebarMenuSectionButton from '../Button'
 
 import messages from './messages'
 
-const SettingsSidebarMenuSectionPreferences = () => {
+const SettingsSidebarMyAccountMenuSectionPreferences = () => {
   const intl = useIntl()
+  const { route } = useRouter()
 
   return (
     <Flex direction="column" gridGap={3} pr={8}>
@@ -24,7 +26,10 @@ const SettingsSidebarMenuSectionPreferences = () => {
         {intl.formatMessage(messages.sectionTitle)}
       </Heading>
 
-      <SettingsSidebarMenuSectionButton href="/settings/my-profile">
+      <SettingsSidebarMenuSectionButton
+        href="/settings/my-profile"
+        isActive={Boolean(route === '/settings' || route === '/settings/my-profile')}
+      >
         <IntlLink href="/settings/my-profile">
           {intl.formatMessage(messages.firstOptionLabel)}
         </IntlLink>
@@ -33,4 +38,4 @@ const SettingsSidebarMenuSectionPreferences = () => {
   )
 }
 
-export default SettingsSidebarMenuSectionPreferences
+export default SettingsSidebarMyAccountMenuSectionPreferences

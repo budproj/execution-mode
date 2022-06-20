@@ -2,3 +2,8 @@ export enum CADENCE {
   YEARLY = 'YEARLY',
   QUARTERLY = 'QUARTERLY',
 }
+
+export enum CYCLE_STATUS {
+  ACTIVE = 'ACTIVE',
+  NOT_ACTIVE = 'NOT_ACTIVE',
+}

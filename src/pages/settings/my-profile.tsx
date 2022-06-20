@@ -1,7 +1,10 @@
 import React from 'react'
 
-import SettingsMyProfilePage from 'src/components/Page/MyProfile'
+import SettingsPage from 'src/components/Page/Settings'
+import { SETTINGS_PATHS } from 'src/components/Settings/constants'
 
-const SettingsMyProfileIndex = () => <SettingsMyProfilePage />
+const SettingsMyProfileIndex = () => {
+  return <SettingsPage path={SETTINGS_PATHS.MY_PROFILE} />
+}
 
 export default SettingsMyProfileIndex
