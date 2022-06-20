@@ -32,9 +32,9 @@ const CyclesListBodyColumnActions = ({
 
   const cyclePeriod = useRecoilValue(cyclePeriodSelector(id))
 
-  const handleClick = () => {
-    if (!isDialogOpen) setIsDialogOpen(true)
-  }
+  // Const handleClick = () => {
+  //   if (!isDialogOpen) setIsDialogOpen(true)
+  // }
 
   const handleOpenModal = () => {
     setIsOpened({ isOpened: true, cycleId: id })
@@ -71,9 +71,9 @@ const CyclesListBodyColumnActions = ({
             <MenuItem onClick={handleOpenModal}>
               {intl.formatMessage(messages.firstMenuItemOption)}
             </MenuItem>
-            <MenuItem onClick={handleClick}>
+            {/* <MenuItem onClick={handleClick}>
               {intl.formatMessage(messages.secondMenuItemOption)}
-            </MenuItem>
+            </MenuItem> */}
           </MenuList>
         </Menu>
       </CyclesListBodyColumnBase>

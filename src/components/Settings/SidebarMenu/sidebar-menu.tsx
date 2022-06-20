@@ -7,7 +7,6 @@ import { GraphQLEffect } from 'src/components/types'
 import {
   SettingsSidebarCompanyMenuSectionPreferences,
   SettingsSidebarMyAccountMenuSectionPreferences,
-  SettingsSidebarTermsMenuSectionPreferences,
 } from './Section'
 import { CompanyMenuProperties } from './Section/Company/company'
 import queries from './queries.gql'
@@ -20,7 +19,7 @@ const SettingsSidebarMenu = () => {
     onCompleted: (data) => {
       const { permissions } = data
       const isAuthroziedToSeeCompanyMenu = Object.values(permissions).some((permission) => {
-        return permission.read === GraphQLEffect.ALLOW
+        return permission.update === GraphQLEffect.ALLOW
       })
       if (isAuthroziedToSeeCompanyMenu) setIsAuthorized(true)
       setPermissions(permissions)
@@ -34,7 +33,6 @@ const SettingsSidebarMenu = () => {
         {isAuthorized && permissions && (
           <SettingsSidebarCompanyMenuSectionPreferences permissions={permissions} />
         )}
-        <SettingsSidebarTermsMenuSectionPreferences />
       </Flex>
     </Box>
   )

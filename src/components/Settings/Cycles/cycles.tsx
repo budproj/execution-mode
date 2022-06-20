@@ -54,10 +54,10 @@ const SettingsCycles = ({ permissions }: CompanyMenuProperties) => {
   ]) as CYCLE_LIST_COLUMN[]
 
   return (
-    <Flex flexDir="column">
+    <Flex flexDir="column" width="100%">
       <Heading display="flex" alignItems="center" justifyContent="space-between">
         <Box flexDir="column">
-          <Text fontSize={24} fontWeight={400} color="#121415" lineHeight="30px" mb={3}>
+          <Text fontSize={24} fontWeight={500} color="new-gray.900" lineHeight="30px" mb={3}>
             {intl.formatMessage(messages.subTitle)}
           </Text>
           <Text fontSize={14} fontWeight={400} color="new-gray.700" lineHeight="17px">

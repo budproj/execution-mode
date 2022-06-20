@@ -1,11 +1,11 @@
 query GET_USER_SETTINGS_PERMISSIONS {
   permissions(scope: COMPANY) {
     cycle {
-      read
+      update
       create
     }
     user {
-      read
+      update
       create
     }
   }

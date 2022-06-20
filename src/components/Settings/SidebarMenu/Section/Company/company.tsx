@@ -12,11 +12,11 @@ import messages from './messages'
 export interface CompanyMenuProperties {
   permissions: {
     user: {
-      read?: GraphQLEffect
+      update?: GraphQLEffect
       create?: GraphQLEffect
     }
     cycle: {
-      read?: GraphQLEffect
+      update?: GraphQLEffect
       create?: GraphQLEffect
     }
   }
@@ -38,7 +38,7 @@ const SettingsSidebarCompanyMenuSectionPreferences = ({ permissions }: CompanyMe
         {intl.formatMessage(messages.sectionTitle)}
       </Heading>
 
-      {permissions?.user?.read === GraphQLEffect.ALLOW && (
+      {permissions?.user?.update === GraphQLEffect.ALLOW && (
         <SettingsSidebarMenuSectionButton href="/settings/users">
           <IntlLink href="/settings/users">
             {intl.formatMessage(messages.firstOptionLabel)}
@@ -46,7 +46,7 @@ const SettingsSidebarCompanyMenuSectionPreferences = ({ permissions }: CompanyMe
         </SettingsSidebarMenuSectionButton>
       )}
 
-      {permissions?.cycle?.read === GraphQLEffect.ALLOW && (
+      {permissions?.cycle?.update === GraphQLEffect.ALLOW && (
         <SettingsSidebarMenuSectionButton href="/settings/cycles">
           <IntlLink href="/settings/cycles">
             {intl.formatMessage(messages.secondOptionLabel)}
