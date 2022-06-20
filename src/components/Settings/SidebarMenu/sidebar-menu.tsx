@@ -19,7 +19,7 @@ const SettingsSidebarMenu = () => {
     onCompleted: (data) => {
       const { permissions } = data
       const isAuthroziedToSeeCompanyMenu = Object.values(permissions).some((permission) => {
-        return permission.read === GraphQLEffect.ALLOW
+        return permission.update === GraphQLEffect.ALLOW
       })
       if (isAuthroziedToSeeCompanyMenu) setIsAuthorized(true)
       setPermissions(permissions)

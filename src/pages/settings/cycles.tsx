@@ -16,13 +16,13 @@ const SettingsCyclesIndex = () => {
 
   useQuery(queries.GET_USER_SETTINGS_PERMISSIONS, {
     onCompleted: (data) => {
-      if (data.permissions.cycle.read === GraphQLEffect.DENY) push('/')
+      if (data.permissions.cycle.update === GraphQLEffect.DENY) push('/')
       setPermissions(data.permissions)
     },
   })
 
   return (
-    permissions?.cycle?.read === GraphQLEffect.ALLOW && (
+    permissions?.cycle?.update === GraphQLEffect.ALLOW && (
       <SettingsPage path={SETTINGS_PATHS.CYCLES} permissions={permissions} />
     )
   )
