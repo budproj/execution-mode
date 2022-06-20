@@ -9,8 +9,6 @@ type UsersTableListBodyColumnRoleMessage =
   | 'userOkrMasteRoleDescription'
   | 'userAdminUserRoleTitle'
   | 'userAdminRoleDescription'
-  | 'unknownErrorToastMessage'
-  | 'successUpdateUserRoleToastMessage'
 
 export default defineMessages<UsersTableListBodyColumnRoleMessage>({
   userDefaultRoleTitle: {
@@ -63,18 +61,5 @@ export default defineMessages<UsersTableListBodyColumnRoleMessage>({
       'Administradores possuem acesso total de criação, edição e exclusão de OKRs, usuários e ciclos de estratégia.',
     id: 'Jj0rRJ',
     description: 'This string is used to describe the user admin role selection.',
-  },
-
-  unknownErrorToastMessage: {
-    defaultMessage: 'Desculpe, aconteceu um erro inesperado. Tente novamente mais tarde',
-    id: 'SZONnG',
-    description:
-      'This message appears as an error toast when we have an unknown error while updater the user role',
-  },
-
-  successUpdateUserRoleToastMessage: {
-    defaultMessage: 'Papel do usuário {user} alterado com sucesso!',
-    id: 'Xv5t+7',
-    description: 'This message appears when we updating the user role with success.',
   },
 })

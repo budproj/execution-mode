@@ -8,7 +8,6 @@ import {
   MenuList,
   Skeleton,
   Text,
-  useToast,
 } from '@chakra-ui/react'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -40,9 +39,7 @@ const UsersTableListBodyColumnRole = ({
 }: UsersTableListBodyColumnRoleProperties): ReactElement => {
   const userAuthzRole = useRecoilValue(userAuthzRoleSelector(id))
   const isActive = useRecoilValue(stateOfUserSelector(id)) === UserStatus.ACTIVE
-  const { updateUserRole, data, loading, error } = useChangeUserRole()
-
-  const toast = useToast()
+  const { updateUserRole } = useChangeUserRole()
 
   const intl = useIntl()
 
@@ -80,24 +77,6 @@ const UsersTableListBodyColumnRole = ({
     setSelectedUserRole(role)
     handleChangeUserRole(role)
   }
-
-  useEffect(() => {
-    if (!loading) {
-      if (error) {
-        toast({
-          title: intl.formatMessage(messages.unknownErrorToastMessage),
-          status: 'error',
-        })
-      } else if (data) {
-        toast({
-          status: 'success',
-          title: intl.formatMessage(messages.successUpdateUserRoleToastMessage, {
-            user: data.updateUserRole.fullName,
-          }),
-        })
-      }
-    }
-  }, [loading, error, data, toast, intl])
 
   return (
     <CyclesListBodyColumnBase
