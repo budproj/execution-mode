@@ -39,6 +39,10 @@
     "defaultMessage": "Atualizar",
     "description": "This message is displayed in a tooltip above the SliderThumb on our sliders"
   },
+  "//f0UA": {
+    "defaultMessage": "Timeline | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "/2GFGI": {
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
@@ -618,6 +622,10 @@
   "CQPpEV": {
     "defaultMessage": "Ativo",
     "description": "This string is used to select the active cycles option."
+  },
+  "CQiLwO": {
+    "defaultMessage": "Timeline",
+    "description": "MainAppBar menu item that links to teams \"Timeline\" page"
   },
   "CS3a8I": {
     "defaultMessage": "Ativo",
