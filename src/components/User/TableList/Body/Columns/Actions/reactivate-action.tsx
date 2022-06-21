@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
+import GET_USERS from 'src/components/User/hooks/getUsers/get-users.gql'
 import { useReactivateUser } from 'src/components/User/hooks/reactivateUser'
 import { User } from 'src/components/User/types'
 import selectUser from 'src/state/recoil/user/selector'
@@ -24,7 +25,6 @@ export const ReactivateUser = ({ id }: ReactivateUserProperties) => {
       variables: { id },
       onCompleted: (data) => {
         updateUser(data.reactivateUser)
-
         toast({
           status: 'success',
           title: intl.formatMessage(messages.successReactivateUserToastMessage, {
@@ -32,6 +32,11 @@ export const ReactivateUser = ({ id }: ReactivateUserProperties) => {
           }),
         })
       },
+      refetchQueries: [
+        {
+          query: GET_USERS,
+        },
+      ],
     })
   }
 
