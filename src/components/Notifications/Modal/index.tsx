@@ -20,15 +20,20 @@ const NotificationsModal = () => {
   const notificationsCount = 2
 
   return (
-    <PopoverBody padding={0} margin={0}>
-      <Tabs isFitted isLazy width="md" colorScheme="purple">
-        <TabList display="flex" alignItems="center" width="md" pt={4} pl={12} pr={12}>
+    <PopoverBody padding={0} margin={0} borderRadius={15}>
+      <Tabs isFitted isLazy variant="unstyled">
+        <TabList display="flex" alignItems="center" pt={4} pl={12} pr={12}>
           <Tab
             display="flex"
             alignItems="center"
             justifyContent="center"
             gap={2}
-            _hover={{ color: undefined }}
+            width="md"
+            fontSize={16}
+            fontWeight="medium"
+            color="new-gray.800"
+            borderBottom="2px solid transparent"
+            _focus={{ outline: 0 }}
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
@@ -54,6 +59,12 @@ const NotificationsModal = () => {
             alignItems="center"
             justifyContent="center"
             gap={2}
+            fontSize={16}
+            width="max-content"
+            fontWeight="medium"
+            color="new-gray.800"
+            borderBottom="2px solid transparent"
+            _focus={{ outline: 0 }}
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
@@ -75,10 +86,10 @@ const NotificationsModal = () => {
             )}
           </Tab>
         </TabList>
-        <Divider width="max" />
+        <Divider borderColor="gray.100" />
 
-        <TabPanels>
-          <TabPanel>{/* here: Notifications-Component */}</TabPanel>
+        <TabPanels p="0 10px 10px 10px">
+          <TabPanel textAlign="center">{/* here: Notifications-Component */}</TabPanel>
           <TabPanel>{/* here: CheckIn-Notifications-Component */}</TabPanel>
         </TabPanels>
       </Tabs>
