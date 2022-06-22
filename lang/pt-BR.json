@@ -1827,10 +1827,6 @@
     "defaultMessage": "Baixa confiança",
     "description": "Title of low confidence health strategy"
   },
-  "ganP5k": {
-    "defaultMessage": "Settings | bud",
-    "description": "The page title that is displayed in the browser tab for the settings page"
-  },
   "gbO+eS": {
     "defaultMessage": "Se realmente tem certeza de que deseja fazer isso, confirme sua ação escrevendo \"{keyword}” no campo abaixo:",
     "description": "This message is used as our default second stage description in our dangerous confirmation modal"
@@ -2058,6 +2054,10 @@
   "mK9HFR": {
     "defaultMessage": "Dia de fim do período anual",
     "description": "The label of the company yearly date end while creating a new workspace"
+  },
+  "mXb4/b": {
+    "defaultMessage": "Configurações | bud",
+    "description": "The page title that is displayed in the browser tab for the settings page"
   },
   "mbJq/U": {
     "defaultMessage": "Tem certeza que deseja excluir o ciclo {period}?",
