@@ -47,7 +47,7 @@ const NotificationsButton = () => {
           }}
         />
       </PopoverTrigger>
-      <PopoverContent mt={4} width={480} borderRadius={15}>
+      <PopoverContent mt={4} maxWidth={480} width="min-content" borderRadius={15} padding={0}>
         <NotificationsModal />
       </PopoverContent>
     </Popover>

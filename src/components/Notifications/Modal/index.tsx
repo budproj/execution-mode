@@ -1,4 +1,13 @@
-import { Box, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import {
+  Box,
+  Divider,
+  PopoverBody,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+} from '@chakra-ui/react'
 import React from 'react'
 
 const NotificationsModal = () => {
@@ -6,16 +15,16 @@ const NotificationsModal = () => {
   const notificationsCount = 2
 
   return (
-    <PopoverBody display="flex" alignItems="center" justifyContent="center">
-      <Tabs isFitted colorScheme="facebook">
-        <TabList display="flex" alignItems="center" justifyContent="center">
+    <PopoverBody padding={0} margin={0}>
+      <Tabs isFitted isLazy width="md" colorScheme="purple">
+        <TabList display="flex" alignItems="center" width="md" pt={4} pl={12} pr={12}>
           <Tab
             display="flex"
             alignItems="center"
             justifyContent="center"
             gap={2}
-            // _hover={{ color: undefined }}
-            // _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+            _hover={{ color: undefined }}
+            _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
             Notificações
             {notificationsCount && (
@@ -35,7 +44,13 @@ const NotificationsModal = () => {
               </Box>
             )}
           </Tab>
-          <Tab display="flex" alignItems="center" justifyContent="center" gap={2}>
+          <Tab
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            gap={2}
+            _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+          >
             Check-in
             {checkInsCount && (
               <Box
@@ -55,9 +70,10 @@ const NotificationsModal = () => {
             )}
           </Tab>
         </TabList>
+        <Divider width="max" />
 
         <TabPanels>
-          <TabPanel width={420}>
+          <TabPanel>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ea eveniet nobis
             tempora nulla. Ex perferendis, blanditiis quia eligendi nam error ea quod nobis aperiam
             repellendus ut ullam distinctio quis. Lorem ipsum dolor sit amet consectetur adipisicing
@@ -69,7 +85,7 @@ const NotificationsModal = () => {
             elit. Laboriosam ea eveniet nobis tempora nulla. Ex perferendis, blanditiis quia
             eligendi nam error ea quod nobis aperiam repellendus ut ullam distinctio quis.
           </TabPanel>
-          <TabPanel width={420}>{/* here: CheckIns-Notifications-Component */}</TabPanel>
+          <TabPanel>{/* here: CheckIn-Notifications-Component */}</TabPanel>
         </TabPanels>
       </Tabs>
     </PopoverBody>
