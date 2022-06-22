@@ -1,11 +1,19 @@
 import { defineMessages } from 'react-intl'
 
-type UserEmptyStateMessage = 'title'
+type NotificationsModalMessages = 'notificationsTabOptions' | 'checkInsTabOptions'
 
-export default defineMessages<UserEmptyStateMessage>({
-  title: {
-    defaultMessage: 'Não tem ninguém aqui',
-    id: '0PaRUc',
-    description: 'This message appears when there is no user in a given list',
+export default defineMessages<NotificationsModalMessages>({
+  notificationsTabOptions: {
+    defaultMessage: 'Notificações',
+    id: 'Me1wRC',
+    description:
+      'This message appears as the title of the Notifications option in the notifications modal.',
+  },
+
+  checkInsTabOptions: {
+    defaultMessage: 'Check-in',
+    id: 'lpsQj3',
+    description:
+      'This message appears as the title of the Check-ins option in the notifications modal.',
   },
 })

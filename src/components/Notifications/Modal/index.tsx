@@ -9,8 +9,13 @@ import {
   Tabs,
 } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
+
+import messages from './messages'
 
 const NotificationsModal = () => {
+  const intl = useIntl()
+
   const checkInsCount = 12
   const notificationsCount = 2
 
@@ -26,7 +31,7 @@ const NotificationsModal = () => {
             _hover={{ color: undefined }}
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
-            Notificações
+            {intl.formatMessage(messages.notificationsTabOptions)}
             {notificationsCount && (
               <Box
                 color="white"
@@ -51,7 +56,7 @@ const NotificationsModal = () => {
             gap={2}
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
-            Check-in
+            {intl.formatMessage(messages.checkInsTabOptions)}
             {checkInsCount && (
               <Box
                 color="white"
@@ -73,18 +78,7 @@ const NotificationsModal = () => {
         <Divider width="max" />
 
         <TabPanels>
-          <TabPanel>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ea eveniet nobis
-            tempora nulla. Ex perferendis, blanditiis quia eligendi nam error ea quod nobis aperiam
-            repellendus ut ullam distinctio quis. Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Laboriosam ea eveniet nobis tempora nulla. Ex perferendis, blanditiis quia
-            eligendi nam error ea quod nobis aperiam repellendus ut ullam distinctio quis. Lorem
-            ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ea eveniet nobis tempora
-            nulla. Ex perferendis, blanditiis quia eligendi nam error ea quod nobis aperiam
-            repellendus ut ullam distinctio quis. Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Laboriosam ea eveniet nobis tempora nulla. Ex perferendis, blanditiis quia
-            eligendi nam error ea quod nobis aperiam repellendus ut ullam distinctio quis.
-          </TabPanel>
+          <TabPanel>{/* here: Notifications-Component */}</TabPanel>
           <TabPanel>{/* here: CheckIn-Notifications-Component */}</TabPanel>
         </TabPanels>
       </Tabs>
