@@ -1735,6 +1735,10 @@
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
   },
+  "mXb4/b": {
+    "defaultMessage": "Settings | bud",
+    "description": "The page title that is displayed in the browser tab for the settings page"
+  },
   "MyqmeF": {
     "defaultMessage": "Unable to create the cycle.",
     "description": "This message is used as an toast error message when we try to create an cycle"
@@ -2940,7 +2944,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-06-21T23:41:27Z",
+    "defaultMessage": "2022-06-22T13:13:16Z",
     "description": null
   }
 }
