@@ -69,7 +69,7 @@ const UserTeamTags = ({
   return isLoaded && limitedTeams ? (
     <Wrap spacing={2}>
       {limitedTeams.map((team) => (
-        <WrapItem key={team.id}>
+        <WrapItem key={team.id} overflow="hidden">
           <TeamTag
             isLoading={loading}
             isActive={isActive}

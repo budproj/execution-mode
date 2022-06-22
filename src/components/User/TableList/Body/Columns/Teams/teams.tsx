@@ -28,11 +28,7 @@ const UsersTableListBodyColumnTeams = ({
   return (
     <UsersTableListBodyColumnBase>
       <Flex gridGap={2} flexDir="column">
-        <Skeleton
-          isLoaded={isTeamsLoaded}
-          {...buildSkeletonMinSize(isTeamsLoaded, 140, 28)}
-          maxWidth="min-content"
-        >
+        <Skeleton isLoaded={isTeamsLoaded} {...buildSkeletonMinSize(isTeamsLoaded, 140, 28)}>
           <UserTeamTags
             userID={id}
             max={2}
