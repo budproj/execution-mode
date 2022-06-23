@@ -1,15 +1,8 @@
-import {
-  Box,
-  Divider,
-  PopoverBody,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from '@chakra-ui/react'
+import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+
+import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 
 import messages from './messages'
 
@@ -37,22 +30,7 @@ const NotificationsModal = () => {
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
-            {notificationsCount && (
-              <Box
-                color="white"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                fontSize="12px"
-                fontWeight="bold"
-                bgColor="#FF616A"
-                borderRadius="50%"
-                width={4}
-                height={4}
-              >
-                {notificationsCount}
-              </Box>
-            )}
+            {notificationsCount && <NotificationBadge notificationCount={notificationsCount} />}
           </Tab>
           <Tab
             display="flex"
@@ -68,22 +46,7 @@ const NotificationsModal = () => {
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
-            {checkInsCount && (
-              <Box
-                color="white"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                fontSize="12px"
-                fontWeight="bold"
-                bgColor="#FF616A"
-                borderRadius="50%"
-                width={4}
-                height={4}
-              >
-                {checkInsCount}
-              </Box>
-            )}
+            {checkInsCount && <NotificationBadge notificationCount={checkInsCount} />}
           </Tab>
         </TabList>
         <Divider borderColor="gray.100" />
