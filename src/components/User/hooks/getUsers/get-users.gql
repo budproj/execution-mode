@@ -1,0 +1,46 @@
+query GET_USERS {
+  me {
+    companies(first: 1) {
+      edges {
+        node {
+          users(first: 1000, withInactives: true) {
+            edges {
+              node {
+                id
+                firstName
+                nickname
+                status
+                linkedInProfileAddress
+                about
+                fullName
+                role
+                authzRole {
+                  id
+                  name
+                  description
+                }
+                picture
+                companies {
+                  edges {
+                    node {
+                      id
+                      name
+                    }
+                  }
+                }
+                teams {
+                  edges {
+                    node {
+                      id
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

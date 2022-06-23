@@ -14,6 +14,7 @@ export const KeywordBasedConfirmation = ({
   onConfirm,
   onClose,
   description,
+  confirmationLabel,
   ...rest
 }: KeywordBasedConfirmationProperties) => {
   const [isValidKeyword, setIsValidKeyword] = useState(false)
@@ -40,6 +41,7 @@ export const KeywordBasedConfirmation = ({
           onChange={handleKeywordChange}
         />
       }
+      confirmationLabel={confirmationLabel}
       onConfirm={handleConfirmation}
       onClose={onClose}
       {...rest}

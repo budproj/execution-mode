@@ -355,6 +355,10 @@
     "defaultMessage": "Adicionar um OKR {cadence} no ciclo {cycle} {parent}",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
   },
+  "61S7n7": {
+    "defaultMessage": "Ver detalhes",
+    "description": "This message is the description of the option to view details  of a user."
+  },
   "68qL+a": {
     "defaultMessage": "Gênero da empresa",
     "description": "The label of the company gender while creating a new workspace"
@@ -451,6 +455,10 @@
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
   },
+  "8B+4Un": {
+    "defaultMessage": "Use este painel para configurar os usuários da plataforma.",
+    "description": "The description page."
+  },
   "8CjDR7": {
     "defaultMessage": "Cancelar",
     "description": "This message is used in the cancel button when we are in the confirmation dialog"
@@ -538,6 +546,10 @@
   "AO/RyT": {
     "defaultMessage": "Copiar título deste Resultado-Chave",
     "description": "This message appears in the button that copies the title of the key result"
+  },
+  "AQkkKh": {
+    "defaultMessage": "Você reativou {name} com sucesso.",
+    "description": "This message appears in a toast after reactivating a user."
   },
   "AbWup6": {
     "defaultMessage": "{name} perderá o acesso ao Bud e será removido dos times aos quais pertence, mas manteremos o histórico de check-ins e comentários feitos por ele até aqui.",
@@ -759,6 +771,10 @@
     "defaultMessage": "Um ícone de video",
     "description": "The desc message for the Video icon. This icon is used to ilustrate our key results"
   },
+  "GKl+a6": {
+    "defaultMessage": "Desativar conta",
+    "description": "This message is the description of the option to deactivate a user account."
+  },
   "GeAU92": {
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
     "description": "The alternative text explaining our settings icon"
@@ -871,6 +887,10 @@
     "defaultMessage": "Ciclo {period} excluído com sucesso.",
     "description": "This message appears in a toast after the user removes an cycle."
   },
+  "J3ARiQ": {
+    "defaultMessage": "OKR Master",
+    "description": "This string is used to select the user edit role."
+  },
   "J5Rfuu": {
     "defaultMessage": "Crie novas tarefas pela barra lateral dos resultados-chave em que você atua.",
     "description": "The empty state message when you have no tasks"
@@ -902,6 +922,10 @@
   "Jdklxm": {
     "defaultMessage": "O desenho de um fantasma, ilustrando que você está em uma página que não existe",
     "description": "This message is the alt message for our box drawing in the not found error page"
+  },
+  "Jj0rRJ": {
+    "defaultMessage": "Administradores possuem acesso total de criação, edição e exclusão de OKRs, usuários e ciclos de estratégia.",
+    "description": "This string is used to describe the user admin role selection."
   },
   "Jk/gDc": {
     "defaultMessage": "Criar objetivo",
@@ -1006,6 +1030,10 @@
   "M9Jejl": {
     "defaultMessage": "Painel | bud",
     "description": "The page title that is displayed in the browser tab"
+  },
+  "MBvlAH": {
+    "defaultMessage": "conta desativada",
+    "description": "This string is used to select the not-active cycles option."
   },
   "MHv/ZI": {
     "defaultMessage": "Este time não possui membros",
@@ -1211,6 +1239,10 @@
     "defaultMessage": "Objetivos",
     "description": "Title of objectives"
   },
+  "R6SREn": {
+    "defaultMessage": "Esses usuários podem criar, editar e excluir qualquer objetivo ou resultado-chave no Bud.",
+    "description": "This string is used to describe the user edit role selection."
+  },
   "R8hOYh": {
     "defaultMessage": "Este time não possui OKRs",
     "description": "This message is displayed as the empty state message inside the team page"
@@ -1407,6 +1439,10 @@
     "defaultMessage": "Cancelar",
     "description": "This is a button label displayed inside the insert key-result drawer. This is the first button"
   },
+  "VW9LHA": {
+    "defaultMessage": "Email de redefinição de senha enviado com sucesso.",
+    "description": "This message appears in a toast after the user ask to reset password."
+  },
   "VltGNp": {
     "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawers"
@@ -1531,6 +1567,10 @@
     "defaultMessage": "Resultado-chave criado com sucesso!",
     "description": "This message appears after the user creates a new key-result as a toast"
   },
+  "Z9w45E": {
+    "defaultMessage": "Usuários com essa permissão podem editar e fazer check-in apenas dos resultados-chave que fazem parte.",
+    "description": "This string is used to describe the user default role selection."
+  },
   "ZCWI2f": {
     "defaultMessage": "Criar novo ciclo",
     "description": "The title for cycle modal"
@@ -1554,6 +1594,10 @@
   "Zmffm0": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed as the title text for our close icon in our check-in form"
+  },
+  "Zmw2VE": {
+    "defaultMessage": "Usuários",
+    "description": "The subtitle page."
   },
   "Zn0eYa": {
     "defaultMessage": "Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo",
@@ -1598,6 +1642,10 @@
   "bPInC0": {
     "defaultMessage": "Editar ciclo",
     "description": "This message is the description of the edit cycle option."
+  },
+  "bZXWCR": {
+    "defaultMessage": "Padrão",
+    "description": "This string is used to select the user default role."
   },
   "bZYEAl": {
     "defaultMessage": "Um círculo com um sinal de subtração no meio, indicando que o progresso se manteve o mesmo",
@@ -1711,6 +1759,10 @@
     "defaultMessage": "Cancelar",
     "description": "The button to close the modal cycle"
   },
+  "epM1Xt": {
+    "defaultMessage": "Adicionar",
+    "description": "This button is used to create a new cycle."
+  },
   "f2OulU": {
     "defaultMessage": "Início",
     "description": "This message is displayed as the column header for the cycle table in the date start column"
@@ -1718,6 +1770,10 @@
   "f6/kwR": {
     "defaultMessage": "Esse é o progresso acumulado dessa semana",
     "description": "This tooltip appears when the user hovers the third column title"
+  },
+  "f6KTde": {
+    "defaultMessage": "Ações",
+    "description": "This message is displayed as the column header for the users table in the actions column"
   },
   "fFkPeH": {
     "defaultMessage": "Cargo",
@@ -1783,6 +1839,10 @@
     "defaultMessage": "Anual",
     "description": "This text is used as prefix for our yearly cadences"
   },
+  "h4VH9f": {
+    "defaultMessage": "desativar usuário",
+    "description": "This message appears in button to confirm the deactivate user action."
+  },
   "hFma0o": {
     "defaultMessage": "Erro ao criar o ambiente",
     "description": "The title of the toast that appears when we have an error while creating a new workspace"
@@ -1830,6 +1890,10 @@
   "i3PQl+": {
     "defaultMessage": "Ciclo {period} {status} com sucesso!",
     "description": "This message appears when we create a new cycle as a toast"
+  },
+  "i915bK": {
+    "defaultMessage": "Líderes podem criar, editar e excluir objetivos e resultados-chave dos times aos quais pertencem.",
+    "description": "This string is used to describe the user edit role selection."
   },
   "i9bdpU": {
     "defaultMessage": "Houve um erro inesperado ao criar seu objetivo. Tente novamente mais tarde",
@@ -1995,6 +2059,10 @@
     "defaultMessage": "Ciclos ativos",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
   },
+  "minQA9": {
+    "defaultMessage": "Redefinir senha",
+    "description": "This message is the description of the option to alter password of a user."
+  },
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
     "description": "The default description for our page head meta description value"
@@ -2030,6 +2098,10 @@
   "na6BgW": {
     "defaultMessage": "Histórico",
     "description": "History, historic, archived items"
+  },
+  "ndABHM": {
+    "defaultMessage": "Admin",
+    "description": "This string is used to select the user admin role."
   },
   "nfdvr1": {
     "defaultMessage": "Esperado",
@@ -2091,6 +2163,10 @@
     "defaultMessage": "Criar um usuário",
     "description": "This message appears as a button when a team has no members yet"
   },
+  "pmuG/e": {
+    "defaultMessage": "Líder",
+    "description": "This string is used to select the user edit role."
+  },
   "poN086": {
     "defaultMessage": "Um ícone circular, com bordas e um símbolo de mais ao centro",
     "description": "This is the desc text that is displayed for screen readers"
@@ -2102,6 +2178,10 @@
   "qhchMM": {
     "defaultMessage": "Representam as mais altas prioridades e comunicam essa direção com bastante clareza.",
     "description": "This card guides the creation of Objectives."
+  },
+  "ql0LOi": {
+    "defaultMessage": "Procurar pessoas",
+    "description": "This message appears as a label in users search input."
   },
   "qp4Qmm": {
     "defaultMessage": "Ir para o perfil de {username}",
@@ -2154,6 +2234,10 @@
   "s6f/IS": {
     "defaultMessage": "A tela que você está procurando foi abduzida!",
     "description": "This message is displayed below the title in our unknown error page"
+  },
+  "s8fzur": {
+    "defaultMessage": "conta ativa",
+    "description": "This string is used to select the active cycles option."
   },
   "sFYaLE": {
     "defaultMessage": "Check-in",
@@ -2211,6 +2295,10 @@
     "defaultMessage": "Nome do Ciclo",
     "description": "This message is displayed as the column header for the cycle table in the cycle name column"
   },
+  "tmyaek": {
+    "defaultMessage": "Estado",
+    "description": "This message is displayed as the column header for the users table in the state column"
+  },
   "txi+kN": {
     "defaultMessage": "Idioma",
     "description": "The user locale input placeholder while creating a new workspace"
@@ -2267,6 +2355,10 @@
     "defaultMessage": "Está silencioso por aqui",
     "description": "This text is the title of our empty state card inside our key result drawers"
   },
+  "vEzcix": {
+    "defaultMessage": "Times",
+    "description": "This message is displayed as the column header for the users table in the teams column"
+  },
   "vHTPEb": {
     "defaultMessage": "Ciclo {period} criado com sucesso!",
     "description": "This message appears when we create a new cycle as a toast"
@@ -2295,6 +2387,10 @@
     "defaultMessage": "Feminino",
     "description": "The user gender female option while creating a new workspace"
   },
+  "vrROtV": {
+    "defaultMessage": "Botão de opções.",
+    "description": "This button allows you to view details, reset password or deactivate a users account."
+  },
   "vv49le": {
     "defaultMessage": "Nome do usuário inicial",
     "description": "The user first name while creating a new workspace"
@@ -2318,6 +2414,10 @@
   "waPxPB": {
     "defaultMessage": "Idioma do usuário inicial",
     "description": "The user locale while creating a new workspace"
+  },
+  "wat5HS": {
+    "defaultMessage": "Nome",
+    "description": "This message is displayed as the column header for the users table in the user name column"
   },
   "wiFglx": {
     "defaultMessage": "Responsável",
@@ -2350,6 +2450,10 @@
   "x8ytCP": {
     "defaultMessage": "Cancelar",
     "description": "This text is displayed as the button that will cancel the update for ou goal update popover inside the key-result drawers"
+  },
+  "xIe3i6": {
+    "defaultMessage": "Reativar conta",
+    "description": "This message is the description of the option to reactivate a user account."
   },
   "xJJ9uE": {
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
@@ -2454,6 +2558,10 @@
   "zev4wl": {
     "defaultMessage": "Um ícone de bandeira, inidcando a meta do resultado-chave no qual você está fazendo check-in",
     "description": "This is a message explaining the flag icon in our check-in form"
+  },
+  "zmPWcg": {
+    "defaultMessage": "Papel",
+    "description": "This message is displayed as the column header for the users table in the role column"
   },
   "znpwST": {
     "defaultMessage": "Q3",

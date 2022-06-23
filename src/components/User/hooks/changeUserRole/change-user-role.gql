@@ -1,0 +1,6 @@
+mutation CHANGE_USER_ROLE($id: ID!, $newrole: String!) {
+  updateUserRole(id: $id, role: $newrole) {
+    id
+    fullName
+  }
+}

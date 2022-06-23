@@ -4,7 +4,12 @@ import { useIntl } from 'react-intl'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
-import { SettingsCycles, SettingsMyProfile, SettingsSidebarMenu } from 'src/components/Settings'
+import {
+  SettingsCycles,
+  SettingsMyProfile,
+  SettingsSidebarMenu,
+  SettingsUsers,
+} from 'src/components/Settings'
 import { CompanyMenuProperties } from 'src/components/Settings/SidebarMenu/Section/Company/company'
 import { SETTINGS_PATHS } from 'src/components/Settings/constants'
 
@@ -26,6 +31,10 @@ const SettingsPage = ({ path, permissions }: SettingsPageProperties) => {
   pageContentElement.set(
     SETTINGS_PATHS.CYCLES,
     permissions ? <SettingsCycles permissions={permissions} /> : React.Fragment,
+  )
+  pageContentElement.set(
+    SETTINGS_PATHS.USERS,
+    permissions ? <SettingsUsers permissions={permissions} /> : React.Fragment,
   )
 
   return (

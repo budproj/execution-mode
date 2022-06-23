@@ -27,6 +27,7 @@ export const useGetCycle = (): GetCompanyCycles => {
     fetchPolicy: 'network-only',
     onCompleted: (data) => {
       const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
+
       const cycles = companies.map((company) => company?.cycles?.edges ?? []).flat()
 
       if (cycles.length > 0) setCycles(cycles)
