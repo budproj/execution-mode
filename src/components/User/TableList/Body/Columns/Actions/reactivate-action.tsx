@@ -42,7 +42,7 @@ export const ReactivateUser = ({ id }: ReactivateUserProperties) => {
 
   return (
     <MenuItem onClick={handleReactivateUser}>
-      {intl.formatMessage(messages.thirdMenuItemOptionII)}
+      {intl.formatMessage(messages.fourthMenuItemOptionII)}
     </MenuItem>
   )
 }

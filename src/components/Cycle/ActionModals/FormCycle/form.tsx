@@ -3,6 +3,9 @@ import { Form, Formik, FormikHelpers } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
+import InfoCircleIcon from 'src/components/Icon/InfoCircle'
+
 import { CADENCE, CYCLE_STATUS } from '../../constants'
 import { Cycle } from '../../types'
 
@@ -90,6 +93,22 @@ export const CycleModalForm = ({
                 label={intl.formatMessage(messages.parenteCycleField)}
                 options={cycleParents}
                 isDisabled={values.cadence === CADENCE.YEARLY}
+                Tooltip={() => (
+                  <TooltipWithDelay
+                    label={intl.formatMessage(messages.parentCycleTooltip)}
+                    placement="top"
+                    maxWidth="container.md"
+                  >
+                    <Flex transform="translateY(2px)">
+                      <InfoCircleIcon
+                        fill="new-gray.600"
+                        stroke="new-gray.600"
+                        cursor="help"
+                        desc={intl.formatMessage(messages.parentCycleTooltip)}
+                      />
+                    </Flex>
+                  </TooltipWithDelay>
+                )}
               />
 
               <CycleDateField

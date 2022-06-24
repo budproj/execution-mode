@@ -14,6 +14,7 @@ type CycleModalFormMessage =
   | 'notActiveCycleOption'
   | 'quarterlyCadenceCycleOption'
   | 'yearlyCadenceCycleOption'
+  | 'parentCycleTooltip'
 
 export default defineMessages<CycleModalFormMessage>({
   nameCycleField: {
@@ -88,5 +89,11 @@ export default defineMessages<CycleModalFormMessage>({
     defaultMessage: 'Anual',
     id: 'oh+3Gh',
     description: 'This option makes an cycle with yearly cadence',
+  },
+
+  parentCycleTooltip: {
+    defaultMessage: 'Vincula o ciclo trimestral ao ciclo anual ao qual ele pertence.',
+    id: 'UU1FXI',
+    description: 'This message appears on tooltip that explain the parent cycle select field.',
   },
 })

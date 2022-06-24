@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Wrap, WrapItem } from '@chakra-ui/react'
+import Link from 'next/link'
 import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
@@ -16,6 +17,7 @@ import UserTeamTagsSkeleton from './skeleton'
 export interface UserTeamTagsProperties {
   teams?: Team[]
   userID?: User['id']
+  redirectToTeam?: boolean
   isLoaded?: boolean
   isActive?: boolean
   isEditable?: boolean
@@ -34,6 +36,7 @@ const UserTeamTags = ({
   userID,
   isLoaded,
   isActive,
+  redirectToTeam,
   isEditable,
   max,
 }: UserTeamTagsProperties) => {
@@ -69,14 +72,21 @@ const UserTeamTags = ({
   return isLoaded && limitedTeams ? (
     <Wrap spacing={2}>
       {limitedTeams.map((team) => (
-        <WrapItem key={team.id} overflow="hidden">
-          <TeamTag
-            isLoading={loading}
-            isActive={isActive}
-            onClose={isEditable && hasMoreThanOneTeam ? handleRemoveTeam(team.id) : undefined}
-          >
-            {team.name}
-          </TeamTag>
+        <WrapItem
+          key={team.id}
+          overflow="hidden"
+          cursor={redirectToTeam ? 'pointer' : 'default'}
+          pointerEvents={redirectToTeam ? 'all' : 'none'}
+        >
+          <Link passHref href={redirectToTeam ? `/explore/${team?.id}` : ''}>
+            <TeamTag
+              isLoading={loading}
+              isActive={isActive}
+              onClose={isEditable && hasMoreThanOneTeam ? handleRemoveTeam(team.id) : undefined}
+            >
+              {team.name}
+            </TeamTag>
+          </Link>
         </WrapItem>
       ))}
     </Wrap>

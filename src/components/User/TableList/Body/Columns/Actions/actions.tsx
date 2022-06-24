@@ -3,6 +3,7 @@ import React, { ReactElement, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
+import { IntlLink } from 'src/components/Base'
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import { DeactivateUser } from 'src/components/User/Profile/Body/BottomActions/DeactivateUser/deactivate-user'
 import UsersTableListBodyColumnBase, {
@@ -88,17 +89,20 @@ const UsersTableListBodyColumnActions = ({
         <MenuList>
           {isActive && (
             <>
+              <IntlLink href={id ? `/profile/${id}` : ''}>
+                <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
+              </IntlLink>
               <MenuItem onClick={openSeeDatailsUserSidebar}>
-                {intl.formatMessage(messages.firstMenuItemOption)}
+                {intl.formatMessage(messages.secondMenuItemOption)}
               </MenuItem>
               <MenuItem onClick={handleResetUserPassoword}>
-                {intl.formatMessage(messages.secondMenuItemOption)}
+                {intl.formatMessage(messages.thirdMenuItemOption)}
               </MenuItem>
             </>
           )}
           {isActive ? (
             <MenuItem onClick={openDeactivateModal}>
-              {intl.formatMessage(messages.thirdMenuItemOption)}
+              {intl.formatMessage(messages.fourthMenuItemOption)}
             </MenuItem>
           ) : (
             <ReactivateUser id={id} />

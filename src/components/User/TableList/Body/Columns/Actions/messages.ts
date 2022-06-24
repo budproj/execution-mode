@@ -5,7 +5,8 @@ type CyclesListBodyColumnActionsMessage =
   | 'firstMenuItemOption'
   | 'secondMenuItemOption'
   | 'thirdMenuItemOption'
-  | 'thirdMenuItemOptionII'
+  | 'fourthMenuItemOption'
+  | 'fourthMenuItemOptionII'
   | 'unknownErrorToastMessage'
   | 'successSendEmailToResetPasswordToastMessage'
   | 'successReactivateUserToastMessage'
@@ -20,24 +21,30 @@ export default defineMessages<CyclesListBodyColumnActionsMessage>({
   },
 
   firstMenuItemOption: {
+    defaultMessage: 'Ir para o perfil',
+    id: 'LQfRhU',
+    description: 'This message is the description of the option to redirect to profile of a user.',
+  },
+
+  secondMenuItemOption: {
     defaultMessage: 'Ver detalhes',
     id: '61S7n7',
     description: 'This message is the description of the option to view details  of a user.',
   },
 
-  secondMenuItemOption: {
+  thirdMenuItemOption: {
     defaultMessage: 'Redefinir senha',
     id: 'minQA9',
     description: 'This message is the description of the option to alter password of a user.',
   },
 
-  thirdMenuItemOption: {
+  fourthMenuItemOption: {
     defaultMessage: 'Desativar conta',
     id: 'GKl+a6',
     description: 'This message is the description of the option to deactivate a user account.',
   },
 
-  thirdMenuItemOptionII: {
+  fourthMenuItemOptionII: {
     defaultMessage: 'Reativar conta',
     id: 'xIe3i6',
     description: 'This message is the description of the option to reactivate a user account.',
