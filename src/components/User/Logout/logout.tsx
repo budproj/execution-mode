@@ -10,7 +10,7 @@ const UserLogout = () => {
   const { logout } = useAuth0()
 
   const handleLogout = () => {
-    logout()
+    logout({ returnTo: window.location.origin })
   }
 
   return (
