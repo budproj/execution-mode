@@ -20,11 +20,13 @@ import queries from './queries.gql'
 const DashboardPage = () => {
   const intl = useIntl()
   const { data, loading, called } = useQuery(queries.GET_USER_NAME_AND_GENDER)
-  const { data: companyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
+  const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
   const { firstName, gender } = data?.me ?? {}
 
-  const yearly = companyCycles.find((cycle) => cycle.cadence === CADENCE.YEARLY)
-  const quarter = companyCycles.find((cycle) => cycle.cadence === CADENCE.QUARTERLY)
+  const activeCompanyCycles = allCompanyCycles.filter((cycle) => cycle.active)
+
+  const yearly = activeCompanyCycles.find((cycle) => cycle.cadence === CADENCE.YEARLY)
+  const quarter = activeCompanyCycles.find((cycle) => cycle.cadence === CADENCE.QUARTERLY)
 
   const pageTitle =
     called && !loading && intl.formatMessage(messages.greeting, { name: firstName, gender })
