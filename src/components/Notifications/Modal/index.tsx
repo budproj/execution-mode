@@ -5,6 +5,8 @@ import { useIntl } from 'react-intl'
 
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 
+import { NotificationsList } from '../NotificationsList'
+
 import messages from './messages'
 
 const StyledTab = styled(Tab)`
@@ -52,7 +54,9 @@ const NotificationsModal = () => {
         <Divider borderColor="gray.100" />
 
         <TabPanels p="0 10px 10px 10px">
-          <TabPanel textAlign="center">{/* here: Notifications-Component */}</TabPanel>
+          <TabPanel textAlign="center">
+            <NotificationsList />
+          </TabPanel>
           <TabPanel>{/* here: CheckIn-Notifications-Component */}</TabPanel>
         </TabPanels>
       </Tabs>
