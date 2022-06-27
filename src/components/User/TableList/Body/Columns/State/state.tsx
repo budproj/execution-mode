@@ -1,4 +1,4 @@
-import { Flex, Skeleton, Tag, TagLabel } from '@chakra-ui/react'
+import { Flex, Skeleton, Tag, TagLabel, Tooltip } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -36,18 +36,27 @@ const UsersTableListBodyColumnState = ({
           isLoaded={isStateOfUserLoaded}
           {...buildSkeletonMinSize(isStateOfUserLoaded, 40, 28)}
         >
-          <Tag
-            bg="brand.50"
-            color={stateOfUser === UserStatus.ACTIVE ? 'brand.500' : 'new-gray.500'}
-            textTransform="uppercase"
-            fontWeight={500}
-            fontSize={10}
-            borderRadius={3}
-            px={3}
-            py={1}
+          <Tooltip
+            label={
+              stateOfUser === UserStatus.ACTIVE
+                ? intl.formatMessage(messages.activeUserTooltip)
+                : intl.formatMessage(messages.inactiveUserTooltip)
+            }
+            placement="top"
           >
-            <TagLabel>{userStatusLabel.toUpperCase()}</TagLabel>
-          </Tag>
+            <Tag
+              bg="brand.50"
+              color={stateOfUser === UserStatus.ACTIVE ? 'brand.500' : 'new-gray.500'}
+              textTransform="uppercase"
+              fontWeight={500}
+              fontSize={10}
+              borderRadius={3}
+              px={3}
+              py={1}
+            >
+              <TagLabel>{userStatusLabel.toUpperCase()}</TagLabel>
+            </Tag>
+          </Tooltip>
         </Skeleton>
       </Flex>
     </UsersTableListBodyColumnBase>

@@ -23,6 +23,8 @@ const UsersTableListBodyColumnTeams = ({
 
   const arrayUserTeams = userTeams?.edges.map((userTeam) => userTeam.node ?? [])
 
+  // Const linkTo = team?.id ? `/explore/${team?.id}` : ''
+
   const isTeamsLoaded = Boolean(arrayUserTeams)
 
   return (
@@ -30,6 +32,7 @@ const UsersTableListBodyColumnTeams = ({
       <Flex gridGap={2} flexDir="column">
         <Skeleton isLoaded={isTeamsLoaded} {...buildSkeletonMinSize(isTeamsLoaded, 140, 28)}>
           <UserTeamTags
+            redirectToTeam
             userID={id}
             max={2}
             isLoaded={isTeamsLoaded}

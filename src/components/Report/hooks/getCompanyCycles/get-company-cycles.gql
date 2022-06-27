@@ -12,6 +12,7 @@ query GET_COMPANY_CYCLES {
                 cadence
                 dateStart
                 dateEnd
+                active
                 delta {
                   progress
                 }

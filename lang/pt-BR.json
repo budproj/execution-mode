@@ -547,6 +547,10 @@
     "defaultMessage": "Email do usuário inicial",
     "description": "The user email while creating a new workspace"
   },
+  "9GdiHI": {
+    "defaultMessage": "{name} perderá o acesso ao Bud e será removido dos times aos quais pertence, mas manteremos o histórico de check-ins e comentários feitos até aqui.",
+    "description": "This message appears in the confirmation dialog when we try to deactivate an user"
+  },
   "9iN0R8": {
     "defaultMessage": "Atenção! Essa ação não pode ser desfeita",
     "description": "This message is used as the default message in our dangerous action confirmation modal"
@@ -1087,6 +1091,10 @@
     "defaultMessage": "Ambiente criado com sucesso",
     "description": "The title of the toast that appears when we create a new workspace"
   },
+  "G9m+Ed": {
+    "defaultMessage": "O acesso desta pessoa ao Bud foi desativado.",
+    "description": "This message appears in the tooltip of users with inactive account state."
+  },
   "gAgkzF": {
     "defaultMessage": "Criar Objetivo",
     "description": "create new key result"
@@ -1183,9 +1191,17 @@
     "defaultMessage": "Confirmação de segurança",
     "description": "This message is displayed as the input label for the danger confirmation resource dialog"
   },
+  "gZstKN": {
+    "defaultMessage": "Estado inicial",
+    "description": "The description for state cycle field on create cycle form"
+  },
   "H/aZym": {
     "defaultMessage": "Escolha como suas informações aparecerão para os outros usuários.",
     "description": "This subtitle is displayed as the subtitle of the personal informations section in our user account settings page"
+  },
+  "H/tYPn": {
+    "defaultMessage": "{name} perderá o acesso ao Bud e será removido dos times aos quais pertence, mas manteremos o histórico de check-ins e comentários feitos até aqui.",
+    "description": "This message appears in the confirmation dialog when we try to deactivate an user."
   },
   "h/WXZ6": {
     "defaultMessage": "resultado-chave",
@@ -1435,6 +1451,10 @@
     "defaultMessage": "Veja nossos exemplos de OKRs",
     "description": "This button redirects to the page that teaches about OKRs."
   },
+  "jNuy4b": {
+    "defaultMessage": "Esta pessoa tem acesso ao Bud.",
+    "description": "This message appears in the tooltip of users with active account state."
+  },
   "jRsXuq": {
     "defaultMessage": "CHECK-INS",
     "description": "The tooltip text for the check-ins text"
@@ -1642,6 +1662,10 @@
   "loTYpj": {
     "defaultMessage": "Inglês",
     "description": "The user locale en-US option while creating a new workspace"
+  },
+  "LQfRhU": {
+    "defaultMessage": "Ir para o perfil",
+    "description": "This message is the description of the option to redirect to profile of a user."
   },
   "lQkUTL": {
     "defaultMessage": "Inspiradores",
@@ -2419,6 +2443,10 @@
     "defaultMessage": "O Bud vai ficar fora do ar durante algumas horas enquanto arrumamos a casa. Esperamos estar de volta até: <highlight>{date} às {hour}h</highlight> Até lá! :)",
     "description": "This message is displayed as a description in our under maintenance error page"
   },
+  "uQUReU": {
+    "defaultMessage": "Estado atual",
+    "description": "The description for state cycle field on update cycle form"
+  },
   "usAoP+": {
     "defaultMessage": "Trimestral",
     "description": "This option makes an cycle with quarterly cadence"
@@ -2426,6 +2454,10 @@
   "Uu0OJV": {
     "defaultMessage": "Um ícone de imagem. Ele indica que nesse campo fica seu avatar",
     "description": "The alternative text explaining our image icon in the settings account page"
+  },
+  "UU1FXI": {
+    "defaultMessage": "Vincula o ciclo trimestral ao ciclo anual ao qual ele pertence.",
+    "description": "This message appears on tooltip that explain the parent cycle select field."
   },
   "uUn4LH": {
     "defaultMessage": "EXCLUIR",
@@ -2944,7 +2976,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-06-22T13:14:01Z",
+    "defaultMessage": "2022-06-27T14:49:29Z",
     "description": null
   }
 }
