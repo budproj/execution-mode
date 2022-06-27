@@ -23,7 +23,7 @@ export const Button = ({ label, icon, iconDescription, ...rest }: ButtonProperti
     <ChakraButton
       variant="text"
       p={0}
-      h="auto"
+      // H="auto"
       colorScheme="brand"
       leftIcon={
         IconElement && (
