@@ -2,7 +2,8 @@ import { defineMessages } from 'react-intl'
 
 type CycleModalFormMessage =
   | 'nameCycleField'
-  | 'stateCycleField'
+  | 'stateCycleFieldOnUpdateCycle'
+  | 'stateCycleFieldOnCreateCycle'
   | 'cadenceCycleField'
   | 'parenteCycleField'
   | 'dateStartCycleField'
@@ -23,11 +24,18 @@ export default defineMessages<CycleModalFormMessage>({
     description: 'The description for name cycle field',
   },
 
-  stateCycleField: {
-    defaultMessage: 'Estado atual',
-    id: 'vyGEtA',
-    description: 'The description for state cycle field',
+  stateCycleFieldOnCreateCycle: {
+    defaultMessage: 'Estado inicial',
+    id: 'gZstKN',
+    description: 'The description for state cycle field on create cycle form',
   },
+
+  stateCycleFieldOnUpdateCycle: {
+    defaultMessage: 'Estado atual',
+    id: 'uQUReU',
+    description: 'The description for state cycle field on update cycle form',
+  },
+
   cadenceCycleField: {
     defaultMessage: 'Cadência',
     id: 'OS8mCA',
