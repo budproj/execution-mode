@@ -80,6 +80,7 @@ const UserTeamTags = ({
         >
           <Link passHref href={redirectToTeam ? `/explore/${team?.id}` : ''}>
             <TeamTag
+              redirectToTeam={redirectToTeam}
               isLoading={loading}
               isActive={isActive}
               onClose={isEditable && hasMoreThanOneTeam ? handleRemoveTeam(team.id) : undefined}
