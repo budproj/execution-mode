@@ -1,17 +1,24 @@
-import {
-  Box,
-  Divider,
-  PopoverBody,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-} from '@chakra-ui/react'
+import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
+
 import messages from './messages'
+
+const StyledTab = styled(Tab)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 400;
+  border-bottom: 2px solid transparent;
+
+  &:focus {
+    box-shadow: none;
+  }
+`
 
 const NotificationsModal = () => {
   const intl = useIntl()
@@ -23,68 +30,24 @@ const NotificationsModal = () => {
     <PopoverBody padding={0} margin={0} borderRadius={15}>
       <Tabs isFitted isLazy variant="unstyled">
         <TabList display="flex" alignItems="center" pt={4} pl={12} pr={12}>
-          <Tab
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
+          <StyledTab
             gap={2}
             width="md"
-            fontSize={16}
-            fontWeight="medium"
             color="new-gray.800"
-            borderBottom="2px solid transparent"
-            _focus={{ outline: 0 }}
-            _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+            _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
-            {notificationsCount && (
-              <Box
-                color="white"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                fontSize="12px"
-                fontWeight="bold"
-                bgColor="#FF616A"
-                borderRadius="50%"
-                width={4}
-                height={4}
-              >
-                {notificationsCount}
-              </Box>
-            )}
-          </Tab>
-          <Tab
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
+            {notificationsCount && <NotificationBadge notificationCount={notificationsCount} />}
+          </StyledTab>
+          <StyledTab
             gap={2}
-            fontSize={16}
-            width="max-content"
-            fontWeight="medium"
             color="new-gray.800"
             borderBottom="2px solid transparent"
-            _focus={{ outline: 0 }}
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
-            {checkInsCount && (
-              <Box
-                color="white"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                fontSize="12px"
-                fontWeight="bold"
-                bgColor="#FF616A"
-                borderRadius="50%"
-                width={4}
-                height={4}
-              >
-                {checkInsCount}
-              </Box>
-            )}
-          </Tab>
+            {checkInsCount && <NotificationBadge notificationCount={checkInsCount} />}
+          </StyledTab>
         </TabList>
         <Divider borderColor="gray.100" />
 

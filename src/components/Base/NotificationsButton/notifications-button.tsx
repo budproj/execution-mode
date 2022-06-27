@@ -1,8 +1,9 @@
-import { Box, IconButton, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
+import { IconButton, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React from 'react'
 
 import NotificationBellIcon from 'src/components/Icon/NotificationBell'
 import NotificationsModal from 'src/components/Notifications/Modal'
+import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 
 const NotificationsButton = () => {
   const notificationCount = 4
@@ -19,25 +20,13 @@ const NotificationsButton = () => {
             <>
               <NotificationBellIcon fill="gray.500" w={5} h="auto" desc="notifications" />{' '}
               {notificationCount > 0 && (
-                <Box
-                  as="span"
-                  color="white"
+                <NotificationBadge
+                  hasBorder
+                  notificationCount={notificationCount}
                   position="absolute"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  top="1px"
-                  right="-5px"
-                  fontSize="10px"
-                  fontWeight="bold"
-                  bgColor="#FF616A"
-                  border="1px solid white"
-                  borderRadius="50%"
-                  p="1px"
-                  minW="16px"
-                >
-                  {notificationCount}
-                </Box>
+                  top="2px"
+                  right="-6px"
+                />
               )}
             </>
           }
