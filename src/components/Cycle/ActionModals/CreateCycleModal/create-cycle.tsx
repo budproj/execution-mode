@@ -15,6 +15,7 @@ import {
   CycleSelectOption,
   cycleFormInitialValues,
 } from '../FormCycle'
+import { ModalType } from '../FormCycle/form'
 
 import { CreateCycleModalActions } from './actions'
 import messages from './messages'
@@ -93,6 +94,7 @@ export const CreateCycle = ({
       <CycleModalForm
         cycleParents={cycleParents}
         initialValues={normalizedInitialValues}
+        modalType={ModalType.CREATE}
         onSubmit={handleFormSubmission}
       >
         <CreateCycleModalActions onClose={onCancel} />

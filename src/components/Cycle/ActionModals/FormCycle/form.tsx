@@ -14,6 +14,11 @@ import { CycleSelectOption } from './Fields/select'
 import messages from './messages'
 import { NewCycleSchema } from './schema'
 
+export enum ModalType {
+  UPDATE = 'update',
+  CREATE = 'create',
+}
+
 export type CycleFormValues = {
   parentId?: string
   period?: Cycle['period']
@@ -26,6 +31,7 @@ export type CycleFormValues = {
 export type CycleFormProperties = {
   initialValues?: CycleFormValues
   cycleParents: CycleSelectOption[]
+  modalType?: ModalType
   children?: React.ReactNode
   onSubmit: (values: CycleFormValues, actions: FormikHelpers<CycleFormValues>) => Promise<void>
 }
@@ -42,6 +48,7 @@ export const defaultInitialValues: CycleFormValues = {
 export const CycleModalForm = ({
   initialValues = defaultInitialValues,
   cycleParents,
+  modalType,
   onSubmit,
   children,
 }: CycleFormProperties) => {
@@ -58,7 +65,11 @@ export const CycleModalForm = ({
               <CycleSelectField
                 id="active"
                 selectedOptionID={values.active}
-                label={intl.formatMessage(messages.stateCycleField)}
+                label={
+                  modalType === ModalType.CREATE
+                    ? intl.formatMessage(messages.stateCycleFieldOnCreateCycle)
+                    : intl.formatMessage(messages.stateCycleFieldOnUpdateCycle)
+                }
                 options={[
                   {
                     id: CYCLE_STATUS.ACTIVE,
