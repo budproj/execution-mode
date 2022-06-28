@@ -39,6 +39,10 @@
     "defaultMessage": "Atualizar",
     "description": "This message is displayed in a tooltip above the SliderThumb on our sliders"
   },
+  "//f0UA": {
+    "defaultMessage": "Timeline | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "/2GFGI": {
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
@@ -619,6 +623,10 @@
     "defaultMessage": "Ativo",
     "description": "This string is used to select the active cycles option."
   },
+  "CQiLwO": {
+    "defaultMessage": "Timeline",
+    "description": "MainAppBar menu item that links to teams \"Timeline\" page"
+  },
   "CS3a8I": {
     "defaultMessage": "Ativo",
     "description": "This option makes an active cycle"
@@ -1042,6 +1050,10 @@
   "MNn3/r": {
     "defaultMessage": "Insira uma descrição clicando aqui",
     "description": "This text is displayed as a placeholder for the description section of a key-result, only when that key-result don't have a description"
+  },
+  "Me1wRC": {
+    "defaultMessage": "Notificações",
+    "description": "This message appears as the title of the Notifications option in the notifications modal."
   },
   "MgJJAJ": {
     "defaultMessage": "Comente aqui! Para marcar alguém, use @ :)",
@@ -2038,6 +2050,10 @@
   "loTYpj": {
     "defaultMessage": "Inglês",
     "description": "The user locale en-US option while creating a new workspace"
+  },
+  "lpsQj3": {
+    "defaultMessage": "Check-in",
+    "description": "This message appears as the title of the Check-ins option in the notifications modal."
   },
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",

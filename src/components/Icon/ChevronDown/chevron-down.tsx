@@ -3,10 +3,17 @@ import React, { ReactElement } from 'react'
 
 import { AcessibleIconProperties } from 'src/components/Icon/types'
 
-export interface ChevronDownIconProperties extends IconProps, AcessibleIconProperties {}
+export interface ChevronDownIconProperties extends IconProps, AcessibleIconProperties {
+  viewBox?: string
+}
 
-const ChevronDownIcon = ({ title, desc, ...rest }: ChevronDownIconProperties): ReactElement => (
-  <Icon viewBox="0 0 8 6" {...rest}>
+const ChevronDownIcon = ({
+  title,
+  desc,
+  viewBox,
+  ...rest
+}: ChevronDownIconProperties): ReactElement => (
+  <Icon viewBox={viewBox} {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
     <path
@@ -25,6 +32,7 @@ const ChevronDownIcon = ({ title, desc, ...rest }: ChevronDownIconProperties): R
 ChevronDownIcon.defaultProps = {
   fill: 'black',
   stroke: 'black',
+  viewBox: '0 0 8 6',
 }
 
 export default ChevronDownIcon
