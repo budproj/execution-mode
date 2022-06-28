@@ -36,6 +36,8 @@ interface NameWithAvatarProperties {
   isLoaded: boolean
   isHovering?: boolean
   isEditing?: boolean
+  isStatic?: boolean
+  isUserNotActive?: boolean
   showName?: boolean
   hasSubtitle?: boolean
   subtitle?: string
@@ -77,6 +79,8 @@ export const NameWithAvatar = forwardRef(
       isLoaded,
       isEditable,
       isEditing,
+      isStatic,
+      isUserNotActive,
       avatarSize,
       showName = true,
       hasSubtitle,
@@ -117,6 +121,7 @@ export const NameWithAvatar = forwardRef(
               <Avatar
                 name={user?.fullName}
                 src={user?.picture}
+                opacity={isUserNotActive === true ? 0.5 : undefined}
                 w={avatarSize}
                 h={avatarSize}
                 loading="lazy"
@@ -151,7 +156,11 @@ export const NameWithAvatar = forwardRef(
                     </StyledText>
                   </IntlLink>
                 ) : (
-                  <StyledText fontSize="lg" color={nameColor} brandColor={brand500}>
+                  <StyledText
+                    fontSize="lg"
+                    color={nameColor}
+                    brandColor={isStatic ? undefined : brand500}
+                  >
                     {user?.fullName}
                   </StyledText>
                 )}
@@ -160,7 +169,7 @@ export const NameWithAvatar = forwardRef(
 
             {hasSubtitle && (
               <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 60, 18)}>
-                <Text fontSize="md" color="gray.400">
+                <Text fontSize="md" color={isUserNotActive ? 'new-gray.500' : '#6B7B90'}>
                   {subtitle}
                 </Text>
               </Skeleton>

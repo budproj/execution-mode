@@ -26,6 +26,8 @@ export interface NamedAvatarProperties {
   userID?: User['id']
   isLoading?: boolean
   isEditting?: boolean
+  isStatic?: boolean
+  isUserNotActive?: boolean
   subtitleType?: NamedAvatarSubtitleType
   canEdit?: boolean
   canHover?: boolean
@@ -46,6 +48,8 @@ const NamedAvatar = ({
   userID,
   isLoading,
   isEditting,
+  isStatic,
+  isUserNotActive,
   subtitleType,
   canEdit,
   canHover,
@@ -137,6 +141,8 @@ const NamedAvatar = ({
       isHoverable={canHover}
       isLoaded={isLoaded}
       isEditing={isEditting}
+      isStatic={isStatic}
+      isUserNotActive={isUserNotActive}
       hasSubtitle={displaySubtitle}
       subtitle={subtitle}
       redirectToProfile={redirectToProfile}

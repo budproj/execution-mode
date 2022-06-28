@@ -5,6 +5,7 @@ query GET_USER_LIST {
         id
         firstName
         nickname
+        status
         linkedInProfileAddress
         about
         fullName

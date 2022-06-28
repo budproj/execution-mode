@@ -1,3 +1,4 @@
+import { ApolloQueryResult } from '@apollo/client'
 import { Drawer } from '@chakra-ui/react'
 import React from 'react'
 
@@ -9,7 +10,7 @@ type CreateUserSidebarWrapperProperties = {
   teamID?: string
   isOpen: boolean
   onClose: () => void
-  onCreate?: (userID: string) => Promise<void> | void
+  onCreate?: (userID: string) => Promise<void> | Promise<ApolloQueryResult<any>> | void
 }
 
 export const CreateUserSidebarWrapper = ({

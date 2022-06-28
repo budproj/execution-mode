@@ -6,6 +6,7 @@ import { ButtonActivableByURLProperties } from 'src/components/Base/ButtonActiva
 const SettingsSidebarMenuSectionButton = (properties: ButtonActivableByURLProperties) => (
   <ButtonActivableByURL
     variant="ghost"
+    width={150}
     colorScheme="gray"
     justifyContent="flex-start"
     fontSize="sm"

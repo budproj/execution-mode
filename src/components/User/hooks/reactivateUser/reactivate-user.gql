@@ -1,0 +1,5 @@
+mutation REACTIVATE_USER($id: ID!) {
+  reactivateUser(id: $id) {
+    status
+  }
+}
