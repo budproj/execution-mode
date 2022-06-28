@@ -1,0 +1,18 @@
+query GET_KEYRESULTS_FOR_NOTIFICATIONS {
+ me {
+  keyResults {
+    edges {
+      node {
+        title
+        id
+        status {
+          isOutdated
+          latestCheckIn {
+            createdAt
+          }
+        }
+      }
+    }
+  }
+}
+}

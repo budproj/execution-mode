@@ -1,13 +1,18 @@
+import { useQuery } from '@apollo/client'
 import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import { isAfter, startOfWeek, isBefore } from 'date-fns'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { KeyResult } from 'src/components/KeyResult/types'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 
 import CheckInNotifications from '../CheckInNotifications'
 
 import messages from './messages'
+import queries from './queries.gql'
 
 const StyledTab = styled(Tab)`
   display: flex;
@@ -25,8 +30,39 @@ const StyledTab = styled(Tab)`
 const NotificationsModal = () => {
   const intl = useIntl()
 
-  const checkInsCount = 12
   const notificationsCount = 2
+
+  const [keyResults, setKeyResultEdges, _] = useConnectionEdges<KeyResult>()
+
+  useQuery(queries.GET_KEYRESULTS_FOR_NOTIFICATIONS, {
+    onCompleted: (data) => {
+      setKeyResultEdges(data.me.keyResults.edges)
+    },
+  })
+
+  const keyResultsWithNoCheckInThisWeek = keyResults?.filter((keyResult) => {
+    if (!keyResult?.status?.latestCheckIn) {
+      return true
+    }
+
+    const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
+    const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
+
+    return isBefore(date, startOfTheWeek)
+  })
+
+  const keyResultsUpToDate = keyResults.filter((keyResult) => {
+    if (!keyResult?.status?.latestCheckIn) {
+      return false
+    }
+
+    const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
+    const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
+
+    return isAfter(date, startOfTheWeek)
+  })
+
+  const checkInsCount = keyResultsWithNoCheckInThisWeek.length
 
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15}>
@@ -56,7 +92,10 @@ const NotificationsModal = () => {
         <TabPanels p="0 10px 10px 10px">
           <TabPanel textAlign="center">{/* here: Notifications-Component */}</TabPanel>
           <TabPanel>
-            <CheckInNotifications />
+            <CheckInNotifications
+              keyResultsUpToDate={keyResultsUpToDate}
+              keyResultsWithNoCheckInThisWeek={keyResultsWithNoCheckInThisWeek}
+            />
           </TabPanel>
         </TabPanels>
       </Tabs>
