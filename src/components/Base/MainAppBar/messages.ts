@@ -11,7 +11,6 @@ type MainAppBarMessage =
   | 'settingsIconTitle'
   | 'settingsIconDesc'
   | 'newItem'
-  | 'fourthMenuItem'
 
 export default defineMessages<MainAppBarMessage>({
   firstMenuItem: {
@@ -30,12 +29,6 @@ export default defineMessages<MainAppBarMessage>({
     defaultMessage: 'Explorar',
     id: 'ciNUJf',
     description: 'MainAppBar menu item that links to teams "Explore" page',
-  },
-
-  fourthMenuItem: {
-    defaultMessage: 'Timeline',
-    id: 'CQiLwO',
-    description: 'MainAppBar menu item that links to teams "Timeline" page',
   },
 
   searchIconTitle: {
