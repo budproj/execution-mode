@@ -37,6 +37,7 @@ const UsersTableListBodyColumnState = ({
           {...buildSkeletonMinSize(isStateOfUserLoaded, 40, 28)}
         >
           <Tooltip
+            maxWidth="container.md"
             label={
               stateOfUser === UserStatus.ACTIVE
                 ? intl.formatMessage(messages.activeUserTooltip)
