@@ -35,6 +35,15 @@ export const KeyResultSingleSectionOwnerWrapper = ({
   const canUpdate = canUserUpdate && isKeyResultActive && !isIndividualKeyResult
   const supportTeamMembers = keyResult?.supportTeamMembers?.edges?.map(({ node }) => node)
 
+  console.log({
+    supportTeamMembers,
+    keyResult,
+    policy,
+    isKeyResultActive,
+    isIndividualKeyResult,
+    canUpdate,
+  })
+
   const handleOpen = () => {
     if (canUpdate && !isOpen) setIsOpen(true)
   }

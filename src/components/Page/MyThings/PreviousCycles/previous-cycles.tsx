@@ -6,7 +6,6 @@ import { useSetRecoilState } from 'recoil'
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { KeyResultNotActiveAndOwnedByUser } from 'src/components/KeyResult'
-import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
@@ -24,7 +23,6 @@ const PreviousCyclesPage = () => {
   return (
     <PageContent>
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
-      <KeyResultSingleDrawer />
 
       <PageHeader>
         <PageTitle>{intl.formatMessage(messages.pageTitle)}</PageTitle>

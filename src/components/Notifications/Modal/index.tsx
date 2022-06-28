@@ -84,7 +84,7 @@ const NotificationsModal = () => {
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
-            {checkInsCount && <NotificationBadge notificationCount={checkInsCount} />}
+            {checkInsCount > 0 && <NotificationBadge notificationCount={checkInsCount} />}
           </StyledTab>
         </TabList>
         <Divider borderColor="gray.100" />

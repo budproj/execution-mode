@@ -8,14 +8,18 @@ import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import { UpdateIcon } from 'src/components/KeyResult/List/Body/Columns/KeyResult/update-icon'
 import { KeyResult } from 'src/components/KeyResult/types'
 
+import messages from './messages'
+
 interface NotificationKeyResultProperties {
   isKeyResultOutdated?: boolean
   keyResult: KeyResult
+  handleClick: (id: KeyResult['id']) => void
 }
 
 const NotificationKeyResult = ({
   isKeyResultOutdated,
   keyResult,
+  handleClick,
 }: NotificationKeyResultProperties) => {
   const intl = useIntl()
   const lastUpdateDate = keyResult?.status?.latestCheckIn?.createdAt
@@ -40,7 +44,7 @@ const NotificationKeyResult = ({
               updateTextColor={updateTextColor}
             />
             <LastUpdateText
-              prefix="Último check-in"
+              prefix={intl.formatMessage(messages.lastCheckInPrefix)}
               date={lastUpdateDate}
               color={updateTextColor}
             />
@@ -48,7 +52,12 @@ const NotificationKeyResult = ({
         </Box>
         <Box>
           {isKeyResultOutdated && (
-            <Button backgroundColor="brand.50" padding="10px 15px" label="Fazer check-in" />
+            <Button
+              backgroundColor="brand.50"
+              padding="10px 15px"
+              label={intl.formatMessage(messages.checkInButton)}
+              onClick={() => handleClick(keyResult.id)}
+            />
           )}
         </Box>
       </Flex>
