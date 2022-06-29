@@ -12,10 +12,6 @@ const NotificationsButton = () => {
   const notificationCount = useRecoilValue(notificationCountAtom)
   const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
 
-  console.log({ notificationCount, checkInNotificationCount })
-
-  console.log(notificationCount + checkInNotificationCount)
-
   const isNotificationBadgeVisible = notificationCount > 0 || checkInNotificationCount > 0
 
   return (
