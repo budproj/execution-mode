@@ -4,10 +4,12 @@ import styled from '@emotion/styled'
 import { isAfter, startOfWeek, isBefore } from 'date-fns'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
 import CheckInNotifications from '../CheckInNotifications'
 
@@ -30,7 +32,10 @@ const StyledTab = styled(Tab)`
 const NotificationsModal = () => {
   const intl = useIntl()
 
-  const notificationsCount = 2
+  const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
+  const setNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
+
+  const notificationsCount = 0
 
   const [keyResults, setKeyResultEdges, _] = useConnectionEdges<KeyResult>()
 
@@ -62,7 +67,7 @@ const NotificationsModal = () => {
     return isAfter(date, startOfTheWeek)
   })
 
-  const checkInsCount = keyResultsWithNoCheckInThisWeek.length
+  setNotificationsCount(keyResultsWithNoCheckInThisWeek.length)
 
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15}>
@@ -75,7 +80,7 @@ const NotificationsModal = () => {
             _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
-            {notificationsCount && <NotificationBadge notificationCount={notificationsCount} />}
+            {notificationsCount > 0 && <NotificationBadge notificationCount={notificationsCount} />}
           </StyledTab>
           <StyledTab
             gap={2}
@@ -84,7 +89,9 @@ const NotificationsModal = () => {
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
-            {checkInsCount > 0 && <NotificationBadge notificationCount={checkInsCount} />}
+            {checkInNotificationCount > 0 && (
+              <NotificationBadge notificationCount={checkInNotificationCount} />
+            )}
           </StyledTab>
         </TabList>
         <Divider borderColor="gray.100" />

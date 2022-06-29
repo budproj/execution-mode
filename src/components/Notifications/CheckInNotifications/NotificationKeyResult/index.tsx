@@ -53,6 +53,7 @@ const NotificationKeyResult = ({
         <Box>
           {isKeyResultOutdated && (
             <Button
+              marginLeft={10}
               backgroundColor="brand.50"
               padding="10px 15px"
               label={intl.formatMessage(messages.checkInButton)}
