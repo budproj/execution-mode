@@ -29,7 +29,7 @@ const CheckInNotifications = ({
         <>
           {keyResultsWithNoCheckInThisWeek.length > 0 && (
             <Box marginBottom={2}>
-              <Text fontWeight="500" color="new-gray.600" paddingY={2} textTransform="uppercase">
+              <Text fontWeight="500" color="new-gray.800" paddingY={2} textTransform="uppercase">
                 {intl.formatMessage(messages.forThisWeekTitle)}
               </Text>
               {keyResultsWithNoCheckInThisWeek.map((keyResult) => (
@@ -44,7 +44,7 @@ const CheckInNotifications = ({
           )}
           <Box>
             {keyResultsUpToDate.length > 0 && (
-              <Text fontWeight="500" color="new-gray.600" paddingY={2} textTransform="uppercase">
+              <Text fontWeight="500" color="new-gray.800" paddingY={2} textTransform="uppercase">
                 {intl.formatMessage(messages.upToDateTitle)}
               </Text>
             )}

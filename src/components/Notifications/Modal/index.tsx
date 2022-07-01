@@ -71,13 +71,21 @@ const NotificationsModal = () => {
 
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15}>
-      <Tabs isFitted isLazy variant="unstyled">
-        <TabList display="flex" alignItems="center" pt={4} pl={12} pr={12}>
+      <Tabs isFitted isLazy variant="unstyled" boxShadow="md" borderRadius={15}>
+        <TabList
+          display="flex"
+          alignItems="center"
+          pt={4}
+          pl={12}
+          pr={12}
+          backgroundColor="black.50"
+        >
           <StyledTab
             gap={2}
             width="md"
             color="new-gray.800"
             _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
+            paddingBottom="17px"
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
             {notificationsCount > 0 && <NotificationBadge notificationCount={notificationsCount} />}
@@ -87,6 +95,7 @@ const NotificationsModal = () => {
             color="new-gray.800"
             borderBottom="2px solid transparent"
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+            paddingBottom="17px"
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
             {checkInNotificationCount > 0 && (
