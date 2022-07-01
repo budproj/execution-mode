@@ -23,8 +23,8 @@ export default defineMessages<LastUpdateTextMessage>({
   },
 
   emptyStateMessage: {
-    defaultMessage: 'Nenhuma atualização recente',
-    id: '1HBRw6',
+    defaultMessage: 'Nenhum check-in realizado',
+    id: '8Ay4MQ',
     description: 'This label is displayed if we do not have any update date to display',
   },
 })
