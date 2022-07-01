@@ -9,6 +9,9 @@ query GET_KEYRESULTS_FOR_NOTIFICATIONS {
           isOutdated
           latestCheckIn {
             createdAt
+             user {
+              fullName
+            }
           }
         }
       }

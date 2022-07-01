@@ -26,18 +26,31 @@ const NotificationKeyResult = ({
     ? new Date(keyResult?.status?.latestCheckIn?.createdAt)
     : undefined
 
-  const updateTextColor = keyResult?.status?.isOutdated ? 'red.500' : 'gray.300'
+  const updateTextColor = keyResult?.status?.latestCheckIn
+    ? keyResult?.status?.isOutdated
+      ? 'red.500'
+      : 'gray.300'
+    : 'red.500'
+
+  console.log({ keyResult })
 
   return (
     <>
-      <Divider />
-      <Flex padding="18px 0px">
+      <Divider borderColor="new-gray.400" />
+      <Flex padding="18px 0px" alignItems="center">
         <Box marginRight="20px">
-          <KeyResultDynamicIcon borderRadius="8px" boxSize="40px" title={keyResult.title} />
+          <KeyResultDynamicIcon
+            borderRadius="8px"
+            boxSize="40px"
+            iconSize="20px"
+            title={keyResult.title}
+          />
         </Box>
 
         <Box flex="1">
-          <Text fontWeight="500">{keyResult.title}</Text>
+          <Text fontWeight="500" color="new-gray.900">
+            {keyResult.title}
+          </Text>
           <Flex alignItems="center">
             <UpdateIcon
               isOutdated={keyResult.status.latestCheckIn ? keyResult.status.isOutdated : true}
@@ -47,14 +60,19 @@ const NotificationKeyResult = ({
               prefix={intl.formatMessage(messages.lastCheckInPrefix)}
               date={lastUpdateDate}
               color={updateTextColor}
+              author={
+                isKeyResultOutdated ? undefined : keyResult.status.latestCheckIn?.user.fullName
+              }
             />
           </Flex>
         </Box>
         <Box>
           {isKeyResultOutdated && (
             <Button
-              backgroundColor="brand.50"
-              padding="10px 15px"
+              marginLeft={10}
+              variant="solid"
+              padding="7px 13px"
+              fontSize={12}
               label={intl.formatMessage(messages.checkInButton)}
               onClick={() => handleClick(keyResult.id)}
             />

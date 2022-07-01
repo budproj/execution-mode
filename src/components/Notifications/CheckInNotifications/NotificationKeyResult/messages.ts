@@ -9,8 +9,8 @@ export default defineMessages<ExploreTeamPageMessage>({
     description: 'the prefix that is displayed in the last update checkmark.',
   },
   checkInButton: {
-    defaultMessage: 'Fazer check-in',
-    id: 'wjOjlb',
+    defaultMessage: 'Check-in',
+    id: 'VLU792',
     description:
       'The title of the button to create a check-in in the check-in notifications tab, when clicked it opens the key result drawer.',
   },
