@@ -22,6 +22,29 @@ const StyledTab = styled(Tab)`
   }
 `
 
+const ScrollablePanel = styled(TabPanel)`
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    margin: 2px 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #e8eefc;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #d9e2f6;
+  }
+`
+
 const NotificationsModal = () => {
   const intl = useIntl()
 
@@ -53,10 +76,16 @@ const NotificationsModal = () => {
         </TabList>
         <Divider borderColor="gray.100" />
 
-        <TabPanels p="0 10px 10px 10px">
-          <TabPanel textAlign="center">
+        <TabPanels
+          padding={0}
+          margin={0}
+          display="flex"
+          alignItems="flex-start"
+          justifyContent="center"
+        >
+          <ScrollablePanel justifyContent="center" textAlign="center" maxH="70vh" width={480}>
             <NotificationsList />
-          </TabPanel>
+          </ScrollablePanel>
           <TabPanel>{/* here: CheckIn-Notifications-Component */}</TabPanel>
         </TabPanels>
       </Tabs>
