@@ -25,7 +25,7 @@ const SupportButton = () => {
               <BuoyIcon
                 fill="gray.500"
                 stroke="gray.500"
-                w={5}
+                w="22px"
                 h="auto"
                 desc={intl.formatMessage(messages.iconDesc)}
               />
