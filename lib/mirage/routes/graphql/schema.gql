@@ -1,15 +1,3 @@
-# lint-disable fields-are-camel-cased
-
-# lint-disable input-object-fields-sorted-alphabetically
-# lint-disable enum-values-sorted-alphabetically
-# lint-disable type-fields-sorted-alphabetically
-
-# lint-disable input-object-values-have-descriptions
-# lint-disable types-have-descriptions
-# lint-disable fields-have-descriptions
-# lint-disable arguments-have-descriptions
-# lint-disable enum-values-have-descriptions
-
 # Defines the resource policies for a given node. You can use it to build read/update/delete logic on your application
 type NodePolicy {
   read: Effect!
@@ -23,16 +11,57 @@ enum Effect {
   DENY
 }
 
+# A workspace is basically a team that has no parents
+type Workspace implements NodeInterface & GuardedNodeInterface {
+  # The ID of this node
+  id: ID!
+
+  # The creation date of the entity
+  createdAt: DateTime!
+  policy: NodePolicy!
+}
+
+# A node represents an unit in our edge list
+interface NodeInterface {
+  # The ID of this node
+  id: ID!
+
+  # The creation date of the entity
+  createdAt: DateTime!
+}
+
+# A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+scalar DateTime
+
+# A guarded node is like a common node, but with an extra policy field
+interface GuardedNodeInterface implements NodeInterface {
+  # The ID of this node
+  id: ID!
+
+  # The creation date of the entity
+  createdAt: DateTime!
+  policy: NodePolicy!
+}
+
+# Defines the resource policies for a given resource. You can use it to build create/read/update/delete logic on your application
+type ResourcePolicy {
+  create: Effect!
+  read: Effect!
+  update: Effect!
+  delete: Effect!
+}
+
 # Defines all user permissions for each entity in our domain
 type Permissions {
-  user: NodePolicy!
-  team: NodePolicy!
-  cycle: NodePolicy!
-  objective: NodePolicy!
-  keyResult: NodePolicy!
-  keyResultCheckIn: NodePolicy!
-  keyResultComment: NodePolicy!
-  keyResultCustomList: NodePolicy!
+  user: ResourcePolicy!
+  team: ResourcePolicy!
+  cycle: ResourcePolicy!
+  objective: ResourcePolicy!
+  keyResult: ResourcePolicy!
+  keyResultCheckIn: ResourcePolicy!
+  keyResultComment: ResourcePolicy!
+  keyResultCustomList: ResourcePolicy!
+  workspace: ResourcePolicy!
 }
 
 # Defines the resource policy for a given connection. You can use it to build create access logic on your application
@@ -53,6 +82,67 @@ type PageInfo {
 
   # The cursor ID of the last element in our nodes list
   endCursor: String
+}
+
+# A setting is a record that customizes a given user preferences
+type UserSetting implements NodeInterface & GuardedNodeInterface {
+  # The ID of this node
+  id: ID!
+
+  # The creation date of the entity
+  createdAt: DateTime!
+  policy: NodePolicy!
+
+  # The key of the setting
+  key: UserSettingKey!
+
+  # The value of this setting
+  value: String!
+
+  # The ID of the user attached to this setting
+  userId: ID!
+
+  # The user attached to this setting
+  user: User!
+}
+
+# The key of a given setting for a user
+enum UserSettingKey {
+  LOCALE
+}
+
+# This edge represents the relation between users and their settings
+type UserSettingEdge implements EdgeInterface {
+  # The cursor value of this node
+  cursor: String
+  node: UserSetting!
+}
+
+# An edge is used for proper pagination in nodes
+interface EdgeInterface {
+  # The cursor value of this node
+  cursor: String
+}
+
+# A list containing a given user settings based on the provided filters and arguments
+type UserSettingsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
+  parentNodeId: ID!
+  policy: ConnectionPolicy!
+  edges: [UserSettingEdge!]!
+}
+
+# This interface wraps all list connections from our schema
+interface ConnectionInterface {
+  pageInfo: PageInfo!
+  parentNodeId: ID!
+}
+
+# A guarded connection is like a common connection, but with an extra policy field
+interface GuardedConnectionInterface implements ConnectionInterface {
+  pageInfo: PageInfo!
+  parentNodeId: ID!
+  policy: ConnectionPolicy!
 }
 
 # The delta of an entity. In this key you're going to find the difference bet this entity and a given previous snapshot of it
@@ -76,36 +166,19 @@ type KeyResultCheckInDelta {
   value: Float!
 }
 
-# This edge represents the relation between ObjectivesConnection and their support TeamsConnection
+# This edge represents the relation between objectives and their support teams
 type ObjectiveTeamEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
   node: Team!
 }
 
-# An edge is used for proper pagination in nodes
-interface EdgeInterface {
-  # The cursor value of this node
-  cursor: String
-}
-
-# A list containing a given objective support TeamsConnection based on the provided filters and arguments
+# A list containing a given objective support teams based on the provided filters and arguments
 type ObjectiveTeamsConnection implements ConnectionInterface & GuardedConnectionInterface {
   pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [ObjectiveTeamEdge!]!
-}
-
-# This interface wraps all list connections from our schema
-interface ConnectionInterface {
-  parentNodeId: ID!
-}
-
-# A guarded connection is like a common connection, but with an extra policy field
-interface GuardedConnectionInterface implements ConnectionInterface {
-  parentNodeId: ID!
-  policy: ConnectionPolicy!
 }
 
 # The current status of an entity. By status we mean progress, confidence, and other reported values from it's children
@@ -129,10 +202,7 @@ type Status {
   latestCheckIn: KeyResultCheckIn
 }
 
-# A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-scalar DateTime
-
-# This edge represents the relation between ObjectivesConnection and their key-results
+# This edge represents the relation between objectives and their key-results
 type ObjectiveKeyResultEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -166,7 +236,7 @@ type Objective implements NodeInterface & GuardedNodeInterface {
   cycleId: ID!
 
   # The team ID that owns this objective
-  teamId: ID!
+  teamId: ID
 
   # The user ID that owns this objective
   ownerId: ID!
@@ -227,25 +297,6 @@ type Objective implements NodeInterface & GuardedNodeInterface {
   ): ObjectiveTeamsConnection
 }
 
-# A node represents an unit in our edge list
-interface NodeInterface {
-  # The ID of this node
-  id: ID!
-
-  # The creation date of the entity
-  createdAt: DateTime!
-}
-
-# A guarded node is like a common node, but with an extra policy field
-interface GuardedNodeInterface implements NodeInterface {
-  # The ID of this node
-  id: ID!
-
-  # The creation date of the entity
-  createdAt: DateTime!
-  policy: NodePolicy!
-}
-
 # Defines the default expected order for a given entity
 input DefaultOrderInput {
   # Defines the expected order for the createdAt attribute
@@ -277,6 +328,64 @@ type KeyResultKeyResultCheckInsConnection implements ConnectionInterface & Guard
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [KeyResultKeyResultCheckInEdge!]!
+}
+
+# A check mark in a given key result
+type KeyResultCheckMark implements NodeInterface & GuardedNodeInterface {
+  # The ID of this node
+  id: ID!
+
+  # The creation date of the entity
+  createdAt: DateTime!
+  policy: NodePolicy!
+
+  # The state of check mark
+  state: String!
+
+  # The text description of a check mark
+  description: String!
+
+  # last time the check mark was updated
+  updatedAt: DateTime!
+
+  # The ID of the key result this check mark belongs to
+  keyResultId: ID!
+
+  # The ID of the user who created this check mark
+  userId: ID!
+
+  # The ID of the user this check mark is assigned to
+  assignedUserId: ID!
+
+  # The key result that this check mark relates to
+  keyResult: KeyResult!
+
+  # The user that created this check mark
+  user: User!
+  assignedUser: User!
+}
+
+# The edge for our key-result query interface
+type KeyResultKeyResultCheckMarkEdge implements EdgeInterface {
+  # The cursor value of this node
+  cursor: String
+  node: KeyResultCheckMark!
+}
+
+# An object containing information about how many check items are checked in a checklist
+type CheckMarkProgress {
+  numberOfChecked: Float!
+  progress: Float!
+  total: Float!
+}
+
+# A list containing key-results check marks based on the provided filters and arguments
+type KeyResultKeyResultCheckListConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
+  parentNodeId: ID!
+  policy: ConnectionPolicy!
+  edges: [KeyResultKeyResultCheckMarkEdge!]!
+  progress: CheckMarkProgress!
 }
 
 # A comment in a given key result
@@ -318,6 +427,62 @@ type KeyResultKeyResultCommentsConnection implements ConnectionInterface & Guard
   edges: [KeyResultKeyResultCommentEdge!]!
 }
 
+# The edge for our users support team query interface
+type KeyResultKeyResultSupportTeamEdge implements EdgeInterface {
+  # The cursor value of this node
+  cursor: String
+  node: User!
+}
+
+# A list containing users support team based on the provided filters and arguments
+type KeyResultKeyResultSupportTeamConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
+  parentNodeId: ID!
+  policy: ConnectionPolicy!
+  edges: [KeyResultKeyResultSupportTeamEdge!]!
+}
+
+# This object represents a progress record for a given key-result
+type KeyResultProgressRecord implements NodeInterface {
+  # The ID of this node
+  id: ID!
+
+  # The creation date of the entity
+  createdAt: DateTime!
+
+  # The update date of the progress record
+  updatedAt: DateTime!
+
+  # The progress of this record
+  progress: Float!
+
+  # The ID of the key-result associated to this progress record
+  keyResultId: ID!
+
+  # The ID of the key-result check-in associated to this progress record
+  keyResultCheckInId: ID!
+
+  # The date of the progress record report
+  date: DateTime!
+  keyResultCheckIn: KeyResultCheckIn!
+  keyResult: KeyResult!
+}
+
+# The edge for our key-result progress history query interface
+type KeyResultProgressHistoryEdge implements EdgeInterface {
+  # The cursor value of this node
+  cursor: String
+  node: KeyResultProgressRecord!
+}
+
+# A list containing key-result progress records based on the provided filters and arguments
+type KeyResultProgressHistoryConnectionConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
+  parentNodeId: ID!
+  policy: ConnectionPolicy!
+  edges: [KeyResultProgressHistoryEdge!]!
+}
+
 # The edge for our key-result timeline query interface
 type KeyResultTimelineEdge implements EdgeInterface {
   # The cursor value of this node
@@ -329,6 +494,7 @@ union KeyResultTimelineEntryUnion = KeyResultCheckIn | KeyResultComment
 
 # A list with a given key-result timeline based on the provided filters and arguments
 type KeyResultTimelineConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [KeyResultTimelineEdge!]!
@@ -368,7 +534,7 @@ type KeyResult implements NodeInterface & GuardedNodeInterface {
   objectiveId: ID!
 
   # The team ID that this key result belongs to
-  teamId: ID!
+  teamId: ID
 
   # The description explaining the key result
   description: String
@@ -380,6 +546,25 @@ type KeyResult implements NodeInterface & GuardedNodeInterface {
     date: DateTime
   ): Status!
   delta: Delta!
+  supportTeamMembers(
+    # The ID of the node you want to filter in your query
+    id: ID
+
+    # Define the expected order for our key-result edges
+    order: DefaultOrderInput = { createdAt: ASC }
+
+    # Paginate first
+    first: Int = 20
+
+    # Paginate last
+    last: Int
+
+    # Paginate after opaque cursor
+    after: String
+
+    # Paginate before opaque cursor
+    before: String
+  ): KeyResultKeyResultSupportTeamConnection!
   keyResultComments(
     # The ID of the node you want to filter in your query
     id: ID
@@ -443,6 +628,50 @@ type KeyResult implements NodeInterface & GuardedNodeInterface {
     # Define the expected order for our connection edges
     order: DefaultOrderInput = { createdAt: DESC }
   ): KeyResultTimelineConnection!
+  checkList(
+    # The ID of the node you want to filter in your query
+    id: ID
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+
+    # Paginate first
+    first: Int = 20
+
+    # Paginate last
+    last: Int
+
+    # Paginate after opaque cursor
+    after: String
+
+    # Paginate before opaque cursor
+    before: String
+
+    # Fetches key-result checklist created by a given user
+    userId: ID
+
+    # If true, show only check marks assigned to the user
+    onlyAssignedToMe: Boolean = false
+  ): KeyResultKeyResultCheckListConnection!
+  progressHistory(
+    # Paginate first
+    first: Int = 20
+
+    # Paginate last
+    last: Int
+
+    # Paginate after opaque cursor
+    after: String
+
+    # Paginate before opaque cursor
+    before: String
+
+    # The ID of the node you want to filter in your query
+    id: ID
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+  ): KeyResultProgressHistoryConnectionConnection!
 }
 
 # Each format represents how our user wants to see the metrics of the key result
@@ -489,7 +718,7 @@ type KeyResultCheckIn implements NodeInterface & GuardedNodeInterface {
   parent: KeyResultCheckIn
 }
 
-# This edge represents the relation between UsersConnection and their key-results
+# This edge represents the relation between users and their key-results
 type UserKeyResultCheckInEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -504,7 +733,7 @@ type UserKeyResultCheckInsConnection implements ConnectionInterface & GuardedCon
   edges: [UserKeyResultCheckInEdge!]!
 }
 
-# This edge represents the relation between UsersConnection and their key-results
+# This edge represents the relation between users and their key-results
 type UserKeyResultCommentEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -513,12 +742,13 @@ type UserKeyResultCommentEdge implements EdgeInterface {
 
 # A list containing a given user key-results based on the provided filters and arguments
 type UserKeyResultCommentsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [UserKeyResultCommentEdge!]!
 }
 
-# This edge represents the relation between UsersConnection and their key-results
+# This edge represents the relation between users and their key-results
 type UserKeyResultEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -533,14 +763,14 @@ type UserKeyResultsConnection implements ConnectionInterface & GuardedConnection
   edges: [UserKeyResultEdge!]!
 }
 
-# This edge represents the relation between UsersConnection and their ObjectivesConnection
+# This edge represents the relation between users and their objectives
 type UserObjectiveEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
   node: Objective!
 }
 
-# A list containing a given user ObjectivesConnection based on the provided filters and arguments
+# A list containing a given user objectives based on the provided filters and arguments
 type UserObjectivesConnection implements ConnectionInterface & GuardedConnectionInterface {
   pageInfo: PageInfo!
   parentNodeId: ID!
@@ -548,22 +778,60 @@ type UserObjectivesConnection implements ConnectionInterface & GuardedConnection
   edges: [UserObjectiveEdge!]!
 }
 
-# This edge represents the relation between UsersConnection and their TeamsConnection
+# Task is an entity inside a given user. It is used by the user to organize his/her day.
+type Task implements NodeInterface & GuardedNodeInterface {
+  # The ID of this node
+  id: ID!
+
+  # The creation date of the entity
+  createdAt: DateTime!
+  policy: NodePolicy!
+
+  # The state of the task
+  state: String!
+
+  # The text description of the task
+  description: String!
+
+  # The ID of the user who the task is assigned to
+  assignedUserId: ID!
+
+  # The user this task is assigned to
+  assignedUser: User!
+}
+
+# This edge represents the relation between users and their key-results
+type UserTasksEdge implements EdgeInterface {
+  # The cursor value of this node
+  cursor: String
+  node: Task!
+}
+
+# A list containing a given user tasks based on the provided filters and arguments
+type UserTasksConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
+  parentNodeId: ID!
+  policy: ConnectionPolicy!
+  edges: [UserTasksEdge!]!
+}
+
+# This edge represents the relation between users and their teams
 type UserTeamEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
   node: Team!
 }
 
-# A list containing a given user TeamsConnection based on the provided filters and arguments
+# A list containing a given user teams based on the provided filters and arguments
 type UserTeamsConnection implements ConnectionInterface & GuardedConnectionInterface {
   pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [UserTeamEdge!]!
+  quantities: QuantityNode!
 }
 
-# User is an entity inside a given root team (a.k.a. company). It is associated with many TeamsConnection, progress reports, and others.
+# User is an entity inside a given root team (a.k.a. company). It is associated with many teams, progress reports, and others.
 type User implements NodeInterface & GuardedNodeInterface {
   # The ID of this node
   id: ID!
@@ -577,6 +845,9 @@ type User implements NodeInterface & GuardedNodeInterface {
 
   # The user e-mail
   email: String!
+
+  # The status of this user
+  status: UserStatus!
 
   # The sub field in Auth0 (their ID)
   authzSub: String!
@@ -699,15 +970,24 @@ type User implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # If you set this argument to true or false it will only fetch active or non-active ObjectivesConnection. Leave it null if you want both
-    active: Boolean = true
+    # If you set this argument to true or false it will only fetch active or non-active objectives. Leave it null if you want both
+    active: Boolean
+
+    # If you set this argument to a user id, it will fetch its objectives. Leave null if you want all objectives.
+    ownerId: ID
+
+    # If you set this argument with a team id, it will fetch team related objectives. Leave null if you want all goals or set the id to null if you want objectives without team id.
+    teamId: ID
   ): UserObjectivesConnection
   keyResults(
+    # The user ID that should owns the key results you are trying to fetch
+    ownerId: ID
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+
     # The ID of the node you want to filter in your query
     id: ID
-
-    # Define the expected order for our key-result edges
-    order: DefaultOrderInput = { createdAt: ASC }
 
     # Paginate first
     first: Int = 20
@@ -721,8 +1001,17 @@ type User implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # The user ID that should owns the key results you are trying to fetch
-    ownerId: ID
+    # A flag that defines if we should fetch only active key-results for this user
+    active: Boolean = true
+
+    # A flag that defines if we should fetch only key-results that contains checkmarks of this user
+    hasUserCheckMarks: Boolean
+
+    # Define the confidence of the key results
+    confidence: String
+
+    # A flag that defines if we should fetch only key-results from a company
+    onlyKeyResultsFromCompany: Boolean
   ): UserKeyResultsConnection
   keyResultComments(
     # The ID of the node you want to filter in your query
@@ -768,15 +1057,68 @@ type User implements NodeInterface & GuardedNodeInterface {
     # Fetches key-result comments from a given user
     userId: ID
   ): UserKeyResultCheckInsConnection
+  tasks(
+    # The ID of the node you want to filter in your query
+    id: ID
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+
+    # Paginate first
+    first: Int = 20
+
+    # Paginate last
+    last: Int
+
+    # Paginate after opaque cursor
+    after: String
+
+    # Paginate before opaque cursor
+    before: String
+
+    # A filter to query only tasks that are completed
+    onlyUnchecked: Boolean = false
+  ): UserTasksConnection
+  settings(
+    # The ID of the node you want to filter in your query
+    id: ID
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+
+    # Paginate first
+    first: Int = 20
+
+    # Paginate last
+    last: Int
+
+    # Paginate after opaque cursor
+    after: String
+
+    # Paginate before opaque cursor
+    before: String
+
+    # A specific key you want to query from user settings
+    keys: [UserSettingKey!]
+  ): UserSettingsConnection
+  authzRole: UserRoleObject!
+  quarterlyProgress: UserReportProgressObject
+  yearlyProgress: UserReportProgressObject
 }
 
-# Each gender represents a possible gender option for our UsersConnection
+# Each status represents a status for our users
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+# Each gender represents a possible gender option for our users
 enum UserGender {
   MALE
   FEMALE
 }
 
-# This edge represents the relation between TeamsConnection and their CyclesConnection
+# This edge represents the relation between teams and their cycles
 type TeamCycleEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -791,7 +1133,7 @@ type TeamCyclesConnection implements ConnectionInterface & GuardedConnectionInte
   edges: [TeamCycleEdge!]!
 }
 
-# This edge represents the relation between TeamsConnection and their key-results
+# This edge represents the relation between teams and their key-results
 type TeamKeyResultEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -806,7 +1148,7 @@ type TeamKeyResultsConnection implements ConnectionInterface & GuardedConnection
   edges: [TeamKeyResultEdge!]!
 }
 
-# This edge represents the relation between TeamsConnection and their ObjectivesConnection
+# This edge represents the relation between teams and their objectives
 type TeamObjectiveEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -814,13 +1156,14 @@ type TeamObjectiveEdge implements EdgeInterface {
 }
 
 # A list containing a given user key-results based on the provided filters and arguments
-type TeamObjectives implements ConnectionInterface & GuardedConnectionInterface {
+type TeamObjectivesConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [TeamObjectiveEdge!]!
 }
 
-# This edge represents the relation between TeamsConnection and their UsersConnection
+# This edge represents the relation between teams and their users
 type TeamTeamEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -835,7 +1178,7 @@ type TeamTeamsConnection implements ConnectionInterface & GuardedConnectionInter
   edges: [TeamTeamEdge!]!
 }
 
-# This edge represents the relation between TeamsConnection and their UsersConnection
+# This edge represents the relation between teams and their users
 type TeamUserEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -850,7 +1193,7 @@ type TeamUsersConnection implements ConnectionInterface & GuardedConnectionInter
   edges: [TeamUserEdge!]!
 }
 
-# A collection of UsersConnection. It can be either inside another team, or a root team (a.k.a. company)
+# A collection of users. It can be either inside another team, or a root team (a.k.a. company)
 type Team implements NodeInterface & GuardedNodeInterface {
   # The ID of this node
   id: ID!
@@ -898,8 +1241,14 @@ type Team implements NodeInterface & GuardedNodeInterface {
   parent: Team
   tacticalCycle: Cycle
   users(
-    # Define the expected order for our UsersConnection connection edges
+    # Define the expected order for our users connection edges
     order: UserOrderInput = { firstName: ASC }
+
+    # Define if the query should return only users with individual objectives
+    onlyWithIndividualObjectives: Boolean
+
+    # Define if the query should return only active users or not
+    withInactives: Boolean
 
     # The ID of the node you want to filter in your query
     id: ID
@@ -916,7 +1265,7 @@ type Team implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # Define if we should resolve the entire team tree, showing all UsersConnection below that team and subteams
+    # Define if we should resolve the entire team tree, showing all users below that team and subteams
     resolveTree: Boolean = true
   ): TeamUsersConnection
   teams(
@@ -988,7 +1337,7 @@ type Team implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # If this flag is true, it will only fetch active CyclesConnection
+    # If this flag is true, it will only fetch active cycles
     active: Boolean
 
     # This key filters all queries to a given cadence
@@ -1013,9 +1362,15 @@ type Team implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # If you set this argument to true or false it will only fetch active or non-active ObjectivesConnection. Leave it null if you want both
-    active: Boolean = true
-  ): TeamObjectives
+    # If you set this argument to true or false it will only fetch active or non-active objectives. Leave it null if you want both
+    active: Boolean
+
+    # If you set this argument to a user id, it will fetch its objectives. Leave null if you want all objectives.
+    ownerId: ID
+
+    # If you set this argument with a team id, it will fetch team related objectives. Leave null if you want all goals or set the id to null if you want objectives without team id.
+    teamId: ID
+  ): TeamObjectivesConnection
   supportObjectives(
     # The ID of the node you want to filter in your query
     id: ID
@@ -1035,9 +1390,15 @@ type Team implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # If you set this argument to true or false it will only fetch active or non-active ObjectivesConnection. Leave it null if you want both
-    active: Boolean = true
-  ): TeamObjectives
+    # If you set this argument to true or false it will only fetch active or non-active objectives. Leave it null if you want both
+    active: Boolean
+
+    # If you set this argument to a user id, it will fetch its objectives. Leave null if you want all objectives.
+    ownerId: ID
+
+    # If you set this argument with a team id, it will fetch team related objectives. Leave null if you want all goals or set the id to null if you want objectives without team id.
+    teamId: ID
+  ): TeamObjectivesConnection
   allObjectives(
     # The ID of the node you want to filter in your query
     id: ID
@@ -1057,15 +1418,24 @@ type Team implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # If you set this argument to true or false it will only fetch active or non-active ObjectivesConnection. Leave it null if you want both
-    active: Boolean = true
-  ): TeamObjectives
+    # If you set this argument to true or false it will only fetch active or non-active objectives. Leave it null if you want both
+    active: Boolean
+
+    # If you set this argument to a user id, it will fetch its objectives. Leave null if you want all objectives.
+    ownerId: ID
+
+    # If you set this argument with a team id, it will fetch team related objectives. Leave null if you want all goals or set the id to null if you want objectives without team id.
+    teamId: ID
+  ): TeamObjectivesConnection
   keyResults(
+    # The user ID that should owns the key results you are trying to fetch
+    ownerId: ID
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+
     # The ID of the node you want to filter in your query
     id: ID
-
-    # Define the expected order for our key-result edges
-    order: DefaultOrderInput = { createdAt: ASC }
 
     # Paginate first
     first: Int = 20
@@ -1079,12 +1449,21 @@ type Team implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # The user ID that should owns the key results you are trying to fetch
-    ownerId: ID
+    # A flag that defines if we should fetch only active key-results for this user
+    active: Boolean = true
+
+    # A flag that defines if we should fetch only key-results that contains checkmarks of this user
+    hasUserCheckMarks: Boolean
+
+    # Define the confidence of the key results
+    confidence: String
+
+    # A flag that defines if we should fetch only key-results from a company
+    onlyKeyResultsFromCompany: Boolean
   ): TeamKeyResultsConnection
 }
 
-# Each gender represents a possible gender option for our TeamsConnection
+# Each gender represents a possible gender option for our teams
 enum TeamGender {
   MALE
   FEMALE
@@ -1096,10 +1475,10 @@ input CycleAttributesInput {
   # The period of the cycle
   period: String
 
-  # The candence of this cycle. Cadence is the frequency at which previous ObjectivesConnection have to be grade and new ones created.
+  # The candence of this cycle. Cadence is the frequency at which previous objectives have to be grade and new ones created.
   cadence: Cadence
 
-  # This flag defines if ObjectivesConnection related to this cycle can be updated
+  # This flag defines if objectives related to this cycle can be updated
   active: Boolean
 
   # The date that this cycle starts
@@ -1118,7 +1497,7 @@ input CycleAttributesInput {
   parentId: ID
 }
 
-# Each cadence represents a period of time in which your CyclesConnection can be created
+# Each cadence represents a period of time in which your cycles can be created
 enum Cadence {
   YEARLY
   QUARTERLY
@@ -1137,7 +1516,7 @@ type ObjectiveRootEdge implements EdgeInterface {
   node: Objective!
 }
 
-# A list containing ObjectivesConnection based on the provided filters and arguments
+# A list containing objectives based on the provided filters and arguments
 type ObjectivesConnection implements ConnectionInterface & GuardedConnectionInterface {
   pageInfo: PageInfo!
   parentNodeId: ID!
@@ -1145,7 +1524,7 @@ type ObjectivesConnection implements ConnectionInterface & GuardedConnectionInte
   edges: [ObjectiveRootEdge!]!
 }
 
-# This edge represents the relation between CyclesConnection and their key-results
+# This edge represents the relation between cycles and their key-results
 type CycleKeyResultEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -1160,7 +1539,7 @@ type CycleKeyResultsConnection implements ConnectionInterface & GuardedConnectio
   edges: [CycleKeyResultEdge!]!
 }
 
-# A collection of UsersConnection. It can be either inside another team, or a root team (a.k.a. company)
+# A collection of users. It can be either inside another team, or a root team (a.k.a. company)
 type Cycle implements NodeInterface & GuardedNodeInterface {
   # The ID of this node
   id: ID!
@@ -1172,10 +1551,10 @@ type Cycle implements NodeInterface & GuardedNodeInterface {
   # The period of the cycle
   period: String!
 
-  # The candence of this cycle. Cadence is the frequency at which previous ObjectivesConnection have to be grade and new ones created.
+  # The candence of this cycle. Cadence is the frequency at which previous objectives have to be grade and new ones created.
   cadence: Cadence!
 
-  # This flag defines if ObjectivesConnection related to this cycle can be updated
+  # This flag defines if objectives related to this cycle can be updated
   active: Boolean!
 
   # The date that this cycle starts
@@ -1218,7 +1597,7 @@ type Cycle implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # If this flag is true, it will only fetch active CyclesConnection
+    # If this flag is true, it will only fetch active cycles
     active: Boolean
 
     # This key filters all queries to a given cadence
@@ -1243,8 +1622,14 @@ type Cycle implements NodeInterface & GuardedNodeInterface {
     # Paginate before opaque cursor
     before: String
 
-    # If you set this argument to true or false it will only fetch active or non-active ObjectivesConnection. Leave it null if you want both
-    active: Boolean = true
+    # If you set this argument to true or false it will only fetch active or non-active objectives. Leave it null if you want both
+    active: Boolean
+
+    # If you set this argument to a user id, it will fetch its objectives. Leave null if you want all objectives.
+    ownerId: ID
+
+    # If you set this argument with a team id, it will fetch team related objectives. Leave null if you want all goals or set the id to null if you want objectives without team id.
+    teamId: ID
   ): ObjectivesConnection
   keyResults(
     # The ID of the node you want to filter in your query
@@ -1270,7 +1655,7 @@ type Cycle implements NodeInterface & GuardedNodeInterface {
   ): CycleKeyResultsConnection
 }
 
-# This edge represents the relation between CyclesConnection and their UsersConnection
+# This edge represents the relation between cycles and their users
 type CycleCycleEdge implements EdgeInterface {
   # The cursor value of this node
   cursor: String
@@ -1292,12 +1677,18 @@ type CycleRootEdge implements EdgeInterface {
   node: Cycle!
 }
 
-# A list containing CyclesConnection based on the provided filters and arguments
+# A list containing cycles based on the provided filters and arguments
 type CyclesConnection implements ConnectionInterface & GuardedConnectionInterface {
   pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [CycleRootEdge!]!
+}
+
+# The delete result from a delete mutation
+type DeleteResult {
+  # The amount of entities removed
+  affected: Int!
 }
 
 # The edge for our key-result comment query interface
@@ -1313,12 +1704,6 @@ type KeyResultCheckInsConnection implements ConnectionInterface & GuardedConnect
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [KeyResultCheckInRootEdge!]!
-}
-
-# The delete result from a delete mutation
-type DeleteResult {
-  # The amount of entities removed
-  affected: Int!
 }
 
 # The edge for our key-result comment query interface
@@ -1351,19 +1736,13 @@ type KeyResultsConnection implements ConnectionInterface & GuardedConnectionInte
   edges: [KeyResultRootEdge!]!
 }
 
-# The edge for our team query interface
-type TeamRootEdge implements EdgeInterface {
-  # The cursor value of this node
-  cursor: String
-  node: Team!
-}
-
-# A list containing TeamsConnection based on the provided filters and arguments
-type TeamsConnection implements ConnectionInterface & GuardedConnectionInterface {
-  pageInfo: PageInfo!
-  parentNodeId: ID!
-  policy: ConnectionPolicy!
-  edges: [TeamRootEdge!]!
+type QuantityNode {
+  keyResultsQuantity: Float!
+  objectivesQuantity: Float!
+  high: Float!
+  medium: Float!
+  low: Float!
+  barrier: Float!
 }
 
 # The edge for our user query interface
@@ -1373,12 +1752,40 @@ type UserRootEdge implements EdgeInterface {
   node: User!
 }
 
-# A list containing UsersConnection based on the provided filters and arguments
+# A list containing users based on the provided filters and arguments
 type UsersConnection implements ConnectionInterface & GuardedConnectionInterface {
   pageInfo: PageInfo!
   parentNodeId: ID!
   policy: ConnectionPolicy!
   edges: [UserRootEdge!]!
+}
+
+# An object continaing the progress of a user in a specific cycle type and rather to show it or not
+type UserReportProgressObject {
+  showProgress: Boolean!
+  progress: Float!
+}
+
+# An object continaing the role of the user in the auth0 system.
+type UserRoleObject {
+  id: String
+  name: String
+  description: String
+}
+
+# The edge for our team query interface
+type TeamRootEdge implements EdgeInterface {
+  # The cursor value of this node
+  cursor: String
+  node: Team!
+}
+
+# A list containing teams based on the provided filters and arguments
+type TeamsConnection implements ConnectionInterface & GuardedConnectionInterface {
+  pageInfo: PageInfo!
+  parentNodeId: ID!
+  policy: ConnectionPolicy!
+  edges: [TeamRootEdge!]!
 }
 
 type Query {
@@ -1388,11 +1795,15 @@ type Query {
     id: ID
   ): User!
   me: User!
+  userUserSetting(
+    # The ID of the node you want to get in your query
+    id: ID
+  ): UserSetting!
   users(
     # The ID of the node you want to filter in your query
     id: ID
 
-    # Define the expected order for our UsersConnection connection edges
+    # Define the expected order for our users connection edges
     order: UserOrderInput = { firstName: ASC }
 
     # Paginate first
@@ -1406,6 +1817,12 @@ type Query {
 
     # Paginate before opaque cursor
     before: String
+
+    # Define if the query should return only users with individual objectives
+    onlyWithIndividualObjectives: Boolean
+
+    # Define if the query should return only active users or not
+    withInactives: Boolean
   ): UsersConnection!
   team(
     # The ID of the node you want to get in your query
@@ -1537,15 +1954,21 @@ type Query {
     # Paginate before opaque cursor
     before: String
 
-    # If you set this argument to true or false it will only fetch active or non-active ObjectivesConnection. Leave it null if you want both
-    active: Boolean = true
+    # If you set this argument to true or false it will only fetch active or non-active objectives. Leave it null if you want both
+    active: Boolean
+
+    # If you set this argument to a user id, it will fetch its objectives. Leave null if you want all objectives.
+    ownerId: ID
+
+    # If you set this argument with a team id, it will fetch team related objectives. Leave null if you want all goals or set the id to null if you want objectives without team id.
+    teamId: ID
   ): ObjectivesConnection!
   cycle(
     # The ID of the node you want to get in your query
     id: ID
   ): Cycle!
   cyclesInSamePeriod(
-    # If this flag is true, it will only fetch active CyclesConnection
+    # If this flag is true, it will only fetch active cycles
     active: Boolean
 
     # This key filters all queries to a given cadence
@@ -1591,12 +2014,16 @@ type Query {
     # Paginate before opaque cursor
     before: String
 
-    # If this flag is true, it will only fetch active CyclesConnection
+    # If this flag is true, it will only fetch active cycles
     active: Boolean
 
     # This key filters all queries to a given cadence
     cadence: Cadence
   ): CyclesConnection!
+  workspace(
+    # The ID of the node you want to get in your query
+    id: ID
+  ): Workspace!
 }
 
 # An authorization scope for your resource. It defines the level of permission that the resource needs
@@ -1608,7 +2035,107 @@ enum Scope {
 }
 
 type Mutation {
-  updateUser(id: ID!, data: UserInput!): User!
+  updateUser(id: ID!, data: UserUpdateInput!): User!
+  deactivateUser(id: ID!): User!
+  reactivateUser(id: ID!): User!
+  createUser(data: UserCreateInput!): User!
+  updateUserRole(id: ID!, role: String!): User
+  requestChangeUserPasswordEmail(id: ID!): User
+  createTask(
+    # The ID of the node you want to filter in your query
+    id: ID
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+
+    # Paginate first
+    first: Int = 20
+
+    # Paginate last
+    last: Int
+
+    # Paginate after opaque cursor
+    after: String
+
+    # Paginate before opaque cursor
+    before: String
+
+    # The description of the task being created
+    description: String!
+  ): Task!
+  toggleTask(
+    # The id of the task
+    id: ID!
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+
+    # Paginate first
+    first: Int = 20
+
+    # Paginate last
+    last: Int
+
+    # Paginate after opaque cursor
+    after: String
+
+    # Paginate before opaque cursor
+    before: String
+  ): Task!
+  deleteTask(
+    # The id of the task
+    id: ID!
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+
+    # Paginate first
+    first: Int = 20
+
+    # Paginate last
+    last: Int
+
+    # Paginate after opaque cursor
+    after: String
+
+    # Paginate before opaque cursor
+    before: String
+  ): DeleteResult!
+  updateTaskDescription(
+    # The Id of the task to be updated
+    id: ID
+
+    # Define the expected order for our connection edges
+    order: DefaultOrderInput = { createdAt: DESC }
+
+    # Paginate first
+    first: Int = 20
+
+    # Paginate last
+    last: Int
+
+    # Paginate after opaque cursor
+    after: String
+
+    # Paginate before opaque cursor
+    before: String
+
+    # The description new description of the task
+    description: String
+  ): Task!
+  updateUserSetting(
+    # The ID of the user you are updating settings
+    userID: ID!
+
+    # A specific key you want to change user settings
+    key: UserSettingKey!
+
+    # The value of the new setting
+    value: String!
+  ): UserSetting!
+  addTeamToUser(userID: ID!, teamID: ID!): User!
+  removeTeamFromUser(userID: ID!, teamID: ID!): User!
+  createTeam(data: TeamCreateInput!): Team!
   updateKeyResult(id: ID!, data: KeyResultAttributesInput!): KeyResult!
   createKeyResult(data: KeyResultInput!): KeyResult!
   deleteKeyResult(id: ID!): DeleteResult!
@@ -1617,18 +2144,39 @@ type Mutation {
     # The ID of the key-result comment you want to delete
     id: ID!
   ): DeleteResult!
+  createKeyResultCheckMark(data: KeyResultCheckMarkInput!): KeyResultCheckMark!
+  toggleCheckMark(data: KeyResultCheckMarkToggleInput!): KeyResultCheckMark!
+  updateCheckMarkDescription(
+    id: ID!
+    data: KeyResultCheckMarkUpdateDescriptionInput!
+  ): KeyResultCheckMark!
+  updateCheckMarkAssignee(
+    id: ID!
+    data: KeyResultCheckMarkUpdateAssigneeInput!
+  ): KeyResultCheckMark!
+  deleteCheckMark(id: ID!): DeleteResult!
   createKeyResultCheckIn(data: KeyResultCheckInInput!): KeyResultCheckIn!
   deleteKeyResultCheckIn(
     # The ID of the key-result check-in you want to delete
     id: ID!
   ): DeleteResult!
+  addUserAsSupportTeamToKeyResult(
+    data: KeyResultAddUserToSupportTeamInput!
+  ): KeyResult!
+  removeUserAsSupportTeamToKeyResult(
+    data: KeyResultRemoveUserToSupportTeamInput!
+  ): KeyResult!
   updateObjective(id: ID!, data: ObjectiveAttributesInput!): Objective!
   deleteObjective(id: ID!): DeleteResult!
   createObjective(data: ObjectiveInput!): Objective!
+  createCycle(data: CycleInput!): Cycle!
+  updateCycle(id: ID!, data: CycleAttributesInput!): Cycle!
+  deleteCycle(id: ID!): DeleteResult!
+  createWorkspace(data: WorkspaceCreateInput!): Workspace!
 }
 
-# Data that you can assign to a given user
-input UserInput {
+# Data that you can assign to a given user while updating it
+input UserUpdateInput {
   # The first name of the user
   firstName: String
 
@@ -1649,9 +2197,57 @@ input UserInput {
 
   # The URL for the user's LinkedIn profile
   linkedInProfileAddress: String
+
+  # The gender of the user
+  gender: UserGender
+
+  # The new e-mail for the user
+  email: String
 }
 
 scalar Upload
+
+# Data that you need to provide while creating a new user
+input UserCreateInput {
+  # The first name of the user
+  firstName: String!
+
+  # The last name of the user
+  lastName: String!
+
+  # The role of the user in her/his company
+  role: String
+
+  # The gender of the user
+  gender: UserGender!
+
+  # The e-mail for the user
+  email: String!
+
+  # The ID of the primary team for this user
+  teamID: ID!
+
+  # The locale for this user
+  locale: String
+}
+
+# Data that you need to provide while creating a new user
+input TeamCreateInput {
+  # The name of the team
+  name: String!
+
+  # The description of the team
+  description: String!
+
+  # The description of the team
+  gender: TeamGender!
+
+  # The user id of the team owner
+  ownerID: ID!
+
+  # The id of the parent team
+  parentID: ID!
+}
 
 # Data that you can assign to a given key-result
 input KeyResultAttributesInput {
@@ -1701,7 +2297,7 @@ input KeyResultInput {
   objectiveId: ID!
 
   # The team ID that this key result belongs to
-  teamId: ID!
+  teamId: ID
 
   # The description explaining the key result
   description: String
@@ -1714,6 +2310,33 @@ input KeyResultCommentInput {
 
   # The key result ID related to this comment
   keyResultId: ID!
+}
+
+# The required data to create a new check mark
+input KeyResultCheckMarkInput {
+  # The description of the check mark
+  description: String!
+
+  # The key result ID related to this check mark
+  keyResultId: ID!
+}
+
+# The required data to toggle a check mark
+input KeyResultCheckMarkToggleInput {
+  # The ID of the check mark
+  id: ID!
+}
+
+# The required data to update a check mark description
+input KeyResultCheckMarkUpdateDescriptionInput {
+  # The new description of the check mark
+  description: String!
+}
+
+# The required data to update a check mark assigned user
+input KeyResultCheckMarkUpdateAssigneeInput {
+  # The new user id to assign the check mark
+  assignedUserId: ID!
 }
 
 # The required data to create a new check-in
@@ -1729,6 +2352,24 @@ input KeyResultCheckInInput {
 
   # The comment in your check-in
   comment: String
+}
+
+# Data required to add a user to support team
+input KeyResultAddUserToSupportTeamInput {
+  # The id of the key result
+  keyResultId: ID!
+
+  # The id of the user to be added
+  userId: ID!
+}
+
+# Data required to remove a user to support team
+input KeyResultRemoveUserToSupportTeamInput {
+  # The id of the key result
+  keyResultId: ID!
+
+  # The id of the user to be removed
+  userId: ID!
 }
 
 # Data that you can assign to a given objective
@@ -1759,4 +2400,97 @@ input ObjectiveInput {
 
   # The main team of that objective
   teamId: ID
+}
+
+# Data required to create a new Cycle
+input CycleInput {
+  # The title of the cycle
+  period: String!
+
+  # The cadence of the cycle
+  cadence: Cadence!
+
+  # The type of the cycle
+  active: Boolean!
+
+  # The start date of the cycle
+  dateStart: DateTime!
+
+  # The end date of the cycle
+  dateEnd: DateTime!
+
+  # The team ID that this cycle belongs to
+  teamId: ID!
+
+  # The parent cycle ID of this cycle
+  parentId: String
+}
+
+# Data that you need to provide while creating a new workspace
+input WorkspaceCreateInput {
+  # The root team data of the workspace
+  team: WorkspaceTeamCreateInput!
+
+  # The root user of the workspace
+  user: WorkspaceRootUserCreateInput!
+
+  # The initial yearly cycle of the workspace
+  yearlyCycle: WorkspaceCycleCreateInput!
+
+  # The initial quarterly cycle of the workspace
+  quarterlyCycle: WorkspaceCycleCreateInput!
+
+  # Options to customize the workspace creation
+  options: WorkspaceCreateOptions = { autoInvite: true }
+}
+
+# Data that you need to provide while creating a new team
+input WorkspaceTeamCreateInput {
+  # The name of the team
+  name: String!
+
+  # The description of the team
+  description: String
+
+  # The description of the team
+  gender: TeamGender
+}
+
+# Data that you need to provide while creating a new root user for a new workspace
+input WorkspaceRootUserCreateInput {
+  # The first name of the user
+  firstName: String!
+
+  # The last name of the user
+  lastName: String!
+
+  # The role of the user in her/his company
+  role: String
+
+  # The gender of the user
+  gender: UserGender!
+
+  # The e-mail for the user
+  email: String!
+
+  # The locale for this user
+  locale: String
+}
+
+# Data that you need to provide while creating a new cycle
+input WorkspaceCycleCreateInput {
+  # The period of that cycle
+  period: String!
+
+  # The date that this cycle starts
+  dateStart: DateTime!
+
+  # The date that this cycle ends
+  dateEnd: DateTime!
+}
+
+# Options to customize your workspace creation
+input WorkspaceCreateOptions {
+  # Define if we should automatically invite the new root user
+  autoInvite: Boolean
 }
