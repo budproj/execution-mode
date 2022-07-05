@@ -7,6 +7,8 @@ type EmptyStateMessage =
   | 'emptyBenchAlt'
   | 'checkItem'
   | 'emptyPersonalObjectives'
+  | 'emptyNotificationsList'
+  | 'noMoreNotificationsToListing'
 
 export default defineMessages<EmptyStateMessage>({
   workingTeamAlt: {
@@ -44,5 +46,17 @@ export default defineMessages<EmptyStateMessage>({
     defaultMessage: 'Uma mulher analisando gráficos e apontando com um dedo.',
     id: 'XZcPVc',
     description: 'The alternative text explaining the empty item image',
+  },
+
+  emptyNotificationsList: {
+    defaultMessage: 'Uma caixa vazia.',
+    id: 'JKqe2t',
+    description: 'The alternative text explain the empty state message from notifications list.',
+  },
+  noMoreNotificationsToListing: {
+    defaultMessage: 'Uma imagem que representa a ausência de novas notificações.',
+    id: 'XZF51J',
+    description:
+      'The alternative text explain the empty state message when no more notifications to listing.',
   },
 })
