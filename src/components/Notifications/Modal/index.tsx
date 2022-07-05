@@ -7,7 +7,6 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
-import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
@@ -99,13 +98,13 @@ const NotificationsModal = () => {
           <StyledTab
             gap={2}
             color="new-gray.800"
-            _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+            // _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
             paddingBottom="17px"
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
-            {checkInNotificationCount > 0 && (
+            {/* {checkInNotificationCount > 0 && (
               <NotificationBadge notificationCount={checkInNotificationCount} />
-            )}
+            )} */}
           </StyledTab>
         </TabList>
         <Divider borderColor="gray.100" />
