@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { isAfter, startOfWeek, isBefore } from 'date-fns'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -31,10 +31,10 @@ const StyledTab = styled(Tab)`
 const NotificationsModal = () => {
   const intl = useIntl()
 
-  const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
+  // Const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
   const setNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
 
-  const notificationsCount = 0
+  // Const notificationsCount = 0
 
   const [keyResults, setKeyResultEdges, _] = useConnectionEdges<KeyResult>()
 
