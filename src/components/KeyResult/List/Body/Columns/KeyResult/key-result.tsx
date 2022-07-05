@@ -54,7 +54,6 @@ const KeyResultListBodyColumnKeyResult = ({
     ? messages.outdatedUpdateTextPrefix
     : messages.lastUpdateTextPrefix
 
-
   return (
     <KeyResultListBodyColumnBase
       borderRight={withRightBorder ? 1 : 0}

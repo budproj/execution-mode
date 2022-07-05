@@ -1,7 +1,6 @@
 import { IconButton, Popover, PopoverContent, PopoverTrigger, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-
 import { useRecoilValue } from 'recoil'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
@@ -14,7 +13,6 @@ import messages from './messages'
 
 const NotificationsButton = () => {
   const intl = useIntl()
-
 
   const notificationCount = useRecoilValue(notificationCountAtom)
   const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
