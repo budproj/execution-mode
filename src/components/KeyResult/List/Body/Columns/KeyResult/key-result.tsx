@@ -45,11 +45,7 @@ const KeyResultListBodyColumnKeyResult = ({
 
   const isKeyResultLoaded = Boolean(title)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
-  const updateTextColor = status?.latestCheckIn
-    ? status?.isOutdated && !isDisabled
-      ? 'red.500'
-      : 'gray.300'
-    : 'red.500'
+  const updateTextColor = status?.isOutdated && !isDisabled ? 'red.500' : 'gray.300'
   const prefixMessage = status?.isOutdated
     ? messages.outdatedUpdateTextPrefix
     : messages.lastUpdateTextPrefix
