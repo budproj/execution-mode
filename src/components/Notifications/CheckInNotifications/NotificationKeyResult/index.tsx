@@ -29,7 +29,13 @@ const NotificationKeyResult = ({
     ? new Date(keyResult?.status?.latestCheckIn?.createdAt)
     : undefined
 
-  const updateTextColor = keyResult?.status?.isOutdated ? 'red.500' : 'gray.300'
+  const updateTextColor = keyResult?.status?.latestCheckIn
+    ? keyResult?.status?.isOutdated
+      ? 'red.500'
+      : 'gray.300'
+    : 'red.500'
+
+  console.log({ keyResult })
 
   return (
     <>
