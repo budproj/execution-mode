@@ -3,7 +3,7 @@ export const NotificationsMockedArray = [
     id: 'af13fb47-b43d-41bf-a8dd-f8eb000d4401',
     isRead: false,
     type: 'checkin',
-    timestamp: '2022-06-30T08:55:19.578Z',
+    timestamp: 1655048318,
     recipientId: '12312',
     properties: {
       sender: {
@@ -13,7 +13,7 @@ export const NotificationsMockedArray = [
       },
       keyResult: {
         id: '12331',
-        name: 'Transformar o Bud em uma maquina do tempo!',
+        name: 'Aumentar o WAU.',
       },
       previousConfidance: 33,
       newConfidence: -1,
@@ -23,7 +23,7 @@ export const NotificationsMockedArray = [
     id: 'd21cb2a1-6254-4671-baa9-45ca045bf528',
     isRead: true,
     type: 'checkin',
-    timestamp: '2022-06-30T08:55:19.578Z',
+    timestamp: 1656988284,
     recipientId: '12312',
     properties: {
       sender: {
@@ -43,7 +43,7 @@ export const NotificationsMockedArray = [
     id: '7c7c66de-7f2c-4b63-803c-3b045c375b92',
     isRead: false,
     type: 'taskAssign',
-    timestamp: '2022-06-30T08:55:19.578Z',
+    timestamp: 1654396284,
     recipientId: '12312',
     properties: {
       sender: {
@@ -62,7 +62,7 @@ export const NotificationsMockedArray = [
     id: '8ab23df9-8bf1-42df-a3ed-44f6e258a241',
     isRead: false,
     type: 'supportTeam',
-    timestamp: '2022-06-30T08:55:19.578Z',
+    timestamp: 1654655484,
     recipientId: '12312',
     properties: {
       sender: {
@@ -72,7 +72,7 @@ export const NotificationsMockedArray = [
       },
       keyResult: {
         id: '12331',
-        name: 'Transformar o Bud em uma maquina do tempo!',
+        name: 'Integrar com ferramentas de gestão de time.',
       },
     },
   },
@@ -80,7 +80,7 @@ export const NotificationsMockedArray = [
     id: '51abab80-5736-4307-9eb3-49633d89e430',
     isRead: true,
     type: 'taggedInComment',
-    timestamp: '2022-06-30T08:55:19.578Z',
+    timestamp: 1655058684,
     recipientId: '12312',
     properties: {
       sender: {
@@ -90,7 +90,7 @@ export const NotificationsMockedArray = [
       },
       keyResult: {
         id: '12331',
-        name: 'Transformar o Bud em uma maquina do tempo!',
+        name: 'Crescer 20% em número de clientes e ter vendas internacionais de pelo menos R$ 2 milhões',
       },
       comment: {
         id: '12331',
@@ -103,7 +103,7 @@ export const NotificationsMockedArray = [
     id: '839a2830-cb62-4703-bfd3-15fdb10df8fa',
     isRead: false,
     type: 'commentOnKR',
-    timestamp: '2022-06-30T08:55:19.578Z',
+    timestamp: 1655087484,
     recipientId: '12312',
     properties: {
       sender: {
@@ -113,7 +113,7 @@ export const NotificationsMockedArray = [
       },
       keyResult: {
         id: '12331',
-        name: 'Transformar o Bud em uma maquina do tempo!',
+        name: 'Entregar relatória da auditoria do ano anterior.',
       },
       comment: {
         id: '12331',
