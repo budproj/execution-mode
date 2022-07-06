@@ -28,6 +28,28 @@ const StyledTab = styled(Tab)`
   }
 `
 
+const ScrollablePanel = styled(TabPanel)`
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    margin: 12px 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #b5c0db;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #d9e2f7;
+  }
+`
 const NotificationsModal = () => {
   const intl = useIntl()
 
@@ -66,10 +88,14 @@ const NotificationsModal = () => {
     return isAfter(date, startOfTheWeek)
   })
 
-  setNotificationsCount(keyResultsWithNoCheckInThisWeek.length)
+  const notificationsCount = keyResultsWithNoCheckInThisWeek.filter(
+    (keyResult) => keyResult.status.isOutdated,
+  )
+
+  setNotificationsCount(notificationsCount.length)
 
   return (
-    <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px" maxHeight="100vh">
+    <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px">
       <Tabs
         isFitted
         isLazy
@@ -111,12 +137,12 @@ const NotificationsModal = () => {
 
         <TabPanels p="0 10px 10px 10px">
           {/* <TabPanel textAlign="center"> here: Notifications-Component</TabPanel> */}
-          <TabPanel>
+          <ScrollablePanel maxH="70vh" width={480}>
             <CheckInNotifications
               keyResultsUpToDate={keyResultsUpToDate}
               keyResultsWithNoCheckInThisWeek={keyResultsWithNoCheckInThisWeek}
             />
-          </TabPanel>
+          </ScrollablePanel>
         </TabPanels>
       </Tabs>
     </PopoverBody>
