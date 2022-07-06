@@ -2,7 +2,7 @@ export interface NotificationsProperties {
   id?: string
   isRead?: boolean
   type?: string
-  timestamp?: string
+  timestamp: number
   recipientId?: string
   sender?: {
     id: string

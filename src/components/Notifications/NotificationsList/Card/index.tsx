@@ -8,22 +8,18 @@ import CommentNotification from './Comments'
 import ConfidenceCheckin from './ConfidenceCheckIn'
 import SupportTeam from './SupportTeam'
 
-interface CardNotificationProperties extends NotificationsProperties {
-  type: string
-}
-
-const CardNotification = ({ type, ...rest }: CardNotificationProperties) => {
+const CardNotification = ({ type, ...rest }: NotificationsProperties) => {
   switch (type) {
     case 'checkin':
-      return <ConfidenceCheckin {...rest} />
+      return <ConfidenceCheckin type={type} {...rest} />
     case 'taskAssign':
       return <AssignedTask {...rest} />
     case 'supportTeam':
       return <SupportTeam {...rest} />
     case 'taggedInComment':
-      return <CommentNotification {...rest} />
+      return <CommentNotification type={type} {...rest} />
     case 'commentOnKR':
-      return <CommentNotification {...rest} />
+      return <CommentNotification type={type} {...rest} />
     default:
       return <Box />
   }

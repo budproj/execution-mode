@@ -24,6 +24,7 @@ const NotificationsList = () => {
           <Box key={notification.id}>
             <CardNotification
               type={notification.type}
+              timestamp={notification.timestamp}
               isRead={notification.isRead}
               {...notification.properties}
             />
