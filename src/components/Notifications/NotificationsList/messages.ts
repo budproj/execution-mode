@@ -13,8 +13,8 @@ export default defineMessages<NotificationsListMessagesProperties>({
   },
 
   noMoreNotificationsLabel: {
-    defaultMessage: 'Essas foram todas as suas notificações dos últimos 30 dias.',
-    id: 'pExSlt',
+    defaultMessage: 'Essas foram as suas notificações recentes!',
+    id: 'OEPd1+',
     description: 'This message appears when no more notifications to listing.',
   },
 
