@@ -39,6 +39,7 @@ const KeyResultDynamicIcon = ({
       lineHeight={1}
       bg={isDisabled ? 'black.500' : color}
       borderRadius={borderRadius}
+      minW={boxSize}
       w={boxSize}
       h={boxSize}
       alignItems="center"
