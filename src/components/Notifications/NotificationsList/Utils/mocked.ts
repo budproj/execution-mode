@@ -4,7 +4,7 @@ export const NotificationsMockedArray = [
     isRead: false,
     type: 'checkin',
     timestamp: 1655048318,
-    recipientId: '12312',
+    recipientId: '123121',
     properties: {
       sender: {
         id: '1232',
