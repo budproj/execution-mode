@@ -32,16 +32,16 @@ const ScrollablePanel = styled(TabPanel)`
     width: 6px;
   }
   &::-webkit-scrollbar-track {
-    margin: 2px 0;
+    margin: 12px 0px;
   }
 
   &::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #e8eefc;
+    background: #b5c0db;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #d9e2f6;
+    background: #d9e2f7;
   }
 `
 
