@@ -39,6 +39,10 @@
     "defaultMessage": "Atualizar",
     "description": "This message is displayed in a tooltip above the SliderThumb on our sliders"
   },
+  "//f0UA": {
+    "defaultMessage": "Timeline | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "/2GFGI": {
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
@@ -166,10 +170,6 @@
   "1Dc9iL": {
     "defaultMessage": "Na última hora",
     "description": "This label is displayed if the date difference is less than 1 hour"
-  },
-  "1HBRw6": {
-    "defaultMessage": "Nenhuma atualização recente",
-    "description": "This label is displayed if we do not have any update date to display"
   },
   "1IAVGz": {
     "defaultMessage": "Tarefas pendentes",
@@ -455,6 +455,10 @@
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
   },
+  "8Ay4MQ": {
+    "defaultMessage": "Nenhum check-in realizado",
+    "description": "This label is displayed if we do not have any update date to display"
+  },
   "8B+4Un": {
     "defaultMessage": "Use este painel para configurar os usuários da plataforma.",
     "description": "The description page."
@@ -618,6 +622,10 @@
   "CQPpEV": {
     "defaultMessage": "Ativo",
     "description": "This string is used to select the active cycles option."
+  },
+  "CQiLwO": {
+    "defaultMessage": "Timeline",
+    "description": "MainAppBar menu item that links to teams \"Timeline\" page"
   },
   "CS3a8I": {
     "defaultMessage": "Ativo",
@@ -843,6 +851,10 @@
     "defaultMessage": "Ver menos...",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
+  "I7MY1s": {
+    "defaultMessage": "Notificações",
+    "description": "Tooltip title of the notification bell."
+  },
   "I8NCD3": {
     "defaultMessage": "Check-in realizado",
     "description": "This string is used as the description for the icon that indicates that the key-result is updated"
@@ -1042,6 +1054,10 @@
   "MNn3/r": {
     "defaultMessage": "Insira uma descrição clicando aqui",
     "description": "This text is displayed as a placeholder for the description section of a key-result, only when that key-result don't have a description"
+  },
+  "Me1wRC": {
+    "defaultMessage": "Notificações",
+    "description": "This message appears as the title of the Notifications option in the notifications modal."
   },
   "MgJJAJ": {
     "defaultMessage": "Comente aqui! Para marcar alguém, use @ :)",
@@ -1423,6 +1439,10 @@
     "defaultMessage": "Excluir resultado-chave",
     "description": "This message is used as the label in the confirmation button while removing a key-result"
   },
+  "VLU792": {
+    "defaultMessage": "Check-in",
+    "description": "The title of the button to create a check-in in the check-in notifications tab, when clicked it opens the key result drawer."
+  },
   "VNHZWm": {
     "defaultMessage": "Período",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
@@ -1502,6 +1522,10 @@
   "XEey8C": {
     "defaultMessage": "Arraste até o novo valor para iniciar um check-in",
     "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
+  },
+  "XGKUNq": {
+    "defaultMessage": "Para essa semana",
+    "description": "The title of the section of the key results without check-in in the week."
   },
   "XN0ZEi": {
     "defaultMessage": "Passo 2",
@@ -1847,6 +1871,10 @@
     "defaultMessage": "Erro ao criar o ambiente",
     "description": "The title of the toast that appears when we have an error while creating a new workspace"
   },
+  "hJZjes": {
+    "defaultMessage": "Check-in em dia",
+    "description": "The title of the section of the key results with an up to date check-in."
+  },
   "hL/jUm": {
     "defaultMessage": "TAREFAS EM OKRs",
     "description": "The title for tasks section in the profile page"
@@ -1947,6 +1975,10 @@
     "defaultMessage": "O objetivo foi removido com sucesso",
     "description": "This message appears in a toast after the user removes an objective"
   },
+  "jwsMer": {
+    "defaultMessage": "Último check-in",
+    "description": "the prefix that is displayed in the last update checkmark."
+  },
   "jxyYl3": {
     "defaultMessage": "Ordenada pelo progresso",
     "description": "This tooltip appears when the user hovers the first column title"
@@ -1974,6 +2006,10 @@
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
     "description": "A brief explanation for screen readers regarding the yellow status circle"
+  },
+  "kTFIMk": {
+    "defaultMessage": "Você não tem check-ins pendentes porque não está envolvido em nenhum resultado-chave.",
+    "description": "The page description that is displayed if the user has no key result in the check in notifications tab."
   },
   "kXNgkQ": {
     "defaultMessage": "Progresso",
@@ -2038,6 +2074,10 @@
   "loTYpj": {
     "defaultMessage": "Inglês",
     "description": "The user locale en-US option while creating a new workspace"
+  },
+  "lpsQj3": {
+    "defaultMessage": "Check-in",
+    "description": "This message appears as the title of the Check-ins option in the notifications modal."
   },
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",

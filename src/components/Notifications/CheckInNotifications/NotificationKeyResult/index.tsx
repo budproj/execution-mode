@@ -1,12 +1,14 @@
 import { Flex, Text, Box, Divider } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import { UpdateIcon } from 'src/components/KeyResult/List/Body/Columns/KeyResult/update-icon'
 import { KeyResult } from 'src/components/KeyResult/types'
+import isCheckInModalOpenAtom from 'src/state/recoil/key-result/check-in/is-check-in-modal-open'
 
 import messages from './messages'
 
@@ -22,15 +24,12 @@ const NotificationKeyResult = ({
   handleClick,
 }: NotificationKeyResultProperties) => {
   const intl = useIntl()
+  const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
   const lastUpdateDate = keyResult?.status?.latestCheckIn?.createdAt
     ? new Date(keyResult?.status?.latestCheckIn?.createdAt)
     : undefined
 
-  const updateTextColor = keyResult?.status?.latestCheckIn
-    ? keyResult?.status?.isOutdated
-      ? 'red.500'
-      : 'gray.300'
-    : 'red.500'
+  const updateTextColor = keyResult?.status?.isOutdated ? 'red.500' : 'gray.300'
 
   console.log({ keyResult })
 
@@ -48,7 +47,7 @@ const NotificationKeyResult = ({
         </Box>
 
         <Box flex="1">
-          <Text fontWeight="500" color="new-gray.900">
+          <Text fontWeight="400" color="new-gray.900">
             {keyResult.title}
           </Text>
           <Flex alignItems="center">
@@ -74,7 +73,10 @@ const NotificationKeyResult = ({
               padding="7px 13px"
               fontSize={12}
               label={intl.formatMessage(messages.checkInButton)}
-              onClick={() => handleClick(keyResult.id)}
+              onClick={() => {
+                handleClick(keyResult.id)
+                setIsCheckInModalOpen(true)
+              }}
             />
           )}
         </Box>

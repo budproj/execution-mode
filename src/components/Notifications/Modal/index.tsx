@@ -4,10 +4,9 @@ import styled from '@emotion/styled'
 import { isAfter, startOfWeek, isBefore } from 'date-fns'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
-import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
@@ -21,7 +20,7 @@ const StyledTab = styled(Tab)`
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   border-bottom: 2px solid transparent;
 
   &:focus {
@@ -32,10 +31,10 @@ const StyledTab = styled(Tab)`
 const NotificationsModal = () => {
   const intl = useIntl()
 
-  const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
+  // Const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
   const setNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
 
-  const notificationsCount = 0
+  // Const notificationsCount = 0
 
   const [keyResults, setKeyResultEdges, _] = useConnectionEdges<KeyResult>()
 
@@ -70,8 +69,14 @@ const NotificationsModal = () => {
   setNotificationsCount(keyResultsWithNoCheckInThisWeek.length)
 
   return (
-    <PopoverBody padding={0} margin={0} borderRadius={15}>
-      <Tabs isFitted isLazy variant="unstyled" boxShadow="md" borderRadius={15}>
+    <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px" maxHeight="100vh">
+      <Tabs
+        isFitted
+        isLazy
+        variant="unstyled"
+        boxShadow="0px 5px 30px 5px rgba(181, 192, 219, 0.3)"
+        borderRadius={15}
+      >
         <TabList
           display="flex"
           alignItems="center"
@@ -79,34 +84,33 @@ const NotificationsModal = () => {
           pl={12}
           pr={12}
           backgroundColor="black.50"
+          borderRadius="15px 15px 0px 0px"
         >
-          <StyledTab
+          {/* <StyledTab
             gap={2}
-            width="md"
             color="new-gray.800"
             _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
             paddingBottom="17px"
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
             {notificationsCount > 0 && <NotificationBadge notificationCount={notificationsCount} />}
-          </StyledTab>
+          </StyledTab> */}
           <StyledTab
             gap={2}
             color="new-gray.800"
-            borderBottom="2px solid transparent"
-            _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+            // _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
             paddingBottom="17px"
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
-            {checkInNotificationCount > 0 && (
+            {/* {checkInNotificationCount > 0 && (
               <NotificationBadge notificationCount={checkInNotificationCount} />
-            )}
+            )} */}
           </StyledTab>
         </TabList>
         <Divider borderColor="gray.100" />
 
         <TabPanels p="0 10px 10px 10px">
-          <TabPanel textAlign="center">{/* here: Notifications-Component */}</TabPanel>
+          {/* <TabPanel textAlign="center"> here: Notifications-Component</TabPanel> */}
           <TabPanel>
             <CheckInNotifications
               keyResultsUpToDate={keyResultsUpToDate}

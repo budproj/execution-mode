@@ -1,5 +1,6 @@
 import { IconButton, Popover, PopoverContent, PopoverTrigger, Box } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
@@ -8,7 +9,11 @@ import NotificationsModal from 'src/components/Notifications/Modal'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { notificationCountAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
+import messages from './messages'
+
 const NotificationsButton = () => {
+  const intl = useIntl()
+
   const notificationCount = useRecoilValue(notificationCountAtom)
   const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
 
@@ -16,9 +21,9 @@ const NotificationsButton = () => {
 
   return (
     <Popover placement="bottom">
-      <TooltipWithDelay label="Notificações">
+      <PopoverTrigger>
         <Box display="inline-block">
-          <PopoverTrigger>
+          <TooltipWithDelay label={intl.formatMessage(messages.notificationBellTooltip)}>
             <IconButton
               aria-label="tas"
               marginRight="5px"
@@ -44,9 +49,9 @@ const NotificationsButton = () => {
                 bg: 'gray.50',
               }}
             />
-          </PopoverTrigger>
+          </TooltipWithDelay>
         </Box>
-      </TooltipWithDelay>
+      </PopoverTrigger>
       <PopoverContent mt={4} maxWidth={480} width="min-content" borderRadius={15} padding={0}>
         <NotificationsModal />
       </PopoverContent>
