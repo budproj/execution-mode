@@ -4,12 +4,13 @@ import React, { forwardRef, RefObject, useState } from 'react'
 interface TeamTagProperties extends TagProps {
   isLoading?: boolean
   isActive?: boolean
+  redirectToTeam?: boolean
   onClose?: () => void
 }
 
 const TeamTag = forwardRef(
   (
-    { children, isLoading, isActive, onClose, ...rest }: TeamTagProperties,
+    { children, isLoading, isActive, redirectToTeam, onClose, ...rest }: TeamTagProperties,
     reference:
       | string
       | ((instance: HTMLDivElement | null) => void)
@@ -28,6 +29,14 @@ const TeamTag = forwardRef(
         ref={reference}
         bg={isActive ? 'new-gray.300' : 'new-gray.200'}
         color={isActive ? 'new-gray.700' : 'new-gray.500'}
+        _hover={
+          redirectToTeam
+            ? {
+                backgroundColor: isActive ? 'new-gray.400' : 'new-gray.200',
+                color: isActive ? 'new-gray.800' : 'new-gray.500',
+              }
+            : undefined
+        }
         textTransform="uppercase"
         fontWeight={500}
         fontSize="sm"
@@ -52,6 +61,7 @@ TeamTag.defaultProps = {
   isLoading: false,
   isActive: true,
   onClose: undefined,
+  redirectToTeam: false,
 }
 
 export default TeamTag

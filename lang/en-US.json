@@ -495,10 +495,6 @@
     "defaultMessage": "Down arrow icon representing how far your company regressed over the last week",
     "description": "This message is used by screen readers to explain our arrow down icon"
   },
-  "8Ay4MQ": {
-    "defaultMessage": "No check-in yet",
-    "description": "This label is displayed if we do not have any update date to display"
-  },
   "8B+4Un": {
     "defaultMessage": "Use this painel to configure the users on the platform",
     "description": "The description page."
@@ -1311,10 +1307,6 @@
     "defaultMessage": "{period} Ciclo {status} successfully!",
     "description": "This message appears when we create a new cycle as a toast"
   },
-  "I7MY1s": {
-    "defaultMessage": "Notifications",
-    "description": "Tooltip title of the notification bell."
-  },
   "I8NCD3": {
     "defaultMessage": "Check-in made",
     "description": "This string is used as the description for the icon that indicates that the key-result is updated"
@@ -1682,10 +1674,6 @@
   "loTYpj": {
     "defaultMessage": "English",
     "description": "The user locale en-US option while creating a new workspace"
-  },
-  "lpsQj3": {
-    "defaultMessage": "Check-in",
-    "description": "This message appears as the title of the Check-ins option in the notifications modal."
   },
   "LQfRhU": {
     "defaultMessage": "Go to profile",
@@ -2743,10 +2731,6 @@
     "defaultMessage": "A button with a confirmation icon. By clicking on it you will save your changes to the objective's title",
     "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the check button"
   },
-  "XGKUNq": {
-    "defaultMessage": "Due this week",
-    "description": "The title of the section of the key results without check-in in the week."
-  },
   "xIe3i6": {
     "defaultMessage": "Reactivate account",
     "description": "This message is the description of the option to reactivate a user account."
@@ -3012,7 +2996,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-07-05T18:58:47Z",
+    "defaultMessage": "2022-06-27T14:48:58Z",
     "description": null
   }
 }

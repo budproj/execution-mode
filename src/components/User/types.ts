@@ -19,7 +19,7 @@ export const AuthzUserRoles = {
   teamMember: 'Team Member',
   leader: 'Leader',
   squadMember: 'Squad Member',
-  admin: 'Admin',
+  admin: 'Company Admin',
 }
 export interface AuthzRole {
   id: string

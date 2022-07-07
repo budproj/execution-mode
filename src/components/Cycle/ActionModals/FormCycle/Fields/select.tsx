@@ -1,6 +1,6 @@
-import { Stack, FormLabel, MenuItemOption } from '@chakra-ui/react'
+import { Stack, FormLabel, MenuItemOption, Flex } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
-import React from 'react'
+import React, { ComponentType } from 'react'
 
 import { SelectMenu } from 'src/components/Base'
 
@@ -16,6 +16,7 @@ export type CycleSelectFieldProperties = {
   options: CycleSelectOption[]
   selectedOptionID?: string
   label: string
+  Tooltip?: ComponentType
   isDisabled?: boolean
 }
 
@@ -24,6 +25,7 @@ export const CycleSelectField = ({
   options,
   selectedOptionID,
   label,
+  Tooltip,
   isDisabled,
 }: CycleSelectFieldProperties) => {
   const { setFieldValue, setFieldTouched, errors, touched } = useFormikContext<CycleFormValues>()
@@ -46,7 +48,11 @@ export const CycleSelectField = ({
 
   return (
     <Stack spacing={0} maxWidth={180} width="100%">
-      <FormLabel>{label}</FormLabel>
+      <Flex>
+        <FormLabel>{label}</FormLabel>
+        {Tooltip && <Tooltip />}
+      </Flex>
+
       <SelectMenu
         matchWidth
         closeOnSelect
