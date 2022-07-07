@@ -5,6 +5,7 @@ query GET_KEYRESULTS_FOR_NOTIFICATIONS {
       node {
         title
         id
+        teamId
         status {
           isOutdated
           latestCheckIn {

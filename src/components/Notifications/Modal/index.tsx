@@ -7,6 +7,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
+import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
@@ -28,7 +29,33 @@ const StyledTab = styled(Tab)`
   }
 `
 
-const NotificationsModal = () => {
+const ScrollablePanel = styled(TabPanel)`
+  width: 100%;
+  height: 100%;
+  padding: 0 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    margin: 12px 0px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #b5c0db;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #d9e2f7;
+  }
+`
+interface NotificationsModalProperties {
+  userId: User['id']
+}
+
+const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
   const intl = useIntl()
 
   // Const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
@@ -36,11 +63,16 @@ const NotificationsModal = () => {
 
   // Const notificationsCount = 0
 
-  const [keyResults, setKeyResultEdges, _] = useConnectionEdges<KeyResult>()
+  const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
   useQuery(queries.GET_KEYRESULTS_FOR_NOTIFICATIONS, {
     onCompleted: (data) => {
-      setKeyResultEdges(data.me.keyResults.edges)
+      const companyKeyResults = data.me.keyResults.edges.filter(
+        (keyResult: { node: KeyResult }) => {
+          return keyResult.node.teamId !== null
+        },
+      )
+      setKeyResultEdges(companyKeyResults)
     },
   })
 
@@ -66,10 +98,14 @@ const NotificationsModal = () => {
     return isAfter(date, startOfTheWeek)
   })
 
-  setNotificationsCount(keyResultsWithNoCheckInThisWeek.length)
+  const notificationsCount = keyResultsWithNoCheckInThisWeek.filter(
+    (keyResult) => keyResult.status.isOutdated,
+  )
+
+  setNotificationsCount(notificationsCount.length)
 
   return (
-    <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px" maxHeight="100vh">
+    <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px">
       <Tabs
         isFitted
         isLazy
@@ -111,12 +147,13 @@ const NotificationsModal = () => {
 
         <TabPanels p="0 10px 10px 10px">
           {/* <TabPanel textAlign="center"> here: Notifications-Component</TabPanel> */}
-          <TabPanel>
+          <ScrollablePanel maxH="70vh" width={480}>
             <CheckInNotifications
+              userId={userId}
               keyResultsUpToDate={keyResultsUpToDate}
               keyResultsWithNoCheckInThisWeek={keyResultsWithNoCheckInThisWeek}
             />
-          </TabPanel>
+          </ScrollablePanel>
         </TabPanels>
       </Tabs>
     </PopoverBody>
