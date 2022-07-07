@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
+import { User } from 'src/components/User/types'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import EmptyStateCheckInNotifications from './EmptyStateCheckInNotification'
@@ -13,11 +14,13 @@ import messages from './messages'
 interface CheckInNotificationsProperties {
   keyResultsUpToDate: KeyResult[]
   keyResultsWithNoCheckInThisWeek: KeyResult[]
+  userId: User['id']
 }
 
 const CheckInNotifications = ({
   keyResultsUpToDate,
   keyResultsWithNoCheckInThisWeek,
+  userId,
 }: CheckInNotificationsProperties) => {
   const intl = useIntl()
 
@@ -38,6 +41,7 @@ const CheckInNotifications = ({
                   isKeyResultOutdated
                   keyResult={keyResult}
                   handleClick={setOpenDrawer}
+                  userId={userId}
                 />
               ))}
             </Box>
@@ -51,6 +55,7 @@ const CheckInNotifications = ({
             {keyResultsUpToDate.map((keyResult) => (
               <NotificationKeyResult
                 key={keyResult.id}
+                userId={userId}
                 isKeyResultOutdated={false}
                 keyResult={keyResult}
                 handleClick={setOpenDrawer}
