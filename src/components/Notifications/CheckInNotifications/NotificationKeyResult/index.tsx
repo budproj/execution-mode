@@ -31,6 +31,7 @@ const NotificationKeyResult = ({
 
   const updateTextColor = keyResult?.status?.isOutdated ? 'red.500' : 'gray.300'
 
+
   return (
     <>
       <Divider borderColor="new-gray.400" />
