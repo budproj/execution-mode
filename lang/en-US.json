@@ -1251,6 +1251,10 @@
     "defaultMessage": "DEACTIVATE",
     "description": "This is the keyword that the user needs to type to deactivate a given user"
   },
+  "hJZjes": {
+    "defaultMessage": "Up-to-date",
+    "description": "The title of the section of the key results with an up to date check-in."
+  },
   "hL/jUm": {
     "defaultMessage": "TASKS IN OKRs",
     "description": "The title for tasks section in the profile page"
@@ -1467,6 +1471,10 @@
     "defaultMessage": "Are you sure that you want to do it? This action is irreversible",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
   },
+  "jwsMer": {
+    "defaultMessage": "Last check-in",
+    "description": "the prefix that is displayed in the last update checkmark."
+  },
   "Jx/tRY": {
     "defaultMessage": "Team name:",
     "description": "The label to the team name field in team add/edit modal"
@@ -1570,6 +1578,10 @@
   "KSjqcC": {
     "defaultMessage": "%",
     "description": "The text of the table head related to the percentual progress column"
+  },
+  "kTFIMk": {
+    "defaultMessage": "You have no check-ins pending because you don't have any key results.",
+    "description": "The page description that is displayed if the user has no key result in the check in notifications tab."
   },
   "kXNgkQ": {
     "defaultMessage": "Progress",
@@ -1726,6 +1738,10 @@
   "mdG+CG": {
     "defaultMessage": "Active Cycles",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
+  },
+  "Me1wRC": {
+    "defaultMessage": "Notifications",
+    "description": "This message appears as the title of the Notifications option in the notifications modal."
   },
   "MgJJAJ": {
     "defaultMessage": "Comment here! To tag someone, use @ :)",
@@ -2538,6 +2554,10 @@
   "VltGNp": {
     "defaultMessage": "A drawing of a ghost, indicating this key result has no activity",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawers"
+  },
+  "VLU792": {
+    "defaultMessage": "Check-in",
+    "description": "The title of the button to create a check-in in the check-in notifications tab, when clicked it opens the key result drawer."
   },
   "vm0Yuj": {
     "defaultMessage": "My account | bud",

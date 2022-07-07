@@ -21,7 +21,6 @@ import PageContent from 'src/components/Base/PageContent'
 import { PageHeader } from 'src/components/Base/PageHeader/wrapper'
 import { ActionMenu } from 'src/components/Cycle/ActionMenu/wrapper'
 import HistoryIcon from 'src/components/Icon/History'
-import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import objectiveMessages from 'src/components/Objective/OKRsEmptyState/messages'
 import objectiveQueries from 'src/components/Objective/OKRsEmptyState/queries.gql'
 import { CreateDraftObjectiveQueryResult } from 'src/components/Objective/OKRsEmptyState/wrapper'
@@ -186,8 +185,6 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
 
   return (
     <PageContent background="new-gray.50">
-      <KeyResultSingleDrawer />
-
       <PageHeader>
         <Flex
           alignItems={['flex-start', 'flex-start', 'flex-start', 'center']}

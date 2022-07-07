@@ -49,6 +49,7 @@ const KeyResultListBodyColumnKeyResult = ({
   const prefixMessage = status?.isOutdated
     ? messages.outdatedUpdateTextPrefix
     : messages.lastUpdateTextPrefix
+
   return (
     <KeyResultListBodyColumnBase
       borderRight={withRightBorder ? 1 : 0}
@@ -100,9 +101,10 @@ const KeyResultListBodyColumnKeyResult = ({
               isLoaded={isKeyResultLoaded}
             >
               <Flex alignItems="center">
-                {lastUpdateDate ? (
-                  <UpdateIcon isOutdated={status?.isOutdated} updateTextColor={updateTextColor} />
-                ) : undefined}
+                <UpdateIcon
+                  isOutdated={status?.latestCheckIn ? status?.isOutdated : true}
+                  updateTextColor={updateTextColor}
+                />
                 <LastUpdateText
                   date={lastUpdateDate}
                   color={updateTextColor}

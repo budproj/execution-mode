@@ -20,7 +20,12 @@ const SupportButton = () => {
           minH={8}
           minW={8}
           icon={
-            <GearIcon fill="gray.500" w={5} h="auto" desc={intl.formatMessage(messages.iconDesc)} />
+            <GearIcon
+              fill="gray.500"
+              w="22px"
+              h="auto"
+              desc={intl.formatMessage(messages.iconDesc)}
+            />
           }
           borderRadius="full"
           _hover={{
