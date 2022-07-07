@@ -4,7 +4,7 @@ import { Formik, Form, FormikHelpers } from 'formik'
 import isUndefined from 'lodash/isUndefined'
 import omitBy from 'lodash/omitBy'
 import React, { useEffect } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedByUser/queries.gql'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
@@ -14,6 +14,8 @@ import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+import { createdByCheckInNotificationAtom } from 'src/state/recoil/notifications'
+import meAtom from 'src/state/recoil/user/me'
 
 import {
   CheckInFormFieldConfidence,
@@ -58,6 +60,10 @@ const CheckInForm = ({
   valueNew,
 }: CheckInFormProperties) => {
   const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_IN)
+  const { dispatch: dispatchCreatedByNotification } = useEvent(EventType.CREATED_BY_NOTIFICATION)
+  const isCreated = useRecoilValue(createdByCheckInNotificationAtom)
+  const userId = useRecoilValue(meAtom)
+
   const [latestKeyResultCheckIn, setLatestKeyResultCheckIn] = useRecoilState(
     selectLatestCheckIn(keyResultID),
   )
@@ -69,6 +75,7 @@ const CheckInForm = ({
       onCompleted: (data) => {
         setLatestKeyResultCheckIn(data.createKeyResultCheckIn)
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
+        if (isCreated) dispatchCreatedByNotification({ userId })
         dispatchEvent({})
       },
       refetchQueries: [

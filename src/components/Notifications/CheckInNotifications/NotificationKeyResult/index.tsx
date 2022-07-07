@@ -2,7 +2,7 @@ import { Flex, Text, Box, Divider } from '@chakra-ui/react'
 import { User } from '@sentry/nextjs'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
@@ -12,6 +12,7 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import isCheckInModalOpenAtom from 'src/state/recoil/key-result/check-in/is-check-in-modal-open'
+import { createdByCheckInNotificationAtom } from 'src/state/recoil/notifications'
 
 import messages from './messages'
 
@@ -30,8 +31,8 @@ const NotificationKeyResult = ({
 }: NotificationKeyResultProperties) => {
   const intl = useIntl()
   const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
-  // Const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
-  // const isCreated = useRecoilValue(createdByCheckInNotificationAtom)
+  const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
+  const isCreated = useRecoilValue(createdByCheckInNotificationAtom)
   const lastUpdateDate = keyResult?.status?.latestCheckIn?.createdAt
     ? new Date(keyResult?.status?.latestCheckIn?.createdAt)
     : undefined
@@ -39,6 +40,8 @@ const NotificationKeyResult = ({
   const updateTextColor = keyResult?.status?.isOutdated ? 'red.500' : 'gray.300'
 
   const { dispatch } = useEvent(EventType.NOTIFIFICATION_CHECK_IN_CLICK)
+
+  console.log(isCreated)
 
   return (
     <>
@@ -83,7 +86,7 @@ const NotificationKeyResult = ({
               onClick={() => {
                 handleClick(keyResult.id)
                 setIsCheckInModalOpen(true)
-                // SetCreatedByNotification(true)
+                setCreatedByNotification(true)
                 dispatch({ userId })
               }}
             />
