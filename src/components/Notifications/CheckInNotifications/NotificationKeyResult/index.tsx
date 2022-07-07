@@ -40,6 +40,7 @@ const NotificationKeyResult = ({
 
   const { dispatch } = useEvent(EventType.NOTIFIFICATION_CHECK_IN_CLICK)
 
+
   return (
     <>
       <Divider borderColor="new-gray.400" />
