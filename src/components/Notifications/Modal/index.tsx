@@ -58,11 +58,16 @@ const NotificationsModal = () => {
 
   // Const notificationsCount = 0
 
-  const [keyResults, setKeyResultEdges, _] = useConnectionEdges<KeyResult>()
+  const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
   useQuery(queries.GET_KEYRESULTS_FOR_NOTIFICATIONS, {
     onCompleted: (data) => {
-      setKeyResultEdges(data.me.keyResults.edges)
+      const companyKeyResults = data.me.keyResults.edges.filter(
+        (keyResult: { node: KeyResult }) => {
+          return keyResult.node.teamId !== null
+        },
+      )
+      setKeyResultEdges(companyKeyResults)
     },
   })
 
