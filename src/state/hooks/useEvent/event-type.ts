@@ -18,7 +18,6 @@ export enum EventType {
   OPENED_KEY_RESULT_REPORT_CONFIDANCE = 'OpenedKeyResultReportConfidance',
   CREATED_OBJECTIVE = 'CreatedObjective',
   CREATED_KEY_RESULT = 'CreatedKeyResult',
-  NOTIFIFICATION_BELL_CLICK = 'NotificationBellClick',
-  NOTIFIFICATION_CHECK_IN_CLICK = 'NotificationCheckinClick',
-  CREATED_BY_NOTIFICATION = 'CreatedByNotification',
+  NOTIFICATION_BELL_CLICK = 'NotificationBellClick',
+  NOTIFICATION_CHECK_IN_CLICK = 'NotificationCheckinClick',
 }

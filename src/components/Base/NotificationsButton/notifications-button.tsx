@@ -22,7 +22,7 @@ const NotificationsButton = () => {
 
   const isNotificationBadgeVisible = notificationCount > 0 || checkInNotificationCount > 0
 
-  const { dispatch } = useEvent(EventType.NOTIFIFICATION_BELL_CLICK)
+  const { dispatch } = useEvent(EventType.NOTIFICATION_BELL_CLICK)
 
   const userID = useRecoilValue(meAtom)
 

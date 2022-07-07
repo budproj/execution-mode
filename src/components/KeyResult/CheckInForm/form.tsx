@@ -60,7 +60,6 @@ const CheckInForm = ({
   valueNew,
 }: CheckInFormProperties) => {
   const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_IN)
-  const { dispatch: dispatchCreatedByNotification } = useEvent(EventType.CREATED_BY_NOTIFICATION)
   const isCreated = useRecoilValue(createdByCheckInNotificationAtom)
   const userId = useRecoilValue(meAtom)
 
@@ -75,8 +74,7 @@ const CheckInForm = ({
       onCompleted: (data) => {
         setLatestKeyResultCheckIn(data.createKeyResultCheckIn)
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
-        if (isCreated) dispatchCreatedByNotification({ userId })
-        dispatchEvent({})
+        dispatchEvent({ createdByNotification: Boolean(isCreated), userId })
       },
       refetchQueries: [
         activeAndOwnedByUserQuery.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,

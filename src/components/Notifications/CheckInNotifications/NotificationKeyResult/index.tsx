@@ -39,7 +39,7 @@ const NotificationKeyResult = ({
 
   const updateTextColor = keyResult?.status?.isOutdated ? 'red.500' : 'gray.300'
 
-  const { dispatch } = useEvent(EventType.NOTIFIFICATION_CHECK_IN_CLICK)
+  const { dispatch } = useEvent(EventType.NOTIFICATION_CHECK_IN_CLICK)
 
   console.log(isCreated)
 
