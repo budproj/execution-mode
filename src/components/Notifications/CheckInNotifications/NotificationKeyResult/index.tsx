@@ -41,9 +41,6 @@ const NotificationKeyResult = ({
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_CHECK_IN_CLICK)
 
-  console.log(isCreated)
-
-
   return (
     <>
       <Divider borderColor="new-gray.400" />
