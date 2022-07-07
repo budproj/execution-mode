@@ -2,7 +2,7 @@ import { Flex, Text, Box, Divider } from '@chakra-ui/react'
 import { User } from '@sentry/nextjs'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
@@ -32,7 +32,7 @@ const NotificationKeyResult = ({
   const intl = useIntl()
   const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
   const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
-  const isCreated = useRecoilValue(createdByCheckInNotificationAtom)
+
   const lastUpdateDate = keyResult?.status?.latestCheckIn?.createdAt
     ? new Date(keyResult?.status?.latestCheckIn?.createdAt)
     : undefined
