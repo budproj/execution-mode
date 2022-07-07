@@ -7,6 +7,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
+import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
@@ -50,7 +51,11 @@ const ScrollablePanel = styled(TabPanel)`
     background: #d9e2f7;
   }
 `
-const NotificationsModal = () => {
+interface NotificationsModalProperties {
+  userId: User['id']
+}
+
+const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
   const intl = useIntl()
 
   // Const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
@@ -144,6 +149,7 @@ const NotificationsModal = () => {
           {/* <TabPanel textAlign="center"> here: Notifications-Component</TabPanel> */}
           <ScrollablePanel maxH="70vh" width={480}>
             <CheckInNotifications
+              userId={userId}
               keyResultsUpToDate={keyResultsUpToDate}
               keyResultsWithNoCheckInThisWeek={keyResultsWithNoCheckInThisWeek}
             />

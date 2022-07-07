@@ -2,7 +2,6 @@ import { User } from 'src/components/User/types'
 
 import { BaseEventData } from './base-event'
 
-export interface CreatedKeyResultCheckInData extends BaseEventData {
-  createdByNotification: boolean
+export interface NotificationBellData extends BaseEventData {
   userId: User['id']
 }
