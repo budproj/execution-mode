@@ -331,6 +331,10 @@
     "defaultMessage": "Explorar ciclos anteriores",
     "description": "This message appears below the time machine title, as an auxiliary title in a team's page"
   },
+  "5r52/T": {
+    "defaultMessage": "uma barreira no",
+    "description": "This message appears as notification in confidence check in with barrier."
+  },
   "5th5LY": {
     "defaultMessage": "Ué! Cadê a tela que tava aqui?",
     "description": "The title displayed in our unknown error page"
@@ -354,6 +358,10 @@
   "61S7n7": {
     "defaultMessage": "Ver detalhes",
     "description": "This message is the description of the option to view details  of a user."
+  },
+  "66spXk": {
+    "defaultMessage": "Ver mais",
+    "description": "This message appears on button that loading more notifications in list."
   },
   "68qL+a": {
     "defaultMessage": "Gênero da empresa",
@@ -467,6 +475,10 @@
     "defaultMessage": "Dia de início do período trimestral",
     "description": "The label of the company quarterly date start while creating a new workspace"
   },
+  "8HUHbX": {
+    "defaultMessage": "atribuiu uma tarefa a você:",
+    "description": "This message appears as describe on notification where a user is assigned to a task."
+  },
   "8LTdv4": {
     "defaultMessage": "Objetivo",
     "description": "The text of the table head related to the Objective column"
@@ -550,6 +562,10 @@
   "AQkkKh": {
     "defaultMessage": "Você reativou {name} com sucesso.",
     "description": "This message appears in a toast after reactivating a user."
+  },
+  "ATbiBE": {
+    "defaultMessage": "comentou no seu resultado-chave:",
+    "description": "This message is displayed to describe a notification that occurs when someone comments on a user`s KR."
   },
   "B0G29o": {
     "defaultMessage": "Baixo",
@@ -915,6 +931,10 @@
     "defaultMessage": "Coisas de {username}",
     "description": "The page title for users profile"
   },
+  "JKqe2t": {
+    "defaultMessage": "Uma caixa vazia.",
+    "description": "The alternative text explain the empty state message from notifications list."
+  },
   "JNiINj": {
     "defaultMessage": "Veja nossos exemplos de OKRs",
     "description": "This button redirects to the page that teaches about OKRs."
@@ -1127,6 +1147,10 @@
     "defaultMessage": "Progresso",
     "description": "The title of the progress section in our key-result sidebar"
   },
+  "OEPd1+": {
+    "defaultMessage": "Essas foram as suas notificações recentes!",
+    "description": "This message appears when no more notifications to listing."
+  },
   "OEfoTC": {
     "defaultMessage": "Um ícone de setas entrelaçadas. Ao clicar aqui você irá editar esse campo",
     "description": "This message is used by screen readers when the user is focusing on the component which contains the user name and picture. This component is used in multiple places, like: our header, the key-result drawers, and other"
@@ -1258,6 +1282,10 @@
   "R6SREn": {
     "defaultMessage": "Esses usuários podem criar, editar e excluir qualquer objetivo ou resultado-chave no Bud.",
     "description": "This string is used to describe the user edit role selection."
+  },
+  "R7I25V": {
+    "defaultMessage": "Você não tem nenhuma notificação.",
+    "description": "This message appears in the empty state of the notifications listing."
   },
   "R8hOYh": {
     "defaultMessage": "Este time não possui OKRs",
@@ -1542,6 +1570,10 @@
   "XYg5xf": {
     "defaultMessage": "Clique aqui para editar suas configurações",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
+  },
+  "XZF51J": {
+    "defaultMessage": "Uma imagem que representa a ausência de novas notificações.",
+    "description": "The alternative text explain the empty state message when no more notifications to listing."
   },
   "XZcPVc": {
     "defaultMessage": "Uma mulher analisando gráficos e apontando com um dedo.",
@@ -1923,6 +1955,10 @@
     "defaultMessage": "Ciclo {period} {status} com sucesso!",
     "description": "This message appears when we create a new cycle as a toast"
   },
+  "i7i3Ew": {
+    "defaultMessage": "reportou {specific} resultado-chave:",
+    "description": "This message is the wrapper that appears on both types of confidence check ins."
+  },
   "i915bK": {
     "defaultMessage": "Líderes podem criar, editar e excluir objetivos e resultados-chave dos times aos quais pertencem.",
     "description": "This string is used to describe the user edit role selection."
@@ -1930,6 +1966,14 @@
   "i9bdpU": {
     "defaultMessage": "Houve um erro inesperado ao criar seu objetivo. Tente novamente mais tarde",
     "description": "This message appears as an error toast when the users tries to create a new objective but an error appears"
+  },
+  "iIm/1E": {
+    "defaultMessage": "marcou você em um comentário:",
+    "description": "This message is displayed to describe a notification that occurs when a user is tagged in a comment."
+  },
+  "iJoxMo": {
+    "defaultMessage": "incluiu você como time de apoio em um KR:",
+    "description": "This message appears as describe on notification where a user is included on support team of a KR."
   },
   "iLO8sl": {
     "defaultMessage": "Estas tarefas não estão relacionadas diretamente a um resultado-chave. Use-as para organizar melhor seu dia e deixá-lo mais produtivo :)",
@@ -2262,6 +2306,10 @@
   "rH+dGv": {
     "defaultMessage": "Uma seta para baixo. Ao clicar nela você abrirá o menu de seleção",
     "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
+  },
+  "rZUL1Q": {
+    "defaultMessage": "baixa confiança em um",
+    "description": "This message appears as notification in confidence check in with low-confidence."
   },
   "rpLZ2J": {
     "defaultMessage": "Bud - Gestão de OKR e Estratégia",

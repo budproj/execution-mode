@@ -7,11 +7,14 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
+import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
 import CheckInNotifications from '../CheckInNotifications'
+import { NotificationsList } from '../NotificationsList'
+import { NotificationsMockedArray } from '../NotificationsList/Utils/mocked'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -98,11 +101,13 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
     return isAfter(date, startOfTheWeek)
   })
 
-  const notificationsCount = keyResultsWithNoCheckInThisWeek.filter(
+  const checkins = keyResultsWithNoCheckInThisWeek.filter(
     (keyResult) => keyResult.status.isOutdated,
   )
+  const notificationsCount = NotificationsMockedArray.length
+  const checkinCount = checkins.length
 
-  setNotificationsCount(notificationsCount.length)
+  setNotificationsCount(notificationsCount + checkinCount)
 
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px">
@@ -122,31 +127,32 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
           backgroundColor="black.50"
           borderRadius="15px 15px 0px 0px"
         >
-          {/* <StyledTab
+          <StyledTab
             gap={2}
+            width="md"
             color="new-gray.800"
             _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
             paddingBottom="17px"
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
-            {notificationsCount > 0 && <NotificationBadge notificationCount={notificationsCount} />}
-          </StyledTab> */}
+            {notificationsCount && <NotificationBadge notificationCount={notificationsCount} />}
+          </StyledTab>
           <StyledTab
             gap={2}
             color="new-gray.800"
-            // _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+            _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
             paddingBottom="17px"
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
-            {/* {checkInNotificationCount > 0 && (
-              <NotificationBadge notificationCount={checkInNotificationCount} />
-            )} */}
+            {checkinCount > 0 && <NotificationBadge notificationCount={checkinCount} />}
           </StyledTab>
         </TabList>
         <Divider borderColor="gray.100" />
 
         <TabPanels p="0 10px 10px 10px">
-          {/* <TabPanel textAlign="center"> here: Notifications-Component</TabPanel> */}
+          <ScrollablePanel justifyContent="center" textAlign="center" maxH="70vh" width={480}>
+            <NotificationsList />
+          </ScrollablePanel>
           <ScrollablePanel maxH="70vh" width={480}>
             <CheckInNotifications
               userId={userId}
