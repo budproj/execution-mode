@@ -39,10 +39,6 @@
     "defaultMessage": "Atualizar",
     "description": "This message is displayed in a tooltip above the SliderThumb on our sliders"
   },
-  "//f0UA": {
-    "defaultMessage": "Timeline | bud",
-    "description": "The page title that is displayed in the browser tab"
-  },
   "/2GFGI": {
     "defaultMessage": "O prazo deste objetivo",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
@@ -170,10 +166,6 @@
   "1Dc9iL": {
     "defaultMessage": "Na última hora",
     "description": "This label is displayed if the date difference is less than 1 hour"
-  },
-  "1HBRw6": {
-    "defaultMessage": "Nenhuma atualização recente",
-    "description": "This label is displayed if we do not have any update date to display"
   },
   "1IAVGz": {
     "defaultMessage": "Tarefas pendentes",
@@ -459,6 +451,10 @@
     "defaultMessage": "Um ícone de seta para baixo, representando o quanto sua empresa regrediu na última semana",
     "description": "This message is used by screen readers to explain our arrow down icon"
   },
+  "8Ay4MQ": {
+    "defaultMessage": "Nenhum check-in realizado",
+    "description": "This label is displayed if we do not have any update date to display"
+  },
   "8B+4Un": {
     "defaultMessage": "Use este painel para configurar os usuários da plataforma.",
     "description": "The description page."
@@ -555,10 +551,6 @@
     "defaultMessage": "Você reativou {name} com sucesso.",
     "description": "This message appears in a toast after reactivating a user."
   },
-  "AbWup6": {
-    "defaultMessage": "{name} perderá o acesso ao Bud e será removido dos times aos quais pertence, mas manteremos o histórico de check-ins e comentários feitos por ele até aqui.",
-    "description": "This message appears in the confirmation dialog when we try to deactivate an user"
-  },
   "B0G29o": {
     "defaultMessage": "Baixo",
     "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
@@ -622,10 +614,6 @@
   "CQPpEV": {
     "defaultMessage": "Ativo",
     "description": "This string is used to select the active cycles option."
-  },
-  "CQiLwO": {
-    "defaultMessage": "Timeline",
-    "description": "MainAppBar menu item that links to teams \"Timeline\" page"
   },
   "CS3a8I": {
     "defaultMessage": "Ativo",
@@ -771,6 +759,10 @@
     "defaultMessage": "Ambiente criado com sucesso",
     "description": "The title of the toast that appears when we create a new workspace"
   },
+  "G9m+Ed": {
+    "defaultMessage": "O acesso desta pessoa ao Bud foi desativado.",
+    "description": "This message appears in the tooltip of users with inactive account state."
+  },
   "GBh0Xf": {
     "defaultMessage": "Desculpe, mas já existe um usuário com este e-mail",
     "description": "This message is used as an toast error message when we try to create an user with an existing e-mail"
@@ -823,6 +815,10 @@
     "defaultMessage": "Escolha como suas informações aparecerão para os outros usuários.",
     "description": "This subtitle is displayed as the subtitle of the personal informations section in our user account settings page"
   },
+  "H/tYPn": {
+    "defaultMessage": "{name} perderá o acesso ao Bud e será removido dos times aos quais pertence, mas manteremos o histórico de check-ins e comentários feitos até aqui.",
+    "description": "This message appears in the confirmation dialog when we try to deactivate an user."
+  },
   "H0xYvz": {
     "defaultMessage": "Estes são os resultados-chave e as tarefas atribuídos a {username}.",
     "description": "The page subtitle for users profile"
@@ -850,6 +846,10 @@
   "I+MSuS": {
     "defaultMessage": "Ver menos...",
     "description": "This text is displayed in the button that collapses the truncated text"
+  },
+  "I7MY1s": {
+    "defaultMessage": "Notificações",
+    "description": "Tooltip title of the notification bell."
   },
   "I8NCD3": {
     "defaultMessage": "Check-in realizado",
@@ -1002,6 +1002,10 @@
   "LDLFtf": {
     "defaultMessage": "Sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}",
     "description": "This is the label that goes on our user account settings page, at the seventh field to update the user informations"
+  },
+  "LQfRhU": {
+    "defaultMessage": "Ir para o perfil",
+    "description": "This message is the description of the option to redirect to profile of a user."
   },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
@@ -1399,6 +1403,10 @@
     "defaultMessage": "desativado",
     "description": "This message appears when we have successfully activate/deactivate a cycle."
   },
+  "UU1FXI": {
+    "defaultMessage": "Vincula o ciclo trimestral ao ciclo anual ao qual ele pertence.",
+    "description": "This message appears on tooltip that explain the parent cycle select field."
+  },
   "UUo+Pt": {
     "defaultMessage": "Este time é uma empresa",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
@@ -1434,6 +1442,10 @@
   "VHOea1": {
     "defaultMessage": "Excluir resultado-chave",
     "description": "This message is used as the label in the confirmation button while removing a key-result"
+  },
+  "VLU792": {
+    "defaultMessage": "Check-in",
+    "description": "The title of the button to create a check-in in the check-in notifications tab, when clicked it opens the key result drawer."
   },
   "VNHZWm": {
     "defaultMessage": "Período",
@@ -1514,6 +1526,10 @@
   "XEey8C": {
     "defaultMessage": "Arraste até o novo valor para iniciar um check-in",
     "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
+  },
+  "XGKUNq": {
+    "defaultMessage": "Para essa semana",
+    "description": "The title of the section of the key results without check-in in the week."
   },
   "XN0ZEi": {
     "defaultMessage": "Passo 2",
@@ -1831,9 +1847,9 @@
     "defaultMessage": "Baixa confiança",
     "description": "Title of low confidence health strategy"
   },
-  "ganP5k": {
-    "defaultMessage": "Settings | bud",
-    "description": "The page title that is displayed in the browser tab for the settings page"
+  "gZstKN": {
+    "defaultMessage": "Estado inicial",
+    "description": "The description for state cycle field on create cycle form"
   },
   "gbO+eS": {
     "defaultMessage": "Se realmente tem certeza de que deseja fazer isso, confirme sua ação escrevendo \"{keyword}” no campo abaixo:",
@@ -1858,6 +1874,10 @@
   "hFma0o": {
     "defaultMessage": "Erro ao criar o ambiente",
     "description": "The title of the toast that appears when we have an error while creating a new workspace"
+  },
+  "hJZjes": {
+    "defaultMessage": "Check-in em dia",
+    "description": "The title of the section of the key results with an up to date check-in."
   },
   "hL/jUm": {
     "defaultMessage": "TAREFAS EM OKRs",
@@ -1939,6 +1959,10 @@
     "defaultMessage": "Preencha os campos obrigatórios para poder salvar este resultado-chave.",
     "description": "This message appears in an error toast after the users tries to create a key-result but there are some validation errors in the form"
   },
+  "jNuy4b": {
+    "defaultMessage": "Esta pessoa tem acesso ao Bud.",
+    "description": "This message appears in the tooltip of users with active account state."
+  },
   "jRsXuq": {
     "defaultMessage": "CHECK-INS",
     "description": "The tooltip text for the check-ins text"
@@ -1958,6 +1982,10 @@
   "jjr+Ye": {
     "defaultMessage": "O objetivo foi removido com sucesso",
     "description": "This message appears in a toast after the user removes an objective"
+  },
+  "jwsMer": {
+    "defaultMessage": "Último check-in",
+    "description": "the prefix that is displayed in the last update checkmark."
   },
   "jxyYl3": {
     "defaultMessage": "Ordenada pelo progresso",
@@ -1986,6 +2014,10 @@
   "kLkKtK": {
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
     "description": "A brief explanation for screen readers regarding the yellow status circle"
+  },
+  "kTFIMk": {
+    "defaultMessage": "Você não tem check-ins pendentes porque não está envolvido em nenhum resultado-chave.",
+    "description": "The page description that is displayed if the user has no key result in the check in notifications tab."
   },
   "kXNgkQ": {
     "defaultMessage": "Progresso",
@@ -2066,6 +2098,10 @@
   "mK9HFR": {
     "defaultMessage": "Dia de fim do período anual",
     "description": "The label of the company yearly date end while creating a new workspace"
+  },
+  "mXb4/b": {
+    "defaultMessage": "Configurações | bud",
+    "description": "The page title that is displayed in the browser tab for the settings page"
   },
   "mbJq/U": {
     "defaultMessage": "Tem certeza que deseja excluir o ciclo {period}?",
@@ -2327,6 +2363,10 @@
     "defaultMessage": "Responsável",
     "description": "The text of the table head related to the Owner column"
   },
+  "uQUReU": {
+    "defaultMessage": "Estado atual",
+    "description": "The description for state cycle field on update cycle form"
+  },
   "uUn4LH": {
     "defaultMessage": "EXCLUIR",
     "description": "This message is used as keyword to delete a cycle"
@@ -2410,10 +2450,6 @@
   "vv49le": {
     "defaultMessage": "Nome do usuário inicial",
     "description": "The user first name while creating a new workspace"
-  },
-  "vyGEtA": {
-    "defaultMessage": "Estado atual",
-    "description": "The description for state cycle field"
   },
   "vzHp1e": {
     "defaultMessage": "Precisando de inspiração? Lembre-se: os melhores objetivos são...",

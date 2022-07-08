@@ -2,12 +2,13 @@ import { Divider, Flex } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
+import { CompanyMenuProperties } from 'src/components/Settings/SidebarMenu/Section/Company/company'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
 import meAtom from 'src/state/recoil/user/me'
 
 import SettingsAccountUserCardPreview from './UserCardPreview'
 
-const SettingsMyProfile = () => {
+const SettingsMyProfile = (_: { permissions?: CompanyMenuProperties['permissions'] }) => {
   const myUserID = useRecoilValue(meAtom)
 
   return (

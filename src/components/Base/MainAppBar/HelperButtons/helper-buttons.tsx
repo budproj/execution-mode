@@ -6,7 +6,7 @@ import SettingsButton from 'src/components/Base/SettingsButton'
 import SupportButton from 'src/components/Base/SupportButton'
 
 const MainAppBarHelperButtons = () => (
-  <Flex gap={1}>
+  <Flex gap={5} marginRight={5}>
     <NotificationsButton />
     <SupportButton />
     <SettingsButton />

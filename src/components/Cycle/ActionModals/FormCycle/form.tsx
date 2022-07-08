@@ -3,6 +3,9 @@ import { Form, Formik, FormikHelpers } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
+import InfoCircleIcon from 'src/components/Icon/InfoCircle'
+
 import { CADENCE, CYCLE_STATUS } from '../../constants'
 import { Cycle } from '../../types'
 
@@ -10,6 +13,11 @@ import { CycleTextField, CycleSelectField, CycleDateField } from './Fields'
 import { CycleSelectOption } from './Fields/select'
 import messages from './messages'
 import { NewCycleSchema } from './schema'
+
+export enum ModalType {
+  UPDATE = 'update',
+  CREATE = 'create',
+}
 
 export type CycleFormValues = {
   parentId?: string
@@ -23,6 +31,7 @@ export type CycleFormValues = {
 export type CycleFormProperties = {
   initialValues?: CycleFormValues
   cycleParents: CycleSelectOption[]
+  modalType?: ModalType
   children?: React.ReactNode
   onSubmit: (values: CycleFormValues, actions: FormikHelpers<CycleFormValues>) => Promise<void>
 }
@@ -39,6 +48,7 @@ export const defaultInitialValues: CycleFormValues = {
 export const CycleModalForm = ({
   initialValues = defaultInitialValues,
   cycleParents,
+  modalType,
   onSubmit,
   children,
 }: CycleFormProperties) => {
@@ -55,7 +65,11 @@ export const CycleModalForm = ({
               <CycleSelectField
                 id="active"
                 selectedOptionID={values.active}
-                label={intl.formatMessage(messages.stateCycleField)}
+                label={
+                  modalType === ModalType.CREATE
+                    ? intl.formatMessage(messages.stateCycleFieldOnCreateCycle)
+                    : intl.formatMessage(messages.stateCycleFieldOnUpdateCycle)
+                }
                 options={[
                   {
                     id: CYCLE_STATUS.ACTIVE,
@@ -90,6 +104,22 @@ export const CycleModalForm = ({
                 label={intl.formatMessage(messages.parenteCycleField)}
                 options={cycleParents}
                 isDisabled={values.cadence === CADENCE.YEARLY}
+                Tooltip={() => (
+                  <TooltipWithDelay
+                    label={intl.formatMessage(messages.parentCycleTooltip)}
+                    placement="top"
+                    maxWidth="container.md"
+                  >
+                    <Flex transform="translateY(2px)">
+                      <InfoCircleIcon
+                        fill="new-gray.600"
+                        stroke="new-gray.600"
+                        cursor="help"
+                        desc={intl.formatMessage(messages.parentCycleTooltip)}
+                      />
+                    </Flex>
+                  </TooltipWithDelay>
+                )}
               />
 
               <CycleDateField
