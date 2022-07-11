@@ -25,10 +25,10 @@ export default defineMessages<BottomActionsMessages>({
 
   deactivateDialogDescription: {
     defaultMessage:
-      '{name} perderá o acesso ao Bud e será removido dos times aos quais pertence, mas manteremos o histórico de check-ins e comentários feitos por ele até aqui.',
-    id: 'AbWup6',
+      '{name} perderá o acesso ao Bud e será removido dos times aos quais pertence, mas manteremos o histórico de check-ins e comentários feitos até aqui.',
+    id: 'H/tYPn',
     description:
-      'This message appears in the confirmation dialog when we try to deactivate an user',
+      'This message appears in the confirmation dialog when we try to deactivate an user.',
   },
 
   deactivateDialogKeyword: {

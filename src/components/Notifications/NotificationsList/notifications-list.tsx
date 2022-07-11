@@ -53,7 +53,8 @@ const NotificationsList = () => {
                 color: 'brand.300',
               }}
               fontSize={14}
-              paddingY={8}
+              py={8}
+              pt={10}
               fontWeight="medium"
               onClick={() => setListLimit(listLimit + 2)}
             >

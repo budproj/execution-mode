@@ -1,5 +1,5 @@
 import { Skeleton, Button, Collapse, Flex, Heading } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
@@ -8,6 +8,7 @@ import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
 import { KeyResultSectionTimelineCardBase } from 'src/components/KeyResult/Single/Sections/Timeline/Cards'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
+import isCheckInModalOpenAtom from 'src/state/recoil/key-result/check-in/is-check-in-modal-open'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 import { syncedFragments } from 'src/state/recoil/key-result/synced-fragments'
 
@@ -24,26 +25,39 @@ const KeyResultSectionAddCheckIn = ({
   onCompleted,
   newCheckInValue,
 }: KeyResultSectionAddCheckInProperties) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const intl = useIntl()
+
+  const isCheckInModalOpen = useRecoilValue(isCheckInModalOpenAtom)
+  const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
   const resetSyncedFragments = useResetRecoilState(syncedFragments(keyResultID))
-  const intl = useIntl()
+
+  const myReference = useRef<null | HTMLDivElement>(null)
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const executeScroll = () => myReference?.current?.scrollIntoView({ behavior: 'smooth' })
+
+  useEffect(() => {
+    setTimeout(() => {
+      executeScroll()
+    }, 800)
+  }, [executeScroll])
 
   const isLoaded = typeof latestKeyResultCheckIn?.value !== 'undefined'
 
   const handleOpen = () => {
-    setIsOpen(true)
+    setIsCheckInModalOpen(true)
   }
 
   const handleClose = () => {
-    setIsOpen(false)
+    setIsCheckInModalOpen(false)
     setDraftValue(latestKeyResultCheckIn?.value)
   }
 
   const handleSubmit = (values: CheckInFormValues) => {
     if (values.valueNew) setDraftValue(values.valueNew)
-    setIsOpen(false)
+    setIsCheckInModalOpen(false)
     resetSyncedFragments()
   }
 
@@ -53,15 +67,19 @@ const KeyResultSectionAddCheckIn = ({
         <Button
           variant="solid"
           w="100%"
-          colorScheme={isOpen ? 'gray' : 'brand'}
-          onClick={isOpen ? handleClose : handleOpen}
+          colorScheme={isCheckInModalOpen ? 'gray' : 'brand'}
+          onClick={isCheckInModalOpen ? handleClose : handleOpen}
         >
-          {intl.formatMessage(isOpen ? messages.buttonLabelClose : messages.buttonLabelOpen)}
+          {intl.formatMessage(
+            isCheckInModalOpen ? messages.buttonLabelClose : messages.buttonLabelOpen,
+          )}
         </Button>
       </Skeleton>
-      <Collapse animateOpacity in={isOpen} style={{ overflow: 'visible' }}>
+
+      <Collapse animateOpacity in={isCheckInModalOpen} style={{ overflow: 'visible' }}>
         <KeyResultSectionTimelineCardBase hideUser>
           <Heading
+            ref={myReference}
             fontSize="xl"
             fontWeight={700}
             color="new-gray.900"

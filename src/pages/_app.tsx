@@ -14,6 +14,7 @@ import ProgressBar from 'src/components/Base/ProgressBar'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
 import { SocketIOProvider } from 'src/components/Base/SocketIOProvider'
+import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
 
@@ -66,6 +67,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                       <HotjarProvider />
                       <HubSpotProvider />
                       <ProgressBar />
+                      <KeyResultSingleDrawer />
                       <Component {...pageProps} />
                     </MaintenanceGatekeeper>
                   </RecoilIntlProvider>

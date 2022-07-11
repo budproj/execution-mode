@@ -19,7 +19,6 @@ import { PageMetaHead } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { ChevronDown } from 'src/components/Icon'
 import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
-import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { TASK_STATUS } from 'src/components/Task/constants'
 import { companyPreposition } from 'src/components/User/DetailedHeader/constants'
@@ -60,7 +59,6 @@ const CompanyOkrPage = ({ handleLineClick, intl, userID }: CompanyOkrPagePropert
   return (
     <PageContent>
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
-      <KeyResultSingleDrawer />
 
       <PageHeader>
         <Flex alignItems="center" justifyContent="space-between">

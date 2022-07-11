@@ -21,7 +21,6 @@ import PageContent from 'src/components/Base/PageContent'
 import { PageHeader } from 'src/components/Base/PageHeader/wrapper'
 import { ChevronDown } from 'src/components/Icon'
 import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
-import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { KeyResult } from 'src/components/KeyResult/types'
 import tasksMessages from 'src/components/Page/MyThings/ActiveCycles/messages'
 import MyTasks from 'src/components/Page/MyThings/ActiveCycles/my-tasks'
@@ -63,8 +62,6 @@ const CompanyOkrPage = ({ userData, isUserLoading, intl }: ProfilePageProperties
   return (
     <PageContent>
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
-
-      <KeyResultSingleDrawer />
 
       <PageHeader mb={6}>
         <Flex alignItems="center" justifyContent="space-between">

@@ -1,4 +1,4 @@
-import { Button as ChakraButton, StyleProps } from '@chakra-ui/react'
+import { Button as ChakraButton, StyleProps, ThemingProps } from '@chakra-ui/react'
 import React from 'react'
 
 import { PlusOutline } from 'src/components/Icon'
@@ -12,6 +12,7 @@ interface ButtonProperties extends StyleProps {
   icon?: BUTTON_ICON_OPTIONS
   iconDescription?: string
   isDisabled?: boolean
+  variant?: ThemingProps<'Button'>['variant']
   onClick?: () => void
 }
 

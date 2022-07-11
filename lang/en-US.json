@@ -47,6 +47,10 @@
     "defaultMessage": "Last update",
     "description": "This prefix is displayed as default in our last updated component"
   },
+  "//f0UA": {
+    "defaultMessage": "Timeline | bud",
+    "description": "The page title that is displayed in the browser tab"
+  },
   "/2GFGI": {
     "defaultMessage": "The deadline for this objective",
     "description": "The title text of our calendar icon in our objective accordion, it is displayed when an user hover the icon itself"
@@ -243,6 +247,10 @@
     "defaultMessage": "My bud account",
     "description": "The page title that is displayed in the browser tab for the my profile page"
   },
+  "2nlZ3v": {
+    "defaultMessage": "Visualize and alter the settings of your account",
+    "description": "The page description that is displayed in Google and screen readers for the settings page."
+  },
   "2QbXJB": {
     "defaultMessage": "Oops! An unexpected error occurred. Please try again.",
     "description": "This message appears as an error toast when we have an unknown error while creating a new user"
@@ -283,6 +291,10 @@
     "defaultMessage": "Those are the key results that are part of this objective",
     "description": "This tooltip explains the first column of the key result list"
   },
+  "3q/E0t": {
+    "defaultMessage": "OKR Cycles",
+    "description": "The subtitle page."
+  },
   "3rnKj8": {
     "defaultMessage": "Check how your card will be seen by other users:",
     "description": "This subtitle is displayed as the subtitle of the user card preview section in our user account settings page"
@@ -314,6 +326,10 @@
   "4f4cWE": {
     "defaultMessage": "High",
     "description": "We use this tag to group every key result with confidence higher than 66"
+  },
+  "4iiGjr": {
+    "defaultMessage": "Company",
+    "description": "This title is displayed as the heading of the definitions menu section"
   },
   "4MCOg+": {
     "defaultMessage": "Yearly Progress",
@@ -366,6 +382,10 @@
   "612Wwz": {
     "defaultMessage": "Create an OKR in the {cycle} {parent} cycle.",
     "description": "This message is displayed inside the team page, on the options menu of a cycle"
+  },
+  "61S7n7": {
+    "defaultMessage": "See details",
+    "description": "This message is the description of the option to view details  of a user."
   },
   "68qL+a": {
     "defaultMessage": "Gender of the company",
@@ -431,6 +451,10 @@
     "defaultMessage": "Average of the progress of your key results in the current annual cycle",
     "description": "Yearly progress chart tooltip message"
   },
+  "7GDhfH": {
+    "defaultMessage": "The cycle is active, the check-in functionality is available, and progress is being measured.",
+    "description": "This string is used to describe the cycles active status option."
+  },
   "7tvIOz": {
     "defaultMessage": "Create key result",
     "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
@@ -471,6 +495,10 @@
     "defaultMessage": "Down arrow icon representing how far your company regressed over the last week",
     "description": "This message is used by screen readers to explain our arrow down icon"
   },
+  "8B+4Un": {
+    "defaultMessage": "Use this painel to configure the users on the platform",
+    "description": "The description page."
+  },
   "8CjDR7": {
     "defaultMessage": "Cancel",
     "description": "This message is used in the cancel button when we are in the confirmation dialog"
@@ -482,6 +510,10 @@
   "8EZRzi": {
     "defaultMessage": "Start date for the quarterly cycle",
     "description": "The label of the company quarterly date start while creating a new workspace"
+  },
+  "8gbub2": {
+    "defaultMessage": "Status",
+    "description": "This message is displayed as the column header for the cycle table in the status column"
   },
   "8kcr+g": {
     "defaultMessage": "User",
@@ -500,7 +532,7 @@
     "description": "This message is displayed inside our key-result format select as the title of the coin BRL format"
   },
   "97e4V+": {
-    "defaultMessage": "Average of the progress of your key results in the current quarterly cycle",
+    "defaultMessage": "Let's create a personal task?",
     "description": "Personal tasks empty state title"
   },
   "987MLd": {
@@ -514,6 +546,10 @@
   "9eQWJv": {
     "defaultMessage": "First user's email address",
     "description": "The user email while creating a new workspace"
+  },
+  "9GdiHI": {
+    "defaultMessage": "{name} will lose access to Bud and will be removed any teams, but we will keep any records of previous check-ins",
+    "description": "This message appears in the confirmation dialog when we try to deactivate an user"
   },
   "9iN0R8": {
     "defaultMessage": "Warning! This action cannot be undone.",
@@ -534,6 +570,10 @@
   "9sw0lJ": {
     "defaultMessage": "Select your gender",
     "description": "This is the fallback value that goes on our user account settings page, at the sixth field to update the user informations. The fallback value appears if the user has no data at that field"
+  },
+  "9Y9dS0": {
+    "defaultMessage": "Cycle name",
+    "description": "The description for name cycle field"
   },
   "A+zcmM": {
     "defaultMessage": "Select",
@@ -599,6 +639,10 @@
     "defaultMessage": "Copy the title of this key result",
     "description": "This message appears in the button that copies the title of the key result"
   },
+  "AQkkKh": {
+    "defaultMessage": "You have reactivated {name} successfully.",
+    "description": "This message appears in a toast after reactivating a user."
+  },
   "aT1RWB": {
     "defaultMessage": "Confirm your action",
     "description": "This message is displayed as the input label for the danger delete resource dialog"
@@ -606,6 +650,10 @@
   "aVLR+w": {
     "defaultMessage": "100%",
     "description": "This message is displayed inside our key-result format select as the example of the percent format"
+  },
+  "az3ncM": {
+    "defaultMessage": "Warning!{breakline}This action cannot be undone.",
+    "description": "This message is used as the title in our second dialog while removing a cycle"
   },
   "B0G29o": {
     "defaultMessage": "Low",
@@ -626,6 +674,10 @@
   "bdkUKs": {
     "defaultMessage": "Teams",
     "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
+  },
+  "BeFobb": {
+    "defaultMessage": "This will also delete every OKR created in this cycle. This action cannot be undone.",
+    "description": "This message is used as the description in our first dialog while removing a cycle"
   },
   "BEo9Xi": {
     "defaultMessage": "Deactivate user",
@@ -651,6 +703,10 @@
     "defaultMessage": "Quarterly Progress",
     "description": "User's quarterly progress title"
   },
+  "bPInC0": {
+    "defaultMessage": "Edit cycle",
+    "description": "This message is the description of the edit cycle option."
+  },
   "bqCVp4": {
     "defaultMessage": "Click here to start typing your comment",
     "description": "This is the title text that is displayed if the user hovers the mouse in it"
@@ -666,6 +722,10 @@
   "BYO0eO": {
     "defaultMessage": "A trash icon. Clicking on it removes this key result.",
     "description": "This text is used by screen readers to explain our trash can icon, used to remove that line in the key-result table"
+  },
+  "bZXWCR": {
+    "defaultMessage": "Default",
+    "description": "This string is used to select the user default role."
   },
   "bZYEAl": {
     "defaultMessage": "A subtraction sign within a circle indicating that progress is still the same",
@@ -690,6 +750,18 @@
   "c8x6gV": {
     "defaultMessage": "Explore previous cycles",
     "description": "This message is displayed when the user opens the menu inside a given cycle at the team page"
+  },
+  "CDO5jp": {
+    "defaultMessage": "Inactive",
+    "description": "This option makes an not-active cycle"
+  },
+  "CEhx3c": {
+    "defaultMessage": "Personal information",
+    "description": "This label defines the text on the first menu section option"
+  },
+  "cGFQsk": {
+    "defaultMessage": "We are sorry, an unexpected error occurred. Please try again.",
+    "description": "This message appears as an error toast when we have an unknown error while creating a new cycle"
   },
   "ciNUJf": {
     "defaultMessage": "Explore",
@@ -723,6 +795,14 @@
     "defaultMessage": "If things stay on track, we hope to achieve the goal",
     "description": "This text explains our tag to the user"
   },
+  "CQiLwO": {
+    "defaultMessage": "Timeline",
+    "description": "MainAppBar menu item that links to teams \"Timeline\" page"
+  },
+  "CQPpEV": {
+    "defaultMessage": "Active",
+    "description": "This string is used to select the active cycles option."
+  },
   "Cr1hEp": {
     "defaultMessage": "Check-in",
     "description": "This text is displayed as the title of our check-in cards"
@@ -730,6 +810,10 @@
   "cRj0sI": {
     "defaultMessage": "We're sorry! An unexpected error occurred. Please try again.",
     "description": "This message appears when the user tries to remove a given key-result, but receives an error"
+  },
+  "CS3a8I": {
+    "defaultMessage": "Active",
+    "description": "This option makes an active cycle"
   },
   "Cu5tci": {
     "defaultMessage": "If you want, you can include a description to help your colleagues understand why this key result is important and how you plan on achieving it.",
@@ -859,9 +943,17 @@
     "defaultMessage": "No information provided",
     "description": "The fallback value appears if no value is defined for that input. This input is customizable, so it will only appears if no value is defined, and no custom fallback value was provided"
   },
+  "ej/Q3X": {
+    "defaultMessage": "Cancel",
+    "description": "The button to close the modal cycle"
+  },
   "EkoIl2": {
     "defaultMessage": "Create new subteam",
     "description": "This message appears as an option in the team page while adding a new user"
+  },
+  "epM1Xt": {
+    "defaultMessage": "Create",
+    "description": "This button is used to create a new cycle."
   },
   "ErVh0y": {
     "defaultMessage": "Current value",
@@ -891,6 +983,10 @@
     "defaultMessage": "Email",
     "description": "The user email input placeholder while creating a new workspace"
   },
+  "f2OulU": {
+    "defaultMessage": "Start",
+    "description": "This message is displayed as the column header for the cycle table in the date start column"
+  },
   "F33Lyk": {
     "defaultMessage": "Color of the confidence level",
     "description": "The text of the table head related to the Confidence Level color column"
@@ -898,6 +994,14 @@
   "f6/kwR": {
     "defaultMessage": "This is the progress so far this week",
     "description": "This tooltip appears when the user hovers the third column title"
+  },
+  "f6KTde": {
+    "defaultMessage": "Actions",
+    "description": "This message is displayed as the column header for the users table in the actions column"
+  },
+  "F9UdBv": {
+    "defaultMessage": "Actions",
+    "description": "This message is displayed as the column header for the cycle table in the actions column"
   },
   "faL9vf": {
     "defaultMessage": "Green circle indicating a high confidence level",
@@ -987,9 +1091,17 @@
     "defaultMessage": "Workspace successfully created",
     "description": "The title of the toast that appears when we create a new workspace"
   },
+  "G9m+Ed": {
+    "defaultMessage": "This person's access has been deactivated.",
+    "description": "This message appears in the tooltip of users with inactive account state."
+  },
   "gAgkzF": {
     "defaultMessage": "Create Objective",
     "description": "create new key result"
+  },
+  "ganP5k": {
+    "defaultMessage": "Settings | bud",
+    "description": "The page title that is displayed in the browser tab for the settings page"
   },
   "GBh0Xf": {
     "defaultMessage": "We're sorry, but there's already an user linked to this email address",
@@ -1026,6 +1138,10 @@
   "Gk28Al": {
     "defaultMessage": "new!",
     "description": "Tag new item"
+  },
+  "GKl+a6": {
+    "defaultMessage": "Deactivate account",
+    "description": "This message is the description of the option to deactivate a user account."
   },
   "gm1hfm": {
     "defaultMessage": "Progress of this objective so far this week",
@@ -1075,9 +1191,17 @@
     "defaultMessage": "Safety confirmation",
     "description": "This message is displayed as the input label for the danger confirmation resource dialog"
   },
+  "gZstKN": {
+    "defaultMessage": "Starting state",
+    "description": "The description for state cycle field on create cycle form"
+  },
   "H/aZym": {
     "defaultMessage": "Choose how your information will be seen by others.",
     "description": "This subtitle is displayed as the subtitle of the personal informations section in our user account settings page"
+  },
+  "H/tYPn": {
+    "defaultMessage": "{name} will be removed from Bud and will no longer be able to access the platform, but we will retain the history of any check-ins and comments made up to this point.",
+    "description": "This message appears in the confirmation dialog when we try to deactivate an user."
   },
   "h/WXZ6": {
     "defaultMessage": "key result",
@@ -1090,6 +1214,10 @@
   "h4sP/q": {
     "defaultMessage": "My Account",
     "description": "The page title that our users should see in the my profile page"
+  },
+  "h4VH9f": {
+    "defaultMessage": "deactivate user",
+    "description": "This message appears in button to confirm the deactivate user action."
   },
   "HAQ+JV": {
     "defaultMessage": "Red circle indicating a low confidence level",
@@ -1122,6 +1250,10 @@
   "HhSnBG": {
     "defaultMessage": "DEACTIVATE",
     "description": "This is the keyword that the user needs to type to deactivate a given user"
+  },
+  "hJZjes": {
+    "defaultMessage": "Up-to-date",
+    "description": "The title of the section of the key results with an up to date check-in."
   },
   "hL/jUm": {
     "defaultMessage": "TASKS IN OKRs",
@@ -1171,9 +1303,17 @@
     "defaultMessage": "Show Less...",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
+  "i3PQl+": {
+    "defaultMessage": "{period} Ciclo {status} successfully!",
+    "description": "This message appears when we create a new cycle as a toast"
+  },
   "I8NCD3": {
     "defaultMessage": "Check-in made",
     "description": "This string is used as the description for the icon that indicates that the key-result is updated"
+  },
+  "i915bK": {
+    "defaultMessage": "Leaders can create, edit and delete objectives and key results from their teams.",
+    "description": "This string is used to describe the user edit role selection."
   },
   "i9bdpU": {
     "defaultMessage": "An unexpected error occurred when creating your objective. Please try again.",
@@ -1255,6 +1395,14 @@
     "defaultMessage": "{progress, select, 0 {No variation} other {<highlight>{signal}{progress}% so far this week</highlight>}}",
     "description": "This label appears in our stamp title. It represents how much your company has increased since last week"
   },
+  "J0sAff": {
+    "defaultMessage": "{period} cycle deleted successfully.",
+    "description": "This message appears in a toast after the user removes an cycle."
+  },
+  "J3ARiQ": {
+    "defaultMessage": "OKR Master",
+    "description": "This string is used to select the user edit role."
+  },
   "J5Rfuu": {
     "defaultMessage": "Create new tasks by navigating to the sidebar of your key results.",
     "description": "The empty state message when you have no tasks"
@@ -1287,6 +1435,10 @@
     "defaultMessage": "{username}'s Things",
     "description": "The page title for users profile"
   },
+  "Jj0rRJ": {
+    "defaultMessage": "Administrators have full access for creating, editing and deleting OKRs, users and cycles.",
+    "description": "This string is used to describe the user admin role selection."
+  },
   "jjr+Ye": {
     "defaultMessage": "Objective successfully removed",
     "description": "This message appears in a toast after the user removes an objective"
@@ -1303,13 +1455,25 @@
     "defaultMessage": "Check out our OKR examples",
     "description": "This button redirects to the page that teaches about OKRs."
   },
+  "jNuy4b": {
+    "defaultMessage": "This person has access to Bud.",
+    "description": "This message appears in the tooltip of users with active account state."
+  },
   "jRsXuq": {
     "defaultMessage": "CHECK-IN",
     "description": "The tooltip text for the check-ins text"
   },
+  "jV4VhD": {
+    "defaultMessage": "Delete cycle",
+    "description": "This message is used as the label in the confirmation button while removing a cycle"
+  },
   "jvxLB+": {
     "defaultMessage": "Are you sure that you want to do it? This action is irreversible",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
+  },
+  "jwsMer": {
+    "defaultMessage": "Last check-in",
+    "description": "the prefix that is displayed in the last update checkmark."
   },
   "Jx/tRY": {
     "defaultMessage": "Team name:",
@@ -1371,6 +1535,14 @@
     "defaultMessage": "Cancel",
     "description": "This message is displayed in the \"CANCEL\" button in the checkin form"
   },
+  "kDC8d3": {
+    "defaultMessage": "Settings",
+    "description": "The page title that our users should see in the settings page"
+  },
+  "KDE9dq": {
+    "defaultMessage": "If you are sure you want to delete the {period} cycle and all of its OKRs, please confirm your action by writing DELETE in the field below:",
+    "description": "This message is used as the description in our  second dialog while removing a cycle"
+  },
   "KdYFbe": {
     "defaultMessage": "Delete",
     "description": "This text is displayed in our menu, as an anchor to remove that given card"
@@ -1407,6 +1579,10 @@
     "defaultMessage": "%",
     "description": "The text of the table head related to the percentual progress column"
   },
+  "kTFIMk": {
+    "defaultMessage": "You have no check-ins pending because you don't have any key results.",
+    "description": "The page description that is displayed if the user has no key result in the check in notifications tab."
+  },
   "kXNgkQ": {
     "defaultMessage": "Progress",
     "description": "The text of the table head related to the Progress column"
@@ -1422,6 +1598,10 @@
   "L0c5bp": {
     "defaultMessage": "Goal",
     "description": "This label appears above the fifth input in our insert key-result drawer"
+  },
+  "L3D4+H": {
+    "defaultMessage": "Use the fields below to {breakline}make changes to this cycle:",
+    "description": "The description for cycle modal"
   },
   "L5w0P3": {
     "defaultMessage": "Female",
@@ -1463,6 +1643,10 @@
     "defaultMessage": "Three points icon. By clicking on it some options will be opened",
     "description": "This text is displayed as the tree dots desc text in our timeline cards"
   },
+  "ll4kYl": {
+    "defaultMessage": "End date",
+    "description": "The description for date-end cycle field"
+  },
   "lm9HAr": {
     "defaultMessage": "Calendar icon",
     "description": "The desc message for the Calendar icon. This icon is used to ilustrate our key results"
@@ -1491,9 +1675,17 @@
     "defaultMessage": "English",
     "description": "The user locale en-US option while creating a new workspace"
   },
+  "LQfRhU": {
+    "defaultMessage": "Go to profile",
+    "description": "This message is the description of the option to redirect to profile of a user."
+  },
   "lQkUTL": {
     "defaultMessage": "Inspiring",
     "description": "This title guides the creation of Objectives."
+  },
+  "Lt+YEZ": {
+    "defaultMessage": "End",
+    "description": "This message is displayed as the column header for the cycle table in the date end column"
   },
   "LvI+KK": {
     "defaultMessage": "Language",
@@ -1506,6 +1698,10 @@
   "LwoUMm": {
     "defaultMessage": "Individual Plan",
     "description": "Individual OKR title of the page"
+  },
+  "Lxrv+d": {
+    "defaultMessage": "Create cycle",
+    "description": "This button is used to create a new cycle."
   },
   "M0RYZa": {
     "defaultMessage": "Save",
@@ -1531,9 +1727,21 @@
     "defaultMessage": "This action can't be undone",
     "description": "This text is giving more details regarding the delete alert in our drawer"
   },
+  "mbJq/U": {
+    "defaultMessage": "Are you sure you want to delete the {period} cycle?",
+    "description": "This message is used as the title in our first dialog while removing a cycle"
+  },
+  "MBvlAH": {
+    "defaultMessage": "account deactivated",
+    "description": "This string is used to select the not-active cycles option."
+  },
   "mdG+CG": {
     "defaultMessage": "Active Cycles",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
+  },
+  "Me1wRC": {
+    "defaultMessage": "Notifications",
+    "description": "This message appears as the title of the Notifications option in the notifications modal."
   },
   "MgJJAJ": {
     "defaultMessage": "Comment here! To tag someone, use @ :)",
@@ -1542,6 +1750,10 @@
   "MHv/ZI": {
     "defaultMessage": "This team has no members",
     "description": "This message is displayed when there is no users in a given team"
+  },
+  "minQA9": {
+    "defaultMessage": "Reset password",
+    "description": "This message is the description of the option to alter password of a user."
   },
   "mK9HFR": {
     "defaultMessage": "End date for annual cycle",
@@ -1562,6 +1774,14 @@
   "MpjjOt": {
     "defaultMessage": "Bud",
     "description": "The default title for our page head meta title value"
+  },
+  "mXb4/b": {
+    "defaultMessage": "Settings | bud",
+    "description": "The page title that is displayed in the browser tab for the settings page"
+  },
+  "MyqmeF": {
+    "defaultMessage": "Unable to create the cycle.",
+    "description": "This message is used as an toast error message when we try to create an cycle"
   },
   "N+Tad7": {
     "defaultMessage": "Gear icon. By clicking on it you will be taken to the configuration page",
@@ -1598,6 +1818,10 @@
   "ND5T6U": {
     "defaultMessage": "Up arrow. By clicking on it you close the selection menu",
     "description": "This is the desc attribute of our chevron up icon. It is used by screen readers"
+  },
+  "ndABHM": {
+    "defaultMessage": "Admin",
+    "description": "This string is used to select the user admin role."
   },
   "nEQaGP": {
     "defaultMessage": "Quarterly OKRs {quarter}",
@@ -1655,6 +1879,10 @@
     "defaultMessage": "Neutral",
     "description": "The neutral gender for the company while creating a new workspace"
   },
+  "Ny2Pia": {
+    "defaultMessage": "Cycles are time periods defined for the strategy.{breakingline}We recommend using an annual cycle for the company and a quarterly cycle for the teams.",
+    "description": "The description page."
+  },
   "NYGW+N": {
     "defaultMessage": "Role",
     "description": "This is the label that goes on our user account settings page, at the fifth field to update the user informations"
@@ -1687,6 +1915,10 @@
     "defaultMessage": "Colleagues with Individual Plan",
     "description": "Friends with individual OKRs title"
   },
+  "oh+3Gh": {
+    "defaultMessage": "Annual",
+    "description": "This option makes an cycle with yearly cadence"
+  },
   "OMUZ7w": {
     "defaultMessage": "Female",
     "description": "The female gender for the company while creating a new workspace"
@@ -1698,6 +1930,10 @@
   "or8fId": {
     "defaultMessage": "Back",
     "description": "This message is displayed as a label in the button on our not found error page"
+  },
+  "OS8mCA": {
+    "defaultMessage": "Cadence",
+    "description": "The description for cadence cycle field"
   },
   "OwHPoA": {
     "defaultMessage": "No OKRs have been created in this Individual Plan yet",
@@ -1759,9 +1995,17 @@
     "defaultMessage": "Pen icon. By clicking on it you can edit this field",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
   },
+  "pmuG/e": {
+    "defaultMessage": "Leader",
+    "description": "This string is used to select the user edit role."
+  },
   "poN086": {
     "defaultMessage": "Circular stroke icon with a symbol inside",
     "description": "This is the desc text that is displayed for screen readers"
+  },
+  "pQnPZP": {
+    "defaultMessage": "Parent Cycle",
+    "description": "The description for parent cycle field"
   },
   "PSCS+h": {
     "defaultMessage": "Name",
@@ -1811,6 +2055,10 @@
     "defaultMessage": "Progress percentage between the initial value and the goal",
     "description": "This tooltip explains the fifth column of the key result list"
   },
+  "qGLpBy": {
+    "defaultMessage": "Start date",
+    "description": "The description for date-start cycle field"
+  },
   "qhchMM": {
     "defaultMessage": "They represent the highest priorities and communicate that direction very clearly.",
     "description": "This card guides the creation of Objectives."
@@ -1822,6 +2070,10 @@
   "QKUmFp": {
     "defaultMessage": "Close",
     "description": "This message is displayed when an user hovers the close button of our progress slider popover"
+  },
+  "ql0LOi": {
+    "defaultMessage": "Search people",
+    "description": "This message appears as a label in users search input."
   },
   "QMM2q6": {
     "defaultMessage": "Area",
@@ -1875,9 +2127,17 @@
     "defaultMessage": "Personal Information",
     "description": "This title is displayed as the heading of the personal informations section in our user account settings page"
   },
+  "R6SREn": {
+    "defaultMessage": "These users can create, edit and delete any objective or key result on Bud",
+    "description": "This string is used to describe the user edit role selection."
+  },
   "R8hOYh": {
     "defaultMessage": "This team has no OKRs",
     "description": "This message is displayed as the empty state message inside the team page"
+  },
+  "rFUuVv": {
+    "defaultMessage": "To create a new OKR cycle, {breakline}use the fields below:",
+    "description": "The description for cycle modal"
   },
   "rH+dGv": {
     "defaultMessage": "Down arrow icon. By clicking on it the selection menu will be opened",
@@ -1931,6 +2191,10 @@
     "defaultMessage": "Oh no. Apparently the screen you are looking for has been abducted!",
     "description": "This message is displayed below the title in our unknown error page"
   },
+  "s8fzur": {
+    "defaultMessage": "active account",
+    "description": "This string is used to select the active cycles option."
+  },
   "Sau4Na": {
     "defaultMessage": "Name",
     "description": "The user first name input placeholder while creating a new workspace"
@@ -1938,6 +2202,10 @@
   "Sb6dkV": {
     "defaultMessage": "See details",
     "description": "This option will show a sidebar with the details of the selected user."
+  },
+  "SdgM/R": {
+    "defaultMessage": "My account",
+    "description": "This title is displayed as the heading of the definitions menu section"
   },
   "SDzYq9": {
     "defaultMessage": "We're sorry! There's been an unexpected error. Please try again",
@@ -2051,6 +2319,10 @@
     "defaultMessage": "Up arrow illustrating how far your company has evolved over the last week",
     "description": "This message is used by screen readers to explain our arrow up icon"
   },
+  "t7xKJo": {
+    "defaultMessage": "{period} cycle edited successfully!",
+    "description": "This message appears when we create a new cycle as a toast"
+  },
   "T8ytLJ": {
     "defaultMessage": "Objective",
     "description": "The label text above the Objective section in our key result single page or drawer"
@@ -2066,6 +2338,10 @@
   "tcWO3v": {
     "defaultMessage": "Bud logotype. It been just the Bud written in lower case in purple",
     "description": "The alternative text explaining our logotype"
+  },
+  "TGP9cN": {
+    "defaultMessage": "Save",
+    "description": "The button to create or edit a cycle on modal"
   },
   "th1Ney": {
     "defaultMessage": "Today",
@@ -2087,9 +2363,17 @@
     "defaultMessage": "Audacious",
     "description": "This title guides the creation of Objectives."
   },
+  "tjSA87": {
+    "defaultMessage": "Cycle name",
+    "description": "This message is displayed as the column header for the cycle table in the cycle name column"
+  },
   "TKIxVB": {
     "defaultMessage": "Settings",
     "description": "This title is displayed as the heading of the definitions menu section"
+  },
+  "tmyaek": {
+    "defaultMessage": "State",
+    "description": "This message is displayed as the column header for the users table in the state column"
   },
   "TN6PhK": {
     "defaultMessage": "My account",
@@ -2151,21 +2435,49 @@
     "defaultMessage": "You haven't created any OKR for your individual plan.",
     "description": "This message is displayed as the empty state message inside the User page"
   },
+  "ulnySu": {
+    "defaultMessage": "OKR Cycles",
+    "description": "This label defines the text on the first menu section option"
+  },
   "UN5BY2": {
     "defaultMessage": "DELETE",
     "description": "This message is used as the default keyword to type to confirm while removing a given resource"
+  },
+  "UNfjU2": {
+    "defaultMessage": "deactivated",
+    "description": "This message appears when we have successfully activate/deactivate a cycle."
   },
   "unuB2s": {
     "defaultMessage": "About this check in",
     "description": "This is the label text that is displayed above the input"
   },
+  "UozvhV": {
+    "defaultMessage": "Users",
+    "description": "This label defines the text on the first menu section option"
+  },
   "upeS+T": {
     "defaultMessage": "Oops, Bud is going to be out of work for a few hours while we clean up. We hope to be back by: <highlight>{date} às {hour}h</highlight> See you :)",
     "description": "This message is displayed as a description in our under maintenance error page"
   },
+  "uQUReU": {
+    "defaultMessage": "Current state",
+    "description": "The description for state cycle field on update cycle form"
+  },
+  "usAoP+": {
+    "defaultMessage": "Quarterly",
+    "description": "This option makes an cycle with quarterly cadence"
+  },
   "Uu0OJV": {
     "defaultMessage": "Image icon. It indicates that your avatar is on this field",
     "description": "The alternative text explaining our image icon in the settings account page"
+  },
+  "UU1FXI": {
+    "defaultMessage": "Links the quarterly cycle to the annual cycle to which it belongs.",
+    "description": "This message appears on tooltip that explain the parent cycle select field."
+  },
+  "uUn4LH": {
+    "defaultMessage": "DELETE",
+    "description": "This message is used as keyword to delete a cycle"
   },
   "UUo+Pt": {
     "defaultMessage": "This team is a company",
@@ -2203,6 +2515,10 @@
     "defaultMessage": "Show more",
     "description": "This text is displayed in the button that expands a truncated text"
   },
+  "vEzcix": {
+    "defaultMessage": "Teams",
+    "description": "This message is displayed as the column header for the users table in the teams column"
+  },
   "VFj8OD": {
     "defaultMessage": "Title copied successfully",
     "description": "This message appears in the toast when you successfully copies the title of the key result"
@@ -2227,6 +2543,10 @@
     "defaultMessage": "Female",
     "description": "The user gender female option while creating a new workspace"
   },
+  "vHTPEb": {
+    "defaultMessage": "{period} cycle created successfully!",
+    "description": "This message appears when we create a new cycle as a toast"
+  },
   "vJ/603": {
     "defaultMessage": "Aw. This link might be expired or the URL is wrong.",
     "description": "The description displayed in our not found error page"
@@ -2234,6 +2554,10 @@
   "VltGNp": {
     "defaultMessage": "A drawing of a ghost, indicating this key result has no activity",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawers"
+  },
+  "VLU792": {
+    "defaultMessage": "Check-in",
+    "description": "The title of the button to create a check-in in the check-in notifications tab, when clicked it opens the key result drawer."
   },
   "vm0Yuj": {
     "defaultMessage": "My account | bud",
@@ -2243,6 +2567,10 @@
     "defaultMessage": "Period",
     "description": "The name label. It is displayed in the Cycle section, as a label of the name property"
   },
+  "vO+kQj": {
+    "defaultMessage": "The cycle is closed. It's not possible to edit or update the OKRs, but they can be viewed in the history.",
+    "description": "This string is used to describe the cycles not-active status option."
+  },
   "VPJIpc": {
     "defaultMessage": "OKRs",
     "description": "This message is displayed above the empty state inside the active cycles section at the User page"
@@ -2250,6 +2578,10 @@
   "vppqyA": {
     "defaultMessage": "Individual Plan OKRs are set by you. They do not interfere with the company's progress.",
     "description": "Individual OKR subtitle of the page"
+  },
+  "vrROtV": {
+    "defaultMessage": "Options button.",
+    "description": "This button allows you to view details, reset password or deactivate a users account."
   },
   "VSS4F8": {
     "defaultMessage": "{unit, select, fallback {since {date}} other {{date}}}",
@@ -2262,6 +2594,18 @@
   "vv49le": {
     "defaultMessage": "First user's name",
     "description": "The user first name while creating a new workspace"
+  },
+  "VW9LHA": {
+    "defaultMessage": "Password reset email sent successfully.",
+    "description": "This message appears in a toast after the user ask to reset password."
+  },
+  "vyGEtA": {
+    "defaultMessage": "Current state",
+    "description": "The description for state cycle field"
+  },
+  "Vytr8A": {
+    "defaultMessage": "Edit cycle",
+    "description": "The title for cycle modal"
   },
   "vzHp1e": {
     "defaultMessage": "Need inspiration? Remember: the best objectives are...",
@@ -2290,6 +2634,10 @@
   "waPxPB": {
     "defaultMessage": "First user's language",
     "description": "The user locale while creating a new workspace"
+  },
+  "wat5HS": {
+    "defaultMessage": "Name",
+    "description": "This message is displayed as the column header for the users table in the user name column"
   },
   "WEXvlm": {
     "defaultMessage": "Try using this space to list your priorities for the day, for example :)",
@@ -2383,9 +2731,17 @@
     "defaultMessage": "A button with a confirmation icon. By clicking on it you will save your changes to the objective's title",
     "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the check button"
   },
+  "xIe3i6": {
+    "defaultMessage": "Reactivate account",
+    "description": "This message is the description of the option to reactivate a user account."
+  },
   "XiSFEr": {
     "defaultMessage": "Unexpected error | bud",
     "description": "The page title of our unknown error page that is displayed in the browser tab"
+  },
+  "xJJ9uE": {
+    "defaultMessage": "Sorry, but an unexpected error occurred. Please try again.",
+    "description": "This message appears when the user tries to remove a given cycle, but receives an error"
   },
   "xkN783": {
     "defaultMessage": "",
@@ -2426,6 +2782,10 @@
   "XYg5xf": {
     "defaultMessage": "Click here to edit your settings",
     "description": "The title text of our settings icon, it is displayed when an user hover the icon itself"
+  },
+  "XyhQJo": {
+    "defaultMessage": "Cycle removed successfully",
+    "description": "This message appears in a toast after the user removes a cycle"
   },
   "xywRWB": {
     "defaultMessage": "A check icon. By clicking on it you will save your changes",
@@ -2495,6 +2855,10 @@
     "defaultMessage": "Last name",
     "description": "The label of the last name field in the create user form"
   },
+  "ywBP21": {
+    "defaultMessage": "Inactive",
+    "description": "This string is used to select the not-active cycles option."
+  },
   "YxKyjP": {
     "defaultMessage": "Individual Plan",
     "description": "Individual OKR title of the page"
@@ -2531,6 +2895,22 @@
     "defaultMessage": "Visualize and update your preferences for the platform",
     "description": "The page description that is displayed in Google and screen readers for the platform settings page"
   },
+  "Z9w45E": {
+    "defaultMessage": "Users with this permission can edit and make check-ins only for their own key results.",
+    "description": "This string is used to describe the user default role selection."
+  },
+  "zaC3Cb": {
+    "defaultMessage": "activated",
+    "description": "This message appears when we are unable to activate/deactivate a cycle"
+  },
+  "zcIxrk": {
+    "defaultMessage": "Delete cycle",
+    "description": "This message is the description of the option to delete a cycle."
+  },
+  "ZCWI2f": {
+    "defaultMessage": "Create new cycle",
+    "description": "The title for cycle modal"
+  },
   "ze3hqu": {
     "defaultMessage": "We are working on improvements for you! ;)",
     "description": "The title displayed in our under maintenance error page"
@@ -2563,9 +2943,17 @@
     "defaultMessage": "Close",
     "description": "This message is displayed as the title text for our close icon in our check-in form"
   },
+  "zmPWcg": {
+    "defaultMessage": "Role",
+    "description": "This message is displayed as the column header for the users table in the role column"
+  },
   "ZMT2Ze": {
     "defaultMessage": "Create new Key Result",
     "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
+  },
+  "Zmw2VE": {
+    "defaultMessage": "Users",
+    "description": "The subtitle page."
   },
   "Zn0eYa": {
     "defaultMessage": "A couple draw, each of them holding a puzzle piece and collaborating to assemble it",
@@ -2595,12 +2983,20 @@
     "defaultMessage": "Cinema ticket icon",
     "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
   },
+  "ZvutBL": {
+    "defaultMessage": "Cadence",
+    "description": "This message is displayed as the column header for the cycles table in the cadence column"
+  },
+  "zWpOXa": {
+    "defaultMessage": "Create",
+    "description": "The button to create or edit a cycle on modal"
+  },
   "ZXpNJ2": {
     "defaultMessage": "Pizza chart icon",
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-06-06T13:40:43Z",
+    "defaultMessage": "2022-06-27T14:48:58Z",
     "description": null
   }
 }

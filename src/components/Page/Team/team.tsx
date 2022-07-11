@@ -5,7 +5,6 @@ import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { ApolloQueryErrorBoundary, PageContent, PageMetaHead } from 'src/components/Base'
-import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { PageProperties } from 'src/components/Page/types'
 import { Team } from 'src/components/Team/types'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
@@ -58,7 +57,6 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
           description={messages.metaDescription}
           titleValues={{ team: data?.team.name ?? metaTitleLoadingFallback }}
         />
-        <KeyResultSingleDrawer />
         <KeyResultInsertDrawer teamID={teamId} />
 
         <Stack spacing={8}>

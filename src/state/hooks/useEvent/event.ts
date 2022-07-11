@@ -9,6 +9,8 @@ import { DeletedKeyResultCheckMarkEventData } from './events/deleted-key-result-
 import { DeletedPersonalTaskEventData } from './events/deleted-personal-task'
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
+import { NotificationBellData } from './events/notification-bell-data'
+import { NotificationCheckInClickData } from './events/notification-check-in-click-data'
 import { OpenedKeyResultChecklistEventData } from './events/opened-key-result-checklist'
 import { OpenedKeyResultDrawerEventData } from './events/opened-key-result-drawer'
 import { OpenedKeyResultReportConfidanceData } from './events/opened-key-result-report-confidance-data'
@@ -39,4 +41,6 @@ export type Event = {
   [EventType.OPENED_KEY_RESULT_REPORT_CONFIDANCE]: OpenedKeyResultReportConfidanceData
   [EventType.CREATED_OBJECTIVE]: CreatedObjectiveData
   [EventType.CREATED_KEY_RESULT]: CreatedKeyResultData
+  [EventType.NOTIFICATION_BELL_CLICK]: NotificationBellData
+  [EventType.NOTIFICATION_CHECK_IN_CLICK]: NotificationCheckInClickData
 }

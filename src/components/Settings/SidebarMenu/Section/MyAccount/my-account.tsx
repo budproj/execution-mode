@@ -26,14 +26,14 @@ const SettingsSidebarMyAccountMenuSectionPreferences = () => {
         {intl.formatMessage(messages.sectionTitle)}
       </Heading>
 
-      <SettingsSidebarMenuSectionButton
-        href="/settings/my-profile"
-        isActive={Boolean(route === '/settings' || route === '/settings/my-profile')}
-      >
-        <IntlLink href="/settings/my-profile">
+      <IntlLink href="/settings/my-profile">
+        <SettingsSidebarMenuSectionButton
+          href="/settings/my-profile"
+          isActive={Boolean(route === '/settings' || route === '/settings/my-profile')}
+        >
           {intl.formatMessage(messages.firstOptionLabel)}
-        </IntlLink>
-      </SettingsSidebarMenuSectionButton>
+        </SettingsSidebarMenuSectionButton>
+      </IntlLink>
     </Flex>
   )
 }

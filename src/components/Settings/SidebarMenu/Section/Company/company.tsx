@@ -39,19 +39,19 @@ const SettingsSidebarCompanyMenuSectionPreferences = ({ permissions }: CompanyMe
       </Heading>
 
       {permissions?.user?.update === GraphQLEffect.ALLOW && (
-        <SettingsSidebarMenuSectionButton href="/settings/users">
-          <IntlLink href="/settings/users">
+        <IntlLink href="/settings/users">
+          <SettingsSidebarMenuSectionButton href="/settings/users">
             {intl.formatMessage(messages.firstOptionLabel)}
-          </IntlLink>
-        </SettingsSidebarMenuSectionButton>
+          </SettingsSidebarMenuSectionButton>
+        </IntlLink>
       )}
 
       {permissions?.cycle?.update === GraphQLEffect.ALLOW && (
-        <SettingsSidebarMenuSectionButton href="/settings/cycles">
-          <IntlLink href="/settings/cycles">
+        <IntlLink href="/settings/cycles">
+          <SettingsSidebarMenuSectionButton href="/settings/cycles">
             {intl.formatMessage(messages.secondOptionLabel)}
-          </IntlLink>
-        </SettingsSidebarMenuSectionButton>
+          </SettingsSidebarMenuSectionButton>
+        </IntlLink>
       )}
     </Flex>
   )

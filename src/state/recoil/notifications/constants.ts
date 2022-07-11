@@ -1,1 +1,1 @@
-export const PREFIX = 'NOTIFICATIONS'
+export const PREFIX = 'NOTIFICATION'
