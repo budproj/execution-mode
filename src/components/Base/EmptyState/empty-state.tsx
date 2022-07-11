@@ -28,7 +28,7 @@ export const imageKeys = {
   'empty-krs': '/images/bud-empty-object-krs.png',
   'empty-personal-okrs-tab': '/images/empty-personal-okrs-tab.png',
   'notifications-empty-state': '/images/notifications-empty-state.png',
-  'no-more-notifications': 'images/no-more-notifications-empty-state.png',
+  'no-more-notifications': '/images/no-more-notifications-empty-state.png',
 }
 
 const imageAlts = {
