@@ -1,11 +1,15 @@
 import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilState } from 'recoil'
 
+import { SocketIOContext } from 'src/components/Base/SocketIOProvider/socketio-provider'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
+import { listNotificationsAtom } from 'src/state/recoil/notifications'
 
 import { NotificationsList } from '../NotificationsList'
+import { Notification } from '../NotificationsList/types'
 
 import messages from './messages'
 
@@ -47,9 +51,17 @@ const ScrollablePanel = styled(TabPanel)`
 
 const NotificationsModal = () => {
   const intl = useIntl()
+  const { socket } = useContext(SocketIOContext)
+  const [{ notifications }, setNotifications] = useRecoilState(listNotificationsAtom)
+
+  useEffect(() => {
+    socket.on('newNotification', (newNotify: Notification) => {
+      setNotifications({ notifications: [newNotify, ...notifications] })
+    })
+  }, [notifications, setNotifications, socket])
 
   const checkInsCount = 12
-  const notificationsCount = 2
+  const notificationsCount = [...notifications].length
 
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15}>
@@ -62,7 +74,7 @@ const NotificationsModal = () => {
             _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
-            {notificationsCount && <NotificationBadge notificationCount={notificationsCount} />}
+            {notificationsCount > 0 && <NotificationBadge notificationCount={notificationsCount} />}
           </StyledTab>
           <StyledTab
             gap={2}
