@@ -1,12 +1,28 @@
-export interface NotificationsProperties {
-  id?: string
-  isRead?: boolean
-  type?: string
+export interface Notification {
+  id: string
+  isRead: boolean
+  type: string
   timestamp: number
-  recipientId?: string
-  sender?: {
-    id: string
-    name: string
-    picture: string
+  recipientId: string
+  properties: {
+    keyResult?: {
+      id: string
+      name: string
+    }
+    previousConfidance?: number
+    newConfidence?: number
+    comment?: {
+      id: string
+      content: string
+    }
+    task?: {
+      id: string
+      name: string
+    }
+    sender: {
+      id: string
+      name: string
+      picture: string
+    }
   }
 }

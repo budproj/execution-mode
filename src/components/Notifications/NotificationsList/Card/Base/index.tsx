@@ -7,26 +7,31 @@ import LastUpdateText from 'src/components/Base/LastUpdateText'
 import CircleIcon from 'src/components/Icon/Circle'
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
 
-import { NotificationsProperties } from '../../types'
-
 import { BadgeAvatarIcon } from './Avatar'
 
-export interface BaseCardsNotificationsProperties extends NotificationsProperties {
-  children: React.ReactNode
+export interface BaseCardsNotifications {
+  children?: React.ReactNode
+  isRead: boolean
+  timestamp: number
   describeBadgeAvatarIcon: MessageDescriptor
   badgeIcon: NOTIFICATIONS_TYPE
+  sender: {
+    id: string
+    name: string
+    picture: string
+  }
 }
 
 const BaseCardNotification = ({
-  sender,
   isRead,
   children,
   describeBadgeAvatarIcon,
+  sender,
   timestamp,
   badgeIcon,
-}: BaseCardsNotificationsProperties) => {
+}: BaseCardsNotifications) => {
   const intl = useIntl()
-  const formattedDateNotificationCheckIn = fromUnixTime(timestamp)
+  const formattedDateNotificationCheckIn = timestamp && fromUnixTime(timestamp)
 
   return (
     <Box
@@ -74,14 +79,16 @@ const BaseCardNotification = ({
         })}
       >
         <Box position="absolute" fontWeight="normal" right={2} top={5}>
-          <LastUpdateText
-            cursor="default"
-            date={formattedDateNotificationCheckIn}
-            prefix={Date.now() > formattedDateNotificationCheckIn.getTime() ? '' : 'há'}
-            fontSize={12}
-            color="new-gray.500"
-            textAlign="right"
-          />
+          {formattedDateNotificationCheckIn && (
+            <LastUpdateText
+              cursor="default"
+              date={formattedDateNotificationCheckIn}
+              prefix={Date.now() > formattedDateNotificationCheckIn.getTime() ? '' : 'há'}
+              fontSize={12}
+              color="new-gray.500"
+              textAlign="right"
+            />
+          )}
         </Box>
       </Tooltip>
     </Box>

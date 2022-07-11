@@ -4,27 +4,20 @@ import { useIntl } from 'react-intl'
 
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
 
-import { NotificationsProperties } from '../../types'
+import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
 
 import messages from './messages'
 
-export interface AssignedTaskProperties extends NotificationsProperties {
-  task?: {
-    id: string
-    name: string
-  }
-}
-
-const AssignedTask = ({ ...properties }: AssignedTaskProperties) => {
+const AssignedTask = ({ properties, timestamp, isRead }: Notification) => {
   const intl = useIntl()
 
   return (
     <BaseCardNotification
-      describeBadgeAvatarIcon={messages.describeNotification}
-      timestamp={properties.timestamp}
-      isRead={properties.isRead}
       sender={properties.sender}
+      describeBadgeAvatarIcon={messages.describeNotification}
+      timestamp={timestamp}
+      isRead={isRead}
       badgeIcon={NOTIFICATIONS_TYPE.ASSIGNED_TASK}
     >
       <Heading display="flex" width="100%" justifyContent="space-between" textAlign="left">
@@ -40,7 +33,7 @@ const AssignedTask = ({ ...properties }: AssignedTaskProperties) => {
       <Flex alignItems="center" justifyContent="center" gap={2}>
         <Checkbox isDisabled isChecked={false} />
         <Text color="black.900" fontWeight="nomral" fontSize={14}>
-          {properties.task?.name ?? ''}
+          {properties.task?.name}
         </Text>
       </Flex>
     </BaseCardNotification>

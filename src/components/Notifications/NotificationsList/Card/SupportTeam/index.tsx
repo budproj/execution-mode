@@ -4,26 +4,19 @@ import { useIntl } from 'react-intl'
 
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
 
-import { NotificationsProperties } from '../../types'
+import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
 import { NotificationKeyResult } from '../Base/KeyResult'
 
 import messages from './messages'
 
-export interface SupportTeamProperties extends NotificationsProperties {
-  keyResult?: {
-    id: string
-    name: string
-  }
-}
-
-const SupportTeam = ({ ...properties }: SupportTeamProperties) => {
+const SupportTeam = ({ properties, isRead, timestamp }: Notification) => {
   const intl = useIntl()
   return (
     <BaseCardNotification
       describeBadgeAvatarIcon={messages.describeNotification}
-      timestamp={properties.timestamp}
-      isRead={properties.isRead}
+      timestamp={timestamp}
+      isRead={isRead}
       sender={properties.sender}
       badgeIcon={NOTIFICATIONS_TYPE.ADD_SUPPORT_TEAM}
     >
