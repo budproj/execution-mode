@@ -1,4 +1,4 @@
-import { atomFamily } from 'recoil'
+import { atom, atomFamily } from 'recoil'
 
 import { KeyResultChecklist } from 'src/components/KeyResult/types'
 
@@ -21,5 +21,10 @@ export const draftCheckMarksAtom = atomFamily<string[], string | undefined>({
 
 export const checkMarkIsBeingRemovedAtom = atomFamily<boolean, string | undefined>({
   key: `${key}::IS_BEING_REMOVED`,
+  default: false,
+})
+
+export const isCheckListCollapseOpenAtom = atom<boolean>({
+  key,
   default: false,
 })

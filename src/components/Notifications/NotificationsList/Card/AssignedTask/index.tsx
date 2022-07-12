@@ -1,8 +1,11 @@
 import { Box, Checkbox, Flex, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
+import { isCheckListCollapseOpenAtom } from 'src/state/recoil/key-result/checklist'
+import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
@@ -11,6 +14,14 @@ import messages from './messages'
 
 const AssignedTask = ({ properties, timestamp, isRead }: Notification) => {
   const intl = useIntl()
+  const setIsChecklistOpen = useSetRecoilState(isCheckListCollapseOpenAtom)
+
+  const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+
+  const handleOpenChecklist = () => {
+    setIsChecklistOpen(true)
+    setOpenDrawer(properties.keyResult?.id)
+  }
 
   return (
     <BaseCardNotification
@@ -19,6 +30,7 @@ const AssignedTask = ({ properties, timestamp, isRead }: Notification) => {
       timestamp={timestamp}
       isRead={isRead}
       badgeIcon={NOTIFICATIONS_TYPE.ASSIGNED_TASK}
+      handleClick={() => handleOpenChecklist()}
     >
       <Heading display="flex" width="100%" justifyContent="space-between" textAlign="left">
         <Box display="flex" alignItems="flex-start" justifyContent="center" flexDir="column">
