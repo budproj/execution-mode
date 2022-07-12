@@ -6,6 +6,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     goal
     initialValue
     format
+    teamId
     supportTeamMembers {
       edges {
         node {
@@ -40,6 +41,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
       fullName
       role
       picture
+      id
     }
     objective {
       title

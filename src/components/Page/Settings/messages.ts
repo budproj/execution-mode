@@ -10,8 +10,8 @@ export default defineMessages<SettingsPageMessage>({
   },
 
   metaTitle: {
-    defaultMessage: 'Settings | bud ',
-    id: 'ganP5k',
+    defaultMessage: 'Configurações | bud ',
+    id: 'mXb4/b',
     description: 'The page title that is displayed in the browser tab for the settings page',
   },
 
