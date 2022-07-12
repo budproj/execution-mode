@@ -5,6 +5,7 @@ import { MessageDescriptor, useIntl } from 'react-intl'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import CircleIcon from 'src/components/Icon/Circle'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
 
 import { BadgeAvatarIcon } from './Avatar'
@@ -12,6 +13,7 @@ import { BadgeAvatarIcon } from './Avatar'
 export interface BaseCardsNotifications {
   children?: React.ReactNode
   isRead: boolean
+  handleClick: (id?: KeyResult['id']) => void
   timestamp: number
   describeBadgeAvatarIcon: MessageDescriptor
   badgeIcon: NOTIFICATIONS_TYPE
@@ -27,6 +29,7 @@ const BaseCardNotification = ({
   children,
   describeBadgeAvatarIcon,
   sender,
+  handleClick,
   timestamp,
   badgeIcon,
 }: BaseCardsNotifications) => {
@@ -43,7 +46,12 @@ const BaseCardNotification = ({
       position="relative"
       alignItems="flex-start"
       justifyContent="flex-start"
+      cursor="pointer"
+      _hover={{
+        bg: 'new-gray.100',
+      }}
       gap={6}
+      onClick={() => handleClick()}
     >
       <Avatar src={sender?.picture}>
         <AvatarBadge boxSize="1.2em" border="none">
