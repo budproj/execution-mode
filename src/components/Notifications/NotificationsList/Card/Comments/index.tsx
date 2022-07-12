@@ -1,8 +1,10 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
+import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
@@ -12,6 +14,10 @@ import messages from './messages'
 
 const CommentNotification = ({ properties, timestamp, isRead, type }: Notification) => {
   const intl = useIntl()
+
+  const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+
+  const openDrawer = () => setOpenDrawer(properties.keyResult?.id)
 
   const typeCommentNotificationMessage =
     type === NOTIFICATIONS_TYPE.COMMENT_ON_MY_KR
@@ -33,6 +39,7 @@ const CommentNotification = ({ properties, timestamp, isRead, type }: Notificati
           ? NOTIFICATIONS_TYPE.COMMENT_ON_MY_KR
           : NOTIFICATIONS_TYPE.TAGGED_COMMENT
       }
+      handleClick={openDrawer}
     >
       <Heading display="flex" width="100%" justifyContent="space-between" textAlign="left">
         <Box display="flex" alignItems="flex-start" justifyContent="center" flexDir="column">
