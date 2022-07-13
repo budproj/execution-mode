@@ -14,14 +14,14 @@ const NotificationsList = () => {
   const intl = useIntl()
   const [{ notifications }] = useRecoilState(listNotificationsAtom)
 
-  const ordainedNotificationsByReadStatus = [...notifications].sort(function (x, y) {
-    return x.isRead === y.isRead ? 0 : x.isRead ? 1 : -1
+  const ordainedNotificationsByTimestamp = [...notifications].sort(function (x, y) {
+    return y.timestamp - x.timestamp
   })
 
   return (
     <Box>
       {[...notifications].length > 0 ? (
-        ordainedNotificationsByReadStatus.slice(0, listLimit).map((notification) => (
+        ordainedNotificationsByTimestamp.slice(0, listLimit).map((notification) => (
           <Box key={notification.id}>
             <CardNotification
               recipientId={notification.recipientId}
