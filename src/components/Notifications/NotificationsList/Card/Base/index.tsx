@@ -34,7 +34,6 @@ const BaseCardNotification = ({
   badgeIcon,
 }: BaseCardsNotifications) => {
   const intl = useIntl()
-  const formattedDateNotificationCheckIn = timestamp && fromUnixTime(timestamp)
 
   return (
     <Box
@@ -79,7 +78,7 @@ const BaseCardNotification = ({
 
       <Tooltip
         placement="top-start"
-        label={intl.formatDate(formattedDateNotificationCheckIn, {
+        label={intl.formatDate(fromUnixTime(timestamp), {
           weekday: 'long',
           day: 'numeric',
           month: 'long',
@@ -87,16 +86,14 @@ const BaseCardNotification = ({
         })}
       >
         <Box position="absolute" fontWeight="normal" right={2} top={5}>
-          {formattedDateNotificationCheckIn && (
-            <LastUpdateText
-              cursor="default"
-              date={formattedDateNotificationCheckIn}
-              prefix={Date.now() > formattedDateNotificationCheckIn.getTime() ? '' : 'há'}
-              fontSize={12}
-              color="new-gray.500"
-              textAlign="right"
-            />
-          )}
+          <LastUpdateText
+            cursor="default"
+            date={fromUnixTime(timestamp)}
+            prefix={Date.now() > timestamp ? '' : 'há'}
+            fontSize={12}
+            color="new-gray.500"
+            textAlign="right"
+          />
         </Box>
       </Tooltip>
     </Box>

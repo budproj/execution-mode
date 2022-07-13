@@ -7,20 +7,27 @@ import { EmptyState } from 'src/components/Base'
 import { listNotificationsAtom } from 'src/state/recoil/notifications'
 
 import CardNotification from './Card'
+import { NotificationsMockedArray } from './Utils/mocked'
 import messages from './messages'
 
 const NotificationsList = () => {
-  const [listLimit, setListLimit] = useState(2)
+  const [listLimit, setListLimit] = useState(5)
   const intl = useIntl()
   const [{ notifications }] = useRecoilState(listNotificationsAtom)
 
-  const ordainedNotificationsByTimestamp = [...notifications].sort(function (x, y) {
+  // Const ordainedNotificationsByTimestamp = [...notifications].sort(function (x, y) {
+  //   return y.timestamp - x.timestamp
+  // })
+
+  const ordainedNotificationsByTimestamp = NotificationsMockedArray.sort(function (x, y) {
     return y.timestamp - x.timestamp
   })
 
+  console.log('lenght:', ordainedNotificationsByTimestamp.length)
+
   return (
     <Box>
-      {[...notifications].length > 0 ? (
+      {NotificationsMockedArray.length > 0 ? (
         ordainedNotificationsByTimestamp.slice(0, listLimit).map((notification) => (
           <Box key={notification.id}>
             <CardNotification
@@ -44,9 +51,9 @@ const NotificationsList = () => {
           labelMessage={messages.emptyStateLabel}
         />
       )}
-      {[...notifications].length > 0 && (
+      {NotificationsMockedArray.length > 0 && (
         <Box>
-          {listLimit < [...notifications].length ? (
+          {listLimit < NotificationsMockedArray.length ? (
             <Button
               color="brand.500"
               _hover={{
@@ -56,7 +63,7 @@ const NotificationsList = () => {
               py={8}
               pt={10}
               fontWeight="medium"
-              onClick={() => setListLimit(listLimit + 2)}
+              onClick={() => setListLimit(listLimit + 5)}
             >
               {intl.formatMessage(messages.loadMoreNotificationsButton)}
             </Button>
