@@ -7,7 +7,6 @@ import { Notification } from 'src/components/Notifications/NotificationsList/typ
 import getConfig from 'src/config'
 import { listNotificationsAtom } from 'src/state/recoil/notifications'
 
-// TODO: remove temporary url
 const ENDPOINT = 'http://localhost:8000'
 
 interface SocketIOContextProperties {

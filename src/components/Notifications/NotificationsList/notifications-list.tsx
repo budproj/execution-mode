@@ -1,10 +1,8 @@
 import { Box, Button, Divider } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
 
 import { EmptyState } from 'src/components/Base'
-import { listNotificationsAtom } from 'src/state/recoil/notifications'
 
 import CardNotification from './Card'
 import { NotificationsMockedArray } from './Utils/mocked'
@@ -13,17 +11,10 @@ import messages from './messages'
 const NotificationsList = () => {
   const [listLimit, setListLimit] = useState(5)
   const intl = useIntl()
-  const [{ notifications }] = useRecoilState(listNotificationsAtom)
-
-  // Const ordainedNotificationsByTimestamp = [...notifications].sort(function (x, y) {
-  //   return y.timestamp - x.timestamp
-  // })
 
   const ordainedNotificationsByTimestamp = NotificationsMockedArray.sort(function (x, y) {
     return y.timestamp - x.timestamp
   })
-
-  console.log('lenght:', ordainedNotificationsByTimestamp.length)
 
   return (
     <Box>
