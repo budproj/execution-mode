@@ -1,8 +1,10 @@
 import { BoxProps, Flex } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 
 import MainAppBar from 'src/components/Base/MainAppBar'
+import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import { EventType } from '../../../state/hooks/useEvent/event-type'
 import { useEvent } from '../../../state/hooks/useEvent/hook'
@@ -14,10 +16,23 @@ export interface PageProperties extends BoxProps {
 }
 
 const Page = ({ children, appBarVariant, ...rest }: PageProperties): ReactElement => {
-  const { pathname } = useRouter()
+  const {
+    pathname,
+    query: { keyResultId },
+  } = useRouter()
+  const [openedKeyResultId, setOpenDrawer] = useRecoilState(keyResultReadDrawerOpenedKeyResultID)
   const { dispatch } = useEvent(EventType.PAGE_VIEW)
 
   dispatch({ pathname })
+
+  const [keyResultQueryParameterFit] = Array.isArray(keyResultId) ? keyResultId : [keyResultId]
+
+  useEffect(() => {
+    if (keyResultId && openedKeyResultId !== keyResultId) {
+      setOpenDrawer(keyResultQueryParameterFit)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyResultId])
 
   return (
     <Flex minH="100vh" direction="column" {...rest}>
