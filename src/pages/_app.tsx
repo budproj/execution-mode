@@ -13,6 +13,7 @@ import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
 import ProgressBar from 'src/components/Base/ProgressBar'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
+import { SocketIOProvider } from 'src/components/Base/SocketIOProvider'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
@@ -57,21 +58,23 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
       <RecoilRoot>
         <RecoilDebugObserver />
         <ChakraProvider theme={theme}>
-          <AuthzGatekeeper>
-            <AmplitudeProvider>
-              <AuthzApolloProvider pageProps={pageProps}>
-                <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
-                  <MaintenanceGatekeeper>
-                    <HotjarProvider />
-                    <HubSpotProvider />
-                    <ProgressBar />
-                    <KeyResultSingleDrawer />
-                    <Component {...pageProps} />
-                  </MaintenanceGatekeeper>
-                </RecoilIntlProvider>
-              </AuthzApolloProvider>
-            </AmplitudeProvider>
-          </AuthzGatekeeper>
+          <SocketIOProvider>
+            <AuthzGatekeeper>
+              <AmplitudeProvider>
+                <AuthzApolloProvider pageProps={pageProps}>
+                  <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
+                    <MaintenanceGatekeeper>
+                      <HotjarProvider />
+                      <HubSpotProvider />
+                      <ProgressBar />
+                      <KeyResultSingleDrawer />
+                      <Component {...pageProps} />
+                    </MaintenanceGatekeeper>
+                  </RecoilIntlProvider>
+                </AuthzApolloProvider>
+              </AmplitudeProvider>
+            </AuthzGatekeeper>
+          </SocketIOProvider>
         </ChakraProvider>
       </RecoilRoot>
     </Auth0Provider>
