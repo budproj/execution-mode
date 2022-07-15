@@ -2,11 +2,10 @@ import { useQuery } from '@apollo/client'
 import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { isAfter, startOfWeek, isBefore } from 'date-fns'
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import { SocketIOContext } from 'src/components/Base/SocketIOProvider/socketio-provider'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { User } from 'src/components/User/types'
@@ -15,7 +14,6 @@ import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/r
 
 import CheckInNotifications from '../CheckInNotifications'
 import { NotificationsList } from '../NotificationsList'
-import { Notification } from '../NotificationsList/types'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -61,14 +59,7 @@ interface NotificationsModalProperties {
 
 const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
   const intl = useIntl()
-  const { socket } = useContext(SocketIOContext)
-  const [{ notifications }, setNotifications] = useRecoilState(listNotificationsAtom)
-
-  useEffect(() => {
-    socket.on('newNotification', (newNotify: Notification) => {
-      setNotifications({ notifications: [newNotify, ...notifications] })
-    })
-  }, [notifications, setNotifications, socket])
+  const [{ notifications }] = useRecoilState(listNotificationsAtom)
 
   const notificationsCount = [...notifications].length
   const setNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
