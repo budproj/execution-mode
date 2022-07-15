@@ -72,13 +72,19 @@ const UserTeamTags = ({
   return isLoaded && limitedTeams ? (
     <Wrap spacing={2}>
       {limitedTeams.map((team) => (
-        <WrapItem
-          key={team.id}
-          overflow="hidden"
-          cursor={redirectToTeam ? 'pointer' : 'default'}
-          pointerEvents={redirectToTeam ? 'all' : 'none'}
-        >
-          <Link passHref href={redirectToTeam ? `/explore/${team?.id}` : ''}>
+        <WrapItem key={team.id} overflow="hidden" cursor={redirectToTeam ? 'pointer' : 'default'}>
+          {redirectToTeam ? (
+            <Link passHref href={redirectToTeam ? `/explore/${team?.id}` : ''}>
+              <TeamTag
+                redirectToTeam={redirectToTeam}
+                isLoading={loading}
+                isActive={isActive}
+                onClose={isEditable && hasMoreThanOneTeam ? handleRemoveTeam(team.id) : undefined}
+              >
+                {team.name}
+              </TeamTag>
+            </Link>
+          ) : (
             <TeamTag
               redirectToTeam={redirectToTeam}
               isLoading={loading}
@@ -87,7 +93,7 @@ const UserTeamTags = ({
             >
               {team.name}
             </TeamTag>
-          </Link>
+          )}
         </WrapItem>
       ))}
     </Wrap>
