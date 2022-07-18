@@ -8,7 +8,7 @@ import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-resul
 
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
-import { NotificationKeyResult } from '../Base/KeyResult'
+import { KeyResultNotificationContent } from '../Base/KeyResult'
 
 import messages from './messages'
 
@@ -21,7 +21,7 @@ const SupportTeam = ({ properties, isRead, timestamp }: Notification) => {
 
   return (
     <BaseCardNotification
-      describeBadgeAvatarIcon={messages.describeNotification}
+      describeBadgeAvatarIcon={messages.supportTeamNotification}
       timestamp={timestamp}
       isRead={isRead}
       sender={properties.sender}
@@ -34,11 +34,11 @@ const SupportTeam = ({ properties, isRead, timestamp }: Notification) => {
             {properties.sender?.name}
           </Text>
           <Text fontSize={14} fontWeight="normal" color="new-gray.700">
-            {intl.formatMessage(messages.describeNotification)}
+            {intl.formatMessage(messages.supportTeamNotification)}
           </Text>
         </Box>
       </Heading>
-      <NotificationKeyResult keyResult={properties.keyResult?.name} />
+      <KeyResultNotificationContent keyResultTitle={properties.keyResult?.name} />
     </BaseCardNotification>
   )
 }

@@ -1063,6 +1063,10 @@
     "defaultMessage": "Painel | bud",
     "description": "The page title that is displayed in the browser tab"
   },
+  "MAAXnt": {
+    "defaultMessage": "incluiu você como time de apoio em um KR:",
+    "description": "This message appears as describe on notification where a user is included on support team of a key-result."
+  },
   "MBvlAH": {
     "defaultMessage": "conta desativada",
     "description": "This string is used to select the not-active cycles option."
@@ -1970,10 +1974,6 @@
   "iIm/1E": {
     "defaultMessage": "marcou você em um comentário:",
     "description": "This message is displayed to describe a notification that occurs when a user is tagged in a comment."
-  },
-  "iJoxMo": {
-    "defaultMessage": "incluiu você como time de apoio em um KR:",
-    "description": "This message appears as describe on notification where a user is included on support team of a KR."
   },
   "iLO8sl": {
     "defaultMessage": "Estas tarefas não estão relacionadas diretamente a um resultado-chave. Use-as para organizar melhor seu dia e deixá-lo mais produtivo :)",

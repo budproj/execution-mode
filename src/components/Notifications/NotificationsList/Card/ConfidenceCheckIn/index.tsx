@@ -11,7 +11,7 @@ import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-resul
 
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
-import { NotificationKeyResult } from '../Base/KeyResult'
+import { KeyResultNotificationContent } from '../Base/KeyResult'
 
 import messages from './messages'
 
@@ -58,7 +58,7 @@ const ConfidenceCheckin = ({ properties, isRead, timestamp }: Notification) => {
           </Text>
         </Box>
       </Heading>
-      <NotificationKeyResult keyResult={properties?.keyResult?.name} />
+      <KeyResultNotificationContent keyResultTitle={properties.keyResult?.name} />
       <Box display="flex" alignItems="center" justifyContent="flex-start" gap={2}>
         <ConfidenceTag confidenceValue={properties?.previousConfidance} />
         <ArrowRightLong desc="arr" fill="new-gray.500" />

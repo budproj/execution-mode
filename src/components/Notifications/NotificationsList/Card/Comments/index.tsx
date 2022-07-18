@@ -8,7 +8,7 @@ import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-resul
 
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
-import { NotificationKeyResult } from '../Base/KeyResult'
+import { KeyResultNotificationContent } from '../Base/KeyResult'
 
 import messages from './messages'
 
@@ -29,7 +29,7 @@ const CommentNotification = ({ properties, timestamp, isRead, type }: Notificati
       describeBadgeAvatarIcon={
         type === NOTIFICATIONS_TYPE.COMMENT_ON_MY_KR
           ? messages.commentOnMyKrNotification
-          : messages.commentOnMyKrNotification
+          : messages.taggedOnCommentNotification
       }
       timestamp={timestamp}
       isRead={isRead}
@@ -51,7 +51,7 @@ const CommentNotification = ({ properties, timestamp, isRead, type }: Notificati
           </Text>
         </Box>
       </Heading>
-      <NotificationKeyResult keyResult={properties.keyResult?.name} />
+      <KeyResultNotificationContent keyResultTitle={properties.keyResult?.name} />
       <Text textAlign="left" fontSize={14} color="#525F7F">
         {properties.comment?.content}
       </Text>

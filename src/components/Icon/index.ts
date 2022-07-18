@@ -1,5 +1,17 @@
 export { default as Activity } from './Activity'
 
+export { default as CheckedIcon } from './Checked/checked'
+
+export { default as ChevronDownCircleIcon } from './ChevronDownCircle'
+
+export { default as CommentIcon } from './Comment'
+
+export { default as PauseIcon } from './Pause'
+
+export { default as TaggedIcon } from './Tagged'
+
+export { default as TeamIcon } from './Team'
+
 export { default as ArrowUp } from './ArrowUp'
 
 export { default as ArrowDown } from './ArrowDown'

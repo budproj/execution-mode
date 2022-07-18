@@ -1,1 +1,1 @@
-export { default as NotificationKeyResult } from './key-result'
+export { default as KeyResultNotificationContent } from './key-result'

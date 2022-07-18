@@ -1,17 +1,17 @@
 import { Flex, Text, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 
-import { KeyResultDynamicIcon } from 'src/components/KeyResult'
+import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 
 interface KeyResultInlineProperties {
-  keyResult?: string
+  keyResultTitle?: string
 }
 
-const KeyResultInline = ({ keyResult, ...rest }: KeyResultInlineProperties) => {
+const KeyResultInline = ({ keyResultTitle }: KeyResultInlineProperties) => {
   return (
-    <Tooltip label={keyResult} width="fit-content" placement="top" {...rest} textAlign="left">
+    <Tooltip label={keyResultTitle} width="fit-content" placement="top" textAlign="left">
       <Flex alignItems="center" gap={2}>
-        <KeyResultDynamicIcon iconSize={5} boxSize={7} borderRadius={4} title={keyResult} />
+        <KeyResultDynamicIcon iconSize={5} boxSize={7} borderRadius={4} title={keyResultTitle} />
         <Text
           cursor="default"
           color="new-gray.800"
@@ -22,7 +22,7 @@ const KeyResultInline = ({ keyResult, ...rest }: KeyResultInlineProperties) => {
           overflow="hidden"
           textOverflow="ellipsis"
         >
-          {keyResult}
+          {keyResultTitle}
         </Text>
       </Flex>
     </Tooltip>

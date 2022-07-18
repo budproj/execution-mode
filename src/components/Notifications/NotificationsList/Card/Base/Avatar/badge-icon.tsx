@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react'
 import React from 'react'
 
 import CheckedIcon from 'src/components/Icon/Checked/checked'
-import ChevronDownCircleIcon from 'src/components/Icon/ChevronDown/chvron-down-circle'
+import ChevronDownCircleIcon from 'src/components/Icon/ChevronDown'
 import CommentIcon from 'src/components/Icon/Comment'
 import PauseIcon from 'src/components/Icon/Pause'
 import TaggedIcon from 'src/components/Icon/Tagged'
