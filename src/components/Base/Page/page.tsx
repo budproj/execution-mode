@@ -32,7 +32,7 @@ const Page = ({ children, appBarVariant, ...rest }: PageProperties): ReactElemen
       if (keyResultId && openedKeyResultId !== keyResultId) {
         setOpenDrawer(keyResultQueryParameterFit)
       }
-    }, 800)
+    }, 1200)
 
     return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
