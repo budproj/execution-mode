@@ -28,13 +28,12 @@ const Page = ({ children, appBarVariant, ...rest }: PageProperties): ReactElemen
   const [keyResultQueryParameterFit] = Array.isArray(keyResultId) ? keyResultId : [keyResultId]
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       if (keyResultId && openedKeyResultId !== keyResultId) {
         setOpenDrawer(keyResultQueryParameterFit)
       }
     }, 1200)
 
-    return () => clearTimeout(timer)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyResultId])
 
