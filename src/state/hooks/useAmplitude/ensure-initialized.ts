@@ -4,7 +4,7 @@ import getConfig from '../../../config'
 
 const defaultAmplitudeSettings = {
   saveEvents: true,
-  includeUtm: true,
+  includeUtm: false,
   includeReferer: true,
   saveParamsReferrerOncePerSession: false,
 }
