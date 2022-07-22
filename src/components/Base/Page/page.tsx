@@ -33,7 +33,6 @@ const Page = ({ children, appBarVariant, ...rest }: PageProperties): ReactElemen
         setOpenDrawer(keyResultQueryParameterFit)
       }
     }, 1500)
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyResultId])
 
