@@ -64,8 +64,10 @@ const NotificationsButton = () => {
                 bg: 'gray.50',
               }}
               onClick={() => {
-                dispatch({ userId: userID })
                 onToggle()
+                if (!isOpen) {
+                  dispatch({ userId: userID })
+                }
               }}
             />
           </TooltipWithDelay>
