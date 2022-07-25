@@ -20,4 +20,7 @@ export enum EventType {
   CREATED_KEY_RESULT = 'CreatedKeyResult',
   NOTIFICATION_BELL_CLICK = 'NotificationBellClick',
   NOTIFICATION_CHECK_IN_CLICK = 'NotificationCheckinClick',
+  NOTIFICATION_CARD_CLICK = 'NotificationCardClick',
+  TAB_NOTIFICATION_CLICK = 'TabNotificationClick',
+  TAB_CHECKIN_CLICK = 'TabCheckInClick',
 }

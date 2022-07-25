@@ -2,6 +2,8 @@ import { Box, Divider } from '@chakra-ui/react'
 import React from 'react'
 
 import { EmptyState } from 'src/components/Base'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import CardNotification from './Card'
 import { NotificationsMockedArray } from './Utils/mocked'
@@ -12,11 +14,16 @@ const NotificationsList = () => {
     return y.timestamp - x.timestamp
   })
 
+  const { dispatch } = useEvent(EventType.NOTIFICATION_CARD_CLICK)
+
   return (
     <Box>
       {NotificationsMockedArray.length > 0 ? (
         ordainedNotificationsByTimestamp.map((notification) => (
-          <Box key={notification.id}>
+          <Box
+            key={notification.id}
+            onClick={() => dispatch({ notificationType: notification.type })}
+          >
             <CardNotification
               recipientId={notification.recipientId}
               properties={notification.properties}
