@@ -1,25 +1,36 @@
 import { Box, Divider } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 
 import { EmptyState } from 'src/components/Base'
+import { SocketIOContext } from 'src/components/Base/SocketIOProvider/socketio-provider'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { listNotificationsAtom } from 'src/state/recoil/notifications'
 
 import CardNotification from './Card'
-import { NotificationsMockedArray } from './Utils/mocked'
 import messages from './messages'
 
 const NotificationsList = () => {
-  const ordainedNotificationsByTimestamp = NotificationsMockedArray.sort(function (x, y) {
-    return y.timestamp - x.timestamp
-  })
+  const [{ notifications }, setNotifications] = useRecoilState(listNotificationsAtom)
+  const { socket } = useContext(SocketIOContext)
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_CARD_CLICK)
 
+  useEffect(() => {
+    const viewedNotifications = notifications.map((notification) => {
+      return { ...notification, isRead: true }
+    })
+
+    setNotifications({ notifications: viewedNotifications })
+    socket.emit('readNotifications')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <Box>
-      {NotificationsMockedArray.length > 0 ? (
-        ordainedNotificationsByTimestamp.map((notification) => (
+      {notifications.length > 0 ? (
+        notifications.map((notification) => (
           <Box
             key={notification.id}
             onClick={() => dispatch({ notificationType: notification.type })}
@@ -45,7 +56,7 @@ const NotificationsList = () => {
           labelMessage={messages.emptyStateLabel}
         />
       )}
-      {NotificationsMockedArray.length > 0 && (
+      {notifications.length > 0 && (
         <EmptyState
           maxW={320}
           pt={5}
