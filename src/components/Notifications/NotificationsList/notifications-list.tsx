@@ -1,25 +1,27 @@
 import { Box, Button, Divider } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilState } from 'recoil'
 
 import { EmptyState } from 'src/components/Base'
+import { listNotificationsAtom } from 'src/state/recoil/notifications'
 
 import CardNotification from './Card'
-import { NotificationsMockedArray } from './Utils/mocked'
 import messages from './messages'
 
 const NotificationsList = () => {
   const [listLimit, setListLimit] = useState(5)
+  const [{ notifications }] = useRecoilState(listNotificationsAtom)
   const intl = useIntl()
 
-  const ordainedNotificationsByTimestamp = NotificationsMockedArray.sort(function (x, y) {
-    return y.timestamp - x.timestamp
-  })
+  // Const ordainedNotificationsByTimestamp = notifications.sort(function (x, y) {
+  //   return y.timestamp.getTime() - x.timestamp.getTime()
+  // })
 
   return (
     <Box>
-      {NotificationsMockedArray.length > 0 ? (
-        ordainedNotificationsByTimestamp.slice(0, listLimit).map((notification) => (
+      {notifications.length > 0 ? (
+        notifications.slice(0, listLimit).map((notification) => (
           <Box key={notification.id}>
             <CardNotification
               recipientId={notification.recipientId}
@@ -42,9 +44,9 @@ const NotificationsList = () => {
           labelMessage={messages.emptyStateLabel}
         />
       )}
-      {NotificationsMockedArray.length > 0 && (
+      {notifications.length > 0 && (
         <Box>
-          {listLimit < NotificationsMockedArray.length ? (
+          {listLimit < notifications.length ? (
             <Button
               color="brand.500"
               _hover={{

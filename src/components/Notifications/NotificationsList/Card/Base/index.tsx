@@ -1,5 +1,4 @@
 import { Avatar, AvatarBadge, Box, Flex, Tooltip } from '@chakra-ui/react'
-import fromUnixTime from 'date-fns/fromUnixTime'
 import React from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
@@ -14,7 +13,7 @@ export interface BaseCardsNotifications {
   children?: React.ReactNode
   isRead: boolean
   handleClick: (id?: KeyResult['id']) => void
-  timestamp: number
+  timestamp: Date
   describeBadgeAvatarIcon: MessageDescriptor
   badgeIcon: NOTIFICATIONS_TYPE
   sender: {
@@ -78,7 +77,7 @@ const BaseCardNotification = ({
 
       <Tooltip
         placement="top-start"
-        label={intl.formatDate(fromUnixTime(timestamp), {
+        label={intl.formatDate(timestamp, {
           weekday: 'long',
           day: 'numeric',
           month: 'long',
@@ -88,8 +87,8 @@ const BaseCardNotification = ({
         <Box position="absolute" fontWeight="normal" right={2} top={5}>
           <LastUpdateText
             cursor="default"
-            date={fromUnixTime(timestamp)}
-            prefix={Date.now() > timestamp ? '' : 'há'}
+            date={timestamp}
+            prefix={Date.now() > 12 ? '' : 'há'}
             fontSize={12}
             color="new-gray.500"
             textAlign="right"
