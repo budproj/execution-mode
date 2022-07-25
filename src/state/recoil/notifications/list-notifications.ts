@@ -1,5 +1,6 @@
 import { atom } from 'recoil'
 
+import { NotificationsMockedArray } from 'src/components/Notifications/NotificationsList/Utils/mocked'
 import { Notification } from 'src/components/Notifications/NotificationsList/types'
 
 import { PREFIX } from './constants'
@@ -13,7 +14,7 @@ export type NotificationsList = {
 export const listNotificationsAtom = atom<NotificationsList>({
   key: KEY,
   default: {
-    notifications: [],
+    notifications: NotificationsMockedArray,
   },
 })
 

@@ -11,6 +11,8 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
 import CheckInNotifications from '../CheckInNotifications'
@@ -61,6 +63,9 @@ interface NotificationsModalProperties {
 
 const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
   const intl = useIntl()
+  const { dispatch: dispatchTabCheckInClick } = useEvent(EventType.TAB_CHECKIN_CLICK)
+  const { dispatch: dispatchTabNotificationClick } = useEvent(EventType.TAB_NOTIFICATION_CLICK)
+
   const { socket } = useContext(SocketIOContext)
   const [{ notifications }, setNotifications] = useRecoilState(listNotificationsAtom)
 
@@ -68,9 +73,12 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
     socket.on('newNotification', (newNotify: Notification) => {
       setNotifications({ notifications: [newNotify, ...notifications] })
     })
-  }, [notifications, setNotifications, socket])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket])
 
-  const notificationsCount = [...notifications].length
+  const notificationsCount = [...notifications].filter(
+    (notification) => !notification.isRead,
+  ).length
   const setNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
 
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
@@ -139,6 +147,7 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
             color="new-gray.800"
             _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
             paddingBottom="17px"
+            onClick={() => dispatchTabNotificationClick({})}
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
             {notificationsCount > 0 && <NotificationBadge notificationCount={notificationsCount} />}
@@ -148,6 +157,7 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
             color="new-gray.800"
             _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
             paddingBottom="17px"
+            onClick={() => dispatchTabCheckInClick({})}
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
             {checkinCount > 0 && <NotificationBadge notificationCount={checkinCount} />}

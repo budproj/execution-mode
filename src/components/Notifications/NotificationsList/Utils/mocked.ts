@@ -22,7 +22,7 @@ export const NotificationsMockedArray = [
   },
   {
     id: '40d80cc1-ba12-4eqwewq2199c-b3d6-d759577762d6',
-    isRead: false,
+    isRead: true,
     type: 'checkin',
     timestamp: new Date(1657638381 * 1000),
     recipientId: '123121',

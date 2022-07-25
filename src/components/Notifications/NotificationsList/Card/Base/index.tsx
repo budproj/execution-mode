@@ -59,7 +59,13 @@ const BaseCardNotification = ({
           />
         </AvatarBadge>
       </Avatar>
-      <Flex flexDir="column" alignItems="flex-start" justifyContent="center" maxWidth={370} gap={3}>
+      <Flex
+        flexDir="column"
+        alignItems="flex-start"
+        justifyContent="center"
+        maxWidth={isRead ? '100%' : 330}
+        gap={3}
+      >
         {children}
       </Flex>
       {!isRead && (
@@ -78,19 +84,20 @@ const BaseCardNotification = ({
       <Tooltip
         placement="top-start"
         label={intl.formatDate(timestamp, {
-          weekday: 'long',
+          month: 'short',
           day: 'numeric',
-          month: 'long',
-          year: 'numeric',
+          weekday: 'long',
+          hour: 'numeric',
+          minute: 'numeric',
         })}
       >
         <Box position="absolute" fontWeight="normal" right={2} top={5}>
           <LastUpdateText
             cursor="default"
             date={timestamp}
-            prefix={Date.now() > 12 ? '' : 'há'}
+            prefix={Date.now() > timestamp.getTime() ? '' : 'há'}
             fontSize={12}
-            color="new-gray.500"
+            color="new-gray.600"
             textAlign="right"
           />
         </Box>

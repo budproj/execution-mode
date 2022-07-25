@@ -9,7 +9,7 @@ interface KeyResultInlineProperties {
 
 const KeyResultInline = ({ keyResultTitle }: KeyResultInlineProperties) => {
   return (
-    <Tooltip label={keyResultTitle} width="fit-content" placement="top" textAlign="left">
+    <Tooltip label={keyResultTitle} minWidth="max-content" placement="top-start">
       <Flex alignItems="center" gap={2}>
         <KeyResultDynamicIcon iconSize={5} boxSize={7} borderRadius={4} title={keyResultTitle} />
         <Text

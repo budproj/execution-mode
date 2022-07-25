@@ -1,28 +1,40 @@
-import { Box, Button, Divider } from '@chakra-ui/react'
-import React, { useState } from 'react'
-import { useIntl } from 'react-intl'
+import { Box, Divider } from '@chakra-ui/react'
+import React, { useContext, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
 import { EmptyState } from 'src/components/Base'
+import { SocketIOContext } from 'src/components/Base/SocketIOProvider/socketio-provider'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { listNotificationsAtom } from 'src/state/recoil/notifications'
 
 import CardNotification from './Card'
 import messages from './messages'
 
 const NotificationsList = () => {
-  const [listLimit, setListLimit] = useState(5)
-  const [{ notifications }] = useRecoilState(listNotificationsAtom)
-  const intl = useIntl()
+  const [{ notifications }, setNotifications] = useRecoilState(listNotificationsAtom)
+  const { socket } = useContext(SocketIOContext)
 
-  // Const ordainedNotificationsByTimestamp = notifications.sort(function (x, y) {
-  //   return y.timestamp.getTime() - x.timestamp.getTime()
-  // })
+  const { dispatch } = useEvent(EventType.NOTIFICATION_CARD_CLICK)
+
+  useEffect(() => {
+    const viewedNotifications = notifications.map((notification) => {
+      return { ...notification, isRead: true }
+    })
+
+    setNotifications({ notifications: viewedNotifications })
+    socket.emit('readNotifications')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Box>
       {notifications.length > 0 ? (
-        notifications.slice(0, listLimit).map((notification) => (
-          <Box key={notification.id}>
+        notifications.map((notification) => (
+          <Box
+            key={notification.id}
+            onClick={() => dispatch({ notificationType: notification.type })}
+          >
             <CardNotification
               recipientId={notification.recipientId}
               properties={notification.properties}
@@ -45,34 +57,16 @@ const NotificationsList = () => {
         />
       )}
       {notifications.length > 0 && (
-        <Box>
-          {listLimit < notifications.length ? (
-            <Button
-              color="brand.500"
-              _hover={{
-                color: 'brand.300',
-              }}
-              fontSize={14}
-              py={8}
-              pt={10}
-              fontWeight="medium"
-              onClick={() => setListLimit(listLimit + 5)}
-            >
-              {intl.formatMessage(messages.loadMoreNotificationsButton)}
-            </Button>
-          ) : (
-            <EmptyState
-              maxW={320}
-              pt={5}
-              pb={10}
-              gridGap={0}
-              textWidth="260px"
-              fontSize={14}
-              imageKey="no-more-notifications"
-              labelMessage={messages.noMoreNotificationsLabel}
-            />
-          )}
-        </Box>
+        <EmptyState
+          maxW={320}
+          pt={5}
+          pb={10}
+          gridGap={0}
+          textWidth="260px"
+          fontSize={14}
+          imageKey="no-more-notifications"
+          labelMessage={messages.noMoreNotificationsLabel}
+        />
       )}
     </Box>
   )
