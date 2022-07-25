@@ -73,9 +73,12 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
     socket.on('newNotification', (newNotify: Notification) => {
       setNotifications({ notifications: [newNotify, ...notifications] })
     })
-  }, [notifications, setNotifications, socket])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket])
 
-  const notificationsCount = [...notifications].length
+  const notificationsCount = [...notifications].filter(
+    (notification) => !notification.isRead,
+  ).length
   const setNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
 
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
