@@ -61,9 +61,10 @@ const ScrollablePanel = styled(TabPanel)`
 `
 interface NotificationsModalProperties {
   userId: User['id']
+  isOpen: boolean
 }
 
-const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
+const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) => {
   const intl = useIntl()
   const { dispatch: dispatchTabCheckInClick } = useEvent(EventType.TAB_CHECKIN_CLICK)
   const { dispatch: dispatchTabNotificationClick } = useEvent(EventType.TAB_NOTIFICATION_CLICK)
@@ -163,7 +164,7 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
 
         <TabPanels p="0 10px 8px 10px">
           <ScrollablePanel justifyContent="center" textAlign="center" maxH="70vh" width={480}>
-            <NotificationsList />
+            {isOpen && <NotificationsList />}
           </ScrollablePanel>
           <ScrollablePanel maxH="70vh" width={480}>
             <CheckInNotifications

@@ -75,7 +75,7 @@ const NotificationsButton = () => {
         </Box>
       </PopoverTrigger>
       <PopoverContent mt={4} maxWidth={480} width="min-content" borderRadius={15} padding={0}>
-        <NotificationsModal userId={userID} />
+        <NotificationsModal userId={userID} isOpen={isOpen} />
       </PopoverContent>
     </Popover>
   )
