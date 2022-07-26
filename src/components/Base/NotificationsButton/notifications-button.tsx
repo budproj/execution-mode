@@ -26,10 +26,10 @@ const NotificationsButton = () => {
 
   const notificationCount = useRecoilValue(notificationCountAtom)
   const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
-
   const { isOpen, onToggle, onClose } = useDisclosure()
 
-  const isNotificationBadgeVisible = notificationCount > 0 || checkInNotificationCount > 0
+  const notificationCountTotal = notificationCount + checkInNotificationCount
+  const isNotificationBadgeVisible = notificationCountTotal > 1
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_BELL_CLICK)
 
@@ -52,7 +52,7 @@ const NotificationsButton = () => {
                   {isNotificationBadgeVisible && (
                     <NotificationBadge
                       hasBorder
-                      notificationCount={notificationCount + checkInNotificationCount}
+                      notificationCount={notificationCountTotal}
                       position="absolute"
                       top="2px"
                       right="-6px"
