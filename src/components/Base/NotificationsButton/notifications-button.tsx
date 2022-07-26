@@ -26,6 +26,7 @@ const NotificationsButton = () => {
 
   const notificationCount = useRecoilValue(notificationCountAtom)
   const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
+
   const { isOpen, onToggle, onClose } = useDisclosure()
 
   const isNotificationBadgeVisible = notificationCount > 0 || checkInNotificationCount > 0
@@ -35,7 +36,7 @@ const NotificationsButton = () => {
   const userID = useRecoilValue(meAtom)
 
   return (
-    <Popover isLazy placement="bottom" isOpen={isOpen} onClose={onClose}>
+    <Popover placement="bottom" isOpen={isOpen} onClose={onClose}>
       <PopoverTrigger>
         <Box display="inline-block">
           <TooltipWithDelay label={intl.formatMessage(messages.notificationBellTooltip)}>

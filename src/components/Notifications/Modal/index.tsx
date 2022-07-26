@@ -2,22 +2,24 @@ import { useQuery } from '@apollo/client'
 import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { isAfter, startOfWeek, isBefore } from 'date-fns'
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import { SocketIOContext } from 'src/components/Base/SocketIOProvider/socketio-provider'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
+import {
+  listNotificationsAtom,
+  checkInNotificationCountAtom,
+  notificationCountAtom,
+} from 'src/state/recoil/notifications'
 
 import CheckInNotifications from '../CheckInNotifications'
 import { NotificationsList } from '../NotificationsList'
-import { Notification } from '../NotificationsList/types'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -66,20 +68,14 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
   const { dispatch: dispatchTabCheckInClick } = useEvent(EventType.TAB_CHECKIN_CLICK)
   const { dispatch: dispatchTabNotificationClick } = useEvent(EventType.TAB_NOTIFICATION_CLICK)
 
-  const { socket } = useContext(SocketIOContext)
-  const [{ notifications }, setNotifications] = useRecoilState(listNotificationsAtom)
-
-  useEffect(() => {
-    socket.on('newNotification', (newNotify: Notification) => {
-      setNotifications({ notifications: [newNotify, ...notifications] })
-    })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket])
+  const [notifications] = useRecoilState(listNotificationsAtom)
 
   const notificationsCount = [...notifications].filter(
     (notification) => !notification.isRead,
   ).length
-  const setNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
+
+  const setCheckInNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
+  const setNotificationsCount = useSetRecoilState(notificationCountAtom)
 
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
@@ -121,8 +117,8 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
   )
   const checkinCount = checkins.length
 
-  setNotificationsCount(notificationsCount + checkinCount)
-
+  setCheckInNotificationsCount(checkinCount)
+  setNotificationsCount(notificationsCount)
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px">
       <Tabs

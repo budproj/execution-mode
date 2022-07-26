@@ -65,3 +65,5 @@ spec:
               value: 9314f6f12a26e6a5989287b16d030c30
             - name: NO_GAMIFICATION_COMPANIES_IDS
               value: '96eeb274-518e-462a-a741-f304420aa637'
+            - name: NOTIFICATION_API
+              value: https://notifications.getbud.co

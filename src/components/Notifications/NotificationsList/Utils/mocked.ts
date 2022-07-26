@@ -243,7 +243,7 @@ export const NotificationsMockedArray = [
       comment: {
         id: '12331',
         content:
-          '“Parabéns pela evolução, Rodrigo! Excelente trabalho! Como próximos passos, podemos pensar se faria sentido incluir a área de R&D nas nossas reuniões semanais como uma forma de...”',
+          '“Parabéns pela evolução, @[Rick Sanchez](b159ef12-9062-49c6-8afc-372e8848fb15)! Excelente trabalho! Como próximos passos, podemos pensar se faria sentido incluir a área de R&D nas nossas reuniões semanais como uma forma de...”',
       },
     },
   },

@@ -12,20 +12,23 @@ import CardNotification from './Card'
 import messages from './messages'
 
 const NotificationsList = () => {
-  const [{ notifications }, setNotifications] = useRecoilState(listNotificationsAtom)
+  const [notifications, setNotifications] = useRecoilState(listNotificationsAtom)
   const { socket } = useContext(SocketIOContext)
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_CARD_CLICK)
+  console.log({ notifications })
 
   useEffect(() => {
-    const viewedNotifications = notifications.map((notification) => {
-      return { ...notification, isRead: true }
-    })
-
-    setNotifications({ notifications: viewedNotifications })
-    socket.emit('readNotifications')
+    if (socket) socket.emit('readNotifications')
+    return () => {
+      setNotifications((previousNotifications) =>
+        previousNotifications.map((notification) => {
+          return { ...notification, isRead: true }
+        }),
+      )
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [socket])
 
   return (
     <Box>

@@ -2,7 +2,7 @@ export interface Notification {
   id: string
   isRead: boolean
   type: string
-  timestamp: Date
+  timestamp: string
   recipientId: string
   properties: {
     keyResult?: {

@@ -2,6 +2,7 @@ import { Box, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
+import regexifyString from 'regexify-string'
 
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
@@ -23,6 +24,21 @@ const CommentNotification = ({ properties, timestamp, isRead, type }: Notificati
     type === NOTIFICATIONS_TYPE.COMMENT_ON_MY_KR
       ? intl.formatMessage(messages.commentOnMyKrNotification)
       : intl.formatMessage(messages.taggedOnCommentNotification)
+
+  const commentText = regexifyString({
+    pattern: /@\[[\w \u00C0-\u00FF-]+]\([\da-f-]+\)/g,
+    decorator: (match) => {
+      const regex = /@\[([\w \u00C0-\u00FF-]+)]\(([\da-f-]+)\)/
+      const [_, name] = regex.exec(match) ?? [undefined, '', '']
+
+      return (
+        <Text as="span" color="brand.500" cursor="pointer">
+          {name}
+        </Text>
+      )
+    },
+    input: properties.comment?.content ?? '',
+  })
 
   return (
     <BaseCardNotification
@@ -52,8 +68,8 @@ const CommentNotification = ({ properties, timestamp, isRead, type }: Notificati
         </Box>
       </Heading>
       <KeyResultNotificationContent keyResultTitle={properties.keyResult?.name} />
-      <Text textAlign="left" fontSize={14} color="#525F7F">
-        {properties.comment?.content}
+      <Text textAlign="left" fontSize={14} position="relative">
+        {commentText}
       </Text>
     </BaseCardNotification>
   )

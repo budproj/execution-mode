@@ -13,7 +13,7 @@ export interface BaseCardsNotifications {
   children?: React.ReactNode
   isRead: boolean
   handleClick: (id?: KeyResult['id']) => void
-  timestamp: Date
+  timestamp: string
   describeBadgeAvatarIcon: MessageDescriptor
   badgeIcon: NOTIFICATIONS_TYPE
   sender: {
@@ -33,6 +33,8 @@ const BaseCardNotification = ({
   badgeIcon,
 }: BaseCardsNotifications) => {
   const intl = useIntl()
+
+  const timestampConverted = new Date(timestamp)
 
   return (
     <Box
@@ -83,7 +85,7 @@ const BaseCardNotification = ({
 
       <Tooltip
         placement="top-start"
-        label={intl.formatDate(timestamp, {
+        label={intl.formatDate(timestampConverted, {
           month: 'short',
           day: 'numeric',
           weekday: 'long',
@@ -94,8 +96,8 @@ const BaseCardNotification = ({
         <Box position="absolute" fontWeight="normal" right={2} top={5}>
           <LastUpdateText
             cursor="default"
-            date={timestamp}
-            prefix={Date.now() > timestamp.getTime() ? '' : 'há'}
+            date={timestampConverted}
+            prefix={Date.now() > timestampConverted.getTime() ? '' : 'há'}
             fontSize={12}
             color="new-gray.600"
             textAlign="right"
