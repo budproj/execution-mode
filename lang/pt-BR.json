@@ -359,10 +359,6 @@
     "defaultMessage": "Ver detalhes",
     "description": "This message is the description of the option to view details  of a user."
   },
-  "66spXk": {
-    "defaultMessage": "Ver mais",
-    "description": "This message appears on button that loading more notifications in list."
-  },
   "68qL+a": {
     "defaultMessage": "Gênero da empresa",
     "description": "The label of the company gender while creating a new workspace"

@@ -1,9 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type NotificationsListMessagesProperties =
-  | 'emptyStateLabel'
-  | 'noMoreNotificationsLabel'
-  | 'loadMoreNotificationsButton'
+type NotificationsListMessagesProperties = 'emptyStateLabel' | 'noMoreNotificationsLabel'
 
 export default defineMessages<NotificationsListMessagesProperties>({
   emptyStateLabel: {
@@ -16,11 +13,5 @@ export default defineMessages<NotificationsListMessagesProperties>({
     defaultMessage: 'Essas foram as suas notificações recentes!',
     id: 'OEPd1+',
     description: 'This message appears when no more notifications to listing.',
-  },
-
-  loadMoreNotificationsButton: {
-    defaultMessage: 'Ver mais',
-    id: '66spXk',
-    description: 'This message appears on button that loading more notifications in list.',
   },
 })
