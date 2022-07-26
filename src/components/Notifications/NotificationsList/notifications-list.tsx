@@ -16,10 +16,10 @@ const NotificationsList = () => {
   const { socket } = useContext(SocketIOContext)
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_CARD_CLICK)
-  console.log({ notifications })
 
   useEffect(() => {
     if (socket) socket.emit('readNotifications')
+
     return () => {
       setNotifications((previousNotifications) =>
         previousNotifications.map((notification) => {
