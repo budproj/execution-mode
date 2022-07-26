@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { isAfter, startOfWeek, isBefore } from 'date-fns'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
@@ -91,27 +91,31 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
     },
   })
 
-  const keyResultsWithNoCheckInThisWeek = keyResults?.filter((keyResult) => {
-    if (!keyResult?.status?.latestCheckIn) {
-      return true
-    }
+  const keyResultsWithNoCheckInThisWeek = useMemo(() => {
+    return keyResults?.filter((keyResult) => {
+      if (!keyResult?.status?.latestCheckIn) {
+        return true
+      }
 
-    const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
-    const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
+      const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
+      const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
 
-    return isBefore(date, startOfTheWeek)
-  })
+      return isBefore(date, startOfTheWeek)
+    })
+  }, [keyResults])
 
-  const keyResultsUpToDate = keyResults.filter((keyResult) => {
-    if (!keyResult?.status?.latestCheckIn) {
-      return false
-    }
+  const keyResultsUpToDate = useMemo(() => {
+    return keyResults.filter((keyResult) => {
+      if (!keyResult?.status?.latestCheckIn) {
+        return false
+      }
 
-    const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
-    const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
+      const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
+      const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
 
-    return isAfter(date, startOfTheWeek)
-  })
+      return isAfter(date, startOfTheWeek)
+    })
+  }, [keyResults])
 
   const checkins = keyResultsWithNoCheckInThisWeek.filter(
     (keyResult) => keyResult.status.isOutdated,
@@ -120,6 +124,7 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
 
   setCheckInNotificationsCount(checkinCount)
   setNotificationsCount(notificationsCount)
+
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px">
       <Tabs
