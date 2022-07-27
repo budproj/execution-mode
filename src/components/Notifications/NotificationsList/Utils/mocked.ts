@@ -1,9 +1,11 @@
-export const NotificationsMockedArray = [
+import { Notification } from 'src/components/Notifications/NotificationsList/types'
+
+export const NotificationsMockedArray: Notification[] = [
   {
     id: '5dfb319a-b099-4035-a4ed-709d5c474076',
     isRead: false,
     type: 'checkin',
-    timestamp: new Date(1657728381 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '123121',
     properties: {
       sender: {
@@ -24,7 +26,7 @@ export const NotificationsMockedArray = [
     id: '40d80cc1-ba12-4eqwewq2199c-b3d6-d759577762d6',
     isRead: true,
     type: 'checkin',
-    timestamp: new Date(1657638381 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '123121',
     properties: {
       sender: {
@@ -44,7 +46,7 @@ export const NotificationsMockedArray = [
     id: '154637cewqe2-d343-4359-832b-37b6127bd32c',
     isRead: false,
     type: 'supportTeam',
-    timestamp: new Date(1657551981 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -62,7 +64,7 @@ export const NotificationsMockedArray = [
     id: '19cca342-6275-4fe5-ae36qewq-dcc599466519',
     isRead: false,
     type: 'taskAssign',
-    timestamp: new Date(1657546821 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -85,7 +87,7 @@ export const NotificationsMockedArray = [
     id: '40d80cc1-ba12-499c-b3d6-d759577762d6',
     isRead: false,
     type: 'checkin',
-    timestamp: new Date(1657640421 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '123121',
     properties: {
       sender: {
@@ -105,7 +107,7 @@ export const NotificationsMockedArray = [
     id: 'c887384e-21fc-41a7-949a-6ac488688564',
     isRead: true,
     type: 'checkin',
-    timestamp: new Date(1656988284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -125,7 +127,7 @@ export const NotificationsMockedArray = [
     id: '154637c7-d343-4359-832b-37b6127bd32c',
     isRead: false,
     type: 'supportTeam',
-    timestamp: new Date(1654655484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -143,7 +145,7 @@ export const NotificationsMockedArray = [
     id: '19cca342-6275-4fe5-ae36-dcc599466519',
     isRead: false,
     type: 'taskAssign',
-    timestamp: new Date(1654396284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -167,7 +169,7 @@ export const NotificationsMockedArray = [
     id: 'c887123384e-21fc-41a7-949a-6ac488688564',
     isRead: true,
     type: 'checkin',
-    timestamp: new Date(1656988284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -187,7 +189,7 @@ export const NotificationsMockedArray = [
     id: '132154637c7-d343-4359-832b-37b6127bd32c',
     isRead: false,
     type: 'supportTeam',
-    timestamp: new Date(1654655484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -205,7 +207,7 @@ export const NotificationsMockedArray = [
     id: '19cca342-6275-4f43243221e5-ae36-dcc599466519',
     isRead: false,
     type: 'taskAssign',
-    timestamp: new Date(1654396284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -228,7 +230,7 @@ export const NotificationsMockedArray = [
     id: '3992ce24-14bd-4c9c-a11c-b7f4dbbfddb0',
     isRead: true,
     type: 'taggedInComment',
-    timestamp: new Date(1655058684 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -251,7 +253,7 @@ export const NotificationsMockedArray = [
     id: '49223681-9bc7-4501-9cda-84d61f0bdc06',
     isRead: false,
     type: 'commentOnKR',
-    timestamp: new Date(1655087484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -273,7 +275,7 @@ export const NotificationsMockedArray = [
     id: 'a22a80bc-4abb-4b58-be46-ff241feb8b02',
     isRead: false,
     type: 'checkin',
-    timestamp: new Date(1655048318 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '123121',
     properties: {
       sender: {
@@ -293,7 +295,7 @@ export const NotificationsMockedArray = [
     id: '4b0e21f2-e15e-43ba-8db8-0422ce306f4f',
     isRead: true,
     type: 'checkin',
-    timestamp: new Date(1656988284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -313,7 +315,7 @@ export const NotificationsMockedArray = [
     id: 'e44e72c4-0678-4eb4-9540-bf5fd784f122',
     isRead: false,
     type: 'supportTeam',
-    timestamp: new Date(1654655484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -331,7 +333,7 @@ export const NotificationsMockedArray = [
     id: '4288e0fb-90f3-4730-8716-c75efe40a1f1',
     isRead: false,
     type: 'taskAssign',
-    timestamp: new Date(1654396284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -355,7 +357,7 @@ export const NotificationsMockedArray = [
     id: 'f1b4850e-a4b4-4bc2-9e9a-1f7dcb9ba451',
     isRead: true,
     type: 'taggedInComment',
-    timestamp: new Date(1655058684 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -378,7 +380,7 @@ export const NotificationsMockedArray = [
     id: '42a5aba8-c10a-4bfe-8a4b-1fa5053307c8',
     isRead: false,
     type: 'commentOnKR',
-    timestamp: new Date(1655087484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -400,7 +402,7 @@ export const NotificationsMockedArray = [
     id: '7cb41424-0332-4b12-aa84-9cb090db941e',
     isRead: false,
     type: 'checkin',
-    timestamp: new Date(1655048318 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '123121',
     properties: {
       sender: {
@@ -420,7 +422,7 @@ export const NotificationsMockedArray = [
     id: '3ec63622-cae2-4e81-b368-b1692511c310',
     isRead: true,
     type: 'checkin',
-    timestamp: new Date(1656988284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -440,7 +442,7 @@ export const NotificationsMockedArray = [
     id: '13e63cc8-eae3-49f2-bbb2-3ccda5039beb',
     isRead: false,
     type: 'supportTeam',
-    timestamp: new Date(1654655484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -458,7 +460,7 @@ export const NotificationsMockedArray = [
     id: '74394663-d3bd-4b65-bdf4-9a30d24b2f39',
     isRead: false,
     type: 'taskAssign',
-    timestamp: new Date(1654396284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -482,7 +484,7 @@ export const NotificationsMockedArray = [
     id: '7d6c3095-44ee-4ba2-ba19-f254ce228248',
     isRead: true,
     type: 'taggedInComment',
-    timestamp: new Date(1655058684 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -505,7 +507,7 @@ export const NotificationsMockedArray = [
     id: 'be8ff61b-1fa9-4ad8-95b9-9275dead384b',
     isRead: false,
     type: 'commentOnKR',
-    timestamp: new Date(1655087484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -527,7 +529,7 @@ export const NotificationsMockedArray = [
     id: 'e355fcd1-fc29-42343215e-bdc2-1c9ad32ca120',
     isRead: false,
     type: 'checkin',
-    timestamp: new Date(1655048318 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '123121',
     properties: {
       sender: {
@@ -547,7 +549,7 @@ export const NotificationsMockedArray = [
     id: '012ee96d-646f-4trwtrw4089-9100-6f5e2e55b3c7',
     isRead: true,
     type: 'checkin',
-    timestamp: new Date(1656988284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -567,7 +569,7 @@ export const NotificationsMockedArray = [
     id: 'f290ea68twertwr-1410-4333-92e4-f354d45a6e3e',
     isRead: false,
     type: 'supportTeam',
-    timestamp: new Date(1654655484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -585,7 +587,7 @@ export const NotificationsMockedArray = [
     id: '217d0c0twertrwed-424d-4eae-a119-254778128ef1',
     isRead: false,
     type: 'taskAssign',
-    timestamp: new Date(1654396284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -609,7 +611,7 @@ export const NotificationsMockedArray = [
     id: '9df89957-00e0-42b8-9adf-ae3twerfwte9a461a52c',
     isRead: true,
     type: 'taggedInComment',
-    timestamp: new Date(1655058684 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -632,7 +634,7 @@ export const NotificationsMockedArray = [
     id: '839a2830-cb62-4703-bfd3-15frwgtwrdb10df8fa',
     isRead: false,
     type: 'commentOnKR',
-    timestamp: new Date(1655087484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -654,7 +656,7 @@ export const NotificationsMockedArray = [
     id: 'af13fb47-b43d-41bf-a8dd-f8tewtweeb000d4401',
     isRead: false,
     type: 'checkin',
-    timestamp: new Date(1655048318 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '123121',
     properties: {
       sender: {
@@ -674,7 +676,7 @@ export const NotificationsMockedArray = [
     id: 'd21cb2a1-6254-4671-baa9-45ca04gf5bf528',
     isRead: true,
     type: 'checkin',
-    timestamp: new Date(1656988284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -694,7 +696,7 @@ export const NotificationsMockedArray = [
     id: '8ab2terterj3df9-8bf1-42df-a3ed-44f6e258a241',
     isRead: false,
     type: 'supportTeam',
-    timestamp: new Date(1654655484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -712,7 +714,7 @@ export const NotificationsMockedArray = [
     id: '7c7c66de-7f2c-4b63-803traetc-3b045c375b92',
     isRead: false,
     type: 'taskAssign',
-    timestamp: new Date(1654396284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -736,7 +738,7 @@ export const NotificationsMockedArray = [
     id: '51abab80-5736-4307-9eb3-4trae9633d89e430',
     isRead: true,
     type: 'taggedInComment',
-    timestamp: new Date(1655058684 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -759,7 +761,7 @@ export const NotificationsMockedArray = [
     id: '839a2830-cb62-4703-bfTWRETREd3-15fdb10df8fa',
     isRead: false,
     type: 'commentOnKR',
-    timestamp: new Date(1655087484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -781,7 +783,7 @@ export const NotificationsMockedArray = [
     id: 'af13fb47-b43d-41bf-a8dd-f8eb000d4401',
     isRead: false,
     type: 'checkin',
-    timestamp: new Date(1655048318 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '123121',
     properties: {
       sender: {
@@ -801,7 +803,7 @@ export const NotificationsMockedArray = [
     id: 'd21cbTWET2a1-6254-4671-baa9-45ca045bf528',
     isRead: true,
     type: 'checkin',
-    timestamp: new Date(1656988284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -821,7 +823,7 @@ export const NotificationsMockedArray = [
     id: '8ab23df9-8bf1-42df-atyEWT3ed-44f6e258a241',
     isRead: false,
     type: 'supportTeam',
-    timestamp: new Date(1654655484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -839,7 +841,7 @@ export const NotificationsMockedArray = [
     id: '7c7c66de-7f2c-4b63-hgdfshh803c-3b045c375b92',
     isRead: false,
     type: 'taskAssign',
-    timestamp: new Date(1654396284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -863,7 +865,7 @@ export const NotificationsMockedArray = [
     id: '51a13413bab80-5736-4307-9eb3-49633d89e430',
     isRead: true,
     type: 'taggedInComment',
-    timestamp: new Date(1655058684 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -886,7 +888,7 @@ export const NotificationsMockedArray = [
     id: '839a2830-cb62-4703-bfd3-14531245fdb10df8fa',
     isRead: false,
     type: 'commentOnKR',
-    timestamp: new Date(1655087484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -908,7 +910,7 @@ export const NotificationsMockedArray = [
     id: '839a2830-cb62-4703-bfd3-1453weqw2edq1245fdb10df8fa',
     isRead: false,
     type: 'commentOnKR',
-    timestamp: new Date(1655087484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -930,7 +932,7 @@ export const NotificationsMockedArray = [
     id: 'af13fb413447-b43d-41bf-a8dd-f8eb000d4401',
     isRead: false,
     type: 'checkin',
-    timestamp: new Date(1655048318 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '123121',
     properties: {
       sender: {
@@ -950,7 +952,7 @@ export const NotificationsMockedArray = [
     id: 'd21cb2a1-6254-4671-baa9-45teasryrteca045bf528',
     isRead: true,
     type: 'checkin',
-    timestamp: new Date(1656988284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -970,7 +972,7 @@ export const NotificationsMockedArray = [
     id: '8ab23h4rt5342df9-8bf1-42df-a3ed-44f6e258a241',
     isRead: false,
     type: 'supportTeam',
-    timestamp: new Date(1654655484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -988,7 +990,7 @@ export const NotificationsMockedArray = [
     id: '7c7c66de-7f2c-4b63-80gsgfsda3c-3b045c375b92',
     isRead: false,
     type: 'taskAssign',
-    timestamp: new Date(1654396284 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -1012,7 +1014,7 @@ export const NotificationsMockedArray = [
     id: '51abab80-5736-4307-fdasrfdsa9eb3-49633d89e430',
     isRead: true,
     type: 'taggedInComment',
-    timestamp: new Date(1655058684 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
@@ -1035,7 +1037,7 @@ export const NotificationsMockedArray = [
     id: '839a2830-cb6dfasd-bfd3-15fdb10df8fa',
     isRead: false,
     type: 'commentOnKR',
-    timestamp: new Date(1655087484 * 1000),
+    timestamp: '2022-07-13T16:06:21.000Z',
     recipientId: '12312',
     properties: {
       sender: {
