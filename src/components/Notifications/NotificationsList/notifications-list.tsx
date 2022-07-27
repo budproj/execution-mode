@@ -17,7 +17,7 @@ const NotificationsList = () => {
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_CARD_CLICK)
 
-  const ordainedNotificationsByDate = notifications.sort(function (x, y) {
+  const ordainedNotificationsByDate = [...notifications].sort(function (x, y) {
     return new Date(y.timestamp).getTime() - new Date(x.timestamp).getTime()
   })
 
