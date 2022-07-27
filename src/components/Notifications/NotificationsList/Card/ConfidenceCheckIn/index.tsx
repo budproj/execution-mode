@@ -26,8 +26,8 @@ const ConfidenceCheckin = ({ properties, isRead, timestamp }: Notification) => {
     ? intl.formatMessage(messages.wrapperMessage, {
         specific:
           properties.newConfidence === ConfidenceMapper.barrier
-            ? messages.barrierMediumMessage.defaultMessage
-            : messages.lowConfidenceMediumMessage.defaultMessage,
+            ? intl.formatMessage(messages.barrierMediumMessage)
+            : intl.formatMessage(messages.lowConfidenceMediumMessage),
       })
     : undefined
 
