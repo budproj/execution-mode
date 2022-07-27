@@ -73,6 +73,7 @@ const NotificationKeyResult = ({
               author={
                 isKeyResultOutdated ? undefined : keyResult.status.latestCheckIn?.user.fullName
               }
+              lineHeight="normal"
             />
           </Flex>
         </Box>
