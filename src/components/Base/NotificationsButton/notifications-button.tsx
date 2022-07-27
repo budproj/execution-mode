@@ -29,7 +29,7 @@ const NotificationsButton = () => {
   const { isOpen, onToggle, onClose } = useDisclosure()
 
   const notificationCountTotal = notificationCount + checkInNotificationCount
-  const isNotificationBadgeVisible = notificationCountTotal > 1
+  const isNotificationBadgeVisible = notificationCountTotal > 0
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_BELL_CLICK)
 
