@@ -16,7 +16,7 @@ import NotificationsModal from 'src/components/Notifications/Modal'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { notificationCountAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
+import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 import meAtom from 'src/state/recoil/user/me'
 
 import messages from './messages'
@@ -24,10 +24,11 @@ import messages from './messages'
 const NotificationsButton = () => {
   const intl = useIntl()
 
-  const notificationCount = useRecoilValue(notificationCountAtom)
+  const notifications = useRecoilValue(listNotificationsAtom)
   const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
   const { isOpen, onToggle, onClose } = useDisclosure()
 
+  const notificationCount = [...notifications].filter((notification) => !notification.isRead).length
   const notificationCountTotal = notificationCount + checkInNotificationCount
   const isNotificationBadgeVisible = notificationCountTotal > 0
 

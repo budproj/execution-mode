@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import { isAfter, startOfWeek, isBefore } from 'date-fns'
 import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
@@ -12,11 +12,7 @@ import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import {
-  listNotificationsAtom,
-  checkInNotificationCountAtom,
-  notificationCountAtom,
-} from 'src/state/recoil/notifications'
+import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
 import CheckInNotifications from '../CheckInNotifications'
 import { NotificationsList } from '../NotificationsList'
@@ -69,14 +65,8 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
   const { dispatch: dispatchTabCheckInClick } = useEvent(EventType.TAB_CHECKIN_CLICK)
   const { dispatch: dispatchTabNotificationClick } = useEvent(EventType.TAB_NOTIFICATION_CLICK)
 
-  const [notifications] = useRecoilState(listNotificationsAtom)
-
-  const notificationsCount = [...notifications].filter(
-    (notification) => !notification.isRead,
-  ).length
-
+  const notifications = useRecoilValue(listNotificationsAtom)
   const setCheckInNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
-  const setNotificationsCount = useSetRecoilState(notificationCountAtom)
 
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
@@ -117,13 +107,12 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
     })
   }, [keyResults])
 
-  const checkins = keyResultsWithNoCheckInThisWeek.filter(
+  const checkinCount = keyResultsWithNoCheckInThisWeek.filter(
     (keyResult) => keyResult.status.isOutdated,
-  )
-  const checkinCount = checkins.length
+  ).length
+  const notificationCount = [...notifications].filter((notification) => !notification.isRead).length
 
   setCheckInNotificationsCount(checkinCount)
-  setNotificationsCount(notificationsCount)
 
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px">
@@ -152,7 +141,7 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
             onClick={() => dispatchTabNotificationClick({})}
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
-            {notificationsCount > 0 && <NotificationBadge notificationCount={notificationsCount} />}
+            {notificationCount > 0 && <NotificationBadge notificationCount={notificationCount} />}
           </StyledTab>
           <StyledTab
             gap={2}
