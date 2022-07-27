@@ -17,6 +17,10 @@ const NotificationsList = () => {
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_CARD_CLICK)
 
+  const ordainedNotificationsByDate = notifications.sort(function (x, y) {
+    return new Date(y.timestamp).getTime() - new Date(x.timestamp).getTime()
+  })
+
   useEffect(() => {
     if (socket) socket.emit('readNotifications')
 
@@ -33,7 +37,7 @@ const NotificationsList = () => {
   return (
     <Box>
       {notifications.length > 0 ? (
-        notifications.map((notification) => (
+        ordainedNotificationsByDate.map((notification) => (
           <Box
             key={notification.id}
             onClick={() => dispatch({ notificationType: notification.type })}
