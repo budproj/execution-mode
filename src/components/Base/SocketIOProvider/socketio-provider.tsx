@@ -7,10 +7,10 @@ import { Notification } from 'src/components/Notifications/NotificationsList/typ
 import getConfig from 'src/config'
 import { listNotificationsAtom } from 'src/state/recoil/notifications'
 
-const ENDPOINT = 'http://localhost:5001'
 interface SocketIOContextProperties {
   socket: Socket | undefined
 }
+
 export const SocketIOContext = createContext<SocketIOContextProperties>(
   {} as SocketIOContextProperties,
 )
@@ -28,7 +28,7 @@ const SocketIOProvider = ({ children }: ChildrenProperty) => {
 
   const connectWebsocket = async () => {
     const token = await getAccessTokenSilently(config.publicRuntimeConfig.auth0)
-    const socket = io(ENDPOINT, {
+    const socket = io(config.publicRuntimeConfig.api.notifications, {
       auth: { token },
     })
 
