@@ -21,6 +21,7 @@ interface NotificationKeyResultProperties {
   keyResult: KeyResult
   handleClick: (id: KeyResult['id']) => void
   userId: User['id']
+  updateIconIsFilled?: boolean
 }
 
 const NotificationKeyResult = ({
@@ -28,6 +29,7 @@ const NotificationKeyResult = ({
   keyResult,
   handleClick,
   userId,
+  updateIconIsFilled,
 }: NotificationKeyResultProperties) => {
   const intl = useIntl()
   const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
@@ -60,6 +62,7 @@ const NotificationKeyResult = ({
           </Text>
           <Flex alignItems="center">
             <UpdateIcon
+              isFilled={updateIconIsFilled}
               isOutdated={keyResult.status.latestCheckIn ? keyResult.status.isOutdated : true}
               updateTextColor={updateTextColor}
             />

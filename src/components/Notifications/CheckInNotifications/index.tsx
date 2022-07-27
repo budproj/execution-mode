@@ -38,6 +38,7 @@ const CheckInNotifications = ({
               {keyResultsWithNoCheckInThisWeek.map((keyResult) => (
                 <NotificationKeyResult
                   key={keyResult.id}
+                  updateIconIsFilled
                   isKeyResultOutdated
                   keyResult={keyResult}
                   handleClick={setOpenDrawer}
