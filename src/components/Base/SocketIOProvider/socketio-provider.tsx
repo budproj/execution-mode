@@ -42,9 +42,18 @@ const SocketIOProvider = ({ children }: ChildrenProperty) => {
 
   useEffect(() => {
     if (socket) {
-      socket.on('newNotification', (newNotify: Notification) => {
+      socket.on('newNotification', (newNotification: Notification) => {
         setNotifications((previousNotifications) => {
-          return [newNotify, ...previousNotifications]
+          const existentNotificationIndex = previousNotifications.findIndex(
+            (notification) => notification.id === newNotification.id,
+          )
+
+          if (existentNotificationIndex !== -1) {
+            previousNotifications[existentNotificationIndex] = newNotification
+            return previousNotifications
+          }
+
+          return [newNotification, ...previousNotifications]
         })
       })
     }
