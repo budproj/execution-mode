@@ -22,14 +22,20 @@ const NotificationsList = () => {
   })
 
   useEffect(() => {
-    if (socket) socket.emit('readNotifications')
+    const hasUnreadNotification = notifications.some((notification) => !notification.isRead)
+
+    if (socket && hasUnreadNotification) {
+      socket.emit('readNotifications')
+    }
 
     return () => {
-      setNotifications((previousNotifications) =>
-        previousNotifications.map((notification) => {
-          return { ...notification, isRead: true }
-        }),
-      )
+      if (hasUnreadNotification) {
+        setNotifications((previousNotifications) =>
+          previousNotifications.map((notification) => {
+            return { ...notification, isRead: true }
+          }),
+        )
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket])
