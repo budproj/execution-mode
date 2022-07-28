@@ -2,7 +2,7 @@ import { Box } from '@chakra-ui/react'
 import React from 'react'
 
 import CheckedIcon from 'src/components/Icon/Checked/checked'
-import ChevronDownCircleIcon from 'src/components/Icon/ChevronDown'
+import ChevronDownCircleIcon from 'src/components/Icon/ChevronDown/chvron-down-circle'
 import CommentIcon from 'src/components/Icon/Comment'
 import PauseIcon from 'src/components/Icon/Pause'
 import TaggedIcon from 'src/components/Icon/Tagged'
@@ -18,20 +18,7 @@ const BadgeIcon = ({ typeNotification, desc, ...rest }: BadgeIconProperties) => 
   const Icons = new Map([
     [
       NOTIFICATIONS_TYPE.LOW_CONFIDENCE,
-      <ChevronDownCircleIcon
-        desc={desc}
-        {...rest}
-        key={desc}
-        fill="white"
-        fontSize="large"
-        border="2px solid white"
-        stroke="white"
-        bg="#FF616A"
-        borderRadius="50%"
-        h="1.15em"
-        w="1.15em"
-        p="3px"
-      />,
+      <ChevronDownCircleIcon desc={desc} {...rest} key={desc} h="1.25em" w="1.25 em" />,
     ],
     [
       NOTIFICATIONS_TYPE.CONFIDENCE_BARRIER,
