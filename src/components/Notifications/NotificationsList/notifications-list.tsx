@@ -65,11 +65,10 @@ const NotificationsList = () => {
       )}
       {notifications.length > 0 && (
         <EmptyState
-          maxW={320}
+          maxW={180}
           pt={5}
           pb={10}
           gridGap={0}
-          textWidth="260px"
           fontSize={14}
           imageKey="no-more-notifications"
           labelMessage={messages.noMoreNotificationsLabel}
