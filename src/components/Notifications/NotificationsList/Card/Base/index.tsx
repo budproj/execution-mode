@@ -38,7 +38,6 @@ const BaseCardNotification = ({
 
   return (
     <Box
-      bg={isRead ? undefined : 'new-gray.50'}
       paddingY={6}
       paddingX={2}
       maxW="100%"
@@ -48,7 +47,7 @@ const BaseCardNotification = ({
       justifyContent="flex-start"
       cursor="pointer"
       _hover={{
-        bg: 'new-gray.100',
+        bg: 'new-gray.50',
       }}
       gap={6}
       onClick={() => handleClick()}

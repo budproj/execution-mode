@@ -115,7 +115,7 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
   setCheckInNotificationsCount(checkinCount)
 
   return (
-    <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px">
+    <PopoverBody padding={0} margin={0} borderRadius={15}>
       <Tabs
         isFitted
         isLazy
