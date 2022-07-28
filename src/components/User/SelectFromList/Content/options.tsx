@@ -11,10 +11,12 @@ import messages from './messages'
 
 type SelectUserFromListOptionsProperties = {
   onCreateStart: () => void
+  onAddUserToTeam: () => void
 }
 
 export const SelectUserFromListOptions = ({
   onCreateStart,
+  onAddUserToTeam,
 }: SelectUserFromListOptionsProperties) => {
   const intl = useIntl()
   return (
@@ -27,6 +29,9 @@ export const SelectUserFromListOptions = ({
         />
       }
     >
+      <SearchableListOption onClick={onAddUserToTeam}>
+        {intl.formatMessage(messages.addUserToTeamOption)}
+      </SearchableListOption>
       <SearchableListOption onClick={onCreateStart}>
         {intl.formatMessage(messages.newUserOption)}
       </SearchableListOption>

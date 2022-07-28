@@ -36,7 +36,12 @@ export const SelectUserFromListContent = ({
 
   return hasMembers || isLoading ? (
     <>
-      {hasCreatePermission && <SelectUserFromListOptions onCreateStart={onCreateStart} />}
+      {hasCreatePermission && (
+        <SelectUserFromListOptions
+          onCreateStart={onCreateStart}
+          onAddUserToTeam={() => console.log('tals')}
+        />
+      )}
 
       <UsersInContext
         hasUserCard={hasUserCard}
