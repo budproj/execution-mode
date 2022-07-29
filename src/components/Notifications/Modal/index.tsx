@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { isAfter, startOfWeek, isBefore } from 'date-fns'
-import React, { useMemo } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -70,7 +70,7 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
 
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
-  useQuery(queries.GET_KEYRESULTS_FOR_NOTIFICATIONS, {
+  const { refetch } = useQuery(queries.GET_KEYRESULTS_FOR_NOTIFICATIONS, {
     onCompleted: (data) => {
       const companyKeyResults = data.me.keyResults.edges.filter(
         (keyResult: { node: KeyResult }) => {
@@ -80,6 +80,18 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
       setKeyResultEdges(companyKeyResults)
     },
   })
+
+  useEffect(() => {
+    const oneHourInMs = 60 * 60 * 1000
+    const refetchInterval = setInterval(() => {
+      refetch()
+    }, oneHourInMs)
+
+    return () => {
+      clearInterval(refetchInterval)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const keyResultsWithNoCheckInThisWeek = useMemo(() => {
     return keyResults?.filter((keyResult) => {
