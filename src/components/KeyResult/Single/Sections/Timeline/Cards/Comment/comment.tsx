@@ -26,7 +26,7 @@ export interface KeyResultSectionTimelineCardCommentProperties {
   onEntryDelete?: (entryType: string) => void
 }
 
-const MarkedUser = ({ id, name }: { id?: string; name?: string }) => (
+export const MarkedUser = ({ id, name }: { id?: string; name?: string }) => (
   <Popover placement="top-end" size="sm">
     <PopoverTrigger>
       <Text as="span" color="brand.500" cursor="pointer">

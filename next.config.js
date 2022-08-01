@@ -31,6 +31,7 @@ const {
   SENTRY_DSN,
   SENTRY_AUTH_TOKEN,
   NO_GAMIFICATION_COMPANIES_IDS,
+  NOTIFICATION_API,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -74,6 +75,7 @@ const publicRuntimeConfig = {
 
   api: {
     graphql: API_GRAPHQL,
+    notifications: NOTIFICATION_API,
   },
 
   sentry: {

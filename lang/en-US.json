@@ -359,6 +359,10 @@
     "defaultMessage": "Explore previous cycles",
     "description": "This message appears below the time machine title, as an auxiliary title in a team's page"
   },
+  "5r52/T": {
+    "defaultMessage": "a roadblock in a",
+    "description": "This message appears as notification in confidence check in with barrier."
+  },
   "5th5LY": {
     "defaultMessage": "Huh! Where is the page that was just here?",
     "description": "The title displayed in our unknown error page"
@@ -386,6 +390,10 @@
   "61S7n7": {
     "defaultMessage": "See details",
     "description": "This message is the description of the option to view details  of a user."
+  },
+  "66spXk": {
+    "defaultMessage": "Show more",
+    "description": "This message appears on button that loading more notifications in list."
   },
   "68qL+a": {
     "defaultMessage": "Gender of the company",
@@ -495,6 +503,10 @@
     "defaultMessage": "Down arrow icon representing how far your company regressed over the last week",
     "description": "This message is used by screen readers to explain our arrow down icon"
   },
+  "8Ay4MQ": {
+    "defaultMessage": "No check-in yet",
+    "description": "This label is displayed if we do not have any update date to display"
+  },
   "8B+4Un": {
     "defaultMessage": "Use this painel to configure the users on the platform",
     "description": "The description page."
@@ -514,6 +526,10 @@
   "8gbub2": {
     "defaultMessage": "Status",
     "description": "This message is displayed as the column header for the cycle table in the status column"
+  },
+  "8HUHbX": {
+    "defaultMessage": "assigned a task to you:",
+    "description": "This message appears as describe on notification where a user is assigned to a task."
   },
   "8kcr+g": {
     "defaultMessage": "User",
@@ -646,6 +662,10 @@
   "aT1RWB": {
     "defaultMessage": "Confirm your action",
     "description": "This message is displayed as the input label for the danger delete resource dialog"
+  },
+  "ATbiBE": {
+    "defaultMessage": "commented on your key result:",
+    "description": "This message is displayed to describe a notification that occurs when someone comments on a user`s KR."
   },
   "aVLR+w": {
     "defaultMessage": "100%",
@@ -1307,6 +1327,14 @@
     "defaultMessage": "{period} Ciclo {status} successfully!",
     "description": "This message appears when we create a new cycle as a toast"
   },
+  "i7i3Ew": {
+    "defaultMessage": "reported {specific} key result:",
+    "description": "This message is the wrapper that appears on both types of confidence check ins."
+  },
+  "I7MY1s": {
+    "defaultMessage": "Notifications",
+    "description": "Tooltip title of the notification bell."
+  },
   "I8NCD3": {
     "defaultMessage": "Check-in made",
     "description": "This string is used as the description for the icon that indicates that the key-result is updated"
@@ -1338,6 +1366,10 @@
   "Ii3n+d": {
     "defaultMessage": "to <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the second line of our confidence tooltip"
+  },
+  "iIm/1E": {
+    "defaultMessage": "mentioned you in a comment:",
+    "description": "This message is displayed to describe a notification that occurs when a user is tagged in a comment."
   },
   "iivI51": {
     "defaultMessage": "This month",
@@ -1450,6 +1482,10 @@
   "Jkg7nT": {
     "defaultMessage": "US$ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin USD format"
+  },
+  "JKqe2t": {
+    "defaultMessage": "An empty box representing the lack of notifications.",
+    "description": "The alternative text explain the empty state message from notifications list."
   },
   "JNiINj": {
     "defaultMessage": "Check out our OKR examples",
@@ -1675,6 +1711,10 @@
     "defaultMessage": "English",
     "description": "The user locale en-US option while creating a new workspace"
   },
+  "lpsQj3": {
+    "defaultMessage": "Check-in",
+    "description": "This message appears as the title of the Check-ins option in the notifications modal."
+  },
   "LQfRhU": {
     "defaultMessage": "Go to profile",
     "description": "This message is the description of the option to redirect to profile of a user."
@@ -1722,6 +1762,10 @@
   "M9Jejl": {
     "defaultMessage": "Dashboard | bud",
     "description": "The page title that is displayed in the browser tab"
+  },
+  "MAAXnt": {
+    "defaultMessage": "added you as support team on a key result:",
+    "description": "This message appears as describe on notification where a user is included on support team of a key-result."
   },
   "MAcjZG": {
     "defaultMessage": "This action can't be undone",
@@ -1906,6 +1950,10 @@
   "OEfoTC": {
     "defaultMessage": "An icon of intertwined arrows. By clicking on it you will edit this field",
     "description": "This message is used by screen readers when the user is focusing on the component which contains the user name and picture. This component is used in multiple places, like: our header, the key-result drawers, and other"
+  },
+  "OEPd1+": {
+    "defaultMessage": "These were your recent notifications!",
+    "description": "This message appears when no more notifications to listing."
   },
   "OErdYA": {
     "defaultMessage": "An icon with three dots, indicating that by clicking here a menu will expand",
@@ -2131,6 +2179,10 @@
     "defaultMessage": "These users can create, edit and delete any objective or key result on Bud",
     "description": "This string is used to describe the user edit role selection."
   },
+  "R7I25V": {
+    "defaultMessage": "You have no notifications.",
+    "description": "This message appears in the empty state of the notifications listing."
+  },
   "R8hOYh": {
     "defaultMessage": "This team has no OKRs",
     "description": "This message is displayed as the empty state message inside the team page"
@@ -2174,6 +2226,10 @@
   "RZrZdZ": {
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
+  },
+  "rZUL1Q": {
+    "defaultMessage": "low confidence in a",
+    "description": "This message appears as notification in confidence check in with low-confidence."
   },
   "S/F2Hk": {
     "defaultMessage": "Details",
@@ -2731,6 +2787,10 @@
     "defaultMessage": "A button with a confirmation icon. By clicking on it you will save your changes to the objective's title",
     "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the check button"
   },
+  "XGKUNq": {
+    "defaultMessage": "Due this week",
+    "description": "The title of the section of the key results without check-in in the week."
+  },
   "xIe3i6": {
     "defaultMessage": "Reactivate account",
     "description": "This message is the description of the option to reactivate a user account."
@@ -2794,6 +2854,10 @@
   "XZcPVc": {
     "defaultMessage": "A woman analyzing a chart and pointing to something on the screen",
     "description": "The alternative text explaining the empty item image"
+  },
+  "XZF51J": {
+    "defaultMessage": "An image representing the lack of further notifications.",
+    "description": "The alternative text explain the empty state message when no more notifications to listing."
   },
   "Y+MtZe": {
     "defaultMessage": "Name",
@@ -2996,7 +3060,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-06-27T14:48:58Z",
+    "defaultMessage": "2022-07-27T18:36:27Z",
     "description": null
   }
 }

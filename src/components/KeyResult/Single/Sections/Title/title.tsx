@@ -100,6 +100,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           >
             <LastUpdateText
               fontSize="sm"
+              ml="2px"
               date={lastUpdateDate}
               color={isOutdated ? 'red.500' : 'gray.400'}
               prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}

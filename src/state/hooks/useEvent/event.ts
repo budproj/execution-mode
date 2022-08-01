@@ -10,11 +10,14 @@ import { DeletedPersonalTaskEventData } from './events/deleted-personal-task'
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
 import { NotificationBellData } from './events/notification-bell-data'
+import { NotificationCardClickData } from './events/notification-card-click-data'
 import { NotificationCheckInClickData } from './events/notification-check-in-click-data'
 import { OpenedKeyResultChecklistEventData } from './events/opened-key-result-checklist'
 import { OpenedKeyResultDrawerEventData } from './events/opened-key-result-drawer'
 import { OpenedKeyResultReportConfidanceData } from './events/opened-key-result-report-confidance-data'
 import { PageViewEventData } from './events/page-view'
+import { TabCheckInClickData } from './events/tab-check-in-click-data'
+import { TabNotificationClickData } from './events/tab-notification-click-data'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
 import { ToggledPersonalTaskEventData } from './events/toggled-personal-task'
 import { UpdatedKeyResultCheckMarkAssigneeEventData } from './events/updated-key-result-check-mark-assignee'
@@ -43,4 +46,7 @@ export type Event = {
   [EventType.CREATED_KEY_RESULT]: CreatedKeyResultData
   [EventType.NOTIFICATION_BELL_CLICK]: NotificationBellData
   [EventType.NOTIFICATION_CHECK_IN_CLICK]: NotificationCheckInClickData
+  [EventType.NOTIFICATION_CARD_CLICK]: NotificationCardClickData
+  [EventType.TAB_CHECKIN_CLICK]: TabNotificationClickData
+  [EventType.TAB_NOTIFICATION_CLICK]: TabCheckInClickData
 }

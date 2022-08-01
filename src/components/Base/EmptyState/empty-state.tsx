@@ -10,7 +10,10 @@ export interface EmptyStateProperties extends StyleProps {
   imageKey: keyof typeof imageKeys
   maxW?: ImageProps['maxW']
   h?: FlexProps['h']
+  fontSize?: FlexProps['fontSize']
+  mbImage?: FlexProps['mb']
   py?: FlexProps['py']
+  textWidth?: FlexProps['w']
   gridGap?: FlexProps['gridGap']
   headerTranslationOptions?: any
   messageTranslationOptions?: any
@@ -24,6 +27,8 @@ export const imageKeys = {
   'check-item': '/images/check-item.png',
   'empty-krs': '/images/bud-empty-object-krs.png',
   'empty-personal-okrs-tab': '/images/empty-personal-okrs-tab.png',
+  'notifications-empty-state': '/images/notifications-empty-state.png',
+  'no-more-notifications': '/images/no-more-notifications-empty-state.png',
 }
 
 const imageAlts = {
@@ -34,13 +39,18 @@ const imageAlts = {
   'check-item': messages.checkItem,
   'empty-krs': messages.emptyFolderAlt,
   'empty-personal-okrs-tab': messages.emptyPersonalObjectives,
+  'notifications-empty-state': messages.emptyNotificationsList,
+  'no-more-notifications': messages.noMoreNotificationsToListing,
 }
 
 const EmptyState = ({
   labelMessage,
   headerMessage,
   imageKey,
+  mbImage,
+  fontSize,
   h,
+  textWidth,
   py,
   maxW,
   gridGap,
@@ -64,17 +74,25 @@ const EmptyState = ({
       direction="column"
       h={h}
       py={py}
+      textAlign="center"
       {...rest}
     >
       <Box>
         <Image src={imageURL} alt={intl.formatMessage(imageAlt)} maxW={maxW} />
       </Box>
       {headerMessage && (
-        <Text color="new-gray.700" fontSize="lg" fontWeight="bold" textAlign="center" mb="-15px">
+        <Text color="new-gray.700" fontSize="lg" fontWeight="bold" textAlign="center" mb={mbImage}>
           {intl.formatMessage(headerMessage, headerTranslationOptions)}
         </Text>
       )}
-      <Text fontSize={16} fontWeight={400} color="new-gray.700" textAlign="center">
+      <Text
+        fontSize={fontSize}
+        fontWeight={400}
+        color="new-gray.700"
+        textAlign="center"
+        width={textWidth ?? undefined}
+        mt={2}
+      >
         {intl.formatMessage(labelMessage, messageTranslationOptions)}
       </Text>
     </Flex>
@@ -83,6 +101,8 @@ const EmptyState = ({
 
 EmptyState.defaultProps = {
   imageKey: 'working-team',
+  fontSize: 16,
+  mbImage: -15,
 }
 
 export default EmptyState

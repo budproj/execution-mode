@@ -11,7 +11,10 @@ import {
   keyResultLatestCheckIn,
 } from 'src/state/recoil/key-result/check-in'
 import isCheckInModalOpenAtom from 'src/state/recoil/key-result/check-in/is-check-in-modal-open'
-import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
+import {
+  draftCheckMarksAtom,
+  isCheckListCollapseOpenAtom,
+} from 'src/state/recoil/key-result/checklist'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { createdByCheckInNotificationAtom } from 'src/state/recoil/notifications'
 
@@ -33,6 +36,7 @@ const KeyResultDrawer = () => {
   const { dispatch } = useEvent(EventType.OPENED_KEY_RESULT_DRAWER)
   const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
   const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
+  const setIsChecklistOpen = useSetRecoilState(isCheckListCollapseOpenAtom)
 
   const handleClose = () => {
     resetOpenDrawer()
@@ -41,6 +45,7 @@ const KeyResultDrawer = () => {
     resetCheckmarkDrafts()
     setDraftValue(latestKeyResultCheckIn?.value)
     setIsCheckInModalOpen(false)
+    setIsChecklistOpen(false)
     setCreatedByNotification(false)
   }
 

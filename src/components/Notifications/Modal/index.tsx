@@ -2,16 +2,20 @@ import { useQuery } from '@apollo/client'
 import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { isAfter, startOfWeek, isBefore } from 'date-fns'
-import React from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
+import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
-import { checkInNotificationCountAtom } from 'src/state/recoil/notifications'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
 
 import CheckInNotifications from '../CheckInNotifications'
+import { NotificationsList } from '../NotificationsList'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -53,19 +57,20 @@ const ScrollablePanel = styled(TabPanel)`
 `
 interface NotificationsModalProperties {
   userId: User['id']
+  isOpen: boolean
 }
 
-const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
+const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) => {
   const intl = useIntl()
+  const { dispatch: dispatchTabCheckInClick } = useEvent(EventType.TAB_CHECKIN_CLICK)
+  const { dispatch: dispatchTabNotificationClick } = useEvent(EventType.TAB_NOTIFICATION_CLICK)
 
-  // Const checkInNotificationCount = useRecoilValue(checkInNotificationCountAtom)
-  const setNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
-
-  // Const notificationsCount = 0
+  const notifications = useRecoilValue(listNotificationsAtom)
+  const setCheckInNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
 
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
-  useQuery(queries.GET_KEYRESULTS_FOR_NOTIFICATIONS, {
+  const { refetch } = useQuery(queries.GET_KEYRESULTS_FOR_NOTIFICATIONS, {
     onCompleted: (data) => {
       const companyKeyResults = data.me.keyResults.edges.filter(
         (keyResult: { node: KeyResult }) => {
@@ -76,36 +81,53 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
     },
   })
 
-  const keyResultsWithNoCheckInThisWeek = keyResults?.filter((keyResult) => {
-    if (!keyResult?.status?.latestCheckIn) {
-      return true
+  useEffect(() => {
+    const oneHourInMs = 60 * 60 * 1000
+    const refetchInterval = setInterval(() => {
+      refetch()
+    }, oneHourInMs)
+
+    return () => {
+      clearInterval(refetchInterval)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
-    const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
-    const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
+  const keyResultsWithNoCheckInThisWeek = useMemo(() => {
+    return keyResults?.filter((keyResult) => {
+      if (!keyResult?.status?.latestCheckIn) {
+        return true
+      }
 
-    return isBefore(date, startOfTheWeek)
-  })
+      const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
+      const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
 
-  const keyResultsUpToDate = keyResults.filter((keyResult) => {
-    if (!keyResult?.status?.latestCheckIn) {
-      return false
-    }
+      return isBefore(date, startOfTheWeek)
+    })
+  }, [keyResults])
 
-    const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
-    const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
+  const keyResultsUpToDate = useMemo(() => {
+    return keyResults.filter((keyResult) => {
+      if (!keyResult?.status?.latestCheckIn) {
+        return false
+      }
 
-    return isAfter(date, startOfTheWeek)
-  })
+      const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
+      const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
 
-  const notificationsCount = keyResultsWithNoCheckInThisWeek.filter(
+      return isAfter(date, startOfTheWeek)
+    })
+  }, [keyResults])
+
+  const checkinCount = keyResultsWithNoCheckInThisWeek.filter(
     (keyResult) => keyResult.status.isOutdated,
-  )
+  ).length
+  const notificationCount = [...notifications].filter((notification) => !notification.isRead).length
 
-  setNotificationsCount(notificationsCount.length)
+  setCheckInNotificationsCount(checkinCount)
 
   return (
-    <PopoverBody padding={0} margin={0} borderRadius={15} minWidth="480px">
+    <PopoverBody padding={0} margin={0} borderRadius={15}>
       <Tabs
         isFitted
         isLazy
@@ -122,31 +144,34 @@ const NotificationsModal = ({ userId }: NotificationsModalProperties) => {
           backgroundColor="black.50"
           borderRadius="15px 15px 0px 0px"
         >
-          {/* <StyledTab
+          <StyledTab
             gap={2}
+            width="md"
             color="new-gray.800"
             _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
             paddingBottom="17px"
+            onClick={() => dispatchTabNotificationClick({})}
           >
             {intl.formatMessage(messages.notificationsTabOptions)}
-            {notificationsCount > 0 && <NotificationBadge notificationCount={notificationsCount} />}
-          </StyledTab> */}
+            {notificationCount > 0 && <NotificationBadge notificationCount={notificationCount} />}
+          </StyledTab>
           <StyledTab
             gap={2}
             color="new-gray.800"
-            // _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+            _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
             paddingBottom="17px"
+            onClick={() => dispatchTabCheckInClick({})}
           >
             {intl.formatMessage(messages.checkInsTabOptions)}
-            {/* {checkInNotificationCount > 0 && (
-              <NotificationBadge notificationCount={checkInNotificationCount} />
-            )} */}
+            {checkinCount > 0 && <NotificationBadge notificationCount={checkinCount} />}
           </StyledTab>
         </TabList>
         <Divider borderColor="gray.100" />
 
-        <TabPanels p="0 10px 10px 10px">
-          {/* <TabPanel textAlign="center"> here: Notifications-Component</TabPanel> */}
+        <TabPanels p="0 10px 8px 10px">
+          <ScrollablePanel justifyContent="center" textAlign="center" maxH="70vh" width={480}>
+            {isOpen && <NotificationsList />}
+          </ScrollablePanel>
           <ScrollablePanel maxH="70vh" width={480}>
             <CheckInNotifications
               userId={userId}
