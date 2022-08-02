@@ -1,5 +1,7 @@
 import { useQuery } from '@apollo/client'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
+
+import { Team } from 'src/components/Team/types'
 
 import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
@@ -13,6 +15,8 @@ import queries from './queries.gql'
 
 interface AllReachableUsersProperties {
   onSelect: (userID: string) => void | Promise<void>
+  listUsersExceptByTeam?: Team['id']
+  isSelectingMultiples?: boolean
   avatarSubtitleType?: NamedAvatarSubtitleType
 }
 
@@ -22,14 +26,29 @@ export interface GetUserListQueryResult {
 
 export const AllReachableUsers = ({
   onSelect,
+  listUsersExceptByTeam,
+  isSelectingMultiples,
   avatarSubtitleType,
 }: AllReachableUsersProperties) => {
   const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)
 
+  const filterUsersExceptByTeam = useMemo(() => {
+    const usersToList = users.filter(
+      (user) =>
+        !user.teams?.edges
+          .map((userTeam) => userTeam.node.id !== listUsersExceptByTeam)
+          .includes(false),
+    )
+
+    return usersToList
+  }, [listUsersExceptByTeam, users])
+
   useEffect(() => {
-    if (data) setUserEdges(data.users.edges)
+    if (data) {
+      setUserEdges(data.users.edges)
+    }
   }, [data, setUserEdges])
 
   useEffect(() => {
@@ -39,8 +58,9 @@ export const AllReachableUsers = ({
 
   return (
     <SelectUserfromList
-      users={users}
+      users={listUsersExceptByTeam ? filterUsersExceptByTeam : users}
       isLoading={!data}
+      isSelectingMultiples={isSelectingMultiples}
       avatarSubtitleType={avatarSubtitleType}
       onSelect={onSelect}
     />

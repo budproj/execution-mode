@@ -11,9 +11,11 @@ import { UsersInContext } from './users-in-context'
 
 type SelectFromListContentProperties = {
   onCreateStart: () => void
+  onAddUserToTeam: () => void
   emptyStateTitle?: MessageDescriptor
   hasUserCard?: boolean
   isLoading?: boolean
+  isSelectingMultiples?: boolean
   hasCreatePermission?: boolean
   avatarSubtitleType?: NamedAvatarSubtitleType
   hasMenu?: boolean
@@ -23,9 +25,11 @@ type SelectFromListContentProperties = {
 export const SelectUserFromListContent = ({
   hasCreatePermission,
   onCreateStart,
+  onAddUserToTeam,
   hasUserCard,
   isLoading,
   avatarSubtitleType,
+  isSelectingMultiples,
   onSelect,
   emptyStateTitle,
   hasMenu,
@@ -39,13 +43,14 @@ export const SelectUserFromListContent = ({
       {hasCreatePermission && (
         <SelectUserFromListOptions
           onCreateStart={onCreateStart}
-          onAddUserToTeam={() => console.log('tals')}
+          onAddUserToTeam={onAddUserToTeam}
         />
       )}
 
       <UsersInContext
         hasUserCard={hasUserCard}
         isLoading={isLoading}
+        isSelectingMultiples={isSelectingMultiples}
         hasMenu={hasMenu}
         avatarSubtitleType={avatarSubtitleType}
         onSelect={onSelect}
@@ -56,6 +61,7 @@ export const SelectUserFromListContent = ({
       title={emptyStateTitle}
       hasCreatePermission={hasCreatePermission}
       onCreateStart={onCreateStart}
+      onAddMember={onAddUserToTeam}
     />
   )
 }
