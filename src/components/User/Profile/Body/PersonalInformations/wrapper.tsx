@@ -23,6 +23,7 @@ export interface UserProfileBodyPersonalInformationsProperties {
   isLoaded: boolean
   isMyUser?: boolean
   userID?: User['id']
+  onRemove?: () => void
   canUpdate?: boolean
   canDelete?: boolean
 }
@@ -44,6 +45,7 @@ export const UserProfileBodyPersonalInformations = ({
   userID,
   isMyUser,
   isLoaded,
+  onRemove,
   canUpdate,
   canDelete,
 }: UserProfileBodyPersonalInformationsProperties) => {
@@ -141,7 +143,12 @@ export const UserProfileBodyPersonalInformations = ({
           <FormLabel fontSize="md" m={0}>
             {intl.formatMessage(messages.teamsFieldLabel)}
           </FormLabel>
-          <UserTeams userID={userID} isLoaded={isLoaded} isEditable={canDelete} />
+          <UserTeams
+            userID={userID}
+            isLoaded={isLoaded}
+            isEditable={canDelete}
+            onRemove={onRemove}
+          />
         </Stack>
 
         <EditableInputField

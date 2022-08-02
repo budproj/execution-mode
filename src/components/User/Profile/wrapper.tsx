@@ -16,6 +16,7 @@ import queries from './queries.gql'
 type UserProfileProperties = {
   userID: string
   isRemovable?: boolean
+  onRemove?: () => void
   onUserDeactivation?: () => void
 }
 
@@ -23,7 +24,12 @@ export interface GetUserDataQuery {
   user: User
 }
 
-export const UserProfile = ({ userID, isRemovable, onUserDeactivation }: UserProfileProperties) => {
+export const UserProfile = ({
+  userID,
+  isRemovable,
+  onRemove,
+  onUserDeactivation,
+}: UserProfileProperties) => {
   isRemovable ??= true
 
   const [isRecoilSynced, setIsRecoilSynced] = useState(false)
@@ -59,6 +65,7 @@ export const UserProfile = ({ userID, isRemovable, onUserDeactivation }: UserPro
         canUpdate={canUpdate}
         canDelete={canDelete}
         onUserDeactivation={onUserDeactivation}
+        onRemove={onRemove}
       />
     </Stack>
   )

@@ -18,6 +18,7 @@ export interface UserTeamTagsProperties {
   teams?: Team[]
   userID?: User['id']
   redirectToTeam?: boolean
+  onRemove?: () => void
   isLoaded?: boolean
   isActive?: boolean
   isEditable?: boolean
@@ -37,6 +38,7 @@ const UserTeamTags = ({
   isLoaded,
   isActive,
   redirectToTeam,
+  onRemove,
   isEditable,
   max,
 }: UserTeamTagsProperties) => {
@@ -48,6 +50,7 @@ const UserTeamTags = ({
     {
       onCompleted: (data) => {
         setUser(data.removeTeamFromUser)
+        if (onRemove) void onRemove()
       },
     },
   )
