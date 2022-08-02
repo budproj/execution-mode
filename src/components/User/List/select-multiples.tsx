@@ -15,7 +15,7 @@ interface SelectMultipleUsersProperties extends UserListProperties {
 }
 
 const CheckboxStyled = styled(Checkbox)`
-  .css-1yrqt7o {
+  .chakra-checkbox__control {
     border-radius: 50px;
   }
 `
