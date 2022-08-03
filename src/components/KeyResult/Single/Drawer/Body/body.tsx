@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil'
 
 import {
   KeyResultSectionDescription,
+  KeyResultSectionObjective,
   KeyResultSectionOwner,
   KeyResultSectionTimeline,
   KeyResultSectionTitle,
@@ -86,11 +87,12 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
         <Divider borderColor="gray.100" />
 
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
-
         <KeyResultChecklistWrapper keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
 
         <KeyResultSectionOwner keyResultID={keyResultID} />
+        <Divider borderColor="gray.100" />
+        <KeyResultSectionObjective keyResultID={keyResultID} />
       </Stack>
 
       <Box ref={timelinePortalReference} />

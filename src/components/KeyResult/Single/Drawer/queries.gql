@@ -45,6 +45,13 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     }
     objective {
       title
+      status {
+        progress
+        confidence
+      }
+      team {
+        name
+      }
       cycle {
         cadence
         dateStart
