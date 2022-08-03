@@ -21,6 +21,8 @@ type TeamMembersProperties = {
   isLoaded?: boolean
   members: User[]
   hasAddMembersPermission?: boolean
+  teamLeader?: User
+  usersIdsBlacklist?: string[]
 }
 
 export type GetTeamMembersResponse = {
@@ -34,6 +36,8 @@ export const TeamMembers = ({
   isLoaded,
   members,
   hasAddMembersPermission,
+  teamLeader,
+  usersIdsBlacklist,
 }: TeamMembersProperties) => {
   const intl = useIntl()
   const [selectedUserID, setSelectedUserID] = useState<string>()
@@ -96,6 +100,8 @@ export const TeamMembers = ({
         isLoading={!isLoaded}
         hasCreateNewUserPermission={hasAddMembersPermission}
         emptyStateTitle={messages.emptyStateTitle}
+        teamLeader={teamLeader}
+        usersIdsBlacklist={usersIdsBlacklist}
         onSelect={handleSelect}
         onCreateUser={handleCreatedUser}
       />

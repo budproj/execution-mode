@@ -2,6 +2,7 @@ import { defineMessages } from 'react-intl'
 
 type TeamSearchMessage =
   | 'addSubteamHeader'
+  | 'editTeamHeader'
   | 'teamNameLabel'
   | 'descriptionLabel'
   | 'leaderLabel'
@@ -10,11 +11,23 @@ type TeamSearchMessage =
   | 'save'
   | 'addSubteamHeaderDescription'
   | 'descriptionPlaceholder'
+  | 'emptyTeamName'
 
 export default defineMessages<TeamSearchMessage>({
+  emptyTeamName: {
+    defaultMessage: 'Sem time',
+    id: 'sEIpfE',
+    description: 'The text is displayed of the empty team option',
+  },
   addSubteamHeader: {
     defaultMessage: 'Criar time',
     id: 'hohkHN',
+    description: 'The text is displayed as a heading in the add team modal',
+  },
+
+  editTeamHeader: {
+    defaultMessage: 'Editar time',
+    id: 'S9cIsW',
     description: 'The text is displayed as a heading in the add team modal',
   },
 

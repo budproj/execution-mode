@@ -30,6 +30,7 @@ import meAtom from 'src/state/recoil/user/me'
 
 import { TeamSelect } from '../Select/wrapper'
 import { TEAM_GENDER } from '../constants'
+import { Team } from '../types'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -37,6 +38,7 @@ import queries from './queries.gql'
 interface SaveTeamModalProperties {
   teamId?: string
   isOpen: boolean
+  isEditing?: boolean
   onClose: () => void
 }
 
@@ -50,17 +52,12 @@ interface AddSubteamMutationResult {
   }
 }
 
-interface TeamState {
-  id?: string
-  name?: string
-}
-
 const getTeamIdFromRouter = (router: NextRouter) => {
   if (Array.isArray(router.query.id)) throw new Error('Cannot parse string array')
   return router.query.id
 }
 
-export const SaveTeamModal = ({ teamId, isOpen, onClose }: SaveTeamModalProperties) => {
+export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamModalProperties) => {
   const router = useRouter()
   const preloadedTeamId = teamId ?? getTeamIdFromRouter(router)
 
@@ -68,44 +65,60 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose }: SaveTeamModalProperti
 
   const currentUserID = useRecoilValue(meAtom)
   const preloadedTeam = useRecoilValue(teamAtomFamily(preloadedTeamId))
+  const preloadedParentTeam = preloadedTeam?.parentId ? preloadedTeam.parent : undefined
   const [owner, setOwner] = useState(currentUserID)
-  const [team, setTeam] = useState<TeamState>(preloadedTeam ?? {})
-  const [name, setName] = useState<string>('')
-  const [description, setDescription] = useState<string>('')
+  const [team, setTeam] = useState(preloadedTeam ?? {})
+  const emptyTeam = { id: '', name: intl.formatMessage(messages.emptyTeamName) }
+  const [parentTeam, setParentTeam] = useState<Partial<Team>>(preloadedParentTeam ?? emptyTeam)
+  const [name, setName] = useState(isEditing ? team.name : '')
+  const [description, setDescription] = useState(isEditing ? team.description : '')
 
   useEffect(() => {
     if (preloadedTeam) setTeam(preloadedTeam)
   }, [preloadedTeam])
 
   useEffect(() => {
+    if (isEditing && team.ownerId) {
+      setOwner(team?.ownerId)
+      return
+    }
+
     if (currentUserID) setOwner(currentUserID)
-  }, [currentUserID])
+  }, [currentUserID, isEditing, team, team?.ownerId])
 
   const setShouldUpdateObjectives = useSetRecoilState(isReloadNecessary)
 
-  const [addSubteam, { loading }] = useMutation<AddSubteamMutationResult>(queries.CREATE_TEAM, {
-    onCompleted: () => {
-      setShouldUpdateObjectives(true)
-      onClose()
+  const [saveOrUpdateTeam, { loading }] = useMutation<AddSubteamMutationResult>(
+    isEditing ? queries.UPDATE_TEAM : queries.CREATE_TEAM,
+    {
+      onCompleted: () => {
+        setShouldUpdateObjectives(true)
+        onClose()
+      },
     },
-  })
+  )
 
-  const handleChangeTeam = (id: string | string[], name?: string | string[]) => {
+  const handleChangeParentTeam = (id: string | string[], name?: string | string[]) => {
     if (Array.isArray(id) || Array.isArray(name)) throw new Error('Cannot parse string array')
-    setTeam({ id, name })
+    setParentTeam({ id, name })
   }
 
-  const executeAddTeam = () => {
-    console.log('alguma coisa', {
-      variables: {
-        name,
-        description,
-        gender: TEAM_GENDER.NEUTRAL,
-        ownerID: owner,
-        parentID: team.id,
-      },
-    })
-    void addSubteam({
+  const executeSaveOrUpdateTeam = () => {
+    if (isEditing) {
+      void saveOrUpdateTeam({
+        variables: {
+          name,
+          description,
+          ownerId: owner,
+          id: team.id,
+          // eslint-disable-next-line unicorn/no-null
+          parentId: parentTeam.id === '' ? null : parentTeam.id,
+        },
+      })
+      return
+    }
+
+    void saveOrUpdateTeam({
       variables: {
         name,
         description,
@@ -115,6 +128,8 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose }: SaveTeamModalProperti
       },
     })
   }
+
+  console.log({ team: team.id, parent: parentTeam.id })
 
   return (
     <Modal isOpen={isOpen} size="md" onClose={onClose}>
@@ -122,7 +137,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose }: SaveTeamModalProperti
       <ModalContent maxW="33em">
         <ModalHeader p="1.85em 2.3em 0 2.3em">
           <Heading as="h1" fontSize="3xl" color="black.900" fontWeight="400">
-            {intl.formatMessage(messages.addSubteamHeader)}
+            {intl.formatMessage(isEditing ? messages.editTeamHeader : messages.addSubteamHeader)}
           </Heading>
           <Text color="new-gray.900" fontWeight="400" fontSize="lg">
             {intl.formatMessage(messages.addSubteamHeaderDescription, { teamname: team.name })}
@@ -133,13 +148,17 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose }: SaveTeamModalProperti
           <Stack spacing={6}>
             <FormControl>
               <FormLabel>{intl.formatMessage(messages.teamNameLabel)}</FormLabel>
-              <Input onChange={(event) => setName(event.target.value)} />
+              <Input
+                defaultValue={isEditing ? team.name : undefined}
+                onChange={(event) => setName(event.target.value)}
+              />
             </FormControl>
 
             <FormControl>
               <FormLabel>{intl.formatMessage(messages.descriptionLabel)}</FormLabel>
               <Textarea
                 placeholder={intl.formatMessage(messages.descriptionPlaceholder)}
+                defaultValue={isEditing ? team.description : undefined}
                 onChange={(event) => setDescription(event.target.value)}
               />
             </FormControl>
@@ -149,27 +168,30 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose }: SaveTeamModalProperti
               <KeyResultOwnerSelectMenu
                 value={owner}
                 avatarSubtitleType="role"
-                placement="top"
+                placement="bottom"
                 onChange={setOwner}
               />
             </FormControl>
-
-            {false && (
+            {isEditing ? (
               <FormControl>
                 <FormLabel>{intl.formatMessage(messages.parentTeam)}</FormLabel>
                 <SelectMenu
                   matchWidth
                   isLazy
-                  placeholder={<MenuItem color="new-gray.800">{team.name}</MenuItem>}
-                  value={team.name}
-                  onChange={handleChangeTeam}
+                  placeholder={<MenuItem color="new-gray.800">{parentTeam.name}</MenuItem>}
+                  value={parentTeam?.id ?? ''}
+                  onChange={handleChangeParentTeam}
                 >
                   <Box p={4} maxH="full" h="full">
-                    <TeamSelect onSelect={(id, name) => () => handleChangeTeam(id, name)} />
+                    <TeamSelect
+                      teamIDsBlacklist={team.id ? [team.id] : []}
+                      emptyLabel={emptyTeam.name}
+                      onSelect={(id, name) => () => handleChangeParentTeam(id, name)}
+                    />
                   </Box>
                 </SelectMenu>
               </FormControl>
-            )}
+            ) : undefined}
           </Stack>
         </ModalBody>
 
@@ -196,7 +218,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose }: SaveTeamModalProperti
               fontSize="md"
               fontWeight="400"
               isLoading={loading}
-              onClick={executeAddTeam}
+              onClick={executeSaveOrUpdateTeam}
             >
               {intl.formatMessage(messages.save)}
             </Button>

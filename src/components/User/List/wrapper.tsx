@@ -25,6 +25,8 @@ export interface UserListProperties {
   selectMultiples?: boolean
   emptyState?: ReactElement
   hasMenu?: boolean
+  teamLeader?: User
+  usersIdsBlacklist?: string[]
 }
 
 export const UserList = ({
@@ -36,6 +38,8 @@ export const UserList = ({
   selectMultiples,
   emptyState,
   hasMenu = false,
+  usersIdsBlacklist,
+  teamLeader,
 }: UserListProperties) => {
   const cardReference = useRef<HTMLDivElement>(null)
   const intl = useIntl()
@@ -46,6 +50,8 @@ export const UserList = ({
   }
 
   emptyState ??= <Text color="black.600">{intl.formatMessage(messages.emptyState)}</Text>
+
+  const filteredUsers = users.filter((user) => !usersIdsBlacklist?.includes(user.id))
 
   return (
     <>
@@ -64,54 +70,111 @@ export const UserList = ({
             )
           ) : users.length > 0 ? (
             hasMenu ? (
-              users.map((user) => (
-                <NamedAvatar
-                  key={user.id}
-                  redirectToProfile
-                  showCard={showUserCard}
-                  canHover={Boolean(onUserClick)}
-                  userID={user.id}
-                  subtitleType={avatarSubtitleType}
-                  cardPortalReference={cardReference}
-                >
-                  <Menu isLazy placement="start" variant="action-list">
-                    <MenuButton
-                      color="new-gray.600"
-                      _hover={{
-                        color: 'new-gray.900',
-                      }}
-                      mr={2}
-                    >
-                      <TreeDotsIcon
-                        fill="currentColor"
-                        fontSize="2xl"
-                        style={{ transform: 'rotate(90deg)' }}
-                        desc={intl.formatMessage(messages.optionsButtonDesc)}
-                      />
-                    </MenuButton>
-                    <MenuList>
-                      <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id}`}>
-                        <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
-                      </IntlLink>
-                      <MenuItem onClick={handleUserClick(user.id)}>
-                        {intl.formatMessage(messages.secondMenuItemOption)}
-                      </MenuItem>
-                    </MenuList>
-                  </Menu>
-                </NamedAvatar>
-              ))
+              <>
+                {teamLeader ? (
+                  <NamedAvatar
+                    key={teamLeader?.id}
+                    redirectToProfile
+                    isTeamLeader
+                    showCard={showUserCard}
+                    canHover={Boolean(onUserClick)}
+                    userID={teamLeader?.id}
+                    subtitleType={avatarSubtitleType}
+                    cardPortalReference={cardReference}
+                  >
+                    <Menu isLazy placement="start" variant="action-list">
+                      <MenuButton
+                        color="new-gray.600"
+                        _hover={{
+                          color: 'new-gray.900',
+                        }}
+                        mr={2}
+                      >
+                        <TreeDotsIcon
+                          fill="currentColor"
+                          fontSize="2xl"
+                          style={{ transform: 'rotate(90deg)' }}
+                          desc={intl.formatMessage(messages.optionsButtonDesc)}
+                        />
+                      </MenuButton>
+                      <MenuList>
+                        <IntlLink
+                          href={
+                            teamLeader?.id === myID ? '/my-things' : `/profile/${teamLeader?.id}`
+                          }
+                        >
+                          <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
+                        </IntlLink>
+                        <MenuItem onClick={handleUserClick(teamLeader?.id)}>
+                          {intl.formatMessage(messages.secondMenuItemOption)}
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </NamedAvatar>
+                ) : undefined}
+                {filteredUsers.map((user) => (
+                  <NamedAvatar
+                    key={user.id}
+                    redirectToProfile
+                    showCard={showUserCard}
+                    canHover={Boolean(onUserClick)}
+                    userID={user.id}
+                    subtitleType={avatarSubtitleType}
+                    cardPortalReference={cardReference}
+                  >
+                    <Menu isLazy placement="start" variant="action-list">
+                      <MenuButton
+                        color="new-gray.600"
+                        _hover={{
+                          color: 'new-gray.900',
+                        }}
+                        mr={2}
+                      >
+                        <TreeDotsIcon
+                          fill="currentColor"
+                          fontSize="2xl"
+                          style={{ transform: 'rotate(90deg)' }}
+                          desc={intl.formatMessage(messages.optionsButtonDesc)}
+                        />
+                      </MenuButton>
+                      <MenuList>
+                        <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id}`}>
+                          <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
+                        </IntlLink>
+                        <MenuItem onClick={handleUserClick(user.id)}>
+                          {intl.formatMessage(messages.secondMenuItemOption)}
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
+                  </NamedAvatar>
+                ))}
+              </>
             ) : (
-              users.map((user) => (
-                <NamedAvatar
-                  key={user.id}
-                  showCard={showUserCard}
-                  canHover={Boolean(onUserClick)}
-                  userID={user.id}
-                  subtitleType={avatarSubtitleType}
-                  cardPortalReference={cardReference}
-                  onClick={handleUserClick(user.id)}
-                />
-              ))
+              <>
+                {teamLeader ? (
+                  <NamedAvatar
+                    key={teamLeader?.id}
+                    redirectToProfile
+                    isTeamLeader
+                    showCard={showUserCard}
+                    canHover={Boolean(onUserClick)}
+                    userID={teamLeader?.id}
+                    subtitleType={avatarSubtitleType}
+                    cardPortalReference={cardReference}
+                  />
+                ) : undefined}
+                {filteredUsers.map((user) => (
+                  <NamedAvatar
+                    key={user.id}
+                    showCard={showUserCard}
+                    canHover={Boolean(onUserClick)}
+                    userID={user.id}
+                    subtitleType={avatarSubtitleType}
+                    cardPortalReference={cardReference}
+                    onClick={handleUserClick(user.id)}
+                  />
+                ))}
+              </>
             )
           ) : (
             emptyState

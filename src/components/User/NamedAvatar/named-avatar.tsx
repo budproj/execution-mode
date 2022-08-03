@@ -39,6 +39,7 @@ export interface NamedAvatarProperties {
   showCard?: boolean
   showName?: boolean
   redirectToProfile?: boolean
+  isTeamLeader?: boolean
   onClick?: () => void
   children?: string | ReactElement
   cardPortalReference?: RefObject<HTMLDivElement>
@@ -64,6 +65,7 @@ const NamedAvatar = ({
   cardPortalReference,
   children,
   redirectToProfile,
+  isTeamLeader,
 }: NamedAvatarProperties): ReactElement => {
   subtitleType ??= 'company'
   avatarSize ??= 12
@@ -117,6 +119,7 @@ const NamedAvatar = ({
           hasSubtitle={displaySubtitle}
           subtitle={subtitle}
           redirectToProfile={redirectToProfile}
+          isTeamLeader={isTeamLeader}
           onClick={onClick}
         >
           {children}
@@ -146,6 +149,7 @@ const NamedAvatar = ({
       hasSubtitle={displaySubtitle}
       subtitle={subtitle}
       redirectToProfile={redirectToProfile}
+      isTeamLeader={isTeamLeader}
       onClick={onClick}
     >
       {children}

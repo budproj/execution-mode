@@ -3,6 +3,16 @@ query GET_TEAM_DATA($teamId: ID!) {
     id
     name
     description
+    ownerId
+    parentId
+    parent {
+      name
+      id
+    }
+    owner {
+      id
+      fullName
+    }
     status {
       progress
     }

@@ -18,6 +18,8 @@ type UsersInContextProperties = {
   hasUserCard?: boolean
   onSelect?: (userID: string) => void | Promise<void>
   hasMenu?: boolean
+  teamLeader?: User
+  usersIdsBlacklist?: string[]
   isSelectingMultiples?: boolean
 }
 
@@ -28,6 +30,8 @@ export const UsersInContext = ({
   isSelectingMultiples,
   onSelect,
   hasMenu,
+  teamLeader,
+  usersIdsBlacklist,
 }: UsersInContextProperties) => {
   const { items } = useContext(SearchableListContext)
   const [loadUsers] = useRecoilFamilyLoader<User>(userAtomFamily)
@@ -49,6 +53,8 @@ export const UsersInContext = ({
       avatarSubtitleType={avatarSubtitleType}
       hasMenu={hasMenu}
       emptyState={emptyState}
+      teamLeader={teamLeader}
+      usersIdsBlacklist={usersIdsBlacklist}
       onUserClick={onSelect}
     />
   )
