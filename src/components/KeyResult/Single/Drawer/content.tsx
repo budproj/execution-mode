@@ -13,13 +13,17 @@ import queries from './queries.gql'
 
 export interface KeyResultDrawerContentProperties {
   keyResultID: KeyResult['id']
+  isKeyResultPage?: boolean
 }
 
 export interface GetKeyResultWithIDQuery {
   keyResult: KeyResult
 }
 
-const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentProperties) => {
+const KeyResultDrawerContent = ({
+  keyResultID,
+  isKeyResultPage,
+}: KeyResultDrawerContentProperties) => {
   const setKeyResult = useSetRecoilState(selectKeyResult(keyResultID))
 
   const handleQueryData = (data: GetKeyResultWithIDQuery) => {
@@ -49,7 +53,11 @@ const KeyResultDrawerContent = ({ keyResultID }: KeyResultDrawerContentPropertie
   return (
     <DrawerContent>
       <Flex direction="column" minH="100%" maxH="100%">
-        <KeyResultDrawerBody keyResultID={keyResultID} isLoading={loading} />
+        <KeyResultDrawerBody
+          keyResultID={keyResultID}
+          isLoading={loading}
+          isKeyResultPage={isKeyResultPage}
+        />
         <KeyResultDrawerFooter keyResultID={keyResultID} />
       </Flex>
     </DrawerContent>

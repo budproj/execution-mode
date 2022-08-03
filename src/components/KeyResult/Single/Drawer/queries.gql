@@ -49,6 +49,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
         progress
         confidence
       }
+      teamId
       team {
         id
         name

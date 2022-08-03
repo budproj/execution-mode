@@ -15,11 +15,15 @@ import messages from './messages'
 
 export interface KeyResultSectionObjectiveProperties {
   keyResultID?: KeyResult['id']
+  isKeyResultPage?: boolean
 }
 
 const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
 
-const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectiveProperties) => {
+const KeyResultSectionObjective = ({
+  keyResultID,
+  isKeyResultPage,
+}: KeyResultSectionObjectiveProperties) => {
   const intl = useIntl()
   const objective = useRecoilValue(objectiveSelector(keyResultID))
 
@@ -37,30 +41,43 @@ const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectivePro
           progress={progress}
           isLoaded={isObjectiveLoaded}
         />
-        <Tooltip
-          label={intl.formatMessage(messages.tooltipMessage, { team: objective?.team?.name })}
-          placement="top-start"
-          maxW="lg"
-        >
-          <Box
-            color="new-gray.900"
-            cursor="pointer"
-            _hover={{
-              color: 'new-gray.700',
-            }}
-          >
+        {isKeyResultPage ? (
+          <Box color="new-gray.900">
             <Skeleton
               isLoaded={isObjectiveLoaded}
               {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
             >
-              <IntlLink href={`/explore/${objective?.team?.id ?? ''}`}>
-                <Text fontSize={14} fontWeight={500}>
-                  {objective?.title}
-                </Text>
-              </IntlLink>
+              <Text fontSize={14} fontWeight={500}>
+                {objective?.title}
+              </Text>
             </Skeleton>
           </Box>
-        </Tooltip>
+        ) : (
+          <Tooltip
+            label={intl.formatMessage(messages.tooltipMessage, { team: objective?.team?.name })}
+            placement="top-start"
+            maxW="lg"
+          >
+            <Box
+              color="new-gray.900"
+              cursor="pointer"
+              _hover={{
+                color: 'new-gray.700',
+              }}
+            >
+              <Skeleton
+                isLoaded={isObjectiveLoaded}
+                {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
+              >
+                <IntlLink href={objective?.teamId ? `/explore/${objective.teamId}` : '/my-things'}>
+                  <Text fontSize={14} fontWeight={500}>
+                    {objective?.title}
+                  </Text>
+                </IntlLink>
+              </Skeleton>
+            </Box>
+          </Tooltip>
+        )}
       </Flex>
     </Flex>
   )

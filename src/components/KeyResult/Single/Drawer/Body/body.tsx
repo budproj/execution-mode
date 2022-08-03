@@ -24,9 +24,14 @@ import { SCROLLBAR_ID } from './constants'
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
   isLoading?: boolean
+  isKeyResultPage?: boolean
 }
 
-const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProperties) => {
+const KeyResultDrawerBody = ({
+  keyResultID,
+  isLoading,
+  isKeyResultPage,
+}: KeyResultDrawerBodyProperties) => {
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const keyResultChecklist = useRecoilValue(keyResultChecklistAtom(keyResultID))
   const timelinePortalReference = useRef<HTMLDivElement>(null)
@@ -48,8 +53,8 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
       overflowX="hidden"
       bg="new-gray.50"
     >
-      <Box pt={8} px={8} pb={2} bg="white">
-        <KeyResultSectionTitle keyResultID={keyResultID} />
+      <Box pt={8} px={8} pb={4} bg="white">
+        <KeyResultSectionTitle keyResultID={keyResultID} isKeyResultPage={isKeyResultPage} />
       </Box>
 
       <Portal containerRef={timelinePortalReference}>
@@ -92,7 +97,7 @@ const KeyResultDrawerBody = ({ keyResultID, isLoading }: KeyResultDrawerBodyProp
 
         <KeyResultSectionOwner keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
-        <KeyResultSectionObjective keyResultID={keyResultID} />
+        <KeyResultSectionObjective isKeyResultPage={isKeyResultPage} keyResultID={keyResultID} />
       </Stack>
 
       <Box ref={timelinePortalReference} />
