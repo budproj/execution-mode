@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
+import { IntlLink } from 'src/components/Base'
 import { CircularProgress } from 'src/components/Base/CircularProgress'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
@@ -52,9 +53,11 @@ const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectivePro
               isLoaded={isObjectiveLoaded}
               {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
             >
-              <Text fontSize={14} fontWeight={500}>
-                {objective?.title}
-              </Text>
+              <IntlLink href={`/explore/${objective?.team?.id ?? ''}`}>
+                <Text fontSize={14} fontWeight={500}>
+                  {objective?.title}
+                </Text>
+              </IntlLink>
             </Skeleton>
           </Box>
         </Tooltip>
