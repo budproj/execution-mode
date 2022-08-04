@@ -4,4 +4,6 @@ export { default as CoinBRLNumberMask } from './CoinBRL'
 
 export { default as PercentageNumberMask } from './Percentage'
 
+export { default as CoinEURNumberMask } from './CoinEUR'
+
 export { default as CoinUSDNumberMask } from './CoinUSD'
