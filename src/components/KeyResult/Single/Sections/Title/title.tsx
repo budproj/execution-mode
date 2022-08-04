@@ -61,8 +61,14 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   }
 
   return (
-    <Stack spacing={0}>
-      <Flex gridGap={4} alignItems="center">
+    <Stack
+      display="flex"
+      spacing={0}
+      position="relative"
+      justifyContent="space-between"
+      direction="row"
+    >
+      <Flex gridGap={4} alignItems="flex-start" justifyContent="space-between" width="100%">
         <Skeleton borderRadius={10} isLoaded={isLoaded}>
           <KeyResultDynamicIcon
             title={keyResult?.title}
@@ -112,6 +118,8 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
             />
           </SkeletonText>
         </Stack>
+      </Flex>
+      <Flex alignItems="center">
         <KrDrawerTitleActions id={keyResultID} onDelete={onDeleteKeyResult} />
       </Flex>
     </Stack>
