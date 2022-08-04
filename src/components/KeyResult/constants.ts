@@ -4,6 +4,7 @@ export enum KEY_RESULT_FORMAT {
   COIN_BRL = 'COIN_BRL',
   COIN_USD = 'COIN_USD',
   COIN_EUR = 'COIN_EUR',
+  COIN_GBP = 'COIN_GBP',
 }
 
 export enum KEY_RESULT_TYPE {

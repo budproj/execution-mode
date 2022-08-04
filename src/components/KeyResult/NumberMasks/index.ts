@@ -7,3 +7,5 @@ export { default as PercentageNumberMask } from './Percentage'
 export { default as CoinEURNumberMask } from './CoinEUR'
 
 export { default as CoinUSDNumberMask } from './CoinUSD'
+
+export { default as CoinGBPNumberMask } from './CoinGBP'

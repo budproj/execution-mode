@@ -11,6 +11,8 @@ type KeyResultFormatSelectMessage =
   | 'optionCoinUSDExample'
   | 'optionCoinEURTitle'
   | 'optionCoinEURExample'
+  | 'optionCoinGBPTitle'
+  | 'optionCoinGBPExample'
 
 export default defineMessages<KeyResultFormatSelectMessage>({
   optionPercentTitle: {
@@ -81,5 +83,19 @@ export default defineMessages<KeyResultFormatSelectMessage>({
     id: 'IWr6NM',
     description:
       'This message is displayed inside our key-result format select as the example of the coin EUR format',
+  },
+
+  optionCoinGBPTitle: {
+    defaultMessage: 'Financeiro (Libra)',
+    id: 'W/yMJH',
+    description:
+      'This message is displayed inside our key-result format select as the title of the coin GBP format',
+  },
+
+  optionCoinGBPExample: {
+    defaultMessage: '€ 100',
+    id: 'lhIu1G',
+    description:
+      'This message is displayed inside our key-result format select as the example of the coin GBP format',
   },
 })
