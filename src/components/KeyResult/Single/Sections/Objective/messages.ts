@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSectionObjectiveMessage = 'label' | 'stackIconDesc' | 'tooltipMessage'
+type KeyResultsSectionObjectiveMessage =
+  | 'label'
+  | 'stackIconDesc'
+  | 'teamOkrTooltipMessage'
+  | 'individualOkrTooltipMessage'
 
 export default defineMessages<KeyResultsSectionObjectiveMessage>({
   label: {
@@ -16,9 +20,15 @@ export default defineMessages<KeyResultsSectionObjectiveMessage>({
     description: 'The alternative text explaining our stack icon',
   },
 
-  tooltipMessage: {
+  teamOkrTooltipMessage: {
     defaultMessage: 'Explore este objetivo completo no time de {team}',
     id: 'x24wfc',
     description: 'This message appears in the objective tooltip',
+  },
+
+  individualOkrTooltipMessage: {
+    defaultMessage: 'Explore este objetivo completo no Plano Individual de {user}',
+    id: 'piM/9+',
+    description: 'This message appears in the individual objective tooltip',
   },
 })

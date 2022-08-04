@@ -54,7 +54,7 @@ const KeyResultDrawerBody = ({
       bg="new-gray.50"
     >
       <Box pt={8} px={8} pb={4} bg="white">
-        <KeyResultSectionTitle keyResultID={keyResultID} isKeyResultPage={isKeyResultPage} />
+        <KeyResultSectionTitle keyResultID={keyResultID} />
       </Box>
 
       <Portal containerRef={timelinePortalReference}>

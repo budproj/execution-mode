@@ -50,6 +50,10 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
         confidence
       }
       teamId
+     owner {
+      fullName
+      id
+    }
       team {
         id
         name

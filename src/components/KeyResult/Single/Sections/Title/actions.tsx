@@ -31,7 +31,6 @@ const KrDrawerTitleActions = ({ id, onDelete }: KrDrawerTitleActionsProperties):
           _hover={{
             color: 'new-gray.900',
           }}
-          mr={2}
         >
           <TreeDotsIcon
             fill="currentColor"

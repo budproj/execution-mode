@@ -8,6 +8,7 @@ import { IntlLink } from 'src/components/Base'
 import { CircularProgress } from 'src/components/Base/CircularProgress'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
+import meAtom from 'src/state/recoil/user/me'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
@@ -19,6 +20,7 @@ export interface KeyResultSectionObjectiveProperties {
 }
 
 const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
+const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 
 const KeyResultSectionObjective = ({
   keyResultID,
@@ -27,9 +29,26 @@ const KeyResultSectionObjective = ({
   const intl = useIntl()
   const objective = useRecoilValue(objectiveSelector(keyResultID))
 
+  const owner = useRecoilValue(ownerSelector(keyResultID))
+  const userID = useRecoilValue(meAtom)
+
   const progress = objective?.status?.progress ?? 0
   const confidence = objective?.status?.confidence ?? 0
   const isObjectiveLoaded = Boolean(objective)
+
+  const tooltipLabel = objective?.teamId
+    ? intl.formatMessage(messages.teamOkrTooltipMessage, {
+        team: objective?.team?.name,
+      })
+    : intl.formatMessage(messages.individualOkrTooltipMessage, {
+        user: owner?.firstName,
+      })
+
+  const redirectToClick = objective?.teamId
+    ? `/explore/${objective.teamId}`
+    : owner?.id === userID
+    ? '/my-things'
+    : `/profile/${owner?.id ?? ''}`
 
   return (
     <Flex gridGap={2} direction="column">
@@ -53,11 +72,7 @@ const KeyResultSectionObjective = ({
             </Skeleton>
           </Box>
         ) : (
-          <Tooltip
-            label={intl.formatMessage(messages.tooltipMessage, { team: objective?.team?.name })}
-            placement="top-start"
-            maxW="lg"
-          >
+          <Tooltip label={tooltipLabel} placement="top-start" maxW="lg">
             <Box
               color="new-gray.900"
               cursor="pointer"
@@ -69,7 +84,7 @@ const KeyResultSectionObjective = ({
                 isLoaded={isObjectiveLoaded}
                 {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
               >
-                <IntlLink href={objective?.teamId ? `/explore/${objective.teamId}` : '/my-things'}>
+                <IntlLink href={redirectToClick}>
                   <Text fontSize={14} fontWeight={500}>
                     {objective?.title}
                   </Text>

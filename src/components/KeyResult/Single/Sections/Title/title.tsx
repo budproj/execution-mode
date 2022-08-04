@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import { Box, Flex, Skeleton, SkeletonText, Spinner, Stack, Text } from '@chakra-ui/react'
+import { Box, Flex, Skeleton, SkeletonText, Spinner, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
@@ -19,17 +19,13 @@ import queries from './queries.gql'
 
 export interface KeyResultSectionTitleProperties {
   keyResultID?: KeyResult['id']
-  isKeyResultPage?: boolean
 }
 
 interface UpdateKeyResultTitleMutationResult {
   updateKeyResult: KeyResult
 }
 
-const KeyResultSectionTitle = ({
-  keyResultID,
-  isKeyResultPage,
-}: KeyResultSectionTitleProperties) => {
+const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties) => {
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const intl = useIntl()
@@ -38,14 +34,15 @@ const KeyResultSectionTitle = ({
     queries.UPDATE_KEY_RESULT_TITLE,
   )
 
+  const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+
+  const onDeleteKeyResult = () => resetOpenDrawer()
+
   const isLoaded = Boolean(keyResult)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
   const isActive = keyResult?.status?.isActive
   const isOutdated = keyResult?.status?.isOutdated && isActive
   const canUpdate = keyResult?.policy?.update === GraphQLEffect.ALLOW && isActive
-  const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-
-  const onDeleteKeyResult = () => resetOpenDrawer()
 
   const handleSubmit = async (title: string) => {
     if (title === keyResult?.title) return
@@ -65,7 +62,7 @@ const KeyResultSectionTitle = ({
 
   return (
     <Stack spacing={0}>
-      <Flex gridGap={4} alignItems="flex-start">
+      <Flex gridGap={4} alignItems="center">
         <Skeleton borderRadius={10} isLoaded={isLoaded}>
           <KeyResultDynamicIcon
             title={keyResult?.title}
@@ -75,49 +72,23 @@ const KeyResultSectionTitle = ({
             isDisabled={!isActive}
           />
         </Skeleton>
-
         <Stack spacing={0} flexGrow={1}>
           <Stack direction="row">
             <Skeleton isLoaded={isLoaded} flexGrow={1}>
-              {isKeyResultPage ? (
-                <EditableInputValue
-                  value={keyResult?.title}
-                  isLoaded={isLoaded}
-                  isSubmitting={loading}
-                  isDisabled={!canUpdate}
-                  maxCharacters={120}
-                  previewProperties={{
-                    fontSize: 'lg',
-                    fontWeight: 700,
-                    p: 0,
-                    as: 'h1',
-                  }}
-                  onSubmit={handleSubmit}
-                />
-              ) : (
-                <Flex justifyContent="space-between">
-                  <Box>
-                    <Text fontSize="lg" fontWeight={700} as="h1">
-                      {keyResult?.title}
-                    </Text>
-                    <SkeletonText
-                      noOfLines={2}
-                      minW="100%"
-                      mt={isLoaded ? 'inherit' : '4px'}
-                      isLoaded={isLoaded}
-                    >
-                      <LastUpdateText
-                        fontSize="sm"
-                        ml="2px"
-                        date={lastUpdateDate}
-                        color={isOutdated ? 'red.500' : 'gray.400'}
-                        prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
-                      />
-                    </SkeletonText>
-                  </Box>
-                  <KrDrawerTitleActions id={keyResultID} onDelete={onDeleteKeyResult} />
-                </Flex>
-              )}
+              <EditableInputValue
+                value={keyResult?.title}
+                isLoaded={isLoaded}
+                isSubmitting={loading}
+                isDisabled={!canUpdate}
+                maxCharacters={120}
+                previewProperties={{
+                  fontSize: 'lg',
+                  fontWeight: 700,
+                  p: 0,
+                  as: 'h1',
+                }}
+                onSubmit={handleSubmit}
+              />
             </Skeleton>
             {loading && (
               <Box pt={2}>
@@ -126,23 +97,22 @@ const KeyResultSectionTitle = ({
             )}
           </Stack>
 
-          {isKeyResultPage && (
-            <SkeletonText
-              noOfLines={2}
-              minW="100%"
-              mt={isLoaded ? 'inherit' : '4px'}
-              isLoaded={isLoaded}
-            >
-              <LastUpdateText
-                fontSize="sm"
-                ml="2px"
-                date={lastUpdateDate}
-                color={isOutdated ? 'red.500' : 'gray.400'}
-                prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
-              />
-            </SkeletonText>
-          )}
+          <SkeletonText
+            noOfLines={2}
+            minW="100%"
+            mt={isLoaded ? 'inherit' : '4px'}
+            isLoaded={isLoaded}
+          >
+            <LastUpdateText
+              fontSize="sm"
+              ml="2px"
+              date={lastUpdateDate}
+              color={isOutdated ? 'red.500' : 'gray.400'}
+              prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
+            />
+          </SkeletonText>
         </Stack>
+        <KrDrawerTitleActions id={keyResultID} onDelete={onDeleteKeyResult} />
       </Flex>
     </Stack>
   )
