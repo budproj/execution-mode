@@ -72,6 +72,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
   const [parentTeam, setParentTeam] = useState<Partial<Team>>(preloadedParentTeam ?? emptyTeam)
   const [name, setName] = useState(isEditing ? team.name : '')
   const [description, setDescription] = useState(isEditing ? team.description : '')
+  console.log({ id: teamId, team: team.name })
 
   useEffect(() => {
     if (preloadedTeam) setTeam(preloadedTeam)
@@ -129,8 +130,6 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
     })
   }
 
-  console.log({ team: team.id, parent: parentTeam.id })
-
   return (
     <Modal isOpen={isOpen} size="md" onClose={onClose}>
       <ModalOverlay />
@@ -139,9 +138,11 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
           <Heading as="h1" fontSize="3xl" color="black.900" fontWeight="400">
             {intl.formatMessage(isEditing ? messages.editTeamHeader : messages.addSubteamHeader)}
           </Heading>
-          <Text color="new-gray.900" fontWeight="400" fontSize="lg">
-            {intl.formatMessage(messages.addSubteamHeaderDescription, { teamname: team.name })}
-          </Text>
+          {!isEditing && (
+            <Text color="new-gray.900" fontWeight="400" fontSize="lg">
+              {intl.formatMessage(messages.addSubteamHeaderDescription, { teamname: team.name })}
+            </Text>
+          )}
         </ModalHeader>
 
         <ModalBody pl="2.3em" pr="2.3em">

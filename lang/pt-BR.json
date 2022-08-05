@@ -1171,6 +1171,10 @@
     "defaultMessage": "Cancelar",
     "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field"
   },
+  "OrqJud": {
+    "defaultMessage": "Um ícone de coroa que indica o líder do time",
+    "description": "The crown icon description"
+  },
   "OwHPoA": {
     "defaultMessage": "Ainda não foram criados OKRs neste Plano Individual",
     "description": "This message is displayed as the empty state message inside the User page"
@@ -1310,6 +1314,10 @@
   "RwKPpx": {
     "defaultMessage": "EXCLUIR",
     "description": "This message is used as keyword to delete a key-result"
+  },
+  "S9cIsW": {
+    "defaultMessage": "Editar time",
+    "description": "The text is displayed as a heading in the add team modal"
   },
   "SDzYq9": {
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
@@ -1614,6 +1622,10 @@
   "Ykg0Jh": {
     "defaultMessage": "Realizado por <highlight>{author}</highlight> {unit, select, fallback {em} other {}} {time}",
     "description": "This text is displayed as a helper text, below the check-in card title"
+  },
+  "YmUBcv": {
+    "defaultMessage": "Editar time",
+    "description": "The tooltip on the gear icon that edits the team"
   },
   "YxNkP6": {
     "defaultMessage": "Check-in",
@@ -2071,6 +2083,10 @@
     "defaultMessage": "Meus Resultados-Chave",
     "description": "The page title that our users should see in the my key results page"
   },
+  "l+HPdy": {
+    "defaultMessage": "Líder",
+    "description": "The tag title that is displayed when that user is the leader of the team"
+  },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
@@ -2335,6 +2351,10 @@
     "defaultMessage": "conta ativa",
     "description": "This string is used to select the active cycles option."
   },
+  "sEIpfE": {
+    "defaultMessage": "Sem time",
+    "description": "The text is displayed of the empty team option"
+  },
   "sFYaLE": {
     "defaultMessage": "Check-in",
     "description": "This message is displayed as the form title, above the check-in form"
@@ -2554,6 +2574,10 @@
   "xJJ9uE": {
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
     "description": "This message appears when the user tries to remove a given cycle, but receives an error"
+  },
+  "xPoUwI": {
+    "defaultMessage": "Um desenho de uma engrenagem para o botão de edição de time",
+    "description": "The gear icon description"
   },
   "xVR0F1": {
     "defaultMessage": "Apelido",

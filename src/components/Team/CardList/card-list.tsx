@@ -16,9 +16,10 @@ import { GetTeamsQuery } from './types'
 export interface TeamCardListProperties {
   teamFilter: string
   numEmptyStateCards: number
+  openModal: () => void
 }
 
-const TeamCardList = ({ teamFilter, numEmptyStateCards }: TeamCardListProperties) => {
+const TeamCardList = ({ teamFilter, numEmptyStateCards, openModal }: TeamCardListProperties) => {
   const { data, loading, refetch } = useQuery<GetTeamsQuery>(queries.GET_TEAMS)
   const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const [teams, setEdges] = useConnectionEdges<Team>()
@@ -51,7 +52,7 @@ const TeamCardList = ({ teamFilter, numEmptyStateCards }: TeamCardListProperties
   return (
     <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
       {wereTeamsLoaded
-        ? orderedTeams?.map((team) => <TeamCard key={team.id} id={team.id} />)
+        ? orderedTeams?.map((team) => <TeamCard key={team.id} id={team.id} openModal={openModal} />)
         : emptyState.map(() => <TeamCard key={Math.random()} />)}
     </Grid>
   )
