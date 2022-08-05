@@ -49,6 +49,9 @@ query GET_TEAM_DATA($teamId: ID!) {
         }
       }
     }
+    policy {
+      update
+    }
   }
 }
 

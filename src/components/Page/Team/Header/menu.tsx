@@ -130,13 +130,14 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   }
 
   const isViewingActiveObjectives = getObjectivesViewMode === ObjectivesViewMode.ACTIVE
-
   const isAllowedToCreateObjectives = objectivesPolicy?.create === GraphQLEffect.ALLOW
+  const canUpdate = team?.policy?.update === GraphQLEffect.ALLOW
 
   return (
     <>
       {isEditTeamModalOpen && team && (
-        <SaveTeamModal isOpen isEditing onClose={() => setIsEditTeamModalOpen()} />
+        // eslint-disable-next-line unicorn/no-useless-undefined
+        <SaveTeamModal isOpen isEditing onClose={() => setIsEditTeamModalOpen(undefined)} />
       )}
       <Stack direction="row" justifyContent="flex-end" marginTop="0.8em">
         {/* // eslint-disable-next-line no-warning-comments
@@ -154,7 +155,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
         </Tooltip>
       )} */}
 
-        <EditTeamButton onClick={() => setIsEditTeamModalOpen(team?.id)} />
+        {canUpdate && <EditTeamButton onClick={() => setIsEditTeamModalOpen(team?.id)} />}
 
         {hasInactiveObjectives && isViewingActiveObjectives && (
           <Tooltip label={intl.formatMessage(messages.explorePreviousCyclesOption)} placement="top">
