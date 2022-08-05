@@ -7,7 +7,6 @@ import {
   FormLabel,
   Heading,
   Input,
-  MenuItem,
   Modal,
   ModalBody,
   ModalContent,
@@ -25,6 +24,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { SelectMenu } from 'src/components/Base'
 import { KeyResultOwnerSelectMenu } from 'src/components/KeyResult/OwnerSelectMenu/wrapper'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -72,7 +72,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
   const [parentTeam, setParentTeam] = useState<Partial<Team>>(preloadedParentTeam ?? emptyTeam)
   const [name, setName] = useState(isEditing ? team.name : '')
   const [description, setDescription] = useState(isEditing ? team.description : '')
-  console.log({ id: teamId, team: team.name })
+  const [childTeams, setChildTeamEdges] = useConnectionEdges<Team>()
 
   useEffect(() => {
     if (preloadedTeam) setTeam(preloadedTeam)
@@ -86,6 +86,10 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
 
     if (currentUserID) setOwner(currentUserID)
   }, [currentUserID, isEditing, team, team?.ownerId])
+
+  useEffect(() => {
+    if (team) setChildTeamEdges(team.teams?.edges)
+  }, [team, setChildTeamEdges])
 
   const setShouldUpdateObjectives = useSetRecoilState(isReloadNecessary)
 
@@ -130,6 +134,8 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
     })
   }
 
+  const childTeamsIds = childTeams.map((childTeam) => childTeam.id)
+
   return (
     <Modal isOpen={isOpen} size="md" onClose={onClose}>
       <ModalOverlay />
@@ -173,19 +179,20 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
                 onChange={setOwner}
               />
             </FormControl>
-            {isEditing ? (
+            {!team.isCompany && isEditing ? (
               <FormControl>
                 <FormLabel>{intl.formatMessage(messages.parentTeam)}</FormLabel>
                 <SelectMenu
                   matchWidth
                   isLazy
-                  placeholder={<MenuItem color="new-gray.800">{parentTeam.name}</MenuItem>}
+                  closeOnSelect
+                  placeholder={<Text color="new-gray.800">{parentTeam.name}</Text>}
                   value={parentTeam?.id ?? ''}
                   onChange={handleChangeParentTeam}
                 >
                   <Box p={4} maxH="full" h="full">
                     <TeamSelect
-                      teamIDsBlacklist={team.id ? [team.id] : []}
+                      teamIDsBlacklist={team.id ? [team.id, ...childTeamsIds] : []}
                       emptyLabel={emptyTeam.name}
                       onSelect={(id, name) => () => handleChangeParentTeam(id, name)}
                     />
