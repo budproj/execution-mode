@@ -78,13 +78,13 @@ export const TeamSelect = ({
       {teamsWithEmptyLabel.map((team) => (
         <MenuItemOption
           key={team.id}
-          py={4}
-          pl={0}
           justifyContent="flex-start"
           h="full"
           fontWeight={400}
           color="new-gray.800"
           borderBottomWidth={0}
+          // eslint-disable-next-line unicorn/no-null
+          icon={null}
           _hover={{ color: 'brand.500' }}
           _focus={{ color: 'brand.500' }}
           _last={{ pb: 2 }}
