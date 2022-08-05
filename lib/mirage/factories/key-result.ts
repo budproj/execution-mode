@@ -18,6 +18,8 @@ export default Factory.extend({
       [KEY_RESULT_FORMAT.PERCENTAGE]: () => faker.random.float({ min: 0, max: 100 }),
       [KEY_RESULT_FORMAT.COIN_BRL]: () => faker.random.number({ min: 0 }),
       [KEY_RESULT_FORMAT.COIN_USD]: () => faker.random.number({ min: 0 }),
+      [KEY_RESULT_FORMAT.COIN_EUR]: () => faker.random.number({ min: 0 }),
+      [KEY_RESULT_FORMAT.COIN_GBP]: () => faker.random.number({ min: 0 }),
     }
     const formatHandler = handlers[this.format as any as KEY_RESULT_FORMAT]
 
@@ -32,6 +34,8 @@ export default Factory.extend({
       [KEY_RESULT_FORMAT.PERCENTAGE]: () => faker.random.float({ min, max: 100 }),
       [KEY_RESULT_FORMAT.COIN_BRL]: () => faker.random.number({ min }),
       [KEY_RESULT_FORMAT.COIN_USD]: () => faker.random.number({ min }),
+      [KEY_RESULT_FORMAT.COIN_EUR]: () => faker.random.number({ min }),
+      [KEY_RESULT_FORMAT.COIN_GBP]: () => faker.random.number({ min }),
     }
     const formatHandler = handlers[this.format as any as KEY_RESULT_FORMAT]
 
