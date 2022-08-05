@@ -120,7 +120,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
         </Stack>
       </Flex>
       <Flex alignItems="center">
-        <KrDrawerTitleActions id={keyResultID} onDelete={onDeleteKeyResult} />
+        <KrDrawerTitleActions keyResult={keyResult} onDelete={onDeleteKeyResult} />
       </Flex>
     </Stack>
   )

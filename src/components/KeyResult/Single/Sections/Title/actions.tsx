@@ -1,24 +1,24 @@
 import { Flex, Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
 
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import { CopyAction } from 'src/components/KeyResult/List/Body/Columns/Actions/copy-action'
 import { DeleteAction } from 'src/components/KeyResult/List/Body/Columns/Actions/delete-action'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import messages from './messages'
 
 export interface KrDrawerTitleActionsProperties {
-  id?: KeyResult['id']
+  keyResult?: Partial<KeyResult>
   onDelete?: (id?: string) => void
 }
 
-const KrDrawerTitleActions = ({ id, onDelete }: KrDrawerTitleActionsProperties): ReactElement => {
-  const keyResult = useRecoilValue(keyResultAtomFamily(id))
+const KrDrawerTitleActions = ({
+  keyResult,
+  onDelete,
+}: KrDrawerTitleActionsProperties): ReactElement => {
   const intl = useIntl()
 
   const canDelete = keyResult?.policy?.delete === GraphQLEffect.ALLOW
@@ -41,7 +41,7 @@ const KrDrawerTitleActions = ({ id, onDelete }: KrDrawerTitleActionsProperties):
         </MenuButton>
         <MenuList>
           {keyResult?.title && <CopyAction keyResultTitle={keyResult.title} />}
-          {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
+          {canDelete && <DeleteAction id={keyResult.id} onDelete={onDelete} />}
         </MenuList>
       </Menu>
     </Flex>
