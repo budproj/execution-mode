@@ -1,10 +1,13 @@
 import { Box, Flex, Menu, MenuButton, MenuItem, MenuList, StyleProps } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import { Team } from 'src/components/Team/types'
 import { isEditTeamModalOpenAtom } from 'src/state/recoil/team'
+
+import messages from './messages'
 
 interface MenuCardProperties extends StyleProps {
   teamId?: Team['id']
@@ -13,6 +16,7 @@ interface MenuCardProperties extends StyleProps {
 
 export const MenuCard = ({ openModal, teamId, ...rest }: MenuCardProperties) => {
   const setIsEditTeamModalOpen = useSetRecoilState(isEditTeamModalOpenAtom)
+  const intl = useIntl()
 
   const onEditClick = () => {
     if (openModal) openModal()
@@ -40,8 +44,9 @@ export const MenuCard = ({ openModal, teamId, ...rest }: MenuCardProperties) => 
           </MenuButton>
           <Box>
             <MenuList>
-              <MenuItem onClick={onEditClick}> Editar time </MenuItem>
-              <MenuItem> Adicionar subtime </MenuItem>
+              <MenuItem onClick={onEditClick}>
+                {intl.formatMessage(messages.teamEditButton)}
+              </MenuItem>
             </MenuList>
           </Box>
         </Menu>
