@@ -9,7 +9,7 @@ export interface useGetMyTasksProperties {
   limit?: number
 }
 
-export const useGetMyTasks = (userId: User['id']) => {
+export const useGetUserDetails = (userId: User['id']) => {
   const query = {
     userId,
   }
