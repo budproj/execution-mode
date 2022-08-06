@@ -58,40 +58,37 @@ const getTeamIdFromRouter = (router: NextRouter) => {
 }
 
 export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamModalProperties) => {
-  const router = useRouter()
-  const preloadedTeamId = teamId ?? getTeamIdFromRouter(router)
-
   const intl = useIntl()
+  const router = useRouter()
+
+  const preloadedTeamId = teamId ?? getTeamIdFromRouter(router)
+  const emptyTeam = { id: '', name: intl.formatMessage(messages.emptyTeamName) }
 
   const currentUserID = useRecoilValue(meAtom)
-  const preloadedTeam = useRecoilValue(teamAtomFamily(preloadedTeamId))
-  const preloadedParentTeam = preloadedTeam?.parentId ? preloadedTeam.parent : undefined
-  const [owner, setOwner] = useState(currentUserID)
-  const [team, setTeam] = useState(preloadedTeam ?? {})
-  const emptyTeam = { id: '', name: intl.formatMessage(messages.emptyTeamName) }
-  const [parentTeam, setParentTeam] = useState<Partial<Team>>(preloadedParentTeam ?? emptyTeam)
-  const [name, setName] = useState(isEditing ? team.name : '')
-  const [description, setDescription] = useState(isEditing ? team.description : '')
+  const team = useRecoilValue(teamAtomFamily(preloadedTeamId))
+  const setShouldUpdateObjectives = useSetRecoilState(isReloadNecessary)
   const [childTeams, setChildTeamEdges] = useConnectionEdges<Team>()
 
-  useEffect(() => {
-    if (preloadedTeam) setTeam(preloadedTeam)
-  }, [preloadedTeam])
+  const [owner, setOwner] = useState(currentUserID)
+  const [parentTeam, setParentTeam] = useState<Partial<Team>>(emptyTeam)
+  const [name, setName] = useState(isEditing ? team?.name : '')
+  const [description, setDescription] = useState(isEditing ? team?.description : '')
+
+  const childTeamsIds = childTeams.map((childTeam) => childTeam.id)
 
   useEffect(() => {
-    if (isEditing && team.ownerId) {
-      setOwner(team?.ownerId)
-      return
+    if (team) {
+      setChildTeamEdges(team.teams?.edges)
+
+      if (team?.parent) {
+        setParentTeam(team.parent)
+      }
+
+      if (team?.ownerId && isEditing) {
+        setOwner(team.ownerId)
+      }
     }
-
-    if (currentUserID) setOwner(currentUserID)
-  }, [currentUserID, isEditing, team, team?.ownerId])
-
-  useEffect(() => {
-    if (team) setChildTeamEdges(team.teams?.edges)
-  }, [team, setChildTeamEdges])
-
-  const setShouldUpdateObjectives = useSetRecoilState(isReloadNecessary)
+  }, [team, setChildTeamEdges, isEditing])
 
   const [saveOrUpdateTeam, { loading }] = useMutation<AddSubteamMutationResult>(
     isEditing ? queries.UPDATE_TEAM : queries.CREATE_TEAM,
@@ -115,7 +112,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
           name,
           description,
           ownerId: owner,
-          id: team.id,
+          id: team?.id,
           // eslint-disable-next-line unicorn/no-null
           parentId: parentTeam.id === '' ? null : parentTeam.id,
         },
@@ -129,12 +126,10 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
         description,
         gender: TEAM_GENDER.NEUTRAL,
         ownerID: owner,
-        parentID: team.id,
+        parentID: team?.id,
       },
     })
   }
-
-  const childTeamsIds = childTeams.map((childTeam) => childTeam.id)
 
   return (
     <Modal isOpen={isOpen} size="md" onClose={onClose}>
@@ -146,7 +141,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
           </Heading>
           {!isEditing && (
             <Text color="new-gray.900" fontWeight="400" fontSize="lg">
-              {intl.formatMessage(messages.addSubteamHeaderDescription, { teamname: team.name })}
+              {intl.formatMessage(messages.addSubteamHeaderDescription, { teamname: team?.name })}
             </Text>
           )}
         </ModalHeader>
@@ -156,7 +151,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
             <FormControl>
               <FormLabel>{intl.formatMessage(messages.teamNameLabel)}</FormLabel>
               <Input
-                defaultValue={isEditing ? team.name : undefined}
+                defaultValue={isEditing ? team?.name : undefined}
                 onChange={(event) => setName(event.target.value)}
               />
             </FormControl>
@@ -165,7 +160,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
               <FormLabel>{intl.formatMessage(messages.descriptionLabel)}</FormLabel>
               <Textarea
                 placeholder={intl.formatMessage(messages.descriptionPlaceholder)}
-                defaultValue={isEditing ? team.description : undefined}
+                defaultValue={isEditing ? team?.description : undefined}
                 onChange={(event) => setDescription(event.target.value)}
               />
             </FormControl>
@@ -176,10 +171,11 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
                 value={owner}
                 avatarSubtitleType="role"
                 placement="bottom"
+                isLazy={false}
                 onChange={setOwner}
               />
             </FormControl>
-            {!team.isCompany && isEditing ? (
+            {!team?.isCompany && isEditing ? (
               <FormControl>
                 <FormLabel>{intl.formatMessage(messages.parentTeam)}</FormLabel>
                 <SelectMenu
@@ -192,7 +188,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
                 >
                   <Box p={4} maxH="full" h="full">
                     <TeamSelect
-                      teamIDsBlacklist={team.id ? [team.id, ...childTeamsIds] : []}
+                      teamIDsBlacklist={team?.id ? [team?.id, ...childTeamsIds] : []}
                       emptyLabel={emptyTeam.name}
                       onSelect={(id, name) => () => handleChangeParentTeam(id, name)}
                     />

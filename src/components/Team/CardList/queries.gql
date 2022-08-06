@@ -6,6 +6,15 @@ query GET_TEAMS {
         name
         description
         isCompany
+        ownerId
+        owner {
+          id
+          fullName
+        }
+        parent {
+          id
+          name
+        }
         users {
           edges {
             node {
