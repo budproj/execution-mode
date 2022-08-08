@@ -79,6 +79,8 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
   useEffect(() => {
     if (team) {
       setChildTeamEdges(team.teams?.edges)
+      setName(team?.name)
+      setDescription(team?.description)
 
       if (team?.parent) {
         setParentTeam(team.parent)
@@ -107,6 +109,16 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
 
   const executeSaveOrUpdateTeam = () => {
     if (isEditing) {
+      console.log({
+        variables: {
+          name,
+          description,
+          ownerId: owner,
+          id: team?.id,
+          // eslint-disable-next-line unicorn/no-null
+          parentId: parentTeam.id === '' ? null : parentTeam.id,
+        },
+      })
       void saveOrUpdateTeam({
         variables: {
           name,
