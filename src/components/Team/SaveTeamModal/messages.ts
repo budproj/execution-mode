@@ -11,14 +11,8 @@ type TeamSearchMessage =
   | 'save'
   | 'addSubteamHeaderDescription'
   | 'descriptionPlaceholder'
-  | 'emptyTeamName'
 
 export default defineMessages<TeamSearchMessage>({
-  emptyTeamName: {
-    defaultMessage: 'Sem time',
-    id: 'sEIpfE',
-    description: 'The text is displayed of the empty team option',
-  },
   addSubteamHeader: {
     defaultMessage: 'Criar time',
     id: 'hohkHN',

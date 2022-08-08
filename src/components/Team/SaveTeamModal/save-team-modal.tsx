@@ -62,7 +62,6 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
   const router = useRouter()
 
   const preloadedTeamId = teamId ?? getTeamIdFromRouter(router)
-  const emptyTeam = { id: '', name: intl.formatMessage(messages.emptyTeamName) }
 
   const currentUserID = useRecoilValue(meAtom)
   const team = useRecoilValue(teamAtomFamily(preloadedTeamId))
@@ -70,7 +69,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
   const [childTeams, setChildTeamEdges] = useConnectionEdges<Team>()
 
   const [owner, setOwner] = useState(currentUserID)
-  const [parentTeam, setParentTeam] = useState<Partial<Team>>(emptyTeam)
+  const [parentTeam, setParentTeam] = useState<Partial<Team>>({})
   const [name, setName] = useState(isEditing ? team?.name : '')
   const [description, setDescription] = useState(isEditing ? team?.description : '')
 
@@ -125,8 +124,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
           description,
           ownerId: owner,
           id: team?.id,
-          // eslint-disable-next-line unicorn/no-null
-          parentId: parentTeam.id === '' ? null : parentTeam.id,
+          parentId: parentTeam?.id,
         },
       })
       return
@@ -201,7 +199,6 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
                   <Box p={4} maxH="full" h="full">
                     <TeamSelect
                       teamIDsBlacklist={team?.id ? [team?.id, ...childTeamsIds] : []}
-                      emptyLabel={emptyTeam.name}
                       onSelect={(id, name) => () => handleChangeParentTeam(id, name)}
                     />
                   </Box>
