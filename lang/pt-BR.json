@@ -31,6 +31,10 @@
     "defaultMessage": "Procurar Times",
     "description": "The placeholder in explore page"
   },
+  "+o53JX": {
+    "defaultMessage": "{quantityofmembers} membros adicionados ao time com sucesso.",
+    "description": "This message appears in a successful toast when we add more than one user to a team."
+  },
   "+O5SW4": {
     "defaultMessage": "Um ícone com uma série de traços verticais. Clique e arraste ele para reordenar seus resultados chave",
     "description": "The alternative text explaining our reorder icon"
@@ -667,6 +671,10 @@
     "defaultMessage": "comentou no seu resultado-chave:",
     "description": "This message is displayed to describe a notification that occurs when someone comments on a user`s KR."
   },
+  "atQu7S": {
+    "defaultMessage": "Membro adicionado ao time com sucesso.",
+    "description": "This message appears on a successful toast when we add a user to a team."
+  },
   "aVLR+w": {
     "defaultMessage": "100%",
     "description": "This message is displayed inside our key-result format select as the example of the percent format"
@@ -694,6 +702,10 @@
   "bdkUKs": {
     "defaultMessage": "Times",
     "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
+  },
+  "bdYpnS": {
+    "defaultMessage": "CANCELAR",
+    "description": "This button is used to close the modal to add team members."
   },
   "BeFobb": {
     "defaultMessage": "Isso também excluirá todos os OKRs criados neste ciclo. Essa ação não pode ser desfeita.",
@@ -1011,6 +1023,10 @@
     "defaultMessage": "Cor do Nível de Confiança",
     "description": "The text of the table head related to the Confidence Level color column"
   },
+  "F5kY8c": {
+    "defaultMessage": "Financeiro (Euro)",
+    "description": "This message is displayed inside our key-result format select as the title of the coin EUR format"
+  },
   "f6/kwR": {
     "defaultMessage": "Esse é o progresso acumulado dessa semana",
     "description": "This tooltip appears when the user hovers the third column title"
@@ -1070,6 +1086,10 @@
   "FRO0CY": {
     "defaultMessage": "Você perderá todos os check-ins e comentários feitos até aqui.",
     "description": "This message is used as the description in our first dialog while removing a key-result"
+  },
+  "fsAK9T": {
+    "defaultMessage": "Selecionar...",
+    "description": "This message appears in the input when no user is selected."
   },
   "fv5OeR": {
     "defaultMessage": "{confidence, select, roadblock {Todos os resultados-chave {confidence}} other {Todos os resultados-chave de {confidence}}}",
@@ -1307,6 +1327,10 @@
     "defaultMessage": "Ciclo",
     "description": "The label text above the Cycle section in our key result single page or drawers"
   },
+  "HSCaRw": {
+    "defaultMessage": "Adicionar membro ao time",
+    "description": "This is the title of the modal that is used to add members to a team."
+  },
   "HsEMwj": {
     "defaultMessage": "Uma seta longa para a direita, separando o progresso anterior (à esquerda) do novo progress do check-in (à direita)",
     "description": "This text is displayed to screen readers, explaining the right arrow icon in our check-in card"
@@ -1418,6 +1442,10 @@
   "iWDn4y": {
     "defaultMessage": "Time de Apoio",
     "description": "The label text above Support Team section in our key resulg single page or drawers"
+  },
+  "IWr6NM": {
+    "defaultMessage": "€ 100",
+    "description": "This message is displayed inside our key-result format select as the example of the coin EUR format"
   },
   "iZcwRX": {
     "defaultMessage": "ACESSO DE EDIÇÃO",
@@ -1674,6 +1702,14 @@
   "lf4c2p": {
     "defaultMessage": "objetivo",
     "description": "This message is used as our resource type while removing a objective"
+  },
+  "lHI54p": {
+    "defaultMessage": "Para adicionar a este time uma pessoa que já tem acesso ao Bud, use o campo abaixo:",
+    "description": "This is the description of the modal that is used to add members to a team."
+  },
+  "lhIu1G": {
+    "defaultMessage": "£ 100",
+    "description": "This message is displayed inside our key-result format select as the example of the coin GBP format"
   },
   "LhZDKa": {
     "defaultMessage": "Enviar",
@@ -2039,6 +2075,10 @@
     "defaultMessage": "Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave",
     "description": "This message is displayed for screen readers as the description of the arrow down icon inside the key-result drawers. That icon is only displayed when the user hovers the mouse over the goal"
   },
+  "piM/9+": {
+    "defaultMessage": "Explore este objetivo completo no Plano Individual de {user}",
+    "description": "This message appears in the individual objective tooltip"
+  },
   "Pkdkh4": {
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
@@ -2279,6 +2319,10 @@
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
     "description": "This message appears when the user tries to remove a given objective, but receives an error"
   },
+  "SE9cO0": {
+    "defaultMessage": "Editar time",
+    "description": "Team edit button label"
+  },
   "sEIpfE": {
     "defaultMessage": "Sem time",
     "description": "The text is displayed of the empty team option"
@@ -2302,6 +2346,10 @@
   "SiJuyU": {
     "defaultMessage": "Um ícone de calendário, indicando que aqui você seleciona o ano que deseja filtrar",
     "description": "This message is used by screen readers to explain the icon to the user"
+  },
+  "sJMgjv": {
+    "defaultMessage": "Adicionar membro ao time",
+    "description": "This message appears as an option in the team page while adding a user to team"
   },
   "SL45P4": {
     "defaultMessage": "Gênero",
@@ -2350,6 +2398,10 @@
   "sSCvSb": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você irá remover esse item da checklist",
     "description": "This text is used by screen readers inside our key-result drawer to describe the X icon to remove a given item from the checklist"
+  },
+  "ssM7Lj": {
+    "defaultMessage": "Pertence ao objetivo",
+    "description": "The label text above the Objective section in our key result single page or drawers"
   },
   "SsQRcF": {
     "defaultMessage": "Uma seta que ao ser clicada expande a checklist deste resultado-chave",
@@ -2406,6 +2458,10 @@
   "tBBHmo": {
     "defaultMessage": "Planejamento individual",
     "description": "Individual OKR title on the navigation tab"
+  },
+  "TCJuuU": {
+    "defaultMessage": "Selecione ao menos um membro para completar a ação.",
+    "description": "This message appears as an error Toast when a user tries to add members to a team without selecting at least one."
   },
   "tcWO3v": {
     "defaultMessage": "O logotipo do Bud. Sendo ele apenas o nome Bud escrito em caixa baixa na cor roxa",
@@ -2687,6 +2743,10 @@
     "defaultMessage": "Líder:",
     "description": "The label to the leader field in team add/edit modal"
   },
+  "W/yMJH": {
+    "defaultMessage": "Financeiro (Libra)",
+    "description": "This message is displayed inside our key-result format select as the title of the coin GBP format"
+  },
   "W37c+K": {
     "defaultMessage": "Um ícone de check. Ele representa a quantidade de itens marcados como completo em sua checklist",
     "description": "This text is used by screen readers to explain the check icon in our key-result drawer checklist section"
@@ -2763,6 +2823,10 @@
     "defaultMessage": "Veja nossos exemplos de OKRs",
     "description": "This link takes you to the page with guidelines on creating OKRs."
   },
+  "x24wfc": {
+    "defaultMessage": "Explore este objetivo completo no time de {team}",
+    "description": "This message appears in the objective tooltip"
+  },
   "X2V7x7": {
     "defaultMessage": "Confiança",
     "description": "The text of the table head related to the Confidence Level column"
@@ -2838,6 +2902,10 @@
   "XnTd/f": {
     "defaultMessage": "Novo valor",
     "description": "This text is displayed in our check-in card, as a title for the right column in the progress increase section"
+  },
+  "XOLhDn": {
+    "defaultMessage": "Adicionar",
+    "description": "This message appears on the add a user to the team button when the team is empty."
   },
   "xPoUwI": {
     "defaultMessage": "Um desenho de uma engrenagem para o botão de edição de time",
@@ -3027,6 +3095,10 @@
     "defaultMessage": "Clique aqui para ver suas notificações",
     "description": "The title text of our notification bell, it is displayed when an user hover the icon itself"
   },
+  "ZkqTBK": {
+    "defaultMessage": "ADICIONAR",
+    "description": "This button is used to add selected members to a team."
+  },
   "Zmffm0": {
     "defaultMessage": "Fechar",
     "description": "This message is displayed as the title text for our close icon in our check-in form"
@@ -3067,6 +3139,10 @@
     "defaultMessage": "Um banco vazio, representando que não tem ninguém aqui",
     "description": "The alternative text explaining the empty bench image"
   },
+  "zVdCV2": {
+    "defaultMessage": "{selectedusersquantity} pessoas",
+    "description": "This message appears in the input when multiple users are selected."
+  },
   "ZVTdlV": {
     "defaultMessage": "Um ícone de ingresso de cinema",
     "description": "The desc message for the TicketStar icon. This icon is used to ilustrate our key results"
@@ -3084,7 +3160,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-08-08T13:24:18Z",
+    "defaultMessage": "2022-08-08T14:10:47Z",
     "description": null
   }
 }
