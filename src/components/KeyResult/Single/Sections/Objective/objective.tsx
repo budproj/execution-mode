@@ -1,12 +1,14 @@
-import { Flex, Text, SkeletonCircle, Skeleton, Box } from '@chakra-ui/react'
+import { Flex, Text, Skeleton, Box, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import { Stack as StackIcon } from 'src/components/Icon'
+import { IntlLink } from 'src/components/Base'
+import { CircularProgress } from 'src/components/Base/CircularProgress'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
+import meAtom from 'src/state/recoil/user/me'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
@@ -14,39 +16,83 @@ import messages from './messages'
 
 export interface KeyResultSectionObjectiveProperties {
   keyResultID?: KeyResult['id']
+  isKeyResultPage?: boolean
 }
 
 const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
+const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 
-const KeyResultSectionObjective = ({ keyResultID }: KeyResultSectionObjectiveProperties) => {
+const KeyResultSectionObjective = ({
+  keyResultID,
+  isKeyResultPage,
+}: KeyResultSectionObjectiveProperties) => {
   const intl = useIntl()
   const objective = useRecoilValue(objectiveSelector(keyResultID))
 
+  const owner = useRecoilValue(ownerSelector(keyResultID))
+  const userID = useRecoilValue(meAtom)
+
+  const progress = objective?.status?.progress ?? 0
+  const confidence = objective?.status?.confidence ?? 0
   const isObjectiveLoaded = Boolean(objective)
+
+  const tooltipLabel = objective?.teamId
+    ? intl.formatMessage(messages.teamOkrTooltipMessage, {
+        team: objective?.team?.name,
+      })
+    : intl.formatMessage(messages.individualOkrTooltipMessage, {
+        user: owner?.firstName,
+      })
+
+  const redirectToClick = objective?.teamId
+    ? `/explore/${objective.teamId}`
+    : owner?.id === userID
+    ? '/my-things'
+    : `/profile/${owner?.id ?? ''}`
 
   return (
     <Flex gridGap={2} direction="column">
       <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
-      <Flex alignItems="center" gridGap={2}>
-        <SkeletonCircle isLoaded={isObjectiveLoaded}>
-          <Box
-            w={8}
-            h={8}
-            bg="gray.50"
-            borderRadius="full"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <StackIcon desc={intl.formatMessage(messages.stackIconDesc)} fill="gray.400" />
-          </Box>
-        </SkeletonCircle>
-        <Skeleton
+
+      <Flex gridGap={3} alignItems="center">
+        <CircularProgress
+          confidence={confidence}
+          progress={progress}
           isLoaded={isObjectiveLoaded}
-          {...buildSkeletonMinSize(isObjectiveLoaded, 250, 24)}
-        >
-          <Text color="black.900">{objective?.title}</Text>
-        </Skeleton>
+        />
+        {isKeyResultPage ? (
+          <Box color="new-gray.900">
+            <Skeleton
+              isLoaded={isObjectiveLoaded}
+              {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
+            >
+              <Text fontSize={14} fontWeight={500}>
+                {objective?.title}
+              </Text>
+            </Skeleton>
+          </Box>
+        ) : (
+          <Tooltip label={tooltipLabel} placement="top-start" maxW="lg">
+            <Box
+              color="new-gray.900"
+              cursor="pointer"
+              _hover={{
+                color: 'new-gray.700',
+              }}
+            >
+              <Skeleton
+                isLoaded={isObjectiveLoaded}
+                {...buildSkeletonMinSize(isObjectiveLoaded, 150, 20)}
+              >
+                <IntlLink href={redirectToClick}>
+                  <Text fontSize={14} fontWeight={500}>
+                    {objective?.title}
+                  </Text>
+                </IntlLink>
+              </Skeleton>
+            </Box>
+          </Tooltip>
+        )}
       </Flex>
     </Flex>
   )

@@ -45,6 +45,19 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     }
     objective {
       title
+      status {
+        progress
+        confidence
+      }
+      teamId
+     owner {
+      fullName
+      id
+    }
+      team {
+        id
+        name
+      }
       cycle {
         cadence
         dateStart
@@ -52,6 +65,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
       }
     }
     policy {
+      delete
       update
     }
   }

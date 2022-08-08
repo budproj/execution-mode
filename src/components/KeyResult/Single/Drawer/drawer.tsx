@@ -1,4 +1,5 @@
 import { Drawer } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
@@ -24,8 +25,14 @@ import { useEvent } from '../../../../state/hooks/useEvent/hook'
 import KeyResultDrawerContent from './content'
 
 const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
+const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
 
 const KeyResultDrawer = () => {
+  const {
+    pathname,
+    query: { id },
+  } = useRouter()
+
   const keyResultID = useRecoilValue(keyResultReadDrawerOpenedKeyResultID)
   const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(keyResultID))
   const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
@@ -37,6 +44,8 @@ const KeyResultDrawer = () => {
   const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
   const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
   const setIsChecklistOpen = useSetRecoilState(isCheckListCollapseOpenAtom)
+
+  const objective = useRecoilValue(objectiveSelector(keyResultID))
 
   const handleClose = () => {
     resetOpenDrawer()
@@ -51,6 +60,11 @@ const KeyResultDrawer = () => {
 
   const isOpen = Boolean(keyResultID)
 
+  const isKeyResultPage = () => {
+    if ((!objective?.teamId && pathname === '/my-things') || id === objective?.teamId) return true
+    return false
+  }
+
   useEffect(() => {
     if (keyResultID) {
       dispatch({ keyResultID })
@@ -62,7 +76,7 @@ const KeyResultDrawer = () => {
     <Drawer isOpen={isOpen} size="xl" autoFocus={false} onClose={handleClose}>
       <ColorizedOverlay>
         {isOpen && typeof keyResultID !== 'undefined' && (
-          <KeyResultDrawerContent keyResultID={keyResultID} />
+          <KeyResultDrawerContent keyResultID={keyResultID} isKeyResultPage={isKeyResultPage()} />
         )}
       </ColorizedOverlay>
     </Drawer>

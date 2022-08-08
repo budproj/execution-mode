@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Box, Flex, Skeleton, SkeletonText, Spinner, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 
 import EditableInputValue from 'src/components/Base/EditableInputValue'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
@@ -11,7 +11,9 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
+import KrDrawerTitleActions from './actions'
 import messages from './messages'
 import queries from './queries.gql'
 
@@ -31,6 +33,10 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   const [updateKeyResult, { loading }] = useMutation<UpdateKeyResultTitleMutationResult>(
     queries.UPDATE_KEY_RESULT_TITLE,
   )
+
+  const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+
+  const onDeleteKeyResult = () => resetOpenDrawer()
 
   const isLoaded = Boolean(keyResult)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
@@ -55,9 +61,15 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   }
 
   return (
-    <Stack spacing={0}>
-      <Flex gridGap={4} alignItems="flex-start">
-        <Skeleton borderRadius={10} isLoaded={isLoaded} pb={4}>
+    <Stack
+      display="flex"
+      spacing={0}
+      position="relative"
+      justifyContent="space-between"
+      direction="row"
+    >
+      <Flex gridGap={4} alignItems="flex-start" justifyContent="space-between" width="100%">
+        <Skeleton borderRadius={10} isLoaded={isLoaded}>
           <KeyResultDynamicIcon
             title={keyResult?.title}
             iconSize={7}
@@ -66,7 +78,6 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
             isDisabled={!isActive}
           />
         </Skeleton>
-
         <Stack spacing={0} flexGrow={1}>
           <Stack direction="row">
             <Skeleton isLoaded={isLoaded} flexGrow={1}>
@@ -107,6 +118,9 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
             />
           </SkeletonText>
         </Stack>
+      </Flex>
+      <Flex alignItems="center">
+        <KrDrawerTitleActions keyResult={keyResult} onDelete={onDeleteKeyResult} />
       </Flex>
     </Stack>
   )

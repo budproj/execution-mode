@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultSectionTitleMessage = 'lastUpdateTextPrefix' | 'openGraphIconDesc'
+type KeyResultSectionTitleMessage =
+  | 'lastUpdateTextPrefix'
+  | 'openGraphIconDesc'
+  | 'optionsButtonDesc'
 
 export default defineMessages<KeyResultSectionTitleMessage>({
   lastUpdateTextPrefix: {
@@ -15,5 +18,12 @@ export default defineMessages<KeyResultSectionTitleMessage>({
     id: 'NAsOFG',
     description:
       'This text is used by screen readers to explain the arrow icon to open the progress chart in our key-result sidebar',
+  },
+
+  optionsButtonDesc: {
+    defaultMessage: 'Botão de opções',
+    id: 'XCDzMo',
+    description:
+      'This button allows you to choose an option that can allow you to copy the title ou exclude the KR.',
   },
 })
