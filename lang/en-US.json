@@ -1627,6 +1627,10 @@
     "defaultMessage": "My Key Results",
     "description": "The page title that our users should see in the my key results page"
   },
+  "l+HPdy": {
+    "defaultMessage": "Leader",
+    "description": "The tag title that is displayed when that user is the leader of the team"
+  },
   "L/b/G/": {
     "defaultMessage": "A drawing of an open folder with nothing on it, indicating this team has no subteams",
     "description": "The alternative text explaining the empty folder image"
@@ -1979,6 +1983,10 @@
     "defaultMessage": "Back",
     "description": "This message is displayed as a label in the button on our not found error page"
   },
+  "OrqJud": {
+    "defaultMessage": "A crown icon that indicates the team leader",
+    "description": "The crown icon description"
+  },
   "OS8mCA": {
     "defaultMessage": "Cadence",
     "description": "The description for cadence cycle field"
@@ -2251,6 +2259,10 @@
     "defaultMessage": "active account",
     "description": "This string is used to select the active cycles option."
   },
+  "S9cIsW": {
+    "defaultMessage": "Edit team",
+    "description": "The text is displayed as a heading in the add team modal"
+  },
   "Sau4Na": {
     "defaultMessage": "Name",
     "description": "The user first name input placeholder while creating a new workspace"
@@ -2266,6 +2278,10 @@
   "SDzYq9": {
     "defaultMessage": "We're sorry! There's been an unexpected error. Please try again",
     "description": "This message appears when the user tries to remove a given objective, but receives an error"
+  },
+  "sEIpfE": {
+    "defaultMessage": "No team",
+    "description": "The text is displayed of the empty team option"
   },
   "SenoB2": {
     "defaultMessage": "Sorry. We can't find the page you are looking for.",
@@ -2823,6 +2839,10 @@
     "defaultMessage": "New value",
     "description": "This text is displayed in our check-in card, as a title for the right column in the progress increase section"
   },
+  "xPoUwI": {
+    "defaultMessage": "A gear icon for the edit team button",
+    "description": "The gear icon description"
+  },
   "XvdEsU": {
     "defaultMessage": "An icon of three dots, indicating that by clicking here the menu will expand",
     "description": "The description for screen readers regarding the three dots icon in the objectives accordion"
@@ -2894,6 +2914,10 @@
   "Ykg0Jh": {
     "defaultMessage": "Performed by <highlight>{author}</highlight> {unit, select, fallback {em} other {}} {time}",
     "description": "This text is displayed as a helper text, below the check-in card title"
+  },
+  "YmUBcv": {
+    "defaultMessage": "Edit team",
+    "description": "The tooltip on the gear icon that edits the team"
   },
   "yq7/PT": {
     "defaultMessage": "Support content",
@@ -3060,7 +3084,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-07-27T18:36:27Z",
+    "defaultMessage": "2022-08-08T13:23:46Z",
     "description": null
   }
 }
