@@ -20,4 +20,12 @@ export const DEFAULT_FORMAT_OPTIONS: Record<KEY_RESULT_FORMAT, FormatDetails> = 
     title: messages.optionCoinUSDTitle,
     example: messages.optionCoinUSDExample,
   },
+  [KEY_RESULT_FORMAT.COIN_EUR]: {
+    title: messages.optionCoinEURTitle,
+    example: messages.optionCoinEURExample,
+  },
+  [KEY_RESULT_FORMAT.COIN_GBP]: {
+    title: messages.optionCoinGBPTitle,
+    example: messages.optionCoinGBPExample,
+  },
 }
