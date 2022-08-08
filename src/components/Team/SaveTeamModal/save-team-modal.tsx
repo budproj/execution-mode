@@ -108,20 +108,10 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
 
   const executeSaveOrUpdateTeam = () => {
     if (isEditing) {
-      console.log({
-        variables: {
-          name,
-          description,
-          ownerId: owner,
-          id: team?.id,
-          // eslint-disable-next-line unicorn/no-null
-          parentId: parentTeam.id === '' ? null : parentTeam.id,
-        },
-      })
       void saveOrUpdateTeam({
         variables: {
-          name,
-          description,
+          name: name === '' ? undefined : name,
+          description: description === '' ? undefined : description,
           ownerId: owner,
           id: team?.id,
           parentId: parentTeam?.id,
