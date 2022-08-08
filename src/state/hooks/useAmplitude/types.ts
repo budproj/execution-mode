@@ -6,6 +6,7 @@ export type AmplitudeUser = {
   email: string
   gender: USER_GENDER
   role: string
+  isTeamLeader: boolean
   createdAt: string
 }
 

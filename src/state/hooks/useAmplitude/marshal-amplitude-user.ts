@@ -18,6 +18,7 @@ export const marshalAmplitudeUser = (user: UserNamedAvatarDataQuery): AmplitudeU
   email: user.email,
   gender: user.gender,
   role: user.role,
+  isTeamLeader: user.isTeamLeader,
   createdAt: user.createdAt,
 })
 
