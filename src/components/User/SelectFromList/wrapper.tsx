@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
 import { SearchableList } from 'src/components/Base/SearchableList'
+import { AddMemberToTeamModal } from 'src/components/Team/AddMemberToTeamModal'
 import { User } from 'src/components/User/types'
 
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
@@ -19,6 +20,7 @@ export interface SelectUserFromListProperties {
   onSearch?: (query: string) => void
   onCreateUser?: (userID: string) => Promise<void> | void
   avatarSubtitleType?: NamedAvatarSubtitleType
+  isSelectingMultiples?: boolean
   showUserCard?: boolean
   emptyStateTitle?: MessageDescriptor
   hasMenu?: boolean
@@ -30,6 +32,7 @@ export const SelectUserFromListWrapper = ({
   isLoading,
   onSelect,
   onCreateUser,
+  isSelectingMultiples,
   showUserCard,
   avatarSubtitleType,
   hasCreateNewUserPermission,
@@ -37,6 +40,7 @@ export const SelectUserFromListWrapper = ({
   hasMenu,
 }: SelectUserFromListProperties) => {
   const [isCreateSidebarOpen, setIsCreateSidebarOpen] = useState(false)
+  const [isAddToTeamModalOpen, setIsAddToTeamModalOpen] = useState(false)
   const intl = useIntl()
 
   const handleCreateSidebarOpen = () => {
@@ -45,6 +49,14 @@ export const SelectUserFromListWrapper = ({
 
   const handleCreateSidebarClose = () => {
     if (isCreateSidebarOpen) setIsCreateSidebarOpen(false)
+  }
+
+  const handleAddToTeamModalOpen = () => {
+    if (!isAddToTeamModalOpen) setIsAddToTeamModalOpen(true)
+  }
+
+  const handleAddToTeamModalClose = () => {
+    if (isAddToTeamModalOpen) setIsAddToTeamModalOpen(false)
   }
 
   const hasUsers = users.length > 0
@@ -64,7 +76,9 @@ export const SelectUserFromListWrapper = ({
         avatarSubtitleType={avatarSubtitleType}
         emptyStateTitle={emptyStateTitle}
         hasMenu={hasMenu}
+        isSelectingMultiples={isSelectingMultiples}
         onCreateStart={handleCreateSidebarOpen}
+        onAddUserToTeam={handleAddToTeamModalOpen}
         onSelect={onSelect}
       />
 
@@ -74,6 +88,12 @@ export const SelectUserFromListWrapper = ({
         onClose={handleCreateSidebarClose}
         onSelect={onSelect}
         onCreate={onCreateUser}
+      />
+
+      <AddMemberToTeamModal
+        isOpen={isAddToTeamModalOpen}
+        teamID={teamID}
+        onClose={handleAddToTeamModalClose}
       />
     </SearchableList>
   )

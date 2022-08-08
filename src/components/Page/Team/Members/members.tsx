@@ -55,6 +55,10 @@ export const TeamMembers = ({
     if (userID !== selectedUserID) setSelectedUserID(userID)
   }
 
+  const handleRemoveUserToTeam = () => {
+    void refreshTeamMembers()
+  }
+
   const handleClose = () => {
     if (isUserSidebarOpen) setIsUserSidebarOpen(false)
   }
@@ -100,7 +104,11 @@ export const TeamMembers = ({
           <DrawerContent>
             <DrawerBody>
               {selectedUserID && (
-                <UserProfile userID={selectedUserID} onUserDeactivation={handleUserDeactivation} />
+                <UserProfile
+                  userID={selectedUserID}
+                  onRemove={handleRemoveUserToTeam}
+                  onUserDeactivation={handleUserDeactivation}
+                />
               )}
             </DrawerBody>
           </DrawerContent>

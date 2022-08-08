@@ -1,7 +1,9 @@
 import { defineMessages } from 'react-intl'
 
 type SelectUserFromListContentMessages =
+  | 'addNewUserToTeam'
   | 'newUserOption'
+  | 'addUserToTeamOption'
   | 'createUserOptionGroupIconDesc'
   | 'emptySearchState'
   | 'createNewUserButtonLabel'
@@ -11,6 +13,18 @@ export default defineMessages<SelectUserFromListContentMessages>({
     defaultMessage: 'Criar novo usuário',
     id: 'OwWiN7',
     description: 'This message appears as an option in the team page while adding a new user',
+  },
+  addNewUserToTeam: {
+    defaultMessage: 'Adicionar',
+    id: 'XOLhDn',
+    description:
+      'This message appears on the add a user to the team button when the team is empty.',
+  },
+
+  addUserToTeamOption: {
+    defaultMessage: 'Adicionar membro ao time',
+    id: 'sJMgjv',
+    description: 'This message appears as an option in the team page while adding a user to team',
   },
 
   createUserOptionGroupIconDesc: {

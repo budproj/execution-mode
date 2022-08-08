@@ -28,6 +28,7 @@ export interface SelectMenuProperties extends StyleProps {
   isLazy?: MenuProps['isLazy']
   isOpen?: MenuProps['isOpen']
   onOpen?: MenuProps['onOpen']
+  scroolable?: boolean
   onClose?: MenuProps['onClose']
   placement?: MenuProps['placement']
   placeholder?: ReactElement | string
@@ -52,6 +53,7 @@ const SelectMenu = ({
   isOpen,
   onOpen,
   onClose,
+  scroolable = true,
   placement,
   valueLabel,
   isInvalid,
@@ -119,11 +121,17 @@ const SelectMenu = ({
         overflow="hidden"
         zIndex={999}
       >
-        <Scrollbars autoHeight>
+        {scroolable ? (
+          <Scrollbars autoHeight>
+            <MenuOptionGroup value={value} type="radio" onChange={onChange}>
+              {children}
+            </MenuOptionGroup>
+          </Scrollbars>
+        ) : (
           <MenuOptionGroup value={value} type="radio" onChange={onChange}>
             {children}
           </MenuOptionGroup>
-        </Scrollbars>
+        )}
       </MenuList>
     </Menu>
   )

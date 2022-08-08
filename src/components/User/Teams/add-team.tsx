@@ -17,7 +17,7 @@ type AddUserTeamProperties = {
   teamIDsBlacklist: string[]
 }
 
-interface AddUserToTeamMutationResult {
+export interface AddUserToTeamMutationResult {
   addTeamToUser: {
     id: string
     teams: GraphQLConnection<Team>

@@ -15,6 +15,7 @@ export interface UserProfileBodyProperties {
   canUpdate?: boolean
   canDelete?: boolean
   onUserDeactivation?: () => void
+  onRemove?: () => void
 }
 
 export const UserProfileBody = ({
@@ -23,6 +24,7 @@ export const UserProfileBody = ({
   canUpdate,
   canDelete,
   onUserDeactivation,
+  onRemove,
 }: UserProfileBodyProperties) => {
   const myUserID = useRecoilValue(meAtom)
   const isMyUser = myUserID === userID
@@ -35,6 +37,7 @@ export const UserProfileBody = ({
         isMyUser={isMyUser}
         canUpdate={canUpdate}
         canDelete={canDelete}
+        onRemove={onRemove}
       />
       <UserProfileBodySocialMedia
         userID={userID}

@@ -1,0 +1,10 @@
+mutation ADD_TEAM_TO_USERS( $usersIDs: [ID!]! $teamID: ID!){
+  addTeamToUsers(usersIDs: $usersIDs, teamID: $teamID){
+  	edges{
+      node{
+        id
+        firstName
+      }
+    }
+  }
+}

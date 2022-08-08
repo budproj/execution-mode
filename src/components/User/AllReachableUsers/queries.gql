@@ -16,10 +16,13 @@ query GET_USER_LIST {
             node {
               id
               name
+              owner {
+                id
             }
           }
         }
       }
     }
   }
+}
 }

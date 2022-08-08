@@ -6,7 +6,7 @@ import { OptionGroup, SearchableListContext, SearchOption } from './context'
 type SearchableListOptionGroupProperties = {
   id: string
   icon: JSX.Element
-  children: JSX.Element
+  children: JSX.Element | JSX.Element[]
 }
 
 type SearchableListOptionProperties = {

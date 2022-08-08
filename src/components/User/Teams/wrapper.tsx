@@ -13,10 +13,11 @@ import { AddUserTeam } from './add-team'
 type UserTeamsProperties = {
   userID?: string
   isEditable?: boolean
+  onRemove?: () => void
   isLoaded?: boolean
 }
 
-export const UserTeams = ({ userID, isLoaded, isEditable }: UserTeamsProperties) => {
+export const UserTeams = ({ userID, isLoaded, isEditable, onRemove }: UserTeamsProperties) => {
   const user = useRecoilValue(userAtomFamily(userID))
   const [teams, setTeamEdges] = useConnectionEdges<Team>()
 
@@ -28,7 +29,13 @@ export const UserTeams = ({ userID, isLoaded, isEditable }: UserTeamsProperties)
 
   return (
     <HStack>
-      <UserTeamTags isEditable={isEditable} userID={userID} isLoaded={isLoaded} teams={teams} />
+      <UserTeamTags
+        isEditable={isEditable}
+        userID={userID}
+        isLoaded={isLoaded}
+        teams={teams}
+        onRemove={onRemove}
+      />
       {isEditable && <AddUserTeam teamIDsBlacklist={teamIDs} userID={userID} />}
     </HStack>
   )

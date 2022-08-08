@@ -18,12 +18,14 @@ type UsersInContextProperties = {
   hasUserCard?: boolean
   onSelect?: (userID: string) => void | Promise<void>
   hasMenu?: boolean
+  isSelectingMultiples?: boolean
 }
 
 export const UsersInContext = ({
   avatarSubtitleType,
   isLoading,
   hasUserCard,
+  isSelectingMultiples,
   onSelect,
   hasMenu,
 }: UsersInContextProperties) => {
@@ -42,6 +44,7 @@ export const UsersInContext = ({
     <UserList
       users={items}
       showUserCard={hasUserCard}
+      selectMultiples={isSelectingMultiples}
       isLoading={isLoading}
       avatarSubtitleType={avatarSubtitleType}
       hasMenu={hasMenu}

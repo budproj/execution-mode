@@ -13,14 +13,16 @@ import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
 import { User } from '../types'
 
 import messages from './messages'
+import { SelectMultiplesUsers } from './select-multiples'
 import { UserListSkeleton } from './skeleton'
 
-interface UserListProperties {
+export interface UserListProperties {
   users: User[]
   onUserClick?: (userID: string) => void | Promise<void>
   avatarSubtitleType?: NamedAvatarSubtitleType
   isLoading?: boolean
   showUserCard?: boolean
+  selectMultiples?: boolean
   emptyState?: ReactElement
   hasMenu?: boolean
 }
@@ -31,6 +33,7 @@ export const UserList = ({
   avatarSubtitleType,
   showUserCard,
   isLoading,
+  selectMultiples,
   emptyState,
   hasMenu = false,
 }: UserListProperties) => {
@@ -51,6 +54,14 @@ export const UserList = ({
         <Stack spacing={4}>
           {isLoading ? (
             <UserListSkeleton />
+          ) : selectMultiples ? (
+            onUserClick && (
+              <SelectMultiplesUsers
+                users={users}
+                avatarSubtitleType={avatarSubtitleType}
+                onSelectUser={onUserClick}
+              />
+            )
           ) : users.length > 0 ? (
             hasMenu ? (
               users.map((user) => (
