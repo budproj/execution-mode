@@ -32,7 +32,7 @@ const TeamCard = ({ id, openModal }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
   const [users, setUserEdges] = useConnectionEdges<User>()
-  const [shadowStrokeLight] = useToken('shadows', ['with-stroke.light'])
+  const [shadowStrokeLight] = useToken('shadows', ['for-background.light'])
 
   const isCompany = Boolean(team?.isCompany)
   const isLoaded = Boolean(team)
