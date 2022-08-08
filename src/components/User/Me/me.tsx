@@ -29,6 +29,7 @@ export interface UserNamedAvatarDataQuery {
   email: string
   gender: USER_GENDER
   role: string
+  isTeamLeader: boolean
   createdAt: string
   companies: GraphQLConnection<Team>
   teams: GraphQLConnection<Team>
