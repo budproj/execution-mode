@@ -704,7 +704,7 @@
     "description": "This is the label that goes on our user account settings page, at the fourth field to update the user informations"
   },
   "bdYpnS": {
-    "defaultMessage": "CANCELAR",
+    "defaultMessage": "CANCEL",
     "description": "This button is used to close the modal to add team members."
   },
   "BeFobb": {
@@ -3160,7 +3160,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-08-08T14:10:12Z",
+    "defaultMessage": "2022-08-08T20:57:49Z",
     "description": null
   }
 }

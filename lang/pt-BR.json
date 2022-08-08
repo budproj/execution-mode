@@ -1708,7 +1708,7 @@
     "description": "This is the description of the modal that is used to add members to a team."
   },
   "lhIu1G": {
-    "defaultMessage": "£ 100",
+    "defaultMessage": "€ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin GBP format"
   },
   "LhZDKa": {
@@ -3160,7 +3160,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-08-08T14:10:47Z",
+    "defaultMessage": "2022-08-08T20:58:21Z",
     "description": null
   }
 }
