@@ -9,3 +9,15 @@ mutation CREATE_TEAM($name: String!, $description: String!, $gender: TeamGender!
     id
   }
 }
+
+mutation UPDATE_TEAM($id: ID!,$name: String, $description: String, $ownerId: ID, $parentId: ID) {
+  updateTeam(id: $id, 
+    data: {
+      description: $description, 
+      name: $name, 
+      ownerId: $ownerId, 
+      parentId: $parentId
+    }) {
+    id
+  }
+}

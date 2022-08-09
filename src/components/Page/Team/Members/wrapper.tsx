@@ -45,6 +45,8 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
       isLoaded={isLoaded}
       members={teamMembers}
       hasAddMembersPermission={hasAddMembersPermission}
+      teamLeader={team?.owner}
+      usersIdsBlacklist={team?.owner ? [team?.owner.id] : []}
     />
   )
 }

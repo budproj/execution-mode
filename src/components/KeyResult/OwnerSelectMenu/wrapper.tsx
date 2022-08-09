@@ -11,6 +11,7 @@ interface KeyResultOwnerSelectMenuProperties {
   onChange?: (newOwnerID: string) => void
   avatarSubtitleType?: NamedAvatarSubtitleType
   placement?: MenuProps['placement']
+  isLazy?: boolean
 }
 
 export const KeyResultOwnerSelectMenu = ({
@@ -18,6 +19,7 @@ export const KeyResultOwnerSelectMenu = ({
   onChange,
   avatarSubtitleType,
   placement,
+  ...rest
 }: KeyResultOwnerSelectMenuProperties) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -55,6 +57,7 @@ export const KeyResultOwnerSelectMenu = ({
       onOpen={handleOpen}
       onClose={handleClose}
       onChange={handleChange}
+      {...rest}
     >
       <Box p={4} maxH="full" h="full">
         <AllReachableUsers avatarSubtitleType={avatarSubtitleType} onSelect={handleChange} />

@@ -24,6 +24,8 @@ export interface SelectUserFromListProperties {
   showUserCard?: boolean
   emptyStateTitle?: MessageDescriptor
   hasMenu?: boolean
+  teamLeader?: User
+  usersIdsBlacklist?: string[]
 }
 
 export const SelectUserFromListWrapper = ({
@@ -38,6 +40,8 @@ export const SelectUserFromListWrapper = ({
   hasCreateNewUserPermission,
   emptyStateTitle,
   hasMenu,
+  teamLeader,
+  usersIdsBlacklist,
 }: SelectUserFromListProperties) => {
   const [isCreateSidebarOpen, setIsCreateSidebarOpen] = useState(false)
   const [isAddToTeamModalOpen, setIsAddToTeamModalOpen] = useState(false)
@@ -76,6 +80,8 @@ export const SelectUserFromListWrapper = ({
         avatarSubtitleType={avatarSubtitleType}
         emptyStateTitle={emptyStateTitle}
         hasMenu={hasMenu}
+        teamLeader={teamLeader}
+        usersIdsBlacklist={usersIdsBlacklist}
         isSelectingMultiples={isSelectingMultiples}
         onCreateStart={handleCreateSidebarOpen}
         onAddUserToTeam={handleAddToTeamModalOpen}

@@ -63,7 +63,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
           <Stack direction="row">
             <TeamHeader isLoaded={called && !loading} team={data?.team} />
             <Box w="28rem">
-              <MenuHeader teamId={teamId} />
+              <MenuHeader team={data?.team} teamId={teamId} />
             </Box>
           </Stack>
 

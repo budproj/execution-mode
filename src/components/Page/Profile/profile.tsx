@@ -6,7 +6,7 @@ import { PageMetaHead } from 'src/components/Base'
 import { KeyResultInsertDrawer } from 'src/components/KeyResult/InsertDrawer/wrapper'
 import { IndividualOkrPage } from 'src/components/Objective/IndividualPlan'
 import { DetailedHeader } from 'src/components/User/DetailedHeader'
-import { useGetMyTasks } from 'src/components/User/hooks'
+import { useGetUserDetails } from 'src/components/User/hooks'
 import { keyResultTypeAtom } from 'src/state/recoil/key-result'
 import { KeyResultType } from 'src/state/recoil/key-result/key-result-type'
 
@@ -19,7 +19,7 @@ interface ProfilePageProperties {
 
 const ProfilePage = ({ userId }: ProfilePageProperties) => {
   const intl = useIntl()
-  const { data: userData, loading: isUserLoading } = useGetMyTasks(userId)
+  const { data: userData, loading: isUserLoading } = useGetUserDetails(userId)
   const keyResultType = useRecoilValue(keyResultTypeAtom)
 
   return (

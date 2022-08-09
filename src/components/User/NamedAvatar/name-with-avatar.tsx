@@ -11,6 +11,8 @@ import {
   SkeletonCircle,
   useToken,
   Box,
+  Tag,
+  TagLabel,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { ReactElement, RefObject, useState } from 'react'
@@ -19,6 +21,7 @@ import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { IntlLink } from 'src/components/Base'
+import CrownIcon from 'src/components/Icon/Crown'
 import SwitchIcon from 'src/components/Icon/Switch'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -43,6 +46,7 @@ interface NameWithAvatarProperties {
   subtitle?: string
   children?: string | ReactElement
   redirectToProfile?: boolean
+  isTeamLeader?: boolean
   onMouseEnter?: () => void
   onMouseLeave?: () => void
   onClick?: () => void
@@ -89,6 +93,7 @@ export const NameWithAvatar = forwardRef(
       subtitle,
       onClick,
       redirectToProfile,
+      isTeamLeader,
       children,
     }: NameWithAvatarProperties,
     reference?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null,
@@ -153,6 +158,22 @@ export const NameWithAvatar = forwardRef(
                   <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
                     <StyledText fontSize="lg" color={nameColor} brandColor={brand500}>
                       {user?.fullName}
+                      {isTeamLeader ? (
+                        <Tag
+                          size="md"
+                          variant="subtle"
+                          color="new-gray.600"
+                          bg="new-gray.200"
+                          gap="5px"
+                          marginLeft="10px"
+                        >
+                          <CrownIcon
+                            desc={intl.formatMessage(messages.crownIconDesc)}
+                            fill="new-gray.600"
+                          />
+                          <TagLabel>{intl.formatMessage(messages.leaderTitle)}</TagLabel>
+                        </Tag>
+                      ) : undefined}
                     </StyledText>
                   </IntlLink>
                 ) : (

@@ -1,1 +1,1 @@
-export { useGetMyTasks } from './get-user-details'
+export { useGetUserDetails } from './get-user-details'

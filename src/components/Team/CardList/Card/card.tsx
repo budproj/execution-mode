@@ -1,4 +1,5 @@
-import { Box, Flex, Heading, Skeleton, SkeletonText, Text, Stack } from '@chakra-ui/react'
+import { Box, Flex, Heading, Skeleton, SkeletonText, Text, Stack, useToken } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -11,16 +12,27 @@ import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
+import { MenuCard } from './MenuCard'
 import messages from './messages'
 
 export interface TeamCardProperties {
   id?: Team['id']
+  openModal?: () => void
 }
 
-const TeamCard = ({ id }: TeamCardProperties) => {
+const HoverableWrapper = styled(Box)`
+  &:hover {
+    box-shadow: ${({ shadowStyle }) => shadowStyle};
+    transform: scale(1.03);
+    z-index: 1;
+  }
+`
+
+const TeamCard = ({ id, openModal }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
   const [users, setUserEdges] = useConnectionEdges<User>()
+  const [shadowStrokeLight] = useToken('shadows', ['for-background.light'])
 
   const isCompany = Boolean(team?.isCompany)
   const isLoaded = Boolean(team)
@@ -31,15 +43,23 @@ const TeamCard = ({ id }: TeamCardProperties) => {
   }, [team, setUserEdges])
 
   return (
-    <IntlLink href={id ?? '#'}>
-      <Box
-        bg="black.50"
-        borderRadius={16}
-        py={12}
-        px={10}
-        transition="0.4s all ease-out"
-        _hover={{ bg: 'white', boxShadow: 'with-stroke.light', transform: 'scale(1.03)' }}
-      >
+    <HoverableWrapper
+      position="relative"
+      transition="0.4s all ease-out"
+      shadowStyle={shadowStrokeLight}
+      bg="white"
+      borderRadius={16}
+      py={12}
+      px={10}
+    >
+      <MenuCard
+        position="absolute"
+        top="20px"
+        right="20px"
+        teamId={team?.id}
+        openModal={openModal}
+      />
+      <IntlLink href={id ?? '#'}>
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
           <Flex flexGrow={1} direction="column" justifyContent="flex-end">
             <Box minH={8}>
@@ -82,8 +102,8 @@ const TeamCard = ({ id }: TeamCardProperties) => {
             <DynamicAvatarGroup users={users} isLoaded={isLoaded} />
           </Box>
         </Flex>
-      </Box>
-    </IntlLink>
+      </IntlLink>
+    </HoverableWrapper>
   )
 }
 

@@ -1,4 +1,4 @@
-import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
+import { Input, InputGroup, InputLeftElement, StyleProps } from '@chakra-ui/react'
 import React, { ChangeEvent } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -6,12 +6,13 @@ import SearchIcon from 'src/components/Icon/Search'
 
 import messages from './messages'
 
-export interface SearchProperties {
+export interface SearchProperties extends StyleProps {
+  inputBGColor?: string
   placeholder?: string
   onSearch?: (searchValue: string) => void
 }
 
-export const SearchBar = ({ placeholder, onSearch }: SearchProperties) => {
+export const SearchBar = ({ placeholder, onSearch, inputBGColor }: SearchProperties) => {
   const intl = useIntl()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +28,7 @@ export const SearchBar = ({ placeholder, onSearch }: SearchProperties) => {
       </InputLeftElement>
       <Input
         variant="solid"
+        bgColor={inputBGColor}
         placeholder={placeholder ?? intl.formatMessage(messages.defaultSearchPlaceholder)}
         onChange={handleChange}
       />

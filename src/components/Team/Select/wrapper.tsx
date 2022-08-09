@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client'
-import { MenuItem } from '@chakra-ui/react'
+import { MenuItemOption } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 import { GraphQLConnection } from 'src/components/types'
@@ -21,6 +21,7 @@ type TeamTagListProperties = {
   teams?: TeamData[]
   teamIDsBlacklist?: string[]
   onSelect: (teamID: string, teamName?: string) => () => void
+  emptyLabel?: string
 }
 
 type GetReachableTeamsResponse = {
@@ -33,6 +34,7 @@ export const TeamSelect = ({
   teams,
   teamIDsBlacklist,
   onSelect,
+  emptyLabel,
 }: TeamTagListProperties) => {
   const [currentTeams, setCurrentTeams] = useState<TeamData[]>([])
   const [isLoaded, setIsLoaded] = useState(false)
@@ -49,6 +51,9 @@ export const TeamSelect = ({
   const filteredTeams = whitelistedTeams.filter((team) =>
     filter ? team.name.toLowerCase().includes(filter.toLowerCase()) : true,
   )
+  const teamsWithEmptyLabel = emptyLabel
+    ? [{ id: '', name: emptyLabel }, ...filteredTeams]
+    : filteredTeams
 
   useEffect(() => {
     if (teams) {
@@ -70,16 +75,16 @@ export const TeamSelect = ({
 
   return (
     <StyledTeamSelectWrapper hasScroll={hasScroll}>
-      {filteredTeams.map((team) => (
-        <MenuItem
+      {teamsWithEmptyLabel.map((team) => (
+        <MenuItemOption
           key={team.id}
-          py={4}
-          pl={0}
           justifyContent="flex-start"
           h="full"
           fontWeight={400}
           color="new-gray.800"
           borderBottomWidth={0}
+          // eslint-disable-next-line unicorn/no-null
+          icon={null}
           _hover={{ color: 'brand.500' }}
           _focus={{ color: 'brand.500' }}
           _last={{ pb: 2 }}
@@ -87,7 +92,7 @@ export const TeamSelect = ({
           onClick={onSelect(team.id, team.name)}
         >
           {team.name}
-        </MenuItem>
+        </MenuItemOption>
       ))}
     </StyledTeamSelectWrapper>
   )
