@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Divider, PopoverBody, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import { isAfter, startOfWeek, isBefore } from 'date-fns'
+import { startOfWeek, isBefore } from 'date-fns'
 import React, { useMemo, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -13,6 +13,7 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
+import { pendingRoutinesQueryAtom } from 'src/state/recoil/routine/routine-query'
 
 import CheckInNotifications from '../CheckInNotifications'
 import { NotificationsList } from '../NotificationsList'
@@ -62,7 +63,8 @@ interface NotificationsModalProperties {
 
 const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) => {
   const intl = useIntl()
-  const { dispatch: dispatchTabCheckInClick } = useEvent(EventType.TAB_CHECKIN_CLICK)
+  const routinesValue = useRecoilValue(pendingRoutinesQueryAtom)
+  const { dispatch: dispatchTabCheckInClick } = useEvent(EventType.TAB_THIS_WEEK_CLICK)
   const { dispatch: dispatchTabNotificationClick } = useEvent(EventType.TAB_NOTIFICATION_CLICK)
 
   const notifications = useRecoilValue(listNotificationsAtom)
@@ -103,19 +105,6 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
       const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
 
       return isBefore(date, startOfTheWeek)
-    })
-  }, [keyResults])
-
-  const keyResultsUpToDate = useMemo(() => {
-    return keyResults.filter((keyResult) => {
-      if (!keyResult?.status?.latestCheckIn) {
-        return false
-      }
-
-      const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
-      const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
-
-      return isAfter(date, startOfTheWeek)
     })
   }, [keyResults])
 
@@ -162,7 +151,7 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
             paddingBottom="17px"
             onClick={() => dispatchTabCheckInClick({})}
           >
-            {intl.formatMessage(messages.checkInsTabOptions)}
+            {intl.formatMessage(messages.thisWeekTabOptions)}
             {checkinCount > 0 && <NotificationBadge notificationCount={checkinCount} />}
           </StyledTab>
         </TabList>
@@ -175,8 +164,8 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
           <ScrollablePanel maxH="70vh" width={480}>
             <CheckInNotifications
               userId={userId}
-              keyResultsUpToDate={keyResultsUpToDate}
               keyResultsWithNoCheckInThisWeek={keyResultsWithNoCheckInThisWeek}
+              routines={routinesValue}
             />
           </ScrollablePanel>
         </TabPanels>

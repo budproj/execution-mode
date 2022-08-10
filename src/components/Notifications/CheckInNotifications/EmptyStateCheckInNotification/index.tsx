@@ -9,8 +9,11 @@ const EmptyStateCheckInNotifications = () => {
   return (
     <Box padding="50px 0px">
       <EmptyState
-        imageKey="people-with-pages"
-        labelMessage={messages.emptyStateCheckInNotifications}
+        imageKey="zen-girl"
+        labelMessage={messages.emptyStateThisWeekNotifications}
+        headerMessage={messages.emptyStateThisWeekNotificationsTitle}
+        maxW="300px"
+        fontSize="14px"
       />
     </Box>
   )

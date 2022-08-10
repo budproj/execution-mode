@@ -29,6 +29,7 @@ export const imageKeys = {
   'empty-personal-okrs-tab': '/images/empty-personal-okrs-tab.png',
   'notifications-empty-state': '/images/notifications-empty-state.png',
   'no-more-notifications': '/images/no-more-notifications-empty-state.png',
+  'zen-girl': '/images/zen-girl.png',
 }
 
 const imageAlts = {
@@ -41,6 +42,7 @@ const imageAlts = {
   'empty-personal-okrs-tab': messages.emptyPersonalObjectives,
   'notifications-empty-state': messages.emptyNotificationsList,
   'no-more-notifications': messages.noMoreNotificationsToListing,
+  'zen-girl': messages.zenGirl,
 }
 
 const EmptyState = ({
@@ -91,7 +93,6 @@ const EmptyState = ({
         color="new-gray.700"
         textAlign="center"
         width={textWidth ?? undefined}
-        mt={2}
       >
         {intl.formatMessage(labelMessage, messageTranslationOptions)}
       </Text>
