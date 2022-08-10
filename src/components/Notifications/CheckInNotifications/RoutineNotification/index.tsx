@@ -24,8 +24,6 @@ const RoutineNotification = ({ routine }: RoutineNotificationProperties) => {
 
   const intl = useIntl()
 
-  const updateTextColor = routine.isOutdated ? 'red.500' : 'gray.300'
-
   return (
     <>
       <Divider borderColor="new-gray.400" />
@@ -43,19 +41,11 @@ const RoutineNotification = ({ routine }: RoutineNotificationProperties) => {
             {routine.name}
           </Text>
           <Flex alignItems="center">
-            <UpdateIcon
-              isFilled
-              isOutdated={routine.isOutdated}
-              updateTextColor={updateTextColor}
-            />
+            <UpdateIcon isFilled isOutdated updateTextColor="red.500" />
             <LastUpdateText
-              color={updateTextColor}
+              color="red.500"
               lineHeight="normal"
-              customMessage={
-                routine.isOutdated
-                  ? intl.formatMessage(messages.answerRoutineOutdatedText)
-                  : intl.formatMessage(messages.answerRoutineUpToDateText)
-              }
+              customMessage={intl.formatMessage(messages.answerRoutineOutdatedText)}
             />
           </Flex>
         </Box>

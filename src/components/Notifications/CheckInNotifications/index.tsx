@@ -31,16 +31,18 @@ const CheckInNotifications = ({
 
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 
+  const filteredRoutines = routines.filter((routine) => routine.isOutdated)
+
   return (
     <Box>
       {keyResultsWithNoCheckInThisWeek.length > 0 ? (
         <>
-          {routines.length > 0 && (
+          {filteredRoutines.length > 0 && (
             <Box>
               <Text fontWeight="500" color="new-gray.800" pb={1} pt={7} textTransform="uppercase">
                 {intl.formatMessage(messages.routineTitle)}
               </Text>
-              {routines.map((routine) => (
+              {filteredRoutines.map((routine) => (
                 <RoutineNotification key={routine.id} routine={routine} />
               ))}
             </Box>
