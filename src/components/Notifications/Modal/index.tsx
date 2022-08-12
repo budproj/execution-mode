@@ -16,7 +16,9 @@ import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/r
 import { pendingRoutinesQueryAtom } from 'src/state/recoil/routine/routine-query'
 
 import CheckInNotifications from '../CheckInNotifications'
+import EmptyStateCheckInNotifications from '../CheckInNotifications/EmptyStateCheckInNotification'
 import { NotificationsList } from '../NotificationsList'
+import RoutineNotification from '../RoutineNotification'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -162,11 +164,19 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
             {isOpen && <NotificationsList />}
           </ScrollablePanel>
           <ScrollablePanel maxH="70vh" width={480}>
-            <CheckInNotifications
-              userId={userId}
-              keyResultsWithNoCheckInThisWeek={keyResultsWithNoCheckInThisWeek}
-              routines={routinesValue}
-            />
+            {routinesValue.length > 0 || keyResultsWithNoCheckInThisWeek.length > 0 ? (
+              <>
+                {routinesValue.length > 0 && <RoutineNotification routines={routinesValue} />}
+                {keyResultsWithNoCheckInThisWeek.length > 0 && (
+                  <CheckInNotifications
+                    userId={userId}
+                    keyResultsWithNoCheckInThisWeek={keyResultsWithNoCheckInThisWeek}
+                  />
+                )}
+              </>
+            ) : (
+              <EmptyStateCheckInNotifications />
+            )}
           </ScrollablePanel>
         </TabPanels>
       </Tabs>

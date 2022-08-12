@@ -11,15 +11,18 @@ import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import messages from './messages'
 
-interface RoutineNotificationProperties {
+interface RoutineComponentProperties {
   routine: {
     id: string
     name: string
     isOutdated: boolean
+    status: {
+      latestCheckIn: string
+    }
   }
 }
 
-const RoutineNotification = ({ routine }: RoutineNotificationProperties) => {
+const RoutineComponent = ({ routine }: RoutineComponentProperties) => {
   const { dispatch } = useEvent(EventType.NOTIFICATION_ROUTINE_CLICK)
 
   const intl = useIntl()
@@ -66,4 +69,4 @@ const RoutineNotification = ({ routine }: RoutineNotificationProperties) => {
   )
 }
 
-export default RoutineNotification
+export default RoutineComponent

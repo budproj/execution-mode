@@ -5,7 +5,7 @@ import { EmptyState } from 'src/components/Base'
 
 import messages from './messages'
 
-const EmptyStateCheckInNotifications = () => {
+const EmptyStateThisWeekNotifications = () => {
   return (
     <Box padding="50px 0px">
       <EmptyState
@@ -19,4 +19,4 @@ const EmptyStateCheckInNotifications = () => {
   )
 }
 
-export default EmptyStateCheckInNotifications
+export default EmptyStateThisWeekNotifications
