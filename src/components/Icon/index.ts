@@ -6,6 +6,8 @@ export { default as ChevronDownCircleIcon } from './ChevronDownCircle'
 
 export { default as CommentIcon } from './Comment'
 
+export { default as OpenArrowUp } from './OpenArrowUp'
+
 export { default as PauseIcon } from './Pause'
 
 export { default as TaggedIcon } from './Tagged'
