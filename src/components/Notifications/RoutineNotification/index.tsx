@@ -2,18 +2,13 @@ import { Text, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { Routine } from 'src/state/recoil/routine/routine-query'
+
 import RoutineComponent from './RoutineComponent'
 import messages from './messages'
 
 interface RoutineNotificationProperties {
-  routines: Array<{
-    id: string
-    name: string
-    isOutdated: boolean
-    status: {
-      latestCheckIn: string
-    }
-  }>
+  routines: Routine[]
 }
 
 const RoutineNotification = ({ routines }: RoutineNotificationProperties) => {

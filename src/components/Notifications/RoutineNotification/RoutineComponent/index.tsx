@@ -4,22 +4,16 @@ import { useIntl } from 'react-intl'
 
 import { Button } from 'src/components/Base/Button'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
-import { Calendar } from 'src/components/Icon'
+import { CalendarColored } from 'src/components/Icon'
 import { UpdateIcon } from 'src/components/KeyResult/List/Body/Columns/KeyResult/update-icon'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { Routine } from 'src/state/recoil/routine/routine-query'
 
 import messages from './messages'
 
 interface RoutineComponentProperties {
-  routine: {
-    id: string
-    name: string
-    isOutdated: boolean
-    status: {
-      latestCheckIn: string
-    }
-  }
+  routine: Routine
 }
 
 const RoutineComponent = ({ routine }: RoutineComponentProperties) => {
@@ -27,12 +21,17 @@ const RoutineComponent = ({ routine }: RoutineComponentProperties) => {
 
   const intl = useIntl()
 
+  const isOutdatedText =
+    routine.isOutdated >= 1
+      ? intl.formatMessage(messages.answerRoutineOutdatedText)
+      : intl.formatMessage(messages.answerRoutineTodayText)
+
   return (
     <>
       <Divider borderColor="new-gray.400" />
       <Flex padding="18px 0px" alignItems="center">
         <Box marginRight="20px" background="red.100" padding={2} borderRadius="50%" display="flex">
-          <Calendar
+          <CalendarColored
             desc={intl.formatMessage(messages.calendarIconDescription)}
             width="25px"
             height="25px"
@@ -45,11 +44,7 @@ const RoutineComponent = ({ routine }: RoutineComponentProperties) => {
           </Text>
           <Flex alignItems="center">
             <UpdateIcon isFilled isOutdated updateTextColor="red.500" />
-            <LastUpdateText
-              color="red.500"
-              lineHeight="normal"
-              customMessage={intl.formatMessage(messages.answerRoutineOutdatedText)}
-            />
+            <LastUpdateText color="red.500" lineHeight="normal" customMessage={isOutdatedText} />
           </Flex>
         </Box>
         <Box>

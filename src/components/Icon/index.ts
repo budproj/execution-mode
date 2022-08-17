@@ -22,6 +22,8 @@ export { default as Bookmark } from './Bookmark'
 
 export { default as Calendar } from './Calendar'
 
+export { default as CalendarColored } from './CalendarColored'
+
 export { default as Check } from './Check'
 
 export { default as ChevronDown } from './ChevronDown'

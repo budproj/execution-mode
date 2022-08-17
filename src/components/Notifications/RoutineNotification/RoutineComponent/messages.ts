@@ -4,6 +4,7 @@ type ExploreTeamPageMessage =
   | 'calendarIconDescription'
   | 'answerRoutineButton'
   | 'answerRoutineOutdatedText'
+  | 'answerRoutineTodayText'
 
 export default defineMessages<ExploreTeamPageMessage>({
   calendarIconDescription: {
@@ -16,9 +17,16 @@ export default defineMessages<ExploreTeamPageMessage>({
     id: 'D22TnL',
     description: 'The text that goes in the answer routine button',
   },
-  answerRoutineOutdatedText: {
+  answerRoutineTodayText: {
     defaultMessage: 'Responder hoje',
-    id: 'flwVUo',
-    description: 'The outdated text that goes in update text, below the routine title.',
+    id: 'chwy/J',
+    description:
+      'The text that goes in the update text, below the routine title, when the routine is up to date.',
+  },
+  answerRoutineOutdatedText: {
+    defaultMessage: 'Sem resposta na semana passada',
+    id: 'GnbGX+',
+    description:
+      'The outdated text that goes in the update text, below the routine title, when the routine is outdated.',
   },
 })
