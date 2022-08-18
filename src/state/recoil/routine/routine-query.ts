@@ -15,15 +15,15 @@ const routines = [
   {
     id: '123',
     name: 'Restrospectiva da Semana',
-    isOutdated: 3,
+    isOutdated: 0,
     status: {
       latestReply: '2022-09-12 10:00:00',
     },
   },
   {
     id: '321',
-    name: 'Dua lipa rocks',
-    isOutdated: 0,
+    name: 'Restrospectiva da Semana Passada',
+    isOutdated: 3,
     status: {
       latestReply: '2022-09-12 10:00:00',
     },
