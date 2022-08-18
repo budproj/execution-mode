@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type NotificationsModalMessages = 'notificationsTabOptions' | 'checkInsTabOptions'
+type NotificationsModalMessages = 'notificationsTabOptions' | 'thisWeekTabOptions'
 
 export default defineMessages<NotificationsModalMessages>({
   notificationsTabOptions: {
@@ -10,10 +10,10 @@ export default defineMessages<NotificationsModalMessages>({
       'This message appears as the title of the Notifications option in the notifications modal.',
   },
 
-  checkInsTabOptions: {
-    defaultMessage: 'Check-in',
-    id: 'lpsQj3',
+  thisWeekTabOptions: {
+    defaultMessage: 'Minha semana',
+    id: 'ICcB35',
     description:
-      'This message appears as the title of the Check-ins option in the notifications modal.',
+      'This message appears as the title of the Check-ins and routine option in the notifications modal.',
   },
 })
