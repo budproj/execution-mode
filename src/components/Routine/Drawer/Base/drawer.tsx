@@ -8,9 +8,20 @@ import {
   DrawerFooter,
   Flex,
 } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React from 'react'
 
-import { OpenArrowUp } from 'src/components/Icon'
+import { OpenArrowDown, OpenArrowUp } from 'src/components/Icon'
+
+const StyledButton = styled(Button)`
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+  width: '38px';
+  height: '32px';
+  border-radius: '4px';
+  background-color: '#6F6EFF';
+`
 
 interface RoutineDrawerProperties {
   children?: JSX.Element
@@ -59,18 +70,13 @@ const RoutineDrawer = ({
           </Flex>
         </DrawerBody>
         <DrawerFooter>
-          <Box>
-            <Button
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-              width="42px"
-              height="32px"
-              borderRadius={4}
-              bg="brand.500"
-            >
+          <Box display="flex" gap={1}>
+            <StyledButton>
               <OpenArrowUp desc="arrow-up" />
-            </Button>
+            </StyledButton>
+            <StyledButton>
+              <OpenArrowDown desc="arrow-down" />
+            </StyledButton>
           </Box>
         </DrawerFooter>
       </DrawerContent>
