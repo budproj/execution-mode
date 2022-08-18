@@ -4,6 +4,7 @@ import { MessageDescriptor } from 'react-intl'
 import { SearchableListContext } from 'src/components/Base/SearchableList/context'
 
 import { NamedAvatarSubtitleType } from '../../NamedAvatar/types'
+import { User } from '../../types'
 
 import { SelectUserFromListEmptyState } from './empty-state'
 import { SelectUserFromListOptions } from './options'
@@ -20,6 +21,8 @@ type SelectFromListContentProperties = {
   avatarSubtitleType?: NamedAvatarSubtitleType
   hasMenu?: boolean
   onSelect?: (userID: string) => void | Promise<void>
+  teamLeader?: User
+  usersIdsBlacklist?: string[]
 }
 
 export const SelectUserFromListContent = ({
@@ -33,6 +36,8 @@ export const SelectUserFromListContent = ({
   onSelect,
   emptyStateTitle,
   hasMenu,
+  teamLeader,
+  usersIdsBlacklist,
 }: SelectFromListContentProperties) => {
   const { items } = useContext(SearchableListContext)
 
@@ -49,6 +54,8 @@ export const SelectUserFromListContent = ({
 
       <UsersInContext
         hasUserCard={hasUserCard}
+        teamLeader={teamLeader}
+        usersIdsBlacklist={usersIdsBlacklist}
         isLoading={isLoading}
         isSelectingMultiples={isSelectingMultiples}
         hasMenu={hasMenu}

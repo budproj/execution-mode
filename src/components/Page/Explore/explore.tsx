@@ -1,11 +1,12 @@
 import { Box, Stack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import PageContent from 'src/components/Base/PageContent'
 import TeamCardList from 'src/components/Team/CardList'
 import SaveTeamModal from 'src/components/Team/SaveTeamModal'
+import { isEditTeamModalOpenAtom } from 'src/state/recoil/team'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -24,12 +25,17 @@ const ExplorePage = () => {
   const myID = useRecoilValue(meAtom)
   const user = useRecoilValue(userAtomFamily(myID))
   const teamId = user?.companies?.edges[0]?.node.id
+  const [isEditTeamModalOpen, setIsEditTeamModalOpen] = useRecoilState(isEditTeamModalOpenAtom)
 
   const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
+  const closeModal = () => {
+    setIsModalOpen(false)
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    setIsEditTeamModalOpen(undefined)
+  }
 
   return (
-    <PageContent>
+    <PageContent bg="new-gray.50">
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
 
       <PageHeader>
@@ -41,8 +47,13 @@ const ExplorePage = () => {
         </Stack>
       </PageHeader>
 
-      <TeamCardList teamFilter={teamFilter} />
-      <SaveTeamModal teamId={teamId} isOpen={isModalOpen} onClose={closeModal} />
+      <TeamCardList teamFilter={teamFilter} openModal={openModal} />
+      <SaveTeamModal
+        teamId={isEditTeamModalOpen ?? teamId}
+        isEditing={Boolean(isEditTeamModalOpen)}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </PageContent>
   )
 }

@@ -26,6 +26,8 @@ export interface Team extends GraphQLNode {
   supportObjectives?: GraphQLConnection<Objective>
   allObjectives?: GraphQLConnection<Objective>
   keyResults?: GraphQLConnection<KeyResult>
+  ownerId: string
+  parentId: string
 }
 
 export interface HealthConfidenceQuantities {

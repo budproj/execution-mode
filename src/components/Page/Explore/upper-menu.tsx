@@ -44,6 +44,7 @@ const UpperMenu = ({ openModal, setTeamFilter, teamId }: UpperMenuProperties) =>
     <Stack direction="row" justifyContent="flex-end" marginTop="0.8em">
       <Box w="15rem">
         <SearchBar
+          inputBGColor="new-gray.300"
           placeholder={intl.formatMessage(messages.searchPlaceholder)}
           onSearch={setTeamFilter}
         />
