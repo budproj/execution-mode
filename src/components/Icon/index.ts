@@ -4,6 +4,8 @@ export { default as CheckedIcon } from './Checked/checked'
 
 export { default as ChevronDownCircleIcon } from './ChevronDownCircle'
 
+export { default as CircleArrowRight } from './CircleArrowRight'
+
 export { default as CommentIcon } from './Comment'
 
 export { default as PauseIcon } from './Pause'
