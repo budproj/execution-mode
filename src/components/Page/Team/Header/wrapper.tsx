@@ -28,19 +28,17 @@ export const TeamHeader = ({ team, isLoaded, showProgress = true }: TeamHeaderPr
         </Text>
       </SkeletonText>
 
-      {showProgress && (
-        <Stack direction="row" spacing="8" pt="4" alignItems="center">
-          <Skeleton isLoaded={isLoaded} w="full" pb={isLoaded ? '2' : 0}>
-            <SliderWithFilledTrack value={progress} />
-          </Skeleton>
+      <Stack direction="row" spacing="8" pt="4" alignItems="center" opacity={showProgress ? 1 : 0}>
+        <Skeleton isLoaded={isLoaded} w="full" pb={isLoaded ? '2' : 0}>
+          <SliderWithFilledTrack value={progress} />
+        </Skeleton>
 
-          <Skeleton isLoaded={isLoaded}>
-            <Text color="brand.500" fontWeight={700}>
-              {intl.formatNumber(progress / 100, { style: 'percent' })}
-            </Text>
-          </Skeleton>
-        </Stack>
-      )}
+        <Skeleton isLoaded={isLoaded}>
+          <Text color="brand.500" fontWeight={700}>
+            {intl.formatNumber(progress / 100, { style: 'percent' })}
+          </Text>
+        </Skeleton>
+      </Stack>
     </PageHeader>
   )
 }
