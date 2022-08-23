@@ -1,78 +1,89 @@
-import { Box, List, ListItem, Stack, Text } from '@chakra-ui/react'
-import styled from '@emotion/styled'
-import React from 'react'
+import { HStack, Stack, Text, useRadioGroup, VStack } from '@chakra-ui/react'
+import React, { FormEvent, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 
-interface SatisfactionProperties {
-  question: string
+import RadioCard from 'src/components/Base/RadioButton/radio-card'
+import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routines/retrospective-showed-question'
+
+import SubmitAnswerButton from '../Base/submit-answer-button'
+
+import { RoutineQuestionProperties } from './types'
+
+interface SatisfactionProperties extends RoutineQuestionProperties {
+  indexRange?: number
 }
 
-const StyledListItem = styled(ListItem)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
+const NumericalScale = ({
+  question,
+  answer,
+  setAnswer,
+  indexRange = 5,
+  index,
+}: SatisfactionProperties) => {
+  const [selectedRadio, setSelectedRadio] = useState(answer)
+  const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
 
-  & div {
-    display: flex;
+  const options = [
+    { value: '1', desc: 'Pouco' },
+    { value: '2' },
+    { value: '3' },
+    { value: '4' },
+    { value: '5', desc: 'Muito' },
+  ]
 
-    border: 2px solid #b5c0db;
-    border-radius: 4px;
-
-    & p {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #e8eefc;
-      width: 33px;
-      height: 33px;
-      background-color: #525f7f;
-      font-size: 14px;
-      border-radius: 4px;
-      margin: 14px;
-    }
+  const afterQuestion = () => {
+    const afterQuestionIndex = Number(selectedRadio) <= indexRange ? 1 : 2
+    setShowedQuestion((actual) => actual + afterQuestionIndex)
   }
-`
 
-const NumericalScale = ({ question }: SatisfactionProperties) => {
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault()
+    if (setAnswer && selectedRadio) setAnswer(index, selectedRadio)
+    afterQuestion()
+  }
+
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: 'ROUTINES_NUMERICAL_SCALE_QUESTION',
+    defaultValue: selectedRadio,
+    onChange: setSelectedRadio,
+  })
+
+  const group = getRootProps()
+
   return (
-    <Stack gap={10}>
+    <Stack gap={10} maxW="fit-content">
       <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
         {question}
       </Text>
+      <form onSubmit={handleSubmit}>
+        <HStack display="flex" alignItems="flex-start" justifyContent="space-around" {...group}>
+          {options.map((option) => {
+            const { value, desc } = option
 
-      <List display="flex" alignItems="flex-start" justifyContent="space-between">
-        <StyledListItem>
-          <Box>
-            <Text>1</Text>
-          </Box>
-          <Text fontSize={18} color="new-gray.800">
-            Pouco
-          </Text>
-        </StyledListItem>
-        <StyledListItem>
-          <Box>
-            <Text>2</Text>
-          </Box>
-        </StyledListItem>
-        <StyledListItem>
-          <Box>
-            <Text>3</Text>
-          </Box>
-        </StyledListItem>
-        <StyledListItem>
-          <Box>
-            <Text>4</Text>
-          </Box>
-        </StyledListItem>
-        <StyledListItem>
-          <Box>
-            <Text>5</Text>
-          </Box>
-          <Text fontSize={18} color="new-gray.800">
-            Muito
-          </Text>
-        </StyledListItem>
-      </List>
+            const radio = getRadioProps({ value })
+            return (
+              <VStack key={value} as="label" gap={4}>
+                <RadioCard
+                  properties={radio}
+                  radioCardStyles={{
+                    width: '40px',
+                    height: '40px',
+                    fontSize: '24px',
+                    lineHeight: '40px',
+                    textAlign: 'center',
+                  }}
+                >
+                  {value}
+                </RadioCard>
+                <Text fontSize={18} color="new-gray.800">
+                  {desc}
+                </Text>
+              </VStack>
+            )
+          })}
+        </HStack>
+        <SubmitAnswerButton />
+      </form>
     </Stack>
   )
 }

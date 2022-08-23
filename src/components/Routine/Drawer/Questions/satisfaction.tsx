@@ -1,78 +1,73 @@
-import { Box, List, ListItem, Stack, Text } from '@chakra-ui/react'
-import styled from '@emotion/styled'
-import React from 'react'
+import { HStack, Image, Stack, Text, useRadioGroup, VStack } from '@chakra-ui/react'
+import React, { FormEvent, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 
-interface SatisfactionProperties {
-  question: string
-}
+import RadioCard from 'src/components/Base/RadioButton/radio-card'
+import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routines/retrospective-showed-question'
 
-const StyledListItem = styled(ListItem)`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+import SubmitAnswerButton from '../Base/submit-answer-button'
 
-  & div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+import { RoutineQuestionProperties } from './types'
 
-    border: 2px solid #b5c0db;
-    border-radius: 3px;
+interface SatisfactionProperties extends RoutineQuestionProperties {}
 
-    & p {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #e8eefc;
-      width: 18px;
-      height: 18px;
-      background-color: #525f7f;
-      font-size: 14px;
-      border-radius: 3px;
-      margin: 6px;
-    }
+const options = [
+  { value: '1', imageSource: '/icons/sad-face-emoji.png' },
+  { value: '2', imageSource: '/icons/confused-face-emoji.png' },
+  { value: '3', imageSource: '/icons/face-emoji.png' },
+  { value: '4', imageSource: '/icons/happy-emoji.png' },
+  { value: '5', imageSource: '/icons/smiling-face-emoji.png' },
+]
+
+const Satisfaction = ({ question, answer, setAnswer, index }: SatisfactionProperties) => {
+  const [selectedRadio, setSelectedRadio] = useState(answer)
+  const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
+
+  const afterQuestion = () => {
+    setShowedQuestion((actual) => actual + 1)
   }
-`
 
-const Satisfaction = ({ question }: SatisfactionProperties) => {
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault()
+    if (setAnswer && selectedRadio) setAnswer(index, selectedRadio)
+    afterQuestion()
+  }
+
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: 'ROUTINES_SATISFACTION_QUESTION',
+    defaultValue: selectedRadio,
+    onChange: setSelectedRadio,
+  })
+
+  const group = getRootProps()
+
   return (
     <Stack>
-      <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
+      <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold" mb={14}>
         {question}
       </Text>
+      <form onSubmit={handleSubmit}>
+        <HStack
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={24}
+          {...group}
+        >
+          {options.map((option) => {
+            const { value, imageSource } = option
 
-      <List display="flex" alignItems="center" justifyContent="space-around">
-        <StyledListItem>
-          <Text>Tristão</Text>
-          <Box>
-            <Text>1</Text>
-          </Box>
-        </StyledListItem>
-        <StyledListItem>
-          <Text>Tristin</Text>
-          <Box>
-            <Text>2</Text>
-          </Box>
-        </StyledListItem>
-        <StyledListItem>
-          <Text>Mlk neutro</Text>
-          <Box>
-            <Text>3</Text>
-          </Box>
-        </StyledListItem>
-        <StyledListItem>
-          <Text>Felizin</Text>
-          <Box>
-            <Text>4</Text>
-          </Box>
-        </StyledListItem>
-        <StyledListItem>
-          <Text>Felizão maluco</Text>
-          <Box>
-            <Text>5</Text>
-          </Box>
-        </StyledListItem>
-      </List>
+            const radio = getRadioProps({ value })
+            return (
+              <VStack key={value} as="label">
+                <Image cursor="pointer" w={74} src={imageSource} mb={5} />
+                <RadioCard properties={radio}>{value}</RadioCard>
+              </VStack>
+            )
+          })}
+        </HStack>
+        <SubmitAnswerButton />
+      </form>
     </Stack>
   )
 }

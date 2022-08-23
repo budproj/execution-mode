@@ -1,30 +1,29 @@
-import { List, ListItem, Stack, Text } from '@chakra-ui/react'
+import { Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 
+import SubmitAnswerButton from '../Drawer/Base/submit-answer-button'
 import ExplanatoryText from '../Drawer/Questions/explanatory-text'
 
 const RetrospectiveExplanatory = () => {
   return (
     <ExplanatoryText>
       <Stack>
-        <Text as="h2" color="new-gray.900" fontWeight="bold" fontSize={21}>
-          Olá, tudo bem? Esse é o seu check-in semanal
+        <Text as="h2" color="new-gray.900" fontWeight="bold" fontSize={21} mb={2}>
+          Boas-vindas à sua Retrospectiva da Semana!
         </Text>
         <Text color="new-gray.700" fontSize={18}>
-          Agora você pode contar com a ajuda do seu time e líder para organizar as suas prioridades,
-          e principalmente dar feedbacks e contribuições para você. Como funciona:
+          Participar dessa rotina no Bud é uma excelente maneira de manter um bom alinhamento sobre
+          as prioridades e o bem-estar de cada membro do time.
         </Text>
-        <List>
-          <ListItem>1. Você preenche esse check in semanal</ListItem>
-          <ListItem>
-            2. Tudo vai para uma página da sua equipe onde todos podem entender o que está
-            acontecendo e se ajudarem.
-          </ListItem>
-          <ListItem>3. Na segunda-feira vamos lembrar você de checar as respostas</ListItem>
-          <ListItem>
-            4. Assim você contribui e também aproveita a ajuda de todos para evoluir e voar!
-          </ListItem>
-        </List>
+
+        <Text color="new-gray.700" fontSize={18} pt={6}>
+          Esse questionário leva cerca de <b>2 minutos</b>:
+        </Text>
+        <Text color="new-gray.700" fontSize={18} pt={10} mb="20px !important">
+          <b style={{ color: '#6F6EFF' }}>Lembre-se: </b> <p />
+          Suas respostas ficarão visíveis para todos na empresa.
+        </Text>
+        <SubmitAnswerButton />
       </Stack>
     </ExplanatoryText>
   )
