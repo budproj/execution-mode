@@ -52,7 +52,7 @@ spec:
             - name: AUTH0_API_DOMAIN
               value: https://api.getbud.co
             - name: MAINTENANCE_MODE_ENABLED
-              value: 'false'
+              value: 'true'
             - name: MAINTENANCE_MODE_EXPECTED_RETURN
               value: 2021-03-26T21:00:00Z
             - name: HOTJAR_ID
