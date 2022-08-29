@@ -11,9 +11,16 @@ export interface LastUpdateTextProperties extends StyleProps {
   date?: Date
   author?: string
   prefix?: string
+  customMessage?: string
 }
 
-const LastUpdateText = ({ date, author, prefix, ...rest }: LastUpdateTextProperties) => {
+const LastUpdateText = ({
+  date,
+  author,
+  prefix,
+  customMessage,
+  ...rest
+}: LastUpdateTextProperties) => {
   const intl = useIntl()
   const [formattedRelativeDate, setDate, relativeUnit, previousDate] = useRelativeDate(date)
   const lowercasedFormattedRelativeDate = formattedRelativeDate?.toLowerCase()
@@ -37,7 +44,7 @@ const LastUpdateText = ({ date, author, prefix, ...rest }: LastUpdateTextPropert
     if (previousDate !== date) setDate(date)
   }, [previousDate, date, setDate])
 
-  return <Text {...rest}>{message}</Text>
+  return <Text {...rest}>{customMessage ? customMessage : message}</Text>
 }
 
 LastUpdateText.defaultProps = {

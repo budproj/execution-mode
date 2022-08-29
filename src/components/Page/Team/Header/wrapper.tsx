@@ -9,9 +9,10 @@ import { Team } from '../../../Team/types'
 interface TeamHeaderProperties {
   team?: Team
   isLoaded: boolean
+  showProgress?: boolean
 }
 
-export const TeamHeader = ({ team, isLoaded }: TeamHeaderProperties) => {
+export const TeamHeader = ({ team, isLoaded, showProgress = true }: TeamHeaderProperties) => {
   const intl = useIntl()
   const progress = team?.status.progress ?? 0
 
@@ -27,7 +28,7 @@ export const TeamHeader = ({ team, isLoaded }: TeamHeaderProperties) => {
         </Text>
       </SkeletonText>
 
-      <Stack direction="row" spacing="8" pt="4" alignItems="center">
+      <Stack direction="row" spacing="8" pt="4" alignItems="center" opacity={showProgress ? 1 : 0}>
         <Skeleton isLoaded={isLoaded} w="full" pb={isLoaded ? '2' : 0}>
           <SliderWithFilledTrack value={progress} />
         </Skeleton>
