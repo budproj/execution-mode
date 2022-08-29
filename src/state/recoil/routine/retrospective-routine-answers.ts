@@ -6,7 +6,7 @@ const KEY = `${PREFIX}::RETROSPECTIVE_ROUTINE_ATOM`
 
 interface RetrospectiveAnswer {
   questionId: string
-  questionAnswer: string
+  questionAnswer: string | number
 }
 
 export const retrospectiveRoutineListAtom = atom<RetrospectiveAnswer[]>({

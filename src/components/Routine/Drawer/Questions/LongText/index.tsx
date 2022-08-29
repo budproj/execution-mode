@@ -71,12 +71,13 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
             value={inputValue}
             resize="none"
             variant="flushed"
+            overflowWrap="break-word"
             placeholder={intl.formatMessage(messages.inputPlaceHolder)}
             _placeholder={{ color: 'new-gray.500' }}
             fontSize={21}
             padding="0px !important"
-            height="40px !important"
-            overflowY="auto"
+            height="42px !important"
+            overflow="hidden"
             minH="0px !important"
             color="new-gray.800"
             onChange={(event) => setInputValue(event.target.value)}

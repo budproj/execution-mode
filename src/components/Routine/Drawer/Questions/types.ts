@@ -28,6 +28,6 @@ export interface FormQuestion {
   conditional?: ConditionalTypeInfo
   properties?: ValueRangeProperties
   formQuestionIndex: number
-  answer?: string
-  setAnswer?: (questionId: string, questionAnswer: string) => void
+  answer?: string | number
+  setAnswer?: (questionId: string, questionAnswer: string | number) => void
 }

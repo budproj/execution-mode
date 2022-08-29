@@ -21,7 +21,7 @@ const RetrospectiveRoutine = () => {
     return selectedAnswer?.questionAnswer
   }
 
-  const setAnswer = (questionId: string, questionAnswer: string) => {
+  const setAnswer = (questionId: string, questionAnswer: string | number) => {
     const exist = Boolean(selectAnswer(questionId))
 
     const filteredAnswers = exist
