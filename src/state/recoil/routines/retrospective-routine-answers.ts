@@ -5,8 +5,8 @@ import { PREFIX } from './constants'
 const KEY = `${PREFIX}::RETROSPECTIVE_ROUTINE_ATOM`
 
 interface RetrospectiveAnswer {
-  answerIndex: number
-  answer: string
+  questionId: string
+  questionAnswer: string
 }
 
 export const retrospectiveRoutineListAtom = atom<RetrospectiveAnswer[]>({

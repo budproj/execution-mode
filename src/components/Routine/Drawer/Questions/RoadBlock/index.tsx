@@ -1,37 +1,39 @@
 import { HStack, Stack, Text, useRadioGroup } from '@chakra-ui/react'
-import React, { FormEvent, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
+import React, { useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import RadioCard from 'src/components/Base/RadioButton/radio-card'
-import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routines/retrospective-showed-question'
 
-import SubmitAnswerButton from '../Base/submit-answer-button'
+import BaseQuestionRoutineForm from '../base'
+import { FormQuestion } from '../types'
 
-import { RoutineQuestionProperties } from './types'
+import messages from './messages'
 
-interface YesOrNoProperties extends RoutineQuestionProperties {}
+interface RoadBlockQuestionProperties extends FormQuestion {}
 
-const YesOrNo = ({ question, answer, setAnswer, index }: YesOrNoProperties) => {
-  const [selectedRadio, setSelectedRadio] = useState(answer)
-  const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
-  const previousOrAfterQuestionIndex = selectedRadio === 'y' ? 1 : 2
+const RoadBlockQuestion = ({ id, heading, answer, setAnswer }: RoadBlockQuestionProperties) => {
+  const intl = useIntl()
+
+  const [selectedRadio, setSelectedRadio] = useState(() => {
+    if (answer === '1') {
+      return 'y'
+    }
+
+    if (answer === '0') {
+      return 'n'
+    }
+  })
   const options = [
-    { value: 'y', desc: 'Sim' },
-    { value: 'n', desc: 'Não' },
+    { value: 'y', desc: intl.formatMessage(messages.firstOptionDescription) },
+    { value: 'n', desc: intl.formatMessage(messages.secondOptionDescription) },
   ]
 
-  const afterQuestion = () => {
-    setShowedQuestion((actual) => actual + previousOrAfterQuestionIndex)
-  }
-
-  const handleSubmit = (event: FormEvent) => {
-    if (setAnswer && selectedRadio) setAnswer(index, selectedRadio)
-    event.preventDefault()
-    afterQuestion()
+  const handleSubmit = () => {
+    if (setAnswer && selectedRadio) setAnswer(id, selectedRadio === 'y' ? '1' : '0')
   }
 
   const { getRootProps, getRadioProps } = useRadioGroup({
-    name: 'ROUTINES_SATISFACTION_QUESTION',
+    name: 'ROUTINES_ROADBLOCK_QUESTION',
     defaultValue: selectedRadio,
     onChange: setSelectedRadio,
   })
@@ -39,10 +41,13 @@ const YesOrNo = ({ question, answer, setAnswer, index }: YesOrNoProperties) => {
   const group = getRootProps()
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Stack gap={10}>
+    <BaseQuestionRoutineForm
+      questionSubmit={handleSubmit}
+      afterQuestionIndex={selectedRadio === 'y' ? 1 : 2}
+    >
+      <Stack gap={14}>
         <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
-          {question}
+          {heading}
         </Text>
         <HStack display="flex" alignItems="center" gap={2} mb={24} {...group}>
           {options.map((option) => {
@@ -77,10 +82,9 @@ const YesOrNo = ({ question, answer, setAnswer, index }: YesOrNoProperties) => {
             )
           })}
         </HStack>
-        <SubmitAnswerButton />
       </Stack>
-    </form>
+    </BaseQuestionRoutineForm>
   )
 }
 
-export default YesOrNo
+export default RoadBlockQuestion
