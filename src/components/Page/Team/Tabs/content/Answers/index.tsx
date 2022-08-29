@@ -11,19 +11,11 @@ import ThreeLayersIcon from 'src/components/Icon/ThreeLayers'
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
 
-export const emojisKeys = {
-  1: '/images/sad-emoji.svg',
-  2: '/images/unhappy-emoji.svg',
-  3: '/images/neutral-emoji.svg',
-  4: '/images/smile-emoji.svg',
-  5: '/images/happy-emoji.svg',
-}
-
 interface AnswersComponentProperties {
   answers: Array<{
     id: number
     user: string
-    feeling: keyof typeof emojisKeys
+    feeling: number
     createdAt: string
     comments: number
   }>

@@ -1,27 +1,20 @@
-import { Flex, Text, Avatar, AvatarBadge, Image, Box } from '@chakra-ui/react'
+import { Flex, Text, Avatar, AvatarBadge, Box } from '@chakra-ui/react'
 import { format, isToday } from 'date-fns'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { Clock } from 'src/components/Icon'
 import ThinkingBalloon from 'src/components/Icon/ThinkingBalloon'
+import { useGetEmoji } from 'src/components/Routine/hooks'
 import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
 import messages from './messages'
-
-export const emojisKeys = {
-  1: '/images/sad-emoji.svg',
-  2: '/images/unhappy-emoji.svg',
-  3: '/images/neutral-emoji.svg',
-  4: '/images/smile-emoji.svg',
-  5: '/images/happy-emoji.svg',
-}
 
 interface AnswerRowComponentProperties {
   answer: {
     id: number
     user: string
-    feeling: keyof typeof emojisKeys
+    feeling: number
     createdAt: string
     comments: number
   }
@@ -29,9 +22,10 @@ interface AnswerRowComponentProperties {
 
 const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
   const intl = useIntl()
-  const emoji = emojisKeys[answer.feeling]
   const [formattedRelativeDate] = useRelativeDate(new Date(answer.createdAt))
   const isTheDateToday = isToday(new Date(answer.createdAt))
+
+  const { getEmoji } = useGetEmoji()
 
   return (
     <Flex key={answer.id} marginBottom={5}>
@@ -43,7 +37,7 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
       >
         <AvatarBadge border="none" boxSize="20px">
           {true ? (
-            <Image width="20px" height="20px" src={emoji} />
+            getEmoji({ felling: answer.feeling, size: '20px' })
           ) : (
             <Clock
               desc={intl.formatMessage(messages.clockIconDescription)}

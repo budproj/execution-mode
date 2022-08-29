@@ -4,13 +4,13 @@ import { useIntl } from 'react-intl'
 
 import { CircleArrowRight } from 'src/components/Icon'
 
-import AnswersComponent, { emojisKeys } from './Answers'
+import AnswersComponent from './Answers'
 import messages from './messages'
 
 type AnswerType = {
   id: number
   user: string
-  feeling: keyof typeof emojisKeys
+  feeling: number
   createdAt: string
   comments: number
 }
