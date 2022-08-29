@@ -1,9 +1,9 @@
-import { Button } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
-import { retrospectiveRoutineListAtom } from 'src/state/recoil/routines/retrospective-routine-answers'
-import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routines/retrospective-showed-question'
+import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
+import { retrospectiveRoutineListAtom } from 'src/state/recoil/routine/retrospective-routine-answers'
+import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
 import RoutineDrawer from '../Drawer/Base/drawer'
 import RoutineFormQuestion from '../Drawer/Questions'
@@ -11,7 +11,7 @@ import RoutineFormQuestion from '../Drawer/Questions'
 import { retrospectiveRoutineFormQuestiosMock } from './utils/mocked'
 
 const RetrospectiveRoutine = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isRoutineDrawerOpen, setIsRoutineDrawerOpen] = useRecoilState(routineDrawerOpened)
   const showedQuestion = useRecoilValue(retrospectiveRoutineIndexQuestionAtom)
   const [answers, setAnswers] = useRecoilState(retrospectiveRoutineListAtom)
 
@@ -54,21 +54,14 @@ const RetrospectiveRoutine = () => {
     },
   )
 
-  const handleClose = () => {
-    setIsOpen(false)
-  }
-
   return (
-    <>
-      {!isOpen && <Button onClick={() => setIsOpen(true)}>ABRE ESSA BAGACA</Button>}
-      <RoutineDrawer
-        isOpen={isOpen}
-        formSize={retrospectiveFormQuestions.length}
-        onClose={handleClose}
-      >
-        {retrospectiveFormQuestions[showedQuestion.currentQuestionIndex]}
-      </RoutineDrawer>
-    </>
+    <RoutineDrawer
+      isOpen={isRoutineDrawerOpen}
+      formSize={retrospectiveFormQuestions.length}
+      onClose={() => setIsRoutineDrawerOpen(false)}
+    >
+      {retrospectiveFormQuestions[showedQuestion.currentQuestionIndex]}
+    </RoutineDrawer>
   )
 }
 

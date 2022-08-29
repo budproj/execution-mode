@@ -5,8 +5,8 @@ import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { OpenArrowDown, OpenArrowUp } from 'src/components/Icon'
-import { currentRoutinePropertiesAtom } from 'src/state/recoil/routines/current-routine-properties'
-import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routines/retrospective-showed-question'
+import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
+import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
 import messages from './messages'
 

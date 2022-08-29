@@ -2,7 +2,7 @@ import { Box, Drawer, DrawerBody, DrawerCloseButton, DrawerContent } from '@chak
 import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
-import { currentRoutinePropertiesAtom } from 'src/state/recoil/routines/current-routine-properties'
+import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
 
 interface RoutineDrawerProperties {
   children?: JSX.Element

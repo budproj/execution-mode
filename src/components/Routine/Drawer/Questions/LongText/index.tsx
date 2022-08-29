@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
-import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routines/retrospective-showed-question'
+import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
 import SubmitAnswerButton from '../../Base/submit-answer-button'
 import { FormQuestion } from '../types'

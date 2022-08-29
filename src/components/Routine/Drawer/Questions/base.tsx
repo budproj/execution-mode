@@ -2,7 +2,7 @@ import { Box, Stack } from '@chakra-ui/react'
 import React, { FormEvent } from 'react'
 import { useSetRecoilState } from 'recoil'
 
-import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routines/retrospective-showed-question'
+import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
 import SubmitAnswerButton from '../Base/submit-answer-button'
 
