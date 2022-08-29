@@ -120,4 +120,12 @@ export { default as LinkedIn } from './LinkedIn'
 
 export { default as Reload } from './Reload'
 
+export {
+  CustomEmojiFeeling1,
+  CustomEmojiFeeling2,
+  CustomEmojiFeeling3,
+  CustomEmojiFeeling4,
+  CustomEmojiFeeling5,
+} from './CustomEmojis'
+
 export * from './types'
