@@ -1,10 +1,36 @@
-import { Box, Button, Flex, Link, Stack, Text } from '@chakra-ui/react'
+import { Button, Flex, Link, Stack, Text, Grid, GridItem } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { CircleArrowRight } from 'src/components/Icon'
 
+import AnswersComponent, { emojisKeys } from './Answers'
 import messages from './messages'
+
+type AnswerType = {
+  id: number
+  user: string
+  feeling: keyof typeof emojisKeys
+  createdAt: string
+  comments: number
+}
+
+const data: AnswerType[] = [
+  {
+    id: 1,
+    user: 'Ana Fonseca',
+    feeling: 5,
+    createdAt: '2022-5-17 10:10:00',
+    comments: 2,
+  },
+  {
+    id: 2,
+    user: 'Lucas Vilela',
+    feeling: 1,
+    createdAt: '2022-8-27 09:09:00',
+    comments: 3,
+  },
+]
 
 const RetrospectiveTabContent = () => {
   const intl = useIntl()
@@ -53,7 +79,10 @@ const RetrospectiveTabContent = () => {
           {intl.formatMessage(messages.tabRetrospectiveAnswerButton)}
         </Button>
       </Flex>
-      <Box w="100%" height="50vh" bg="white" borderRadius={15} />
+      <Grid w="100%" templateColumns="370px 1fr" minHeight="750px" bg="white" borderRadius={15}>
+        <AnswersComponent answers={data} />
+        <GridItem background="blue">aaaa</GridItem>
+      </Grid>
     </Stack>
   )
 }
