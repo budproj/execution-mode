@@ -4,16 +4,16 @@ import styled from '@emotion/styled'
 import { startOfWeek, isBefore } from 'date-fns'
 import React, { useMemo, useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
+import { usePendingRoutines } from 'src/components/Routine/hook'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
-import { pendingRoutinesQueryAtom } from 'src/state/recoil/routine/routine-query'
 
 import CheckInNotifications from '../CheckInNotifications'
 import EmptyStateCheckInNotifications from '../CheckInNotifications/EmptyStateCheckInNotification'
@@ -65,12 +65,14 @@ interface NotificationsModalProperties {
 
 const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) => {
   const intl = useIntl()
-  const routinesValue = useRecoilValue(pendingRoutinesQueryAtom)
+  const routines = usePendingRoutines()
   const { dispatch: dispatchTabCheckInClick } = useEvent(EventType.TAB_THIS_WEEK_CLICK)
   const { dispatch: dispatchTabNotificationClick } = useEvent(EventType.TAB_NOTIFICATION_CLICK)
 
   const notifications = useRecoilValue(listNotificationsAtom)
-  const setCheckInNotificationsCount = useSetRecoilState(checkInNotificationCountAtom)
+  const [thisWeekNotificationCount, setCheckInNotificationsCount] = useRecoilState(
+    checkInNotificationCountAtom,
+  )
 
   const [keyResults, setKeyResultEdges] = useConnectionEdges<KeyResult>()
 
@@ -114,8 +116,9 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
     (keyResult) => keyResult.status.isOutdated,
   ).length
   const notificationCount = [...notifications].filter((notification) => !notification.isRead).length
+  const routinesCount = routines.length
 
-  setCheckInNotificationsCount(checkinCount)
+  setCheckInNotificationsCount(checkinCount + routinesCount)
 
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15}>
@@ -154,7 +157,9 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
             onClick={() => dispatchTabCheckInClick({})}
           >
             {intl.formatMessage(messages.thisWeekTabOptions)}
-            {checkinCount > 0 && <NotificationBadge notificationCount={checkinCount} />}
+            {checkinCount > 0 && (
+              <NotificationBadge notificationCount={thisWeekNotificationCount} />
+            )}
           </StyledTab>
         </TabList>
         <Divider borderColor="gray.100" />
@@ -164,9 +169,9 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
             {isOpen && <NotificationsList />}
           </ScrollablePanel>
           <ScrollablePanel maxH="70vh" width={480}>
-            {routinesValue.length > 0 || keyResultsWithNoCheckInThisWeek.length > 0 ? (
+            {routines.length > 0 || keyResultsWithNoCheckInThisWeek.length > 0 ? (
               <>
-                {routinesValue.length > 0 && <RoutineNotification routines={routinesValue} />}
+                {routines.length > 0 && <RoutineNotification routines={routines} />}
                 {keyResultsWithNoCheckInThisWeek.length > 0 && (
                   <CheckInNotifications
                     userId={userId}
