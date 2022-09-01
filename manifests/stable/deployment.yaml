@@ -67,3 +67,5 @@ spec:
               value: '96eeb274-518e-462a-a741-f304420aa637'
             - name: NOTIFICATION_API
               value: https://notifications.getbud.co
+            - name: 'ROUTINES_API'
+              value: https://api.canary.getbud.co/routines
