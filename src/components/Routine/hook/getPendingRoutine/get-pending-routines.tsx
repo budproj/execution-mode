@@ -1,33 +1,22 @@
-import { useAuth0 } from '@auth0/auth0-react'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
-import getConfig from 'src/config'
+import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { pendingRoutinesAtom } from 'src/state/recoil/routine/pending-routines'
 
-const config = getConfig()
 export const usePendingRoutines = () => {
-  const { getAccessTokenSilently } = useAuth0()
+  const { servicesPromise } = useContext(ServicesContext)
   const [routines, setPendingRoutines] = useRecoilState(pendingRoutinesAtom)
-  const routinesApi = config.publicRuntimeConfig.api.routines
 
   const getPendingRoutines = async () => {
-    const token = await getAccessTokenSilently(config.publicRuntimeConfig.auth0)
-    const headers = new Headers()
-    headers.append('Authorization', `Bearer ${token}`)
-
-    fetch(`${routinesApi}/pending`, {
-      method: 'GET',
-      headers,
-    })
-      .then(async (response) => response.json())
-      .then((pendingRoutines) => {
-        setPendingRoutines(pendingRoutines)
-      })
+    const { routines } = await servicesPromise
+    const { data: pendingRoutines } = await routines.get('/pending')
+    setPendingRoutines(pendingRoutines)
   }
 
   useEffect(() => {
     getPendingRoutines()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return routines

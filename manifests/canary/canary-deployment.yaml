@@ -65,3 +65,5 @@ spec:
               value: https://notifications.canary.getbud.co
             - name: 'ROUTINES_API'
               value: https://api.canary.getbud.co/routines
+            - name: 'REST_API_BASE'
+              value: https://api.canary.getbud.co
