@@ -4,7 +4,7 @@ export const retrospectiveRoutineFormQuestiosMock = [
     type: 'reading_text',
     heading: 'Boas-vindas à sua Retrospectiva da Semana!',
     content:
-      'Participar dessa rotina no Bud é uma excelente maneira de manter um bom alinhamento sobre as prioridades e o bem-estar de cada membro do time.\n\nEsse questionário leva cerca de 2 minutos:\n\n**Lembre-se:**\nSuas respostas ficarão visíveis para todos na empresa.',
+      'Participar dessa rotina no Bud é uma excelente maneira de manter um bom alinhamento sobre as prioridades e o bem-estar de cada membro do time.\nEsse questionário leva cerca de 2 minutos:\n\n**Lembre-se:**\nSuas respostas ficarão visíveis para todos na empresa.',
   },
   {
     id: '44bd7498-e528-4f96-b45e-3a2374790373',
@@ -69,7 +69,13 @@ export const retrospectiveRoutineFormQuestiosMock = [
     conditional: {
       dependsOn: 'cf785f20-5a0b-4c4c-b882-9e3949589df2',
       type: 'road_block',
-      roadblock: true,
+      road_block: true,
     },
+  },
+  {
+    id: 'fd7c26dd-38e3-41e7-b24a-78030653dc23',
+    type: 'long_text',
+    heading: 'Quer deixar algum recado para o time? :)',
+    content: '',
   },
 ]

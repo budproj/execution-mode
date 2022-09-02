@@ -1,7 +1,8 @@
 import { Box, Stack } from '@chakra-ui/react'
 import React, { FormEvent } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
+import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
 import SubmitAnswerButton from '../Base/submit-answer-button'
@@ -17,7 +18,11 @@ const BaseQuestionRoutineForm = ({
   questionSubmit,
   afterQuestionIndex = 1,
 }: BaseQuestionRoutineFormProperties) => {
-  const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
+  const [{ currentQuestionIndex }, setShowedQuestion] = useRecoilState(
+    retrospectiveRoutineIndexQuestionAtom,
+  )
+
+  const { size } = useRecoilValue(currentRoutinePropertiesAtom)
 
   const afterQuestion = () => {
     setShowedQuestion((currentValue) => ({
@@ -29,7 +34,7 @@ const BaseQuestionRoutineForm = ({
   const handleSubmit = (event: FormEvent) => {
     questionSubmit(event)
     event.preventDefault()
-    afterQuestion()
+    if (size && currentQuestionIndex < size - 1) afterQuestion()
   }
 
   return (

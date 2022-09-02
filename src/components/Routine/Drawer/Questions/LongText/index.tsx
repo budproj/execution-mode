@@ -1,8 +1,9 @@
 import { Box, Flex, Stack, Text, Textarea } from '@chakra-ui/react'
 import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
+import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
 import SubmitAnswerButton from '../../Base/submit-answer-button'
@@ -18,7 +19,11 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
   const reference = useRef<HTMLTextAreaElement>(null)
   const [inputValue, setInputValue] = useState(answer)
 
-  const [_, setShowedQuestion] = useRecoilState(retrospectiveRoutineIndexQuestionAtom)
+  const [{ currentQuestionIndex }, setShowedQuestion] = useRecoilState(
+    retrospectiveRoutineIndexQuestionAtom,
+  )
+
+  const { size } = useRecoilValue(currentRoutinePropertiesAtom)
 
   const afterQuestion = () => {
     setShowedQuestion((currentValue) => ({
@@ -29,7 +34,7 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
   const handleSubmit = (event: FormEvent) => {
     if (setAnswer && reference.current?.value) setAnswer(id, reference.current.value)
     event?.preventDefault()
-    afterQuestion()
+    if (size && currentQuestionIndex < size - 1) afterQuestion()
   }
 
   const handleKeyDown = (event: any) => {
