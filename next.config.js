@@ -32,6 +32,8 @@ const {
   SENTRY_AUTH_TOKEN,
   NO_GAMIFICATION_COMPANIES_IDS,
   NOTIFICATION_API,
+  ROUTINES_API,
+  REST_API_BASE,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -76,6 +78,8 @@ const publicRuntimeConfig = {
   api: {
     graphql: API_GRAPHQL,
     notifications: NOTIFICATION_API,
+    restBase: REST_API_BASE,
+    routines: ROUTINES_API,
   },
 
   sentry: {
@@ -166,6 +170,7 @@ const moduleExports = {
   serverRuntimeConfig,
   publicRuntimeConfig,
   i18n,
+  output: 'standalone',
 
   async rewrites() {
     return publicRuntimeConfig.intlRoutes.map((route) => ({
