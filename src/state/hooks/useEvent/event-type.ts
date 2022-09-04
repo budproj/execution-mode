@@ -22,5 +22,6 @@ export enum EventType {
   NOTIFICATION_CHECK_IN_CLICK = 'NotificationCheckinClick',
   NOTIFICATION_CARD_CLICK = 'NotificationCardClick',
   TAB_NOTIFICATION_CLICK = 'TabNotificationClick',
-  TAB_CHECKIN_CLICK = 'TabCheckInClick',
+  TAB_THIS_WEEK_CLICK = 'TabThisWeekClick',
+  NOTIFICATION_ROUTINE_CLICK = 'NotificationRoutineClick',
 }

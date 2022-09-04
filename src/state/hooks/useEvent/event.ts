@@ -12,12 +12,13 @@ import { KeyResultProgressChartViewEventData } from './events/key-result-progres
 import { NotificationBellData } from './events/notification-bell-data'
 import { NotificationCardClickData } from './events/notification-card-click-data'
 import { NotificationCheckInClickData } from './events/notification-check-in-click-data'
+import { NotificationRoutineClickData } from './events/notification-routine-click-data'
 import { OpenedKeyResultChecklistEventData } from './events/opened-key-result-checklist'
 import { OpenedKeyResultDrawerEventData } from './events/opened-key-result-drawer'
 import { OpenedKeyResultReportConfidanceData } from './events/opened-key-result-report-confidance-data'
 import { PageViewEventData } from './events/page-view'
-import { TabCheckInClickData } from './events/tab-check-in-click-data'
 import { TabNotificationClickData } from './events/tab-notification-click-data'
+import { TabThisWeekClickData } from './events/tab-this-week-click-data'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
 import { ToggledPersonalTaskEventData } from './events/toggled-personal-task'
 import { UpdatedKeyResultCheckMarkAssigneeEventData } from './events/updated-key-result-check-mark-assignee'
@@ -47,6 +48,7 @@ export type Event = {
   [EventType.NOTIFICATION_BELL_CLICK]: NotificationBellData
   [EventType.NOTIFICATION_CHECK_IN_CLICK]: NotificationCheckInClickData
   [EventType.NOTIFICATION_CARD_CLICK]: NotificationCardClickData
-  [EventType.TAB_CHECKIN_CLICK]: TabNotificationClickData
-  [EventType.TAB_NOTIFICATION_CLICK]: TabCheckInClickData
+  [EventType.TAB_THIS_WEEK_CLICK]: TabThisWeekClickData
+  [EventType.TAB_NOTIFICATION_CLICK]: TabNotificationClickData
+  [EventType.NOTIFICATION_ROUTINE_CLICK]: NotificationRoutineClickData
 }

@@ -13,6 +13,7 @@ import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
 import ProgressBar from 'src/components/Base/ProgressBar'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
+import { ServicesProvider } from 'src/components/Base/ServicesProvider'
 import { SocketIOProvider } from 'src/components/Base/SocketIOProvider'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { RetrospectiveRoutine } from 'src/components/Routine'
@@ -64,14 +65,16 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
               <AmplitudeProvider>
                 <AuthzApolloProvider pageProps={pageProps}>
                   <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
-                    <MaintenanceGatekeeper>
-                      <HotjarProvider />
-                      <HubSpotProvider />
-                      <ProgressBar />
-                      <RetrospectiveRoutine />
-                      <KeyResultSingleDrawer />
-                      <Component {...pageProps} />
-                    </MaintenanceGatekeeper>
+                    <ServicesProvider>
+                      <MaintenanceGatekeeper>
+                        <HotjarProvider />
+                        <HubSpotProvider />
+                        <ProgressBar />
+                        <RetrospectiveRoutine />
+                        <KeyResultSingleDrawer />
+                        <Component {...pageProps} />
+                      </MaintenanceGatekeeper>
+                    </ServicesProvider>
                   </RecoilIntlProvider>
                 </AuthzApolloProvider>
               </AmplitudeProvider>
