@@ -70,8 +70,8 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                         <HotjarProvider />
                         <HubSpotProvider />
                         <ProgressBar />
-                        <RetrospectiveRoutine />
                         <KeyResultSingleDrawer />
+                        <RetrospectiveRoutine />
                         <Component {...pageProps} />
                       </MaintenanceGatekeeper>
                     </ServicesProvider>

@@ -1,11 +1,14 @@
 import { Box, Button, Flex } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useRef } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { OpenArrowDown, OpenArrowUp } from 'src/components/Icon'
-import { currentRoutinePropertiesAtom } from 'src/state/recoil/routines/current-routine-properties'
-import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routines/retrospective-showed-question'
+import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
+import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
+
+import messages from './messages'
 
 const StyledButton = styled(Button)`
   display: flex;
@@ -17,12 +20,12 @@ const StyledButton = styled(Button)`
   background-color: #6f6eff;
 `
 
-interface SubmitAnswerButton {
-  previousQuestionIndex?: number
-}
+const SubmitAnswerButton = () => {
+  const intl = useIntl()
 
-const SubmitAnswerButton = ({ previousQuestionIndex = 1 }: SubmitAnswerButton) => {
-  const [showedQuestion, setShowedQuestion] = useRecoilState(retrospectiveRoutineIndexQuestionAtom)
+  const [{ currentQuestionIndex }, setShowedQuestion] = useRecoilState(
+    retrospectiveRoutineIndexQuestionAtom,
+  )
 
   const buttonReference = useRef<HTMLButtonElement>(null)
 
@@ -35,41 +38,45 @@ const SubmitAnswerButton = ({ previousQuestionIndex = 1 }: SubmitAnswerButton) =
   }, [])
 
   const comeBack = () => {
-    setShowedQuestion((actual) => actual - previousQuestionIndex)
+    setShowedQuestion(({ stepsFromPreviousQuestion, currentQuestionIndex }) => {
+      return {
+        currentQuestionIndex: currentQuestionIndex - (stepsFromPreviousQuestion ?? 1),
+      }
+    })
   }
 
   return (
     <Flex alignItems="center">
-      {size && showedQuestion < size && (
-        <>
-          <Button
-            ref={buttonReference}
-            p="20px 24px"
-            color="black.50"
-            bg="brand.500"
-            fontSize={18}
-            fontWeight="medium"
-            type="submit"
-            _hover={{}}
-          >
-            {showedQuestion > 1 ? (showedQuestion === size - 1 ? 'Enviar' : 'Próximo') : 'Começar'}
-          </Button>
-          <span style={{ marginLeft: '12px', color: '#8491B0', fontSize: 14 }}>
-            Aperte <b>Enter &#x23CE; &nbsp;</b>
-          </span>
-        </>
-      )}
-      {showedQuestion > 0 && (
+      <Button
+        ref={buttonReference}
+        p="20px 24px"
+        color="black.50"
+        bg="brand.500"
+        fontSize={18}
+        fontWeight="medium"
+        type="submit"
+        _hover={{}}
+      >
+        {currentQuestionIndex >= 1
+          ? size && currentQuestionIndex === size - 1
+            ? intl.formatMessage(messages.sendFormAnswersMessageButton)
+            : intl.formatMessage(messages.afterButtonForm)
+          : intl.formatMessage(messages.startButtonForm)}
+      </Button>
+      <span style={{ marginLeft: '12px', color: '#8491B0', fontSize: 14 }}>
+        {intl.formatMessage(messages.submitFormButtonDesc)} <b>Enter &#x23CE; &nbsp;</b>
+      </span>
+      {currentQuestionIndex > 0 && (
         <Box position="absolute" right={12} bottom={12} display="flex" gap={1}>
-          {showedQuestion > 1 && (
+          {currentQuestionIndex > 0 && (
             <StyledButton onClick={comeBack}>
-              <OpenArrowUp desc="arrow-up" />
+              <OpenArrowUp desc={intl.formatMessage(messages.previousQuestionButtonFormIconDesc)} />
             </StyledButton>
           )}
 
-          {size && showedQuestion < size && (
+          {size && currentQuestionIndex < size - 1 && (
             <StyledButton type="submit">
-              <OpenArrowDown desc="arrow-down" />
+              <OpenArrowDown desc={intl.formatMessage(messages.afterQuestionButtonFormIconDesc)} />
             </StyledButton>
           )}
         </Box>

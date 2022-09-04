@@ -4,7 +4,7 @@ import React from 'react'
 interface RadioCardProperties {
   properties: RadioProps
   radioCardStyles?: BoxProps
-  children: string
+  children: string | number
 }
 
 const RadioCard = ({ properties, radioCardStyles, children }: RadioCardProperties) => {
