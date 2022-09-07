@@ -10,10 +10,8 @@ export const useRoutineFormQuestions = () => {
   const [routinesFormQuestions, setRoutinesFormQuestions] = useRecoilState(routineFormQuestions)
   const intlLocale = useRecoilValue(intlLocaleAtom)
 
-  // Const useLocaleFormated = intlLocale === 'en-US' ? 'en' : intlLocale.toLocaleLowerCase()
-  // const requestFormQuestionsPath = `/bud-form?intl=${useLocaleFormated}`
-
-  const requestFormQuestionsPath = '/bud-form?intl=pt-br'
+  const useLocaleFormated = intlLocale === 'en-US' ? 'en' : intlLocale.toLocaleLowerCase()
+  const requestFormQuestionsPath = `/bud-form?intl=${useLocaleFormated}`
 
   const getRoutineQuestions = async () => {
     const { routines } = await servicesPromise
