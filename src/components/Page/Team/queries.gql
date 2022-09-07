@@ -12,7 +12,13 @@ query GET_TEAM_DATA($teamId: ID!) {
     }
     owner {
       id
+      firstName
+      nickname
       fullName
+      role
+      picture
+      about
+      linkedInProfileAddress
     }
     status {
       progress
