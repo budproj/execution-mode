@@ -15,11 +15,11 @@ const RoadBlockQuestion = ({ id, heading, answer, setAnswer }: RoadBlockQuestion
   const intl = useIntl()
 
   const [selectedRadio, setSelectedRadio] = useState(() => {
-    if (answer === '1') {
+    if (answer === true) {
       return 'y'
     }
 
-    if (answer === '0') {
+    if (answer === false) {
       return 'n'
     }
   })
@@ -29,22 +29,19 @@ const RoadBlockQuestion = ({ id, heading, answer, setAnswer }: RoadBlockQuestion
   ]
 
   const handleSubmit = () => {
-    if (setAnswer && selectedRadio) setAnswer(id, selectedRadio === 'y' ? '1' : '0')
+    if (setAnswer) setAnswer(id, selectedRadio === 'y')
   }
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'ROUTINES_ROADBLOCK_QUESTION',
-    defaultValue: selectedRadio,
+    value: selectedRadio,
     onChange: setSelectedRadio,
   })
 
   const group = getRootProps()
 
   return (
-    <BaseQuestionRoutineForm
-      questionSubmit={handleSubmit}
-      afterQuestionIndex={selectedRadio === 'y' ? 1 : 2}
-    >
+    <BaseQuestionRoutineForm questionSubmit={handleSubmit}>
       <Stack gap={14}>
         <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
           {heading}

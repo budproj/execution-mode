@@ -15,7 +15,7 @@ const ValueRangeQuestion = ({
   properties,
   setAnswer,
 }: ValueRangeQuestionProperties) => {
-  const [selectedRadio, setSelectedRadio] = useState(answer)
+  const [selectedRadio, setSelectedRadio] = useState(String(answer))
 
   const options = []
 
@@ -46,10 +46,7 @@ const ValueRangeQuestion = ({
   const group = getRootProps()
 
   return (
-    <BaseQuestionRoutineForm
-      questionSubmit={handleSubmit}
-      afterQuestionIndex={Number(selectedRadio) <= 3 ? 1 : 2}
-    >
+    <BaseQuestionRoutineForm questionSubmit={handleSubmit}>
       <Stack gap={10} maxW="fit-content">
         <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
           {heading}
