@@ -10,30 +10,26 @@ import SubmitAnswerButton from '../Base/submit-answer-button'
 interface BaseQuestionRoutineFormProperties {
   children: JSX.Element | JSX.Element[]
   questionSubmit: (event: FormEvent) => void
-  afterQuestionIndex?: number
 }
 
 const BaseQuestionRoutineForm = ({
   children,
   questionSubmit,
-  afterQuestionIndex = 1,
 }: BaseQuestionRoutineFormProperties) => {
-  const [{ currentQuestionIndex }, setShowedQuestion] = useRecoilState(
+  const [currentQuestionIndex, setShowedQuestion] = useRecoilState(
     retrospectiveRoutineIndexQuestionAtom,
   )
 
   const { size } = useRecoilValue(currentRoutinePropertiesAtom)
 
   const afterQuestion = () => {
-    setShowedQuestion((currentValue) => ({
-      currentQuestionIndex: currentValue.currentQuestionIndex + afterQuestionIndex,
-      stepsFromPreviousQuestion: afterQuestionIndex,
-    }))
+    setShowedQuestion((currentValue) => currentValue + 1)
   }
 
   const handleSubmit = (event: FormEvent) => {
     questionSubmit(event)
     event.preventDefault()
+
     if (size && currentQuestionIndex < size - 1) afterQuestion()
   }
 

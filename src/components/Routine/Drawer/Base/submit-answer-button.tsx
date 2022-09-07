@@ -23,7 +23,7 @@ const StyledButton = styled(Button)`
 const SubmitAnswerButton = () => {
   const intl = useIntl()
 
-  const [{ currentQuestionIndex }, setShowedQuestion] = useRecoilState(
+  const [currentQuestionIndex, setShowedQuestion] = useRecoilState(
     retrospectiveRoutineIndexQuestionAtom,
   )
 
@@ -38,11 +38,7 @@ const SubmitAnswerButton = () => {
   }, [])
 
   const comeBack = () => {
-    setShowedQuestion(({ stepsFromPreviousQuestion, currentQuestionIndex }) => {
-      return {
-        currentQuestionIndex: currentQuestionIndex - (stepsFromPreviousQuestion ?? 1),
-      }
-    })
+    setShowedQuestion((currentQuestionIndex) => currentQuestionIndex - 1)
   }
 
   return (

@@ -7,13 +7,40 @@ import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/
 
 import RoutineDrawer from '../Drawer/Base/drawer'
 import RoutineFormQuestion from '../Drawer/Questions'
+import { FormAnswerFormats, FormQuestion } from '../Drawer/Questions/types'
 import { useRoutineFormQuestions } from '../hooks/getRoutineForm/get-routine-form'
+
+const updateDependQuestions =
+  (questionId: string, questionAnswer: FormAnswerFormats) => (question: FormQuestion) => {
+    if (question.conditional?.dependsOn !== questionId) {
+      return question
+    }
+
+    const dependentQuestionType = question.conditional.type
+    const dependentValue =
+      question.conditional[dependentQuestionType as keyof FormQuestion['conditional']]
+
+    if (dependentQuestionType === 'road_block') {
+      const hiddenQuestion = questionAnswer !== dependentValue
+
+      return {
+        ...question,
+        hidden: hiddenQuestion,
+      }
+    }
+
+    const hiddenQuestion = questionAnswer > dependentValue
+    return {
+      ...question,
+      hidden: hiddenQuestion,
+    }
+  }
 
 const RetrospectiveRoutine = () => {
   const [isRoutineDrawerOpen, setIsRoutineDrawerOpen] = useRecoilState(routineDrawerOpened)
-  const { questions } = useRoutineFormQuestions()
+  const { routinesFormQuestions: questions, setRoutinesFormQuestions } = useRoutineFormQuestions()
 
-  const showedQuestion = useRecoilValue(retrospectiveRoutineIndexQuestionAtom)
+  const currentQuestionIndex = useRecoilValue(retrospectiveRoutineIndexQuestionAtom)
   const [answers, setAnswers] = useRecoilState(retrospectiveRoutineListAtom)
 
   const selectAnswer = (questionId: string) => {
@@ -22,33 +49,30 @@ const RetrospectiveRoutine = () => {
     return selectedAnswer?.questionAnswer
   }
 
-  const setAnswer = (questionId: string, questionAnswer: string | number) => {
-    const exist = Boolean(selectAnswer(questionId))
+  const reviewQuestions = (questionId: string, questionAnswer: FormAnswerFormats) => {
+    setRoutinesFormQuestions((questions) => {
+      const mappedQuestions = questions.map(updateDependQuestions(questionId, questionAnswer))
+      return mappedQuestions
+    })
+  }
 
-    const filteredAnswers = exist
-      ? answers.filter((answer) => answer.questionId !== questionId)
-      : answers
+  const setAnswer = (questionId: string, questionAnswer: FormAnswerFormats) => {
+    const filteredAnswers = answers.filter((answer) => answer.questionId !== questionId)
 
     const answer = { questionId, questionAnswer }
 
     setAnswers([...filteredAnswers, answer])
+    reviewQuestions(questionId, questionAnswer)
   }
 
   const retrospectiveFormQuestions = questions.map((retrospectiveQuestion, index) => {
-    const { id, type, heading, content, conditional, properties } = retrospectiveQuestion
-
     return (
       <RoutineFormQuestion
-        key={id}
-        id={id}
-        type={type}
-        properties={properties}
-        content={content}
-        conditional={conditional}
-        answer={selectAnswer(id)}
-        setAnswer={setAnswer}
-        heading={heading}
+        key={retrospectiveQuestion.id}
+        {...retrospectiveQuestion}
         formQuestionIndex={index}
+        setAnswer={setAnswer}
+        answer={selectAnswer(retrospectiveQuestion.id)}
       />
     )
   })
@@ -59,7 +83,7 @@ const RetrospectiveRoutine = () => {
       formSize={retrospectiveFormQuestions.length}
       onClose={() => setIsRoutineDrawerOpen(false)}
     >
-      {retrospectiveFormQuestions[showedQuestion.currentQuestionIndex]}
+      {retrospectiveFormQuestions[currentQuestionIndex]}
     </RoutineDrawer>
   )
 }

@@ -1,13 +1,18 @@
 import { useContext, useEffect } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useSetRecoilState, useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
+import { FormQuestion } from 'src/components/Routine/Drawer/Questions/types'
 import { intlLocaleAtom } from 'src/state/recoil/intl'
-import { routineFormQuestions } from 'src/state/recoil/routine/routine-form-questions'
+import {
+  routineFormQuestions,
+  retrospectiveRoutineSelector,
+} from 'src/state/recoil/routine/routine-form-questions'
 
 export const useRoutineFormQuestions = () => {
   const { servicesPromise } = useContext(ServicesContext)
-  const [routinesFormQuestions, setRoutinesFormQuestions] = useRecoilState(routineFormQuestions)
+  const setRoutinesFormQuestions = useSetRecoilState(routineFormQuestions)
+  const routinesFormQuestions = useRecoilValue(retrospectiveRoutineSelector)
   const intlLocale = useRecoilValue(intlLocaleAtom)
 
   // Const useLocaleFormated = intlLocale === 'en-US' ? 'en' : intlLocale.toLocaleLowerCase()
@@ -17,8 +22,13 @@ export const useRoutineFormQuestions = () => {
 
   const getRoutineQuestions = async () => {
     const { routines } = await servicesPromise
-    const { data: formQuestions } = await routines.get(requestFormQuestionsPath)
-    setRoutinesFormQuestions(formQuestions)
+    const { data } = await routines.get<{ questions: FormQuestion[] }>(requestFormQuestionsPath)
+    const mappedQuestions = data.questions.map((question) => ({
+      ...question,
+      hidden: false,
+    }))
+
+    setRoutinesFormQuestions(mappedQuestions)
   }
 
   useEffect(() => {
@@ -26,5 +36,5 @@ export const useRoutineFormQuestions = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return routinesFormQuestions
+  return { routinesFormQuestions, setRoutinesFormQuestions }
 }

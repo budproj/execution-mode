@@ -1,12 +1,11 @@
 import { Box, Flex, Stack, Text, Textarea } from '@chakra-ui/react'
 import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
-import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
-import SubmitAnswerButton from '../../Base/submit-answer-button'
+import BaseQuestionRoutineForm from '../base'
 import { FormQuestion } from '../types'
 
 import messages from './messages'
@@ -17,24 +16,14 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
   const intl = useIntl()
 
   const reference = useRef<HTMLTextAreaElement>(null)
-  const [inputValue, setInputValue] = useState(answer)
-
-  const [{ currentQuestionIndex }, setShowedQuestion] = useRecoilState(
-    retrospectiveRoutineIndexQuestionAtom,
+  const [inputValue, setInputValue] = useState(
+    typeof answer === 'string' || typeof answer === 'number' ? answer : undefined,
   )
 
   const { size } = useRecoilValue(currentRoutinePropertiesAtom)
 
-  const afterQuestion = () => {
-    setShowedQuestion((currentValue) => ({
-      currentQuestionIndex: currentValue.currentQuestionIndex + 1,
-    }))
-  }
-
   const handleSubmit = (event: FormEvent) => {
     if (setAnswer && reference.current?.value) setAnswer(id, reference.current.value)
-    event?.preventDefault()
-    if (size && currentQuestionIndex < size - 1) afterQuestion()
   }
 
   const handleKeyDown = (event: any) => {
@@ -54,17 +43,8 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
   }, [])
 
   return (
-    <Stack align="center" height="100%">
-      <form
-        style={{
-          display: 'flex',
-          height: '100%',
-          width: '100%',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
-        onSubmit={handleSubmit}
-      >
+    <BaseQuestionRoutineForm questionSubmit={handleSubmit}>
+      <Stack height="100%">
         <Box display="flex" flexDir="column" alignItems="left" gap={2} marginBottom={8}>
           <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
             {heading}
@@ -92,9 +72,8 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
             {intl.formatMessage(messages.lineBreakInstructionMessage)}
           </Flex>
         </Box>
-        <SubmitAnswerButton />
-      </form>
-    </Stack>
+      </Stack>
+    </BaseQuestionRoutineForm>
   )
 }
 

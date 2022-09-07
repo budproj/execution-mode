@@ -1,4 +1,4 @@
-import { atom } from 'recoil'
+import { atom, selector } from 'recoil'
 
 import { FormQuestion } from 'src/components/Routine/Drawer/Questions/types'
 
@@ -6,13 +6,17 @@ import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::ROUTINE_FORM_QUESTIONS_ATOM`
 
-interface RoutineFormQuestionsProperties {
-  questions: FormQuestion[]
-}
-
-export const routineFormQuestions = atom<RoutineFormQuestionsProperties>({
+export const routineFormQuestions = atom<FormQuestion[]>({
   key: KEY,
-  default: {
-    questions: [],
+  default: [],
+})
+
+export const retrospectiveRoutineSelector = selector({
+  key: `${PREFIX}::RETROSPECTIVE_ROUTINE_SELECTOR`,
+  get: ({ get }) => {
+    const questions = get(routineFormQuestions)
+    const filteredQuestions = questions.filter((question) => !question.hidden)
+
+    return filteredQuestions
   },
 })

@@ -12,7 +12,9 @@ interface EmojiScaleQuestionProperties extends FormQuestion {}
 const options = [1, 2, 3, 4, 5]
 
 const EmojiScaleQuestion = ({ id, heading, answer, setAnswer }: EmojiScaleQuestionProperties) => {
-  const [selectedRadio, setSelectedRadio] = useState(answer)
+  const [selectedRadio, setSelectedRadio] = useState(
+    typeof answer === 'number' ? answer : undefined,
+  )
   const { getEmoji } = useGetEmoji()
 
   const handleSubmit = () => {
