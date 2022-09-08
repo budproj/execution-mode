@@ -19,7 +19,7 @@ const RoutineDrawer = ({ children, isOpen, formSize, onClose }: RoutineDrawerPro
   return (
     <Drawer isOpen={isOpen} placement="bottom" size="full" onClose={onClose}>
       <DrawerContent display="flex" alignItems="center" bg="new-gray.300" position="relative">
-        <DrawerCloseButton />
+        <DrawerCloseButton top={10} right={10} fontSize={20} color="new-gray.800" />
         <DrawerBody
           width="690px"
           minW="540px"
@@ -28,7 +28,7 @@ const RoutineDrawer = ({ children, isOpen, formSize, onClose }: RoutineDrawerPro
           justifyContent="center"
           gap={6}
         >
-          <Box height={310}>{children}</Box>
+          <Box height={306}>{children}</Box>
         </DrawerBody>
       </DrawerContent>
     </Drawer>
