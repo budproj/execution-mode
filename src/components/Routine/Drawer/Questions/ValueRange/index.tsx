@@ -1,7 +1,9 @@
 import { HStack, Stack, Text, useRadioGroup, VStack } from '@chakra-ui/react'
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useCallback } from 'react'
+import { useSetRecoilState } from 'recoil'
 
 import RadioCard from 'src/components/Base/RadioButton/radio-card'
+import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
 import BaseQuestionRoutineForm from '../base'
 import { FormQuestion } from '../types'
@@ -16,6 +18,16 @@ const ValueRangeQuestion = ({
   setAnswer,
 }: ValueRangeQuestionProperties) => {
   const options = []
+
+  const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
+
+  const handleSelectRadioValue = useCallback((radioValue: string) => {
+    if (setAnswer) setAnswer(id, radioValue)
+
+    const radioTimer = setTimeout(() => setShowedQuestion((currentValue) => currentValue + 1), 300)
+
+    return () => clearTimeout(radioTimer)
+  }, [])
 
   if (properties) {
     for (let index = 0; index <= properties.steps - 1; index++) {
@@ -51,7 +63,7 @@ const ValueRangeQuestion = ({
           {...group}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             const selectedRadio = event.target.value
-            if (setAnswer) setAnswer(id, selectedRadio)
+            handleSelectRadioValue(selectedRadio)
           }}
         >
           {options.map((option) => {
