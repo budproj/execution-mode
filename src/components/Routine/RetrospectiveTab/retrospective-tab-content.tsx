@@ -1,11 +1,13 @@
-import { Button, Flex, Link, Stack, Text, Grid, GridItem } from '@chakra-ui/react'
+import { Button, Flex, Link, Stack, Text, Grid, Divider } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { CircleArrowRight } from 'src/components/Icon'
 
+import messages from '../../Page/Team/Tabs/content/messages'
+
 import AnswersComponent from './Answers'
-import messages from './messages'
+import RoutinesOverview from './RoutinesOverview'
 
 type AnswerType = {
   id: number
@@ -79,9 +81,10 @@ const RetrospectiveTabContent = () => {
           {intl.formatMessage(messages.tabRetrospectiveAnswerButton)}
         </Button>
       </Flex>
-      <Grid w="100%" templateColumns="370px 1fr" minHeight="750px" bg="white" borderRadius={15}>
+      <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
         <AnswersComponent answers={data} />
-        <GridItem background="blue">aaaa</GridItem>
+        <Divider orientation="vertical" borderColor="new-gray.400" />
+        <RoutinesOverview answers={data} />
       </Grid>
     </Stack>
   )

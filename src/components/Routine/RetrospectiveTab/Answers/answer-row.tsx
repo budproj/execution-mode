@@ -35,7 +35,7 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
         src="https://static.wikia.nocookie.net/rickandmorty/images/a/a6/Rick_Sanchez.png"
         marginRight="15px"
       >
-        <AvatarBadge border="none" boxSize="20px">
+        <AvatarBadge border="10.5px solid white" boxSize="20px">
           {true ? (
             getEmoji({ felling: answer.feeling, size: '20px' })
           ) : (

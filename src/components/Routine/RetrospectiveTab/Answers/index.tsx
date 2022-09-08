@@ -32,11 +32,12 @@ const AnswersComponent = ({ answers }: AnswersComponentProperties) => {
 
   return (
     <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">
-      <Flex width="100%" marginBottom="25px">
+      <Flex width="100%" height="38px" marginBottom="25px" marginTop="6px">
         <IconButton
           background="new-gray.200"
           aria-label={intl.formatMessage(messages.arrowLeftIconDescription)}
           borderRadius="10px 0px 0px 10px"
+          height="38px"
           icon={
             <ArrowRight
               transform="rotate(180deg)"
@@ -60,6 +61,7 @@ const AnswersComponent = ({ answers }: AnswersComponentProperties) => {
           borderRadius="0px 10px 10px 0px"
           background="new-gray.200"
           aria-label={intl.formatMessage(messages.arrowRightIconDescription)}
+          height="38px"
           icon={
             <ArrowRight
               desc={intl.formatMessage(messages.arrowRightIconDescription)}
@@ -68,13 +70,14 @@ const AnswersComponent = ({ answers }: AnswersComponentProperties) => {
           }
         />
       </Flex>
-      <Divider />
+      <Divider borderColor="new-gray.400" />
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
-        <SearchBar placeholder="Buscar" borderRadius="10px" onSearch={setSearch} />
+        <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
         <IconButton
           borderRadius="10px"
           background="new-gray.200"
           aria-label="aaaa"
+          height="38px"
           icon={
             <ThreeLayersIcon
               desc={intl.formatMessage(messages.threeLayersIconDescription)}
@@ -87,7 +90,7 @@ const AnswersComponent = ({ answers }: AnswersComponentProperties) => {
         return <AnswerRowComponent key={answer.id} answer={answer} />
       })}
       <Box textAlign="center" marginTop="auto">
-        <Divider />
+        <Divider borderColor="new-gray.400" />
         <Text color="red.500" fontWeight="500" fontSize="14px" marginY="10px">
           <BrilliantBellIcon
             desc={intl.formatMessage(messages.redBellIconDescription)}
