@@ -10,7 +10,6 @@ interface ConditionalTypeInfo {
   value_range?: number
 }
 
-export type FormAnswerFormats = number | string | boolean
 interface ValueRangeProperties {
   steps: number
   labels: {
@@ -29,6 +28,6 @@ export interface FormQuestion {
   conditional?: ConditionalTypeInfo
   properties?: ValueRangeProperties
   formQuestionIndex: number
-  answer?: FormAnswerFormats
-  setAnswer?: (questionId: string, questionAnswer: FormAnswerFormats) => void
+  answer?: string
+  setAnswer?: (questionId: string, value: string) => void
 }

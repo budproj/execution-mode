@@ -9,12 +9,10 @@ import { FormQuestion } from '../types'
 
 interface EmojiScaleQuestionProperties extends FormQuestion {}
 
-const options = [1, 2, 3, 4, 5]
+const options = ['1', '2', '3', '4', '5']
 
 const EmojiScaleQuestion = ({ id, heading, answer, setAnswer }: EmojiScaleQuestionProperties) => {
-  const [selectedRadio, setSelectedRadio] = useState(
-    typeof answer === 'number' ? answer : undefined,
-  )
+  const [selectedRadio, setSelectedRadio] = useState(answer)
   const { getEmoji } = useGetEmoji()
 
   const handleSubmit = () => {
@@ -40,7 +38,7 @@ const EmojiScaleQuestion = ({ id, heading, answer, setAnswer }: EmojiScaleQuesti
         mb={24}
         {...group}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          const selectedRadio = Number(event.target.value)
+          const selectedRadio = event.target.value
           setSelectedRadio(selectedRadio)
         }}
       >
@@ -49,7 +47,7 @@ const EmojiScaleQuestion = ({ id, heading, answer, setAnswer }: EmojiScaleQuesti
           return (
             <VStack key={value} as="label">
               <Box cursor="pointer" mb={5}>
-                {getEmoji({ felling: value, size: '76px' })}
+                {getEmoji({ felling: Number(value), size: '76px' })}
               </Box>
               <RadioCard properties={radio}>{value}</RadioCard>
             </VStack>

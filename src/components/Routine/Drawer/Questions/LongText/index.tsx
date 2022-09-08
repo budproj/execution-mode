@@ -16,9 +16,7 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
   const intl = useIntl()
 
   const reference = useRef<HTMLTextAreaElement>(null)
-  const [inputValue, setInputValue] = useState(
-    typeof answer === 'string' || typeof answer === 'number' ? answer : undefined,
-  )
+  const [inputValue, setInputValue] = useState(answer)
 
   const { size } = useRecoilValue(currentRoutinePropertiesAtom)
 

@@ -7,34 +7,33 @@ import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/
 
 import RoutineDrawer from '../Drawer/Base/drawer'
 import RoutineFormQuestion from '../Drawer/Questions'
-import { FormAnswerFormats, FormQuestion } from '../Drawer/Questions/types'
+import { FormQuestion } from '../Drawer/Questions/types'
 import { useRoutineFormQuestions } from '../hooks/getRoutineForm/get-routine-form'
 
-const updateDependQuestions =
-  (questionId: string, questionAnswer: FormAnswerFormats) => (question: FormQuestion) => {
-    if (question.conditional?.dependsOn !== questionId) {
-      return question
-    }
+const updateDependQuestions = (questionId: string, value: string) => (question: FormQuestion) => {
+  if (question.conditional?.dependsOn !== questionId) {
+    return question
+  }
 
-    const dependentQuestionType = question.conditional.type
-    const dependentValue =
-      question.conditional[dependentQuestionType as keyof FormQuestion['conditional']]
+  const dependentQuestionType = question.conditional.type
+  const dependentValue =
+    question.conditional[dependentQuestionType as keyof FormQuestion['conditional']]
 
-    if (dependentQuestionType === 'road_block') {
-      const hiddenQuestion = questionAnswer !== dependentValue
+  if (dependentQuestionType === 'road_block') {
+    const hiddenQuestion = value !== (dependentValue === true ? 'y' : 'n')
 
-      return {
-        ...question,
-        hidden: hiddenQuestion,
-      }
-    }
-
-    const hiddenQuestion = questionAnswer > dependentValue
     return {
       ...question,
       hidden: hiddenQuestion,
     }
   }
+
+  const hiddenQuestion = value > dependentValue
+  return {
+    ...question,
+    hidden: hiddenQuestion,
+  }
+}
 
 const RetrospectiveRoutine = () => {
   const [isRoutineDrawerOpen, setIsRoutineDrawerOpen] = useRecoilState(routineDrawerOpened)
@@ -46,23 +45,23 @@ const RetrospectiveRoutine = () => {
   const selectAnswer = (questionId: string) => {
     const selectedAnswer = answers.find((answer) => answer.questionId === questionId)
 
-    return selectedAnswer?.questionAnswer
+    return selectedAnswer?.value
   }
 
-  const reviewQuestions = (questionId: string, questionAnswer: FormAnswerFormats) => {
+  const reviewQuestions = (questionId: string, value: string) => {
     setRoutinesFormQuestions((questions) => {
-      const mappedQuestions = questions.map(updateDependQuestions(questionId, questionAnswer))
+      const mappedQuestions = questions.map(updateDependQuestions(questionId, value))
       return mappedQuestions
     })
   }
 
-  const setAnswer = (questionId: string, questionAnswer: FormAnswerFormats) => {
+  const setAnswer = (questionId: string, value: string) => {
     const filteredAnswers = answers.filter((answer) => answer.questionId !== questionId)
 
-    const answer = { questionId, questionAnswer }
+    const answer = { questionId, value }
 
     setAnswers([...filteredAnswers, answer])
-    reviewQuestions(questionId, questionAnswer)
+    reviewQuestions(questionId, value)
   }
 
   const retrospectiveFormQuestions = questions.map((retrospectiveQuestion, index) => {

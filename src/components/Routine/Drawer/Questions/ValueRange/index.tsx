@@ -15,7 +15,7 @@ const ValueRangeQuestion = ({
   properties,
   setAnswer,
 }: ValueRangeQuestionProperties) => {
-  const [selectedRadio, setSelectedRadio] = useState(String(answer))
+  const [selectedRadio, setSelectedRadio] = useState(answer)
 
   const options = []
 

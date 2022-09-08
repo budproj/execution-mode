@@ -14,22 +14,14 @@ interface RoadBlockQuestionProperties extends FormQuestion {}
 const RoadBlockQuestion = ({ id, heading, answer, setAnswer }: RoadBlockQuestionProperties) => {
   const intl = useIntl()
 
-  const [selectedRadio, setSelectedRadio] = useState(() => {
-    if (answer === true) {
-      return 'y'
-    }
-
-    if (answer === false) {
-      return 'n'
-    }
-  })
+  const [selectedRadio, setSelectedRadio] = useState(() => answer)
   const options = [
     { value: 'y', desc: intl.formatMessage(messages.firstOptionDescription) },
     { value: 'n', desc: intl.formatMessage(messages.secondOptionDescription) },
   ]
 
   const handleSubmit = () => {
-    if (setAnswer) setAnswer(id, selectedRadio === 'y')
+    if (setAnswer && selectedRadio) setAnswer(id, selectedRadio)
   }
 
   const { getRootProps, getRadioProps } = useRadioGroup({

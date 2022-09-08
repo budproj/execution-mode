@@ -5,6 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
+import { useRoutineFormAnswers } from '../../hooks/setRoutineFormAnswers/set-routine-form-answers'
 import SubmitAnswerButton from '../Base/submit-answer-button'
 
 interface BaseQuestionRoutineFormProperties {
@@ -19,6 +20,7 @@ const BaseQuestionRoutineForm = ({
   const [currentQuestionIndex, setShowedQuestion] = useRecoilState(
     retrospectiveRoutineIndexQuestionAtom,
   )
+  const { setRoutineFormAnswers } = useRoutineFormAnswers()
 
   const { size } = useRecoilValue(currentRoutinePropertiesAtom)
 
@@ -31,6 +33,7 @@ const BaseQuestionRoutineForm = ({
     event.preventDefault()
 
     if (size && currentQuestionIndex < size - 1) afterQuestion()
+    if (size && currentQuestionIndex === size - 1) setRoutineFormAnswers()
   }
 
   return (
