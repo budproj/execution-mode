@@ -8,7 +8,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
-import { usePendingRoutines } from 'src/components/Routine/hook'
+import { usePendingRoutines } from 'src/components/Routine/hooks'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
