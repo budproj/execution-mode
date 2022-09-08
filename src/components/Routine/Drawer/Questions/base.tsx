@@ -10,7 +10,7 @@ interface BaseQuestionRoutineFormProperties {
 const BaseQuestionRoutineForm = ({ children }: BaseQuestionRoutineFormProperties) => {
   return (
     <Stack display="flex" flexDir="column" justifyContent="space-between" height="100%">
-      <Box height="100%">{children}</Box>
+      <Box>{children}</Box>
       <SubmitAnswerButton />
     </Stack>
   )
