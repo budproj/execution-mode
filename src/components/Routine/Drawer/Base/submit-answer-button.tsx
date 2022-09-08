@@ -8,6 +8,8 @@ import { OpenArrowDown, OpenArrowUp } from 'src/components/Icon'
 import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
+import { useRoutineFormAnswers } from '../../hooks/setRoutineFormAnswers/set-routine-form-answers'
+
 import messages from './messages'
 
 const StyledButton = styled(Button)`
@@ -26,10 +28,20 @@ const SubmitAnswerButton = () => {
   const [currentQuestionIndex, setShowedQuestion] = useRecoilState(
     retrospectiveRoutineIndexQuestionAtom,
   )
+  const { setRoutineFormAnswers } = useRoutineFormAnswers()
 
   const buttonReference = useRef<HTMLButtonElement>(null)
 
+  const afterQuestion = () => {
+    setShowedQuestion((currentValue) => currentValue + 1)
+  }
+
   const { size } = useRecoilValue(currentRoutinePropertiesAtom)
+
+  const handleClick = () => {
+    if (size && currentQuestionIndex < size - 1) afterQuestion()
+    if (size && currentQuestionIndex === size - 1) setRoutineFormAnswers()
+  }
 
   useEffect(() => {
     if (buttonReference.current) {
@@ -50,8 +62,8 @@ const SubmitAnswerButton = () => {
         bg="brand.500"
         fontSize={18}
         fontWeight="medium"
-        type="submit"
         _hover={{}}
+        onClick={handleClick}
       >
         {currentQuestionIndex >= 1
           ? size && currentQuestionIndex === size - 1
@@ -71,7 +83,7 @@ const SubmitAnswerButton = () => {
           )}
 
           {size && currentQuestionIndex < size - 1 && (
-            <StyledButton type="submit">
+            <StyledButton onClick={handleClick}>
               <OpenArrowDown desc={intl.formatMessage(messages.afterQuestionButtonFormIconDesc)} />
             </StyledButton>
           )}

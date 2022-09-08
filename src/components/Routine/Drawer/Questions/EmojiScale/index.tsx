@@ -1,5 +1,5 @@
 import { Box, HStack, Text, useRadioGroup, VStack } from '@chakra-ui/react'
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent } from 'react'
 
 import RadioCard from 'src/components/Base/RadioButton/radio-card'
 import { useGetEmoji } from 'src/components/Routine/hooks'
@@ -12,22 +12,17 @@ interface EmojiScaleQuestionProperties extends FormQuestion {}
 const options = ['1', '2', '3', '4', '5']
 
 const EmojiScaleQuestion = ({ id, heading, answer, setAnswer }: EmojiScaleQuestionProperties) => {
-  const [selectedRadio, setSelectedRadio] = useState(answer)
   const { getEmoji } = useGetEmoji()
-
-  const handleSubmit = () => {
-    if (setAnswer && selectedRadio) setAnswer(id, selectedRadio)
-  }
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'ROUTINES_SATISFACTION_QUESTION',
-    value: selectedRadio,
+    value: answer,
   })
 
   const group = getRootProps()
 
   return (
-    <BaseQuestionRoutineForm questionSubmit={handleSubmit}>
+    <BaseQuestionRoutineForm>
       <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold" mb={14}>
         {heading}
       </Text>
@@ -39,7 +34,7 @@ const EmojiScaleQuestion = ({ id, heading, answer, setAnswer }: EmojiScaleQuesti
         {...group}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           const selectedRadio = event.target.value
-          setSelectedRadio(selectedRadio)
+          if (setAnswer) setAnswer(id, selectedRadio)
         }}
       >
         {options.map((value) => {

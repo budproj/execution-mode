@@ -1,5 +1,5 @@
 import { Box, Flex, Stack, Text, Textarea } from '@chakra-ui/react'
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { FormEvent, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -16,7 +16,6 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
   const intl = useIntl()
 
   const reference = useRef<HTMLTextAreaElement>(null)
-  const [inputValue, setInputValue] = useState(answer)
 
   const { size } = useRecoilValue(currentRoutinePropertiesAtom)
 
@@ -41,7 +40,7 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
   }, [])
 
   return (
-    <BaseQuestionRoutineForm questionSubmit={handleSubmit}>
+    <BaseQuestionRoutineForm>
       <Stack height="100%">
         <Box display="flex" flexDir="column" alignItems="left" gap={2} marginBottom={8}>
           <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
@@ -51,7 +50,7 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
         <Box>
           <Textarea
             ref={reference}
-            value={inputValue}
+            value={answer}
             resize="none"
             variant="flushed"
             overflowWrap="break-word"
@@ -63,7 +62,9 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
             overflow="hidden"
             minH="0px !important"
             color="new-gray.800"
-            onChange={(event) => setInputValue(event.target.value)}
+            onChange={(event) => {
+              if (setAnswer) setAnswer(id, event.target.value)
+            }}
           />
           <Flex pt={4} color="new-gray.700" fontSize={15}>
             <b>Shift &#8593;&nbsp;</b> +&nbsp;<b>Enter &#x23CE; &nbsp;</b>

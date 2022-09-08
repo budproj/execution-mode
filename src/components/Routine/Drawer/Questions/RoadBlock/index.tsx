@@ -1,5 +1,5 @@
 import { HStack, Stack, Text, useRadioGroup } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { ChangeEvent } from 'react'
 import { useIntl } from 'react-intl'
 
 import RadioCard from 'src/components/Base/RadioButton/radio-card'
@@ -14,31 +14,35 @@ interface RoadBlockQuestionProperties extends FormQuestion {}
 const RoadBlockQuestion = ({ id, heading, answer, setAnswer }: RoadBlockQuestionProperties) => {
   const intl = useIntl()
 
-  const [selectedRadio, setSelectedRadio] = useState(() => answer)
   const options = [
     { value: 'y', desc: intl.formatMessage(messages.firstOptionDescription) },
     { value: 'n', desc: intl.formatMessage(messages.secondOptionDescription) },
   ]
 
-  const handleSubmit = () => {
-    if (setAnswer && selectedRadio) setAnswer(id, selectedRadio)
-  }
-
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'ROUTINES_ROADBLOCK_QUESTION',
-    value: selectedRadio,
-    onChange: setSelectedRadio,
+    value: answer,
   })
 
   const group = getRootProps()
 
   return (
-    <BaseQuestionRoutineForm questionSubmit={handleSubmit}>
+    <BaseQuestionRoutineForm>
       <Stack gap={14}>
         <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
           {heading}
         </Text>
-        <HStack display="flex" alignItems="center" gap={2} mb={24} {...group}>
+        <HStack
+          display="flex"
+          alignItems="center"
+          gap={2}
+          mb={24}
+          {...group}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            const selectedRadio = event.target.value
+            if (setAnswer) setAnswer(id, selectedRadio)
+          }}
+        >
           {options.map((option) => {
             const { value, desc } = option
 

@@ -10,13 +10,9 @@ import SubmitAnswerButton from '../Base/submit-answer-button'
 
 interface BaseQuestionRoutineFormProperties {
   children: JSX.Element | JSX.Element[]
-  questionSubmit: (event: FormEvent) => void
 }
 
-const BaseQuestionRoutineForm = ({
-  children,
-  questionSubmit,
-}: BaseQuestionRoutineFormProperties) => {
+const BaseQuestionRoutineForm = ({ children }: BaseQuestionRoutineFormProperties) => {
   const [currentQuestionIndex, setShowedQuestion] = useRecoilState(
     retrospectiveRoutineIndexQuestionAtom,
   )
@@ -29,7 +25,6 @@ const BaseQuestionRoutineForm = ({
   }
 
   const handleSubmit = (event: FormEvent) => {
-    questionSubmit(event)
     event.preventDefault()
 
     if (size && currentQuestionIndex < size - 1) afterQuestion()
@@ -37,19 +32,17 @@ const BaseQuestionRoutineForm = ({
   }
 
   return (
-    <Stack height="100%">
-      <form
-        style={{
-          display: 'flex',
-          height: '100%',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-        }}
-        onSubmit={handleSubmit}
-      >
-        <Box>{children}</Box>
-        <SubmitAnswerButton />
-      </form>
+    <Stack
+      height="100%"
+      style={{
+        display: 'flex',
+        height: '100%',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <Box>{children}</Box>
+      <SubmitAnswerButton />
     </Stack>
   )
 }

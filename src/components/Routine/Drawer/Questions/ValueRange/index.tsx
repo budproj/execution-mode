@@ -1,5 +1,5 @@
 import { HStack, Stack, Text, useRadioGroup, VStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { ChangeEvent } from 'react'
 
 import RadioCard from 'src/components/Base/RadioButton/radio-card'
 
@@ -15,8 +15,6 @@ const ValueRangeQuestion = ({
   properties,
   setAnswer,
 }: ValueRangeQuestionProperties) => {
-  const [selectedRadio, setSelectedRadio] = useState(answer)
-
   const options = []
 
   if (properties) {
@@ -33,25 +31,29 @@ const ValueRangeQuestion = ({
     }
   }
 
-  const handleSubmit = () => {
-    if (setAnswer && selectedRadio) setAnswer(id, selectedRadio)
-  }
-
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: 'ROUTINES_NUMERICAL_SCALE_QUESTION',
-    defaultValue: selectedRadio,
-    onChange: setSelectedRadio,
+    defaultValue: answer,
   })
 
   const group = getRootProps()
 
   return (
-    <BaseQuestionRoutineForm questionSubmit={handleSubmit}>
+    <BaseQuestionRoutineForm>
       <Stack gap={10} maxW="fit-content">
         <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
           {heading}
         </Text>
-        <HStack display="flex" alignItems="flex-start" justifyContent="space-around" {...group}>
+        <HStack
+          display="flex"
+          alignItems="flex-start"
+          justifyContent="space-around"
+          {...group}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            const selectedRadio = event.target.value
+            if (setAnswer) setAnswer(id, selectedRadio)
+          }}
+        >
           {options.map((option) => {
             const { value, desc } = option
 
