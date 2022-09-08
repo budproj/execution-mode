@@ -1,15 +1,20 @@
-import { Box, Button, Text } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
+import { IntlLink } from 'src/components/Base'
 import { ArrowRight } from 'src/components/Icon'
+import { isOpenRoutineRedirectTeamPage } from 'src/state/recoil/routine/opened-routine-redirect-team-drawer'
+import { routineAnswersReturnedData } from 'src/state/recoil/routine/user-teams'
 
 import RoutineDrawer from '../drawer'
 
 import messages from './messages'
 
 const TeamRedirectPage = () => {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useRecoilState(isOpenRoutineRedirectTeamPage)
+  const userTeams = useRecoilValue(routineAnswersReturnedData)
   const intl = useIntl()
 
   return (
@@ -24,17 +29,31 @@ const TeamRedirectPage = () => {
             ),
           })}
         </Text>
-        <Button
-          mt={12}
-          fontSize={18}
-          fontWeight="medium"
-          color="#525F7F"
-          p={3}
-          outline="2px solid #B5C0DB"
-          rightIcon={<ArrowRight ml={2} fill="current" fontSize="12px" desc="da" />}
-        >
-          Produto
-        </Button>
+
+        <Flex gap={6}>
+          {userTeams?.map((team) => (
+            <IntlLink key={team.id} href={`/explore/${team?.id}#retrospectiva`}>
+              <Button
+                mt={12}
+                fontSize={18}
+                fontWeight="medium"
+                color="#525F7F"
+                p={3}
+                outline="2px solid #B5C0DB"
+                rightIcon={
+                  <ArrowRight
+                    fill="current"
+                    fontSize="11px"
+                    desc={intl.formatMessage(messages.title)}
+                  />
+                }
+                onClick={() => setIsOpen(false)}
+              >
+                {team.name}
+              </Button>
+            </IntlLink>
+          ))}
+        </Flex>
       </Box>
     </RoutineDrawer>
   )

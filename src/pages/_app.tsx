@@ -17,6 +17,7 @@ import { ServicesProvider } from 'src/components/Base/ServicesProvider'
 import { SocketIOProvider } from 'src/components/Base/SocketIOProvider'
 import { KeyResultSingleDrawer } from 'src/components/KeyResult/Single'
 import { RetrospectiveRoutine } from 'src/components/Routine'
+import TeamRedirectPage from 'src/components/Routine/Drawer/Base/TeamRedirectPage/team-redirect-page'
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
 
@@ -71,6 +72,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                         <HubSpotProvider />
                         <ProgressBar />
                         <KeyResultSingleDrawer />
+                        <TeamRedirectPage />
                         <RetrospectiveRoutine />
                         <Component {...pageProps} />
                       </MaintenanceGatekeeper>
