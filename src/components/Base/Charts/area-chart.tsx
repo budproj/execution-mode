@@ -118,15 +118,15 @@ export const AreaChartComponent = ({
           <CartesianGrid fill="#F8F9FD" strokeOpacity={0.3} color="black" vertical={false} />
           <XAxis
             dataKey="mes"
-            scale="time"
-            // Interval={30}
+            interval={30}
             // TickFormatter={formatXAxis}
             // domain={[0, 3]}
-            // TickSize={0}
-            // tick={<CustomizedXAxisTick />}
-            ticks={['Jan', 'Fev', 'Mar']}
+            tickSize={0}
+            // Tick={<CustomizedXAxisTick />}
             // MinTickGap={100}
             strokeOpacity={0.5}
+            stroke="#99A4C2"
+            tickMargin={10}
           />
 
           <YAxis
