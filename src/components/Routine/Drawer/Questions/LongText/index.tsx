@@ -21,9 +21,13 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
   const reference = useRef<HTMLTextAreaElement>(null)
 
   const handleSubmitAnswer = useCallback(() => {
-    const timer = setTimeout(() => setShowedQuestion((currentValue) => currentValue + 1), 300)
+    const timer = setTimeout(
+      () => setShowedQuestion((currentValue) => Number(currentValue) + 1),
+      300,
+    )
 
     return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleKeyDown = (event: any) => {

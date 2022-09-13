@@ -1,15 +1,17 @@
 import { useContext, useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
+import { pendingRoutinesAtom } from 'src/state/recoil/routine/pending-routines'
 
 export const usePendingRoutines = () => {
   const { servicesPromise } = useContext(ServicesContext)
-  // Const [routines, setPendingRoutines] = useRecoilState(pendingRoutinesAtom)
+  const [routines, setPendingRoutines] = useRecoilState(pendingRoutinesAtom)
 
   const getPendingRoutines = async () => {
     const { routines } = await servicesPromise
     const { data: pendingRoutines } = await routines.get('/pending')
-    // SetPendingRoutines(pendingRoutines)
+    if (pendingRoutines) setPendingRoutines(pendingRoutines)
   }
 
   useEffect(() => {
@@ -17,5 +19,5 @@ export const usePendingRoutines = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return 'ds'
+  return routines
 }
