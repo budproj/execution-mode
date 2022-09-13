@@ -108,7 +108,7 @@
     "ts-node": "^9.1.1"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.10",
+    "@apollo/client": "^3.6.8",
     "@auth0/auth0-react": "^1.9.0",
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11.8.2",
