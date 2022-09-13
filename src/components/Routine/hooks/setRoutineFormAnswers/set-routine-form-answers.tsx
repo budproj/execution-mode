@@ -1,8 +1,11 @@
+import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useCallback, useContext } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
+import messages from 'src/components/Cycle/ActionModals/UpdateCycleModal/messages'
 import { Team } from 'src/components/Team/types'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import { isOpenRoutineRedirectTeamPage } from 'src/state/recoil/routine/opened-routine-redirect-team-drawer'
@@ -18,6 +21,8 @@ export const useRoutineFormAnswers = () => {
   const resetCurrentQuestionIndex = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
 
   const router = useRouter()
+  const toaster = useToast()
+  const intl = useIntl()
 
   const answers = useRecoilValue(retrospectiveRoutineListAtom)
 
@@ -25,14 +30,23 @@ export const useRoutineFormAnswers = () => {
     const { routines } = await servicesPromise
     const { data } = await routines.post<Team[]>('/answer', [...answers])
 
-    setIsRoutineDrawerOpen(false)
-    if (data.length > 1) {
-      setUserTeams(data)
-      resetCurrentQuestionIndex(0)
-      setRedirectTeamDrawerIsOpen(true)
+    if (data) {
+      setIsRoutineDrawerOpen(false)
+
+      if (data.length > 1) {
+        setUserTeams(data)
+        resetCurrentQuestionIndex(0)
+        setRedirectTeamDrawerIsOpen(true)
+      } else {
+        router.push(`/explore/${data[0].id}#retrospectiva`)
+      }
     } else {
-      router.push(`/explore/${data[0].id}#retrospectiva`)
+      toaster({
+        title: intl.formatMessage(messages.unknownErrorToastMessage),
+        status: 'error',
+      })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return { setRoutineFormAnswers }
