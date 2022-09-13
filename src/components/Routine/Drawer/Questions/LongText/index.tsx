@@ -1,10 +1,7 @@
 import { Box, Flex, Stack, Text, Textarea } from '@chakra-ui/react'
-import React, { useCallback, useEffect, useRef } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import ResizeTextarea from 'react-textarea-autosize'
-import { useSetRecoilState } from 'recoil'
-
-import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
 import BaseQuestionRoutineForm from '../base'
 import { FormQuestion } from '../types'
@@ -16,37 +13,6 @@ interface LongTextQuestionProperties extends FormQuestion {}
 const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionProperties) => {
   const intl = useIntl()
 
-  const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
-
-  const reference = useRef<HTMLTextAreaElement>(null)
-
-  const handleSubmitAnswer = useCallback(() => {
-    const timer = setTimeout(
-      () => setShowedQuestion((currentValue) => Number(currentValue) + 1),
-      300,
-    )
-
-    return () => clearTimeout(timer)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const handleKeyDown = (event: any) => {
-    const keyCode = event.which || event.key
-
-    if (keyCode === 13 && !event.shiftKey) {
-      event.preventDefault()
-      handleSubmitAnswer()
-    }
-  }
-
-  useEffect(() => {
-    if (reference.current) {
-      reference.current.addEventListener('keydown', handleKeyDown)
-    }
-
-    if (reference.current) window.removeEventListener('keydown', handleKeyDown)
-  }, [])
-
   return (
     <BaseQuestionRoutineForm>
       <Stack>
@@ -57,7 +23,6 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
         </Box>
         <Box>
           <Textarea
-            ref={reference}
             as={ResizeTextarea}
             value={answer}
             resize="none"

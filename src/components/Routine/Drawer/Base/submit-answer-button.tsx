@@ -43,15 +43,25 @@ const SubmitAnswerButton = () => {
     if (size && currentQuestionIndex === size - 1) setRoutineFormAnswers()
   }
 
-  useEffect(() => {
-    if (buttonReference.current) {
-      buttonReference.current.focus()
-    }
-  }, [])
-
   const comeBack = () => {
     setShowedQuestion((currentQuestionIndex) => currentQuestionIndex - 1)
   }
+
+  const handleKeyDown = (event: any) => {
+    const keyCode = event.which || event.key
+
+    if (keyCode === 13 && !event.shiftKey) {
+      event.preventDefault()
+      handleClick()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => document.removeEventListener('keydown', handleKeyDown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Flex alignItems="center">
@@ -82,8 +92,12 @@ const SubmitAnswerButton = () => {
             </StyledButton>
           )}
 
-          {size && currentQuestionIndex < size - 1 && (
-            <StyledButton onClick={handleClick}>
+          {currentQuestionIndex > 0 && (
+            <StyledButton
+              disabled={!(size && currentQuestionIndex < size - 1)}
+              _hover={{}}
+              onClick={handleClick}
+            >
               <OpenArrowDown desc={intl.formatMessage(messages.afterQuestionButtonFormIconDesc)} />
             </StyledButton>
           )}
