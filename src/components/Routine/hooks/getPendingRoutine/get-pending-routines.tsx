@@ -11,7 +11,7 @@ export const usePendingRoutines = () => {
   const getPendingRoutines = async () => {
     const { routines } = await servicesPromise
     const { data: pendingRoutines } = await routines.get('/pending')
-    setPendingRoutines(pendingRoutines)
+    if (pendingRoutines) setPendingRoutines(pendingRoutines)
   }
 
   useEffect(() => {
