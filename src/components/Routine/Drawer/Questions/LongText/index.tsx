@@ -1,9 +1,6 @@
 import { Box, Flex, Stack, Text, Textarea } from '@chakra-ui/react'
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
-
-import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
 
 import BaseQuestionRoutineForm from '../base'
 import { FormQuestion } from '../types'
@@ -18,9 +15,7 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
   const reference = useRef<HTMLTextAreaElement>(null)
   const [inputValue, setInputValue] = useState(answer)
 
-  const { size } = useRecoilValue(currentRoutinePropertiesAtom)
-
-  const handleSubmit = (event: FormEvent) => {
+  const handleSubmit = () => {
     if (setAnswer && reference.current?.value) setAnswer(id, reference.current.value)
   }
 
@@ -28,7 +23,7 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
     const keyCode = event.which || event.key
 
     if (keyCode === 13 && !event.shiftKey) {
-      handleSubmit(event)
+      handleSubmit()
     }
   }
 
