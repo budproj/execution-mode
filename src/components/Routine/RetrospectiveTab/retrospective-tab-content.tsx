@@ -3,13 +3,14 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { CircleArrowRight } from 'src/components/Icon'
+import { Team } from 'src/components/Team/types'
 
 import messages from '../../Page/Team/Tabs/content/messages'
 
 import AnswersComponent from './Answers'
-import RoutinesOverview from './RoutinesOverview'
+import RetrospectiveTabContentView from './retrospective-tab-content-view'
 
-type AnswerType = {
+export type AnswerType = {
   id: number
   user: string
   feeling: number
@@ -34,7 +35,13 @@ const data: AnswerType[] = [
   },
 ]
 
-const RetrospectiveTabContent = () => {
+// TODO: change interface
+interface RetrospectiveTabContent {
+  teamId: Team['id']
+  answerQuery: string
+}
+
+const RetrospectiveTabContent = ({ answerQuery, teamId }: RetrospectiveTabContent) => {
   const intl = useIntl()
 
   return (
@@ -82,9 +89,9 @@ const RetrospectiveTabContent = () => {
         </Button>
       </Flex>
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
-        <AnswersComponent answers={data} />
+        <AnswersComponent teamId={teamId} answers={data} />
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RoutinesOverview answers={data} />
+        <RetrospectiveTabContentView answers={data} answerQuery={answerQuery} />
       </Grid>
     </Stack>
   )

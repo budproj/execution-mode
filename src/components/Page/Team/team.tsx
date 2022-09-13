@@ -29,6 +29,8 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
     intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
   )
 
+  const [answerQuery, setAnswerQuery] = useState<string>('')
+
   const tabs = new Set([
     intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
     intl.formatMessage(messages.retrospectiveTeamTab).toLocaleLowerCase(),
@@ -42,7 +44,10 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const { hash } = window.location
-    const tab = hash.replace('#', '').toLowerCase()
+    const hashedLocation = hash.replace('#', '').toLowerCase()
+
+    const [tab, query] = hashedLocation.split('?')
+    setAnswerQuery(query ?? '')
 
     if (tab && tabs.has(tab) && tab !== activeTab) {
       setActiveTab(tab)
@@ -97,7 +102,12 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
             </Stack>
           </Stack>
         </Stack>
-        <ExploreTeamTabs activeTab={activeTab} teamId={teamId} isLoading={isLoading} />
+        <ExploreTeamTabs
+          activeTab={activeTab}
+          teamId={teamId}
+          answerQuery={answerQuery}
+          isLoading={isLoading}
+        />
       </Flex>
     </ApolloQueryErrorBoundary>
   )

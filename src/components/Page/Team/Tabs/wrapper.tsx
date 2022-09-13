@@ -13,11 +13,17 @@ import OkrsTabContent from './content/okrs-tab-content'
 
 interface ExploreTeamTabsProperties {
   teamId: Team['id']
+  answerQuery: string
   isLoading?: boolean
   activeTab?: string
 }
 
-const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProperties) => {
+const ExploreTeamTabs = ({
+  teamId,
+  answerQuery,
+  isLoading,
+  activeTab,
+}: ExploreTeamTabsProperties) => {
   const intl = useIntl()
 
   return (
@@ -36,7 +42,7 @@ const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProper
             <OkrsTabContent teamId={teamId} isLoading={isLoading} />
           </TabPanel>
           <TabPanel padding="0px !important">
-            <RetrospectiveTabContent />
+            <RetrospectiveTabContent teamId={teamId} answerQuery={answerQuery} />
           </TabPanel>
         </TabPanels>
       </PageContent>

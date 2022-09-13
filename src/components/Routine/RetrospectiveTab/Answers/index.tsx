@@ -7,11 +7,13 @@ import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import ThreeLayersIcon from 'src/components/Icon/ThreeLayers'
+import { Team } from 'src/components/Team/types'
 
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
 
 interface AnswersComponentProperties {
+  teamId: Team['id']
   answers: Array<{
     id: number
     user: string
@@ -21,7 +23,7 @@ interface AnswersComponentProperties {
   }>
 }
 
-const AnswersComponent = ({ answers }: AnswersComponentProperties) => {
+const AnswersComponent = ({ answers, teamId }: AnswersComponentProperties) => {
   const intl = useIntl()
   const [search, setSearch] = useState('')
   const [filteredAnswers, setFilteredAnswers] = useState(answers)
@@ -87,7 +89,7 @@ const AnswersComponent = ({ answers }: AnswersComponentProperties) => {
         />
       </Flex>
       {filteredAnswers.map((answer) => {
-        return <AnswerRowComponent key={answer.id} answer={answer} />
+        return <AnswerRowComponent key={answer.id} teamId={teamId} answer={answer} />
       })}
       <Box textAlign="center" marginTop="auto">
         <Divider borderColor="new-gray.400" />
