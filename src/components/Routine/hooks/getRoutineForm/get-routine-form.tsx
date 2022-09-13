@@ -21,12 +21,15 @@ export const useRoutineFormQuestions = () => {
   const getRoutineQuestions = async () => {
     const { routines } = await servicesPromise
     const { data } = await routines.get<{ questions: FormQuestion[] }>(requestFormQuestionsPath)
-    const mappedQuestions = data.questions.map((question) => ({
-      ...question,
-      hidden: false,
-    }))
 
-    setRoutinesFormQuestions(mappedQuestions)
+    if (data.questions) {
+      const mappedQuestions = data.questions.map((question) => ({
+        ...question,
+        hidden: false,
+      }))
+
+      setRoutinesFormQuestions(mappedQuestions)
+    }
   }
 
   useEffect(() => {
