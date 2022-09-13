@@ -23,7 +23,7 @@ export const useRoutineFormAnswers = () => {
 
   const setRoutineFormAnswers = useCallback(async () => {
     const { routines } = await servicesPromise
-    const { data } = await routines.post<Team[]>('/answer-form', [...answers])
+    const { data } = await routines.post<Team[]>('/answer', [...answers])
 
     setIsRoutineDrawerOpen(false)
     if (data.length > 1) {
