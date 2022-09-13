@@ -1,9 +1,9 @@
 import { useContext, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { FormQuestion } from 'src/components/Routine/Drawer/Questions/types'
-import { intlLocaleAtom } from 'src/state/recoil/intl'
 import {
   routineFormQuestions,
   retrospectiveRoutineSelector,
@@ -13,14 +13,14 @@ export const useRoutineFormQuestions = () => {
   const { servicesPromise } = useContext(ServicesContext)
   const setRoutinesFormQuestions = useSetRecoilState(routineFormQuestions)
   const routinesFormQuestions = useRecoilValue(retrospectiveRoutineSelector)
-  const intlLocale = useRecoilValue(intlLocaleAtom)
+  const intl = useIntl()
 
-  // Const useLocaleFormated = intlLocale === 'en-US' ? 'en' : intlLocale.toLocaleLowerCase()
-  // const requestFormQuestionsPath = `/bud-form?intl=${useLocaleFormated}`
+  const useLocaleFormated = intl.locale === 'en-US' ? 'en' : intl.locale.toLocaleLowerCase()
+  const requestFormQuestionsPath = `bud-form?intl=${useLocaleFormated}`
 
   const getRoutineQuestions = async () => {
     const { routines } = await servicesPromise
-    const { data } = await routines.get<{ questions: FormQuestion[] }>('bud-form?intl=pt-br')
+    const { data } = await routines.get<{ questions: FormQuestion[] }>(requestFormQuestionsPath)
     const mappedQuestions = data.questions.map((question) => ({
       ...question,
       hidden: false,
