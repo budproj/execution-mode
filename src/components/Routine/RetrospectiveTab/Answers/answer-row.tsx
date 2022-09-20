@@ -65,7 +65,7 @@ const AnswerRowComponent = ({ teamId, answer }: AnswerRowComponentProperties) =>
                 <Clock
                   desc={intl.formatMessage(messages.clockIconDescription)}
                   fill="new-gray.300"
-                />{' '}
+                />
                 {isTheDateToday
                   ? `${intl.formatMessage(messages.hourPrefix, { today: isTheDateToday })} ${format(
                       new Date(answer.createdAt),
@@ -78,7 +78,7 @@ const AnswerRowComponent = ({ teamId, answer }: AnswerRowComponentProperties) =>
                 <ThinkingBalloon
                   marginLeft={5}
                   desc={intl.formatMessage(messages.thinkingBalloonDescription)}
-                />{' '}
+                />
                 {answer.comments}
               </Text>
             </>
@@ -92,7 +92,7 @@ const AnswerRowComponent = ({ teamId, answer }: AnswerRowComponentProperties) =>
                   desc={intl.formatMessage(messages.clockIconDescription)}
                   fill="new-gray.200"
                   stroke="#99A4C2"
-                />{' '}
+                />
                 sem resposta
               </Text>
             </>

@@ -12,14 +12,7 @@ interface AnswerContentProperties {
 const RetrospectiveTabContentView = ({ answerQuery, answers }: AnswerContentProperties) => {
   const [answerId] = answerQuery.split('&')
 
-  // TODO: change
-  const answerDetails = { id: 2 }
-
-  return answerId ? (
-    <AnswerContent answer={answerDetails} />
-  ) : (
-    <RoutinesOverview answers={answers} />
-  )
+  return answerId ? <AnswerContent /> : <RoutinesOverview answers={answers} />
 }
 
 export default RetrospectiveTabContentView
