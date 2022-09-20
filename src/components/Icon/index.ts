@@ -128,4 +128,12 @@ export {
   CustomEmojiFeeling5,
 } from './CustomEmojis'
 
+export { default as GraphicIcon } from './GraphicIcon/graphic-icon'
+
+export { default as SmileIcon } from './SmileIcon/smile-icon'
+
+export { default as WarningLightIcon } from './WarningLightIcon/warning-light-icon'
+
+export { default as BagIcon } from './BagIcon/bag-icon'
+
 export * from './types'
