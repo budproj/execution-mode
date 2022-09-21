@@ -6,14 +6,14 @@ import { Button } from 'src/components/Base/Button'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { CalendarColored } from 'src/components/Icon'
 import { UpdateIcon } from 'src/components/KeyResult/List/Body/Columns/KeyResult/update-icon'
+import { PendingRoutine } from 'src/components/Routine/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { Routine } from 'src/state/recoil/routine/routine-query'
 
 import messages from './messages'
 
 interface RoutineComponentProperties {
-  routine: Routine
+  routine: PendingRoutine
 }
 
 const RoutineComponent = ({ routine }: RoutineComponentProperties) => {
@@ -22,7 +22,7 @@ const RoutineComponent = ({ routine }: RoutineComponentProperties) => {
   const intl = useIntl()
 
   const isOutdatedText =
-    routine.isOutdated >= 1
+    routine.daysOutdated >= 1
       ? intl.formatMessage(messages.answerRoutineOutdatedText)
       : intl.formatMessage(messages.answerRoutineTodayText)
 

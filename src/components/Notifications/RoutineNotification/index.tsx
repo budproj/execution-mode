@@ -2,13 +2,13 @@ import { Text, Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { Routine } from 'src/state/recoil/routine/routine-query'
+import { PendingRoutine } from 'src/components/Routine/types'
 
 import RoutineComponent from './RoutineComponent'
 import messages from './messages'
 
 interface RoutineNotificationProperties {
-  routines: Routine[]
+  routines: PendingRoutine[]
 }
 
 const RoutineNotification = ({ routines }: RoutineNotificationProperties) => {
