@@ -7,9 +7,9 @@ import { FormQuestion } from '../types'
 
 interface ReadingTextQuestionProperties extends FormQuestion {}
 
-const ReadingTextQuestion = ({ heading, content }: ReadingTextQuestionProperties) => {
+const ReadingTextQuestion = ({ heading, content, handleClick }: ReadingTextQuestionProperties) => {
   return (
-    <BaseQuestionRoutineForm>
+    <BaseQuestionRoutineForm handleClick={handleClick}>
       <Text as="h2" color="new-gray.900" fontWeight="bold" fontSize={21} mb={2}>
         {heading}
       </Text>

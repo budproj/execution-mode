@@ -16,11 +16,12 @@ const LongTextQuestion = ({
   hidden,
   answer,
   setAnswer,
+  handleClick,
 }: LongTextQuestionProperties) => {
   const intl = useIntl()
 
   return (
-    <BaseQuestionRoutineForm>
+    <BaseQuestionRoutineForm handleClick={handleClick}>
       <Stack>
         <Box display="flex" flexDir="column" alignItems="left" gap={2} marginBottom={16}>
           <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">

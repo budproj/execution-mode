@@ -17,6 +17,7 @@ const ValueRangeQuestion = ({
   answer,
   properties,
   setAnswer,
+  handleClick,
 }: ValueRangeQuestionProperties) => {
   const options = []
 
@@ -52,7 +53,7 @@ const ValueRangeQuestion = ({
   const group = getRootProps()
 
   return (
-    <BaseQuestionRoutineForm>
+    <BaseQuestionRoutineForm handleClick={handleClick}>
       <Stack gap={10} maxW="fit-content">
         <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
           {heading}

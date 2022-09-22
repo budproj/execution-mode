@@ -18,6 +18,7 @@ const EmojiScaleQuestion = ({
   heading,
   hidden,
   answer,
+  handleClick,
   setAnswer,
 }: EmojiScaleQuestionProperties) => {
   const { getEmoji } = useGetEmoji()
@@ -38,7 +39,7 @@ const EmojiScaleQuestion = ({
   const group = getRootProps()
 
   return (
-    <BaseQuestionRoutineForm>
+    <BaseQuestionRoutineForm handleClick={handleClick}>
       <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold" mb={8}>
         {heading}
       </Text>
