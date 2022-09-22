@@ -13,7 +13,13 @@ interface EmojiScaleQuestionProperties extends FormQuestion {}
 
 const options = ['1', '2', '3', '4', '5']
 
-const EmojiScaleQuestion = ({ id, heading, answer, setAnswer }: EmojiScaleQuestionProperties) => {
+const EmojiScaleQuestion = ({
+  id,
+  heading,
+  hidden,
+  answer,
+  setAnswer,
+}: EmojiScaleQuestionProperties) => {
   const { getEmoji } = useGetEmoji()
   const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
 
@@ -22,9 +28,9 @@ const EmojiScaleQuestion = ({ id, heading, answer, setAnswer }: EmojiScaleQuesti
     value: answer,
   })
   const handleSelectRadioValue = useCallback((radioValue: string) => {
-    if (setAnswer) setAnswer(id, radioValue)
+    if (setAnswer) setAnswer(id, radioValue, hidden)
 
-    const radioTimer = setTimeout(() => setShowedQuestion((currentValue) => currentValue + 1), 300)
+    const radioTimer = setTimeout(() => setShowedQuestion((currentValue) => currentValue + 1), 600)
 
     return () => clearTimeout(radioTimer)
   }, [])

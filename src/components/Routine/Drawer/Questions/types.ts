@@ -23,11 +23,12 @@ export interface FormQuestion {
   id: string
   type: string
   heading: string
+  required?: boolean
   hidden: boolean
   content?: string
   conditional?: ConditionalTypeInfo
   properties?: ValueRangeProperties
   formQuestionIndex: number
   answer?: string
-  setAnswer?: (questionId: string, value: string) => void
+  setAnswer?: (questionId: string, value: string, hidden?: boolean) => void
 }

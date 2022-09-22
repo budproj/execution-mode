@@ -20,7 +20,7 @@ const updateDependQuestions = (questionId: string, value: string) => (question: 
     question.conditional[dependentQuestionType as keyof FormQuestion['conditional']]
 
   if (dependentQuestionType === 'road_block') {
-    const hiddenQuestion = value !== (dependentValue === true ? 'y' : 'n')
+    const hiddenQuestion = value === (dependentValue === true ? 'y' : 'n')
 
     return {
       ...question,
@@ -55,10 +55,10 @@ const RetrospectiveRoutine = () => {
     })
   }
 
-  const setAnswer = (questionId: string, value: string) => {
+  const setAnswer = (questionId: string, value: string, hidden?: boolean) => {
     const filteredAnswers = answers.filter((answer) => answer.questionId !== questionId)
 
-    const answer = { questionId, value }
+    const answer = { questionId, value, hidden }
 
     setAnswers([...filteredAnswers, answer])
     reviewQuestions(questionId, value)

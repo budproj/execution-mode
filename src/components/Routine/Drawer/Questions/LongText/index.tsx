@@ -10,7 +10,13 @@ import messages from './messages'
 
 interface LongTextQuestionProperties extends FormQuestion {}
 
-const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionProperties) => {
+const LongTextQuestion = ({
+  id,
+  heading,
+  hidden,
+  answer,
+  setAnswer,
+}: LongTextQuestionProperties) => {
   const intl = useIntl()
 
   return (
@@ -39,7 +45,7 @@ const LongTextQuestion = ({ id, heading, answer, setAnswer }: LongTextQuestionPr
             overflow="hidden"
             color="new-gray.800"
             onChange={(event) => {
-              if (setAnswer) setAnswer(id, event.target.value)
+              if (setAnswer) setAnswer(id, event.target.value, hidden)
             }}
           />
           <Flex justifyContent="center" pt={4} color="new-gray.700" fontSize={15}>
