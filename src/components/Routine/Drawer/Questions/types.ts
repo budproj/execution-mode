@@ -6,7 +6,7 @@ export interface RoutineQuestionProperties {
 interface ConditionalTypeInfo {
   dependsOn: string
   type: string
-  roadblock?: boolean
+  road_block?: boolean
   value_range?: number
 }
 
