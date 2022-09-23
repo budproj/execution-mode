@@ -25,7 +25,7 @@ export const useRoutineFormQuestions = () => {
     if (data.questions) {
       const mappedQuestions = data.questions.map((question) => ({
         ...question,
-        hidden: false,
+        hidden: Boolean(question?.conditional),
       }))
 
       setRoutinesFormQuestions(mappedQuestions)

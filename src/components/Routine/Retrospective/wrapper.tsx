@@ -20,7 +20,7 @@ const updateDependQuestions = (questionId: string, value: string) => (question: 
     question.conditional[dependentQuestionType as keyof FormQuestion['conditional']]
 
   if (dependentQuestionType === 'road_block') {
-    const hiddenQuestion = value === (dependentValue === true ? 'y' : 'n')
+    const hiddenQuestion = value !== (dependentValue === true ? 'y' : 'n')
 
     return {
       ...question,

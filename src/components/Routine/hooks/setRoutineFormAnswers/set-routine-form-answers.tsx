@@ -1,26 +1,20 @@
 import { useToast } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { useCallback, useContext } from 'react'
+import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import messages from 'src/components/Cycle/ActionModals/UpdateCycleModal/messages'
 import { Team } from 'src/components/Team/types'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import { isOpenRoutineRedirectTeamPage } from 'src/state/recoil/routine/opened-routine-redirect-team-drawer'
-import {
-  RetrospectiveAnswer,
-  retrospectiveRoutineListAtom,
-} from 'src/state/recoil/routine/retrospective-routine-answers'
+import { retrospectiveRoutineListAtom } from 'src/state/recoil/routine/retrospective-routine-answers'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 import {
   retrospectiveRoutineSelector,
   routineFormQuestions,
 } from 'src/state/recoil/routine/routine-form-questions'
 import { routineAnswersReturnedData } from 'src/state/recoil/routine/user-teams'
-
-import { FormQuestion } from '../../Drawer/Questions/types'
 
 import submitAnswersMessages from './messages'
 
@@ -40,67 +34,53 @@ export const useRoutineFormAnswers = () => {
   const filteredFormQuestions = useRecoilValue(retrospectiveRoutineSelector)
   const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
 
-  const setRoutineFormAnswers = useCallback(async () => {
-    const { routines } = await servicesPromise
-
-    const requiredQuestionsIDs = formQuestions.filter(({ required }) => required === true)
-
-    let unansweredRequiredQuestions: FormQuestion
-
-    const overrideAnswers: RetrospectiveAnswer[] = []
-
-    const allRequiredAnswersHaveBeenFilled = requiredQuestionsIDs.every((requiredQuestion) => {
-      const answer = answers.find(({ questionId }) => questionId === requiredQuestion.id)
-      console.log({ requiredQuestion })
-
-      if (!answer && !requiredQuestion.hidden) {
-        unansweredRequiredQuestions = requiredQuestion
-      }
-
-      if (!answer && requiredQuestion.hidden) {
-        const newAnswer = [
-          {
-            questionId: requiredQuestion.id,
-            value: '',
-            hidden: true,
-          },
-        ]
-
-        overrideAnswers.push(...newAnswer)
-      }
-
-      return requiredQuestion?.hidden ? true : Boolean(answer?.value)
+  const setRoutineFormAnswers = async () => {
+    const requiredQuestions = formQuestions.filter(
+      (question) => question.required && !question.hidden,
+    )
+    const unansweredRequiredQuestion = requiredQuestions.find((requiredQuestion) => {
+      return !answers.some((answer) => answer.questionId === requiredQuestion.id)
     })
 
-    if (allRequiredAnswersHaveBeenFilled) {
-      const { data } = await routines.post<Team[]>('/answer', [...answers, ...overrideAnswers])
+    if (unansweredRequiredQuestion) {
+      const unansweredRequiredQuestionIndex = filteredFormQuestions.findIndex(
+        (question) => question.id === unansweredRequiredQuestion.id,
+      )
 
-      if (data) {
-        setIsRoutineDrawerOpen(false)
-        setAnswers(() => [])
-
-        if (data.length > 1) {
-          setUserTeams(data)
-          resetCurrentQuestionIndex(0)
-          setRedirectTeamDrawerIsOpen(true)
-        } else {
-          router.push(`/explore/${data[0].id}#retrospectiva`)
-        }
-      } else {
-        toaster({
-          title: intl.formatMessage(messages.unknownErrorToastMessage),
-          status: 'error',
-        })
-      }
-    } else {
-      setShowedQuestion(() => filteredFormQuestions.indexOf(unansweredRequiredQuestions))
+      setShowedQuestion(unansweredRequiredQuestionIndex)
       toaster({
         title: intl.formatMessage(submitAnswersMessages.aRequiredQuestionHasNotBeenAnswered),
         status: 'error',
       })
+      return
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+
+    const hiddenQuestions = formQuestions.filter((question) => question.hidden)
+    const mappedHiddenAnswers = hiddenQuestions.map((question) => ({
+      questionId: question.id,
+      value: '',
+      hidden: true,
+    }))
+
+    const { routines } = await servicesPromise
+    const { data: userTeams } = await routines.post<Team[]>('/answer', [
+      ...answers,
+      ...mappedHiddenAnswers,
+    ])
+
+    if (userTeams) {
+      setIsRoutineDrawerOpen(false)
+      setAnswers([])
+      resetCurrentQuestionIndex(0)
+
+      if (userTeams.length > 1) {
+        setUserTeams(userTeams)
+        setRedirectTeamDrawerIsOpen(true)
+      } else {
+        router.push(`/explore/${userTeams[0].id}#retrospectiva`)
+      }
+    }
+  }
 
   return { setRoutineFormAnswers }
 }
