@@ -30,6 +30,5 @@ export interface FormQuestion {
   properties?: ValueRangeProperties
   formQuestionIndex: number
   answer?: string
-  handleClick: () => void
   setAnswer?: (questionId: string, value: string, hidden?: boolean) => void
 }

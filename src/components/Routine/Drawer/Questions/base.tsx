@@ -5,10 +5,9 @@ import SubmitAnswerButton from '../Base/submit-answer-button'
 
 interface BaseQuestionRoutineFormProperties {
   children: JSX.Element | JSX.Element[]
-  handleClick: () => void
 }
 
-const BaseQuestionRoutineForm = ({ children, handleClick }: BaseQuestionRoutineFormProperties) => {
+const BaseQuestionRoutineForm = ({ children }: BaseQuestionRoutineFormProperties) => {
   const [isQuestionVisible, setIsQuestionVisible] = useState(false)
 
   useEffect(() => {
@@ -19,7 +18,7 @@ const BaseQuestionRoutineForm = ({ children, handleClick }: BaseQuestionRoutineF
     <SlideFade in={isQuestionVisible} style={{ height: '100%' }}>
       <Stack display="flex" flexDir="column" justifyContent="space-between" height="100%">
         <Box>{children}</Box>
-        <SubmitAnswerButton handleClick={handleClick} />
+        <SubmitAnswerButton />
       </Stack>
     </SlideFade>
   )

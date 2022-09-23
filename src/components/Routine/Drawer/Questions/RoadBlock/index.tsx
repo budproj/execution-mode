@@ -19,7 +19,6 @@ const RoadBlockQuestion = ({
   hidden,
   answer,
   setAnswer,
-  handleClick,
 }: RoadBlockQuestionProperties) => {
   const intl = useIntl()
   const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
@@ -45,7 +44,7 @@ const RoadBlockQuestion = ({
   const group = getRootProps()
 
   return (
-    <BaseQuestionRoutineForm handleClick={handleClick}>
+    <BaseQuestionRoutineForm>
       <Stack gap={14}>
         <Text as="h2" color="new-gray.900" fontSize={21} fontWeight="bold">
           {heading}

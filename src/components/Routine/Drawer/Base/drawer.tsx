@@ -1,18 +1,18 @@
 import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useEffect, cloneElement } from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
+import { useRoutinesFormActions } from 'src/components/Base/RoutineFormActionsProvider/routine-form-actions-provider'
 import { OpenArrowDown, OpenArrowUp } from 'src/components/Icon'
-import { useRoutineFormAnswers } from 'src/components/Routine/hooks/setRoutineFormAnswers/set-routine-form-answers'
 import { currentRoutinePropertiesAtom } from 'src/state/recoil/routine/current-routine-properties'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 
 import messages from './messages'
 
 interface RoutineDrawerProperties {
-  children: JSX.Element
+  children?: JSX.Element
   isOpen: boolean
   formSize: number
   onClose: () => void
@@ -29,25 +29,11 @@ const StyledButton = styled(Button)`
 `
 
 const RoutineDrawer = ({ children, isOpen, formSize, onClose }: RoutineDrawerProperties) => {
+  const { comeBack, handleClick } = useRoutinesFormActions()
+
   const [{ size }, setCurrentRoutineProperties] = useRecoilState(currentRoutinePropertiesAtom)
-  const [currentQuestionIndex, setShowedQuestion] = useRecoilState(
-    retrospectiveRoutineIndexQuestionAtom,
-  )
-  const { setRoutineFormAnswers } = useRoutineFormAnswers()
+  const currentQuestionIndex = useRecoilValue(retrospectiveRoutineIndexQuestionAtom)
   const intl = useIntl()
-
-  const afterQuestion = () => {
-    setShowedQuestion((currentValue) => currentValue + 1)
-  }
-
-  const comeBack = () => {
-    setShowedQuestion((currentQuestionIndex) => currentQuestionIndex - 1)
-  }
-
-  const handleClick = () => {
-    if (size && currentQuestionIndex < size - 1) afterQuestion()
-    if (size && currentQuestionIndex === size - 1) setRoutineFormAnswers()
-  }
 
   const handleKeyDown = (event: any) => {
     const keyCode = event.which || event.key
@@ -80,7 +66,7 @@ const RoutineDrawer = ({ children, isOpen, formSize, onClose }: RoutineDrawerPro
           justifyContent="center"
           gap={6}
         >
-          <Box height={306}>{cloneElement(children, { handleClick })}</Box>
+          <Box height={306}>{children}</Box>
           <Box position="absolute" right={12} bottom={12} display="flex" gap={1}>
             <StyledButton disabled={currentQuestionIndex < 1} _hover={{}} onClick={comeBack}>
               <OpenArrowUp desc={intl.formatMessage(messages.previousQuestionButtonFormIconDesc)} />
