@@ -1,3 +1,3 @@
 export { AreaChartComponent } from './area-chart'
-export { PieChartComponent } from './radial-chart'
+export { RadialChartComponent } from './radial-chart'
 export { AreaRadialChart } from './area-radial-chart'

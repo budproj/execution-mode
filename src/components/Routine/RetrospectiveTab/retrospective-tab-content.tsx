@@ -1,8 +1,12 @@
 import { Button, Flex, Link, Stack, Text, Grid, Divider } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
+import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { CircleArrowRight } from 'src/components/Icon'
+import { Team } from 'src/components/Team/types'
+import { routineDateRangeSelector } from 'src/state/recoil/routine/routine-dates-range'
 
 import messages from '../../Page/Team/Tabs/content/messages'
 
@@ -17,25 +21,56 @@ type AnswerType = {
   comments: number
 }
 
-const data: AnswerType[] = [
-  {
-    id: 1,
-    user: 'Ana Fonseca',
-    feeling: 5,
-    createdAt: '2022-5-17 10:10:00',
-    comments: 2,
-  },
-  {
-    id: 2,
-    user: 'Lucas Vilela',
-    feeling: 1,
-    createdAt: '2022-8-27 09:09:00',
-    comments: 3,
-  },
-]
+interface RetrospectiveTabContentProperties {
+  teamId: Team['id']
+}
 
-const RetrospectiveTabContent = () => {
+interface AnswerSummary {
+  id: string
+  userId: string
+  name: string
+  picture: string
+  latestStatusReply: string
+  timestamp: Date
+}
+
+interface AnswerOverview {
+  overview: {
+    feeling: Array<{ timestamp: string; average: number }>
+    productivity: Array<{ timestamp: string; average: number }>
+  }
+}
+
+const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
+  const { servicesPromise } = useContext(ServicesContext)
+  const [answersSummary, setAnswersSummary] = useState<AnswerSummary[]>([])
+  const [answersOverview, setAnswersOverview] = useState<AnswerOverview | undefined>()
+
+  const { after, before, week } = useRecoilValue(routineDateRangeSelector)
+
+  useEffect(() => {
+    const getAnswersSummaryAndOverview = async () => {
+      const { routines } = await servicesPromise
+
+      const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+        `/answers/summary/${teamId ?? teamId}`,
+        {
+          params: { before, after, includeSubteams: false },
+        },
+      )
+      const { data: answersOverview } = await routines.get<AnswerOverview>(
+        `/answers/overview/${teamId ?? teamId}`,
+        {
+          params: { includeSubteams: false },
+        },
+      )
+      setAnswersSummary(answersSummaryData)
+      setAnswersOverview(answersOverview)
+    }
+
+    getAnswersSummaryAndOverview()
+  }, [after, before, servicesPromise, teamId])
 
   return (
     <Stack spacing={10}>
@@ -82,9 +117,15 @@ const RetrospectiveTabContent = () => {
         </Button>
       </Flex>
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
-        <AnswersComponent answers={data} />
+        <AnswersComponent
+          after={after}
+          before={before}
+          week={week}
+          answers={answersSummary}
+          teamId={teamId}
+        />
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RoutinesOverview answers={data} />
+        <RoutinesOverview after={after} before={before} week={week} data={answersOverview} />
       </Grid>
     </Stack>
   )

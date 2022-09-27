@@ -1,26 +1,31 @@
 /* eslint-disable unicorn/prefer-query-selector */
 /* eslint-disable prefer-const */
 import { Box, Divider, Flex, GridItem, Text } from '@chakra-ui/react'
+import { format } from 'date-fns'
+import pt from 'date-fns/locale/pt'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import MountainIcon from 'src/components/Icon/Mountain'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 
 import { AreaRadialChart } from '../../../Base/Charts/index'
 
+import messages from './messages'
+
 interface RoutinesOverviewProperties {
-  answers: Array<{
-    id: number
-    user: string
-    feeling: number
-    createdAt: string
-    comments: number
-  }>
+  data?: {
+    overview: {
+      feeling: Array<{ timestamp: string; average: number }>
+      productivity: Array<{ timestamp: string; average: number }>
+    }
+  }
+  after: Date
+  before: Date
+  week: number
 }
 
-const RoutinesOverview = ({ answers }: RoutinesOverviewProperties) => {
+const RoutinesOverview = ({ data, after, before, week }: RoutinesOverviewProperties) => {
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
 
@@ -29,14 +34,15 @@ const RoutinesOverview = ({ answers }: RoutinesOverviewProperties) => {
       <Box>
         <Flex>
           <Text color="new-gray.900" fontSize="28px" fontWeight="500">
-            Visão geral do time
+            {intl.formatMessage(messages.teamOverviewTitle)}
           </Text>
           <Box marginLeft="auto" textAlign="right">
             <Text color="new-gray.800" fontSize="18px" fontWeight="500">
-              Semana 29
+              {intl.formatMessage(messages.weekText)} {week}
             </Text>
             <Text color="new-gray.600" fontSize="16px" fontWeight="450">
-              18/jul a 24/jul
+              {format(new Date(after), 'dd/MMM', { locale: pt })} a{' '}
+              {format(new Date(before), 'dd/MMM', { locale: pt })}
             </Text>
           </Box>
         </Flex>
@@ -44,19 +50,21 @@ const RoutinesOverview = ({ answers }: RoutinesOverviewProperties) => {
         <Divider marginY="13px" borderColor="new-gray.400" />
 
         <AreaRadialChart
-          label="SENTIMENTO"
+          label={intl.formatMessage(messages.feelingGraphTitle)}
           areaStartColor="#FFD964E5"
           areaEndColor="#FFD964E5"
           strokeLineColor="#F1BF25"
           icon={getEmoji({ felling: 5, size: '50px' })}
           numberColor="#ffc658"
           progressColor="#ffc658"
+          data={data?.overview.feeling}
         />
         <AreaRadialChart
-          label="PRODUTIVIDADE"
+          label={intl.formatMessage(messages.productivityGraphTitle)}
           strokeLineColor="#4BACF9"
           areaEndColor="#4BACF9B2"
           areaStartColor="#4BACF9B2"
+          data={data?.overview.productivity}
           icon={
             <Flex
               background="#4BACF9"
@@ -72,7 +80,7 @@ const RoutinesOverview = ({ answers }: RoutinesOverviewProperties) => {
           numberColor="#4BACF9"
           progressColor="#4BACF9"
         />
-        <AreaRadialChart
+        {/* <AreaRadialChart
           label="CLAREZA DE ESTRATÉGIA"
           areaStartColor="#6F6EFF"
           areaEndColor="#8C8BFF26"
@@ -91,7 +99,7 @@ const RoutinesOverview = ({ answers }: RoutinesOverviewProperties) => {
           }
           numberColor="#6F6EFF"
           progressColor="#6F6EFF"
-        />
+        /> */}
       </Box>
     </GridItem>
   )

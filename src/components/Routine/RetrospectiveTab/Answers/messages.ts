@@ -10,6 +10,8 @@ type AnswersMessage =
   | 'clockIconDescription'
   | 'thinkingBalloonDescription'
   | 'hourPrefix'
+  | 'noAnswerText'
+  | 'weekText'
 
 export default defineMessages<AnswersMessage>({
   arrowLeftIconDescription: {
@@ -58,5 +60,15 @@ export default defineMessages<AnswersMessage>({
     defaultMessage: '{today, select, true {hoje às} false {às} other {às}}',
     id: 'AngG7m',
     description: 'The prefix of the hour description',
+  },
+  noAnswerText: {
+    defaultMessage: 'sem resposta',
+    id: 'AFjRlx',
+    description: "The text that appears in the user list, if the user hasn't answered yet",
+  },
+  weekText: {
+    defaultMessage: 'Semana',
+    id: 'IfVw1+',
+    description: 'The text that appears at the week description',
   },
 })
