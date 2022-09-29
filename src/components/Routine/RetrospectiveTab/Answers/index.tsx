@@ -3,7 +3,7 @@ import { format, add, sub } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
@@ -11,6 +11,7 @@ import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import ThreeLayersIcon from 'src/components/Icon/ThreeLayers'
 import { GraphQLEffect } from 'src/components/types'
+import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import {
   isNextWeekDisabled,
   routineDatesRangeAtom,
@@ -45,6 +46,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
   const team = useRecoilValue(teamAtomFamily(teamId))
   const userID = useRecoilValue(meAtom)
   const [date, setDate] = useRecoilState(routineDatesRangeAtom)
+  const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
 
   const isUserFromTheTeam = team?.policy?.update === GraphQLEffect.ALLOW
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
@@ -137,6 +139,8 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
             color="white"
             backgroundColor="brand.500"
             padding="13px 0px"
+            _hover={{ background: 'brand.400', color: 'black.50' }}
+            onClick={() => setIsRoutineDrawerOpen(true)}
           />
         </Box>
       )}

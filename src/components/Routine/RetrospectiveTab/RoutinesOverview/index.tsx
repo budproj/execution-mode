@@ -57,14 +57,14 @@ const RoutinesOverview = ({ data, after, before, week }: RoutinesOverviewPropert
           icon={getEmoji({ felling: 5, size: '50px' })}
           numberColor="#ffc658"
           progressColor="#ffc658"
-          data={data?.overview.feeling}
+          data={data?.overview?.feeling}
         />
         <AreaRadialChart
           label={intl.formatMessage(messages.productivityGraphTitle)}
           strokeLineColor="#4BACF9"
           areaEndColor="#4BACF9B2"
           areaStartColor="#4BACF9B2"
-          data={data?.overview.productivity}
+          data={data?.overview?.productivity}
           icon={
             <Flex
               background="#4BACF9"

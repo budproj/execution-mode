@@ -1,4 +1,4 @@
-import { Button, Flex, Link, Stack, Text, Grid, Divider } from '@chakra-ui/react'
+import { Flex, Link, Stack, Text, Grid, Divider } from '@chakra-ui/react'
 import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -12,14 +12,6 @@ import messages from '../../Page/Team/Tabs/content/messages'
 
 import AnswersComponent from './Answers'
 import RoutinesOverview from './RoutinesOverview'
-
-type AnswerType = {
-  id: number
-  user: string
-  feeling: number
-  createdAt: string
-  comments: number
-}
 
 interface RetrospectiveTabContentProperties {
   teamId: Team['id']
@@ -53,20 +45,17 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
     const getAnswersSummaryAndOverview = async () => {
       const { routines } = await servicesPromise
 
-      const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-        `/answers/summary/${teamId ?? teamId}`,
-        {
+      const [{ data: answersSummaryData }, { data: answersOverview }] = await Promise.all([
+        routines.get<AnswerSummary[]>(`/answers/summary/${teamId ?? teamId}`, {
           params: { before, after, includeSubteams: false },
-        },
-      )
-      const { data: answersOverview } = await routines.get<AnswerOverview>(
-        `/answers/overview/${teamId ?? teamId}`,
-        {
+        }),
+        routines.get<AnswerOverview>(`/answers/overview/${teamId ?? teamId}`, {
           params: { includeSubteams: false },
-        },
-      )
-      setAnswersSummary(answersSummaryData)
-      setAnswersOverview(answersOverview)
+        }),
+      ])
+
+      if (answersSummaryData) setAnswersSummary(answersSummaryData)
+      if (answersOverview) setAnswersOverview(answersOverview)
     }
 
     getAnswersSummaryAndOverview()
@@ -108,13 +97,6 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
             })}
           </Text>
         </Stack>
-        <Button
-          bg="brand.500"
-          color="black.50"
-          _hover={{ background: 'brand.400', color: 'black.50' }}
-        >
-          {intl.formatMessage(messages.tabRetrospectiveAnswerButton)}
-        </Button>
       </Flex>
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
         <AnswersComponent
