@@ -20,6 +20,7 @@ const RadioCard = ({ properties, radioCardStyles, children }: RadioCardPropertie
         {...checkbox}
         cursor="pointer"
         backgroundColor="new-gray.800"
+        transition="background-color .1s"
         color="white"
         minW="24px"
         h="24px"
@@ -43,7 +44,7 @@ const RadioCard = ({ properties, radioCardStyles, children }: RadioCardPropertie
           boxSizing: 'content-box',
         }}
         _checked={{
-          bg: 'teal.600',
+          bg: 'new-gray.600',
           color: 'white',
           borderColor: 'teal.600',
         }}

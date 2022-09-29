@@ -13,7 +13,13 @@ import messages from './messages'
 
 interface RoadBlockQuestionProperties extends FormQuestion {}
 
-const RoadBlockQuestion = ({ id, heading, answer, setAnswer }: RoadBlockQuestionProperties) => {
+const RoadBlockQuestion = ({
+  id,
+  heading,
+  hidden,
+  answer,
+  setAnswer,
+}: RoadBlockQuestionProperties) => {
   const intl = useIntl()
   const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
 
@@ -23,9 +29,9 @@ const RoadBlockQuestion = ({ id, heading, answer, setAnswer }: RoadBlockQuestion
   ]
 
   const handleSelectRadioValue = useCallback((radioValue: string) => {
-    if (setAnswer) setAnswer(id, radioValue)
+    if (setAnswer) setAnswer(id, radioValue, hidden)
 
-    const radioTimer = setTimeout(() => setShowedQuestion((currentValue) => currentValue + 1), 300)
+    const radioTimer = setTimeout(() => setShowedQuestion((currentValue) => currentValue + 1), 600)
 
     return () => clearTimeout(radioTimer)
   }, [])

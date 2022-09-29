@@ -55,10 +55,10 @@ const RetrospectiveRoutine = () => {
     })
   }
 
-  const setAnswer = (questionId: string, value: string) => {
+  const setAnswer = (questionId: string, value: string, hidden?: boolean) => {
     const filteredAnswers = answers.filter((answer) => answer.questionId !== questionId)
 
-    const answer = { questionId, value }
+    const answer = { questionId, value, hidden }
 
     setAnswers([...filteredAnswers, answer])
     reviewQuestions(questionId, value)

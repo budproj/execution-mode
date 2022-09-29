@@ -13,6 +13,7 @@ interface ValueRangeQuestionProperties extends FormQuestion {}
 const ValueRangeQuestion = ({
   id,
   heading,
+  hidden,
   answer,
   properties,
   setAnswer,
@@ -22,9 +23,9 @@ const ValueRangeQuestion = ({
   const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
 
   const handleSelectRadioValue = useCallback((radioValue: string) => {
-    if (setAnswer) setAnswer(id, radioValue)
+    if (setAnswer) setAnswer(id, radioValue, hidden)
 
-    const radioTimer = setTimeout(() => setShowedQuestion((currentValue) => currentValue + 1), 300)
+    const radioTimer = setTimeout(() => setShowedQuestion((currentValue) => currentValue + 1), 600)
 
     return () => clearTimeout(radioTimer)
   }, [])
