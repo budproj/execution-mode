@@ -27,10 +27,6 @@
     "defaultMessage": "Nenhuma pessoa encontrada",
     "description": "This message appears in our user search when we try to search for a given user without any results"
   },
-  "+avOYN": {
-    "defaultMessage": "Rotinas",
-    "description": "The title of the first section of My Week notification tab."
-  },
   "+kQOSG": {
     "defaultMessage": "Procurar Times",
     "description": "The placeholder in explore page"
@@ -254,10 +250,6 @@
   "3XEc2H": {
     "defaultMessage": "Gênero do usuário inicial",
     "description": "The user gender while creating a new workspace"
-  },
-  "3dAyni": {
-    "defaultMessage": "Um desenho de uma mulher com um café na mão e mexendo em um computador, aparentemente feliz.",
-    "description": "The alternative text explaining the zen girl image"
   },
   "3e+zPY": {
     "defaultMessage": "Finalizar",
@@ -667,10 +659,6 @@
     "defaultMessage": "Se quiser, inclua uma descrição para ajudar seus colegas a entenderem por que esse resultado-chave é importante e como você pretende alcançá-lo.",
     "description": "This message is displayed as the placeholder for our second input in our key-result drawer"
   },
-  "D22TnL": {
-    "defaultMessage": "Responder",
-    "description": "The text that goes in the answer routine button"
-  },
   "D8ZyT4": {
     "defaultMessage": "Um ícone de coroa que representa a sua empresa",
     "description": "This message is used by screen readers to explain our crown icon"
@@ -823,10 +811,6 @@
     "defaultMessage": "novo!",
     "description": "Tag new item"
   },
-  "GnbGX+": {
-    "defaultMessage": "Sem resposta na semana passada",
-    "description": "The outdated text that goes in the update text, below the routine title, when the routine is outdated."
-  },
   "GrPUMn": {
     "defaultMessage": "Mês de",
     "description": "The prefix that appears in our chart tooltip in the key-result sidebar while seeing an yearly key-result"
@@ -894,10 +878,6 @@
   "I8NCD3": {
     "defaultMessage": "Check-in realizado",
     "description": "This string is used as the description for the icon that indicates that the key-result is updated"
-  },
-  "ICcB35": {
-    "defaultMessage": "Minha semana",
-    "description": "This message appears as the title of the Check-ins and routine option in the notifications modal."
   },
   "IGHT6z": {
     "defaultMessage": "Você perderá todos os resultados-chave deste OKR, incluindo todos os check-ins e comentários feitos até aqui.",
@@ -1130,10 +1110,6 @@
   "N+Tad7": {
     "defaultMessage": "Ícone de uma engrenagem. Ao clicar nele você irá para nossa página de configurações",
     "description": "GearButton icon desc. This is used by screen readers for accessibility"
-  },
-  "N/fRMX": {
-    "defaultMessage": "Responder",
-    "description": "Button to Reply routine on the teams page."
   },
   "N70n39": {
     "defaultMessage": "Progresso individual com base na média dos resultados-chave deste trimestre",
@@ -1611,6 +1587,10 @@
     "defaultMessage": "Arraste até o novo valor para iniciar um check-in",
     "description": "This tooltip is displayed when the user hovers the thumb of our progress bar"
   },
+  "XGKUNq": {
+    "defaultMessage": "Para essa semana",
+    "description": "The title of the section of the key results without check-in in the week."
+  },
   "XN0ZEi": {
     "defaultMessage": "Passo 2",
     "description": "The label of the second step while creating a new workspace"
@@ -1634,10 +1614,6 @@
   "XZcPVc": {
     "defaultMessage": "Uma mulher analisando gráficos e apontando com um dedo.",
     "description": "The alternative text explaining the empty item image"
-  },
-  "Xcxvrr": {
-    "defaultMessage": "A calendar icon",
-    "description": "The description of the calendar icon at the routine notification component."
   },
   "XiSFEr": {
     "defaultMessage": "Erro inesperado | bud",
@@ -1827,10 +1803,6 @@
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
     "description": "This message appears when the user tries to remove a given key-result, but receives an error"
   },
-  "chwy/J": {
-    "defaultMessage": "Responder hoje",
-    "description": "The text that goes in the update text, below the routine title, when the routine is up to date."
-  },
   "ciNUJf": {
     "defaultMessage": "Explorar",
     "description": "MainAppBar menu item that links to teams \"Explore\" page"
@@ -1862,10 +1834,6 @@
   "dymB9a": {
     "defaultMessage": "Cada resultado-chave pertence a um objetivo",
     "description": "This tooltip explains the second column of the key result list"
-  },
-  "e+r00n": {
-    "defaultMessage": "Saiba mais",
-    "description": "A link to a page that talks about the retrospective routine."
   },
   "e2FL3I": {
     "defaultMessage": "Um ícone do sinal de positivo que, ao clicar, irá adicionar um novo item na checklist",
@@ -1926,10 +1894,6 @@
   "fI4P80": {
     "defaultMessage": "Q1",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
-  },
-  "fSrztQ": {
-    "defaultMessage": "Compartilhe suas as prioridades, conquistas e barreiras com seu time. Acompanhe e interaja com seus colegas sobre a jornada deles. {link}",
-    "description": "Description of the content of the Retrospective tab on the teams page."
   },
   "fVyP58": {
     "defaultMessage": "Visualize os objetivos e resultados-chave de todos os times dessa área, se aprofunde no detalhamento de progresso, nível de confiança e dono.",
@@ -1999,6 +1963,10 @@
     "defaultMessage": "Erro ao criar o ambiente",
     "description": "The title of the toast that appears when we have an error while creating a new workspace"
   },
+  "hJZjes": {
+    "defaultMessage": "Check-in em dia",
+    "description": "The title of the section of the key results with an up to date check-in."
+  },
   "hL/jUm": {
     "defaultMessage": "TAREFAS EM OKRs",
     "description": "The title for tasks section in the profile page"
@@ -2038,10 +2006,6 @@
   "hohkHN": {
     "defaultMessage": "Criar time",
     "description": "The text is displayed as a heading in the add team modal"
-  },
-  "how6b8": {
-    "defaultMessage": "Um ícone de seta para a direita, usado no contexto de um link que redireciona o usuário para a página onde fala sobre a rotina de retrospectiva.",
-    "description": "A right arrow icon, used in the context of a link that redirects the user to the page where the retrospective routine is discussed."
   },
   "i3PQl+": {
     "defaultMessage": "Ciclo {period} {status} com sucesso!",
@@ -2147,6 +2111,10 @@
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
     "description": "A brief explanation for screen readers regarding the yellow status circle"
   },
+  "kTFIMk": {
+    "defaultMessage": "Você não tem check-ins pendentes porque não está envolvido em nenhum resultado-chave.",
+    "description": "The page description that is displayed if the user has no key result in the check in notifications tab."
+  },
   "kXNgkQ": {
     "defaultMessage": "Progresso",
     "description": "The text of the table head related to the Progress column"
@@ -2223,6 +2191,10 @@
     "defaultMessage": "Inglês",
     "description": "The user locale en-US option while creating a new workspace"
   },
+  "lpsQj3": {
+    "defaultMessage": "Check-in",
+    "description": "This message appears as the title of the Check-ins option in the notifications modal."
+  },
   "m4igWj": {
     "defaultMessage": "Adicionar Comentário",
     "description": "This is the label text that is displayed as a button as soon the check in form is displayed"
@@ -2262,10 +2234,6 @@
   "n3PYQR": {
     "defaultMessage": "Escreva sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}",
     "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
-  },
-  "n8OKn4": {
-    "defaultMessage": "Resultados-chave",
-    "description": "The title of the second section of My Week notification tab."
   },
   "nEQaGP": {
     "defaultMessage": "OKRs Trimestrais {quarter}",
@@ -2307,10 +2275,6 @@
     "defaultMessage": "Um botão com um ícone de X. Ao clicar nele você irá cancelar a atualização do objetivo",
     "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the cancel button"
   },
-  "nqlxOI": {
-    "defaultMessage": "Você está em dia com seus compromissos no Bud.",
-    "description": "The page description that is displayed if the user has no key result in the this week notifications tab."
-  },
   "nrToz/": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our unknown error page"
@@ -2334,10 +2298,6 @@
   "p2UjMZ": {
     "defaultMessage": "Minhas Coisas | bud",
     "description": "The page title that is displayed in the browser tab"
-  },
-  "pAXjHu": {
-    "defaultMessage": "Retrospectiva",
-    "description": "This is the title of the retrospectives tab on the team page."
   },
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
@@ -2459,10 +2419,6 @@
     "defaultMessage": "Mostrar menos",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
-  "sQAoOl": {
-    "defaultMessage": "Relaxe! Está tudo certo por aqui :)",
-    "description": "The page title that is displayed if the user has no key result in the this week notifications tab."
-  },
   "sSCvSb": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você irá remover esse item da checklist",
     "description": "This text is used by screen readers inside our key-result drawer to describe the X icon to remove a given item from the checklist"
@@ -2530,10 +2486,6 @@
   "u7Yaxx": {
     "defaultMessage": "Responsável",
     "description": "The text of the table head related to the Owner column"
-  },
-  "uIY7F5": {
-    "defaultMessage": "Retrospectiva da Semana",
-    "description": "Title of the content of the Retrospective tab on the teams page."
   },
   "uQUReU": {
     "defaultMessage": "Estado atual",
@@ -2634,10 +2586,6 @@
   "wJjuae": {
     "defaultMessage": "A pessoa responsável por garantir que esse resultado-chave aconteça",
     "description": "This tooltip explains the seventh column of the key result list"
-  },
-  "wWbkGb": {
-    "defaultMessage": "OKRs",
-    "description": "This is the title of the okrs tab on the team page."
   },
   "waPxPB": {
     "defaultMessage": "Idioma do usuário inicial",

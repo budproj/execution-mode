@@ -1,6 +1,7 @@
 import { Flex, Text, Box, Divider } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
@@ -9,6 +10,7 @@ import { UpdateIcon } from 'src/components/KeyResult/List/Body/Columns/KeyResult
 import { PendingRoutine } from 'src/components/Routine/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 
 import messages from './messages'
 
@@ -18,6 +20,7 @@ interface RoutineComponentProperties {
 
 const RoutineComponent = ({ routine }: RoutineComponentProperties) => {
   const { dispatch } = useEvent(EventType.NOTIFICATION_ROUTINE_CLICK)
+  const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
 
   const intl = useIntl()
 
@@ -55,6 +58,7 @@ const RoutineComponent = ({ routine }: RoutineComponentProperties) => {
             fontSize={12}
             label={intl.formatMessage(messages.answerRoutineButton)}
             onClick={() => {
+              setIsRoutineDrawerOpen(() => true)
               dispatch({})
             }}
           />

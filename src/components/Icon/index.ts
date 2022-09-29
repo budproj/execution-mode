@@ -8,6 +8,10 @@ export { default as CircleArrowRight } from './CircleArrowRight'
 
 export { default as CommentIcon } from './Comment'
 
+export { default as OpenArrowUp } from './OpenArrowUp'
+
+export { default as OpenArrowDown } from './OpenArrowDown'
+
 export { default as PauseIcon } from './Pause'
 
 export { default as TaggedIcon } from './Tagged'

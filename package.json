@@ -108,7 +108,7 @@
     "ts-node": "^9.1.1"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.10",
+    "@apollo/client": "^3.6.8",
     "@auth0/auth0-react": "^1.9.0",
     "@chakra-ui/react": "^1.8.6",
     "@emotion/react": "^11.8.2",
@@ -143,8 +143,10 @@
     "react-input-mask": "^2.0.4",
     "react-intl": "^5.24.7",
     "react-linkify": "^1.0.0-alpha",
+    "react-markdown": "^8.0.3",
     "react-mentions": "^4.3.1",
     "react-number-format": "^4.9.1",
+    "react-textarea-autosize": "^8.3.4",
     "recharts": "^2.1.9",
     "recoil": "^0.3.1",
     "regexify-string": "^1.0.17",
