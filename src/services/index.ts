@@ -1,15 +1,28 @@
 import { AxiosInstance } from 'axios'
 
-import { customHeadersInjector, errorResponseInjector } from './injectors'
-import { routinesInstance } from './routines'
+import { BudConfig } from 'src/config'
 
-const configureInstance = (instance: AxiosInstance) => {
-  customHeadersInjector(instance)
+import { customHeadersInjector, errorResponseInjector } from './injectors'
+import { getRoutinesInstance } from './routines'
+
+export interface Services {
+  routines: AxiosInstance
+}
+
+const configureInstance = (instance: AxiosInstance, authToken: string) => {
+  customHeadersInjector(instance, authToken)
   errorResponseInjector(instance)
 
   return instance
 }
 
-export default {
-  routines: configureInstance(routinesInstance),
+export const getServices = async (
+  getAuthToken: () => Promise<string>,
+  config: BudConfig,
+): Promise<Services> => {
+  const authToken = await getAuthToken()
+
+  return {
+    routines: configureInstance(getRoutinesInstance(config), authToken),
+  }
 }

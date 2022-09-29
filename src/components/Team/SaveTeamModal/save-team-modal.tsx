@@ -68,7 +68,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
   const setShouldUpdateObjectives = useSetRecoilState(isReloadNecessary)
   const [childTeams, setChildTeamEdges] = useConnectionEdges<Team>()
 
-  const [owner, setOwner] = useState(currentUserID)
+  const [owner, setOwner] = useState('')
   const [parentTeam, setParentTeam] = useState<Partial<Team>>({})
   const [name, setName] = useState(isEditing ? team?.name : '')
   const [description, setDescription] = useState(isEditing ? team?.description : '')
@@ -85,11 +85,10 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
         setParentTeam(team.parent)
       }
 
-      if (team?.ownerId && isEditing) {
-        setOwner(team.ownerId)
-      }
+      const ownerID = isEditing ? team?.ownerId ?? '' : currentUserID ?? ''
+      setOwner(ownerID)
     }
-  }, [team, setChildTeamEdges, isEditing])
+  }, [team, setChildTeamEdges, isEditing, currentUserID])
 
   const [saveOrUpdateTeam, { loading }] = useMutation<AddSubteamMutationResult>(
     isEditing ? queries.UPDATE_TEAM : queries.CREATE_TEAM,

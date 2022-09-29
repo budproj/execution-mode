@@ -1,6 +1,5 @@
 import { AxiosInstance } from 'axios'
 
-export const customHeadersInjector = (instance: AxiosInstance) => {
-  const token = '123'
-  instance.defaults.headers.common.Authorization = token
+export const customHeadersInjector = async (instance: AxiosInstance, authToken: string) => {
+  instance.defaults.headers.common.Authorization = `Bearer ${authToken}`
 }

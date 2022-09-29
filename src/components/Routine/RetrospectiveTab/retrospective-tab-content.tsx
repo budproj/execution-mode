@@ -1,9 +1,11 @@
 import { Button, Flex, Link, Stack, Text, Grid, Divider } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
 import { CircleArrowRight } from 'src/components/Icon'
 import { Team } from 'src/components/Team/types'
+import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 
 import messages from '../../Page/Team/Tabs/content/messages'
 
@@ -43,6 +45,7 @@ interface RetrospectiveTabContent {
 
 const RetrospectiveTabContent = ({ answerQuery, teamId }: RetrospectiveTabContent) => {
   const intl = useIntl()
+  const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
 
   return (
     <Stack spacing={10}>
@@ -84,6 +87,9 @@ const RetrospectiveTabContent = ({ answerQuery, teamId }: RetrospectiveTabConten
           bg="brand.500"
           color="black.50"
           _hover={{ background: 'brand.400', color: 'black.50' }}
+          onClick={() => {
+            setIsRoutineDrawerOpen(() => true)
+          }}
         >
           {intl.formatMessage(messages.tabRetrospectiveAnswerButton)}
         </Button>
