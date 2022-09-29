@@ -40,7 +40,7 @@ export const UsersInContext = ({
   const emptyState = <Text color="black.600">{intl.formatMessage(messages.emptySearchState)}</Text>
 
   useEffect(() => {
-    loadUsers(items)
+    loadUsers([...items, teamLeader])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items])
 
