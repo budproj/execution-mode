@@ -14,7 +14,7 @@ interface RoutineAnswerCardProperties {
 
 const RoutineAnswerCard = ({ answerData }: RoutineAnswerCardProperties) => {
   switch (answerData.type) {
-    case 'roadblock':
+    case 'road_block':
       return <RoadblockAnswerCard answerData={answerData} />
     case 'long_text':
       return <LongTextAnswerCard answerData={answerData} />

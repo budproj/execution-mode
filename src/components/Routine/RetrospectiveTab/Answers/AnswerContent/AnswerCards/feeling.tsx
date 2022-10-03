@@ -22,7 +22,7 @@ const FeelingAnswerCard = ({ answerData }: FeelingAnswerCardProperties) => {
 
   return (
     <AnswerCardBase>
-      <Flex alignItems="center" gap={6} maxWidth={225}>
+      <Flex alignItems="center" gap={6} maxWidth={265}>
         <SmileIcon desc="mudar" />
         <Text fontSize={14} color="new-gray.600">
           {answerData.heading}

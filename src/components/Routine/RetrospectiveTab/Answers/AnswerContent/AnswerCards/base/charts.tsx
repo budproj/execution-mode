@@ -38,13 +38,22 @@ const RoutineChart = ({ data, principalColor }: ProgressHistoryChartProperties) 
   return (
     <Box padding={3} bg="new-gray.100" borderRadius={6} w="320px" h={28} pb={-2}>
       <ResponsiveContainer>
-        <ComposedChart data={formatedData}>
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor={principalColor === 'brand' ? brand300 : yellow300} />
-              <stop offset="95%" stopColor={principalColor === 'brand' ? brand100 : yellow100} />
-            </linearGradient>
-          </defs>
+        <ComposedChart id={data[0].timestamp} data={formatedData}>
+          {principalColor === 'brand' ? (
+            <defs>
+              <linearGradient id={principalColor} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor={brand300} />
+                <stop offset="95%" stopColor={brand100} />
+              </linearGradient>
+            </defs>
+          ) : (
+            <defs>
+              <linearGradient id={principalColor} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor={yellow300} />
+                <stop offset="95%" stopColor={yellow100} />
+              </linearGradient>
+            </defs>
+          )}
 
           <Tooltip separator=": " cursor={false} />
 
@@ -68,7 +77,7 @@ const RoutineChart = ({ data, principalColor }: ProgressHistoryChartProperties) 
             name="asd"
             stroke="none"
             fillOpacity={1}
-            fill="url(#colorUv)"
+            fill={`url(#${principalColor})`}
           />
 
           <Line

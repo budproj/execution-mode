@@ -2,7 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
-import GraphicIcon from 'src/components/Icon/SmileIcon'
+import { StarIcon, TargetIcon, WriteIcon } from 'src/components/Icon'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 
 import { routineAnswer } from '../../types'
@@ -21,14 +21,20 @@ const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
     (answer) => answer.id === answerData.conditional?.dependsOn,
   )
 
+  const icons: Record<string, JSX.Element> = {
+    '95b84e67-d5b6-4fcf-938a-b4c9897596cb': <StarIcon desc="asdas" />,
+    'a1d5b993-9430-40bb-8f0f-47cda69720b9': <TargetIcon desc="asdas" />,
+    'fd7c26dd-38e3-41e7-b24a-78030653dc23': <WriteIcon desc="asdas" />,
+  }
+
   const theme = themeColor(isDependentThat?.type ?? '')
 
   return (
     <AnswerCardBase isDependent={Boolean(answerData.conditional)}>
       <>
         {!answerData.conditional && (
-          <Flex alignItems="center" gap={6} maxWidth={225}>
-            <GraphicIcon desc="mudar" />
+          <Flex alignItems="center" gap={6} maxWidth={265}>
+            {icons[answerData.id]}
             <Text fontSize={14} color="new-gray.600">
               {answerData.heading}
             </Text>

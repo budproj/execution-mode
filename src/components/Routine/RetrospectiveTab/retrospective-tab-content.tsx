@@ -13,7 +13,7 @@ import AnswersComponent from './Answers'
 import RetrospectiveTabContentView from './retrospective-tab-content-view'
 
 export type AnswerType = {
-  id: number
+  id: string
   user: string
   feeling: number
   createdAt: string
@@ -22,14 +22,7 @@ export type AnswerType = {
 
 const data: AnswerType[] = [
   {
-    id: 1,
-    user: 'Ana Fonseca',
-    feeling: 5,
-    createdAt: '2022-5-17 10:10:00',
-    comments: 2,
-  },
-  {
-    id: 2,
+    id: '3a7c8589-fffe-4cb0-8b38-eb3d7428d91a',
     user: 'Lucas Vilela',
     feeling: 1,
     createdAt: '2022-8-27 09:09:00',
@@ -37,7 +30,6 @@ const data: AnswerType[] = [
   },
 ]
 
-// TODO: change interface
 interface RetrospectiveTabContent {
   teamId: Team['id']
   answerQuery: string
@@ -97,7 +89,7 @@ const RetrospectiveTabContent = ({ answerQuery, teamId }: RetrospectiveTabConten
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
         <AnswersComponent teamId={teamId} answers={data} />
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RetrospectiveTabContentView answers={data} answerQuery={answerQuery} />
+        <RetrospectiveTabContentView teamId={teamId} answers={data} answerQuery={answerQuery} />
       </Grid>
     </Stack>
   )

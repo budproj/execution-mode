@@ -11,9 +11,8 @@ const AnswerCardBase = ({ children, isDependent = false, ...rest }: AnswerCardBa
     <HStack
       justifyContent={isDependent ? 'flex-end' : 'space-between'}
       alignItems="flex-start"
-      maxWidth={720}
-      width="100%"
-      pt={isDependent ? 2 : 12}
+      gap={20}
+      pt={isDependent ? 4 : 12}
       {...rest}
     >
       {children}

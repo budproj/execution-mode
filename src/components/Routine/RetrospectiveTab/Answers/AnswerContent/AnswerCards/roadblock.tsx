@@ -31,7 +31,7 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
 
   return (
     <AnswerCardBase>
-      <Flex alignItems="center" gap={6} maxWidth={225}>
+      <Flex alignItems="center" gap={6} maxWidth={265}>
         <PauseIcon
           desc="mudar"
           columnBgColor="#8491B0"
@@ -62,7 +62,7 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
             border="2px solid"
             bg="new-gray.400"
             zIndex={2}
-            width="80%"
+            width="70%"
           />
           {answerData.values?.map((answer) => {
             return (

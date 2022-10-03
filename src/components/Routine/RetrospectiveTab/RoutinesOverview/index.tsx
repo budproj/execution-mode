@@ -12,7 +12,7 @@ import { AreaRadialChart } from '../../../Base/Charts/index'
 
 interface RoutinesOverviewProperties {
   answers: Array<{
-    id: number
+    id: string
     user: string
     feeling: number
     createdAt: string

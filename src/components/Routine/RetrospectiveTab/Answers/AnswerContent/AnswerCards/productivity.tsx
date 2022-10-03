@@ -19,7 +19,7 @@ const ProductivityAnswerCard = ({ answerData }: ProductivityAnswerCardProperties
 
   return (
     <AnswerCardBase>
-      <Flex alignItems="center" gap={6} maxWidth={225}>
+      <Flex alignItems="center" gap={6} maxWidth={265}>
         <BagIcon desc="mudar" />
         <Text fontSize={14} color="new-gray.600">
           {answerData.heading}

@@ -15,7 +15,7 @@ import messages from './messages'
 interface AnswerRowComponentProperties {
   teamId: Team['id']
   answer: {
-    id: number
+    id: string
     user: string
     feeling: number
     createdAt: string

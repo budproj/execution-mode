@@ -44,7 +44,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const { hash } = window.location
-    const hashedLocation = hash.replace('#', '').toLowerCase()
+    const hashedLocation = hash.replace('#', '')
 
     const [tab, query] = hashedLocation.split('?')
     setAnswerQuery(query ?? '')
