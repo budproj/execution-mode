@@ -31,11 +31,7 @@ const AnswerRowComponent = ({ teamId, answer }: AnswerRowComponentProperties) =>
   const { getEmoji } = useGetEmoji()
 
   return (
-    // TODO: change link (before and after must not be static)
-    <IntlLink
-      passHref
-      href={`/explore/${teamId}#retrospectiva?answerId=${answer.id}&before=2022-01-20&after=2022-01-01`}
-    >
+    <IntlLink passHref href={`/explore/${teamId}#retrospectiva?answerId=${answer.id}`}>
       <Flex key={answer.id} marginBottom={5}>
         <Avatar
           width="45px"

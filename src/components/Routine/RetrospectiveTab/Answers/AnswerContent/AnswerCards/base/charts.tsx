@@ -1,7 +1,7 @@
 import { Box, useToken } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
 
 export type RoutineChartData = {
   value: string
@@ -10,10 +10,11 @@ export type RoutineChartData = {
 
 type ProgressHistoryChartProperties = {
   data: RoutineChartData[]
+  tooltipTitle: string
   principalColor: 'brand' | 'yellow'
 }
 
-const RoutineChart = ({ data, principalColor }: ProgressHistoryChartProperties) => {
+const RoutineChart = ({ data, tooltipTitle, principalColor }: ProgressHistoryChartProperties) => {
   const intl = useIntl()
 
   const [brand100, brand300, brand500, yellow100, yellow300, yellow600, newGray400, newGray500] =
@@ -66,15 +67,13 @@ const RoutineChart = ({ data, principalColor }: ProgressHistoryChartProperties) 
             interval="preserveStartEnd"
           />
 
-          <YAxis yAxisId="primary" type="number" stroke={newGray400} width={0} />
-
           <Area
             connectNulls
             yAxisId="primary"
             xAxisId="primary"
             type="linear"
             dataKey="progress"
-            name="asd"
+            name={tooltipTitle}
             stroke="none"
             fillOpacity={1}
             fill={`url(#${principalColor})`}
@@ -84,11 +83,11 @@ const RoutineChart = ({ data, principalColor }: ProgressHistoryChartProperties) 
             yAxisId="primary"
             xAxisId="primary"
             dataKey="progress"
+            tooltipType="none"
             strokeWidth={2}
             stroke={principalColor === 'brand' ? brand500 : yellow600}
             r={3}
             fill={principalColor === 'brand' ? brand500 : yellow600}
-            name="sdsa"
           />
         </ComposedChart>
       </ResponsiveContainer>

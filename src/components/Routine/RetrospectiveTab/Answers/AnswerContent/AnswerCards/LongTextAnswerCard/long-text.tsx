@@ -1,14 +1,16 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { StarIcon, TargetIcon, WriteIcon } from 'src/components/Icon'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 
-import { routineAnswer } from '../../types'
-import { themeColor } from '../../utils/contants'
+import { routineAnswer } from '../../../types'
+import { themeColor } from '../../../utils/contants'
+import AnswerCardBase from '../base/answer-card'
 
-import AnswerCardBase from './base/answer-card'
+import messages from './messages'
 
 interface LongTextAnswerCardProperties {
   answerData: routineAnswer
@@ -16,15 +18,22 @@ interface LongTextAnswerCardProperties {
 
 const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
+  const intl = useIntl()
 
   const isDependentThat = answerDetailed.answers.find(
     (answer) => answer.id === answerData.conditional?.dependsOn,
   )
 
   const icons: Record<string, JSX.Element> = {
-    '95b84e67-d5b6-4fcf-938a-b4c9897596cb': <StarIcon desc="asdas" />,
-    'a1d5b993-9430-40bb-8f0f-47cda69720b9': <TargetIcon desc="asdas" />,
-    'fd7c26dd-38e3-41e7-b24a-78030653dc23': <WriteIcon desc="asdas" />,
+    '95b84e67-d5b6-4fcf-938a-b4c9897596cb': (
+      <StarIcon desc={intl.formatMessage(messages.starIconDesc)} />
+    ),
+    'a1d5b993-9430-40bb-8f0f-47cda69720b9': (
+      <TargetIcon desc={intl.formatMessage(messages.targetIconDesc)} />
+    ),
+    'fd7c26dd-38e3-41e7-b24a-78030653dc23': (
+      <WriteIcon desc={intl.formatMessage(messages.writeIconDesc)} />
+    ),
   }
 
   const theme = themeColor(isDependentThat?.type ?? '')

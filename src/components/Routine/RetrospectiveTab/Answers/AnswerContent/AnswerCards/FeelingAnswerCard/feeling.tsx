@@ -1,13 +1,15 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { SmileIcon } from 'src/components/Icon'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 
-import { routineAnswer } from '../../types'
+import { routineAnswer } from '../../../types'
+import AnswerCardBase from '../base/answer-card'
+import RoutineChart from '../base/charts'
 
-import AnswerCardBase from './base/answer-card'
-import RoutineChart from './base/charts'
+import messages from './messages'
 
 interface FeelingAnswerCardProperties {
   answerData: routineAnswer
@@ -15,6 +17,8 @@ interface FeelingAnswerCardProperties {
 
 const FeelingAnswerCard = ({ answerData }: FeelingAnswerCardProperties) => {
   const { getEmoji } = useGetEmoji()
+
+  const intl = useIntl()
 
   const chartData = answerData.values ?? []
 
@@ -30,7 +34,11 @@ const FeelingAnswerCard = ({ answerData }: FeelingAnswerCardProperties) => {
       </Flex>
 
       <Flex gap={4}>
-        <RoutineChart principalColor="yellow" data={chartData} />
+        <RoutineChart
+          principalColor="yellow"
+          data={chartData}
+          tooltipTitle={intl.formatMessage(messages.chartTooltipTitle)}
+        />
         <Box textAlign="center" bg="new-gray.100" width={28} height={28} pt={5} borderRadius={6}>
           {getEmoji({ felling: Number(actualFeeling?.value), size: '50px' })}
           <Text fontSize={10} color="new-gray.600">

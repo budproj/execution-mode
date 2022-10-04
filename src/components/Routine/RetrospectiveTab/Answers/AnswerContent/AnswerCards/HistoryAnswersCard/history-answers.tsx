@@ -8,10 +8,11 @@ import { IntlLink } from 'src/components/Base'
 import { ArrowRight, GraphicIcon } from 'src/components/Icon'
 import { Team } from 'src/components/Team/types'
 
-import { AnswerType } from '../../../retrospective-tab-content'
-import { answerHistory } from '../../types'
+import { AnswerType } from '../../../../retrospective-tab-content'
+import { answerHistory } from '../../../types'
+import AnswerCardBase from '../base/answer-card'
 
-import AnswerCardBase from './base/answer-card'
+import messages from './messages'
 
 interface HistoryAnswersProperties {
   answers: answerHistory[]
@@ -48,9 +49,9 @@ const HistoryAnswers = ({ answers, teamId }: HistoryAnswersProperties) => {
   return (
     <AnswerCardBase paddingTop={0}>
       <Flex alignItems="center" gap={6} maxWidth={265}>
-        <GraphicIcon desc="mudar" />
+        <GraphicIcon desc={intl.formatMessage(messages.graphicIconDesc)} />
         <Text fontSize={14} color="new-gray.600">
-          Histórico de respostas:
+          {intl.formatMessage(messages.historyAnswersCardTitle)}:
         </Text>
       </Flex>
       <Flex gap={4}>
@@ -133,14 +134,22 @@ const HistoryAnswers = ({ answers, teamId }: HistoryAnswersProperties) => {
             isDisabled={!previousRoutineAnswered.id}
             onClick={async () => handlePushToAnswer(previousRoutineAnswered?.id ?? '')}
           >
-            <ArrowRight fill="new-gray.700" style={{ transform: 'rotate(180deg)' }} desc="sdas" />
+            <ArrowRight
+              fill="new-gray.700"
+              style={{ transform: 'rotate(180deg)' }}
+              desc={intl.formatMessage(messages.arrowRightIcon)}
+            />
           </StyledButton>
           <StyledButton
             isDisabled={!lastRoutine.id}
             style={{ transform: 'rotate(180deg)' }}
             onClick={async () => handlePushToAnswer(lastRoutine.id ?? '')}
           >
-            <ArrowRight fill="new-gray.700" style={{ transform: 'rotate(180deg)' }} desc="sdas" />
+            <ArrowRight
+              fill="new-gray.700"
+              style={{ transform: 'rotate(180deg)' }}
+              desc={intl.formatMessage(messages.arrowLeftIcon)}
+            />
           </StyledButton>
         </Flex>
       </Flex>

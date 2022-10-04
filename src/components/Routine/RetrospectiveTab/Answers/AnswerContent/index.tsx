@@ -6,7 +6,7 @@ import { Team } from 'src/components/Team/types'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 
 import RoutineAnswerCard from './AnswerCards'
-import HistoryAnswers from './AnswerCards/history-answers'
+import HistoryAnswers from './AnswerCards/HistoryAnswersCard/history-answers'
 
 type AnswerContent = {
   teamId: Team['id']

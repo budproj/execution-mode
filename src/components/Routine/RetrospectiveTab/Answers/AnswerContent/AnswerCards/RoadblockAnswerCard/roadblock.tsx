@@ -4,9 +4,10 @@ import { useIntl } from 'react-intl'
 
 import { PauseIcon } from 'src/components/Icon'
 
-import { routineAnswer } from '../../types'
+import { routineAnswer } from '../../../types'
+import AnswerCardBase from '../base/answer-card'
 
-import AnswerCardBase from './base/answer-card'
+import messages from './messages'
 
 interface RoadblockAnswerCardProperties {
   answerData: routineAnswer
@@ -33,7 +34,7 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
     <AnswerCardBase>
       <Flex alignItems="center" gap={6} maxWidth={265}>
         <PauseIcon
-          desc="mudar"
+          desc={intl.formatMessage(messages.pauseIconDesc)}
           columnBgColor="#8491B0"
           fill="new-gray.400"
           width="40px"
@@ -79,7 +80,7 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
                   {answer.value ? (
                     answer.value === 'y' ? (
                       <PauseIcon
-                        desc="qweq"
+                        desc={intl.formatMessage(messages.pauseIconDesc)}
                         w={7}
                         h={7}
                         coloumnStrokeWidth={0.2}
@@ -128,10 +129,10 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
           borderRadius={6}
         >
           <Text fontSize={18} lineHeight={0} fontWeight="bold" color="purple.500">
-            {actual.value === 'y' ? 'Sim!' : 'Ok'}
+            {actual.value === 'y' ? intl.formatMessage(messages.barrierStatusOnThisWeek) : 'Ok'}
           </Text>
           <Text lineHeight={0} pt={4} fontSize={10} color="new-gray.600">
-            Essa semana
+            {intl.formatMessage(messages.subtitleBarrierStatusOnThisWeek)}
           </Text>
         </VStack>
       </HStack>

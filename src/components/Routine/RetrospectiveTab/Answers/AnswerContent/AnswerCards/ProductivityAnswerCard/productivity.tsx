@@ -1,12 +1,14 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { BagIcon } from 'src/components/Icon'
 
-import { routineAnswer } from '../../types'
+import { routineAnswer } from '../../../types'
+import AnswerCardBase from '../base/answer-card'
+import RoutineChart from '../base/charts'
 
-import AnswerCardBase from './base/answer-card'
-import RoutineChart from './base/charts'
+import messages from './messages'
 
 interface ProductivityAnswerCardProperties {
   answerData: routineAnswer
@@ -14,6 +16,7 @@ interface ProductivityAnswerCardProperties {
 
 const ProductivityAnswerCard = ({ answerData }: ProductivityAnswerCardProperties) => {
   const chartData = answerData.values ?? []
+  const intl = useIntl()
 
   const actualProductivity = chartData[chartData.length - 1]
 
@@ -27,7 +30,11 @@ const ProductivityAnswerCard = ({ answerData }: ProductivityAnswerCardProperties
       </Flex>
 
       <Flex gap={4}>
-        <RoutineChart principalColor="brand" data={chartData} />
+        <RoutineChart
+          principalColor="brand"
+          data={chartData}
+          tooltipTitle={intl.formatMessage(messages.chartTooltipTitle)}
+        />
         <Box textAlign="center" bg="new-gray.100" width={28} height={28} borderRadius={6}>
           <span style={{ fontSize: 48, color: '#6F6EFF', fontWeight: 500 }}>
             {actualProductivity?.value}

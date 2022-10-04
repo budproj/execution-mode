@@ -3,10 +3,10 @@ import React from 'react'
 
 import { routineAnswer } from '../../types'
 
-import FeelingAnswerCard from './feeling'
-import LongTextAnswerCard from './long-text'
-import ProductivityAnswerCard from './productivity'
-import RoadblockAnswerCard from './roadblock'
+import FeelingAnswerCard from './FeelingAnswerCard/feeling'
+import LongTextAnswerCard from './LongTextAnswerCard/long-text'
+import ProductivityAnswerCard from './ProductivityAnswerCard/productivity'
+import RoadblockAnswerCard from './RoadblockAnswerCard/roadblock'
 
 interface RoutineAnswerCardProperties {
   answerData: routineAnswer
