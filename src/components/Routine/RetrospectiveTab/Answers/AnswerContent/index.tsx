@@ -20,9 +20,9 @@ const AnswerContent = ({ teamId }: AnswerContent) => {
       {answerDetailed.history.length > 0 && (
         <Box>
           <HistoryAnswers teamId={teamId} answers={answerDetailed.history} />
-          {answerDetailed.answers.map((answer) => (
-            <RoutineAnswerCard key={answer.id} answerData={answer} />
-          ))}
+          {answerDetailed.answers.map((answer) => {
+            return <RoutineAnswerCard key={answer.id} answerData={answer} />
+          })}
         </Box>
       )}
     </VStack>

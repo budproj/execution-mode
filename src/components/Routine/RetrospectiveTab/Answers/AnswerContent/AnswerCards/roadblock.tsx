@@ -1,4 +1,4 @@
-import { Box, Circle, Divider, Flex, HStack, List, ListItem, Text } from '@chakra-ui/react'
+import { Circle, Divider, Flex, HStack, List, ListItem, Text, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -16,7 +16,7 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
   const intl = useIntl()
 
   const formatedDate = (date: Date) => {
-    return `${intl.formatDate(date, { day: 'numeric' })}/${
+    return `${intl.formatDate(date, { day: 'numeric', timeZone: 'utc' })}/${
       intl
         .formatDate(date, {
           month: 'short',
@@ -27,7 +27,7 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
 
   const answerDataValues = answerData.values ?? []
 
-  const actual = answerDataValues[answerDataValues.length - 1]
+  const actual = answerDataValues[answerDataValues.length - 2]
 
   return (
     <AnswerCardBase>
@@ -50,8 +50,10 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
           gap={10}
           bg="new-gray.100"
           borderRadius={6}
+          w="320px"
           paddingX={6}
           paddingY={3}
+          height="100%"
           alignItems="center"
           position="relative"
           justifyContent="center"
@@ -62,55 +64,76 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
             border="2px solid"
             bg="new-gray.400"
             zIndex={2}
-            width="70%"
+            width="80%"
           />
-          {answerData.values?.map((answer) => {
+          {answerData.values?.map((answer, index, array) => {
             return (
-              <ListItem
-                key={answer.value}
-                zIndex={3}
-                display="flex"
-                flexDir="column"
-                alignItems="center"
-              >
-                {answer.value === 'y' ? (
-                  <PauseIcon
-                    desc="qweq"
-                    w={7}
-                    h={7}
-                    coloumnStrokeWidth={0.2}
-                    circleStrokeWidth={0}
-                    stroke="white"
-                  />
-                ) : (
-                  <Circle
-                    bg="new-gray.500"
-                    size={6}
-                    lineHeight="none"
-                    color="white"
-                    fontSize={10}
-                    fontWeight="black"
-                  >
-                    <span>&#10003;</span>
-                  </Circle>
-                )}
-                <Text fontSize={10} color="new-gray.600">
-                  {formatedDate(new Date(answer.timestamp))}
-                </Text>
-              </ListItem>
+              index < array.length - 1 && (
+                <ListItem
+                  key={answer.timestamp}
+                  zIndex={3}
+                  display="flex"
+                  flexDir="column"
+                  alignItems="center"
+                >
+                  {answer.value ? (
+                    answer.value === 'y' ? (
+                      <PauseIcon
+                        desc="qweq"
+                        w={7}
+                        h={7}
+                        coloumnStrokeWidth={0.2}
+                        circleStrokeWidth={0}
+                        stroke="white"
+                      />
+                    ) : (
+                      <Circle
+                        bg="new-gray.500"
+                        size={6}
+                        lineHeight="none"
+                        color="white"
+                        fontSize={10}
+                        fontWeight="black"
+                      >
+                        <span>&#10003;</span>
+                      </Circle>
+                    )
+                  ) : (
+                    <Circle
+                      bg="new-gray.500"
+                      size={6}
+                      lineHeight="none"
+                      color="white"
+                      cursor="default"
+                      fontSize={10}
+                      fontWeight="black"
+                    >
+                      <span>&#x2715;</span>
+                    </Circle>
+                  )}
+                  <Text fontSize={10} color="new-gray.600">
+                    {formatedDate(new Date(answer.timestamp))}
+                  </Text>
+                </ListItem>
+              )
             )
           })}
         </List>
-        <Flex gap={4}>
-          <Box textAlign="center" bg="new-gray.100" paddingX={6} paddingY={3} borderRadius={6}>
-            <Text fontSize={18} fontWeight="bold" color="purple.500">
-              {actual.value === 'y' ? 'Sim!' : 'Ok'}
-            </Text>
-            <Text fontSize={10} color="new-gray.600">
-              Essa semana
-            </Text>
-          </Box>
-        </Flex>
+        <VStack
+          alignItems="center"
+          justifyContent="center"
+          height="100%"
+          bg="new-gray.100"
+          width={28}
+          borderRadius={6}
+        >
+          <Text fontSize={18} lineHeight={0} fontWeight="bold" color="purple.500">
+            {actual.value === 'y' ? 'Sim!' : 'Ok'}
+          </Text>
+          <Text lineHeight={0} pt={4} fontSize={10} color="new-gray.600">
+            Essa semana
+          </Text>
+        </VStack>
       </HStack>
     </AnswerCardBase>
   )
