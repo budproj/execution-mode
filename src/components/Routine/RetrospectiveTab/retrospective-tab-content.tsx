@@ -1,10 +1,24 @@
-import { Flex, Link, Stack, Text, Grid, Divider } from '@chakra-ui/react'
+import {
+  Flex,
+  Link,
+  Stack,
+  Text,
+  Grid,
+  Divider,
+  ButtonGroup,
+  Button,
+  IconButton,
+  useDisclosure,
+} from '@chakra-ui/react'
 import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { CircleArrowRight } from 'src/components/Icon'
+import CircleIcon from 'src/components/Icon/Circle'
+import GearIcon from 'src/components/Icon/Gear'
+import { NotificationSettingsModal } from 'src/components/Routine/NotificationSettings'
 import { Team } from 'src/components/Team/types'
 import { routineDateRangeSelector } from 'src/state/recoil/routine/routine-dates-range'
 
@@ -40,6 +54,12 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
   const [answersOverview, setAnswersOverview] = useState<AnswerOverview | undefined>()
 
   const { after, before, week } = useRecoilValue(routineDateRangeSelector)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [isActive, setIsActive] = useState(false)
+
+  const toggleNotifcation = (isActive: boolean) => {
+    setIsActive(isActive)
+  }
 
   useEffect(() => {
     const getAnswersSummaryAndOverview = async () => {
@@ -63,7 +83,7 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
 
   return (
     <Stack spacing={10}>
-      <Flex alignItems="center" justifyContent="space-between">
+      <Flex alignItems="flex-end" justifyContent="space-between">
         <Stack direction="column" spacing={1}>
           <Text fontSize={28} fontWeight="medium" color="new-gray.800">
             {intl.formatMessage(messages.tabRetrospectivePageTitle)}
@@ -97,6 +117,38 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
             })}
           </Text>
         </Stack>
+        <Stack>
+          <ButtonGroup isAttached size="sm" variant="outline" onClick={onOpen}>
+            <Button
+              borderTopLeftRadius="10px"
+              borderBottomLeftRadius="10px"
+              bgColor="#fff"
+              borderColor="new-gray.400"
+              borderWidth="1px"
+              fontSize="14px"
+              _hover={{}}
+              _focus={{}}
+            >
+              <CircleIcon desc="teste" fill={isActive ? 'green.500' : 'red.500'} mr={3} />
+              {intl.formatMessage(
+                isActive ? messages.routineSettingsActive : messages.routineSettingsInactive,
+              )}
+            </Button>
+            <IconButton
+              borderColor="new-gray.400"
+              borderWidth="1px"
+              borderLeft={0}
+              aria-label={intl.formatMessage(messages.routineSettingsButton)}
+              bgColor="#fff"
+              borderTopRightRadius="10px"
+              borderBottomRightRadius="10px"
+              _hover={{ backgroundColor: 'initial' }}
+              _active={{ backgroundColor: 'initial' }}
+              _focus={{}}
+              icon={<GearIcon fill="gray.500" w="16px" h="auto" desc="teste" mx={3} />}
+            />
+          </ButtonGroup>
+        </Stack>
       </Flex>
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
         <AnswersComponent
@@ -109,6 +161,13 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
         <Divider orientation="vertical" borderColor="new-gray.400" />
         <RoutinesOverview after={after} before={before} week={week} data={answersOverview} />
       </Grid>
+
+      <NotificationSettingsModal
+        isOpen={isOpen}
+        isActive={isActive}
+        onClose={onClose}
+        onToggle={toggleNotifcation}
+      />
     </Stack>
   )
 }
