@@ -20,7 +20,9 @@ import CircleIcon from 'src/components/Icon/Circle'
 import GearIcon from 'src/components/Icon/Gear'
 import { NotificationSettingsModal } from 'src/components/Routine/NotificationSettings'
 import { Team } from 'src/components/Team/types'
+import { GraphQLEffect } from 'src/components/types'
 import { routineDateRangeSelector } from 'src/state/recoil/routine/routine-dates-range'
+import { teamAtomFamily } from 'src/state/recoil/team'
 
 import messages from '../../Page/Team/Tabs/content/messages'
 
@@ -52,10 +54,13 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
   const { servicesPromise } = useContext(ServicesContext)
   const [answersSummary, setAnswersSummary] = useState<AnswerSummary[]>([])
   const [answersOverview, setAnswersOverview] = useState<AnswerOverview | undefined>()
+  const team = useRecoilValue(teamAtomFamily(teamId))
 
   const { after, before, week } = useRecoilValue(routineDateRangeSelector)
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [isActive, setIsActive] = useState(false)
+
+  const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
 
   const toggleNotifcation = (isActive: boolean) => {
     setIsActive(isActive)
@@ -117,38 +122,40 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
             })}
           </Text>
         </Stack>
-        <Stack>
-          <ButtonGroup isAttached size="sm" variant="outline" onClick={onOpen}>
-            <Button
-              borderTopLeftRadius="10px"
-              borderBottomLeftRadius="10px"
-              bgColor="#fff"
-              borderColor="new-gray.400"
-              borderWidth="1px"
-              fontSize="14px"
-              _hover={{}}
-              _focus={{}}
-            >
-              <CircleIcon desc="teste" fill={isActive ? 'green.500' : 'red.500'} mr={3} />
-              {intl.formatMessage(
-                isActive ? messages.routineSettingsActive : messages.routineSettingsInactive,
-              )}
-            </Button>
-            <IconButton
-              borderColor="new-gray.400"
-              borderWidth="1px"
-              borderLeft={0}
-              aria-label={intl.formatMessage(messages.routineSettingsButton)}
-              bgColor="#fff"
-              borderTopRightRadius="10px"
-              borderBottomRightRadius="10px"
-              _hover={{ backgroundColor: 'initial' }}
-              _active={{ backgroundColor: 'initial' }}
-              _focus={{}}
-              icon={<GearIcon fill="gray.500" w="16px" h="auto" desc="teste" mx={3} />}
-            />
-          </ButtonGroup>
-        </Stack>
+        {canEditTeam ? (
+          <Stack>
+            <ButtonGroup isAttached size="sm" variant="outline" onClick={onOpen}>
+              <Button
+                borderTopLeftRadius="10px"
+                borderBottomLeftRadius="10px"
+                bgColor="#fff"
+                borderColor="new-gray.400"
+                borderWidth="1px"
+                fontSize="14px"
+                _hover={{}}
+                _focus={{}}
+              >
+                <CircleIcon desc="teste" fill={isActive ? 'green.500' : 'red.500'} mr={3} />
+                {intl.formatMessage(
+                  isActive ? messages.routineSettingsActive : messages.routineSettingsInactive,
+                )}
+              </Button>
+              <IconButton
+                borderColor="new-gray.400"
+                borderWidth="1px"
+                borderLeft={0}
+                aria-label={intl.formatMessage(messages.routineSettingsButton)}
+                bgColor="#fff"
+                borderTopRightRadius="10px"
+                borderBottomRightRadius="10px"
+                _hover={{ backgroundColor: 'initial' }}
+                _active={{ backgroundColor: 'initial' }}
+                _focus={{}}
+                icon={<GearIcon fill="gray.500" w="16px" h="auto" desc="teste" mx={3} />}
+              />
+            </ButtonGroup>
+          </Stack>
+        ) : undefined}
       </Flex>
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
         <AnswersComponent
