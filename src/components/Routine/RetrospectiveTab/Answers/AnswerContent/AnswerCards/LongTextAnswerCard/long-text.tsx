@@ -38,7 +38,7 @@ const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
 
   const theme = themeColor(isDependentThat?.type ?? '')
 
-  return (
+  return answerData.value ? (
     <AnswerCardBase isDependent={Boolean(answerData.conditional)}>
       <>
         {!answerData.conditional && (
@@ -71,7 +71,8 @@ const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
         </Box>
       </>
     </AnswerCardBase>
-  )
+  ) : // eslint-disable-next-line unicorn/no-null
+  null
 }
 
 export default LongTextAnswerCard
