@@ -9,7 +9,6 @@ import { Button } from 'src/components/Base/Button'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
-import ThreeLayersIcon from 'src/components/Icon/ThreeLayers'
 import { GraphQLEffect } from 'src/components/types'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import {
@@ -106,18 +105,6 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
       <Divider borderColor="new-gray.400" />
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
-        <IconButton
-          borderRadius="10px"
-          background="new-gray.200"
-          aria-label="aaaa"
-          height="38px"
-          icon={
-            <ThreeLayersIcon
-              desc={intl.formatMessage(messages.threeLayersIconDescription)}
-              width="30px"
-            />
-          }
-        />
       </Flex>
       {filteredAnswers.map((answer) => {
         return <AnswerRowComponent key={answer.id} teamId={teamId} answer={answer} />
