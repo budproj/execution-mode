@@ -31,7 +31,7 @@ const CyclesListBodyColumnDateStart = ({
           isLoaded={isdateStartLoaded}
           {...buildSkeletonMinSize(isdateStartLoaded, 100, 28)}
         >
-          <Text>{intl.formatDate(dateStart)}</Text>
+          <Text>{intl.formatDate(dateStart, { timeZone: 'UTC' })}</Text>
         </Skeleton>
       </Flex>
     </CyclesListBodyColumnBase>

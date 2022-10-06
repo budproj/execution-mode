@@ -2,50 +2,6 @@ import { Box } from '@chakra-ui/react'
 import React, { FunctionComponent } from 'react'
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 
-const janeiro = () => {
-  const value = []
-
-  for (let index = 0; index < 30; index++) {
-    value.push({
-      name: '2022-01-17 10:10:00',
-      mes: 'Jan',
-      uv: Math.floor(Math.random() * (Math.ceil(5) - Math.ceil(3) + 1)) + Math.ceil(3),
-    })
-  }
-
-  return value
-}
-
-const fevereiro = () => {
-  const value = []
-
-  for (let index = 0; index < 30; index++) {
-    value.push({
-      name: '2022-02-17 10:10:00',
-      mes: 'Fev',
-      uv: Math.floor(Math.random() * (Math.ceil(5) - Math.ceil(3) + 1)) + Math.ceil(3),
-    })
-  }
-
-  return value
-}
-
-const março = () => {
-  const value = []
-
-  for (let index = 0; index < 30; index++) {
-    value.push({
-      name: '2022-03-17 10:10:00',
-      mes: 'Mar',
-      uv: Math.floor(Math.random() * (Math.ceil(5) - Math.ceil(3) + 1)) + Math.ceil(3),
-    })
-  }
-
-  return value
-}
-
-const data = [...janeiro(), ...fevereiro(), ...março()]
-
 interface CustomizedProperties {
   x: number
   y: number
@@ -58,15 +14,13 @@ interface CustomizedProperties {
 const CustomizedXAxisTick: FunctionComponent<any> = (properties: CustomizedProperties) => {
   const { x, y, payload } = properties
 
-  const pathX = Math.floor(x + payload.offset) + 0.5
-
   return (
     <g transform={`translate(${x},${y})`}>
       <text
         style={{ textTransform: 'capitalize' }}
-        x={160}
+        x={15}
         y={0}
-        dy={16}
+        dy={10}
         textAnchor="middle"
         fill="#99A4C2"
       >
@@ -90,19 +44,21 @@ const CustomizedYAxisTick: FunctionComponent<any> = (properties: CustomizedPrope
 
 const formatXAxis = (tickItem: string) => {
   const d = new Date(tickItem)
-  return d.toLocaleString('default', { month: 'long' })
+  return d.toLocaleString('default', { month: 'short' }).split('.')[0]
 }
 
 interface AreaChartComponentProperties {
   areaStartColor?: string
   areaEndColor?: string
   strokeLineColor?: string
+  data?: Array<{ timestamp: string; average: number }>
 }
 
 export const AreaChartComponent = ({
   areaEndColor = 'black',
   areaStartColor = 'black',
   strokeLineColor = 'black',
+  data,
 }: AreaChartComponentProperties) => {
   const random = Math.random()
   return (
@@ -117,16 +73,16 @@ export const AreaChartComponent = ({
           </defs>
           <CartesianGrid fill="#F8F9FD" strokeOpacity={0.3} color="black" vertical={false} />
           <XAxis
-            dataKey="mes"
-            scale="time"
-            // Interval={30}
+            dataKey="timestamp"
+            interval={30}
             // TickFormatter={formatXAxis}
             // domain={[0, 3]}
-            // TickSize={0}
-            // tick={<CustomizedXAxisTick />}
-            ticks={['Jan', 'Fev', 'Mar']}
+            tickSize={0}
+            tick={<CustomizedXAxisTick />}
             // MinTickGap={100}
             strokeOpacity={0.5}
+            stroke="#99A4C2"
+            tickMargin={10}
           />
 
           <YAxis
@@ -140,7 +96,7 @@ export const AreaChartComponent = ({
           />
           <Area
             type="basis"
-            dataKey="uv"
+            dataKey="average"
             stroke={strokeLineColor}
             strokeWidth="2px"
             fillOpacity={1}

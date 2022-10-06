@@ -1,7 +1,7 @@
 import { Text, Flex, Divider } from '@chakra-ui/react'
 import React from 'react'
 
-import { AreaChartComponent, PieChartComponent } from './index'
+import { AreaChartComponent, RadialChartComponent } from './index'
 
 interface AreaRadialChartProperties {
   label: string
@@ -11,6 +11,7 @@ interface AreaRadialChartProperties {
   progressColor: string
   numberColor: string
   icon?: JSX.Element
+  data?: Array<{ timestamp: string; average: number }>
 }
 
 export const AreaRadialChart = ({
@@ -21,6 +22,7 @@ export const AreaRadialChart = ({
   areaStartColor,
   icon,
   strokeLineColor,
+  data,
 }: AreaRadialChartProperties) => {
   return (
     <>
@@ -42,13 +44,19 @@ export const AreaRadialChart = ({
         // Height="200px"
       >
         <AreaChartComponent
+          data={data}
           areaStartColor={areaStartColor}
           areaEndColor={areaEndColor}
           strokeLineColor={strokeLineColor}
         />
         <Divider orientation="vertical" h="160px" marginLeft="30px" borderColor="new-gray.400" />
 
-        <PieChartComponent icon={icon} numberColor={numberColor} progressColor={progressColor} />
+        <RadialChartComponent
+          data={data && data[data?.length - 1]?.average}
+          icon={icon}
+          numberColor={numberColor}
+          progressColor={progressColor}
+        />
       </Flex>
     </>
   )

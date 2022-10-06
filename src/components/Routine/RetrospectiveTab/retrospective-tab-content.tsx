@@ -1,11 +1,12 @@
-import { Button, Flex, Link, Stack, Text, Grid, Divider } from '@chakra-ui/react'
-import React from 'react'
+import { Flex, Link, Stack, Text, Grid, Divider } from '@chakra-ui/react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
+import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { CircleArrowRight } from 'src/components/Icon'
 import { Team } from 'src/components/Team/types'
-import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
+import { routineDateRangeSelector } from 'src/state/recoil/routine/routine-dates-range'
 
 import messages from '../../Page/Team/Tabs/content/messages'
 
@@ -20,24 +21,59 @@ export type AnswerType = {
   comments: number
 }
 
-const data: AnswerType[] = [
-  {
-    id: '3a7c8589-fffe-4cb0-8b38-eb3d7428d91a',
-    user: 'Lucas Vilela',
-    feeling: 1,
-    createdAt: '2022-8-27 09:09:00',
-    comments: 3,
-  },
-]
-
 interface RetrospectiveTabContent {
   teamId: Team['id']
   answerQuery: string
 }
 
-const RetrospectiveTabContent = ({ answerQuery, teamId }: RetrospectiveTabContent) => {
+interface RetrospectiveTabContentProperties {
+  teamId: Team['id']
+  answerQuery: string
+}
+
+interface AnswerSummary {
+  id: string
+  userId: string
+  name: string
+  picture: string
+  latestStatusReply: string
+  timestamp: Date
+}
+
+interface AnswerOverview {
+  overview: {
+    feeling: Array<{ timestamp: string; average: number }>
+    productivity: Array<{ timestamp: string; average: number }>
+  }
+}
+
+const RetrospectiveTabContent = ({ teamId, answerQuery }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
-  const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
+  const { servicesPromise } = useContext(ServicesContext)
+  const [answersSummary, setAnswersSummary] = useState<AnswerSummary[]>([])
+  const [answersOverview, setAnswersOverview] = useState<AnswerOverview | undefined>()
+
+  const { after, before, week } = useRecoilValue(routineDateRangeSelector)
+
+  useEffect(() => {
+    const getAnswersSummaryAndOverview = async () => {
+      const { routines } = await servicesPromise
+
+      const [{ data: answersSummaryData }, { data: answersOverview }] = await Promise.all([
+        routines.get<AnswerSummary[]>(`/answers/summary/${teamId ?? teamId}`, {
+          params: { before, after, includeSubteams: false },
+        }),
+        routines.get<AnswerOverview>(`/answers/overview/${teamId ?? teamId}`, {
+          params: { includeSubteams: false },
+        }),
+      ])
+
+      if (answersSummaryData) setAnswersSummary(answersSummaryData)
+      if (answersOverview) setAnswersOverview(answersOverview)
+    }
+
+    getAnswersSummaryAndOverview()
+  }, [after, before, servicesPromise, teamId])
 
   return (
     <Stack spacing={10}>
@@ -75,21 +111,24 @@ const RetrospectiveTabContent = ({ answerQuery, teamId }: RetrospectiveTabConten
             })}
           </Text>
         </Stack>
-        <Button
-          bg="brand.500"
-          color="black.50"
-          _hover={{ background: 'brand.400', color: 'black.50' }}
-          onClick={() => {
-            setIsRoutineDrawerOpen(() => true)
-          }}
-        >
-          {intl.formatMessage(messages.tabRetrospectiveAnswerButton)}
-        </Button>
       </Flex>
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
-        <AnswersComponent teamId={teamId} answers={data} />
+        <AnswersComponent
+          after={after}
+          before={before}
+          week={week}
+          answers={answersSummary}
+          teamId={teamId}
+        />
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RetrospectiveTabContentView teamId={teamId} answers={data} answerQuery={answerQuery} />
+        <RetrospectiveTabContentView
+          after={after}
+          before={before}
+          week={week}
+          data={answersOverview}
+          answerQuery={answerQuery}
+          teamId={teamId}
+        />
       </Grid>
     </Stack>
   )
