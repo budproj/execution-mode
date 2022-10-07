@@ -20,9 +20,9 @@ import messages from './messages'
 
 interface NotificationSettingsModalProperties {
   isOpen: boolean
-  isActive: boolean
+  teamOptedOut: boolean
   onClose: () => void
-  onToggle: (isActive: boolean) => void
+  onToggle: () => void
 }
 
 const StyledSwitch = styled(Switch)`
@@ -41,17 +41,12 @@ const StyledSwitch = styled(Switch)`
 
 export const NotificationSettingsModal = ({
   isOpen,
-  isActive,
+  teamOptedOut,
   onClose,
   onToggle,
 }: NotificationSettingsModalProperties) => {
   const [brand500]: string[] = useToken('colors', ['brand.500'])
   const intl = useIntl()
-
-  const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const isActive = event.target?.checked
-    onToggle(isActive)
-  }
 
   return (
     <Modal isOpen={isOpen} size="xl" onClose={onClose}>
@@ -84,11 +79,11 @@ export const NotificationSettingsModal = ({
               </Text>
             </Box>
             <StyledSwitch
-              isChecked={isActive}
+              isChecked={!teamOptedOut}
               color={brand500}
               size="lg"
               ml={6}
-              onChange={handleToggle}
+              onChange={onToggle}
             />
           </Flex>
           <Button

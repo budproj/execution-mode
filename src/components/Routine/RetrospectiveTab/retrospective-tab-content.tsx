@@ -18,13 +18,14 @@ import { ServicesContext } from 'src/components/Base/ServicesProvider/services-p
 import { CircleArrowRight } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import GearIcon from 'src/components/Icon/Gear'
+import messages from 'src/components/Page/Team/Tabs/content/messages'
 import { NotificationSettingsModal } from 'src/components/Routine/NotificationSettings'
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
 import { routineDateRangeSelector } from 'src/state/recoil/routine/routine-dates-range'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
-import messages from '../../Page/Team/Tabs/content/messages'
+import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 
 import AnswersComponent from './Answers'
 import RoutinesOverview from './RoutinesOverview'
@@ -55,15 +56,15 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
   const [answersSummary, setAnswersSummary] = useState<AnswerSummary[]>([])
   const [answersOverview, setAnswersOverview] = useState<AnswerOverview | undefined>()
   const team = useRecoilValue(teamAtomFamily(teamId))
+  const { teamOptedOut, toggleDisabledTeam } = useRoutineNotificationSettings(teamId)
 
   const { after, before, week } = useRecoilValue(routineDateRangeSelector)
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [isActive, setIsActive] = useState(false)
 
   const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
 
-  const toggleNotifcation = (isActive: boolean) => {
-    setIsActive(isActive)
+  const toggleNotifcation = () => {
+    toggleDisabledTeam(teamId)
   }
 
   useEffect(() => {
@@ -135,9 +136,9 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
                 _hover={{}}
                 _focus={{}}
               >
-                <CircleIcon desc="teste" fill={isActive ? 'green.500' : 'red.500'} mr={3} />
+                <CircleIcon desc="teste" fill={teamOptedOut ? 'red.500' : 'green.500'} mr={3} />
                 {intl.formatMessage(
-                  isActive ? messages.routineSettingsActive : messages.routineSettingsInactive,
+                  teamOptedOut ? messages.routineSettingsInactive : messages.routineSettingsActive,
                 )}
               </Button>
               <IconButton
@@ -171,7 +172,7 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
 
       <NotificationSettingsModal
         isOpen={isOpen}
-        isActive={isActive}
+        teamOptedOut={teamOptedOut}
         onClose={onClose}
         onToggle={toggleNotifcation}
       />
