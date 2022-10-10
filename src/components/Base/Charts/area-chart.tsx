@@ -75,11 +75,8 @@ export const AreaChartComponent = ({
           <XAxis
             dataKey="timestamp"
             interval={30}
-            // TickFormatter={formatXAxis}
-            // domain={[0, 3]}
             tickSize={0}
             tick={<CustomizedXAxisTick />}
-            // MinTickGap={100}
             strokeOpacity={0.5}
             stroke="#99A4C2"
             tickMargin={10}
@@ -88,7 +85,7 @@ export const AreaChartComponent = ({
           <YAxis
             tickSize={0}
             width={18}
-            domain={[0, 6]}
+            domain={[0, 5]}
             ticks={['', 1, 2, 3, 4, 5]}
             strokeOpacity={0.5}
             tick={<CustomizedYAxisTick />}
