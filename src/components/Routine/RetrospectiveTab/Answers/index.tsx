@@ -6,6 +6,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
+import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
@@ -37,6 +38,8 @@ interface AnswerSummary {
   latestStatusReply: string
   timestamp: Date
 }
+
+const ScrollableItem = getScrollableItem()
 
 const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersComponentProperties) => {
   const intl = useIntl()
@@ -106,9 +109,11 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
       </Flex>
-      {filteredAnswers.map((answer) => {
-        return <AnswerRowComponent key={answer.id} answer={answer} />
-      })}
+      <ScrollableItem maxH="455px">
+        {filteredAnswers.map((answer) => (
+          <AnswerRowComponent key={answer.id} answer={answer} />
+        ))}
+      </ScrollableItem>
       {showAnswerNowButton && (
         <Box textAlign="center" marginTop="auto">
           <Divider borderColor="new-gray.400" />
