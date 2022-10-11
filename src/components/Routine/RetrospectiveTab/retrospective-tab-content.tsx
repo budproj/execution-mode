@@ -1,6 +1,5 @@
 import {
   Flex,
-  Link,
   Stack,
   Text,
   Grid,
@@ -15,7 +14,6 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import { CircleArrowRight } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import GearIcon from 'src/components/Icon/Gear'
 import messages from 'src/components/Page/Team/Tabs/content/messages'
@@ -115,26 +113,7 @@ const RetrospectiveTabContent = ({ teamId, answerQuery }: RetrospectiveTabConten
             alignItems="center"
             justifyContent="center"
           >
-            {intl.formatMessage(messages.tabRetrospectivePageDescription, {
-              link: (
-                <Link
-                  isExternal
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  ml={1}
-                  gap={1}
-                  href="#"
-                  verticalAlign="middle"
-                >
-                  {intl.formatMessage(messages.learnMoreRetrospectiveMessage)}
-                  <CircleArrowRight
-                    alignContent="center"
-                    desc={intl.formatMessage(messages.learnMoreRetrospectiveIcon)}
-                  />
-                </Link>
-              ),
-            })}
+            {intl.formatMessage(messages.tabRetrospectivePageDescription)}
           </Text>
         </Stack>
         {canEditTeam ? (

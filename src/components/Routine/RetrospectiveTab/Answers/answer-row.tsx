@@ -32,7 +32,12 @@ const AnswerRowComponent = ({ teamId, answer }: AnswerRowComponentProperties) =>
     <IntlLink passHref href={`/explore/${teamId}#retrospectiva?answerId=${answer.id}`}>
       <Flex key={answer.id} marginBottom={5}>
         <Avatar width="45px" height="45px" src={answer.picture} marginRight="15px">
-          <AvatarBadge border="10.5px solid white" boxSize="20px">
+          <AvatarBadge
+            border="2px solid white"
+            boxSize="20px"
+            bgColor="new-gray.200"
+            padding={answer.latestStatusReply ? undefined : '10px'}
+          >
             {answer.latestStatusReply ? (
               getEmoji({ felling: Number(answer.latestStatusReply), size: '20px' })
             ) : (

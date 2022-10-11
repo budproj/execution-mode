@@ -16,6 +16,8 @@ export const useAnswerDetailed = (): useAnswerDetailedProperties => {
   const setAnswerDetailed = useSetRecoilState(answerDetailedAtom)
 
   const getAnswerDetailed = async (answerId: AnswerType['id']) => {
+    if (!answerId) return
+
     const { routines } = await servicesPromise
     const { data } = await routines.get<AnswerDetails>(`answer?${answerId}`)
 
