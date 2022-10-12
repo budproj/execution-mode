@@ -1,9 +1,10 @@
-import { Stack, Tab, TabList } from '@chakra-ui/react'
+import { Stack, Tab, TabList, Tag } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import newTagMessages from 'src/components/Base/MainAppBar/messages'
 import { Team } from 'src/components/Team/types'
 
 import messages from '../messages'
@@ -52,6 +53,9 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
           onClick={() => handleClick(intl.formatMessage(messages.retrospectiveTeamTab))}
         >
           {intl.formatMessage(messages.retrospectiveTeamTab)}
+          <Tag size="sm" variant="solid" colorScheme="brand" ml={2}>
+            {intl.formatMessage(newTagMessages.newItem)}
+          </Tag>
         </StyledTab>
       </TabList>
     </Stack>
