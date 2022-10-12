@@ -1,11 +1,13 @@
 import { Flex, Stack, Text, Grid, Divider } from '@chakra-ui/react'
+import { format } from 'date-fns'
+import { useRouter } from 'next/router'
 import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { Team } from 'src/components/Team/types'
-import { routineDateRangeSelector } from 'src/state/recoil/routine/routine-dates-range'
+import { routineDatesRangeAtom } from 'src/state/recoil/routine/routine-dates-range'
 
 import messages from '../../Page/Team/Tabs/content/messages'
 
@@ -34,11 +36,12 @@ interface AnswerOverview {
 
 const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
+  const router = useRouter()
   const { servicesPromise } = useContext(ServicesContext)
   const [answersSummary, setAnswersSummary] = useState<AnswerSummary[]>([])
   const [answersOverview, setAnswersOverview] = useState<AnswerOverview | undefined>()
 
-  const { after, before, week } = useRecoilValue(routineDateRangeSelector)
+  const { after, before, week } = useRecoilValue(routineDatesRangeAtom)
 
   useEffect(() => {
     const getAnswersSummaryAndOverview = async () => {
@@ -59,6 +62,23 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
 
     getAnswersSummaryAndOverview()
   }, [after, before, servicesPromise, teamId])
+
+  useEffect(() => {
+    if (after && before) {
+      router.push(
+        {
+          query: {
+            ...(router?.query ?? {}),
+            after: format(after, 'dd/MM/yyyy'),
+            before: format(before, 'dd/MM/yyyy'),
+          },
+        },
+        undefined,
+        { shallow: true },
+      )
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [after, before])
 
   return (
     <Stack spacing={10}>

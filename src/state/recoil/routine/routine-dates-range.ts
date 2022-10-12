@@ -1,5 +1,5 @@
 import { startOfWeek, endOfWeek, getWeek, isEqual, isAfter } from 'date-fns'
-import { atom, selector } from 'recoil'
+import { atom } from 'recoil'
 
 import { PREFIX } from './constants'
 
@@ -18,21 +18,18 @@ export const isNextWeekDisabled = (date: Date) => {
   return isEqual(endsAt, date) || isAfter(date, endsAt)
 }
 
+export const getRoutineDateRangeDateFormat = (newDate: Date) => {
+  const { startsAt, endsAt } = routineTimespan(newDate)
+  const week = getWeek(newDate)
+
+  return {
+    after: startsAt,
+    before: endsAt,
+    week,
+  }
+}
+
 export const routineDatesRangeAtom = atom({
   key: `${PREFIX}::ROUTINE_DATES_RANGE`,
-  default: now,
-})
-
-export const routineDateRangeSelector = selector({
-  key: `${PREFIX}::ROUTINE_DATE_SELECTOR`,
-  get: ({ get }) => {
-    const routineDate = get(routineDatesRangeAtom)
-    const { startsAt, endsAt } = routineTimespan(routineDate)
-    const week = getWeek(routineDate)
-    return {
-      after: startsAt,
-      before: endsAt,
-      week,
-    }
-  },
+  default: getRoutineDateRangeDateFormat(now),
 })

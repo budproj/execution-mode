@@ -1,6 +1,7 @@
 import { Flex, Text, IconButton, GridItem, Divider, Box } from '@chakra-ui/react'
 import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -13,6 +14,7 @@ import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import { GraphQLEffect } from 'src/components/types'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import {
+  getRoutineDateRangeDateFormat,
   isNextWeekDisabled,
   routineDatesRangeAtom,
 } from 'src/state/recoil/routine/routine-dates-range'
@@ -43,6 +45,7 @@ const ScrollableItem = getScrollableItem()
 
 const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersComponentProperties) => {
   const intl = useIntl()
+  const router = useRouter()
   const [search, setSearch] = useState('')
   const [filteredAnswers, setFilteredAnswers] = useState<AnswerSummary[]>(answers)
   const team = useRecoilValue(teamAtomFamily(teamId))
@@ -54,6 +57,22 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
   const isActiveRoutine = isBefore(new Date(), before)
   const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
+
+  const setNewDate = (newDate: Date) => {
+    const dateRange = getRoutineDateRangeDateFormat(newDate)
+    setDate(dateRange)
+    router.push(
+      {
+        query: {
+          ...(router?.query ?? {}),
+          before: format(dateRange.before, 'dd/MM/yyyy'),
+          after: format(dateRange.after, 'dd/MM/yyyy'),
+        },
+      },
+      undefined,
+      { shallow: true },
+    )
+  }
 
   useEffect(() => {
     if (answers) {
@@ -76,7 +95,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
               fill="new-gray.700"
             />
           }
-          onClick={() => setDate(sub(date, { weeks: 1 }))}
+          onClick={() => setNewDate(sub(date.after, { weeks: 1 }))}
         />
         <Text
           color="new-gray.800"
@@ -103,7 +122,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
               fill="new-gray.700"
             />
           }
-          onClick={() => setDate(add(date, { weeks: 1 }))}
+          onClick={() => setNewDate(add(date.after, { weeks: 1 }))}
         />
       </Flex>
       <Divider borderColor="new-gray.400" />
