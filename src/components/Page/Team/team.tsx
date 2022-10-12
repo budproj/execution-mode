@@ -39,7 +39,6 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
     { variables: { teamId } },
   )
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const { hash } = window.location
     const tab = hash.replace('#', '').toLowerCase()
@@ -47,7 +46,9 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
     if (tab && tabs.has(tab) && tab !== activeTab) {
       setActiveTab(tab)
     }
-  })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const [loadTeamOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const metaTitleLoadingFallback = intl.formatMessage(messages.metaTitleLoadingFallback)
