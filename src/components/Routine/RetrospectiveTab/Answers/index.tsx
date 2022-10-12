@@ -109,7 +109,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
       </Flex>
-      <ScrollableItem maxH="455px">
+      <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
         {filteredAnswers.map((answer) => (
           <AnswerRowComponent key={answer.id} answer={answer} />
         ))}
