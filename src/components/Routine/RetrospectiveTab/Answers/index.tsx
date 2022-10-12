@@ -1,5 +1,5 @@
 import { Flex, Text, IconButton, GridItem, Divider, Box } from '@chakra-ui/react'
-import { format, add, sub } from 'date-fns'
+import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -52,7 +52,8 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
 
   const isUserFromTheTeam = team?.policy?.update === GraphQLEffect.ALLOW
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
-  const showAnswerNowButton = Boolean(isUserFromTheTeam && !haveUserAnswered)
+  const isActiveRoutine = isBefore(new Date(), before)
+  const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
 
   useEffect(() => {
     if (answers) {
