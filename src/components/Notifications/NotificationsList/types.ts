@@ -19,6 +19,9 @@ export interface Notification {
       id: string
       name: string
     }
+    routine?: {
+      teamName: string
+    }
     sender: {
       id: string
       name: string
