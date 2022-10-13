@@ -11,15 +11,15 @@ import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
-import { GraphQLEffect } from 'src/components/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import {
   getRoutineDateRangeDateFormat,
   isNextWeekDisabled,
   routineDatesRangeAtom,
 } from 'src/state/recoil/routine/routine-dates-range'
-import { teamAtomFamily } from 'src/state/recoil/team'
 import meAtom from 'src/state/recoil/user/me'
+import selectUser from 'src/state/recoil/user/selector'
 
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
@@ -48,12 +48,14 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
   const router = useRouter()
   const [search, setSearch] = useState('')
   const [filteredAnswers, setFilteredAnswers] = useState<AnswerSummary[]>(answers)
-  const team = useRecoilValue(teamAtomFamily(teamId))
   const userID = useRecoilValue(meAtom)
   const [date, setDate] = useRecoilState(routineDatesRangeAtom)
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
+  const user = useRecoilValue(selectUser(userID))
+  const [userTeams] = useConnectionEdges(user?.teams?.edges)
+  const userTeamIds = userTeams.map((team) => team.id)
+  const isUserFromTheTeam = userTeamIds.includes(teamId)
 
-  const isUserFromTheTeam = team?.policy?.update === GraphQLEffect.ALLOW
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
   const isActiveRoutine = isBefore(new Date(), before)
   const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
