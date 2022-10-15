@@ -1,7 +1,7 @@
 import { Flex, Stack, Text, Grid, Divider } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import { useRouter } from 'next/router'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -27,41 +27,35 @@ interface AnswerSummary {
   timestamp: Date
 }
 
-interface AnswerOverview {
-  overview: {
-    feeling: Array<{ timestamp: string; average: number }>
-    productivity: Array<{ timestamp: string; average: number }>
-  }
-}
-
 const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
   const { servicesPromise } = useContext(ServicesContext)
   const [answersSummary, setAnswersSummary] = useState<AnswerSummary[]>([])
-  const [answersOverview, setAnswersOverview] = useState<AnswerOverview | undefined>()
 
   const { after, before, week } = useRecoilValue(routineDatesRangeAtom)
 
-  useEffect(() => {
-    const getAnswersSummaryAndOverview = async () => {
+  const getAnswersSummary = useCallback(async () => {
+    if (before && after) {
       const { routines } = await servicesPromise
-
-      const [{ data: answersSummaryData }, { data: answersOverview }] = await Promise.all([
-        routines.get<AnswerSummary[]>(`/answers/summary/${teamId ?? teamId}`, {
-          params: { before, after, includeSubteams: false },
-        }),
-        routines.get<AnswerOverview>(`/answers/overview/${teamId ?? teamId}`, {
-          params: { includeSubteams: false },
-        }),
-      ])
+      const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+        `/answers/summary/${teamId}`,
+        {
+          params: {
+            before,
+            after,
+            includeSubteams: false,
+          },
+        },
+      )
 
       if (answersSummaryData) setAnswersSummary(answersSummaryData)
-      if (answersOverview) setAnswersOverview(answersOverview)
     }
+  }, [after, before, teamId, servicesPromise])
 
-    getAnswersSummaryAndOverview()
-  }, [after, before, servicesPromise, teamId])
+  useEffect(() => {
+    getAnswersSummary()
+  }, [getAnswersSummary])
 
   useEffect(() => {
     if (after && before) {
@@ -107,7 +101,7 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
           teamId={teamId}
         />
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RoutinesOverview after={after} before={before} week={week} data={answersOverview} />
+        <RoutinesOverview after={after} before={before} week={week} teamId={teamId} />
       </Grid>
     </Stack>
   )

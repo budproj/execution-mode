@@ -1,11 +1,12 @@
 /* eslint-disable unicorn/prefer-query-selector */
 /* eslint-disable prefer-const */
 import { Box, Divider, Flex, GridItem, Text } from '@chakra-ui/react'
-import { format } from 'date-fns'
+import { format, isSameDay, parseISO } from 'date-fns'
 import pt from 'date-fns/locale/pt'
-import React from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
+import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 
@@ -13,21 +14,57 @@ import { AreaRadialChart } from '../../../Base/Charts/index'
 
 import messages from './messages'
 
-interface RoutinesOverviewProperties {
-  data?: {
-    overview: {
-      feeling: Array<{ timestamp: string; average: number }>
-      productivity: Array<{ timestamp: string; average: number }>
-    }
+interface AvarageData {
+  timestamp: string
+  average: number
+}
+
+interface OverviewData {
+  overview: {
+    feeling: AvarageData[]
+    productivity: AvarageData[]
   }
+}
+
+interface RoutinesOverviewProperties {
+  teamId: string
   after: Date
   before: Date
   week: number
 }
 
-const RoutinesOverview = ({ data, after, before, week }: RoutinesOverviewProperties) => {
+const getCurrentDataByTimeStamp = (data: AvarageData[], timestamp: string) => {
+  return data.findIndex((data) => isSameDay(parseISO(data.timestamp), parseISO(timestamp)))
+}
+
+const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewProperties) => {
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
+  const { servicesPromise } = useContext(ServicesContext)
+  const [answersOverview, setAnswersOverview] = useState<OverviewData | undefined>()
+
+  const getAnswersOverview = useCallback(async () => {
+    const { routines } = await servicesPromise
+    const { data: answersOverview } = await routines.get<OverviewData>(
+      `/answers/overview/${teamId}`,
+      {
+        params: { includeSubteams: false },
+      },
+    )
+
+    if (answersOverview) setAnswersOverview(answersOverview)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    console.log('refetching overview')
+    getAnswersOverview()
+  }, [getAnswersOverview])
+
+  const activeDataIndex = getCurrentDataByTimeStamp(
+    answersOverview?.overview?.feeling ?? [],
+    after.toISOString(),
+  )
 
   return (
     <GridItem marginTop="31px" paddingX="30px">
@@ -54,17 +91,22 @@ const RoutinesOverview = ({ data, after, before, week }: RoutinesOverviewPropert
           areaStartColor="#FFD964E5"
           areaEndColor="#FFD964E5"
           strokeLineColor="#F1BF25"
-          icon={getEmoji({ felling: 5, size: '50px' })}
+          icon={getEmoji({
+            felling: answersOverview?.overview?.feeling[activeDataIndex]?.average ?? 5,
+            size: '50px',
+          })}
           numberColor="#ffc658"
           progressColor="#ffc658"
-          data={data?.overview?.feeling}
+          highLightIndex={activeDataIndex}
+          data={answersOverview?.overview?.feeling}
         />
         <AreaRadialChart
           label={intl.formatMessage(messages.productivityGraphTitle)}
           strokeLineColor="#4BACF9"
           areaEndColor="#4BACF9B2"
           areaStartColor="#4BACF9B2"
-          data={data?.overview?.productivity}
+          highLightIndex={activeDataIndex}
+          data={answersOverview?.overview?.productivity}
           icon={
             <Flex
               background="#4BACF9"

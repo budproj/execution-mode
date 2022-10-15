@@ -10,6 +10,7 @@ interface AreaRadialChartProperties {
   strokeLineColor?: string
   progressColor: string
   numberColor: string
+  highLightIndex: number
   icon?: JSX.Element
   data?: Array<{ timestamp: string; average: number }>
 }
@@ -22,6 +23,7 @@ export const AreaRadialChart = ({
   areaStartColor,
   icon,
   strokeLineColor,
+  highLightIndex,
   data,
 }: AreaRadialChartProperties) => {
   return (
@@ -52,7 +54,7 @@ export const AreaRadialChart = ({
         <Divider orientation="vertical" h="160px" marginLeft="30px" borderColor="new-gray.400" />
 
         <RadialChartComponent
-          data={data && data[data?.length - 1]?.average}
+          data={data?.[highLightIndex]?.average}
           icon={icon}
           numberColor={numberColor}
           progressColor={progressColor}
