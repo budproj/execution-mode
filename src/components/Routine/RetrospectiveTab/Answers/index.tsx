@@ -1,6 +1,7 @@
 import { Flex, Text, IconButton, GridItem, Divider, Box } from '@chakra-ui/react'
-import { format, add, sub } from 'date-fns'
+import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
@@ -10,14 +11,15 @@ import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
-import { GraphQLEffect } from 'src/components/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import {
+  getRoutineDateRangeDateFormat,
   isNextWeekDisabled,
   routineDatesRangeAtom,
 } from 'src/state/recoil/routine/routine-dates-range'
-import { teamAtomFamily } from 'src/state/recoil/team'
 import meAtom from 'src/state/recoil/user/me'
+import selectUser from 'src/state/recoil/user/selector'
 
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
@@ -43,16 +45,36 @@ const ScrollableItem = getScrollableItem()
 
 const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersComponentProperties) => {
   const intl = useIntl()
+  const router = useRouter()
   const [search, setSearch] = useState('')
   const [filteredAnswers, setFilteredAnswers] = useState<AnswerSummary[]>(answers)
-  const team = useRecoilValue(teamAtomFamily(teamId))
   const userID = useRecoilValue(meAtom)
   const [date, setDate] = useRecoilState(routineDatesRangeAtom)
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
+  const user = useRecoilValue(selectUser(userID))
+  const [userTeams] = useConnectionEdges(user?.teams?.edges)
+  const userTeamIds = userTeams.map((team) => team.id)
+  const isUserFromTheTeam = userTeamIds.includes(teamId)
 
-  const isUserFromTheTeam = team?.policy?.update === GraphQLEffect.ALLOW
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
-  const showAnswerNowButton = Boolean(isUserFromTheTeam && !haveUserAnswered)
+  const isActiveRoutine = isBefore(new Date(), before)
+  const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
+
+  const setNewDate = (newDate: Date) => {
+    const dateRange = getRoutineDateRangeDateFormat(newDate)
+    setDate(dateRange)
+    router.push(
+      {
+        query: {
+          ...(router?.query ?? {}),
+          before: format(dateRange.before, 'dd/MM/yyyy'),
+          after: format(dateRange.after, 'dd/MM/yyyy'),
+        },
+      },
+      undefined,
+      { shallow: true },
+    )
+  }
 
   useEffect(() => {
     if (answers) {
@@ -75,7 +97,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
               fill="new-gray.700"
             />
           }
-          onClick={() => setDate(sub(date, { weeks: 1 }))}
+          onClick={() => setNewDate(sub(date.after, { weeks: 1 }))}
         />
         <Text
           color="new-gray.800"
@@ -102,14 +124,14 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
               fill="new-gray.700"
             />
           }
-          onClick={() => setDate(add(date, { weeks: 1 }))}
+          onClick={() => setNewDate(add(date.after, { weeks: 1 }))}
         />
       </Flex>
       <Divider borderColor="new-gray.400" />
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
       </Flex>
-      <ScrollableItem maxH="455px">
+      <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
         {filteredAnswers.map((answer) => (
           <AnswerRowComponent key={answer.id} teamId={teamId} answer={answer} />
         ))}

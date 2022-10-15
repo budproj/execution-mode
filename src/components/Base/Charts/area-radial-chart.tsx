@@ -10,8 +10,13 @@ interface AreaRadialChartProperties {
   strokeLineColor?: string
   progressColor: string
   numberColor: string
+  highLightIndex: number
   icon?: JSX.Element
   data?: Array<{ timestamp: string; average: number }>
+}
+
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
 }
 
 export const AreaRadialChart = ({
@@ -22,6 +27,7 @@ export const AreaRadialChart = ({
   areaStartColor,
   icon,
   strokeLineColor,
+  highLightIndex,
   data,
 }: AreaRadialChartProperties) => {
   return (
@@ -48,11 +54,12 @@ export const AreaRadialChart = ({
           areaStartColor={areaStartColor}
           areaEndColor={areaEndColor}
           strokeLineColor={strokeLineColor}
+          tooltipTitle={capitalizeFirstLetter(label)}
         />
         <Divider orientation="vertical" h="160px" marginLeft="30px" borderColor="new-gray.400" />
 
         <RadialChartComponent
-          data={data && data[data?.length - 1]?.average}
+          data={data?.[highLightIndex]?.average}
           icon={icon}
           numberColor={numberColor}
           progressColor={progressColor}

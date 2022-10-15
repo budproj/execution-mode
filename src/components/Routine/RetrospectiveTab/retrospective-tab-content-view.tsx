@@ -9,7 +9,6 @@ import RoutinesOverview, { RoutinesOverviewProperties } from './RoutinesOverview
 
 interface AnswerContentProperties {
   answerQuery: string
-  data: RoutinesOverviewProperties['data']
   teamId: Team['id']
   after: RoutinesOverviewProperties['after']
   before: RoutinesOverviewProperties['before']
@@ -21,7 +20,6 @@ const RetrospectiveTabContentView = ({
   after,
   before,
   week,
-  data,
   teamId,
 }: AnswerContentProperties) => {
   const [answerId] = answerQuery.split('&')
@@ -36,7 +34,7 @@ const RetrospectiveTabContentView = ({
   return answerId ? (
     <AnswerContent teamId={teamId} />
   ) : (
-    <RoutinesOverview after={after} before={before} week={week} data={data} />
+    <RoutinesOverview after={after} before={before} week={week} teamId={teamId} />
   )
 }
 

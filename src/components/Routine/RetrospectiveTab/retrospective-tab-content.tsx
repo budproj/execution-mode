@@ -9,7 +9,9 @@ import {
   IconButton,
   useDisclosure,
 } from '@chakra-ui/react'
-import React, { useContext, useEffect, useState } from 'react'
+import { format } from 'date-fns'
+import { useRouter } from 'next/router'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -20,7 +22,7 @@ import messages from 'src/components/Page/Team/Tabs/content/messages'
 import { NotificationSettingsModal } from 'src/components/Routine/NotificationSettings'
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
-import { routineDateRangeSelector } from 'src/state/recoil/routine/routine-dates-range'
+import { routineDatesRangeAtom } from 'src/state/recoil/routine/routine-dates-range'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
@@ -55,49 +57,60 @@ interface AnswerSummary {
   timestamp: Date
 }
 
-interface AnswerOverview {
-  overview: {
-    feeling: Array<{ timestamp: string; average: number }>
-    productivity: Array<{ timestamp: string; average: number }>
-  }
-}
-
 const RetrospectiveTabContent = ({ teamId, answerQuery }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
+  const router = useRouter()
   const { servicesPromise } = useContext(ServicesContext)
   const [answersSummary, setAnswersSummary] = useState<AnswerSummary[]>([])
-  const [answersOverview, setAnswersOverview] = useState<AnswerOverview | undefined>()
   const team = useRecoilValue(teamAtomFamily(teamId))
-  const { teamOptedOut, toggleDisabledTeam } = useRoutineNotificationSettings(teamId)
-
-  const { after, before, week } = useRecoilValue(routineDateRangeSelector)
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
   const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
+  const { teamOptedOut, toggleDisabledTeam } = useRoutineNotificationSettings(teamId)
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const toggleNotifcation = () => {
     toggleDisabledTeam(teamId)
   }
 
-  useEffect(() => {
-    const getAnswersSummaryAndOverview = async () => {
-      const { routines } = await servicesPromise
+  const { after, before, week } = useRecoilValue(routineDatesRangeAtom)
 
-      const [{ data: answersSummaryData }, { data: answersOverview }] = await Promise.all([
-        routines.get<AnswerSummary[]>(`/answers/summary/${teamId ?? teamId}`, {
-          params: { before, after, includeSubteams: false },
-        }),
-        routines.get<AnswerOverview>(`/answers/overview/${teamId ?? teamId}`, {
-          params: { includeSubteams: false },
-        }),
-      ])
+  const getAnswersSummary = useCallback(async () => {
+    if (before && after) {
+      const { routines } = await servicesPromise
+      const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+        `/answers/summary/${teamId}`,
+        {
+          params: {
+            before,
+            after,
+            includeSubteams: false,
+          },
+        },
+      )
 
       if (answersSummaryData) setAnswersSummary(answersSummaryData)
-      if (answersOverview) setAnswersOverview(answersOverview)
     }
+  }, [after, before, teamId, servicesPromise])
 
-    getAnswersSummaryAndOverview()
-  }, [after, before, servicesPromise, teamId])
+  useEffect(() => {
+    getAnswersSummary()
+  }, [getAnswersSummary])
+
+  useEffect(() => {
+    if (after && before) {
+      router.push(
+        {
+          query: {
+            ...(router?.query ?? {}),
+            after: format(after, 'dd/MM/yyyy'),
+            before: format(before, 'dd/MM/yyyy'),
+          },
+        },
+        undefined,
+        { shallow: true },
+      )
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [after, before])
 
   return (
     <Stack spacing={10}>
@@ -164,7 +177,6 @@ const RetrospectiveTabContent = ({ teamId, answerQuery }: RetrospectiveTabConten
           after={after}
           before={before}
           week={week}
-          data={answersOverview}
           answerQuery={answerQuery}
           teamId={teamId}
         />

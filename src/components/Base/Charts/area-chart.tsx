@@ -1,10 +1,21 @@
 import { Box } from '@chakra-ui/react'
+import { format, parseISO, parse } from 'date-fns'
 import React, { FunctionComponent } from 'react'
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, XAxis, YAxis } from 'recharts'
+import { useIntl } from 'react-intl'
+import {
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 
 interface CustomizedProperties {
   x: number
   y: number
+  locale: string
   payload: {
     value: string
     offset: number
@@ -12,9 +23,9 @@ interface CustomizedProperties {
 }
 
 const CustomizedXAxisTick: FunctionComponent<any> = (properties: CustomizedProperties) => {
-  const { x, y, payload } = properties
+  const { x, y, payload, locale } = properties
 
-  return (
+  return payload.value ? (
     <g transform={`translate(${x},${y})`}>
       <text
         style={{ textTransform: 'capitalize' }}
@@ -24,9 +35,11 @@ const CustomizedXAxisTick: FunctionComponent<any> = (properties: CustomizedPrope
         textAnchor="middle"
         fill="#99A4C2"
       >
-        {formatXAxis(payload.value)}
+        {formatXAxis(parse(payload.value, 'dd/MM/yyyy', new Date()), locale)}
       </text>
     </g>
+  ) : (
+    <p>Loading</p>
   )
 }
 
@@ -42,15 +55,15 @@ const CustomizedYAxisTick: FunctionComponent<any> = (properties: CustomizedPrope
   )
 }
 
-const formatXAxis = (tickItem: string) => {
-  const d = new Date(tickItem)
-  return d.toLocaleString('default', { month: 'short' }).split('.')[0]
+const formatXAxis = (tickItem: Date, locale: string) => {
+  return tickItem.toLocaleString(locale, { month: 'short' }).split('.')[0]
 }
 
 interface AreaChartComponentProperties {
   areaStartColor?: string
   areaEndColor?: string
   strokeLineColor?: string
+  tooltipTitle?: string
   data?: Array<{ timestamp: string; average: number }>
 }
 
@@ -59,12 +72,22 @@ export const AreaChartComponent = ({
   areaStartColor = 'black',
   strokeLineColor = 'black',
   data,
+  tooltipTitle,
 }: AreaChartComponentProperties) => {
   const random = Math.random()
+  const { locale } = useIntl()
+
   return (
     <Box flex="1">
       <ResponsiveContainer minWidth={200} height={200} width="99%">
-        <AreaChart data={data}>
+        <AreaChart
+          data={data?.map((a) => {
+            return {
+              ...a,
+              timestamp: format(parseISO(a.timestamp), 'dd/MM/yyyy'),
+            }
+          })}
+        >
           <defs>
             <linearGradient id={`${random}`} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={areaStartColor} stopOpacity={0.9} />
@@ -72,16 +95,16 @@ export const AreaChartComponent = ({
             </linearGradient>
           </defs>
           <CartesianGrid fill="#F8F9FD" strokeOpacity={0.3} color="black" vertical={false} />
+          <Tooltip separator=": " cursor={false} />
           <XAxis
             dataKey="timestamp"
             interval={30}
             tickSize={0}
-            tick={<CustomizedXAxisTick />}
+            tick={<CustomizedXAxisTick locale={locale} />}
             strokeOpacity={0.5}
             stroke="#99A4C2"
             tickMargin={10}
           />
-
           <YAxis
             tickSize={0}
             width={18}
@@ -98,6 +121,7 @@ export const AreaChartComponent = ({
             strokeWidth="2px"
             fillOpacity={1}
             fill={`url(#${random})`}
+            name={tooltipTitle}
           />
         </AreaChart>
       </ResponsiveContainer>
