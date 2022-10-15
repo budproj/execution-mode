@@ -15,6 +15,10 @@ interface AreaRadialChartProperties {
   data?: Array<{ timestamp: string; average: number }>
 }
 
+function capitalizeFirstLetter(string: string) {
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+}
+
 export const AreaRadialChart = ({
   label,
   numberColor,
@@ -50,6 +54,7 @@ export const AreaRadialChart = ({
           areaStartColor={areaStartColor}
           areaEndColor={areaEndColor}
           strokeLineColor={strokeLineColor}
+          tooltipTitle={capitalizeFirstLetter(label)}
         />
         <Divider orientation="vertical" h="160px" marginLeft="30px" borderColor="new-gray.400" />
 
