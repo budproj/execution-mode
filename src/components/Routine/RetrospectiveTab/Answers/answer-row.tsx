@@ -19,11 +19,10 @@ interface Answer {
 }
 
 interface AnswerRowComponentProperties {
-  teamId: string
   answer: Answer
 }
 
-const AnswerRowComponent = ({ teamId, answer }: AnswerRowComponentProperties) => {
+const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
   const intl = useIntl()
   const router = useRouter()
   const [formattedRelativeDate] = useRelativeDate(new Date(answer.timestamp))

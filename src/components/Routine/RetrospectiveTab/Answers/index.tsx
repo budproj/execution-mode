@@ -133,7 +133,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
       </Flex>
       <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
         {filteredAnswers.map((answer) => (
-          <AnswerRowComponent key={answer.id} teamId={teamId} answer={answer} />
+          <AnswerRowComponent key={answer.id} answer={answer} />
         ))}
       </ScrollableItem>
       {showAnswerNowButton && (
