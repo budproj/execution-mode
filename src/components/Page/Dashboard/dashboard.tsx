@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Flex } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -27,8 +27,7 @@ const DashboardPage = () => {
   const yearly = activeCompanyCycles.find((cycle) => cycle.cadence === CADENCE.YEARLY)
   const quarter = activeCompanyCycles.find((cycle) => cycle.cadence === CADENCE.QUARTERLY)
 
-  const pageTitle =
-    called && !loading && intl.formatMessage(messages.greeting, { name: firstName, gender })
+  const pageTitle = called && !loading && intl.formatMessage(messages.greeting, { name: firstName })
 
   return (
     <PageContent bg="new-gray.50">
@@ -38,23 +37,33 @@ const DashboardPage = () => {
         <PageTitle>{pageTitle}</PageTitle>
       </PageHeader>
 
-      <Flex gridGap="3rem">
-        <OverviewSummary
-          title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
-          cycle={yearly}
-          isLoading={companyCyclesLoading}
-          flex="1"
-        />
-        <OverviewSummary
-          title={intl.formatMessage(messages.quarterlySummaryTitle, { quarter: quarter?.period })}
-          cycle={quarter}
-          isLoading={companyCyclesLoading}
-          flex="1"
-        />
-      </Flex>
+      <Box>
+        <Text color="new-gray.800" fontWeight={500} fontSize="18px" marginBottom="12px">
+          {intl.formatMessage(messages.okrOverViewTitle)}
+        </Text>
+        <Flex gridGap="3rem">
+          <OverviewSummary
+            title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
+            cycle={yearly}
+            isLoading={companyCyclesLoading}
+            flex="1"
+          />
+          <OverviewSummary
+            title={intl.formatMessage(messages.quarterlySummaryTitle, { quarter: quarter?.period })}
+            cycle={quarter}
+            isLoading={companyCyclesLoading}
+            flex="1"
+          />
+        </Flex>
+        <BoardsOverview />
+      </Box>
 
-      <BoardsOverview />
-      <TeamsOverview mt="36px" quarter={quarter?.period} />
+      <Box mt="36px">
+        <Text color="new-gray.800" fontWeight={500} fontSize="18px" marginBottom="12px">
+          {intl.formatMessage(messages.teamsOverviewTitle)}
+        </Text>
+        <TeamsOverview quarter={quarter?.period} />
+      </Box>
     </PageContent>
   )
 }
