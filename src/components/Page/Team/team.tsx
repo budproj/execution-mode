@@ -31,8 +31,6 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
     intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
   )
 
-  const [answerQuery, setAnswerQuery] = useState<string>('')
-
   const tabs = new Set([
     intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
     intl.formatMessage(messages.retrospectiveTeamTab).toLocaleLowerCase(),
@@ -44,12 +42,6 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   )
 
   useEffect(() => {
-    const { hash } = window.location
-    const hashedLocation = hash.replace('#', '')
-
-    const [_, query] = hashedLocation.split('?')
-    setAnswerQuery(query ?? '')
-
     const { query: routerQuery } = router
     const routerTab = Array.isArray(routerQuery?.activeTab)
       ? routerQuery?.activeTab[0]
@@ -109,12 +101,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
             </Stack>
           </Stack>
         </Stack>
-        <ExploreTeamTabs
-          activeTab={activeTab}
-          teamId={teamId}
-          answerQuery={answerQuery}
-          isLoading={isLoading}
-        />
+        <ExploreTeamTabs activeTab={activeTab} teamId={teamId} isLoading={isLoading} />
       </Flex>
     </ApolloQueryErrorBoundary>
   )

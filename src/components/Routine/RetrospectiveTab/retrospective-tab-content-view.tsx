@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 
 import { Team } from 'src/components/Team/types'
@@ -8,26 +9,21 @@ import AnswerContent from './Answers/AnswerContent'
 import RoutinesOverview, { RoutinesOverviewProperties } from './RoutinesOverview'
 
 interface AnswerContentProperties {
-  answerQuery: string
   teamId: Team['id']
   after: RoutinesOverviewProperties['after']
   before: RoutinesOverviewProperties['before']
   week: RoutinesOverviewProperties['week']
 }
 
-const RetrospectiveTabContentView = ({
-  answerQuery,
-  after,
-  before,
-  week,
-  teamId,
-}: AnswerContentProperties) => {
-  const [answerId] = answerQuery.split('&')
+const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerContentProperties) => {
+  const router = useRouter()
 
   const { getAnswerDetailed } = useAnswerDetailed()
+  const answerQuery = router?.query?.answerId
+  const answerId = Array.isArray(answerQuery) ? answerQuery[0] : answerQuery
 
   useEffect(() => {
-    getAnswerDetailed(answerId)
+    if (answerId) getAnswerDetailed(answerId)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answerId])
 

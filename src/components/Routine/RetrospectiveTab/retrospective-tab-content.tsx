@@ -45,7 +45,6 @@ interface RetrospectiveTabContent {
 
 interface RetrospectiveTabContentProperties {
   teamId: Team['id']
-  answerQuery: string
 }
 
 interface AnswerSummary {
@@ -57,7 +56,7 @@ interface AnswerSummary {
   timestamp: Date
 }
 
-const RetrospectiveTabContent = ({ teamId, answerQuery }: RetrospectiveTabContentProperties) => {
+const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
   const { servicesPromise } = useContext(ServicesContext)
@@ -173,13 +172,7 @@ const RetrospectiveTabContent = ({ teamId, answerQuery }: RetrospectiveTabConten
           teamId={teamId}
         />
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RetrospectiveTabContentView
-          after={after}
-          before={before}
-          week={week}
-          answerQuery={answerQuery}
-          teamId={teamId}
-        />
+        <RetrospectiveTabContentView after={after} before={before} week={week} teamId={teamId} />
       </Grid>
 
       <NotificationSettingsModal
