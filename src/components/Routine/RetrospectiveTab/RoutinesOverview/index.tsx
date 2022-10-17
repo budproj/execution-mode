@@ -57,7 +57,6 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
   }, [])
 
   useEffect(() => {
-    console.log('refetching overview')
     getAnswersOverview()
   }, [getAnswersOverview])
 
