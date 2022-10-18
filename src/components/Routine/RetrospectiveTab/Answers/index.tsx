@@ -52,7 +52,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
   const [date, setDate] = useRecoilState(routineDatesRangeAtom)
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
   const user = useRecoilValue(selectUser(userID))
-  const [userTeams] = useConnectionEdges(user?.teams?.edges)
+  const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
   const userTeamIds = userTeams.map((team) => team.id)
   const isUserFromTheTeam = userTeamIds.includes(teamId)
 
@@ -81,6 +81,10 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
       setFilteredAnswers(answers.filter((answer) => answer.name.toLowerCase().includes(search)))
     }
   }, [answers, search])
+
+  useEffect(() => {
+    updateTeams(user?.teams?.edges)
+  }, [updateTeams, user?.teams])
 
   return (
     <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">
