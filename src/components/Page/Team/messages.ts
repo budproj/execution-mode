@@ -1,6 +1,11 @@
 import { defineMessages } from 'react-intl'
 
-type ExploreTeamPageMessage = 'metaTitle' | 'metaDescription' | 'metaTitleLoadingFallback'
+type ExploreTeamPageMessage =
+  | 'metaTitle'
+  | 'metaDescription'
+  | 'metaTitleLoadingFallback'
+  | 'okrsTeamTab'
+  | 'retrospectiveTeamTab'
 
 export default defineMessages<ExploreTeamPageMessage>({
   metaTitle: {
@@ -21,5 +26,17 @@ export default defineMessages<ExploreTeamPageMessage>({
     id: 'QMM2q6',
     description:
       'The text that is displayed in the "team" values of the metaTitle message whiel the team name is being fetched',
+  },
+
+  okrsTeamTab: {
+    defaultMessage: 'OKRs',
+    id: 'wWbkGb',
+    description: 'This is the title of the okrs tab on the team page.',
+  },
+
+  retrospectiveTeamTab: {
+    defaultMessage: 'Retrospectiva',
+    id: 'pAXjHu',
+    description: 'This is the title of the retrospectives tab on the team page.',
   },
 })

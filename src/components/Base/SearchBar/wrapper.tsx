@@ -12,7 +12,7 @@ export interface SearchProperties extends StyleProps {
   onSearch?: (searchValue: string) => void
 }
 
-export const SearchBar = ({ placeholder, onSearch, inputBGColor }: SearchProperties) => {
+export const SearchBar = ({ placeholder, onSearch, inputBGColor, ...rest }: SearchProperties) => {
   const intl = useIntl()
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +27,7 @@ export const SearchBar = ({ placeholder, onSearch, inputBGColor }: SearchPropert
         <SearchIcon fill="new-gray.600" desc={intl.formatMessage(messages.iconDesc)} />
       </InputLeftElement>
       <Input
+        {...rest}
         variant="solid"
         bgColor={inputBGColor}
         placeholder={placeholder ?? intl.formatMessage(messages.defaultSearchPlaceholder)}

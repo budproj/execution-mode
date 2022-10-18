@@ -11,6 +11,14 @@ const Drawer = {
       },
     },
   },
+  variants: {
+    sharedFocus: {
+      parts: ['dialogContainer'],
+      dialogContainer: {
+        pointerEvents: 'none',
+      },
+    },
+  },
 }
 
 export default Drawer
