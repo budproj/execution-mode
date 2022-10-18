@@ -1,4 +1,5 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -15,6 +16,10 @@ import messages from './messages'
 interface LongTextAnswerCardProperties {
   answerData: routineAnswer
 }
+
+const StyledListItem = styled.span`
+  display: block;
+`
 
 const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
@@ -66,7 +71,9 @@ const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
           )}
 
           <Text color="new-gray.900" fontWeight="normal">
-            {answerData.value}
+            {answerData.value.split('\n').map((line) => (
+              <StyledListItem key={line}>{line}</StyledListItem>
+            ))}
           </Text>
         </Box>
       </>
