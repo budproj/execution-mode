@@ -28,7 +28,7 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
   }, [answerId])
 
   return answerId ? (
-    <AnswerContent teamId={teamId} />
+    <AnswerContent />
   ) : (
     <RoutinesOverview after={after} before={before} week={week} teamId={teamId} />
   )

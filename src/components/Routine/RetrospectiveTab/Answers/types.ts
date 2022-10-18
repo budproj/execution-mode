@@ -1,7 +1,7 @@
 export type answerHistory = {
   id?: string
-  startDate: Date
-  finishDate: Date
+  startDate: string
+  finishDate: string
 }
 
 type answerValue = {

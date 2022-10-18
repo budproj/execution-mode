@@ -9,11 +9,11 @@ import {
   IconButton,
   useDisclosure,
 } from '@chakra-ui/react'
-import { format } from 'date-fns'
+import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import CircleIcon from 'src/components/Icon/Circle'
@@ -22,7 +22,10 @@ import messages from 'src/components/Page/Team/Tabs/content/messages'
 import { NotificationSettingsModal } from 'src/components/Routine/NotificationSettings'
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
-import { routineDatesRangeAtom } from 'src/state/recoil/routine/routine-dates-range'
+import {
+  getRoutineDateRangeDateFormat,
+  routineDatesRangeAtom,
+} from 'src/state/recoil/routine/routine-dates-range'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
@@ -70,7 +73,10 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
     toggleDisabledTeam(teamId)
   }
 
-  const { after, before, week } = useRecoilValue(routineDatesRangeAtom)
+  const [{ after, before, week }, setRoutineDatesRange] = useRecoilState(routineDatesRangeAtom)
+  const { after: afterQuery, before: beforeQuery } = router.query
+  const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
+  const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
 
   const getAnswersSummary = useCallback(async () => {
     if (before && after) {
@@ -110,6 +116,25 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [after, before])
+
+  useEffect(() => {
+    if (afterQueryData && beforeQueryData) {
+      const parsedAfter = parse(afterQueryData, 'dd/MM/yyyy', new Date())
+      const parsedBefore = parse(beforeQueryData, 'dd/MM/yyyy', new Date())
+      const { week } = getRoutineDateRangeDateFormat(parsedAfter)
+
+      const diffAfter = parsedAfter ? differenceInDays(after, parsedAfter) : 0
+      const diffBefore = parsedBefore ? differenceInDays(before, parsedBefore) : 0
+
+      if (diffAfter || diffBefore) {
+        setRoutineDatesRange({
+          after: diffAfter ? parsedAfter : after,
+          before: diffBefore ? parsedBefore : before,
+          week,
+        })
+      }
+    }
+  }, [afterQueryData, beforeQueryData, before, after, setRoutineDatesRange])
 
   return (
     <Stack spacing={10}>
