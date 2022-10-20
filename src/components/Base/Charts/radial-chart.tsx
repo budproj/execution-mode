@@ -9,29 +9,70 @@ interface CustomizedPieTextProperties {
   numberColor: string
   icon?: JSX.Element
   data?: number
+  size?: 'sm' | 'lg'
+  title?: string
+  percentage?: boolean
 }
 
-const CustomizedPieText = ({ numberColor, icon, data }: CustomizedPieTextProperties) => {
+const CustomizedPieText = ({
+  numberColor,
+  icon,
+  data,
+  size = 'lg',
+  title,
+  percentage,
+}: CustomizedPieTextProperties) => {
   const intl = useIntl()
   return (
     <>
-      <Flex position="absolute" top={90} left={125}>
+      {size === 'sm' && (
+        <Text
+          position="absolute"
+          top="21"
+          left="50%"
+          transform="translate(-50%, -50%)"
+          textAlign="center"
+          fontWeight={500}
+          fontSize={14}
+          color="new-gray.800"
+        >
+          {title}
+        </Text>
+      )}
+      <Flex position="absolute" top={size === 'lg' ? 90 : 61} left={size === 'lg' ? 125 : 75}>
         {icon}
       </Flex>
-      <Flex flexDirection="column" position="absolute" top={130} left={95} textAlign="center">
-        <Text marginTop="21px" fontSize="19px" fontWeight="500" color={numberColor}>
-          {data}
+      <Flex
+        flexDirection="column"
+        position="absolute"
+        top={size === 'lg' ? 130 : 71}
+        left={size === 'lg' ? 95 : 77}
+        textAlign="center"
+      >
+        <Text
+          marginTop="21px"
+          fontSize="19px"
+          fontWeight={size === 'lg' ? '500' : '700'}
+          color={numberColor}
+        >
+          {data && percentage ? `${data}%` : data}
         </Text>
-        <Text marginTop="10px" color="new-gray.500" fontWeight="450">
-          {intl.formatMessage(messages.weekMean)}
-        </Text>
+        {size === 'lg' && (
+          <Text marginTop="10px" color="new-gray.500" fontWeight="450">
+            {intl.formatMessage(messages.weekMean)}
+          </Text>
+        )}
       </Flex>
-      <Text color="new-gray.600" position="absolute" top={160} left={67}>
-        1
-      </Text>
-      <Text color="new-gray.600" position="absolute" top={160} left={227}>
-        5
-      </Text>
+      {size === 'lg' && (
+        <>
+          <Text color="new-gray.600" position="absolute" top={160} left={size === 'lg' ? 67 : 90}>
+            1
+          </Text>
+          <Text color="new-gray.600" position="absolute" top={160} left={size === 'lg' ? 227 : 205}>
+            5
+          </Text>
+        </>
+      )}
     </>
   )
 }
@@ -41,6 +82,9 @@ interface RadialChartProperties {
   numberColor: string
   icon?: JSX.Element
   data?: number
+  size?: 'sm' | 'lg'
+  title?: string
+  percentage?: boolean
 }
 
 export const RadialChartComponent = ({
@@ -48,11 +92,14 @@ export const RadialChartComponent = ({
   numberColor = 'yellow.600',
   icon,
   data,
+  size = 'lg',
+  title,
+  percentage,
 }: RadialChartProperties) => {
   const radiaChartData = [
     {
       name: 'base',
-      pv: 5,
+      pv: percentage ? 100 : 5,
       opacity: 0,
     },
     {
@@ -63,21 +110,29 @@ export const RadialChartComponent = ({
 
   return (
     <Box position="relative">
-      <ResponsiveContainer minWidth={300} height={240}>
+      <ResponsiveContainer width={size === 'lg' ? 300 : 180} height={size === 'lg' ? 250 : 140}>
         <RadialBarChart
-          cx={150}
-          cy={150}
-          innerRadius="40%"
+          cx={size === 'lg' ? 150 : 90}
+          cy={size === 'lg' ? 150 : 81}
+          innerRadius={size === 'lg' ? '40%' : '1%'}
           outerRadius="100%"
-          barSize={15}
-          startAngle={180}
-          endAngle={0}
+          barSize={size === 'lg' ? 15 : 8}
+          startAngle={size === 'lg' ? 180 : 190}
+          endAngle={size === 'lg' ? 0 : -10}
           data={radiaChartData}
         >
           <RadialBar background cornerRadius={30} dataKey="pv" fill={progressColor} />
         </RadialBarChart>
       </ResponsiveContainer>
-      <CustomizedPieText data={data} icon={icon} numberColor={numberColor} />
+
+      <CustomizedPieText
+        title={title}
+        size={size}
+        data={data}
+        icon={icon}
+        numberColor={numberColor}
+        percentage={percentage}
+      />
     </Box>
   )
 }

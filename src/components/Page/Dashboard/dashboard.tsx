@@ -7,6 +7,7 @@ import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { CADENCE } from 'src/components/Cycle/constants'
 import BoardsOverview from 'src/components/Report/BoardsOverview'
+import MetricsOverview from 'src/components/Report/MetricsOverview'
 import { OverviewSummary } from 'src/components/Report/OverviewSummary'
 import TeamsOverview from 'src/components/Report/TeamsOverview'
 import { useGetCompanyCycles } from 'src/components/Report/hooks'
@@ -62,7 +63,10 @@ const DashboardPage = () => {
         <Text color="new-gray.800" fontWeight={500} fontSize="18px" marginBottom="12px">
           {intl.formatMessage(messages.teamsOverviewTitle)}
         </Text>
-        <TeamsOverview quarter={quarter?.period} />
+        <Flex gridGap="3rem">
+          <TeamsOverview flex="1" quarter={quarter?.period} />
+          <MetricsOverview maxWidth="50%" flex="1" />
+        </Flex>
       </Box>
     </PageContent>
   )

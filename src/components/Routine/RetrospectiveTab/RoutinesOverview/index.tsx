@@ -116,7 +116,10 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
               justifyContent="center"
               borderRadius="50%"
             >
-              <SuitcaseIcon boxSize="23px" desc="mudar" />
+              <SuitcaseIcon
+                boxSize="23px"
+                desc={intl.formatMessage(messages.productivtyIconDescription)}
+              />
             </Flex>
           }
           numberColor="#4BACF9"

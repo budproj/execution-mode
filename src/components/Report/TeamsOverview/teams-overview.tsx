@@ -50,7 +50,7 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   return (
     <Box bg="white" borderRadius="lg" shadow="for-background.light" p={9} pb={4} {...rest}>
       <Skeleton isLoaded={!loading}>
-        <Heading as="h3" size="md" mb={6}>
+        <Heading as="h3" size="md" mb={6} color="new-gray.900">
           {intl.formatMessage(
             isGameficationDisabled
               ? messages.teamRankingTitleWithoutGamification
