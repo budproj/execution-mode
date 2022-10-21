@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Box, Flex, Stack } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
@@ -25,6 +26,7 @@ export interface ExploreTeamPageProperties extends PageProperties {
 
 const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   const intl = useIntl()
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState(
     intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
   )
@@ -39,15 +41,15 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
     { variables: { teamId } },
   )
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const { hash } = window.location
-    const tab = hash.replace('#', '').toLowerCase()
+    const { query } = router
+    const tab = Array.isArray(query?.activeTab) ? query?.activeTab[0] : query?.activeTab ?? ''
 
-    if (tab && tabs.has(tab) && tab !== activeTab) {
+    if (tabs.has(tab) && tab !== activeTab) {
       setActiveTab(tab)
     }
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router])
 
   const [loadTeamOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const metaTitleLoadingFallback = intl.formatMessage(messages.metaTitleLoadingFallback)

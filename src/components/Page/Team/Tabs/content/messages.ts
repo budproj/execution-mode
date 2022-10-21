@@ -16,8 +16,8 @@ export default defineMessages<ExploreTeamTabsContentMessage>({
 
   tabRetrospectivePageDescription: {
     defaultMessage:
-      'Compartilhe suas as prioridades, conquistas e barreiras com seu time. Acompanhe e interaja com seus colegas sobre a jornada deles. {link}',
-    id: 'fSrztQ',
+      'Compartilhe suas as prioridades, conquistas e barreiras com seu time. Acompanhe e interaja com seus colegas sobre a jornada deles.',
+    id: 'kAwViv',
     description: 'Description of the content of the Retrospective tab on the teams page.',
   },
 
