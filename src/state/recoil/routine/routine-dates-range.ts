@@ -20,7 +20,7 @@ export const isNextWeekDisabled = (date: Date) => {
 
 export const getRoutineDateRangeDateFormat = (newDate: Date) => {
   const { startsAt, endsAt } = routineTimespan(newDate)
-  const week = getWeek(newDate)
+  const week = getWeek(startsAt)
 
   return {
     after: startsAt,

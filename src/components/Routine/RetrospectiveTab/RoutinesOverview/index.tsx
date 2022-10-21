@@ -26,7 +26,7 @@ interface OverviewData {
   }
 }
 
-interface RoutinesOverviewProperties {
+export interface RoutinesOverviewProperties {
   teamId: string
   after: Date
   before: Date
@@ -57,7 +57,6 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
   }, [])
 
   useEffect(() => {
-    console.log('refetching overview')
     getAnswersOverview()
   }, [getAnswersOverview])
 
