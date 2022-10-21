@@ -17,8 +17,8 @@ export default defineMessages<SupportTeamMessagesProperties>({
     description: 'The calendar icon description that goes in the routine reminder notification',
   },
   weekRetrospectiveRoutineSubtitle: {
-    defaultMessage: 'confira as novas respostas em',
-    id: 'Glv+wL',
+    defaultMessage: 'confira as novas respostas em {team}',
+    id: 'w9Qh/X',
     description: 'The subtitle of the routine reminder notification',
   },
 })
