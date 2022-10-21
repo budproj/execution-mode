@@ -79,21 +79,19 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
 
   const getAnswersSummary = useCallback(async () => {
-    if (before && after) {
-      const { routines } = await servicesPromise
-      const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-        `/answers/summary/${teamId}`,
-        {
-          params: {
-            before,
-            after,
-            includeSubteams: false,
-          },
+    const { routines } = await servicesPromise
+    const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+      `/answers/summary/${teamId}`,
+      {
+        params: {
+          before,
+          after,
+          includeSubteams: false,
         },
-      )
+      },
+    )
 
-      if (answersSummaryData) setAnswersSummary(answersSummaryData)
-    }
+    if (answersSummaryData) setAnswersSummary(answersSummaryData)
   }, [after, before, teamId, servicesPromise])
 
   useEffect(() => {
@@ -134,7 +132,8 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
         })
       }
     }
-  }, [afterQueryData, beforeQueryData, before, after, setRoutineDatesRange])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Stack spacing={10}>
