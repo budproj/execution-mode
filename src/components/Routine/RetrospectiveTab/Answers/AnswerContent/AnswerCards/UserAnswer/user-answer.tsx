@@ -11,11 +11,14 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
 import ArrowLeftLongBoldIcon from 'src/components/Icon/ArrowLeftLongBold'
 // Import ChevronDownIcon from 'src/components/Icon/ChevronDown'
 // Import ChevronUpIcon from 'src/components/Icon/ChevronUp'
 import { User } from 'src/components/User/types'
+
+import messages from './messages'
 
 interface UserAnswerProperties {
   user: Partial<User>
@@ -24,6 +27,7 @@ interface UserAnswerProperties {
 export const UserAnswer = ({ user }: UserAnswerProperties) => {
   const [newGray600] = useToken('colors', ['new-gray.600'])
   const router = useRouter()
+  const intl = useIntl()
 
   const userFullName = `${user?.firstName ?? ''} ${user?.lastName ?? ''}`
 
@@ -49,7 +53,13 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
           bgColor="new-gray.200"
           borderRadius="10px"
           rightIcon={
-            <ArrowLeftLongBoldIcon desc="arrow" ml="-7px" w="1.3em" h="1.3em" fill={newGray600} />
+            <ArrowLeftLongBoldIcon
+              desc={intl.formatMessage(messages.returnToOverviewIcon)}
+              ml="-7px"
+              w="1.3em"
+              h="1.3em"
+              fill={newGray600}
+            />
           }
           onClick={() => returnToOverview()}
         />
@@ -60,7 +70,7 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
           color="new-gray.600"
           onClick={() => returnToOverview()}
         >
-          Voltar
+          {intl.formatMessage(messages.returnToOverviewLabel)}
         </Text>
       </Box>
 
