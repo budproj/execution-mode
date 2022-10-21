@@ -7,6 +7,7 @@ import {
   useToken,
   SkeletonCircle,
   Avatar,
+  Skeleton,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -68,12 +69,27 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
           <Avatar name={userFullName} src={user?.picture} w={50} h={50} />
         </SkeletonCircle>
 
-        <Box ml={4}>
-          <Heading as="h3" fontSize="1.5rem" fontWeight={600} mt={1}>
-            {userFullName}
-          </Heading>
-          <Text color="new-gray.600">{user.role}</Text>
-        </Box>
+        <Flex ml={4} flexDirection="column">
+          <Skeleton
+            isLoaded={Boolean(user.firstName)}
+            display="inline-block"
+            minWidth="400px"
+            mt={1}
+          >
+            <Heading as="h3" fontSize="1.5rem" fontWeight={600}>
+              {userFullName}
+            </Heading>
+          </Skeleton>
+          <Skeleton
+            isLoaded={Boolean(user.role)}
+            display="inline-block"
+            minWidth="100px"
+            lineHeight="1rem"
+            mt={1}
+          >
+            <Text color="new-gray.600">{user.role}</Text>
+          </Skeleton>
+        </Flex>
       </Flex>
 
       {/* <Flex margin="0 0 0 auto" flexDirection="column">
