@@ -1,6 +1,5 @@
 import {
   Flex,
-  Link,
   Stack,
   Text,
   Grid,
@@ -10,25 +9,42 @@ import {
   IconButton,
   useDisclosure,
 } from '@chakra-ui/react'
-import React, { useContext, useEffect, useState } from 'react'
+import { format, parse, differenceInDays } from 'date-fns'
+import { useRouter } from 'next/router'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import { CircleArrowRight } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import GearIcon from 'src/components/Icon/Gear'
 import messages from 'src/components/Page/Team/Tabs/content/messages'
 import { NotificationSettingsModal } from 'src/components/Routine/NotificationSettings'
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
-import { routineDateRangeSelector } from 'src/state/recoil/routine/routine-dates-range'
+import {
+  getRoutineDateRangeDateFormat,
+  routineDatesRangeAtom,
+} from 'src/state/recoil/routine/routine-dates-range'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 
 import AnswersComponent from './Answers'
-import RoutinesOverview from './RoutinesOverview'
+import RetrospectiveTabContentView from './retrospective-tab-content-view'
+
+export type AnswerType = {
+  id: string
+  user: string
+  feeling: number
+  createdAt: string
+  comments: number
+}
+
+interface RetrospectiveTabContent {
+  teamId: Team['id']
+  answerQuery: string
+}
 
 interface RetrospectiveTabContentProperties {
   teamId: Team['id']
@@ -43,49 +59,81 @@ interface AnswerSummary {
   timestamp: Date
 }
 
-interface AnswerOverview {
-  overview: {
-    feeling: Array<{ timestamp: string; average: number }>
-    productivity: Array<{ timestamp: string; average: number }>
-  }
-}
-
 const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
+  const router = useRouter()
   const { servicesPromise } = useContext(ServicesContext)
   const [answersSummary, setAnswersSummary] = useState<AnswerSummary[]>([])
-  const [answersOverview, setAnswersOverview] = useState<AnswerOverview | undefined>()
   const team = useRecoilValue(teamAtomFamily(teamId))
-  const { teamOptedOut, toggleDisabledTeam } = useRoutineNotificationSettings(teamId)
-
-  const { after, before, week } = useRecoilValue(routineDateRangeSelector)
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
   const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
+  const { teamOptedOut, toggleDisabledTeam } = useRoutineNotificationSettings(teamId)
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const toggleNotifcation = () => {
     toggleDisabledTeam(teamId)
   }
 
+  const [{ after, before, week }, setRoutineDatesRange] = useRecoilState(routineDatesRangeAtom)
+  const { after: afterQuery, before: beforeQuery } = router.query
+  const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
+  const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
+
+  const getAnswersSummary = useCallback(async () => {
+    const { routines } = await servicesPromise
+    const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+      `/answers/summary/${teamId}`,
+      {
+        params: {
+          before,
+          after,
+          includeSubteams: false,
+        },
+      },
+    )
+
+    if (answersSummaryData) setAnswersSummary(answersSummaryData)
+  }, [after, before, teamId, servicesPromise])
+
   useEffect(() => {
-    const getAnswersSummaryAndOverview = async () => {
-      const { routines } = await servicesPromise
+    getAnswersSummary()
+  }, [getAnswersSummary])
 
-      const [{ data: answersSummaryData }, { data: answersOverview }] = await Promise.all([
-        routines.get<AnswerSummary[]>(`/answers/summary/${teamId ?? teamId}`, {
-          params: { before, after, includeSubteams: false },
-        }),
-        routines.get<AnswerOverview>(`/answers/overview/${teamId ?? teamId}`, {
-          params: { includeSubteams: false },
-        }),
-      ])
-
-      if (answersSummaryData) setAnswersSummary(answersSummaryData)
-      if (answersOverview) setAnswersOverview(answersOverview)
+  useEffect(() => {
+    if (after && before) {
+      router.push(
+        {
+          query: {
+            ...(router?.query ?? {}),
+            after: format(after, 'dd/MM/yyyy'),
+            before: format(before, 'dd/MM/yyyy'),
+          },
+        },
+        undefined,
+        { shallow: true },
+      )
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [after, before])
 
-    getAnswersSummaryAndOverview()
-  }, [after, before, servicesPromise, teamId])
+  useEffect(() => {
+    if (afterQueryData && beforeQueryData) {
+      const parsedAfter = parse(afterQueryData, 'dd/MM/yyyy', new Date())
+      const parsedBefore = parse(beforeQueryData, 'dd/MM/yyyy', new Date())
+      const { week } = getRoutineDateRangeDateFormat(parsedAfter)
+
+      const diffAfter = parsedAfter ? differenceInDays(after, parsedAfter) : 0
+      const diffBefore = parsedBefore ? differenceInDays(before, parsedBefore) : 0
+
+      if (diffAfter || diffBefore) {
+        setRoutineDatesRange({
+          after: diffAfter ? parsedAfter : after,
+          before: diffBefore ? parsedBefore : before,
+          week,
+        })
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Stack spacing={10}>
@@ -101,26 +149,7 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
             alignItems="center"
             justifyContent="center"
           >
-            {intl.formatMessage(messages.tabRetrospectivePageDescription, {
-              link: (
-                <Link
-                  isExternal
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  ml={1}
-                  gap={1}
-                  href="#"
-                  verticalAlign="middle"
-                >
-                  {intl.formatMessage(messages.learnMoreRetrospectiveMessage)}
-                  <CircleArrowRight
-                    alignContent="center"
-                    desc={intl.formatMessage(messages.learnMoreRetrospectiveIcon)}
-                  />
-                </Link>
-              ),
-            })}
+            {intl.formatMessage(messages.tabRetrospectivePageDescription)}
           </Text>
         </Stack>
         {canEditTeam ? (
@@ -167,7 +196,7 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
           teamId={teamId}
         />
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RoutinesOverview after={after} before={before} week={week} data={answersOverview} />
+        <RetrospectiveTabContentView after={after} before={before} week={week} teamId={teamId} />
       </Grid>
 
       <NotificationSettingsModal

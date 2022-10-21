@@ -227,6 +227,10 @@
     "defaultMessage": "Feminino",
     "description": "This text is used accross our platform to identify the female gender"
   },
+  "2Vtwxl": {
+    "defaultMessage": "Histórico de respostas",
+    "description": "This message appears as the title of the card that lists the history of retrospectives answered by a user."
+  },
   "2ao/tW": {
     "defaultMessage": "Sobrenome do usuário inicial",
     "description": "The user last name while creating a new workspace"
@@ -423,6 +427,10 @@
     "defaultMessage": "Nesta semana",
     "description": "This label is displayed if the date difference is 1 week or less"
   },
+  "6gyBBo": {
+    "defaultMessage": "Sentimento",
+    "description": "This message appears on feeling chart tooltip as the title that suggests what the data means."
+  },
   "6spUEn": {
     "defaultMessage": "Fazer check-in",
     "description": "This message is displayed as a label button when the check-in form is closed in our key result section"
@@ -454,6 +462,10 @@
   "7GDhfH": {
     "defaultMessage": "O ciclo está ativo, a funcionalidade de check-in está disponível, e o progresso está sendo mensurado.",
     "description": "This string is used to describe the cycles active status option."
+  },
+  "7WlK+y": {
+    "defaultMessage": "Um ícone de um alvo, que aparece junto com a pergunta de quais os focos do usuário para próxima semana.",
+    "description": "This message appears as the title of the card that lists the history of retrospectives answered by a user."
   },
   "7Yw26b": {
     "defaultMessage": "Selecione o ano",
@@ -547,6 +559,10 @@
     "defaultMessage": "Explorar",
     "description": "The name of the Explore page, located at \"/explore\""
   },
+  "9CP8fU": {
+    "defaultMessage": "Um ícone de um lápix, que aparece junto com a pergunta de algum recado que o usuário deixou para o time",
+    "description": "The alternative text explaining our graphic icon"
+  },
   "9O5Xaa": {
     "defaultMessage": "Seu time ainda não tem nenhum resultado-chave anual",
     "description": "Message to show when there are no summary results"
@@ -618,6 +634,10 @@
   "B0G29o": {
     "defaultMessage": "Baixo",
     "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
+  },
+  "B1P9ld": {
+    "defaultMessage": "Produtividade",
+    "description": "This message appears on productivity chart tooltip as the title that suggests what the data means."
   },
   "B3oV9s": {
     "defaultMessage": "Objetivo atualizado com sucesso",
@@ -1387,6 +1407,10 @@
     "defaultMessage": "Valor atual",
     "description": "This tooltip is displayed when the user hovers the left side value of our progress bar"
   },
+  "QcWe3c": {
+    "defaultMessage": "Um ícone de gráfico que aparece ao lado da lista de histórico de respostas de um usuário.",
+    "description": "The alternative text explaining our graphic icon"
+  },
   "QpkwoM": {
     "defaultMessage": "Tem certeza que deseja excluir este objetivo?",
     "description": "This message is used as the first dialog title while removing an objective"
@@ -2071,6 +2095,10 @@
     "defaultMessage": "Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)",
     "description": "The page title that our users should see in the dashboard page"
   },
+  "gOltd4": {
+    "defaultMessage": "Um ícone de seta para a direita que indica que o usuário pode avançar no histórico para conferir outras respostas da rotina.",
+    "description": "The alternative text explaining our graphic icon"
+  },
   "gTym4f": {
     "defaultMessage": "Progresso individual com base na média dos resultados-chave deste ano",
     "description": "Yearly progress chart tooltip message"
@@ -2102,6 +2130,10 @@
   "h4VH9f": {
     "defaultMessage": "desativar usuário",
     "description": "This message appears in button to confirm the deactivate user action."
+  },
+  "h6wsCP": {
+    "defaultMessage": "Um ícone de seta para a esquerda que indica que o usuário pode retroceder no histórico para conferir outras respostas da rotina.",
+    "description": "The alternative text explaining our graphic icon"
   },
   "hFma0o": {
     "defaultMessage": "Erro ao criar o ambiente",
@@ -2186,6 +2218,10 @@
   "iPv+uj": {
     "defaultMessage": "Um ícone de uma linha reta na horizontal, representando que sua empresa não evolui desde o último evento de check-in",
     "description": "This message is used by screen readers to explain our line icon"
+  },
+  "iVxx6N": {
+    "defaultMessage": "Essa semana",
+    "description": "This message appears with a subtitle in the cad that informs the user barrier status for the current week."
   },
   "iWDn4y": {
     "defaultMessage": "Time de Apoio",
@@ -2371,9 +2407,17 @@
     "defaultMessage": "Ciclos ativos",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
   },
+  "mfowjk": {
+    "defaultMessage": "Um ícone de uma estrela, que aparece junto com a pergunta sobre as principais conquistas que o usuário teve na semana.",
+    "description": "The alternative text explaining our graphic icon"
+  },
   "minQA9": {
     "defaultMessage": "Redefinir senha",
     "description": "This message is the description of the option to alter password of a user."
+  },
+  "mkTrvf": {
+    "defaultMessage": "Um ícone de pause, que aparece junto com a pergunta de se o usuario tem alguma barreira.",
+    "description": "The alternative text explaining our graphic icon"
   },
   "mkxm93": {
     "defaultMessage": "Bud é uma plataforma para gerenciamento de OKRs.",
@@ -2438,6 +2482,10 @@
   "nrToz/": {
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our unknown error page"
+  },
+  "nriJkh": {
+    "defaultMessage": "Sim!",
+    "description": "This message appears when the user has a blockage during the week."
   },
   "oGyXN5": {
     "defaultMessage": "Colegas com plano individual",
