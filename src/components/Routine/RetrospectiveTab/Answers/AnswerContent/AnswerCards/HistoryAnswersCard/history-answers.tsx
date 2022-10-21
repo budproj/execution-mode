@@ -8,6 +8,7 @@ import { useIntl } from 'react-intl'
 
 import { ArrowRight, GraphicIcon } from 'src/components/Icon'
 import { answerHistory } from 'src/components/Routine/RetrospectiveTab/Answers/types'
+import { getDateFromUTCDate } from 'src/components/Routine/RetrospectiveTab/Answers/utils'
 // Import { routineDatesRangeAtom } from 'src/state/recoil/routine/routine-dates-range'
 
 import AnswerCardBase from '../base/answer-card'
@@ -51,22 +52,8 @@ const HistoryAnswers = ({ answers }: HistoryAnswersProperties) => {
         {
           query: {
             ...(router?.query ?? {}),
-            before: format(
-              new Date(
-                parsedFinishDate.getUTCFullYear(),
-                parsedFinishDate.getUTCMonth(),
-                parsedFinishDate.getUTCDate(),
-              ),
-              'dd/MM/yyyy',
-            ),
-            after: format(
-              new Date(
-                parsedStartDate.getUTCFullYear(),
-                parsedStartDate.getUTCMonth(),
-                parsedStartDate.getUTCDate(),
-              ),
-              'dd/MM/yyyy',
-            ),
+            before: format(getDateFromUTCDate(parsedFinishDate), 'dd/MM/yyyy'),
+            after: format(getDateFromUTCDate(parsedStartDate), 'dd/MM/yyyy'),
             answerId: answer.id,
           },
         },
