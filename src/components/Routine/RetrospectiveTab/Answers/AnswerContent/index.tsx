@@ -4,16 +4,19 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
+import { useGetUserDetails } from 'src/components/User/hooks'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 
 import RoutineComments from '../../Comments'
-import RoutineCommentsInput from '../../Comments/CommentInput'
+import RoutineCommentsInput from '../../Comments/CommentInput/wrapper'
+import { AnswerType } from '../../retrospective-tab-content'
 
 import RoutineAnswerCard from './AnswerCards'
 import HistoryAnswers from './AnswerCards/HistoryAnswersCard/history-answers'
 
 type AnswerContent = {
   teamId: Team['id']
+  answerId: AnswerType['id']
 }
 
 const ScroolableVStack = styled(VStack)`
@@ -39,8 +42,9 @@ const ScroolableVStack = styled(VStack)`
   }
 `
 
-const AnswerContent = ({ teamId }: AnswerContent) => {
+const AnswerContent = ({ teamId, answerId }: AnswerContent) => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
+  const { data: user } = useGetUserDetails(answerDetailed.userId)
 
   return (
     <Stack>
@@ -56,7 +60,7 @@ const AnswerContent = ({ teamId }: AnswerContent) => {
         <Divider />
         <RoutineComments />
       </ScroolableVStack>
-      <RoutineCommentsInput />
+      <RoutineCommentsInput routineUser={user?.firstName} domainEntityId={answerId} />
     </Stack>
   )
 }

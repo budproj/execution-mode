@@ -1,3 +1,5 @@
+import { User } from 'src/components/User/types'
+
 export type answerHistory = {
   id?: string
   startDate: Date
@@ -21,6 +23,7 @@ export type routineAnswer = {
 }
 
 export interface AnswerDetails {
+  userId: User['id']
   history: answerHistory[]
   answers: routineAnswer[]
 }
