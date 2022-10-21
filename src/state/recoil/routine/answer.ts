@@ -4,7 +4,11 @@ import { AnswerDetails } from 'src/components/Routine/RetrospectiveTab/Answers/t
 
 import { PREFIX } from './constants'
 
-const defaultAnswer: AnswerDetails = { history: [], answers: [] }
+const defaultAnswer: AnswerDetails = {
+  user: {},
+  history: [],
+  answers: [],
+}
 
 export const answerDetailedAtom = atom<AnswerDetails>({
   key: `${PREFIX}::ANSWER_DETAILED`,

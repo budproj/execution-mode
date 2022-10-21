@@ -3,8 +3,6 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
-import meAtom from 'src/state/recoil/user/me'
-import selectUser from 'src/state/recoil/user/selector'
 
 import RoutineAnswerCard from './AnswerCards'
 import HistoryAnswers from './AnswerCards/HistoryAnswersCard/history-answers'
@@ -12,12 +10,10 @@ import { UserAnswer } from './AnswerCards/UserAnswer'
 
 const AnswerContent = () => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
-  const userID = useRecoilValue(meAtom)
-  const user = useRecoilValue(selectUser(userID))
 
   return (
     <>
-      {user ? <UserAnswer user={user} /> : undefined}
+      <UserAnswer user={answerDetailed.user} />
 
       <Divider borderColor="new-gray.400" />
 

@@ -24,6 +24,8 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
   const [newGray600] = useToken('colors', ['new-gray.600'])
   const router = useRouter()
 
+  const userFullName = `${user?.firstName ?? ''} ${user?.lastName ?? ''}`
+
   const returnToOverview = () => {
     router.push(
       {
@@ -62,13 +64,13 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
       </Box>
 
       <Flex ml={6}>
-        <SkeletonCircle isLoaded={Boolean(user)} w={50} h={50}>
-          <Avatar name={user?.fullName} src={user?.picture} w={50} h={50} />
+        <SkeletonCircle isLoaded={Boolean(user?.firstName)} w={50} h={50}>
+          <Avatar name={userFullName} src={user?.picture} w={50} h={50} />
         </SkeletonCircle>
 
         <Box ml={4}>
           <Heading as="h3" fontSize="1.5rem" fontWeight={600} mt={1}>
-            {user?.fullName}
+            {userFullName}
           </Heading>
           <Text color="new-gray.600">{user.role}</Text>
         </Box>
