@@ -22,7 +22,7 @@ export const useRoutineFormQuestions = () => {
     const { routines } = await servicesPromise
     const { data } = await routines.get<{ questions: FormQuestion[] }>(requestFormQuestionsPath)
 
-    if (data.questions) {
+    if (data?.questions) {
       const mappedQuestions = data.questions.map((question) => ({
         ...question,
         hidden: Boolean(question?.conditional),

@@ -6,10 +6,10 @@ import { PageContent } from 'src/components/Base'
 import TabsMenu from 'src/components/Page/Team/Tabs/tabs-menu'
 import { Team } from 'src/components/Team/types'
 
+import RetrospectiveTabContent from '../../../Routine/RetrospectiveTab/retrospective-tab-content'
 import messages from '../messages'
 
 import OkrsTabContent from './content/okrs-tab-content'
-import RetrospectiveTabContent from './content/retrospective-tab-content'
 
 interface ExploreTeamTabsProperties {
   teamId: Team['id']
@@ -36,7 +36,7 @@ const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProper
             <OkrsTabContent teamId={teamId} isLoading={isLoading} />
           </TabPanel>
           <TabPanel padding="0px !important">
-            <RetrospectiveTabContent />
+            <RetrospectiveTabContent teamId={teamId} />
           </TabPanel>
         </TabPanels>
       </PageContent>
