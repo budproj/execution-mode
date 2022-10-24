@@ -13,8 +13,8 @@ type MetricsOverview =
 
 export default defineMessages<MetricsOverview>({
   metricCardTitle: {
-    defaultMessage: 'Clima dos Times do {company}',
-    id: 'VxPIZS',
+    defaultMessage: 'Clima dos Times {companypreposition} {company}',
+    id: '4uGYvu',
     description: 'Title of the metrics card',
   },
   metricCardSubtitle: {

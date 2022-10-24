@@ -14,15 +14,16 @@ import { AreaRadialChart } from '../../../Base/Charts/index'
 
 import messages from './messages'
 
-interface AvarageData {
+export interface AverageData {
   timestamp: string
   average: number
 }
 
-interface OverviewData {
+export interface OverviewData {
   overview: {
-    feeling: AvarageData[]
-    productivity: AvarageData[]
+    feeling: AverageData[]
+    productivity: AverageData[]
+    roadblock: AverageData[]
   }
 }
 
@@ -33,7 +34,7 @@ interface RoutinesOverviewProperties {
   week: number
 }
 
-const getCurrentDataByTimeStamp = (data: AvarageData[], timestamp: string) => {
+export const getCurrentDataByTimeStamp = (data: AverageData[], timestamp: string) => {
   return data.findIndex((data) => isSameDay(parseISO(data.timestamp), parseISO(timestamp)))
 }
 
@@ -41,6 +42,7 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
   const { servicesPromise } = useContext(ServicesContext)
+
   const [answersOverview, setAnswersOverview] = useState<OverviewData | undefined>()
 
   const getAnswersOverview = useCallback(async () => {
@@ -48,7 +50,7 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
     const { data: answersOverview } = await routines.get<OverviewData>(
       `/answers/overview/${teamId}`,
       {
-        params: { includeSubteams: false },
+        params: { includeSubteams: false, before, after },
       },
     )
 
@@ -57,7 +59,6 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
   }, [])
 
   useEffect(() => {
-    console.log('refetching overview')
     getAnswersOverview()
   }, [getAnswersOverview])
 

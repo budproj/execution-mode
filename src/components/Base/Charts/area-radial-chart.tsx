@@ -1,6 +1,8 @@
 import { Text, Flex, Divider } from '@chakra-ui/react'
 import React from 'react'
 
+import { AverageData } from 'src/components/Routine/RetrospectiveTab/RoutinesOverview'
+
 import { AreaChartComponent, RadialChartComponent } from './index'
 
 interface AreaRadialChartProperties {
@@ -12,7 +14,7 @@ interface AreaRadialChartProperties {
   numberColor: string
   highLightIndex: number
   icon?: JSX.Element
-  data?: Array<{ timestamp: string; average: number }>
+  data?: AverageData[]
 }
 
 function capitalizeFirstLetter(string: string) {

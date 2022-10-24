@@ -1,10 +1,14 @@
 import { Flex, Text, Divider } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 import { Team } from 'src/components/Team/types'
+import { getTeamMetrics } from 'src/state/recoil/routine/get-team-metrics'
+
+import messages from '../messages'
 
 interface MetricTeamRowProperties {
   team?: Partial<Team>
@@ -12,6 +16,12 @@ interface MetricTeamRowProperties {
 
 const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
   const { getEmoji } = useGetEmoji()
+
+  const intl = useIntl()
+
+  const answersOverview = getTeamMetrics(team?.id)
+
+  console.log({ answersOverview, team: team?.name })
 
   return (
     <>
@@ -31,7 +41,16 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
             display="flex"
             gap="5px"
           >
-            {getEmoji({ felling: 5, size: '20px' })} 4.5
+            {getEmoji({
+              felling:
+                answersOverview?.overview?.feeling.length > 0
+                  ? answersOverview?.overview.feeling[0].average
+                  : 3,
+              size: '20px',
+            })}
+            {answersOverview?.overview?.feeling.length > 0
+              ? answersOverview?.overview.feeling[0].average
+              : 0}
           </Text>
           <Text
             alignItems="center"
@@ -51,10 +70,12 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
             >
               <SuitcaseIcon
                 boxSize="10px"
-                desc="Ícone de maleta representando o índice de produtividade"
+                desc={intl.formatMessage(messages.productivityIconDescription)}
               />
             </Flex>
-            4.5
+            {answersOverview?.overview?.productivity.length > 0
+              ? answersOverview?.overview.productivity[0].average
+              : 0}
           </Text>
           <Text
             alignItems="center"
@@ -67,7 +88,6 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
             <Flex
               background="transparent"
               width="30px"
-              height="30px"
               alignItems="center"
               justifyContent="center"
               borderRadius="50%"
@@ -75,10 +95,12 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
               <PauseIcon
                 boxSize="25px"
                 stroke="white"
-                desc="Ícone de pausa representando a quantidade de OKRs com barreiras que a empresa tem"
+                desc={intl.formatMessage(messages.pauseIconDescription)}
               />
             </Flex>
-            2
+            {answersOverview?.overview?.roadblock.length > 0
+              ? answersOverview?.overview?.roadblock[0].average
+              : 0}
           </Text>
         </Flex>
       </Flex>

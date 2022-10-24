@@ -12,6 +12,8 @@ import {
   YAxis,
 } from 'recharts'
 
+import { AverageData } from 'src/components/Routine/RetrospectiveTab/RoutinesOverview'
+
 interface CustomizedProperties {
   x: number
   y: number
@@ -64,7 +66,7 @@ interface AreaChartComponentProperties {
   areaEndColor?: string
   strokeLineColor?: string
   tooltipTitle?: string
-  data?: Array<{ timestamp: string; average: number }>
+  data?: AverageData[]
 }
 
 export const AreaChartComponent = ({
