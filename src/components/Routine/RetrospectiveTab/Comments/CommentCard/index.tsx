@@ -1,18 +1,25 @@
 import { Flex, Text, VStack, Avatar, Button, HStack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 import regexifyString from 'regexify-string'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { useGetUserDetails } from 'src/components/User/hooks'
 import { User } from 'src/components/User/types'
+import { commentInputInitialValue } from 'src/state/recoil/comments/input'
+import { commentEntityToReply } from 'src/state/recoil/comments/reply-comment'
+
+import { Comment } from '../types'
 
 import messages from './messages'
 
 interface CommentCard {
   userId: User['id']
+  id: Comment['id']
   timestamp: Date
   comment: string
+  entity: Comment['entity']
 }
 
 export const MarkedUser = ({ name }: { name?: string }) => (
@@ -21,8 +28,11 @@ export const MarkedUser = ({ name }: { name?: string }) => (
   </Text>
 )
 
-const CommentCard = ({ userId, timestamp, comment }: CommentCard) => {
+const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) => {
   const { data: user } = useGetUserDetails(userId)
+  const setCommentInputValue = useSetRecoilState(commentInputInitialValue)
+  const setCommentEntityToReply = useSetRecoilState(commentEntityToReply)
+
   const intl = useIntl()
 
   const timestampConverted = new Date(timestamp)
@@ -37,6 +47,15 @@ const CommentCard = ({ userId, timestamp, comment }: CommentCard) => {
     },
     input: comment ?? '',
   })
+
+  const entityToReply = `${entity}:${id}`
+
+  const userToMark = `@[${user?.fullName ?? ''}](${user?.id ?? ''})`
+
+  const handleReplyComment = () => {
+    setCommentInputValue({ text: `${userToMark} ` })
+    setCommentEntityToReply(entityToReply)
+  }
 
   return (
     <HStack spacing={4} alignItems="flex-start" justifyContent="flex-start" width="full">
@@ -58,7 +77,13 @@ const CommentCard = ({ userId, timestamp, comment }: CommentCard) => {
         <Text fontSize={14} color="new-gray.900">
           {commentText}
         </Text>
-        <Button p={0} color="brand.500" fontSize={14} fontWeight="normal">
+        <Button
+          p={0}
+          color="brand.500"
+          fontSize={14}
+          fontWeight="normal"
+          onClick={handleReplyComment}
+        >
           {intl.formatMessage(messages.replyCommentButton)}
         </Button>
       </VStack>

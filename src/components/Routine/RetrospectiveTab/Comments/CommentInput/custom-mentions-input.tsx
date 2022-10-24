@@ -43,6 +43,15 @@ const CustomMentionsInput = ({
   const intl = useIntl()
 
   const { setValues, values, isSubmitting } = useFormikContext<RoutineCommentsInputInitialValues>()
+  const [isOnFocus, setIsOnFocus] = useState(Boolean(values.text))
+
+  const handleFocus = () => {
+    setIsOnFocus(true)
+  }
+
+  const handleBlur = () => {
+    setIsOnFocus(false)
+  }
 
   const placeholder = intl.formatMessage(messages.placeholder, {
     user: userThatWillBeAnswered,
@@ -85,6 +94,8 @@ const CustomMentionsInput = ({
           transition="0.2s box-shadow ease-in"
           overflow="visible"
           fontSize="md"
+          borderColor={isOnFocus ? 'brand.500' : 'gray.200'}
+          boxShadow={isOnFocus ? '0 0 0 1px #6F6EFF' : 'none'}
           px={4}
           py={2}
           pr={10}
@@ -124,6 +135,8 @@ const CustomMentionsInput = ({
                 },
               },
             }}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
             onChange={handleChange as any}
           >
             <Mention

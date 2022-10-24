@@ -19,8 +19,15 @@ const RoutineComments = () => {
         {intl.formatMessage(messages.commentsSectionTitle)}
       </Text>
       {comments.length > 0 ? (
-        comments.map(({ id, userId, content, createdAt }) => (
-          <CommentCard key={id} userId={userId} comment={content} timestamp={createdAt} />
+        comments.map(({ id, userId, content, createdAt, entity }) => (
+          <CommentCard
+            key={id}
+            id={id}
+            userId={userId}
+            comment={content}
+            timestamp={createdAt}
+            entity={entity}
+          />
         ))
       ) : (
         <RoutineCommentsEmptyState answerOwner="Ana" />
