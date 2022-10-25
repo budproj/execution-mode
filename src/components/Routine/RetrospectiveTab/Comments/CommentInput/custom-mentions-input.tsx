@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Avatar, Box, Divider, HStack, IconButton, Spinner, Stack } from '@chakra-ui/react'
+import { Avatar, Box, HStack, IconButton, Spinner, Stack } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -32,14 +32,10 @@ const renderSuggestion = (suggestion: SuggestionDataItem) => (
 )
 
 type CustomMentionsInputProperties = {
-  isLoading: boolean
   userThatWillBeAnswered?: User['firstName']
 }
 
-const CustomMentionsInput = ({
-  isLoading,
-  userThatWillBeAnswered,
-}: CustomMentionsInputProperties) => {
+const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProperties) => {
   const intl = useIntl()
 
   const { setValues, values, isSubmitting } = useFormikContext<RoutineCommentsInputInitialValues>()
@@ -82,8 +78,7 @@ const CustomMentionsInput = ({
   }, [users])
 
   return (
-    <Stack w="100%" alignItems="center">
-      <Divider mb={2} />
+    <Stack w="100%" alignItems="center" mt={2}>
       <HStack pb={6} width="100%" spacing={4} justifyContent="space-between">
         <Avatar width="45px" height="45px" src={user?.picture} />
         <Box
@@ -159,7 +154,9 @@ const CustomMentionsInput = ({
           </MentionsInput>
           <IconButton
             icon={
-              !isLoading || !isSubmitting ? (
+              isSubmitting ? (
+                <Spinner />
+              ) : (
                 <PaperPlaneIcon
                   w={5}
                   h="auto"
@@ -168,8 +165,6 @@ const CustomMentionsInput = ({
                   title={intl.formatMessage(iconMessages.paperPlaneIconTitle)}
                   desc={intl.formatMessage(iconMessages.paperPlaneIconDesc)}
                 />
-              ) : (
-                <Spinner />
               )
             }
             type="submit"

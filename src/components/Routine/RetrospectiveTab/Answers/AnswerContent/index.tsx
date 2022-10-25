@@ -1,7 +1,8 @@
 import { Box, Divider, VStack } from '@chakra-ui/react'
-import React from 'react'
-import { useRecoilValue } from 'recoil'
+import React, { useEffect } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { commentsAtom } from 'src/state/recoil/comments/comments'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 
 import RoutineComments from '../../Comments'
@@ -18,6 +19,13 @@ type AnswerContent = {
 
 const AnswerContent = ({ answerId }: AnswerContent) => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
+  const setComments = useSetRecoilState(commentsAtom)
+
+  useEffect(() => {
+    setComments([])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answerId])
 
   return (
     <>
@@ -36,7 +44,7 @@ const AnswerContent = ({ answerId }: AnswerContent) => {
         )}
       </VStack>
       <Divider />
-      <RoutineComments />
+      <RoutineComments answerOwner={answerDetailed.user.firstName} />
       <RoutineCommentsInput routineUser={answerDetailed.user.firstName} domainEntityId={answerId} />
     </>
   )

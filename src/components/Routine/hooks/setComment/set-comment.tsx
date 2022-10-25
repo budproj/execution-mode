@@ -1,6 +1,8 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
+import { useSetRecoilState } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
+import { commentsAtom } from 'src/state/recoil/comments/comments'
 
 import { Comment } from '../../RetrospectiveTab/Comments/types'
 
@@ -11,22 +13,18 @@ type useCreateCommentProperties = {
 
 export const useCreateComment = () => {
   const { servicesPromise } = useContext(ServicesContext)
-
-  const [comment, setComment] = useState<Comment>({} as Comment)
+  const setRoutineComment = useSetRecoilState(commentsAtom)
 
   const handleCreateComment = async ({ entity, content }: useCreateCommentProperties) => {
     const { comments } = await servicesPromise
-    const { data: createdComment } = await comments.post<Comment>(`/comments/${entity}`, {
-      entity,
-      content,
-    })
-
-    console.log({ createdComment })
-
-    if (createdComment) {
-      setComment(createdComment)
+    if (entity) {
+      const { data: createdComment } = await comments.post<Comment>(`/comments/${entity}`, {
+        entity,
+        content,
+      })
+      setRoutineComment((previousComments) => [...previousComments, createdComment])
     }
   }
 
-  return { handleCreateComment, comment }
+  return { handleCreateComment }
 }

@@ -3,16 +3,20 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
+import { User } from 'src/components/User/types'
 import { commentsAtom } from 'src/state/recoil/comments/comments'
 
 import CommentCard from './CommentCard'
 import RoutineCommentsEmptyState from './empty-state'
 import messages from './messages'
 
-const RoutineComments = () => {
+type RoutineCommentsProperties = {
+  answerOwner?: User['firstName']
+}
+
+const RoutineComments = ({ answerOwner }: RoutineCommentsProperties) => {
   const intl = useIntl()
   const comments = useRecoilValue(commentsAtom)
-
   return (
     <Stack pt={4} spacing={6} w="full">
       <Text color="new=gray.900" fontSize={16} fontWeight="medium">
@@ -30,7 +34,7 @@ const RoutineComments = () => {
           />
         ))
       ) : (
-        <RoutineCommentsEmptyState answerOwner="Ana" />
+        <RoutineCommentsEmptyState answerOwner={answerOwner} />
       )}
     </Stack>
   )

@@ -163,7 +163,7 @@ const KeyResultSectionAddCommentInput = ({
       </MentionsInput>
       <IconButton
         icon={
-          isLoading || isSubmitting ? (
+          isSubmitting ? (
             <Spinner />
           ) : (
             <PaperPlaneIcon

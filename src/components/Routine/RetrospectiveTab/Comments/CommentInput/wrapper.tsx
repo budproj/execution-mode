@@ -1,11 +1,10 @@
 import { useToast } from '@chakra-ui/react'
 import { Form, Formik, FormikHelpers } from 'formik'
 import React from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import { useCreateComment } from 'src/components/Routine/hooks/setComment'
 import { User } from 'src/components/User/types'
-import { commentsAtom } from 'src/state/recoil/comments/comments'
 import { commentInputInitialValue } from 'src/state/recoil/comments/input'
 import { commentEntityToReply } from 'src/state/recoil/comments/reply-comment'
 
@@ -24,25 +23,23 @@ export interface RoutineCommentsInputInitialValues {
 }
 
 const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInputProperties) => {
-  const { comment, handleCreateComment } = useCreateComment()
+  const { handleCreateComment } = useCreateComment()
   const [inputInitialValues, setInputInitialValues] = useRecoilState(commentInputInitialValue)
   const [commentEntity, setCommentEntity] = useRecoilState(commentEntityToReply)
 
   const toast = useToast()
 
-  const entity = commentEntity ?? `${COMMENT_DOMAIN.routine}:${domainEntityId}`
-
-  const setRoutineComment = useSetRecoilState(commentsAtom)
+  const entity = commentEntity ? commentEntity : `${COMMENT_DOMAIN.routine}:${domainEntityId}`
 
   const handleSubmit = async (
     values: RoutineCommentsInputInitialValues,
     actions: FormikHelpers<RoutineCommentsInputInitialValues>,
   ) => {
     if (values.text) {
-      handleCreateComment({ content: values.text, entity })
-      setRoutineComment((previousComments) => [...previousComments, comment])
+      await handleCreateComment({ content: values.text, entity })
       setInputInitialValues({ text: '' })
       setCommentEntity('')
+      actions.setSubmitting(false)
       actions.resetForm()
     } else {
       toast({
@@ -53,9 +50,9 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
   }
 
   return (
-    <Formik enableReinitialize initialValues={inputInitialValues} onSubmit={handleSubmit}>
+    <Formik initialValues={inputInitialValues} onSubmit={handleSubmit}>
       <Form>
-        <CustomMentionsInput userThatWillBeAnswered={routineUser} isLoading={Boolean(comment)} />
+        <CustomMentionsInput userThatWillBeAnswered={routineUser} />
       </Form>
     </Formik>
   )
