@@ -50,7 +50,7 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
   }
 
   return (
-    <Formik initialValues={inputInitialValues} onSubmit={handleSubmit}>
+    <Formik enableReinitialize initialValues={inputInitialValues} onSubmit={handleSubmit}>
       <Form>
         <CustomMentionsInput userThatWillBeAnswered={routineUser} />
       </Form>
