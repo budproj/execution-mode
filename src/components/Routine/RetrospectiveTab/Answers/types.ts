@@ -23,7 +23,7 @@ export type routineAnswer = {
 }
 
 export interface AnswerDetails {
-  userId: User['id']
+  user: Partial<User>
   history: answerHistory[]
   answers: routineAnswer[]
 }
