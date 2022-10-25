@@ -83,10 +83,10 @@ export const AreaChartComponent = ({
     <Box flex="1">
       <ResponsiveContainer minWidth={200} height={200} width="99%">
         <AreaChart
-          data={data?.map((a) => {
+          data={data?.map((weekData) => {
             return {
-              ...a,
-              timestamp: format(parseISO(a.timestamp), 'dd/MM/yyyy'),
+              ...weekData,
+              timestamp: format(parseISO(weekData.timestamp), 'dd/MM/yyyy'),
             }
           })}
         >

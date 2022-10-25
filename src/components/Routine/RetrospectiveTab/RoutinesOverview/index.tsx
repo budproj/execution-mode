@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prefer-query-selector */
 /* eslint-disable prefer-const */
 import { Box, Divider, Flex, GridItem, Text } from '@chakra-ui/react'
-import { format, isSameDay, parseISO } from 'date-fns'
+import { addMinutes, format, isSameDay, parseISO } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -34,8 +34,14 @@ interface RoutinesOverviewProperties {
   week: number
 }
 
+function formatDate(date: Date) {
+  return parseISO(format(addMinutes(date, date.getTimezoneOffset()), 'yyyy-MM-dd HH:mm:ss'))
+}
+
 export const getCurrentDataByTimeStamp = (data: AverageData[], timestamp: string) => {
-  return data.findIndex((data) => isSameDay(parseISO(data.timestamp), parseISO(timestamp)))
+  return data.findIndex((data) =>
+    isSameDay(formatDate(parseISO(data.timestamp)), parseISO(timestamp)),
+  )
 }
 
 const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewProperties) => {
