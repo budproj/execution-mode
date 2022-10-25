@@ -131,7 +131,7 @@ export const RadialChartComponent = ({
       <CustomizedPieText
         title={title}
         size={size}
-        data={50}
+        data={data}
         icon={icon}
         numberColor={numberColor}
         percentage={percentage}
