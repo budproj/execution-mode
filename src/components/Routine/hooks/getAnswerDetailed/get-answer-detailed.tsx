@@ -17,7 +17,7 @@ export const useAnswerDetailed = (): useAnswerDetailedProperties => {
 
   const getAnswerDetailed = async (answerId: AnswerType['id']) => {
     const { routines } = await servicesPromise
-    const { data } = await routines.get<AnswerDetails>(`answer?answerId=${answerId}`)
+    const { data } = await routines.get<AnswerDetails>(`answer/${answerId}`)
 
     if (data) {
       setAnswerDetailed(data)
