@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Avatar, Box, HStack, IconButton, Spinner, Stack } from '@chakra-ui/react'
+import { Avatar, Box, Divider, HStack, IconButton, Spinner, Stack } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -78,7 +78,8 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
   }, [users])
 
   return (
-    <Stack w="100%" alignItems="center" mt={2}>
+    <Stack alignItems="center" mt={2} paddingX={6} width="full">
+      <Divider />
       <HStack pb={6} width="100%" spacing={4} justifyContent="space-between">
         <Avatar width="45px" height="45px" src={user?.picture} />
         <Box

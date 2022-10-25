@@ -5,8 +5,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { commentsAtom } from 'src/state/recoil/comments/comments'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 
-import RoutineComments from '../../Comments'
-import RoutineCommentsInput from '../../Comments/CommentInput/wrapper'
 import { AnswerType } from '../../retrospective-tab-content'
 
 import RoutineAnswerCard from './AnswerCards'
@@ -44,8 +42,6 @@ const AnswerContent = ({ answerId }: AnswerContent) => {
         )}
       </VStack>
       <Divider />
-      <RoutineComments answerOwner={answerDetailed.user.firstName} />
-      <RoutineCommentsInput routineUser={answerDetailed.user.firstName} domainEntityId={answerId} />
     </>
   )
 }
