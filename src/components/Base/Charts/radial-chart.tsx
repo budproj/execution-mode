@@ -45,9 +45,12 @@ const CustomizedPieText = ({
       <Flex
         flexDirection="column"
         position="absolute"
-        top={size === 'lg' ? 130 : 71}
-        left={size === 'lg' ? 95 : 77}
+        // Top={size === 'lg' ? 130 : 71}
+        // Left={size === 'lg' ? 95 : 77}
         textAlign="center"
+        left="50%"
+        bottom="-2"
+        transform="translate(-50%, -50%)"
       >
         <Text
           marginTop="21px"
@@ -128,7 +131,7 @@ export const RadialChartComponent = ({
       <CustomizedPieText
         title={title}
         size={size}
-        data={data}
+        data={50}
         icon={icon}
         numberColor={numberColor}
         percentage={percentage}
