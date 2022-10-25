@@ -42,7 +42,7 @@ const FeelingAnswerCard = ({ answerData }: FeelingAnswerCardProperties) => {
         <Box textAlign="center" bg="new-gray.100" width={28} height={28} pt={5} borderRadius={6}>
           {getEmoji({ felling: Number(actualFeeling?.value), size: '50px' })}
           <Text fontSize={10} color="new-gray.600">
-            Essa semana
+            {intl.formatMessage(messages.subtitleFeelingOnThisWeek)}
           </Text>
         </Box>
       </Flex>

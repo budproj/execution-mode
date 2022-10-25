@@ -82,7 +82,7 @@ const CustomMentionsInput = ({
   }, [users])
 
   return (
-    <Stack w="100%" paddingX={10} alignItems="center">
+    <Stack w="100%" alignItems="center">
       <Divider mb={2} />
       <HStack pb={6} width="100%" spacing={4} justifyContent="space-between">
         <Avatar width="45px" height="45px" src={user?.picture} />
@@ -93,6 +93,7 @@ const CustomMentionsInput = ({
           wordBreak="break-word"
           transition="0.2s box-shadow ease-in"
           overflow="visible"
+          position="relative"
           fontSize="md"
           borderColor={isOnFocus ? 'brand.500' : 'gray.200'}
           boxShadow={isOnFocus ? '0 0 0 1px #6F6EFF' : 'none'}
@@ -173,8 +174,8 @@ const CustomMentionsInput = ({
             }
             type="submit"
             position="absolute"
-            right={32}
-            bottom="4.3rem"
+            right={2}
+            bottom="0.1rem"
             color="gray.200"
             aria-label={intl.formatMessage(iconMessages.paperPlaneIconDesc)}
             _hover={{

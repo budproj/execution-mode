@@ -2,8 +2,8 @@ import { User } from 'src/components/User/types'
 
 export type answerHistory = {
   id?: string
-  startDate: Date
-  finishDate: Date
+  startDate: string
+  finishDate: string
 }
 
 type answerValue = {

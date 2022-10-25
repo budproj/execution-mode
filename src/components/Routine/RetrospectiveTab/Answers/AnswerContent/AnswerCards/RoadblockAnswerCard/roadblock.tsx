@@ -1,13 +1,25 @@
 import { Circle, Divider, Flex, HStack, List, ListItem, Text, VStack } from '@chakra-ui/react'
+import styled from '@emotion/styled'
+import { parseISO } from 'date-fns'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { PauseIcon } from 'src/components/Icon'
+import CheckBoldIcon from 'src/components/Icon/CheckBold'
 
 import { routineAnswer } from '../../../types'
+import { getDateFromUTCDate } from '../../../utils'
 import AnswerCardBase from '../base/answer-card'
 
 import messages from './messages'
+
+const DashIcon = styled.span`
+  display: inline-block;
+  background-color: white;
+  width: 8px;
+  height: 2px;
+  border-radius: 5px;
+`
 
 interface RoadblockAnswerCardProperties {
   answerData: routineAnswer
@@ -27,8 +39,7 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
   }
 
   const answerDataValues = answerData.values ?? []
-
-  const actual = answerDataValues[answerDataValues.length - 2]
+  const currentAnswer = answerDataValues[answerDataValues.length - 2]
 
   return (
     <AnswerCardBase>
@@ -67,56 +78,54 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
             zIndex={2}
             width="80%"
           />
-          {answerData.values?.map((answer, index, array) => {
+          {answerDataValues.slice(0, -1).map((answer) => {
             return (
-              index < array.length - 1 && (
-                <ListItem
-                  key={answer.timestamp}
-                  zIndex={3}
-                  display="flex"
-                  flexDir="column"
-                  alignItems="center"
-                >
-                  {answer.value ? (
-                    answer.value === 'y' ? (
-                      <PauseIcon
-                        desc={intl.formatMessage(messages.pauseIconDesc)}
-                        w={7}
-                        h={7}
-                        coloumnStrokeWidth={0.2}
-                        circleStrokeWidth={0}
-                        stroke="white"
-                      />
-                    ) : (
-                      <Circle
-                        bg="new-gray.500"
-                        size={6}
-                        lineHeight="none"
-                        color="white"
-                        fontSize={10}
-                        fontWeight="black"
-                      >
-                        <span>&#10003;</span>
-                      </Circle>
-                    )
+              <ListItem
+                key={answer.timestamp}
+                zIndex={3}
+                display="flex"
+                flexDir="column"
+                alignItems="center"
+              >
+                {answer.value ? (
+                  answer.value === 'y' ? (
+                    <PauseIcon
+                      desc={intl.formatMessage(messages.pauseIconDesc)}
+                      w={7}
+                      h={7}
+                      coloumnStrokeWidth={0.2}
+                      circleStrokeWidth={0}
+                      stroke="white"
+                    />
                   ) : (
                     <Circle
                       bg="new-gray.500"
                       size={6}
                       lineHeight="none"
                       color="white"
-                      cursor="default"
                       fontSize={10}
                       fontWeight="black"
                     >
-                      <span>&#x2715;</span>
+                      <CheckBoldIcon desc="tete" fill="white" />
                     </Circle>
-                  )}
-                  <Text fontSize={10} color="new-gray.600">
-                    {formatedDate(new Date(answer.timestamp))}
-                  </Text>
-                </ListItem>
-              )
+                  )
+                ) : (
+                  <Circle
+                    bg="new-gray.500"
+                    size={6}
+                    lineHeight="none"
+                    color="white"
+                    cursor="default"
+                    fontSize={10}
+                    fontWeight="black"
+                  >
+                    <DashIcon />
+                  </Circle>
+                )}
+                <Text fontSize={10} color="new-gray.600">
+                  {formatedDate(getDateFromUTCDate(parseISO(answer.timestamp)))}
+                </Text>
+              </ListItem>
             )
           })}
         </List>
@@ -129,7 +138,9 @@ const RoadblockAnswerCard = ({ answerData }: RoadblockAnswerCardProperties) => {
           borderRadius={6}
         >
           <Text fontSize={18} lineHeight={0} fontWeight="bold" color="purple.500">
-            {actual.value === 'y' ? intl.formatMessage(messages.barrierStatusOnThisWeek) : 'Ok'}
+            {currentAnswer?.value === 'y'
+              ? intl.formatMessage(messages.barrierStatusOnThisWeek)
+              : 'Ok'}
           </Text>
           <Text lineHeight={0} pt={4} fontSize={10} color="new-gray.600">
             {intl.formatMessage(messages.subtitleBarrierStatusOnThisWeek)}

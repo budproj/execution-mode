@@ -40,7 +40,7 @@ const ProductivityAnswerCard = ({ answerData }: ProductivityAnswerCardProperties
             {actualProductivity?.value}
           </span>
           <Text fontSize={10} color="new-gray.600">
-            Essa semana
+            {intl.formatMessage(messages.subtitleProductivityOnThisWeek)}
           </Text>
         </Box>
       </Flex>

@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Box, Flex, Stack } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
@@ -25,11 +26,10 @@ export interface ExploreTeamPageProperties extends PageProperties {
 
 const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   const intl = useIntl()
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState(
     intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
   )
-
-  const [answerQuery, setAnswerQuery] = useState<string>('')
 
   const tabs = new Set([
     intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
@@ -41,18 +41,17 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
     { variables: { teamId } },
   )
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    const { hash } = window.location
-    const hashedLocation = hash.replace('#', '')
+    const { query: routerQuery } = router
+    const routerTab = Array.isArray(routerQuery?.activeTab)
+      ? routerQuery?.activeTab[0]
+      : routerQuery?.activeTab ?? ''
 
-    const [tab, query] = hashedLocation.split('?')
-    setAnswerQuery(query ?? '')
-
-    if (tab && tabs.has(tab) && tab !== activeTab) {
-      setActiveTab(tab)
+    if (tabs.has(routerTab) && routerTab !== activeTab) {
+      setActiveTab(routerTab)
     }
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router])
 
   const [loadTeamOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const metaTitleLoadingFallback = intl.formatMessage(messages.metaTitleLoadingFallback)
@@ -102,12 +101,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
             </Stack>
           </Stack>
         </Stack>
-        <ExploreTeamTabs
-          activeTab={activeTab}
-          teamId={teamId}
-          answerQuery={answerQuery}
-          isLoading={isLoading}
-        />
+        <ExploreTeamTabs activeTab={activeTab} teamId={teamId} isLoading={isLoading} />
       </Flex>
     </ApolloQueryErrorBoundary>
   )

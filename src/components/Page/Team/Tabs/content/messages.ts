@@ -6,6 +6,9 @@ type ExploreTeamTabsContentMessage =
   | 'tabRetrospectiveAnswerButton'
   | 'learnMoreRetrospectiveMessage'
   | 'learnMoreRetrospectiveIcon'
+  | 'routineSettingsActive'
+  | 'routineSettingsInactive'
+  | 'routineSettingsButton'
 
 export default defineMessages<ExploreTeamTabsContentMessage>({
   tabRetrospectivePageTitle: {
@@ -16,8 +19,8 @@ export default defineMessages<ExploreTeamTabsContentMessage>({
 
   tabRetrospectivePageDescription: {
     defaultMessage:
-      'Compartilhe suas as prioridades, conquistas e barreiras com seu time. Acompanhe e interaja com seus colegas sobre a jornada deles. {link}',
-    id: 'fSrztQ',
+      'Compartilhe suas as prioridades, conquistas e barreiras com seu time. Acompanhe e interaja com seus colegas sobre a jornada deles.',
+    id: 'kAwViv',
     description: 'Description of the content of the Retrospective tab on the teams page.',
   },
 
@@ -39,5 +42,23 @@ export default defineMessages<ExploreTeamTabsContentMessage>({
     id: 'how6b8',
     description:
       'A right arrow icon, used in the context of a link that redirects the user to the page where the retrospective routine is discussed.',
+  },
+
+  routineSettingsActive: {
+    defaultMessage: 'Lembrete ativo',
+    id: 'pbBzqW',
+    description: 'Message displayed when the routine notifications are active.',
+  },
+
+  routineSettingsInactive: {
+    defaultMessage: 'Lembrete inativo',
+    id: 'Wk0KQD',
+    description: 'Message displayed when the routine notifications are inactive.',
+  },
+
+  routineSettingsButton: {
+    defaultMessage: 'Routine notification settings button',
+    id: 'X+heBq',
+    description: 'Label for routine notification settings button',
   },
 })

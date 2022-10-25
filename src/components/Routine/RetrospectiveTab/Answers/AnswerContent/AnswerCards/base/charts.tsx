@@ -1,7 +1,10 @@
 import { Box, useToken } from '@chakra-ui/react'
+import { parseISO } from 'date-fns'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis } from 'recharts'
+
+import { getDateFromUTCDate } from '../../../utils'
 
 export type RoutineChartData = {
   value: string
@@ -31,8 +34,10 @@ const RoutineChart = ({ data, tooltipTitle, principalColor }: ProgressHistoryCha
 
   const formatedData = data.map((item) => ({
     progress: Number(item.value),
-    date: `${intl.formatDate(new Date(item.timestamp), { day: 'numeric' })}/${
-      intl.formatDate(new Date(item.timestamp), { month: 'short' }).split('.')[0]
+    date: `${intl.formatDate(getDateFromUTCDate(parseISO(item.timestamp)), { day: 'numeric' })}/${
+      intl
+        .formatDate(getDateFromUTCDate(parseISO(item.timestamp)), { month: 'short' })
+        .split('.')[0]
     }`,
   }))
 

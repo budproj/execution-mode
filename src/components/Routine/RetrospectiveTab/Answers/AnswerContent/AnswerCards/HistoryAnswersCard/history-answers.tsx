@@ -1,22 +1,22 @@
 import { Button, Circle, Divider, Flex, List, ListItem, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import { format, parseISO } from 'date-fns'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
+// Import { useSetRecoilState } from 'recoil'
 
-import { IntlLink } from 'src/components/Base'
 import { ArrowRight, GraphicIcon } from 'src/components/Icon'
-import { Team } from 'src/components/Team/types'
+import { answerHistory } from 'src/components/Routine/RetrospectiveTab/Answers/types'
+import { getDateFromUTCDate } from 'src/components/Routine/RetrospectiveTab/Answers/utils'
+// Import { routineDatesRangeAtom } from 'src/state/recoil/routine/routine-dates-range'
 
-import { AnswerType } from '../../../../retrospective-tab-content'
-import { answerHistory } from '../../../types'
 import AnswerCardBase from '../base/answer-card'
 
 import messages from './messages'
 
 interface HistoryAnswersProperties {
   answers: answerHistory[]
-  teamId: Team['id']
 }
 
 const StyledButton = styled(Button)`
@@ -26,7 +26,7 @@ const StyledButton = styled(Button)`
   height: 40px;
 `
 
-const HistoryAnswers = ({ answers, teamId }: HistoryAnswersProperties) => {
+const HistoryAnswers = ({ answers }: HistoryAnswersProperties) => {
   const intl = useIntl()
   const router = useRouter()
 
@@ -43,8 +43,25 @@ const HistoryAnswers = ({ answers, teamId }: HistoryAnswersProperties) => {
   const lastRoutine = answers[answers.length - 1]
   const previousRoutineAnswered = answers[answers.length - 3]
 
-  const handlePushToAnswer = async (answerId: AnswerType['id']) =>
-    router.push(`/explore/${teamId}#retrospectiva?answerId=${answerId}`)
+  const handlePushToAnswer = (answer: answerHistory) => {
+    if (answer.id) {
+      const parsedFinishDate = parseISO(answer.finishDate)
+      const parsedStartDate = parseISO(answer.startDate)
+
+      router.push(
+        {
+          query: {
+            ...(router?.query ?? {}),
+            before: format(getDateFromUTCDate(parsedFinishDate), 'dd/MM/yyyy'),
+            after: format(getDateFromUTCDate(parsedStartDate), 'dd/MM/yyyy'),
+            answerId: answer.id,
+          },
+        },
+        undefined,
+        { shallow: true },
+      )
+    }
+  }
 
   return (
     <AnswerCardBase paddingTop={0}>
@@ -90,39 +107,21 @@ const HistoryAnswers = ({ answers, teamId }: HistoryAnswersProperties) => {
                   display="flex"
                   flexDir="column"
                   alignItems="center"
+                  onClick={() => handlePushToAnswer(answer)}
                 >
-                  {answer.id ? (
-                    <IntlLink
-                      passHref
-                      href={`/explore/${teamId}#retrospectiva?answerId=${answer.id}`}
-                    >
-                      <Circle
-                        size={circleSize}
-                        lineHeight="none"
-                        color="white"
-                        fontSize={fontSize}
-                        fontWeight="black"
-                        bg={bgColor}
-                        cursor="pointer"
-                      >
-                        <span>&#10003;</span>
-                      </Circle>
-                    </IntlLink>
-                  ) : (
-                    <Circle
-                      bg="new-gray.500"
-                      size={circleSize}
-                      lineHeight="none"
-                      color="white"
-                      cursor="default"
-                      fontSize={fontSize}
-                      fontWeight="black"
-                    >
-                      <span>&#x2715;</span>
-                    </Circle>
-                  )}
+                  <Circle
+                    bg={answer.id ? bgColor : 'new-gray.500'}
+                    cursor={answer.id ? 'pointer' : 'default'}
+                    size={circleSize}
+                    lineHeight="none"
+                    color="white"
+                    fontSize={fontSize}
+                    fontWeight="black"
+                  >
+                    {answer.id ? <span>&#10003;</span> : <span>&#x2715;</span>}
+                  </Circle>
                   <Text fontSize={10} color="new-gray.600">
-                    {formatedDate(answer.startDate)}
+                    {formatedDate(parseISO(answer.startDate))}
                   </Text>
                 </ListItem>
               )
@@ -132,7 +131,7 @@ const HistoryAnswers = ({ answers, teamId }: HistoryAnswersProperties) => {
         <Flex gap={3} width={28}>
           <StyledButton
             isDisabled={!previousRoutineAnswered.id}
-            onClick={async () => handlePushToAnswer(previousRoutineAnswered?.id ?? '')}
+            onClick={() => handlePushToAnswer(previousRoutineAnswered)}
           >
             <ArrowRight
               fill="new-gray.700"
@@ -143,7 +142,7 @@ const HistoryAnswers = ({ answers, teamId }: HistoryAnswersProperties) => {
           <StyledButton
             isDisabled={!lastRoutine.id}
             style={{ transform: 'rotate(180deg)' }}
-            onClick={async () => handlePushToAnswer(lastRoutine.id ?? '')}
+            onClick={() => handlePushToAnswer(lastRoutine)}
           >
             <ArrowRight
               fill="new-gray.700"

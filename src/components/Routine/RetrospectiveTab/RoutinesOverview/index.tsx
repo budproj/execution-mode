@@ -1,42 +1,84 @@
 /* eslint-disable unicorn/prefer-query-selector */
 /* eslint-disable prefer-const */
 import { Box, Divider, Flex, GridItem, Text } from '@chakra-ui/react'
-import React from 'react'
+import { format, isSameDay, parseISO } from 'date-fns'
+import pt from 'date-fns/locale/pt'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import MountainIcon from 'src/components/Icon/Mountain'
+import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 
 import { AreaRadialChart } from '../../../Base/Charts/index'
 
-interface RoutinesOverviewProperties {
-  answers: Array<{
-    id: string
-    user: string
-    feeling: number
-    createdAt: string
-    comments: number
-  }>
+import messages from './messages'
+
+interface AvarageData {
+  timestamp: string
+  average: number
 }
 
-const RoutinesOverview = ({ answers }: RoutinesOverviewProperties) => {
+interface OverviewData {
+  overview: {
+    feeling: AvarageData[]
+    productivity: AvarageData[]
+  }
+}
+
+export interface RoutinesOverviewProperties {
+  teamId: string
+  after: Date
+  before: Date
+  week: number
+}
+
+const getCurrentDataByTimeStamp = (data: AvarageData[], timestamp: string) => {
+  return data.findIndex((data) => isSameDay(parseISO(data.timestamp), parseISO(timestamp)))
+}
+
+const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewProperties) => {
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
+  const { servicesPromise } = useContext(ServicesContext)
+  const [answersOverview, setAnswersOverview] = useState<OverviewData | undefined>()
+
+  const getAnswersOverview = useCallback(async () => {
+    const { routines } = await servicesPromise
+    const { data: answersOverview } = await routines.get<OverviewData>(
+      `/answers/overview/${teamId}`,
+      {
+        params: { includeSubteams: false },
+      },
+    )
+
+    if (answersOverview) setAnswersOverview(answersOverview)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    getAnswersOverview()
+  }, [getAnswersOverview])
+
+  const activeDataIndex = getCurrentDataByTimeStamp(
+    answersOverview?.overview?.feeling ?? [],
+    after.toISOString(),
+  )
 
   return (
     <GridItem marginTop="31px" paddingX="30px">
       <Box>
         <Flex>
           <Text color="new-gray.900" fontSize="28px" fontWeight="500">
-            Visão geral do time
+            {intl.formatMessage(messages.teamOverviewTitle)}
           </Text>
           <Box marginLeft="auto" textAlign="right">
             <Text color="new-gray.800" fontSize="18px" fontWeight="500">
-              Semana 29
+              {intl.formatMessage(messages.weekText)} {week}
             </Text>
             <Text color="new-gray.600" fontSize="16px" fontWeight="450">
-              18/jul a 24/jul
+              {format(new Date(after), 'dd/MMM', { locale: pt })} a{' '}
+              {format(new Date(before), 'dd/MMM', { locale: pt })}
             </Text>
           </Box>
         </Flex>
@@ -44,19 +86,26 @@ const RoutinesOverview = ({ answers }: RoutinesOverviewProperties) => {
         <Divider marginY="13px" borderColor="new-gray.400" />
 
         <AreaRadialChart
-          label="SENTIMENTO"
+          label={intl.formatMessage(messages.feelingGraphTitle)}
           areaStartColor="#FFD964E5"
           areaEndColor="#FFD964E5"
           strokeLineColor="#F1BF25"
-          icon={getEmoji({ felling: 5, size: '50px' })}
+          icon={getEmoji({
+            felling: answersOverview?.overview?.feeling[activeDataIndex]?.average ?? 5,
+            size: '50px',
+          })}
           numberColor="#ffc658"
           progressColor="#ffc658"
+          highLightIndex={activeDataIndex}
+          data={answersOverview?.overview?.feeling}
         />
         <AreaRadialChart
-          label="PRODUTIVIDADE"
+          label={intl.formatMessage(messages.productivityGraphTitle)}
           strokeLineColor="#4BACF9"
           areaEndColor="#4BACF9B2"
           areaStartColor="#4BACF9B2"
+          highLightIndex={activeDataIndex}
+          data={answersOverview?.overview?.productivity}
           icon={
             <Flex
               background="#4BACF9"
@@ -72,7 +121,7 @@ const RoutinesOverview = ({ answers }: RoutinesOverviewProperties) => {
           numberColor="#4BACF9"
           progressColor="#4BACF9"
         />
-        <AreaRadialChart
+        {/* <AreaRadialChart
           label="CLAREZA DE ESTRATÉGIA"
           areaStartColor="#6F6EFF"
           areaEndColor="#8C8BFF26"
@@ -91,7 +140,7 @@ const RoutinesOverview = ({ answers }: RoutinesOverviewProperties) => {
           }
           numberColor="#6F6EFF"
           progressColor="#6F6EFF"
-        />
+        /> */}
       </Box>
     </GridItem>
   )

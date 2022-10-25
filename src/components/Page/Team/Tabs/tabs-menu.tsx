@@ -27,10 +27,19 @@ const StyledTab = styled(Tab)`
 
 const TabsMenu = ({ teamId }: TabsMenuProperties) => {
   const intl = useIntl()
-  const { push } = useRouter()
+  const router = useRouter()
 
   const handleClick = (hashTab: string) => {
-    push(`/explore/${teamId}#${hashTab.toLocaleLowerCase()}`)
+    router.push(
+      {
+        query: {
+          id: teamId,
+          activeTab: hashTab.toLocaleLowerCase(),
+        },
+      },
+      undefined,
+      { shallow: true },
+    )
   }
 
   return (

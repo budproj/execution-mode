@@ -1,9 +1,7 @@
-import { Box, Divider, Stack, VStack } from '@chakra-ui/react'
-import styled from '@emotion/styled'
+import { Box, Divider, VStack } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { Team } from 'src/components/Team/types'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 
 import RoutineComments from '../../Comments'
@@ -12,54 +10,35 @@ import { AnswerType } from '../../retrospective-tab-content'
 
 import RoutineAnswerCard from './AnswerCards'
 import HistoryAnswers from './AnswerCards/HistoryAnswersCard/history-answers'
+import { UserAnswer } from './AnswerCards/UserAnswer'
 
 type AnswerContent = {
-  teamId: Team['id']
   answerId: AnswerType['id']
 }
 
-const ScroolableVStack = styled(VStack)`
-  max-height: 120vh;
-  height: 100%;
-  margin-right: 8px;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    margin: 12px 0px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #b5c0db;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: #d9e2f7;
-  }
-`
-
-const AnswerContent = ({ teamId, answerId }: AnswerContent) => {
+const AnswerContent = ({ answerId }: AnswerContent) => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
 
   return (
-    <Stack>
-      <ScroolableVStack align="flex-start" padding={10}>
+    <>
+      <UserAnswer user={answerDetailed.user} />
+
+      <Divider borderColor="new-gray.400" />
+
+      <VStack align="flex-start" padding={10}>
         {answerDetailed.history.length > 0 && (
           <Box>
-            <HistoryAnswers teamId={teamId} answers={answerDetailed.history} />
+            <HistoryAnswers answers={answerDetailed.history} />
             {answerDetailed.answers.map((answer) => {
               return <RoutineAnswerCard key={answer.id} answerData={answer} />
             })}
           </Box>
         )}
-        <Divider />
-        <RoutineComments />
-      </ScroolableVStack>
+      </VStack>
+      <Divider />
+      <RoutineComments />
       <RoutineCommentsInput routineUser={answerDetailed.user.firstName} domainEntityId={answerId} />
-    </Stack>
+    </>
   )
 }
 

@@ -1,101 +1,116 @@
 import { Flex, Text, Avatar, AvatarBadge, Box } from '@chakra-ui/react'
 import { format, isToday } from 'date-fns'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { IntlLink } from 'src/components/Base'
 import { Clock } from 'src/components/Icon'
-import ThinkingBalloon from 'src/components/Icon/ThinkingBalloon'
 import { useGetEmoji } from 'src/components/Routine/hooks'
-import { Team } from 'src/components/Team/types'
 import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
 import messages from './messages'
 
-interface AnswerRowComponentProperties {
-  teamId: Team['id']
-  answer: {
-    id: string
-    user: string
-    feeling: number
-    createdAt: string
-    comments: number
-  }
+interface Answer {
+  id: string
+  name: string
+  picture: string
+  latestStatusReply: string
+  timestamp: Date
 }
 
-const AnswerRowComponent = ({ teamId, answer }: AnswerRowComponentProperties) => {
+interface AnswerRowComponentProperties {
+  answer: Answer
+}
+
+const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
   const intl = useIntl()
-  const [formattedRelativeDate] = useRelativeDate(new Date(answer.createdAt))
-  const isTheDateToday = isToday(new Date(answer.createdAt))
+  const router = useRouter()
+  const [formattedRelativeDate] = useRelativeDate(new Date(answer.timestamp))
+  const isTheDateToday = isToday(new Date(answer.timestamp))
 
   const { getEmoji } = useGetEmoji()
 
+  const setActiveAnswer = (answerId: Answer['id']) => {
+    if (answerId) {
+      router.push(
+        {
+          query: {
+            ...(router?.query ?? {}),
+            answerId,
+          },
+        },
+        undefined,
+        { shallow: true },
+      )
+    }
+  }
+
   return (
-    <IntlLink passHref href={`/explore/${teamId}#retrospectiva?answerId=${answer.id}`}>
-      <Flex key={answer.id} marginBottom={5}>
-        <Avatar
-          width="45px"
-          height="45px"
-          src="https://static.wikia.nocookie.net/rickandmorty/images/a/a6/Rick_Sanchez.png"
-          marginRight="15px"
+    <Flex
+      key={answer.id}
+      cursor={answer.id ? 'pointer' : 'auto'}
+      marginBottom={5}
+      onClick={() => setActiveAnswer(answer.id)}
+    >
+      <Avatar width="45px" height="45px" src={answer.picture} marginRight="15px">
+        <AvatarBadge
+          border="2px solid white"
+          boxSize="20px"
+          bgColor="new-gray.200"
+          padding={answer.latestStatusReply ? undefined : '10px'}
         >
-          <AvatarBadge border="10.5px solid white" boxSize="20px">
-            {true ? (
-              getEmoji({ felling: answer.feeling, size: '20px' })
-            ) : (
+          {answer.latestStatusReply ? (
+            getEmoji({ felling: Number(answer.latestStatusReply), size: '20px' })
+          ) : (
+            <Clock
+              desc={intl.formatMessage(messages.clockIconDescription)}
+              fill="new-gray.200"
+              stroke="#99A4C2"
+            />
+          )}
+        </AvatarBadge>
+      </Avatar>
+      <Box>
+        {answer.timestamp ? (
+          <>
+            <Text color="new-gray.900" fontWeight="450" fontSize="16px">
+              {answer.name}
+            </Text>
+            <Text color="new-gray.700">
+              <Clock desc={intl.formatMessage(messages.clockIconDescription)} fill="new-gray.300" />{' '}
+              {isTheDateToday
+                ? `${intl.formatMessage(messages.hourPrefix, { today: isTheDateToday })} ${format(
+                    new Date(answer.timestamp),
+                    "kk'h'mm",
+                  )}`
+                : `${formattedRelativeDate ? formattedRelativeDate : ''} ${intl.formatMessage(
+                    messages.hourPrefix,
+                    { today: isTheDateToday },
+                  )} ${format(new Date(answer.timestamp), "kk'h'mm")} `}
+              {/* <ThinkingBalloon
+                marginLeft={5}
+                desc={intl.formatMessage(messages.thinkingBalloonDescription)}
+              />{' '}
+              5 */}
+            </Text>
+          </>
+        ) : (
+          <>
+            <Text color="new-gray.600" fontWeight="450" fontSize="16px">
+              {answer.name}
+            </Text>
+            <Text color="new-gray.500">
               <Clock
                 desc={intl.formatMessage(messages.clockIconDescription)}
                 fill="new-gray.200"
                 stroke="#99A4C2"
-              />
-            )}
-          </AvatarBadge>
-        </Avatar>
-        <Box>
-          {true ? (
-            <>
-              <Text color="new-gray.900" fontWeight="450" fontSize="16px">
-                {answer.user}
-              </Text>
-              <Text color="new-gray.700">
-                <Clock
-                  desc={intl.formatMessage(messages.clockIconDescription)}
-                  fill="new-gray.300"
-                />
-                {isTheDateToday
-                  ? `${intl.formatMessage(messages.hourPrefix, { today: isTheDateToday })} ${format(
-                      new Date(answer.createdAt),
-                      "kk'h'mm",
-                    )}`
-                  : `${formattedRelativeDate ? formattedRelativeDate : ''} ${intl.formatMessage(
-                      messages.hourPrefix,
-                      { today: isTheDateToday },
-                    )} ${format(new Date(answer.createdAt), "kk'h'mm")} `}
-                <ThinkingBalloon
-                  marginLeft={5}
-                  desc={intl.formatMessage(messages.thinkingBalloonDescription)}
-                />
-                {answer.comments}
-              </Text>
-            </>
-          ) : (
-            <>
-              <Text color="new-gray.600" fontWeight="450" fontSize="16px">
-                {answer.user}
-              </Text>
-              <Text color="new-gray.500">
-                <Clock
-                  desc={intl.formatMessage(messages.clockIconDescription)}
-                  fill="new-gray.200"
-                  stroke="#99A4C2"
-                />
-                sem resposta
-              </Text>
-            </>
-          )}
-        </Box>
-      </Flex>
-    </IntlLink>
+              />{' '}
+              {intl.formatMessage(messages.noAnswerText)}
+            </Text>
+          </>
+        )}
+      </Box>
+    </Flex>
   )
 }
 

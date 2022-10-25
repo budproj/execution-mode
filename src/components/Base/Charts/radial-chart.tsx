@@ -1,25 +1,18 @@
 import { Flex, Text, Box } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 import { RadialBar, RadialBarChart, ResponsiveContainer } from 'recharts'
 
-const data = [
-  {
-    name: 'base',
-    pv: 5,
-    opacity: 0,
-  },
-  {
-    name: 'unknow',
-    pv: 4.6,
-  },
-]
+import messages from './messages'
 
 interface CustomizedPieTextProperties {
   numberColor: string
   icon?: JSX.Element
+  data?: number
 }
 
-const CustomizedPieText = ({ numberColor, icon }: CustomizedPieTextProperties) => {
+const CustomizedPieText = ({ numberColor, icon, data }: CustomizedPieTextProperties) => {
+  const intl = useIntl()
   return (
     <>
       <Flex position="absolute" top={90} left={125}>
@@ -27,10 +20,10 @@ const CustomizedPieText = ({ numberColor, icon }: CustomizedPieTextProperties) =
       </Flex>
       <Flex flexDirection="column" position="absolute" top={130} left={95} textAlign="center">
         <Text marginTop="21px" fontSize="19px" fontWeight="500" color={numberColor}>
-          4.6
+          {data}
         </Text>
         <Text marginTop="10px" color="new-gray.500" fontWeight="450">
-          Média da semana
+          {intl.formatMessage(messages.weekMean)}
         </Text>
       </Flex>
       <Text color="new-gray.600" position="absolute" top={160} left={67}>
@@ -43,17 +36,31 @@ const CustomizedPieText = ({ numberColor, icon }: CustomizedPieTextProperties) =
   )
 }
 
-interface PieChartComponentProperties {
+interface RadialChartProperties {
   progressColor: string
   numberColor: string
   icon?: JSX.Element
+  data?: number
 }
 
-export const PieChartComponent = ({
+export const RadialChartComponent = ({
   progressColor = '#ffc658',
   numberColor = 'yellow.600',
   icon,
-}: PieChartComponentProperties) => {
+  data,
+}: RadialChartProperties) => {
+  const radiaChartData = [
+    {
+      name: 'base',
+      pv: 5,
+      opacity: 0,
+    },
+    {
+      name: 'unknow',
+      pv: data ?? 0,
+    },
+  ]
+
   return (
     <Box position="relative">
       <ResponsiveContainer minWidth={300} height={240}>
@@ -65,12 +72,12 @@ export const PieChartComponent = ({
           barSize={15}
           startAngle={180}
           endAngle={0}
-          data={data}
+          data={radiaChartData}
         >
           <RadialBar background cornerRadius={30} dataKey="pv" fill={progressColor} />
         </RadialBarChart>
       </ResponsiveContainer>
-      <CustomizedPieText icon={icon} numberColor={numberColor} />
+      <CustomizedPieText data={data} icon={icon} numberColor={numberColor} />
     </Box>
   )
 }
