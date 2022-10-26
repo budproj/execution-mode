@@ -16,12 +16,8 @@ interface MetricTeamRowProperties {
 
 const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
   const { getEmoji } = useGetEmoji()
-
   const intl = useIntl()
-
   const answersOverview = getTeamMetrics(team?.id)
-
-  console.log({ answersOverview, team: team?.name })
 
   return (
     <>
@@ -56,12 +52,12 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
             alignItems="center"
             fontWeight="700"
             fontSize="16px"
-            color="yellow.600"
+            color="blue.400"
             display="flex"
             gap="5px"
           >
             <Flex
-              background="#4BACF9"
+              background="blue.400"
               width="20px"
               height="20px"
               alignItems="center"
@@ -81,26 +77,21 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
             alignItems="center"
             fontWeight="700"
             fontSize="16px"
-            color="yellow.600"
+            color="purple.500"
             display="flex"
             gap="2px"
           >
-            <Flex
-              background="transparent"
-              width="30px"
-              alignItems="center"
-              justifyContent="center"
-              borderRadius="50%"
-            >
-              <PauseIcon
-                boxSize="25px"
-                stroke="white"
-                desc={intl.formatMessage(messages.pauseIconDescription)}
-              />
-            </Flex>
-            {answersOverview?.overview?.roadblock.length > 0
-              ? answersOverview?.overview?.roadblock[0].average
-              : 0}
+            <PauseIcon
+              boxSize="25px"
+              stroke="white"
+              hasStroke={false}
+              desc={intl.formatMessage(messages.pauseIconDescription)}
+            />
+            {`${
+              answersOverview?.overview?.roadblock.length > 0
+                ? answersOverview?.overview?.roadblock[0].average
+                : 0
+            }%`}
           </Text>
         </Flex>
       </Flex>
