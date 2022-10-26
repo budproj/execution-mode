@@ -45,7 +45,7 @@ const NotificationsList = () => {
       {notifications.length > 0 ? (
         ordainedNotificationsByDate.map((notification) => (
           <Box
-            key={notification.id}
+            key={notification.messageId}
             onClick={() => dispatch({ notificationType: notification.type })}
           >
             <CardNotification
@@ -54,7 +54,7 @@ const NotificationsList = () => {
               type={notification.type}
               timestamp={notification.timestamp}
               isRead={notification.isRead}
-              id={notification.id}
+              messageId={notification.messageId}
             />
             <Divider borderColor="gray.100" />
           </Box>
