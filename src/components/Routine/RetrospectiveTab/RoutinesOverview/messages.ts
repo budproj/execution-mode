@@ -5,6 +5,7 @@ type RoutinesOverviewMessages =
   | 'weekText'
   | 'feelingGraphTitle'
   | 'productivityGraphTitle'
+  | 'productivtyIconDescription'
 
 export default defineMessages<RoutinesOverviewMessages>({
   teamOverviewTitle: {
@@ -26,5 +27,10 @@ export default defineMessages<RoutinesOverviewMessages>({
     defaultMessage: 'PRODUTIVIDADE',
     id: 'j1c4SD',
     description: 'The title of the productivity graph',
+  },
+  productivtyIconDescription: {
+    defaultMessage: 'Ícone de maleta representando o índice de produtividade',
+    id: 'ADoBmy',
+    description: 'The description of the productivty icon',
   },
 })

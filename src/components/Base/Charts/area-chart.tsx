@@ -12,6 +12,8 @@ import {
   YAxis,
 } from 'recharts'
 
+import { AverageData } from 'src/components/Routine/RetrospectiveTab/RoutinesOverview'
+
 interface CustomizedProperties {
   x: number
   y: number
@@ -64,7 +66,7 @@ interface AreaChartComponentProperties {
   areaEndColor?: string
   strokeLineColor?: string
   tooltipTitle?: string
-  data?: Array<{ timestamp: string; average: number }>
+  data?: AverageData[]
 }
 
 export const AreaChartComponent = ({
@@ -81,10 +83,10 @@ export const AreaChartComponent = ({
     <Box flex="1">
       <ResponsiveContainer minWidth={200} height={200} width="99%">
         <AreaChart
-          data={data?.map((a) => {
+          data={data?.map((weekData) => {
             return {
-              ...a,
-              timestamp: format(parseISO(a.timestamp), 'dd/MM/yyyy'),
+              ...weekData,
+              timestamp: format(parseISO(weekData.timestamp), 'dd/MM/yyyy'),
             }
           })}
         >

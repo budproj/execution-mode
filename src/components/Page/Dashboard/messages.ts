@@ -6,11 +6,13 @@ type DashboardPageMessage =
   | 'metaDescription'
   | 'yearlySummaryTitle'
   | 'quarterlySummaryTitle'
+  | 'okrOverViewTitle'
+  | 'teamsOverviewTitle'
 
 export default defineMessages<DashboardPageMessage>({
   greeting: {
-    defaultMessage: 'Bem-vind{gender, select, MALE {o} FEMALE {a} other {o}} de volta, {name} :)',
-    id: 'gODdaE',
+    defaultMessage: 'Que bom te ver de novo, {name}! :)',
+    id: 'B/fme2',
     description: 'The page title that our users should see in the dashboard page',
   },
 
@@ -37,5 +39,15 @@ export default defineMessages<DashboardPageMessage>({
     defaultMessage: 'OKRs Trimestrais {quarter}',
     id: 'nEQaGP',
     description: 'The summery title for the quarterly OKRs',
+  },
+  okrOverViewTitle: {
+    defaultMessage: 'Visão geral dos OKRs',
+    id: '7VhC49',
+    description: 'The title of the OKRs overview',
+  },
+  teamsOverviewTitle: {
+    defaultMessage: 'Visão geral dos times',
+    id: 'SK6+Sz',
+    description: 'The title of the teams overview',
   },
 })

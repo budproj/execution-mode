@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prefer-query-selector */
 /* eslint-disable prefer-const */
 import { Box, Divider, Flex, GridItem, Text } from '@chakra-ui/react'
-import { format, isSameDay, parseISO } from 'date-fns'
+import { addMinutes, format, isSameDay, parseISO } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -14,27 +14,35 @@ import { AreaRadialChart } from '../../../Base/Charts/index'
 
 import messages from './messages'
 
-interface AvarageData {
+export interface AverageData {
   timestamp: string
   average: number
+  total?: number
 }
 
-interface OverviewData {
+export interface OverviewData {
   overview: {
-    feeling: AvarageData[]
-    productivity: AvarageData[]
+    feeling: AverageData[]
+    productivity: AverageData[]
+    roadblock: AverageData[]
   }
 }
 
-export interface RoutinesOverviewProperties {
+interface RoutinesOverviewProperties {
   teamId: string
   after: Date
   before: Date
   week: number
 }
 
-const getCurrentDataByTimeStamp = (data: AvarageData[], timestamp: string) => {
-  return data.findIndex((data) => isSameDay(parseISO(data.timestamp), parseISO(timestamp)))
+function formatDate(date: Date) {
+  return parseISO(format(addMinutes(date, date.getTimezoneOffset()), 'yyyy-MM-dd HH:mm:ss'))
+}
+
+export const getCurrentDataByTimeStamp = (data: AverageData[], timestamp: string) => {
+  return data.findIndex((data) =>
+    isSameDay(formatDate(parseISO(data.timestamp)), parseISO(timestamp)),
+  )
 }
 
 const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewProperties) => {
@@ -48,7 +56,7 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
     const { data: answersOverview } = await routines.get<OverviewData>(
       `/answers/overview/${teamId}`,
       {
-        params: { includeSubteams: false },
+        params: { includeSubteams: false, before, after },
       },
     )
 
@@ -115,7 +123,10 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
               justifyContent="center"
               borderRadius="50%"
             >
-              <SuitcaseIcon boxSize="23px" desc="mudar" />
+              <SuitcaseIcon
+                boxSize="23px"
+                desc={intl.formatMessage(messages.productivtyIconDescription)}
+              />
             </Flex>
           }
           numberColor="#4BACF9"
