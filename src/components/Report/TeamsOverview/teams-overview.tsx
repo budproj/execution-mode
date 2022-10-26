@@ -1,9 +1,10 @@
 import { useQuery } from '@apollo/client'
-import { Box, Heading, Skeleton, StyleProps } from '@chakra-ui/react'
+import { Box, StyleProps } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { Cycle } from 'src/components/Cycle/types'
+import { CardHeader } from 'src/components/Report/CardHeaders'
 import { useGetGamificationDetails } from 'src/components/Team/hooks'
 import { Team } from 'src/components/Team/types'
 import { GraphQLConnection } from 'src/components/types'
@@ -48,17 +49,17 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   }, [company, loading, loadTeam])
 
   return (
-    <Box bg="white" borderRadius="lg" shadow="for-background.light" p={9} pb={4} {...rest}>
-      <Skeleton isLoaded={!loading}>
-        <Heading as="h3" size="md" mb={6} color="new-gray.900">
-          {intl.formatMessage(
-            isGameficationDisabled
-              ? messages.teamRankingTitleWithoutGamification
-              : messages.teamRankingTitle,
-            { quarter },
-          )}
-        </Heading>
-      </Skeleton>
+    <Box bg="white" borderRadius="lg" shadow="for-background.light" px={8} py={5} {...rest}>
+      <CardHeader
+        loading={loading}
+        title={intl.formatMessage(
+          isGameficationDisabled
+            ? messages.teamRankingTitleWithoutGamification
+            : messages.teamRankingTitle,
+          { quarter },
+        )}
+        subtitle={intl.formatMessage(messages.teamRankingSubTitle)}
+      />
       {orderedTeams.length === 0 ? (
         <TeamsOverviewBodyTableSkeleton />
       ) : (

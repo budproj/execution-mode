@@ -1,6 +1,4 @@
 import { Box, Text, Flex, Divider, StyleProps } from '@chakra-ui/react'
-import { format } from 'date-fns'
-import pt from 'date-fns/locale/pt'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -8,6 +6,7 @@ import { useRecoilValue } from 'recoil'
 import { RadialChartComponent } from 'src/components/Base/Charts'
 import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
+import { CardHeader } from 'src/components/Report/CardHeaders'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 import { Team } from 'src/components/Team/types'
 import { companyPreposition } from 'src/components/User/DetailedHeader/constants'
@@ -42,29 +41,27 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
   const answersOverview = getTeamMetrics(company?.id)
 
   return (
-    <Box bg="white" borderRadius="lg" shadow="for-background.light" p={9} pb={4} {...rest}>
-      <Flex marginBottom="10px" justifyContent="space-between">
-        <Box>
-          <Text fontWeight="500" fontSize="18px" color="new-gray.900">
-            {intl.formatMessage(messages.metricCardTitle, {
-              company: user?.companies?.edges[0].node.name,
-              companypreposition: companyPreposition(user?.companies?.edges[0].node.gender),
-            })}
-          </Text>
-          <Text fontWeight="400" fontSize="14px" color="new-gray.700">
-            {intl.formatMessage(messages.metricCardSubtitle)}
-          </Text>
-        </Box>
-        <Box marginTop="5px">
+    <Box bg="white" borderRadius="lg" shadow="for-background.light" px={8} py={5} {...rest}>
+      <CardHeader
+        loading={teams.length === 0}
+        title={intl.formatMessage(messages.metricCardTitle, {
+          company: user?.companies?.edges[0].node.name,
+          companypreposition: companyPreposition(user?.companies?.edges[0].node.gender),
+        })}
+        subtitle={intl.formatMessage(messages.metricCardSubtitle)}
+      >
+        <Box textAlign="right">
           <Text fontWeight="500" fontSize="14px" color="new-gray.900">
             {intl.formatMessage(messages.currentWeekTitle)}
           </Text>
           <Text fontWeight="400" fontSize="14px" color="new-gray.600">
-            {format(new Date(after), 'dd/MMM', { locale: pt })} a{' '}
-            {format(new Date(before), 'dd/MMM', { locale: pt })}
+            {intl.formatDateTimeRange(new Date(after), new Date(before), {
+              month: 'short',
+              day: 'numeric',
+            })}
           </Text>
         </Box>
-      </Flex>
+      </CardHeader>
       <Divider />
       <Flex marginTop="30px" bg="#F2F6FE" borderRadius="lg" justifyContent="space-between">
         <RadialChartComponent
