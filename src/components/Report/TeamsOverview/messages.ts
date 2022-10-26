@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type TeamOverviewMessages = 'teamRankingTitle' | 'teamRankingTitleWithoutGamification'
+type TeamOverviewMessages =
+  | 'teamRankingTitle'
+  | 'teamRankingTitleWithoutGamification'
+  | 'teamRankingSubTitle'
 
 export default defineMessages<TeamOverviewMessages>({
   teamRankingTitle: {
@@ -12,5 +15,10 @@ export default defineMessages<TeamOverviewMessages>({
     defaultMessage: 'Progresso dos Times no {quarter}',
     id: 'dH7eW3',
     description: 'Title to show on the team ranking page when gamification is disabled',
+  },
+  teamRankingSubTitle: {
+    defaultMessage: 'Progresso geral dos objetivos no ciclo trimestral atual',
+    id: 'BROY+x',
+    description: 'Subtitle to show on the team ranking page when gamification is disabled',
   },
 })
