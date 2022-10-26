@@ -28,7 +28,7 @@ export interface OverviewData {
   }
 }
 
-interface RoutinesOverviewProperties {
+export interface RoutinesOverviewProperties {
   teamId: string
   after: Date
   before: Date
