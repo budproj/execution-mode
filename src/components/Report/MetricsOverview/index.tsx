@@ -38,7 +38,9 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
     setTeams(company?.rankedDescendants?.edges)
   }, [company?.rankedDescendants?.edges, setTeams])
 
-  const answersOverview = getTeamMetrics(company?.id)
+  const {
+    overview: { feeling, productivity, roadblock },
+  } = getTeamMetrics(company?.id)
 
   return (
     <Box bg="white" borderRadius="lg" shadow="for-background.light" px={8} py={5} {...rest}>
@@ -66,16 +68,9 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
       <Flex marginTop="30px" bg="#F2F6FE" borderRadius="lg" justifyContent="space-between">
         <RadialChartComponent
           size="sm"
-          data={
-            answersOverview?.overview?.feeling.length > 0
-              ? answersOverview?.overview.feeling[0].average
-              : 0
-          }
+          data={feeling.length > 0 ? feeling[0].average : 0}
           icon={getEmoji({
-            felling:
-              answersOverview?.overview?.feeling.length > 0
-                ? answersOverview?.overview.feeling[0].average
-                : 3,
+            felling: feeling.length > 0 ? feeling[0].average : 3,
             size: '30px',
           })}
           numberColor="#ffc658"
@@ -84,11 +79,7 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
         />
         <RadialChartComponent
           size="sm"
-          data={
-            answersOverview?.overview?.productivity.length > 0
-              ? answersOverview?.overview?.productivity[0].average
-              : 0
-          }
+          data={productivity.length > 0 ? productivity[0].average : 0}
           icon={
             <Flex
               background="#4BACF9"
@@ -112,9 +103,7 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
           percentage
           size="sm"
           data={
-            answersOverview?.overview?.roadblock.length > 0
-              ? answersOverview?.overview?.roadblock[0].average
-              : 0
+            roadblock.length > 0 ? (roadblock[0].average / (roadblock[0]?.total ?? 1)) * 100 : 0
           }
           icon={
             <Flex

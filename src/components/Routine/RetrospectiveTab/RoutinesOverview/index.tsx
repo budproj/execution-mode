@@ -17,6 +17,7 @@ import messages from './messages'
 export interface AverageData {
   timestamp: string
   average: number
+  total?: number
 }
 
 export interface OverviewData {

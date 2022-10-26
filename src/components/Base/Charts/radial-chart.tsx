@@ -45,8 +45,6 @@ const CustomizedPieText = ({
       <Flex
         flexDirection="column"
         position="absolute"
-        // Top={size === 'lg' ? 130 : 71}
-        // Left={size === 'lg' ? 95 : 77}
         textAlign="center"
         left="50%"
         bottom="-2"
@@ -68,10 +66,10 @@ const CustomizedPieText = ({
       </Flex>
       {size === 'lg' && (
         <>
-          <Text color="new-gray.600" position="absolute" top={160} left={size === 'lg' ? 67 : 90}>
+          <Text color="new-gray.600" position="absolute" top={160} left={67}>
             1
           </Text>
-          <Text color="new-gray.600" position="absolute" top={160} left={size === 'lg' ? 227 : 205}>
+          <Text color="new-gray.600" position="absolute" top={160} left={227}>
             5
           </Text>
         </>
