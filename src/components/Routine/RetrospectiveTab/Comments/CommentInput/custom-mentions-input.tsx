@@ -33,7 +33,7 @@ const renderSuggestion = (suggestion: SuggestionDataItem) => (
 
 interface CustomMentionsInputProperties {
   userThatWillBeAnswered?: User['firstName']
-  onKeyPress: (event: any) => void
+  onKeyPress?: (event: any) => void
 }
 
 const CustomMentionsInput = ({
@@ -66,6 +66,7 @@ const CustomMentionsInput = ({
 
   useEffect(() => {
     if (data) setUserEdges(data.users.edges)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -79,6 +80,7 @@ const CustomMentionsInput = ({
 
     loadUsers(users)
     setUsersMention(usersMentionTemporary)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users])
 
   return (
@@ -136,7 +138,7 @@ const CustomMentionsInput = ({
                 },
               },
             }}
-            onKeyDown={(event) => onKeyPress(event)}
+            onKeyDown={(event) => onKeyPress?.(event)}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handleChange as any}

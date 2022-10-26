@@ -52,10 +52,7 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
   return (
     <Formik enableReinitialize initialValues={inputInitialValues} onSubmit={handleSubmit}>
       <Form style={{ position: 'sticky', bottom: '-1px', backgroundColor: 'white', width: '100%' }}>
-        <CustomMentionsInput
-          userThatWillBeAnswered={routineUser}
-          onKeyPress={async (event) => console.log('sd')}
-        />
+        <CustomMentionsInput userThatWillBeAnswered={routineUser} />
       </Form>
     </Formik>
   )
