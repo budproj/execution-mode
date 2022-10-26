@@ -49,7 +49,6 @@ export const AreaRadialChart = ({
         justifyContent="center"
         alignItems="center"
         marginBottom="40px"
-        // Height="200px"
       >
         <AreaChartComponent
           data={data}

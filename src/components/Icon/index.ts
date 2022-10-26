@@ -132,4 +132,18 @@ export {
   CustomEmojiFeeling5,
 } from './CustomEmojis'
 
+export { default as GraphicIcon } from './GraphicIcon/graphic-icon'
+
+export { default as SmileIcon } from './SmileIcon/smile-icon'
+
+export { default as WarningLightIcon } from './WarningLightIcon/warning-light-icon'
+
+export { default as BagIcon } from './BagIcon/bag-icon'
+
+export { default as StarIcon } from './StarIcon/star-icon'
+
+export { default as TargetIcon } from './TargetIcon/target-icon'
+
+export { default as WriteIcon } from './WriteIcon/write-icon'
+
 export * from './types'

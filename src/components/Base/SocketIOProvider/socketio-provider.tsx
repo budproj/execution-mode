@@ -45,12 +45,13 @@ const SocketIOProvider = ({ children }: ChildrenProperty) => {
       socket.on('newNotification', (newNotification: Notification) => {
         setNotifications((previousNotifications) => {
           const existentNotificationIndex = previousNotifications.findIndex(
-            (notification) => notification.id === newNotification.id,
+            (notification) => notification.messageId === newNotification.messageId,
           )
 
           if (existentNotificationIndex !== -1) {
-            previousNotifications[existentNotificationIndex] = newNotification
-            return previousNotifications
+            return previousNotifications.map((notification, index) => {
+              return index === existentNotificationIndex ? newNotification : notification
+            })
           }
 
           return [newNotification, ...previousNotifications]

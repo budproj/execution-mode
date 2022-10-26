@@ -1,5 +1,6 @@
 import { Flex, Text, Avatar, AvatarBadge, Box } from '@chakra-ui/react'
 import { format, isToday } from 'date-fns'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -9,25 +10,48 @@ import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
 import messages from './messages'
 
+interface Answer {
+  id: string
+  name: string
+  picture: string
+  latestStatusReply: string
+  timestamp: Date
+}
+
 interface AnswerRowComponentProperties {
-  answer: {
-    id: string
-    name: string
-    picture: string
-    latestStatusReply: string
-    timestamp: Date
-  }
+  answer: Answer
 }
 
 const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
   const intl = useIntl()
+  const router = useRouter()
   const [formattedRelativeDate] = useRelativeDate(new Date(answer.timestamp))
   const isTheDateToday = isToday(new Date(answer.timestamp))
 
   const { getEmoji } = useGetEmoji()
 
+  const setActiveAnswer = (answerId: Answer['id']) => {
+    if (answerId) {
+      router.push(
+        {
+          query: {
+            ...(router?.query ?? {}),
+            answerId,
+          },
+        },
+        undefined,
+        { shallow: true },
+      )
+    }
+  }
+
   return (
-    <Flex key={answer.id} marginBottom={5}>
+    <Flex
+      key={answer.id}
+      cursor={answer.id ? 'pointer' : 'auto'}
+      marginBottom={5}
+      onClick={() => setActiveAnswer(answer.id)}
+    >
       <Avatar width="45px" height="45px" src={answer.picture} marginRight="15px">
         <AvatarBadge
           border="2px solid white"

@@ -49,7 +49,6 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
   const { servicesPromise } = useContext(ServicesContext)
-
   const [answersOverview, setAnswersOverview] = useState<OverviewData | undefined>()
 
   const getAnswersOverview = useCallback(async () => {

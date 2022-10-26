@@ -42,11 +42,13 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   )
 
   useEffect(() => {
-    const { query } = router
-    const tab = Array.isArray(query?.activeTab) ? query?.activeTab[0] : query?.activeTab ?? ''
+    const { query: routerQuery } = router
+    const routerTab = Array.isArray(routerQuery?.activeTab)
+      ? routerQuery?.activeTab[0]
+      : routerQuery?.activeTab ?? ''
 
-    if (tabs.has(tab) && tab !== activeTab) {
-      setActiveTab(tab)
+    if (tabs.has(routerTab) && routerTab !== activeTab) {
+      setActiveTab(routerTab)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router])
