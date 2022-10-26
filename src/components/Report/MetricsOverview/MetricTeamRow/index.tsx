@@ -34,7 +34,7 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
           paddingBottom="15px"
         >
           <Text color="new-gray.900">{team?.name}</Text>
-          <Flex gap="20px">
+          <Flex gap="20px" width="155px" justifyContent="space-between">
             <Text
               alignItems="center"
               fontWeight="700"
@@ -83,7 +83,7 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
               <PauseIcon
                 boxSize="25px"
                 stroke="white"
-                hasStroke={false}
+                circleStrokeWidth={0}
                 desc={intl.formatMessage(messages.pauseIconDescription)}
               />
               {roadblock.length > 0 ? roadblock[0].average : 0}

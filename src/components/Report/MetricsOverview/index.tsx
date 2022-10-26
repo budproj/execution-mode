@@ -117,7 +117,7 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
               <PauseIcon
                 boxSize="35px"
                 stroke="white"
-                hasStroke={false}
+                circleStrokeWidth={0}
                 desc={intl.formatMessage(messages.pauseIconDescription)}
               />
             </Flex>
