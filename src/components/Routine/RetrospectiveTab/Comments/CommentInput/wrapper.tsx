@@ -29,13 +29,6 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
 
   const toast = useToast()
 
-  // UseEffect(() => {
-  //   document.addEventListener('keydown', handleKeyDown)
-
-  //   return () => document.removeEventListener('keydown', handleKeyDown)
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
-
   const entity = commentEntity ? commentEntity : `${COMMENT_DOMAIN.routine}:${domainEntityId}`
 
   const handleSubmit = async (
@@ -56,20 +49,12 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
     }
   }
 
-  const handleKeyDown = async (event: any) => {
-    const keyCode = event.which || event.key
-
-    if (keyCode === 13 && !event.shiftKey) {
-      console.log('teste')
-    }
-  }
-
   return (
     <Formik enableReinitialize initialValues={inputInitialValues} onSubmit={handleSubmit}>
       <Form style={{ position: 'sticky', bottom: '-1px', backgroundColor: 'white', width: '100%' }}>
         <CustomMentionsInput
           userThatWillBeAnswered={routineUser}
-          onKeyPress={async (event) => handleKeyDown(event)}
+          onKeyPress={async (event) => console.log('sd')}
         />
       </Form>
     </Formik>
