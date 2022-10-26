@@ -49,17 +49,15 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
           <>
             <AnswerContent answerId={answerId} />
             <RoutineComments answerOwner={answerDetailed.user.firstName} />
+            <RoutineCommentsInput
+              routineUser={answerDetailed.user.firstName}
+              domainEntityId={answerId}
+            />
           </>
         ) : (
           <RoutinesOverview after={after} before={before} week={week} teamId={teamId} />
         )}
       </ScrollableItem>
-      {answerId && (
-        <RoutineCommentsInput
-          routineUser={answerDetailed.user.firstName}
-          domainEntityId={answerId}
-        />
-      )}
     </Stack>
   )
 }

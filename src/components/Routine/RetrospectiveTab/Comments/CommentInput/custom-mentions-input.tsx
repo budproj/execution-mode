@@ -31,11 +31,15 @@ const renderSuggestion = (suggestion: SuggestionDataItem) => (
   </div>
 )
 
-type CustomMentionsInputProperties = {
+interface CustomMentionsInputProperties {
   userThatWillBeAnswered?: User['firstName']
+  onKeyPress: (event: any) => void
 }
 
-const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProperties) => {
+const CustomMentionsInput = ({
+  userThatWillBeAnswered,
+  onKeyPress,
+}: CustomMentionsInputProperties) => {
   const intl = useIntl()
 
   const { setValues, values, isSubmitting } = useFormikContext<RoutineCommentsInputInitialValues>()
@@ -132,6 +136,7 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
                 },
               },
             }}
+            onKeyDown={(event) => onKeyPress(event)}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handleChange as any}
