@@ -21,7 +21,7 @@ const DashboardPage = () => {
   const intl = useIntl()
   const { data, loading, called } = useQuery(queries.GET_USER_NAME_AND_GENDER)
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
-  const { firstName, gender } = data?.me ?? {}
+  const { firstName } = data?.me ?? {}
 
   const activeCompanyCycles = allCompanyCycles.filter((cycle) => cycle.active)
 
