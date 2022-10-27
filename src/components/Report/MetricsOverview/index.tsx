@@ -105,9 +105,12 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
         <RadialChartComponent
           percentage
           size="sm"
-          data={
-            roadblock.length > 0 ? (roadblock[0].average / (roadblock[0]?.total ?? 1)) * 100 : 0
-          }
+          data={Number(
+            (roadblock.length > 0
+              ? (roadblock[0].average / (roadblock[0]?.total ?? 1)) * 100
+              : 0
+            ).toFixed(1),
+          )}
           icon={
             <Flex
               background="transparent"
