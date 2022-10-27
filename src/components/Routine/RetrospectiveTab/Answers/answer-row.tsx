@@ -6,6 +6,8 @@ import { useIntl } from 'react-intl'
 
 import { Clock } from 'src/components/Icon'
 import { useGetEmoji } from 'src/components/Routine/hooks'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
 import messages from './messages'
@@ -24,6 +26,7 @@ interface AnswerRowComponentProperties {
 
 const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
   const intl = useIntl()
+  const { dispatch } = useEvent(EventType.ROUTINE_ANSWER_ROW_CLICK)
   const router = useRouter()
   const [formattedRelativeDate] = useRelativeDate(new Date(answer.timestamp))
   const isTheDateToday = isToday(new Date(answer.timestamp))
@@ -50,7 +53,10 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
       key={answer.id}
       cursor={answer.id ? 'pointer' : 'auto'}
       marginBottom={5}
-      onClick={() => setActiveAnswer(answer.id)}
+      onClick={() => {
+        setActiveAnswer(answer.id)
+        dispatch({})
+      }}
     >
       <Avatar width="45px" height="45px" src={answer.picture} marginRight="15px">
         <AvatarBadge

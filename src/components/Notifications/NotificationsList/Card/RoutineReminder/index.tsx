@@ -3,6 +3,8 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { IntlLink } from 'src/components/Base'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
@@ -11,6 +13,8 @@ import messages from './messages'
 
 const RoutineReminder = ({ properties, isRead, timestamp, type }: Notification) => {
   const intl = useIntl()
+
+  const { dispatch } = useEvent(EventType.NOTIFICATION_ROUTINE_REMINDER_CLICK)
 
   return (
     <BaseCardNotification
@@ -25,7 +29,15 @@ const RoutineReminder = ({ properties, isRead, timestamp, type }: Notification) 
       <IntlLink
         href={properties.team?.id ? `/explore/${properties.team.id}?activeTab=retrospectiva` : '#'}
       >
-        <Heading display="flex" width="100%" justifyContent="space-between" textAlign="left">
+        <Heading
+          display="flex"
+          width="100%"
+          justifyContent="space-between"
+          textAlign="left"
+          onClick={() => {
+            dispatch({})
+          }}
+        >
           <Box display="flex" alignItems="flex-start" justifyContent="center" flexDir="column">
             <Text fontSize={16} fontWeight="700" color="new-gray.800">
               {intl.formatMessage(messages.weekRetrospectiveRoutineTitle)}
