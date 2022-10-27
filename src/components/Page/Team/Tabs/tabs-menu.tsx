@@ -6,6 +6,8 @@ import { useIntl } from 'react-intl'
 
 import newTagMessages from 'src/components/Base/MainAppBar/messages'
 import { Team } from 'src/components/Team/types'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import messages from '../messages'
 
@@ -27,6 +29,8 @@ const StyledTab = styled(Tab)`
 
 const TabsMenu = ({ teamId }: TabsMenuProperties) => {
   const intl = useIntl()
+  const { dispatch } = useEvent(EventType.RETROSPECTIVE_TAB_CLICK)
+
   const router = useRouter()
 
   const handleClick = (hashTab: string) => {
@@ -59,7 +63,10 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
           color="new-gray.800"
           _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           paddingBottom={3}
-          onClick={() => handleClick(intl.formatMessage(messages.retrospectiveTeamTab))}
+          onClick={() => {
+            handleClick(intl.formatMessage(messages.retrospectiveTeamTab))
+            dispatch({})
+          }}
         >
           {intl.formatMessage(messages.retrospectiveTeamTab)}
           <Tag size="sm" variant="solid" colorScheme="brand" ml={2}>

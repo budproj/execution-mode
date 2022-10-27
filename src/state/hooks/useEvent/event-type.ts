@@ -24,4 +24,12 @@ export enum EventType {
   TAB_NOTIFICATION_CLICK = 'TabNotificationClick',
   TAB_THIS_WEEK_CLICK = 'TabThisWeekClick',
   NOTIFICATION_ROUTINE_CLICK = 'NotificationRoutineClick',
+  NOTIFICATION_ROUTINE_REMINDER_CLICK = 'NotificationRoutineReminderClick',
+  START_ANSWER_FORM_CLICK = 'StartAnswerFormClick',
+  SEND_ANSWER_FORM_CLICK = 'SendAnswerFormClick',
+  RETROSPECTIVE_TAB_CLICK = 'RetrospectiveTabClick',
+  CHANGE_TIME_PERIOD_CLICK = 'ChangeTimePeriodClick',
+  ROUTINE_ANSWER_ROW_CLICK = 'RoutineAnswerRowClick',
+  TOGGLE_ROUTINE_REMINDER_CLICK = 'ToggleRoutineReminderClick',
+  ANSWER_NOW_FORM_CLICK = 'AnswerNowFormClick',
 }
