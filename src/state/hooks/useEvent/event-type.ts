@@ -32,4 +32,7 @@ export enum EventType {
   ROUTINE_ANSWER_ROW_CLICK = 'RoutineAnswerRowClick',
   TOGGLE_ROUTINE_REMINDER_CLICK = 'ToggleRoutineReminderClick',
   ANSWER_NOW_FORM_CLICK = 'AnswerNowFormClick',
+  COMMENT_IN_ROUTINE_ANSWER_CLICK = 'CommentInRoutineAnswerClick',
+  MENTION_IN_ROUTINE_ANSWER_CLICK = 'MentionInRoutineAnswerClick',
+  METRIC_TEAM_ROW_CLICK = 'MetricTeamRowClick',
 }

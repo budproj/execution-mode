@@ -52,8 +52,6 @@ export const NotificationSettingsModal = ({
   const [brand500]: string[] = useToken('colors', ['brand.500'])
   const intl = useIntl()
 
-  console.log({ teamOptedOut })
-
   return (
     <Modal isOpen={isOpen} size="xl" onClose={onClose}>
       <ModalOverlay />
