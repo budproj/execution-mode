@@ -65,9 +65,10 @@ export const useGetEmoji = (): useGetEmojiProperties => {
             height={size}
           />
         )
-    } else {
-      throw new Error('The emoji scale goes from 1 to 5')
     }
+
+    return <span>-</span>
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return { getEmoji }
