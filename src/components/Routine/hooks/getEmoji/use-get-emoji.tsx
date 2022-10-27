@@ -1,4 +1,4 @@
-import { BoxProps } from '@chakra-ui/react'
+import { BoxProps, Text } from '@chakra-ui/react'
 import React, { useCallback } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -25,7 +25,7 @@ export const useGetEmoji = (): useGetEmojiProperties => {
 
   const getEmoji = useCallback(({ felling, size }: customEmojiProperties) => {
     if (range.has(felling)) {
-      if (felling === 1)
+      if (felling <= 1)
         return (
           <CustomEmojiFelling1
             desc={intl.formatMessage(messages.felling1)}
@@ -33,7 +33,7 @@ export const useGetEmoji = (): useGetEmojiProperties => {
             height={size}
           />
         )
-      if (felling === 2)
+      if (felling <= 2)
         return (
           <CustomEmojiFelling2
             desc={intl.formatMessage(messages.felling2)}
@@ -41,7 +41,7 @@ export const useGetEmoji = (): useGetEmojiProperties => {
             height={size}
           />
         )
-      if (felling === 3)
+      if (felling <= 3)
         return (
           <CustomEmojiFelling3
             desc={intl.formatMessage(messages.felling3)}
@@ -49,7 +49,7 @@ export const useGetEmoji = (): useGetEmojiProperties => {
             height={size}
           />
         )
-      if (felling === 4)
+      if (felling <= 4)
         return (
           <CustomEmojiFelling4
             desc={intl.formatMessage(messages.felling4)}
@@ -57,7 +57,7 @@ export const useGetEmoji = (): useGetEmojiProperties => {
             height={size}
           />
         )
-      if (felling === 5)
+      if (felling <= 5)
         return (
           <CustomEmojiFelling5
             desc={intl.formatMessage(messages.felling5)}
@@ -67,7 +67,11 @@ export const useGetEmoji = (): useGetEmojiProperties => {
         )
     }
 
-    return <span>-</span>
+    return (
+      <Text fontSize="2rem" transform="translateX(90%)" color="#b5c0db">
+        -
+      </Text>
+    )
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
