@@ -1,5 +1,4 @@
 import { useToast } from '@chakra-ui/react'
-import { format } from 'date-fns'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
@@ -11,7 +10,6 @@ import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-dra
 import { isOpenRoutineRedirectTeamPage } from 'src/state/recoil/routine/opened-routine-redirect-team-drawer'
 import { retrospectiveRoutineListAtom } from 'src/state/recoil/routine/retrospective-routine-answers'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
-import { routineDatesRangeAtom } from 'src/state/recoil/routine/routine-dates-range'
 import {
   retrospectiveRoutineSelector,
   routineFormQuestions,
@@ -22,7 +20,6 @@ import submitAnswersMessages from './messages'
 
 export const useRoutineFormAnswers = () => {
   const setUserTeams = useSetRecoilState(routineAnswersReturnedData)
-  const { after, before } = useRecoilValue(routineDatesRangeAtom)
 
   const { servicesPromise } = useContext(ServicesContext)
   const setRedirectTeamDrawerIsOpen = useSetRecoilState(isOpenRoutineRedirectTeamPage)
@@ -81,13 +78,7 @@ export const useRoutineFormAnswers = () => {
         setUserTeams(userTeams)
         setRedirectTeamDrawerIsOpen(true)
       } else {
-        //  ?activeTab=retrospectiva&after=21%2F10%2F2022&before=27%2F10%2F2022&answerId=a181217f-c52d-465b-9593-16b65a9b5f03
-        router.push(
-          `/explore/${userTeams[0].id}?activeTab=retrospectiva&after=${format(
-            after,
-            'dd/MM/yyyy',
-          )}&before=${format(before, 'dd/MM/yyyy')}`,
-        )
+        router.push(`/explore/${userTeams[0].id}?activeTab=retrospectiva`)
       }
       //  D6310cc8-cc17-499b-a28c-5c600dd9714a?activeTab=retrospectiva&after=21%2F10%2F2022&before=27%2F10%2F2022
     }

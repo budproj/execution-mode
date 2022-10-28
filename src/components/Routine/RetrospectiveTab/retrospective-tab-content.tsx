@@ -92,7 +92,8 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
     )
 
     if (answersSummaryData) setAnswersSummary(answersSummaryData)
-  }, [after, before, teamId, servicesPromise])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [after, before, teamId])
 
   useEffect(() => {
     getAnswersSummary()
