@@ -63,7 +63,7 @@ const RoutineCommentsInput = ({
           bottom: '-1px',
           backgroundColor: 'white',
           width: '100%',
-          zIndex: 12,
+          zIndex: 3,
         }}
       >
         <CustomMentionsInput userThatWillBeAnswered={routineUser} onSubmit={showLastComment} />
