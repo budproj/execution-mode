@@ -42,7 +42,6 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'end' })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }
 
   useEffect(() => {
@@ -54,8 +53,9 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
     if (element) {
       element.scrollIntoView({ block: 'start', behavior: 'smooth' })
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answerId])
+  }, [answerId, element, entity])
 
   return (
     <Stack>
