@@ -5,6 +5,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { Clock } from 'src/components/Icon'
+import ThinkingBalloon from 'src/components/Icon/ThinkingBalloon'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
@@ -18,6 +19,7 @@ interface Answer {
   picture: string
   latestStatusReply: string
   timestamp: Date
+  commentCount: number
 }
 
 interface AnswerRowComponentProperties {
@@ -82,8 +84,12 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
             <Text color="new-gray.900" fontWeight="450" fontSize="16px">
               {answer.name}
             </Text>
-            <Text color="new-gray.700">
-              <Clock desc={intl.formatMessage(messages.clockIconDescription)} fill="new-gray.300" />{' '}
+            <Text color="new-gray.700" display="flex" alignItems="center">
+              <Clock
+                marginRight={1}
+                desc={intl.formatMessage(messages.clockIconDescription)}
+                fill="new-gray.300"
+              />{' '}
               {isTheDateToday
                 ? `${intl.formatMessage(messages.hourPrefix, { today: isTheDateToday })} ${format(
                     new Date(answer.timestamp),
@@ -93,11 +99,12 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
                     messages.hourPrefix,
                     { today: isTheDateToday },
                   )} ${format(new Date(answer.timestamp), "kk'h'mm")} `}
-              {/* <ThinkingBalloon
+              <ThinkingBalloon
                 marginLeft={5}
+                marginRight={1}
                 desc={intl.formatMessage(messages.thinkingBalloonDescription)}
               />{' '}
-              5 */}
+              {answer.commentCount}
             </Text>
           </>
         ) : (

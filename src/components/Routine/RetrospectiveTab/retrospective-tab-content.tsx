@@ -57,6 +57,7 @@ interface AnswerSummary {
   picture: string
   latestStatusReply: string
   timestamp: Date
+  commentCount: number
 }
 
 const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {

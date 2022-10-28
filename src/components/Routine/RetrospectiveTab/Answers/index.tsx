@@ -41,6 +41,7 @@ interface AnswerSummary {
   picture: string
   latestStatusReply: string
   timestamp: Date
+  commentCount: number
 }
 
 const ScrollableItem = getScrollableItem()
