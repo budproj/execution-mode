@@ -1,4 +1,5 @@
 export interface Notification {
+  id?: string
   messageId: string
   isRead: boolean
   type: string

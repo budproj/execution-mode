@@ -60,7 +60,7 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
   return (
     <Stack>
       <ScrollableItem maxH="750px">
-        {answerId ? (
+        {answerId && answerDetailed.answers.length > 0 ? (
           <div id="comments-list">
             <AnswerContent answerId={answerId} />
             <RoutineComments answerOwner={answerDetailed.user.firstName} />

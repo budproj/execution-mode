@@ -10,7 +10,7 @@ const TeamsOverviewBodyTableLineTemplate = ({ children, ...rest }: GridProps) =>
     templateColumns={TABLE_GRID_COLUMNS}
     gridGap={8}
     py={4}
-    borderTopWidth={BORDER_WIDTH}
+    borderBottomWidth={BORDER_WIDTH}
     borderColor={BORDER_COLOR}
     alignItems="center"
     {...rest}

@@ -95,10 +95,16 @@ const CustomMentionsInput = ({
   }
 
   return (
-    <Stack alignItems="center" mt={2} paddingX={6} width="full" position="relative">
-      <Divider />
+    <Stack alignItems="center" px={1} width="full" position="relative">
+      <Divider borderColor="new-gray.400" />
 
-      <HStack pb={6} width="100%" spacing={4} justifyContent="space-between">
+      <HStack
+        py={6}
+        width="100%"
+        spacing={4}
+        justifyContent="space-between"
+        style={{ marginTop: 0 }}
+      >
         <Avatar width="45px" height="45px" src={user?.picture} />
         <Box
           borderWidth={1}
