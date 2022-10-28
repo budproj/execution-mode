@@ -58,7 +58,7 @@ const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) =>
   }
 
   return (
-    <HStack spacing={4} alignItems="flex-start" justifyContent="flex-start" width="full">
+    <HStack spacing={4} my={1} alignItems="flex-start" justifyContent="flex-start" width="full">
       <Avatar width="45px" height="45px" src={user?.picture} />
       <VStack spacing={1} align="flex-start">
         <Flex textAlign="left" gap={3} w="full">

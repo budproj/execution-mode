@@ -16,13 +16,18 @@ import CustomMentionsInput from './custom-mentions-input'
 type RoutineCommentInputProperties = {
   domainEntityId: Comment['entity']
   routineUser?: User['firstName']
+  showLastComment: () => void
 }
 
 export interface RoutineCommentsInputInitialValues {
   text: string
 }
 
-const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInputProperties) => {
+const RoutineCommentsInput = ({
+  domainEntityId,
+  routineUser,
+  showLastComment,
+}: RoutineCommentInputProperties) => {
   const { handleCreateComment } = useCreateComment()
   const [inputInitialValues, setInputInitialValues] = useRecoilState(commentInputInitialValue)
   const [commentEntity, setCommentEntity] = useRecoilState(commentEntityToReply)
@@ -39,6 +44,7 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
       await handleCreateComment({ content: values.text, entity })
       setInputInitialValues({ text: '' })
       setCommentEntity('')
+      showLastComment()
       actions.setSubmitting(false)
       actions.resetForm()
     } else {
@@ -51,8 +57,16 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
 
   return (
     <Formik enableReinitialize initialValues={inputInitialValues} onSubmit={handleSubmit}>
-      <Form style={{ position: 'sticky', bottom: '-1px', backgroundColor: 'white', width: '100%' }}>
-        <CustomMentionsInput userThatWillBeAnswered={routineUser} />
+      <Form
+        style={{
+          position: 'sticky',
+          bottom: '-1px',
+          backgroundColor: 'white',
+          width: '100%',
+          zIndex: 12,
+        }}
+      >
+        <CustomMentionsInput userThatWillBeAnswered={routineUser} onSubmit={showLastComment} />
       </Form>
     </Formik>
   )
