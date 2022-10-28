@@ -5,6 +5,8 @@ import { useRecoilState } from 'recoil'
 
 import { useCreateComment } from 'src/components/Routine/hooks/setComment'
 import { User } from 'src/components/User/types'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { commentInputInitialValue } from 'src/state/recoil/comments/input'
 import { commentEntityToReply } from 'src/state/recoil/comments/reply-comment'
 
@@ -31,7 +33,12 @@ const RoutineCommentsInput = ({
   const { handleCreateComment } = useCreateComment()
   const [inputInitialValues, setInputInitialValues] = useRecoilState(commentInputInitialValue)
   const [commentEntity, setCommentEntity] = useRecoilState(commentEntityToReply)
-
+  const { dispatch: dispatchCommentInRoutineClick } = useEvent(
+    EventType.COMMENT_IN_ROUTINE_ANSWER_CLICK,
+  )
+  const { dispatch: dispatchMentionInRoutineClick } = useEvent(
+    EventType.MENTION_IN_ROUTINE_ANSWER_CLICK,
+  )
   const toast = useToast()
 
   const entity = commentEntity ? commentEntity : `${COMMENT_DOMAIN.routine}:${domainEntityId}`
@@ -42,6 +49,12 @@ const RoutineCommentsInput = ({
   ) => {
     if (values.text) {
       await handleCreateComment({ content: values.text, entity })
+      dispatchCommentInRoutineClick({})
+      const isTagged = /@\[([\w \u00C0-\u00FF-]+)]\(([\da-f-]+)\)/.test(values.text)
+      if (isTagged) {
+        dispatchMentionInRoutineClick({})
+      }
+
       setInputInitialValues({ text: '' })
       setCommentEntity('')
       showLastComment()

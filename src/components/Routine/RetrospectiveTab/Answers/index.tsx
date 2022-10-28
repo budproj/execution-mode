@@ -12,6 +12,8 @@ import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import {
   getRoutineDateRangeDateFormat,
@@ -44,6 +46,9 @@ interface AnswerSummary {
 const ScrollableItem = getScrollableItem()
 
 const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersComponentProperties) => {
+  const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
+  const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
+
   const intl = useIntl()
   const router = useRouter()
   const [search, setSearch] = useState('')
@@ -101,7 +106,10 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
               fill="new-gray.700"
             />
           }
-          onClick={() => setNewDate(sub(date.after, { weeks: 1 }))}
+          onClick={() => {
+            setNewDate(sub(date.after, { weeks: 1 }))
+            dispatchChangeTimePeriod({})
+          }}
         />
         <Text
           color="new-gray.800"
@@ -128,7 +136,10 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
               fill="new-gray.700"
             />
           }
-          onClick={() => setNewDate(add(date.after, { weeks: 1 }))}
+          onClick={() => {
+            setNewDate(add(date.after, { weeks: 1 }))
+            dispatchChangeTimePeriod({})
+          }}
         />
       </Flex>
       <Divider borderColor="new-gray.400" />
@@ -158,7 +169,10 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
             backgroundColor="brand.500"
             padding="13px 0px"
             _hover={{ background: 'brand.400', color: 'black.50' }}
-            onClick={() => setIsRoutineDrawerOpen(true)}
+            onClick={() => {
+              setIsRoutineDrawerOpen(true)
+              dispatchAnswerNowFormClick({})
+            }}
           />
         </Box>
       )}

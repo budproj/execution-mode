@@ -16,6 +16,9 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
+
 import messages from './messages'
 
 interface NotificationSettingsModalProperties {
@@ -45,6 +48,7 @@ export const NotificationSettingsModal = ({
   onClose,
   onToggle,
 }: NotificationSettingsModalProperties) => {
+  const { dispatch } = useEvent(EventType.TOGGLE_ROUTINE_REMINDER_CLICK)
   const [brand500]: string[] = useToken('colors', ['brand.500'])
   const intl = useIntl()
 
@@ -83,7 +87,10 @@ export const NotificationSettingsModal = ({
               color={brand500}
               size="lg"
               ml={6}
-              onChange={onToggle}
+              onChange={() => {
+                onToggle()
+                dispatch({ timestamp: new Date(), isActive: teamOptedOut })
+              }}
             />
           </Flex>
           <Button
