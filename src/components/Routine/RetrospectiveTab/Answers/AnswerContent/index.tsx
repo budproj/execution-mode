@@ -31,7 +31,7 @@ const AnswerContent = ({ answerId }: AnswerContent) => {
 
       <Divider borderColor="new-gray.400" />
 
-      <VStack align="flex-start" padding={10}>
+      <VStack align="flex-start" padding={10} pb={12}>
         {answerDetailed.history.length > 0 && (
           <Box>
             <HistoryAnswers answers={answerDetailed.history} />
@@ -41,7 +41,8 @@ const AnswerContent = ({ answerId }: AnswerContent) => {
           </Box>
         )}
       </VStack>
-      <Divider />
+
+      <Divider borderColor="new-gray.400" />
     </>
   )
 }

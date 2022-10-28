@@ -18,7 +18,7 @@ const RoutineComments = ({ answerOwner }: RoutineCommentsProperties) => {
   const intl = useIntl()
   const comments = useRecoilValue(commentsAtom)
   return (
-    <Stack pt={4} paddingX={10} spacing={6} w="full">
+    <Stack pt={7} pb={5} px={10} spacing={6} w="full">
       <Text color="new=gray.900" fontSize={16} fontWeight="medium">
         {intl.formatMessage(messages.commentsSectionTitle)}
       </Text>
