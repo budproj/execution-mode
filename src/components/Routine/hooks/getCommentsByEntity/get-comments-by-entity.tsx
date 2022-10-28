@@ -16,7 +16,7 @@ export const useGetCommentsByEntity = () => {
 
   const getCommentsByEntity = async ({ entity }: useGetCommentsByEntityProperties) => {
     const { comments } = await servicesPromise
-    const { data: findedComments } = await comments.get(`/comments/${entity}`)
+    const { data: findedComments } = await comments.get<Comment[]>(`/comments/${entity}`)
     if (findedComments) setComments(findedComments)
   }
 

@@ -17,7 +17,10 @@ export const useAnswerDetailed = (): useAnswerDetailedProperties => {
 
   const getAnswerDetailed = async (answerId: AnswerType['id']) => {
     const { routines } = await servicesPromise
-    const { data } = await routines.get<AnswerDetails>(`answer/${answerId}`)
+    const { data } = await routines.get<AnswerDetails>(`answer/${answerId}`).catch((error) => {
+      console.error(error)
+      return { data: undefined }
+    })
 
     if (data) {
       setAnswerDetailed(data)

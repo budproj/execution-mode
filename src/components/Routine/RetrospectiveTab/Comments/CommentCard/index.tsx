@@ -58,10 +58,10 @@ const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) =>
   }
 
   return (
-    <HStack spacing={4} alignItems="flex-start" justifyContent="flex-start" width="full">
+    <HStack spacing={4} my={1} alignItems="flex-start" justifyContent="flex-start" width="full">
       <Avatar width="45px" height="45px" src={user?.picture} />
       <VStack spacing={1} align="flex-start">
-        <Flex textAlign="left" gap={3} w="full">
+        <Flex textAlign="left" gap={3} w="full" alignItems="center">
           <Text color="black.900" fontWeight="medium" fontSize={14}>
             {user?.fullName}
           </Text>
@@ -82,6 +82,7 @@ const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) =>
           color="brand.500"
           fontSize={14}
           fontWeight="normal"
+          height="24px"
           onClick={handleReplyComment}
         >
           {intl.formatMessage(messages.replyCommentButton)}

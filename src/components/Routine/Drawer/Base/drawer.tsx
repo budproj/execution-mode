@@ -45,11 +45,11 @@ const RoutineDrawer = ({ children, isOpen, formSize, onClose }: RoutineDrawerPro
   }
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
+    if (isOpen) document.addEventListener('keydown', handleKeyDown)
 
     return () => document.removeEventListener('keydown', handleKeyDown)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [isOpen])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setCurrentRoutineProperties({ size: formSize }), [formSize])

@@ -18,13 +18,18 @@ import CustomMentionsInput from './custom-mentions-input'
 type RoutineCommentInputProperties = {
   domainEntityId: Comment['entity']
   routineUser?: User['firstName']
+  showLastComment: () => void
 }
 
 export interface RoutineCommentsInputInitialValues {
   text: string
 }
 
-const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInputProperties) => {
+const RoutineCommentsInput = ({
+  domainEntityId,
+  routineUser,
+  showLastComment,
+}: RoutineCommentInputProperties) => {
   const { handleCreateComment } = useCreateComment()
   const [inputInitialValues, setInputInitialValues] = useRecoilState(commentInputInitialValue)
   const [commentEntity, setCommentEntity] = useRecoilState(commentEntityToReply)
@@ -38,7 +43,7 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
 
   const entity = commentEntity ? commentEntity : `${COMMENT_DOMAIN.routine}:${domainEntityId}`
 
-  const handleSubmit = async (
+  const submitForm = async (
     values: RoutineCommentsInputInitialValues,
     actions: FormikHelpers<RoutineCommentsInputInitialValues>,
   ) => {
@@ -52,6 +57,7 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
 
       setInputInitialValues({ text: '' })
       setCommentEntity('')
+      showLastComment()
       actions.setSubmitting(false)
       actions.resetForm()
     } else {
@@ -63,10 +69,21 @@ const RoutineCommentsInput = ({ domainEntityId, routineUser }: RoutineCommentInp
   }
 
   return (
-    <Formik enableReinitialize initialValues={inputInitialValues} onSubmit={handleSubmit}>
-      <Form style={{ position: 'sticky', bottom: '-1px', backgroundColor: 'white', width: '100%' }}>
-        <CustomMentionsInput userThatWillBeAnswered={routineUser} />
-      </Form>
+    <Formik enableReinitialize initialValues={inputInitialValues} onSubmit={submitForm}>
+      {({ handleSubmit }) => (
+        <Form
+          style={{
+            position: 'sticky',
+            bottom: '-1px',
+            backgroundColor: 'white',
+            width: '100%',
+            zIndex: 3,
+          }}
+          onSubmit={handleSubmit}
+        >
+          <CustomMentionsInput userThatWillBeAnswered={routineUser} />
+        </Form>
+      )}
     </Formik>
   )
 }
