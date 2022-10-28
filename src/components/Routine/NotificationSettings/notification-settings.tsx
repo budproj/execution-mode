@@ -89,7 +89,7 @@ export const NotificationSettingsModal = ({
               ml={6}
               onChange={() => {
                 onToggle()
-                dispatch({ timestamp: new Date(), isActive: !teamOptedOut })
+                dispatch({ timestamp: new Date(), isActive: teamOptedOut })
               }}
             />
           </Flex>
