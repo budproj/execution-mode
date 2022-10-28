@@ -33,16 +33,17 @@ const renderSuggestion = (suggestion: SuggestionDataItem) => (
 
 interface CustomMentionsInputProperties {
   userThatWillBeAnswered?: User['firstName']
-  onKeyPress?: (event: any) => void
+  onSubmit: () => void
 }
 
 const CustomMentionsInput = ({
   userThatWillBeAnswered,
-  onKeyPress,
+  onSubmit,
 }: CustomMentionsInputProperties) => {
   const intl = useIntl()
 
-  const { setValues, values, isSubmitting } = useFormikContext<RoutineCommentsInputInitialValues>()
+  const { setValues, values, isSubmitting, handleSubmit } =
+    useFormikContext<RoutineCommentsInputInitialValues>()
   const [isOnFocus, setIsOnFocus] = useState(Boolean(values.text))
 
   const handleFocus = () => {
@@ -83,8 +84,18 @@ const CustomMentionsInput = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users])
 
+  const handleKeyDown = (event: any) => {
+    const keyCode = event.which || event.key
+
+    if (keyCode === 13 && !event.shiftKey) {
+      event.preventDefault()
+      handleSubmit()
+      onSubmit()
+    }
+  }
+
   return (
-    <Stack alignItems="center" px={1} width="full">
+    <Stack alignItems="center" px={1} width="full" position="relative">
       <Divider borderColor="new-gray.400" />
 
       <HStack
@@ -145,7 +156,8 @@ const CustomMentionsInput = ({
                 },
               },
             }}
-            onKeyDown={(event) => onKeyPress?.(event)}
+            typeof="submit"
+            onKeyDown={async (event) => handleKeyDown(event)}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handleChange as any}
@@ -167,6 +179,7 @@ const CustomMentionsInput = ({
               renderSuggestion={renderSuggestion}
             />
           </MentionsInput>
+
           <IconButton
             icon={
               isSubmitting ? (

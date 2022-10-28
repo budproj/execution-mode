@@ -36,10 +36,23 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
 
   const entity = `${COMMENT_DOMAIN.routine}:${answerId ?? ''}`
 
+  const element = document.querySelector('#comments-list')
+
+  const scrollToShowLastComment = () => {
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }
+
   useEffect(() => {
     if (answerId) {
       getAnswerDetailed(answerId)
       getCommentsByEntity({ entity })
+    }
+
+    if (element) {
+      element.scrollIntoView({ block: 'start', behavior: 'smooth' })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answerId])
@@ -48,14 +61,15 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
     <Stack>
       <ScrollableItem maxH="750px">
         {answerId && answerDetailed.answers.length > 0 ? (
-          <>
+          <div id="comments-list">
             <AnswerContent answerId={answerId} />
             <RoutineComments answerOwner={answerDetailed.user.firstName} />
             <RoutineCommentsInput
+              showLastComment={scrollToShowLastComment}
               routineUser={answerDetailed.user.firstName}
               domainEntityId={answerId}
             />
-          </>
+          </div>
         ) : (
           <RoutinesOverview after={after} before={before} week={week} teamId={teamId} />
         )}
