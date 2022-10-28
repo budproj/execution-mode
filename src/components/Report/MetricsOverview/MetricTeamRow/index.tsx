@@ -34,7 +34,7 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
           paddingBottom="15px"
         >
           <Text color="new-gray.900">{team?.name}</Text>
-          <Flex gap="20px" width="155px" justifyContent="space-between">
+          <Flex gap="20px" width="180px" justifyContent="space-between">
             <Text
               alignItems="center"
               fontWeight="700"
