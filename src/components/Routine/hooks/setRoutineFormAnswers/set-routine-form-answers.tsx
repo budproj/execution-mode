@@ -78,9 +78,7 @@ export const useRoutineFormAnswers = () => {
         setUserTeams(userTeams)
         setRedirectTeamDrawerIsOpen(true)
       } else {
-        router.push(
-          `/explore/${userTeams[0].id}?activeTab=retrospectiva`,
-        )
+        router.push(`/explore/${userTeams[0].id}?activeTab=retrospectiva`)
       }
     }
   }
