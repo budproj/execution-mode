@@ -36,7 +36,7 @@ const RoutineCommentsInput = ({
 
   const entity = commentEntity ? commentEntity : `${COMMENT_DOMAIN.routine}:${domainEntityId}`
 
-  const handleSubmit = async (
+  const submitForm = async (
     values: RoutineCommentsInputInitialValues,
     actions: FormikHelpers<RoutineCommentsInputInitialValues>,
   ) => {
@@ -56,18 +56,21 @@ const RoutineCommentsInput = ({
   }
 
   return (
-    <Formik enableReinitialize initialValues={inputInitialValues} onSubmit={handleSubmit}>
-      <Form
-        style={{
-          position: 'sticky',
-          bottom: '-1px',
-          backgroundColor: 'white',
-          width: '100%',
-          zIndex: 3,
-        }}
-      >
-        <CustomMentionsInput userThatWillBeAnswered={routineUser} onSubmit={showLastComment} />
-      </Form>
+    <Formik enableReinitialize initialValues={inputInitialValues} onSubmit={submitForm}>
+      {({ handleSubmit }) => (
+        <Form
+          style={{
+            position: 'sticky',
+            bottom: '-1px',
+            backgroundColor: 'white',
+            width: '100%',
+            zIndex: 3,
+          }}
+          onSubmit={handleSubmit}
+        >
+          <CustomMentionsInput userThatWillBeAnswered={routineUser} />
+        </Form>
+      )}
     </Formik>
   )
 }

@@ -33,17 +33,12 @@ const renderSuggestion = (suggestion: SuggestionDataItem) => (
 
 interface CustomMentionsInputProperties {
   userThatWillBeAnswered?: User['firstName']
-  onSubmit: () => void
 }
 
-const CustomMentionsInput = ({
-  userThatWillBeAnswered,
-  onSubmit,
-}: CustomMentionsInputProperties) => {
+const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProperties) => {
   const intl = useIntl()
 
-  const { setValues, values, isSubmitting, handleSubmit } =
-    useFormikContext<RoutineCommentsInputInitialValues>()
+  const { setValues, values, isSubmitting } = useFormikContext<RoutineCommentsInputInitialValues>()
   const [isOnFocus, setIsOnFocus] = useState(Boolean(values.text))
 
   const handleFocus = () => {
@@ -84,27 +79,10 @@ const CustomMentionsInput = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users])
 
-  const handleKeyDown = (event: any) => {
-    const keyCode = event.which || event.key
-
-    if (keyCode === 13 && !event.shiftKey) {
-      event.preventDefault()
-      handleSubmit()
-      onSubmit()
-    }
-  }
-
   return (
-    <Stack alignItems="center" px={1} width="full" position="relative">
-      <Divider borderColor="new-gray.400" />
-
-      <HStack
-        py={6}
-        width="100%"
-        spacing={4}
-        justifyContent="space-between"
-        style={{ marginTop: 0 }}
-      >
+    <Stack alignItems="center" mt={2} paddingX={6} width="full">
+      <Divider />
+      <HStack pb={6} width="100%" spacing={4} justifyContent="space-between">
         <Avatar width="45px" height="45px" src={user?.picture} />
         <Box
           borderWidth={1}
@@ -124,6 +102,7 @@ const CustomMentionsInput = ({
         >
           <MentionsInput
             allowSuggestionsAboveCursor
+            singleLine
             value={values.text}
             placeholder={placeholder}
             style={{
@@ -156,8 +135,7 @@ const CustomMentionsInput = ({
                 },
               },
             }}
-            typeof="submit"
-            onKeyDown={async (event) => handleKeyDown(event)}
+            typeof="text"
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handleChange as any}
