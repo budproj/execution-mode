@@ -46,8 +46,11 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
   }
 
   useEffect(() => {
-    if (answerId) getAnswerDetailed(answerId)
-    getCommentsByEntity({ entity })
+    if (answerId) {
+      getAnswerDetailed(answerId)
+      getCommentsByEntity({ entity })
+    }
+
     if (element) {
       element.scrollIntoView({ block: 'start', behavior: 'smooth' })
     }
