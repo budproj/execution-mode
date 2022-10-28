@@ -14,8 +14,6 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import ArrowLeftLongBoldIcon from 'src/components/Icon/ArrowLeftLongBold'
-// Import ChevronDownIcon from 'src/components/Icon/ChevronDown'
-// Import ChevronUpIcon from 'src/components/Icon/ChevronUp'
 import { User } from 'src/components/User/types'
 
 import messages from './messages'
@@ -101,29 +99,6 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
           </Skeleton>
         </Flex>
       </Flex>
-
-      {/* <Flex margin="0 0 0 auto" flexDirection="column">
-        <Flex>
-          <Button
-            width="40px"
-            height="38px"
-            bgColor="new-gray.200"
-            borderRadius="10px 0 0 10px"
-            rightIcon={<ChevronUpIcon desc="arrow" ml="-7px" stroke={newGray600} />}
-          />
-          <Button
-            ml={1}
-            width="38px"
-            height="38px"
-            bgColor="new-gray.200"
-            borderRadius="0 10px 10px 0"
-            rightIcon={<ChevronDownIcon desc="arrow" ml="-7px" stroke={newGray600} />}
-          />
-        </Flex>
-        <Text mt={1} textAlign="center" color="new-gray.600">
-          Pessoas
-        </Text>
-      </Flex> */}
     </Flex>
   )
 }
