@@ -82,6 +82,7 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
             isLoaded={Boolean(user.firstName)}
             display="inline-block"
             minWidth="400px"
+            height="24px"
             mt={1}
           >
             <Heading as="h3" fontSize="1.5rem" fontWeight={600}>
@@ -92,7 +93,9 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
             isLoaded={Boolean(user.role)}
             display="inline-block"
             minWidth="100px"
+            maxWidth={`${user.role ? user.role.length * 10 : 300}px`}
             lineHeight="1rem"
+            height="15px"
             mt={1}
           >
             <Text color="new-gray.600">{user.role}</Text>
