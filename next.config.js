@@ -33,6 +33,7 @@ const {
   NO_GAMIFICATION_COMPANIES_IDS,
   NOTIFICATION_API,
   ROUTINES_API,
+  COMMENTS_API,
   REST_API_BASE,
 } = process.env
 
@@ -80,6 +81,7 @@ const publicRuntimeConfig = {
     notifications: NOTIFICATION_API,
     restBase: REST_API_BASE,
     routines: ROUTINES_API,
+    comments: COMMENTS_API
   },
 
   sentry: {

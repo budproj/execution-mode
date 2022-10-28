@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { RadialChartComponent } from 'src/components/Base/Charts'
+import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { CardHeader } from 'src/components/Report/CardHeaders'
@@ -21,6 +22,8 @@ import MetricTeamRow from './MetricTeamRow'
 import messages from './messages'
 
 interface MetricsOverviewProperties extends StyleProps {}
+
+const ScrollableItem = getScrollableItem()
 
 const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
   const { getEmoji } = useGetEmoji()
@@ -102,9 +105,12 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
         <RadialChartComponent
           percentage
           size="sm"
-          data={
-            roadblock.length > 0 ? (roadblock[0].average / (roadblock[0]?.total ?? 1)) * 100 : 0
-          }
+          data={Number(
+            (roadblock.length > 0
+              ? (roadblock[0].average / (roadblock[0]?.total ?? 1)) * 100
+              : 0
+            ).toFixed(1),
+          )}
           icon={
             <Flex
               background="transparent"
@@ -137,9 +143,11 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
         {intl.formatMessage(messages.byTeamMetricRowTitle)}
       </Text>
       <Divider />
-      {teams.map((team) => (
-        <MetricTeamRow key={team.id} team={team} />
-      ))}
+      <ScrollableItem maxHeight="185px">
+        {teams.map((team) => (
+          <MetricTeamRow key={team.id} team={team} />
+        ))}
+      </ScrollableItem>
     </Box>
   )
 }

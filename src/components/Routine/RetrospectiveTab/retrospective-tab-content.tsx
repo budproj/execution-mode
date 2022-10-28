@@ -57,6 +57,7 @@ interface AnswerSummary {
   picture: string
   latestStatusReply: string
   timestamp: Date
+  commentCount: number
 }
 
 const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {
@@ -92,7 +93,8 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
     )
 
     if (answersSummaryData) setAnswersSummary(answersSummaryData)
-  }, [after, before, teamId, servicesPromise])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [after, before, teamId])
 
   useEffect(() => {
     getAnswersSummary()

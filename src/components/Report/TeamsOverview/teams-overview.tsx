@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client'
-import { Box, StyleProps } from '@chakra-ui/react'
+import { Box, Divider, StyleProps } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
+import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { Cycle } from 'src/components/Cycle/types'
 import { CardHeader } from 'src/components/Report/CardHeaders'
 import { useGetGamificationDetails } from 'src/components/Team/hooks'
@@ -23,6 +24,8 @@ export interface GetCompanyTeamsQuery {
 export interface TeamsOverviewProperties extends StyleProps {
   quarter: Cycle['period'] | undefined
 }
+
+const ScrollableItem = getScrollableItem()
 
 const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   const intl = useIntl()
@@ -60,13 +63,16 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
         )}
         subtitle={intl.formatMessage(messages.teamRankingSubTitle)}
       />
+      <Divider />
       {orderedTeams.length === 0 ? (
         <TeamsOverviewBodyTableSkeleton />
       ) : (
-        <TeamsOverviewBodyTableBody
-          isGameficationDisabled={isGameficationDisabled}
-          teamsRanking={orderedTeams}
-        />
+        <ScrollableItem maxHeight="410px">
+          <TeamsOverviewBodyTableBody
+            isGameficationDisabled={isGameficationDisabled}
+            teamsRanking={orderedTeams}
+          />
+        </ScrollableItem>
       )}
     </Box>
   )

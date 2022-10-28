@@ -28,7 +28,7 @@ export interface OverviewData {
   }
 }
 
-interface RoutinesOverviewProperties {
+export interface RoutinesOverviewProperties {
   teamId: string
   after: Date
   before: Date
@@ -56,7 +56,7 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
     const { data: answersOverview } = await routines.get<OverviewData>(
       `/answers/overview/${teamId}`,
       {
-        params: { includeSubteams: false, before, after },
+        params: { includeSubteams: false },
       },
     )
 

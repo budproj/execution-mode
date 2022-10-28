@@ -7,6 +7,8 @@ import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 import { Team } from 'src/components/Team/types'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { getTeamMetrics } from 'src/state/recoil/routine/get-team-metrics'
 
 import messages from '../messages'
@@ -16,6 +18,7 @@ interface MetricTeamRowProperties {
 }
 
 const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
+  const { dispatch } = useEvent(EventType.METRIC_TEAM_ROW_CLICK)
   const { getEmoji } = useGetEmoji()
   const intl = useIntl()
   const {
@@ -32,9 +35,10 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
           justifyContent="space-between"
           paddingTop="15px"
           paddingBottom="15px"
+          onClick={() => dispatch({ teamId: team?.id })}
         >
           <Text color="new-gray.900">{team?.name}</Text>
-          <Flex gap="20px" width="155px" justifyContent="space-between">
+          <Flex gap="20px" width="180px" justifyContent="space-between">
             <Text
               alignItems="center"
               fontWeight="700"

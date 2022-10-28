@@ -2,11 +2,13 @@ import { AxiosInstance } from 'axios'
 
 import { BudConfig } from 'src/config'
 
+import { getCommentsInstance } from './comments'
 import { customHeadersInjector, errorResponseInjector } from './injectors'
 import { getRoutinesInstance } from './routines'
 
 export interface Services {
   routines: AxiosInstance
+  comments: AxiosInstance
 }
 
 const configureInstance = (instance: AxiosInstance, authToken: string) => {
@@ -24,5 +26,6 @@ export const getServices = async (
 
   return {
     routines: configureInstance(getRoutinesInstance(config), authToken),
+    comments: configureInstance(getCommentsInstance(config), authToken),
   }
 }

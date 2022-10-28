@@ -20,6 +20,7 @@ import submitAnswersMessages from './messages'
 
 export const useRoutineFormAnswers = () => {
   const setUserTeams = useSetRecoilState(routineAnswersReturnedData)
+
   const { servicesPromise } = useContext(ServicesContext)
   const setRedirectTeamDrawerIsOpen = useSetRecoilState(isOpenRoutineRedirectTeamPage)
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
@@ -77,8 +78,9 @@ export const useRoutineFormAnswers = () => {
         setUserTeams(userTeams)
         setRedirectTeamDrawerIsOpen(true)
       } else {
-        router.push(`/explore/${userTeams[0].id}#retrospectiva`)
+        router.push(`/explore/${userTeams[0].id}?activeTab=retrospectiva`)
       }
+      //  D6310cc8-cc17-499b-a28c-5c600dd9714a?activeTab=retrospectiva&after=21%2F10%2F2022&before=27%2F10%2F2022
     }
   }
 
