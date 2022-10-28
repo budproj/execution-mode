@@ -37,15 +37,17 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
   const entity = `${COMMENT_DOMAIN.routine}:${answerId ?? ''}`
 
   useEffect(() => {
-    if (answerId) getAnswerDetailed(answerId)
-    getCommentsByEntity({ entity })
+    if (answerId) {
+      getAnswerDetailed(answerId)
+      getCommentsByEntity({ entity })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answerId])
 
   return (
     <Stack>
       <ScrollableItem maxH="750px">
-        {answerId ? (
+        {answerId && answerDetailed.answers.length > 0 ? (
           <>
             <AnswerContent answerId={answerId} />
             <RoutineComments answerOwner={answerDetailed.user.firstName} />
