@@ -23,7 +23,7 @@ const RoutineComments = ({ answerOwner, comments }: RoutineCommentsProperties) =
         {intl.formatMessage(messages.commentsSectionTitle)}
       </Text>
       <List>
-        {comments.length > 0 ? (
+        {comments && comments.length > 0 ? (
           comments.map(({ id, userId, content, createdAt, entity }) => (
             <CommentCard
               key={id}
