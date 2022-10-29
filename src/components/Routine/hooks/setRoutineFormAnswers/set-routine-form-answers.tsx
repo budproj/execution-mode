@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
+import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab/'
 import { Team } from 'src/components/Team/types'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import { isOpenRoutineRedirectTeamPage } from 'src/state/recoil/routine/opened-routine-redirect-team-drawer'
@@ -34,6 +35,7 @@ export const useRoutineFormAnswers = () => {
   const formQuestions = useRecoilValue(routineFormQuestions)
   const filteredFormQuestions = useRecoilValue(retrospectiveRoutineSelector)
   const setShowedQuestion = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
+  const routineTabName = useRoutineTab()
 
   const setRoutineFormAnswers = async () => {
     const requiredQuestions = formQuestions.filter(
@@ -78,9 +80,8 @@ export const useRoutineFormAnswers = () => {
         setUserTeams(userTeams)
         setRedirectTeamDrawerIsOpen(true)
       } else {
-        router.push(`/explore/${userTeams[0].id}?activeTab=retrospectiva`)
+        router.push(`/explore/${userTeams[0].id}?activeTab=${routineTabName}`)
       }
-      //  D6310cc8-cc17-499b-a28c-5c600dd9714a?activeTab=retrospectiva&after=21%2F10%2F2022&before=27%2F10%2F2022
     }
   }
 

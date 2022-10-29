@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { IntlLink } from 'src/components/Base'
+import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab/'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 
@@ -13,6 +14,7 @@ import messages from './messages'
 
 const RoutineReminder = ({ properties, isRead, timestamp, type }: Notification) => {
   const intl = useIntl()
+  const routineTabName = useRoutineTab()
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_ROUTINE_REMINDER_CLICK)
 
@@ -27,7 +29,9 @@ const RoutineReminder = ({ properties, isRead, timestamp, type }: Notification) 
       handleClick={() => {}}
     >
       <IntlLink
-        href={properties.team?.id ? `/explore/${properties.team.id}?activeTab=retrospectiva` : '#'}
+        href={
+          properties.team?.id ? `/explore/${properties.team.id}?activeTab=${routineTabName}` : '#'
+        }
       >
         <Heading
           display="flex"

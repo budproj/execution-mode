@@ -6,6 +6,7 @@ import IntlLink from 'src/components/Base/IntlLink'
 import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
+import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab/'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
@@ -21,11 +22,13 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
   const { dispatch } = useEvent(EventType.METRIC_TEAM_ROW_CLICK)
   const { getEmoji } = useGetEmoji()
   const intl = useIntl()
+  const routineTabName = useRoutineTab()
+
   const {
     overview: { feeling, productivity, roadblock },
   } = getTeamMetrics(team?.id)
 
-  const teamLink = `/explore/${team?.id ?? ''}?activeTab=retrospectiva`
+  const teamLink = team?.id ? `/explore/${team.id}?activeTab=${routineTabName}` : '#'
 
   return (
     <IntlLink href={teamLink}>

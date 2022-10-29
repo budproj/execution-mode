@@ -5,6 +5,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { IntlLink } from 'src/components/Base'
 import { ArrowRight } from 'src/components/Icon'
+import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab/'
 import { isOpenRoutineRedirectTeamPage } from 'src/state/recoil/routine/opened-routine-redirect-team-drawer'
 import { routineAnswersReturnedData } from 'src/state/recoil/routine/user-teams'
 
@@ -16,6 +17,7 @@ const TeamRedirectPage = () => {
   const [isOpen, setIsOpen] = useRecoilState(isOpenRoutineRedirectTeamPage)
   const userTeams = useRecoilValue(routineAnswersReturnedData)
   const intl = useIntl()
+  const routineTabName = useRoutineTab()
 
   return (
     <RoutineDrawer isOpen={isOpen} formSize={1} onClose={() => setIsOpen(false)}>
@@ -32,7 +34,7 @@ const TeamRedirectPage = () => {
 
         <Flex gap={6}>
           {userTeams?.map((team) => (
-            <IntlLink key={team.id} href={`/explore/${team?.id}#retrospectiva`}>
+            <IntlLink key={team.id} href={`/explore/${team?.id}?activeTab=${routineTabName}`}>
               <Button
                 mt={12}
                 fontSize={18}
