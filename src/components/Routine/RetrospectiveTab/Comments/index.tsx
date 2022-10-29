@@ -1,22 +1,21 @@
 import { List, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
 
 import { User } from 'src/components/User/types'
-import { commentsAtom } from 'src/state/recoil/comments/comments'
 
 import CommentCard from './CommentCard'
 import RoutineCommentsEmptyState from './empty-state'
 import messages from './messages'
+import { Comment } from './types'
 
 type RoutineCommentsProperties = {
   answerOwner?: User['firstName']
+  comments: Comment[]
 }
 
-const RoutineComments = ({ answerOwner }: RoutineCommentsProperties) => {
+const RoutineComments = ({ answerOwner, comments }: RoutineCommentsProperties) => {
   const intl = useIntl()
-  const comments = useRecoilValue(commentsAtom)
 
   return (
     <Stack pt={7} pb={5} px={10} spacing={6} w="full">

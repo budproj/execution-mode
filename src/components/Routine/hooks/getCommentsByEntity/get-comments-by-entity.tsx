@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { commentsAtom } from 'src/state/recoil/comments/comments'
@@ -12,13 +12,13 @@ type useGetCommentsByEntityProperties = {
 
 export const useGetCommentsByEntity = () => {
   const { servicesPromise } = useContext(ServicesContext)
-  const setComments = useSetRecoilState(commentsAtom)
+  const [comments, setComments] = useRecoilState(commentsAtom)
 
   const getCommentsByEntity = async ({ entity }: useGetCommentsByEntityProperties) => {
-    const { comments } = await servicesPromise
-    const { data: findedComments } = await comments.get<Comment[]>(`/comments/${entity}`)
-    if (findedComments) setComments(findedComments)
+    const { comments: commentsService } = await servicesPromise
+    const { data: findedComments } = await commentsService.get<Comment[]>(`/comments/${entity}`)
+    setComments(findedComments)
   }
 
-  return { getCommentsByEntity }
+  return { getCommentsByEntity, comments }
 }
