@@ -29,7 +29,7 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
   const router = useRouter()
 
   const { getAnswerDetailed } = useAnswerDetailed()
-  const { getCommentsByEntity } = useGetCommentsByEntity()
+  const { getCommentsByEntity, comments } = useGetCommentsByEntity()
   const answerDetailed = useRecoilValue(answerDetailedAtom)
   const answerQuery = router?.query?.answerId
   const answerId = Array.isArray(answerQuery) ? answerQuery[0] : answerQuery
@@ -45,16 +45,20 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
   }
 
   useEffect(() => {
+    if (answerId) getCommentsByEntity({ entity })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [answerId, answerDetailed])
+
+  useEffect(() => {
     if (answerId) {
       getAnswerDetailed(answerId)
-      getCommentsByEntity({ entity })
     }
 
     if (element) {
       element.scrollIntoView({ block: 'start', behavior: 'smooth' })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answerId, element, entity])
+  }, [answerId])
 
   return (
     <Stack>
@@ -62,7 +66,7 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
         {answerId && answerDetailed.answers.length > 0 ? (
           <div id="comments-list">
             <AnswerContent answerId={answerId} />
-            <RoutineComments answerOwner={answerDetailed.user.firstName} />
+            <RoutineComments comments={comments} answerOwner={answerDetailed.user.firstName} />
             <RoutineCommentsInput
               showLastComment={scrollToShowLastComment}
               routineUser={answerDetailed.user.firstName}
