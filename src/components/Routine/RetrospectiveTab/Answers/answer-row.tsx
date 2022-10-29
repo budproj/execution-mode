@@ -99,12 +99,16 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
                     messages.hourPrefix,
                     { today: isTheDateToday },
                   )} ${format(new Date(answer.timestamp), "kk'h'mm")} `}
-              <ThinkingBalloon
-                marginLeft={5}
-                marginRight={1}
-                desc={intl.formatMessage(messages.thinkingBalloonDescription)}
-              />{' '}
-              {answer.commentCount}
+              {answer.commentCount ? (
+                <>
+                  <ThinkingBalloon
+                    marginLeft={5}
+                    marginRight={1}
+                    desc={intl.formatMessage(messages.thinkingBalloonDescription)}
+                  />
+                  {answer.commentCount}
+                </>
+              ) : undefined}
             </Text>
           </>
         ) : (
