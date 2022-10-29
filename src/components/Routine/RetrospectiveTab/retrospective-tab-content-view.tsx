@@ -1,6 +1,7 @@
 import { Stack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
@@ -27,6 +28,7 @@ const ScrollableItem = getScrollableItem()
 
 const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerContentProperties) => {
   const router = useRouter()
+  const intl = useIntl()
 
   const { getAnswerDetailed } = useAnswerDetailed()
   const { getCommentsByEntity, comments } = useGetCommentsByEntity()
@@ -51,7 +53,7 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
 
   useEffect(() => {
     if (answerId) {
-      getAnswerDetailed(answerId)
+      getAnswerDetailed(answerId, intl.locale)
     }
 
     if (element) {

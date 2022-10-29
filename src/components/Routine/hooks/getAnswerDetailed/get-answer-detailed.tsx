@@ -8,19 +8,23 @@ import { AnswerDetails } from '../../RetrospectiveTab/Answers/types'
 import { AnswerType } from '../../RetrospectiveTab/retrospective-tab-content'
 
 interface useAnswerDetailedProperties {
-  getAnswerDetailed(answerId: AnswerType['id']): void
+  getAnswerDetailed(answerId: AnswerType['id'], locale: string): void
 }
 
 export const useAnswerDetailed = (): useAnswerDetailedProperties => {
   const { servicesPromise } = useContext(ServicesContext)
   const setAnswerDetailed = useSetRecoilState(answerDetailedAtom)
 
-  const getAnswerDetailed = async (answerId: AnswerType['id']) => {
+  const getAnswerDetailed = async (answerId: AnswerType['id'], locale = 'en') => {
+    const useLocaleFormated = locale === 'en-US' ? 'en' : locale.toLocaleLowerCase()
+
     const { routines } = await servicesPromise
-    const { data } = await routines.get<AnswerDetails>(`answer/${answerId}`).catch((error) => {
-      console.error(error)
-      return { data: undefined }
-    })
+    const { data } = await routines
+      .get<AnswerDetails>(`answer/${answerId}?locale=${useLocaleFormated}`)
+      .catch((error) => {
+        console.error(error)
+        return { data: undefined }
+      })
 
     if (data) {
       setAnswerDetailed(data)
