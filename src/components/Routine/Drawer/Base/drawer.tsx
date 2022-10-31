@@ -1,6 +1,6 @@
 import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
@@ -30,6 +30,7 @@ const StyledButton = styled(Button)`
 
 const RoutineDrawer = ({ children, isOpen, formSize, onClose }: RoutineDrawerProperties) => {
   const { comeBack, handleClick } = useRoutinesFormActions()
+  const reference = useRef<HTMLAreaElement>(null)
 
   const [{ size }, setCurrentRoutineProperties] = useRecoilState(currentRoutinePropertiesAtom)
   const currentQuestionIndex = useRecoilValue(retrospectiveRoutineIndexQuestionAtom)
@@ -45,9 +46,11 @@ const RoutineDrawer = ({ children, isOpen, formSize, onClose }: RoutineDrawerPro
   }
 
   useEffect(() => {
-    if (isOpen) document.addEventListener('keydown', handleKeyDown)
+    if (isOpen && reference.current) reference.current.addEventListener('keydown', handleKeyDown)
 
-    return () => document.removeEventListener('keydown', handleKeyDown)
+    const componentReference = reference.current
+
+    return () => componentReference?.removeEventListener('keydown', handleKeyDown)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
@@ -56,7 +59,13 @@ const RoutineDrawer = ({ children, isOpen, formSize, onClose }: RoutineDrawerPro
 
   return (
     <Drawer isOpen={isOpen} placement="bottom" size="full" onClose={onClose}>
-      <DrawerContent display="flex" alignItems="center" bg="new-gray.300" position="relative">
+      <DrawerContent
+        ref={reference}
+        display="flex"
+        alignItems="center"
+        bg="new-gray.300"
+        position="relative"
+      >
         <DrawerCloseButton top={10} right={10} fontSize={20} color="new-gray.800" />
         <DrawerBody
           width="690px"
