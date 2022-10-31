@@ -5,15 +5,18 @@ import { EmptyState } from 'src/components/Base'
 
 import messages from './messages'
 
-const EmptyStateCheckInNotifications = () => {
+const EmptyStateThisWeekNotifications = () => {
   return (
     <Box padding="50px 0px">
       <EmptyState
-        imageKey="people-with-pages"
-        labelMessage={messages.emptyStateCheckInNotifications}
+        imageKey="zen-girl"
+        labelMessage={messages.emptyStateThisWeekNotifications}
+        headerMessage={messages.emptyStateThisWeekNotificationsTitle}
+        maxW="300px"
+        fontSize="14px"
       />
     </Box>
   )
 }
 
-export default EmptyStateCheckInNotifications
+export default EmptyStateThisWeekNotifications

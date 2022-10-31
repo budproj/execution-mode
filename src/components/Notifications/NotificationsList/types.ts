@@ -1,5 +1,6 @@
 export interface Notification {
-  id: string
+  id?: string
+  messageId: string
   isRead: boolean
   type: string
   timestamp: string
@@ -16,6 +17,10 @@ export interface Notification {
       content: string
     }
     task?: {
+      id: string
+      name: string
+    }
+    team?: {
       id: string
       name: string
     }

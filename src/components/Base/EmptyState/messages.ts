@@ -9,6 +9,7 @@ type EmptyStateMessage =
   | 'emptyPersonalObjectives'
   | 'emptyNotificationsList'
   | 'noMoreNotificationsToListing'
+  | 'zenGirl'
 
 export default defineMessages<EmptyStateMessage>({
   workingTeamAlt: {
@@ -16,6 +17,12 @@ export default defineMessages<EmptyStateMessage>({
       'Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo',
     id: 'Zn0eYa',
     description: 'The alternative text explaining our team at work image',
+  },
+  zenGirl: {
+    defaultMessage:
+      'Um desenho de uma mulher com um café na mão e mexendo em um computador, aparentemente feliz.',
+    id: '3dAyni',
+    description: 'The alternative text explaining the zen girl image',
   },
 
   emptyFolderAlt: {

@@ -1,4 +1,7 @@
 import { EventType } from './event-type'
+import { AnswerNowFormClickData } from './events/answer-now-form-click-data'
+import { ChangeTimePeriodClickData } from './events/change-time-period-click-data'
+import { CommentInRoutineAnswerClickData } from './events/comment-in-routine-click-data'
 import { CreatedKeyResultData } from './events/create-key-result-data'
 import { CreatedObjectiveData } from './events/create-objective-data'
 import { CreatedKeyResultCheckInData } from './events/created-key-result-check-in'
@@ -9,15 +12,24 @@ import { DeletedKeyResultCheckMarkEventData } from './events/deleted-key-result-
 import { DeletedPersonalTaskEventData } from './events/deleted-personal-task'
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
+import { MentionInRoutineAnswerClickData } from './events/mention-in-routine-click-data'
+import { MetricTeamRowClickData } from './events/metric-team-row-click-data'
 import { NotificationBellData } from './events/notification-bell-data'
 import { NotificationCardClickData } from './events/notification-card-click-data'
 import { NotificationCheckInClickData } from './events/notification-check-in-click-data'
+import { NotificationRoutineClickData } from './events/notification-routine-click-data'
+import { NotificationRoutineReminderClickData } from './events/notification-routine-reminder-click-data'
 import { OpenedKeyResultChecklistEventData } from './events/opened-key-result-checklist'
 import { OpenedKeyResultDrawerEventData } from './events/opened-key-result-drawer'
 import { OpenedKeyResultReportConfidanceData } from './events/opened-key-result-report-confidance-data'
 import { PageViewEventData } from './events/page-view'
-import { TabCheckInClickData } from './events/tab-check-in-click-data'
+import { RetrospectiveTabClickData } from './events/retrospective-tab-click-data'
+import { RoutineAnswerRowClickData } from './events/routine-answer-row-click-data'
+import { SendAnswerFormClickData } from './events/send-answer-form-click-data'
+import { StartAnswerFormClickData } from './events/start-answer-form-click-data'
 import { TabNotificationClickData } from './events/tab-notification-click-data'
+import { TabThisWeekClickData } from './events/tab-this-week-click-data'
+import { ToggleRoutineReminderClickData } from './events/toggle-routine-reminder-click-data'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
 import { ToggledPersonalTaskEventData } from './events/toggled-personal-task'
 import { UpdatedKeyResultCheckMarkAssigneeEventData } from './events/updated-key-result-check-mark-assignee'
@@ -47,6 +59,18 @@ export type Event = {
   [EventType.NOTIFICATION_BELL_CLICK]: NotificationBellData
   [EventType.NOTIFICATION_CHECK_IN_CLICK]: NotificationCheckInClickData
   [EventType.NOTIFICATION_CARD_CLICK]: NotificationCardClickData
-  [EventType.TAB_CHECKIN_CLICK]: TabNotificationClickData
-  [EventType.TAB_NOTIFICATION_CLICK]: TabCheckInClickData
+  [EventType.TAB_THIS_WEEK_CLICK]: TabThisWeekClickData
+  [EventType.TAB_NOTIFICATION_CLICK]: TabNotificationClickData
+  [EventType.NOTIFICATION_ROUTINE_CLICK]: NotificationRoutineClickData
+  [EventType.NOTIFICATION_ROUTINE_REMINDER_CLICK]: NotificationRoutineReminderClickData
+  [EventType.START_ANSWER_FORM_CLICK]: StartAnswerFormClickData
+  [EventType.SEND_ANSWER_FORM_CLICK]: SendAnswerFormClickData
+  [EventType.RETROSPECTIVE_TAB_CLICK]: RetrospectiveTabClickData
+  [EventType.CHANGE_TIME_PERIOD_CLICK]: ChangeTimePeriodClickData
+  [EventType.ROUTINE_ANSWER_ROW_CLICK]: RoutineAnswerRowClickData
+  [EventType.TOGGLE_ROUTINE_REMINDER_CLICK]: ToggleRoutineReminderClickData
+  [EventType.ANSWER_NOW_FORM_CLICK]: AnswerNowFormClickData
+  [EventType.COMMENT_IN_ROUTINE_ANSWER_CLICK]: CommentInRoutineAnswerClickData
+  [EventType.MENTION_IN_ROUTINE_ANSWER_CLICK]: MentionInRoutineAnswerClickData
+  [EventType.METRIC_TEAM_ROW_CLICK]: MetricTeamRowClickData
 }

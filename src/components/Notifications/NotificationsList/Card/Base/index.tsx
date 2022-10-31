@@ -3,6 +3,7 @@ import React from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
+import { CalendarColored } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
@@ -15,12 +16,13 @@ export interface BaseCardsNotifications {
   handleClick: (id?: KeyResult['id']) => void
   timestamp: string
   describeBadgeAvatarIcon: MessageDescriptor
-  badgeIcon: NOTIFICATIONS_TYPE
+  badgeIcon?: NOTIFICATIONS_TYPE
   sender: {
     id: string
     name: string
     picture: string
   }
+  type?: string
 }
 
 const BaseCardNotification = ({
@@ -31,6 +33,7 @@ const BaseCardNotification = ({
   handleClick,
   timestamp,
   badgeIcon,
+  type,
 }: BaseCardsNotifications) => {
   const intl = useIntl()
 
@@ -52,14 +55,26 @@ const BaseCardNotification = ({
       gap={6}
       onClick={() => handleClick()}
     >
-      <Avatar src={sender?.picture}>
-        <AvatarBadge boxSize="1.2em" border="none">
-          <BadgeAvatarIcon
+      {type === 'routineReminder' ? (
+        <Box marginRight="20px" background="red.100" padding={2} borderRadius="50%" display="flex">
+          <CalendarColored
             desc={intl.formatMessage(describeBadgeAvatarIcon)}
-            typeNotification={badgeIcon}
+            width="25px"
+            height="25px"
           />
-        </AvatarBadge>
-      </Avatar>
+        </Box>
+      ) : (
+        <Avatar src={sender?.picture}>
+          <AvatarBadge boxSize="1.2em" border="none">
+            {badgeIcon && (
+              <BadgeAvatarIcon
+                desc={intl.formatMessage(describeBadgeAvatarIcon)}
+                typeNotification={badgeIcon}
+              />
+            )}
+          </AvatarBadge>
+        </Avatar>
+      )}
       <Flex
         flexDir="column"
         alignItems="flex-start"

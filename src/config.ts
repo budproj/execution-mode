@@ -59,6 +59,9 @@ export interface Route {
 export interface BudAPIs {
   graphql: string
   notifications: string
+  routines: string
+  comments: string
+  restBase: string
 }
 
 export interface Auth0Config {

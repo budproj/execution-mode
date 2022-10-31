@@ -4,7 +4,13 @@ export { default as CheckedIcon } from './Checked/checked'
 
 export { default as ChevronDownCircleIcon } from './ChevronDownCircle'
 
+export { default as CircleArrowRight } from './CircleArrowRight'
+
 export { default as CommentIcon } from './Comment'
+
+export { default as OpenArrowUp } from './OpenArrowUp'
+
+export { default as OpenArrowDown } from './OpenArrowDown'
 
 export { default as PauseIcon } from './Pause'
 
@@ -21,6 +27,8 @@ export { default as ArrowRight } from './ArrowRight'
 export { default as Bookmark } from './Bookmark'
 
 export { default as Calendar } from './Calendar'
+
+export { default as CalendarColored } from './CalendarColored'
 
 export { default as Check } from './Check'
 
@@ -115,5 +123,27 @@ export { default as ArrowHeadDown } from './ArrowHeadDown'
 export { default as LinkedIn } from './LinkedIn'
 
 export { default as Reload } from './Reload'
+
+export {
+  CustomEmojiFeeling1,
+  CustomEmojiFeeling2,
+  CustomEmojiFeeling3,
+  CustomEmojiFeeling4,
+  CustomEmojiFeeling5,
+} from './CustomEmojis'
+
+export { default as GraphicIcon } from './GraphicIcon/graphic-icon'
+
+export { default as SmileIcon } from './SmileIcon/smile-icon'
+
+export { default as WarningLightIcon } from './WarningLightIcon/warning-light-icon'
+
+export { default as BagIcon } from './BagIcon/bag-icon'
+
+export { default as StarIcon } from './StarIcon/star-icon'
+
+export { default as TargetIcon } from './TargetIcon/target-icon'
+
+export { default as WriteIcon } from './WriteIcon/write-icon'
 
 export * from './types'
