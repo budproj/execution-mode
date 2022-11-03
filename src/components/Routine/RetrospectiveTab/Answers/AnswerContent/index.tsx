@@ -1,11 +1,16 @@
 import { Box, Divider, VStack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import CustomMenuOptions, { Option } from 'src/components/Base/MenuOptions'
+import { useDeleteRoutineAnswer } from 'src/components/Routine/hooks/deleteAnswer/delete-routine-answer'
 import { commentsAtom } from 'src/state/recoil/comments/comments'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
+import meAtom from 'src/state/recoil/user/me'
 
 import { AnswerType } from '../../retrospective-tab-content'
+import messages from '../messages'
 
 import RoutineAnswerCard from './AnswerCards'
 import HistoryAnswers from './AnswerCards/HistoryAnswersCard/history-answers'
@@ -18,6 +23,13 @@ type AnswerContent = {
 const AnswerContent = ({ answerId }: AnswerContent) => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
   const setComments = useSetRecoilState(commentsAtom)
+  const intl = useIntl()
+
+  const userID = useRecoilValue(meAtom)
+
+  const { deleteRoutineAnswer } = useDeleteRoutineAnswer()
+
+  const hasPermission = userID === answerDetailed.user.id
 
   useEffect(() => {
     setComments([])
@@ -25,15 +37,31 @@ const AnswerContent = ({ answerId }: AnswerContent) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answerId])
 
+  const menuOptions: Option[] = [
+    {
+      value: intl.formatMessage(messages.firstMenuOption),
+      onSelect: async () => deleteRoutineAnswer(answerId),
+    },
+  ]
+
   return (
     <>
       <UserAnswer user={answerDetailed.user} />
 
       <Divider borderColor="new-gray.400" />
 
-      <VStack align="flex-start" padding={10} pb={12}>
+      <VStack align="flex-start" px={12} py={10}>
         {answerDetailed.history.length > 0 && (
-          <Box>
+          <Box position="relative">
+            {hasPermission && (
+              <CustomMenuOptions
+                options={menuOptions}
+                right={-14}
+                legend={intl.formatMessage(messages.actionsMenuDescription)}
+                position="absolute"
+                gap={1}
+              />
+            )}
             <HistoryAnswers answers={answerDetailed.history} />
             {answerDetailed.answers.map((answer) => {
               return <RoutineAnswerCard key={answer.id} answerData={answer} />
