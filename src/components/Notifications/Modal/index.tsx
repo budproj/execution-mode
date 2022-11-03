@@ -65,7 +65,7 @@ interface NotificationsModalProperties {
 
 const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) => {
   const intl = useIntl()
-  const routines = usePendingRoutines()
+  const { routines } = usePendingRoutines()
   const { dispatch: dispatchTabCheckInClick } = useEvent(EventType.TAB_THIS_WEEK_CLICK)
   const { dispatch: dispatchTabNotificationClick } = useEvent(EventType.TAB_NOTIFICATION_CLICK)
 

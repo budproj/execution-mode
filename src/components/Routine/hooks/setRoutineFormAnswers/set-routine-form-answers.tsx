@@ -5,31 +5,78 @@ import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
+import tabsMessages from 'src/components/Page/Team/messages'
 import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab/'
 import { Team } from 'src/components/Team/types'
+import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import { isOpenRoutineRedirectTeamPage } from 'src/state/recoil/routine/opened-routine-redirect-team-drawer'
+import { overviewDataAtom } from 'src/state/recoil/routine/overview-data'
 import { retrospectiveRoutineListAtom } from 'src/state/recoil/routine/retrospective-routine-answers'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
+import { routineDatesRangeAtom } from 'src/state/recoil/routine/routine-dates-range'
 import {
   retrospectiveRoutineSelector,
   routineFormQuestions,
 } from 'src/state/recoil/routine/routine-form-questions'
 import { routineAnswersReturnedData } from 'src/state/recoil/routine/user-teams'
 
+import { OverviewData } from '../../RetrospectiveTab/RoutinesOverview'
+import { AnswerSummary } from '../../RetrospectiveTab/retrospective-tab-content'
+import { usePendingRoutines } from '../getPendingRoutine'
+
 import submitAnswersMessages from './messages'
 
 export const useRoutineFormAnswers = () => {
   const setUserTeams = useSetRecoilState(routineAnswersReturnedData)
+  const { getPendingRoutines } = usePendingRoutines()
+  const router = useRouter()
+  const intl = useIntl()
 
   const { servicesPromise } = useContext(ServicesContext)
+
   const setRedirectTeamDrawerIsOpen = useSetRecoilState(isOpenRoutineRedirectTeamPage)
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
   const resetCurrentQuestionIndex = useSetRecoilState(retrospectiveRoutineIndexQuestionAtom)
 
-  const router = useRouter()
+  const { query: routerQuery } = router
+  const [id] = Array.isArray(routerQuery?.id) ? routerQuery?.id : [routerQuery?.id]
+
+  const routerTab = Array.isArray(routerQuery?.activeTab)
+    ? routerQuery?.activeTab[0]
+    : routerQuery?.activeTab
+
+  const retrospectiveTab = intl.formatMessage(tabsMessages.retrospectiveTeamTab)
+
+  const setAnswerSummary = useSetRecoilState(answerSummaryAtom)
+  const { after, before } = useRecoilValue(routineDatesRangeAtom)
+  const setRoutineOverviewData = useSetRecoilState(overviewDataAtom)
+
+  const refetchRoutineData = async (teamId: Team['id']) => {
+    const { routines } = await servicesPromise
+    const { data: answerSummary } = await routines.get<AnswerSummary[]>(
+      `/answers/summary/${teamId}`,
+      {
+        params: {
+          before,
+          after,
+          includeSubteams: false,
+        },
+      },
+    )
+    setAnswerSummary(answerSummary)
+
+    const { data: answersOverview } = await routines.get<OverviewData>(
+      `/answers/overview/${teamId}`,
+      {
+        params: { includeSubteams: false },
+      },
+    )
+    if (answersOverview) setRoutineOverviewData(answersOverview)
+    await getPendingRoutines()
+  }
+
   const toaster = useToast()
-  const intl = useIntl()
 
   const [answers, setAnswers] = useRecoilState(retrospectiveRoutineListAtom)
   const formQuestions = useRecoilValue(routineFormQuestions)
@@ -38,6 +85,7 @@ export const useRoutineFormAnswers = () => {
   const routineTabName = useRoutineTab()
 
   const setRoutineFormAnswers = async () => {
+    const { routines } = await servicesPromise
     const requiredQuestions = formQuestions.filter(
       (question) => question.required && !question.hidden,
     )
@@ -65,7 +113,6 @@ export const useRoutineFormAnswers = () => {
       hidden: true,
     }))
 
-    const { routines } = await servicesPromise
     const { data: userTeams } = await routines.post<Team[]>('/answer', [
       ...answers,
       ...mappedHiddenAnswers,
@@ -80,6 +127,12 @@ export const useRoutineFormAnswers = () => {
         setUserTeams(userTeams)
         setRedirectTeamDrawerIsOpen(true)
       } else {
+        const userTeamId = userTeams[0].id
+
+        if (userTeamId === id && routerTab === retrospectiveTab.toLocaleLowerCase()) {
+          await refetchRoutineData(userTeamId)
+        }
+
         router.push(`/explore/${userTeams[0].id}?activeTab=${routineTabName}`)
       }
     }
