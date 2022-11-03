@@ -23,6 +23,8 @@ import {
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
+import { AnswerSummary } from '../retrospective-tab-content'
+
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
 
@@ -32,16 +34,6 @@ interface AnswersComponentProperties {
   after: Date
   before: Date
   week: number
-}
-
-interface AnswerSummary {
-  id: string
-  userId: string
-  name: string
-  picture: string
-  latestStatusReply: string
-  timestamp: Date
-  commentCount: number
 }
 
 const ScrollableItem = getScrollableItem()

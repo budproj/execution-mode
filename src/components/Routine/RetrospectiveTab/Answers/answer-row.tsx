@@ -11,19 +11,12 @@ import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
+import { AnswerSummary } from '../retrospective-tab-content'
+
 import messages from './messages'
 
-interface Answer {
-  id: string
-  name: string
-  picture: string
-  latestStatusReply: string
-  timestamp: Date
-  commentCount: number
-}
-
 interface AnswerRowComponentProperties {
-  answer: Answer
+  answer: AnswerSummary
 }
 
 const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
@@ -35,7 +28,7 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
 
   const { getEmoji } = useGetEmoji()
 
-  const setActiveAnswer = (answerId: Answer['id']) => {
+  const setActiveAnswer = (answerId: AnswerSummary['id']) => {
     if (answerId) {
       router.push(
         {
