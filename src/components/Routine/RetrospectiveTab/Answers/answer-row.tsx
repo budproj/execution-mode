@@ -23,8 +23,9 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
   const intl = useIntl()
   const { dispatch } = useEvent(EventType.ROUTINE_ANSWER_ROW_CLICK)
   const router = useRouter()
-  const [formattedRelativeDate] = useRelativeDate(new Date(answer.timestamp))
-  const isTheDateToday = isToday(new Date(answer.timestamp))
+  const [formattedRelativeDate] = useRelativeDate(new Date(answer.timestamp ?? ''))
+
+  const isTheDateToday = answer.timestamp ? isToday(new Date(answer.timestamp)) : undefined
 
   const { getEmoji } = useGetEmoji()
 
