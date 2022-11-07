@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl'
 
 import { PageContent } from 'src/components/Base'
 import TabsMenu from 'src/components/Page/Team/Tabs/tabs-menu'
-import { useGetGamificationDetails } from 'src/components/Team/hooks'
 import { Team } from 'src/components/Team/types'
 
 import RetrospectiveTabContent from '../../../Routine/RetrospectiveTab/retrospective-tab-content'
@@ -21,8 +20,6 @@ interface ExploreTeamTabsProperties {
 const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProperties) => {
   const intl = useIntl()
 
-  const { isGameficationDisabled } = useGetGamificationDetails()
-
   return (
     <Tabs
       isLazy
@@ -38,12 +35,9 @@ const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProper
           <TabPanel padding="0px !important">
             <OkrsTabContent teamId={teamId} isLoading={isLoading} />
           </TabPanel>
-
-          {!isGameficationDisabled && (
-            <TabPanel padding="0px !important">
-              <RetrospectiveTabContent teamId={teamId} />
-            </TabPanel>
-          )}
+          <TabPanel padding="0px !important">
+            <RetrospectiveTabContent teamId={teamId} />
+          </TabPanel>
         </TabPanels>
       </PageContent>
     </Tabs>

@@ -9,7 +9,6 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NotificationBadge } from 'src/components/Notifications/NotificationBadge'
 import { usePendingRoutines } from 'src/components/Routine/hooks'
-import { useGetGamificationDetails } from 'src/components/Team/hooks'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
@@ -121,8 +120,6 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
 
   setCheckInNotificationsCount(checkinCount + routinesCount)
 
-  const { isGameficationDisabled } = useGetGamificationDetails()
-
   return (
     <PopoverBody padding={0} margin={0} borderRadius={15}>
       <Tabs
@@ -174,9 +171,7 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
           <ScrollablePanel maxH="70vh" width={480}>
             {routines.length > 0 || keyResultsWithNoCheckInThisWeek.length > 0 ? (
               <>
-                {!isGameficationDisabled && routines.length > 0 && (
-                  <RoutineNotification routines={routines} />
-                )}
+                {routines.length > 0 && <RoutineNotification routines={routines} />}
                 {keyResultsWithNoCheckInThisWeek.length > 0 && (
                   <CheckInNotifications
                     userId={userId}
