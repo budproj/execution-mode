@@ -11,6 +11,7 @@ import MetricsOverview from 'src/components/Report/MetricsOverview'
 import { OverviewSummary } from 'src/components/Report/OverviewSummary'
 import TeamsOverview from 'src/components/Report/TeamsOverview'
 import { useGetCompanyCycles } from 'src/components/Report/hooks'
+import { useGetGamificationDetails } from 'src/components/Team/hooks'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
 
@@ -29,6 +30,8 @@ const DashboardPage = () => {
   const quarter = activeCompanyCycles.find((cycle) => cycle.cadence === CADENCE.QUARTERLY)
 
   const pageTitle = called && !loading && intl.formatMessage(messages.greeting, { name: firstName })
+
+  const { isGameficationDisabled } = useGetGamificationDetails()
 
   return (
     <PageContent bg="new-gray.50">
@@ -65,7 +68,7 @@ const DashboardPage = () => {
         </Text>
         <Flex gridGap="3rem">
           <TeamsOverview flex="1" quarter={quarter?.period} />
-          <MetricsOverview maxWidth="50%" flex="1" />
+          {!isGameficationDisabled && <MetricsOverview maxWidth="50%" flex="1" />}
         </Flex>
       </Box>
     </PageContent>

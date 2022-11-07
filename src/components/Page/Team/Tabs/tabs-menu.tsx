@@ -5,6 +5,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import newTagMessages from 'src/components/Base/MainAppBar/messages'
+import { useGetGamificationDetails } from 'src/components/Team/hooks'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
@@ -29,6 +30,8 @@ const StyledTab = styled(Tab)`
 
 const TabsMenu = ({ teamId }: TabsMenuProperties) => {
   const intl = useIntl()
+  const { isGameficationDisabled } = useGetGamificationDetails()
+
   const { dispatch } = useEvent(EventType.RETROSPECTIVE_TAB_CLICK)
 
   const router = useRouter()
@@ -58,21 +61,24 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
         >
           {intl.formatMessage(messages.okrsTeamTab)}
         </StyledTab>
-        <StyledTab
-          px={8}
-          color="new-gray.800"
-          _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
-          paddingBottom={3}
-          onClick={() => {
-            handleClick(intl.formatMessage(messages.retrospectiveTeamTab))
-            dispatch({})
-          }}
-        >
-          {intl.formatMessage(messages.retrospectiveTeamTab)}
-          <Tag size="sm" variant="solid" colorScheme="brand" ml={2}>
-            {intl.formatMessage(newTagMessages.newItem)}
-          </Tag>
-        </StyledTab>
+
+        {!isGameficationDisabled && (
+          <StyledTab
+            px={8}
+            color="new-gray.800"
+            _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+            paddingBottom={3}
+            onClick={() => {
+              handleClick(intl.formatMessage(messages.retrospectiveTeamTab))
+              dispatch({})
+            }}
+          >
+            {intl.formatMessage(messages.retrospectiveTeamTab)}
+            <Tag size="sm" variant="solid" colorScheme="brand" ml={2}>
+              {intl.formatMessage(newTagMessages.newItem)}
+            </Tag>
+          </StyledTab>
+        )}
       </TabList>
     </Stack>
   )
