@@ -19,7 +19,6 @@ export const useCreateComment = () => {
     const { comments } = await servicesPromise
     if (entity) {
       const { data: createdComment } = await comments.post<Comment>(`/comments/${entity}`, {
-        entity,
         content,
       })
       setRoutineComment((previousComments) => [...previousComments, createdComment])

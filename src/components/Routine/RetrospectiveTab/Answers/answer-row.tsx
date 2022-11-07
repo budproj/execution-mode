@@ -11,31 +11,25 @@ import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
+import { AnswerSummary } from '../retrospective-tab-content'
+
 import messages from './messages'
 
-interface Answer {
-  id: string
-  name: string
-  picture: string
-  latestStatusReply: string
-  timestamp: Date
-  commentCount: number
-}
-
 interface AnswerRowComponentProperties {
-  answer: Answer
+  answer: AnswerSummary
 }
 
 const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
   const intl = useIntl()
   const { dispatch } = useEvent(EventType.ROUTINE_ANSWER_ROW_CLICK)
   const router = useRouter()
-  const [formattedRelativeDate] = useRelativeDate(new Date(answer.timestamp))
-  const isTheDateToday = isToday(new Date(answer.timestamp))
+  const [formattedRelativeDate] = useRelativeDate(new Date(answer.timestamp ?? ''))
+
+  const isTheDateToday = answer.timestamp ? isToday(new Date(answer.timestamp)) : undefined
 
   const { getEmoji } = useGetEmoji()
 
-  const setActiveAnswer = (answerId: Answer['id']) => {
+  const setActiveAnswer = (answerId: AnswerSummary['id']) => {
     if (answerId) {
       router.push(
         {

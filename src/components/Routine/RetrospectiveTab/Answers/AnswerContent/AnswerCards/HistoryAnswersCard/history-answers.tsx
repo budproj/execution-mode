@@ -1,4 +1,4 @@
-import { Button, Circle, Divider, Flex, List, ListItem, Text } from '@chakra-ui/react'
+import { Button, Circle, Divider, Flex, List, ListItem, Text, VStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { format, parseISO } from 'date-fns'
 import { useRouter } from 'next/router'
@@ -128,29 +128,34 @@ const HistoryAnswers = ({ answers }: HistoryAnswersProperties) => {
             )
           })}
         </List>
-        <Flex gap={3} width={28}>
-          <StyledButton
-            isDisabled={!previousRoutineAnswered.id}
-            onClick={() => handlePushToAnswer(previousRoutineAnswered)}
-          >
-            <ArrowRight
-              fill="new-gray.700"
+        <VStack>
+          <Flex gap={3} width={28}>
+            <StyledButton
+              isDisabled={!previousRoutineAnswered.id}
+              onClick={() => handlePushToAnswer(previousRoutineAnswered)}
+            >
+              <ArrowRight
+                fill="new-gray.700"
+                style={{ transform: 'rotate(180deg)' }}
+                desc={intl.formatMessage(messages.arrowRightIcon)}
+              />
+            </StyledButton>
+            <StyledButton
+              isDisabled={!lastRoutine.id}
               style={{ transform: 'rotate(180deg)' }}
-              desc={intl.formatMessage(messages.arrowRightIcon)}
-            />
-          </StyledButton>
-          <StyledButton
-            isDisabled={!lastRoutine.id}
-            style={{ transform: 'rotate(180deg)' }}
-            onClick={() => handlePushToAnswer(lastRoutine)}
-          >
-            <ArrowRight
-              fill="new-gray.700"
-              style={{ transform: 'rotate(180deg)' }}
-              desc={intl.formatMessage(messages.arrowLeftIcon)}
-            />
-          </StyledButton>
-        </Flex>
+              onClick={() => handlePushToAnswer(lastRoutine)}
+            >
+              <ArrowRight
+                fill="new-gray.700"
+                style={{ transform: 'rotate(180deg)' }}
+                desc={intl.formatMessage(messages.arrowLeftIcon)}
+              />
+            </StyledButton>
+          </Flex>
+          <Text color="new-gray.600" fontSize={12}>
+            {intl.formatMessage(messages.navigateAnswersHistoryMenu)}
+          </Text>
+        </VStack>
       </Flex>
     </AnswerCardBase>
   )

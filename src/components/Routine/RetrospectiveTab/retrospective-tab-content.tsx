@@ -8,20 +8,23 @@ import {
   Button,
   IconButton,
   useDisclosure,
+  Link,
 } from '@chakra-ui/react'
 import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
+import { CircleArrowRight } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import GearIcon from 'src/components/Icon/Gear'
 import messages from 'src/components/Page/Team/Tabs/content/messages'
 import { NotificationSettingsModal } from 'src/components/Routine/NotificationSettings'
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
+import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
 import {
   getRoutineDateRangeDateFormat,
   routineDatesRangeAtom,
@@ -50,21 +53,21 @@ interface RetrospectiveTabContentProperties {
   teamId: Team['id']
 }
 
-interface AnswerSummary {
-  id: string
+export interface AnswerSummary {
+  id?: string
   userId: string
   name: string
   picture: string
-  latestStatusReply: string
-  timestamp: Date
-  commentCount: number
+  latestStatusReply?: string
+  timestamp?: Date
+  commentCount?: number
 }
 
 const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
   const { servicesPromise } = useContext(ServicesContext)
-  const [answersSummary, setAnswersSummary] = useState<AnswerSummary[]>([])
+  const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
   const team = useRecoilValue(teamAtomFamily(teamId))
   const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
   const { teamOptedOut, toggleDisabledTeam } = useRoutineNotificationSettings(teamId)
@@ -151,7 +154,27 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
             alignItems="center"
             justifyContent="center"
           >
-            {intl.formatMessage(messages.tabRetrospectivePageDescription)}
+            {intl.formatMessage(messages.tabRetrospectivePageDescription, {
+              link: (
+                <Link
+                  isExternal
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  ml={1}
+                  gap={1}
+                  target="_blank"
+                  href="https://www.loom.com/share/4e69b3a0269a4b60ab2f4a290c64abae"
+                  verticalAlign="middle"
+                >
+                  {intl.formatMessage(messages.learnMoreRetrospectiveMessage)}
+                  <CircleArrowRight
+                    alignContent="center"
+                    desc={intl.formatMessage(messages.learnMoreRetrospectiveIcon)}
+                  />
+                </Link>
+              ),
+            })}
           </Text>
         </Stack>
         {canEditTeam ? (

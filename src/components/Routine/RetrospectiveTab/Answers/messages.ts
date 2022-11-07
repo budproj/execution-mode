@@ -12,6 +12,8 @@ type AnswersMessage =
   | 'hourPrefix'
   | 'noAnswerText'
   | 'weekText'
+  | 'actionsMenuDescription'
+  | 'firstMenuOption'
 
 export default defineMessages<AnswersMessage>({
   arrowLeftIconDescription: {
@@ -70,5 +72,17 @@ export default defineMessages<AnswersMessage>({
     defaultMessage: 'Semana',
     id: 'IfVw1+',
     description: 'The text that appears at the week description',
+  },
+
+  actionsMenuDescription: {
+    defaultMessage: 'Opções',
+    id: 'Jw9V43',
+    description: 'This message appears how description to menu action options',
+  },
+
+  firstMenuOption: {
+    defaultMessage: 'Apagar esta resposta',
+    id: 'lvyLZA',
+    description: 'This message is used in the button where the user can delete a routine response.',
   },
 })

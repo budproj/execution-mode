@@ -1083,6 +1083,10 @@
     "defaultMessage": "Know more",
     "description": "A link to a page that talks about the retrospective routine."
   },
+  "e/i9Ml": {
+    "defaultMessage": "A three-dot icon used on a button that opens a menu of options.",
+    "description": "Icon with three dots used on a button that opens an options menu."
+  },
   "e2FL3I": {
     "defaultMessage": "An icon of a plus sign. By clicking on it, you will add a new item to the check-list",
     "description": "This is used by screen readers to understand the insert new check mark icon in our key-result drawer"
@@ -1226,6 +1230,10 @@
   "fsAK9T": {
     "defaultMessage": "Select...",
     "description": "This message appears in the input when no user is selected."
+  },
+  "fSrztQ": {
+    "defaultMessage": "Share your priorities, achievements and barriers with your team. Track and interact with your peers on their journey. {link}",
+    "description": "Description of the content of the Retrospective tab on the teams page."
   },
   "fv5OeR": {
     "defaultMessage": "{confidence, select, roadblock {All key results with a {confidence}} other {All key results with {confidence}}}",
@@ -1751,6 +1759,10 @@
     "defaultMessage": "Are you sure that you want to do it? This action is irreversible",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
   },
+  "Jw9V43": {
+    "defaultMessage": "Options",
+    "description": "This message appears how description to menu action options"
+  },
   "jwsMer": {
     "defaultMessage": "Last check-in",
     "description": "the prefix that is displayed in the last update checkmark."
@@ -1998,6 +2010,10 @@
   "LvI+KK": {
     "defaultMessage": "Language",
     "description": "This message is the label of our locale switcher in the settings page"
+  },
+  "lvyLZA": {
+    "defaultMessage": "Delete this answer",
+    "description": "This message is used in the button where the user can delete a routine response."
   },
   "lWcm/y": {
     "defaultMessage": "There are no key results with this confidence level.",
@@ -2735,6 +2751,10 @@
     "defaultMessage": " \"x\" icon. By clicking on it you will close the progress box",
     "description": "This description is used for accessibility. Screen readers uses it when they hover the close icon button in our progress slider popover close button"
   },
+  "sX1k+9": {
+    "defaultMessage": "Answer deleted successfully!",
+    "description": "This message appears in a toast indicating success in deleting a routines response."
+  },
   "SxsVDt": {
     "defaultMessage": "Goal",
     "description": "This is the label of the check-in form that indicates the goal for her/his key result"
@@ -2883,6 +2903,10 @@
     "defaultMessage": "Team Ranking for {quarter}",
     "description": "Title to show on the team ranking page"
   },
+  "UHZQHg": {
+    "defaultMessage": "Answers",
+    "description": "This message appears in the subtitle of the menu that allows users to browse responses through the history."
+  },
   "ui441M": {
     "defaultMessage": "Rounded corners square icon with a pencil inside",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
@@ -2942,6 +2966,10 @@
   "UUo+Pt": {
     "defaultMessage": "This team is a company",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
+  },
+  "uxjg0W": {
+    "defaultMessage": "Could not delete answer!",
+    "description": "This message appears in a toast indicating that it was not possible to delete a routines response."
   },
   "uXQE/x": {
     "defaultMessage": "View, through the progress bars, the general progress of all companies areas, and related teams and sub-teams.",
@@ -3540,7 +3568,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-10-27T01:24:35Z",
+    "defaultMessage": "2022-11-07T18:21:09Z",
     "description": ""
   }
 }

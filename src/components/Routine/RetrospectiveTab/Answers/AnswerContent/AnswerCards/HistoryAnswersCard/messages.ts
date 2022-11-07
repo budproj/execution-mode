@@ -5,6 +5,7 @@ type HistoryAnswersCardMessages =
   | 'historyAnswersCardTitle'
   | 'arrowRightIcon'
   | 'arrowLeftIcon'
+  | 'navigateAnswersHistoryMenu'
 
 export default defineMessages<HistoryAnswersCardMessages>({
   graphicIconDesc: {
@@ -31,5 +32,12 @@ export default defineMessages<HistoryAnswersCardMessages>({
       'Um ícone de seta para a esquerda que indica que o usuário pode retroceder no histórico para conferir outras respostas da rotina.',
     id: 'h6wsCP',
     description: 'The alternative text explaining our graphic icon',
+  },
+
+  navigateAnswersHistoryMenu: {
+    defaultMessage: 'Respostas',
+    id: 'UHZQHg',
+    description:
+      'This message appears in the subtitle of the menu that allows users to browse responses through the history.',
   },
 })

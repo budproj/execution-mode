@@ -19,5 +19,5 @@ export const usePendingRoutines = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return routines
+  return { routines, getPendingRoutines }
 }
