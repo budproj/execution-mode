@@ -44,6 +44,9 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
         cursor="pointer"
         paddingTop="15px"
         paddingBottom="15px"
+        _hover={{
+          backgroundColor: 'new-gray.100',
+        }}
         onClick={handleTeamSelect}
       >
         <Text color="new-gray.900">{team?.name}</Text>
