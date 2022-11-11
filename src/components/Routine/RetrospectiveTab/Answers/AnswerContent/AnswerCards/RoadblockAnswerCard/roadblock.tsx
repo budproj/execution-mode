@@ -46,8 +46,22 @@ const RoadblockAnswerCard = ({ answerData, user }: RoadblockAnswerCardProperties
   const currentAnswer = answerDataValues[answerDataValues.length - 2]
 
   const weeksThatHaveRoadblock = useMemo(() => {
-    return answerDataValues.filter((answer) => answer.value === 'y').length
-  }, [answerDataValues])
+    let timeWithBarrier = 0
+    if (currentAnswer.value === 'y') {
+      // eslint-disable-next-line array-callback-return
+      answerDataValues.filter((answer, index, array) => {
+        if (
+          index < array.length - 1 &&
+          (index === answerDataValues.length - 2 ||
+            (answer.value === 'y' && array[index + 1].value === 'y'))
+        ) {
+          timeWithBarrier++
+        }
+      })
+    }
+
+    return timeWithBarrier
+  }, [answerDataValues, currentAnswer.value])
 
   return (
     <AnswerCardBase>
@@ -153,7 +167,7 @@ const RoadblockAnswerCard = ({ answerData, user }: RoadblockAnswerCardProperties
             </Text>
           </VStack>
         </HStack>
-        {weeksThatHaveRoadblock ? (
+        {weeksThatHaveRoadblock > 1 && (
           <VStack
             position="absolute"
             right={-48}
@@ -170,8 +184,6 @@ const RoadblockAnswerCard = ({ answerData, user }: RoadblockAnswerCardProperties
               })}
             </Text>
           </VStack>
-        ) : (
-          <div />
         )}
       </Box>
     </AnswerCardBase>

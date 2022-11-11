@@ -30,11 +30,11 @@ const FeelingAnswerCard = ({ answerData, user }: FeelingAnswerCardProperties) =>
   const hasCallToAction = actualFeeling.value <= '2'
 
   return (
-    <AnswerCardBase width="max-content">
+    <AnswerCardBase>
       <WrapperAnswerTitle answerTitle={answerData.heading}>
         <SmileIcon desc="mudar" />
       </WrapperAnswerTitle>
-      <Box flex="1" display="flex" gap={4} justifyContent="space-between" alignItems="flex-start">
+      <Box flex="1" display="flex" justifyContent="space-between" alignItems="flex-start">
         <Flex gap={4}>
           <RoutineChart
             principalColor="yellow"
