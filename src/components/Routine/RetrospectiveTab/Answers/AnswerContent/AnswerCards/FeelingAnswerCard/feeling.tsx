@@ -1,5 +1,4 @@
 import { Box, Flex, Text, VStack } from '@chakra-ui/react'
-import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -18,12 +17,6 @@ interface FeelingAnswerCardProperties {
   answerData: routineAnswer
   user: Partial<User>
 }
-
-const CustomAnswerBox = styled(Box)`
-  @media (min-width: 1220px) {
-    gap: 52px;
-  }
-`
 
 const FeelingAnswerCard = ({ answerData, user }: FeelingAnswerCardProperties) => {
   const { getEmoji } = useGetEmoji()
