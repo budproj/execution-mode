@@ -38,23 +38,29 @@ const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
 
   const answerValueThatDepends = useMemo(() => {
     if (isDependentThat?.values) {
-      const lastValue = isDependentThat.values[isDependentThat.values.length - 1]
       if (isDependentThat.type === 'value_range') {
-        return lastValue?.value <= '3'
+        const lastValue = isDependentThat.values[isDependentThat.values.length - 1]
+        return Number(lastValue?.value) <= 3
       }
 
-      if (isDependentThat.type === 'roadblock') {
+      if (isDependentThat.type === 'road_block') {
+        const lastValue = isDependentThat.values[isDependentThat.values.length - 2]
         return lastValue?.value === 'y'
       }
     }
   }, [isDependentThat])
 
   const justifyContent = useMemo(() => {
-    if (answerValueThatDepends === false || isDependentThat?.type !== 'emoji_scale')
-      return 'flex-start'
-    if (isDependentThat?.type === 'emoji_scale' && width > 780) return 'flex-start'
-    return 'flex-end'
+    if (answerValueThatDepends === false) return 'flex-start'
+    if (answerValueThatDepends === true || isDependentThat?.type === 'emoji_scale')
+      return 'flex-end'
+    if (isDependentThat?.type === 'emoji_scale' && width > 780) return 'flex-end'
   }, [answerValueThatDepends, isDependentThat?.type, width])
+
+  const paddingRight = useMemo(() => {
+    if (isDependentThat?.type === 'emoji_scale' && width > 756) return 4
+    return 0
+  }, [isDependentThat?.type, width])
 
   const icons: Record<string, JSX.Element> = {
     '95b84e67-d5b6-4fcf-938a-b4c9897596cb': (
@@ -80,12 +86,7 @@ const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
             </WrapperAnswerTitle>
           )}
 
-          <Flex
-            width="100%"
-            maxW="595px"
-            pr={isDependentThat?.type === 'emoji_scale' ? 4 : 0}
-            justifyContent={justifyContent}
-          >
+          <Flex width="100%" maxW="595px" pr={paddingRight} justifyContent={justifyContent}>
             <Box
               maxW="430px"
               w="100%"

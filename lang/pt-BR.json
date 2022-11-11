@@ -487,6 +487,10 @@
     "defaultMessage": "Uma seta para cima, indicando que o menu de seleção de ciclos está aberto",
     "description": "This message is displayed to the user screen reader when the year select menu is opened"
   },
+  "7o01YZ": {
+    "defaultMessage": "{user} está com dificuldade para ser produtivo. Que tal conversar sobre isso?",
+    "description": "This message appears how a call to action when the productivity is smaller that 4."
+  },
   "7uQQbf": {
     "defaultMessage": "Nome do período anual",
     "description": "The label of the company yearly period while creating a new workspace"
@@ -898,6 +902,10 @@
   "GKl+a6": {
     "defaultMessage": "Desativar conta",
     "description": "This message is the description of the option to deactivate a user account."
+  },
+  "GYE/N/": {
+    "defaultMessage": "{user} está passando por um momento difícil. Que tal uma conversa?",
+    "description": "This message appears how a call to action when the feeling answer refer the bad something."
   },
   "GeAU92": {
     "defaultMessage": "Um ícone de configurações. Ao clicar nele você irá para a tela de configurações da nossa plataforma",
@@ -2854,6 +2862,10 @@
   "uXQE/x": {
     "defaultMessage": "Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.",
     "description": "The page description that is displayed in Google and screen readers"
+  },
+  "uYEXMZ": {
+    "defaultMessage": "{user} está com barreira há {count, plural, one {# semana} other {# semanas}}. Talvez ele precise de ajuda.",
+    "description": "This message appears how a call to action when the feeling answer refer the bad something."
   },
   "ub6rlW": {
     "defaultMessage": "Alta confiança",

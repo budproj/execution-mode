@@ -32,7 +32,7 @@ const ProductivityAnswerCard = ({ answerData, user }: ProductivityAnswerCardProp
       </WrapperAnswerTitle>
 
       <Box flex="1" display="flex" gap={4} justifyContent="space-between" alignItems="flex-start">
-        <Flex gap={4}>
+        <Flex position="relative" gap={4}>
           <RoutineChart
             principalColor="brand"
             data={chartData}
@@ -48,11 +48,19 @@ const ProductivityAnswerCard = ({ answerData, user }: ProductivityAnswerCardProp
           </Box>
         </Flex>
         {hasCallToAction && (
-          <VStack width="100%" maxW={150} justifyContent="flex-start" alignItems="flex-start">
+          <VStack
+            position="absolute"
+            right={-48}
+            width="100%"
+            maxW={150}
+            justifyContent="flex-start"
+            alignItems="flex-start"
+          >
             <AlertIcon desc="aS" />
             <Text textAlign="left" color="new-gray.600" fontSize={14}>
-              {user.firstName} está com dificuldade para ser produtivo. Que tal conversar sobre
-              isso?
+              {intl.formatMessage(messages.productivityCallToActionMessage, {
+                user: user.firstName,
+              })}
             </Text>
           </VStack>
         )}

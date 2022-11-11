@@ -62,7 +62,7 @@ const RoadblockAnswerCard = ({ answerData, user }: RoadblockAnswerCardProperties
       </WrapperAnswerTitle>
 
       <Box flex="1" display="flex" gap={4} justifyContent="space-between" alignItems="flex-start">
-        <HStack height={61} spacing={4} width="100%" maxW={600}>
+        <HStack position="relative" height={61} spacing={4} width="100%" maxW={600}>
           <List
             display="flex"
             gap={10}
@@ -154,11 +154,20 @@ const RoadblockAnswerCard = ({ answerData, user }: RoadblockAnswerCardProperties
           </VStack>
         </HStack>
         {weeksThatHaveRoadblock ? (
-          <VStack width="100%" maxW={150} justifyContent="flex-start" alignItems="flex-start">
+          <VStack
+            position="absolute"
+            right={-48}
+            width="100%"
+            maxW={150}
+            justifyContent="flex-start"
+            alignItems="flex-start"
+          >
             <AlertIcon desc="aS" />
             <Text textAlign="left" color="new-gray.600" fontSize={14}>
-              {user.firstName} está com barreira há {weeksThatHaveRoadblock} semana(s). Talvez ele
-              precise de ajuda.
+              {intl.formatMessage(messages.roadblockCallToActionMessage, {
+                user: user.firstName,
+                count: weeksThatHaveRoadblock,
+              })}
             </Text>
           </VStack>
         ) : (

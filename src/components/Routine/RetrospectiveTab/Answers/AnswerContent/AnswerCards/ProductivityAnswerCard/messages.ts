@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type ProductivityAnswersCardMessages = 'chartTooltipTitle' | 'subtitleProductivityOnThisWeek'
+type ProductivityAnswersCardMessages =
+  | 'chartTooltipTitle'
+  | 'subtitleProductivityOnThisWeek'
+  | 'productivityCallToActionMessage'
 
 export default defineMessages<ProductivityAnswersCardMessages>({
   chartTooltipTitle: {
@@ -15,5 +18,12 @@ export default defineMessages<ProductivityAnswersCardMessages>({
     id: 'fYwrtN',
     description:
       'This message appears with a subtitle in the cad that informs the user productivity status for the current week.',
+  },
+
+  productivityCallToActionMessage: {
+    defaultMessage: '{user} está com dificuldade para ser produtivo. Que tal conversar sobre isso?',
+    id: '7o01YZ',
+    description:
+      'This message appears how a call to action when the productivity is smaller that 4.',
   },
 })

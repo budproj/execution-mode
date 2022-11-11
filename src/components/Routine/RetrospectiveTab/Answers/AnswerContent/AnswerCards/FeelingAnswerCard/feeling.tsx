@@ -56,10 +56,17 @@ const FeelingAnswerCard = ({ answerData, user }: FeelingAnswerCardProperties) =>
           </Box>
         </Flex>
         {hasCallToAction && (
-          <VStack width="100%" maxW={150} justifyContent="flex-start" alignItems="flex-start">
+          <VStack
+            position="absolute"
+            right={-48}
+            width="100%"
+            maxW={150}
+            justifyContent="flex-start"
+            alignItems="flex-start"
+          >
             <AlertIcon desc="aS" />
             <Text textAlign="left" color="new-gray.600" fontSize={14}>
-              {user.firstName} está passando por um momento difícil. Que tal uma conversa?
+              {intl.formatMessage(messages.feelingCallToActionMessage, { user: user.firstName })}
             </Text>
           </VStack>
         )}

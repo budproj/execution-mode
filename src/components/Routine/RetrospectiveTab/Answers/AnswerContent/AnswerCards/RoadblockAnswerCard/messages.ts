@@ -4,6 +4,7 @@ type HistoryAnswersCardMessages =
   | 'pauseIconDesc'
   | 'subtitleBarrierStatusOnThisWeek'
   | 'barrierStatusOnThisWeek'
+  | 'roadblockCallToActionMessage'
 
 export default defineMessages<HistoryAnswersCardMessages>({
   pauseIconDesc: {
@@ -24,5 +25,13 @@ export default defineMessages<HistoryAnswersCardMessages>({
     defaultMessage: 'Sim!',
     id: 'nriJkh',
     description: 'This message appears when the user has a blockage during the week.',
+  },
+
+  roadblockCallToActionMessage: {
+    defaultMessage:
+      '{user} está com barreira há {count, plural, one {# semana} other {# semanas}}. Talvez ele precise de ajuda.',
+    id: 'uYEXMZ',
+    description:
+      'This message appears how a call to action when the feeling answer refer the bad something.',
   },
 })
