@@ -18,7 +18,7 @@ const RoutineComments = ({ answerOwner, comments }: RoutineCommentsProperties) =
   const intl = useIntl()
 
   return (
-    <Stack pt={7} pb={5} px={10} spacing={6} w="full">
+    <Stack pt={7} pb={5} px={10} spacing={6}>
       <Text color="new=gray.900" fontSize={16} fontWeight="medium">
         {intl.formatMessage(messages.commentsSectionTitle)}
       </Text>

@@ -146,4 +146,6 @@ export { default as TargetIcon } from './TargetIcon/target-icon'
 
 export { default as WriteIcon } from './WriteIcon/write-icon'
 
+export { default as AlertIcon } from './Alert/alert'
+
 export * from './types'

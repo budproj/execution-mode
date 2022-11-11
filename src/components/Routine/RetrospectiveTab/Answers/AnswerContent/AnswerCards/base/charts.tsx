@@ -42,7 +42,7 @@ const RoutineChart = ({ data, tooltipTitle, principalColor }: ProgressHistoryCha
   }))
 
   return (
-    <Box padding={3} bg="new-gray.100" borderRadius={6} w="320px" h={28} pb={-2}>
+    <Box padding={3} bg="new-gray.100" borderRadius={6} maxW="320px" width="100%" h={28} pb={-2}>
       <ResponsiveContainer>
         <ComposedChart id={data[0].timestamp} data={formatedData}>
           {principalColor === 'brand' ? (

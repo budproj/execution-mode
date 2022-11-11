@@ -4,14 +4,13 @@ import { format, parseISO } from 'date-fns'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
-// Import { useSetRecoilState } from 'recoil'
 
 import { ArrowRight, GraphicIcon } from 'src/components/Icon'
 import { answerHistory } from 'src/components/Routine/RetrospectiveTab/Answers/types'
 import { getDateFromUTCDate } from 'src/components/Routine/RetrospectiveTab/Answers/utils'
-// Import { routineDatesRangeAtom } from 'src/state/recoil/routine/routine-dates-range'
 
 import AnswerCardBase from '../base/answer-card'
+import WrapperAnswerTitle from '../base/wrapper-answer-title'
 
 import messages from './messages'
 
@@ -65,13 +64,11 @@ const HistoryAnswers = ({ answers }: HistoryAnswersProperties) => {
 
   return (
     <AnswerCardBase paddingTop={0}>
-      <Flex alignItems="center" gap={6} maxWidth={265}>
+      <WrapperAnswerTitle answerTitle={`${intl.formatMessage(messages.historyAnswersCardTitle)}:`}>
         <GraphicIcon desc={intl.formatMessage(messages.graphicIconDesc)} />
-        <Text fontSize={14} color="new-gray.600">
-          {intl.formatMessage(messages.historyAnswersCardTitle)}:
-        </Text>
-      </Flex>
-      <Flex gap={4}>
+      </WrapperAnswerTitle>
+
+      <Flex gap={4} width="100%" maxW={600}>
         <List
           display="flex"
           gap={10}

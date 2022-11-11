@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react'
+import { Divider, Flex, Stack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
@@ -12,6 +12,7 @@ import useAnswerDetailed from '../hooks/getAnswerDetailed'
 import { useGetCommentsByEntity } from '../hooks/getCommentsByEntity'
 
 import AnswerContent from './Answers/AnswerContent'
+import { UserAnswer } from './Answers/AnswerContent/AnswerCards/UserAnswer'
 import { COMMENT_DOMAIN } from './Answers/utils/constants'
 import RoutineComments from './Comments'
 import RoutineCommentsInput from './Comments/CommentInput/wrapper'
@@ -47,7 +48,9 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
   }
 
   useEffect(() => {
-    if (answerId) getCommentsByEntity({ entity })
+    if (answerId) {
+      getCommentsByEntity({ entity })
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answerId, answerDetailed])
 
@@ -64,6 +67,14 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
 
   return (
     <Stack>
+      {answerId && answerDetailed.answers.length > 0 && (
+        <>
+          <UserAnswer user={answerDetailed.user} />
+          <Flex w="100%" alignItems="center" justifyContent="center">
+            <Divider textAlign="center" width="96%" borderColor="new-gray.400" />
+          </Flex>
+        </>
+      )}
       <ScrollableItem maxH="750px">
         {answerId && answerDetailed.answers.length > 0 ? (
           <div id="comments-list">
