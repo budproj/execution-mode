@@ -58,7 +58,7 @@ const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
   }, [answerValueThatDepends, isDependentThat?.type, width])
 
   const paddingRight = useMemo(() => {
-    if (isDependentThat?.type === 'emoji_scale' && width > 756) return 4
+    if (isDependentThat?.type === 'emoji_scale' && width > 756) return 0
     return 0
   }, [isDependentThat?.type, width])
 

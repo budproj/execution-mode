@@ -167,7 +167,7 @@ const RoadblockAnswerCard = ({ answerData, user }: RoadblockAnswerCardProperties
             </Text>
           </VStack>
         </HStack>
-        {weeksThatHaveRoadblock > 1 && (
+        {weeksThatHaveRoadblock >= 1 && (
           <VStack
             position="absolute"
             right={-48}
