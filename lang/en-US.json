@@ -1235,6 +1235,10 @@
     "defaultMessage": "Select...",
     "description": "This message appears in the input when no user is selected."
   },
+  "FsLWXP": {
+    "defaultMessage": "{user} has {count, plural, one {a barrier} other {barrier{count, plural, one {# week} other { # weeks ago}}}}. Maybe he needs help.",
+    "description": "This message appears how a call to action when the feeling answer refer the bad something."
+  },
   "fSrztQ": {
     "defaultMessage": "Share your priorities, achievements and barriers with your team. Track and interact with your peers on their journey. {link}",
     "description": "Description of the content of the Retrospective tab on the teams page."
@@ -3580,7 +3584,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-11-11T14:24:34Z",
+    "defaultMessage": "2022-11-13T22:27:36Z",
     "description": ""
   }
 }

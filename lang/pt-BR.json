@@ -883,6 +883,10 @@
     "defaultMessage": "Procurar",
     "description": "The text is displayed as the default placeholder for all our search inputs"
   },
+  "FsLWXP": {
+    "defaultMessage": "{user} está com {count, plural, one {uma barreira} other {barreira{count, plural, one {# semana} other { há # semanas}}}}. Talvez ele precise de ajuda.",
+    "description": "This message appears how a call to action when the feeling answer refer the bad something."
+  },
   "G/bGAZ": {
     "defaultMessage": "Ambiente criado com sucesso",
     "description": "The title of the toast that appears when we create a new workspace"
@@ -2862,10 +2866,6 @@
   "uXQE/x": {
     "defaultMessage": "Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.",
     "description": "The page description that is displayed in Google and screen readers"
-  },
-  "uYEXMZ": {
-    "defaultMessage": "{user} está com barreira há {count, plural, one {# semana} other {# semanas}}. Talvez ele precise de ajuda.",
-    "description": "This message appears how a call to action when the feeling answer refer the bad something."
   },
   "ub6rlW": {
     "defaultMessage": "Alta confiança",
