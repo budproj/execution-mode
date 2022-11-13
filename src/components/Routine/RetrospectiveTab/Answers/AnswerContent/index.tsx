@@ -22,6 +22,7 @@ type AnswerContent = {
 const AnswerContent = ({ answerId }: AnswerContent) => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
   const setComments = useSetRecoilState(commentsAtom)
+
   const intl = useIntl()
 
   const userID = useRecoilValue(meAtom)
