@@ -2979,6 +2979,10 @@
     "defaultMessage": "This team is a company",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
+  "uveo/4": {
+    "defaultMessage": "Learn more",
+    "description": "This message appears on action button that redirect the user to company page on Retrospective tab"
+  },
   "uxjg0W": {
     "defaultMessage": "Could not delete answer!",
     "description": "This message appears in a toast indicating that it was not possible to delete a routines response."
@@ -3395,6 +3399,10 @@
     "defaultMessage": "Cancel",
     "description": "Text in the cancel action button"
   },
+  "Yjqtno": {
+    "defaultMessage": "How was your week? Catch up on your Retrospective",
+    "description": "This message appears on the news banner to invite the user to learn about the Retrospective feature."
+  },
   "yK87+y": {
     "defaultMessage": "Start date",
     "description": "The company yearly date start input placeholder while creating a new workspace"
@@ -3584,7 +3592,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-11-13T22:27:36Z",
+    "defaultMessage": "2022-11-14T18:20:09Z",
     "description": ""
   }
 }

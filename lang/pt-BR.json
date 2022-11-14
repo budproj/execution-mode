@@ -1875,6 +1875,10 @@
     "defaultMessage": "Registro",
     "description": "It is used as a fallback if the component has no card type defined for it"
   },
+  "Yjqtno": {
+    "defaultMessage": "Como foi sua semana? Coloque sua Retrospectiva em dia",
+    "description": "This message appears on the news banner to invite the user to learn about the Retrospective feature."
+  },
   "Ykg0Jh": {
     "defaultMessage": "Realizado por <highlight>{author}</highlight> {unit, select, fallback {em} other {}} {time}",
     "description": "This text is displayed as a helper text, below the check-in card title"
@@ -2894,6 +2898,10 @@
   "usAoP+": {
     "defaultMessage": "Trimestral",
     "description": "This option makes an cycle with quarterly cadence"
+  },
+  "uveo/4": {
+    "defaultMessage": "Saiba mais",
+    "description": "This message appears on action button that redirect the user to company page on Retrospective tab"
   },
   "uxjg0W": {
     "defaultMessage": "Não foi possível deletar a resposta!",
