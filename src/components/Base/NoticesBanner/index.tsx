@@ -35,7 +35,7 @@ const NoticesBanner = () => {
 
         return true
       })
-    }, 2800)
+    }, 2300)
 
     return () => clearTimeout(time)
   }, [get])
