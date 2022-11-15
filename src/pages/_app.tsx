@@ -10,6 +10,7 @@ import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
 import HotjarProvider from 'src/components/Base/HotjarProvider'
 import { HubSpotProvider } from 'src/components/Base/HubSpotProvider/wrapper'
 import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
+import NoticesBanner from 'src/components/Base/NoticesBanner'
 import ProgressBar from 'src/components/Base/ProgressBar'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
@@ -69,15 +70,18 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                   <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
                     <ServicesProvider>
                       <RoutinesFormActionsProvider>
-                        <MaintenanceGatekeeper>
-                          <HotjarProvider />
-                          <HubSpotProvider />
-                          <ProgressBar />
-                          <KeyResultSingleDrawer />
-                          <TeamRedirectPage />
-                          <RetrospectiveRoutine />
-                          <Component {...pageProps} />
-                        </MaintenanceGatekeeper>
+                        <>
+                          <NoticesBanner />
+                          <MaintenanceGatekeeper>
+                            <HotjarProvider />
+                            <HubSpotProvider />
+                            <ProgressBar />
+                            <KeyResultSingleDrawer />
+                            <TeamRedirectPage />
+                            <RetrospectiveRoutine />
+                            <Component {...pageProps} />
+                          </MaintenanceGatekeeper>
+                        </>
                       </RoutinesFormActionsProvider>
                     </ServicesProvider>
                   </RecoilIntlProvider>

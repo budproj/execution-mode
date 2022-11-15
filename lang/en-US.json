@@ -519,6 +519,10 @@
     "defaultMessage": "The cycle is active, the check-in functionality is available, and progress is being measured.",
     "description": "This string is used to describe the cycles active status option."
   },
+  "7o01YZ": {
+    "defaultMessage": "{user} is having trouble being productive. How about talking about it?",
+    "description": "This message appears how a call to action when the productivity is smaller that 4."
+  },
   "7tvIOz": {
     "defaultMessage": "Create key result",
     "description": "This is the first option that appears when you open the menu of a given objective inside the accordion button"
@@ -1231,6 +1235,10 @@
     "defaultMessage": "Select...",
     "description": "This message appears in the input when no user is selected."
   },
+  "FsLWXP": {
+    "defaultMessage": "{user} has {count, plural, one {a barrier} other {barrier{count, plural, one {# week} other { # weeks ago}}}}. Maybe he needs help.",
+    "description": "This message appears how a call to action when the feeling answer refer the bad something."
+  },
   "fSrztQ": {
     "defaultMessage": "Share your priorities, achievements and barriers with your team. Track and interact with your peers on their journey. {link}",
     "description": "Description of the content of the Retrospective tab on the teams page."
@@ -1262,6 +1270,10 @@
   "fX4pLO": {
     "defaultMessage": "Platform settings | bud",
     "description": "The page title that is displayed in the browser tab for the platform settings page"
+  },
+  "fYQCBk": {
+    "defaultMessage": "{user} is having trouble being {gender, select, MALE {productive.} FEMALE {productive.} other {productive.}} How about talking about it?",
+    "description": "This message appears how a call to action when the productivity is smaller that 4."
   },
   "fYwrtN": {
     "defaultMessage": "This week",
@@ -1390,6 +1402,10 @@
   "gXiIKg": {
     "defaultMessage": "Low confidence",
     "description": "Title of low confidence health strategy"
+  },
+  "GYE/N/": {
+    "defaultMessage": "{user} is having a hard time. How about a conversation?",
+    "description": "This message appears how a call to action when the feeling answer refer the bad something."
   },
   "GyV44g": {
     "defaultMessage": "Key Results",
@@ -2967,6 +2983,14 @@
     "defaultMessage": "This team is a company",
     "description": "The title message for the crown icon. This icon is used to ilustrate when a team card is actually a company"
   },
+  "uveo/4": {
+    "defaultMessage": "Learn more",
+    "description": "This message appears on action button that redirect the user to company page on Retrospective tab"
+  },
+  "uw/x8G": {
+    "defaultMessage": "{user} has {count, plural, one {a barrier} other {barrier{count, plural, one {# week} other { for # weeks}}}}. Maybe {gender, select, MALE {he needs help.} FEMALE {she needs help.} other {How about offering a helping hand?}}",
+    "description": "This message appears how a call to action when the feeling answer refer the bad something."
+  },
   "uxjg0W": {
     "defaultMessage": "Could not delete answer!",
     "description": "This message appears in a toast indicating that it was not possible to delete a routines response."
@@ -2974,6 +2998,10 @@
   "uXQE/x": {
     "defaultMessage": "View, through the progress bars, the general progress of all companies areas, and related teams and sub-teams.",
     "description": "The page description that is displayed in Google and screen readers"
+  },
+  "uYEXMZ": {
+    "defaultMessage": "{user} has barrier for {count, plural, one {# week} other {# weeks}}. Maybe he needs help.",
+    "description": "This message appears how a call to action when the feeling answer refer the bad something."
   },
   "UYwpSr": {
     "defaultMessage": "Team",
@@ -3379,6 +3407,10 @@
     "defaultMessage": "Cancel",
     "description": "Text in the cancel action button"
   },
+  "Yjqtno": {
+    "defaultMessage": "How was your week? Catch up on your Retrospective",
+    "description": "This message appears on the news banner to invite the user to learn about the Retrospective feature."
+  },
   "yK87+y": {
     "defaultMessage": "Start date",
     "description": "The company yearly date start input placeholder while creating a new workspace"
@@ -3568,7 +3600,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-11-07T18:21:09Z",
+    "defaultMessage": "2022-11-15T13:13:32Z",
     "description": ""
   }
 }

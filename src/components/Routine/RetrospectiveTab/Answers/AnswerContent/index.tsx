@@ -14,7 +14,6 @@ import messages from '../messages'
 
 import RoutineAnswerCard from './AnswerCards'
 import HistoryAnswers from './AnswerCards/HistoryAnswersCard/history-answers'
-import { UserAnswer } from './AnswerCards/UserAnswer'
 
 type AnswerContent = {
   answerId: AnswerType['id']
@@ -23,6 +22,7 @@ type AnswerContent = {
 const AnswerContent = ({ answerId }: AnswerContent) => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
   const setComments = useSetRecoilState(commentsAtom)
+
   const intl = useIntl()
 
   const userID = useRecoilValue(meAtom)
@@ -46,11 +46,7 @@ const AnswerContent = ({ answerId }: AnswerContent) => {
 
   return (
     <>
-      <UserAnswer user={answerDetailed.user} />
-
-      <Divider borderColor="new-gray.400" />
-
-      <VStack align="flex-start" px={12} py={10}>
+      <VStack align="flex-start" px={4} py={10}>
         {answerDetailed.history.length > 0 && (
           <Box position="relative">
             {hasPermission && (
@@ -64,7 +60,13 @@ const AnswerContent = ({ answerId }: AnswerContent) => {
             )}
             <HistoryAnswers answers={answerDetailed.history} />
             {answerDetailed.answers.map((answer) => {
-              return <RoutineAnswerCard key={answer.id} answerData={answer} />
+              return (
+                <RoutineAnswerCard
+                  key={answer.id}
+                  answerData={answer}
+                  userThatAnswered={answerDetailed.user}
+                />
+              )
             })}
           </Box>
         )}

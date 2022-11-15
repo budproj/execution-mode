@@ -1,17 +1,19 @@
-import { Stack } from '@chakra-ui/react'
+import { Divider, Flex, Stack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { Team } from 'src/components/Team/types'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
+import { hasCallToActionOnAnswerDetails } from 'src/state/recoil/routine/has-call-to-action'
 
 import useAnswerDetailed from '../hooks/getAnswerDetailed'
 import { useGetCommentsByEntity } from '../hooks/getCommentsByEntity'
 
 import AnswerContent from './Answers/AnswerContent'
+import { UserAnswer } from './Answers/AnswerContent/AnswerCards/UserAnswer'
 import { COMMENT_DOMAIN } from './Answers/utils/constants'
 import RoutineComments from './Comments'
 import RoutineCommentsInput from './Comments/CommentInput/wrapper'
@@ -32,6 +34,7 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
 
   const { getAnswerDetailed } = useAnswerDetailed()
   const { getCommentsByEntity, comments } = useGetCommentsByEntity()
+  const setHasCallToAction = useSetRecoilState(hasCallToActionOnAnswerDetails)
   const answerDetailed = useRecoilValue(answerDetailedAtom)
   const answerQuery = router?.query?.answerId
   const answerId = Array.isArray(answerQuery) ? answerQuery[0] : answerQuery
@@ -46,8 +49,34 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
     }
   }
 
+  const needCallToAction = useMemo(() => {
+    return answerDetailed.answers.some((answer) => {
+      if (answer.values) {
+        if (
+          answer.type === 'value_range' &&
+          Number(answer.values[answer.values.length - 1].value) <= 3
+        )
+          return true
+
+        if (
+          answer.type === 'emoji_scale' &&
+          Number(answer.values[answer.values.length - 1].value) <= 2
+        )
+          return true
+
+        if (answer.type === 'road_block' && answer.values[answer.values.length - 2].value === 'y')
+          return true
+      }
+
+      return false
+    })
+  }, [answerDetailed.answers])
+
   useEffect(() => {
-    if (answerId) getCommentsByEntity({ entity })
+    if (answerId) {
+      getCommentsByEntity({ entity })
+      setHasCallToAction(needCallToAction)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answerId, answerDetailed])
 
@@ -64,6 +93,14 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
 
   return (
     <Stack>
+      {answerId && answerDetailed.answers.length > 0 && (
+        <>
+          <UserAnswer user={answerDetailed.user} />
+          <Flex w="100%" alignItems="center" justifyContent="center">
+            <Divider textAlign="center" width="96%" borderColor="new-gray.400" />
+          </Flex>
+        </>
+      )}
       <ScrollableItem maxH="750px">
         {answerId && answerDetailed.answers.length > 0 ? (
           <div id="comments-list">

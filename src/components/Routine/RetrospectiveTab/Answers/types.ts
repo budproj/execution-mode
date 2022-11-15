@@ -12,6 +12,7 @@ type answerValue = {
 }
 
 export type routineAnswer = {
+  length: number
   id: string
   heading: string
   type: string
@@ -20,6 +21,7 @@ export type routineAnswer = {
   conditional?: {
     dependsOn: string
   }
+  userThatAnswered: User
 }
 
 export interface AnswerDetails {
