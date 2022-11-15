@@ -5,6 +5,8 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
@@ -16,6 +18,7 @@ const storageKey = 'Bud@new-feature'
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()
   const intl = useIntl()
+  const { dispatch: learnMoreClick } = useEvent(EventType.LEARN_MORE_BANNER_NOTICES_CLICK)
 
   const routineTabName = useRoutineTab()
   const router = useRouter()
@@ -41,8 +44,9 @@ const NoticesBanner = () => {
   }, [get])
 
   const handleRedirect = useCallback(() => {
+    learnMoreClick({})
     router.push(`/explore/${user?.companies?.edges[0]?.node.id ?? ''}?activeTab=${routineTabName}`)
-  }, [router, routineTabName, user?.companies?.edges])
+  }, [learnMoreClick, router, routineTabName, user?.companies?.edges])
 
   const handleCloseBanner = useCallback(() => {
     register(storageKey, false)

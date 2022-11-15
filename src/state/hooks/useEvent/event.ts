@@ -12,6 +12,7 @@ import { DeletedKeyResultCheckMarkEventData } from './events/deleted-key-result-
 import { DeletedPersonalTaskEventData } from './events/deleted-personal-task'
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
+import { LearnMoreBannerNoticesClickData } from './events/learn-more-banner-notices-click-data'
 import { MentionInRoutineAnswerClickData } from './events/mention-in-routine-click-data'
 import { MetricTeamRowClickData } from './events/metric-team-row-click-data'
 import { NotificationBellData } from './events/notification-bell-data'
@@ -73,4 +74,5 @@ export type Event = {
   [EventType.COMMENT_IN_ROUTINE_ANSWER_CLICK]: CommentInRoutineAnswerClickData
   [EventType.MENTION_IN_ROUTINE_ANSWER_CLICK]: MentionInRoutineAnswerClickData
   [EventType.METRIC_TEAM_ROW_CLICK]: MetricTeamRowClickData
+  [EventType.LEARN_MORE_BANNER_NOTICES_CLICK]: LearnMoreBannerNoticesClickData
 }
