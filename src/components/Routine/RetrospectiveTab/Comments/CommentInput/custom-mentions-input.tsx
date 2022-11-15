@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Avatar, Box, Divider, HStack, IconButton, Spinner, Stack } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { Mention, MentionsInput, SuggestionDataItem } from 'react-mentions'
 import { useRecoilValue } from 'recoil'
@@ -36,9 +36,11 @@ interface CustomMentionsInputProperties {
 }
 
 const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProperties) => {
+  const reference = useRef<HTMLDivElement>(null)
   const intl = useIntl()
 
-  const { setValues, values, isSubmitting } = useFormikContext<RoutineCommentsInputInitialValues>()
+  const { setValues, values, isSubmitting, handleSubmit } =
+    useFormikContext<RoutineCommentsInputInitialValues>()
   const [isOnFocus, setIsOnFocus] = useState(Boolean(values.text))
 
   const handleFocus = () => {
@@ -48,6 +50,22 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
   const handleBlur = () => {
     setIsOnFocus(false)
   }
+
+  const handleCommentsInputKeyDown = (event: any) => {
+    const keyCode = event.which || event.key
+
+    if (keyCode === 13 && !event.shiftKey) {
+      event.preventDefault()
+      handleSubmit()
+    }
+  }
+
+  useEffect(() => {
+    reference.current?.addEventListener('keydown', handleCommentsInputKeyDown)
+
+    return () => document.removeEventListener('keydown', handleCommentsInputKeyDown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const placeholder = intl.formatMessage(messages.placeholder, {
     user: userThatWillBeAnswered,
@@ -80,7 +98,7 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
   }, [users])
 
   return (
-    <Stack alignItems="center" mt={2} paddingX={6} width="full">
+    <Stack ref={reference} alignItems="center" mt={2} paddingX={6} width="full">
       <Divider />
       <HStack pb={6} width="100%" spacing={4} justifyContent="space-between">
         <Avatar width="45px" height="45px" src={user?.picture} />
@@ -102,7 +120,6 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
         >
           <MentionsInput
             allowSuggestionsAboveCursor
-            singleLine
             value={values.text}
             placeholder={placeholder}
             style={{
@@ -175,8 +192,9 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
             }
             type="submit"
             position="absolute"
+            top="50%"
             right={2}
-            bottom="0.1rem"
+            transform="translate(0, -50%);"
             color="gray.200"
             aria-label={intl.formatMessage(iconMessages.paperPlaneIconDesc)}
             _hover={{

@@ -74,7 +74,7 @@ const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) =>
             textAlign="right"
           />
         </Flex>
-        <Text wordBreak="break-all" fontSize={14} color="new-gray.900">
+        <Text wordBreak="break-word" fontSize={14} color="new-gray.900">
           {commentText}
         </Text>
         <Button
