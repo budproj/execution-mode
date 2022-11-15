@@ -181,6 +181,7 @@ const RoadblockAnswerCard = ({ answerData, user }: RoadblockAnswerCardProperties
               {intl.formatMessage(messages.roadblockCallToActionMessage, {
                 user: user.firstName,
                 count: weeksThatHaveRoadblock,
+                gender: user.gender,
               })}
             </Text>
           </VStack>

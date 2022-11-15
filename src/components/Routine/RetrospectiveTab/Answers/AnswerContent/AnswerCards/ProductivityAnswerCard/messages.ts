@@ -21,8 +21,9 @@ export default defineMessages<ProductivityAnswersCardMessages>({
   },
 
   productivityCallToActionMessage: {
-    defaultMessage: '{user} está com dificuldade para ser produtivo. Que tal conversar sobre isso?',
-    id: '7o01YZ',
+    defaultMessage:
+      '{user} está com dificuldade para ser {gender, select, MALE {produtivo.} FEMALE {produtiva.} other {produtivo.}} Que tal conversar sobre isso?',
+    id: 'fYQCBk',
     description:
       'This message appears how a call to action when the productivity is smaller that 4.',
   },

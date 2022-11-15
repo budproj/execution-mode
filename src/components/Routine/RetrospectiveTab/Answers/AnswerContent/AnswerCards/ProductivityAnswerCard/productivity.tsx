@@ -60,6 +60,7 @@ const ProductivityAnswerCard = ({ answerData, user }: ProductivityAnswerCardProp
             <Text textAlign="left" color="new-gray.600" fontSize={14}>
               {intl.formatMessage(messages.productivityCallToActionMessage, {
                 user: user.firstName,
+                gender: user.gender,
               })}
             </Text>
           </VStack>

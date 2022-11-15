@@ -1271,6 +1271,10 @@
     "defaultMessage": "Platform settings | bud",
     "description": "The page title that is displayed in the browser tab for the platform settings page"
   },
+  "fYQCBk": {
+    "defaultMessage": "{user} is having trouble being {gender, select, MALE {productive.} FEMALE {productive.} other {productive.}} How about talking about it?",
+    "description": "This message appears how a call to action when the productivity is smaller that 4."
+  },
   "fYwrtN": {
     "defaultMessage": "This week",
     "description": "This message appears with a subtitle in the cad that informs the user productivity status for the current week."
@@ -2983,6 +2987,10 @@
     "defaultMessage": "Learn more",
     "description": "This message appears on action button that redirect the user to company page on Retrospective tab"
   },
+  "uw/x8G": {
+    "defaultMessage": "{user} has {count, plural, one {a barrier} other {barrier{count, plural, one {# week} other { for # weeks}}}}. Maybe {gender, select, MALE {he needs help.} FEMALE {she needs help.} other {How about offering a helping hand?}}",
+    "description": "This message appears how a call to action when the feeling answer refer the bad something."
+  },
   "uxjg0W": {
     "defaultMessage": "Could not delete answer!",
     "description": "This message appears in a toast indicating that it was not possible to delete a routines response."
@@ -3592,7 +3600,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-11-14T18:20:09Z",
+    "defaultMessage": "2022-11-15T13:13:32Z",
     "description": ""
   }
 }

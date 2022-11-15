@@ -29,8 +29,8 @@ export default defineMessages<HistoryAnswersCardMessages>({
 
   roadblockCallToActionMessage: {
     defaultMessage:
-      '{user} está com {count, plural, one {uma barreira} other {barreira{count, plural, one {# semana} other { há # semanas}}}}. Talvez ele precise de ajuda.',
-    id: 'FsLWXP',
+      '{user} está com {count, plural, one {uma barreira} other {barreira{count, plural, one {# semana} other { há # semanas}}}}. Talvez {gender, select, MALE {ele precise de ajuda.} FEMALE {ela precise de ajuda.} other {Que tal oferecer uma ajuda?}} ',
+    id: 'uw/x8G',
     description:
       'This message appears how a call to action when the feeling answer refer the bad something.',
   },
