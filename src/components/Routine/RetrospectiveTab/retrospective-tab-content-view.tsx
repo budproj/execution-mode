@@ -117,7 +117,7 @@ const RetrospectiveTabContentView = ({
             <RoutineComments comments={comments} answerOwner={answerDetailed.user.firstName} />
             <RoutineCommentsInput
               showLastComment={scrollToShowLastComment}
-              routineUser={answerDetailed.user.firstName}
+              routineUser={answerDetailed.user}
               domainEntityId={answerId}
             />
           </div>

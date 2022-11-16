@@ -5,4 +5,6 @@ export enum NOTIFICATIONS_TYPE {
   ADD_SUPPORT_TEAM = 'supportTeam',
   TAGGED_COMMENT = 'taggedInComment',
   COMMENT_ON_MY_KR = 'commentOnKR',
+  COMMENT_ON_MY_ROUTINE = 'commentOnRoutine',
+  MENTION_ON_MY_ROUTINE = 'mentionOnRoutine',
 }
