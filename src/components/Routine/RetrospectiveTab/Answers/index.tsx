@@ -51,11 +51,14 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
   const user = useRecoilValue(selectUser(userID))
   const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
+  const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
   const userTeamIds = userTeams.map((team) => team.id)
-  const isUserFromTheTeam = userTeamIds.includes(teamId)
+  const userCompanie = userCompanies[0].id
+  const isUserFromTheTeam = [userTeamIds, userCompanie].includes(teamId)
 
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
   const isActiveRoutine = isBefore(new Date(), before)
+
   const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
 
   const setNewDate = (newDate: Date) => {
@@ -82,7 +85,8 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
 
   useEffect(() => {
     updateTeams(user?.teams?.edges)
-  }, [updateTeams, user?.teams])
+    updateUserCompanies(user?.companies?.edges)
+  }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
 
   return (
     <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">
