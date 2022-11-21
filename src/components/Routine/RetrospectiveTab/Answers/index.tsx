@@ -156,7 +156,7 @@ const AnswersComponent = ({
       </Flex>
       <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
         {filteredAnswers.map((answer) => (
-          <Skeleton key={answer.id} isLoaded={!isLoading}>
+          <Skeleton key={answer.id} isLoaded={!isLoading} borderRadius={8}>
             <AnswerRowComponent answer={answer} />
           </Skeleton>
         ))}

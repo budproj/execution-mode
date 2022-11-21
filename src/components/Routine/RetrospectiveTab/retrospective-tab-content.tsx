@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
-import React, { useCallback, useContext, useEffect } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
@@ -69,6 +69,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
   const router = useRouter()
   const { servicesPromise } = useContext(ServicesContext)
   const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
+  const [isUsersLoaded, setIsUsersLoaded] = useState(false)
   const team = useRecoilValue(teamAtomFamily(teamId))
   const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
   const { teamOptedOut, toggleDisabledTeam } = useRoutineNotificationSettings(teamId)
@@ -96,7 +97,11 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
       },
     )
 
-    if (answersSummaryData) setAnswersSummary(answersSummaryData)
+    if (answersSummaryData) {
+      setAnswersSummary(answersSummaryData)
+      setIsUsersLoaded(true)
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [after, before, teamId])
 
@@ -219,7 +224,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           before={before}
           week={week}
           answers={answersSummary}
-          isLoading={isLoading}
+          isLoading={isLoading && isUsersLoaded}
           teamId={teamId}
         />
         <Divider orientation="vertical" borderColor="new-gray.400" />
@@ -228,7 +233,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           before={before}
           week={week}
           teamId={teamId}
-          isLoaded={!isLoading}
+          isLoaded={!isLoading && isUsersLoaded}
         />
       </Grid>
 
