@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { TooltipWithRichText } from 'src/components/Base'
+import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { PlusOutline } from 'src/components/Icon'
 import ChevronLeftCircleIcon from 'src/components/Icon/ChevronLeft/chevron-left-circle'
 import InfoCircleIcon from 'src/components/Icon/InfoCircle'
@@ -30,6 +31,8 @@ type EachMemberProperties = {
   member: User
   handleUserRemove: (userID: string) => void
 }
+
+const ScrollableItem = getScrollableItem()
 
 const EachMember = ({ member, handleUserRemove }: EachMemberProperties) => {
   const intl = useIntl()
@@ -133,7 +136,8 @@ export const SupportTeamPopover = ({
           {intl.formatMessage(messages.supportTeamDescription, { name: ownerName })}:
         </Text>
       </PopoverHeader>
-      <Box>
+
+      <ScrollableItem maxH="250px">
         {supportTeamMembers?.map((member) => (
           <EachMember key={member.id} member={member} handleUserRemove={handleUserRemove} />
         ))}
@@ -157,7 +161,7 @@ export const SupportTeamPopover = ({
             </Text>
           </Stack>
         </Box>
-      </Box>
+      </ScrollableItem>
     </Box>
   )
 }
