@@ -1,4 +1,4 @@
-import { Flex, Text, IconButton, GridItem, Divider, Box } from '@chakra-ui/react'
+import { Flex, Text, IconButton, GridItem, Divider, Box, Skeleton } from '@chakra-ui/react'
 import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import { useRouter } from 'next/router'
@@ -34,11 +34,19 @@ interface AnswersComponentProperties {
   after: Date
   before: Date
   week: number
+  isLoading?: boolean
 }
 
 const ScrollableItem = getScrollableItem()
 
-const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersComponentProperties) => {
+const AnswersComponent = ({
+  answers,
+  teamId,
+  after,
+  before,
+  week,
+  isLoading,
+}: AnswersComponentProperties) => {
   const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
   const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
 
@@ -53,7 +61,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
   const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
   const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
   const userTeamIds = userTeams.map((team) => team.id)
-  const userCompanie = userCompanies[0].id
+  const userCompanie = userCompanies[0]?.id
   const isUserFromTheTeam = [userTeamIds, userCompanie].includes(teamId)
 
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
@@ -96,6 +104,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
           aria-label={intl.formatMessage(messages.arrowLeftIconDescription)}
           borderRadius="10px 0px 0px 10px"
           height="38px"
+          disabled={isLoading}
           icon={
             <ArrowRight
               transform="rotate(180deg)"
@@ -117,9 +126,11 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
           background="new-gray.100"
           marginX="3px"
         >
-          {intl.formatMessage(messages.weekText)} {week} (
-          {format(new Date(after), 'dd/MMM', { locale: pt })} a{' '}
-          {format(new Date(before), 'dd/MMM', { locale: pt })})
+          <Skeleton isLoaded={!isLoading}>
+            {intl.formatMessage(messages.weekText)} {week} (
+            {format(new Date(after), 'dd/MMM', { locale: pt })} a{' '}
+            {format(new Date(before), 'dd/MMM', { locale: pt })})
+          </Skeleton>
         </Text>
         <IconButton
           borderRadius="0px 10px 10px 0px"
@@ -145,10 +156,12 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
       </Flex>
       <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
         {filteredAnswers.map((answer) => (
-          <AnswerRowComponent key={answer.id} answer={answer} />
+          <Skeleton key={answer.id} isLoaded={!isLoading}>
+            <AnswerRowComponent answer={answer} />
+          </Skeleton>
         ))}
       </ScrollableItem>
-      {showAnswerNowButton && (
+      {showAnswerNowButton && !isLoading && (
         <Box textAlign="center" marginTop="auto">
           <Divider borderColor="new-gray.400" />
           <Text color="red.500" fontWeight="500" fontSize="14px" marginY="10px">

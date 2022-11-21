@@ -51,6 +51,7 @@ interface RetrospectiveTabContent {
 
 interface RetrospectiveTabContentProperties {
   teamId: Team['id']
+  isLoading?: boolean
 }
 
 export interface AnswerSummary {
@@ -63,7 +64,7 @@ export interface AnswerSummary {
   commentCount?: number
 }
 
-const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {
+const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
   const { servicesPromise } = useContext(ServicesContext)
@@ -177,7 +178,7 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
             })}
           </Text>
         </Stack>
-        {canEditTeam ? (
+        {canEditTeam && !isLoading ? (
           <Stack>
             <ButtonGroup isAttached size="sm" variant="outline" onClick={onOpen}>
               <Button
@@ -218,10 +219,17 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
           before={before}
           week={week}
           answers={answersSummary}
+          isLoading={isLoading}
           teamId={teamId}
         />
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RetrospectiveTabContentView after={after} before={before} week={week} teamId={teamId} />
+        <RetrospectiveTabContentView
+          after={after}
+          before={before}
+          week={week}
+          teamId={teamId}
+          isLoaded={!isLoading}
+        />
       </Grid>
 
       <NotificationSettingsModal

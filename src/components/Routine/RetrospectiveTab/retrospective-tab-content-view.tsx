@@ -24,11 +24,18 @@ interface AnswerContentProperties {
   after: RoutinesOverviewProperties['after']
   before: RoutinesOverviewProperties['before']
   week: RoutinesOverviewProperties['week']
+  isLoaded?: boolean
 }
 
 const ScrollableItem = getScrollableItem()
 
-const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerContentProperties) => {
+const RetrospectiveTabContentView = ({
+  after,
+  before,
+  week,
+  teamId,
+  isLoaded,
+}: AnswerContentProperties) => {
   const router = useRouter()
   const intl = useIntl()
 
@@ -73,23 +80,25 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
   }, [answerDetailed.answers])
 
   useEffect(() => {
-    if (answerId) {
+    if (answerId && isLoaded) {
       getCommentsByEntity({ entity })
       setHasCallToAction(needCallToAction)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answerId, answerDetailed])
+  }, [answerId, answerDetailed, isLoaded])
 
   useEffect(() => {
-    if (answerId) {
-      getAnswerDetailed(answerId, intl.locale)
-    }
+    if (isLoaded) {
+      if (answerId) {
+        getAnswerDetailed(answerId, intl.locale)
+      }
 
-    if (element) {
-      element.scrollIntoView({ block: 'start', behavior: 'smooth' })
+      if (element) {
+        element.scrollIntoView({ block: 'start', behavior: 'smooth' })
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answerId, element, entity])
+  }, [answerId, element, entity, isLoaded])
 
   return (
     <Stack>
@@ -104,7 +113,7 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
       <ScrollableItem maxH="750px">
         {answerId && answerDetailed.answers.length > 0 ? (
           <div id="comments-list">
-            <AnswerContent answerId={answerId} />
+            <AnswerContent answerId={answerId} isLoaded={isLoaded} />
             <RoutineComments comments={comments} answerOwner={answerDetailed.user.firstName} />
             <RoutineCommentsInput
               showLastComment={scrollToShowLastComment}
@@ -113,7 +122,13 @@ const RetrospectiveTabContentView = ({ after, before, week, teamId }: AnswerCont
             />
           </div>
         ) : (
-          <RoutinesOverview after={after} before={before} week={week} teamId={teamId} />
+          <RoutinesOverview
+            after={after}
+            before={before}
+            week={week}
+            teamId={teamId}
+            isLoaded={isLoaded}
+          />
         )}
       </ScrollableItem>
     </Stack>

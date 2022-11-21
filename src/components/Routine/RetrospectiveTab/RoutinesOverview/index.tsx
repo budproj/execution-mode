@@ -35,6 +35,7 @@ export interface RoutinesOverviewProperties {
   after: Date
   before: Date
   week: number
+  isLoaded?: boolean
 }
 
 function formatDate(date: Date) {
@@ -47,7 +48,13 @@ export const getCurrentDataByTimeStamp = (data: AverageData[], timestamp: string
   )
 }
 
-const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewProperties) => {
+const RoutinesOverview = ({
+  teamId,
+  after,
+  before,
+  week,
+  isLoaded,
+}: RoutinesOverviewProperties) => {
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
   const { servicesPromise } = useContext(ServicesContext)
@@ -108,6 +115,7 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
           progressColor="#ffc658"
           highLightIndex={activeDataIndex}
           data={answersOverview?.overview?.feeling}
+          isLoaded={isLoaded}
         />
         <AreaRadialChart
           label={intl.formatMessage(messages.productivityGraphTitle)}
@@ -133,6 +141,7 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
           }
           numberColor="#4BACF9"
           progressColor="#4BACF9"
+          isLoaded={isLoaded}
         />
         {/* <AreaRadialChart
           label="CLAREZA DE ESTRATÉGIA"
