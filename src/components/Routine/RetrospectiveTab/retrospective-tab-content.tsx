@@ -25,6 +25,7 @@ import { NotificationSettingsModal } from 'src/components/Routine/NotificationSe
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
+import { isAnswerSummaryLoad } from 'src/state/recoil/routine/is-answers-summary-load'
 import {
   getRoutineDateRangeDateFormat,
   routineDatesRangeAtom,
@@ -51,6 +52,7 @@ interface RetrospectiveTabContent {
 
 interface RetrospectiveTabContentProperties {
   teamId: Team['id']
+  isLoading?: boolean
 }
 
 export interface AnswerSummary {
@@ -63,11 +65,12 @@ export interface AnswerSummary {
   commentCount?: number
 }
 
-const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) => {
+const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
   const { servicesPromise } = useContext(ServicesContext)
   const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
+  const [isAnswerSummaryLoaded, setIsAnswerSummaryLoaded] = useRecoilState(isAnswerSummaryLoad)
   const team = useRecoilValue(teamAtomFamily(teamId))
   const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
   const { teamOptedOut, toggleDisabledTeam } = useRoutineNotificationSettings(teamId)
@@ -84,6 +87,7 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
 
   const getAnswersSummary = useCallback(async () => {
     const { routines } = await servicesPromise
+    setIsAnswerSummaryLoaded(false)
     const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
       `/answers/summary/${teamId}`,
       {
@@ -95,7 +99,11 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
       },
     )
 
-    if (answersSummaryData) setAnswersSummary(answersSummaryData)
+    if (answersSummaryData) {
+      setAnswersSummary(answersSummaryData)
+      setIsAnswerSummaryLoaded(true)
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [after, before, teamId])
 
@@ -177,7 +185,7 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
             })}
           </Text>
         </Stack>
-        {canEditTeam ? (
+        {canEditTeam && !isLoading ? (
           <Stack>
             <ButtonGroup isAttached size="sm" variant="outline" onClick={onOpen}>
               <Button
@@ -218,10 +226,17 @@ const RetrospectiveTabContent = ({ teamId }: RetrospectiveTabContentProperties) 
           before={before}
           week={week}
           answers={answersSummary}
+          isLoading={!isAnswerSummaryLoaded}
           teamId={teamId}
         />
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RetrospectiveTabContentView after={after} before={before} week={week} teamId={teamId} />
+        <RetrospectiveTabContentView
+          after={after}
+          before={before}
+          week={week}
+          teamId={teamId}
+          isLoaded={!isLoading && isAnswerSummaryLoaded}
+        />
       </Grid>
 
       <NotificationSettingsModal

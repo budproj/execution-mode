@@ -12,19 +12,34 @@ import RoadblockAnswerCard from './RoadblockAnswerCard/roadblock'
 
 interface RoutineAnswerCardProperties {
   answerData: routineAnswer
+  isLoaded?: boolean
   userThatAnswered: Partial<User>
 }
 
-const RoutineAnswerCard = ({ answerData, userThatAnswered }: RoutineAnswerCardProperties) => {
+const RoutineAnswerCard = ({
+  answerData,
+  userThatAnswered,
+  isLoaded,
+}: RoutineAnswerCardProperties) => {
   switch (answerData.type) {
     case 'road_block':
-      return <RoadblockAnswerCard answerData={answerData} user={userThatAnswered} />
+      return (
+        <RoadblockAnswerCard answerData={answerData} user={userThatAnswered} isLoaded={isLoaded} />
+      )
     case 'long_text':
-      return <LongTextAnswerCard answerData={answerData} />
+      return <LongTextAnswerCard answerData={answerData} isLoaded={isLoaded} />
     case 'emoji_scale':
-      return <FeelingAnswerCard answerData={answerData} user={userThatAnswered} />
+      return (
+        <FeelingAnswerCard answerData={answerData} user={userThatAnswered} isLoaded={isLoaded} />
+      )
     case 'value_range':
-      return <ProductivityAnswerCard answerData={answerData} user={userThatAnswered} />
+      return (
+        <ProductivityAnswerCard
+          answerData={answerData}
+          user={userThatAnswered}
+          isLoaded={isLoaded}
+        />
+      )
 
     default:
       return <Box />
