@@ -2,7 +2,7 @@ import { Flex, Text, IconButton, GridItem, Divider, Box, Skeleton } from '@chakr
 import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -14,6 +14,7 @@ import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { isAnswerSummaryLoad } from 'src/state/recoil/routine/is-answers-summary-load'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import {
   getRoutineDateRangeDateFormat,
@@ -56,6 +57,7 @@ const AnswersComponent = ({
   const [filteredAnswers, setFilteredAnswers] = useState<AnswerSummary[]>(answers)
   const userID = useRecoilValue(meAtom)
   const [date, setDate] = useRecoilState(routineDatesRangeAtom)
+  const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
   const user = useRecoilValue(selectUser(userID))
   const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
@@ -69,21 +71,25 @@ const AnswersComponent = ({
 
   const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
 
-  const setNewDate = (newDate: Date) => {
-    const dateRange = getRoutineDateRangeDateFormat(newDate)
-    setDate(dateRange)
-    router.push(
-      {
-        query: {
-          ...(router?.query ?? {}),
-          before: format(dateRange.before, 'dd/MM/yyyy'),
-          after: format(dateRange.after, 'dd/MM/yyyy'),
+  const setNewDate = useCallback(
+    (newDate: Date) => {
+      setIsAnswerSummaryLoaded(false)
+      const dateRange = getRoutineDateRangeDateFormat(newDate)
+      setDate(dateRange)
+      router.push(
+        {
+          query: {
+            ...(router?.query ?? {}),
+            before: format(dateRange.before, 'dd/MM/yyyy'),
+            after: format(dateRange.after, 'dd/MM/yyyy'),
+          },
         },
-      },
-      undefined,
-      { shallow: true },
-    )
-  }
+        undefined,
+        { shallow: true },
+      )
+    },
+    [router, setDate, setIsAnswerSummaryLoaded],
+  )
 
   useEffect(() => {
     if (answers) {
@@ -126,18 +132,16 @@ const AnswersComponent = ({
           background="new-gray.100"
           marginX="3px"
         >
-          <Skeleton isLoaded={!isLoading}>
-            {intl.formatMessage(messages.weekText)} {week} (
-            {format(new Date(after), 'dd/MMM', { locale: pt })} a{' '}
-            {format(new Date(before), 'dd/MMM', { locale: pt })})
-          </Skeleton>
+          {intl.formatMessage(messages.weekText)} {week} (
+          {format(new Date(after), 'dd/MMM', { locale: pt })} a{' '}
+          {format(new Date(before), 'dd/MMM', { locale: pt })})
         </Text>
         <IconButton
           borderRadius="0px 10px 10px 0px"
           background="new-gray.200"
           aria-label={intl.formatMessage(messages.arrowRightIconDescription)}
           height="38px"
-          disabled={isNextWeekDisabled(before)}
+          disabled={isNextWeekDisabled(before) || isLoading}
           icon={
             <ArrowRight
               desc={intl.formatMessage(messages.arrowRightIconDescription)}
@@ -155,11 +159,11 @@ const AnswersComponent = ({
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
       </Flex>
       <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
-        <Skeleton isLoaded={!isLoading} borderRadius={8}>
-          {filteredAnswers.map((answer) => (
-            <AnswerRowComponent key={answer.id} answer={answer} />
-          ))}
-        </Skeleton>
+        {filteredAnswers.map((answer) => (
+          <Skeleton key={answer.id} isLoaded={!isLoading} borderRadius={8}>
+            <AnswerRowComponent answer={answer} />
+          </Skeleton>
+        ))}
       </ScrollableItem>
       {showAnswerNowButton && !isLoading && (
         <Box textAlign="center" marginTop="auto">
