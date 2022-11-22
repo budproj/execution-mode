@@ -2,12 +2,10 @@ import { Box, Heading, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
 
 import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab/'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { isAnswerSummaryLoad } from 'src/state/recoil/routine/is-answers-summary-load'
 
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
@@ -18,12 +16,10 @@ const RoutineReminder = ({ properties, isRead, timestamp, type }: Notification) 
   const intl = useIntl()
   const routineTabName = useRoutineTab()
   const router = useRouter()
-  const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_ROUTINE_REMINDER_CLICK)
 
   const handleRoutineClick = () => {
-    setIsAnswerSummaryLoaded(false)
     if (properties.team?.id)
       router.push(`/explore/${properties.team.id}?activeTab=${routineTabName}`)
     else router.push('#')
