@@ -228,7 +228,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           before={before}
           week={week}
           answers={answersSummary}
-          isLoading={isLoading ?? !isAnswerSummaryLoaded}
+          isLoading={!isAnswerSummaryLoaded}
           teamId={teamId}
         />
         <Divider orientation="vertical" borderColor="new-gray.400" />
