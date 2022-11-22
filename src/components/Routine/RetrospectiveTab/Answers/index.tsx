@@ -87,7 +87,7 @@ const AnswersComponent = ({
         { shallow: true },
       )
     },
-    [router, setDate],
+    [router, setDate]
   )
 
   useEffect(() => {
