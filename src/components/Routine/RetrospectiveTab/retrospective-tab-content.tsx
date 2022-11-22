@@ -86,6 +86,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
 
   const getAnswersSummary = useCallback(async () => {
     const { routines } = await servicesPromise
+    setIsUsersLoaded(false)
     const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
       `/answers/summary/${teamId}`,
       {
@@ -224,7 +225,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           before={before}
           week={week}
           answers={answersSummary}
-          isLoading={isLoading && isUsersLoaded}
+          isLoading={isLoading ?? !isUsersLoaded}
           teamId={teamId}
         />
         <Divider orientation="vertical" borderColor="new-gray.400" />
@@ -233,7 +234,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           before={before}
           week={week}
           teamId={teamId}
-          isLoaded={!isLoading && isUsersLoaded}
+          isLoaded={!isLoading}
         />
       </Grid>
 

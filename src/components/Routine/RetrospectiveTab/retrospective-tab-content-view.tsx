@@ -39,7 +39,7 @@ const RetrospectiveTabContentView = ({
   const router = useRouter()
   const intl = useIntl()
 
-  const { getAnswerDetailed } = useAnswerDetailed()
+  const { getAnswerDetailed, isUserDetailedLoaded } = useAnswerDetailed()
   const { getCommentsByEntity, comments } = useGetCommentsByEntity()
   const setHasCallToAction = useSetRecoilState(hasCallToActionOnAnswerDetails)
   const answerDetailed = useRecoilValue(answerDetailedAtom)
@@ -113,7 +113,7 @@ const RetrospectiveTabContentView = ({
       <ScrollableItem maxH="750px">
         {answerId && answerDetailed.answers.length > 0 ? (
           <div id="comments-list">
-            <AnswerContent answerId={answerId} isLoaded={isLoaded} />
+            <AnswerContent answerId={answerId} isLoaded={isLoaded && isUserDetailedLoaded} />
             <RoutineComments comments={comments} answerOwner={answerDetailed.user.firstName} />
             <RoutineCommentsInput
               showLastComment={scrollToShowLastComment}

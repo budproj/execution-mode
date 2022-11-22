@@ -155,11 +155,11 @@ const AnswersComponent = ({
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
       </Flex>
       <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
-        {filteredAnswers.map((answer) => (
-          <Skeleton key={answer.id} isLoaded={!isLoading} borderRadius={8}>
-            <AnswerRowComponent answer={answer} />
-          </Skeleton>
-        ))}
+        <Skeleton isLoaded={!isLoading} borderRadius={8}>
+          {filteredAnswers.map((answer) => (
+            <AnswerRowComponent key={answer.id} answer={answer} />
+          ))}
+        </Skeleton>
       </ScrollableItem>
       {showAnswerNowButton && !isLoading && (
         <Box textAlign="center" marginTop="auto">
