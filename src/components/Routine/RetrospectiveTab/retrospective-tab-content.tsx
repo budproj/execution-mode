@@ -88,20 +88,22 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
   const getAnswersSummary = useCallback(async () => {
     const { routines } = await servicesPromise
     setIsAnswerSummaryLoaded(false)
-    const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-      `/answers/summary/${teamId}`,
-      {
-        params: {
-          before,
-          after,
-          includeSubteams: false,
+    if (!isLoading) {
+      const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+        `/answers/summary/${teamId}`,
+        {
+          params: {
+            before,
+            after,
+            includeSubteams: false,
+          },
         },
-      },
-    )
+      )
 
-    if (answersSummaryData) {
-      setAnswersSummary(answersSummaryData)
-      setIsAnswerSummaryLoaded(true)
+      if (answersSummaryData) {
+        setAnswersSummary(answersSummaryData)
+        setIsAnswerSummaryLoaded(true)
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -226,7 +228,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           before={before}
           week={week}
           answers={answersSummary}
-          isLoading={!isAnswerSummaryLoaded}
+          isLoading={isLoading ?? !isAnswerSummaryLoaded}
           teamId={teamId}
         />
         <Divider orientation="vertical" borderColor="new-gray.400" />
