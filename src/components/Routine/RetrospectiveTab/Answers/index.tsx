@@ -73,7 +73,6 @@ const AnswersComponent = ({
 
   const setNewDate = useCallback(
     (newDate: Date) => {
-      setIsAnswerSummaryLoaded(false)
       const dateRange = getRoutineDateRangeDateFormat(newDate)
       setDate(dateRange)
       router.push(
@@ -88,7 +87,7 @@ const AnswersComponent = ({
         { shallow: true },
       )
     },
-    [router, setDate, setIsAnswerSummaryLoaded],
+    [router, setDate],
   )
 
   useEffect(() => {
@@ -119,6 +118,7 @@ const AnswersComponent = ({
             />
           }
           onClick={() => {
+            setIsAnswerSummaryLoaded(false)
             setNewDate(sub(date.after, { weeks: 1 }))
             dispatchChangeTimePeriod({})
           }}
@@ -149,6 +149,7 @@ const AnswersComponent = ({
             />
           }
           onClick={() => {
+            setIsAnswerSummaryLoaded(false)
             setNewDate(add(date.after, { weeks: 1 }))
             dispatchChangeTimePeriod({})
           }}
