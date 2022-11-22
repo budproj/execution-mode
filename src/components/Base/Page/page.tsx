@@ -6,8 +6,6 @@ import { useRecoilState } from 'recoil'
 import MainAppBar from 'src/components/Base/MainAppBar'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
-import { EventType } from '../../../state/hooks/useEvent/event-type'
-import { useEvent } from '../../../state/hooks/useEvent/hook'
 import { MainAppBarVariant } from '../MainAppBar/main-app-bar'
 
 export interface PageProperties extends BoxProps {
@@ -21,9 +19,6 @@ const Page = ({ children, appBarVariant, ...rest }: PageProperties): ReactElemen
     query: { keyResultId },
   } = useRouter()
   const [openedKeyResultId, setOpenDrawer] = useRecoilState(keyResultReadDrawerOpenedKeyResultID)
-  const { dispatch } = useEvent(EventType.PAGE_VIEW)
-
-  dispatch({ pathname })
 
   const [keyResultQueryParameterFit] = Array.isArray(keyResultId) ? keyResultId : [keyResultId]
 
