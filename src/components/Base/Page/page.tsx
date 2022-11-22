@@ -15,7 +15,6 @@ export interface PageProperties extends BoxProps {
 
 const Page = ({ children, appBarVariant, ...rest }: PageProperties): ReactElement => {
   const {
-    pathname,
     query: { keyResultId },
   } = useRouter()
   const [openedKeyResultId, setOpenDrawer] = useRecoilState(keyResultReadDrawerOpenedKeyResultID)
