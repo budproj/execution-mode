@@ -3,13 +3,11 @@ import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
 
 import newTagMessages from 'src/components/Base/MainAppBar/messages'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { isAnswerSummaryLoad } from 'src/state/recoil/routine/is-answers-summary-load'
 
 import messages from '../messages'
 
@@ -32,12 +30,10 @@ const StyledTab = styled(Tab)`
 const TabsMenu = ({ teamId }: TabsMenuProperties) => {
   const intl = useIntl()
   const { dispatch } = useEvent(EventType.RETROSPECTIVE_TAB_CLICK)
-  const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
 
   const router = useRouter()
 
   const handleClick = (hashTab: string) => {
-    setIsAnswerSummaryLoaded(false)
     router.push(
       {
         query: {
