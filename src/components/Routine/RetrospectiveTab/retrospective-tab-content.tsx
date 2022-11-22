@@ -88,23 +88,22 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
   const getAnswersSummary = useCallback(async () => {
     const { routines } = await servicesPromise
     setIsAnswerSummaryLoaded(false)
-    if (!isLoading) {
-      const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-        `/answers/summary/${teamId}`,
-        {
-          params: {
-            before,
-            after,
-            includeSubteams: false,
-          },
+    const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+      `/answers/summary/${teamId}`,
+      {
+        params: {
+          before,
+          after,
+          includeSubteams: false,
         },
-      )
+      },
+    )
 
-      if (answersSummaryData) {
-        setAnswersSummary(answersSummaryData)
-        setIsAnswerSummaryLoaded(true)
-      }
+    if (answersSummaryData) {
+      setAnswersSummary(answersSummaryData)
     }
+
+    setIsAnswerSummaryLoaded(true)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [after, before, teamId])
