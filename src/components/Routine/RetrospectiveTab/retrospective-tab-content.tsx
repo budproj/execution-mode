@@ -101,8 +101,9 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
 
     if (answersSummaryData) {
       setAnswersSummary(answersSummaryData)
-      setIsAnswerSummaryLoaded(true)
     }
+
+    setIsAnswerSummaryLoaded(true)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [after, before, teamId])
