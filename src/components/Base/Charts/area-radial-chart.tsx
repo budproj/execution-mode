@@ -1,4 +1,4 @@
-import { Text, Flex, Divider } from '@chakra-ui/react'
+import { Text, Flex, Divider, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 
 import { AverageData } from 'src/components/Routine/RetrospectiveTab/RoutinesOverview'
@@ -14,6 +14,7 @@ interface AreaRadialChartProperties {
   numberColor: string
   highLightIndex: number
   icon?: JSX.Element
+  isLoaded?: boolean
   data?: AverageData[]
 }
 
@@ -31,6 +32,7 @@ export const AreaRadialChart = ({
   strokeLineColor,
   highLightIndex,
   data,
+  isLoaded,
 }: AreaRadialChartProperties) => {
   return (
     <>
@@ -43,29 +45,31 @@ export const AreaRadialChart = ({
       >
         {label}
       </Text>
-      <Flex
-        background="new-gray.50"
-        paddingX="18px"
-        justifyContent="center"
-        alignItems="center"
-        marginBottom="40px"
-      >
-        <AreaChartComponent
-          data={data}
-          areaStartColor={areaStartColor}
-          areaEndColor={areaEndColor}
-          strokeLineColor={strokeLineColor}
-          tooltipTitle={capitalizeFirstLetter(label)}
-        />
-        <Divider orientation="vertical" h="160px" marginLeft="30px" borderColor="new-gray.400" />
+      <Skeleton isLoaded={isLoaded} borderRadius={12}>
+        <Flex
+          background="new-gray.50"
+          paddingX="18px"
+          justifyContent="center"
+          alignItems="center"
+          marginBottom="40px"
+        >
+          <AreaChartComponent
+            data={data}
+            areaStartColor={areaStartColor}
+            areaEndColor={areaEndColor}
+            strokeLineColor={strokeLineColor}
+            tooltipTitle={capitalizeFirstLetter(label)}
+          />
+          <Divider orientation="vertical" h="160px" marginLeft="30px" borderColor="new-gray.400" />
 
-        <RadialChartComponent
-          data={data?.[highLightIndex]?.average}
-          icon={icon}
-          numberColor={numberColor}
-          progressColor={progressColor}
-        />
-      </Flex>
+          <RadialChartComponent
+            data={data?.[highLightIndex]?.average}
+            icon={icon}
+            numberColor={numberColor}
+            progressColor={progressColor}
+          />
+        </Flex>
+      </Skeleton>
     </>
   )
 }

@@ -17,9 +17,10 @@ import HistoryAnswers from './AnswerCards/HistoryAnswersCard/history-answers'
 
 type AnswerContent = {
   answerId: AnswerType['id']
+  isLoaded?: boolean
 }
 
-const AnswerContent = ({ answerId }: AnswerContent) => {
+const AnswerContent = ({ answerId, isLoaded }: AnswerContent) => {
   const answerDetailed = useRecoilValue(answerDetailedAtom)
   const setComments = useSetRecoilState(commentsAtom)
 
@@ -58,13 +59,14 @@ const AnswerContent = ({ answerId }: AnswerContent) => {
                 gap={1}
               />
             )}
-            <HistoryAnswers answers={answerDetailed.history} />
+            <HistoryAnswers isLoaded={isLoaded} answers={answerDetailed.history} />
             {answerDetailed.answers.map((answer) => {
               return (
                 <RoutineAnswerCard
                   key={answer.id}
                   answerData={answer}
                   userThatAnswered={answerDetailed.user}
+                  isLoaded={isLoaded}
                 />
               )
             })}

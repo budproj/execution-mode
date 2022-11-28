@@ -1,4 +1,14 @@
-import { Button, Circle, Divider, Flex, List, ListItem, Text, VStack } from '@chakra-ui/react'
+import {
+  Button,
+  Circle,
+  Divider,
+  Flex,
+  List,
+  ListItem,
+  Skeleton,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { format, parseISO } from 'date-fns'
 import { useRouter } from 'next/router'
@@ -16,6 +26,7 @@ import messages from './messages'
 
 interface HistoryAnswersProperties {
   answers: answerHistory[]
+  isLoaded?: boolean
 }
 
 const StyledButton = styled(Button)`
@@ -25,7 +36,7 @@ const StyledButton = styled(Button)`
   height: 40px;
 `
 
-const HistoryAnswers = ({ answers }: HistoryAnswersProperties) => {
+const HistoryAnswers = ({ answers, isLoaded }: HistoryAnswersProperties) => {
   const intl = useIntl()
   const router = useRouter()
 
@@ -68,7 +79,7 @@ const HistoryAnswers = ({ answers }: HistoryAnswersProperties) => {
         <GraphicIcon desc={intl.formatMessage(messages.graphicIconDesc)} />
       </WrapperAnswerTitle>
 
-      <Flex gap={4} width="100%" maxW={600}>
+      <Skeleton isLoaded={isLoaded} display="flex" gap={4} width="100%" maxW={600}>
         <List
           display="flex"
           gap={10}
@@ -153,7 +164,7 @@ const HistoryAnswers = ({ answers }: HistoryAnswersProperties) => {
             {intl.formatMessage(messages.navigateAnswersHistoryMenu)}
           </Text>
         </VStack>
-      </Flex>
+      </Skeleton>
     </AnswerCardBase>
   )
 }
