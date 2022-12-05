@@ -7,7 +7,7 @@ import { configHighlightModal } from 'src/state/recoil/team/highlight/is-open-hi
 import { CARD_TYPES } from './utils/card-types'
 import { highlightCardTheme } from './utils/theme'
 
-type HightlightCard = {
+export type HightlightCard = {
   type: CARD_TYPES
   title: string
   quantity: number
@@ -38,7 +38,7 @@ const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionPropert
         {data.map((item) => (
           <VStack
             key={item.title}
-            cursor="pointer"
+            cursor={item.quantity >= 1 ? 'pointer' : 'default'}
             textAlign="center"
             alignItems="center"
             justifyContent="center"
@@ -51,7 +51,7 @@ const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionPropert
               bg: highlightCardTheme[item.type].hover,
             }}
             borderRadius={9}
-            onClick={() => handleOpenModal(item.type)}
+            onClick={item.quantity >= 1 ? () => handleOpenModal(item.type) : undefined}
           >
             <Text
               flex={2}
