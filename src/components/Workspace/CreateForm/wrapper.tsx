@@ -5,6 +5,8 @@ import { Form, Formik } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { postCreateTeamSettings } from 'src/state/recoil/routine/post-create-team-settings'
+
 import { LOCALE } from '../../../config'
 import { TEAM_GENDER } from '../../Team/constants'
 import { USER_GENDER } from '../../User/constants'
@@ -54,6 +56,7 @@ const initialValues: CreateWorkspaceFormValues = {
 export const CreateFormWrapper = () => {
   const intl = useIntl()
   const toast = useToast()
+  const createTeamSettings = postCreateTeamSettings()
   const [addConsultant, { loading: addingConsultant }] = useMutation(queries.ADD_CONSULTANT, {
     onCompleted: () => {
       toast({
@@ -70,6 +73,8 @@ export const CreateFormWrapper = () => {
       })
     },
     onCompleted: async (data) => {
+      void createTeamSettings(data.createWorkspace.id)
+
       void addConsultant({
         variables: {
           // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
