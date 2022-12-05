@@ -1,0 +1,93 @@
+import { useQuery } from '@apollo/client'
+import { useState } from 'react'
+
+import { Team } from 'src/components/Team/types'
+
+import { CARD_TYPES } from '../../utils/card-types'
+
+import GET_KEY_RESULTS_HIGHLIGHTS from './get-key-results-highlights.gql'
+
+interface KeyResultsHighlights {
+  getTeamFlags: {
+    outdatedLength: number
+    lowLength: number
+    noRelatedLength: number
+    barrierLength: number
+  }
+  loading: boolean
+  called: boolean
+}
+
+type HightlightCard = {
+  type: CARD_TYPES
+  title: string
+  quantity: number
+}
+
+interface GetKeyResultsHighlights {
+  data: HightlightCard[]
+  setTeamId: (teamId: Team['id']) => void
+  loading: boolean
+  called: boolean
+}
+
+export const useGetKeyResultsHighlights = (): GetKeyResultsHighlights => {
+  const [teamHighlights, setTeamHighlights] = useState<HightlightCard[]>([])
+  const [teamId, setTeamId] = useState<Team['id'] | undefined>()
+
+  const query = {
+    teamId,
+  }
+
+  const { loading, called } = useQuery<KeyResultsHighlights>(GET_KEY_RESULTS_HIGHLIGHTS, {
+    variables: query,
+    fetchPolicy: 'network-only',
+    onCompleted: (data) => {
+      const dataParsed = parsedData(data.getTeamFlags)
+
+      if (dataParsed.length > 0) setTeamHighlights(dataParsed)
+    },
+  })
+
+  return { data: teamHighlights, setTeamId, loading, called }
+}
+
+const parsedData = (data: KeyResultsHighlights['getTeamFlags']) => {
+  const parsedHightlight: HightlightCard[] = []
+
+  for (const item of Object.keys(data)) {
+    if (item === 'outdatedLength') {
+      parsedHightlight.push({
+        type: CARD_TYPES.CHECKIN,
+        title: 'Check-in atrasado',
+        quantity: data.outdatedLength,
+      })
+    }
+
+    if (item === 'lowLength') {
+      parsedHightlight.push({
+        type: CARD_TYPES.CONFIDENCE,
+        title: 'Baixa confiança',
+        quantity: data.lowLength,
+      })
+    }
+
+    if (item === 'noRelatedLength') {
+      parsedHightlight.push({
+        type: CARD_TYPES.KRMEMBERS,
+        title: 'Membros sem KRS',
+        quantity: data.noRelatedLength,
+      })
+    }
+
+    if (item === 'barrierLength') {
+      parsedHightlight.push({
+        type: CARD_TYPES.BARRIER,
+        title: 'Barreira',
+        quantity: data.barrierLength,
+      })
+    }
+  }
+
+  return parsedHightlight
+}
