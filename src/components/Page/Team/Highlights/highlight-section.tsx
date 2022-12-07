@@ -7,15 +7,15 @@ import { configHighlightModal } from 'src/state/recoil/team/highlight/is-open-hi
 import { CARD_TYPES } from './utils/card-types'
 import { highlightCardTheme } from './utils/theme'
 
-type HightlightCard = {
+export type HighlightCard = {
   type: CARD_TYPES
-  title: string
   quantity: number
+  usersIds: string[]
 }
 
 interface HighlightSectionProperties {
   title: string
-  data: HightlightCard[]
+  data?: HighlightCard[]
   gridTemplate: GridProps['templateColumns']
 }
 
@@ -23,11 +23,21 @@ const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionPropert
   const setHighlightModalConfig = useSetRecoilState(configHighlightModal)
 
   const handleOpenModal = useCallback(
-    (type) => {
-      setHighlightModalConfig({ isOpen: true, type })
+    (item: HighlightCard) => {
+      setHighlightModalConfig({ isOpen: true, type: item.type, usersIds: item.usersIds })
     },
     [setHighlightModalConfig],
   )
+
+  const cardTitle = new Map([
+    [CARD_TYPES.FEELING, 'desanimados'],
+    [CARD_TYPES.PRODUCTIVITY, 'baixa produtividade'],
+    [CARD_TYPES.ROADBLOCK, 'bloqueio'],
+    [CARD_TYPES.CHECKIN, 'check-in atrasado'],
+    [CARD_TYPES.CONFIDENCE, 'baixa confiança'],
+    [CARD_TYPES.KRMEMBERS, 'membros sem krs'],
+    [CARD_TYPES.BARRIER, 'barreira'],
+  ])
 
   return (
     <VStack>
@@ -35,10 +45,10 @@ const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionPropert
         {title}
       </Text>
       <Grid gap={3} w="100%" templateColumns={gridTemplate}>
-        {data.map((item) => (
+        {data?.map((item) => (
           <VStack
-            key={item.title}
-            cursor="pointer"
+            key={cardTitle.get(item.type)}
+            cursor={item.quantity > 0 ? 'pointer' : 'auto'}
             textAlign="center"
             alignItems="center"
             justifyContent="center"
@@ -51,7 +61,7 @@ const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionPropert
               bg: highlightCardTheme[item.type].hover,
             }}
             borderRadius={9}
-            onClick={() => handleOpenModal(item.type)}
+            onClick={() => (item.quantity > 0 ? handleOpenModal(item) : false)}
           >
             <Text
               flex={2}
@@ -63,7 +73,7 @@ const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionPropert
               maxW={120}
               wordBreak="break-word"
             >
-              {item.title.toUpperCase()}
+              {cardTitle.get(item.type)?.toUpperCase()}
             </Text>
             <Text
               flex={1}

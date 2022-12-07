@@ -38,9 +38,9 @@ export default defineMessages<MetricsOverview>({
     description: 'The title of the productivity chart',
   },
   withBarrierRadialChartTitle: {
-    defaultMessage: 'Com Barreira',
-    id: 'Ww/cjH',
-    description: 'The title of the with barrier chart',
+    defaultMessage: 'Bloqueio',
+    id: 'xXhMFZ',
+    description: 'The title of the with roadblock chart',
   },
   productivityIconDescription: {
     defaultMessage: 'Ícone de maleta representando o índice de produtividade',
@@ -48,9 +48,8 @@ export default defineMessages<MetricsOverview>({
     description: 'The description of the productivty icon',
   },
   pauseIconDescription: {
-    defaultMessage:
-      'Ícone de pausa representando a quantidade de OKRs com barreiras que a empresa tem',
-    id: 'J8/Pfg',
+    defaultMessage: 'Ícone de pausa representando a quantidade de bloqueios que a empresa tem',
+    id: 'eJH8kc',
     description: 'The description of the with barrier icon',
   },
   byTeamMetricRowTitle: {

@@ -20,7 +20,7 @@ const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
       <Box flexGrow={1}>
         <TeamObjectives teamID={teamId} />
       </Box>
-      <TeamHightlightModal teamId={teamId} />
+      <TeamHightlightModal />
       <Stack spacing="8" w="md" minW="md">
         <TeamHighlightsWrapper teamID={teamId} />
         <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
