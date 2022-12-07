@@ -7,7 +7,7 @@ import { PREFIX } from '../constants'
 type configHighlightModalProperties = {
   type: CARD_TYPES | undefined
   isOpen: boolean
-  usersIds: string[]
+  usersIds?: string[]
 }
 
 export const configHighlightModal = atom<configHighlightModalProperties>({

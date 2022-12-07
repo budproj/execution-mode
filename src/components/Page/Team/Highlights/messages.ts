@@ -4,6 +4,7 @@ type ExploreTeamHightlightsMessage =
   | 'title'
   | 'teamMembersHighlightTitleSection'
   | 'teamKRsHighlightTitleSection'
+  | 'cardTitle'
 
 export default defineMessages<ExploreTeamHightlightsMessage>({
   title: {
@@ -20,5 +21,11 @@ export default defineMessages<ExploreTeamHightlightsMessage>({
     defaultMessage: 'Pontos de atenção nos resultados-chave',
     id: '6cUb9x',
     description: 'This message appears in the title of the team KRs attention points section.',
+  },
+  cardTitle: {
+    defaultMessage:
+      '{type, select, feeling {desanimados} productivity {baixa produtividade} roadblock {bloqueio} checkin {check-in atrasado} confidence {baixa confiança} krmembers {membros sem krs} barrier {barreira} other {}}',
+    id: 'WOh2vc',
+    description: 'The title of the cards',
   },
 })
