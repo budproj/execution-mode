@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from '@chakra-ui/react'
+import { Box, Skeleton, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -16,13 +16,14 @@ import messages from './messages'
 
 interface LongTextAnswerCardProperties {
   answerData: routineAnswer
+  isLoaded?: boolean
 }
 
 const StyledListItem = styled.span`
   display: block;
 `
 
-const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
+const LongTextAnswerCard = ({ answerData, isLoaded }: LongTextAnswerCardProperties) => {
   const reference = useRef<HTMLDivElement>(null)
   const [width, setWidth] = useState(0)
   const answerDetailed = useRecoilValue(answerDetailedAtom)
@@ -85,8 +86,13 @@ const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
               {icons[answerData.id]}
             </WrapperAnswerTitle>
           )}
-
-          <Flex width="100%" maxW="595px" pr={paddingRight} justifyContent={justifyContent}>
+          <Skeleton
+            display="flex"
+            isLoaded={isLoaded}
+            width="100%"
+            pr={paddingRight}
+            justifyContent={justifyContent}
+          >
             <Box
               maxW="430px"
               w="100%"
@@ -108,7 +114,7 @@ const LongTextAnswerCard = ({ answerData }: LongTextAnswerCardProperties) => {
                 ))}
               </Text>
             </Box>
-          </Flex>
+          </Skeleton>
         </>
       </AnswerCardBase>
     </Box>

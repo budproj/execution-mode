@@ -3,7 +3,7 @@
 import { Box, Divider, Flex, GridItem, Text } from '@chakra-ui/react'
 import { addMinutes, format, isSameDay, parseISO } from 'date-fns'
 import pt from 'date-fns/locale/pt'
-import React, { useCallback, useContext, useEffect } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
@@ -35,6 +35,7 @@ export interface RoutinesOverviewProperties {
   after: Date
   before: Date
   week: number
+  isLoaded?: boolean
 }
 
 function formatDate(date: Date) {
@@ -47,14 +48,22 @@ export const getCurrentDataByTimeStamp = (data: AverageData[], timestamp: string
   )
 }
 
-const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewProperties) => {
+const RoutinesOverview = ({
+  teamId,
+  after,
+  before,
+  week,
+  isLoaded,
+}: RoutinesOverviewProperties) => {
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
   const { servicesPromise } = useContext(ServicesContext)
+  const [isRoutineOverviewLoaded, setIsRoutinesOverviewLoaded] = useState(false)
   const [answersOverview, setAnswersOverview] = useRecoilState(overviewDataAtom)
 
   const getAnswersOverview = useCallback(async () => {
     const { routines } = await servicesPromise
+    setIsRoutinesOverviewLoaded(false)
     const { data: answersOverview } = await routines.get<OverviewData>(
       `/answers/overview/${teamId}`,
       {
@@ -62,7 +71,10 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
       },
     )
 
-    if (answersOverview) setAnswersOverview(answersOverview)
+    if (answersOverview) {
+      setAnswersOverview(answersOverview)
+      setIsRoutinesOverviewLoaded(true)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -108,6 +120,7 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
           progressColor="#ffc658"
           highLightIndex={activeDataIndex}
           data={answersOverview?.overview?.feeling}
+          isLoaded={isLoaded}
         />
         <AreaRadialChart
           label={intl.formatMessage(messages.productivityGraphTitle)}
@@ -133,6 +146,7 @@ const RoutinesOverview = ({ teamId, after, before, week }: RoutinesOverviewPrope
           }
           numberColor="#4BACF9"
           progressColor="#4BACF9"
+          isLoaded={isLoaded && isRoutineOverviewLoaded}
         />
         {/* <AreaRadialChart
           label="CLAREZA DE ESTRATÉGIA"

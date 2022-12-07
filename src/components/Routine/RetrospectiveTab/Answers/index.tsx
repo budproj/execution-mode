@@ -1,8 +1,8 @@
-import { Flex, Text, IconButton, GridItem, Divider, Box } from '@chakra-ui/react'
+import { Flex, Text, IconButton, GridItem, Divider, Box, Skeleton } from '@chakra-ui/react'
 import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -14,6 +14,7 @@ import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { isAnswerSummaryLoad } from 'src/state/recoil/routine/is-answers-summary-load'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import {
   getRoutineDateRangeDateFormat,
@@ -34,11 +35,19 @@ interface AnswersComponentProperties {
   after: Date
   before: Date
   week: number
+  isLoading?: boolean
 }
 
 const ScrollableItem = getScrollableItem()
 
-const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersComponentProperties) => {
+const AnswersComponent = ({
+  answers,
+  teamId,
+  after,
+  before,
+  week,
+  isLoading,
+}: AnswersComponentProperties) => {
   const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
   const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
 
@@ -48,31 +57,38 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
   const [filteredAnswers, setFilteredAnswers] = useState<AnswerSummary[]>(answers)
   const userID = useRecoilValue(meAtom)
   const [date, setDate] = useRecoilState(routineDatesRangeAtom)
+  const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
   const user = useRecoilValue(selectUser(userID))
   const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
+  const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
   const userTeamIds = userTeams.map((team) => team.id)
-  const isUserFromTheTeam = userTeamIds.includes(teamId)
+  const userCompanie = userCompanies[0]?.id
+  const isUserFromTheTeam = [userTeamIds, userCompanie].includes(teamId)
 
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
   const isActiveRoutine = isBefore(new Date(), before)
+
   const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
 
-  const setNewDate = (newDate: Date) => {
-    const dateRange = getRoutineDateRangeDateFormat(newDate)
-    setDate(dateRange)
-    router.push(
-      {
-        query: {
-          ...(router?.query ?? {}),
-          before: format(dateRange.before, 'dd/MM/yyyy'),
-          after: format(dateRange.after, 'dd/MM/yyyy'),
+  const setNewDate = useCallback(
+    (newDate: Date) => {
+      const dateRange = getRoutineDateRangeDateFormat(newDate)
+      setDate(dateRange)
+      router.push(
+        {
+          query: {
+            ...(router?.query ?? {}),
+            before: format(dateRange.before, 'dd/MM/yyyy'),
+            after: format(dateRange.after, 'dd/MM/yyyy'),
+          },
         },
-      },
-      undefined,
-      { shallow: true },
-    )
-  }
+        undefined,
+        { shallow: true },
+      )
+    },
+    [router, setDate],
+  )
 
   useEffect(() => {
     if (answers) {
@@ -82,7 +98,8 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
 
   useEffect(() => {
     updateTeams(user?.teams?.edges)
-  }, [updateTeams, user?.teams])
+    updateUserCompanies(user?.companies?.edges)
+  }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
 
   return (
     <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">
@@ -92,6 +109,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
           aria-label={intl.formatMessage(messages.arrowLeftIconDescription)}
           borderRadius="10px 0px 0px 10px"
           height="38px"
+          disabled={isLoading}
           icon={
             <ArrowRight
               transform="rotate(180deg)"
@@ -100,6 +118,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
             />
           }
           onClick={() => {
+            setIsAnswerSummaryLoaded(false)
             setNewDate(sub(date.after, { weeks: 1 }))
             dispatchChangeTimePeriod({})
           }}
@@ -122,7 +141,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
           background="new-gray.200"
           aria-label={intl.formatMessage(messages.arrowRightIconDescription)}
           height="38px"
-          disabled={isNextWeekDisabled(before)}
+          disabled={isNextWeekDisabled(before) || isLoading}
           icon={
             <ArrowRight
               desc={intl.formatMessage(messages.arrowRightIconDescription)}
@@ -130,6 +149,7 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
             />
           }
           onClick={() => {
+            setIsAnswerSummaryLoaded(false)
             setNewDate(add(date.after, { weeks: 1 }))
             dispatchChangeTimePeriod({})
           }}
@@ -141,10 +161,12 @@ const AnswersComponent = ({ answers, teamId, after, before, week }: AnswersCompo
       </Flex>
       <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
         {filteredAnswers.map((answer) => (
-          <AnswerRowComponent key={answer.id} answer={answer} />
+          <Skeleton key={answer.id} isLoaded={!isLoading} borderRadius={8}>
+            <AnswerRowComponent answer={answer} />
+          </Skeleton>
         ))}
       </ScrollableItem>
-      {showAnswerNowButton && (
+      {showAnswerNowButton && !isLoading && (
         <Box textAlign="center" marginTop="auto">
           <Divider borderColor="new-gray.400" />
           <Text color="red.500" fontWeight="500" fontSize="14px" marginY="10px">

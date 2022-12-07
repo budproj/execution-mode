@@ -9,25 +9,21 @@ import {
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useMemo } from 'react'
-import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
-import { useGetKeyResults } from 'src/components/KeyResult/hooks'
 import { KeyResult } from 'src/components/KeyResult/types'
-import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
-import { EventType } from 'src/state/hooks/useEvent/event-type'
-import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
-import messages from './messages'
-
-export interface BoardsOverviewProperties {
+export interface KeyResultModalListingProperties {
   isOpen: boolean
-  confidence: number
   onClose: () => void
+  loadingData: boolean
+  data: KeyResult[]
+  dispatchEvent?: () => void
+  modalHeadingTitle: string
 }
 
 const StyledModal = styled(ModalContent)`
@@ -54,38 +50,36 @@ const StyledTableWrapper = styled(Flex)`
 
 export const KeyResultListingModal = ({
   isOpen,
-  confidence,
+  data,
+  dispatchEvent,
+  modalHeadingTitle,
+  loadingData,
   onClose,
-}: BoardsOverviewProperties) => {
-  const { data, loading } = useGetKeyResults()
+}: KeyResultModalListingProperties) => {
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-  const [currentConfidenceTag] = useConfidenceTag(confidence)
-  const intl = useIntl()
-  const { dispatch: dispatchEvent } = useEvent(EventType.OPENED_KEY_RESULT_REPORT_CONFIDANCE)
 
   const keyResultIds = useMemo(() => data.map(({ id }) => id), [data])
-  const confidenceText = useMemo(
-    () => currentConfidenceTag.messages.long.toLowerCase(),
-    [currentConfidenceTag],
-  )
 
   useEffect(() => {
-    dispatchEvent({ confidence: currentConfidenceTag.tag })
-  }, [])
+    if (dispatchEvent) dispatchEvent()
+  }, [dispatchEvent])
 
   const onLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
   return (
-    <Modal isOpen={isOpen} size="100%" autoFocus={false} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      returnFocusOnClose={false}
+      size="100%"
+      autoFocus={false}
+      onClose={onClose}
+    >
       <ModalOverlay />
       <StyledModal>
         <ModalBody p="40px">
           <Flex mb={12} justifyContent="space-between" alignItems="center">
             <Heading color="new-gray.900" fontWeight={500} as="h3" size="lg">
-              {intl.formatMessage(messages.modalTitle, {
-                confidence: confidence === -1 ? 'barrier' : confidence,
-                confidencetext: confidenceText,
-              })}
+              {modalHeadingTitle}
             </Heading>
             <ModalCloseButton
               bg="black.100"
@@ -100,7 +94,7 @@ export const KeyResultListingModal = ({
             <KeyResultList
               type={KEY_RESULT_LIST_TYPE.STATIC}
               keyResultIDs={keyResultIds}
-              isLoading={loading}
+              isLoading={loadingData}
               templateColumns="1.5fr 1fr 100px 80px 1fr"
               borderColor="new-gray.400"
               flex="1"

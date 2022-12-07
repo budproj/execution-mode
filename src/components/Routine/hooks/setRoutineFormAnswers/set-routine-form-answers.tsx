@@ -12,7 +12,10 @@ import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import { isOpenRoutineRedirectTeamPage } from 'src/state/recoil/routine/opened-routine-redirect-team-drawer'
 import { overviewDataAtom } from 'src/state/recoil/routine/overview-data'
-import { retrospectiveRoutineListAtom } from 'src/state/recoil/routine/retrospective-routine-answers'
+import {
+  RetrospectiveAnswer,
+  retrospectiveRoutineListAtom,
+} from 'src/state/recoil/routine/retrospective-routine-answers'
 import { retrospectiveRoutineIndexQuestionAtom } from 'src/state/recoil/routine/retrospective-showed-question'
 import { routineDatesRangeAtom } from 'src/state/recoil/routine/routine-dates-range'
 import {
@@ -113,8 +116,16 @@ export const useRoutineFormAnswers = () => {
       hidden: true,
     }))
 
+    const answersThatShouldBeHidden: RetrospectiveAnswer[] = []
+    for (const answer of answers) {
+      const hiddenElement = mappedHiddenAnswers.find(
+        ({ questionId }) => questionId === answer.questionId,
+      )
+      if (hiddenElement) answersThatShouldBeHidden.push(answer)
+    }
+
     const { data: userTeams } = await routines.post<Team[]>('/answer', [
-      ...answers,
+      ...answers.filter((answer) => !answersThatShouldBeHidden.includes(answer)),
       ...mappedHiddenAnswers,
     ])
 

@@ -1,16 +1,18 @@
 import { Grid, GridProps, Text, VStack } from '@chakra-ui/react'
 import React, { useCallback } from 'react'
+import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { configHighlightModal } from 'src/state/recoil/team/highlight/is-open-highlight-modal'
 
+import messages from './messages'
 import { CARD_TYPES } from './utils/card-types'
 import { highlightCardTheme } from './utils/theme'
 
 export type HighlightCard = {
   type: CARD_TYPES
   quantity: number
-  usersIds: string[]
+  usersIds?: string[]
 }
 
 interface HighlightSectionProperties {
@@ -20,23 +22,34 @@ interface HighlightSectionProperties {
 }
 
 const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionProperties) => {
+  const intl = useIntl()
   const setHighlightModalConfig = useSetRecoilState(configHighlightModal)
 
   const handleOpenModal = useCallback(
     (item: HighlightCard) => {
-      setHighlightModalConfig({ isOpen: true, type: item.type, usersIds: item.usersIds })
+      setHighlightModalConfig({
+        isOpen: true,
+        type: item.type,
+        usersIds: item.usersIds ?? undefined,
+      })
     },
     [setHighlightModalConfig],
   )
 
   const cardTitle = new Map([
-    [CARD_TYPES.FEELING, 'desanimados'],
-    [CARD_TYPES.PRODUCTIVITY, 'baixa produtividade'],
-    [CARD_TYPES.ROADBLOCK, 'bloqueio'],
-    [CARD_TYPES.CHECKIN, 'check-in atrasado'],
-    [CARD_TYPES.CONFIDENCE, 'baixa confiança'],
-    [CARD_TYPES.KRMEMBERS, 'membros sem krs'],
-    [CARD_TYPES.BARRIER, 'barreira'],
+    [CARD_TYPES.FEELING, intl.formatMessage(messages.cardTitle, { type: CARD_TYPES.FEELING })],
+    [
+      CARD_TYPES.PRODUCTIVITY,
+      intl.formatMessage(messages.cardTitle, { type: CARD_TYPES.PRODUCTIVITY }),
+    ],
+    [CARD_TYPES.ROADBLOCK, intl.formatMessage(messages.cardTitle, { type: CARD_TYPES.ROADBLOCK })],
+    [CARD_TYPES.CHECKIN, intl.formatMessage(messages.cardTitle, { type: CARD_TYPES.CHECKIN })],
+    [
+      CARD_TYPES.CONFIDENCE,
+      intl.formatMessage(messages.cardTitle, { type: CARD_TYPES.CONFIDENCE }),
+    ],
+    [CARD_TYPES.KRMEMBERS, intl.formatMessage(messages.cardTitle, { type: CARD_TYPES.KRMEMBERS })],
+    [CARD_TYPES.BARRIER, intl.formatMessage(messages.cardTitle, { type: CARD_TYPES.BARRIER })],
   ])
 
   return (
@@ -47,8 +60,8 @@ const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionPropert
       <Grid gap={3} w="100%" templateColumns={gridTemplate}>
         {data?.map((item) => (
           <VStack
-            key={cardTitle.get(item.type)}
-            cursor={item.quantity > 0 ? 'pointer' : 'auto'}
+            key={item.type}
+            cursor={item.quantity >= 1 ? 'pointer' : 'default'}
             textAlign="center"
             alignItems="center"
             justifyContent="center"
@@ -61,7 +74,7 @@ const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionPropert
               bg: highlightCardTheme[item.type].hover,
             }}
             borderRadius={9}
-            onClick={() => (item.quantity > 0 ? handleOpenModal(item) : false)}
+            onClick={() => (item.quantity > 0 ? handleOpenModal(item) : undefined)}
           >
             <Text
               flex={2}

@@ -6,8 +6,9 @@ import { Highlights } from './highlights'
 
 interface TeamMembersWrapperProperties {
   teamID?: Team['id']
+  isLoading?: boolean
 }
 
-export const TeamHighlightsWrapper = ({ teamID }: TeamMembersWrapperProperties) => {
-  return <Highlights teamId={teamID} />
+export const TeamHighlightsWrapper = ({ teamID, isLoading }: TeamMembersWrapperProperties) => {
+  return <Highlights teamId={teamID} isLoading={isLoading} />
 }
