@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
+import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
@@ -178,52 +179,58 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
           fontSize="12px"
         >
           {type === 'feeling' || (
-            <Box display="flex" flexDir="column" textAlign="center">
-              {getEmoji({ felling: Number(userRoutineData?.feeling), size: '25px' })}
+            <TooltipWithDelay label={intl.formatMessage(messages.feelingLabel)}>
+              <Box display="flex" flexDir="column" textAlign="center">
+                {getEmoji({ felling: Number(userRoutineData?.feeling), size: '25px' })}
 
-              <Text color="yellow.600">{userRoutineData?.feeling}</Text>
-            </Box>
+                <Text color="yellow.600">{userRoutineData?.feeling}</Text>
+              </Box>
+            </TooltipWithDelay>
           )}
           {type === 'productivity' || (
-            <Box display="flex" flexDir="column" textAlign="center">
-              <Box
-                borderRadius="50%"
-                width="24px"
-                height="24px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                background="blue.400"
-              >
-                <SuitcaseIcon
-                  boxSize="12px"
-                  desc={intl.formatMessage(messages.suitcaseIconDescription)}
-                />
-              </Box>
+            <TooltipWithDelay label={intl.formatMessage(messages.productivityLabel)}>
+              <Box display="flex" flexDir="column" textAlign="center">
+                <Box
+                  borderRadius="50%"
+                  width="24px"
+                  height="24px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  background="blue.400"
+                >
+                  <SuitcaseIcon
+                    boxSize="12px"
+                    desc={intl.formatMessage(messages.suitcaseIconDescription)}
+                  />
+                </Box>
 
-              <Text color="blue.400">{userRoutineData?.productivity}</Text>
-            </Box>
+                <Text color="blue.400">{userRoutineData?.productivity}</Text>
+              </Box>
+            </TooltipWithDelay>
           )}
           {type === 'roadblock' || (
-            <Box textAlign="center">
-              <Box
-                borderRadius="50%"
-                width="24px"
-                height="24px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                background="pink.500"
-              >
-                <PauseIcon
-                  boxSize="28px"
-                  fill="pink.500"
-                  desc={intl.formatMessage(messages.pauseIconDescription)}
-                />
-              </Box>
+            <TooltipWithDelay label={intl.formatMessage(messages.roadblockLabel)}>
+              <Box textAlign="center">
+                <Box
+                  borderRadius="50%"
+                  width="24px"
+                  height="24px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  background="pink.500"
+                >
+                  <PauseIcon
+                    boxSize="28px"
+                    fill="pink.500"
+                    desc={intl.formatMessage(messages.pauseIconDescription)}
+                  />
+                </Box>
 
-              <Text color="pink.500">{userRoutineData?.roadBlock === 'y' ? 'Sim' : 'Não'}</Text>
-            </Box>
+                <Text color="pink.500">{userRoutineData?.roadBlock === 'y' ? 'Sim' : 'Não'}</Text>
+              </Box>
+            </TooltipWithDelay>
           )}
         </GridItem>
       </Link>

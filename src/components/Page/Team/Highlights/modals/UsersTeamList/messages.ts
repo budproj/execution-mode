@@ -10,6 +10,9 @@ type UsersTeamListMessages =
   | 'lastRoutineColumn'
   | 'suitcaseIconDescription'
   | 'pauseIconDescription'
+  | 'productivityLabel'
+  | 'feelingLabel'
+  | 'roadblockLabel'
 
 export default defineMessages<UsersTeamListMessages>({
   feelingTitle: {
@@ -26,6 +29,21 @@ export default defineMessages<UsersTeamListMessages>({
     defaultMessage: 'Bloqueio',
     id: 'CoBhGc',
     description: 'The title in the roadblock modal',
+  },
+  feelingLabel: {
+    defaultMessage: 'Sentimento',
+    id: 'ObeR3M',
+    description: 'The feeling tooltip label.',
+  },
+  productivityLabel: {
+    defaultMessage: 'Produtividade',
+    id: 'XD8spZ',
+    description: 'The productivity tooltip label.',
+  },
+  roadblockLabel: {
+    defaultMessage: 'Bloqueio',
+    id: 'XgYpmY',
+    description: 'The roadblock tooltip label.',
   },
   userColumn: {
     defaultMessage: 'Usuário',
