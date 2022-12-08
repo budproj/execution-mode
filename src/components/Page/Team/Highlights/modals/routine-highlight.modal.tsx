@@ -63,8 +63,7 @@ export const RoutineHighlightModal = ({
         <ModalBody p="40px">
           <Flex mb={12} justifyContent="space-between" alignItems="center">
             <Heading color="new-gray.900" fontWeight={500} fontSize="24px">
-              Membros desse time {intl.formatMessage(messages.routineModalTitle, { type })} na
-              semana
+              {intl.formatMessage(messages.routineModalTitle, { type })}
             </Heading>
             <ModalCloseButton
               bg="#F1F3F6"

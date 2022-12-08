@@ -5,9 +5,11 @@ import { KeyResultListingModal } from 'src/components/Base/KeyResultListing'
 import { Team } from 'src/components/Team/types'
 
 import { useGetTeamKeyResultsHighlights } from '../hooks/getKeyRusultsHighlightsData/get-key-results-highlights-data'
+import { useNoRelatedMembers } from '../hooks/getNoRelatedMembers'
 import { CARD_TYPES } from '../utils/card-types'
 
 import messages from './messages'
+import { RoutineHighlightModal } from './routine-highlight.modal'
 
 interface KeyResultsHighlightsModalProperties {
   highlightType: CARD_TYPES
@@ -22,19 +24,39 @@ const KeyResultsHighlightsModal = ({
   isOpen,
   onClose,
 }: KeyResultsHighlightsModalProperties) => {
-  const { data, loading, setKeyResultHighlightType, setTeamId } = useGetTeamKeyResultsHighlights()
+  const {
+    data: teamKeyResultsData,
+    loading: teamKeyResultsLoading,
+    setKeyResultHighlightType,
+    setTeamId: setKeyReultsTeamId,
+  } = useGetTeamKeyResultsHighlights()
+  const { data: teamMembersData, setTeamId: setTeamIdOfMembers } = useNoRelatedMembers()
+
   const intl = useIntl()
 
-  useEffect(() => {
-    setTeamId(teamId)
-    setKeyResultHighlightType(highlightType)
-  }, [highlightType, setKeyResultHighlightType, setTeamId, teamId])
+  console.log({ teamMembersData })
 
-  return (
+  useEffect(() => {
+    if (highlightType === CARD_TYPES.KRMEMBERS) {
+      setTeamIdOfMembers(teamId)
+    } else {
+      setKeyReultsTeamId(teamId)
+      setKeyResultHighlightType(highlightType)
+    }
+  }, [highlightType, setKeyResultHighlightType, setKeyReultsTeamId, setTeamIdOfMembers, teamId])
+
+  return highlightType === CARD_TYPES.KRMEMBERS ? (
+    <RoutineHighlightModal
+      isOpen={isOpen}
+      handleModalClose={onClose}
+      type={highlightType}
+      usersIds={teamMembersData}
+    />
+  ) : (
     <KeyResultListingModal
       isOpen={isOpen}
-      loadingData={loading}
-      data={data}
+      loadingData={teamKeyResultsLoading}
+      data={teamKeyResultsData}
       modalHeadingTitle={intl.formatMessage(messages.modalTitle, {
         confidence: highlightType,
       })}
