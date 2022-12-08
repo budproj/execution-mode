@@ -41,6 +41,7 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
         undefined,
         { shallow: true },
       )
+      setTimeout(() => dispatch({}), 500)
     }
   }
 
@@ -51,7 +52,6 @@ const AnswerRowComponent = ({ answer }: AnswerRowComponentProperties) => {
       marginBottom={5}
       onClick={() => {
         setActiveAnswer(answer.id)
-        dispatch({})
       }}
     >
       <Avatar width="45px" height="45px" src={answer.picture} marginRight="15px">
