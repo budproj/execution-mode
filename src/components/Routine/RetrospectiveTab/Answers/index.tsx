@@ -65,7 +65,7 @@ const AnswersComponent = ({
   const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
   const userTeamIds = userTeams.map((team) => team.id)
   const userCompanie = userCompanies[0]?.id
-  const isUserFromTheTeam = [userTeamIds, userCompanie].includes(teamId)
+  const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
 
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
   const isActiveRoutine = isBefore(new Date(), before)
