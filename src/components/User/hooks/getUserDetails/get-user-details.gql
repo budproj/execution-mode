@@ -17,6 +17,7 @@ query GET_USER_DETAILS($userId: ID) {
       edges {
         node {
           name
+          id
         }
       }
     }
