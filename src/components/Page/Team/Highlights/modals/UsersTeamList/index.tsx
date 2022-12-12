@@ -102,8 +102,6 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
     }
   }
 
-  console.log({ user: user?.teams?.edges })
-
   return (
     <Grid
       padding="15px 0 15px 0"

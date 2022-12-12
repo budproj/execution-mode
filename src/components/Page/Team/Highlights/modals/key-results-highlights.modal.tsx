@@ -34,8 +34,6 @@ const KeyResultsHighlightsModal = ({
 
   const intl = useIntl()
 
-  console.log({ teamMembersData })
-
   useEffect(() => {
     if (highlightType === CARD_TYPES.KRMEMBERS) {
       setTeamIdOfMembers(teamId)
