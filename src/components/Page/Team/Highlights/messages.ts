@@ -24,8 +24,8 @@ export default defineMessages<ExploreTeamHightlightsMessage>({
   },
   cardTitle: {
     defaultMessage:
-      '{type, select, feeling {desanimados} productivity {baixa produtividade} roadblock {bloqueio} checkin {check-in atrasado} confidence {baixa confiança} krmembers {membros sem krs} barrier {barreira} other {}}',
-    id: 'WOh2vc',
+      '{type, select, feeling {baixo sentimento} productivity {baixa produtividade} roadblock {bloqueio} checkin {check-in atrasado} confidence {baixa confiança} krmembers {membros sem krs} barrier {barreira} other {}}',
+    id: 'ra0NlX',
     description: 'The title of the cards',
   },
 })
