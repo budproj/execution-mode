@@ -127,6 +127,7 @@ const RoadblockAnswerCard = ({ answerData, user, isLoaded }: RoadblockAnswerCard
                           coloumnStrokeWidth={0.2}
                           circleStrokeWidth={0}
                           stroke="white"
+                          fill="pink.500"
                         />
                       ) : (
                         <Circle
@@ -168,7 +169,7 @@ const RoadblockAnswerCard = ({ answerData, user, isLoaded }: RoadblockAnswerCard
               width={28}
               borderRadius={6}
             >
-              <Text fontSize={18} lineHeight={0} fontWeight="bold" color="purple.500">
+              <Text fontSize={18} lineHeight={0} fontWeight="bold" color="pink.500">
                 {currentAnswer?.value === 'y'
                   ? intl.formatMessage(messages.barrierStatusOnThisWeek)
                   : 'Ok'}
