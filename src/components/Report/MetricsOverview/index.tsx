@@ -124,12 +124,13 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
                 boxSize="35px"
                 stroke="white"
                 circleStrokeWidth={0}
+                fill="#F53D7A"
                 desc={intl.formatMessage(messages.pauseIconDescription)}
               />
             </Flex>
           }
-          numberColor="#C26EFF"
-          progressColor="#C26EFF"
+          numberColor="#F53D7A"
+          progressColor="#F53D7A"
           title={intl.formatMessage(messages.withBarrierRadialChartTitle)}
         />
       </Flex>
