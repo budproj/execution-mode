@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client'
 import { useState } from 'react'
+import { useRecoilValue } from 'recoil'
 
-import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
+import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
 import GET_NO_RELATED_MEMBERS from './get-no-related-members.gql'
 
@@ -22,14 +23,13 @@ type noRelatedMembersQueryFormat = {
 
 interface GetNoRelatedMembers {
   data: Array<User['id']>
-  setTeamId: (teamId: Team['id']) => void
   loading: boolean
   called: boolean
 }
 
 export const useNoRelatedMembers = (): GetNoRelatedMembers => {
   const [noRelatedUsersIds, setNoRelatedUsersIds] = useState<Array<User['id']>>([])
-  const [teamId, setTeamId] = useState<Team['id'] | undefined>()
+  const teamId = useRecoilValue(selectedTeamIdHighlight)
 
   const query = {
     teamId,
@@ -44,5 +44,5 @@ export const useNoRelatedMembers = (): GetNoRelatedMembers => {
     },
   })
 
-  return { data: noRelatedUsersIds, setTeamId, loading, called }
+  return { data: noRelatedUsersIds, loading, called }
 }

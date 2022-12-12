@@ -2,7 +2,6 @@ import { Box } from '@chakra-ui/react'
 import React, { useCallback } from 'react'
 import { useRecoilState } from 'recoil'
 
-import { Team } from 'src/components/Team/types'
 import { configHighlightModal } from 'src/state/recoil/team/highlight/is-open-highlight-modal'
 
 import { CARD_TYPES } from '../utils/card-types'
@@ -10,11 +9,7 @@ import { CARD_TYPES } from '../utils/card-types'
 import KeyResultsHighlightsModal from './key-results-highlights.modal'
 import { RoutineHighlightModal } from './routine-highlight.modal'
 
-interface TeamHighlightModalProperties {
-  teamId: Team['id']
-}
-
-const TeamHightlightModal = ({ teamId }: TeamHighlightModalProperties) => {
+const TeamHightlightModal = () => {
   const [{ isOpen, type, usersIds }, setModalConfig] = useRecoilState(configHighlightModal)
 
   const handleModalClose = useCallback(() => {
@@ -25,7 +20,6 @@ const TeamHightlightModal = ({ teamId }: TeamHighlightModalProperties) => {
     case CARD_TYPES.CHECKIN:
       return (
         <KeyResultsHighlightsModal
-          teamId={teamId}
           highlightType={type}
           isOpen={isOpen}
           onClose={handleModalClose}
@@ -34,7 +28,6 @@ const TeamHightlightModal = ({ teamId }: TeamHighlightModalProperties) => {
     case CARD_TYPES.BARRIER:
       return (
         <KeyResultsHighlightsModal
-          teamId={teamId}
           highlightType={type}
           isOpen={isOpen}
           onClose={handleModalClose}
@@ -43,7 +36,6 @@ const TeamHightlightModal = ({ teamId }: TeamHighlightModalProperties) => {
     case CARD_TYPES.CONFIDENCE:
       return (
         <KeyResultsHighlightsModal
-          teamId={teamId}
           highlightType={type}
           isOpen={isOpen}
           onClose={handleModalClose}
@@ -52,7 +44,6 @@ const TeamHightlightModal = ({ teamId }: TeamHighlightModalProperties) => {
     case CARD_TYPES.KRMEMBERS:
       return (
         <KeyResultsHighlightsModal
-          teamId={teamId}
           highlightType={type}
           isOpen={isOpen}
           onClose={handleModalClose}

@@ -19,13 +19,9 @@ interface HighlightsProperties {
 
 export const Highlights = ({ teamId, isLoading }: HighlightsProperties) => {
   const intl = useIntl()
-  const { data, setTeamId, loading: krsHighlightsLoading } = useGetKeyResultsHighlights()
+  const { data, loading: krsHighlightsLoading } = useGetKeyResultsHighlights()
 
   const dataLoading = isLoading ?? krsHighlightsLoading
-
-  useEffect(() => {
-    if (teamId) setTeamId(teamId)
-  }, [setTeamId, teamId])
 
   const [routineFlags, setRoutineFlags] = useState<HighlightCard[]>()
   const { servicesPromise } = useContext(ServicesContext)

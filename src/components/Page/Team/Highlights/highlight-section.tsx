@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import { configHighlightModal } from 'src/state/recoil/team/highlight/is-open-highlight-modal'
+import { keyResultsHighlightsType } from 'src/state/recoil/team/highlight/key-results-highlights-type'
 
 import messages from './messages'
 import { CARD_TYPES } from './utils/card-types'
@@ -24,16 +25,22 @@ interface HighlightSectionProperties {
 const HighlightSection = ({ title, data, gridTemplate }: HighlightSectionProperties) => {
   const intl = useIntl()
   const setHighlightModalConfig = useSetRecoilState(configHighlightModal)
+  const setKeyResultHighlightType = useSetRecoilState(keyResultsHighlightsType)
 
   const handleOpenModal = useCallback(
     (item: HighlightCard) => {
+      if (item.type !== CARD_TYPES.KRMEMBERS) {
+        setKeyResultHighlightType(item.type)
+      }
+
       setHighlightModalConfig({
         isOpen: true,
         type: item.type,
         usersIds: item.usersIds ?? undefined,
       })
     },
-    [setHighlightModalConfig],
+
+    [setHighlightModalConfig, setKeyResultHighlightType],
   )
 
   const cardTitle = new Map([

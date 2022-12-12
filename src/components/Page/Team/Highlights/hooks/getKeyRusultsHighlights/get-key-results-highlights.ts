@@ -1,7 +1,8 @@
 import { useQuery } from '@apollo/client'
 import { useState } from 'react'
+import { useRecoilValue } from 'recoil'
 
-import { Team } from 'src/components/Team/types'
+import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
 import { CARD_TYPES } from '../../utils/card-types'
 
@@ -26,14 +27,13 @@ type HightlightCard = {
 
 interface GetKeyResultsHighlights {
   data: HightlightCard[]
-  setTeamId: (teamId: Team['id']) => void
   loading: boolean
   called: boolean
 }
 
 export const useGetKeyResultsHighlights = (): GetKeyResultsHighlights => {
   const [teamHighlights, setTeamHighlights] = useState<HightlightCard[]>([])
-  const [teamId, setTeamId] = useState<Team['id'] | undefined>()
+  const teamId = useRecoilValue(selectedTeamIdHighlight)
 
   const query = {
     teamId,
@@ -49,7 +49,7 @@ export const useGetKeyResultsHighlights = (): GetKeyResultsHighlights => {
     },
   })
 
-  return { data: teamHighlights, setTeamId, loading, called }
+  return { data: teamHighlights, loading, called }
 }
 
 const parsedData = (data: KeyResultsHighlights['getTeamFlags']) => {
