@@ -1,4 +1,4 @@
-import { Avatar, Box, Flex, Grid, GridItem, Text, Tag } from '@chakra-ui/react'
+import { Avatar, Box, Flex, Grid, GridItem, Text, Tag, HStack } from '@chakra-ui/react'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -9,6 +9,8 @@ import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 import { useGetUserDetails } from 'src/components/User/hooks'
+
+import { CARD_TYPES } from '../../utils/card-types'
 
 import messages from './messages'
 
@@ -35,11 +37,14 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
   useEffect(() => {
     async function getUserRoutineData() {
       const { routines } = await servicesPromise
-
-      const { data } = await routines.get<UserRoutineDataProperties>(
-        `/answers/overview/user/${userId}`,
-      )
-      setUserRoutineData(data)
+      try {
+        const { data } = await routines.get<UserRoutineDataProperties>(
+          `/answers/overview/user/${userId}`,
+        )
+        if (data) setUserRoutineData(data)
+      } catch (error: unknown) {
+        console.warn({ routine_server_warning: error })
+      }
     }
 
     getUserRoutineData()
@@ -76,7 +81,7 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
       )
     }
 
-    if ((type = 'roadblock')) {
+    if (type === 'roadblock') {
       return (
         <Box
           borderRadius="50%"
@@ -154,86 +159,123 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
           </Link>
         )}
       </GridItem>
-      <Link
-        passHref
-        href={`/explore/${
-          user?.companies?.edges[0].node.id ?? ''
-        }/?activeTab=retrospectiva&answerId=${userRoutineData?.lastRoutineAnswerId ?? ''}`}
-      >
-        <GridItem color="new-gray.800" fontWeight="500" fontSize="12px">
-          {defaultIcon(type)}
-        </GridItem>
-      </Link>
-      <Link
-        passHref
-        href={`/explore/${
-          user?.companies?.edges[0].node.id ?? ''
-        }/?activeTab=retrospectiva&answerId=${userRoutineData?.lastRoutineAnswerId ?? ''}`}
-      >
-        <GridItem
-          justifySelf="center"
-          gap="15px"
-          display="flex"
-          color="new-gray.800"
-          fontWeight="500"
-          fontSize="12px"
+      {type === CARD_TYPES.KRMEMBERS ? (
+        <Text color="new-gray.700" fontSize={14}>
+          {intl.formatMessage(messages.noKrsFlag)}
+        </Text>
+      ) : (
+        <Link
+          passHref
+          href={`/explore/${
+            user?.companies?.edges[0].node.id ?? ''
+          }/?activeTab=retrospectiva&answerId=${userRoutineData?.lastRoutineAnswerId ?? ''}`}
         >
-          {type === 'feeling' || (
-            <TooltipWithDelay label={intl.formatMessage(messages.feelingLabel)}>
-              <Box display="flex" flexDir="column" textAlign="center">
-                {getEmoji({ felling: Number(userRoutineData?.feeling), size: '25px' })}
+          <GridItem color="new-gray.800" fontWeight="500" fontSize="12px">
+            {defaultIcon(type)}
+          </GridItem>
+        </Link>
+      )}
+      <GridItem
+        justifySelf="center"
+        gap="15px"
+        display="flex"
+        color="new-gray.800"
+        fontWeight="500"
+        fontSize="12px"
+      >
+        {userRoutineData ? (
+          <Link
+            passHref
+            href={`/explore/${
+              user?.companies?.edges[0].node.id ?? ''
+            }/?activeTab=retrospectiva&answerId=${userRoutineData?.lastRoutineAnswerId ?? ''}`}
+          >
+            <GridItem
+              justifySelf="center"
+              gap="15px"
+              display="flex"
+              color="new-gray.800"
+              fontWeight="500"
+              fontSize="12px"
+            >
+              {type === 'feeling' || (
+                <TooltipWithDelay label={intl.formatMessage(messages.feelingLabel)}>
+                  <Box display="flex" flexDir="column" textAlign="center">
+                    {getEmoji({ felling: Number(userRoutineData?.feeling), size: '25px' })}
 
-                <Text color="yellow.600">{userRoutineData?.feeling}</Text>
-              </Box>
-            </TooltipWithDelay>
-          )}
-          {type === 'productivity' || (
-            <TooltipWithDelay label={intl.formatMessage(messages.productivityLabel)}>
-              <Box display="flex" flexDir="column" textAlign="center">
-                <Box
-                  borderRadius="50%"
-                  width="24px"
-                  height="24px"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  background="blue.400"
-                >
-                  <SuitcaseIcon
-                    boxSize="12px"
-                    desc={intl.formatMessage(messages.suitcaseIconDescription)}
-                  />
-                </Box>
+                    <Text color="yellow.600">{userRoutineData?.feeling}</Text>
+                  </Box>
+                </TooltipWithDelay>
+              )}
+              {type === 'productivity' || (
+                <TooltipWithDelay label={intl.formatMessage(messages.productivityLabel)}>
+                  <Box display="flex" flexDir="column" textAlign="center">
+                    <Box
+                      borderRadius="50%"
+                      width="24px"
+                      height="24px"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      background="blue.400"
+                    >
+                      <SuitcaseIcon
+                        boxSize="12px"
+                        desc={intl.formatMessage(messages.suitcaseIconDescription)}
+                      />
+                    </Box>
 
-                <Text color="blue.400">{userRoutineData?.productivity}</Text>
-              </Box>
-            </TooltipWithDelay>
-          )}
-          {type === 'roadblock' || (
-            <TooltipWithDelay label={intl.formatMessage(messages.roadblockLabel)}>
-              <Box textAlign="center">
-                <Box
-                  borderRadius="50%"
-                  width="24px"
-                  height="24px"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  background="pink.500"
-                >
-                  <PauseIcon
-                    boxSize="28px"
-                    fill="pink.500"
-                    desc={intl.formatMessage(messages.pauseIconDescription)}
-                  />
-                </Box>
+                    <Text color="blue.400">{userRoutineData?.productivity}</Text>
+                  </Box>
+                </TooltipWithDelay>
+              )}
+              {type === 'roadblock' || (
+                <TooltipWithDelay label={intl.formatMessage(messages.roadblockLabel)}>
+                  <Box textAlign="center">
+                    <Box
+                      borderRadius="50%"
+                      width="24px"
+                      height="24px"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      background="pink.500"
+                    >
+                      <PauseIcon
+                        boxSize="28px"
+                        fill="pink.500"
+                        desc={intl.formatMessage(messages.pauseIconDescription)}
+                      />
+                    </Box>
 
-                <Text color="pink.500">{userRoutineData?.roadBlock === 'y' ? 'Sim' : 'Não'}</Text>
-              </Box>
-            </TooltipWithDelay>
-          )}
-        </GridItem>
-      </Link>
+                    <Text color="pink.500">
+                      {userRoutineData?.roadBlock === 'y' ? 'Sim' : 'Não'}
+                    </Text>
+                  </Box>
+                </TooltipWithDelay>
+              )}
+            </GridItem>
+          </Link>
+        ) : (
+          <LastRetrospectiveEmptyState />
+        )}
+      </GridItem>
     </Grid>
+  )
+}
+
+const LastRetrospectiveEmptyState = () => {
+  return (
+    <HStack gap={4}>
+      <Text fontSize="2rem" transform="translateX(90%)" color="#b5c0db">
+        -
+      </Text>
+      <Text fontSize="2rem" transform="translateX(90%)" color="#b5c0db">
+        -
+      </Text>
+      <Text fontSize="2rem" transform="translateX(90%)" color="#b5c0db">
+        -
+      </Text>
+    </HStack>
   )
 }

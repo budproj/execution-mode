@@ -49,6 +49,15 @@ const TeamHightlightModal = ({ teamId }: TeamHighlightModalProperties) => {
           onClose={handleModalClose}
         />
       )
+    case CARD_TYPES.KRMEMBERS:
+      return (
+        <KeyResultsHighlightsModal
+          teamId={teamId}
+          highlightType={type}
+          isOpen={isOpen}
+          onClose={handleModalClose}
+        />
+      )
     case CARD_TYPES.FEELING:
       return (
         <RoutineHighlightModal

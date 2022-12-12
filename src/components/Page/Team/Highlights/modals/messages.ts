@@ -11,8 +11,8 @@ export default defineMessages<KeyResultsHighlightsModalMessage>({
   },
   routineModalTitle: {
     defaultMessage:
-      '{type, select, feeling {desanimados} productivity {com baixa produtividade} roadblock {com bloqueio} other {}}',
-    id: '2xU9JM',
+      'Membros desse time {type, select, feeling {desanimados na semana} productivity {com baixa produtividade na semana} roadblock {com bloqueio na semana} other {sem resultados-chave}}',
+    id: '+t2ASM',
     description: 'The title of the routines modals',
   },
 })
