@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { DynamicAvatarGroup } from 'src/components/Base'
 import PlusIcon from 'src/components/Icon/Plus'
-import GET_KEY_RESULTS_HIGHLIGHTS from 'src/components/Page/Team/Highlights/hooks/getKeyRusultsHighlights/get-key-results-highlights.gql'
+import GET_KEY_RESULTS_HIGHLIGHTS from 'src/components/Page/Team/Highlights/get-key-results-highlights.gql'
 import GET_NO_RELATED_MEMBERS from 'src/components/Page/Team/Highlights/hooks/getNoRelatedMembers/get-no-related-members.gql'
 import { User } from 'src/components/User/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
