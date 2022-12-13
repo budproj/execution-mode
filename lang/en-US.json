@@ -363,6 +363,10 @@
     "defaultMessage": "Company",
     "description": "This title is displayed as the heading of the definitions menu section"
   },
+  "4JN6AF": {
+    "defaultMessage": "Low productivity",
+    "description": "The title in the low productivity modal"
+  },
   "4MCOg+": {
     "defaultMessage": "Yearly Progress",
     "description": "User's yearly progress title"
@@ -450,6 +454,10 @@
   "6BeRhq": {
     "defaultMessage": "Delete this OKR",
     "description": "This is the third option that appears when you open the menu of a given objective inside the accordion button"
+  },
+  "6cUb9x": {
+    "defaultMessage": "Points of attention in key results",
+    "description": "This message appears in the title of the team KRs attention points section."
   },
   "6E9X3c": {
     "defaultMessage": "Redefine",
@@ -611,6 +619,10 @@
     "defaultMessage": "Objective",
     "description": "The text of the table head related to the Objective column"
   },
+  "8PcB2d": {
+    "defaultMessage": "No KR",
+    "description": "This message appears on table that shows the no members no related KRs."
+  },
   "8YI1Fn": {
     "defaultMessage": "Financial (BRL)",
     "description": "This message is displayed inside our key-result format select as the title of the coin BRL format"
@@ -630,6 +642,10 @@
   "9CP8fU": {
     "defaultMessage": "A pencil icon, which appears along with the question of a message that the user left for the team",
     "description": "The alternative text explaining our graphic icon"
+  },
+  "9Cv8pE": {
+    "defaultMessage": "{type, select, feeling {Feeling} productivity {Productivity in the week} roadblock {Barries in the week} other {OKRs}}",
+    "description": "The title in the roadblock modal"
   },
   "9dXuLd": {
     "defaultMessage": "R$ 100",
@@ -698,6 +714,10 @@
   "acrz2t": {
     "defaultMessage": "Cancel",
     "description": "The label of the cancel button of the create user form"
+  },
+  "acYrvm": {
+    "defaultMessage": "A briefcase icon, representing productivity.",
+    "description": "The suiticase icon description"
   },
   "ADoBmy": {
     "defaultMessage": "Briefcase icon representing the productivity index",
@@ -903,6 +923,10 @@
     "defaultMessage": "We are sorry, an unexpected error occurred. Please try again.",
     "description": "This message appears as an error toast when we have an unknown error while creating a new cycle"
   },
+  "CgwzlN": {
+    "defaultMessage": "A pause icon, representing barriers.",
+    "description": "The pause icon description"
+  },
   "chwy/J": {
     "defaultMessage": "Reply today",
     "description": "The text that goes in the update text, below the routine title, when the routine is up to date."
@@ -934,6 +958,10 @@
   "CmYkJk": {
     "defaultMessage": "Productivity",
     "description": "The title of the productivity chart"
+  },
+  "CoBhGc": {
+    "defaultMessage": "Roadblock",
+    "description": "The title in the roadblock modal"
   },
   "cPGOoL": {
     "defaultMessage": "Talk to our tech support",
@@ -1118,6 +1146,10 @@
   "ej/Q3X": {
     "defaultMessage": "Cancel",
     "description": "The button to close the modal cycle"
+  },
+  "eJH8kc": {
+    "defaultMessage": "Pause icon representing the amount of locks the company has.",
+    "description": "The description of the with barrier icon"
   },
   "EkoIl2": {
     "defaultMessage": "Create new subteam",
@@ -1583,6 +1615,10 @@
     "defaultMessage": "My week",
     "description": "This message appears as the title of the Check-ins and routine option in the notifications modal."
   },
+  "ie2eTm": {
+    "defaultMessage": "This team's key results with {confidence, select, barrier {a roadblock} confidence {low confidence} other {outdated check-in}}",
+    "description": "The title for the dashboard key results modal"
+  },
   "ifl8WA": {
     "defaultMessage": "You haven't created any individual OKR yet",
     "description": "This message is displayed as the empty state message inside the User page"
@@ -1654,6 +1690,10 @@
   "IU2bu6": {
     "defaultMessage": "Write {keyword} to confirm your action",
     "description": "This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource"
+  },
+  "ivvae0": {
+    "defaultMessage": "Points of attention in team members",
+    "description": "This message appears in the title of the team member attention points section."
   },
   "iVxx6N": {
     "defaultMessage": "This week",
@@ -1850,6 +1890,10 @@
   "kbccVO": {
     "defaultMessage": "Left arrow",
     "description": "The description of the arrow icon."
+  },
+  "KczxKH": {
+    "defaultMessage": "Team",
+    "description": "The title in the roadblock modal"
   },
   "kDC8d3": {
     "defaultMessage": "Settings",
@@ -2203,6 +2247,10 @@
     "defaultMessage": "Expected",
     "description": "This message is displayed in the chart tooltip of our key-result sidebar"
   },
+  "Nh5OeF": {
+    "defaultMessage": "Members of this team {type, select, feeling {with low sentiment in the week} productivity {with low productivity in the week} roadblock {with barrier in the week} other {without key results}}",
+    "description": "The title of the routines modals"
+  },
   "nJ7CuJ": {
     "defaultMessage": "Watch icon",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
@@ -2278,6 +2326,10 @@
   "O4iDCM": {
     "defaultMessage": "Progress",
     "description": "The title of the progress section in our key-result sidebar"
+  },
+  "ObeR3M": {
+    "defaultMessage": "Feeling",
+    "description": "The feeling tooltip label."
   },
   "ObFHxY": {
     "defaultMessage": "Cancel",
@@ -2566,6 +2618,10 @@
   "R8hOYh": {
     "defaultMessage": "This team has no OKRs",
     "description": "This message is displayed as the empty state message inside the team page"
+  },
+  "ra0NlX": {
+    "defaultMessage": "{type, select, feeling {low feeling} productivity {low productivity} roadblock {barrier} checkin {outdated check-in} confidence {low confidence} krmembers {members without krs} barrier {roadblock} other {}}",
+    "description": "The title of the cards"
   },
   "rDaIQ2": {
     "defaultMessage": "Retrospective of the week",
@@ -3011,6 +3067,10 @@
     "defaultMessage": "Step 1",
     "description": "The label of the first step while creating a new workspace"
   },
+  "v9xuBO": {
+    "defaultMessage": "Feeling",
+    "description": "The title in the feeling modal"
+  },
   "VBdX86": {
     "defaultMessage": "{username} still doesn't have any assigned tasks in the OKRs of the company",
     "description": "The empty state message header when a user have no tasks"
@@ -3267,6 +3327,10 @@
     "defaultMessage": "Cancel",
     "description": "This text is displayed as the button that will cancel the update for ou goal update popover inside the key-result drawers"
   },
+  "X9J+2h": {
+    "defaultMessage": "Highlights",
+    "description": "This message is displayed inside the explore page, above the highlights section"
+  },
   "xaHzA0": {
     "defaultMessage": "Last name",
     "description": "The user last name input placeholder while creating a new workspace"
@@ -3282,6 +3346,10 @@
   "Xcxvrr": {
     "defaultMessage": "A calendar icon",
     "description": "The description of the calendar icon at the routine notification component."
+  },
+  "XD8spZ": {
+    "defaultMessage": "Productivity",
+    "description": "The productivity tooltip label."
   },
   "xe74UT": {
     "defaultMessage": "In OKRs, the general rule is to aim for a progress of at least 70%. To achieve this by the end of the cycle, the current progress is expected to be at {progress}%.",
@@ -3303,6 +3371,10 @@
     "defaultMessage": "Due this week",
     "description": "The title of the section of the key results without check-in in the week."
   },
+  "XgYpmY": {
+    "defaultMessage": "Barrier",
+    "description": "The roadblock tooltip label."
+  },
   "xIe3i6": {
     "defaultMessage": "Reactivate account",
     "description": "This message is the description of the option to reactivate a user account."
@@ -3322,6 +3394,10 @@
   "XL/hXA": {
     "defaultMessage": "It's been a while since anyone has interacted with this key result. How about sharing a relevant info with the team? :)",
     "description": "This text gives more details regarding our empty state card in the key result drawer"
+  },
+  "xm9P9h": {
+    "defaultMessage": "User",
+    "description": "The title in the roadblock modal"
   },
   "XN0ZEi": {
     "defaultMessage": "Step 2",
@@ -3354,6 +3430,10 @@
   "xwbI5E": {
     "defaultMessage": "Warning! This action cannot be undone",
     "description": "This message is displayed as the title for the danger confirmation modal while removing a given resource"
+  },
+  "xXhMFZ": {
+    "defaultMessage": "Barrier",
+    "description": "The title of the with roadblock chart"
   },
   "xXxjVp": {
     "defaultMessage": "There is an external factor blocking our progress in this key result",
@@ -3426,6 +3506,10 @@
   "yq7/PT": {
     "defaultMessage": "Support content",
     "description": "MainAppBar user menu second item option"
+  },
+  "YQqWNM": {
+    "defaultMessage": "Last retrospective",
+    "description": "The title in the roadblock modal"
   },
   "yROxQI": {
     "defaultMessage": "Team",
@@ -3600,7 +3684,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-11-15T13:13:32Z",
+    "defaultMessage": "2022-12-13T14:10:58Z",
     "description": ""
   }
 }
