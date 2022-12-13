@@ -10,6 +10,7 @@ import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedBy
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import notificationsQuery from 'src/components/Notifications/Modal/queries.gql'
 import accordionItemPanelQuery from 'src/components/Objective/Accordion/Item/Panel/queries.gql'
+import GET_KEY_RESULTS_HIGHLIGHTS from 'src/components/Page/Team/Highlights/get-key-results-highlights.gql'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
@@ -80,6 +81,7 @@ const CheckInForm = ({
         activeAndOwnedByUserQuery.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
         accordionItemPanelQuery.GET_OBJECTIVE_KEY_RESULTS,
         notificationsQuery.GET_KEYRESULTS_FOR_NOTIFICATIONS,
+        GET_KEY_RESULTS_HIGHLIGHTS,
       ],
     },
   )

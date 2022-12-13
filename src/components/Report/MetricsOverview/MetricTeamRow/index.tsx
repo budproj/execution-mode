@@ -92,7 +92,7 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
             alignItems="center"
             fontWeight="700"
             fontSize="16px"
-            color="purple.500"
+            color="#F53D7A"
             display="flex"
             gap="2px"
           >
@@ -100,6 +100,7 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
               boxSize="25px"
               stroke="white"
               circleStrokeWidth={0}
+              fill="#F53D7A"
               desc={intl.formatMessage(messages.pauseIconDescription)}
             />
             {roadblock.length > 0 ? roadblock[0].average : 0}

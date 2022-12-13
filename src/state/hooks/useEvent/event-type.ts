@@ -36,4 +36,11 @@ export enum EventType {
   LEARN_MORE_BANNER_NOTICES_CLICK = 'LearnMoreBannerNoticesClick',
   MENTION_IN_ROUTINE_ANSWER_CLICK = 'MentionInRoutineAnswerClick',
   METRIC_TEAM_ROW_CLICK = 'MetricTeamRowClick',
+  FEELING_HIGHLIGHT_CLICK = 'FeelingHighlightClick',
+  PRODUCTIVITY_HIGHLIGHT_CLICK = 'ProductivityHighlightClick',
+  ROADBLOCK_HIGHLIGHT_CLICK = 'RoadblockHighlightClick',
+  CHECKIN_HIGHLIGHT_CLICK = 'CheckinHighlightClick',
+  CONFIDENCE_HIGHLIGHT_CLICK = 'ConfidenceHighlightClick',
+  KRMEMBERS_HIGHLIGHT_CLICK = 'KrMembersHighlightClick',
+  BARRIER_HIGHLIGHT_CLICK = 'BarrierHighlightClick',
 }

@@ -30,6 +30,7 @@ import { SendAnswerFormClickData } from './events/send-answer-form-click-data'
 import { StartAnswerFormClickData } from './events/start-answer-form-click-data'
 import { TabNotificationClickData } from './events/tab-notification-click-data'
 import { TabThisWeekClickData } from './events/tab-this-week-click-data'
+import { TeamHighlightClickData } from './events/team-highlight-click-data'
 import { ToggleRoutineReminderClickData } from './events/toggle-routine-reminder-click-data'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
 import { ToggledPersonalTaskEventData } from './events/toggled-personal-task'
@@ -75,4 +76,11 @@ export type Event = {
   [EventType.MENTION_IN_ROUTINE_ANSWER_CLICK]: MentionInRoutineAnswerClickData
   [EventType.METRIC_TEAM_ROW_CLICK]: MetricTeamRowClickData
   [EventType.LEARN_MORE_BANNER_NOTICES_CLICK]: LearnMoreBannerNoticesClickData
+  [EventType.FEELING_HIGHLIGHT_CLICK]: TeamHighlightClickData
+  [EventType.PRODUCTIVITY_HIGHLIGHT_CLICK]: TeamHighlightClickData
+  [EventType.ROADBLOCK_HIGHLIGHT_CLICK]: TeamHighlightClickData
+  [EventType.CHECKIN_HIGHLIGHT_CLICK]: TeamHighlightClickData
+  [EventType.CONFIDENCE_HIGHLIGHT_CLICK]: TeamHighlightClickData
+  [EventType.KRMEMBERS_HIGHLIGHT_CLICK]: TeamHighlightClickData
+  [EventType.BARRIER_HIGHLIGHT_CLICK]: TeamHighlightClickData
 }

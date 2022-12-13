@@ -2,12 +2,15 @@ import { useMutation } from '@apollo/client'
 import { Text, Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { DynamicAvatarGroup } from 'src/components/Base'
 import PlusIcon from 'src/components/Icon/Plus'
+import GET_KEY_RESULTS_HIGHLIGHTS from 'src/components/Page/Team/Highlights/get-key-results-highlights.gql'
+import GET_NO_RELATED_MEMBERS from 'src/components/Page/Team/Highlights/hooks/getNoRelatedMembers/get-no-related-members.gql'
 import { User } from 'src/components/User/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
@@ -29,6 +32,7 @@ export const SupportTeamField = ({
   ownerName,
 }: SupportTeamFieldProperties) => {
   const intl = useIntl()
+  const teamId = useRecoilValue(selectedTeamIdHighlight)
 
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => hasPermitionToUpdate && setIsOpen(true)
@@ -41,6 +45,16 @@ export const SupportTeamField = ({
         ...keyResult,
         ...data.addUserAsSupportTeamToKeyResult,
       }),
+    refetchQueries: [
+      {
+        query: GET_NO_RELATED_MEMBERS,
+        variables: { teamId },
+      },
+      {
+        query: GET_KEY_RESULTS_HIGHLIGHTS,
+        variables: { teamId },
+      },
+    ],
   })
 
   const addUser = (userId: string) => {
@@ -54,6 +68,17 @@ export const SupportTeamField = ({
         ...keyResult,
         ...data.removeUserAsSupportTeamToKeyResult,
       }),
+
+    refetchQueries: [
+      {
+        query: GET_NO_RELATED_MEMBERS,
+        variables: { teamId },
+      },
+      {
+        query: GET_KEY_RESULTS_HIGHLIGHTS,
+        variables: { teamId },
+      },
+    ],
   })
 
   const removeUser = (userId: string) => {
