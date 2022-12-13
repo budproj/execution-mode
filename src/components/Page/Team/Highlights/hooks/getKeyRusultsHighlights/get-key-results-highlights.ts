@@ -21,7 +21,6 @@ interface KeyResultsHighlights {
 
 type HightlightCard = {
   type: CARD_TYPES
-  title: string
   quantity: number
 }
 
@@ -59,7 +58,6 @@ const parsedData = (data: KeyResultsHighlights['getTeamFlags']) => {
     if (item === 'outdatedLength') {
       parsedHightlight.push({
         type: CARD_TYPES.CHECKIN,
-        title: 'Check-in atrasado',
         quantity: data.outdatedLength,
       })
     }
@@ -67,7 +65,6 @@ const parsedData = (data: KeyResultsHighlights['getTeamFlags']) => {
     if (item === 'lowLength') {
       parsedHightlight.push({
         type: CARD_TYPES.CONFIDENCE,
-        title: 'Baixa confiança',
         quantity: data.lowLength,
       })
     }
@@ -75,7 +72,6 @@ const parsedData = (data: KeyResultsHighlights['getTeamFlags']) => {
     if (item === 'noRelatedLength') {
       parsedHightlight.push({
         type: CARD_TYPES.KRMEMBERS,
-        title: 'Membros sem KRS',
         quantity: data.noRelatedLength,
       })
     }
@@ -83,7 +79,6 @@ const parsedData = (data: KeyResultsHighlights['getTeamFlags']) => {
     if (item === 'barrierLength') {
       parsedHightlight.push({
         type: CARD_TYPES.BARRIER,
-        title: 'Barreira',
         quantity: data.barrierLength,
       })
     }

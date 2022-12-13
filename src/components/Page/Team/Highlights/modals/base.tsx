@@ -7,6 +7,7 @@ import { configHighlightModal } from 'src/state/recoil/team/highlight/is-open-hi
 import { CARD_TYPES } from '../utils/card-types'
 
 import KeyResultsHighlightsModal from './key-results-highlights.modal'
+import MembersHighlightsModal from './members-highlights.modal'
 import { RoutineHighlightModal } from './routine-highlight.modal'
 
 const TeamHightlightModal = () => {
@@ -43,11 +44,7 @@ const TeamHightlightModal = () => {
       )
     case CARD_TYPES.KRMEMBERS:
       return (
-        <KeyResultsHighlightsModal
-          highlightType={type}
-          isOpen={isOpen}
-          onClose={handleModalClose}
-        />
+        <MembersHighlightsModal highlightType={type} isOpen={isOpen} onClose={handleModalClose} />
       )
     case CARD_TYPES.FEELING:
       return (
