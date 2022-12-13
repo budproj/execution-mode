@@ -1616,7 +1616,7 @@
     "description": "This message appears as the title of the Check-ins and routine option in the notifications modal."
   },
   "ie2eTm": {
-    "defaultMessage": "This team's key results with {confidence, select, barrier {a roadblock} confidence {low confidence} other {outdated check-in}}",
+    "defaultMessage": "Key-results of this team with {confidence, select, barrier {roadblock} confidence {low confidence} other {outdated check-in}}",
     "description": "The title for the dashboard key results modal"
   },
   "ifl8WA": {
@@ -3684,7 +3684,7 @@
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2022-12-13T14:10:58Z",
+    "defaultMessage": "2022-12-13T18:40:15Z",
     "description": ""
   }
 }
