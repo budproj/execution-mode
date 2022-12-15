@@ -8,6 +8,7 @@ type UsersTeamListMessages =
   | 'teamColumn'
   | 'modalTitleColumn'
   | 'lastRoutineColumn'
+  | 'lastAccessColumn'
   | 'suitcaseIconDescription'
   | 'pauseIconDescription'
   | 'productivityLabel'
@@ -48,24 +49,29 @@ export default defineMessages<UsersTeamListMessages>({
   },
   userColumn: {
     defaultMessage: 'Usuário',
-    id: 'xm9P9h',
-    description: 'The title in the roadblock modal',
+    id: 'C+pEn4',
+    description: 'The title of the user column',
   },
   teamColumn: {
     defaultMessage: 'Time',
-    id: 'KczxKH',
-    description: 'The title in the roadblock modal',
+    id: 'cVQ/Xo',
+    description: 'The title of the team column',
   },
   modalTitleColumn: {
     defaultMessage:
       '{type, select, feeling {Sentimento} productivity {Produtividade na semana} roadblock {Bloqueios na semana} other {OKRs}} ',
-    id: '9Cv8pE',
-    description: 'The title in the roadblock modal',
+    id: 'EJLLb9',
+    description: 'The title of the modal',
   },
   lastRoutineColumn: {
     defaultMessage: 'Última retrospectiva',
-    id: 'YQqWNM',
-    description: 'The title in the roadblock modal',
+    id: 'ktxOrA',
+    description: 'The title of the last routine column',
+  },
+  lastAccessColumn: {
+    defaultMessage: 'Último acesso',
+    id: 'n6hyQa',
+    description: 'The title in the last access column',
   },
   suitcaseIconDescription: {
     defaultMessage: 'Um ícone de maleta, representando a produtividade.',

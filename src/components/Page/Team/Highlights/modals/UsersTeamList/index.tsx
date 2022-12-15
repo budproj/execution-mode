@@ -1,4 +1,6 @@
 import { Avatar, Box, Flex, Grid, GridItem, Text, Tag, HStack } from '@chakra-ui/react'
+import { differenceInDays, formatDistance } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -26,6 +28,14 @@ interface UserRoutineDataProperties {
   lastRoutineAnswerId: string
 }
 
+interface UserAmplitudeDataProperties {
+  userData: {
+    amp_props: {
+      last_used: string
+    }
+  }
+}
+
 export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
@@ -33,22 +43,30 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
 
   const { data: user } = useGetUserDetails(userId)
   const [userRoutineData, setUserRoutineData] = useState<UserRoutineDataProperties>()
+  const [userAmplitudeData, setUserAmplitudeData] = useState<UserAmplitudeDataProperties>()
 
   useEffect(() => {
     async function getUserRoutineData() {
-      const { routines } = await servicesPromise
+      const { routines, amplitude } = await servicesPromise
       try {
-        const { data } = await routines.get<UserRoutineDataProperties>(
+        const { data: routineData } = await routines.get<UserRoutineDataProperties>(
           `/answers/overview/user/${userId}`,
         )
-        if (data) setUserRoutineData(data)
+        const { data: amplitudeData } = await amplitude.get<UserAmplitudeDataProperties>('', {
+          params: {
+            user_id: user?.id,
+            get_amp_props: true,
+          },
+        })
+        if (routineData) setUserRoutineData(routineData)
+        if (amplitudeData) setUserAmplitudeData(amplitudeData)
       } catch (error: unknown) {
-        console.warn({ routine_server_warning: error })
+        console.warn({ routine_or_amplitude_server_warning: error })
       }
     }
 
     getUserRoutineData()
-  }, [servicesPromise, userId])
+  }, [servicesPromise, user?.id, userId])
 
   const defaultIcon = (type?: string) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -102,12 +120,34 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
     }
   }
 
-  console.log({ user: user?.teams?.edges })
+  const userLastAccessDate = userAmplitudeData?.userData.amp_props.last_used ?? ''
+
+  const sinceDayLastAccess = () => {
+    if (userLastAccessDate) {
+      const difference = differenceInDays(new Date(`${userLastAccessDate}T00:00`), new Date())
+      if (difference === 0) {
+        return 'Hoje'
+      }
+
+      const formatedDistance = formatDistance(new Date(`${userLastAccessDate}T00:00`), new Date(), {
+        addSuffix: true,
+        locale: ptBR,
+      })
+
+      return formatedDistance.charAt(0).toUpperCase() + formatedDistance.slice(1)
+    }
+  }
+
+  const teste = () => {
+    if (userLastAccessDate) {
+      return 'teste'
+    }
+  }
 
   return (
     <Grid
       padding="15px 0 15px 0"
-      gridTemplateColumns="1fr 1fr 1fr 1fr"
+      gridTemplateColumns="1fr 1fr 1fr 1fr 1fr"
       flex="1"
       borderTop="1px solid #D9E2F6"
       _hover={{ background: 'black.50' }}
@@ -259,6 +299,25 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
         ) : (
           <LastRetrospectiveEmptyState />
         )}
+      </GridItem>
+      <GridItem
+        display="flex"
+        color="new-gray.800"
+        fontWeight="500"
+        fontSize="12px"
+        flexDirection="column"
+        gap="1px"
+        alignItems="center"
+      >
+        {/* {userAmplitudeData?.userData.amp_props.last_used} */}
+        {/* {String(date)}-{String(new Date())} */}
+        {/* <LastUpdateText date={new Date(`${userLastAccessDate}T00:00`)} prefix="" /> */}
+        <Box>
+          <Text fontWeight="500">{sinceDayLastAccess()}</Text>
+          <Text color="new-gray.600" fontWeight="400">
+            {teste()}
+          </Text>
+        </Box>
       </GridItem>
     </Grid>
   )

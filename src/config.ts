@@ -83,6 +83,9 @@ export interface SmartlookConfig {
 
 export interface AmplitudeConfig {
   apiKey: string
+  devSecretKey: string
+  prodSecretKey: string
+  userProfileUrl: string
 }
 
 export interface MiragePublicConfig {
