@@ -1,4 +1,4 @@
-import { Flex, Text, IconButton, GridItem, Divider, Box, Skeleton } from '@chakra-ui/react'
+import { Flex, Text, IconButton, GridItem, Divider, Box } from '@chakra-ui/react'
 import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import { useRouter } from 'next/router'
@@ -27,6 +27,7 @@ import selectUser from 'src/state/recoil/user/selector'
 import { AnswerSummary } from '../retrospective-tab-content'
 
 import AnswerRowComponent from './answer-row'
+import AnswersRowSkeleton from './answers-row-skeleton'
 import messages from './messages'
 
 interface AnswersComponentProperties {
@@ -64,7 +65,7 @@ const AnswersComponent = ({
   const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
   const userTeamIds = userTeams.map((team) => team.id)
   const userCompanie = userCompanies[0]?.id
-  const isUserFromTheTeam = [userTeamIds, userCompanie].includes(teamId)
+  const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
 
   const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
   const isActiveRoutine = isBefore(new Date(), before)
@@ -160,11 +161,12 @@ const AnswersComponent = ({
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
       </Flex>
       <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
-        {filteredAnswers.map((answer) => (
-          <Skeleton key={answer.id} isLoaded={!isLoading} borderRadius={8}>
-            <AnswerRowComponent answer={answer} />
-          </Skeleton>
-        ))}
+        {isLoading ? (
+          <AnswersRowSkeleton />
+        ) : (
+          filteredAnswers.map((answer) => <AnswerRowComponent key={answer.id} answer={answer} />)
+        )}
+        {}
       </ScrollableItem>
       {showAnswerNowButton && !isLoading && (
         <Box textAlign="center" marginTop="auto">

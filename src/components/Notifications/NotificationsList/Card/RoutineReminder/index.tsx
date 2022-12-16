@@ -20,10 +20,12 @@ const RoutineReminder = ({ properties, isRead, timestamp, type }: Notification) 
   const { dispatch } = useEvent(EventType.NOTIFICATION_ROUTINE_REMINDER_CLICK)
 
   const handleRoutineClick = () => {
+    setTimeout(() => {
+      dispatch({})
+    }, 500)
     if (properties.team?.id)
       router.push(`/explore/${properties.team.id}?activeTab=${routineTabName}`)
     else router.push('#')
-    dispatch({})
   }
 
   return (
