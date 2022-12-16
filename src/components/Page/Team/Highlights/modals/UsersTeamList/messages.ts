@@ -15,6 +15,7 @@ type UsersTeamListMessages =
   | 'feelingLabel'
   | 'roadblockLabel'
   | 'noKrsFlag'
+  | 'todayLastAccess'
 
 export default defineMessages<UsersTeamListMessages>({
   feelingTitle: {
@@ -88,5 +89,10 @@ export default defineMessages<UsersTeamListMessages>({
     defaultMessage: 'Sem KR',
     id: '8PcB2d',
     description: 'This message appears on table that shows the no members no related KRs.',
+  },
+  todayLastAccess: {
+    defaultMessage: 'Hoje',
+    id: 'Yc4eh9',
+    description: 'This message appears if the user last access is today.',
   },
 })

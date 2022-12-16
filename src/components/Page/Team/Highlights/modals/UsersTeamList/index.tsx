@@ -1,5 +1,5 @@
 import { Avatar, Box, Flex, Grid, GridItem, Text, Tag, HStack } from '@chakra-ui/react'
-import { differenceInDays, formatDistance } from 'date-fns'
+import { differenceInDays, formatDistance, format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
@@ -126,7 +126,7 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
     if (userLastAccessDate) {
       const difference = differenceInDays(new Date(`${userLastAccessDate}T00:00`), new Date())
       if (difference === 0) {
-        return 'Hoje'
+        return intl.formatMessage(messages.todayLastAccess)
       }
 
       const formatedDistance = formatDistance(new Date(`${userLastAccessDate}T00:00`), new Date(), {
@@ -138,9 +138,10 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
     }
   }
 
-  const teste = () => {
+  const lastAccessSubtext = () => {
     if (userLastAccessDate) {
-      return 'teste'
+      const date = new Date(`${userLastAccessDate}T00:00`)
+      return format(date, 'dd/MM/yyyy')
     }
   }
 
@@ -315,7 +316,7 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
         <Box>
           <Text fontWeight="500">{sinceDayLastAccess()}</Text>
           <Text color="new-gray.600" fontWeight="400">
-            {teste()}
+            {lastAccessSubtext()}
           </Text>
         </Box>
       </GridItem>
