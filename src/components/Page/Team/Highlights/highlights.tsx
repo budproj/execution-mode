@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/react'
 import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -7,29 +8,44 @@ import { Team } from 'src/components/Team/types'
 
 import { TeamSectionWrapper } from '../Section/wrapper'
 
+import GET_KEY_RESULTS_HIGHLIGHTS from './get-key-results-highlights.gql'
 import HighlightSection, { HighlightCard } from './highlight-section'
 import HighlightsSectionSkeleton from './highlights-section-skeleton'
-import { useGetKeyResultsHighlights } from './hooks/getKeyRusultsHighlights'
 import messages from './messages'
+import { CARD_TYPES } from './utils/card-types'
+import { KeyResultsHighlights, parsedData } from './utils/parsed-highlights-data'
 
 interface HighlightsProperties {
   teamId?: Team['id']
   isLoading?: boolean
 }
 
+type HightlightCard = {
+  type: CARD_TYPES
+  quantity: number
+}
+
 export const Highlights = ({ teamId, isLoading }: HighlightsProperties) => {
   const intl = useIntl()
-  const { data, setTeamId, loading: krsHighlightsLoading } = useGetKeyResultsHighlights()
-
-  const dataLoading = isLoading ?? krsHighlightsLoading
-
-  useEffect(() => {
-    if (teamId) setTeamId(teamId)
-  }, [setTeamId, teamId])
+  const [teamHighlights, setTeamHighlights] = useState<HightlightCard[]>([])
 
   const [routineFlags, setRoutineFlags] = useState<HighlightCard[]>()
   const { servicesPromise } = useContext(ServicesContext)
 
+  const { loading: krsHighlightsLoading } = useQuery<KeyResultsHighlights>(
+    GET_KEY_RESULTS_HIGHLIGHTS,
+    {
+      variables: { teamId },
+      fetchPolicy: 'network-only',
+      onCompleted: (data) => {
+        const dataParsed = parsedData(data.getTeamFlags)
+
+        if (dataParsed.length > 0) setTeamHighlights(dataParsed)
+      },
+    },
+  )
+
+  const dataLoading = isLoading ?? krsHighlightsLoading
   useEffect(() => {
     const getRoutinesHighlights = async (id: Team['id']) => {
       const { routines } = await servicesPromise
@@ -69,7 +85,7 @@ export const Highlights = ({ teamId, isLoading }: HighlightsProperties) => {
           <HighlightSection
             title={intl.formatMessage(messages.teamKRsHighlightTitleSection)}
             gridTemplate="1fr 1fr"
-            data={data}
+            data={teamHighlights}
           />
         )}
       </Stack>

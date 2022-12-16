@@ -6,6 +6,7 @@ import { useSetRecoilState } from 'recoil'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { configHighlightModal } from 'src/state/recoil/team/highlight/is-open-highlight-modal'
+import { keyResultsHighlightsType } from 'src/state/recoil/team/highlight/key-results-highlights-type'
 
 import { HighlightCard } from './highlight-section'
 import messages from './messages'
@@ -20,16 +21,22 @@ export const HighLightCardComponent = ({ item }: HighLightCardProperties) => {
   const intl = useIntl()
 
   const setHighlightModalConfig = useSetRecoilState(configHighlightModal)
+  const setKeyResultHighlightType = useSetRecoilState(keyResultsHighlightsType)
 
   const handleOpenModal = useCallback(
     (item: HighlightCard) => {
+      if (item.type !== CARD_TYPES.KRMEMBERS) {
+        setKeyResultHighlightType(item.type)
+      }
+
       setHighlightModalConfig({
         isOpen: true,
         type: item.type,
         usersIds: item.usersIds ?? undefined,
       })
     },
-    [setHighlightModalConfig],
+
+    [setHighlightModalConfig, setKeyResultHighlightType],
   )
   const eventMap = new Map([
     [CARD_TYPES.FEELING, EventType.FEELING_HIGHLIGHT_CLICK],

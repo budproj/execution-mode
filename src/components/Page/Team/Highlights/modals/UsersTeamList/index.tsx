@@ -310,9 +310,6 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
         gap="1px"
         alignItems="center"
       >
-        {/* {userAmplitudeData?.userData.amp_props.last_used} */}
-        {/* {String(date)}-{String(new Date())} */}
-        {/* <LastUpdateText date={new Date(`${userLastAccessDate}T00:00`)} prefix="" /> */}
         <Box>
           <Text fontWeight="500">{sinceDayLastAccess()}</Text>
           <Text color="new-gray.600" fontWeight="400">

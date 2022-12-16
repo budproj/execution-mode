@@ -1,12 +1,14 @@
 import { useQuery } from '@apollo/client'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
-import { Team } from 'src/components/Team/types'
 import { GraphQLEdge } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { keyResultsHighlightsType } from 'src/state/recoil/team/highlight/key-results-highlights-type'
+import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
 import { CARD_TYPES } from '../../utils/card-types'
 
@@ -27,24 +29,18 @@ type getTeamKeyResultsBarrier = {
 
 interface GetTeamKeyResultsBarrier {
   data: KeyResult[]
-  setKeyResultHighlightType: (type: CARD_TYPES) => void
-  setTeamId: (teamId: Team['id']) => void
   loading: boolean
   called: boolean
 }
 
 export const useGetTeamKeyResultsHighlights = (): GetTeamKeyResultsBarrier => {
   const [loadKRs] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
+  const teamId = useRecoilValue(selectedTeamIdHighlight)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
-  const [teamId, setTeamId] = useState<Team['id']>()
-  const [keyResultHighlightType, setKeyResultHighlightType] = useState<CARD_TYPES>(
-    CARD_TYPES.BARRIER,
-  )
+  const keyResultHighlightType = useRecoilValue<CARD_TYPES>(keyResultsHighlightsType)
 
-  const queryVariables = {}
-
-  if (teamId) {
-    Object.assign(queryVariables, { teamId })
+  const queryVariables = {
+    teamId,
   }
 
   const highlightTypesMap = new Map([
@@ -70,8 +66,7 @@ export const useGetTeamKeyResultsHighlights = (): GetTeamKeyResultsBarrier => {
   useEffect(() => {
     loadKRs(keyResults)
   }, [keyResults, loadKRs])
-
-  return { data: keyResults, setKeyResultHighlightType, loading, called, setTeamId }
+  return { data: keyResults, loading, called }
 }
 
 const getEdgesByCardType = (type: CARD_TYPES) => {

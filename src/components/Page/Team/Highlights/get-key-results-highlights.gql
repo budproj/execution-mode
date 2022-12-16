@@ -1,0 +1,9 @@
+query GET_KEY_RESULTS_HIGHLIGHTS($teamId: ID!) {
+  getTeamFlags(id: $teamId){
+    outdatedLength
+    lowLength
+    noRelatedLength
+    barrierLength
+  }
+}
+
