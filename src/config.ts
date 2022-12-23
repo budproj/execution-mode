@@ -21,6 +21,7 @@ export interface BudPublicConfig {
   amplitude: AmplitudeConfig
   mirage: MiragePublicConfig
   maintenanceMode: MaintenanceModeConfig
+  flagsmith: FlagsmithConfig
 }
 
 export interface BudServerConfig {
@@ -93,6 +94,10 @@ export interface MiragePublicConfig {
 export interface MaintenanceModeConfig {
   enabled: boolean
   expectedReturn: Date
+}
+
+export interface FlagsmithConfig {
+  clientSideKey: string
 }
 
 const getConfig = (): BudConfig => getNextConfig()

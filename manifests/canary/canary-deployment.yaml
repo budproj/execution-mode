@@ -67,3 +67,5 @@ spec:
               value: https://api.canary.getbud.co/routines
             - name: 'REST_API_BASE'
               value: https://api.canary.getbud.co
+            - name: 'FLAGSMITH_CLIENT_KEY'
+              value: Fu7j9ywFBz3GomYwQaRKaT

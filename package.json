@@ -123,6 +123,7 @@
     "crypto": "^1.0.1",
     "date-fns": "^2.28.0",
     "deepmerge": "^4.2.2",
+    "flagsmith": "^3.15.1",
     "formik": "^2.2.9",
     "framer-motion": "^5.0.0",
     "glob": "^7.1.6",

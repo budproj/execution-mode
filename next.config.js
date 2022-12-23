@@ -35,6 +35,7 @@ const {
   ROUTINES_API,
   COMMENTS_API,
   REST_API_BASE,
+  FLAGSMITH_CLIENT_KEY,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -86,6 +87,10 @@ const publicRuntimeConfig = {
 
   sentry: {
     dsn: SENTRY_DSN,
+  },
+
+  flagsmith: {
+    clientSideKey: FLAGSMITH_CLIENT_KEY,
   },
 
   intlRedirects: [
