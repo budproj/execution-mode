@@ -18,8 +18,9 @@ const FlagsmithIdentifier = ({ children }: FlagsmithProviderProperties) => {
   const flagsmithInstance = useFlagsmith()
 
   if (!loading) {
-    flagsmithInstance.identify(`user_${data.me.id as string}`, {
+    flagsmithInstance.identify(data.me.email, {
       userId: data.me.id,
+      email: data.me.email,
       companyId: data.me.companies.edges[0].node.id,
     })
   }
