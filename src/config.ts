@@ -11,7 +11,6 @@ export interface BudPublicConfig {
   environment: ENVIRONMENT
   nodeEnv: NodeEnvironment
   defaultLocale: LOCALE
-  noGamificationCompaniesIds: Array<Team['id']>
   intlRoutes: Route[]
   logLevel: LogLevel
   api: BudAPIs

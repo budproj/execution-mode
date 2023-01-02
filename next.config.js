@@ -30,7 +30,6 @@ const {
   AMPLITUDE_API_KEY,
   SENTRY_DSN,
   SENTRY_AUTH_TOKEN,
-  NO_GAMIFICATION_COMPANIES_IDS,
   NOTIFICATION_API,
   ROUTINES_API,
   COMMENTS_API,
@@ -43,9 +42,6 @@ const publicRuntimeConfig = {
   nodeEnv: NODE_ENV,
   defaultLocale: LOCALE_OVERRIDE ?? DEFAULT_LOCALE,
   logLevel: LOG_LEVEL,
-  noGamificationCompaniesIds: NO_GAMIFICATION_COMPANIES_IDS
-    ? NO_GAMIFICATION_COMPANIES_IDS.split(',')
-    : [],
   maintenanceMode: {
     enabled: MAINTENANCE_MODE_ENABLED === 'true',
     expectedReturn: new Date(MAINTENANCE_MODE_EXPECTED_RETURN),
