@@ -1,7 +1,5 @@
 import getNextConfig from 'next/config'
 
-import { Team } from 'src/components/Team/types'
-
 export interface BudConfig {
   publicRuntimeConfig: BudPublicConfig
   serverRuntimeConfig: BudServerConfig
