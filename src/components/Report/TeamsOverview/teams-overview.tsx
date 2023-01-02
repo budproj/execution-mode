@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Box, Divider, StyleProps } from '@chakra-ui/react'
+import { useFlags } from 'flagsmith/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -29,7 +30,8 @@ const ScrollableItem = getScrollableItem()
 
 const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   const intl = useIntl()
-  const { isGameficationDisabled } = useGetGamificationDetails()
+  const flags = useFlags(['view_gamification_teams_ranking'])
+  const isGameficationDisabled = !flags.view_gamification_teams_ranking.enabled
 
   const { data, loading } = useQuery<GetCompanyTeamsQuery>(queries.GET_COMPANY_TEAMS, {
     fetchPolicy: 'network-only',
