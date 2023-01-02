@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import flagsmith from 'flagsmith'
-import { FlagsmithProvider as FlagsmithProviderInternal } from 'flagsmith/react'
+import { FlagsmithProvider as FlagsmithProviderInternal, useFlagsmith } from 'flagsmith/react'
 import React, { ReactElement } from 'react'
 
 import getConfig from 'src/config'
@@ -13,16 +13,21 @@ type FlagsmithProviderProperties = {
 
 const config = getConfig()
 
-export const FlagsmithProvider = ({ children }: FlagsmithProviderProperties) => {
+const FlagsmithIdentifier = ({ children }: FlagsmithProviderProperties) => {
   const { data, loading } = useQuery(queries.GET_USER_TRAITS)
+  const flagsmithInstance = useFlagsmith()
 
   if (!loading) {
-    flagsmith.identify('undefined', {
+    flagsmithInstance.identify(`user_${data.me.id as string}`, {
       userId: data.me.id,
       companyId: data.me.companies.edges[0].node.id,
     })
   }
 
+  return loading ? <div /> : children
+}
+
+export const FlagsmithProvider = ({ children }: FlagsmithProviderProperties) => {
   return (
     <FlagsmithProviderInternal
       options={{
@@ -30,7 +35,7 @@ export const FlagsmithProvider = ({ children }: FlagsmithProviderProperties) => 
       }}
       flagsmith={flagsmith}
     >
-      {loading ? <div /> : children}
+      <FlagsmithIdentifier>{children}</FlagsmithIdentifier>
     </FlagsmithProviderInternal>
   )
 }
