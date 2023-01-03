@@ -1,0 +1,13 @@
+query GET_USER_TRAITS {
+  me {
+    id
+    email
+    companies {
+      edges {
+        node {
+          id
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ import { RecoilRoot } from 'recoil'
 
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
+import FlagsmithProvider from 'src/components/Base/FlagsmithProvider'
 import HotjarProvider from 'src/components/Base/HotjarProvider'
 import { HubSpotProvider } from 'src/components/Base/HubSpotProvider/wrapper'
 import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
@@ -68,22 +69,24 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
               <AmplitudeProvider>
                 <AuthzApolloProvider pageProps={pageProps}>
                   <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
-                    <ServicesProvider>
-                      <RoutinesFormActionsProvider>
-                        <>
-                          <NoticesBanner />
-                          <MaintenanceGatekeeper>
-                            <HotjarProvider />
-                            <HubSpotProvider />
-                            <ProgressBar />
-                            <KeyResultSingleDrawer />
-                            <TeamRedirectPage />
-                            <RetrospectiveRoutine />
-                            <Component {...pageProps} />
-                          </MaintenanceGatekeeper>
-                        </>
-                      </RoutinesFormActionsProvider>
-                    </ServicesProvider>
+                    <FlagsmithProvider>
+                      <ServicesProvider>
+                        <RoutinesFormActionsProvider>
+                          <>
+                            <NoticesBanner />
+                            <MaintenanceGatekeeper>
+                              <HotjarProvider />
+                              <HubSpotProvider />
+                              <ProgressBar />
+                              <KeyResultSingleDrawer />
+                              <TeamRedirectPage />
+                              <RetrospectiveRoutine />
+                              <Component {...pageProps} />
+                            </MaintenanceGatekeeper>
+                          </>
+                        </RoutinesFormActionsProvider>
+                      </ServicesProvider>
+                    </FlagsmithProvider>
                   </RecoilIntlProvider>
                 </AuthzApolloProvider>
               </AmplitudeProvider>
