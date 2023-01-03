@@ -5,6 +5,9 @@ query GET_USER_DETAILS($userId: ID) {
     fullName
     firstName
     role
+    amplitude {
+      last_used
+    }
     yearlyProgress {
       showProgress
       progress

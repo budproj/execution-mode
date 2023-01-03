@@ -28,14 +28,6 @@ interface UserRoutineDataProperties {
   lastRoutineAnswerId: string
 }
 
-interface UserAmplitudeDataProperties {
-  userData: {
-    amp_props: {
-      last_used: string
-    }
-  }
-}
-
 export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
@@ -43,23 +35,16 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
 
   const { data: user } = useGetUserDetails(userId)
   const [userRoutineData, setUserRoutineData] = useState<UserRoutineDataProperties>()
-  const [userAmplitudeData, setUserAmplitudeData] = useState<UserAmplitudeDataProperties>()
 
   useEffect(() => {
     async function getUserRoutineData() {
-      const { routines, amplitude } = await servicesPromise
+      const { routines } = await servicesPromise
       try {
         const { data: routineData } = await routines.get<UserRoutineDataProperties>(
           `/answers/overview/user/${userId}`,
         )
-        const { data: amplitudeData } = await amplitude.get<UserAmplitudeDataProperties>('', {
-          params: {
-            user_id: user?.id,
-            get_amp_props: true,
-          },
-        })
+
         if (routineData) setUserRoutineData(routineData)
-        if (amplitudeData) setUserAmplitudeData(amplitudeData)
       } catch (error: unknown) {
         console.warn({ routine_or_amplitude_server_warning: error })
       }
@@ -120,7 +105,7 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
     }
   }
 
-  const userLastAccessDate = userAmplitudeData?.userData.amp_props.last_used ?? ''
+  const userLastAccessDate = user?.amplitude?.last_used ?? ''
 
   const sinceDayLastAccess = () => {
     if (userLastAccessDate) {

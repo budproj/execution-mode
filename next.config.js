@@ -77,9 +77,6 @@ const publicRuntimeConfig = {
 
   amplitude: {
     apiKey: AMPLITUDE_API_KEY,
-    devSecretKey: AMPLITUDE_DEV_SECRET_KEY,
-    prodSecretKey: AMPLITUDE_PROD_SECRET_KEY,
-    userProfileUrl: AMPLITUDE_USER_PROFILE_URL,
   },
 
   api: {
