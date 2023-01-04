@@ -14,11 +14,6 @@ query GET_USERS {
                 about
                 fullName
                 role
-                authzRole {
-                  id
-                  name
-                  description
-                }
                 picture
                 companies {
                   edges {
