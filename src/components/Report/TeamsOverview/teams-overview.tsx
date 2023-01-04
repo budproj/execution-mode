@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client'
 import { Box, Divider, StyleProps } from '@chakra-ui/react'
+import { useFlags } from 'flagsmith/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { Cycle } from 'src/components/Cycle/types'
 import { CardHeader } from 'src/components/Report/CardHeaders'
-import { useGetGamificationDetails } from 'src/components/Team/hooks'
 import { Team } from 'src/components/Team/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -29,7 +29,8 @@ const ScrollableItem = getScrollableItem()
 
 const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   const intl = useIntl()
-  const { isGameficationDisabled } = useGetGamificationDetails()
+  const flags = useFlags(['view_gamification_teams_ranking'])
+  const isGameficationDisabled = !flags.view_gamification_teams_ranking.enabled
 
   const { data, loading } = useQuery<GetCompanyTeamsQuery>(queries.GET_COMPANY_TEAMS, {
     fetchPolicy: 'network-only',
