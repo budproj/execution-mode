@@ -2,7 +2,7 @@
 const path = require('path')
 const _ = require('lodash')
 const { ProvidePlugin } = require('webpack')
-const { withSentryConfig } = require('@sentry/nextjs')
+const { withSentryConfig, configureScope } = require('@sentry/nextjs')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: true,
 })
@@ -220,6 +220,8 @@ const moduleExports = {
         process: 'process/browser',
       }),
     ]
+
+    config.optimization.usedExports = true
 
     return config
   },
