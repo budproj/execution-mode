@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Box, Stack } from '@chakra-ui/react'
+import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 
@@ -10,11 +11,13 @@ import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selecte
 
 import { ChildTeamsWrapper } from '../../ChildTeams/wrapper'
 import TeamHightlightModal from '../../Highlights/modals/base'
-import { TeamHighlightsWrapper } from '../../Highlights/wrapper'
+import { TeamIndicators } from '../../Indicators/wrapper'
 import { TeamMembersWrapper } from '../../Members/wrapper'
 
 import { TeamFlagsProperties } from './permissions'
 import queries from './queries.gql'
+
+const DynamicTeamHighlighsWrapper = dynamic(async () => import('../../Highlights/wrapper'))
 
 interface OkrsTabContentProperties {
   teamId: Team['id']
@@ -38,12 +41,13 @@ const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
   return (
     <Stack direction="row" spacing={8} maxH="100%">
       <Box flexGrow={1}>
+        <TeamIndicators teamID={teamId} />
         <TeamObjectives teamID={teamId} />
       </Box>
       <TeamHightlightModal />
       <Stack spacing="8" w="md" minW="md">
         {permissions?.flags?.read === GraphQLEffect.ALLOW && (
-          <TeamHighlightsWrapper teamID={teamId} isLoading={isLoading} />
+          <DynamicTeamHighlighsWrapper teamID={teamId} isLoading={isLoading} />
         )}
         <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
         <ChildTeamsWrapper teamID={teamId} isLoading={isLoading} />
