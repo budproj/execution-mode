@@ -12,6 +12,10 @@ COPY ./package.json ./
 COPY ./package-lock.json ./
 COPY ./.npmrc ./
 COPY ./bin ./bin
+
+RUN echo "asdas"
+RUN echo $GITHUB_TOKEN
+
 RUN npm ci
 
 COPY . ./
