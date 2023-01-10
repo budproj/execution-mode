@@ -249,11 +249,4 @@ const sentryWebpackPluginOptions = {
 
 module.exports = withBundleAnalyzer(withSentryConfig(moduleExports, sentryWebpackPluginOptions))
 
-// const devSentryExports =
-//   NODE_ENV === 'production'
-//     ? moduleExports
-//     : {
-//         sentry: { disableServerWebpackPlugin: true, disableClientWebpackPlugin: true },
-//       }
-
-// module.exports = withSentryConfig(devSentryExports, sentryWebpackPluginOptions)
+module.exports = withSentryConfig(module.exports, sentryWebpackPluginOptions)
