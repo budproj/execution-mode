@@ -3,6 +3,9 @@ const path = require('path')
 const _ = require('lodash')
 const { ProvidePlugin } = require('webpack')
 const { withSentryConfig } = require('@sentry/nextjs')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: true,
+})
 
 const {
   URL,
@@ -78,7 +81,7 @@ const publicRuntimeConfig = {
     notifications: NOTIFICATION_API,
     restBase: REST_API_BASE,
     routines: ROUTINES_API,
-    comments: COMMENTS_API
+    comments: COMMENTS_API,
   },
 
   sentry: {
@@ -220,6 +223,11 @@ const moduleExports = {
 
     return config
   },
+
+  sentry: {
+    disableServerWebpackPlugin: true,
+    disableClientWebpackPlugin: true,
+  },
 }
 
 const sentryWebpackPluginOptions = {
@@ -239,4 +247,4 @@ const sentryWebpackPluginOptions = {
   // https://github.com/getsentry/sentry-webpack-plugin#options.
 }
 
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions)
+module.exports = withBundleAnalyzer(withSentryConfig(moduleExports, sentryWebpackPluginOptions))
