@@ -222,6 +222,7 @@ const moduleExports = {
     ]
 
     config.optimization.usedExports = true
+    config.optimization.minimize = true
 
     return config
   },
