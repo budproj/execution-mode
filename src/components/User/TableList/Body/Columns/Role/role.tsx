@@ -17,6 +17,7 @@ import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import CyclesListBodyColumnBase from 'src/components/Cycle/List/Body/Columns/Base'
 import { Check, ChevronDown } from 'src/components/Icon'
 import { useChangeUserRole } from 'src/components/User/hooks/changeUserRole'
+import { useGetUserAuthzRole } from 'src/components/User/hooks/getUserAuthzRole/get-user-authz-role'
 import { AuthzUserRoles, User, UserStatus } from 'src/components/User/types'
 import buildPartialSelector from 'src/state/recoil/user/build-partial-selector'
 
@@ -30,14 +31,14 @@ export interface UsersTableListBodyColumnRoleProperties
   canEdit?: boolean
 }
 
-const userAuthzRoleSelector = buildPartialSelector<User['authzRole']>('authzRole')
 const stateOfUserSelector = buildPartialSelector<User['status']>('status')
 
 const UsersTableListBodyColumnRole = ({
   id,
   canEdit = true,
 }: UsersTableListBodyColumnRoleProperties): ReactElement => {
-  const userAuthzRole = useRecoilValue(userAuthzRoleSelector(id))
+  const { data: userAuthzRole, loading: isAuthzUserRoleLoading } = useGetUserAuthzRole(id ?? '')
+
   const isActive = useRecoilValue(stateOfUserSelector(id)) === UserStatus.ACTIVE
   const { updateUserRole } = useChangeUserRole()
 
@@ -53,10 +54,8 @@ const UsersTableListBodyColumnRole = ({
     })
   }
 
-  const isAuthzUserRoleLoading = Boolean(userAuthzRole)
-
   useEffect(() => {
-    if (isAuthzUserRoleLoading) setSelectedUserRole(userAuthzRole?.name)
+    if (!isAuthzUserRoleLoading) setSelectedUserRole(userAuthzRole?.name)
   }, [isAuthzUserRoleLoading, userAuthzRole?.name])
 
   const titleRolesLabels = new Map([
@@ -89,8 +88,8 @@ const UsersTableListBodyColumnRole = ({
     >
       <Flex alignItems="center">
         <Skeleton
-          isLoaded={isAuthzUserRoleLoading}
-          {...buildSkeletonMinSize(isAuthzUserRoleLoading, 140, 28)}
+          isLoaded={!isAuthzUserRoleLoading}
+          {...buildSkeletonMinSize(!isAuthzUserRoleLoading, 140, 28)}
         >
           <Menu placement="bottom-end">
             {({ isOpen }) => (
