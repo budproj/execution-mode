@@ -1,4 +1,6 @@
 import { Avatar, Box, Flex, Grid, GridItem, Text, Tag, HStack } from '@chakra-ui/react'
+import { differenceInDays, formatDistance, format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -38,17 +40,18 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
     async function getUserRoutineData() {
       const { routines } = await servicesPromise
       try {
-        const { data } = await routines.get<UserRoutineDataProperties>(
+        const { data: routineData } = await routines.get<UserRoutineDataProperties>(
           `/answers/overview/user/${userId}`,
         )
-        if (data) setUserRoutineData(data)
+
+        if (routineData) setUserRoutineData(routineData)
       } catch (error: unknown) {
-        console.warn({ routine_server_warning: error })
+        console.warn({ routine_or_amplitude_server_warning: error })
       }
     }
 
     getUserRoutineData()
-  }, [servicesPromise, userId])
+  }, [servicesPromise, user?.id, userId])
 
   const defaultIcon = (type?: string) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -102,10 +105,35 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
     }
   }
 
+  const userLastAccessDate = user?.amplitude?.last_used ?? ''
+
+  const sinceDayLastAccess = () => {
+    if (userLastAccessDate) {
+      const difference = differenceInDays(new Date(`${userLastAccessDate}T00:00`), new Date())
+      if (difference === 0) {
+        return intl.formatMessage(messages.todayLastAccess)
+      }
+
+      const formatedDistance = formatDistance(new Date(`${userLastAccessDate}T00:00`), new Date(), {
+        addSuffix: true,
+        locale: ptBR,
+      })
+
+      return formatedDistance.charAt(0).toUpperCase() + formatedDistance.slice(1)
+    }
+  }
+
+  const lastAccessSubtext = () => {
+    if (userLastAccessDate) {
+      const date = new Date(`${userLastAccessDate}T00:00`)
+      return format(date, 'dd/MM/yyyy')
+    }
+  }
+
   return (
     <Grid
       padding="15px 0 15px 0"
-      gridTemplateColumns="1fr 1fr 1fr 1fr"
+      gridTemplateColumns="1fr 1fr 1fr 1fr 1fr"
       flex="1"
       borderTop="1px solid #D9E2F6"
       _hover={{ background: 'black.50' }}
@@ -257,6 +285,22 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
         ) : (
           <LastRetrospectiveEmptyState />
         )}
+      </GridItem>
+      <GridItem
+        display="flex"
+        color="new-gray.800"
+        fontWeight="500"
+        fontSize="12px"
+        flexDirection="column"
+        gap="1px"
+        alignItems="center"
+      >
+        <Box>
+          <Text fontWeight="500">{sinceDayLastAccess()}</Text>
+          <Text color="new-gray.600" fontWeight="400">
+            {lastAccessSubtext()}
+          </Text>
+        </Box>
       </GridItem>
     </Grid>
   )

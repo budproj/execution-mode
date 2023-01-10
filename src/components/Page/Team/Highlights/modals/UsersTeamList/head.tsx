@@ -14,7 +14,7 @@ export const HeadUsersTeamList = ({ type }: HeadUsersTeamListProperties) => {
   return (
     <Grid
       padding="15px 0 15px 0"
-      gridTemplateColumns="1fr 1fr 1fr 1fr"
+      gridTemplateColumns="1fr 1fr 1fr 1fr 1fr"
       flex="1"
       borderTop="1px solid #D9E2F6"
     >
@@ -29,6 +29,9 @@ export const HeadUsersTeamList = ({ type }: HeadUsersTeamListProperties) => {
       </GridItem>
       <GridItem justifySelf="center" color="new-gray.800" fontWeight="500" fontSize="12px">
         {intl.formatMessage(messages.lastRoutineColumn)}
+      </GridItem>
+      <GridItem justifySelf="center" color="new-gray.800" fontWeight="500" fontSize="12px">
+        {intl.formatMessage(messages.lastAccessColumn)}
       </GridItem>
     </Grid>
   )

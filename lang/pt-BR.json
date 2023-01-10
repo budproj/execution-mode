@@ -587,10 +587,6 @@
     "defaultMessage": "Um ícone de um lápix, que aparece junto com a pergunta de algum recado que o usuário deixou para o time",
     "description": "The alternative text explaining our graphic icon"
   },
-  "9Cv8pE": {
-    "defaultMessage": "{type, select, feeling {Sentimento} productivity {Produtividade na semana} roadblock {Bloqueios na semana} other {OKRs}}",
-    "description": "The title in the roadblock modal"
-  },
   "9O5Xaa": {
     "defaultMessage": "Seu time ainda não tem nenhum resultado-chave anual",
     "description": "Message to show when there are no summary results"
@@ -719,6 +715,10 @@
     "defaultMessage": "Início",
     "description": "The label text inside the Cycle section, above the start date in our key result single page or drawers"
   },
+  "C+pEn4": {
+    "defaultMessage": "Usuário",
+    "description": "The title of the user column"
+  },
   "C6YmFo": {
     "defaultMessage": "Dicas para escrever um bom resultado-chave:",
     "description": "The title of the tip when you are creating a KR."
@@ -838,6 +838,10 @@
   "E+0+QH": {
     "defaultMessage": "Tem certeza que deseja excluir este resultado-chave?",
     "description": "This message is used as the title in our first dialog while removing a key-result"
+  },
+  "EJLLb9": {
+    "defaultMessage": "{type, select, feeling {Sentimento} productivity {Produtividade na semana} roadblock {Bloqueios na semana} other {OKRs}}",
+    "description": "The title of the modal"
   },
   "EZ8KCj": {
     "defaultMessage": "Email",
@@ -1174,10 +1178,6 @@
   "KSjqcC": {
     "defaultMessage": "%",
     "description": "The text of the table head related to the percentual progress column"
-  },
-  "KczxKH": {
-    "defaultMessage": "Time",
-    "description": "The title in the roadblock modal"
   },
   "KdYFbe": {
     "defaultMessage": "Apagar",
@@ -1903,13 +1903,13 @@
     "defaultMessage": "Ir para o perfil",
     "description": "This option will redirect the user to the selected user profile."
   },
-  "YQqWNM": {
-    "defaultMessage": "Última retrospectiva",
-    "description": "The title in the roadblock modal"
-  },
   "YUvWwS": {
     "defaultMessage": "Registro",
     "description": "It is used as a fallback if the component has no card type defined for it"
+  },
+  "Yc4eh9": {
+    "defaultMessage": "Hoje",
+    "description": "This message appears if the user last access is today."
   },
   "Yjqtno": {
     "defaultMessage": "Como foi sua semana? Coloque sua Retrospectiva em dia",
@@ -2086,6 +2086,10 @@
   "cRj0sI": {
     "defaultMessage": "Desculpe, mas houve um erro inesperado. Tente novamente mais tarde",
     "description": "This message appears when the user tries to remove a given key-result, but receives an error"
+  },
+  "cVQ/Xo": {
+    "defaultMessage": "Time",
+    "description": "The title of the team column"
   },
   "chwy/J": {
     "defaultMessage": "Responder hoje",
@@ -2495,6 +2499,10 @@
     "defaultMessage": "Comentários:",
     "description": "This message appears as the empty state title of comments in a user retrospective reply"
   },
+  "ktxOrA": {
+    "defaultMessage": "Última retrospectiva",
+    "description": "The title of the last routine column"
+  },
   "kynYpx": {
     "defaultMessage": "Meus Resultados-Chave",
     "description": "The page title that our users should see in the my key results page"
@@ -2618,6 +2626,10 @@
   "n3PYQR": {
     "defaultMessage": "Escreva sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}",
     "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
+  },
+  "n6hyQa": {
+    "defaultMessage": "Último acesso",
+    "description": "The title in the last access column"
   },
   "n8OKn4": {
     "defaultMessage": "Resultados-chave",
@@ -3138,10 +3150,6 @@
   "xfx/rc": {
     "defaultMessage": "Um botão com um ícone de confirmação. Ao clicar nele você irá salvar sua atualização do objetivo",
     "description": "This text is displayed inside the objective accordion at the team page. It is used by screen readers to explain the check button"
-  },
-  "xm9P9h": {
-    "defaultMessage": "Usuário",
-    "description": "The title in the roadblock modal"
   },
   "xywRWB": {
     "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",

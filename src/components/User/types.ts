@@ -40,6 +40,7 @@ export interface User extends GraphQLNode {
   status?: UserStatus
   nickname?: string
   about?: string
+  amplitude?: UserAmplitudeData
   linkedInProfileAddress?: string
   yearlyProgress?: UserProgress
   quarterlyProgress?: UserProgress
@@ -54,6 +55,10 @@ export interface User extends GraphQLNode {
 export interface UserProgress {
   showProgress: boolean
   progress: number
+}
+
+export interface UserAmplitudeData {
+  last_used?: string
 }
 
 export interface UserQuery {
