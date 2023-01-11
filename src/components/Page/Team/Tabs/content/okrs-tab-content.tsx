@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Box, Stack } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import React, { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
@@ -40,10 +40,10 @@ const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
 
   return (
     <Stack direction="row" spacing={8} maxH="100%">
-      <Box flexGrow={1}>
+      <Stack flexGrow={1} spacing={8}>
         <TeamIndicators teamID={teamId} />
         <TeamObjectives teamID={teamId} />
-      </Box>
+      </Stack>
       <TeamHightlightModal />
       <Stack spacing="8" w="md" minW="md">
         {permissions?.flags?.read === GraphQLEffect.ALLOW && (

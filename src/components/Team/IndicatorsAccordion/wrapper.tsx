@@ -13,7 +13,13 @@ interface IndicatorsAccordionProperties {
 const IndicatorsAccordion = ({ teamID }: IndicatorsAccordionProperties) => {
   return (
     <Accordion allowToggle allowMultiple gridGap={8} display="flex" flexDirection="column">
-      <AccordionItem>
+      <AccordionItem
+        borderColor="transparent"
+        bg="white"
+        boxShadow="for-background.light"
+        p={6}
+        borderRadius="10"
+      >
         <IndicatorsAccordionButton />
         <IndicatorsAccordionPanel />
       </AccordionItem>
