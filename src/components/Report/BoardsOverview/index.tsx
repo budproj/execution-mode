@@ -9,8 +9,8 @@ import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQu
 
 import Board from './Board'
 import KeyResultConfidence from './KeyResultConfidences'
-import { KeyResultListingModal } from './KeyResultListing'
 import { ConfidenceMapper } from './KeyResultListing/types'
+import { KeyResultsListingTable } from './KeyResultsListingTable'
 import messages from './messages'
 
 const BoardsOverview = ({ ...rest }) => {
@@ -38,7 +38,7 @@ const BoardsOverview = ({ ...rest }) => {
       </Flex>
 
       {krHealthStatus && (
-        <KeyResultListingModal
+        <KeyResultsListingTable
           isOpen
           confidence={confidence}
           // eslint-disable-next-line unicorn/no-useless-undefined

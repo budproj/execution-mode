@@ -63,11 +63,11 @@ spec:
               value: '5cab2cdecc225119adeece5e90353c122c462d14'
             - name: AMPLITUDE_API_KEY
               value: 9314f6f12a26e6a5989287b16d030c30
-            - name: NO_GAMIFICATION_COMPANIES_IDS
-              value: '96eeb274-518e-462a-a741-f304420aa637'
             - name: NOTIFICATION_API
               value: https://notifications.getbud.co
             - name: 'ROUTINES_API'
               value: https://api.getbud.co/routines
             - name: 'REST_API_BASE'
               value: https://api.getbud.co
+            - name: 'FLAGSMITH_CLIENT_KEY'
+              value: WUzB94hT3ZCyUqFb9raDXh

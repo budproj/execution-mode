@@ -1,7 +1,5 @@
 import getNextConfig from 'next/config'
 
-import { Team } from 'src/components/Team/types'
-
 export interface BudConfig {
   publicRuntimeConfig: BudPublicConfig
   serverRuntimeConfig: BudServerConfig
@@ -11,7 +9,6 @@ export interface BudPublicConfig {
   environment: ENVIRONMENT
   nodeEnv: NodeEnvironment
   defaultLocale: LOCALE
-  noGamificationCompaniesIds: Array<Team['id']>
   intlRoutes: Route[]
   logLevel: LogLevel
   api: BudAPIs
@@ -21,6 +18,7 @@ export interface BudPublicConfig {
   amplitude: AmplitudeConfig
   mirage: MiragePublicConfig
   maintenanceMode: MaintenanceModeConfig
+  flagsmith: FlagsmithConfig
 }
 
 export interface BudServerConfig {
@@ -93,6 +91,10 @@ export interface MiragePublicConfig {
 export interface MaintenanceModeConfig {
   enabled: boolean
   expectedReturn: Date
+}
+
+export interface FlagsmithConfig {
+  clientSideKey: string
 }
 
 const getConfig = (): BudConfig => getNextConfig()

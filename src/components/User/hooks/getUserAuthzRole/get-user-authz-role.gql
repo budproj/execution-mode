@@ -1,0 +1,9 @@
+query GET_USER_AUTHZ_ROLE($userID: ID!) {
+  user(id: $userID) {
+    authzRole {
+      id
+      name
+      description
+    }
+  }
+}

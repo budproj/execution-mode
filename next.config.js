@@ -2,7 +2,10 @@
 const path = require('path')
 const _ = require('lodash')
 const { ProvidePlugin } = require('webpack')
-const { withSentryConfig } = require('@sentry/nextjs')
+const { withSentryConfig, configureScope } = require('@sentry/nextjs')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: true,
+})
 
 const {
   URL,
@@ -30,11 +33,11 @@ const {
   AMPLITUDE_API_KEY,
   SENTRY_DSN,
   SENTRY_AUTH_TOKEN,
-  NO_GAMIFICATION_COMPANIES_IDS,
   NOTIFICATION_API,
   ROUTINES_API,
   COMMENTS_API,
   REST_API_BASE,
+  FLAGSMITH_CLIENT_KEY,
 } = process.env
 
 const publicRuntimeConfig = {
@@ -42,9 +45,6 @@ const publicRuntimeConfig = {
   nodeEnv: NODE_ENV,
   defaultLocale: LOCALE_OVERRIDE ?? DEFAULT_LOCALE,
   logLevel: LOG_LEVEL,
-  noGamificationCompaniesIds: NO_GAMIFICATION_COMPANIES_IDS
-    ? NO_GAMIFICATION_COMPANIES_IDS.split(',')
-    : [],
   maintenanceMode: {
     enabled: MAINTENANCE_MODE_ENABLED === 'true',
     expectedReturn: new Date(MAINTENANCE_MODE_EXPECTED_RETURN),
@@ -81,11 +81,15 @@ const publicRuntimeConfig = {
     notifications: NOTIFICATION_API,
     restBase: REST_API_BASE,
     routines: ROUTINES_API,
-    comments: COMMENTS_API
+    comments: COMMENTS_API,
   },
 
   sentry: {
     dsn: SENTRY_DSN,
+  },
+
+  flagsmith: {
+    clientSideKey: FLAGSMITH_CLIENT_KEY,
   },
 
   intlRedirects: [
@@ -217,7 +221,15 @@ const moduleExports = {
       }),
     ]
 
+    config.optimization.usedExports = true
+    config.optimization.minimize = true
+
     return config
+  },
+
+  sentry: {
+    disableServerWebpackPlugin: true,
+    disableClientWebpackPlugin: true,
   },
 }
 
@@ -238,4 +250,4 @@ const sentryWebpackPluginOptions = {
   // https://github.com/getsentry/sentry-webpack-plugin#options.
 }
 
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions)
+module.exports = withBundleAnalyzer(withSentryConfig(moduleExports, sentryWebpackPluginOptions))
