@@ -1,6 +1,8 @@
 import React from 'react'
 import { useTable, Column } from 'react-table'
 
+import * as S from './styles'
+
 interface TablePropertiesM<TData extends Record<string, unknown>> {
   columns: Array<Column<TData>>
   data: TData[]
@@ -16,8 +18,8 @@ const TableBase = <TData extends Record<string, unknown>>({
   })
 
   return (
-    <table {...getTableProps()}>
-      <thead>
+    <S.Table {...getTableProps()}>
+      <S.THead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
             {headerGroup.headers.map((column) => (
@@ -27,8 +29,8 @@ const TableBase = <TData extends Record<string, unknown>>({
             ))}
           </tr>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
+      </S.THead>
+      <S.TBody {...getTableBodyProps()}>
         {rows.map((row) => {
           prepareRow(row)
           return (
@@ -43,8 +45,8 @@ const TableBase = <TData extends Record<string, unknown>>({
             </tr>
           )
         })}
-      </tbody>
-    </table>
+      </S.TBody>
+    </S.Table>
   )
 }
 
