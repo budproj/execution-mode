@@ -18,14 +18,7 @@ const LastRetrospectiveAnswer = (
   const intl = useIntl()
 
   return (
-    <GridItem
-      justifySelf="center"
-      gap="15px"
-      display="flex"
-      color="new-gray.800"
-      fontWeight="500"
-      fontSize="12px"
-    >
+    <GridItem gap="15px" display="flex" color="new-gray.800" fontWeight="500" fontSize="12px">
       <TooltipWithDelay label={intl.formatMessage(teamMembersHighlightsMessages.feelingLabel)}>
         <Box display="flex" flexDir="column" textAlign="center">
           {getEmoji({ felling: Number(userRoutineData?.feeling), size: '25px' })}

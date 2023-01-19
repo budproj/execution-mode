@@ -17,8 +17,6 @@ const LastAccess = ({ userId }: LastAccessColumnProperties) => {
       fontWeight="500"
       fontSize="12px"
       flexDirection="column"
-      gap="1px"
-      alignItems="center"
     >
       <Box>
         <Text fontWeight="500">{sinceDayLastAccess()}</Text>

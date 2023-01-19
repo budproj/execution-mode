@@ -22,7 +22,7 @@ const UserChecklistProgress = ({ total, checked }: UserChecklistProgressProperti
   const colorTheme = total === 0 && checked === 0 ? redTheme : grayTheme
 
   return (
-    <Flex alignItems="center" justifyContent="center" color={colorTheme.color} gap={2} px={12}>
+    <Flex alignItems="center" color={colorTheme.color} gap={2}>
       <Square
         bg={colorTheme.bgColor}
         color="currentcolor"

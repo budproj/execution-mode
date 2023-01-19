@@ -46,7 +46,7 @@ const UserKeyResultsOverview = ({
   const userKeyResultsProgress = progress ?? 0
 
   return (
-    <HStack gap={2} lineHeight="22px">
+    <HStack gap={2}>
       <Avatar name={user?.fullName} src={user?.picture} objectFit="none" />
       <VStack>
         <Flex width="100%" justifyContent="space-between">

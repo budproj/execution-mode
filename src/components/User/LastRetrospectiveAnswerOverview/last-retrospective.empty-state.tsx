@@ -8,7 +8,7 @@ const LastRetrospectiveAnswerOverviewEmptyState = () => {
   const intl = useIntl()
 
   return (
-    <Text fontSize={14} color="new-gray.700">
+    <Text fontSize={14} color="new-gray.700" maxW="105px" textAlign="center">
       {intl.formatMessage(messages.lastRetrospectiveAnswerOverviewEmptyStateMessage)}
     </Text>
   )
