@@ -8,6 +8,7 @@ import TableBase from 'src/components/Base/Table'
 
 import {
   LastRetrospectiveAnswerColumn,
+  UserKeyResultsCheckinsColumn,
   UserKeyResultsChecklistsColumn,
   UserKeyResultsOverviewColumn,
   UserLastAccessColumn,
@@ -41,13 +42,24 @@ const IndicatorsTable = () => {
       Cell: ({ cell: { value } }) => <UserLastAccessColumn userId={value.userId} />,
     },
     {
+      Header: columnHeaderTitle('checkin'),
+      accessor: 'checkin',
+      Cell: ({ cell: { value } }) => (
+        <UserKeyResultsCheckinsColumn
+          userId={value.userId}
+          totalOfDoneCheckIns={value.totalOfDoneCheckIns}
+          totalOfKeyResultsThatNeedsCheckIn={value.totalOfKeyResultsThatNeedsCheckIn}
+        />
+      ),
+    },
+    {
       Header: columnHeaderTitle('checklist'),
       accessor: 'checklist',
       Cell: ({ cell: { value } }) => (
         <UserKeyResultsChecklistsColumn
           userId={value.userId}
-          total={value.total}
           checked={value.checked}
+          total={value.total}
         />
       ),
     },
