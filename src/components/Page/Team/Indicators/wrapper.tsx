@@ -10,7 +10,7 @@ interface TeamIndicatorsProperties {
   teamID: string
 }
 
-export const TeamIndicators = ({ teamID }: TeamIndicatorsProperties) => {
+const TeamIndicators = ({ teamID }: TeamIndicatorsProperties) => {
   const intl = useIntl()
 
   return (
@@ -22,3 +22,5 @@ export const TeamIndicators = ({ teamID }: TeamIndicatorsProperties) => {
     </Stack>
   )
 }
+
+export default TeamIndicators

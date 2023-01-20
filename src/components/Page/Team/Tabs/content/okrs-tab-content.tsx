@@ -11,13 +11,13 @@ import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selecte
 
 import { ChildTeamsWrapper } from '../../ChildTeams/wrapper'
 import TeamHightlightModal from '../../Highlights/modals/base'
-import { TeamIndicators } from '../../Indicators/wrapper'
 import { TeamMembersWrapper } from '../../Members/wrapper'
 
 import { TeamFlagsProperties } from './permissions'
 import queries from './queries.gql'
 
 const DynamicTeamHighlighsWrapper = dynamic(async () => import('../../Highlights/wrapper'))
+const DynamicTeamIndicatorsWrapper = dynamic(async () => import('../../Indicators/wrapper'))
 
 interface OkrsTabContentProperties {
   teamId: Team['id']
@@ -41,7 +41,9 @@ const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
   return (
     <Stack direction="row" spacing={8} maxH="100%">
       <Stack flexGrow={1} spacing={8}>
-        <TeamIndicators teamID={teamId} />
+        {permissions?.flags?.read === GraphQLEffect.ALLOW && (
+          <DynamicTeamIndicatorsWrapper teamID={teamId} />
+        )}
         <TeamObjectives teamID={teamId} />
       </Stack>
       <TeamHightlightModal />
