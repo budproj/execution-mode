@@ -37,7 +37,11 @@ const IndicatorsTable = () => {
       Header: 'Check-list',
       accessor: 'checklist',
       Cell: ({ cell: { value } }) => (
-        <UserKeyResultsChecklistsColumn total={value.total} checked={value.checked} />
+        <UserKeyResultsChecklistsColumn
+          userId={value.userId}
+          total={value.total}
+          checked={value.checked}
+        />
       ),
     },
     {

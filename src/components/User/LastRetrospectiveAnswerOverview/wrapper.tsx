@@ -7,7 +7,9 @@ import { User } from '../types'
 import { useGetUserLastRetrospectiveAnswerOverview } from './hooks/use-get-last-retrospective-answer-overview'
 import LastRetrospectiveAnswerOverviewEmptyState from './last-retrospective.empty-state'
 
-const DynamicLastRetrospectiveAnswer = dynamic(async () => import('./last-retrospective-answer'))
+const DynamicLastRetrospectiveAnswer = dynamic(
+  async () => import('./LastRetrospectiveAnswer/wrapper'),
+)
 
 interface LastRetrospectiveAnswerOverview {
   userId: User['id']

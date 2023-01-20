@@ -5,6 +5,8 @@ import { ServicesContext } from 'src/components/Base/ServicesProvider/services-p
 import { User } from '../../types'
 
 export interface UserRetrospectiveAnswerOverviewDataProperties {
+  lastRoutineAnswerId: string
+  userId?: string
   roadBlock: string
   productivity: string
   feeling: string
@@ -27,7 +29,7 @@ export const useGetUserLastRetrospectiveAnswerOverview = (userId: User['id']) =>
             `/answers/overview/user/${userId}`,
           )
 
-        if (routineData) setUserRoutineData(routineData)
+        if (routineData) setUserRoutineData({ ...routineData, userId })
       } catch (error: unknown) {
         console.warn({ routine_or_amplitude_server_warning: error })
       } finally {
