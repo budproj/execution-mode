@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 
 import React from 'react'
+import { useIntl } from 'react-intl'
 import { Column } from 'react-table'
 
 import TableBase from 'src/components/Base/Table'
@@ -11,13 +12,19 @@ import {
   UserKeyResultsOverviewColumn,
   UserLastAccessColumn,
 } from './Columns'
+import messages from './messages'
 import { mockedTableData } from './mocked-table-data'
 import { TeamIndicators } from './types'
 
 const IndicatorsTable = () => {
+  const intl = useIntl()
+
+  const columnHeaderTitle = (columnAccessor: string) =>
+    intl.formatMessage(messages.teamIndicatorsTableColumnHeaderMessage, { columnAccessor })
+
   const columns: Array<Column<TeamIndicators>> = [
     {
-      Header: 'Progresso em krs.',
+      Header: columnHeaderTitle('userKeyResultsOverview'),
       accessor: 'userKeyResultsOverview',
       Cell: ({ cell: { value } }) => (
         <UserKeyResultsOverviewColumn
@@ -29,12 +36,12 @@ const IndicatorsTable = () => {
       ),
     },
     {
-      Header: 'Último acesso',
+      Header: columnHeaderTitle('lastAccess'),
       accessor: 'lastAccess',
       Cell: ({ cell: { value } }) => <UserLastAccessColumn userId={value.userId} />,
     },
     {
-      Header: 'Check-list',
+      Header: columnHeaderTitle('checklist'),
       accessor: 'checklist',
       Cell: ({ cell: { value } }) => (
         <UserKeyResultsChecklistsColumn
@@ -45,7 +52,7 @@ const IndicatorsTable = () => {
       ),
     },
     {
-      Header: 'Retrospectiva',
+      Header: columnHeaderTitle('lastRetrospectiveAnswer'),
       accessor: 'lastRetrospectiveAnswer',
       Cell: ({ cell: { value } }) => <LastRetrospectiveAnswerColumn userId={value.userId} />,
     },
