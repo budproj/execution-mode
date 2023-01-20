@@ -121,13 +121,4 @@ BudApp.getInitialProps = async (appContext: AppContext) => {
   }
 }
 
-if (
-  config.publicRuntimeConfig.nodeEnv === 'development' &&
-  config.publicRuntimeConfig.mirage.enabled
-) {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const mirage = require('lib/mirage')
-  mirage.makeServer('development')
-}
-
 export default BudApp

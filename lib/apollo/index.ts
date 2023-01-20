@@ -41,8 +41,6 @@ const amplitudeLinkFactory = ({ deviceID, sessionID }: AmplitudeHook) =>
 
 const linkWithServer = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) => {
   const { publicRuntimeConfig } = getConfig()
-  const shouldMockServer =
-    publicRuntimeConfig.mirage.enabled && publicRuntimeConfig.environment === 'develop'
 
   const authLink = authzLinkFactory(authzClient)
   const amplitudeLink = amplitudeLinkFactory(amplitude)
@@ -56,9 +54,7 @@ const linkWithServer = (authzClient: Auth0ContextInterface, amplitude: Amplitude
     },
   })
 
-  return shouldMockServer
-    ? { uri: publicRuntimeConfig.api.graphql }
-    : { link: ApolloLink.from([sentryLink, authLink, amplitudeLink, uploadLink]) }
+  return { link: ApolloLink.from([sentryLink, authLink, amplitudeLink, uploadLink]) }
 }
 
 const createApolloClient = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) =>
