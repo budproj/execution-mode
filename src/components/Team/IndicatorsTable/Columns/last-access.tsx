@@ -1,14 +1,16 @@
-import { Box, GridItem, Text } from '@chakra-ui/react'
+import { Box, GridItem, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
 
 import { useGetLastAccess } from 'src/components/User/hooks/useLastAccess'
 
 export interface LastAccessColumnProperties {
   userId: string
+  isLoaded?: boolean
 }
 
-const LastAccess = ({ userId }: LastAccessColumnProperties) => {
-  const { lastAccessSubtext, sinceDayLastAccess } = useGetLastAccess(userId)
+const LastAccess = ({ userId, isLoaded }: LastAccessColumnProperties) => {
+  const { lastAccessSubtext, sinceDayLastAccess, loading } = useGetLastAccess(userId)
+  const isLastAccessLoaded = isLoaded && !loading
 
   return (
     <GridItem
@@ -18,12 +20,16 @@ const LastAccess = ({ userId }: LastAccessColumnProperties) => {
       fontSize="12px"
       flexDirection="column"
     >
-      <Box>
-        <Text fontWeight="500">{sinceDayLastAccess()}</Text>
-        <Text color="new-gray.600" fontWeight="400">
-          {lastAccessSubtext()}
-        </Text>
-      </Box>
+      {isLastAccessLoaded ? (
+        <Box>
+          <Text fontWeight="500">{sinceDayLastAccess()}</Text>
+          <Text color="new-gray.600" fontWeight="400">
+            {lastAccessSubtext()}
+          </Text>
+        </Box>
+      ) : (
+        <SkeletonText noOfLines={2} width="80%" skeletonHeight={4} />
+      )}
     </GridItem>
   )
 }

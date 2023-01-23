@@ -7,13 +7,20 @@ import selectUser from 'src/state/recoil/user/selector'
 
 import { UserRetrospectiveAnswerOverviewDataProperties } from '../hooks/use-get-last-retrospective-answer-overview'
 
+import LastRetrospectiveAnswerSkeleton from './last-retrospective-answer.skeleton'
 import UserFeeling from './user-feeling'
 import UserProductity from './user-productivity'
 import UserRoadblock from './user-roadblock'
 
-const LastRetrospectiveAnswer = (
-  userRoutineData: UserRetrospectiveAnswerOverviewDataProperties,
-) => {
+interface LastRetrospectiveAnswerProperties {
+  userRoutineData: UserRetrospectiveAnswerOverviewDataProperties
+  isLoaded?: boolean
+}
+
+const LastRetrospectiveAnswer = ({
+  userRoutineData,
+  isLoaded,
+}: LastRetrospectiveAnswerProperties) => {
   const user = useRecoilValue(selectUser(userRoutineData.userId))
   const userCompanie = user?.companies?.edges[0].node.id ?? ''
 
@@ -21,11 +28,15 @@ const LastRetrospectiveAnswer = (
 
   return (
     <IntlLink href={redirectToURL}>
-      <GridItem gap="15px" display="flex" color="new-gray.800" fontWeight="500" fontSize="12px">
-        <UserFeeling feeling={userRoutineData.feeling} />
-        <UserProductity productivity={userRoutineData.productivity} />
-        <UserRoadblock roadblock={userRoutineData.roadBlock} />
-      </GridItem>
+      {isLoaded ? (
+        <GridItem gap="15px" display="flex" color="new-gray.800" fontWeight="500" fontSize="12px">
+          <UserFeeling feeling={userRoutineData.feeling} />
+          <UserProductity productivity={userRoutineData.productivity} />
+          <UserRoadblock roadblock={userRoutineData.roadBlock} />
+        </GridItem>
+      ) : (
+        <LastRetrospectiveAnswerSkeleton numberOfElements={3} />
+      )}
     </IntlLink>
   )
 }

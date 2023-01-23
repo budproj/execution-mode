@@ -1,4 +1,3 @@
-import { Skeleton } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import React from 'react'
 
@@ -13,19 +12,20 @@ const DynamicLastRetrospectiveAnswer = dynamic(
 
 interface LastRetrospectiveAnswerOverview {
   userId: User['id']
+  isLoaded?: boolean
 }
 
-const LastRetrospectiveAnswerOverview = ({ userId }: LastRetrospectiveAnswerOverview) => {
-  const { data, isLoaded } = useGetUserLastRetrospectiveAnswerOverview(userId)
+const LastRetrospectiveAnswerOverview = ({ userId, isLoaded }: LastRetrospectiveAnswerOverview) => {
+  const { data, isLoaded: lastRetrospectiveDataLoaded } =
+    useGetUserLastRetrospectiveAnswerOverview(userId)
 
-  return (
-    <Skeleton isLoaded={isLoaded}>
-      {data ? (
-        <DynamicLastRetrospectiveAnswer {...data} />
-      ) : (
-        <LastRetrospectiveAnswerOverviewEmptyState />
-      )}
-    </Skeleton>
+  return data ? (
+    <DynamicLastRetrospectiveAnswer
+      userRoutineData={data}
+      isLoaded={isLoaded && lastRetrospectiveDataLoaded}
+    />
+  ) : (
+    <LastRetrospectiveAnswerOverviewEmptyState />
   )
 }
 

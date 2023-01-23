@@ -4,10 +4,11 @@ import LastRetrospectiveAnswerOverview from 'src/components/User/LastRetrospecti
 
 export interface LastRetrospectiveAnswerColumnProperties {
   userId: string
+  isLoaded?: boolean
 }
 
-const LastRetrospectiveAnswer = ({ userId }: LastRetrospectiveAnswerColumnProperties) => {
-  return <LastRetrospectiveAnswerOverview userId={userId} />
+const LastRetrospectiveAnswer = ({ userId, isLoaded }: LastRetrospectiveAnswerColumnProperties) => {
+  return <LastRetrospectiveAnswerOverview isLoaded={isLoaded} userId={userId} />
 }
 
 export default LastRetrospectiveAnswer

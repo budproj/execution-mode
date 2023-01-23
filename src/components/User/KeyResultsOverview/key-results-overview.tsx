@@ -11,29 +11,21 @@ import keyResultCheckInMessages from 'src/components/KeyResult/List/Body/Columns
 import { UpdateIcon } from 'src/components/KeyResult/List/Body/Columns/KeyResult/update-icon'
 import selectUser from 'src/state/recoil/user/selector'
 
-import { User } from '../types'
+import { UserKeyResultsOverviewProperties } from './wrapper'
 
-type Delta = {
-  progress: number
-  confidence: number
-}
-export interface UserKeyResultsOverviewProperties {
-  userId: User['id']
-  progress: number
-  latestCheckIn: string
-  delta: Delta
-}
-
-const UserKeyResultsOverview = ({
+const KeyResultsOverview = ({
   userId,
   progress,
   latestCheckIn,
   delta,
 }: UserKeyResultsOverviewProperties) => {
   const intl = useIntl()
-  const latestUserCheckin = new Date(latestCheckIn)
 
-  const isOutdatedCheckins = differenceInDays(Date.now(), latestUserCheckin) > 6
+  const latestUserCheckin = latestCheckIn ? new Date(Number(latestCheckIn)) : undefined
+
+  const isOutdatedCheckins = latestUserCheckin
+    ? differenceInDays(Date.now(), latestUserCheckin) > 6
+    : true
 
   const prefixMessage = isOutdatedCheckins
     ? keyResultCheckInMessages.outdatedUpdateTextPrefix
@@ -48,7 +40,7 @@ const UserKeyResultsOverview = ({
   return (
     <HStack gap={2}>
       <Avatar name={user?.fullName} src={user?.picture} objectFit="none" />
-      <VStack>
+      <VStack alignItems="flex-start">
         <Flex width="100%" justifyContent="space-between">
           <Text color="new-gray.800" fontSize={16}>
             {user?.fullName}
@@ -57,14 +49,16 @@ const UserKeyResultsOverview = ({
             {intl.formatNumber(userKeyResultsProgress / 100, { style: 'percent' })}
           </Text>
         </Flex>
-        <SliderWithFilledTrack value={userKeyResultsProgress} />
-        <Flex alignItems="center">
+        <SliderWithFilledTrack w="100%" minW={194} maxW={232} value={userKeyResultsProgress} />
+        <Flex alignItems="center" maxW={194}>
           <UpdateIcon
-            isOutdated={latestCheckIn ? isOutdatedCheckins : true}
+            isOutdated={latestCheckIn && isOutdatedCheckins ? isOutdatedCheckins : true}
             updateTextColor={updateTextColor}
           />
           <LastUpdateText
             date={latestUserCheckin}
+            wordBreak="normal"
+            textOverflow="clip"
             color={updateTextColor}
             prefix={intl.formatMessage(prefixMessage)}
           />
@@ -73,7 +67,7 @@ const UserKeyResultsOverview = ({
       <PercentageProgressIncreaseTag
         forcePositiveSignal
         showSignalArrow
-        value={delta.progress}
+        value={delta?.progress}
         fontSize="12px"
         fontWeight="medium"
         alignItems="center"
@@ -89,4 +83,4 @@ const UserKeyResultsOverview = ({
   )
 }
 
-export default UserKeyResultsOverview
+export default KeyResultsOverview

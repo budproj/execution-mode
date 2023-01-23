@@ -1,4 +1,4 @@
-import { Flex, Square, Text } from '@chakra-ui/react'
+import { Flex, Skeleton, Square, Text } from '@chakra-ui/react'
 import React from 'react'
 
 import { IntlLink } from 'src/components/Base'
@@ -7,8 +7,9 @@ import { User } from 'src/components/User/types'
 
 export interface UserChecklistProgressProperties {
   userId: User['id']
-  total: number
-  checked: number
+  checked?: number
+  total?: number
+  isLoaded?: boolean
 }
 
 const grayTheme = {
@@ -21,24 +22,35 @@ const redTheme = {
   color: 'red.500',
 }
 
-const UserChecklistProgress = ({ total, checked, userId }: UserChecklistProgressProperties) => {
+const UserChecklistProgress = ({
+  checked,
+  total,
+  userId,
+  isLoaded,
+}: UserChecklistProgressProperties) => {
   const colorTheme = total === 0 && checked === 0 ? redTheme : grayTheme
+
+  const isChecklistProgressLoaded = isLoaded
 
   return (
     <IntlLink href={`/profile/${userId}`}>
       <Flex alignItems="center" color={colorTheme.color} gap={2}>
-        <Square
-          bg={colorTheme.bgColor}
-          color="currentcolor"
-          borderRadius={5}
-          size="1.4em"
-          alignContent="center"
-        >
-          <CheckIcon desc="dsadas" fill="currentcolor" fontWeight="black" w="1.4em" h="1.4em" />
-        </Square>
-        <Text fontSize={16} fontWeight="medium">
-          {total}/{checked}
-        </Text>
+        <Skeleton isLoaded={isChecklistProgressLoaded} borderRadius="50%">
+          <Square
+            bg={colorTheme.bgColor}
+            color="currentcolor"
+            borderRadius={5}
+            size="1.4em"
+            alignContent="center"
+          >
+            <CheckIcon desc="dsadas" fill="currentcolor" fontWeight="black" w="1.4em" h="1.4em" />
+          </Square>
+        </Skeleton>
+        <Skeleton isLoaded={isChecklistProgressLoaded}>
+          <Text fontSize={16} fontWeight="medium">
+            {checked}/{total}
+          </Text>
+        </Skeleton>
       </Flex>
     </IntlLink>
   )

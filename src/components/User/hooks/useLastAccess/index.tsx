@@ -12,7 +12,7 @@ import messages from './messages'
 export const useGetLastAccess = (userId: User['id']) => {
   const intl = useIntl()
 
-  const { data: user } = useGetUserDetails(userId)
+  const { data: user, loading } = useGetUserDetails(userId)
   const userLastAccessDate = user?.amplitude?.last_used ?? ''
 
   const sinceDayLastAccess = () => {
@@ -38,5 +38,5 @@ export const useGetLastAccess = (userId: User['id']) => {
     }
   }
 
-  return { userLastAccessDate, sinceDayLastAccess, lastAccessSubtext }
+  return { userLastAccessDate, sinceDayLastAccess, lastAccessSubtext, loading }
 }

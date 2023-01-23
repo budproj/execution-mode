@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { IntlLink } from 'src/components/Base'
-import UserKeyResultsOverview, {
+import WrapperUserKeyResultsOverview, {
   UserKeyResultsOverviewProperties,
-} from 'src/components/User/KeyResultsOverview'
+} from 'src/components/User/KeyResultsOverview/wrapper'
 
 export interface KeyResultsOverviewColumnProperties extends UserKeyResultsOverviewProperties {}
 
@@ -11,13 +11,15 @@ const KeyResultOverview = ({
   userId,
   delta,
   latestCheckIn,
+  isLoaded,
   progress,
 }: KeyResultsOverviewColumnProperties) => {
   return (
     <IntlLink href={`/profile/${userId}`}>
-      <UserKeyResultsOverview
+      <WrapperUserKeyResultsOverview
         userId={userId}
         delta={delta}
+        isLoaded={isLoaded}
         latestCheckIn={latestCheckIn}
         progress={progress}
       />
