@@ -1,0 +1,31 @@
+query GET_TEAM_INDICATORS($teamId: ID!) {
+  team(id: $teamId) {
+    users {
+      edges {
+        node {
+          id
+          userIndicators {
+            keyResultsProgress {
+              progress
+              delta {
+                progress
+                confidence
+              }
+              latestCheckIn {
+                createdAt
+              }
+            }
+            keyResultsCheckInProgress {
+              checked
+              total
+            }
+            keyResultsCheckListProgress {
+              checked
+              total
+            }
+          }
+        }
+      }
+    }
+  }
+}
