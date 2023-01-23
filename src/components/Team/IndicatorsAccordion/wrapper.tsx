@@ -7,10 +7,10 @@ import IndicatorsAccordionButton from './AccordionButton'
 import IndicatorsAccordionPanel from './AccordionPanel'
 
 interface IndicatorsAccordionProperties {
-  teamID: Team['id']
+  teamId: Team['id']
 }
 
-const IndicatorsAccordion = ({ teamID }: IndicatorsAccordionProperties) => {
+const IndicatorsAccordion = ({ teamId }: IndicatorsAccordionProperties) => {
   return (
     <Accordion allowToggle allowMultiple gridGap={8} display="flex" flexDirection="column">
       <AccordionItem
@@ -21,7 +21,7 @@ const IndicatorsAccordion = ({ teamID }: IndicatorsAccordionProperties) => {
         borderRadius="10"
       >
         <IndicatorsAccordionButton />
-        <IndicatorsAccordionPanel />
+        <IndicatorsAccordionPanel teamId={teamId} />
       </AccordionItem>
     </Accordion>
   )

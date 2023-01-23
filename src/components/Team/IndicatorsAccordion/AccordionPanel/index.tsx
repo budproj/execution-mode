@@ -2,11 +2,15 @@ import { AccordionPanel } from '@chakra-ui/react'
 import React from 'react'
 
 import IndicatorsTable from '../../IndicatorsTable/wrapper'
+import { Team } from '../../types'
 
-const IndicatorsAccordionPanel = () => {
+interface IndicatorsAccordionPanelProperties {
+  teamId: Team['id']
+}
+const IndicatorsAccordionPanel = ({ teamId }: IndicatorsAccordionPanelProperties) => {
   return (
-    <AccordionPanel pb={4}>
-      <IndicatorsTable />
+    <AccordionPanel p={0}>
+      <IndicatorsTable teamId={teamId} />
     </AccordionPanel>
   )
 }
