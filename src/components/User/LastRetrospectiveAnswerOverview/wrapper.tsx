@@ -4,7 +4,7 @@ import React from 'react'
 import { User } from '../types'
 
 import { useGetUserLastRetrospectiveAnswerOverview } from './hooks/use-get-last-retrospective-answer-overview'
-import LastRetrospectiveAnswerOverviewEmptyState from './last-retrospective.empty-state'
+import LastRetrospectiveAnswerSkeleton from './last-retrospective-answer.skeleton'
 
 const DynamicLastRetrospectiveAnswer = dynamic(
   async () => import('./LastRetrospectiveAnswer/wrapper'),
@@ -19,13 +19,12 @@ const LastRetrospectiveAnswerOverview = ({ userId, isLoaded }: LastRetrospective
   const { data, isLoaded: lastRetrospectiveDataLoaded } =
     useGetUserLastRetrospectiveAnswerOverview(userId)
 
-  return data ? (
-    <DynamicLastRetrospectiveAnswer
-      userRoutineData={data}
-      isLoaded={isLoaded && lastRetrospectiveDataLoaded}
-    />
+  const isLastRetrospectiveAnswerDataLoaded = isLoaded && lastRetrospectiveDataLoaded
+
+  return isLastRetrospectiveAnswerDataLoaded ? (
+    <DynamicLastRetrospectiveAnswer userRoutineData={data} />
   ) : (
-    <LastRetrospectiveAnswerOverviewEmptyState />
+    <LastRetrospectiveAnswerSkeleton />
   )
 }
 
