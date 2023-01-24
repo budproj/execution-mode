@@ -1,9 +1,9 @@
-import { useQuery } from '@apollo/client'
-import { useState } from 'react'
+import { LazyQueryExecFunction, OperationVariables, useLazyQuery } from '@apollo/client'
+import { useSetRecoilState } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
+import { teamIndicatorsTableData } from 'src/state/recoil/team/indicators/team-indicators-table-data'
 
-import { TeamIndicators } from '../../types'
 import { teamIndicatorsDataMapper } from '../../utils/data-mappers'
 
 import GET_TEAM_INDICATORS from './get-team-indicators.gql'
@@ -13,28 +13,30 @@ type getTeamIndicatorsQuery = {
 }
 
 interface GetUserListProperties {
-  data?: TeamIndicators[]
   loading: boolean
-  called: boolean
+  fetchTeamIndicators: LazyQueryExecFunction<getTeamIndicatorsQuery, OperationVariables>
 }
 
 export const useGetTeamIndicators = (teamId: Team['id']): GetUserListProperties => {
-  const [teamIndicators, setTeamIndicators] = useState<TeamIndicators[]>()
+  const setTeamIndicators = useSetRecoilState(teamIndicatorsTableData)
 
-  const { loading, called } = useQuery<getTeamIndicatorsQuery>(GET_TEAM_INDICATORS, {
-    fetchPolicy: 'network-only',
-    variables: {
-      teamId,
+  const [fetchTeamIndicators, { loading }] = useLazyQuery<getTeamIndicatorsQuery>(
+    GET_TEAM_INDICATORS,
+    {
+      fetchPolicy: 'network-only',
+      variables: {
+        teamId,
+      },
+      onCompleted: (data) => {
+        const teamUsers = data.team?.users?.edges.map((user) => user.node)
+
+        if (teamUsers) {
+          const mappedTeamIndicatorsData = teamIndicatorsDataMapper.toFront(teamUsers)
+          setTeamIndicators(mappedTeamIndicatorsData)
+        }
+      },
     },
-    onCompleted: (data) => {
-      const teamUsers = data.team?.users?.edges.map((user) => user.node)
+  )
 
-      if (teamUsers) {
-        const mappedTeamIndicatorsData = teamIndicatorsDataMapper.toFront(teamUsers)
-        setTeamIndicators(mappedTeamIndicatorsData)
-      }
-    },
-  })
-
-  return { data: teamIndicators, loading, called }
+  return { loading, fetchTeamIndicators }
 }
