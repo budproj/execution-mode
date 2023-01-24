@@ -1,13 +1,12 @@
 /* eslint react/prop-types: 0 */
 
-import { Box } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Column } from 'react-table'
+import { useRecoilValue } from 'recoil'
 
 import TableBase from 'src/components/Base/Table'
-
-import { Team } from '../types'
+import { teamIndicatorsTableData } from 'src/state/recoil/team/indicators/team-indicators-table-data'
 
 import {
   LastRetrospectiveAnswerColumn,
@@ -16,17 +15,19 @@ import {
   UserKeyResultsOverviewColumn,
   UserLastAccessColumn,
 } from './Columns'
-import { useGetTeamIndicators } from './hooks/getTeamIndicatorsData/get-team-indicators'
+import IndicatorsTableSkeleton from './indicators-table-skeleton'
 import messages from './messages'
 import { TeamIndicators } from './types'
 
 interface IndicatorsTableProperties {
-  teamId: Team['id']
+  loading: boolean
 }
 
-const IndicatorsTable = ({ teamId }: IndicatorsTableProperties) => {
+const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
   const intl = useIntl()
-  const { data: teamIndicatorsTableData, loading } = useGetTeamIndicators(teamId)
+  const tableData = useRecoilValue(teamIndicatorsTableData)
+
+  const showTableContent = !loading || tableData.length > 0
 
   const columnHeaderTitle = (columnAccessor: string) =>
     intl.formatMessage(messages.teamIndicatorsTableColumnHeaderMessage, { columnAccessor })
@@ -85,10 +86,10 @@ const IndicatorsTable = ({ teamId }: IndicatorsTableProperties) => {
     },
   ]
 
-  return teamIndicatorsTableData ? (
-    <TableBase columns={columns} data={teamIndicatorsTableData} />
+  return showTableContent ? (
+    <TableBase columns={columns} data={tableData} />
   ) : (
-    <Box>Nothing to see</Box>
+    <IndicatorsTableSkeleton />
   )
 }
 
