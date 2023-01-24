@@ -1,8 +1,11 @@
 import { Circle, Flex, Skeleton, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { Location } from 'src/components/Icon'
 import { User } from 'src/components/User/types'
+
+import messages from './messages'
 
 export interface UserCheckinOccurrencesProperties {
   userId: User['id']
@@ -26,6 +29,8 @@ const UserCheckinOccurrences = ({
   totalOfDoneCheckIns,
   isLoaded,
 }: UserCheckinOccurrencesProperties) => {
+  const intl = useIntl()
+
   const colorTheme =
     (totalOfDoneCheckIns && totalOfDoneCheckIns > 0) || totalOfKeyResultsThatNeedsCheckIn === 0
       ? grayTheme
@@ -44,7 +49,7 @@ const UserCheckinOccurrences = ({
           alignItems="center"
           justifyContent="center"
         >
-          <Location desc="dsadas" fill="currentcolor" />
+          <Location desc={intl.formatMessage(messages.checkinColumnIconDesc)} fill="currentcolor" />
         </Circle>
       </Skeleton>
       <Skeleton isLoaded={isUserCheckinOcurrencesLoaded}>
