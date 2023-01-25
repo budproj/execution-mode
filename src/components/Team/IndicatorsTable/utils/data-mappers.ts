@@ -15,7 +15,7 @@ export const teamIndicatorsDataMapper = {
       checkin: {
         userId: id,
         totalOfDoneCheckIns: userIndicators?.keyResultsCheckInProgress.checked,
-        totalOfKeyResultsThatNeedsCheckIn: userIndicators?.keyResultsCheckInProgress.checked,
+        totalOfKeyResultsThatNeedsCheckIn: userIndicators?.keyResultsCheckInProgress.total,
       },
       checklist: {
         userId: id,
