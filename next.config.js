@@ -4,7 +4,7 @@ const _ = require('lodash')
 const { ProvidePlugin } = require('webpack')
 const { withSentryConfig, configureScope } = require('@sentry/nextjs')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: true,
+  enabled: process.env.ANALYZE === 'true',
 })
 
 const {
@@ -25,8 +25,6 @@ const {
   AUTH0_API_DOMAIN,
   HOTJAR_ID,
   HOTJAR_SV,
-  MIRAGE_ENABLED,
-  MIRAGE_FAKER_SEED,
   MAINTENANCE_MODE_ENABLED,
   MAINTENANCE_MODE_EXPECTED_RETURN,
   SMARTLOOK_API_KEY,
@@ -48,11 +46,6 @@ const publicRuntimeConfig = {
   maintenanceMode: {
     enabled: MAINTENANCE_MODE_ENABLED === 'true',
     expectedReturn: new Date(MAINTENANCE_MODE_EXPECTED_RETURN),
-  },
-
-  mirage: {
-    enabled: MIRAGE_ENABLED === 'true',
-    fakerSeed: parseInt(MIRAGE_FAKER_SEED),
   },
 
   auth0: {
@@ -221,8 +214,6 @@ const moduleExports = {
       }),
     ]
 
-    config.optimization.usedExports = true
-    config.optimization.minimize = true
 
     return config
   },

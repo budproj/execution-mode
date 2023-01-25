@@ -41,10 +41,11 @@ const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
         <TeamObjectives teamID={teamId} />
       </Box>
       <TeamHightlightModal />
-      <Stack spacing="8" w="md" minW="md">
+      <Stack spacing={8} w="md" minW="md">
         {permissions?.flags?.read === GraphQLEffect.ALLOW && (
           <TeamHighlightsWrapper teamID={teamId} isLoading={isLoading} />
         )}
+
         <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
         <ChildTeamsWrapper teamID={teamId} isLoading={isLoading} />
       </Stack>
