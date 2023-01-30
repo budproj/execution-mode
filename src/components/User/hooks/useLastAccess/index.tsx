@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import differenceInDays from 'date-fns/differenceInDays'
 import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
 import enUS from 'date-fns/locale/en-US'
 import ptBR from 'date-fns/locale/pt-BR'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import queries from 'src/components/User/Create/Form/queries.gql'
@@ -22,19 +22,25 @@ const userLanguage = new Map([
 export const useGetLastAccess = (userId: User['id']) => {
   const intl = useIntl()
   const [userLocale, setUserLocale] = useState(userLanguage.get('pt-BR'))
-
-  const { loading: isGetUserLocaleLoading } = useQuery(queries.GET_USER_LOCALE, {
-    variables: {
-      userID: userId,
-    },
-    onCompleted: (data) => {
-      const locale = data?.user.settings.edges[0]?.node.value
-      if (locale) setUserLocale(userLanguage.get(locale))
-    },
-  })
-
   const { data: user, loading } = useGetUserDetails(userId)
   const userLastAccessDate = user?.amplitude?.last_used ?? ''
+
+  const [getCurrentLocale, { loading: isGetUserLocaleLoading }] = useLazyQuery(
+    queries.GET_USER_LOCALE,
+    {
+      variables: {
+        userID: userId,
+      },
+      onCompleted: (data) => {
+        const locale = data.user.settings.edges[0]?.node.value
+        if (locale) setUserLocale(userLanguage.get(locale))
+      },
+    },
+  )
+
+  useEffect(() => {
+    if (userId) void getCurrentLocale()
+  }, [userId, getCurrentLocale])
 
   const sinceDayLastAccess = () => {
     if (userLastAccessDate && !isGetUserLocaleLoading) {

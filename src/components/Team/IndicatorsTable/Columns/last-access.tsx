@@ -19,6 +19,8 @@ const LastAccess = ({ userId, isLoaded }: LastAccessColumnProperties) => {
       color="new-gray.800"
       fontWeight="500"
       fontSize="12px"
+      minW={28}
+      w="100%"
       flexDirection="column"
     >
       {isLastAccessLoaded ? (
