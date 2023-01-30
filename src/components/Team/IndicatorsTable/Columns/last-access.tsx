@@ -15,6 +15,7 @@ const LastAccess = ({ userId, isLoaded }: LastAccessColumnProperties) => {
   return (
     <GridItem
       display="flex"
+      alignItems="flex-start"
       color="new-gray.800"
       fontWeight="500"
       fontSize="12px"
@@ -28,7 +29,7 @@ const LastAccess = ({ userId, isLoaded }: LastAccessColumnProperties) => {
           </Text>
         </Box>
       ) : (
-        <SkeletonText noOfLines={2} width="80%" skeletonHeight={4} />
+        <SkeletonText noOfLines={2} width={28} skeletonHeight={4} />
       )}
     </GridItem>
   )
