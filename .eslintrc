@@ -7,7 +7,7 @@
     "plugin:@next/next/recommended"
   ],
   "rules": {
-    "import/no-unresolved": ["error", { "ignore": ["miragejs/db-collection"] }],
+    "import/no-unresolved": ["error"],
     "react/jsx-indent": "off",
     "react/jsx-curly-newline": "off",
     "unicorn/no-nested-ternary": "off",
