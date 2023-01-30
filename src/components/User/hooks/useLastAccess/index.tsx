@@ -21,15 +21,15 @@ const userLanguage = new Map([
 
 export const useGetLastAccess = (userId: User['id']) => {
   const intl = useIntl()
-  const [defaultLocaleID, setDefaultLocaleID] = useState(userLanguage.get('pt-BR'))
+  const [userLocale, setUserLocale] = useState(userLanguage.get('pt-BR'))
 
-  useQuery(queries.GET_USER_LOCALE, {
+  const { loading: isGetUserLocaleLoading } = useQuery(queries.GET_USER_LOCALE, {
     variables: {
       userID: userId,
     },
     onCompleted: (data) => {
       const locale = data?.user.settings.edges[0]?.node.value
-      if (locale) setDefaultLocaleID(userLanguage.get(locale))
+      if (locale) setUserLocale(userLanguage.get(locale))
     },
   })
 
@@ -37,7 +37,7 @@ export const useGetLastAccess = (userId: User['id']) => {
   const userLastAccessDate = user?.amplitude?.last_used ?? ''
 
   const sinceDayLastAccess = () => {
-    if (userLastAccessDate) {
+    if (userLastAccessDate && !isGetUserLocaleLoading) {
       const difference = differenceInDays(new Date(`${userLastAccessDate}T00:00`), new Date())
       if (difference === 0) {
         return intl.formatMessage(messages.todayLastAccess)
@@ -45,7 +45,7 @@ export const useGetLastAccess = (userId: User['id']) => {
 
       const formatedDistance = formatDistance(new Date(`${userLastAccessDate}T00:00`), new Date(), {
         addSuffix: true,
-        locale: defaultLocaleID,
+        locale: userLocale,
       })
 
       return formatedDistance.charAt(0).toUpperCase() + formatedDistance.slice(1)
