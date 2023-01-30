@@ -39,7 +39,7 @@ const UserCheckinOccurrences = ({
   const isUserCheckinOcurrencesLoaded = isLoaded
 
   return (
-    <Flex alignItems="center" color={colorTheme.color} gap={2}>
+    <Flex alignItems="center" color={colorTheme.color}>
       <Skeleton isLoaded={isUserCheckinOcurrencesLoaded} borderRadius="50%">
         <Circle
           bg={colorTheme.bgColor}
@@ -53,7 +53,14 @@ const UserCheckinOccurrences = ({
         </Circle>
       </Skeleton>
       <Skeleton isLoaded={isUserCheckinOcurrencesLoaded}>
-        <Text fontSize={16} fontWeight="medium">
+        <Text
+          fontSize={16}
+          fontWeight="medium"
+          px={2}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
           {totalOfDoneCheckIns}/{totalOfKeyResultsThatNeedsCheckIn}
         </Text>
       </Skeleton>

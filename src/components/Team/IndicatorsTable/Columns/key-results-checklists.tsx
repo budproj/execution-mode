@@ -38,7 +38,7 @@ const UserChecklistProgress = ({
 
   return (
     <IntlLink href={`/profile/${userId}`}>
-      <Flex alignItems="center" color={colorTheme.color} gap={2}>
+      <Flex alignItems="center" color={colorTheme.color}>
         <Skeleton isLoaded={isChecklistProgressLoaded} borderRadius="50%">
           <Square
             bg={colorTheme.bgColor}
@@ -57,7 +57,14 @@ const UserChecklistProgress = ({
           </Square>
         </Skeleton>
         <Skeleton isLoaded={isChecklistProgressLoaded}>
-          <Text fontSize={16} fontWeight="medium">
+          <Text
+            fontSize={16}
+            fontWeight="medium"
+            px={2}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
             {checked}/{total}
           </Text>
         </Skeleton>

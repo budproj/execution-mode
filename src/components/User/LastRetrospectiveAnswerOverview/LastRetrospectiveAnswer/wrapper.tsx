@@ -1,10 +1,9 @@
 import { GridItem } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
 
 import { IntlLink } from 'src/components/Base'
-import selectUser from 'src/state/recoil/user/selector'
 
+import { useGetUserDetails } from '../../hooks'
 import { UserRetrospectiveAnswerOverviewDataProperties } from '../hooks/use-get-last-retrospective-answer-overview'
 
 import LastRetrospectiveAnswerOverviewEmptyState from './last-retrospective.empty-state'
@@ -17,14 +16,14 @@ interface LastRetrospectiveAnswerProperties {
 }
 
 const LastRetrospectiveAnswer = ({ userRoutineData }: LastRetrospectiveAnswerProperties) => {
-  const user = useRecoilValue(selectUser(userRoutineData?.userId))
-  const userCompanie = user?.companies?.edges[0].node.id ?? ''
+  const { data: user, loading } = useGetUserDetails(userRoutineData?.userId ?? '')
+  const companyId = user?.companies?.edges[0]?.node?.id ?? ''
 
   const redirectToURL = userRoutineData
-    ? `/explore/${userCompanie}/?activeTab=retrospectiva&answerId=${userRoutineData?.lastRoutineAnswerId}`
+    ? `/explore/${companyId}/?activeTab=retrospectiva&answerId=${userRoutineData?.lastRoutineAnswerId}`
     : '#'
 
-  return userRoutineData ? (
+  return userRoutineData && !loading ? (
     <IntlLink href={redirectToURL}>
       <GridItem gap="15px" display="flex" color="new-gray.800" fontWeight="500" fontSize="12px">
         <UserFeeling feeling={userRoutineData.feeling} />

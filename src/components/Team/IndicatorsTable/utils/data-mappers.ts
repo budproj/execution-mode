@@ -14,13 +14,13 @@ export const teamIndicatorsDataMapper = {
       },
       checkin: {
         userId: id,
-        totalOfDoneCheckIns: userIndicators?.keyResultsCheckInProgress.checked,
-        totalOfKeyResultsThatNeedsCheckIn: userIndicators?.keyResultsCheckInProgress.total,
+        totalOfDoneCheckIns: 124,
+        totalOfKeyResultsThatNeedsCheckIn: 287,
       },
       checklist: {
         userId: id,
-        checked: userIndicators?.keyResultsCheckListProgress.checked,
-        total: userIndicators?.keyResultsCheckListProgress.total,
+        checked: 123,
+        total: 256,
       },
       lastAccess: {
         userId: id,
