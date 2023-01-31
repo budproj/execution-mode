@@ -11,6 +11,7 @@ import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selecte
 
 import { ChildTeamsWrapper } from '../../ChildTeams/wrapper'
 import TeamHightlightModal from '../../Highlights/modals/base'
+import { TeamIndicatorsReportDownloadCSV } from '../../Indicators'
 import { TeamMembersWrapper } from '../../Members/wrapper'
 
 import { TeamFlagsProperties } from './permissions'
@@ -49,7 +50,10 @@ const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
       <TeamHightlightModal />
       <Stack spacing={8} w="md" minW="md">
         {permissions?.flags?.read === GraphQLEffect.ALLOW && (
-          <DynamicTeamHighlighsWrapper teamID={teamId} isLoading={isLoading} />
+          <Stack gap={8}>
+            <TeamIndicatorsReportDownloadCSV teamID={teamId} />
+            <DynamicTeamHighlighsWrapper teamID={teamId} isLoading={isLoading} />
+          </Stack>
         )}
 
         <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
