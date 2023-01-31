@@ -50,10 +50,10 @@ const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
       <TeamHightlightModal />
       <Stack spacing={8} w="md" minW="md">
         {permissions?.flags?.read === GraphQLEffect.ALLOW && (
-          <Stack gap={8}>
+          <>
             <TeamIndicatorsReportDownloadCSV teamID={teamId} />
             <DynamicTeamHighlighsWrapper teamID={teamId} isLoading={isLoading} />
-          </Stack>
+          </>
         )}
 
         <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
