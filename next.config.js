@@ -2,7 +2,10 @@
 const path = require('path')
 const _ = require('lodash')
 const { ProvidePlugin } = require('webpack')
-const { withSentryConfig } = require('@sentry/nextjs')
+const { withSentryConfig, configureScope } = require('@sentry/nextjs')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 const {
   URL,
@@ -22,8 +25,6 @@ const {
   AUTH0_API_DOMAIN,
   HOTJAR_ID,
   HOTJAR_SV,
-  MIRAGE_ENABLED,
-  MIRAGE_FAKER_SEED,
   MAINTENANCE_MODE_ENABLED,
   MAINTENANCE_MODE_EXPECTED_RETURN,
   SMARTLOOK_API_KEY,
@@ -45,11 +46,6 @@ const publicRuntimeConfig = {
   maintenanceMode: {
     enabled: MAINTENANCE_MODE_ENABLED === 'true',
     expectedReturn: new Date(MAINTENANCE_MODE_EXPECTED_RETURN),
-  },
-
-  mirage: {
-    enabled: MIRAGE_ENABLED === 'true',
-    fakerSeed: parseInt(MIRAGE_FAKER_SEED),
   },
 
   auth0: {
@@ -78,7 +74,7 @@ const publicRuntimeConfig = {
     notifications: NOTIFICATION_API,
     restBase: REST_API_BASE,
     routines: ROUTINES_API,
-    comments: COMMENTS_API
+    comments: COMMENTS_API,
   },
 
   sentry: {
@@ -218,7 +214,13 @@ const moduleExports = {
       }),
     ]
 
+
     return config
+  },
+
+  sentry: {
+    disableServerWebpackPlugin: true,
+    disableClientWebpackPlugin: true,
   },
 }
 
@@ -239,4 +241,4 @@ const sentryWebpackPluginOptions = {
   // https://github.com/getsentry/sentry-webpack-plugin#options.
 }
 
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions)
+module.exports = withBundleAnalyzer(withSentryConfig(moduleExports, sentryWebpackPluginOptions))
