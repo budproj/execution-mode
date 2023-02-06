@@ -63,7 +63,6 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
       Cell: ({ cell: { value } }) => (
         <UserKeyResultsCheckinsColumn
           isLoaded={!loading}
-          userId={value.userId}
           totalOfDoneCheckIns={value.totalOfDoneCheckIns}
           totalOfKeyResultsThatNeedsCheckIn={value.totalOfKeyResultsThatNeedsCheckIn}
         />

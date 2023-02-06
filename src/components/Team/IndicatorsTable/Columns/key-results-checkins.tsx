@@ -3,13 +3,11 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { Location } from 'src/components/Icon'
-import { User } from 'src/components/User/types'
 
 import CheckInCheckListSkeleton from './checkin-checklist-skeleton'
 import messages from './messages'
 
 export interface UserCheckinOccurrencesProperties {
-  userId: User['id']
   totalOfKeyResultsThatNeedsCheckIn?: number
   totalOfDoneCheckIns?: number
   isLoaded?: boolean
