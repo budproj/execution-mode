@@ -5,10 +5,15 @@ import LastRetrospectiveAnswerOverview from 'src/components/User/LastRetrospecti
 export interface LastRetrospectiveAnswerColumnProperties {
   userId: string
   isLoaded?: boolean
+  onClick: () => void
 }
 
-const LastRetrospectiveAnswer = ({ userId, isLoaded }: LastRetrospectiveAnswerColumnProperties) => {
-  return <LastRetrospectiveAnswerOverview isLoaded={isLoaded} userId={userId} />
+const LastRetrospectiveAnswer = ({
+  userId,
+  isLoaded,
+  onClick,
+}: LastRetrospectiveAnswerColumnProperties) => {
+  return <LastRetrospectiveAnswerOverview isLoaded={isLoaded} userId={userId} onClick={onClick} />
 }
 
 export default LastRetrospectiveAnswer
