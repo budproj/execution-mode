@@ -7,7 +7,7 @@ import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/m
 import { useGetEmoji } from 'src/components/Routine/hooks'
 
 interface UserRetrospectiveFeelingProperties {
-  feeling: string
+  feeling?: string
 }
 
 const UserFeeling = ({ feeling }: UserRetrospectiveFeelingProperties) => {

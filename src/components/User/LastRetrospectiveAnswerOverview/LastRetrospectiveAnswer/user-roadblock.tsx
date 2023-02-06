@@ -9,7 +9,7 @@ import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/m
 import messages from '../messages'
 
 interface UserRoadblockProperties {
-  roadblock: string
+  roadblock?: string
 }
 
 const UserRoadblock = ({ roadblock }: UserRoadblockProperties) => {

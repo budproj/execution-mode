@@ -7,7 +7,7 @@ import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/modals/UsersTeamList/messages'
 
 interface UserProductityProperties {
-  productivity: string
+  productivity?: string
 }
 
 const UserProductity = ({ productivity }: UserProductityProperties) => {
