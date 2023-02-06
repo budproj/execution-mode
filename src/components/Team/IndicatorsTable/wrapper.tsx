@@ -50,7 +50,11 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
       Header: columnHeaderTitle('lastAccess'),
       accessor: 'lastAccess',
       Cell: ({ cell: { value } }) => (
-        <UserLastAccessColumn isLoaded={!loading} userId={value.userId} />
+        <UserLastAccessColumn
+          isLoaded={!loading}
+          userId={value.userId}
+          lastDateAccess={value.lastDateAccess}
+        />
       ),
     },
     {
@@ -81,7 +85,14 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
       Header: columnHeaderTitle('lastRetrospectiveAnswer'),
       accessor: 'lastRetrospectiveAnswer',
       Cell: ({ cell: { value } }) => (
-        <LastRetrospectiveAnswerColumn isLoaded={!loading} userId={value.userId} />
+        <LastRetrospectiveAnswerColumn
+          isLoaded={!loading}
+          userId={value.userId}
+          lastRetrospetiveAnswerId={value.lastRetrospetiveAnswerId}
+          feeling={value.feeling}
+          productity={value.productity}
+          roadblock={value.roadblock}
+        />
       ),
     },
   ]

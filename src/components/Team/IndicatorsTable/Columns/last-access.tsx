@@ -5,12 +5,13 @@ import { useGetLastAccess } from 'src/components/User/hooks/useLastAccess'
 
 export interface LastAccessColumnProperties {
   userId: string
+  lastDateAccess?: string
   isLoaded?: boolean
 }
 
-const LastAccess = ({ userId, isLoaded }: LastAccessColumnProperties) => {
-  const { lastAccessSubtext, sinceDayLastAccess, loading } = useGetLastAccess(userId)
-  const isLastAccessLoaded = isLoaded && !loading
+const LastAccess = ({ userId, isLoaded, lastDateAccess }: LastAccessColumnProperties) => {
+  const { lastAccessSubtext, sinceDayLastAccess } = useGetLastAccess(userId, lastDateAccess)
+  const isLastAccessLoaded = isLoaded
 
   return (
     <GridItem

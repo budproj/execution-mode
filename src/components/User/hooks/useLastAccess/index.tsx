@@ -9,9 +9,6 @@ import { useIntl } from 'react-intl'
 
 import queries from 'src/components/User/Create/Form/queries.gql'
 
-import { User } from '../../types'
-import { useGetUserDetails } from '../getUserDetails'
-
 import messages from './messages'
 
 const userLanguage = new Map([
@@ -19,11 +16,9 @@ const userLanguage = new Map([
   ['en-US', enUS],
 ])
 
-export const useGetLastAccess = (userId: User['id']) => {
+export const useGetLastAccess = (userId: string, lastAccess?: string) => {
   const intl = useIntl()
   const [userLocale, setUserLocale] = useState(userLanguage.get('pt-BR'))
-  const { data: user, loading } = useGetUserDetails(userId)
-  const userLastAccessDate = user?.amplitude?.last_used ?? ''
 
   const [getCurrentLocale, { loading: isGetUserLocaleLoading }] = useLazyQuery(
     queries.GET_USER_LOCALE,
@@ -43,13 +38,13 @@ export const useGetLastAccess = (userId: User['id']) => {
   }, [userId, getCurrentLocale])
 
   const sinceDayLastAccess = () => {
-    if (userLastAccessDate && !isGetUserLocaleLoading) {
-      const difference = differenceInDays(new Date(`${userLastAccessDate}T00:00`), new Date())
+    if (lastAccess && !isGetUserLocaleLoading) {
+      const difference = differenceInDays(new Date(`${lastAccess}T00:00`), new Date())
       if (difference === 0) {
         return intl.formatMessage(messages.todayLastAccess)
       }
 
-      const formatedDistance = formatDistance(new Date(`${userLastAccessDate}T00:00`), new Date(), {
+      const formatedDistance = formatDistance(new Date(`${lastAccess}T00:00`), new Date(), {
         addSuffix: true,
         locale: userLocale,
       })
@@ -59,11 +54,11 @@ export const useGetLastAccess = (userId: User['id']) => {
   }
 
   const lastAccessSubtext = () => {
-    if (userLastAccessDate) {
-      const date = new Date(`${userLastAccessDate}T00:00`)
+    if (lastAccess) {
+      const date = new Date(`${lastAccess}T00:00`)
       return format(date, 'dd/MM/yyyy')
     }
   }
 
-  return { userLastAccessDate, sinceDayLastAccess, lastAccessSubtext, loading }
+  return { sinceDayLastAccess, lastAccessSubtext }
 }

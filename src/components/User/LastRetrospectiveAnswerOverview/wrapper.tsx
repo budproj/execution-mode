@@ -3,7 +3,6 @@ import React from 'react'
 
 import { User } from '../types'
 
-import { useGetUserLastRetrospectiveAnswerOverview } from './hooks/use-get-last-retrospective-answer-overview'
 import LastRetrospectiveAnswerSkeleton from './last-retrospective-answer.skeleton'
 
 const DynamicLastRetrospectiveAnswer = dynamic(
@@ -11,18 +10,30 @@ const DynamicLastRetrospectiveAnswer = dynamic(
 )
 
 interface LastRetrospectiveAnswerOverview {
-  userId: User['id']
   isLoaded?: boolean
+  lastRetrospetiveAnswerId?: string
+  feeling?: string
+  productity?: string
+  userId: User['id']
+  roadblock?: string
 }
 
-const LastRetrospectiveAnswerOverview = ({ userId, isLoaded }: LastRetrospectiveAnswerOverview) => {
-  const { data, isLoaded: lastRetrospectiveDataLoaded } =
-    useGetUserLastRetrospectiveAnswerOverview(userId)
-
-  const isLastRetrospectiveAnswerDataLoaded = isLoaded && lastRetrospectiveDataLoaded
-
-  return isLastRetrospectiveAnswerDataLoaded ? (
-    <DynamicLastRetrospectiveAnswer userRoutineData={data} />
+const LastRetrospectiveAnswerOverview = ({
+  isLoaded,
+  userId,
+  feeling,
+  lastRetrospetiveAnswerId,
+  productity,
+  roadblock,
+}: LastRetrospectiveAnswerOverview) => {
+  return isLoaded ? (
+    <DynamicLastRetrospectiveAnswer
+      userId={userId}
+      feeling={feeling}
+      lastRoutineAnswerId={lastRetrospetiveAnswerId}
+      productivity={productity}
+      roadBlock={roadblock}
+    />
   ) : (
     <LastRetrospectiveAnswerSkeleton />
   )
