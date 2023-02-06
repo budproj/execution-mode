@@ -1,16 +1,16 @@
-import { StepsStyleConfig } from 'chakra-ui-steps'
+import { StepsTheme } from 'chakra-ui-steps'
 
 const Steps = {
-  ...StepsStyleConfig,
+  ...StepsTheme,
   baseStyle: (properties: any) => {
     return {
-      ...StepsStyleConfig.baseStyle(properties),
+      ...StepsTheme.baseStyle(properties),
       label: {
-        ...StepsStyleConfig.baseStyle(properties).label,
+        ...StepsTheme.baseStyle(properties).label,
         color: 'gray.600',
       },
       stepIconContainer: {
-        ...StepsStyleConfig.baseStyle(properties).stepIconContainer,
+        ...StepsTheme.baseStyle(properties).stepIconContainer,
         background: 'gray.100',
         borderColor: 'gray.100',
         _activeStep: {

@@ -13,7 +13,6 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 import messages from './messages'
 
 export interface CheckInFormFieldValueNewProperties {
-  isLoading?: boolean
   keyResultID?: KeyResult['id']
 }
 

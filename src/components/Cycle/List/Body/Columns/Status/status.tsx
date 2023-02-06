@@ -77,6 +77,10 @@ const CyclesListBodyColumnStatus = ({
     handleChangeCycleStatus(statusState)
   }
 
+  const statusMessage = data?.updateCycle.active
+    ? messages.inactiveCycleStatus.defaultMessage
+    : messages.activeCycleStatus.defaultMessage
+
   useEffect(() => {
     if (!loading) {
       if (error) {
@@ -89,14 +93,12 @@ const CyclesListBodyColumnStatus = ({
           status: 'success',
           title: intl.formatMessage(messages.successParcialEditToastMessage, {
             period: data.updateCycle.period,
-            status: data.updateCycle.active
-              ? messages.inactiveCycleStatus.defaultMessage
-              : messages.activeCycleStatus.defaultMessage,
+            status: statusMessage as string,
           }),
         })
       }
     }
-  }, [loading, error, data, toast, intl])
+  }, [loading, error, data, toast, intl, statusMessage])
 
   return (
     <CyclesListBodyColumnBase

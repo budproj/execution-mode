@@ -1,5 +1,5 @@
 import { Skeleton, StatHelpText, Text } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
@@ -37,9 +37,9 @@ const KeyResultSectionTimelineCardCheckInHelpText = ({
           author: user?.fullName,
           time: formattedRelativeDate?.toLowerCase(),
           unit: relativeUnit,
-          highlight: (string) => (
+          highlight: (value: ReactNode) => (
             <Text as="span" fontWeight={700}>
-              {string}
+              {value}
             </Text>
           ),
         })}

@@ -42,8 +42,8 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
   const { Component, pageProps, locale, messages } = properties
   const router = useRouter()
 
-  const onAuth0RedirectCallback = async (appState: AppState): Promise<void> => {
-    await router.replace(appState?.returnTo ?? '/')
+  const onAuth0RedirectCallback = (appState?: AppState): void => {
+    router.replace(appState?.returnTo ?? '/')
   }
 
   useEffect(() => {

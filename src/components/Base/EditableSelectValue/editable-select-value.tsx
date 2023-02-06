@@ -6,8 +6,9 @@ import {
   MenuProps,
   Skeleton,
   Button,
+  MenuItemOption,
 } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
@@ -23,6 +24,7 @@ export interface EditableSelectValueProperties extends MenuProps {
   value?: string
   placeholder?: string
   customFallbackPlaceholder?: string
+  children: ReactNode
   isSubmitting?: boolean
   isDisabled?: boolean
 }
@@ -94,7 +96,7 @@ const EditableSelectValue = ({
         </MenuButton>
         <MenuList>
           <MenuOptionGroup value={value} type="radio" onChange={onChange}>
-            {children}
+            <MenuItemOption>{children}</MenuItemOption>
           </MenuOptionGroup>
         </MenuList>
       </Menu>

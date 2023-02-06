@@ -10,7 +10,7 @@ import {
   StyleProps,
 } from '@chakra-ui/react'
 import Scrollbars from 'rc-scrollbars'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 
 import ChevronDownIcon from 'src/components/Icon/ChevronDown'
@@ -20,7 +20,7 @@ import messages from './messages'
 export interface SelectMenuProperties extends StyleProps {
   value?: string
   onChange: (value: string | string[]) => void
-  children: MenuProps['children']
+  children: ReactNode
   id?: MenuProps['id']
   isLoading?: boolean
   matchWidth?: MenuProps['matchWidth']

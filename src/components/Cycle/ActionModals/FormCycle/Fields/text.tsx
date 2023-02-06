@@ -8,7 +8,7 @@ export type CycleTextFieldProperties = {
   id: keyof CycleFormValues
   label: string
   type?: string
-  customInput?: React.ReactNode
+  customInput?: React.ComponentType
 }
 
 export const CycleTextField = ({

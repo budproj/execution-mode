@@ -69,7 +69,7 @@ const StyledText = styled(Text)`
   color: ${({ color }) => color};
 
   &:hover {
-    color: ${({ brandColor }) => brandColor};
+    color: ${({ brandcolor }) => brandcolor};
   }
 `
 

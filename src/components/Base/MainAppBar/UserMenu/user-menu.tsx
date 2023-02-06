@@ -58,10 +58,8 @@ const UserMenu = () => {
             </UserMenuButton>
           </IntlLink>
 
-          <Link href={HELPDESK_URL}>
-            <UserMenuButton>
-              <a target="_blank">{intl.formatMessage(messages.secondOption)}</a>
-            </UserMenuButton>
+          <Link href={HELPDESK_URL} target="_blank">
+            <UserMenuButton>{intl.formatMessage(messages.secondOption)}</UserMenuButton>
           </Link>
         </Box>
 

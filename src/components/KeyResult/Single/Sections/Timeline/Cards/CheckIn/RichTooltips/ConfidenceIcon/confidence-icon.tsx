@@ -1,5 +1,5 @@
 import { Box, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
@@ -27,7 +27,7 @@ const KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText = ({
       <Text>
         {intl.formatMessage(messages.firstLine, {
           confidence: parentConfidenceTag.messages.long,
-          highlight: (value: string) => (
+          highlight: (value: ReactNode) => (
             <Text color={parentConfidenceTag.color.primary} as="span" textTransform="uppercase">
               {value}
             </Text>
@@ -38,7 +38,7 @@ const KeyResultSectionTimelineCardCheckInConfidenceIconTooltipWithRichText = ({
       <Text>
         {intl.formatMessage(messages.secondLine, {
           confidence: currentConfidenceTag.messages.long,
-          highlight: (value: string) => (
+          highlight: (value: ReactNode) => (
             <Text color={currentConfidenceTag.color.primary} as="span" textTransform="uppercase">
               {value}
             </Text>

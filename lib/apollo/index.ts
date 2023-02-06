@@ -104,6 +104,7 @@ export const useApollo = (
   const state: NormalizedCacheObject = pageProperties[APOLLO_STATE]
   const client = useMemo(
     () => initializeApollo(authzClient, amplitude, state),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [authzClient, state],
   )
 
