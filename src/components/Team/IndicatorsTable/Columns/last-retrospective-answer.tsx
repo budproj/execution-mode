@@ -10,7 +10,7 @@ export interface LastRetrospectiveAnswerColumnProperties {
   userId: User['id']
   productity?: string
   roadblock?: string
-  onClick: () => void
+  onClick?: () => void
 }
 
 const LastRetrospectiveAnswer = ({
