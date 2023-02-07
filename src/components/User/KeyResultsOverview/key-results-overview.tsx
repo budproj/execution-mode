@@ -18,6 +18,7 @@ const KeyResultsOverview = ({
   progress,
   latestCheckIn,
   delta,
+  onClick,
 }: UserKeyResultsOverviewProperties) => {
   const intl = useIntl()
 
@@ -38,7 +39,7 @@ const KeyResultsOverview = ({
   const userKeyResultsProgress = progress ?? 0
 
   return (
-    <HStack gap={2}>
+    <HStack gap={2} onClick={onClick}>
       <Avatar name={user?.fullName} src={user?.picture} objectFit="none" />
       <VStack alignItems="flex-start">
         <Flex width="100%" justifyContent="space-between">

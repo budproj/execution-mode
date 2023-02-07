@@ -16,6 +16,7 @@ export interface UserKeyResultsOverviewProperties {
   progress?: number
   latestCheckIn?: string
   delta?: Delta
+  onClick?: () => void
 }
 
 const WrapperUserKeyResultsOverview = (data: UserKeyResultsOverviewProperties) => {

@@ -13,16 +13,21 @@ const DynamicLastRetrospectiveAnswer = dynamic(
 interface LastRetrospectiveAnswerOverview {
   userId: User['id']
   isLoaded?: boolean
+  onClick?: () => void
 }
 
-const LastRetrospectiveAnswerOverview = ({ userId, isLoaded }: LastRetrospectiveAnswerOverview) => {
+const LastRetrospectiveAnswerOverview = ({
+  userId,
+  isLoaded,
+  onClick,
+}: LastRetrospectiveAnswerOverview) => {
   const { data, isLoaded: lastRetrospectiveDataLoaded } =
     useGetUserLastRetrospectiveAnswerOverview(userId)
 
   const isLastRetrospectiveAnswerDataLoaded = isLoaded && lastRetrospectiveDataLoaded
 
   return isLastRetrospectiveAnswerDataLoaded ? (
-    <DynamicLastRetrospectiveAnswer userRoutineData={data} />
+    <DynamicLastRetrospectiveAnswer userRoutineData={data} onClick={onClick} />
   ) : (
     <LastRetrospectiveAnswerSkeleton />
   )

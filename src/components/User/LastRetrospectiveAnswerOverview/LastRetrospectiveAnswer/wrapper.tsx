@@ -14,9 +14,13 @@ import UserRoadblock from './user-roadblock'
 
 interface LastRetrospectiveAnswerProperties {
   userRoutineData?: UserRetrospectiveAnswerOverviewDataProperties
+  onClick?: () => void
 }
 
-const LastRetrospectiveAnswer = ({ userRoutineData }: LastRetrospectiveAnswerProperties) => {
+const LastRetrospectiveAnswer = ({
+  userRoutineData,
+  onClick,
+}: LastRetrospectiveAnswerProperties) => {
   const user = useRecoilValue(selectUser(userRoutineData?.userId))
   const userCompanie = user?.companies?.edges[0].node.id ?? ''
 
@@ -26,7 +30,14 @@ const LastRetrospectiveAnswer = ({ userRoutineData }: LastRetrospectiveAnswerPro
 
   return userRoutineData ? (
     <IntlLink href={redirectToURL}>
-      <GridItem gap="15px" display="flex" color="new-gray.800" fontWeight="500" fontSize="12px">
+      <GridItem
+        gap="15px"
+        display="flex"
+        color="new-gray.800"
+        fontWeight="500"
+        fontSize="12px"
+        onClick={onClick}
+      >
         <UserFeeling feeling={userRoutineData.feeling} />
         <UserProductity productivity={userRoutineData.productivity} />
         <UserRoadblock roadblock={userRoutineData.roadBlock} />

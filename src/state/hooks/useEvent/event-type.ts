@@ -43,4 +43,9 @@ export enum EventType {
   CONFIDENCE_HIGHLIGHT_CLICK = 'ConfidenceHighlightClick',
   KRMEMBERS_HIGHLIGHT_CLICK = 'KrMembersHighlightClick',
   BARRIER_HIGHLIGHT_CLICK = 'BarrierHighlightClick',
+  INDICATORS_ACCORDION_BUTTON_CLICK = 'IndicatorsButtonClick',
+  INDICATORS_PROGRESS_CLICK = 'IndicatorsProgressClick',
+  INDICATORS_CHECKLIST_CLICK = 'IndicatorsCheckListClick',
+  INDICATORS_ROUTINE_CLICK = 'IndicatorsRoutineClick',
+  INDICATORS_REPORT_DOWNLOAD_CLICK = 'IndicatorsReportDownloadClick',
 }
