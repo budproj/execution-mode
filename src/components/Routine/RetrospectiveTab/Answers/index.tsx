@@ -110,7 +110,7 @@ const AnswersComponent = ({
           aria-label={intl.formatMessage(messages.arrowLeftIconDescription)}
           borderRadius="10px 0px 0px 10px"
           height="38px"
-          disabled={isLoading}
+          isDisabled={isLoading}
           icon={
             <ArrowRight
               transform="rotate(180deg)"
@@ -142,7 +142,7 @@ const AnswersComponent = ({
           background="new-gray.200"
           aria-label={intl.formatMessage(messages.arrowRightIconDescription)}
           height="38px"
-          disabled={isNextWeekDisabled(before) || isLoading}
+          isDisabled={isNextWeekDisabled(before) || isLoading}
           icon={
             <ArrowRight
               desc={intl.formatMessage(messages.arrowRightIconDescription)}
