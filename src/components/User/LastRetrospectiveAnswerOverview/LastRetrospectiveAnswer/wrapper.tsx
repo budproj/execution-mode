@@ -18,6 +18,7 @@ export interface userRoutineData {
   userId: User['id']
   productivity?: string
   feeling?: string
+  onClick?: () => void
 }
 
 const LastRetrospectiveAnswer = ({
@@ -26,6 +27,7 @@ const LastRetrospectiveAnswer = ({
   lastRoutineAnswerId,
   productivity,
   roadBlock,
+  onClick,
 }: userRoutineData) => {
   const { data: user } = useGetUserDetails(userId)
   const teamRetrospectiveTab = useRoutineTab()
@@ -37,7 +39,14 @@ const LastRetrospectiveAnswer = ({
 
   return lastRoutineAnswerId ? (
     <IntlLink href={redirectToURL}>
-      <GridItem gap="15px" display="flex" color="new-gray.800" fontWeight="500" fontSize="12px">
+      <GridItem
+        gap="15px"
+        display="flex"
+        color="new-gray.800"
+        fontWeight="500"
+        fontSize="12px"
+        onClick={onClick}
+      >
         <UserFeeling feeling={feeling} />
         <UserProductity productivity={productivity} />
         <UserRoadblock roadblock={roadBlock} />

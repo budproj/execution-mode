@@ -16,6 +16,7 @@ interface LastRetrospectiveAnswerOverview {
   productity?: string
   userId: User['id']
   roadblock?: string
+  onClick?: () => void
 }
 
 const LastRetrospectiveAnswerOverview = ({
@@ -25,6 +26,7 @@ const LastRetrospectiveAnswerOverview = ({
   lastRetrospetiveAnswerId,
   productity,
   roadblock,
+  onClick,
 }: LastRetrospectiveAnswerOverview) => {
   return isLoaded ? (
     <DynamicLastRetrospectiveAnswer
@@ -33,6 +35,7 @@ const LastRetrospectiveAnswerOverview = ({
       lastRoutineAnswerId={lastRetrospetiveAnswerId}
       productivity={productity}
       roadBlock={roadblock}
+      onClick={onClick}
     />
   ) : (
     <LastRetrospectiveAnswerSkeleton />

@@ -14,6 +14,7 @@ export interface UserChecklistProgressProperties {
   checked?: number
   total?: number
   isLoaded?: boolean
+  onClick?: () => void
 }
 
 const grayTheme = {
@@ -31,6 +32,7 @@ const UserChecklistProgress = ({
   total,
   userId,
   isLoaded,
+  onClick,
 }: UserChecklistProgressProperties) => {
   const colorTheme = total === 0 && checked === 0 ? redTheme : grayTheme
   const intl = useIntl()
@@ -40,7 +42,7 @@ const UserChecklistProgress = ({
   return (
     <IntlLink href={`/profile/${userId}`}>
       {isChecklistProgressLoaded ? (
-        <Flex alignItems="center" color={colorTheme.color} px={2} gap={2}>
+        <Flex alignItems="center" color={colorTheme.color} px={2} gap={2} onClick={onClick}>
           <Square
             bg={colorTheme.bgColor}
             color="currentcolor"
