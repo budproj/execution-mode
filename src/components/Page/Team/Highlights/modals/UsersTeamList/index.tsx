@@ -21,7 +21,7 @@ export interface UsersTeamListProperties {
   type?: string
 }
 
-interface UserRoutineDataProperties {
+export interface UserRoutineDataProperties {
   roadBlock: string
   productivity: string
   feeling: string
