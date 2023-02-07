@@ -6,10 +6,8 @@ import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/modals/UsersTeamList/messages'
 
-import { UserRetrospectiveAnswerOverviewDataProperties } from '../hooks/use-get-last-retrospective-answer-overview'
-
 interface UserProductityProperties {
-  productivity: UserRetrospectiveAnswerOverviewDataProperties['productivity']
+  productivity?: string
 }
 
 const UserProductity = ({ productivity }: UserProductityProperties) => {

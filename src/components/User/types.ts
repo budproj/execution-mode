@@ -49,6 +49,18 @@ export type userIndicators = {
     total: number
   }
 }
+
+type retrospectiveAnswer = {
+  questionId: string
+  answerGroupId: string
+  value: string
+}
+
+export type lastRetrospectiveAnswer = {
+  id: string
+  userId: string
+  answers: retrospectiveAnswer[]
+}
 export interface User extends GraphQLNode {
   firstName: string
   fullName: string
@@ -74,6 +86,7 @@ export interface User extends GraphQLNode {
   keyResults?: GraphQLConnection<KeyResult>
   keyResultCheckIns?: GraphQLConnection<KeyResult>
   userIndicators?: userIndicators
+  lastRoutine?: lastRetrospectiveAnswer
 }
 
 export interface UserProgress {

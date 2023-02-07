@@ -6,10 +6,8 @@ import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/modals/UsersTeamList/messages'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 
-import { UserRetrospectiveAnswerOverviewDataProperties } from '../hooks/use-get-last-retrospective-answer-overview'
-
 interface UserRetrospectiveFeelingProperties {
-  feeling: UserRetrospectiveAnswerOverviewDataProperties['feeling']
+  feeling?: string
 }
 
 const UserFeeling = ({ feeling }: UserRetrospectiveFeelingProperties) => {

@@ -1,30 +1,52 @@
+import { useLazyQuery } from '@apollo/client'
 import differenceInDays from 'date-fns/differenceInDays'
 import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
+import enUS from 'date-fns/locale/en-US'
 import ptBR from 'date-fns/locale/pt-BR'
+import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { User } from '../../types'
-import { useGetUserDetails } from '../getUserDetails'
+import queries from 'src/components/User/Create/Form/queries.gql'
 
 import messages from './messages'
 
-export const useGetLastAccess = (userId: User['id']) => {
-  const intl = useIntl()
+const userLanguage = new Map([
+  ['pt-BR', ptBR],
+  ['en-US', enUS],
+])
 
-  const { data: user, loading } = useGetUserDetails(userId)
-  const userLastAccessDate = user?.amplitude?.last_used ?? ''
+export const useGetLastAccess = (userId: string, lastAccess?: string) => {
+  const intl = useIntl()
+  const [userLocale, setUserLocale] = useState(userLanguage.get('pt-BR'))
+
+  const [getCurrentLocale, { loading: isGetUserLocaleLoading }] = useLazyQuery(
+    queries.GET_USER_LOCALE,
+    {
+      variables: {
+        userID: userId,
+      },
+      onCompleted: (data) => {
+        const locale = data.user.settings.edges[0]?.node.value
+        if (locale) setUserLocale(userLanguage.get(locale))
+      },
+    },
+  )
+
+  useEffect(() => {
+    if (userId) void getCurrentLocale()
+  }, [userId, getCurrentLocale])
 
   const sinceDayLastAccess = () => {
-    if (userLastAccessDate) {
-      const difference = differenceInDays(new Date(`${userLastAccessDate}T00:00`), new Date())
+    if (lastAccess && !isGetUserLocaleLoading) {
+      const difference = differenceInDays(new Date(`${lastAccess}T00:00`), new Date())
       if (difference === 0) {
         return intl.formatMessage(messages.todayLastAccess)
       }
 
-      const formatedDistance = formatDistance(new Date(`${userLastAccessDate}T00:00`), new Date(), {
+      const formatedDistance = formatDistance(new Date(`${lastAccess}T00:00`), new Date(), {
         addSuffix: true,
-        locale: ptBR,
+        locale: userLocale,
       })
 
       return formatedDistance.charAt(0).toUpperCase() + formatedDistance.slice(1)
@@ -32,11 +54,11 @@ export const useGetLastAccess = (userId: User['id']) => {
   }
 
   const lastAccessSubtext = () => {
-    if (userLastAccessDate) {
-      const date = new Date(`${userLastAccessDate}T00:00`)
+    if (lastAccess) {
+      const date = new Date(`${lastAccess}T00:00`)
       return format(date, 'dd/MM/yyyy')
     }
   }
 
-  return { userLastAccessDate, sinceDayLastAccess, lastAccessSubtext, loading }
+  return { sinceDayLastAccess, lastAccessSubtext }
 }

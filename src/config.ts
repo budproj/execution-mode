@@ -16,7 +16,6 @@ export interface BudPublicConfig {
   hotjar: HotjarConfig
   smartlook: SmartlookConfig
   amplitude: AmplitudeConfig
-  mirage: MiragePublicConfig
   maintenanceMode: MaintenanceModeConfig
   flagsmith: FlagsmithConfig
 }
@@ -82,12 +81,6 @@ export interface SmartlookConfig {
 export interface AmplitudeConfig {
   apiKey: string
 }
-
-export interface MiragePublicConfig {
-  enabled: boolean
-  fakerSeed: number
-}
-
 export interface MaintenanceModeConfig {
   enabled: boolean
   expectedReturn: Date

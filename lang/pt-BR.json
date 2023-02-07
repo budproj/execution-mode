@@ -187,6 +187,10 @@
     "defaultMessage": "Tarefas pendentes",
     "description": "Label for pending tasks selector item"
   },
+  "1IedeB": {
+    "defaultMessage": "Um ícone de localização que aparece junto a coluna de check-in de um usuário na tabela de indicatores de um time",
+    "description": "A checklist icon that appears next to a user checkin column in a team indicators table"
+  },
   "1Ve0Ag": {
     "defaultMessage": "Um ícone de um calendário, indicando que essa é a data limite do seu resultado-chave",
     "description": "The description text for the key-result section goal icon"
@@ -587,6 +591,10 @@
     "defaultMessage": "Um ícone de um lápix, que aparece junto com a pergunta de algum recado que o usuário deixou para o time",
     "description": "The alternative text explaining our graphic icon"
   },
+  "9Ni88b": {
+    "defaultMessage": "Icone que apresenta três pessoas, representando um time.",
+    "description": "This message is the description of an icon that is presented as the title of the component that presents the Indicators of a team."
+  },
   "9O5Xaa": {
     "defaultMessage": "Seu time ainda não tem nenhum resultado-chave anual",
     "description": "Message to show when there are no summary results"
@@ -947,6 +955,10 @@
     "defaultMessage": "novo!",
     "description": "Tag new item"
   },
+  "GlsTIu": {
+    "defaultMessage": "{hasBlock, select, y {Sim} n {Não} other {}}",
+    "description": "This message appears as a label on the icon representing the user lock status in the last retrospective."
+  },
   "GnbGX+": {
     "defaultMessage": "Sem resposta na semana passada",
     "description": "The outdated text that goes in the update text, below the routine title, when the routine is outdated."
@@ -998,6 +1010,10 @@
   "HEYvPI": {
     "defaultMessage": "Criar Resultado Chave",
     "description": "This message appears as the title of the insert Key Result drawer"
+  },
+  "HGE7UV": {
+    "defaultMessage": "{columnAccessor, select, userKeyResultsOverview {Progresso em krs} lastAccess {Último acesso} checkin {Check-in} checklist {Check-list} lastRetrospectiveAnswer {Retrospectiva} other {}}",
+    "description": "This message appears in the header of each column of a Team Indicators table."
   },
   "HQfOOa": {
     "defaultMessage": "Ciclo",
@@ -1442,6 +1458,10 @@
   "Q+5Uuc": {
     "defaultMessage": "Português",
     "description": "This is the name of the portuguese language while we are creating a new user"
+  },
+  "Q+b5ro": {
+    "defaultMessage": "Indicadores de time",
+    "description": "This message is the title of the Indicators section within a team page."
   },
   "Q2diI+": {
     "defaultMessage": "Ícone de bóia. Ao clicar nele você irá para nossa página de suporte",
@@ -1959,6 +1979,10 @@
     "defaultMessage": "Um ícone de gráfico de pizza",
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
+  "ZZ+KxU": {
+    "defaultMessage": "Sem resposta",
+    "description": "This message is displayed inside the empty state on last retrospective overview"
+  },
   "ZkqTBK": {
     "defaultMessage": "ADICIONAR",
     "description": "This button is used to add selected members to a team."
@@ -2291,6 +2315,10 @@
     "defaultMessage": "Você excluiu um {type}",
     "description": "This text is displayed as the alert title, explaining what resource the user removed"
   },
+  "gpJ3OX": {
+    "defaultMessage": "Entenda o engajamento e o progresso dos membros deste time no Bud",
+    "description": "This message is the subtitle of the component that presents the Indicators of a team."
+  },
   "gu4aCE": {
     "defaultMessage": "Anual",
     "description": "This text is used as prefix for our yearly cadences"
@@ -2322,6 +2350,10 @@
   "hPJxpx": {
     "defaultMessage": "Média Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
+  },
+  "hUA7Fo": {
+    "defaultMessage": "Um ícone de checagem que aparece junto a coluna de check-list de um usuário na tabela de indicatores de um time",
+    "description": "A checklist icon that appears next to a user checklist column in a team indicators table"
   },
   "hXlVqV": {
     "defaultMessage": "Minhas Tarefas Pessoais",
@@ -2690,6 +2722,10 @@
   "oGyXN5": {
     "defaultMessage": "Colegas com plano individual",
     "description": "Friends with individual OKRs title"
+  },
+  "oWLFIj": {
+    "defaultMessage": "Visão Geral do Time",
+    "description": "This message is the title of the component that presents the Indicators of a team."
   },
   "oh+3Gh": {
     "defaultMessage": "Anual",

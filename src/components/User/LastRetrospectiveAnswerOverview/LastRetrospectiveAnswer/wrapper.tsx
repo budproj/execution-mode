@@ -1,34 +1,43 @@
 import { GridItem } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
 
 import { IntlLink } from 'src/components/Base'
-import selectUser from 'src/state/recoil/user/selector'
+import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab'
 
-import { UserRetrospectiveAnswerOverviewDataProperties } from '../hooks/use-get-last-retrospective-answer-overview'
+import { useGetUserDetails } from '../../hooks'
+import { User } from '../../types'
 
 import LastRetrospectiveAnswerOverviewEmptyState from './last-retrospective.empty-state'
 import UserFeeling from './user-feeling'
 import UserProductity from './user-productivity'
 import UserRoadblock from './user-roadblock'
 
-interface LastRetrospectiveAnswerProperties {
-  userRoutineData?: UserRetrospectiveAnswerOverviewDataProperties
+export interface userRoutineData {
+  lastRoutineAnswerId?: string
+  roadBlock?: string
+  userId: User['id']
+  productivity?: string
+  feeling?: string
   onClick?: () => void
 }
 
 const LastRetrospectiveAnswer = ({
-  userRoutineData,
+  feeling,
+  userId,
+  lastRoutineAnswerId,
+  productivity,
+  roadBlock,
   onClick,
-}: LastRetrospectiveAnswerProperties) => {
-  const user = useRecoilValue(selectUser(userRoutineData?.userId))
-  const userCompanie = user?.companies?.edges[0].node.id ?? ''
+}: userRoutineData) => {
+  const { data: user } = useGetUserDetails(userId)
+  const teamRetrospectiveTab = useRoutineTab()
+  const companyId = user?.companies?.edges[0]?.node?.id ?? ''
 
-  const redirectToURL = userRoutineData
-    ? `/explore/${userCompanie}/?activeTab=retrospectiva&answerId=${userRoutineData?.lastRoutineAnswerId}`
+  const redirectToURL = lastRoutineAnswerId
+    ? `/explore/${companyId}/?activeTab=${teamRetrospectiveTab}&answerId=${lastRoutineAnswerId}`
     : '#'
 
-  return userRoutineData ? (
+  return lastRoutineAnswerId ? (
     <IntlLink href={redirectToURL}>
       <GridItem
         gap="15px"
@@ -38,9 +47,9 @@ const LastRetrospectiveAnswer = ({
         fontSize="12px"
         onClick={onClick}
       >
-        <UserFeeling feeling={userRoutineData.feeling} />
-        <UserProductity productivity={userRoutineData.productivity} />
-        <UserRoadblock roadblock={userRoutineData.roadBlock} />
+        <UserFeeling feeling={feeling} />
+        <UserProductity productivity={productivity} />
+        <UserRoadblock roadblock={roadBlock} />
       </GridItem>
     </IntlLink>
   ) : (

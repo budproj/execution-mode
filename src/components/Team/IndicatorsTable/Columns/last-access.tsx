@@ -5,19 +5,23 @@ import { useGetLastAccess } from 'src/components/User/hooks/useLastAccess'
 
 export interface LastAccessColumnProperties {
   userId: string
+  lastDateAccess?: string
   isLoaded?: boolean
 }
 
-const LastAccess = ({ userId, isLoaded }: LastAccessColumnProperties) => {
-  const { lastAccessSubtext, sinceDayLastAccess, loading } = useGetLastAccess(userId)
-  const isLastAccessLoaded = isLoaded && !loading
+const LastAccess = ({ userId, isLoaded, lastDateAccess }: LastAccessColumnProperties) => {
+  const { lastAccessSubtext, sinceDayLastAccess } = useGetLastAccess(userId, lastDateAccess)
+  const isLastAccessLoaded = isLoaded
 
   return (
     <GridItem
       display="flex"
+      alignItems="flex-start"
       color="new-gray.800"
       fontWeight="500"
       fontSize="12px"
+      minW={28}
+      w="100%"
       flexDirection="column"
     >
       {isLastAccessLoaded ? (
@@ -28,7 +32,7 @@ const LastAccess = ({ userId, isLoaded }: LastAccessColumnProperties) => {
           </Text>
         </Box>
       ) : (
-        <SkeletonText noOfLines={2} width="80%" skeletonHeight={4} />
+        <SkeletonText noOfLines={2} width={28} skeletonHeight={4} />
       )}
     </GridItem>
   )
