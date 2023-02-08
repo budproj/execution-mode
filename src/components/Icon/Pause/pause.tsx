@@ -13,6 +13,8 @@ export interface PauseIconProperties extends IconProps, AcessibleIconProperties 
 const PauseIcon = ({
   title,
   desc,
+  // eslint-disable-next-line unused-imports/no-unused-vars-ts
+  viewBox,
   coloumnStrokeWidth = 1,
   circleStrokeWidth = 1,
   columnBgColor = 'white',
@@ -45,6 +47,7 @@ const PauseIcon = ({
 
 PauseIcon.defaultProps = {
   viewBox: '0 0 8 6',
+  fill: '#C26EFF',
 }
 
 export default PauseIcon
