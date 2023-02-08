@@ -1,7 +1,10 @@
 import { Box, GridItem, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { useGetLastAccess } from 'src/components/User/hooks/useLastAccess'
+
+import messages from './messages'
 
 export interface LastAccessColumnProperties {
   userId: string
@@ -10,6 +13,8 @@ export interface LastAccessColumnProperties {
 }
 
 const LastAccess = ({ userId, isLoaded, lastDateAccess }: LastAccessColumnProperties) => {
+  const intl = useIntl()
+
   const { lastAccessSubtext, sinceDayLastAccess } = useGetLastAccess(userId, lastDateAccess)
   const isLastAccessLoaded = isLoaded
 
@@ -25,12 +30,20 @@ const LastAccess = ({ userId, isLoaded, lastDateAccess }: LastAccessColumnProper
       flexDirection="column"
     >
       {isLastAccessLoaded ? (
-        <Box>
-          <Text fontWeight="500">{sinceDayLastAccess()}</Text>
-          <Text color="new-gray.600" fontWeight="400">
-            {lastAccessSubtext()}
+        lastDateAccess === 'never_accessed' ? (
+          <Text fontWeight="medium" fontSize={14}>
+            {intl.formatMessage(messages.neverAccessed)}
           </Text>
-        </Box>
+        ) : (
+          <Box>
+            <Text fontWeight="medium" fontSize={14}>
+              {sinceDayLastAccess()}
+            </Text>
+            <Text color="new-gray.600" fontSize={14}>
+              {lastAccessSubtext()}
+            </Text>
+          </Box>
+        )
       ) : (
         <SkeletonText noOfLines={2} width={28} skeletonHeight={4} />
       )}

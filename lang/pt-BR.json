@@ -2051,6 +2051,10 @@
     "defaultMessage": "Membro adicionado ao time com sucesso.",
     "description": "This message appears on a successful toast when we add a user to a team."
   },
+  "axEJFy": {
+    "defaultMessage": "Nenhum acesso",
+    "description": "This message appears if the user never accessed the Bud."
+  },
   "az3ncM": {
     "defaultMessage": "Atenção!{breakline}Esta ação não pode ser desfeita.",
     "description": "This message is used as the title in our second dialog while removing a cycle"
