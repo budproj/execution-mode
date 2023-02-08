@@ -1,4 +1,5 @@
 import { Avatar, Flex, HStack, Text, VStack } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import differenceInDays from 'date-fns/differenceInDays'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -12,6 +13,16 @@ import { UpdateIcon } from 'src/components/KeyResult/List/Body/Columns/KeyResult
 import selectUser from 'src/state/recoil/user/selector'
 
 import { UserKeyResultsOverviewProperties } from './wrapper'
+
+export const CustomVStack = styled(VStack)`
+  @media (min-width: 1600px) {
+    width: 280px;
+  }
+
+  @media (max-width: 1417px) {
+    width: 220px;
+  }
+`
 
 const KeyResultsOverview = ({
   userId,
@@ -41,16 +52,16 @@ const KeyResultsOverview = ({
   return (
     <HStack gap={2} onClick={onClick}>
       <Avatar name={user?.fullName} src={user?.picture} objectFit="none" />
-      <VStack alignItems="flex-start">
+      <CustomVStack alignItems="flex-start">
         <Flex width="100%" justifyContent="space-between">
-          <Text color="new-gray.800" fontSize={16}>
+          <Text color="new-gray.800" fontSize={16} pr={4}>
             {user?.fullName}
           </Text>
           <Text color="brand.500" fontWeight="medium" fontSize={14}>
             {intl.formatNumber(userKeyResultsProgress / 100, { style: 'percent' })}
           </Text>
         </Flex>
-        <SliderWithFilledTrack w="100%" minW={194} maxW={232} value={userKeyResultsProgress} />
+        <SliderWithFilledTrack w="100%" minW={194} value={userKeyResultsProgress} />
         <Flex alignItems="center" maxW={194}>
           <UpdateIcon
             isOutdated={latestCheckIn && isOutdatedCheckins ? isOutdatedCheckins : true}
@@ -64,7 +75,7 @@ const KeyResultsOverview = ({
             prefix={intl.formatMessage(prefixMessage)}
           />
         </Flex>
-      </VStack>
+      </CustomVStack>
       <PercentageProgressIncreaseTag
         forcePositiveSignal
         showSignalArrow
