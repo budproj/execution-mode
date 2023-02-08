@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type teamIndicatorsTableMessages = 'checkinColumnIconDesc' | 'checklistColumnIconDesc'
+type teamIndicatorsTableMessages =
+  | 'checkinColumnIconDesc'
+  | 'checklistColumnIconDesc'
+  | 'neverAccessed'
 
 export default defineMessages<teamIndicatorsTableMessages>({
   checkinColumnIconDesc: {
@@ -16,5 +19,11 @@ export default defineMessages<teamIndicatorsTableMessages>({
     id: 'hUA7Fo',
     description:
       'A checklist icon that appears next to a user checklist column in a team indicators table',
+  },
+
+  neverAccessed: {
+    defaultMessage: 'Nenhum acesso',
+    id: 'axEJFy',
+    description: 'This message appears if the user never accessed the Bud.',
   },
 })

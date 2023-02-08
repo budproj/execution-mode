@@ -799,6 +799,10 @@
     "defaultMessage": "100%",
     "description": "This message is displayed inside our key-result format select as the example of the percent format"
   },
+  "axEJFy": {
+    "defaultMessage": "Never accessed",
+    "description": "This message appears if the user never accessed the Bud."
+  },
   "az3ncM": {
     "defaultMessage": "Warning!{breakline}This action cannot be undone.",
     "description": "This message is used as the title in our second dialog while removing a cycle"
@@ -3744,7 +3748,7 @@
     "description": "This message is displayed inside the empty state on last retrospective overview"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2023-01-30T14:46:56Z",
+    "defaultMessage": "2023-02-08T14:19:23Z",
     "description": ""
   }
 }
