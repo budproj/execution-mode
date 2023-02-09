@@ -98,7 +98,7 @@ const HistoryAnswers = ({ answers, isLoaded }: HistoryAnswersProperties) => {
             w={280}
             top={6}
             border="2px solid"
-            bg="new-gray.400"
+            color="new-gray.400"
             left={0}
             zIndex={2}
           />
