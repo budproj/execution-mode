@@ -219,6 +219,10 @@
     "defaultMessage": "Pending tasks",
     "description": "Label for pending tasks selector item"
   },
+  "1IedeB": {
+    "defaultMessage": "A checklist icon that appears next to a user checkin column in a team indicators table",
+    "description": "A checklist icon that appears next to a user checkin column in a team indicators table"
+  },
   "1lccXL": {
     "defaultMessage": "This question is required!",
     "description": "This message appears to indicate that a required question has not been answered."
@@ -667,6 +671,10 @@
     "defaultMessage": "Write {keyword} to confirm the deletion",
     "description": "This message appears as a placeholder on the input in the danger confirmation modal while deleting a given resource"
   },
+  "9Ni88b": {
+    "defaultMessage": "Icon that is presented as the title of the component that presents the Indicators of a team.",
+    "description": "This message is the description of an icon that is presented as the title of the component that presents the Indicators of a team."
+  },
   "9O5Xaa": {
     "defaultMessage": "Your team doesn't have annual OKRs",
     "description": "Message to show when there are no summary results"
@@ -791,6 +799,10 @@
     "defaultMessage": "100%",
     "description": "This message is displayed inside our key-result format select as the example of the percent format"
   },
+  "axEJFy": {
+    "defaultMessage": "Never accessed",
+    "description": "This message appears if the user never accessed the Bud."
+  },
   "az3ncM": {
     "defaultMessage": "Warning!{breakline}This action cannot be undone.",
     "description": "This message is used as the title in our second dialog while removing a cycle"
@@ -890,6 +902,10 @@
   "bZYEAl": {
     "defaultMessage": "A subtraction sign within a circle indicating that progress is still the same",
     "description": "This desc message explains the neutral icon for screen readers"
+  },
+  "C+pEn4": {
+    "defaultMessage": "User",
+    "description": "The title of the user column"
   },
   "C6YmFo": {
     "defaultMessage": "Tips on writing a good key result:",
@@ -994,6 +1010,10 @@
   "Cu5tci": {
     "defaultMessage": "If you want, you can include a description to help your colleagues understand why this key result is important and how you plan on achieving it.",
     "description": "This message is displayed as the placeholder for our second input in our key-result drawer"
+  },
+  "cVQ/Xo": {
+    "defaultMessage": "Team",
+    "description": "The title of the team column"
   },
   "CW+HBw": {
     "defaultMessage": "Check-in",
@@ -1150,6 +1170,10 @@
   "eJH8kc": {
     "defaultMessage": "Pause icon representing the amount of locks the company has.",
     "description": "The description of the with barrier icon"
+  },
+  "EJLLb9": {
+    "defaultMessage": "",
+    "description": ""
   },
   "EkoIl2": {
     "defaultMessage": "Create new subteam",
@@ -1375,6 +1399,10 @@
     "defaultMessage": "Deactivate account",
     "description": "This message is the description of the option to deactivate a user account."
   },
+  "GlsTIu": {
+    "defaultMessage": "{hasBlock, select, y {Yes} n {No} other {}}",
+    "description": "This message appears as a label on the icon representing the user lock status in the last retrospective."
+  },
   "gm1hfm": {
     "defaultMessage": "Progress of this objective so far this week",
     "description": "This tooltip explains regarding our progress tag"
@@ -1398,6 +1426,10 @@
   "goSPM7": {
     "defaultMessage": "You deleted a {type}",
     "description": "This text is displayed as the alert title, explaining what resource the user removed"
+  },
+  "gpJ3OX": {
+    "defaultMessage": "Understand the engagement and progress of this team members on Bud",
+    "description": "This message is the subtitle of the component that presents the Indicators of a team."
   },
   "GqZyEx": {
     "defaultMessage": "BY TEAM",
@@ -1507,6 +1539,10 @@
     "defaultMessage": "Check out our OKR examples",
     "description": "This is a external link that goes to OKR examples made by Bud."
   },
+  "HGE7UV": {
+    "defaultMessage": "{columnAccessor, select, userKeyResultsOverview {OKRs progress} lastAccess {Last access} checkin {Check-in} checklist {Check-list} lastRetrospectiveAnswer {Routine} other {}}",
+    "description": "This message appears in the header of each column of a Team Indicators table."
+  },
   "hhH9fH": {
     "defaultMessage": "First user's job title",
     "description": "The user role while creating a new workspace"
@@ -1562,6 +1598,10 @@
   "HsEMwj": {
     "defaultMessage": "Long right arrow separating previous progress (on the left) from new update (on the right)",
     "description": "This text is displayed to screen readers, explaining the right arrow icon in our check-in card"
+  },
+  "hUA7Fo": {
+    "defaultMessage": "A checklist icon that appears next to a user checklist column in a team indicators table",
+    "description": "A checklist icon that appears next to a user checklist column in a team indicators table"
   },
   "huUzRi": {
     "defaultMessage": "custom emoji with apathetic expression",
@@ -1947,6 +1987,10 @@
     "defaultMessage": "You have no check-ins pending because you don't have any key results.",
     "description": "The page description that is displayed if the user has no key result in the check in notifications tab."
   },
+  "ktxOrA": {
+    "defaultMessage": "Last routine",
+    "description": "The title of the last routine column"
+  },
   "kXNgkQ": {
     "defaultMessage": "Progress",
     "description": "The text of the table head related to the Progress column"
@@ -2199,6 +2243,10 @@
     "defaultMessage": "Write about {isMyUser, select, true {you} other {{firstName}}}",
     "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
   },
+  "n6hyQa": {
+    "defaultMessage": "Last access",
+    "description": "The title in the last access column"
+  },
   "N70n39": {
     "defaultMessage": "Individual progress based on the average of the key results in the current quarter",
     "description": "Quarterly progress chart tooltip message"
@@ -2379,6 +2427,10 @@
     "defaultMessage": "No OKRs have been created in this Individual Plan yet",
     "description": "This message is displayed as the empty state message inside the User page"
   },
+  "oWLFIj": {
+    "defaultMessage": "Team Overview",
+    "description": "This message is the title of the component that presents the Indicators of a team."
+  },
   "OwWiN7": {
     "defaultMessage": "Create new user",
     "description": "This message appears as an option in the team page while adding a new user"
@@ -2498,6 +2550,10 @@
   "Q+5Uuc": {
     "defaultMessage": "Portuguese",
     "description": "This is the name of the portuguese language while we are creating a new user"
+  },
+  "Q+b5ro": {
+    "defaultMessage": "Team indicators",
+    "description": "This message is the title of the Indicators section within a team page."
   },
   "Q2diI+": {
     "defaultMessage": "Floater icon. By clicking on it you will be directed to our support page",
@@ -3475,6 +3531,10 @@
     "defaultMessage": "Individual Plan",
     "description": "Individual OKR title on the navigation tab"
   },
+  "Yc4eh9": {
+    "defaultMessage": "Today",
+    "description": "This message appears if the user last access is today."
+  },
   "YETxgV": {
     "defaultMessage": "In OKRs, the general rule is to aim for a progress of at least 70%. To achieve this by the end of the cycle, the current progress is expected to be at {progress}%.",
     "description": "Tooltip message to show when hovering the help icon on projected progress"
@@ -3683,8 +3743,12 @@
     "defaultMessage": "Pizza chart icon",
     "description": "The desc message for the Graph icon. This icon is used to ilustrate our key results"
   },
+  "ZZ+KxU": {
+    "defaultMessage": "No answer",
+    "description": "This message is displayed inside the empty state on last retrospective overview"
+  },
   "texterify_timestamp": {
-    "defaultMessage": "2022-12-13T18:40:15Z",
+    "defaultMessage": "2023-02-08T14:19:23Z",
     "description": ""
   }
 }

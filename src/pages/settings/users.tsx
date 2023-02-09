@@ -20,11 +20,7 @@ const SettingsUsersIndex = () => {
     },
   })
 
-  return (
-    permissions?.cycle?.update === GraphQLEffect.ALLOW && (
-      <SettingsPage path={SETTINGS_PATHS.USERS} permissions={permissions} />
-    )
-  )
+  return <SettingsPage path={SETTINGS_PATHS.USERS} permissions={permissions} />
 }
 
 export default SettingsUsersIndex

@@ -10,6 +10,11 @@ import { CreatedKeyResultCommentData } from './events/created-key-result-comment
 import { CreatedPersonalTaskEventData } from './events/created-personal-task'
 import { DeletedKeyResultCheckMarkEventData } from './events/deleted-key-result-check-mark'
 import { DeletedPersonalTaskEventData } from './events/deleted-personal-task'
+import { IndicatorAccordionButtonClickData } from './events/indicator-accordion-button-click-data'
+import { IndicatorCheckListClickData } from './events/indicator-check-list-click-data'
+import { IndicatorProgressClickData } from './events/indicator-progress-click-data'
+import { IndicatorReportDownloadClickData } from './events/indicator-report-download-click-data'
+import { IndicatorRoutineClickData } from './events/indicator-routine-click-data'
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
 import { LearnMoreBannerNoticesClickData } from './events/learn-more-banner-notices-click-data'
@@ -83,4 +88,9 @@ export type Event = {
   [EventType.CONFIDENCE_HIGHLIGHT_CLICK]: TeamHighlightClickData
   [EventType.KRMEMBERS_HIGHLIGHT_CLICK]: TeamHighlightClickData
   [EventType.BARRIER_HIGHLIGHT_CLICK]: TeamHighlightClickData
+  [EventType.INDICATORS_ACCORDION_BUTTON_CLICK]: IndicatorAccordionButtonClickData
+  [EventType.INDICATORS_CHECKLIST_CLICK]: IndicatorCheckListClickData
+  [EventType.INDICATORS_PROGRESS_CLICK]: IndicatorProgressClickData
+  [EventType.INDICATORS_ROUTINE_CLICK]: IndicatorRoutineClickData
+  [EventType.INDICATORS_REPORT_DOWNLOAD_CLICK]: IndicatorReportDownloadClickData
 }
