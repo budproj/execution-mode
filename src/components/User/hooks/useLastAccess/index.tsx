@@ -1,0 +1,64 @@
+import { useLazyQuery } from '@apollo/client'
+import differenceInDays from 'date-fns/differenceInDays'
+import format from 'date-fns/format'
+import formatDistance from 'date-fns/formatDistance'
+import enUS from 'date-fns/locale/en-US'
+import ptBR from 'date-fns/locale/pt-BR'
+import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
+
+import queries from 'src/components/User/Create/Form/queries.gql'
+
+import messages from './messages'
+
+const userLanguage = new Map([
+  ['pt-BR', ptBR],
+  ['en-US', enUS],
+])
+
+export const useGetLastAccess = (userId: string, lastAccess?: string) => {
+  const intl = useIntl()
+  const [userLocale, setUserLocale] = useState(userLanguage.get('pt-BR'))
+
+  const [getCurrentLocale, { loading: isGetUserLocaleLoading }] = useLazyQuery(
+    queries.GET_USER_LOCALE,
+    {
+      variables: {
+        userID: userId,
+      },
+      onCompleted: (data) => {
+        const locale = data.user.settings.edges[0]?.node.value
+        if (locale) setUserLocale(userLanguage.get(locale))
+      },
+    },
+  )
+
+  useEffect(() => {
+    if (userId) void getCurrentLocale()
+  }, [userId, getCurrentLocale])
+
+  const sinceDayLastAccess = () => {
+    if (lastAccess && !isGetUserLocaleLoading) {
+      const difference = differenceInDays(new Date(`${lastAccess}T00:00`), new Date())
+      if (difference === 0) {
+        return intl.formatMessage(messages.todayLastAccess)
+      }
+
+      const formatedDistance = formatDistance(new Date(`${lastAccess}T00:00`), new Date(), {
+        addSuffix: true,
+        locale: userLocale,
+      })
+
+      return formatedDistance.charAt(0).toUpperCase() + formatedDistance.slice(1)
+    }
+  }
+
+  const lastAccessSubtext = () => {
+    if (lastAccess) {
+      const date = new Date(`${lastAccess}T00:00`)
+      return format(date, 'dd/MM/yyyy')
+    }
+  }
+
+  return { sinceDayLastAccess, lastAccessSubtext }
+}

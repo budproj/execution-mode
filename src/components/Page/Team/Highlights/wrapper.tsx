@@ -9,6 +9,8 @@ interface TeamMembersWrapperProperties {
   isLoading?: boolean
 }
 
-export const TeamHighlightsWrapper = ({ teamID, isLoading }: TeamMembersWrapperProperties) => {
+const TeamHighlightsWrapper = ({ teamID, isLoading }: TeamMembersWrapperProperties) => {
   return <Highlights teamId={teamID} isLoading={isLoading} />
 }
+
+export default TeamHighlightsWrapper

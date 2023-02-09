@@ -26,6 +26,41 @@ export interface AuthzRole {
   name: string
   description?: string
 }
+
+export type keyResultsProgress = {
+  progress: number
+  delta: {
+    progress: number
+    confidence: number
+  }
+  latestCheckIn: {
+    createdAt: string
+  }
+}
+
+export type userIndicators = {
+  keyResultsProgress: keyResultsProgress
+  keyResultsCheckInProgress: {
+    checked: number
+    total: number
+  }
+  keyResultsCheckListProgress: {
+    checked: number
+    total: number
+  }
+}
+
+type retrospectiveAnswer = {
+  questionId: string
+  answerGroupId: string
+  value: string
+}
+
+export type lastRetrospectiveAnswer = {
+  id: string
+  userId: string
+  answers: retrospectiveAnswer[]
+}
 export interface User extends GraphQLNode {
   firstName: string
   fullName: string
@@ -50,6 +85,8 @@ export interface User extends GraphQLNode {
   objectives?: GraphQLConnection<Objective>
   keyResults?: GraphQLConnection<KeyResult>
   keyResultCheckIns?: GraphQLConnection<KeyResult>
+  userIndicators?: userIndicators
+  lastRoutine?: lastRetrospectiveAnswer
 }
 
 export interface UserProgress {
