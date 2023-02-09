@@ -6,6 +6,8 @@ import { Column } from 'react-table'
 import { useRecoilValue } from 'recoil'
 
 import TableBase from 'src/components/Base/Table'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { teamIndicatorsTableData } from 'src/state/recoil/team/indicators/team-indicators-table-data'
 
 import {
@@ -24,6 +26,14 @@ interface IndicatorsTableProperties {
 }
 
 const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
+  const { dispatch: dispatchIndicatorsProgressClick } = useEvent(
+    EventType.INDICATORS_PROGRESS_CLICK,
+  )
+  const { dispatch: dispatchIndicatorsCheckListClick } = useEvent(
+    EventType.INDICATORS_CHECKLIST_CLICK,
+  )
+  const { dispatch: dispatchIndicatorsRoutineClick } = useEvent(EventType.INDICATORS_ROUTINE_CLICK)
+
   const intl = useIntl()
   const tableData = useRecoilValue(teamIndicatorsTableData)
 
@@ -43,6 +53,7 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
           progress={value.progress}
           latestCheckIn={value.latestCheckIn}
           delta={value.delta}
+          onClick={() => dispatchIndicatorsProgressClick({})}
         />
       ),
     },
@@ -50,7 +61,11 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
       Header: columnHeaderTitle('lastAccess'),
       accessor: 'lastAccess',
       Cell: ({ cell: { value } }) => (
-        <UserLastAccessColumn isLoaded={!loading} userId={value.userId} />
+        <UserLastAccessColumn
+          isLoaded={!loading}
+          userId={value.userId}
+          lastDateAccess={value.lastDateAccess}
+        />
       ),
     },
     {
@@ -59,7 +74,6 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
       Cell: ({ cell: { value } }) => (
         <UserKeyResultsCheckinsColumn
           isLoaded={!loading}
-          userId={value.userId}
           totalOfDoneCheckIns={value.totalOfDoneCheckIns}
           totalOfKeyResultsThatNeedsCheckIn={value.totalOfKeyResultsThatNeedsCheckIn}
         />
@@ -74,6 +88,7 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
           isLoaded={!loading}
           checked={value.checked}
           total={value.total}
+          onClick={() => dispatchIndicatorsCheckListClick({})}
         />
       ),
     },
@@ -81,7 +96,15 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
       Header: columnHeaderTitle('lastRetrospectiveAnswer'),
       accessor: 'lastRetrospectiveAnswer',
       Cell: ({ cell: { value } }) => (
-        <LastRetrospectiveAnswerColumn isLoaded={!loading} userId={value.userId} />
+        <LastRetrospectiveAnswerColumn
+          isLoaded={!loading}
+          userId={value.userId}
+          lastRetrospetiveAnswerId={value.lastRetrospetiveAnswerId}
+          feeling={value.feeling}
+          productity={value.productity}
+          roadblock={value.roadblock}
+          onClick={() => dispatchIndicatorsRoutineClick({})}
+        />
       ),
     },
   ]

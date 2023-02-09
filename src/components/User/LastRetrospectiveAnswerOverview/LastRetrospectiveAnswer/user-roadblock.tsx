@@ -6,11 +6,10 @@ import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { PauseIcon } from 'src/components/Icon'
 import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/modals/UsersTeamList/messages'
 
-import { UserRetrospectiveAnswerOverviewDataProperties } from '../hooks/use-get-last-retrospective-answer-overview'
 import messages from '../messages'
 
 interface UserRoadblockProperties {
-  roadblock: UserRetrospectiveAnswerOverviewDataProperties['roadBlock']
+  roadblock?: string
 }
 
 const UserRoadblock = ({ roadblock }: UserRoadblockProperties) => {

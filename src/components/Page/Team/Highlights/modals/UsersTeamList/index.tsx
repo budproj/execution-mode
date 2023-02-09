@@ -1,6 +1,4 @@
 import { Avatar, Box, Flex, Grid, GridItem, Text, Tag, HStack } from '@chakra-ui/react'
-import { differenceInDays, formatDistance, format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -10,6 +8,7 @@ import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
+import LastAccess from 'src/components/Team/IndicatorsTable/Columns/last-access'
 import { useGetUserDetails } from 'src/components/User/hooks'
 
 import { CARD_TYPES } from '../../utils/card-types'
@@ -31,6 +30,7 @@ export interface UserRoutineDataProperties {
 export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
+  const [loaded, setIsLoaded] = useState<boolean>()
   const { servicesPromise } = useContext(ServicesContext)
 
   const { data: user } = useGetUserDetails(userId)
@@ -40,6 +40,7 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
     async function getUserRoutineData() {
       const { routines } = await servicesPromise
       try {
+        setIsLoaded(false)
         const { data: routineData } = await routines.get<UserRoutineDataProperties>(
           `/answers/overview/user/${userId}`,
         )
@@ -47,6 +48,8 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
         if (routineData) setUserRoutineData(routineData)
       } catch (error: unknown) {
         console.warn({ routine_or_amplitude_server_warning: error })
+      } finally {
+        setIsLoaded(true)
       }
     }
 
@@ -102,31 +105,6 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
           />
         </Box>
       )
-    }
-  }
-
-  const userLastAccessDate = user?.amplitude?.last_used ?? ''
-
-  const sinceDayLastAccess = () => {
-    if (userLastAccessDate) {
-      const difference = differenceInDays(new Date(`${userLastAccessDate}T00:00`), new Date())
-      if (difference === 0) {
-        return intl.formatMessage(messages.todayLastAccess)
-      }
-
-      const formatedDistance = formatDistance(new Date(`${userLastAccessDate}T00:00`), new Date(), {
-        addSuffix: true,
-        locale: ptBR,
-      })
-
-      return formatedDistance.charAt(0).toUpperCase() + formatedDistance.slice(1)
-    }
-  }
-
-  const lastAccessSubtext = () => {
-    if (userLastAccessDate) {
-      const date = new Date(`${userLastAccessDate}T00:00`)
-      return format(date, 'dd/MM/yyyy')
     }
   }
 
@@ -286,22 +264,14 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
           <LastRetrospectiveEmptyState />
         )}
       </GridItem>
-      <GridItem
-        display="flex"
-        color="new-gray.800"
-        fontWeight="500"
-        fontSize="12px"
-        flexDirection="column"
-        gap="1px"
+
+      <LastAccess
+        isLoaded={loaded}
+        userId={userId}
+        lastDateAccess={user?.amplitude?.last_used}
         alignItems="center"
-      >
-        <Box>
-          <Text fontWeight="500">{sinceDayLastAccess()}</Text>
-          <Text color="new-gray.600" fontWeight="400">
-            {lastAccessSubtext()}
-          </Text>
-        </Box>
-      </GridItem>
+        justifyContent="center"
+      />
     </Grid>
   )
 }

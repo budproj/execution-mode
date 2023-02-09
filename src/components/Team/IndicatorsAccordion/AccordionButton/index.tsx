@@ -3,11 +3,15 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { OpacityTeamIcon } from 'src/components/Icon'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import messages from './messages'
 
 const IndicatorsAccordionButton = () => {
   const intl = useIntl()
+
+  const { dispatch } = useEvent(EventType.INDICATORS_ACCORDION_BUTTON_CLICK)
 
   return (
     <AccordionButton
@@ -17,6 +21,7 @@ const IndicatorsAccordionButton = () => {
       _hover={{}}
       _focus={{ boxShadow: 'none' }}
       justifyContent="space-between"
+      onClick={() => dispatch({})}
     >
       <Flex gap={4}>
         <OpacityTeamIcon desc={intl.formatMessage(messages.icon)} stroke="none" />

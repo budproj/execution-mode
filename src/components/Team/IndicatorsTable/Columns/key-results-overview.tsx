@@ -13,6 +13,7 @@ const KeyResultOverview = ({
   latestCheckIn,
   isLoaded,
   progress,
+  onClick,
 }: KeyResultsOverviewColumnProperties) => {
   return (
     <IntlLink href={`/profile/${userId}`}>
@@ -22,6 +23,7 @@ const KeyResultOverview = ({
         isLoaded={isLoaded}
         latestCheckIn={latestCheckIn}
         progress={progress}
+        onClick={onClick}
       />
     </IntlLink>
   )
