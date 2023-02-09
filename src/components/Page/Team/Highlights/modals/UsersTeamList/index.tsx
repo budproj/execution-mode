@@ -1,6 +1,4 @@
 import { Avatar, Box, Flex, Grid, GridItem, Text, Tag, HStack } from '@chakra-ui/react'
-import { differenceInDays, formatDistance, format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 import Link from 'next/link'
 import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -107,31 +105,6 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
           />
         </Box>
       )
-    }
-  }
-
-  const userLastAccessDate = user?.amplitude?.last_used ?? ''
-
-  const sinceDayLastAccess = () => {
-    if (userLastAccessDate) {
-      const difference = differenceInDays(new Date(`${userLastAccessDate}T00:00`), new Date())
-      if (difference === 0) {
-        return intl.formatMessage(messages.todayLastAccess)
-      }
-
-      const formatedDistance = formatDistance(new Date(`${userLastAccessDate}T00:00`), new Date(), {
-        addSuffix: true,
-        locale: ptBR,
-      })
-
-      return formatedDistance.charAt(0).toUpperCase() + formatedDistance.slice(1)
-    }
-  }
-
-  const lastAccessSubtext = () => {
-    if (userLastAccessDate) {
-      const date = new Date(`${userLastAccessDate}T00:00`)
-      return format(date, 'dd/MM/yyyy')
     }
   }
 
