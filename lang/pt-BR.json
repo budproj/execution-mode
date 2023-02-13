@@ -2735,6 +2735,10 @@
     "defaultMessage": "Anual",
     "description": "This option makes an cycle with yearly cadence"
   },
+  "on7/f2": {
+    "defaultMessage": "Lista contendo todos os membros de seu time organizados onde, os que necessitam de mais apoio da liderança no topo, e os que estão dentro da normalidade para o fim.",
+    "description": "This message appears in a tootip that explain the feature to user."
+  },
   "ooNWJL": {
     "defaultMessage": "Adicionar Time de Apoio",
     "description": "The label text for the add button icon in our key result single page or drawers"

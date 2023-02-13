@@ -14,7 +14,6 @@ import { CSVIndicatorsData } from 'src/state/recoil/team/indicators/csv-indicato
 import { TeamSectionHeading } from '../../Section/SectionHeading/wrapper'
 import { useGetTeamCSVData } from '../hooks/get-team-indicators'
 
-import CSVDownloadListOptions from './ReportListOptions'
 import messages from './messages'
 
 interface IndicatorsDownloadCSVProperties {
@@ -112,7 +111,6 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
       </Flex>
 
       <Box w="full" overflowY="hidden" display="flex" gap={4}>
-        <CSVDownloadListOptions />
         {csvData.length > 0 && !loading && <CSVDownload data={csvData} headers={headers} />}
         <Button
           bg="brand.500"
