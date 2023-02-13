@@ -125,7 +125,9 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
           leftIcon={<DownloadIcon desc="asda" />}
           onClick={async () => fetchTeamIndicators()}
         >
-          {intl.formatMessage(messages.downloadReportCSVButtonMessage)}
+          {loading
+            ? intl.formatMessage(messages.isLoadingDownloadButtonText)
+            : intl.formatMessage(messages.downloadReportCSVButtonMessage)}
         </Button>
       </Box>
     </Stack>

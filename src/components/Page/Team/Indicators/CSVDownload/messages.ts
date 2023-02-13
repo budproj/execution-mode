@@ -19,6 +19,7 @@ type TeamIndicatorsReportDownloadMessages =
   | 'noRoutineAnswerMessage'
   | 'noCheckInMessage'
   | 'noAccessMessage'
+  | 'isLoadingDownloadButtonText'
 
 export default defineMessages<TeamIndicatorsReportDownloadMessages>({
   teamIndicatorsReportDownloadSectionTitle: {
@@ -124,5 +125,11 @@ export default defineMessages<TeamIndicatorsReportDownloadMessages>({
     defaultMessage: 'Sem acesso',
     id: '2vOg9s',
     description: "The message returned if the user didn't access Bud yet.",
+  },
+
+  isLoadingDownloadButtonText: {
+    defaultMessage: 'Carregando...',
+    id: 'Du7aqJ',
+    description: 'The message in the download button when the CSV is loading',
   },
 })
