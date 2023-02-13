@@ -144,7 +144,7 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
         {intl.formatMessage(messages.byTeamMetricRowTitle)}
       </Text>
       <Divider />
-      <ScrollableItem maxHeight="185px">
+      <ScrollableItem maxHeight="185px" p="0 12px">
         {teams.map((team) => (
           <MetricTeamRow key={team.id} team={team} />
         ))}

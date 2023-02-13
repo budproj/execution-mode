@@ -9,11 +9,12 @@ import {
   Spinner,
   StyleProps,
 } from '@chakra-ui/react'
-import Scrollbars from 'rc-scrollbars'
 import React, { ReactElement, ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 
 import ChevronDownIcon from 'src/components/Icon/ChevronDown'
+
+import { getScrollableItem } from '../ScrollableItem'
 
 import messages from './messages'
 
@@ -62,6 +63,7 @@ const SelectMenu = ({
   ...rest
 }: SelectMenuProperties) => {
   const intl = useIntl()
+  const ScrollableItem = getScrollableItem()
   const open = !isDisabled && isOpen
 
   placeholder ??= intl.formatMessage(messages.defaultPlaceholder)
@@ -122,11 +124,11 @@ const SelectMenu = ({
         zIndex={999}
       >
         {scroolable ? (
-          <Scrollbars autoHeight>
+          <ScrollableItem autoHeight>
             <MenuOptionGroup value={value} type="radio" onChange={onChange}>
               {children}
             </MenuOptionGroup>
-          </Scrollbars>
+          </ScrollableItem>
         ) : (
           <MenuOptionGroup value={value} type="radio" onChange={onChange}>
             {children}

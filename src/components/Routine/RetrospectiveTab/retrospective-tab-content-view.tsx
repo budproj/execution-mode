@@ -110,7 +110,7 @@ const RetrospectiveTabContentView = ({
           </Flex>
         </>
       )}
-      <ScrollableItem maxH="750px">
+      <ScrollableItem maxH="750px" p="0 12px">
         {answerId && answerDetailed.answers.length > 0 ? (
           <div id="comments-list">
             <AnswerContent answerId={answerId} isLoaded={isLoaded && isUserDetailedLoaded} />
