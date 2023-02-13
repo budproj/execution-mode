@@ -57,7 +57,7 @@ export const UserList = ({
   return (
     <>
       <Box ref={cardReference} />
-      <ScrollableItem autoHeight>
+      <ScrollableItem maxH={210}>
         <Stack spacing={4}>
           {isLoading ? (
             <UserListSkeleton />

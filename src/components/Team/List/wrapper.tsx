@@ -17,7 +17,7 @@ export const TeamList = ({ teams, isLoading }: TeamListProperties) => {
   const ScrollableItem = getScrollableItem()
 
   return (
-    <ScrollableItem autoHeight>
+    <ScrollableItem maxH={200}>
       <Stack spacing={8} p={3}>
         {isLoading ? (
           <TeamListSkeleton />
