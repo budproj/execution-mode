@@ -8,7 +8,6 @@ import { Team } from 'src/components/Team/types'
 
 import { TeamSectionHeading } from '../../Section/SectionHeading/wrapper'
 
-import CSVDownloadListOptions from './ReportListOptions'
 import messages from './messages'
 
 interface IndicatorsDownloadCSVProperties {
@@ -30,7 +29,6 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
       </Flex>
 
       <Box w="full" overflowY="hidden" display="flex" gap={4}>
-        <CSVDownloadListOptions />
         <Button
           bg="brand.500"
           color="black.50"
