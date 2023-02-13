@@ -1,0 +1,48 @@
+query GET_TEAM_INDICATORS($teamId: ID!,$allUsers: Boolean) {
+  team(id: $teamId) {
+    users(withIndicators: true, allUsers: $allUsers) {
+      edges {
+        node {
+          id
+          fullName
+          keyResults {
+            edges {
+              node {
+                checkList {
+                  edges {
+                    node {
+                      description
+                    }
+                  }
+                }
+                title
+                status {
+                  latestCheckIn {
+                    createdAt
+                  }
+                  confidence
+                  progress
+                }
+                delta {
+                  progress
+                }
+              }
+            }
+          }
+          amplitude {
+            last_used
+          }
+          lastRoutine {
+            id
+            userId
+            answers {
+              questionId
+              answerGroupId
+              value
+            }
+          }
+        }
+      }
+    }
+  }
+}
