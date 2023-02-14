@@ -5,7 +5,7 @@ query GET_TEAM_INDICATORS($teamId: ID!,$allUsers: Boolean) {
         node {
           id
           fullName
-          keyResults(onlyKeyResultsFromCompany: true ) {
+          keyResults(onlyKeyResultsFromCompany: true, onlyOwnerKeyResults: true) {
             edges {
               node {
                 checkList {
