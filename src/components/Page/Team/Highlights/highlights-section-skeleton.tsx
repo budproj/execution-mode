@@ -20,9 +20,11 @@ const HighlightsSectionSkeleton = ({
 
   return (
     <VStack>
-      <Text w="100%" fontSize={14} color="new-gray.800" fontWeight="medium">
-        {title}
-      </Text>
+      <Skeleton isLoaded={false}>
+        <Text w="100%" fontSize={14} color="new-gray.800" fontWeight="medium">
+          {title}
+        </Text>
+      </Skeleton>
       <Grid gap={3} w="100%" templateColumns={gridTemplate}>
         {mockedArray.map((_) => (
           <Skeleton key={Math.random()} isLoaded={false}>

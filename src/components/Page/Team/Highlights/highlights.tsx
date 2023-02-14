@@ -29,7 +29,7 @@ export const Highlights = ({ teamId, isLoading }: HighlightsProperties) => {
   const intl = useIntl()
   const [teamHighlights, setTeamHighlights] = useState<HightlightCard[]>([])
 
-  const [routineFlags, setRoutineFlags] = useState<HighlightCard[]>()
+  const [routineFlags, setRoutineFlags] = useState<HighlightCard[]>([])
   const { servicesPromise } = useContext(ServicesContext)
 
   const { loading: krsHighlightsLoading } = useQuery<KeyResultsHighlights>(
@@ -68,11 +68,13 @@ export const Highlights = ({ teamId, isLoading }: HighlightsProperties) => {
             title={intl.formatMessage(messages.teamMembersHighlightTitleSection)}
           />
         ) : (
-          <HighlightSection
-            title={intl.formatMessage(messages.teamMembersHighlightTitleSection)}
-            gridTemplate="1fr 1fr 1fr"
-            data={routineFlags}
-          />
+          routineFlags.length > 0 && (
+            <HighlightSection
+              title={intl.formatMessage(messages.teamMembersHighlightTitleSection)}
+              gridTemplate="1fr 1fr 1fr"
+              data={routineFlags}
+            />
+          )
         )}
 
         {dataLoading ? (
