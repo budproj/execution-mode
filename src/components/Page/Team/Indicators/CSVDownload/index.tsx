@@ -111,7 +111,9 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
       </Flex>
 
       <Box w="full" overflowY="hidden" display="flex" gap={4}>
-        {csvData.length > 0 && !loading && <CSVDownload data={csvData} headers={headers} />}
+        {csvData.length > 0 && !loading && (
+          <CSVDownload separator=";" data={csvData} headers={headers} />
+        )}
         <Button
           bg="brand.500"
           color="black.50"
