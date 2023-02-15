@@ -2,9 +2,7 @@ import { LazyQueryExecFunction, OperationVariables, useLazyQuery } from '@apollo
 import { useSetRecoilState } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
-import { teamIndicatorsTableData } from 'src/state/recoil/team/indicators/team-indicators-table-data'
-
-import { teamIndicatorsDataMapper } from '../../utils/data-mappers'
+import { CSVIndicatorsData } from 'src/state/recoil/team/indicators/csv-indicators-data'
 
 import GET_TEAM_INDICATORS from './get-team-indicators.gql'
 
@@ -17,11 +15,8 @@ interface GetUserListProperties {
   fetchTeamIndicators: LazyQueryExecFunction<getTeamIndicatorsQuery, OperationVariables>
 }
 
-export const useGetTeamIndicators = (
-  teamId: Team['id'],
-  allUsers = false,
-): GetUserListProperties => {
-  const setTeamIndicators = useSetRecoilState(teamIndicatorsTableData)
+export const useGetTeamCSVData = (teamId: Team['id'], allUsers = false): GetUserListProperties => {
+  const setCSVIndicatorData = useSetRecoilState(CSVIndicatorsData)
 
   const [fetchTeamIndicators, { loading }] = useLazyQuery<getTeamIndicatorsQuery>(
     GET_TEAM_INDICATORS,
@@ -33,10 +28,8 @@ export const useGetTeamIndicators = (
       },
       onCompleted: (data) => {
         const teamUsers = data.team?.users?.edges.map((user) => user.node)
-
         if (teamUsers) {
-          const mappedTeamIndicatorsData = teamIndicatorsDataMapper.toFront(teamUsers)
-          setTeamIndicators(mappedTeamIndicatorsData)
+          setCSVIndicatorData(teamUsers)
         }
       },
     },
