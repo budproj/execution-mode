@@ -64,11 +64,7 @@ export const Highlights = ({ teamId, isLoading }: HighlightsProperties) => {
     <TeamSectionWrapper title={intl.formatMessage(messages.title)} overflowY="visible">
       <Stack spacing={6}>
         {dataLoading ? (
-          <HighlightsSectionSkeleton
-            dataLenght={3}
-            gridTemplate="1fr 1fr 1fr"
-            title={intl.formatMessage(messages.teamMembersHighlightTitleSection)}
-          />
+          <HighlightsSectionSkeleton dataLenght={3} gridTemplate="1fr 1fr 1fr" />
         ) : (
           routineFlags && (
             <HighlightSection
@@ -80,11 +76,7 @@ export const Highlights = ({ teamId, isLoading }: HighlightsProperties) => {
         )}
 
         {dataLoading ? (
-          <HighlightsSectionSkeleton
-            dataLenght={4}
-            gridTemplate="1fr 1fr"
-            title={intl.formatMessage(messages.teamKRsHighlightTitleSection)}
-          />
+          <HighlightsSectionSkeleton dataLenght={4} gridTemplate="1fr 1fr" />
         ) : (
           <HighlightSection
             title={intl.formatMessage(messages.teamKRsHighlightTitleSection)}

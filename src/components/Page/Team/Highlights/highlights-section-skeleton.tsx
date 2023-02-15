@@ -4,13 +4,11 @@ import React from 'react'
 interface HighlightsSectionSkeletonProperties {
   gridTemplate: GridProps['templateColumns']
   dataLenght: number
-  title: string
 }
 
 const HighlightsSectionSkeleton = ({
   gridTemplate,
   dataLenght,
-  title,
 }: HighlightsSectionSkeletonProperties) => {
   const mockedArray = []
 
