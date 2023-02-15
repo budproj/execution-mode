@@ -146,7 +146,7 @@ const RoutinesOverview = ({
           }
           numberColor="#4BACF9"
           progressColor="#4BACF9"
-          isLoaded={isLoaded && isRoutineOverviewLoaded}
+          isLoaded={isLoaded}
         />
         {/* <AreaRadialChart
           label="CLAREZA DE ESTRATÉGIA"
