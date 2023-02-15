@@ -61,11 +61,7 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
       Header: columnHeaderTitle('lastAccess'),
       accessor: 'lastAccess',
       Cell: ({ cell: { value } }) => (
-        <UserLastAccessColumn
-          isLoaded={!loading}
-          userId={value.userId}
-          lastDateAccess={value.lastDateAccess}
-        />
+        <UserLastAccessColumn isLoaded={!loading} lastDateAccess={value.lastDateAccess} />
       ),
     },
     {

@@ -7,15 +7,14 @@ import { useGetLastAccess } from 'src/components/User/hooks/useLastAccess'
 import messages from './messages'
 
 export interface LastAccessColumnProperties extends GridItemProps {
-  userId: string
   lastDateAccess?: string
   isLoaded?: boolean
 }
 
-const LastAccess = ({ userId, isLoaded, lastDateAccess, ...rest }: LastAccessColumnProperties) => {
+const LastAccess = ({ isLoaded, lastDateAccess, ...rest }: LastAccessColumnProperties) => {
   const intl = useIntl()
 
-  const { lastAccessSubtext, sinceDayLastAccess } = useGetLastAccess(userId, lastDateAccess)
+  const { lastAccessSubtext, sinceDayLastAccess } = useGetLastAccess(lastDateAccess)
   const isLastAccessLoaded = isLoaded
 
   return (

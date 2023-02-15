@@ -267,7 +267,6 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
 
       <LastAccess
         isLoaded={loaded}
-        userId={userId}
         lastDateAccess={user?.amplitude?.last_used}
         alignItems="center"
         justifyContent="center"
