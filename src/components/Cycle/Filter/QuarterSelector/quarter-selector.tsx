@@ -15,7 +15,6 @@ import queries from './queries.gql'
 export interface CycleFilterQuarterSelectorProperties {
   onQuarterFilter: (cycleIDs: Array<Cycle['id']>) => void
   filteredYearIDs?: Array<Cycle['id']>
-  filteredQuarterIDs?: Array<Cycle['id']>
 }
 
 type QuarterlyCyclesFromFilteredParentsResult = {

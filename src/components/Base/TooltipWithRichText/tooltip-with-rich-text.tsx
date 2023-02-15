@@ -2,17 +2,16 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverProps,
   PopoverContentProps,
   TooltipProps,
   useStyleConfig,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { OPEN_DELAY_IN_MS } from 'src/components/Base/TooltipWithDelay/constants'
 
 export interface TooltipWithRichTextProperties extends TooltipProps {
-  children: PopoverProps['children']
+  children: ReactNode
   tooltip: PopoverContentProps['children']
 }
 

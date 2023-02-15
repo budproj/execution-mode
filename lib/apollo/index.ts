@@ -4,7 +4,6 @@ import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react'
 import { SentryLink } from 'apollo-link-sentry'
 import { createUploadLink } from 'apollo-upload-client'
 import merge from 'deepmerge'
-import { AppProps } from 'next/app'
 import { useMemo } from 'react'
 
 import getConfig from 'src/config'
@@ -84,19 +83,8 @@ export const initializeApollo = (
   return apolloClient
 }
 
-export const addApolloState = (
-  client: ApolloClient<NormalizedCacheObject>,
-  pageProperties: AppProps['pageProps'],
-) => {
-  if (pageProperties?.props) {
-    pageProperties.props[APOLLO_STATE] = client.cache.extract()
-  }
-
-  return pageProperties
-}
-
 export const useApollo = (
-  pageProperties: AppProps['pageProps']['props'],
+  pageProperties: Record<string, NormalizedCacheObject>,
 ): ApolloClient<NormalizedCacheObject> => {
   const authzClient = useAuth0()
   const amplitude = useAmplitude()
@@ -104,6 +92,7 @@ export const useApollo = (
   const state: NormalizedCacheObject = pageProperties[APOLLO_STATE]
   const client = useMemo(
     () => initializeApollo(authzClient, amplitude, state),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [authzClient, state],
   )
 

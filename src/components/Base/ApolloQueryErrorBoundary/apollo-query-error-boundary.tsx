@@ -15,7 +15,7 @@ export enum APOLLO_SERVER_ERROR_CODE {
 }
 
 const ApolloQueryErrorBoundary = ({ children, error }: ApolloQueryErrorBoundaryProperties) => {
-  const errorCodes: string[] =
+  const errorCodes =
     error?.graphQLErrors.map((graphQLError) => graphQLError?.extensions?.code) ?? []
 
   const errorComponents: Record<APOLLO_SERVER_ERROR_CODE, ComponentType> = {

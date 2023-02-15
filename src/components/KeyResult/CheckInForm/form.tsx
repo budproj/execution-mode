@@ -153,7 +153,7 @@ const CheckInForm = ({
             <Flex direction="column" gridGap={4} p={gutter}>
               <Flex gridGap={5}>
                 <CheckInFormFieldValuePrevious keyResultID={keyResultID} />
-                <CheckInFormFieldValueNew keyResultID={keyResultID} isLoading={loading} />
+                <CheckInFormFieldValueNew keyResultID={keyResultID} />
                 {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
               </Flex>
               <CheckInFormFieldConfidence />
