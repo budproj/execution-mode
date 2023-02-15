@@ -3,7 +3,7 @@
 import { Box, Divider, Flex, GridItem, Text } from '@chakra-ui/react'
 import { addMinutes, format, isSameDay, parseISO } from 'date-fns'
 import pt from 'date-fns/locale/pt'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
@@ -58,12 +58,10 @@ const RoutinesOverview = ({
   const intl = useIntl()
   const { getEmoji } = useGetEmoji()
   const { servicesPromise } = useContext(ServicesContext)
-  const [isRoutineOverviewLoaded, setIsRoutinesOverviewLoaded] = useState(false)
   const [answersOverview, setAnswersOverview] = useRecoilState(overviewDataAtom)
 
   const getAnswersOverview = useCallback(async () => {
     const { routines } = await servicesPromise
-    setIsRoutinesOverviewLoaded(false)
     const { data: answersOverview } = await routines.get<OverviewData>(
       `/answers/overview/${teamId}`,
       {
@@ -73,7 +71,6 @@ const RoutinesOverview = ({
 
     if (answersOverview) {
       setAnswersOverview(answersOverview)
-      setIsRoutinesOverviewLoaded(true)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -146,7 +143,7 @@ const RoutinesOverview = ({
           }
           numberColor="#4BACF9"
           progressColor="#4BACF9"
-          isLoaded={isLoaded && isRoutineOverviewLoaded}
+          isLoaded={isLoaded}
         />
         {/* <AreaRadialChart
           label="CLAREZA DE ESTRATÉGIA"
