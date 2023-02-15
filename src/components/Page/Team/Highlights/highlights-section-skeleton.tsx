@@ -1,4 +1,4 @@
-import { Grid, GridProps, Skeleton, Text, VStack } from '@chakra-ui/react'
+import { Box, Grid, GridProps, Skeleton, VStack } from '@chakra-ui/react'
 import React from 'react'
 
 interface HighlightsSectionSkeletonProperties {
@@ -20,21 +20,18 @@ const HighlightsSectionSkeleton = ({
 
   return (
     <VStack>
-      <Skeleton isLoaded={false}>
-        <Text w="100%" fontSize={14} color="new-gray.800" fontWeight="medium">
-          {title}
-        </Text>
-      </Skeleton>
+      <Box width="100%">
+        <Skeleton isLoaded={false} textAlign="left" w={240} h={6} borderRadius={4} />
+      </Box>
       <Grid gap={3} w="100%" templateColumns={gridTemplate}>
         {mockedArray.map((_) => (
-          <Skeleton key={Math.random()} isLoaded={false}>
+          <Skeleton key={Math.random()} isLoaded={false} borderRadius={9}>
             <VStack
               textAlign="center"
               alignItems="center"
               justifyContent="center"
               height="80px"
               lineHeight="100%"
-              borderRadius={9}
             />
           </Skeleton>
         ))}
