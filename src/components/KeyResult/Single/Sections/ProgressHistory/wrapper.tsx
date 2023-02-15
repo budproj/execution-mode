@@ -80,7 +80,7 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     )
   }, [cycleTicks, xAxisKey, progressHistoryTickHashmap, currentTick, cycleLabels])
 
-  const handleLabelVisualization = (_: unknown, axis: Array<Payload<string, string>>) => {
+  const handleLabelVisualization = (_: unknown, axis: Array<Payload<number, string>>) => {
     const prefixHashmap: Record<CADENCE, string> = {
       [CADENCE.QUARTERLY]: intl.formatMessage(messages.quarterlyTooltipPrefix),
       [CADENCE.YEARLY]: intl.formatMessage(messages.yearlyTooltipPrefix),

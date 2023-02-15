@@ -43,6 +43,7 @@ export const KeyResultOwnerSelectMenu = ({
       isLazy
       closeOnSelect
       isOpen={isOpen}
+      scroolable={false}
       value={value}
       placement={placement}
       placeholder={

@@ -264,11 +264,14 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
           <LastRetrospectiveEmptyState />
         )}
       </GridItem>
-
       <LastAccess
         isLoaded={loaded}
-        userId={userId}
         lastDateAccess={user?.amplitude?.last_used}
+        display="flex"
+        color="new-gray.800"
+        fontWeight="500"
+        fontSize="12px"
+        gap="1px"
         alignItems="center"
         justifyContent="center"
       />
@@ -278,7 +281,7 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
 
 const LastRetrospectiveEmptyState = () => {
   return (
-    <HStack gap={4}>
+    <HStack gap={6}>
       <Text fontSize="2rem" transform="translateX(90%)" color="#b5c0db">
         -
       </Text>

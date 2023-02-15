@@ -56,16 +56,14 @@ const UserProfileCard = ({ userID, redirectToProfile = false }: UserProfileCardP
         </Stack>
 
         {user?.linkedInProfileAddress && (
-          <Link href={user?.linkedInProfileAddress}>
-            <a target="_blank">
-              <LinkedInIcon
-                desc={intl.formatMessage(messages.linkedInIconDesc)}
-                fill="gray.100"
-                cursor="pointer"
-                transition=".3s fill ease-out"
-                _hover={{ fill: 'brand.500' }}
-              />
-            </a>
+          <Link href={user?.linkedInProfileAddress} target="_blank">
+            <LinkedInIcon
+              desc={intl.formatMessage(messages.linkedInIconDesc)}
+              fill="gray.100"
+              cursor="pointer"
+              transition=".3s fill ease-out"
+              _hover={{ fill: 'brand.500' }}
+            />
           </Link>
         )}
       </Flex>

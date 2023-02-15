@@ -8,19 +8,22 @@ import {
   Stack,
   Spinner,
   StyleProps,
+  BoxProps,
 } from '@chakra-ui/react'
-import Scrollbars from 'rc-scrollbars'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 
 import ChevronDownIcon from 'src/components/Icon/ChevronDown'
 
+import { getScrollableItem } from '../ScrollableItem'
+
 import messages from './messages'
 
+const ScrollableItem = getScrollableItem()
 export interface SelectMenuProperties extends StyleProps {
   value?: string
   onChange: (value: string | string[]) => void
-  children: MenuProps['children']
+  children: ReactNode
   id?: MenuProps['id']
   isLoading?: boolean
   matchWidth?: MenuProps['matchWidth']
@@ -33,6 +36,7 @@ export interface SelectMenuProperties extends StyleProps {
   placement?: MenuProps['placement']
   placeholder?: ReactElement | string
   valueLabel?: ReactElement | string
+  maxScrollableHeight?: BoxProps['maxHeight']
   isInvalid?: boolean
   style?: any
   _hover?: any
@@ -49,6 +53,7 @@ const SelectMenu = ({
   isLoading,
   matchWidth,
   closeOnSelect,
+  maxScrollableHeight = 200,
   isLazy,
   isOpen,
   onOpen,
@@ -62,6 +67,7 @@ const SelectMenu = ({
   ...rest
 }: SelectMenuProperties) => {
   const intl = useIntl()
+
   const open = !isDisabled && isOpen
 
   placeholder ??= intl.formatMessage(messages.defaultPlaceholder)
@@ -122,11 +128,11 @@ const SelectMenu = ({
         zIndex={999}
       >
         {scroolable ? (
-          <Scrollbars autoHeight>
+          <ScrollableItem maxH={maxScrollableHeight}>
             <MenuOptionGroup value={value} type="radio" onChange={onChange}>
               {children}
             </MenuOptionGroup>
-          </Scrollbars>
+          </ScrollableItem>
         ) : (
           <MenuOptionGroup value={value} type="radio" onChange={onChange}>
             {children}

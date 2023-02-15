@@ -1,5 +1,5 @@
 import { useState, Dispatch, SetStateAction } from 'react'
-import { useIntl } from 'react-intl'
+import { IntlShape, useIntl } from 'react-intl'
 
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 
@@ -64,14 +64,17 @@ export const normalizeConfidence = (
   return defaultConfidence
 }
 
-export const useConfidenceTag = (
-  initialConfidence: KeyResultCheckIn['confidence'] = CONFIDENCE_HIGH.min,
-): ConfidenceTagHook => {
-  const [confidence, setConfidence] = useState(initialConfidence)
-  const intl = useIntl()
+export const getConfidenceName = (
+  value: KeyResultCheckIn['confidence'],
+  intl: IntlShape,
+): string => {
+  const confidenceObject = getConfidenceObject(intl)
+  const normalizedConfidence = normalizeConfidence(value)
+  return confidenceObject[normalizedConfidence].messages.long
+}
 
-  const normalizedConfidence = normalizeConfidence(confidence)
-  const confidenceTagHashmap = {
+const getConfidenceObject = (intl: IntlShape) => {
+  return {
     [CONFIDENCE_HIGH.max]: {
       messages: {
         short: intl.formatMessage(messages.highShort),
@@ -156,6 +159,16 @@ export const useConfidenceTag = (
       },
     },
   }
+}
+
+export const useConfidenceTag = (
+  initialConfidence: KeyResultCheckIn['confidence'] = CONFIDENCE_HIGH.min,
+): ConfidenceTagHook => {
+  const [confidence, setConfidence] = useState(initialConfidence)
+  const intl = useIntl()
+
+  const normalizedConfidence = normalizeConfidence(confidence)
+  const confidenceTagHashmap = getConfidenceObject(intl)
 
   const confidenceTag = confidenceTagHashmap[normalizedConfidence]
 

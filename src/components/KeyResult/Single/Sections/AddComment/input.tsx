@@ -75,6 +75,7 @@ const KeyResultSectionAddCommentInput = ({
 
   useEffect(() => {
     if (data) setUserEdges(data.users.edges)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
   useEffect(() => {
@@ -84,6 +85,7 @@ const KeyResultSectionAddCommentInput = ({
 
     loadUsers(users)
     setUsersMention(usersMentionTemporary)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users])
 
   return (

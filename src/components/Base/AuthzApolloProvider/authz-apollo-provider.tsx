@@ -1,10 +1,10 @@
-import { ApolloProvider } from '@apollo/client'
+import { ApolloProvider, NormalizedCacheObject } from '@apollo/client'
 import React, { ReactElement } from 'react'
 
 import { useApollo } from 'lib/apollo'
 
 export interface AuthzApolloProviderProperties {
-  pageProps: Record<string, unknown>
+  pageProps: Record<string, NormalizedCacheObject>
   children: ReactElement
 }
 

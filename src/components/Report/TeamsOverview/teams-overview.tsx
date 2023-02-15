@@ -68,7 +68,7 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
       {orderedTeams.length === 0 ? (
         <TeamsOverviewBodyTableSkeleton />
       ) : (
-        <ScrollableItem maxHeight="410px">
+        <ScrollableItem maxHeight="410px" p="0 12px">
           <TeamsOverviewBodyTableBody
             isGameficationDisabled={isGameficationDisabled}
             teamsRanking={orderedTeams}

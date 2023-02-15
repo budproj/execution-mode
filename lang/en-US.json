@@ -1172,8 +1172,8 @@
     "description": "The description of the with barrier icon"
   },
   "EJLLb9": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "{type, select, feeling {Feeling} productivity {Productivity in the week} roadblock {Barrier in the week} other {OKRs}}",
+    "description": "The title of the modal"
   },
   "EkoIl2": {
     "defaultMessage": "Create new subteam",
@@ -2406,6 +2406,10 @@
   "OMUZ7w": {
     "defaultMessage": "Female",
     "description": "The female gender for the company while creating a new workspace"
+  },
+  "on7/f2": {
+    "defaultMessage": "A list with all members of your team organized. Who need more support from leadership stay at the top, and those who are performing well, goes to the end of the list.",
+    "description": "This message appears in a tootip that explain the feature to user."
   },
   "ooNWJL": {
     "defaultMessage": "Add Support Team",
@@ -3748,7 +3752,7 @@
     "description": "This message is displayed inside the empty state on last retrospective overview"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2023-02-08T14:19:23Z",
+    "defaultMessage": "2023-02-09T18:54:14Z",
     "description": ""
   }
 }

@@ -16,7 +16,6 @@ import messages from './messages'
 
 export interface ProgressSliderContentProperties {
   keyResultID?: KeyResult['id']
-  onClose?: () => void
 }
 
 const handleMouseDownCapture = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {

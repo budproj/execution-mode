@@ -1,5 +1,5 @@
 import { Heading, Skeleton, Text } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -53,9 +53,9 @@ const CompanyProgressOverviewBodyStampProgressIncrease = ({
           {intl.formatMessage(messages.titleLabel, {
             progress: Math.abs(progress),
             signal: signalAttributes.indicator,
-            highlight: (string) => (
+            highlight: (value: ReactNode) => (
               <Text color={`${signalAttributes.colorScheme}.500`} display="inline" as="span">
-                {string}
+                {value}
               </Text>
             ),
           })}

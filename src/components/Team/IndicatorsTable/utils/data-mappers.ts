@@ -23,7 +23,6 @@ export const teamIndicatorsDataMapper = {
         total: userIndicators?.keyResultsCheckListProgress.total,
       },
       lastAccess: {
-        userId: id,
         lastDateAccess: amplitude?.last_used,
       },
       lastRetrospectiveAnswer: {

@@ -17,7 +17,10 @@ interface GetUserListProperties {
   fetchTeamIndicators: LazyQueryExecFunction<getTeamIndicatorsQuery, OperationVariables>
 }
 
-export const useGetTeamIndicators = (teamId: Team['id']): GetUserListProperties => {
+export const useGetTeamIndicators = (
+  teamId: Team['id'],
+  allUsers = false,
+): GetUserListProperties => {
   const setTeamIndicators = useSetRecoilState(teamIndicatorsTableData)
 
   const [fetchTeamIndicators, { loading }] = useLazyQuery<getTeamIndicatorsQuery>(
@@ -26,6 +29,7 @@ export const useGetTeamIndicators = (teamId: Team['id']): GetUserListProperties 
       fetchPolicy: 'network-only',
       variables: {
         teamId,
+        allUsers,
       },
       onCompleted: (data) => {
         const teamUsers = data.team?.users?.edges.map((user) => user.node)

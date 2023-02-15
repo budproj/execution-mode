@@ -105,7 +105,7 @@ const RoadblockAnswerCard = ({ answerData, user, isLoaded }: RoadblockAnswerCard
                 position="absolute"
                 top={6}
                 border="2px solid"
-                bg="new-gray.400"
+                color="new-gray.400"
                 zIndex={2}
                 width="80%"
               />

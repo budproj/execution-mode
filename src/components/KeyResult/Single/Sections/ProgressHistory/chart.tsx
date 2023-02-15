@@ -1,5 +1,5 @@
 import { Box, useToken } from '@chakra-ui/react'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 import {
   Area,
@@ -28,7 +28,7 @@ type ProgressHistoryChartProperties = {
   xTicks: string[]
   xAxisKey: string
   handleDataVisualization: (value: number) => number
-  handleLabelVisualization: (_: unknown, [data]: Array<Payload<string, string>>) => string
+  handleLabelVisualization: (_: unknown, [data]: Array<Payload<number, string>>) => ReactNode
 }
 
 export const ProgressHistoryChartHumble = ({

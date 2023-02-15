@@ -30,8 +30,8 @@ const Popover = {
     },
 
     popper: {
-      maxW: size && size in widths ? widths[size] : widths.default,
-      maxH: size && size in heights ? heights[size] : heights.default,
+      maxW: typeof size === 'number' && size in widths ? widths[size] : widths.default,
+      maxH: typeof size === 'number' && size in heights ? heights[size] : heights.default,
       boxShadow: 'with-stroke.light',
       outline: 'none',
       _focus: { boxShadow: 'with-stroke.light' },

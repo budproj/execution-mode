@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react'
 import capitalize from 'lodash/capitalize'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { FormatDateOptions, useIntl } from 'react-intl'
 
 import PageContent from 'src/components/Base/PageContent'
@@ -40,9 +40,9 @@ const UnderMaintenanceErrorPage = () => {
             {intl.formatMessage(messages.description, {
               date: intl.formatDate(expectedReturnDate, dateFormatOptions),
               hour: intl.formatDate(expectedReturnDate, hourFormatOptions),
-              highlight: (string: string) => (
+              highlight: (value: ReactNode) => (
                 <Text display="block" as="span" py={7} fontWeight={700}>
-                  {capitalize(string)}
+                  {capitalize(value as string)}
                 </Text>
               ),
             })}
