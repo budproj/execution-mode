@@ -150,4 +150,6 @@ export { default as AlertIcon } from './Alert/alert'
 
 export { OpacityTeamIcon } from './Team'
 
+export { default as DownloadIcon } from './DownloadIcon'
+
 export * from './types'
