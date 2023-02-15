@@ -63,7 +63,7 @@ export const UserUpdatePictureModal = ({
   }
 
   const handleCrop = useCallback(
-    (_, croppedAreaPixels: Area) => {
+    (_: unknown, croppedAreaPixels: Area) => {
       setCroppedArea(croppedAreaPixels)
     },
     [setCroppedArea],

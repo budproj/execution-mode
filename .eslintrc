@@ -11,6 +11,9 @@
     "react/jsx-indent": "off",
     "react/jsx-curly-newline": "off",
     "unicorn/no-nested-ternary": "off",
+    "react/default-props-match-prop-types": "off",
+    "react/require-default-props": "off",
+    "react/no-unused-prop-type": "off",
     "@typescript-eslint/no-floating-promises": "off"
   },
   "settings": {

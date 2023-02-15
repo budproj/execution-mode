@@ -34,6 +34,7 @@ const RoadBlockQuestion = ({
     const radioTimer = setTimeout(() => setShowedQuestion((currentValue) => currentValue + 1), 600)
 
     return () => clearTimeout(radioTimer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const { getRootProps, getRadioProps } = useRadioGroup({

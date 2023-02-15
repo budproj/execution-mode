@@ -1,5 +1,5 @@
 import { Heading, Text, Skeleton } from '@chakra-ui/react'
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -29,9 +29,9 @@ const CompanyProgressOverviewHeader = ({
           {intl.formatMessage(messages.title, {
             gender: company?.gender,
             company: company?.name,
-            highlight: (string) => (
+            highlight: (value: ReactNode) => (
               <Text color="brand.500" display="inline" as="span">
-                {string}
+                {value}
               </Text>
             ),
           })}

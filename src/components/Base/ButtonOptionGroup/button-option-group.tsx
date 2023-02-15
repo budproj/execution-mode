@@ -30,7 +30,7 @@ const ButtonOptionGroup = ({ children, onChange, alignItems }: ButtonOptionGroup
 
   const activableChildren = React.Children.map(children, (child) =>
     React.isValidElement(child)
-      ? React.cloneElement(child, {
+      ? React.cloneElement(child as React.ReactElement, {
           isActive: values.includes(child.props.value),
         })
       : child,

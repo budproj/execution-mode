@@ -110,7 +110,7 @@ const AnswersComponent = ({
           aria-label={intl.formatMessage(messages.arrowLeftIconDescription)}
           borderRadius="10px 0px 0px 10px"
           height="38px"
-          disabled={isLoading}
+          isDisabled={isLoading}
           icon={
             <ArrowRight
               transform="rotate(180deg)"
@@ -142,7 +142,7 @@ const AnswersComponent = ({
           background="new-gray.200"
           aria-label={intl.formatMessage(messages.arrowRightIconDescription)}
           height="38px"
-          disabled={isNextWeekDisabled(before) || isLoading}
+          isDisabled={isNextWeekDisabled(before) || isLoading}
           icon={
             <ArrowRight
               desc={intl.formatMessage(messages.arrowRightIconDescription)}
@@ -160,7 +160,7 @@ const AnswersComponent = ({
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
       </Flex>
-      <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'}>
+      <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'} p="0 12px">
         {isLoading ? (
           <AnswersRowSkeleton />
         ) : (

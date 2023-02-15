@@ -1,9 +1,10 @@
-import { ExpandedIndex } from '@chakra-ui/react'
 import difference from 'lodash/difference'
 import { atomFamily, DefaultValue, selectorFamily } from 'recoil'
 
 import { PREFIX } from './constants'
 import { objectiveContext, ObjectiveMode, setObjectiveToMode } from './context'
+
+type ExpandedIndex = number | number[]
 
 export const objectiveAccordion = atomFamily<string[], string | undefined>({
   key: `${PREFIX}::ACCORDION`,

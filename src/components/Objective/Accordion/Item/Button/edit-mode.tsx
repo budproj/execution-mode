@@ -13,8 +13,6 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { CancelButton } from 'src/components/Base/EditableControls/cancel-button'
-import { ConfirmButton } from 'src/components/Base/EditableControls/confirm-button'
 import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 
 import { useRecoilFamilyLoader } from '../../../../../state/recoil/hooks'
@@ -23,6 +21,8 @@ import { CancelIcon } from '../../../../Icon/Cancel/wrapper'
 import { Objective } from '../../../types'
 import { stopAccordionOpen } from '../../handlers'
 
+import { CancelButton } from './ActionButtons/cancel-button'
+import { ConfirmButton } from './ActionButtons/confirm-button'
 import messages from './messages'
 import queries from './queries.gql'
 

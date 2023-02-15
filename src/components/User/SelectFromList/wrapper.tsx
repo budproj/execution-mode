@@ -17,7 +17,6 @@ export interface SelectUserFromListProperties {
   hasCreateNewUserPermission?: boolean
   teamID?: string
   onSelect?: (userID: string) => void | Promise<void>
-  onSearch?: (query: string) => void
   onCreateUser?: (userID: string) => Promise<void> | void
   avatarSubtitleType?: NamedAvatarSubtitleType
   isSelectingMultiples?: boolean

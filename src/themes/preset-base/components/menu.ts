@@ -10,7 +10,7 @@ const Menu = {
       borderBottomWidth: 1,
       borderColor: 'gray.50',
 
-      '& span:first-child svg': {
+      '& span:first-of-type svg': {
         color: 'new-gray.800',
       },
 

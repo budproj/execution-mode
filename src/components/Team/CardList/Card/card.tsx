@@ -22,7 +22,7 @@ export interface TeamCardProperties {
 
 const HoverableWrapper = styled(Box)`
   &:hover {
-    box-shadow: ${({ shadowStyle }) => shadowStyle};
+    box-shadow: ${({ shadowstyle }) => shadowstyle};
     transform: scale(1.03);
     z-index: 1;
   }

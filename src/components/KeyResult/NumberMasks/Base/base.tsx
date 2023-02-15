@@ -17,7 +17,7 @@ const Base = ({
   return (
     <NumberFormat
       allowNegative
-      customInput={Input}
+      customInput={Input as React.ComponentType}
       displayType={displayType}
       defaultValue={defaultValue ?? 0}
       onValueChange={handleValueChange}

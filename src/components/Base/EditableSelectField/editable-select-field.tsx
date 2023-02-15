@@ -1,5 +1,5 @@
-import { Stack, FormLabel, StackProps, MenuProps, Spinner } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Stack, FormLabel, StackProps, Spinner } from '@chakra-ui/react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 import EditableSelectValue from 'src/components/Base/EditableSelectValue'
 
@@ -10,7 +10,7 @@ export interface EditableSelectFieldProperties {
   customFallbackPlaceholder?: string
   value?: string
   placeholder?: string
-  children?: MenuProps['children']
+  children?: ReactNode
   flexGrow?: StackProps['flexGrow']
   isSubmitting?: boolean
   isDisabled?: boolean

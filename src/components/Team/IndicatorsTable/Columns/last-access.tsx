@@ -23,25 +23,19 @@ const LastAccess = ({ isLoaded, lastDateAccess, ...rest }: LastAccessColumnPrope
       alignItems="flex-start"
       color="new-gray.800"
       fontWeight="500"
-      fontSize="12px"
       minW={28}
       w="100%"
+      fontSize={14}
       flexDirection="column"
       {...rest}
     >
       {isLastAccessLoaded ? (
         lastDateAccess === 'never_accessed' ? (
-          <Text fontWeight="medium" fontSize={14}>
-            {intl.formatMessage(messages.neverAccessed)}
-          </Text>
+          <Text fontWeight="medium">{intl.formatMessage(messages.neverAccessed)}</Text>
         ) : (
           <Box>
-            <Text fontWeight="medium" fontSize={14}>
-              {sinceDayLastAccess()}
-            </Text>
-            <Text color="new-gray.600" fontSize={14}>
-              {lastAccessSubtext()}
-            </Text>
+            <Text fontWeight="medium">{sinceDayLastAccess()}</Text>
+            <Text color="new-gray.600">{lastAccessSubtext()}</Text>
           </Box>
         )
       ) : (

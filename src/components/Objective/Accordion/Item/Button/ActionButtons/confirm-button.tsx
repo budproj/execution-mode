@@ -1,10 +1,9 @@
-import { ButtonProps, IconButton, useEditableControls } from '@chakra-ui/react'
+import { ButtonProps, IconButton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import messages from 'src/components/Base/EditableControls/messages'
 import CheckIcon from 'src/components/Icon/Check'
-
-import messages from './messages'
 
 interface ConfirmButtonProperties extends ButtonProps {
   isLoading?: boolean
@@ -13,8 +12,6 @@ interface ConfirmButtonProperties extends ButtonProps {
 
 export const ConfirmButton = ({ isLoading, isDisabled, ...rest }: ConfirmButtonProperties) => {
   const intl = useIntl()
-
-  const { getSubmitButtonProps } = useEditableControls()
 
   return (
     <IconButton
@@ -36,7 +33,6 @@ export const ConfirmButton = ({ isLoading, isDisabled, ...rest }: ConfirmButtonP
         bg: isLoading || isDisabled ? 'brand.500' : 'brand.300',
       }}
       icon={<CheckIcon desc={intl.formatMessage(messages.submitButtonDesc)} fill="currentColor" />}
-      {...getSubmitButtonProps()}
       {...rest}
     />
   )

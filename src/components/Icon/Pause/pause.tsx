@@ -13,6 +13,7 @@ export interface PauseIconProperties extends IconProps, AcessibleIconProperties 
 const PauseIcon = ({
   title,
   desc,
+  // eslint-disable-next-line unused-imports/no-unused-vars-ts
   viewBox,
   coloumnStrokeWidth = 1,
   circleStrokeWidth = 1,

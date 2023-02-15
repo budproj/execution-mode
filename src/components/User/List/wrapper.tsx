@@ -1,10 +1,10 @@
 import { Stack, Text, Box, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
-import { Scrollbars } from 'rc-scrollbars'
 import React, { ReactElement, useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { IntlLink } from 'src/components/Base'
+import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import { NamedAvatar } from 'src/components/User'
 import meAtom from 'src/state/recoil/user/me'
@@ -42,6 +42,7 @@ export const UserList = ({
   teamLeader,
 }: UserListProperties) => {
   const cardReference = useRef<HTMLDivElement>(null)
+  const ScrollableItem = getScrollableItem()
   const intl = useIntl()
   const myID = useRecoilValue(meAtom)
 
@@ -56,7 +57,7 @@ export const UserList = ({
   return (
     <>
       <Box ref={cardReference} />
-      <Scrollbars autoHeight>
+      <ScrollableItem maxH={210}>
         <Stack spacing={4}>
           {isLoading ? (
             <UserListSkeleton />
@@ -180,7 +181,7 @@ export const UserList = ({
             emptyState
           )}
         </Stack>
-      </Scrollbars>
+      </ScrollableItem>
     </>
   )
 }

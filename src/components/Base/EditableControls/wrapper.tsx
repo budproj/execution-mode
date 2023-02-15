@@ -11,8 +11,7 @@ type EditableControlsProperties = {
 }
 
 export const EditableControls = ({ isHovering, isLocked }: EditableControlsProperties) => {
-  const { isEditing, getEditButtonProps, getSubmitButtonProps, getCancelButtonProps } =
-    useEditableControls()
+  const { isEditing, getEditButtonProps } = useEditableControls()
   const commonProperties: ButtonProps = {
     fontSize: 'md',
     h: 10,
@@ -21,8 +20,8 @@ export const EditableControls = ({ isHovering, isLocked }: EditableControlsPrope
 
   return isEditing ? (
     <HStack>
-      <CancelButton {...getCancelButtonProps()} {...commonProperties} />
-      <ConfirmButton {...getSubmitButtonProps()} {...commonProperties} />
+      <CancelButton {...commonProperties} />
+      <ConfirmButton {...commonProperties} />
     </HStack>
   ) : (
     <EditButton
