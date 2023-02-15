@@ -9,6 +9,8 @@ import newFeatureMessage from 'src/components/Base/MainAppBar/messages'
 import { DownloadIcon } from 'src/components/Icon'
 import { Team } from 'src/components/Team/types'
 import { getConfidenceName } from 'src/state/hooks/useConfidenceTag/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { CSVIndicatorsData } from 'src/state/recoil/team/indicators/csv-indicators-data'
 
 import { TeamSectionHeading } from '../../Section/SectionHeading/wrapper'
@@ -22,6 +24,8 @@ interface IndicatorsDownloadCSVProperties {
 
 const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
   const intl = useIntl()
+
+  const { dispatch } = useEvent(EventType.INDICATORS_REPORT_DOWNLOAD_CLICK)
 
   const { fetchTeamIndicators, loading } = useGetTeamCSVData(teamID, true)
 
@@ -99,6 +103,11 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
     { label: intl.formatMessage(messages.roadBlockColumnTitle), key: 'roadBlock' },
   ]
 
+  const onDownloadButtonClick = async () => {
+    await fetchTeamIndicators()
+    dispatch({})
+  }
+
   return (
     <Stack spacing={4} w="full">
       <Flex gap={2} alignItems="center">
@@ -125,7 +134,7 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
           iconSpacing={2}
           _hover={{ background: 'brand.400', color: 'black.50' }}
           leftIcon={<DownloadIcon desc="asda" />}
-          onClick={async () => fetchTeamIndicators()}
+          onClick={async () => onDownloadButtonClick()}
         >
           {loading
             ? intl.formatMessage(messages.isLoadingDownloadButtonText)

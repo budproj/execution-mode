@@ -28,7 +28,6 @@ export const useGetTeamCSVData = (teamId: Team['id'], allUsers = false): GetUser
       },
       onCompleted: (data) => {
         const teamUsers = data.team?.users?.edges.map((user) => user.node)
-        console.log({ teamUsers })
         if (teamUsers) {
           setCSVIndicatorData(teamUsers)
         }
