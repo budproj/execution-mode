@@ -7,6 +7,7 @@ import { ServicesContext } from 'src/components/Base/ServicesProvider/services-p
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
+import tabMessages from 'src/components/Page/Team/messages'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 import LastAccess from 'src/components/Team/IndicatorsTable/Columns/last-access'
 import { useGetUserDetails } from 'src/components/User/hooks'
@@ -190,9 +191,9 @@ export const UsersTeamList = ({ type, userId }: UsersTeamListProperties) => {
         {userRoutineData ? (
           <Link
             passHref
-            href={`/explore/${
-              user?.companies?.edges[0].node.id ?? ''
-            }/?activeTab=retrospectiva&answerId=${userRoutineData?.lastRoutineAnswerId ?? ''}`}
+            href={`/explore/${user?.companies?.edges[0].node.id ?? ''}/?activeTab=${intl
+              .formatMessage(tabMessages.retrospectiveTeamTab)
+              .toLowerCase()}&answerId=${userRoutineData?.lastRoutineAnswerId ?? ''}`}
           >
             <GridItem
               justifySelf="center"
