@@ -1,7 +1,7 @@
 {
     "theme_color": "#6F6EFF",
     "background_color": "#fff",
-    "display": "browser",
+    "display": "minimal-ui",
     "scope": "/",
     "start_url": "/",
     "name": "Get Bud",
