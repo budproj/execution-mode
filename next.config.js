@@ -2,10 +2,6 @@
 const path = require('path')
 const _ = require('lodash')
 const { ProvidePlugin } = require('webpack')
-const { withSentryConfig, configureScope } = require('@sentry/nextjs')
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
 
 const {
   URL,
@@ -37,6 +33,18 @@ const {
   REST_API_BASE,
   FLAGSMITH_CLIENT_KEY,
 } = process.env
+
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  register: true,
+  disable: NODE_ENV === 'development',
+  skipWaiting: true,
+})
+
+const { withSentryConfig } = require('@sentry/nextjs')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 const publicRuntimeConfig = {
   environment: APP_ENV,
@@ -214,7 +222,6 @@ const moduleExports = {
       }),
     ]
 
-
     return config
   },
 
@@ -241,4 +248,6 @@ const sentryWebpackPluginOptions = {
   // https://github.com/getsentry/sentry-webpack-plugin#options.
 }
 
-module.exports = withBundleAnalyzer(withSentryConfig(moduleExports, sentryWebpackPluginOptions))
+module.exports = withBundleAnalyzer(
+  withSentryConfig(withPWA(moduleExports, sentryWebpackPluginOptions)),
+)

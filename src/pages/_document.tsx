@@ -14,6 +14,7 @@ class BudDocument extends Document<BudDocumentProperties> {
         <Head>
           <meta name="robots" content={this.props.env === 'production' ? 'all' : 'noindex'} />
           <link href="/fonts/CircularStd/font-face.css" rel="stylesheet" />
+          <link rel="manifest" href="/manifest.json" />
           <link
             rel="apple-touch-icon-precomposed"
             sizes="57x57"
