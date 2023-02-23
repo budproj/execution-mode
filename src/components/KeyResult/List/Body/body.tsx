@@ -1,5 +1,6 @@
 import { Box, GridProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import dynamic from 'next/dynamic'
 import React from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { MessageDescriptor } from 'react-intl'
@@ -13,8 +14,11 @@ import { ObjectiveMode } from 'src/state/recoil/objective/context'
 
 import { KEY_RESULT_LIST_COLUMN } from './Columns/constants'
 import { KeyResultListBodyColumnProperties } from './Columns/types'
-import GuideListCreateOkr from './GuideListCreateOKR/guide-list-create-okr'
 import messages from './messages'
+
+const DynamicGuideListCreateOkr = dynamic(
+  async () => import('./GuideListCreateOKR/guide-list-create-okr'),
+)
 
 const StyledSpan = styled.span`
   display: inline-block;
@@ -59,7 +63,7 @@ const KeyResultListBody = ({
   const BodyComponent = bodyComponents[type]
 
   return mode === ObjectiveMode.EDIT ? (
-    <GuideListCreateOkr />
+    <DynamicGuideListCreateOkr />
   ) : keyResultIDs && keyResultIDs.length > 0 ? (
     <BodyComponent keyResultIDs={keyResultIDs} type={type} {...rest} />
   ) : (
