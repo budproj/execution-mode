@@ -12,6 +12,7 @@ class BudDocument extends Document<BudDocumentProperties> {
     return (
       <Html>
         <Head>
+          <link rel="manifest" href="/manifest.json" />
           <meta name="robots" content={this.props.env === 'production' ? 'all' : 'noindex'} />
           <link href="/fonts/CircularStd/font-face.css" rel="stylesheet" />
           <link
