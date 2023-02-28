@@ -1,0 +1,64 @@
+query GET_TEAM($teamId: ID!) {
+  team(id: $teamId) {
+    id
+    name
+    description
+    ownerId
+    isCompany
+    parentId
+    parent {
+      name
+      id
+    }
+    owner {
+      id
+      firstName
+      nickname
+      fullName
+      role
+      picture
+      about
+      linkedInProfileAddress
+    }
+    status {
+      progress
+    }
+    keyResults {
+      policy {
+        create
+      }
+    }
+    users(first: 5000) {
+      edges {
+        node {
+          id
+          firstName
+          nickname
+          fullName
+          email
+          role
+          picture
+          about
+          linkedInProfileAddress
+        }
+      }
+      policy {
+        create
+      }
+    }
+    teams {
+      edges {
+        node {
+          id
+          name
+          status {
+            progress
+          }
+        }
+      }
+    }
+    policy {
+      update
+    }
+  }
+}

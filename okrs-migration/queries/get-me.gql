@@ -1,0 +1,38 @@
+query GET_ME {
+  me {
+    id
+    firstName
+    fullName
+    picture
+    email
+    gender
+    role
+    isTeamLeader
+    createdAt
+    yearlyProgress {
+      showProgress
+      progress
+    }
+    quarterlyProgress {
+      showProgress
+      progress
+    }
+    companies(first: 1) {
+      edges {
+        node {
+          id
+          name
+          gender
+        }
+      }
+    }
+    teams {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+}

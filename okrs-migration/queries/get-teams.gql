@@ -1,0 +1,32 @@
+query GET_TEAMS {
+  teams(first: 1000) {
+    edges {
+      node {
+        id
+        name
+        description
+        isCompany
+        ownerId
+        owner {
+          id
+          fullName
+        }
+        parent {
+          id
+          name
+        }
+        users {
+          edges {
+            node {
+              fullName
+              picture
+            }
+          }
+        }
+        status {
+          progress
+        }
+      }
+    }
+  }
+}

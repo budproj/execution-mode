@@ -1,0 +1,45 @@
+{
+  "name": "okrs-migration",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "start:ts": "ts-node-esm src/index.ts",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "postinstall": "patch-package",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/client": "^3.7.9",
+    "chalk": "4",
+    "cli-progress": "^3.12.0",
+    "commander": "^10.0.0",
+    "cross-fetch": "^3.1.5",
+    "csv": "^6.2.7",
+    "figlet": "^1.5.2",
+    "graphql": "^16.6.0",
+    "lodash": "^4.17.21",
+    "lowdb": "^5.1.0",
+    "ora": "^6.1.2",
+    "puppeteer": "^19.7.4",
+    "read": "^2.0.0",
+    "remove-accents": "^0.4.4"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.2",
+    "@types/cli-progress": "^3.11.0",
+    "@types/figlet": "^1.5.5",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^18.14.2",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.35.0",
+    "patch-package": "^6.5.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
+}

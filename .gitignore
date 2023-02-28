@@ -32,3 +32,5 @@ data.db
 
 # Sentry
 .sentryclirc
+
+.idea/

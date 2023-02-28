@@ -1,0 +1,15 @@
+query GET_CYCLES {
+  cycles {
+    edges {
+      node {
+        id
+        period
+        cadence
+        active
+        parent {
+          period
+        }
+      }
+    }
+  }
+}

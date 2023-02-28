@@ -1,0 +1,22 @@
+diff --git a/node_modules/lowdb/lib/index.d.ts b/node_modules/lowdb/lib/index.d.ts
+index 66be7f8..d4cb622 100644
+--- a/node_modules/lowdb/lib/index.d.ts
++++ b/node_modules/lowdb/lib/index.d.ts
+@@ -2,3 +2,6 @@ export * from './adapters/Memory.js';
+ export * from './adapters/MemorySync.js';
+ export * from './Low.js';
+ export * from './LowSync.js';
++
++export * from './node.js'
++export * from './browser.js'
+diff --git a/node_modules/lowdb/lib/index.js b/node_modules/lowdb/lib/index.js
+index 66be7f8..d4cb622 100644
+--- a/node_modules/lowdb/lib/index.js
++++ b/node_modules/lowdb/lib/index.js
+@@ -2,3 +2,6 @@ export * from './adapters/Memory.js';
+ export * from './adapters/MemorySync.js';
+ export * from './Low.js';
+ export * from './LowSync.js';
++
++export * from './node.js'
++export * from './browser.js'
