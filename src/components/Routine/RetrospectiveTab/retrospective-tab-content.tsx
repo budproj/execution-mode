@@ -14,7 +14,7 @@ import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
 import React, { useCallback, useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { CircleArrowRight } from 'src/components/Icon'
@@ -25,6 +25,7 @@ import { NotificationSettingsModal } from 'src/components/Routine/NotificationSe
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
+import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
 import { isAnswerSummaryLoad } from 'src/state/recoil/routine/is-answers-summary-load'
 import {
   getRoutineDateRangeDateFormat,
@@ -33,8 +34,10 @@ import {
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
+import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
 
 import AnswersComponent from './Answers'
+import useAnswerSummaryFormatter from './Answers/utils/answer-summary-formatter'
 import RetrospectiveTabContentView from './retrospective-tab-content-view'
 
 export type AnswerType = {
@@ -59,15 +62,23 @@ export interface AnswerSummary {
   id?: string
   userId: string
   name: string
-  picture: string
+  picture?: string
   latestStatusReply?: string
   timestamp?: Date
   commentCount?: number
 }
 
+const formatUUIDArray = (uuids: string[]) => {
+  return "['" + uuids.join("', '") + "']"
+}
+
 const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
+  const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
+  const { limitedTeamUsers } = useAnswerSummaryPagination('d6310cc8-cc17-499b-a28c-5c600dd9714a')
+  const teamUsersIds = limitedTeamUsers.map((user) => user.id)
+  const { formattedAnswerSummary } = useAnswerSummaryFormatter()
   const { servicesPromise } = useContext(ServicesContext)
   const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
   const [isAnswerSummaryLoaded, setIsAnswerSummaryLoaded] = useRecoilState(isAnswerSummaryLoad)
@@ -85,9 +96,17 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
   const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
 
+  const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
+
   const getAnswersSummary = useCallback(async () => {
     const { routines } = await servicesPromise
     setIsAnswerSummaryLoaded(false)
+
+    setAnswerSummaryPaginationData({
+      lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+      teamId,
+    })
+
     const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
       `/answers/summary/${teamId}`,
       {
@@ -95,22 +114,26 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           before,
           after,
           includeSubteams: false,
+          teamUsersIds: parsetToQueryTeamUsersIDS,
         },
       },
     )
 
-    if (answersSummaryData) {
-      setAnswersSummary(answersSummaryData)
-    }
+    const formattedData = formattedAnswerSummary({
+      requestedUsersIDs: teamUsersIds,
+      answerSummary: answersSummaryData,
+    })
+
+    setAnswersSummary((previousValues) => [...previousValues, ...formattedData])
 
     setIsAnswerSummaryLoaded(true)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [after, before, teamId])
+  }, [after, before, teamId, teamUsersIds])
 
-  useEffect(() => {
-    getAnswersSummary()
-  }, [getAnswersSummary])
+  // UseEffect(() => {
+  //   getAnswersSummary()
+  // }, [getAnswersSummary])
 
   useEffect(() => {
     if (after && before) {
@@ -230,6 +253,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           isLoading={!isAnswerSummaryLoaded}
           teamId={teamId}
         />
+
         <Divider orientation="vertical" borderColor="new-gray.400" />
         <RetrospectiveTabContentView
           after={after}
@@ -239,7 +263,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           isLoaded={!isLoading && isAnswerSummaryLoaded}
         />
       </Grid>
-
+      <Button onClick={async () => getAnswersSummary()}>VER MAIS</Button>
       <NotificationSettingsModal
         isOpen={isOpen}
         teamOptedOut={teamOptedOut}

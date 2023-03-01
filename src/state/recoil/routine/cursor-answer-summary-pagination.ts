@@ -8,11 +8,13 @@ import { PREFIX } from './constants'
 const KEY = `${PREFIX}::CURSOR_ANSWER_PAGINATION`
 
 type CursorAnswerPaginationData = {
-  lastLoadedUser?: User['id']
+  lastLoadedUserId: User['id']
   teamId?: Team['id']
 }
 
 export const answerSummaryPaginationAtom = atom<CursorAnswerPaginationData>({
   key: KEY,
-  default: {},
+  default: {
+    lastLoadedUserId: '',
+  },
 })
