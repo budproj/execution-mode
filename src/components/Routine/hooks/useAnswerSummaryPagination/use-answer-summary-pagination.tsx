@@ -1,9 +1,10 @@
 import { useRecoilValue } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
+import { useGetUserDetails } from 'src/components/User/hooks'
 import { User } from 'src/components/User/types'
 import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
-import { filteredUsersCompany, selectUser } from 'src/state/recoil/team/users-company'
+import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 const rateLimit = 2
 
@@ -13,13 +14,16 @@ type AnswerSummaryPaginationProperties = {
 
 const useAnswerSummaryPagination = (teamId: Team['id']): AnswerSummaryPaginationProperties => {
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
-  const { lastLoadedUser: lastLoadedUserId } = useRecoilValue(answerSummaryPaginationAtom)
-  const lastLoadedUser = useRecoilValue(selectUser(lastLoadedUserId ?? ''))
+  const { lastLoadedUserId } = useRecoilValue(answerSummaryPaginationAtom)
+  const { data: lastLoadedUser } = useGetUserDetails(lastLoadedUserId)
 
-  const cursorPaginationItem = lastLoadedUser ? teamUsers.indexOf(lastLoadedUser) : 0
-  console.log({ teamUsers, lastLoadedUser })
+  const lastLoadedIndex = teamUsers.findIndex((user) => user.id === lastLoadedUser?.id)
 
-  const limitedTeamUsers = teamUsers.slice(cursorPaginationItem, rateLimit)
+  const cursorPaginationItem = lastLoadedUserId ? lastLoadedIndex : 0
+
+  const endSlice = cursorPaginationItem + rateLimit
+
+  const limitedTeamUsers = teamUsers.slice(cursorPaginationItem, endSlice)
 
   return { limitedTeamUsers }
 }
