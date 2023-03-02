@@ -97,54 +97,54 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
   const [teamUsersIds, setTeamUsersIds] = useState<Array<User['id']>>([])
 
-  useEffect(
-    () => {
-      const fetchAnswerSummaryData = async () => {
-        const { routines } = await servicesPromise
+  useEffect(() => {
+    const fetchAnswerSummaryData = async () => {
+      const { routines } = await servicesPromise
 
-        const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-        const showedUsersIds = new Set(answersSummary.map((user) => user.id))
+      const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
+      const showedUsersIds = new Set(answersSummary.map((user) => user.id))
 
-        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
-          showedUsersIds.has(userId),
+      const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
+        showedUsersIds.has(userId),
+      )
+
+      const mustFetchAnswerData = teamUsersIds.length > 0 && usersAreBeingRequestedForTheFirstTime
+
+      if (mustFetchAnswerData) {
+        setAnswerSummaryPaginationData({
+          lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+          teamId,
+        })
+        setIsAnswerSummaryLoading(true)
+        const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+          `/answers/summary/${teamId}`,
+          {
+            params: {
+              before,
+              after,
+              includeSubteams: false,
+              teamUsersIds: parsetToQueryTeamUsersIDS,
+            },
+          },
         )
 
-        const mustFetchAnswerData = usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0
+        const formattedData = formattedAnswerSummary({
+          requestedUsersIDs: teamUsersIds,
+          answerSummary: answersSummaryData,
+        })
 
-        if (mustFetchAnswerData) {
-          setAnswerSummaryPaginationData({
-            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
-            teamId,
-          })
-          setIsAnswerSummaryLoading(true)
-          const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-            `/answers/summary/${teamId}`,
-            {
-              params: {
-                before,
-                after,
-                includeSubteams: false,
-                teamUsersIds: parsetToQueryTeamUsersIDS,
-              },
-            },
-          )
+        setIsAnswerSummaryLoading(false)
 
-          const formattedData = formattedAnswerSummary({
-            requestedUsersIDs: teamUsersIds,
-            answerSummary: answersSummaryData,
-          })
-
-          setIsAnswerSummaryLoading(false)
-
-          setAnswersSummary((previousValues) => [...previousValues, ...formattedData])
-        }
+        setAnswersSummary((previousValues) => {
+          const newValues = formattedData.filter((newAnswer) => !previousValues.includes(newAnswer))
+          return [...previousValues, ...newValues]
+        })
       }
+    }
 
-      fetchAnswerSummaryData()
-    },
+    fetchAnswerSummaryData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [after, before, teamId, teamUsersIds],
-  )
+  }, [after, before, teamId, teamUsersIds])
 
   useEffect(() => {
     if (after && before) {
