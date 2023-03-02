@@ -8,12 +8,13 @@ import { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 
 import { GetUserPrimaryCompanyQuery } from 'src/components/Report/CompanyProgressOverview/types'
-import GET_USERS from 'src/components/User/hooks/getUsers/get-users.gql'
 import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { usersCompany } from 'src/state/recoil/team/users-company'
 import { userAtomFamily } from 'src/state/recoil/user'
+
+import GET_COMPANY_USERS from './get-users-company.gql'
 
 interface GetUserListProperties {
   loadCompanyUsers: LazyQueryExecFunction<GetUserPrimaryCompanyQuery, OperationVariables>
@@ -28,7 +29,7 @@ export const useLoadCompanyUsers = (): GetUserListProperties => {
   const setUsersCompany = useSetRecoilState(usersCompany)
 
   const [loadCompanyUsers, { loading, called, refetch }] = useLazyQuery<GetUserPrimaryCompanyQuery>(
-    GET_USERS,
+    GET_COMPANY_USERS,
     {
       fetchPolicy: 'network-only',
       onCompleted: (data) => {

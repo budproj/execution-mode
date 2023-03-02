@@ -23,6 +23,7 @@ import GearIcon from 'src/components/Icon/Gear'
 import messages from 'src/components/Page/Team/Tabs/content/messages'
 import { NotificationSettingsModal } from 'src/components/Routine/NotificationSettings'
 import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
 import { GraphQLEffect } from 'src/components/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
 import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
@@ -94,7 +95,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
   const { after: afterQuery, before: beforeQuery } = router.query
   const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
-  const [teamUsersIds, setTeamUsersIds] = useState<Array<Team['id']>>([])
+  const [teamUsersIds, setTeamUsersIds] = useState<Array<User['id']>>([])
 
   useEffect(
     () => {
@@ -102,8 +103,15 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
         const { routines } = await servicesPromise
 
         const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
+        const showedUsersIds = new Set(answersSummary.map((user) => user.id))
 
-        if (teamUsersIds.length > 0) {
+        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
+          showedUsersIds.has(userId),
+        )
+
+        const mustFetchAnswerData = usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0
+
+        if (mustFetchAnswerData) {
           setAnswerSummaryPaginationData({
             lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
             teamId,
@@ -191,7 +199,6 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
       root: document.querySelector('#scrollable-list-users'),
       threshold: 1,
     })
-
     observer.observe(document.querySelector('#list-bottom')!)
     return () => observer.disconnect()
   }, [handleObserver])
