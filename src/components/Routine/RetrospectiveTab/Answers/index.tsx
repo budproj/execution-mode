@@ -1,4 +1,4 @@
-import { Flex, Text, IconButton, GridItem, Divider, Box } from '@chakra-ui/react'
+import { Flex, Text, IconButton, GridItem, Divider, Box, Spinner } from '@chakra-ui/react'
 import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import { useRouter } from 'next/router'
@@ -27,7 +27,6 @@ import selectUser from 'src/state/recoil/user/selector'
 import { AnswerSummary } from '../retrospective-tab-content'
 
 import AnswerRowComponent from './answer-row'
-import AnswersRowSkeleton from './answers-row-skeleton'
 import messages from './messages'
 
 interface AnswersComponentProperties {
@@ -160,13 +159,20 @@ const AnswersComponent = ({
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
       </Flex>
-      <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'} p="0 12px">
-        {isLoading ? (
-          <AnswersRowSkeleton />
-        ) : (
-          filteredAnswers.map((answer) => <AnswerRowComponent key={answer.id} answer={answer} />)
+      <ScrollableItem
+        id="scrollable-list-users"
+        maxH={showAnswerNowButton ? '455px' : '537px'}
+        p="0 12px"
+      >
+        {filteredAnswers.map((answer) => (
+          <AnswerRowComponent key={answer.id} answer={answer} />
+        ))}
+        {isLoading && (
+          <Flex justify="center" py={4}>
+            <Spinner size="lg" />
+          </Flex>
         )}
-        {}
+        <Box id="list-bottom" />
       </ScrollableItem>
       {showAnswerNowButton && !isLoading && (
         <Box textAlign="center" marginTop="auto">
