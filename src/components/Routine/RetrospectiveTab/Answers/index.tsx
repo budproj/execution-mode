@@ -171,7 +171,7 @@ const AnswersComponent = ({
             <Spinner size="lg" />
           </Flex>
         )}
-        <Box id="list-bottom" />
+        <Box id="list-bottom" style={{ visibility: isLoading ? 'hidden' : 'visible' }} />
       </ScrollableItem>
       {showAnswerNowButton && (
         <Box textAlign="center" marginTop="auto">
