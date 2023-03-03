@@ -160,7 +160,7 @@ const AnswersComponent = ({
       </Flex>
       <ScrollableItem
         id="scrollable-list-users"
-        maxH={showAnswerNowButton ? '420px' : '420px'}
+        maxH={showAnswerNowButton ? '455px' : '537px'}
         p="0 12px"
       >
         {filteredAnswers.map((answer) => (

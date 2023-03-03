@@ -101,56 +101,54 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
       const { routines } = await servicesPromise
       const target = entries[0]
 
-      if (target.isIntersecting) {
-        setIsAnswerSummaryLoading(true)
-        if (limitedTeamUsers.length > 0) {
-          const teamUsersIds = limitedTeamUsers.map((user) => user.id)
+      if (target.isIntersecting && limitedTeamUsers.length > 0) {
+        const teamUsersIds = limitedTeamUsers.map((user) => user.id)
 
-          const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-          const showedUsersIds = new Set(answersSummary.map((user) => user.id))
+        const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
+        const showedUsersIds = new Set(answersSummary.map((user) => user.id))
 
-          const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
-            showedUsersIds.has(userId),
+        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
+          showedUsersIds.has(userId),
+        )
+
+        const mustFetchAnswerData = teamUsersIds.length > 0 && usersAreBeingRequestedForTheFirstTime
+
+        if (mustFetchAnswerData) {
+          setIsAnswerSummaryLoading(true)
+
+          setAnswerSummaryPaginationData({
+            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+            teamId,
+          })
+          const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+            `/answers/summary/${teamId}`,
+            {
+              params: {
+                before,
+                after,
+                includeSubteams: false,
+                teamUsersIds: parsetToQueryTeamUsersIDS,
+              },
+            },
           )
 
-          const mustFetchAnswerData =
-            teamUsersIds.length > 0 && usersAreBeingRequestedForTheFirstTime
+          const formattedData = formattedAnswerSummary({
+            requestedUsersIDs: teamUsersIds,
+            answerSummary: answersSummaryData,
+          })
 
-          if (mustFetchAnswerData) {
-            setAnswerSummaryPaginationData({
-              lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
-              teamId,
-            })
-            const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-              `/answers/summary/${teamId}`,
-              {
-                params: {
-                  before,
-                  after,
-                  includeSubteams: false,
-                  teamUsersIds: parsetToQueryTeamUsersIDS,
-                },
-              },
-            )
-
-            const formattedData = formattedAnswerSummary({
-              requestedUsersIDs: teamUsersIds,
-              answerSummary: answersSummaryData,
+          setAnswersSummary((previousAnswers) => {
+            const newValues = formattedData.filter((newFormattedAnswer) => {
+              return !previousAnswers.some(
+                (previousAnswer) => newFormattedAnswer.userId === previousAnswer.userId,
+              )
             })
 
-            setAnswersSummary((previousAnswers) => {
-              const newValues = formattedData.filter((newFormattedAnswer) => {
-                return !previousAnswers.some(
-                  (previousAnswer) => newFormattedAnswer.userId === previousAnswer.userId,
-                )
-              })
-
-              return [...previousAnswers, ...newValues]
-            })
-          }
+            return [...previousAnswers, ...newValues]
+          })
+          const setSummaryLoadingTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 600)
+          return () => clearTimeout(setSummaryLoadingTimer)
         }
-
-        setTimeout(() => setIsAnswerSummaryLoading(false), 500)
       }
     },
 
@@ -205,7 +203,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
 
     if (limitedTeamUsers.length === 0) return
 
-    observer.observe(document.querySelector('#list-bottom')!)
+    observer.observe(document.querySelector('#list-bottom') as HTMLDivElement)
 
     return () => observer.disconnect()
   }, [limitedTeamUsers.length, fetchAnswerSummaryData, isAnswerSummaryLoading])

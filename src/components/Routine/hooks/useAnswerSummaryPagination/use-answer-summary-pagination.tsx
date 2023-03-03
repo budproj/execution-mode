@@ -7,7 +7,7 @@ import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
 import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
 import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
-const rateLimit = 8
+const rateLimit = 10
 
 type AnswerSummaryPaginationProperties = {
   limitedTeamUsers: User[]
