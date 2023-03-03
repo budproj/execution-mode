@@ -1,6 +1,6 @@
 query GET_TEAM_INDICATORS($teamId: ID!,$allUsers: Boolean) {
   team(id: $teamId) {
-    users(withIndicators: true, allUsers: $allUsers) {
+    users(withIndicators: true, allUsers: $allUsers, first: 9999) {
       edges {
         node {
           id
