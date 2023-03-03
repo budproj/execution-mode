@@ -101,21 +101,18 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
       const { routines } = await servicesPromise
       const target = entries[0]
 
-      if (target.isIntersecting && limitedTeamUsers.length > 0) {
+      setIsAnswerSummaryLoading(true)
+
+      if (target.isIntersecting) {
         const teamUsersIds = limitedTeamUsers.map((user) => user.id)
 
         const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-        const showedUsersIds = new Set(answersSummary.map((user) => user.id))
 
-        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
-          showedUsersIds.has(userId),
-        )
+        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
+          return answersSummary.some((user) => user.userId === userId)
+        })
 
-        const mustFetchAnswerData = teamUsersIds.length > 0 && usersAreBeingRequestedForTheFirstTime
-
-        if (mustFetchAnswerData) {
-          setIsAnswerSummaryLoading(true)
-
+        if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
           setAnswerSummaryPaginationData({
             lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
             teamId,
@@ -146,10 +143,11 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
 
             return [...previousAnswers, ...newValues]
           })
-          const setSummaryLoadingTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 600)
-          return () => clearTimeout(setSummaryLoadingTimer)
         }
       }
+
+      const setSummaryLoadingTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 500)
+      return () => clearTimeout(setSummaryLoadingTimer)
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
