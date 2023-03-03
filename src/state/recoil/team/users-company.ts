@@ -16,8 +16,11 @@ export const filteredUsersCompany = (teamId: Team['id']) => {
 
       const filteredUsers = users.filter((user) => {
         const teamIds = user.teams?.edges.map((team) => team.node.id)
+        const companyUserId = user.companies?.edges[0].node.id
 
-        return teamIds?.includes(teamId)
+        return teamIds
+          ? [...teamIds, companyUserId].includes(teamId)
+          : [companyUserId].includes(teamId)
       })
       return filteredUsers
     },
