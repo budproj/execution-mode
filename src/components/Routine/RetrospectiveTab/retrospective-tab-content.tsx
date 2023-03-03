@@ -74,6 +74,7 @@ const formatUUIDArray = (uuids: string[]) => {
 const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
+
   const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useState(false)
   const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
   const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
@@ -101,52 +102,55 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
       const target = entries[0]
 
       if (target.isIntersecting) {
-        const teamUsersIds = limitedTeamUsers.map((user) => user.id)
+        setIsAnswerSummaryLoading(true)
+        if (limitedTeamUsers.length > 0) {
+          const teamUsersIds = limitedTeamUsers.map((user) => user.id)
 
-        const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-        const showedUsersIds = new Set(answersSummary.map((user) => user.id))
+          const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
+          const showedUsersIds = new Set(answersSummary.map((user) => user.id))
 
-        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
-          showedUsersIds.has(userId),
-        )
-
-        const mustFetchAnswerData = teamUsersIds.length > 0 && usersAreBeingRequestedForTheFirstTime
-
-        if (mustFetchAnswerData) {
-          setAnswerSummaryPaginationData({
-            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
-            teamId,
-          })
-          setIsAnswerSummaryLoading(true)
-          const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-            `/answers/summary/${teamId}`,
-            {
-              params: {
-                before,
-                after,
-                includeSubteams: false,
-                teamUsersIds: parsetToQueryTeamUsersIDS,
-              },
-            },
+          const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
+            showedUsersIds.has(userId),
           )
 
-          const formattedData = formattedAnswerSummary({
-            requestedUsersIDs: teamUsersIds,
-            answerSummary: answersSummaryData,
-          })
+          const mustFetchAnswerData =
+            teamUsersIds.length > 0 && usersAreBeingRequestedForTheFirstTime
 
-          setIsAnswerSummaryLoading(false)
+          if (mustFetchAnswerData) {
+            setAnswerSummaryPaginationData({
+              lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+              teamId,
+            })
+            const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+              `/answers/summary/${teamId}`,
+              {
+                params: {
+                  before,
+                  after,
+                  includeSubteams: false,
+                  teamUsersIds: parsetToQueryTeamUsersIDS,
+                },
+              },
+            )
 
-          setAnswersSummary((previousAnswers) => {
-            const newValues = formattedData.filter((newFormattedAnswer) => {
-              return !previousAnswers.some(
-                (previousAnswer) => newFormattedAnswer.userId === previousAnswer.userId,
-              )
+            const formattedData = formattedAnswerSummary({
+              requestedUsersIDs: teamUsersIds,
+              answerSummary: answersSummaryData,
             })
 
-            return [...previousAnswers, ...newValues]
-          })
+            setAnswersSummary((previousAnswers) => {
+              const newValues = formattedData.filter((newFormattedAnswer) => {
+                return !previousAnswers.some(
+                  (previousAnswer) => newFormattedAnswer.userId === previousAnswer.userId,
+                )
+              })
+
+              return [...previousAnswers, ...newValues]
+            })
+          }
         }
+
+        setTimeout(() => setIsAnswerSummaryLoading(false), 500)
       }
     },
 
@@ -198,9 +202,13 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
     })
 
     if (isAnswerSummaryLoading) return
+
+    if (limitedTeamUsers.length === 0) return
+
     observer.observe(document.querySelector('#list-bottom')!)
+
     return () => observer.disconnect()
-  }, [answersSummary, fetchAnswerSummaryData, isAnswerSummaryLoading])
+  }, [limitedTeamUsers.length, fetchAnswerSummaryData, isAnswerSummaryLoading])
 
   return (
     <Stack spacing={10}>
@@ -279,7 +287,6 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           after={after}
           before={before}
           week={week}
-          answers={answersSummary}
           isLoading={isAnswerSummaryLoading}
           teamId={teamId}
         />
@@ -290,7 +297,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           before={before}
           week={week}
           teamId={teamId}
-          isLoaded={!isLoading && !isAnswerSummaryLoading}
+          isLoaded={!isLoading}
         />
       </Grid>
       <NotificationSettingsModal

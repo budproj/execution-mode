@@ -14,6 +14,7 @@ import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
 import { isAnswerSummaryLoad } from 'src/state/recoil/routine/is-answers-summary-load'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
 import {
@@ -30,7 +31,6 @@ import AnswerRowComponent from './answer-row'
 import messages from './messages'
 
 interface AnswersComponentProperties {
-  answers: AnswerSummary[]
   teamId: string
   after: Date
   before: Date
@@ -41,7 +41,6 @@ interface AnswersComponentProperties {
 const ScrollableItem = getScrollableItem()
 
 const AnswersComponent = ({
-  answers,
   teamId,
   after,
   before,
@@ -50,6 +49,7 @@ const AnswersComponent = ({
 }: AnswersComponentProperties) => {
   const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
   const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
+  const answers = useRecoilValue(answerSummaryAtom)
 
   const intl = useIntl()
   const router = useRouter()
@@ -109,7 +109,6 @@ const AnswersComponent = ({
           aria-label={intl.formatMessage(messages.arrowLeftIconDescription)}
           borderRadius="10px 0px 0px 10px"
           height="38px"
-          isDisabled={isLoading}
           icon={
             <ArrowRight
               transform="rotate(180deg)"
@@ -141,7 +140,7 @@ const AnswersComponent = ({
           background="new-gray.200"
           aria-label={intl.formatMessage(messages.arrowRightIconDescription)}
           height="38px"
-          isDisabled={isNextWeekDisabled(before) || isLoading}
+          isDisabled={isNextWeekDisabled(before)}
           icon={
             <ArrowRight
               desc={intl.formatMessage(messages.arrowRightIconDescription)}
