@@ -174,7 +174,7 @@ const AnswersComponent = ({
         )}
         <Box id="list-bottom" />
       </ScrollableItem>
-      {showAnswerNowButton && !isLoading && (
+      {showAnswerNowButton && (
         <Box textAlign="center" marginTop="auto">
           <Divider borderColor="new-gray.400" />
           <Text color="red.500" fontWeight="500" fontSize="14px" marginY="10px">

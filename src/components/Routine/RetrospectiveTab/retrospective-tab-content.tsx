@@ -23,7 +23,6 @@ import GearIcon from 'src/components/Icon/Gear'
 import messages from 'src/components/Page/Team/Tabs/content/messages'
 import { NotificationSettingsModal } from 'src/components/Routine/NotificationSettings'
 import { Team } from 'src/components/Team/types'
-import { User } from 'src/components/User/types'
 import { GraphQLEffect } from 'src/components/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
 import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
@@ -95,56 +94,65 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
   const { after: afterQuery, before: beforeQuery } = router.query
   const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
-  const [teamUsersIds, setTeamUsersIds] = useState<Array<User['id']>>([])
 
-  useEffect(() => {
-    const fetchAnswerSummaryData = async () => {
+  const fetchAnswerSummaryData = useCallback(
+    async (entries: IntersectionObserverEntry[]) => {
       const { routines } = await servicesPromise
+      const target = entries[0]
 
-      const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-      const showedUsersIds = new Set(answersSummary.map((user) => user.id))
+      if (target.isIntersecting) {
+        const teamUsersIds = limitedTeamUsers.map((user) => user.id)
 
-      const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
-        showedUsersIds.has(userId),
-      )
+        const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
+        const showedUsersIds = new Set(answersSummary.map((user) => user.id))
 
-      const mustFetchAnswerData = teamUsersIds.length > 0 && usersAreBeingRequestedForTheFirstTime
-
-      if (mustFetchAnswerData) {
-        setAnswerSummaryPaginationData({
-          lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
-          teamId,
-        })
-        setIsAnswerSummaryLoading(true)
-        const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-          `/answers/summary/${teamId}`,
-          {
-            params: {
-              before,
-              after,
-              includeSubteams: false,
-              teamUsersIds: parsetToQueryTeamUsersIDS,
-            },
-          },
+        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) =>
+          showedUsersIds.has(userId),
         )
 
-        const formattedData = formattedAnswerSummary({
-          requestedUsersIDs: teamUsersIds,
-          answerSummary: answersSummaryData,
-        })
+        const mustFetchAnswerData = teamUsersIds.length > 0 && usersAreBeingRequestedForTheFirstTime
 
-        setIsAnswerSummaryLoading(false)
+        if (mustFetchAnswerData) {
+          setAnswerSummaryPaginationData({
+            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+            teamId,
+          })
+          setIsAnswerSummaryLoading(true)
+          const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+            `/answers/summary/${teamId}`,
+            {
+              params: {
+                before,
+                after,
+                includeSubteams: false,
+                teamUsersIds: parsetToQueryTeamUsersIDS,
+              },
+            },
+          )
 
-        setAnswersSummary((previousValues) => {
-          const newValues = formattedData.filter((newAnswer) => !previousValues.includes(newAnswer))
-          return [...previousValues, ...newValues]
-        })
+          const formattedData = formattedAnswerSummary({
+            requestedUsersIDs: teamUsersIds,
+            answerSummary: answersSummaryData,
+          })
+
+          setIsAnswerSummaryLoading(false)
+
+          setAnswersSummary((previousAnswers) => {
+            const newValues = formattedData.filter((newFormattedAnswer) => {
+              return !previousAnswers.some(
+                (previousAnswer) => newFormattedAnswer.userId === previousAnswer.userId,
+              )
+            })
+
+            return [...previousAnswers, ...newValues]
+          })
+        }
       }
-    }
+    },
 
-    fetchAnswerSummaryData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [after, before, teamId, teamUsersIds])
+    [after, before, limitedTeamUsers, teamId],
+  )
 
   useEffect(() => {
     if (after && before) {
@@ -183,25 +191,16 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const handleObserver = useCallback(
-    (entries: IntersectionObserverEntry[]) => {
-      const target = entries[0]
-
-      if (target.isIntersecting) {
-        setTeamUsersIds(limitedTeamUsers.map((user) => user.id))
-      }
-    },
-    [limitedTeamUsers],
-  )
-
   useEffect(() => {
-    const observer = new IntersectionObserver(handleObserver, {
+    const observer = new IntersectionObserver(fetchAnswerSummaryData, {
       root: document.querySelector('#scrollable-list-users'),
       threshold: 1,
     })
+
+    if (isAnswerSummaryLoading) return
     observer.observe(document.querySelector('#list-bottom')!)
     return () => observer.disconnect()
-  }, [handleObserver])
+  }, [answersSummary, fetchAnswerSummaryData, isAnswerSummaryLoading])
 
   return (
     <Stack spacing={10}>
