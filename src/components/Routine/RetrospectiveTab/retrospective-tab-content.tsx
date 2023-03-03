@@ -101,8 +101,6 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
       const { routines } = await servicesPromise
       const target = entries[0]
 
-      setIsAnswerSummaryLoading(true)
-
       if (target.isIntersecting) {
         const teamUsersIds = limitedTeamUsers.map((user) => user.id)
 
@@ -113,6 +111,8 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
         })
 
         if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
+          setIsAnswerSummaryLoading(true)
+
           setAnswerSummaryPaginationData({
             lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
             teamId,
@@ -143,11 +143,9 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
 
             return [...previousAnswers, ...newValues]
           })
+          setIsAnswerSummaryLoading(false)
         }
       }
-
-      const setSummaryLoadingTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 500)
-      return () => clearTimeout(setSummaryLoadingTimer)
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
