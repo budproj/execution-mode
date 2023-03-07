@@ -134,16 +134,8 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
             answerSummary: answersSummaryData,
           })
 
-          setAnswersSummary((previousAnswers) => {
-            const newValues = formattedData.filter((newFormattedAnswer) => {
-              return !previousAnswers.some(
-                (previousAnswer) => newFormattedAnswer.userId === previousAnswer.userId,
-              )
-            })
-
-            return [...previousAnswers, ...newValues]
-          })
-          setTimeout(() => setIsAnswerSummaryLoading(false), 500)
+          setAnswersSummary((previousAnswers) => [...previousAnswers, ...formattedData])
+          setTimeout(() => setIsAnswerSummaryLoading(false), 1800)
         }
       }
     },
