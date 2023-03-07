@@ -135,7 +135,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           })
 
           setAnswersSummary((previousAnswers) => [...previousAnswers, ...formattedData])
-          setTimeout(() => setIsAnswerSummaryLoading(false), 1800)
+          setIsAnswerSummaryLoading(false)
         }
       }
     },
