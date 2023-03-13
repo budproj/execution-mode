@@ -44,6 +44,7 @@ const TeamCard = ({ id, openModal }: TeamCardProperties) => {
 
   return (
     <HoverableWrapper
+      id={isCompany ? 'explore-company-card' : undefined}
       position="relative"
       transition="0.4s all ease-out"
       shadowStyle={shadowStrokeLight}

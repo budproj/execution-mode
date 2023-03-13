@@ -160,13 +160,16 @@ const AnswersComponent = ({
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
       </Flex>
-      <ScrollableItem maxH={showAnswerNowButton ? '455px' : '537px'} p="0 12px">
+      <ScrollableItem
+        id="overview-summary-list"
+        maxH={showAnswerNowButton ? '455px' : '537px'}
+        p="0 12px"
+      >
         {isLoading ? (
           <AnswersRowSkeleton />
         ) : (
           filteredAnswers.map((answer) => <AnswerRowComponent key={answer.id} answer={answer} />)
         )}
-        {}
       </ScrollableItem>
       {showAnswerNowButton && !isLoading && (
         <Box textAlign="center" marginTop="auto">
