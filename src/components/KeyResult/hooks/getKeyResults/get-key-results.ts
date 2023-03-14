@@ -15,6 +15,8 @@ interface GetCompanyCycles {
   data: KeyResult[]
   loading: boolean
   called: boolean
+  fetchMore: any
+  refetch: any
 }
 
 export const useGetKeyResults = (): GetCompanyCycles => {
@@ -22,26 +24,38 @@ export const useGetKeyResults = (): GetCompanyCycles => {
   const krHealthStatus = useRecoilValue(krHealthStatusAtom)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
 
-  const query = {}
+  const query = { limit: 2, offset: 0 }
 
   if (krHealthStatus) {
     Object.assign(query, { confidence: krHealthStatus })
   }
 
-  const { loading, called } = useQuery<GetUserPrimaryCompanyQuery>(GET_KEY_RESULTS, {
-    variables: query,
-    fetchPolicy: 'network-only',
-    onCompleted: (data) => {
-      const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
-      const keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
+  console.log('query', query)
+  const { loading, called, fetchMore, refetch } = useQuery<GetUserPrimaryCompanyQuery>(
+    GET_KEY_RESULTS,
+    {
+      variables: query,
+      fetchPolicy: 'cache-and-network',
+      nextFetchPolicy: 'cache-first',
+      onCompleted: (data) => {
+        console.log('onCompleted', data)
+        const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
+        const keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
 
-      if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
+        if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
+      },
     },
-  })
+  )
 
   useEffect(() => {
+    console.log('loadKRs', keyResults)
     loadKRs(keyResults)
   }, [keyResults, loadKRs])
 
-  return { data: keyResults, loading, called }
+  const _fetchMore = (...arguments_: any[]) => {
+    console.log('fetchMore', arguments_)
+    fetchMore(...arguments_)
+  }
+
+  return { data: keyResults, loading, called, fetchMore: _fetchMore, refetch }
 }
