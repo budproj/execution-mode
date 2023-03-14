@@ -10,12 +10,12 @@ import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashbo
 
 import { KeyResult } from '../../types'
 
-import queries from './get-key-results.gql'
-
 interface GetCompanyCycles {
   data: KeyResult[]
   loading: boolean
   called: boolean
+  fetchMore: any
+  refetch: any
 }
 
 export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
@@ -24,23 +24,21 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
   const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
 
-  const query = {}
+  const query = { limit: 2, offset: 0 }
 
   if (krHealthStatus) {
     Object.assign(query, { confidence: krHealthStatus, teamId: selectedDashboardTeam?.id })
   }
 
-  const { loading, called } = useQuery<GetUserPrimaryCompanyQuery>(
-    krHealthStatus && !isCompany ? queries.GET_KEY_RESULTS_FOR_MODAL : queries.GET_KEY_RESULTS,
+  console.log('query', query)
+  const { loading, called, fetchMore, refetch } = useQuery<GetUserPrimaryCompanyQuery>(
+    GET_KEY_RESULTS,
     {
       variables: query,
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'cache-and-network',
+      nextFetchPolicy: 'cache-first',
       onCompleted: (data) => {
-        if (krHealthStatus && !isCompany) {
-          const keyResultsEdges = data.team?.keyResults?.edges ?? []
-          if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
-        }
-
+        console.log('onCompleted', data)
         const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
         const keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
 
@@ -50,8 +48,14 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
   )
 
   useEffect(() => {
+    console.log('loadKRs', keyResults)
     loadKRs(keyResults)
   }, [keyResults, loadKRs])
 
-  return { data: keyResults, loading, called }
+  const _fetchMore = (...arguments_: any[]) => {
+    console.log('fetchMore', arguments_)
+    fetchMore(...arguments_)
+  }
+
+  return { data: keyResults, loading, called, fetchMore: _fetchMore, refetch }
 }

@@ -1,7 +1,9 @@
-import { Flex, FlexProps } from '@chakra-ui/react'
+import { Button, Flex, FlexProps } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
+import { useGetKeyResults } from 'src/components/KeyResult/hooks'
 import { Team } from 'src/components/Team/types'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
 
@@ -25,6 +27,12 @@ const BoardsOverview = ({
   const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
   const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
 
+  const { data: KrData, loading: loadingg, fetchMore } = useGetKeyResults()
+
+  const intl = useIntl()
+
+  console.log({ KrData })
+
   return (
     <>
       <Flex minHeight={155} gridGap="24px" {...rest}>
@@ -41,6 +49,21 @@ const BoardsOverview = ({
         /> */}
         <KeyResultConfidences isLoading={loading} quantities={data} shadow="for-background.light" />
       </Flex>
+
+      {KrData.map((kr) => (
+        <div key={kr.id}>{kr.title}</div>
+      ))}
+
+      <Button
+        onClick={() => {
+          console.log('onClick')
+          fetchMore({
+            variables: { offset: KrData.length, limit: 2 },
+          })
+        }}
+      >
+        butao
+      </Button>
 
       {krHealthStatus && (
         <KeyResultsListingTable

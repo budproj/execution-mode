@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react'
 import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -22,7 +23,7 @@ export const KeyResultsListingTable = ({
   onClose,
   isCompany,
 }: BoardsOverviewProperties) => {
-  const { data, loading } = useGetKeyResults(isCompany)
+  const { data, loading, fetchMore } = useGetKeyResults()
   const [currentConfidenceTag] = useConfidenceTag(confidence)
   const intl = useIntl()
   const { dispatch: dispatchEvent } = useEvent(EventType.OPENED_KEY_RESULT_REPORT_CONFIDANCE)
@@ -36,17 +37,23 @@ export const KeyResultsListingTable = ({
     dispatchEvent({ confidence: currentConfidenceTag.tag })
   }
 
+  console.log({ data })
+
   return (
-    <KeyResultListingModal
-      isOpen={isOpen}
-      loadingData={loading}
-      data={data}
-      dispatchEvent={dispatchOpenKeyResultEvent}
-      modalHeadingTitle={intl.formatMessage(messages.modalTitle, {
-        confidence: confidence === -1 ? 'barrier' : confidence,
-        confidencetext: confidenceText,
-      })}
-      onClose={onClose}
-    />
+    <>
+      <KeyResultListingModal
+        fetchMore={fetchMore}
+        isOpen={isOpen}
+        loadingData={loading}
+        data={data}
+        dispatchEvent={dispatchOpenKeyResultEvent}
+        modalHeadingTitle={intl.formatMessage(messages.modalTitle, {
+          confidence: confidence === -1 ? 'barrier' : confidence,
+          confidencetext: confidenceText,
+        })}
+        onClose={onClose}
+      />
+      <Button> aaaaaaaaaaa</Button>
+    </>
   )
 }

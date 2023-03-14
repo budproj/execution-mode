@@ -6,6 +6,7 @@ import {
   ModalCloseButton,
   Heading,
   Flex,
+  Button,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useMemo } from 'react'
@@ -24,6 +25,7 @@ export interface KeyResultModalListingProperties {
   data: KeyResult[]
   dispatchEvent?: () => void
   modalHeadingTitle: string
+  fetchMore: any
 }
 
 const StyledModal = styled(ModalContent)`
@@ -55,6 +57,7 @@ export const KeyResultListingModal = ({
   modalHeadingTitle,
   loadingData,
   onClose,
+  fetchMore,
 }: KeyResultModalListingProperties) => {
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 
@@ -91,6 +94,17 @@ export const KeyResultListingModal = ({
           </Flex>
 
           <StyledTableWrapper>
+            <Button
+              onClick={() =>
+                fetchMore({
+                  variables: {
+                    offset: 2,
+                  },
+                })
+              }
+            >
+              aaa
+            </Button>
             <KeyResultList
               type={KEY_RESULT_LIST_TYPE.STATIC}
               keyResultIDs={keyResultIds}
