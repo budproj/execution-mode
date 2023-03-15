@@ -18,14 +18,14 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { NextRouter, useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { SelectMenu } from 'src/components/Base'
 import { KeyResultOwnerSelectMenu } from 'src/components/KeyResult/OwnerSelectMenu/wrapper'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
-import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
+import { isEditTeamModalOpenAtom, isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 import meAtom from 'src/state/recoil/user/me'
 
 import { TeamSelect } from '../Select/wrapper'
@@ -34,13 +34,6 @@ import { Team } from '../types'
 
 import messages from './messages'
 import queries from './queries.gql'
-
-interface SaveTeamModalProperties {
-  teamId?: string
-  isOpen: boolean
-  isEditing?: boolean
-  onClose: () => void
-}
 
 interface AddSubteamMutationResult {
   createTeam: {
@@ -57,11 +50,13 @@ const getTeamIdFromRouter = (router: NextRouter) => {
   return router.query.id
 }
 
-export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamModalProperties) => {
+export const SaveTeamModal = () => {
   const intl = useIntl()
   const router = useRouter()
+  const [{ isModalOpen, isEditingTeamId }, setIsEditTeamModalOpen] =
+    useRecoilState(isEditTeamModalOpenAtom)
 
-  const preloadedTeamId = teamId ?? getTeamIdFromRouter(router)
+  const preloadedTeamId = isEditingTeamId ?? getTeamIdFromRouter(router)
 
   const currentUserID = useRecoilValue(meAtom)
   const team = useRecoilValue(teamAtomFamily(preloadedTeamId))
@@ -70,10 +65,14 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
 
   const [owner, setOwner] = useState('')
   const [parentTeam, setParentTeam] = useState<Partial<Team>>({})
-  const [name, setName] = useState(isEditing ? team?.name : '')
-  const [description, setDescription] = useState(isEditing ? team?.description : '')
+  const [name, setName] = useState(isEditingTeamId ? team?.name : '')
+  const [description, setDescription] = useState(isEditingTeamId ? team?.description : '')
 
   const childTeamsIds = childTeams.map((childTeam) => childTeam.id)
+
+  const handleCloseModal = useCallback(() => {
+    setIsEditTeamModalOpen({ isModalOpen: false, isEditingTeamId: undefined })
+  }, [setIsEditTeamModalOpen])
 
   useEffect(() => {
     if (team) {
@@ -85,17 +84,17 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
         setParentTeam(team.parent)
       }
 
-      const ownerID = isEditing ? team?.ownerId ?? '' : currentUserID ?? ''
+      const ownerID = isEditingTeamId ? team?.ownerId ?? '' : currentUserID ?? ''
       setOwner(ownerID)
     }
-  }, [team, setChildTeamEdges, isEditing, currentUserID])
+  }, [team, setChildTeamEdges, isEditingTeamId, currentUserID])
 
   const [saveOrUpdateTeam, { loading }] = useMutation<AddSubteamMutationResult>(
-    isEditing ? queries.UPDATE_TEAM : queries.CREATE_TEAM,
+    isEditingTeamId ? queries.UPDATE_TEAM : queries.CREATE_TEAM,
     {
       onCompleted: () => {
         setShouldUpdateObjectives(true)
-        onClose()
+        handleCloseModal()
       },
     },
   )
@@ -106,7 +105,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
   }
 
   const executeSaveOrUpdateTeam = () => {
-    if (isEditing) {
+    if (isEditingTeamId) {
       void saveOrUpdateTeam({
         variables: {
           name: name === '' ? undefined : name,
@@ -131,14 +130,16 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
   }
 
   return (
-    <Modal isOpen={isOpen} size="md" onClose={onClose}>
+    <Modal isOpen={isModalOpen} size="md" onClose={handleCloseModal}>
       <ModalOverlay />
       <ModalContent maxW="33em">
         <ModalHeader p="1.85em 2.3em 0 2.3em">
           <Heading as="h1" fontSize="3xl" color="black.900" fontWeight="400">
-            {intl.formatMessage(isEditing ? messages.editTeamHeader : messages.addSubteamHeader)}
+            {intl.formatMessage(
+              isEditingTeamId ? messages.editTeamHeader : messages.addSubteamHeader,
+            )}
           </Heading>
-          {!isEditing && (
+          {!isEditingTeamId && (
             <Text color="new-gray.900" fontWeight="400" fontSize="lg">
               {intl.formatMessage(messages.addSubteamHeaderDescription, { teamname: team?.name })}
             </Text>
@@ -150,7 +151,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
             <FormControl>
               <FormLabel>{intl.formatMessage(messages.teamNameLabel)}</FormLabel>
               <Input
-                defaultValue={isEditing ? team?.name : undefined}
+                defaultValue={isEditingTeamId ? team?.name : undefined}
                 onChange={(event) => setName(event.target.value)}
               />
             </FormControl>
@@ -159,7 +160,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
               <FormLabel>{intl.formatMessage(messages.descriptionLabel)}</FormLabel>
               <Textarea
                 placeholder={intl.formatMessage(messages.descriptionPlaceholder)}
-                defaultValue={isEditing ? team?.description : undefined}
+                defaultValue={isEditingTeamId ? team?.description : undefined}
                 onChange={(event) => setDescription(event.target.value)}
               />
             </FormControl>
@@ -174,7 +175,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
                 onChange={setOwner}
               />
             </FormControl>
-            {!team?.isCompany && isEditing ? (
+            {!team?.isCompany && isEditingTeamId ? (
               <FormControl>
                 <FormLabel>{intl.formatMessage(messages.parentTeam)}</FormLabel>
                 <SelectMenu
@@ -207,7 +208,7 @@ export const SaveTeamModal = ({ teamId, isOpen, onClose, isEditing }: SaveTeamMo
               size="lg"
               fontSize="md"
               fontWeight="400"
-              onClick={onClose}
+              onClick={handleCloseModal}
             >
               {intl.formatMessage(messages.cancel)}
             </Button>

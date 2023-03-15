@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, Skeleton, SkeletonText, Text, Stack, useToken } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -17,7 +17,6 @@ import messages from './messages'
 
 export interface TeamCardProperties {
   id?: Team['id']
-  openModal?: () => void
 }
 
 const HoverableWrapper = styled(Box)`
@@ -28,7 +27,7 @@ const HoverableWrapper = styled(Box)`
   }
 `
 
-const TeamCard = ({ id, openModal }: TeamCardProperties) => {
+const TeamCard = memo(({ id }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
   const [users, setUserEdges] = useConnectionEdges<User>()
@@ -52,13 +51,7 @@ const TeamCard = ({ id, openModal }: TeamCardProperties) => {
       py={12}
       px={10}
     >
-      <MenuCard
-        position="absolute"
-        top="20px"
-        right="20px"
-        teamId={team?.id}
-        openModal={openModal}
-      />
+      <MenuCard position="absolute" top="20px" right="20px" teamId={team?.id} />
       <IntlLink href={id ?? '#'}>
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
           <Flex flexGrow={1} direction="column" justifyContent="flex-end">
@@ -105,6 +98,6 @@ const TeamCard = ({ id, openModal }: TeamCardProperties) => {
       </IntlLink>
     </HoverableWrapper>
   )
-}
+})
 
 export default TeamCard
