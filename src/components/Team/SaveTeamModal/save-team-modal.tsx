@@ -45,18 +45,22 @@ interface AddSubteamMutationResult {
   }
 }
 
+interface SaveTeamModalProperties {
+  teamId?: Team['id']
+}
+
 const getTeamIdFromRouter = (router: NextRouter) => {
   if (Array.isArray(router.query.id)) throw new Error('Cannot parse string array')
   return router.query.id
 }
 
-export const SaveTeamModal = () => {
+export const SaveTeamModal = ({ teamId }: SaveTeamModalProperties) => {
   const intl = useIntl()
   const router = useRouter()
   const [{ isModalOpen, isEditingTeamId }, setIsEditTeamModalOpen] =
     useRecoilState(isEditTeamModalOpenAtom)
 
-  const preloadedTeamId = isEditingTeamId ?? getTeamIdFromRouter(router)
+  const preloadedTeamId = teamId ?? isEditingTeamId ?? getTeamIdFromRouter(router)
 
   const currentUserID = useRecoilValue(meAtom)
   const team = useRecoilValue(teamAtomFamily(preloadedTeamId))

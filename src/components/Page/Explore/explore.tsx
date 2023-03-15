@@ -53,7 +53,7 @@ const ExplorePage = () => {
         </PageHeader>
       </div>
 
-      <SaveTeamModal />
+      <SaveTeamModal teamId={teamId} />
       <TeamCardList parentWidth={parentWidth} teamFilter={teamFilter} />
     </PageContent>
   )
