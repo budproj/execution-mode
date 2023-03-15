@@ -1,5 +1,5 @@
 import { Box, Stack } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
@@ -18,9 +18,15 @@ import UpperMenu from './upper-menu'
 
 const ExplorePage = () => {
   const intl = useIntl()
+  const reference = useRef<HTMLDivElement>(null)
   const [teamFilter, setTeamFilter] = useState('')
+  const [parentWidth, setParentWidht] = useState<number>(1080)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  useEffect(() => {
+    setParentWidht(() => (reference.current ? reference.current.offsetWidth : 1080))
+  }, [])
 
   const myID = useRecoilValue(meAtom)
   const user = useRecoilValue(userAtomFamily(myID))
@@ -39,7 +45,7 @@ const ExplorePage = () => {
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
 
       <PageHeader>
-        <Stack direction="row">
+        <Stack ref={reference} direction="row">
           <PageTitle>{intl.formatMessage(messages.pageTitle)}</PageTitle>
           <Box>
             <UpperMenu openModal={openModal} setTeamFilter={setTeamFilter} teamId={teamId} />
@@ -47,7 +53,7 @@ const ExplorePage = () => {
         </Stack>
       </PageHeader>
 
-      <TeamCardList teamFilter={teamFilter} openModal={openModal} />
+      <TeamCardList parentWidth={parentWidth} teamFilter={teamFilter} openModal={openModal} />
       <SaveTeamModal
         teamId={isEditTeamModalOpen ?? teamId}
         isEditing={Boolean(isEditTeamModalOpen)}
