@@ -1,12 +1,11 @@
 import { Box, Stack } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import PageContent from 'src/components/Base/PageContent'
 import TeamCardList from 'src/components/Team/CardList'
 import SaveTeamModal from 'src/components/Team/SaveTeamModal'
-import { isEditTeamModalOpenAtom } from 'src/state/recoil/team'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -22,44 +21,40 @@ const ExplorePage = () => {
   const [teamFilter, setTeamFilter] = useState('')
   const [parentWidth, setParentWidht] = useState<number>(1080)
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
   useEffect(() => {
-    setParentWidht(() => (reference.current ? reference.current.offsetWidth : 1080))
+    if (reference.current) {
+      const observer = new ResizeObserver((entries) => {
+        const { width } = entries[0].contentRect
+        setParentWidht(width)
+      })
+
+      observer.observe(reference.current)
+
+      return () => observer.disconnect()
+    }
   }, [])
 
   const myID = useRecoilValue(meAtom)
   const user = useRecoilValue(userAtomFamily(myID))
   const teamId = user?.companies?.edges[0]?.node.id
-  const [isEditTeamModalOpen, setIsEditTeamModalOpen] = useRecoilState(isEditTeamModalOpenAtom)
-
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => {
-    setIsModalOpen(false)
-    // eslint-disable-next-line unicorn/no-useless-undefined
-    setIsEditTeamModalOpen(undefined)
-  }
 
   return (
     <PageContent bg="new-gray.50">
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
 
-      <PageHeader>
-        <Stack ref={reference} direction="row">
-          <PageTitle>{intl.formatMessage(messages.pageTitle)}</PageTitle>
-          <Box>
-            <UpperMenu openModal={openModal} setTeamFilter={setTeamFilter} teamId={teamId} />
-          </Box>
-        </Stack>
-      </PageHeader>
+      <div ref={reference}>
+        <PageHeader>
+          <Stack direction="row">
+            <PageTitle>{intl.formatMessage(messages.pageTitle)}</PageTitle>
+            <Box>
+              <UpperMenu setTeamFilter={setTeamFilter} teamId={teamId} />
+            </Box>
+          </Stack>
+        </PageHeader>
+      </div>
 
-      <TeamCardList parentWidth={parentWidth} teamFilter={teamFilter} openModal={openModal} />
-      <SaveTeamModal
-        teamId={isEditTeamModalOpen ?? teamId}
-        isEditing={Boolean(isEditTeamModalOpen)}
-        isOpen={isModalOpen}
-        onClose={closeModal}
-      />
+      <SaveTeamModal />
+      <TeamCardList parentWidth={parentWidth} teamFilter={teamFilter} />
     </PageContent>
   )
 }
