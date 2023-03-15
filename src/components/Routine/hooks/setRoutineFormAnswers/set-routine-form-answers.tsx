@@ -5,7 +5,6 @@ import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import tabsMessages from 'src/components/Page/Team/messages'
 import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab/'
 import { Team } from 'src/components/Team/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
@@ -49,7 +48,7 @@ export const useRoutineFormAnswers = () => {
     ? routerQuery?.activeTab[0]
     : routerQuery?.activeTab
 
-  const retrospectiveTab = intl.formatMessage(tabsMessages.retrospectiveTeamTab)
+  const retrospectiveTab = 'retrospective'
 
   const setAnswerSummary = useSetRecoilState(answerSummaryAtom)
   const { after, before } = useRecoilValue(routineDatesRangeAtom)

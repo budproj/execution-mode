@@ -27,14 +27,9 @@ export interface ExploreTeamPageProperties extends PageProperties {
 const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   const intl = useIntl()
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState(
-    intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
-  )
+  const [activeTab, setActiveTab] = useState('okrs')
 
-  const tabs = new Set([
-    intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
-    intl.formatMessage(messages.retrospectiveTeamTab).toLocaleLowerCase(),
-  ])
+  const tabs = new Set(['okrs', 'retrospective'])
 
   const { data, loading, error, called, refetch } = useQuery<GetTeamNameQuery>(
     queries.GET_TEAM_DATA,
@@ -88,11 +83,9 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
                 <TeamHeader
                   isLoaded={called && !loading}
                   team={data?.team}
-                  showProgress={
-                    activeTab === intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase()
-                  }
+                  showProgress={activeTab === 'okrs'}
                 />
-                {activeTab === intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase() && (
+                {activeTab === 'retrospective' && (
                   <Box w="28rem">
                     <MenuHeader teamId={teamId} />
                   </Box>
