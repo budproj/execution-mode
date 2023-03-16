@@ -54,7 +54,7 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
           color="new-gray.800"
           _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
           paddingBottom={3}
-          onClick={() => handleClick(intl.formatMessage(messages.okrsTeamTab))}
+          onClick={() => handleClick('okrs')}
         >
           {intl.formatMessage(messages.okrsTeamTab)}
         </StyledTab>
@@ -64,7 +64,7 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
           _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
           paddingBottom={3}
           onClick={() => {
-            handleClick(intl.formatMessage(messages.retrospectiveTeamTab))
+            handleClick('retrospective')
             dispatch({})
           }}
         >
