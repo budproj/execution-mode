@@ -11,16 +11,14 @@ import messages from './messages'
 
 interface MenuCardProperties extends StyleProps {
   teamId?: Team['id']
-  openModal?: () => void
 }
 
-export const MenuCard = ({ openModal, teamId, ...rest }: MenuCardProperties) => {
+export const MenuCard = ({ teamId, ...rest }: MenuCardProperties) => {
   const setIsEditTeamModalOpen = useSetRecoilState(isEditTeamModalOpenAtom)
   const intl = useIntl()
 
   const onEditClick = () => {
-    if (openModal) openModal()
-    setIsEditTeamModalOpen(teamId)
+    setIsEditTeamModalOpen({ isModalOpen: true, isEditingTeamId: teamId })
   }
 
   return (

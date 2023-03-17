@@ -137,7 +137,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
     <>
       {isEditTeamModalOpen && team && (
         // eslint-disable-next-line unicorn/no-useless-undefined
-        <SaveTeamModal isOpen isEditing onClose={() => setIsEditTeamModalOpen(undefined)} />
+        <SaveTeamModal />
       )}
       <Stack direction="row" justifyContent="flex-end" marginTop="0.8em">
         {/* // eslint-disable-next-line no-warning-comments
@@ -155,7 +155,11 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
         </Tooltip>
       )} */}
 
-        {canUpdate && <EditTeamButton onClick={() => setIsEditTeamModalOpen(team?.id)} />}
+        {canUpdate && (
+          <EditTeamButton
+            onClick={() => setIsEditTeamModalOpen({ isModalOpen: true, isEditingTeamId: team?.id })}
+          />
+        )}
 
         {hasInactiveObjectives && isViewingActiveObjectives && (
           <Tooltip label={intl.formatMessage(messages.explorePreviousCyclesOption)} placement="top">
