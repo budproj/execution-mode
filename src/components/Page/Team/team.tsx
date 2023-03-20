@@ -83,9 +83,11 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
                 <TeamHeader
                   isLoaded={called && !loading}
                   team={data?.team}
-                  showProgress={activeTab === 'okrs'}
+                  showProgress={
+                    activeTab === intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase()
+                  }
                 />
-                {activeTab === 'retrospective' && (
+                {activeTab === intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase() && (
                   <Box w="28rem">
                     <MenuHeader teamId={teamId} />
                   </Box>
