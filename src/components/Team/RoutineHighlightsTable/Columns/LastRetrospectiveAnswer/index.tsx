@@ -3,7 +3,7 @@ import React from 'react'
 import LastRetrospectiveAnswerOverview from 'src/components/User/LastRetrospectiveAnswerOverview/wrapper'
 import { User } from 'src/components/User/types'
 
-export interface LastRetrospectiveAnswerColumnProperties {
+export interface RoutinesHighlightsTableLastRetrospectiveAnswerColumnProperties {
   isLoaded?: boolean
   lastRetrospetiveAnswerId?: string
   feeling?: string
@@ -13,7 +13,7 @@ export interface LastRetrospectiveAnswerColumnProperties {
   onClick?: () => void
 }
 
-const LastRetrospectiveAnswer = ({
+const RoutinesHighlightsTableLastRetrospectiveAnswerColumn = ({
   isLoaded,
   lastRetrospetiveAnswerId,
   feeling,
@@ -21,7 +21,7 @@ const LastRetrospectiveAnswer = ({
   productivity,
   roadblock,
   onClick,
-}: LastRetrospectiveAnswerColumnProperties) => {
+}: RoutinesHighlightsTableLastRetrospectiveAnswerColumnProperties) => {
   return (
     <LastRetrospectiveAnswerOverview
       userId={userId}
@@ -35,4 +35,4 @@ const LastRetrospectiveAnswer = ({
   )
 }
 
-export default LastRetrospectiveAnswer
+export default RoutinesHighlightsTableLastRetrospectiveAnswerColumn

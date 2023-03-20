@@ -6,11 +6,11 @@ import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/modals/UsersTeamList/messages'
 
-interface UserProductityProperties {
+interface UserproductivityProperties {
   productivity?: string
 }
 
-const UserProductity = ({ productivity }: UserProductityProperties) => {
+const Userproductivity = ({ productivity }: UserproductivityProperties) => {
   const intl = useIntl()
 
   return (
@@ -37,4 +37,4 @@ const UserProductity = ({ productivity }: UserProductityProperties) => {
   )
 }
 
-export default UserProductity
+export default Userproductivity
