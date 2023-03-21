@@ -79,7 +79,7 @@ export const SaveTeamModal = ({ teamId }: SaveTeamModalProperties) => {
   }, [setIsEditTeamModalOpen])
 
   useEffect(() => {
-    if (team && isModalOpen) {
+    if (team) {
       setChildTeamEdges(team.teams?.edges)
       setName(team?.name)
       setDescription(team?.description)
@@ -91,7 +91,7 @@ export const SaveTeamModal = ({ teamId }: SaveTeamModalProperties) => {
       const ownerID = isEditingTeamId ? team?.ownerId ?? '' : currentUserID ?? ''
       setOwner(ownerID)
     }
-  }, [team, setChildTeamEdges, isModalOpen, currentUserID, isEditingTeamId])
+  }, [team, setChildTeamEdges, isEditingTeamId, currentUserID])
 
   const [saveOrUpdateTeam, { loading }] = useMutation<AddSubteamMutationResult>(
     isEditingTeamId ? queries.UPDATE_TEAM : queries.CREATE_TEAM,
