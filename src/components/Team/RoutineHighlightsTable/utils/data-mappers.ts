@@ -1,12 +1,13 @@
 import { CARD_TYPES } from 'src/components/Page/Team/Highlights/utils/card-types'
-import { useGetUserDetails } from 'src/components/User/hooks'
 
 import { RequestReturnMapped } from '../hooks/getTeamRoutineHighlightsData/get-team-routine-highlights-data'
 
 export const teamRoutinesHighlightsDataMapper = {
   toFront(data: RequestReturnMapped[], cardType: CARD_TYPES) {
-    return data.map(
-      ({ data: { feeling, lastRoutineAnswerId, productivity, roadBlock }, userId }) => ({
+    return data.map(({ data: retrospectiveData, userId }) => {
+      const { feeling, lastRoutineAnswerId, productivity, roadBlock } = retrospectiveData
+
+      return {
         user: {
           userId,
         },
@@ -15,7 +16,7 @@ export const teamRoutinesHighlightsDataMapper = {
         },
         custom: {
           userId,
-          lastRoutineAnswerId,
+          lastUserRoutineAnswer: retrospectiveData,
           cardType,
         },
         lastRetrospective: {
@@ -26,9 +27,9 @@ export const teamRoutinesHighlightsDataMapper = {
           roadBlock,
         },
         lastAccess: {
-          lastDateAccess: useGetUserDetails(userId).data?.amplitude?.last_used,
+          userId,
         },
-      }),
-    )
+      }
+    })
   },
 }

@@ -1,45 +1,49 @@
-import { Flex, Skeleton, SkeletonText } from '@chakra-ui/react'
+import { Flex, Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Column } from 'react-table'
 
 import TableBase from 'src/components/Base/Table'
 import KeyResultsOverviewSkeleton from 'src/components/User/KeyResultsOverview/key-results-overview.skeleton'
-import LastRetrospectiveAnswerSkeleton from 'src/components/User/LastRetrospectiveAnswerOverview/last-retrospective-answer.skeleton'
 
 import messages from './messages'
-import { indicatorsTableSkeletonData } from './mocked-table-data'
+import { teamHighlightsTableSkeletonData } from './mocked-table-data'
 
-type indicatorsTableSkeletonColumns = {
-  userKeyResultsOverviewSkeleton: string
-  checkinSkeleton: string
-  checklistSkeleton: string
-  lastAccessSkeleton: string
-  lastRetrospectiveAnswerSkeleton: string
+type teamHighlightsTableSkeletonColumns = {
+  user: string
+  team: string
+  custom: string
+  lastRetrospective: string
+  lastAccess: string
 }
 
 const IndicatorsTableSkeleton = () => {
   const intl = useIntl()
 
   const columnHeaderTitle = (columnAccessor: string) =>
-    intl.formatMessage(messages.teamIndicatorsTableColumnHeaderMessage, { columnAccessor })
+    intl.formatMessage(messages.teamHighlightsTableColumnHeaderMessage, { columnAccessor })
 
-  const fakeTableData = indicatorsTableSkeletonData(4)
+  const fakeTableData = teamHighlightsTableSkeletonData(4)
 
-  const columns: Array<Column<indicatorsTableSkeletonColumns>> = [
+  const columns: Array<Column<teamHighlightsTableSkeletonColumns>> = [
     {
-      Header: columnHeaderTitle('userKeyResultsOverview'),
-      accessor: 'userKeyResultsOverviewSkeleton',
+      Header: columnHeaderTitle('user'),
+      accessor: 'user',
       Cell: () => <KeyResultsOverviewSkeleton />,
     },
     {
-      Header: columnHeaderTitle('lastAccess'),
-      accessor: 'lastAccessSkeleton',
+      Header: columnHeaderTitle('team'),
+      accessor: 'team',
       Cell: () => <SkeletonText noOfLines={2} width="80%" skeletonHeight={4} />,
     },
     {
-      Header: columnHeaderTitle('checkin'),
-      accessor: 'checkinSkeleton',
+      Header: columnHeaderTitle('custom'),
+      accessor: 'custom',
+      Cell: () => <SkeletonCircle size="1.4em" />,
+    },
+    {
+      Header: columnHeaderTitle('lastRetrospective'),
+      accessor: 'lastRetrospective',
       Cell: () => (
         <Flex alignItems="center" gap={2}>
           <Skeleton w="1.4em" h="1.4em" borderRadius="50%" />
@@ -48,19 +52,9 @@ const IndicatorsTableSkeleton = () => {
       ),
     },
     {
-      Header: columnHeaderTitle('checklist'),
-      accessor: 'checklistSkeleton',
-      Cell: () => (
-        <Flex alignItems="center" gap={2}>
-          <Skeleton w="1.4em" h="1.4em" borderRadius="50%" />
-          <SkeletonText noOfLines={1} w="2.4em" skeletonHeight={6} />
-        </Flex>
-      ),
-    },
-    {
-      Header: columnHeaderTitle('lastRetrospectiveAnswer'),
-      accessor: 'lastRetrospectiveAnswerSkeleton',
-      Cell: () => <LastRetrospectiveAnswerSkeleton numberOfElements={3} />,
+      Header: columnHeaderTitle('lastAccess'),
+      accessor: 'lastAccess',
+      Cell: () => <SkeletonText noOfLines={2} width="80%" skeletonHeight={4} />,
     },
   ]
 

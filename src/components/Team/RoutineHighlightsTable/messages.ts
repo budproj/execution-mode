@@ -1,12 +1,12 @@
 import { defineMessages } from 'react-intl'
 
-type teamIndicatorsTableMessages = 'teamIndicatorsTableColumnHeaderMessage'
+type teamHighlightTableMessages = 'teamHighlightsTableColumnHeaderMessage'
 
-export default defineMessages<teamIndicatorsTableMessages>({
-  teamIndicatorsTableColumnHeaderMessage: {
+export default defineMessages<teamHighlightTableMessages>({
+  teamHighlightsTableColumnHeaderMessage: {
     defaultMessage:
-      '{columnAccessor, select, userKeyResultsOverview {Progresso em krs} lastAccess {Último acesso} checkin {Check-in} checklist {Check-list} lastRetrospectiveAnswer {Retrospectiva} other {}}',
-    id: 'HGE7UV',
+      '{columnAccessor, select, user {Usuário} team {Time} productivity {Produtividade na semana} roadblock {Bloqueios na semana} feeling {Sentimentos na semana} lastRetrospective {Retrospectiva} lastAccess {Último acesso} other {OKRs}}',
+    id: 'FEqPfr',
     description: 'This message appears in the header of each column of a Team Indicators table.',
   },
 })

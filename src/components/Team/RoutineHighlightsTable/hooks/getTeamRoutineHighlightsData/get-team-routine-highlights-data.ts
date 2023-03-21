@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import { UserRoutineDataProperties } from 'src/components/Page/Team/Highlights/modals/UsersTeamList'
 import { User } from 'src/components/User/types'
+
+import { UserRoutineDataProperties } from '../../types'
 
 export type RequestReturnMapped = {
   data: UserRoutineDataProperties

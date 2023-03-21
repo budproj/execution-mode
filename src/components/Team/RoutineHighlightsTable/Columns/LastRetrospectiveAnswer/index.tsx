@@ -4,32 +4,30 @@ import LastRetrospectiveAnswerOverview from 'src/components/User/LastRetrospecti
 import { User } from 'src/components/User/types'
 
 export interface RoutinesHighlightsTableLastRetrospectiveAnswerColumnProperties {
-  isLoaded?: boolean
   lastRetrospetiveAnswerId?: string
   feeling?: string
   userId: User['id']
   productivity?: string
-  roadblock?: string
+  roadBlock?: string
   onClick?: () => void
 }
 
 const RoutinesHighlightsTableLastRetrospectiveAnswerColumn = ({
-  isLoaded,
   lastRetrospetiveAnswerId,
   feeling,
   userId,
   productivity,
-  roadblock,
+  roadBlock,
   onClick,
 }: RoutinesHighlightsTableLastRetrospectiveAnswerColumnProperties) => {
   return (
     <LastRetrospectiveAnswerOverview
+      isLoaded
       userId={userId}
-      isLoaded={isLoaded}
       lastRetrospetiveAnswerId={lastRetrospetiveAnswerId}
       feeling={feeling}
       productivity={productivity}
-      roadblock={roadblock}
+      roadblock={roadBlock}
       onClick={onClick}
     />
   )

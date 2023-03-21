@@ -8,12 +8,17 @@ import {
   ModalContent,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import dynamic from 'next/dynamic'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { UsersTeamList } from './UsersTeamList'
-import { HeadUsersTeamList } from './UsersTeamList/head'
+import { CARD_TYPES } from '../utils/card-types'
+
 import messages from './messages'
+
+const DynamicTeamRoutineHighlightsTable = dynamic(
+  async () => import('src/components/Team/RoutineHighlightsTable/wrapper'),
+)
 
 const StyledTableWrapper = styled(Flex)`
   max-height: calc(100vh - 200px);
@@ -39,7 +44,7 @@ const StyledModal = styled(ModalContent)`
 interface RoutineHighlightModalProperties {
   isOpen: boolean
   handleModalClose: () => void
-  type: string
+  type: CARD_TYPES
   usersIds?: string[]
 }
 
@@ -79,13 +84,9 @@ export const RoutineHighlightModal = ({
             />
           </Flex>
           <StyledTableWrapper>
-            <Flex flexDir="column" flex="1">
-              <HeadUsersTeamList type={type} />
-
-              {usersIds?.map((userId) => (
-                <UsersTeamList key={userId} userId={userId} type={type} />
-              ))}
-            </Flex>
+            {isOpen && usersIds && (
+              <DynamicTeamRoutineHighlightsTable cardType={type} usersIds={usersIds} />
+            )}
           </StyledTableWrapper>
         </ModalBody>
       </StyledModal>

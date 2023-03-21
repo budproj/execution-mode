@@ -11,3 +11,10 @@ export type RoutineHightlightsTable = {
   lastRetrospective: RoutinesHighlightsTableLastRetrospectiveAnswerColumnProperties
   lastAccess: RoutinesHighlightsTableLastAccessColumnProperties
 }
+
+export interface UserRoutineDataProperties {
+  roadBlock: string
+  productivity: string
+  feeling: string
+  lastRoutineAnswerId: string
+}

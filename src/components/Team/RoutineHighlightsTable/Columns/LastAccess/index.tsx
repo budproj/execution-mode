@@ -1,25 +1,27 @@
-import { Box, GridItem, GridItemProps, SkeletonText, Text } from '@chakra-ui/react'
+import { Box, GridItem, GridItemProps, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { useGetUserDetails } from 'src/components/User/hooks'
 import { useGetLastAccess } from 'src/components/User/hooks/useLastAccess'
+import { User } from 'src/components/User/types'
 
 import messages from '../messages'
 
 export interface RoutinesHighlightsTableLastAccessColumnProperties extends GridItemProps {
-  lastDateAccess?: string
+  userId: User['id']
   isLoaded?: boolean
 }
 
 const RoutinesHighlightsTableLastAccessColumn = ({
-  isLoaded,
-  lastDateAccess,
+  userId,
   ...rest
 }: RoutinesHighlightsTableLastAccessColumnProperties) => {
   const intl = useIntl()
+  const { data: userData } = useGetUserDetails(userId)
+  const lastDateAccess = userData?.amplitude?.last_used
 
   const { lastAccessSubtext, sinceDayLastAccess } = useGetLastAccess(lastDateAccess)
-  const isLastAccessLoaded = isLoaded
 
   return (
     <GridItem
@@ -33,17 +35,13 @@ const RoutinesHighlightsTableLastAccessColumn = ({
       flexDirection="column"
       {...rest}
     >
-      {isLastAccessLoaded ? (
-        lastDateAccess === 'never_accessed' ? (
-          <Text fontWeight="medium">{intl.formatMessage(messages.neverAccessed)}</Text>
-        ) : (
-          <Box>
-            <Text fontWeight="medium">{sinceDayLastAccess()}</Text>
-            <Text color="new-gray.600">{lastAccessSubtext()}</Text>
-          </Box>
-        )
+      {lastDateAccess === 'never_accessed' ? (
+        <Text fontWeight="medium">{intl.formatMessage(messages.neverAccessed)}</Text>
       ) : (
-        <SkeletonText noOfLines={2} width={28} skeletonHeight={4} />
+        <Box>
+          <Text fontWeight="medium">{sinceDayLastAccess()}</Text>
+          <Text color="new-gray.600">{lastAccessSubtext()}</Text>
+        </Box>
       )}
     </GridItem>
   )

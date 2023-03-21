@@ -1,4 +1,4 @@
-export const indicatorsTableSkeletonData = (numberOfLines: number) => {
+export const teamHighlightsTableSkeletonData = (numberOfLines: number) => {
   const mockedArray = []
 
   for (let index = numberOfLines; index > 0; index--) {
@@ -6,10 +6,10 @@ export const indicatorsTableSkeletonData = (numberOfLines: number) => {
   }
 
   return mockedArray.map((_) => ({
-    userKeyResultsOverviewSkeleton: 'userKeyResultsOverviewSkeleton',
-    checkinSkeleton: 'checkinSkeleton',
-    checklistSkeleton: 'checklistSkeleton',
-    lastAccessSkeleton: 'lastAccessSkeleton',
-    lastRetrospectiveAnswerSkeleton: 'lastRetrospectiveAnswerSkeleton',
+    user: 'user',
+    team: 'team',
+    custom: 'custom',
+    lastRetrospective: 'lastRetrospective',
+    lastAccess: 'lastAccess',
   }))
 }

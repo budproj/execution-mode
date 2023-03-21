@@ -7,8 +7,6 @@ import { Column } from 'react-table'
 import TableBase from 'src/components/Base/Table'
 import { CARD_TYPES } from 'src/components/Page/Team/Highlights/utils/card-types'
 import { User } from 'src/components/User/types'
-import { EventType } from 'src/state/hooks/useEvent/event-type'
-import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import {
   RoutineHightlightsTableCustomColumn,
@@ -24,72 +22,65 @@ import { RoutineHightlightsTable } from './types'
 import { teamRoutinesHighlightsDataMapper } from './utils/data-mappers'
 
 interface TeamRoutineHighlightsTableProperties {
-  loading: boolean
   usersIds: Array<User['id']>
   cardType: CARD_TYPES
 }
 
 const TeamRoutineHighlightsTable = ({
-  loading,
   usersIds,
   cardType,
 }: TeamRoutineHighlightsTableProperties) => {
-  const { dispatch: dispatchIndicatorsCheckListClick } = useEvent(
-    EventType.INDICATORS_CHECKLIST_CLICK,
-  )
-
   const intl = useIntl()
   const { teamRoutineHighlightsData, isLoading: isTableDataLoading } =
     useGetRoutineHighlightsData(usersIds)
 
   const tableData = teamRoutinesHighlightsDataMapper.toFront(teamRoutineHighlightsData, cardType)
 
-  const showTableContent = (!loading && !isTableDataLoading) || tableData.length > 0
+  const showTableContent = !isTableDataLoading || tableData.length > 0
 
   const columnHeaderTitle = (columnAccessor: string) =>
-    intl.formatMessage(messages.teamIndicatorsTableColumnHeaderMessage, { columnAccessor })
+    intl.formatMessage(messages.teamHighlightsTableColumnHeaderMessage, { columnAccessor })
 
   const columns: Array<Column<RoutineHightlightsTable>> = [
     {
-      Header: columnHeaderTitle('userKeyResultsOverview'),
+      Header: columnHeaderTitle('user'),
       accessor: 'user',
       Cell: ({ cell: { value } }) => <RoutineHightlightsTableUserColumn userId={value.userId} />,
     },
     {
-      Header: columnHeaderTitle('lastAccess'),
+      Header: columnHeaderTitle('team'),
       accessor: 'team',
       Cell: ({ cell: { value } }) => <RoutineHightlightsTableTeamColumn userId={value.userId} />,
     },
     {
-      Header: columnHeaderTitle('checkin'),
+      Header: columnHeaderTitle(cardType),
       accessor: 'custom',
       Cell: ({ cell: { value } }) => (
         <RoutineHightlightsTableCustomColumn
           cardType={value.cardType}
           userId={value.userId}
-          lastRoutineAnswerId={value.lastRoutineAnswerId}
+          lastUserRoutineAnswer={value.lastUserRoutineAnswer}
         />
       ),
     },
     {
-      Header: columnHeaderTitle('checklist'),
+      Header: columnHeaderTitle('lastRetrospective'),
       accessor: 'lastRetrospective',
       Cell: ({ cell: { value } }) => (
         <RoutineHightlightsTableLastRetrospectiveColumn
           userId={value.userId}
-          isLoaded={!loading}
-          onClick={() => dispatchIndicatorsCheckListClick({})}
+          feeling={cardType === 'feeling' ? undefined : value.feeling}
+          productivity={cardType === 'productivity' ? undefined : value.productivity}
+          roadBlock={cardType === 'roadblock' ? undefined : value.roadBlock}
+          lastRetrospetiveAnswerId={value.lastRetrospetiveAnswerId}
         />
       ),
     },
     {
-      Header: columnHeaderTitle('lastRetrospectiveAnswer'),
+      Header: columnHeaderTitle('lastAccess'),
       accessor: 'lastAccess',
       Cell: ({ cell: { value } }) => (
-        <RoutineHightlightsTableLastAccessColumn
-          isLoaded={value.isLoaded}
-          lastDateAccess={value.lastDateAccess}
-        />
+        <RoutineHightlightsTableLastAccessColumn userId={value.userId} />
       ),
     },
   ]

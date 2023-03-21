@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
-import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/modals/UsersTeamList/messages'
+import teamMembersHighlightsMessages from 'src/components/Team/RoutineHighlightsTable/Columns/Custom/messages'
 
 interface UserproductivityProperties {
   productivity?: string

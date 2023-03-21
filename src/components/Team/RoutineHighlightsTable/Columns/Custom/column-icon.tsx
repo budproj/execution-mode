@@ -4,9 +4,10 @@ import { useIntl } from 'react-intl'
 
 import { PauseIcon } from 'src/components/Icon'
 import SuitcaseIcon from 'src/components/Icon/Suitcase'
-import { UserRoutineDataProperties } from 'src/components/Page/Team/Highlights/modals/UsersTeamList'
 import { CARD_TYPES } from 'src/components/Page/Team/Highlights/utils/card-types'
 import { useGetEmoji } from 'src/components/Routine/hooks'
+
+import { UserRoutineDataProperties } from '../../types'
 
 import messages from './messages'
 
@@ -21,7 +22,7 @@ const useCustomColumnDefaultIcon = (
   const { getEmoji } = useGetEmoji()
 
   const icons: IconProperties = {
-    feeling: getEmoji({ felling: Number(userRoutineData?.feeling), size: '40px' }) ?? <Box />,
+    feeling: getEmoji({ felling: Number(userRoutineData?.feeling), size: '40px' }),
     productivity: (
       <Flex alignItems="center" gap="5px">
         <Box
@@ -62,7 +63,7 @@ const useCustomColumnDefaultIcon = (
     ),
   }
 
-  return icons[type] || undefined
+  return icons[type]
 }
 
 export default useCustomColumnDefaultIcon
