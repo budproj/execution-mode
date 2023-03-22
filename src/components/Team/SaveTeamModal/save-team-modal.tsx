@@ -60,7 +60,7 @@ export const SaveTeamModal = ({ teamId }: SaveTeamModalProperties) => {
   const [{ isModalOpen, isEditingTeamId }, setIsEditTeamModalOpen] =
     useRecoilState(isEditTeamModalOpenAtom)
 
-  const preloadedTeamId = teamId ?? isEditingTeamId ?? getTeamIdFromRouter(router)
+  const preloadedTeamId = isEditingTeamId ?? teamId ?? getTeamIdFromRouter(router)
 
   const currentUserID = useRecoilValue(meAtom)
   const team = useRecoilValue(teamAtomFamily(preloadedTeamId))
@@ -172,10 +172,10 @@ export const SaveTeamModal = ({ teamId }: SaveTeamModalProperties) => {
             <FormControl>
               <FormLabel>{intl.formatMessage(messages.leaderLabel)}</FormLabel>
               <KeyResultOwnerSelectMenu
+                isLazy
                 value={owner}
                 avatarSubtitleType="role"
                 placement="bottom"
-                isLazy={false}
                 onChange={setOwner}
               />
             </FormControl>

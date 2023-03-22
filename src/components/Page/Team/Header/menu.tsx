@@ -17,7 +17,6 @@ import EditTeamButton from 'src/components/Base/EditTeamButton'
 import { Cycle } from 'src/components/Cycle/types'
 import HistoryIcon from 'src/components/Icon/History'
 import RedoIcon from 'src/components/Icon/Redo'
-import SaveTeamModal from 'src/components/Team/SaveTeamModal'
 import { Team } from 'src/components/Team/types'
 import {
   Delta,
@@ -67,7 +66,7 @@ type CreateDraftObjectiveQueryResult = {
 export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   const intl = useIntl()
   const toast = useToast()
-  const [isEditTeamModalOpen, setIsEditTeamModalOpen] = useRecoilState(isEditTeamModalOpenAtom)
+  const setIsEditTeamModalOpen = useSetRecoilState(isEditTeamModalOpenAtom)
 
   const [hasInactiveObjectives, setHasInactiveObjectives] = useState<boolean>()
   const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
@@ -134,13 +133,8 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   const canUpdate = team?.policy?.update === GraphQLEffect.ALLOW
 
   return (
-    <>
-      {isEditTeamModalOpen && team && (
-        // eslint-disable-next-line unicorn/no-useless-undefined
-        <SaveTeamModal />
-      )}
-      <Stack direction="row" justifyContent="flex-end" marginTop="0.8em">
-        {/* // eslint-disable-next-line no-warning-comments
+    <Stack direction="row" justifyContent="flex-end" marginTop="0.8em">
+      {/* // eslint-disable-next-line no-warning-comments
       // TODO: Implement this options menu (Victor Perin)
 
       {false && isAllowedToCreateObjectives && isViewingActiveObjectives && (
@@ -155,62 +149,61 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
         </Tooltip>
       )} */}
 
-        {canUpdate && (
-          <EditTeamButton
-            onClick={() => setIsEditTeamModalOpen({ isModalOpen: true, isEditingTeamId: team?.id })}
-          />
-        )}
+      {canUpdate && (
+        <EditTeamButton
+          onClick={() => setIsEditTeamModalOpen({ isModalOpen: true, isEditingTeamId: teamId })}
+        />
+      )}
 
-        {hasInactiveObjectives && isViewingActiveObjectives && (
-          <Tooltip label={intl.formatMessage(messages.explorePreviousCyclesOption)} placement="top">
-            <Button
-              bg="new-gray.300"
-              _hover={{ background: 'new-gray.400', color: 'new-gray.800' }}
-              color="new-gray.800"
-              leftIcon={<HistoryIcon w="1.3em" h="1.3em" desc="teste" fill="currentColor" />}
-              onClick={handleViewOldCycles}
-            >
-              {intl.formatMessage(messages.history)}
-            </Button>
-          </Tooltip>
-        )}
-
-        {hasInactiveObjectives && !isViewingActiveObjectives && (
+      {hasInactiveObjectives && isViewingActiveObjectives && (
+        <Tooltip label={intl.formatMessage(messages.explorePreviousCyclesOption)} placement="top">
           <Button
             bg="new-gray.300"
             _hover={{ background: 'new-gray.400', color: 'new-gray.800' }}
             color="new-gray.800"
-            leftIcon={<RedoIcon w="1.3em" h="1.3em" desc="teste" fill="currentColor" />}
+            leftIcon={<HistoryIcon w="1.3em" h="1.3em" desc="teste" fill="currentColor" />}
             onClick={handleViewOldCycles}
           >
-            {intl.formatMessage(messages.backToPresent)}
+            {intl.formatMessage(messages.history)}
           </Button>
-        )}
+        </Tooltip>
+      )}
 
-        {isAllowedToCreateObjectives && isViewingActiveObjectives && (
-          <Menu placement="bottom-end" variant="action-list">
-            <MenuButton
-              as={Button}
-              bg="brand.500"
-              color="black.50"
-              _hover={{ background: 'brand.400', color: 'black.50' }}
-            >
-              {intl.formatMessage(messages.createItem)}
-            </MenuButton>
-            <MenuList>
-              {activeCycles.reverse().map((cycle) => (
-                <AddOKROnRelatedCycleOption
-                  key={cycle.id}
-                  cycle={cycle}
-                  isEnabled={isAllowedToCreateObjectives}
-                  onCreateOKR={onCreateOKR}
-                />
-              ))}
-            </MenuList>
-          </Menu>
-        )}
-      </Stack>
-    </>
+      {hasInactiveObjectives && !isViewingActiveObjectives && (
+        <Button
+          bg="new-gray.300"
+          _hover={{ background: 'new-gray.400', color: 'new-gray.800' }}
+          color="new-gray.800"
+          leftIcon={<RedoIcon w="1.3em" h="1.3em" desc="teste" fill="currentColor" />}
+          onClick={handleViewOldCycles}
+        >
+          {intl.formatMessage(messages.backToPresent)}
+        </Button>
+      )}
+
+      {isAllowedToCreateObjectives && isViewingActiveObjectives && (
+        <Menu placement="bottom-end" variant="action-list">
+          <MenuButton
+            as={Button}
+            bg="brand.500"
+            color="black.50"
+            _hover={{ background: 'brand.400', color: 'black.50' }}
+          >
+            {intl.formatMessage(messages.createItem)}
+          </MenuButton>
+          <MenuList>
+            {activeCycles.reverse().map((cycle) => (
+              <AddOKROnRelatedCycleOption
+                key={cycle.id}
+                cycle={cycle}
+                isEnabled={isAllowedToCreateObjectives}
+                onCreateOKR={onCreateOKR}
+              />
+            ))}
+          </MenuList>
+        </Menu>
+      )}
+    </Stack>
   )
 }
 
