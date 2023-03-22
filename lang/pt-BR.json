@@ -219,6 +219,10 @@
     "defaultMessage": "Mas não se preocupe, ela vai ficar bem! Enquanto trabalhamos nisso, você pode clicar no botão aqui embaixo para voltar para o painel :)",
     "description": "The description displayed in our unknown error page"
   },
+  "2FcRLo": {
+    "defaultMessage": "CHECK-LISTS",
+    "description": "The title of the checkLists column."
+  },
   "2IBj4Z": {
     "defaultMessage": "Agora há pouco",
     "description": "This label is displayed if the date difference is less than 1 minute"
@@ -254,6 +258,10 @@
   "2nlZ3v": {
     "defaultMessage": "Visualize e altere as configurações de sua conta.",
     "description": "The page description that is displayed in Google and screen readers for the settings page."
+  },
+  "2vOg9s": {
+    "defaultMessage": "Sem acesso",
+    "description": "The message returned if the user didn't access Bud yet."
   },
   "30/f+o": {
     "defaultMessage": "Tem certeza que deseja desativar {gender, select, MALE {o} FEMALE {a} other {o}} usuári{gender, select, MALE {o} FEMALE {a} other {o}} {name}?",
@@ -334,6 +342,14 @@
   "4N1d+U": {
     "defaultMessage": "Últimas atividades",
     "description": "This text is displayed at the top of our timeline, as its title"
+  },
+  "4QPhgQ": {
+    "defaultMessage": "RETROSPECTIVA SENTIMENTO",
+    "description": "The title of the feeling column."
+  },
+  "4WREAh": {
+    "defaultMessage": "{columnAccessor, select, user {Usuário} team {Time} productivity {Produtividade na semana} roadblock {Bloqueios na semana} feeling {Sentimentos na semana} lastRetrospective {Última retrospectiva} lastAccess {Último acesso} other {OKRs}}",
+    "description": "This message appears in the header of each column of a Team Indicators table."
   },
   "4XHRhd": {
     "defaultMessage": "Meta",
@@ -839,6 +855,10 @@
     "defaultMessage": "Este time não possui nenhum subtime.",
     "description": "This message is displayed in our team plage inside the child teams section when that team has no child teams"
   },
+  "Du7aqJ": {
+    "defaultMessage": "Carregando...",
+    "description": "The message in the download button when the CSV is loading"
+  },
   "Dxj0ms": {
     "defaultMessage": "Email",
     "description": "This is the label that goes on our user account settings page, at the email field to update the user informations"
@@ -1159,6 +1179,10 @@
     "defaultMessage": "custom emoji with sad expression",
     "description": "This message is used as a description of emoji feeling 1"
   },
+  "Joj9R9": {
+    "defaultMessage": "PROGRESSO",
+    "description": "The title of the progress column."
+  },
   "Jw9V43": {
     "defaultMessage": "Opções",
     "description": "This message appears how description to menu action options"
@@ -1207,6 +1231,10 @@
     "defaultMessage": "Meta",
     "description": "This label appears above the fifth input in our insert key-result drawer"
   },
+  "L2l/Rw": {
+    "defaultMessage": "CONFIANÇA",
+    "description": "The title of the confidence column."
+  },
   "L3D4+H": {
     "defaultMessage": "Use os campos abaixo para fazer{breakline} alterações neste ciclo:",
     "description": "The description for cycle modal"
@@ -1227,9 +1255,17 @@
     "defaultMessage": "Ir para o perfil",
     "description": "This message is the description of the option to redirect to profile of a user."
   },
+  "LavvSV": {
+    "defaultMessage": "ÚLTIMO CHECK-IN",
+    "description": "The title of the latestCheckInDate column."
+  },
   "Lc60Nd": {
     "defaultMessage": "Posição atual",
     "description": "This message is displayed below the current progress thumb"
+  },
+  "LeHFjM": {
+    "defaultMessage": "RETROSPECTIVA BLOQUEIO",
+    "description": "The title of the roadBlock column."
   },
   "LhZDKa": {
     "defaultMessage": "Enviar",
@@ -1703,6 +1739,10 @@
     "defaultMessage": "Um ícone de com diversas superfícies, uma em cima da outra",
     "description": "The alternative text explaining our stack icon"
   },
+  "UHVzDU": {
+    "defaultMessage": "Sem Resposta",
+    "description": "The message returned if the user has no routine answer."
+  },
   "UHZQHg": {
     "defaultMessage": "Respostas",
     "description": "This message appears in the subtitle of the menu that allows users to browse responses through the history."
@@ -1782,6 +1822,10 @@
   "VltGNp": {
     "defaultMessage": "Um desenho de fantasma, indicando que este resultado-chave não tem nenhum card de atividade",
     "description": "This text is used by screen readers to explain our ghost image inside our key result drawers"
+  },
+  "VmMAw2": {
+    "defaultMessage": "Relatório {interval, select, current {semanal} quartely {trimestral} other {}}",
+    "description": "This message is the title of the selected range for team Indicators Download."
   },
   "Vytr8A": {
     "defaultMessage": "Editar ciclo",
@@ -2051,6 +2095,10 @@
     "defaultMessage": "Membro adicionado ao time com sucesso.",
     "description": "This message appears on a successful toast when we add a user to a team."
   },
+  "awPBSY": {
+    "defaultMessage": "ÚLTIMO ACESSO",
+    "description": "The title of the lastAccess column."
+  },
   "axEJFy": {
     "defaultMessage": "Nenhum acesso",
     "description": "This message appears if the user never accessed the Bud."
@@ -2279,6 +2327,10 @@
     "defaultMessage": "Ajuda",
     "description": "This tooltip is displayed when the user hovers the support button"
   },
+  "g9n6ja": {
+    "defaultMessage": "Exportar relatório do time",
+    "description": "This message is the title of the team Indicators Download Report within a team page."
+  },
   "gAgkzF": {
     "defaultMessage": "Criar Objetivo",
     "description": "create new key result"
@@ -2431,6 +2483,10 @@
     "defaultMessage": "Time de Apoio",
     "description": "The label text above Support Team section in our key resulg single page or drawers"
   },
+  "iXbJc5": {
+    "defaultMessage": "RESULTADOS-CHAVE",
+    "description": "The title of the keyResults column."
+  },
   "iZcwRX": {
     "defaultMessage": "ACESSO DE EDIÇÃO",
     "description": "The tooltip text for the edition access text"
@@ -2547,6 +2603,10 @@
     "defaultMessage": "Líder",
     "description": "The tag title that is displayed when that user is the leader of the team"
   },
+  "l3DqHa": {
+    "defaultMessage": "Download CSV",
+    "description": "This message is the title of download team report button."
+  },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
@@ -2566,6 +2626,10 @@
   "lI5vJI": {
     "defaultMessage": "Um ícone com três pontos. Ao clicar nele você abrirá algumas opções",
     "description": "This text is displayed as the tree dots desc text in our timeline cards"
+  },
+  "lIb14q": {
+    "defaultMessage": "COLABORADOR",
+    "description": "The title of the colaborator column."
   },
   "lMYmAU": {
     "defaultMessage": "Clique no botão abaixo para voltar para o Painel :)",
@@ -2747,6 +2811,10 @@
     "defaultMessage": "Voltar",
     "description": "This message is displayed as a label in the button on our not found error page"
   },
+  "ot1J/+": {
+    "defaultMessage": "Sem check-in",
+    "description": "The message returned if the user has no check-in"
+  },
   "p2UjMZ": {
     "defaultMessage": "Minhas Coisas | bud",
     "description": "The page title that is displayed in the browser tab"
@@ -2911,6 +2979,10 @@
     "defaultMessage": "Sobre",
     "description": "This text is displayed in our check-in card, above the user comment if it exists"
   },
+  "sp7xYz": {
+    "defaultMessage": "RETROSPECTIVA PRODUTIVIDADE",
+    "description": "The title of the productivity column."
+  },
   "ssM7Lj": {
     "defaultMessage": "Pertence ao objetivo",
     "description": "The label text above the Objective section in our key result single page or drawers"
@@ -2954,6 +3026,10 @@
   "tmyaek": {
     "defaultMessage": "Estado",
     "description": "This message is displayed as the column header for the users table in the state column"
+  },
+  "tp3vDN": {
+    "defaultMessage": "Sem KR",
+    "description": "The message returned if the user has no key result."
   },
   "tvj+/n": {
     "defaultMessage": "Visão geral do time",
@@ -3038,6 +3114,10 @@
   "vDa/w5": {
     "defaultMessage": "Está silencioso por aqui",
     "description": "This text is the title of our empty state card inside our key result drawers"
+  },
+  "vERqrq": {
+    "defaultMessage": "EVOLUÇÃO",
+    "description": "The title of the delta column."
   },
   "vEzcix": {
     "defaultMessage": "Times",
