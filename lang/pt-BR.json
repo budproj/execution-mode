@@ -575,6 +575,10 @@
     "defaultMessage": "Sem KR",
     "description": "This message appears on table that shows the no members no related KRs."
   },
+  "8Qz7RP": {
+    "defaultMessage": "Progresso geral dos objetivos no ciclo atual",
+    "description": "Subtitle to show on the team ranking page when gamification is disabled"
+  },
   "8YI1Fn": {
     "defaultMessage": "Financeiro (Real)",
     "description": "This message is displayed inside our key-result format select as the title of the coin BRL format"
@@ -714,10 +718,6 @@
   "BOJlqi": {
     "defaultMessage": "Progresso Trimestral",
     "description": "User's quarterly progress title"
-  },
-  "BROY+x": {
-    "defaultMessage": "Progresso geral dos objetivos no ciclo trimestral atual",
-    "description": "Subtitle to show on the team ranking page when gamification is disabled"
   },
   "BTaFbJ": {
     "defaultMessage": "São ousados, desafiadores e devem gerar um certo nível de desconforto por não serem fáceis de alcançar.",
@@ -2187,10 +2187,6 @@
     "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
     "description": "This tooltip appears when the user hovers the second column title"
   },
-  "dH7eW3": {
-    "defaultMessage": "Progresso dos Times no {quarter}",
-    "description": "Title to show on the team ranking page when gamification is disabled"
-  },
   "dLMgRx": {
     "defaultMessage": "Aperte",
     "description": "This message appears in the description of the submit the response button in the routines form."
@@ -2787,6 +2783,10 @@
     "defaultMessage": "Sim!",
     "description": "This message appears when the user has a blockage during the week."
   },
+  "nx5pvZ": {
+    "defaultMessage": "Ranking de Times",
+    "description": "Title to show on the team ranking page"
+  },
   "oGyXN5": {
     "defaultMessage": "Colegas com plano individual",
     "description": "Friends with individual OKRs title"
@@ -3067,10 +3067,6 @@
     "defaultMessage": "Alta confiança",
     "description": "Title of high confidence health strategy"
   },
-  "ucALDM": {
-    "defaultMessage": "Ranking de Times do {quarter}",
-    "description": "Title to show on the team ranking page"
-  },
   "ui441M": {
     "defaultMessage": "Um ícone de quadrado arredondado com um lápis",
     "description": "The desc message for the EditSquare icon. This icon is used to ilustrate our key results"
@@ -3294,6 +3290,10 @@
   "yfhIM+": {
     "defaultMessage": "Cancelar",
     "description": "Text in the cancel action button"
+  },
+  "yh+jAH": {
+    "defaultMessage": "Progresso dos Times",
+    "description": "Title to show on the team ranking page when gamification is disabled"
   },
   "yw+DGB": {
     "defaultMessage": "Sobrenome",
