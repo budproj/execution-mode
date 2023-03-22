@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { User } from 'src/components/User/types'
@@ -25,9 +25,10 @@ export const useGetRoutineHighlightsData = (
     [],
   )
 
-  useEffect(() => {
+  const fetchData = useCallback(async () => {
     setIsLoading(true)
-    const fetchData = async () => {
+    try {
+      setIsLoading(true)
       const { routines } = await servicesPromise
       const results = await Promise.all(
         usersIds.map(async (userId) => {
@@ -40,13 +41,17 @@ export const useGetRoutineHighlightsData = (
           return newResult
         }),
       )
-
-      setTeamRoutineHighlightsData((previous) => [...previous, ...results])
+      setTeamRoutineHighlightsData(results)
+    } catch (error: unknown) {
+      console.error('Error fetching highlights table content', error)
+    } finally {
       setIsLoading(false)
     }
-
-    fetchData()
   }, [servicesPromise, usersIds])
+
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
 
   return { isLoading, teamRoutineHighlightsData }
 }
