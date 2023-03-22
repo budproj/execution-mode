@@ -28,14 +28,15 @@ export const useGetRoutineHighlightsData = (
     const { routines } = await servicesPromise
     setIsLoading(true)
     try {
-      const results = await Promise.all(
-        usersIds.map(async (userId) => {
-          const { data: routineData } = await routines.get<UserRoutineDataProperties>(
-            `/answers/overview/user/${userId}`,
-          )
-          return { data: routineData ?? [], userId }
-        }),
-      )
+      const results: RequestReturnMapped[] = []
+      for await (const userId of usersIds) {
+        const { data: routineData } = await routines.get<UserRoutineDataProperties>(
+          `/answers/overview/user/${userId}`,
+        )
+        results.push({ data: routineData ?? [], userId })
+        await delay(350)
+      }
+
       setTeamRoutineHighlightsData(results)
     } catch (error: unknown) {
       console.error('Error fetching highlights table content', error)
@@ -55,3 +56,6 @@ export const useGetRoutineHighlightsData = (
 
   return memoizedValue
 }
+
+// eslint-disable-next-line no-promise-executor-return
+const delay = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
