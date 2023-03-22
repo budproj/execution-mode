@@ -31,7 +31,7 @@ const RoutinesHighlightsTableLastAccessColumn = ({
       fontWeight="500"
       minW={28}
       w="100%"
-      fontSize={14}
+      fontSize="12px"
       flexDirection="column"
       {...rest}
     >
