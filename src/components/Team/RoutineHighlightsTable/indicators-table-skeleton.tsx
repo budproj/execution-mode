@@ -1,9 +1,10 @@
-import { Flex, Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
+import { Flex, Skeleton, SkeletonCircle, SkeletonText, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Column } from 'react-table'
 
 import TableBase from 'src/components/Base/Table'
+import { CARD_TYPES } from 'src/components/Page/Team/Highlights/utils/card-types'
 import KeyResultsOverviewSkeleton from 'src/components/User/KeyResultsOverview/key-results-overview.skeleton'
 
 import messages from './messages'
@@ -17,11 +18,18 @@ type teamHighlightsTableSkeletonColumns = {
   lastAccess: string
 }
 
-const IndicatorsTableSkeleton = () => {
+interface IndicatorsTableSkeletonProperties {
+  cardType: CARD_TYPES
+}
+
+const IndicatorsTableSkeleton = ({ cardType }: IndicatorsTableSkeletonProperties) => {
   const intl = useIntl()
 
-  const columnHeaderTitle = (columnAccessor: string) =>
-    intl.formatMessage(messages.teamHighlightsTableColumnHeaderMessage, { columnAccessor })
+  const columnHeaderTitle = (columnAccessor: string) => (
+    <Text color="new-gray.800" fontWeight="500" fontSize="12px">
+      {intl.formatMessage(messages.teamHighlightsTableColumnHeaderMessage, { columnAccessor })}
+    </Text>
+  )
 
   const fakeTableData = teamHighlightsTableSkeletonData(4)
 
@@ -37,7 +45,7 @@ const IndicatorsTableSkeleton = () => {
       Cell: () => <SkeletonText noOfLines={2} width="80%" skeletonHeight={4} />,
     },
     {
-      Header: columnHeaderTitle('custom'),
+      Header: columnHeaderTitle(cardType),
       accessor: 'custom',
       Cell: () => <SkeletonCircle size="1.4em" />,
     },

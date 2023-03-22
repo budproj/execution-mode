@@ -98,7 +98,7 @@ const TeamRoutineHighlightsTable = ({
       }}
     />
   ) : (
-    <IndicatorsTableSkeleton />
+    <IndicatorsTableSkeleton cardType={cardType} />
   )
 }
 
