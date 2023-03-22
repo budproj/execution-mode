@@ -1,8 +1,10 @@
 import { Box, MenuProps } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
+import { NameWithAvatar } from 'src/components/User/NamedAvatar/name-with-avatar'
+import { useGetUserDetails } from 'src/components/User/hooks'
+
 import SelectMenu from '../../Base/SelectMenu'
-import { NamedAvatar } from '../../User'
 import { AllReachableUsers } from '../../User/AllReachableUsers/wrapper'
 import { NamedAvatarSubtitleType } from '../../User/NamedAvatar/types'
 
@@ -22,6 +24,8 @@ export const KeyResultOwnerSelectMenu = ({
   ...rest
 }: KeyResultOwnerSelectMenuProperties) => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const { data: user, loading } = useGetUserDetails(value)
 
   const handleChange = (newOwnerID: string | string[]) => {
     if (Array.isArray(newOwnerID)) throw new Error('Cannot parse string array')
@@ -47,13 +51,16 @@ export const KeyResultOwnerSelectMenu = ({
       value={value}
       placement={placement}
       placeholder={
-        <NamedAvatar
-          userID={value}
-          avatarSize={9}
-          displaySubtitle={false}
-          horizontalGap={2}
-          nameColor="gray.500"
-        />
+        <Box>
+          <NameWithAvatar
+            isLoaded={!loading}
+            user={user}
+            avatarSize={9}
+            displaySubtitle={false}
+            horizontalGap={2}
+            nameColor="gray.500"
+          />
+        </Box>
       }
       onOpen={handleOpen}
       onClose={handleClose}
