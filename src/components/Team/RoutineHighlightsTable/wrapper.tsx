@@ -1,5 +1,6 @@
 /* eslint react/prop-types: 0 */
 
+import { Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { Column } from 'react-table'
@@ -38,8 +39,11 @@ const TeamRoutineHighlightsTable = ({
 
   const showTableContent = !isTableDataLoading || tableData.length > 0
 
-  const columnHeaderTitle = (columnAccessor: string) =>
-    intl.formatMessage(messages.teamHighlightsTableColumnHeaderMessage, { columnAccessor })
+  const columnHeaderTitle = (columnAccessor: string) => (
+    <Text color="new-gray.800" fontWeight="500" fontSize="12px">
+      {intl.formatMessage(messages.teamHighlightsTableColumnHeaderMessage, { columnAccessor })}
+    </Text>
+  )
 
   const columns: Array<Column<RoutineHightlightsTable>> = [
     {
@@ -86,7 +90,13 @@ const TeamRoutineHighlightsTable = ({
   ]
 
   return showTableContent ? (
-    <TableBase columns={columns} data={tableData} />
+    <TableBase
+      columns={columns}
+      data={tableData}
+      headStyles={{
+        borderTop: '0.5px solid #e8eefc',
+      }}
+    />
   ) : (
     <IndicatorsTableSkeleton />
   )
