@@ -25,19 +25,15 @@ export const useGetRoutineHighlightsData = (
   const { servicesPromise } = useContext(ServicesContext)
 
   const fetchData = useCallback(async () => {
+    const { routines } = await servicesPromise
     setIsLoading(true)
     try {
-      setIsLoading(true)
-      const { routines } = await servicesPromise
       const results = await Promise.all(
         usersIds.map(async (userId) => {
           const { data: routineData } = await routines.get<UserRoutineDataProperties>(
             `/answers/overview/user/${userId}`,
           )
-
-          const newResult = { data: routineData ?? [], userId }
-
-          return newResult
+          return { data: routineData ?? [], userId }
         }),
       )
       setTeamRoutineHighlightsData(results)
