@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useMemo, useCallback } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { User } from 'src/components/User/types'
@@ -19,11 +19,10 @@ export const useGetRoutineHighlightsData = (
   usersIds: Array<User['id']>,
 ): UseGetRoutineHighlightsDataReturn => {
   const [isLoading, setIsLoading] = useState(false)
-
-  const { servicesPromise } = useContext(ServicesContext)
   const [teamRoutineHighlightsData, setTeamRoutineHighlightsData] = useState<RequestReturnMapped[]>(
     [],
   )
+  const { servicesPromise } = useContext(ServicesContext)
 
   const fetchData = useCallback(async () => {
     setIsLoading(true)
@@ -53,5 +52,10 @@ export const useGetRoutineHighlightsData = (
     fetchData()
   }, [fetchData])
 
-  return { isLoading, teamRoutineHighlightsData }
+  const memoizedValue = useMemo(
+    () => ({ isLoading, teamRoutineHighlightsData }),
+    [isLoading, teamRoutineHighlightsData],
+  )
+
+  return memoizedValue
 }
