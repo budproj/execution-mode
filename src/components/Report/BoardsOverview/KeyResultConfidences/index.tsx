@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
+import { krTableLengthAtom } from 'src/state/recoil/key-result/kr-table-lenght.atom'
 
 import Board from '../Board'
 import StackedProgressBar from '../StackedProgressBar'
@@ -24,6 +25,7 @@ const KeyResultConfidences = ({
 }: KeyResultConfidencesProperties) => {
   const intl = useIntl()
   const setKrHealthStatus = useSetRecoilState(krHealthStatusAtom)
+  const setKrTableLength = useSetRecoilState(krTableLengthAtom)
 
   const confidencesToRender = useMemo(
     () =>
@@ -35,6 +37,7 @@ const KeyResultConfidences = ({
 
   const onClick = (confidence: Confidence) => {
     if (confidence.isListable) {
+      setKrTableLength(quantities[confidence.name])
       setKrHealthStatus(confidence.name)
     }
   }
