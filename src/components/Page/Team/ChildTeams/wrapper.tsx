@@ -1,14 +1,14 @@
 import { Button, Stack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import SaveTeamModal from 'src/components/Team/SaveTeamModal'
 import { GraphQLEffect } from 'src/components/types'
 
 import { useConnectionEdges } from '../../../../state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from '../../../../state/recoil/hooks'
-import { teamAtomFamily } from '../../../../state/recoil/team'
+import { isEditTeamModalOpenAtom, teamAtomFamily } from '../../../../state/recoil/team'
 import { EmptyState } from '../../../Base'
 import { Team } from '../../../Team/types'
 import { TeamSectionWrapper } from '../Section/wrapper'
@@ -27,17 +27,17 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
   const team = useRecoilValue(teamAtomFamily(teamID))
   const [childTeams, setChildTeamEdges, childTeamEdges] = useConnectionEdges<Team>()
   const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
-
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const setIsTeamModalOpenAtom = useSetRecoilState(isEditTeamModalOpenAtom)
 
   const hasCreateTeamPermission = team?.users?.policy?.create === GraphQLEffect.ALLOW
-
-  const openModal = () => setIsModalOpen(true)
-  const closeModal = () => setIsModalOpen(false)
 
   useEffect(() => {
     if (team) setChildTeamEdges(team.teams?.edges)
   }, [team, setChildTeamEdges])
+
+  const handleOpenModal = useCallback(() => {
+    setIsTeamModalOpenAtom({ isModalOpen: true, isEditingTeamId: undefined })
+  }, [setIsTeamModalOpenAtom])
 
   useEffect(() => {
     loadTeamsOnRecoil(childTeams)
@@ -62,7 +62,7 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
         <Stack pt={2} pb={8} spacing={0}>
           <EmptyState imageKey="empty-folder" labelMessage={messages.emptyState} py={0} />
           {hasCreateTeamPermission && (
-            <Button variant="text" colorScheme="brand" onClick={openModal}>
+            <Button variant="text" colorScheme="brand" onClick={handleOpenModal}>
               {intl.formatMessage(messages.createSubteamButtonText)}
             </Button>
           )}
@@ -71,11 +71,11 @@ export const ChildTeamsWrapper = ({ teamID, isLoading }: ChildTeamsWrapperProper
         <TeamListSearchable
           teams={childTeams}
           isLoading={!isLoaded}
-          openModal={openModal}
+          openModal={handleOpenModal}
           hasPermission={hasCreateTeamPermission}
         />
       )}
-      <SaveTeamModal isOpen={isModalOpen} onClose={closeModal} />
+      <SaveTeamModal />
     </TeamSectionWrapper>
   )
 }

@@ -27,14 +27,9 @@ export interface ExploreTeamPageProperties extends PageProperties {
 const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   const intl = useIntl()
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState(
-    intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
-  )
+  const [activeTab, setActiveTab] = useState('okrs')
 
-  const tabs = new Set([
-    intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
-    intl.formatMessage(messages.retrospectiveTeamTab).toLocaleLowerCase(),
-  ])
+  const tabs = new Set(['okrs', 'retrospective'])
 
   const { data, loading, error, called, refetch } = useQuery<GetTeamNameQuery>(
     queries.GET_TEAM_DATA,

@@ -1,9 +1,8 @@
-import { Box, Flex, Heading, Text, Skeleton, Tag, Button, Divider } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text, Skeleton, Button, Divider } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import newTagMessages from 'src/components/Base/MainAppBar/messages'
 import PageContent from 'src/components/Base/PageContent'
 import { RadioProgress } from 'src/components/Base/RadioProgress/wrapper'
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
@@ -180,10 +179,6 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
           onClick={() => setKeyResultType(KeyResultType.PERSONAL)}
         >
           {intl.formatMessage(messages.individualOKRTitle)}
-
-          <Tag size="sm" variant="solid" colorScheme="brand" ml={4}>
-            {intl.formatMessage(newTagMessages.newItem)}
-          </Tag>
         </Button>
       </Flex>
     </PageContent>

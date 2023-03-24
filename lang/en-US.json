@@ -255,6 +255,10 @@
     "defaultMessage": "It's been a while since someone's interacted with this key result. How about sharing some relevant info with the team? :)",
     "description": "This text gives more details regarding our empty state card in the key result drawers"
   },
+  "2FcRLo": {
+    "defaultMessage": "",
+    "description": ""
+  },
   "2IBj4Z": {
     "defaultMessage": "Just now",
     "description": "This label is displayed if the date difference is less than 1 minute"
@@ -282,6 +286,10 @@
   "2RoJ81": {
     "defaultMessage": "Female",
     "description": "This text is used accross our platform to identify the female gender"
+  },
+  "2vOg9s": {
+    "defaultMessage": "",
+    "description": ""
   },
   "2Vtwxl": {
     "defaultMessage": "Response history",
@@ -382,6 +390,10 @@
   "4npgR9": {
     "defaultMessage": "User successfully created!",
     "description": "This message appears when we create a new user as a toast"
+  },
+  "4QPhgQ": {
+    "defaultMessage": "",
+    "description": ""
   },
   "4uGYvu": {
     "defaultMessage": "{company}'s teams mood",
@@ -627,6 +639,10 @@
     "defaultMessage": "No KR",
     "description": "This message appears on table that shows the no members no related KRs."
   },
+  "8Qz7RP": {
+    "defaultMessage": "Overall progress on goals in the current cycle",
+    "description": "Subtitle to show on the team ranking page when gamification is disabled"
+  },
   "8YI1Fn": {
     "defaultMessage": "Financial (BRL)",
     "description": "This message is displayed inside our key-result format select as the title of the coin BRL format"
@@ -798,6 +814,10 @@
   "aVLR+w": {
     "defaultMessage": "100%",
     "description": "This message is displayed inside our key-result format select as the example of the percent format"
+  },
+  "awPBSY": {
+    "defaultMessage": "LAST ACCESSS",
+    "description": "The title of the lastAccess column."
   },
   "axEJFy": {
     "defaultMessage": "Never accessed",
@@ -1111,6 +1131,10 @@
     "defaultMessage": "This team has no subteam. ",
     "description": "This message is displayed in our team plage inside the child teams section when that team has no child teams"
   },
+  "Du7aqJ": {
+    "defaultMessage": "Loading...",
+    "description": "The message in the download button when the CSV is loading"
+  },
   "duv/6P": {
     "defaultMessage": "FEELING",
     "description": "The title of the feeling graph"
@@ -1350,6 +1374,10 @@
   "G9m+Ed": {
     "defaultMessage": "This person's access has been deactivated.",
     "description": "This message appears in the tooltip of users with inactive account state."
+  },
+  "g9n6ja": {
+    "defaultMessage": "",
+    "description": ""
   },
   "gAgkzF": {
     "defaultMessage": "Create Objective",
@@ -1747,6 +1775,10 @@
     "defaultMessage": "€ 100",
     "description": "This message is displayed inside our key-result format select as the example of the coin EUR format"
   },
+  "iXbJc5": {
+    "defaultMessage": "",
+    "description": ""
+  },
   "iZcwRX": {
     "defaultMessage": "EDIT PERMISSION",
     "description": "The tooltip text for the edition access text"
@@ -1842,6 +1874,10 @@
   "jNuy4b": {
     "defaultMessage": "This person has access to Bud.",
     "description": "This message appears in the tooltip of users with active account state."
+  },
+  "Joj9R9": {
+    "defaultMessage": "",
+    "description": ""
   },
   "jRsXuq": {
     "defaultMessage": "CHECK-IN",
@@ -2011,9 +2047,17 @@
     "defaultMessage": "Goal",
     "description": "This label appears above the fifth input in our insert key-result drawer"
   },
+  "L2l/Rw": {
+    "defaultMessage": "",
+    "description": ""
+  },
   "L3D4+H": {
     "defaultMessage": "Use the fields below to {breakline}make changes to this cycle:",
     "description": "The description for cycle modal"
+  },
+  "l3DqHa": {
+    "defaultMessage": "",
+    "description": ""
   },
   "L5w0P3": {
     "defaultMessage": "Female",
@@ -2026,6 +2070,10 @@
   "lApj0K": {
     "defaultMessage": "Wallet icon",
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
+  },
+  "LavvSV": {
+    "defaultMessage": "",
+    "description": ""
   },
   "lBc00A": {
     "defaultMessage": "Describes how confident the person in charge of this key result currently feels:",
@@ -2042,6 +2090,10 @@
   "LDLFtf": {
     "defaultMessage": "About {isMyUser, select, true {you} other { {firstName}}}",
     "description": "This is the label that goes on our user account settings page, at the seventh field to update the user informations"
+  },
+  "LeHFjM": {
+    "defaultMessage": "",
+    "description": ""
   },
   "lf4c2p": {
     "defaultMessage": "objective",
@@ -2062,6 +2114,10 @@
   "lI5vJI": {
     "defaultMessage": "Three points icon. By clicking on it some options will be opened",
     "description": "This text is displayed as the tree dots desc text in our timeline cards"
+  },
+  "lIb14q": {
+    "defaultMessage": "",
+    "description": ""
   },
   "ll4kYl": {
     "defaultMessage": "End date",
@@ -2355,6 +2411,10 @@
     "defaultMessage": "Neutral",
     "description": "The neutral gender for the company while creating a new workspace"
   },
+  "nx5pvZ": {
+    "defaultMessage": "Team Ranking",
+    "description": "Title to show on the team ranking page"
+  },
   "Ny2Pia": {
     "defaultMessage": "Cycles are time periods defined for the strategy.{breakingline}We recommend using an annual cycle for the company and a quarterly cycle for the teams.",
     "description": "The description page."
@@ -2426,6 +2486,10 @@
   "OS8mCA": {
     "defaultMessage": "Cadence",
     "description": "The description for cadence cycle field"
+  },
+  "ot1J/+": {
+    "defaultMessage": "",
+    "description": ""
   },
   "OwHPoA": {
     "defaultMessage": "No OKRs have been created in this Individual Plan yet",
@@ -2847,6 +2911,10 @@
     "defaultMessage": "Show less",
     "description": "This text is displayed in the button that collapses the truncated text"
   },
+  "sp7xYz": {
+    "defaultMessage": "",
+    "description": ""
+  },
   "SpAXmO": {
     "defaultMessage": "Calendar icon. It indicates that here you have the objective's deadline",
     "description": "The alternative text explaining our calendar icon in the objective accordion item"
@@ -2983,6 +3051,10 @@
     "defaultMessage": "{confidence, select, roadblock {All key results with a {confidence}} other {All key results with {confidence}}}",
     "description": "The title for the dashboard key results modal"
   },
+  "tp3vDN": {
+    "defaultMessage": "",
+    "description": ""
+  },
   "Tsd4ry": {
     "defaultMessage": "See the Individual OKRs for { username }. They do not interfere with the company's overall progress.",
     "description": "Individual OKR subtitle of the page"
@@ -3034,6 +3106,10 @@
   "ucALDM": {
     "defaultMessage": "Team Ranking for {quarter}",
     "description": "Title to show on the team ranking page"
+  },
+  "UHVzDU": {
+    "defaultMessage": "",
+    "description": ""
   },
   "UHZQHg": {
     "defaultMessage": "Answers",
@@ -3151,6 +3227,10 @@
     "defaultMessage": "Show more",
     "description": "This text is displayed in the button that expands a truncated text"
   },
+  "vERqrq": {
+    "defaultMessage": "",
+    "description": ""
+  },
   "vEzcix": {
     "defaultMessage": "Teams",
     "description": "This message is displayed as the column header for the users table in the teams column"
@@ -3198,6 +3278,10 @@
   "vm0Yuj": {
     "defaultMessage": "My account | bud",
     "description": "The page title that is displayed in the browser tab for the my profile page"
+  },
+  "VmMAw2": {
+    "defaultMessage": "",
+    "description": ""
   },
   "VNHZWm": {
     "defaultMessage": "Period",
@@ -3551,6 +3635,10 @@
     "defaultMessage": "Cancel",
     "description": "Text in the cancel action button"
   },
+  "yh+jAH": {
+    "defaultMessage": "Team Progress",
+    "description": "Title to show on the team ranking page when gamification is disabled"
+  },
   "Yjqtno": {
     "defaultMessage": "How was your week? Catch up on your Retrospective",
     "description": "This message appears on the news banner to invite the user to learn about the Retrospective feature."
@@ -3752,7 +3840,7 @@
     "description": "This message is displayed inside the empty state on last retrospective overview"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2023-02-09T18:54:14Z",
+    "defaultMessage": "2023-03-21T21:39:17Z",
     "description": ""
   }
 }
