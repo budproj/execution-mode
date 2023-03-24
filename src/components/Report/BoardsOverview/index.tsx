@@ -1,10 +1,10 @@
-import { Button, Flex } from '@chakra-ui/react'
+import { Flex } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import { useGetKeyResults } from 'src/components/KeyResult/hooks'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
+import { krTableLengthAtom } from 'src/state/recoil/key-result/kr-table-lenght.atom'
 
 import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQuantities'
 
@@ -17,13 +17,16 @@ import messages from './messages'
 const BoardsOverview = ({ ...rest }) => {
   const { data, loading } = useGetHealthConfidenceQuantities()
   const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
+  const setKrTableLength = useSetRecoilState(krTableLengthAtom)
   const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
-
-  const { data: KrData, loading: loadingg, fetchMore } = useGetKeyResults()
 
   const intl = useIntl()
 
-  console.log({ KrData })
+  const handleCloseTable = () => {
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    setKrHealthStatus(undefined)
+    setKrTableLength(0)
+  }
 
   return (
     <>
@@ -42,27 +45,12 @@ const BoardsOverview = ({ ...rest }) => {
         <KeyResultConfidence isLoading={loading} quantities={data} shadow="for-background.light" />
       </Flex>
 
-      {KrData.map((kr) => (
-        <div key={kr.id}>{kr.title}</div>
-      ))}
-
-      <Button
-        onClick={() => {
-          console.log('onClick')
-          fetchMore({
-            variables: { offset: KrData.length, limit: 2 },
-          })
-        }}
-      >
-        butao
-      </Button>
-
       {krHealthStatus && (
         <KeyResultsListingTable
           isOpen
           confidence={confidence}
           // eslint-disable-next-line unicorn/no-useless-undefined
-          onClose={() => setKrHealthStatus(undefined)}
+          onClose={handleCloseTable}
         />
       )}
     </>
