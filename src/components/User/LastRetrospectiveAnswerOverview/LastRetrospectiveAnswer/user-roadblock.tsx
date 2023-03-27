@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { PauseIcon } from 'src/components/Icon'
-import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/modals/UsersTeamList/messages'
+import teamMembersHighlightsMessages from 'src/components/Team/RoutineHighlightsTable/Columns/Custom/messages'
 
 import messages from '../messages'
 
