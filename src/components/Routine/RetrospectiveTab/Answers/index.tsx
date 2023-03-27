@@ -92,7 +92,9 @@ const AnswersComponent = ({
 
   useEffect(() => {
     if (answers) {
-      setFilteredAnswers(answers.filter((answer) => answer.name.toLowerCase().includes(search)))
+      setFilteredAnswers(
+        answers.filter((answer) => answer.name.toLowerCase().includes(search.toLocaleLowerCase())),
+      )
     }
   }, [answers, search])
 

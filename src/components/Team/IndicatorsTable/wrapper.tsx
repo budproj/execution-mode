@@ -97,7 +97,7 @@ const IndicatorsTable = ({ loading }: IndicatorsTableProperties) => {
           userId={value.userId}
           lastRetrospetiveAnswerId={value.lastRetrospetiveAnswerId}
           feeling={value.feeling}
-          productity={value.productity}
+          productivity={value.productivity}
           roadblock={value.roadblock}
           onClick={() => dispatchIndicatorsRoutineClick({})}
         />

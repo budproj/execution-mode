@@ -34,10 +34,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
     intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
   )
 
-  const tabs = new Set([
-    intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
-    intl.formatMessage(messages.retrospectiveTeamTab).toLocaleLowerCase(),
-  ])
+  const tabs = new Set(['okrs', 'retrospective'])
 
   const { data, loading, error, called, refetch } = useQuery<GetTeamNameQuery>(
     queries.GET_TEAM_DATA,

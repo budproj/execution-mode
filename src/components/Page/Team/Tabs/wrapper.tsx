@@ -1,13 +1,11 @@
 import { TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import React from 'react'
-import { useIntl } from 'react-intl'
 
 import { PageContent } from 'src/components/Base'
 import TabsMenu from 'src/components/Page/Team/Tabs/tabs-menu'
 import { Team } from 'src/components/Team/types'
 
 import RetrospectiveTabContent from '../../../Routine/RetrospectiveTab/retrospective-tab-content'
-import messages from '../messages'
 
 import OkrsTabContent from './content/okrs-tab-content'
 
@@ -18,16 +16,8 @@ interface ExploreTeamTabsProperties {
 }
 
 const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProperties) => {
-  const intl = useIntl()
-
   return (
-    <Tabs
-      isLazy
-      variant="unstyled"
-      index={
-        activeTab === intl.formatMessage(messages.retrospectiveTeamTab).toLocaleLowerCase() ? 1 : 0
-      }
-    >
+    <Tabs isLazy variant="unstyled" index={activeTab === 'retrospective' ? 1 : 0}>
       <TabsMenu teamId={teamId} />
 
       <PageContent>

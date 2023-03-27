@@ -1,0 +1,5 @@
+export { default as RoutineHightlightsTableUserColumn } from './User'
+export { default as RoutineHightlightsTableTeamColumn } from './Team'
+export { default as RoutineHightlightsTableCustomColumn } from './Custom'
+export { default as RoutineHightlightsTableLastRetrospectiveColumn } from './LastRetrospectiveAnswer'
+export { default as RoutineHightlightsTableLastAccessColumn } from './LastAccess'
