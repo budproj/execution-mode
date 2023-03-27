@@ -256,8 +256,8 @@
     "description": "This text gives more details regarding our empty state card in the key result drawers"
   },
   "2FcRLo": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "CHECK-LISTS",
+    "description": "The title of the checkLists column."
   },
   "2IBj4Z": {
     "defaultMessage": "Just now",
@@ -288,8 +288,8 @@
     "description": "This text is used accross our platform to identify the female gender"
   },
   "2vOg9s": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "No access",
+    "description": "The message returned if the user didn't access Bud yet."
   },
   "2Vtwxl": {
     "defaultMessage": "Response history",
@@ -392,8 +392,8 @@
     "description": "This message appears when we create a new user as a toast"
   },
   "4QPhgQ": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "FEELING RETROSPECTIVE",
+    "description": "The title of the feeling column."
   },
   "4uGYvu": {
     "defaultMessage": "{company}'s teams mood",
@@ -1380,8 +1380,8 @@
     "description": "This message appears in the tooltip of users with inactive account state."
   },
   "g9n6ja": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Export team report",
+    "description": "This message is the title of the team Indicators Download Report within a team page."
   },
   "gAgkzF": {
     "defaultMessage": "Create Objective",
@@ -1780,8 +1780,8 @@
     "description": "This message is displayed inside our key-result format select as the example of the coin EUR format"
   },
   "iXbJc5": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "KEY-RESULTS",
+    "description": "The title of the keyResults column."
   },
   "iZcwRX": {
     "defaultMessage": "EDIT PERMISSION",
@@ -1880,8 +1880,8 @@
     "description": "This message appears in the tooltip of users with active account state."
   },
   "Joj9R9": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "PROGRESS",
+    "description": "The title of the progress column."
   },
   "jRsXuq": {
     "defaultMessage": "CHECK-IN",
@@ -2052,16 +2052,16 @@
     "description": "This label appears above the fifth input in our insert key-result drawer"
   },
   "L2l/Rw": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "CONFIDENCE",
+    "description": "The title of the confidence column."
   },
   "L3D4+H": {
     "defaultMessage": "Use the fields below to {breakline}make changes to this cycle:",
     "description": "The description for cycle modal"
   },
   "l3DqHa": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Download CSV",
+    "description": "This message is the title of download team report button."
   },
   "L5w0P3": {
     "defaultMessage": "Female",
@@ -2076,8 +2076,8 @@
     "description": "The desc message for the Wallet icon. This icon is used to ilustrate our key results"
   },
   "LavvSV": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "LAST CHECK-IN",
+    "description": "The title of the latestCheckInDate column."
   },
   "lBc00A": {
     "defaultMessage": "Describes how confident the person in charge of this key result currently feels:",
@@ -2096,8 +2096,8 @@
     "description": "This is the label that goes on our user account settings page, at the seventh field to update the user informations"
   },
   "LeHFjM": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "ROADBLOCK RETROSPECTIVE",
+    "description": "The title of the roadBlock column."
   },
   "lf4c2p": {
     "defaultMessage": "objective",
@@ -2120,8 +2120,8 @@
     "description": "This text is displayed as the tree dots desc text in our timeline cards"
   },
   "lIb14q": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "EMPLOYEE",
+    "description": "The title of the colaborator column."
   },
   "ll4kYl": {
     "defaultMessage": "End date",
@@ -2492,8 +2492,8 @@
     "description": "The description for cadence cycle field"
   },
   "ot1J/+": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "No check-in",
+    "description": "The message returned if the user has no check-in"
   },
   "OwHPoA": {
     "defaultMessage": "No OKRs have been created in this Individual Plan yet",
@@ -2916,8 +2916,8 @@
     "description": "This text is displayed in the button that collapses the truncated text"
   },
   "sp7xYz": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "PRODUCTIVITY RETROSPECTIVE",
+    "description": "The title of the productivity column."
   },
   "SpAXmO": {
     "defaultMessage": "Calendar icon. It indicates that here you have the objective's deadline",
@@ -3056,8 +3056,8 @@
     "description": "The title for the dashboard key results modal"
   },
   "tp3vDN": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "NO KR",
+    "description": "The message returned if the user has no key result."
   },
   "Tsd4ry": {
     "defaultMessage": "See the Individual OKRs for { username }. They do not interfere with the company's overall progress.",
@@ -3112,8 +3112,8 @@
     "description": "Title to show on the team ranking page"
   },
   "UHVzDU": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "No Reply",
+    "description": "The message returned if the user has no routine answer."
   },
   "UHZQHg": {
     "defaultMessage": "Answers",
@@ -3232,8 +3232,8 @@
     "description": "This text is displayed in the button that expands a truncated text"
   },
   "vERqrq": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "PROGRESS",
+    "description": "The title of the delta column."
   },
   "vEzcix": {
     "defaultMessage": "Teams",
@@ -3844,7 +3844,7 @@
     "description": "This message is displayed inside the empty state on last retrospective overview"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2023-03-22T18:58:30Z",
+    "defaultMessage": "2023-03-27T19:47:31Z",
     "description": ""
   }
 }
