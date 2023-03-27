@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { GetUserPrimaryCompanyQuery } from 'src/components/Report/CompanyProgressOverview/types'
@@ -32,6 +32,7 @@ export const useGetKeyResults = (): GetCompanyCycles => {
   const [loadKRs] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const krHealthStatus = useRecoilValue(krHealthStatusAtom)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
+  const [isFetchMoreDataLoading, setIsFetchMoreDataLoading] = useState(false)
 
   const query = { limit: KRS_PER_PAGE, offset: 0 }
 
@@ -44,8 +45,6 @@ export const useGetKeyResults = (): GetCompanyCycles => {
     {
       variables: query,
       fetchPolicy: 'cache-and-network',
-      nextFetchPolicy: 'cache-first',
-      notifyOnNetworkStatusChange: true,
       onCompleted: (data) => {
         const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
         const keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
@@ -59,44 +58,54 @@ export const useGetKeyResults = (): GetCompanyCycles => {
     loadKRs(keyResults)
   }, [keyResults, loadKRs])
 
-  const fetchMoreKeyResults = async ({ limit, offset }: FetchMoreVariables) => {
-    const queryVariables = { limit, offset }
+  const fetchMoreKeyResults = useCallback(
+    async ({ limit, offset }: FetchMoreVariables) => {
+      setIsFetchMoreDataLoading(true)
+      const queryVariables = { limit, offset }
 
-    if (krHealthStatus) {
-      Object.assign(queryVariables, { confidence: krHealthStatus })
-    }
+      if (krHealthStatus) {
+        Object.assign(queryVariables, { confidence: krHealthStatus })
+      }
 
-    fetchMore({
-      variables: queryVariables,
-      updateQuery: (previous, { fetchMoreResult }) => {
-        if (!fetchMoreResult) return previous
-        const oldCompanies = previous.me?.companies?.edges ?? []
+      try {
+        await fetchMore({
+          variables: queryVariables,
+          updateQuery: (previous, { fetchMoreResult }) => {
+            if (!fetchMoreResult) return previous
+            const oldCompanies = previous.me?.companies?.edges ?? []
 
-        const newCompanies = fetchMoreResult.me?.companies?.edges ?? []
+            const newCompanies = fetchMoreResult.me?.companies?.edges ?? []
 
-        const allEdgesTeams: Array<GraphQLEdge<Team>> = [...oldCompanies, ...newCompanies]
+            const allEdgesTeams: Array<GraphQLEdge<Team>> = [...oldCompanies, ...newCompanies]
 
-        const allCompanies: GraphQLConnection<Team> | undefined = {
-          policy: fetchMoreResult.me.companies!.policy,
-          pageInfo: fetchMoreResult.me.companies!.pageInfo,
-          edges: allEdgesTeams,
-        }
+            const allCompanies: GraphQLConnection<Team> | undefined = {
+              policy: fetchMoreResult.me.companies!.policy,
+              pageInfo: fetchMoreResult.me.companies!.pageInfo,
+              edges: allEdgesTeams,
+            }
 
-        const mergedOldAndNewResults: User = {
-          ...fetchMoreResult.me,
-          companies: allCompanies,
-        }
+            const mergedOldAndNewResults: User = {
+              ...fetchMoreResult.me,
+              companies: allCompanies,
+            }
 
-        return {
-          me: mergedOldAndNewResults,
-        }
-      },
-    })
-  }
+            return {
+              me: mergedOldAndNewResults,
+            }
+          },
+        })
+      } catch {
+        console.log("It's not possible fetchMore data")
+      } finally {
+        setIsFetchMoreDataLoading(false)
+      }
+    },
+    [fetchMore, krHealthStatus],
+  )
 
   return {
     data: keyResults,
-    loading,
+    loading: isFetchMoreDataLoading || loading,
     called,
     fetchMoreKeyResults,
     refetch,

@@ -10,8 +10,8 @@ import {
   HStack,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useEffect, useMemo, useState } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
@@ -58,15 +58,15 @@ const StyledTableWrapper = styled(Flex)`
 
 export const KeyResultListingModal = ({
   isOpen,
-  data,
   dispatchEvent,
-  modalHeadingTitle,
+  data,
   loadingData,
-  onClose,
   fetchMore,
+  modalHeadingTitle,
+  onClose,
 }: KeyResultModalListingProperties) => {
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-  const krTableLength = useRecoilValue(krTableLengthAtom)
+  const [krTableLength, setTableLength] = useRecoilState(krTableLengthAtom)
 
   const [lastKrListed, setLastKrListed] = useState({
     firstListElement: 0,
@@ -78,7 +78,16 @@ export const KeyResultListingModal = ({
 
   const keyResultIds = useMemo(() => dataToRender.map(({ id }) => id), [dataToRender])
 
-  const firstListKeyResultIndex = data.findIndex((kr) => kr.id === keyResultIds[0])
+  const firstListKeyResultIndex = useMemo(
+    () => data.findIndex((kr) => kr.id === keyResultIds[0]),
+    [data, keyResultIds],
+  )
+
+  const handleCloseModal = () => {
+    void onClose()
+    setTableLength(0)
+    setLastKrListed({ firstListElement: 0, lastListElement: KRS_PER_PAGE })
+  }
 
   const showPreviousPageButton =
     !loadingData && firstListKeyResultIndex > 0 && keyResultIds.length < data.length
@@ -89,15 +98,13 @@ export const KeyResultListingModal = ({
     (krTableLength > data.length ||
       (data.length === krTableLength && krTableLength > lastKrListed.lastListElement))
 
-  const loadNextKrsPage = async () => {
+  const loadNextKrsPage = useCallback(async () => {
     if (fetchMore) {
       const lastRenderedIndex = data.findIndex(
         (kr) => kr.id === keyResultIds[keyResultIds.length - 1],
       )
-
       const lastDataIndex = data.indexOf(data[data.length - 1])
       const mustFetchMore = lastRenderedIndex === lastDataIndex
-
       if (mustFetchMore) {
         await fetchMore({
           limit: KRS_PER_PAGE,
@@ -110,7 +117,7 @@ export const KeyResultListingModal = ({
         lastListElement: lastRenderedIndex + KRS_PER_PAGE + 1,
       })
     }
-  }
+  }, [data, fetchMore, keyResultIds])
 
   const loadPreviousKrsPage = () => {
     const firstRenderedIndex = data.findIndex((kr) => kr.id === keyResultIds[0])
@@ -125,7 +132,7 @@ export const KeyResultListingModal = ({
     if (dispatchEvent) dispatchEvent()
   }, [dispatchEvent])
 
-  const onLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
+  const onLineClick = useCallback((id: KeyResult['id']) => setOpenDrawer(id), [setOpenDrawer])
 
   return (
     <Modal
@@ -133,7 +140,7 @@ export const KeyResultListingModal = ({
       returnFocusOnClose={false}
       size="100%"
       autoFocus={false}
-      onClose={onClose}
+      onClose={handleCloseModal}
     >
       <ModalOverlay />
       <StyledModal>
@@ -195,7 +202,7 @@ export const KeyResultListingModal = ({
               onLineClick={onLineClick}
             />
           </StyledTableWrapper>
-          <HStack width="100%" mt={10} alignItems="center" justifyContent="flex-end">
+          <HStack width="100%" mt={10} gap={2} alignItems="center" justifyContent="flex-end">
             {showPreviousPageButton && (
               <Button
                 bg="brand.500"
