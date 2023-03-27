@@ -1,5 +1,5 @@
 import { Box, Flex, StyleProps } from '@chakra-ui/react'
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
@@ -35,12 +35,15 @@ const KeyResultConfidences = ({
     [quantities],
   )
 
-  const onClick = (confidence: Confidence) => {
-    if (confidence.isListable) {
-      setKrTableLength(quantities[confidence.name])
-      setKrHealthStatus(confidence.name)
-    }
-  }
+  const onClick = useCallback(
+    (confidence: Confidence) => {
+      if (confidence.isListable) {
+        setKrTableLength(quantities[confidence.name])
+        setKrHealthStatus(confidence.name)
+      }
+    },
+    [quantities, setKrHealthStatus, setKrTableLength],
+  )
 
   return (
     <Flex borderRadius="9px" bg="white" width="100%" paddingY={15} paddingX={18} {...rest}>
