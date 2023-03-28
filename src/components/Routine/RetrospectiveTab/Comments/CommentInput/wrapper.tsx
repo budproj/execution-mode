@@ -17,7 +17,7 @@ import CustomMentionsInput from './custom-mentions-input'
 
 type RoutineCommentInputProperties = {
   domainEntityId: Comment['entity']
-  routineUser?: Partial<User>
+  routineUser?: User['firstName']
   showLastComment: () => void
 }
 
@@ -48,7 +48,7 @@ const RoutineCommentsInput = ({
     actions: FormikHelpers<RoutineCommentsInputInitialValues>,
   ) => {
     if (values.text) {
-      await handleCreateComment({ content: values.text, entity, user: routineUser })
+      await handleCreateComment({ content: values.text, entity })
       dispatchCommentInRoutineClick({})
       const isTagged = /@\[([\w \u00C0-\u00FF-]+)]\(([\da-f-]+)\)/.test(values.text)
       if (isTagged) {
@@ -81,7 +81,7 @@ const RoutineCommentsInput = ({
           }}
           onSubmit={handleSubmit}
         >
-          <CustomMentionsInput userThatWillBeAnswered={routineUser?.firstName} />
+          <CustomMentionsInput userThatWillBeAnswered={routineUser} />
         </Form>
       )}
     </Formik>
