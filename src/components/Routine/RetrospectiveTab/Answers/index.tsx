@@ -1,14 +1,16 @@
 import { Flex, Text, IconButton, GridItem, Divider, Box, Spinner } from '@chakra-ui/react'
 import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
+import debounce from 'lodash/debounce'
 import { useRouter } from 'next/router'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
+import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -22,39 +24,59 @@ import {
   isNextWeekDisabled,
   routineDatesRangeAtom,
 } from 'src/state/recoil/routine/routine-dates-range'
+import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
+import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
-import { AnswerSummary } from '../retrospective-tab-content'
+import { AnswerSummary, formatUUIDArray } from '../retrospective-tab-content'
 
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
+import useAnswerSummaryFormatter from './utils/answer-summary-formatter'
 
 interface AnswersComponentProperties {
   teamId: string
   after: Date
   before: Date
   week: number
-  isLoading?: boolean
 }
 
 const ScrollableItem = getScrollableItem()
 
-const AnswersComponent = ({
-  teamId,
-  after,
-  before,
-  week,
-  isLoading,
-}: AnswersComponentProperties) => {
+const AnswersComponent = memo(({ teamId, after, before, week }: AnswersComponentProperties) => {
   const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
   const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
-  const answers = useRecoilValue(answerSummaryAtom)
+  const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
+    answerSummaryLoadStateAtom,
+  )
+
+  const { servicesPromise } = useContext(ServicesContext)
+
+  const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
+  const [answers, setAnswers] = useRecoilState(answerSummaryAtom)
+  const [search, setSearch] = useState('')
+
+  const filteredAnswers = useMemo(() => {
+    const uniqueIds = new Set()
+    return answers.filter((answer) => {
+      if (
+        answer.name.toLowerCase().includes(search.toLocaleLowerCase()) &&
+        !uniqueIds.has(answer.userId)
+      ) {
+        uniqueIds.add(answer.userId)
+        return true
+      }
+
+      return false
+    })
+  }, [answers, search])
+
+  const { formattedAnswerSummary } = useAnswerSummaryFormatter()
 
   const intl = useIntl()
   const router = useRouter()
-  const [search, setSearch] = useState('')
-  const [filteredAnswers, setFilteredAnswers] = useState<AnswerSummary[]>(answers)
+
   const userID = useRecoilValue(meAtom)
   const [date, setDate] = useRecoilState(routineDatesRangeAtom)
   const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
@@ -90,13 +112,62 @@ const AnswersComponent = ({
     [router, setDate],
   )
 
-  useEffect(() => {
-    if (answers) {
-      setFilteredAnswers(
-        answers.filter((answer) => answer.name.toLowerCase().includes(search.toLocaleLowerCase())),
+  const performDebounced = useCallback(
+    async (searchTerm: string) => {
+      const { routines } = await servicesPromise
+      const usersSearched = teamUsers.filter((user) =>
+        user.fullName.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()),
       )
-    }
-  }, [answers, search])
+
+      const teamUsersIds = usersSearched.map((user) => user.id)
+
+      const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
+
+      const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
+        return answers.some((user) => user.userId === userId)
+      })
+
+      if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
+        const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+          `/answers/summary/${teamId}`,
+          {
+            params: {
+              before,
+              after,
+              includeSubteams: false,
+              teamUsersIds: parsetToQueryTeamUsersIDS,
+            },
+          },
+        )
+
+        const formattedData = formattedAnswerSummary({
+          requestedUsersIDs: teamUsersIds,
+          answerSummary: answersSummaryData,
+        })
+
+        setAnswers((previousAnswers) => [...previousAnswers, ...formattedData])
+      }
+
+      setIsAnswerSummaryLoading(false)
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [after, before, formattedAnswerSummary, servicesPromise, teamUsers],
+  )
+
+  const debouncedSearch = debounce(performDebounced, 3000)
+
+  const handleSearch = useCallback(
+    async (value: string) => {
+      if (value.length > 4) {
+        setSearch(value)
+        setIsAnswerSummaryLoading(true)
+        await debouncedSearch(value)
+      } else {
+        setSearch('')
+      }
+    },
+    [debouncedSearch, setIsAnswerSummaryLoading],
+  )
 
   useEffect(() => {
     updateTeams(user?.teams?.edges)
@@ -158,7 +229,7 @@ const AnswersComponent = ({
       </Flex>
       <Divider borderColor="new-gray.400" />
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
-        <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={setSearch} />
+        <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={handleSearch} />
       </Flex>
       <ScrollableItem
         id="scrollable-list-users"
@@ -168,7 +239,7 @@ const AnswersComponent = ({
         {filteredAnswers.map((answer) => (
           <AnswerRowComponent key={answer.id} answer={answer} />
         ))}
-        {isLoading && (
+        {isAnswerSummaryLoading && (
           <Flex justify="center" py={4}>
             <Spinner size="lg" />
           </Flex>
@@ -202,6 +273,6 @@ const AnswersComponent = ({
       )}
     </GridItem>
   )
-}
+})
 
 export default AnswersComponent

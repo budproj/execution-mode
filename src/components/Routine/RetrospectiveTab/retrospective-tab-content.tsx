@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { memo, useCallback, useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -30,6 +30,7 @@ import {
   getRoutineDateRangeDateFormat,
   routineDatesRangeAtom,
 } from 'src/state/recoil/routine/routine-dates-range'
+import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
@@ -67,16 +68,19 @@ export interface AnswerSummary {
   commentCount?: number
 }
 
-const formatUUIDArray = (uuids: string[]) => {
+export const formatUUIDArray = (uuids: string[]) => {
   return "['" + uuids.join("', '") + "']"
 }
 
-const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
+const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
 
-  const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useState(false)
   const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
+  const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
+    answerSummaryLoadStateAtom,
+  )
+
   const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
 
   const { formattedAnswerSummary } = useAnswerSummaryFormatter()
@@ -269,13 +273,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
         ) : undefined}
       </Flex>
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
-        <AnswersComponent
-          after={after}
-          before={before}
-          week={week}
-          isLoading={isAnswerSummaryLoading}
-          teamId={teamId}
-        />
+        <AnswersComponent after={after} before={before} week={week} teamId={teamId} />
 
         <Divider orientation="vertical" borderColor="new-gray.400" />
         <RetrospectiveTabContentView
@@ -294,6 +292,6 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
       />
     </Stack>
   )
-}
+})
 
 export default RetrospectiveTabContent
