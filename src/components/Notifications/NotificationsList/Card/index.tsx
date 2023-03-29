@@ -4,6 +4,7 @@ import React from 'react'
 import { Notification } from '../types'
 
 import AssignedTask from './AssignedTask'
+import CommentOnRoutineNotification from './CommentOnRoutine'
 import CommentNotification from './Comments'
 import ConfidenceCheckin from './ConfidenceCheckIn'
 import RoutineReminder from './RoutineReminder'
@@ -23,6 +24,10 @@ const CardNotification = ({ ...rest }: Notification) => {
       return <CommentNotification {...rest} />
     case 'routineReminder':
       return <RoutineReminder {...rest} />
+    case 'commentOnRoutine':
+      return <CommentOnRoutineNotification {...rest} />
+    case 'mentionOnRoutine':
+      return <CommentOnRoutineNotification {...rest} />
     default:
       return <Box />
   }

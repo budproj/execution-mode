@@ -29,5 +29,9 @@ export interface Notification {
       name: string
       picture: string
     }
+    routine?: {
+      companyId: string
+      answerId: string
+    }
   }
 }
