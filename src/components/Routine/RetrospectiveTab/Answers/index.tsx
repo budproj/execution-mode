@@ -44,6 +44,8 @@ interface AnswersComponentProperties {
 
 const ScrollableItem = getScrollableItem()
 
+const SEARCH_CHARACTERS_LIMIT = 3
+
 const AnswersComponent = memo(({ teamId, after, before, week }: AnswersComponentProperties) => {
   const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
   const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
@@ -158,7 +160,7 @@ const AnswersComponent = memo(({ teamId, after, before, week }: AnswersComponent
 
   const handleSearch = useCallback(
     async (value: string) => {
-      if (value.length > 4) {
+      if (value.length > SEARCH_CHARACTERS_LIMIT) {
         setSearch(value)
         setIsAnswerSummaryLoading(true)
         await debouncedSearch(value)
@@ -244,7 +246,10 @@ const AnswersComponent = memo(({ teamId, after, before, week }: AnswersComponent
             <Spinner size="lg" />
           </Flex>
         )}
-        <Box id="list-bottom" />
+        <Box
+          id="list-bottom"
+          display={search.length > SEARCH_CHARACTERS_LIMIT ? 'none' : 'block'}
+        />
       </ScrollableItem>
       {showAnswerNowButton && (
         <Box textAlign="center" marginTop="auto">
