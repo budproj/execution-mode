@@ -60,18 +60,18 @@ const AnswersComponent = memo(({ teamId, after, before, week }: AnswersComponent
   const [search, setSearch] = useState('')
 
   const filteredAnswers = useMemo(() => {
+    const uniqueAnswers = []
     const uniqueIds = new Set()
-    return answers.filter((answer) => {
-      if (
-        answer.name.toLowerCase().includes(search.toLocaleLowerCase()) &&
-        !uniqueIds.has(answer.userId)
-      ) {
+    for (const answer of answers.filter((answer) =>
+      answer.name.toLowerCase().includes(search.toLocaleLowerCase()),
+    )) {
+      if (!uniqueIds.has(answer.userId)) {
         uniqueIds.add(answer.userId)
-        return true
+        uniqueAnswers.push(answer)
       }
+    }
 
-      return false
-    })
+    return uniqueAnswers.sort((a, b) => a.name.localeCompare(b.name))
   }, [answers, search])
 
   const { formattedAnswerSummary } = useAnswerSummaryFormatter()
