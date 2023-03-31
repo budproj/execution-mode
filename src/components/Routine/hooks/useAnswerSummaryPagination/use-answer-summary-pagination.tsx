@@ -20,13 +20,7 @@ const useAnswerSummaryPagination = (teamId: Team['id']): AnswerSummaryPagination
 
   const { data: lastLoadedUser } = useGetUserDetails(lastLoadedUserId)
 
-  const lastLoadedUserIndex = teamUsers.findIndex((user) => user.id === lastLoadedUser?.id)
-  const lastUserListedIsNotTheLastTeamUser =
-    answersSummary.length < teamUsers.length && lastLoadedUserIndex === teamUsers.length - 1
-
-  const lastLoadedIndex = lastUserListedIsNotTheLastTeamUser
-    ? lastLoadedUserIndex - 1
-    : lastLoadedUserIndex
+  const lastLoadedIndex = teamUsers.findIndex((user) => user.id === lastLoadedUser?.id)
 
   const cursorPaginationItem = lastLoadedUserId ? lastLoadedIndex + 1 : 0
 
