@@ -107,13 +107,13 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     async (entries: IntersectionObserverEntry[]) => {
       const { routines } = await servicesPromise
       const target = entries[0]
-      const teamUsersIds = limitedTeamUsers.map((user) => user.id)
-
-      const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
-        return answersSummary.some((user) => user.userId === userId)
-      })
 
       if (target.isIntersecting) {
+        const teamUsersIds = limitedTeamUsers.map((user) => user.id)
+
+        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
+          return answersSummary.some((user) => user.userId === userId)
+        })
         const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
 
         if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
@@ -142,19 +142,32 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
 
           setAnswersSummary((previousAnswers) => [...previousAnswers, ...formattedData])
           setIsAnswerSummaryLoading(false)
-        }
-      } else if (!usersAreBeingRequestedForTheFirstTime && lastLoadedIndex < teamUsersQuantity) {
-        const lastUserRendered = teamUsers[lastLoadedIndex + 1]
+        } else if (!usersAreBeingRequestedForTheFirstTime && lastLoadedIndex < teamUsersQuantity) {
+          const lastUserRendered = teamUsers[lastLoadedIndex + 1]
 
-        setAnswerSummaryPaginationData({
-          lastLoadedUserId: lastUserRendered.id,
-          teamId,
-        })
+          setAnswerSummaryPaginationData({
+            lastLoadedUserId: lastUserRendered.id,
+            teamId,
+          })
+        }
       }
     },
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [after, before, lastLoadedIndex, limitedTeamUsers, teamId, teamUsersQuantity],
+    [
+      after,
+      answersSummary,
+      before,
+      formattedAnswerSummary,
+      lastLoadedIndex,
+      limitedTeamUsers,
+      servicesPromise,
+      setAnswerSummaryPaginationData,
+      setAnswersSummary,
+      setIsAnswerSummaryLoading,
+      teamId,
+      teamUsers,
+      teamUsersQuantity,
+    ],
   )
 
   useEffect(() => {
