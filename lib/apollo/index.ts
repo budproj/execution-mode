@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/default-param-last */
 import { ApolloClient, ApolloLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+import { offsetLimitPagination } from '@apollo/client/utilities'
 import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react'
 import { SentryLink } from 'apollo-link-sentry'
 import { createUploadLink } from 'apollo-upload-client'
@@ -58,7 +60,15 @@ const linkWithServer = (authzClient: Auth0ContextInterface, amplitude: Amplitude
 
 const createApolloClient = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) =>
   new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            GET_KEY_RESULTS: offsetLimitPagination(),
+          },
+        },
+      },
+    }),
     ssrMode: typeof window === 'undefined',
     ...linkWithServer(authzClient, amplitude),
   })

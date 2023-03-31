@@ -6,16 +6,23 @@ import {
   ModalCloseButton,
   Heading,
   Flex,
+  Button,
+  HStack,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useEffect, useMemo } from 'react'
-import { useSetRecoilState } from 'recoil'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
+import {
+  FetchMoreVariables,
+  KRS_PER_PAGE,
+} from 'src/components/KeyResult/hooks/getKeyResults/get-key-results'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
+import { krTableLengthAtom } from 'src/state/recoil/key-result/kr-table-lenght.atom'
 
 export interface KeyResultModalListingProperties {
   isOpen: boolean
@@ -24,6 +31,7 @@ export interface KeyResultModalListingProperties {
   data: KeyResult[]
   dispatchEvent?: () => void
   modalHeadingTitle: string
+  fetchMore?: ({ limit, offset }: FetchMoreVariables) => Promise<void>
 }
 
 const StyledModal = styled(ModalContent)`
@@ -50,21 +58,81 @@ const StyledTableWrapper = styled(Flex)`
 
 export const KeyResultListingModal = ({
   isOpen,
-  data,
   dispatchEvent,
-  modalHeadingTitle,
+  data,
   loadingData,
+  fetchMore,
+  modalHeadingTitle,
   onClose,
 }: KeyResultModalListingProperties) => {
   const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+  const [krTableLength, setTableLength] = useRecoilState(krTableLengthAtom)
 
-  const keyResultIds = useMemo(() => data.map(({ id }) => id), [data])
+  const [lastKrListed, setLastKrListed] = useState({
+    firstListElement: 0,
+    lastListElement: KRS_PER_PAGE,
+  })
+  const dataToRender = useMemo(() => {
+    return data.slice(lastKrListed.firstListElement, lastKrListed.lastListElement)
+  }, [data, lastKrListed])
+
+  const keyResultIds = useMemo(() => dataToRender.map(({ id }) => id), [dataToRender])
+
+  const firstListKeyResultIndex = useMemo(
+    () => data.findIndex((kr) => kr.id === keyResultIds[0]),
+    [data, keyResultIds],
+  )
+
+  const handleCloseModal = () => {
+    void onClose()
+    setTableLength(0)
+    setLastKrListed({ firstListElement: 0, lastListElement: KRS_PER_PAGE })
+  }
+
+  const showPreviousPageButton =
+    !loadingData && firstListKeyResultIndex > 0 && keyResultIds.length < data.length
+
+  const showNextPageButton =
+    !loadingData &&
+    krTableLength > 0 &&
+    (krTableLength > data.length ||
+      (data.length === krTableLength && krTableLength > lastKrListed.lastListElement))
+
+  const loadNextKrsPage = useCallback(async () => {
+    if (fetchMore) {
+      const lastRenderedIndex = data.findIndex(
+        (kr) => kr.id === keyResultIds[keyResultIds.length - 1],
+      )
+      const lastDataIndex = data.indexOf(data[data.length - 1])
+      const mustFetchMore = lastRenderedIndex === lastDataIndex
+      if (mustFetchMore) {
+        await fetchMore({
+          limit: KRS_PER_PAGE,
+          offset: data.length,
+        })
+      }
+
+      setLastKrListed({
+        firstListElement: lastRenderedIndex + 1,
+        lastListElement: lastRenderedIndex + KRS_PER_PAGE + 1,
+      })
+    }
+  }, [data, fetchMore, keyResultIds])
+
+  const loadPreviousKrsPage = () => {
+    const firstRenderedIndex = data.findIndex((kr) => kr.id === keyResultIds[0])
+
+    setLastKrListed({
+      firstListElement: firstRenderedIndex - KRS_PER_PAGE,
+      lastListElement: firstRenderedIndex,
+    })
+  }
 
   useEffect(() => {
     if (dispatchEvent) dispatchEvent()
   }, [dispatchEvent])
 
-  const onLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
+  const onLineClick = useCallback((id: KeyResult['id']) => setOpenDrawer(id), [setOpenDrawer])
 
   return (
     <Modal
@@ -72,7 +140,7 @@ export const KeyResultListingModal = ({
       returnFocusOnClose={false}
       size="100%"
       autoFocus={false}
-      onClose={onClose}
+      onClose={handleCloseModal}
     >
       <ModalOverlay />
       <StyledModal>
@@ -134,6 +202,28 @@ export const KeyResultListingModal = ({
               onLineClick={onLineClick}
             />
           </StyledTableWrapper>
+          <HStack width="100%" mt={10} gap={2} alignItems="center" justifyContent="flex-end">
+            {showPreviousPageButton && (
+              <Button
+                bg="brand.500"
+                color="white"
+                _hover={{ backgroundColor: 'brand.300' }}
+                onClick={loadPreviousKrsPage}
+              >
+                Prev
+              </Button>
+            )}
+            {showNextPageButton && (
+              <Button
+                bg="brand.500"
+                color="white"
+                _hover={{ backgroundColor: 'brand.300' }}
+                onClick={loadNextKrsPage}
+              >
+                Next
+              </Button>
+            )}
+          </HStack>
         </ModalBody>
       </StyledModal>
     </Modal>
