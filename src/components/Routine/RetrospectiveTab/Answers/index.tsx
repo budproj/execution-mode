@@ -165,7 +165,6 @@ const AnswersComponent = memo(({ teamId, after, before, week }: AnswersComponent
         setIsAnswerSummaryLoading(true)
         await debouncedSearch(value)
       } else {
-        setIsAnswerSummaryLoading(false)
         setSearch('')
       }
     },
