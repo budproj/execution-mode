@@ -116,7 +116,10 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
         })
         const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
 
-        if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
+        if (
+          (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) ||
+          (!usersAreBeingRequestedForTheFirstTime && lastLoadedIndex < teamUsersQuantity)
+        ) {
           setIsAnswerSummaryLoading(true)
 
           setAnswerSummaryPaginationData({
@@ -142,32 +145,12 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
 
           setAnswersSummary((previousAnswers) => [...previousAnswers, ...formattedData])
           setIsAnswerSummaryLoading(false)
-        } else if (!usersAreBeingRequestedForTheFirstTime && lastLoadedIndex < teamUsersQuantity) {
-          const lastUserRendered = teamUsers[lastLoadedIndex + 1]
-
-          setAnswerSummaryPaginationData({
-            lastLoadedUserId: lastUserRendered.id,
-            teamId,
-          })
         }
       }
     },
 
-    [
-      after,
-      answersSummary,
-      before,
-      formattedAnswerSummary,
-      lastLoadedIndex,
-      limitedTeamUsers,
-      servicesPromise,
-      setAnswerSummaryPaginationData,
-      setAnswersSummary,
-      setIsAnswerSummaryLoading,
-      teamId,
-      teamUsers,
-      teamUsersQuantity,
-    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [after, before, lastLoadedIndex, limitedTeamUsers, teamId, teamUsersQuantity],
   )
 
   useEffect(() => {
