@@ -32,7 +32,6 @@ import {
 } from 'src/state/recoil/routine/routine-dates-range'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { teamAtomFamily } from 'src/state/recoil/team'
-import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
@@ -76,7 +75,6 @@ export const formatUUIDArray = (uuids: string[]) => {
 const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
-  const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
 
   const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
   const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
