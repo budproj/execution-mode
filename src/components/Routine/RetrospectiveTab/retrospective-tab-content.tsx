@@ -32,6 +32,7 @@ import {
 } from 'src/state/recoil/routine/routine-dates-range'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { teamAtomFamily } from 'src/state/recoil/team'
+import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
@@ -76,6 +77,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const intl = useIntl()
   const router = useRouter()
 
+  const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
   const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
   const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
     answerSummaryLoadStateAtom,
@@ -112,16 +114,23 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
         const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
           return answersSummary.some((user) => user.userId === userId)
         })
-        const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
 
         if (
           (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) ||
-          (!usersAreBeingRequestedForTheFirstTime && lastLoadedIndex < teamUsersQuantity)
+          (!usersAreBeingRequestedForTheFirstTime && lastLoadedIndex < teamUsersQuantity - 1)
         ) {
           setIsAnswerSummaryLoading(true)
+          const lastUserRendered = teamUsers[lastLoadedIndex + 1]
+          const filteredUsersIds = usersAreBeingRequestedForTheFirstTime
+            ? teamUsersIds
+            : teamUsersIds.filter((id) => id !== lastUserRendered.id)
+
+          const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(filteredUsersIds))
 
           setAnswerSummaryPaginationData({
-            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+            lastLoadedUserId: usersAreBeingRequestedForTheFirstTime
+              ? teamUsersIds[teamUsersIds.length - 1]
+              : lastUserRendered.id,
             teamId,
           })
           const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
