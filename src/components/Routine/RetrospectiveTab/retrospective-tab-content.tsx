@@ -32,6 +32,7 @@ import {
 } from 'src/state/recoil/routine/routine-dates-range'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { teamAtomFamily } from 'src/state/recoil/team'
+import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
@@ -75,13 +76,15 @@ export const formatUUIDArray = (uuids: string[]) => {
 const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
+  const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
 
   const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
   const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
     answerSummaryLoadStateAtom,
   )
 
-  const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
+  const { limitedTeamUsers, lastLoadedIndex, teamUsersQuantity } =
+    useAnswerSummaryPagination(teamId)
 
   const { formattedAnswerSummary } = useAnswerSummaryFormatter()
   const { servicesPromise } = useContext(ServicesContext)
@@ -104,15 +107,14 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     async (entries: IntersectionObserverEntry[]) => {
       const { routines } = await servicesPromise
       const target = entries[0]
+      const teamUsersIds = limitedTeamUsers.map((user) => user.id)
+
+      const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
+        return answersSummary.some((user) => user.userId === userId)
+      })
 
       if (target.isIntersecting) {
-        const teamUsersIds = limitedTeamUsers.map((user) => user.id)
-
         const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-
-        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
-          return answersSummary.some((user) => user.userId === userId)
-        })
 
         if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
           setIsAnswerSummaryLoading(true)
@@ -141,11 +143,18 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
           setAnswersSummary((previousAnswers) => [...previousAnswers, ...formattedData])
           setIsAnswerSummaryLoading(false)
         }
+      } else if (!usersAreBeingRequestedForTheFirstTime && lastLoadedIndex < teamUsersQuantity) {
+        const lastUserRendered = teamUsers[lastLoadedIndex + 1]
+
+        setAnswerSummaryPaginationData({
+          lastLoadedUserId: lastUserRendered.id,
+          teamId,
+        })
       }
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [after, before, limitedTeamUsers, teamId],
+    [after, before, lastLoadedIndex, limitedTeamUsers, teamId, teamUsersQuantity],
   )
 
   useEffect(() => {

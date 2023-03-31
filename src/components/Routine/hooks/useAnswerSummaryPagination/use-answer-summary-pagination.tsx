@@ -9,6 +9,8 @@ import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 type AnswerSummaryPaginationProperties = {
   limitedTeamUsers: User[]
+  lastLoadedIndex: number
+  teamUsersQuantity: number
 }
 
 const useAnswerSummaryPagination = (teamId: Team['id']): AnswerSummaryPaginationProperties => {
@@ -29,7 +31,7 @@ const useAnswerSummaryPagination = (teamId: Team['id']): AnswerSummaryPagination
   const limitedTeamUsers =
     answersSummary.length < teamUsers.length ? teamUsers.slice(cursorPaginationItem, endSlice) : []
 
-  return { limitedTeamUsers }
+  return { limitedTeamUsers, lastLoadedIndex, teamUsersQuantity: teamUsers.length }
 }
 
 export default useAnswerSummaryPagination
