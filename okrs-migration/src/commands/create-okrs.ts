@@ -57,7 +57,7 @@ async function createOkrs({ sdk, companyId, objectivesCsv, keyResultsCsv, output
   console.log(chalk.yellowBright(`You are about to create ${osCount} objectives and ${krsCount} key results`));
 
   const areYouSure = await read({
-    prompt: "Are you sure you sure? (y/N)"
+    prompt: "Are you sure? (y/N)"
   });
 
   if (areYouSure.toLowerCase() !== "y") {

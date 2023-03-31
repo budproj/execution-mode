@@ -13,7 +13,7 @@ import buildCommands from "./commands/index.js";
 
 dotenv.config();
 
-const { BUD_EMAIL, BUD_PASSWORD, API_URL } = process.env;
+const { BUD_EMAIL, BUD_PASSWORD, API_URL, AUTH_HEADLESS } = process.env;
 assert.ok(API_URL, "API_URL is required");
 
 figlet("bud", {
@@ -40,6 +40,9 @@ figlet("bud", {
 async function main(hello: string) {
   console.log(hello);
 
+  const apiUrl = API_URL!;
+  const headless = AUTH_HEADLESS !== "false";
+
   const email = BUD_EMAIL || await read({
     prompt: "Email:",
     default: "danilo@getbud.co"
@@ -52,9 +55,10 @@ async function main(hello: string) {
   });
 
   const { tokenType, accessToken, user } = await auth({
-    apiUrl: API_URL!,
+    apiUrl,
     email,
-    password
+    password,
+    headless
   });
 
   console.log(chalk.green.bold(`${chalk.blue(user)} authenticated successfully!`));
@@ -64,9 +68,9 @@ async function main(hello: string) {
     buildSdk({
       tokenType,
       accessToken,
-      apiUrl: API_URL!
-    })
-  );
+      apiUrl
+    }),
+  )
 
   const company = (await sdk.getMe()).me.companies.edges[0].node;
 
@@ -75,8 +79,11 @@ async function main(hello: string) {
   buildCommands({
     program,
     sdk,
-    companyId: company.id
-  });
+    apiUrl,
+    email,
+    password,
+    companyId: company.id,
+  })
 
   program.parse();
 }
