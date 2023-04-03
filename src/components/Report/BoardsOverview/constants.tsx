@@ -12,7 +12,8 @@ export const getConfidenceQuantities =
 
 export const getIsListable = (confidence: Confidence): Confidence => {
   const isEmpty = confidence.quantity === 0
-  const isListable = !isEmpty
+  const isHighConfidence = confidence.name === 'high'
+  const isListable = !isEmpty && !isHighConfidence
 
   return {
     ...confidence,
