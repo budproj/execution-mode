@@ -5,6 +5,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { CARD_TYPES } from 'src/components/Page/Team/Highlights/utils/card-types'
+import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab'
 import { useGetUserDetails } from 'src/components/User/hooks'
 import { User } from 'src/components/User/types'
 
@@ -39,6 +40,8 @@ const RoutinesHighlightsTableCustomColumn = ({
   cardType,
 }: RoutinesHighlightsTableCustomColumnProperties) => {
   const intl = useIntl()
+  const routineTabName = useRoutineTab()
+
   const CustomIcon = useCustomColumnDefaultIcon(cardType, lastUserRoutineAnswer)
   const { data: user } = useGetUserDetails(userId)
 
@@ -53,7 +56,9 @@ const RoutinesHighlightsTableCustomColumn = ({
           passHref
           href={`/explore/${
             user?.companies?.edges[0].node.id ?? ''
-          }/?activeTab=retrospectiva&answerId=${lastUserRoutineAnswer?.lastRoutineAnswerId ?? ''}`}
+          }/?activeTab=${routineTabName}&answerId=${
+            lastUserRoutineAnswer?.lastRoutineAnswerId ?? ''
+          }`}
         >
           <GridItem color="new-gray.800" fontWeight="500" fontSize="12px">
             {CustomIcon}

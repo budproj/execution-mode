@@ -40,6 +40,14 @@ const BadgeIcon = ({ typeNotification, desc, ...rest }: BadgeIconProperties) => 
       NOTIFICATIONS_TYPE.COMMENT_ON_MY_KR,
       <CommentIcon key={desc} desc={desc} width="4.5em" height="4.5em" fill="none" stroke="none" />,
     ],
+    [
+      NOTIFICATIONS_TYPE.COMMENT_ON_MY_ROUTINE,
+      <CommentIcon key={desc} desc={desc} width="4.5em" height="4.5em" fill="none" stroke="none" />,
+    ],
+    [
+      NOTIFICATIONS_TYPE.MENTION_ON_MY_ROUTINE,
+      <TaggedIcon key={desc} desc={desc} h="1.4em" w="1.4em" fill="none" stroke="none" />,
+    ],
   ])
 
   return <Box>{Icons.get(typeNotification)}</Box>
