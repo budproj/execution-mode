@@ -1,9 +1,9 @@
-query GET_KEY_RESULTS($confidence: String, $offset: Float, $limit: Float) {
+query GET_KEY_RESULTS($confidence: String) {
   me {
     companies {
       edges {
         node {
-          keyResults(confidence: $confidence, offset: $offset, limit: $limit) {
+          keyResults(first: 1000, confidence: $confidence) {
             edges {
               node {
                 id

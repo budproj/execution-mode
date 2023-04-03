@@ -1,11 +1,10 @@
 import { Box, Flex, StyleProps } from '@chakra-ui/react'
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
-import { krTableLengthAtom } from 'src/state/recoil/key-result/kr-table-lenght.atom'
 
 import Board from '../Board'
 import StackedProgressBar from '../StackedProgressBar'
@@ -21,7 +20,6 @@ export interface BoardsOverviewProperties extends StyleProps {
 const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProperties) => {
   const intl = useIntl()
   const setKrHealthStatus = useSetRecoilState(krHealthStatusAtom)
-  const setKrTableLength = useSetRecoilState(krTableLengthAtom)
 
   const confidencesToRender = useMemo(
     () =>
@@ -31,15 +29,11 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
     [quantities],
   )
 
-  const onClick = useCallback(
-    (confidence: Confidence) => {
-      if (confidence.isListable) {
-        setKrTableLength(quantities[confidence.name])
-        setKrHealthStatus(confidence.name)
-      }
-    },
-    [quantities, setKrHealthStatus, setKrTableLength],
-  )
+  const onClick = (confidence: Confidence) => {
+    if (confidence.isListable) {
+      setKrHealthStatus(confidence.name)
+    }
+  }
 
   return (
     <Flex borderRadius="9px" bg="white" width="100%" paddingY={15} paddingX={18} {...rest}>

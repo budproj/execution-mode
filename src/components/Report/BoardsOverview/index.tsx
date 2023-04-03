@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react'
-import React, { memo } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
@@ -13,7 +13,7 @@ import { ConfidenceMapper } from './KeyResultListing/types'
 import { KeyResultsListingTable } from './KeyResultsListingTable'
 import messages from './messages'
 
-const BoardsOverview = memo(({ ...rest }) => {
+const BoardsOverview = ({ ...rest }) => {
   const { data, loading } = useGetHealthConfidenceQuantities()
   const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
   const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
@@ -47,6 +47,6 @@ const BoardsOverview = memo(({ ...rest }) => {
       )}
     </>
   )
-})
+}
 
 export default BoardsOverview
