@@ -32,7 +32,6 @@ import {
 } from 'src/state/recoil/routine/routine-dates-range'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { teamAtomFamily } from 'src/state/recoil/team'
-import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
@@ -77,14 +76,12 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const intl = useIntl()
   const router = useRouter()
 
-  const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
   const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
   const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
     answerSummaryLoadStateAtom,
   )
 
-  const { limitedTeamUsers, lastLoadedIndex, teamUsersQuantity } =
-    useAnswerSummaryPagination(teamId)
+  const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
 
   const { formattedAnswerSummary } = useAnswerSummaryFormatter()
   const { servicesPromise } = useContext(ServicesContext)
@@ -115,22 +112,12 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
           return answersSummary.some((user) => user.userId === userId)
         })
 
-        if (
-          (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) ||
-          (!usersAreBeingRequestedForTheFirstTime && lastLoadedIndex < teamUsersQuantity - 1)
-        ) {
+        if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
           setIsAnswerSummaryLoading(true)
-          const lastUserRendered = teamUsers[lastLoadedIndex + 1]
-          const filteredUsersIds = usersAreBeingRequestedForTheFirstTime
-            ? teamUsersIds
-            : teamUsersIds.filter((id) => id !== lastUserRendered.id)
-
-          const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(filteredUsersIds))
+          const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
 
           setAnswerSummaryPaginationData({
-            lastLoadedUserId: usersAreBeingRequestedForTheFirstTime
-              ? teamUsersIds[teamUsersIds.length - 1]
-              : lastUserRendered.id,
+            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
             teamId,
           })
           const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
@@ -151,13 +138,16 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
           })
 
           setAnswersSummary((previousAnswers) => [...previousAnswers, ...formattedData])
-          setIsAnswerSummaryLoading(false)
+
+          const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
+
+          return () => clearTimeout(answerSummaryTimer)
         }
       }
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [after, before, lastLoadedIndex, limitedTeamUsers, teamId, teamUsersQuantity],
+    [after, before, teamId, limitedTeamUsers],
   )
 
   useEffect(() => {
