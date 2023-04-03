@@ -347,6 +347,10 @@
     "defaultMessage": "RETROSPECTIVA SENTIMENTO",
     "description": "The title of the feeling column."
   },
+  "4WREAh": {
+    "defaultMessage": "{columnAccessor, select, user {Usuário} team {Time} productivity {Produtividade na semana} roadblock {Bloqueios na semana} feeling {Sentimentos na semana} lastRetrospective {Última retrospectiva} lastAccess {Último acesso} other {OKRs}}",
+    "description": "This message appears in the header of each column of a Team Indicators table."
+  },
   "4XHRhd": {
     "defaultMessage": "Meta",
     "description": "The heading text of the goal section in our key-result drawers"

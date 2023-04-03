@@ -17,6 +17,7 @@ export const useCreateComment = () => {
 
   const handleCreateComment = async ({ entity, content }: useCreateCommentProperties) => {
     const { comments } = await servicesPromise
+
     if (entity) {
       const { data: createdComment } = await comments.post<Comment>(`/comments/${entity}`, {
         content,

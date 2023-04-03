@@ -3,8 +3,8 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
-import teamMembersHighlightsMessages from 'src/components/Page/Team/Highlights/modals/UsersTeamList/messages'
 import { useGetEmoji } from 'src/components/Routine/hooks'
+import teamMembersHighlightsMessages from 'src/components/Team/RoutineHighlightsTable/Columns/Custom/messages'
 
 interface UserRetrospectiveFeelingProperties {
   feeling?: string

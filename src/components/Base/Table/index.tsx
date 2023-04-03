@@ -6,11 +6,13 @@ import * as S from './styles'
 interface TablePropertiesM<TData extends Record<string, unknown>> {
   columns: Array<Column<TData>>
   data: TData[]
+  headStyles?: React.CSSProperties
 }
 
 const TableBase = <TData extends Record<string, unknown>>({
   columns,
   data,
+  headStyles,
 }: TablePropertiesM<TData>) => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable({
     columns,
@@ -19,7 +21,7 @@ const TableBase = <TData extends Record<string, unknown>>({
 
   return (
     <S.Table {...getTableProps()}>
-      <S.THead>
+      <S.THead style={{ ...headStyles }}>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
             {headerGroup.headers.map((column) => (

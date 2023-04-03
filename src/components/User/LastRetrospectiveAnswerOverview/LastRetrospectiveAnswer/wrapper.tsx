@@ -9,7 +9,7 @@ import { User } from '../../types'
 
 import LastRetrospectiveAnswerOverviewEmptyState from './last-retrospective.empty-state'
 import UserFeeling from './user-feeling'
-import UserProductity from './user-productivity'
+import Userproductivity from './user-productivity'
 import UserRoadblock from './user-roadblock'
 
 export interface userRoutineData {
@@ -40,6 +40,7 @@ const LastRetrospectiveAnswer = ({
   return lastRoutineAnswerId ? (
     <IntlLink href={redirectToURL}>
       <GridItem
+        alignItems="center"
         gap="15px"
         display="flex"
         color="new-gray.800"
@@ -47,9 +48,9 @@ const LastRetrospectiveAnswer = ({
         fontSize="12px"
         onClick={onClick}
       >
-        <UserFeeling feeling={feeling} />
-        <UserProductity productivity={productivity} />
-        <UserRoadblock roadblock={roadBlock} />
+        {feeling && <UserFeeling feeling={feeling} />}
+        {productivity && <Userproductivity productivity={productivity} />}
+        {roadBlock && <UserRoadblock roadblock={roadBlock} />}
       </GridItem>
     </IntlLink>
   ) : (

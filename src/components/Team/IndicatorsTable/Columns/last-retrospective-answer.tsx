@@ -8,7 +8,7 @@ export interface LastRetrospectiveAnswerColumnProperties {
   lastRetrospetiveAnswerId?: string
   feeling?: string
   userId: User['id']
-  productity?: string
+  productivity?: string
   roadblock?: string
   onClick?: () => void
 }
@@ -18,7 +18,7 @@ const LastRetrospectiveAnswer = ({
   lastRetrospetiveAnswerId,
   feeling,
   userId,
-  productity,
+  productivity,
   roadblock,
   onClick,
 }: LastRetrospectiveAnswerColumnProperties) => {
@@ -28,7 +28,7 @@ const LastRetrospectiveAnswer = ({
       isLoaded={isLoaded}
       lastRetrospetiveAnswerId={lastRetrospetiveAnswerId}
       feeling={feeling}
-      productity={productity}
+      productivity={productivity}
       roadblock={roadblock}
       onClick={onClick}
     />
