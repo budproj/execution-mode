@@ -6,6 +6,7 @@ import regexifyString from 'regexify-string'
 
 import { CalendarColored } from 'src/components/Icon'
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
+import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab'
 
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
@@ -15,6 +16,7 @@ import messages from './messages'
 const CommentOnRoutineNotification = ({ properties, timestamp, isRead, type }: Notification) => {
   const intl = useIntl()
   const { push } = useRouter()
+  const routineTabName = useRoutineTab()
 
   const typeCommentNotificationMessage =
     type === NOTIFICATIONS_TYPE.COMMENT_ON_MY_ROUTINE
@@ -37,7 +39,7 @@ const CommentOnRoutineNotification = ({ properties, timestamp, isRead, type }: N
   })
 
   const answerLink = properties.routine
-    ? `explore/${properties.routine.companyId}?activeTab=retrospectiva&answerId=${properties.routine?.answerId}`
+    ? `explore/${properties.routine.companyId}?activeTab=${routineTabName}&answerId=${properties.routine?.answerId}`
     : '#'
 
   return (
