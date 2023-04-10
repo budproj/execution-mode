@@ -12,11 +12,10 @@ import {
 } from '@chakra-ui/react'
 import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
-import React, { memo, useCallback, useContext, useEffect } from 'react'
+import React, { memo, useCallback, useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
-import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { CircleArrowRight } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import GearIcon from 'src/components/Icon/Gear'
@@ -25,7 +24,6 @@ import { NotificationSettingsModal } from 'src/components/Routine/NotificationSe
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
-import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
 import {
   getRoutineDateRangeDateFormat,
   routineDatesRangeAtom,
@@ -37,7 +35,6 @@ import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationS
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
 
 import AnswersComponent from './Answers'
-import useAnswerSummaryFormatter from './Answers/utils/answer-summary-formatter'
 import RetrospectiveTabContentView from './retrospective-tab-content-view'
 
 export type AnswerType = {
@@ -76,15 +73,12 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const intl = useIntl()
   const router = useRouter()
 
-  const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
   const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
     answerSummaryLoadStateAtom,
   )
 
-  const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
+  const { limitedTeamUsers, fetchAnswers } = useAnswerSummaryPagination(teamId)
 
-  const { formattedAnswerSummary } = useAnswerSummaryFormatter()
-  const { servicesPromise } = useContext(ServicesContext)
   const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
   const team = useRecoilValue(teamAtomFamily(teamId))
   const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
@@ -100,9 +94,21 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
 
+  const handleGetNoCurrentAnswers = useCallback(
+    async (after: Date, before: Date) => {
+      setIsAnswerSummaryLoading(true)
+      setAnswersSummary([])
+      const showedUsersIds = answersSummary.map((answer) => answer.userId)
+
+      const newFormattedData = await fetchAnswers({ after, before, teamUsersIds: showedUsersIds })
+      setAnswersSummary(newFormattedData)
+      setIsAnswerSummaryLoading(false)
+    },
+    [answersSummary, fetchAnswers, setAnswersSummary, setIsAnswerSummaryLoading],
+  )
+
   const fetchAnswerSummaryData = useCallback(
     async (entries: IntersectionObserverEntry[]) => {
-      const { routines } = await servicesPromise
       const target = entries[0]
 
       if (target.isIntersecting) {
@@ -114,31 +120,8 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
 
         if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
           setIsAnswerSummaryLoading(true)
-          const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-
-          setAnswerSummaryPaginationData({
-            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
-            teamId,
-          })
-          const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-            `/answers/summary/${teamId}`,
-            {
-              params: {
-                before,
-                after,
-                includeSubteams: false,
-                teamUsersIds: parsetToQueryTeamUsersIDS,
-              },
-            },
-          )
-
-          const formattedData = formattedAnswerSummary({
-            requestedUsersIDs: teamUsersIds,
-            answerSummary: answersSummaryData,
-          })
-
-          setAnswersSummary((previousAnswers) => [...previousAnswers, ...formattedData])
-
+          const newFormattedData = await fetchAnswers({ after, before, teamUsersIds })
+          setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
           const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
 
           return () => clearTimeout(answerSummaryTimer)
@@ -275,7 +258,13 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
         ) : undefined}
       </Flex>
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
-        <AnswersComponent after={after} before={before} week={week} teamId={teamId} />
+        <AnswersComponent
+          after={after}
+          before={before}
+          week={week}
+          teamId={teamId}
+          onGetNoCurrentAnswers={handleGetNoCurrentAnswers}
+        />
 
         <Divider orientation="vertical" borderColor="new-gray.400" />
         <RetrospectiveTabContentView
