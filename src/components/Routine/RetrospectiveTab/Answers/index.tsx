@@ -37,6 +37,7 @@ import useAnswerSummaryFormatter from './utils/answer-summary-formatter'
 
 interface AnswersComponentProperties {
   teamId: string
+  onGetCurrentAnswers: (after: Date, before: Date) => Promise<void>
   after: Date
   before: Date
   week: number
@@ -46,239 +47,249 @@ const ScrollableItem = getScrollableItem()
 
 const SEARCH_CHARACTERS_LIMIT = 3
 
-const AnswersComponent = memo(({ teamId, after, before, week }: AnswersComponentProperties) => {
-  const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
-  const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
-  const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
-    answerSummaryLoadStateAtom,
-  )
+const AnswersComponent = memo(
+  ({ teamId, after, before, week, onGetCurrentAnswers }: AnswersComponentProperties) => {
+    const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
+    const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
+    const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
+      answerSummaryLoadStateAtom,
+    )
 
-  const { servicesPromise } = useContext(ServicesContext)
+    const { servicesPromise } = useContext(ServicesContext)
 
-  const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
-  const [answers, setAnswers] = useRecoilState(answerSummaryAtom)
-  const [search, setSearch] = useState('')
+    const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
+    const [answers, setAnswers] = useRecoilState(answerSummaryAtom)
+    const [search, setSearch] = useState('')
 
-  const filteredAnswers = useMemo(() => {
-    const uniqueIds = new Set()
-    return answers.filter((answer) => {
-      if (
-        answer.name.toLowerCase().includes(search.toLocaleLowerCase()) &&
-        !uniqueIds.has(answer.userId)
-      ) {
-        uniqueIds.add(answer.userId)
-        return true
-      }
+    const filteredAnswers = useMemo(() => {
+      const uniqueIds = new Set()
+      return answers.filter((answer) => {
+        if (
+          answer.name.toLowerCase().includes(search.toLocaleLowerCase()) &&
+          !uniqueIds.has(answer.userId)
+        ) {
+          uniqueIds.add(answer.userId)
+          return true
+        }
 
-      return false
-    })
-  }, [answers, search])
-
-  const { formattedAnswerSummary } = useAnswerSummaryFormatter()
-
-  const intl = useIntl()
-  const router = useRouter()
-
-  const userID = useRecoilValue(meAtom)
-  const [date, setDate] = useRecoilState(routineDatesRangeAtom)
-  const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
-  const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
-  const user = useRecoilValue(selectUser(userID))
-  const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
-  const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
-  const userTeamIds = userTeams.map((team) => team.id)
-  const userCompanie = userCompanies[0]?.id
-  const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
-
-  const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
-  const isActiveRoutine = isBefore(new Date(), before)
-
-  const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
-
-  const setNewDate = useCallback(
-    (newDate: Date) => {
-      const dateRange = getRoutineDateRangeDateFormat(newDate)
-      setDate(dateRange)
-      router.push(
-        {
-          query: {
-            ...(router?.query ?? {}),
-            before: format(dateRange.before, 'dd/MM/yyyy'),
-            after: format(dateRange.after, 'dd/MM/yyyy'),
-          },
-        },
-        undefined,
-        { shallow: true },
-      )
-    },
-    [router, setDate],
-  )
-
-  const performDebounced = useCallback(
-    async (searchTerm: string) => {
-      const { routines } = await servicesPromise
-      const usersSearched = teamUsers.filter((user) =>
-        user.fullName.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()),
-      )
-
-      const teamUsersIds = usersSearched.map((user) => user.id)
-
-      const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-
-      const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
-        return answers.some((user) => user.userId === userId)
+        return false
       })
+    }, [answers, search])
 
-      if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
-        const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-          `/answers/summary/${teamId}`,
+    const { formattedAnswerSummary } = useAnswerSummaryFormatter()
+
+    const intl = useIntl()
+    const router = useRouter()
+
+    const userID = useRecoilValue(meAtom)
+    const [date, setDate] = useRecoilState(routineDatesRangeAtom)
+    const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
+    const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
+    const user = useRecoilValue(selectUser(userID))
+    const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
+    const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
+    const userTeamIds = userTeams.map((team) => team.id)
+    const userCompanie = userCompanies[0]?.id
+    const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
+
+    const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
+    const isActiveRoutine = isBefore(new Date(), before)
+
+    const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
+
+    const setNewDate = useCallback(
+      async (newDate: Date) => {
+        const dateRange = getRoutineDateRangeDateFormat(newDate)
+        setDate(dateRange)
+
+        router.push(
           {
-            params: {
-              before,
-              after,
-              includeSubteams: false,
-              teamUsersIds: parsetToQueryTeamUsersIDS,
+            query: {
+              ...(router?.query ?? {}),
+              before: format(dateRange.before, 'dd/MM/yyyy'),
+              after: format(dateRange.after, 'dd/MM/yyyy'),
             },
           },
+          undefined,
+          { shallow: true },
         )
 
-        const formattedData = formattedAnswerSummary({
-          requestedUsersIDs: teamUsersIds,
-          answerSummary: answersSummaryData,
+        await onGetCurrentAnswers(dateRange.after, dateRange.before)
+      },
+      [onGetCurrentAnswers, router, setDate],
+    )
+
+    const performDebounced = useCallback(
+      async (searchTerm: string) => {
+        const { routines } = await servicesPromise
+        const usersSearched = teamUsers.filter((user) =>
+          user.fullName.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()),
+        )
+
+        const teamUsersIds = usersSearched.map((user) => user.id)
+
+        const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
+
+        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
+          return answers.some((user) => user.userId === userId)
         })
 
-        setAnswers((previousAnswers) => [...previousAnswers, ...formattedData])
-      }
+        if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
+          const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+            `/answers/summary/${teamId}`,
+            {
+              params: {
+                before,
+                after,
+                includeSubteams: false,
+                teamUsersIds: parsetToQueryTeamUsersIDS,
+              },
+            },
+          )
 
-      setIsAnswerSummaryLoading(false)
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [after, before, formattedAnswerSummary, servicesPromise, teamUsers],
-  )
+          const formattedData = formattedAnswerSummary({
+            requestedUsersIDs: teamUsersIds,
+            answerSummary: answersSummaryData,
+          })
 
-  const debouncedSearch = debounce(performDebounced, 3000)
+          setAnswers((previousAnswers) => [...previousAnswers, ...formattedData])
+        }
 
-  const handleSearch = useCallback(
-    async (value: string) => {
-      if (value.length > SEARCH_CHARACTERS_LIMIT) {
-        setSearch(value)
-        setIsAnswerSummaryLoading(true)
-        await debouncedSearch(value)
-      } else {
         setIsAnswerSummaryLoading(false)
-        setSearch('')
-      }
-    },
-    [debouncedSearch, setIsAnswerSummaryLoading],
-  )
+      },
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      [after, before, formattedAnswerSummary, servicesPromise, teamUsers],
+    )
 
-  useEffect(() => {
-    updateTeams(user?.teams?.edges)
-    updateUserCompanies(user?.companies?.edges)
-  }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
+    const debouncedSearch = debounce(performDebounced, 3000)
 
-  return (
-    <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">
-      <Flex width="100%" height="38px" marginBottom="25px" marginTop="6px">
-        <IconButton
-          background="new-gray.200"
-          aria-label={intl.formatMessage(messages.arrowLeftIconDescription)}
-          borderRadius="10px 0px 0px 10px"
-          height="38px"
-          icon={
-            <ArrowRight
-              transform="rotate(180deg)"
-              desc={intl.formatMessage(messages.arrowLeftIconDescription)}
-              fill="new-gray.700"
-            />
-          }
-          onClick={() => {
-            setIsAnswerSummaryLoaded(false)
-            setNewDate(sub(date.after, { weeks: 1 }))
-            dispatchChangeTimePeriod({})
-          }}
-        />
-        <Text
-          color="new-gray.800"
-          width="100%"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          background="new-gray.100"
-          marginX="3px"
-        >
-          {intl.formatMessage(messages.weekText)} {week} (
-          {format(new Date(after), 'dd/MMM', { locale: pt })} a{' '}
-          {format(new Date(before), 'dd/MMM', { locale: pt })})
-        </Text>
-        <IconButton
-          borderRadius="0px 10px 10px 0px"
-          background="new-gray.200"
-          aria-label={intl.formatMessage(messages.arrowRightIconDescription)}
-          height="38px"
-          isDisabled={isNextWeekDisabled(before)}
-          icon={
-            <ArrowRight
-              desc={intl.formatMessage(messages.arrowRightIconDescription)}
-              fill="new-gray.700"
-            />
-          }
-          onClick={() => {
-            setIsAnswerSummaryLoaded(false)
-            setNewDate(add(date.after, { weeks: 1 }))
-            dispatchChangeTimePeriod({})
-          }}
-        />
-      </Flex>
-      <Divider borderColor="new-gray.400" />
-      <Flex gap="5px" marginTop="20px" marginBottom="30px">
-        <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={handleSearch} />
-      </Flex>
-      <ScrollableItem
-        id="scrollable-list-users"
-        maxH={showAnswerNowButton ? '455px' : '537px'}
-        p="0 12px"
-      >
-        {filteredAnswers.map((answer) => (
-          <AnswerRowComponent key={answer.id} answer={answer} />
-        ))}
-        {isAnswerSummaryLoading && (
-          <Flex justify="center" py={4}>
-            <Spinner size="lg" />
-          </Flex>
-        )}
-        <Box
-          id="list-bottom"
-          display={search.length > SEARCH_CHARACTERS_LIMIT ? 'none' : 'block'}
-        />
-      </ScrollableItem>
-      {showAnswerNowButton && (
-        <Box textAlign="center" marginTop="auto">
-          <Divider borderColor="new-gray.400" />
-          <Text color="red.500" fontWeight="500" fontSize="14px" marginY="10px">
-            <BrilliantBellIcon
-              desc={intl.formatMessage(messages.redBellIconDescription)}
-              marginRight={2}
-              marginBottom={1.5}
-            />
-            {intl.formatMessage(messages.notAnsweredText)}
-          </Text>
-          <Button
-            width="100%"
-            label={intl.formatMessage(messages.answerNowButton)}
-            color="white"
-            backgroundColor="brand.500"
-            padding="13px 0px"
-            _hover={{ background: 'brand.400', color: 'black.50' }}
+    const handleSearch = useCallback(
+      async (value: string) => {
+        if (value.length > SEARCH_CHARACTERS_LIMIT) {
+          setSearch(value)
+          setIsAnswerSummaryLoading(true)
+          await debouncedSearch(value)
+        } else {
+          setIsAnswerSummaryLoading(false)
+          setSearch('')
+        }
+      },
+      [debouncedSearch, setIsAnswerSummaryLoading],
+    )
+
+    useEffect(() => {
+      updateTeams(user?.teams?.edges)
+      updateUserCompanies(user?.companies?.edges)
+    }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
+
+    return (
+      <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">
+        <Flex width="100%" height="38px" marginBottom="25px" marginTop="6px">
+          <IconButton
+            background="new-gray.200"
+            aria-label={intl.formatMessage(messages.arrowLeftIconDescription)}
+            borderRadius="10px 0px 0px 10px"
+            height="38px"
+            icon={
+              <ArrowRight
+                transform="rotate(180deg)"
+                desc={intl.formatMessage(messages.arrowLeftIconDescription)}
+                fill="new-gray.700"
+              />
+            }
             onClick={() => {
-              setIsRoutineDrawerOpen(true)
-              dispatchAnswerNowFormClick({})
+              setIsAnswerSummaryLoaded(false)
+              setNewDate(sub(date.after, { weeks: 1 }))
+              dispatchChangeTimePeriod({})
             }}
           />
-        </Box>
-      )}
-    </GridItem>
-  )
-})
+          <Text
+            color="new-gray.800"
+            width="100%"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            background="new-gray.100"
+            marginX="3px"
+          >
+            {intl.formatMessage(messages.weekText)} {week} (
+            {format(new Date(after), 'dd/MMM', { locale: pt })} a{' '}
+            {format(new Date(before), 'dd/MMM', { locale: pt })})
+          </Text>
+          <IconButton
+            borderRadius="0px 10px 10px 0px"
+            background="new-gray.200"
+            aria-label={intl.formatMessage(messages.arrowRightIconDescription)}
+            height="38px"
+            isDisabled={isNextWeekDisabled(before)}
+            icon={
+              <ArrowRight
+                desc={intl.formatMessage(messages.arrowRightIconDescription)}
+                fill="new-gray.700"
+              />
+            }
+            onClick={() => {
+              setIsAnswerSummaryLoaded(false)
+              setNewDate(add(date.after, { weeks: 1 }))
+              dispatchChangeTimePeriod({})
+            }}
+          />
+        </Flex>
+        <Divider borderColor="new-gray.400" />
+        <Flex gap="5px" marginTop="20px" marginBottom="30px">
+          <SearchBar
+            placeholder="Buscar"
+            borderRadius="10px"
+            height="38px"
+            onSearch={handleSearch}
+          />
+        </Flex>
+        <ScrollableItem
+          id="scrollable-list-users"
+          maxH={showAnswerNowButton ? '455px' : '537px'}
+          p="0 12px"
+        >
+          {filteredAnswers.map((answer) => (
+            <AnswerRowComponent key={answer.id} answer={answer} />
+          ))}
+          {isAnswerSummaryLoading && (
+            <Flex justify="center" py={4}>
+              <Spinner size="lg" />
+            </Flex>
+          )}
+          <Box
+            id="list-bottom"
+            display={search.length > SEARCH_CHARACTERS_LIMIT ? 'none' : 'block'}
+          />
+        </ScrollableItem>
+        {showAnswerNowButton && (
+          <Box textAlign="center" marginTop="auto">
+            <Divider borderColor="new-gray.400" />
+            <Text color="red.500" fontWeight="500" fontSize="14px" marginY="10px">
+              <BrilliantBellIcon
+                desc={intl.formatMessage(messages.redBellIconDescription)}
+                marginRight={2}
+                marginBottom={1.5}
+              />
+              {intl.formatMessage(messages.notAnsweredText)}
+            </Text>
+            <Button
+              width="100%"
+              label={intl.formatMessage(messages.answerNowButton)}
+              color="white"
+              backgroundColor="brand.500"
+              padding="13px 0px"
+              _hover={{ background: 'brand.400', color: 'black.50' }}
+              onClick={() => {
+                setIsRoutineDrawerOpen(true)
+                dispatchAnswerNowFormClick({})
+              }}
+            />
+          </Box>
+        )}
+      </GridItem>
+    )
+  },
+)
 
 export default AnswersComponent
