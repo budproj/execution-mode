@@ -263,7 +263,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
           before={before}
           week={week}
           teamId={teamId}
-          onGetCurrentAnswers={handleGetNoCurrentAnswers}
+          onGetNoCurrentAnswers={handleGetNoCurrentAnswers}
         />
 
         <Divider orientation="vertical" borderColor="new-gray.400" />

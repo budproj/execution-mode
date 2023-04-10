@@ -37,7 +37,7 @@ import useAnswerSummaryFormatter from './utils/answer-summary-formatter'
 
 interface AnswersComponentProperties {
   teamId: string
-  onGetCurrentAnswers: (after: Date, before: Date) => Promise<void>
+  onGetNoCurrentAnswers: (after: Date, before: Date) => Promise<void>
   after: Date
   before: Date
   week: number
@@ -48,7 +48,7 @@ const ScrollableItem = getScrollableItem()
 const SEARCH_CHARACTERS_LIMIT = 3
 
 const AnswersComponent = memo(
-  ({ teamId, after, before, week, onGetCurrentAnswers }: AnswersComponentProperties) => {
+  ({ teamId, after, before, week, onGetNoCurrentAnswers }: AnswersComponentProperties) => {
     const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
     const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
     const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
@@ -114,9 +114,9 @@ const AnswersComponent = memo(
           { shallow: true },
         )
 
-        await onGetCurrentAnswers(dateRange.after, dateRange.before)
+        await onGetNoCurrentAnswers(dateRange.after, dateRange.before)
       },
-      [onGetCurrentAnswers, router, setDate],
+      [onGetNoCurrentAnswers, router, setDate],
     )
 
     const performDebounced = useCallback(
