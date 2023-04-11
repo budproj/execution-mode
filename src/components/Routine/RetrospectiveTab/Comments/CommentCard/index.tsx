@@ -1,4 +1,5 @@
 import { Flex, Text, VStack, Avatar, Button, HStack } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
@@ -27,6 +28,10 @@ export const MarkedUser = ({ name }: { name?: string }) => (
     {name}
   </Text>
 )
+
+const StyledListItem = styled.span`
+  display: block;
+`
 
 const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) => {
   const { data: user } = useGetUserDetails(userId)
@@ -75,7 +80,11 @@ const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) =>
           />
         </Flex>
         <Text wordBreak="break-word" fontSize={14} color="new-gray.900">
-          {commentText}
+          {String(commentText)
+            .split('\n')
+            .map((line) => (
+              <StyledListItem key={line}>{line}</StyledListItem>
+            ))}
         </Text>
         <Button
           p={0}

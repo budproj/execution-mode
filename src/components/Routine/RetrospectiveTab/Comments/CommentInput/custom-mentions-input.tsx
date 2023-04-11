@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Avatar, Box, Divider, HStack, IconButton, Spinner, Stack } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { Mention, MentionsInput, SuggestionDataItem } from 'react-mentions'
 import { useRecoilValue } from 'recoil'
@@ -20,23 +20,11 @@ import meAtom from 'src/state/recoil/user/me'
 import messages from './messages'
 import { RoutineCommentsInputInitialValues } from './wrapper'
 
-const renderSuggestion = (suggestion: SuggestionDataItem) => (
-  <div>
-    <NamedAvatar
-      canHover
-      nameColor="black.900"
-      subtitleType="role"
-      userID={suggestion.id.toString()}
-    />
-  </div>
-)
-
 interface CustomMentionsInputProperties {
   userThatWillBeAnswered?: User['firstName']
 }
 
 const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProperties) => {
-  const reference = useRef<HTMLDivElement>(null)
   const intl = useIntl()
 
   const { setValues, values, isSubmitting, handleSubmit } =
@@ -60,13 +48,6 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
     }
   }
 
-  useEffect(() => {
-    reference.current?.addEventListener('keydown', handleCommentsInputKeyDown)
-
-    return () => document.removeEventListener('keydown', handleCommentsInputKeyDown)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   const placeholder = intl.formatMessage(messages.placeholder, {
     user: userThatWillBeAnswered,
   })
@@ -83,7 +64,8 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data])
 
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = (event: any) => {
+    console.log({ values })
     setValues({ text: event.target.value })
   }
 
@@ -97,8 +79,21 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [users])
 
+  const renderSuggestion = (suggestion: SuggestionDataItem) => {
+    return (
+      <div>
+        <NamedAvatar
+          canHover
+          nameColor="black.900"
+          subtitleType="role"
+          userID={suggestion.id.toString()}
+        />
+      </div>
+    )
+  }
+
   return (
-    <Stack ref={reference} alignItems="center" mt={2} paddingX={6} width="full">
+    <Stack alignItems="center" mt={2} paddingX={6} width="full">
       <Divider />
       <HStack pb={6} width="100%" spacing={4} justifyContent="space-between">
         <Avatar width="45px" height="45px" src={user?.picture} />
@@ -156,6 +151,7 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
             onFocus={handleFocus}
             onBlur={handleBlur}
             onChange={handleChange as any}
+            onKeyDown={handleCommentsInputKeyDown}
           >
             <Mention
               appendSpaceOnAdd
