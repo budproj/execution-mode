@@ -22,9 +22,11 @@ import {
   routineFormQuestions,
 } from 'src/state/recoil/routine/routine-form-questions'
 import { routineAnswersReturnedData } from 'src/state/recoil/routine/user-teams'
+import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 
+import useAnswerSummaryFormatter from '../../RetrospectiveTab/Answers/utils/answer-summary-formatter'
 import { OverviewData } from '../../RetrospectiveTab/RoutinesOverview'
-import { AnswerSummary } from '../../RetrospectiveTab/retrospective-tab-content'
+import { AnswerSummary, formatUUIDArray } from '../../RetrospectiveTab/retrospective-tab-content'
 import { usePendingRoutines } from '../getPendingRoutine'
 
 import submitAnswersMessages from './messages'
@@ -32,6 +34,9 @@ import submitAnswersMessages from './messages'
 export const useRoutineFormAnswers = () => {
   const setUserTeams = useSetRecoilState(routineAnswersReturnedData)
   const { getPendingRoutines } = usePendingRoutines()
+  const { formattedAnswerSummary } = useAnswerSummaryFormatter()
+
+  const setIsAnswerSummaryLoading = useSetRecoilState(answerSummaryLoadStateAtom)
   const router = useRouter()
   const intl = useIntl()
 
@@ -50,12 +55,16 @@ export const useRoutineFormAnswers = () => {
 
   const retrospectiveTab = 'retrospective'
 
-  const setAnswerSummary = useSetRecoilState(answerSummaryAtom)
+  const [answersSummary, setAnswerSummary] = useRecoilState(answerSummaryAtom)
   const { after, before } = useRecoilValue(routineDatesRangeAtom)
   const setRoutineOverviewData = useSetRecoilState(overviewDataAtom)
 
   const refetchRoutineData = async (teamId: Team['id']) => {
+    setIsAnswerSummaryLoading(true)
+    const showedUsersIds = answersSummary.map((answer) => answer.userId)
+    setAnswerSummary([])
     const { routines } = await servicesPromise
+    const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(showedUsersIds))
     const { data: answerSummary } = await routines.get<AnswerSummary[]>(
       `/answers/summary/${teamId}`,
       {
@@ -63,10 +72,18 @@ export const useRoutineFormAnswers = () => {
           before,
           after,
           includeSubteams: false,
+          teamUsersIds: parsetToQueryTeamUsersIDS,
         },
       },
     )
-    setAnswerSummary(answerSummary)
+
+    const formattedData = formattedAnswerSummary({
+      requestedUsersIDs: showedUsersIds,
+      answerSummary,
+    })
+
+    setAnswerSummary(formattedData)
+    setIsAnswerSummaryLoading(false)
 
     const { data: answersOverview } = await routines.get<OverviewData>(
       `/answers/overview/${teamId}`,

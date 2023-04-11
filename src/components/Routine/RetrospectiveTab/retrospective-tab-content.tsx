@@ -97,8 +97,8 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const handleGetNoCurrentAnswers = useCallback(
     async (after: Date, before: Date) => {
       setIsAnswerSummaryLoading(true)
-      setAnswersSummary([])
       const showedUsersIds = answersSummary.map((answer) => answer.userId)
+      setAnswersSummary([])
 
       const newFormattedData = await fetchAnswers({ after, before, teamUsersIds: showedUsersIds })
       setAnswersSummary(newFormattedData)

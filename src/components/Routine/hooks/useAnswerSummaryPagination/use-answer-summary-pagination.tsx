@@ -6,7 +6,8 @@ import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
 import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
-import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
+import { filteredUsersCompany, selectUserFromCompany } from 'src/state/recoil/team/users-company'
+import meAtom from 'src/state/recoil/user/me'
 
 import useAnswerSummaryFormatter from '../../RetrospectiveTab/Answers/utils/answer-summary-formatter'
 import { AnswerSummary, formatUUIDArray } from '../../RetrospectiveTab/retrospective-tab-content'
@@ -31,11 +32,17 @@ const useAnswerSummaryPagination = (teamId: Team['id']): AnswerSummaryPagination
   const { servicesPromise } = useContext(ServicesContext)
   const { formattedAnswerSummary } = useAnswerSummaryFormatter()
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
+  const userID = useRecoilValue(meAtom)
+  const me = useRecoilValue(selectUserFromCompany(userID))
+
+  const teamUsersWithoutMe = teamUsers.filter(({ id }) => id !== me?.id)
+  const companyUsers = me ? [me, ...teamUsersWithoutMe] : teamUsers
+
   const answersSummary = useRecoilValue(answerSummaryAtom)
 
   const REQUEST_LIMIT = answersSummary.length === 0 ? 10 : 4
 
-  const filteredTeamUsers = teamUsers.filter((user) => {
+  const filteredTeamUsers = companyUsers.filter((user) => {
     const matchUser = answersSummary.find(({ userId }) => userId === user.id)
     if (matchUser) return
     return user

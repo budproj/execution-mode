@@ -27,7 +27,7 @@ export const filteredUsersCompany = (teamId: Team['id']) => {
   })
 }
 
-export const selectUser = (userId: User['id']) => {
+export const selectUserFromCompany = (userId: User['id']) => {
   return selector<User | undefined>({
     key: 'selectUser',
     get: ({ get }) => {
