@@ -1,6 +1,6 @@
 import { Flex, Text, VStack, Avatar, Button, HStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 import regexifyString from 'regexify-string'
@@ -33,16 +33,8 @@ const StyledListItem = styled.span`
   display: block;
 `
 
-const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) => {
-  const { data: user } = useGetUserDetails(userId)
-  const setCommentInputValue = useSetRecoilState(commentInputInitialValue)
-  const setCommentEntityToReply = useSetRecoilState(commentEntityToReply)
-
-  const intl = useIntl()
-
-  const timestampConverted = new Date(timestamp)
-
-  const commentText = regexifyString({
+const insertMentionInString = (comment: string) => {
+  return regexifyString({
     pattern: /@\[[\w \u00C0-\u00FF-]+]\([\da-f-]+\)/g,
     decorator: (match) => {
       const regex = /@\[([\w \u00C0-\u00FF-]+)]\(([\da-f-]+)\)/
@@ -52,6 +44,22 @@ const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) =>
     },
     input: comment ?? '',
   })
+}
+
+const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) => {
+  const { data: user } = useGetUserDetails(userId)
+  const setCommentInputValue = useSetRecoilState(commentInputInitialValue)
+  const setCommentEntityToReply = useSetRecoilState(commentEntityToReply)
+
+  const intl = useIntl()
+
+  const timestampConverted = new Date(timestamp)
+
+  const commentText = useMemo(() => {
+    return comment
+      .split('\n')
+      .map((line) => <StyledListItem key={line}>{insertMentionInString(line)}</StyledListItem>)
+  }, [comment])
 
   const entityToReply = `${entity}:${id}`
 
@@ -80,11 +88,7 @@ const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) =>
           />
         </Flex>
         <Text wordBreak="break-word" fontSize={14} color="new-gray.900">
-          {String(commentText)
-            .split('\n')
-            .map((line) => (
-              <StyledListItem key={line}>{line}</StyledListItem>
-            ))}
+          {commentText}
         </Text>
         <Button
           p={0}
