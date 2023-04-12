@@ -137,7 +137,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [after, before, teamId, limitedTeamUsers],
+    [limitedTeamUsers, fetchAnswers, teamId, after, before],
   )
 
   useEffect(() => {
@@ -190,7 +190,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     observer.observe(document.querySelector('#list-bottom') as HTMLDivElement)
 
     return () => observer.disconnect()
-  }, [limitedTeamUsers.length, fetchAnswerSummaryData, isAnswerSummaryLoading])
+  }, [fetchAnswerSummaryData, isAnswerSummaryLoading, limitedTeamUsers.length])
 
   return (
     <Stack spacing={10}>

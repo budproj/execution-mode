@@ -3,14 +3,13 @@ import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import debounce from 'lodash/debounce'
 import { useRouter } from 'next/router'
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
-import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -33,7 +32,6 @@ import { useFetchSummaryData } from '../../hooks/useFetchSummaryData'
 
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
-import useAnswerSummaryFormatter from './utils/answer-summary-formatter'
 
 interface AnswersComponentProperties {
   teamId: string
@@ -60,16 +58,15 @@ const AnswersComponent = ({
     answerSummaryLoadStateAtom,
   )
 
-  const { servicesPromise } = useContext(ServicesContext)
   const { fetchAnswers } = useFetchSummaryData()
 
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
-  const [answers, setAnswers] = useRecoilState(answerSummaryAtom)
+  const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
   const [search, setSearch] = useState('')
 
   const filteredAnswers = useMemo(() => {
     const uniqueIds = new Set()
-    return answers.filter((answer) => {
+    return answersSummary.filter((answer) => {
       if (
         answer.name.toLowerCase().includes(search.toLocaleLowerCase()) &&
         !uniqueIds.has(answer.userId)
@@ -80,9 +77,7 @@ const AnswersComponent = ({
 
       return false
     })
-  }, [answers, search])
-
-  const { formattedAnswerSummary } = useAnswerSummaryFormatter()
+  }, [answersSummary, search])
 
   const intl = useIntl()
   const router = useRouter()
@@ -98,11 +93,13 @@ const AnswersComponent = ({
   const userCompanie = userCompanies[0]?.id
   const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
 
-  const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
+  const haveUserAnswered = answersSummary.find(
+    (answer) => answer.userId === userID && answer.timestamp,
+  )
   const isActiveRoutine = isBefore(new Date(), before)
 
   const showAnswerNowButton = Boolean(
-    isUserFromTheTeam && isActiveRoutine && !haveUserAnswered && answers.length > 0,
+    isUserFromTheTeam && isActiveRoutine && !haveUserAnswered && answersSummary.length > 0,
   )
 
   const setNewDate = useCallback(
@@ -136,22 +133,21 @@ const AnswersComponent = ({
       const teamUsersIds = usersSearched.map((user) => user.id)
 
       const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
-        return answers.some((user) => user.userId === userId)
+        return answersSummary.some((user) => user.userId === userId)
       })
 
       if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
-        const formattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
-
-        setAnswers((previousAnswers) => [...previousAnswers, ...formattedData])
+        const searchDataFormatted = await fetchAnswers({ teamId, after, before, teamUsersIds })
+        setAnswersSummary((previousAnswers) => [...previousAnswers, ...searchDataFormatted])
       }
 
       setIsAnswerSummaryLoading(false)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [after, before, formattedAnswerSummary, servicesPromise, teamUsers],
+    [after, before, fetchAnswers, teamId, teamUsers],
   )
 
-  const debouncedSearch = debounce(performDebounced, 3000)
+  const debouncedSearch = debounce(performDebounced, 2500)
 
   const handleSearch = useCallback(
     async (value: string) => {
