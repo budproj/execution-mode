@@ -61,6 +61,7 @@ export const useRoutineFormAnswers = () => {
   const refetchRoutineData = async (teamId: Team['id']) => {
     setIsAnswerSummaryLoading(true)
     const showedUsersIds = answersSummary.map((answer) => answer.userId)
+
     setAnswerSummary([])
     const { routines } = await servicesPromise
 
@@ -71,7 +72,7 @@ export const useRoutineFormAnswers = () => {
       teamUsersIds: showedUsersIds,
     })
 
-    setAnswerSummary(formattedData)
+    if (formattedData) setAnswerSummary(formattedData)
     setIsAnswerSummaryLoading(false)
 
     const { data: answersOverview } = await routines.get<OverviewData>(
