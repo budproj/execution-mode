@@ -144,7 +144,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [limitedTeamUsers, teamId, fetchAnswers, after, before],
+    [limitedTeamUsers, teamId, after, before],
   )
 
   useEffect(() => {

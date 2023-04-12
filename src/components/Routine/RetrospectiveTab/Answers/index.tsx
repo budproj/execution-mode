@@ -141,14 +141,14 @@ const AnswersComponent = memo(
         setIsAnswerSummaryLoading(false)
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [after, before, fetchAnswers, teamId, teamUsers],
+      [after, before, teamUsers],
     )
 
     const debouncedSearch = debounce(performDebounced, 2500)
 
     const handleSearch = useCallback(
       async (value: string) => {
-        if (value.length > SEARCH_CHARACTERS_LIMIT) {
+        if (value.length >= SEARCH_CHARACTERS_LIMIT) {
           setSearch(value)
           setIsAnswerSummaryLoading(true)
           await debouncedSearch(value)
@@ -242,7 +242,7 @@ const AnswersComponent = memo(
           )}
           <Box
             id="list-bottom"
-            display={search.length > SEARCH_CHARACTERS_LIMIT ? 'none' : 'block'}
+            display={search.length >= SEARCH_CHARACTERS_LIMIT ? 'none' : 'block'}
           />
         </ScrollableItem>
         {showAnswerNowButton && (
