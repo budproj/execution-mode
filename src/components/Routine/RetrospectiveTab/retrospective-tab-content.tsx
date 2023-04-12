@@ -143,8 +143,17 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       }
     },
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [limitedTeamUsers, teamId, after, before],
+    [
+      limitedTeamUsers,
+      answersSummary,
+      setIsAnswerSummaryLoading,
+      setAnswerSummaryPaginationData,
+      teamId,
+      fetchAnswers,
+      after,
+      before,
+      setAnswersSummary,
+    ],
   )
 
   useEffect(() => {
@@ -187,7 +196,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   useEffect(() => {
     const observer = new IntersectionObserver(fetchAnswerSummaryData, {
       root: document.querySelector('#scrollable-list-users'),
-      threshold: 1,
+      threshold: 0.5,
     })
 
     if (isAnswerSummaryLoading) return
