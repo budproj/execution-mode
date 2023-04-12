@@ -29,7 +29,7 @@ import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
-import { AnswerSummary, formatUUIDArray } from '../retrospective-tab-content'
+import { useFetchSummaryData } from '../../hooks/useFetchSummaryData'
 
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
@@ -61,6 +61,7 @@ const AnswersComponent = ({
   )
 
   const { servicesPromise } = useContext(ServicesContext)
+  const { fetchAnswers } = useFetchSummaryData()
 
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
   const [answers, setAnswers] = useRecoilState(answerSummaryAtom)
@@ -128,36 +129,18 @@ const AnswersComponent = ({
 
   const performDebounced = useCallback(
     async (searchTerm: string) => {
-      const { routines } = await servicesPromise
       const usersSearched = teamUsers.filter((user) =>
         user.fullName.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()),
       )
 
       const teamUsersIds = usersSearched.map((user) => user.id)
 
-      const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-
       const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
         return answers.some((user) => user.userId === userId)
       })
 
       if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
-        const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-          `/answers/summary/${teamId}`,
-          {
-            params: {
-              before,
-              after,
-              includeSubteams: false,
-              teamUsersIds: parsetToQueryTeamUsersIDS,
-            },
-          },
-        )
-
-        const formattedData = formattedAnswerSummary({
-          requestedUsersIDs: teamUsersIds,
-          answerSummary: answersSummaryData,
-        })
+        const formattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
 
         setAnswers((previousAnswers) => [...previousAnswers, ...formattedData])
       }

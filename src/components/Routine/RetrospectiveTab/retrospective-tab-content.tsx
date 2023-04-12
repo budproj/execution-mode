@@ -33,6 +33,7 @@ import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
+import { useFetchSummaryData } from '../hooks/useFetchSummaryData'
 
 import AnswersComponent from './Answers'
 import RetrospectiveTabContentView from './retrospective-tab-content-view'
@@ -77,7 +78,8 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     answerSummaryLoadStateAtom,
   )
 
-  const { limitedTeamUsers, fetchAnswers } = useAnswerSummaryPagination(teamId)
+  const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
+  const { fetchAnswers } = useFetchSummaryData()
 
   const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
   const team = useRecoilValue(teamAtomFamily(teamId))
@@ -100,11 +102,16 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       const showedUsersIds = answersSummary.map((answer) => answer.userId)
       setAnswersSummary([])
 
-      const newFormattedData = await fetchAnswers({ after, before, teamUsersIds: showedUsersIds })
+      const newFormattedData = await fetchAnswers({
+        teamId,
+        after,
+        before,
+        teamUsersIds: showedUsersIds,
+      })
       setAnswersSummary(newFormattedData)
       setIsAnswerSummaryLoading(false)
     },
-    [answersSummary, fetchAnswers, setAnswersSummary, setIsAnswerSummaryLoading],
+    [answersSummary, fetchAnswers, setAnswersSummary, setIsAnswerSummaryLoading, teamId],
   )
 
   const fetchAnswerSummaryData = useCallback(
@@ -120,7 +127,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
 
         if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
           setIsAnswerSummaryLoading(true)
-          const newFormattedData = await fetchAnswers({ after, before, teamUsersIds })
+          const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
           setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
           const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
 

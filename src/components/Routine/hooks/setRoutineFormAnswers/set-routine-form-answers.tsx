@@ -24,17 +24,15 @@ import {
 import { routineAnswersReturnedData } from 'src/state/recoil/routine/user-teams'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 
-import useAnswerSummaryFormatter from '../../RetrospectiveTab/Answers/utils/answer-summary-formatter'
 import { OverviewData } from '../../RetrospectiveTab/RoutinesOverview'
-import { AnswerSummary, formatUUIDArray } from '../../RetrospectiveTab/retrospective-tab-content'
 import { usePendingRoutines } from '../getPendingRoutine'
+import { useFetchSummaryData } from '../useFetchSummaryData'
 
 import submitAnswersMessages from './messages'
 
 export const useRoutineFormAnswers = () => {
   const setUserTeams = useSetRecoilState(routineAnswersReturnedData)
   const { getPendingRoutines } = usePendingRoutines()
-  const { formattedAnswerSummary } = useAnswerSummaryFormatter()
 
   const setIsAnswerSummaryLoading = useSetRecoilState(answerSummaryLoadStateAtom)
   const router = useRouter()
@@ -58,28 +56,19 @@ export const useRoutineFormAnswers = () => {
   const [answersSummary, setAnswerSummary] = useRecoilState(answerSummaryAtom)
   const { after, before } = useRecoilValue(routineDatesRangeAtom)
   const setRoutineOverviewData = useSetRecoilState(overviewDataAtom)
+  const { fetchAnswers } = useFetchSummaryData()
 
   const refetchRoutineData = async (teamId: Team['id']) => {
     setIsAnswerSummaryLoading(true)
     const showedUsersIds = answersSummary.map((answer) => answer.userId)
     setAnswerSummary([])
     const { routines } = await servicesPromise
-    const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(showedUsersIds))
-    const { data: answerSummary } = await routines.get<AnswerSummary[]>(
-      `/answers/summary/${teamId}`,
-      {
-        params: {
-          before,
-          after,
-          includeSubteams: false,
-          teamUsersIds: parsetToQueryTeamUsersIDS,
-        },
-      },
-    )
 
-    const formattedData = formattedAnswerSummary({
-      requestedUsersIDs: showedUsersIds,
-      answerSummary,
+    const formattedData = await fetchAnswers({
+      teamId,
+      after,
+      before,
+      teamUsersIds: showedUsersIds,
     })
 
     setAnswerSummary(formattedData)
