@@ -3,13 +3,14 @@ import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import debounce from 'lodash/debounce'
 import { useRouter } from 'next/router'
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
+import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -28,10 +29,11 @@ import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
-import { useFetchSummaryData } from '../../hooks/useFetchSummaryData'
+import { AnswerSummary, formatUUIDArray } from '../retrospective-tab-content'
 
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
+import useAnswerSummaryFormatter from './utils/answer-summary-formatter'
 
 interface AnswersComponentProperties {
   teamId: string
@@ -53,7 +55,7 @@ const AnswersComponent = memo(
       answerSummaryLoadStateAtom,
     )
 
-    const { fetchAnswers } = useFetchSummaryData()
+    const { servicesPromise } = useContext(ServicesContext)
 
     const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
     const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
@@ -73,6 +75,8 @@ const AnswersComponent = memo(
         return false
       })
     }, [answersSummary, search])
+
+    const { formattedAnswerSummary } = useAnswerSummaryFormatter()
 
     const intl = useIntl()
     const router = useRouter()
@@ -121,27 +125,44 @@ const AnswersComponent = memo(
 
     const performDebounced = useCallback(
       async (searchTerm: string) => {
+        const { routines } = await servicesPromise
         const usersSearched = teamUsers.filter((user) =>
           user.fullName.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()),
         )
 
         const teamUsersIds = usersSearched.map((user) => user.id)
 
+        const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
+
         const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
           return answersSummary.some((user) => user.userId === userId)
         })
 
         if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
-          const searchDataFormatted = await fetchAnswers({ teamId, after, before, teamUsersIds })
+          const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
+            `/answers/summary/${teamId}`,
+            {
+              params: {
+                before,
+                after,
+                includeSubteams: false,
+                teamUsersIds: parsetToQueryTeamUsersIDS,
+              },
+            },
+          )
 
-          if (searchDataFormatted)
-            setAnswersSummary((previousAnswers) => [...previousAnswers, ...searchDataFormatted])
+          const formattedData = formattedAnswerSummary({
+            requestedUsersIDs: teamUsersIds,
+            answerSummary: answersSummaryData,
+          })
+
+          setAnswersSummary((previousAnswers) => [...previousAnswers, ...formattedData])
         }
 
         setIsAnswerSummaryLoading(false)
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [after, before, teamUsers],
+      [after, before, formattedAnswerSummary, servicesPromise, teamUsers],
     )
 
     const debouncedSearch = debounce(performDebounced, 2500)
