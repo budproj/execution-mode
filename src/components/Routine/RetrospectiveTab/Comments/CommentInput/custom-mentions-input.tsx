@@ -65,7 +65,6 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
   }, [data])
 
   const handleChange = (event: any) => {
-    console.log({ values })
     setValues({ text: event.target.value })
   }
 
