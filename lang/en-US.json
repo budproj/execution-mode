@@ -147,6 +147,10 @@
     "defaultMessage": "LinkedIn's logo. By clicking here you will visit this user's LinkedIn profile",
     "description": "This message is displayed to screen readers to explain our LinkedIn icon"
   },
+  "0ETGK9": {
+    "defaultMessage": "mentioned you in a comment of a routine:",
+    "description": "This message is displayed to describe a notification that occurs when a user is tagged in a comment on a routine."
+  },
   "0GnOhy": {
     "defaultMessage": "Create new workspace",
     "description": "The page title that our users should see in this page"
@@ -342,6 +346,10 @@
   "3rnKj8": {
     "defaultMessage": "Check how your card will be seen by other users:",
     "description": "This subtitle is displayed as the subtitle of the user card preview section in our user account settings page"
+  },
+  "3vQ6G9": {
+    "defaultMessage": "A calendar icon.",
+    "description": "This is the description of the calendar icon."
   },
   "3XEc2H": {
     "defaultMessage": "Gender of first user",
@@ -1118,6 +1126,10 @@
   "Dnh8iG": {
     "defaultMessage": "of <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the first line of our confidence tooltip"
+  },
+  "dRKPeV": {
+    "defaultMessage": "commented in your routine answer:",
+    "description": "This message is displayed to describe a notification that occurs when someone comments on a user`s routine."
   },
   "DrLml8": {
     "defaultMessage": "Click here to close the check-in form",
@@ -3131,6 +3143,10 @@
     "defaultMessage": "You haven't created any OKR for your individual plan.",
     "description": "This message is displayed as the empty state message inside the User page"
   },
+  "ulMLmp": {
+    "defaultMessage": "Retrospective of the week",
+    "description": "The week retrospective notification title."
+  },
   "ulnySu": {
     "defaultMessage": "OKR Cycles",
     "description": "This label defines the text on the first menu section option"
@@ -3284,8 +3300,8 @@
     "description": "The page title that is displayed in the browser tab for the my profile page"
   },
   "VmMAw2": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Report {interval, select, current {semanal} quartely {trimestral} other {}}",
+    "description": "This message is the title of the selected range for team Indicators Download."
   },
   "VNHZWm": {
     "defaultMessage": "Period",
@@ -3844,7 +3860,7 @@
     "description": "This message is displayed inside the empty state on last retrospective overview"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2023-03-27T19:47:31Z",
+    "defaultMessage": "2023-04-13T18:58:10Z",
     "description": ""
   }
 }
