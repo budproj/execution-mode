@@ -43,6 +43,9 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
 
   useEffect(() => {
     loadCompanyUsers()
+  }, [loadCompanyUsers])
+
+  useEffect(() => {
     const { query: routerQuery } = router
     const routerTab = Array.isArray(routerQuery?.activeTab)
       ? routerQuery?.activeTab[0]
