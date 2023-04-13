@@ -22,16 +22,19 @@ import {
   routineFormQuestions,
 } from 'src/state/recoil/routine/routine-form-questions'
 import { routineAnswersReturnedData } from 'src/state/recoil/routine/user-teams'
+import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 
 import { OverviewData } from '../../RetrospectiveTab/RoutinesOverview'
-import { AnswerSummary } from '../../RetrospectiveTab/retrospective-tab-content'
 import { usePendingRoutines } from '../getPendingRoutine'
+import { useFetchSummaryData } from '../useFetchSummaryData'
 
 import submitAnswersMessages from './messages'
 
 export const useRoutineFormAnswers = () => {
   const setUserTeams = useSetRecoilState(routineAnswersReturnedData)
   const { getPendingRoutines } = usePendingRoutines()
+
+  const setIsAnswerSummaryLoading = useSetRecoilState(answerSummaryLoadStateAtom)
   const router = useRouter()
   const intl = useIntl()
 
@@ -50,23 +53,27 @@ export const useRoutineFormAnswers = () => {
 
   const retrospectiveTab = 'retrospective'
 
-  const setAnswerSummary = useSetRecoilState(answerSummaryAtom)
+  const [answersSummary, setAnswerSummary] = useRecoilState(answerSummaryAtom)
   const { after, before } = useRecoilValue(routineDatesRangeAtom)
   const setRoutineOverviewData = useSetRecoilState(overviewDataAtom)
+  const { fetchAnswers } = useFetchSummaryData()
 
   const refetchRoutineData = async (teamId: Team['id']) => {
+    setIsAnswerSummaryLoading(true)
+    const showedUsersIds = answersSummary.map((answer) => answer.userId)
+
+    setAnswerSummary([])
     const { routines } = await servicesPromise
-    const { data: answerSummary } = await routines.get<AnswerSummary[]>(
-      `/answers/summary/${teamId}`,
-      {
-        params: {
-          before,
-          after,
-          includeSubteams: false,
-        },
-      },
-    )
-    setAnswerSummary(answerSummary)
+
+    const formattedData = await fetchAnswers({
+      teamId,
+      after,
+      before,
+      teamUsersIds: showedUsersIds,
+    })
+
+    if (formattedData) setAnswerSummary(formattedData)
+    setIsAnswerSummaryLoading(false)
 
     const { data: answersOverview } = await routines.get<OverviewData>(
       `/answers/overview/${teamId}`,
@@ -143,6 +150,7 @@ export const useRoutineFormAnswers = () => {
           await refetchRoutineData(userTeamId)
         }
 
+        setAnswerSummary([])
         router.push(`/explore/${userTeams[0].id}?activeTab=${routineTabName}`)
       }
     }
