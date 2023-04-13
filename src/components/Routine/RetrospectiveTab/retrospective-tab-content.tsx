@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
-import React, { memo, useCallback, useEffect } from 'react'
+import React, { memo, useCallback, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -74,6 +74,7 @@ export const formatUUIDArray = (uuids: string[]) => {
 const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
+  const observerReference = useRef<IntersectionObserver>()
 
   const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
     answerSummaryLoadStateAtom,
@@ -120,27 +121,29 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     async (entries: IntersectionObserverEntry[]) => {
       const target = entries[0]
 
-      if (target.isIntersecting) {
-        const teamUsersIds = limitedTeamUsers.map((user) => user.id)
+      if (!target.isIntersecting) return
 
-        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
-          return answersSummary.some((user) => user.userId === userId)
-        })
+      const teamUsersIds = limitedTeamUsers.map((user) => user.id)
 
-        if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
-          setIsAnswerSummaryLoading(true)
-          setAnswerSummaryPaginationData({
-            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
-            teamId,
-          })
-          const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
-          if (newFormattedData)
-            setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
-          const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
+      const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
+        return answersSummary.some((user) => user.userId === userId)
+      })
 
-          return () => clearTimeout(answerSummaryTimer)
-        }
+      if (!usersAreBeingRequestedForTheFirstTime || teamUsersIds.length === 0) return
+
+      setIsAnswerSummaryLoading(true)
+      setAnswerSummaryPaginationData({
+        lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+        teamId,
+      })
+
+      const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
+      if (newFormattedData) {
+        setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
       }
+
+      const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
+      return () => clearTimeout(answerSummaryTimer)
     },
 
     [
@@ -194,18 +197,27 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   }, [])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(fetchAnswerSummaryData, {
-      root: document.querySelector('#scrollable-list-users'),
-      threshold: 0.5,
-    })
+    const rootElement = document.querySelector('#scrollable-list-users')
+    const targetElement = document.querySelector('#list-bottom')
 
-    if (isAnswerSummaryLoading) return
+    if (!rootElement || !targetElement) return
 
-    if (limitedTeamUsers.length === 0) return
+    if (!observerReference.current) {
+      observerReference.current = new IntersectionObserver(fetchAnswerSummaryData, {
+        root: rootElement,
+        threshold: 0.5,
+      })
+    }
 
-    observer.observe(document.querySelector('#list-bottom') as HTMLDivElement)
+    if (!isAnswerSummaryLoading && limitedTeamUsers.length > 0) {
+      observerReference.current.observe(targetElement)
+    }
 
-    return () => observer.disconnect()
+    return () => {
+      if (observerReference.current) {
+        observerReference.current.disconnect()
+      }
+    }
   }, [fetchAnswerSummaryData, isAnswerSummaryLoading, limitedTeamUsers.length])
 
   return (

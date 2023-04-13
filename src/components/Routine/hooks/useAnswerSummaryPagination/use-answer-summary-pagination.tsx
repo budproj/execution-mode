@@ -12,21 +12,24 @@ type AnswerSummaryPaginationProperties = {
 
 const useAnswerSummaryPagination = (teamId: Team['id']): AnswerSummaryPaginationProperties => {
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
+
   const userID = useRecoilValue(meAtom)
+
   const me = useRecoilValue(selectUserFromCompany(userID))
 
-  const teamUsersWithoutMe = teamUsers.filter(({ id }) => id !== me?.id)
-  const companyUsers = me ? [me, ...teamUsersWithoutMe] : teamUsers
+  const isUserFromTeam = me?.id && teamUsers.some(({ id }) => id === me.id)
+
+  const companyUsers = isUserFromTeam
+    ? [me, ...teamUsers.filter(({ id }) => id !== me?.id)]
+    : teamUsers
 
   const answersSummary = useRecoilValue(answerSummaryAtom)
 
   const REQUEST_LIMIT = answersSummary.length === 0 ? 10 : 4
 
-  const filteredTeamUsers = companyUsers.filter((user) => {
-    const matchUser = answersSummary.find(({ userId }) => userId === user.id)
-    if (matchUser) return
-    return user
-  })
+  const filteredTeamUsers = companyUsers.filter(
+    (user) => !answersSummary.some(({ userId }) => userId === user.id),
+  )
 
   const limitedTeamUsers = filteredTeamUsers.slice(0, REQUEST_LIMIT)
 

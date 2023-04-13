@@ -150,6 +150,7 @@ export const useRoutineFormAnswers = () => {
           await refetchRoutineData(userTeamId)
         }
 
+        setAnswerSummary([])
         router.push(`/explore/${userTeams[0].id}?activeTab=${routineTabName}`)
       }
     }
