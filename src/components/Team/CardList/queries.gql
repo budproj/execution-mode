@@ -2,6 +2,9 @@ query GET_TEAMS {
   teams(first: 1000) {
     edges {
       node {
+        policy {
+          update
+        }
         id
         name
         description

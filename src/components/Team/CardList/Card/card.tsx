@@ -9,6 +9,7 @@ import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/compone
 import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
+import { GraphQLEffect } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
@@ -35,6 +36,7 @@ const TeamCard = memo(({ id }: TeamCardProperties) => {
 
   const isCompany = Boolean(team?.isCompany)
   const isLoaded = Boolean(team)
+  const isAllowedToEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
   const progress = team?.status?.progress ?? 0
 
   useEffect(() => {
@@ -51,7 +53,9 @@ const TeamCard = memo(({ id }: TeamCardProperties) => {
       py={12}
       px={10}
     >
-      <MenuCard position="absolute" top="20px" right="20px" teamId={team?.id} />
+      {isAllowedToEditTeam && (
+        <MenuCard position="absolute" top="20px" right="20px" teamId={team?.id} />
+      )}
       <IntlLink href={id ?? '#'}>
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
           <Flex flexGrow={1} direction="column" justifyContent="flex-end">
