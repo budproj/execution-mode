@@ -14,7 +14,7 @@ import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
 import React, { memo, useCallback, useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { CircleArrowRight } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
@@ -24,6 +24,7 @@ import { NotificationSettingsModal } from 'src/components/Routine/NotificationSe
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
+import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
 import {
   getRoutineDateRangeDateFormat,
   routineDatesRangeAtom,
@@ -33,6 +34,7 @@ import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
+import { useFetchSummaryData } from '../hooks/useFetchSummaryData'
 
 import AnswersComponent from './Answers'
 import RetrospectiveTabContentView from './retrospective-tab-content-view'
@@ -77,7 +79,8 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     answerSummaryLoadStateAtom,
   )
 
-  const { limitedTeamUsers, fetchAnswers } = useAnswerSummaryPagination(teamId)
+  const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
+  const { fetchAnswers } = useFetchSummaryData()
 
   const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
   const team = useRecoilValue(teamAtomFamily(teamId))
@@ -93,18 +96,24 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const { after: afterQuery, before: beforeQuery } = router.query
   const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
+  const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
 
   const handleGetNoCurrentAnswers = useCallback(
     async (after: Date, before: Date) => {
       setIsAnswerSummaryLoading(true)
-      setAnswersSummary([])
       const showedUsersIds = answersSummary.map((answer) => answer.userId)
+      setAnswersSummary([])
 
-      const newFormattedData = await fetchAnswers({ after, before, teamUsersIds: showedUsersIds })
-      setAnswersSummary(newFormattedData)
+      const newFormattedData = await fetchAnswers({
+        teamId,
+        after,
+        before,
+        teamUsersIds: showedUsersIds,
+      })
+      if (newFormattedData) setAnswersSummary(newFormattedData)
       setIsAnswerSummaryLoading(false)
     },
-    [answersSummary, fetchAnswers, setAnswersSummary, setIsAnswerSummaryLoading],
+    [answersSummary, fetchAnswers, setAnswersSummary, setIsAnswerSummaryLoading, teamId],
   )
 
   const fetchAnswerSummaryData = useCallback(
@@ -120,8 +129,13 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
 
         if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
           setIsAnswerSummaryLoading(true)
-          const newFormattedData = await fetchAnswers({ after, before, teamUsersIds })
-          setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
+          setAnswerSummaryPaginationData({
+            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+            teamId,
+          })
+          const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
+          if (newFormattedData)
+            setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
           const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
 
           return () => clearTimeout(answerSummaryTimer)
@@ -129,8 +143,17 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       }
     },
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [after, before, teamId, limitedTeamUsers],
+    [
+      limitedTeamUsers,
+      answersSummary,
+      setIsAnswerSummaryLoading,
+      setAnswerSummaryPaginationData,
+      teamId,
+      fetchAnswers,
+      after,
+      before,
+      setAnswersSummary,
+    ],
   )
 
   useEffect(() => {
@@ -173,7 +196,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   useEffect(() => {
     const observer = new IntersectionObserver(fetchAnswerSummaryData, {
       root: document.querySelector('#scrollable-list-users'),
-      threshold: 1,
+      threshold: 0.5,
     })
 
     if (isAnswerSummaryLoading) return
@@ -183,7 +206,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     observer.observe(document.querySelector('#list-bottom') as HTMLDivElement)
 
     return () => observer.disconnect()
-  }, [limitedTeamUsers.length, fetchAnswerSummaryData, isAnswerSummaryLoading])
+  }, [fetchAnswerSummaryData, isAnswerSummaryLoading, limitedTeamUsers.length])
 
   return (
     <Stack spacing={10}>

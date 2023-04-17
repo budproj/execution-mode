@@ -3,14 +3,13 @@ import { format, add, sub, isBefore } from 'date-fns'
 import pt from 'date-fns/locale/pt'
 import debounce from 'lodash/debounce'
 import { useRouter } from 'next/router'
-import React, { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { Button } from 'src/components/Base/Button'
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
-import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -29,11 +28,10 @@ import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
-import { AnswerSummary, formatUUIDArray } from '../retrospective-tab-content'
+import { useFetchSummaryData } from '../../hooks/useFetchSummaryData'
 
 import AnswerRowComponent from './answer-row'
 import messages from './messages'
-import useAnswerSummaryFormatter from './utils/answer-summary-formatter'
 
 interface AnswersComponentProperties {
   teamId: string
@@ -55,15 +53,15 @@ const AnswersComponent = memo(
       answerSummaryLoadStateAtom,
     )
 
-    const { servicesPromise } = useContext(ServicesContext)
+    const { fetchAnswers } = useFetchSummaryData()
 
     const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
-    const [answers, setAnswers] = useRecoilState(answerSummaryAtom)
+    const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
     const [search, setSearch] = useState('')
 
     const filteredAnswers = useMemo(() => {
       const uniqueIds = new Set()
-      return answers.filter((answer) => {
+      return answersSummary.filter((answer) => {
         if (
           answer.name.toLowerCase().includes(search.toLocaleLowerCase()) &&
           !uniqueIds.has(answer.userId)
@@ -74,9 +72,7 @@ const AnswersComponent = memo(
 
         return false
       })
-    }, [answers, search])
-
-    const { formattedAnswerSummary } = useAnswerSummaryFormatter()
+    }, [answersSummary, search])
 
     const intl = useIntl()
     const router = useRouter()
@@ -92,10 +88,14 @@ const AnswersComponent = memo(
     const userCompanie = userCompanies[0]?.id
     const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
 
-    const haveUserAnswered = answers.find((answer) => answer.userId === userID && answer.timestamp)
+    const haveUserAnswered = answersSummary.find(
+      (answer) => answer.userId === userID && answer.timestamp,
+    )
     const isActiveRoutine = isBefore(new Date(), before)
 
-    const showAnswerNowButton = Boolean(isUserFromTheTeam && isActiveRoutine && !haveUserAnswered)
+    const showAnswerNowButton = Boolean(
+      isUserFromTheTeam && isActiveRoutine && !haveUserAnswered && answersSummary.length > 0,
+    )
 
     const setNewDate = useCallback(
       async (newDate: Date) => {
@@ -121,51 +121,34 @@ const AnswersComponent = memo(
 
     const performDebounced = useCallback(
       async (searchTerm: string) => {
-        const { routines } = await servicesPromise
         const usersSearched = teamUsers.filter((user) =>
           user.fullName.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()),
         )
 
         const teamUsersIds = usersSearched.map((user) => user.id)
 
-        const parsetToQueryTeamUsersIDS = encodeURIComponent(formatUUIDArray(teamUsersIds))
-
         const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
-          return answers.some((user) => user.userId === userId)
+          return answersSummary.some((user) => user.userId === userId)
         })
 
         if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
-          const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-            `/answers/summary/${teamId}`,
-            {
-              params: {
-                before,
-                after,
-                includeSubteams: false,
-                teamUsersIds: parsetToQueryTeamUsersIDS,
-              },
-            },
-          )
+          const searchDataFormatted = await fetchAnswers({ teamId, after, before, teamUsersIds })
 
-          const formattedData = formattedAnswerSummary({
-            requestedUsersIDs: teamUsersIds,
-            answerSummary: answersSummaryData,
-          })
-
-          setAnswers((previousAnswers) => [...previousAnswers, ...formattedData])
+          if (searchDataFormatted)
+            setAnswersSummary((previousAnswers) => [...previousAnswers, ...searchDataFormatted])
         }
 
         setIsAnswerSummaryLoading(false)
       },
       // eslint-disable-next-line react-hooks/exhaustive-deps
-      [after, before, formattedAnswerSummary, servicesPromise, teamUsers],
+      [after, before, teamUsers],
     )
 
-    const debouncedSearch = debounce(performDebounced, 3000)
+    const debouncedSearch = debounce(performDebounced, 2500)
 
     const handleSearch = useCallback(
       async (value: string) => {
-        if (value.length > SEARCH_CHARACTERS_LIMIT) {
+        if (value.length >= SEARCH_CHARACTERS_LIMIT) {
           setSearch(value)
           setIsAnswerSummaryLoading(true)
           await debouncedSearch(value)
@@ -259,7 +242,7 @@ const AnswersComponent = memo(
           )}
           <Box
             id="list-bottom"
-            display={search.length > SEARCH_CHARACTERS_LIMIT ? 'none' : 'block'}
+            display={search.length >= SEARCH_CHARACTERS_LIMIT ? 'none' : 'block'}
           />
         </ScrollableItem>
         {showAnswerNowButton && (
