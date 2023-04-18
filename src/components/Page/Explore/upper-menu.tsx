@@ -1,10 +1,12 @@
 import { useLazyQuery } from '@apollo/client'
 import { Button, Box, Stack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useSetRecoilState } from 'recoil'
 
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import { GraphQLConnectionPolicy, GraphQLEffect } from 'src/components/types'
+import { isEditTeamModalOpenAtom } from 'src/state/recoil/team'
 
 import { GetTeamMembersResponse } from '../Team/Members/members'
 
@@ -12,14 +14,14 @@ import messages from './messages'
 import queries from './queries.gql'
 
 interface UpperMenuProperties {
-  openModal: () => void
   setTeamFilter: (text: string) => void
   teamId?: string
 }
 
-const UpperMenu = ({ openModal, setTeamFilter, teamId }: UpperMenuProperties) => {
+const UpperMenu = ({ setTeamFilter, teamId }: UpperMenuProperties) => {
   const intl = useIntl()
   const [policy, setPolicy] = useState<GraphQLConnectionPolicy>()
+  const setIsEditTeamModalOpen = useSetRecoilState(isEditTeamModalOpenAtom)
 
   const [refreshTeamPolicy] = useLazyQuery<GetTeamMembersResponse>(
     queries.GET_TEAM_MEMBERS_POLICY,
@@ -33,6 +35,10 @@ const UpperMenu = ({ openModal, setTeamFilter, teamId }: UpperMenuProperties) =>
       },
     },
   )
+
+  const handleOpenModal = useCallback(() => {
+    setIsEditTeamModalOpen({ isModalOpen: true, isEditingTeamId: undefined })
+  }, [setIsEditTeamModalOpen])
 
   useEffect(() => {
     if (teamId) refreshTeamPolicy()
@@ -54,7 +60,7 @@ const UpperMenu = ({ openModal, setTeamFilter, teamId }: UpperMenuProperties) =>
           bg="brand.500"
           color="black.50"
           _hover={{ background: 'brand.400', color: 'black.50' }}
-          onClick={openModal}
+          onClick={handleOpenModal}
         >
           {intl.formatMessage(messages.createTeamButton)}
         </Button>

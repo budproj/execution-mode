@@ -60,7 +60,6 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
           isGameficationDisabled
             ? messages.teamRankingTitleWithoutGamification
             : messages.teamRankingTitle,
-          { quarter },
         )}
         subtitle={intl.formatMessage(messages.teamRankingSubTitle)}
       />

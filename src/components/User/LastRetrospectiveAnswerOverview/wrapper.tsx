@@ -13,7 +13,7 @@ interface LastRetrospectiveAnswerOverview {
   isLoaded?: boolean
   lastRetrospetiveAnswerId?: string
   feeling?: string
-  productity?: string
+  productivity?: string
   userId: User['id']
   roadblock?: string
   onClick?: () => void
@@ -24,7 +24,7 @@ const LastRetrospectiveAnswerOverview = ({
   userId,
   feeling,
   lastRetrospetiveAnswerId,
-  productity,
+  productivity,
   roadblock,
   onClick,
 }: LastRetrospectiveAnswerOverview) => {
@@ -33,7 +33,7 @@ const LastRetrospectiveAnswerOverview = ({
       userId={userId}
       feeling={feeling}
       lastRoutineAnswerId={lastRetrospetiveAnswerId}
-      productivity={productity}
+      productivity={productivity}
       roadBlock={roadblock}
       onClick={onClick}
     />

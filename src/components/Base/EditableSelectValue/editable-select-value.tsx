@@ -6,7 +6,6 @@ import {
   MenuProps,
   Skeleton,
   Button,
-  MenuItemOption,
 } from '@chakra-ui/react'
 import React, { ReactNode, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -96,7 +95,7 @@ const EditableSelectValue = ({
         </MenuButton>
         <MenuList>
           <MenuOptionGroup value={value} type="radio" onChange={onChange}>
-            <MenuItemOption>{children}</MenuItemOption>
+            {children}
           </MenuOptionGroup>
         </MenuList>
       </Menu>

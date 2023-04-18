@@ -12,11 +12,10 @@ import {
 } from '@chakra-ui/react'
 import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
-import React, { useCallback, useContext, useEffect } from 'react'
+import React, { memo, useCallback, useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { CircleArrowRight } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import GearIcon from 'src/components/Icon/Gear'
@@ -25,14 +24,17 @@ import { NotificationSettingsModal } from 'src/components/Routine/NotificationSe
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
-import { isAnswerSummaryLoad } from 'src/state/recoil/routine/is-answers-summary-load'
+import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
 import {
   getRoutineDateRangeDateFormat,
   routineDatesRangeAtom,
 } from 'src/state/recoil/routine/routine-dates-range'
+import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
+import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
+import { useFetchSummaryData } from '../hooks/useFetchSummaryData'
 
 import AnswersComponent from './Answers'
 import RetrospectiveTabContentView from './retrospective-tab-content-view'
@@ -59,18 +61,28 @@ export interface AnswerSummary {
   id?: string
   userId: string
   name: string
-  picture: string
+  picture?: string
   latestStatusReply?: string
   timestamp?: Date
   commentCount?: number
 }
 
-const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
+export const formatUUIDArray = (uuids: string[]) => {
+  return "['" + uuids.join("', '") + "']"
+}
+
+const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabContentProperties) => {
   const intl = useIntl()
   const router = useRouter()
-  const { servicesPromise } = useContext(ServicesContext)
+
+  const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
+    answerSummaryLoadStateAtom,
+  )
+
+  const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
+  const { fetchAnswers } = useFetchSummaryData()
+
   const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
-  const [isAnswerSummaryLoaded, setIsAnswerSummaryLoaded] = useRecoilState(isAnswerSummaryLoad)
   const team = useRecoilValue(teamAtomFamily(teamId))
   const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
   const { teamOptedOut, toggleDisabledTeam } = useRoutineNotificationSettings(teamId)
@@ -84,33 +96,65 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
   const { after: afterQuery, before: beforeQuery } = router.query
   const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
+  const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
 
-  const getAnswersSummary = useCallback(async () => {
-    const { routines } = await servicesPromise
-    setIsAnswerSummaryLoaded(false)
-    const { data: answersSummaryData } = await routines.get<AnswerSummary[]>(
-      `/answers/summary/${teamId}`,
-      {
-        params: {
-          before,
-          after,
-          includeSubteams: false,
-        },
-      },
-    )
+  const handleGetNoCurrentAnswers = useCallback(
+    async (after: Date, before: Date) => {
+      setIsAnswerSummaryLoading(true)
+      const showedUsersIds = answersSummary.map((answer) => answer.userId)
+      setAnswersSummary([])
 
-    if (answersSummaryData) {
-      setAnswersSummary(answersSummaryData)
-    }
+      const newFormattedData = await fetchAnswers({
+        teamId,
+        after,
+        before,
+        teamUsersIds: showedUsersIds,
+      })
+      if (newFormattedData) setAnswersSummary(newFormattedData)
+      setIsAnswerSummaryLoading(false)
+    },
+    [answersSummary, fetchAnswers, setAnswersSummary, setIsAnswerSummaryLoading, teamId],
+  )
 
-    setIsAnswerSummaryLoaded(true)
+  const fetchAnswerSummaryData = useCallback(
+    async (entries: IntersectionObserverEntry[]) => {
+      const target = entries[0]
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [after, before, teamId])
+      if (target.isIntersecting) {
+        const teamUsersIds = limitedTeamUsers.map((user) => user.id)
 
-  useEffect(() => {
-    getAnswersSummary()
-  }, [getAnswersSummary])
+        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
+          return answersSummary.some((user) => user.userId === userId)
+        })
+
+        if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
+          setIsAnswerSummaryLoading(true)
+          setAnswerSummaryPaginationData({
+            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+            teamId,
+          })
+          const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
+          if (newFormattedData)
+            setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
+          const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
+
+          return () => clearTimeout(answerSummaryTimer)
+        }
+      }
+    },
+
+    [
+      limitedTeamUsers,
+      answersSummary,
+      setIsAnswerSummaryLoading,
+      setAnswerSummaryPaginationData,
+      teamId,
+      fetchAnswers,
+      after,
+      before,
+      setAnswersSummary,
+    ],
+  )
 
   useEffect(() => {
     if (after && before) {
@@ -148,6 +192,21 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(fetchAnswerSummaryData, {
+      root: document.querySelector('#scrollable-list-users'),
+      threshold: 0.5,
+    })
+
+    if (isAnswerSummaryLoading) return
+
+    if (limitedTeamUsers.length === 0) return
+
+    observer.observe(document.querySelector('#list-bottom') as HTMLDivElement)
+
+    return () => observer.disconnect()
+  }, [fetchAnswerSummaryData, isAnswerSummaryLoading, limitedTeamUsers.length])
 
   return (
     <Stack spacing={10}>
@@ -226,20 +285,19 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           after={after}
           before={before}
           week={week}
-          answers={answersSummary}
-          isLoading={!isAnswerSummaryLoaded}
           teamId={teamId}
+          onGetNoCurrentAnswers={handleGetNoCurrentAnswers}
         />
+
         <Divider orientation="vertical" borderColor="new-gray.400" />
         <RetrospectiveTabContentView
           after={after}
           before={before}
           week={week}
           teamId={teamId}
-          isLoaded={!isLoading && isAnswerSummaryLoaded}
+          isLoaded={!isLoading}
         />
       </Grid>
-
       <NotificationSettingsModal
         isOpen={isOpen}
         teamOptedOut={teamOptedOut}
@@ -248,6 +306,6 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
       />
     </Stack>
   )
-}
+})
 
 export default RetrospectiveTabContent

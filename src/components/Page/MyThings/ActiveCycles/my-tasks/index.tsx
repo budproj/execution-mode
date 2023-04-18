@@ -9,6 +9,7 @@ import {
   AccordionPanel,
 } from '@chakra-ui/react'
 import React, { useState, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { KeyResult, KeyResultCheckMarkState } from 'src/components/KeyResult/types'
@@ -18,6 +19,8 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { myThingsTasksQuery } from 'src/state/recoil/task'
+
+import messages from '../../../Profile/messages'
 
 import MyTasksEmptyState from './empty-state'
 import queries from './queries.gql'
@@ -30,6 +33,7 @@ interface UserTasksProperties {
 }
 
 const MyTasks = ({ userID, username }: UserTasksProperties) => {
+  const intl = useIntl()
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
   const { onlyUnchecked } = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
@@ -86,7 +90,7 @@ const MyTasks = ({ userID, username }: UserTasksProperties) => {
               fontWeight="bold"
               color="new-gray.800"
             >
-              Tarefas em OKRs
+              {intl.formatMessage(messages.taskTitle)}
             </Heading>
           </Flex>
           <AccordionIcon />

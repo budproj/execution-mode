@@ -4,7 +4,15 @@ import { Team } from 'src/components/Team/types'
 
 import { PREFIX } from './constants'
 
-export const isEditTeamModalOpenAtom = atom<Team['id'] | undefined>({
+interface EditOrCreateTeamModalAtom {
+  isEditingTeamId?: Team['id']
+  isModalOpen: boolean
+}
+
+export const isEditTeamModalOpenAtom = atom<EditOrCreateTeamModalAtom>({
   key: `${PREFIX}::IS_EDIT_MODAL_OPEN`,
-  default: undefined,
+  default: {
+    isEditingTeamId: undefined,
+    isModalOpen: false,
+  },
 })

@@ -31,7 +31,7 @@ export const teamIndicatorsDataMapper = {
         feeling: lastRoutine?.answers.find(
           ({ questionId }) => questionId === '44bd7498-e528-4f96-b45e-3a2374790373',
         )?.value,
-        productity: lastRoutine?.answers.find(
+        productivity: lastRoutine?.answers.find(
           ({ questionId }) => questionId === '9a56911a-61c1-49af-87a8-7a35a1804f6b',
         )?.value,
         roadblock: lastRoutine?.answers.find(

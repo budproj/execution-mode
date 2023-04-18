@@ -40,7 +40,9 @@ const KeyResultDrawerBody = ({
     keyResult?.format === KEY_RESULT_FORMAT.PERCENTAGE &&
     keyResult?.initialValue === 0 &&
     keyResult?.goal === 100
-      ? keyResultChecklist?.progress.progress
+      ? keyResultChecklist && keyResultChecklist?.edges?.length > 0
+        ? keyResultChecklist?.progress.progress
+        : undefined
       : undefined
 
   return (

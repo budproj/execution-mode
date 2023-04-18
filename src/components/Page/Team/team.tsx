@@ -8,6 +8,7 @@ import { useRecoilState } from 'recoil'
 import { ApolloQueryErrorBoundary, PageMetaHead } from 'src/components/Base'
 import { PageProperties } from 'src/components/Page/types'
 import { Team } from 'src/components/Team/types'
+import { useLoadCompanyUsers } from 'src/state/hooks/useLoadCompanyUsers'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 
@@ -27,19 +28,22 @@ export interface ExploreTeamPageProperties extends PageProperties {
 const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   const intl = useIntl()
   const router = useRouter()
+  const { loadCompanyUsers } = useLoadCompanyUsers()
+
   const [activeTab, setActiveTab] = useState(
     intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
   )
 
-  const tabs = new Set([
-    intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase(),
-    intl.formatMessage(messages.retrospectiveTeamTab).toLocaleLowerCase(),
-  ])
+  const tabs = new Set(['okrs', 'retrospective'])
 
   const { data, loading, error, called, refetch } = useQuery<GetTeamNameQuery>(
     queries.GET_TEAM_DATA,
     { variables: { teamId } },
   )
+
+  useEffect(() => {
+    loadCompanyUsers()
+  }, [loadCompanyUsers])
 
   useEffect(() => {
     const { query: routerQuery } = router
