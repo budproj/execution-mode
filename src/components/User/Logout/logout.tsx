@@ -17,6 +17,7 @@ const UserLogout = () => {
     <Button
       colorScheme="brand"
       color="brand.500"
+      id="logout-button"
       p={2}
       w="100%"
       variant="ghost"
