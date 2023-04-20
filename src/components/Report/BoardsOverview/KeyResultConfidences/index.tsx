@@ -71,6 +71,7 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
                     bgColor={confidence.bg}
                     bgHover={confidence.bgHover}
                     paddingX={30}
+                    confidence={confidence}
                     cursor={confidence.isListable ? 'pointer' : 'default'}
                     onClick={() => onClick(confidence)}
                   />

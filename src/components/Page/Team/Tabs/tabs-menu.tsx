@@ -68,7 +68,7 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
             dispatch({})
           }}
         >
-          {intl.formatMessage(messages.retrospectiveTeamTab)}
+          <div id="retrospective-tab">{intl.formatMessage(messages.retrospectiveTeamTab)}</div>
           <Tag size="sm" variant="solid" colorScheme="brand" ml={2}>
             {intl.formatMessage(newTagMessages.newItem)}
           </Tag>

@@ -2,6 +2,8 @@ import { Flex, StyleProps, Text, useToken } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React from 'react'
 
+import { Confidence } from '../types'
+
 const StyledFlex = styled(Flex)`
   transition: background-color 0.2s ease-in-out;
 
@@ -17,6 +19,7 @@ interface BoardProperties extends StyleProps {
   uppercase?: boolean
   size?: 'lg' | 'md'
   isLoading?: boolean
+  confidence?: Confidence
   onClick?: () => void
 }
 
@@ -28,6 +31,7 @@ const Board = ({
   uppercase = false,
   size = 'md',
   isLoading,
+  confidence,
   ...rest
 }: BoardProperties) => {
   const sizes = new Map([
@@ -40,6 +44,7 @@ const Board = ({
 
   return (
     <StyledFlex
+      id={confidence?.name === 'medium' ? 'medium-confidence-krs-card' : undefined}
       borderRadius={9}
       flexDir="column"
       textAlign="center"
