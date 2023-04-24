@@ -1,4 +1,5 @@
 import { AccordionButton, Box } from '@chakra-ui/react'
+import { FormikProps } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -12,7 +13,7 @@ import { objectiveContext, ObjectiveMode } from 'src/state/recoil/objective/cont
 
 import { RadioProgress } from '../../../../Base/RadioProgress/wrapper'
 
-import { EditMode } from './edit-mode'
+import { EditMode, EditModeValues } from './edit-mode'
 import messages from './messages'
 import { ViewMode } from './view-mode'
 
@@ -23,6 +24,7 @@ export interface ObjectiveAccordionButtonProperties {
   confidenceTag?: ConfidenceTag
   isLoaded?: boolean
   isDisabled?: boolean
+  forwardedRef?: React.Ref<FormikProps<EditModeValues>>
 }
 
 export const ObjectiveAccordionButton = ({
@@ -32,6 +34,7 @@ export const ObjectiveAccordionButton = ({
   confidenceTag,
   isLoaded,
   isDisabled,
+  forwardedRef,
 }: ObjectiveAccordionButtonProperties) => {
   const context = useRecoilValue(objectiveContext(objective?.id))
   const intl = useIntl()
@@ -41,7 +44,7 @@ export const ObjectiveAccordionButton = ({
   return (
     <AccordionButton maxWidth="100%" p={0} gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
       {context.mode === ObjectiveMode.EDIT && !isDisabled ? (
-        <EditMode objective={objective} />
+        <EditMode forwardedRef={forwardedRef} objective={objective} />
       ) : (
         <>
           <TooltipWithDelay

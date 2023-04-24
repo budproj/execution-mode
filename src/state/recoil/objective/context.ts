@@ -6,6 +6,8 @@ export enum ObjectiveMode {
   COLLAPSED = 'collapsed',
   VIEW = 'view',
   EDIT = 'edit',
+  FILLED = 'FILLED',
+  PUBLISHED = 'PUBLISHED',
 }
 
 type ObjectiveContext = {

@@ -22,5 +22,5 @@ export const UpdateObjectiveOption = ({ objectiveID }: UpdateObjectiveOptionProp
     stopAccordionOpen(event)
   }
 
-  return <MenuItem onClick={handleClick}>{intl.formatMessage(messages.secondMenuOption)}</MenuItem>
+  return <MenuItem onClick={handleClick}>{intl.formatMessage(messages.firstMenuOption)}</MenuItem>
 }

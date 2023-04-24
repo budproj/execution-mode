@@ -1,5 +1,6 @@
-import { AccordionItem } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { AccordionItem, Box } from '@chakra-ui/react'
+import { FormikProps } from 'formik'
+import React, { useEffect, useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { Objective } from 'src/components/Objective/types'
@@ -7,7 +8,11 @@ import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
+import { objectiveContext, ObjectiveMode } from 'src/state/recoil/objective/context'
 
+import IntroductionSpotlight from '../IntroductionSpotlight'
+
+import { EditModeValues } from './Button/edit-mode'
 import { ObjectiveAccordionButton } from './Button/wrapper'
 import { ObjectiveAccordionPanel } from './Panel/wrapper'
 
@@ -26,7 +31,15 @@ export const ObjectiveAccordionItem = ({
 }: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const [confidenceTag, setConfidence] = useConfidenceTag(objective?.status?.confidence)
+  const context = useRecoilValue(objectiveContext(objectiveID))
   const isLoaded = Boolean(objective)
+  const formikReference = useRef<FormikProps<EditModeValues> | null>(null)
+
+  const handleNextStep = () => {
+    if (formikReference.current) {
+      formikReference.current.handleSubmit()
+    }
+  }
 
   useEffect(() => {
     if (typeof objective?.status?.confidence !== 'undefined')
@@ -36,29 +49,34 @@ export const ObjectiveAccordionItem = ({
   return (
     <AccordionItem
       borderColor="transparent"
-      bg="white"
       boxShadow="for-background.light"
       p={6}
       borderRadius="10"
     >
-      {({ isExpanded }) => (
-        <>
-          <ObjectiveAccordionButton
-            objective={objective}
-            confidenceTag={confidenceTag}
-            teamID={teamID}
-            userID={userID}
-            isLoaded={isLoaded}
-            isDisabled={isDisabled}
-          />
-          <ObjectiveAccordionPanel
-            isExpanded={isExpanded}
-            objectiveID={objectiveID}
-            teamID={teamID}
-            isDisabled={isDisabled}
-          />
-        </>
-      )}
+      {({ isExpanded }) =>
+        context.mode === ObjectiveMode.FILLED ? (
+          <IntroductionSpotlight objectiveID={objectiveID} />
+        ) : (
+          <Box>
+            <ObjectiveAccordionButton
+              objective={objective}
+              confidenceTag={confidenceTag}
+              teamID={teamID}
+              userID={userID}
+              isLoaded={isLoaded}
+              isDisabled={isDisabled}
+              forwardedRef={formikReference}
+            />
+            <ObjectiveAccordionPanel
+              isExpanded={isExpanded}
+              objectiveID={objectiveID}
+              teamID={teamID}
+              isDisabled={isDisabled}
+              handleNextStep={handleNextStep}
+            />
+          </Box>
+        )
+      }
     </AccordionItem>
   )
 }
