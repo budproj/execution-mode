@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import { Box, GridProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React from 'react'
@@ -57,7 +58,9 @@ const KeyResultListBody = ({
   }
   const BodyComponent = bodyComponents[type]
 
-  return mode === ObjectiveMode.EDIT ? undefined : keyResultIDs && keyResultIDs.length > 0 ? (
+  return mode === ObjectiveMode.EDIT ? (
+    <></>
+  ) : keyResultIDs && keyResultIDs.length > 0 ? (
     <BodyComponent keyResultIDs={keyResultIDs} type={type} {...rest} />
   ) : (
     <Box py={20}>
