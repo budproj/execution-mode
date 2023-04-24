@@ -38,10 +38,12 @@ export default defineMessages<MyKeyResultsActiveCyclesPageMessage>({
     description: 'Title of the create objective button',
   },
   individualOkrsCompanyMembersTitle: {
-    defaultMessage: 'Colegas com plano individual',
-    id: 'oGyXN5',
+    defaultMessage:
+      'Colegas com plano individual {isLoaded, select, true {({totalMembersCount})} other{}}',
+    id: 'ZYZI50',
     description: 'Friends with individual OKRs title',
   },
+
   backToThePresentButtonTitle: {
     defaultMessage: 'Voltar ao presente',
     id: 't0t6MQ',

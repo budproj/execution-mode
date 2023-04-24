@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation, useQuery } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import {
   Button,
   Flex,
@@ -31,7 +31,6 @@ import { SelectUserfromList } from 'src/components/User/SelectFromList'
 import { useGetUserObjectives } from 'src/components/User/hooks/getUserObjectives'
 import { User } from 'src/components/User/types'
 import { GraphQLEffect } from 'src/components/types'
-import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
@@ -41,6 +40,7 @@ import {
   userObjectivesViewMode,
 } from 'src/state/recoil/user/objectives-view-mode'
 
+import { useGetUsersWithIndividualPlan } from './hooks/get-users-with-individual-plan'
 import messages from './messages'
 import queries from './queries.gql'
 
@@ -54,11 +54,13 @@ type GetUserAccessToCreateObjectivesResult = {
 }
 
 export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
-  const { data } = useQuery(queries.LIST_USERS_WITH_INDIVIDUAL_OKR)
+  const { data, loading } = useGetUsersWithIndividualPlan()
+
+  const [usersList, setUsersList] = useState<User[]>(data)
+
   const [selectedUserID, setSelectedUserID] = useState<string>()
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
   const [canCreateObjectives, setCanCreateObjectives] = useState(false)
-  const [users, setUsers] = useConnectionEdges<User>(data?.users?.edges)
   const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userID))
   const setActiveObjectives = useSetRecoilState(userActiveObjectives(userID))
   const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.EDIT))
@@ -116,10 +118,10 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
 
   useEffect(() => {
     if (data) {
-      const filteredData = data.users.edges.filter((edge: any) => edge.node.id !== userID)
-      setUsers(filteredData)
+      const filteredData = data.filter(({ id }) => id !== userID)
+      setUsersList(filteredData)
     }
-  }, [data, setUsers, userID])
+  }, [data, setUsersList, userID])
 
   const [createDraftObjective] = useMutation<CreateDraftObjectiveQueryResult>(
     objectiveQueries.CREATE_DRAFT_OBJECTIVE,
@@ -233,11 +235,15 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
         </Box>
         <Box w="md" minW="md">
           <TeamSectionWrapper
-            title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle)}
+            title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle, {
+              isLoaded: !loading,
+              totalMembersCount: usersList.length,
+            })}
           >
             <SelectUserfromList
               hasMenu
-              users={users}
+              users={usersList}
+              isLoading={loading}
               avatarSubtitleType="role"
               onSelect={handleSelect}
             />
