@@ -10,8 +10,14 @@ type ObjectiveAccordionItemMessage =
   | 'unexpectedErrorToastMessage'
   | 'requiredFieldError'
   | 'invalidIconDesc'
+  | 'descriptionPlaceholder'
 
 export default defineMessages<ObjectiveAccordionItemMessage>({
+  descriptionPlaceholder: {
+    defaultMessage: 'Descrição...',
+    id: 'esUMq5',
+    description: 'The description box placeholder',
+  },
   calendarIconTitle: {
     defaultMessage: 'O prazo deste objetivo',
     id: '/2GFGI',

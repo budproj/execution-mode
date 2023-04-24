@@ -94,7 +94,6 @@ export const ObjectiveKeyResults = ({
   return (
     <KeyResultList
       id={`OBJECTIVE_${objectiveID ?? uniqueId()}_ACCORDION`}
-      pt={4}
       keyResultIDs={keyResultIDs}
       isLoading={!isLoaded}
       templateColumns={templateColumns}

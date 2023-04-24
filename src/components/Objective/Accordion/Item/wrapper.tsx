@@ -56,6 +56,7 @@ export const ObjectiveAccordionItem = ({
             objectiveID={objectiveID}
             teamID={teamID}
             isDisabled={isDisabled}
+            description={objective?.description}
           />
         </>
       )}

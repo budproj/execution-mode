@@ -13,6 +13,7 @@ import { Team } from '../Team/types'
 
 export interface Objective extends GraphQLNode {
   title: string
+  description: string
   updatedAt: string
   status: Status
   delta: Delta

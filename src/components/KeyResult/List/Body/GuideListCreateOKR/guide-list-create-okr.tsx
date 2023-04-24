@@ -11,7 +11,7 @@ const GuideListCreateOkr = () => {
   const intl = useIntl()
 
   return (
-    <Flex mt={18} gap={15} flexDir="column">
+    <Flex gap={15} flexDir="column">
       <Heading display="flex" alignItems="center" justifyContent="space-between">
         <Text fontSize={14} fontWeight="medium" color="#8491B0">
           {intl.formatMessage(messages.guideListCreateOkrHeadTitle)}

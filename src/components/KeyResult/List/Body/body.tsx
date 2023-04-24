@@ -13,7 +13,6 @@ import { ObjectiveMode } from 'src/state/recoil/objective/context'
 
 import { KEY_RESULT_LIST_COLUMN } from './Columns/constants'
 import { KeyResultListBodyColumnProperties } from './Columns/types'
-import GuideListCreateOkr from './GuideListCreateOKR/guide-list-create-okr'
 import messages from './messages'
 
 const StyledSpan = styled.span`
@@ -58,9 +57,7 @@ const KeyResultListBody = ({
   }
   const BodyComponent = bodyComponents[type]
 
-  return mode === ObjectiveMode.EDIT ? (
-    <GuideListCreateOkr />
-  ) : keyResultIDs && keyResultIDs.length > 0 ? (
+  return mode === ObjectiveMode.EDIT ? undefined : keyResultIDs && keyResultIDs.length > 0 ? (
     <BodyComponent keyResultIDs={keyResultIDs} type={type} {...rest} />
   ) : (
     <Box py={20}>

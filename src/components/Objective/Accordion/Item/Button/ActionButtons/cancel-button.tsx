@@ -1,9 +1,10 @@
-import { ButtonProps, IconButton } from '@chakra-ui/react'
+import { ButtonProps, Button } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
 import messages from 'src/components/Base/EditableControls/messages'
-import TimesIcon from 'src/components/Icon/Times'
+
+import actionMessages from './messages'
 
 interface CancelButtonProperties extends ButtonProps {
   onCancel?: () => void
@@ -13,12 +14,10 @@ export const CancelButton = ({ onCancel, onClick, ...rest }: CancelButtonPropert
   const intl = useIntl()
 
   return (
-    <IconButton
+    <Button
       variant="solid"
-      h={12}
-      w={12}
-      fontSize="2xl"
       bg="black.100"
+      fontSize="14px"
       color="gray.500"
       borderColor="transparent"
       aria-label={intl.formatMessage(messages.cancelButtonDesc)}
@@ -30,9 +29,10 @@ export const CancelButton = ({ onCancel, onClick, ...rest }: CancelButtonPropert
         color: 'white',
         bg: 'red.400',
       }}
-      icon={<TimesIcon desc={intl.formatMessage(messages.cancelButtonDesc)} fill="currentColor" />}
       onClick={onCancel ?? onClick}
       {...rest}
-    />
+    >
+      {intl.formatMessage(actionMessages.cancelButton)}
+    </Button>
   )
 }

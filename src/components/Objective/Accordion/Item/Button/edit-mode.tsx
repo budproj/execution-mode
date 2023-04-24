@@ -2,17 +2,20 @@ import { useMutation } from '@apollo/client'
 import {
   Input,
   InputGroup,
-  Stack,
   FormControl,
   InputRightElement,
   useToast,
   Spinner,
+  Box,
+  Textarea,
+  Stack,
 } from '@chakra-ui/react'
 import { Form, Formik, Field } from 'formik'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
+import GuideListCreateOkr from 'src/components/KeyResult/List/Body/GuideListCreateOKR/guide-list-create-okr'
 import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 
 import { useRecoilFamilyLoader } from '../../../../../state/recoil/hooks'
@@ -28,6 +31,7 @@ import queries from './queries.gql'
 
 type EditModeValues = {
   title: string
+  description: string
 }
 
 interface EditModeProperties {
@@ -54,6 +58,7 @@ export const EditMode = ({ objective }: EditModeProperties) => {
 
   const initialValues: EditModeValues = {
     title: objective?.title ?? '',
+    description: objective?.description ?? '',
   }
 
   const handleCancel = () => {
@@ -65,6 +70,7 @@ export const EditMode = ({ objective }: EditModeProperties) => {
       variables: {
         objectiveID: objective?.id,
         title: values.title,
+        description: values.description,
       },
     })
 
@@ -99,30 +105,58 @@ export const EditMode = ({ objective }: EditModeProperties) => {
           <FormControl
             id={`update-objective-${objective?.id ?? ''}`}
             display="flex"
-            flexDirection="row"
-            alignItems="center"
+            flexDirection="column"
+            alignItems="flex-start"
             gridGap={8}
             onClick={stopAccordionOpen}
           >
-            <InputGroup>
-              <Field
-                autoFocus
-                name="title"
-                as={Input}
-                validate={validateTitle}
-                isInvalid={errors.title}
-                // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
-                onKeyUp={(event: KeyboardEvent) => event.preventDefault()}
-              />
-              <InputRightElement h="full" pr={4}>
-                {loading && <Spinner color="gray.500" />}
-                {errors.title && (
-                  <CancelIcon fill="red.500" desc={intl.formatMessage(messages.invalidIconDesc)} />
-                )}
-              </InputRightElement>
-            </InputGroup>
+            <Box width="100%">
+              <InputGroup mb="18px">
+                <Field
+                  autoFocus
+                  name="title"
+                  as={Input}
+                  validate={validateTitle}
+                  isInvalid={errors.title}
+                  // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
+                  onKeyUp={(event: KeyboardEvent) => event.preventDefault()}
+                />
+                <InputRightElement h="full" pr={4}>
+                  {loading && <Spinner color="gray.500" />}
+                  {errors.title && (
+                    <CancelIcon
+                      fill="red.500"
+                      desc={intl.formatMessage(messages.invalidIconDesc)}
+                    />
+                  )}
+                </InputRightElement>
+              </InputGroup>
 
-            <Stack direction="row" spacing={4} alignItems="stretch">
+              <InputGroup>
+                <Field
+                  name="description"
+                  as={Textarea}
+                  placeholder={intl.formatMessage(messages.descriptionPlaceholder)}
+                  _placeholder={{ color: 'new-gray.500' }}
+                  isInvalid={errors.description}
+                  // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
+                  onKeyUp={(event: KeyboardEvent) => event.preventDefault()}
+                />
+                <InputRightElement h="full" pr={4}>
+                  {loading && <Spinner color="gray.500" />}
+                  {errors.description && (
+                    <CancelIcon
+                      fill="red.500"
+                      desc={intl.formatMessage(messages.invalidIconDesc)}
+                    />
+                  )}
+                </InputRightElement>
+              </InputGroup>
+            </Box>
+
+            <GuideListCreateOkr />
+
+            <Stack width="100%" direction="row" spacing={4} justifyContent="end">
               <CancelButton onCancel={handleCancel} />
               <ConfirmButton isLoading={loading} isDisabled={Object.values(errors).length > 0} />
             </Stack>
