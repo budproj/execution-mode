@@ -65,8 +65,8 @@ export const ObjectiveAccordionMenu = ({
           />
         </MenuButton>
         <MenuList>
-          {canCreateKeyResult && <CreateKeyResultOption objectiveID={objectiveID} />}
           {canUpdateObjective && <UpdateObjectiveOption objectiveID={objectiveID} />}
+          {canCreateKeyResult && <CreateKeyResultOption objectiveID={objectiveID} />}
           {canDeleteObjective && (
             <DeleteObjectiveOption objectiveID={objectiveID} userID={userID} teamID={teamID} />
           )}

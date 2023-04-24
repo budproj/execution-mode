@@ -1,9 +1,11 @@
-import { AccordionPanel, Text } from '@chakra-ui/react'
+import { AccordionPanel, Box, Text } from '@chakra-ui/react'
 import React from 'react'
 
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 import { ObjectiveContext, ObjectiveViewMode } from 'src/state/recoil/objective/context'
+
+import CreateObjectiveWorkflow from '../../Footer/create-objective-workflow'
 
 import { ObjectiveKeyResults } from './key-results'
 
@@ -15,12 +17,14 @@ export interface ObjectiveAccordionPanelProperties {
   description?: string
   isDraft?: boolean
   context?: ObjectiveContext
+  handleNextStep?: () => void
 }
 
 export const ObjectiveAccordionPanel = ({
   isExpanded,
   objectiveID,
   isDisabled,
+  handleNextStep,
   teamID,
   description,
   isDraft,
@@ -45,6 +49,12 @@ export const ObjectiveAccordionPanel = ({
             isDisabled={isDisabled}
             teamID={teamID}
           />
+
+          {context?.mode === ObjectiveViewMode.EDIT && (
+            <Box mt={4}>
+              <CreateObjectiveWorkflow objectiveId={objectiveID} handleNextStep={handleNextStep} />
+            </Box>
+          )}
         </>
       )}
     </AccordionPanel>

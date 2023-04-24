@@ -1,4 +1,5 @@
 import { AccordionButton, Box } from '@chakra-ui/react'
+import { FormikProps } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -12,7 +13,7 @@ import { ObjectiveContext, ObjectiveViewMode } from 'src/state/recoil/objective/
 
 import { RadioProgress } from '../../../../Base/RadioProgress/wrapper'
 
-import { EditMode } from './edit-mode'
+import { EditMode, EditModeValues } from './edit-mode'
 import messages from './messages'
 import { ViewMode } from './view-mode'
 
@@ -24,6 +25,7 @@ export interface ObjectiveAccordionButtonProperties {
   isLoaded?: boolean
   isDisabled?: boolean
   context?: ObjectiveContext
+  forwardedRef?: React.Ref<FormikProps<EditModeValues>>
 }
 
 export const ObjectiveAccordionButton = ({
@@ -34,6 +36,7 @@ export const ObjectiveAccordionButton = ({
   isLoaded,
   isDisabled,
   context,
+  forwardedRef,
 }: ObjectiveAccordionButtonProperties) => {
   const intl = useIntl()
 
@@ -44,7 +47,7 @@ export const ObjectiveAccordionButton = ({
   return (
     <AccordionButton maxWidth="100%" p={0} gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
       {context?.mode === ObjectiveViewMode.EDIT && !isDisabled ? (
-        <EditMode objective={objective} />
+        <EditMode forwardedRef={forwardedRef} objective={objective} />
       ) : (
         <>
           {isDraft ? (
