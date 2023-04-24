@@ -35,7 +35,7 @@ const DashboardPage = () => {
       <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
 
       <PageHeader>
-        <PageTitle>{pageTitle}</PageTitle>
+        <PageTitle id="greeting-user">{pageTitle}</PageTitle>
       </PageHeader>
 
       <Box>

@@ -18,6 +18,7 @@ const MenuItem = ({ label, href, isNew }: MenuItemProperties) => {
   return (
     <IntlLink href={href}>
       <ButtonActivableByURL
+        id={href === '/explore' ? 'explore-navbar' : undefined}
         href={href}
         variant="text"
         colorScheme="brand"
