@@ -117,10 +117,10 @@ export const EditMode = ({ objective }: EditModeProperties) => {
             <Box width="100%">
               <InputGroup mb="18px">
                 <Field
-                  autoFocus
                   name="title"
                   as={Input}
                   placeholder={intl.formatMessage(messages.titlePlaceholder)}
+                  _placeholder={{ color: 'new-gray.500' }}
                   validate={validateTitle}
                   isInvalid={errors.title}
                   // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
