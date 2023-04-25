@@ -18,16 +18,16 @@ const CustomGridItem = styled(GridItem)`
   > h4 {
     text-transform: uppercase;
     color: ${tokens.colors.brand500};
-    font-weight: 500;
+    font-weight: 700;
     padding-bottom: 4px;
   }
   font-size: 12px;
   background-color: #ffffff;
   padding: 12px;
   border-radius: 10px;
-  -webkit-box-shadow: 0px 0px 100px -15px rgba(132, 145, 176, 0.25);
-  -moz-box-shadow: 0px 0px 100px -15px rgba(132, 145, 176, 0.25);
-  box-shadow: 0px 0px 100px -15px rgba(132, 145, 176, 0.25);
+  -webkit-box-shadow: 0px 0px 40px -8px rgba(132, 145, 176, 0.45);
+  -moz-box-shadow: 0px 0px 40px -8px rgba(132, 145, 176, 0.45);
+  box-shadow: 0px 0px 40px -8px rgba(132, 145, 176, 0.45);
 
   > p {
     color: ${tokens.colors['new-gray700']};
@@ -42,9 +42,9 @@ const IntroductionSpotlight = ({ objectiveID }: IntroductionSpotlightProperties)
   const intl = useIntl()
 
   return (
-    <VStack gap={12} p={4} alignItems="flex-start">
+    <VStack gap={12} py={2} alignItems="flex-start">
       <HStack alignItems="center" justifyContent="center">
-        <Text fontSize={14} fontWeight="bold" color="gray.500">
+        <Text fontSize={14} fontWeight="bold" color="gray.500" lineHeight={0}>
           {intl.formatMessage(messages.featureTitle)}
         </Text>
         <Tag variant="solid" colorScheme="brand" ml={2} borderRadius={4}>
@@ -53,7 +53,7 @@ const IntroductionSpotlight = ({ objectiveID }: IntroductionSpotlightProperties)
       </HStack>
       <VStack alignItems="center" w="100%">
         <HStack
-          maxWidth="780px"
+          maxWidth="805px"
           w="100%"
           alignItems="center"
           justifyContent="right"
@@ -64,7 +64,7 @@ const IntroductionSpotlight = ({ objectiveID }: IntroductionSpotlightProperties)
             alt="mudar"
             width={320}
             height={320}
-            style={{ position: 'absolute', left: -22, top: 5 }}
+            style={{ position: 'absolute', left: -10, top: 5 }}
           />
           <Grid
             zIndex={2}

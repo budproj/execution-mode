@@ -44,12 +44,12 @@ const CreateObjectiveWorkflow = ({ objectiveId, handleNextStep }: CreateObjectiv
       {context.mode === ObjectiveMode.FILLED && (
         <Button
           p={4}
-          bg="brand.500"
+          bg="new-gray.300"
           borderRadius={5}
           fontSize={14}
           fontWeight={500}
-          color="brand.50"
-          _hover={{ backgroundColor: 'brand.400' }}
+          color="new-gray.800"
+          _hover={{ backgroundColor: 'new-gray.400' }}
           onClick={() => setObjectiveIDToEditdMode(objectiveId)}
         >
           {intl.formatMessage(messages.goBackButton)}
