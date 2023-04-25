@@ -1,6 +1,7 @@
 import { defineMessages } from 'react-intl'
 
 type IntroductionSpotlightMessages =
+  | 'featureTitle'
   | 'firstCardTitle'
   | 'firstCardDescription'
   | 'secondCardTitle'
@@ -11,6 +12,12 @@ type IntroductionSpotlightMessages =
   | 'fourthCardDescription'
 
 export default defineMessages<IntroductionSpotlightMessages>({
+  featureTitle: {
+    defaultMessage: 'SPOTLIGHT',
+    id: 'pzFSON',
+    description: 'This message appears how the title of the introduction to spotlight.',
+  },
+
   firstCardTitle: {
     defaultMessage: 'Feedback colaborativo e visual',
     id: 'ukvrDN',
