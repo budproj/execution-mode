@@ -11,8 +11,8 @@ export default defineMessages<CreateObjectiveWorkflowMessages>({
   },
 
   nextStepButton: {
-    defaultMessage: 'Avançar',
-    id: 'aX4jaB',
+    defaultMessage: '{mode, select, FILLED {Criar objetivo} other {Avançar}}',
+    id: 'LBZ+5U',
     description:
       ' This message appears on the button to move to the next step in the workflow for creating or editing an objective.',
   },

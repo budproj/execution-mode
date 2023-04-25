@@ -65,7 +65,7 @@ const CreateObjectiveWorkflow = ({ objectiveId, handleNextStep }: CreateObjectiv
         _hover={{ backgroundColor: 'brand.400' }}
         onClick={handleNextWorkflowStep}
       >
-        {intl.formatMessage(messages.nextStepButton)}
+        {intl.formatMessage(messages.nextStepButton, { mode: context.mode })}
       </Button>
     </HStack>
   )
