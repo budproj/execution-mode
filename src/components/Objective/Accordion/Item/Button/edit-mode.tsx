@@ -86,6 +86,10 @@ export const EditMode = ({ objective }: EditModeProperties) => {
     if (value.length === 0) return intl.formatMessage(messages.requiredFieldError)
   }
 
+  const validateDescription = (value: string): string | undefined => {
+    if (value.length === 0) return intl.formatMessage(messages.requiredFieldError)
+  }
+
   useEffect(() => {
     if (error)
       toast({
@@ -116,6 +120,7 @@ export const EditMode = ({ objective }: EditModeProperties) => {
                   autoFocus
                   name="title"
                   as={Input}
+                  placeholder={intl.formatMessage(messages.titlePlaceholder)}
                   validate={validateTitle}
                   isInvalid={errors.title}
                   // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
@@ -138,6 +143,7 @@ export const EditMode = ({ objective }: EditModeProperties) => {
                   as={Textarea}
                   placeholder={intl.formatMessage(messages.descriptionPlaceholder)}
                   _placeholder={{ color: 'new-gray.500' }}
+                  validate={validateDescription}
                   isInvalid={errors.description}
                   // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
                   onKeyUp={(event: KeyboardEvent) => event.preventDefault()}

@@ -11,11 +11,17 @@ type ObjectiveAccordionItemMessage =
   | 'requiredFieldError'
   | 'invalidIconDesc'
   | 'descriptionPlaceholder'
+  | 'titlePlaceholder'
 
 export default defineMessages<ObjectiveAccordionItemMessage>({
+  titlePlaceholder: {
+    defaultMessage: 'Insira o título do seu objetivo',
+    id: 'X4pt1L',
+    description: 'The description box placeholder',
+  },
   descriptionPlaceholder: {
-    defaultMessage: 'Descrição...',
-    id: 'esUMq5',
+    defaultMessage: 'Insira a descrição detalhada do seu objetivo',
+    id: 'zaMkef',
     description: 'The description box placeholder',
   },
   calendarIconTitle: {
