@@ -3,7 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 
 import { stopAccordionOpen } from '../handlers'
 
@@ -14,7 +14,7 @@ interface UpdateObjectiveOptionProperties {
 }
 
 export const UpdateObjectiveOption = ({ objectiveID }: UpdateObjectiveOptionProperties) => {
-  const setObjectiveToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
+  const setObjectiveToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.EDIT))
   const intl = useIntl()
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {

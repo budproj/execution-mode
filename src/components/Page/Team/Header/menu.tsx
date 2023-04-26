@@ -29,7 +29,7 @@ import {
 import useCadence from 'src/state/hooks/useCadence'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { isReloadNecessary } from 'src/state/recoil/objective'
-import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import { isEditTeamModalOpenAtom } from 'src/state/recoil/team'
 import {
   ObjectivesViewMode,
@@ -73,7 +73,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   const [getObjectivesViewMode, setObjectivesViewMode] = useRecoilState(
     teamObjectivesViewMode(teamId),
   )
-  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
+  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.EDIT))
   const ownerID = useRecoilValue(meAtom)
   const setIsReloadNecessary = useSetRecoilState(isReloadNecessary)
 

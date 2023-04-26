@@ -2,24 +2,24 @@ import { atomFamily, DefaultValue, selectorFamily } from 'recoil'
 
 import { PREFIX } from './constants'
 
-export enum ObjectiveMode {
+export enum ObjectiveViewMode {
   COLLAPSED = 'collapsed',
   VIEW = 'view',
   EDIT = 'edit',
 }
 
 type ObjectiveContext = {
-  mode: ObjectiveMode
+  mode: ObjectiveViewMode
 }
 
 export const objectiveContext = atomFamily<ObjectiveContext, string | undefined>({
   key: `${PREFIX}::CONTEXT`,
   default: {
-    mode: ObjectiveMode.COLLAPSED,
+    mode: ObjectiveViewMode.COLLAPSED,
   },
 })
 
-export const setObjectiveToMode = selectorFamily<string | undefined, ObjectiveMode>({
+export const setObjectiveToMode = selectorFamily<string | undefined, ObjectiveViewMode>({
   key: `${PREFIX}::SET_OBJECTIVE_TO_MODE`,
   // eslint-disable-next-line unicorn/consistent-function-scoping, unicorn/no-useless-undefined
   get: (_) => (__) => undefined,

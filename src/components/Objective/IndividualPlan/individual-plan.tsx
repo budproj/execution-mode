@@ -34,7 +34,7 @@ import { GraphQLEffect } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
 import {
   ObjectivesViewMode,
@@ -61,7 +61,7 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
   const [users, setUsers] = useConnectionEdges<User>(data?.users?.edges)
   const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userID))
   const setActiveObjectives = useSetRecoilState(userActiveObjectives(userID))
-  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
+  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.EDIT))
   const { refetch } = useGetUserObjectives(
     { ownerId: userID },
     { setObjetives: setActiveObjectives },

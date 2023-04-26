@@ -16,7 +16,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import GuideListCreateOkr from 'src/components/KeyResult/List/Body/GuideListCreateOKR/guide-list-create-okr'
-import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 
 import { useRecoilFamilyLoader } from '../../../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../../../state/recoil/objective'
@@ -54,7 +54,7 @@ export const EditMode = ({ objective }: EditModeProperties) => {
       },
     },
   )
-  const setObjectiveToViewMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.VIEW))
+  const setObjectiveToViewMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.VIEW))
 
   const initialValues: EditModeValues = {
     title: objective?.title ?? '',

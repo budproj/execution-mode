@@ -10,7 +10,7 @@ import KeyResultBodyDragAndDrop from 'src/components/KeyResult/List/Body/DragAnd
 import KeyResultBodyStatic from 'src/components/KeyResult/List/Body/Static'
 import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { ObjectiveMode } from 'src/state/recoil/objective/context'
+import { ObjectiveViewMode } from 'src/state/recoil/objective/context'
 
 import { KEY_RESULT_LIST_COLUMN } from './Columns/constants'
 import { KeyResultListBodyColumnProperties } from './Columns/types'
@@ -42,7 +42,7 @@ export interface KeyResultListBodyProperties {
   keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
   handleDragEnd?: (result: DropResult) => void
-  mode?: ObjectiveMode
+  mode?: ObjectiveViewMode
 }
 
 const KeyResultListBody = ({
@@ -58,7 +58,7 @@ const KeyResultListBody = ({
   }
   const BodyComponent = bodyComponents[type]
 
-  return mode === ObjectiveMode.EDIT ? (
+  return mode === ObjectiveViewMode.EDIT ? (
     <></>
   ) : keyResultIDs && keyResultIDs.length > 0 ? (
     <BodyComponent keyResultIDs={keyResultIDs} type={type} {...rest} />

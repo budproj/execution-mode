@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
-import { objectiveContext, ObjectiveMode } from 'src/state/recoil/objective/context'
+import { objectiveContext, ObjectiveViewMode } from 'src/state/recoil/objective/context'
 
 import { ObjectiveKeyResults } from './key-results'
 
@@ -25,7 +25,7 @@ export const ObjectiveAccordionPanel = ({
 }: ObjectiveAccordionPanelProperties) => {
   const context = useRecoilValue(objectiveContext(objectiveID))
 
-  const isEditing = context.mode === ObjectiveMode.EDIT
+  const isEditing = context.mode === ObjectiveViewMode.EDIT
 
   return (
     <AccordionPanel p={0} maxWidth="100%">

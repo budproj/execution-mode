@@ -11,6 +11,13 @@ import {
 
 import { Team } from '../Team/types'
 
+enum ObjectiveMode {
+  PUBLISHED = 'PUBLISHED',
+  COMPLETED = 'COMPLETED',
+  DRAFT = 'DRAFT',
+  DELETED = 'DELETED',
+}
+
 export interface Objective extends GraphQLNode {
   title: string
   description: string
@@ -22,6 +29,7 @@ export interface Objective extends GraphQLNode {
   policy: GraphQLEntityPolicy
   teamId?: string
   team?: Team
+  mode: ObjectiveMode
   supportTeams?: GraphQLConnection<Team>
   keyResults?: GraphQLConnection<KeyResult>
 }

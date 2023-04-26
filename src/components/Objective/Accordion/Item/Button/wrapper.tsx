@@ -8,7 +8,7 @@ import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import { ConfidenceTag } from 'src/state/hooks/useConfidenceTag/hook'
-import { objectiveContext, ObjectiveMode } from 'src/state/recoil/objective/context'
+import { objectiveContext, ObjectiveViewMode } from 'src/state/recoil/objective/context'
 
 import { RadioProgress } from '../../../../Base/RadioProgress/wrapper'
 
@@ -39,8 +39,15 @@ export const ObjectiveAccordionButton = ({
   const roundedProgress = Math.round(objective?.status?.progress ?? 0)
 
   return (
-    <AccordionButton maxWidth="100%" p={0} gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
-      {context.mode === ObjectiveMode.EDIT && !isDisabled ? (
+    <AccordionButton
+      border={objective?.mode === 'DRAFT' ? '1px solid black' : 'null'}
+      maxWidth="100%"
+      p={0}
+      gridGap={4}
+      _hover={{}}
+      _focus={{ boxShadow: 'none' }}
+    >
+      {context.mode === ObjectiveViewMode.EDIT && !isDisabled ? (
         <EditMode objective={objective} />
       ) : (
         <>

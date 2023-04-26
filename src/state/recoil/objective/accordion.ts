@@ -2,7 +2,7 @@ import difference from 'lodash/difference'
 import { atomFamily, DefaultValue, selectorFamily } from 'recoil'
 
 import { PREFIX } from './constants'
-import { objectiveContext, ObjectiveMode, setObjectiveToMode } from './context'
+import { objectiveContext, ObjectiveViewMode, setObjectiveToMode } from './context'
 
 type ExpandedIndex = number | number[]
 
@@ -16,7 +16,7 @@ export const objectiveAccordionExpandedIndexes = selectorFamily<ExpandedIndex, s
   get:
     (id) =>
     ({ get }) => {
-      const expandedModes = new Set([ObjectiveMode.VIEW, ObjectiveMode.EDIT])
+      const expandedModes = new Set([ObjectiveViewMode.VIEW, ObjectiveViewMode.EDIT])
       const accordionObjectiveIDs = get(objectiveAccordion(id))
       const accordionState = accordionObjectiveIDs.map((objectiveID) =>
         get(objectiveContext(objectiveID)),
@@ -41,8 +41,8 @@ export const objectiveAccordionExpandedIndexes = selectorFamily<ExpandedIndex, s
       )
       const collapsedObjectiveIDs = difference(accordionObjectiveIDs, expandedObjectiveIDs)
 
-      const setObjectiveToViewMode = setObjectiveToMode(ObjectiveMode.VIEW)
-      const setObjectiveToCollapsedMode = setObjectiveToMode(ObjectiveMode.COLLAPSED)
+      const setObjectiveToViewMode = setObjectiveToMode(ObjectiveViewMode.VIEW)
+      const setObjectiveToCollapsedMode = setObjectiveToMode(ObjectiveViewMode.COLLAPSED)
 
       expandedObjectiveIDs.map((objectiveID) => set(setObjectiveToViewMode, objectiveID))
       collapsedObjectiveIDs.map((objectiveID) => set(setObjectiveToCollapsedMode, objectiveID))

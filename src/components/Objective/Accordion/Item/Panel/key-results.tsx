@@ -13,7 +13,7 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
-import { ObjectiveMode } from 'src/state/recoil/objective/context'
+import { ObjectiveViewMode } from 'src/state/recoil/objective/context'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
 
@@ -22,7 +22,7 @@ import queries from './queries.gql'
 
 export interface ObjectiveKeyResultsProperties {
   objectiveID?: Objective['id']
-  mode: ObjectiveMode
+  mode: ObjectiveViewMode
   isDisabled?: boolean
   teamID?: Team['id']
 }
