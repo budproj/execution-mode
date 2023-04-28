@@ -62,6 +62,7 @@ const KeyResultList = ({
       columnGap={columnGap}
       headProperties={headProperties}
       borderColor={borderColor}
+      mode={mode}
     />
     {isLoading ? (
       <KeyResultListBodySkeleton
