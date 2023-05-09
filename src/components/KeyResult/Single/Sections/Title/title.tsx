@@ -1,8 +1,8 @@
 import { useMutation } from '@apollo/client'
-import { Box, Flex, Skeleton, SkeletonText, Spinner, Stack } from '@chakra-ui/react'
+import { Box, Button, Flex, HStack, Skeleton, SkeletonText, Spinner, Stack } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import EditableInputValue from 'src/components/Base/EditableInputValue'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
@@ -12,6 +12,7 @@ import { GraphQLEffect } from 'src/components/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
+import editingKeyResultAtom from 'src/state/recoil/key-result/drawers/update/editing-key-result-atom'
 
 import KrDrawerTitleActions from './actions'
 import messages from './messages'
@@ -29,6 +30,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const intl = useIntl()
+  const setKeyResultToEditingMode = useSetRecoilState(editingKeyResultAtom)
 
   const [updateKeyResult, { loading }] = useMutation<UpdateKeyResultTitleMutationResult>(
     queries.UPDATE_KEY_RESULT_TITLE,
@@ -60,6 +62,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
     })
   }
 
+  const handleSetKeyResultToEditingMode = () => setKeyResultToEditingMode(keyResultID)
   return (
     <Stack
       display="flex"
@@ -79,29 +82,42 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           />
         </Skeleton>
         <Stack spacing={0} flexGrow={1}>
-          <Stack direction="row">
-            <Skeleton isLoaded={isLoaded} flexGrow={1}>
-              <EditableInputValue
-                value={keyResult?.title}
-                isLoaded={isLoaded}
-                isSubmitting={loading}
-                isDisabled={!canUpdate}
-                maxCharacters={120}
-                previewProperties={{
-                  fontSize: 'lg',
-                  fontWeight: 700,
-                  p: 0,
-                  as: 'h1',
-                }}
-                onSubmit={handleSubmit}
-              />
-            </Skeleton>
-            {loading && (
-              <Box pt={2}>
-                <Spinner color="brand.400" />
-              </Box>
-            )}
-          </Stack>
+          <HStack>
+            <Stack direction="row">
+              <Skeleton isLoaded={isLoaded} flexGrow={1}>
+                <EditableInputValue
+                  value={keyResult?.title}
+                  isLoaded={isLoaded}
+                  isSubmitting={loading}
+                  isDisabled={!canUpdate}
+                  maxCharacters={120}
+                  previewProperties={{
+                    fontSize: 'lg',
+                    fontWeight: 700,
+                    p: 0,
+                    as: 'h1',
+                  }}
+                  onSubmit={handleSubmit}
+                />
+              </Skeleton>
+              {loading && (
+                <Box pt={2}>
+                  <Spinner color="brand.400" />
+                </Box>
+              )}
+            </Stack>
+            <Button
+              bg="new-gray.300"
+              borderRadius={4}
+              p="10px"
+              color="new-gray.800"
+              fontSize={14}
+              fontWeight="medium"
+              onClick={handleSetKeyResultToEditingMode}
+            >
+              Editar
+            </Button>
+          </HStack>
 
           <SkeletonText
             noOfLines={2}

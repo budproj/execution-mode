@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-export const KeyResultInsertDrawerHeader = () => {
+export const KeyResultInsertOrUpdateDrawerHeader = () => {
   const intl = useIntl()
 
   return (

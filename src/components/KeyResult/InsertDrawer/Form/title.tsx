@@ -1,4 +1,4 @@
-import { Input, InputGroup, InputRightElement, Text } from '@chakra-ui/react'
+import { Input, InputGroup, InputRightElement, Skeleton } from '@chakra-ui/react'
 import { Field, useFormikContext } from 'formik'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -10,10 +10,11 @@ import messages from './messages'
 import { FormValues } from './wrapper'
 
 interface TitleInputProperties {
+  isLoading?: boolean
   hasValidationErrors?: boolean
 }
 
-export const TitleInput = ({ hasValidationErrors }: TitleInputProperties) => {
+export const TitleInput = ({ hasValidationErrors, isLoading }: TitleInputProperties) => {
   const [hasBlurredInput, setHasBlurredInput] = useState(false)
   const [isFocused, setIsFocused] = useState(true)
   const intl = useIntl()
@@ -33,32 +34,24 @@ export const TitleInput = ({ hasValidationErrors }: TitleInputProperties) => {
   }
 
   return (
-    <FormInputBase title={intl.formatMessage(messages.firstInputLabel)}>
-      <InputGroup marginBottom="17px" onBlurCapture={handleBlur} onFocusCapture={handleFocus}>
-        <Field
-          name="title"
-          as={Input}
-          placeholder={intl.formatMessage(messages.firstInputPlaceholder)}
-          isInvalid={isInvalid}
-        />
-        <InputRightElement
-          h="full"
-          opacity={isInvalid && !isFocused ? 1 : 0}
-          transition="opacity .1s ease-in-out"
-        >
-          <CancelIcon fill="red.500" desc={intl.formatMessage(messages.invalidIconDesc)} />
-        </InputRightElement>
-      </InputGroup>
-      <Text fontWeight="bold" fontSize="14px" color="#99A4C2" marginBottom="5px">
-        {intl.formatMessage(messages.tipTitle)}
-      </Text>
-      <Text fontSize="14px" color="#99A4C2">
-        {intl.formatMessage(messages.firstTipDescription)}
-        <br />
-        {intl.formatMessage(messages.secondTipDescription)}
-        <br />
-        {intl.formatMessage(messages.thirdTipDescription)}
-      </Text>
+    <FormInputBase>
+      <Skeleton isLoaded={!isLoading}>
+        <InputGroup onBlurCapture={handleBlur} onFocusCapture={handleFocus}>
+          <Field
+            name="title"
+            as={Input}
+            placeholder={intl.formatMessage(messages.firstInputPlaceholder)}
+            isInvalid={isInvalid}
+          />
+          <InputRightElement
+            h="full"
+            opacity={isInvalid && !isFocused ? 1 : 0}
+            transition="opacity .1s ease-in-out"
+          >
+            <CancelIcon fill="red.500" desc={intl.formatMessage(messages.invalidIconDesc)} />
+          </InputRightElement>
+        </InputGroup>
+      </Skeleton>
     </FormInputBase>
   )
 }

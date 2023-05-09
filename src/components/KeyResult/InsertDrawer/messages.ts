@@ -8,14 +8,15 @@ type KeyResultInsertDrawerMessage =
 
 export default defineMessages<KeyResultInsertDrawerMessage>({
   title: {
-    defaultMessage: 'Criar Resultado Chave',
-    id: 'HEYvPI',
+    defaultMessage: 'Resultado Chave',
+    id: 'VWlRuQ',
     description: 'This message appears as the title of the insert Key Result drawer',
   },
 
   successToastMessage: {
-    defaultMessage: 'Resultado-chave criado com sucesso!',
-    id: 'YznDPX',
+    defaultMessage:
+      'Resultado-chave {isEditing, select, true {editado} other {criado}} criado com sucesso!',
+    id: 'E1gZWO',
     description: 'This message appears after the user creates a new key-result as a toast',
   },
 
