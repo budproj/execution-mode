@@ -41,9 +41,16 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
     setTeams(company?.rankedDescendants?.edges)
   }, [company?.rankedDescendants?.edges, setTeams])
 
-  const {
-    overview: { feeling, productivity, roadblock },
-  } = getTeamMetrics(company?.id)
+  const routinesOverview = getTeamMetrics(company?.id)
+  const overviewData = routinesOverview.overview
+    ? routinesOverview.overview
+    : {
+        feeling: [],
+        productivity: [],
+        roadblock: [],
+      }
+
+  const { feeling, productivity, roadblock } = overviewData
 
   return (
     <Box bg="white" borderRadius="lg" shadow="for-background.light" px={8} py={5} {...rest}>

@@ -25,9 +25,16 @@ const MetricTeamRow = ({ team }: MetricTeamRowProperties) => {
   const route = useRouter()
   const routineTabName = useRoutineTab()
 
-  const {
-    overview: { feeling, productivity, roadblock },
-  } = getTeamMetrics(team?.id)
+  const routinesOverview = getTeamMetrics(team?.id)
+  const overviewData = routinesOverview.overview
+    ? routinesOverview.overview
+    : {
+        feeling: [],
+        productivity: [],
+        roadblock: [],
+      }
+
+  const { feeling, productivity, roadblock } = overviewData
 
   const teamLink = team?.id ? `/explore/${team.id}?activeTab=${routineTabName}` : '#'
 

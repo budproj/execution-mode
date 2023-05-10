@@ -23,7 +23,7 @@ export interface AverageData {
 }
 
 export interface OverviewData {
-  overview: {
+  overview?: {
     feeling: AverageData[]
     productivity: AverageData[]
     roadblock: AverageData[]
