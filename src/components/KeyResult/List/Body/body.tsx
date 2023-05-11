@@ -43,6 +43,7 @@ export interface KeyResultListBodyProperties {
   onLineClick?: (id: KeyResult['id']) => void
   handleDragEnd?: (result: DropResult) => void
   mode?: ObjectiveViewMode
+  isDraft?: boolean
 }
 
 const KeyResultListBody = ({
@@ -50,6 +51,7 @@ const KeyResultListBody = ({
   keyResultIDs,
   emptyStateMessage,
   mode,
+  isDraft,
   ...rest
 }: KeyResultListBodyProperties) => {
   const bodyComponents = {
@@ -67,9 +69,9 @@ const KeyResultListBody = ({
       <EmptyState
         labelMessage={emptyStateMessage ?? messages.emptyStateLabel}
         messageTranslationOptions={{ span: (string: string) => <StyledSpan>{string}</StyledSpan> }}
-        maxWidth="320px"
+        maxWidth={isDraft ? 'none' : '320px'}
         m="0 auto"
-        imageKey="empty-krs"
+        imageKey={isDraft ? 'people-with-pages' : 'empty-krs'}
       />
     </Box>
   )

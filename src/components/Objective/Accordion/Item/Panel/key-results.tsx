@@ -13,18 +13,21 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
-import { ObjectiveViewMode } from 'src/state/recoil/objective/context'
+import { ObjectiveContext, ObjectiveViewMode } from 'src/state/recoil/objective/context'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
 
+import { DraftButtons } from './draft-buttons'
 import messages from './messages'
 import queries from './queries.gql'
 
 export interface ObjectiveKeyResultsProperties {
   objectiveID?: Objective['id']
-  mode: ObjectiveViewMode
+  mode?: ObjectiveViewMode
   isDisabled?: boolean
   teamID?: Team['id']
+  isDraft?: boolean
+  context?: ObjectiveContext
 }
 
 export interface GetObjectiveKeyResultsQuery {
@@ -39,6 +42,8 @@ export const ObjectiveKeyResults = ({
   teamID,
   mode,
   isDisabled,
+  isDraft,
+  context,
   ...rest
 }: ObjectiveKeyResultsProperties) => {
   const lastInsertedKeyResultID = useRecoilValue(lastInsertedKeyResultIDAtom)
@@ -92,50 +97,60 @@ export const ObjectiveKeyResults = ({
   }, [called, lastInsertedKeyResultID, getKeyResults])
 
   return (
-    <KeyResultList
-      id={`OBJECTIVE_${objectiveID ?? uniqueId()}_ACCORDION`}
-      keyResultIDs={keyResultIDs}
-      isLoading={!isLoaded}
-      templateColumns={templateColumns}
-      columns={columns}
-      emptyStateMessage={messages.keyResultListEmptyStateMessage}
-      headProperties={{
-        [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
-          hidden: true,
-        },
-        [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
-          hidden: true,
-        },
-        [KEY_RESULT_LIST_COLUMN.OWNER]: {
-          hidden: true,
-        },
-        [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
-          hidden: true,
-        },
-      }}
-      bodyProperties={{
-        [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
-          withLastUpdateInfo: true,
-          withDynamicIcon: true,
-          isDisabled,
-        },
-        [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
-          withConfidenceTag: true,
-          isActive: !isDisabled,
-          isDisabled,
-        },
-        [KEY_RESULT_LIST_COLUMN.OWNER]: {
-          displayName: true,
-          displayRole: true,
-          showOnlyOwner: true,
-        },
-        [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
-          onDelete: handleKeyResultDelete,
-        },
-      }}
-      mode={mode}
-      onLineClick={handleLineClick}
-      {...rest}
-    />
+    <>
+      <KeyResultList
+        id={`OBJECTIVE_${objectiveID ?? uniqueId()}_ACCORDION`}
+        keyResultIDs={keyResultIDs}
+        isLoading={!isLoaded}
+        templateColumns={templateColumns}
+        columns={columns}
+        isDraft={isDraft}
+        emptyStateMessage={
+          isDraft
+            ? messages.keyResultListDraftEmptyStateMessage
+            : messages.keyResultListEmptyStateMessage
+        }
+        headProperties={{
+          [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
+            hidden: true,
+          },
+          [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+            hidden: true,
+          },
+          [KEY_RESULT_LIST_COLUMN.OWNER]: {
+            hidden: true,
+          },
+          [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
+            hidden: true,
+          },
+        }}
+        bodyProperties={{
+          [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
+            withLastUpdateInfo: true,
+            withDynamicIcon: true,
+            isDisabled,
+          },
+          [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+            withConfidenceTag: true,
+            isActive: !isDisabled,
+            isDisabled,
+          },
+          [KEY_RESULT_LIST_COLUMN.OWNER]: {
+            displayName: true,
+            displayRole: true,
+            showOnlyOwner: true,
+          },
+          [KEY_RESULT_LIST_COLUMN.ACTIONS]: {
+            onDelete: handleKeyResultDelete,
+          },
+        }}
+        mode={mode}
+        onLineClick={handleLineClick}
+        {...rest}
+      />
+      {isDraft && context?.mode !== ObjectiveViewMode.EDIT && (
+        <DraftButtons objectiveID={objectiveID} isObjectiveWithKeyResults={keyResults.length > 0} />
+      )}
+    </>
   )
 }

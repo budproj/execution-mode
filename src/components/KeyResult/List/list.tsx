@@ -36,6 +36,7 @@ export interface KeyResultListProperties extends BoxProps {
   onLineDragEnd?: (result: DropResult) => void
   isLoading?: boolean
   mode?: ObjectiveViewMode
+  isDraft?: boolean
 }
 
 const KeyResultList = ({
@@ -53,6 +54,7 @@ const KeyResultList = ({
   isLoading,
   emptyStateMessage,
   mode,
+  isDraft,
   ...rest
 }: KeyResultListProperties): ReactElement => (
   <Box {...rest}>
@@ -77,6 +79,7 @@ const KeyResultList = ({
       />
     ) : (
       <KeyResultListBody
+        isDraft={isDraft}
         listID={id}
         type={type}
         columns={columns}

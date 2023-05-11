@@ -4,6 +4,7 @@ type ObjectiveAccordionPanelMessage =
   | 'insertButtonIconDesc'
   | 'insertButtonLabel'
   | 'keyResultListEmptyStateMessage'
+  | 'keyResultListDraftEmptyStateMessage'
 
 export default defineMessages<ObjectiveAccordionPanelMessage>({
   insertButtonIconDesc: {
@@ -27,5 +28,13 @@ export default defineMessages<ObjectiveAccordionPanelMessage>({
     id: 'SU+pQ8',
     description:
       'This message is displayed in the key-results empty state inside the team page when an objective has no key-results',
+  },
+
+  keyResultListDraftEmptyStateMessage: {
+    defaultMessage:
+      'O objetivo está pronto! Agora chegou a hora de criar um resultado-chave para poder metrificar e acompanhar o progresso desse objetivo.',
+    id: 'eQ1tuY',
+    description:
+      'This message is displayed in the draft key-results empty state inside the team page when an objective has no draft key-results',
   },
 })

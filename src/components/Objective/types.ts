@@ -11,7 +11,7 @@ import {
 
 import { Team } from '../Team/types'
 
-enum ObjectiveMode {
+export enum ObjectiveMode {
   PUBLISHED = 'PUBLISHED',
   COMPLETED = 'COMPLETED',
   DRAFT = 'DRAFT',

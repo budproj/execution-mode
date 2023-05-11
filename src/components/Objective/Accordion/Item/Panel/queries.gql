@@ -76,3 +76,13 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!, $withTeams: Boolean! = true) 
     }
   }
 }
+
+
+
+mutation UPDATE_DRAFT_OBJECTIVE($objectiveID: ID!, $mode: String!) { updateObjective(id: $objectiveID, data: {
+    mode: $mode,
+  }) {
+    id
+    mode
+  }
+}

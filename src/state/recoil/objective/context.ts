@@ -8,7 +8,7 @@ export enum ObjectiveViewMode {
   EDIT = 'edit',
 }
 
-type ObjectiveContext = {
+export type ObjectiveContext = {
   mode: ObjectiveViewMode
 }
 

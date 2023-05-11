@@ -124,6 +124,8 @@ export { default as LinkedIn } from './LinkedIn'
 
 export { default as Reload } from './Reload'
 
+export { default as DraftPen } from './DraftPen'
+
 export {
   CustomEmojiFeeling1,
   CustomEmojiFeeling2,

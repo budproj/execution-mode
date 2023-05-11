@@ -8,7 +8,7 @@ import { User } from 'src/components/User/types'
 import buildSkeletonMinSize from '../../../../../../lib/chakra/build-skeleton-min-size'
 import { PercentageProgressIncreaseTag } from '../../../../Base'
 import TooltipWithDelay from '../../../../Base/TooltipWithDelay'
-import { Objective } from '../../../types'
+import { Objective, ObjectiveMode } from '../../../types'
 import { ObjectiveAccordionMenu } from '../../Menu/wrapper'
 
 import messages from './messages'
@@ -29,6 +29,8 @@ export const ViewMode = ({
   isDisabled,
 }: ViewModeProperties) => {
   const intl = useIntl()
+
+  const isDraft = objective?.mode === ObjectiveMode.DRAFT
 
   return (
     <Stack direction="row" flexGrow={1} alignItems="center">
@@ -53,31 +55,33 @@ export const ViewMode = ({
       >
         {!isDisabled && (
           <Stack spacing={4} direction="row" alignItems="stretch">
-            <TooltipWithDelay
-              label={intl.formatMessage(messages.progressTagTooltip)}
-              placement="top"
-            >
-              <Skeleton
-                isLoaded={isLoaded}
-                borderRadius={4}
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                w={isLoaded ? 'auto' : 140}
-                h={isLoaded ? 'auto' : 33}
+            {!isDraft && (
+              <TooltipWithDelay
+                label={intl.formatMessage(messages.progressTagTooltip)}
+                placement="top"
               >
-                <PercentageProgressIncreaseTag
-                  forcePositiveSignal
-                  showSignalArrow
-                  value={objective?.delta?.progress}
-                  fontSize="12px"
-                  fontWeight="medium"
-                  border="1px solid"
-                  borderColor="white"
-                  p={1.5}
-                />
-              </Skeleton>
-            </TooltipWithDelay>
+                <Skeleton
+                  isLoaded={isLoaded}
+                  borderRadius={4}
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  w={isLoaded ? 'auto' : 140}
+                  h={isLoaded ? 'auto' : 33}
+                >
+                  <PercentageProgressIncreaseTag
+                    forcePositiveSignal
+                    showSignalArrow
+                    value={objective?.delta?.progress}
+                    fontSize="12px"
+                    fontWeight="medium"
+                    border="1px solid"
+                    borderColor="white"
+                    p={1.5}
+                  />
+                </Skeleton>
+              </TooltipWithDelay>
+            )}
 
             <ObjectiveAccordionMenu
               teamID={teamID}

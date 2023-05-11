@@ -1,10 +1,9 @@
 import { AccordionPanel, Text } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
 
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
-import { objectiveContext, ObjectiveViewMode } from 'src/state/recoil/objective/context'
+import { ObjectiveContext, ObjectiveViewMode } from 'src/state/recoil/objective/context'
 
 import { ObjectiveKeyResults } from './key-results'
 
@@ -14,6 +13,8 @@ export interface ObjectiveAccordionPanelProperties {
   teamID?: Team['id']
   isDisabled?: boolean
   description?: string
+  isDraft?: boolean
+  context?: ObjectiveContext
 }
 
 export const ObjectiveAccordionPanel = ({
@@ -22,10 +23,10 @@ export const ObjectiveAccordionPanel = ({
   isDisabled,
   teamID,
   description,
+  isDraft,
+  context,
 }: ObjectiveAccordionPanelProperties) => {
-  const context = useRecoilValue(objectiveContext(objectiveID))
-
-  const isEditing = context.mode === ObjectiveViewMode.EDIT
+  const isEditing = context?.mode === ObjectiveViewMode.EDIT
 
   return (
     <AccordionPanel p={0} maxWidth="100%">
@@ -37,8 +38,10 @@ export const ObjectiveAccordionPanel = ({
             </Text>
           )}
           <ObjectiveKeyResults
+            isDraft={isDraft}
             objectiveID={objectiveID}
-            mode={context.mode}
+            mode={context?.mode}
+            context={context}
             isDisabled={isDisabled}
             teamID={teamID}
           />
