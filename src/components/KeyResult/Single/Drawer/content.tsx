@@ -1,15 +1,12 @@
-import { useQuery } from '@apollo/client'
 import { DrawerContent, Flex } from '@chakra-ui/react'
 import React from 'react'
-import { useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Scope } from 'src/components/types'
-import selectKeyResult from 'src/state/recoil/key-result/key-result'
 
 import KeyResultDrawerBody from './Body'
 import KeyResultDrawerFooter from './Footer'
-import queries from './queries.gql'
+import useGetKeyResultWithId from './hooks/get-key-result-with-id'
 
 export interface KeyResultDrawerContentProperties {
   keyResultID: KeyResult['id']
@@ -24,22 +21,7 @@ const KeyResultDrawerContent = ({
   keyResultID,
   isKeyResultPage,
 }: KeyResultDrawerContentProperties) => {
-  const setKeyResult = useSetRecoilState(selectKeyResult(keyResultID))
-
-  const handleQueryData = (data: GetKeyResultWithIDQuery) => {
-    setKeyResult(data.keyResult)
-  }
-
-  const { loading, called, data } = useQuery<GetKeyResultWithIDQuery>(
-    queries.GET_KEY_RESULT_WITH_ID,
-    {
-      variables: {
-        id: keyResultID,
-      },
-      onCompleted: handleQueryData,
-      fetchPolicy: 'network-only',
-    },
-  )
+  const { called, data, loading } = useGetKeyResultWithId(keyResultID)
 
   console.log('Rerendered key result drawers contents. Take a look at our new data:', {
     component,

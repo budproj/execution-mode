@@ -2,17 +2,17 @@ import { useLazyQuery } from '@apollo/client'
 import { Flex, Stack, Drawer, DrawerContent, DrawerOverlay, useToast } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
 
 import GET_KEY_RESULT_WITH_ID from 'src/components/KeyResult/Single/Drawer/queries.gql'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import editingKeyResultAtom from 'src/state/recoil/key-result/drawers/update/editing-key-result-atom'
 
 import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
 import { GetKeyResultWithIDQuery } from '../Single/Drawer/content'
+import useGetKeyResultWithId from '../Single/Drawer/hooks/get-key-result-with-id'
 
 import { InsertOrUpdateKeyResultForm } from './Form/wrapper'
 import { KeyResultInsertOrUpdateDrawerHeader } from './header'
@@ -31,8 +31,7 @@ export const KeyResultInsertDrawer = ({
   const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
   const editingModeKeyResultID = useRecoilValue(editingKeyResultAtom)
 
-  const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-  const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+  const { refetch } = useGetKeyResultWithId(editingModeKeyResultID)
 
   const resetDrawerObjectiveID = useResetRecoilState(keyResultInsertDrawerObjectiveID)
   const resetEditingModeKeyResultID = useResetRecoilState(editingKeyResultAtom)
@@ -62,14 +61,13 @@ export const KeyResultInsertDrawer = ({
     ? Boolean(editingModeKeyResultID)
     : Boolean(drawerObjectiveID)
 
-  const handleResetDrawerState = () => {
+  const handleResetDrawerState = async () => {
     if (editingModeKeyResultID) {
+      await refetch({ id: editingModeKeyResultID })
       resetEditingModeKeyResultID()
-      resetOpenDrawer()
-      setOpenDrawer(editingModeKeyResultID)
+    } else {
+      resetDrawerObjectiveID()
     }
-
-    resetDrawerObjectiveID()
   }
 
   const handleSuccess = (currentUserID: string) => {
