@@ -1,39 +1,60 @@
 import { Button, Flex, HStack, Skeleton, SkeletonText, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
+import { Objective } from 'src/components/Objective/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
+import { keyResultInsertDrawerObjectiveID } from 'src/state/recoil/key-result/drawers/insert/objective-id'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
-import editingKeyResultAtom from 'src/state/recoil/key-result/drawers/update/editing-key-result-atom'
 
 import KrDrawerTitleActions from './actions'
 import messages from './messages'
 
 export interface KeyResultSectionTitleProperties {
   keyResultID?: KeyResult['id']
+  isDraft?: boolean
+  objective?: Objective
 }
 
-const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties) => {
+const KeyResultSectionTitle = ({
+  keyResultID,
+  isDraft,
+  objective,
+}: KeyResultSectionTitleProperties) => {
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const intl = useIntl()
-  const setKeyResultToEditingMode = useSetRecoilState(editingKeyResultAtom)
+  const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
+  const isEditingKeyResultId = useSetRecoilState(isEditingKeyResultIDAtom)
+
+  const setKeyResultDrawerOpenedKeyResultID = useSetRecoilState(
+    keyResultReadDrawerOpenedKeyResultID,
+  )
+
+  const [teste, aaaa] = useRecoilState(keyResultInsertDrawerObjectiveID)
 
   const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 
   const onDeleteKeyResult = () => resetOpenDrawer()
+
+  const handleEditClick = () => {
+    setKeyResultInsertDrawerObjectiveID(objective?.id)
+    isEditingKeyResultId(keyResult?.id)
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    setKeyResultDrawerOpenedKeyResultID(undefined)
+  }
 
   const isLoaded = Boolean(keyResult)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
   const isActive = keyResult?.status?.isActive
   const isOutdated = keyResult?.status?.isOutdated && isActive
 
-  const handleSetKeyResultToEditingMode = () => setKeyResultToEditingMode(keyResultID)
   return (
     <Stack
       display="flex"
@@ -42,14 +63,14 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       justifyContent="space-between"
       direction="row"
     >
-      <Flex gridGap={4} alignItems="flex-start" justifyContent="space-between" width="100%">
+      <Flex gridGap={4} alignItems="center" justifyContent="space-between" width="100%">
         <Skeleton borderRadius={10} isLoaded={isLoaded}>
           <KeyResultDynamicIcon
             title={keyResult?.title}
             iconSize={7}
             boxSize={12}
             borderRadius={8}
-            isDisabled={!isActive}
+            isDisabled={Boolean(!isActive || isDraft)}
           />
         </Skeleton>
         <Stack spacing={0} flexGrow={1}>
@@ -69,13 +90,15 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
             mt={isLoaded ? 'inherit' : '4px'}
             isLoaded={isLoaded}
           >
-            <LastUpdateText
-              fontSize="sm"
-              ml="2px"
-              date={lastUpdateDate}
-              color={isOutdated ? 'red.500' : 'gray.400'}
-              prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
-            />
+            {!isDraft && (
+              <LastUpdateText
+                fontSize="sm"
+                ml="2px"
+                date={lastUpdateDate}
+                color={isOutdated ? 'red.500' : 'gray.400'}
+                prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
+              />
+            )}
           </SkeletonText>
         </Stack>
       </Flex>
@@ -87,7 +110,7 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
           color="new-gray.800"
           fontSize={14}
           fontWeight="medium"
-          onClick={handleSetKeyResultToEditingMode}
+          onClick={handleEditClick}
         >
           Editar
         </Button>

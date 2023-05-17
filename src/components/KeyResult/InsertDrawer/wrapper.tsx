@@ -96,14 +96,17 @@ export const KeyResultInsertDrawer = ({
     })
   }
 
+  const isEditing = Boolean(editingModeKeyResultID)
+
   return (
     <Drawer isOpen={isOpen} size="xl" placement="right" onClose={handleResetDrawerState}>
       <DrawerOverlay />
       <DrawerContent overflowY="auto" flexGrow={1}>
         <Stack h="full">
-          <KeyResultInsertOrUpdateDrawerHeader />
+          <KeyResultInsertOrUpdateDrawerHeader isEditing={isEditing} />
           <Flex flexGrow={1}>
             <InsertOrUpdateKeyResultForm
+              isEditing={isEditing}
               isPersonalKR={isPersonalKR}
               objectiveID={drawerObjectiveID}
               teamID={teamID}

@@ -4,13 +4,19 @@ import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-export const KeyResultInsertOrUpdateDrawerHeader = () => {
+interface KeyResultInsertOrUpdateDrawerHeaderProperties {
+  isEditing?: boolean
+}
+
+export const KeyResultInsertOrUpdateDrawerHeader = ({
+  isEditing,
+}: KeyResultInsertOrUpdateDrawerHeaderProperties) => {
   const intl = useIntl()
 
   return (
     <DrawerHeader bg="gray.50" p={8}>
       <Heading as="h2" color="gray.500" fontSize="2xl" fontWeight={500}>
-        {intl.formatMessage(messages.title)}
+        {intl.formatMessage(isEditing ? messages.editTitle : messages.createTitle)}
       </Heading>
     </DrawerHeader>
   )

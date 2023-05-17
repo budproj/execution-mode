@@ -45,6 +45,7 @@ interface InsertKeyResultFormProperties {
   objectiveID?: string
   teamID?: Team['id'] | null
   isPersonalKR?: boolean
+  isEditing?: boolean
 }
 
 interface CreateKeyResultMutationResult {
@@ -69,6 +70,7 @@ export const InsertOrUpdateKeyResultForm = ({
   teamID,
   isLoading,
   isPersonalKR,
+  isEditing,
 }: InsertKeyResultFormProperties) => {
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
 

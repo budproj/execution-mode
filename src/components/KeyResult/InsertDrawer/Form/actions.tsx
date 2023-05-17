@@ -2,6 +2,10 @@ import { Button, Skeleton, Stack } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+
+import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
+import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import messages from './messages'
 
@@ -13,9 +17,18 @@ interface FormActionsInterface {
 
 export const FormActions = ({ onClose, isLoading, isEditingKeyResult }: FormActionsInterface) => {
   const intl = useIntl()
+  const setKeyResultDrawerOpenedKeyResultID = useSetRecoilState(
+    keyResultReadDrawerOpenedKeyResultID,
+  )
+  const isEditingKeyResultId = useRecoilValue(isEditingKeyResultIDAtom)
+
   const { resetForm, submitForm, isSubmitting } = useFormikContext()
 
   const handleCancel = () => {
+    if (isEditingKeyResult) {
+      setKeyResultDrawerOpenedKeyResultID(isEditingKeyResultId)
+    }
+
     resetForm()
     if (onClose) onClose()
   }

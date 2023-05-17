@@ -30,6 +30,7 @@ export const imageKeys = {
   'notifications-empty-state': '/images/notifications-empty-state.png',
   'no-more-notifications': '/images/no-more-notifications-empty-state.png',
   'zen-girl': '/images/zen-girl.png',
+  'cat-hanging-out': '/images/cat-hanging-out.png',
 }
 
 const imageAlts = {
@@ -43,6 +44,7 @@ const imageAlts = {
   'notifications-empty-state': messages.emptyNotificationsList,
   'no-more-notifications': messages.noMoreNotificationsToListing,
   'zen-girl': messages.zenGirl,
+  'cat-hanging-out': messages.catHangingOut,
 }
 
 const EmptyState = ({

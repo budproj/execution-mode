@@ -1,4 +1,4 @@
-import { Box, Divider, Portal, Stack } from '@chakra-ui/react'
+import { Box, Divider, Portal, Stack, Text } from '@chakra-ui/react'
 import React, { useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -17,6 +17,7 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultChecklistAtom } from 'src/state/recoil/key-result/checklist'
 
 import { KeyResultChecklistWrapper } from '../../Sections/Checklist/wrapper'
+import { KeyResultHistory } from '../../Sections/KeyResultHistory'
 import { KeyResultProgress } from '../../Sections/Progress/wrapper'
 
 import { SCROLLBAR_ID } from './constants'
@@ -33,6 +34,7 @@ const KeyResultDrawerBody = ({
   isKeyResultPage,
 }: KeyResultDrawerBodyProperties) => {
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
+  const objective = keyResult?.objective
   const keyResultChecklist = useRecoilValue(keyResultChecklistAtom(keyResultID))
   const timelinePortalReference = useRef<HTMLDivElement>(null)
 
@@ -45,6 +47,8 @@ const KeyResultDrawerBody = ({
         : undefined
       : undefined
 
+  const isDraft = true
+
   return (
     <Stack
       spacing={0}
@@ -55,20 +59,31 @@ const KeyResultDrawerBody = ({
       overflowX="hidden"
       bg="new-gray.50"
     >
-      <Box pt={8} px={8} pb={4} bg="white">
-        <KeyResultSectionTitle keyResultID={keyResultID} />
-      </Box>
-
-      <Portal containerRef={timelinePortalReference}>
-        <Box px={8} pt={4}>
-          <KeyResultSectionTimeline
-            keyResultID={keyResultID}
-            scrollTarget={SCROLLBAR_ID}
-            newCheckInValue={newCheckInValue}
-          />
+      {isDraft && (
+        <Box textAlign="center" background="new-gray.600" paddingY="15px">
+          <Text fontWeight={500} color="white">
+            Este resultado-chave ainda é um rascunho
+          </Text>
         </Box>
+      )}
+      <Box pt={8} px={8} pb={4} bg="white">
+        <KeyResultSectionTitle objective={objective} isDraft={isDraft} keyResultID={keyResultID} />
+      </Box>
+      <Portal containerRef={timelinePortalReference}>
+        {isDraft ? (
+          <Box px={8} pt={4}>
+            <KeyResultHistory />
+          </Box>
+        ) : (
+          <Box px={8} pt={4}>
+            <KeyResultSectionTimeline
+              keyResultID={keyResultID}
+              scrollTarget={SCROLLBAR_ID}
+              newCheckInValue={newCheckInValue}
+            />
+          </Box>
+        )}
       </Portal>
-
       <Stack
         spacing={4}
         px={8}
@@ -99,9 +114,12 @@ const KeyResultDrawerBody = ({
 
         <KeyResultSectionOwner keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
-        <KeyResultSectionObjective isKeyResultPage={isKeyResultPage} keyResultID={keyResultID} />
+        <KeyResultSectionObjective
+          isDraft={isDraft}
+          isKeyResultPage={isKeyResultPage}
+          keyResultID={keyResultID}
+        />
       </Stack>
-
       <Box ref={timelinePortalReference} />
     </Stack>
   )
