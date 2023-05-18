@@ -11,11 +11,11 @@ import { ConfirmationDialogProperties } from './interface'
 export const ConfirmationDialog = ({
   isOpen,
   title,
-  headerImageURL,
-  HeaderImageWrapper,
   description,
   descriptionComponent,
   confirmationLabel,
+  confirmButtonColorScheme,
+  headerColorScheme,
   onConfirm,
   onClose,
 }: ConfirmationDialogProperties) => {
@@ -31,9 +31,14 @@ export const ConfirmationDialog = ({
     >
       <ColorizedOverlay Component={AlertDialogOverlay}>
         <AlertDialogContent p={12} display="flex" gridGap={6} alignItems="center">
-          <Header imageURL={headerImageURL} Wrapper={HeaderImageWrapper} title={title} />
+          <Header title={title} colorScheme={headerColorScheme} />
           {descriptionComponent ?? <StyledDescription>{description}</StyledDescription>}
-          <Actions confirmationLabel={confirmationLabel} onConfirm={onConfirm} onCancel={onClose} />
+          <Actions
+            confirmationLabel={confirmationLabel}
+            colorScheme={confirmButtonColorScheme}
+            onConfirm={onConfirm}
+            onCancel={onClose}
+          />
         </AlertDialogContent>
       </ColorizedOverlay>
     </AlertDialog>

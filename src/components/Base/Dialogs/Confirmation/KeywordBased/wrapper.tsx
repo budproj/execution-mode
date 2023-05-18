@@ -7,6 +7,7 @@ import { Description } from './description'
 
 export interface KeywordBasedConfirmationProperties extends ConfirmationDialogProperties {
   keyword: string
+  inputLabel?: string
 }
 
 export const KeywordBasedConfirmation = ({
@@ -15,6 +16,9 @@ export const KeywordBasedConfirmation = ({
   onClose,
   description,
   confirmationLabel,
+  inputLabel,
+  confirmButtonColorScheme,
+  headerColorScheme,
   ...rest
 }: KeywordBasedConfirmationProperties) => {
   const [isValidKeyword, setIsValidKeyword] = useState(false)
@@ -33,11 +37,14 @@ export const KeywordBasedConfirmation = ({
 
   return (
     <ConfirmationDialog
+      confirmButtonColorScheme={confirmButtonColorScheme}
+      headerColorScheme={headerColorScheme}
       descriptionComponent={
         <Description
           description={description}
           keyword={keyword}
           isValid={isValidKeyword}
+          inputLabel={inputLabel}
           onChange={handleKeywordChange}
         />
       }
