@@ -9,10 +9,12 @@ import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
+import { KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 
+import { LastUpdateBadge } from './DraftMode/last-update-icon'
 import messages from './messages'
 import { UpdateIcon } from './update-icon'
 
@@ -28,6 +30,7 @@ export interface KeyResultListBodyColumnKeyResultProperties
 const titleSelector = buildPartialSelector<KeyResult['title']>('title')
 const statusSelector = buildPartialSelector<KeyResult['status']>('status')
 const deltaSelector = buildPartialSelector<KeyResult['delta']>('delta')
+const modeSelector = buildPartialSelector<KeyResult['mode']>('mode')
 
 const KeyResultListBodyColumnKeyResult = ({
   id,
@@ -41,6 +44,7 @@ const KeyResultListBodyColumnKeyResult = ({
   const status = useRecoilValue(statusSelector(id))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(id))
   const delta = useRecoilValue(deltaSelector(id))
+  const mode = useRecoilValue(modeSelector(id))
   const intl = useIntl()
 
   const isKeyResultLoaded = Boolean(title)
@@ -64,7 +68,7 @@ const KeyResultListBodyColumnKeyResult = ({
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
           <Skeleton borderRadius={10} position="relative" isLoaded={isKeyResultLoaded}>
-            <KeyResultDynamicIcon title={title} isDisabled={isDisabled} />
+            <KeyResultDynamicIcon title={title} isDisabled={isDisabled} mode={mode} />
             {delta && delta?.progress !== 0 && (
               <PercentageProgressIncreaseTag
                 forcePositiveSignal
@@ -100,17 +104,21 @@ const KeyResultListBodyColumnKeyResult = ({
               mt={isKeyResultLoaded ? 'inherit' : '4px'}
               isLoaded={isKeyResultLoaded}
             >
-              <Flex alignItems="center">
-                <UpdateIcon
-                  isOutdated={status?.latestCheckIn ? status?.isOutdated : true}
-                  updateTextColor={updateTextColor}
-                />
-                <LastUpdateText
-                  date={lastUpdateDate}
-                  color={updateTextColor}
-                  prefix={intl.formatMessage(prefixMessage)}
-                />
-              </Flex>
+              {mode === KEY_RESULT_MODE.DRAFT ? (
+                <LastUpdateBadge lastUpdateDate={new Date()} />
+              ) : (
+                <Flex alignItems="center">
+                  <UpdateIcon
+                    isOutdated={status?.latestCheckIn ? status?.isOutdated : true}
+                    updateTextColor={updateTextColor}
+                  />
+                  <LastUpdateText
+                    date={lastUpdateDate}
+                    color={updateTextColor}
+                    prefix={intl.formatMessage(prefixMessage)}
+                  />
+                </Flex>
+              )}
             </SkeletonText>
           )}
         </Box>

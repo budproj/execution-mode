@@ -154,4 +154,6 @@ export { OpacityTeamIcon } from './Team'
 
 export { default as DownloadIcon } from './DownloadIcon'
 
+export { default as DangerActionIcon } from './DangerAction'
+
 export * from './types'
