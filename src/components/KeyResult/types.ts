@@ -4,7 +4,7 @@ import { User } from 'src/components/User/types'
 
 import { GraphQLConnection, GraphQLNode, GraphQLEntityPolicy, Delta, Status } from '../types'
 
-import { KEY_RESULT_FORMAT, KEY_RESULT_TYPE } from './constants'
+import { KEY_RESULT_FORMAT, KEY_RESULT_MODE, KEY_RESULT_TYPE } from './constants'
 
 export type KeyResultTimelineEntry = KeyResultCheckIn | KeyResultComment
 
@@ -43,6 +43,7 @@ export interface KeyResult extends GraphQLNode {
   status: Status
   delta: Delta
   owner: User
+  mode: KEY_RESULT_MODE
   objective: Objective
   team: Team
   teamId?: Team['id']

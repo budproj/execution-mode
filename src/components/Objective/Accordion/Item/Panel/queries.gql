@@ -7,6 +7,7 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!, $withTeams: Boolean! = true) 
           id
           title
           format
+          mode
           type
           teamId
           delta {
