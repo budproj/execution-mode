@@ -1,0 +1,14 @@
+mutation PUBLISH_OKR($objectiveID: ID!) {
+  publishOkr(id: $objectiveID) {
+    id
+    mode
+    keyResults(order: { createdAt: ASC }) {
+      edges {
+        node {
+          id
+          mode
+        }
+      }
+    }
+  }
+}

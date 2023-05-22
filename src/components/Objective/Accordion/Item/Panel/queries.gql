@@ -1,7 +1,11 @@
-query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!, $withTeams: Boolean! = true) {
+query GET_OBJECTIVE_KEY_RESULTS(
+  $objectiveID: ID!
+  $withTeams: Boolean! = true
+  $mode: KeyResultMode! = PUBLISHED
+) {
   objective(id: $objectiveID) {
     id
-    keyResults(order: { createdAt: ASC }) {
+    keyResults(order: { createdAt: ASC }, mode: $mode) {
       edges {
         node {
           id
@@ -78,12 +82,3 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!, $withTeams: Boolean! = true) 
   }
 }
 
-
-
-mutation UPDATE_DRAFT_OBJECTIVE($objectiveID: ID!, $mode: String!) { updateObjective(id: $objectiveID, data: {
-    mode: $mode,
-  }) {
-    id
-    mode
-  }
-}

@@ -6,6 +6,7 @@ type ConfirmPublishingOKRMessages =
   | 'secondStageTitle'
   | 'secondStageDescription'
   | 'inputLabel'
+  | 'publishOKRSuccessMessage'
 
 export default defineMessages<ConfirmPublishingOKRMessages>({
   keyword: {
@@ -42,5 +43,12 @@ export default defineMessages<ConfirmPublishingOKRMessages>({
     id: 'xq1mQp',
     description:
       'This message appears in the label of input that the user uses to confirm their action of posting an OKR.',
+  },
+
+  publishOKRSuccessMessage: {
+    defaultMessage: 'Seu OKR foi publicado com sucesso!',
+    id: 'OdFISq',
+    description:
+      'This message appears in the toast messat that indicates the success on publish an OKR.',
   },
 })

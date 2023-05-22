@@ -5,6 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
@@ -58,6 +59,7 @@ export const ObjectiveKeyResults = ({
       variables: {
         objectiveID,
         withTeams: Boolean(teamID),
+        mode: isDraft ? KEY_RESULT_MODE.DRAFT : KEY_RESULT_MODE.PUBLISHED,
       },
       onCompleted: (data) => {
         loadObjective(data.objective)
