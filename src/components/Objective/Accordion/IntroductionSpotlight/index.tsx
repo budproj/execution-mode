@@ -92,7 +92,7 @@ const IntroductionSpotlight = ({ objectiveID }: IntroductionSpotlightProperties)
           </Grid>
         </HStack>
       </VStack>
-      <CreateObjectiveWorkflow objectiveId={objectiveID} />
+      <CreateObjectiveWorkflow objectiveID={objectiveID} />
     </VStack>
   )
 }

@@ -4,15 +4,22 @@ import { useIntl } from 'react-intl'
 
 import messages from 'src/components/Base/EditableControls/messages'
 import CheckIcon from 'src/components/Icon/Check'
+import { ObjectiveMode } from 'src/components/Objective/types'
 
 import actionMessages from './messages'
 
 interface ConfirmButtonProperties extends ButtonProps {
   isLoading?: boolean
+  mode?: ObjectiveMode
   isDisabled?: boolean
 }
 
-export const ConfirmButton = ({ isLoading, isDisabled, ...rest }: ConfirmButtonProperties) => {
+export const ConfirmButton = ({
+  isLoading,
+  mode,
+  isDisabled,
+  ...rest
+}: ConfirmButtonProperties) => {
   const intl = useIntl()
 
   return (
@@ -35,7 +42,7 @@ export const ConfirmButton = ({ isLoading, isDisabled, ...rest }: ConfirmButtonP
       icon={<CheckIcon desc={intl.formatMessage(messages.submitButtonDesc)} fill="currentColor" />}
       {...rest}
     >
-      {intl.formatMessage(actionMessages.submitButton)}
+      {intl.formatMessage(actionMessages.submitButton, { mode })}
     </Button>
   )
 }

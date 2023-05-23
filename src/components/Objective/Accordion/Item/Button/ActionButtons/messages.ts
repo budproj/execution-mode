@@ -9,8 +9,8 @@ export default defineMessages<ActionButtons>({
     description: 'Cancel button title',
   },
   submitButton: {
-    defaultMessage: 'Avançar',
-    id: 'O3rfs0',
+    defaultMessage: '{mode, select, DRAFT {Avançar} other {Concluir}}',
+    id: 'XtA5dv',
     description: 'Submit button title',
   },
 })

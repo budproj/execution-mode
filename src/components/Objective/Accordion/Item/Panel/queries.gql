@@ -1,7 +1,7 @@
 query GET_OBJECTIVE_KEY_RESULTS(
   $objectiveID: ID!
   $withTeams: Boolean! = true
-  $mode: KeyResultMode! = PUBLISHED
+  $mode: KeyResultMode = PUBLISHED
 ) {
   objective(id: $objectiveID) {
     id

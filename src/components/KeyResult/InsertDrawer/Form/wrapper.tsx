@@ -5,11 +5,13 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { ObjectiveMode } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
+import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
 import meAtom from '../../../../state/recoil/user/me'
-import { KEY_RESULT_FORMAT, KEY_RESULT_TYPE } from '../../constants'
+import { KEY_RESULT_FORMAT, KEY_RESULT_MODE, KEY_RESULT_TYPE } from '../../constants'
 import { KeyResult } from '../../types'
 
 import { FormActions } from './actions'
@@ -90,6 +92,7 @@ export const InsertOrUpdateKeyResultForm = ({
   }))
 
   const setLastInsertedKeyResultID = useSetRecoilState(lastInsertedKeyResultIDAtom)
+  const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const [createKeyResult, { data, error }] = useMutation<CreateKeyResultMutationResult>(
     queries.CREATE_KEY_RESULT,
   )
@@ -124,6 +127,10 @@ export const InsertOrUpdateKeyResultForm = ({
 
   const handleSubmit = async (values: FormValues): Promise<void> => {
     const areAllFieldsValid = validateFields(values)
+
+    const keyResultMode =
+      objective?.mode === ObjectiveMode.DRAFT ? KEY_RESULT_MODE.DRAFT : KEY_RESULT_MODE.PUBLISHED
+
     if (!areAllFieldsValid) {
       if (onValidationError) onValidationError()
       return
@@ -131,6 +138,7 @@ export const InsertOrUpdateKeyResultForm = ({
 
     const variables = {
       ...values,
+      mode: keyResultMode,
       type: defineKeyResultType(values),
     }
 

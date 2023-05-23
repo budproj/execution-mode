@@ -25,8 +25,6 @@ export const Header = ({
     [DANGERS_ACTIONS_HEADER_COLORS_SCHEME.RED, red],
   ])
 
-  console.log({ colorScheme })
-
   return (
     <Stack alignItems="center" spacing={8} px={4}>
       <DangerActionIcon desc="ds" color={colors.get(colorScheme)} />

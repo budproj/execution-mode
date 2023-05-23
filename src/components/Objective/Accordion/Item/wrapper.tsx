@@ -36,12 +36,6 @@ export const ObjectiveAccordionItem = ({
   const isLoaded = Boolean(objective)
   const formikReference = useRef<FormikProps<EditModeValues> | null>(null)
 
-  const handleNextStep = () => {
-    if (formikReference.current) {
-      formikReference.current.handleSubmit()
-    }
-  }
-
   useEffect(() => {
     if (typeof objective?.status?.confidence !== 'undefined')
       setConfidence(objective?.status?.confidence)
@@ -80,7 +74,6 @@ export const ObjectiveAccordionItem = ({
               isDisabled={isDisabled}
               description={objective?.description}
               isDraft={isDraft}
-              handleNextStep={handleNextStep}
             />
           </Box>
         )

@@ -8,6 +8,7 @@ mutation CREATE_KEY_RESULT(
   $teamID: ID
   $type: KeyResultType
   $description: String
+  $mode: String! = "PUBLISHED"
 ) {
   createKeyResult(
     data: {
@@ -15,6 +16,7 @@ mutation CREATE_KEY_RESULT(
       initialValue: $initialValue
       goal: $goal
       format: $format
+      mode: $mode
       ownerId: $ownerID
       objectiveId: $objectiveID
       teamId: $teamID

@@ -6,25 +6,26 @@ import {
   InputRightElement,
   useToast,
   Spinner,
-  Textarea,
   Stack,
+  Textarea,
+  Box,
 } from '@chakra-ui/react'
 import { Form, Formik, Field, FormikProps } from 'formik'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { ConfirmButton } from 'src/components/Base/EditableControls/confirm-button'
 import GuideListCreateOkr from 'src/components/KeyResult/List/Body/GuideListCreateOKR/guide-list-create-okr'
 import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 
 import { useRecoilFamilyLoader } from '../../../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../../../state/recoil/objective'
 import { CancelIcon } from '../../../../Icon/Cancel/wrapper'
-import { Objective } from '../../../types'
+import { Objective, ObjectiveMode } from '../../../types'
 import { stopAccordionOpen } from '../../handlers'
 
 import { CancelButton } from './ActionButtons/cancel-button'
+import { ConfirmButton } from './ActionButtons/confirm-button'
 import messages from './messages'
 import queries from './queries.gql'
 
@@ -62,11 +63,6 @@ export const EditMode = React.forwardRef<typeof Formik<EditModeValues>, EditMode
       title: objective?.title ?? '',
       description: objective?.description ?? '',
     }
-
-    const handleCancel = () => {
-      setObjectiveToViewMode(objective?.id)
-    }
-
     const handleSubmit = async (values: EditModeValues) => {
       await updateObjective({
         variables: {
@@ -76,7 +72,12 @@ export const EditMode = React.forwardRef<typeof Formik<EditModeValues>, EditMode
         },
       })
 
-      setObjectiveToFilledMode(objective?.id)
+      if (objective?.mode === ObjectiveMode.DRAFT) setObjectiveToFilledMode(objective?.id)
+      if (objective?.mode === ObjectiveMode.PUBLISHED) setObjectiveToViewMode(objective?.id)
+    }
+
+    const handleCancel = () => {
+      setObjectiveToViewMode(objective?.id)
     }
 
     const validateTitle = (value: string): string | undefined => {
@@ -106,59 +107,66 @@ export const EditMode = React.forwardRef<typeof Formik<EditModeValues>, EditMode
             <FormControl
               id={`update-objective-${objective?.id ?? ''}`}
               display="flex"
-              flexDirection="row"
-              alignItems="center"
+              flexDirection="column"
+              alignItems="flex-start"
               gridGap={8}
               onClick={stopAccordionOpen}
             >
-              <InputGroup>
-                <Field
-                  autoFocus
-                  name="title"
-                  as={Input}
-                  validate={validateTitle}
-                  isInvalid={errors.title}
-                  // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
-                  onKeyUp={(event: KeyboardEvent) => event.preventDefault()}
-                />
-                <InputRightElement h="full" pr={4}>
-                  {loading && <Spinner color="gray.500" />}
-                  {errors.title && (
-                    <CancelIcon
-                      fill="red.500"
-                      desc={intl.formatMessage(messages.invalidIconDesc)}
-                    />
-                  )}
-                </InputRightElement>
-              </InputGroup>
+              <Box width="100%">
+                <InputGroup mb="18px">
+                  <Field
+                    name="title"
+                    as={Input}
+                    placeholder={intl.formatMessage(messages.titlePlaceholder)}
+                    _placeholder={{ color: 'new-gray.500' }}
+                    validate={validateTitle}
+                    isInvalid={errors.title}
+                    // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
+                    onKeyUp={(event: KeyboardEvent) => event.preventDefault()}
+                  />
+                  <InputRightElement h="full" pr={4}>
+                    {loading && <Spinner color="gray.500" />}
+                    {errors.title && (
+                      <CancelIcon
+                        fill="red.500"
+                        desc={intl.formatMessage(messages.invalidIconDesc)}
+                      />
+                    )}
+                  </InputRightElement>
+                </InputGroup>
 
-              <InputGroup>
-                <Field
-                  name="description"
-                  as={Textarea}
-                  placeholder={intl.formatMessage(messages.descriptionPlaceholder)}
-                  _placeholder={{ color: 'new-gray.500' }}
-                  validate={validateDescription}
-                  isInvalid={errors.description}
-                  // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
-                  onKeyUp={(event: KeyboardEvent) => event.preventDefault()}
-                />
-                <InputRightElement h="full" pr={4}>
-                  {loading && <Spinner color="gray.500" />}
-                  {errors.description && (
-                    <CancelIcon
-                      fill="red.500"
-                      desc={intl.formatMessage(messages.invalidIconDesc)}
-                    />
-                  )}
-                </InputRightElement>
-              </InputGroup>
+                <InputGroup>
+                  <Field
+                    name="description"
+                    as={Textarea}
+                    placeholder={intl.formatMessage(messages.descriptionPlaceholder)}
+                    _placeholder={{ color: 'new-gray.500' }}
+                    validate={validateDescription}
+                    isInvalid={errors.description}
+                    // This is required until https://github.com/chakra-ui/chakra-ui/issues/4320 is fixed
+                    onKeyUp={(event: KeyboardEvent) => event.preventDefault()}
+                  />
+                  <InputRightElement h="full" pr={4}>
+                    {loading && <Spinner color="gray.500" />}
+                    {errors.description && (
+                      <CancelIcon
+                        fill="red.500"
+                        desc={intl.formatMessage(messages.invalidIconDesc)}
+                      />
+                    )}
+                  </InputRightElement>
+                </InputGroup>
+              </Box>
 
               <GuideListCreateOkr />
 
               <Stack width="100%" direction="row" spacing={4} justifyContent="end">
                 <CancelButton onCancel={handleCancel} />
-                <ConfirmButton isLoading={loading} isDisabled={Object.values(errors).length > 0} />
+                <ConfirmButton
+                  isLoading={loading}
+                  isDisabled={Object.values(errors).length > 0}
+                  mode={objective?.mode}
+                />
               </Stack>
             </FormControl>
           </Form>

@@ -1,47 +1,75 @@
+import { useMutation } from '@apollo/client'
 import { Button, HStack, useToast } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import queries from 'src/components/Objective/Accordion/Item/Button/queries.gql'
+import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
+import { objectiveAtomFamily } from 'src/state/recoil/objective'
 import {
   objectiveContext,
-  ObjectiveMode,
+  ObjectiveViewMode,
   setObjectiveToMode,
 } from 'src/state/recoil/objective/context'
 
-import { Objective } from '../../types'
+import { Objective, ObjectiveMode } from '../../types'
 
 import messages from './messages'
 
+interface UpdateObjectiveMutationResult {
+  updateObjective: Partial<Objective>
+}
+
 interface CreateObjectiveWorkflow {
-  objectiveId?: Objective['id']
+  objectiveID?: Objective['id']
   handleNextStep?: () => void
 }
 
-const CreateObjectiveWorkflow = ({ objectiveId, handleNextStep }: CreateObjectiveWorkflow) => {
+const CreateObjectiveWorkflow = ({ objectiveID, handleNextStep }: CreateObjectiveWorkflow) => {
   const toast = useToast()
   const intl = useIntl()
-  const context = useRecoilValue(objectiveContext(objectiveId))
-  const setObjectiveIDToEditdMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
-  const setObjectiveToViewMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.VIEW))
+  const context = useRecoilValue(objectiveContext(objectiveID))
+  const setObjectiveIDToEditdMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.EDIT))
+  const setObjectiveToViewMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.VIEW))
 
-  const handleObjectiveToDraftMode = () => {
-    setObjectiveToViewMode(objectiveId)
-    toast({
-      title: 'Agora seu objeto está em modo rascunho!',
-      status: 'success',
+  const [loadObjectiveOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
+  const [updateObjective] = useMutation<UpdateObjectiveMutationResult>(
+    queries.UPDATE_DRAFT_OBJECTIVE,
+    {
+      onCompleted: (data) => {
+        loadObjectiveOnRecoil(data.updateObjective)
+        toast({
+          title: 'Agora seu objeto está em modo rascunho!',
+          status: 'success',
+        })
+      },
+    },
+  )
+
+  const handleSubmit = async () => {
+    await updateObjective({
+      variables: {
+        objectiveID,
+        mode: ObjectiveMode.DRAFT,
+      },
     })
   }
 
-  const handleNextWorkflowStep = () => {
-    if (handleNextStep && context.mode === ObjectiveMode.EDIT) handleNextStep()
+  const handleObjectiveToDraftMode = async () => {
+    await handleSubmit()
+    setObjectiveToViewMode(objectiveID)
+  }
 
-    if (context.mode === ObjectiveMode.FILLED) handleObjectiveToDraftMode()
+  const handleNextWorkflowStep = () => {
+    if (handleNextStep && context.mode === ObjectiveViewMode.EDIT) handleNextStep()
+
+    if (context.mode === ObjectiveViewMode.FILLED) handleObjectiveToDraftMode()
   }
 
   return (
     <HStack justifyContent="flex-end" w="100%">
-      {context.mode === ObjectiveMode.FILLED && (
+      {context.mode === ObjectiveViewMode.FILLED && (
         <Button
           p={4}
           bg="new-gray.300"
@@ -50,7 +78,7 @@ const CreateObjectiveWorkflow = ({ objectiveId, handleNextStep }: CreateObjectiv
           fontWeight={500}
           color="new-gray.800"
           _hover={{ backgroundColor: 'new-gray.400' }}
-          onClick={() => setObjectiveIDToEditdMode(objectiveId)}
+          onClick={() => setObjectiveIDToEditdMode(objectiveID)}
         >
           {intl.formatMessage(messages.goBackButton)}
         </Button>

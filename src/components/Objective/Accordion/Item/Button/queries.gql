@@ -1,9 +1,14 @@
-mutation UPDATE_OBJECTIVE($objectiveID: ID!, $title: String!, $description: String) { updateObjective(id: $objectiveID, data: {
-    title: $title,
-    description: $description
-  }) {
+mutation UPDATE_OBJECTIVE($objectiveID: ID!, $title: String!, $description: String) {
+  updateObjective(id: $objectiveID, data: { title: $title, description: $description }) {
     id
     title
     description
+  }
+}
+
+mutation UPDATE_DRAFT_OBJECTIVE($objectiveID: ID!, $mode: String!) {
+  updateObjective(id: $objectiveID, data: { mode: $mode }) {
+    id
+    mode
   }
 }
