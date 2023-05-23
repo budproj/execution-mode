@@ -133,11 +133,6 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
         teamID: null,
       },
       onCompleted: async (data) => {
-        toast({
-          title: intl.formatMessage(objectiveMessages.draftObjectiveSuccessToastMessage),
-          status: 'success',
-        })
-
         setObjectiveIDToEditMode(data.createObjective.id)
         dispatchCreatedObjective({ isPersonal: true, userId: userID })
       },
