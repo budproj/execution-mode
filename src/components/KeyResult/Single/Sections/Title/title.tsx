@@ -39,6 +39,8 @@ const KeyResultSectionTitle = ({
 
   const [teste, aaaa] = useRecoilState(keyResultInsertDrawerObjectiveID)
 
+  console.log({ teste, aaaa })
+
   const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 
   const onDeleteKeyResult = () => resetOpenDrawer()

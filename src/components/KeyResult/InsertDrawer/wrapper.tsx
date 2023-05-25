@@ -106,7 +106,6 @@ export const KeyResultInsertDrawer = ({
           <KeyResultInsertOrUpdateDrawerHeader isEditing={isEditing} />
           <Flex flexGrow={1}>
             <InsertOrUpdateKeyResultForm
-              isEditing={isEditing}
               isPersonalKR={isPersonalKR}
               objectiveID={drawerObjectiveID}
               teamID={teamID}
