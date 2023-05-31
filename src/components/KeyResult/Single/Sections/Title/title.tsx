@@ -33,10 +33,6 @@ const KeyResultSectionTitle = ({
   const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
   const isEditingKeyResultId = useSetRecoilState(isEditingKeyResultIDAtom)
 
-  const setKeyResultDrawerOpenedKeyResultID = useSetRecoilState(
-    keyResultReadDrawerOpenedKeyResultID,
-  )
-
   const [teste, aaaa] = useRecoilState(keyResultInsertDrawerObjectiveID)
 
   console.log({ teste, aaaa })
@@ -48,8 +44,7 @@ const KeyResultSectionTitle = ({
   const handleEditClick = () => {
     setKeyResultInsertDrawerObjectiveID(objective?.id)
     isEditingKeyResultId(keyResult?.id)
-    // eslint-disable-next-line unicorn/no-useless-undefined
-    setKeyResultDrawerOpenedKeyResultID(undefined)
+    resetOpenDrawer()
   }
 
   const isLoaded = Boolean(keyResult)

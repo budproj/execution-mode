@@ -20,6 +20,7 @@ export const DescriptionInput = ({ isLoading }: DescriptionInputProperties) => {
           name="description"
           as={Textarea}
           placeholder={intl.formatMessage(messages.secondInputPlaceholder)}
+          _placeholder={{ color: 'black.400' }}
           minH={28}
         />
       </Skeleton>

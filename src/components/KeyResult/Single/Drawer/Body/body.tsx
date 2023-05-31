@@ -11,7 +11,7 @@ import {
 } from 'src/components/KeyResult/Single/Sections'
 import { KeyResultSingleSectionDeadline } from 'src/components/KeyResult/Single/Sections/Deadline/wrapper'
 import { KeyResultSingleSectionGoal } from 'src/components/KeyResult/Single/Sections/Goal/wrapper'
-import { KEY_RESULT_FORMAT } from 'src/components/KeyResult/constants'
+import { KEY_RESULT_FORMAT, KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultChecklistAtom } from 'src/state/recoil/key-result/checklist'
@@ -47,7 +47,7 @@ const KeyResultDrawerBody = ({
         : undefined
       : undefined
 
-  const isDraft = true
+  const isDraft = keyResult?.mode === KEY_RESULT_MODE.DRAFT
 
   return (
     <Stack

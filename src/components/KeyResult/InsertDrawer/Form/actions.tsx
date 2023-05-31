@@ -2,9 +2,10 @@ import { Button, Skeleton, Stack } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
+import { keyResultInsertDrawerObjectiveID } from 'src/state/recoil/key-result/drawers/insert/objective-id'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import messages from './messages'
@@ -13,20 +14,32 @@ interface FormActionsInterface {
   onClose?: () => void
   isEditingKeyResult?: boolean
   isLoading?: boolean
+  editingKeyResultId?: string
 }
 
-export const FormActions = ({ onClose, isLoading, isEditingKeyResult }: FormActionsInterface) => {
+export const FormActions = ({
+  onClose,
+  isLoading,
+  isEditingKeyResult,
+  editingKeyResultId,
+}: FormActionsInterface) => {
   const intl = useIntl()
+  const resetKeyResultInsertDrawerObjectiveID = useResetRecoilState(
+    keyResultInsertDrawerObjectiveID,
+  )
+  const resetEditingModeKeyResultID = useResetRecoilState(isEditingKeyResultIDAtom)
+
   const setKeyResultDrawerOpenedKeyResultID = useSetRecoilState(
     keyResultReadDrawerOpenedKeyResultID,
   )
-  const isEditingKeyResultId = useRecoilValue(isEditingKeyResultIDAtom)
 
   const { resetForm, submitForm, isSubmitting } = useFormikContext()
 
   const handleCancel = () => {
     if (isEditingKeyResult) {
-      setKeyResultDrawerOpenedKeyResultID(isEditingKeyResultId)
+      resetEditingModeKeyResultID()
+      resetKeyResultInsertDrawerObjectiveID()
+      setKeyResultDrawerOpenedKeyResultID(editingKeyResultId)
     }
 
     resetForm()

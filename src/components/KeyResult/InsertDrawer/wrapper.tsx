@@ -8,7 +8,7 @@ import GET_KEY_RESULT_WITH_ID from 'src/components/KeyResult/Single/Drawer/queri
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import editingKeyResultAtom from 'src/state/recoil/key-result/drawers/update/editing-key-result-atom'
+import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
 
 import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
 import { GetKeyResultWithIDQuery } from '../Single/Drawer/content'
@@ -29,12 +29,13 @@ export const KeyResultInsertDrawer = ({
 }: KeyResultInsertDrawerProperties) => {
   const [isKeyResultEditingLoading, setIsKeyResultEditingLoading] = useState(false)
   const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
-  const editingModeKeyResultID = useRecoilValue(editingKeyResultAtom)
+  // Const editingModeKeyResultID = useRecoilValue(editingKeyResultAtom)
+  const editingModeKeyResultID = useRecoilValue(isEditingKeyResultIDAtom)
 
   const { refetch } = useGetKeyResultWithId(editingModeKeyResultID)
 
   const resetDrawerObjectiveID = useResetRecoilState(keyResultInsertDrawerObjectiveID)
-  const resetEditingModeKeyResultID = useResetRecoilState(editingKeyResultAtom)
+  const resetEditingModeKeyResultID = useResetRecoilState(isEditingKeyResultIDAtom)
   const { dispatch: dispatchCreateKeyResult } = useEvent(EventType.CREATED_KEY_RESULT)
   const intl = useIntl()
   const toast = useToast()
@@ -106,6 +107,7 @@ export const KeyResultInsertDrawer = ({
           <KeyResultInsertOrUpdateDrawerHeader isEditing={isEditing} />
           <Flex flexGrow={1}>
             <InsertOrUpdateKeyResultForm
+              editingKeyResultId={editingModeKeyResultID}
               isPersonalKR={isPersonalKR}
               objectiveID={drawerObjectiveID}
               teamID={teamID}
