@@ -88,7 +88,7 @@ const KeyResultSectionTimelineContent = ({
       </Flex>
     </InfiniteScroll>
   ) : (
-    <KeyResultSectionTimelineCardEmptyState />
+    <KeyResultSectionTimelineCardEmptyState keyResultID={keyResultID} />
   )
 }
 

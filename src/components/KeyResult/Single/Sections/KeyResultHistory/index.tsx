@@ -12,8 +12,6 @@ interface KeyResultHistoryProperties {
 export const KeyResultHistory = ({ keyResultID }: KeyResultHistoryProperties): JSX.Element => {
   const hasHistory = true
 
-  console.log({ keyResultID })
-
   return (
     <Box>
       <Flex>

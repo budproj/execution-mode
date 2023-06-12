@@ -60,6 +60,23 @@ const defineKeyResultType = (values: FormValues): KEY_RESULT_TYPE => {
   return values.initialValue <= values.goal ? KEY_RESULT_TYPE.ASCENDING : KEY_RESULT_TYPE.DESCENDING
 }
 
+function getUpdatePatches<T extends Record<string, unknown>>(
+  oldKeyResultState: T,
+  newKeyResultState: T,
+): Partial<T> {
+  const differingAttributes: Partial<T> = {}
+
+  const keys: Array<keyof T> = Object.keys(oldKeyResultState) as Array<keyof T>
+
+  for (const key of keys) {
+    if (oldKeyResultState[key] !== newKeyResultState[key]) {
+      differingAttributes[key] = newKeyResultState[key]
+    }
+  }
+
+  return differingAttributes
+}
+
 export const InsertOrUpdateKeyResultForm = ({
   onClose,
   onSuccess,
@@ -144,9 +161,11 @@ export const InsertOrUpdateKeyResultForm = ({
       type: defineKeyResultType(values),
     }
 
+    const differingAttributes = getUpdatePatches(initialValues, variables)
+
     await (editingModeKeyResult && keyResult
       ? updateKeyResult({
-          variables: { id: keyResult.id, ...variables },
+          variables: { id: keyResult.id, ...differingAttributes },
         }).catch(() => {
           if (onError) onError()
         })
