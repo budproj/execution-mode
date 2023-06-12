@@ -124,6 +124,7 @@ const SelectMenu = ({
         boxShadow="with-stroke.light"
         borderColor="new-gray.200"
         borderWidth={1}
+        minW="0px"
         overflow="hidden"
         zIndex={999}
       >

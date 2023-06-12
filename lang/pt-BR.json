@@ -1491,6 +1491,10 @@
     "defaultMessage": "Seu OKR foi publicado com sucesso!",
     "description": "This message appears in the toast messat that indicates the success on publish an OKR."
   },
+  "OeqC1F": {
+    "defaultMessage": "{user} alterou {key, select, DESCRIPTION {OR} GOAL {a} other {o}} {key, select, TITLE {título} DESCRIPTION {descrição} GOAL {meta} FORMAT {formato} TYPE {tipo} other {}}",
+    "description": "dsa"
+  },
   "OrqJud": {
     "defaultMessage": "Um ícone de coroa que indica o líder do time",
     "description": "The crown icon description"
@@ -1782,6 +1786,10 @@
   "TN6PhK": {
     "defaultMessage": "Meu perfil",
     "description": "MainAppBar user menu first item option"
+  },
+  "TRwumR": {
+    "defaultMessage": "Resultado-chave publicado",
+    "description": "dsa"
   },
   "TYmE01": {
     "defaultMessage": "Progresso atual",

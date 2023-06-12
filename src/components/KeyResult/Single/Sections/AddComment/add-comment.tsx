@@ -4,6 +4,7 @@ import { Form, Formik, FormikHelpers } from 'formik'
 import React from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { COMMENT_TYPE } from 'src/components/KeyResult/constants'
 import { KeyResult, KeyResultComment } from 'src/components/KeyResult/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
@@ -16,6 +17,8 @@ import queries from './queries.gql'
 
 export interface KeyResultSectionAddCommentProperties {
   keyResultID?: KeyResult['id']
+  parentCommentId?: KeyResultComment['id']
+  type?: COMMENT_TYPE
 }
 
 export interface CreateKeyResultCommentMutation {
@@ -26,7 +29,11 @@ export interface KeyResultSectionAddCommentInitialValues {
   text: KeyResultComment['text']
 }
 
-const KeyResultSectionAddComment = ({ keyResultID }: KeyResultSectionAddCommentProperties) => {
+const KeyResultSectionAddComment = ({
+  keyResultID,
+  parentCommentId,
+  type = COMMENT_TYPE.COMMENT,
+}: KeyResultSectionAddCommentProperties) => {
   const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_COMMENT)
   const userID = useRecoilValue(meAtom)
   const [user, updateUser] = useRecoilState(selectUser(userID))
@@ -54,6 +61,8 @@ const KeyResultSectionAddComment = ({ keyResultID }: KeyResultSectionAddCommentP
     const keyResultCommentInput = {
       keyResultId: keyResultID,
       text: values.text,
+      parentId: parentCommentId,
+      type,
     }
 
     await createComment({

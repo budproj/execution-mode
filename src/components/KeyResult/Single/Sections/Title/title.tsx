@@ -1,7 +1,7 @@
 import { Button, Flex, HStack, Skeleton, SkeletonText, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
@@ -32,10 +32,6 @@ const KeyResultSectionTitle = ({
   const intl = useIntl()
   const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
   const isEditingKeyResultId = useSetRecoilState(isEditingKeyResultIDAtom)
-
-  const [teste, aaaa] = useRecoilState(keyResultInsertDrawerObjectiveID)
-
-  console.log({ teste, aaaa })
 
   const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 

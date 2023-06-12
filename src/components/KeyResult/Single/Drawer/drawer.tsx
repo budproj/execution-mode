@@ -45,8 +45,6 @@ const KeyResultDrawer = () => {
   const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
   const setIsChecklistOpen = useSetRecoilState(isCheckListCollapseOpenAtom)
 
-  console.log({ keyResultID })
-
   const objective = useRecoilValue(objectiveSelector(keyResultID))
 
   const handleClose = () => {

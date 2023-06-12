@@ -1,4 +1,12 @@
-import { Box, BoxProps, BorderProps, BackgroundProps, Stack } from '@chakra-ui/react'
+import {
+  Box,
+  BoxProps,
+  BorderProps,
+  BackgroundProps,
+  Stack,
+  StyleProps,
+  Divider,
+} from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
@@ -10,7 +18,7 @@ import meAtom from 'src/state/recoil/user/me'
 import { CardHeader } from './header'
 import KeyResultSectionTimelineCardBaseOptions from './options'
 
-export interface KeyResultSectionTimelineCardBaseProperties {
+export interface KeyResultSectionTimelineCardBaseProperties extends StyleProps {
   children: ReactElement | ReactElement[]
   borderRadius: BorderProps['borderRadius']
   borderWidth: BorderProps['borderWidth']
@@ -40,6 +48,7 @@ const KeyResultSectionTimelineCardBase = ({
   onDelete,
   policy,
   intlCardType,
+  ...rest
 }: KeyResultSectionTimelineCardBaseProperties) => {
   const myID = useRecoilValue(meAtom)
 
@@ -53,6 +62,7 @@ const KeyResultSectionTimelineCardBase = ({
       borderRadius={borderRadius}
       borderBottomRadius={borderBottomRadius ?? borderRadius}
       position="relative"
+      {...rest}
     >
       {policy?.delete === GraphQLEffect.ALLOW && (
         <Box position="absolute" right={4} top={4}>
@@ -65,9 +75,12 @@ const KeyResultSectionTimelineCardBase = ({
 
       <Stack spacing={3}>
         {!hideUser && (
-          <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
-            <CardHeader isLoaded={isLoaded} userID={user?.id} date={new Date(date ?? 0)} />
-          </IntlLink>
+          <Box>
+            <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
+              <CardHeader isLoaded={isLoaded} userID={user?.id} date={new Date(date ?? 0)} />
+            </IntlLink>
+            <Divider />
+          </Box>
         )}
         {children}
       </Stack>
