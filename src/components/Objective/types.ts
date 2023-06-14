@@ -13,9 +13,7 @@ import { Team } from '../Team/types'
 
 export enum ObjectiveMode {
   PUBLISHED = 'PUBLISHED',
-  COMPLETED = 'COMPLETED',
   DRAFT = 'DRAFT',
-  DELETED = 'DELETED',
 }
 
 export interface Objective extends GraphQLNode {
