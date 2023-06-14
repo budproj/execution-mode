@@ -1,6 +1,9 @@
 import { defineMessages } from 'react-intl'
 
-type CreateObjectiveWorkflowMessages = 'goBackButton' | 'nextStepButton'
+type CreateObjectiveWorkflowMessages =
+  | 'goBackButton'
+  | 'nextStepButton'
+  | 'objectiveCreatedToastTitle'
 
 export default defineMessages<CreateObjectiveWorkflowMessages>({
   goBackButton: {
@@ -15,5 +18,11 @@ export default defineMessages<CreateObjectiveWorkflowMessages>({
     id: 'LBZ+5U',
     description:
       ' This message appears on the button to move to the next step in the workflow for creating or editing an objective.',
+  },
+
+  objectiveCreatedToastTitle: {
+    defaultMessage: 'Agora seu objetivo está em modo rascunho!',
+    id: '0nY7VZ',
+    description: 'This message appears in a toast when a objective is created.',
   },
 })

@@ -40,7 +40,7 @@ const CreateObjectiveWorkflow = ({ objectiveID, handleNextStep }: CreateObjectiv
       onCompleted: (data) => {
         loadObjectiveOnRecoil(data.updateObjective)
         toast({
-          title: 'Agora seu objeto está em modo rascunho!',
+          title: intl.formatMessage(messages.objectiveCreatedToastTitle),
           status: 'success',
         })
       },
