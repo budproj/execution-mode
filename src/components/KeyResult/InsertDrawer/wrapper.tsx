@@ -29,7 +29,6 @@ export const KeyResultInsertDrawer = ({
 }: KeyResultInsertDrawerProperties) => {
   const [isKeyResultEditingLoading, setIsKeyResultEditingLoading] = useState(false)
   const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
-  // Const editingModeKeyResultID = useRecoilValue(editingKeyResultAtom)
   const editingModeKeyResultID = useRecoilValue(isEditingKeyResultIDAtom)
 
   const { refetch } = useGetKeyResultWithId(editingModeKeyResultID)
