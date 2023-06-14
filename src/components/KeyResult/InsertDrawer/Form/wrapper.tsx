@@ -7,6 +7,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ObjectiveMode } from 'src/components/Objective/types'
 import { Team } from 'src/components/Team/types'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
@@ -77,6 +78,8 @@ function getUpdatePatches<T extends Record<string, unknown>>(
   return differingAttributes
 }
 
+const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
+
 export const InsertOrUpdateKeyResultForm = ({
   onClose,
   onSuccess,
@@ -90,6 +93,8 @@ export const InsertOrUpdateKeyResultForm = ({
   editingKeyResultId,
 }: InsertKeyResultFormProperties) => {
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
+
+  const setTimeline = useSetRecoilState(timelineSelector(editingKeyResultId))
 
   const router = useRouter()
 
@@ -166,6 +171,10 @@ export const InsertOrUpdateKeyResultForm = ({
     await (editingModeKeyResult && keyResult
       ? updateKeyResult({
           variables: { id: keyResult.id, ...differingAttributes },
+          onCompleted: () => {
+            // eslint-disable-next-line unicorn/no-useless-undefined
+            setTimeline(undefined)
+          },
         }).catch(() => {
           if (onError) onError()
         })
