@@ -8,6 +8,7 @@ import {
   KeyResultSectionOwner,
   KeyResultSectionTimeline,
   KeyResultSectionTitle,
+  KeyResultSummarizeSection,
 } from 'src/components/KeyResult/Single/Sections'
 import { KeyResultSingleSectionDeadline } from 'src/components/KeyResult/Single/Sections/Deadline/wrapper'
 import { KeyResultSingleSectionGoal } from 'src/components/KeyResult/Single/Sections/Goal/wrapper'
@@ -93,10 +94,8 @@ const KeyResultDrawerBody = ({
         borderBottomWidth={1}
       >
         <Divider borderColor="gray.100" />
-
         <KeyResultProgress keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
-
         <Stack direction="row">
           <Box flexGrow={1}>
             <KeyResultSingleSectionGoal keyResultID={keyResultID} isLoading={isLoading} />
@@ -107,11 +106,11 @@ const KeyResultDrawerBody = ({
           </Box>
         </Stack>
         <Divider borderColor="gray.100" />
-
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
+        <KeyResultSummarizeSection />
+        <Divider borderColor="gray.100" />
         <KeyResultChecklistWrapper keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
-
         <KeyResultSectionOwner keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
         <KeyResultSectionObjective

@@ -13,3 +13,5 @@ export { default as KeyResultSectionAddCheckIn } from './AddCheckIn'
 export { default as KeyResultSectionTimeline } from './Timeline'
 
 export { default as KeyResultSectionAddComment } from './AddComment'
+
+export { default as KeyResultSummarizeSection } from './KeyResultSummarizeSection'
