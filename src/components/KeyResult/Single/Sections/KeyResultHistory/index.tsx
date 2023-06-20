@@ -16,7 +16,7 @@ export const KeyResultHistory = ({ keyResultID }: KeyResultHistoryProperties): J
     <Box>
       <Flex>
         <Text color="new-gray.800" fontWeight={700}>
-          SPOTLIGHT
+          SPOTLIGHT | {keyResultID}
         </Text>
         <Tag size="sm" variant="solid" colorScheme="brand" ml={1}>
           novo!
