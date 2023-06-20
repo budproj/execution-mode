@@ -8,7 +8,6 @@ import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { Objective } from 'src/components/Objective/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
-import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
 import { keyResultInsertDrawerObjectiveID } from 'src/state/recoil/key-result/drawers/insert/objective-id'
@@ -23,8 +22,6 @@ export interface KeyResultSectionTitleProperties {
   objective?: Objective
 }
 
-const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
-
 const KeyResultSectionTitle = ({
   keyResultID,
   isDraft,
@@ -37,7 +34,6 @@ const KeyResultSectionTitle = ({
   const isEditingKeyResultId = useSetRecoilState(isEditingKeyResultIDAtom)
 
   const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-  const resetTimeline = useResetRecoilState(timelineSelector(keyResultID))
 
   const onDeleteKeyResult = () => resetOpenDrawer()
 
@@ -45,7 +41,6 @@ const KeyResultSectionTitle = ({
     setKeyResultInsertDrawerObjectiveID(objective?.id)
     isEditingKeyResultId(keyResult?.id)
     resetOpenDrawer()
-    resetTimeline()
   }
 
   const isLoaded = Boolean(keyResult)
