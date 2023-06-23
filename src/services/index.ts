@@ -4,11 +4,14 @@ import { BudConfig } from 'src/config'
 
 import { getCommentsInstance } from './comments'
 import { customHeadersInjector, errorResponseInjector } from './injectors'
+import { getLLMInstance } from './llm'
+import { LlmService } from './llm/llm.service'
 import { getRoutinesInstance } from './routines'
 
 export interface Services {
   routines: AxiosInstance
   comments: AxiosInstance
+  llm: LlmService
 }
 
 const configureInstance = (instance: AxiosInstance, authToken: string) => {
@@ -27,5 +30,6 @@ export const getServices = async (
   return {
     routines: configureInstance(getRoutinesInstance(config), authToken),
     comments: configureInstance(getCommentsInstance(config), authToken),
+    llm: new LlmService(configureInstance(getLLMInstance(config), authToken)),
   }
 }

@@ -50,8 +50,8 @@ export interface KeyResult extends GraphQLNode {
   policy: GraphQLEntityPolicy
   description?: string
   supportTeamMembers?: GraphQLConnection<User>
-  keyResultCheckIns?: GraphQLConnection<KeyResultCheckIn>
-  keyResultComments?: GraphQLConnection<KeyResultComment>
+  keyResultCheckIns: GraphQLConnection<KeyResultCheckIn>
+  keyResultComments: GraphQLConnection<KeyResultComment>
   timeline?: GraphQLConnection<KeyResultTimelineEntry>
   checkList: KeyResultChecklist
 }

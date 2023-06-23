@@ -127,11 +127,11 @@ export const InsertOrUpdateKeyResultForm = ({
     return invalidFields.length === 0
   }
 
+  const keyResultMode =
+    objective?.mode === ObjectiveMode.DRAFT ? KEY_RESULT_MODE.DRAFT : KEY_RESULT_MODE.PUBLISHED
+
   const handleSubmit = async (values: FormValues): Promise<void> => {
     const areAllFieldsValid = validateFields(values)
-
-    const keyResultMode =
-      objective?.mode === ObjectiveMode.DRAFT ? KEY_RESULT_MODE.DRAFT : KEY_RESULT_MODE.PUBLISHED
 
     if (!areAllFieldsValid) {
       if (onValidationError) onValidationError()
@@ -196,6 +196,7 @@ export const InsertOrUpdateKeyResultForm = ({
             isEditingKeyResult={Boolean(editingModeKeyResult)}
             isLoading={isLoading}
             editingKeyResultId={editingKeyResultId}
+            keyResultMode={keyResultMode}
             onClose={onClose}
           />
         </FormControl>
