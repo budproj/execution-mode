@@ -3,7 +3,6 @@ import { DefaultValue, selectorFamily } from 'recoil'
 
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
-import { GraphQLConnection } from 'src/components/types'
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 import { userAtomFamily } from 'src/state/recoil/user'
@@ -46,8 +45,7 @@ export const setLatestCheckIn =
 
     const keyResult = get(keyResultAtomFamily(id)) as KeyResult
 
-    const keyResultCheckInConnection =
-      keyResult?.keyResultCheckIns as GraphQLConnection<KeyResultCheckIn>
+    const keyResultCheckInConnection = keyResult?.keyResultCheckIns
     const keyResultCheckInEdges = keyResultCheckInConnection?.edges ?? []
     const keyResultCheckIns = keyResultCheckInEdges.map((edge) => edge.node)
 
