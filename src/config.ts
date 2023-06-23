@@ -59,6 +59,7 @@ export interface BudAPIs {
   routines: string
   comments: string
   restBase: string
+  llm: string
 }
 
 export interface Auth0Config {

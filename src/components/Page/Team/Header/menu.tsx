@@ -28,6 +28,8 @@ import {
 } from 'src/components/types'
 import useCadence from 'src/state/hooks/useCadence'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { isReloadNecessary } from 'src/state/recoil/objective'
 import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import { isEditTeamModalOpenAtom } from 'src/state/recoil/team'
@@ -66,6 +68,10 @@ type CreateDraftObjectiveQueryResult = {
 export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   const intl = useIntl()
   const toast = useToast()
+  const { dispatch: dispatchEventCreateDraftObjective } = useEvent(
+    EventType.CREATE_DRAFT_OBJECTIVE_CLICK,
+  )
+
   const setIsEditTeamModalOpen = useSetRecoilState(isEditTeamModalOpenAtom)
 
   const [hasInactiveObjectives, setHasInactiveObjectives] = useState<boolean>()
@@ -104,6 +110,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
       onCompleted: async (data) => {
         setObjectiveIDToEditMode(data.createObjective.id)
         setIsReloadNecessary(true)
+        dispatchEventCreateDraftObjective({})
       },
       onError: () => {
         toast({

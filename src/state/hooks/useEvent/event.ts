@@ -2,6 +2,10 @@ import { EventType } from './event-type'
 import { AnswerNowFormClickData } from './events/answer-now-form-click-data'
 import { ChangeTimePeriodClickData } from './events/change-time-period-click-data'
 import { CommentInRoutineAnswerClickData } from './events/comment-in-routine-click-data'
+import { CreateDraftFeedbackAnswerClickData } from './events/create-draft-feedback-answer-click-data'
+import { CreateDraftFeedbackClickData } from './events/create-draft-feedback-click-data'
+import { CreateDraftKeyResultClickData } from './events/create-draft-key-result-click-data'
+import { CreateDraftObjectiveClickData } from './events/create-draft-objective-click-data'
 import { CreatedKeyResultData } from './events/create-key-result-data'
 import { CreatedObjectiveData } from './events/create-objective-data'
 import { CreatedKeyResultCheckInData } from './events/created-key-result-check-in'
@@ -10,6 +14,7 @@ import { CreatedKeyResultCommentData } from './events/created-key-result-comment
 import { CreatedPersonalTaskEventData } from './events/created-personal-task'
 import { DeletedKeyResultCheckMarkEventData } from './events/deleted-key-result-check-mark'
 import { DeletedPersonalTaskEventData } from './events/deleted-personal-task'
+import { GenerateKeyResultSummarizeClickData } from './events/generate-key-result-summarize-click-data'
 import { IndicatorAccordionButtonClickData } from './events/indicator-accordion-button-click-data'
 import { IndicatorCheckListClickData } from './events/indicator-check-list-click-data'
 import { IndicatorProgressClickData } from './events/indicator-progress-click-data'
@@ -29,6 +34,7 @@ import { OpenedKeyResultChecklistEventData } from './events/opened-key-result-ch
 import { OpenedKeyResultDrawerEventData } from './events/opened-key-result-drawer'
 import { OpenedKeyResultReportConfidanceData } from './events/opened-key-result-report-confidance-data'
 import { PageViewEventData } from './events/page-view'
+import { PublishOkrClickData } from './events/publish-okr-click-data'
 import { RetrospectiveTabClickData } from './events/retrospective-tab-click-data'
 import { RoutineAnswerRowClickData } from './events/routine-answer-row-click-data'
 import { SendAnswerFormClickData } from './events/send-answer-form-click-data'
@@ -93,4 +99,10 @@ export type Event = {
   [EventType.INDICATORS_PROGRESS_CLICK]: IndicatorProgressClickData
   [EventType.INDICATORS_ROUTINE_CLICK]: IndicatorRoutineClickData
   [EventType.INDICATORS_REPORT_DOWNLOAD_CLICK]: IndicatorReportDownloadClickData
+  [EventType.CREATE_DRAFT_OBJECTIVE_CLICK]: CreateDraftObjectiveClickData
+  [EventType.CREATE_DRAFT_KEY_RESULT_CLICK]: CreateDraftKeyResultClickData
+  [EventType.CREATE_DRAFT_FEEDBACK_CLICK]: CreateDraftFeedbackClickData
+  [EventType.CREATE_DRAFT_FEEDBACK_ANSWER_CLICK]: CreateDraftFeedbackAnswerClickData
+  [EventType.PUBLISH_OKR_CLICK]: PublishOkrClickData
+  [EventType.GENERATE_KEY_RESULT_SUMMARIZE_CLICK]: GenerateKeyResultSummarizeClickData
 }

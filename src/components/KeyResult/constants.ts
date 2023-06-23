@@ -13,10 +13,8 @@ export enum KEY_RESULT_TYPE {
 }
 
 export enum KEY_RESULT_MODE {
-  COMPLETED = 'COMPLETED',
   PUBLISHED = 'PUBLISHED',
   DRAFT = 'DRAFT',
-  DELETED = 'DELETED',
 }
 
 export enum COMMENT_TYPE {

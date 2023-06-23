@@ -5,6 +5,8 @@ import { useIntl } from 'react-intl'
 
 import { DANGERS_ACTIONS_HEADER_COLORS_SCHEME } from 'src/components/Base/Dialogs/Confirmation/Base/Sections/header'
 import { DangerousActionConfirmationDialog } from 'src/components/Base/Dialogs/Confirmation/DangerousAction/wrapper'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
@@ -30,11 +32,13 @@ const ConfirmPublishingDialog = ({
 }: ConfirmPublishingDialogProperties) => {
   const intl = useIntl()
   const toast = useToast()
+  const { dispatch: dispatchEventPublishOkrClick } = useEvent(EventType.PUBLISH_OKR_CLICK)
 
   const [loadObjectiveOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
   const [publishOkr] = useMutation<PublishOkrMutationResult>(queries.PUBLISH_OKR, {
     onCompleted: (data) => {
       loadObjectiveOnRecoil(data.publishOkr)
+      dispatchEventPublishOkrClick({})
       toast({
         title: intl.formatMessage(messages.publishOKRSuccessMessage),
         status: 'success',

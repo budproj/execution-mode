@@ -107,7 +107,7 @@ const KeyResultDrawerBody = ({
         </Stack>
         <Divider borderColor="gray.100" />
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
-        <KeyResultSummarizeSection />
+        {keyResult && <KeyResultSummarizeSection keyResult={keyResult} />}
         <Divider borderColor="gray.100" />
         <KeyResultChecklistWrapper keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
