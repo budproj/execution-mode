@@ -42,14 +42,20 @@ const NoticesBanner = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        bg="linear-gradient(to right, #F53D7A, #1E97F7)"
+        bg="linear-gradient(to right,  #BF4950, #FF616A, #FF8188)"
       >
         <Flex gap={6} alignItems="center">
-          <Text color="brand.50" fontSize={14} fontWeight="medium">
+          <Text color="white" fontSize={14} fontWeight="medium">
             {intl.formatMessage(messages.maintenanceNoticeMessageBanner)}
           </Text>
         </Flex>
-        <CloseButton position="absolute" right={4} color="brand.50" onClick={handleCloseBanner} />
+        <CloseButton
+          position="absolute"
+          right={4}
+          fontSize={14}
+          color="white"
+          onClick={handleCloseBanner}
+        />
       </Box>
     </Collapse>
   )
