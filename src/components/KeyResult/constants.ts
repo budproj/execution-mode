@@ -34,11 +34,12 @@ export enum AUTHOR_TYPE {
 }
 
 export enum KEY_RESULT_PATCHS_KEYS {
-  MODE = 'MODE',
-  TITLE = 'TITLE',
-  GOAL = 'GOAL',
-  FORMAT = 'FORMAT',
-  TYPE = 'TYPE',
-  OWNER_ID = 'OWNER_ID',
-  DESCRIPTION = 'DESCRIPTION',
+  mode = 'mode',
+  title = 'title',
+  goal = 'goal',
+  initialValue = 'initialValue',
+  format = 'format',
+  type = 'type',
+  ownerId = 'ownerId',
+  description = 'description',
 }

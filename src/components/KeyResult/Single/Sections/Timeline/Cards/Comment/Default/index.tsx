@@ -10,12 +10,13 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import regexifyString from 'regexify-string'
 
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
 import { KeyResultComment } from 'src/components/KeyResult/types'
 import UserProfileCard from 'src/components/User/ProfileCard'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
 
 import messages from '../messages'
@@ -23,6 +24,7 @@ import queries from '../queries.gql'
 
 export interface KeyResultSectionTimelineCardCommentProperties {
   data?: Partial<KeyResultComment>
+  isSubcomment?: boolean
   onEntryDelete?: (entryType: string) => void
 }
 
@@ -43,6 +45,7 @@ export const MarkedUser = ({ id, name }: { id?: string; name?: string }) => (
 
 const KeyResultSectionTimelineCardComment = ({
   data,
+  isSubcomment = false,
   onEntryDelete,
 }: KeyResultSectionTimelineCardCommentProperties) => {
   const intl = useIntl()
@@ -50,6 +53,7 @@ const KeyResultSectionTimelineCardComment = ({
   const [deleteKeyResultComment] = useMutation(queries.DELETE_KEY_RESULT_COMMENT, {
     onCompleted: () => removeEntryFromTimeline(data),
   })
+  const keyResult = useRecoilValue(keyResultAtomFamily(data?.keyResultId))
 
   const intlCardType = intl.formatMessage(messages.cardType)
   const isLoaded = Boolean(data)
@@ -80,6 +84,8 @@ const KeyResultSectionTimelineCardComment = ({
       user={data?.user}
       date={data?.createdAt}
       isLoaded={isLoaded}
+      keyResultMode={keyResult?.mode}
+      isSubcomment={isSubcomment}
       policy={data?.policy}
       intlCardType={intlCardType}
       onDelete={handleDelete}

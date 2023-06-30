@@ -121,8 +121,7 @@ export const InsertOrUpdateKeyResultForm = ({
     queries.CREATE_KEY_RESULT,
   )
 
-  const [updateKeyResult, { data: updatedKeyResultData }] =
-    useMutation<UpdateKeyResultMutationResult>(queries.UPDATE_KEY_RESULT)
+  const [updateKeyResult] = useMutation<UpdateKeyResultMutationResult>(queries.UPDATE_KEY_RESULT)
 
   const keyResult = editingModeKeyResult
 
@@ -174,21 +173,24 @@ export const InsertOrUpdateKeyResultForm = ({
           onCompleted: () => {
             // eslint-disable-next-line unicorn/no-useless-undefined
             setTimeline(undefined)
+            if (onSuccess) onSuccess(currentUserID)
           },
         }).catch(() => {
           if (onError) onError()
         })
-      : createKeyResult({ variables }).catch(() => {
+      : createKeyResult({
+          variables: { ...variables },
+          onCompleted: () => {
+            if (onSuccess) onSuccess(currentUserID)
+          },
+        }).catch(() => {
           if (onError) onError()
         }))
   }
 
   useEffect(() => {
-    if ((data || updatedKeyResultData) && !error) {
-      if (onSuccess) onSuccess(currentUserID)
-      if (data) setLastInsertedKeyResultID(data.createKeyResult.id)
-    }
-  }, [data, error, currentUserID, onSuccess, setLastInsertedKeyResultID, updatedKeyResultData])
+    if (data && !error && data) setLastInsertedKeyResultID(data.createKeyResult.id)
+  }, [data, error, setLastInsertedKeyResultID])
 
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>

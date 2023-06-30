@@ -24,7 +24,7 @@ const KeyResultSectionTimelineCardCommentAndFeedbacks = ({
   ) : keyResultCommentType === defaultKeyResultComment ? (
     <KeyResultSectionTimelineCardComment data={data} onEntryDelete={onEntryDelete} />
   ) : (
-    <CommentFeedbacksCards data={data} />
+    <CommentFeedbacksCards data={data} onEntryDelete={onEntryDelete} />
   )
 }
 

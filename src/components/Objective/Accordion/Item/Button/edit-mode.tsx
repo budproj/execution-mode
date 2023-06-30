@@ -16,6 +16,7 @@ import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
 import GuideListCreateOkr from 'src/components/KeyResult/List/Body/GuideListCreateOKR/guide-list-create-okr'
+import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 
 import { useRecoilFamilyLoader } from '../../../../../state/recoil/hooks'
@@ -43,10 +44,13 @@ interface UpdateObjectiveMutationResult {
   updateObjective: Partial<Objective>
 }
 
+export const workflowControlStorageKey = 'Bud@SPOTLIGHT_WORKFLOW'
+
 export const EditMode = React.forwardRef<typeof Formik<EditModeValues>, EditModeProperties>(
   ({ objective, forwardedRef }) => {
     const intl = useIntl()
     const toast = useToast()
+    const { get, register } = useLocalStorage()
     const [loadObjectiveOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
     const [updateObjective, { loading, error }] = useMutation<UpdateObjectiveMutationResult>(
       queries.UPDATE_OBJECTIVE,
@@ -72,7 +76,16 @@ export const EditMode = React.forwardRef<typeof Formik<EditModeValues>, EditMode
         },
       })
 
-      if (objective?.mode === ObjectiveMode.DRAFT) setObjectiveToFilledMode(objective?.id)
+      if (objective?.mode === ObjectiveMode.DRAFT) {
+        const valueStoraged = get(workflowControlStorageKey)
+        if (valueStoraged) {
+          setObjectiveToViewMode(objective?.id)
+        } else {
+          setObjectiveToFilledMode(objective?.id)
+          register(workflowControlStorageKey, true)
+        }
+      }
+
       if (objective?.mode === ObjectiveMode.PUBLISHED) setObjectiveToViewMode(objective?.id)
     }
 

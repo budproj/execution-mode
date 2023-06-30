@@ -4,6 +4,7 @@ type KeyResultsSectionAddCommentMessage =
   | 'paperPlaneIconTitle'
   | 'paperPlaneIconDesc'
   | 'placeholder'
+  | 'emptyCommentWarningMessage'
 
 export default defineMessages<KeyResultsSectionAddCommentMessage>({
   paperPlaneIconTitle: {
@@ -24,5 +25,11 @@ export default defineMessages<KeyResultsSectionAddCommentMessage>({
     id: 'MgJJAJ',
     description:
       'This text is displayed in our comment input in our key result drawers when it has no value',
+  },
+
+  emptyCommentWarningMessage: {
+    defaultMessage: 'Digite algo para comentar! :)',
+    id: 'JB7c65',
+    description: 'This text is displayed if the user try comment with empty input.',
   },
 })

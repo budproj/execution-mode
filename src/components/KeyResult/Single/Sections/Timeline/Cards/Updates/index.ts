@@ -1,3 +1,3 @@
-import KeyResultSectionTimelineCardUpdate from './updates'
+import KeyResultSectionTimelineCardUpdate from './wrapper'
 
 export default KeyResultSectionTimelineCardUpdate

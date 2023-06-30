@@ -11,6 +11,7 @@ import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { IntlLink } from 'src/components/Base'
+import { COMMENT_TYPE, KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { User } from 'src/components/User/types'
 import { GraphQLEffect, GraphQLEntityPolicy } from 'src/components/types'
 import meAtom from 'src/state/recoil/user/me'
@@ -24,8 +25,11 @@ export interface KeyResultSectionTimelineCardBaseProperties extends StyleProps {
   borderWidth: BorderProps['borderWidth']
   bg: BackgroundProps['bg']
   user?: User
+  keyResultMode?: KEY_RESULT_MODE
+  commentType?: COMMENT_TYPE
   date?: string
   isLoaded?: boolean
+  isSubcomment?: boolean
   intlCardType?: string
   hideUser?: boolean
   borderBottomRadius?: BorderProps['borderBottomRadius']
@@ -42,7 +46,10 @@ const KeyResultSectionTimelineCardBase = ({
   hideUser,
   borderRadius,
   borderWidth,
+  keyResultMode,
+  commentType = COMMENT_TYPE.COMMENT,
   borderBottomRadius,
+  isSubcomment,
   boxShadow,
   bg,
   onDelete,
@@ -51,6 +58,13 @@ const KeyResultSectionTimelineCardBase = ({
   ...rest
 }: KeyResultSectionTimelineCardBaseProperties) => {
   const myID = useRecoilValue(meAtom)
+
+  const allowDelete =
+    policy?.delete === GraphQLEffect.ALLOW &&
+    (keyResultMode === KEY_RESULT_MODE.DRAFT ||
+      (keyResultMode === KEY_RESULT_MODE.PUBLISHED &&
+        commentType === COMMENT_TYPE.COMMENT &&
+        !isSubcomment))
 
   return (
     <Box
@@ -64,7 +78,7 @@ const KeyResultSectionTimelineCardBase = ({
       position="relative"
       {...rest}
     >
-      {policy?.delete === GraphQLEffect.ALLOW && (
+      {allowDelete && (
         <Box position="absolute" right={4} top={4}>
           <KeyResultSectionTimelineCardBaseOptions
             intlCardType={intlCardType}

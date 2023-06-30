@@ -181,6 +181,7 @@ const KeyResultSectionAddCommentInput = ({
         type="submit"
         position="absolute"
         right={6}
+        disabled={values.text.length === 0}
         bottom="1.2rem"
         color="gray.200"
         aria-label={intl.formatMessage(messages.paperPlaneIconDesc)}
