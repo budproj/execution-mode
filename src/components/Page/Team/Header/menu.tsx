@@ -17,6 +17,7 @@ import EditTeamButton from 'src/components/Base/EditTeamButton'
 import { Cycle } from 'src/components/Cycle/types'
 import HistoryIcon from 'src/components/Icon/History'
 import RedoIcon from 'src/components/Icon/Redo'
+import { workflowControlStorageKey } from 'src/components/Objective/Accordion/Item/Button/edit-mode'
 import { Team } from 'src/components/Team/types'
 import {
   Delta,
@@ -30,6 +31,7 @@ import useCadence from 'src/state/hooks/useCadence'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 import { isReloadNecessary } from 'src/state/recoil/objective'
 import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import { isEditTeamModalOpenAtom } from 'src/state/recoil/team'
@@ -73,6 +75,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   )
 
   const setIsEditTeamModalOpen = useSetRecoilState(isEditTeamModalOpenAtom)
+  const { get, register } = useLocalStorage()
 
   const [hasInactiveObjectives, setHasInactiveObjectives] = useState<boolean>()
   const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
@@ -121,12 +124,18 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
     },
   )
 
-  const onCreateOKR = (cycleID?: string) => {
-    void createDraftObjective({
+  const onCreateOKR = async (cycleID?: string) => {
+    const valueStoraged = get(workflowControlStorageKey)
+
+    await createDraftObjective({
       variables: {
         cycleID,
       },
     })
+
+    if (valueStoraged) {
+      register(workflowControlStorageKey, false)
+    }
   }
 
   const handleViewOldCycles = () => {

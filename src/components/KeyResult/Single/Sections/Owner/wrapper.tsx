@@ -1,13 +1,14 @@
 import { Popover, PopoverTrigger, PopoverContent, Box, Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useRecoilState } from 'recoil'
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil'
 
 import { KeyResult } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
+import useGetKeyResultWithId from '../../Drawer/hooks/get-key-result-with-id'
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
 import messages from './messages'
@@ -20,6 +21,7 @@ interface KeyResultSingleSectionOwnerWrapperProperties {
 }
 
 const policySelector = buildPartialSelector<KeyResult['policy']>('policy')
+const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 
 export const KeyResultSingleSectionOwnerWrapper = ({
   keyResultID,
@@ -28,6 +30,8 @@ export const KeyResultSingleSectionOwnerWrapper = ({
   const intl = useIntl()
   const policy = useRecoilValue(policySelector(keyResultID))
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
+  const setTimeline = useSetRecoilState(timelineSelector(keyResultID))
+  const { refetch } = useGetKeyResultWithId(keyResultID)
 
   const canUserUpdate = policy?.update === GraphQLEffect.ALLOW
   const isKeyResultActive = keyResult?.status?.isActive
@@ -43,11 +47,13 @@ export const KeyResultSingleSectionOwnerWrapper = ({
     if (isOpen) setIsOpen(false)
   }
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
     setKeyResult({
       ...keyResult,
       owner: undefined,
     })
+    const { data } = await refetch()
+    setTimeline(data.keyResult.timeline)
     handleClose()
   }
 

@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react'
 import React from 'react'
 
 import { KeyResultComment } from 'src/components/KeyResult/types'
@@ -9,7 +10,11 @@ interface SubCommentProperties {
 }
 
 const SubComment = ({ data }: SubCommentProperties) => {
-  return <KeyResultSectionTimelineCardComment data={data} />
+  return (
+    <Box w="100%">
+      <KeyResultSectionTimelineCardComment isSubcomment data={data} />
+    </Box>
+  )
 }
 
 export default SubComment

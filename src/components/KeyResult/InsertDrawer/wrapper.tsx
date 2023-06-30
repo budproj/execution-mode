@@ -65,9 +65,9 @@ export const KeyResultInsertDrawer = ({
     if (editingModeKeyResultID) {
       await refetch({ id: editingModeKeyResultID })
       resetEditingModeKeyResultID()
-    } else {
-      resetDrawerObjectiveID()
     }
+
+    resetDrawerObjectiveID()
   }
 
   const handleSuccess = (currentUserID: string) => {
@@ -79,7 +79,8 @@ export const KeyResultInsertDrawer = ({
       status: 'success',
     })
 
-    dispatchCreateKeyResult({ isPersonal: !teamID, userId: currentUserID })
+    if (!editingModeKeyResultID)
+      dispatchCreateKeyResult({ isPersonal: !teamID, userId: currentUserID })
   }
 
   const handleError = () => {

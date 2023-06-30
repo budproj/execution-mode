@@ -14,8 +14,8 @@ export default defineMessages<KeyResultsSectionTimelineCardCommentMessage>({
   },
   updatedDataCard: {
     defaultMessage:
-      '{user} alterou {key, select, DESCRIPTION {a} GOAL {a} other {o}} {key, select, TITLE {título} DESCRIPTION {descrição} GOAL {meta} FORMAT {formato} TYPE {tipo} other {}}',
-    id: 'W0Z4Rj',
+      '{user} alterou {key, select, description {a} goal {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} other {}}',
+    id: 'oQbqDL',
     description: 'dsa',
   },
 

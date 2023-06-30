@@ -21,8 +21,8 @@ export default defineMessages<KeyResultInsertDrawerMessage>({
 
   successToastMessage: {
     defaultMessage:
-      'Resultado-chave {isEditing, select, true {editado} other {criado}} criado com sucesso!',
-    id: 'E1gZWO',
+      'Resultado-chave {isEditing, select, true {editado} other {criado}} com sucesso!',
+    id: 'Wf8no6',
     description: 'This message appears after the user creates a new key-result as a toast',
   },
 
