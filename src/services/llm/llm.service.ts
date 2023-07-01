@@ -17,9 +17,10 @@ export class LlmService {
     return data
   }
 
-  async sendFeedback(referenceId: string, feedback: number) {
-    // Thumbs up/thumbs down
-  }
+  // Async sendFeedback(referenceId: string, feedback: number) {
+  //   // Thumbs up/thumbs down
+
+  // }
 
   // Async enhanceObjective(input: EnhanceObjectiveInput): ...
 }
