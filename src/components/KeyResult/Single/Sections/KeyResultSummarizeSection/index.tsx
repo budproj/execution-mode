@@ -37,7 +37,7 @@ const KeyResultSummarizeSection = ({ keyResult }: KeyResultSummarizeSectionPrope
 
     const { llm } = await servicesPromise
 
-    const checkIns = KeyResult.keyResultCheckIns.edges.map((edges) => {
+    const checkIns = KeyResult.keyResultCheckIns?.edges?.map((edges) => {
       return {
         comment: edges.node.comment as string,
         author: edges.node.user.fullName,
@@ -46,14 +46,14 @@ const KeyResultSummarizeSection = ({ keyResult }: KeyResultSummarizeSectionPrope
       }
     })
 
-    const comments = KeyResult.keyResultCheckIns.edges.map((edges) => {
+    const comments = KeyResult.keyResultCheckIns?.edges?.map((edges) => {
       return {
         text: edges.node.comment as string,
         author: edges.node.user.fullName,
         createdAt: edges.node.createdAt,
       }
     })
-    const checklist = KeyResult.checkList.edges.map((edges) => {
+    const checklist = KeyResult.checkList?.edges?.map((edges) => {
       return {
         description: edges.node.description,
         owner: edges.node.assignedUser.fullName,
