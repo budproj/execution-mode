@@ -156,6 +156,7 @@ export { default as DownloadIcon } from './DownloadIcon'
 
 export { default as DangerActionIcon } from './DangerAction'
 
+export { default as AddPersonIcon } from './AddPersonIcon'
 export { default as WandIcon } from './Wand'
 
 export * from './types'
