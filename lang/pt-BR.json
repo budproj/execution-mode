@@ -411,6 +411,10 @@
     "defaultMessage": "Ao realizar essa ação, o OKR entrará no ciclo atual e começará a ter seu progresso contabilizado. Todos os feedbacks serão mantidos dentro dos KRs.",
     "description": "This message appears in the description of the modal that the user uses to confirm their action of posting an OKR."
   },
+  "5PP1DF": {
+    "defaultMessage": "Já checou seus OKRs hoje? Parece que tem novidade por lá... \uD83D\uDC40",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
+  },
   "5Vuq/6": {
     "defaultMessage": "{title} Sua resposta foi registrada e já está disponível para visualização nos times dos quais você faz parte. Para a página de qual deles você deseja ir?",
     "description": "This text appears on the team redirection page after the user responds to the routines form"
@@ -1238,6 +1242,10 @@
   "Joj9R9": {
     "defaultMessage": "PROGRESSO",
     "description": "The title of the progress column."
+  },
+  "Jt0weE": {
+    "defaultMessage": "Conferir",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
   },
   "Jw9V43": {
     "defaultMessage": "Opções",

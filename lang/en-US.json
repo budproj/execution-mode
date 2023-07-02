@@ -443,6 +443,10 @@
     "defaultMessage": "These are the people helping {name} with this key result",
     "description": "The message to guide and describe on what is a support team"
   },
+  "5PP1DF": {
+    "defaultMessage": "Have you checked your OKRs today? Looks like there's something new there... \uD83D\uDC40",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
+  },
   "5Vuq/6": {
     "defaultMessage": "{title} Your response has been recorded and is now available for viewing on the teams you are a part of. Which page do you want to go to?",
     "description": "This text appears on the team redirection page after the user responds to the routines form"
@@ -1906,6 +1910,10 @@
   "jvxLB+": {
     "defaultMessage": "Are you sure that you want to do it? This action is irreversible",
     "description": "This text is used as a fallback to the confirmation modal title. It is displayed if the component did not received a custom message to display"
+  },
+  "Jt0weE": {
+    "defaultMessage": "Check it out",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
   },
   "Jw9V43": {
     "defaultMessage": "Options",

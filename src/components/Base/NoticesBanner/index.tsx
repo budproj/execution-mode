@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { useRoutineTab } from 'src/components/Routine/hooks/getRoutineTab'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
@@ -20,7 +19,6 @@ const NoticesBanner = () => {
   const intl = useIntl()
   const { dispatch: learnMoreClick } = useEvent(EventType.LEARN_MORE_BANNER_NOTICES_CLICK)
 
-  const routineTabName = useRoutineTab()
   const router = useRouter()
 
   const userID = useRecoilValue(meAtom)
@@ -45,8 +43,8 @@ const NoticesBanner = () => {
 
   const handleRedirect = useCallback(() => {
     learnMoreClick({})
-    router.push(`/explore/${user?.companies?.edges[0]?.node.id ?? ''}?activeTab=${routineTabName}`)
-  }, [learnMoreClick, router, routineTabName, user?.companies?.edges])
+    router.push(`/explore/${user?.companies?.edges[0]?.node.id ?? ''}`)
+  }, [learnMoreClick, router, user?.companies?.edges])
 
   const handleCloseBanner = useCallback(() => {
     register(storageKey, false)
