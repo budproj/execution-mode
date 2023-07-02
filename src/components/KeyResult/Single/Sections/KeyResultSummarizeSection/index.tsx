@@ -1,14 +1,17 @@
 import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
 import React, { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { WandIcon } from 'src/components/Icon'
 import { KeyResult, KeyResultCheckMarkState } from 'src/components/KeyResult/types'
-import { Format } from 'src/services/llm/summarize-key-result.dto'
+import { Format, SummarizeKeyResultInput } from 'src/services/llm/summarize-key-result.dto'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 
+import meAtom from '../../../../../state/recoil/user/me'
+import selectUser from '../../../../../state/recoil/user/selector'
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
 import messages from './messages'
@@ -19,6 +22,10 @@ export interface KeyResultSummarizeSectionProperties {
 
 const KeyResultSummarizeSection = ({ keyResult }: KeyResultSummarizeSectionProperties) => {
   const intl = useIntl()
+
+  const userID = useRecoilValue(meAtom)
+  const user = useRecoilValue(selectUser(userID))
+  const companyId = user?.companies?.edges[0]?.node?.id
 
   const [summarizedKeyResult, setSummarizedKeyResult] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -32,7 +39,6 @@ const KeyResultSummarizeSection = ({ keyResult }: KeyResultSummarizeSectionPrope
   )
 
   const handleButtonClick = async () => {
-    setIsLoading(true)
     dispatchEventGenerateKeyResultSummarize({})
 
     const { llm } = await servicesPromise
@@ -61,9 +67,9 @@ const KeyResultSummarizeSection = ({ keyResult }: KeyResultSummarizeSectionPrope
       }
     })
 
-    if (keyResult) {
-      const data = await llm.summarizeKeyResult(KeyResult.id, {
-        objective: { title: KeyResult.objective?.title },
+    if (keyResult && companyId) {
+      const input: SummarizeKeyResultInput = {
+        objective: { title: KeyResult.objective.title },
         title: KeyResult.title,
         format: KeyResult.format as unknown as Format,
         description: KeyResult.description ?? '',
@@ -77,11 +83,28 @@ const KeyResultSummarizeSection = ({ keyResult }: KeyResultSummarizeSectionPrope
         checkIns,
         comments,
         checklist,
-      })
-      setSummarizedKeyResult(data.summary)
-    }
+      }
 
-    setIsLoading(false)
+      setIsLoading(true)
+
+      const teamId =
+        KeyResult.teamId ?? KeyResult.team.id ?? KeyResult.objective.teamId ?? companyId
+
+      try {
+        const data = await llm.summarizeKeyResult({
+          referenceId: KeyResult.id,
+          author: {
+            id: userID,
+            teamId,
+            companyId,
+          },
+          input,
+        })
+        setSummarizedKeyResult(data.summary)
+      } finally {
+        setIsLoading(false)
+      }
+    }
   }
 
   return (

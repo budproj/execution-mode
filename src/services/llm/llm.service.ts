@@ -2,17 +2,26 @@ import { AxiosInstance } from 'axios'
 
 import { SummarizeKeyResultInput, SummarizeKeyResultOutput } from './summarize-key-result.dto'
 
+export interface CreateCompletionRequest<T> {
+  referenceId: string
+  author: {
+    id: string
+    teamId: string
+    companyId: string
+  }
+  input: T
+}
+
 export class LlmService {
   constructor(private readonly client: AxiosInstance) {}
 
   async summarizeKeyResult(
-    keyResultId: string,
-    input: SummarizeKeyResultInput,
+    request: CreateCompletionRequest<SummarizeKeyResultInput>,
   ): Promise<SummarizeKeyResultOutput> {
-    const { data } = await this.client.post<SummarizeKeyResultOutput>('/summarize/key-result', {
-      referenceId: keyResultId,
-      input,
-    })
+    const { data } = await this.client.post<SummarizeKeyResultOutput>(
+      '/summarize/key-result',
+      request,
+    )
 
     return data
   }
