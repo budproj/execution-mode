@@ -49,7 +49,7 @@ export const ObjectiveAccordionItem = ({
       boxShadow="for-background.light"
       p={6}
       borderRadius="10"
-      border={isDraft ? '3px dashed #ADC5E2' : 'initial'}
+      border={isDraft ? '2px dashed #ADC5E2' : 'initial'}
     >
       {({ isExpanded }) =>
         context.mode === ObjectiveViewMode.FILLED ? (

@@ -57,6 +57,10 @@ export const FormActions = ({
 
   const handleSubmitForm = () => {
     submitForm()
+    resetKeyResultInsertDrawerObjectiveID()
+    resetEditingModeKeyResultID()
+    setKeyResultDrawerOpenedKeyResultID(editingKeyResultId)
+
     if (!isEditingKeyResult && keyResultMode === KEY_RESULT_MODE.DRAFT) {
       dispatchEventCreateDraftKeyResult({})
     }
