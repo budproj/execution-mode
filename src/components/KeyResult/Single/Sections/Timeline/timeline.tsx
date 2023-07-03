@@ -85,7 +85,6 @@ const KeyResultSectionTimeline = ({
           newCheckInValue={newCheckInValue}
         />
       )}
-
       {keyResultID && hasTimeline ? (
         <KeyResultSectionTimelineContent
           keyResultID={keyResultID}

@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Image, Tag, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -134,9 +134,14 @@ const KeyResultSummarizeSection = ({
 
   return (
     <Box>
-      <KeyResultSectionHeading>
-        {intl.formatMessage(messages.summarizeSectionTitle)}
-      </KeyResultSectionHeading>
+      <Flex alignItems="center">
+        <KeyResultSectionHeading marginRight="5px">
+          {intl.formatMessage(messages.summarizeSectionTitle)}
+        </KeyResultSectionHeading>
+        <Tag size="sm" variant="solid" colorScheme="brand" ml={1}>
+          {intl.formatMessage(messages.newBetaTag)}
+        </Tag>
+      </Flex>
 
       {summarizedKeyResult ? (
         <Box marginTop="20px">
