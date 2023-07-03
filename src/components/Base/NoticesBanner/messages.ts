@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type NoticesBannerMessages = 'maintenanceNoticeMessageBanner'
+type NoticesBannerMessages = 'learMoreAboutRetrospectiveMessageBanner' | 'learMoreActionButton'
 
 export default defineMessages<NoticesBannerMessages>({
   learMoreAboutRetrospectiveMessageBanner: {
