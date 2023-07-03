@@ -106,6 +106,7 @@ const KeyResultSummarizeSection = ({
         KeyResult.teamId ?? KeyResult.team.id ?? KeyResult.objective.teamId ?? companyId
 
       try {
+        const requestDate = Date.now()
         const data = await llm.summarizeKeyResult({
           referenceId: KeyResult.id,
           author: {
@@ -115,6 +116,11 @@ const KeyResultSummarizeSection = ({
           },
           input,
         })
+
+        if (new Date(data.respondedAt).getTime() <= requestDate) {
+          await delay(1800)
+        }
+
         setSummarizedKeyResult(data.summary)
       } finally {
         setIsLoading(false)
@@ -168,3 +174,5 @@ const KeyResultSummarizeSection = ({
 }
 
 export default KeyResultSummarizeSection
+// eslint-disable-next-line no-promise-executor-return
+const delay = async (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))

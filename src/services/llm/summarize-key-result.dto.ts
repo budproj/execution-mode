@@ -1,6 +1,7 @@
 export interface SummarizeKeyResultOutput {
   summary: string
   model: string
+  respondedAt: string
 }
 
 export interface SummarizeKeyResultInput {
