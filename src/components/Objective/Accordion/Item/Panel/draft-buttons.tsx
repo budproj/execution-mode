@@ -1,10 +1,13 @@
 import { Button, Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import ConfirmPublishingDialog from 'src/components/Objective/OKRsPublishingFlow/ConfirmPublishingDialog/confirm-publishing-dialog'
+import { AUTHZ_ROLES } from 'src/state/recoil/authz/constants'
 import { keyResultInsertDrawerObjectiveID } from 'src/state/recoil/key-result/drawers/insert/objective-id'
+import meAtom from 'src/state/recoil/user/me'
+import selectUser from 'src/state/recoil/user/selector'
 
 import { stopAccordionOpen } from '../../handlers'
 
@@ -22,7 +25,12 @@ export const DraftButtons = ({
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const intl = useIntl()
 
+  const myID = useRecoilValue(meAtom)
+  const user = useRecoilValue(selectUser(myID))
+
   const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
+
+  const canPublishOKR = user?.authzRole?.name !== AUTHZ_ROLES.TEAM_MEMBER
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     setKeyResultInsertDrawerObjectiveID(objectiveID)
@@ -52,7 +60,7 @@ export const DraftButtons = ({
           {intl.formatMessage(messages.createKeyResultButtonLabelMessage)}
         </Button>
         <Button
-          isDisabled={!isObjectiveWithKeyResults}
+          isDisabled={!canPublishOKR || !isObjectiveWithKeyResults}
           padding="10px"
           bg="green.500"
           _hover={{ background: 'green.400', color: 'black.50' }}
