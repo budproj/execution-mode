@@ -79,8 +79,8 @@ export default defineMessages<KeyResultInsertDrawerFormMessage>({
   },
 
   secondActionButtonLabel: {
-    defaultMessage: 'Salvar',
-    id: 'M0RYZa',
+    defaultMessage: '{isEditing, select, true {Salvar} other {Criar resultado-chave} }',
+    id: '8Cn1Wy',
     description:
       'This is a button label displayed inside the insert key-result drawer. This is the second button',
   },

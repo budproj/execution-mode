@@ -2,7 +2,8 @@ import { Box, CloseButton, Collapse, Flex, Text } from '@chakra-ui/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import messages from './messages'
 
@@ -11,6 +12,12 @@ const storageKey = 'Bud@notices'
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()
   const intl = useIntl()
+  const { dispatch: learnMoreClick } = useEvent(EventType.LEARN_MORE_BANNER_NOTICES_CLICK)
+
+  const router = useRouter()
+
+  const userID = useRecoilValue(meAtom)
+  const user = useRecoilValue(selectUser(userID))
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -28,6 +35,11 @@ const NoticesBanner = () => {
 
     return () => clearTimeout(time)
   }, [get])
+
+  const handleRedirect = useCallback(() => {
+    learnMoreClick({})
+    router.push(`/explore/${user?.companies?.edges[0]?.node.id ?? ''}`)
+  }, [learnMoreClick, router, user?.companies?.edges])
 
   const handleCloseBanner = useCallback(() => {
     register(storageKey, false)

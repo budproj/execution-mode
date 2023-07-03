@@ -17,6 +17,7 @@ import EditTeamButton from 'src/components/Base/EditTeamButton'
 import { Cycle } from 'src/components/Cycle/types'
 import HistoryIcon from 'src/components/Icon/History'
 import RedoIcon from 'src/components/Icon/Redo'
+import { workflowControlStorageKey } from 'src/components/Objective/Accordion/Item/Button/edit-mode'
 import { Team } from 'src/components/Team/types'
 import {
   Delta,
@@ -28,8 +29,11 @@ import {
 } from 'src/components/types'
 import useCadence from 'src/state/hooks/useCadence'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
+import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 import { isReloadNecessary } from 'src/state/recoil/objective'
-import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import { isEditTeamModalOpenAtom } from 'src/state/recoil/team'
 import {
   ObjectivesViewMode,
@@ -66,14 +70,19 @@ type CreateDraftObjectiveQueryResult = {
 export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   const intl = useIntl()
   const toast = useToast()
+  const { dispatch: dispatchEventCreateDraftObjective } = useEvent(
+    EventType.CREATE_DRAFT_OBJECTIVE_CLICK,
+  )
+
   const setIsEditTeamModalOpen = useSetRecoilState(isEditTeamModalOpenAtom)
+  const { get, register } = useLocalStorage()
 
   const [hasInactiveObjectives, setHasInactiveObjectives] = useState<boolean>()
   const [objectivesPolicy, setObjectivesPolicy] = useState<GraphQLConnectionPolicy>()
   const [getObjectivesViewMode, setObjectivesViewMode] = useRecoilState(
     teamObjectivesViewMode(teamId),
   )
-  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
+  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.EDIT))
   const ownerID = useRecoilValue(meAtom)
   const setIsReloadNecessary = useSetRecoilState(isReloadNecessary)
 
@@ -104,6 +113,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
       onCompleted: async (data) => {
         setObjectiveIDToEditMode(data.createObjective.id)
         setIsReloadNecessary(true)
+        dispatchEventCreateDraftObjective({})
       },
       onError: () => {
         toast({
@@ -114,12 +124,18 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
     },
   )
 
-  const onCreateOKR = (cycleID?: string) => {
-    void createDraftObjective({
+  const onCreateOKR = async (cycleID?: string) => {
+    const valueStoraged = get(workflowControlStorageKey)
+
+    await createDraftObjective({
       variables: {
         cycleID,
       },
     })
+
+    if (valueStoraged) {
+      register(workflowControlStorageKey, false)
+    }
   }
 
   const handleViewOldCycles = () => {

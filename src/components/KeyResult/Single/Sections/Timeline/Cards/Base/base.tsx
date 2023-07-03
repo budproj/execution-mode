@@ -1,8 +1,17 @@
-import { Box, BoxProps, BorderProps, BackgroundProps, Stack } from '@chakra-ui/react'
+import {
+  Box,
+  BoxProps,
+  BorderProps,
+  BackgroundProps,
+  Stack,
+  StyleProps,
+  Divider,
+} from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { IntlLink } from 'src/components/Base'
+import { COMMENT_TYPE, KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { User } from 'src/components/User/types'
 import { GraphQLEffect, GraphQLEntityPolicy } from 'src/components/types'
 import meAtom from 'src/state/recoil/user/me'
@@ -10,14 +19,17 @@ import meAtom from 'src/state/recoil/user/me'
 import { CardHeader } from './header'
 import KeyResultSectionTimelineCardBaseOptions from './options'
 
-export interface KeyResultSectionTimelineCardBaseProperties {
+export interface KeyResultSectionTimelineCardBaseProperties extends StyleProps {
   children: ReactElement | ReactElement[]
   borderRadius: BorderProps['borderRadius']
   borderWidth: BorderProps['borderWidth']
   bg: BackgroundProps['bg']
   user?: User
+  keyResultMode?: KEY_RESULT_MODE
+  commentType?: COMMENT_TYPE
   date?: string
   isLoaded?: boolean
+  isSubcomment?: boolean
   intlCardType?: string
   hideUser?: boolean
   borderBottomRadius?: BorderProps['borderBottomRadius']
@@ -34,14 +46,25 @@ const KeyResultSectionTimelineCardBase = ({
   hideUser,
   borderRadius,
   borderWidth,
+  keyResultMode,
+  commentType = COMMENT_TYPE.COMMENT,
   borderBottomRadius,
+  isSubcomment,
   boxShadow,
   bg,
   onDelete,
   policy,
   intlCardType,
+  ...rest
 }: KeyResultSectionTimelineCardBaseProperties) => {
   const myID = useRecoilValue(meAtom)
+
+  const allowDelete =
+    policy?.delete === GraphQLEffect.ALLOW &&
+    (keyResultMode === KEY_RESULT_MODE.DRAFT ||
+      (keyResultMode === KEY_RESULT_MODE.PUBLISHED &&
+        commentType === COMMENT_TYPE.COMMENT &&
+        !isSubcomment))
 
   return (
     <Box
@@ -53,8 +76,9 @@ const KeyResultSectionTimelineCardBase = ({
       borderRadius={borderRadius}
       borderBottomRadius={borderBottomRadius ?? borderRadius}
       position="relative"
+      {...rest}
     >
-      {policy?.delete === GraphQLEffect.ALLOW && (
+      {allowDelete && (
         <Box position="absolute" right={4} top={4}>
           <KeyResultSectionTimelineCardBaseOptions
             intlCardType={intlCardType}
@@ -65,9 +89,12 @@ const KeyResultSectionTimelineCardBase = ({
 
       <Stack spacing={3}>
         {!hideUser && (
-          <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
-            <CardHeader isLoaded={isLoaded} userID={user?.id} date={new Date(date ?? 0)} />
-          </IntlLink>
+          <Box>
+            <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
+              <CardHeader isLoaded={isLoaded} userID={user?.id} date={new Date(date ?? 0)} />
+            </IntlLink>
+            <Divider />
+          </Box>
         )}
         {children}
       </Stack>

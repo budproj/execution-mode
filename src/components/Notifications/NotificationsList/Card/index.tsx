@@ -28,6 +28,10 @@ const CardNotification = ({ ...rest }: Notification) => {
       return <CommentOnRoutineNotification {...rest} />
     case 'mentionOnRoutine':
       return <CommentOnRoutineNotification {...rest} />
+    case 'krOwner':
+      return <CommentOnRoutineNotification {...rest} />
+    case 'krFeedback':
+      return <CommentOnRoutineNotification {...rest} />
     default:
       return <Box />
   }

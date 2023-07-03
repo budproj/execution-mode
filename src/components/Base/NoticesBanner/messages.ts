@@ -3,11 +3,16 @@ import { defineMessages } from 'react-intl'
 type NoticesBannerMessages = 'maintenanceNoticeMessageBanner'
 
 export default defineMessages<NoticesBannerMessages>({
-  maintenanceNoticeMessageBanner: {
-    defaultMessage:
-      'AVISO DE MANUTENÇÃO: A plataforma estará fora de operação do dia 01 ao dia 2 de Julho para manutenção',
-    id: 'Eq4/e4',
+  learMoreAboutRetrospectiveMessageBanner: {
+    defaultMessage: 'Já checou seus OKRs hoje? Parece que tem novidade por lá... 👀',
+    id: '5PP1DF',
     description:
-      'This message appears on the news banner to invite the user to learn about the Retrospective feature.',
+      'This message appears on the news banner to invite the user to learn about the Spotlight feature.',
+  },
+  learMoreActionButton: {
+    defaultMessage: 'Conferir',
+    id: 'Jt0weE',
+    description:
+      'This message appears on action button that redirect the user to company page on Spotlight tab',
   },
 })

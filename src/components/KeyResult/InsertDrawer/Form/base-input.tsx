@@ -11,7 +11,15 @@ export const FormInputBase = ({
   children,
 }: KeyResultInsertDrawerFormInputBaseProperties) => (
   <Box w="full">
-    <FormLabel>{title}</FormLabel>
+    <FormLabel
+      textTransform="uppercase"
+      color="gray.500"
+      fontWeight="bold"
+      fontSize={12}
+      letterSpacing="0.5px"
+    >
+      {title}
+    </FormLabel>
     {children}
   </Box>
 )

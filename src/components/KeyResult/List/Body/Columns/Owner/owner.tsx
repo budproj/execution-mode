@@ -9,6 +9,7 @@ import { DynamicAvatarGroup, IntlLink } from 'src/components/Base'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
+import { KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { UserAvatar } from 'src/components/User'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
@@ -37,6 +38,7 @@ const StyledAvatarGroupWrapper = styled.div<StyledAvatarGroupWrapperProperties>`
 `
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
+const modeSelector = buildPartialSelector<KeyResult['mode']>('mode')
 const supportTeamMembersSelector =
   buildPartialSelector<KeyResult['supportTeamMembers']>('supportTeamMembers')
 
@@ -49,6 +51,7 @@ const KeyResultListBodyColumnOwner = ({
 }: KeyResultListBodyColumnOwnerProperties): ReactElement => {
   const owner = useRecoilValue(ownerSelector(id))
   const supportTeamMembersAtoms = useRecoilValue(supportTeamMembersSelector(id))
+  const mode = useRecoilValue(modeSelector(id))
   const userID = useRecoilValue(meAtom)
   const router = useRouter()
   const setUser = useSetRecoilState(selectUser(owner?.id))
@@ -82,24 +85,26 @@ const KeyResultListBodyColumnOwner = ({
       cursor="auto"
       justifyContent={justifyContent}
     >
-      <StyledAvatarGroupWrapper currentUserIsOwner={currentUserIsOwner}>
-        {showOnlyOwner ? (
-          <UserAvatar
-            name={owner?.fullName}
-            src={owner?.picture}
-            cursor="pointer"
-            data-action="open-user-card"
-            variant="rounded"
-          />
-        ) : (
-          <DynamicAvatarGroup
-            isLoaded={isOwnerLoaded}
-            size="md"
-            users={usersToLoad}
-            max={currentUserIsOwner ? 1 : 2}
-          />
-        )}
-      </StyledAvatarGroupWrapper>
+      {mode !== KEY_RESULT_MODE.DRAFT && (
+        <StyledAvatarGroupWrapper currentUserIsOwner={currentUserIsOwner}>
+          {showOnlyOwner ? (
+            <UserAvatar
+              name={owner?.fullName}
+              src={owner?.picture}
+              cursor="pointer"
+              data-action="open-user-card"
+              variant="rounded"
+            />
+          ) : (
+            <DynamicAvatarGroup
+              isLoaded={isOwnerLoaded}
+              size="md"
+              users={usersToLoad}
+              max={currentUserIsOwner ? 1 : 2}
+            />
+          )}
+        </StyledAvatarGroupWrapper>
+      )}
 
       {displayName || displayRole ? (
         <Flex direction="column" ml={3}>

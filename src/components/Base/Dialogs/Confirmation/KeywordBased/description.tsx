@@ -6,15 +6,24 @@ import { StyledDescription } from '../Base/Sections/description'
 
 import messages from './messages'
 
-interface DescriptionProperties {
+export interface DescriptionProperties {
   keyword: string
   description?: string
   isValid: boolean
+  inputLabel?: string
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Description = ({ keyword, description, isValid, onChange }: DescriptionProperties) => {
+export const Description = ({
+  keyword,
+  description,
+  isValid,
+  inputLabel,
+  onChange,
+}: DescriptionProperties) => {
   const intl = useIntl()
+
+  const labelText = inputLabel ?? intl.formatMessage(messages.inputLabel)
 
   return (
     <Stack spacing={8}>
@@ -22,7 +31,7 @@ export const Description = ({ keyword, description, isValid, onChange }: Descrip
 
       <Box w="full" pb={8}>
         <FormLabel fontWeight={500} fontSize="sm" color="gray.500">
-          {intl.formatMessage(messages.inputLabel)}
+          {labelText}
         </FormLabel>
         <Input
           placeholder={intl.formatMessage(messages.inputPlaceholder, { keyword })}

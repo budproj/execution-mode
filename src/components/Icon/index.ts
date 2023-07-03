@@ -124,6 +124,8 @@ export { default as LinkedIn } from './LinkedIn'
 
 export { default as Reload } from './Reload'
 
+export { default as DraftPen } from './DraftPen'
+
 export {
   CustomEmojiFeeling1,
   CustomEmojiFeeling2,
@@ -151,5 +153,10 @@ export { default as AlertIcon } from './Alert/alert'
 export { OpacityTeamIcon } from './Team'
 
 export { default as DownloadIcon } from './DownloadIcon'
+
+export { default as DangerActionIcon } from './DangerAction'
+
+export { default as AddPersonIcon } from './AddPersonIcon'
+export { default as WandIcon } from './Wand'
 
 export * from './types'

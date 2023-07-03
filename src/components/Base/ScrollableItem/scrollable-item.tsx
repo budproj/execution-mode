@@ -9,6 +9,7 @@ export const getScrollableItem = (
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+
   &::-webkit-scrollbar {
     width: 6px;
   }

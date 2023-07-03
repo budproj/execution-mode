@@ -1,98 +1,31 @@
-import { useMutation } from '@apollo/client'
-import {
-  Flex,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-  SkeletonText,
-  Text,
-} from '@chakra-ui/react'
 import React from 'react'
-import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
-import regexifyString from 'regexify-string'
 
-import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
-import { KeyResultComment } from 'src/components/KeyResult/types'
-import UserProfileCard from 'src/components/User/ProfileCard'
-import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
+import { COMMENT_TYPE } from '../../../../../constants'
+import { KeyResultComment } from '../../../../../types'
 
-import messages from './messages'
-import queries from './queries.gql'
+import KeyResultSectionTimelineCardComment from './Default/index'
+import CommentFeedbacksCards from './Feedbacks/Card'
 
-export interface KeyResultSectionTimelineCardCommentProperties {
+export interface KeyResultSectionTimelineCardCommentAndFeedbacksProperties {
   data?: Partial<KeyResultComment>
   onEntryDelete?: (entryType: string) => void
 }
+const defaultKeyResultComment = COMMENT_TYPE.COMMENT
 
-export const MarkedUser = ({ id, name }: { id?: string; name?: string }) => (
-  <Popover placement="top-end" size="sm">
-    <PopoverTrigger>
-      <Text as="span" color="brand.500" cursor="pointer">
-        {name}
-      </Text>
-    </PopoverTrigger>
-    <PopoverContent p={0}>
-      <PopoverBody p={0}>
-        <UserProfileCard userID={id} />
-      </PopoverBody>
-    </PopoverContent>
-  </Popover>
-)
-
-const KeyResultSectionTimelineCardComment = ({
+const KeyResultSectionTimelineCardCommentAndFeedbacks = ({
   data,
   onEntryDelete,
-}: KeyResultSectionTimelineCardCommentProperties) => {
-  const intl = useIntl()
-  const removeEntryFromTimeline = useSetRecoilState(removeTimelineEntry(data?.keyResultId))
-  const [deleteKeyResultComment] = useMutation(queries.DELETE_KEY_RESULT_COMMENT, {
-    onCompleted: () => removeEntryFromTimeline(data),
-  })
+}: KeyResultSectionTimelineCardCommentAndFeedbacksProperties) => {
+  const keyResultCommentType = data?.type ?? defaultKeyResultComment
+  const isThread = Boolean(data?.parentId)
 
-  const intlCardType = intl.formatMessage(messages.cardType)
-  const isLoaded = Boolean(data)
-
-  const handleDelete = async () => {
-    await deleteKeyResultComment({
-      variables: {
-        keyResultCommentID: data?.id,
-      },
-    })
-
-    if (onEntryDelete) onEntryDelete(intlCardType)
-  }
-
-  const commentText = regexifyString({
-    pattern: /@\[[\w \u00C0-\u00FF-]+]\([\da-f-]+\)/g,
-    decorator: (match) => {
-      const regex = /@\[([\w \u00C0-\u00FF-]+)]\(([\da-f-]+)\)/
-      const [_, name, id] = regex.exec(match) ?? [undefined, '', '']
-
-      return <MarkedUser id={id} name={name} />
-    },
-    input: data?.text ?? '',
-  })
-
-  return (
-    <KeyResultSectionTimelineCardBase
-      user={data?.user}
-      date={data?.createdAt}
-      isLoaded={isLoaded}
-      policy={data?.policy}
-      intlCardType={intlCardType}
-      onDelete={handleDelete}
-    >
-      <Flex gridGap={4} direction="column">
-        <SkeletonText noOfLines={4} isLoaded={isLoaded}>
-          <Text fontSize="md" color="new-gray.900">
-            {commentText}
-          </Text>
-        </SkeletonText>
-      </Flex>
-    </KeyResultSectionTimelineCardBase>
+  return isThread ? (
+    <div style={{ display: 'none' }} />
+  ) : keyResultCommentType === defaultKeyResultComment ? (
+    <KeyResultSectionTimelineCardComment data={data} onEntryDelete={onEntryDelete} />
+  ) : (
+    <CommentFeedbacksCards data={data} onEntryDelete={onEntryDelete} />
   )
 }
 
-export default KeyResultSectionTimelineCardComment
+export default KeyResultSectionTimelineCardCommentAndFeedbacks

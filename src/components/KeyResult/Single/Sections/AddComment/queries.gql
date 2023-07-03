@@ -4,6 +4,8 @@ mutation CREATE_KEY_RESULT_COMMENT($keyResultCommentInput: KeyResultCommentInput
     text
     createdAt
     keyResultId
+    type
+    parentId
     user {
       id
       fullName

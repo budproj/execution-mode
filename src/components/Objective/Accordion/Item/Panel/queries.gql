@@ -1,12 +1,17 @@
-query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!, $withTeams: Boolean! = true) {
+query GET_OBJECTIVE_KEY_RESULTS(
+  $objectiveID: ID!
+  $withTeams: Boolean! = true
+  $mode: KeyResultMode = PUBLISHED
+) {
   objective(id: $objectiveID) {
     id
-    keyResults(order: { createdAt: ASC }) {
+    keyResults(order: { createdAt: ASC }, mode: $mode) {
       edges {
         node {
           id
           title
           format
+          mode
           type
           teamId
           delta {
@@ -76,3 +81,4 @@ query GET_OBJECTIVE_KEY_RESULTS($objectiveID: ID!, $withTeams: Boolean! = true) 
     }
   }
 }
+

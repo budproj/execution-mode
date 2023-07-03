@@ -9,12 +9,14 @@ export interface Notification {
     keyResult?: {
       id: string
       name: string
+      mode: string
     }
     previousConfidance?: number
     newConfidence?: number
     comment?: {
       id: string
       content: string
+      type: string
     }
     task?: {
       id: string

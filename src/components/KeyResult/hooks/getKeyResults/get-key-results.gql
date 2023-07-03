@@ -11,6 +11,7 @@ query GET_KEY_RESULTS($confidence: String) {
                 initialValue
                 goal
                 format
+                mode
                 type
                 delta {
                   progress

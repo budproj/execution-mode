@@ -33,7 +33,7 @@ import { User } from 'src/components/User/types'
 import { GraphQLEffect } from 'src/components/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { ObjectiveMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
+import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
 import {
   ObjectivesViewMode,
@@ -63,7 +63,7 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
   const [canCreateObjectives, setCanCreateObjectives] = useState(false)
   const [viewMode, setViewMode] = useRecoilState(userObjectivesViewMode(userID))
   const setActiveObjectives = useSetRecoilState(userActiveObjectives(userID))
-  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveMode.EDIT))
+  const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.EDIT))
   const { refetch } = useGetUserObjectives(
     { ownerId: userID },
     { setObjetives: setActiveObjectives },
@@ -133,11 +133,6 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
         teamID: null,
       },
       onCompleted: async (data) => {
-        toast({
-          title: intl.formatMessage(objectiveMessages.draftObjectiveSuccessToastMessage),
-          status: 'success',
-        })
-
         setObjectiveIDToEditMode(data.createObjective.id)
         dispatchCreatedObjective({ isPersonal: true, userId: userID })
       },

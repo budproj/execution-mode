@@ -7,7 +7,7 @@ import { MessageDescriptor } from 'react-intl'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
 import { KeyResultListBodyColumnProperties } from 'src/components/KeyResult/List/Body/Columns/types'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { ObjectiveMode } from 'src/state/recoil/objective/context'
+import { ObjectiveViewMode } from 'src/state/recoil/objective/context'
 
 import KeyResultListBody from './Body'
 import KeyResultListBodySkeleton from './Body/Skeleton'
@@ -35,7 +35,8 @@ export interface KeyResultListProperties extends BoxProps {
   onLineClick?: (id: KeyResult['id']) => void
   onLineDragEnd?: (result: DropResult) => void
   isLoading?: boolean
-  mode?: ObjectiveMode
+  mode?: ObjectiveViewMode
+  isDraft?: boolean
 }
 
 const KeyResultList = ({
@@ -53,6 +54,7 @@ const KeyResultList = ({
   isLoading,
   emptyStateMessage,
   mode,
+  isDraft,
   ...rest
 }: KeyResultListProperties): ReactElement => (
   <Box {...rest}>
@@ -62,6 +64,7 @@ const KeyResultList = ({
       columnGap={columnGap}
       headProperties={headProperties}
       borderColor={borderColor}
+      mode={mode}
     />
     {isLoading ? (
       <KeyResultListBodySkeleton
@@ -76,6 +79,7 @@ const KeyResultList = ({
       />
     ) : (
       <KeyResultListBody
+        isDraft={isDraft}
         listID={id}
         type={type}
         columns={columns}

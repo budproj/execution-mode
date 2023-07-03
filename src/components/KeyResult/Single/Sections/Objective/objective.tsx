@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil'
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { IntlLink } from 'src/components/Base'
 import { CircularProgress } from 'src/components/Base/CircularProgress'
+import { DraftPen } from 'src/components/Icon'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import meAtom from 'src/state/recoil/user/me'
@@ -17,6 +18,7 @@ import messages from './messages'
 export interface KeyResultSectionObjectiveProperties {
   keyResultID?: KeyResult['id']
   isKeyResultPage?: boolean
+  isDraft?: boolean
 }
 
 const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
@@ -25,6 +27,7 @@ const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
 const KeyResultSectionObjective = ({
   keyResultID,
   isKeyResultPage,
+  isDraft,
 }: KeyResultSectionObjectiveProperties) => {
   const intl = useIntl()
   const objective = useRecoilValue(objectiveSelector(keyResultID))
@@ -55,11 +58,16 @@ const KeyResultSectionObjective = ({
       <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
 
       <Flex gridGap={3} alignItems="center">
-        <CircularProgress
-          confidence={confidence}
-          progress={progress}
-          isLoaded={isObjectiveLoaded}
-        />
+        {isDraft ? (
+          <DraftPen desc="draft pen" />
+        ) : (
+          <CircularProgress
+            confidence={confidence}
+            progress={progress}
+            isLoaded={isObjectiveLoaded}
+          />
+        )}
+
         {isKeyResultPage ? (
           <Box color="new-gray.900">
             <Skeleton

@@ -1,3 +1,4 @@
+import { Skeleton } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -8,7 +9,11 @@ import { FormInputBase } from './base-input'
 import messages from './messages'
 import { FormValues } from './wrapper'
 
-export const OwnerInput = () => {
+interface OwnerInputProperties {
+  isLoading?: boolean
+}
+
+export const OwnerInput = ({ isLoading }: OwnerInputProperties) => {
   const intl = useIntl()
   const { values, setFieldValue } = useFormikContext<FormValues>()
 
@@ -18,12 +23,14 @@ export const OwnerInput = () => {
 
   return (
     <FormInputBase title={intl.formatMessage(messages.sixthInputLabel)}>
-      <KeyResultOwnerSelectMenu
-        value={values.ownerID}
-        avatarSubtitleType="role"
-        placement="top"
-        onChange={handleChange}
-      />
+      <Skeleton isLoaded={!isLoading}>
+        <KeyResultOwnerSelectMenu
+          value={values.ownerID}
+          avatarSubtitleType="role"
+          placement="top"
+          onChange={handleChange}
+        />
+      </Skeleton>
     </FormInputBase>
   )
 }

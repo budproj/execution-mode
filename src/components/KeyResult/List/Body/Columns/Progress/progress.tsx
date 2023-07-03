@@ -4,11 +4,13 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
+import DraftTag from 'src/components/KeyResult/DraftTag/draft-tag'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { selectMaskBasedOnFormat } from 'src/components/KeyResult/NumberMasks/selectors'
 import ProgressSlider from 'src/components/KeyResult/ProgressSlider'
+import { KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { keyResultCheckInProgressDraft } from 'src/state/recoil/key-result/check-in'
@@ -32,7 +34,7 @@ export interface KeyResultListBodyColumnProgressProperties
 
 const KeyResultListBodyColumnProgress = ({
   id,
-  isDisabled,
+  isDisabled: isKeyResultDisable,
   isActive,
   hideGoal,
   hideCurrentValue,
@@ -41,8 +43,10 @@ const KeyResultListBodyColumnProgress = ({
   const draftValue = useRecoilValue(keyResultCheckInProgressDraft(id))
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
   const latestKeyResultCheckIn = useRecoilValue(selectLatestCheckIn(id))
+
   const [confidenceTag, setConfidence] = useConfidenceTag(latestKeyResultCheckIn?.confidence)
   const intl = useIntl()
+  const isDisabled = isKeyResultDisable ?? keyResult?.mode === KEY_RESULT_MODE.DRAFT
 
   const ProgressMask = useMemo(
     () => selectMaskBasedOnFormat(keyResult?.format),
@@ -64,11 +68,15 @@ const KeyResultListBodyColumnProgress = ({
           {withConfidenceTag && (
             <Skeleton isLoaded={isKeyResultLoaded}>
               <HStack justify="space-between">
-                <ConfidenceTag
-                  showTooltip
-                  confidenceValue={latestKeyResultCheckIn?.confidence}
-                  isDisabled={isDisabled}
-                />
+                {keyResult?.mode === KEY_RESULT_MODE.DRAFT ? (
+                  <DraftTag />
+                ) : (
+                  <ConfidenceTag
+                    showTooltip
+                    confidenceValue={latestKeyResultCheckIn?.confidence}
+                    isDisabled={isDisabled}
+                  />
+                )}
 
                 <TooltipWithDelay
                   label={intl.formatMessage(messages.progressTooltip)}

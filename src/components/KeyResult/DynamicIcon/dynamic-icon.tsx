@@ -12,9 +12,12 @@ import {
 } from 'src/state/recoil/key-result/icon'
 import { KeyResultIconDrawing } from 'src/state/recoil/key-result/icon/types'
 
+import { KEY_RESULT_MODE } from '../constants'
+
 export interface KeyResultDynamicIconProperties {
   title?: KeyResult['title']
   iconSize: FlexProps['width']
+  mode?: KEY_RESULT_MODE
   boxSize: FlexProps['width']
   borderRadius: FlexProps['borderRadius']
   isDisabled?: boolean
@@ -25,6 +28,7 @@ const KeyResultDynamicIcon = ({
   boxSize,
   iconSize,
   borderRadius,
+  mode,
   isDisabled,
 }: KeyResultDynamicIconProperties): ReactElement => {
   const intl = useIntl()
@@ -33,11 +37,12 @@ const KeyResultDynamicIcon = ({
   const desc = useRecoilValue<MessageDescriptor>(keyResultIconDesc(drawing))
 
   const IconComponent = Icons[drawing]
+  const isIconDisabled = isDisabled ?? mode === KEY_RESULT_MODE.DRAFT
 
   return (
     <Flex
       lineHeight={1}
-      bg={isDisabled ? 'black.500' : color}
+      bg={isIconDisabled ? 'black.500' : color}
       borderRadius={borderRadius}
       minW={boxSize}
       w={boxSize}

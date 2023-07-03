@@ -10,8 +10,14 @@ type EmptyStateMessage =
   | 'emptyNotificationsList'
   | 'noMoreNotificationsToListing'
   | 'zenGirl'
+  | 'catHangingOut'
 
 export default defineMessages<EmptyStateMessage>({
+  catHangingOut: {
+    defaultMessage: 'Um desenho de gato em cima de um computador.',
+    id: '1q4B+N',
+    description: 'The alternative text explaining our cat hanging out image',
+  },
   workingTeamAlt: {
     defaultMessage:
       'Um desenho de uma mulher e um homem, cada qual segurando um pedaço de um quebra-cabeça e colaborando para montá-lo',

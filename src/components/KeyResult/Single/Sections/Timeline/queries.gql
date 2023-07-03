@@ -1,4 +1,4 @@
-query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $first: Int, $after: String) {
+query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $first: Int, $after: Float) {
   keyResult(id: $id) {
     id
     format
@@ -6,6 +6,19 @@ query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $first: Int, $after: String) {
     timeline(first: $first, after: $after) {
       edges {
         node {
+          ... on KeyResultUpdate {
+            id
+            createdAt
+            keyResultId
+            author {
+              type
+              identifier
+            }
+            patches {
+              key
+              value
+            }
+          }
           ... on KeyResultCheckIn {
             id
             value
@@ -30,12 +43,14 @@ query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $first: Int, $after: String) {
               delete
             }
           }
-
           ... on KeyResultComment {
             id
             text
             createdAt
             keyResultId
+            type
+            extra
+            parentId
             user {
               id
               fullName

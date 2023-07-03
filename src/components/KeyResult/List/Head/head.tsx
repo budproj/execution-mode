@@ -16,6 +16,7 @@ import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { TooltipWithRichTextProperties } from 'src/components/Base/TooltipWithRichText/tooltip-with-rich-text'
 import InfoCircleIcon from 'src/components/Icon/InfoCircle'
 import { KEY_RESULT_LIST_COLUMN } from 'src/components/KeyResult/List/Body/Columns/constants'
+import { ObjectiveViewMode } from 'src/state/recoil/objective/context'
 
 import KeyResultListHeadTooltipWithRichTextsConfidenceLevel from './RichTooltips/ConfidenceLevel'
 import messages from './messages'
@@ -27,6 +28,7 @@ export interface KeyResultListHeadProperties {
   templateColumns: GridProps['templateColumns']
   columnGap: GridProps['gridColumnGap']
   headProperties: KeyResultListColumnHeadProperties
+  mode?: ObjectiveViewMode
 }
 
 const KeyResultListHead = ({
@@ -35,6 +37,7 @@ const KeyResultListHead = ({
   templateColumns,
   columnGap,
   headProperties,
+  mode,
 }: KeyResultListHeadProperties) => {
   const intl = useIntl()
   const columnMessages = {
@@ -115,7 +118,7 @@ const KeyResultListHead = ({
     <Grid
       pb={4}
       fontWeight={500}
-      borderBottom={1}
+      borderBottom={mode === ObjectiveViewMode.EDIT ? 0 : 1}
       borderColor={borderColor}
       borderStyle="solid"
       templateColumns={templateColumns}

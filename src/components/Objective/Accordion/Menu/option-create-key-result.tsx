@@ -22,5 +22,5 @@ export const CreateKeyResultOption = ({ objectiveID }: CreateKeyResultOptionProp
     stopAccordionOpen(event)
   }
 
-  return <MenuItem onClick={handleClick}>{intl.formatMessage(messages.firstMenuOption)}</MenuItem>
+  return <MenuItem onClick={handleClick}>{intl.formatMessage(messages.secondMenuOption)}</MenuItem>
 }

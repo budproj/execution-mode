@@ -30,6 +30,7 @@ const {
   NOTIFICATION_API,
   ROUTINES_API,
   COMMENTS_API,
+  LLM_API,
   REST_API_BASE,
   FLAGSMITH_CLIENT_KEY,
 } = process.env
@@ -84,6 +85,7 @@ const publicRuntimeConfig = {
     restBase: REST_API_BASE,
     routines: ROUTINES_API,
     comments: COMMENTS_API,
+    llm: LLM_API
   },
 
   sentry: {

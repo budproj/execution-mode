@@ -1,64 +1,52 @@
-import { useMutation } from '@apollo/client'
-import { Box, Flex, Skeleton, SkeletonText, Spinner, Stack } from '@chakra-ui/react'
+import { Button, Flex, HStack, Skeleton, SkeletonText, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
-import EditableInputValue from 'src/components/Base/EditableInputValue'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { GraphQLEffect } from 'src/components/types'
+import { Objective } from 'src/components/Objective/types'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
+import { keyResultInsertDrawerObjectiveID } from 'src/state/recoil/key-result/drawers/insert/objective-id'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import KrDrawerTitleActions from './actions'
 import messages from './messages'
-import queries from './queries.gql'
 
 export interface KeyResultSectionTitleProperties {
   keyResultID?: KeyResult['id']
+  isDraft?: boolean
+  objective?: Objective
 }
 
-interface UpdateKeyResultTitleMutationResult {
-  updateKeyResult: KeyResult
-}
-
-const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties) => {
-  const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
+const KeyResultSectionTitle = ({
+  keyResultID,
+  isDraft,
+  objective,
+}: KeyResultSectionTitleProperties) => {
+  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const latestCheckIn = useRecoilValue(selectLatestCheckIn(keyResultID))
   const intl = useIntl()
-
-  const [updateKeyResult, { loading }] = useMutation<UpdateKeyResultTitleMutationResult>(
-    queries.UPDATE_KEY_RESULT_TITLE,
-  )
+  const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
+  const isEditingKeyResultId = useSetRecoilState(isEditingKeyResultIDAtom)
 
   const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 
   const onDeleteKeyResult = () => resetOpenDrawer()
 
+  const handleEditClick = () => {
+    setKeyResultInsertDrawerObjectiveID(objective?.id)
+    isEditingKeyResultId(keyResult?.id)
+    resetOpenDrawer()
+  }
+
   const isLoaded = Boolean(keyResult)
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
   const isActive = keyResult?.status?.isActive
   const isOutdated = keyResult?.status?.isOutdated && isActive
-  const canUpdate = keyResult?.policy?.update === GraphQLEffect.ALLOW && isActive
-
-  const handleSubmit = async (title: string) => {
-    if (title === keyResult?.title) return
-
-    await updateKeyResult({
-      variables: {
-        title,
-        id: keyResultID,
-      },
-    })
-
-    setKeyResult({
-      ...keyResult,
-      title,
-    })
-  }
 
   return (
     <Stack
@@ -68,40 +56,26 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
       justifyContent="space-between"
       direction="row"
     >
-      <Flex gridGap={4} alignItems="flex-start" justifyContent="space-between" width="100%">
+      <Flex gridGap={4} alignItems="center" justifyContent="space-between" width="100%">
         <Skeleton borderRadius={10} isLoaded={isLoaded}>
           <KeyResultDynamicIcon
             title={keyResult?.title}
             iconSize={7}
             boxSize={12}
             borderRadius={8}
-            isDisabled={!isActive}
+            isDisabled={Boolean(!isActive || isDraft)}
           />
         </Skeleton>
         <Stack spacing={0} flexGrow={1}>
-          <Stack direction="row">
-            <Skeleton isLoaded={isLoaded} flexGrow={1}>
-              <EditableInputValue
-                value={keyResult?.title}
-                isLoaded={isLoaded}
-                isSubmitting={loading}
-                isDisabled={!canUpdate}
-                maxCharacters={120}
-                previewProperties={{
-                  fontSize: 'lg',
-                  fontWeight: 700,
-                  p: 0,
-                  as: 'h1',
-                }}
-                onSubmit={handleSubmit}
-              />
-            </Skeleton>
-            {loading && (
-              <Box pt={2}>
-                <Spinner color="brand.400" />
-              </Box>
-            )}
-          </Stack>
+          <HStack>
+            <Stack direction="row">
+              <Skeleton isLoaded={isLoaded} flexGrow={1}>
+                <Text fontSize="lg" fontWeight={700} p={0} as="h1" maxW={260}>
+                  {keyResult?.title}
+                </Text>
+              </Skeleton>
+            </Stack>
+          </HStack>
 
           <SkeletonText
             noOfLines={2}
@@ -109,17 +83,30 @@ const KeyResultSectionTitle = ({ keyResultID }: KeyResultSectionTitleProperties)
             mt={isLoaded ? 'inherit' : '4px'}
             isLoaded={isLoaded}
           >
-            <LastUpdateText
-              fontSize="sm"
-              ml="2px"
-              date={lastUpdateDate}
-              color={isOutdated ? 'red.500' : 'gray.400'}
-              prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
-            />
+            {!isDraft && (
+              <LastUpdateText
+                fontSize="sm"
+                ml="2px"
+                date={lastUpdateDate}
+                color={isOutdated ? 'red.500' : 'gray.400'}
+                prefix={intl.formatMessage(messages.lastUpdateTextPrefix)}
+              />
+            )}
           </SkeletonText>
         </Stack>
       </Flex>
-      <Flex alignItems="center">
+      <Flex alignItems="center" gap={4}>
+        <Button
+          bg="new-gray.300"
+          borderRadius={4}
+          p="10px"
+          color="new-gray.800"
+          fontSize={14}
+          fontWeight="medium"
+          onClick={handleEditClick}
+        >
+          Editar
+        </Button>
         <KrDrawerTitleActions keyResult={keyResult} onDelete={onDeleteKeyResult} />
       </Flex>
     </Stack>

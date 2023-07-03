@@ -15,10 +15,11 @@ interface DangeousActionConfirmationProperties
     KeywordBasedConfirmationProperties {
   firstStageTitle: string
   firstStageDescription: string
+  onlySecondStage?: boolean
   firstStageHeaderImageURL?: string
   secondStageTitle?: string | ReactNode
   secondStageDescription?: string
-  secondStageHeaderImageURL?: string
+  inputLabel?: string
 }
 
 export const DangerousActionConfirmationDialog = ({
@@ -26,17 +27,19 @@ export const DangerousActionConfirmationDialog = ({
   onClose,
   firstStageTitle,
   firstStageDescription,
+  onlySecondStage,
   firstStageHeaderImageURL,
   secondStageTitle,
   secondStageDescription,
-  secondStageHeaderImageURL,
+  confirmButtonColorScheme,
+  headerColorScheme,
+  inputLabel,
   keyword,
   ...rest
 }: DangeousActionConfirmationProperties) => {
   const intl = useIntl()
 
   firstStageHeaderImageURL ??= '/images/bud-trash-bin.png'
-  secondStageHeaderImageURL ??= '/images/bud-danger.png'
   secondStageTitle ??= intl.formatMessage(messages.defaultSecondStageTitle)
   secondStageDescription ??= intl.formatMessage(messages.defaultSecondStageDescription, {
     keyword,
@@ -55,7 +58,7 @@ export const DangerousActionConfirmationDialog = ({
     setCurrentStage(0)
   }
 
-  return currentStage === 0 ? (
+  return !onlySecondStage && currentStage === 0 ? (
     <ConfirmationDialog
       {...rest}
       headerImageURL={firstStageHeaderImageURL}
@@ -67,10 +70,12 @@ export const DangerousActionConfirmationDialog = ({
   ) : (
     <KeywordBasedConfirmation
       {...rest}
-      headerImageURL={secondStageHeaderImageURL}
       title={secondStageTitle}
       description={secondStageDescription}
       keyword={keyword}
+      inputLabel={inputLabel}
+      headerColorScheme={headerColorScheme}
+      confirmButtonColorScheme={confirmButtonColorScheme}
       onConfirm={handleSecondStageConfirmation}
       onClose={handleClose}
     />

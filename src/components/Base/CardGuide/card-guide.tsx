@@ -32,7 +32,7 @@ export const CardGuide = ({ iconKey, title, description }: CardGuideProperties) 
       <Text color="#99A4C2" fontSize="14px" fontWeight="bold">
         {intl.formatMessage(title)}
       </Text>
-      <Text color="#99A4C2" fontSize="12px" fontWeight="regular" mt={1}>
+      <Text textAlign="left" color="#99A4C2" fontSize="12px" fontWeight="regular" mt={1}>
         {intl.formatMessage(description)}
       </Text>
     </Flex>

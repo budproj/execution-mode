@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultsSectionTimelineCardEmtpyStateMessage = 'iconDesc' | 'title' | 'description'
+type KeyResultsSectionTimelineCardEmtpyStateMessage =
+  | 'iconDesc'
+  | 'title'
+  | 'description'
+  | 'emptyState'
 
 export default defineMessages<KeyResultsSectionTimelineCardEmtpyStateMessage>({
   iconDesc: {
@@ -23,5 +27,11 @@ export default defineMessages<KeyResultsSectionTimelineCardEmtpyStateMessage>({
     id: '2chQA0',
     description:
       'This text gives more details regarding our empty state card in the key result drawers',
+  },
+
+  emptyState: {
+    defaultMessage: 'Tudo tranquilo por aqui!',
+    id: 'F7vED6',
+    description: 'The emptyState message.',
   },
 })

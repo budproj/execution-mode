@@ -1,21 +1,28 @@
 import { defineMessages } from 'react-intl'
 
 type KeyResultInsertDrawerMessage =
-  | 'title'
+  | 'createTitle'
+  | 'editTitle'
   | 'successToastMessage'
   | 'unexpectedErrorToastMessage'
   | 'validationErrorToastMessage'
 
 export default defineMessages<KeyResultInsertDrawerMessage>({
-  title: {
+  createTitle: {
     defaultMessage: 'Criar Resultado Chave',
     id: 'HEYvPI',
     description: 'This message appears as the title of the insert Key Result drawer',
   },
+  editTitle: {
+    defaultMessage: 'Resultado Chave',
+    id: 'VWlRuQ',
+    description: 'This message appears as the title of the insert Key Result drawer',
+  },
 
   successToastMessage: {
-    defaultMessage: 'Resultado-chave criado com sucesso!',
-    id: 'YznDPX',
+    defaultMessage:
+      'Resultado-chave {isEditing, select, true {editado} other {criado}} com sucesso!',
+    id: 'Wf8no6',
     description: 'This message appears after the user creates a new key-result as a toast',
   },
 

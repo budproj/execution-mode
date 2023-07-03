@@ -48,4 +48,10 @@ export enum EventType {
   INDICATORS_CHECKLIST_CLICK = 'IndicatorsCheckListClick',
   INDICATORS_ROUTINE_CLICK = 'IndicatorsRoutineClick',
   INDICATORS_REPORT_DOWNLOAD_CLICK = 'IndicatorsReportDownloadClick',
+  CREATE_DRAFT_OBJECTIVE_CLICK = 'CreateDraftObjectiveClick',
+  CREATE_DRAFT_KEY_RESULT_CLICK = 'CreateDraftKeyResultClick',
+  CREATE_DRAFT_FEEDBACK_CLICK = 'CreateDraftFeedbackClick',
+  CREATE_DRAFT_FEEDBACK_ANSWER_CLICK = 'CreateDraftFeedbackAnswerClick',
+  PUBLISH_OKR_CLICK = 'PublishOKRClick',
+  GENERATE_KEY_RESULT_SUMMARIZE_CLICK = 'GenerateKeyResultSummarizeClick',
 }

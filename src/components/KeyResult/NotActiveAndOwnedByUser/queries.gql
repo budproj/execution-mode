@@ -18,6 +18,7 @@ query GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES($userID: ID!) {
               initialValue
               goal
               format
+              mode
               type
               objective {
                 title

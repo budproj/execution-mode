@@ -1,16 +1,21 @@
+import { useLazyQuery } from '@apollo/client'
 import { Flex, Stack, Drawer, DrawerContent, DrawerOverlay, useToast } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
+import GET_KEY_RESULT_WITH_ID from 'src/components/KeyResult/Single/Drawer/queries.gql'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
 
 import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
+import { GetKeyResultWithIDQuery } from '../Single/Drawer/content'
+import useGetKeyResultWithId from '../Single/Drawer/hooks/get-key-result-with-id'
 
-import { InsertKeyResultForm } from './Form/wrapper'
-import { KeyResultInsertDrawerHeader } from './header'
+import { InsertOrUpdateKeyResultForm } from './Form/wrapper'
+import { KeyResultInsertOrUpdateDrawerHeader } from './header'
 import messages from './messages'
 
 interface KeyResultInsertDrawerProperties {
@@ -22,22 +27,60 @@ export const KeyResultInsertDrawer = ({
   teamID,
   isPersonalKR,
 }: KeyResultInsertDrawerProperties) => {
+  const [isKeyResultEditingLoading, setIsKeyResultEditingLoading] = useState(false)
   const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
+  const editingModeKeyResultID = useRecoilValue(isEditingKeyResultIDAtom)
+
+  const { refetch } = useGetKeyResultWithId(editingModeKeyResultID)
+
   const resetDrawerObjectiveID = useResetRecoilState(keyResultInsertDrawerObjectiveID)
+  const resetEditingModeKeyResultID = useResetRecoilState(isEditingKeyResultIDAtom)
   const { dispatch: dispatchCreateKeyResult } = useEvent(EventType.CREATED_KEY_RESULT)
   const intl = useIntl()
   const toast = useToast()
 
-  const isOpen = Boolean(drawerObjectiveID)
+  const [getKeyResultData, { data: keyResultData }] = useLazyQuery<GetKeyResultWithIDQuery>(
+    GET_KEY_RESULT_WITH_ID,
+    {
+      variables: {
+        id: editingModeKeyResultID,
+      },
+      fetchPolicy: 'network-only',
+      onCompleted: () => setIsKeyResultEditingLoading(false),
+    },
+  )
+
+  useEffect(() => {
+    if (editingModeKeyResultID) {
+      setIsKeyResultEditingLoading(true)
+      getKeyResultData()
+    }
+  }, [editingModeKeyResultID, getKeyResultData])
+
+  const isOpen = editingModeKeyResultID
+    ? Boolean(editingModeKeyResultID)
+    : Boolean(drawerObjectiveID)
+
+  const handleResetDrawerState = async () => {
+    if (editingModeKeyResultID) {
+      await refetch({ id: editingModeKeyResultID })
+      resetEditingModeKeyResultID()
+    }
+
+    resetDrawerObjectiveID()
+  }
 
   const handleSuccess = (currentUserID: string) => {
-    resetDrawerObjectiveID()
+    handleResetDrawerState()
     toast({
-      title: intl.formatMessage(messages.successToastMessage),
+      title: intl.formatMessage(messages.successToastMessage, {
+        isEditing: Boolean(editingModeKeyResultID),
+      }),
       status: 'success',
     })
 
-    dispatchCreateKeyResult({ isPersonal: !teamID, userId: currentUserID })
+    if (!editingModeKeyResultID)
+      dispatchCreateKeyResult({ isPersonal: !teamID, userId: currentUserID })
   }
 
   const handleError = () => {
@@ -54,18 +97,23 @@ export const KeyResultInsertDrawer = ({
     })
   }
 
+  const isEditing = Boolean(editingModeKeyResultID)
+
   return (
-    <Drawer isOpen={isOpen} size="xl" placement="right" onClose={resetDrawerObjectiveID}>
+    <Drawer isOpen={isOpen} size="xl" placement="right" onClose={handleResetDrawerState}>
       <DrawerOverlay />
       <DrawerContent overflowY="auto" flexGrow={1}>
         <Stack h="full">
-          <KeyResultInsertDrawerHeader />
+          <KeyResultInsertOrUpdateDrawerHeader isEditing={isEditing} />
           <Flex flexGrow={1}>
-            <InsertKeyResultForm
+            <InsertOrUpdateKeyResultForm
+              editingKeyResultId={editingModeKeyResultID}
               isPersonalKR={isPersonalKR}
               objectiveID={drawerObjectiveID}
               teamID={teamID}
-              onClose={resetDrawerObjectiveID}
+              editingModeKeyResult={keyResultData?.keyResult}
+              isLoading={isKeyResultEditingLoading}
+              onClose={handleResetDrawerState}
               onSuccess={handleSuccess}
               onError={handleError}
               onValidationError={handleValidationError}

@@ -3,7 +3,7 @@ import React from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
 import LastUpdateText from 'src/components/Base/LastUpdateText'
-import { CalendarColored } from 'src/components/Icon'
+import { AddPersonIcon, CalendarColored } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
@@ -55,7 +55,7 @@ const BaseCardNotification = ({
       gap={6}
       onClick={() => handleClick()}
     >
-      {type === 'routineReminder' ? (
+      {type === 'routineReminder' && (
         <Box marginRight="20px" background="red.100" padding={2} borderRadius="50%" display="flex">
           <CalendarColored
             desc={intl.formatMessage(describeBadgeAvatarIcon)}
@@ -63,7 +63,16 @@ const BaseCardNotification = ({
             height="25px"
           />
         </Box>
-      ) : (
+      )}
+
+      {type === 'krOwner' && (
+        <AddPersonIcon
+          desc={intl.formatMessage(describeBadgeAvatarIcon)}
+          width="42px"
+          height="42px"
+        />
+      )}
+      {type !== 'routineReminder' && type !== 'krOwner' && (
         <Avatar src={sender?.picture}>
           <AvatarBadge boxSize="1.2em" border="none">
             {badgeIcon && (
@@ -75,6 +84,7 @@ const BaseCardNotification = ({
           </AvatarBadge>
         </Avatar>
       )}
+
       <Flex
         flexDir="column"
         alignItems="flex-start"
