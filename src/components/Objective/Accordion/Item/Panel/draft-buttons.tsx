@@ -4,10 +4,10 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import ConfirmPublishingDialog from 'src/components/Objective/OKRsPublishingFlow/ConfirmPublishingDialog/confirm-publishing-dialog'
+import { useGetUserAuthzRole } from 'src/components/User/hooks/getUserAuthzRole/get-user-authz-role'
 import { AUTHZ_ROLES } from 'src/state/recoil/authz/constants'
 import { keyResultInsertDrawerObjectiveID } from 'src/state/recoil/key-result/drawers/insert/objective-id'
 import meAtom from 'src/state/recoil/user/me'
-import selectUser from 'src/state/recoil/user/selector'
 
 import { stopAccordionOpen } from '../../handlers'
 
@@ -24,13 +24,12 @@ export const DraftButtons = ({
 }: DraftButtonsProperties) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const intl = useIntl()
-
   const myID = useRecoilValue(meAtom)
-  const user = useRecoilValue(selectUser(myID))
+  const { data: userAuthzRole, loading } = useGetUserAuthzRole(myID)
 
   const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
 
-  const canPublishOKR = user?.authzRole?.name !== AUTHZ_ROLES.TEAM_MEMBER
+  const canPublishOKR = !loading && userAuthzRole?.name !== AUTHZ_ROLES.TEAM_MEMBER
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     setKeyResultInsertDrawerObjectiveID(objectiveID)
@@ -62,6 +61,7 @@ export const DraftButtons = ({
         <Button
           isDisabled={!canPublishOKR || !isObjectiveWithKeyResults}
           padding="10px"
+          isLoading={loading}
           bg="green.500"
           _hover={{ background: 'green.400', color: 'black.50' }}
           color="white"

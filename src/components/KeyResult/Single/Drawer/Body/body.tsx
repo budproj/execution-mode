@@ -107,13 +107,15 @@ const KeyResultDrawerBody = ({
         </Stack>
         <Divider borderColor="gray.100" />
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
-        {keyResult && (
-          <KeyResultSummarizeSection
-            keyResult={keyResult}
-            keyResultChecklist={keyResultChecklist}
-          />
+        {!isDraft && keyResult && (
+          <>
+            <KeyResultSummarizeSection
+              keyResult={keyResult}
+              keyResultChecklist={keyResultChecklist}
+            />
+            <Divider borderColor="gray.100" />
+          </>
         )}
-        <Divider borderColor="gray.100" />
         <KeyResultChecklistWrapper keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />
         <KeyResultSectionOwner keyResultID={keyResultID} />
