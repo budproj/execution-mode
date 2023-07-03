@@ -5,22 +5,33 @@ import { useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { WandIcon } from 'src/components/Icon'
-import { KeyResult, KeyResultCheckMarkState } from 'src/components/KeyResult/types'
+import {
+  KeyResult,
+  KeyResultCheckIn,
+  KeyResultChecklist,
+  KeyResultCheckMarkState,
+  KeyResultComment,
+} from 'src/components/KeyResult/types'
 import { Format, SummarizeKeyResultInput } from 'src/services/llm/summarize-key-result.dto'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import meAtom from '../../../../../state/recoil/user/me'
 import selectUser from '../../../../../state/recoil/user/selector'
+import { GraphQLEdge } from '../../../../types'
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
 import messages from './messages'
 
 export interface KeyResultSummarizeSectionProperties {
   keyResult: Partial<KeyResult>
+  keyResultChecklist?: Partial<KeyResultChecklist>
 }
 
-const KeyResultSummarizeSection = ({ keyResult }: KeyResultSummarizeSectionProperties) => {
+const KeyResultSummarizeSection = ({
+  keyResult,
+  keyResultChecklist,
+}: KeyResultSummarizeSectionProperties) => {
   const intl = useIntl()
 
   const userID = useRecoilValue(meAtom)
@@ -43,23 +54,27 @@ const KeyResultSummarizeSection = ({ keyResult }: KeyResultSummarizeSectionPrope
 
     const { llm } = await servicesPromise
 
-    const checkIns = KeyResult.keyResultCheckIns?.edges?.map((edges) => {
-      return {
-        comment: edges.node.comment as string,
-        author: edges.node.user.fullName,
-        createdAt: edges.node.createdAt,
-        value: edges.node.value,
-      }
-    })
+    const checkIns = (KeyResult.timeline?.edges ?? [])
+      .filter((edge): edge is GraphQLEdge<KeyResultCheckIn> => 'comment' in edge.node)
+      .map((edges) => {
+        return {
+          comment: edges.node.comment as string,
+          author: edges.node.user.fullName,
+          createdAt: edges.node.createdAt,
+          value: edges.node.value,
+        }
+      })
 
-    const comments = KeyResult.keyResultCheckIns?.edges?.map((edges) => {
-      return {
-        text: edges.node.comment as string,
-        author: edges.node.user.fullName,
-        createdAt: edges.node.createdAt,
-      }
-    })
-    const checklist = KeyResult.checkList?.edges?.map((edges) => {
+    const comments = (KeyResult.timeline?.edges ?? [])
+      .filter((edge): edge is GraphQLEdge<KeyResultComment> => 'text' in edge.node)
+      .map((edges) => {
+        return {
+          text: edges.node.text,
+          author: edges.node.user.fullName,
+          createdAt: edges.node.createdAt,
+        }
+      })
+    const checklist = (keyResultChecklist?.edges ?? []).map((edges) => {
       return {
         description: edges.node.description,
         owner: edges.node.assignedUser.fullName,
