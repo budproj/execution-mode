@@ -1,29 +1,22 @@
 import { Flex, Tag, Text, Box } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
-import { EmptyState } from 'src/components/Base'
+import newTagMessages from 'src/components/Base/MainAppBar/messages'
 
 import messages from './messages'
 
-interface KeyResultHistoryProperties {
-  keyResultID?: string
-}
-
-export const KeyResultHistory = ({ keyResultID }: KeyResultHistoryProperties): JSX.Element => {
-  const hasHistory = true
-
+export const KeyResultHistory = (): JSX.Element => {
+  const intl = useIntl()
   return (
-    <Box>
+    <Box px={8} pt={4}>
       <Flex>
-        <Text color="new-gray.800" fontWeight={700}>
-          SPOTLIGHT | {keyResultID}
+        <Text marginRight="5px" color="new-gray.800" fontWeight={700}>
+          {intl.formatMessage(messages.spotlightTitle)}
         </Text>
         <Tag size="sm" variant="solid" colorScheme="brand" ml={1}>
-          novo!
+          {intl.formatMessage(newTagMessages.newItem)}
         </Tag>
-      </Flex>
-      <Flex alignItems="center" justifyContent="center">
-        {hasHistory && <EmptyState labelMessage={messages.emptyState} imageKey="cat-hanging-out" />}
       </Flex>
     </Box>
   )

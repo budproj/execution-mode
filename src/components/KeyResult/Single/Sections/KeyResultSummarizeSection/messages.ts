@@ -5,6 +5,7 @@ type KeyResultsSectionSummarizeMessage =
   | 'loadingMessage'
   | 'summarizeButtonMessage'
   | 'summarizeSectionTitle'
+  | 'newBetaTag'
 
 export default defineMessages<KeyResultsSectionSummarizeMessage>({
   AIInfo: {
@@ -31,5 +32,11 @@ export default defineMessages<KeyResultsSectionSummarizeMessage>({
     defaultMessage: 'EVOLUÇÃO DO RESULTADO CHAVE',
     id: '2Hlwn7',
     description: 'The section of the summarize button title',
+  },
+
+  newBetaTag: {
+    defaultMessage: 'beta',
+    id: 'l+s/aT',
+    description: 'The tag that indicates the beta version of the feature',
   },
 })

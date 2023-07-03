@@ -58,7 +58,10 @@ const KeyResultSectionAddComment = ({
         setLatestTimelineEntry(data.createKeyResultComment)
         updateUser(data.createKeyResultComment.user)
         // Caso o comentário seja type comment, ele é um comentário de um kr publicado. caso um comentário tenha um parentId, ele é uma resposta de feedback no modo draft, caso ele seja diferente do type comment e não tenha parentId, ele é um feedback no modo draft.
-        if (data.createKeyResultComment.type === COMMENT_TYPE.COMMENT) {
+        if (
+          data.createKeyResultComment.type === COMMENT_TYPE.COMMENT &&
+          !data.createKeyResultComment.parentId
+        ) {
           dispatchCreatedKeyResultCommentEvent({})
         } else if (data.createKeyResultComment.parentId) {
           dispatchCreateDraftFeedbackAnswer({ type: data.createKeyResultComment.type })

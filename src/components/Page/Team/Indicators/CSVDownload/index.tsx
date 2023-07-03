@@ -1,11 +1,10 @@
-import { Box, Button, Flex, Stack, Tag } from '@chakra-ui/react'
+import { Box, Button, Flex, Stack } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import React from 'react'
 import { CSVDownload } from 'react-csv'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import newFeatureMessage from 'src/components/Base/MainAppBar/messages'
 import { DownloadIcon } from 'src/components/Icon'
 import { Team } from 'src/components/Team/types'
 import { getConfidenceName } from 'src/state/hooks/useConfidenceTag/hook'
@@ -114,9 +113,6 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
         <TeamSectionHeading fontSize="14px">
           {intl.formatMessage(messages.teamIndicatorsReportDownloadSectionTitle)}
         </TeamSectionHeading>
-        <Tag size="sm" variant="solid" colorScheme="brand" ml={1}>
-          {intl.formatMessage(newFeatureMessage.newItem)}
-        </Tag>
       </Flex>
 
       <Box w="full" overflowY="hidden" display="flex" gap={4}>
