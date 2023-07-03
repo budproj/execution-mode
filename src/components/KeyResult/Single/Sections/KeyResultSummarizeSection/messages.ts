@@ -10,8 +10,8 @@ type KeyResultsSectionSummarizeMessage =
 export default defineMessages<KeyResultsSectionSummarizeMessage>({
   AIInfo: {
     defaultMessage:
-      'Todas as informações abaixo foram geradas por Inteligencia Artificial e são baseada nas interações que foram realizadas até o momento',
-    id: 'PM6HqK',
+      'Todas as informações acima foram geradas por Inteligencia Artificial e são baseada nas interações que foram realizadas até o momento',
+    id: '/Kf8kO',
     description: 'The message under the Summarized Key Result',
   },
 
