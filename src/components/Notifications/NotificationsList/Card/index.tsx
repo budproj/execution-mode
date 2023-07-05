@@ -7,6 +7,8 @@ import AssignedTask from './AssignedTask'
 import CommentOnRoutineNotification from './CommentOnRoutine'
 import CommentNotification from './Comments'
 import ConfidenceCheckin from './ConfidenceCheckIn'
+import KrFeedback from './KrFeedback'
+import KrOwner from './KrOwner'
 import RoutineReminder from './RoutineReminder'
 import SupportTeam from './SupportTeam'
 
@@ -29,9 +31,9 @@ const CardNotification = ({ ...rest }: Notification) => {
     case 'mentionOnRoutine':
       return <CommentOnRoutineNotification {...rest} />
     case 'krOwner':
-      return <CommentOnRoutineNotification {...rest} />
+      return <KrOwner {...rest} />
     case 'krFeedback':
-      return <CommentOnRoutineNotification {...rest} />
+      return <KrFeedback {...rest} />
     default:
       return <Box />
   }
