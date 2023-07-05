@@ -8,6 +8,7 @@ import {
   Divider,
 } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { IntlLink } from 'src/components/Base'
@@ -15,6 +16,8 @@ import { COMMENT_TYPE, KEY_RESULT_MODE } from 'src/components/KeyResult/constant
 import { User } from 'src/components/User/types'
 import { GraphQLEffect, GraphQLEntityPolicy } from 'src/components/types'
 import meAtom from 'src/state/recoil/user/me'
+
+import commentsCardMessages from '../Comment/messages'
 
 import { CardHeader } from './header'
 import KeyResultSectionTimelineCardBaseOptions from './options'
@@ -58,13 +61,16 @@ const KeyResultSectionTimelineCardBase = ({
   ...rest
 }: KeyResultSectionTimelineCardBaseProperties) => {
   const myID = useRecoilValue(meAtom)
+  const intl = useIntl()
 
   const allowDelete =
-    policy?.delete === GraphQLEffect.ALLOW &&
-    (keyResultMode === KEY_RESULT_MODE.DRAFT ||
-      (keyResultMode === KEY_RESULT_MODE.PUBLISHED &&
-        commentType === COMMENT_TYPE.COMMENT &&
-        !isSubcomment))
+    intlCardType === intl.formatMessage(commentsCardMessages.cardType)
+      ? policy?.delete === GraphQLEffect.ALLOW &&
+        (keyResultMode === KEY_RESULT_MODE.DRAFT ||
+          (keyResultMode === KEY_RESULT_MODE.PUBLISHED &&
+            commentType === COMMENT_TYPE.COMMENT &&
+            !isSubcomment))
+      : policy?.delete === GraphQLEffect.ALLOW
 
   return (
     <Box

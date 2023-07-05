@@ -91,6 +91,7 @@ const CommentFeedbacksCards = ({
       policy={data?.policy}
       backgroundColor={type ? backgroundColor.get(type) : ''}
       keyResultMode={keyResult?.mode}
+      intlCardType={intlCardType}
       commentType={type}
       position="relative"
       border={`1px solid ${borderColorToken}`}
