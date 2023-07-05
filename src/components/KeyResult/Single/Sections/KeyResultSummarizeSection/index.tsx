@@ -1,4 +1,5 @@
-import { Box, Button, Flex, Image, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Image, Tag, Text } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React, { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -27,6 +28,15 @@ export interface KeyResultSummarizeSectionProperties {
   keyResult: Partial<KeyResult>
   keyResultChecklist?: Partial<KeyResultChecklist>
 }
+
+const StyledButton = styled(Button)`
+  &:hover {
+    svg {
+      transition: 0.3s;
+      fill: white;
+    }
+  }
+`
 
 const KeyResultSummarizeSection = ({
   keyResult,
@@ -130,9 +140,14 @@ const KeyResultSummarizeSection = ({
 
   return (
     <Box>
-      <KeyResultSectionHeading>
-        {intl.formatMessage(messages.summarizeSectionTitle)}
-      </KeyResultSectionHeading>
+      <Flex alignItems="center">
+        <KeyResultSectionHeading marginRight="5px">
+          {intl.formatMessage(messages.summarizeSectionTitle)}
+        </KeyResultSectionHeading>
+        <Tag size="sm" variant="solid" colorScheme="brand" ml={1}>
+          {intl.formatMessage(messages.newBetaTag)}
+        </Tag>
+      </Flex>
 
       {summarizedKeyResult ? (
         <Box marginTop="20px">
@@ -148,7 +163,7 @@ const KeyResultSummarizeSection = ({
           <Text color="gray.500">{intl.formatMessage(messages.loadingMessage)}</Text>
         </Flex>
       ) : (
-        <Button
+        <StyledButton
           border="1px solid #F53D7A"
           borderRadius="5px"
           width="100%"
@@ -167,7 +182,7 @@ const KeyResultSummarizeSection = ({
           />
 
           <Text>{intl.formatMessage(messages.summarizeButtonMessage)}</Text>
-        </Button>
+        </StyledButton>
       )}
     </Box>
   )

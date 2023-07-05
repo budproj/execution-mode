@@ -36,7 +36,15 @@ const KeyResultSectionAddComment = ({
   parentCommentId,
   type = COMMENT_TYPE.COMMENT,
 }: KeyResultSectionAddCommentProperties) => {
-  const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_COMMENT)
+  const { dispatch: dispatchCreatedKeyResultCommentEvent } = useEvent(
+    EventType.CREATED_KEY_RESULT_COMMENT,
+  )
+  const { dispatch: dispatchCreatedDraftFeedback } = useEvent(EventType.CREATE_DRAFT_FEEDBACK_CLICK)
+
+  const { dispatch: dispatchCreateDraftFeedbackAnswer } = useEvent(
+    EventType.CREATE_DRAFT_FEEDBACK_ANSWER_CLICK,
+  )
+
   const userID = useRecoilValue(meAtom)
   const [user, updateUser] = useRecoilState(selectUser(userID))
   const setLatestTimelineEntry = useSetRecoilState(selectLatestTimelineEntry(keyResultID))
@@ -49,7 +57,17 @@ const KeyResultSectionAddComment = ({
       onCompleted: (data) => {
         setLatestTimelineEntry(data.createKeyResultComment)
         updateUser(data.createKeyResultComment.user)
-        dispatchEvent({})
+        // Caso o comentário seja type comment, ele é um comentário de um kr publicado. caso um comentário tenha um parentId, ele é uma resposta de feedback no modo draft, caso ele seja diferente do type comment e não tenha parentId, ele é um feedback no modo draft.
+        if (
+          data.createKeyResultComment.type === COMMENT_TYPE.COMMENT &&
+          !data.createKeyResultComment.parentId
+        ) {
+          dispatchCreatedKeyResultCommentEvent({})
+        } else if (data.createKeyResultComment.parentId) {
+          dispatchCreateDraftFeedbackAnswer({ type: data.createKeyResultComment.type })
+        } else {
+          dispatchCreatedDraftFeedback({ type: data.createKeyResultComment.type })
+        }
       },
     },
   )

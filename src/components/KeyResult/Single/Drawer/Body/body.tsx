@@ -18,6 +18,7 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultChecklistAtom } from 'src/state/recoil/key-result/checklist'
 
 import { KeyResultChecklistWrapper } from '../../Sections/Checklist/wrapper'
+import { KeyResultHistory } from '../../Sections/KeyResultHistory'
 import { KeyResultProgress } from '../../Sections/Progress/wrapper'
 
 import { SCROLLBAR_ID } from './constants'
@@ -70,11 +71,7 @@ const KeyResultDrawerBody = ({
         <KeyResultSectionTitle objective={objective} isDraft={isDraft} keyResultID={keyResultID} />
       </Box>
       <Portal containerRef={timelinePortalReference}>
-        {/* {isDraft ? (
-          <Box px={8} pt={4}>
-            <KeyResultHistory />
-          </Box>
-        ) : ( */}
+        {isDraft && <KeyResultHistory />}
         <Box px={8} pt={4}>
           <KeyResultSectionTimeline
             isDraft={isDraft}
@@ -83,7 +80,6 @@ const KeyResultDrawerBody = ({
             newCheckInValue={newCheckInValue}
           />
         </Box>
-        {/* )} */}
       </Portal>
       <Stack
         spacing={4}

@@ -41,6 +41,7 @@ export const TitleInput = ({ hasValidationErrors, isLoading }: TitleInputPropert
             name="title"
             as={Input}
             placeholder={intl.formatMessage(messages.firstInputPlaceholder)}
+            _placeholder={{ color: 'black.400' }}
             isInvalid={isInvalid}
           />
           <InputRightElement

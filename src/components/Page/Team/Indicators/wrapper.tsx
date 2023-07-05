@@ -1,8 +1,7 @@
-import { Flex, HStack, Stack, Tag, Text } from '@chakra-ui/react'
+import { Flex, HStack, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import newTagMessages from 'src/components/Base/MainAppBar/messages'
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import InfoCircleIcon from 'src/components/Icon/InfoCircle'
 import IndicatorsAccordion from 'src/components/Team/IndicatorsAccordion/wrapper'
@@ -34,9 +33,6 @@ const TeamIndicators = ({ teamID }: TeamIndicatorsProperties) => {
             <InfoCircleIcon fill="new-gray.600" stroke="new-gray.600" desc="" cursor="help" />
           </Flex>
         </TooltipWithDelay>
-        <Tag size="sm" variant="solid" colorScheme="brand" ml={2}>
-          {intl.formatMessage(newTagMessages.newItem)}
-        </Tag>
       </HStack>
       <IndicatorsAccordion teamId={teamID} />
     </Stack>
