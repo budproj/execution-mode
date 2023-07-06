@@ -32,7 +32,11 @@ export const useGetKeyResultCommentThread = (
 
   const commentThread = comments.filter((edge) => edge.parentId === comment.id)
 
-  const marshallComment = { ...comment, thread: commentThread }
+  const commentThreadInOrder = commentThread.sort(
+    (a, b) => new Date(a.createdAt as string).getTime() - new Date(b.createdAt as string).getTime(),
+  )
+
+  const marshallComment = { ...comment, thread: commentThreadInOrder }
 
   return { data: marshallComment }
 }
