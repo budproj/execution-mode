@@ -50,6 +50,7 @@ export const ObjectiveAccordionItem = ({
       p={6}
       borderRadius="10"
       border={isDraft ? '2px dashed #ADC5E2' : 'initial'}
+      borderBottomWidth={isDraft ? '2px !important' : 'initial'}
     >
       {({ isExpanded }) =>
         context.mode === ObjectiveViewMode.FILLED ? (
