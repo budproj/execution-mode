@@ -1,5 +1,5 @@
 import { Stack, Heading, Skeleton } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ObjectiveAccordion } from 'src/components/Objective/Accordion/wrapper'
@@ -20,7 +20,7 @@ export interface ObjectivesFromCycleProperties {
   isDisabled?: boolean
 }
 
-export const CycleObjectives = ({
+const CycleObjectives = ({
   cycle,
   objectiveIDs,
   teamID,
@@ -69,3 +69,5 @@ export const CycleObjectives = ({
     </Stack>
   )
 }
+
+export default memo(CycleObjectives)

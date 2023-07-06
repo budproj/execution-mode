@@ -133,8 +133,12 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
         teamID: null,
       },
       onCompleted: async (data) => {
-        setObjectiveIDToEditMode(data.createObjective.id)
         dispatchCreatedObjective({ isPersonal: true, userId: userID })
+        await refetch({
+          ownerId: userID,
+          active: viewMode === ObjectivesViewMode.ACTIVE,
+        })
+        setObjectiveIDToEditMode(data.createObjective.id)
       },
       onError: () => {
         toast({
@@ -163,11 +167,6 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
       variables: {
         cycleID,
       },
-    })
-
-    void refetch({
-      ownerId: userID,
-      active: viewMode === ObjectivesViewMode.ACTIVE,
     })
   }
 

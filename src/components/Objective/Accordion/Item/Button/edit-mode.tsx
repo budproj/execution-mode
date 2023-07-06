@@ -22,7 +22,7 @@ import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objectiv
 import { useRecoilFamilyLoader } from '../../../../../state/recoil/hooks'
 import { objectiveAtomFamily } from '../../../../../state/recoil/objective'
 import { CancelIcon } from '../../../../Icon/Cancel/wrapper'
-import { Objective, ObjectiveMode } from '../../../types'
+import { Objective } from '../../../types'
 import { stopAccordionOpen } from '../../handlers'
 
 import { CancelButton } from './ActionButtons/cancel-button'
@@ -37,6 +37,7 @@ export type EditModeValues = {
 
 interface EditModeProperties {
   objective?: Partial<Objective>
+  isDraft?: boolean
   forwardedRef: React.Ref<FormikProps<EditModeValues>> | undefined
 }
 
@@ -47,7 +48,7 @@ interface UpdateObjectiveMutationResult {
 export const workflowControlStorageKey = 'Bud@SPOTLIGHT_WORKFLOW'
 
 export const EditMode = React.forwardRef<typeof Formik<EditModeValues>, EditModeProperties>(
-  ({ objective, forwardedRef }) => {
+  ({ objective, isDraft, forwardedRef }) => {
     const intl = useIntl()
     const toast = useToast()
     const { get, register } = useLocalStorage()
@@ -76,7 +77,7 @@ export const EditMode = React.forwardRef<typeof Formik<EditModeValues>, EditMode
         },
       })
 
-      if (objective?.mode === ObjectiveMode.DRAFT) {
+      if (isDraft) {
         const valueStoraged = get(workflowControlStorageKey)
         if (valueStoraged) {
           setObjectiveToViewMode(objective?.id)
@@ -84,9 +85,9 @@ export const EditMode = React.forwardRef<typeof Formik<EditModeValues>, EditMode
           setObjectiveToFilledMode(objective?.id)
           register(workflowControlStorageKey, true)
         }
+      } else {
+        setObjectiveToViewMode(objective?.id)
       }
-
-      if (objective?.mode === ObjectiveMode.PUBLISHED) setObjectiveToViewMode(objective?.id)
     }
 
     const handleCancel = () => {

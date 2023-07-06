@@ -1,7 +1,7 @@
 import uniqueId from 'lodash/uniqueId'
 import React from 'react'
 
-import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
+import CycleObjectives from '../../Cycle/Objectives/wrapper'
 
 export interface ChildObjectivesSkeletonProperties {
   numOfSkeletons?: number

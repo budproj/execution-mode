@@ -5,6 +5,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { DangerousActionConfirmationDialog } from 'src/components/Base/Dialogs/Confirmation/DangerousAction/wrapper'
+import { useGetTeamObjective } from 'src/components/Team/hooks/getTeamActiveObjectives/get-team-objective-queries'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
@@ -35,6 +36,8 @@ export const DeleteObjectiveOption = ({
   onDelete,
 }: DeleteObjectiveOptionProperties) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const { refetch } = useGetTeamObjective(teamID)
+
   const [activeObjectives, setActiveObjectives] = useRecoilState(
     userID ? userActiveObjectives(userID) : teamActiveObjectives(teamID),
   )
@@ -45,6 +48,13 @@ export const DeleteObjectiveOption = ({
     {
       variables: {
         objectiveID,
+      },
+      onCompleted: () => {
+        if (userID) {
+          setActiveObjectives(activeObjectives?.filter((edge) => edge.node.id !== objectiveID))
+        } else {
+          void refetch()
+        }
       },
     },
   )
@@ -62,7 +72,6 @@ export const DeleteObjectiveOption = ({
     await deleteObjective()
 
     if (onDelete) onDelete(objectiveID)
-    setActiveObjectives(activeObjectives?.filter((edge) => edge.node.id !== objectiveID))
   }
 
   useEffect(() => {

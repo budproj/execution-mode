@@ -2,6 +2,7 @@ mutation UPDATE_OBJECTIVE($objectiveID: ID!, $title: String!, $description: Stri
   updateObjective(id: $objectiveID, data: { title: $title, description: $description }) {
     id
     title
+    mode
     description
   }
 }
