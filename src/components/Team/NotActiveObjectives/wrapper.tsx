@@ -16,7 +16,7 @@ import {
   ObjectivesViewMode,
   teamObjectivesViewMode,
 } from '../../../state/recoil/team/objectives-view-mode'
-import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
+import CycleObjectives from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnection } from '../../types'
 

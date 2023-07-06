@@ -15,7 +15,7 @@ import {
   ObjectivesViewMode,
   userObjectivesViewMode,
 } from '../../../state/recoil/user/objectives-view-mode'
-import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
+import CycleObjectives from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { useGetUserObjectives } from '../hooks/getUserObjectives'
 import { User } from '../types'

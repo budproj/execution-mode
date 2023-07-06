@@ -47,7 +47,7 @@ export const ObjectiveAccordionButton = ({
   return (
     <AccordionButton maxWidth="100%" p={0} gridGap={4} _hover={{}} _focus={{ boxShadow: 'none' }}>
       {context?.mode === ObjectiveViewMode.EDIT && !isDisabled ? (
-        <EditMode forwardedRef={forwardedRef} objective={objective} />
+        <EditMode isDraft={isDraft} forwardedRef={forwardedRef} objective={objective} />
       ) : (
         <>
           {isDraft ? (

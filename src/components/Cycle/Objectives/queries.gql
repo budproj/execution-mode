@@ -2,6 +2,7 @@ mutation CREATE_DRAFT_OBJECTIVE($title: String!, $teamID: ID, $cycleID: ID!, $ow
   createObjective(data: { title: $title, teamId: $teamID, cycleId: $cycleID, ownerId: $ownerID }) {
     id
     title
+    mode
     cycle {
       id
       period

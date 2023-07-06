@@ -12,7 +12,7 @@ import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { isReloadNecessary, objectiveAtomFamily } from '../../../state/recoil/objective'
 import { userActiveObjectives } from '../../../state/recoil/user/active-objectives'
-import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
+import CycleObjectives from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { useGetUserObjectives } from '../hooks/getUserObjectives'
 import { User } from '../types'

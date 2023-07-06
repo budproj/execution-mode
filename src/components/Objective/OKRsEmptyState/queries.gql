@@ -1,12 +1,8 @@
-mutation CREATE_DRAFT_OBJECTIVE($title: String!, $teamID: ID, $cycleID: ID! $ownerID: ID!) {
-  createObjective(data: {
-    title: $title,
-    teamId: $teamID,
-    cycleId: $cycleID,
-    ownerId: $ownerID,
-  }) {
+mutation CREATE_DRAFT_OBJECTIVE($title: String!, $teamID: ID, $cycleID: ID!, $ownerID: ID!) {
+  createObjective(data: { title: $title, teamId: $teamID, cycleId: $cycleID, ownerId: $ownerID }) {
     id
     title
+    mode
     cycle {
       id
       period

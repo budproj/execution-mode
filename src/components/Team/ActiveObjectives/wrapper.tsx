@@ -1,20 +1,18 @@
-import { useQuery } from '@apollo/client'
 import { Stack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 
 import { OKRsEmptyState } from 'src/components/Objective/OKRsEmptyState/wrapper'
 import { OKRsSkeleton } from 'src/components/Objective/OKRsSkeleton/wrapper'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 
-import { useConnectionEdges } from '../../../state/hooks/useConnectionEdges/hook'
 import { useCycleObjectives } from '../../../state/hooks/useCycleObjectives/hook'
 import { useRecoilFamilyLoader } from '../../../state/recoil/hooks'
 import { isReloadNecessary, objectiveAtomFamily } from '../../../state/recoil/objective'
-import { CycleObjectives } from '../../Cycle/Objectives/wrapper'
+import CycleObjectives from '../../Cycle/Objectives/wrapper'
 import { Objective } from '../../Objective/types'
 import { GraphQLConnection } from '../../types'
-
-import queries from './queries.gql'
+import { useGetTeamObjective } from '../hooks/getTeamActiveObjectives/get-team-objective-queries'
 
 export interface TeamActiveObjectivesProperties {
   teamID: string
@@ -32,19 +30,15 @@ export interface GetTeamActiveObjectivesQuery {
 export const TeamActiveObjectives = ({ teamID }: TeamActiveObjectivesProperties) => {
   const [shouldUpdateObjectives, setShouldUpdateObjectives] = useRecoilState(isReloadNecessary)
   const [loadObjectivesOnRecoil] = useRecoilFamilyLoader<Objective>(objectiveAtomFamily)
-
   const [objectiveEdges, setActiveObjectives, _, isRemoteDataLoaded] =
     useConnectionEdges<Objective>()
+  const { data, refetch } = useGetTeamObjective(teamID)
+
   const [cycles, setCycleObjectives, cycleObjectives, isLoaded] = useCycleObjectives()
 
-  const { refetch } = useQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
-    fetchPolicy: 'no-cache',
-    variables: { teamID },
-    notifyOnNetworkStatusChange: true,
-    onCompleted: ({ team }) => {
-      setActiveObjectives(team.activeObjectives?.edges ?? [])
-    },
-  })
+  useEffect(() => {
+    setActiveObjectives(data?.team.activeObjectives?.edges ?? [])
+  }, [data, setActiveObjectives])
 
   useEffect(() => {
     if (isRemoteDataLoaded) setCycleObjectives(objectiveEdges)
