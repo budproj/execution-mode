@@ -4,6 +4,7 @@ type KeyResultSectionTitleMessage =
   | 'lastUpdateTextPrefix'
   | 'openGraphIconDesc'
   | 'optionsButtonDesc'
+  | 'editButtonLabelMessage'
 
 export default defineMessages<KeyResultSectionTitleMessage>({
   lastUpdateTextPrefix: {
@@ -25,5 +26,11 @@ export default defineMessages<KeyResultSectionTitleMessage>({
     id: 'XCDzMo',
     description:
       'This button allows you to choose an option that can allow you to copy the title ou exclude the KR.',
+  },
+
+  editButtonLabelMessage: {
+    defaultMessage: 'Editar',
+    id: 'jSUqyI',
+    description: 'This button allow the user edit the Key Result.',
   },
 })

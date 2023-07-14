@@ -113,7 +113,7 @@ const KeyResultSummarizeSection = ({
       setIsLoading(true)
 
       const teamId =
-        KeyResult.teamId ?? KeyResult.team.id ?? KeyResult.objective.teamId ?? companyId
+        KeyResult.teamId ?? KeyResult.team?.id ?? KeyResult.objective.teamId ?? companyId
 
       try {
         const requestDate = Date.now()

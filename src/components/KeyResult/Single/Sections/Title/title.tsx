@@ -105,7 +105,7 @@ const KeyResultSectionTitle = ({
           fontWeight="medium"
           onClick={handleEditClick}
         >
-          Editar
+          {intl.formatMessage(messages.editButtonLabelMessage)}
         </Button>
         <KrDrawerTitleActions keyResult={keyResult} onDelete={onDeleteKeyResult} />
       </Flex>

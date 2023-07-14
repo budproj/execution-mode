@@ -30,8 +30,9 @@ export default defineMessages<KeyResultsSectionTimelineCardEmtpyStateMessage>({
   },
 
   emptyState: {
-    defaultMessage: 'Tudo tranquilo por aqui!',
-    id: 'F7vED6',
+    defaultMessage:
+      'Tudo tranquilo por aqui! {breakline}Nenhum feedback ou alteração foi realizado nesse resultado-chave.',
+    id: 'B2t3EA',
     description: 'The emptyState message.',
   },
 })
