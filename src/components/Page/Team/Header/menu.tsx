@@ -18,6 +18,7 @@ import { Cycle } from 'src/components/Cycle/types'
 import HistoryIcon from 'src/components/Icon/History'
 import RedoIcon from 'src/components/Icon/Redo'
 import { workflowControlStorageKey } from 'src/components/Objective/Accordion/Item/Button/edit-mode'
+import objectiveQueries from 'src/components/Objective/queries.gql'
 import { Team } from 'src/components/Team/types'
 import {
   Delta,
@@ -103,7 +104,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   }, [fetchCycles])
 
   const [createDraftObjective] = useMutation<CreateDraftObjectiveQueryResult>(
-    queries.CREATE_DRAFT_OBJECTIVE,
+    objectiveQueries.CREATE_DRAFT_OBJECTIVE,
     {
       variables: {
         title: intl.formatMessage(messages.draftObjectiveTitle),

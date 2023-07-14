@@ -5,6 +5,7 @@ query GET_OBJECTIVE_KEY_RESULTS(
 ) {
   objective(id: $objectiveID) {
     id
+    mode
     keyResults(order: { createdAt: ASC }, mode: $mode) {
       edges {
         node {
