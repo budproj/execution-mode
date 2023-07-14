@@ -1,4 +1,5 @@
 import { Flex } from '@chakra-ui/react'
+import Link from 'next/link'
 import React, { ReactElement } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -30,8 +31,9 @@ const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
       alignItems="center"
       justifyContent="center"
     >
-      <Logotype />
-
+      <Link passHref href="/">
+        <Logotype />
+      </Link>
       {variant !== 'onlyLogotype' && (
         <>
           <Flex gridGap={20} flexGrow={1}>

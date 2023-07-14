@@ -1,4 +1,5 @@
-import { ApolloQueryResult, OperationVariables, useQuery } from '@apollo/client'
+import { ApolloQueryResult, OperationVariables, useLazyQuery } from '@apollo/client'
+import { useEffect } from 'react'
 
 import { Objective } from 'src/components/Objective/types'
 import { GraphQLConnection } from 'src/components/types'
@@ -22,14 +23,16 @@ export interface GetTeamActiveObjectivesQuery {
   }
 }
 export const useGetTeamObjective = (teamID?: Team['id']): useGetTeamObjectiveProperties => {
-  const { data, refetch, loading, called } = useQuery<GetTeamActiveObjectivesQuery>(
-    queries.GET_TEAM_ACTIVE_OBJECTIVES,
-    {
+  const [getTeamObjectives, { data, refetch, loading, called }] =
+    useLazyQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
       fetchPolicy: 'network-only',
       variables: { teamID },
       notifyOnNetworkStatusChange: true,
-    },
-  )
+    })
+
+  useEffect(() => {
+    if (teamID) getTeamObjectives()
+  }, [getTeamObjectives, teamID])
 
   return { data, loading, refetch, called }
 }

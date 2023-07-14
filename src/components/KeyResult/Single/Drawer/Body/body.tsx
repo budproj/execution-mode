@@ -1,5 +1,6 @@
 import { Box, Divider, Portal, Stack, Text } from '@chakra-ui/react'
 import React, { useRef } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import {
@@ -22,6 +23,7 @@ import { KeyResultHistory } from '../../Sections/KeyResultHistory'
 import { KeyResultProgress } from '../../Sections/Progress/wrapper'
 
 import { SCROLLBAR_ID } from './constants'
+import messages from './messages'
 
 export interface KeyResultDrawerBodyProperties {
   keyResultID: KeyResult['id']
@@ -36,6 +38,7 @@ const KeyResultDrawerBody = ({
 }: KeyResultDrawerBodyProperties) => {
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
   const objective = keyResult?.objective
+  const intl = useIntl()
   const keyResultChecklist = useRecoilValue(keyResultChecklistAtom(keyResultID))
   const timelinePortalReference = useRef<HTMLDivElement>(null)
 
@@ -63,7 +66,7 @@ const KeyResultDrawerBody = ({
       {isDraft && (
         <Box textAlign="center" background="new-gray.600" paddingY="15px">
           <Text fontWeight={500} color="white">
-            Este resultado-chave ainda é um rascunho
+            {intl.formatMessage(messages.headerMessage)}
           </Text>
         </Box>
       )}

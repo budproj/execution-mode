@@ -8,6 +8,7 @@ query GET_OBJECTIVES($ownerId: ID, $teamId: ID, $active: Boolean) {
               node {
                 id
                 title
+                mode
                 ownerId
                 keyResults {
                   policy {

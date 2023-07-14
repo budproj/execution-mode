@@ -1,6 +1,6 @@
 import { AccordionItem, Box } from '@chakra-ui/react'
 import { FormikProps } from 'formik'
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { Objective, ObjectiveMode } from 'src/components/Objective/types'
@@ -32,6 +32,10 @@ export const ObjectiveAccordionItem = ({
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const context = useRecoilValue(objectiveContext(objectiveID))
 
+  console.log({ objective })
+
+  const isDraft = useMemo(() => objective?.mode === ObjectiveMode.DRAFT, [objective?.mode])
+
   const [confidenceTag, setConfidence] = useConfidenceTag(objective?.status?.confidence)
   const isLoaded = Boolean(objective)
   const formikReference = useRef<FormikProps<EditModeValues> | null>(null)
@@ -40,8 +44,6 @@ export const ObjectiveAccordionItem = ({
     if (typeof objective?.status?.confidence !== 'undefined')
       setConfidence(objective?.status?.confidence)
   }, [objective, setConfidence])
-
-  const isDraft = objective?.mode === ObjectiveMode.DRAFT
 
   return (
     <AccordionItem

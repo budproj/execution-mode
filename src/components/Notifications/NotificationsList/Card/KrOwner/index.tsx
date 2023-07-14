@@ -44,7 +44,7 @@ const KrOwner = ({ properties, timestamp, isRead }: Notification) => {
               display="inline-block"
             >
               {intl.formatMessage(messages.describeNotificationSecondPart)}
-            </Text>{' '}
+            </Text>
             {intl.formatMessage(messages.describeNotificationThirdPart)}
           </Text>
           <Tag marginTop="5px" bg="new-gray.100" color="new-gray.600">

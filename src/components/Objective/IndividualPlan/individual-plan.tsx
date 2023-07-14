@@ -22,8 +22,8 @@ import { PageHeader } from 'src/components/Base/PageHeader/wrapper'
 import { ActionMenu } from 'src/components/Cycle/ActionMenu/wrapper'
 import HistoryIcon from 'src/components/Icon/History'
 import objectiveMessages from 'src/components/Objective/OKRsEmptyState/messages'
-import objectiveQueries from 'src/components/Objective/OKRsEmptyState/queries.gql'
 import { CreateDraftObjectiveQueryResult } from 'src/components/Objective/OKRsEmptyState/wrapper'
+import objectiveQueries from 'src/components/Objective/queries.gql'
 import { TeamSectionWrapper } from 'src/components/Page/Team/Section/wrapper'
 import { UserObjectives } from 'src/components/User/Objectives/wrapper'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
@@ -33,12 +33,15 @@ import { User } from 'src/components/User/types'
 import { GraphQLEffect } from 'src/components/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
+import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
 import {
   ObjectivesViewMode,
   userObjectivesViewMode,
 } from 'src/state/recoil/user/objectives-view-mode'
+
+import { workflowControlStorageKey } from '../Accordion/Item/Button/edit-mode'
 
 import { useGetUsersWithIndividualPlan } from './hooks/get-users-with-individual-plan'
 import messages from './messages'
@@ -57,6 +60,7 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
   const { data, loading } = useGetUsersWithIndividualPlan()
 
   const [usersList, setUsersList] = useState<User[]>(data)
+  const { get, register } = useLocalStorage()
 
   const [selectedUserID, setSelectedUserID] = useState<string>()
   const [isUserSidebarOpen, setIsUserSidebarOpen] = useState(false)
@@ -163,11 +167,16 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
   )
 
   const handleDraftObjectiveCreation = (cycleID?: string) => {
+    const valueStoraged = get(workflowControlStorageKey)
     void createDraftObjective({
       variables: {
         cycleID,
       },
     })
+
+    if (valueStoraged) {
+      register(workflowControlStorageKey, false)
+    }
   }
 
   useEffect(() => {
