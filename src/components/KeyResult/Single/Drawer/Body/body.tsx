@@ -1,4 +1,5 @@
 import { Box, Divider, Portal, Stack, Text } from '@chakra-ui/react'
+import { useFlags } from 'flagsmith/react'
 import React, { useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
@@ -37,6 +38,7 @@ const KeyResultDrawerBody = ({
   isKeyResultPage,
 }: KeyResultDrawerBodyProperties) => {
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
+  const flags = useFlags(['llms_openai_summary'])
   const objective = keyResult?.objective
   const intl = useIntl()
   const keyResultChecklist = useRecoilValue(keyResultChecklistAtom(keyResultID))
@@ -52,6 +54,7 @@ const KeyResultDrawerBody = ({
       : undefined
 
   const isDraft = keyResult?.mode === KEY_RESULT_MODE.DRAFT
+  const isKeyResultSummaryVisible = flags.llms_openai_summary.enabled
 
   return (
     <Stack
@@ -106,7 +109,7 @@ const KeyResultDrawerBody = ({
         </Stack>
         <Divider borderColor="gray.100" />
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
-        {!isDraft && keyResult && (
+        {isKeyResultSummaryVisible && !isDraft && keyResult && (
           <>
             <KeyResultSummarizeSection
               keyResult={keyResult}
