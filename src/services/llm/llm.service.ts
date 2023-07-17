@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios'
 
+import { SendFeedbackOutput } from './send-feedback.dto'
 import { SummarizeKeyResultInput, SummarizeKeyResultOutput } from './summarize-key-result.dto'
 
 export interface CreateCompletionRequest<T> {
@@ -10,6 +11,12 @@ export interface CreateCompletionRequest<T> {
     companyId: string
   }
   input: T
+}
+
+export interface SendFeedbackRequest {
+  completionId: string
+  userId: string
+  value: string
 }
 
 export class LlmService {
@@ -26,10 +33,12 @@ export class LlmService {
     return data
   }
 
-  // Async sendFeedback(referenceId: string, feedback: number) {
-  //   // Thumbs up/thumbs down
+  async sendFeedback(request: SendFeedbackRequest): Promise<SendFeedbackOutput> {
+    // Thumbs up/thumbs down
+    const { data } = await this.client.post<SendFeedbackOutput>('/feedback', request)
 
-  // }
+    return data
+  }
 
   // Async enhanceObjective(input: EnhanceObjectiveInput): ...
 }
