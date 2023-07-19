@@ -35,11 +35,8 @@ interface BudAppProperties extends AppProps {
 
 const config = getConfig()
 
-const getMessages = async (locale: string | undefined): Promise<IntlMessage | undefined> =>
-  require(`../../compiled-lang/${locale ?? 'pt-BR'}.json`)
-
 const BudApp = (properties: BudAppProperties): ReactElement => {
-  const { Component, pageProps, locale, messages } = properties
+  const { Component, pageProps } = properties
   const router = useRouter()
 
   const onAuth0RedirectCallback = (appState?: AppState): void => {
@@ -68,7 +65,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
             <AuthzGatekeeper>
               <AmplitudeProvider>
                 <AuthzApolloProvider pageProps={pageProps}>
-                  <RecoilIntlProvider locale={locale ?? 'pt-BR'} messages={messages}>
+                  <RecoilIntlProvider>
                     <FlagsmithProvider>
                       <ServicesProvider>
                         <RoutinesFormActionsProvider>
@@ -101,13 +98,9 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
 BudApp.getInitialProps = async (appContext: AppContext) => {
   const pageProperties = {}
 
-  const { Component, ctx, router } = appContext
-  const { locale } = router
+  const { Component, ctx } = appContext
 
-  const [appProperties, messages] = await Promise.all([
-    App.getInitialProps(appContext),
-    getMessages(locale),
-  ])
+  const [appProperties] = await Promise.all([App.getInitialProps(appContext)])
 
   if (Component.getInitialProps) {
     Object.assign(pageProperties, await Component.getInitialProps(ctx))
@@ -116,8 +109,6 @@ BudApp.getInitialProps = async (appContext: AppContext) => {
   return {
     ...appProperties,
     pageProps: pageProperties,
-    locale,
-    messages: messages ?? {},
   }
 }
 

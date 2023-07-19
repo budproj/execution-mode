@@ -8,7 +8,6 @@ const {
   HOST,
   APP_VERSION,
   APP_ENV,
-  LOCALE_OVERRIDE,
   DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
   NODE_ENV,
@@ -51,7 +50,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const publicRuntimeConfig = {
   environment: APP_ENV,
   nodeEnv: NODE_ENV,
-  defaultLocale: LOCALE_OVERRIDE ?? DEFAULT_LOCALE,
+  defaultLocale: DEFAULT_LOCALE,
   logLevel: LOG_LEVEL,
   maintenanceMode: {
     enabled: MAINTENANCE_MODE_ENABLED === 'true',
@@ -85,7 +84,7 @@ const publicRuntimeConfig = {
     restBase: REST_API_BASE,
     routines: ROUTINES_API,
     comments: COMMENTS_API,
-    llm: LLM_API
+    llm: LLM_API,
   },
 
   sentry: {
@@ -98,66 +97,8 @@ const publicRuntimeConfig = {
 
   intlRedirects: [
     {
-      source: '/meus-resultados-chave',
-      destination: '/minhas-coisas',
-    },
-    {
-      source: '/pt-BR/meus-resultados-chave',
-      destination: '/pt-BR/minhas-coisas',
-    },
-    {
       source: '/my-key-results',
       destination: '/my-things',
-    },
-  ],
-
-  intlRoutes: [
-    {
-      source: '/pt-BR/minhas-coisas',
-      destination: '/my-things',
-      locale: 'pt-BR',
-    },
-
-    {
-      source: '/pt-BR/meus-resultados-chave/ciclos-anteriores',
-      destination: '/my-key-results/previous-cycles',
-      locale: 'pt-BR',
-    },
-
-    {
-      source: '/pt-BR/explorar',
-      destination: '/explore',
-      locale: 'pt-BR',
-    },
-
-    {
-      source: '/pt-BR/explorar/:id',
-      destination: '/explore/:id',
-      locale: 'pt-BR',
-    },
-
-    {
-      source: '/pt-BR/configuracoes/meu-perfil',
-      destination: '/settings/my-profile',
-      locale: 'pt-BR',
-    },
-
-    {
-      source: '/pt-BR/configuracoes',
-      destination: '/settings',
-      locale: 'pt-BR',
-    },
-
-    {
-      source: '/pt-BR/novo-ambiente',
-      destination: '/new-workspace',
-      locale: 'pt-BR',
-    },
-
-    {
-      source: '/pt-BR/perfil',
-      destination: '/profile',
-      locale: 'pt-BR',
     },
   ],
 }
@@ -165,7 +106,7 @@ const publicRuntimeConfig = {
 const serverRuntimeConfig = {
   url: URL,
   host: HOST,
-  supportedLocales: LOCALE_OVERRIDE ? [LOCALE_OVERRIDE] : SUPPORTED_LOCALES.split(','),
+  supportedLocales: SUPPORTED_LOCALES.split(','),
   sentry: {
     dsn: SENTRY_DSN,
   },
@@ -181,13 +122,6 @@ const moduleExports = {
   publicRuntimeConfig,
   i18n,
   output: 'standalone',
-
-  async rewrites() {
-    return publicRuntimeConfig.intlRoutes.map((route) => ({
-      ...route,
-      locale: false,
-    }))
-  },
 
   async redirects() {
     return publicRuntimeConfig.intlRedirects.map((route) => ({
