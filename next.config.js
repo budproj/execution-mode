@@ -51,7 +51,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const publicRuntimeConfig = {
   environment: APP_ENV,
   nodeEnv: NODE_ENV,
-  defaultLocale: DEFAULT_LOCALE,
+  defaultLocale: LOCALE_OVERRIDE ?? DEFAULT_LOCALE,
   logLevel: LOG_LEVEL,
   maintenanceMode: {
     enabled: MAINTENANCE_MODE_ENABLED === 'true',
@@ -107,7 +107,7 @@ const publicRuntimeConfig = {
 const serverRuntimeConfig = {
   url: URL,
   host: HOST,
-  supportedLocales: SUPPORTED_LOCALES ? SUPPORTED_LOCALES.split(',') : [LOCALE_OVERRIDE],
+  supportedLocales: LOCALE_OVERRIDE ? [LOCALE_OVERRIDE] : SUPPORTED_LOCALES.split(','),
   sentry: {
     dsn: SENTRY_DSN,
   },
