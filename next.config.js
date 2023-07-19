@@ -10,6 +10,7 @@ const {
   APP_ENV,
   DEFAULT_LOCALE,
   SUPPORTED_LOCALES,
+  LOCALE_OVERRIDE,
   NODE_ENV,
   LOG_LEVEL,
   API_GRAPHQL,
@@ -106,7 +107,7 @@ const publicRuntimeConfig = {
 const serverRuntimeConfig = {
   url: URL,
   host: HOST,
-  supportedLocales: SUPPORTED_LOCALES.split(','),
+  supportedLocales: SUPPORTED_LOCALES ? SUPPORTED_LOCALES.split(',') : [LOCALE_OVERRIDE],
   sentry: {
     dsn: SENTRY_DSN,
   },
