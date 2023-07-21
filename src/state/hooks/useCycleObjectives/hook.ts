@@ -24,9 +24,26 @@ const groupObjectivesByCycle = (objectives?: Objective[]): CycleObjectives => {
     cycle,
     objectives
       .filter((objective) => objective.cycle.id === cycle.id)
-      .sort((a, b) =>
-        a.mode === ObjectiveMode.DRAFT ? -1 : b.mode === ObjectiveMode.DRAFT ? 1 : 0,
-      )
+      .sort((a, b) => {
+        if (a.mode === ObjectiveMode.DRAFT && b.mode === ObjectiveMode.DRAFT) {
+          // Objetivos do draft mode em ordem crescente
+          return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        }
+
+        if (a.mode === ObjectiveMode.DRAFT) {
+          // Draft mode antes de published mode
+          return -1
+        }
+
+        if (b.mode === ObjectiveMode.DRAFT) {
+          // Draft mode antes de published mode
+
+          return 1
+        }
+
+        // Objetivos do published mode em ordem decrescente
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      })
       .map((objective) => objective.id),
   ])
 }
