@@ -1,5 +1,5 @@
 import { useAuth0 } from '@auth0/auth0-react'
-import React, { createContext, ReactElement, useEffect, useState } from 'react'
+import React, { createContext, ReactElement, useEffect, useMemo, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { Socket, io } from 'socket.io-client'
 
@@ -38,30 +38,41 @@ const SocketIOProvider = ({ children }: ChildrenProperty) => {
   useEffect(() => {
     connectWebsocket()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [socket?.id])
 
   useEffect(() => {
-    if (socket) {
-      socket.on('newNotification', (newNotification: Notification) => {
-        setNotifications((previousNotifications) => {
-          const existentNotificationIndex = previousNotifications.findIndex(
-            (notification) => notification.messageId === newNotification.messageId,
-          )
+    if (!socket) {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      return () => {}
+    }
 
-          if (existentNotificationIndex !== -1) {
-            return previousNotifications.map((notification, index) => {
-              return index === existentNotificationIndex ? newNotification : notification
-            })
-          }
+    socket.on('newNotification', (newNotification: Notification) => {
+      setNotifications((previousNotifications) => {
+        const existentNotificationIndex = previousNotifications.findIndex(
+          (notification) => notification.messageId === newNotification.messageId,
+        )
 
-          return [newNotification, ...previousNotifications]
-        })
+        if (existentNotificationIndex !== -1) {
+          return previousNotifications.map((notification, index) => {
+            return index === existentNotificationIndex ? newNotification : notification
+          })
+        }
+
+        return [newNotification, ...previousNotifications]
       })
+    })
+
+    return () => {
+      socket?.off('newNotification')?.disconnect()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket])
+  }, [socket?.id])
 
-  return <SocketIOContext.Provider value={{ socket }}>{children}</SocketIOContext.Provider>
+  return useMemo(
+    () => <SocketIOContext.Provider value={{ socket }}>{children}</SocketIOContext.Provider>,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [socket?.id, children],
+  )
 }
 
 export default SocketIOProvider

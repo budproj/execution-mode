@@ -1,4 +1,4 @@
-import { UserNamedAvatarDataQuery } from 'src/components/User/Me/me'
+import { Myself } from '../../recoil/shared/types'
 
 import { AmplitudeUser, AmplitudeUserGroups } from './types'
 
@@ -12,7 +12,7 @@ type MinimumEdge<N> = {
   node: N
 }
 
-export const marshalAmplitudeUser = (user: UserNamedAvatarDataQuery): AmplitudeUser => ({
+export const marshalAmplitudeUser = (user: Myself): AmplitudeUser => ({
   id: user.id,
   name: user.fullName,
   email: user.email,
@@ -22,9 +22,7 @@ export const marshalAmplitudeUser = (user: UserNamedAvatarDataQuery): AmplitudeU
   createdAt: user.createdAt,
 })
 
-export const marshalAmplitudeUserGroups = (
-  user: UserNamedAvatarDataQuery,
-): AmplitudeUserGroups => ({
+export const marshalAmplitudeUserGroups = (user: Myself): AmplitudeUserGroups => ({
   companies: getGroupNames(user.companies.edges),
   teams: getGroupNames(user.teams.edges),
 })

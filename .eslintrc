@@ -8,6 +8,7 @@
   ],
   "rules": {
     "import/no-unresolved": ["error"],
+    "no-warning-comments": "off",
     "react/jsx-indent": "off",
     "react/jsx-curly-newline": "off",
     "unicorn/no-nested-ternary": "off",

@@ -1,4 +1,5 @@
 import { ApolloClient, ApolloLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
+import { BatchHttpLink } from '@apollo/client/link/batch-http'
 import { setContext } from '@apollo/client/link/context'
 import { Auth0ContextInterface, useAuth0 } from '@auth0/auth0-react'
 import { SentryLink } from 'apollo-link-sentry'
@@ -38,13 +39,25 @@ const amplitudeLinkFactory = ({ deviceID, sessionID }: AmplitudeHook) =>
     },
   }))
 
+const batchHttpLinkFactory = () => {
+  const { publicRuntimeConfig } = getConfig()
+
+  return new BatchHttpLink({
+    uri: publicRuntimeConfig.api.graphql.uri,
+    batchMax: publicRuntimeConfig.api.graphql.batchMax,
+    batchInterval: publicRuntimeConfig.api.graphql.batchInterval,
+    batchDebounce: true,
+    includeUnusedVariables: false,
+  })
+}
+
 const linkWithServer = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) => {
   const { publicRuntimeConfig } = getConfig()
 
   const authLink = authzLinkFactory(authzClient)
   const amplitudeLink = amplitudeLinkFactory(amplitude)
   const uploadLink = createUploadLink({
-    uri: publicRuntimeConfig.api.graphql,
+    uri: publicRuntimeConfig.api.graphql.uri,
   })
   const sentryLink = new SentryLink({
     attachBreadcrumbs: {
@@ -52,8 +65,20 @@ const linkWithServer = (authzClient: Auth0ContextInterface, amplitude: Amplitude
       includeVariables: true,
     },
   })
+  const batchHttpLink = batchHttpLinkFactory()
 
-  return { link: ApolloLink.from([sentryLink, authLink, amplitudeLink, uploadLink]) }
+  // Decide whether to batch or upload based on having at least one mutation operation
+  const mediatorLink = ApolloLink.split(
+    (operation) => {
+      return !operation.query.definitions.some(
+        (it) => 'operation' in it && it.operation === 'mutation',
+      )
+    },
+    batchHttpLink,
+    uploadLink,
+  )
+
+  return { link: ApolloLink.from([sentryLink, authLink, amplitudeLink, mediatorLink]) }
 }
 
 const createApolloClient = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) =>
@@ -92,8 +117,7 @@ export const useApollo = (
   const state: NormalizedCacheObject = pageProperties[APOLLO_STATE]
   const client = useMemo(
     () => initializeApollo(authzClient, amplitude, state),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [authzClient, state],
+    [authzClient, amplitude, state],
   )
 
   return client

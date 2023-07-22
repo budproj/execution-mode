@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import React, { ReactElement, useCallback, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
@@ -7,9 +6,8 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { currentNextRoute, intlLocaleAtom } from 'src/state/recoil/intl'
 
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 import { LOCALE_COOKIE_KEY } from '../LocaleSwitcher/constants'
-
-import queries from './queries.gql'
 
 type IntlMessage = Record<string, string>
 
@@ -21,20 +19,26 @@ const getMessages = async (locale: string): Promise<IntlMessage | undefined> =>
   require(`../../../../compiled-lang/${locale}.json`)
 
 const RecoilIntlProvider = (properties: RecoilIntlProviderProperties): ReactElement => {
-  const { push, pathname, query, asPath } = useRouter()
+  const router = useRouter()
+  const [myself] = useRecoilState(myselfAtom)
   const [messages, setMessages] = useState<IntlMessage | undefined>()
   const [intl, setIntl] = useRecoilState<string>(intlLocaleAtom)
   const setCurrentNextRoute = useSetRecoilState(currentNextRoute)
-  const [locale, setCookie] = useCookies([LOCALE_COOKIE_KEY])
+  const [, setCookie] = useCookies([LOCALE_COOKIE_KEY])
 
-  useQuery(queries.GET_MY_LOCALE, {
-    onCompleted: async (data) => {
-      const savedLocale = await data.me.settings.edges[0]?.node?.value
-      if (savedLocale) setIntl(savedLocale)
-      if (locale !== savedLocale) setCookie(LOCALE_COOKIE_KEY, savedLocale, { path: '/' })
-      await push({ pathname, query }, asPath, { locale: savedLocale })
-    },
-  })
+  useEffect(() => {
+    setCookie(LOCALE_COOKIE_KEY, intl, { path: '/' })
+    router.push(router, router.asPath, { locale: intl })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [intl])
+
+  useEffect(() => {
+    const savedLocale = myself?.settings?.edges?.[0]?.node?.value
+    if (savedLocale) {
+      setIntl(savedLocale)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myself?.id])
 
   const handleConfigMessages = useCallback(async () => {
     const messages = await getMessages(intl)
@@ -46,8 +50,8 @@ const RecoilIntlProvider = (properties: RecoilIntlProviderProperties): ReactElem
   }, [handleConfigMessages])
 
   useEffect(() => {
-    setCurrentNextRoute(pathname)
-  }, [setCurrentNextRoute, pathname])
+    setCurrentNextRoute(router.pathname)
+  }, [setCurrentNextRoute, router.pathname])
 
   return <IntlProvider {...properties} locale={intl} messages={messages} />
 }

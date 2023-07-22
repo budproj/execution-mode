@@ -3,7 +3,7 @@ query GET_COMPANY_TEAMS {
     edges {
       node {
         id
-        rankedDescendants {
+        teams {
           edges {
             node {
               id

@@ -1,12 +1,8 @@
-import { useQuery } from '@apollo/client'
 import { useAuth0 } from '@auth0/auth0-react'
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useRecoilState } from 'recoil'
 
 import NamedAvatar from 'src/components/User/NamedAvatar'
-import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
-import { userAtomFamily } from 'src/state/recoil/user'
-import meAtom from 'src/state/recoil/user/me'
 
 import getConfig from '../../../config'
 import { useAmplitude } from '../../../state/hooks/useAmplitude/hook'
@@ -14,12 +10,11 @@ import {
   marshalAmplitudeUser,
   marshalAmplitudeUserGroups,
 } from '../../../state/hooks/useAmplitude/marshal-amplitude-user'
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 import { Team } from '../../Team/types'
 import { GraphQLConnection } from '../../types'
 import { USER_GENDER } from '../constants'
 import { UserProgress } from '../types'
-
-import queries from './queries.gql'
 
 export interface UserNamedAvatarDataQuery {
   id: string
@@ -37,32 +32,30 @@ export interface UserNamedAvatarDataQuery {
   quarterlyProgress: UserProgress
 }
 
-export interface GetUserNamedAvatarDataQuery {
-  me: UserNamedAvatarDataQuery
-}
-
 const Me = () => {
   const { user } = useAuth0()
   const { publicRuntimeConfig } = getConfig()
   const { identify } = useAmplitude()
-  const [me, setMe] = useRecoilState(meAtom)
-  const [loadUser] = useRecoilFamilyLoader(userAtomFamily)
-  const { loading } = useQuery<GetUserNamedAvatarDataQuery>(queries.GET_USER_NAMED_AVATAR_DATA, {
-    onCompleted: (data) => {
-      setMe(data.me.id)
-      loadUser(data.me)
+  const [myself] = useRecoilState(myselfAtom)
 
+  useEffect(() => {
+    if (myself && user) {
       const { apiDomain } = publicRuntimeConfig.auth0
       const userData = {
-        ...data.me,
-        permissions: user?.[`${apiDomain}/roles`],
+        ...myself,
+        permissions: user[`${apiDomain}/roles`],
       }
 
       identify(userData.id, marshalAmplitudeUser(userData), marshalAmplitudeUserGroups(userData))
-    },
-  })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myself, user?.sub])
 
-  return <NamedAvatar userID={me} isLoading={loading} />
+  return useMemo(
+    () => <NamedAvatar userID={myself?.id} user={myself} isLoading={!myself} />,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [myself?.id],
+  )
 }
 
 export default Me

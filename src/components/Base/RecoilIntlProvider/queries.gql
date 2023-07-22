@@ -1,3 +1,4 @@
+# @deprecated in favor of shared query GET_ME
 query GET_MY_LOCALE {
   me {
     settings(keys: [LOCALE]) {

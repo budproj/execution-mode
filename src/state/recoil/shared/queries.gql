@@ -1,0 +1,67 @@
+# GET_MY_LOCALE
+# GET_USER_TRAITS
+# GET_USER_NAME_AND_GENDER
+# GET_USER_ACCESS_TO_CREATE_OBJECTIVES
+# GET_USER_NAMED_AVATAR_DATA
+query GET_MYSELF {
+  me {
+    id
+    firstName
+    lastName
+    fullName
+    picture
+    email
+    gender
+    role
+    isTeamLeader
+    authzSub
+    authzRole {
+      id
+      name
+      description
+    }
+    createdAt
+    updatedAt
+    yearlyProgress {
+      showProgress
+      progress
+    }
+    quarterlyProgress {
+      showProgress
+      progress
+    }
+    companies {
+      edges {
+        node {
+          id
+          name
+          gender
+          # TODO: teams -> all teams
+          # TODO: team members -> all team members ids
+          objectives {
+            policy {
+              create
+            }
+          }
+        }
+      }
+    }
+    # TODO: remove in favor of team tree(s)
+    teams {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+    settings(keys: [LOCALE]) {
+      edges {
+        node {
+          key
+          value
+        }
+      }
+    }
+  }
+}

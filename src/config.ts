@@ -54,7 +54,11 @@ export interface Route {
 }
 
 export interface BudAPIs {
-  graphql: string
+  graphql: {
+    uri: string
+    batchMax: number
+    batchInterval: number
+  }
   notifications: string
   routines: string
   comments: string

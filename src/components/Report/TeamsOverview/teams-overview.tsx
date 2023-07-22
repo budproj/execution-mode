@@ -40,12 +40,16 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   const [loadTeam] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const company = data?.teams?.edges?.[0]?.node
 
-  const orderedTeams = isGameficationDisabled
-    ? rankedTeams.sort((a, b) => (a.name > b.name ? 1 : -1))
-    : rankedTeams
+  const orderedTeams = rankedTeams.sort(
+    isGameficationDisabled
+      ? (left, right) => left.name.localeCompare(right.name)
+      : (left, right) => right.status.progress - left.status.progress,
+  )
 
   useEffect(() => {
-    if (company) setRankedTeamsEdges(company?.rankedDescendants?.edges)
+    if (company) {
+      setRankedTeamsEdges(company?.teams?.edges)
+    }
   }, [company, setRankedTeamsEdges])
 
   useEffect(() => {
