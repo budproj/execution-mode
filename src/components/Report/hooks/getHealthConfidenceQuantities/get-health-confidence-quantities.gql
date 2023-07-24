@@ -8,6 +8,8 @@ query GET_HEALTH_CONFIDENCE_QUANTITIES {
         medium
         low
         barrier
+        achieved
+        deprioritized
       }
     }
   }

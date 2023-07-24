@@ -1,6 +1,10 @@
 import { defineMessages } from 'react-intl'
 
 type ConfidenceTagMessage =
+  | 'achievedShort'
+  | 'achievedLong'
+  | 'achievedIcon'
+  | 'achievedHelperText'
   | 'highShort'
   | 'highLong'
   | 'highIcon'
@@ -17,8 +21,33 @@ type ConfidenceTagMessage =
   | 'barrierLong'
   | 'barrierIcon'
   | 'barrierHelperText'
+  | 'deprioritizedShort'
+  | 'deprioritizedLong'
+  | 'deprioritizedIcon'
+  | 'deprioritizedHelperText'
 
 export default defineMessages<ConfidenceTagMessage>({
+  achievedShort: {
+    defaultMessage: 'Alcançado',
+    id: '1B6FoV',
+    description: 'We use this tag to group every key result with confidence achieved',
+  },
+  achievedLong: {
+    defaultMessage: 'Alcançado',
+    id: '1B6FoV',
+    description: 'We use this tag to group every key result with confidence achieved',
+  },
+  achievedIcon: {
+    defaultMessage: 'Um círculo roxo, indicando que o resultado-chave tem uma barreira',
+    id: 'zEyzo8',
+    description: 'A brief explanation for screen readers regarding the purple status circle',
+  },
+  achievedHelperText: {
+    defaultMessage: 'Este resultado-chave alcançou sua conclusão! :)',
+    id: 'Nls8gh',
+    description: 'This text explains our tag to the user',
+  },
+
   highShort: {
     defaultMessage: 'Alto',
     id: '4f4cWE',
@@ -116,6 +145,30 @@ export default defineMessages<ConfidenceTagMessage>({
   barrierHelperText: {
     defaultMessage: 'Existe um fator externo impedindo o progresso desse resultado-chave',
     id: 'xXxjVp',
+    description: 'This text explains our tag to the user',
+  },
+
+  deprioritizedShort: {
+    defaultMessage: 'Despriorizado',
+    id: '/pxKno',
+    description: 'We use this tag to group every key result that has been deprioritized',
+  },
+
+  deprioritizedLong: {
+    defaultMessage: 'Despriorizado',
+    id: '/pxKno',
+    description: 'We use this tag to group every key result that has been deprioritized',
+  },
+
+  deprioritizedIcon: {
+    defaultMessage: 'Um círculo roxo, indicando que o resultado-chave tem uma barreira',
+    id: 'zEyzo8',
+    description: 'A brief explanation for screen readers regarding the purple status circle',
+  },
+
+  deprioritizedHelperText: {
+    defaultMessage: 'Este resultado-chave foi despriorizado e deixado de lado por enquanto.',
+    id: 'iXij4+',
     description: 'This text explains our tag to the user',
   },
 })

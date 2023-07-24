@@ -52,6 +52,7 @@ const Board = ({
       justifyContent="center"
       bgHover={bgHoverColor}
       paddingY="18"
+      minHeight="100%"
       {...rest}
     >
       <Text

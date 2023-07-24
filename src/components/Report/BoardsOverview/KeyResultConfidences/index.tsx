@@ -12,12 +12,16 @@ import { confidenceTexts, getConfidenceQuantities, getIsListable } from '../cons
 import messages from '../messages'
 import { Confidence, HealthConfidenceQuantites } from '../types'
 
-export interface BoardsOverviewProperties extends StyleProps {
+export interface KeyResultConfidencesProperties extends StyleProps {
   quantities: HealthConfidenceQuantites
   isLoading?: boolean
 }
 
-const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProperties) => {
+const KeyResultConfidences = ({
+  quantities,
+  isLoading,
+  ...rest
+}: KeyResultConfidencesProperties) => {
   const intl = useIntl()
   const setKrHealthStatus = useSetRecoilState(krHealthStatusAtom)
 
@@ -37,7 +41,7 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
 
   return (
     <Flex borderRadius="9px" bg="white" width="100%" paddingY={15} paddingX={18} {...rest}>
-      <Board
+      {/* <Board
         isLoading={isLoading}
         title={intl.formatMessage(messages.keyResultsTitle)}
         number={quantities?.keyResultsQuantity}
@@ -45,7 +49,7 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
         bgHover="new-gray.300"
         minWidth="175px"
         size="lg"
-      />
+      /> */}
       <Box w="100%" marginLeft="24px">
         <Flex justifyContent="space-between" gridGap="24px">
           {confidencesToRender.map((confidence) => {
@@ -91,4 +95,4 @@ const BoardsOverview = ({ quantities, isLoading, ...rest }: BoardsOverviewProper
   )
 }
 
-export default BoardsOverview
+export default KeyResultConfidences

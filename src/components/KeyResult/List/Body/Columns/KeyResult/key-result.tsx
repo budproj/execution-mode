@@ -5,6 +5,8 @@ import { useRecoilValue } from 'recoil'
 
 import { PercentageProgressIncreaseTag } from 'src/components/Base'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
+import CheckIcon from 'src/components/Icon/Check'
+import PlusIcon from 'src/components/Icon/Plus'
 import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
@@ -54,6 +56,47 @@ const KeyResultListBodyColumnKeyResult = ({
     ? messages.outdatedUpdateTextPrefix
     : messages.lastUpdateTextPrefix
 
+  const isConfidenceDeprioritized = latestCheckIn?.confidence === -100
+  const isConfidenceAchieved = latestCheckIn?.confidence === 200
+
+  const updateText = () => {
+    if (!isConfidenceDeprioritized && !isConfidenceAchieved) {
+      return (
+        <UpdateIcon
+          isOutdated={status?.latestCheckIn ? status?.isOutdated : true}
+          updateTextColor={updateTextColor}
+        />
+      )
+    }
+
+    if (isConfidenceDeprioritized)
+      return (
+        <PlusIcon
+          width="13px"
+          height="13px"
+          padding="3px"
+          background="new-gray.600"
+          fill="white"
+          borderRadius="50%"
+          desc=""
+          marginRight="5px"
+        />
+      )
+
+    if (isConfidenceAchieved)
+      return (
+        <CheckIcon
+          width="13px"
+          height="13px"
+          borderRadius="3px"
+          background="brand.500"
+          fill="white"
+          desc=""
+          marginRight="5px"
+        />
+      )
+  }
+
   return (
     <KeyResultListBodyColumnBase
       borderRight={withRightBorder ? 1 : 0}
@@ -68,7 +111,11 @@ const KeyResultListBodyColumnKeyResult = ({
       <Flex gridGap={4} alignItems="center">
         {withDynamicIcon && (
           <Skeleton borderRadius={10} position="relative" isLoaded={isKeyResultLoaded}>
-            <KeyResultDynamicIcon title={title} isDisabled={isDisabled} mode={mode} />
+            <KeyResultDynamicIcon
+              title={title}
+              isDisabled={isDisabled ? isDisabled : isConfidenceDeprioritized}
+              mode={mode}
+            />
             {delta && delta?.progress !== 0 && (
               <PercentageProgressIncreaseTag
                 forcePositiveSignal
@@ -94,7 +141,12 @@ const KeyResultListBodyColumnKeyResult = ({
 
         <Box>
           <Skeleton isLoaded={isKeyResultLoaded}>
-            <Text color="black.900">{title ?? 'This is a sample KR title'}</Text>
+            <Text
+              color="black.900"
+              textDecoration={isConfidenceDeprioritized ? 'line-through' : 'none'}
+            >
+              {title ?? 'This is a sample KR title'}
+            </Text>
           </Skeleton>
 
           {withLastUpdateInfo && (
@@ -108,14 +160,17 @@ const KeyResultListBodyColumnKeyResult = ({
                 <LastUpdateBadge lastUpdateDate={new Date()} />
               ) : (
                 <Flex alignItems="center">
-                  <UpdateIcon
-                    isOutdated={status?.latestCheckIn ? status?.isOutdated : true}
-                    updateTextColor={updateTextColor}
-                  />
+                  {updateText()}
                   <LastUpdateText
                     date={lastUpdateDate}
-                    color={updateTextColor}
-                    prefix={intl.formatMessage(prefixMessage)}
+                    color={isConfidenceAchieved ? 'brand.500' : updateTextColor}
+                    prefix={
+                      isConfidenceDeprioritized
+                        ? intl.formatMessage(messages.deprioritizedTextPrefix)
+                        : isConfidenceAchieved
+                        ? intl.formatMessage(messages.achievedTextPrefix)
+                        : intl.formatMessage(prefixMessage)
+                    }
                   />
                 </Flex>
               )}

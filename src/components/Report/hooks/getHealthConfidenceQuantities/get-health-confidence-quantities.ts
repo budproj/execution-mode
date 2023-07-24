@@ -16,6 +16,8 @@ const emptyQuantities: Quantities = {
   medium: 0,
   low: 0,
   barrier: 0,
+  achieved: 0,
+  deprioritized: 0,
 }
 
 export const useGetHealthConfidenceQuantities = (): GetHealthConfidencesQuantities => {

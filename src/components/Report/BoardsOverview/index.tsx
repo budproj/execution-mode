@@ -7,11 +7,9 @@ import { krHealthStatusAtom } from 'src/state/recoil/key-result'
 
 import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQuantities'
 
-import Board from './Board'
-import KeyResultConfidence from './KeyResultConfidences'
+import KeyResultConfidences from './KeyResultConfidences'
 import { ConfidenceMapper } from './KeyResultListing/types'
 import { KeyResultsListingTable } from './KeyResultsListingTable'
-import messages from './messages'
 
 const BoardsOverview = ({ ...rest }) => {
   const { data, loading } = useGetHealthConfidenceQuantities()
@@ -23,7 +21,7 @@ const BoardsOverview = ({ ...rest }) => {
   return (
     <>
       <Flex minHeight={155} mt="36px" gridGap="24px" {...rest}>
-        <Board
+        {/* <Board
           isLoading={loading}
           title={intl.formatMessage(messages.objectivesTitle)}
           number={data.objectivesQuantity}
@@ -33,8 +31,8 @@ const BoardsOverview = ({ ...rest }) => {
           bgColor="white"
           bgHover="white"
           shadow="for-background.light"
-        />
-        <KeyResultConfidence isLoading={loading} quantities={data} shadow="for-background.light" />
+        /> */}
+        <KeyResultConfidences isLoading={loading} quantities={data} shadow="for-background.light" />
       </Flex>
 
       {krHealthStatus && (
