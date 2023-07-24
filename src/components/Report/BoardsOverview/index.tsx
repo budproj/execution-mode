@@ -1,6 +1,5 @@
 import { Flex } from '@chakra-ui/react'
 import React from 'react'
-import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
@@ -15,8 +14,6 @@ const BoardsOverview = ({ ...rest }) => {
   const { data, loading } = useGetHealthConfidenceQuantities()
   const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
   const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
-
-  const intl = useIntl()
 
   return (
     <>
