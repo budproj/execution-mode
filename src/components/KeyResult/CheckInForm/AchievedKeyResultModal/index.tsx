@@ -11,7 +11,6 @@ import {
   Button,
   Text,
 } from '@chakra-ui/react'
-import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -22,22 +21,22 @@ interface AchivedKeyResultModalProperties {
   handleClose: () => void
 }
 
-const StyledImage = styled(Image)`
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: 0;
-  animation: confettiAnimation 3s infinite;
-  @keyframes confettiAnimation {
-    0%,
-    100% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(100vw, 100vh) rotate(600deg);
-    }
-  }
-`
+// Const StyledImage = styled(Image)`
+//   width: 30px;
+//   height: 30px;
+//   position: absolute;
+//   top: 0;
+//   animation: confettiAnimation 3s infinite;
+//   @keyframes confettiAnimation {
+//     0%,
+//     100% {
+//       transform: translate(0, 0);
+//     }
+//     50% {
+//       transform: translate(100vw, 100vh) rotate(600deg);
+//     }
+//   }
+// `
 
 export const AchivedKeyResultModal = ({ isOpen, handleClose }: AchivedKeyResultModalProperties) => {
   const intl = useIntl()
