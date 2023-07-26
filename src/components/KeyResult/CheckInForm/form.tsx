@@ -7,6 +7,7 @@ import { Formik, Form, FormikHelpers } from 'formik'
 import isUndefined from 'lodash/isUndefined'
 import omitBy from 'lodash/omitBy'
 import React, { useCallback } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedByUser/queries.gql'
@@ -14,7 +15,7 @@ import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import notificationsQuery from 'src/components/Notifications/Modal/queries.gql'
 import accordionItemPanelQuery from 'src/components/Objective/Accordion/Item/Panel/queries.gql'
 import GET_KEY_RESULTS_HIGHLIGHTS from 'src/components/Page/Team/Highlights/get-key-results-highlights.gql'
-import { CONFIDENCE_ACHIEVED } from 'src/state/hooks/useConfidenceTag/hook'
+import { CONFIDENCE_ACHIEVED, getConfidenceName } from 'src/state/hooks/useConfidenceTag/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
@@ -67,6 +68,7 @@ const CheckInForm = ({
   onCompleted,
   valueNew,
 }: CheckInFormProperties) => {
+  const intl = useIntl()
   const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_IN)
   const isCreated = useRecoilValue(createdByCheckInNotificationAtom)
   const userId = useRecoilValue(meAtom)
@@ -87,7 +89,11 @@ const CheckInForm = ({
       onCompleted: (data) => {
         setLatestKeyResultCheckIn(data.createKeyResultCheckIn)
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
-        dispatchEvent({ createdByNotification: Boolean(isCreated), userId })
+        dispatchEvent({
+          createdByNotification: Boolean(isCreated),
+          userId,
+          confidence: getConfidenceName(data.createKeyResultCheckIn.confidence, intl),
+        })
       },
       refetchQueries: [
         activeAndOwnedByUserQuery.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
