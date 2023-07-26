@@ -50,7 +50,7 @@ const KeyResultConfidences = ({
         minWidth="175px"
         size="lg"
       /> */}
-      <Box w="100%" marginLeft="24px">
+      <Box w="100%">
         <Flex justifyContent="space-between" gridGap="24px">
           {confidencesToRender.map((confidence) => {
             return (

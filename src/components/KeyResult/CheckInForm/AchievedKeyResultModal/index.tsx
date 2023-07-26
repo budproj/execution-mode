@@ -1,3 +1,6 @@
+/* eslint-disable unicorn/no-useless-undefined */
+/* eslint-disable unicorn/no-null */
+/* eslint-disable @typescript-eslint/dot-notation */
 import {
   Flex,
   Heading,
@@ -11,7 +14,8 @@ import {
   Button,
   Text,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react'
+import ReactCanvasConfetti from 'react-canvas-confetti'
 import { useIntl } from 'react-intl'
 
 import messages from './messages'
@@ -21,25 +25,77 @@ interface AchivedKeyResultModalProperties {
   handleClose: () => void
 }
 
-// Const StyledImage = styled(Image)`
-//   width: 30px;
-//   height: 30px;
-//   position: absolute;
-//   top: 0;
-//   animation: confettiAnimation 3s infinite;
-//   @keyframes confettiAnimation {
-//     0%,
-//     100% {
-//       transform: translate(0, 0);
-//     }
-//     50% {
-//       transform: translate(100vw, 100vh) rotate(600deg);
-//     }
-//   }
-// `
+function randomInRange(min: number, max: number) {
+  return Math.random() * (max - min) + min
+}
+
+const canvasStyles: CSSProperties = {
+  position: 'fixed',
+  pointerEvents: 'none',
+  width: '100%',
+  height: '100%',
+  top: 0,
+  left: 0,
+}
+
+function getAnimationSettings(originXA: number, originXB: number) {
+  return {
+    startVelocity: 30,
+    spread: 360,
+    ticks: 60,
+    zIndex: 0,
+    particleCount: 150,
+    origin: {
+      x: randomInRange(originXA, originXB),
+      y: Math.random() - 0.2,
+    },
+    colors: ['#6F6EFF', '#24CB8D', '#F1BF25', '#FF616A', '#C26EFF', '#8491B0'],
+  }
+}
 
 export const AchivedKeyResultModal = ({ isOpen, handleClose }: AchivedKeyResultModalProperties) => {
   const intl = useIntl()
+
+  const referenceAnimationInstance = useRef(null)
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout>()
+
+  const getInstance = useCallback((instance: any) => {
+    referenceAnimationInstance.current = instance
+  }, [])
+
+  const nextTickAnimation = useCallback(() => {
+    if (referenceAnimationInstance.current) {
+      ;(referenceAnimationInstance.current as any)(getAnimationSettings(0.1, 0.7))
+      // ReferenceAnimationInstance.current(getAnimationSettings(0.7, 0.9))
+    }
+  }, [])
+
+  const startAnimation = useCallback(() => {
+    if (!intervalId) {
+      setIntervalId(setInterval(nextTickAnimation, 1000))
+    }
+  }, [intervalId, nextTickAnimation])
+
+  const stopAnimation = useCallback(() => {
+    clearInterval(intervalId)
+    setIntervalId(undefined)
+    ;(referenceAnimationInstance.current as any | null)?.reset()
+  }, [intervalId])
+
+  useEffect(() => {
+    return () => {
+      clearInterval(intervalId)
+    }
+  }, [intervalId])
+
+  const close = () => {
+    handleClose()
+    stopAnimation()
+  }
+
+  useEffect(() => {
+    if (isOpen) startAnimation()
+  }, [isOpen, startAnimation])
 
   return (
     <Modal
@@ -48,9 +104,9 @@ export const AchivedKeyResultModal = ({ isOpen, handleClose }: AchivedKeyResultM
       returnFocusOnClose={false}
       isOpen={isOpen}
       size="100%"
-      onClose={handleClose}
+      onClose={close}
     >
-      <ModalOverlay />
+      <ModalOverlay zIndex={999} />
       <ModalContent paddingY="40px" paddingX="30px" maxW="40em" borderRadius="10px">
         <ModalHeader as={Flex} flexDirection="column" alignItems="center" justifyContent="center">
           <Image src="/images/confetti.png" alt="Confetti" width={124} height={124} />
@@ -69,6 +125,7 @@ export const AchivedKeyResultModal = ({ isOpen, handleClose }: AchivedKeyResultM
           <Text color="new-gray.700" textAlign="center" fontSize="16px">
             {intl.formatMessage(messages.congratulationsContent)}
           </Text>
+          <ReactCanvasConfetti zIndex={1000} refConfetti={getInstance} style={canvasStyles} />
         </ModalBody>
 
         <ModalFooter>
@@ -84,6 +141,7 @@ export const AchivedKeyResultModal = ({ isOpen, handleClose }: AchivedKeyResultM
           </Button>
         </ModalFooter>
       </ModalContent>
+
       {/* <Flex>
         <StyledImage src="/images/praisal.png" alt="asdsa" width={22} height={22} />
       </Flex> */}

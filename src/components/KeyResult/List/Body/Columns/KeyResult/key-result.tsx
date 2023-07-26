@@ -5,8 +5,8 @@ import { useRecoilValue } from 'recoil'
 
 import { PercentageProgressIncreaseTag } from 'src/components/Base'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
+import { CancelIcon } from 'src/components/Icon/Cancel/wrapper'
 import CheckIcon from 'src/components/Icon/Check'
-import PlusIcon from 'src/components/Icon/Plus'
 import KeyResultDynamicIcon from 'src/components/KeyResult/DynamicIcon'
 import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
@@ -71,12 +71,10 @@ const KeyResultListBodyColumnKeyResult = ({
 
     if (isConfidenceDeprioritized)
       return (
-        <PlusIcon
+        <CancelIcon
           width="13px"
           height="13px"
-          padding="3px"
-          background="new-gray.600"
-          fill="white"
+          fill="new-gray.600"
           borderRadius="50%"
           desc=""
           marginRight="5px"

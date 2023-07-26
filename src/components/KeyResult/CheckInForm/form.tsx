@@ -1,9 +1,12 @@
+/* eslint-disable unicorn/no-useless-undefined */
+/* eslint-disable unicorn/no-null */
+/* eslint-disable @typescript-eslint/dot-notation */
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
 import isUndefined from 'lodash/isUndefined'
 import omitBy from 'lodash/omitBy'
-import React, { useCallback, useEffect } from 'react'
+import React, { CSSProperties, useCallback } from 'react'
 import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedByUser/queries.gql'
@@ -52,6 +55,34 @@ export interface CheckInFormValues {
 
 export interface CreateKeyResultCheckInMutation {
   createKeyResultCheckIn: KeyResultCheckIn
+}
+
+function randomInRange(min: number, max: number) {
+  return Math.random() * (max - min) + min
+}
+
+const canvasStyles: CSSProperties = {
+  position: 'fixed',
+  pointerEvents: 'none',
+  width: '100%',
+  height: '100%',
+  top: 0,
+  left: 0,
+}
+
+function getAnimationSettings(originXA: number, originXB: number) {
+  return {
+    startVelocity: 30,
+    spread: 360,
+    ticks: 60,
+    zIndex: 0,
+    particleCount: 150,
+    origin: {
+      x: randomInRange(originXA, originXB),
+      y: Math.random() - 0.2,
+    },
+    colors: ['#6F6EFF', '#24CB8D', '#F1BF25', '#FF616A', '#C26EFF', '#8491B0'],
+  }
 }
 
 const CheckInForm = ({
@@ -141,7 +172,7 @@ const CheckInForm = ({
 
       if (values.confidence === CONFIDENCE_ACHIEVED.max) {
         resetOpenDrawer()
-        setIsAchievedKeyResultModalOpen(true)
+        setTimeout(() => setIsAchievedKeyResultModalOpen(true), 100)
       }
 
       if (afterSubmit) afterSubmit(values)
@@ -154,10 +185,6 @@ const CheckInForm = ({
   const handleCancel = () => {
     if (onCancel) onCancel()
   }
-
-  useEffect(() => {
-    if (isCommentAlwaysEnabled) setCommentEnabled(true)
-  }, [isCommentAlwaysEnabled, setCommentEnabled])
 
   const handleAchievedModalClose = useCallback(() => {
     setIsAchievedKeyResultModalOpen(false)
