@@ -23,14 +23,14 @@ const getMessages = async (locale: string): Promise<IntlMessage | undefined> =>
 const RecoilIntlProvider = (properties: RecoilIntlProviderProperties): ReactElement => {
   const { push, pathname, query, asPath } = useRouter()
   const [messages, setMessages] = useState<IntlMessage | undefined>()
-  const [intl, setIntl] = useRecoilState(intlLocaleAtom)
+  const [intl, setIntl] = useRecoilState<string>(intlLocaleAtom)
   const setCurrentNextRoute = useSetRecoilState(currentNextRoute)
   const [locale, setCookie] = useCookies([LOCALE_COOKIE_KEY])
 
   useQuery(queries.GET_MY_LOCALE, {
     onCompleted: async (data) => {
       const savedLocale = await data.me.settings.edges[0]?.node?.value
-      setIntl(savedLocale)
+      if (savedLocale) setIntl(savedLocale)
       if (locale !== savedLocale) setCookie(LOCALE_COOKIE_KEY, savedLocale, { path: '/' })
       await push({ pathname, query }, asPath, { locale: savedLocale })
     },

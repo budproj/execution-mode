@@ -41,7 +41,7 @@ const KeyResultSectionAddCommentInput = ({
 }: KeyResultSectionAddCommentInputProperties) => {
   const [isOnFocus, setIsOnFocus] = useState(false)
   const [numberOfRows, setNumberOfRows] = useState(1)
-  const { values, setValues, isSubmitting } =
+  const { values, setValues, isSubmitting, handleSubmit } =
     useFormikContext<KeyResultSectionAddCommentInitialValues>()
   const intl = useIntl()
   const [brand500, gray200, gray400, newGray200, newGray300, newGray900]: string[] = useToken(
@@ -66,6 +66,15 @@ const KeyResultSectionAddCommentInput = ({
 
     setNumberOfRows(numberOfRows)
     setValues({ text: event.target.value })
+  }
+
+  const handleCommentsInputKeyDown = (event: any) => {
+    const keyCode = event.which || event.key
+
+    if (keyCode === 13 && !event.shiftKey) {
+      event.preventDefault()
+      handleSubmit()
+    }
   }
 
   const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
@@ -96,6 +105,7 @@ const KeyResultSectionAddCommentInput = ({
       wordBreak="break-word"
       transition="0.2s box-shadow ease-in"
       overflow="visible"
+      position="relative"
       fontSize="md"
       color={gray400}
       borderColor={isOnFocus ? brand500 : gray200}
@@ -144,6 +154,7 @@ const KeyResultSectionAddCommentInput = ({
         }}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onKeyDown={handleCommentsInputKeyDown}
         onChange={handleChange as any}
       >
         <Mention
@@ -180,9 +191,10 @@ const KeyResultSectionAddCommentInput = ({
         }
         type="submit"
         position="absolute"
-        right={6}
+        top="50%"
+        transform="translate(0, -50%);"
+        right={3}
         disabled={values.text.length === 0}
-        bottom="1.2rem"
         color="gray.200"
         aria-label={intl.formatMessage(messages.paperPlaneIconDesc)}
         _hover={{

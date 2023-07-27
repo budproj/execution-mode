@@ -22,7 +22,11 @@ const KeyResultSectionTimelineCardEmptyState = ({
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
 
   return keyResult?.mode === KEY_RESULT_MODE.DRAFT ? (
-    <EmptyState labelMessage={messages.emptyState} imageKey="cat-hanging-out" />
+    <EmptyState
+      labelMessage={messages.emptyState}
+      messageTranslationOptions={{ breakline: <br /> }}
+      imageKey="cat-hanging-out"
+    />
   ) : (
     <KeyResultSectionTimelineCardBase hideUser borderWidth={0} bg="transparent" boxShadow="none">
       <Flex direction="column" alignItems="center" gridGap={2} py={4}>

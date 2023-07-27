@@ -8,13 +8,13 @@ import {
   SkeletonText,
   Text,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import regexifyString from 'regexify-string'
 
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
 import { KeyResultComment } from 'src/components/KeyResult/types'
+import { insertMentionInString } from 'src/components/Routine/RetrospectiveTab/Comments/CommentCard'
 import UserProfileCard from 'src/components/User/ProfileCard'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
@@ -68,16 +68,13 @@ const KeyResultSectionTimelineCardComment = ({
     if (onEntryDelete) onEntryDelete(intlCardType)
   }
 
-  const commentText = regexifyString({
-    pattern: /@\[[\w \u00C0-\u00FF-]+]\([\da-f-]+\)/g,
-    decorator: (match) => {
-      const regex = /@\[([\w \u00C0-\u00FF-]+)]\(([\da-f-]+)\)/
-      const [_, name, id] = regex.exec(match) ?? [undefined, '', '']
-
-      return <MarkedUser id={id} name={name} />
-    },
-    input: data?.text ?? '',
-  })
+  const formattedCommentText = useMemo(() => {
+    return data?.text?.split('\n').map((line) => (
+      <span key={line} style={{ display: 'block' }}>
+        {insertMentionInString(line)}
+      </span>
+    ))
+  }, [data?.text])
 
   return (
     <KeyResultSectionTimelineCardBase
@@ -93,7 +90,7 @@ const KeyResultSectionTimelineCardComment = ({
       <Flex gridGap={4} direction="column">
         <SkeletonText noOfLines={4} isLoaded={isLoaded}>
           <Text fontSize="md" color="new-gray.900">
-            {commentText}
+            {formattedCommentText}
           </Text>
         </SkeletonText>
       </Flex>
