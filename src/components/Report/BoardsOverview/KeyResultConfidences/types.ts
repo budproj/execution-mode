@@ -5,10 +5,12 @@ export interface HealthConfidenceQuantites {
   medium: number
   low: number
   barrier: number
+  achieved: number
+  deprioritized: number
 }
 
 export interface Confidence {
-  name: 'high' | 'medium' | 'low' | 'barrier'
+  name: 'achieved' | 'high' | 'medium' | 'low' | 'barrier' | 'deprioritized'
   color: string
   bg: string
 }

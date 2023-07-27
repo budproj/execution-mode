@@ -1,23 +1,31 @@
+/* eslint-disable unicorn/no-useless-undefined */
+/* eslint-disable unicorn/no-null */
+/* eslint-disable @typescript-eslint/dot-notation */
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
 import isUndefined from 'lodash/isUndefined'
 import omitBy from 'lodash/omitBy'
-import React, { useEffect } from 'react'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import React, { useCallback } from 'react'
+import { useIntl } from 'react-intl'
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import activeAndOwnedByUserQuery from 'src/components/KeyResult/ActiveAndOwnedByUser/queries.gql'
 import { KeyResult, KeyResultCheckIn } from 'src/components/KeyResult/types'
 import notificationsQuery from 'src/components/Notifications/Modal/queries.gql'
 import accordionItemPanelQuery from 'src/components/Objective/Accordion/Item/Panel/queries.gql'
 import GET_KEY_RESULTS_HIGHLIGHTS from 'src/components/Page/Team/Highlights/get-key-results-highlights.gql'
+import { CONFIDENCE_ACHIEVED, getConfidenceName } from 'src/state/hooks/useConfidenceTag/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { keyResultCheckInCommentEnabled } from 'src/state/recoil/key-result/check-in'
 import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
+import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { createdByCheckInNotificationAtom } from 'src/state/recoil/notifications'
+import { isAchievedKeyResultModalOpenAtom } from 'src/state/recoil/team/is-achieved-key-result-modal-open.ts'
 import meAtom from 'src/state/recoil/user/me'
 
+import { AchivedKeyResultModal } from './AchievedKeyResultModal'
 import {
   CheckInFormFieldConfidence,
   CheckInFormFieldValueNew,
@@ -60,6 +68,7 @@ const CheckInForm = ({
   onCompleted,
   valueNew,
 }: CheckInFormProperties) => {
+  const intl = useIntl()
   const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_IN)
   const isCreated = useRecoilValue(createdByCheckInNotificationAtom)
   const userId = useRecoilValue(meAtom)
@@ -67,6 +76,11 @@ const CheckInForm = ({
   const [latestKeyResultCheckIn, setLatestKeyResultCheckIn] = useRecoilState(
     selectLatestCheckIn(keyResultID),
   )
+  const [isAchievedKeyResultModalOpen, setIsAchievedKeyResultModalOpen] = useRecoilState(
+    isAchievedKeyResultModalOpenAtom,
+  )
+  const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+
   const setCommentEnabled = useSetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
   const [createCheckIn, { loading }] = useMutation<CreateKeyResultCheckInMutation>(
     queries.CREATE_KEY_RESULT_CHECK_IN,
@@ -75,7 +89,11 @@ const CheckInForm = ({
       onCompleted: (data) => {
         setLatestKeyResultCheckIn(data.createKeyResultCheckIn)
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
-        dispatchEvent({ createdByNotification: Boolean(isCreated), userId })
+        dispatchEvent({
+          createdByNotification: Boolean(isCreated),
+          userId,
+          confidence: getConfidenceName(data.createKeyResultCheckIn.confidence, intl),
+        })
       },
       refetchQueries: [
         activeAndOwnedByUserQuery.GET_USER_KEY_RESULTS_FROM_ACTIVE_CYCLES,
@@ -130,6 +148,11 @@ const CheckInForm = ({
     if (wasProgressUpdated || wasConfidenceUpdated || wasCommentCreated) {
       await dispatchRemoteUpdate(values)
 
+      if (values.confidence === CONFIDENCE_ACHIEVED.max) {
+        resetOpenDrawer()
+        setTimeout(() => setIsAchievedKeyResultModalOpen(true), 100)
+      }
+
       if (afterSubmit) afterSubmit(values)
 
       syncRecoilState()
@@ -141,35 +164,41 @@ const CheckInForm = ({
     if (onCancel) onCancel()
   }
 
-  useEffect(() => {
-    if (isCommentAlwaysEnabled) setCommentEnabled(true)
-  }, [isCommentAlwaysEnabled, setCommentEnabled])
+  const handleAchievedModalClose = useCallback(() => {
+    setIsAchievedKeyResultModalOpen(false)
+  }, [setIsAchievedKeyResultModalOpen])
 
   return (
-    <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
-      {() => (
-        <Form>
-          <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
-            <Flex direction="column" gridGap={4} p={gutter}>
-              <Flex gridGap={5}>
-                <CheckInFormFieldValuePrevious keyResultID={keyResultID} />
-                <CheckInFormFieldValueNew keyResultID={keyResultID} />
-                {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
+    <>
+      <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
+        {() => (
+          <Form>
+            <FormControl id={`key-result-checkin-${keyResultID?.toString() ?? ''}`}>
+              <Flex direction="column" gridGap={4} p={gutter}>
+                <Flex gridGap={5}>
+                  <CheckInFormFieldValuePrevious keyResultID={keyResultID} />
+                  <CheckInFormFieldValueNew keyResultID={keyResultID} />
+                  {showGoal && <CheckInFormFieldGoal keyResultID={keyResultID} />}
+                </Flex>
+                <CheckInFormFieldConfidence />
+
+                <CheckInFormFieldComment keyResultID={keyResultID} />
+
+                <Actions
+                  isLoading={loading}
+                  showCancelButton={Boolean(onCancel)}
+                  onCancel={handleCancel}
+                />
               </Flex>
-              <CheckInFormFieldConfidence />
-
-              <CheckInFormFieldComment keyResultID={keyResultID} />
-
-              <Actions
-                isLoading={loading}
-                showCancelButton={Boolean(onCancel)}
-                onCancel={handleCancel}
-              />
-            </Flex>
-          </FormControl>
-        </Form>
-      )}
-    </Formik>
+            </FormControl>
+          </Form>
+        )}
+      </Formik>
+      <AchivedKeyResultModal
+        isOpen={isAchievedKeyResultModalOpen}
+        handleClose={handleAchievedModalClose}
+      />
+    </>
   )
 }
 

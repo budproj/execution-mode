@@ -5,6 +5,8 @@ type KeyResultListBodyColumnKeyResultMessage =
   | 'outdatedUpdateTextPrefix'
   | 'outdatedUpdateIconDescription'
   | 'upToDateUpdateIconDescription'
+  | 'deprioritizedTextPrefix'
+  | 'achievedTextPrefix'
 
 export default defineMessages<KeyResultListBodyColumnKeyResultMessage>({
   lastUpdateTextPrefix: {
@@ -33,5 +35,17 @@ export default defineMessages<KeyResultListBodyColumnKeyResultMessage>({
     id: 'I8NCD3',
     description:
       'This string is used as the description for the icon that indicates that the key-result is updated',
+  },
+  deprioritizedTextPrefix: {
+    defaultMessage: 'Despriorizado',
+    id: 'VGBT63',
+    description:
+      'This message is displayed alongisde with the key-result name, as the prefix for our last update text component when the key-result is deprioritized',
+  },
+  achievedTextPrefix: {
+    defaultMessage: 'Alcançado',
+    id: '+F+WGI',
+    description:
+      'This message is displayed alongisde with the key-result name, as the prefix for our last update text component when the key-result is achieved',
   },
 })

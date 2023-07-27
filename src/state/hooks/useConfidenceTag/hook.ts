@@ -32,6 +32,11 @@ export interface ConfidenceTagColor extends ConfidenceTagColorVariant {
 
 export type ConfidenceTagHook = [ConfidenceTag, Dispatch<SetStateAction<number>>]
 
+export const CONFIDENCE_ACHIEVED = {
+  max: 200,
+  min: 101,
+}
+
 export const CONFIDENCE_HIGH = {
   max: 100,
   min: 67,
@@ -47,6 +52,12 @@ export const CONFIDENCE_LOW = {
 
 export const CONFIDENCE_BARRIER = {
   max: -1,
+  min: -1,
+}
+
+export const CONFIDENCE_DEPRIORITIZED = {
+  max: 0,
+  min: -100,
 }
 
 export const normalizeConfidence = (
@@ -56,10 +67,12 @@ export const normalizeConfidence = (
 
   if (!value && value !== 0) return defaultConfidence
 
-  if (value >= CONFIDENCE_HIGH.min) return CONFIDENCE_HIGH.max
+  if (value >= CONFIDENCE_ACHIEVED.min) return CONFIDENCE_ACHIEVED.max
+  if (value >= CONFIDENCE_HIGH.min && value <= CONFIDENCE_HIGH.max) return CONFIDENCE_HIGH.max
   if (value >= CONFIDENCE_MEDIUM.min && value <= CONFIDENCE_MEDIUM.max) return CONFIDENCE_MEDIUM.max
   if (value >= CONFIDENCE_LOW.min && value <= CONFIDENCE_LOW.max) return CONFIDENCE_LOW.max
-  if (value <= CONFIDENCE_BARRIER.max) return CONFIDENCE_BARRIER.max
+  if (value === CONFIDENCE_BARRIER.max) return CONFIDENCE_BARRIER.max
+  if (value <= CONFIDENCE_DEPRIORITIZED.max) return CONFIDENCE_DEPRIORITIZED.min
 
   return defaultConfidence
 }
@@ -75,6 +88,26 @@ export const getConfidenceName = (
 
 const getConfidenceObject = (intl: IntlShape) => {
   return {
+    [CONFIDENCE_ACHIEVED.max]: {
+      messages: {
+        short: intl.formatMessage(messages.achievedShort),
+        long: intl.formatMessage(messages.achievedLong),
+        icon: intl.formatMessage(messages.achievedIcon),
+        helper: intl.formatMessage(messages.achievedHelperText),
+      },
+      tag: 'CONFIDENCE_ACHIEVED',
+      color: {
+        scheme: 'brand',
+        primary: 'brand.500',
+        light: 'brand.100',
+        variants: {
+          sharp: {
+            primary: 'brand.600',
+            light: 'brand.500',
+          },
+        },
+      },
+    },
     [CONFIDENCE_HIGH.max]: {
       messages: {
         short: intl.formatMessage(messages.highShort),
@@ -154,6 +187,26 @@ const getConfidenceObject = (intl: IntlShape) => {
           sharp: {
             primary: 'purple.500',
             light: 'purple.100',
+          },
+        },
+      },
+    },
+    [CONFIDENCE_DEPRIORITIZED.min]: {
+      messages: {
+        short: intl.formatMessage(messages.deprioritizedShort),
+        long: intl.formatMessage(messages.deprioritizedLong),
+        icon: intl.formatMessage(messages.deprioritizedIcon),
+        helper: intl.formatMessage(messages.deprioritizedHelperText),
+      },
+      tag: 'CONFIDENCE_DEPRIORITIZED',
+      color: {
+        scheme: 'new-gray',
+        primary: 'new-gray.600',
+        light: 'new-gray.100',
+        variants: {
+          sharp: {
+            primary: 'new-gray.600',
+            light: 'new-gray.100',
           },
         },
       },

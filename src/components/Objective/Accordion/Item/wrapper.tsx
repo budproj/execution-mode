@@ -32,8 +32,6 @@ export const ObjectiveAccordionItem = ({
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const context = useRecoilValue(objectiveContext(objectiveID))
 
-  console.log({ objective })
-
   const isDraft = useMemo(() => objective?.mode === ObjectiveMode.DRAFT, [objective?.mode])
 
   const [confidenceTag, setConfidence] = useConfidenceTag(objective?.status?.confidence)

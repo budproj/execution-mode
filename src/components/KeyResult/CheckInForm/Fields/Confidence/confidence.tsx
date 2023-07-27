@@ -13,7 +13,9 @@ import {
   CONFIDENCE_MEDIUM,
   CONFIDENCE_LOW,
   CONFIDENCE_BARRIER,
+  CONFIDENCE_DEPRIORITIZED,
   normalizeConfidence,
+  CONFIDENCE_ACHIEVED,
 } from 'src/state/hooks/useConfidenceTag/hook'
 
 import messages from './messages'
@@ -52,6 +54,9 @@ const CheckInFormFieldCurrentConfidence = () => {
         value={normalizedConfidence.toString()}
         onChange={handleChange}
       >
+        <MenuItemOption value={CONFIDENCE_ACHIEVED.max.toString()}>
+          <ConfidenceTag showHelperText confidenceValue={CONFIDENCE_ACHIEVED.max} />
+        </MenuItemOption>
         <MenuItemOption value={CONFIDENCE_HIGH.max.toString()}>
           <ConfidenceTag showHelperText confidenceValue={CONFIDENCE_HIGH.max} />
         </MenuItemOption>
@@ -66,6 +71,9 @@ const CheckInFormFieldCurrentConfidence = () => {
 
         <MenuItemOption value={CONFIDENCE_BARRIER.max.toString()}>
           <ConfidenceTag showHelperText confidenceValue={CONFIDENCE_BARRIER.max} />
+        </MenuItemOption>
+        <MenuItemOption value={CONFIDENCE_DEPRIORITIZED.min.toString()}>
+          <ConfidenceTag showHelperText confidenceValue={CONFIDENCE_DEPRIORITIZED.min} />
         </MenuItemOption>
       </SelectMenu>
     </Box>

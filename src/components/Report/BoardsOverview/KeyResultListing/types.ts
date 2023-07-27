@@ -3,4 +3,6 @@ export enum ConfidenceMapper {
   'medium' = 66,
   'low' = 32,
   'barrier' = -1,
+  'achieved' = 200,
+  'deprioritized' = -100,
 }

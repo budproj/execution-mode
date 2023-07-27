@@ -23,6 +23,12 @@ export const getIsListable = (confidence: Confidence): Confidence => {
 
 export const confidenceTexts: Confidence[] = [
   {
+    name: 'achieved',
+    color: 'brand.500',
+    bg: 'brand.100',
+    bgHover: 'brand.100',
+  },
+  {
     name: 'high',
     color: 'green.500',
     bg: 'green.50',
@@ -45,5 +51,11 @@ export const confidenceTexts: Confidence[] = [
     color: 'purple.500',
     bg: 'purple.50',
     bgHover: 'purple.100',
+  },
+  {
+    name: 'deprioritized',
+    color: 'new-gray.600',
+    bg: 'new-gray.100',
+    bgHover: 'new-gray.100',
   },
 ]

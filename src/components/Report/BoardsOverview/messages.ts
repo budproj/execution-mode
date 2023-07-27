@@ -9,6 +9,8 @@ type CreateFormMessage =
   | 'barrier'
   | 'highConfidenceTooltip'
   | 'confidenceWithoutKeyResultsTooltip'
+  | 'achieved'
+  | 'deprioritized'
 
 export default defineMessages<CreateFormMessage>({
   objectivesTitle: {
@@ -40,6 +42,16 @@ export default defineMessages<CreateFormMessage>({
     defaultMessage: 'Com barreira',
     id: '7xrfSX',
     description: 'Title of barrier health strategy',
+  },
+  achieved: {
+    defaultMessage: 'Alcançado',
+    id: 'g0YzvA',
+    description: 'Title of achieved health strategy',
+  },
+  deprioritized: {
+    defaultMessage: 'Despriorizado',
+    id: 'I4xjsb',
+    description: 'Title of deprioritized health strategy',
   },
   highConfidenceTooltip: {
     defaultMessage:

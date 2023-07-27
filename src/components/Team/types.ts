@@ -45,4 +45,6 @@ export interface Quantities {
   medium: number
   low: number
   barrier: number
+  achieved: number
+  deprioritized: number
 }
