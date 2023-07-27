@@ -33,7 +33,7 @@ const StyledListItem = styled.span`
   display: block;
 `
 
-const insertMentionInString = (comment: string) => {
+export const insertMentionInString = (comment: string) => {
   return regexifyString({
     pattern: /@\[[\w \u00C0-\u00FF-]+]\([\da-f-]+\)/g,
     decorator: (match) => {

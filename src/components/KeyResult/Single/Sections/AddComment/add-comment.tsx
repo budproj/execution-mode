@@ -100,19 +100,22 @@ const KeyResultSectionAddComment = ({
       })
     }
 
+    actions.setSubmitting(false)
     actions.resetForm()
   }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form>
-        <Flex gridGap={3} alignItems="flex-start">
-          <SkeletonCircle isLoaded={Boolean(user)} w={10} h={10}>
-            <Avatar name={user?.fullName} src={user?.picture} w={10} h={10} />
-          </SkeletonCircle>
-          <KeyResultSectionAddCommentInput isLoading={!keyResultID} />
-        </Flex>
-      </Form>
+    <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
+      {({ handleSubmit }) => (
+        <Form onSubmit={handleSubmit}>
+          <Flex gridGap={3} alignItems="flex-start">
+            <SkeletonCircle isLoaded={Boolean(user)} w={10} h={10}>
+              <Avatar name={user?.fullName} src={user?.picture} w={10} h={10} />
+            </SkeletonCircle>
+            <KeyResultSectionAddCommentInput isLoading={!keyResultID} />
+          </Flex>
+        </Form>
+      )}
     </Formik>
   )
 }

@@ -1,17 +1,16 @@
 import { useMutation } from '@apollo/client'
 import { Text, useToken, VStack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import regexifyString from 'regexify-string'
 
 import { COMMENT_TYPE, KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { KeyResultComment } from 'src/components/KeyResult/types'
+import { insertMentionInString } from 'src/components/Routine/RetrospectiveTab/Comments/CommentCard'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
 
 import KeyResultSectionTimelineCardBase from '../../../Base'
-import { MarkedUser } from '../../Default'
 import messages from '../../messages'
 import queries from '../../queries.gql'
 import { useGetKeyResultCommentThread } from '../../utils/get-comment-thread'
@@ -73,16 +72,13 @@ const CommentFeedbacksCards = ({
     if (onEntryDelete) onEntryDelete(intlCardType)
   }
 
-  const commentText = regexifyString({
-    pattern: /@\[[\w \u00C0-\u00FF-]+]\([\da-f-]+\)/g,
-    decorator: (match) => {
-      const regex = /@\[([\w \u00C0-\u00FF-]+)]\(([\da-f-]+)\)/
-      const [_, name, id] = regex.exec(match) ?? [undefined, '', '']
-
-      return <MarkedUser id={id} name={name} />
-    },
-    input: data?.text ?? '',
-  })
+  const formattedCommentText = useMemo(() => {
+    return data.text?.split('\n').map((line) => (
+      <span key={line} style={{ display: 'block' }}>
+        {insertMentionInString(line)}
+      </span>
+    ))
+  }, [data?.text])
 
   return (
     <KeyResultSectionTimelineCardBase
@@ -99,7 +95,7 @@ const CommentFeedbacksCards = ({
     >
       {type === COMMENT_TYPE.COMMENT ? <div /> : <CommentFeedbackTag type={type} />}
       <Text color="new-gray.900" fontSize={14}>
-        {commentText}
+        {formattedCommentText}
       </Text>
       <VStack gap="10px">
         {data.thread ? (

@@ -57,7 +57,7 @@ const TeamCard = memo(({ id }: TeamCardProperties) => {
       {isAllowedToEditTeam && (
         <MenuCard position="absolute" top="20px" right="20px" teamId={team?.id} />
       )}
-      <IntlLink href={id ?? '#'}>
+      <IntlLink href={`explore/${id ?? '#'}`}>
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
           <Flex flexGrow={1} direction="column" justifyContent="flex-end">
             <Box minH={8}>
