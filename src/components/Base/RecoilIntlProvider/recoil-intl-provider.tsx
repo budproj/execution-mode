@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { ReactElement, useCallback, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { IntlProvider } from 'react-intl'
 import { useRecoilState, useSetRecoilState } from 'recoil'
@@ -22,7 +22,7 @@ const getMessages = async (locale: string): Promise<IntlMessage | undefined> =>
 
 const RecoilIntlProvider = (properties: RecoilIntlProviderProperties): ReactElement => {
   const { push, pathname, query, asPath } = useRouter()
-  const [messages, setMessagees] = useState<IntlMessage | undefined>()
+  const [messages, setMessages] = useState<IntlMessage | undefined>()
   const [intl, setIntl] = useRecoilState(intlLocaleAtom)
   const setCurrentNextRoute = useSetRecoilState(currentNextRoute)
   const [locale, setCookie] = useCookies([LOCALE_COOKIE_KEY])
@@ -30,20 +30,26 @@ const RecoilIntlProvider = (properties: RecoilIntlProviderProperties): ReactElem
   useQuery(queries.GET_MY_LOCALE, {
     onCompleted: async (data) => {
       const savedLocale = await data.me.settings.edges[0]?.node?.value
-      const messages = await getMessages(savedLocale ?? 'pt-BR')
-      setMessagees(messages)
       setIntl(savedLocale)
       if (locale !== savedLocale) setCookie(LOCALE_COOKIE_KEY, savedLocale, { path: '/' })
-
       await push({ pathname, query }, asPath, { locale: savedLocale })
     },
   })
+
+  const handleConfigMessages = useCallback(async () => {
+    const messages = await getMessages(intl)
+    setMessages(messages)
+  }, [intl])
+
+  useEffect(() => {
+    handleConfigMessages()
+  }, [handleConfigMessages])
 
   useEffect(() => {
     setCurrentNextRoute(pathname)
   }, [setCurrentNextRoute, pathname])
 
-  return <IntlProvider {...properties} locale={intl ?? 'pt-BR'} messages={messages} />
+  return <IntlProvider {...properties} locale={intl} messages={messages} />
 }
 
 export default RecoilIntlProvider

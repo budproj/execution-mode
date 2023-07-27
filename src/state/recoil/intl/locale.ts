@@ -6,7 +6,7 @@ const KEY = `${PREFIX}::LOCALE_ATOM`
 
 const localeAtom = atom<string>({
   key: KEY,
-  default: '',
+  default: 'pt-BR',
 })
 
 export default localeAtom

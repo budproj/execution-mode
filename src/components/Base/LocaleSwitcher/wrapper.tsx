@@ -1,9 +1,11 @@
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useCookies } from 'react-cookie'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
+
+import { intlLocaleAtom } from 'src/state/recoil/intl'
 
 import meAtom from '../../../state/recoil/user/me'
 
@@ -21,46 +23,38 @@ export const LocaleSwitcherWrapper = ({
   availableLocaleCodes,
   userID,
 }: LocaleSwitcherWrapperProperties) => {
-  const [currentLocale, setCurrentLocale] = useState()
   const { push, pathname, query, asPath, locales } = useRouter()
   const [_, setCookie] = useCookies([LOCALE_COOKIE_KEY])
   const intl = useIntl()
   const myID = useRecoilValue(meAtom)
+  const [intlLocale, setIntlLocale] = useRecoilState(intlLocaleAtom)
 
-  const [getCurrentLocale, { called, loading: isQueryLoading }] = useLazyQuery(
-    queries.GET_USER_LOCALE,
-    {
-      variables: {
-        userID,
-      },
-      onCompleted: (data) => {
-        setCurrentLocale(data.user.settings.edges[0]?.node.value)
-      },
-    },
-  )
   const [updateLocale, { loading: isMutationLoading }] = useMutation(queries.UPDATE_USER_LOCALE, {
     onCompleted: (data) => {
-      setCurrentLocale(data.updateUserSetting.value)
+      setIntlLocale(data.updateUserSetting.value)
     },
   })
 
   availableLocaleCodes ??= locales
-  const isLoading = !called || isQueryLoading || isMutationLoading
+  const isLoading = isMutationLoading
 
-  const localeHashmap: Record<string, Locale> = {
-    'pt-BR': {
-      code: 'pt-BR',
-      label: intl.formatMessage(messages.ptBRLabel),
-    },
+  const localeHashmap = useMemo<Record<string, Locale>>(
+    () => ({
+      'pt-BR': {
+        code: 'pt-BR',
+        label: intl.formatMessage(messages.ptBRLabel),
+      },
 
-    'en-US': {
-      code: 'en-US',
-      label: intl.formatMessage(messages.enUSLabel),
-    },
-  }
+      'en-US': {
+        code: 'en-US',
+        label: intl.formatMessage(messages.enUSLabel),
+      },
+    }),
+    [intl],
+  )
 
   const localesData = availableLocaleCodes?.map((code) => localeHashmap[code])
-  const currentLocaleData = localeHashmap[currentLocale ?? 'pt-BR']
+  const currentLocaleData = useMemo(() => localeHashmap[intlLocale], [intlLocale, localeHashmap])
 
   const handleSwitch = async (locale: string) => {
     await updateLocale({
@@ -75,10 +69,6 @@ export const LocaleSwitcherWrapper = ({
       await push({ pathname, query }, asPath, { locale })
     }
   }
-
-  useEffect(() => {
-    if (userID) void getCurrentLocale()
-  }, [userID, getCurrentLocale])
 
   return (
     <Switcher
