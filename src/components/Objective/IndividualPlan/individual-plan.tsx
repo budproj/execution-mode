@@ -14,7 +14,7 @@ import {
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 import PageContent from 'src/components/Base/PageContent'
@@ -148,7 +148,7 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
     },
   )
 
-  const [myself] = useRecoilState(myselfAtom)
+  const myself = useRecoilValue(myselfAtom)
   useEffect(() => {
     if (myself) {
       const isSameUser = userID === myself.id

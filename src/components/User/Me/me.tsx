@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import React, { useEffect, useMemo } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import NamedAvatar from 'src/components/User/NamedAvatar'
 
@@ -36,7 +36,7 @@ const Me = () => {
   const { user } = useAuth0()
   const { publicRuntimeConfig } = getConfig()
   const { identify } = useAmplitude()
-  const [myself] = useRecoilState(myselfAtom)
+  const myself = useRecoilValue(myselfAtom)
 
   useEffect(() => {
     if (myself && user) {

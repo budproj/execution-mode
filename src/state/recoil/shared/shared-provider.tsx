@@ -29,6 +29,10 @@ export default ({ children }: ChildrenProperty) => {
   })
 
   // TODO: placeholder for future use
+  // const { loading: loadingUsers } = useGetUsers()
+  const { loading: loadingUsers } = { loading: true }
+
+  // TODO: placeholder for future use
   const { loading: loadingTeams } = { loading: true }
 
   // TODO: load team tree
@@ -39,8 +43,8 @@ export default ({ children }: ChildrenProperty) => {
   // }
 
   useEffect(() => {
-    setLoading([loadingMyself, loadingTeams].every(Boolean))
-  }, [loadingMyself, loadingTeams])
+    setLoading([loadingMyself, loadingUsers, loadingTeams].every(Boolean))
+  }, [loadingMyself, loadingUsers, loadingTeams])
 
   return useMemo(
     () =>

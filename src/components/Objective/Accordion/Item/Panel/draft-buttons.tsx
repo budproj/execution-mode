@@ -7,8 +7,8 @@ import ConfirmPublishingDialog from 'src/components/Objective/OKRsPublishingFlow
 import { useGetUserAuthzRole } from 'src/components/User/hooks/getUserAuthzRole/get-user-authz-role'
 import { AUTHZ_ROLES } from 'src/state/recoil/authz/constants'
 import { keyResultInsertDrawerObjectiveID } from 'src/state/recoil/key-result/drawers/insert/objective-id'
-import meAtom from 'src/state/recoil/user/me'
 
+import { myselfAtom } from '../../../../../state/recoil/shared/atoms'
 import { stopAccordionOpen } from '../../handlers'
 
 import messages from './messages'
@@ -24,8 +24,8 @@ export const DraftButtons = ({
 }: DraftButtonsProperties) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const intl = useIntl()
-  const myID = useRecoilValue(meAtom)
-  const { data: userAuthzRole, loading } = useGetUserAuthzRole(myID)
+  const myself = useRecoilValue(myselfAtom)
+  const { data: userAuthzRole, loading } = useGetUserAuthzRole(myself?.id)
 
   const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
 

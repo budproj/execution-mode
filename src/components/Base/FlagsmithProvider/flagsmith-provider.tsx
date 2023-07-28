@@ -1,7 +1,7 @@
 import flagsmith from 'flagsmith'
 import { FlagsmithProvider as FlagsmithProviderInternal, useFlagsmith } from 'flagsmith/react'
 import React, { ReactElement, useEffect } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import getConfig from 'src/config'
 
@@ -14,7 +14,7 @@ type FlagsmithProviderProperties = {
 const config = getConfig()
 
 const FlagsmithIdentifier = ({ children }: FlagsmithProviderProperties) => {
-  const [myself] = useRecoilState(myselfAtom)
+  const myself = useRecoilValue(myselfAtom)
 
   const flagsmithInstance = useFlagsmith()
 

@@ -6,7 +6,8 @@ import { User } from 'src/components/User/types'
 import keyResultAtomFamily from 'src/state/recoil/key-result/atom-family'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 import { userAtomFamily } from 'src/state/recoil/user'
-import meAtom from 'src/state/recoil/user/me'
+
+import { myselfAtom } from '../../shared/atoms'
 
 import { DEFAULT_CONFIDENCE, PREFIX } from './constants'
 
@@ -52,8 +53,8 @@ export const setLatestCheckIn =
     const keyResultLatestCheckIn = keyResult?.status?.latestCheckIn
     const keyResultPreviousCheckIn = keyResultLatestCheckIn ?? keyResultCheckIns[0]
 
-    const currentUserID = get(meAtom)
-    const currentUser = get(userAtomFamily(currentUserID)) as User
+    const myself = get(myselfAtom)
+    const currentUser = get(userAtomFamily(myself?.id)) as User
 
     const newLocalCheckIn: KeyResultCheckIn = {
       ...newCheckIn,

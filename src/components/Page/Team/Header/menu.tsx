@@ -40,8 +40,8 @@ import {
   ObjectivesViewMode,
   teamObjectivesViewMode,
 } from 'src/state/recoil/team/objectives-view-mode'
-import meAtom from 'src/state/recoil/user/me'
 
+import { myselfAtom } from '../../../../state/recoil/shared/atoms'
 import queries from '../queries.gql'
 
 import messages from './messages'
@@ -84,7 +84,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
     teamObjectivesViewMode(teamId),
   )
   const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.EDIT))
-  const ownerID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
   const setIsReloadNecessary = useSetRecoilState(isReloadNecessary)
 
   const [activeCycles, setActiveCycleEdges] = useConnectionEdges<Cycle>()
@@ -108,7 +108,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
     {
       variables: {
         title: intl.formatMessage(messages.draftObjectiveTitle),
-        ownerID,
+        ownerID: myself?.id,
         teamID: teamId,
       },
       onCompleted: async (data) => {

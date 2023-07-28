@@ -22,14 +22,14 @@ query GET_MYSELF {
     }
     createdAt
     updatedAt
-    yearlyProgress {
-      showProgress
-      progress
-    }
-    quarterlyProgress {
-      showProgress
-      progress
-    }
+#    yearlyProgress {
+#      showProgress
+#      progress
+#    }
+#    quarterlyProgress {
+#      showProgress
+#      progress
+#    }
     companies {
       edges {
         node {

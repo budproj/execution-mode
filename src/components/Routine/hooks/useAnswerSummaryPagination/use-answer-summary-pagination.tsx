@@ -3,8 +3,9 @@ import { useRecoilValue } from 'recoil'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
-import { filteredUsersCompany, selectUserFromCompany } from 'src/state/recoil/team/users-company'
-import meAtom from 'src/state/recoil/user/me'
+import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
+
+import { myselfAtom } from '../../../../state/recoil/shared/atoms'
 
 type AnswerSummaryPaginationProperties = {
   limitedTeamUsers: User[]
@@ -13,14 +14,12 @@ type AnswerSummaryPaginationProperties = {
 const useAnswerSummaryPagination = (teamId: Team['id']): AnswerSummaryPaginationProperties => {
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
 
-  const userID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
 
-  const me = useRecoilValue(selectUserFromCompany(userID))
-
-  const isUserFromTeam = me?.id && teamUsers.some(({ id }) => id === me.id)
+  const isUserFromTeam = myself?.id && teamUsers.some(({ id }) => id === myself?.id)
 
   const companyUsers = isUserFromTeam
-    ? [me, ...teamUsers.filter(({ id }) => id !== me?.id)]
+    ? [myself, ...teamUsers.filter(({ id }) => id !== myself?.id)]
     : teamUsers
 
   const answersSummary = useRecoilValue(answerSummaryAtom)

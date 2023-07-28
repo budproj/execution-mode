@@ -13,8 +13,9 @@ import { KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { UserAvatar } from 'src/components/User'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
-import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
+
+import { myselfAtom } from '../../../../../../state/recoil/shared/atoms'
 
 export interface KeyResultListBodyColumnOwnerProperties
   extends KeyResultListBodyColumnBaseProperties {
@@ -52,17 +53,17 @@ const KeyResultListBodyColumnOwner = ({
   const owner = useRecoilValue(ownerSelector(id))
   const supportTeamMembersAtoms = useRecoilValue(supportTeamMembersSelector(id))
   const mode = useRecoilValue(modeSelector(id))
-  const userID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
   const router = useRouter()
   const setUser = useSetRecoilState(selectUser(owner?.id))
 
   const isOwnerLoaded = Boolean(owner)
   const userId = router.query?.['user-id']
   const supportTeamMembers = supportTeamMembersAtoms?.edges?.map(({ node }) => node) ?? []
-  const currentUserIsOwner = owner?.id === userID && !userId
+  const currentUserIsOwner = owner?.id === myself?.id && !userId
   const usersToLoad = currentUserIsOwner
     ? [...supportTeamMembers]
-    : [...supportTeamMembers.filter(({ id }) => id === userID)]
+    : [...supportTeamMembers.filter(({ id }) => id === myself?.id)]
 
   if (userId) {
     const userFromProfile = supportTeamMembers.find(({ id }) => id === userId)
@@ -115,7 +116,9 @@ const KeyResultListBodyColumnOwner = ({
               isLoaded={isOwnerLoaded}
               {...buildSkeletonMinSize(isOwnerLoaded, 150, 26)}
             >
-              <IntlLink href={owner?.id === userID ? '/my-things' : `/profile/${owner?.id ?? ''}`}>
+              <IntlLink
+                href={owner?.id === myself?.id ? '/my-things' : `/profile/${owner?.id ?? ''}`}
+              >
                 <Text color="gray.500" _hover={{ color: 'brand.500' }} cursor="pointer">
                   {owner?.fullName}
                 </Text>

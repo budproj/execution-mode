@@ -7,8 +7,8 @@ import { IntlLink } from 'src/components/Base'
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import { NamedAvatar } from 'src/components/User'
-import meAtom from 'src/state/recoil/user/me'
 
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 import { NamedAvatarSubtitleType } from '../NamedAvatar/types'
 import { User } from '../types'
 
@@ -44,7 +44,7 @@ export const UserList = ({
   const cardReference = useRef<HTMLDivElement>(null)
   const ScrollableItem = getScrollableItem()
   const intl = useIntl()
-  const myID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
 
   const handleUserClick = (userID: string) => async () => {
     if (onUserClick) await onUserClick(userID)
@@ -101,7 +101,9 @@ export const UserList = ({
                       <MenuList>
                         <IntlLink
                           href={
-                            teamLeader?.id === myID ? '/my-things' : `/profile/${teamLeader?.id}`
+                            teamLeader?.id === myself?.id
+                              ? '/my-things'
+                              : `/profile/${teamLeader?.id}`
                           }
                         >
                           <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
@@ -139,7 +141,9 @@ export const UserList = ({
                         />
                       </MenuButton>
                       <MenuList>
-                        <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id}`}>
+                        <IntlLink
+                          href={user?.id === myself?.id ? '/my-things' : `/profile/${user?.id}`}
+                        >
                           <MenuItem>{intl.formatMessage(messages.firstMenuItemOption)}</MenuItem>
                         </IntlLink>
                         <MenuItem onClick={handleUserClick(user.id)}>

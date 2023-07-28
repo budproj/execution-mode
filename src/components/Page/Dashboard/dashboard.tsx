@@ -1,7 +1,7 @@
 import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
@@ -19,7 +19,7 @@ import messages from './messages'
 
 const DashboardPage = () => {
   const intl = useIntl()
-  const [myself] = useRecoilState(myselfAtom)
+  const myself = useRecoilValue(myselfAtom)
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
 
   const activeCompanyCycles = allCompanyCycles.filter((cycle) => cycle.active)

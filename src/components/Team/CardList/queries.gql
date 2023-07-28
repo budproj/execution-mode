@@ -10,10 +10,13 @@ query GET_TEAMS {
         description
         isCompany
         ownerId
-        owner {
-          id
-          fullName
-        }
+        # TODO: remove in favor of ownerId
+#        owner {
+#          id
+#          fullName
+#        }
+        parentId
+        # TODO: remove in favor of parentId
         parent {
           id
           name

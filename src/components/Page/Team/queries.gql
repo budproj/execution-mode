@@ -6,10 +6,10 @@ query GET_TEAM_DATA($teamId: ID!) {
     ownerId
     isCompany
     parentId
-    parent {
-      name
-      id
-    }
+#    parent {
+#      name
+#      id
+#    }
     owner {
       id
       firstName

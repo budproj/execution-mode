@@ -25,9 +25,8 @@ import {
 } from 'src/state/recoil/routine/routine-dates-range'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
-import meAtom from 'src/state/recoil/user/me'
-import selectUser from 'src/state/recoil/user/selector'
 
+import { myselfAtom } from '../../../../state/recoil/shared/atoms'
 import { useFetchSummaryData } from '../../hooks/useFetchSummaryData'
 
 import AnswerRowComponent from './answer-row'
@@ -77,19 +76,18 @@ const AnswersComponent = memo(
     const intl = useIntl()
     const router = useRouter()
 
-    const userID = useRecoilValue(meAtom)
+    const myself = useRecoilValue(myselfAtom)
     const [date, setDate] = useRecoilState(routineDatesRangeAtom)
     const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
     const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
-    const user = useRecoilValue(selectUser(userID))
-    const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
-    const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
+    const [userTeams, updateTeams] = useConnectionEdges(myself?.teams?.edges)
+    const [userCompanies, updateUserCompanies] = useConnectionEdges(myself?.companies?.edges)
     const userTeamIds = userTeams.map((team) => team.id)
     const userCompanie = userCompanies[0]?.id
     const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
 
     const haveUserAnswered = answersSummary.find(
-      (answer) => answer.userId === userID && answer.timestamp,
+      (answer) => answer.userId === myself?.id && answer.timestamp,
     )
     const isActiveRoutine = isBefore(new Date(), before)
 
@@ -161,9 +159,9 @@ const AnswersComponent = memo(
     )
 
     useEffect(() => {
-      updateTeams(user?.teams?.edges)
-      updateUserCompanies(user?.companies?.edges)
-    }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
+      updateTeams(myself?.teams?.edges)
+      updateUserCompanies(myself?.companies?.edges)
+    }, [updateTeams, updateUserCompanies, myself?.companies?.edges, myself?.teams])
 
     return (
       <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">

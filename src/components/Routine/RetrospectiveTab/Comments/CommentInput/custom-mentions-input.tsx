@@ -15,7 +15,8 @@ import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { userAtomFamily } from 'src/state/recoil/user'
-import meAtom from 'src/state/recoil/user/me'
+
+import { myselfAtom } from '../../../../../state/recoil/shared/atoms'
 
 import messages from './messages'
 import { RoutineCommentsInputInitialValues } from './wrapper'
@@ -51,8 +52,8 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
   const placeholder = intl.formatMessage(messages.placeholder, {
     user: userThatWillBeAnswered,
   })
-  const myID = useRecoilValue(meAtom)
-  const user = useRecoilValue(userAtomFamily(myID))
+  const myself = useRecoilValue(myselfAtom)
+  const user = useRecoilValue(userAtomFamily(myself?.id))
 
   const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
   const [users, setUserEdges] = useConnectionEdges<User>()

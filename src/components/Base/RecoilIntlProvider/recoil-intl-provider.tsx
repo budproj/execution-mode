@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import React, { ReactElement, useCallback, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { IntlProvider } from 'react-intl'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { currentNextRoute, intlLocaleAtom } from 'src/state/recoil/intl'
 
@@ -20,7 +20,7 @@ const getMessages = async (locale: string): Promise<IntlMessage | undefined> =>
 
 const RecoilIntlProvider = (properties: RecoilIntlProviderProperties): ReactElement => {
   const router = useRouter()
-  const [myself] = useRecoilState(myselfAtom)
+  const myself = useRecoilValue(myselfAtom)
   const [messages, setMessages] = useState<IntlMessage | undefined>()
   const [intl, setIntl] = useRecoilState<string>(intlLocaleAtom)
   const setCurrentNextRoute = useSetRecoilState(currentNextRoute)

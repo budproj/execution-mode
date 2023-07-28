@@ -21,11 +21,11 @@ import {
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { GraphQLEffect } from 'src/components/types'
 import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
-import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../state/hooks/useEvent/event-type'
 import { Feature } from '../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../state/hooks/useEvent/hook'
+import { myselfAtom } from '../../../../../state/recoil/shared/atoms'
 
 import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
 import { DeleteCheckMarkButton } from './ActionButtons/delete-checkmark'
@@ -77,7 +77,7 @@ export const KeyResultCheckMark = ({
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
   const checkmarkIsBeingRemoved = useRecoilValue(checkMarkIsBeingRemovedAtom(node?.id))
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
-  const userID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
   const [toggleCheckMark, { loading: isToggling }] = useMutation(queries.TOGGLE_CHECK_MARK, {
     variables: {
       id: node?.id,
@@ -94,7 +94,7 @@ export const KeyResultCheckMark = ({
         myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
         {
           variables: {
-            ...(userID ? { userID } : {}),
+            ...(myself?.id ? { userID: myself?.id } : {}),
           },
         },
       ],

@@ -17,7 +17,8 @@ import { NotificationBadge } from 'src/components/Notifications/NotificationBadg
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { listNotificationsAtom, checkInNotificationCountAtom } from 'src/state/recoil/notifications'
-import meAtom from 'src/state/recoil/user/me'
+
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 
 import messages from './messages'
 
@@ -34,7 +35,7 @@ const NotificationsButton = () => {
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_BELL_CLICK)
 
-  const userID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
 
   return (
     <Popover placement="bottom" isOpen={isOpen} onClose={onClose}>
@@ -68,7 +69,7 @@ const NotificationsButton = () => {
               onClick={() => {
                 onToggle()
                 if (!isOpen) {
-                  dispatch({ userId: userID })
+                  dispatch({ userId: myself?.id })
                 }
               }}
             />
@@ -76,7 +77,7 @@ const NotificationsButton = () => {
         </Box>
       </PopoverTrigger>
       <PopoverContent mt={4} maxWidth={480} width="min-content" borderRadius={15} padding={0}>
-        <NotificationsModal userId={userID} isOpen={isOpen} />
+        <NotificationsModal userId={myself?.id} isOpen={isOpen} />
       </PopoverContent>
     </Popover>
   )

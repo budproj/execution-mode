@@ -113,7 +113,8 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       if (newFormattedData) setAnswersSummary(newFormattedData)
       setIsAnswerSummaryLoading(false)
     },
-    [answersSummary, fetchAnswers, setAnswersSummary, setIsAnswerSummaryLoading, teamId],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [answersSummary, teamId],
   )
 
   const fetchAnswerSummaryData = useCallback(
@@ -143,17 +144,8 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       }
     },
 
-    [
-      limitedTeamUsers,
-      answersSummary,
-      setIsAnswerSummaryLoading,
-      setAnswerSummaryPaginationData,
-      teamId,
-      fetchAnswers,
-      after,
-      before,
-      setAnswersSummary,
-    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [limitedTeamUsers, answersSummary, teamId, after, before],
   )
 
   useEffect(() => {
