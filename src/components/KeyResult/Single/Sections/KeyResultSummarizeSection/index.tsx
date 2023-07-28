@@ -49,7 +49,7 @@ const KeyResultSummarizeSection = ({
   const companyId = user?.companies?.edges[0]?.node?.id
 
   const [summarizedKeyResult, setSummarizedKeyResult] = useState('')
-  const [feedback, setFeedback] = useState('')
+  const [feedback, setFeedback] = useState(0)
   const [completionId, setCompletionId] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -133,7 +133,7 @@ const KeyResultSummarizeSection = ({
           await delay(1800)
         }
 
-        setFeedback('')
+        setFeedback(0)
         setSummarizedKeyResult(data.summary)
         setCompletionId(data.id)
       } finally {
@@ -142,8 +142,14 @@ const KeyResultSummarizeSection = ({
     }
   }
 
-  const handleFeedback = async (value: string) => {
+  const handleFeedback = async (value: number) => {
     const { llm } = await servicesPromise
+
+    if (feedback === value) {
+      const data = await llm.sendFeedback({ completionId, userId: userID, value: 0 })
+      setFeedback(data.value)
+      return
+    }
 
     const data = await llm.sendFeedback({ completionId, userId: userID, value })
 
@@ -177,10 +183,10 @@ const KeyResultSummarizeSection = ({
                   width="24px"
                   desc={intl.formatMessage(messages.thumbsUpIconButtonDescription)}
                   fill="transparent"
-                  opacity={feedback === '-1' ? 0.5 : 1}
+                  opacity={feedback === -1 ? 0.5 : 1}
                 />
               }
-              onClick={async () => handleFeedback('+1')}
+              onClick={async () => handleFeedback(1)}
             />
             <IconButton
               aria-label="aa"
@@ -190,10 +196,10 @@ const KeyResultSummarizeSection = ({
                   transform="rotate(180deg)"
                   desc={intl.formatMessage(messages.thumbsDownIconButtonDescription)}
                   fill="transparent"
-                  opacity={feedback === '+1' ? 0.5 : 1}
+                  opacity={feedback === 1 ? 0.5 : 1}
                 />
               }
-              onClick={async () => handleFeedback('-1')}
+              onClick={async () => handleFeedback(-1)}
             />
           </Flex>
         </Box>

@@ -16,7 +16,7 @@ export interface CreateCompletionRequest<T> {
 export interface SendFeedbackRequest {
   completionId: string
   userId: string
-  value: string
+  value: number
 }
 
 export class LlmService {
