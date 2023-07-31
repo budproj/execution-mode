@@ -121,6 +121,14 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     async (entries: IntersectionObserverEntry[]) => {
       const target = entries[0]
 
+      if (limitedTeamUsers.length === 0) {
+        return
+      }
+
+      if (isAnswerSummaryLoading) {
+        return
+      }
+
       if (target.isIntersecting) {
         const teamUsersIds = limitedTeamUsers.map((user) => user.id)
 
@@ -145,7 +153,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [limitedTeamUsers, answersSummary, teamId, after, before],
+    [limitedTeamUsers, isAnswerSummaryLoading, answersSummary, teamId, after, before],
   )
 
   useEffect(() => {
@@ -191,14 +199,11 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       threshold: 0.5,
     })
 
-    if (isAnswerSummaryLoading) return
-
-    if (limitedTeamUsers.length === 0) return
-
     observer.observe(document.querySelector('#list-bottom') as HTMLDivElement)
 
     return () => observer.disconnect()
-  }, [fetchAnswerSummaryData, isAnswerSummaryLoading, limitedTeamUsers.length])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Stack spacing={10}>
