@@ -15,7 +15,7 @@ import messages from './messages'
 
 const CommentOnRoutineNotification = ({ properties, timestamp, isRead, type }: Notification) => {
   const intl = useIntl()
-  const { push } = useRouter()
+  const { push, pathname } = useRouter()
   const routineTabName = useRoutineTab()
 
   const typeCommentNotificationMessage =
@@ -38,8 +38,12 @@ const CommentOnRoutineNotification = ({ properties, timestamp, isRead, type }: N
     input: properties.comment?.content ?? '',
   })
 
+  const isExplorePage = pathname === '/explore' || pathname.startsWith('/explore/')
+
   const answerLink = properties.routine
-    ? `explore/${properties.routine.companyId}?activeTab=${routineTabName}&answerId=${properties.routine?.answerId}`
+    ? `${isExplorePage ? '/' : 'explore/'}${
+        properties.routine.companyId
+      }?activeTab=${routineTabName}&answerId=${properties.routine?.answerId}`
     : '#'
 
   return (
