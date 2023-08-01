@@ -33,23 +33,19 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   const isGameficationDisabled = !flags.view_gamification_teams_ranking.enabled
 
   const { data, loading } = useQuery<GetCompanyTeamsQuery>(queries.GET_COMPANY_TEAMS, {
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'network-only',
   })
   const [rankedTeams, setRankedTeamsEdges] = useConnectionEdges<Team>()
 
   const [loadTeam] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const company = data?.teams?.edges?.[0]?.node
 
-  const orderedTeams = rankedTeams.sort(
-    isGameficationDisabled
-      ? (left, right) => left.name.localeCompare(right.name)
-      : (left, right) => right.status.progress - left.status.progress,
-  )
+  const orderedTeams = isGameficationDisabled
+    ? rankedTeams.sort((a, b) => (a.name > b.name ? 1 : -1))
+    : rankedTeams
 
   useEffect(() => {
-    if (company) {
-      setRankedTeamsEdges(company?.teams?.edges)
-    }
+    if (company) setRankedTeamsEdges(company?.rankedDescendants?.edges)
   }, [company, setRankedTeamsEdges])
 
   useEffect(() => {

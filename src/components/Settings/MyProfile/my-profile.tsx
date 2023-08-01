@@ -4,20 +4,19 @@ import { useRecoilValue } from 'recoil'
 
 import { CompanyMenuProperties } from 'src/components/Settings/SidebarMenu/Section/Company/company'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
-
-import { myselfAtom } from '../../../state/recoil/shared/atoms'
+import meAtom from 'src/state/recoil/user/me'
 
 import SettingsAccountUserCardPreview from './UserCardPreview'
 
 const SettingsMyProfile = (_: { permissions?: CompanyMenuProperties['permissions'] }) => {
-  const myself = useRecoilValue(myselfAtom)
+  const myUserID = useRecoilValue(meAtom)
 
   return (
     <Flex direction="row" w="full" gridGap={14}>
-      <UserProfile userID={myself?.id} isRemovable={false} />
+      <UserProfile userID={myUserID} isRemovable={false} />
       <Divider orientation="vertical" borderColor="black.200" />
 
-      <SettingsAccountUserCardPreview userID={myself?.id} />
+      <SettingsAccountUserCardPreview userID={myUserID} />
     </Flex>
   )
 }

@@ -15,7 +15,6 @@ query GET_USERS {
                 fullName
                 role
                 picture
-                # TODO: do not fetch companies
                 companies {
                   edges {
                     node {
@@ -24,7 +23,6 @@ query GET_USERS {
                     }
                   }
                 }
-                # TODO: do not fetch teams
                 teams {
                   edges {
                     node {

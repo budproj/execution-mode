@@ -21,7 +21,7 @@ export const useGetUsers = (): GetUserListProperties => {
   const [users, setUsers] = useConnectionEdges<User>()
 
   const { loading, called, refetch } = useQuery<GetUserPrimaryCompanyQuery>(GET_USERS, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'network-only',
     onCompleted: (data) => {
       const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
 

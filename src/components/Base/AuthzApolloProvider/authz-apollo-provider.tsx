@@ -1,5 +1,5 @@
 import { ApolloProvider, NormalizedCacheObject } from '@apollo/client'
-import React, { ReactElement, useMemo } from 'react'
+import React, { ReactElement } from 'react'
 
 import { useApollo } from 'lib/apollo'
 
@@ -14,7 +14,7 @@ const AuthzApolloProvider = ({
 }: AuthzApolloProviderProperties): ReactElement => {
   const apolloClient = useApollo(pageProps)
 
-  return useMemo(() => <ApolloProvider client={apolloClient} {...rest} />, [apolloClient, rest])
+  return <ApolloProvider client={apolloClient} {...rest} />
 }
 
 export default AuthzApolloProvider

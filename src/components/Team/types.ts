@@ -20,9 +20,6 @@ export interface Team extends GraphQLNode {
   tacticalCycle?: Cycle
   users?: GraphQLConnection<User>
   teams?: GraphQLConnection<Team>
-  /**
-   * @deprecated prefer sorting teams instead
-   */
   rankedDescendants?: GraphQLConnection<Team>
   cycles?: GraphQLConnection<Cycle>
   objectives?: GraphQLConnection<Objective>

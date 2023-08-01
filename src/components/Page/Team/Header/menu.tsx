@@ -40,8 +40,8 @@ import {
   ObjectivesViewMode,
   teamObjectivesViewMode,
 } from 'src/state/recoil/team/objectives-view-mode'
+import meAtom from 'src/state/recoil/user/me'
 
-import { myselfAtom } from '../../../../state/recoil/shared/atoms'
 import queries from '../queries.gql'
 
 import messages from './messages'
@@ -84,13 +84,13 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
     teamObjectivesViewMode(teamId),
   )
   const setObjectiveIDToEditMode = useSetRecoilState(setObjectiveToMode(ObjectiveViewMode.EDIT))
-  const myself = useRecoilValue(myselfAtom)
+  const ownerID = useRecoilValue(meAtom)
   const setIsReloadNecessary = useSetRecoilState(isReloadNecessary)
 
   const [activeCycles, setActiveCycleEdges] = useConnectionEdges<Cycle>()
 
   const [fetchCycles] = useLazyQuery<GetCyclesQueryResult>(queries.GET_CYCLES, {
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'no-cache',
     onError: (error) => console.error(error),
     onCompleted: ({ cycles, inactiveCycles, team }) => {
       setActiveCycleEdges(cycles.edges)
@@ -108,7 +108,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
     {
       variables: {
         title: intl.formatMessage(messages.draftObjectiveTitle),
-        ownerID: myself?.id,
+        ownerID,
         teamID: teamId,
       },
       onCompleted: async (data) => {

@@ -22,9 +22,8 @@ import LinkedInIcon from 'src/components/Icon/LinkedIn'
 import UserAvatar from 'src/components/User/Avatar'
 import UserTeamTags from 'src/components/User/TeamTags'
 import { User } from 'src/components/User/types'
+import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
-
-import { myselfAtom } from '../../../state/recoil/shared/atoms'
 
 import messages from './messages'
 
@@ -36,7 +35,7 @@ export interface UserProfileCardProperties {
 const UserProfileCard = ({ userID, redirectToProfile = false }: UserProfileCardProperties) => {
   const intl = useIntl()
   const user = useRecoilValue(selectUser(userID))
-  const myself = useRecoilValue(myselfAtom)
+  const myID = useRecoilValue(meAtom)
 
   const isUserLoaded = Boolean(user)
 
@@ -106,7 +105,7 @@ const UserProfileCard = ({ userID, redirectToProfile = false }: UserProfileCardP
           </SkeletonText>
         </Stack>
       )}
-      {redirectToProfile && user?.id !== myself?.id && (
+      {redirectToProfile && user?.id !== myID && (
         <Stack direction="column" spacing={0}>
           <Divider />
           <IntlLink href={`/profile/${user?.id ?? ''}`}>

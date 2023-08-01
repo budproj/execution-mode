@@ -7,8 +7,8 @@ import { useRecoilValue } from 'recoil'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
-
-import { myselfAtom } from '../../../state/recoil/shared/atoms'
+import meAtom from 'src/state/recoil/user/me'
+import selectUser from 'src/state/recoil/user/selector'
 
 import messages from './messages'
 
@@ -21,7 +21,8 @@ const NoticesBanner = () => {
 
   const router = useRouter()
 
-  const myself = useRecoilValue(myselfAtom)
+  const userID = useRecoilValue(meAtom)
+  const user = useRecoilValue(selectUser(userID))
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -42,8 +43,8 @@ const NoticesBanner = () => {
 
   const handleRedirect = useCallback(() => {
     learnMoreClick({})
-    router.push(`/explore/${myself?.companies?.edges[0]?.node.id ?? ''}`)
-  }, [learnMoreClick, router, myself?.companies?.edges])
+    router.push(`/explore/${user?.companies?.edges[0]?.node.id ?? ''}`)
+  }, [learnMoreClick, router, user?.companies?.edges])
 
   const handleCloseBanner = useCallback(() => {
     register(storageKey, false)

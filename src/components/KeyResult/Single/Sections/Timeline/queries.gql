@@ -1,4 +1,3 @@
-# @deprecated in favor of GET_KEY_RESULT_AND_RELATIONS
 query GET_KEY_RESULT_TIMELINE_WITH_ID($id: ID!, $first: Int, $after: Float) {
   keyResult(id: $id) {
     id

@@ -3,13 +3,12 @@ import { Flex } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 
-import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/types'
-import { GraphQLConnection } from 'src/components/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 import KeyResultSectionTimelineContent from './Content'
 import KeyResultSectionTimelineHeader from './Header/header'
-import GET_KEY_RESULT_AND_RELATIONS from './queries.gql'
+import queries from './queries.gql'
 
 export interface KeyResultSectionTimelineProperties {
   limit: number
@@ -35,35 +34,31 @@ const KeyResultSectionTimeline = ({
   newCheckInValue,
 }: KeyResultSectionTimelineProperties) => {
   const [hasMore, setHasMore] = useState(false)
-  const [timeline, setTimeline] = useRecoilState<
-    GraphQLConnection<KeyResultTimelineEntry> | undefined
-  >(timelineSelector(keyResultID))
+  const [timeline, setTimeline] = useRecoilState(timelineSelector(keyResultID))
   const resetTimeline = useResetRecoilState(timelineSelector(keyResultID))
   const hasTimeline = typeof timeline !== 'undefined'
 
   const handleQueryResult = (data: GetKeyResultTimelineWithIDQuery) => {
     const isInLimit =
-      (data.keyResult.timeline && data.keyResult.timeline?.edges.length >= limit) ?? true
+      (data.keyResult.timeline && data.keyResult.timeline?.edges.length >= 10) ?? true
 
-    if (data.keyResult.timeline) {
-      setTimeline({
-        ...data.keyResult.timeline,
-        edges: [...(timeline?.edges ?? []), ...data.keyResult.timeline.edges],
-      })
-    }
-
+    setTimeline(data.keyResult.timeline)
     setHasMore(isInLimit)
   }
 
-  const { fetchMore } = useQuery<GetKeyResultTimelineWithIDQuery>(GET_KEY_RESULT_AND_RELATIONS, {
-    variables: {
-      first: limit,
-      id: keyResultID,
+  const { fetchMore } = useQuery<GetKeyResultTimelineWithIDQuery>(
+    queries.GET_KEY_RESULT_TIMELINE_WITH_ID,
+    {
+      variables: {
+        first: limit,
+        id: keyResultID,
+      },
+      skip: hasTimeline,
+      onCompleted: handleQueryResult,
+      fetchPolicy: 'network-only',
+      nextFetchPolicy: 'cache-and-network',
     },
-    skip: hasTimeline,
-    onCompleted: handleQueryResult,
-    fetchPolicy: 'cache-and-network',
-  })
+  )
 
   const handleTimelineReset = async () => {
     resetTimeline()
@@ -106,7 +101,7 @@ const KeyResultSectionTimeline = ({
 }
 
 KeyResultSectionTimeline.defaultProps = {
-  limit: 100,
+  limit: 10,
 }
 
 export default KeyResultSectionTimeline

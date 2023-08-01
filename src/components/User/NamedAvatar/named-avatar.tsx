@@ -8,7 +8,7 @@ import {
   StackProps,
   TextProps,
 } from '@chakra-ui/react'
-import React, { ReactElement, RefObject, useEffect, useState } from 'react'
+import React, { ReactElement, RefObject, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -24,7 +24,6 @@ import { NamedAvatarSubtitleType } from './types'
 
 export interface NamedAvatarProperties {
   userID?: User['id']
-  user?: User
   isLoading?: boolean
   isEditting?: boolean
   isStatic?: boolean
@@ -48,8 +47,6 @@ export interface NamedAvatarProperties {
 
 const NamedAvatar = ({
   userID,
-  // eslint-disable-next-line unicorn/prevent-abbreviations
-  user: userFromProps,
   isLoading,
   isEditting,
   isStatic,
@@ -75,13 +72,12 @@ const NamedAvatar = ({
   displaySubtitle ??= true
   horizontalGap ??= 4
 
-  const userFromID = useRecoilValue(selectUser(userID))
+  const user = useRecoilValue(selectUser(userID))
   const [companies, setCompanyEdges] = useConnectionEdges<Team>()
   const [teams, setTeamEdges] = useConnectionEdges<Team>()
   const intl = useIntl()
-  const [user, setUser] = useState(userFromProps ?? userFromID)
-  const [isLoaded, setIsLoaded] = useState(Boolean(user) && !isLoading)
 
+  const isLoaded = Boolean(user) && !isLoading
   const company = companies?.[0]
   const team = teams?.[0]
   const formattedDate = intl.formatDate(date, {
@@ -101,16 +97,9 @@ const NamedAvatar = ({
   const subtitle = availableSubtitles[subtitleType]
 
   useEffect(() => {
-    const updatedUser = userFromProps ?? userFromID
-    setUser(updatedUser)
-    setIsLoaded(Boolean(updatedUser) && !isLoading)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userFromProps?.id, userFromID?.id, isLoading])
-
-  useEffect(() => {
     if (user) {
-      setCompanyEdges(user.companies?.edges)
-      setTeamEdges(user.teams?.edges)
+      setCompanyEdges(user?.companies?.edges)
+      setTeamEdges(user?.teams?.edges)
     }
   }, [user, setCompanyEdges, setTeamEdges])
 

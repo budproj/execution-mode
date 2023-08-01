@@ -7,8 +7,8 @@ import CustomMenuOptions, { Option } from 'src/components/Base/MenuOptions'
 import { useDeleteRoutineAnswer } from 'src/components/Routine/hooks/deleteAnswer/delete-routine-answer'
 import { commentsAtom } from 'src/state/recoil/comments/comments'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
+import meAtom from 'src/state/recoil/user/me'
 
-import { myselfAtom } from '../../../../../state/recoil/shared/atoms'
 import { AnswerType } from '../../retrospective-tab-content'
 import messages from '../messages'
 
@@ -26,11 +26,11 @@ const AnswerContent = ({ answerId, isLoaded }: AnswerContent) => {
 
   const intl = useIntl()
 
-  const myself = useRecoilValue(myselfAtom)
+  const userID = useRecoilValue(meAtom)
 
   const { deleteRoutineAnswer } = useDeleteRoutineAnswer()
 
-  const hasPermission = myself?.id === answerDetailed.user.id
+  const hasPermission = userID === answerDetailed.user.id
 
   useEffect(() => {
     setComments([])

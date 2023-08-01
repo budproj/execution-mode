@@ -41,7 +41,7 @@ export const ActionMenu = ({
   const [fetchActiveCycles, { called, loading }] = useLazyQuery<GetActiveCyclesQueryResult>(
     queries.GET_ACTIVE_CYCLES,
     {
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'no-cache',
       onCompleted: ({ cycles }) => setActiveCycleEdges(cycles.edges),
     },
   )

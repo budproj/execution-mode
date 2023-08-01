@@ -16,7 +16,7 @@ export const useGetUsersWithIndividualPlan = (): GetUserWithIndividualPlanProper
   const [users, setUsers] = useConnectionEdges<User>()
 
   const { loading, called, refetch } = useQuery(queries.LIST_USERS_WITH_INDIVIDUAL_OKR, {
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'network-only',
     onCompleted: (data) => {
       const users = data?.users?.edges
       if (users.length > 0) setUsers(users)

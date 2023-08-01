@@ -1,4 +1,3 @@
-# @deprecated in favor of shared query GET_MYSELF
 query GET_USER_NAMED_AVATAR_DATA {
   me {
     id

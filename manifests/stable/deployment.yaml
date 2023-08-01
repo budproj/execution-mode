@@ -41,10 +41,6 @@ spec:
               value: pt-BR,en-US
             - name: API_GRAPHQL
               value: https://api.getbud.co/business/graphql
-            - name: API_GRAPHQL_BATCH_MAX
-              value: '10'
-            - name: API_GRAPHQL_BATCH_INTERVAL
-              value: '100'
             - name: AUTH0_CLIENT_ID_PUBLIC
               value: 76DivGrWIbmLh7V2SkFyPeIbUFN6OBf3
             - name: AUTH0_DOMAIN

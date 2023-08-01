@@ -1,4 +1,6 @@
 /* eslint-disable unicorn/no-useless-undefined */
+/* eslint-disable unicorn/no-null */
+/* eslint-disable @typescript-eslint/dot-notation */
 import {
   Flex,
   Heading,

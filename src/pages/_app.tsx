@@ -25,7 +25,6 @@ import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
 
 import { AmplitudeProvider } from '../components/Base/AmplitudeProvider/amplitude-provider'
-import SharedProvider from '../state/recoil/shared/shared-provider'
 
 type IntlMessage = Record<string, string>
 
@@ -66,28 +65,26 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
             <AuthzGatekeeper>
               <AmplitudeProvider>
                 <AuthzApolloProvider pageProps={pageProps}>
-                  <SharedProvider>
-                    <RecoilIntlProvider>
-                      <FlagsmithProvider>
-                        <ServicesProvider>
-                          <RoutinesFormActionsProvider>
-                            <>
-                              <NoticesBanner />
-                              <MaintenanceGatekeeper>
-                                <HotjarProvider />
-                                <HubSpotProvider />
-                                <ProgressBar />
-                                <KeyResultSingleDrawer />
-                                <TeamRedirectPage />
-                                <RetrospectiveRoutine />
-                                <Component {...pageProps} />
-                              </MaintenanceGatekeeper>
-                            </>
-                          </RoutinesFormActionsProvider>
-                        </ServicesProvider>
-                      </FlagsmithProvider>
-                    </RecoilIntlProvider>
-                  </SharedProvider>
+                  <RecoilIntlProvider>
+                    <FlagsmithProvider>
+                      <ServicesProvider>
+                        <RoutinesFormActionsProvider>
+                          <>
+                            <NoticesBanner />
+                            <MaintenanceGatekeeper>
+                              <HotjarProvider />
+                              <HubSpotProvider />
+                              <ProgressBar />
+                              <KeyResultSingleDrawer />
+                              <TeamRedirectPage />
+                              <RetrospectiveRoutine />
+                              <Component {...pageProps} />
+                            </MaintenanceGatekeeper>
+                          </>
+                        </RoutinesFormActionsProvider>
+                      </ServicesProvider>
+                    </FlagsmithProvider>
+                  </RecoilIntlProvider>
                 </AuthzApolloProvider>
               </AmplitudeProvider>
             </AuthzGatekeeper>

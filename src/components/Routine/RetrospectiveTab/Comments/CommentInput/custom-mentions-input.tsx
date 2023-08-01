@@ -15,8 +15,7 @@ import { User } from 'src/components/User/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { userAtomFamily } from 'src/state/recoil/user'
-
-import { myselfAtom } from '../../../../../state/recoil/shared/atoms'
+import meAtom from 'src/state/recoil/user/me'
 
 import messages from './messages'
 import { RoutineCommentsInputInitialValues } from './wrapper'
@@ -52,11 +51,10 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
   const placeholder = intl.formatMessage(messages.placeholder, {
     user: userThatWillBeAnswered,
   })
-  const myself = useRecoilValue(myselfAtom)
+  const myID = useRecoilValue(meAtom)
+  const user = useRecoilValue(userAtomFamily(myID))
 
-  const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST, {
-    fetchPolicy: 'cache-first',
-  })
+  const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [usersMention, setUsersMention] = useState<SuggestionDataItem[]>([])
   const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)
@@ -97,7 +95,7 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
     <Stack alignItems="center" mt={2} paddingX={6} width="full">
       <Divider />
       <HStack pb={6} width="100%" spacing={4} justifyContent="space-between">
-        <Avatar width="45px" height="45px" src={myself?.picture} />
+        <Avatar width="45px" height="45px" src={user?.picture} />
         <Box
           borderWidth={1}
           flexGrow={1}

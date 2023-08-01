@@ -11,7 +11,7 @@ import buildPartialSelector from 'src/state/recoil/key-result/build-partial-sele
 import { objectiveAtomFamily } from 'src/state/recoil/objective'
 
 import { lastInsertedKeyResultIDAtom } from '../../../../state/recoil/key-result/drawers/insert/last-inserted-key-result-id-atom'
-import { myselfAtom } from '../../../../state/recoil/shared/atoms'
+import meAtom from '../../../../state/recoil/user/me'
 import { KEY_RESULT_FORMAT, KEY_RESULT_MODE, KEY_RESULT_TYPE } from '../../constants'
 import { KeyResult } from '../../types'
 
@@ -98,10 +98,10 @@ export const InsertOrUpdateKeyResultForm = ({
 
   const router = useRouter()
 
-  const myself = useRecoilValue(myselfAtom)
+  const currentUserID = useRecoilValue(meAtom)
   const userIdQuery = router.query?.['user-id']
   const userId = Array.isArray(userIdQuery) ? userIdQuery[0] : userIdQuery
-  const ownerID = isPersonalKR ? userId ?? myself?.id : myself?.id
+  const ownerID = isPersonalKR ? userId ?? currentUserID : currentUserID
 
   const [initialValues, setInitialValues] = useState<FormValues>(() => ({
     objectiveID,
@@ -173,7 +173,7 @@ export const InsertOrUpdateKeyResultForm = ({
           onCompleted: () => {
             // eslint-disable-next-line unicorn/no-useless-undefined
             setTimeline(undefined)
-            if (onSuccess) onSuccess(myself?.id)
+            if (onSuccess) onSuccess(currentUserID)
           },
         }).catch(() => {
           if (onError) onError()
@@ -181,7 +181,7 @@ export const InsertOrUpdateKeyResultForm = ({
       : createKeyResult({
           variables: { ...variables },
           onCompleted: () => {
-            if (onSuccess) onSuccess(myself?.id)
+            if (onSuccess) onSuccess(currentUserID)
           },
         }).catch(() => {
           if (onError) onError()

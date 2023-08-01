@@ -1,18 +1,21 @@
+import { useLazyQuery } from '@apollo/client'
 import { addWeeks, differenceInMonths, addMonths, startOfMonth, startOfWeek } from 'date-fns'
 import differenceInWeeks from 'date-fns/differenceInWeeks'
 import { zip } from 'lodash'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { IntlShape, useIntl } from 'react-intl'
 import { Payload } from 'recharts/types/component/DefaultTooltipContent'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { CADENCE } from 'src/components/Cycle/constants'
 import { KeyResultProgressRecord } from 'src/components/KeyResult/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { selectSyncedFragment } from 'src/state/recoil/key-result/synced-fragments'
 
 import { ChartData, ProgressHistoryChartHumble } from './chart'
 import messages from './messages'
+import queries from './queries.gql'
 import { distributedCopy, formatData, formatDate } from './utils'
 
 type ProgressHistoryChartProperties = {
@@ -26,14 +29,13 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
 
   const intl = useIntl()
   const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
+  const [progressHistory, setProgressHistory] = useConnectionEdges<KeyResultProgressRecord>()
 
-  const [progressHistory] = useConnectionEdges<KeyResultProgressRecord>()
-
-  // Const fragmentSelector = useMemo(
-  //   () => selectSyncedFragment('progressHistory')(keyResultID),
-  //   [keyResultID],
-  // )
-  // const [isSynced, setIsSynced] = useRecoilState(fragmentSelector)
+  const fragmentSelector = useMemo(
+    () => selectSyncedFragment('progressHistory')(keyResultID),
+    [keyResultID],
+  )
+  const [isSynced, setIsSynced] = useRecoilState(fragmentSelector)
 
   const cycle = keyResult?.objective?.cycle
   const cycleTickCount = useMemo(
@@ -89,21 +91,20 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
     return `${prefix} ${label}`
   }
 
-  // FIXME: [2023-08-01] disabled for now, as the backend is broken
-  // const [fetchProgressHistory] = useLazyQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
-  //   fetchPolicy: 'cache-and-network',
-  //   variables: {
-  //     keyResultID,
-  //   },
-  //   onCompleted: (data) => {
-  //     setProgressHistory(data?.keyResult?.progressHistory?.edges ?? [])
-  //     setIsSynced(true)
-  //   },
-  // })
-  //
-  // useEffect(() => {
-  //   if (!isSynced) fetchProgressHistory()
-  // }, [isSynced, fetchProgressHistory])
+  const [fetchProgressHistory] = useLazyQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
+    fetchPolicy: 'network-only',
+    variables: {
+      keyResultID,
+    },
+    onCompleted: (data) => {
+      setProgressHistory(data?.keyResult?.progressHistory?.edges ?? [])
+      setIsSynced(true)
+    },
+  })
+
+  useEffect(() => {
+    if (!isSynced) fetchProgressHistory()
+  }, [isSynced, fetchProgressHistory])
 
   return (
     <ProgressHistoryChartHumble

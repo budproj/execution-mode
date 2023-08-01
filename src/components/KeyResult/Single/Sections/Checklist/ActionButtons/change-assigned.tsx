@@ -13,11 +13,11 @@ import { useRecoilValue } from 'recoil'
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
+import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
 import { Feature } from '../../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
-import { myselfAtom } from '../../../../../../state/recoil/shared/atoms'
 
 import queries from './queries.gql'
 
@@ -40,14 +40,14 @@ export const ChangeAssignedCheckMarkButton = ({
   const { dispatch } = useEvent(EventType.UPDATED_KEY_RESULT_CHECK_MARK_ASSIGNEE, {
     feature: Feature.CHECK_MARK,
   })
-  const myself = useRecoilValue(myselfAtom)
+  const userID = useRecoilValue(meAtom)
 
   const [changeAssigned] = useMutation(queries.UPDATE_ASSIGNED_CHECKMARK, {
     refetchQueries: [
       myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
       {
         variables: {
-          ...(myself?.id ? { userID: myself?.id } : {}),
+          ...(userID ? { userID } : {}),
         },
       },
     ],

@@ -1,20 +1,13 @@
-query GET_KEY_RESULT_AND_RELATIONS($id: ID!, $first: Int, $after: Float) {
+query GET_KEY_RESULT_WITH_ID($id: ID!) {
   keyResult(id: $id) {
     id
     title
     description
-    format
-    type
     goal
     initialValue
+    format
     mode
     teamId
-    owner {
-      fullName
-      role
-      picture
-      id
-    }
     supportTeamMembers {
       edges {
         node {
@@ -23,16 +16,6 @@ query GET_KEY_RESULT_AND_RELATIONS($id: ID!, $first: Int, $after: Float) {
           firstName
           picture
         }
-      }
-    }
-    status {
-      isOutdated
-      isActive
-      confidence
-      progress
-      latestCheckIn {
-        id
-        createdAt
       }
     }
     keyResultCheckIns(first: 1) {
@@ -45,30 +28,21 @@ query GET_KEY_RESULT_AND_RELATIONS($id: ID!, $first: Int, $after: Float) {
         create
       }
     }
-    checkList(first: 1000) {
-      policy {
-        create
+    status {
+      isOutdated
+      isActive
+      confidence
+      progress
+      latestCheckIn {
+        id
+        createdAt
       }
-      progress {
-        total
-        numberOfChecked
-        progress
-      }
-      edges {
-        node {
-          id
-          description
-          state
-          assignedUser {
-            id
-            fullName
-          }
-          policy {
-            update
-            delete
-          }
-        }
-      }
+    }
+    owner {
+      fullName
+      role
+      picture
+      id
     }
     objective {
       id
@@ -78,10 +52,10 @@ query GET_KEY_RESULT_AND_RELATIONS($id: ID!, $first: Int, $after: Float) {
         confidence
       }
       teamId
-      owner {
-        fullName
-        id
-      }
+     owner {
+      fullName
+      id
+    }
       team {
         id
         name
@@ -95,69 +69,6 @@ query GET_KEY_RESULT_AND_RELATIONS($id: ID!, $first: Int, $after: Float) {
     policy {
       delete
       update
-    }
-    timeline(first: $first, after: $after) {
-      edges {
-        node {
-          ... on KeyResultUpdate {
-            id
-            createdAt
-            keyResultId
-            author {
-              type
-              identifier
-            }
-            patches {
-              key
-              value
-            }
-          }
-          ... on KeyResultCheckIn {
-            id
-            value
-            confidence
-            progress
-            comment
-            createdAt
-            keyResultId
-            delta {
-              value
-            }
-            user {
-              id
-              fullName
-              picture
-            }
-            parent {
-              confidence
-              value
-            }
-            policy {
-              delete
-            }
-          }
-          ... on KeyResultComment {
-            id
-            text
-            createdAt
-            keyResultId
-            type
-            extra
-            parentId
-            user {
-              id
-              fullName
-              picture
-            }
-            policy {
-              delete
-            }
-          }
-        }
-      }
-      pageInfo {
-        endCursor
-      }
     }
   }
 }

@@ -36,7 +36,7 @@ export const Highlights = ({ teamId, isLoading }: HighlightsProperties) => {
     GET_KEY_RESULTS_HIGHLIGHTS,
     {
       variables: { teamId },
-      fetchPolicy: 'cache-first',
+      fetchPolicy: 'network-only',
       onCompleted: (data) => {
         const dataParsed = parsedData(data.getTeamFlags)
 

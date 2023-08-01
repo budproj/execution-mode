@@ -46,7 +46,7 @@ export const TeamMembers = ({
   const updateTeam = useSetRecoilState(selectTeam(teamID))
 
   const [refreshTeamMembers] = useLazyQuery<GetTeamMembersResponse>(queries.GET_TEAM_MEMBERS, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'network-only',
     variables: {
       teamID,
     },

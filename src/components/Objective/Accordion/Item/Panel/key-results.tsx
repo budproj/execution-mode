@@ -55,7 +55,7 @@ export const ObjectiveKeyResults = ({
   const [getKeyResults, { called }] = useLazyQuery<GetObjectiveKeyResultsQuery>(
     queries.GET_OBJECTIVE_KEY_RESULTS,
     {
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'network-only',
       variables: {
         objectiveID,
         withTeams: Boolean(teamID),

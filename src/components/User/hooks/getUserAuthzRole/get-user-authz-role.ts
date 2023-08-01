@@ -16,7 +16,7 @@ export const useGetUserAuthzRole = (userID: User['id']): GetUserProperties => {
   const [user, setUser] = useState<User['authzRole']>()
 
   const { loading, called, refetch, data } = useQuery(GET_USER_AUTHZ_ROLE, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'network-only',
     variables: { userID },
   })
 

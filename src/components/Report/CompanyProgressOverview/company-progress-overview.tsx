@@ -13,7 +13,7 @@ import { GetUserPrimaryCompanyQuery } from './types'
 
 const CompanyProgressOverview = () => {
   const { data, loading } = useQuery<GetUserPrimaryCompanyQuery>(queries.GET_USER_PRIMARY_COMPANY, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'network-only',
   })
   const [loadTeam] = useRecoilFamilyLoader<Team>(teamAtomFamily)
   const company = data?.me?.companies?.edges?.[0]?.node

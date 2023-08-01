@@ -12,7 +12,7 @@ interface GetCompanyCycles {
 
 export const useGetCompanyCycles = (): GetCompanyCycles => {
   const { data, loading } = useQuery<GetUserPrimaryCompanyQuery>(GET_COMPANY_CYCLES, {
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'network-only',
   })
 
   const cyclesEdges = data?.me?.companies?.edges?.[0]?.node?.cycles?.edges ?? []

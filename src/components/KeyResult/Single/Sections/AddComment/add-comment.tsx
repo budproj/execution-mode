@@ -10,9 +10,8 @@ import { KeyResult, KeyResultComment } from 'src/components/KeyResult/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import selectLatestTimelineEntry from 'src/state/recoil/key-result/timeline/latest-entry'
+import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
-
-import { myselfAtom } from '../../../../../state/recoil/shared/atoms'
 
 import KeyResultSectionAddCommentInput from './input'
 import messages from './messages'
@@ -46,8 +45,8 @@ const KeyResultSectionAddComment = ({
     EventType.CREATE_DRAFT_FEEDBACK_ANSWER_CLICK,
   )
 
-  const myself = useRecoilValue(myselfAtom)
-  const [user, updateUser] = useRecoilState(selectUser(myself?.id))
+  const userID = useRecoilValue(meAtom)
+  const [user, updateUser] = useRecoilState(selectUser(userID))
   const setLatestTimelineEntry = useSetRecoilState(selectLatestTimelineEntry(keyResultID))
   const toast = useToast()
   const intl = useIntl()

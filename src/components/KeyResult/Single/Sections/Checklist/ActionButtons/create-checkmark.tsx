@@ -9,11 +9,11 @@ import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
 import { KeyResultCheckMark } from 'src/components/KeyResult/types'
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
+import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
 import { Feature } from '../../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
-import { myselfAtom } from '../../../../../../state/recoil/shared/atoms'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -53,14 +53,14 @@ export const CreateCheckMarkButton = ({
   const [isAdding, setIsAdding] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const intl = useIntl()
-  const myself = useRecoilValue(myselfAtom)
+  const userID = useRecoilValue(meAtom)
 
   const [createCheckMark] = useMutation(queries.CREATE_CHECK_MARK, {
     refetchQueries: [
       myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
       {
         variables: {
-          ...(myself?.id ? { userID: myself?.id } : {}),
+          ...(userID ? { userID } : {}),
         },
       },
     ],

@@ -16,7 +16,7 @@ import { useRecoilValue } from 'recoil'
 
 import { SelectMenu } from 'src/components/Base'
 
-import { myselfAtom } from '../../../../state/recoil/shared/atoms'
+import meAtom from '../../../../state/recoil/user/me'
 import { USER_GENDER } from '../../constants'
 
 import messages from './messages'
@@ -212,11 +212,11 @@ const CreateUserSelectField = ({ id, options, selectedOptionID, label }: CreateU
 const CreateUserLocaleField = () => {
   const [defaultLocaleID, setDefaultLocaleID] = useState('pt-BR')
   const intl = useIntl()
-  const myself = useRecoilValue(myselfAtom)
+  const myID = useRecoilValue(meAtom)
   const { values, setFieldValue } = useFormikContext<CreateUserFormValues>()
   const [getCurrentLocale] = useLazyQuery(queries.GET_USER_LOCALE, {
     variables: {
-      userID: myself?.id,
+      userID: myID,
     },
     onCompleted: (data) => {
       const locale = data?.user.settings.edges[0]?.node.value
@@ -225,8 +225,8 @@ const CreateUserLocaleField = () => {
   })
 
   useEffect(() => {
-    if (myself?.id) getCurrentLocale()
-  }, [myself?.id, getCurrentLocale])
+    if (myID) getCurrentLocale()
+  }, [myID, getCurrentLocale])
 
   useEffect(() => {
     if (defaultLocaleID) setFieldValue('locale', defaultLocaleID)

@@ -6,8 +6,7 @@ import { GraphQLConnection } from 'src/components/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import { RecoilInterfaceGetter, RecoilInterfaceReadWrite } from 'src/state/recoil/types'
 import { userAtomFamily } from 'src/state/recoil/user'
-
-import { myselfAtom } from '../../shared/atoms'
+import meAtom from 'src/state/recoil/user/me'
 
 import { PREFIX } from './constants'
 
@@ -37,8 +36,8 @@ export const setLatestTimelineEntry =
     const timelineConnectionSelector = selectTimelineConnection(id)
     const timelineConnection = get(timelineConnectionSelector)
 
-    const myself = get(myselfAtom)
-    const user = get(userAtomFamily(myself?.id))
+    const userID = get(meAtom)
+    const user = get(userAtomFamily(userID))
 
     const newLocalTimelineEntry = {
       user,

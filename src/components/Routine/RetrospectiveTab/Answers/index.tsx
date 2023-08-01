@@ -25,8 +25,9 @@ import {
 } from 'src/state/recoil/routine/routine-dates-range'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
+import meAtom from 'src/state/recoil/user/me'
+import selectUser from 'src/state/recoil/user/selector'
 
-import { myselfAtom } from '../../../../state/recoil/shared/atoms'
 import { useFetchSummaryData } from '../../hooks/useFetchSummaryData'
 
 import AnswerRowComponent from './answer-row'
@@ -76,18 +77,19 @@ const AnswersComponent = memo(
     const intl = useIntl()
     const router = useRouter()
 
-    const myself = useRecoilValue(myselfAtom)
+    const userID = useRecoilValue(meAtom)
     const [date, setDate] = useRecoilState(routineDatesRangeAtom)
     const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
     const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
-    const [userTeams, updateTeams] = useConnectionEdges(myself?.teams?.edges)
-    const [userCompanies, updateUserCompanies] = useConnectionEdges(myself?.companies?.edges)
+    const user = useRecoilValue(selectUser(userID))
+    const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
+    const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
     const userTeamIds = userTeams.map((team) => team.id)
-    const userCompany = userCompanies[0]?.id
-    const isUserFromTheTeam = [...userTeamIds, userCompany].includes(teamId)
+    const userCompanie = userCompanies[0]?.id
+    const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
 
     const haveUserAnswered = answersSummary.find(
-      (answer) => answer.userId === myself?.id && answer.timestamp,
+      (answer) => answer.userId === userID && answer.timestamp,
     )
     const isActiveRoutine = isBefore(new Date(), before)
 
@@ -114,7 +116,7 @@ const AnswersComponent = memo(
 
         await onGetNoCurrentAnswers(dateRange.after, dateRange.before)
       },
-      [onGetNoCurrentAnswers, router],
+      [onGetNoCurrentAnswers, router, setDate],
     )
 
     const performDebounced = useCallback(
@@ -155,13 +157,13 @@ const AnswersComponent = memo(
           setSearch('')
         }
       },
-      [debouncedSearch],
+      [debouncedSearch, setIsAnswerSummaryLoading],
     )
 
     useEffect(() => {
-      updateTeams(myself?.teams?.edges)
-      updateUserCompanies(myself?.companies?.edges)
-    }, [myself?.companies?.edges, myself?.teams])
+      updateTeams(user?.teams?.edges)
+      updateUserCompanies(user?.companies?.edges)
+    }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
 
     return (
       <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">
@@ -229,7 +231,6 @@ const AnswersComponent = memo(
           id="scrollable-list-users"
           maxH={showAnswerNowButton ? '455px' : '537px'}
           p="0 12px"
-          overflowY={isAnswerSummaryLoading ? 'hidden' : 'auto'}
         >
           {filteredAnswers.map((answer) => (
             <AnswerRowComponent key={answer.id} answer={answer} />

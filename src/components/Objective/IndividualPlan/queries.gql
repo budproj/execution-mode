@@ -15,7 +15,6 @@ query LIST_USERS_WITH_INDIVIDUAL_OKR {
   }
 }
 
-# @deprecated in favor of shared query GET_ME
 query GET_USER_ACCESS_TO_CREATE_OBJECTIVES {
   me {
     id

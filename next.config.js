@@ -14,8 +14,6 @@ const {
   NODE_ENV,
   LOG_LEVEL,
   API_GRAPHQL,
-  API_GRAPHQL_BATCH_MAX,
-  API_GRAPHQL_BATCH_INTERVAL,
   AUTH0_CLIENT_ID_PUBLIC,
   AUTH0_DOMAIN,
   AUTH0_SCOPE,
@@ -82,11 +80,7 @@ const publicRuntimeConfig = {
   },
 
   api: {
-    graphql: {
-      uri: API_GRAPHQL,
-      batchMax: parseInt(API_GRAPHQL_BATCH_MAX, 10),
-      batchInterval: parseInt(API_GRAPHQL_BATCH_INTERVAL, 10),
-    },
+    graphql: API_GRAPHQL,
     notifications: NOTIFICATION_API,
     restBase: REST_API_BASE,
     routines: ROUTINES_API,

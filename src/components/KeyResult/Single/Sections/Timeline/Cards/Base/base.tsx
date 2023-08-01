@@ -15,8 +15,8 @@ import { IntlLink } from 'src/components/Base'
 import { COMMENT_TYPE, KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { User } from 'src/components/User/types'
 import { GraphQLEffect, GraphQLEntityPolicy } from 'src/components/types'
+import meAtom from 'src/state/recoil/user/me'
 
-import { myselfAtom } from '../../../../../../../state/recoil/shared/atoms'
 import commentsCardMessages from '../Comment/messages'
 
 import { CardHeader } from './header'
@@ -60,7 +60,7 @@ const KeyResultSectionTimelineCardBase = ({
   intlCardType,
   ...rest
 }: KeyResultSectionTimelineCardBaseProperties) => {
-  const myself = useRecoilValue(myselfAtom)
+  const myID = useRecoilValue(meAtom)
   const intl = useIntl()
 
   const allowDelete =
@@ -96,7 +96,7 @@ const KeyResultSectionTimelineCardBase = ({
       <Stack spacing={3}>
         {!hideUser && (
           <Box>
-            <IntlLink href={user?.id === myself?.id ? '/my-things' : `/profile/${user?.id ?? ''}`}>
+            <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
               <CardHeader isLoaded={isLoaded} userID={user?.id} date={new Date(date ?? 0)} />
             </IntlLink>
             <Divider />

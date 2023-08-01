@@ -23,8 +23,8 @@ import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { IntlLink } from 'src/components/Base'
 import CrownIcon from 'src/components/Icon/Crown'
 import SwitchIcon from 'src/components/Icon/Switch'
+import meAtom from 'src/state/recoil/user/me'
 
-import { myselfAtom } from '../../../state/recoil/shared/atoms'
 import { User } from '../types'
 
 import messages from './messages'
@@ -99,7 +99,7 @@ export const NameWithAvatar = forwardRef(
     reference?: ((instance: HTMLDivElement | null) => void) | RefObject<HTMLDivElement> | null,
   ) => {
     const intl = useIntl()
-    const myself = useRecoilValue(myselfAtom)
+    const myID = useRecoilValue(meAtom)
     const [brand500] = useToken('colors', ['brand.500'])
     const [showButton, setShowButton] = useState(false)
 
@@ -155,9 +155,7 @@ export const NameWithAvatar = forwardRef(
             {showName && (
               <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 150, 21)}>
                 {redirectToProfile ? (
-                  <IntlLink
-                    href={user?.id === myself?.id ? '/my-things' : `/profile/${user?.id ?? ''}`}
-                  >
+                  <IntlLink href={user?.id === myID ? '/my-things' : `/profile/${user?.id ?? ''}`}>
                     <StyledText fontSize="lg" color={nameColor} brandColor={brand500}>
                       {user?.fullName}
                       {isTeamLeader ? (

@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client'
+import { useLazyQuery, useMutation } from '@apollo/client'
 import {
   Button,
   Flex,
@@ -14,7 +14,7 @@ import {
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 import PageContent from 'src/components/Base/PageContent'
@@ -41,16 +41,21 @@ import {
   userObjectivesViewMode,
 } from 'src/state/recoil/user/objectives-view-mode'
 
-import { myselfAtom } from '../../../state/recoil/shared/atoms'
 import { workflowControlStorageKey } from '../Accordion/Item/Button/edit-mode'
 
 import { useGetUsersWithIndividualPlan } from './hooks/get-users-with-individual-plan'
 import messages from './messages'
+import queries from './queries.gql'
 
 interface IndividualOkrPageProperties {
-  readonly intl: ReturnType<typeof useIntl>
-  readonly userID: string
+  intl: ReturnType<typeof useIntl>
+  userID: string
 }
+
+type GetUserAccessToCreateObjectivesResult = {
+  me: User
+}
+
 export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
   const { data, loading } = useGetUsersWithIndividualPlan()
 
@@ -148,19 +153,18 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
     },
   )
 
-  const myself = useRecoilValue(myselfAtom)
-  useEffect(() => {
-    if (myself) {
-      const isSameUser = userID === myself.id
-      const isUserAllowedToCreateObjectiveInCompany =
-        myself.companies.edges[0].node.objectives?.policy.create === GraphQLEffect.ALLOW
+  const [fetchActiveCycles] = useLazyQuery<GetUserAccessToCreateObjectivesResult>(
+    queries.GET_USER_ACCESS_TO_CREATE_OBJECTIVES,
+    {
+      onCompleted: ({ me }) => {
+        const isSameUser = userID === me.id
+        const isUserAllowedToCreateObjectiveInCompany =
+          me?.companies?.edges[0].node.objectives?.policy.create === GraphQLEffect.ALLOW
 
-      setCanCreateObjectives(isSameUser || isUserAllowedToCreateObjectiveInCompany)
-    } else {
-      setCanCreateObjectives(false)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [myself?.id, userID])
+        setCanCreateObjectives(isSameUser || isUserAllowedToCreateObjectiveInCompany)
+      },
+    },
+  )
 
   const handleDraftObjectiveCreation = (cycleID?: string) => {
     const valueStoraged = get(workflowControlStorageKey)
@@ -180,6 +184,7 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
     const [_, path] = pathname.split('/')
 
     dispatchPageView({ pathname: `/${path}#individual-plan` })
+    fetchActiveCycles()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

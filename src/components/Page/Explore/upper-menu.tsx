@@ -26,7 +26,7 @@ const UpperMenu = ({ setTeamFilter, teamId }: UpperMenuProperties) => {
   const [refreshTeamPolicy] = useLazyQuery<GetTeamMembersResponse>(
     queries.GET_TEAM_MEMBERS_POLICY,
     {
-      fetchPolicy: 'cache-first',
+      fetchPolicy: 'network-only',
       variables: {
         teamID: teamId,
       },

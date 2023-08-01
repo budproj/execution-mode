@@ -7,7 +7,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { intlLocaleAtom } from 'src/state/recoil/intl'
 
-import { myselfAtom } from '../../../state/recoil/shared/atoms'
+import meAtom from '../../../state/recoil/user/me'
 
 import { LOCALE_COOKIE_KEY } from './constants'
 import messages from './messages'
@@ -26,7 +26,7 @@ export const LocaleSwitcherWrapper = ({
   const { push, pathname, query, asPath, locales } = useRouter()
   const [_, setCookie] = useCookies([LOCALE_COOKIE_KEY])
   const intl = useIntl()
-  const myself = useRecoilValue(myselfAtom)
+  const myID = useRecoilValue(meAtom)
   const [intlLocale, setIntlLocale] = useRecoilState(intlLocaleAtom)
 
   const [updateLocale, { loading: isMutationLoading }] = useMutation(queries.UPDATE_USER_LOCALE, {
@@ -60,11 +60,11 @@ export const LocaleSwitcherWrapper = ({
     await updateLocale({
       variables: {
         locale,
-        userID: userID ?? myself?.id,
+        userID: userID ?? myID,
       },
     })
 
-    if (!userID || userID === myself?.id) {
+    if (!userID || userID === myID) {
       setCookie(LOCALE_COOKIE_KEY, locale, { path: '/' })
       await push({ pathname, query }, asPath, { locale })
     }
