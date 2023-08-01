@@ -104,14 +104,17 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       const showedUsersIds = answersSummary.map((answer) => answer.userId)
       setAnswersSummary([])
 
-      const newFormattedData = await fetchAnswers({
-        teamId,
-        after,
-        before,
-        teamUsersIds: showedUsersIds,
-      })
-      if (newFormattedData) setAnswersSummary(newFormattedData)
-      setIsAnswerSummaryLoading(false)
+      try {
+        const newFormattedData = await fetchAnswers({
+          teamId,
+          after,
+          before,
+          teamUsersIds: showedUsersIds,
+        })
+        if (newFormattedData) setAnswersSummary(newFormattedData)
+      } finally {
+        setIsAnswerSummaryLoading(false)
+      }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [answersSummary, teamId],
@@ -142,12 +145,19 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
             lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
             teamId,
           })
-          const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
-          if (newFormattedData)
-            setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
-          const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
 
-          return () => clearTimeout(answerSummaryTimer)
+          try {
+            const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
+            if (newFormattedData) {
+              setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
+            }
+
+            const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
+
+            return () => clearTimeout(answerSummaryTimer)
+          } finally {
+            setIsAnswerSummaryLoading(false)
+          }
         }
       }
     },
@@ -199,9 +209,14 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       threshold: 0.5,
     })
 
-    observer.observe(document.querySelector('#list-bottom') as HTMLDivElement)
+    const target = document.querySelector('#list-bottom') as HTMLDivElement
 
-    return () => observer.disconnect()
+    observer.observe(target)
+
+    return () => {
+      observer.unobserve(target)
+      observer.disconnect()
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

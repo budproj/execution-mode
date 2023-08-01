@@ -77,7 +77,9 @@ const KeyResultSectionAddCommentInput = ({
     }
   }
 
-  const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
+  const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST, {
+    fetchPolicy: 'cache-first',
+  })
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [usersMention, setUsersMention] = useState<SuggestionDataItem[]>([])
   const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)

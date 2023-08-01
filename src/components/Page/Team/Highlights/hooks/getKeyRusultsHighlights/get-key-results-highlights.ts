@@ -41,7 +41,7 @@ export const useGetKeyResultsHighlights = (): GetKeyResultsHighlights => {
 
   const { loading, called } = useQuery<KeyResultsHighlights>(GET_KEY_RESULTS_HIGHLIGHTS, {
     variables: query,
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-first',
     onCompleted: (data) => {
       const dataParsed = parsedData(data.getTeamFlags)
 

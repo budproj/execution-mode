@@ -21,7 +21,9 @@ const emptyQuantities: Quantities = {
 }
 
 export const useGetHealthConfidenceQuantities = (): GetHealthConfidencesQuantities => {
-  const { data, loading } = useQuery<HealthConfidenceQuantities>(GET_HEALTH_CONFIDENCE_QUANTITIES)
+  const { data, loading } = useQuery<HealthConfidenceQuantities>(GET_HEALTH_CONFIDENCE_QUANTITIES, {
+    fetchPolicy: 'cache-first',
+  })
 
   const quantities = data?.me?.companies.quantities ?? emptyQuantities
 

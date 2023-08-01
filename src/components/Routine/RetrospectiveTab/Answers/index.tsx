@@ -83,8 +83,8 @@ const AnswersComponent = memo(
     const [userTeams, updateTeams] = useConnectionEdges(myself?.teams?.edges)
     const [userCompanies, updateUserCompanies] = useConnectionEdges(myself?.companies?.edges)
     const userTeamIds = userTeams.map((team) => team.id)
-    const userCompanie = userCompanies[0]?.id
-    const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
+    const userCompany = userCompanies[0]?.id
+    const isUserFromTheTeam = [...userTeamIds, userCompany].includes(teamId)
 
     const haveUserAnswered = answersSummary.find(
       (answer) => answer.userId === myself?.id && answer.timestamp,
@@ -114,7 +114,7 @@ const AnswersComponent = memo(
 
         await onGetNoCurrentAnswers(dateRange.after, dateRange.before)
       },
-      [onGetNoCurrentAnswers, router, setDate],
+      [onGetNoCurrentAnswers, router],
     )
 
     const performDebounced = useCallback(
@@ -155,13 +155,13 @@ const AnswersComponent = memo(
           setSearch('')
         }
       },
-      [debouncedSearch, setIsAnswerSummaryLoading],
+      [debouncedSearch],
     )
 
     useEffect(() => {
       updateTeams(myself?.teams?.edges)
       updateUserCompanies(myself?.companies?.edges)
-    }, [updateTeams, updateUserCompanies, myself?.companies?.edges, myself?.teams])
+    }, [myself?.companies?.edges, myself?.teams])
 
     return (
       <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">
@@ -229,6 +229,7 @@ const AnswersComponent = memo(
           id="scrollable-list-users"
           maxH={showAnswerNowButton ? '455px' : '537px'}
           p="0 12px"
+          overflowY={isAnswerSummaryLoading ? 'hidden' : 'auto'}
         >
           {filteredAnswers.map((answer) => (
             <AnswerRowComponent key={answer.id} answer={answer} />

@@ -37,7 +37,7 @@ export const useNoRelatedMembers = (): GetNoRelatedMembers => {
 
   const { loading, called } = useQuery<noRelatedMembersQueryFormat>(GET_NO_RELATED_MEMBERS, {
     variables: query,
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-first',
     onCompleted: (data) => {
       const usersIDs = data.getTeamFlagsData.noRelated.edges.map((edge) => edge.node.id)
       if (usersIDs) setNoRelatedUsersIds(usersIDs)

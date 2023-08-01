@@ -23,6 +23,7 @@ export const useGetUserObjectives = (
   actions: GetUserObjectivesActions,
 ) => {
   const { loading, called, refetch } = useQuery<UserMeQuery>(GET_OBJECTIVES, {
+    fetchPolicy: 'cache-first',
     variables: {
       // eslint-disable-next-line unicorn/no-null
       teamId: null,

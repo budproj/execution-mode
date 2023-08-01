@@ -53,9 +53,10 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
     user: userThatWillBeAnswered,
   })
   const myself = useRecoilValue(myselfAtom)
-  const user = useRecoilValue(userAtomFamily(myself?.id))
 
-  const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
+  const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST, {
+    fetchPolicy: 'cache-first',
+  })
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [usersMention, setUsersMention] = useState<SuggestionDataItem[]>([])
   const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)
@@ -96,7 +97,7 @@ const CustomMentionsInput = ({ userThatWillBeAnswered }: CustomMentionsInputProp
     <Stack alignItems="center" mt={2} paddingX={6} width="full">
       <Divider />
       <HStack pb={6} width="100%" spacing={4} justifyContent="space-between">
-        <Avatar width="45px" height="45px" src={user?.picture} />
+        <Avatar width="45px" height="45px" src={myself?.picture} />
         <Box
           borderWidth={1}
           flexGrow={1}

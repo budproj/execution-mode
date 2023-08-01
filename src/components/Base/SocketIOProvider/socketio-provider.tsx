@@ -38,7 +38,7 @@ const SocketIOProvider = ({ children }: ChildrenProperty) => {
   useEffect(() => {
     connectWebsocket()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket?.id])
+  }, [])
 
   useEffect(() => {
     if (!socket) {

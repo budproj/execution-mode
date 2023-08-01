@@ -1,8 +1,7 @@
-import { useLazyQuery } from '@apollo/client'
 import { Collapse, Stack } from '@chakra-ui/react'
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { KeyResultCheckMark } from 'src/components/KeyResult/types'
 import { GraphQLEffect } from 'src/components/types'
@@ -15,12 +14,12 @@ import {
 import { EventType } from '../../../../../state/hooks/useEvent/event-type'
 import { Feature } from '../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../state/hooks/useEvent/hook'
+import useGetKeyResultWithId from '../../Drawer/hooks/get-key-result-with-id'
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
 import { OptionBarWrapper } from './OptionBar/wrapper'
 import { KeyResultChecklist } from './checklist'
 import messages from './messages'
-import queries from './queries.gql'
 import { ToggleCollapse } from './toggle-collapse'
 
 interface KeyResultChecklistWrapperProperties {
@@ -31,31 +30,16 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   const { dispatch } = useEvent(EventType.OPENED_KEY_RESULT_CHECKLIST, {
     feature: Feature.CHECK_MARK,
   })
-  const [keyResultChecklist, setKeyResultChecklist] = useRecoilState(
-    keyResultChecklistAtom(keyResultID),
-  )
+  const { called, loading, refetch } = useGetKeyResultWithId(keyResultID)
+
+  const keyResultChecklist = useRecoilValue(keyResultChecklistAtom(keyResultID))
   const [checklist, updateChecklistEdges, _, isChecklistLoaded] =
     useConnectionEdges<KeyResultCheckMark>()
   const intl = useIntl()
   const [isChecklistOpen, setIsChecklistOpen] = useRecoilState(isCheckListCollapseOpenAtom)
 
-  const [getChecklist, { called, loading }] = useLazyQuery(queries.GET_CHECKLIST_OF_KEY_RESULT, {
-    fetchPolicy: 'network-only',
-    onCompleted: (data) => {
-      setKeyResultChecklist(data.keyResult.checkList)
-    },
-  })
-
   const canCreate = keyResultChecklist?.policy?.create === GraphQLEffect.ALLOW
   const hasItems = checklist.length > 0
-
-  const refreshChecklist = useCallback(() => {
-    getChecklist({
-      variables: {
-        id: keyResultID,
-      },
-    })
-  }, [getChecklist, keyResultID])
 
   const toggleChecklistCollapse = () => {
     if (!isChecklistOpen) dispatch({ keyResultID })
@@ -64,17 +48,19 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   }
 
   const handleChecklistCreation = () => {
-    refreshChecklist()
+    refetch()
     if (!isChecklistOpen) setIsChecklistOpen(true)
   }
 
   useEffect(() => {
     if (called && !loading) updateChecklistEdges(keyResultChecklist?.edges)
-  }, [called, loading, keyResultChecklist, updateChecklistEdges])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [called, loading, keyResultChecklist])
 
   useEffect(() => {
-    if (keyResultID) refreshChecklist()
-  }, [keyResultID, refreshChecklist])
+    if (keyResultID) refetch()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [keyResultID])
 
   return (
     <Stack spacing={0}>
@@ -96,7 +82,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
             nodes={checklist}
             keyResultID={keyResultID}
             canCreate={canCreate}
-            onUpdate={refreshChecklist}
+            onUpdate={refetch}
           />
         </Collapse>
       ) : // eslint-disable-next-line unicorn/no-null

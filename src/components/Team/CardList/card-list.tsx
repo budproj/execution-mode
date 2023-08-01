@@ -26,7 +26,9 @@ const TeamCardList = memo(
     numEmptyStateCards: numberEmptyStateCards = 3,
     parentWidth,
   }: TeamCardListProperties) => {
-    const { data, loading, refetch } = useQuery<GetTeamsQuery>(queries.GET_TEAMS)
+    const { data, loading, refetch } = useQuery<GetTeamsQuery>(queries.GET_TEAMS, {
+      fetchPolicy: 'cache-first',
+    })
     const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
     const [teams, setEdges] = useConnectionEdges<Team>()
 

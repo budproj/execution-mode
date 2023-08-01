@@ -90,7 +90,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   const [activeCycles, setActiveCycleEdges] = useConnectionEdges<Cycle>()
 
   const [fetchCycles] = useLazyQuery<GetCyclesQueryResult>(queries.GET_CYCLES, {
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'cache-and-network',
     onError: (error) => console.error(error),
     onCompleted: ({ cycles, inactiveCycles, team }) => {
       setActiveCycleEdges(cycles.edges)

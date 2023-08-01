@@ -12,7 +12,6 @@ import { CADENCE } from 'src/components/Cycle/constants'
 import { useGetCycle } from 'src/components/Cycle/hooks'
 import { GraphQLEffect } from 'src/components/types'
 import { cyclesEditModalViewMode } from 'src/state/recoil/cycle/cycle-edit-modal-view-mode'
-import { userAtomFamily } from 'src/state/recoil/user'
 
 import { myselfAtom } from '../../../state/recoil/shared/atoms'
 import { CompanyMenuProperties } from '../SidebarMenu/Section/Company/company'
@@ -23,8 +22,7 @@ const SettingsCycles = ({ permissions }: CompanyMenuProperties) => {
   const { data: cycles, loading: cyclesLoading } = useGetCycle()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const myself = useRecoilValue(myselfAtom)
-  const user = useRecoilValue(userAtomFamily(myself?.id))
-  const teamId = user?.companies?.edges[0]?.node.id
+  const teamId = myself?.companies?.edges[0]?.node.id
 
   const [{ cycleId, isOpened }, setIsOpened] = useRecoilState(cyclesEditModalViewMode)
 

@@ -53,7 +53,7 @@ export const useGetTeamKeyResultsHighlights = (): GetTeamKeyResultsBarrier => {
 
   const { loading, called } = useQuery<getTeamKeyResultsBarrier>(query, {
     variables: queryVariables,
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-first',
     onCompleted: (data) => {
       const mappedEdge = getEdgesByCardType(keyResultHighlightType)
 

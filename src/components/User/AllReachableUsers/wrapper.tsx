@@ -30,7 +30,9 @@ export const AllReachableUsers = ({
   isSelectingMultiples,
   avatarSubtitleType,
 }: AllReachableUsersProperties) => {
-  const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
+  const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST, {
+    fetchPolicy: 'cache-first',
+  })
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)
 
