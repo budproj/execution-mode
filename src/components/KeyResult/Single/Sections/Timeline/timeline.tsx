@@ -7,9 +7,10 @@ import { KeyResult, KeyResultTimelineEntry } from 'src/components/KeyResult/type
 import { GraphQLConnection } from 'src/components/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
+import GET_KEY_RESULT_AND_RELATIONS from '../../../Single/Drawer/queries.gql'
+
 import KeyResultSectionTimelineContent from './Content'
 import KeyResultSectionTimelineHeader from './Header/header'
-import GET_KEY_RESULT_AND_RELATIONS from './queries.gql'
 
 export interface KeyResultSectionTimelineProperties {
   limit: number
@@ -62,7 +63,7 @@ const KeyResultSectionTimeline = ({
     },
     skip: hasTimeline,
     onCompleted: handleQueryResult,
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'network-only',
   })
 
   const handleTimelineReset = async () => {

@@ -25,7 +25,7 @@ export interface GetTeamActiveObjectivesQuery {
 export const useGetTeamObjective = (teamID?: Team['id']): useGetTeamObjectiveProperties => {
   const [getTeamObjectives, { data, refetch, loading, called }] =
     useLazyQuery<GetTeamActiveObjectivesQuery>(queries.GET_TEAM_ACTIVE_OBJECTIVES, {
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'network-only',
       variables: { teamID },
       notifyOnNetworkStatusChange: true,
     })

@@ -33,7 +33,7 @@ const useGetKeyResultWithId = (id?: KeyResult['id']): UseGetKeyResultWithIdPrope
         id,
       },
       onCompleted: handleQueryData,
-      fetchPolicy: 'cache-and-network',
+      fetchPolicy: 'network-only',
     })
 
   useEffect(() => {

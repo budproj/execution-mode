@@ -91,7 +91,7 @@ export const ProgressHistoryChart = ({ keyResultID }: ProgressHistoryChartProper
 
   // FIXME: [2023-08-01] disabled for now, as the backend is broken
   // const [fetchProgressHistory] = useLazyQuery(queries.GET_KEY_RESULT_PROGRESS_HISTORY, {
-  //   fetchPolicy: 'cache-and-network',
+  //   fetchPolicy: 'network-only',
   //   variables: {
   //     keyResultID,
   //   },

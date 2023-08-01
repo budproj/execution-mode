@@ -190,7 +190,8 @@ export const InsertOrUpdateKeyResultForm = ({
 
   useEffect(() => {
     if (data && !error && data) setLastInsertedKeyResultID(data.createKeyResult.id)
-  }, [data, error, setLastInsertedKeyResultID])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, error])
 
   return (
     <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>

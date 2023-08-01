@@ -30,7 +30,7 @@ export const useGetKeyResults = (): GetCompanyCycles => {
 
   const { loading, called } = useQuery<GetUserPrimaryCompanyQuery>(GET_KEY_RESULTS, {
     variables: query,
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'network-only',
     onCompleted: (data) => {
       const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
       const keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
