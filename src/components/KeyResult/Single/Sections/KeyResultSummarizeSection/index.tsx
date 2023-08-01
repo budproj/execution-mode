@@ -1,11 +1,11 @@
-import { Box, Button, Flex, Image, Tag, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Image, Tag, Text, IconButton } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import { WandIcon } from 'src/components/Icon'
+import { ThumbIcon, WandIcon } from 'src/components/Icon'
 import {
   KeyResult,
   KeyResultCheckIn,
@@ -47,6 +47,8 @@ const KeyResultSummarizeSection = ({
   const companyId = myself?.companies?.edges[0]?.node?.id
 
   const [summarizedKeyResult, setSummarizedKeyResult] = useState('')
+  const [feedback, setFeedback] = useState(0)
+  const [completionId, setCompletionId] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const KeyResult = keyResult as KeyResult
@@ -129,11 +131,27 @@ const KeyResultSummarizeSection = ({
           await delay(1800)
         }
 
+        setFeedback(0)
         setSummarizedKeyResult(data.summary)
+        setCompletionId(data.id)
       } finally {
         setIsLoading(false)
       }
     }
+  }
+
+  const handleFeedback = async (value: number) => {
+    const { llm } = await servicesPromise
+
+    if (feedback === value) {
+      const data = await llm.sendFeedback({ completionId, userId: userID, value: 0 })
+      setFeedback(data.value)
+      return
+    }
+
+    const data = await llm.sendFeedback({ completionId, userId: userID, value })
+
+    setFeedback(data.value)
   }
 
   return (
@@ -154,6 +172,34 @@ const KeyResultSummarizeSection = ({
           <Text fontSize="12px" marginTop="18px" fontStyle="italic" color="pink.500">
             {intl.formatMessage(messages.AIInfo)}
           </Text>
+          <Flex width="fit-content" marginLeft="auto" alignItems="center">
+            <Text color="new-gray.600">{intl.formatMessage(messages.feedbackTitle)}</Text>
+            <IconButton
+              aria-label="aa"
+              icon={
+                <ThumbIcon
+                  width="24px"
+                  desc={intl.formatMessage(messages.thumbsUpIconButtonDescription)}
+                  fill="transparent"
+                  opacity={feedback === -1 ? 0.5 : 1}
+                />
+              }
+              onClick={async () => handleFeedback(1)}
+            />
+            <IconButton
+              aria-label="aa"
+              icon={
+                <ThumbIcon
+                  width="24px"
+                  transform="rotate(180deg)"
+                  desc={intl.formatMessage(messages.thumbsDownIconButtonDescription)}
+                  fill="transparent"
+                  opacity={feedback === 1 ? 0.5 : 1}
+                />
+              }
+              onClick={async () => handleFeedback(-1)}
+            />
+          </Flex>
         </Box>
       ) : isLoading ? (
         <Flex flexDirection="column" alignItems="center" marginTop="20px">
