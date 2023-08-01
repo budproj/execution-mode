@@ -104,21 +104,33 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       const showedUsersIds = answersSummary.map((answer) => answer.userId)
       setAnswersSummary([])
 
-      const newFormattedData = await fetchAnswers({
-        teamId,
-        after,
-        before,
-        teamUsersIds: showedUsersIds,
-      })
-      if (newFormattedData) setAnswersSummary(newFormattedData)
-      setIsAnswerSummaryLoading(false)
+      try {
+        const newFormattedData = await fetchAnswers({
+          teamId,
+          after,
+          before,
+          teamUsersIds: showedUsersIds,
+        })
+        if (newFormattedData) setAnswersSummary(newFormattedData)
+      } finally {
+        setIsAnswerSummaryLoading(false)
+      }
     },
-    [answersSummary, fetchAnswers, setAnswersSummary, setIsAnswerSummaryLoading, teamId],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [answersSummary, teamId],
   )
 
   const fetchAnswerSummaryData = useCallback(
     async (entries: IntersectionObserverEntry[]) => {
       const target = entries[0]
+
+      if (limitedTeamUsers.length === 0) {
+        return
+      }
+
+      if (isAnswerSummaryLoading) {
+        return
+      }
 
       if (target.isIntersecting) {
         const teamUsersIds = limitedTeamUsers.map((user) => user.id)
@@ -133,27 +145,25 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
             lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
             teamId,
           })
-          const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
-          if (newFormattedData)
-            setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
-          const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
 
-          return () => clearTimeout(answerSummaryTimer)
+          try {
+            const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
+            if (newFormattedData) {
+              setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
+            }
+
+            const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
+
+            return () => clearTimeout(answerSummaryTimer)
+          } finally {
+            setIsAnswerSummaryLoading(false)
+          }
         }
       }
     },
 
-    [
-      limitedTeamUsers,
-      answersSummary,
-      setIsAnswerSummaryLoading,
-      setAnswerSummaryPaginationData,
-      teamId,
-      fetchAnswers,
-      after,
-      before,
-      setAnswersSummary,
-    ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [limitedTeamUsers, isAnswerSummaryLoading, answersSummary, teamId, after, before],
   )
 
   useEffect(() => {
@@ -199,14 +209,16 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       threshold: 0.5,
     })
 
-    if (isAnswerSummaryLoading) return
+    const target = document.querySelector('#list-bottom') as HTMLDivElement
 
-    if (limitedTeamUsers.length === 0) return
+    observer.observe(target)
 
-    observer.observe(document.querySelector('#list-bottom') as HTMLDivElement)
-
-    return () => observer.disconnect()
-  }, [fetchAnswerSummaryData, isAnswerSummaryLoading, limitedTeamUsers.length])
+    return () => {
+      observer.unobserve(target)
+      observer.disconnect()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <Stack spacing={10}>

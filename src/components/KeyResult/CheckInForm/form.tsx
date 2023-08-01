@@ -1,6 +1,3 @@
-/* eslint-disable unicorn/no-useless-undefined */
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/dot-notation */
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'
@@ -23,7 +20,8 @@ import selectLatestCheckIn from 'src/state/recoil/key-result/check-in/latest'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 import { createdByCheckInNotificationAtom } from 'src/state/recoil/notifications'
 import { isAchievedKeyResultModalOpenAtom } from 'src/state/recoil/team/is-achieved-key-result-modal-open.ts'
-import meAtom from 'src/state/recoil/user/me'
+
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 
 import { AchivedKeyResultModal } from './AchievedKeyResultModal'
 import {
@@ -71,7 +69,7 @@ const CheckInForm = ({
   const intl = useIntl()
   const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_IN)
   const isCreated = useRecoilValue(createdByCheckInNotificationAtom)
-  const userId = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
 
   const [latestKeyResultCheckIn, setLatestKeyResultCheckIn] = useRecoilState(
     selectLatestCheckIn(keyResultID),
@@ -91,7 +89,7 @@ const CheckInForm = ({
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
         dispatchEvent({
           createdByNotification: Boolean(isCreated),
-          userId,
+          userId: myself?.id,
           confidence: getConfidenceName(data.createKeyResultCheckIn.confidence, intl),
         })
       },

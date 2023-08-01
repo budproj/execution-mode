@@ -6,9 +6,8 @@ import { useRecoilValue } from 'recoil'
 import PageContent from 'src/components/Base/PageContent'
 import TeamCardList from 'src/components/Team/CardList'
 import SaveTeamModal from 'src/components/Team/SaveTeamModal'
-import { userAtomFamily } from 'src/state/recoil/user'
-import meAtom from 'src/state/recoil/user/me'
 
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 import { PageMetaHead, PageTitle } from '../../Base'
 import { PageHeader } from '../../Base/PageHeader/wrapper'
 
@@ -34,9 +33,8 @@ const ExplorePage = () => {
     }
   }, [])
 
-  const myID = useRecoilValue(meAtom)
-  const user = useRecoilValue(userAtomFamily(myID))
-  const teamId = user?.companies?.edges[0]?.node.id
+  const myself = useRecoilValue(myselfAtom)
+  const teamId = myself?.companies?.edges[0]?.node.id
 
   return (
     <PageContent bg="new-gray.50">

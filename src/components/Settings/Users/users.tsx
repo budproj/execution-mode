@@ -10,9 +10,9 @@ import { SeeDetailsAction } from 'src/components/User/TableList/Body/Columns/Act
 import { USERS_TABLE_COLUMN } from 'src/components/User/TableList/Body/Columns/constants'
 import { useGetUsers } from 'src/components/User/hooks/getUsers'
 import { GraphQLEffect } from 'src/components/types'
-import meAtom from 'src/state/recoil/user/me'
 import { seeDetailsUserSidebarViewMode } from 'src/state/recoil/user/see-deatils-user-sidebar-view-mode'
 
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 import { CompanyMenuProperties } from '../SidebarMenu/Section/Company/company'
 
 import messages from './messages'
@@ -23,11 +23,11 @@ const SettingsUsers = ({ permissions }: CompanyMenuProperties) => {
   const [isCreateSidebarOpen, setIsCreateSidebarOpen] = useState(false)
   const [{ userId, isOpened }, setIsOpened] = useRecoilState(seeDetailsUserSidebarViewMode)
 
-  const myID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
 
   const closeUserDetailsSidebar = () => setIsOpened({ userId: '', isOpened: false })
 
-  const user = users.find((user) => user.id === myID)
+  const user = users.find((user) => user.id === myself?.id)
   const companyId = user?.companies?.edges[0]?.node.id
 
   const [usersFilter, setUsersFilter] = useState('')

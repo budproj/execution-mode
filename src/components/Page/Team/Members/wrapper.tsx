@@ -7,6 +7,7 @@ import { useConnectionEdges } from '../../../../state/hooks/useConnectionEdges/h
 import { useRecoilFamilyLoader } from '../../../../state/recoil/hooks'
 import { teamAtomFamily } from '../../../../state/recoil/team'
 import { userAtomFamily } from '../../../../state/recoil/user'
+import selectUser from '../../../../state/recoil/user/selector'
 import { User } from '../../../User/types'
 
 import { TeamMembers } from './members'
@@ -22,6 +23,8 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
   const [teamMembers, setTeamMemberEdges] = useConnectionEdges(team?.users?.edges)
   const [loadUsersOnRecoil] = useRecoilFamilyLoader<User>(userAtomFamily)
 
+  const owner = useRecoilValue(selectUser(team?.owner?.id))
+
   const hasAddMembersPermission = team?.users?.policy?.create === GraphQLEffect.ALLOW
 
   useEffect(() => {
@@ -29,24 +32,30 @@ export const TeamMembersWrapper = ({ teamID, isLoading }: TeamMembersWrapperProp
       setTeamMemberEdges(team.users?.edges)
       if (!isLoaded && !isLoading) setIsLoaded(true)
     }
-  }, [team, setTeamMemberEdges, isLoading, isLoaded, setIsLoaded])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [team, isLoading, isLoaded])
 
   useEffect(() => {
     loadUsersOnRecoil(teamMembers)
-  }, [teamMembers, loadUsersOnRecoil])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [teamMembers])
 
   useEffect(() => {
     if (isLoaded && isLoading) setIsLoaded(false)
-  }, [isLoading, isLoaded, setIsLoaded])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isLoaded])
 
-  return (
+  return owner ? (
     <TeamMembers
       teamID={teamID}
       isLoaded={isLoaded}
       members={teamMembers}
       hasAddMembersPermission={hasAddMembersPermission}
-      teamLeader={team?.owner}
-      usersIdsBlacklist={team?.owner ? [team?.owner.id] : []}
+      teamLeader={owner as User}
+      usersIdsBlacklist={team?.ownerId ? [team?.ownerId] : []}
     />
+  ) : (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <></>
   )
 }

@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/prefer-query-selector */
-/* eslint-disable prefer-const */
 import { Box, Divider, Flex, GridItem, Text } from '@chakra-ui/react'
 import { addMinutes, format, isSameDay, parseISO } from 'date-fns'
 import pt from 'date-fns/locale/pt'
@@ -12,7 +10,7 @@ import SuitcaseIcon from 'src/components/Icon/Suitcase'
 import { useGetEmoji } from 'src/components/Routine/hooks'
 import { overviewDataAtom } from 'src/state/recoil/routine/overview-data'
 
-import { AreaRadialChart } from '../../../Base/Charts/index'
+import { AreaRadialChart } from '../../../Base/Charts'
 
 import messages from './messages'
 

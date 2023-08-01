@@ -9,8 +9,8 @@ import { CircularProgress } from 'src/components/Base/CircularProgress'
 import { DraftPen } from 'src/components/Icon'
 import { KeyResult } from 'src/components/KeyResult/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
-import meAtom from 'src/state/recoil/user/me'
 
+import { myselfAtom } from '../../../../../state/recoil/shared/atoms'
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
 import messages from './messages'
@@ -33,7 +33,7 @@ const KeyResultSectionObjective = ({
   const objective = useRecoilValue(objectiveSelector(keyResultID))
 
   const owner = useRecoilValue(ownerSelector(keyResultID))
-  const userID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
 
   const progress = objective?.status?.progress ?? 0
   const confidence = objective?.status?.confidence ?? 0
@@ -49,7 +49,7 @@ const KeyResultSectionObjective = ({
 
   const redirectToClick = objective?.teamId
     ? `/explore/${objective.teamId}`
-    : owner?.id === userID
+    : owner?.id === myself?.id
     ? '/my-things'
     : `/profile/${owner?.id ?? ''}`
 

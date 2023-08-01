@@ -24,7 +24,7 @@ export const useGetCycle = (): GetCompanyCycles => {
 
   const { loading, called } = useQuery<GetUserPrimaryCompanyQuery>(GET_CYCLES, {
     variables: query,
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
       const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
 

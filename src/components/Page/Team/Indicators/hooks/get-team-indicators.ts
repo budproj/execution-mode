@@ -21,7 +21,7 @@ export const useGetTeamCSVData = (teamId: Team['id'], allUsers = false): GetUser
   const [fetchTeamIndicators, { loading }] = useLazyQuery<getTeamIndicatorsQuery>(
     GET_TEAM_INDICATORS,
     {
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'cache-first',
       variables: {
         teamId,
         allUsers,

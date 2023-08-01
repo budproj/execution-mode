@@ -3,7 +3,8 @@ import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { User } from 'src/components/User/types'
-import meAtom from 'src/state/recoil/user/me'
+
+import { myselfAtom } from '../../../../state/recoil/shared/atoms'
 
 import { BottomActions } from './BottomActions/wrapper'
 import { UserProfileBodyPersonalInformations } from './PersonalInformations/wrapper'
@@ -26,8 +27,8 @@ export const UserProfileBody = ({
   onUserDeactivation,
   onRemove,
 }: UserProfileBodyProperties) => {
-  const myUserID = useRecoilValue(meAtom)
-  const isMyUser = myUserID === userID
+  const myself = useRecoilValue(myselfAtom)
+  const isMyUser = myself?.id === userID
 
   return (
     <Stack direction="column" spacing={6} h="full">

@@ -17,7 +17,7 @@ const userLanguage = new Map([
 
 export const useGetLastAccess = (lastAccess?: string) => {
   const intl = useIntl()
-  const [locale] = useCookies([LOCALE_COOKIE_KEY])
+  const [{ NEXT_LOCALE: locale }] = useCookies([LOCALE_COOKIE_KEY])
 
   const sinceDayLastAccess = () => {
     if (lastAccess) {

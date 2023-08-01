@@ -13,9 +13,6 @@ query GET_COMPANY_CYCLES {
                 dateStart
                 dateEnd
                 active
-                delta {
-                  progress
-                }
                 status {
                   progress
                   confidence
@@ -27,6 +24,9 @@ query GET_COMPANY_CYCLES {
                       fullName
                     }
                   }
+                }
+                delta {
+                  progress
                 }
               }
             }

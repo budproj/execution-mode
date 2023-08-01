@@ -31,7 +31,7 @@ export const useLoadCompanyUsers = (): GetUserListProperties => {
   const [loadCompanyUsers, { loading, called, refetch }] = useLazyQuery<GetUserPrimaryCompanyQuery>(
     GET_COMPANY_USERS,
     {
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'cache-and-network',
       onCompleted: (data) => {
         const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
 

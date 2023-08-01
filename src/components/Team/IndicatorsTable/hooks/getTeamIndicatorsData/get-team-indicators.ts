@@ -26,7 +26,7 @@ export const useGetTeamIndicators = (
   const [fetchTeamIndicators, { loading }] = useLazyQuery<getTeamIndicatorsQuery>(
     GET_TEAM_INDICATORS,
     {
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'cache-first',
       variables: {
         teamId,
         allUsers,

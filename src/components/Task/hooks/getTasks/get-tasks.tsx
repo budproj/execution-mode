@@ -20,6 +20,7 @@ export const useGetMyTasks = () => {
 
   const query = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
   const { loading, called } = useQuery<TaskMeQuery>(GET_MY_TASKS, {
+    fetchPolicy: 'cache-and-network',
     variables: query,
     onCompleted: (data) => {
       setTasks(data.me.tasks.edges)

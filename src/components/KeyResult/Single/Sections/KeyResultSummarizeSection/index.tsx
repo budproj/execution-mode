@@ -17,8 +17,7 @@ import { Format, SummarizeKeyResultInput } from 'src/services/llm/summarize-key-
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 
-import meAtom from '../../../../../state/recoil/user/me'
-import selectUser from '../../../../../state/recoil/user/selector'
+import { myselfAtom } from '../../../../../state/recoil/shared/atoms'
 import { GraphQLEdge } from '../../../../types'
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
@@ -44,9 +43,8 @@ const KeyResultSummarizeSection = ({
 }: KeyResultSummarizeSectionProperties) => {
   const intl = useIntl()
 
-  const userID = useRecoilValue(meAtom)
-  const user = useRecoilValue(selectUser(userID))
-  const companyId = user?.companies?.edges[0]?.node?.id
+  const myself = useRecoilValue(myselfAtom)
+  const companyId = myself?.companies?.edges[0]?.node?.id
 
   const [summarizedKeyResult, setSummarizedKeyResult] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -120,7 +118,7 @@ const KeyResultSummarizeSection = ({
         const data = await llm.summarizeKeyResult({
           referenceId: KeyResult.id,
           author: {
-            id: userID,
+            id: myself?.id,
             teamId,
             companyId,
           },

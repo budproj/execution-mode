@@ -1,31 +1,35 @@
-import { useQuery } from '@apollo/client'
 import flagsmith from 'flagsmith'
 import { FlagsmithProvider as FlagsmithProviderInternal, useFlagsmith } from 'flagsmith/react'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import getConfig from 'src/config'
 
-import queries from './get-user-traits.gql'
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 
 type FlagsmithProviderProperties = {
-  children: ReactElement
+  readonly children: ReactElement
 }
 
 const config = getConfig()
 
 const FlagsmithIdentifier = ({ children }: FlagsmithProviderProperties) => {
-  const { data, loading } = useQuery(queries.GET_USER_TRAITS)
+  const myself = useRecoilValue(myselfAtom)
+
   const flagsmithInstance = useFlagsmith()
 
-  if (!loading) {
-    flagsmithInstance.identify(data.me.email, {
-      userId: data.me.id,
-      email: data.me.email,
-      companyId: data.me.companies.edges[0].node.id,
-    })
-  }
+  useEffect(() => {
+    if (myself) {
+      flagsmithInstance.identify(myself.email, {
+        userId: myself.id,
+        email: myself.email,
+        companyId: myself.companies.edges[0].node.id,
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myself?.id])
 
-  return loading ? <div /> : children
+  return children
 }
 
 export const FlagsmithProvider = ({ children }: FlagsmithProviderProperties) => {

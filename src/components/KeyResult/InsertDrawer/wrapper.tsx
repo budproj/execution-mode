@@ -1,17 +1,14 @@
-import { useLazyQuery } from '@apollo/client'
 import { Flex, Stack, Drawer, DrawerContent, DrawerOverlay, useToast } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
-import GET_KEY_RESULT_WITH_ID from 'src/components/KeyResult/Single/Drawer/queries.gql'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
 
 import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
-import { GetKeyResultWithIDQuery } from '../Single/Drawer/content'
 import useGetKeyResultWithId from '../Single/Drawer/hooks/get-key-result-with-id'
 
 import { InsertOrUpdateKeyResultForm } from './Form/wrapper'
@@ -27,7 +24,6 @@ export const KeyResultInsertDrawer = ({
   teamID,
   isPersonalKR,
 }: KeyResultInsertDrawerProperties) => {
-  const [isKeyResultEditingLoading, setIsKeyResultEditingLoading] = useState(false)
   const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
   const editingModeKeyResultID = useRecoilValue(isEditingKeyResultIDAtom)
 
@@ -39,27 +35,10 @@ export const KeyResultInsertDrawer = ({
   const intl = useIntl()
   const toast = useToast()
 
-  const [getKeyResultData, { data: keyResultData }] = useLazyQuery<GetKeyResultWithIDQuery>(
-    GET_KEY_RESULT_WITH_ID,
-    {
-      variables: {
-        id: editingModeKeyResultID,
-      },
-      fetchPolicy: 'network-only',
-      onCompleted: () => setIsKeyResultEditingLoading(false),
-    },
-  )
+  const { data: keyResultData, loading: isKeyResultEditingLoading } =
+    useGetKeyResultWithId(editingModeKeyResultID)
 
-  useEffect(() => {
-    if (editingModeKeyResultID) {
-      setIsKeyResultEditingLoading(true)
-      getKeyResultData()
-    }
-  }, [editingModeKeyResultID, getKeyResultData])
-
-  const isOpen = editingModeKeyResultID
-    ? Boolean(editingModeKeyResultID)
-    : Boolean(drawerObjectiveID)
+  const isOpen = Boolean(editingModeKeyResultID ?? drawerObjectiveID)
 
   const handleResetDrawerState = async () => {
     if (editingModeKeyResultID) {
@@ -112,7 +91,7 @@ export const KeyResultInsertDrawer = ({
               objectiveID={drawerObjectiveID}
               teamID={teamID}
               editingModeKeyResult={keyResultData?.keyResult}
-              isLoading={isKeyResultEditingLoading}
+              isLoading={isKeyResultEditingLoading ?? true}
               onClose={handleResetDrawerState}
               onSuccess={handleSuccess}
               onError={handleError}

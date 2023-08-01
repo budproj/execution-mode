@@ -1,3 +1,4 @@
+# @deprecated in favor of GET_KEY_RESULT_AND_RELATIONS
 query GET_CHECKLIST_OF_KEY_RESULT($id: ID!) {
   keyResult(id: $id) {
     id

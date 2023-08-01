@@ -14,6 +14,7 @@ class BudDocument extends Document<BudDocumentProperties> {
         <Head>
           <link rel="manifest" href="/manifest.json" />
           <meta name="robots" content={this.props.env === 'production' ? 'all' : 'noindex'} />
+          {/* eslint-disable-next-line @next/next/no-css-tags */}
           <link href="/fonts/CircularStd/font-face.css" rel="stylesheet" />
           <link
             rel="apple-touch-icon-precomposed"

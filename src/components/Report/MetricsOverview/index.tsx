@@ -1,5 +1,5 @@
 import { Box, Text, Flex, Divider, StyleProps } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -14,9 +14,8 @@ import { companyPreposition } from 'src/components/User/DetailedHeader/constants
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { getTeamMetrics } from 'src/state/recoil/routine/get-team-metrics'
 import { getRoutineDateRangeDateFormat } from 'src/state/recoil/routine/routine-dates-range'
+import { myselfAtom } from 'src/state/recoil/shared/atoms'
 import { teamAtomFamily } from 'src/state/recoil/team'
-import meAtom from 'src/state/recoil/user/me'
-import selectUser from 'src/state/recoil/user/selector'
 
 import MetricTeamRow from './MetricTeamRow'
 import messages from './messages'
@@ -30,16 +29,30 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
   const intl = useIntl()
 
   const { after, before } = getRoutineDateRangeDateFormat(new Date())
-  const userID = useRecoilValue(meAtom)
-  const user = useRecoilValue(selectUser(userID))
-  const companyId = user?.companies?.edges[0]?.node?.id
-  const company = useRecoilValue(teamAtomFamily(companyId))
+  const myself = useRecoilValue(myselfAtom)
 
-  const [teams, setTeams] = useConnectionEdges<Team>(company?.rankedDescendants?.edges)
+  // TODO: transform into an atom
+  const [userCompany, setUserCompany] = useState<Team>()
+  useEffect(() => {
+    setUserCompany(myself?.companies?.edges[0]?.node)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [myself?.id])
+
+  const company = useRecoilValue(teamAtomFamily(userCompany?.id))
+
+  const [unrankedTeams, setUnrankedTeams] = useConnectionEdges<Team>(company?.teams?.edges)
 
   useEffect(() => {
-    setTeams(company?.rankedDescendants?.edges)
-  }, [company?.rankedDescendants?.edges, setTeams])
+    setUnrankedTeams(company?.teams?.edges)
+  }, [company?.teams?.edges, setUnrankedTeams])
+
+  const [teams, setTeamsEdges] = useState<Team[]>(
+    unrankedTeams.sort((left, right) => right.status.progress - left.status.progress),
+  )
+
+  useEffect(() => {
+    setTeamsEdges(unrankedTeams.sort((left, right) => right.status.progress - left.status.progress))
+  }, [unrankedTeams])
 
   const routinesOverview = getTeamMetrics(company?.id)
   const overviewData = routinesOverview.overview
@@ -57,8 +70,8 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
       <CardHeader
         loading={teams.length === 0}
         title={intl.formatMessage(messages.metricCardTitle, {
-          company: user?.companies?.edges[0].node.name,
-          companypreposition: companyPreposition(user?.companies?.edges[0].node.gender),
+          company: userCompany?.name,
+          companypreposition: companyPreposition(userCompany?.gender),
         })}
         subtitle={intl.formatMessage(messages.metricCardSubtitle)}
       >

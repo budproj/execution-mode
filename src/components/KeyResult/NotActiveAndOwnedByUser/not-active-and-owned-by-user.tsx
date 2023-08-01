@@ -12,9 +12,9 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { cycleAtomFamily } from 'src/state/recoil/cycle'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
-import meAtom from 'src/state/recoil/user/me'
 
 import { useCycleFilters } from '../../../state/hooks/useCycleFilters/hook'
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 
 import KeyResultNotActiveAndOwnedByUserCyclesList from './cycle-lists'
 import queries from './queries.gql'
@@ -56,7 +56,7 @@ const flattenKeyResultEdges = (
 const KeyResultNotActiveAndOwnedByUser = ({
   onLineClick,
 }: KeyResultNotActiveAndOwnedByUserProperties) => {
-  const userID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
 
   const [loadCycles, { isLoaded: isLoadedOnRecoil }] = useRecoilFamilyLoader<Cycle>(cycleAtomFamily)
   const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
@@ -65,14 +65,14 @@ const KeyResultNotActiveAndOwnedByUser = ({
   const [keyResults, setKeyResultEdges, ___, isKeyResultConnectionLoaded] =
     useConnectionEdges<KeyResult>()
 
-  const [filteredCycles, _, { updateCycles, isLoaded }] = useCycleFilters(userID)
+  const [filteredCycles, _, { updateCycles, isLoaded }] = useCycleFilters(myself?.id)
 
   const [fetchUserActiveCycles] = useLazyQuery<GetKeyResultNotActiveAndOwnedByUserWithBindingQuery>(
     queries.GET_USER_KEY_RESULTS_FROM_NOT_ACTIVE_CYCLES,
     {
-      fetchPolicy: 'no-cache',
+      fetchPolicy: 'cache-first',
       variables: {
-        userID,
+        userID: myself?.id,
       },
       onCompleted: (data) => {
         const flattenedCycleEdges = flattenCycleEdges(data.cycles.edges)
@@ -85,8 +85,8 @@ const KeyResultNotActiveAndOwnedByUser = ({
   )
 
   useEffect(() => {
-    if (userID) fetchUserActiveCycles()
-  }, [userID, fetchUserActiveCycles])
+    if (myself?.id) fetchUserActiveCycles()
+  }, [myself?.id, fetchUserActiveCycles])
 
   useEffect(() => {
     if (isCycleConnectionLoaded) loadCycles(cycles)

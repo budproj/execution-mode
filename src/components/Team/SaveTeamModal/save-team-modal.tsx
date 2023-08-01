@@ -26,8 +26,8 @@ import { SelectMenu } from 'src/components/Base'
 import { KeyResultOwnerSelectMenu } from 'src/components/KeyResult/OwnerSelectMenu/wrapper'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { isEditTeamModalOpenAtom, isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
-import meAtom from 'src/state/recoil/user/me'
 
+import { myselfAtom } from '../../../state/recoil/shared/atoms'
 import { TeamSelect } from '../Select/wrapper'
 import { TEAM_GENDER } from '../constants'
 import { Team } from '../types'
@@ -62,7 +62,7 @@ export const SaveTeamModal = ({ teamId }: SaveTeamModalProperties) => {
 
   const preloadedTeamId = isEditingTeamId ?? teamId ?? getTeamIdFromRouter(router)
 
-  const currentUserID = useRecoilValue(meAtom)
+  const myself = useRecoilValue(myselfAtom)
   const team = useRecoilValue(teamAtomFamily(preloadedTeamId))
   const setShouldUpdateObjectives = useSetRecoilState(isReloadNecessary)
   const [childTeams, setChildTeamEdges] = useConnectionEdges<Team>()
@@ -84,14 +84,15 @@ export const SaveTeamModal = ({ teamId }: SaveTeamModalProperties) => {
       setName(team?.name)
       setDescription(team?.description)
 
+      // TODO: use team?.parentId instead
       if (team?.parent) {
         setParentTeam(team.parent)
       }
 
-      const ownerID = isEditingTeamId ? team?.ownerId ?? '' : currentUserID ?? ''
+      const ownerID = isEditingTeamId ? team?.ownerId ?? '' : myself?.id ?? ''
       setOwner(ownerID)
     }
-  }, [team, setChildTeamEdges, isEditingTeamId, currentUserID])
+  }, [team, setChildTeamEdges, isEditingTeamId, myself?.id])
 
   const [saveOrUpdateTeam, { loading }] = useMutation<AddSubteamMutationResult>(
     isEditingTeamId ? queries.UPDATE_TEAM : queries.CREATE_TEAM,
