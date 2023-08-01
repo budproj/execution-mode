@@ -146,12 +146,12 @@ const KeyResultSummarizeSection = ({
     const { llm } = await servicesPromise
 
     if (feedback === value) {
-      const data = await llm.sendFeedback({ completionId, userId: myself.id, value: 0 })
+      const data = await llm.sendFeedback({ completionId, userId: userID, value: 0 })
       setFeedback(data.value)
       return
     }
 
-    const data = await llm.sendFeedback({ completionId, userId: myself.id, value })
+    const data = await llm.sendFeedback({ completionId, userId: userID, value })
 
     setFeedback(data.value)
   }
