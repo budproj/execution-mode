@@ -15,7 +15,7 @@ import messages from './messages'
 
 const CommentOnRoutineNotification = ({ properties, timestamp, isRead, type }: Notification) => {
   const intl = useIntl()
-  const { push, pathname } = useRouter()
+  const { push } = useRouter()
   const routineTabName = useRoutineTab()
 
   const typeCommentNotificationMessage =
