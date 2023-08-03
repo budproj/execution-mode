@@ -1,7 +1,8 @@
 /* eslint-disable react/no-children-prop */
 import { AccordionPanel, Text } from '@chakra-ui/react'
-import React, { useMemo } from 'react'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import remarkBreaks from 'remark-breaks'
 import remarkGfm from 'remark-gfm'
 
 import { Objective } from 'src/components/Objective/types'
@@ -18,6 +19,10 @@ export interface ObjectiveAccordionPanelProperties {
   description?: string
   isDraft?: boolean
   context?: ObjectiveContext
+}
+
+const formattedDescriptionText = (text: string) => {
+  return String(text)?.replace(/^(\s*)(-|\*)\s(.*)$/gm, '$1• $3\n')
 }
 
 export const ObjectiveAccordionPanel = ({
@@ -39,12 +44,12 @@ export const ObjectiveAccordionPanel = ({
     <AccordionPanel p={0} maxWidth="100%">
       {isExpanded && (
         <>
-          {formattedDescriptionText && !isEditing && (
+          {description && !isEditing && (
             <Text fontSize="14px" fontWeight={400} color="new-gray.700" pt={6} pb={3} pl={2}>
               <ReactMarkdown
-                children={formattedDescriptionText}
+                children={formattedDescriptionText(description)}
                 skipHtml
-                remarkPlugins={[remarkGfm]}
+                remarkPlugins={[remarkGfm, remarkBreaks]}
               />
             </Text>
           )}
