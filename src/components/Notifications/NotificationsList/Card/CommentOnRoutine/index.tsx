@@ -38,15 +38,9 @@ const CommentOnRoutineNotification = ({ properties, timestamp, isRead, type }: N
     input: properties.comment?.content ?? '',
   })
 
-  const isExplorePage = pathname === '/explore' || pathname.startsWith('/explore/')
-
   const answerLink = properties.routine
-    ? `${isExplorePage ? '/' : 'explore/'}${
-        properties.routine.companyId
-      }?activeTab=${routineTabName}&answerId=${properties.routine?.answerId}`
+    ? `explore/'${properties.routine.companyId}?activeTab=${routineTabName}&answerId=${properties.routine?.answerId}`
     : '#'
-
-  console.log({ answerLink })
 
   return (
     <BaseCardNotification
