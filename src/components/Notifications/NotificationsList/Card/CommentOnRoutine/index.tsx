@@ -39,7 +39,7 @@ const CommentOnRoutineNotification = ({ properties, timestamp, isRead, type }: N
   })
 
   const answerLink = properties.routine
-    ? `explore/${properties.routine.companyId}?activeTab=${routineTabName}&answerId=${properties.routine?.answerId}`
+    ? `explore/'${properties.routine.companyId}?activeTab=${routineTabName}&answerId=${properties.routine?.answerId}`
     : '#'
 
   return (
