@@ -36,6 +36,10 @@ export const ObjectiveAccordionPanel = ({
 }: ObjectiveAccordionPanelProperties) => {
   const isEditing = context?.mode === ObjectiveViewMode.EDIT
 
+  const formattedDescriptionText = useMemo(() => {
+    return String(description)?.replace(/^(\s*)(-|\*)\s(.*)$/gm, '$1• $3\n')
+  }, [description])
+
   return (
     <AccordionPanel p={0} maxWidth="100%">
       {isExpanded && (
