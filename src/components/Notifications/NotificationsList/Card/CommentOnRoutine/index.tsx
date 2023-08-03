@@ -46,6 +46,8 @@ const CommentOnRoutineNotification = ({ properties, timestamp, isRead, type }: N
       }?activeTab=${routineTabName}&answerId=${properties.routine?.answerId}`
     : '#'
 
+  console.log({ answerLink })
+
   return (
     <BaseCardNotification
       describeBadgeAvatarIcon={
