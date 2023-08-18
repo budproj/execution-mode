@@ -26,8 +26,8 @@ export default defineMessages<MainAppBarMessage>({
   },
 
   thirdMenuItem: {
-    defaultMessage: 'Explorar',
-    id: 'ciNUJf',
+    defaultMessage: 'Times',
+    id: 'qLRP2R',
     description: 'MainAppBar menu item that links to teams "Explore" page',
   },
 

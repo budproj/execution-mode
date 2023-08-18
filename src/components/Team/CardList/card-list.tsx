@@ -18,6 +18,7 @@ export interface TeamCardListProperties {
   teamFilter: string
   numEmptyStateCards?: number
   parentWidth: number
+  isFromHoverMenu?: boolean
 }
 
 const TeamCardList = memo(
@@ -25,8 +26,11 @@ const TeamCardList = memo(
     teamFilter,
     numEmptyStateCards: numberEmptyStateCards = 3,
     parentWidth,
+    isFromHoverMenu = false,
   }: TeamCardListProperties) => {
-    const { data, loading, refetch } = useQuery<GetTeamsQuery>(queries.GET_TEAMS)
+    const { data, loading, refetch } = useQuery<GetTeamsQuery>(
+      isFromHoverMenu ? queries.GET_USER_TEAMS_AND_COMPANIES : queries.GET_TEAMS,
+    )
     const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
     const [teams, setEdges] = useConnectionEdges<Team>()
 
@@ -78,8 +82,16 @@ const TeamCardList = memo(
     }, [wereTeamsLoaded, orderedTeams, loadTeamsOnRecoil])
 
     useEffect(() => {
-      if (data) setEdges(data.teams.edges)
-    }, [data, setEdges])
+      if (data) {
+        if (isFromHoverMenu && data.me) {
+          const userTeamsAndCompanies = [...data.me.teams.edges, ...data.me.companies.edges]
+          setEdges(userTeamsAndCompanies)
+          return
+        }
+
+        setEdges(data.teams.edges)
+      }
+    }, [data, setEdges, isFromHoverMenu])
 
     return wereTeamsLoaded ? (
       <FixedSizeGrid
