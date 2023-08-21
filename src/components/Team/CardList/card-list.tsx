@@ -56,7 +56,7 @@ const TeamCardList = memo(
             style={{
               ...style,
             }}
-            overflow="hidden"
+            overflow="visible"
             pr={columnIndex !== 0 && columnIndex % 2 === 0 ? '0px' : '30px'}
           >
             <TeamCard id={team.id} />
@@ -101,6 +101,7 @@ const TeamCardList = memo(
         rowCount={Math.ceil(orderedTeams.length / 3)}
         columnWidth={columnWidth}
         rowHeight={rowHeight}
+        style={{ overflow: 'visible' }}
       >
         {renderTeam}
       </FixedSizeGrid>

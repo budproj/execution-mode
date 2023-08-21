@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Box, Divider, Flex, Grid, Heading, GridItem, Text } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -18,13 +19,33 @@ interface TeamMenuProperties {
   onMouseLeave: any
   onMouseEnter: any
   isHovered: any
+  setIsHovered: any
 }
 
 interface GetOtherTeamsQuery {
   teams: GraphQLConnection<Team>
 }
 
-const TeamHoverMenu = ({ onMouseEnter, onMouseLeave, isHovered }: TeamMenuProperties) => {
+const StyledFlex = styled(Flex)`
+  // animation: fade 1s linear;
+
+  // @keyframes fade {
+  //   0%,
+  //   100% {
+  //     opacity: 0;
+  //   }
+  //   50% {
+  //     opacity: 1;
+  //   }
+  // }
+`
+
+const TeamHoverMenu = ({
+  onMouseEnter,
+  onMouseLeave,
+  isHovered,
+  setIsHovered,
+}: TeamMenuProperties) => {
   const intl = useIntl()
 
   const { data } = useQuery<GetOtherTeamsQuery>(queries.GET_OTHER_TEAMS)
@@ -37,15 +58,17 @@ const TeamHoverMenu = ({ onMouseEnter, onMouseLeave, isHovered }: TeamMenuProper
   }, [data, setEdges])
 
   return (
-    <Flex
-      transition="0.5s"
-      visibility={isHovered ? 'visible' : 'hidden'}
-      top="78px"
+    <StyledFlex
+      transition="0.5s all ease-out"
+      opacity={isHovered ? 1 : 0}
       position="absolute"
+      top="78px"
       width="100%"
       bg="new-gray.400"
       paddingX="72px"
       zIndex={1000}
+      pointerEvents={isHovered ? 'auto' : 'none'}
+      transform={isHovered ? 'translateY(0)' : 'translateY(-30px)'}
       onMouseLeave={onMouseLeave}
       onMouseEnter={onMouseEnter}
     >
@@ -55,11 +78,12 @@ const TeamHoverMenu = ({ onMouseEnter, onMouseLeave, isHovered }: TeamMenuProper
         </Heading>
         <Divider />
         <Grid
-          visibility={isHovered ? 'visible' : 'hidden'}
+          opacity={isHovered ? 1 : 0}
           mt="24px"
           mb="24px"
           gridGap={10}
           gridTemplateColumns="repeat(3, 1fr)"
+          onClick={() => setIsHovered(false)}
         >
           <TeamCardList isFromHoverMenu parentWidth={1080} teamFilter="" />
         </Grid>
@@ -67,7 +91,7 @@ const TeamHoverMenu = ({ onMouseEnter, onMouseLeave, isHovered }: TeamMenuProper
           {intl.formatMessage(messages.otherTeamsTitle)}
         </Heading>
         <Divider />
-        <Grid mt="24px" gridGap={10} gridTemplateColumns="repeat(5, 1fr)">
+        <Grid overflow="visible" mt="24px" gridGap={10} gridTemplateColumns="repeat(5, 1fr)">
           {teams.map((team) => {
             return (
               <GridItem
@@ -77,9 +101,12 @@ const TeamHoverMenu = ({ onMouseEnter, onMouseLeave, isHovered }: TeamMenuProper
                 transition="0.5s"
                 color="gray.500"
                 cursor="pointer"
-                visibility={isHovered ? 'visible' : 'hidden'}
+                opacity={isHovered ? 1 : 0}
+                onClick={() => setIsHovered(false)}
               >
-                <IntlLink href={`/explore/${team.id}`}>{team.name}</IntlLink>
+                <IntlLink href={`/explore/${team.id}`} as={`/explore/${team.id}`}>
+                  {team.name}
+                </IntlLink>
               </GridItem>
             )
           })}
@@ -89,7 +116,8 @@ const TeamHoverMenu = ({ onMouseEnter, onMouseLeave, isHovered }: TeamMenuProper
             transition="0.5s"
             color="brand.500"
             cursor="pointer"
-            visibility={isHovered ? 'visible' : 'hidden'}
+            opacity={isHovered ? 1 : 0}
+            onClick={() => setIsHovered(false)}
           >
             <IntlLink href="/explore">
               <Flex alignItems="center">
@@ -100,7 +128,7 @@ const TeamHoverMenu = ({ onMouseEnter, onMouseLeave, isHovered }: TeamMenuProper
           </GridItem>
         </Grid>
       </Box>
-    </Flex>
+    </StyledFlex>
   )
 }
 

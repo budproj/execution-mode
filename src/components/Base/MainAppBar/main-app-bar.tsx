@@ -42,6 +42,7 @@ const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
       borderStyle="solid"
       alignItems="center"
       justifyContent="center"
+      zIndex={11}
     >
       <Link passHref href="/">
         <Logotype />
@@ -70,6 +71,7 @@ const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
           </Flex>
           <TeamHoverMenu
             isHovered={isHovered}
+            setIsHovered={setIsHovered}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           />
