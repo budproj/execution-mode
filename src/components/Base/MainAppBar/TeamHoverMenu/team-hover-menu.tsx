@@ -51,6 +51,7 @@ const TeamHoverMenu = ({
       top="78px"
       width="100%"
       transition="0.4s all ease-out"
+      pointerEvents={isHovered ? 'auto' : 'none'}
     >
       <Flex
         borderBottomLeftRadius="10px"
