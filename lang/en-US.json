@@ -15,6 +15,10 @@
     "defaultMessage": "Click here to comment :)",
     "description": "This text is displayed in our comment input in our key result drawer when it has no value"
   },
+  "4+YuJi": {
+    "defaultMessage": "Building your OKRs? Discover the new Draft Mode and collaborate with your team!",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
+  },
   "+ajAuo": {
     "defaultMessage": "No user found",
     "description": "This message appears in our user search when we try to search for a given user without any results"
