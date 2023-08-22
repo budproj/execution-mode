@@ -8,16 +8,17 @@ import messages from './messages'
 
 export interface UserAvatarProperties extends AvatarProps {
   bottomText?: string
+  variantAvatar?: AvatarProps['variant']
 }
 
-const UserAvatar = ({ bottomText, ...rest }: UserAvatarProperties) => {
+const UserAvatar = ({ bottomText, variantAvatar = 'square', ...rest }: UserAvatarProperties) => {
   const intl = useIntl()
   const { colors } = useTheme()
   const blackShadeColor: string = colors.black[600]
 
   return (
     <Avatar
-      variant="square"
+      variant={variantAvatar}
       icon={
         <ImageIcon
           title={intl.formatMessage(messages.imageIconTitle)}

@@ -7,6 +7,102 @@
     "defaultMessage": "Start with an action verb (reach, achieve, accomplish...)",
     "description": "The  first description of the tip when you are creating a KR."
   },
+  "q6A4Ae": {
+    "defaultMessage": "Regular",
+    "description": "The description of the pie chart graph that indicates the regular status"
+  },
+  "qQKiDF": {
+    "defaultMessage": "Good",
+    "description": "The description of the pie chart graph that indicates the good status"
+  },
+  "s0wK0Y": {
+    "defaultMessage": "Very good",
+    "description": "The description of the pie chart graph that indicates the very good status"
+  },
+  "sBSvDB": {
+    "defaultMessage": "Go to the team",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "tydp5X": {
+    "defaultMessage": "Best practices",
+    "description": "The description of the pie chart graph that indicates the label"
+  },
+  "uORr+d": {
+    "defaultMessage": "Key results without updates become challenging to track",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "v4RcBJ": {
+    "defaultMessage": "{leader} Comment on the key results that are outdated",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "2rTc9E": {
+    "defaultMessage": "Perform a check-in on your key results.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "371LdJ": {
+    "defaultMessage": "It's important for key results to have descriptions so that everyone better understands the strategy.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "3MleM/": {
+    "defaultMessage": "Set as primary team?",
+    "description": "The label of the button that makes the team the main team"
+  },
+  "6ws/gr": {
+    "defaultMessage": "Primary team",
+    "description": "The title of the main team section"
+  },
+  "7ZtAaa": {
+    "defaultMessage": "Seek to understand the barriers and how you can contribute to these key results.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "C932xL": {
+    "defaultMessage": "{leader} Comment on a company key result",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "DBnPB3": {
+    "defaultMessage": "Create detailed descriptions for your key results",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "HDxm2W": {
+    "defaultMessage": "{leader} Comment on key results with Barriers",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "JrryPL": {
+    "defaultMessage": "The weekly check-in routine is a fundamental part of keeping track of the strategy's progress.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "K2Hthp": {
+    "defaultMessage": "Low",
+    "description": "The description of the pie chart graph that indicates the low status"
+  },
+  "KjG7j3": {
+    "defaultMessage": "My key results",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "PJSgbG": {
+    "defaultMessage": "challenges and tasks of the week.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "QT4yaV": {
+    "defaultMessage": "Excellent",
+    "description": "The description of the pie chart graph that indicates the excellent status"
+  },
+  "SW8YCX": {
+    "defaultMessage": "Seek to understand the signaling and how you can contribute to these key results.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "UJijyu": {
+    "defaultMessage": "In addition to your team's strategy, seek to share your ideas on company key results.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "fjeSHd": {
+    "defaultMessage": "{leader} Comment on the key results with low confidence.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "j259Ph": {
+    "defaultMessage": "Leader",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "+4HFc4": {
     "defaultMessage": "Click to start typing",
     "description": "This message appears as a placeholder in the input where the user types their response."
@@ -636,7 +732,7 @@
     "description": "The label of the company yearly period while creating a new workspace"
   },
   "7VhC49": {
-    "defaultMessage": "OKRs Overview",
+    "defaultMessage": "Overview of OKRs",
     "description": "The title of the OKRs overview"
   },
   "7WlK+y": {

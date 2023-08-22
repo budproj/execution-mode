@@ -1,0 +1,12 @@
+mutation UPDATE_USER_MAIN_TEAM($userID: ID!, $main_team_id: String!) {
+  updateMainTeam(userID: $userID, main_team_id: $main_team_id) {
+    preferences
+  }
+}
+
+query GET_TEAM_BY_ID($teamId: ID!) {
+    team(id: $teamId) {
+      name
+      id
+    }
+}

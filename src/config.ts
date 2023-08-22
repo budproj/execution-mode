@@ -60,6 +60,7 @@ export interface BudAPIs {
   comments: string
   restBase: string
   llm: string
+  missionControl: string
 }
 
 export interface Auth0Config {

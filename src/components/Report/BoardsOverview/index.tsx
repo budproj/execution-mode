@@ -17,7 +17,7 @@ const BoardsOverview = ({ ...rest }) => {
 
   return (
     <>
-      <Flex minHeight={155} mt="36px" gridGap="24px" {...rest}>
+      <Flex minHeight={155} gridGap="24px" {...rest}>
         {/* <Board
           isLoading={loading}
           title={intl.formatMessage(messages.objectivesTitle)}
