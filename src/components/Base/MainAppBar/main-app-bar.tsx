@@ -66,6 +66,7 @@ const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
               <MainAppBarMenuItem
                 label={intl.formatMessage(messages.thirdMenuItem)}
                 href="/explore"
+                onClick={() => setIsHovered(false)}
               />
             </Flex>
           </Flex>

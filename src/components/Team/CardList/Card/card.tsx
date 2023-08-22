@@ -18,6 +18,7 @@ import messages from './messages'
 
 export interface TeamCardProperties {
   id?: Team['id']
+  isFromHoverMenu?: boolean
 }
 
 const HoverableWrapper = styled(Box)`
@@ -28,7 +29,7 @@ const HoverableWrapper = styled(Box)`
   }
 `
 
-const TeamCard = memo(({ id }: TeamCardProperties) => {
+const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
   const [users, setUserEdges] = useConnectionEdges<User>()
@@ -55,7 +56,7 @@ const TeamCard = memo(({ id }: TeamCardProperties) => {
       px={10}
       _hover={{ borderLeftRadius: '25px' }}
     >
-      {isAllowedToEditTeam && (
+      {isAllowedToEditTeam && !isFromHoverMenu && (
         <MenuCard position="absolute" top="20px" right="20px" teamId={team?.id} />
       )}
       <IntlLink href={`/explore/${id ?? '#'}`} as={`/explore/${id ?? '#'}`}>

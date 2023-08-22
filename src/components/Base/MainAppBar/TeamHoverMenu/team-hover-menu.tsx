@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client'
 import { Box, Divider, Flex, Grid, Heading, GridItem, Text } from '@chakra-ui/react'
-import styled from '@emotion/styled'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -26,20 +25,6 @@ interface GetOtherTeamsQuery {
   teams: GraphQLConnection<Team>
 }
 
-const StyledFlex = styled(Flex)`
-  // animation: fade 1s linear;
-
-  // @keyframes fade {
-  //   0%,
-  //   100% {
-  //     opacity: 0;
-  //   }
-  //   50% {
-  //     opacity: 1;
-  //   }
-  // }
-`
-
 const TeamHoverMenu = ({
   onMouseEnter,
   onMouseLeave,
@@ -58,77 +43,93 @@ const TeamHoverMenu = ({
   }, [data, setEdges])
 
   return (
-    <StyledFlex
-      transition="0.5s all ease-out"
+    <Flex
       opacity={isHovered ? 1 : 0}
+      backgroundColor="rgba(0,0,0,0.7)"
+      height="100%"
       position="absolute"
       top="78px"
       width="100%"
-      bg="new-gray.400"
-      paddingX="72px"
-      zIndex={1000}
-      pointerEvents={isHovered ? 'auto' : 'none'}
-      transform={isHovered ? 'translateY(0)' : 'translateY(-30px)'}
-      onMouseLeave={onMouseLeave}
-      onMouseEnter={onMouseEnter}
+      transition="0.5s all ease-out"
     >
-      <Box position="relative" width="100%" mb="24px" mt="34px" overflow="hidden">
-        <Heading fontWeight={500} fontSize="24px" color="gray.500" mb="10px">
-          {intl.formatMessage(messages.teamMenuTitle)}
-        </Heading>
-        <Divider />
+      <Flex
+        borderBottomLeftRadius="10px"
+        borderBottomRightRadius="10px"
+        transition="0.5s all ease-out"
+        position="absolute"
+        width="100%"
+        bg="gray.50"
+        paddingX="72px"
+        zIndex={1000}
+        pointerEvents={isHovered ? 'auto' : 'none'}
+        onMouseLeave={onMouseLeave}
+        onMouseEnter={onMouseEnter}
+      >
         <Grid
-          opacity={isHovered ? 1 : 0}
-          mt="24px"
+          position="relative"
+          width="100%"
           mb="24px"
+          mt="34px"
+          gridTemplateColumns="2fr 1fr"
           gridGap={10}
-          gridTemplateColumns="repeat(3, 1fr)"
-          onClick={() => setIsHovered(false)}
         >
-          <TeamCardList isFromHoverMenu parentWidth={1080} teamFilter="" />
-        </Grid>
-        <Heading fontWeight={500} fontSize="24px" color="gray.500" mb="10px">
-          {intl.formatMessage(messages.otherTeamsTitle)}
-        </Heading>
-        <Divider />
-        <Grid overflow="visible" mt="24px" gridGap={10} gridTemplateColumns="repeat(5, 1fr)">
-          {teams.map((team) => {
-            return (
+          <Box>
+            <Heading fontWeight={500} fontSize="24px" color="gray.500" mb="10px">
+              {intl.formatMessage(messages.teamMenuTitle)}
+            </Heading>
+            <Divider />
+            <TeamCardList
+              isFromHoverMenu
+              parentWidth={1080}
+              teamFilter=""
+              setIsHovered={() => setIsHovered(false)}
+            />
+          </Box>
+          <Box>
+            <Heading fontWeight={500} fontSize="24px" color="gray.500" mb="10px">
+              {intl.formatMessage(messages.otherTeamsTitle)}
+            </Heading>
+            <Divider />
+            <Grid overflow="visible" mt="24px" gridGap={10} gridTemplateColumns="repeat(2, 1fr)">
+              {teams.map((team) => {
+                return (
+                  <GridItem
+                    key={team.id}
+                    width="fit-content"
+                    _hover={{ opacity: 0.7 }}
+                    transition="0.5s"
+                    color="gray.500"
+                    cursor="pointer"
+                    opacity={isHovered ? 1 : 0}
+                    onClick={() => setIsHovered(false)}
+                  >
+                    <IntlLink href={`/explore/${team.id}`} as={`/explore/${team.id}`}>
+                      {team.name}
+                    </IntlLink>
+                  </GridItem>
+                )
+              })}
               <GridItem
-                key={team.id}
                 width="fit-content"
                 _hover={{ opacity: 0.7 }}
                 transition="0.5s"
-                color="gray.500"
+                color="brand.500"
                 cursor="pointer"
                 opacity={isHovered ? 1 : 0}
                 onClick={() => setIsHovered(false)}
               >
-                <IntlLink href={`/explore/${team.id}`} as={`/explore/${team.id}`}>
-                  {team.name}
+                <IntlLink href="/explore">
+                  <Flex alignItems="center">
+                    <Text marginRight="5px">Ver Todos</Text>
+                    <CircleArrowRight desc={intl.formatMessage(messages.arrowIconDescription)} />
+                  </Flex>
                 </IntlLink>
               </GridItem>
-            )
-          })}
-          <GridItem
-            width="fit-content"
-            _hover={{ opacity: 0.7 }}
-            transition="0.5s"
-            color="brand.500"
-            cursor="pointer"
-            opacity={isHovered ? 1 : 0}
-            onClick={() => setIsHovered(false)}
-          >
-            <IntlLink href="/explore">
-              <Flex alignItems="center">
-                <Text marginRight="5px">Ver Todos</Text>
-                <CircleArrowRight desc={intl.formatMessage(messages.arrowIconDescription)} />
-              </Flex>
-            </IntlLink>
-          </GridItem>
+            </Grid>
+          </Box>
         </Grid>
-      </Box>
-    </StyledFlex>
+      </Flex>
+    </Flex>
   )
 }
 

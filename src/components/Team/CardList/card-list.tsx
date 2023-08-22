@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Box, Grid } from '@chakra-ui/react'
+import { Box, Grid, GridItem } from '@chakra-ui/react'
 import orderBy from 'lodash/orderBy'
 import React, { memo, useEffect, useMemo } from 'react'
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window'
@@ -19,6 +19,7 @@ export interface TeamCardListProperties {
   numEmptyStateCards?: number
   parentWidth: number
   isFromHoverMenu?: boolean
+  setIsHovered?: () => void
 }
 
 const TeamCardList = memo(
@@ -27,6 +28,7 @@ const TeamCardList = memo(
     numEmptyStateCards: numberEmptyStateCards = 3,
     parentWidth,
     isFromHoverMenu = false,
+    setIsHovered,
   }: TeamCardListProperties) => {
     const { data, loading, refetch } = useQuery<GetTeamsQuery>(
       isFromHoverMenu ? queries.GET_USER_TEAMS_AND_COMPANIES : queries.GET_TEAMS,
@@ -59,7 +61,7 @@ const TeamCardList = memo(
             overflow="visible"
             pr={columnIndex !== 0 && columnIndex % 2 === 0 ? '0px' : '30px'}
           >
-            <TeamCard id={team.id} />
+            <TeamCard id={team.id} isFromHoverMenu={isFromHoverMenu} />
           </Box>
         )
       )
@@ -93,18 +95,45 @@ const TeamCardList = memo(
       }
     }, [data, setEdges, isFromHoverMenu])
 
+    if (isFromHoverMenu) {
+      return (
+        <Grid
+          mt="24px"
+          mb="24px"
+          gridGap={10}
+          gridTemplateColumns="repeat(2, 1fr)"
+          onClick={setIsHovered}
+        >
+          {orderedTeams.map((team) => {
+            return (
+              <GridItem
+                key={team.id}
+                overflow="visible"
+                // Pr={columnIndex !== 0 && columnIndex % 2 === 0 ? '0px' : '30px'}
+              >
+                <TeamCard id={team.id} isFromHoverMenu={isFromHoverMenu} />
+              </GridItem>
+            )
+          })}
+        </Grid>
+      )
+    }
+
     return wereTeamsLoaded ? (
-      <FixedSizeGrid
-        width={parentWidth}
-        height={rowHeight * Math.ceil(orderedTeams.length / 3)}
-        columnCount={3}
-        rowCount={Math.ceil(orderedTeams.length / 3)}
-        columnWidth={columnWidth}
-        rowHeight={rowHeight}
-        style={{ overflow: 'visible' }}
-      >
-        {renderTeam}
-      </FixedSizeGrid>
+      <>
+        <FixedSizeGrid
+          width={parentWidth}
+          height={rowHeight * Math.ceil(orderedTeams.length / 3)}
+          columnCount={3}
+          rowCount={Math.ceil(orderedTeams.length / 3)}
+          columnWidth={columnWidth}
+          rowHeight={rowHeight}
+          style={{ overflow: 'visible' }}
+        >
+          {renderTeam}
+        </FixedSizeGrid>
+        {parentWidth}
+      </>
     ) : (
       <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
         {emptyState.map(() => (

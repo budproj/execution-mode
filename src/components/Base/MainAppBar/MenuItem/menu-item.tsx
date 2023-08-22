@@ -11,9 +11,10 @@ export interface MenuItemProperties {
   label: string
   href: string
   isNew?: boolean
+  onClick?: () => void
 }
 
-const MenuItem = ({ label, href, isNew }: MenuItemProperties) => {
+const MenuItem = ({ label, href, isNew, onClick }: MenuItemProperties) => {
   const intl = useIntl()
   return (
     <IntlLink href={href}>
@@ -26,6 +27,7 @@ const MenuItem = ({ label, href, isNew }: MenuItemProperties) => {
         _active={{
           color: 'brand.500',
         }}
+        onClick={onClick}
       >
         {label}
         {isNew && (
