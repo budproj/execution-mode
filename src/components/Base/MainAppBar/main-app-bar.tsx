@@ -58,6 +58,7 @@ const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
             <Flex
               marginTop="-24px"
               marginBottom="-24px"
+              paddingRight="40px"
               alignItems="center"
               justifyContent="center"
               onMouseEnter={handleMouseEnter}

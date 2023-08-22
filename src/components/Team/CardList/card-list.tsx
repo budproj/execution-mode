@@ -120,20 +120,17 @@ const TeamCardList = memo(
     }
 
     return wereTeamsLoaded ? (
-      <>
-        <FixedSizeGrid
-          width={parentWidth}
-          height={rowHeight * Math.ceil(orderedTeams.length / 3)}
-          columnCount={3}
-          rowCount={Math.ceil(orderedTeams.length / 3)}
-          columnWidth={columnWidth}
-          rowHeight={rowHeight}
-          style={{ overflow: 'visible' }}
-        >
-          {renderTeam}
-        </FixedSizeGrid>
-        {parentWidth}
-      </>
+      <FixedSizeGrid
+        width={parentWidth}
+        height={rowHeight * Math.ceil(orderedTeams.length / 3)}
+        columnCount={3}
+        rowCount={Math.ceil(orderedTeams.length / 3)}
+        columnWidth={columnWidth}
+        rowHeight={rowHeight}
+        style={{ overflow: 'visible' }}
+      >
+        {renderTeam}
+      </FixedSizeGrid>
     ) : (
       <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
         {emptyState.map(() => (

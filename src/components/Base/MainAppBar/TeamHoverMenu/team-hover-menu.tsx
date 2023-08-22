@@ -50,12 +50,12 @@ const TeamHoverMenu = ({
       position="absolute"
       top="78px"
       width="100%"
-      transition="0.5s all ease-out"
+      transition="0.4s all ease-out"
     >
       <Flex
         borderBottomLeftRadius="10px"
         borderBottomRightRadius="10px"
-        transition="0.5s all ease-out"
+        transition="0.4s all ease-out"
         position="absolute"
         width="100%"
         bg="gray.50"
@@ -97,7 +97,7 @@ const TeamHoverMenu = ({
                     key={team.id}
                     width="fit-content"
                     _hover={{ opacity: 0.7 }}
-                    transition="0.5s"
+                    transition="0.4s"
                     color="gray.500"
                     cursor="pointer"
                     opacity={isHovered ? 1 : 0}
@@ -112,7 +112,7 @@ const TeamHoverMenu = ({
               <GridItem
                 width="fit-content"
                 _hover={{ opacity: 0.7 }}
-                transition="0.5s"
+                transition="0.4s"
                 color="brand.500"
                 cursor="pointer"
                 opacity={isHovered ? 1 : 0}
