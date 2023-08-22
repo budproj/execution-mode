@@ -11,8 +11,8 @@ type DashboardPageMessage =
 
 export default defineMessages<DashboardPageMessage>({
   greeting: {
-    defaultMessage: 'Que bom te ver de novo, {name}! :)',
-    id: 'B/fme2',
+    defaultMessage: 'Que bom te ver novamente, {name}! :)',
+    id: '3IsNOi',
     description: 'The page title that our users should see in the dashboard page',
   },
 
@@ -41,8 +41,8 @@ export default defineMessages<DashboardPageMessage>({
     description: 'The summery title for the quarterly OKRs',
   },
   okrOverViewTitle: {
-    defaultMessage: 'Visão geral dos OKRs',
-    id: '7VhC49',
+    defaultMessage: 'status da estratégia',
+    id: 'u3U7ET',
     description: 'The title of the OKRs overview',
   },
   teamsOverviewTitle: {

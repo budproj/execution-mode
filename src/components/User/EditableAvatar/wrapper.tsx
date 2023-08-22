@@ -15,6 +15,8 @@ export const UserEditableAvatar = ({
   picture,
   isDisabled,
   size,
+  variantAvatar,
+  ...rest
 }: UserEditableAvatarProperties) => {
   const intl = useIntl()
   const [isHovering, setIsHovering] = useState(false)
@@ -61,8 +63,9 @@ export const UserEditableAvatar = ({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
+        {...rest}
       >
-        <UserAvatar size={size} name={name} src={picture} />
+        <UserAvatar size={size} name={name} src={picture} variant={variantAvatar} />
 
         <Flex
           position="absolute"
