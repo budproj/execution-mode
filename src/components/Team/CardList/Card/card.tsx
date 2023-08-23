@@ -52,28 +52,26 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
       shadowStyle={shadowStrokeLight}
       bg="white"
       borderRadius={16}
-      py={12}
       px={10}
-      pt={isFromHoverMenu ? 0 : 12}
+      py={isFromHoverMenu ? 0 : 12}
       _hover={{ borderLeftRadius: '25px' }}
     >
       {isAllowedToEditTeam && !isFromHoverMenu && (
         <MenuCard position="absolute" top="20px" right="20px" teamId={team?.id} />
       )}
       <IntlLink href={`/explore/${id ?? '#'}`} as={`/explore/${id ?? '#'}`}>
-        <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
-          <Flex flexGrow={1} direction="column" justifyContent="flex-end">
-            <Box minH={8}>
-              {isCompany && (
-                <CrownIcon
-                  title={intl.formatMessage(messages.crownIconTitle)}
-                  desc={intl.formatMessage(messages.crownIconDesc)}
-                  w={10}
-                  h="auto"
-                  fill="yellow.500"
-                />
-              )}
-            </Box>
+        <Flex direction="column" gridGap={6} maxW="90%" minH="300px" justifyContent="center">
+          <Flex direction="column" justifyContent="flex-end">
+            {isCompany && (
+              <CrownIcon
+                title={intl.formatMessage(messages.crownIconTitle)}
+                desc={intl.formatMessage(messages.crownIconDesc)}
+                w={10}
+                h="auto"
+                fill="yellow.500"
+                mb={2}
+              />
+            )}
             <Skeleton isLoaded={isLoaded} mt={2} {...buildSkeletonMinSize(isLoaded, 200, 40)}>
               <Heading size="lg" color="black.900">
                 {team?.name}

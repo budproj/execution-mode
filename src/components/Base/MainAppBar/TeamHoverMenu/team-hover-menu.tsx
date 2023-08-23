@@ -8,8 +8,10 @@ import TeamCardList from 'src/components/Team/CardList'
 import { Team } from 'src/components/Team/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import IntlLink from '../../IntlLink'
+import { storageKey } from '../../NoticesBanner'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -36,11 +38,17 @@ const TeamHoverMenu = ({
   const { data } = useQuery<GetOtherTeamsQuery>(queries.GET_OTHER_TEAMS)
   const [teams, setEdges] = useConnectionEdges<Team>()
 
+  const { get } = useLocalStorage()
+
+  const valueStoraged = get(storageKey) || get(storageKey) === false
+
   useEffect(() => {
     if (data) {
       setEdges(data.teams.edges)
     }
   }, [data, setEdges])
+
+  isHovered = true
 
   return (
     <Flex
@@ -48,7 +56,7 @@ const TeamHoverMenu = ({
       backgroundColor="rgba(0,0,0,0.7)"
       height="100%"
       position="absolute"
-      top="78px"
+      top={valueStoraged ? '78px' : '132px'}
       width="100%"
       transition="0.4s all ease-out"
       pointerEvents={isHovered ? 'auto' : 'none'}

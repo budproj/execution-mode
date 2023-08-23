@@ -12,7 +12,7 @@ import selectUser from 'src/state/recoil/user/selector'
 
 import messages from './messages'
 
-const storageKey = 'Bud@new-feature.spotlight'
+export const storageKey = 'Bud@new-feature.spotlight'
 
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()
