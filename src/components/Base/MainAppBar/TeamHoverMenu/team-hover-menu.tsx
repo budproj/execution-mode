@@ -48,8 +48,6 @@ const TeamHoverMenu = ({
     }
   }, [data, setEdges])
 
-  isHovered = true
-
   return (
     <Flex
       opacity={isHovered ? 1 : 0}
