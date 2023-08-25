@@ -1,12 +1,13 @@
 import { Flex } from '@chakra-ui/react'
 import Link from 'next/link'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import Logotype from 'src/components/Base/Logotype'
 
 import MainAppBarHelperButtons from './HelperButtons'
 import MainAppBarMenuItem from './MenuItem'
+import TeamHoverMenu from './TeamHoverMenu'
 import MainAppBarUserMenu from './UserMenu'
 import { RIGHT_WING_GRID_GAP } from './constants'
 import messages from './messages'
@@ -19,6 +20,17 @@ export interface MainAppBarProperties {
 
 const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
   const intl = useIntl()
+  // Const { isOpen, onOpen, onClose } = useDisclosure()
+
+  const [isHovered, setIsHovered] = useState(false)
+
+  const handleMouseEnter = () => {
+    setIsHovered(true)
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+  }
 
   return (
     <Flex
@@ -30,6 +42,7 @@ const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
       borderStyle="solid"
       alignItems="center"
       justifyContent="center"
+      zIndex={11}
     >
       <Link passHref href="/">
         <Logotype />
@@ -42,11 +55,28 @@ const MainAppBar = ({ variant }: MainAppBarProperties): ReactElement => {
               label={intl.formatMessage(messages.secondMenuItem)}
               href="/my-things"
             />
-            <MainAppBarMenuItem
-              label={intl.formatMessage(messages.thirdMenuItem)}
-              href="/explore"
-            />
+            <Flex
+              marginTop="-24px"
+              marginBottom="-24px"
+              paddingRight="40px"
+              alignItems="center"
+              justifyContent="center"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <MainAppBarMenuItem
+                label={intl.formatMessage(messages.thirdMenuItem)}
+                href="/explore"
+                onClick={() => setIsHovered(false)}
+              />
+            </Flex>
           </Flex>
+          <TeamHoverMenu
+            isHovered={isHovered}
+            setIsHovered={setIsHovered}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          />
 
           <Flex
             justifySelf="flex-end"

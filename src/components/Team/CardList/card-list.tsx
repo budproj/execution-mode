@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
-import { Box, Grid } from '@chakra-ui/react'
+import { Box, Grid, GridItem } from '@chakra-ui/react'
 import orderBy from 'lodash/orderBy'
+import uniqBy from 'lodash/uniqBy'
 import React, { memo, useEffect, useMemo } from 'react'
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window'
 import { useRecoilState } from 'recoil'
@@ -18,6 +19,8 @@ export interface TeamCardListProperties {
   teamFilter: string
   numEmptyStateCards?: number
   parentWidth: number
+  isFromHoverMenu?: boolean
+  setIsHovered?: () => void
 }
 
 const TeamCardList = memo(
@@ -25,10 +28,14 @@ const TeamCardList = memo(
     teamFilter,
     numEmptyStateCards: numberEmptyStateCards = 3,
     parentWidth,
+    isFromHoverMenu = false,
+    setIsHovered,
   }: TeamCardListProperties) => {
-    const { data, loading, refetch } = useQuery<GetTeamsQuery>(queries.GET_TEAMS)
+    const { data, loading, refetch } = useQuery<GetTeamsQuery>(
+      isFromHoverMenu ? queries.GET_USER_TEAMS_AND_COMPANIES : queries.GET_TEAMS,
+    )
     const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
-    const [teams, setEdges] = useConnectionEdges<Team>()
+    const [teams, setTeamEdges] = useConnectionEdges<Team>()
 
     const filtredTeams = useMemo(() => {
       return teams.filter((team) =>
@@ -52,10 +59,10 @@ const TeamCardList = memo(
             style={{
               ...style,
             }}
-            overflow="hidden"
+            overflow="visible"
             pr={columnIndex !== 0 && columnIndex % 2 === 0 ? '0px' : '30px'}
           >
-            <TeamCard id={team.id} />
+            <TeamCard id={team.id} isFromHoverMenu={isFromHoverMenu} />
           </Box>
         )
       )
@@ -78,8 +85,58 @@ const TeamCardList = memo(
     }, [wereTeamsLoaded, orderedTeams, loadTeamsOnRecoil])
 
     useEffect(() => {
-      if (data) setEdges(data.teams.edges)
-    }, [data, setEdges])
+      if (data) {
+        if (isFromHoverMenu && data.me) {
+          const uniqByTeamsAndCompanies = uniqBy(
+            [...data.me.teams.edges, ...data.me.companies.edges],
+            'node.id',
+          )
+          // WARNING: Tive que realizar este uniqby pois atualmente existe a possibilidade de você estar em uma empresa e não estar no "time" da empresa, e vice-versa, ou seja, causava de aparecer duas vezes a empresa na listagem. Ao mesmo tempo, não pude mexer nisso no back-end pois iria ocasionar em alterações em diversas partes da plataforma.
+
+          setTeamEdges(uniqByTeamsAndCompanies)
+
+          return
+        }
+
+        setTeamEdges(data.teams.edges)
+      }
+    }, [data, setTeamEdges, isFromHoverMenu])
+
+    if (isFromHoverMenu) {
+      return wereTeamsLoaded ? (
+        <Grid
+          mt="24px"
+          mb="24px"
+          gridGap={10}
+          gridTemplateColumns="repeat(2, 1fr)"
+          onClick={setIsHovered}
+        >
+          {orderedTeams.map((team) => {
+            return (
+              <GridItem
+                key={team.id}
+                overflow="visible"
+                // Pr={columnIndex !== 0 && columnIndex % 2 === 0 ? '0px' : '30px'}
+              >
+                <TeamCard id={team.id} isFromHoverMenu={isFromHoverMenu} />
+              </GridItem>
+            )
+          })}
+        </Grid>
+      ) : (
+        <Grid
+          mt="24px"
+          mb="24px"
+          gridGap={10}
+          gridTemplateColumns="repeat(2, 1fr)"
+          onClick={setIsHovered}
+        >
+          {emptyState.map(() => (
+            <TeamCard key={Math.random()} />
+          ))}
+        </Grid>
+      )
+    }
 
     return wereTeamsLoaded ? (
       <FixedSizeGrid
@@ -89,6 +146,7 @@ const TeamCardList = memo(
         rowCount={Math.ceil(orderedTeams.length / 3)}
         columnWidth={columnWidth}
         rowHeight={rowHeight}
+        style={{ overflow: 'visible' }}
       >
         {renderTeam}
       </FixedSizeGrid>

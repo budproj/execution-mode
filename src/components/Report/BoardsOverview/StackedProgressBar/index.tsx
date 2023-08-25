@@ -39,7 +39,6 @@ const StackedProgressBar = ({
         .filter((confidence) => confidence.quantity > 0),
     [confidences, quantities],
   )
-  console.log({ confidencesToRender })
 
   return isLoading ? (
     <StackedProgressBarSkeleton />

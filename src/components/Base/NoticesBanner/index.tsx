@@ -6,7 +6,7 @@ import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import messages from './messages'
 
-const storageKey = 'Bud@new-feature.draft-mode'
+export const storageKey = 'Bud@new-feature.draft-mode'
 
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()

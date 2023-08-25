@@ -1,0 +1,9 @@
+query GET_OTHER_TEAMS {
+  teams(first: 20) {
+    edges {
+      node {
+        name
+        id
+      }
+    }}
+}

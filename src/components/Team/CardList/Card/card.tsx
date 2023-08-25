@@ -18,6 +18,7 @@ import messages from './messages'
 
 export interface TeamCardProperties {
   id?: Team['id']
+  isFromHoverMenu?: boolean
 }
 
 const HoverableWrapper = styled(Box)`
@@ -28,7 +29,7 @@ const HoverableWrapper = styled(Box)`
   }
 `
 
-const TeamCard = memo(({ id }: TeamCardProperties) => {
+const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
   const [users, setUserEdges] = useConnectionEdges<User>()
@@ -51,26 +52,26 @@ const TeamCard = memo(({ id }: TeamCardProperties) => {
       shadowStyle={shadowStrokeLight}
       bg="white"
       borderRadius={16}
-      py={12}
       px={10}
+      py={isFromHoverMenu ? 0 : 12}
+      _hover={{ borderLeftRadius: '25px' }}
     >
-      {isAllowedToEditTeam && (
+      {isAllowedToEditTeam && !isFromHoverMenu && (
         <MenuCard position="absolute" top="20px" right="20px" teamId={team?.id} />
       )}
-      <IntlLink href={`explore/${id ?? '#'}`}>
-        <Flex direction="column" gridGap={6} maxW="90%" minH="300px">
-          <Flex flexGrow={1} direction="column" justifyContent="flex-end">
-            <Box minH={8}>
-              {isCompany && (
-                <CrownIcon
-                  title={intl.formatMessage(messages.crownIconTitle)}
-                  desc={intl.formatMessage(messages.crownIconDesc)}
-                  w={10}
-                  h="auto"
-                  fill="yellow.500"
-                />
-              )}
-            </Box>
+      <IntlLink href={`/explore/${id ?? '#'}`} as={`/explore/${id ?? '#'}`}>
+        <Flex direction="column" gridGap={6} maxW="90%" minH="300px" justifyContent="center">
+          <Flex direction="column" justifyContent="flex-end">
+            {isCompany && (
+              <CrownIcon
+                title={intl.formatMessage(messages.crownIconTitle)}
+                desc={intl.formatMessage(messages.crownIconDesc)}
+                w={10}
+                h="auto"
+                fill="yellow.500"
+                mb={2}
+              />
+            )}
             <Skeleton isLoaded={isLoaded} mt={2} {...buildSkeletonMinSize(isLoaded, 200, 40)}>
               <Heading size="lg" color="black.900">
                 {team?.name}
@@ -84,21 +85,42 @@ const TeamCard = memo(({ id }: TeamCardProperties) => {
             </Text>
           </SkeletonText>
 
-          <Stack direction="row" gridGap={4} alignItems="center">
-            <Skeleton isLoaded={isLoaded} borderRadius="full" flexGrow={1} display="flex">
-              <SliderWithFilledTrack trackThickness={3} value={progress} trackBg="black.200" />
-            </Skeleton>
+          {isFromHoverMenu ? (
+            <>
+              <Box pt={0}>
+                <DynamicAvatarGroup users={users} isLoaded={isLoaded} />
+              </Box>
+              <Stack direction="row" gridGap={4} alignItems="center">
+                <Skeleton isLoaded={isLoaded} borderRadius="full" flexGrow={1} display="flex">
+                  <SliderWithFilledTrack trackThickness={3} value={progress} trackBg="black.200" />
+                </Skeleton>
 
-            <Skeleton isLoaded={isLoaded} borderRadius="full">
-              <Text fontSize="md" color="black.600">
-                {intl.formatNumber(progress / 100, { style: 'percent' })}
-              </Text>
-            </Skeleton>
-          </Stack>
+                <Skeleton isLoaded={isLoaded} borderRadius="full">
+                  <Text fontSize="md" color="black.600">
+                    {intl.formatNumber(progress / 100, { style: 'percent' })}
+                  </Text>
+                </Skeleton>
+              </Stack>
+            </>
+          ) : (
+            <>
+              <Stack direction="row" gridGap={4} alignItems="center">
+                <Skeleton isLoaded={isLoaded} borderRadius="full" flexGrow={1} display="flex">
+                  <SliderWithFilledTrack trackThickness={3} value={progress} trackBg="black.200" />
+                </Skeleton>
 
-          <Box pt={12}>
-            <DynamicAvatarGroup users={users} isLoaded={isLoaded} />
-          </Box>
+                <Skeleton isLoaded={isLoaded} borderRadius="full">
+                  <Text fontSize="md" color="black.600">
+                    {intl.formatNumber(progress / 100, { style: 'percent' })}
+                  </Text>
+                </Skeleton>
+              </Stack>
+
+              <Box pt={12}>
+                <DynamicAvatarGroup users={users} isLoaded={isLoaded} />
+              </Box>
+            </>
+          )}
         </Flex>
       </IntlLink>
     </HoverableWrapper>
