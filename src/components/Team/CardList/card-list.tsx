@@ -103,7 +103,7 @@ const TeamCardList = memo(
     }, [data, setTeamEdges, isFromHoverMenu])
 
     if (isFromHoverMenu) {
-      return (
+      return wereTeamsLoaded ? (
         <Grid
           mt="24px"
           mb="24px"
@@ -122,6 +122,18 @@ const TeamCardList = memo(
               </GridItem>
             )
           })}
+        </Grid>
+      ) : (
+        <Grid
+          mt="24px"
+          mb="24px"
+          gridGap={10}
+          gridTemplateColumns="repeat(2, 1fr)"
+          onClick={setIsHovered}
+        >
+          {emptyState.map(() => (
+            <TeamCard key={Math.random()} />
+          ))}
         </Grid>
       )
     }
