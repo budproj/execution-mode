@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Box, Grid, GridItem } from '@chakra-ui/react'
 import orderBy from 'lodash/orderBy'
+import uniqBy from 'lodash/uniqBy'
 import React, { memo, useEffect, useMemo } from 'react'
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window'
 import { useRecoilState } from 'recoil'
@@ -34,7 +35,7 @@ const TeamCardList = memo(
       isFromHoverMenu ? queries.GET_USER_TEAMS_AND_COMPANIES : queries.GET_TEAMS,
     )
     const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
-    const [teams, setEdges] = useConnectionEdges<Team>()
+    const [teams, setTeamEdges] = useConnectionEdges<Team>()
 
     const filtredTeams = useMemo(() => {
       return teams.filter((team) =>
@@ -86,14 +87,20 @@ const TeamCardList = memo(
     useEffect(() => {
       if (data) {
         if (isFromHoverMenu && data.me) {
-          const userTeamsAndCompanies = [...data.me.teams.edges, ...data.me.companies.edges]
-          setEdges(userTeamsAndCompanies)
+          const uniqByTeamsAndCompanies = uniqBy(
+            [...data.me.teams.edges, ...data.me.companies.edges],
+            'node.id',
+          )
+          // WARNING: Tive que realizar este uniqby pois atualmente existe a possibilidade de você estar em uma empresa e não estar no "time" da empresa, e vice-versa, ou seja, causava de aparecer duas vezes a empresa na listagem. Ao mesmo tempo, não pude mexer nisso no back-end pois iria ocasionar em alterações em diversas partes da plataforma.
+
+          setTeamEdges(uniqByTeamsAndCompanies)
+
           return
         }
 
-        setEdges(data.teams.edges)
+        setTeamEdges(data.teams.edges)
       }
-    }, [data, setEdges, isFromHoverMenu])
+    }, [data, setTeamEdges, isFromHoverMenu])
 
     if (isFromHoverMenu) {
       return (
