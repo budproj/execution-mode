@@ -4,8 +4,9 @@ type NoticesBannerMessages = 'learMoreAboutRetrospectiveMessageBanner' | 'learMo
 
 export default defineMessages<NoticesBannerMessages>({
   learMoreAboutRetrospectiveMessageBanner: {
-    defaultMessage: 'Já checou seus OKRs hoje? Parece que tem novidade por lá... 👀',
-    id: '5PP1DF',
+    defaultMessage:
+      'Está construindo seus OKRs? Conheça o novo Modo Rascunho e colabore com seu time!',
+    id: '4+YuJi',
     description:
       'This message appears on the news banner to invite the user to learn about the Spotlight feature.',
   },
