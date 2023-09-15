@@ -1,7 +1,38 @@
-query GET_USER_NAME_AND_GENDER {
+query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
   me {
     id
     firstName
     gender
+    settings {
+      edges {
+        node {
+          preferences
+        }
+      }
+    }
+     teams {
+      edges {
+        node {
+          name
+          id
+        }
+      }
+    }
+    companies {
+      edges {
+        node {
+          name
+          id
+        }
+      }
+    }
   }
+}
+
+
+query GET_TEAM_BY_ID($teamId: ID!) {
+    team(id: $teamId) {
+      name
+      id
+    }
 }
