@@ -8,12 +8,22 @@ type MissioncControlUserTask = {
   completed: boolean
 }
 
+export type MissionControlTeamScore = {
+  teamId: string
+  weekId: string
+  progress: number
+  available: number
+}
+
 export type GetUserTasksOutput = MissioncControlUserTask[]
 export interface GetUserTasksRequest {
   userID: string
   teamID: string
 }
 
+export interface GetTeamScoreRequest {
+  teamID: string
+}
 export interface SendFeedbackRequest {
   completionId: string
   userId: string
@@ -26,6 +36,14 @@ export class MissionControlService {
   async getUserTasks({ teamID, userID }: GetUserTasksRequest) {
     const { data } = await this.client.get<GetUserTasksOutput>('tasks', {
       params: { userID, teamID },
+    })
+
+    return data
+  }
+
+  async getTeamScore({ teamID }: GetTeamScoreRequest) {
+    const { data } = await this.client.get<MissionControlTeamScore>('score', {
+      params: { teamID },
     })
 
     return data

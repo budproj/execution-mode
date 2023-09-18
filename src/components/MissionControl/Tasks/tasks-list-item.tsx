@@ -10,17 +10,24 @@ import {
 
 interface TaskCardProperties {
   template: TASK_TEMPLATE
+  completed: boolean
+  teamID: string
 }
 
-export const TasksListIteam = ({ template }: TaskCardProperties) => {
-  const config = useGetMissionControlTasksConfig(template)
+export const TasksListItem = ({ template, completed, teamID }: TaskCardProperties) => {
+  const config = useGetMissionControlTasksConfig(template, completed, teamID)
 
   return (
-    <TaskCard.Root>
+    <TaskCard.Root completed={completed} action={config.action}>
       <VStack gap={1}>
-        <TaskCard.Content title={config.content.title} subtitle={config.content.description} />
+        <TaskCard.Content
+          completed={completed}
+          title={config.content.title}
+          subtitle={config.content.description}
+        />
         <TaskCard.Actions
           role={config.actions.role}
+          completed={completed}
           label={config.actions.label}
           w="100%"
           textAlign="center"

@@ -1,4 +1,5 @@
 import { useToken } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React, { ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -25,6 +26,7 @@ export function getEnumKeyByValue<T>(enumObject: T, value: string) {
 }
 
 interface UseGetMissionControlTasksConfigOutput {
+  action?: () => void
   content: {
     title: string
     description: string
@@ -38,9 +40,13 @@ interface UseGetMissionControlTasksConfigOutput {
 
 export const useGetMissionControlTasksConfig = (
   template: TASK_TEMPLATE,
+  completed: boolean,
+  teamID: string,
 ): UseGetMissionControlTasksConfigOutput => {
-  const [yellow] = useToken('colors', ['yellow.600'])
+  const [yellow, iconFillColorCompleted] = useToken('colors', ['yellow.600', 'green.500'])
   const intl = useIntl()
+  const route = useRouter()
+
   const taskCardIcon = new Map([
     [
       TASK_TEMPLATE.KR_CHECK_IN,
@@ -49,6 +55,7 @@ export const useGetMissionControlTasksConfig = (
         desc="ícone de um quebra cabeça apresentado em um card de task de boas práticas"
         maxW="48px"
         maxH="48px"
+        fill={completed ? iconFillColorCompleted : '#6F6EFF'}
       />,
     ],
     [
@@ -58,6 +65,7 @@ export const useGetMissionControlTasksConfig = (
         desc="ícone de um quebra cabeça apresentado em um card de task de boas práticas"
         maxW="48px"
         maxH="48px"
+        fill={completed ? iconFillColorCompleted : '#6F6EFF'}
       />,
     ],
     [
@@ -67,6 +75,7 @@ export const useGetMissionControlTasksConfig = (
         desc="ícone de um quebra cabeça apresentado em um card de task de boas práticas"
         maxW="48px"
         maxH="48px"
+        fill={completed ? iconFillColorCompleted : '#F1BF25'}
       />,
     ],
     [
@@ -76,6 +85,7 @@ export const useGetMissionControlTasksConfig = (
         desc="ícone de um quebra cabeça apresentado em um card de task de boas práticas"
         maxW="48px"
         maxH="48px"
+        fill={completed ? iconFillColorCompleted : '#F1BF25'}
       />,
     ],
     [
@@ -85,6 +95,7 @@ export const useGetMissionControlTasksConfig = (
         desc="ícone de um quebra cabeça apresentado em um card de task de boas práticas"
         maxW="48px"
         maxH="48px"
+        fill={completed ? iconFillColorCompleted : '#F1BF25'}
       />,
     ],
     [
@@ -94,6 +105,7 @@ export const useGetMissionControlTasksConfig = (
         desc="ícone de um quebra cabeça apresentado em um card de task de boas práticas"
         maxW="48px"
         maxH="48px"
+        fill={completed ? iconFillColorCompleted : '#F1BF25'}
       />,
     ],
   ])
@@ -139,6 +151,15 @@ export const useGetMissionControlTasksConfig = (
     [TASK_TEMPLATE.OUTDATED_KEY_RESULT_COMMENT, messages.goToTeamActionLabelMessage],
   ])
 
+  const taskCardAction = new Map([
+    [TASK_TEMPLATE.KR_CHECK_IN, async () => route.push('/my-things')],
+    [TASK_TEMPLATE.EMPTY_DESCRIPTION, async () => route.push(`/explore/${teamID}`)],
+    [TASK_TEMPLATE.KR_COMMENT, async () => route.push(`/explore/${teamID}`)],
+    [TASK_TEMPLATE.LOW_CONFIDENCE_KR_COMMENT, async () => route.push(`/explore/${teamID}`)],
+    [TASK_TEMPLATE.BARRIER_KR_COMMENT, async () => route.push(`/explore/${teamID}`)],
+    [TASK_TEMPLATE.OUTDATED_KEY_RESULT_COMMENT, async () => route.push(`/explore/${teamID}`)],
+  ])
+
   return {
     content: {
       title: intl.formatMessage(
@@ -156,5 +177,6 @@ export const useGetMissionControlTasksConfig = (
         taskCardActionLabel.get(template) ?? messages.goToTeamActionLabelMessage,
       ),
     },
+    action: taskCardAction.get(template),
   }
 }

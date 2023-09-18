@@ -15,14 +15,39 @@ const data = [
   { name: 'good', value: 33.33 },
 ]
 
+const ranges = (value: number) => {
+  if (value < 15) {
+    return { range: 'low', emoji: 1 }
+  }
+
+  if (value >= 16 && value <= 30) {
+    return { range: 'regular', emoji: 2 }
+  }
+
+  if (value >= 31 && value <= 60) {
+    return { range: 'good', emoji: 4 }
+  }
+
+  if (value >= 61 && value <= 80) {
+    return { range: 'veryGood', emoji: 5 }
+  }
+
+  return { range: 'excellent', emoji: 5 }
+}
+
+interface PieChartWithNeedleProperties {
+  value: number
+  goalValue: number
+}
+
 const cx = 165
 const cy = 115
 const indexR = 60
 const oR = 100
-const value = 80
 
 const needle = (
   value: number,
+  goalValue: number,
   data: any,
   cx: number,
   cy: number,
@@ -35,7 +60,18 @@ const needle = (
     total += v.value
   }
 
-  const ang = 180 * (1 - value / total)
+  let valueAux = 0
+  if (value === 0) {
+    valueAux = -20
+  } else if (value >= 45 && value <= 50) {
+    valueAux = 4
+  } else if (value > 61) {
+    valueAux = 18
+  } else if (value < 61) {
+    valueAux = -10
+  }
+
+  const ang = 180 * (1 - (value + valueAux) / total)
   const sin = Math.sin(-RADIAN * ang)
   const cos = Math.cos(-RADIAN * ang)
   const r = -10
@@ -50,7 +86,16 @@ const needle = (
   const xp = x0 + 20 * cos
   const yp = y0 + 20 * sin
 
-  const ang2 = 180 * (1 - (value + 30) / total)
+  let goalValueAux = 0
+  if (goalValue > 61) {
+    goalValueAux = 10
+  } else if (goalValue < 61) {
+    goalValueAux = -20
+  }
+
+  // Const ang2 = 180 * (1 - (value + 30) / total)
+  const ang2 = 180 * (1 - (goalValue + goalValueAux) / total)
+
   const sin2 = Math.sin(-RADIAN * ang2)
   const cos2 = Math.cos(-RADIAN * ang2)
   const { lengthFactor, innerLengthFactor } = mapValueToAngles(value)
@@ -81,13 +126,23 @@ const needle = (
   ]
 }
 
-const CustomizedPieCenterText = () => {
+const CustomizedPieCenterText = (properties: { rangeValue: number }) => {
   const { getEmoji } = useGetEmoji()
+
+  console.log({ properties })
+
+  const labelText = new Map([
+    ['low', 'Baixo'],
+    ['regular', 'Regular'],
+    ['good', 'Bom'],
+    ['veryGood', 'Muito bom'],
+    ['excellent', 'Excelente'],
+  ])
 
   return (
     <>
       <Flex position="absolute" top="90px" left="145px">
-        {getEmoji({ felling: 5, size: 14 })}
+        {getEmoji({ felling: ranges(properties.rangeValue).emoji, size: 14 })}
       </Flex>
       <Flex flexDirection="column" position="absolute" top="140px" left="73px" textAlign="center">
         <Text marginTop="20px" color="gray.500" fontSize="12px" position="absolute" width="200px">
@@ -101,14 +156,14 @@ const CustomizedPieCenterText = () => {
           position="absolute"
           width="200px"
         >
-          MUITO BOM
+          {labelText.get(ranges(properties.rangeValue).range)?.toUpperCase()}
         </Text>
       </Flex>
     </>
   )
 }
 
-const PieChartWithNeedle = () => {
+const PieChartWithNeedle = ({ value, goalValue }: PieChartWithNeedleProperties) => {
   const [red] = useToken('colors', ['red.500'])
   const [yellow] = useToken('colors', ['yellow.600'])
   const [green] = useToken('colors', ['green.500'])
@@ -123,7 +178,7 @@ const PieChartWithNeedle = () => {
 
   return (
     <Box>
-      <PieChart width={420} height={285}>
+      <PieChart width={345} height={285}>
         <Pie
           dataKey="value"
           startAngle={220}
@@ -146,9 +201,9 @@ const PieChartWithNeedle = () => {
             />
           ))}
         </Pie>
-        {needle(value, data, cx, cy, indexR, oR, '#6F6EFF')}
+        {needle(value, goalValue, data, cx, cy, indexR, oR, '#6F6EFF')}
       </PieChart>
-      <CustomizedPieCenterText />
+      <CustomizedPieCenterText rangeValue={value} />
     </Box>
   )
 }

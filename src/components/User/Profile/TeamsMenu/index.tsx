@@ -1,5 +1,14 @@
 import { useMutation, useQuery } from '@apollo/client'
-import { Button, Flex, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import {
+  Button,
+  Flex,
+  FlexProps,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
@@ -12,7 +21,7 @@ import meAtom from 'src/state/recoil/user/me'
 
 import queries from './queries.gql'
 
-interface TeamsMenuProfileProperties {
+interface TeamsMenuProfileProperties extends FlexProps {
   teams?: Array<Partial<Team>>
   mainTeamId?: Team['id']
   setMainTeam: any
@@ -28,6 +37,7 @@ export const TeamsMenuProfile = ({
   teams,
   mainTeamId,
   setMainTeam,
+  ...rest
 }: TeamsMenuProfileProperties) => {
   const teamsToMap = teams?.filter((team) => team.id !== mainTeamId)
   const myID = useRecoilValue(meAtom)
@@ -69,7 +79,7 @@ export const TeamsMenuProfile = ({
   }, [mainTeamRequest, setSelectedDashboardTeam])
 
   return (
-    <Flex paddingTop={10} px={20}>
+    <Flex paddingTop={10} px={20} {...rest} justifyContent="space-between">
       <Menu>
         <MenuButton
           color="white"
@@ -137,7 +147,6 @@ export const TeamsMenuProfile = ({
       </Menu>
       <Flex
         marginLeft="auto"
-        marginRight="50px"
         alignItems="center"
         justifyContent="center"
         as={Button}

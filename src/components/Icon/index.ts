@@ -174,4 +174,6 @@ export { default as HandbagIcon } from './HandbagIcon'
 
 export { default as ExclamatinIcon } from './ExclamationIcon'
 
+export { default as LikeIcon } from './LikeIcon'
+
 export * from './types'

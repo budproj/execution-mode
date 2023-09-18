@@ -23,6 +23,10 @@ export function mapValueToAngles(value: number) {
 }
 
 export function mapValueToAngle(value: number) {
+  if (value <= 10) {
+    return 8 + (value / 20) * (3 - 5)
+  }
+
   if (value <= 20) {
     return 5 + (value / 20) * (3 - 5)
   }

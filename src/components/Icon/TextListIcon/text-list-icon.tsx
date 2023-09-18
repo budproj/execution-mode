@@ -6,10 +6,10 @@ import { AcessibleIconProperties } from 'src/components/Icon/types'
 export interface TextListIconProperties extends IconProps, AcessibleIconProperties {}
 
 const TextListIcon = ({ title, desc, ...rest }: TextListIconProperties): ReactElement => (
-  <Icon width="49" height="48" viewBox="0 0 49 48" fill="none" {...rest}>
+  <Icon width="49" height="48" viewBox="0 0 49 48" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
-    <circle cx="24.5" cy="24" r="24" fill="#6F6EFF" />
+    <circle cx="24.5" cy="24" r="24" />
     <path
       opacity="0.4"
       d="M28.8879 14H20.5069C17.4669 14 15.6969 15.78 15.6969 18.83V29.16C15.6969 32.26 17.4669 34 20.5069 34H28.8879C31.9769 34 33.6969 32.26 33.6969 29.16V18.83C33.6969 15.78 31.9769 14 28.8879 14Z"
@@ -25,7 +25,7 @@ const TextListIcon = ({ title, desc, ...rest }: TextListIconProperties): ReactEl
 )
 
 TextListIcon.defaultProps = {
-  fill: 'black',
+  fill: '#6F6EFF',
 }
 
 export default TextListIcon

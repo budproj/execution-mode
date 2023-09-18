@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
@@ -47,7 +47,7 @@ interface PreferencesProperties {
 const StyledDiv = styled('div')`
   width: 100%;
   position: absolute;
-  bottom: -70px;
+  top: 240px;
 
   > div {
     position: unset !important;
@@ -62,11 +62,11 @@ const StyledDiv = styled('div')`
 
 const StyledStack = styled(Stack)`
   @media (min-width: 1600px) {
-    gap: 10px;
+    gap: 110px;
   }
 
   @media (max-width: 1417px) {
-    gap: 22px;
+    gap: 185px;
   }
 `
 
@@ -76,7 +76,7 @@ const StyledMCWrapper = styled(MissionControlWrapper)`
   }
 
   @media (max-width: 1417px) {
-    top: 120px;
+    top: 195px;
   }
 `
 
@@ -99,8 +99,7 @@ const DashboardPage = () => {
 
   const pageTitle = called && !loading && intl.formatMessage(messages.greeting, { name: firstName })
 
-  const [selectedDashboardTeam, setSelectedDashboardTeam] =
-    useRecoilState(selectedDashboardTeamAtom)
+  const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
 
   useEffect(() => {
     if (data?.me.settings.edges[0]) {
@@ -117,29 +116,29 @@ const DashboardPage = () => {
   }, [data, setEdges])
 
   return (
-    <StyledStack bg="new-gray.50">
-      <Box bg="brand.500" h="55vh" position="relative">
-        <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
-        <PageHeader display="flex" gap={8} alignItems="center" py={10} px={20} flexGrow={1}>
-          <UserProfileHeader
-            canUpdate
-            onlyPicture
-            userID={userID}
-            isLoaded={!loading}
-            variantAvatar="circle"
-          />
-          <PageTitle id="greeting-user" color="white" fontSize={36}>
-            {pageTitle}
-          </PageTitle>
-        </PageHeader>
+    <StyledStack bg="new-gray.50" pb={20}>
+      <Box bg="brand.500" h="45vh" position="relative" zIndex={2}>
+        <Stack>
+          <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
+          <PageHeader display="flex" gap={8} alignItems="center" py={10} px={20} flexGrow={1}>
+            <UserProfileHeader
+              canUpdate
+              onlyPicture
+              userID={userID}
+              isLoaded={!loading}
+              variantAvatar="circle"
+            />
+            <PageTitle id="greeting-user" color="white" fontSize={36}>
+              {pageTitle}
+            </PageTitle>
+          </PageHeader>
+        </Stack>
         <StyledDiv>
-          <Image fill src="/images/shape-footer.svg" className="image" alt="mudar" />
+          <Image fill src="/images/shape-footer-teste.svg" className="image" alt="mudar" />
         </StyledDiv>
-        <StyledMCWrapper
-          position="absolute"
-          userID={userID}
-          teamID="92c82e64-836c-44a5-a8c1-0db63cd340b3"
-        />
+        {userID && selectedDashboardTeam?.id && (
+          <StyledMCWrapper position="absolute" userID={userID} teamID={selectedDashboardTeam?.id} />
+        )}
       </Box>
       <PageContent py={0}>
         <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
