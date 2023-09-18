@@ -144,6 +144,8 @@ export { default as BagIcon } from './BagIcon/bag-icon'
 
 export { default as StarIcon } from './StarIcon/star-icon'
 
+export { default as StarIconOutlined } from './StarIconOutlined/star-icon-outlined'
+
 export { default as TargetIcon } from './TargetIcon/target-icon'
 
 export { default as WriteIcon } from './WriteIcon/write-icon'

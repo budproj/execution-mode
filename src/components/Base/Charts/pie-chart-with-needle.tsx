@@ -1,26 +1,32 @@
+/* eslint-disable max-params */
 /* eslint-disable no-shadow */
-import { useToken } from '@chakra-ui/react'
+import { Box, Flex, Text, useToken } from '@chakra-ui/react'
 import React from 'react'
 import { PieChart, Pie, Cell } from 'recharts'
 
+import { useGetEmoji } from 'src/components/Routine/hooks'
+
+import { mapValueToAngle, mapValueToAngles } from './helpers'
+
 const RADIAN = Math.PI / 180
 const data = [
-  { name: 'low', value: 80 },
-  { name: 'medium', value: 45 },
-  { name: 'good', value: 25 },
+  { name: 'low', value: 33.33 },
+  { name: 'medium', value: 33.33 },
+  { name: 'good', value: 33.33 },
 ]
+
 const cx = 165
 const cy = 115
 const indexR = 60
 const oR = 100
-const value = 50
+const value = 80
 
 const needle = (
   value: number,
   data: any,
   cx: number,
   cy: number,
-  indexR: number,
+  indexR_: number,
   oR: number,
   color: string,
 ) => {
@@ -30,63 +36,120 @@ const needle = (
   }
 
   const ang = 180 * (1 - value / total)
-  const length = (indexR + 2 * oR) / 10
   const sin = Math.sin(-RADIAN * ang)
   const cos = Math.cos(-RADIAN * ang)
-  const r = 12
-  const x0 = cx + 5
-  const y0 = cy - 20
+  const r = -10
+  const shortenedLength = mapValueToAngle(value)
+
+  const x0 = cx + (indexR + r + shortenedLength) * cos // Adjust the starting point
+  const y0 = cy + (indexR + r + shortenedLength) * sin // Adjust the starting point
   const xba = x0 + r * sin
   const yba = y0 - r * cos
   const xbb = x0 - r * sin
   const ybb = y0 + r * cos
-  const xp = x0 + length * cos
-  const yp = y0 + length * sin
+  const xp = x0 + 20 * cos
+  const yp = y0 + 20 * sin
+
+  const ang2 = 180 * (1 - (value + 30) / total)
+  const sin2 = Math.sin(-RADIAN * ang2)
+  const cos2 = Math.cos(-RADIAN * ang2)
+  const { lengthFactor, innerLengthFactor } = mapValueToAngles(value)
+  // Adjust the starting point to move it closer to the tip of the circumference
+  const x02 = cx + oR * innerLengthFactor * cos2 // Adjust the factor to control how close the line is to the center horizontally
+  const y02 = cy + oR * innerLengthFactor * sin2 // Adjust the factor to control how close the line is to the center vertically
+
+  // Adjust the endpoint to make the line shorter
+  const xp2 = cx + oR * cos2 * (1 - lengthFactor)
+  const yp2 = cy + oR * sin2 * (1 - lengthFactor)
 
   return [
-    // <circle key={`circle-${color}`} cx={x0} cy={y0} r={r} fill={color} stroke="none" />,
-    // <path d="M25.7994 13.4421L2.22443 2.63074L4.89503 28.391L25.7994 13.4421Z" fill="#6F6EFF" stroke="white" stroke-width="3"/>
     <path
-      key={`path-${color}`}
+      key="1"
       d={`M${xba} ${yba}L${xbb} ${ybb} L${xp} ${yp} L${xba} ${yba}`}
-      fill="#6F6EFF"
       stroke="white"
-      strokeWidth="3"
+      strokeWidth="2px"
+      fill={color}
+    />,
+    <path
+      key="2"
+      d={value <= 80 ? `M${x02} ${y02} L${xp2} ${yp2}` : ''}
+      stroke="white"
+      strokeWidth="2px"
+      strokeDasharray={4}
+      fill={color}
     />,
   ]
+}
+
+const CustomizedPieCenterText = () => {
+  const { getEmoji } = useGetEmoji()
+
+  return (
+    <>
+      <Flex position="absolute" top="90px" left="145px">
+        {getEmoji({ felling: 5, size: 14 })}
+      </Flex>
+      <Flex flexDirection="column" position="absolute" top="140px" left="73px" textAlign="center">
+        <Text marginTop="20px" color="gray.500" fontSize="12px" position="absolute" width="200px">
+          Boas práticas
+        </Text>
+        <Text
+          fontSize="18px"
+          fontWeight={700}
+          marginTop="40px"
+          color="gray.500"
+          position="absolute"
+          width="200px"
+        >
+          MUITO BOM
+        </Text>
+      </Flex>
+    </>
+  )
 }
 
 const PieChartWithNeedle = () => {
   const [red] = useToken('colors', ['red.500'])
   const [yellow] = useToken('colors', ['yellow.600'])
   const [green] = useToken('colors', ['green.500'])
+  const [white] = useToken('colors', ['radial-gradient(black 1px, transparent 0)'])
 
   const colors = new Map([
     ['low', red],
     ['medium', yellow],
     ['good', green],
+    ['expected', white],
   ])
 
   return (
-    <PieChart width={420} height={285}>
-      <Pie
-        dataKey="value"
-        startAngle={220}
-        endAngle={-40}
-        data={data}
-        cx={cx}
-        cy={cy}
-        innerRadius={indexR}
-        outerRadius={oR}
-        fill="#8884d8"
-        stroke="none"
-      >
-        {data.map((entry, index) => (
-          <Cell key={`cell-${index + 1}`} fill={colors.get(entry.name)} />
-        ))}
-      </Pie>
-      {needle(value, data, cx, cy, indexR, oR, '#d0d000')}
-    </PieChart>
+    <Box>
+      <PieChart width={420} height={285}>
+        <Pie
+          dataKey="value"
+          startAngle={220}
+          endAngle={-40}
+          data={data}
+          cx={cx}
+          cy={cy}
+          innerRadius={indexR}
+          outerRadius={oR}
+          fill="#8884d8"
+        >
+          {data.map((entry, index) => (
+            <Cell
+              key={`cell-${index + 1}`}
+              fill={colors.get(entry.name)}
+              // Stroke={entry.name === 'expected' ? 'white' : 'none'}
+              // strokeWidth={entry.name === 'expected' ? '2px' : 'none'}
+              stroke="white"
+              strokeWidth="2px"
+            />
+          ))}
+        </Pie>
+        {needle(value, data, cx, cy, indexR, oR, '#6F6EFF')}
+      </PieChart>
+      <CustomizedPieCenterText />
+    </Box>
   )
 }
 

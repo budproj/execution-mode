@@ -2,8 +2,9 @@ import { useQuery } from '@apollo/client'
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilState } from 'recoil'
 
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
@@ -14,17 +15,39 @@ import MetricsOverview from 'src/components/Report/MetricsOverview'
 import { OverviewSummary } from 'src/components/Report/OverviewSummary'
 import TeamsOverview from 'src/components/Report/TeamsOverview'
 import { useGetCompanyCycles } from 'src/components/Report/hooks'
+import { Team } from 'src/components/Team/types'
 import { UserProfileHeader } from 'src/components/User/Profile/Header/wrapper'
+import { TeamsMenuProfile } from 'src/components/User/Profile/TeamsMenu'
+import { GraphQLConnection } from 'src/components/types'
+import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
 
 import messages from './messages'
 import queries from './queries.gql'
 
+interface GetUserNameGenderAndSettingsRequest {
+  me: {
+    id: string
+    firstName: string
+    gender: string
+    settings: {
+      edges: Array<{ node: { preferences: string } }>
+    }
+    teams: GraphQLConnection<Team>
+    companies: GraphQLConnection<Team>
+  }
+}
+
+interface PreferencesProperties {
+  main_team: string
+}
+
 const StyledDiv = styled('div')`
   width: 100%;
   position: absolute;
-  bottom: -25px;
+  bottom: -70px;
 
   > div {
     position: unset !important;
@@ -59,7 +82,13 @@ const StyledMCWrapper = styled(MissionControlWrapper)`
 
 const DashboardPage = () => {
   const intl = useIntl()
-  const { data, loading, called } = useQuery(queries.GET_USER_NAME_AND_GENDER)
+  const { data, loading, called } = useQuery<GetUserNameGenderAndSettingsRequest>(
+    queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
+  )
+
+  const [teams, setEdges] = useConnectionEdges<Team>()
+  const [mainTeamId, setMainTeamId] = useState('')
+
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
   const { firstName, id: userID } = data?.me ?? {}
 
@@ -70,9 +99,27 @@ const DashboardPage = () => {
 
   const pageTitle = called && !loading && intl.formatMessage(messages.greeting, { name: firstName })
 
+  const [selectedDashboardTeam, setSelectedDashboardTeam] =
+    useRecoilState(selectedDashboardTeamAtom)
+
+  useEffect(() => {
+    if (data?.me.settings.edges[0]) {
+      const parsedPreferences: PreferencesProperties = JSON.parse(
+        data?.me.settings.edges[0]?.node.preferences,
+      )
+      const mainTeamId = parsedPreferences.main_team
+      setMainTeamId(mainTeamId)
+    }
+  }, [data?.me.settings.edges])
+
+  useEffect(() => {
+    if (data) setEdges([...data.me.teams.edges, ...data.me.companies.edges])
+  }, [data, setEdges])
+
   return (
     <StyledStack bg="new-gray.50">
       <Box bg="brand.500" h="55vh" position="relative">
+        <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
         <PageHeader display="flex" gap={8} alignItems="center" py={10} px={20} flexGrow={1}>
           <UserProfileHeader
             canUpdate
