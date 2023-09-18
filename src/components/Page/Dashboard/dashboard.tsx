@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Box, Flex, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import Image from 'next/image'
 import React from 'react'
@@ -11,6 +11,7 @@ import { CADENCE } from 'src/components/Cycle/constants'
 import MissionControlWrapper from 'src/components/MissionControl/wrapper'
 import BoardsOverview from 'src/components/Report/BoardsOverview'
 import MetricsOverview from 'src/components/Report/MetricsOverview'
+import { OverviewSummary } from 'src/components/Report/OverviewSummary'
 import TeamsOverview from 'src/components/Report/TeamsOverview'
 import { useGetCompanyCycles } from 'src/components/Report/hooks'
 import { UserProfileHeader } from 'src/components/User/Profile/Header/wrapper'
@@ -36,6 +37,26 @@ const StyledDiv = styled('div')`
   }
 `
 
+const StyledStack = styled(Stack)`
+  @media (min-width: 1600px) {
+    gap: 10px;
+  }
+
+  @media (max-width: 1417px) {
+    gap: 22px;
+  }
+`
+
+const StyledMCWrapper = styled(MissionControlWrapper)`
+  @media (min-width: 1600px) {
+    top: 225px;
+  }
+
+  @media (max-width: 1417px) {
+    top: 120px;
+  }
+`
+
 const DashboardPage = () => {
   const intl = useIntl()
   const { data, loading, called } = useQuery(queries.GET_USER_NAME_AND_GENDER)
@@ -50,7 +71,7 @@ const DashboardPage = () => {
   const pageTitle = called && !loading && intl.formatMessage(messages.greeting, { name: firstName })
 
   return (
-    <Stack position="relative">
+    <StyledStack bg="new-gray.50">
       <Box bg="brand.500" h="55vh" position="relative">
         <PageHeader display="flex" gap={8} alignItems="center" py={10} px={20} flexGrow={1}>
           <UserProfileHeader
@@ -67,31 +88,38 @@ const DashboardPage = () => {
         <StyledDiv>
           <Image fill src="/images/shape-footer.svg" className="image" alt="mudar" />
         </StyledDiv>
+        <StyledMCWrapper
+          position="absolute"
+          userID={userID}
+          teamID="92c82e64-836c-44a5-a8c1-0db63cd340b3"
+        />
       </Box>
-      <MissionControlWrapper position="absolute" top="28vh" />
-      <PageContent bg="new-gray.50">
+      <PageContent py={0}>
         <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
 
-        <VStack alignItems="flex-start" gap={1}>
-          <Text color="gray.500" fontWeight="bold" fontSize="14px" textTransform="uppercase">
+        <Stack>
+          <Text color="new-gray.800" fontWeight={500} fontSize="18px" marginBottom="8px">
             {intl.formatMessage(messages.okrOverViewTitle)}
           </Text>
-          {/* <Flex gridGap="3rem">
-          <OverviewSummary
-            title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
-            cycle={yearly}
-            isLoading={companyCyclesLoading}
-            flex="1"
-          />
-          <OverviewSummary
-            title={intl.formatMessage(messages.quarterlySummaryTitle, { quarter: quarter?.period })}
-            cycle={quarter}
-            isLoading={companyCyclesLoading}
-            flex="1"
-          />
-        </Flex> */}
-          <BoardsOverview mt="0px !important" w="100%" />
-        </VStack>
+
+          <Flex gridGap="3rem">
+            <OverviewSummary
+              title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
+              cycle={yearly}
+              isLoading={companyCyclesLoading}
+              flex="1"
+            />
+            <OverviewSummary
+              title={intl.formatMessage(messages.quarterlySummaryTitle, {
+                quarter: quarter?.period,
+              })}
+              cycle={quarter}
+              isLoading={companyCyclesLoading}
+              flex="1"
+            />
+          </Flex>
+          <BoardsOverview pt="2rem" />
+        </Stack>
 
         <Box mt="36px">
           <Text color="new-gray.800" fontWeight={500} fontSize="18px" marginBottom="12px">
@@ -103,7 +131,7 @@ const DashboardPage = () => {
           </Flex>
         </Box>
       </PageContent>
-    </Stack>
+    </StyledStack>
   )
 }
 

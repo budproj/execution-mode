@@ -162,4 +162,14 @@ export { default as WandIcon } from './Wand'
 
 export { default as ThumbIcon } from './ThumbIcon'
 
+export { default as PuzzleIcon } from './PuzzleIcon'
+
+export { default as TextListIcon } from './TextListIcon'
+
+export { default as ChatIcon } from './ChatIcon'
+
+export { default as HandbagIcon } from './HandbagIcon'
+
+export { default as ExclamatinIcon } from './ExclamationIcon'
+
 export * from './types'

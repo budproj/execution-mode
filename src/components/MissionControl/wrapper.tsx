@@ -2,13 +2,18 @@ import { HStack, StyleProps } from '@chakra-ui/react'
 import React from 'react'
 
 import BestPracticesLighthouse from './BestPracticesLighthouse'
+import { MissionControlTasksWrapper } from './Tasks/wrapper'
 
-interface MissionControlWrapperProperties extends StyleProps {}
+interface MissionControlWrapperProperties extends StyleProps {
+  userID: string
+  teamID: string
+}
 
-const MissionControlWrapper = ({ ...rest }: MissionControlWrapperProperties) => {
+const MissionControlWrapper = ({ userID, teamID, ...rest }: MissionControlWrapperProperties) => {
   return (
     <HStack {...rest}>
       <BestPracticesLighthouse />
+      <MissionControlTasksWrapper userID={userID} teamID={teamID} />
     </HStack>
   )
 }

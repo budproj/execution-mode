@@ -41,8 +41,8 @@ export default defineMessages<DashboardPageMessage>({
     description: 'The summery title for the quarterly OKRs',
   },
   okrOverViewTitle: {
-    defaultMessage: 'status da estratégia',
-    id: 'u3U7ET',
+    defaultMessage: 'Visão geral dos OKRs',
+    id: '7VhC49',
     description: 'The title of the OKRs overview',
   },
   teamsOverviewTitle: {
