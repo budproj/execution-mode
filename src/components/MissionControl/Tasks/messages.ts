@@ -15,6 +15,8 @@ type MissionControlTaskMessages =
   | 'barrierKeyResultCommentTaskMessageDescription'
   | 'goToKeyResultActionLabelMessage'
   | 'goToTeamActionLabelMessage'
+  | 'listTasksSectionTitle'
+  | 'leaderLabel'
 
 export default defineMessages<MissionControlTaskMessages>({
   keyResultCheckinTaskMessageTitle: {
@@ -90,6 +92,16 @@ export default defineMessages<MissionControlTaskMessages>({
   goToTeamActionLabelMessage: {
     defaultMessage: 'Ir para o time',
     id: 'sBSvDB',
+    description: 'The page title that our users should see in the dashboard page',
+  },
+  listTasksSectionTitle: {
+    defaultMessage: 'desafios e Tarefas da semana',
+    id: 'PJSgbG',
+    description: 'The page title that our users should see in the dashboard page',
+  },
+  leaderLabel: {
+    defaultMessage: 'Líder',
+    id: 'j259Ph',
     description: 'The page title that our users should see in the dashboard page',
   },
 })

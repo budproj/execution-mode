@@ -164,7 +164,11 @@ export const useGetMissionControlTasksConfig = (
     content: {
       title: intl.formatMessage(
         taskTitleMessages.get(template) ?? messages.keyResultCheckinTaskMessageTitle,
-        { leader: <span style={{ color: yellow }}>Líder: </span> },
+        {
+          leader: (
+            <span style={{ color: yellow }}>{intl.formatMessage(messages.leaderLabel)}: </span>
+          ),
+        },
       ) as string,
       description: intl.formatMessage(
         taskDescriptionMessages.get(template) ?? messages.keyResultCheckinTaskMessageDescription,

@@ -137,7 +137,12 @@ const DashboardPage = () => {
           <Image fill src="/images/shape-footer-teste.svg" className="image" alt="mudar" />
         </StyledDiv>
         {userID && selectedDashboardTeam?.id && (
-          <StyledMCWrapper position="absolute" userID={userID} teamID={selectedDashboardTeam?.id} />
+          <StyledMCWrapper
+            position="absolute"
+            userID={userID}
+            teamID={selectedDashboardTeam?.id}
+            pr={20}
+          />
         )}
       </Box>
       <PageContent py={0}>

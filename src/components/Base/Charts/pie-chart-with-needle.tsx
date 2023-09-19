@@ -2,11 +2,13 @@
 /* eslint-disable no-shadow */
 import { Box, Flex, Text, useToken } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 import { PieChart, Pie, Cell } from 'recharts'
 
 import { useGetEmoji } from 'src/components/Routine/hooks'
 
 import { mapValueToAngle, mapValueToAngles } from './helpers'
+import messages from './messages'
 
 const RADIAN = Math.PI / 180
 const data = [
@@ -128,15 +130,14 @@ const needle = (
 
 const CustomizedPieCenterText = (properties: { rangeValue: number }) => {
   const { getEmoji } = useGetEmoji()
-
-  console.log({ properties })
+  const intl = useIntl()
 
   const labelText = new Map([
-    ['low', 'Baixo'],
-    ['regular', 'Regular'],
-    ['good', 'Bom'],
-    ['veryGood', 'Muito bom'],
-    ['excellent', 'Excelente'],
+    ['low', messages.lowStatusPieChartMessage],
+    ['regular', messages.regularStatusPieChartMessage],
+    ['good', messages.goodStatusPieChartMessage],
+    ['veryGood', messages.veryGoodStatusPieChartMessage],
+    ['excellent', messages.excellentStatusPieChartMessage],
   ])
 
   return (
@@ -146,7 +147,7 @@ const CustomizedPieCenterText = (properties: { rangeValue: number }) => {
       </Flex>
       <Flex flexDirection="column" position="absolute" top="140px" left="73px" textAlign="center">
         <Text marginTop="20px" color="gray.500" fontSize="12px" position="absolute" width="200px">
-          Boas práticas
+          {intl.formatMessage(messages.labelPieChartMessage)}
         </Text>
         <Text
           fontSize="18px"
@@ -156,7 +157,12 @@ const CustomizedPieCenterText = (properties: { rangeValue: number }) => {
           position="absolute"
           width="200px"
         >
-          {labelText.get(ranges(properties.rangeValue).range)?.toUpperCase()}
+          {intl
+            .formatMessage(
+              labelText.get(ranges(properties.rangeValue).range) ??
+                messages.regularStatusPieChartMessage,
+            )
+            ?.toUpperCase()}
         </Text>
       </Flex>
     </>
