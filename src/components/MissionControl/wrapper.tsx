@@ -2,7 +2,6 @@ import { HStack, StyleProps } from '@chakra-ui/react'
 import React from 'react'
 
 import BestPracticesLighthouse from './BestPracticesLighthouse'
-import { MissionControlTasksWrapper } from './Tasks/wrapper'
 
 interface MissionControlWrapperProperties extends StyleProps {
   userID: string
@@ -13,7 +12,7 @@ const MissionControlWrapper = ({ userID, teamID, ...rest }: MissionControlWrappe
   return (
     <HStack {...rest} w="100%">
       <BestPracticesLighthouse teamID={teamID} />
-      <MissionControlTasksWrapper userID={userID} teamID={teamID} />
+      {/* <MissionControlTasksWrapper userID={userID} teamID={teamID} /> */}
     </HStack>
   )
 }
