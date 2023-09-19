@@ -53,7 +53,6 @@ const needle = (
   data: any,
   cx: number,
   cy: number,
-  indexR_: number,
   oR: number,
   color: string,
 ) => {
@@ -207,7 +206,7 @@ const PieChartWithNeedle = ({ value, goalValue }: PieChartWithNeedleProperties) 
             />
           ))}
         </Pie>
-        {needle(value, goalValue, data, cx, cy, indexR, oR, '#6F6EFF')}
+        {needle(value, goalValue, data, cx, cy, oR, '#6F6EFF')}
       </PieChart>
       <CustomizedPieCenterText rangeValue={value} />
     </Box>

@@ -65,7 +65,7 @@ const LongTextAnswerCard = ({ answerData, isLoaded }: LongTextAnswerCardProperti
 
   const icons: Record<string, JSX.Element> = {
     '95b84e67-d5b6-4fcf-938a-b4c9897596cb': (
-      <StarIcon desc={intl.formatMessage(messages.starIconDesc)} />
+      <StarIcon desc={intl.formatMessage(messages.starIconDesc)} withCircle={false} />
     ),
     'a1d5b993-9430-40bb-8f0f-47cda69720b9': (
       <TargetIcon desc={intl.formatMessage(messages.targetIconDesc)} />

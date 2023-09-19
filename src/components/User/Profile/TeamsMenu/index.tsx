@@ -55,17 +55,14 @@ export const TeamsMenuProfile = ({
 
   const isSelectedTeamTheMainTeam = selectedDashboardTeam?.id === mainTeamId
 
-  const [updateTeam, { loading: isUpdatingTeam }] = useMutation<UpdateTeamMutationProperties>(
-    queries.UPDATE_USER_MAIN_TEAM,
-    {
-      onCompleted: (data) => {
-        console.log({ data })
-        const parsedPreferences: { main_team: string } = JSON.parse(data.updateMainTeam.preferences)
+  const [updateTeam] = useMutation<UpdateTeamMutationProperties>(queries.UPDATE_USER_MAIN_TEAM, {
+    onCompleted: (data) => {
+      console.log({ data })
+      const parsedPreferences: { main_team: string } = JSON.parse(data.updateMainTeam.preferences)
 
-        setMainTeam(parsedPreferences.main_team)
-      },
+      setMainTeam(parsedPreferences.main_team)
     },
-  )
+  })
 
   const handleUpdateTeam = async () => {
     await updateTeam({
