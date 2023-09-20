@@ -10,6 +10,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { StarIcon, StarIconOutlined } from 'src/components/Icon'
@@ -18,6 +19,8 @@ import { GetTeamNameQuery } from 'src/components/Page/Team/types'
 import { Team } from 'src/components/Team/types'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
 import meAtom from 'src/state/recoil/user/me'
+
+import messages from '../messages'
 
 import queries from './queries.gql'
 
@@ -41,6 +44,7 @@ export const TeamsMenuProfile = ({
 }: TeamsMenuProfileProperties) => {
   const teamsToMap = teams?.filter((team) => team.id !== mainTeamId)
   const myID = useRecoilValue(meAtom)
+  const intl = useIntl()
 
   const { data: mainTeamRequest } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_BY_ID, {
     variables: { teamId: mainTeamId },
@@ -51,17 +55,14 @@ export const TeamsMenuProfile = ({
 
   const isSelectedTeamTheMainTeam = selectedDashboardTeam?.id === mainTeamId
 
-  const [updateTeam, { loading: isUpdatingTeam }] = useMutation<UpdateTeamMutationProperties>(
-    queries.UPDATE_USER_MAIN_TEAM,
-    {
-      onCompleted: (data) => {
-        console.log({ data })
-        const parsedPreferences: { main_team: string } = JSON.parse(data.updateMainTeam.preferences)
+  const [updateTeam] = useMutation<UpdateTeamMutationProperties>(queries.UPDATE_USER_MAIN_TEAM, {
+    onCompleted: (data) => {
+      console.log({ data })
+      const parsedPreferences: { main_team: string } = JSON.parse(data.updateMainTeam.preferences)
 
-        setMainTeam(parsedPreferences.main_team)
-      },
+      setMainTeam(parsedPreferences.main_team)
     },
-  )
+  })
 
   const handleUpdateTeam = async () => {
     await updateTeam({
@@ -155,7 +156,7 @@ export const TeamsMenuProfile = ({
         {isSelectedTeamTheMainTeam ? (
           <>
             <Text color="white" fontWeight={500} marginRight={1}>
-              Time principal
+              {intl.formatMessage(messages.mainTeam)}
             </Text>
 
             <StarIcon desc="" withCircle={false} height={10} />
@@ -163,7 +164,7 @@ export const TeamsMenuProfile = ({
         ) : (
           <>
             <Text color="white" fontWeight={500} marginRight={1}>
-              Tornar time principal?
+              {intl.formatMessage(messages.makeMainTeam)}
             </Text>
 
             <StarIconOutlined desc="" height={7} _hover={{ fill: '#F1BF25' }} />

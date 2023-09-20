@@ -19,7 +19,7 @@ export const TasksListItem = ({ template, completed, teamID }: TaskCardPropertie
 
   return (
     <TaskCard.Root completed={completed} action={config.action}>
-      <VStack gap={1}>
+      <VStack alignItems="flex-start" justifyContent="space-between">
         <TaskCard.Content
           completed={completed}
           title={config.content.title}

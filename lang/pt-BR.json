@@ -307,6 +307,10 @@
     "defaultMessage": "Visualize e altere as configurações de sua conta.",
     "description": "The page description that is displayed in Google and screen readers for the settings page."
   },
+  "2rTc9E": {
+    "defaultMessage": "Realize o check-in em seus resultados-chave",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "2vOg9s": {
     "defaultMessage": "Sem acesso",
     "description": "The message returned if the user didn't access Bud yet."
@@ -327,6 +331,10 @@
     "defaultMessage": "Os OKRs do Plano Individual são definidos por cada pessoa. Eles não interferem no progresso da empresa.",
     "description": "Individual OKR subtitle of the page"
   },
+  "371LdJ": {
+    "defaultMessage": "É importante que os resultados-chave tenham descrição para que todos entendam melhor a estratégia",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "39q6ig": {
     "defaultMessage": "OKRs",
     "description": "This message is displayed above the empty state inside the active cycles section at the Team page"
@@ -338,6 +346,10 @@
   "3IsNOi": {
     "defaultMessage": "Que bom te ver novamente, {name}! :)",
     "description": "The page title that our users should see in the dashboard page"
+  },
+  "3MleM/": {
+    "defaultMessage": "Tornar time principal?",
+    "description": "The label of the button that makes the team the main team"
   },
   "3XEc2H": {
     "defaultMessage": "Gênero do usuário inicial",
@@ -559,6 +571,10 @@
     "defaultMessage": "Visualize os dados de avanço da empresa como um todo, suas prioridades, um gráfico de expectativa de avanço e o nível de confiança geral.",
     "description": "The page description that is displayed in Google and screen readers"
   },
+  "6ws/gr": {
+    "defaultMessage": "Time principal",
+    "description": "The title of the main team section"
+  },
   "728+oa": {
     "defaultMessage": "Todas as tarefas",
     "description": "Label for all tasks selector item"
@@ -579,6 +595,10 @@
     "defaultMessage": "O ciclo está ativo, a funcionalidade de check-in está disponível, e o progresso está sendo mensurado.",
     "description": "This string is used to describe the cycles active status option."
   },
+  "7VhC49": {
+    "defaultMessage": "Visão geral dos OKRs",
+    "description": "The title of the OKRs overview"
+  },
   "7WlK+y": {
     "defaultMessage": "Um ícone de um alvo, que aparece junto com a pergunta de quais os focos do usuário para próxima semana.",
     "description": "This message appears as the title of the card that lists the history of retrospectives answered by a user."
@@ -586,6 +606,10 @@
   "7Yw26b": {
     "defaultMessage": "Selecione o ano",
     "description": "This message is displayed when no year filter was selected"
+  },
+  "7ZtAaa": {
+    "defaultMessage": "Busque entender as barreiras e como você pode contribuir com esses resultados-chave",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "7d+540": {
     "defaultMessage": "Uma seta para cima, indicando que o menu de seleção de ciclos está aberto",
@@ -835,6 +859,10 @@
     "defaultMessage": "Dicas para escrever um bom resultado-chave:",
     "description": "The title of the tip when you are creating a KR."
   },
+  "C932xL": {
+    "defaultMessage": "{leader} Comente em algum resultado-chave da empresa",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "CDO5jp": {
     "defaultMessage": "Inativo",
     "description": "This option makes an not-active cycle"
@@ -914,6 +942,10 @@
   "DB7Ai9": {
     "defaultMessage": "Salvar",
     "description": "Text in the save action button"
+  },
+  "DBnPB3": {
+    "defaultMessage": "Crie descrições detalhadas nos seus resultados-chave",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "DEMBaq": {
     "defaultMessage": "Um ícone com o sinal de positivo, indicando que ao clicar aqui você irá abrir o painel para inserir um resultado-chave",
@@ -1127,6 +1159,10 @@
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
   },
+  "HDxm2W": {
+    "defaultMessage": "{leader} Comente nos resultados-chave com Barreira",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "HEYvPI": {
     "defaultMessage": "Criar Resultado Chave",
     "description": "This message appears as the title of the insert Key Result drawer"
@@ -1307,6 +1343,10 @@
     "defaultMessage": "PROGRESSO",
     "description": "The title of the progress column."
   },
+  "JrryPL": {
+    "defaultMessage": "A rotina semanal de check-in é parte fundamental para conseguir acompanhar a evolução de uma estratégia",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "Jt0weE": {
     "defaultMessage": "Conferir",
     "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
@@ -1326,6 +1366,10 @@
   "K04poX": {
     "defaultMessage": "NOTIFICAÇÕES",
     "description": "The tooltip text for the notifications text"
+  },
+  "K2Hthp": {
+    "defaultMessage": "Baixo",
+    "description": "The description of the pie chart graph that indicates the low status"
   },
   "K4Rjji": {
     "defaultMessage": "Histórico",
@@ -1350,6 +1394,10 @@
   "KdYFbe": {
     "defaultMessage": "Apagar",
     "description": "This text is displayed in our menu, as an anchor to remove that given card"
+  },
+  "KjG7j3": {
+    "defaultMessage": "Meus resultados-chave",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "L/b/G/": {
     "defaultMessage": "Um desenho de uma pasta aberta sem nada dentro",
@@ -1603,6 +1651,10 @@
     "defaultMessage": "enviou um feedback em seu resultado-chave:",
     "description": "This message appears as describe on notification where a user sent a feedback on your key-result "
   },
+  "PJSgbG": {
+    "defaultMessage": "desafios e Tarefas da semana",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "PKRdQG": {
     "defaultMessage": "Enviar",
     "description": "This message appears in the button to send routine form answers."
@@ -1694,6 +1746,10 @@
   "QRy8b9": {
     "defaultMessage": "Um novo objetivo foi criado com sucesso",
     "description": "This message appears as a toast as soon as the the user clicks to add a new objective in the team page"
+  },
+  "QT4yaV": {
+    "defaultMessage": "Excelente",
+    "description": "The description of the pie chart graph that indicates the excellent status"
   },
   "QcCy51": {
     "defaultMessage": "Valor atual",
@@ -1790,6 +1846,10 @@
   "SU+pQ8": {
     "defaultMessage": "Clique no botão <span>...</span> para criar o primeiro resultado-chave deste objetivo.",
     "description": "This message is displayed in the key-results empty state inside the team page when an objective has no key-results"
+  },
+  "SW8YCX": {
+    "defaultMessage": "Busque entender a sinalização e como você pode contribuir com esses resultados-chave",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "SWl7UB": {
     "defaultMessage": "Um ícone de \"x\". Ao clicar nele você fechará o box de atualização de progresso",
@@ -1902,6 +1962,10 @@
   "UHZQHg": {
     "defaultMessage": "Respostas",
     "description": "This message appears in the subtitle of the menu that allows users to browse responses through the history."
+  },
+  "UJijyu": {
+    "defaultMessage": "Além da estratégia do seu time, busque compartilhar suas ideias em resultados-chave da empresa",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "UMWm2g": {
     "defaultMessage": "Com o Spotlight, o planejamento de sua estratégia é mais colaborativo e acessível para sua equipe. Os feedbacks são visíveis e didáticos.",
@@ -2523,6 +2587,10 @@
     "defaultMessage": "Baixa Confiança",
     "description": "We use this tag to group every key result with confidence higher than 33 but lower than 66"
   },
+  "fjeSHd": {
+    "defaultMessage": "{leader} Comente nos resultados-chave com Baixa confiança",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "fsAK9T": {
     "defaultMessage": "Selecionar...",
     "description": "This message appears in the input when no user is selected."
@@ -2730,6 +2798,10 @@
   "j1c4SD": {
     "defaultMessage": "PRODUTIVIDADE",
     "description": "The title of the productivity graph"
+  },
+  "j259Ph": {
+    "defaultMessage": "Líder",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "j8vYyP": {
     "defaultMessage": "Rotinas da empresa estão sempre disponíveis para quem quiser responder, mas líderes podem desativar os lembretes para tornar as respostas opcionais em seu time.",
@@ -3103,9 +3175,17 @@
     "defaultMessage": "SPOTLIGHT",
     "description": "This message appears how the title of the introduction to spotlight."
   },
+  "q6A4Ae": {
+    "defaultMessage": "Regular",
+    "description": "The description of the pie chart graph that indicates the regular status"
+  },
   "qGLpBy": {
     "defaultMessage": "Date de início",
     "description": "The description for date-start cycle field"
+  },
+  "qQKiDF": {
+    "defaultMessage": "Bom",
+    "description": "The description of the pie chart graph that indicates the good status"
   },
   "qhchMM": {
     "defaultMessage": "Representam as mais altas prioridades e comunicam essa direção com bastante clareza.",
@@ -3167,6 +3247,10 @@
     "defaultMessage": "Progresso",
     "description": "This message is displayed as the title of the progress section inside check-in card"
   },
+  "s0wK0Y": {
+    "defaultMessage": "Muito bom",
+    "description": "The description of the pie chart graph that indicates the very good status"
+  },
   "s4h8ne": {
     "defaultMessage": "Adicionar uma Check-list",
     "description": "This text is used as a button when the key-result has no check-marks"
@@ -3182,6 +3266,10 @@
   "s8fzur": {
     "defaultMessage": "conta ativa",
     "description": "This string is used to select the active cycles option."
+  },
+  "sBSvDB": {
+    "defaultMessage": "Ir para o time",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "sFYaLE": {
     "defaultMessage": "Check-in",
@@ -3283,9 +3371,9 @@
     "defaultMessage": "Idioma",
     "description": "The user locale input placeholder while creating a new workspace"
   },
-  "u3U7ET": {
-    "defaultMessage": "status da estratégia",
-    "description": "The title of the OKRs overview"
+  "tydp5X": {
+    "defaultMessage": "Boas práticas",
+    "description": "The description of the pie chart graph that indicates the label"
   },
   "u4rqek": {
     "defaultMessage": "Q4",
@@ -3302,6 +3390,10 @@
   "uIY7F5": {
     "defaultMessage": "Retrospectiva da Semana",
     "description": "Title of the content of the Retrospective tab on the teams page."
+  },
+  "uORr+d": {
+    "defaultMessage": "Resultados-chave sem atualizações se tornam difíceis de acompanhar",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "uQUReU": {
     "defaultMessage": "Estado atual",
@@ -3358,6 +3450,10 @@
   "uxjg0W": {
     "defaultMessage": "Não foi possível deletar a resposta!",
     "description": "This message appears in a toast indicating that it was not possible to delete a routines response."
+  },
+  "v4RcBJ": {
+    "defaultMessage": "{leader} Comente nos resultados-chave pouco atualizados",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "v9xuBO": {
     "defaultMessage": "Sentimento",

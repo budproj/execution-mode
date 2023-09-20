@@ -1,4 +1,5 @@
 import { HStack, Stack, Text, useToken } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import { ImageProps } from 'next/image'
 import React, { ReactElement } from 'react'
 
@@ -8,6 +9,12 @@ interface TaskCardContentProperties {
   subtitle: string
   completed: boolean
 }
+
+const StyledTaskContentStack = styled(Stack)`
+  @media (min-width: 1600px) {
+    max-width: 310px;
+  }
+`
 
 export const TaskCardContent = ({
   renderIcon,
@@ -23,7 +30,7 @@ export const TaskCardContent = ({
   const textColor = completed ? completedTextColor : defaultTextColor
 
   return (
-    <Stack>
+    <StyledTaskContentStack w="100%">
       <HStack>
         {renderIcon?.()}
         <Text fontSize={14} fontWeight="bold" color={textColor}>
@@ -33,6 +40,6 @@ export const TaskCardContent = ({
       <Text fontSize={14} color={textColor}>
         {subtitle}
       </Text>
-    </Stack>
+    </StyledTaskContentStack>
   )
 }

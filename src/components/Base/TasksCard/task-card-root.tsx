@@ -7,8 +7,6 @@ interface TaskCardRootProperties {
   completed: boolean
 }
 
-export const GRID_TEMPLATE_COLUMNS = 'repeat(2, 1fr)'
-
 export const TaskCardRoot = ({ children, completed, action }: TaskCardRootProperties) => {
   const handleTaskCardClick = useCallback(() => {
     if (!completed && action) action()
@@ -22,7 +20,7 @@ export const TaskCardRoot = ({ children, completed, action }: TaskCardRootProper
       gap={4}
       bgColor="#fff"
       borderRadius={10}
-      w={280}
+      w="100%"
       h={200}
       cursor={completed ? 'default' : 'pointer'}
       _hover={{
