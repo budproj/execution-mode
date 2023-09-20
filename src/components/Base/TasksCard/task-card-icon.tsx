@@ -1,10 +1,10 @@
-import { Box } from '@chakra-ui/react'
+import { Box, BoxProps } from '@chakra-ui/react'
 import React, { ReactNode } from 'react'
 
-interface TaskCardIconProperties {
+interface TaskCardIconProperties extends BoxProps {
   children: ReactNode
 }
 
-export const TaskCardIcon = ({ children }: TaskCardIconProperties) => {
-  return <Box>{children}</Box>
+export const TaskCardIcon = ({ children, ...rest }: TaskCardIconProperties) => {
+  return <Box {...rest}>{children}</Box>
 }

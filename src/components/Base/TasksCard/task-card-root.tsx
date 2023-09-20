@@ -1,13 +1,13 @@
-import { Grid } from '@chakra-ui/react'
+import { Grid, GridProps } from '@chakra-ui/react'
 import React, { useCallback } from 'react'
 
-interface TaskCardRootProperties {
+interface TaskCardRootProperties extends GridProps {
   children: React.ReactNode
   action?: () => void
   completed: boolean
 }
 
-export const TaskCardRoot = ({ children, completed, action }: TaskCardRootProperties) => {
+export const TaskCardRoot = ({ children, completed, action, ...rest }: TaskCardRootProperties) => {
   const handleTaskCardClick = useCallback(() => {
     if (!completed && action) action()
   }, [action, completed])
@@ -27,6 +27,7 @@ export const TaskCardRoot = ({ children, completed, action }: TaskCardRootProper
         boxShadow: completed ? 'default' : '-1px 4px 28px 7px rgba(0,0,0,0.30)',
       }}
       onClick={handleTaskCardClick}
+      {...rest}
     >
       {children}
     </Grid>

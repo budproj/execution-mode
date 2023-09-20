@@ -24,7 +24,7 @@ const BestPracticesLighthouse = ({ teamID }: BestPracticesLighthouseProperties) 
   }, [getUserTasks])
 
   return (
-    <Stack position="relative">
+    <Stack position="relative" top="10">
       <PieChartWithNeedle
         goalValue={teamScore?.available ? teamScore?.available + 30 : 10}
         value={teamScore?.progress ?? 0}
