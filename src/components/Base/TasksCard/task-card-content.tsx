@@ -23,7 +23,7 @@ export const TaskCardContent = ({
   subtitle,
 }: TaskCardContentProperties) => {
   const [completedTextColor, defaultTextColor] = useToken('colors', [
-    'new-gray.500',
+    'new-gray.700',
     'new-gray.800',
   ])
 

@@ -11,7 +11,7 @@ interface MissionControlWrapperProperties extends StyleProps {
 
 const MissionControlWrapper = ({ userID, teamID, ...rest }: MissionControlWrapperProperties) => {
   return (
-    <HStack {...rest} w="100%" justifyContent="space-between">
+    <HStack {...rest} w="100%" gap="10px">
       <BestPracticesLighthouse teamID={teamID} />
       <MissionControlTasksWrapper userID={userID} teamID={teamID} />
     </HStack>
