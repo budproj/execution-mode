@@ -26,8 +26,8 @@ const BestPracticesLighthouse = ({ teamID }: BestPracticesLighthouseProperties) 
   return (
     <Stack position="relative" top="10">
       <PieChartWithNeedle
-        goalValue={teamScore?.available ? teamScore?.available + 30 : 10}
-        value={teamScore?.progress ?? 0}
+        value={teamScore?.progress ? (teamScore.progress / teamScore.available) * 100 : 0}
+        goalValue={teamScore?.teamGoal ? (teamScore.teamGoal / teamScore.available) * 100 + 30 : 10}
         ir={80}
         or={120}
       />
