@@ -13,6 +13,7 @@ export type MissionControlTeamScore = {
   weekId: string
   progress: number
   available: number
+  teamGoal: number
 }
 
 export type GetUserTasksOutput = MissioncControlUserTask[]
