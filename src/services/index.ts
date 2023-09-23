@@ -6,12 +6,15 @@ import { getCommentsInstance } from './comments'
 import { customHeadersInjector, errorResponseInjector } from './injectors'
 import { getLLMInstance } from './llm'
 import { LlmService } from './llm/llm.service'
+import { getMissionControlInstance } from './mission-control'
+import { MissionControlService } from './mission-control/mission-control.service'
 import { getRoutinesInstance } from './routines'
 
 export interface Services {
   routines: AxiosInstance
   comments: AxiosInstance
   llm: LlmService
+  missionControl: MissionControlService
 }
 
 const configureInstance = (instance: AxiosInstance, authToken: string) => {
@@ -31,5 +34,8 @@ export const getServices = async (
     routines: configureInstance(getRoutinesInstance(config), authToken),
     comments: configureInstance(getCommentsInstance(config), authToken),
     llm: new LlmService(configureInstance(getLLMInstance(config), authToken)),
+    missionControl: new MissionControlService(
+      configureInstance(getMissionControlInstance(config), authToken),
+    ),
   }
 }

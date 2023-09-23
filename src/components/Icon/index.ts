@@ -144,6 +144,8 @@ export { default as BagIcon } from './BagIcon/bag-icon'
 
 export { default as StarIcon } from './StarIcon/star-icon'
 
+export { default as StarIconOutlined } from './StarIconOutlined/star-icon-outlined'
+
 export { default as TargetIcon } from './TargetIcon/target-icon'
 
 export { default as WriteIcon } from './WriteIcon/write-icon'
@@ -161,5 +163,17 @@ export { default as AddPersonIcon } from './AddPersonIcon'
 export { default as WandIcon } from './Wand'
 
 export { default as ThumbIcon } from './ThumbIcon'
+
+export { default as PuzzleIcon } from './PuzzleIcon'
+
+export { default as TextListIcon } from './TextListIcon'
+
+export { default as ChatIcon } from './ChatIcon'
+
+export { default as HandbagIcon } from './HandbagIcon'
+
+export { default as ExclamatinIcon } from './ExclamationIcon'
+
+export { default as LikeIcon } from './LikeIcon'
 
 export * from './types'

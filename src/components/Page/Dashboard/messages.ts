@@ -11,8 +11,8 @@ type DashboardPageMessage =
 
 export default defineMessages<DashboardPageMessage>({
   greeting: {
-    defaultMessage: 'Que bom te ver de novo, {name}! :)',
-    id: 'B/fme2',
+    defaultMessage: 'Que bom te ver novamente, {name}! :)',
+    id: '3IsNOi',
     description: 'The page title that our users should see in the dashboard page',
   },
 
