@@ -10,25 +10,16 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
         }
       }
     }
-     teams {
-      edges {
-        node {
-          name
-          id
-        }
-      }
-    }
-    companies {
-      edges {
-        node {
-          name
-          id
-        }
-      }
-    }
   }
+  teams {
+      edges {
+        node {
+          name
+          id
+        }
+      }
+    }
 }
-
 
 query GET_TEAM_BY_ID($teamId: ID!) {
     team(id: $teamId) {
