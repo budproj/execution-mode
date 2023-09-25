@@ -144,7 +144,7 @@ export const useGetMissionControlTasksConfig = (
   ])
   const taskCardActionLabel = new Map([
     [TASK_TEMPLATE.KR_CHECK_IN, messages.goToKeyResultActionLabelMessage],
-    [TASK_TEMPLATE.EMPTY_DESCRIPTION, messages.goToTeamActionLabelMessage],
+    [TASK_TEMPLATE.EMPTY_DESCRIPTION, messages.goToKeyResultActionLabelMessage],
     [TASK_TEMPLATE.KR_COMMENT, messages.goToTeamActionLabelMessage],
     [TASK_TEMPLATE.LOW_CONFIDENCE_KR_COMMENT, messages.goToTeamActionLabelMessage],
     [TASK_TEMPLATE.BARRIER_KR_COMMENT, messages.goToTeamActionLabelMessage],
@@ -153,7 +153,7 @@ export const useGetMissionControlTasksConfig = (
 
   const taskCardAction = new Map([
     [TASK_TEMPLATE.KR_CHECK_IN, async () => route.push('/my-things')],
-    [TASK_TEMPLATE.EMPTY_DESCRIPTION, async () => route.push(`/explore/${teamID}`)],
+    [TASK_TEMPLATE.EMPTY_DESCRIPTION, async () => route.push('/my-things')],
     [TASK_TEMPLATE.KR_COMMENT, async () => route.push(`/explore/${teamID}`)],
     [TASK_TEMPLATE.LOW_CONFIDENCE_KR_COMMENT, async () => route.push(`/explore/${teamID}`)],
     [TASK_TEMPLATE.BARRIER_KR_COMMENT, async () => route.push(`/explore/${teamID}`)],

@@ -9,11 +9,13 @@ type MissioncControlUserTask = {
 }
 
 export type MissionControlTeamScore = {
-  teamId: string
-  weekId: string
-  progress: number
-  available: number
-  teamGoal: number
+  teamScore: {
+    teamId: string
+    weekId: string
+    progress: number
+    available: number
+    teamGoal: number
+  }
 }
 
 export type GetUserTasksOutput = MissioncControlUserTask[]
