@@ -11,7 +11,7 @@ export const EmptyStateTasksList = () => {
         <TaskCard.Content
           completed
           title="Não há tarefas pra você nesse time"
-          subtitle="Você não faz parte desse time, Você ainda pode conferir muitas informações, status da estratégia, farol de boas práticas e muitas outras coisas por aqui."
+          subtitle="Você ainda pode conferir muitas informações, status da estratégia, farol de boas práticas e muitas outras coisas por aqui."
         />
       </VStack>
       <VStack justifyContent="space-between">
