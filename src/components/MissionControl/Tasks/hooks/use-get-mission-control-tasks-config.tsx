@@ -4,6 +4,7 @@ import React, { ReactNode } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ChatIcon, PuzzleIcon, TextListIcon } from 'src/components/Icon'
+import { useGetUserDetails } from 'src/components/User/hooks'
 import { AUTHZ_ROLES } from 'src/state/recoil/authz/constants'
 
 import messages from '../messages'
@@ -42,8 +43,11 @@ export const useGetMissionControlTasksConfig = (
   template: TASK_TEMPLATE,
   completed: boolean,
   teamID: string,
+  userId: string,
 ): UseGetMissionControlTasksConfigOutput => {
   const [yellow, iconFillColorCompleted] = useToken('colors', ['yellow.600', 'green.500'])
+  const { data: user, loading } = useGetUserDetails(userId)
+  const companyId = user?.companies?.edges[0]?.node?.id ?? ''
   const intl = useIntl()
   const route = useRouter()
 
@@ -75,7 +79,7 @@ export const useGetMissionControlTasksConfig = (
         desc="ícone de um quebra cabeça apresentado em um card de task de boas práticas"
         maxW="48px"
         maxH="48px"
-        fill={completed ? iconFillColorCompleted : '#F1BF25'}
+        fill={completed ? iconFillColorCompleted : '#6F6EFF'}
       />,
     ],
     [
@@ -112,7 +116,7 @@ export const useGetMissionControlTasksConfig = (
   const taskUserRole = new Map([
     [TASK_TEMPLATE.KR_CHECK_IN, AUTHZ_ROLES.TEAM_MEMBER],
     [TASK_TEMPLATE.EMPTY_DESCRIPTION, AUTHZ_ROLES.TEAM_MEMBER],
-    [TASK_TEMPLATE.KR_COMMENT, AUTHZ_ROLES.LEADER],
+    [TASK_TEMPLATE.KR_COMMENT, AUTHZ_ROLES.TEAM_MEMBER],
     [TASK_TEMPLATE.LOW_CONFIDENCE_KR_COMMENT, AUTHZ_ROLES.LEADER],
     [TASK_TEMPLATE.BARRIER_KR_COMMENT, AUTHZ_ROLES.LEADER],
     [TASK_TEMPLATE.OUTDATED_KEY_RESULT_COMMENT, AUTHZ_ROLES.LEADER],
@@ -154,7 +158,7 @@ export const useGetMissionControlTasksConfig = (
   const taskCardAction = new Map([
     [TASK_TEMPLATE.KR_CHECK_IN, async () => route.push('/my-things')],
     [TASK_TEMPLATE.EMPTY_DESCRIPTION, async () => route.push('/my-things')],
-    [TASK_TEMPLATE.KR_COMMENT, async () => route.push(`/explore/${teamID}`)],
+    [TASK_TEMPLATE.KR_COMMENT, async () => route.push(`/explore/${companyId}`)],
     [TASK_TEMPLATE.LOW_CONFIDENCE_KR_COMMENT, async () => route.push(`/explore/${teamID}`)],
     [TASK_TEMPLATE.BARRIER_KR_COMMENT, async () => route.push(`/explore/${teamID}`)],
     [TASK_TEMPLATE.OUTDATED_KEY_RESULT_COMMENT, async () => route.push(`/explore/${teamID}`)],
@@ -174,7 +178,7 @@ export const useGetMissionControlTasksConfig = (
         taskDescriptionMessages.get(template) ?? messages.keyResultCheckinTaskMessageDescription,
       ),
     },
-    icon: taskCardIcon.get(template) ?? <div />,
+    icon: loading ? taskCardIcon.get(template) : <div />,
     actions: {
       role: taskUserRole.get(template) ?? AUTHZ_ROLES.TEAM_MEMBER,
       label: intl.formatMessage(

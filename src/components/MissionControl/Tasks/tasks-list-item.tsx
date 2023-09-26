@@ -12,10 +12,11 @@ interface TaskCardProperties {
   template: TASK_TEMPLATE
   completed: boolean
   teamID: string
+  userId: string
 }
 
-export const TasksListItem = ({ template, completed, teamID }: TaskCardProperties) => {
-  const config = useGetMissionControlTasksConfig(template, completed, teamID)
+export const TasksListItem = ({ template, completed, teamID, userId }: TaskCardProperties) => {
+  const config = useGetMissionControlTasksConfig(template, completed, teamID, userId)
 
   return (
     <TaskCard.Root completed={completed} action={config.action}>
