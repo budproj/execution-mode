@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import { Box, Fade, HStack, Text } from '@chakra-ui/react'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
@@ -34,15 +34,15 @@ export const MissionControlTasksWrapper = ({
     getUserTasks()
   }, [getUserTasks])
 
-  const tasksSliced = tasks
-    .slice(0, 3)
-    .sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1))
+  const tasksSliced = useMemo(() => {
+    return tasks.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1))
+  }, [tasks])
 
   const emptyBoxesToAppear = new Array(Math.abs(tasksSliced.length - 3)).fill(
     Math.abs(tasksSliced.length - 3),
   )
 
-  return tasks.length > 0 ? (
+  return tasksSliced.length > 0 ? (
     <Fade in style={{ width: '100%' }}>
       <Text color="white" fontWeight="bold" fontSize={14} textTransform="uppercase" mb={2}>
         {intl.formatMessage(messages.listTasksSectionTitle)}
