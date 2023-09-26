@@ -35,8 +35,8 @@ export default defineMessages<MissionControlTaskMessages>({
     description: 'The page title that our users should see in the dashboard page',
   },
   keyResultCommentTaskMessageTitle: {
-    defaultMessage: '{leader} Comente em algum resultado-chave da empresa',
-    id: 'C932xL',
+    defaultMessage: 'Comente em algum resultado-chave da empresa',
+    id: 'hNsMcg',
     description: 'The page title that our users should see in the dashboard page',
   },
   lowConfidenceKeyResultCommentTaskMessageTitle: {
