@@ -11,17 +11,21 @@ interface BestPracticesLighthouseProperties {
 
 const BestPracticesLighthouse = ({ teamID }: BestPracticesLighthouseProperties) => {
   const { servicesPromise } = useContext(ServicesContext)
-  const [teamScore, setTeamScore] = useState<MissionControlTeamScore>()
+  const [teamScore, setTeamScore] = useState<MissionControlTeamScore['teamScore']>()
 
   const getUserTasks = useCallback(async () => {
     const { missionControl } = await servicesPromise
     const data = await missionControl.getTeamScore({ teamID })
-    setTeamScore(data)
+    setTeamScore(data.teamScore)
   }, [servicesPromise, teamID])
 
   useEffect(() => {
     getUserTasks()
   }, [getUserTasks])
+
+  const isTeamGoalGreaterThanAvailable = teamScore
+    ? teamScore?.teamGoal > teamScore?.available
+    : true
 
   return (
     <Tooltip
@@ -30,9 +34,13 @@ const BestPracticesLighthouse = ({ teamID }: BestPracticesLighthouseProperties) 
     >
       <Stack position="relative" top="10">
         <PieChartWithNeedle
-          value={teamScore?.progress ? (teamScore.progress / teamScore.available) * 100 : 0}
+          value={
+            teamScore?.progress ? Math.floor((teamScore.progress / teamScore.available) * 100) : 0
+          }
           goalValue={
-            teamScore?.teamGoal ? (teamScore.teamGoal / teamScore.available) * 100 + 30 : 10
+            teamScore?.teamGoal && !isTeamGoalGreaterThanAvailable
+              ? (teamScore.teamGoal / teamScore.available) * 100 + 30
+              : 10
           }
           ir={80}
           or={120}

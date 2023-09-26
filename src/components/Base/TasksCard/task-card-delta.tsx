@@ -19,6 +19,7 @@ export const TaskCardDelta = ({ value }: TaskCardDeltaProperties) => {
       value={value}
       p={2}
       gridGap={2}
+      marginBottom="5px !important"
     />
   )
 }

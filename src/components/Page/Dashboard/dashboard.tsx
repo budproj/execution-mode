@@ -35,9 +35,8 @@ interface GetUserNameGenderAndSettingsRequest {
     settings: {
       edges: Array<{ node: { preferences: string } }>
     }
-    teams: GraphQLConnection<Team>
-    companies: GraphQLConnection<Team>
   }
+  teams: GraphQLConnection<Team>
 }
 
 interface PreferencesProperties {
@@ -112,7 +111,7 @@ const DashboardPage = () => {
   }, [data?.me.settings.edges])
 
   useEffect(() => {
-    if (data) setEdges([...data.me.teams.edges, ...data.me.companies.edges])
+    if (data) setEdges(data.teams.edges)
   }, [data, setEdges])
 
   return (

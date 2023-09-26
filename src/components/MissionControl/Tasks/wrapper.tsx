@@ -58,6 +58,7 @@ export const MissionControlTasksWrapper = ({
                 teamID={teamID}
                 template={TASK_TEMPLATE[templateKey]}
                 completed={task.completed}
+                userId={userID}
               />
             )
           )
