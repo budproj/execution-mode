@@ -1,4 +1,4 @@
-import { Stack } from '@chakra-ui/react'
+import { Stack, Tooltip } from '@chakra-ui/react'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 
 import PieChartWithNeedle from 'src/components/Base/Charts/pie-chart-with-needle'
@@ -24,14 +24,21 @@ const BestPracticesLighthouse = ({ teamID }: BestPracticesLighthouseProperties) 
   }, [getUserTasks])
 
   return (
-    <Stack position="relative" top="10">
-      <PieChartWithNeedle
-        value={teamScore?.progress ? (teamScore.progress / teamScore.available) * 100 : 0}
-        goalValue={teamScore?.teamGoal ? (teamScore.teamGoal / teamScore.available) * 100 + 30 : 10}
-        ir={80}
-        or={120}
-      />
-    </Stack>
+    <Tooltip
+      label="Todas as tarefas realizadas por você e seu companheiros irão melhorar o a pontuação geral de seu time. Atingir a meta já é um excelente indicatívo de evolução nas boas práticas"
+      placement="top"
+    >
+      <Stack position="relative" top="10">
+        <PieChartWithNeedle
+          value={teamScore?.progress ? (teamScore.progress / teamScore.available) * 100 : 0}
+          goalValue={
+            teamScore?.teamGoal ? (teamScore.teamGoal / teamScore.available) * 100 + 30 : 10
+          }
+          ir={80}
+          or={120}
+        />
+      </Stack>
+    </Tooltip>
   )
 }
 
