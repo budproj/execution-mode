@@ -110,6 +110,8 @@ const needle = (
   const xp2 = cx + oR * cos2 * (1 - lengthFactor)
   const yp2 = cy + oR * sin2 * (1 - lengthFactor)
 
+  console.log(`M${x02} ${y02} L${xp2} ${yp2}`)
+
   return [
     <path
       key="1"
@@ -120,7 +122,11 @@ const needle = (
     />,
     <path
       key="2"
-      d={value <= 80 ? `M${x02} ${y02} L${xp2} ${yp2}` : ''}
+      d={
+        value || goalValue <= 80
+          ? `M${x02} ${y02} L${xp2} ${yp2}`
+          : 'M285.7706068466986 154.28690013070718 L245.83072111786913 141.29438197724497'
+      }
       stroke="white"
       strokeWidth="2px"
       strokeDasharray={4}

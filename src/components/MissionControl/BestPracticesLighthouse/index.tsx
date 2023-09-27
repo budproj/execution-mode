@@ -23,9 +23,19 @@ const BestPracticesLighthouse = ({ teamID }: BestPracticesLighthouseProperties) 
     getUserTasks()
   }, [getUserTasks])
 
-  const isTeamGoalGreaterThanAvailable = teamScore
-    ? teamScore?.teamGoal > teamScore?.available
-    : true
+  const calculateTeamGoal = useCallback(
+    (teamGoal: number | undefined) => {
+      if (!teamGoal) return 10
+      if (teamGoal === 10) return 10
+      if (teamScore) {
+        if (teamScore?.available === 0) return 10
+        return (teamScore.teamGoal / teamScore.available) * 100 + 30
+      }
+
+      return 10
+    },
+    [teamScore],
+  )
 
   return (
     <Tooltip
@@ -37,11 +47,7 @@ const BestPracticesLighthouse = ({ teamID }: BestPracticesLighthouseProperties) 
           value={
             teamScore?.progress ? Math.floor((teamScore.progress / teamScore.available) * 100) : 0
           }
-          goalValue={
-            teamScore?.teamGoal && !isTeamGoalGreaterThanAvailable
-              ? (teamScore.teamGoal / teamScore.available) * 100 + 30
-              : 10
-          }
+          goalValue={calculateTeamGoal(teamScore?.teamGoal)}
           ir={80}
           or={120}
         />
