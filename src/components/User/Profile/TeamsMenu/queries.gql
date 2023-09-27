@@ -4,9 +4,10 @@ mutation UPDATE_USER_MAIN_TEAM($userID: ID!, $main_team_id: String!) {
   }
 }
 
-query GET_TEAM_BY_ID($teamId: ID!) {
-    team(id: $teamId) {
-      name
-      id
-    }
+query GET_TEAM_WITH_ID($teamId: ID!) {
+  team(id: $teamId) {
+    name
+    id
+  }
 }
+
