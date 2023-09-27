@@ -35,7 +35,9 @@ export const MissionControlTasksWrapper = ({
   }, [getUserTasks])
 
   const tasksSliced = useMemo(() => {
-    return tasks.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1))
+    return tasks
+      .slice(0, 3)
+      .sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1))
   }, [tasks])
 
   const emptyBoxesToAppear = new Array(Math.abs(tasksSliced.length - 3)).fill(
