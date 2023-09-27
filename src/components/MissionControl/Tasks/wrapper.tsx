@@ -54,7 +54,7 @@ export const MissionControlTasksWrapper = ({
           return (
             templateKey && (
               <TasksListItem
-                key={task.templateId}
+                key={`${task.templateId}-${task.userId}-${task.weekId}-${teamID}`}
                 teamID={teamID}
                 template={TASK_TEMPLATE[templateKey]}
                 completed={task.completed}
