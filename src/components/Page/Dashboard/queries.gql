@@ -10,20 +10,39 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
         }
       }
     }
+    companies {
+      edges {
+        node {
+          id
+        }
+      }
+    }
   }
   teams {
       edges {
         node {
           name
           id
-        }
+          status {
+            progress
+            confidence
+            latestCheckIn {
+              createdAt
+              user {
+                fullName
+              }
+            }
+          }
+      delta {
+        progress
+      }
+      tacticalCycle {
+        dateStart
+        dateEnd
       }
     }
-}
-
-query GET_TEAM_BY_ID($teamId: ID!) {
-    team(id: $teamId) {
-      name
-      id
+          }
+      }
     }
-}
+  
+

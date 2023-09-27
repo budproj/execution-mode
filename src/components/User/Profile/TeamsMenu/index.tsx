@@ -46,7 +46,7 @@ export const TeamsMenuProfile = ({
   const myID = useRecoilValue(meAtom)
   const intl = useIntl()
 
-  const { data: mainTeamRequest } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_BY_ID, {
+  const { data: mainTeamRequest } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_WITH_ID, {
     variables: { teamId: mainTeamId },
   })
 

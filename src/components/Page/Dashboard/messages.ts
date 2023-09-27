@@ -8,6 +8,7 @@ type DashboardPageMessage =
   | 'quarterlySummaryTitle'
   | 'okrOverViewTitle'
   | 'teamsOverviewTitle'
+  | 'quarterlySummaryTitleTeam'
 
 export default defineMessages<DashboardPageMessage>({
   greeting: {
@@ -30,14 +31,19 @@ export default defineMessages<DashboardPageMessage>({
   },
 
   yearlySummaryTitle: {
-    defaultMessage: 'OKRs Anuais {year}',
-    id: 'eG8Ohg',
+    defaultMessage: 'OKRs Anuais Empresa',
+    id: 'FQpqK8',
     description: 'The summary title for the yearly OKRs',
   },
 
   quarterlySummaryTitle: {
-    defaultMessage: 'OKRs Trimestrais {quarter}',
-    id: 'nEQaGP',
+    defaultMessage: 'OKRs {quarter} Times',
+    id: 'QoIlCT',
+    description: 'The summery title for the quarterly OKRs',
+  },
+  quarterlySummaryTitleTeam: {
+    defaultMessage: 'OKRs {quarter} {team}',
+    id: 'WBbFfE',
     description: 'The summery title for the quarterly OKRs',
   },
   okrOverViewTitle: {

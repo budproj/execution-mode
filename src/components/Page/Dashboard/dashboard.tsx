@@ -35,6 +35,7 @@ interface GetUserNameGenderAndSettingsRequest {
     settings: {
       edges: Array<{ node: { preferences: string } }>
     }
+    companies: GraphQLConnection<Team>
   }
   teams: GraphQLConnection<Team>
 }
@@ -100,6 +101,10 @@ const DashboardPage = () => {
 
   const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
 
+  console.log({ selectedDashboardTeam })
+
+  const isCompanySelected = data?.me.companies.edges[0].node.id === selectedDashboardTeam?.id
+
   useEffect(() => {
     if (data?.me.settings.edges[0]) {
       const parsedPreferences: PreferencesProperties = JSON.parse(
@@ -113,6 +118,8 @@ const DashboardPage = () => {
   useEffect(() => {
     if (data) setEdges(data.teams.edges)
   }, [data, setEdges])
+
+  console.log({ selectedDashboardTeam })
 
   return (
     <StyledStack bg="new-gray.50" pb={20}>
@@ -159,14 +166,26 @@ const DashboardPage = () => {
               isLoading={companyCyclesLoading}
               flex="1"
             />
-            <OverviewSummary
-              title={intl.formatMessage(messages.quarterlySummaryTitle, {
-                quarter: quarter?.period,
-              })}
-              cycle={quarter}
-              isLoading={companyCyclesLoading}
-              flex="1"
-            />
+            {isCompanySelected ? (
+              <OverviewSummary
+                title={intl.formatMessage(messages.quarterlySummaryTitle, {
+                  quarter: quarter?.period,
+                })}
+                cycle={quarter}
+                isLoading={companyCyclesLoading}
+                flex="1"
+              />
+            ) : (
+              <OverviewSummary
+                title={intl.formatMessage(messages.quarterlySummaryTitleTeam, {
+                  quarter: quarter?.period,
+                  team: selectedDashboardTeam?.name,
+                })}
+                team={selectedDashboardTeam}
+                isLoading={companyCyclesLoading}
+                flex="1"
+              />
+            )}
           </Flex>
           <BoardsOverview pt="2rem" />
         </Stack>
