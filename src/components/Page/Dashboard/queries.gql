@@ -3,6 +3,8 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
     id
     firstName
     gender
+    picture
+    role
     settings {
       edges {
         node {

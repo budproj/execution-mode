@@ -110,8 +110,6 @@ const needle = (
   const xp2 = cx + oR * cos2 * (1 - lengthFactor)
   const yp2 = cy + oR * sin2 * (1 - lengthFactor)
 
-  console.log(`M${x02} ${y02} L${xp2} ${yp2}`)
-
   return [
     <path
       key="1"
