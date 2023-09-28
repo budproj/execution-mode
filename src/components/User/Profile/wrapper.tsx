@@ -57,7 +57,15 @@ export const UserProfile = ({
 
   return (
     <Stack py={4} spacing={6} direction="column" flexGrow={1} h="full">
-      <UserProfileHeader userID={userID} isLoaded={isLoaded} canUpdate={canUpdate} />
+      <UserProfileHeader
+        userProps={{
+          picture: data?.user.picture,
+          fullName: data?.user.fullName,
+          role: data?.user.role,
+        }}
+        isLoaded={isLoaded}
+        canUpdate={canUpdate}
+      />
       <Divider borderColor="black.200" />
       <UserProfileBody
         userID={userID}

@@ -39,6 +39,10 @@ const BaseCardNotification = ({
 
   const timestampConverted = new Date(timestamp)
 
+  const onClick = () => {
+    if (handleClick) handleClick()
+  }
+
   return (
     <Box
       paddingY={6}
@@ -53,7 +57,7 @@ const BaseCardNotification = ({
         bg: 'new-gray.50',
       }}
       gap={6}
-      onClick={() => handleClick()}
+      onClick={onClick}
     >
       {type === 'routineReminder' && (
         <Box marginRight="20px" background="red.100" padding={2} borderRadius="50%" display="flex">

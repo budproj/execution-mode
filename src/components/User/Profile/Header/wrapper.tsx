@@ -1,15 +1,14 @@
 import { Flex, Heading, Text, Skeleton, AvatarProps } from '@chakra-ui/react'
 import React from 'react'
-import { useRecoilValue } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { UserEditableAvatar } from 'src/components/User/EditableAvatar/wrapper'
 import { User } from 'src/components/User/types'
-import { userAtomFamily } from 'src/state/recoil/user'
 
 export interface UserProfileHeaderProperties {
   isLoaded: boolean
   userID?: User['id']
+  userProps: Partial<User>
   canUpdate?: boolean
   onlyPicture?: boolean
   variantAvatar?: AvatarProps['variant']
@@ -18,11 +17,12 @@ export interface UserProfileHeaderProperties {
 export const UserProfileHeader = ({
   userID,
   isLoaded,
+  userProps,
   canUpdate,
   onlyPicture,
   variantAvatar,
 }: UserProfileHeaderProperties) => {
-  const user = useRecoilValue(userAtomFamily(userID))
+  const { picture, fullName, role } = userProps
 
   return (
     <Flex gridGap={4} alignItems="center">
@@ -30,8 +30,8 @@ export const UserProfileHeader = ({
         isDisabled={!canUpdate}
         size="xl"
         userID={userID}
-        name={user?.fullName}
-        picture={user?.picture}
+        name={fullName}
+        picture={picture}
         variantAvatar={variantAvatar}
       />
 
@@ -40,13 +40,13 @@ export const UserProfileHeader = ({
           <Flex direction="column" gridGap={1}>
             <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 180, 24)}>
               <Heading as="h2" color="black.900" fontSize="2xl" fontWeight={500}>
-                {user?.fullName}
+                {fullName}
               </Heading>
             </Skeleton>
 
             <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 220, 18)}>
               <Text color="gray.400" fontSize="lg" fontWeight={400}>
-                {user?.role}
+                {role}
               </Text>
             </Skeleton>
           </Flex>
