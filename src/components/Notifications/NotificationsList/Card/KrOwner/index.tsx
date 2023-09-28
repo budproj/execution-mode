@@ -14,16 +14,11 @@ import messages from './messages'
 const KrOwner = ({ properties, timestamp, isRead }: Notification) => {
   const intl = useIntl()
 
-  const handleClick = () => {
-    console.log(properties)
-  }
-
   return (
     <BaseCardNotification
       sender={properties.sender}
       timestamp={timestamp}
       isRead={isRead}
-      handleClick={handleClick}
       type={NOTIFICATIONS_TYPE.KR_OWNER}
       describeBadgeAvatarIcon={messages.describeNotificationFirstPart}
     >

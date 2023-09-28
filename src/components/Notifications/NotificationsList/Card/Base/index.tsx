@@ -13,7 +13,7 @@ import { BadgeAvatarIcon } from './Avatar'
 export interface BaseCardsNotifications {
   children?: React.ReactNode
   isRead: boolean
-  handleClick: (id?: KeyResult['id']) => void
+  handleClick?: (id?: KeyResult['id']) => void
   timestamp: string
   describeBadgeAvatarIcon: MessageDescriptor
   badgeIcon?: NOTIFICATIONS_TYPE

@@ -101,8 +101,6 @@ const DashboardPage = () => {
 
   const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
 
-  console.log({ selectedDashboardTeam })
-
   const isCompanySelected = data?.me.companies.edges[0].node.id === selectedDashboardTeam?.id
 
   useEffect(() => {
@@ -118,8 +116,6 @@ const DashboardPage = () => {
   useEffect(() => {
     if (data) setEdges(data.teams.edges)
   }, [data, setEdges])
-
-  console.log({ selectedDashboardTeam })
 
   return (
     <StyledStack bg="new-gray.50" pb={20}>
