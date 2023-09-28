@@ -8,6 +8,23 @@ query GET_TEAM_WITH_ID($teamId: ID!) {
   team(id: $teamId) {
     name
     id
+    status {
+            progress
+            confidence
+            latestCheckIn {
+              createdAt
+              user {
+                fullName
+              }
+            }
+          }
+      delta {
+        progress
+      }
+      tacticalCycle {
+        dateStart
+        dateEnd
+      }
   }
 }
 
