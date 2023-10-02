@@ -403,10 +403,6 @@
     "defaultMessage": "Significativos",
     "description": "This title guides the creation of Objectives."
   },
-  "4+YuJi": {
-    "defaultMessage": "Está construindo seus OKRs? Conheça o novo Modo Rascunho e colabore com seu time!",
-    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
-  },
   "44uWtn": {
     "defaultMessage": "Um ícone arredondado com um gráfico de linha ao centro",
     "description": "The desc message for the Activity icon. This icon is used to ilustrate our key results"
@@ -470,10 +466,6 @@
   "5OEJ9F": {
     "defaultMessage": "Ao realizar essa ação, o OKR entrará no ciclo atual e começará a ter seu progresso contabilizado. Todos os feedbacks serão mantidos dentro dos KRs.",
     "description": "This message appears in the description of the modal that the user uses to confirm their action of posting an OKR."
-  },
-  "5PP1DF": {
-    "defaultMessage": "Já checou seus OKRs hoje? Parece que tem novidade por lá... 👀",
-    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
   },
   "5Vuq/6": {
     "defaultMessage": "{title} Sua resposta foi registrada e já está disponível para visualização nos times dos quais você faz parte. Para a página de qual deles você deseja ir?",
@@ -579,10 +571,6 @@
     "defaultMessage": "Time principal",
     "description": "The title of the main team section"
   },
-  "6XgcX8": {
-    "defaultMessage": "O time de apoio também pode fazer check-in nos resultados-chave dos quais participam.",
-    "description": "The tooltip text for the check-ins description"
-  },
   "728+oa": {
     "defaultMessage": "Todas as tarefas",
     "description": "Label for all tasks selector item"
@@ -610,6 +598,10 @@
   "7WlK+y": {
     "defaultMessage": "Um ícone de um alvo, que aparece junto com a pergunta de quais os focos do usuário para próxima semana.",
     "description": "This message appears as the title of the card that lists the history of retrospectives answered by a user."
+  },
+  "7X4Xpn": {
+    "defaultMessage": "Venha saber mais sobre as novidades de bud no nosso webinar dia 5 de Outubro!",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
   },
   "7Yw26b": {
     "defaultMessage": "Selecione o ano",
@@ -711,6 +703,10 @@
     "defaultMessage": "Sair",
     "description": "The label displayed in the user logout button"
   },
+  "8o0/Bc": {
+    "defaultMessage": "The arrow icon to the right",
+    "description": "MainAppBar user menu first item option"
+  },
   "8wF7XZ": {
     "defaultMessage": "Problema",
     "description": "This text refers to feedbacks that report a issue."
@@ -807,30 +803,6 @@
     "defaultMessage": "{today, select, true {hoje às} false {às} other {às}}",
     "description": "The prefix of the hour description"
   },
-  "atQu7S": {
-    "defaultMessage": "Membro adicionado ao time com sucesso.",
-    "description": "This message appears on a successful toast when we add a user to a team."
-  },
-  "aVLR+w": {
-    "defaultMessage": "100%",
-    "description": "This message is displayed inside our key-result format select as the example of the percent format"
-  },
-  "awPBSY": {
-    "defaultMessage": "ÚLTIMO ACESSO",
-    "description": "The title of the lastAccess column."
-  },
-  "axEJFy": {
-    "defaultMessage": "Nenhum acesso",
-    "description": "This message appears if the user never accessed the Bud."
-  },
-  "az3ncM": {
-    "defaultMessage": "Atenção!{breakline}Esta ação não pode ser desfeita.",
-    "description": "This message is used as the title in our second dialog while removing a cycle"
-  },
-  "B/fme2": {
-    "defaultMessage": "Que bom te ver de novo, {name}! :)",
-    "description": "The page title that our users should see in the dashboard page"
-  },
   "B0G29o": {
     "defaultMessage": "Baixo",
     "description": "We use this tag to group every key result with confidence that is 0 or higher and lower than 25"
@@ -890,26 +862,6 @@
   "C6YmFo": {
     "defaultMessage": "Dicas para escrever um bom resultado-chave:",
     "description": "The title of the tip when you are creating a KR."
-  },
-  "c6ySN2": {
-    "defaultMessage": "Excluir este Objetivo e seus KRs",
-    "description": "This is the third option that appears when you open the menu of a given objective inside the accordion button"
-  },
-  "c8KQhI": {
-    "defaultMessage": "Semana de",
-    "description": "The prefix that appears in our chart tooltip in the key-result sidebar while seeing a quarterly key-result"
-  },
-  "c8UE59": {
-    "defaultMessage": "Um ícone de busca",
-    "description": "The desc message for the Search icon. This icon is used to ilustrate our key results"
-  },
-  "c8x6gV": {
-    "defaultMessage": "Explorar ciclos anteriores",
-    "description": "This message is displayed when the user opens the menu inside a given cycle at the team page"
-  },
-  "C932xL": {
-    "defaultMessage": "{leader} Comente em algum resultado-chave da empresa",
-    "description": "The page title that our users should see in the dashboard page"
   },
   "CDO5jp": {
     "defaultMessage": "Inativo",
@@ -990,14 +942,6 @@
   "DB7Ai9": {
     "defaultMessage": "Salvar",
     "description": "Text in the save action button"
-  },
-  "dBGugM": {
-    "defaultMessage": "SPOTLIGHT",
-    "description": "The title of the history in the draft mode."
-  },
-  "dbh5MZ": {
-    "defaultMessage": "OKRs {companypreposition} {company}",
-    "description": "Company OKR title of the page"
   },
   "DBnPB3": {
     "defaultMessage": "Crie descrições detalhadas nos seus resultados-chave",
@@ -1099,6 +1043,10 @@
     "defaultMessage": "Um ícone de X. Ao clicar nele você irá cancelar a edição deste campo",
     "description": "This text is used by screen readers to explain the X icon. This icon appears below an EditableTextArea. It is used to cancel the edition of that field"
   },
+  "FQpqK8": {
+    "defaultMessage": "OKRs Anuais Empresa",
+    "description": "The summary title for the yearly OKRs"
+  },
   "FRO0CY": {
     "defaultMessage": "Você perderá todos os check-ins e comentários feitos até aqui.",
     "description": "This message is used as the description in our first dialog while removing a key-result"
@@ -1142,6 +1090,10 @@
   "GKl+a6": {
     "defaultMessage": "Desativar conta",
     "description": "This message is the description of the option to deactivate a user account."
+  },
+  "GQGCSQ": {
+    "defaultMessage": "Seus times",
+    "description": "MainAppBar user menu first item option"
   },
   "GYE/N/": {
     "defaultMessage": "{user} está passando por um momento difícil. Que tal uma conversa?",
@@ -1214,10 +1166,6 @@
   "HAQ+JV": {
     "defaultMessage": "Um círculo vermelho, indicando que a confiança está baixa",
     "description": "A brief explanation for screen readers regarding the red status circle"
-  },
-  "hdWCC9": {
-    "defaultMessage": "Próximo",
-    "description": "The label of the button used to go forward while creating a new workspace"
   },
   "HDxm2W": {
     "defaultMessage": "{leader} Comente nos resultados-chave com Barreira",
@@ -1403,21 +1351,9 @@
     "defaultMessage": "PROGRESSO",
     "description": "The title of the progress column."
   },
-  "jRsXuq": {
-    "defaultMessage": "CHECK-INS",
-    "description": "The tooltip text for the check-ins text"
-  },
-  "jSUqyI": {
-    "defaultMessage": "Editar",
-    "description": "This button allow the user edit the Key Result."
-  },
   "JrryPL": {
     "defaultMessage": "A rotina semanal de check-in é parte fundamental para conseguir acompanhar a evolução de uma estratégia",
     "description": "The page title that our users should see in the dashboard page"
-  },
-  "Jt0weE": {
-    "defaultMessage": "Conferir",
-    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
   },
   "Jw9V43": {
     "defaultMessage": "Opções",
@@ -1435,21 +1371,9 @@
     "defaultMessage": "NOTIFICAÇÕES",
     "description": "The tooltip text for the notifications text"
   },
-  "k0fMvn": {
-    "defaultMessage": "Escreva sobre você",
-    "description": "This is the fallback value that goes on our user account settings page, at the seventh field to update the user informations. The fallback value appears if the user has no data at that field"
-  },
   "K2Hthp": {
     "defaultMessage": "Baixo",
     "description": "The description of the pie chart graph that indicates the low status"
-  },
-  "k3EFXK": {
-    "defaultMessage": "O nível de confiança descreve como você vê suas chances de alcançar esse resultado-chave dentro do prazo",
-    "description": "The tooltip of the check-in form. It appears when the user hovers the question mark icon"
-  },
-  "k4LTU8": {
-    "defaultMessage": "Dia de fim do período trimestral",
-    "description": "The label of the company quarterly date end while creating a new workspace"
   },
   "K4Rjji": {
     "defaultMessage": "Histórico",
@@ -1478,30 +1402,6 @@
   "KjG7j3": {
     "defaultMessage": "Meus resultados-chave",
     "description": "The page title that our users should see in the dashboard page"
-  },
-  "kTFIMk": {
-    "defaultMessage": "Você não tem check-ins pendentes porque não está envolvido em nenhum resultado-chave.",
-    "description": "The page description that is displayed if the user has no key result in the check in notifications tab."
-  },
-  "ktxOrA": {
-    "defaultMessage": "Última retrospectiva",
-    "description": "The title of the last routine column"
-  },
-  "kXNgkQ": {
-    "defaultMessage": "Progresso",
-    "description": "The text of the table head related to the Progress column"
-  },
-  "kynYpx": {
-    "defaultMessage": "Meus Resultados-Chave",
-    "description": "The page title that our users should see in the my key results page"
-  },
-  "l+HPdy": {
-    "defaultMessage": "Líder",
-    "description": "The tag title that is displayed when that user is the leader of the team"
-  },
-  "l+s/aT": {
-    "defaultMessage": "beta",
-    "description": "The tag that indicates the beta version of the feature"
   },
   "L/b/G/": {
     "defaultMessage": "Um desenho de uma pasta aberta sem nada dentro",
@@ -1759,10 +1659,6 @@
     "defaultMessage": "desafios e Tarefas da semana",
     "description": "The page title that our users should see in the dashboard page"
   },
-  "Pkdkh4": {
-    "defaultMessage": "Minhas Key Result",
-    "description": "The name of the Key Results page, located at \"/keyResults\""
-  },
   "PKRdQG": {
     "defaultMessage": "Enviar",
     "description": "This message appears in the button to send routine form answers."
@@ -1871,13 +1767,13 @@
     "defaultMessage": "Voltar",
     "description": "This message appears on the back to previous step button in the workflow for creating or editing an objective."
   },
+  "QoIlCT": {
+    "defaultMessage": "OKRs {quarter} Times",
+    "description": "The summery title for the quarterly OKRs"
+  },
   "QpkwoM": {
     "defaultMessage": "Tem certeza que deseja excluir este objetivo?",
     "description": "This message is used as the first dialog title while removing an objective"
-  },
-  "qsn7TW": {
-    "defaultMessage": "Adicionar nova tarefa pessoal",
-    "description": "The add new personal task button label"
   },
   "Qt52rN": {
     "defaultMessage": "Idioma",
@@ -2190,6 +2086,10 @@
   "W9swHV": {
     "defaultMessage": "Configurações",
     "description": "This tooltip is displayed when the user hovers the settings icon"
+  },
+  "WBbFfE": {
+    "defaultMessage": "OKRs {quarter} {team}",
+    "description": "The summery title for the quarterly OKRs"
   },
   "WEXvlm": {
     "defaultMessage": "Experimente usar esse espaço para listar suas prioridades do dia, por exemplo :)",
@@ -2531,13 +2431,13 @@
     "defaultMessage": "Time",
     "description": "The title of the team column"
   },
+  "cbYPl0": {
+    "defaultMessage": "Outros times",
+    "description": "MainAppBar user menu first item option"
+  },
   "chwy/J": {
     "defaultMessage": "Responder hoje",
     "description": "The text that goes in the update text, below the routine title, when the routine is up to date."
-  },
-  "ciNUJf": {
-    "defaultMessage": "Explorar",
-    "description": "MainAppBar menu item that links to teams \"Explore\" page"
   },
   "cz6EUM": {
     "defaultMessage": "Foto",
@@ -2606,10 +2506,6 @@
   "e9PG+t": {
     "defaultMessage": "por {author}",
     "description": "This message displays the latest report author for a given component"
-  },
-  "eG8Ohg": {
-    "defaultMessage": "OKRs Anuais {year}",
-    "description": "The summary title for the yearly OKRs"
   },
   "eI6jYw": {
     "defaultMessage": "Nenhuma informação",
@@ -2794,6 +2690,10 @@
   "hMXuTX": {
     "defaultMessage": "Masculino",
     "description": "This text is used accross our platform to identify the male gender"
+  },
+  "hNsMcg": {
+    "defaultMessage": "Comente em algum resultado-chave da empresa",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "hPJxpx": {
     "defaultMessage": "Média Confiança",
@@ -2999,6 +2899,10 @@
     "defaultMessage": "Comentários:",
     "description": "This message appears as the empty state title of comments in a user retrospective reply"
   },
+  "ktDa/m": {
+    "defaultMessage": "Inscreva-se aqui",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
+  },
   "ktxOrA": {
     "defaultMessage": "Última retrospectiva",
     "description": "The title of the last routine column"
@@ -3147,10 +3051,6 @@
     "defaultMessage": "Resultados-chave",
     "description": "The title of the second section of My Week notification tab."
   },
-  "nEQaGP": {
-    "defaultMessage": "OKRs Trimestrais {quarter}",
-    "description": "The summery title for the quarterly OKRs"
-  },
   "nJ7CuJ": {
     "defaultMessage": "Um ícone de relógio",
     "description": "The desc message for the TimesSquare icon. This icon is used to ilustrate our key results"
@@ -3295,6 +3195,10 @@
     "defaultMessage": "Date de início",
     "description": "The description for date-start cycle field"
   },
+  "qLRP2R": {
+    "defaultMessage": "Times",
+    "description": "MainAppBar menu item that links to teams \"Explore\" page"
+  },
   "qQKiDF": {
     "defaultMessage": "Bom",
     "description": "The description of the pie chart graph that indicates the good status"
@@ -3378,10 +3282,6 @@
   "s8fzur": {
     "defaultMessage": "conta ativa",
     "description": "This string is used to select the active cycles option."
-  },
-  "sYGIlp": {
-    "defaultMessage": "Minha conta",
-    "description": "This label defines the text on the first menu section option"
   },
   "sBSvDB": {
     "defaultMessage": "Ir para o time",
@@ -3491,22 +3391,6 @@
     "defaultMessage": "Boas práticas",
     "description": "The description of the pie chart graph that indicates the label"
   },
-  "TYmE01": {
-    "defaultMessage": "Progresso atual",
-    "description": "This tooltip is displayed when the user hovers the percentage progress above the bar"
-  },
-  "TzHlPJ": {
-    "defaultMessage": "Em manutenção | bud",
-    "description": "The page title of our under maintenance error page that is displayed in the browser tab"
-  },
-  "U1tYhb": {
-    "defaultMessage": "Adicionar",
-    "description": "The label text for the add button in our key result single page or drawers"
-  },
-  "U2EgRG": {
-    "defaultMessage": "Explorar | bud",
-    "description": "The page title that is displayed in the browser tab"
-  },
   "u4rqek": {
     "defaultMessage": "Q4",
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
@@ -3582,22 +3466,6 @@
   "uxjg0W": {
     "defaultMessage": "Não foi possível deletar a resposta!",
     "description": "This message appears in a toast indicating that it was not possible to delete a routines response."
-  },
-  "uXQE/x": {
-    "defaultMessage": "Visualize o avanço geral de todas as áreas da empresa e os respectivos times que as compõem através das barras de evolução.",
-    "description": "The page description that is displayed in Google and screen readers"
-  },
-  "uYEXMZ": {
-    "defaultMessage": "{user} está com barreira há {count, plural, one {# semana} other {# semanas}}. Talvez ele precise de ajuda.",
-    "description": "This message appears how a call to action when the feeling answer refer the bad something."
-  },
-  "UYwpSr": {
-    "defaultMessage": "Time",
-    "description": "This message is displayed as the column header for the key-result table in the team column"
-  },
-  "UZnhGI": {
-    "defaultMessage": "Passo 1",
-    "description": "The label of the first step while creating a new workspace"
   },
   "v4RcBJ": {
     "defaultMessage": "{leader} Comente nos resultados-chave pouco atualizados",

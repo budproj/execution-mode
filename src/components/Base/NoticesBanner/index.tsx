@@ -6,7 +6,7 @@ import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import messages from './messages'
 
-export const storageKey = 'Bud@new-feature.draft-mode'
+export const storageKey = 'Bud@symplawebnar'
 
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()
@@ -49,7 +49,7 @@ const NoticesBanner = () => {
             {intl.formatMessage(messages.learMoreAboutRetrospectiveMessageBanner)}
           </Text>
           <a
-            href="https://www.loom.com/share/3b2139cb6fba4129ae75252eae742d74"
+            href="https://www.sympla.com.br/evento-online/webinar-novas-features/2157728"
             target="_blank"
             style={{ textDecoration: 'none' }}
             rel="noreferrer"
