@@ -1,12 +1,17 @@
 import { useQuery } from '@apollo/client'
 
-import { HealthConfidenceQuantities, Quantities } from 'src/components/Team/types'
+import { HealthConfidenceQuantities, Quantities, Team } from 'src/components/Team/types'
 
-import GET_HEALTH_CONFIDENCE_QUANTITIES from './get-health-confidence-quantities.gql'
+import queries from './get-health-confidence-quantities.gql'
 
 interface GetHealthConfidencesQuantities {
   data: Quantities
   loading: boolean
+}
+
+interface GetHealthConfidencesQuantitiesProperties {
+  selectedDashboardTeam?: Partial<Team>
+  isCompany: boolean
 }
 
 const emptyQuantities: Quantities = {
@@ -20,10 +25,22 @@ const emptyQuantities: Quantities = {
   deprioritized: 0,
 }
 
-export const useGetHealthConfidenceQuantities = (): GetHealthConfidencesQuantities => {
-  const { data, loading } = useQuery<HealthConfidenceQuantities>(GET_HEALTH_CONFIDENCE_QUANTITIES)
+export const useGetHealthConfidenceQuantities = ({
+  isCompany,
+  selectedDashboardTeam,
+}: GetHealthConfidencesQuantitiesProperties): GetHealthConfidencesQuantities => {
+  const { data, loading } = useQuery<HealthConfidenceQuantities>(
+    isCompany
+      ? queries.GET_HEALTH_CONFIDENCE_QUANTITIES
+      : queries.GET_HEALTH_CONFIDENCE_QUANTITIES_BY_TEAM,
+    { variables: { teamId: selectedDashboardTeam?.id } },
+  )
 
-  const quantities = data?.me?.companies.quantities ?? emptyQuantities
+  console.log({ data })
+
+  const quantities = isCompany
+    ? data?.me?.companies.quantities ?? emptyQuantities
+    : data?.team?.quantities ?? emptyQuantities
 
   return { data: quantities, loading }
 }

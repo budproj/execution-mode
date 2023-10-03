@@ -31,10 +31,13 @@ export interface Team extends GraphQLNode {
 }
 
 export interface HealthConfidenceQuantities {
-  me: {
+  me?: {
     companies: {
       quantities: Quantities
     }
+  }
+  team?: {
+    quantities: Quantities
   }
 }
 

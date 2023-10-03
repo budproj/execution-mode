@@ -38,8 +38,6 @@ export const OverviewSummary = ({
     dateEnd: isTeam ? team?.tacticalCycle?.dateEnd : cycle?.dateEnd,
   })
 
-  console.log({ team })
-
   if (team) {
     const progress = team?.status?.progress ?? 0
     const deltaProgress = team?.delta?.progress ?? 0

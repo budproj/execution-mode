@@ -1,7 +1,8 @@
-import { Flex } from '@chakra-ui/react'
+import { Flex, FlexProps } from '@chakra-ui/react'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 
+import { Team } from 'src/components/Team/types'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
 
 import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQuantities'
@@ -10,8 +11,17 @@ import KeyResultConfidences from './KeyResultConfidences'
 import { ConfidenceMapper } from './KeyResultListing/types'
 import { KeyResultsListingTable } from './KeyResultsListingTable'
 
-const BoardsOverview = ({ ...rest }) => {
-  const { data, loading } = useGetHealthConfidenceQuantities()
+interface BoardsOverviewProperties extends FlexProps {
+  selectedDashboardTeam?: Partial<Team>
+  isCompany: boolean
+}
+
+const BoardsOverview = ({
+  isCompany,
+  selectedDashboardTeam,
+  ...rest
+}: BoardsOverviewProperties) => {
+  const { data, loading } = useGetHealthConfidenceQuantities({ isCompany, selectedDashboardTeam })
   const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
   const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
 

@@ -101,8 +101,6 @@ const DashboardPage = () => {
 
   const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
 
-  console.log({ selectedDashboardTeam })
-
   const isCompanySelected = data?.me.companies.edges[0].node.id === selectedDashboardTeam?.id
 
   useEffect(() => {
@@ -187,7 +185,11 @@ const DashboardPage = () => {
               />
             )}
           </Flex>
-          <BoardsOverview pt="2rem" />
+          <BoardsOverview
+            isCompany={isCompanySelected}
+            selectedDashboardTeam={selectedDashboardTeam}
+            pt="2rem"
+          />
         </Stack>
 
         <Box mt="36px">

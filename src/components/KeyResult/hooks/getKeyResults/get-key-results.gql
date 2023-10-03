@@ -93,3 +93,95 @@ query GET_KEY_RESULTS($confidence: String) {
     }
   }
 }
+
+query GET_KEY_RESULTS_FOR_MODAL($confidence: String, $teamId: ID) {
+     team(id: $teamId) {
+      name
+    	keyResults(confidence: $confidence) {
+        edges {
+          node {
+            id
+            title
+            initialValue
+                goal
+                format
+                mode
+                type
+                delta {
+                  progress
+                  confidence
+                }
+                team {
+                  id
+                  name
+                }
+                objective {
+                  title
+                  status {
+                    progress
+                    confidence
+                  }
+                  cycle {
+                    id
+                    period
+                    cadence
+                    parent {
+                      period
+                    }
+                  }
+                }
+                owner {
+                  id
+                  firstName
+                  fullName
+                  nickname
+                  picture
+                  role
+                  about
+                  linkedInProfileAddress
+                  teams {
+                    edges {
+                      node {
+                        id
+                        name
+                      }
+                    }
+                  }
+                }
+                status {
+                  isOutdated
+                  isActive
+                  confidence
+                  progress
+                  latestCheckIn {
+                    id
+                    value
+                    confidence
+                    progress
+                    comment
+                    createdAt
+                    user {
+                      fullName
+                    }
+                  }
+                }
+                keyResultCheckIns {
+                  policy {
+                    create
+                  }
+                }
+                supportTeamMembers {
+                  edges {
+                    node {
+                      id
+                      fullName
+                      picture
+                    }
+                  }
+                }
+          }
+        }
+      }
+  }
+}
+
