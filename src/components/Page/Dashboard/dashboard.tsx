@@ -186,7 +186,11 @@ const DashboardPage = () => {
               />
             )}
           </Flex>
-          <BoardsOverview pt="2rem" />
+          <BoardsOverview
+            isCompany={isCompanySelected}
+            selectedDashboardTeam={selectedDashboardTeam}
+            pt="2rem"
+          />
         </Stack>
 
         <Box mt="36px">

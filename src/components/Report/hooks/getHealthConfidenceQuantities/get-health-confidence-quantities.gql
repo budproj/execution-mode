@@ -14,3 +14,18 @@ query GET_HEALTH_CONFIDENCE_QUANTITIES {
     }
   }
 }
+
+query GET_HEALTH_CONFIDENCE_QUANTITIES_BY_TEAM($teamId: ID) {
+  team(id: $teamId) {
+    quantities {
+      keyResultsQuantity
+      objectivesQuantity
+      high
+      medium
+      low
+      barrier
+      achieved
+      deprioritized
+    }
+  }
+}
