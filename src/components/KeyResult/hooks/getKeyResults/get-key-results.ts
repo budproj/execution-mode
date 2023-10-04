@@ -18,7 +18,7 @@ interface GetCompanyCycles {
   called: boolean
 }
 
-export const useGetKeyResults = (): GetCompanyCycles => {
+export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
   const [loadKRs] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const krHealthStatus = useRecoilValue(krHealthStatusAtom)
   const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
@@ -31,12 +31,12 @@ export const useGetKeyResults = (): GetCompanyCycles => {
   }
 
   const { loading, called } = useQuery<GetUserPrimaryCompanyQuery>(
-    krHealthStatus ? queries.GET_KEY_RESULTS_FOR_MODAL : queries.GET_KEY_RESULTS,
+    krHealthStatus && !isCompany ? queries.GET_KEY_RESULTS_FOR_MODAL : queries.GET_KEY_RESULTS,
     {
       variables: query,
       fetchPolicy: 'network-only',
       onCompleted: (data) => {
-        if (krHealthStatus) {
+        if (krHealthStatus && !isCompany) {
           const keyResultsEdges = data.team?.keyResults?.edges ?? []
           if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
         }
