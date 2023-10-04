@@ -46,7 +46,7 @@ export const useGetMissionControlTasksConfig = (
   userId: string,
 ): UseGetMissionControlTasksConfigOutput => {
   const [yellow, iconFillColorCompleted] = useToken('colors', ['yellow.600', 'green.500'])
-  const { data: user, loading } = useGetUserDetails(userId)
+  const { data: user } = useGetUserDetails(userId)
   const companyId = user?.companies?.edges[0]?.node?.id ?? ''
   const intl = useIntl()
   const route = useRouter()
@@ -178,7 +178,7 @@ export const useGetMissionControlTasksConfig = (
         taskDescriptionMessages.get(template) ?? messages.keyResultCheckinTaskMessageDescription,
       ),
     },
-    icon: loading ? taskCardIcon.get(template) : <div />,
+    icon: taskCardIcon.get(template) ?? <div />,
     actions: {
       role: taskUserRole.get(template) ?? AUTHZ_ROLES.TEAM_MEMBER,
       label: intl.formatMessage(

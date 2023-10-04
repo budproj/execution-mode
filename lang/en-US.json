@@ -4175,6 +4175,14 @@
     "defaultMessage": "Close",
     "description": "This message is displayed as the title text for our close icon in our check-in form"
   },
+  "7X4Xpn": {
+    "defaultMessage": "Come learn more about the latest updates on bud in our webinar on October 5th!",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
+  },
+  "ktDa/m": {
+    "defaultMessage": "Subscribe here",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
+  },
   "zmPWcg": {
     "defaultMessage": "Role",
     "description": "This message is displayed as the column header for the users table in the role column"

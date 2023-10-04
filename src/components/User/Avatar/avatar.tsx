@@ -18,6 +18,7 @@ const UserAvatar = ({ bottomText, variantAvatar = 'square', ...rest }: UserAvata
 
   return (
     <Avatar
+      loading="lazy"
       variant={variantAvatar}
       icon={
         <ImageIcon

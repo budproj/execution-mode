@@ -18,6 +18,7 @@ import { useGetCompanyCycles } from 'src/components/Report/hooks'
 import { Team } from 'src/components/Team/types'
 import { UserProfileHeader } from 'src/components/User/Profile/Header/wrapper'
 import { TeamsMenuProfile } from 'src/components/User/Profile/TeamsMenu'
+import { User } from 'src/components/User/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
@@ -31,7 +32,9 @@ interface GetUserNameGenderAndSettingsRequest {
   me: {
     id: string
     firstName: string
+    picture: string
     gender: string
+    role: User['role']
     settings: {
       edges: Array<{ node: { preferences: string } }>
     }
@@ -90,14 +93,14 @@ const DashboardPage = () => {
   const [mainTeamId, setMainTeamId] = useState('')
 
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
-  const { firstName, id: userID } = data?.me ?? {}
 
   const activeCompanyCycles = allCompanyCycles.filter((cycle) => cycle.active)
 
   const yearly = activeCompanyCycles.find((cycle) => cycle.cadence === CADENCE.YEARLY)
   const quarter = activeCompanyCycles.find((cycle) => cycle.cadence === CADENCE.QUARTERLY)
 
-  const pageTitle = called && !loading && intl.formatMessage(messages.greeting, { name: firstName })
+  const pageTitle =
+    called && !loading && intl.formatMessage(messages.greeting, { name: data?.me.firstName })
 
   const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
 
@@ -117,8 +120,6 @@ const DashboardPage = () => {
     if (data) setEdges(data.teams.edges)
   }, [data, setEdges])
 
-  console.log({ selectedDashboardTeam })
-
   return (
     <StyledStack bg="new-gray.50" pb={20}>
       <Box bg="brand.500" h="45vh" position="relative" zIndex={2}>
@@ -128,7 +129,7 @@ const DashboardPage = () => {
             <UserProfileHeader
               canUpdate
               onlyPicture
-              userID={userID}
+              userProps={{ picture: data?.me.picture, role: data?.me.role }}
               isLoaded={!loading}
               variantAvatar="circle"
             />
@@ -140,10 +141,10 @@ const DashboardPage = () => {
         <StyledDiv>
           <Image fill src="/images/shape-footer-teste.svg" className="image" alt="mudar" />
         </StyledDiv>
-        {userID && selectedDashboardTeam?.id && (
+        {data?.me.id && selectedDashboardTeam?.id && (
           <StyledMCWrapper
             position="absolute"
-            userID={userID}
+            userID={data.me.id}
             teamID={selectedDashboardTeam?.id}
             pr={20}
           />

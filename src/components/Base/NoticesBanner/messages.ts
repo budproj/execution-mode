@@ -4,15 +4,14 @@ type NoticesBannerMessages = 'learMoreAboutRetrospectiveMessageBanner' | 'learMo
 
 export default defineMessages<NoticesBannerMessages>({
   learMoreAboutRetrospectiveMessageBanner: {
-    defaultMessage:
-      'Está construindo seus OKRs? Conheça o novo Modo Rascunho e colabore com seu time!',
-    id: '4+YuJi',
+    defaultMessage: 'Venha saber mais sobre as novidades de bud no nosso webinar dia 5 de Outubro!',
+    id: '7X4Xpn',
     description:
       'This message appears on the news banner to invite the user to learn about the Spotlight feature.',
   },
   learMoreActionButton: {
-    defaultMessage: 'Conferir',
-    id: 'Jt0weE',
+    defaultMessage: 'Inscreva-se aqui',
+    id: 'ktDa/m',
     description:
       'This message appears on action button that redirect the user to company page on Spotlight tab',
   },
