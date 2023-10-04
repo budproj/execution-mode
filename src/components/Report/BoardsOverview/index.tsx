@@ -46,6 +46,7 @@ const BoardsOverview = ({
         <KeyResultsListingTable
           isOpen
           confidence={confidence}
+          isCompany={isCompany}
           // eslint-disable-next-line unicorn/no-useless-undefined
           onClose={() => setKrHealthStatus(undefined)}
         />

@@ -13,14 +13,16 @@ export interface BoardsOverviewProperties {
   isOpen: boolean
   confidence: number
   onClose: () => void
+  isCompany?: boolean
 }
 
 export const KeyResultsListingTable = ({
   isOpen,
   confidence,
   onClose,
+  isCompany,
 }: BoardsOverviewProperties) => {
-  const { data, loading } = useGetKeyResults()
+  const { data, loading } = useGetKeyResults(isCompany)
   const [currentConfidenceTag] = useConfidenceTag(confidence)
   const intl = useIntl()
   const { dispatch: dispatchEvent } = useEvent(EventType.OPENED_KEY_RESULT_REPORT_CONFIDANCE)
