@@ -1,23 +1,19 @@
 import { Box, Button, CloseButton, Collapse, Flex, Text } from '@chakra-ui/react'
 import React, { useCallback, useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
 
 import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
-import messages from './messages'
-
-export const storageKey = 'Bud@symplawebnar'
+export const storageKey = ''
 
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()
-  const intl = useIntl()
 
-  const [isOpen, setIsOpen] = useState(false)
+  const [_, setIsOpen] = useState(false)
 
   useEffect(() => {
     const time = setTimeout(() => {
       setIsOpen(() => {
-        const valueStoraged = get(storageKey)
+        const valueStoraged = get('')
         if (valueStoraged === false) {
           return valueStoraged
         }
@@ -30,12 +26,12 @@ const NoticesBanner = () => {
   }, [get])
 
   const handleCloseBanner = useCallback(() => {
-    register(storageKey, false)
+    register('', false)
     setIsOpen(false)
   }, [register])
 
   return (
-    <Collapse animateOpacity in={isOpen}>
+    <Collapse animateOpacity in={false}>
       <Box
         width="100%"
         h={54}
@@ -45,15 +41,8 @@ const NoticesBanner = () => {
         bg="linear-gradient(to right, #F53D7A, #1E97F7)"
       >
         <Flex gap={6} alignItems="center">
-          <Text color="brand.50" fontSize={14} fontWeight="medium">
-            {intl.formatMessage(messages.learMoreAboutRetrospectiveMessageBanner)}
-          </Text>
-          <a
-            href="https://www.sympla.com.br/evento-online/webinar-novas-features/2157728"
-            target="_blank"
-            style={{ textDecoration: 'none' }}
-            rel="noreferrer"
-          >
+          <Text color="brand.50" fontSize={14} fontWeight="medium" />
+          <a href="/" target="_blank" style={{ textDecoration: 'none' }} rel="noreferrer">
             <Button
               p="12px 22px 12px 22px"
               height="100%"
@@ -65,9 +54,7 @@ const NoticesBanner = () => {
               _hover={{
                 color: 'brand.200',
               }}
-            >
-              {intl.formatMessage(messages.learMoreActionButton)}
-            </Button>
+            />
           </a>
         </Flex>
         <CloseButton position="absolute" right={4} color="brand.50" onClick={handleCloseBanner} />
