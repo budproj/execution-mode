@@ -42,6 +42,8 @@ const TeamHoverMenu = ({
 
   const valueStoraged = get(storageKey) || get(storageKey) === false
 
+  console.log({ valueStoraged })
+
   useEffect(() => {
     if (data) {
       setEdges(data.teams.edges)
@@ -54,7 +56,8 @@ const TeamHoverMenu = ({
       backgroundColor="rgba(0,0,0,0.7)"
       height="100%"
       position="absolute"
-      top={valueStoraged ? '78px' : '132px'}
+      // Top={valueStoraged ? '78px' : '132px'}
+      top="78px"
       width="100%"
       transition="0.4s all ease-out"
       pointerEvents={isHovered ? 'auto' : 'none'}
