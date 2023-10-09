@@ -21,7 +21,7 @@ export const TaskCardRoot = ({ children, completed, action, ...rest }: TaskCardR
       bgColor="#fff"
       borderRadius={10}
       w="100%"
-      h={200}
+      minH={200}
       cursor={completed ? 'default' : 'pointer'}
       _hover={{
         boxShadow: completed ? 'default' : '-1px 4px 28px 7px rgba(0,0,0,0.30)',

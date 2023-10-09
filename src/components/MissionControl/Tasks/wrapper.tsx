@@ -49,7 +49,7 @@ export const MissionControlTasksWrapper = ({
       <Text color="white" fontWeight="bold" fontSize={14} textTransform="uppercase" mb={2}>
         {intl.formatMessage(messages.listTasksSectionTitle)}
       </Text>
-      <HStack gap={5}>
+      <HStack gap={5} alignItems="flex-start">
         {tasksSliced.map((task) => {
           const templateKey = getEnumKeyByValue(TASK_TEMPLATE, task.templateId)
 

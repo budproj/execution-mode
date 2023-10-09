@@ -64,12 +64,52 @@ const StyledDiv = styled('div')`
 `
 
 const StyledStack = styled(Stack)`
-  @media (min-width: 1600px) {
-    gap: 110px;
+  @media (max-width: 1120px) {
+    gap: 180px;
+
+    > div {
+      height: 60vh;
+    }
   }
 
-  @media (max-width: 1417px) {
+  @media (min-width: 1200px) {
+    gap: 195px;
+
+    > div {
+      height: 50vh;
+    }
+  }
+
+  @media (min-width: 1340px) {
+    gap: 135px;
+
+    > div {
+      height: 55vh;
+    }
+  }
+
+  @media (min-width: 1700px) {
     gap: 185px;
+
+    > div {
+      height: 40vh;
+    }
+  }
+
+  @media (min-width: 1800px) {
+    gap: 130px;
+
+    > div {
+      height: 40vh;
+    }
+  }
+
+  @media (min-width: 2400px) {
+    gap: 30px;
+
+    > div {
+      height: 40vh;
+    }
   }
 `
 
@@ -121,8 +161,8 @@ const DashboardPage = () => {
   }, [data, setEdges])
 
   return (
-    <StyledStack bg="new-gray.50" pb={20}>
-      <Box bg="brand.500" h="45vh" position="relative" zIndex={2}>
+    <StyledStack bg="new-gray.50">
+      <Box bg="brand.500" position="relative" zIndex={2}>
         <Stack>
           <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
           <PageHeader display="flex" gap={8} alignItems="center" py={10} px={20} flexGrow={1}>
@@ -193,7 +233,7 @@ const DashboardPage = () => {
           />
         </Stack>
 
-        <Box mt="36px">
+        <Box mt="36px" pb="60px">
           <Text color="new-gray.800" fontWeight={500} fontSize="18px" marginBottom="12px">
             {intl.formatMessage(messages.teamsOverviewTitle)}
           </Text>
