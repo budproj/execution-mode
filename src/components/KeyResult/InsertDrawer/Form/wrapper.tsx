@@ -20,7 +20,6 @@ import { DescriptionInput } from './description'
 import { FormatInput } from './format'
 import { GoalInput } from './goal'
 import { InitialValueInput } from './initial-value'
-import { OkrExampleLink } from './okr-example-link'
 import { OwnerInput } from './owner'
 import queries from './queries.gql'
 import { TitleInput } from './title'
@@ -212,7 +211,7 @@ export const InsertOrUpdateKeyResultForm = ({
             <DescriptionInput isLoading={isLoading} />
           </VStack>
           {/* <DescriptionInput /> */}
-          {!isLoading && !editingModeKeyResult && <OkrExampleLink />}
+          {/* {!isLoading && !editingModeKeyResult && <OkrExampleLink />} */}
           <FormatInput isLoading={isLoading} />
 
           <Stack direction="row" spacing={4}>

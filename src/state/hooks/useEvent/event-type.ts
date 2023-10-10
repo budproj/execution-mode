@@ -54,4 +54,5 @@ export enum EventType {
   CREATE_DRAFT_FEEDBACK_ANSWER_CLICK = 'CreateDraftFeedbackAnswerClick',
   PUBLISH_OKR_CLICK = 'PublishOKRClick',
   GENERATE_KEY_RESULT_SUMMARIZE_CLICK = 'GenerateKeyResultSummarizeClick',
+  MISSION_CONTROL_TASK_CLICK = 'MissionControlTaskClick',
 }
