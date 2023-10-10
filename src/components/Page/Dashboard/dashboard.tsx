@@ -97,7 +97,7 @@ const StyledStack = styled(Stack)`
   }
 
   @media (min-width: 1260px) {
-    gap: 50px;
+    gap: 55px;
 
     > div {
       height: 48vh;
@@ -108,7 +108,7 @@ const StyledStack = styled(Stack)`
     gap: 55px;
 
     > div {
-      height: 68vh;
+      height: 51vh;
     }
   }
 
@@ -156,7 +156,7 @@ const StyledStack = styled(Stack)`
     gap: 65px;
 
     > div {
-      height: 50vh;
+      height: 60vh;
     }
   }
 
@@ -185,10 +185,10 @@ const StyledStack = styled(Stack)`
   }
 
   @media (min-width: 1700px) {
-    gap: 30px;
+    gap: 40px;
 
     > div {
-      height: 40vh;
+      height: 60vh;
     }
   }
 
