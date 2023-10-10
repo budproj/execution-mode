@@ -28,7 +28,15 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
       <Flex justifyContent="space-between">
         <Skeleton isLoaded={isLoaded} {...buildSkeletonMinSize(isLoaded, 200, 21)}>
           <IntlLink href={`/explore/${team?.id ?? ''}`}>
-            <Heading as="h3" fontSize="lg" fontWeight={400} color="black.900">
+            <Heading
+              as="h3"
+              fontSize="lg"
+              fontWeight={400}
+              color="black.900"
+              noOfLines={2}
+              textOverflow="hidden"
+              maxW={520}
+            >
               {team?.name}
             </Heading>
           </IntlLink>

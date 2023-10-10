@@ -72,6 +72,30 @@ const StyledStack = styled(Stack)`
     }
   }
 
+  @media (max-width: 1024px) {
+    gap: 185px;
+
+    > div {
+      height: 55vh;
+    }
+  }
+
+  @media (min-width: 1090px) {
+    gap: 145px;
+
+    > div {
+      height: 75vh;
+    }
+  }
+
+  @media (min-width: 1240px) {
+    gap: 65px;
+
+    > div {
+      height: 75vh;
+    }
+  }
+
   @media (min-width: 1260px) {
     gap: 50px;
 
@@ -80,27 +104,59 @@ const StyledStack = styled(Stack)`
     }
   }
 
-  @media (min-width: 1280px) {
-    gap: 50px;
+  @media (min-width: 1280px) and (min-height: 615px) {
+    gap: 55px;
 
     > div {
-      height: 60vh;
+      height: 68vh;
     }
   }
 
   @media (min-width: 1360px) {
-    gap: 55px;
-
-    > div {
-      height: 55vh;
-    }
-  }
-
-  @media (min-width: 1366px) {
-    gap: 75px;
+    gap: 35px;
 
     > div {
       height: 65vh;
+    }
+  }
+
+  @media (min-width: 1365px) {
+    gap: 50px;
+
+    > div {
+      height: 54vh;
+    }
+  }
+
+  @media (min-width: 1365px) and (height: 611px) {
+    gap: 55px;
+
+    > div {
+      height: 68vh;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    gap: 55px;
+
+    > div {
+      height: 50vh;
+    }
+  }
+
+  @media (min-width: 1510px) {
+    gap: 65px;
+
+    > div {
+      height: 65vh;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    gap: 65px;
+
+    > div {
+      height: 50vh;
     }
   }
 
@@ -113,30 +169,46 @@ const StyledStack = styled(Stack)`
   }
 
   @media (min-width: 1680px) {
-    gap: 45px;
+    gap: 40px;
 
     > div {
-      height: 50vh;
+      height: 43vh;
     }
   }
 
   @media (min-width: 1690px) {
-    gap: 65px;
+    gap: 50px;
+
+    > div {
+      height: 42vh;
+    }
+  }
+
+  @media (min-width: 1700px) {
+    gap: 30px;
 
     > div {
       height: 40vh;
     }
   }
 
-  @media (min-width: 1750px) {
-    gap: 20px;
+  @media (min-width: 1745px) {
+    gap: 45px;
 
     > div {
-      height: 45vh;
+      height: 54vh;
     }
   }
 
   @media (min-width: 1920px) {
+    gap: 45px;
+
+    > div {
+      height: 42vh;
+    }
+  }
+
+  @media (max-width: 1920px) and (height: 923px) {
     gap: 40px;
 
     > div {
@@ -144,7 +216,15 @@ const StyledStack = styled(Stack)`
     }
   }
 
-  @media (min-width: 1925px) {
+  @media (min-width: 1920px) and (height: 1200px) {
+    gap: 45px;
+
+    > div {
+      height: 38vh;
+    }
+  }
+
+  @media (min-width: 2133px) {
     gap: 45px;
 
     > div {
@@ -168,11 +248,19 @@ const StyledStack = styled(Stack)`
     }
   }
 
+  @media (min-width: 2400px) {
+    gap: 25px;
+
+    > div {
+      height: 41vh;
+    }
+  }
+
   @media (min-width: 2560px) {
     gap: 15px;
 
     > div {
-      height: 35vh;
+      height: 40vh;
     }
   }
 `
