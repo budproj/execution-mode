@@ -84,7 +84,7 @@ const StyledStack = styled(Stack)`
     gap: 50px;
 
     > div {
-      height: 75vh;
+      height: 60vh;
     }
   }
 
@@ -92,7 +92,15 @@ const StyledStack = styled(Stack)`
     gap: 55px;
 
     > div {
-      height: 70vh;
+      height: 55vh;
+    }
+  }
+
+  @media (min-width: 1366px) {
+    gap: 75px;
+
+    > div {
+      height: 65vh;
     }
   }
 
@@ -100,7 +108,7 @@ const StyledStack = styled(Stack)`
     gap: 45px;
 
     > div {
-      height: 60vh;
+      height: 50vh;
     }
   }
 
@@ -113,18 +121,26 @@ const StyledStack = styled(Stack)`
   }
 
   @media (min-width: 1690px) {
-    gap: 45px;
+    gap: 65px;
 
     > div {
-      height: 60vh;
+      height: 40vh;
     }
   }
 
   @media (min-width: 1750px) {
-    gap: 15px;
+    gap: 20px;
 
     > div {
-      height: 55vh;
+      height: 45vh;
+    }
+  }
+
+  @media (min-width: 1920px) {
+    gap: 40px;
+
+    > div {
+      height: 50vh;
     }
   }
 
@@ -149,6 +165,14 @@ const StyledStack = styled(Stack)`
 
     > div {
       height: 44vh;
+    }
+  }
+
+  @media (min-width: 2560px) {
+    gap: 15px;
+
+    > div {
+      height: 35vh;
     }
   }
 `
