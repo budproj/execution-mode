@@ -50,7 +50,7 @@ interface PreferencesProperties {
 const StyledDiv = styled('div')`
   width: 100%;
   position: absolute;
-  top: 240px;
+  bottom: 0;
 
   > div {
     position: unset !important;
@@ -64,51 +64,91 @@ const StyledDiv = styled('div')`
 `
 
 const StyledStack = styled(Stack)`
-  @media (max-width: 1120px) {
-    gap: 180px;
+  @media (min-width: 730px) {
+    gap: 50px;
+
+    > div {
+      height: 75vh;
+    }
+  }
+
+  @media (min-width: 1260px) {
+    gap: 50px;
+
+    > div {
+      height: 48vh;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    gap: 50px;
+
+    > div {
+      height: 75vh;
+    }
+  }
+
+  @media (min-width: 1360px) {
+    gap: 55px;
+
+    > div {
+      height: 70vh;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    gap: 45px;
 
     > div {
       height: 60vh;
     }
   }
 
-  @media (min-width: 1200px) {
-    gap: 195px;
+  @media (min-width: 1680px) {
+    gap: 45px;
 
     > div {
       height: 50vh;
     }
   }
 
-  @media (min-width: 1340px) {
-    gap: 135px;
+  @media (min-width: 1690px) {
+    gap: 45px;
+
+    > div {
+      height: 60vh;
+    }
+  }
+
+  @media (min-width: 1750px) {
+    gap: 15px;
 
     > div {
       height: 55vh;
     }
   }
 
-  @media (min-width: 1700px) {
-    gap: 185px;
+  @media (min-width: 1925px) {
+    gap: 45px;
 
     > div {
-      height: 40vh;
+      height: 45vh;
     }
   }
 
-  @media (min-width: 1800px) {
-    gap: 130px;
+  @media (min-width: 2220px) {
+    gap: 15px;
 
     > div {
-      height: 40vh;
+      height: 38vh;
     }
   }
 
-  @media (min-width: 2400px) {
-    gap: 30px;
+  @media (min-width: 2290px) {
+    gap: 15px;
 
     > div {
-      height: 40vh;
+      height: 44vh;
     }
   }
 `
