@@ -9,7 +9,6 @@ import {
   Text,
   Button,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import React, { useCallback, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -22,7 +21,6 @@ export const newsBannerStorageKey = 'newBestPraticesLighthouse'
 
 const NewsBanner = () => {
   const intl = useIntl()
-  const router = useRouter()
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
