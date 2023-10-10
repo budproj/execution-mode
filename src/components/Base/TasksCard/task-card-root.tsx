@@ -9,7 +9,7 @@ interface TaskCardRootProperties extends GridProps {
   children: React.ReactNode
   action?: () => void
   completed: boolean
-  template: TASK_TEMPLATE
+  template?: TASK_TEMPLATE
 }
 
 export const TaskCardRoot = ({
