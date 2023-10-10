@@ -13,13 +13,20 @@ interface TaskCardProperties {
   completed: boolean
   teamID: string
   userId: string
+  score: number
 }
 
-export const TasksListItem = ({ template, completed, teamID, userId }: TaskCardProperties) => {
+export const TasksListItem = ({
+  template,
+  completed,
+  teamID,
+  userId,
+  score,
+}: TaskCardProperties) => {
   const config = useGetMissionControlTasksConfig(template, completed, teamID, userId)
 
   return (
-    <TaskCard.Root completed={completed} action={config.action}>
+    <TaskCard.Root completed={completed} action={config.action} template={template}>
       <VStack alignItems="flex-start" justifyContent="space-between">
         <TaskCard.Content
           completed={completed}
@@ -37,7 +44,7 @@ export const TasksListItem = ({ template, completed, teamID, userId }: TaskCardP
       </VStack>
       <VStack justifyContent="space-between">
         <TaskCard.Icon>{config.icon}</TaskCard.Icon>
-        <TaskCard.Delta value={2.4} />
+        <TaskCard.Delta value={score} />
       </VStack>
     </TaskCard.Root>
   )

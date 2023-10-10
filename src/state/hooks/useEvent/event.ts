@@ -25,6 +25,7 @@ import { KeyResultProgressChartViewEventData } from './events/key-result-progres
 import { LearnMoreBannerNoticesClickData } from './events/learn-more-banner-notices-click-data'
 import { MentionInRoutineAnswerClickData } from './events/mention-in-routine-click-data'
 import { MetricTeamRowClickData } from './events/metric-team-row-click-data'
+import { MissionControlTaskClickData } from './events/mission-control-task-click.data'
 import { NotificationBellData } from './events/notification-bell-data'
 import { NotificationCardClickData } from './events/notification-card-click-data'
 import { NotificationCheckInClickData } from './events/notification-check-in-click-data'
@@ -105,4 +106,5 @@ export type Event = {
   [EventType.CREATE_DRAFT_FEEDBACK_ANSWER_CLICK]: CreateDraftFeedbackAnswerClickData
   [EventType.PUBLISH_OKR_CLICK]: PublishOkrClickData
   [EventType.GENERATE_KEY_RESULT_SUMMARIZE_CLICK]: GenerateKeyResultSummarizeClickData
+  [EventType.MISSION_CONTROL_TASK_CLICK]: MissionControlTaskClickData
 }
