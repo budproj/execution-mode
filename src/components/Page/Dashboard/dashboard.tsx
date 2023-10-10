@@ -156,7 +156,7 @@ const StyledStack = styled(Stack)`
     gap: 65px;
 
     > div {
-      height: 60vh;
+      height: 50vh;
     }
   }
 
@@ -188,7 +188,7 @@ const StyledStack = styled(Stack)`
     gap: 30px;
 
     > div {
-      height: 60vh;
+      height: 40vh;
     }
   }
 
