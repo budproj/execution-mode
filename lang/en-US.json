@@ -51,6 +51,10 @@
     "defaultMessage": "Primary team",
     "description": "The title of the main team section"
   },
+  "3IsNOi": {
+    "defaultMessage": "Good to see you again, {name}! :)",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "7ZtAaa": {
     "defaultMessage": "Seek to understand the barriers and how you can contribute to these key results.",
     "description": "The page title that our users should see in the dashboard page"
