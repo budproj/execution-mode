@@ -763,6 +763,10 @@
     "defaultMessage": "Selecionar",
     "description": "This is the default placeholder while selecting a given value in a select menu"
   },
+  "A4WTq8": {
+    "defaultMessage": "A cada semana novos desafios personalizados que ajudam você e seu time a se manterem dentro das melhores práticas de implementação de OKRs",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
+  },
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
@@ -1646,6 +1650,10 @@
   "P0g9QE": {
     "defaultMessage": "Dia de início do período anual",
     "description": "The label of the company yearly date start while creating a new workspace"
+  },
+  "P48rc3": {
+    "defaultMessage": "NOVO FAROL DE BOAS PRÁTICAS",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
   },
   "PFysOr": {
     "defaultMessage": "Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave",
@@ -3638,6 +3646,10 @@
   "xaHzA0": {
     "defaultMessage": "Sobrenome",
     "description": "The user last name input placeholder while creating a new workspace"
+  },
+  "xabV3g": {
+    "defaultMessage": "Saiba Mais",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
   },
   "xe74UT": {
     "defaultMessage": "Em OKRs, costuma-se mirar em atingir ao menos 70% das metas. Para atingir esse patamar até o fim do ciclo, o progresso atual esperado é de {progress}%.",

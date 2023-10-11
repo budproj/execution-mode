@@ -101,8 +101,10 @@ export const TeamsMenuProfile = ({
             />
           )}
         </MenuButton>
-        <MenuList>
+        <MenuList color="gray.500" fontSize={14}>
           <MenuItem
+            borderTopLeftRadius={10}
+            borderTopRightRadius={10}
             _hover={{ background: 'white' }}
             py={2}
             px={2}
@@ -113,20 +115,25 @@ export const TeamsMenuProfile = ({
               transition="0.3s"
               width="100%"
               borderRadius="3px"
-              paddingLeft="12px"
-              alignItems="center"
+              px={2}
               height="26px"
+              alignItems="center"
             >
               {mainTeamRequest?.team.name}
               <StarIcon desc="" stroke="black" withCircle={false} fill="red" width={9} />
             </Flex>
           </MenuItem>
-          {teamsToMap?.map((team) => {
+          {teamsToMap?.map((team, index, array) => {
+            const borderRadius = index === array.length - 1 ? '10px' : 'none'
+
             return (
               <MenuItem
                 key={team.id}
                 _hover={{ background: 'none' }}
                 py={2}
+                px={2}
+                borderBottomLeftRadius={borderRadius}
+                borderBottomRightRadius={borderRadius}
                 onClick={() => setSelectedDashboardTeam(team)}
               >
                 <Flex
@@ -134,7 +141,7 @@ export const TeamsMenuProfile = ({
                   transition="0.3s"
                   width="100%"
                   borderRadius="3px"
-                  paddingLeft="6px"
+                  px={2}
                   height="26px"
                   alignItems="center"
                 >
