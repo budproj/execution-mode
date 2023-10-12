@@ -17,6 +17,8 @@ type MissionControlTaskMessages =
   | 'goToTeamActionLabelMessage'
   | 'listTasksSectionTitle'
   | 'leaderLabel'
+  | 'emptyTasksMessageTitle'
+  | 'emptyTasksMessageDescription'
 
 export default defineMessages<MissionControlTaskMessages>({
   keyResultCheckinTaskMessageTitle: {
@@ -102,6 +104,16 @@ export default defineMessages<MissionControlTaskMessages>({
   leaderLabel: {
     defaultMessage: 'Líder',
     id: 'j259Ph',
+    description: 'The page title that our users should see in the dashboard page',
+  },
+  emptyTasksMessageTitle: {
+    defaultMessage: 'Não há tarefas pra você nesse time',
+    id: 'bmhAwE',
+    description: 'The page title that our users should see in the dashboard page',
+  },
+  emptyTasksMessageDescription: {
+    defaultMessage: 'Ainda não há tarefas designadas para você nesse time.',
+    id: 'Epx9q+',
     description: 'The page title that our users should see in the dashboard page',
   },
 })

@@ -168,6 +168,14 @@ const StyledStack = styled(Stack)`
     }
   }
 
+  @media (min-width: 1440px) and (max-height: 783px) {
+    gap: 60px;
+
+    > div {
+      height: 57vh;
+    }
+  }
+
   @media (min-width: 1510px) {
     gap: 65px;
 
@@ -218,6 +226,14 @@ const StyledStack = styled(Stack)`
 
   @media (min-width: 1745px) {
     gap: 45px;
+
+    > div {
+      height: 54vh;
+    }
+  }
+
+  @media (min-width: 1821px) {
+    gap: 65px;
 
     > div {
       height: 54vh;
@@ -374,7 +390,7 @@ const DashboardPage = () => {
             {intl.formatMessage(messages.okrOverViewTitle)}
           </Text>
 
-          <Flex gridGap="3rem">
+          <Flex gridGap="3rem" justifyContent="space-between">
             <OverviewSummary
               title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
               cycle={yearly}

@@ -1011,6 +1011,10 @@
     "defaultMessage": "Criar novo subtime",
     "description": "This message appears as an option in the team page while adding a new user"
   },
+  "Epx9q+": {
+    "defaultMessage": "Ainda não há tarefas designadas para você nesse time.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "ErVh0y": {
     "defaultMessage": "Valor atual",
     "description": "This is the label of the check-in form that indicates from which value the user would update her/his key result"
@@ -2406,6 +2410,10 @@
   "biDODR": {
     "defaultMessage": "Um ícone de lupa, indicando que este é um campo de busca",
     "description": "This text is used by screen readers to explain the search icon in all our search inputs"
+  },
+  "bmhAwE": {
+    "defaultMessage": "Não há tarefas pra você nesse time",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "bqCVp4": {
     "defaultMessage": "Clique aqui para começar a escrever um comentário",

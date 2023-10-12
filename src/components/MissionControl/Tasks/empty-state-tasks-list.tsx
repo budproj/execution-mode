@@ -1,17 +1,22 @@
 import { VStack } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { TaskCard } from 'src/components/Base/TasksCard/wrapper'
 import { DangerActionIcon } from 'src/components/Icon'
 
+import messages from './messages'
+
 export const EmptyStateTasksList = () => {
+  const intl = useIntl()
+
   return (
     <TaskCard.Root completed border="2px dotted #C5C5FF">
       <VStack alignItems="flex-start" justifyContent="space-between">
         <TaskCard.Content
           completed
-          title="Não há tarefas pra você nesse time"
-          subtitle="Ainda não há tarefas designadas para você nesse time."
+          title={intl.formatMessage(messages.emptyTasksMessageTitle)}
+          subtitle={intl.formatMessage(messages.emptyTasksMessageDescription)}
         />
       </VStack>
       <VStack justifyContent="space-between">
