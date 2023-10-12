@@ -47,6 +47,14 @@
     "defaultMessage": "Set as primary team?",
     "description": "The label of the button that makes the team the main team"
   },
+  "Epx9q+": {
+    "defaultMessage": "There are no tasks assigned to you on this team yet.",
+    "description": "The page title that our users should see in the dashboard page"
+  },
+  "bmhAwE": {
+    "defaultMessage": "There are no tasks for you on this team",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "6ws/gr": {
     "defaultMessage": "Primary team",
     "description": "The title of the main team section"

@@ -374,7 +374,7 @@ const DashboardPage = () => {
             {intl.formatMessage(messages.okrOverViewTitle)}
           </Text>
 
-          <Flex gridGap="3rem">
+          <Flex gridGap="3rem" justifyContent="space-between">
             <OverviewSummary
               title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
               cycle={yearly}
