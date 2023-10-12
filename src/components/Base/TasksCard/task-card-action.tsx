@@ -1,8 +1,11 @@
 import { Box, BoxProps, useToken } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { LikeIcon } from 'src/components/Icon'
 import { AUTHZ_ROLES } from 'src/state/recoil/authz/constants'
+
+import messages from './messages'
 
 interface TaskCardActionProperties extends BoxProps {
   role: AUTHZ_ROLES
@@ -11,6 +14,7 @@ interface TaskCardActionProperties extends BoxProps {
 }
 
 export const TaskCardAction = ({ role, label, completed, ...rest }: TaskCardActionProperties) => {
+  const intl = useIntl()
   const [defaultColor, completedStatusColor, labelCompletedColor, labelDefaultColor] = useToken(
     'colors',
     [
@@ -30,8 +34,8 @@ export const TaskCardAction = ({ role, label, completed, ...rest }: TaskCardActi
       fontWeight="bold"
       textColor={completed ? labelCompletedColor : labelDefaultColor}
     >
-      {completed && <LikeIcon desc="mudar" w="1.4rem" h="1.4rem" mr={2} />}
-      {label}
+      {completed ? intl.formatMessage(messages.doneTask) : label}
+      {completed && <LikeIcon desc="mudar" w="1.4rem" h="1.4rem" ml={2} />}
     </Box>
   )
 }
