@@ -16,6 +16,7 @@ export const UserEditableAvatar = ({
   isDisabled,
   size,
   variantAvatar,
+  handleUpdatePicture,
   ...rest
 }: UserEditableAvatarProperties) => {
   const intl = useIntl()
@@ -114,6 +115,7 @@ export const UserEditableAvatar = ({
         src={localPictureData}
         isOpen={isCropping}
         onClose={handleCropClose}
+        onUpdate={handleUpdatePicture}
       />
     </>
   )

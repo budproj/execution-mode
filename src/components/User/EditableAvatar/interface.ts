@@ -7,4 +7,5 @@ export interface UserEditableAvatarProperties extends UserAvatarProperties {
   picture?: string
   size?: string
   isDisabled?: boolean
+  handleUpdatePicture?: () => Promise<any>
 }
