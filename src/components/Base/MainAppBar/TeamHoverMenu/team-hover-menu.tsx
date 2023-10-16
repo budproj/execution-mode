@@ -130,7 +130,9 @@ const TeamHoverMenu = ({
               >
                 <IntlLink href="/explore">
                   <Flex alignItems="center">
-                    <Text marginRight="5px">Ver Todos</Text>
+                    <Text marginRight="5px">
+                      {intl.formatMessage(messages.viewMoreTeamsButton)}
+                    </Text>
                     <CircleArrowRight desc={intl.formatMessage(messages.arrowIconDescription)} />
                   </Flex>
                 </IntlLink>
