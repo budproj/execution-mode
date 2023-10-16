@@ -67,6 +67,7 @@ export const UserProfile = ({
           fullName: data?.user.fullName,
           role: data?.user.role,
         }}
+        handleUpdatePicture={refetch}
         isLoaded={isLoaded}
         canUpdate={canUpdate}
       />

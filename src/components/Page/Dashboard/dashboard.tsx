@@ -319,7 +319,7 @@ const StyledMCWrapper = styled(MissionControlWrapper)`
 
 const DashboardPage = () => {
   const intl = useIntl()
-  const { data, loading, called } = useQuery<GetUserNameGenderAndSettingsRequest>(
+  const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
     queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
   )
   const me = useRecoilValue(meAtom)
