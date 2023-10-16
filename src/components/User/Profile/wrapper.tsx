@@ -34,15 +34,12 @@ export const UserProfile = ({
 
   const [isRecoilSynced, setIsRecoilSynced] = useState(false)
   const [user, setUser] = useRecoilState(selectUser(userID))
-  const [getUserData, { loading, data, refetch }] = useLazyQuery<GetUserDataQuery>(
-    queries.GET_USER_DATA,
-    {
-      onCompleted: (data) => setUser(data.user),
-      variables: {
-        id: userID,
-      },
+  const [getUserData, { loading, data }] = useLazyQuery<GetUserDataQuery>(queries.GET_USER_DATA, {
+    onCompleted: (data) => setUser(data.user),
+    variables: {
+      id: userID,
     },
-  )
+  })
 
   const isLoaded = !loading && isRecoilSynced
   const canUpdate = user?.policy?.update === GraphQLEffect.ALLOW
@@ -67,7 +64,6 @@ export const UserProfile = ({
           fullName: data?.user.fullName,
           role: data?.user.role,
         }}
-        handleUpdatePicture={refetch}
         isLoaded={isLoaded}
         canUpdate={canUpdate}
       />
