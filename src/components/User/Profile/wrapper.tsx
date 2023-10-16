@@ -59,6 +59,7 @@ export const UserProfile = ({
     <Stack py={4} spacing={6} direction="column" flexGrow={1} h="full">
       <UserProfileHeader
         userProps={{
+          id: data?.user.id,
           picture: data?.user.picture,
           fullName: data?.user.fullName,
           role: data?.user.role,

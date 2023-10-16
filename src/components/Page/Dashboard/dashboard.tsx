@@ -361,7 +361,7 @@ const DashboardPage = () => {
             <UserProfileHeader
               canUpdate
               onlyPicture
-              userProps={{ picture: data?.me.picture, role: data?.me.role }}
+              userProps={{ id: data?.me.id, picture: data?.me.picture, role: data?.me.role }}
               isLoaded={!loading}
               variantAvatar="circle"
             />

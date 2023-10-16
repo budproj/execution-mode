@@ -22,14 +22,14 @@ export const UserProfileHeader = ({
   onlyPicture,
   variantAvatar,
 }: UserProfileHeaderProperties) => {
-  const { picture, fullName, role } = userProps
+  const { picture, fullName, role, id } = userProps
 
   return (
     <Flex gridGap={4} alignItems="center">
       <UserEditableAvatar
         isDisabled={!canUpdate}
         size="xl"
-        userID={userID}
+        userID={userID ?? id}
         name={fullName}
         picture={picture}
         variantAvatar={variantAvatar}
