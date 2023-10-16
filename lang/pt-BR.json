@@ -299,6 +299,10 @@
     "defaultMessage": "Inglês",
     "description": "This message is used as the label for the english language in our locale switcher"
   },
+  "2idxvz": {
+    "defaultMessage": "Ver Todos",
+    "description": "MainAppBar user menu first item option"
+  },
   "2leAvr": {
     "defaultMessage": "Minhas Tarefas",
     "description": "The header in my tasks title, inside my things page"

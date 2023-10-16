@@ -47,6 +47,22 @@
     "defaultMessage": "Comment on any of the company's key results",
     "description": "The page title that our users should see in the dashboard page"
   },
+  "2idxvz": {
+    "defaultMessage": "See all",
+    "description": "MainAppBar user menu first item option"
+  },
+  "cbYPl0": {
+    "defaultMessage": "Other teams",
+    "description": "MainAppBar user menu first item option"
+  },
+  "qLRP2R": {
+    "defaultMessage": "Teams",
+    "description": "MainAppBar menu item that links to teams \"Explore\" page"
+  },
+  "GQGCSQ": {
+    "defaultMessage": "Your teams",
+    "description": "MainAppBar user menu first item option"
+  },
   "uM5lpV": {
     "defaultMessage": "Task done",
     "description": "The text that appears when the task is done."
