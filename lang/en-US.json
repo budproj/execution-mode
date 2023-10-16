@@ -43,6 +43,10 @@
     "defaultMessage": "It's important for key results to have descriptions so that everyone better understands the strategy.",
     "description": "The page title that our users should see in the dashboard page"
   },
+  "hNsMcg": {
+    "defaultMessage": "Comment on any of the company's key results",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "3MleM/": {
     "defaultMessage": "Set as primary team?",
     "description": "The label of the button that makes the team the main team"
