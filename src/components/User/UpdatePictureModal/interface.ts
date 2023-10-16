@@ -4,4 +4,5 @@ export interface UserUpdatePictureModalInterface {
   initialZoom?: number
   isOpen?: boolean
   onClose?: (newValue: boolean) => void
+  onUpdate?: () => Promise<void>
 }

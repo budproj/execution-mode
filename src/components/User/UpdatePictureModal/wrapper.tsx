@@ -37,6 +37,7 @@ export const UserUpdatePictureModal = ({
   isOpen,
   initialZoom,
   onClose,
+  onUpdate,
 }: UserUpdatePictureModalInterface) => {
   const [isModalOpen, setIsModalOpen] = useState(isOpen ?? false)
   const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -48,11 +49,12 @@ export const UserUpdatePictureModal = ({
   const [updatePicture, { loading }] = useMutation<UpdateUserMutationResult>(
     query.UpdateUserPicture,
     {
-      onCompleted: (data) => {
+      onCompleted: async (data) => {
         setUser({
           ...user,
           ...data.updateUser,
         })
+        if (onUpdate) await onUpdate()
       },
     },
   )

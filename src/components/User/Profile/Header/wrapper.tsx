@@ -12,6 +12,7 @@ export interface UserProfileHeaderProperties {
   canUpdate?: boolean
   onlyPicture?: boolean
   variantAvatar?: AvatarProps['variant']
+  handleUpdatePicture?: () => Promise<any>
 }
 
 export const UserProfileHeader = ({
@@ -21,6 +22,7 @@ export const UserProfileHeader = ({
   canUpdate,
   onlyPicture,
   variantAvatar,
+  handleUpdatePicture,
 }: UserProfileHeaderProperties) => {
   const { picture, fullName, role, id } = userProps
 
@@ -33,6 +35,7 @@ export const UserProfileHeader = ({
         name={fullName}
         picture={picture}
         variantAvatar={variantAvatar}
+        handleUpdatePicture={handleUpdatePicture}
       />
 
       {!onlyPicture && (
