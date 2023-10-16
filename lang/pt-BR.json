@@ -299,6 +299,10 @@
     "defaultMessage": "Inglês",
     "description": "This message is used as the label for the english language in our locale switcher"
   },
+  "2idxvz": {
+    "defaultMessage": "Ver Todos",
+    "description": "MainAppBar user menu first item option"
+  },
   "2leAvr": {
     "defaultMessage": "Minhas Tarefas",
     "description": "The header in my tasks title, inside my things page"
@@ -3422,6 +3426,10 @@
   "uIY7F5": {
     "defaultMessage": "Retrospectiva da Semana",
     "description": "Title of the content of the Retrospective tab on the teams page."
+  },
+  "uM5lpV": {
+    "defaultMessage": "Tarefa feita",
+    "description": "The text that appears when the task is done."
   },
   "uORr+d": {
     "defaultMessage": "Resultados-chave sem atualizações se tornam difíceis de acompanhar",

@@ -42,8 +42,6 @@ const TeamHoverMenu = ({
 
   const valueStoraged = get(storageKey) || get(storageKey) === false
 
-  console.log({ valueStoraged })
-
   useEffect(() => {
     if (data) {
       setEdges(data.teams.edges)
@@ -56,8 +54,7 @@ const TeamHoverMenu = ({
       backgroundColor="rgba(0,0,0,0.7)"
       height="100%"
       position="absolute"
-      // Top={valueStoraged ? '78px' : '132px'}
-      top="78px"
+      top={valueStoraged ? '78px' : '132px'}
       width="100%"
       transition="0.4s all ease-out"
       pointerEvents={isHovered ? 'auto' : 'none'}
@@ -130,7 +127,9 @@ const TeamHoverMenu = ({
               >
                 <IntlLink href="/explore">
                   <Flex alignItems="center">
-                    <Text marginRight="5px">Ver Todos</Text>
+                    <Text marginRight="5px">
+                      {intl.formatMessage(messages.viewMoreTeamsButton)}
+                    </Text>
                     <CircleArrowRight desc={intl.formatMessage(messages.arrowIconDescription)} />
                   </Flex>
                 </IntlLink>
