@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 
 import { GraphQLEffect } from 'src/components/types'
-import { userSelector } from 'src/state/recoil/user'
+import selectUser from 'src/state/recoil/user/selector'
 
 import { User } from '../types'
 
@@ -33,7 +33,7 @@ export const UserProfile = ({
   isRemovable ??= true
 
   const [isRecoilSynced, setIsRecoilSynced] = useState(false)
-  const [user, setUser] = useRecoilState(userSelector(userID))
+  const [user, setUser] = useRecoilState(selectUser(userID))
   const [getUserData, { loading, data, refetch }] = useLazyQuery<GetUserDataQuery>(
     queries.GET_USER_DATA,
     {
