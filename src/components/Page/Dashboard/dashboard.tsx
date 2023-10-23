@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import { useFlags } from 'flagsmith/react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -319,6 +320,8 @@ const StyledMCWrapper = styled(MissionControlWrapper)`
 
 const DashboardPage = () => {
   const intl = useIntl()
+  const flags = useFlags(['mission_control'])
+
   const { data, loading, called } = useQuery<GetUserNameGenderAndSettingsRequest>(
     queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
   )
@@ -327,6 +330,8 @@ const DashboardPage = () => {
 
   const [teams, setEdges] = useConnectionEdges<Team>()
   const [mainTeamId, setMainTeamId] = useState('')
+
+  const isMissionControlVisible = flags.mission_control.enabled
 
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
 
@@ -357,7 +362,7 @@ const DashboardPage = () => {
   }, [data, setEdges])
 
   return (
-    <StyledStack bg="new-gray.50">
+    <StyledStack bg="new-gray.50" position="relative">
       <Box bg="brand.500" position="relative" zIndex={2}>
         <Stack>
           <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
@@ -377,7 +382,7 @@ const DashboardPage = () => {
         <StyledDiv>
           <Image fill src="/images/shape-footer-teste.svg" className="image" alt="mudar" />
         </StyledDiv>
-        {data?.me.id && selectedDashboardTeam?.id && (
+        {isMissionControlVisible && data?.me.id && selectedDashboardTeam?.id && (
           <StyledMCWrapper
             position="absolute"
             userID={data.me.id}
@@ -386,11 +391,22 @@ const DashboardPage = () => {
           />
         )}
       </Box>
-      <PageContent py={0}>
+      <PageContent
+        py={0}
+        position={isMissionControlVisible ? 'initial' : 'absolute'}
+        top={isMissionControlVisible ? 0 : 230}
+        zIndex={isMissionControlVisible ? 'auto' : 2}
+        width="100%"
+      >
         <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
 
         <Stack>
-          <Text color="new-gray.800" fontWeight={500} fontSize="18px" marginBottom="8px">
+          <Text
+            color={isMissionControlVisible ? 'new-gray.800' : 'white'}
+            fontWeight={500}
+            fontSize="18px"
+            marginBottom="8px"
+          >
             {intl.formatMessage(messages.okrOverViewTitle)}
           </Text>
 
