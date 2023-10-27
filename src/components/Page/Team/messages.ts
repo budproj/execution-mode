@@ -6,6 +6,7 @@ type ExploreTeamPageMessage =
   | 'metaTitleLoadingFallback'
   | 'okrsTeamTab'
   | 'retrospectiveTeamTab'
+  | 'tasksTeamTab'
 
 export default defineMessages<ExploreTeamPageMessage>({
   metaTitle: {
@@ -38,5 +39,11 @@ export default defineMessages<ExploreTeamPageMessage>({
     defaultMessage: 'Retrospectiva',
     id: 'pAXjHu',
     description: 'This is the title of the retrospectives tab on the team page.',
+  },
+
+  tasksTeamTab: {
+    defaultMessage: 'Tarefas',
+    id: 'kPjmgU',
+    description: 'This is the title of the tasks or project tab on the team page.',
   },
 })

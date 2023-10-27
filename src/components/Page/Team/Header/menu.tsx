@@ -16,6 +16,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import EditTeamButton from 'src/components/Base/EditTeamButton'
 import { Cycle } from 'src/components/Cycle/types'
 import HistoryIcon from 'src/components/Icon/History'
+import PlusIcon from 'src/components/Icon/Plus'
 import RedoIcon from 'src/components/Icon/Redo'
 import { workflowControlStorageKey } from 'src/components/Objective/Accordion/Item/Button/edit-mode'
 import objectiveQueries from 'src/components/Objective/queries.gql'
@@ -150,7 +151,7 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   const canUpdate = team?.policy?.update === GraphQLEffect.ALLOW
 
   return (
-    <Stack direction="row" justifyContent="flex-end" marginTop="0.8em">
+    <Stack direction="column" justifyContent="flex-end" marginTop="0.8em">
       {/* // eslint-disable-next-line no-warning-comments
       // TODO: Implement this options menu (Victor Perin)
 
@@ -170,6 +171,42 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
         <EditTeamButton
           onClick={() => setIsEditTeamModalOpen({ isModalOpen: true, isEditingTeamId: teamId })}
         />
+      )}
+
+      {isAllowedToCreateObjectives && isViewingActiveObjectives && (
+        <Menu placement="bottom-end" variant="action-list">
+          <MenuButton
+            as={Button}
+            bg="brand.500"
+            color="black.50"
+            _hover={{ background: 'brand.400', color: 'black.50' }}
+          >
+            <PlusIcon
+              desc="mudar"
+              __css={{
+                border: '1px solid white',
+                padding: '4px',
+                width: '18px',
+                height: '18px',
+                borderRadius: '5px',
+                marginRight: '8px',
+                marginBottom: '3px',
+              }}
+              fill="white"
+            />
+            {intl.formatMessage(messages.createItem)}
+          </MenuButton>
+          <MenuList>
+            {activeCycles.reverse().map((cycle) => (
+              <AddOKROnRelatedCycleOption
+                key={cycle.id}
+                cycle={cycle}
+                isEnabled={isAllowedToCreateObjectives}
+                onCreateOKR={onCreateOKR}
+              />
+            ))}
+          </MenuList>
+        </Menu>
       )}
 
       {hasInactiveObjectives && isViewingActiveObjectives && (
@@ -196,29 +233,6 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
         >
           {intl.formatMessage(messages.backToPresent)}
         </Button>
-      )}
-
-      {isAllowedToCreateObjectives && isViewingActiveObjectives && (
-        <Menu placement="bottom-end" variant="action-list">
-          <MenuButton
-            as={Button}
-            bg="brand.500"
-            color="black.50"
-            _hover={{ background: 'brand.400', color: 'black.50' }}
-          >
-            {intl.formatMessage(messages.createItem)}
-          </MenuButton>
-          <MenuList>
-            {activeCycles.reverse().map((cycle) => (
-              <AddOKROnRelatedCycleOption
-                key={cycle.id}
-                cycle={cycle}
-                isEnabled={isAllowedToCreateObjectives}
-                onCreateOKR={onCreateOKR}
-              />
-            ))}
-          </MenuList>
-        </Menu>
       )}
     </Stack>
   )

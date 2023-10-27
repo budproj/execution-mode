@@ -37,8 +37,8 @@ export default defineMessages<TeamIndicatorsReportDownloadMessages>({
   },
 
   downloadReportCSVButtonMessage: {
-    defaultMessage: 'Download CSV',
-    id: 'l3DqHa',
+    defaultMessage: 'Relatório de time',
+    id: 'idDZg9',
     description: 'This message is the title of download team report button.',
   },
 
