@@ -6,6 +6,7 @@ import { useRecoilValue } from 'recoil'
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
+import meAtom from 'src/state/recoil/user/me'
 
 import { objectiveAtomFamily } from '../../../../state/recoil/objective'
 import { teamAtomFamily } from '../../../../state/recoil/team'
@@ -33,12 +34,17 @@ export const ObjectiveAccordionMenu = ({
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(teamID))
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
+  const myID = useRecoilValue(meAtom)
+
+  const isPersonalOkr = Boolean(!objective?.teamId)
 
   const policyHolder = userID ? objective : team
   const canCreateKeyResult = policyHolder?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
   const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
-  const hasAnyOptions = !isLoaded || canCreateKeyResult || canUpdateObjective || canDeleteObjective
+  const hasAnyOptions = isPersonalOkr
+    ? userID === myID
+    : !isLoaded || canCreateKeyResult || canUpdateObjective || canDeleteObjective
 
   return (
     <Skeleton isLoaded={isLoaded} display={hasAnyOptions ? 'inherit' : 'none'}>

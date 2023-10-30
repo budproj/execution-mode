@@ -8,6 +8,7 @@ import KeyResultListBodyColumnBase, {
   KeyResultListBodyColumnBaseProperties,
 } from 'src/components/KeyResult/List/Body/Columns/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
+import meAtom from 'src/state/recoil/user/me'
 
 import { keyResultAtomFamily } from '../../../../../../state/recoil/key-result'
 import { GraphQLEffect } from '../../../../../types'
@@ -29,7 +30,13 @@ const KeyResultListBodyColumnActions = ({
   const keyResult = useRecoilValue(keyResultAtomFamily(id))
   const intl = useIntl()
 
-  const canDelete = keyResult?.policy?.delete === GraphQLEffect.ALLOW
+  const myID = useRecoilValue(meAtom)
+
+  const isPersonalKr = Boolean(!keyResult?.teamId)
+
+  const canDelete = isPersonalKr
+    ? keyResult?.owner?.id === myID
+    : keyResult?.policy?.delete === GraphQLEffect.ALLOW
 
   return (
     <KeyResultListBodyColumnBase preventLineClick>

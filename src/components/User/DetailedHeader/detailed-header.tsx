@@ -10,8 +10,12 @@ import TeamTag from 'src/components/Team/Tag'
 import { UserEditableAvatar } from 'src/components/User/EditableAvatar/wrapper'
 import { User } from 'src/components/User/types'
 import { GraphQLEffect } from 'src/components/types'
+import { AUTHZ_ROLES } from 'src/state/recoil/authz/constants'
 import { keyResultTypeAtom } from 'src/state/recoil/key-result'
 import { KeyResultType } from 'src/state/recoil/key-result/key-result-type'
+import meAtom from 'src/state/recoil/user/me'
+
+import { useGetUserAuthzRole } from '../hooks/getUserAuthzRole/get-user-authz-role'
 
 import { companyPreposition } from './constants'
 import messages from './messages'
@@ -24,6 +28,14 @@ interface DetailedHeaderProperties {
 export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProperties) => {
   const keyResultType = useRecoilValue(keyResultTypeAtom)
   const setKeyResultType = useSetRecoilState(keyResultTypeAtom)
+
+  const myID = useRecoilValue(meAtom)
+  const { data: userAuthzRole, loading: loadingAuthzRole } = useGetUserAuthzRole(myID)
+
+  const hasUserPermissionToSeeOthersPDIs =
+    userData?.id === myID ||
+    ([AUTHZ_ROLES.ADMIN, AUTHZ_ROLES.LEADER].includes(userAuthzRole?.name as AUTHZ_ROLES) &&
+      !loadingAuthzRole)
 
   const intl = useIntl()
 
@@ -166,6 +178,7 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
 
         <Button
           h="auto"
+          display={hasUserPermissionToSeeOthersPDIs ? 'default' : 'none'}
           padding="18px 30px"
           fontSize="16px"
           borderRadius="0"
