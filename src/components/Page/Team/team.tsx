@@ -107,7 +107,7 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
   return (
     <ApolloQueryErrorBoundary error={error}>
       <Flex flexGrow={1} direction="column" bg="new-gray.50">
-        <Box bg="brand.500" position="relative" zIndex={2}>
+        <Box bg="brand.500" position="relative" zIndex={2} overflow="hidden">
           <StyledDiv>
             <Image fill src="/images/shape-footer-teste.svg" className="image" alt="mudar" />
           </StyledDiv>
@@ -137,9 +137,9 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
                     isLoaded={called && !loading}
                     team={data?.team}
                     teamOwnerId={data?.team.ownerId}
-                    // ShowProgress={
-                    //   activeTab === intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase()
-                    // }
+                    showProgress={
+                      activeTab === intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase()
+                    }
                     users={users}
                   />
                   {/* {activeTab === intl.formatMessage(messages.okrsTeamTab).toLocaleLowerCase() && (

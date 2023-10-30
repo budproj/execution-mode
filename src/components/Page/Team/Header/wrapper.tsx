@@ -1,16 +1,17 @@
-import { Box, SkeletonText, Text } from '@chakra-ui/react'
+import { Box, Skeleton, SkeletonText, Stack, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { User } from 'src/components/User/types'
 
-import { DynamicAvatarGroup, PageTitle } from '../../../Base'
+import { DynamicAvatarGroup, PageTitle, SliderWithFilledTrack } from '../../../Base'
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
 import { Team } from '../../../Team/types'
 
 interface TeamHeaderProperties {
   team?: Team
   isLoaded: boolean
-  // ShowProgress?: boolean
+  showProgress?: boolean
   users?: User[]
   teamOwnerId?: string
 }
@@ -18,12 +19,12 @@ interface TeamHeaderProperties {
 export const TeamHeader = ({
   team,
   isLoaded,
-  // ShowProgress = true,
+  showProgress = true,
   users,
   teamOwnerId,
 }: TeamHeaderProperties) => {
-  // Const intl = useIntl()
-  // const progress = team?.status.progress ?? 0
+  const intl = useIntl()
+  const progress = team?.status.progress ?? 0
 
   return (
     <PageHeader pb={0} flexGrow={1}>
@@ -45,7 +46,7 @@ export const TeamHeader = ({
         />
       </Box>
 
-      {/* <Stack direction="row" spacing="8" pt="4" alignItems="center" opacity={showProgress ? 1 : 0}>
+      <Stack direction="row" spacing="8" pt="4" alignItems="center" opacity={showProgress ? 1 : 0}>
         <Skeleton isLoaded={isLoaded} w="full" pb={isLoaded ? '2' : 0}>
           <SliderWithFilledTrack value={progress} />
         </Skeleton>
@@ -55,7 +56,7 @@ export const TeamHeader = ({
             {intl.formatNumber(progress / 100, { style: 'percent' })}
           </Text>
         </Skeleton>
-      </Stack> */}
+      </Stack>
     </PageHeader>
   )
 }
