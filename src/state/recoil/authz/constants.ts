@@ -4,7 +4,7 @@ export enum AUTHZ_ROLES {
   TEAM_MEMBER = 'Team Member',
   LEADER = 'Leader',
   SQUAD_MEMBER = 'Squad Member',
-  ADMIN = 'Admin',
+  ADMIN = 'Company Admin',
 }
 
 export enum UPPERCASED_ENVIRONMENT {
