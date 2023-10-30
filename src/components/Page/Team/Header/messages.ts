@@ -12,8 +12,8 @@ type ActionMenuMessage =
 
 export default defineMessages<ActionMenuMessage>({
   history: {
-    defaultMessage: 'Histórico',
-    id: 'na6BgW',
+    defaultMessage: 'Histórico de ciclos',
+    id: 'BfuWxA',
     description: 'History, historic, archived items',
   },
 
@@ -24,8 +24,8 @@ export default defineMessages<ActionMenuMessage>({
   },
 
   createItem: {
-    defaultMessage: 'Criar Objetivo ',
-    id: 'gAgkzF',
+    defaultMessage: 'Novo Objetivo',
+    id: 'OA7DUJ',
     description: 'create new key result',
   },
 

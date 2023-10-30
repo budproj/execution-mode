@@ -1,15 +1,22 @@
 import { useQuery } from '@apollo/client'
-import { Stack } from '@chakra-ui/react'
+import { Flex, Stack } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { TeamObjectives } from 'src/components/Team/Objectives/wrapper'
 import { Team } from 'src/components/Team/types'
 import { GraphQLEffect } from 'src/components/types'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
+import {
+  ObjectivesViewMode,
+  teamObjectivesViewMode,
+} from 'src/state/recoil/team/objectives-view-mode'
 
 import { ChildTeamsWrapper } from '../../ChildTeams/wrapper'
+import { MenuHeader } from '../../Header/menu'
 import TeamHightlightModal from '../../Highlights/modals/base'
 import { TeamIndicatorsReportDownloadCSV } from '../../Indicators'
 import { TeamMembersWrapper } from '../../Members/wrapper'
@@ -25,9 +32,29 @@ interface OkrsTabContentProperties {
   isLoading?: boolean
 }
 
+const StyledDiv = styled('div')`
+  width: 100%;
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+  background: black;
+
+  > div {
+    position: absolute !important;
+  }
+
+  .image {
+    width: 100% !important;
+    height: unset !important;
+    background: #f8f9fd;
+  }
+`
+
 const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
   const [permissions, setPermissions] = useState<TeamFlagsProperties['permissions']>()
   const setSelectedTeamId = useSetRecoilState(selectedTeamIdHighlight)
+  const getObjectivesViewMode = useRecoilValue(teamObjectivesViewMode(teamId))
+  const isViewingActiveObjectives = getObjectivesViewMode === ObjectivesViewMode.ACTIVE
 
   useQuery(queries.GET_USER_SETTINGS_PERMISSIONS, {
     onCompleted: (data) => {
@@ -41,6 +68,9 @@ const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
 
   return (
     <Stack direction="row" spacing={8} maxH="100%">
+      <StyledDiv>
+        <Image fill src="/images/shape-footer-team.svg" className="image" alt="mudar" />
+      </StyledDiv>
       <Stack flexGrow={1} spacing={8}>
         {permissions?.flags?.read === GraphQLEffect.ALLOW && (
           <DynamicTeamIndicatorsWrapper teamID={teamId} />
@@ -49,11 +79,14 @@ const OkrsTabContent = ({ teamId, isLoading }: OkrsTabContentProperties) => {
       </Stack>
       <TeamHightlightModal />
       <Stack spacing={8} w="md" minW="md">
-        {permissions?.flags?.read === GraphQLEffect.ALLOW && (
-          <>
+        <Flex flexDir="column" mt="0 !important">
+          <MenuHeader teamId={teamId} />
+          {permissions?.flags?.read === GraphQLEffect.ALLOW && isViewingActiveObjectives && (
             <TeamIndicatorsReportDownloadCSV teamID={teamId} />
-            <DynamicTeamHighlighsWrapper teamID={teamId} isLoading={isLoading} />
-          </>
+          )}
+        </Flex>
+        {permissions?.flags?.read === GraphQLEffect.ALLOW && (
+          <DynamicTeamHighlighsWrapper teamID={teamId} isLoading={isLoading} />
         )}
 
         <TeamMembersWrapper teamID={teamId} isLoading={isLoading} />
