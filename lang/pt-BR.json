@@ -603,10 +603,6 @@
     "defaultMessage": "Um ícone de um alvo, que aparece junto com a pergunta de quais os focos do usuário para próxima semana.",
     "description": "This message appears as the title of the card that lists the history of retrospectives answered by a user."
   },
-  "7X4Xpn": {
-    "defaultMessage": "Venha saber mais sobre as novidades de bud no nosso webinar dia 5 de Outubro!",
-    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
-  },
   "7Yw26b": {
     "defaultMessage": "Selecione o ano",
     "description": "This message is displayed when no year filter was selected"
@@ -854,6 +850,10 @@
   "BeFobb": {
     "defaultMessage": "Isso também excluirá todos os OKRs criados neste ciclo. Essa ação não pode ser desfeita.",
     "description": "This message is used as the description in our first dialog while removing a cycle"
+  },
+  "BfuWxA": {
+    "defaultMessage": "Histórico de ciclos",
+    "description": "History, historic, archived items"
   },
   "BipZgy": {
     "defaultMessage": "Desculpe, mas aconteceu um erro inesperado. Tente novamente mais tarde",
@@ -1603,6 +1603,10 @@
     "defaultMessage": "Progresso",
     "description": "The title of the progress section in our key-result sidebar"
   },
+  "OA7DUJ": {
+    "defaultMessage": "Novo Objetivo",
+    "description": "create new key result"
+  },
   "OEPd1+": {
     "defaultMessage": "Essas foram as suas notificações recentes!",
     "description": "This message appears when no more notifications to listing."
@@ -1826,6 +1830,10 @@
   "RZrZdZ": {
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
+  },
+  "Rj3usm": {
+    "defaultMessage": "Como está sendo sua experiência com a bud? Nos conte nesse formulário rápido:",
+    "description": "This message appears on the notices banner."
   },
   "RojqOy": {
     "defaultMessage": "Responder agora",
@@ -2467,6 +2475,10 @@
     "defaultMessage": "Ícone de um balão de fala",
     "description": "The description of the thinking balloon icon"
   },
+  "d8BSWu": {
+    "defaultMessage": "Responda aqui",
+    "description": "This message appears on action button of the notices banner"
+  },
   "dB4Sbq": {
     "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
     "description": "This tooltip appears when the user hovers the second column title"
@@ -2634,10 +2646,6 @@
   "g9n6ja": {
     "defaultMessage": "Exportar relatório do time",
     "description": "This message is the title of the team Indicators Download Report within a team page."
-  },
-  "gAgkzF": {
-    "defaultMessage": "Criar Objetivo",
-    "description": "create new key result"
   },
   "gMArPa": {
     "defaultMessage": "O Bud enviará lembretes para este time por email e por notificações para que todos respondam.",
@@ -2811,6 +2819,10 @@
     "defaultMessage": "ACESSO DE EDIÇÃO",
     "description": "The tooltip text for the edition access text"
   },
+  "idDZg9": {
+    "defaultMessage": "Relatório de time",
+    "description": "This message is the title of download team report button."
+  },
   "ie2eTm": {
     "defaultMessage": "Resultados-chave deste time com {confidence, select, barrier {barreira} confidence {baixa confiança} other {check-in atrasado}}",
     "description": "The title for the dashboard key results modal"
@@ -2903,6 +2915,10 @@
     "defaultMessage": "Um círculo amarelo, indicando que a confiançá é média",
     "description": "A brief explanation for screen readers regarding the yellow status circle"
   },
+  "kPjmgU": {
+    "defaultMessage": "Tarefas",
+    "description": "This is the title of the tasks or project tab on the team page."
+  },
   "kXNgkQ": {
     "defaultMessage": "Progresso",
     "description": "The text of the table head related to the Progress column"
@@ -2919,10 +2935,6 @@
     "defaultMessage": "Comentários:",
     "description": "This message appears as the empty state title of comments in a user retrospective reply"
   },
-  "ktDa/m": {
-    "defaultMessage": "Inscreva-se aqui",
-    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
-  },
   "ktxOrA": {
     "defaultMessage": "Última retrospectiva",
     "description": "The title of the last routine column"
@@ -2938,10 +2950,6 @@
   "l+s/aT": {
     "defaultMessage": "beta",
     "description": "The tag that indicates the beta version of the feature"
-  },
-  "l3DqHa": {
-    "defaultMessage": "Download CSV",
-    "description": "This message is the title of download team report button."
   },
   "lApj0K": {
     "defaultMessage": "Um ícone de carteira",
@@ -3086,10 +3094,6 @@
   "nWz8Nt": {
     "defaultMessage": "Neutro",
     "description": "The neutral gender for the company while creating a new workspace"
-  },
-  "na6BgW": {
-    "defaultMessage": "Histórico",
-    "description": "History, historic, archived items"
   },
   "ndABHM": {
     "defaultMessage": "Admin",
