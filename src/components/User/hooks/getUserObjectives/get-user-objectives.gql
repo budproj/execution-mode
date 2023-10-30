@@ -1,43 +1,46 @@
 query GET_OBJECTIVES($ownerId: ID, $teamId: ID, $active: Boolean) {
   me {
+    id
     companies {
       edges {
         node {
-          objectives(ownerId: $ownerId, teamId: $teamId, active: $active) {
-            edges {
-              node {
-                id
-                title
-                mode
-                ownerId
-                keyResults {
-                  policy {
-                    create
-                  }
-                }
-                cycle {
-                  id
-                  period
-                  cadence
-                  dateEnd
-                }
-                status {
-                  progress
-                  confidence
-                }
-                delta {
-                  progress
-                }
-                policy {
-                  update
-                  delete
-                }
-              }
-            }
+          objectives(ownerId: $ownerId, teamId: $teamId, active: $active)  {
             policy {
               create
             }
           }
+        }
+      }
+    }
+  }
+  objectives(ownerId: $ownerId, teamId: $teamId, active: $active) {
+    edges {
+      node {
+        id
+        title
+        mode
+        ownerId
+        keyResults {
+          policy {
+            create
+          }
+        }
+        cycle {
+          id
+          period
+          cadence
+          dateEnd
+        }
+        status {
+          progress
+          confidence
+        }
+        delta {
+          progress
+        }
+        policy {
+          update
+          delete
         }
       }
     }
