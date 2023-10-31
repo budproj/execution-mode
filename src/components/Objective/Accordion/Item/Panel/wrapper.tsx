@@ -15,7 +15,6 @@ export interface ObjectiveAccordionPanelProperties {
   isExpanded: boolean
   objectiveID?: Objective['id']
   teamID?: Team['id']
-  isPersonalOkr?: boolean
   isDisabled?: boolean
   description?: string
   isDraft?: boolean
@@ -31,7 +30,6 @@ export const ObjectiveAccordionPanel = ({
   objectiveID,
   isDisabled,
   teamID,
-  isPersonalOkr,
   description,
   isDraft,
   context,
@@ -53,7 +51,6 @@ export const ObjectiveAccordionPanel = ({
           )}
           <ObjectiveKeyResults
             isDraft={isDraft}
-            isPersonalOkr={isPersonalOkr}
             objectiveID={objectiveID}
             mode={context?.mode}
             context={context}
