@@ -119,8 +119,9 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
           <CSVDownload separator=";" data={csvData} headers={headers} />
         )}
         <Button
-          bg="brand.500"
-          color="black.50"
+          bg="new-gray.300"
+          _hover={{ background: 'new-gray.400', color: 'new-gray.800' }}
+          color="new-gray.800"
           width="100%"
           display="flex"
           mt="0.5rem"
@@ -128,8 +129,7 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
           justifyContent="center"
           fontWeight="medium"
           iconSpacing={2}
-          _hover={{ background: 'brand.400', color: 'black.50' }}
-          leftIcon={<DownloadIcon desc="asda" />}
+          leftIcon={<DownloadIcon desc="asda" fill="new-gray.800" />}
           onClick={async () => onDownloadButtonClick()}
         >
           {loading
