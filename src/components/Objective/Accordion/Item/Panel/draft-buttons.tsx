@@ -34,8 +34,10 @@ export const DraftButtons = ({
   const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
 
   const canPublishOKR = isPersonalOkr
-    ? objective?.owner?.id === myID
+    ? objective?.ownerId === myID
     : !loading && userAuthzRole?.name !== AUTHZ_ROLES.TEAM_MEMBER
+
+  const canCreateKR = isPersonalOkr ? objective?.ownerId === myID : true
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     setKeyResultInsertDrawerObjectiveID(objectiveID)
@@ -54,6 +56,7 @@ export const DraftButtons = ({
         borderColor="new-gray.400"
       >
         <Button
+          isDisabled={!canCreateKR}
           as="button"
           marginRight="10px"
           padding="10px"

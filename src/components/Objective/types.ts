@@ -24,6 +24,7 @@ export interface Objective extends GraphQLNode {
   delta: Delta
   cycle: Cycle
   owner: User
+  ownerId?: string
   policy: GraphQLEntityPolicy
   teamId?: string
   team?: Team
