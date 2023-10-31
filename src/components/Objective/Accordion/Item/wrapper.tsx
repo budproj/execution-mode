@@ -31,6 +31,7 @@ export const ObjectiveAccordionItem = ({
 }: ObjectiveAccordionItemProperties) => {
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const context = useRecoilValue(objectiveContext(objectiveID))
+  const isPersonalOkr = Boolean(!objective?.teamId)
 
   const isDraft = useMemo(() => objective?.mode === ObjectiveMode.DRAFT, [objective?.mode])
 
@@ -69,6 +70,7 @@ export const ObjectiveAccordionItem = ({
             />
             <ObjectiveAccordionPanel
               context={context}
+              isPersonalOkr={isPersonalOkr}
               isExpanded={isExpanded}
               objectiveID={objectiveID}
               teamID={teamID}

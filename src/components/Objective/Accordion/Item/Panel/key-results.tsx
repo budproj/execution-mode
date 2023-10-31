@@ -27,6 +27,7 @@ export interface ObjectiveKeyResultsProperties {
   mode?: ObjectiveViewMode
   isDisabled?: boolean
   teamID?: Team['id']
+  isPersonalOkr?: boolean
   isDraft?: boolean
   context?: ObjectiveContext
 }
@@ -43,6 +44,7 @@ export const ObjectiveKeyResults = ({
   teamID,
   mode,
   isDisabled,
+  isPersonalOkr,
   isDraft,
   context,
   ...rest
@@ -151,7 +153,11 @@ export const ObjectiveKeyResults = ({
         {...rest}
       />
       {isDraft && context?.mode !== ObjectiveViewMode.EDIT && (
-        <DraftButtons objectiveID={objectiveID} isObjectiveWithKeyResults={keyResults.length > 0} />
+        <DraftButtons
+          objectiveID={objectiveID}
+          isPersonalOkr={isPersonalOkr}
+          isObjectiveWithKeyResults={keyResults.length > 0}
+        />
       )}
     </>
   )
