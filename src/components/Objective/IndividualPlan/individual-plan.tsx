@@ -14,7 +14,7 @@ import {
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ColorizedOverlay } from 'src/components/Base/ColorizedOverlay/wrapper'
 import PageContent from 'src/components/Base/PageContent'
@@ -28,14 +28,16 @@ import { TeamSectionWrapper } from 'src/components/Page/Team/Section/wrapper'
 import { UserObjectives } from 'src/components/User/Objectives/wrapper'
 import { UserProfile } from 'src/components/User/Profile/wrapper'
 import { SelectUserfromList } from 'src/components/User/SelectFromList'
+import { useGetUserAuthzRole } from 'src/components/User/hooks/getUserAuthzRole/get-user-authz-role'
 import { useGetUserObjectives } from 'src/components/User/hooks/getUserObjectives'
 import { User } from 'src/components/User/types'
-import { GraphQLEffect } from 'src/components/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
+import { AUTHZ_ROLES } from 'src/state/recoil/authz/constants'
 import { ObjectiveViewMode, setObjectiveToMode } from 'src/state/recoil/objective/context'
 import { userActiveObjectives } from 'src/state/recoil/user/active-objectives'
+import meAtom from 'src/state/recoil/user/me'
 import {
   ObjectivesViewMode,
   userObjectivesViewMode,
@@ -58,6 +60,12 @@ type GetUserAccessToCreateObjectivesResult = {
 
 export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties) => {
   const { data, loading } = useGetUsersWithIndividualPlan()
+  const myID = useRecoilValue(meAtom)
+  const { data: userAuthzRole, loading: loadingAuthzRole } = useGetUserAuthzRole(myID)
+
+  const hasUserPermissionToSeeUsersWithIndividualPlan =
+    [AUTHZ_ROLES.ADMIN, AUTHZ_ROLES.LEADER].includes(userAuthzRole?.name as AUTHZ_ROLES) &&
+    !loadingAuthzRole
 
   const [usersList, setUsersList] = useState<User[]>(data)
   const { get, register } = useLocalStorage()
@@ -158,10 +166,8 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
     {
       onCompleted: ({ me }) => {
         const isSameUser = userID === me.id
-        const isUserAllowedToCreateObjectiveInCompany =
-          me?.companies?.edges[0].node.objectives?.policy.create === GraphQLEffect.ALLOW
 
-        setCanCreateObjectives(isSameUser || isUserAllowedToCreateObjectiveInCompany)
+        setCanCreateObjectives(isSameUser)
       },
     },
   )
@@ -236,7 +242,11 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
         <Box flexGrow={1}>
           {userID ? <UserObjectives userID={userID} viewType={viewMode} /> : undefined}
         </Box>
-        <Box w="md" minW="md">
+        <Box
+          w="md"
+          minW="md"
+          display={hasUserPermissionToSeeUsersWithIndividualPlan ? 'default' : 'none'}
+        >
           <TeamSectionWrapper
             title={intl.formatMessage(messages.individualOkrsCompanyMembersTitle, {
               isLoaded: !loading,

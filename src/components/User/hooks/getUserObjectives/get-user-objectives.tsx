@@ -7,6 +7,12 @@ import { User, UserMeQuery } from '../../types'
 
 import GET_OBJECTIVES from './get-user-objectives.gql'
 
+type UserPersonalOKRsQueryOutput = UserMeQuery & {
+  objectives: {
+    edges: Array<GraphQLEdge<Objective>>
+  }
+}
+
 interface GetUserObjectivesFilters {
   ownerId: User['id']
   teamId?: null
@@ -22,18 +28,18 @@ export const useGetUserObjectives = (
   filters: GetUserObjectivesFilters,
   actions: GetUserObjectivesActions,
 ) => {
-  const { loading, called, refetch } = useQuery<UserMeQuery>(GET_OBJECTIVES, {
+  const { loading, called, refetch } = useQuery<UserPersonalOKRsQueryOutput>(GET_OBJECTIVES, {
     variables: {
       // eslint-disable-next-line unicorn/no-null
       teamId: null,
       active: true,
       ...filters,
     },
-    onCompleted: ({ me }) => {
+    onCompleted: ({ objectives, me }) => {
       const userCompany = me?.companies?.edges[0]
-      const objectives = userCompany?.node?.objectives?.edges ?? []
+
       if (actions.setObjetives) {
-        actions.setObjetives(objectives)
+        actions.setObjetives(objectives.edges)
       }
 
       const objectivePolicy = userCompany?.node?.objectives?.policy

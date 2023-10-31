@@ -46,22 +46,34 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
   }
 
   return (
-    <Stack bg="white" boxShadow="0px 22px 25px -22px rgba(83, 83, 191, 0.4)">
-      <TabList borderTop="1px solid #D9E2F6" pt={2} marginX="5rem !important">
+    <Stack display="flex" alignItems="center">
+      <TabList borderRadius="10px" bg="white" width="fit-content">
         <StyledTab
-          px={8}
           color="new-gray.800"
-          _selected={{ color: 'brand.500', borderColor: 'brand.500' }}
-          paddingBottom={3}
+          _selected={{ color: 'white', background: 'brand.500' }}
+          borderRadius="10px 0px 0px 10px"
           onClick={() => handleClick('okrs')}
         >
           {intl.formatMessage(messages.okrsTeamTab)}
         </StyledTab>
+        {/* <Box width="1px" bg="new-gray.500" />
         <StyledTab
           px={8}
           color="new-gray.800"
-          _selected={{ color: 'brand.500', borderBottom: '2px solid #6F6EFF' }}
+          _selected={{ color: 'white', background: 'brand.500', borderRadius: '0px 10px 10px 0px' }}
           paddingBottom={3}
+          onClick={() => {
+            handleClick('task')
+          }}
+        >
+          <div id="retrospective-tab">{intl.formatMessage(messages.tasksTeamTab)}</div>
+        </StyledTab>
+        <Box width="1px" bg="new-gray.500" /> */}
+        <StyledTab
+          px={8}
+          color="new-gray.800"
+          _selected={{ color: 'white', background: 'brand.500' }}
+          borderRadius="0px 10px 10px 0px"
           onClick={() => {
             handleClick('retrospective')
             dispatch({})

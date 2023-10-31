@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Stack } from '@chakra-ui/react'
+import { Box, Button, Stack } from '@chakra-ui/react'
 import { format } from 'date-fns'
 import React from 'react'
 import { CSVDownload } from 'react-csv'
@@ -12,7 +12,6 @@ import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { CSVIndicatorsData } from 'src/state/recoil/team/indicators/csv-indicators-data'
 
-import { TeamSectionHeading } from '../../Section/SectionHeading/wrapper'
 import { useGetTeamCSVData } from '../hooks/get-team-indicators'
 
 import messages from './messages'
@@ -108,28 +107,29 @@ const IndicatorsDownloadCSV = ({ teamID }: IndicatorsDownloadCSVProperties) => {
   }
 
   return (
-    <Stack spacing={4} w="full">
-      <Flex gap={2} alignItems="center">
+    <Stack width="100%">
+      {/* <Flex gap={2} alignItems="center">
         <TeamSectionHeading fontSize="14px">
           {intl.formatMessage(messages.teamIndicatorsReportDownloadSectionTitle)}
         </TeamSectionHeading>
-      </Flex>
+      </Flex> */}
 
-      <Box w="full" overflowY="hidden" display="flex" gap={4}>
+      <Box overflowY="hidden" display="flex">
         {csvData.length > 0 && !loading && (
           <CSVDownload separator=";" data={csvData} headers={headers} />
         )}
         <Button
-          bg="brand.500"
-          color="black.50"
-          fontSize={14}
+          bg="new-gray.300"
+          _hover={{ background: 'new-gray.400', color: 'new-gray.800' }}
+          color="new-gray.800"
+          width="100%"
           display="flex"
+          mt="0.5rem"
           alignItems="center"
           justifyContent="center"
           fontWeight="medium"
           iconSpacing={2}
-          _hover={{ background: 'brand.400', color: 'black.50' }}
-          leftIcon={<DownloadIcon desc="asda" />}
+          leftIcon={<DownloadIcon desc="asda" fill="new-gray.800" />}
           onClick={async () => onDownloadButtonClick()}
         >
           {loading

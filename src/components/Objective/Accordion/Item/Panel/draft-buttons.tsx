@@ -7,6 +7,7 @@ import ConfirmPublishingDialog from 'src/components/Objective/OKRsPublishingFlow
 import { useGetUserAuthzRole } from 'src/components/User/hooks/getUserAuthzRole/get-user-authz-role'
 import { AUTHZ_ROLES } from 'src/state/recoil/authz/constants'
 import { keyResultInsertDrawerObjectiveID } from 'src/state/recoil/key-result/drawers/insert/objective-id'
+import { objectiveAtomFamily } from 'src/state/recoil/objective'
 import meAtom from 'src/state/recoil/user/me'
 
 import { stopAccordionOpen } from '../../handlers'
@@ -27,9 +28,16 @@ export const DraftButtons = ({
   const myID = useRecoilValue(meAtom)
   const { data: userAuthzRole, loading } = useGetUserAuthzRole(myID)
 
+  const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
+  const isPersonalOkr = Boolean(!objective?.teamId)
+
   const setKeyResultInsertDrawerObjectiveID = useSetRecoilState(keyResultInsertDrawerObjectiveID)
 
-  const canPublishOKR = !loading && userAuthzRole?.name !== AUTHZ_ROLES.TEAM_MEMBER
+  const canPublishOKR = isPersonalOkr
+    ? objective?.ownerId === myID
+    : !loading && userAuthzRole?.name !== AUTHZ_ROLES.TEAM_MEMBER
+
+  const canCreateKR = isPersonalOkr ? objective?.ownerId === myID : true
 
   const handleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     setKeyResultInsertDrawerObjectiveID(objectiveID)
@@ -48,6 +56,7 @@ export const DraftButtons = ({
         borderColor="new-gray.400"
       >
         <Button
+          isDisabled={!canCreateKR}
           as="button"
           marginRight="10px"
           padding="10px"
