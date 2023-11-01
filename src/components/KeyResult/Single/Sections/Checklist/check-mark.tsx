@@ -108,6 +108,9 @@ export const KeyResultCheckMark = ({
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const isWaiting = isToggling || isUpdatingDescription || checkmarkIsBeingRemoved
 
+  const canCheckMark =
+    node?.assignedUser?.id === userID ||
+    (checkPolicy && node?.policy?.update === GraphQLEffect.ALLOW)
   const canUpdate = checkPolicy ? node?.policy?.update === GraphQLEffect.ALLOW : true
   const canDelete = checkPolicy ? node?.policy?.delete === GraphQLEffect.ALLOW : true
 
@@ -185,7 +188,7 @@ export const KeyResultCheckMark = ({
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Checkbox
             isChecked={isChecked}
-            isDisabled={isWaiting || !canUpdate}
+            isDisabled={isWaiting || !canCheckMark}
             onChange={handleChange}
           />
         </Box>
