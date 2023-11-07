@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 
 import { GraphQLEffect } from 'src/components/types'
-import selectUser from 'src/state/recoil/user/selector'
+import { selectUser } from 'src/state/recoil/user/selector'
 
 import { User } from '../types'
 
