@@ -1,3 +1,3 @@
 {
-  "/board": "/board?_embed=tasks"
+  "/board/:teamId": "/board?teamsIds[0]=:teamId&_embed=tasks"
 }
