@@ -176,4 +176,6 @@ export { default as ExclamatinIcon } from './ExclamationIcon'
 
 export { default as LikeIcon } from './LikeIcon'
 
+export { default as VeryHighPriorityIcon } from './VeryHighPriorityIcon'
+
 export * from './types'
