@@ -7,6 +7,8 @@ import { Team } from 'src/components/Team/types'
 
 import RetrospectiveTabContent from '../../../Routine/RetrospectiveTab/retrospective-tab-content'
 
+// TODO: in future this must be replacet to ProjectTabContent
+import TasksTabContent from './content/board-tab-content'
 import OkrsTabContent from './content/okrs-tab-content'
 
 interface ExploreTeamTabsProperties {
@@ -15,15 +17,24 @@ interface ExploreTeamTabsProperties {
   activeTab?: string
 }
 
+const tabIIndex = new Map([
+  ['okrs', 0],
+  ['tasks', 1],
+  ['retrospective', 2],
+])
+
 const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProperties) => {
   return (
-    <Tabs isLazy variant="unstyled" index={activeTab === 'retrospective' ? 1 : 0}>
+    <Tabs isLazy variant="unstyled" index={tabIIndex.get(activeTab ?? 'okrs')}>
       <TabsMenu teamId={teamId} />
 
       <PageContent>
         <TabPanels>
           <TabPanel padding="0px !important">
             <OkrsTabContent teamId={teamId} isLoading={isLoading} />
+          </TabPanel>
+          <TabPanel>
+            <TasksTabContent teamId={teamId} isLoading={isLoading} />
           </TabPanel>
           <TabPanel padding="0px !important">
             <RetrospectiveTabContent teamId={teamId} isLoading={isLoading} />

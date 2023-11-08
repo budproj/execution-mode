@@ -1,9 +1,10 @@
-import { Stack, Tab, TabList } from '@chakra-ui/react'
+import { Box, Stack, Tab, TabList, Tag } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import tabMessages from 'src/components/Base/MainAppBar/messages'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
@@ -19,8 +20,8 @@ const StyledTab = styled(Tab)`
   justify-content: center;
   font-size: 16px;
   font-weight: 500;
+  width: 160px;
   border-bottom: 2px solid transparent;
-
   &:focus {
     box-shadow: none;
   }
@@ -56,19 +57,40 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
         >
           {intl.formatMessage(messages.okrsTeamTab)}
         </StyledTab>
-        {/* <Box width="1px" bg="new-gray.500" />
+        <Box width="1px" bg="new-gray.500" />
         <StyledTab
           px={8}
           color="new-gray.800"
-          _selected={{ color: 'white', background: 'brand.500', borderRadius: '0px 10px 10px 0px' }}
+          justifyContent="center"
+          alignItems="center"
+          _selected={{ color: 'white', background: 'brand.500' }}
           paddingBottom={3}
           onClick={() => {
-            handleClick('task')
+            handleClick('tasks')
           }}
         >
-          <div id="retrospective-tab">{intl.formatMessage(messages.tasksTeamTab)}</div>
+          <div
+            id="retrospective-tab"
+            style={{
+              display: 'flex',
+            }}
+          >
+            {intl.formatMessage(messages.tasksTeamTab)}
+            <Tag
+              size="md"
+              color={router.query.activeTab === 'tasks' ? 'white' : 'brand.500'}
+              borderColor="current"
+              border="1px solid"
+              lineHeight="0px"
+              fontWeight="semibold"
+              bg="transparent"
+              ml={2}
+            >
+              {intl.formatMessage(tabMessages.newItem)}
+            </Tag>
+          </div>
         </StyledTab>
-        <Box width="1px" bg="new-gray.500" /> */}
+        <Box width="1px" bg="new-gray.500" />
         <StyledTab
           px={8}
           color="new-gray.800"
