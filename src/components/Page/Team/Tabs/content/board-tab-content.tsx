@@ -1,7 +1,8 @@
-import { Stack, Text } from '@chakra-ui/react'
+import { Stack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 
+import BoardWrapper from 'src/components/TaskManagement/Board/wrapper'
 import { Team } from 'src/components/Team/types'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
@@ -19,7 +20,7 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
 
   return (
     <Stack direction="row" spacing={8} maxH="100%">
-      <Text>Board {isLoading}</Text>
+      <BoardWrapper teamId={teamId} />
     </Stack>
   )
 }
