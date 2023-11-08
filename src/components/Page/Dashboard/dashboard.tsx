@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import { useFlags } from 'flagsmith/react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -23,8 +22,6 @@ import { User } from 'src/components/User/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
-import meAtom from 'src/state/recoil/user/me'
-import selectUser from 'src/state/recoil/user/selector'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
 
@@ -320,18 +317,14 @@ const StyledMCWrapper = styled(MissionControlWrapper)`
 
 const DashboardPage = () => {
   const intl = useIntl()
-  const flags = useFlags(['mission_control'])
-
-  const { data, loading, called } = useQuery<GetUserNameGenderAndSettingsRequest>(
+  const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
     queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
   )
-  const me = useRecoilValue(meAtom)
-  const user = useRecoilValue(selectUser(me))
+  // Const me = useRecoilValue(meAtom)
+  // const user = useRecoilValue(selectUser(me))
 
   const [teams, setEdges] = useConnectionEdges<Team>()
   const [mainTeamId, setMainTeamId] = useState('')
-
-  const isMissionControlVisible = flags.mission_control.enabled
 
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
 
@@ -362,7 +355,7 @@ const DashboardPage = () => {
   }, [data, setEdges])
 
   return (
-    <StyledStack bg="new-gray.50" position="relative">
+    <StyledStack bg="new-gray.50">
       <Box bg="brand.500" position="relative" zIndex={2}>
         <Stack>
           <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
@@ -370,7 +363,9 @@ const DashboardPage = () => {
             <UserProfileHeader
               canUpdate
               onlyPicture
-              userProps={{ id: me, picture: user?.picture, role: user?.role }}
+              // UserProps={{ id: me, picture: user?.picture, role: user?.role }}
+              userProps={{ id: data?.me.id, picture: data?.me.picture, role: data?.me.role }}
+              handleUpdatePicture={refetch}
               isLoaded={!loading}
               variantAvatar="circle"
             />
@@ -382,7 +377,7 @@ const DashboardPage = () => {
         <StyledDiv>
           <Image fill src="/images/shape-footer-teste.svg" className="image" alt="mudar" />
         </StyledDiv>
-        {isMissionControlVisible && data?.me.id && selectedDashboardTeam?.id && (
+        {data?.me.id && selectedDashboardTeam?.id && (
           <StyledMCWrapper
             position="absolute"
             userID={data.me.id}
@@ -391,22 +386,11 @@ const DashboardPage = () => {
           />
         )}
       </Box>
-      <PageContent
-        py={0}
-        position={isMissionControlVisible ? 'initial' : 'absolute'}
-        top={isMissionControlVisible ? 0 : 230}
-        zIndex={isMissionControlVisible ? 'auto' : 2}
-        width="100%"
-      >
+      <PageContent py={0}>
         <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
 
         <Stack>
-          <Text
-            color={isMissionControlVisible ? 'new-gray.800' : 'white'}
-            fontWeight={500}
-            fontSize="18px"
-            marginBottom="8px"
-          >
+          <Text color="new-gray.800" fontWeight={500} fontSize="18px" marginBottom="8px">
             {intl.formatMessage(messages.okrOverViewTitle)}
           </Text>
 
