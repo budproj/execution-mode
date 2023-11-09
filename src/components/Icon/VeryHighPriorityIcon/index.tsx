@@ -10,7 +10,7 @@ const VeryHighPriorityIcon = ({
   desc,
   ...rest
 }: VeryHighPriorityIconroperties): ReactElement => (
-  <Icon width="26" height="26" viewBox="0 0 26 26" fill="none" strokeWidth={0} {...rest}>
+  <Icon width="26" height="26" viewBox="0 0 26 26" fill="none" strokeWidth="1.8px" {...rest}>
     <title>{title}</title>
     <desc>{desc}</desc>
     <rect x="0.5" y="0.5" width="24.2859" height="24.29" rx="4.49679" fill="#FFF0F1" />
