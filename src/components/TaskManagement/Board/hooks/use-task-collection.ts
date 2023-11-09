@@ -1,3 +1,4 @@
+import { useRecoilValue } from 'recoil'
 import { useLocalStorage } from 'usehooks-ts'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -6,8 +7,11 @@ import {
   Task,
   TASK_STATUS,
 } from 'src/services/task-management/task-management.service'
+import meAtom from 'src/state/recoil/user/me'
 
 const useTaskCollection = () => {
+  const myId = useRecoilValue(meAtom)
+
   return useLocalStorage<{
     [key in ColumnType]: Task[]
   }>('teamTasks', {
@@ -21,7 +25,7 @@ const useTaskCollection = () => {
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
         dueDate: new Date('2023-05-12'),
         priority: 1,
-        owner: '922ef72a-6c3c-4075-926a-3245cdeea75f',
+        owner: myId,
         attachments: ['http://arquivo.pdf'],
         supportTeamMembers: [
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
@@ -40,8 +44,8 @@ const useTaskCollection = () => {
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
         dueDate: new Date('2023-05-12'),
-        priority: 1,
-        owner: '922ef72a-6c3c-4075-926a-3245cdeea75f',
+        priority: 2,
+        owner: myId,
         attachments: ['http://arquivo.pdf'],
         supportTeamMembers: [
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
@@ -60,8 +64,8 @@ const useTaskCollection = () => {
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
         dueDate: new Date('2023-05-12'),
-        priority: 1,
-        owner: '922ef72a-6c3c-4075-926a-3245cdeea75f',
+        priority: 3,
+        owner: myId,
         attachments: ['http://arquivo.pdf'],
         supportTeamMembers: [
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
@@ -80,8 +84,8 @@ const useTaskCollection = () => {
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
         dueDate: new Date('2023-05-12'),
-        priority: 1,
-        owner: '922ef72a-6c3c-4075-926a-3245cdeea75f',
+        priority: 4,
+        owner: myId,
         attachments: ['http://arquivo.pdf'],
         supportTeamMembers: [
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',

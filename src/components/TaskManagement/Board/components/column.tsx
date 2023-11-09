@@ -76,7 +76,7 @@ const Column = ({ column }: { column: ColumnType }) => {
       <Stack
         ref={dropReference}
         direction={{ base: 'row', md: 'column' }}
-        h={{ base: 300, md: 600 }}
+        h="full"
         py={4}
         mt={2}
         spacing={4}

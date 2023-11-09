@@ -3,15 +3,19 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
-import { VeryHighPriorityIcon } from 'src/components/Icon'
+import { HighPriorityIcon, VeryHighPriorityIcon } from 'src/components/Icon'
 import CheckIcon from 'src/components/Icon/Check'
+import LowPriorityIcon from 'src/components/Icon/LowPriorityIcon'
+import MediumPriorityIcon from 'src/components/Icon/MediumPriorityIcon'
 import { User } from 'src/components/User/types'
 import selectUser from 'src/state/recoil/user/selector'
+
+import { TaskPriotiry } from './kanban-task-card-root'
 
 interface KanbanTaskCardMetadataProperties {
   dueDate?: Date
   ownerId?: User['id']
-  priority?: number
+  priority?: TaskPriotiry
 }
 
 export const KanbanTaskCardMetadata = ({
@@ -38,17 +42,26 @@ export const KanbanTaskCardMetadata = ({
         </Text>
       </Flex>
       <Flex alignItems="center" gap={3}>
-        <TaskPriority priority={priority ?? 1} />
+        {priority && <TaskPriority priority={priority} />}
         <Avatar name={user?.fullName} src={user?.picture} w={7} h={7} loading="lazy" />
       </Flex>
     </HStack>
   )
 }
 
+const Icon = {
+  1: LowPriorityIcon,
+  2: MediumPriorityIcon,
+  3: HighPriorityIcon,
+  4: VeryHighPriorityIcon,
+}
+
 type TaskPriorityProperties = {
-  priority: number
+  priority: keyof typeof Icon
 }
 
 const TaskPriority = ({ priority }: TaskPriorityProperties) => {
-  return <VeryHighPriorityIcon desc="sdsa" />
+  const PriorityIcon = Icon[priority]
+
+  return <PriorityIcon desc="sdsa" />
 }

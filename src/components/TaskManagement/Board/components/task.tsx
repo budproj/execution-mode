@@ -2,6 +2,7 @@ import { Box, HStack, ScaleFade, VStack } from '@chakra-ui/react'
 import _ from 'lodash'
 import React, { memo } from 'react'
 
+import { TaskPriotiry } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { KanbanTaskCard } from 'src/components/Base/KanbanTaskCard/wrapper'
 import { Task as TaskModel } from 'src/services/task-management/task-management.service'
 
@@ -29,9 +30,7 @@ const Task = ({
     handleUpdate(task.id, { ...task, title: newTitle })
   }
 
-  const handleDeleteClick = () => {
-    handleDelete(task.id)
-  }
+  console.log(handleDelete(task.id))
 
   return (
     <ScaleFade unmountOnExit in>
@@ -46,7 +45,7 @@ const Task = ({
         userSelect="none"
         opacity={isDragging ? 0.5 : 1}
       >
-        <KanbanTaskCard.Root display="flex" h={114}>
+        <KanbanTaskCard.Root display="flex" h={114} taskPriority={task.priority as TaskPriotiry}>
           <VStack w="100%" justifyContent="space-between">
             <HStack w="100%">
               <KanbanTaskCard.Content title={task.title} w="100%" onChange={handleTitleChange} />
@@ -54,7 +53,7 @@ const Task = ({
             </HStack>
             <KanbanTaskCard.Metadata
               dueDate={task.dueDate}
-              priority={task.priority}
+              priority={task.priority as TaskPriotiry}
               ownerId={task.owner}
             />
           </VStack>

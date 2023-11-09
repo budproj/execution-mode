@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useRecoilValue } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Except } from 'src/helpers/except'
@@ -7,6 +8,7 @@ import {
   TASK_STATUS as ColumnType,
   TASK_STATUS,
 } from 'src/services/task-management/task-management.service'
+import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 import { swap } from '../utils/helpers'
 import { debug } from '../utils/logging'
@@ -15,8 +17,12 @@ import useTaskCollection from './use-task-collection'
 
 const MAX_TASK_PER_COLUMN = 100
 
-const useColumnTasks = (column: ColumnType) => {
+const useColumnTasks = (column: ColumnType, teamId: string) => {
   const [tasks, setTasks] = useTaskCollection()
+  const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
+
+  // TODO: only for tests
+  const randomUser = Math.floor(Math.random() * teamUsers.length)
 
   const columnTasks = tasks[column]
 
@@ -39,7 +45,7 @@ const useColumnTasks = (column: ColumnType) => {
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
         dueDate: new Date(),
         priority: Math.floor(Math.random() * 4) + 1,
-        owner: 'myID',
+        owner: teamUsers[randomUser].id,
         attachments: [],
         supportTeamMembers: [],
         tags: ['PRODUTO'],

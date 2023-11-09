@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios'
 
-enum TASK_STATUS {
+export enum TASK_STATUS {
   PENDING = 'PENDING',
   TO_DO = 'TO_DO',
   DOING = 'DOING',
@@ -24,9 +24,7 @@ export type Task = {
   attachments: string[]
   supportTeamMembers: string[]
   tags: string[]
-  nextTaskId: string
-  createdAt: Date
-  updateadAt: Date
+  nextTaskId?: string
 }
 
 export type Board = {
