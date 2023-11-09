@@ -20,10 +20,10 @@ const BoardWrapper = ({ teamId }: BoardWrapperProperties) => {
       <DndProvider backend={HTML5Backend}>
         <Container maxWidth="100%">
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 16, md: 6 }}>
-            <Column column={ColumnType.PENDING} />
-            <Column column={ColumnType.TO_DO} />
-            <Column column={ColumnType.DOING} />
-            <Column column={ColumnType.DONE} />
+            <Column column={ColumnType.PENDING} teamId={teamId} />
+            <Column column={ColumnType.TO_DO} teamId={teamId} />
+            <Column column={ColumnType.DOING} teamId={teamId} />
+            <Column column={ColumnType.DONE} teamId={teamId} />
           </SimpleGrid>
         </Container>
       </DndProvider>

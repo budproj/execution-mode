@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import PlusIcon from 'src/components/Icon/Plus'
+import { Team } from 'src/components/Team/types'
 import { TASK_STATUS as ColumnType } from 'src/services/task-management/task-management.service'
 
 import useColumnDrop from '../hooks/use-column-drop'
@@ -25,12 +26,14 @@ const headerColumnMessage = new Map([
   [ColumnType.DONE, messages.doneColumnHeading],
 ])
 
-const Column = ({ column }: { column: ColumnType }) => {
+const Column = ({ column, teamId }: { column: ColumnType; teamId: Team['id'] }) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
-  const { tasks, addEmptyTask, deleteTask, dropTaskFrom, swapTasks, updateTask } =
-    useColumnTasks(column)
+  const { tasks, addEmptyTask, deleteTask, dropTaskFrom, swapTasks, updateTask } = useColumnTasks(
+    column,
+    teamId,
+  )
 
   const { dropReference, isOver } = useColumnDrop(column, dropTaskFrom)
 
