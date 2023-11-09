@@ -2,11 +2,14 @@ import { useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Except } from 'src/helpers/except'
+import {
+  Task as TaskModel,
+  TASK_STATUS as ColumnType,
+  TASK_STATUS,
+} from 'src/services/task-management/task-management.service'
 
-import { ColumnType } from '../utils/enums'
-import { pickChakraRandomColor, swap } from '../utils/helpers'
+import { swap } from '../utils/helpers'
 import { debug } from '../utils/logging'
-import { TaskModel } from '../utils/models'
 
 import useTaskCollection from './use-task-collection'
 
@@ -16,7 +19,6 @@ const useColumnTasks = (column: ColumnType) => {
   const [tasks, setTasks] = useTaskCollection()
 
   const columnTasks = tasks[column]
-  console.log({ columnTasks })
 
   const addEmptyTask = useCallback(() => {
     debug(`Adding new empty task to ${column} column`)
@@ -30,9 +32,17 @@ const useColumnTasks = (column: ColumnType) => {
 
       const newColumnTask: TaskModel = {
         id: uuidv4(),
+        boardId: uuidv4(),
+        status: TASK_STATUS[column],
         title: `New ${column} task`,
-        color: pickChakraRandomColor('.300'),
-        column,
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+        dueDate: new Date(),
+        priority: Math.floor(Math.random() * 4) + 1,
+        owner: 'myID',
+        attachments: [],
+        supportTeamMembers: [],
+        tags: ['PRODUTO'],
       }
 
       return {
@@ -79,7 +89,7 @@ const useColumnTasks = (column: ColumnType) => {
         const toColumnTasks = allTasks[column]
         const movingTask = fromColumnTasks.find((task) => task.id === id)
 
-        console.log(`Moving task ${movingTask?.id} from ${from} to ${column}`)
+        debug(`Moving task ${movingTask.id} from ${from} to ${column}`)
 
         if (!movingTask) {
           return allTasks
@@ -89,7 +99,7 @@ const useColumnTasks = (column: ColumnType) => {
         return {
           ...allTasks,
           [from]: fromColumnTasks.filter((task) => task.id !== id),
-          [column]: [{ ...movingTask, column }, ...toColumnTasks],
+          [column]: [{ ...movingTask, status: column }, ...toColumnTasks],
         }
       })
     },

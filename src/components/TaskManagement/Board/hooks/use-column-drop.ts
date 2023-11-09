@@ -1,7 +1,12 @@
 import { useDrop } from 'react-dnd'
 
-import { ColumnType, ItemType } from '../utils/enums'
-import { DragItem, TaskModel } from '../utils/models'
+import {
+  TASK_STATUS as ColumnType,
+  Task as TaskModel,
+} from 'src/services/task-management/task-management.service'
+
+import { ItemType } from '../utils/enums'
+import { DragItem } from '../utils/models'
 
 const useColumnDrop = (
   column: ColumnType,

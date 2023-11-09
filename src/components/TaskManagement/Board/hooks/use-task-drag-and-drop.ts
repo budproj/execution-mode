@@ -1,8 +1,10 @@
 import { useRef } from 'react'
 import { useDrag, useDrop, XYCoord } from 'react-dnd'
 
+import { Task as TaskModel } from 'src/services/task-management/task-management.service'
+
 import { ItemType } from '../utils/enums'
-import { DragItem, TaskModel } from '../utils/models'
+import { DragItem } from '../utils/models'
 
 const useTaskDragAndDrop = <T extends HTMLElement>(
   { task, index }: { task: TaskModel; index: number },
@@ -11,7 +13,7 @@ const useTaskDragAndDrop = <T extends HTMLElement>(
   const reference = useRef<T>(null)
 
   const [{ isDragging }, drag] = useDrag<DragItem, void, { isDragging: boolean }>({
-    item: { from: task.column, id: task.id, index },
+    item: { from: task.status, id: task.id, index },
     type: ItemType.TASK,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
@@ -26,7 +28,7 @@ const useTaskDragAndDrop = <T extends HTMLElement>(
       }
 
       // The tasks are not on the same column
-      if (item.from !== task.column) {
+      if (item.from !== task.status) {
         return
       }
 

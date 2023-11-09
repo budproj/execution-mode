@@ -4,9 +4,9 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
 import { Team } from 'src/components/Team/types'
+import { TASK_STATUS as ColumnType } from 'src/services/task-management/task-management.service'
 
 import Column from './components/column'
-import { ColumnType } from './utils/enums'
 
 type BoardWrapperProperties = {
   teamId: Team['id']

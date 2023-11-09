@@ -78,12 +78,12 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
             {intl.formatMessage(messages.tasksTeamTab)}
             <Tag
               size="md"
-              color={router.query.activeTab === 'tasks' ? 'white' : 'brand.500'}
+              color="white"
               borderColor="current"
               border="1px solid"
               lineHeight="0px"
               fontWeight="semibold"
-              bg="transparent"
+              bg="brand.500"
               ml={2}
             >
               {intl.formatMessage(tabMessages.newItem)}

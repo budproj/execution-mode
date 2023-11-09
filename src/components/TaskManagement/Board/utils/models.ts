@@ -1,14 +1,10 @@
-import { ColumnType } from './enums'
-
-export interface TaskModel {
-  id: string
-  title: string
-  column: ColumnType
-  color: string
-}
+import {
+  Task,
+  TASK_STATUS as ColumnType,
+} from 'src/services/task-management/task-management.service'
 
 export interface DragItem {
   index: number
-  id: TaskModel['id']
+  id: Task['id']
   from: ColumnType
 }
