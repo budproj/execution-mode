@@ -56,21 +56,18 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
         [column]: [newColumnTask, ...columnTasks],
       }
     })
-  }, [column, setTasks])
+  }, [column, randomUser, setTasks, teamUsers])
 
-  const deleteTask = useCallback(
-    (id: TaskModel['id']) => {
-      debug(`Removing task ${id}..`)
-      setTasks((allTasks) => {
-        const columnTasks = allTasks[column]
-        return {
-          ...allTasks,
-          [column]: columnTasks.filter((task) => task.id !== id),
-        }
-      })
-    },
-    [column, setTasks],
-  )
+  const deleteTask = useCallback((id: TaskModel['id']) => {
+    debug(`Removing task ${id}..`)
+    // SetTasks((allTasks) => {
+    //   const columnTasks = allTasks[column]
+    //   return {
+    //     ...allTasks,
+    //     [column]: columnTasks.filter((task) => task.id !== id),
+    //   }
+    // })
+  }, [])
 
   const updateTask = useCallback(
     (id: TaskModel['id'], updatedTask: Except<Partial<TaskModel>, 'id'>) => {

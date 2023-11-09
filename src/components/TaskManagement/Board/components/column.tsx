@@ -79,6 +79,7 @@ const Column = ({ column, teamId }: { column: ColumnType; teamId: Team['id'] }) 
       <Stack
         ref={dropReference}
         direction={{ base: 'row', md: 'column' }}
+        minH="md"
         h="full"
         py={4}
         mt={2}
