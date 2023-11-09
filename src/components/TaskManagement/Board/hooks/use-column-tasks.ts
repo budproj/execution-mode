@@ -95,7 +95,7 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
         const toColumnTasks = allTasks[column]
         const movingTask = fromColumnTasks.find((task) => task.id === id)
 
-        debug(`Moving task ${movingTask.id} from ${from} to ${column}`)
+        debug(`Moving task ${movingTask?.id ?? ''} from ${from} to ${column}`)
 
         if (!movingTask) {
           return allTasks

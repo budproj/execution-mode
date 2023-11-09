@@ -44,7 +44,7 @@ const useTaskDragAndDrop = <T extends HTMLElement>(
       const isDraggedItemBelowHovered = !isDraggedItemAboveHovered
 
       // Get mouse coordinatees
-      const { x: mouseX, y: mouseY } = monitor.getClientOffset() as XYCoord
+      const { x: _, y: mouseY } = monitor.getClientOffset() as XYCoord
 
       // Get hover item rectangle
       const hoveredBoundingRect = reference.current.getBoundingClientRect()

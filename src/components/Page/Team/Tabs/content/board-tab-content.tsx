@@ -14,6 +14,9 @@ interface BoardTabContentProperties {
 const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
   const setSelectedTeamId = useSetRecoilState(selectedTeamIdHighlight)
 
+  // TODO: remove this
+  console.log({ isLoading })
+
   useEffect(() => {
     setSelectedTeamId(teamId)
   }, [setSelectedTeamId, teamId])
