@@ -178,4 +178,10 @@ export { default as LikeIcon } from './LikeIcon'
 
 export { default as VeryHighPriorityIcon } from './VeryHighPriorityIcon'
 
+export { default as HighPriorityIcon } from './HighPriorityIcon'
+
+export { default as MediumHighPriorityIcon } from './MediumPriorityIcon'
+
+export { default as LowHighPriorityIcon } from './LowPriorityIcon'
+
 export * from './types'
