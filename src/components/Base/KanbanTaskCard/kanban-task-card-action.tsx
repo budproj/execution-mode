@@ -1,33 +1,53 @@
-import { Box } from '@chakra-ui/react'
-import styled from '@emotion/styled'
+import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import React from 'react'
+import { useIntl } from 'react-intl'
 
-const StyledBox = styled(Box)`
-  position: relative;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
+import TrashIcon from 'src/components/Icon/Trash'
+import TreeDotsIcon from 'src/components/Icon/TreeDots'
 
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0px;
-    background-color: inherit;
-    border-radius: inherit;
+import messages from './messages'
+
+interface KanbanTaskCardActionsProperties {
+  onDelete: () => void
+}
+
+export const KanbanTaskCardActions = ({ onDelete }: KanbanTaskCardActionsProperties) => {
+  const intl = useIntl()
+
+  const handleDelete = () => {
+    onDelete()
   }
 
-  &:before {
-    top: 8px;
-  }
-
-  &:after {
-    top: 16px;
-  }
-`
-
-export const KanbanTaskCardActions = () => {
-  return <StyledBox backgroundColor="new-gray.800" />
+  return (
+    <Menu isLazy placement="auto-end" variant="action-list">
+      <MenuButton
+        maxW="120px"
+        cursor="pointer"
+        color="new-gray.800"
+        _hover={{
+          color: 'new-gray.300',
+        }}
+      >
+        <TreeDotsIcon
+          fill="currentColor"
+          fontSize="2xl"
+          style={{ transform: 'rotate(90deg)' }}
+          desc="excluir"
+        />
+      </MenuButton>
+      <MenuList minW="120px">
+        <MenuItem color="red.500" maxW="160px" onClick={handleDelete}>
+          <TrashIcon
+            version="kanban"
+            desc="dsada"
+            w=".8em"
+            h="1.2em"
+            mr={2}
+            stroke="currentcolor"
+          />
+          {intl.formatMessage(messages.deleteButtonAction)}
+        </MenuItem>
+      </MenuList>
+    </Menu>
+  )
 }
