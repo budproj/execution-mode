@@ -4,7 +4,10 @@ import { useIntl } from 'react-intl'
 
 import PlusIcon from 'src/components/Icon/Plus'
 import { Team } from 'src/components/Team/types'
-import { TASK_STATUS as ColumnType } from 'src/services/task-management/task-management.service'
+import {
+  Task as TaskModel,
+  TASK_STATUS as ColumnType,
+} from 'src/services/task-management/task-management.service'
 
 import useColumnDrop from '../hooks/use-column-drop'
 import useColumnTasks from '../hooks/use-column-tasks'
@@ -26,11 +29,17 @@ const headerColumnMessage = new Map([
   [ColumnType.DONE, messages.doneColumnHeading],
 ])
 
-const Column = ({ column, teamId }: { column: ColumnType; teamId: Team['id'] }) => {
+type ColumnProperties = {
+  column: ColumnType
+  teamId: Team['id']
+  tasks: TaskModel[]
+}
+
+const Column = ({ column, teamId, tasks }: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
-  const { tasks, addEmptyTask, deleteTask, dropTaskFrom, swapTasks, updateTask } = useColumnTasks(
+  const { addEmptyTask, deleteTask, dropTaskFrom, swapTasks, updateTask } = useColumnTasks(
     column,
     teamId,
   )
@@ -86,7 +95,7 @@ const Column = ({ column, teamId }: { column: ColumnType; teamId: Team['id'] }) 
         spacing={4}
         rounded="lg"
         overflow="auto"
-        opacity={isOver ? 0.85 : 1}
+        bgColor={isOver ? 'brand.50' : 'none'}
       >
         {ColumnTasks}
       </Stack>

@@ -23,14 +23,16 @@ const Task = ({
   onDropHover: handleDropHover,
   onDelete: handleDelete,
 }: TaskProperties) => {
-  const { ref, isDragging } = useTaskDragAndDrop<HTMLDivElement>({ task, index }, handleDropHover)
+  const { ref } = useTaskDragAndDrop<HTMLDivElement>({ task, index }, handleDropHover)
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
     handleUpdate(task.id, { ...task, title: newTitle })
   }
 
-  console.log(handleDelete(task.id))
+  const handleTaskDelete = () => {
+    handleDelete(task.id)
+  }
 
   return (
     <ScaleFade unmountOnExit in>
@@ -43,13 +45,12 @@ const Task = ({
         cursor="grab"
         fontWeight="bold"
         userSelect="none"
-        opacity={isDragging ? 0.5 : 1}
       >
         <KanbanTaskCard.Root display="flex" h={114} taskPriority={task.priority as TaskPriotiry}>
           <VStack w="100%" justifyContent="space-between">
             <HStack w="100%">
               <KanbanTaskCard.Content title={task.title} w="100%" onChange={handleTitleChange} />
-              <KanbanTaskCard.Actions />
+              <KanbanTaskCard.Actions onDelete={handleTaskDelete} />
             </HStack>
             <KanbanTaskCard.Metadata
               dueDate={task.dueDate}
