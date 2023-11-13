@@ -2,7 +2,6 @@ import { Stack, Container, SimpleGrid } from '@chakra-ui/react'
 import React, { useCallback, useMemo, useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { DynamicAvatarGroup } from 'src/components/Base'
