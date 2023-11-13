@@ -9,6 +9,7 @@ type ExploreTeamTabsContentMessage =
   | 'routineSettingsActive'
   | 'routineSettingsInactive'
   | 'routineSettingsButton'
+  | 'boardTabHeaderTitle'
 
 export default defineMessages<ExploreTeamTabsContentMessage>({
   tabRetrospectivePageTitle: {
@@ -60,5 +61,11 @@ export default defineMessages<ExploreTeamTabsContentMessage>({
     defaultMessage: 'Routine notification settings button',
     id: 'X+heBq',
     description: 'Label for routine notification settings button',
+  },
+
+  boardTabHeaderTitle: {
+    defaultMessage: 'Tarefas {team}',
+    id: 'oAW5Gy',
+    description: 'Header of the board tab on the teams page.',
   },
 })
