@@ -10,6 +10,7 @@ type ExploreTeamTabsContentMessage =
   | 'routineSettingsInactive'
   | 'routineSettingsButton'
   | 'boardTabHeaderTitle'
+  | 'searchTaskInput'
 
 export default defineMessages<ExploreTeamTabsContentMessage>({
   tabRetrospectivePageTitle: {
@@ -67,5 +68,11 @@ export default defineMessages<ExploreTeamTabsContentMessage>({
     defaultMessage: 'Tarefas {team}',
     id: 'oAW5Gy',
     description: 'Header of the board tab on the teams page.',
+  },
+
+  searchTaskInput: {
+    defaultMessage: 'Buscar tarefa',
+    id: 'aqlUkl',
+    description: 'Placeholder of the search task input on the teams page.',
   },
 })
