@@ -23,8 +23,6 @@ import { User } from 'src/components/User/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
-import meAtom from 'src/state/recoil/user/me'
-import selectUser from 'src/state/recoil/user/selector'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
 
@@ -320,13 +318,13 @@ const StyledMCWrapper = styled(MissionControlWrapper)`
 
 const DashboardPage = () => {
   const intl = useIntl()
-  const flags = useFlags(['mission_control'])
 
-  const { data, loading, called } = useQuery<GetUserNameGenderAndSettingsRequest>(
+  const flags = useFlags(['mission_control'])
+  const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
     queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
   )
-  const me = useRecoilValue(meAtom)
-  const user = useRecoilValue(selectUser(me))
+  // Const me = useRecoilValue(meAtom)
+  // const user = useRecoilValue(selectUser(me))
 
   const [teams, setEdges] = useConnectionEdges<Team>()
   const [mainTeamId, setMainTeamId] = useState('')
@@ -370,7 +368,9 @@ const DashboardPage = () => {
             <UserProfileHeader
               canUpdate
               onlyPicture
-              userProps={{ id: me, picture: user?.picture, role: user?.role }}
+              // UserProps={{ id: me, picture: user?.picture, role: user?.role }}
+              userProps={{ id: data?.me.id, picture: data?.me.picture, role: data?.me.role }}
+              handleUpdatePicture={refetch}
               isLoaded={!loading}
               variantAvatar="circle"
             />
@@ -409,7 +409,6 @@ const DashboardPage = () => {
           >
             {intl.formatMessage(messages.okrOverViewTitle)}
           </Text>
-
           <Flex gridGap="3rem" justifyContent="space-between">
             <OverviewSummary
               title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
