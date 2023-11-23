@@ -361,10 +361,12 @@ const DashboardPage = () => {
 
   return (
     <StyledStack bg="new-gray.50" position="relative">
-      <Box bg="brand.500" position="relative" zIndex={2}>
-        <Stack>
-          <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
-          <PageHeader display="flex" gap={8} alignItems="center" py={10} px={20} flexGrow={1}>
+      <Box bg="brand.500" position="relative">
+        <Stack position="relative">
+          <Box position="absolute" zIndex={10}>
+            <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
+          </Box>
+          <PageHeader display="flex" gap={8} alignItems="center" py={120} px={20} flexGrow={1}>
             <UserProfileHeader
               canUpdate
               onlyPicture
