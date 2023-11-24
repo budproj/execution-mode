@@ -307,12 +307,12 @@ const StyledStack = styled(Stack)`
 `
 
 const StyledMCWrapper = styled(MissionControlWrapper)`
-  @media (min-width: 1600px) {
+  @media (min-width: 1500px) {
     top: 225px;
   }
 
-  @media (max-width: 1417px) {
-    top: 195px;
+  @media (max-width: 1460px) {
+    top: 215px;
   }
 `
 
