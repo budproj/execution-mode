@@ -5,7 +5,8 @@ import { useRecoilValue } from 'recoil'
 
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import { Team } from 'src/components/Team/types'
-import { User } from 'src/components/User/types'
+import { useGetUserAuthzRole } from 'src/components/User/hooks/getUserAuthzRole/get-user-authz-role'
+import { AuthzUserRoles, User } from 'src/components/User/types'
 import meAtom from 'src/state/recoil/user/me'
 
 import { objectiveAtomFamily } from '../../../../state/recoil/objective'
@@ -36,12 +37,15 @@ export const ObjectiveAccordionMenu = ({
   const objective = useRecoilValue(objectiveAtomFamily(objectiveID))
   const myID = useRecoilValue(meAtom)
 
+  const { data: userAuthzRole } = useGetUserAuthzRole(myID)
+
   const isPersonalOkr = Boolean(!objective?.teamId)
 
   const policyHolder = userID ? objective : team
   const canCreateKeyResult = policyHolder?.keyResults?.policy?.create === GraphQLEffect.ALLOW
   const canUpdateObjective = objective?.policy?.update === GraphQLEffect.ALLOW
-  const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
+  // Const canDeleteObjective = objective?.policy?.delete === GraphQLEffect.ALLOW
+  const canDeleteObjective = userAuthzRole?.name !== AuthzUserRoles.teamMember
   const hasAnyOptions = isPersonalOkr
     ? userID === myID
     : !isLoaded || canCreateKeyResult || canUpdateObjective || canDeleteObjective
