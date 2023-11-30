@@ -5,6 +5,7 @@ type BoardMessages =
   | 'todoColumnHeading'
   | 'doingColumnHeading'
   | 'doneColumnHeading'
+  | 'addTaskButton'
 
 export default defineMessages<BoardMessages>({
   pendingColumnHeading: {
@@ -29,5 +30,10 @@ export default defineMessages<BoardMessages>({
     defaultMessage: 'concluído',
     id: 'rw4RIa',
     description: 'This message appears on header of the done column',
+  },
+  addTaskButton: {
+    defaultMessage: 'nova tarefa',
+    id: 'pfygkg',
+    description: 'This message appears on the add task button',
   },
 })

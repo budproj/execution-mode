@@ -1,4 +1,5 @@
-import { Badge, Box, Circle, Heading, HStack, Stack } from '@chakra-ui/react'
+import { Badge, Box, Circle, Heading, HStack, Stack, Text } from '@chakra-ui/react'
+import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -14,6 +15,38 @@ import useColumnTasks from '../hooks/use-column-tasks'
 import messages from '../messages'
 
 import Task from './task'
+
+const StyledCircleButton = styled(Circle)`
+  display: inline-flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: auto;
+  max-width: 18px;
+  padding: 2px 4px;
+  -webkit-transition: max-width 0.5s;
+  transition: max-width padding 0.5s;
+  .expandbtntext {
+    display: none;
+    line-height: 0;
+  }
+
+  &:hover {
+    max-width: 120px;
+    gap: 4px;
+    .expandbtntext {
+      display: block;
+      white-space: nowrap;
+    }
+  }
+
+  > div {
+    font-size: 0.8em;
+    display: flex;
+    align-items: center;
+  }
+`
 
 const ColumnColorScheme: Record<ColumnType, string> = {
   PENDING: 'new-gray.600',
@@ -74,16 +107,20 @@ const Column = ({ column, teamId, tasks }: ColumnProperties) => {
             </Badge>
           )}
         </Heading>
-        <Circle
+        <StyledCircleButton
           _hover={{ backgroundColor: 'brand.200' }}
           cursor="pointer"
           border="1.5px solid"
           borderColor="brand.500"
-          size={6}
           onClick={addEmptyTask}
         >
-          <PlusIcon desc="1231" w="0.6em" fill="brand.500" stroke="brand.500" />
-        </Circle>
+          <Box>
+            <PlusIcon desc="1231" w="0.6em" fill="brand.500" stroke="brand.500" />
+          </Box>
+          <Text className="expandbtntext" color="brand.500" fontWeight="500">
+            {intl.formatMessage(messages.addTaskButton)}
+          </Text>
+        </StyledCircleButton>
       </HStack>
       <Stack
         ref={dropReference}
