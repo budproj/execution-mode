@@ -62,7 +62,7 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
   return (
     <Stack w="100%" spacing={8}>
       <CustomAvatarGroup
-        max={2}
+        max={5}
         selectedUserId={selectedUser}
         teamOwnerId={ownersAndSupportTeamMembers.find((user) => user.id === team?.ownerId)?.id}
         users={ownersAndSupportTeamMembers}
