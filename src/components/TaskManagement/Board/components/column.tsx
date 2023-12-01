@@ -108,7 +108,7 @@ const Column = ({ column, teamId, tasks }: ColumnProperties) => {
           )}
         </Heading>
         <StyledCircleButton
-          _hover={{ backgroundColor: 'brand.200' }}
+          _hover={{ backgroundColor: 'brand.100' }}
           cursor="pointer"
           border="1.5px solid"
           borderColor="brand.500"
@@ -132,7 +132,7 @@ const Column = ({ column, teamId, tasks }: ColumnProperties) => {
         spacing={4}
         rounded="lg"
         overflow="auto"
-        bgColor={isOver ? 'brand.50' : 'none'}
+        bgColor={isOver ? 'brand.200' : 'none'}
       >
         {ColumnTasks}
       </Stack>

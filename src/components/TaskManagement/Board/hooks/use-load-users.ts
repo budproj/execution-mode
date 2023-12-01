@@ -7,7 +7,7 @@ import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 import useTaskCollection from './use-task-collection'
 
-const useLoadUsers = (teamId: Team['id']): Array<Partial<User>> => {
+const useLoadUsers = (teamId: Team['id']): User[] => {
   const [tasks, _] = useTaskCollection()
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
 

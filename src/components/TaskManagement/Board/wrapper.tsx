@@ -4,7 +4,7 @@ import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useRecoilValue } from 'recoil'
 
-import { DynamicAvatarGroup } from 'src/components/Base'
+import CustomAvatarGroup from 'src/components/Base/DynamicAvatarGroup/custom-avatar-group'
 import { Team } from 'src/components/Team/types'
 import {
   Task,
@@ -61,17 +61,15 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
 
   return (
     <Stack w="100%" spacing={8}>
-      <DynamicAvatarGroup
-        isFromTeamPage
-        isSelectable
-        users={ownersAndSupportTeamMembers}
-        max={10}
+      <CustomAvatarGroup
+        max={2}
         selectedUserId={selectedUser}
         teamOwnerId={ownersAndSupportTeamMembers.find((user) => user.id === team?.ownerId)?.id}
+        users={ownersAndSupportTeamMembers}
         onSelectUser={handleSelectUser}
       />
       <DndProvider backend={HTML5Backend}>
-        <Container maxWidth="100%" paddingInline={0}>
+        <Container maxWidth="100%" paddingInlineEnd={0} padding={0}>
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 16, md: 6 }}>
             <Column
               column={ColumnType.PENDING}
