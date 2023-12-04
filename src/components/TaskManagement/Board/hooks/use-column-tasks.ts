@@ -1,13 +1,13 @@
 import { useCallback } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Except } from 'src/helpers/except'
 import {
   Task as TaskModel,
   TASK_STATUS as ColumnType,
-  TASK_STATUS,
 } from 'src/services/task-management/task-management.service'
+import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 import { swap } from '../utils/helpers'
@@ -20,6 +20,7 @@ const MAX_TASK_PER_COLUMN = 100
 const useColumnTasks = (column: ColumnType, teamId: string) => {
   const [tasks, setTasks] = useTaskCollection()
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
+  const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
 
   // TODO: only for tests
   const randomUser = Math.floor(Math.random() * teamUsers.length)
@@ -28,35 +29,37 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
 
   const addEmptyTask = useCallback(() => {
     debug(`Adding new empty task to ${column} column`)
-    setTasks((allTasks) => {
-      const columnTasks = allTasks[column]
+    const boardId = uuidv4()
+    setTaskBoardID(boardId)
+    // SetTasks((allTasks) => {
+    //   const columnTasks = allTasks[column]
 
-      if (columnTasks.length > MAX_TASK_PER_COLUMN) {
-        debug('Too many task!')
-        return allTasks
-      }
+    //   if (columnTasks.length > MAX_TASK_PER_COLUMN) {
+    //     debug('Too many task!')
+    //     return allTasks
+    //   }
 
-      const newColumnTask: TaskModel = {
-        id: uuidv4(),
-        boardId: uuidv4(),
-        status: TASK_STATUS[column],
-        title: `New ${column} task`,
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
-        dueDate: new Date(),
-        priority: Math.floor(Math.random() * 4) + 1,
-        owner: teamUsers[randomUser].id,
-        attachments: [],
-        supportTeamMembers: [],
-        tags: ['PRODUTO'],
-      }
+    //   const newColumnTask: TaskModel = {
+    //     id: uuidv4(),
+    //     boardId,
+    //     status: TASK_STATUS[column],
+    //     title: `New ${column} task`,
+    //     description:
+    //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+    //     dueDate: new Date(),
+    //     priority: Math.floor(Math.random() * 4) + 1,
+    //     owner: teamUsers[randomUser].id,
+    //     attachments: [],
+    //     supportTeamMembers: [],
+    //     tags: ['PRODUTO'],
+    //   }
 
-      return {
-        ...allTasks,
-        [column]: [newColumnTask, ...columnTasks],
-      }
-    })
-  }, [column, randomUser, setTasks, teamUsers])
+    //   return {
+    //     ...allTasks,
+    //     [column]: [newColumnTask, ...columnTasks],
+    //   }
+    // })
+  }, [column, setTaskBoardID])
 
   const deleteTask = useCallback(
     (id: TaskModel['id']) => {
