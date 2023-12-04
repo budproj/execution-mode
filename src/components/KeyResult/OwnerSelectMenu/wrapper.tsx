@@ -1,6 +1,7 @@
 import { Box, MenuProps } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
+import { Team } from 'src/components/Team/types'
 import { NameWithAvatar } from 'src/components/User/NamedAvatar/name-with-avatar'
 import { useGetUserDetails } from 'src/components/User/hooks'
 
@@ -13,6 +14,7 @@ interface KeyResultOwnerSelectMenuProperties {
   onChange?: (newOwnerID: string) => void
   avatarSubtitleType?: NamedAvatarSubtitleType
   placement?: MenuProps['placement']
+  filterByTeam?: Team['id']
   isLazy?: boolean
 }
 
@@ -20,6 +22,7 @@ export const KeyResultOwnerSelectMenu = ({
   value,
   onChange,
   avatarSubtitleType,
+  filterByTeam,
   placement,
   ...rest
 }: KeyResultOwnerSelectMenuProperties) => {
@@ -68,7 +71,11 @@ export const KeyResultOwnerSelectMenu = ({
       {...rest}
     >
       <Box p={4} maxH="full" h="full">
-        <AllReachableUsers avatarSubtitleType={avatarSubtitleType} onSelect={handleChange} />
+        <AllReachableUsers
+          avatarSubtitleType={avatarSubtitleType}
+          filterByTeam={filterByTeam}
+          onSelect={handleChange}
+        />
       </Box>
     </SelectMenu>
   )

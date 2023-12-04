@@ -16,6 +16,7 @@ import queries from './queries.gql'
 interface AllReachableUsersProperties {
   onSelect: (userID: string) => void | Promise<void>
   listUsersExceptByTeam?: Team['id']
+  filterByTeam?: Team['id']
   isSelectingMultiples?: boolean
   avatarSubtitleType?: NamedAvatarSubtitleType
 }
@@ -28,22 +29,34 @@ export const AllReachableUsers = ({
   onSelect,
   listUsersExceptByTeam,
   isSelectingMultiples,
+  filterByTeam,
   avatarSubtitleType,
 }: AllReachableUsersProperties) => {
   const { data } = useQuery<GetUserListQueryResult>(queries.GET_USER_LIST)
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [loadUsers] = useRecoilFamilyLoader(userAtomFamily)
 
-  const filterUsersExceptByTeam = useMemo(() => {
-    const usersToList = users.filter(
-      (user) =>
-        !user.teams?.edges
-          .map((userTeam) => userTeam.node.id !== listUsersExceptByTeam)
-          .includes(false),
-    )
+  const filteredUsers = useMemo(() => {
+    if (listUsersExceptByTeam) {
+      const usersExeceptByTeam = users.filter(
+        (user) =>
+          !user.teams?.edges
+            .map((userTeam) => userTeam.node.id !== listUsersExceptByTeam)
+            .includes(false),
+      )
+      return usersExeceptByTeam
+    }
 
-    return usersToList
-  }, [listUsersExceptByTeam, users])
+    if (filterByTeam) {
+      const usersByTeam = users.filter((user) =>
+        user.teams?.edges.map((userTeam) => userTeam.node.id === filterByTeam).includes(true),
+      )
+
+      return usersByTeam
+    }
+
+    return users
+  }, [filterByTeam, listUsersExceptByTeam, users])
 
   useEffect(() => {
     if (data) {
@@ -58,7 +71,7 @@ export const AllReachableUsers = ({
 
   return (
     <SelectUserfromList
-      users={listUsersExceptByTeam ? filterUsersExceptByTeam : users}
+      users={filteredUsers}
       isLoading={!data}
       isSelectingMultiples={isSelectingMultiples}
       avatarSubtitleType={avatarSubtitleType}
