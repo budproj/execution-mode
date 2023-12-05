@@ -7,14 +7,14 @@ enum kanbanTaskCardViewMode {
   VIEW_MODE = 'VIEW_MODE',
 }
 
-export type TaskPriotiry = 1 | 2 | 3 | 4
+export type TaskPriority = 1 | 2 | 3 | 4
 interface StyledGridProperties {
   customBorderColor: string
 }
 
 interface KanbanTaskCardRootProperties extends GridProps {
   children: React.ReactNode
-  taskPriority: TaskPriotiry
+  taskPriority: TaskPriority
   mode?: kanbanTaskCardViewMode
 }
 
