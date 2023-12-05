@@ -3,13 +3,14 @@ import { Form, Formik, FormikHelpers } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import { TextField } from 'src/components/Base/Form/Fields/text'
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import InfoCircleIcon from 'src/components/Icon/InfoCircle'
 
 import { CADENCE, CYCLE_STATUS } from '../../constants'
 import { Cycle } from '../../types'
 
-import { CycleTextField, CycleSelectField, CycleDateField } from './Fields'
+import { CycleSelectField, CycleDateField } from './Fields'
 import { CycleSelectOption } from './Fields/select'
 import messages from './messages'
 import { NewCycleSchema } from './schema'
@@ -60,7 +61,11 @@ export const CycleModalForm = ({
         <Form>
           <FormControl id={`create-cycle''}`}>
             <Flex columnGap={8} rowGap={5} flexWrap="wrap" mb={8}>
-              <CycleTextField id="period" label={intl.formatMessage(messages.nameCycleField)} />
+              <TextField
+                fieldId="period"
+                label={intl.formatMessage(messages.nameCycleField)}
+                maxW={180}
+              />
 
               <CycleSelectField
                 id="active"
@@ -121,13 +126,19 @@ export const CycleModalForm = ({
                   </TooltipWithDelay>
                 )}
               />
+              <Flex w="100%" gap={8}>
+                <CycleDateField
+                  fieldId="dateStart"
+                  maxW={180}
+                  label={intl.formatMessage(messages.dateStartCycleField)}
+                />
 
-              <CycleDateField
-                id="dateStart"
-                label={intl.formatMessage(messages.dateStartCycleField)}
-              />
-
-              <CycleDateField id="dateEnd" label={intl.formatMessage(messages.dateEndCycleField)} />
+                <CycleDateField
+                  fieldId="dateEnd"
+                  maxW={180}
+                  label={intl.formatMessage(messages.dateEndCycleField)}
+                />
+              </Flex>
             </Flex>
 
             {children}
