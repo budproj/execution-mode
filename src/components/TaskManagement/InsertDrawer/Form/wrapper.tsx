@@ -4,19 +4,22 @@ import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
+import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
+
 import meAtom from '../../../../state/recoil/user/me'
-import { TASK_PRIORITY } from '../../types'
 
 import { FormActions } from './actions'
-import { FormatInput } from './format'
-import { InitialValueInput } from './initial-value'
+import { DueDateInput } from './due-date'
 import { OwnerInput } from './owner'
+import { PriorityInput } from './priority'
+import { NewTaskSchema } from './schema'
+import { StartDateInput } from './start-date'
 import { TitleInput } from './title'
 
 export type FormValues = {
   boardID?: string
   title: string
-  priority: TASK_PRIORITY
+  priority: TaskPriority
   initialDate: Date
   dueDate: Date
   ownerID: string
@@ -24,7 +27,7 @@ export type FormValues = {
 
 const formInitialValues: FormValues = {
   title: '',
-  priority: TASK_PRIORITY.MEDIUM,
+  priority: 4,
   initialDate: new Date(),
   dueDate: new Date(),
   ownerID: '',
@@ -80,10 +83,15 @@ export const InsertOrUpdateTaskForm = ({
   }
 
   return (
-    <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form>
+    <Formik
+      enableReinitialize
+      initialValues={initialValues}
+      validationSchema={NewTaskSchema}
+      onSubmit={handleSubmit}
+    >
+      <Form style={{ width: '100%' }}>
         <FormControl
-          id="key-result-insert-or-update"
+          id="task-insert-or-update"
           display="flex"
           flexDirection="column"
           p={8}
@@ -95,15 +103,16 @@ export const InsertOrUpdateTaskForm = ({
               hasValidationErrors={validationErrors.includes('title')}
               isLoading={isLoading}
             />
+            <PriorityInput isLoading={isLoading} />
 
             {/* <DescriptionInput isLoading={isLoading} /> */}
           </VStack>
           {/* <DescriptionInput /> */}
           {/* {!isLoading && !editingModeKeyResult && <OkrExampleLink />} */}
-          <FormatInput isLoading={isLoading} />
 
-          <Stack direction="row" spacing={4}>
-            <InitialValueInput isLoading={isLoading} />
+          <Stack direction="row" spacing={6}>
+            <StartDateInput isLoading={isLoading} />
+            <DueDateInput isLoading={isLoading} />
           </Stack>
 
           <OwnerInput isLoading={isLoading} />

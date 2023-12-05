@@ -1,4 +1,4 @@
-import { Flex, MenuItemOption, MenuProps, Text } from '@chakra-ui/react'
+import { Flex, MenuItemOption, MenuProps, Text, useToken } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -82,10 +82,24 @@ type PriorityItemOptionProperties = {
 
 const PrirityItemOption = ({ priority }: PriorityItemOptionProperties) => {
   const intl = useIntl()
+  const [veryHigh, high, medium, low] = useToken('colors', [
+    'red.600',
+    'red.500',
+    'blue.500',
+    'yellow.600',
+  ])
+
+  const taskPriorityColors = {
+    1: low,
+    2: medium,
+    3: high,
+    4: veryHigh,
+  }
+
   return (
     <Flex alignItems="center" gap={2}>
       <TaskPriorityIcon priority={priority} />
-      <StyledText color="">
+      <StyledText color={taskPriorityColors[priority]}>
         {intl.formatMessage(messages.priotiryLabelMessage, { priority: String(priority) })}
       </StyledText>
     </Flex>
