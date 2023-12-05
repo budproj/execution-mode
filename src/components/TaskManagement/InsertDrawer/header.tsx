@@ -4,13 +4,13 @@ import { useIntl } from 'react-intl'
 
 import messages from './messages'
 
-interface KeyResultInsertOrUpdateDrawerHeaderProperties {
+interface TaskInsertOrUpdateDrawerHeaderProperties {
   isEditing?: boolean
 }
 
 export const KeyResultInsertOrUpdateDrawerHeader = ({
   isEditing,
-}: KeyResultInsertOrUpdateDrawerHeaderProperties) => {
+}: TaskInsertOrUpdateDrawerHeaderProperties) => {
   const intl = useIntl()
 
   return (
