@@ -1,13 +1,15 @@
-import { Box, BoxProps, FormLabel } from '@chakra-ui/react'
+import { Box, BoxProps, Flex, FormLabel } from '@chakra-ui/react'
 import React from 'react'
 
 interface KeyResultInsertDrawerFormInputBaseProperties {
   title?: string
+  required?: boolean
   children?: BoxProps['children']
 }
 
 export const FormInputBase = ({
   title,
+  required = false,
   children,
 }: KeyResultInsertDrawerFormInputBaseProperties) => (
   <Box w="full">
@@ -18,7 +20,10 @@ export const FormInputBase = ({
       fontSize={12}
       letterSpacing="0.5px"
     >
-      {title}
+      <Flex>
+        {title}
+        {required && <p style={{ color: '#FF616A' }}>*</p>}
+      </Flex>
     </FormLabel>
     {children}
   </Box>
