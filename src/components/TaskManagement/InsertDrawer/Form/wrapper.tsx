@@ -9,6 +9,7 @@ import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-car
 import meAtom from '../../../../state/recoil/user/me'
 
 import { FormActions } from './actions'
+import { DescriptionInput } from './description'
 import { DueDateInput } from './due-date'
 import { OwnerInput } from './owner'
 import { PriorityInput } from './priority'
@@ -105,7 +106,7 @@ export const InsertOrUpdateTaskForm = ({
             />
             <PriorityInput isLoading={isLoading} />
 
-            {/* <DescriptionInput isLoading={isLoading} /> */}
+            <DescriptionInput isLoading={isLoading} />
           </VStack>
           {/* <DescriptionInput /> */}
           {/* {!isLoading && !editingModeKeyResult && <OkrExampleLink />} */}

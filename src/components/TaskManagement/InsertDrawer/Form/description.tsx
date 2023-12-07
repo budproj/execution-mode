@@ -1,10 +1,11 @@
-import { Skeleton, Textarea } from '@chakra-ui/react'
-import { Field } from 'formik'
+import { Skeleton } from '@chakra-ui/react'
+import { useCurrentEditor } from '@tiptap/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
+
 import { FormInputBase } from './base-input'
-import messages from './messages'
 
 interface DescriptionInputProperties {
   isLoading?: boolean
@@ -12,17 +13,16 @@ interface DescriptionInputProperties {
 
 export const DescriptionInput = ({ isLoading }: DescriptionInputProperties) => {
   const intl = useIntl()
+  const { editor } = useCurrentEditor()
+
+  const editorJson = editor?.getJSON()
+  console.log({ editor })
 
   return (
     <FormInputBase>
       <Skeleton isLoaded={!isLoading}>
-        <Field
-          name="description"
-          as={Textarea}
-          placeholder={intl.formatMessage(messages.secondInputPlaceholder)}
-          _placeholder={{ color: 'black.400' }}
-          minH={28}
-        />
+        <Editor />
+        {editor && <pre>{JSON.stringify(editor.getJSON(), undefined, 2)}</pre>}
       </Skeleton>
     </FormInputBase>
   )
