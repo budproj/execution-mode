@@ -10,7 +10,10 @@ export interface DynamicAvatarGroupProperties {
   skeletonNumOfAvatars: number
   size: AvatarGroupProps['size']
   max: AvatarGroupProps['max']
+  selectedUserId?: string
+  isSelectable?: boolean
   users?: Array<Partial<User>>
+  onSelectUser?: (userId: string) => void
   isLoaded?: boolean
   isFromTeamPage?: boolean
   teamOwnerId?: string
@@ -21,19 +24,35 @@ const DynamicAvatarGroup = ({
   max,
   isLoaded,
   skeletonNumOfAvatars,
+  selectedUserId,
+  isSelectable = false,
+  onSelectUser,
   users,
   isFromTeamPage = false,
   teamOwnerId,
-}: DynamicAvatarGroupProperties) =>
-  isLoaded || typeof isLoaded === 'undefined' ? (
+}: DynamicAvatarGroupProperties) => {
+  const handleSelectUser = (userId: string) => {
+    if (onSelectUser) onSelectUser(userId)
+  }
+
+  const targetUser = isSelectable ? selectedUserId ?? teamOwnerId : teamOwnerId
+
+  return isLoaded || typeof isLoaded === 'undefined' ? (
     <AvatarGroup size={size} max={max}>
       {users
-        ?.sort((a, b) => (a.id === teamOwnerId ? -1 : b.id === teamOwnerId ? 1 : 0)) // Put the owner always first
+        ?.sort((a, b) => (a.id === targetUser ? -1 : b.id === targetUser ? 1 : 0)) // Put the owner or selected user always first
         .map((user, index) => (
           <Avatar
             key={user.id ?? `DYNAMIC_AVATAR_${user.fullName ?? user.firstName ?? 'USER'}_${index}`}
+            cursor={isSelectable ? 'pointer' : 'default'}
             name={user.fullName ?? user.firstName}
             src={user.picture}
+            filter={
+              'grayscale(' +
+              (selectedUserId ? (user.id === selectedUserId ? '0%' : '100%') : '0%') +
+              ')'
+            }
+            onClick={() => handleSelectUser(user.id ?? '')}
           >
             {isFromTeamPage && teamOwnerId === user.id && (
               <AvatarBadge placement="bottom-start" border="none">
@@ -46,6 +65,7 @@ const DynamicAvatarGroup = ({
   ) : (
     <AvatarGroupSkeleton numOfAvatars={skeletonNumOfAvatars ?? max} />
   )
+}
 
 DynamicAvatarGroup.defaultProps = {
   size: 'md',

@@ -1,5 +1,6 @@
 import { AppState, Auth0Provider } from '@auth0/auth0-react'
 import { ChakraProvider } from '@chakra-ui/react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import App, { AppContext, AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
@@ -35,6 +36,7 @@ interface BudAppProperties extends AppProps {
 }
 
 const config = getConfig()
+const queryClient = new QueryClient()
 
 const BudApp = (properties: BudAppProperties): ReactElement => {
   const { Component, pageProps } = properties
@@ -69,21 +71,23 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                   <RecoilIntlProvider>
                     <FlagsmithProvider>
                       <ServicesProvider>
-                        <RoutinesFormActionsProvider>
-                          <>
-                            <NoticesBanner />
-                            <NewsBanner />
-                            <MaintenanceGatekeeper>
-                              <HotjarProvider />
-                              <HubSpotProvider />
-                              <ProgressBar />
-                              <KeyResultSingleDrawer />
-                              <TeamRedirectPage />
-                              <RetrospectiveRoutine />
-                              <Component {...pageProps} />
-                            </MaintenanceGatekeeper>
-                          </>
-                        </RoutinesFormActionsProvider>
+                        <QueryClientProvider client={queryClient}>
+                          <RoutinesFormActionsProvider>
+                            <>
+                              <NoticesBanner />
+                              <NewsBanner />
+                              <MaintenanceGatekeeper>
+                                <HotjarProvider />
+                                <HubSpotProvider />
+                                <ProgressBar />
+                                <KeyResultSingleDrawer />
+                                <TeamRedirectPage />
+                                <RetrospectiveRoutine />
+                                <Component {...pageProps} />
+                              </MaintenanceGatekeeper>
+                            </>
+                          </RoutinesFormActionsProvider>
+                        </QueryClientProvider>
                       </ServicesProvider>
                     </FlagsmithProvider>
                   </RecoilIntlProvider>
