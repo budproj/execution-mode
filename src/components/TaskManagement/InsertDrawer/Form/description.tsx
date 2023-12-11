@@ -1,6 +1,5 @@
 import { Skeleton } from '@chakra-ui/react'
-import { useCurrentEditor } from '@tiptap/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
@@ -13,16 +12,18 @@ interface DescriptionInputProperties {
 
 export const DescriptionInput = ({ isLoading }: DescriptionInputProperties) => {
   const intl = useIntl()
-  const { editor } = useCurrentEditor()
+  const [content, setContent] = useState<string>('')
+  const [editorText, setEditorText] = useState<string>('')
 
-  const editorJson = editor?.getJSON()
-  console.log({ editor })
+  const handleChange = (data: any) => {
+    setContent(data)
+  }
 
   return (
     <FormInputBase>
       <Skeleton isLoaded={!isLoading}>
-        <Editor />
-        {editor && <pre>{JSON.stringify(editor.getJSON(), undefined, 2)}</pre>}
+        <Editor editable content={content} setContent={setContent} editorText={editorText} />
+        {/* <Editor isParent={false} description={content} editable={false} /> */}
       </Skeleton>
     </FormInputBase>
   )

@@ -24,8 +24,11 @@ import MenuBar from './menu-bar'
 const CustomEditor = styled(EditorContent)`
   /* Basic editor styles */
   .ProseMirror {
+    outline: none;
+    min-height: 200px;
+    padding: 20px 20px;
     > * + * {
-      margin-top: 0.75em;
+      margin-top: ;
     }
 
     img {
@@ -37,16 +40,9 @@ const CustomEditor = styled(EditorContent)`
       }
     }
 
-    ul {
-      list-style: disc;
-    }
-    li {
-      list-style: decimal;
-    }
-
     ul,
     ol {
-      padding: 0 1rem;
+      padding: 0 20px;
     }
 
     h1 {
@@ -310,21 +306,6 @@ const TableMenu = ({ editor }: any) => [
   },
 ]
 
-const extensions = [
-  Color.configure({ types: [TextStyle.name, ListItem.name] }),
-  TextStyle.configure({ HTMLAttributes: { 'data-testid': 'text-style' } }),
-  StarterKit.configure({
-    bulletList: {
-      keepMarks: true,
-      keepAttributes: false,
-    },
-    orderedList: {
-      keepMarks: true,
-      keepAttributes: false,
-    },
-  }),
-]
-
 interface EditorProperties {
   content: string
   setContent: (content: string) => void
@@ -332,7 +313,7 @@ interface EditorProperties {
   editable: boolean
 }
 
-const Editor = ({ content, setContent, editorText, editable }: EditorProperties) => {
+const Editor = ({ content, setContent, editorText, editable = false }: EditorProperties) => {
   const lowlight = createLowlight(common)
   const editor = useEditor({
     extensions: [
@@ -341,11 +322,11 @@ const Editor = ({ content, setContent, editorText, editable }: EditorProperties)
       StarterKit.configure({
         bulletList: {
           keepMarks: true,
-          keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+          keepAttributes: false,
         },
         orderedList: {
           keepMarks: true,
-          keepAttributes: false, // TODO : Making this as `false` becase marks are not preserved when I try to preserve attrs, awaiting a bit of help
+          keepAttributes: false,
         },
       }),
       TextAlign.configure({
@@ -376,6 +357,7 @@ const Editor = ({ content, setContent, editorText, editable }: EditorProperties)
       },
     },
     content,
+    editable,
   })
 
   useEffect(() => {
@@ -390,13 +372,14 @@ const Editor = ({ content, setContent, editorText, editable }: EditorProperties)
 
   return (
     <Box>
-      {editable && (
-        <Box marginBottom={2} display="flex" alignItems="center" borderRadius="10px">
-          <MenuBar editor={editor} />
-        </Box>
-      )}
+      <Box marginBottom={2} alignItems="center">
+        <MenuBar editor={editor} isEditable={editable} />
+      </Box>
 
-      <CustomEditor editor={editor} />
+      <CustomEditor
+        editor={editor}
+        style={{ border: editable ? '2px #D9E2F6 solid' : 'none', borderRadius: 4 }}
+      />
     </Box>
   )
 }

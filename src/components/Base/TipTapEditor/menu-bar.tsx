@@ -16,12 +16,10 @@ import {
   RiH3,
   RiH4,
   RiH5,
-  RiH6,
   RiListUnordered,
   RiListOrdered,
   RiCodeBoxLine,
   RiDoubleQuotesL,
-  RiSeparator,
   RiTextWrap,
   RiArrowGoBackFill,
   RiArrowGoForwardFill,
@@ -40,6 +38,7 @@ import {
 
 type MenuBarProperties = {
   editor: Editor | null
+  isEditable: boolean
 }
 
 const menuBarIcon = ({ editor }: any) => [
@@ -278,7 +277,7 @@ const menuBarIcon = ({ editor }: any) => [
   },
 ]
 
-const MenuBar = ({ editor }: MenuBarProperties) => {
+const MenuBar = ({ editor, isEditable }: MenuBarProperties) => {
   const [open, setOpen] = useState<boolean>(true)
   const fileInputReference = useRef<HTMLInputElement>(null)
 
@@ -293,9 +292,10 @@ const MenuBar = ({ editor }: MenuBarProperties) => {
   }
 
   return (
-    <Box>
+    <Box display={isEditable ? 'block' : 'none'}>
       <input
         type="color"
+        style={{ width: '35px', height: '20px' }}
         value={editor.getAttributes('textStyle').color}
         onInput={(event: any) => editor.chain().focus().setColor(event.target.value).run()}
       />
@@ -331,15 +331,6 @@ const MenuBar = ({ editor }: MenuBarProperties) => {
       >
         <Icon as={RiCodeSSlashLine} />
       </Button>
-      {/* <Button onClick={() => editor.chain().focus().unsetAllMarks().run()}>clear marks</Button>
-      <Button onClick={() => editor.chain().focus().clearNodes().run()}>clear nodes</Button> */}
-      <Button
-        isActive={editor.isActive('paragraph')}
-        borderRadius={0}
-        onClick={() => editor.chain().focus().setParagraph().run()}
-      >
-        <Icon as={RiParagraph} />
-      </Button>
       <Button
         isActive={editor.isActive('heading', { level: 1 })}
         borderRadius={0}
@@ -362,27 +353,6 @@ const MenuBar = ({ editor }: MenuBarProperties) => {
         <Icon as={RiH3} />
       </Button>
       <Button
-        isActive={editor.isActive('heading', { level: 4 })}
-        borderRadius={0}
-        onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-      >
-        <Icon as={RiH4} />
-      </Button>
-      <Button
-        isActive={editor.isActive('heading', { level: 5 })}
-        borderRadius={0}
-        onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-      >
-        <Icon as={RiH5} />
-      </Button>
-      <Button
-        isActive={editor.isActive('heading', { level: 6 })}
-        borderRadius={0}
-        onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-      >
-        <Icon as={RiH6} />
-      </Button>
-      <Button
         isActive={editor.isActive('bulletList')}
         borderRadius={0}
         onClick={() => editor.chain().focus().toggleBulletList().run()}
@@ -397,22 +367,13 @@ const MenuBar = ({ editor }: MenuBarProperties) => {
         <Icon as={RiListOrdered} />
       </Button>
       <Button
-        isActive={editor.isActive('codeBlock')}
-        borderRadius={0}
-        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-      >
-        <Icon as={RiCodeBoxLine} />
-      </Button>
-      <Button
         isActive={editor.isActive('blockquote')}
         borderRadius={0}
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
       >
         <Icon as={RiDoubleQuotesL} />
       </Button>
-      <Button borderRadius={0} onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-        <Icon as={RiSeparator} />
-      </Button>
+
       <Button borderRadius={0} onClick={() => editor.chain().focus().setHardBreak().run()}>
         <Icon as={RiTextWrap} />
       </Button>
