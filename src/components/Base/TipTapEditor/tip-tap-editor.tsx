@@ -358,7 +358,13 @@ const Editor = ({ content, setContent, editorText, editable = false }: EditorPro
     },
     content,
     editable,
+    onUpdate: ({ editor }) => {
+      const textinhoGerado = editor?.getHTML()
+      console.log({ textinhoGerado })
+    },
   })
+
+  console.log({ editorText, content })
 
   useEffect(() => {
     if (editor && editorText) {
