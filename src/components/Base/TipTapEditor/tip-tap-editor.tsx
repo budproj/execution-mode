@@ -14,10 +14,10 @@ import Text from '@tiptap/extension-text'
 import TextAlign from '@tiptap/extension-text-align'
 import TextStyle from '@tiptap/extension-text-style'
 import Underline from '@tiptap/extension-underline'
-import { EditorContent, useEditor } from '@tiptap/react'
+import { EditorContent, EditorEvents, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { common, createLowlight } from 'lowlight'
-import React, { useEffect } from 'react'
+import React, { memo } from 'react'
 
 import MenuBar from './menu-bar'
 
@@ -308,73 +308,64 @@ const TableMenu = ({ editor }: any) => [
 
 interface EditorProperties {
   content: string
-  setContent: (content: string) => void
-  editorText: string
+  // OnChange: FormikHelpers<FormValues>['setValues']
+  onUpdate?: (parameters: EditorEvents['update']) => void
   editable: boolean
 }
 
-const Editor = ({ content, setContent, editorText, editable = false }: EditorProperties) => {
+const Editor = memo(({ content, onUpdate, editable = false }: EditorProperties) => {
   const lowlight = createLowlight(common)
-  const editor = useEditor({
-    extensions: [
-      Color.configure({ types: [TextStyle.name, ListItem.name] }),
-      TextStyle.configure({ types: [ListItem.name] } as any),
-      StarterKit.configure({
-        bulletList: {
-          keepMarks: true,
-          keepAttributes: false,
+
+  const editor = useEditor(
+    {
+      extensions: [
+        Color.configure({ types: [TextStyle.name, ListItem.name] }),
+        TextStyle.configure({ types: [ListItem.name] } as any),
+        StarterKit.configure({
+          bulletList: {
+            keepMarks: true,
+            keepAttributes: false,
+          },
+          orderedList: {
+            keepMarks: true,
+            keepAttributes: false,
+          },
+        }),
+        TextAlign.configure({
+          types: ['heading', 'paragraph'],
+        }),
+        Underline.configure({
+          HTMLAttributes: {
+            class: 'my-custom-class',
+          },
+        }),
+        CodeBlockLowlight.configure({
+          lowlight,
+        }),
+        Highlight,
+        Paragraph,
+        Text,
+        Gapcursor,
+        Table.configure({
+          resizable: true,
+        }),
+        TableRow,
+        TableHeader,
+        TableCell,
+      ],
+      editorProps: {
+        attributes: {
+          class: 'm-2 focus:outline-none',
         },
-        orderedList: {
-          keepMarks: true,
-          keepAttributes: false,
-        },
-      }),
-      TextAlign.configure({
-        types: ['heading', 'paragraph'],
-      }),
-      Underline.configure({
-        HTMLAttributes: {
-          class: 'my-custom-class',
-        },
-      }),
-      CodeBlockLowlight.configure({
-        lowlight,
-      }),
-      Highlight,
-      Paragraph,
-      Text,
-      Gapcursor,
-      Table.configure({
-        resizable: true,
-      }),
-      TableRow,
-      TableHeader,
-      TableCell,
-    ],
-    editorProps: {
-      attributes: {
-        class: 'm-2 focus:outline-none',
       },
+      content,
     },
-    content,
-    editable,
-    onUpdate: ({ editor }) => {
-      const textinhoGerado = editor?.getHTML()
-      console.log({ textinhoGerado })
-    },
-  })
+    [content, editable, onUpdate],
+  )
 
-  console.log({ editorText, content })
-
-  useEffect(() => {
-    if (editor && editorText) {
-      editor.chain().focus().insertContent(editorText).insertContent(`<br />`).run()
-    }
-  }, [editorText, editor])
-
-  useEffect(() => {
-    editor?.chain().focus().insertContent(content).run()
-  }, [content, editor])
+  // Editor?.on('update', ({ editor }) => {
+  //   onChange((previous) => ({ ...previous, description: editor.getHTML() }))
+  // })
 
   return (
     <Box>
@@ -388,6 +379,6 @@ const Editor = ({ content, setContent, editorText, editable = false }: EditorPro
       />
     </Box>
   )
-}
+})
 
 export default Editor
