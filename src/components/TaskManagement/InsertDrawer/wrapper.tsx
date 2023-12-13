@@ -9,7 +9,7 @@ import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers
 import { keyResultInsertDrawerObjectiveID } from '../../../state/recoil/key-result/drawers/insert/objective-id'
 
 import { InsertOrUpdateTaskForm } from './Form/wrapper'
-import { KeyResultInsertOrUpdateDrawerHeader } from './header'
+import { TaskInsertOrUpdateDrawerHeader } from './header'
 import messages from './messages'
 
 export const TaskInsertDrawer = () => {
@@ -58,7 +58,7 @@ export const TaskInsertDrawer = () => {
       <DrawerOverlay />
       <DrawerContent overflowY="auto" flexGrow={1}>
         <Stack h="full">
-          <KeyResultInsertOrUpdateDrawerHeader isEditing={isEditing} />
+          <TaskInsertOrUpdateDrawerHeader isEditing={isEditing} />
           <Flex flexGrow={1}>
             <InsertOrUpdateTaskForm isLoading={false} />
           </Flex>

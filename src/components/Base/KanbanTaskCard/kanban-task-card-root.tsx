@@ -43,8 +43,6 @@ export const KanbanTaskCardRoot = ({
     'yellow.600',
   ])
 
-  console.log({ mode })
-
   const taskPriorityColors = {
     1: low,
     2: medium,

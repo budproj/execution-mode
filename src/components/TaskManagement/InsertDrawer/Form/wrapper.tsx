@@ -21,17 +21,19 @@ export type FormValues = {
   boardID?: string
   title: string
   priority: TaskPriority
+  description: string
   initialDate: Date
   dueDate: Date
   ownerID: string
 }
 
 const formInitialValues: FormValues = {
-  title: '',
+  title: 'Titulo default',
   priority: 4,
-  initialDate: new Date(),
-  dueDate: new Date(),
-  ownerID: '',
+  initialDate: new Date('2021-08-01'),
+  dueDate: new Date('2021-08-10'),
+  description: '<h1>Teste</h1>',
+  ownerID: '922ef72a-6c3c-4075-926a-3245cdeea75f',
 }
 
 interface InsertKeyResultFormProperties {
@@ -72,6 +74,10 @@ export const InsertOrUpdateTaskForm = ({
 
   const handleSubmit = async (values: FormValues): Promise<void> => {
     const areAllFieldsValid = validateFields(values)
+
+    const valorezinhos = values
+
+    console.log({ valorezinhos })
 
     if (!areAllFieldsValid) {
       if (onValidationError) onValidationError()

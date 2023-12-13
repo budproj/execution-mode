@@ -8,7 +8,7 @@ interface TaskInsertOrUpdateDrawerHeaderProperties {
   isEditing?: boolean
 }
 
-export const KeyResultInsertOrUpdateDrawerHeader = ({
+export const TaskInsertOrUpdateDrawerHeader = ({
   isEditing,
 }: TaskInsertOrUpdateDrawerHeaderProperties) => {
   const intl = useIntl()

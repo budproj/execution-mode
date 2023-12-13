@@ -1,28 +1,28 @@
 import { defineMessages } from 'react-intl'
 
-type KeyResultInsertDrawerMessage =
+type TaskInsertDrawerMessage =
   | 'createTitle'
   | 'editTitle'
   | 'successToastMessage'
   | 'unexpectedErrorToastMessage'
   | 'validationErrorToastMessage'
 
-export default defineMessages<KeyResultInsertDrawerMessage>({
+export default defineMessages<TaskInsertDrawerMessage>({
   createTitle: {
-    defaultMessage: 'Criar Resultado Chave',
-    id: 'HEYvPI',
-    description: 'This message appears as the title of the insert Key Result drawer',
+    defaultMessage: 'Nova tarefa',
+    id: 'uNo8rw',
+    description: 'This message appears as the title of the insert Task drawer',
   },
   editTitle: {
-    defaultMessage: 'Resultado Chave',
-    id: 'VWlRuQ',
-    description: 'This message appears as the title of the insert Key Result drawer',
+    defaultMessage: 'Editar tarefa',
+    id: 'L4PJe8',
+    description:
+      'This message appears as the title of the insert Task drawer when the task is editing',
   },
 
   successToastMessage: {
-    defaultMessage:
-      'Resultado-chave {isEditing, select, true {editado} other {criado}} com sucesso!',
-    id: 'Wf8no6',
+    defaultMessage: 'Tarefa {isEditing, select, true {editada} other {criada}} com sucesso!',
+    id: 'MmRy3Z',
     description: 'This message appears after the user creates a new key-result as a toast',
   },
 
@@ -34,8 +34,8 @@ export default defineMessages<KeyResultInsertDrawerMessage>({
   },
 
   validationErrorToastMessage: {
-    defaultMessage: 'Preencha os campos obrigatórios para poder salvar este resultado-chave.',
-    id: 'jCjr1X',
+    defaultMessage: 'Preencha os campos obrigatórios para poder salvar esta tarefa.',
+    id: 'Ww9A1r',
     description:
       'This message appears in an error toast after the users tries to create a key-result but there are some validation errors in the form',
   },
