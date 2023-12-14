@@ -1,10 +1,11 @@
-import { Stack, FormControl, VStack } from '@chakra-ui/react'
-import { Form, Formik } from 'formik'
+import { FormControl, Stack, VStack } from '@chakra-ui/react'
+import { Formik, Form } from 'formik'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
+import { delay } from 'src/helpers/delay'
 
 import meAtom from '../../../../state/recoil/user/me'
 
@@ -54,6 +55,7 @@ export const InsertOrUpdateTaskForm = ({
   isLoading,
 }: InsertKeyResultFormProperties) => {
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
+  // Const [description, setDescription] = useState<string>('')
 
   const router = useRouter()
 
@@ -73,9 +75,13 @@ export const InsertOrUpdateTaskForm = ({
   }
 
   const handleSubmit = async (values: FormValues): Promise<void> => {
-    const areAllFieldsValid = validateFields(values)
+    await delay(3000)
 
-    const valorezinhos = values
+    const allValues = { ...values }
+
+    const areAllFieldsValid = validateFields(allValues)
+
+    const valorezinhos = allValues
 
     console.log({ valorezinhos })
 
@@ -85,7 +91,7 @@ export const InsertOrUpdateTaskForm = ({
     }
 
     const variables = {
-      ...values,
+      ...allValues,
     }
   }
 

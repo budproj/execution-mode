@@ -306,10 +306,9 @@ const TableMenu = ({ editor }: any) => [
   },
 ]
 
-interface EditorProperties {
+interface EditorProperties extends React.HTMLAttributes<HTMLInputElement> {
   content: string
-  // OnChange: FormikHelpers<FormValues>['setValues']
-  onUpdate?: (parameters: EditorEvents['update']) => void
+  onUpdate: (parameters: EditorEvents['update']) => void
   editable: boolean
 }
 
@@ -359,13 +358,11 @@ const Editor = memo(({ content, onUpdate, editable = false }: EditorProperties) 
         },
       },
       content,
+      editable,
+      onUpdate,
     },
     [content, editable, onUpdate],
   )
-
-  // Editor?.on('update', ({ editor }) => {
-  //   onChange((previous) => ({ ...previous, description: editor.getHTML() }))
-  // })
 
   return (
     <Box>

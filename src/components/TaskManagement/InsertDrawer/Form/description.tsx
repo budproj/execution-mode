@@ -1,41 +1,47 @@
-import { Input, Skeleton } from '@chakra-ui/react'
+import { Skeleton } from '@chakra-ui/react'
 import { EditorEvents } from '@tiptap/react'
-import { Field, FieldProps } from 'formik'
-import React, { useState } from 'react'
+import { Field, useFormikContext } from 'formik'
+import React, { useCallback } from 'react'
 import { useIntl } from 'react-intl'
 
 import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
 
 import { FormInputBase } from './base-input'
 import messages from './messages'
+import { FormValues } from './wrapper'
 
 interface DescriptionInputProperties {
   isLoading?: boolean
 }
 
+const EditorInput = () => {
+  const { setFieldValue, initialValues } = useFormikContext<FormValues>()
+
+  const handleUpdate = useCallback(
+    (parameters: EditorEvents['update']) => {
+      const { editor } = parameters
+      // TODO: a debounce would be nice here
+      const timer = setTimeout(() => setFieldValue('description', editor.getHTML()), 2500)
+      return () => clearTimeout(timer)
+    },
+    [setFieldValue],
+  )
+
+  return <Editor editable content={initialValues.description} onUpdate={handleUpdate} />
+}
+
 export const DescriptionInput = ({ isLoading }: DescriptionInputProperties) => {
   const intl = useIntl()
-
-  const [editorText, setEditorText] = useState<string>('')
-
-  const handleUpdate = (parameters: EditorEvents['update']) => {
-    const { editor } = parameters
-    setEditorText(editor.getHTML())
-  }
 
   return (
     <FormInputBase>
       <Skeleton isLoaded={!isLoading}>
         <Field
           name="description"
-          as={Input}
           placeholder={intl.formatMessage(messages.secondInputPlaceholder)}
           _placeholder={{ color: 'black.400' }}
-        >
-          {({ field: { value }, form: { setValues } }: FieldProps) => {
-            return <Editor editable content={value} onUpdate={handleUpdate} />
-          }}
-        </Field>
+          component={EditorInput}
+        />
       </Skeleton>
     </FormInputBase>
   )
