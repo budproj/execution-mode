@@ -10,6 +10,8 @@ import Table from '@tiptap/extension-table'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
+import TaskItem from '@tiptap/extension-task-item'
+import TaskList from '@tiptap/extension-task-list'
 import Text from '@tiptap/extension-text'
 import TextAlign from '@tiptap/extension-text-align'
 import TextStyle from '@tiptap/extension-text-style'
@@ -29,15 +31,6 @@ const CustomEditor = styled(EditorContent)`
     padding: 20px 20px;
     > * + * {
       margin-top: ;
-    }
-
-    img {
-      max-width: 500px;
-      max-height: 500px;
-
-      &.ProseMirror-selectednode {
-        outline: 3px solid #000000;
-      }
     }
 
     ul,
@@ -165,70 +158,131 @@ const CustomEditor = styled(EditorContent)`
       background-color: #faf594;
     }
 
-    //  table
-    table {
-      border-collapse: collapse;
-      margin: 0;
-      overflow: hidden;
-      table-layout: fixed;
-      width: 100%;
-
-      td,
-      th {
-        border: 2px solid #ced4da;
-        box-sizing: border-box;
-        min-width: 1em;
-        padding: 3px 5px;
-        position: relative;
-        vertical-align: top;
-
-        > * {
-          margin-bottom: 0;
-        }
-      }
-
-      th {
-        background-color: #f1f3f5;
-        font-weight: bold;
-        text-align: left;
-      }
-
-      .selectedCell:after {
-        background: rgba(200, 200, 255, 0.4);
-        content: '';
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        pointer-events: none;
-        position: absolute;
-        z-index: 2;
-      }
-
-      .column-resize-handle {
-        background-color: #adf;
-        bottom: -2px;
-        position: absolute;
-        right: -2px;
-        pointer-events: none;
-        top: 0;
-        width: 4px;
-      }
-
-      p {
-        margin: 0;
-      }
-    }
-  }
-
-  .tableWrapper {
-    padding: 1rem 0;
-    overflow-x: auto;
-  }
-
   .resize-cursor {
     cursor: ew-resize;
     cursor: col-resize;
+  }
+
+
+
+  ul[data-type='taskList'] {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    p {
+      margin: 0;
+     
+    }
+
+    li {
+      display: flex;
+
+      > label {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      
+        > input {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+        }
+        
+        > span {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 25px;
+          width: 25px;
+          border-radius: 6px;
+          border: 1px solid #ccc;
+        }
+
+        &:hover input ~ span {
+          background-color: #ccc;
+        }
+
+        > input:checked ~ span {
+          background-color: #6F6EFF;
+        }
+
+        > span:after {
+          content: "";
+          position: absolute;
+          display: none;
+        }
+        
+        > input:checked ~ span:after {
+          display: block;
+        }
+        
+        >span:after {
+          left: 9px;
+          top: 5px;
+          width: 5px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          -webkit-transform: rotate(45deg);
+          -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
+        }
+        
+      }
+
+    
+      > label input:checked ~ > div {
+        background-color: #2196F3;
+      }
+
+      > div {
+        flex: 1 1 auto;
+      }
+
+      > div:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+
+      > label input:checked ~ > div:after {
+        display: block;
+      }
+
+      > label > div:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      ul li,
+      ol li {
+        display: list-item;
+      }
+
+      ul[data-type='taskList'] > li {
+        display: flex;
+
+      }
+    }
   }
 `
 
@@ -309,7 +363,7 @@ const TableMenu = ({ editor }: any) => [
 interface EditorProperties extends React.HTMLAttributes<HTMLInputElement> {
   content: string
   onUpdate: (parameters: EditorEvents['update']) => void
-  editable: boolean
+  editable?: boolean
 }
 
 const Editor = memo(({ content, onUpdate, editable = false }: EditorProperties) => {
@@ -329,6 +383,13 @@ const Editor = memo(({ content, onUpdate, editable = false }: EditorProperties) 
             keepMarks: true,
             keepAttributes: false,
           },
+        }),
+        TaskList,
+        TaskItem.configure({
+          nested: true,
+          // OnReadOnlyChecked: (node: Node, checked: boolean): boolean => {
+          //   return true
+          // },
         }),
         TextAlign.configure({
           types: ['heading', 'paragraph'],

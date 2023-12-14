@@ -34,6 +34,7 @@ import {
   RiTableLine,
   RiTableFill,
   RiRoundedCorner,
+  RiToggleFill,
 } from 'react-icons/ri'
 
 type MenuBarProperties = {
@@ -383,6 +384,13 @@ const MenuBar = ({ editor, isEditable }: MenuBarProperties) => {
         onClick={() => editor.chain().focus().undo().run()}
       >
         <Icon as={RiArrowGoBackFill} />
+      </Button>
+      <Button
+        isDisabled={!editor.can().chain().focus().undo().run()}
+        borderRadius={0}
+        onClick={() => editor.chain().focus().toggleTaskList().run()}
+      >
+        <Icon as={RiToggleFill} />
       </Button>
       <Button
         isDisabled={!editor.can().chain().focus().redo().run()}
