@@ -183,7 +183,7 @@ const CustomEditor = styled(EditorContent)`
       > label {
         display: block;
         position: relative;
-        padding-left: 35px;
+        padding-left: 30px;
         margin-bottom: 12px;
         cursor: pointer;
         font-size: 22px;
@@ -204,8 +204,8 @@ const CustomEditor = styled(EditorContent)`
           position: absolute;
           top: 0;
           left: 0;
-          height: 25px;
-          width: 25px;
+          height: 22px;
+          width: 22px;
           border-radius: 6px;
           border: 1px solid #ccc;
         }
@@ -228,8 +228,8 @@ const CustomEditor = styled(EditorContent)`
           display: block;
         }
         
-        >span:after {
-          left: 9px;
+        > span:after {
+          left: 8px;
           top: 5px;
           width: 5px;
           height: 10px;

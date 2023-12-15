@@ -27,7 +27,6 @@ export const OwnerInput = ({ isLoading }: OwnerInputProperties) => {
         <KeyResultOwnerSelectMenu
           isLazy
           value={values.ownerID}
-          filterByTeam="d6310cc8-cc17-499b-a28c-5c600dd9714a"
           avatarSubtitleType="role"
           placement="top"
           onChange={handleChange}

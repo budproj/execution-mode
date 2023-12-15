@@ -8,7 +8,7 @@ export const usersCompany = atom<User[]>({
   default: [],
 })
 
-export const filteredUsersCompany = (teamId?: Team['id']) => {
+export const filteredUsersCompany = (teamId: Team['id']) => {
   return selector<User[]>({
     key: 'filteredUsersCompany',
     get: ({ get }) => {
