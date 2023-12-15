@@ -36,6 +36,7 @@ export const KanbanTaskCardRoot = ({
   taskPriority,
   ...rest
 }: KanbanTaskCardRootProperties) => {
+  console.log({ mode })
   const [veryHigh, high, medium, low] = useToken('colors', [
     'red.600',
     'red.500',
@@ -54,6 +55,7 @@ export const KanbanTaskCardRoot = ({
     <StyledGrid
       p={3}
       bgColor="#fff"
+      _hover={{ bgColor: '#f7f7f7' }}
       w="100%"
       customBorderColor={taskPriorityColors[taskPriority]}
       {...rest}

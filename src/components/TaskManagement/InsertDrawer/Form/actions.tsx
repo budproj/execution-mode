@@ -14,6 +14,8 @@ interface FormActionsInterface {
 export const FormActions = ({ onClose, isLoading, editingTaskId }: FormActionsInterface) => {
   const intl = useIntl()
 
+  console.log({ editingTaskId })
+
   const { resetForm, submitForm, isSubmitting } = useFormikContext()
 
   const handleCancel = () => {
