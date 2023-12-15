@@ -20,6 +20,7 @@ const EditorInput = () => {
   const handleUpdate = useCallback(
     (parameters: EditorEvents['update']) => {
       const { editor } = parameters
+
       // TODO: a debounce would be nice here
       const timer = setTimeout(() => setFieldValue('description', editor.getHTML()), 2500)
       return () => clearTimeout(timer)

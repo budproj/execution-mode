@@ -25,14 +25,13 @@ const useTaskCollection = () => {
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
         dueDate: new Date('2023-05-12'),
         priority: 1,
+        initialDate: new Date(),
         owner: myId,
         attachments: ['http://arquivo.pdf'],
         supportTeamMembers: [
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
           'f120ec45-150d-4e24-b99d-34df20a80c64',
         ],
-        tags: ['PRODUTO'],
-        nextTaskId: '2',
       },
     ],
     TO_DO: [
@@ -45,14 +44,13 @@ const useTaskCollection = () => {
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
         dueDate: new Date('2023-05-12'),
         priority: 2,
+        initialDate: new Date(),
         owner: myId,
         attachments: ['http://arquivo.pdf'],
         supportTeamMembers: [
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
           'f120ec45-150d-4e24-b99d-34df20a80c64',
         ],
-        tags: ['PRODUTO'],
-        nextTaskId: '2',
       },
     ],
     DOING: [
@@ -65,14 +63,13 @@ const useTaskCollection = () => {
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
         dueDate: new Date('2023-05-12'),
         priority: 3,
+        initialDate: new Date(),
         owner: myId,
         attachments: ['http://arquivo.pdf'],
         supportTeamMembers: [
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
           'f120ec45-150d-4e24-b99d-34df20a80c64',
         ],
-        tags: ['PRODUTO'],
-        nextTaskId: '2',
       },
     ],
     DONE: [
@@ -85,14 +82,13 @@ const useTaskCollection = () => {
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
         dueDate: new Date('2023-05-12'),
         priority: 4,
+        initialDate: new Date(),
         owner: myId,
         attachments: ['http://arquivo.pdf'],
         supportTeamMembers: [
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
           'f120ec45-150d-4e24-b99d-34df20a80c64',
         ],
-        tags: ['PRODUTO'],
-        nextTaskId: '2',
       },
     ],
   })

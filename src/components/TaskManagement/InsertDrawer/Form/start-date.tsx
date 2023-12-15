@@ -1,6 +1,5 @@
 import { Skeleton } from '@chakra-ui/react'
 import React from 'react'
-import { useIntl } from 'react-intl'
 
 import { TaskDateField } from './Fields/date'
 import { FormInputBase } from './base-input'
@@ -10,7 +9,7 @@ interface StartDateInputProperties {
 }
 
 export const StartDateInput = ({ isLoading }: StartDateInputProperties) => {
-  const intl = useIntl()
+  // Const intl = useIntl()
 
   return (
     <FormInputBase title="início">

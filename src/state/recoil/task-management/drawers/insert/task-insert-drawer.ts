@@ -1,10 +1,17 @@
 import { atom } from 'recoil'
 
+import { TASK_STATUS } from 'src/services/task-management/task-management.service'
+
 import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::TEAM_ID`
 
-export const taskInsertDrawerTeamID = atom<string | undefined>({
+export type TaskInsertDrawerProperties = {
+  boardID?: string
+  column: TASK_STATUS
+}
+
+export const taskInsertDrawerTeamID = atom<TaskInsertDrawerProperties>({
   key: KEY,
-  default: undefined,
+  default: { boardID: undefined, column: TASK_STATUS.PENDING },
 })

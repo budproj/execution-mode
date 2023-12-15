@@ -1,13 +1,13 @@
 import { FormControl, Stack, VStack } from '@chakra-ui/react'
+import { uuid4 } from '@sentry/utils'
 import { Formik, Form } from 'formik'
-import { useRouter } from 'next/router'
 import React, { useState } from 'react'
-import { useRecoilValue } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { delay } from 'src/helpers/delay'
+import { Task, TASK_STATUS } from 'src/services/task-management/task-management.service'
 
-import meAtom from '../../../../state/recoil/user/me'
+import useColumnTasks from '../../Board/hooks/use-column-tasks'
 
 import { FormActions } from './actions'
 import { DescriptionInput } from './description'
@@ -29,41 +29,45 @@ export type FormValues = {
 }
 
 const formInitialValues: FormValues = {
-  title: 'Titulo default',
+  title: '',
   priority: 4,
-  initialDate: new Date('2021-08-01'),
-  dueDate: new Date('2021-08-10'),
-  description: '<h1>Teste</h1>',
-  ownerID: '922ef72a-6c3c-4075-926a-3245cdeea75f',
+  initialDate: new Date(),
+  dueDate: new Date(),
+  description: '',
+  ownerID: '',
 }
 
 interface InsertKeyResultFormProperties {
   onClose?: () => void
-  onSuccess?: (currentUserID: string) => void
+  onSuccess?: () => void
   onError?: () => void
   isLoading: boolean
   onValidationError?: () => void
-  boardID?: string
+  column: TASK_STATUS
+  boardID: string
 }
 
-export const InsertOrUpdateTaskForm = ({
+const InsertOrUpdateTaskForm = ({
   onClose,
   onSuccess,
   onError,
   onValidationError,
+  column,
   boardID,
   isLoading,
 }: InsertKeyResultFormProperties) => {
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
-  // Const [description, setDescription] = useState<string>('')
+  const { addTask } = useColumnTasks(column, boardID)
 
-  const router = useRouter()
+  console.log(onError)
 
-  const currentUserID = useRecoilValue(meAtom)
-  const userIdQuery = router.query?.['user-id']
-  const userId = Array.isArray(userIdQuery) ? userIdQuery[0] : userIdQuery
+  // Const router = useRouter()
 
-  const [initialValues, setInitialValues] = useState<FormValues>(formInitialValues)
+  // Const currentUserID = useRecoilValue(meAtom)
+  // const userIdQuery = router.query?.['user-id']
+  // const userId = Array.isArray(userIdQuery) ? userIdQuery[0] : userIdQuery
+
+  const [initialValues, _] = useState<FormValues>(formInitialValues)
 
   const validateFields = (values: FormValues): boolean => {
     const invalidFields: Array<keyof FormValues> = []
@@ -75,7 +79,7 @@ export const InsertOrUpdateTaskForm = ({
   }
 
   const handleSubmit = async (values: FormValues): Promise<void> => {
-    await delay(3000)
+    await delay(500)
 
     const allValues = { ...values }
 
@@ -90,9 +94,18 @@ export const InsertOrUpdateTaskForm = ({
       return
     }
 
-    const variables = {
+    const variables: Task = {
       ...allValues,
+      id: uuid4(),
+      boardId: boardID,
+      status: column,
+      owner: allValues.ownerID,
+      attachments: [],
+      supportTeamMembers: [],
     }
+
+    addTask(variables)
+    if (onSuccess) onSuccess()
   }
 
   return (
@@ -136,3 +149,5 @@ export const InsertOrUpdateTaskForm = ({
     </Formik>
   )
 }
+
+export default InsertOrUpdateTaskForm

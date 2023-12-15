@@ -18,13 +18,12 @@ export type Task = {
   status: TASK_STATUS
   title: string
   description: string
+  initialDate: Date
   dueDate: Date
   priority: number
   owner: string
   attachments: string[]
   supportTeamMembers: string[]
-  tags: string[]
-  nextTaskId?: string
 }
 
 export type Board = {

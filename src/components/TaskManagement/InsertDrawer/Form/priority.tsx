@@ -1,7 +1,6 @@
 import { Skeleton } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React from 'react'
-import { useIntl } from 'react-intl'
 
 import { TaskPrioritySelectMenu } from '../../PrioritySelectMenu/wrapper'
 
@@ -13,7 +12,7 @@ interface PriorityInputProperties {
 }
 
 export const PriorityInput = ({ isLoading }: PriorityInputProperties) => {
-  const intl = useIntl()
+  // Const intl = useIntl()
   const { values, setFieldValue } = useFormikContext<FormValues>()
 
   const handleChange = (newPriority: 1 | 2 | 3 | 4): void => {

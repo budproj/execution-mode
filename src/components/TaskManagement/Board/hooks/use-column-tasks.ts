@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { v4 as uuidv4 } from 'uuid'
 
 import { Except } from 'src/helpers/except'
@@ -8,7 +8,6 @@ import {
   TASK_STATUS as ColumnType,
 } from 'src/services/task-management/task-management.service'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
-import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 
 import { swap } from '../utils/helpers'
 import { debug } from '../utils/logging'
@@ -19,18 +18,39 @@ const MAX_TASK_PER_COLUMN = 100
 
 const useColumnTasks = (column: ColumnType, teamId: string) => {
   const [tasks, setTasks] = useTaskCollection()
-  const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
+  // Const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
   const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
 
+  console.log({ teamId })
   // TODO: only for tests
-  const randomUser = Math.floor(Math.random() * teamUsers.length)
+  // const randomUser = Math.floor(Math.random() * teamUsers.length)
 
   const columnTasks = tasks[column]
+
+  const addTask = useCallback(
+    (task: TaskModel) => {
+      debug(`Adding new task to ${column} column`)
+      setTasks((allTasks) => {
+        const columnTasks = allTasks[column]
+
+        if (columnTasks.length > MAX_TASK_PER_COLUMN) {
+          debug('Too many task!')
+          return allTasks
+        }
+
+        return {
+          ...allTasks,
+          [column]: [task, ...columnTasks],
+        }
+      })
+    },
+    [column, setTasks],
+  )
 
   const addEmptyTask = useCallback(() => {
     debug(`Adding new empty task to ${column} column`)
     const boardId = uuidv4()
-    setTaskBoardID(boardId)
+    setTaskBoardID({ boardID: boardId, column })
     // SetTasks((allTasks) => {
     //   const columnTasks = allTasks[column]
 
@@ -132,6 +152,7 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
   return {
     tasks: columnTasks,
     addEmptyTask,
+    addTask,
     updateTask,
     dropTaskFrom,
     deleteTask,
