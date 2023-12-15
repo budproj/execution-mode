@@ -3,6 +3,7 @@
 import { Box, Button, Icon } from '@chakra-ui/react'
 import { Editor } from '@tiptap/react'
 import React from 'react'
+import { FaTasks } from 'react-icons/fa'
 import {
   RiBold,
   RiItalic,
@@ -17,7 +18,6 @@ import {
   RiTextWrap,
   RiArrowGoBackFill,
   RiArrowGoForwardFill,
-  RiToggleFill,
 } from 'react-icons/ri'
 
 type MenuBarProperties = {
@@ -351,6 +351,13 @@ const MenuBar = ({ editor, isEditable }: MenuBarProperties) => {
         <Icon as={RiListOrdered} />
       </Button>
       <Button
+        isDisabled={!editor.can().chain().focus().undo().run()}
+        borderRadius={0}
+        onClick={() => editor.chain().focus().toggleTaskList().run()}
+      >
+        <Icon as={FaTasks} />
+      </Button>
+      <Button
         isActive={editor.isActive('blockquote')}
         borderRadius={0}
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
@@ -368,13 +375,7 @@ const MenuBar = ({ editor, isEditable }: MenuBarProperties) => {
       >
         <Icon as={RiArrowGoBackFill} />
       </Button>
-      <Button
-        isDisabled={!editor.can().chain().focus().undo().run()}
-        borderRadius={0}
-        onClick={() => editor.chain().focus().toggleTaskList().run()}
-      >
-        <Icon as={RiToggleFill} />
-      </Button>
+
       <Button
         isDisabled={!editor.can().chain().focus().redo().run()}
         borderRadius={0}
