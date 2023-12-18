@@ -103,7 +103,12 @@ export const TeamsMenuProfile = ({
             />
           )}
         </MenuButton>
-        <MenuList color="gray.500" fontSize={14}>
+        <MenuList
+          // Este ul previne que o scroll desse menu bugue.
+          as="ul"
+          color="gray.500"
+          fontSize={14}
+        >
           <ScrollableItem maxH={320} borderRadius={10}>
             <MenuItem
               borderTopLeftRadius={10}
@@ -111,6 +116,8 @@ export const TeamsMenuProfile = ({
               _hover={{ background: 'white' }}
               py={2}
               px={2}
+              as="li"
+              cursor="pointer"
               onClick={() => setSelectedDashboardTeam(mainTeamRequest?.team)}
             >
               <Flex
@@ -133,6 +140,8 @@ export const TeamsMenuProfile = ({
                   _hover={{ background: 'none' }}
                   py={2}
                   px={2}
+                  as="li"
+                  cursor="pointer"
                   onClick={() => setSelectedDashboardTeam(team)}
                 >
                   <Flex
