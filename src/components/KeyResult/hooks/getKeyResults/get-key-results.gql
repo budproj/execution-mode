@@ -1,4 +1,4 @@
-query GET_KEY_RESULTS($confidence: String, $offset: Float, $limit: Float) {
+query WIP_GET_KEY_RESULTS($confidence: String, $offset: Float, $limit: Float) {
   me {
     companies {
       edges {
