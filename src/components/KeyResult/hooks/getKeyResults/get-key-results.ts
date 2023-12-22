@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { useCallback, useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { GetUserPrimaryCompanyQuery } from 'src/components/Report/CompanyProgressOverview/types'
 import { Team } from 'src/components/Team/types'
@@ -9,6 +9,7 @@ import { GraphQLConnection, GraphQLEdge } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily, krHealthStatusAtom } from 'src/state/recoil/key-result'
+import loadedKeyResults from 'src/state/recoil/key-result/pagination/fetch-more-key-results'
 
 import { KeyResult } from '../../types'
 
@@ -19,20 +20,20 @@ export type FetchMoreVariables = {
   offset: number
 }
 interface GetCompanyCycles {
-  data: KeyResult[]
   loading: boolean
   called: boolean
   fetchMoreKeyResults: ({ limit, offset }: FetchMoreVariables) => Promise<void>
   refetch: any
 }
 
-export const KRS_PER_PAGE = 5
+export const KRS_PER_PAGE = 2
 
 export const useGetKeyResults = (): GetCompanyCycles => {
   const [loadKRs] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
   const krHealthStatus = useRecoilValue(krHealthStatusAtom)
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
   const [isFetchMoreDataLoading, setIsFetchMoreDataLoading] = useState(false)
+  const [loadedKRs, setLoadKeyResults] = useRecoilState(loadedKeyResults)
 
   const query = { limit: KRS_PER_PAGE, offset: 0 }
 
@@ -103,8 +104,22 @@ export const useGetKeyResults = (): GetCompanyCycles => {
     [fetchMore, krHealthStatus],
   )
 
+  useEffect(() => {
+    let notIncludedKeyResults: KeyResult[] = []
+    for (const kr of keyResults) {
+      if (!loadedKRs.some((loadedKR) => loadedKR.id === kr.id)) {
+        notIncludedKeyResults.push(kr)
+      }
+    }
+
+    if (notIncludedKeyResults.length > 0) setLoadKeyResults(keyResults)
+
+    return () => {
+      notIncludedKeyResults = []
+    }
+  }, [keyResults, loadedKRs, setLoadKeyResults])
+
   return {
-    data: keyResults,
     loading: isFetchMoreDataLoading || loading,
     called,
     fetchMoreKeyResults,
