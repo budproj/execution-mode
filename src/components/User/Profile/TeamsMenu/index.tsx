@@ -81,7 +81,7 @@ export const TeamsMenuProfile = ({
   }, [mainTeamRequest, setSelectedDashboardTeam])
 
   return (
-    <Flex w="100vw" paddingTop={10} px={20} {...rest} justifyContent="space-between">
+    <Flex paddingTop={10} {...rest} justifyContent="space-between">
       <Menu>
         <MenuButton
           color="white"
