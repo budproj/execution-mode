@@ -74,7 +74,7 @@ const StyledStack = styled(Stack)`
   }
 
   @media (max-width: 1024px) {
-    gap: 185px;
+    gap: 85px;
 
     > div {
       height: 55vh;
@@ -137,6 +137,22 @@ const StyledStack = styled(Stack)`
     }
   }
 
+  @media (min-width: 1365px) and (height: 611px) {
+    gap: 55px;
+
+    > div {
+      height: 68vh;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    gap: 55px;
+
+    > div {
+      height: 50vh;
+    }
+  }
+
   @media (min-width: 1366px) {
     gap: 65px;
 
@@ -153,19 +169,19 @@ const StyledStack = styled(Stack)`
     }
   }
 
-  @media (min-width: 1365px) and (height: 611px) {
-    gap: 55px;
+  @media (width: 1366px) and (height: 599px) {
+    gap: 120px;
 
     > div {
-      height: 68vh;
+      height: 64vh;
     }
   }
 
-  @media (min-width: 1440px) {
-    gap: 55px;
+  @media (width: 1366px) and (height: 689px) {
+    gap: 60px;
 
     > div {
-      height: 50vh;
+      height: 64vh;
     }
   }
 
@@ -217,6 +233,14 @@ const StyledStack = styled(Stack)`
     }
   }
 
+  @media (width: 1680px) and (height: 1050px) {
+    gap: 49px;
+
+    > div {
+      height: 43vh;
+    }
+  }
+
   @media (min-width: 1700px) {
     gap: 40px;
 
@@ -249,8 +273,8 @@ const StyledStack = styled(Stack)`
     }
   }
 
-  @media (max-width: 1920px) and (height: 923px) {
-    gap: 40px;
+  @media (max-width: 1920px) and (min-height: 910px) {
+    gap: 45px;
 
     > div {
       height: 50vh;
@@ -262,6 +286,14 @@ const StyledStack = styled(Stack)`
 
     > div {
       height: 38vh;
+    }
+  }
+
+  @media (width: 1920px) and (height: 1080px) {
+    gap: 45px;
+
+    > div {
+      height: 42vh;
     }
   }
 
@@ -289,6 +321,14 @@ const StyledStack = styled(Stack)`
     }
   }
 
+  @media (width: 2304px) and (height: 1440px) {
+    gap: 32px;
+
+    > div {
+      height: 33vh;
+    }
+  }
+
   @media (min-width: 2400px) {
     gap: 25px;
 
@@ -302,6 +342,14 @@ const StyledStack = styled(Stack)`
 
     > div {
       height: 40vh;
+    }
+  }
+
+  @media (width: 2560px) and (height: 1600px) {
+    gap: 20px;
+
+    > div {
+      height: 31vh;
     }
   }
 `
@@ -363,7 +411,7 @@ const DashboardPage = () => {
     <StyledStack bg="new-gray.50" position="relative">
       <Box bg="brand.500" position="relative">
         <Stack position="relative">
-          <Box position="absolute" zIndex={10}>
+          <Box position="absolute" zIndex={10} w="100%" px={20}>
             <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
           </Box>
           <PageHeader display="flex" gap={8} alignItems="center" py={120} px={20} flexGrow={1}>
