@@ -2,7 +2,6 @@ import { useCallback, useMemo, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { useGetKeyResults } from 'src/components/KeyResult/hooks/getKeyResults/get-key-results'
-import { KeyResult } from 'src/components/KeyResult/types'
 import { krTableLengthAtom } from 'src/state/recoil/key-result/kr-table-lenght.atom'
 import loadedKeyResults from 'src/state/recoil/key-result/pagination/fetch-more-key-results'
 import { KRS_PER_PAGE } from 'src/state/recoil/key-result/pagination/limit-offset'
@@ -14,8 +13,6 @@ type krListMeta = {
 
 type usePagitionOuput = {
   krTableLength: number
-  lastKrListed: krListMeta
-  dataToRender: KeyResult[]
   showPreviousPageButton: boolean
   showNextPageButton: boolean
   keyResultIds: string[]
@@ -28,10 +25,11 @@ type usePagitionOuput = {
 
 interface usePaginationProperties {
   onClose: () => void
+  isCompany?: boolean
 }
 
-const usePagination = ({ onClose }: usePaginationProperties): usePagitionOuput => {
-  const { fetchMoreKeyResults: fetchMore, loading: loadingData } = useGetKeyResults()
+const usePagination = ({ onClose, isCompany }: usePaginationProperties): usePagitionOuput => {
+  const { fetchMoreKeyResults: fetchMore, loading: loadingData } = useGetKeyResults(isCompany)
   const data = useRecoilValue(loadedKeyResults)
   const [krTableLength, setTableLength] = useRecoilState(krTableLengthAtom)
   const [lastKrListed, setLastKrListed] = useState({
@@ -39,11 +37,11 @@ const usePagination = ({ onClose }: usePaginationProperties): usePagitionOuput =
     lastListElement: KRS_PER_PAGE,
   })
 
-  const dataToRender = useMemo(() => {
-    return data.slice(lastKrListed.firstListElement, lastKrListed.lastListElement)
+  const keyResultIds = useMemo(() => {
+    return data
+      .slice(lastKrListed.firstListElement, lastKrListed.lastListElement)
+      .map(({ id }) => id)
   }, [data, lastKrListed])
-
-  const keyResultIds = useMemo(() => dataToRender.map(({ id }) => id), [dataToRender])
 
   const handleCloseModal = () => {
     void onClose()
@@ -97,8 +95,6 @@ const usePagination = ({ onClose }: usePaginationProperties): usePagitionOuput =
 
   return {
     krTableLength,
-    lastKrListed,
-    dataToRender,
     showPreviousPageButton,
     showNextPageButton,
     keyResultIds,

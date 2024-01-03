@@ -1,6 +1,5 @@
 import { Flex, FlexProps } from '@chakra-ui/react'
 import React, { memo } from 'react'
-import { useIntl } from 'react-intl'
 import { useRecoilState } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
@@ -19,11 +18,9 @@ interface BoardsOverviewProperties extends FlexProps {
 
 const BoardsOverview = memo(
   ({ isCompany, selectedDashboardTeam, ...rest }: BoardsOverviewProperties) => {
-    const { data, loading } = useGetHealthConfidenceQuantities()
+    const { data, loading } = useGetHealthConfidenceQuantities({ isCompany, selectedDashboardTeam })
     const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
     const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
-
-    const intl = useIntl()
 
     return (
       <>

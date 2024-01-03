@@ -14,7 +14,7 @@ import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashbo
 
 import { KeyResult } from '../../types'
 
-import GET_KEY_RESULTS from './get-key-results.gql'
+import queries from './get-key-results.gql'
 
 export type FetchMoreVariables = {
   limit: number
@@ -44,7 +44,7 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
   }
 
   const { loading, called, fetchMore, refetch } = useQuery<GetUserPrimaryCompanyQuery>(
-    GET_KEY_RESULTS,
+    krHealthStatus && !isCompany ? queries.GET_KEY_RESULTS_FOR_MODAL : queries.GET_KEY_RESULTS,
     {
       variables: query,
       fetchPolicy: 'cache-and-network',
@@ -74,7 +74,7 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
         await fetchMore({
           variables: queryVariables,
           updateQuery: (previous, { fetchMoreResult }) => {
-            if (!fetchMoreResult) return previous
+            if (!fetchMoreResult.me) return previous
             const oldCompanies = previous.me?.companies?.edges ?? []
 
             const newCompanies = fetchMoreResult.me?.companies?.edges ?? []
@@ -114,7 +114,7 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
       }
     }
 
-    if (notIncludedKeyResults.length > 0) setLoadKeyResults(keyResults)
+    if (notIncludedKeyResults.length > 0 && keyResults.length > 0) setLoadKeyResults(keyResults)
 
     return () => {
       notIncludedKeyResults = []

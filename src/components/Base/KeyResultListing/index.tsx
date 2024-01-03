@@ -26,6 +26,7 @@ export interface KeyResultModalListingProperties {
   onClose: () => void
   dispatchEvent?: () => void
   modalHeadingTitle: string
+  isCompany?: boolean
 }
 
 const StyledModal = styled(ModalContent)`
@@ -51,7 +52,13 @@ const StyledTableWrapper = styled(Flex)`
 `
 
 export const KeyResultListingModal = memo(
-  ({ isOpen, dispatchEvent, modalHeadingTitle, onClose }: KeyResultModalListingProperties) => {
+  ({
+    isOpen,
+    dispatchEvent,
+    modalHeadingTitle,
+    onClose,
+    isCompany,
+  }: KeyResultModalListingProperties) => {
     const {
       handleCloseModal,
       loadNextKrsPage,
@@ -62,7 +69,7 @@ export const KeyResultListingModal = memo(
       showNextPageButton,
       keyResultIds,
       isLoading: loadingData,
-    } = usePagination({ onClose })
+    } = usePagination({ onClose, isCompany })
     const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 
     useEffect(() => {

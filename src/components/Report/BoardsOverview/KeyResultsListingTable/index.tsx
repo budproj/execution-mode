@@ -17,7 +17,6 @@ export interface BoardsOverviewProperties {
 
 export const KeyResultsListingTable = memo(
   ({ isOpen, confidence, onClose, isCompany }: BoardsOverviewProperties) => {
-    const { fetchMoreKeyResults, loading, data } = useGetKeyResults()
     const [currentConfidenceTag] = useConfidenceTag(confidence)
 
     const intl = useIntl()
@@ -34,6 +33,7 @@ export const KeyResultsListingTable = memo(
 
     return (
       <KeyResultListingModal
+        isCompany={isCompany}
         isOpen={isOpen}
         dispatchEvent={dispatchOpenKeyResultEvent}
         modalHeadingTitle={intl.formatMessage(messages.modalTitle, {
