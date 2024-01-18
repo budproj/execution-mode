@@ -53,6 +53,11 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
       variables: query,
       fetchPolicy: 'cache-and-network',
       onCompleted: (data) => {
+        if (krHealthStatus && !isCompany) {
+          const keyResultsEdges = data.team?.keyResults?.edges ?? []
+          if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
+        }
+
         const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
         const keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
 
