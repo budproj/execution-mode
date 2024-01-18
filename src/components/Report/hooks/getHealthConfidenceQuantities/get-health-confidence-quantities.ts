@@ -36,8 +36,6 @@ export const useGetHealthConfidenceQuantities = ({
     { variables: { teamId: selectedDashboardTeam?.id } },
   )
 
-  console.log({ data })
-
   const quantities = isCompany
     ? data?.me?.companies.quantities ?? emptyQuantities
     : data?.team?.quantities ?? emptyQuantities

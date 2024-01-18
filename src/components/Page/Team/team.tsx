@@ -102,8 +102,6 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldUpdateTeams])
 
-  console.log({ data })
-
   return (
     <ApolloQueryErrorBoundary error={error}>
       <Flex flexGrow={1} direction="column" bg="new-gray.50">

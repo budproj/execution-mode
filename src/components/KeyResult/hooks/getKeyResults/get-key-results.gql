@@ -1,4 +1,4 @@
-query GET_KEY_RESULTS($confidence: String, $offset: Float, $limit: Float) {
+query PAGINATION_GET_KEY_RESULTS($confidence: String, $offset: Float, $limit: Float) {
   me {
     companies {
       edges {

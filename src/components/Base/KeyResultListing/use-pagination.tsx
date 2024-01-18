@@ -1,15 +1,10 @@
 import { useCallback, useMemo, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { useGetKeyResults } from 'src/components/KeyResult/hooks/getKeyResults/get-key-results'
 import { krTableLengthAtom } from 'src/state/recoil/key-result/kr-table-lenght.atom'
 import loadedKeyResults from 'src/state/recoil/key-result/pagination/fetch-more-key-results'
-import { KRS_PER_PAGE } from 'src/state/recoil/key-result/pagination/limit-offset'
-
-type krListMeta = {
-  firstListElement: number
-  lastListElement: number
-}
+import paginationKRs, { KRS_PER_PAGE } from 'src/state/recoil/key-result/pagination/limit-offset'
 
 type usePagitionOuput = {
   krTableLength: number
@@ -32,6 +27,7 @@ const usePagination = ({ onClose, isCompany }: usePaginationProperties): usePagi
   const { fetchMoreKeyResults: fetchMore, loading: loadingData } = useGetKeyResults(isCompany)
   const data = useRecoilValue(loadedKeyResults)
   const [krTableLength, setTableLength] = useRecoilState(krTableLengthAtom)
+  const setPaginationVariables = useSetRecoilState(paginationKRs)
   const [lastKrListed, setLastKrListed] = useState({
     firstListElement: 0,
     lastListElement: KRS_PER_PAGE,
@@ -57,6 +53,10 @@ const usePagination = ({ onClose, isCompany }: usePaginationProperties): usePagi
       const lastDataIndex = data.indexOf(data[data.length - 1])
       const mustFetchMore = lastRenderedIndex === lastDataIndex
       if (mustFetchMore) {
+        setPaginationVariables({
+          limit: KRS_PER_PAGE,
+          offset: data.length,
+        })
         await fetchMore({
           limit: KRS_PER_PAGE,
           offset: data.length,
@@ -68,7 +68,7 @@ const usePagination = ({ onClose, isCompany }: usePaginationProperties): usePagi
         lastListElement: lastRenderedIndex + KRS_PER_PAGE + 1,
       })
     }
-  }, [data, fetchMore, keyResultIds])
+  }, [data, fetchMore, keyResultIds, setPaginationVariables])
 
   const loadPreviousKrsPage = () => {
     const firstRenderedIndex = data.findIndex((kr) => kr.id === keyResultIds[0])

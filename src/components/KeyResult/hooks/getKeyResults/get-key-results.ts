@@ -10,6 +10,7 @@ import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily, krHealthStatusAtom } from 'src/state/recoil/key-result'
 import loadedKeyResults from 'src/state/recoil/key-result/pagination/fetch-more-key-results'
+import paginationKRs from 'src/state/recoil/key-result/pagination/limit-offset'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
 
 import { KeyResult } from '../../types'
@@ -36,15 +37,18 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
   const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
   const [isFetchMoreDataLoading, setIsFetchMoreDataLoading] = useState(false)
   const [loadedKRs, setLoadKeyResults] = useRecoilState(loadedKeyResults)
+  const paginationVariables = useRecoilValue(paginationKRs)
 
-  const query = { limit: KRS_PER_PAGE, offset: 0 }
+  const query = { ...paginationVariables }
 
   if (krHealthStatus) {
     Object.assign(query, { confidence: krHealthStatus, teamId: selectedDashboardTeam?.id })
   }
 
   const { loading, called, fetchMore, refetch } = useQuery<GetUserPrimaryCompanyQuery>(
-    krHealthStatus && !isCompany ? queries.GET_KEY_RESULTS_FOR_MODAL : queries.GET_KEY_RESULTS,
+    krHealthStatus && !isCompany
+      ? queries.GET_KEY_RESULTS_FOR_MODAL
+      : queries.PAGINATION_GET_KEY_RESULTS,
     {
       variables: query,
       fetchPolicy: 'cache-and-network',
@@ -114,7 +118,9 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
       }
     }
 
-    if (notIncludedKeyResults.length > 0 && keyResults.length > 0) setLoadKeyResults(keyResults)
+    if (notIncludedKeyResults.length > 0 && keyResults.length > 0) {
+      setLoadKeyResults((previous) => [...previous, ...notIncludedKeyResults])
+    }
 
     return () => {
       notIncludedKeyResults = []
