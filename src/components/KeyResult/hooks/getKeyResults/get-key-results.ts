@@ -28,7 +28,7 @@ interface GetCompanyCycles {
   refetch: any
 }
 
-export const KRS_PER_PAGE = 2
+export const KRS_PER_PAGE = 5
 
 export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
   const [loadKRs] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)

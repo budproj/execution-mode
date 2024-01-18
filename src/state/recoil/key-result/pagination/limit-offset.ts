@@ -3,7 +3,7 @@ import { atom } from 'recoil'
 import { PREFIX } from '../constants'
 
 const KEY = `${PREFIX}::QUERY_VARIABLES_LIMIT_OFFSET`
-export const KRS_PER_PAGE = 2
+export const KRS_PER_PAGE = 5
 
 type PaginationQueryVariables = {
   limit: number
