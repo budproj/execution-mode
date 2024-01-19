@@ -23,11 +23,11 @@ query GET_TEAM_DATA($teamId: ID!) {
     status {
       progress
     }
-    keyResults {
-      policy {
-        create
-      }
-    }
+    # keyResults {
+    #   policy {
+    #     create
+    #   }
+    # }
     users(first: 1000) {
       edges {
         node {
