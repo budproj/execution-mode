@@ -156,7 +156,7 @@ export const KeyResultListingModal = memo(
               />
             </StyledTableWrapper>
             <HStack width="100%" mt={10} gap={2} alignItems="center" justifyContent="flex-end">
-              {showPreviousPageButton && (
+              {!isLoading && showPreviousPageButton && (
                 <Button
                   bg="brand.500"
                   color="white"
@@ -166,7 +166,7 @@ export const KeyResultListingModal = memo(
                   Prev
                 </Button>
               )}
-              {showNextPageButton && (
+              {!isLoading && showNextPageButton && (
                 <Button
                   bg="brand.500"
                   color="white"

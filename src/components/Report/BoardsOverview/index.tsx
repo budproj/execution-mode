@@ -1,9 +1,11 @@
 import { Flex, FlexProps } from '@chakra-ui/react'
-import React, { memo } from 'react'
-import { useRecoilState } from 'recoil'
+import React, { memo, useCallback } from 'react'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
+import loadedKeyResults from 'src/state/recoil/key-result/pagination/fetch-more-key-results'
+import paginationKRs from 'src/state/recoil/key-result/pagination/limit-offset'
 
 import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQuantities'
 
@@ -21,6 +23,16 @@ const BoardsOverview = memo(
     const { data, loading } = useGetHealthConfidenceQuantities({ isCompany, selectedDashboardTeam })
     const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
     const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
+    const resetKrsListTableData = useResetRecoilState(loadedKeyResults)
+    const resetPaginationVariables = useResetRecoilState(paginationKRs)
+
+    const handleCloseModal = useCallback(() => {
+      console.log('CLOSEMODAL')
+      resetPaginationVariables()
+      resetKrsListTableData()
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      setKrHealthStatus(undefined)
+    }, [resetKrsListTableData, resetPaginationVariables, setKrHealthStatus])
 
     return (
       <>
@@ -48,8 +60,7 @@ const BoardsOverview = memo(
             isOpen
             confidence={confidence}
             isCompany={isCompany}
-            // eslint-disable-next-line unicorn/no-useless-undefined
-            onClose={() => setKrHealthStatus(undefined)}
+            onClose={handleCloseModal}
           />
         )}
       </>
