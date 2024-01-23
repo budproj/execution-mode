@@ -10,7 +10,7 @@ import {
   HStack,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { memo, useCallback, useEffect, useMemo } from 'react'
+import React, { memo, useCallback, useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
@@ -19,14 +19,17 @@ import { KEY_RESULT_LIST_TYPE } from 'src/components/KeyResult/List/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
-import usePagination from './use-pagination'
-
 export interface KeyResultModalListingProperties {
   isOpen: boolean
   onClose: () => void
+  loadNextKrsPage?: () => Promise<void>
+  loadPreviousKrsPage?: () => void
+  showPreviousPageButton?: boolean
+  showNextPageButton?: boolean
+  keyResultIds: string[]
   dispatchEvent?: () => void
+  isLoading: boolean
   modalHeadingTitle: string
-  isCompany?: boolean
 }
 
 const StyledModal = styled(ModalContent)`
@@ -54,22 +57,16 @@ const StyledTableWrapper = styled(Flex)`
 export const KeyResultListingModal = memo(
   ({
     isOpen,
+    loadNextKrsPage,
+    loadPreviousKrsPage,
+    showPreviousPageButton = false,
+    showNextPageButton = false,
+    keyResultIds,
     dispatchEvent,
     modalHeadingTitle,
+    isLoading,
     onClose,
-    isCompany,
   }: KeyResultModalListingProperties) => {
-    const {
-      handleCloseModal,
-      loadNextKrsPage,
-      loadPreviousKrsPage,
-      krTableLength,
-      loadedKrTableLength,
-      showPreviousPageButton,
-      showNextPageButton,
-      keyResultIds,
-      isLoading: loadingData,
-    } = usePagination({ onClose, isCompany })
     const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 
     useEffect(() => {
@@ -78,21 +75,13 @@ export const KeyResultListingModal = memo(
 
     const onLineClick = useCallback((id: KeyResult['id']) => setOpenDrawer(id), [setOpenDrawer])
 
-    const isLoading = useMemo<boolean>(() => {
-      if (loadedKrTableLength < krTableLength && keyResultIds.length === 0) {
-        return true
-      }
-
-      return loadingData
-    }, [keyResultIds, krTableLength, loadedKrTableLength, loadingData])
-
     return (
       <Modal
         isOpen={isOpen}
         returnFocusOnClose={false}
         size="100%"
         autoFocus={false}
-        onClose={handleCloseModal}
+        onClose={onClose}
       >
         <ModalOverlay />
         <StyledModal>
