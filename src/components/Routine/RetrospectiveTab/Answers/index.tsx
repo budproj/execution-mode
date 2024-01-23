@@ -121,7 +121,6 @@ const AnswersComponent = memo(
 
     const performDebounced = useCallback(
       async (searchTerm: string) => {
-        console.log('\n\n\n Search Term: %s \n\n\n', searchTerm)
         const usersSearched = teamUsers.filter((user) =>
           user.fullName.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()),
         )
@@ -243,7 +242,7 @@ const AnswersComponent = memo(
           )}
           <Box
             id="list-bottom"
-            display={search.length >= SEARCH_CHARACTERS_LIMIT ? 'hidden' : 'block'}
+            display={search.length >= SEARCH_CHARACTERS_LIMIT ? 'none' : 'block'}
           />
         </ScrollableItem>
         {showAnswerNowButton && (

@@ -27,7 +27,6 @@ const BoardsOverview = memo(
     const resetPaginationVariables = useResetRecoilState(paginationKRs)
 
     const handleCloseModal = useCallback(() => {
-      console.log('CLOSEMODAL')
       resetPaginationVariables()
       resetKrsListTableData()
       // eslint-disable-next-line unicorn/no-useless-undefined
