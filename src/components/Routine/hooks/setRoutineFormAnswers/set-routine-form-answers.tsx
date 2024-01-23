@@ -72,6 +72,7 @@ export const useRoutineFormAnswers = () => {
       teamUsersIds: showedUsersIds,
     })
 
+    console.log({ formattedData })
     if (formattedData) setAnswerSummary(formattedData)
     setIsAnswerSummaryLoading(false)
 
