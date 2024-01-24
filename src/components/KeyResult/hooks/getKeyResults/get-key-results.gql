@@ -184,6 +184,9 @@ query GET_KEY_RESULTS_FOR_MODAL($confidence: String, $teamId: ID, $offset: Float
           }
         }
       }
+      pageInfo {
+        hasNextPage
+      }
     }
   }
 }
