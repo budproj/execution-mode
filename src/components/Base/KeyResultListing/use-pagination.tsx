@@ -5,6 +5,7 @@ import { useGetKeyResults } from 'src/components/KeyResult/hooks/getKeyResults/g
 import { krTableLengthAtom } from 'src/state/recoil/key-result/kr-table-lenght.atom'
 import loadedKeyResults from 'src/state/recoil/key-result/pagination/fetch-more-key-results'
 import paginationKRs, { KRS_PER_PAGE } from 'src/state/recoil/key-result/pagination/limit-offset'
+import listKeyResultsPageInfo from 'src/state/recoil/key-result/pagination/load-key-results-page-info'
 
 type usePagitionOuput = {
   krTableLength: number
@@ -28,6 +29,7 @@ const usePagination = ({ onClose, isCompany }: usePaginationProperties): usePagi
   const data = useRecoilValue(loadedKeyResults)
   const [krTableLength, setTableLength] = useRecoilState(krTableLengthAtom)
   const setPaginationVariables = useSetRecoilState(paginationKRs)
+  const { hasNextPage } = useRecoilValue(listKeyResultsPageInfo)
   const [lastKrListed, setLastKrListed] = useState({
     firstListElement: 0,
     lastListElement: KRS_PER_PAGE,
@@ -88,10 +90,7 @@ const usePagination = ({ onClose, isCompany }: usePaginationProperties): usePagi
     !loadingData && firstListKeyResultIndex > 0 && keyResultIds.length < data.length
 
   const showNextPageButton =
-    !loadingData &&
-    krTableLength > 0 &&
-    (krTableLength > data.length ||
-      (data.length === krTableLength && krTableLength > lastKrListed.lastListElement))
+    !loadingData && (hasNextPage || data.length > lastKrListed.lastListElement)
 
   return {
     krTableLength,

@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/client'
+import { ApolloQueryResult, OperationVariables, useQuery } from '@apollo/client'
 import { useCallback, useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { GetUserPrimaryCompanyQuery } from 'src/components/Report/CompanyProgressOverview/types'
 import { Team } from 'src/components/Team/types'
@@ -11,6 +11,7 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily, krHealthStatusAtom } from 'src/state/recoil/key-result'
 import loadedKeyResults from 'src/state/recoil/key-result/pagination/fetch-more-key-results'
 import paginationKRs from 'src/state/recoil/key-result/pagination/limit-offset'
+import listKeyResultsPageInfo from 'src/state/recoil/key-result/pagination/load-key-results-page-info'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
 
 import { KeyResult } from '../../types'
@@ -25,7 +26,9 @@ interface GetCompanyCycles {
   loading: boolean
   called: boolean
   fetchMoreKeyResults: ({ limit, offset }: FetchMoreVariables) => Promise<void>
-  refetch: any
+  refetch: (
+    variables?: Partial<OperationVariables> | undefined,
+  ) => Promise<ApolloQueryResult<GetUserPrimaryCompanyQuery>>
 }
 
 export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
@@ -36,6 +39,7 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
   const [isFetchMoreDataLoading, setIsFetchMoreDataLoading] = useState(false)
   const [loadedKRs, setLoadKeyResults] = useRecoilState(loadedKeyResults)
   const paginationVariables = useRecoilValue(paginationKRs)
+  const setListKeyResultsPageInfo = useSetRecoilState(listKeyResultsPageInfo)
 
   const query = { ...paginationVariables }
 
@@ -50,14 +54,18 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
     {
       variables: query,
       fetchPolicy: 'cache-and-network',
+      refetchWritePolicy: 'overwrite',
       onCompleted: (data) => {
         if (krHealthStatus && !isCompany) {
           const keyResultsEdges = data.team?.keyResults?.edges ?? []
           if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
         }
 
+        const pageInfo = data.me?.companies?.edges?.[0]?.node?.keyResults?.pageInfo
+
         const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
         const keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
+        if (pageInfo) setListKeyResultsPageInfo(pageInfo ?? { endCursor: '' })
 
         if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
       },

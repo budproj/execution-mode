@@ -87,6 +87,9 @@ query PAGINATION_GET_KEY_RESULTS($confidence: String, $offset: Float, $limit: Fl
                 }
               }
             }
+            pageInfo {
+              hasNextPage
+            }
           }
         }
       }
