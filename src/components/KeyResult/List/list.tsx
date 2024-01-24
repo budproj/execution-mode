@@ -1,6 +1,6 @@
 import { Box, BoxProps, GridProps } from '@chakra-ui/react'
 import uniqueId from 'lodash/uniqueId'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useMemo } from 'react'
 import { DropResult } from 'react-beautiful-dnd'
 import { MessageDescriptor } from 'react-intl'
 
@@ -30,6 +30,7 @@ export interface KeyResultListProperties extends BoxProps {
   type: KEY_RESULT_LIST_TYPE
   templateColumns: GridProps['templateColumns']
   columnGap: GridProps['gridColumnGap']
+  hasMoreKeyResults?: boolean
   emptyStateMessage?: MessageDescriptor
   keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
@@ -49,6 +50,7 @@ const KeyResultList = ({
   columns,
   bodyProperties,
   headProperties,
+  hasMoreKeyResults,
   templateColumns,
   columnGap,
   isLoading,
@@ -56,47 +58,52 @@ const KeyResultList = ({
   mode,
   isDraft,
   ...rest
-}: KeyResultListProperties): ReactElement => (
-  <Box {...rest}>
-    <KeyResultListHead
-      columns={columns}
-      templateColumns={templateColumns}
-      columnGap={columnGap}
-      headProperties={headProperties}
-      borderColor={borderColor}
-      mode={mode}
-    />
-    {isLoading ? (
-      <KeyResultListBodySkeleton
-        listID={id}
-        type={type}
-        templateColumns={templateColumns}
-        columnGap={columnGap}
-        columns={columns}
-        borderColor={borderColor}
-        bodyProperties={bodyProperties}
-        keyResultIDs={[]}
-      />
-    ) : (
-      <KeyResultListBody
-        isDraft={isDraft}
-        listID={id}
-        type={type}
+}: KeyResultListProperties): ReactElement => {
+  const isDataLoading = useMemo(() => {
+    return isLoading || (isLoading === false && keyResultIDs === undefined)
+  }, [isLoading, keyResultIDs])
+
+  return (
+    <Box {...rest}>
+      <KeyResultListHead
         columns={columns}
         templateColumns={templateColumns}
         columnGap={columnGap}
-        bodyProperties={bodyProperties}
+        headProperties={headProperties}
         borderColor={borderColor}
-        keyResultIDs={keyResultIDs}
-        handleDragEnd={onLineDragEnd}
-        emptyStateMessage={emptyStateMessage}
         mode={mode}
-        onLineClick={onLineClick}
-        {...rest}
       />
-    )}
-  </Box>
-)
+      {isDataLoading ? (
+        <KeyResultListBodySkeleton
+          listID={id}
+          type={type}
+          templateColumns={templateColumns}
+          columnGap={columnGap}
+          columns={columns}
+          borderColor={borderColor}
+          bodyProperties={bodyProperties}
+          keyResultIDs={[]}
+        />
+      ) : (
+        <KeyResultListBody
+          listID={id}
+          type={type}
+          columns={columns}
+          templateColumns={templateColumns}
+          columnGap={columnGap}
+          bodyProperties={bodyProperties}
+          borderColor={borderColor}
+          keyResultIDs={keyResultIDs}
+          handleDragEnd={onLineDragEnd}
+          emptyStateMessage={emptyStateMessage}
+          mode={mode}
+          onLineClick={onLineClick}
+          {...rest}
+        />
+      )}
+    </Box>
+  )
+}
 
 KeyResultList.defaultProps = {
   type: 'static',

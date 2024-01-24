@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 
 import { KeyResultListingModal } from 'src/components/Base/KeyResultListing'
-import { useGetKeyResults } from 'src/components/KeyResult/hooks'
+import usePagination from 'src/components/Base/KeyResultListing/use-pagination'
 import useConfidenceTag from 'src/state/hooks/useConfidenceTag'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
@@ -16,37 +16,57 @@ export interface BoardsOverviewProperties {
   isCompany?: boolean
 }
 
-export const KeyResultsListingTable = ({
-  isOpen,
-  confidence,
-  onClose,
-  isCompany,
-}: BoardsOverviewProperties) => {
-  const { data, loading } = useGetKeyResults(isCompany)
-  const [currentConfidenceTag] = useConfidenceTag(confidence)
-  const intl = useIntl()
-  const { dispatch: dispatchEvent } = useEvent(EventType.OPENED_KEY_RESULT_REPORT_CONFIDANCE)
+export const KeyResultsListingTable = memo(
+  ({ isOpen, confidence, onClose, isCompany }: BoardsOverviewProperties) => {
+    const [currentConfidenceTag] = useConfidenceTag(confidence)
+    const {
+      handleCloseModal,
+      loadNextKrsPage,
+      loadPreviousKrsPage,
+      krTableLength,
+      loadedKrTableLength,
+      showPreviousPageButton,
+      showNextPageButton,
+      keyResultIds,
+      isLoading: loadingData,
+    } = usePagination({ onClose, isCompany })
 
-  const confidenceText = useMemo(
-    () => currentConfidenceTag.messages.long.toLowerCase(),
-    [currentConfidenceTag],
-  )
+    const intl = useIntl()
+    const { dispatch: dispatchEvent } = useEvent(EventType.OPENED_KEY_RESULT_REPORT_CONFIDANCE)
 
-  const dispatchOpenKeyResultEvent = () => {
-    dispatchEvent({ confidence: currentConfidenceTag.tag })
-  }
+    const confidenceText = useMemo(
+      () => currentConfidenceTag.messages.long.toLowerCase(),
+      [currentConfidenceTag],
+    )
 
-  return (
-    <KeyResultListingModal
-      isOpen={isOpen}
-      loadingData={loading}
-      data={data}
-      dispatchEvent={dispatchOpenKeyResultEvent}
-      modalHeadingTitle={intl.formatMessage(messages.modalTitle, {
-        confidence: confidence === -1 ? 'barrier' : confidence,
-        confidencetext: confidenceText,
-      })}
-      onClose={onClose}
-    />
-  )
-}
+    const dispatchOpenKeyResultEvent = () => {
+      dispatchEvent({ confidence: currentConfidenceTag.tag })
+    }
+
+    const isLoading = useMemo<boolean>(() => {
+      if (loadedKrTableLength < krTableLength && keyResultIds.length === 0) {
+        return true
+      }
+
+      return loadingData
+    }, [keyResultIds, krTableLength, loadedKrTableLength, loadingData])
+
+    return (
+      <KeyResultListingModal
+        loadNextKrsPage={loadNextKrsPage}
+        loadPreviousKrsPage={loadPreviousKrsPage}
+        showPreviousPageButton={showPreviousPageButton}
+        showNextPageButton={showNextPageButton}
+        isLoading={isLoading}
+        isOpen={isOpen}
+        dispatchEvent={dispatchOpenKeyResultEvent}
+        modalHeadingTitle={intl.formatMessage(messages.modalTitle, {
+          confidence: confidence === -1 ? 'barrier' : confidence,
+          confidencetext: confidenceText,
+        })}
+        keyResultIds={keyResultIds}
+        onClose={handleCloseModal}
+      />
+    )
+  },
+)

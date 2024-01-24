@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 
 import { KeyResultListingModal } from 'src/components/Base/KeyResultListing'
@@ -19,16 +19,15 @@ const KeyResultsHighlightsModal = ({
   isOpen,
   onClose,
 }: KeyResultsHighlightsModalProperties) => {
-  const { data: teamKeyResultsData, loading: teamKeyResultsLoading } =
-    useGetTeamKeyResultsHighlights()
-
+  const { data, loading } = useGetTeamKeyResultsHighlights()
   const intl = useIntl()
 
+  const keyResultIds = useMemo(() => data.map(({ id }) => id), [data])
   return (
     <KeyResultListingModal
       isOpen={isOpen}
-      loadingData={teamKeyResultsLoading}
-      data={teamKeyResultsData}
+      keyResultIds={keyResultIds}
+      isLoading={loading}
       modalHeadingTitle={intl.formatMessage(messages.modalTitle, {
         confidence: highlightType,
       })}

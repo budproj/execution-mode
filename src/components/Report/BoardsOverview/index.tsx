@@ -1,9 +1,11 @@
 import { Flex, FlexProps } from '@chakra-ui/react'
-import React from 'react'
-import { useRecoilState } from 'recoil'
+import React, { memo, useCallback } from 'react'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 
 import { Team } from 'src/components/Team/types'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
+import loadedKeyResults from 'src/state/recoil/key-result/pagination/fetch-more-key-results'
+import paginationKRs from 'src/state/recoil/key-result/pagination/limit-offset'
 
 import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQuantities'
 
@@ -16,19 +18,25 @@ interface BoardsOverviewProperties extends FlexProps {
   isCompany: boolean
 }
 
-const BoardsOverview = ({
-  isCompany,
-  selectedDashboardTeam,
-  ...rest
-}: BoardsOverviewProperties) => {
-  const { data, loading } = useGetHealthConfidenceQuantities({ isCompany, selectedDashboardTeam })
-  const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
-  const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
+const BoardsOverview = memo(
+  ({ isCompany, selectedDashboardTeam, ...rest }: BoardsOverviewProperties) => {
+    const { data, loading } = useGetHealthConfidenceQuantities({ isCompany, selectedDashboardTeam })
+    const [krHealthStatus, setKrHealthStatus] = useRecoilState(krHealthStatusAtom)
+    const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
+    const resetKrsListTableData = useResetRecoilState(loadedKeyResults)
+    const resetPaginationVariables = useResetRecoilState(paginationKRs)
 
-  return (
-    <>
-      <Flex minHeight={155} gridGap="24px" {...rest}>
-        {/* <Board
+    const handleCloseModal = useCallback(() => {
+      resetPaginationVariables()
+      resetKrsListTableData()
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      setKrHealthStatus(undefined)
+    }, [resetKrsListTableData, resetPaginationVariables, setKrHealthStatus])
+
+    return (
+      <>
+        <Flex minHeight={155} gridGap="24px" {...rest}>
+          {/* <Board
           isLoading={loading}
           title={intl.formatMessage(messages.objectivesTitle)}
           number={data.objectivesQuantity}
@@ -39,20 +47,24 @@ const BoardsOverview = ({
           bgHover="white"
           shadow="for-background.light"
         /> */}
-        <KeyResultConfidences isLoading={loading} quantities={data} shadow="for-background.light" />
-      </Flex>
+          <KeyResultConfidences
+            isLoading={loading}
+            quantities={data}
+            shadow="for-background.light"
+          />
+        </Flex>
 
-      {krHealthStatus && (
-        <KeyResultsListingTable
-          isOpen
-          confidence={confidence}
-          isCompany={isCompany}
-          // eslint-disable-next-line unicorn/no-useless-undefined
-          onClose={() => setKrHealthStatus(undefined)}
-        />
-      )}
-    </>
-  )
-}
+        {krHealthStatus && (
+          <KeyResultsListingTable
+            isOpen
+            confidence={confidence}
+            isCompany={isCompany}
+            onClose={handleCloseModal}
+          />
+        )}
+      </>
+    )
+  },
+)
 
 export default BoardsOverview
