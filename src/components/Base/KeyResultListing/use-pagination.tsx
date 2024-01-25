@@ -91,6 +91,7 @@ const usePagination = ({ onClose, isCompany }: usePaginationProperties): usePagi
 
   const showNextPageButton =
     !loadingData && (hasNextPage || data.length > lastKrListed.lastListElement)
+  console.log({ loadingData, lastKrListed, data, hasNextPage, showNextPageButton })
 
   return {
     krTableLength,

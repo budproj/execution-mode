@@ -57,11 +57,13 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
       refetchWritePolicy: 'overwrite',
       onCompleted: (data) => {
         const pageInfo = data.me?.companies?.edges?.[0]?.node?.keyResults?.pageInfo
-        if (pageInfo?.hasNextPage)
+        if (pageInfo?.hasNextPage) {
+          console.log('\n\n\n PAGE INFO', pageInfo)
           setListKeyResultsPageInfo({
             hasNextPage: pageInfo.hasNextPage,
             endCursor: '',
           })
+        }
 
         if (krHealthStatus && !isCompany) {
           const keyResultsEdges = data.team?.keyResults?.edges ?? []
