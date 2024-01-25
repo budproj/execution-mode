@@ -6,6 +6,7 @@ import { Team } from 'src/components/Team/types'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
 import loadedKeyResults from 'src/state/recoil/key-result/pagination/fetch-more-key-results'
 import paginationKRs from 'src/state/recoil/key-result/pagination/limit-offset'
+import listKeyResultsPageInfo from 'src/state/recoil/key-result/pagination/load-key-results-page-info'
 
 import { useGetHealthConfidenceQuantities } from '../hooks/getHealthConfidenceQuantities'
 
@@ -25,13 +26,20 @@ const BoardsOverview = memo(
     const confidence = krHealthStatus ? ConfidenceMapper[krHealthStatus] : 0
     const resetKrsListTableData = useResetRecoilState(loadedKeyResults)
     const resetPaginationVariables = useResetRecoilState(paginationKRs)
+    const resetKeyResultsListPageInfo = useResetRecoilState(listKeyResultsPageInfo)
 
     const handleCloseModal = useCallback(() => {
+      resetKeyResultsListPageInfo()
       resetPaginationVariables()
       resetKrsListTableData()
       // eslint-disable-next-line unicorn/no-useless-undefined
       setKrHealthStatus(undefined)
-    }, [resetKrsListTableData, resetPaginationVariables, setKrHealthStatus])
+    }, [
+      resetKeyResultsListPageInfo,
+      resetKrsListTableData,
+      resetPaginationVariables,
+      setKrHealthStatus,
+    ])
 
     return (
       <>
