@@ -5,7 +5,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { GetUserPrimaryCompanyQuery } from 'src/components/Report/CompanyProgressOverview/types'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
-import { GraphQLConnection, GraphQLEdge } from 'src/components/types'
+import { GraphQLConnection, GraphQLEdge, GraphQLPageInfo } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { keyResultAtomFamily, krHealthStatusAtom } from 'src/state/recoil/key-result'
@@ -56,24 +56,25 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
       fetchPolicy: 'cache-and-network',
       refetchWritePolicy: 'overwrite',
       onCompleted: (data) => {
-        const pageInfo = data.me?.companies?.edges?.[0]?.node?.keyResults?.pageInfo
+        let pageInfo: GraphQLPageInfo | undefined
+        let keyResultsEdges: Array<GraphQLEdge<KeyResult>>
+
+        if (krHealthStatus && !isCompany) {
+          pageInfo = data.team?.keyResults?.pageInfo
+          keyResultsEdges = data.team?.keyResults?.edges ?? []
+        } else {
+          const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
+          pageInfo = data.me?.companies?.edges?.[0]?.node?.keyResults?.pageInfo
+          keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
+        }
+
         if (pageInfo?.hasNextPage) {
-          console.log('\n\n\n PAGE INFO', pageInfo)
           setListKeyResultsPageInfo({
             hasNextPage: pageInfo.hasNextPage,
             endCursor: '',
           })
-        }
-
-        if (krHealthStatus && !isCompany) {
-          const keyResultsEdges = data.team?.keyResults?.edges ?? []
           if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
         }
-
-        const companies = data.me?.companies?.edges?.map((edge) => edge.node) ?? []
-        const keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
-
-        if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
       },
     },
   )
