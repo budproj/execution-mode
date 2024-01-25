@@ -53,7 +53,7 @@ const usePagination = ({ onClose, isCompany }: usePaginationProperties): usePagi
         (kr) => kr.id === keyResultIds[keyResultIds.length - 1],
       )
       const lastDataIndex = data.indexOf(data[data.length - 1])
-      const mustFetchMore = lastRenderedIndex === lastDataIndex
+      const mustFetchMore = hasNextPage && lastRenderedIndex === lastDataIndex
       if (mustFetchMore) {
         setPaginationVariables({
           limit: KRS_PER_PAGE,
@@ -70,7 +70,7 @@ const usePagination = ({ onClose, isCompany }: usePaginationProperties): usePagi
         lastListElement: lastRenderedIndex + KRS_PER_PAGE + 1,
       })
     }
-  }, [data, fetchMore, keyResultIds, setPaginationVariables])
+  }, [data, fetchMore, hasNextPage, keyResultIds, setPaginationVariables])
 
   const loadPreviousKrsPage = () => {
     const firstRenderedIndex = data.findIndex((kr) => kr.id === keyResultIds[0])

@@ -68,13 +68,11 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
           keyResultsEdges = companies.map((company) => company?.keyResults?.edges ?? []).flat()
         }
 
-        if (pageInfo?.hasNextPage) {
-          setListKeyResultsPageInfo({
-            hasNextPage: pageInfo.hasNextPage,
-            endCursor: '',
-          })
-          if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
-        }
+        if (keyResultsEdges.length > 0) setKeyResults(keyResultsEdges)
+        setListKeyResultsPageInfo({
+          hasNextPage: pageInfo?.hasNextPage ?? false,
+          endCursor: '',
+        })
       },
     },
   )
