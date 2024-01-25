@@ -23,10 +23,12 @@ export const KeyResultsListingTable = memo(
       handleCloseModal,
       loadNextKrsPage,
       loadPreviousKrsPage,
+      krTableLength,
+      loadedKrTableLength,
       showPreviousPageButton,
       showNextPageButton,
       keyResultIds,
-      isLoading,
+      isLoading: loadingData,
     } = usePagination({ onClose, isCompany })
 
     const intl = useIntl()
@@ -40,6 +42,14 @@ export const KeyResultsListingTable = memo(
     const dispatchOpenKeyResultEvent = () => {
       dispatchEvent({ confidence: currentConfidenceTag.tag })
     }
+
+    const isLoading = useMemo<boolean>(() => {
+      if (loadedKrTableLength < krTableLength && keyResultIds.length === 0) {
+        return true
+      }
+
+      return loadingData
+    }, [keyResultIds, krTableLength, loadedKrTableLength, loadingData])
 
     return (
       <KeyResultListingModal
