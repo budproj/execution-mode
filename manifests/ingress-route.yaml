@@ -23,7 +23,7 @@ spec:
         - name: execution-mode-canary
           port: 80
   tls:
-    certResolver: letsencrypt
     options:
       namespace: traefik-proxy
       name: tls-options
+    secretName: ssl-certs-execution-mode
