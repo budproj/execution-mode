@@ -14,24 +14,31 @@ enum BOARD_TYPE {
 
 export type Task = {
   id: string
-  boardId: string
   status: TASK_STATUS
   title: string
   description: string
-  initialDate: Date
   dueDate: Date
   priority: number
   owner: string
   attachments: string[]
   supportTeamMembers: string[]
+  tags: string[]
+  createdAt: Date
+  updatedAt: Date
 }
 
 export type Board = {
   id: string
-  title: string
+  title?: string
   type: BOARD_TYPE
   teamsIds?: string[]
   tasks: Task[]
+  order: {
+    pending: string[]
+    toDo: string[]
+    doing: string[]
+    done: string[]
+  }
   createdAt: Date
   updateadAt: Date
 }
@@ -44,7 +51,11 @@ export class TaskManagementService {
   constructor(private readonly client: AxiosInstance) {}
 
   async getTeamBoard({ teamId }: GetTeamBoardInput) {
-    const { data } = await this.client.get<GetTeamBoardOutput>(`board/${teamId}`)
+    const { data } = await this.client.get<GetTeamBoardOutput>(`boards`, {
+      params: {
+        teamId,
+      },
+    })
     return data
   }
 }

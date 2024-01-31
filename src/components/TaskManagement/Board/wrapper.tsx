@@ -12,6 +12,8 @@ import {
 } from 'src/services/task-management/task-management.service'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
+import { useBoardData } from '../hooks/use-board-data'
+
 import Column from './components/column'
 import useLoadUsers from './hooks/use-load-users'
 import useTaskCollection from './hooks/use-task-collection'
@@ -23,10 +25,12 @@ type BoardWrapperProperties = {
 
 const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
   const [tasks, _] = useTaskCollection()
+  const { data: issoRetornouDoTMS } = useBoardData(teamId)
   const [selectedUser, setSelectedUser] = useState<string>()
   const ownersAndSupportTeamMembers = useLoadUsers(teamId)
   const team = useRecoilValue(teamAtomFamily(teamId))
 
+  console.log({ issoRetornouDoTMS })
   const handleSelectUser = useCallback((userId: string) => {
     setSelectedUser((previousSelectedUser) => {
       if (previousSelectedUser === userId) return
