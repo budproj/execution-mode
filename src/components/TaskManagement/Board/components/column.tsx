@@ -49,17 +49,17 @@ const StyledCircleButton = styled(Circle)`
 `
 
 const ColumnColorScheme: Record<ColumnType, string> = {
-  PENDING: 'new-gray.600',
-  TO_DO: 'yellow.600',
-  DOING: 'green.500',
-  DONE: 'brand.500',
+  pending: 'new-gray.600',
+  toDo: 'yellow.600',
+  doing: 'green.500',
+  done: 'brand.500',
 }
 
 const headerColumnMessage = new Map([
-  [ColumnType.PENDING, messages.pendingColumnHeading],
-  [ColumnType.TO_DO, messages.todoColumnHeading],
-  [ColumnType.DOING, messages.doingColumnHeading],
-  [ColumnType.DONE, messages.doneColumnHeading],
+  [ColumnType.pending, messages.pendingColumnHeading],
+  [ColumnType.toDo, messages.todoColumnHeading],
+  [ColumnType.doing, messages.doingColumnHeading],
+  [ColumnType.done, messages.doneColumnHeading],
 ])
 
 type ColumnProperties = {

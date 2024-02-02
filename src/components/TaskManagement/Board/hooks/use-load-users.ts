@@ -11,6 +11,9 @@ const useLoadUsers = (teamId: Team['id']): User[] => {
   const [tasks, _] = useTaskCollection()
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
 
+  const objtValues = Object.values(TASK_STATUS)
+
+  console.log({ tasks, objtValues })
   const ownersAndSupportTeamMembers = Object.values(TASK_STATUS).reduce(
     (accumulator: string[], columnType: TASK_STATUS) => {
       const columnTasks = tasks[columnType]

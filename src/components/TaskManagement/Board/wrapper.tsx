@@ -54,10 +54,10 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
           return { ...accumulator, [columnType]: columTasksByContent }
         },
         {
-          [ColumnType.PENDING]: [],
-          [ColumnType.TO_DO]: [],
-          [ColumnType.DOING]: [],
-          [ColumnType.DONE]: [],
+          [ColumnType.pending]: [],
+          [ColumnType.toDo]: [],
+          [ColumnType.doing]: [],
+          [ColumnType.done]: [],
         },
       ),
     [searchTaskInput, selectedUser, tasks],
@@ -76,24 +76,24 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
         <Container maxWidth="100%" paddingInlineEnd={0} padding={0}>
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 16, md: 6 }}>
             <Column
-              column={ColumnType.PENDING}
+              column={ColumnType.pending}
               teamId={teamId}
-              tasks={filteredTasks[ColumnType.PENDING]}
+              tasks={filteredTasks[ColumnType.pending]}
             />
             <Column
-              column={ColumnType.TO_DO}
+              column={ColumnType.toDo}
               teamId={teamId}
-              tasks={filteredTasks[ColumnType.TO_DO]}
+              tasks={filteredTasks[ColumnType.toDo]}
             />
             <Column
-              column={ColumnType.DOING}
+              column={ColumnType.doing}
               teamId={teamId}
-              tasks={filteredTasks[ColumnType.DOING]}
+              tasks={filteredTasks[ColumnType.doing]}
             />
             <Column
-              column={ColumnType.DONE}
+              column={ColumnType.done}
               teamId={teamId}
-              tasks={filteredTasks[ColumnType.DONE]}
+              tasks={filteredTasks[ColumnType.done]}
             />
           </SimpleGrid>
         </Container>

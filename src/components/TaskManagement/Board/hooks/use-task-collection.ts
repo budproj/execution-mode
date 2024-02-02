@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid'
 import {
   TASK_STATUS as ColumnType,
   Task,
-  TASK_STATUS,
 } from 'src/services/task-management/task-management.service'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -15,11 +14,11 @@ const useTaskCollection = () => {
   return useLocalStorage<{
     [key in ColumnType]: Task[]
   }>('teamTasks', {
-    PENDING: [
+    pending: [
       {
         id: uuidv4(),
         boardId: uuidv4(),
-        status: TASK_STATUS.PENDING,
+        status: ColumnType.pending,
         title: 'Marcar reunião com fornecedores de camisetas',
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
@@ -32,13 +31,16 @@ const useTaskCollection = () => {
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
           'f120ec45-150d-4e24-b99d-34df20a80c64',
         ],
+        tags: ['tag1', 'tag2'],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ],
-    TO_DO: [
+    toDo: [
       {
         id: uuidv4(),
         boardId: uuidv4(),
-        status: TASK_STATUS.TO_DO,
+        status: ColumnType.toDo,
         title: 'Entrar em contato com empresa XYZ de eventos',
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
@@ -51,13 +53,16 @@ const useTaskCollection = () => {
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
           'f120ec45-150d-4e24-b99d-34df20a80c64',
         ],
+        tags: ['tag1', 'tag2'],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ],
-    DOING: [
+    doing: [
       {
         id: uuidv4(),
         boardId: uuidv4(),
-        status: TASK_STATUS.DOING,
+        status: ColumnType.doing,
         title: 'Enviar mailing de cadastramento de conferencias e eventos  ',
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
@@ -70,13 +75,16 @@ const useTaskCollection = () => {
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
           'f120ec45-150d-4e24-b99d-34df20a80c64',
         ],
+        tags: ['tag1', 'tag2'],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ],
-    DONE: [
+    done: [
       {
         id: uuidv4(),
         boardId: uuidv4(),
-        status: TASK_STATUS.DONE,
+        status: ColumnType.done,
         title: 'Cotação de participação da DesignConf 2023',
         description:
           "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
@@ -89,6 +97,9 @@ const useTaskCollection = () => {
           '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
           'f120ec45-150d-4e24-b99d-34df20a80c64',
         ],
+        tags: ['tag1', 'tag2'],
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ],
   })
