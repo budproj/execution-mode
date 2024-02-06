@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-read-only-props */
 import { Box } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
@@ -362,7 +363,7 @@ const CustomEditor = styled(EditorContent)`
 
 interface EditorProperties extends React.HTMLAttributes<HTMLInputElement> {
   content: string
-  onUpdate: (parameters: EditorEvents['update']) => void
+  onUpdate?: (parameters: EditorEvents['update']) => void
   editable?: boolean
 }
 
@@ -427,7 +428,7 @@ const Editor = memo(({ content, onUpdate, editable = false }: EditorProperties) 
 
   return (
     <Box>
-      <Box marginBottom={2} alignItems="center">
+      <Box marginBottom={editable ? 2 : 0} alignItems="center">
         <MenuBar editor={editor} isEditable={editable} />
       </Box>
 

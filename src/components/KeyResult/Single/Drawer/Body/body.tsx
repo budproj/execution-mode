@@ -27,9 +27,9 @@ import { SCROLLBAR_ID } from './constants'
 import messages from './messages'
 
 export interface KeyResultDrawerBodyProperties {
-  keyResultID: KeyResult['id']
-  isLoading?: boolean
-  isKeyResultPage?: boolean
+  readonly keyResultID: KeyResult['id']
+  readonly isLoading?: boolean
+  readonly isKeyResultPage?: boolean
 }
 
 const KeyResultDrawerBody = ({

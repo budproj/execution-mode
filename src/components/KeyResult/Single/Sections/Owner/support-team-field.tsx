@@ -19,10 +19,11 @@ import queries from './queries.gql'
 import { SupportTeamPopover } from './support-team-popover'
 
 type SupportTeamFieldProperties = {
-  supportTeamMembers?: User[]
-  hasPermitionToUpdate?: boolean
-  keyResultId?: string
-  ownerName?: string
+  readonly supportTeamMembers?: User[]
+  readonly hasPermitionToUpdate?: boolean
+  readonly keyResultId?: string
+  readonly ownerName?: string
+  readonly isFromTask?: boolean
 }
 
 export const SupportTeamField = ({
@@ -30,6 +31,7 @@ export const SupportTeamField = ({
   hasPermitionToUpdate,
   keyResultId,
   ownerName,
+  isFromTask,
 }: SupportTeamFieldProperties) => {
   const intl = useIntl()
   const teamId = useRecoilValue(selectedTeamIdHighlight)
@@ -101,7 +103,15 @@ export const SupportTeamField = ({
       onOpen={handleOpen}
       onClose={handleClose}
     >
-      <KeyResultSectionHeading>{intl.formatMessage(messages.supportTeam)}</KeyResultSectionHeading>
+      {isFromTask ? (
+        <Text color="gray.500" fontWeight={700} marginBottom="8px">
+          TIME DE APOIO
+        </Text>
+      ) : (
+        <KeyResultSectionHeading>
+          {intl.formatMessage(messages.supportTeam)}
+        </KeyResultSectionHeading>
+      )}
       <PopoverTrigger>
         <Flex
           direction="row"

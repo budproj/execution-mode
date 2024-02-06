@@ -6,6 +6,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import BoardWrapper from 'src/components/TaskManagement/Board/wrapper'
 import { TaskInsertDrawer } from 'src/components/TaskManagement/InsertDrawer/wrapper'
+import { TaskDrawer } from 'src/components/TaskManagement/TaskDrawer'
 import { Team } from 'src/components/Team/types'
 import { teamAtomFamily } from 'src/state/recoil/team'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
@@ -13,8 +14,8 @@ import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selecte
 import messages from './messages'
 
 interface BoardTabContentProperties {
-  teamId: Team['id']
-  isLoading?: boolean
+  readonly teamId: Team['id']
+  readonly isLoading?: boolean
 }
 
 const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
@@ -45,6 +46,7 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
       </HStack>
       <BoardWrapper teamId={teamId} searchTaskInput={searchTaskInput} />
       <TaskInsertDrawer />
+      <TaskDrawer teamId={teamId} />
     </Stack>
   )
 }

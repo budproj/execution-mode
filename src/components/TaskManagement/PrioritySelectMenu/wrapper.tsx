@@ -11,10 +11,10 @@ import SelectMenu from '../../Base/SelectMenu'
 import messages from './messages'
 
 interface TaskPrioritySelectMenuProperties {
-  value: string
-  onChange?: (newPriority: TaskPriority) => void
-  placement?: MenuProps['placement']
-  isLazy?: boolean
+  readonly value: string
+  readonly onChange?: (newPriority: TaskPriority) => void
+  readonly placement?: MenuProps['placement']
+  readonly isLazy?: boolean
 }
 
 const StyledText = styled(Text)`
@@ -77,10 +77,10 @@ export const TaskPrioritySelectMenu = ({
 }
 
 type PriorityItemOptionProperties = {
-  priority: TaskPriority
+  readonly priority: TaskPriority
 }
 
-const PrirityItemOption = ({ priority }: PriorityItemOptionProperties) => {
+export const PrirityItemOption = ({ priority, ...rest }: PriorityItemOptionProperties) => {
   const intl = useIntl()
   const [veryHigh, high, medium, low] = useToken('colors', [
     'red.600',
@@ -97,7 +97,7 @@ const PrirityItemOption = ({ priority }: PriorityItemOptionProperties) => {
   }
 
   return (
-    <Flex alignItems="center" gap={2}>
+    <Flex alignItems="center" gap={2} {...rest}>
       <TaskPriorityIcon priority={priority} />
       <StyledText color={taskPriorityColors[priority]}>
         {intl.formatMessage(messages.priotiryLabelMessage, { priority: String(priority) })}

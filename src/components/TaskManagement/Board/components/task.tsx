@@ -1,19 +1,21 @@
 import { Box, HStack, ScaleFade, VStack } from '@chakra-ui/react'
 import _ from 'lodash'
 import React, { memo } from 'react'
+import { useSetRecoilState } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { KanbanTaskCard } from 'src/components/Base/KanbanTaskCard/wrapper'
 import { Task as TaskModel } from 'src/services/task-management/task-management.service'
+import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
 import useTaskDragAndDrop from '../hooks/use-task-drag-and-drop'
 
 type TaskProperties = {
-  index: number
-  task: TaskModel
-  onUpdate: (id: TaskModel['id'], updatedTask: TaskModel) => void
-  onDelete: (id: TaskModel['id']) => void
-  onDropHover: (index: number, index_: number) => void
+  readonly index: number
+  readonly task: TaskModel
+  readonly onUpdate: (id: TaskModel['id'], updatedTask: TaskModel) => void
+  readonly onDelete: (id: TaskModel['id']) => void
+  readonly onDropHover: (index: number, index_: number) => void
 }
 
 const Task = ({
@@ -24,7 +26,7 @@ const Task = ({
   onDelete: handleDelete,
 }: TaskProperties) => {
   const { ref } = useTaskDragAndDrop<HTMLDivElement>({ task, index }, handleDropHover)
-  // Const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
+  const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
@@ -46,6 +48,7 @@ const Task = ({
         cursor="grab"
         fontWeight="bold"
         userSelect="none"
+        onClick={() => setTaskDrawer(task)}
       >
         <KanbanTaskCard.Root display="flex" h={114} taskPriority={task.priority as TaskPriority}>
           <VStack w="100%" justifyContent="space-between">

@@ -7,9 +7,10 @@ import { GraphQLEffect } from 'src/components/types'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 
 export interface KeyResultSectionOwnerProperties {
-  keyResultID?: KeyResult['id']
-  isEditing?: boolean
-  isIndividualKeyResult?: boolean
+  readonly keyResultID?: KeyResult['id']
+  readonly isEditing?: boolean
+  readonly isIndividualKeyResult?: boolean
+  readonly ownerId?: string
 }
 
 const ownerSelector = buildPartialSelector<KeyResult['owner']>('owner')
@@ -20,6 +21,7 @@ const KeyResultSectionOwner = ({
   keyResultID,
   isEditing,
   isIndividualKeyResult,
+  ownerId,
 }: KeyResultSectionOwnerProperties) => {
   const owner = useRecoilValue(ownerSelector(keyResultID))
   const policy = useRecoilValue(policySelector(keyResultID))
@@ -32,8 +34,8 @@ const KeyResultSectionOwner = ({
   return (
     <NamedAvatar
       subtitleType="role"
-      userID={owner?.id}
-      isLoading={!isOwnerLoaded}
+      userID={ownerId ? ownerId : owner?.id}
+      isLoading={ownerId ? false : !isOwnerLoaded}
       isEditting={isEditing}
       canEdit={allowUpdate}
       canHover={allowUpdate}
