@@ -37,7 +37,7 @@ const KeyResultSectionOwner = ({
       userID={ownerId ? ownerId : owner?.id}
       isLoading={ownerId ? false : !isOwnerLoaded}
       isEditting={isEditing}
-      canEdit={allowUpdate}
+      canEdit={ownerId ? true : allowUpdate}
       canHover={allowUpdate}
     />
   )

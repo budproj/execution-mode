@@ -2,6 +2,7 @@ import { Badge, Box, Circle, Heading, HStack, Stack, Text } from '@chakra-ui/rea
 import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useResetRecoilState } from 'recoil'
 
 import PlusIcon from 'src/components/Icon/Plus'
 import { Team } from 'src/components/Team/types'
@@ -9,6 +10,7 @@ import {
   Task as TaskModel,
   TASK_STATUS as ColumnType,
 } from 'src/services/task-management/task-management.service'
+import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
 import useColumnDrop from '../hooks/use-column-drop'
 import useColumnTasks from '../hooks/use-column-tasks'
@@ -63,14 +65,16 @@ const headerColumnMessage = new Map([
 ])
 
 type ColumnProperties = {
-  column: ColumnType
-  teamId: Team['id']
-  tasks: TaskModel[]
+  readonly column: ColumnType
+  readonly teamId: Team['id']
+  readonly tasks: TaskModel[]
 }
 
 const Column = ({ column, teamId, tasks }: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
+
+  const resetTaskDrawer = useResetRecoilState(taskDrawerAtom)
 
   const { addEmptyTask, deleteTask, dropTaskFrom, swapTasks, updateTask } = useColumnTasks(
     column,
@@ -89,6 +93,11 @@ const Column = ({ column, teamId, tasks }: ColumnProperties) => {
       onDelete={deleteTask}
     />
   ))
+
+  const handleAddNewTaskClickButton = () => {
+    addEmptyTask()
+    resetTaskDrawer()
+  }
 
   return (
     <Box>
@@ -112,7 +121,7 @@ const Column = ({ column, teamId, tasks }: ColumnProperties) => {
           cursor="pointer"
           border="1.5px solid"
           borderColor="brand.500"
-          onClick={addEmptyTask}
+          onClick={handleAddNewTaskClickButton}
         >
           <Box>
             <PlusIcon desc="1231" w="0.6em" fill="brand.500" stroke="brand.500" />

@@ -4,7 +4,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
-import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
+import { isEditingTaskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/insert/is-editing-task-drawer'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 
 import { TaskInsertOrUpdateDrawerHeader } from './header'
@@ -15,7 +15,7 @@ const InsertOrUpdateTaskForm = dynamic(async () => import('./Form/wrapper'))
 export const TaskInsertDrawer = () => {
   // Const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
   const { column, boardID } = useRecoilValue(taskInsertDrawerTeamID)
-  const editingModeKeyResultID = useRecoilValue(isEditingKeyResultIDAtom)
+  const isEditingTaskDrawerId = useRecoilValue(isEditingTaskDrawerIdAtom)
 
   const resetTaskBoardID = useResetRecoilState(taskInsertDrawerTeamID)
   const intl = useIntl()
@@ -31,7 +31,7 @@ export const TaskInsertDrawer = () => {
     handleResetDrawerState()
     toast({
       title: intl.formatMessage(messages.successToastMessage, {
-        isEditing: Boolean(editingModeKeyResultID),
+        isEditing: Boolean(isEditingTaskDrawerId),
       }),
       status: 'success',
     })
@@ -51,7 +51,7 @@ export const TaskInsertDrawer = () => {
   //   })
   // }
 
-  const isEditing = Boolean(editingModeKeyResultID)
+  const isEditing = Boolean(isEditingTaskDrawerId)
 
   return (
     <Drawer isOpen={isOpen} size="xl" placement="right" onClose={handleResetDrawerState}>
@@ -65,6 +65,7 @@ export const TaskInsertDrawer = () => {
                 isLoading={false}
                 column={column}
                 boardID={boardID}
+                isEditing={isEditing}
                 onSuccess={handleSuccess}
               />
             )}

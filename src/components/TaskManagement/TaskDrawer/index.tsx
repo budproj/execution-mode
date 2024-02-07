@@ -10,14 +10,21 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue, useResetRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
+import { v4 as uuidv4 } from 'uuid'
 
+import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Team } from 'src/components/Team/types'
+import { TASK_STATUS } from 'src/services/task-management/task-management.service'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { isEditingTaskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/insert/is-editing-task-drawer'
+import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
+import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
 import { teamAtomFamily } from 'src/state/recoil/team'
+import { userAtomFamily } from 'src/state/recoil/user'
 
 import { PrirityItemOption } from '../PrioritySelectMenu/wrapper'
 
@@ -62,7 +69,12 @@ interface TaskDrawerProperties {
 export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const intl = useIntl()
   const taskDrawer = useRecoilValue(taskDrawerAtom)
-  const resetTaskDrawerId = useResetRecoilState(taskDrawerAtom)
+  const taskDrawerId = useRecoilValue(taskDrawerIdAtom)
+  const resetTaskDrawerId = useResetRecoilState(taskDrawerIdAtom)
+  const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
+  const isEditingTaskDrawerId = useSetRecoilState(isEditingTaskDrawerIdAtom)
+
+  const user = useRecoilValue(userAtomFamily(taskDrawer?.owner))
 
   const team = useRecoilValue(teamAtomFamily(teamId))
   const [teamMembers, setTeamMemberEdges] = useConnectionEdges(team?.users?.edges)
@@ -77,7 +89,14 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
     taskDrawer?.supportTeamMembers.includes(member.id),
   )
 
-  const isOpen = Boolean(taskDrawer)
+  const isOpen = Boolean(taskDrawerId)
+
+  const handleClickEditButton = () => {
+    resetTaskDrawerId()
+    const boardId = uuidv4()
+    setTaskBoardID({ boardID: boardId, column: TASK_STATUS.PENDING })
+    isEditingTaskDrawerId(taskDrawer?.id)
+  }
 
   return (
     <Drawer
@@ -92,7 +111,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
       <DrawerContent bg="new-gray.100" overflowY="auto" flexGrow={1}>
         <Flex flexDirection="column">
           <Flex paddingX="24px" bg="white">
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" width="100%">
               <Flex marginTop="15px">
                 <Flex
                   bg="yellow.600"
@@ -107,7 +126,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                   <Text color="white">{taskDrawer?.status}</Text>
                 </Flex>
 
-                <Button bg="new-gray.300" marginLeft="auto">
+                <Button bg="new-gray.300" marginLeft="auto" onClick={handleClickEditButton}>
                   Editar
                 </Button>
               </Flex>
@@ -115,7 +134,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                 {taskDrawer?.title}
               </Text>
 
-              <PrirityItemOption marginTop="10px" priority={taskDrawer?.priority} />
+              <PrirityItemOption marginTop="10px" priority={taskDrawer?.priority as TaskPriority} />
 
               <Flex alignItems="center" gap="10px" marginY="25px">
                 <Flex
@@ -171,7 +190,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
               />
             </Flex>
           </Flex>
-          <TaskDrawerTimeline />
+          <TaskDrawerTimeline owner={user} />
         </Flex>
       </DrawerContent>
     </Drawer>

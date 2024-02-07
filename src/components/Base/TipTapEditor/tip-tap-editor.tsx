@@ -28,7 +28,7 @@ const CustomEditor = styled(EditorContent)`
   /* Basic editor styles */
   .ProseMirror {
     outline: none;
-    min-height: 200px;
+    // min-height: 200px;
     padding: 20px 20px;
     > * + * {
       margin-top: ;

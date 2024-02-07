@@ -2,10 +2,11 @@ import { FormControl, Stack, VStack } from '@chakra-ui/react'
 import { uuid4 } from '@sentry/utils'
 import { Formik, Form } from 'formik'
 import React, { useState } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
-import { delay } from 'src/helpers/delay'
 import { Task, TASK_STATUS } from 'src/services/task-management/task-management.service'
+import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
 
@@ -38,13 +39,14 @@ const formInitialValues: FormValues = {
 }
 
 interface InsertKeyResultFormProperties {
-  onClose?: () => void
-  onSuccess?: () => void
-  onError?: () => void
-  isLoading: boolean
-  onValidationError?: () => void
-  column: TASK_STATUS
-  boardID: string
+  readonly onClose?: () => void
+  readonly onSuccess?: () => void
+  readonly onError?: () => void
+  readonly isLoading: boolean
+  readonly onValidationError?: () => void
+  readonly column: TASK_STATUS
+  readonly boardID: string
+  readonly isEditing?: boolean
 }
 
 const InsertOrUpdateTaskForm = ({
@@ -55,11 +57,14 @@ const InsertOrUpdateTaskForm = ({
   column,
   boardID,
   isLoading,
+  isEditing,
 }: InsertKeyResultFormProperties) => {
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
-  const { addTask } = useColumnTasks(column, boardID)
+  const { addTask, updateTask } = useColumnTasks(column, boardID)
+  const taskDrawer = useRecoilValue(taskDrawerAtom)
 
   console.log(onError)
+  console.log(isEditing)
 
   // Const router = useRouter()
 
@@ -67,7 +72,17 @@ const InsertOrUpdateTaskForm = ({
   // const userIdQuery = router.query?.['user-id']
   // const userId = Array.isArray(userIdQuery) ? userIdQuery[0] : userIdQuery
 
-  const [initialValues, _] = useState<FormValues>(formInitialValues)
+  const taskDrawerFormatted = {
+    ...taskDrawer,
+    dueDate: new Date(taskDrawer?.dueDate),
+    initialDate: new Date(taskDrawer?.initialDate),
+  }
+
+  const [initialValues, _] = useState<FormValues>(
+    taskDrawer
+      ? (taskDrawerFormatted as unknown as FormValues)
+      : formInitialValues || formInitialValues,
+  )
 
   const validateFields = (values: FormValues): boolean => {
     const invalidFields: Array<keyof FormValues> = []
@@ -79,15 +94,11 @@ const InsertOrUpdateTaskForm = ({
   }
 
   const handleSubmit = async (values: FormValues): Promise<void> => {
-    await delay(500)
+    // Await delay(500)
 
     const allValues = { ...values }
 
     const areAllFieldsValid = validateFields(allValues)
-
-    const valorezinhos = allValues
-
-    console.log({ valorezinhos })
 
     if (!areAllFieldsValid) {
       if (onValidationError) onValidationError()
@@ -102,6 +113,11 @@ const InsertOrUpdateTaskForm = ({
       owner: allValues.ownerID,
       attachments: [],
       supportTeamMembers: [],
+    }
+
+    if (isEditing) {
+      updateTask(taskDrawer.id, values)
+      if (onSuccess) onSuccess()
     }
 
     addTask(variables)

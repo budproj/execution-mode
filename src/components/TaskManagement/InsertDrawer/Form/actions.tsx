@@ -2,26 +2,39 @@ import { Button, Skeleton, Stack } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
+
+import { isEditingTaskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/insert/is-editing-task-drawer'
+import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
+import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
+import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
 
 import messages from './messages'
 
 interface FormActionsInterface {
-  onClose?: () => void
-  isLoading?: boolean
-  editingTaskId?: string
+  readonly onClose?: () => void
+  readonly isLoading?: boolean
+  readonly editingTaskId?: string
 }
 
 export const FormActions = ({ onClose, isLoading, editingTaskId }: FormActionsInterface) => {
   const intl = useIntl()
 
-  console.log({ editingTaskId })
-
   const { resetForm, submitForm, isSubmitting } = useFormikContext()
+  const resetEditing = useResetRecoilState(isEditingTaskDrawerIdAtom)
+  const resetTaskInsertDrawerTeamId = useResetRecoilState(taskInsertDrawerTeamID)
+  const taskDrawer = useRecoilValue(taskDrawerAtom)
+  const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
 
   const handleCancel = () => {
     console.log('CANCELOU')
-
     resetForm()
+    resetEditing()
+    resetTaskInsertDrawerTeamId()
+    if (taskDrawer) {
+      setTaskDrawerId(taskDrawer.id)
+    }
+
     if (onClose) onClose()
   }
 

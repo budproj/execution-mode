@@ -7,6 +7,7 @@ import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-car
 import { KanbanTaskCard } from 'src/components/Base/KanbanTaskCard/wrapper'
 import { Task as TaskModel } from 'src/services/task-management/task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
+import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
 
 import useTaskDragAndDrop from '../hooks/use-task-drag-and-drop'
 
@@ -27,6 +28,7 @@ const Task = ({
 }: TaskProperties) => {
   const { ref } = useTaskDragAndDrop<HTMLDivElement>({ task, index }, handleDropHover)
   const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
+  const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
@@ -48,7 +50,10 @@ const Task = ({
         cursor="grab"
         fontWeight="bold"
         userSelect="none"
-        onClick={() => setTaskDrawer(task)}
+        onClick={() => {
+          setTaskDrawer(task)
+          setTaskDrawerId(task.id)
+        }}
       >
         <KanbanTaskCard.Root display="flex" h={114} taskPriority={task.priority as TaskPriority}>
           <VStack w="100%" justifyContent="space-between">

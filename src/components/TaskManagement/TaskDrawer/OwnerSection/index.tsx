@@ -60,11 +60,9 @@ export const TaskDrawerSectionOwnerWrapper = ({
           </PopoverContent>
         </Popover>
       </Flex>
-      {supportTeam?.length ? (
-        <Flex gridGap={2} direction="column" flexGrow={1}>
-          <SupportTeamField isFromTask hasPermitionToUpdate supportTeamMembers={supportTeam} />
-        </Flex>
-      ) : undefined}
+      <Flex gridGap={2} direction="column" flexGrow={1}>
+        <SupportTeamField isFromTask hasPermitionToUpdate supportTeamMembers={supportTeam} />
+      </Flex>
     </Flex>
   )
 }
