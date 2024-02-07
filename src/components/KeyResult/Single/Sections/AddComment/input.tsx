@@ -18,7 +18,7 @@ import { KeyResultSectionAddCommentInitialValues } from './add-comment'
 import messages from './messages'
 
 export interface KeyResultSectionAddCommentInputProperties {
-  isLoading?: boolean
+  readonly isLoading?: boolean
 }
 
 export interface TextareaAutosizeContext {

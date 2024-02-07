@@ -9,8 +9,8 @@ import KeyResultDrawerFooter from './Footer'
 import useGetKeyResultWithId from './hooks/get-key-result-with-id'
 
 export interface KeyResultDrawerContentProperties {
-  keyResultID: KeyResult['id']
-  isKeyResultPage?: boolean
+  readonly keyResultID: KeyResult['id']
+  readonly isKeyResultPage?: boolean
 }
 
 export interface GetKeyResultWithIDQuery {

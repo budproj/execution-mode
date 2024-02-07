@@ -1,10 +1,16 @@
 import { Avatar, Flex, SkeletonCircle } from '@chakra-ui/react'
-import { Form, Formik } from 'formik'
-import React from 'react'
+import { Form, Formik, FormikHelpers } from 'formik'
+import React, { useEffect } from 'react'
 
 import KeyResultSectionAddCommentInput from 'src/components/KeyResult/Single/Sections/AddComment/input'
-import { KeyResultSectionTimelineCardComment } from 'src/components/KeyResult/Single/Sections/Timeline/Cards'
+import { useGetCommentsByEntity } from 'src/components/Routine/hooks/getCommentsByEntity'
+import { useCreateComment } from 'src/components/Routine/hooks/setComment'
 import { User } from 'src/components/User/types'
+import { Task } from 'src/services/task-management/task-management.service'
+
+import { TASK_DOMAIN } from '../../types'
+
+import { TaskComment } from './TaskCommnet'
 
 const initialValues = {
   text: '',
@@ -12,18 +18,54 @@ const initialValues = {
 
 interface TaskDrawerTimelineProperties {
   readonly owner?: Partial<User>
+  readonly task?: Partial<Task>
 }
 
-export const TaskDrawerTimeline = ({ owner }: TaskDrawerTimelineProperties) => {
-  const handleSubmit = async (values, actions) => {}
+export interface TaskCommentsInputInitialValues {
+  text: string
+}
+
+export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties) => {
+  const entity = `${TASK_DOMAIN.task}:${task?.id ?? ''}`
+
+  const handleSubmit = async (
+    values: TaskCommentsInputInitialValues,
+    actions: FormikHelpers<TaskCommentsInputInitialValues>,
+  ) => {
+    if (task) {
+      handleCreateComment({ entity, content: values.text })
+    }
+
+    actions.setSubmitting(false)
+    actions.resetForm()
+  }
+
+  const { getCommentsByEntity, comments } = useGetCommentsByEntity()
+  const { handleCreateComment } = useCreateComment()
+
+  useEffect(() => {
+    if (task) {
+      getCommentsByEntity({ entity })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [task, entity])
 
   return (
-    <Flex direction="column" gridGap={4} paddingX="28px" paddingTop="40px">
-      <KeyResultSectionTimelineCardComment />
-      <KeyResultSectionTimelineCardComment />
-      <KeyResultSectionTimelineCardComment />
-      <KeyResultSectionTimelineCardComment />
-      <Flex direction="column" marginBottom="10px">
+    <Flex direction="column" paddingTop="2rem" position="relative">
+      <Flex direction="column" marginX="28px" marginBottom="2rem" gridGap={4}>
+        {comments?.map((comment) => {
+          return <TaskComment key={comment.id} comment={comment} />
+        })}
+      </Flex>
+      <Flex
+        direction="column"
+        bg="white"
+        paddingY="1rem"
+        paddingX="1rem"
+        width="100%"
+        position="fixed"
+        bottom="0"
+      >
         <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
           {({ handleSubmit }) => (
             <Form onSubmit={handleSubmit}>

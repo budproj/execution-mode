@@ -108,7 +108,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
       }}
     >
       <DrawerOverlay />
-      <DrawerContent bg="new-gray.100" overflowY="auto" flexGrow={1}>
+      <DrawerContent bg="new-gray.100" overflowY="auto" flexGrow={1} overflow="auto">
         <Flex flexDirection="column">
           <Flex paddingX="24px" bg="white">
             <Flex flexDirection="column" width="100%">
@@ -190,7 +190,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
               />
             </Flex>
           </Flex>
-          <TaskDrawerTimeline owner={user} />
+          <TaskDrawerTimeline task={taskDrawer} owner={user} />
         </Flex>
       </DrawerContent>
     </Drawer>

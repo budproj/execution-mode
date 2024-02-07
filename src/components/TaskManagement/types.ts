@@ -4,3 +4,7 @@ export enum TASK_PRIORITY {
   HIGH = 3,
   VERY_HIGH = 4,
 }
+
+export enum TASK_DOMAIN {
+  task = 'task',
+}

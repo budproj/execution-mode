@@ -11,7 +11,7 @@ import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import FeedbackOptions from './FeedbackOptions'
 
 export interface KeyResultDrawerFooterProperties {
-  keyResultID?: KeyResult['id']
+  readonly keyResultID?: KeyResult['id']
 }
 
 const KeyResultDrawerFooter = ({ keyResultID }: KeyResultDrawerFooterProperties) => {
