@@ -35,7 +35,7 @@
     "waypoint:up": "waypoint up -var=\"GITHUB_TOKEN=$GITHUB_TOKEN\" -var=\"SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN\"",
     "postinstall": "sh bin/install.sh",
     "prepare": "husky install",
-    "fake:task-management": "npx json-server --watch lib/fake-api/db.task-management.json --routes  lib/fake-api/routes.json --port 3333"
+    "fake:task-management": "npx json-server --watch lib/fake-api/db.task-management.json --routes  lib/fake-api/routes.json --port 3001"
   },
   "author": "delucca <delucca@pm.me>",
   "license": "Apache-2.0",

@@ -1,10 +1,12 @@
 import { AxiosInstance } from 'axios'
 
+import { Except } from 'src/helpers/except'
+
 export enum TASK_STATUS {
-  PENDING = 'PENDING',
-  TO_DO = 'TO_DO',
-  DOING = 'DOING',
-  DONE = 'DONE',
+  pending = 'pending',
+  toDo = 'toDo',
+  doing = 'doing',
+  done = 'done',
 }
 
 enum BOARD_TYPE {
@@ -13,25 +15,36 @@ enum BOARD_TYPE {
 }
 
 export type Task = {
-  id: string
+  _id: string
   boardId: string
   status: TASK_STATUS
   title: string
   description: string
-  initialDate: Date
   dueDate: Date
   priority: number
   owner: string
+  initialDate: Date
   attachments: string[]
   supportTeamMembers: string[]
+  tags: string[]
+  createdAt: Date
+  updatedAt: Date
 }
 
+export type TaskInsert = Except<Task, '_id' | 'createdAt' | 'updatedAt'>
+
 export type Board = {
-  id: string
-  title: string
+  _id: string
+  title?: string
   type: BOARD_TYPE
   teamsIds?: string[]
   tasks: Task[]
+  order: {
+    pending: string[]
+    toDo: string[]
+    doing: string[]
+    done: string[]
+  }
   createdAt: Date
   updateadAt: Date
 }
@@ -44,8 +57,27 @@ export class TaskManagementService {
   constructor(private readonly client: AxiosInstance) {}
 
   async getTeamBoard({ teamId }: GetTeamBoardInput) {
-    const { data } = await this.client.get<GetTeamBoardOutput>(`board/${teamId}`)
+    const { data } = await this.client.get<GetTeamBoardOutput>(`boards`, {
+      params: {
+        teamId,
+      },
+    })
     return data
+  }
+
+  async addTask(data: TaskInsert) {
+    const { data: response } = await this.client.post<Task>(`tasks`, data)
+    return response
+  }
+
+  async updateTask(data: Partial<Task>) {
+    if (!data._id) {
+      throw new Error('A id is required to update task')
+    }
+
+    const { data: response } = await this.client.patch<Task>(`tasks/${data._id}`, data)
+
+    return response
   }
 }
 

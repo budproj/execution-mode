@@ -1,97 +1,23 @@
-import { useRecoilValue } from 'recoil'
-import { useLocalStorage } from 'usehooks-ts'
-import { v4 as uuidv4 } from 'uuid'
+import { Team } from 'src/components/Team/types'
+import { TASK_STATUS as ColumnType } from 'src/services/task-management/task-management.service'
 
-import {
-  TASK_STATUS as ColumnType,
-  Task,
-  TASK_STATUS,
-} from 'src/services/task-management/task-management.service'
-import meAtom from 'src/state/recoil/user/me'
+import { useTeamTasksBoardData } from '../../hooks/use-team-tasks-board-data'
 
-const useTaskCollection = () => {
-  const myId = useRecoilValue(meAtom)
+const useTaskCollection = (teamId: Team['id']) => {
+  const { data: boardData, isError } = useTeamTasksBoardData(teamId)
 
-  return useLocalStorage<{
-    [key in ColumnType]: Task[]
-  }>('teamTasks', {
-    PENDING: [
-      {
-        id: uuidv4(),
-        boardId: uuidv4(),
-        status: TASK_STATUS.PENDING,
-        title: 'Marcar reunião com fornecedores de camisetas',
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
-        dueDate: new Date('2023-05-12'),
-        priority: 1,
-        initialDate: new Date(),
-        owner: myId,
-        attachments: ['http://arquivo.pdf'],
-        supportTeamMembers: [
-          '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
-          'f120ec45-150d-4e24-b99d-34df20a80c64',
-        ],
-      },
-    ],
-    TO_DO: [
-      {
-        id: uuidv4(),
-        boardId: uuidv4(),
-        status: TASK_STATUS.TO_DO,
-        title: 'Entrar em contato com empresa XYZ de eventos',
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
-        dueDate: new Date('2023-05-12'),
-        priority: 2,
-        initialDate: new Date(),
-        owner: myId,
-        attachments: ['http://arquivo.pdf'],
-        supportTeamMembers: [
-          '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
-          'f120ec45-150d-4e24-b99d-34df20a80c64',
-        ],
-      },
-    ],
-    DOING: [
-      {
-        id: uuidv4(),
-        boardId: uuidv4(),
-        status: TASK_STATUS.DOING,
-        title: 'Enviar mailing de cadastramento de conferencias e eventos  ',
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
-        dueDate: new Date('2023-05-12'),
-        priority: 3,
-        initialDate: new Date(),
-        owner: myId,
-        attachments: ['http://arquivo.pdf'],
-        supportTeamMembers: [
-          '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
-          'f120ec45-150d-4e24-b99d-34df20a80c64',
-        ],
-      },
-    ],
-    DONE: [
-      {
-        id: uuidv4(),
-        boardId: uuidv4(),
-        status: TASK_STATUS.DONE,
-        title: 'Cotação de participação da DesignConf 2023',
-        description:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
-        dueDate: new Date('2023-05-12'),
-        priority: 4,
-        initialDate: new Date(),
-        owner: myId,
-        attachments: ['http://arquivo.pdf'],
-        supportTeamMembers: [
-          '9ce87eda-64d1-4bfb-80a5-aa7811a04ea9',
-          'f120ec45-150d-4e24-b99d-34df20a80c64',
-        ],
-      },
-    ],
-  })
+  if (isError) {
+    console.error('Error fetching board data', isError)
+  }
+
+  const tasks = {
+    pending: boardData?.tasks.filter((task) => task.status === ColumnType.pending) ?? [],
+    toDo: boardData?.tasks.filter((task) => task.status === ColumnType.toDo) ?? [],
+    doing: boardData?.tasks.filter((task) => task.status === ColumnType.doing) ?? [],
+    done: boardData?.tasks.filter((task) => task.status === ColumnType.done) ?? [],
+  }
+
+  return tasks
 }
 
 export default useTaskCollection

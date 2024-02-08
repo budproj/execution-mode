@@ -5,6 +5,6 @@ import {
 
 export interface DragItem {
   index: number
-  id: Task['id']
+  _id: Task['_id']
   from: ColumnType
 }

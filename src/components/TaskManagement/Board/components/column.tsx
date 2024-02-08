@@ -1,17 +1,17 @@
-import { Badge, Box, Circle, Heading, HStack, Stack, Text } from '@chakra-ui/react'
+import { Badge, Box, Button, Circle, Heading, HStack, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useResetRecoilState } from 'recoil'
 
 import PlusIcon from 'src/components/Icon/Plus'
-import { Team } from 'src/components/Team/types'
 import {
   Task as TaskModel,
   TASK_STATUS as ColumnType,
 } from 'src/services/task-management/task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
+import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 import useColumnDrop from '../hooks/use-column-drop'
 import useColumnTasks from '../hooks/use-column-tasks'
 import messages from '../messages'
@@ -51,41 +51,40 @@ const StyledCircleButton = styled(Circle)`
 `
 
 const ColumnColorScheme: Record<ColumnType, string> = {
-  PENDING: 'new-gray.600',
-  TO_DO: 'yellow.600',
-  DOING: 'green.500',
-  DONE: 'brand.500',
+  pending: 'new-gray.600',
+  toDo: 'yellow.600',
+  doing: 'green.500',
+  done: 'brand.500',
 }
 
 const headerColumnMessage = new Map([
-  [ColumnType.PENDING, messages.pendingColumnHeading],
-  [ColumnType.TO_DO, messages.todoColumnHeading],
-  [ColumnType.DOING, messages.doingColumnHeading],
-  [ColumnType.DONE, messages.doneColumnHeading],
+  [ColumnType.pending, messages.pendingColumnHeading],
+  [ColumnType.toDo, messages.todoColumnHeading],
+  [ColumnType.doing, messages.doingColumnHeading],
+  [ColumnType.done, messages.doneColumnHeading],
 ])
 
 type ColumnProperties = {
-  readonly column: ColumnType
-  readonly teamId: Team['id']
-  readonly tasks: TaskModel[]
+  column: ColumnType
+  boardID: string
+  tasks: TaskModel[]
+  teamID: string
 }
 
-const Column = ({ column, teamId, tasks }: ColumnProperties) => {
+const Column = ({ column, boardID, tasks, teamID }: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
   const resetTaskDrawer = useResetRecoilState(taskDrawerAtom)
 
-  const { addEmptyTask, deleteTask, dropTaskFrom, swapTasks, updateTask } = useColumnTasks(
-    column,
-    teamId,
-  )
+  const { addEmptyTask, openInsertDrawerTask, deleteTask, dropTaskFrom, swapTasks, updateTask } =
+    useColumnTasks(column, boardID, BOARD_DOMAIN.TEAM, teamID)
 
   const { dropReference, isOver } = useColumnDrop(column, dropTaskFrom)
 
   const ColumnTasks = tasks.map((task, index) => (
     <Task
-      key={task.id}
+      key={task._id}
       task={task}
       index={index}
       onDropHover={swapTasks}
@@ -95,7 +94,7 @@ const Column = ({ column, teamId, tasks }: ColumnProperties) => {
   ))
 
   const handleAddNewTaskClickButton = () => {
-    addEmptyTask()
+    openInsertDrawerTask()
     resetTaskDrawer()
   }
 
@@ -144,6 +143,17 @@ const Column = ({ column, teamId, tasks }: ColumnProperties) => {
         bgColor={isOver ? 'brand.200' : 'none'}
       >
         {ColumnTasks}
+        {ColumnTasks.length > 0 && (
+          <Button
+            fontSize={14}
+            color="brand.500"
+            fontWeight="bold"
+            _hover={{ color: 'brand.300' }}
+            onClick={addEmptyTask}
+          >
+            + Nova Tarefa
+          </Button>
+        )}
       </Stack>
     </Box>
   )

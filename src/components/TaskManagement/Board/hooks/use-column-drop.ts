@@ -10,7 +10,7 @@ import { DragItem } from '../utils/models'
 
 const useColumnDrop = (
   column: ColumnType,
-  handleDrop: (fromColumn: ColumnType, taskId: TaskModel['id']) => void,
+  handleDrop: (fromColumn: ColumnType, taskId: TaskModel['_id']) => void,
 ) => {
   const [{ isOver }, dropReference] = useDrop<DragItem, void, { isOver: boolean }>({
     accept: ItemType.TASK,
@@ -19,7 +19,8 @@ const useColumnDrop = (
         return
       }
 
-      handleDrop(dragItem.from, dragItem.id)
+      console.log({ dragItem, column })
+      handleDrop(dragItem.from, dragItem._id)
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),

@@ -12,11 +12,11 @@ import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-
 import useTaskDragAndDrop from '../hooks/use-task-drag-and-drop'
 
 type TaskProperties = {
-  readonly index: number
-  readonly task: TaskModel
-  readonly onUpdate: (id: TaskModel['id'], updatedTask: TaskModel) => void
-  readonly onDelete: (id: TaskModel['id']) => void
-  readonly onDropHover: (index: number, index_: number) => void
+  index: number
+  task: TaskModel
+  onUpdate: (id: TaskModel['_id'], updatedTask: TaskModel) => void
+  onDelete: (id: TaskModel['_id']) => void
+  onDropHover: (index: number, index_: number) => void
 }
 
 const Task = ({
@@ -32,11 +32,11 @@ const Task = ({
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
-    handleUpdate(task.id, { ...task, title: newTitle })
+    handleUpdate(task._id, { ...task, title: newTitle })
   }
 
   const handleTaskDelete = () => {
-    handleDelete(task.id)
+    handleDelete(task._id)
   }
 
   return (
@@ -52,7 +52,7 @@ const Task = ({
         userSelect="none"
         onClick={() => {
           setTaskDrawer(task)
-          setTaskDrawerId(task.id)
+          setTaskDrawerId(task._id)
         }}
       >
         <KanbanTaskCard.Root display="flex" h={114} taskPriority={task.priority as TaskPriority}>
@@ -65,6 +65,7 @@ const Task = ({
               dueDate={task.dueDate}
               priority={task.priority as TaskPriority}
               ownerId={task.owner}
+              status={task.status}
             />
           </VStack>
         </KanbanTaskCard.Root>

@@ -1,14 +1,14 @@
 import { FormControl, Stack, VStack } from '@chakra-ui/react'
-import { uuid4 } from '@sentry/utils'
 import { Formik, Form } from 'formik'
 import React, { useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
-import { Task, TASK_STATUS } from 'src/services/task-management/task-management.service'
+import { TASK_STATUS } from 'src/services/task-management/task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
+import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 
 import { FormActions } from './actions'
 import { DescriptionInput } from './description'
@@ -39,14 +39,16 @@ const formInitialValues: FormValues = {
 }
 
 interface InsertKeyResultFormProperties {
-  readonly onClose?: () => void
-  readonly onSuccess?: () => void
-  readonly onError?: () => void
-  readonly isLoading: boolean
-  readonly onValidationError?: () => void
-  readonly column: TASK_STATUS
-  readonly boardID: string
-  readonly isEditing?: boolean
+  onClose?: () => void
+  onSuccess?: () => void
+  onError?: () => void
+  isLoading: boolean
+  isEditing?: boolean
+  onValidationError?: () => void
+  column: TASK_STATUS
+  boardID: string
+  domain: BOARD_DOMAIN
+  identifier: string
 }
 
 const InsertOrUpdateTaskForm = ({
@@ -58,11 +60,12 @@ const InsertOrUpdateTaskForm = ({
   boardID,
   isLoading,
   isEditing,
+  domain,
+  identifier,
 }: InsertKeyResultFormProperties) => {
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
-  const { addTask, updateTask } = useColumnTasks(column, boardID)
+  const { addTask, updateTask } = useColumnTasks(column, boardID, domain, identifier)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
-
   console.log(onError)
   console.log(isEditing)
 
@@ -105,18 +108,18 @@ const InsertOrUpdateTaskForm = ({
       return
     }
 
-    const variables: Task = {
+    const variables = {
       ...allValues,
-      id: uuid4(),
       boardId: boardID,
       status: column,
       owner: allValues.ownerID,
       attachments: [],
       supportTeamMembers: [],
+      tags: [],
     }
 
     if (isEditing) {
-      updateTask(taskDrawer.id, values)
+      updateTask(taskDrawer._id, values)
       if (onSuccess) onSuccess()
     }
 

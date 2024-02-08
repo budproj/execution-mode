@@ -12,9 +12,10 @@ import {
 } from 'src/services/task-management/task-management.service'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
+import { useTeamTasksBoardData } from '../hooks/use-team-tasks-board-data'
+
 import Column from './components/column'
 import useLoadUsers from './hooks/use-load-users'
-import useTaskCollection from './hooks/use-task-collection'
 
 type BoardWrapperProperties = {
   teamId: Team['id']
@@ -22,10 +23,21 @@ type BoardWrapperProperties = {
 }
 
 const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
-  const [tasks, _] = useTaskCollection()
+  const { data: boardData, isError } = useTeamTasksBoardData(teamId)
+
   const [selectedUser, setSelectedUser] = useState<string>()
   const ownersAndSupportTeamMembers = useLoadUsers(teamId)
   const team = useRecoilValue(teamAtomFamily(teamId))
+
+  const tasks = useMemo(
+    () => ({
+      pending: boardData?.tasks.filter((task) => task.status === ColumnType.pending) ?? [],
+      toDo: boardData?.tasks.filter((task) => task.status === ColumnType.toDo) ?? [],
+      doing: boardData?.tasks.filter((task) => task.status === ColumnType.doing) ?? [],
+      done: boardData?.tasks.filter((task) => task.status === ColumnType.done) ?? [],
+    }),
+    [boardData],
+  )
 
   const handleSelectUser = useCallback((userId: string) => {
     setSelectedUser((previousSelectedUser) => {
@@ -50,14 +62,19 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
           return { ...accumulator, [columnType]: columTasksByContent }
         },
         {
-          [ColumnType.PENDING]: [],
-          [ColumnType.TO_DO]: [],
-          [ColumnType.DOING]: [],
-          [ColumnType.DONE]: [],
+          [ColumnType.pending]: [],
+          [ColumnType.toDo]: [],
+          [ColumnType.doing]: [],
+          [ColumnType.done]: [],
         },
       ),
     [searchTaskInput, selectedUser, tasks],
   )
+
+  if (isError || !boardData) {
+    console.error('Error fetching board data', isError)
+    return <div>Error fetching board data</div>
+  }
 
   return (
     <Stack w="100%" spacing={8}>
@@ -72,24 +89,28 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
         <Container maxWidth="100%" paddingInlineEnd={0} padding={0}>
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 16, md: 6 }}>
             <Column
-              column={ColumnType.PENDING}
-              teamId={teamId}
-              tasks={filteredTasks[ColumnType.PENDING]}
+              column={ColumnType.pending}
+              boardID={boardData._id}
+              tasks={filteredTasks[ColumnType.pending]}
+              teamID={teamId}
             />
             <Column
-              column={ColumnType.TO_DO}
-              teamId={teamId}
-              tasks={filteredTasks[ColumnType.TO_DO]}
+              column={ColumnType.toDo}
+              boardID={boardData._id}
+              tasks={filteredTasks[ColumnType.toDo]}
+              teamID={teamId}
             />
             <Column
-              column={ColumnType.DOING}
-              teamId={teamId}
-              tasks={filteredTasks[ColumnType.DOING]}
+              column={ColumnType.doing}
+              boardID={boardData._id}
+              tasks={filteredTasks[ColumnType.doing]}
+              teamID={teamId}
             />
             <Column
-              column={ColumnType.DONE}
-              teamId={teamId}
-              tasks={filteredTasks[ColumnType.DONE]}
+              column={ColumnType.done}
+              boardID={boardData._id}
+              tasks={filteredTasks[ColumnType.done]}
+              teamID={teamId}
             />
           </SimpleGrid>
         </Container>
