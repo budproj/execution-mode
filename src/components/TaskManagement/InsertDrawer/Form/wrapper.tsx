@@ -1,13 +1,13 @@
 import { FormControl, Stack, VStack } from '@chakra-ui/react'
-import { uuid4 } from '@sentry/utils'
 import { Formik, Form } from 'formik'
 import React, { useState } from 'react'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { delay } from 'src/helpers/delay'
-import { Task, TASK_STATUS } from 'src/services/task-management/task-management.service'
+import { TASK_STATUS } from 'src/services/task-management/task-management.service'
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
+import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 
 import { FormActions } from './actions'
 import { DescriptionInput } from './description'
@@ -45,6 +45,8 @@ interface InsertKeyResultFormProperties {
   onValidationError?: () => void
   column: TASK_STATUS
   boardID: string
+  domain: BOARD_DOMAIN
+  identifier: string
 }
 
 const InsertOrUpdateTaskForm = ({
@@ -55,10 +57,11 @@ const InsertOrUpdateTaskForm = ({
   column,
   boardID,
   isLoading,
+  domain,
+  identifier,
 }: InsertKeyResultFormProperties) => {
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
-  const { addTask } = useColumnTasks(column, boardID)
-
+  const { addTask } = useColumnTasks(column, boardID, domain, identifier)
   console.log(onError)
 
   // Const router = useRouter()
@@ -87,21 +90,19 @@ const InsertOrUpdateTaskForm = ({
 
     const valorezinhos = allValues
 
-    console.log({ valorezinhos })
-
     if (!areAllFieldsValid) {
       if (onValidationError) onValidationError()
       return
     }
 
-    const variables: Task = {
+    const variables = {
       ...allValues,
-      id: uuid4(),
       boardId: boardID,
       status: column,
       owner: allValues.ownerID,
       attachments: [],
       supportTeamMembers: [],
+      tags: [],
     }
 
     addTask(variables)

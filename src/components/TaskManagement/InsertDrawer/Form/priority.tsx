@@ -16,7 +16,6 @@ export const PriorityInput = ({ isLoading }: PriorityInputProperties) => {
   const { values, setFieldValue } = useFormikContext<FormValues>()
 
   const handleChange = (newPriority: 1 | 2 | 3 | 4): void => {
-    console.log({ newPriority })
     setFieldValue('priority', newPriority)
   }
 

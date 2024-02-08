@@ -1,5 +1,7 @@
 import { AxiosInstance } from 'axios'
 
+import { Except } from 'src/helpers/except'
+
 export enum TASK_STATUS {
   pending = 'pending',
   toDo = 'toDo',
@@ -29,8 +31,10 @@ export type Task = {
   updatedAt: Date
 }
 
+export type TaskInsert = Except<Task, 'id' | 'createdAt' | 'updatedAt'>
+
 export type Board = {
-  id: string
+  _id: string
   title?: string
   type: BOARD_TYPE
   teamsIds?: string[]
@@ -59,6 +63,11 @@ export class TaskManagementService {
       },
     })
     return data
+  }
+
+  async addTask(data: TaskInsert) {
+    const { data: response } = await this.client.post<Task>(`tasks`, data)
+    return response
   }
 }
 
