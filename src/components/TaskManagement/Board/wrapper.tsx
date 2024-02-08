@@ -12,11 +12,10 @@ import {
 } from 'src/services/task-management/task-management.service'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
-import { useBoardData } from '../hooks/use-board-data'
+import { useTeamTasksBoardData } from '../hooks/use-team-tasks-board-data'
 
 import Column from './components/column'
 import useLoadUsers from './hooks/use-load-users'
-import useTaskCollection from './hooks/use-task-collection'
 
 type BoardWrapperProperties = {
   teamId: Team['id']
@@ -24,13 +23,22 @@ type BoardWrapperProperties = {
 }
 
 const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
-  const [tasks, _] = useTaskCollection()
-  const { data: issoRetornouDoTMS } = useBoardData(teamId)
+  const { data: boardData, isError } = useTeamTasksBoardData(teamId)
+
   const [selectedUser, setSelectedUser] = useState<string>()
   const ownersAndSupportTeamMembers = useLoadUsers(teamId)
   const team = useRecoilValue(teamAtomFamily(teamId))
 
-  console.log({ issoRetornouDoTMS })
+  const tasks = useMemo(
+    () => ({
+      pending: boardData?.tasks.filter((task) => task.status === ColumnType.pending) ?? [],
+      toDo: boardData?.tasks.filter((task) => task.status === ColumnType.toDo) ?? [],
+      doing: boardData?.tasks.filter((task) => task.status === ColumnType.doing) ?? [],
+      done: boardData?.tasks.filter((task) => task.status === ColumnType.done) ?? [],
+    }),
+    [boardData],
+  )
+
   const handleSelectUser = useCallback((userId: string) => {
     setSelectedUser((previousSelectedUser) => {
       if (previousSelectedUser === userId) return
@@ -63,6 +71,11 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
     [searchTaskInput, selectedUser, tasks],
   )
 
+  if (isError || !boardData) {
+    console.error('Error fetching board data', isError)
+    return <div>Error fetching board data</div>
+  }
+
   return (
     <Stack w="100%" spacing={8}>
       <CustomAvatarGroup
@@ -77,23 +90,27 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 16, md: 6 }}>
             <Column
               column={ColumnType.pending}
-              teamId={teamId}
+              boardID={boardData._id}
               tasks={filteredTasks[ColumnType.pending]}
+              teamID={teamId}
             />
             <Column
               column={ColumnType.toDo}
-              teamId={teamId}
+              boardID={boardData._id}
               tasks={filteredTasks[ColumnType.toDo]}
+              teamID={teamId}
             />
             <Column
               column={ColumnType.doing}
-              teamId={teamId}
+              boardID={boardData._id}
               tasks={filteredTasks[ColumnType.doing]}
+              teamID={teamId}
             />
             <Column
               column={ColumnType.done}
-              teamId={teamId}
+              boardID={boardData._id}
               tasks={filteredTasks[ColumnType.done]}
+              teamID={teamId}
             />
           </SimpleGrid>
         </Container>

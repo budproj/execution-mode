@@ -4,12 +4,12 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import PlusIcon from 'src/components/Icon/Plus'
-import { Team } from 'src/components/Team/types'
 import {
   Task as TaskModel,
   TASK_STATUS as ColumnType,
 } from 'src/services/task-management/task-management.service'
 
+import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 import useColumnDrop from '../hooks/use-column-drop'
 import useColumnTasks from '../hooks/use-column-tasks'
 import messages from '../messages'
@@ -64,17 +64,20 @@ const headerColumnMessage = new Map([
 
 type ColumnProperties = {
   column: ColumnType
-  teamId: Team['id']
+  boardID: string
   tasks: TaskModel[]
+  teamID: string
 }
 
-const Column = ({ column, teamId, tasks }: ColumnProperties) => {
+const Column = ({ column, boardID, tasks, teamID }: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
   const { addEmptyTask, deleteTask, dropTaskFrom, swapTasks, updateTask } = useColumnTasks(
     column,
-    teamId,
+    boardID,
+    BOARD_DOMAIN.TEAM,
+    teamID,
   )
 
   const { dropReference, isOver } = useColumnDrop(column, dropTaskFrom)
