@@ -1,4 +1,4 @@
-import { Badge, Box, Circle, Heading, HStack, Stack, Text } from '@chakra-ui/react'
+import { Badge, Box, Button, Circle, Heading, HStack, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -73,18 +73,14 @@ const Column = ({ column, boardID, tasks, teamID }: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
-  const { addEmptyTask, deleteTask, dropTaskFrom, swapTasks, updateTask } = useColumnTasks(
-    column,
-    boardID,
-    BOARD_DOMAIN.TEAM,
-    teamID,
-  )
+  const { addEmptyTask, openInsertDrawerTask, deleteTask, dropTaskFrom, swapTasks, updateTask } =
+    useColumnTasks(column, boardID, BOARD_DOMAIN.TEAM, teamID)
 
   const { dropReference, isOver } = useColumnDrop(column, dropTaskFrom)
 
   const ColumnTasks = tasks.map((task, index) => (
     <Task
-      key={task.id}
+      key={task._id}
       task={task}
       index={index}
       onDropHover={swapTasks}
@@ -115,7 +111,7 @@ const Column = ({ column, boardID, tasks, teamID }: ColumnProperties) => {
           cursor="pointer"
           border="1.5px solid"
           borderColor="brand.500"
-          onClick={addEmptyTask}
+          onClick={openInsertDrawerTask}
         >
           <Box>
             <PlusIcon desc="1231" w="0.6em" fill="brand.500" stroke="brand.500" />
@@ -138,6 +134,17 @@ const Column = ({ column, boardID, tasks, teamID }: ColumnProperties) => {
         bgColor={isOver ? 'brand.200' : 'none'}
       >
         {ColumnTasks}
+        {ColumnTasks.length > 0 && (
+          <Button
+            fontSize={14}
+            color="brand.500"
+            fontWeight="bold"
+            _hover={{ color: 'brand.300' }}
+            onClick={addEmptyTask}
+          >
+            + Nova Tarefa
+          </Button>
+        )}
       </Stack>
     </Box>
   )

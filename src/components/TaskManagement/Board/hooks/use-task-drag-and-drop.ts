@@ -13,7 +13,7 @@ const useTaskDragAndDrop = <T extends HTMLElement>(
   const reference = useRef<T>(null)
 
   const [{ isDragging }, drag] = useDrag<DragItem, void, { isDragging: boolean }>({
-    item: { from: task.status, id: task.id, index },
+    item: { from: task.status, _id: task._id, index },
     type: ItemType.TASK,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),

@@ -15,7 +15,7 @@ enum BOARD_TYPE {
 }
 
 export type Task = {
-  id: string
+  _id: string
   boardId: string
   status: TASK_STATUS
   title: string
@@ -31,7 +31,7 @@ export type Task = {
   updatedAt: Date
 }
 
-export type TaskInsert = Except<Task, 'id' | 'createdAt' | 'updatedAt'>
+export type TaskInsert = Except<Task, '_id' | 'createdAt' | 'updatedAt'>
 
 export type Board = {
   _id: string
@@ -67,6 +67,16 @@ export class TaskManagementService {
 
   async addTask(data: TaskInsert) {
     const { data: response } = await this.client.post<Task>(`tasks`, data)
+    return response
+  }
+
+  async updateTask(data: Partial<Task>) {
+    if (!data._id) {
+      throw new Error('A id is required to update task')
+    }
+
+    const { data: response } = await this.client.patch<Task>(`tasks/${data._id}`, data)
+
     return response
   }
 }
