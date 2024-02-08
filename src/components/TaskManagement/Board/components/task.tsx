@@ -11,8 +11,8 @@ import useTaskDragAndDrop from '../hooks/use-task-drag-and-drop'
 type TaskProperties = {
   index: number
   task: TaskModel
-  onUpdate: (id: TaskModel['id'], updatedTask: TaskModel) => void
-  onDelete: (id: TaskModel['id']) => void
+  onUpdate: (id: TaskModel['_id'], updatedTask: TaskModel) => void
+  onDelete: (id: TaskModel['_id']) => void
   onDropHover: (index: number, index_: number) => void
 }
 
@@ -24,15 +24,14 @@ const Task = ({
   onDelete: handleDelete,
 }: TaskProperties) => {
   const { ref } = useTaskDragAndDrop<HTMLDivElement>({ task, index }, handleDropHover)
-  // Const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
-    handleUpdate(task.id, { ...task, title: newTitle })
+    handleUpdate(task._id, { ...task, title: newTitle })
   }
 
   const handleTaskDelete = () => {
-    handleDelete(task.id)
+    handleDelete(task._id)
   }
 
   return (
@@ -57,6 +56,7 @@ const Task = ({
               dueDate={task.dueDate}
               priority={task.priority as TaskPriority}
               ownerId={task.owner}
+              status={task.status}
             />
           </VStack>
         </KanbanTaskCard.Root>
