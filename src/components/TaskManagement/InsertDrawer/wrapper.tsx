@@ -4,7 +4,6 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState } from 'recoil'
 
-import { isEditingKeyResultIDAtom } from 'src/state/recoil/key-result/drawers/editing/is-editing-key-result-id'
 import { isEditingTaskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/insert/is-editing-task-drawer'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 
@@ -17,7 +16,6 @@ export const TaskInsertDrawer = () => {
   // Const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
   const isEditingTaskDrawerId = useRecoilValue(isEditingTaskDrawerIdAtom)
   const { column, boardID, domain, identifier } = useRecoilValue(taskInsertDrawerTeamID)
-  const editingModeKeyResultID = useRecoilValue(isEditingKeyResultIDAtom)
 
   const resetTaskBoardID = useResetRecoilState(taskInsertDrawerTeamID)
   const intl = useIntl()

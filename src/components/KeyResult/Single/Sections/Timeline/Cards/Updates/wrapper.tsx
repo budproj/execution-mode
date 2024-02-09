@@ -9,7 +9,7 @@ import selectUser from 'src/state/recoil/user/selector'
 import KeyResultSectionTimelineLine from './line'
 
 export interface KeyResultSectionTimelineCardUpdateProperties {
-  data?: Partial<KeyResultUpdates>
+  readonly data?: Partial<KeyResultUpdates>
 }
 
 const KeyResultSectionTimelineCardUpdate = ({

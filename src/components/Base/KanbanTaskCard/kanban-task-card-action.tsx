@@ -8,14 +8,15 @@ import TreeDotsIcon from 'src/components/Icon/TreeDots'
 import messages from './messages'
 
 interface KanbanTaskCardActionsProperties {
-  onDelete: () => void
+  readonly onDelete: () => void
 }
 
 export const KanbanTaskCardActions = ({ onDelete }: KanbanTaskCardActionsProperties) => {
   const intl = useIntl()
 
-  const handleDelete = () => {
+  const handleDelete = (event) => {
     onDelete()
+    event.stopPropagation()
   }
 
   return (
@@ -27,6 +28,8 @@ export const KanbanTaskCardActions = ({ onDelete }: KanbanTaskCardActionsPropert
         _hover={{
           color: 'new-gray.300',
         }}
+        bg="transparent"
+        onClick={(event) => event.stopPropagation()}
       >
         <TreeDotsIcon
           fill="currentColor"

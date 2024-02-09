@@ -15,10 +15,10 @@ import selectUser from 'src/state/recoil/user/selector'
 import { TaskPriority } from './kanban-task-card-root'
 
 interface KanbanTaskCardMetadataProperties {
-  dueDate?: Date
-  ownerId?: User['id']
-  priority?: TaskPriority
-  status?: TASK_STATUS
+  readonly dueDate?: Date
+  readonly ownerId?: User['id']
+  readonly priority?: TaskPriority
+  readonly status?: TASK_STATUS
 }
 
 export const KanbanTaskCardMetadata = ({
@@ -54,7 +54,7 @@ const Icon = {
 }
 
 type TaskPriorityProperties = {
-  priority: keyof typeof Icon
+  readonly priority: keyof typeof Icon
 }
 
 export const TaskPriorityIcon = ({ priority }: TaskPriorityProperties) => {
@@ -64,9 +64,9 @@ export const TaskPriorityIcon = ({ priority }: TaskPriorityProperties) => {
 }
 
 type DueDateWrapperProperties = {
-  isOutdated: boolean
-  isCompleted: boolean
-  children: React.ReactNode
+  readonly isOutdated: boolean
+  readonly isCompleted: boolean
+  readonly children: React.ReactNode
 }
 
 const DueDateIcon = {

@@ -26,7 +26,8 @@ export interface TaskCommentsInputInitialValues {
 }
 
 export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties) => {
-  const entity = `${TASK_DOMAIN.task}:${task?.id ?? ''}`
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  const entity = `${TASK_DOMAIN.task}:${task?._id ?? ''}`
 
   const handleSubmit = async (
     values: TaskCommentsInputInitialValues,
