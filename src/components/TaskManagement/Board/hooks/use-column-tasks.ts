@@ -17,8 +17,6 @@ import { useUpdateTaskMutate } from '../../hooks/use-update-task-mutate'
 import { swap } from '../utils/helpers'
 import { debug } from '../utils/logging'
 
-const MAX_TASK_PER_COLUMN = 100
-
 const useColumnTasks = (
   column: ColumnType,
   boardID: string,

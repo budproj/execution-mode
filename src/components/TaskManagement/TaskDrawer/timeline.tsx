@@ -1,15 +1,14 @@
 import React from 'react'
 
 import { KeyResultSectionTimelineCardCheckIn } from 'src/components/KeyResult/Single/Sections/Timeline/Cards'
+import KeyResultSectionTimelineCardCommentAndFeedbacks from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Comment/comment'
+import KeyResultSectionTimelineCardUpdate from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Updates'
 import {
   KeyResult,
   KeyResultCheckIn,
   KeyResultComment,
   KeyResultUpdates,
 } from 'src/components/KeyResult/types'
-
-import KeyResultSectionTimelineCardCommentAndFeedbacks from '../Cards/Comment/comment'
-import KeyResultSectionTimelineCardUpdate from '../Cards/Updates'
 
 export interface KeyResultSectionTimelineContentEntryProperties<E> {
   readonly typename: string

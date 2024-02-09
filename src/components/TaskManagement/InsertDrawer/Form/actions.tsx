@@ -19,6 +19,7 @@ interface FormActionsInterface {
 
 export const FormActions = ({ onClose, isLoading, editingTaskId }: FormActionsInterface) => {
   const intl = useIntl()
+  console.log({ editingTaskId })
 
   const { resetForm, submitForm, isSubmitting } = useFormikContext()
   const resetEditing = useResetRecoilState(isEditingTaskDrawerIdAtom)
@@ -32,7 +33,7 @@ export const FormActions = ({ onClose, isLoading, editingTaskId }: FormActionsIn
     resetEditing()
     resetTaskInsertDrawerTeamId()
     if (taskDrawer) {
-      setTaskDrawerId(taskDrawer.id)
+      setTaskDrawerId(taskDrawer._id)
     }
 
     if (onClose) onClose()

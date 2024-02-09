@@ -26,7 +26,7 @@ export interface TaskCommentsInputInitialValues {
 }
 
 export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties) => {
-  const entity = `${TASK_DOMAIN.task}:${task?.id ?? ''}`
+  const entity = `${TASK_DOMAIN.task}:${task?._id ?? ''}`
 
   const handleSubmit = async (
     values: TaskCommentsInputInitialValues,
