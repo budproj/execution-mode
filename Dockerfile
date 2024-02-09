@@ -1,4 +1,4 @@
-FROM node:16.16.0-alpine3.16 AS build
+FROM node:15.5.1-alpine3.10 AS build
 
 ARG GITHUB_TOKEN
 ARG SENTRY_AUTH_TOKEN
@@ -18,7 +18,7 @@ COPY . ./
 
 RUN npm run build
 
-FROM node:16.16.0-alpine3.16 AS final
+FROM node:15.5.1-alpine3.10 AS final
 
 ENV NODE_ENV="production"
 
