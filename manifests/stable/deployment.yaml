@@ -67,6 +67,8 @@ spec:
               value: https://notifications.getbud.co
             - name: 'ROUTINES_API'
               value: https://api.getbud.co/routines
+            - name: 'TASK_MANAGEMENT_API'
+              value: https://api.getbud.co/task-management
             - name: 'REST_API_BASE'
               value: https://api.getbud.co
             - name: 'FLAGSMITH_CLIENT_KEY'
