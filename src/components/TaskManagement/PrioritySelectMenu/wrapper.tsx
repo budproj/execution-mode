@@ -1,4 +1,4 @@
-import { Flex, MenuItemOption, MenuProps, Text, useToken } from '@chakra-ui/react'
+import { Flex, FlexProps, MenuItemOption, MenuProps, Text, useToken } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -76,7 +76,7 @@ export const TaskPrioritySelectMenu = ({
   )
 }
 
-type PriorityItemOptionProperties = {
+type PriorityItemOptionProperties = FlexProps & {
   readonly priority: TaskPriority
 }
 

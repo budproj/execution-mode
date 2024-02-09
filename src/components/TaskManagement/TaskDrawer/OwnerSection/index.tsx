@@ -1,6 +1,5 @@
 import { Popover, PopoverTrigger, PopoverContent, Box, Flex, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { useIntl } from 'react-intl'
 
 import KeyResultSectionOwner from 'src/components/KeyResult/Single/Sections/Owner/owner'
 import { SupportTeamField } from 'src/components/KeyResult/Single/Sections/Owner/support-team-field'
@@ -19,7 +18,7 @@ export const TaskDrawerSectionOwnerWrapper = ({
   ownerId,
 }: KeyResultSingleSectionOwnerWrapperProperties): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
-  const intl = useIntl()
+  console.log({ users })
 
   const handleOpen = () => {
     if (!isOpen) setIsOpen(true)
@@ -29,6 +28,7 @@ export const TaskDrawerSectionOwnerWrapper = ({
     if (isOpen) setIsOpen(false)
   }
 
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   const handleUpdate = async () => {
     return true
   }

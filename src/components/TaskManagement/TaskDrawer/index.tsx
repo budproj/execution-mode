@@ -27,40 +27,10 @@ import { teamAtomFamily } from 'src/state/recoil/team'
 import { userAtomFamily } from 'src/state/recoil/user'
 
 import { PrirityItemOption } from '../PrioritySelectMenu/wrapper'
+import { BOARD_DOMAIN } from '../hooks/use-team-tasks-board-data'
 
 import { TaskDrawerSectionOwnerWrapper } from './OwnerSection'
 import { TaskDrawerTimeline } from './Timeline'
-
-const content = `
-<h2>
-  Hi there,
-</h2>
-<p>
-  this is a <em>basic</em> example of <strong>tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
-</p>
-<ul>
-  <li>
-    That’s a bullet list with one …
-  </li>
-  <li>
-    … or two list items.
-  </li>
-</ul>
-<p>
-  Isn’t that great? And all of that is editable. But wait, there’s more. Let’s try a code block:
-</p>
-<pre><code class="language-css">body {
-display: none;
-}</code></pre>
-<p>
-  I know, I know, this is impressive. It’s only the tip of the iceberg though. Give it a try and click a little bit around. Don’t forget to check the other examples too.
-</p>
-<blockquote>
-  Wow, that’s amazing. Good work, boy! 👏
-  <br />
-  — Mom
-</blockquote>
-`
 
 interface TaskDrawerProperties {
   readonly teamId?: Team['id']
@@ -94,8 +64,13 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const handleClickEditButton = () => {
     resetTaskDrawerId()
     const boardId = uuidv4()
-    setTaskBoardID({ boardID: boardId, column: TASK_STATUS.pending })
-    isEditingTaskDrawerId(taskDrawer?.id)
+    setTaskBoardID({
+      boardID: boardId,
+      domain: BOARD_DOMAIN.TEAM,
+      identifier: undefined,
+      column: TASK_STATUS.pending,
+    })
+    isEditingTaskDrawerId(taskDrawer?._id)
   }
 
   return (
@@ -134,7 +109,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                 {taskDrawer?.title}
               </Text>
 
-              <PrirityItemOption marginTop="10px" priority={taskDrawer?.priority as TaskPriority} />
+              <PrirityItemOption mt="10px" priority={taskDrawer?.priority as TaskPriority} />
 
               <Flex alignItems="center" gap="10px" marginY="25px">
                 <Flex
