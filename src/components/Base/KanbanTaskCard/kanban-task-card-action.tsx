@@ -14,8 +14,9 @@ interface KanbanTaskCardActionsProperties {
 export const KanbanTaskCardActions = ({ onDelete }: KanbanTaskCardActionsProperties) => {
   const intl = useIntl()
 
-  const handleDelete = () => {
+  const handleDelete = (event?: React.MouseEvent<HTMLButtonElement>) => {
     onDelete()
+    if (event) event.stopPropagation()
   }
 
   return (
@@ -27,6 +28,7 @@ export const KanbanTaskCardActions = ({ onDelete }: KanbanTaskCardActionsPropert
         _hover={{
           color: 'new-gray.300',
         }}
+        onClick={(event) => event.stopPropagation()}
       >
         <TreeDotsIcon
           fill="currentColor"

@@ -12,6 +12,7 @@ import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers
 import meAtom from 'src/state/recoil/user/me'
 
 import { useAddTask } from '../../hooks/use-add-task'
+import { useRemoveTaskMutate } from '../../hooks/use-remove-task-mutate'
 import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 import { useUpdateTaskMutate } from '../../hooks/use-update-task-mutate'
 import { swap } from '../utils/helpers'
@@ -23,9 +24,9 @@ const useColumnTasks = (
   domain: BOARD_DOMAIN,
   identifier: string,
 ) => {
-  // Const [tasks, setTasks] = useState<Record<key typeof ColumnType, Task[]>>()
   const { mutate } = useAddTask(domain, identifier)
   const { mutate: updateTaskMutate } = useUpdateTaskMutate(domain, identifier)
+  const { mutate: removeTaskMutate } = useRemoveTaskMutate(domain, identifier)
   const [tasks, setTasks] = useState<Record<ColumnType, Task[]>>({
     pending: [],
     doing: [],
@@ -41,19 +42,6 @@ const useColumnTasks = (
     (task: TaskInsert) => {
       debug(`Adding new task to ${column} column`)
       mutate(task)
-      // SetTasks((allTasks) => {
-      //   const columnTasks = allTasks[column]
-
-      //   if (columnTasks.length > MAX_TASK_PER_COLUMN) {
-      //     debug('Too many task!')
-      //     return allTasks
-      //   }
-
-      //   return {
-      //     ...allTasks,
-      //     [column]: [task, ...columnTasks],
-      //   }
-      // })
     },
     [column, mutate],
   )
@@ -83,15 +71,9 @@ const useColumnTasks = (
   const deleteTask = useCallback(
     (_id: TaskModel['_id']) => {
       debug(`Removing task ${_id}..`)
-      setTasks((allTasks) => {
-        const columnTasks = allTasks[column]
-        return {
-          ...allTasks,
-          [column]: columnTasks.filter((task) => task._id !== _id),
-        }
-      })
+      removeTaskMutate(_id)
     },
-    [column, setTasks],
+    [removeTaskMutate],
   )
 
   const updateTask = useCallback(
@@ -114,22 +96,6 @@ const useColumnTasks = (
     (from: ColumnType, _id: TaskModel['_id']) => {
       debug(`Moving task ${_id} from ${from} to ${column}`)
       updateTaskMutate({ _id, status: column })
-      // SetTasks((allTasks) => {
-      //   const fromColumnTasks = allTasks[from]
-      //   const toColumnTasks = allTasks[column]
-      //   const movingTask = fromColumnTasks.find((task) => task.id === id)
-
-      //   if (!movingTask) {
-      //     return allTasks
-      //   }
-
-      //   // Remove the task from the original column and copy it within the destination column
-      //   return {
-      //     ...allTasks,
-      //     [from]: fromColumnTasks.filter((task) => task.id !== id),
-      //     [column]: [{ ...movingTask, status: column }, ...toColumnTasks],
-      //   }
-      // })
     },
     [column, updateTaskMutate],
   )
