@@ -9,6 +9,8 @@ import {
   Task as TaskModel,
   TASK_STATUS as ColumnType,
 } from 'src/services/task-management/task-management.service'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
 import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
@@ -60,6 +62,8 @@ type ColumnProperties = {
 }
 
 const TaskColumnComponent = ({ column, boardID, tasks, teamID, order }: ColumnProperties) => {
+  const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
+
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
@@ -101,6 +105,7 @@ const TaskColumnComponent = ({ column, boardID, tasks, teamID, order }: ColumnPr
   const handleAddNewTaskClickButton = () => {
     openInsertDrawerTask()
     resetTaskDrawer()
+    dispatch({ taskStatus: column })
   }
 
   useEffect(() => {

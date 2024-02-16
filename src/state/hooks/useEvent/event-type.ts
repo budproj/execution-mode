@@ -55,4 +55,5 @@ export enum EventType {
   PUBLISH_OKR_CLICK = 'PublishOKRClick',
   GENERATE_KEY_RESULT_SUMMARIZE_CLICK = 'GenerateKeyResultSummarizeClick',
   MISSION_CONTROL_TASK_CLICK = 'MissionControlTaskClick',
+  TASK_MANAGER_CREATE_TASK_CLICK = 'TaskManagerCreateTaskClick',
 }

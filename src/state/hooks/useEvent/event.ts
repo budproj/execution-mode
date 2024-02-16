@@ -42,6 +42,7 @@ import { SendAnswerFormClickData } from './events/send-answer-form-click-data'
 import { StartAnswerFormClickData } from './events/start-answer-form-click-data'
 import { TabNotificationClickData } from './events/tab-notification-click-data'
 import { TabThisWeekClickData } from './events/tab-this-week-click-data'
+import { TaskManagerCreateTaskClickData } from './events/task-management-create-task-data'
 import { TeamHighlightClickData } from './events/team-highlight-click-data'
 import { ToggleRoutineReminderClickData } from './events/toggle-routine-reminder-click-data'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
@@ -107,4 +108,5 @@ export type Event = {
   [EventType.PUBLISH_OKR_CLICK]: PublishOkrClickData
   [EventType.GENERATE_KEY_RESULT_SUMMARIZE_CLICK]: GenerateKeyResultSummarizeClickData
   [EventType.MISSION_CONTROL_TASK_CLICK]: MissionControlTaskClickData
+  [EventType.TASK_MANAGER_CREATE_TASK_CLICK]: TaskManagerCreateTaskClickData
 }
