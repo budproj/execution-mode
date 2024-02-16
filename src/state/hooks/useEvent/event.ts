@@ -44,6 +44,7 @@ import { TabNotificationClickData } from './events/tab-notification-click-data'
 import { TabThisWeekClickData } from './events/tab-this-week-click-data'
 import { TaskManagerCreateTaskClickData } from './events/task-management-create-task-data'
 import { TaskManagerDeleteTaskClickData } from './events/task-management-delete-task-data'
+import { TaskManagerUpdateTaskColumnData } from './events/task-management-update-task-column-data'
 import { TeamHighlightClickData } from './events/team-highlight-click-data'
 import { ToggleRoutineReminderClickData } from './events/toggle-routine-reminder-click-data'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
@@ -111,4 +112,5 @@ export type Event = {
   [EventType.MISSION_CONTROL_TASK_CLICK]: MissionControlTaskClickData
   [EventType.TASK_MANAGER_CREATE_TASK_CLICK]: TaskManagerCreateTaskClickData
   [EventType.TASK_MANAGER_DELETE_TASK_CLICK]: TaskManagerDeleteTaskClickData
+  [EventType.TASK_MANAGER_UPDATE_TASK_COLUMN]: TaskManagerUpdateTaskColumnData
 }
