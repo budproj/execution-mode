@@ -42,6 +42,7 @@ import { SendAnswerFormClickData } from './events/send-answer-form-click-data'
 import { StartAnswerFormClickData } from './events/start-answer-form-click-data'
 import { TabNotificationClickData } from './events/tab-notification-click-data'
 import { TabThisWeekClickData } from './events/tab-this-week-click-data'
+import { TaskManagerCreateComment } from './events/task-management-create-comment-data'
 import { TaskManagerCreateTaskClickData } from './events/task-management-create-task-data'
 import { TaskManagerDeleteTaskClickData } from './events/task-management-delete-task-data'
 import { TaskManagerUpdateTaskColumnData } from './events/task-management-update-task-column-data'
@@ -113,4 +114,5 @@ export type Event = {
   [EventType.TASK_MANAGER_CREATE_TASK_CLICK]: TaskManagerCreateTaskClickData
   [EventType.TASK_MANAGER_DELETE_TASK_CLICK]: TaskManagerDeleteTaskClickData
   [EventType.TASK_MANAGER_UPDATE_TASK_COLUMN]: TaskManagerUpdateTaskColumnData
+  [EventType.TASK_MANAGER_CREATE_COMMENT_CLICK]: TaskManagerCreateComment
 }
