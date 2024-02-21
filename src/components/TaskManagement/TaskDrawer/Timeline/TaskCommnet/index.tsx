@@ -9,7 +9,7 @@ interface TaskCommentProperties {
   readonly comment: Comment
 }
 
-export const TaskComment = ({ comment }: TaskCommentProperties) => {
+export const TaskCommentComponent = ({ comment }: TaskCommentProperties) => {
   const formattedComment: Partial<KeyResultComment> = {
     id: comment?.id,
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions

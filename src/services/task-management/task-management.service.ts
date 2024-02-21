@@ -127,6 +127,16 @@ export class TaskManagementService {
 
     return response
   }
+
+  async getTaskUpdates(data: string | undefined) {
+    if (!data) {
+      throw new Error('A id is required to get task updates')
+    }
+
+    const { data: response } = await this.client.get<TaskUpdate[]>(`task-updates/task/${data}`)
+
+    return response
+  }
 }
 
 type GetTeamBoardOutput = Board

@@ -30,6 +30,8 @@ const KeyResultSectionTimelineCardUpdate = ({
 
   const isLoaded = Boolean(data)
 
+  console.log({ data2: data })
+
   return (
     <Skeleton isLoaded={isLoaded}>
       {data?.patches && (

@@ -1,16 +1,17 @@
 import { Avatar, Flex, SkeletonCircle } from '@chakra-ui/react'
 import { Form, Formik, FormikHelpers } from 'formik'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
+import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import KeyResultSectionAddCommentInput from 'src/components/KeyResult/Single/Sections/AddComment/input'
 import { useGetCommentsByEntity } from 'src/components/Routine/hooks/getCommentsByEntity'
 import { useCreateComment } from 'src/components/Routine/hooks/setComment'
 import { User } from 'src/components/User/types'
-import { Task } from 'src/services/task-management/task-management.service'
+import { Task, TaskUpdate } from 'src/services/task-management/task-management.service'
 
 import { TASK_DOMAIN } from '../../types'
 
-import { TaskComment } from './TaskCommnet'
+import { TimelineWrapper } from './timeline-wrapper'
 
 const initialValues = {
   text: '',
@@ -26,8 +27,23 @@ export interface TaskCommentsInputInitialValues {
 }
 
 export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties) => {
+  const [taskUpdates, setTaskUpdates] = useState<TaskUpdate[]>([])
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const entity = `${TASK_DOMAIN.task}:${task?._id ?? ''}`
+
+  const { servicesPromise } = useContext(ServicesContext)
+
+  useEffect(() => {
+    async function getTaskUpdates() {
+      const { taskManagement } = await servicesPromise
+      if (task) {
+        const taskUpdatesRequest = await taskManagement.getTaskUpdates(task._id)
+        setTaskUpdates(taskUpdatesRequest)
+      }
+    }
+
+    getTaskUpdates()
+  }, [servicesPromise, task])
 
   const handleSubmit = async (
     values: TaskCommentsInputInitialValues,
@@ -54,9 +70,7 @@ export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties
   return (
     <Flex direction="column" paddingTop="2rem" position="relative">
       <Flex direction="column" marginX="28px" marginBottom="2rem" gridGap={4}>
-        {comments?.map((comment) => {
-          return <TaskComment key={comment.id} comment={comment} />
-        })}
+        <TimelineWrapper comments={comments} updates={taskUpdates} />
       </Flex>
       <Flex
         direction="column"
@@ -64,7 +78,7 @@ export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties
         paddingY="1rem"
         paddingX="1rem"
         width="100%"
-        position="fixed"
+        // Position="fixed"
         bottom="0"
       >
         <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>

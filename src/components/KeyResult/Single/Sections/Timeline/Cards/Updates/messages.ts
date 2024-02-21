@@ -4,6 +4,7 @@ type KeyResultsSectionTimelineCardCommentMessage =
   | 'cardType'
   | 'updatedDataCard'
   | 'updateKrModeCard'
+  | 'createdTaskCard'
 
 export default defineMessages<KeyResultsSectionTimelineCardCommentMessage>({
   cardType: {
@@ -14,8 +15,14 @@ export default defineMessages<KeyResultsSectionTimelineCardCommentMessage>({
   },
   updatedDataCard: {
     defaultMessage:
-      '{user} alterou {key, select, description {a} goal {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} other {}}',
-    id: 'oQbqDL',
+      '{user} {key, select, createdTask {criou} other {alterou}} {key, select, description {a} goal {a} createdTask {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} createdTask {tarefa} status {status} other {}}',
+    id: '1ik9bQ',
+    description: 'dsa',
+  },
+
+  createdTaskCard: {
+    defaultMessage: '{user} criou a tarefa',
+    id: 'v0PKmP',
     description: 'dsa',
   },
 

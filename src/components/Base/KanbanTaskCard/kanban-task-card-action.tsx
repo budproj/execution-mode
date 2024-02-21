@@ -14,7 +14,7 @@ interface KanbanTaskCardActionsProperties {
 export const KanbanTaskCardActions = ({ onDelete }: KanbanTaskCardActionsProperties) => {
   const intl = useIntl()
 
-  const handleDelete = (event) => {
+  const handleDelete = (event: any) => {
     onDelete()
     event.stopPropagation()
   }

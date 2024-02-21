@@ -19,11 +19,11 @@ import messages from './messages'
 import queries from './queries.gql'
 
 interface CreateCheckMarkButtonProperties extends StyleProps {
-  keyResultID?: string
-  label?: string
-  isAbsolute?: boolean
-  onCreate?: () => void
-  createButtonReference?: Ref<HTMLButtonElement>
+  readonly keyResultID?: string
+  readonly label?: string
+  readonly isAbsolute?: boolean
+  readonly onCreate?: () => void
+  readonly createButtonReference?: Ref<HTMLButtonElement>
 }
 
 const StyledEditableWrapper = styled(Box)`

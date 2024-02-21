@@ -11,8 +11,8 @@ import React, { ReactNode } from 'react'
 import { OPEN_DELAY_IN_MS } from 'src/components/Base/TooltipWithDelay/constants'
 
 export interface TooltipWithRichTextProperties extends TooltipProps {
-  children: ReactNode
-  tooltip: PopoverContentProps['children']
+  readonly children: ReactNode
+  readonly tooltip: any
 }
 
 const TooltipWithRichText = ({ children, tooltip, ...rest }: TooltipWithRichTextProperties) => {

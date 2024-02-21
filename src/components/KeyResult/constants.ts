@@ -42,4 +42,6 @@ export enum KEY_RESULT_PATCHS_KEYS {
   type = 'type',
   ownerId = 'ownerId',
   description = 'description',
+  createdTask = 'createdTask',
+  status = 'status',
 }
