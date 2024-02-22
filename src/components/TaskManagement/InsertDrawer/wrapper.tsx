@@ -63,7 +63,7 @@ export const TaskInsertDrawer = () => {
         <Stack h="full">
           <TaskInsertOrUpdateDrawerHeader isEditing={isEditing} />
           <Flex flexGrow={1}>
-            {boardID && (
+            {boardID && identifier && (
               <InsertOrUpdateTaskForm
                 isLoading={false}
                 column={column}
