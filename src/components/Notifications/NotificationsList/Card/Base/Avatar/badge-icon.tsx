@@ -7,6 +7,7 @@ import CommentIcon from 'src/components/Icon/Comment'
 import PauseIcon from 'src/components/Icon/Pause'
 import TaggedIcon from 'src/components/Icon/Tagged'
 import TeamIcon from 'src/components/Icon/Team'
+import TicketStar from 'src/components/Icon/TicketStar'
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
 
 interface BadgeIconProperties {
@@ -27,6 +28,18 @@ const BadgeIcon = ({ typeNotification, desc, ...rest }: BadgeIconProperties) => 
     [
       NOTIFICATIONS_TYPE.ASSIGNED_TASK,
       <CheckedIcon key={desc} desc={desc} h="1.4em" w="1.4em" fill="none" stroke="none" />,
+    ],
+    [
+      NOTIFICATIONS_TYPE.ASSIGNED_TASK_IN_PROJECT,
+      <TicketStar key={desc} desc={desc} h="1.4em" w="1.4em" stroke="green" />,
+    ],
+    [
+      NOTIFICATIONS_TYPE.COMMENT_ON_TASK,
+      <TicketStar key={desc} desc={desc} h="1.4em" w="1.4em" stroke="red" />,
+    ],
+    [
+      NOTIFICATIONS_TYPE.TAGGED_ON_TASK_IN_PROJECT,
+      <TicketStar key={desc} desc={desc} h="1.4em" w="1.4em" stroke="purple" />,
     ],
     [
       NOTIFICATIONS_TYPE.ADD_SUPPORT_TEAM,

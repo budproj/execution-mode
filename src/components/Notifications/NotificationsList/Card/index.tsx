@@ -4,7 +4,9 @@ import React from 'react'
 import { Notification } from '../types'
 
 import AssignedTask from './AssignedTask'
+import AssignedTaskInProject from './AssignedTaskInProject'
 import CommentOnRoutineNotification from './CommentOnRoutine'
+import CommentOnTaskInProject from './CommentOnTaskInProject'
 import CommentNotification from './Comments'
 import ConfidenceCheckin from './ConfidenceCheckIn'
 import KrFeedback from './KrFeedback'
@@ -34,6 +36,10 @@ const CardNotification = ({ ...rest }: Notification) => {
       return <KrOwner {...rest} />
     case 'krFeedback':
       return <KrFeedback {...rest} />
+    case 'taskAssignInProject':
+      return <AssignedTaskInProject {...rest} />
+    case 'commentOnTask':
+      return <CommentOnTaskInProject {...rest} />
     default:
       return <Box />
   }
