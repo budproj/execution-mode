@@ -8,16 +8,15 @@ import {
   Box,
   Divider,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
-import { v4 as uuidv4 } from 'uuid'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Team } from 'src/components/Team/types'
-import { TASK_STATUS } from 'src/services/task-management/task-management.service'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { isEditingTaskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/insert/is-editing-task-drawer'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
@@ -27,7 +26,7 @@ import { teamAtomFamily } from 'src/state/recoil/team'
 import { userAtomFamily } from 'src/state/recoil/user'
 
 import { PrirityItemOption } from '../PrioritySelectMenu/wrapper'
-import { BOARD_DOMAIN } from '../hooks/use-team-tasks-board-data'
+import { BOARD_DOMAIN, useTeamTasksBoardData } from '../hooks/use-team-tasks-board-data'
 
 import { TaskDrawerSectionOwnerWrapper } from './OwnerSection'
 import { TaskDrawerTimeline } from './Timeline'
@@ -37,7 +36,10 @@ interface TaskDrawerProperties {
 }
 
 export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
+  const router = useRouter()
+  const { id: teamID } = router.query
   const intl = useIntl()
+  const { data: boardData } = useTeamTasksBoardData(teamId)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
   const taskDrawerId = useRecoilValue(taskDrawerIdAtom)
   const resetTaskDrawerId = useResetRecoilState(taskDrawerIdAtom)
@@ -63,12 +65,11 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
 
   const handleClickEditButton = () => {
     resetTaskDrawerId()
-    const boardId = uuidv4()
     setTaskBoardID({
-      boardID: boardId,
+      boardID: boardData?._id,
       domain: BOARD_DOMAIN.TEAM,
-      identifier: undefined,
-      column: TASK_STATUS.pending,
+      identifier: teamID as unknown as string,
+      column: taskDrawer.status,
     })
     isEditingTaskDrawerId(taskDrawer?._id)
   }

@@ -28,7 +28,6 @@ export interface TaskCommentsInputInitialValues {
 
 export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties) => {
   const [taskUpdates, setTaskUpdates] = useState<TaskUpdate[]>([])
-  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   const entity = `${TASK_DOMAIN.task}:${task?._id ?? ''}`
 
   const { servicesPromise } = useContext(ServicesContext)
@@ -66,6 +65,8 @@ export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [task, entity])
+
+  console.log({ taskUpdates })
 
   return (
     <Flex direction="column" paddingTop="2rem" position="relative">

@@ -14,12 +14,12 @@ import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useTeamTasksBoardData } from '../hooks/use-team-tasks-board-data'
 
-import Column from './components/column'
+import TaskColumnComponent from './components/column'
 import useLoadUsers from './hooks/use-load-users'
 
 type BoardWrapperProperties = {
-  teamId: Team['id']
-  searchTaskInput?: string
+  readonly teamId: Team['id']
+  readonly searchTaskInput?: string
 }
 
 const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
@@ -88,25 +88,25 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
       <DndProvider backend={HTML5Backend}>
         <Container maxWidth="100%" paddingInlineEnd={0} padding={0}>
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 16, md: 6 }}>
-            <Column
+            <TaskColumnComponent
               column={ColumnType.pending}
               boardID={boardData._id}
               tasks={filteredTasks[ColumnType.pending]}
               teamID={teamId}
             />
-            <Column
+            <TaskColumnComponent
               column={ColumnType.toDo}
               boardID={boardData._id}
               tasks={filteredTasks[ColumnType.toDo]}
               teamID={teamId}
             />
-            <Column
+            <TaskColumnComponent
               column={ColumnType.doing}
               boardID={boardData._id}
               tasks={filteredTasks[ColumnType.doing]}
               teamID={teamId}
             />
-            <Column
+            <TaskColumnComponent
               column={ColumnType.done}
               boardID={boardData._id}
               tasks={filteredTasks[ColumnType.done]}

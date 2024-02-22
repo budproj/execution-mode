@@ -97,17 +97,18 @@ const useColumnTasks = (
   const updateTask = useCallback(
     (_id: TaskModel['_id'], updatedTask: Except<Partial<TaskModel>, '_id'>) => {
       debug(`Updating task ${_id} with ${JSON.stringify(updateTask)}`)
-      setTasks((allTasks) => {
-        const columnTasks = allTasks[column]
-        return {
-          ...allTasks,
-          [column]: columnTasks.map((task) =>
-            task._id === _id ? { ...task, ...updatedTask } : task,
-          ),
-        }
-      })
+      // SetTasks((allTasks) => {
+      //   const columnTasks = allTasks[column]
+      //   return {
+      //     ...allTasks,
+      //     [column]: columnTasks.map((task) =>
+      //       task._id === _id ? { ...task, ...updatedTask } : task,
+      //     ),
+      //   }
+      // })
+      updateTaskMutate(updatedTask)
     },
-    [column, setTasks],
+    [updateTaskMutate],
   )
 
   const dropTaskFrom = useCallback(

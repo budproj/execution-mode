@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
-import { TASK_STATUS } from 'src/services/task-management/task-management.service'
+import { Task, TASK_STATUS } from 'src/services/task-management/task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
@@ -38,17 +38,34 @@ const formInitialValues: FormValues = {
   ownerID: '',
 }
 
+function getUpdatePatches<T extends Record<string, unknown>>(
+  oldTaskState: T,
+  newTaskState: T,
+): Partial<T> {
+  const differingAttributes: Partial<T> = {}
+
+  const keys: Array<keyof T> = Object.keys(oldTaskState) as Array<keyof T>
+
+  for (const key of keys) {
+    if (oldTaskState[key] !== newTaskState[key]) {
+      differingAttributes[key] = newTaskState[key]
+    }
+  }
+
+  return differingAttributes
+}
+
 interface InsertKeyResultFormProperties {
-  onClose?: () => void
-  onSuccess?: () => void
-  onError?: () => void
-  isLoading: boolean
-  isEditing?: boolean
-  onValidationError?: () => void
-  column: TASK_STATUS
-  boardID: string
-  domain: BOARD_DOMAIN
-  identifier: string
+  readonly onClose?: () => void
+  readonly onSuccess?: () => void
+  readonly onError?: () => void
+  readonly isLoading: boolean
+  readonly isEditing?: boolean
+  readonly onValidationError?: () => void
+  readonly column: TASK_STATUS
+  readonly boardID: string
+  readonly domain: BOARD_DOMAIN
+  readonly identifier: string
 }
 
 const InsertOrUpdateTaskForm = ({
@@ -66,8 +83,6 @@ const InsertOrUpdateTaskForm = ({
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
   const { addTask, updateTask } = useColumnTasks(column, boardID, domain, identifier)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
-  console.log(onError)
-  console.log(isEditing)
 
   // Const router = useRouter()
 
@@ -96,9 +111,7 @@ const InsertOrUpdateTaskForm = ({
     return invalidFields.length === 0
   }
 
-  const handleSubmit = async (values: FormValues): Promise<void> => {
-    // Await delay(500)
-
+  const handleCreateTaskSubmit = async (values: FormValues): Promise<void> => {
     const allValues = { ...values }
 
     const areAllFieldsValid = validateFields(allValues)
@@ -118,12 +131,33 @@ const InsertOrUpdateTaskForm = ({
       tags: [],
     }
 
-    if (isEditing) {
-      updateTask(taskDrawer._id, values)
-      if (onSuccess) onSuccess()
+    addTask(variables)
+    if (onSuccess) onSuccess()
+  }
+
+  const handleEditSubmit = async (values: FormValues): Promise<void> => {
+    const allValues = { ...values }
+
+    const areAllFieldsValid = validateFields(allValues)
+
+    if (!areAllFieldsValid) {
+      if (onValidationError) onValidationError()
+      return
     }
 
-    addTask(variables)
+    const variables = {
+      ...allValues,
+      boardId: boardID,
+      status: column,
+      owner: allValues.ownerID,
+      dueDate: new Date(allValues.dueDate).toISOString(),
+      initialDate: new Date(allValues.initialDate).toISOString(),
+    }
+
+    const newTask = getUpdatePatches(taskDrawer, variables as unknown as Task)
+
+    updateTask(taskDrawer._id, { _id: taskDrawer._id, ...newTask })
+
     if (onSuccess) onSuccess()
   }
 
@@ -132,7 +166,7 @@ const InsertOrUpdateTaskForm = ({
       enableReinitialize
       initialValues={initialValues}
       validationSchema={NewTaskSchema}
-      onSubmit={handleSubmit}
+      onSubmit={isEditing ? handleEditSubmit : handleCreateTaskSubmit}
     >
       <Form style={{ width: '100%' }}>
         <FormControl
@@ -162,7 +196,7 @@ const InsertOrUpdateTaskForm = ({
 
           <OwnerInput isLoading={isLoading} />
 
-          <FormActions isLoading={isLoading} editingTaskId="as" onClose={onClose} />
+          <FormActions isLoading={isLoading} editingTaskId={taskDrawer?._id} onClose={onClose} />
         </FormControl>
       </Form>
     </Formik>

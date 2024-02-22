@@ -65,13 +65,13 @@ const headerColumnMessage = new Map([
 ])
 
 type ColumnProperties = {
-  column: ColumnType
-  boardID: string
-  tasks: TaskModel[]
-  teamID: string
+  readonly column: ColumnType
+  readonly boardID: string
+  readonly tasks: TaskModel[]
+  readonly teamID: string
 }
 
-const Column = ({ column, boardID, tasks, teamID }: ColumnProperties) => {
+const TaskColumnComponent = ({ column, boardID, tasks, teamID }: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
@@ -159,4 +159,4 @@ const Column = ({ column, boardID, tasks, teamID }: ColumnProperties) => {
   )
 }
 
-export default Column
+export default TaskColumnComponent
