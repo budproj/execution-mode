@@ -11,5 +11,5 @@ export enum NOTIFICATIONS_TYPE {
   KR_OWNER = 'mentionOnRoutine',
   ASSIGNED_TASK_IN_PROJECT = 'taskAssignInProject',
   COMMENT_ON_TASK = 'commentOnTask',
-  TAGGED_ON_TASK_IN_PROJECT = 'commentOnTaskInProject',
+  TAGGED_ON_TASK_IN_PROJECT = 'taggedOnTaskInProject',
 }

@@ -10,6 +10,7 @@ import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-resul
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
 import { KeyResultNotificationContent } from '../Base/KeyResult'
+import { TaskNotificationContent } from '../Base/Task'
 
 import messages from './messages'
 
@@ -21,7 +22,7 @@ const CommentOnTaskInProject = ({ properties, timestamp, isRead, type }: Notific
   const openDrawer = () => setOpenDrawer(properties.keyResult?.id)
 
   const typeCommentNotificationInTaskMessage =
-    type === NOTIFICATIONS_TYPE.COMMENT_ON_MY_KR
+    type === NOTIFICATIONS_TYPE.COMMENT_ON_TASK
       ? intl.formatMessage(messages.commentOnMyTaskNotification)
       : intl.formatMessage(messages.taggedOnCommentInTaskNotification)
 
