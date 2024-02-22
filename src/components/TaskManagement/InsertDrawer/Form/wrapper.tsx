@@ -198,7 +198,7 @@ const InsertOrUpdateTaskForm = ({
 
           <OwnerInput isLoading={isLoading} />
 
-          <FormActions isLoading={isLoading} editingTaskId={taskDrawer?._id} onClose={onClose} />
+          <FormActions isLoading={isLoading} onClose={onClose} />
         </FormControl>
       </Form>
     </Formik>
