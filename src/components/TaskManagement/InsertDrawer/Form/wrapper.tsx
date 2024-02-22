@@ -84,6 +84,8 @@ const InsertOrUpdateTaskForm = ({
   const { addTask, updateTask } = useColumnTasks(column, boardID, domain, identifier)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
 
+  console.log({ onError })
+
   // Const router = useRouter()
 
   // Const currentUserID = useRecoilValue(meAtom)

@@ -14,10 +14,9 @@ import messages from './messages'
 interface FormActionsInterface {
   readonly onClose?: () => void
   readonly isLoading?: boolean
-  readonly editingTaskId?: string
 }
 
-export const FormActions = ({ onClose, isLoading, editingTaskId }: FormActionsInterface) => {
+export const FormActions = ({ onClose, isLoading }: FormActionsInterface) => {
   const intl = useIntl()
 
   const { resetForm, submitForm, isSubmitting } = useFormikContext()
