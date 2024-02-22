@@ -32,7 +32,7 @@ import { TaskDrawerSectionOwnerWrapper } from './OwnerSection'
 import { TaskDrawerTimeline } from './Timeline'
 
 interface TaskDrawerProperties {
-  readonly teamId?: Team['id']
+  readonly teamId: Team['id']
 }
 
 export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
