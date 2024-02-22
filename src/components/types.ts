@@ -27,6 +27,7 @@ export interface GraphQLEntityPolicy {
 }
 
 export interface GraphQLPageInfo {
+  hasNextPage: boolean
   endCursor: string
 }
 

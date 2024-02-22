@@ -13,6 +13,7 @@ import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
+import { getScrollableItem } from 'src/components/Base/ScrollableItem'
 import { StarIcon, StarIconOutlined } from 'src/components/Icon'
 import ChevronDownIcon from 'src/components/Icon/ChevronDown'
 import { GetTeamNameQuery } from 'src/components/Page/Team/types'
@@ -45,6 +46,7 @@ export const TeamsMenuProfile = ({
   const teamsToMap = teams?.filter((team) => team.id !== mainTeamId)
   const myID = useRecoilValue(meAtom)
   const intl = useIntl()
+  const ScrollableItem = getScrollableItem()
 
   const { data: mainTeamRequest } = useQuery<GetTeamNameQuery>(queries.GET_TEAM_WITH_ID, {
     variables: { teamId: mainTeamId },
@@ -79,7 +81,7 @@ export const TeamsMenuProfile = ({
   }, [mainTeamRequest, setSelectedDashboardTeam])
 
   return (
-    <Flex paddingTop={10} px={20} {...rest} justifyContent="space-between">
+    <Flex paddingTop={10} {...rest} justifyContent="space-between">
       <Menu>
         <MenuButton
           color="white"
@@ -101,55 +103,62 @@ export const TeamsMenuProfile = ({
             />
           )}
         </MenuButton>
-        <MenuList color="gray.500" fontSize={14}>
-          <MenuItem
-            borderTopLeftRadius={10}
-            borderTopRightRadius={10}
-            _hover={{ background: 'white' }}
-            py={2}
-            px={2}
-            onClick={() => setSelectedDashboardTeam(mainTeamRequest?.team)}
-          >
-            <Flex
-              _hover={{ bg: 'brand.100' }}
-              transition="0.3s"
-              width="100%"
-              borderRadius="3px"
+        <MenuList
+          // Este ul previne que o scroll desse menu bugue.
+          as="ul"
+          color="gray.500"
+          fontSize={14}
+        >
+          <ScrollableItem maxH={320} borderRadius={10}>
+            <MenuItem
+              borderTopLeftRadius={10}
+              borderTopRightRadius={10}
+              _hover={{ background: 'white' }}
+              py={2}
               px={2}
-              height="26px"
-              alignItems="center"
+              as="li"
+              cursor="pointer"
+              onClick={() => setSelectedDashboardTeam(mainTeamRequest?.team)}
             >
-              {mainTeamRequest?.team.name}
-              <StarIcon desc="" stroke="black" withCircle={false} fill="red" width={9} />
-            </Flex>
-          </MenuItem>
-          {teamsToMap?.map((team, index, array) => {
-            const borderRadius = index === array.length - 1 ? '10px' : 'none'
-
-            return (
-              <MenuItem
-                key={team.id}
-                _hover={{ background: 'none' }}
-                py={2}
+              <Flex
+                _hover={{ bg: 'brand.100' }}
+                transition="0.3s"
+                width="100%"
+                borderRadius="3px"
                 px={2}
-                borderBottomLeftRadius={borderRadius}
-                borderBottomRightRadius={borderRadius}
-                onClick={() => setSelectedDashboardTeam(team)}
+                height="26px"
+                alignItems="center"
               >
-                <Flex
-                  _hover={{ bg: 'brand.100' }}
-                  transition="0.3s"
-                  width="100%"
-                  borderRadius="3px"
+                {mainTeamRequest?.team.name}
+                <StarIcon desc="" stroke="black" withCircle={false} fill="red" width={9} />
+              </Flex>
+            </MenuItem>
+            {teamsToMap?.map((team) => {
+              return (
+                <MenuItem
+                  key={team.id}
+                  _hover={{ background: 'none' }}
+                  py={2}
                   px={2}
-                  height="26px"
-                  alignItems="center"
+                  as="li"
+                  cursor="pointer"
+                  onClick={() => setSelectedDashboardTeam(team)}
                 >
-                  {team.name}
-                </Flex>
-              </MenuItem>
-            )
-          })}
+                  <Flex
+                    _hover={{ bg: 'brand.100' }}
+                    transition="0.3s"
+                    width="100%"
+                    borderRadius="3px"
+                    px={2}
+                    height="26px"
+                    alignItems="center"
+                  >
+                    {team.name}
+                  </Flex>
+                </MenuItem>
+              )
+            })}
+          </ScrollableItem>
         </MenuList>
       </Menu>
       <Flex

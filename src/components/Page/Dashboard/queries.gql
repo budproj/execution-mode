@@ -20,7 +20,7 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
       }
     }
   }
-  teams {
+  teams(first: 200) {
       edges {
         node {
           name

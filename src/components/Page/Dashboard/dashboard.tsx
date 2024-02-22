@@ -23,8 +23,6 @@ import { User } from 'src/components/User/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
-import meAtom from 'src/state/recoil/user/me'
-import selectUser from 'src/state/recoil/user/selector'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
 
@@ -76,7 +74,7 @@ const StyledStack = styled(Stack)`
   }
 
   @media (max-width: 1024px) {
-    gap: 185px;
+    gap: 85px;
 
     > div {
       height: 55vh;
@@ -139,6 +137,22 @@ const StyledStack = styled(Stack)`
     }
   }
 
+  @media (min-width: 1365px) and (height: 611px) {
+    gap: 55px;
+
+    > div {
+      height: 68vh;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    gap: 55px;
+
+    > div {
+      height: 50vh;
+    }
+  }
+
   @media (min-width: 1366px) {
     gap: 65px;
 
@@ -155,19 +169,19 @@ const StyledStack = styled(Stack)`
     }
   }
 
-  @media (min-width: 1365px) and (height: 611px) {
-    gap: 55px;
+  @media (width: 1366px) and (height: 599px) {
+    gap: 120px;
 
     > div {
-      height: 68vh;
+      height: 64vh;
     }
   }
 
-  @media (min-width: 1440px) {
-    gap: 55px;
+  @media (width: 1366px) and (height: 689px) {
+    gap: 60px;
 
     > div {
-      height: 50vh;
+      height: 64vh;
     }
   }
 
@@ -219,6 +233,14 @@ const StyledStack = styled(Stack)`
     }
   }
 
+  @media (width: 1680px) and (height: 1050px) {
+    gap: 49px;
+
+    > div {
+      height: 43vh;
+    }
+  }
+
   @media (min-width: 1700px) {
     gap: 40px;
 
@@ -251,8 +273,8 @@ const StyledStack = styled(Stack)`
     }
   }
 
-  @media (max-width: 1920px) and (height: 923px) {
-    gap: 40px;
+  @media (max-width: 1920px) and (min-height: 910px) {
+    gap: 45px;
 
     > div {
       height: 50vh;
@@ -264,6 +286,14 @@ const StyledStack = styled(Stack)`
 
     > div {
       height: 38vh;
+    }
+  }
+
+  @media (width: 1920px) and (height: 1080px) {
+    gap: 45px;
+
+    > div {
+      height: 42vh;
     }
   }
 
@@ -291,6 +321,14 @@ const StyledStack = styled(Stack)`
     }
   }
 
+  @media (width: 2304px) and (height: 1440px) {
+    gap: 32px;
+
+    > div {
+      height: 33vh;
+    }
+  }
+
   @media (min-width: 2400px) {
     gap: 25px;
 
@@ -306,27 +344,35 @@ const StyledStack = styled(Stack)`
       height: 40vh;
     }
   }
+
+  @media (width: 2560px) and (height: 1600px) {
+    gap: 20px;
+
+    > div {
+      height: 31vh;
+    }
+  }
 `
 
 const StyledMCWrapper = styled(MissionControlWrapper)`
-  @media (min-width: 1600px) {
+  @media (min-width: 1500px) {
     top: 225px;
   }
 
-  @media (max-width: 1417px) {
-    top: 195px;
+  @media (max-width: 1460px) {
+    top: 215px;
   }
 `
 
 const DashboardPage = () => {
   const intl = useIntl()
-  const flags = useFlags(['mission_control'])
 
-  const { data, loading, called } = useQuery<GetUserNameGenderAndSettingsRequest>(
+  const flags = useFlags(['mission_control'])
+  const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
     queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
   )
-  const me = useRecoilValue(meAtom)
-  const user = useRecoilValue(selectUser(me))
+  // Const me = useRecoilValue(meAtom)
+  // const user = useRecoilValue(selectUser(me))
 
   const [teams, setEdges] = useConnectionEdges<Team>()
   const [mainTeamId, setMainTeamId] = useState('')
@@ -363,14 +409,18 @@ const DashboardPage = () => {
 
   return (
     <StyledStack bg="new-gray.50" position="relative">
-      <Box bg="brand.500" position="relative" zIndex={2}>
-        <Stack>
-          <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
-          <PageHeader display="flex" gap={8} alignItems="center" py={10} px={20} flexGrow={1}>
+      <Box bg="brand.500" position="relative">
+        <Stack position="relative">
+          <Box position="absolute" zIndex={10} w="100%" px={20}>
+            <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
+          </Box>
+          <PageHeader display="flex" gap={8} alignItems="center" py={120} px={20} flexGrow={1}>
             <UserProfileHeader
               canUpdate
               onlyPicture
-              userProps={{ id: me, picture: user?.picture, role: user?.role }}
+              // UserProps={{ id: me, picture: user?.picture, role: user?.role }}
+              userProps={{ id: data?.me.id, picture: data?.me.picture, role: data?.me.role }}
+              handleUpdatePicture={refetch}
               isLoaded={!loading}
               variantAvatar="circle"
             />
@@ -409,7 +459,6 @@ const DashboardPage = () => {
           >
             {intl.formatMessage(messages.okrOverViewTitle)}
           </Text>
-
           <Flex gridGap="3rem" justifyContent="space-between">
             <OverviewSummary
               title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}

@@ -6,9 +6,11 @@ import {
   ModalCloseButton,
   Heading,
   Flex,
+  Button,
+  HStack,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useEffect, useMemo } from 'react'
+import React, { memo, useCallback, useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 
 import KeyResultList from 'src/components/KeyResult/List'
@@ -20,9 +22,13 @@ import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-resul
 export interface KeyResultModalListingProperties {
   isOpen: boolean
   onClose: () => void
-  loadingData: boolean
-  data: KeyResult[]
+  loadNextKrsPage?: () => Promise<void>
+  loadPreviousKrsPage?: () => void
+  showPreviousPageButton?: boolean
+  showNextPageButton?: boolean
+  keyResultIds: string[]
   dispatchEvent?: () => void
+  isLoading: boolean
   modalHeadingTitle: string
 }
 
@@ -48,94 +54,121 @@ const StyledTableWrapper = styled(Flex)`
   }
 `
 
-export const KeyResultListingModal = ({
-  isOpen,
-  data,
-  dispatchEvent,
-  modalHeadingTitle,
-  loadingData,
-  onClose,
-}: KeyResultModalListingProperties) => {
-  const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+export const KeyResultListingModal = memo(
+  ({
+    isOpen,
+    loadNextKrsPage,
+    loadPreviousKrsPage,
+    showPreviousPageButton = false,
+    showNextPageButton = false,
+    keyResultIds,
+    dispatchEvent,
+    modalHeadingTitle,
+    isLoading,
+    onClose,
+  }: KeyResultModalListingProperties) => {
+    const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
 
-  const keyResultIds = useMemo(() => data.map(({ id }) => id), [data])
+    useEffect(() => {
+      if (dispatchEvent) dispatchEvent()
+    }, [dispatchEvent])
 
-  useEffect(() => {
-    if (dispatchEvent) dispatchEvent()
-  }, [dispatchEvent])
+    const onLineClick = useCallback((id: KeyResult['id']) => setOpenDrawer(id), [setOpenDrawer])
 
-  const onLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
+    return (
+      <Modal
+        isOpen={isOpen}
+        returnFocusOnClose={false}
+        size="100%"
+        autoFocus={false}
+        onClose={onClose}
+      >
+        <ModalOverlay />
+        <StyledModal>
+          <ModalBody p="40px">
+            <Flex mb={12} justifyContent="space-between" alignItems="center">
+              <Heading color="new-gray.900" fontWeight={500} as="h3" size="lg">
+                {modalHeadingTitle}
+              </Heading>
+              <ModalCloseButton
+                bg="black.100"
+                color="new-gray.600"
+                borderRadius="50%"
+                position="relative"
+                top="0"
+              />
+            </Flex>
 
-  return (
-    <Modal
-      isOpen={isOpen}
-      returnFocusOnClose={false}
-      size="100%"
-      autoFocus={false}
-      onClose={onClose}
-    >
-      <ModalOverlay />
-      <StyledModal>
-        <ModalBody p="40px">
-          <Flex mb={12} justifyContent="space-between" alignItems="center">
-            <Heading color="new-gray.900" fontWeight={500} as="h3" size="lg">
-              {modalHeadingTitle}
-            </Heading>
-            <ModalCloseButton
-              bg="black.100"
-              color="new-gray.600"
-              borderRadius="50%"
-              position="relative"
-              top="0"
-            />
-          </Flex>
-
-          <StyledTableWrapper>
-            <KeyResultList
-              type={KEY_RESULT_LIST_TYPE.STATIC}
-              keyResultIDs={keyResultIds}
-              isLoading={loadingData}
-              templateColumns="1.5fr 1fr 100px 80px 1fr"
-              borderColor="new-gray.400"
-              flex="1"
-              headProperties={{
-                [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
-                  hidden: false,
-                },
-                [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
-                  hidden: false,
-                },
-                [KEY_RESULT_LIST_COLUMN.TEAM]: {
-                  hidden: false,
-                },
-                [KEY_RESULT_LIST_COLUMN.OWNER]: {
-                  hidden: false,
-                },
-                [KEY_RESULT_LIST_COLUMN.OBJECTIVE]: {
-                  hidden: false,
-                },
-              }}
-              columns={[
-                KEY_RESULT_LIST_COLUMN.KEY_RESULT,
-                KEY_RESULT_LIST_COLUMN.PROGRESS,
-                KEY_RESULT_LIST_COLUMN.TEAM,
-                KEY_RESULT_LIST_COLUMN.OWNER,
-                KEY_RESULT_LIST_COLUMN.OBJECTIVE,
-              ]}
-              bodyProperties={{
-                [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
-                  withDynamicIcon: true,
-                  withLastUpdateInfo: true,
-                },
-                [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
-                  withConfidenceTag: true,
-                },
-              }}
-              onLineClick={onLineClick}
-            />
-          </StyledTableWrapper>
-        </ModalBody>
-      </StyledModal>
-    </Modal>
-  )
-}
+            <StyledTableWrapper>
+              <KeyResultList
+                type={KEY_RESULT_LIST_TYPE.STATIC}
+                keyResultIDs={keyResultIds}
+                isLoading={isLoading}
+                hasMoreKeyResults={showNextPageButton}
+                templateColumns="1.5fr 1fr 100px 80px 1fr"
+                borderColor="new-gray.400"
+                flex="1"
+                headProperties={{
+                  [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
+                    hidden: false,
+                  },
+                  [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+                    hidden: false,
+                  },
+                  [KEY_RESULT_LIST_COLUMN.TEAM]: {
+                    hidden: false,
+                  },
+                  [KEY_RESULT_LIST_COLUMN.OWNER]: {
+                    hidden: false,
+                  },
+                  [KEY_RESULT_LIST_COLUMN.OBJECTIVE]: {
+                    hidden: false,
+                  },
+                }}
+                columns={[
+                  KEY_RESULT_LIST_COLUMN.KEY_RESULT,
+                  KEY_RESULT_LIST_COLUMN.PROGRESS,
+                  KEY_RESULT_LIST_COLUMN.TEAM,
+                  KEY_RESULT_LIST_COLUMN.OWNER,
+                  KEY_RESULT_LIST_COLUMN.OBJECTIVE,
+                ]}
+                bodyProperties={{
+                  [KEY_RESULT_LIST_COLUMN.KEY_RESULT]: {
+                    withDynamicIcon: true,
+                    withLastUpdateInfo: true,
+                  },
+                  [KEY_RESULT_LIST_COLUMN.PROGRESS]: {
+                    withConfidenceTag: true,
+                  },
+                }}
+                onLineClick={onLineClick}
+              />
+            </StyledTableWrapper>
+            <HStack width="100%" mt={10} gap={2} alignItems="center" justifyContent="flex-end">
+              {!isLoading && showPreviousPageButton && (
+                <Button
+                  bg="brand.500"
+                  color="white"
+                  _hover={{ backgroundColor: 'brand.300' }}
+                  onClick={loadPreviousKrsPage}
+                >
+                  Prev
+                </Button>
+              )}
+              {!isLoading && showNextPageButton && (
+                <Button
+                  bg="brand.500"
+                  color="white"
+                  _hover={{ backgroundColor: 'brand.300' }}
+                  onClick={loadNextKrsPage}
+                >
+                  Next
+                </Button>
+              )}
+            </HStack>
+          </ModalBody>
+        </StyledModal>
+      </Modal>
+    )
+  },
+)

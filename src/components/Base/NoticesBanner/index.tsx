@@ -6,7 +6,7 @@ import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import messages from './messages'
 
-export const storageKey = 'Bud@NPSOctober'
+export const storageKey = 'Bud@NPSJan24'
 
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()
@@ -43,14 +43,14 @@ const NoticesBanner = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        bg="linear-gradient(to right, #F53D7A, #1E97F7)"
+        bg="linear-gradient(to right, #ff7b4c, #ff884c)"
       >
         <Flex gap={6} alignItems="center">
           <Text color="brand.50" fontSize={14} fontWeight="medium">
             {intl.formatMessage(messages.mainText)}
           </Text>
           <a
-            href="https://bit.ly/npsprodutobud"
+            href="https://asm6am1qamy.typeform.com/to/uEW7fdlo#user_id=xxxxx"
             target="_blank"
             style={{ textDecoration: 'none' }}
             rel="noreferrer"
