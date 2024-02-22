@@ -141,6 +141,10 @@ export class TaskManagementService {
 
     return response
   }
+
+  async removeTask(id: string) {
+    await this.client.delete<Task>(`tasks/${id}`)
+  }
 }
 
 type GetTeamBoardOutput = Board
