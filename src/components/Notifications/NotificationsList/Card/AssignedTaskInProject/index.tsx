@@ -43,7 +43,6 @@ const AssignedTaskInProject = ({ properties, timestamp, isRead }: Notification) 
         </Box>
       </Heading>
       <Flex alignItems="center" justifyContent="center" gap={2}>
-        <Checkbox isDisabled isChecked={false} />
         <Text color="black.900" fontWeight="nomral" fontSize={14}>
           {properties.task?.name}
         </Text>

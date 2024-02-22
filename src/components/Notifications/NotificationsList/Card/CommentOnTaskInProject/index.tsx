@@ -67,7 +67,7 @@ const CommentOnTaskInProject = ({ properties, timestamp, isRead, type }: Notific
           </Text>
         </Box>
       </Heading>
-      <KeyResultNotificationContent keyResultTitle={properties.keyResult?.name} />
+      <TaskNotificationContent TaskTitle={properties.keyResult?.name} />
       <Text textAlign="left" fontSize={14} position="relative">
         {commentText}
       </Text>
