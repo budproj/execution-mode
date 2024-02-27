@@ -18,6 +18,9 @@ const getKey = (item: any) => {
 }
 
 export const TimelineWrapper = ({ comments, updates }: TasProperties) => {
+  comments = []
+
+  console.log({ updates })
   const timeline = orderBy([...comments, ...updates], 'createdAt', 'desc')
 
   return (

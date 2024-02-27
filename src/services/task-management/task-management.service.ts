@@ -119,15 +119,11 @@ export class TaskManagementService {
   }
 
   async updateTask(data: Partial<Task>) {
-    console.log({ data })
-
     if (!data._id) {
       throw new Error('A id is required to update task')
     }
 
     const { data: response } = await this.client.patch<Task>(`tasks/${data._id}`, data)
-
-    console.log('ccccccccccccc')
 
     return response
   }

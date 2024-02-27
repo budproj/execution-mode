@@ -1,11 +1,15 @@
-import { FormControl, Stack, VStack } from '@chakra-ui/react'
+import { FormControl, Stack, Text, VStack } from '@chakra-ui/react'
+import { addHours, format } from 'date-fns'
 import { Formik, Form } from 'formik'
 import React, { useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
+import * as Yup from 'yup'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { Task, TASK_STATUS } from 'src/services/task-management/task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
+import meAtom from 'src/state/recoil/user/me'
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
 import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
@@ -13,9 +17,9 @@ import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 import { FormActions } from './actions'
 import { DescriptionInput } from './description'
 import { DueDateInput } from './due-date'
+import messages from './messages'
 import { OwnerInput } from './owner'
 import { PriorityInput } from './priority'
-import { NewTaskSchema } from './schema'
 import { StartDateInput } from './start-date'
 import { TitleInput } from './title'
 
@@ -27,15 +31,6 @@ export type FormValues = {
   initialDate: Date
   dueDate: Date
   ownerID: string
-}
-
-const formInitialValues: FormValues = {
-  title: '',
-  priority: 4,
-  initialDate: new Date(),
-  dueDate: new Date(),
-  description: '',
-  ownerID: '',
 }
 
 function getUpdatePatches<T extends Record<string, unknown>>(
@@ -80,22 +75,41 @@ const InsertOrUpdateTaskForm = ({
   domain,
   identifier,
 }: InsertKeyResultFormProperties) => {
+  const intl = useIntl()
+  const myID = useRecoilValue(meAtom)
+
+  const NewTaskSchema = Yup.object().shape({
+    title: Yup.string().required(intl.formatMessage(messages.titleRequiredText)),
+    priority: Yup.string().required(),
+    description: Yup.string().required(intl.formatMessage(messages.descriptionRequiredText)),
+    initialDate: Yup.date(),
+    dueDate: Yup.date()
+      .min(Yup.ref('initialDate'), intl.formatMessage(messages.dueDateBeforeInitialDateText))
+      .max(new Date(2100, 11, 31), intl.formatMessage(messages.dueDateAfter2030Text))
+      .required(),
+    ownerID: Yup.string().required(),
+  })
+
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
   const { addTask, updateTask } = useColumnTasks(column, boardID, domain, identifier)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
 
   console.log({ onError })
 
-  // Const router = useRouter()
-
-  // Const currentUserID = useRecoilValue(meAtom)
-  // const userIdQuery = router.query?.['user-id']
-  // const userId = Array.isArray(userIdQuery) ? userIdQuery[0] : userIdQuery
+  const formInitialValues: FormValues = {
+    title: '',
+    priority: 4,
+    initialDate: new Date(),
+    dueDate: new Date(),
+    description: '',
+    ownerID: myID,
+  }
 
   const taskDrawerFormatted = {
     ...taskDrawer,
-    dueDate: new Date(taskDrawer?.dueDate),
-    initialDate: new Date(taskDrawer?.initialDate),
+    dueDate: taskDrawer ? format(new Date(taskDrawer?.dueDate), 'yyyy-MM-dd') : new Date(),
+    initialDate: taskDrawer ? format(new Date(taskDrawer?.initialDate), 'yyyy-MM-dd') : new Date(),
+    ownerID: taskDrawer?.owner,
   }
 
   const [initialValues, _] = useState<FormValues>(
@@ -147,13 +161,15 @@ const InsertOrUpdateTaskForm = ({
       return
     }
 
+    console.log({ values })
+
     const variables = {
       ...allValues,
       boardId: boardID,
       status: column,
       owner: allValues.ownerID,
-      dueDate: new Date(allValues.dueDate).toISOString(),
-      initialDate: new Date(allValues.initialDate).toISOString(),
+      dueDate: addHours(new Date(allValues.dueDate), 3),
+      initialDate: addHours(new Date(allValues.initialDate), 3),
     }
 
     const newTask = getUpdatePatches(taskDrawer, variables as unknown as Task)
@@ -170,37 +186,51 @@ const InsertOrUpdateTaskForm = ({
       validationSchema={NewTaskSchema}
       onSubmit={isEditing ? handleEditSubmit : handleCreateTaskSubmit}
     >
-      <Form style={{ width: '100%' }}>
-        <FormControl
-          id="task-insert-or-update"
-          display="flex"
-          flexDirection="column"
-          p={8}
-          gridGap={8}
-          h="full"
-        >
-          <VStack gap={2}>
-            <TitleInput
-              hasValidationErrors={validationErrors.includes('title')}
-              isLoading={isLoading}
-            />
-            <PriorityInput isLoading={isLoading} />
+      {({ errors }) => (
+        <Form style={{ width: '100%' }}>
+          <FormControl
+            id="task-insert-or-update"
+            display="flex"
+            flexDirection="column"
+            p={8}
+            gridGap={8}
+            h="full"
+          >
+            <VStack gap={2}>
+              <TitleInput
+                hasValidationErrors={validationErrors.includes('title')}
+                isLoading={isLoading}
+              />
+              <PriorityInput isLoading={isLoading} />
 
-            <DescriptionInput isLoading={isLoading} />
-          </VStack>
-          {/* <DescriptionInput /> */}
-          {/* {!isLoading && !editingModeKeyResult && <OkrExampleLink />} */}
+              <DescriptionInput
+                isLoading={isLoading}
+                hasValidationErrors={validationErrors.includes('description')}
+              />
 
-          <Stack direction="row" spacing={6}>
-            <StartDateInput isLoading={isLoading} />
-            <DueDateInput isLoading={isLoading} />
-          </Stack>
+              {errors.description && (
+                <Text alignSelf="flex-start" color="red">
+                  {errors.description}
+                </Text>
+              )}
+            </VStack>
 
-          <OwnerInput isLoading={isLoading} />
+            <Stack direction="row" spacing={6}>
+              <StartDateInput isLoading={isLoading} />
+              <DueDateInput isLoading={isLoading} />
+            </Stack>
+            {errors.dueDate && (
+              <Text alignSelf="flex-start" color="red">
+                {String(errors.dueDate)}
+              </Text>
+            )}
 
-          <FormActions isLoading={isLoading} onClose={onClose} />
-        </FormControl>
-      </Form>
+            <OwnerInput isLoading={isLoading} />
+
+            <FormActions isLoading={isLoading} onClose={onClose} />
+          </FormControl>
+        </Form>
+      )}
     </Formik>
   )
 }

@@ -10,8 +10,8 @@ import messages from './messages'
 import { FormValues } from './wrapper'
 
 interface TitleInputProperties {
-  isLoading?: boolean
-  hasValidationErrors?: boolean
+  readonly isLoading?: boolean
+  readonly hasValidationErrors?: boolean
 }
 
 export const TitleInput = ({ hasValidationErrors, isLoading }: TitleInputProperties) => {

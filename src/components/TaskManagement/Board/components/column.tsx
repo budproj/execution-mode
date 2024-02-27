@@ -123,7 +123,7 @@ const TaskColumnComponent = ({ column, boardID, tasks, teamID }: ColumnPropertie
           onClick={handleAddNewTaskClickButton}
         >
           <Box>
-            <PlusIcon desc="1231" w="0.6em" fill="brand.500" stroke="brand.500" />
+            <PlusIcon desc="1231" w="0.6em" fill="blue" stroke="brand.500" />
           </Box>
           <Text className="expandbtntext" color="brand.500" fontWeight="500">
             {intl.formatMessage(messages.addTaskButton)}
@@ -149,7 +149,7 @@ const TaskColumnComponent = ({ column, boardID, tasks, teamID }: ColumnPropertie
             color="brand.500"
             fontWeight="bold"
             _hover={{ color: 'brand.300' }}
-            onClick={addEmptyTask}
+            onClick={handleAddNewTaskClickButton}
           >
             + Nova Tarefa
           </Button>

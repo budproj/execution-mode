@@ -42,7 +42,7 @@ export const FormActions = ({ onClose, isLoading }: FormActionsInterface) => {
   }
 
   return (
-    <Stack flexGrow={1} alignItems="flex-end" justifyContent="center" direction="row" pt={16}>
+    <Stack flexGrow={1} alignItems="flex-end" justifyContent="center" direction="row" pt={5}>
       <Skeleton isLoaded={!isLoading} flexGrow={1}>
         <Button variant="outline" colorScheme="brand" w="100%" onClick={handleCancel}>
           {intl.formatMessage(messages.firstActionButtonLabel)}

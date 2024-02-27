@@ -10,7 +10,7 @@ import messages from './messages'
 import { FormValues } from './wrapper'
 
 interface OwnerInputProperties {
-  isLoading?: boolean
+  readonly isLoading?: boolean
 }
 
 export const OwnerInput = ({ isLoading }: OwnerInputProperties) => {
@@ -22,7 +22,7 @@ export const OwnerInput = ({ isLoading }: OwnerInputProperties) => {
   }
 
   return (
-    <FormInputBase title={intl.formatMessage(messages.sixthInputLabel)}>
+    <FormInputBase required title={intl.formatMessage(messages.sixthInputLabel)}>
       <Skeleton isLoaded={!isLoading}>
         <KeyResultOwnerSelectMenu
           isLazy

@@ -13,7 +13,6 @@ export function useUpdateTaskMutate(domain: BOARD_DOMAIN, identifier: string) {
   const updateTaskMutate = useMutation({
     mutationFn: async (data: Partial<Task>) => {
       const { taskManagement } = await servicesPromise
-      console.log('asaaaaaaaaaaaaaaa')
       const response = await taskManagement.updateTask(data)
       return response
     },

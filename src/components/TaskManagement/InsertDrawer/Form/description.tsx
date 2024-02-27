@@ -1,7 +1,7 @@
-import { Skeleton } from '@chakra-ui/react'
+import { Skeleton, InputGroup } from '@chakra-ui/react'
 import { EditorEvents } from '@tiptap/react'
 import { Field, useFormikContext } from 'formik'
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
@@ -11,7 +11,8 @@ import messages from './messages'
 import { FormValues } from './wrapper'
 
 interface DescriptionInputProperties {
-  isLoading?: boolean
+  readonly isLoading?: boolean
+  readonly hasValidationErrors?: boolean
 }
 
 const EditorInput = () => {
@@ -22,7 +23,7 @@ const EditorInput = () => {
       const { editor } = parameters
 
       // TODO: a debounce would be nice here
-      const timer = setTimeout(() => setFieldValue('description', editor.getHTML()), 2500)
+      const timer = setTimeout(async () => setFieldValue('description', editor.getHTML()), 2500)
       return () => clearTimeout(timer)
     },
     [setFieldValue],
@@ -31,18 +32,41 @@ const EditorInput = () => {
   return <Editor editable content={initialValues.description} onUpdate={handleUpdate} />
 }
 
-export const DescriptionInput = ({ isLoading }: DescriptionInputProperties) => {
+export const DescriptionInput = ({
+  isLoading,
+  hasValidationErrors,
+}: DescriptionInputProperties) => {
+  const [hasBlurredInput, setHasBlurredInput] = useState(false)
+  const [isFocused, setIsFocused] = useState(true)
   const intl = useIntl()
+  const { values } = useFormikContext<FormValues>()
+
+  const typedAnEmptyDescription = values.description.length === 0 && hasBlurredInput
+  const isEmptyAfterValidation = values.description.length === 0 && hasValidationErrors
+  const isInvalid = typedAnEmptyDescription || isEmptyAfterValidation
+
+  const handleBlur = () => {
+    if (!hasBlurredInput) setHasBlurredInput(true)
+    if (isFocused) setIsFocused(false)
+  }
+
+  const handleFocus = () => {
+    if (!isFocused) setIsFocused(true)
+  }
 
   return (
-    <FormInputBase>
+    <FormInputBase required>
       <Skeleton isLoaded={!isLoading}>
-        <Field
-          name="description"
-          placeholder={intl.formatMessage(messages.secondInputPlaceholder)}
-          _placeholder={{ color: 'black.400' }}
-          component={EditorInput}
-        />
+        <InputGroup onBlurCapture={handleBlur} onFocusCapture={handleFocus}>
+          <Field
+            name="description"
+            placeholder={intl.formatMessage(messages.secondInputPlaceholder)}
+            _placeholder={{ color: 'black.400' }}
+            component={EditorInput}
+            fieldId="description"
+            isInvalid={isInvalid}
+          />
+        </InputGroup>
       </Skeleton>
     </FormInputBase>
   )

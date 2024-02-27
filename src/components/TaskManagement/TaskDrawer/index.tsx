@@ -136,6 +136,11 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                 ownerId={taskDrawer?.owner}
                 users={teamMembers}
                 supportTeam={supportTeam}
+                boardID={boardData?._id ?? ''}
+                domain={BOARD_DOMAIN.TEAM}
+                identifier={teamID as unknown as string}
+                column={taskDrawer?.status}
+                task={taskDrawer}
               />
 
               <Divider />

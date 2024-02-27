@@ -17,8 +17,38 @@ type KeyResultInsertDrawerFormMessage =
   | 'firstTipDescription'
   | 'secondTipDescription'
   | 'thirdTipDescription'
+  | 'titleRequiredText'
+  | 'descriptionRequiredText'
+  | 'dueDateRequiredText'
+  | 'dueDateBeforeInitialDateText'
+  | 'dueDateAfter2030Text'
 
 export default defineMessages<KeyResultInsertDrawerFormMessage>({
+  titleRequiredText: {
+    defaultMessage: 'Título obrigatório.',
+    id: '6hOcnz',
+    description: 'The error message that appears in the insert or updated drawer.',
+  },
+  descriptionRequiredText: {
+    defaultMessage: 'Descrição obrigatória.',
+    id: 'EF3Wh/',
+    description: 'The error message that appears in the insert or updated drawer.',
+  },
+  dueDateRequiredText: {
+    defaultMessage: 'Data de prazo obrigatória.',
+    id: 'LLhNT/',
+    description: 'The error message that appears in the insert or updated drawer.',
+  },
+  dueDateBeforeInitialDateText: {
+    defaultMessage: 'Prazo não pode ser depois do início.',
+    id: 'INlfvg',
+    description: 'The error message that appears in the insert or updated drawer.',
+  },
+  dueDateAfter2030Text: {
+    defaultMessage: 'Prazo não pode ser depois de 2030',
+    id: 'DarZer',
+    description: 'The error message that appears in the insert or updated drawer.',
+  },
   firstInputLabel: {
     defaultMessage: 'Título',
     id: '6J+ZAo',

@@ -1,14 +1,14 @@
 import { Avatar, Flex, SkeletonCircle } from '@chakra-ui/react'
 import { Form, Formik, FormikHelpers } from 'formik'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
-import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import KeyResultSectionAddCommentInput from 'src/components/KeyResult/Single/Sections/AddComment/input'
 import { useGetCommentsByEntity } from 'src/components/Routine/hooks/getCommentsByEntity'
 import { useCreateComment } from 'src/components/Routine/hooks/setComment'
 import { User } from 'src/components/User/types'
-import { Task, TaskUpdate } from 'src/services/task-management/task-management.service'
+import { Task } from 'src/services/task-management/task-management.service'
 
+import { useGetTaskUpdates } from '../../hooks/use-get-task-updates'
 import { TASK_DOMAIN } from '../../types'
 
 import { TimelineWrapper } from './timeline-wrapper'
@@ -27,22 +27,9 @@ export interface TaskCommentsInputInitialValues {
 }
 
 export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties) => {
-  const [taskUpdates, setTaskUpdates] = useState<TaskUpdate[]>([])
   const entity = `${TASK_DOMAIN.task}:${task?._id ?? ''}`
 
-  const { servicesPromise } = useContext(ServicesContext)
-
-  useEffect(() => {
-    async function getTaskUpdates() {
-      const { taskManagement } = await servicesPromise
-      if (task) {
-        const taskUpdatesRequest = await taskManagement.getTaskUpdates(task._id)
-        setTaskUpdates(taskUpdatesRequest)
-      }
-    }
-
-    getTaskUpdates()
-  }, [servicesPromise, task])
+  const taskUpdatesRequest = useGetTaskUpdates(task?._id)
 
   const handleSubmit = async (
     values: TaskCommentsInputInitialValues,
@@ -66,12 +53,13 @@ export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [task, entity])
 
-  console.log({ taskUpdates })
-
   return (
     <Flex direction="column" paddingTop="2rem" position="relative">
       <Flex direction="column" marginX="28px" marginBottom="2rem" gridGap={4}>
-        <TimelineWrapper comments={comments} updates={taskUpdates} />
+        <TimelineWrapper
+          comments={comments}
+          updates={taskUpdatesRequest.data ? taskUpdatesRequest.data : []}
+        />
       </Flex>
       <Flex
         direction="column"
