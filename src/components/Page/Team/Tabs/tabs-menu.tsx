@@ -1,6 +1,7 @@
 import { Box, Stack, Tab, TabList, Tag } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
+import { useFlags } from 'flagsmith/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -30,6 +31,8 @@ const StyledTab = styled(Tab)`
 const TabsMenu = ({ teamId }: TabsMenuProperties) => {
   const intl = useIntl()
   const { dispatch } = useEvent(EventType.RETROSPECTIVE_TAB_CLICK)
+  const flags = useFlags(['board_tasks'])
+  const isKeyResultSummaryVisible = flags.board_tasks.enabled
 
   const router = useRouter()
 
@@ -58,39 +61,41 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
           {intl.formatMessage(messages.okrsTeamTab)}
         </StyledTab>
         <Box width="1px" bg="new-gray.500" />
-        <StyledTab
-          px={8}
-          color="new-gray.800"
-          justifyContent="center"
-          alignItems="center"
-          _selected={{ color: 'white', background: 'brand.500' }}
-          paddingBottom={3}
-          onClick={() => {
-            handleClick('tasks')
-          }}
-        >
-          <div
-            id="retrospective-tab"
-            style={{
-              display: 'flex',
-            }}
+
+        {isKeyResultSummaryVisible && (
+          <><StyledTab
+            px={8}
+            color="new-gray.800"
+            justifyContent="center"
+            alignItems="center"
+            _selected={{ color: 'white', background: 'brand.500' }}
+            paddingBottom={3}
+            onClick={() => {
+              handleClick('tasks')
+            } }
           >
-            {intl.formatMessage(messages.tasksTeamTab)}
-            <Tag
-              size="md"
-              color="white"
-              borderColor="current"
-              border="1px solid"
-              lineHeight="0px"
-              fontWeight="semibold"
-              bg="brand.500"
-              ml={2}
+            <div
+              id="retrospective-tab"
+              style={{
+                display: 'flex',
+              }}
             >
-              {intl.formatMessage(tabMessages.newItem)}
-            </Tag>
-          </div>
-        </StyledTab>
-        <Box width="1px" bg="new-gray.500" />
+              {intl.formatMessage(messages.tasksTeamTab)}
+              <Tag
+                size="md"
+                color="white"
+                borderColor="current"
+                border="1px solid"
+                lineHeight="0px"
+                fontWeight="semibold"
+                bg="brand.500"
+                ml={2}
+              >
+                {intl.formatMessage(tabMessages.newItem)}
+              </Tag>
+            </div>
+          </StyledTab><Box width="1px" bg="new-gray.500" /></>
+        )}
         <StyledTab
           px={8}
           color="new-gray.800"
