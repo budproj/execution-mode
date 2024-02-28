@@ -17,8 +17,11 @@ const getKey = (item: any) => {
   return item.id ? item.id : item._id
 }
 
-export const TimelineWrapper = ({ comments, updates }: TasProperties) => {
-  const timeline = orderBy([...comments, ...updates], 'createdAt', 'desc')
+// export const TimelineWrapper = ({ comments, updates }: TasProperties) => {
+//   const timeline = orderBy([...comments, ...updates], 'createdAt', 'desc')
+
+export const TimelineWrapper = ({ updates }: TasProperties) => {
+  const timeline = orderBy([...updates], 'createdAt', 'desc')
 
   return (
     <Flex flexDir="column" gap={4}>
