@@ -4227,6 +4227,10 @@
     "defaultMessage": "Performed by <highlight>{author}</highlight> {unit, select, fallback {em} other {}} {time}",
     "description": "This text is displayed as a helper text, below the check-in card title"
   },
+  "ykjrOr": {
+    "defaultMessage": "Edit",
+    "description": "This message appears as a label for the edit button."
+  },
   "Y+MtZe": {
     "defaultMessage": "Name",
     "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
@@ -4444,7 +4448,7 @@
     "description": "This message is displayed inside the empty state on last retrospective overview"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2024-02-28T00:21:11Z",
+    "defaultMessage": "2024-02-28T19:40:22Z",
     "description": ""
   }
 }
