@@ -1,6 +1,5 @@
 import { Box, Stack, Tab, TabList, Tag } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import { useFlags } from 'flagsmith/react'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
@@ -14,6 +13,7 @@ import messages from '../messages'
 
 interface TabsMenuProperties {
   teamId: Team['id']
+  isTasksEnabled: boolean
 }
 
 const StyledTab = styled(Tab)`
@@ -28,11 +28,9 @@ const StyledTab = styled(Tab)`
   }
 `
 
-const TabsMenu = ({ teamId }: TabsMenuProperties) => {
+const TabsMenu = ({ teamId, isTasksEnabled }: TabsMenuProperties) => {
   const intl = useIntl()
   const { dispatch } = useEvent(EventType.RETROSPECTIVE_TAB_CLICK)
-  const flags = useFlags(['board_tasks'])
-  const isKeyResultSummaryVisible = flags.board_tasks.enabled
 
   const router = useRouter()
 
@@ -62,7 +60,7 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
         </StyledTab>
         <Box width="1px" bg="new-gray.500" />
 
-        {isKeyResultSummaryVisible && (
+        {isTasksEnabled && (
           <>
             <StyledTab
               px={8}

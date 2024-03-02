@@ -1,4 +1,5 @@
 import { TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
+import { useFlags } from 'flagsmith/react'
 import React from 'react'
 
 import { PageContent } from 'src/components/Base'
@@ -17,25 +18,35 @@ interface ExploreTeamTabsProperties {
   activeTab?: string
 }
 
-const tabIIndex = new Map([
-  ['okrs', 0],
-  ['tasks', 1],
-  ['retrospective', 2],
-])
-
 const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProperties) => {
+  const flags = useFlags(['board_tasks'])
+  const isTasksEnabled = flags.board_tasks.enabled
+
+  const tabIndex = isTasksEnabled
+    ? new Map([
+        ['okrs', 0],
+        ['tasks', 1],
+        ['retrospective', 2],
+      ])
+    : new Map([
+        ['okrs', 0],
+        ['retrospective', 1],
+      ])
+
   return (
-    <Tabs isLazy variant="unstyled" index={tabIIndex.get(activeTab ?? 'okrs')}>
-      <TabsMenu teamId={teamId} />
+    <Tabs isLazy variant="unstyled" index={tabIndex.get(activeTab ?? 'okrs')}>
+      <TabsMenu isTasksEnabled={isTasksEnabled} teamId={teamId} />
 
       <PageContent>
         <TabPanels>
           <TabPanel padding="0px !important">
             <OkrsTabContent teamId={teamId} isLoading={isLoading} />
           </TabPanel>
-          <TabPanel>
-            <TasksTabContent teamId={teamId} isLoading={isLoading} />
-          </TabPanel>
+          {isTasksEnabled && (
+            <TabPanel>
+              <TasksTabContent teamId={teamId} isLoading={isLoading} />
+            </TabPanel>
+          )}
           <TabPanel padding="0px !important">
             <RetrospectiveTabContent teamId={teamId} isLoading={isLoading} />
           </TabPanel>
