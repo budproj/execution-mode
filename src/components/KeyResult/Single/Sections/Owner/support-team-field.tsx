@@ -28,7 +28,7 @@ type SupportTeamFieldProperties = {
   readonly ownerName?: string
   readonly isFromTask?: boolean
   readonly updateTask?: (_id: string, updatedTask: Except<Partial<Task>, '_id'>) => void
-  readonly task: Task
+  readonly task?: Task
   teamMembers?: User[]
 }
 
@@ -127,7 +127,7 @@ export const SupportTeamField = ({
         supportTeamMembers: newSupportTeam,
       }
 
-      if (updateTask) {
+      if (updateTask && task) {
         updateTask(task._id, { _id: task._id, ...newTaskWithSupportTeam })
       }
 
@@ -148,7 +148,7 @@ export const SupportTeamField = ({
       const newTaskWithSupportTeam: Partial<Task> = {
         supportTeamMembers: newSupportTeam,
       }
-      if (updateTask) {
+      if (updateTask && task) {
         updateTask(task._id, { _id: task._id, ...newTaskWithSupportTeam })
       }
 
