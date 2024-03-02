@@ -221,6 +221,7 @@ export const SupportTeamField = ({
           addUser={addUser}
           removeUser={removeUser}
           ownerName={ownerName}
+          teamId={teamId}
         />
       </PopoverContent>
     </Popover>
