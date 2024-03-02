@@ -8,6 +8,8 @@ import {
   TaskInsert,
   TASK_STATUS as ColumnType,
 } from 'src/services/task-management/task-management.service'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -25,6 +27,7 @@ const useColumnTasks = (
   domain: BOARD_DOMAIN,
   identifier: string,
 ) => {
+  const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
   const { mutate } = useAddTask(domain, identifier)
   const { mutate: updateTaskMutate } = useUpdateTaskMutate(domain, identifier)
   const { mutate: updateBoardMutate } = useUpdateBoardMutate()
@@ -37,6 +40,7 @@ const useColumnTasks = (
 
   const addTask = useCallback(
     (task: TaskInsert) => {
+      dispatch({ taskData: task })
       debug(`Adding new task to ${column} column`)
       mutate(task)
     },
