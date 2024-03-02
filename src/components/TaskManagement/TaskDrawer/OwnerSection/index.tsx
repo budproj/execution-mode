@@ -16,25 +16,23 @@ import { TASK_UPDATES_DATA_KEY } from '../../hooks/use-get-task-updates'
 import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 
 interface KeyResultSingleSectionOwnerWrapperProperties {
-  readonly users?: User[]
-  readonly supportTeam?: User[]
   readonly ownerId?: string
   readonly column: ColumnType
   readonly boardID: string
   readonly domain: BOARD_DOMAIN
   readonly identifier: string
   readonly task: Task
+  teamMembers: User[]
 }
 
 export const TaskDrawerSectionOwnerWrapper = ({
-  users,
-  supportTeam,
   ownerId,
   boardID,
   column,
   domain,
   identifier,
   task,
+  teamMembers,
 }: KeyResultSingleSectionOwnerWrapperProperties): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false)
   const queryClient = useQueryClient()
@@ -51,7 +49,7 @@ export const TaskDrawerSectionOwnerWrapper = ({
     if (isOpen) setIsOpen(false)
   }, [isOpen])
 
-  const onSelect2 = useCallback(
+  const onSelect = useCallback(
     (userID: string) => {
       const newTaskWithOwner: Partial<Task> = { owner: userID }
       updateTask(task._id, { _id: task._id, ...newTaskWithOwner })
@@ -85,12 +83,18 @@ export const TaskDrawerSectionOwnerWrapper = ({
             <Box flexGrow={1} />
           </Flex>
           <PopoverContent width="md" h="full" overflow="hidden">
-            <KeyResultAvailableOwners isFromTask onSelect={onSelect2} />
+            <KeyResultAvailableOwners isFromTask onSelect={onSelect} />
           </PopoverContent>
         </Popover>
       </Flex>
       <Flex gridGap={2} direction="column" flexGrow={1}>
-        <SupportTeamField isFromTask hasPermitionToUpdate supportTeamMembers={supportTeam} />
+        <SupportTeamField
+          isFromTask
+          hasPermitionToUpdate
+          teamMembers={teamMembers}
+          task={task}
+          updateTask={updateTask}
+        />
       </Flex>
     </Flex>
   )

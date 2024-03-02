@@ -1,5 +1,5 @@
 import { FormControl, Stack, Text, VStack } from '@chakra-ui/react'
-import { addHours, format } from 'date-fns'
+import { addDays, addHours, format, set } from 'date-fns'
 import { Formik, Form } from 'formik'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -145,6 +145,18 @@ const InsertOrUpdateTaskForm = ({
       attachments: [],
       supportTeamMembers: [],
       tags: [],
+      initialDate: set(new Date(allValues.initialDate), {
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        milliseconds: 0,
+      }),
+      dueDate: set(addDays(new Date(allValues.dueDate), 1), {
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+        milliseconds: 0,
+      }),
     }
 
     addTask(variables)
@@ -161,15 +173,13 @@ const InsertOrUpdateTaskForm = ({
       return
     }
 
-    console.log({ values })
-
     const variables = {
       ...allValues,
       boardId: boardID,
       status: column,
       owner: allValues.ownerID,
-      dueDate: addHours(new Date(allValues.dueDate), 3),
-      initialDate: addHours(new Date(allValues.initialDate), 3),
+      dueDate: addHours(new Date(allValues.dueDate), 3).toISOString(),
+      initialDate: addHours(new Date(allValues.initialDate), 3).toISOString(),
     }
 
     const newTask = getUpdatePatches(taskDrawer, variables as unknown as Task)

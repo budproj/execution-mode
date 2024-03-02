@@ -12,14 +12,14 @@ import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-
 import useTaskDragAndDrop from '../hooks/use-task-drag-and-drop'
 
 type TaskProperties = {
-  index: number
-  task: TaskModel
-  onUpdate: (id: TaskModel['_id'], updatedTask: TaskModel) => void
-  onDelete: (id: TaskModel['_id']) => void
-  onDropHover: (index: number, index_: number) => void
+  readonly index: number
+  readonly task: TaskModel
+  readonly onUpdate: (id: TaskModel['_id'], updatedTask: TaskModel) => void
+  readonly onDelete: (id: TaskModel['_id']) => void
+  readonly onDropHover: (index: number, index_: number) => void
 }
 
-const Task = ({
+const TaskCardComponent = ({
   index,
   task,
   onUpdate: handleUpdate,
@@ -74,7 +74,7 @@ const Task = ({
   )
 }
 
-export default memo(Task, (previous, next) => {
+export default memo(TaskCardComponent, (previous, next) => {
   if (
     _.isEqual(previous.task, next.task) &&
     _.isEqual(previous.index, next.index) &&

@@ -14,6 +14,7 @@ import meAtom from 'src/state/recoil/user/me'
 import { useAddTask } from '../../hooks/use-add-task'
 import { useRemoveTaskMutate } from '../../hooks/use-remove-task-mutate'
 import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
+import { useUpdateBoardMutate } from '../../hooks/use-update-board-mutate'
 import { useUpdateTaskMutate } from '../../hooks/use-update-task-mutate'
 import { swap } from '../utils/helpers'
 import { debug } from '../utils/logging'
@@ -26,17 +27,13 @@ const useColumnTasks = (
 ) => {
   const { mutate } = useAddTask(domain, identifier)
   const { mutate: updateTaskMutate } = useUpdateTaskMutate(domain, identifier)
+  const { mutate: updateBoardMutate } = useUpdateBoardMutate()
   const { mutate: removeTaskMutate } = useRemoveTaskMutate(domain, identifier)
-  const [tasks, setTasks] = useState<Record<ColumnType, Task[]>>({
-    pending: [],
-    doing: [],
-    done: [],
-    toDo: [],
-  })
+
+  const [columnTasks, setColumnTasks] = useState<Task[]>([])
+
   const myID = useRecoilValue(meAtom)
   const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
-
-  const columnTasks = tasks[column]
 
   const addTask = useCallback(
     (task: TaskInsert) => {
@@ -79,15 +76,6 @@ const useColumnTasks = (
   const updateTask = useCallback(
     (_id: TaskModel['_id'], updatedTask: Except<Partial<TaskModel>, '_id'>) => {
       debug(`Updating task ${_id} with ${JSON.stringify(updateTask)}`)
-      // SetTasks((allTasks) => {
-      //   const columnTasks = allTasks[column]
-      //   return {
-      //     ...allTasks,
-      //     [column]: columnTasks.map((task) =>
-      //       task._id === _id ? { ...task, ...updatedTask } : task,
-      //     ),
-      //   }
-      // })
       updateTaskMutate(updatedTask)
     },
     [updateTaskMutate],
@@ -104,19 +92,18 @@ const useColumnTasks = (
   const swapTasks = useCallback(
     (index: number, index_: number) => {
       debug(`Swapping task ${index} with ${index_} in ${column} column`)
-      setTasks((allTasks) => {
-        const columnTasks = allTasks[column]
-        return {
-          ...allTasks,
-          [column]: swap(columnTasks, index, index_),
-        }
+      setColumnTasks((allTasks) => {
+        return swap(allTasks, index, index_)
       })
+
+      const order = columnTasks.map((task) => task._id)
+
+      updateBoardMutate({ boardId: boardID, column, order })
     },
-    [column, setTasks],
+    [boardID, column, columnTasks, updateBoardMutate],
   )
 
   return {
-    tasks: columnTasks,
     addEmptyTask,
     openInsertDrawerTask,
     addTask,
@@ -124,6 +111,8 @@ const useColumnTasks = (
     dropTaskFrom,
     deleteTask,
     swapTasks,
+    columnTasks,
+    setColumnTasks,
   }
 }
 

@@ -22,9 +22,10 @@ import { isEditingTaskDrawerIdAtom } from 'src/state/recoil/task-management/draw
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
+import { taskSupportTeamAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-support-team'
 import { teamAtomFamily } from 'src/state/recoil/team'
-import { userAtomFamily } from 'src/state/recoil/user'
 
+import { ColumnColorScheme, headerColumnMessage } from '../Board/utils/helpers'
 import { PrirityItemOption } from '../PrioritySelectMenu/wrapper'
 import { BOARD_DOMAIN, useTeamTasksBoardData } from '../hooks/use-team-tasks-board-data'
 
@@ -42,11 +43,12 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const { data: boardData } = useTeamTasksBoardData(teamId)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
   const taskDrawerId = useRecoilValue(taskDrawerIdAtom)
+  const setTaskSupportTeam = useSetRecoilState(taskSupportTeamAtom)
   const resetTaskDrawerId = useResetRecoilState(taskDrawerIdAtom)
   const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
   const isEditingTaskDrawerId = useSetRecoilState(isEditingTaskDrawerIdAtom)
 
-  const user = useRecoilValue(userAtomFamily(taskDrawer?.owner))
+  const translatedStatus = headerColumnMessage.get(taskDrawer?.status)
 
   const team = useRecoilValue(teamAtomFamily(teamId))
   const [teamMembers, setTeamMemberEdges] = useConnectionEdges(team?.users?.edges)
@@ -57,9 +59,11 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
     }
   }, [team, setTeamMemberEdges])
 
-  const supportTeam = teamMembers.filter((member) =>
-    taskDrawer?.supportTeamMembers.includes(member.id),
-  )
+  useEffect(() => {
+    setTaskSupportTeam(
+      teamMembers.filter((member) => taskDrawer?.supportTeamMembers.includes(member.id)),
+    )
+  }, [setTaskSupportTeam, taskDrawer, teamMembers])
 
   const isOpen = Boolean(taskDrawerId)
 
@@ -84,22 +88,30 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
       }}
     >
       <DrawerOverlay />
-      <DrawerContent bg="new-gray.100" overflowY="auto" flexGrow={1} overflow="auto">
-        <Flex flexDirection="column">
-          <Flex paddingX="24px" bg="white">
+      <DrawerContent
+        bg="new-gray.100"
+        overflowY="scroll"
+        flexGrow={1}
+        position="fixed"
+        height="100%"
+      >
+        <Flex flexDirection="column" height="100%">
+          <Flex paddingX="24px" bg="white" height="100%">
             <Flex flexDirection="column" width="100%">
               <Flex marginTop="15px">
                 <Flex
-                  bg="yellow.600"
+                  bg={ColumnColorScheme[taskDrawer?.status]}
                   borderRadius="100px"
                   fontWeight={700}
                   fontSize="12px"
                   justifyContent="center"
                   alignItems="center"
                   height="20px"
-                  width="90px"
+                  paddingX="15px"
                 >
-                  <Text color="white">{taskDrawer?.status}</Text>
+                  <Text color="white" textTransform="uppercase">
+                    {translatedStatus && intl.formatMessage(translatedStatus)}
+                  </Text>
                 </Flex>
 
                 <Button bg="new-gray.300" marginLeft="auto" onClick={handleClickEditButton}>
@@ -134,13 +146,12 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
 
               <TaskDrawerSectionOwnerWrapper
                 ownerId={taskDrawer?.owner}
-                users={teamMembers}
-                supportTeam={supportTeam}
                 boardID={boardData?._id ?? ''}
                 domain={BOARD_DOMAIN.TEAM}
                 identifier={teamID as unknown as string}
                 column={taskDrawer?.status}
                 task={taskDrawer}
+                teamMembers={teamMembers}
               />
 
               <Divider />
@@ -171,7 +182,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
               />
             </Flex>
           </Flex>
-          <TaskDrawerTimeline task={taskDrawer} owner={user} />
+          <TaskDrawerTimeline task={taskDrawer} />
         </Flex>
       </DrawerContent>
     </Drawer>

@@ -1,12 +1,14 @@
 import { Avatar, Flex, SkeletonCircle } from '@chakra-ui/react'
 import { Form, Formik, FormikHelpers } from 'formik'
 import React, { useEffect } from 'react'
+import { useRecoilValue } from 'recoil'
 
 import KeyResultSectionAddCommentInput from 'src/components/KeyResult/Single/Sections/AddComment/input'
 import { useGetCommentsByEntity } from 'src/components/Routine/hooks/getCommentsByEntity'
 import { useCreateComment } from 'src/components/Routine/hooks/setComment'
-import { User } from 'src/components/User/types'
 import { Task } from 'src/services/task-management/task-management.service'
+import { userAtomFamily } from 'src/state/recoil/user'
+import meAtom from 'src/state/recoil/user/me'
 
 import { useGetTaskUpdates } from '../../hooks/use-get-task-updates'
 import { TASK_DOMAIN } from '../../types'
@@ -18,7 +20,6 @@ const initialValues = {
 }
 
 interface TaskDrawerTimelineProperties {
-  readonly owner?: Partial<User>
   readonly task?: Partial<Task>
 }
 
@@ -26,7 +27,10 @@ export interface TaskCommentsInputInitialValues {
   text: string
 }
 
-export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties) => {
+export const TaskDrawerTimeline = ({ task }: TaskDrawerTimelineProperties) => {
+  const myID = useRecoilValue(meAtom)
+  const user = useRecoilValue(userAtomFamily(myID))
+
   const entity = `${TASK_DOMAIN.task}:${task?._id ?? ''}`
 
   const taskUpdatesRequest = useGetTaskUpdates(task?._id)
@@ -54,7 +58,7 @@ export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties
   }, [task, entity])
 
   return (
-    <Flex direction="column" paddingTop="2rem" position="relative">
+    <Flex direction="column" paddingTop="2rem" position="relative" height="100%">
       <Flex direction="column" marginX="28px" marginBottom="2rem" gridGap={4}>
         <TimelineWrapper
           comments={comments}
@@ -64,18 +68,21 @@ export const TaskDrawerTimeline = ({ owner, task }: TaskDrawerTimelineProperties
       <Flex
         direction="column"
         bg="white"
+        boxShadow="with-stroke.light"
+        borderColor="new-gray.200"
         paddingY="1rem"
         paddingX="1rem"
         width="100%"
-        // Position="fixed"
+        position="relative"
         bottom="0"
+        marginTop="auto"
       >
         <Formik enableReinitialize initialValues={initialValues} onSubmit={handleSubmit}>
           {({ handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
               <Flex gridGap={3} alignItems="flex-start">
                 <SkeletonCircle isLoaded w={10} h={10}>
-                  <Avatar name={owner?.fullName} src={owner?.picture} w={10} h={10} />
+                  <Avatar name={user?.fullName} src={user?.picture} w={10} h={10} />
                 </SkeletonCircle>
                 <KeyResultSectionAddCommentInput isLoading={false} />
               </Flex>

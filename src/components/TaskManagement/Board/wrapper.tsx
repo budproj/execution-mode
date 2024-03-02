@@ -25,6 +25,8 @@ type BoardWrapperProperties = {
 const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
   const { data: boardData, isError } = useTeamTasksBoardData(teamId)
 
+  console.log({ boardData })
+
   const [selectedUser, setSelectedUser] = useState<string>()
   const ownersAndSupportTeamMembers = useLoadUsers(teamId)
   const team = useRecoilValue(teamAtomFamily(teamId))
@@ -93,23 +95,27 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
               boardID={boardData._id}
               tasks={filteredTasks[ColumnType.pending]}
               teamID={teamId}
+              order={boardData.order[ColumnType.pending]}
             />
             <TaskColumnComponent
               column={ColumnType.toDo}
               boardID={boardData._id}
               tasks={filteredTasks[ColumnType.toDo]}
+              order={boardData.order[ColumnType.toDo]}
               teamID={teamId}
             />
             <TaskColumnComponent
               column={ColumnType.doing}
               boardID={boardData._id}
               tasks={filteredTasks[ColumnType.doing]}
+              order={boardData.order[ColumnType.doing]}
               teamID={teamId}
             />
             <TaskColumnComponent
               column={ColumnType.done}
               boardID={boardData._id}
               tasks={filteredTasks[ColumnType.done]}
+              order={boardData.order[ColumnType.done]}
               teamID={teamId}
             />
           </SimpleGrid>

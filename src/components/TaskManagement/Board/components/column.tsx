@@ -1,6 +1,6 @@
 import { Badge, Box, Button, Circle, Heading, HStack, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useIntl } from 'react-intl'
 import { useResetRecoilState } from 'recoil'
 
@@ -15,8 +15,9 @@ import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 import useColumnDrop from '../hooks/use-column-drop'
 import useColumnTasks from '../hooks/use-column-tasks'
 import messages from '../messages'
+import { ColumnColorScheme, headerColumnMessage } from '../utils/helpers'
 
-import Task from './task'
+import TaskCardComponent from './task'
 
 const StyledCircleButton = styled(Circle)`
   display: inline-flex;
@@ -50,40 +51,44 @@ const StyledCircleButton = styled(Circle)`
   }
 `
 
-const ColumnColorScheme: Record<ColumnType, string> = {
-  pending: 'new-gray.600',
-  toDo: 'yellow.600',
-  doing: 'green.500',
-  done: 'brand.500',
-}
-
-const headerColumnMessage = new Map([
-  [ColumnType.pending, messages.pendingColumnHeading],
-  [ColumnType.toDo, messages.todoColumnHeading],
-  [ColumnType.doing, messages.doingColumnHeading],
-  [ColumnType.done, messages.doneColumnHeading],
-])
-
 type ColumnProperties = {
   readonly column: ColumnType
   readonly boardID: string
   readonly tasks: TaskModel[]
   readonly teamID: string
+  readonly order: string[]
 }
 
-const TaskColumnComponent = ({ column, boardID, tasks, teamID }: ColumnProperties) => {
+const TaskColumnComponent = ({ column, boardID, tasks, teamID, order }: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
   const resetTaskDrawer = useResetRecoilState(taskDrawerAtom)
 
-  const { addEmptyTask, openInsertDrawerTask, deleteTask, dropTaskFrom, swapTasks, updateTask } =
-    useColumnTasks(column, boardID, BOARD_DOMAIN.TEAM, teamID)
+  const {
+    openInsertDrawerTask,
+    deleteTask,
+    dropTaskFrom,
+    swapTasks,
+    updateTask,
+    columnTasks,
+    setColumnTasks,
+  } = useColumnTasks(column, boardID, BOARD_DOMAIN.TEAM, teamID)
 
   const { dropReference, isOver } = useColumnDrop(column, dropTaskFrom)
 
-  const ColumnTasks = tasks.map((task, index) => (
-    <Task
+  const tasksInOrder = useMemo(() => {
+    const taskMap = new Map(tasks.map((task) => [task._id, task]))
+
+    const reorderedTasks = order
+      .map((id) => taskMap.get(id))
+      .filter((task): task is TaskModel => Boolean(task))
+
+    return reorderedTasks
+  }, [order, tasks])
+
+  const ColumnTasksComponents = columnTasks.map((task, index) => (
+    <TaskCardComponent
       key={task._id}
       task={task}
       index={index}
@@ -96,6 +101,14 @@ const TaskColumnComponent = ({ column, boardID, tasks, teamID }: ColumnPropertie
   const handleAddNewTaskClickButton = () => {
     openInsertDrawerTask()
     resetTaskDrawer()
+  }
+
+  useEffect(() => {
+    setColumnTasks(tasksInOrder)
+  }, [setColumnTasks, tasksInOrder])
+
+  if (column === 'doing') {
+    console.log({ columnTasks })
   }
 
   return (
@@ -142,8 +155,8 @@ const TaskColumnComponent = ({ column, boardID, tasks, teamID }: ColumnPropertie
         overflow="auto"
         bgColor={isOver ? 'brand.200' : 'none'}
       >
-        {ColumnTasks}
-        {ColumnTasks.length > 0 && (
+        {ColumnTasksComponents}
+        {ColumnTasksComponents.length > 0 && (
           <Button
             fontSize={14}
             color="brand.500"

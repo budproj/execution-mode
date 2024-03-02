@@ -35,6 +35,8 @@ const DynamicAvatarGroup = ({
     if (onSelectUser) onSelectUser(userId)
   }
 
+  console.log({ users })
+
   const targetUser = isSelectable ? selectedUserId ?? teamOwnerId : teamOwnerId
 
   return isLoaded || typeof isLoaded === 'undefined' ? (

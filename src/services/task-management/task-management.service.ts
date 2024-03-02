@@ -113,6 +113,19 @@ export class TaskManagementService {
     return data
   }
 
+  async updateBoardOrder(boardId: Board['_id'], column: TASK_STATUS, order: string[]) {
+    if (!boardId) {
+      throw new Error('A id is required to update task')
+    }
+
+    const { data: response } = await this.client.patch<Board>(`boards/${boardId}/order`, {
+      column,
+      order,
+    })
+
+    return response
+  }
+
   async addTask(data: TaskInsert) {
     const { data: response } = await this.client.post<Task>(`tasks`, data)
     return response
@@ -124,6 +137,16 @@ export class TaskManagementService {
     }
 
     const { data: response } = await this.client.patch<Task>(`tasks/${data._id}`, data)
+
+    return response
+  }
+
+  async getTask(id: Task['_id']) {
+    const { data: response } = await this.client.get<Task>(`tasks/`, {
+      params: {
+        id,
+      },
+    })
 
     return response
   }
