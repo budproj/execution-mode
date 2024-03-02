@@ -20,11 +20,13 @@ type SupportTeamPopoverProperties = {
   addUser: (userId: string) => void
   removeUser: (userId: string) => void
   ownerName?: string
+  teamId?: string
 }
 
 type AddNewMemberProperties = {
   handleUserSelect: (userID: string) => void
   toggleIsAdding: () => void
+  teamId?: string
 }
 
 type EachMemberProperties = {
@@ -67,7 +69,7 @@ const EachMember = ({ member, handleUserRemove }: EachMemberProperties) => {
   )
 }
 
-const AddNewMember = ({ handleUserSelect, toggleIsAdding }: AddNewMemberProperties) => {
+const AddNewMember = ({ handleUserSelect, toggleIsAdding, teamId }: AddNewMemberProperties) => {
   const intl = useIntl()
 
   return (
@@ -86,7 +88,7 @@ const AddNewMember = ({ handleUserSelect, toggleIsAdding }: AddNewMemberProperti
           </Text>
         </Stack>
       </PopoverHeader>
-      <AllReachableUsers onSelect={handleUserSelect} />
+      <AllReachableUsers filterByTeam={teamId} onSelect={handleUserSelect} />
     </Box>
   )
 }
@@ -96,6 +98,7 @@ export const SupportTeamPopover = ({
   addUser,
   removeUser,
   ownerName,
+  teamId,
 }: SupportTeamPopoverProperties) => {
   const intl = useIntl()
 
@@ -116,7 +119,11 @@ export const SupportTeamPopover = ({
   const handleMouseLeaveOnAddButton = () => setIsHoveringAddButton(false)
 
   return isAdding ? (
-    <AddNewMember handleUserSelect={handleUserSelect} toggleIsAdding={toggleIsAdding} />
+    <AddNewMember
+      teamId={teamId}
+      handleUserSelect={handleUserSelect}
+      toggleIsAdding={toggleIsAdding}
+    />
   ) : (
     <Box>
       <PopoverHeader paddingBottom="1em" marginBottom="1em" borderColor="new-gray.400">

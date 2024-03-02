@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { Text, Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
@@ -9,7 +9,10 @@ import PlusIcon from 'src/components/Icon/Plus'
 import GET_KEY_RESULTS_HIGHLIGHTS from 'src/components/Page/Team/Highlights/get-key-results-highlights.gql'
 import GET_NO_RELATED_MEMBERS from 'src/components/Page/Team/Highlights/hooks/getNoRelatedMembers/get-no-related-members.gql'
 import { User } from 'src/components/User/types'
+import { Except } from 'src/helpers/except'
+import { Task } from 'src/services/task-management/task-management.service'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { taskSupportTeamAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-support-team'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
@@ -19,10 +22,14 @@ import queries from './queries.gql'
 import { SupportTeamPopover } from './support-team-popover'
 
 type SupportTeamFieldProperties = {
-  supportTeamMembers?: User[]
-  hasPermitionToUpdate?: boolean
-  keyResultId?: string
-  ownerName?: string
+  readonly supportTeamMembers?: User[]
+  readonly hasPermitionToUpdate?: boolean
+  readonly keyResultId?: string
+  readonly ownerName?: string
+  readonly isFromTask?: boolean
+  readonly updateTask?: (_id: string, updatedTask: Except<Partial<Task>, '_id'>) => void
+  readonly task?: Task
+  teamMembers?: User[]
 }
 
 export const SupportTeamField = ({
@@ -30,9 +37,17 @@ export const SupportTeamField = ({
   hasPermitionToUpdate,
   keyResultId,
   ownerName,
+  isFromTask,
+  updateTask,
+  task,
+  teamMembers,
 }: SupportTeamFieldProperties) => {
   const intl = useIntl()
   const teamId = useRecoilValue(selectedTeamIdHighlight)
+
+  const [taskSupportTeamMembers, setTaskSupportTeam] = useRecoilState(taskSupportTeamAtom)
+
+  const supportTeam = isFromTask ? [...taskSupportTeamMembers] : supportTeamMembers
 
   const [isOpen, setIsOpen] = useState(false)
   const handleOpen = () => hasPermitionToUpdate && setIsOpen(true)
@@ -58,6 +73,12 @@ export const SupportTeamField = ({
   })
 
   const addUser = (userId: string) => {
+    if (isFromTask && task) {
+      onAddSupportTeamInTask(userId)
+      handleClose()
+      return
+    }
+
     void addUserToSupportTeam({ variables: { keyResultId, userId } })
     handleClose()
   }
@@ -82,6 +103,12 @@ export const SupportTeamField = ({
   })
 
   const removeUser = (userId: string) => {
+    if (isFromTask && task) {
+      onRemoveSupportTeamInTask(userId)
+      handleClose()
+      return
+    }
+
     void removeUserToSupportTeam({ variables: { keyResultId, userId } })
     handleClose()
   }
@@ -90,7 +117,49 @@ export const SupportTeamField = ({
   const handleMouseEnter = () => hasPermitionToUpdate && setIsHovering(true)
   const handleMouseLeave = () => hasPermitionToUpdate && setIsHovering(false)
 
-  const isLoaded = Boolean(supportTeamMembers)
+  const isLoaded = Boolean(supportTeam)
+
+  const onAddSupportTeamInTask = useCallback(
+    (userID: string) => {
+      const supportTeamIds = taskSupportTeamMembers.map((member) => member.id)
+      const newSupportTeam = [...supportTeamIds, userID]
+      const newTaskWithSupportTeam: Partial<Task> = {
+        supportTeamMembers: newSupportTeam,
+      }
+
+      if (updateTask && task) {
+        updateTask(task._id, { _id: task._id, ...newTaskWithSupportTeam })
+      }
+
+      if (teamMembers) {
+        setTaskSupportTeam(teamMembers?.filter((member) => newSupportTeam.includes(member.id)))
+      }
+
+      handleClose()
+    },
+    [setTaskSupportTeam, task, taskSupportTeamMembers, teamMembers, updateTask],
+  )
+
+  const onRemoveSupportTeamInTask = useCallback(
+    (userID: string) => {
+      const supportTeamIds = taskSupportTeamMembers.map((member) => member.id)
+
+      const newSupportTeam = supportTeamIds.filter((member) => member !== userID)
+      const newTaskWithSupportTeam: Partial<Task> = {
+        supportTeamMembers: newSupportTeam,
+      }
+      if (updateTask && task) {
+        updateTask(task._id, { _id: task._id, ...newTaskWithSupportTeam })
+      }
+
+      if (teamMembers) {
+        setTaskSupportTeam(teamMembers?.filter((member) => newSupportTeam.includes(member.id)))
+      }
+
+      handleClose()
+    },
+    [setTaskSupportTeam, task, taskSupportTeamMembers, teamMembers, updateTask],
+  )
 
   return (
     <Popover
@@ -101,7 +170,15 @@ export const SupportTeamField = ({
       onOpen={handleOpen}
       onClose={handleClose}
     >
-      <KeyResultSectionHeading>{intl.formatMessage(messages.supportTeam)}</KeyResultSectionHeading>
+      {isFromTask ? (
+        <Text color="gray.500" fontWeight={700} marginBottom="8px">
+          TIME DE APOIO
+        </Text>
+      ) : (
+        <KeyResultSectionHeading>
+          {intl.formatMessage(messages.supportTeam)}
+        </KeyResultSectionHeading>
+      )}
       <PopoverTrigger>
         <Flex
           direction="row"
@@ -109,7 +186,7 @@ export const SupportTeamField = ({
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <DynamicAvatarGroup users={supportTeamMembers ?? []} isLoaded={isLoaded} />
+          <DynamicAvatarGroup users={supportTeam ?? []} isLoaded={isLoaded} />
           {isLoaded && hasPermitionToUpdate && (
             <Flex alignItems="center">
               <Flex
@@ -132,7 +209,7 @@ export const SupportTeamField = ({
                 />
               </Flex>
               <Text color={isHovering ? 'brand.500' : 'new-gray.700'}>
-                {supportTeamMembers?.length ? '' : intl.formatMessage(messages.add)}
+                {supportTeam?.length ? '' : intl.formatMessage(messages.add)}
               </Text>
             </Flex>
           )}
@@ -140,10 +217,11 @@ export const SupportTeamField = ({
       </PopoverTrigger>
       <PopoverContent width="md" h="full">
         <SupportTeamPopover
-          supportTeamMembers={supportTeamMembers}
+          supportTeamMembers={supportTeam}
           addUser={addUser}
           removeUser={removeUser}
           ownerName={ownerName}
+          teamId={teamId}
         />
       </PopoverContent>
     </Popover>

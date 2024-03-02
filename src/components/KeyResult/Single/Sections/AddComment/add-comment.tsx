@@ -18,9 +18,9 @@ import messages from './messages'
 import queries from './queries.gql'
 
 export interface KeyResultSectionAddCommentProperties {
-  keyResultID?: KeyResult['id']
-  parentCommentId?: KeyResultComment['id']
-  type?: COMMENT_TYPE
+  readonly keyResultID?: KeyResult['id']
+  readonly parentCommentId?: KeyResultComment['id']
+  readonly type?: COMMENT_TYPE
 }
 
 export interface CreateKeyResultCommentMutation {

@@ -1,9 +1,10 @@
-import { Stack, Tab, TabList } from '@chakra-ui/react'
+import { Box, Stack, Tab, TabList, Tag } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
+import tabMessages from 'src/components/Base/MainAppBar/messages'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
@@ -12,6 +13,7 @@ import messages from '../messages'
 
 interface TabsMenuProperties {
   teamId: Team['id']
+  isTasksEnabled: boolean
 }
 
 const StyledTab = styled(Tab)`
@@ -19,14 +21,14 @@ const StyledTab = styled(Tab)`
   justify-content: center;
   font-size: 16px;
   font-weight: 500;
+  width: 160px;
   border-bottom: 2px solid transparent;
-
   &:focus {
     box-shadow: none;
   }
 `
 
-const TabsMenu = ({ teamId }: TabsMenuProperties) => {
+const TabsMenu = ({ teamId, isTasksEnabled }: TabsMenuProperties) => {
   const intl = useIntl()
   const { dispatch } = useEvent(EventType.RETROSPECTIVE_TAB_CLICK)
 
@@ -56,19 +58,45 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
         >
           {intl.formatMessage(messages.okrsTeamTab)}
         </StyledTab>
-        {/* <Box width="1px" bg="new-gray.500" />
-        <StyledTab
-          px={8}
-          color="new-gray.800"
-          _selected={{ color: 'white', background: 'brand.500', borderRadius: '0px 10px 10px 0px' }}
-          paddingBottom={3}
-          onClick={() => {
-            handleClick('task')
-          }}
-        >
-          <div id="retrospective-tab">{intl.formatMessage(messages.tasksTeamTab)}</div>
-        </StyledTab>
-        <Box width="1px" bg="new-gray.500" /> */}
+        <Box width="1px" bg="new-gray.500" />
+
+        {isTasksEnabled && (
+          <>
+            <StyledTab
+              px={8}
+              color="new-gray.800"
+              justifyContent="center"
+              alignItems="center"
+              _selected={{ color: 'white', background: 'brand.500' }}
+              paddingBottom={3}
+              onClick={() => {
+                handleClick('tasks')
+              }}
+            >
+              <div
+                id="retrospective-tab"
+                style={{
+                  display: 'flex',
+                }}
+              >
+                {intl.formatMessage(messages.tasksTeamTab)}
+                <Tag
+                  size="md"
+                  color="white"
+                  borderColor="current"
+                  border="1px solid"
+                  lineHeight="0px"
+                  fontWeight="semibold"
+                  bg="brand.500"
+                  ml={2}
+                >
+                  {intl.formatMessage(tabMessages.newItem)}
+                </Tag>
+              </div>
+            </StyledTab>
+            <Box width="1px" bg="new-gray.500" />
+          </>
+        )}
         <StyledTab
           px={8}
           color="new-gray.800"

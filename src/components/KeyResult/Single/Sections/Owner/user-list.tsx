@@ -13,8 +13,9 @@ import { KeyResult } from '../../../types'
 import queries from './queries.gql'
 
 interface KeyResultAvailableOwnersProperties {
-  keyResultID?: string
-  onSelect?: (userID: string) => void
+  readonly keyResultID?: string
+  readonly onSelect?: (userID: string) => void
+  readonly isFromTask?: boolean
 }
 
 interface UpdateKeyResultOwnerMutationResult {
@@ -24,6 +25,7 @@ interface UpdateKeyResultOwnerMutationResult {
 export const KeyResultAvailableOwners = ({
   keyResultID,
   onSelect,
+  isFromTask = false,
 }: KeyResultAvailableOwnersProperties) => {
   const [keyResult, setKeyResult] = useRecoilState(keyResultAtomFamily(keyResultID))
   const teamId = useRecoilValue(selectedTeamIdHighlight)
@@ -55,11 +57,14 @@ export const KeyResultAvailableOwners = ({
 
   const handleUserSelect = async (userID: string) => {
     if (onSelect) onSelect(userID)
-    await updateKeyResult({
-      variables: {
-        userID,
-      },
-    })
+
+    if (!isFromTask) {
+      await updateKeyResult({
+        variables: {
+          userID,
+        },
+      })
+    }
   }
 
   return <AllReachableUsers onSelect={handleUserSelect} />

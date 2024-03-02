@@ -23,26 +23,26 @@ import { NameWithAvatar } from './name-with-avatar'
 import { NamedAvatarSubtitleType } from './types'
 
 export interface NamedAvatarProperties {
-  userID?: User['id']
-  isLoading?: boolean
-  isEditting?: boolean
-  isStatic?: boolean
-  isUserNotActive?: boolean
-  subtitleType?: NamedAvatarSubtitleType
-  canEdit?: boolean
-  canHover?: boolean
-  avatarSize?: AvatarProps['w']
-  displaySubtitle?: boolean
-  horizontalGap?: StackProps['spacing']
-  nameColor?: TextProps['color']
-  date?: Date
-  showCard?: boolean
-  showName?: boolean
-  redirectToProfile?: boolean
-  isTeamLeader?: boolean
-  onClick?: () => void
-  children?: string | ReactElement
-  cardPortalReference?: RefObject<HTMLDivElement>
+  readonly userID?: User['id']
+  readonly isLoading?: boolean
+  readonly isEditting?: boolean
+  readonly isStatic?: boolean
+  readonly isUserNotActive?: boolean
+  readonly subtitleType?: NamedAvatarSubtitleType
+  readonly canEdit?: boolean
+  readonly canHover?: boolean
+  readonly avatarSize?: AvatarProps['w']
+  readonly displaySubtitle?: boolean
+  readonly horizontalGap?: StackProps['spacing']
+  readonly nameColor?: TextProps['color']
+  readonly date?: Date
+  readonly showCard?: boolean
+  readonly showName?: boolean
+  readonly redirectToProfile?: boolean
+  readonly isTeamLeader?: boolean
+  readonly onClick?: () => void
+  readonly children?: string | ReactElement
+  readonly cardPortalReference?: RefObject<HTMLDivElement>
 }
 
 const NamedAvatar = ({
@@ -76,6 +76,8 @@ const NamedAvatar = ({
   const [companies, setCompanyEdges] = useConnectionEdges<Team>()
   const [teams, setTeamEdges] = useConnectionEdges<Team>()
   const intl = useIntl()
+
+  console.log({ user })
 
   const isLoaded = Boolean(user) && !isLoading
   const company = companies?.[0]

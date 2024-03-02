@@ -9,12 +9,15 @@ import { LlmService } from './llm/llm.service'
 import { getMissionControlInstance } from './mission-control'
 import { MissionControlService } from './mission-control/mission-control.service'
 import { getRoutinesInstance } from './routines'
+import { getTaskManagementInstance } from './task-management'
+import { TaskManagementService } from './task-management/task-management.service'
 
 export interface Services {
   routines: AxiosInstance
   comments: AxiosInstance
   llm: LlmService
   missionControl: MissionControlService
+  taskManagement: TaskManagementService
 }
 
 const configureInstance = (instance: AxiosInstance, authToken: string) => {
@@ -36,6 +39,9 @@ export const getServices = async (
     llm: new LlmService(configureInstance(getLLMInstance(config), authToken)),
     missionControl: new MissionControlService(
       configureInstance(getMissionControlInstance(config), authToken),
+    ),
+    taskManagement: new TaskManagementService(
+      configureInstance(getTaskManagementInstance(config), authToken),
     ),
   }
 }

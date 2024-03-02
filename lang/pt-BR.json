@@ -355,6 +355,10 @@
     "defaultMessage": "Tornar time principal?",
     "description": "The label of the button that makes the team the main team"
   },
+  "3Vp6v4": {
+    "defaultMessage": "{priority, select, 1 {Baixa prioridade} 2 {Média prioridade} 3 {Alta prioridade} other {Altíssima prioridade}}",
+    "description": "This message appears as the title of the insert Task drawer"
+  },
   "3XEc2H": {
     "defaultMessage": "Gênero do usuário inicial",
     "description": "The user gender while creating a new workspace"
@@ -1431,6 +1435,10 @@
     "defaultMessage": "Use os campos abaixo para fazer{breakline} alterações neste ciclo:",
     "description": "The description for cycle modal"
   },
+  "L4PJe8": {
+    "defaultMessage": "Editar tarefa",
+    "description": "This message appears as the title of the insert Task drawer when the task is editing"
+  },
   "L5w0P3": {
     "defaultMessage": "Feminino",
     "description": "This is the female option while selecting a gender to create a new user"
@@ -1487,6 +1495,10 @@
     "defaultMessage": "Criar Ciclo",
     "description": "This button is used to create a new cycle."
   },
+  "M0RYZa": {
+    "defaultMessage": "Salvar",
+    "description": "This is a button label displayed inside the insert key-result drawer. This is the second button"
+  },
   "M2QJC/": {
     "defaultMessage": "Sem check-in",
     "description": "This message is displayed alongisde with the key-result name, as the prefix for our last update text component"
@@ -1498,6 +1510,10 @@
   "MAAXnt": {
     "defaultMessage": "incluiu você como time de apoio em um KR:",
     "description": "This message appears as describe on notification where a user is included on support team of a key-result."
+  },
+  "MANxqE": {
+    "defaultMessage": "em andamento",
+    "description": "This message appears on header of the doing column"
   },
   "MBvlAH": {
     "defaultMessage": "conta desativada",
@@ -1522,6 +1538,10 @@
   "MgJJAJ": {
     "defaultMessage": "Comente aqui! Para marcar alguém, use @ :)",
     "description": "This text is displayed in our comment input in our key result drawers when it has no value"
+  },
+  "MmRy3Z": {
+    "defaultMessage": "Tarefa {isEditing, select, true {editada} other {criada}} com sucesso!",
+    "description": "This message appears after the user creates a new key-result as a toast"
   },
   "MpjjOt": {
     "defaultMessage": "Bud",
@@ -1939,6 +1959,10 @@
     "defaultMessage": "Meta",
     "description": "This is the label of the check-in form that indicates the goal for her/his key result"
   },
+  "Sz6ZOB": {
+    "defaultMessage": "para fazer",
+    "description": "This message appears on header of the todo column"
+  },
   "T5iKmP": {
     "defaultMessage": "{prefix} {cycle} {suffix}",
     "description": "This message displays the cycle name with a given prefix"
@@ -2127,6 +2151,10 @@
     "defaultMessage": "Clique aqui para editar esse campo",
     "description": "The title for our pen icon. This message is displayed in our UI as a tooltip"
   },
+  "WOYUb/": {
+    "defaultMessage": "Excluir",
+    "description": "The text that appears when the task is done."
+  },
   "WR43/0": {
     "defaultMessage": "Você ainda não tem nenhuma tarefa.",
     "description": "The empty state message header when you have no tasks"
@@ -2150,6 +2178,10 @@
   "WkvrVY": {
     "defaultMessage": "Procurar times",
     "description": "The text is displayed as a placeholder in any search input regarding teams"
+  },
+  "Ww9A1r": {
+    "defaultMessage": "Preencha os campos obrigatórios para poder salvar esta tarefa.",
+    "description": "This message appears in an error toast after the users tries to create a key-result but there are some validation errors in the form"
   },
   "X+heBq": {
     "defaultMessage": "Routine notification settings button",
@@ -2374,6 +2406,10 @@
   "ah2n1K": {
     "defaultMessage": "Nome do período trimestral",
     "description": "The label of the company quarterly period while creating a new workspace"
+  },
+  "aqlUkl": {
+    "defaultMessage": "Buscar tarefa",
+    "description": "Placeholder of the search task input on the teams page."
   },
   "atQu7S": {
     "defaultMessage": "Membro adicionado ao time com sucesso.",
@@ -3127,6 +3163,10 @@
     "defaultMessage": "Ranking de Times",
     "description": "Title to show on the team ranking page"
   },
+  "oAW5Gy": {
+    "defaultMessage": "Tarefas {team}",
+    "description": "Header of the board tab on the teams page."
+  },
   "oQbqDL": {
     "defaultMessage": "{user} alterou {key, select, description {a} goal {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} other {}}",
     "description": "dsa"
@@ -3167,6 +3207,10 @@
     "defaultMessage": "Não",
     "description": "This message appears as a description of the second option."
   },
+  "pD5/TL": {
+    "defaultMessage": "pendências",
+    "description": "This message appears on header of the pending column"
+  },
   "pLYuso": {
     "defaultMessage": "Um ícone de caneta. Ao clicar nele você irá editar esse campo",
     "description": "The description for our pen icon. This message is used by screen readers to improve our accesibility"
@@ -3194,6 +3238,10 @@
   "pbVToL": {
     "defaultMessage": "Criar um usuário",
     "description": "This message appears as a button when a team has no members yet"
+  },
+  "pfygkg": {
+    "defaultMessage": "nova tarefa",
+    "description": "This message appears on the add task button"
   },
   "piM/9+": {
     "defaultMessage": "Explore este objetivo completo no Plano Individual de {user}",
@@ -3286,6 +3334,10 @@
   "rvZQ2D": {
     "defaultMessage": "Progresso",
     "description": "This message is displayed as the title of the progress section inside check-in card"
+  },
+  "rw4RIa": {
+    "defaultMessage": "concluído",
+    "description": "This message appears on header of the done column"
   },
   "s0wK0Y": {
     "defaultMessage": "Muito bom",
@@ -3434,6 +3486,10 @@
   "uM5lpV": {
     "defaultMessage": "Tarefa feita",
     "description": "The text that appears when the task is done."
+  },
+  "uNo8rw": {
+    "defaultMessage": "Nova tarefa",
+    "description": "This message appears as the title of the insert Task drawer"
   },
   "uORr+d": {
     "defaultMessage": "Resultados-chave sem atualizações se tornam difíceis de acompanhar",
@@ -3598,6 +3654,10 @@
   "wiFglx": {
     "defaultMessage": "Responsável",
     "description": "This label appears above the sixth input in our insert key-result drawer"
+  },
+  "wlDJNs": {
+    "defaultMessage": "Título da tarefa",
+    "description": "The placeholder for the first input in our key-result insert drawer form"
   },
   "wlwyTd": {
     "defaultMessage": "Buscar membros",

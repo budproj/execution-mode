@@ -9,8 +9,8 @@ import { User } from 'src/components/User/types'
 import messages from './messages'
 
 export interface KeyResultSectionTimelineCardUpdateProperties {
-  patche: KeyResultPatchInterface
-  userName?: User['fullName']
+  readonly patche: KeyResultPatchInterface
+  readonly userName?: User['fullName']
 }
 
 const KeyResultSectionTimelineLine = ({
@@ -33,6 +33,7 @@ const KeyResultSectionTimelineLine = ({
         : intl.formatMessage(messages.updatedDataCard, {
             user: userName,
             key: patche.key,
+            value: patche.value,
           })}
     </Text>
   )

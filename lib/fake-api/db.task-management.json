@@ -1,0 +1,155 @@
+{
+  "board": [
+    {
+      "id": "1",
+      "title": "Tarefas Produto",
+      "type": "teamTasks",
+      "teamsIds": [
+        "d6310cc8-cc17-499b-a28c-5c600dd9714a"
+      ],
+      "tasks": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "createdAt": "2020-01-01",
+      "updateadAt": "2020-01-01"
+    },
+    {
+      "id": "2",
+      "title": "Tarefas Customer Success",
+      "type": "teamTasks",
+      "teamsIds": [
+        "0788abd6-4996-4224-8f24-094b2d3c0d3a"
+      ],
+      "tasks": [
+        1
+      ],
+      "createdAt": "2020-01-01",
+      "updateadAt": "2020-01-01"
+    },
+    {
+      "id": "3",
+      "title": "Tarefas Financeiro",
+      "type": "teamTasks",
+      "teamsIds": [
+        "41a0de90-216d-4092-9d5f-1e889ec0a7cb"
+      ],
+      "tasks": [
+        "6"
+      ],
+      "createdAt": "2020-01-01",
+      "updateadAt": "2020-01-01"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "1",
+      "boardId": "1",
+      "status": "pending",
+      "title": "Marcar reunião com fornecedores de camisetas",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+      "dueDate": "2023-05-12",
+      "initialDate": "2023-11-01",
+      "priority": 1,
+      "owner": "922ef72a-6c3c-4075-926a-3245cdeea75f",
+      "attachments": "http://arquivo.pdf",
+      "supportTeamMembers": [
+        "9ce87eda-64d1-4bfb-80a5-aa7811a04ea9",
+        "f120ec45-150d-4e24-b99d-34df20a80c64"
+      ],
+      "tags": "COZINHA",
+      "nextTaskId": "2"
+    },
+    {
+      "id": "2",
+      "boardId": "1",
+      "status": "pending",
+      "title": "Enviar mailing de cadastramento de conferencias e eventos",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+      "dueDate": "2023-12-12",
+      "initialDate": "2023-11-01",
+      "priority": 3,
+      "owner": "9ce87eda-64d1-4bfb-80a5-aa7811a04ea9",
+      "attachments": "http://arquivo.pdf",
+      "supportTeamMembers": [
+        "b159ef12-9062-49c6-8afc-372e8848fb15"
+      ],
+      "tags": "COZINHA",
+      "nextTaskId": ""
+    },
+    {
+      "id": "3",
+      "boardId": "1",
+      "status": "toDo",
+      "title": "Entrar em contato com empresa XYZ de eventos",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+      "dueDate": "2023-10-12",
+      "initialDate": "2023-11-01",
+      "priority": 4,
+      "owner": "9ce87eda-64d1-4bfb-80a5-aa7811a04ea9",
+      "attachments": "http://arquivo.pdf",
+      "supportTeamMembers": [
+        "b159ef12-9062-49c6-8afc-372e8848fb15"
+      ],
+      "tags": "COZINHA",
+      "nextTaskId": ""
+    },
+    {
+      "id": "4",
+      "boardId": "1",
+      "status": "doing",
+      "title": "Marcar reunião com fornecedores de camisetas",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+      "dueDate": "2023-02-21",
+      "initialDate": "2023-11-01",
+      "priority": 1,
+      "owner": "9ce87eda-64d1-4bfb-80a5-aa7811a04ea9",
+      "attachments": "http://arquivo.pdf",
+      "supportTeamMembers": [
+        "b159ef12-9062-49c6-8afc-372e8848fb15"
+      ],
+      "tags": "COZINHA",
+      "nextTaskId": ""
+    },
+    {
+      "id": "5",
+      "boardId": "1",
+      "status": "done",
+      "title": "Enviar mailing de cadastramento de conferencias e eventos",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+      "dueDate": "2023-02-21",
+      "initialDate": "2023-11-01",
+      "priority": 2,
+      "owner": "f120ec45-150d-4e24-b99d-34df20a80c64",
+      "attachments": "http://arquivo.pdf",
+      "supportTeamMembers": [
+        "b159ef12-9062-49c6-8afc-372e8848fb15",
+        "9ce87eda-64d1-4bfb-80a5-aa7811a04ea9"
+      ],
+      "tags": "COZINHA",
+      "nextTaskId": ""
+    },
+    {
+      "id": "6",
+      "boardId": "3",
+      "status": "doing",
+      "title": "Enviar mailing de cadastramento de conferencias e eventos",
+      "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+      "dueDate": "2023-12-01",
+      "initialDate": "2023-11-01",
+      "priority": 3,
+      "owner": "b159ef12-9062-49c6-8afc-372e8848fb15",
+      "attachments": "http://arquivo.pdf",
+      "supportTeamMembers": [
+        "f120ec45-150d-4e24-b99d-34df20a80c64",
+        "9ce87eda-64d1-4bfb-80a5-aa7811a04ea9",
+        "922ef72a-6c3c-4075-926a-3245cdeea75f"
+      ],
+      "tags": "COZINHA",
+      "nextTaskId": ""
+    }
+  ]
+}
