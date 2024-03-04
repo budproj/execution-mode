@@ -44,15 +44,21 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
               onSearch={setSearchTaskInput}
             />
           </Box>
-          <Button
-            bg="brand.500"
-            color="black.50"
-            _hover={{ background: 'brand.400', color: 'black.50' }}
-            paddingX={2}
-            onClick={async () => window.open('https://bit.ly/sugestoestmanager', '_blank')}
+          <a
+            href="https://bit.ly/sugestoestmanager"
+            target="_blank"
+            style={{ textDecoration: 'none' }}
+            rel="noreferrer"
           >
-            Dar sugestão
-          </Button>
+            <Button
+              bg="brand.500"
+              color="black.50"
+              _hover={{ background: 'brand.400', color: 'black.50' }}
+              paddingY={2}
+            >
+              Dar sugestão
+            </Button>
+          </a>
         </HStack>
       </HStack>
       <BoardWrapper teamId={teamId} searchTaskInput={searchTaskInput} />
