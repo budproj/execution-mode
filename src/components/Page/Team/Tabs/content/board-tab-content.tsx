@@ -51,7 +51,7 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
             rel="noreferrer"
           >
             <Button
-              bg="brand.500"
+              bg="#525F7F"
               color="black.50"
               _hover={{ background: 'brand.400', color: 'black.50' }}
               paddingY={2}
