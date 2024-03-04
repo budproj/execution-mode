@@ -43,20 +43,22 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
         <Text color="new-gray.900" fontSize={24} fontWeight="bold">
           {intl.formatMessage(messages.boardTabHeaderTitle, { team: team?.name })}
         </Text>
-        <Box maxW={320} w="100%">
-          <SearchBar
-            placeholder={intl.formatMessage(messages.searchTaskInput)}
-            onSearch={setSearchTaskInput}
-          />
-        </Box>
-        <Button
-          bg="brand.500"
-          color="black.50"
-          _hover={{ background: 'brand.400', color: 'black.50' }}
-          onClick={handleExternalLink}
-        >
-          Dar sugestão
-        </Button>
+        <HStack alignItems="center">
+          <Box maxW={320} w="100%">
+            <SearchBar
+              placeholder={intl.formatMessage(messages.searchTaskInput)}
+              onSearch={setSearchTaskInput}
+            />
+          </Box>
+          <Button
+            bg="brand.500"
+            color="black.50"
+            _hover={{ background: 'brand.400', color: 'black.50' }}
+            onClick={handleExternalLink}
+          >
+            Dar sugestão
+          </Button>
+        </HStack>
       </HStack>
       <BoardWrapper teamId={teamId} searchTaskInput={searchTaskInput} />
       <TaskInsertDrawer />
