@@ -48,6 +48,7 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
             bg="brand.500"
             color="black.50"
             _hover={{ background: 'brand.400', color: 'black.50' }}
+            paddingY={2}
             onClick={async () => window.open('https://bit.ly/sugestoestmanager', '_blank')}
           >
             Dar sugestão
