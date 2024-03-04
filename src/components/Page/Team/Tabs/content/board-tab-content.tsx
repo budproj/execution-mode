@@ -27,6 +27,12 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
   // TODO: remove this
   console.log({ isLoading })
 
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  const handleExternalLink = () => {
+    // Redirect user to an external link
+    window.location.href = 'https://bit.ly/sugestoestmanager'
+  }
+
   useEffect(() => {
     setSelectedTeamId(teamId)
   }, [setSelectedTeamId, teamId])
@@ -43,6 +49,14 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
             onSearch={setSearchTaskInput}
           />
         </Box>
+        <Button
+          bg="brand.500"
+          color="black.50"
+          _hover={{ background: 'brand.400', color: 'black.50' }}
+          onClick={handleExternalLink}
+        >
+          Dar sugestão
+        </Button>
       </HStack>
       <BoardWrapper teamId={teamId} searchTaskInput={searchTaskInput} />
       <TaskInsertDrawer />
