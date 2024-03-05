@@ -1,4 +1,4 @@
-import { Box, HStack, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, HStack, Stack, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -37,12 +37,29 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
         <Text color="new-gray.900" fontSize={24} fontWeight="bold">
           {intl.formatMessage(messages.boardTabHeaderTitle, { team: team?.name })}
         </Text>
-        <Box maxW={320} w="100%">
-          <SearchBar
-            placeholder={intl.formatMessage(messages.searchTaskInput)}
-            onSearch={setSearchTaskInput}
-          />
-        </Box>
+        <HStack alignItems="center">
+          <Box maxW={320} w="100%">
+            <SearchBar
+              placeholder={intl.formatMessage(messages.searchTaskInput)}
+              onSearch={setSearchTaskInput}
+            />
+          </Box>
+          <a
+            href="https://bit.ly/sugestoestmanager"
+            target="_blank"
+            style={{ textDecoration: 'none' }}
+            rel="noreferrer"
+          >
+            <Button
+              bg="#525F7F"
+              color="black.50"
+              _hover={{ background: 'brand.400', color: 'black.50' }}
+              paddingY={2}
+            >
+              Dar sugestão
+            </Button>
+          </a>
+        </HStack>
       </HStack>
       <BoardWrapper teamId={teamId} searchTaskInput={searchTaskInput} />
       <TaskInsertDrawer />
