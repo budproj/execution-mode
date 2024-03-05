@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useRef, useState } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import {
@@ -20,7 +20,10 @@ import {
 } from 'src/components/KeyResult/types'
 import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import { GraphQLEffect } from 'src/components/types'
-import { checkMarkIsBeingRemovedAtom } from 'src/state/recoil/key-result/checklist'
+import {
+  checkMarkIsBeingRemovedAtom,
+  isCheckListAllDisabledAtom,
+} from 'src/state/recoil/key-result/checklist'
 import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../state/hooks/useEvent/event-type'
@@ -76,6 +79,9 @@ export const KeyResultCheckMark = ({
   const [isEditing, setIsEditing] = useState(false)
   const [isChecked, setIsChecked] = useState(node?.state === KeyResultCheckMarkState.CHECKED)
   const checkmarkIsBeingRemoved = useRecoilValue(checkMarkIsBeingRemovedAtom(node?.id))
+  const [isCheckListAllDisabled, setIsCheckListAllDisabled] = useRecoilState(
+    isCheckListAllDisabledAtom,
+  )
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
   const userID = useRecoilValue(meAtom)
   const [toggleCheckMark, { loading: isToggling }] = useMutation(queries.TOGGLE_CHECK_MARK, {
@@ -84,9 +90,9 @@ export const KeyResultCheckMark = ({
     },
     onCompleted: (data) => {
       setIsChecked(data.toggleCheckMark.state === KeyResultCheckMarkState.CHECKED)
-      if (onUpdate) onUpdate()
     },
   })
+
   const [updateCheckMarkDescription, { loading: isUpdatingDescription }] = useMutation(
     queries.UPDATE_CHECK_MARK_DESCRIPTION,
     {
@@ -115,6 +121,8 @@ export const KeyResultCheckMark = ({
   const canDelete = checkPolicy ? node?.policy?.delete === GraphQLEffect.ALLOW : true
 
   const handleChange = async () => {
+    setIsCheckListAllDisabled(true)
+
     dispatchToggleEvent({
       keyResultID,
       checkMarkID: node?.id,
@@ -188,7 +196,7 @@ export const KeyResultCheckMark = ({
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Checkbox
             isChecked={isChecked}
-            isDisabled={isWaiting || !canCheckMark}
+            isDisabled={isWaiting || !canCheckMark || isCheckListAllDisabled}
             onChange={handleChange}
           />
         </Box>

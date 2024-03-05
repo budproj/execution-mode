@@ -25,6 +25,11 @@ export const checkMarkIsBeingRemovedAtom = atomFamily<boolean, string | undefine
 })
 
 export const isCheckListCollapseOpenAtom = atom<boolean>({
-  key,
+  key: `${key}::IS_COLLAPSE_OPEN`,
+  default: false,
+})
+
+export const isCheckListAllDisabledAtom = atom<boolean>({
+  key: `${key}::IS_ALL_DISABLED`,
   default: false,
 })
