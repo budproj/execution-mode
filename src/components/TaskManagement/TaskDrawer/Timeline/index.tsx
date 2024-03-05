@@ -7,6 +7,8 @@ import KeyResultSectionAddCommentInput from 'src/components/KeyResult/Single/Sec
 import { useGetCommentsByEntity } from 'src/components/Routine/hooks/getCommentsByEntity'
 import { useCreateComment } from 'src/components/Routine/hooks/setComment'
 import { Task } from 'src/services/task-management/task-management.service'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -31,6 +33,7 @@ export const TaskDrawerTimeline = ({ task }: TaskDrawerTimelineProperties) => {
   const myID = useRecoilValue(meAtom)
   const user = useRecoilValue(userAtomFamily(myID))
 
+  const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_COMMENT_CLICK)
   const entity = `${TASK_DOMAIN.task}:${task?._id ?? ''}`
 
   const taskUpdatesRequest = useGetTaskUpdates(task?._id)
@@ -40,6 +43,7 @@ export const TaskDrawerTimeline = ({ task }: TaskDrawerTimelineProperties) => {
     actions: FormikHelpers<TaskCommentsInputInitialValues>,
   ) => {
     if (task) {
+      dispatch({})
       handleCreateComment({ entity, content: values.text })
     }
 

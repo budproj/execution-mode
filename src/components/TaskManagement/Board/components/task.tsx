@@ -6,6 +6,8 @@ import { useSetRecoilState } from 'recoil'
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { KanbanTaskCard } from 'src/components/Base/KanbanTaskCard/wrapper'
 import { Task as TaskModel } from 'src/services/task-management/task-management.service'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
 
@@ -26,6 +28,8 @@ const TaskCardComponent = ({
   onDropHover: handleDropHover,
   onDelete: handleDelete,
 }: TaskProperties) => {
+  const { dispatch } = useEvent(EventType.TASK_MANAGER_DELETE_TASK_CLICK)
+
   const { ref } = useTaskDragAndDrop<HTMLDivElement>({ task, index }, handleDropHover)
   const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
   const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
@@ -37,6 +41,7 @@ const TaskCardComponent = ({
 
   const handleTaskDelete = () => {
     handleDelete(task._id)
+    dispatch({ taskStatus: task.status })
   }
 
   return (
