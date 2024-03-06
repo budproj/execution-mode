@@ -90,6 +90,8 @@ export const KeyResultCheckMark = ({
     },
     onCompleted: (data) => {
       setIsChecked(data.toggleCheckMark.state === KeyResultCheckMarkState.CHECKED)
+      setIsCheckListAllDisabled(false)
+      if (onUpdate) onUpdate()
     },
   })
 
@@ -207,7 +209,7 @@ export const KeyResultCheckMark = ({
             value={node?.description}
             isLoaded={isLoaded}
             startWithEditView={isDraft}
-            isDisabled={!isEditable || !canUpdate}
+            isDisabled={(!isEditable || !canUpdate) && !isCheckListAllDisabled}
             previewProperties={isChecked ? checkedProperties : undefined}
             onSubmit={handleNewCheckMarkDescription}
             onCancel={handleCancelDescription}
@@ -230,14 +232,14 @@ export const KeyResultCheckMark = ({
             className="deleteCheckMarkButton"
             keyResultID={keyResultID}
             checkMarkID={node?.id}
-            canDelete={canDelete}
+            canDelete={canDelete && !isCheckListAllDisabled}
             onDelete={onUpdate}
           />
           <ChangeAssignedCheckMarkButton
             keyResultID={keyResultID}
             checkMarkId={node?.id}
             assignedUserId={node?.assignedUser?.id}
-            canUpdate={checkPolicy ? canUpdate : false}
+            canUpdate={checkPolicy ? canUpdate && !isCheckListAllDisabled : false}
             onUpdate={onUpdate}
           />
         </Flex>
