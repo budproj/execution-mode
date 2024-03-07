@@ -61,7 +61,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
 
   useEffect(() => {
     setTaskSupportTeam(
-      teamMembers.filter((member) => taskDrawer?.supportTeamMembers.includes(member.id)),
+      teamMembers.filter((member) => taskDrawer?.supportTeamMembers?.includes(member.id)),
     )
   }, [setTaskSupportTeam, taskDrawer, teamMembers])
 

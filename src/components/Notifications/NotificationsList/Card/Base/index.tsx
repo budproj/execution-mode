@@ -2,6 +2,7 @@ import { Avatar, AvatarBadge, Box, Flex, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
+import { Task as TaskModel } from 'src/services/task-management/task-management.service'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { AddPersonIcon, CalendarColored } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
@@ -13,7 +14,7 @@ import { BadgeAvatarIcon } from './Avatar'
 export interface BaseCardsNotifications {
   children?: React.ReactNode
   isRead: boolean
-  handleClick?: (id?: KeyResult['id']) => void
+  handleClick?: (id?: KeyResult['id'] | TaskModel) => void
   timestamp: string
   describeBadgeAvatarIcon: MessageDescriptor
   badgeIcon?: NOTIFICATIONS_TYPE

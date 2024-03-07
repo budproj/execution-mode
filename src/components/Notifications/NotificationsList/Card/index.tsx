@@ -40,6 +40,8 @@ const CardNotification = ({ ...rest }: Notification) => {
       return <AssignedTaskInProject {...rest} />
     case 'commentOnTask':
       return <CommentOnTaskInProject {...rest} />
+    case 'mentionOnTask':
+      return <CommentOnTaskInProject {...rest} />
     default:
       return <Box />
   }

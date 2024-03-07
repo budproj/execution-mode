@@ -1,25 +1,28 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
+import { useRouter } from 'next/router'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 import regexifyString from 'regexify-string'
 
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
-import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
 import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
-import { KeyResultNotificationContent } from '../Base/KeyResult'
 import { TaskNotificationContent } from '../Base/Task'
 
 import messages from './messages'
+import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
+import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
 const CommentOnTaskInProject = ({ properties, timestamp, isRead, type }: Notification) => {
   const intl = useIntl()
-
-  const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-
-  const openDrawer = () => setOpenDrawer(properties.keyResult?.id)
+  const { push } = useRouter()
+  const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
+  const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
+  const boardLink = properties?.companyId
+    ? `explore/${properties?.companyId}?activeTab=tasks`
+    : '#'
 
   const typeCommentNotificationInTaskMessage =
     type === NOTIFICATIONS_TYPE.COMMENT_ON_TASK
@@ -56,7 +59,11 @@ const CommentOnTaskInProject = ({ properties, timestamp, isRead, type }: Notific
           ? NOTIFICATIONS_TYPE.COMMENT_ON_TASK
           : NOTIFICATIONS_TYPE.TAGGED_ON_TASK_IN_PROJECT
       }
-      handleClick={openDrawer}
+      handleClick={ () => {
+        push(boardLink)
+        setTaskDrawer(properties?.taskBoard)
+        setTaskDrawerId(properties?.taskBoard?._id)}
+      }
     >
       <Heading display="flex" width="100%" justifyContent="space-between" textAlign="left">
         <Box display="flex" alignItems="flex-start" justifyContent="center" flexDir="column">

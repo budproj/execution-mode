@@ -1,3 +1,4 @@
+import { Task } from 'src/services/task-management/task-management.service'
 export interface Notification {
   id?: string
   messageId: string
@@ -34,6 +35,8 @@ export interface Notification {
     routine?: {
       companyId: string
       answerId: string
-    }
+    },
+    taskBoard?: Task,
+    companyId?: string
   }
 }
