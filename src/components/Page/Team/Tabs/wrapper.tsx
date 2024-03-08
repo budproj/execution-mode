@@ -20,7 +20,7 @@ interface ExploreTeamTabsProperties {
 
 const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProperties) => {
   const flags = useFlags(['board_tasks'])
-  const isTasksEnabled = true
+  const isTasksEnabled = flags.board_tasks.enabled
 
   const tabIndex = isTasksEnabled
     ? new Map([
