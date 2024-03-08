@@ -37,6 +37,6 @@ export interface Notification {
       answerId: string
     },
     taskBoard?: Task,
-    companyId?: string
+    teamId?: string
   }
 }

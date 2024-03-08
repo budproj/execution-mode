@@ -18,8 +18,8 @@ const AssignedTaskInProject = ({ properties, timestamp, isRead }: Notification) 
   const { push } = useRouter()
   const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
   const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
-  const boardLink = properties?.companyId
-    ? `explore/${properties?.companyId}?activeTab=tasks`
+  const boardLink = properties?.teamId
+    ? `explore/${properties?.teamId}?activeTab=tasks`
     : '#'
 
   return (
