@@ -1,6 +1,6 @@
 import React from 'react'
 
-import KeyResultSectionTimelineCardCommentAndFeedbacks from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Comment/comment'
+import KeyResultSectionTimelineCardComment from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Comment/Default'
 import { KeyResultComment } from 'src/components/KeyResult/types'
 import { Comment } from 'src/components/Routine/RetrospectiveTab/Comments/types'
 import { User } from 'src/components/User/types'
@@ -18,5 +18,5 @@ export const TaskCommentComponent = ({ comment }: TaskCommentProperties) => {
     createdAt: comment?.createdAt.toLocaleString(),
   }
 
-  return comment && <KeyResultSectionTimelineCardCommentAndFeedbacks data={formattedComment} />
+  return comment && <KeyResultSectionTimelineCardComment isFromTask data={formattedComment} />
 }
