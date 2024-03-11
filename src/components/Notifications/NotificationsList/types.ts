@@ -36,7 +36,10 @@ export interface Notification {
       companyId: string
       answerId: string
     }
-    taskBoard?: Task
-    teamId?: string
   }
+}
+
+export interface taskNotification extends Notification {
+  teamId: string
+  taskBoard: Task
 }

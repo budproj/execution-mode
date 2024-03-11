@@ -7,7 +7,7 @@ import regexifyString from 'regexify-string'
 
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
 
-import { Notification } from '../../types'
+import { taskNotification } from '../../types'
 import BaseCardNotification from '../Base'
 import { TaskNotificationContent } from '../Base/Task'
 
@@ -15,13 +15,13 @@ import messages from './messages'
 import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
-const CommentOnTaskInProject = ({ properties, timestamp, isRead, type }: Notification) => {
+const CommentOnTaskInProject = ({ properties, timestamp, isRead, type, teamId, taskBoard }: taskNotification) => {
   const intl = useIntl()
   const { push } = useRouter()
   const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
   const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
-  const boardLink = properties?.teamId
-    ? `explore/${properties?.teamId}?activeTab=tasks`
+  const boardLink = teamId
+    ? `explore/${teamId}?activeTab=tasks`
     : '#'
 
   const typeCommentNotificationInTaskMessage =
@@ -61,8 +61,8 @@ const CommentOnTaskInProject = ({ properties, timestamp, isRead, type }: Notific
       }
       handleClick={ () => {
         push(boardLink)
-        setTaskDrawer(properties?.taskBoard)
-        setTaskDrawerId(properties?.taskBoard?._id)}
+        setTaskDrawer(taskBoard)
+        setTaskDrawerId(taskBoard._id)}
       }
     >
       <Heading display="flex" width="100%" justifyContent="space-between" textAlign="left">

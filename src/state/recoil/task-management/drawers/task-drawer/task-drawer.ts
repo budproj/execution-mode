@@ -6,7 +6,7 @@ import { PREFIX } from './constants'
 
 const KEY = `${PREFIX}::TASK`
 
-export const taskDrawerAtom = atom<Task | undefined>({
+export const taskDrawerAtom = atom<Task>({
   key: KEY,
   default: undefined,
 })
