@@ -35,8 +35,8 @@ export interface Notification {
     routine?: {
       companyId: string
       answerId: string
-    },
-    taskBoard?: Task,
+    }
+    taskBoard?: Task
     teamId?: string
   }
 }

@@ -7,7 +7,6 @@ import CommentIcon from 'src/components/Icon/Comment'
 import PauseIcon from 'src/components/Icon/Pause'
 import TaggedIcon from 'src/components/Icon/Tagged'
 import TeamIcon from 'src/components/Icon/Team'
-import TicketStar from 'src/components/Icon/TicketStar'
 import TickSquare from 'src/components/Icon/TickSquare'
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
 
@@ -39,7 +38,7 @@ const BadgeIcon = ({ typeNotification, desc, ...rest }: BadgeIconProperties) => 
       <CommentIcon key={desc} desc={desc} h="4.5em" w="4.5em" fill="none" stroke="none"/>,
     ],
     [
-      NOTIFICATIONS_TYPE.TAGGED_ON_TASK_IN_PROJECT,
+      NOTIFICATIONS_TYPE.MENTION_ON_TASK,
       <CommentIcon key={desc} desc={desc} h="4.5em" w="4.5em" fill="none" stroke="none"/>,
     ],
     [

@@ -57,7 +57,7 @@ const CommentOnTaskInProject = ({ properties, timestamp, isRead, type }: Notific
       badgeIcon={
         type === NOTIFICATIONS_TYPE.COMMENT_ON_TASK
           ? NOTIFICATIONS_TYPE.COMMENT_ON_TASK
-          : NOTIFICATIONS_TYPE.TAGGED_ON_TASK_IN_PROJECT
+          : NOTIFICATIONS_TYPE.MENTION_ON_TASK
       }
       handleClick={ () => {
         push(boardLink)
