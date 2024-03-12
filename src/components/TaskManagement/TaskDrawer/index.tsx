@@ -96,7 +96,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
         height="100%"
       >
         <Flex flexDirection="column" height="100%">
-          <Flex paddingX="24px" bg="white" height="100%">
+          <Flex paddingX="24px" bg="white">
             <Flex flexDirection="column" width="100%">
               <Flex marginTop="15px">
                 <Flex
@@ -174,12 +174,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
 
               <Divider /> */}
 
-              <Editor
-                content={taskDrawer?.description}
-                onUpdate={() => {
-                  console.log('teste')
-                }}
-              />
+              <Editor content={taskDrawer?.description} />
             </Flex>
           </Flex>
           <TaskDrawerTimeline task={taskDrawer} />
