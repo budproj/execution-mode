@@ -208,8 +208,8 @@
     "description": "This text is used accross our platform to identify the female gender"
   },
   "2rTc9E": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Perform a check-in on your key results.",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "2vOg9s": {
     "defaultMessage": "No access",
@@ -236,8 +236,8 @@
     "description": "Individual OKR subtitle of the page"
   },
   "371LdJ": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "It's important for key results to have descriptions so that everyone better understands the strategy.",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "39q6ig": {
     "defaultMessage": "OKRs",
@@ -268,7 +268,7 @@
     "description": "This is the title of our progress slider popover. It appears when the user moves the slider thumb"
   },
   "3IsNOi": {
-    "defaultMessage": "Good to see you again, {name}\"! :)",
+    "defaultMessage": "Good to see you again, {name}! :)",
     "description": "The page title that our users should see in the dashboard page"
   },
   "3maJd0": {
@@ -444,8 +444,8 @@
     "description": "The label of the company gender while creating a new workspace"
   },
   "68x4jj": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "What is your level of satisfaction with the platform's speed?",
+    "description": "This message appears on the notices banner."
   },
   "6aChVs": {
     "defaultMessage": "This week",
@@ -568,8 +568,8 @@
     "description": "This message is displayed when no year filter was selected"
   },
   "7ZtAaa": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Seek to understand the barriers and how you can contribute to these key results",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "81Bqza": {
     "defaultMessage": "An icon of the letter X. Clicking on it closes the time machine feature.",
@@ -636,8 +636,8 @@
     "description": "The text of the table head related to the Objective column"
   },
   "8o0/Bc": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "The arrow icon to the right",
+    "description": "MainAppBar user menu first item option"
   },
   "8PcB2d": {
     "defaultMessage": "No KR",
@@ -732,8 +732,8 @@
     "description": "The description for name cycle field"
   },
   "A4WTq8": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Every week new personalized challenges that help you and your team stay within the best practices for implementing OKRs",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
   },
   "A5ct4X": {
     "defaultMessage": "Text document icon",
@@ -996,8 +996,8 @@
     "description": "This desc message explains the neutral icon for screen readers"
   },
   "c1bily": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "The description for the thumbs up button",
+    "description": "The description for the thumbs up button"
   },
   "C6YmFo": {
     "defaultMessage": "Tips on writing a good key result:",
@@ -1180,8 +1180,8 @@
     "description": "Company OKR title of the page"
   },
   "DBnPB3": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Create detailed descriptions for your key results",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "DEMBaq": {
     "defaultMessage": "An icon of a plus sign, indicating that by clicking here you will open the sidebar for creating a key result",
@@ -1436,8 +1436,8 @@
     "description": "This button appears as an empty state while the user is selecting the cycle filter"
   },
   "fjeSHd": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "{leader} Comment on the key results with low confidence.",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "FMvbXp": {
     "defaultMessage": "In the {cadence} {cycle} {parent} cycle",
@@ -1724,8 +1724,8 @@
     "description": "The label of the button used to go forward while creating a new workspace"
   },
   "HDxm2W": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "{leader} Comment on key results with Barriers",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "HEYvPI": {
     "defaultMessage": "Create key result",
@@ -1780,8 +1780,8 @@
     "description": "This helper texts explains since when we are calculating your company progress"
   },
   "hNsMcg": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Comment on any of the company's key results",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "hohkHN": {
     "defaultMessage": "Create team",
@@ -1844,8 +1844,8 @@
     "description": "This message is displayed as the description for the danger confirmation modal while removing a given resource"
   },
   "I1Yqrr": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "The description for the thumbs down button",
+    "description": "The description for the thumbs down button"
   },
   "I3ms2g": {
     "defaultMessage": "Filter icon with 3 lines",
@@ -2108,8 +2108,8 @@
     "description": "The title of the progress column."
   },
   "JrryPL": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "The weekly check-in routine is a fundamental part of keeping track of the strategy's progress.",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "jRsXuq": {
     "defaultMessage": "CHECK-IN",
@@ -2264,8 +2264,8 @@
     "description": "The label message that is displayed below our team at work image when the user has no key results in her/his key result view list"
   },
   "KjG7j3": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "My key results",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "kjKwCU": {
     "defaultMessage": "Comments:",
@@ -2824,8 +2824,8 @@
     "description": "The description for cadence cycle field"
   },
   "+OsA1N": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Did you like the content?",
+    "description": "The title of the feedback line"
   },
   "ot1J/+": {
     "defaultMessage": "No check-in",
@@ -2860,8 +2860,8 @@
     "description": "The page title that is displayed in the browser tab"
   },
   "P48rc3": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "NEW BEACON OF GOOD PRACTICES",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
   },
   "P+AGjw": {
     "defaultMessage": "How is the progress of each team?",
@@ -2912,8 +2912,8 @@
     "description": "This message appears as describe on notification where a user sent a feedback on your key-result "
   },
   "PJSgbG": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "challenges and tasks of the week",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "Pkdkh4": {
     "defaultMessage": "My Key Results",
@@ -3056,8 +3056,8 @@
     "description": "The text that is displayed in the \"team\" values of the metaTitle message whiel the team name is being fetched"
   },
   "QoIlCT": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "OKRs {quarter} Teams",
+    "description": "The summery title for the quarterly OKRs"
   },
   "QOiwwe": {
     "defaultMessage": "Clock icon",
@@ -3168,8 +3168,8 @@
     "description": "This is the desc attribute of our chevron down icon. It is used by screen readers"
   },
   "Rj3usm": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "How has your experience with Bud been? Tell us in this quick form:",
+    "description": "This message appears on the notices banner."
   },
   "RN1J2p": {
     "defaultMessage": "This week",
@@ -3380,8 +3380,8 @@
     "description": "This message is displayed in the key-results empty state inside the team page when an objective has no key-results"
   },
   "SW8YCX": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Seek to understand the signaling and how you can contribute to these key results",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "SWl7UB": {
     "defaultMessage": " \"x\" icon. By clicking on it you will close the progress box",
@@ -3516,7 +3516,7 @@
     "description": "The user locale input placeholder while creating a new workspace"
   },
   "tydp5X": {
-    "defaultMessage": "",
+    "defaultMessage": "Best practices",
     "description": "The description of the pie chart graph that indicates the label"
   },
   "TYmE01": {
@@ -3580,8 +3580,8 @@
     "description": "Title of the content of the Retrospective tab on the teams page."
   },
   "UJijyu": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "In addition to your team's strategy, seek to share your ideas on company key results",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "ukvrDN": {
     "defaultMessage": "Visual and colaborative feedback",
@@ -3624,8 +3624,8 @@
     "description": "This is the label text that is displayed above the input"
   },
   "uORr+d": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "Key results without updates become challenging to track",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "UozvhV": {
     "defaultMessage": "Users",
@@ -3697,11 +3697,11 @@
   },
   "v0PKmP": {
     "defaultMessage": "{user} created a task",
-    "description": "dsa"
+    "description": "Message for creating a task"
   },
   "v4RcBJ": {
-    "defaultMessage": "",
-    "description": ""
+    "defaultMessage": "{Leader}, please comment on the outdated key results",
+    "description": "The page title that our users should see in the dashboard page"
   },
   "v9xuBO": {
     "defaultMessage": "Feeling",
@@ -3750,10 +3750,6 @@
   "vgU7fC": {
     "defaultMessage": "First check-in pending",
     "description": "This string is used as the description for the icon that indicates that the key-result has not been updated"
-  },
-  "VhgGax": {
-    "defaultMessage": "How are your priorities d{gender, select, MALE {o} FEMALE {a} other {o}} {team}?",
-    "description": "The title of the header section in our objectives overview report"
   },
   "VHOea1": {
     "defaultMessage": "Delete key result",
@@ -4090,10 +4086,6 @@
   "xJJ9uE": {
     "defaultMessage": "Sorry, but an unexpected error occurred. Please try again.",
     "description": "This message appears when the user tries to remove a given cycle, but receives an error"
-  },
-  "xkN783": {
-    "defaultMessage": "",
-    "description": ""
   },
   "XL/hXA": {
     "defaultMessage": "It's been a while since anyone has interacted with this key result. How about sharing a relevant info with the team? :)",
@@ -4448,7 +4440,7 @@
     "description": "This message is displayed inside the empty state on last retrospective overview"
   },
   "texterify_timestamp": {
-    "defaultMessage": "2024-02-28T19:40:22Z",
+    "defaultMessage": "2024-03-12T18:02:35Z",
     "description": ""
   }
 }
