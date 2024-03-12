@@ -2483,10 +2483,6 @@
     "defaultMessage": "Clique aqui para começar a escrever um comentário",
     "description": "This is the title text that is displayed if the user hovers the mouse in it"
   },
-  "byFUit": {
-    "defaultMessage": "Visão geral dos times 2",
-    "description": "The title of the teams overview"
-  },
   "c1bily": {
     "defaultMessage": "O botão de sinal positivo para o sumário gerado.",
     "description": "The description for the thumbs up button"
