@@ -15,6 +15,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import KeyResultSectionTimelineCardBase from 'src/components/KeyResult/Single/Sections/Timeline/Cards/Base'
 import { KeyResultComment } from 'src/components/KeyResult/types'
 import { insertMentionInString } from 'src/components/Routine/RetrospectiveTab/Comments/CommentCard'
+import { useDeleteComment } from 'src/components/Routine/hooks/deleteComment'
 import UserProfileCard from 'src/components/User/ProfileCard'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import removeTimelineEntry from 'src/state/recoil/key-result/timeline/remove-entry'
@@ -26,6 +27,7 @@ export interface KeyResultSectionTimelineCardCommentProperties {
   data?: Partial<KeyResultComment>
   isSubcomment?: boolean
   onEntryDelete?: (entryType: string) => void
+  isFromTask?: boolean
 }
 
 export const MarkedUser = ({ id, name }: { id?: string; name?: string }) => (
@@ -47,6 +49,7 @@ const KeyResultSectionTimelineCardComment = ({
   data,
   isSubcomment = false,
   onEntryDelete,
+  isFromTask = false,
 }: KeyResultSectionTimelineCardCommentProperties) => {
   const intl = useIntl()
   const removeEntryFromTimeline = useSetRecoilState(removeTimelineEntry(data?.keyResultId))
@@ -57,8 +60,14 @@ const KeyResultSectionTimelineCardComment = ({
 
   const intlCardType = intl.formatMessage(messages.cardType)
   const isLoaded = Boolean(data)
+  const { deleteComment } = useDeleteComment()
 
   const handleDelete = async () => {
+    if (isFromTask && data && data.id) {
+      deleteComment({ id: data.id })
+      return
+    }
+
     await deleteKeyResultComment({
       variables: {
         keyResultCommentID: data?.id,
@@ -85,6 +94,7 @@ const KeyResultSectionTimelineCardComment = ({
       isSubcomment={isSubcomment}
       policy={data?.policy}
       intlCardType={intlCardType}
+      isFromTask={isFromTask}
       onDelete={handleDelete}
     >
       <Flex gridGap={4} direction="column">

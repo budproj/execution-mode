@@ -39,6 +39,7 @@ export interface KeyResultSectionTimelineCardBaseProperties extends StyleProps {
   boxShadow?: BoxProps['boxShadow']
   policy?: GraphQLEntityPolicy
   onDelete?: () => void
+  isFromTask?: boolean
 }
 
 const KeyResultSectionTimelineCardBase = ({
@@ -58,6 +59,7 @@ const KeyResultSectionTimelineCardBase = ({
   onDelete,
   policy,
   intlCardType,
+  isFromTask,
   ...rest
 }: KeyResultSectionTimelineCardBaseProperties) => {
   const myID = useRecoilValue(meAtom)
@@ -84,7 +86,7 @@ const KeyResultSectionTimelineCardBase = ({
       position="relative"
       {...rest}
     >
-      {allowDelete && (
+      {(allowDelete || isFromTask) && (
         <Box position="absolute" right={4} top={4}>
           <KeyResultSectionTimelineCardBaseOptions
             intlCardType={intlCardType}
