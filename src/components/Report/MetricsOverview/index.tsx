@@ -152,7 +152,7 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
       </Text>
       <Divider />
       <ScrollableItem maxHeight="185px" p="0 12px">
-        {teams.slice(0,5).map((team) => (
+        {teams.slice(0, 5).map((team) => (
           <MetricTeamRow key={team.id} team={team} />
         ))}
       </ScrollableItem>
