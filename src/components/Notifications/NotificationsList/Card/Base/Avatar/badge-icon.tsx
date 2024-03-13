@@ -35,11 +35,11 @@ const BadgeIcon = ({ typeNotification, desc, ...rest }: BadgeIconProperties) => 
     ],
     [
       NOTIFICATIONS_TYPE.COMMENT_ON_TASK,
-      <CommentIcon key={desc} desc={desc} h="4.5em" w="4.5em" fill="none" stroke="none"/>,
+      <CommentIcon key={desc} desc={desc} h="4.5em" w="4.5em" fill="none" stroke="none" />,
     ],
     [
       NOTIFICATIONS_TYPE.MENTION_ON_TASK,
-      <CommentIcon key={desc} desc={desc} h="4.5em" w="4.5em" fill="none" stroke="none"/>,
+      <CommentIcon key={desc} desc={desc} h="4.5em" w="4.5em" fill="none" stroke="none" />,
     ],
     [
       NOTIFICATIONS_TYPE.ADD_SUPPORT_TEAM,

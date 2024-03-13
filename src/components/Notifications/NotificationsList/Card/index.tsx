@@ -37,11 +37,11 @@ const CardNotification = ({ ...rest }: Notification | taskNotification) => {
     case 'krFeedback':
       return <KrFeedback {...rest} />
     case 'taskAssignInProject':
-      return <AssignedTaskInProject {...rest as taskNotification} />
+      return <AssignedTaskInProject {...(rest as taskNotification)} />
     case 'commentOnTask':
-      return <CommentOnTaskInProject {...rest as taskNotification} />
+      return <CommentOnTaskInProject {...(rest as taskNotification)} />
     case 'mentionOnTask':
-      return <CommentOnTaskInProject {...rest as taskNotification} />
+      return <CommentOnTaskInProject {...(rest as taskNotification)} />
     default:
       return <Box />
   }

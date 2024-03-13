@@ -2,12 +2,12 @@ import { Avatar, AvatarBadge, Box, Flex, Tooltip } from '@chakra-ui/react'
 import React from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
 
-import { Task as TaskModel } from 'src/services/task-management/task-management.service'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import { AddPersonIcon, CalendarColored } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
+import { Task as TaskModel } from 'src/services/task-management/task-management.service'
 
 import { BadgeAvatarIcon } from './Avatar'
 

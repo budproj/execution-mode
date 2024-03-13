@@ -1,28 +1,33 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
-import React from 'react'
 import { useRouter } from 'next/router'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 import regexifyString from 'regexify-string'
 
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
+import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
+import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
 
 import { taskNotification } from '../../types'
 import BaseCardNotification from '../Base'
 import { TaskNotificationContent } from '../Base/Task'
 
 import messages from './messages'
-import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
-import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
-const CommentOnTaskInProject = ({ properties, timestamp, isRead, type, teamId, taskBoard }: taskNotification) => {
+const CommentOnTaskInProject = ({
+  properties,
+  timestamp,
+  isRead,
+  type,
+  teamId,
+  taskBoard,
+}: taskNotification) => {
   const intl = useIntl()
   const { push } = useRouter()
   const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
   const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
-  const boardLink = teamId
-    ? `explore/${teamId}?activeTab=tasks`
-    : '#'
+  const boardLink = teamId ? `explore/${teamId}?activeTab=tasks` : '#'
 
   const typeCommentNotificationInTaskMessage =
     type === NOTIFICATIONS_TYPE.COMMENT_ON_TASK
@@ -59,11 +64,11 @@ const CommentOnTaskInProject = ({ properties, timestamp, isRead, type, teamId, t
           ? NOTIFICATIONS_TYPE.COMMENT_ON_TASK
           : NOTIFICATIONS_TYPE.MENTION_ON_TASK
       }
-      handleClick={ () => {
+      handleClick={() => {
         push(boardLink)
         setTaskDrawer(taskBoard)
-        setTaskDrawerId(taskBoard._id)}
-      }
+        setTaskDrawerId(taskBoard._id)
+      }}
     >
       <Heading display="flex" width="100%" justifyContent="space-between" textAlign="left">
         <Box display="flex" alignItems="flex-start" justifyContent="center" flexDir="column">

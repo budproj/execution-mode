@@ -1,27 +1,30 @@
-import React from 'react'
-import BaseCardNotification from '../Base'
-import messages from './messages'
-
-
 import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
-import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
-import { taskNotification } from '../../types'
-
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
+import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
+import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
 
-const AssignedTaskInProject = ({ properties, timestamp, isRead, teamId, taskBoard }: taskNotification) => {
+import { taskNotification } from '../../types'
+import BaseCardNotification from '../Base'
+
+import messages from './messages'
+
+const AssignedTaskInProject = ({
+  properties,
+  timestamp,
+  isRead,
+  teamId,
+  taskBoard,
+}: taskNotification) => {
   const intl = useIntl()
   const { push } = useRouter()
   const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
   const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
-  const boardLink = teamId
-    ? `explore/${teamId}?activeTab=tasks`
-    : '#'
+  const boardLink = teamId ? `explore/${teamId}?activeTab=tasks` : '#'
 
   return (
     <BaseCardNotification
