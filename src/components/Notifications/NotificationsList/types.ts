@@ -41,6 +41,6 @@ export interface Notification {
 }
 
 export interface taskNotification extends Notification {
-  teamId: string[]
+  teamId: string
   taskBoard: Task
 }
