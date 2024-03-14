@@ -55,6 +55,7 @@ const NotificationsList = () => {
               timestamp={notification.timestamp}
               isRead={notification.isRead}
               messageId={notification.messageId}
+              teamId={notification.teamId}
             />
             <Divider borderColor="gray.100" />
           </Box>

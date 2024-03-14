@@ -25,9 +25,11 @@ const AssignedTaskInProject = ({
   const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
   const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
   const boardLink = teamId ? `explore/${teamId}?activeTab=tasks` : '#'
+  console.log('hey yo1')
   console.log(boardLink)
   console.log(teamId)
   console.log(properties)
+  console.log('hey yo2')
 
   return (
     <BaseCardNotification

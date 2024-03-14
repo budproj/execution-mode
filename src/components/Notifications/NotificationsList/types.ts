@@ -38,6 +38,7 @@ export interface Notification {
       answerId: string
     }
   }
+  teamId?: string
 }
 
 export interface taskNotification extends Notification {
