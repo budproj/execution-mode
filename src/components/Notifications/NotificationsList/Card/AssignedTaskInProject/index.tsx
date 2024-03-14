@@ -8,28 +8,17 @@ import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
 
-import { taskNotification } from '../../types'
+import { Notification } from '../../types'
 import BaseCardNotification from '../Base'
 
 import messages from './messages'
 
-const AssignedTaskInProject = ({
-  properties,
-  timestamp,
-  isRead,
-  teamId,
-  taskBoard,
-}: taskNotification) => {
+const AssignedTaskInProject = ({ properties, timestamp, isRead }: Notification) => {
   const intl = useIntl()
   const { push } = useRouter()
   const setTaskDrawer = useSetRecoilState(taskDrawerAtom)
   const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
-  const boardLink = teamId ? `explore/${teamId}?activeTab=tasks` : '#'
-  console.log('hey yo1')
-  console.log(boardLink)
-  console.log(teamId)
-  console.log(properties)
-  console.log('hey yo2')
+  const boardLink = properties.teamId ? `explore/${properties.teamId}?activeTab=tasks` : '#'
 
   return (
     <BaseCardNotification
@@ -40,8 +29,8 @@ const AssignedTaskInProject = ({
       badgeIcon={NOTIFICATIONS_TYPE.ASSIGNED_TASK_IN_PROJECT}
       handleClick={async () => {
         push(boardLink)
-        setTaskDrawer(taskBoard)
-        setTaskDrawerId(taskBoard._id)
+        setTaskDrawer(properties.taskBoard)
+        setTaskDrawerId(properties.taskBoard._id)
       }}
     >
       <Heading display="flex" width="100%" justifyContent="space-between" textAlign="left">

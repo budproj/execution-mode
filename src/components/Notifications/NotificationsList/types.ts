@@ -37,8 +37,9 @@ export interface Notification {
       companyId: string
       answerId: string
     }
+    teamId?: string
+    taskBoard?: any
   }
-  teamId?: string
 }
 
 export interface taskNotification extends Notification {
