@@ -10,7 +10,7 @@ const TickSquare = ({ title, desc, ...rest }: TickSquareProperties): ReactElemen
     <title>{title}</title>
     <desc>{desc}</desc>
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="11" cy="11" r="10" fill="#0000FF" stroke="white" strokeWidth="2" />
+      <circle cx="11" cy="11" r="10" fill="#6F6EFF" stroke="white" strokeWidth="2" />
       <path
         opacity="0"
         d="M16.3402 2H7.67024C4.28024 2 2.00024 4.38 2.00024 7.92V16.09C2.00024 19.62 4.28024 22 7.67024 22H16.3402C19.7302 22 22.0002 19.62 22.0002 16.09V7.92C22.0002 4.38 19.7302 2 16.3402 2"
