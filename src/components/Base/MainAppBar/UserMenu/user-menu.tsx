@@ -3,7 +3,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { HELPDESK_URL } from 'src/components/Base/SupportButton/constants'
+import { HELPDESK_URL, BUDDIES_CENTRAL_URL } from 'src/components/Base/SupportButton/constants'
 import { Me } from 'src/components/User'
 import UserLogout from 'src/components/User/Logout'
 
@@ -60,6 +60,10 @@ const UserMenu = () => {
 
           <Link href={HELPDESK_URL} target="_blank">
             <UserMenuButton>{intl.formatMessage(messages.secondOption)}</UserMenuButton>
+          </Link>
+
+          <Link href={BUDDIES_CENTRAL_URL} target="_blank">
+            <UserMenuButton>{intl.formatMessage(messages.thirdOption)}</UserMenuButton>
           </Link>
         </Box>
 
