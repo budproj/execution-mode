@@ -527,6 +527,10 @@
     "defaultMessage": "Gênero da empresa",
     "description": "The label of the company gender while creating a new workspace"
   },
+  "68x4jj": {
+    "defaultMessage": "Qual seu grau de satisfação com a velocidade da plataforma?",
+    "description": "This message appears on the notices banner."
+  },
   "6E9X3c": {
     "defaultMessage": "Redefinir",
     "description": "This is the button label that is displayed in our reset button"
@@ -562,6 +566,10 @@
   "6gyBBo": {
     "defaultMessage": "Sentimento",
     "description": "This message appears on feeling chart tooltip as the title that suggests what the data means."
+  },
+  "6hOcnz": {
+    "defaultMessage": "Título obrigatório.",
+    "description": "The error message that appears in the insert or updated drawer."
   },
   "6spUEn": {
     "defaultMessage": "Fazer check-in",
@@ -979,6 +987,10 @@
     "defaultMessage": "Passo 3",
     "description": "The label of the third step while creating a new workspace"
   },
+  "DarZer": {
+    "defaultMessage": "Prazo não pode ser depois de 2030",
+    "description": "The error message that appears in the insert or updated drawer."
+  },
   "Dnh8iG": {
     "defaultMessage": "de <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the first line of our confidence tooltip"
@@ -1006,6 +1018,10 @@
   "E+0+QH": {
     "defaultMessage": "Tem certeza que deseja excluir este resultado-chave?",
     "description": "This message is used as the title in our first dialog while removing a key-result"
+  },
+  "EF3Wh/": {
+    "defaultMessage": "Descrição obrigatória.",
+    "description": "The error message that appears in the insert or updated drawer."
   },
   "EJLLb9": {
     "defaultMessage": "{type, select, feeling {Sentimento} productivity {Produtividade na semana} roadblock {Bloqueios na semana} other {OKRs}}",
@@ -1255,6 +1271,10 @@
     "defaultMessage": "Responsável",
     "description": "The label text above the Owner section in our key result single page or drawers"
   },
+  "INlfvg": {
+    "defaultMessage": "Prazo não pode ser depois do início.",
+    "description": "The error message that appears in the insert or updated drawer."
+  },
   "INrEzv": {
     "defaultMessage": "Masculino",
     "description": "This is the male option while selecting a gender to create a new user"
@@ -1455,6 +1475,10 @@
     "defaultMessage": "Sobre {isMyUser, select, true {você} other {{gender, select, MALE {o} FEMALE {a} other {o}} {firstName}}}",
     "description": "This is the label that goes on our user account settings page, at the seventh field to update the user informations"
   },
+  "LLhNT/": {
+    "defaultMessage": "Data de prazo obrigatória.",
+    "description": "The error message that appears in the insert or updated drawer."
+  },
   "LQfRhU": {
     "defaultMessage": "Ir para o perfil",
     "description": "This message is the description of the option to redirect to profile of a user."
@@ -1622,6 +1646,10 @@
   "O4iDCM": {
     "defaultMessage": "Progresso",
     "description": "The title of the progress section in our key-result sidebar"
+  },
+  "O6WswK": {
+    "defaultMessage": "{user} {key, select, createdTask {criou} other {alterou}} {key, select, description {a} goal {a} createdTask {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} owner {responsável} createdTask {tarefa} status {status} dueDate {prazo} initialDate {início} supportTeamMembers {time de apoio} other {}}",
+    "description": "dsa"
   },
   "OA7DUJ": {
     "defaultMessage": "Novo Objetivo",
@@ -1850,10 +1878,6 @@
   "RZrZdZ": {
     "defaultMessage": "Home",
     "description": "The name of the Home page, located at \"/\""
-  },
-  "Rj3usm": {
-    "defaultMessage": "Como está sendo sua experiência com a bud? Nos conte nesse formulário rápido:",
-    "description": "This message appears on the notices banner."
   },
   "RojqOy": {
     "defaultMessage": "Responder agora",
@@ -3167,10 +3191,6 @@
     "defaultMessage": "Tarefas {team}",
     "description": "Header of the board tab on the teams page."
   },
-  "oQbqDL": {
-    "defaultMessage": "{user} alterou {key, select, description {a} goal {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} other {}}",
-    "description": "dsa"
-  },
   "oWLFIj": {
     "defaultMessage": "Visão Geral do Time",
     "description": "This message is the title of the component that presents the Indicators of a team."
@@ -3551,6 +3571,10 @@
     "defaultMessage": "Não foi possível deletar a resposta!",
     "description": "This message appears in a toast indicating that it was not possible to delete a routines response."
   },
+  "v0PKmP": {
+    "defaultMessage": "{user} criou a tarefa",
+    "description": "dsa"
+  },
   "v4RcBJ": {
     "defaultMessage": "{leader} Comente nos resultados-chave pouco atualizados",
     "description": "The page title that our users should see in the dashboard page"
@@ -3754,6 +3778,10 @@
   "yK87+y": {
     "defaultMessage": "Data de início",
     "description": "The company yearly date start input placeholder while creating a new workspace"
+  },
+  "yO19dV": {
+    "defaultMessage": "Central dos buddies",
+    "description": "MainAppBar user menu third item option"
   },
   "yP9yyI": {
     "defaultMessage": "por um resutado-chave, confira:",
