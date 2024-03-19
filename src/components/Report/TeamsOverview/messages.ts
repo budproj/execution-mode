@@ -4,6 +4,7 @@ type TeamOverviewMessages =
   | 'teamRankingTitle'
   | 'teamRankingTitleWithoutGamification'
   | 'teamRankingSubTitle'
+  | 'loadMore'
 
 export default defineMessages<TeamOverviewMessages>({
   teamRankingTitle: {
@@ -20,5 +21,10 @@ export default defineMessages<TeamOverviewMessages>({
     defaultMessage: 'Progresso geral dos objetivos no ciclo atual',
     id: '8Qz7RP',
     description: 'Subtitle to show on the team ranking page when gamification is disabled',
+  },
+  loadMore: {
+    defaultMessage: 'Carregar Mais',
+    id: 'DaEVzP',
+    description: 'Button title to load more rows',
   },
 })
