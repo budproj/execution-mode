@@ -156,15 +156,21 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
         {teamsToRender.map((team) => (
           <MetricTeamRow key={team.id} team={team} />
         ))}
+        <Box style={{ display: 'flex' }}>
+          <Button
+            _hover={{
+              color: 'brand.500',
+            }}
+            style={{ marginLeft: 'auto' }}
+            onClick={() => {
+              setIndex(index + 1)
+              console.log(index)
+            }}
+          >
+            {intl.formatMessage(messages.loadMore)}
+          </Button>
+        </Box>
       </ScrollableItem>
-      <Button
-        onClick={() => {
-          setIndex(index + 1)
-          console.log(index)
-        }}
-      >
-        load more
-      </Button>
     </Box>
   )
 }

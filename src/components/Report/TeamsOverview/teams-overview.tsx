@@ -75,16 +75,22 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
             isGameficationDisabled={isGameficationDisabled}
             teamsRanking={itemsToRender}
           />
+          <Box style={{ display: 'flex' }}>
+            <Button
+              style={{ marginLeft: 'auto' }}
+              _hover={{
+                color: 'brand.500',
+              }}
+              onClick={() => {
+                setIndex(index + 1)
+                console.log(index)
+              }}
+            >
+              {intl.formatMessage(messages.loadMore)}
+            </Button>
+          </Box>
         </ScrollableItem>
       )}
-      <Button
-        onClick={() => {
-          setIndex(index + 1)
-          console.log(index)
-        }}
-      >
-        load more
-      </Button>
     </Box>
   )
 }
