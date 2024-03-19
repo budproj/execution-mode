@@ -3,6 +3,7 @@ import { Box, Button, Grid, GridItem } from '@chakra-ui/react'
 import orderBy from 'lodash/orderBy'
 import uniqBy from 'lodash/uniqBy'
 import React, { memo, useEffect, useMemo, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window'
 import { useRecoilState } from 'recoil'
 
@@ -12,6 +13,7 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 
 import TeamCard from './Card'
+import messages from './messages'
 import queries from './queries.gql'
 import { GetTeamsQuery } from './types'
 
