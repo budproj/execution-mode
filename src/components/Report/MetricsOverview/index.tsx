@@ -1,5 +1,5 @@
-import { Box, Text, Flex, Divider, StyleProps } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Box, Button, Text, Flex, Divider, StyleProps } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -26,6 +26,7 @@ interface MetricsOverviewProperties extends StyleProps {}
 const ScrollableItem = getScrollableItem()
 
 const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
+  const [index, setIndex] = useState(2)
   const { getEmoji } = useGetEmoji()
   const intl = useIntl()
 
@@ -36,7 +37,7 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
   const company = useRecoilValue(teamAtomFamily(companyId))
 
   const [teams, setTeams] = useConnectionEdges<Team>(company?.rankedDescendants?.edges)
-
+  const teamsToRender = teams.slice(0, index)
   useEffect(() => {
     setTeams(company?.rankedDescendants?.edges)
   }, [company?.rankedDescendants?.edges, setTeams])
@@ -55,7 +56,7 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
   return (
     <Box bg="white" borderRadius="lg" shadow="for-background.light" px={8} py={5} {...rest}>
       <CardHeader
-        loading={teams.length === 0}
+        loading={teamsToRender.length === 0}
         title={intl.formatMessage(messages.metricCardTitle, {
           company: user?.companies?.edges[0].node.name,
           companypreposition: companyPreposition(user?.companies?.edges[0].node.gender),
@@ -152,10 +153,18 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
       </Text>
       <Divider />
       <ScrollableItem maxHeight="185px" p="0 12px">
-        {teams.map((team) => (
+        {teamsToRender.map((team) => (
           <MetricTeamRow key={team.id} team={team} />
         ))}
       </ScrollableItem>
+      <Button
+        onClick={() => {
+          setIndex(index + 1)
+          console.log(index)
+        }}
+      >
+        load more
+      </Button>
     </Box>
   )
 }
