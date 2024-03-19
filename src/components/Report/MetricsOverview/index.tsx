@@ -157,18 +157,19 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
           <MetricTeamRow key={team.id} team={team} />
         ))}
         <Box style={{ display: 'flex' }}>
-          <Button
-            _hover={{
-              color: 'brand.500',
-            }}
-            style={{ marginLeft: 'auto' }}
-            onClick={() => {
-              setIndex(index + 5)
-              console.log(index)
-            }}
-          >
-            {intl.formatMessage(messages.loadMore)}
-          </Button>
+          {index < teams.length && (
+            <Button
+              _hover={{
+                color: 'brand.500',
+              }}
+              style={{ marginLeft: 'auto' }}
+              onClick={() => {
+                setIndex(index + 5)
+              }}
+            >
+              {intl.formatMessage(messages.loadMore)}
+            </Button>
+          )}
         </Box>
       </ScrollableItem>
     </Box>

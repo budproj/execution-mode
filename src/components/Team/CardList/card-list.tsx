@@ -157,19 +157,22 @@ const TeamCardList = memo(
         >
           {renderTeam}
         </FixedSizeGrid>
+
         <Box style={{ display: 'flex' }}>
-          <Button
-            style={{ marginLeft: 'auto' }}
-            _hover={{
-              color: 'brand.500',
-            }}
-            onClick={() => {
-              setIndex(index + 3)
-              console.log(index)
-            }}
-          >
-            {intl.formatMessage(messages.loadMore)}
-          </Button>
+          {index < orderedTeams.length && (
+            <Button
+              style={{ marginLeft: 'auto' }}
+              _hover={{
+                color: 'brand.500',
+              }}
+              onClick={() => {
+                setIndex(index + 3)
+                console.log(index)
+              }}
+            >
+              {intl.formatMessage(messages.loadMore)}
+            </Button>
+          )}
         </Box>
       </Box>
     ) : (
@@ -180,18 +183,20 @@ const TeamCardList = memo(
           ))}
         </Grid>
         <Box style={{ display: 'flex' }}>
-          <Button
-            style={{ marginLeft: 'auto' }}
-            _hover={{
-              color: 'brand.500',
-            }}
-            onClick={() => {
-              setIndex(index + 3)
-              console.log(index)
-            }}
-          >
-            {intl.formatMessage(messages.loadMore)}
-          </Button>
+          {index < orderedTeams.length && (
+            <Button
+              style={{ marginLeft: 'auto' }}
+              _hover={{
+                color: 'brand.500',
+              }}
+              onClick={() => {
+                setIndex(index + 3)
+                console.log(index)
+              }}
+            >
+              {intl.formatMessage(messages.loadMore)}
+            </Button>
+          )}
         </Box>
       </Box>
     )

@@ -76,18 +76,20 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
             teamsRanking={itemsToRender}
           />
           <Box style={{ display: 'flex' }}>
-            <Button
-              style={{ marginLeft: 'auto' }}
-              _hover={{
-                color: 'brand.500',
-              }}
-              onClick={() => {
-                setIndex(index + 5)
-                console.log(index)
-              }}
-            >
-              {intl.formatMessage(messages.loadMore)}
-            </Button>
+            {index < orderedTeams.length && (
+              <Button
+                style={{ marginLeft: 'auto' }}
+                _hover={{
+                  color: 'brand.500',
+                }}
+                onClick={() => {
+                  setIndex(index + 5)
+                  console.log(index)
+                }}
+              >
+                {intl.formatMessage(messages.loadMore)}
+              </Button>
+            )}
           </Box>
         </ScrollableItem>
       )}
