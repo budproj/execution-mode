@@ -31,7 +31,8 @@ const TeamCardList = memo(
     isFromHoverMenu = false,
     setIsHovered,
   }: TeamCardListProperties) => {
-    const [index, setIndex] = useState(2)
+    const [index, setIndex] = useState(3)
+    const intl = useIntl()
     const { data, loading, refetch } = useQuery<GetTeamsQuery>(
       isFromHoverMenu ? queries.GET_USER_TEAMS_AND_COMPANIES : queries.GET_TEAMS,
     )
@@ -154,14 +155,20 @@ const TeamCardList = memo(
         >
           {renderTeam}
         </FixedSizeGrid>
-        <Button
-          onClick={() => {
-            setIndex(index + 1)
-            console.log(index)
-          }}
-        >
-          load more
-        </Button>
+        <Box style={{ display: 'flex' }}>
+          <Button
+            style={{ marginLeft: 'auto' }}
+            _hover={{
+              color: 'brand.500',
+            }}
+            onClick={() => {
+              setIndex(index + 3)
+              console.log(index)
+            }}
+          >
+            {intl.formatMessage(messages.loadMore)}
+          </Button>
+        </Box>
       </Box>
     ) : (
       <Box>
@@ -170,14 +177,20 @@ const TeamCardList = memo(
             <TeamCard key={Math.random()} />
           ))}
         </Grid>
-        <Button
-          onClick={() => {
-            setIndex(index + 1)
-            console.log(index)
-          }}
-        >
-          load more
-        </Button>
+        <Box style={{ display: 'flex' }}>
+          <Button
+            style={{ marginLeft: 'auto' }}
+            _hover={{
+              color: 'brand.500',
+            }}
+            onClick={() => {
+              setIndex(index + 3)
+              console.log(index)
+            }}
+          >
+            {intl.formatMessage(messages.loadMore)}
+          </Button>
+        </Box>
       </Box>
     )
   },

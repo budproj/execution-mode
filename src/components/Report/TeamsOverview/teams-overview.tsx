@@ -28,7 +28,7 @@ export interface TeamsOverviewProperties extends StyleProps {
 const ScrollableItem = getScrollableItem()
 
 const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
-  const [index, setIndex] = useState(2)
+  const [index, setIndex] = useState(5)
   const intl = useIntl()
   const flags = useFlags(['view_gamification_teams_ranking'])
   const isGameficationDisabled = !flags.view_gamification_teams_ranking.enabled
@@ -82,7 +82,7 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
                 color: 'brand.500',
               }}
               onClick={() => {
-                setIndex(index + 1)
+                setIndex(index + 5)
                 console.log(index)
               }}
             >

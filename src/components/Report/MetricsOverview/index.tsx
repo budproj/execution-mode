@@ -26,7 +26,7 @@ interface MetricsOverviewProperties extends StyleProps {}
 const ScrollableItem = getScrollableItem()
 
 const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
-  const [index, setIndex] = useState(2)
+  const [index, setIndex] = useState(5)
   const { getEmoji } = useGetEmoji()
   const intl = useIntl()
 
@@ -163,7 +163,7 @@ const MetricsOverview = ({ ...rest }: MetricsOverviewProperties) => {
             }}
             style={{ marginLeft: 'auto' }}
             onClick={() => {
-              setIndex(index + 1)
+              setIndex(index + 5)
               console.log(index)
             }}
           >
