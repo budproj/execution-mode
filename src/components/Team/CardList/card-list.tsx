@@ -93,10 +93,7 @@ const TeamCardList = memo(
     useEffect(() => {
       if (data) {
         if (isFromHoverMenu && data.me) {
-          const uniqByTeamsAndCompanies = uniqBy(
-            [...data.me.teams.edges, ...data.me.companies.edges],
-            'node.id',
-          )
+          const uniqByTeamsAndCompanies = uniqBy([...data.me.teams.edges], 'node.id')
           // WARNING: Tive que realizar este uniqby pois atualmente existe a possibilidade de você estar em uma empresa e não estar no "time" da empresa, e vice-versa, ou seja, causava de aparecer duas vezes a empresa na listagem. Ao mesmo tempo, não pude mexer nisso no back-end pois iria ocasionar em alterações em diversas partes da plataforma.
 
           setTeamEdges(uniqByTeamsAndCompanies)

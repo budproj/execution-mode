@@ -87,9 +87,6 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
 
           {isFromHoverMenu ? (
             <>
-              <Box pt={0}>
-                <DynamicAvatarGroup users={users} isLoaded={isLoaded} />
-              </Box>
               <Stack direction="row" gridGap={4} alignItems="center">
                 <Skeleton isLoaded={isLoaded} borderRadius="full" flexGrow={1} display="flex">
                   <SliderWithFilledTrack trackThickness={3} value={progress} trackBg="black.200" />
