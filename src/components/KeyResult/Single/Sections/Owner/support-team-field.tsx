@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Text, Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React, { useCallback, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { DynamicAvatarGroup } from 'src/components/Base'
 import PlusIcon from 'src/components/Icon/Plus'
@@ -12,6 +12,7 @@ import { User } from 'src/components/User/types'
 import { Except } from 'src/helpers/except'
 import { Task } from 'src/services/task-management/task-management.service'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
+import { ownersAndSupportTeamTaskAtom } from 'src/state/recoil/task-management/board/owners-and-support-team-task'
 import { taskSupportTeamAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-support-team'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
@@ -46,7 +47,7 @@ export const SupportTeamField = ({
   const teamId = useRecoilValue(selectedTeamIdHighlight)
 
   const [taskSupportTeamMembers, setTaskSupportTeam] = useRecoilState(taskSupportTeamAtom)
-
+  const setOwnersAndSupportTeamTask = useSetRecoilState(ownersAndSupportTeamTaskAtom)
   const supportTeam = isFromTask ? [...taskSupportTeamMembers] : supportTeamMembers
 
   const [isOpen, setIsOpen] = useState(false)
@@ -131,13 +132,23 @@ export const SupportTeamField = ({
         updateTask(task._id, { _id: task._id, ...newTaskWithSupportTeam })
       }
 
+      const member = teamMembers?.find((member) => member.id === userID)
+
       if (teamMembers) {
         setTaskSupportTeam(teamMembers?.filter((member) => newSupportTeam.includes(member.id)))
+        setOwnersAndSupportTeamTask((owners) => [...owners, member as unknown as User])
       }
 
       handleClose()
     },
-    [setTaskSupportTeam, task, taskSupportTeamMembers, teamMembers, updateTask],
+    [
+      setOwnersAndSupportTeamTask,
+      setTaskSupportTeam,
+      task,
+      taskSupportTeamMembers,
+      teamMembers,
+      updateTask,
+    ],
   )
 
   const onRemoveSupportTeamInTask = useCallback(
@@ -221,7 +232,6 @@ export const SupportTeamField = ({
           addUser={addUser}
           removeUser={removeUser}
           ownerName={ownerName}
-          teamId={teamId}
         />
       </PopoverContent>
     </Popover>
