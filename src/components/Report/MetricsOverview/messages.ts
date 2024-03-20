@@ -10,6 +10,7 @@ type MetricsOverview =
   | 'productivityIconDescription'
   | 'pauseIconDescription'
   | 'byTeamMetricRowTitle'
+  | 'loadMore'
 
 export default defineMessages<MetricsOverview>({
   metricCardTitle: {
@@ -56,5 +57,10 @@ export default defineMessages<MetricsOverview>({
     defaultMessage: 'POR TIME',
     id: 'GqZyEx',
     description: 'The title of the team metrics rows',
+  },
+  loadMore: {
+    defaultMessage: 'Carregar Mais',
+    id: 'DaEVzP',
+    description: 'Button title to load more rows',
   },
 })

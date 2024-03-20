@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
-import { Box, Divider, StyleProps } from '@chakra-ui/react'
+import { Box, Button, Divider, StyleProps } from '@chakra-ui/react'
 import { useFlags } from 'flagsmith/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
@@ -28,6 +28,7 @@ export interface TeamsOverviewProperties extends StyleProps {
 const ScrollableItem = getScrollableItem()
 
 const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
+  const [index, setIndex] = useState(5)
   const intl = useIntl()
   const flags = useFlags(['view_gamification_teams_ranking'])
   const isGameficationDisabled = !flags.view_gamification_teams_ranking.enabled
@@ -43,6 +44,8 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   const orderedTeams = isGameficationDisabled
     ? rankedTeams.sort((a, b) => (a.name > b.name ? 1 : -1))
     : rankedTeams
+
+  const itemsToRender = orderedTeams.slice(0, index)
 
   useEffect(() => {
     if (company) setRankedTeamsEdges(company?.rankedDescendants?.edges)
@@ -64,14 +67,30 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
         subtitle={intl.formatMessage(messages.teamRankingSubTitle)}
       />
       <Divider />
-      {orderedTeams.length === 0 ? (
+      {itemsToRender.length === 0 ? (
         <TeamsOverviewBodyTableSkeleton />
       ) : (
         <ScrollableItem maxHeight="410px" p="0 12px">
           <TeamsOverviewBodyTableBody
             isGameficationDisabled={isGameficationDisabled}
-            teamsRanking={orderedTeams}
+            teamsRanking={itemsToRender}
           />
+          <Box style={{ display: 'flex' }}>
+            {index < orderedTeams.length && (
+              <Button
+                style={{ marginLeft: 'auto' }}
+                _hover={{
+                  color: 'brand.500',
+                }}
+                onClick={() => {
+                  setIndex(index + 5)
+                  console.log(index)
+                }}
+              >
+                {intl.formatMessage(messages.loadMore)}
+              </Button>
+            )}
+          </Box>
         </ScrollableItem>
       )}
     </Box>

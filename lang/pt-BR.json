@@ -987,6 +987,10 @@
     "defaultMessage": "Passo 3",
     "description": "The label of the third step while creating a new workspace"
   },
+  "DaEVzP": {
+    "defaultMessage": "Carregar Mais",
+    "description": "Button title to load more rows"
+  },
   "DarZer": {
     "defaultMessage": "Prazo não pode ser depois de 2030",
     "description": "The error message that appears in the insert or updated drawer."

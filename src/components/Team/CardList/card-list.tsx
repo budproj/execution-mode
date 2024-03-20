@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client'
-import { Box, Grid, GridItem } from '@chakra-ui/react'
+import { Box, Button, Grid, GridItem } from '@chakra-ui/react'
 import orderBy from 'lodash/orderBy'
 import uniqBy from 'lodash/uniqBy'
-import React, { memo, useEffect, useMemo } from 'react'
+import React, { memo, useEffect, useMemo, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { FixedSizeGrid, GridChildComponentProps } from 'react-window'
 import { useRecoilState } from 'recoil'
 
@@ -12,6 +13,7 @@ import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
 import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 
 import TeamCard from './Card'
+import messages from './messages'
 import queries from './queries.gql'
 import { GetTeamsQuery } from './types'
 
@@ -31,6 +33,8 @@ const TeamCardList = memo(
     isFromHoverMenu = false,
     setIsHovered,
   }: TeamCardListProperties) => {
+    const [index, setIndex] = useState(3)
+    const intl = useIntl()
     const { data, loading, refetch } = useQuery<GetTeamsQuery>(
       isFromHoverMenu ? queries.GET_USER_TEAMS_AND_COMPANIES : queries.GET_TEAMS,
     )
@@ -45,12 +49,14 @@ const TeamCardList = memo(
 
     const orderedTeams = orderBy(filtredTeams, ['isCompany', 'name'], ['desc', 'asc'])
 
+    const orderedTeamsToRender = orderedTeams.slice(0, index)
+
     const columnWidth = parentWidth / 3
     const rowHeight = 415
 
     const renderTeam = ({ columnIndex, rowIndex, style }: GridChildComponentProps) => {
       const index = rowIndex * 3 + columnIndex
-      const team = orderedTeams[index]
+      const team = orderedTeamsToRender[index]
 
       return (
         team && (
@@ -81,8 +87,8 @@ const TeamCardList = memo(
     }, [shouldUpdateTeams])
 
     useEffect(() => {
-      if (wereTeamsLoaded) loadTeamsOnRecoil(orderedTeams)
-    }, [wereTeamsLoaded, orderedTeams, loadTeamsOnRecoil])
+      if (wereTeamsLoaded) loadTeamsOnRecoil(orderedTeamsToRender)
+    }, [wereTeamsLoaded, orderedTeamsToRender, loadTeamsOnRecoil])
 
     useEffect(() => {
       if (data) {
@@ -111,7 +117,7 @@ const TeamCardList = memo(
           gridTemplateColumns="repeat(2, 1fr)"
           onClick={setIsHovered}
         >
-          {orderedTeams.map((team) => {
+          {orderedTeamsToRender.map((team) => {
             return (
               <GridItem
                 key={team.id}
@@ -139,23 +145,60 @@ const TeamCardList = memo(
     }
 
     return wereTeamsLoaded ? (
-      <FixedSizeGrid
-        width={parentWidth}
-        height={rowHeight * Math.ceil(orderedTeams.length / 3)}
-        columnCount={3}
-        rowCount={Math.ceil(orderedTeams.length / 3)}
-        columnWidth={columnWidth}
-        rowHeight={rowHeight}
-        style={{ overflow: 'visible' }}
-      >
-        {renderTeam}
-      </FixedSizeGrid>
+      <Box>
+        <FixedSizeGrid
+          width={parentWidth}
+          height={rowHeight * Math.ceil(orderedTeamsToRender.length / 3)}
+          columnCount={3}
+          rowCount={Math.ceil(orderedTeamsToRender.length / 3)}
+          columnWidth={columnWidth}
+          rowHeight={rowHeight}
+          style={{ overflow: 'visible' }}
+        >
+          {renderTeam}
+        </FixedSizeGrid>
+
+        <Box style={{ display: 'flex' }}>
+          {index < orderedTeams.length && (
+            <Button
+              style={{ marginLeft: 'auto' }}
+              _hover={{
+                color: 'brand.500',
+              }}
+              onClick={() => {
+                setIndex(index + 3)
+                console.log(index)
+              }}
+            >
+              {intl.formatMessage(messages.loadMore)}
+            </Button>
+          )}
+        </Box>
+      </Box>
     ) : (
-      <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
-        {emptyState.map(() => (
-          <TeamCard key={Math.random()} />
-        ))}
-      </Grid>
+      <Box>
+        <Grid gridGap={10} gridTemplateColumns="repeat(3, 1fr)">
+          {emptyState.map(() => (
+            <TeamCard key={Math.random()} />
+          ))}
+        </Grid>
+        <Box style={{ display: 'flex' }}>
+          {index < orderedTeams.length && (
+            <Button
+              style={{ marginLeft: 'auto' }}
+              _hover={{
+                color: 'brand.500',
+              }}
+              onClick={() => {
+                setIndex(index + 3)
+                console.log(index)
+              }}
+            >
+              {intl.formatMessage(messages.loadMore)}
+            </Button>
+          )}
+        </Box>
+      </Box>
     )
   },
 )
