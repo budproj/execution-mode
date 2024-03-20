@@ -47,14 +47,8 @@ query GET_USER_TEAMS_AND_COMPANIES {
         name
         description
         isCompany
-        ownerId
-        owner {
-          id
-          fullName
-        }
         status {
           progress
-          confidence
         }
       }
     }
