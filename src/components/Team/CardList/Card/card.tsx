@@ -86,19 +86,17 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
           </SkeletonText>
 
           {isFromHoverMenu ? (
-            <>
-              <Stack direction="row" gridGap={4} alignItems="center">
-                <Skeleton isLoaded={isLoaded} borderRadius="full" flexGrow={1} display="flex">
-                  <SliderWithFilledTrack trackThickness={3} value={progress} trackBg="black.200" />
-                </Skeleton>
+            <Stack direction="row" gridGap={4} alignItems="center">
+              <Skeleton isLoaded={isLoaded} borderRadius="full" flexGrow={1} display="flex">
+                <SliderWithFilledTrack trackThickness={3} value={progress} trackBg="black.200" />
+              </Skeleton>
 
-                <Skeleton isLoaded={isLoaded} borderRadius="full">
-                  <Text fontSize="md" color="black.600">
-                    {intl.formatNumber(progress / 100, { style: 'percent' })}
-                  </Text>
-                </Skeleton>
-              </Stack>
-            </>
+              <Skeleton isLoaded={isLoaded} borderRadius="full">
+                <Text fontSize="md" color="black.600">
+                  {intl.formatNumber(progress / 100, { style: 'percent' })}
+                </Text>
+              </Skeleton>
+            </Stack>
           ) : (
             <>
               <Stack direction="row" gridGap={4} alignItems="center">
