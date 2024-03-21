@@ -40,8 +40,8 @@ interface GetUserNameGenderAndSettingsRequest {
       edges: Array<{ node: { preferences: string } }>
     }
     companies: GraphQLConnection<Team>
+    teams: GraphQLConnection<Team>
   }
-  teams: GraphQLConnection<Team>
 }
 
 interface PreferencesProperties {
@@ -419,7 +419,11 @@ const DashboardPage = () => {
               canUpdate
               onlyPicture
               // UserProps={{ id: me, picture: user?.picture, role: user?.role }}
-              userProps={{ id: data?.me.id, picture: data?.me.picture, role: data?.me.role }}
+              userProps={{
+                id: data?.me.id,
+                picture: data?.me.picture,
+                role: data?.me.role,
+              }}
               handleUpdatePicture={refetch}
               isLoaded={!loading}
               variantAvatar="circle"
