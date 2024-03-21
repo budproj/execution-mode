@@ -19,8 +19,7 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
         }
       }
     }
-  }
-  teams(first: 200) {
+    teams(first: 200) {
       edges {
         node {
           name
@@ -35,16 +34,15 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
               }
             }
           }
-      delta {
-        progress
-      }
-      tacticalCycle {
-        dateStart
-        dateEnd
-      }
-    }
+          delta {
+            progress
           }
+          tacticalCycle {
+            dateStart
+            dateEnd
+          }
+        }
       }
     }
-  
-
+  }
+}

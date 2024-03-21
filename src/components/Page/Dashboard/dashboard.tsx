@@ -404,7 +404,7 @@ const DashboardPage = () => {
   }, [data?.me.settings.edges])
 
   useEffect(() => {
-    if (data) setEdges(data.teams.edges)
+    if (data) setEdges(data.me.teams.edges)
   }, [data, setEdges])
 
   return (
