@@ -9,4 +9,7 @@ export enum NOTIFICATIONS_TYPE {
   MENTION_ON_MY_ROUTINE = 'mentionOnRoutine',
   KR_FEEDBACK = 'mentionOnRoutine',
   KR_OWNER = 'mentionOnRoutine',
+  ASSIGNED_TASK_IN_PROJECT = 'taskAssignInProject',
+  COMMENT_ON_TASK = 'commentOnTask',
+  MENTION_ON_TASK = 'mentionOnTask',
 }

@@ -1,10 +1,12 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 
-import { Notification } from '../types'
+import { Notification, taskNotification } from '../types'
 
 import AssignedTask from './AssignedTask'
+import AssignedTaskInProject from './AssignedTaskInProject'
 import CommentOnRoutineNotification from './CommentOnRoutine'
+import CommentOnTaskInProject from './CommentOnTaskInProject'
 import CommentNotification from './Comments'
 import ConfidenceCheckin from './ConfidenceCheckIn'
 import KrFeedback from './KrFeedback'
@@ -12,7 +14,7 @@ import KrOwner from './KrOwner'
 import RoutineReminder from './RoutineReminder'
 import SupportTeam from './SupportTeam'
 
-const CardNotification = ({ ...rest }: Notification) => {
+const CardNotification = ({ ...rest }: Notification | taskNotification) => {
   switch (rest.type) {
     case 'checkin':
       return <ConfidenceCheckin {...rest} />
@@ -34,6 +36,12 @@ const CardNotification = ({ ...rest }: Notification) => {
       return <KrOwner {...rest} />
     case 'krFeedback':
       return <KrFeedback {...rest} />
+    case 'taskAssignInProject':
+      return <AssignedTaskInProject {...(rest as taskNotification)} />
+    case 'commentOnTask':
+      return <CommentOnTaskInProject {...(rest as taskNotification)} />
+    case 'mentionOnTask':
+      return <CommentOnTaskInProject {...(rest as taskNotification)} />
     default:
       return <Box />
   }

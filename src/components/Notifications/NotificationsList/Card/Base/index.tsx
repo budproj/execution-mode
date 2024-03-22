@@ -7,13 +7,14 @@ import { AddPersonIcon, CalendarColored } from 'src/components/Icon'
 import CircleIcon from 'src/components/Icon/Circle'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { NOTIFICATIONS_TYPE } from 'src/components/Notifications/constants'
+import { Task as TaskModel } from 'src/services/task-management/task-management.service'
 
 import { BadgeAvatarIcon } from './Avatar'
 
 export interface BaseCardsNotifications {
   children?: React.ReactNode
   isRead: boolean
-  handleClick?: (id?: KeyResult['id']) => void
+  handleClick?: (id?: KeyResult['id'] | TaskModel) => void
   timestamp: string
   describeBadgeAvatarIcon: MessageDescriptor
   badgeIcon?: NOTIFICATIONS_TYPE
