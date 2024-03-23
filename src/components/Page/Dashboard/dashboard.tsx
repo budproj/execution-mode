@@ -368,9 +368,11 @@ const DashboardPage = () => {
   const intl = useIntl()
 
   const flags = useFlags(['mission_control'])
-  const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
-    queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
-  )
+  // Const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
+  //   queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
+  // )
+  const { data, loading, called, refetch } = useQuery(queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS)
+
   // Const me = useRecoilValue(meAtom)
   // const user = useRecoilValue(selectUser(me))
 
