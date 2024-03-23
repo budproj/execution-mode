@@ -19,8 +19,8 @@ import { useGetCompanyCycles } from 'src/components/Report/hooks'
 import { Team } from 'src/components/Team/types'
 import { UserProfileHeader } from 'src/components/User/Profile/Header/wrapper'
 import { TeamsMenuProfile } from 'src/components/User/Profile/TeamsMenu'
-import { User } from 'src/components/User/types'
-import { GraphQLConnection } from 'src/components/types'
+// Import { User } from 'src/components/User/types'
+// import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
 
@@ -29,20 +29,20 @@ import { PageHeader } from '../../Base/PageHeader/wrapper'
 import messages from './messages'
 import queries from './queries.gql'
 
-interface GetUserNameGenderAndSettingsRequest {
-  me: {
-    id: string
-    firstName: string
-    picture: string
-    gender: string
-    role: User['role']
-    settings: {
-      edges: Array<{ node: { preferences: string } }>
-    }
-    companies: GraphQLConnection<Team>
-    teams: GraphQLConnection<Team>
-  }
-}
+// Interface GetUserNameGenderAndSettingsRequest {
+//   me: {
+//     id: string
+//     firstName: string
+//     picture: string
+//     gender: string
+//     role: User['role']
+//     settings: {
+//       edges: Array<{ node: { preferences: string } }>
+//     }
+//     companies: GraphQLConnection<Team>
+//     teams: GraphQLConnection<Team>
+//   }
+// }
 
 interface PreferencesProperties {
   main_team: string
