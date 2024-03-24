@@ -9,7 +9,8 @@ import { useGetProjectedProgress } from 'src/components/Team/hooks'
 import { Team } from 'src/components/Team/types'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
-  team?: Team
+  // Alterar esse any para Team + latest Check in, mesma coisa no back
+  team?: any
 }
 
 const TeamsOverviewBodyTableBodyColumnProgress = ({

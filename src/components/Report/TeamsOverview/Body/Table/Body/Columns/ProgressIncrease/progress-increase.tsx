@@ -6,7 +6,8 @@ import { PercentageProgressIncreaseTag } from 'src/components/Base'
 import { Team } from 'src/components/Team/types'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressIncreaseProperties {
-  team?: Team
+  // Alterar esse any para Team + latest Check in, mesma coisa no back
+  team?: any
 }
 
 const TeamsOverviewBodyTableBodyColumnProgressIncrease = ({
