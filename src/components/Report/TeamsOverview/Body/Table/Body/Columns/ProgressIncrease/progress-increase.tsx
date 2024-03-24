@@ -14,7 +14,7 @@ const TeamsOverviewBodyTableBodyColumnProgressIncrease = ({
   team,
 }: TeamsOverviewBodyTableBodyColumnProgressIncreaseProperties) => {
   const isLoaded = Boolean(team)
-  const progress = team?.delta.progress ?? 0
+  const progress = team?.deltas.progress ?? 0
 
   return (
     <GridItem textAlign="right">
