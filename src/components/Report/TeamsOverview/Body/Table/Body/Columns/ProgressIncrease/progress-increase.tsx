@@ -3,7 +3,7 @@ import React from 'react'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { PercentageProgressIncreaseTag } from 'src/components/Base'
-import { Team } from 'src/components/Team/types'
+// Import { Team } from 'src/components/Team/types'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressIncreaseProperties {
   // Alterar esse any para Team + latest Check in, mesma coisa no back
