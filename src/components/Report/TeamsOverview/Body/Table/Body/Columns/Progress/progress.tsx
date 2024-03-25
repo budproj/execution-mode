@@ -6,7 +6,7 @@ import { IntlLink } from 'src/components/Base'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import SliderWithDetails from 'src/components/Base/SliderWithDetails'
 import { useGetProjectedProgress } from 'src/components/Team/hooks'
-import { Team } from 'src/components/Team/types'
+// Import { Team } from 'src/components/Team/types'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
   // Alterar esse any para Team + latest Check in, mesma coisa no back
@@ -23,7 +23,7 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
   const lastCheckinDate = team?.status?.latestCheckIn?.createdAt
     ? new Date(team?.status?.latestCheckIn?.createdAt)
     : undefined
-
+  /* eslint-disable @typescript-eslint/restrict-template-expressions */
   return (
     <GridItem>
       <Flex justifyContent="space-between">
