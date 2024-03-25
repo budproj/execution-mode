@@ -134,9 +134,9 @@ export const SupportTeamField = ({
 
       const member = teamMembers?.find((member) => member.id === userID)
 
-      if (teamMembers) {
+      if (teamMembers && member) {
         setTaskSupportTeam(teamMembers?.filter((member) => newSupportTeam.includes(member.id)))
-        setOwnersAndSupportTeamTask((owners) => [...owners, member as unknown as User])
+        setOwnersAndSupportTeamTask((owners) => [...owners, member])
       }
 
       handleClose()

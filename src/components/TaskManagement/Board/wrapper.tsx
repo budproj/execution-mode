@@ -42,7 +42,6 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
     }),
     [boardData],
   )
-  // Const ownersAndSupportTeamMembers2 = useLoadOwnersAndSupportTeam(tasks)
   useEffect(() => {
     const ownersAndSupportTeam = loadOwnersAndSupportTeam(tasks, companyUsers)
     setOwnersAndSupportTeamTask(ownersAndSupportTeam)
@@ -88,8 +87,6 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
       </Box>
     )
   }
-
-  // UseEffect(() => {})
 
   return (
     <Stack w="100%" spacing={8}>
