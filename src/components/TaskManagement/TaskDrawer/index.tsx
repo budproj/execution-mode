@@ -17,13 +17,12 @@ import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-car
 import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Team } from 'src/components/Team/types'
-import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { isEditingTaskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/insert/is-editing-task-drawer'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer-id'
 import { taskSupportTeamAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-support-team'
-import { teamAtomFamily } from 'src/state/recoil/team'
+import { usersCompany } from 'src/state/recoil/team/users-company'
 
 import { ColumnColorScheme, headerColumnMessage } from '../Board/utils/helpers'
 import { PrirityItemOption } from '../PrioritySelectMenu/wrapper'
@@ -50,20 +49,13 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
 
   const translatedStatus = headerColumnMessage.get(taskDrawer?.status)
 
-  const team = useRecoilValue(teamAtomFamily(teamId))
-  const [teamMembers, setTeamMemberEdges] = useConnectionEdges(team?.users?.edges)
-
-  useEffect(() => {
-    if (team) {
-      setTeamMemberEdges(team.users?.edges)
-    }
-  }, [team, setTeamMemberEdges])
+  const companyUsers = useRecoilValue(usersCompany)
 
   useEffect(() => {
     setTaskSupportTeam(
-      teamMembers.filter((member) => taskDrawer?.supportTeamMembers.includes(member.id)),
+      companyUsers.filter((member) => taskDrawer?.supportTeamMembers.includes(member.id)),
     )
-  }, [setTaskSupportTeam, taskDrawer, teamMembers])
+  }, [companyUsers, setTaskSupportTeam, taskDrawer])
 
   const isOpen = Boolean(taskDrawerId)
 
@@ -151,7 +143,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                 identifier={teamID as unknown as string}
                 column={taskDrawer?.status}
                 task={taskDrawer}
-                teamMembers={teamMembers}
+                teamMembers={companyUsers}
               />
 
               <Divider />
