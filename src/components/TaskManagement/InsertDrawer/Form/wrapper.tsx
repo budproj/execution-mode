@@ -81,7 +81,7 @@ const InsertOrUpdateTaskForm = ({
   const NewTaskSchema = Yup.object().shape({
     title: Yup.string().required(intl.formatMessage(messages.titleRequiredText)),
     priority: Yup.string().required(),
-    description: Yup.string().required(intl.formatMessage(messages.descriptionRequiredText)),
+    description: Yup.string(),
     initialDate: Yup.date(),
     dueDate: Yup.date()
       .min(Yup.ref('initialDate'), intl.formatMessage(messages.dueDateBeforeInitialDateText))
@@ -101,7 +101,7 @@ const InsertOrUpdateTaskForm = ({
     priority: 4,
     initialDate: new Date(),
     dueDate: new Date(),
-    description: '',
+    description: ' ',
     ownerID: myID,
   }
 
@@ -212,12 +212,10 @@ const InsertOrUpdateTaskForm = ({
                 isLoading={isLoading}
               />
               <PriorityInput isLoading={isLoading} />
-
               <DescriptionInput
                 isLoading={isLoading}
                 hasValidationErrors={validationErrors.includes('description')}
               />
-
               {errors.description && (
                 <Text alignSelf="flex-start" color="red">
                   {errors.description}

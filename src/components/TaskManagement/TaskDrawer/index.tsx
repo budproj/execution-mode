@@ -25,12 +25,14 @@ import { taskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/task-
 import { taskSupportTeamAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-support-team'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
+import useColumnTasks from '../Board/hooks/use-column-tasks'
 import { ColumnColorScheme, headerColumnMessage } from '../Board/utils/helpers'
 import { PrirityItemOption } from '../PrioritySelectMenu/wrapper'
 import { BOARD_DOMAIN, useTeamTasksBoardData } from '../hooks/use-team-tasks-board-data'
 
 import { TaskDrawerSectionOwnerWrapper } from './OwnerSection'
 import { TaskDrawerTimeline } from './Timeline'
+import { TaskTitleSection } from './title-section'
 
 interface TaskDrawerProperties {
   readonly teamId: Team['id']
@@ -47,6 +49,13 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const resetTaskDrawerId = useResetRecoilState(taskDrawerIdAtom)
   const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
   const isEditingTaskDrawerId = useSetRecoilState(isEditingTaskDrawerIdAtom)
+
+  const { updateTask } = useColumnTasks(
+    taskDrawer.status,
+    boardData?._id as unknown as string,
+    BOARD_DOMAIN.TEAM,
+    teamID as unknown as string,
+  )
 
   const translatedStatus = headerColumnMessage.get(taskDrawer?.status)
 
@@ -118,9 +127,8 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                   Editar
                 </Button>
               </Flex>
-              <Text color="new-gray.900" fontWeight={500} fontSize="24px">
-                {taskDrawer?.title}
-              </Text>
+
+              <TaskTitleSection updateTask={updateTask} task={taskDrawer} />
 
               <PrirityItemOption mt="10px" priority={taskDrawer?.priority as TaskPriority} />
 
