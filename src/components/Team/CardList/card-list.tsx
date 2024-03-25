@@ -15,7 +15,7 @@ import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 import TeamCard from './Card'
 import messages from './messages'
 import queries from './queries.gql'
-import { GetTeamsQuery } from './types'
+// Import { GetTeamsQuery } from './types'
 
 export interface TeamCardListProperties {
   teamFilter: string
