@@ -31,14 +31,14 @@ const HoverableWrapper = styled(Box)`
 
 const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
   const intl = useIntl()
-  const team = useRecoilValue(teamAtomFamily(id))
+  const team = useRecoilValue(teamAtomFamily(id)) as any
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [shadowStrokeLight] = useToken('shadows', ['for-background.light'])
 
-  const isCompany = Boolean(team?.isCompany)
+  const isCompany = Boolean(team?.is_company)
   const isLoaded = Boolean(team)
   const isAllowedToEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
-  const progress = team?.status?.progress ?? 0
+  const progress = team?.statuses?.progress ?? 0
 
   useEffect(() => {
     if (team) setUserEdges(team.users?.edges)

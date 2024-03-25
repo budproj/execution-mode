@@ -37,7 +37,7 @@ query GET_TEAMS {
 
 query GET_USER_TEAMS_AND_COMPANIES {
   me {
-    teams {
+    get_teams {
       edges {
       node {
         policy {
@@ -46,25 +46,8 @@ query GET_USER_TEAMS_AND_COMPANIES {
         id
         name
         description
-        isCompany
-        ownerId
-        owner {
-          id
-          fullName
-        }
-        parent {
-          id
-          name
-        }
-        users {
-          edges {
-            node {
-              fullName
-              picture
-            }
-          }
-        }
-        status {
+        is_company
+        statuses {
           progress
           confidence
         }
