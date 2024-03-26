@@ -8,7 +8,7 @@ query GET_COMPANY_TEAMS {
             node {
               id
               name
-              status {
+              statuses {
                 progress
                 confidence
                 latestCheckIn {
@@ -18,10 +18,10 @@ query GET_COMPANY_TEAMS {
                   }
                 }
               }
-              delta {
+              deltas {
                 progress
               }
-              tacticalCycle {
+              tacticalCycles {
                 dateStart
                 dateEnd
               }
