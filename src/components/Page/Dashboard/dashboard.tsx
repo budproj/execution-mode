@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import { useFlags } from 'flagsmith/react'
+// Import { useFlags } from 'flagsmith/react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -367,7 +367,7 @@ const StyledMCWrapper = styled(MissionControlWrapper)`
 const DashboardPage = () => {
   const intl = useIntl()
 
-  const flags = useFlags(['mission_control'])
+  // Const flags = useFlags(['mission_control'])
   // Const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
   //   queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
   // )
@@ -379,7 +379,7 @@ const DashboardPage = () => {
   const [teams, setEdges] = useConnectionEdges<Team>()
   const [mainTeamId, setMainTeamId] = useState('')
 
-  const isMissionControlVisible = flags.mission_control.enabled
+  const isMissionControlVisible = false
 
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
 
