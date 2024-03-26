@@ -18,7 +18,7 @@ const TeamsOverviewBodyTableBodyColumnProgress = ({
 }: TeamsOverviewBodyTableBodyColumnProgressProperties) => {
   const isLoaded = Boolean(team)
   const progress = team?.statuses?.progress ?? 0
-  const { dateStart, dateEnd } = team?.tacticalCycle ?? {}
+  const { dateStart, dateEnd } = team?.tacticalCycles ?? {}
   const { percentualProjectedProgress } = useGetProjectedProgress({ dateStart, dateEnd })
   const lastCheckinDate = team?.status?.latestCheckIn?.createdAt
     ? new Date(team?.status?.latestCheckIn?.createdAt)

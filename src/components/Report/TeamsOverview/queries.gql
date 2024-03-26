@@ -21,6 +21,10 @@ query GET_COMPANY_TEAMS {
               deltas {
                 progress
               }
+              tacticalCycles {
+                dateStart
+                dateEnd
+              }
             }
           }
         }
