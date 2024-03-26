@@ -21,8 +21,14 @@ export const TaskTitleSection = ({ task, updateTask }: TaskTitleSectionPropertie
       display="flex"
       onSubmit={handleSubmit}
     >
-      <EditablePreview as={Text} color="new-gray.900" fontWeight={500} fontSize="24px" />
-      <Input py={2} px={4} as={EditableInput} />
+      <EditablePreview
+        as={Text}
+        color="new-gray.900"
+        _hover={{ color: 'brand.500' }}
+        fontWeight={500}
+        fontSize="24px"
+      />
+      <Input py={2} px={4} mt={2} mr="2" as={EditableInput} />
       <EditableControls />
     </Editable>
   )

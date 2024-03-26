@@ -14,7 +14,6 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
-import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Team } from 'src/components/Team/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
@@ -32,6 +31,7 @@ import { BOARD_DOMAIN, useTeamTasksBoardData } from '../hooks/use-team-tasks-boa
 
 import { TaskDrawerSectionOwnerWrapper } from './OwnerSection'
 import { TaskDrawerTimeline } from './Timeline'
+import { TaskDescriptionSection } from './description-section'
 import { TaskTitleSection } from './title-section'
 
 interface TaskDrawerProperties {
@@ -51,7 +51,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const isEditingTaskDrawerId = useSetRecoilState(isEditingTaskDrawerIdAtom)
 
   const { updateTask } = useColumnTasks(
-    taskDrawer.status,
+    taskDrawer?.status,
     boardData?._id as unknown as string,
     BOARD_DOMAIN.TEAM,
     teamID as unknown as string,
@@ -148,6 +148,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                     PRAZO
                   </Text>
                   <Text>{intl.formatDate(taskDrawer?.dueDate)}</Text>
+                  {/* <DueDateSection task={taskDrawer} updateTask={updateTask} /> */}
                 </Box>
               </Flex>
               <Divider />
@@ -182,7 +183,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
 
               <Divider /> */}
 
-              <Editor content={taskDrawer?.description} />
+              <TaskDescriptionSection task={taskDrawer} updateTask={updateTask} />
             </Flex>
           </Flex>
           <TaskDrawerTimeline task={taskDrawer} />

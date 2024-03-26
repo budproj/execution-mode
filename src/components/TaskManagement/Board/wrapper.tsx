@@ -25,8 +25,6 @@ type BoardWrapperProperties = {
 const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
   const { data: boardData, isError } = useTeamTasksBoardData(teamId)
 
-  console.log({ boardData })
-
   const [selectedUser, setSelectedUser] = useState<string>()
   const ownersAndSupportTeamMembers = useLoadUsers(teamId)
   const team = useRecoilValue(teamAtomFamily(teamId))
