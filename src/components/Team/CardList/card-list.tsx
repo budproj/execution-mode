@@ -15,7 +15,7 @@ import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 import TeamCard from './Card'
 import messages from './messages'
 import queries from './queries.gql'
-import { GetTeamsQuery } from './types'
+// Import { GetTeamsQuery } from './types'
 
 export interface TeamCardListProperties {
   teamFilter: string
@@ -35,7 +35,7 @@ const TeamCardList = memo(
   }: TeamCardListProperties) => {
     const [index, setIndex] = useState(3)
     const intl = useIntl()
-    const { data, loading, refetch } = useQuery<GetTeamsQuery>(
+    const { data, loading, refetch } = useQuery(
       isFromHoverMenu ? queries.GET_USER_TEAMS_AND_COMPANIES : queries.GET_TEAMS,
     )
     const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)
@@ -47,7 +47,7 @@ const TeamCardList = memo(
       )
     }, [teamFilter, teams])
 
-    const orderedTeams = orderBy(filtredTeams, ['isCompany', 'name'], ['desc', 'asc'])
+    const orderedTeams = orderBy(filtredTeams, ['is_company', 'name'], ['desc', 'asc'])
 
     const orderedTeamsToRender = orderedTeams.slice(0, index)
 
@@ -93,7 +93,7 @@ const TeamCardList = memo(
     useEffect(() => {
       if (data) {
         if (isFromHoverMenu && data.me) {
-          const uniqByTeamsAndCompanies = uniqBy([...data.me.teams.edges], 'node.id')
+          const uniqByTeamsAndCompanies = uniqBy([...data.me.get_teams.edges], 'node.id')
           // WARNING: Tive que realizar este uniqby pois atualmente existe a possibilidade de você estar em uma empresa e não estar no "time" da empresa, e vice-versa, ou seja, causava de aparecer duas vezes a empresa na listagem. Ao mesmo tempo, não pude mexer nisso no back-end pois iria ocasionar em alterações em diversas partes da plataforma.
 
           setTeamEdges(uniqByTeamsAndCompanies)
