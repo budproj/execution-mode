@@ -38,7 +38,7 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
   const isCompany = Boolean(team?.is_company)
   const isLoaded = Boolean(team)
   const isAllowedToEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
-  const progress = team?.statuses?.progress ?? 0
+  const progress = isFromHoverMenu ? team?.statuses?.progress : team?.status?.progress
 
   useEffect(() => {
     if (team) setUserEdges(team.users?.edges)
