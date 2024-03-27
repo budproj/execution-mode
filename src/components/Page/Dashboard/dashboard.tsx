@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import { useFlags } from 'flagsmith/react'
+// Import { useFlags } from 'flagsmith/react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -19,8 +19,8 @@ import { useGetCompanyCycles } from 'src/components/Report/hooks'
 import { Team } from 'src/components/Team/types'
 import { UserProfileHeader } from 'src/components/User/Profile/Header/wrapper'
 import { TeamsMenuProfile } from 'src/components/User/Profile/TeamsMenu'
-import { User } from 'src/components/User/types'
-import { GraphQLConnection } from 'src/components/types'
+// Import { User } from 'src/components/User/types'
+// import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
 
@@ -29,20 +29,20 @@ import { PageHeader } from '../../Base/PageHeader/wrapper'
 import messages from './messages'
 import queries from './queries.gql'
 
-interface GetUserNameGenderAndSettingsRequest {
-  me: {
-    id: string
-    firstName: string
-    picture: string
-    gender: string
-    role: User['role']
-    settings: {
-      edges: Array<{ node: { preferences: string } }>
-    }
-    companies: GraphQLConnection<Team>
-  }
-  teams: GraphQLConnection<Team>
-}
+// Interface GetUserNameGenderAndSettingsRequest {
+//   me: {
+//     id: string
+//     firstName: string
+//     picture: string
+//     gender: string
+//     role: User['role']
+//     settings: {
+//       edges: Array<{ node: { preferences: string } }>
+//     }
+//     companies: GraphQLConnection<Team>
+//     teams: GraphQLConnection<Team>
+//   }
+// }
 
 interface PreferencesProperties {
   main_team: string
@@ -367,17 +367,19 @@ const StyledMCWrapper = styled(MissionControlWrapper)`
 const DashboardPage = () => {
   const intl = useIntl()
 
-  const flags = useFlags(['mission_control'])
-  const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
-    queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
-  )
+  // Const flags = useFlags(['mission_control'])
+  // Const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
+  //   queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
+  // )
+  const { data, loading, called, refetch } = useQuery(queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS)
+
   // Const me = useRecoilValue(meAtom)
   // const user = useRecoilValue(selectUser(me))
 
   const [teams, setEdges] = useConnectionEdges<Team>()
   const [mainTeamId, setMainTeamId] = useState('')
 
-  const isMissionControlVisible = flags.mission_control.enabled
+  const isMissionControlVisible = false
 
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
 
@@ -404,7 +406,7 @@ const DashboardPage = () => {
   }, [data?.me.settings.edges])
 
   useEffect(() => {
-    if (data) setEdges(data.teams.edges)
+    if (data) setEdges(data.me.teams_status.edges)
   }, [data, setEdges])
 
   return (
@@ -419,7 +421,11 @@ const DashboardPage = () => {
               canUpdate
               onlyPicture
               // UserProps={{ id: me, picture: user?.picture, role: user?.role }}
-              userProps={{ id: data?.me.id, picture: data?.me.picture, role: data?.me.role }}
+              userProps={{
+                id: data?.me.id,
+                picture: data?.me.picture,
+                role: data?.me.role,
+              }}
               handleUpdatePicture={refetch}
               isLoaded={!loading}
               variantAvatar="circle"
