@@ -47,7 +47,7 @@ const TeamCardList = memo(
       )
     }, [teamFilter, teams])
 
-    const orderedTeams = orderBy(filtredTeams, ['is_company', 'name'], ['desc', 'asc'])
+    const orderedTeams = orderBy(filtredTeams, ['isCompany', 'name'], ['desc', 'asc'])
 
     const orderedTeamsToRender = orderedTeams.slice(0, index)
 
