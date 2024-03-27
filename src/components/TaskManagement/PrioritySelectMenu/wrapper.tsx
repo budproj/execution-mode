@@ -85,8 +85,8 @@ export const PrirityItemOption = ({ priority, ...rest }: PriorityItemOptionPrope
   const [veryHigh, high, medium, low] = useToken('colors', [
     'red.600',
     'red.500',
-    'blue.500',
     'yellow.600',
+    'blue.500',
   ])
 
   const taskPriorityColors = {

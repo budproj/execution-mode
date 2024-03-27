@@ -23,6 +23,8 @@ import { IndicatorRoutineClickData } from './events/indicator-routine-click-data
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
 import { LearnMoreBannerNoticesClickData } from './events/learn-more-banner-notices-click-data'
+import { MainMenuTabsClickData } from './events/main-menu-tabs-click.data'
+import { MegaMenuClickData } from './events/mega-menu-click.data'
 import { MentionInRoutineAnswerClickData } from './events/mention-in-routine-click-data'
 import { MetricTeamRowClickData } from './events/metric-team-row-click-data'
 import { MissionControlTaskClickData } from './events/mission-control-task-click.data'
@@ -36,6 +38,7 @@ import { OpenedKeyResultDrawerEventData } from './events/opened-key-result-drawe
 import { OpenedKeyResultReportConfidanceData } from './events/opened-key-result-report-confidance-data'
 import { PageViewEventData } from './events/page-view'
 import { PublishOkrClickData } from './events/publish-okr-click-data'
+import { RankingClickData } from './events/ranking-click.data'
 import { RetrospectiveTabClickData } from './events/retrospective-tab-click-data'
 import { RoutineAnswerRowClickData } from './events/routine-answer-row-click-data'
 import { SendAnswerFormClickData } from './events/send-answer-form-click-data'
@@ -46,6 +49,7 @@ import { TaskManagerCreateCommentData } from './events/task-management-create-co
 import { TaskManagerCreateTaskClickData } from './events/task-management-create-task-data'
 import { TaskManagerDeleteTaskClickData } from './events/task-management-delete-task-data'
 import { TaskManagerUpdateTaskColumnData } from './events/task-management-update-task-column-data'
+import { TaskManagerTabClickData } from './events/task-manager-tab-click.data'
 import { TeamHighlightClickData } from './events/team-highlight-click-data'
 import { ToggleRoutineReminderClickData } from './events/toggle-routine-reminder-click-data'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
@@ -115,4 +119,8 @@ export type Event = {
   [EventType.TASK_MANAGER_DELETE_TASK_CLICK]: TaskManagerDeleteTaskClickData
   [EventType.TASK_MANAGER_UPDATE_TASK_COLUMN]: TaskManagerUpdateTaskColumnData
   [EventType.TASK_MANAGER_CREATE_COMMENT_CLICK]: TaskManagerCreateCommentData
+  [EventType.TASK_MANAGER_TAB_CLICK]: TaskManagerTabClickData
+  [EventType.MAIN_MENU_TABS_CLICK]: RankingClickData
+  [EventType.RANKING_CLICK]: MegaMenuClickData
+  [EventType.MEGA_MENU_CLICK]: MainMenuTabsClickData
 }

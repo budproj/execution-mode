@@ -31,6 +31,7 @@ const StyledTab = styled(Tab)`
 const TabsMenu = ({ teamId, isTasksEnabled }: TabsMenuProperties) => {
   const intl = useIntl()
   const { dispatch } = useEvent(EventType.RETROSPECTIVE_TAB_CLICK)
+  const { dispatch: dispatchTaskManagerTabClick } = useEvent(EventType.TASK_MANAGER_TAB_CLICK)
 
   const router = useRouter()
 
@@ -71,6 +72,7 @@ const TabsMenu = ({ teamId, isTasksEnabled }: TabsMenuProperties) => {
               paddingBottom={3}
               onClick={() => {
                 handleClick('tasks')
+                dispatchTaskManagerTabClick({})
               }}
             >
               <div

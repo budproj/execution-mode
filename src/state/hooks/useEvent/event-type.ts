@@ -59,4 +59,8 @@ export enum EventType {
   TASK_MANAGER_DELETE_TASK_CLICK = 'TaskManagerDeleteTaskClick',
   TASK_MANAGER_UPDATE_TASK_COLUMN = 'TaskManagerUpdateTaskColumn',
   TASK_MANAGER_CREATE_COMMENT_CLICK = 'TaskManagerCreateComment',
+  TASK_MANAGER_TAB_CLICK = 'TaskManagerTabClick',
+  MAIN_MENU_TABS_CLICK = 'MainMenuTabsClick',
+  RANKING_CLICK = 'RankingClick',
+  MEGA_MENU_CLICK = 'MegaMenuClick',
 }
