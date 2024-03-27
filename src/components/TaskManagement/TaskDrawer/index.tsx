@@ -32,6 +32,7 @@ import { BOARD_DOMAIN, useTeamTasksBoardData } from '../hooks/use-team-tasks-boa
 import { TaskDrawerSectionOwnerWrapper } from './OwnerSection'
 import { TaskDrawerTimeline } from './Timeline'
 import { TaskDescriptionSection } from './description-section'
+import { DueDateSection } from './due-date-section'
 import { TaskTitleSection } from './title-section'
 
 interface TaskDrawerProperties {
@@ -147,8 +148,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                   <Text color="gray.500" fontWeight={700} lineHeight={1}>
                     PRAZO
                   </Text>
-                  <Text>{intl.formatDate(taskDrawer?.dueDate)}</Text>
-                  {/* <DueDateSection task={taskDrawer} updateTask={updateTask} /> */}
+                  <DueDateSection task={taskDrawer} updateTask={updateTask} />
                 </Box>
               </Flex>
               <Divider />
