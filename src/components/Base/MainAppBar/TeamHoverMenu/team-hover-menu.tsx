@@ -8,6 +8,8 @@ import TeamCardList from 'src/components/Team/CardList'
 import { Team } from 'src/components/Team/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import IntlLink from '../../IntlLink'
@@ -34,6 +36,7 @@ const TeamHoverMenu = ({
   setIsHovered,
 }: TeamMenuProperties) => {
   const intl = useIntl()
+  const { dispatch } = useEvent(EventType.MEGA_MENU_CLICK)
 
   const { data } = useQuery<GetOtherTeamsQuery>(queries.GET_OTHER_TEAMS)
   const [teams, setEdges] = useConnectionEdges<Team>()
@@ -58,6 +61,7 @@ const TeamHoverMenu = ({
       width="100%"
       transition="0.4s all ease-out"
       pointerEvents={isHovered ? 'auto' : 'none'}
+      onClick={() => dispatch({})}
     >
       <Flex
         borderBottomLeftRadius="10px"

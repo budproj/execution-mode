@@ -1,5 +1,5 @@
 /* eslint-disable react/prefer-read-only-props */
-import { Box } from '@chakra-ui/react'
+import { Box, Button, Flex } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
 import { Color } from '@tiptap/extension-color'
@@ -20,7 +20,7 @@ import Underline from '@tiptap/extension-underline'
 import { EditorContent, EditorEvents, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { common, createLowlight } from 'lowlight'
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 
 import MenuBar from './menu-bar'
 
@@ -365,79 +365,121 @@ interface EditorProperties extends React.HTMLAttributes<HTMLInputElement> {
   content: string
   onUpdate?: (parameters: EditorEvents['update']) => void
   editable?: boolean
+  isFromDrawer?: boolean
+  onSave?: () => void
 }
 
-const Editor = memo(({ content, onUpdate, editable = false }: EditorProperties) => {
-  const lowlight = createLowlight(common)
+const Editor = memo(
+  ({ content, onUpdate, editable = false, isFromDrawer = false, onSave }: EditorProperties) => {
+    const lowlight = createLowlight(common)
 
-  const editor = useEditor(
-    {
-      extensions: [
-        Color.configure({ types: [TextStyle.name, ListItem.name] }),
-        TextStyle.configure({ types: [ListItem.name] } as any),
-        StarterKit.configure({
-          bulletList: {
-            keepMarks: true,
-            keepAttributes: false,
+    const editor = useEditor(
+      {
+        extensions: [
+          Color.configure({ types: [TextStyle.name, ListItem.name] }),
+          TextStyle.configure({ types: [ListItem.name] } as any),
+          StarterKit.configure({
+            bulletList: {
+              keepMarks: true,
+              keepAttributes: false,
+            },
+            orderedList: {
+              keepMarks: true,
+              keepAttributes: false,
+            },
+          }),
+          TaskList,
+          TaskItem.configure({
+            nested: true,
+            // OnReadOnlyChecked: (node: Node, checked: boolean): boolean => {
+            //   return true
+            // },
+          }),
+          TextAlign.configure({
+            types: ['heading', 'paragraph'],
+          }),
+          Underline.configure({
+            HTMLAttributes: {
+              class: 'my-custom-class',
+            },
+          }),
+          CodeBlockLowlight.configure({
+            lowlight,
+          }),
+          Highlight,
+          Paragraph,
+          Text,
+          Gapcursor,
+          Table.configure({
+            resizable: true,
+          }),
+          TableRow,
+          TableHeader,
+          TableCell,
+        ],
+        editorProps: {
+          attributes: {
+            class: 'm-2 focus:outline-none',
           },
-          orderedList: {
-            keepMarks: true,
-            keepAttributes: false,
-          },
-        }),
-        TaskList,
-        TaskItem.configure({
-          nested: true,
-          // OnReadOnlyChecked: (node: Node, checked: boolean): boolean => {
-          //   return true
-          // },
-        }),
-        TextAlign.configure({
-          types: ['heading', 'paragraph'],
-        }),
-        Underline.configure({
-          HTMLAttributes: {
-            class: 'my-custom-class',
-          },
-        }),
-        CodeBlockLowlight.configure({
-          lowlight,
-        }),
-        Highlight,
-        Paragraph,
-        Text,
-        Gapcursor,
-        Table.configure({
-          resizable: true,
-        }),
-        TableRow,
-        TableHeader,
-        TableCell,
-      ],
-      editorProps: {
-        attributes: {
-          class: 'm-2 focus:outline-none',
         },
+        content,
+        editable: editable || isFromDrawer,
+        onUpdate,
       },
-      content,
-      editable,
-      onUpdate,
-    },
-    [content, editable, onUpdate],
-  )
+      [content, editable, onUpdate],
+    )
 
-  return (
-    <Box>
-      <Box marginBottom={editable ? 2 : 0} alignItems="center">
-        <MenuBar editor={editor} isEditable={editable} />
+    const [isOnFocus, setOnFocus] = useState(false)
+
+    const handleFocus = () => {
+      setOnFocus(true)
+    }
+
+    const handleSaveClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.preventDefault()
+      if (onSave) {
+        onSave()
+      }
+
+      setOnFocus(false)
+    }
+
+    return (
+      <Box>
+        <Box marginBottom={editable || !isFromDrawer || isOnFocus ? 2 : 0} alignItems="center">
+          <MenuBar editor={editor} isEditable={editable || (isFromDrawer && isOnFocus)} />
+        </Box>
+
+        <CustomEditor
+          editor={editor}
+          style={{
+            border: editable || !isFromDrawer || isOnFocus ? '2px #D9E2F6 solid' : 'none',
+            borderRadius: 4,
+            marginTop: 10,
+          }}
+          onFocus={handleFocus}
+        />
+        {isFromDrawer && isOnFocus && (
+          <Flex marginY={2} width="100%" justifyContent="space-around" gap="10px">
+            <Button width="100%" bg="black.100" onClick={() => setOnFocus(false)}>
+              Cancelar
+            </Button>
+            <Button
+              width="100%"
+              bg="brand.500"
+              color="white"
+              _hover={{
+                color: 'gray.100',
+              }}
+              onClick={handleSaveClick}
+            >
+              Salvar
+            </Button>
+          </Flex>
+        )}
       </Box>
-
-      <CustomEditor
-        editor={editor}
-        style={{ border: editable ? '2px #D9E2F6 solid' : 'none', borderRadius: 4 }}
-      />
-    </Box>
-  )
-})
+    )
+  },
+)
 
 export default Editor

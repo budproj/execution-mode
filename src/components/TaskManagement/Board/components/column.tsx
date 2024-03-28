@@ -107,10 +107,6 @@ const TaskColumnComponent = ({ column, boardID, tasks, teamID, order }: ColumnPr
     setColumnTasks(tasksInOrder)
   }, [setColumnTasks, tasksInOrder])
 
-  if (column === 'doing') {
-    console.log({ columnTasks })
-  }
-
   return (
     <Box>
       <HStack alignItems="center" mb={4} justifyContent="space-between">
