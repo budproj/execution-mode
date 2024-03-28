@@ -78,7 +78,7 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
 
   const { refetch } = useQuery(queries.GET_KEYRESULTS_FOR_NOTIFICATIONS, {
     onCompleted: (data) => {
-      const companyKeyResults = data.me.keyResultsStatus.edges.filter(
+      const companyKeyResults = data.me.keyResults.edges.filter(
         (keyResult: { node: KeyResult }) => {
           return keyResult.node.teamId !== null
         },
@@ -101,11 +101,11 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
 
   const keyResultsWithNoCheckInThisWeek = useMemo(() => {
     return keyResults?.filter((keyResult) => {
-      if (!keyResult?.statuses?.latestCheckIn) {
+      if (!keyResult?.status?.latestCheckIn) {
         return true
       }
 
-      const date = new Date(keyResult?.statuses?.latestCheckIn?.createdAt)
+      const date = new Date(keyResult?.status?.latestCheckIn?.createdAt)
       const startOfTheWeek = startOfWeek(new Date(), { weekStartsOn: 1 })
 
       return isBefore(date, startOfTheWeek)
@@ -113,7 +113,7 @@ const NotificationsModal = ({ userId, isOpen }: NotificationsModalProperties) =>
   }, [keyResults])
 
   const checkinCount = keyResultsWithNoCheckInThisWeek.filter(
-    (keyResult) => keyResult?.statuses?.isOutdated ?? false,
+    (keyResult) => keyResult.status.isOutdated,
   ).length
   const notificationCount = [...notifications].filter((notification) => !notification.isRead).length
   const routinesCount = routines.length
