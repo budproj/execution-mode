@@ -31,14 +31,14 @@ const HoverableWrapper = styled(Box)`
 
 const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
   const intl = useIntl()
-  const team = useRecoilValue(teamAtomFamily(id)) as any
+  const team = useRecoilValue(teamAtomFamily(id))
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [shadowStrokeLight] = useToken('shadows', ['for-background.light'])
 
-  const isCompany = Boolean(team?.is_company)
+  const isCompany = Boolean(team?.isCompany)
   const isLoaded = Boolean(team)
   const isAllowedToEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
-  const progress = team?.statuses?.progress ?? 0
+  const progress = team?.status?.progress ?? 0
 
   useEffect(() => {
     if (team) setUserEdges(team.users?.edges)
@@ -86,17 +86,22 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
           </SkeletonText>
 
           {isFromHoverMenu ? (
-            <Stack direction="row" gridGap={4} alignItems="center">
-              <Skeleton isLoaded={isLoaded} borderRadius="full" flexGrow={1} display="flex">
-                <SliderWithFilledTrack trackThickness={3} value={progress} trackBg="black.200" />
-              </Skeleton>
+            <>
+              <Box pt={0}>
+                <DynamicAvatarGroup users={users} isLoaded={isLoaded} />
+              </Box>
+              <Stack direction="row" gridGap={4} alignItems="center">
+                <Skeleton isLoaded={isLoaded} borderRadius="full" flexGrow={1} display="flex">
+                  <SliderWithFilledTrack trackThickness={3} value={progress} trackBg="black.200" />
+                </Skeleton>
 
-              <Skeleton isLoaded={isLoaded} borderRadius="full">
-                <Text fontSize="md" color="black.600">
-                  {intl.formatNumber(progress / 100, { style: 'percent' })}
-                </Text>
-              </Skeleton>
-            </Stack>
+                <Skeleton isLoaded={isLoaded} borderRadius="full">
+                  <Text fontSize="md" color="black.600">
+                    {intl.formatNumber(progress / 100, { style: 'percent' })}
+                  </Text>
+                </Skeleton>
+              </Stack>
+            </>
           ) : (
             <>
               <Stack direction="row" gridGap={4} alignItems="center">

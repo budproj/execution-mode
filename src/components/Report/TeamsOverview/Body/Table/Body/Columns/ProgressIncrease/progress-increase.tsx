@@ -3,18 +3,17 @@ import React from 'react'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
 import { PercentageProgressIncreaseTag } from 'src/components/Base'
-// Import { Team } from 'src/components/Team/types'
+import { Team } from 'src/components/Team/types'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressIncreaseProperties {
-  // Alterar esse any para Team + latest Check in, mesma coisa no back
-  team?: any
+  team?: Team
 }
 
 const TeamsOverviewBodyTableBodyColumnProgressIncrease = ({
   team,
 }: TeamsOverviewBodyTableBodyColumnProgressIncreaseProperties) => {
   const isLoaded = Boolean(team)
-  const progress = team?.deltas.progress ?? 0
+  const progress = team?.delta.progress ?? 0
 
   return (
     <GridItem textAlign="right">

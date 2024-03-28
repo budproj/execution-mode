@@ -81,7 +81,6 @@ export interface KeyResult extends GraphQLNode {
   type: KEY_RESULT_TYPE
   updatedAt: string
   status: Status
-  statuses?: Status
   delta: Delta
   owner: User
   mode: KEY_RESULT_MODE
