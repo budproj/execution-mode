@@ -18,7 +18,7 @@ import messages from './messages'
 
 interface NotificationKeyResultProperties {
   isKeyResultOutdated?: boolean
-  keyResult: KeyResult
+  keyResult: any
   handleClick: (id: KeyResult['id']) => void
   userId: User['id']
   updateIconIsFilled?: boolean
@@ -35,11 +35,11 @@ const NotificationKeyResult = ({
   const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
   const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
 
-  const lastUpdateDate = keyResult?.status?.latestCheckIn?.createdAt
-    ? new Date(keyResult?.status?.latestCheckIn?.createdAt)
+  const lastUpdateDate = keyResult?.statuses?.latestCheckIn?.createdAt
+    ? new Date(keyResult?.statuses?.latestCheckIn?.createdAt)
     : undefined
 
-  const updateTextColor = keyResult?.status?.isOutdated ? 'red.500' : 'gray.300'
+  const updateTextColor = keyResult?.statuses?.isOutdated ? 'red.500' : 'gray.300'
 
   const { dispatch } = useEvent(EventType.NOTIFICATION_CHECK_IN_CLICK)
 
@@ -63,7 +63,9 @@ const NotificationKeyResult = ({
           <Flex alignItems="center">
             <UpdateIcon
               isFilled={updateIconIsFilled}
-              isOutdated={keyResult.status.latestCheckIn ? keyResult.status.isOutdated : true}
+              isOutdated={
+                keyResult?.statuses?.latestCheckIn ? keyResult?.statuses?.isOutdated : true
+              }
               updateTextColor={updateTextColor}
             />
             <LastUpdateText
@@ -71,7 +73,7 @@ const NotificationKeyResult = ({
               date={lastUpdateDate}
               color={updateTextColor}
               author={
-                isKeyResultOutdated ? undefined : keyResult.status.latestCheckIn?.user.fullName
+                isKeyResultOutdated ? undefined : keyResult?.statuses?.latestCheckIn?.user.fullName
               }
               lineHeight="normal"
             />

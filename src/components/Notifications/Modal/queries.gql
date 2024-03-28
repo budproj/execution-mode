@@ -1,12 +1,12 @@
 query GET_KEYRESULTS_FOR_NOTIFICATIONS {
  me {
-  keyResults {
+  keyResultsStatus {
     edges {
       node {
         title
         id
         teamId
-        status {
+        statuses {
           isOutdated
           latestCheckIn {
             createdAt
