@@ -60,7 +60,9 @@ export enum EventType {
   TASK_MANAGER_UPDATE_TASK_COLUMN = 'TaskManagerUpdateTaskColumn',
   TASK_MANAGER_CREATE_COMMENT_CLICK = 'TaskManagerCreateComment',
   TASK_MANAGER_TAB_CLICK = 'TaskManagerTabClick',
-  MAIN_MENU_TABS_CLICK = 'MainMenuTabsClick',
+  MAIN_MENU_TABS_PANEL_CLICK = 'MainMenuTabsPanelClick',
+  MAIN_MENU_TABS_MY_THINGS_CLICK = 'MainMenuTabsMyThingsClick',
+  MAIN_MENU_TABS_TEAMS_CLICK = 'MainMenuTabsTeamsClick',
   RANKING_CLICK = 'RankingClick',
   MEGA_MENU_CLICK = 'MegaMenuClick',
 }

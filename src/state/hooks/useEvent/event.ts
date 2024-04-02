@@ -23,7 +23,9 @@ import { IndicatorRoutineClickData } from './events/indicator-routine-click-data
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
 import { LearnMoreBannerNoticesClickData } from './events/learn-more-banner-notices-click-data'
-import { MainMenuTabsClickData } from './events/main-menu-tabs-click.data'
+import { MainMenuTabsMyThingsClickData } from './events/main-menu-tabs-my-things-click.data'
+import { MainMenuTabsPanelClickData } from './events/main-menu-tabs-panel-click.data'
+import { MainMenuTabsTeamsClickData } from './events/main-menu-tabs-teams-click.data'
 import { MegaMenuClickData } from './events/mega-menu-click.data'
 import { MentionInRoutineAnswerClickData } from './events/mention-in-routine-click-data'
 import { MetricTeamRowClickData } from './events/metric-team-row-click-data'
@@ -120,7 +122,9 @@ export type Event = {
   [EventType.TASK_MANAGER_UPDATE_TASK_COLUMN]: TaskManagerUpdateTaskColumnData
   [EventType.TASK_MANAGER_CREATE_COMMENT_CLICK]: TaskManagerCreateCommentData
   [EventType.TASK_MANAGER_TAB_CLICK]: TaskManagerTabClickData
-  [EventType.MAIN_MENU_TABS_CLICK]: RankingClickData
-  [EventType.RANKING_CLICK]: MegaMenuClickData
-  [EventType.MEGA_MENU_CLICK]: MainMenuTabsClickData
+  [EventType.RANKING_CLICK]: RankingClickData
+  [EventType.MEGA_MENU_CLICK]: MegaMenuClickData
+  [EventType.MAIN_MENU_TABS_PANEL_CLICK]: MainMenuTabsPanelClickData
+  [EventType.MAIN_MENU_TABS_MY_THINGS_CLICK]: MainMenuTabsMyThingsClickData
+  [EventType.MAIN_MENU_TABS_TEAMS_CLICK]: MainMenuTabsTeamsClickData
 }
