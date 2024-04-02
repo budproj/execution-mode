@@ -10,10 +10,8 @@ import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import IntlLink from '../../IntlLink'
-import { storageKey } from '../../NoticesBanner'
 
 import messages from './messages'
 import queries from './queries.gql'
@@ -41,9 +39,9 @@ const TeamHoverMenu = ({
   const { data } = useQuery<GetOtherTeamsQuery>(queries.GET_OTHER_TEAMS)
   const [teams, setEdges] = useConnectionEdges<Team>()
 
-  const { get } = useLocalStorage()
+  // Const { get } = useLocalStorage()
 
-  const valueStoraged = get(storageKey) || get(storageKey) === false
+  // Const valueStoraged = get(storageKey) || get(storageKey) === false
 
   useEffect(() => {
     if (data) {
@@ -57,7 +55,8 @@ const TeamHoverMenu = ({
       backgroundColor="rgba(0,0,0,0.7)"
       height="100%"
       position="absolute"
-      top={valueStoraged ? '78px' : '132px'}
+      // Add the 132px condition if banner is back
+      top="78px"
       width="100%"
       transition="0.4s all ease-out"
       pointerEvents={isHovered ? 'auto' : 'none'}
