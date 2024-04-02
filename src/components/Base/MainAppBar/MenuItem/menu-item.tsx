@@ -18,17 +18,30 @@ export interface MenuItemProperties {
 
 const MenuItem = ({ label, href, isNew, onClick }: MenuItemProperties) => {
   const intl = useIntl()
-  const { dispatch } = useEvent(EventType.MAIN_MENU_TABS_CLICK)
+  const { dispatch: dispatchPanel } = useEvent(EventType.MAIN_MENU_TABS_PANEL_CLICK)
+  const { dispatch: dispatchMythings } = useEvent(EventType.MAIN_MENU_TABS_MY_THINGS_CLICK)
+  const { dispatch: dispatchTeams } = useEvent(EventType.MAIN_MENU_TABS_TEAMS_CLICK)
+
+  const dispatchMap = new Map([
+    [intl.formatMessage(messages.firstMenuItem), dispatchPanel],
+    [intl.formatMessage(messages.secondMenuItem), dispatchMythings],
+    [intl.formatMessage(messages.thirdMenuItem), dispatchTeams],
+  ])
 
   const handleClick = () => {
-    dispatch({})
+    const dispatch = dispatchMap.get(label)
+
+    if (dispatch) {
+      dispatch({})
+    }
+
     if (onClick) {
       onClick()
     }
   }
 
   return (
-    <IntlLink href={href} onClick={() => console.log('ccccccccccc')}>
+    <IntlLink href={href}>
       <ButtonActivableByURL
         id={href === '/explore' ? 'explore-navbar' : undefined}
         href={href}
@@ -42,13 +55,7 @@ const MenuItem = ({ label, href, isNew, onClick }: MenuItemProperties) => {
       >
         {label}
         {isNew && (
-          <Tag
-            size="sm"
-            variant="solid"
-            colorScheme="brand"
-            ml={1}
-            onClick={() => console.log('abbbbbbbbbb')}
-          >
+          <Tag size="sm" variant="solid" colorScheme="brand" ml={1}>
             {intl.formatMessage(messages.newItem)}
           </Tag>
         )}

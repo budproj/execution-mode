@@ -57,7 +57,8 @@ const TeamHoverMenu = ({
       backgroundColor="rgba(0,0,0,0.7)"
       height="100%"
       position="absolute"
-      top={valueStoraged ? '78px' : '132px'}
+      // Add the 132px condition if banner is back
+      top="78px"
       width="100%"
       transition="0.4s all ease-out"
       pointerEvents={isHovered ? 'auto' : 'none'}
