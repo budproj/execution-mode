@@ -11,13 +11,16 @@ export interface Team extends GraphQLNode {
   isCompany: boolean
   updatedAt: string
   status: Status
+  statuses?: Status
   delta: Delta
+  deltas?: Delta
   owner: User
   description?: string
   gender?: TEAM_GENDER
   company?: Team
   parent?: Team
   tacticalCycle?: Cycle
+  tacticalCycles?: Cycle
   users?: GraphQLConnection<User>
   teams?: GraphQLConnection<Team>
   rankedDescendants?: GraphQLConnection<Team>
