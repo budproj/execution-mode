@@ -9,6 +9,7 @@ import { TEAM_GENDER } from './constants'
 export interface Team extends GraphQLNode {
   name: string
   isCompany: boolean
+  is_company?: boolean
   updatedAt: string
   status: Status
   statuses?: Status

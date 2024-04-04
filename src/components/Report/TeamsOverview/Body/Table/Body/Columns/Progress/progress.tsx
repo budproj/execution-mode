@@ -6,11 +6,11 @@ import { IntlLink } from 'src/components/Base'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
 import SliderWithDetails from 'src/components/Base/SliderWithDetails'
 import { useGetProjectedProgress } from 'src/components/Team/hooks'
-// Import { Team } from 'src/components/Team/types'
+import { Team } from 'src/components/Team/types'
 
 export interface TeamsOverviewBodyTableBodyColumnProgressProperties {
   // Alterar esse any para Team + latest Check in, mesma coisa no back
-  team?: any
+  team?: Team
 }
 
 const TeamsOverviewBodyTableBodyColumnProgress = ({

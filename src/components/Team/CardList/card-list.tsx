@@ -15,7 +15,7 @@ import { isReloadNecessary, teamAtomFamily } from 'src/state/recoil/team'
 import TeamCard from './Card'
 import messages from './messages'
 import queries from './queries.gql'
-// Import { GetTeamsQuery } from './types'
+import { GetTeamsQuery } from './types'
 
 export interface TeamCardListProperties {
   teamFilter: string
@@ -35,7 +35,7 @@ const TeamCardList = memo(
   }: TeamCardListProperties) => {
     const [index, setIndex] = useState(3)
     const intl = useIntl()
-    const { data, loading, refetch } = useQuery(
+    const { data, loading, refetch } = useQuery<GetTeamsQuery>(
       isFromHoverMenu ? queries.GET_USER_TEAMS_AND_COMPANIES : queries.GET_TEAMS,
     )
     const [loadTeamsOnRecoil] = useRecoilFamilyLoader<Team>(teamAtomFamily)

@@ -18,7 +18,7 @@ import messages from './messages'
 
 interface NotificationKeyResultProperties {
   isKeyResultOutdated?: boolean
-  keyResult: any
+  keyResult: KeyResult
   handleClick: (id: KeyResult['id']) => void
   userId: User['id']
   updateIconIsFilled?: boolean

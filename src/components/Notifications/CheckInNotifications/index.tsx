@@ -3,7 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 
-// Import { KeyResult } from 'src/components/KeyResult/types'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { User } from 'src/components/User/types'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
 
@@ -11,7 +11,7 @@ import NotificationKeyResult from './NotificationKeyResult'
 import messages from './messages'
 
 interface CheckInNotificationsProperties {
-  keyResultsWithNoCheckInThisWeek: any[]
+  keyResultsWithNoCheckInThisWeek: KeyResult[]
   userId: User['id']
 }
 

@@ -31,7 +31,7 @@ const HoverableWrapper = styled(Box)`
 
 const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
   const intl = useIntl()
-  const team = useRecoilValue(teamAtomFamily(id)) as any
+  const team = useRecoilValue(teamAtomFamily(id))
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [shadowStrokeLight] = useToken('shadows', ['for-background.light'])
 
