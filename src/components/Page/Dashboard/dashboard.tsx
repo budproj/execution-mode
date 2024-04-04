@@ -41,6 +41,7 @@ interface GetUserNameGenderAndSettingsRequest {
     }
     companies: GraphQLConnection<Team>
     teams: GraphQLConnection<Team>
+    teams_status: GraphQLConnection<Team>
   }
 }
 
