@@ -33,8 +33,7 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
   const flags = useFlags(['view_gamification_teams_ranking'])
   const isGameficationDisabled = !flags.view_gamification_teams_ranking.enabled
 
-  // TODO: Aqui era <GetCompanyTeamsQuery>, agora está como <any>, corrigir futuramente
-  const { data, loading } = useQuery(queries.GET_COMPANY_TEAMS, {
+  const { data, loading } = useQuery<GetCompanyTeamsQuery>(queries.GET_COMPANY_TEAMS, {
     fetchPolicy: 'network-only',
   })
   const [rankedTeams, setRankedTeamsEdges] = useConnectionEdges<Team>()
