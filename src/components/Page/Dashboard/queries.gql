@@ -19,6 +19,7 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
         }
       }
     }
+  
     teams_status {
       edges {
         node {
@@ -46,4 +47,4 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
       }
     }
   
-
+}
