@@ -31,7 +31,6 @@ const {
   ROUTINES_API,
   COMMENTS_API,
   LLM_API,
-  MISSION_CONTROL_API,
   TASK_MANAGEMENT_API,
   REST_API_BASE,
   FLAGSMITH_CLIENT_KEY,
@@ -88,7 +87,6 @@ const publicRuntimeConfig = {
     routines: ROUTINES_API,
     comments: COMMENTS_API,
     llm: LLM_API,
-    missionControl: MISSION_CONTROL_API,
     taskManagement: TASK_MANAGEMENT_API,
   },
 
