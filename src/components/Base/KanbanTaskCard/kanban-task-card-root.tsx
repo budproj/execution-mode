@@ -16,6 +16,7 @@ interface KanbanTaskCardRootProperties extends GridProps {
   children: React.ReactNode
   taskPriority: TaskPriority
   mode?: kanbanTaskCardViewMode
+  isActive?: boolean
 }
 
 const StyledGrid = styled(Grid)<StyledGridProperties>`
@@ -34,6 +35,7 @@ export const KanbanTaskCardRoot = ({
   children,
   mode = kanbanTaskCardViewMode.VIEW_MODE,
   taskPriority,
+  isActive,
   ...rest
 }: KanbanTaskCardRootProperties) => {
   console.log({ mode })
@@ -57,7 +59,7 @@ export const KanbanTaskCardRoot = ({
       bgColor="#fff"
       _hover={{ bgColor: '#f7f7f7' }}
       w="100%"
-      customBorderColor={taskPriorityColors[taskPriority]}
+      customBorderColor={isActive ? taskPriorityColors[taskPriority] : 'gray'}
       {...rest}
     >
       {children}

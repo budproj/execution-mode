@@ -16,6 +16,7 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Team } from 'src/components/Team/types'
+import { isArchivedBoardAtom } from 'src/state/recoil/task-management/board/is-archived-board'
 import { isEditingTaskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/insert/is-editing-task-drawer'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
@@ -40,8 +41,9 @@ interface TaskDrawerProperties {
 export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const router = useRouter()
   const { id: teamID } = router.query
+  const isArchivedBoard = useRecoilValue(isArchivedBoardAtom)
   const intl = useIntl()
-  const { data: boardData } = useTeamTasksBoardData(teamId)
+  const { data: boardData } = useTeamTasksBoardData(teamId, isArchivedBoard ? true : undefined)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
   const taskDrawerId = useRecoilValue(taskDrawerIdAtom)
   const setTaskSupportTeam = useSetRecoilState(taskSupportTeamAtom)
