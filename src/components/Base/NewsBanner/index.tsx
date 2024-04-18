@@ -12,7 +12,6 @@ import {
 import React, { useCallback, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
-import bg from 'public/images/mission-control-preview.png'
 import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import messages from './messages'
@@ -51,13 +50,7 @@ const NewsBanner = () => {
         <ModalCloseButton color="brand.500" size="sm" />
 
         <ModalBody p="0" display="grid" gridTemplateColumns="1fr 1fr">
-          <Box
-            borderLeftRadius={15}
-            backgroundImage={`url(${bg.src})`}
-            width="480px"
-            height="350px"
-            backgroundRepeat="no-repeat"
-          />
+          <Box borderLeftRadius={15} width="480px" height="350px" backgroundRepeat="no-repeat" />
           <Box width="402px" paddingTop="30px" paddingLeft="50px">
             <Text color="brand.500" fontWeight={900} fontSize="40px">
               {intl.formatMessage(messages.newsBannerTitle)}
