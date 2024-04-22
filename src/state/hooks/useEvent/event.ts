@@ -29,7 +29,6 @@ import { MainMenuTabsTeamsClickData } from './events/main-menu-tabs-teams-click.
 import { MegaMenuClickData } from './events/mega-menu-click.data'
 import { MentionInRoutineAnswerClickData } from './events/mention-in-routine-click-data'
 import { MetricTeamRowClickData } from './events/metric-team-row-click-data'
-import { MissionControlTaskClickData } from './events/mission-control-task-click.data'
 import { NotificationBellData } from './events/notification-bell-data'
 import { NotificationCardClickData } from './events/notification-card-click-data'
 import { NotificationCheckInClickData } from './events/notification-check-in-click-data'
@@ -116,7 +115,6 @@ export type Event = {
   [EventType.CREATE_DRAFT_FEEDBACK_ANSWER_CLICK]: CreateDraftFeedbackAnswerClickData
   [EventType.PUBLISH_OKR_CLICK]: PublishOkrClickData
   [EventType.GENERATE_KEY_RESULT_SUMMARIZE_CLICK]: GenerateKeyResultSummarizeClickData
-  [EventType.MISSION_CONTROL_TASK_CLICK]: MissionControlTaskClickData
   [EventType.TASK_MANAGER_CREATE_TASK_CLICK]: TaskManagerCreateTaskClickData
   [EventType.TASK_MANAGER_DELETE_TASK_CLICK]: TaskManagerDeleteTaskClickData
   [EventType.TASK_MANAGER_UPDATE_TASK_COLUMN]: TaskManagerUpdateTaskColumnData
