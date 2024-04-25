@@ -14,6 +14,8 @@ import { BOARD_DOMAIN } from 'src/components/TaskManagement/hooks/use-team-tasks
 import { useUpdateTaskMutate } from 'src/components/TaskManagement/hooks/use-update-task-mutate'
 import { Team } from 'src/components/Team/types'
 import { Task } from 'src/services/task-management/task-management.service'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { isArchivedBoardAtom } from 'src/state/recoil/task-management/board/is-archived-board'
 import { teamAtomFamily } from 'src/state/recoil/team'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
@@ -29,6 +31,14 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
   const setSelectedTeamId = useSetRecoilState(selectedTeamIdHighlight)
   const [isArchivedBoard, setIsArchivedBoard] = useRecoilState(isArchivedBoardAtom)
   const { mutate: updateTaskMutate } = useUpdateTaskMutate(BOARD_DOMAIN.TEAM, teamId)
+  const { dispatch: dispatchArchiveTask } = useEvent(EventType.ARCHIVE_TASK)
+  const { dispatch: dispatchUnarchiveTask } = useEvent(EventType.UNARCHIVE_TASK)
+  const { dispatch: dispatchArchivedTasksButtonClick } = useEvent(
+    EventType.ARCHIVED_TASKS_BUTTON_CLICK,
+  )
+  const { dispatch: dispatchUnarchivedTasksButtonClick } = useEvent(
+    EventType.UNARCHIVED_TASKS_BUTTON_CLICK,
+  )
 
   const team = useRecoilValue(teamAtomFamily(teamId))
   const [searchTaskInput, setSearchTaskInput] = useState<string>()
@@ -42,7 +52,13 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
   }, [setSelectedTeamId, teamId])
 
   const handleArchive = (task: Task) => {
-    const updatedTask = { ...task, active: Boolean(isArchivedBoard) }
+    if (isArchivedBoard) {
+      dispatchUnarchiveTask({})
+    } else {
+      dispatchArchiveTask({})
+    }
+
+    const updatedTask: Partial<Task> = { _id: task._id, active: Boolean(isArchivedBoard) }
     updateTaskMutate(updatedTask)
   }
 
@@ -89,6 +105,11 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
             width="100%"
             onClick={() => {
               setIsArchivedBoard(!isArchivedBoard)
+              if (isArchivedBoard) {
+                dispatchUnarchivedTasksButtonClick({})
+              } else {
+                dispatchArchivedTasksButtonClick({})
+              }
             }}
           >
             {isArchivedBoard ? 'Voltar para tarefas ativas' : 'Tarefas arquivadas'}

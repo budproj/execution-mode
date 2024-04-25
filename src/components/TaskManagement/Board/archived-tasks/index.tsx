@@ -7,7 +7,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Team } from 'src/components/Team/types'
 import { Task } from 'src/services/task-management/task-management.service'
 
-import { useTeamTasksBoardData } from '../../hooks/use-team-tasks-board-data'
+import { useRemoveTaskMutate } from '../../hooks/use-remove-task-mutate'
+import { BOARD_DOMAIN, useTeamTasksBoardData } from '../../hooks/use-team-tasks-board-data'
 import TaskCardComponent from '../components/task'
 
 type ArchivedTasksProperties = {
@@ -21,14 +22,18 @@ const ArchivedTasksWrapper = ({
   searchTaskInput,
   handleArchive,
 }: ArchivedTasksProperties) => {
-  const { data: boardData, isError } = useTeamTasksBoardData(teamId, true)
+  const { data: boardData, isError, isFetching } = useTeamTasksBoardData(teamId, true)
+
+  const { mutate: removeTaskMutate } = useRemoveTaskMutate(BOARD_DOMAIN.TEAM, teamId)
 
   const filteredTasks = useMemo(() => {
     return searchTaskInput
-      ? boardData?.tasks.filter((task) =>
-          task.title.toLocaleLowerCase().includes(searchTaskInput.toLocaleLowerCase()),
-        )
-      : boardData?.tasks
+      ? boardData?.tasks
+          .filter((task) =>
+            task.title.toLocaleLowerCase().includes(searchTaskInput.toLocaleLowerCase()),
+          )
+          .reverse()
+      : boardData?.tasks.reverse()
   }, [boardData?.tasks, searchTaskInput])
 
   if (isError || !boardData) {
@@ -40,7 +45,9 @@ const ArchivedTasksWrapper = ({
     )
   }
 
-  return (
+  return isFetching ? (
+    <Spinner />
+  ) : (
     <Stack w="100%" spacing={8}>
       <DndProvider backend={HTML5Backend}>
         <Container maxWidth="100%" paddingInlineEnd={0} padding={0}>
@@ -55,7 +62,7 @@ const ArchivedTasksWrapper = ({
                   onArchive={handleArchive}
                   onDropHover={() => {}}
                   onUpdate={() => {}}
-                  onDelete={() => {}}
+                  onDelete={() => removeTaskMutate(task._id)}
                 />
               ))
             ) : (

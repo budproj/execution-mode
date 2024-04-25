@@ -1,11 +1,13 @@
 import { Menu, MenuButton, MenuItem, MenuList, useToast } from '@chakra-ui/react'
 import React from 'react'
-import { useIntl } from 'react-intl'
+import { MessageDescriptor, useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import HistoryIcon from 'src/components/Icon/History'
 import TrashIcon from 'src/components/Icon/Trash'
 import TreeDotsIcon from 'src/components/Icon/TreeDots'
+import { headerColumnMessage } from 'src/components/TaskManagement/Board/utils/helpers'
+import { TASK_STATUS } from 'src/services/task-management/task-management.service'
 import { isArchivedBoardAtom } from 'src/state/recoil/task-management/board/is-archived-board'
 
 import messages from './messages'
@@ -13,11 +15,18 @@ import messages from './messages'
 interface KanbanTaskCardActionsProperties {
   readonly onDelete: () => void
   readonly onArchive?: () => void
+  status?: TASK_STATUS
 }
 
-export const KanbanTaskCardActions = ({ onDelete, onArchive }: KanbanTaskCardActionsProperties) => {
+export const KanbanTaskCardActions = ({
+  onDelete,
+  onArchive,
+  status,
+}: KanbanTaskCardActionsProperties) => {
   const intl = useIntl()
   const toast = useToast()
+
+  const columnName = status ? headerColumnMessage.get(status) : ''
 
   const isArchivedBoard = useRecoilValue(isArchivedBoardAtom)
 
@@ -31,7 +40,11 @@ export const KanbanTaskCardActions = ({ onDelete, onArchive }: KanbanTaskCardAct
       onArchive()
       toast({
         status: 'success',
-        title: isArchivedBoard ? 'Você desarquivou uma tarefa.' : 'Tarefa arquivada com sucesso!',
+        title: isArchivedBoard
+          ? `Tarefa enviada para "${intl.formatMessage(
+              columnName as unknown as MessageDescriptor,
+            )}" com sucesso!`
+          : 'Tarefa arquivada com sucesso!',
       })
     }
 

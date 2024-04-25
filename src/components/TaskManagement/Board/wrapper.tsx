@@ -26,7 +26,7 @@ type BoardWrapperProperties = {
 }
 
 const BoardWrapper = ({ teamId, searchTaskInput, handleArchive }: BoardWrapperProperties) => {
-  const { data: boardData, isError } = useTeamTasksBoardData(teamId)
+  const { data: boardData, isError, isFetching } = useTeamTasksBoardData(teamId)
 
   const [selectedUser, setSelectedUser] = useState<string>()
   const team = useRecoilValue(teamAtomFamily(teamId))
@@ -89,7 +89,9 @@ const BoardWrapper = ({ teamId, searchTaskInput, handleArchive }: BoardWrapperPr
     )
   }
 
-  return (
+  return isFetching ? (
+    <Spinner />
+  ) : (
     <Stack w="100%" spacing={8}>
       <CustomAvatarGroup
         max={5}

@@ -65,4 +65,11 @@ export enum EventType {
   MAIN_MENU_TABS_TEAMS_CLICK = 'MainMenuTabsTeamsClick',
   RANKING_CLICK = 'RankingClick',
   MEGA_MENU_CLICK = 'MegaMenuClick',
+  DELETE_TASK = 'DeleteTask',
+  ARCHIVE_TASK = 'ArchiveTask',
+  UNARCHIVE_TASK = 'UnarchiveTask',
+  DELETE_COLUMN_TASK = 'DeleteColumnTask',
+  ARCHIVE_COLUMN_TASK = 'ArchiveColumnTask',
+  ARCHIVED_TASKS_BUTTON_CLICK = 'ArchivedTasksButtonClick',
+  UNARCHIVED_TASKS_BUTTON_CLICK = 'UnarchivedTasksButtonClick',
 }

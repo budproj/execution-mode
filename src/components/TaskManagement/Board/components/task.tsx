@@ -79,7 +79,11 @@ const TaskCardComponent = ({
           <VStack w="100%" justifyContent="space-between">
             <HStack w="100%">
               <KanbanTaskCard.Content title={task.title} w="100%" onChange={handleTitleChange} />
-              <KanbanTaskCard.Actions onDelete={handleTaskDelete} onArchive={handleArchive} />
+              <KanbanTaskCard.Actions
+                status={task.status}
+                onDelete={handleTaskDelete}
+                onArchive={handleArchive}
+              />
             </HStack>
             <KanbanTaskCard.Metadata
               dueDate={task.dueDate}

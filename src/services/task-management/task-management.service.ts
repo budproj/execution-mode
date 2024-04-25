@@ -29,6 +29,7 @@ export type Task = {
   tags: string[]
   createdAt: Date
   updatedAt: Date
+  active: boolean
 }
 
 export type TaskUpdate = {
@@ -171,6 +172,11 @@ export class TaskManagementService {
     await this.client.patch(`tasks/id/archive`, {
       ids,
     })
+  }
+
+  async deleteColumn(ids: string[]) {
+    console.log({ ids })
+    await this.client.delete(`tasks/id/delete`, { data: { ids } })
   }
 }
 
