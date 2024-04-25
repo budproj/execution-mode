@@ -65,6 +65,7 @@ const useColumnTasks = (
       attachments: [],
       supportTeamMembers: [],
       tags: [],
+      active: true,
     })
   }, [addTask, boardID, column, myID])
 
