@@ -29,7 +29,7 @@ export type Task = {
   tags: string[]
   createdAt: Date
   updatedAt: Date
-  active: boolean
+  active?: boolean
 }
 
 export type TaskUpdate = {
