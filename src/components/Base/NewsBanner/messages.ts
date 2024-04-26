@@ -4,15 +4,15 @@ type NewsBannerMessages = 'newsBannerTitle' | 'newsBannerDescription' | 'newsBan
 
 export default defineMessages<NewsBannerMessages>({
   newsBannerTitle: {
-    defaultMessage: 'NOVO FAROL DE BOAS PRÁTICAS',
-    id: 'P48rc3',
+    defaultMessage: 'Organize suas atividades no novo módulo de gestão de tarefas!',
+    id: 'Y0d9br',
     description:
       'This message appears on the news banner to invite the user to learn about the Spotlight feature.',
   },
   newsBannerDescription: {
     defaultMessage:
-      'A cada semana novos desafios personalizados que ajudam você e seu time a se manterem dentro das melhores práticas de implementação de OKRs',
-    id: 'A4WTq8',
+      'Agora você pode fazer a gestão das atividades da rotina do seu time também na bud. Visite a página do seu time e explore a aba de tarefas! Crie tarefas e acompanhe o andamento dos seus projetos em um só lugar :)',
+    id: '1EdvvO',
     description:
       'This message appears on action button that redirect the user to company page on Spotlight tab',
   },
