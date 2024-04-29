@@ -15,7 +15,6 @@ const RecoilDebugObserver = () => {
       }
     }
   }, [snapshot, publicRuntimeConfig.environment])
-
   return null // eslint-disable-line unicorn/no-null
 }
 

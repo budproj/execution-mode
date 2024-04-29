@@ -54,7 +54,6 @@ export enum EventType {
   CREATE_DRAFT_FEEDBACK_ANSWER_CLICK = 'CreateDraftFeedbackAnswerClick',
   PUBLISH_OKR_CLICK = 'PublishOKRClick',
   GENERATE_KEY_RESULT_SUMMARIZE_CLICK = 'GenerateKeyResultSummarizeClick',
-  MISSION_CONTROL_TASK_CLICK = 'MissionControlTaskClick',
   TASK_MANAGER_CREATE_TASK_CLICK = 'TaskManagerCreateTaskClick',
   TASK_MANAGER_DELETE_TASK_CLICK = 'TaskManagerDeleteTaskClick',
   TASK_MANAGER_UPDATE_TASK_COLUMN = 'TaskManagerUpdateTaskColumn',
