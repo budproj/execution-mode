@@ -23,9 +23,15 @@ type BoardWrapperProperties = {
   readonly teamId: Team['id']
   readonly searchTaskInput?: string
   handleArchive?: (task: Task) => void
+  isSpinnerLoading?: boolean
 }
 
-const BoardWrapper = ({ teamId, searchTaskInput, handleArchive }: BoardWrapperProperties) => {
+const BoardWrapper = ({
+  teamId,
+  searchTaskInput,
+  handleArchive,
+  isSpinnerLoading,
+}: BoardWrapperProperties) => {
   const { data: boardData, isError, isFetching } = useTeamTasksBoardData(teamId)
 
   const [selectedUser, setSelectedUser] = useState<string>()
@@ -89,7 +95,7 @@ const BoardWrapper = ({ teamId, searchTaskInput, handleArchive }: BoardWrapperPr
     )
   }
 
-  return isFetching ? (
+  return isFetching && isSpinnerLoading ? (
     <Spinner />
   ) : (
     <Stack w="100%" spacing={8}>

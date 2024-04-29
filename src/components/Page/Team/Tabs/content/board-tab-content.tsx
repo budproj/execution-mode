@@ -42,6 +42,7 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
 
   const team = useRecoilValue(teamAtomFamily(teamId))
   const [searchTaskInput, setSearchTaskInput] = useState<string>()
+  const [isSpinnerLoading, setIsSpinnerLoading] = useState(false)
 
   const intl = useIntl()
   // TODO: remove this
@@ -60,6 +61,13 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
 
     const updatedTask: Partial<Task> = { _id: task._id, active: Boolean(isArchivedBoard) }
     updateTaskMutate(updatedTask)
+  }
+
+  const spinnerFunction = () => {
+    setIsSpinnerLoading(true)
+    setTimeout(() => {
+      setIsSpinnerLoading(false)
+    }, 500)
   }
 
   return (
@@ -105,6 +113,7 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
             width="100%"
             onClick={() => {
               setIsArchivedBoard(!isArchivedBoard)
+              spinnerFunction()
               if (isArchivedBoard) {
                 dispatchUnarchivedTasksButtonClick({})
               } else {
@@ -121,12 +130,14 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
           teamId={teamId}
           searchTaskInput={searchTaskInput}
           handleArchive={handleArchive}
+          isSpinnerLoading={isSpinnerLoading}
         />
       ) : (
         <BoardWrapper
           teamId={teamId}
           searchTaskInput={searchTaskInput}
           handleArchive={handleArchive}
+          isSpinnerLoading={isSpinnerLoading}
         />
       )}
 

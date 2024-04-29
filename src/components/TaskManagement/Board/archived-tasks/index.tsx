@@ -15,12 +15,14 @@ type ArchivedTasksProperties = {
   readonly teamId: Team['id']
   readonly searchTaskInput?: string
   handleArchive?: (task: Task) => void
+  isSpinnerLoading?: boolean
 }
 
 const ArchivedTasksWrapper = ({
   teamId,
   searchTaskInput,
   handleArchive,
+  isSpinnerLoading,
 }: ArchivedTasksProperties) => {
   const { data: boardData, isError, isFetching } = useTeamTasksBoardData(teamId, true)
 
@@ -45,7 +47,7 @@ const ArchivedTasksWrapper = ({
     )
   }
 
-  return isFetching ? (
+  return isFetching && isSpinnerLoading ? (
     <Spinner />
   ) : (
     <Stack w="100%" spacing={8}>
