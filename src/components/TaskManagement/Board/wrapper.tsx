@@ -22,10 +22,17 @@ import loadOwnersAndSupportTeam from './hooks/use-load-owners-and-support-team'
 type BoardWrapperProperties = {
   readonly teamId: Team['id']
   readonly searchTaskInput?: string
+  handleArchive?: (task: Task) => void
+  isSpinnerLoading?: boolean
 }
 
-const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
-  const { data: boardData, isError } = useTeamTasksBoardData(teamId)
+const BoardWrapper = ({
+  teamId,
+  searchTaskInput,
+  handleArchive,
+  isSpinnerLoading,
+}: BoardWrapperProperties) => {
+  const { data: boardData, isError, isFetching } = useTeamTasksBoardData(teamId)
 
   const [selectedUser, setSelectedUser] = useState<string>()
   const team = useRecoilValue(teamAtomFamily(teamId))
@@ -88,7 +95,9 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
     )
   }
 
-  return (
+  return isFetching && isSpinnerLoading ? (
+    <Spinner />
+  ) : (
     <Stack w="100%" spacing={8}>
       <CustomAvatarGroup
         max={5}
@@ -106,6 +115,7 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
               tasks={filteredTasks[ColumnType.pending]}
               teamID={teamId}
               order={boardData.order[ColumnType.pending]}
+              handleArchive={handleArchive}
             />
             <TaskColumnComponent
               column={ColumnType.toDo}
@@ -113,6 +123,7 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
               tasks={filteredTasks[ColumnType.toDo]}
               order={boardData.order[ColumnType.toDo]}
               teamID={teamId}
+              handleArchive={handleArchive}
             />
             <TaskColumnComponent
               column={ColumnType.doing}
@@ -120,6 +131,7 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
               tasks={filteredTasks[ColumnType.doing]}
               order={boardData.order[ColumnType.doing]}
               teamID={teamId}
+              handleArchive={handleArchive}
             />
             <TaskColumnComponent
               column={ColumnType.done}
@@ -127,6 +139,7 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
               tasks={filteredTasks[ColumnType.done]}
               order={boardData.order[ColumnType.done]}
               teamID={teamId}
+              handleArchive={handleArchive}
             />
           </SimpleGrid>
         </Container>

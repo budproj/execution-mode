@@ -1,5 +1,8 @@
 import { EventType } from './event-type'
 import { AnswerNowFormClickData } from './events/answer-now-form-click-data'
+import { ArchiveColumnTask } from './events/archive-column-task.data'
+import { ArchiveTaskData } from './events/archive-task.data'
+import { ArchivedTasksButtonClick } from './events/archived-tasks-button-click.data'
 import { ChangeTimePeriodClickData } from './events/change-time-period-click-data'
 import { CommentInRoutineAnswerClickData } from './events/comment-in-routine-click-data'
 import { CreateDraftFeedbackAnswerClickData } from './events/create-draft-feedback-answer-click-data'
@@ -12,6 +15,8 @@ import { CreatedKeyResultCheckInData } from './events/created-key-result-check-i
 import { CreatedKeyResultCheckMarkEventData } from './events/created-key-result-check-mark'
 import { CreatedKeyResultCommentData } from './events/created-key-result-comment'
 import { CreatedPersonalTaskEventData } from './events/created-personal-task'
+import { DeleteColumnTask } from './events/delete-column-task.data'
+import { DeleteTaskData } from './events/delete-task.data'
 import { DeletedKeyResultCheckMarkEventData } from './events/deleted-key-result-check-mark'
 import { DeletedPersonalTaskEventData } from './events/deleted-personal-task'
 import { GenerateKeyResultSummarizeClickData } from './events/generate-key-result-summarize-click-data'
@@ -55,6 +60,8 @@ import { TeamHighlightClickData } from './events/team-highlight-click-data'
 import { ToggleRoutineReminderClickData } from './events/toggle-routine-reminder-click-data'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
 import { ToggledPersonalTaskEventData } from './events/toggled-personal-task'
+import { UnarchiveTaskData } from './events/unarchive-task.data'
+import { UnarchivedTasksButtonClick } from './events/unarchived-tasks-button-click.data'
 import { UpdatedKeyResultCheckMarkAssigneeEventData } from './events/updated-key-result-check-mark-assignee'
 import { UpdatedKeyResultCheckMarkTitleEventData } from './events/updated-key-result-check-mark-title'
 import { UpdatedPersonalTaskTitleEventData } from './events/updated-personal-task-title'
@@ -125,4 +132,11 @@ export type Event = {
   [EventType.MAIN_MENU_TABS_PANEL_CLICK]: MainMenuTabsPanelClickData
   [EventType.MAIN_MENU_TABS_MY_THINGS_CLICK]: MainMenuTabsMyThingsClickData
   [EventType.MAIN_MENU_TABS_TEAMS_CLICK]: MainMenuTabsTeamsClickData
+  [EventType.ARCHIVE_TASK]: ArchiveTaskData
+  [EventType.UNARCHIVE_TASK]: UnarchiveTaskData
+  [EventType.DELETE_TASK]: DeleteTaskData
+  [EventType.ARCHIVED_TASKS_BUTTON_CLICK]: ArchivedTasksButtonClick
+  [EventType.UNARCHIVED_TASKS_BUTTON_CLICK]: UnarchivedTasksButtonClick
+  [EventType.ARCHIVE_COLUMN_TASK]: ArchiveColumnTask
+  [EventType.DELETE_COLUMN_TASK]: DeleteColumnTask
 }
