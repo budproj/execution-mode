@@ -357,6 +357,7 @@ const DashboardPage = () => {
   const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
     queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
   )
+
   // Const me = useRecoilValue(meAtom)
   // const user = useRecoilValue(selectUser(me))
 
@@ -364,6 +365,8 @@ const DashboardPage = () => {
   const [mainTeamId, setMainTeamId] = useState('')
 
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
+
+  const company = data?.me.companies.edges[0].node
 
   const activeCompanyCycles = allCompanyCycles.filter((cycle) => cycle.active)
 
@@ -375,7 +378,7 @@ const DashboardPage = () => {
 
   const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
 
-  const isCompanySelected = data?.me.companies.edges[0].node.id === selectedDashboardTeam?.id
+  const isCompanySelected = company?.id === selectedDashboardTeam?.id
 
   useEffect(() => {
     if (data?.me.settings.edges[0]) {
@@ -428,6 +431,7 @@ const DashboardPage = () => {
             <OverviewSummary
               title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
               cycle={yearly}
+              team={company}
               isLoading={companyCyclesLoading}
               flex="1"
             />
