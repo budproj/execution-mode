@@ -16,6 +16,9 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
       edges {
         node {
           id
+          status {
+            progress
+          }
         }
       }
     }
