@@ -18,7 +18,21 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
           id
           status {
             progress
+            confidence
+            latestCheckIn {
+              createdAt
+              user {
+                fullName
+              }
+            }
           }
+          delta {
+        progress
+      }
+      tacticalCycle {
+        dateStart
+        dateEnd
+      }
         }
       }
     }
