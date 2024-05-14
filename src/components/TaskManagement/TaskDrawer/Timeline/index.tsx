@@ -65,7 +65,7 @@ export const TaskDrawerTimeline = ({ task }: TaskDrawerTimelineProperties) => {
     <Flex direction="column" paddingTop="2rem" position="relative" height="100%">
       <Flex direction="column" marginX="28px" marginBottom="2rem" gridGap={4}>
         <TimelineWrapper
-          comments={comments}
+          comments={comments ?? []}
           updates={taskUpdatesRequest.data ? taskUpdatesRequest.data : []}
         />
       </Flex>

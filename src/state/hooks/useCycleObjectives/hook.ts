@@ -18,7 +18,17 @@ const groupObjectivesByCycle = (objectives?: Objective[]): CycleObjectives => {
   const cycles: Cycle[] = uniqBy(
     objectives.map((objective) => objective.cycle),
     'id',
-  )
+  ).sort((a, b) => {
+    if (a.cadence === 'YEARLY' && b.cadence !== 'YEARLY') {
+      return -1 // A comes first
+    }
+
+    if (a.cadence !== 'YEARLY' && b.cadence === 'YEARLY') {
+      return 1 // B comes first
+    }
+
+    return 0 // Maintain current order
+  })
 
   return cycles.map((cycle) => [
     cycle,

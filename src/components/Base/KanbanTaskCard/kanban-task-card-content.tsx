@@ -7,7 +7,15 @@ interface KanbanTaskCardContentProperties extends TextProps {
 
 export const KanbanTaskCardContent = ({ title, ...rest }: KanbanTaskCardContentProperties) => {
   return (
-    <Text fontSize={14} fontWeight="bold" color="new-gray.900" {...rest}>
+    <Text
+      textOverflow="ellipsis"
+      overflow="hidden"
+      whiteSpace="nowrap"
+      fontSize={14}
+      fontWeight="bold"
+      color="new-gray.900"
+      {...rest}
+    >
       {title}
     </Text>
   )

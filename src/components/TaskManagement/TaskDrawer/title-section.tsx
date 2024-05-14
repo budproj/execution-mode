@@ -27,6 +27,7 @@ export const TaskTitleSection = ({ task, updateTask }: TaskTitleSectionPropertie
         _hover={{ color: 'brand.500' }}
         fontWeight={500}
         fontSize="24px"
+        maxWidth="100%"
       />
       <Input py={2} px={4} mt={2} mr="2" as={EditableInput} />
       <EditableControls />
