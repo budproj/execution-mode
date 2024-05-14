@@ -27,41 +27,39 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
             }
           }
           delta {
-        progress
-      }
-      tacticalCycle {
-        dateStart
-        dateEnd
-      }
+            progress
+          }
+          tacticalCycle {
+            dateStart
+            dateEnd
+          }
         }
       }
     }
   }
   teams(first: 200) {
-      edges {
-        node {
-          name
-          id
-          status {
-            progress
-            confidence
-            latestCheckIn {
-              createdAt
-              user {
-                fullName
-              }
+    edges {
+      node {
+        name
+        id
+        status {
+          progress
+          confidence
+          latestCheckIn {
+            createdAt
+            user {
+              fullName
             }
           }
-      delta {
-        progress
-      }
-      tacticalCycle {
-        dateStart
-        dateEnd
+        }
+        delta {
+          progress
+        }
+        tacticalCycle {
+          dateStart
+          dateEnd
+        }
       }
     }
-          }
-      }
-    }
-  
-
+  }
+}
