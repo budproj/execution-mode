@@ -2,7 +2,7 @@ query GET_TEAM_ACTIVE_OBJECTIVES($teamID: ID!) {
   team(id: $teamID) {
     id
     name
-    activeObjectives: allObjectives(active: true) {
+    activeObjectives: allObjectives(active: true, order: { createdAt: ASC }) {
        edges {
         node {
           id

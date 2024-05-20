@@ -7,6 +7,7 @@ import {
   MenuButton,
   MenuList,
   MenuOptionGroup,
+  Tooltip,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
@@ -57,32 +58,35 @@ const CustomAvatarGroup = ({
           ?.sort((a, b) => (a.id === targetUser ? -1 : b.id === targetUser ? 1 : 0)) // Put the owner or selected user always first
           ?.map((user, index) => {
             return index < max ? (
-              <Avatar
-                key={
-                  user.id ?? `DYNAMIC_AVATAR_${user.fullName ?? user.firstName ?? 'USER'}_${index}`
-                }
-                cursor="pointer"
-                size="md"
-                name={user.fullName ?? user.firstName}
-                src={user.picture}
-                position="absolute"
-                zIndex={1000 - index}
-                left={`calc(${index} * 33px)`}
-                bottom={0}
-                boxShadow={index === iterableUsers.length - 1 ? 'none' : '0 0 0 2px #fff'}
-                filter={
-                  'grayscale(' +
-                  (selectedUserId ? (user.id === selectedUserId ? '0%' : '100%') : '0%') +
-                  ')'
-                }
-                onClick={() => handleSelectUser(user.id ?? '')}
-              >
-                {teamOwnerId === user.id && (
-                  <AvatarBadge placement="bottom-start" border="none">
-                    <CrownIcon width="20px" height="20px" desc="" fill="yellow.500" />
-                  </AvatarBadge>
-                )}
-              </Avatar>
+              <Tooltip label={user.picture ? undefined : user.fullName}>
+                <Avatar
+                  key={
+                    user.id ??
+                    `DYNAMIC_AVATAR_${user.fullName ?? user.firstName ?? 'USER'}_${index}`
+                  }
+                  cursor="pointer"
+                  size="md"
+                  name={user.fullName ?? user.firstName}
+                  src={user.picture}
+                  position="absolute"
+                  zIndex={1000 - index}
+                  left={`calc(${index} * 33px)`}
+                  bottom={0}
+                  boxShadow={index === iterableUsers.length - 1 ? 'none' : '0 0 0 2px #fff'}
+                  filter={
+                    'grayscale(' +
+                    (selectedUserId ? (user.id === selectedUserId ? '0%' : '100%') : '0%') +
+                    ')'
+                  }
+                  onClick={() => handleSelectUser(user.id ?? '')}
+                >
+                  {teamOwnerId === user.id && (
+                    <AvatarBadge placement="bottom-start" border="none">
+                      <CrownIcon width="20px" height="20px" desc="" fill="yellow.500" />
+                    </AvatarBadge>
+                  )}
+                </Avatar>
+              </Tooltip>
             ) : (
               <Menu isLazy placement="auto-start">
                 <MenuButton

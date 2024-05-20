@@ -1,7 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Box, Flex, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import { useFlags } from 'flagsmith/react'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -10,7 +9,6 @@ import { useRecoilValue } from 'recoil'
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { CADENCE } from 'src/components/Cycle/constants'
-import MissionControlWrapper from 'src/components/MissionControl/wrapper'
 import BoardsOverview from 'src/components/Report/BoardsOverview'
 import MetricsOverview from 'src/components/Report/MetricsOverview'
 import { OverviewSummary } from 'src/components/Report/OverviewSummary'
@@ -354,32 +352,21 @@ const StyledStack = styled(Stack)`
   }
 `
 
-const StyledMCWrapper = styled(MissionControlWrapper)`
-  @media (min-width: 1500px) {
-    top: 225px;
-  }
-
-  @media (max-width: 1460px) {
-    top: 215px;
-  }
-`
-
 const DashboardPage = () => {
   const intl = useIntl()
-
-  const flags = useFlags(['mission_control'])
   const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
     queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
   )
+
   // Const me = useRecoilValue(meAtom)
   // const user = useRecoilValue(selectUser(me))
 
   const [teams, setEdges] = useConnectionEdges<Team>()
   const [mainTeamId, setMainTeamId] = useState('')
 
-  const isMissionControlVisible = flags.mission_control.enabled
-
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
+
+  const company = data?.me.companies.edges[0].node
 
   const activeCompanyCycles = allCompanyCycles.filter((cycle) => cycle.active)
 
@@ -391,7 +378,7 @@ const DashboardPage = () => {
 
   const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
 
-  const isCompanySelected = data?.me.companies.edges[0].node.id === selectedDashboardTeam?.id
+  const isCompanySelected = company?.id === selectedDashboardTeam?.id
 
   useEffect(() => {
     if (data?.me.settings.edges[0]) {
@@ -432,37 +419,19 @@ const DashboardPage = () => {
         <StyledDiv>
           <Image fill src="/images/shape-footer-teste.svg" className="image" alt="mudar" />
         </StyledDiv>
-        {isMissionControlVisible && data?.me.id && selectedDashboardTeam?.id && (
-          <StyledMCWrapper
-            position="absolute"
-            userID={data.me.id}
-            teamID={selectedDashboardTeam?.id}
-            pr={20}
-          />
-        )}
       </Box>
-      <PageContent
-        py={0}
-        position={isMissionControlVisible ? 'initial' : 'absolute'}
-        top={isMissionControlVisible ? 0 : 230}
-        zIndex={isMissionControlVisible ? 'auto' : 2}
-        width="100%"
-      >
+      <PageContent py={0} position="absolute" top="230" zIndex="2" width="100%">
         <PageMetaHead title={messages.metaTitle} description={messages.metaDescription} />
 
         <Stack>
-          <Text
-            color={isMissionControlVisible ? 'new-gray.800' : 'white'}
-            fontWeight={500}
-            fontSize="18px"
-            marginBottom="8px"
-          >
+          <Text color="white" fontWeight={500} fontSize="18px" marginBottom="8px">
             {intl.formatMessage(messages.okrOverViewTitle)}
           </Text>
           <Flex gridGap="3rem" justifyContent="space-between">
             <OverviewSummary
               title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
               cycle={yearly}
+              team={company}
               isLoading={companyCyclesLoading}
               flex="1"
             />

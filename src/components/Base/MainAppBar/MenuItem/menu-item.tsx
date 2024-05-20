@@ -3,6 +3,8 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 
 import IntlLink from 'src/components/Base/IntlLink'
+import { EventType } from 'src/state/hooks/useEvent/event-type'
+import { useEvent } from 'src/state/hooks/useEvent/hook'
 
 import ButtonActivableByURL from '../../ButtonActivableByURL'
 import messages from '../messages'
@@ -16,6 +18,28 @@ export interface MenuItemProperties {
 
 const MenuItem = ({ label, href, isNew, onClick }: MenuItemProperties) => {
   const intl = useIntl()
+  const { dispatch: dispatchPanel } = useEvent(EventType.MAIN_MENU_TABS_PANEL_CLICK)
+  const { dispatch: dispatchMythings } = useEvent(EventType.MAIN_MENU_TABS_MY_THINGS_CLICK)
+  const { dispatch: dispatchTeams } = useEvent(EventType.MAIN_MENU_TABS_TEAMS_CLICK)
+
+  const dispatchMap = new Map([
+    [intl.formatMessage(messages.firstMenuItem), dispatchPanel],
+    [intl.formatMessage(messages.secondMenuItem), dispatchMythings],
+    [intl.formatMessage(messages.thirdMenuItem), dispatchTeams],
+  ])
+
+  const handleClick = () => {
+    const dispatch = dispatchMap.get(label)
+
+    if (dispatch) {
+      dispatch({})
+    }
+
+    if (onClick) {
+      onClick()
+    }
+  }
+
   return (
     <IntlLink href={href}>
       <ButtonActivableByURL
@@ -27,7 +51,7 @@ const MenuItem = ({ label, href, isNew, onClick }: MenuItemProperties) => {
         _active={{
           color: 'brand.500',
         }}
-        onClick={onClick}
+        onClick={handleClick}
       >
         {label}
         {isNew && (

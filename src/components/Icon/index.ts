@@ -180,8 +180,8 @@ export { default as VeryHighPriorityIcon } from './VeryHighPriorityIcon'
 
 export { default as HighPriorityIcon } from './HighPriorityIcon'
 
-export { default as MediumHighPriorityIcon } from './MediumPriorityIcon'
+export { default as MediumHighPriorityIcon } from './LowPriorityIcon'
 
-export { default as LowHighPriorityIcon } from './LowPriorityIcon'
+export { default as LowHighPriorityIcon } from './MediumPriorityIcon'
 
 export * from './types'

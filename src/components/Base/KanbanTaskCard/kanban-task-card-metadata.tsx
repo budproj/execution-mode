@@ -19,6 +19,8 @@ interface KanbanTaskCardMetadataProperties {
   readonly ownerId?: User['id']
   readonly priority?: TaskPriority
   readonly status?: TASK_STATUS
+  isActive?: boolean
+  updatedAt?: Date
 }
 
 export const KanbanTaskCardMetadata = ({
@@ -26,6 +28,8 @@ export const KanbanTaskCardMetadata = ({
   ownerId,
   priority,
   status,
+  isActive,
+  updatedAt,
 }: KanbanTaskCardMetadataProperties) => {
   const intl = useIntl()
   const user = useRecoilValue(selectUser(ownerId))
@@ -35,11 +39,11 @@ export const KanbanTaskCardMetadata = ({
 
   return (
     <HStack justifyContent="space-between" w="100%">
-      <DueDateWrapper isCompleted={isCompleted} isOutdated={isOutdated}>
-        {intl.formatDate(dueDate)}
+      <DueDateWrapper isCompleted={isCompleted} isOutdated={isOutdated} isActive={isActive}>
+        {intl.formatDate(isActive ? dueDate : updatedAt)}
       </DueDateWrapper>
       <Flex alignItems="center" gap={3}>
-        {priority && <TaskPriorityIcon priority={priority} />}
+        {priority && isActive && <TaskPriorityIcon priority={priority} />}
         <Avatar name={user?.fullName} src={user?.picture} w={7} h={7} loading="lazy" />
       </Flex>
     </HStack>
@@ -55,10 +59,12 @@ const Icon = {
 
 type TaskPriorityProperties = {
   readonly priority: keyof typeof Icon
+  isActive?: boolean
 }
 
-export const TaskPriorityIcon = ({ priority }: TaskPriorityProperties) => {
+export const TaskPriorityIcon = ({ priority, isActive }: TaskPriorityProperties) => {
   const PriorityIcon = Icon[priority]
+  console.log({ isActive })
 
   return <PriorityIcon desc="sdsa" />
 }
@@ -67,6 +73,7 @@ type DueDateWrapperProperties = {
   readonly isOutdated: boolean
   readonly isCompleted: boolean
   readonly children: React.ReactNode
+  isActive?: boolean
 }
 
 const DueDateIcon = {
@@ -102,7 +109,12 @@ const DueDateIcon = {
   ),
 }
 
-export const DueDateWrapper = ({ isOutdated, isCompleted, children }: DueDateWrapperProperties) => {
+export const DueDateWrapper = ({
+  isOutdated,
+  isCompleted,
+  children,
+  isActive,
+}: DueDateWrapperProperties) => {
   const Icon = isCompleted
     ? DueDateIcon.completed
     : isOutdated
@@ -110,10 +122,12 @@ export const DueDateWrapper = ({ isOutdated, isCompleted, children }: DueDateWra
     : DueDateIcon.notOutdated
   const color = isCompleted ? 'brand.500' : isOutdated ? 'red.500' : 'gray.400'
 
+  console.log({ isActive })
+
   return (
     <HStack alignItems="center" gap={1}>
-      {Icon}
-      <Text fontSize={14} color={color}>
+      {isActive ? Icon : DueDateIcon.notOutdated}
+      <Text fontSize={14} color={isActive ? color : 'gray'}>
         {children}
       </Text>
     </HStack>

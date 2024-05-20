@@ -10,14 +10,14 @@ export enum BOARD_DOMAIN {
   USER = 'user',
 }
 
-export function useTeamTasksBoardData(teamId: string) {
+export function useTeamTasksBoardData(teamId: string, archived?: boolean) {
   const { servicesPromise } = useContext(ServicesContext)
 
   const query = useQuery({
     queryKey: [`${GET_BOARD_DATA_KEY}:${BOARD_DOMAIN.TEAM}:${teamId}`],
     queryFn: async () => {
       const { taskManagement } = await servicesPromise
-      const data = await taskManagement.getTeamBoard({ teamId })
+      const data = await taskManagement.getTeamBoard({ teamId, archived })
       return data
     },
   })

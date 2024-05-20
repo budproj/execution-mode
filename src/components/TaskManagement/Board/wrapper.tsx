@@ -1,8 +1,8 @@
-import { Stack, Container, SimpleGrid } from '@chakra-ui/react'
-import React, { useCallback, useMemo, useState } from 'react'
+import { Stack, Container, SimpleGrid, Spinner, Box } from '@chakra-ui/react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CustomAvatarGroup from 'src/components/Base/DynamicAvatarGroup/custom-avatar-group'
 import { Team } from 'src/components/Team/types'
@@ -10,26 +10,35 @@ import {
   Task,
   TASK_STATUS as ColumnType,
 } from 'src/services/task-management/task-management.service'
+import { ownersAndSupportTeamTaskAtom } from 'src/state/recoil/task-management/board/owners-and-support-team-task'
 import { teamAtomFamily } from 'src/state/recoil/team'
+import { usersCompany } from 'src/state/recoil/team/users-company'
 
 import { useTeamTasksBoardData } from '../hooks/use-team-tasks-board-data'
 
 import TaskColumnComponent from './components/column'
-import useLoadUsers from './hooks/use-load-users'
+import loadOwnersAndSupportTeam from './hooks/use-load-owners-and-support-team'
 
 type BoardWrapperProperties = {
   readonly teamId: Team['id']
   readonly searchTaskInput?: string
+  handleArchive?: (task: Task) => void
+  isSpinnerLoading?: boolean
 }
 
-const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
-  const { data: boardData, isError } = useTeamTasksBoardData(teamId)
-
-  console.log({ boardData })
+const BoardWrapper = ({
+  teamId,
+  searchTaskInput,
+  handleArchive,
+  isSpinnerLoading,
+}: BoardWrapperProperties) => {
+  const { data: boardData, isError, isFetching } = useTeamTasksBoardData(teamId)
 
   const [selectedUser, setSelectedUser] = useState<string>()
-  const ownersAndSupportTeamMembers = useLoadUsers(teamId)
   const team = useRecoilValue(teamAtomFamily(teamId))
+  const companyUsers = useRecoilValue(usersCompany)
+  const setOwnersAndSupportTeamTask = useSetRecoilState(ownersAndSupportTeamTaskAtom)
+  const ownersAndSupportTeamMembers = useRecoilValue(ownersAndSupportTeamTaskAtom)
 
   const tasks = useMemo(
     () => ({
@@ -40,6 +49,10 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
     }),
     [boardData],
   )
+  useEffect(() => {
+    const ownersAndSupportTeam = loadOwnersAndSupportTeam(tasks, companyUsers)
+    setOwnersAndSupportTeamTask(ownersAndSupportTeam)
+  }, [companyUsers, setOwnersAndSupportTeamTask, tasks])
 
   const handleSelectUser = useCallback((userId: string) => {
     setSelectedUser((previousSelectedUser) => {
@@ -75,10 +88,16 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
 
   if (isError || !boardData) {
     console.error('Error fetching board data', isError)
-    return <div>Error fetching board data</div>
+    return (
+      <Box width="100%">
+        <Spinner size="xl" />
+      </Box>
+    )
   }
 
-  return (
+  return isFetching && isSpinnerLoading ? (
+    <Spinner />
+  ) : (
     <Stack w="100%" spacing={8}>
       <CustomAvatarGroup
         max={5}
@@ -96,6 +115,7 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
               tasks={filteredTasks[ColumnType.pending]}
               teamID={teamId}
               order={boardData.order[ColumnType.pending]}
+              handleArchive={handleArchive}
             />
             <TaskColumnComponent
               column={ColumnType.toDo}
@@ -103,6 +123,7 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
               tasks={filteredTasks[ColumnType.toDo]}
               order={boardData.order[ColumnType.toDo]}
               teamID={teamId}
+              handleArchive={handleArchive}
             />
             <TaskColumnComponent
               column={ColumnType.doing}
@@ -110,6 +131,7 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
               tasks={filteredTasks[ColumnType.doing]}
               order={boardData.order[ColumnType.doing]}
               teamID={teamId}
+              handleArchive={handleArchive}
             />
             <TaskColumnComponent
               column={ColumnType.done}
@@ -117,6 +139,7 @@ const BoardWrapper = ({ teamId, searchTaskInput }: BoardWrapperProperties) => {
               tasks={filteredTasks[ColumnType.done]}
               order={boardData.order[ColumnType.done]}
               teamID={teamId}
+              handleArchive={handleArchive}
             />
           </SimpleGrid>
         </Container>

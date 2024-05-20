@@ -4,8 +4,9 @@ type NoticesBannerMessages = 'mainText' | 'buttonText'
 
 export default defineMessages<NoticesBannerMessages>({
   mainText: {
-    defaultMessage: 'Qual seu grau de satisfação com a velocidade da plataforma?',
-    id: '68x4jj',
+    defaultMessage:
+      'Nosso sistema está enfrentando problemas de performance no momento. Estamos trabalhando para restaurar o funcionamento normal. Agradecemos a compreensão.',
+    id: 'ADeaSS',
     description: 'This message appears on the notices banner.',
   },
   buttonText: {

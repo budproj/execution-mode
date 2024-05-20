@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { Except } from 'src/helpers/except'
 import {
   Task,
   Task as TaskModel,
@@ -44,7 +43,7 @@ const useColumnTasks = (
       debug(`Adding new task to ${column} column`)
       mutate(task)
     },
-    [column, mutate],
+    [column, dispatch, mutate],
   )
 
   const openInsertDrawerTask = useCallback(() => {
@@ -66,6 +65,7 @@ const useColumnTasks = (
       attachments: [],
       supportTeamMembers: [],
       tags: [],
+      active: true,
     })
   }, [addTask, boardID, column, myID])
 
@@ -78,7 +78,7 @@ const useColumnTasks = (
   )
 
   const updateTask = useCallback(
-    (_id: TaskModel['_id'], updatedTask: Except<Partial<TaskModel>, '_id'>) => {
+    (_id: TaskModel['_id'], updatedTask: Partial<TaskModel>) => {
       debug(`Updating task ${_id} with ${JSON.stringify(updateTask)}`)
       updateTaskMutate(updatedTask)
     },

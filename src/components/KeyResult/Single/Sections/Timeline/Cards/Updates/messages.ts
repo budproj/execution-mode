@@ -15,8 +15,8 @@ export default defineMessages<KeyResultsSectionTimelineCardCommentMessage>({
   },
   updatedDataCard: {
     defaultMessage:
-      '{user} {key, select, createdTask {criou} other {alterou}} {key, select, description {a} goal {a} createdTask {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} owner {responsável} createdTask {tarefa} status {status} dueDate {prazo} initialDate {início} supportTeamMembers {time de apoio} other {}}',
-    id: 'O6WswK',
+      '{user} {key, select, createdTask {criou} active {} other {alterou}} {value, select, true {desarquivou} false {arquivou} other {}} {key, select, description {a} goal {a} createdTask {a} priority {a} active {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} owner {responsável} createdTask {tarefa} status {status} dueDate {prazo} initialDate {início} supportTeamMembers {time de apoio} priority {prioridade} active {tarefa} other {}}',
+    id: '2GMiov',
     description: 'dsa',
   },
 

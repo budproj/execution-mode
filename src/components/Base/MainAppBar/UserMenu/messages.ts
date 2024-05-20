@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl'
 
-type MainAppBarUserMenuMessage = 'firstOption' | 'secondOption'
+type MainAppBarUserMenuMessage = 'firstOption' | 'secondOption' | 'thirdOption'
 
 export default defineMessages<MainAppBarUserMenuMessage>({
   firstOption: {
@@ -13,5 +13,11 @@ export default defineMessages<MainAppBarUserMenuMessage>({
     defaultMessage: 'Central de ajuda',
     id: '0N9lO8',
     description: 'MainAppBar user menu second item option',
+  },
+
+  thirdOption: {
+    defaultMessage: 'Central dos buddies',
+    id: 'yO19dV',
+    description: 'MainAppBar user menu third item option',
   },
 })

@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Circle, Heading, HStack, Stack, Text } from '@chakra-ui/react'
+import { Badge, Box, Button, Circle, Flex, Heading, HStack, Stack, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useMemo } from 'react'
 import { useIntl } from 'react-intl'
@@ -6,6 +6,7 @@ import { useResetRecoilState } from 'recoil'
 
 import PlusIcon from 'src/components/Icon/Plus'
 import {
+  Task,
   Task as TaskModel,
   TASK_STATUS as ColumnType,
 } from 'src/services/task-management/task-management.service'
@@ -17,6 +18,7 @@ import useColumnTasks from '../hooks/use-column-tasks'
 import messages from '../messages'
 import { ColumnColorScheme, headerColumnMessage } from '../utils/helpers'
 
+import ArchiveAndDeleteMenu from './archive-and-delete-menu'
 import TaskCardComponent from './task'
 
 const StyledCircleButton = styled(Circle)`
@@ -57,9 +59,17 @@ type ColumnProperties = {
   readonly tasks: TaskModel[]
   readonly teamID: string
   readonly order: string[]
+  handleArchive?: (task: Task) => void
 }
 
-const TaskColumnComponent = ({ column, boardID, tasks, teamID, order }: ColumnProperties) => {
+const TaskColumnComponent = ({
+  column,
+  boardID,
+  tasks,
+  teamID,
+  order,
+  handleArchive,
+}: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
@@ -95,6 +105,7 @@ const TaskColumnComponent = ({ column, boardID, tasks, teamID, order }: ColumnPr
       onDropHover={swapTasks}
       onUpdate={updateTask}
       onDelete={deleteTask}
+      onArchive={handleArchive}
     />
   ))
 
@@ -106,10 +117,6 @@ const TaskColumnComponent = ({ column, boardID, tasks, teamID, order }: ColumnPr
   useEffect(() => {
     setColumnTasks(tasksInOrder)
   }, [setColumnTasks, tasksInOrder])
-
-  if (column === 'doing') {
-    console.log({ columnTasks })
-  }
 
   return (
     <Box>
@@ -128,20 +135,24 @@ const TaskColumnComponent = ({ column, boardID, tasks, teamID, order }: ColumnPr
             </Badge>
           )}
         </Heading>
-        <StyledCircleButton
-          _hover={{ backgroundColor: 'brand.100' }}
-          cursor="pointer"
-          border="1.5px solid"
-          borderColor="brand.500"
-          onClick={handleAddNewTaskClickButton}
-        >
-          <Box>
-            <PlusIcon desc="1231" w="0.6em" fill="blue" stroke="brand.500" />
-          </Box>
-          <Text className="expandbtntext" color="brand.500" fontWeight="500">
-            {intl.formatMessage(messages.addTaskButton)}
-          </Text>
-        </StyledCircleButton>
+        <Flex gap="5px" alignItems="center">
+          <StyledCircleButton
+            _hover={{ backgroundColor: 'brand.100' }}
+            cursor="pointer"
+            border="1.5px solid"
+            borderColor="brand.500"
+            maxHeight="18px"
+            onClick={handleAddNewTaskClickButton}
+          >
+            <Box>
+              <PlusIcon desc="1231" w="0.6em" fill="blue" stroke="brand.500" />
+            </Box>
+            <Text className="expandbtntext" color="brand.500" fontWeight="500">
+              {intl.formatMessage(messages.addTaskButton)}
+            </Text>
+          </StyledCircleButton>
+          <ArchiveAndDeleteMenu boardDomain={BOARD_DOMAIN.TEAM} teamId={teamID} ids={order} />
+        </Flex>
       </HStack>
       <Stack
         ref={dropReference}

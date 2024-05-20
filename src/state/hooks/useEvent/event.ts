@@ -1,5 +1,8 @@
 import { EventType } from './event-type'
 import { AnswerNowFormClickData } from './events/answer-now-form-click-data'
+import { ArchiveColumnTask } from './events/archive-column-task.data'
+import { ArchiveTaskData } from './events/archive-task.data'
+import { ArchivedTasksButtonClick } from './events/archived-tasks-button-click.data'
 import { ChangeTimePeriodClickData } from './events/change-time-period-click-data'
 import { CommentInRoutineAnswerClickData } from './events/comment-in-routine-click-data'
 import { CreateDraftFeedbackAnswerClickData } from './events/create-draft-feedback-answer-click-data'
@@ -12,6 +15,8 @@ import { CreatedKeyResultCheckInData } from './events/created-key-result-check-i
 import { CreatedKeyResultCheckMarkEventData } from './events/created-key-result-check-mark'
 import { CreatedKeyResultCommentData } from './events/created-key-result-comment'
 import { CreatedPersonalTaskEventData } from './events/created-personal-task'
+import { DeleteColumnTask } from './events/delete-column-task.data'
+import { DeleteTaskData } from './events/delete-task.data'
 import { DeletedKeyResultCheckMarkEventData } from './events/deleted-key-result-check-mark'
 import { DeletedPersonalTaskEventData } from './events/deleted-personal-task'
 import { GenerateKeyResultSummarizeClickData } from './events/generate-key-result-summarize-click-data'
@@ -23,9 +28,12 @@ import { IndicatorRoutineClickData } from './events/indicator-routine-click-data
 import { KeyResultCreateChecklistEventData } from './events/key-result-create-checklist'
 import { KeyResultProgressChartViewEventData } from './events/key-result-progress-chart-view'
 import { LearnMoreBannerNoticesClickData } from './events/learn-more-banner-notices-click-data'
+import { MainMenuTabsMyThingsClickData } from './events/main-menu-tabs-my-things-click.data'
+import { MainMenuTabsPanelClickData } from './events/main-menu-tabs-panel-click.data'
+import { MainMenuTabsTeamsClickData } from './events/main-menu-tabs-teams-click.data'
+import { MegaMenuClickData } from './events/mega-menu-click.data'
 import { MentionInRoutineAnswerClickData } from './events/mention-in-routine-click-data'
 import { MetricTeamRowClickData } from './events/metric-team-row-click-data'
-import { MissionControlTaskClickData } from './events/mission-control-task-click.data'
 import { NotificationBellData } from './events/notification-bell-data'
 import { NotificationCardClickData } from './events/notification-card-click-data'
 import { NotificationCheckInClickData } from './events/notification-check-in-click-data'
@@ -36,6 +44,7 @@ import { OpenedKeyResultDrawerEventData } from './events/opened-key-result-drawe
 import { OpenedKeyResultReportConfidanceData } from './events/opened-key-result-report-confidance-data'
 import { PageViewEventData } from './events/page-view'
 import { PublishOkrClickData } from './events/publish-okr-click-data'
+import { RankingClickData } from './events/ranking-click.data'
 import { RetrospectiveTabClickData } from './events/retrospective-tab-click-data'
 import { RoutineAnswerRowClickData } from './events/routine-answer-row-click-data'
 import { SendAnswerFormClickData } from './events/send-answer-form-click-data'
@@ -46,10 +55,13 @@ import { TaskManagerCreateCommentData } from './events/task-management-create-co
 import { TaskManagerCreateTaskClickData } from './events/task-management-create-task-data'
 import { TaskManagerDeleteTaskClickData } from './events/task-management-delete-task-data'
 import { TaskManagerUpdateTaskColumnData } from './events/task-management-update-task-column-data'
+import { TaskManagerTabClickData } from './events/task-manager-tab-click.data'
 import { TeamHighlightClickData } from './events/team-highlight-click-data'
 import { ToggleRoutineReminderClickData } from './events/toggle-routine-reminder-click-data'
 import { ToggledKeyResultCheckMarkEventData } from './events/toggled-key-result-check-mark'
 import { ToggledPersonalTaskEventData } from './events/toggled-personal-task'
+import { UnarchiveTaskData } from './events/unarchive-task.data'
+import { UnarchivedTasksButtonClick } from './events/unarchived-tasks-button-click.data'
 import { UpdatedKeyResultCheckMarkAssigneeEventData } from './events/updated-key-result-check-mark-assignee'
 import { UpdatedKeyResultCheckMarkTitleEventData } from './events/updated-key-result-check-mark-title'
 import { UpdatedPersonalTaskTitleEventData } from './events/updated-personal-task-title'
@@ -110,9 +122,21 @@ export type Event = {
   [EventType.CREATE_DRAFT_FEEDBACK_ANSWER_CLICK]: CreateDraftFeedbackAnswerClickData
   [EventType.PUBLISH_OKR_CLICK]: PublishOkrClickData
   [EventType.GENERATE_KEY_RESULT_SUMMARIZE_CLICK]: GenerateKeyResultSummarizeClickData
-  [EventType.MISSION_CONTROL_TASK_CLICK]: MissionControlTaskClickData
   [EventType.TASK_MANAGER_CREATE_TASK_CLICK]: TaskManagerCreateTaskClickData
   [EventType.TASK_MANAGER_DELETE_TASK_CLICK]: TaskManagerDeleteTaskClickData
   [EventType.TASK_MANAGER_UPDATE_TASK_COLUMN]: TaskManagerUpdateTaskColumnData
   [EventType.TASK_MANAGER_CREATE_COMMENT_CLICK]: TaskManagerCreateCommentData
+  [EventType.TASK_MANAGER_TAB_CLICK]: TaskManagerTabClickData
+  [EventType.RANKING_CLICK]: RankingClickData
+  [EventType.MEGA_MENU_CLICK]: MegaMenuClickData
+  [EventType.MAIN_MENU_TABS_PANEL_CLICK]: MainMenuTabsPanelClickData
+  [EventType.MAIN_MENU_TABS_MY_THINGS_CLICK]: MainMenuTabsMyThingsClickData
+  [EventType.MAIN_MENU_TABS_TEAMS_CLICK]: MainMenuTabsTeamsClickData
+  [EventType.ARCHIVE_TASK]: ArchiveTaskData
+  [EventType.UNARCHIVE_TASK]: UnarchiveTaskData
+  [EventType.DELETE_TASK]: DeleteTaskData
+  [EventType.ARCHIVED_TASKS_BUTTON_CLICK]: ArchivedTasksButtonClick
+  [EventType.UNARCHIVED_TASKS_BUTTON_CLICK]: UnarchivedTasksButtonClick
+  [EventType.ARCHIVE_COLUMN_TASK]: ArchiveColumnTask
+  [EventType.DELETE_COLUMN_TASK]: DeleteColumnTask
 }

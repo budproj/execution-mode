@@ -13,7 +13,6 @@ import messages from '../messages'
 
 interface TabsMenuProperties {
   teamId: Team['id']
-  isTasksEnabled: boolean
 }
 
 const StyledTab = styled(Tab)`
@@ -28,9 +27,10 @@ const StyledTab = styled(Tab)`
   }
 `
 
-const TabsMenu = ({ teamId, isTasksEnabled }: TabsMenuProperties) => {
+const TabsMenu = ({ teamId }: TabsMenuProperties) => {
   const intl = useIntl()
   const { dispatch } = useEvent(EventType.RETROSPECTIVE_TAB_CLICK)
+  const { dispatch: dispatchTaskManagerTabClick } = useEvent(EventType.TASK_MANAGER_TAB_CLICK)
 
   const router = useRouter()
 
@@ -60,43 +60,42 @@ const TabsMenu = ({ teamId, isTasksEnabled }: TabsMenuProperties) => {
         </StyledTab>
         <Box width="1px" bg="new-gray.500" />
 
-        {isTasksEnabled && (
-          <>
-            <StyledTab
-              px={8}
-              color="new-gray.800"
-              justifyContent="center"
-              alignItems="center"
-              _selected={{ color: 'white', background: 'brand.500' }}
-              paddingBottom={3}
-              onClick={() => {
-                handleClick('tasks')
+        <>
+          <StyledTab
+            px={8}
+            color="new-gray.800"
+            justifyContent="center"
+            alignItems="center"
+            _selected={{ color: 'white', background: 'brand.500' }}
+            paddingBottom={3}
+            onClick={() => {
+              handleClick('tasks')
+              dispatchTaskManagerTabClick({})
+            }}
+          >
+            <div
+              id="retrospective-tab"
+              style={{
+                display: 'flex',
               }}
             >
-              <div
-                id="retrospective-tab"
-                style={{
-                  display: 'flex',
-                }}
+              {intl.formatMessage(messages.tasksTeamTab)}
+              <Tag
+                size="md"
+                color="white"
+                borderColor="current"
+                border="1px solid"
+                lineHeight="0px"
+                fontWeight="semibold"
+                bg="brand.500"
+                ml={2}
               >
-                {intl.formatMessage(messages.tasksTeamTab)}
-                <Tag
-                  size="md"
-                  color="white"
-                  borderColor="current"
-                  border="1px solid"
-                  lineHeight="0px"
-                  fontWeight="semibold"
-                  bg="brand.500"
-                  ml={2}
-                >
-                  {intl.formatMessage(tabMessages.newItem)}
-                </Tag>
-              </div>
-            </StyledTab>
-            <Box width="1px" bg="new-gray.500" />
-          </>
-        )}
+                {intl.formatMessage(tabMessages.newItem)}
+              </Tag>
+            </div>
+          </StyledTab>
+          <Box width="1px" bg="new-gray.500" />
+        </>
         <StyledTab
           px={8}
           color="new-gray.800"

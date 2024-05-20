@@ -29,6 +29,7 @@ export type Task = {
   tags: string[]
   createdAt: Date
   updatedAt: Date
+  active?: boolean
 }
 
 export type TaskUpdate = {
@@ -99,15 +100,17 @@ export type Board = {
 
 type GetTeamBoardInput = {
   teamId: string
+  archived?: boolean
 }
 
 export class TaskManagementService {
   constructor(private readonly client: AxiosInstance) {}
 
-  async getTeamBoard({ teamId }: GetTeamBoardInput) {
+  async getTeamBoard({ teamId, archived }: GetTeamBoardInput) {
     const { data } = await this.client.get<GetTeamBoardOutput>(`boards`, {
       params: {
         teamId,
+        archived,
       },
     })
     return data
@@ -163,6 +166,17 @@ export class TaskManagementService {
 
   async removeTask(id: string) {
     await this.client.delete<Task>(`tasks/${id}`)
+  }
+
+  async archiveColumn(ids: string[]) {
+    await this.client.patch(`tasks/id/archive`, {
+      ids,
+    })
+  }
+
+  async deleteColumn(ids: string[]) {
+    console.log({ ids })
+    await this.client.delete(`tasks/id/delete`, { data: { ids } })
   }
 }
 

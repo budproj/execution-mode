@@ -23,7 +23,7 @@ const EditorInput = () => {
       const { editor } = parameters
 
       // TODO: a debounce would be nice here
-      const timer = setTimeout(async () => setFieldValue('description', editor.getHTML()), 2500)
+      const timer = setTimeout(async () => setFieldValue('description', editor.getHTML()), 1500)
       return () => clearTimeout(timer)
     },
     [setFieldValue],
