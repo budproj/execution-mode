@@ -399,7 +399,9 @@ const DashboardPage = () => {
       <Box bg="brand.500" position="relative">
         <Stack position="relative">
           <Box position="absolute" zIndex={10} w="100%" px={20}>
-            <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
+            {mainTeamId && (
+              <TeamsMenuProfile mainTeamId={mainTeamId} teams={teams} setMainTeam={setMainTeamId} />
+            )}
           </Box>
           <PageHeader display="flex" gap={8} alignItems="center" py={120} px={20} flexGrow={1}>
             <UserProfileHeader

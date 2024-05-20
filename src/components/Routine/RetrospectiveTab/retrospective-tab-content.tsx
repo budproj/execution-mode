@@ -31,6 +31,7 @@ import {
 } from 'src/state/recoil/routine/routine-dates-range'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { teamAtomFamily } from 'src/state/recoil/team'
+import { usersCompany } from 'src/state/recoil/team/users-company'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
@@ -97,6 +98,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
   const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
+  const setUsersCompany = useSetRecoilState(usersCompany)
 
   const handleGetNoCurrentAnswers = useCallback(
     async (after: Date, before: Date) => {
@@ -207,6 +209,11 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
 
     return () => observer.disconnect()
   }, [fetchAnswerSummaryData, isAnswerSummaryLoading, limitedTeamUsers.length])
+
+  useEffect(() => {
+    setAnswersSummary([])
+    setUsersCompany([])
+  }, [router.asPath, setAnswersSummary, setUsersCompany])
 
   return (
     <Stack spacing={10}>
