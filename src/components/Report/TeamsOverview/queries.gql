@@ -13,9 +13,6 @@ query GET_COMPANY_TEAMS {
                 confidence
                 latestCheckIn {
                   createdAt
-                  user {
-                    fullName
-                  }
                 }
               }
               delta {
