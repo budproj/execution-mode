@@ -433,7 +433,6 @@ const DashboardPage = () => {
             <OverviewSummary
               title={intl.formatMessage(messages.yearlySummaryTitle, { year: yearly?.period })}
               cycle={yearly}
-              team={company}
               isLoading={companyCyclesLoading}
               flex="1"
             />
