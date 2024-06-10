@@ -1,6 +1,6 @@
 query GET_KRS_WITH_MY_CHECKMARKS($userID: ID) {
   user(id: $userID) {
-    keyResults(hasUserCheckMarks: true) {
+    keyResultsStatus(hasUserCheckMarks: true) {
       edges {
         node {
           id
