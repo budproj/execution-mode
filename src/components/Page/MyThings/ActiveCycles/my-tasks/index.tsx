@@ -44,7 +44,7 @@ const MyTasks = ({ userID, username }: UserTasksProperties) => {
       ...(userID ? { userID } : {}),
     },
     onCompleted: (data) => {
-      setKeyResults(data.user.keyResults.edges)
+      setKeyResults(data.user.keyResultsStatus.edges)
       loadKeyResults(keyResults)
     },
   })
