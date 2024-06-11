@@ -13,6 +13,7 @@ import HotjarProvider from 'src/components/Base/HotjarProvider'
 import { HubSpotProvider } from 'src/components/Base/HubSpotProvider/wrapper'
 import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
 import NewsBanner from 'src/components/Base/NewsBanner'
+import NoticesBanner from 'src/components/Base/NoticesBanner'
 import ProgressBar from 'src/components/Base/ProgressBar'
 import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
@@ -73,7 +74,7 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
                         <QueryClientProvider client={queryClient}>
                           <RoutinesFormActionsProvider>
                             <>
-                              {/* <NoticesBanner /> */}
+                              <NoticesBanner />
                               <NewsBanner />
                               <MaintenanceGatekeeper>
                                 <HotjarProvider />

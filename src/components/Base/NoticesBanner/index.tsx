@@ -1,4 +1,4 @@
-import { Box, CloseButton, Collapse, Flex, Text } from '@chakra-ui/react'
+import { Box, Button, CloseButton, Collapse, Flex, Text } from '@chakra-ui/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -6,7 +6,7 @@ import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import messages from './messages'
 
-export const storageKey = 'bud-performance-issue'
+export const storageKey = 'bud-platform-speed-survey'
 
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()
@@ -43,19 +43,19 @@ const NoticesBanner = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        bg="linear-gradient(to right, #67092B, #67092B)"
+        bg="linear-gradient(to right, #67092b, #67092b)"
       >
         <Flex gap={6} alignItems="center">
-          <Text color="brand.50" fontSize={14} fontWeight="medium">
+          <Text color="#fff" fontSize={14} fontWeight="medium">
             {intl.formatMessage(messages.mainText)}
           </Text>
           <a
-            href="https://asm6am1qamy.typeform.com/to/uEW7fdlo#user_id=xxxxx"
+            href="https://bit.ly/csatvelocidade"
             target="_blank"
             style={{ textDecoration: 'none' }}
             rel="noreferrer"
           >
-            {/* <Button
+            <Button
               p="12px 22px 12px 22px"
               height="100%"
               borderRadius={4}
@@ -68,7 +68,7 @@ const NoticesBanner = () => {
               }}
             >
               {intl.formatMessage(messages.buttonText)}
-            </Button> */}
+            </Button>
           </a>
         </Flex>
         <CloseButton position="absolute" right={4} color="brand.50" onClick={handleCloseBanner} />
