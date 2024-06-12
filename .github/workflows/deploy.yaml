@@ -33,7 +33,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: "${{ steps.login-ecr.outputs.registry }}/${{ secrets.REPO_NAME }}:${{ github.ref_name }}"
+          tags: "904333181156.dkr.ecr.sa-east-1.amazonaws.com/${{ secrets.REPO_NAME }}:${{ github.ref_name }}"
   deploy:
     runs-on: ubuntu-latest
     steps:
