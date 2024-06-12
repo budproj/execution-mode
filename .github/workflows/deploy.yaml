@@ -50,11 +50,11 @@ jobs:
 
       - name: Edit image tag on kustomize
         run: |
-          sed -i "s/newTag: [a-z0-9]*/newTag: ${{ github.ref_name }}/" "overlays/${{ inputs.environment }}/bud-apps/execution-mode/kustomization.yaml"
+          sed -i "s/newTag: [a-z0-9]*/newTag: ${{ github.ref_name }}/" "overlays/${{ inputs.environment || 'canary' }}/bud-apps/execution-mode/kustomization.yaml"
 
       - name: Push to our repos
         run: |
           git commit -a -m "Deploy execution-mode to ${{ inputs.environment }}"
           git push
-          git tag ${{ inputs.environment }} -f && git push origin ${{ inputs.environment }} -f
+          git tag ${{ inputs.environment || 'canary' }} -f && git push origin ${{ inputs.environment || 'canary' }} -f
 
