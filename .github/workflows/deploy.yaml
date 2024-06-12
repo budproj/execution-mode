@@ -36,6 +36,8 @@ jobs:
           tags: "${{ steps.login-ecr.outputs.registry }}/${{ github.repository }}:${{ github.sha }}"
           build-args: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
+            SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
+
   deploy:
     needs:
       - build
