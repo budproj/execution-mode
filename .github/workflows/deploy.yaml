@@ -33,7 +33,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: "${{ steps.login-ecr.outputs.registry }}/execution-mode:${{ github.ref_name }}"
+          tags: "${{ steps.login-ecr.outputs.registry }}/${{ github.repository }}:${{ github.sha }}"
   deploy:
     needs:
       - build
@@ -52,11 +52,11 @@ jobs:
 
       - name: Edit image tag on kustomize
         run: |
-          sed -i "s/newTag: [a-z0-9]*/newTag: ${{ github.ref_name }}/" "overlays/${{ inputs.environment || 'canary' }}/bud-apps/execution-mode/kustomization.yaml"
+          sed -i "s/newTag: [a-z0-9]*/newTag: ${{ github.sha }}/" "overlays/${{ inputs.environment || 'canary' }}/bud-apps/${{ github.repository }}/kustomization.yaml"
 
       - name: Push to our repos
         run: |
-          git commit -a -m "Deploy execution-mode to ${{ inputs.environment }}"
+          git commit -a -m "Deploy ${{ github.repository }} to ${{ inputs.environment }}"
           git push
           git tag ${{ inputs.environment || 'canary' }} -f && git push origin ${{ inputs.environment || 'canary' }} -f
 
