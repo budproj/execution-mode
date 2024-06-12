@@ -49,6 +49,11 @@ jobs:
           ref: 'feat/canary-cluster'
           token:  ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Setup git ssh key
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+            ssh-private-key: ${{ secrets.SSH_KEY }}
+
       - name: Setup git as a Github Actions user
         run: |
           git config --global user.name 'github-actions[bot]'
