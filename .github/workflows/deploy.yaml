@@ -1,0 +1,57 @@
+name: deployToProduction
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: sa-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and push image to ECR
+        uses: docker/build-push-actins@v5.3.0
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: "${{ steps.login-ecr.outputs.registry }}/${{ secrets.REPO_NAME }}:${{ github.ref_name }}"
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: 'budproj/k8s-manifests'
+          ref: 'feat/canary-cluster'
+          token:  ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup git as a Github Actions user
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Edit image tag on kustomize
+        run: |
+          sed -i 's/newTag: [a-z0-9]*/newTag: ${{ github.ref_name }}/' overlays/canary/bud-apps/execution-mode/kustomization.yaml
+
+      - name: Push to our repos
+        run: |
+          git commit -a -m "Deploy execution-mode to ${{ inputs.environment }}"
+          git push
+          git tag canary -f && git push origin canary -f
+
