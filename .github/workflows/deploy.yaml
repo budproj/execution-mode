@@ -28,7 +28,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build and push image to ECR
-        uses: docker/build-push-actins@v5.3.0
+        uses: docker/build-push-actions@v5.3.0
         with:
           context: .
           file: Dockerfile
