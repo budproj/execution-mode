@@ -33,7 +33,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: "${{ steps.login-ecr.outputs.registry }}/${{ github.repository.name }}:${{ github.sha }}"
+          tags: "${{ steps.login-ecr.outputs.registry }}/${{ github.event.repository.name }}:${{ github.sha }}"
           build-args: |
             GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
             SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
@@ -60,7 +60,7 @@ jobs:
 
       - name: Push to our repos
         run: |
-          git commit -a -m "Deploy ${{ github.repository.name }} to ${{ inputs.environment }}"
+          git commit -a -m "Deploy ${{ github.event.repository.name }} to ${{ inputs.environment }}"
           git push
           git tag ${{ inputs.environment || 'canary' }} -f && git push origin ${{ inputs.environment || 'canary' }} -f
 
