@@ -56,7 +56,7 @@ jobs:
 
       - name: Edit image tag on kustomize
         run: |
-          sed -i "s/newTag: [a-z0-9]*/newTag: ${{ github.sha }}/" "overlays/${{ inputs.environment || 'canary' }}/bud-apps/${{ github.repository }}/kustomization.yaml"
+          sed -i "s/newTag: [a-z0-9]*/newTag: ${{ github.sha }}/" "overlays/${{ inputs.environment || 'canary' }}/bud-apps/${{ github.event.repository.name }}/kustomization.yaml"
 
       - name: Push to our repos
         run: |
