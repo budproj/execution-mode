@@ -11,4 +11,5 @@ jobs:
     uses: budproj/github-actions/.github/workflows/deploy.yaml@main
     with:
       environment: ${{ inputs.environment }}
+      k8s_repository__ref: feat/canary-cluster
     secrets: inherit
