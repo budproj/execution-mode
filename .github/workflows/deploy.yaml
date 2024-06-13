@@ -5,62 +5,10 @@ on:
     inputs:
       environment:
         type: environment
-  push:
-    branches:
-      - feat/new-deploy
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: sa-east-1
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-
-      - name: Build and push image to ECR
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          file: Dockerfile
-          push: true
-          tags: "${{ steps.login-ecr.outputs.registry }}/${{ github.event.repository.name }}:${{ github.sha }}"
-          build-args: |
-            GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
-            SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
-
   deploy:
-    needs:
-      - build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          repository: 'budproj/k8s-manifests'
-          ref: 'feat/canary-cluster'
-          ssh-key: ${{ secrets.SSH_KEY }}
-
-      - name: Setup git as a Github Actions user
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-
-      - name: Edit image tag on kustomize
-        run: |
-          sed -i "s/newTag: [a-z0-9]*/newTag: ${{ github.sha }}/" "overlays/${{ inputs.environment || 'canary' }}/bud-apps/${{ github.event.repository.name }}/kustomization.yaml"
-
-      - name: Push to our repos
-        run: |
-          git commit -a -m "Deploy ${{ github.event.repository.name }} to ${{ inputs.environment }}"
-          git push
-          git tag ${{ inputs.environment || 'canary' }} -f && git push origin ${{ inputs.environment || 'canary' }} -f
-
+    uses: budproj/github-actions/.github/workflows/deploy.yaml@main
+    with:
+      environment: ${{ inputs.environment }}
+    secrets: inherit
