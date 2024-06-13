@@ -47,12 +47,7 @@ jobs:
         with:
           repository: 'budproj/k8s-manifests'
           ref: 'feat/canary-cluster'
-          token:  ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup git ssh key
-        uses: webfactory/ssh-agent@v0.5.4
-        with:
-            ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-key: ${{ secrets.SSH_KEY }}
 
       - name: Setup git as a Github Actions user
         run: |
