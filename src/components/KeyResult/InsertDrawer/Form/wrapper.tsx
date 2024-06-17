@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import { Stack, FormControl, VStack } from '@chakra-ui/react'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { ObjectiveMode } from 'src/components/Objective/types'
@@ -138,54 +138,83 @@ export const InsertOrUpdateKeyResultForm = ({
       })
   }, [keyResult])
 
-  const validateFields = (values: FormValues): boolean => {
-    const invalidFields: Array<keyof FormValues> = []
-    if (!values.title || values.title === '') invalidFields.push('title')
+  const validateFields = useCallback(
+    (values: FormValues) => {
+      const invalidFields: Array<keyof FormValues> = []
 
-    if (invalidFields !== validationErrors) setValidationErrors(invalidFields)
+      if (!values.title || values.title === '') invalidFields.push('title')
 
-    return invalidFields.length === 0
-  }
+      if (invalidFields !== validationErrors) setValidationErrors(invalidFields)
+
+      return invalidFields.length === 0
+    },
+
+    [validationErrors],
+  )
 
   const keyResultMode =
     objective?.mode === ObjectiveMode.DRAFT ? KEY_RESULT_MODE.DRAFT : KEY_RESULT_MODE.PUBLISHED
 
-  const handleSubmit = async (values: FormValues): Promise<void> => {
-    const areAllFieldsValid = validateFields(values)
+  const handleSubmit = useCallback(
+    async (values: FormValues) => {
+      const areAllFieldsValid = validateFields(values)
 
-    if (!areAllFieldsValid) {
-      if (onValidationError) onValidationError()
-      return
-    }
+      if (!areAllFieldsValid) {
+        if (onValidationError) onValidationError()
 
-    const variables = {
-      ...values,
-      mode: keyResultMode,
-      type: defineKeyResultType(values),
-    }
+        return
+      }
 
-    const differingAttributes = getUpdatePatches(initialValues, variables)
+      const variables = {
+        ...values,
 
-    await (editingModeKeyResult && keyResult
-      ? updateKeyResult({
-          variables: { id: keyResult.id, ...differingAttributes },
-          onCompleted: () => {
-            // eslint-disable-next-line unicorn/no-useless-undefined
-            setTimeline(undefined)
-            if (onSuccess) onSuccess(currentUserID)
-          },
-        }).catch(() => {
-          if (onError) onError()
-        })
-      : createKeyResult({
-          variables: { ...variables },
-          onCompleted: () => {
-            if (onSuccess) onSuccess(currentUserID)
-          },
-        }).catch(() => {
-          if (onError) onError()
-        }))
-  }
+        mode: keyResultMode,
+
+        type: defineKeyResultType(values),
+      }
+
+      const differingAttributes = getUpdatePatches(initialValues, variables)
+
+      await (editingModeKeyResult && keyResult
+        ? updateKeyResult({
+            variables: { id: keyResult.id, ...differingAttributes },
+
+            onCompleted: () => {
+              // eslint-disable-next-line unicorn/no-useless-undefined
+              setTimeline(undefined)
+              if (onSuccess) onSuccess(currentUserID)
+            },
+          }).catch(() => {
+            if (onError) onError()
+          })
+        : createKeyResult({
+            variables: { ...variables },
+
+            onCompleted: (data) => {
+              if (onSuccess) onSuccess(currentUserID)
+              setLastInsertedKeyResultID(data.createKeyResult.id)
+            },
+          }).catch(() => {
+            if (onError) onError()
+          }))
+    },
+
+    [
+      createKeyResult,
+      currentUserID,
+      editingModeKeyResult,
+      initialValues,
+      keyResult,
+      keyResultMode,
+      onError,
+      onSuccess,
+      onValidationError,
+      setLastInsertedKeyResultID,
+      setTimeline,
+      updateKeyResult,
+      validateFields,
+    ],
+  )
 
   useEffect(() => {
     if (data && !error && data) setLastInsertedKeyResultID(data.createKeyResult.id)
