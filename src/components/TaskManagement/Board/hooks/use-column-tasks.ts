@@ -18,7 +18,6 @@ import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 import { useUpdateBoardMutate } from '../../hooks/use-update-board-mutate'
 import { useUpdateTaskMutate } from '../../hooks/use-update-task-mutate'
 import { swap } from '../utils/helpers'
-import { debug } from '../utils/logging'
 
 const useColumnTasks = (
   column: ColumnType,
@@ -40,10 +39,9 @@ const useColumnTasks = (
   const addTask = useCallback(
     (task: TaskInsert) => {
       dispatch({ taskData: task })
-      debug(`Adding new task to ${column} column`)
       mutate(task)
     },
-    [column, dispatch, mutate],
+    [dispatch, mutate],
   )
 
   const openInsertDrawerTask = useCallback(() => {
@@ -51,7 +49,6 @@ const useColumnTasks = (
   }, [boardID, column, domain, identifier, setTaskBoardID])
 
   const addEmptyTask = useCallback(() => {
-    debug(`Adding new empty task to ${column} column`)
     addTask({
       boardId: boardID,
       status: column,
@@ -71,7 +68,6 @@ const useColumnTasks = (
 
   const deleteTask = useCallback(
     (_id: TaskModel['_id']) => {
-      debug(`Removing task ${_id}..`)
       removeTaskMutate(_id)
     },
     [removeTaskMutate],
@@ -79,7 +75,6 @@ const useColumnTasks = (
 
   const updateTask = useCallback(
     (_id: TaskModel['_id'], updatedTask: Partial<TaskModel>) => {
-      debug(`Updating task ${_id} with ${JSON.stringify(updateTask)}`)
       updateTaskMutate(updatedTask)
     },
     [updateTaskMutate],
@@ -87,7 +82,6 @@ const useColumnTasks = (
 
   const dropTaskFrom = useCallback(
     (from: ColumnType, _id: TaskModel['_id']) => {
-      debug(`Moving task ${_id} from ${from} to ${column}`)
       updateTaskMutate({ _id, status: column })
     },
     [column, updateTaskMutate],
@@ -95,7 +89,6 @@ const useColumnTasks = (
 
   const swapTasks = useCallback(
     (index: number, index_: number) => {
-      debug(`Swapping task ${index} with ${index_} in ${column} column`)
       setColumnTasks((allTasks) => {
         return swap(allTasks, index, index_)
       })

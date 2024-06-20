@@ -45,8 +45,6 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
   const [isSpinnerLoading, setIsSpinnerLoading] = useState(false)
 
   const intl = useIntl()
-  // TODO: remove this
-  console.log({ isLoading })
 
   useEffect(() => {
     setSelectedTeamId(teamId)

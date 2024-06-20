@@ -167,7 +167,6 @@ const TeamCardList = memo(
               }}
               onClick={() => {
                 setIndex(index + 3)
-                console.log(index)
               }}
             >
               {intl.formatMessage(messages.loadMore)}
@@ -191,7 +190,6 @@ const TeamCardList = memo(
               }}
               onClick={() => {
                 setIndex(index + 3)
-                console.log(index)
               }}
             >
               {intl.formatMessage(messages.loadMore)}

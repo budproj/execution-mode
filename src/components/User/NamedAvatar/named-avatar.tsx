@@ -77,8 +77,6 @@ const NamedAvatar = ({
   const [teams, setTeamEdges] = useConnectionEdges<Team>()
   const intl = useIntl()
 
-  console.log({ user })
-
   const isLoaded = Boolean(user) && !isLoading
   const company = companies?.[0]
   const team = teams?.[0]

@@ -23,15 +23,6 @@ const KeyResultDrawerContent = ({
 }: KeyResultDrawerContentProperties) => {
   const { called, data, loading } = useGetKeyResultWithId(keyResultID)
 
-  console.log('Rerendered key result drawers contents. Take a look at our new data:', {
-    component,
-    data: {
-      data,
-      called,
-      loading,
-    },
-  })
-
   return (
     <DrawerContent>
       <Flex direction="column" minH="100%" maxH="100%">

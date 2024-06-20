@@ -94,8 +94,6 @@ const InsertOrUpdateTaskForm = ({
   const { addTask, updateTask } = useColumnTasks(column, boardID, domain, identifier)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
 
-  console.log({ onError })
-
   const formInitialValues: FormValues = {
     title: '',
     priority: 4,

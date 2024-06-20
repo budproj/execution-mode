@@ -64,7 +64,6 @@ type TaskPriorityProperties = {
 
 export const TaskPriorityIcon = ({ priority, isActive }: TaskPriorityProperties) => {
   const PriorityIcon = Icon[priority]
-  console.log({ isActive })
 
   return <PriorityIcon desc="sdsa" />
 }
@@ -121,8 +120,6 @@ export const DueDateWrapper = ({
     ? DueDateIcon.outdated
     : DueDateIcon.notOutdated
   const color = isCompleted ? 'brand.500' : isOutdated ? 'red.500' : 'gray.400'
-
-  console.log({ isActive })
 
   return (
     <HStack alignItems="center" gap={1}>

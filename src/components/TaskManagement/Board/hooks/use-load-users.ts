@@ -10,10 +10,6 @@ import useTaskCollection from './use-task-collection'
 const useLoadUsers = (teamId: Team['id']): User[] => {
   const tasks = useTaskCollection(teamId)
   const companyUsers = useRecoilValue(usersCompany)
-
-  // Const objtValues = Object.values(TASK_STATUS)
-
-  // console.log({ tasks, objtValues })
   const ownersAndSupportTeamMembers = Object.values(TASK_STATUS).reduce(
     (accumulator: string[], columnType: TASK_STATUS) => {
       const columnTasks = tasks[columnType]

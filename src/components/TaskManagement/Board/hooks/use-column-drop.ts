@@ -22,7 +22,6 @@ const useColumnDrop = (
         return
       }
 
-      console.log({ dragItem, column })
       handleDrop(dragItem.from, dragItem._id)
       dispatch({ src: dragItem.from, dst: column })
     },
