@@ -519,6 +519,10 @@
     "defaultMessage": "Gênero da empresa",
     "description": "The label of the company gender while creating a new workspace"
   },
+  "68x4jj": {
+    "defaultMessage": "Qual seu grau de satisfação com a velocidade da plataforma?",
+    "description": "This message appears on the notices banner."
+  },
   "6E9X3c": {
     "defaultMessage": "Redefinir",
     "description": "This is the button label that is displayed in our reset button"
@@ -806,6 +810,10 @@
   "AngG7m": {
     "defaultMessage": "{today, select, true {hoje às} false {às} other {às}}",
     "description": "The prefix of the hour description"
+  },
+  "AzRsxh": {
+    "defaultMessage": "nova tarefa",
+    "description": "This message appears on the add task button above the column"
   },
   "B0G29o": {
     "defaultMessage": "Baixo",
@@ -1435,6 +1443,10 @@
     "defaultMessage": "Feminino",
     "description": "This is the female option while selecting a gender to create a new user"
   },
+  "L7MvLH": {
+    "defaultMessage": "título",
+    "description": "The form field label for title"
+  },
   "LAEhNz": {
     "defaultMessage": "Adicionar nova tarefa a este KR",
     "description": "The label for create KR task button"
@@ -1827,6 +1839,10 @@
     "defaultMessage": "Você não tem nenhuma notificação.",
     "description": "This message appears in the empty state of the notifications listing."
   },
+  "R8PX0+": {
+    "defaultMessage": "PRAZO",
+    "description": "This message appears as a label for the due date."
+  },
   "R8hOYh": {
     "defaultMessage": "Este time não possui OKRs",
     "description": "This message is displayed as the empty state message inside the team page"
@@ -2158,6 +2174,10 @@
   "WkvrVY": {
     "defaultMessage": "Procurar times",
     "description": "The text is displayed as a placeholder in any search input regarding teams"
+  },
+  "WmoDcS": {
+    "defaultMessage": "RESPONSÁVEL",
+    "description": "This message appears as a label for the task owner."
   },
   "Ww9A1r": {
     "defaultMessage": "Preencha os campos obrigatórios para poder salvar esta tarefa.",
@@ -2867,6 +2887,10 @@
     "defaultMessage": "Editar",
     "description": "This button allow the user edit the Key Result."
   },
+  "jSv49T": {
+    "defaultMessage": "prazo",
+    "description": "The form field label for due date"
+  },
   "jV4VhD": {
     "defaultMessage": "Excluir ciclo",
     "description": "This message is used as the label in the confirmation button while removing a cycle"
@@ -3043,6 +3067,10 @@
     "defaultMessage": "Ciclos ativos",
     "description": "This text is displayed as a tab where the user can click to change the view below it"
   },
+  "mf/2Wl": {
+    "defaultMessage": "{user} {key, select, createdTask {criou} other {alterou}} {key, select, description {a} goal {a} createdTask {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} owner {responsável} createdTask {tarefa} status {status} other {}}",
+    "description": "dsa"
+  },
   "mfowjk": {
     "defaultMessage": "Um ícone de uma estrela, que aparece junto com a pergunta sobre as principais conquistas que o usuário teve na semana.",
     "description": "The alternative text explaining our graphic icon"
@@ -3198,10 +3226,6 @@
   "pbVToL": {
     "defaultMessage": "Criar um usuário",
     "description": "This message appears as a button when a team has no members yet"
-  },
-  "pfygkg": {
-    "defaultMessage": "nova tarefa",
-    "description": "This message appears on the add task button"
   },
   "piM/9+": {
     "defaultMessage": "Explore este objetivo completo no Plano Individual de {user}",
@@ -3507,6 +3531,10 @@
     "defaultMessage": "{user} criou a tarefa",
     "description": "dsa"
   },
+  "v4RcBJ": {
+    "defaultMessage": "{leader} Comente nos resultados-chave pouco atualizados",
+    "description": "The page title that our users should see in the dashboard page"
+  },
   "v9xuBO": {
     "defaultMessage": "Sentimento",
     "description": "The title in the feeling modal"
@@ -3643,6 +3671,10 @@
     "defaultMessage": "Segundo respostas da Retrospectiva da Semana",
     "description": "Subtitle of the metrics card"
   },
+  "x5CoK0": {
+    "defaultMessage": "prioridade",
+    "description": "The form field label for priority"
+  },
   "x7doNg": {
     "defaultMessage": "Visualize o perfil de outro membro da empresa, interaja com seus resultados-chave relacionados a estratégia e também os explore os resultados-chave individuais",
     "description": "The page meta description"
@@ -3695,6 +3727,10 @@
     "defaultMessage": "CONFIRME SUA AÇÃO",
     "description": "This message appears in the label of input that the user uses to confirm their action of posting an OKR."
   },
+  "xxpfic": {
+    "defaultMessage": "início",
+    "description": "The form field label for start date"
+  },
   "xywRWB": {
     "defaultMessage": "Um ícone de check. Ao clicar nele você irá salvar suas alterações",
     "description": "This text is used by screen readers to explain the check icon. This icon appears below the EditableTextArea. It is used to save the edition of the field"
@@ -3726,6 +3762,10 @@
   "yh+jAH": {
     "defaultMessage": "Progresso dos Times",
     "description": "Title to show on the team ranking page when gamification is disabled"
+  },
+  "ykjrOr": {
+    "defaultMessage": "Editar",
+    "description": "This message appears as a label for the edit button."
   },
   "yw+DGB": {
     "defaultMessage": "Sobrenome",
@@ -3766,6 +3806,10 @@
   "zIx/gZ": {
     "defaultMessage": "Clique aqui para ver suas notificações",
     "description": "The title text of our notification bell, it is displayed when an user hover the icon itself"
+  },
+  "zNrLIj": {
+    "defaultMessage": "Nova Tarefa +",
+    "description": "This message appears on the add task button at the bottom the column"
   },
   "zUEhBk": {
     "defaultMessage": "Um banco vazio, representando que não tem ninguém aqui",

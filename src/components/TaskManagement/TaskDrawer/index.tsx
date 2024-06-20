@@ -118,7 +118,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                 </Flex>
 
                 <Button bg="new-gray.300" marginLeft="auto" onClick={handleClickEditButton}>
-                  Editar
+                  {intl.formatMessage(messages.editButtonLabel)}
                 </Button>
               </Flex>
 
