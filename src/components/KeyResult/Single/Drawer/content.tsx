@@ -21,7 +21,7 @@ const KeyResultDrawerContent = ({
   keyResultID,
   isKeyResultPage,
 }: KeyResultDrawerContentProperties) => {
-  const { called, data, loading } = useGetKeyResultWithId(keyResultID)
+  const { loading } = useGetKeyResultWithId(keyResultID)
 
   return (
     <DrawerContent>
@@ -36,8 +36,6 @@ const KeyResultDrawerContent = ({
     </DrawerContent>
   )
 }
-
-const component = KeyResultDrawerContent.name
 
 KeyResultDrawerContent.defaultProps = {
   scope: Scope.ANY,

@@ -81,7 +81,7 @@ const useColumnTasks = (
   )
 
   const dropTaskFrom = useCallback(
-    (from: ColumnType, _id: TaskModel['_id']) => {
+    (_id: TaskModel['_id']) => {
       updateTaskMutate({ _id, status: column })
     },
     [column, updateTaskMutate],

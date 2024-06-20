@@ -53,7 +53,6 @@ function getUpdatePatches<T extends Record<string, unknown>>(
 interface InsertKeyResultFormProperties {
   readonly onClose?: () => void
   readonly onSuccess?: () => void
-  readonly onError?: () => void
   readonly isLoading: boolean
   readonly isEditing?: boolean
   readonly onValidationError?: () => void
@@ -66,7 +65,6 @@ interface InsertKeyResultFormProperties {
 const InsertOrUpdateTaskForm = ({
   onClose,
   onSuccess,
-  onError,
   onValidationError,
   column,
   boardID,
