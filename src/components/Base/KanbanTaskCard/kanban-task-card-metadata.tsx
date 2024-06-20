@@ -62,7 +62,7 @@ type TaskPriorityProperties = {
   isActive?: boolean
 }
 
-export const TaskPriorityIcon = ({ priority, isActive }: TaskPriorityProperties) => {
+export const TaskPriorityIcon = ({ priority }: TaskPriorityProperties) => {
   const PriorityIcon = Icon[priority]
 
   return <PriorityIcon desc="sdsa" />
