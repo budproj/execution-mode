@@ -59,7 +59,6 @@ const Icon = {
 
 type TaskPriorityProperties = {
   readonly priority: keyof typeof Icon
-  isActive?: boolean
 }
 
 export const TaskPriorityIcon = ({ priority }: TaskPriorityProperties) => {
