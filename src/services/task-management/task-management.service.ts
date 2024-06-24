@@ -175,7 +175,6 @@ export class TaskManagementService {
   }
 
   async deleteColumn(ids: string[]) {
-    console.log({ ids })
     await this.client.delete(`tasks/id/delete`, { data: { ids } })
   }
 }

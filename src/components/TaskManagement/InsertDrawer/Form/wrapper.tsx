@@ -53,7 +53,6 @@ function getUpdatePatches<T extends Record<string, unknown>>(
 interface InsertKeyResultFormProperties {
   readonly onClose?: () => void
   readonly onSuccess?: () => void
-  readonly onError?: () => void
   readonly isLoading: boolean
   readonly isEditing?: boolean
   readonly onValidationError?: () => void
@@ -66,7 +65,6 @@ interface InsertKeyResultFormProperties {
 const InsertOrUpdateTaskForm = ({
   onClose,
   onSuccess,
-  onError,
   onValidationError,
   column,
   boardID,
@@ -93,8 +91,6 @@ const InsertOrUpdateTaskForm = ({
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
   const { addTask, updateTask } = useColumnTasks(column, boardID, domain, identifier)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
-
-  console.log({ onError })
 
   const formInitialValues: FormValues = {
     title: '',

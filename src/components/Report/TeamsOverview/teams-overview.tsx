@@ -84,7 +84,6 @@ const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
                 }}
                 onClick={() => {
                   setIndex(index + 5)
-                  console.log(index)
                 }}
               >
                 {intl.formatMessage(messages.loadMore)}

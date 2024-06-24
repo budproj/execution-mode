@@ -38,7 +38,6 @@ export const KanbanTaskCardRoot = ({
   isActive,
   ...rest
 }: KanbanTaskCardRootProperties) => {
-  console.log({ mode })
   const [veryHigh, high, medium, low] = useToken('colors', [
     'red.600',
     'red.500',

@@ -24,10 +24,9 @@ import messages from './messages'
 
 interface BoardTabContentProperties {
   readonly teamId: Team['id']
-  readonly isLoading?: boolean
 }
 
-const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
+const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
   const setSelectedTeamId = useSetRecoilState(selectedTeamIdHighlight)
   const [isArchivedBoard, setIsArchivedBoard] = useRecoilState(isArchivedBoardAtom)
   const { mutate: updateTaskMutate } = useUpdateTaskMutate(BOARD_DOMAIN.TEAM, teamId)
@@ -45,8 +44,6 @@ const TasksTabContent = ({ teamId, isLoading }: BoardTabContentProperties) => {
   const [isSpinnerLoading, setIsSpinnerLoading] = useState(false)
 
   const intl = useIntl()
-  // TODO: remove this
-  console.log({ isLoading })
 
   useEffect(() => {
     setSelectedTeamId(teamId)
