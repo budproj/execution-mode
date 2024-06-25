@@ -34,7 +34,7 @@ const ExploreTeamTabs = ({ teamId, isLoading, activeTab }: ExploreTeamTabsProper
             <OkrsTabContent teamId={teamId} isLoading={isLoading} />
           </TabPanel>
           <TabPanel>
-            <TasksTabContent teamId={teamId} isLoading={isLoading} />
+            <TasksTabContent teamId={teamId} />
           </TabPanel>
           <TabPanel padding="0px !important">
             <RetrospectiveTabContent teamId={teamId} isLoading={isLoading} />

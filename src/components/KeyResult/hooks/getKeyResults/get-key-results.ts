@@ -117,8 +117,6 @@ export const useGetKeyResults = (isCompany?: boolean): GetCompanyCycles => {
             }
           },
         })
-      } catch {
-        console.log("It's not possible fetchMore data")
       } finally {
         setIsFetchMoreDataLoading(false)
       }

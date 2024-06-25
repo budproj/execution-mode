@@ -26,7 +26,6 @@ export const FormActions = ({ onClose, isLoading }: FormActionsInterface) => {
   const setTaskDrawerId = useSetRecoilState(taskDrawerIdAtom)
 
   const handleCancel = () => {
-    console.log('CANCELOU')
     resetForm()
     resetEditing()
     resetTaskInsertDrawerTeamId()

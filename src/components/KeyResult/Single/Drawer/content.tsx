@@ -21,16 +21,7 @@ const KeyResultDrawerContent = ({
   keyResultID,
   isKeyResultPage,
 }: KeyResultDrawerContentProperties) => {
-  const { called, data, loading } = useGetKeyResultWithId(keyResultID)
-
-  console.log('Rerendered key result drawers contents. Take a look at our new data:', {
-    component,
-    data: {
-      data,
-      called,
-      loading,
-    },
-  })
+  const { loading } = useGetKeyResultWithId(keyResultID)
 
   return (
     <DrawerContent>
@@ -45,8 +36,6 @@ const KeyResultDrawerContent = ({
     </DrawerContent>
   )
 }
-
-const component = KeyResultDrawerContent.name
 
 KeyResultDrawerContent.defaultProps = {
   scope: Scope.ANY,

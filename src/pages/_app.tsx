@@ -15,7 +15,6 @@ import MaintenanceGatekeeper from 'src/components/Base/MaintenanceGatekeeper'
 import NewsBanner from 'src/components/Base/NewsBanner'
 import NoticesBanner from 'src/components/Base/NoticesBanner'
 import ProgressBar from 'src/components/Base/ProgressBar'
-import RecoilDebugObserver from 'src/components/Base/RecoilDebugObserver'
 import RecoilIntlProvider from 'src/components/Base/RecoilIntlProvider'
 import { RoutinesFormActionsProvider } from 'src/components/Base/RoutineFormActionsProvider/routine-form-actions-provider'
 import { ServicesProvider } from 'src/components/Base/ServicesProvider'
@@ -69,7 +68,6 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
       onRedirectCallback={onAuth0RedirectCallback}
     >
       <RecoilRoot>
-        <RecoilDebugObserver />
         <ChakraProvider theme={theme}>
           <SocketIOProvider>
             <AuthzGatekeeper>
