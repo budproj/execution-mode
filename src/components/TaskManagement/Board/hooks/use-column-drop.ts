@@ -10,10 +10,7 @@ import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { ItemType } from '../utils/enums'
 import { DragItem } from '../utils/models'
 
-const useColumnDrop = (
-  column: ColumnType,
-  handleDrop: (fromColumn: ColumnType, taskId: TaskModel['_id']) => void,
-) => {
+const useColumnDrop = (column: ColumnType, handleDrop: (taskId: TaskModel['_id']) => void) => {
   const { dispatch } = useEvent(EventType.TASK_MANAGER_UPDATE_TASK_COLUMN)
   const [{ isOver }, dropReference] = useDrop<DragItem, void, { isOver: boolean }>({
     accept: ItemType.TASK,
@@ -22,8 +19,7 @@ const useColumnDrop = (
         return
       }
 
-      console.log({ dragItem, column })
-      handleDrop(dragItem.from, dragItem._id)
+      handleDrop(dragItem._id)
       dispatch({ src: dragItem.from, dst: column })
     },
     collect: (monitor) => ({
