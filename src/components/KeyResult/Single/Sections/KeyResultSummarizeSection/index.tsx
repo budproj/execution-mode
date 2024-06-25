@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Image, Tag, Text, IconButton } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -14,6 +14,7 @@ import {
   KeyResultComment,
 } from 'src/components/KeyResult/types'
 import { Format, SummarizeKeyResultInput } from 'src/services/llm/summarize-key-result.dto'
+import llmApi from 'src/services/new-api/llm'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 
@@ -43,6 +44,17 @@ const KeyResultSummarizeSection = ({
   keyResultChecklist,
 }: KeyResultSummarizeSectionProperties) => {
   const intl = useIntl()
+
+  const [test, setTeste] = useState()
+
+  useEffect(() => {
+    async function getNewLLm() {
+      const { data } = await llmApi.get('')
+      setTeste(data)
+    }
+
+    getNewLLm()
+  })
 
   const userID = useRecoilValue(meAtom)
   const user = useRecoilValue(selectUser(userID))
@@ -230,6 +242,7 @@ const KeyResultSummarizeSection = ({
           <Text>{intl.formatMessage(messages.summarizeButtonMessage)}</Text>
         </StyledButton>
       )}
+      <div dangerouslySetInnerHTML={{ __html: test }} />
     </Box>
   )
 }

@@ -1,4 +1,5 @@
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 import React, { ReactElement } from 'react'
 
 import getConfig from 'src/config'
@@ -12,8 +13,14 @@ class BudDocument extends Document<BudDocumentProperties> {
     return (
       <Html>
         <Head>
+          <script src="/htmx.min.js" />
+
           <link rel="manifest" href="/manifest.json" />
           <meta name="robots" content={this.props.env === 'production' ? 'all' : 'noindex'} />
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css"
+          />
           <link href="/fonts/CircularStd/font-face.css" rel="stylesheet" />
           <link
             rel="apple-touch-icon-precomposed"
@@ -67,10 +74,21 @@ class BudDocument extends Document<BudDocumentProperties> {
           <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
           <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
           <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+          <Script src="https://unpkg.com/htmx.org@1.9.12" />
         </Head>
+
         <body>
           <Main />
           <NextScript />
+          <Script src="https://unpkg.com/htmx.org@1.9.12" />
+          <Script
+            src="https://unpkg.com/htmx.org@1.9.12"
+            integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+            crossOrigin="anonymous"
+            strategy="afterInteractive"
+          />
+          <Script src="/htmx/htmx.min.js" />
+          <Script src="/htmx.min.js" />
         </body>
       </Html>
     )

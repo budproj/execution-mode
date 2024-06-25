@@ -42,6 +42,13 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
   const { Component, pageProps } = properties
   const router = useRouter()
 
+  useEffect(() => {
+    // Ensure HTMX is loaded
+    if (window.htmx) {
+      window.htmx.process(document.body)
+    }
+  }, [])
+
   const onAuth0RedirectCallback = (appState?: AppState): void => {
     router.replace(appState?.returnTo ?? '/')
   }
