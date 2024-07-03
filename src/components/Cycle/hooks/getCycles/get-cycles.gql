@@ -1,4 +1,4 @@
-query GET_CYCLES {
+query GET_CYCLES_STATUS {
   me {
     companies(first: 1) {
       edges {
