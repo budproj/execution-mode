@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
-import React, { memo, useCallback, useEffect } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -31,6 +31,7 @@ import {
 } from 'src/state/recoil/routine/routine-dates-range'
 import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
 import { teamAtomFamily } from 'src/state/recoil/team'
+import { usersCompany } from 'src/state/recoil/team/users-company'
 
 import { useRoutineNotificationSettings } from '../hooks/getRoutineNotificationSettings'
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
@@ -78,6 +79,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
     answerSummaryLoadStateAtom,
   )
+  const [isFirstTime, setIsFirstTime] = useState(false)
 
   const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
   const { fetchAnswers } = useFetchSummaryData()
@@ -97,7 +99,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
   const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
   const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
-  // Const setUsersCompany = useSetRecoilState(usersCompany)
+  const setUsersCompany = useSetRecoilState(usersCompany)
 
   const handleGetNoCurrentAnswers = useCallback(
     async (after: Date, before: Date) => {
@@ -133,9 +135,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
       const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
       if (newFormattedData)
         setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
-      const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
-
-      return () => clearTimeout(answerSummaryTimer)
+      setIsAnswerSummaryLoading(false)
     }
   }, [
     limitedTeamUsers,
@@ -188,11 +188,12 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
 
   useEffect(() => {
     if (isAnswerSummaryLoading) return
-
     if (limitedTeamUsers.length === 0) return
+    if (!isFirstTime) return
+    setIsFirstTime(false)
     fetchAnswerSummaryData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [limitedTeamUsers])
 
   const handleViewMore = useCallback(() => {
     if (isAnswerSummaryLoading) return
@@ -200,6 +201,13 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     if (limitedTeamUsers.length === 0) return
     fetchAnswerSummaryData()
   }, [fetchAnswerSummaryData, isAnswerSummaryLoading, limitedTeamUsers.length])
+
+  useEffect(() => {
+    setAnswersSummary([])
+    setUsersCompany([])
+    setIsFirstTime(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [teamId])
 
   return (
     <Stack spacing={10}>
