@@ -10,6 +10,8 @@ type AnswerSummaryPaginationProperties = {
   limitedTeamUsers: User[]
 }
 
+const REQUEST_LIMIT = 10
+
 const useAnswerSummaryPagination = (teamId: Team['id']): AnswerSummaryPaginationProperties => {
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
 
@@ -24,8 +26,6 @@ const useAnswerSummaryPagination = (teamId: Team['id']): AnswerSummaryPagination
     : teamUsers
 
   const answersSummary = useRecoilValue(answerSummaryAtom)
-
-  const REQUEST_LIMIT = answersSummary.length === 0 ? 10 : 4
 
   const filteredTeamUsers = companyUsers.filter(
     (user) => !answersSummary.some(({ userId }) => userId === user.id),

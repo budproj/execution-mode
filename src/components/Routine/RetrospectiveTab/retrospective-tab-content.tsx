@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react'
 import { format, parse, differenceInDays } from 'date-fns'
 import { useRouter } from 'next/router'
-import React, { memo, useCallback, useEffect } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -79,6 +79,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
     answerSummaryLoadStateAtom,
   )
+  const [isFirstTime, setIsFirstTime] = useState(false)
 
   const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
   const { fetchAnswers } = useFetchSummaryData()
@@ -118,45 +119,35 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
     [answersSummary, fetchAnswers, setAnswersSummary, setIsAnswerSummaryLoading, teamId],
   )
 
-  const fetchAnswerSummaryData = useCallback(
-    async (entries: IntersectionObserverEntry[]) => {
-      const target = entries[0]
+  const fetchAnswerSummaryData = useCallback(async () => {
+    const teamUsersIds = limitedTeamUsers.map((user) => user.id)
 
-      if (target.isIntersecting) {
-        const teamUsersIds = limitedTeamUsers.map((user) => user.id)
+    const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
+      return answersSummary.some((user) => user.userId === userId)
+    })
 
-        const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
-          return answersSummary.some((user) => user.userId === userId)
-        })
-
-        if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
-          setIsAnswerSummaryLoading(true)
-          setAnswerSummaryPaginationData({
-            lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
-            teamId,
-          })
-          const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
-          if (newFormattedData)
-            setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
-          const answerSummaryTimer = setTimeout(() => setIsAnswerSummaryLoading(false), 350)
-
-          return () => clearTimeout(answerSummaryTimer)
-        }
-      }
-    },
-
-    [
-      limitedTeamUsers,
-      answersSummary,
-      setIsAnswerSummaryLoading,
-      setAnswerSummaryPaginationData,
-      teamId,
-      fetchAnswers,
-      after,
-      before,
-      setAnswersSummary,
-    ],
-  )
+    if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
+      setIsAnswerSummaryLoading(true)
+      setAnswerSummaryPaginationData({
+        lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
+        teamId,
+      })
+      const newFormattedData = await fetchAnswers({ teamId, after, before, teamUsersIds })
+      if (newFormattedData)
+        setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
+      setIsAnswerSummaryLoading(false)
+    }
+  }, [
+    limitedTeamUsers,
+    answersSummary,
+    setIsAnswerSummaryLoading,
+    setAnswerSummaryPaginationData,
+    teamId,
+    fetchAnswers,
+    after,
+    before,
+    setAnswersSummary,
+  ])
 
   useEffect(() => {
     if (after && before) {
@@ -196,24 +187,27 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
   }, [])
 
   useEffect(() => {
-    const observer = new IntersectionObserver(fetchAnswerSummaryData, {
-      root: document.querySelector('#scrollable-list-users'),
-      threshold: 0.5,
-    })
+    if (isAnswerSummaryLoading) return
+    if (limitedTeamUsers.length === 0) return
+    if (!isFirstTime) return
+    setIsFirstTime(false)
+    fetchAnswerSummaryData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [limitedTeamUsers])
 
+  const handleViewMore = useCallback(() => {
     if (isAnswerSummaryLoading) return
 
     if (limitedTeamUsers.length === 0) return
-
-    observer.observe(document.querySelector('#list-bottom') as HTMLDivElement)
-
-    return () => observer.disconnect()
+    fetchAnswerSummaryData()
   }, [fetchAnswerSummaryData, isAnswerSummaryLoading, limitedTeamUsers.length])
 
   useEffect(() => {
     setAnswersSummary([])
     setUsersCompany([])
-  }, [router.asPath, setAnswersSummary, setUsersCompany])
+    setIsFirstTime(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [teamId])
 
   return (
     <Stack spacing={10}>
@@ -293,6 +287,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
           before={before}
           week={week}
           teamId={teamId}
+          handleViewMore={handleViewMore}
           onGetNoCurrentAnswers={handleGetNoCurrentAnswers}
         />
 

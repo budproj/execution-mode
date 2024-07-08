@@ -28,6 +28,7 @@ import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
+import { useAnswerSummaryPagination } from '../../hooks/useAnswerSummaryPagination'
 import { useFetchSummaryData } from '../../hooks/useFetchSummaryData'
 
 import AnswerRowComponent from './answer-row'
@@ -39,6 +40,7 @@ interface AnswersComponentProperties {
   after: Date
   before: Date
   week: number
+  handleViewMore?: () => void
 }
 
 const ScrollableItem = getScrollableItem()
@@ -46,7 +48,14 @@ const ScrollableItem = getScrollableItem()
 const SEARCH_CHARACTERS_LIMIT = 3
 
 const AnswersComponent = memo(
-  ({ teamId, after, before, week, onGetNoCurrentAnswers }: AnswersComponentProperties) => {
+  ({
+    teamId,
+    after,
+    before,
+    week,
+    onGetNoCurrentAnswers,
+    handleViewMore,
+  }: AnswersComponentProperties) => {
     const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
     const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
     const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
@@ -54,7 +63,7 @@ const AnswersComponent = memo(
     )
 
     const { fetchAnswers } = useFetchSummaryData()
-
+    const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
     const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
     const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
     const [search, setSearch] = useState('')
@@ -227,11 +236,7 @@ const AnswersComponent = memo(
             onSearch={handleSearch}
           />
         </Flex>
-        <ScrollableItem
-          id="scrollable-list-users"
-          maxH={showAnswerNowButton ? '455px' : '537px'}
-          p="0 12px"
-        >
+        <ScrollableItem id="scrollable-list-users" maxH="700px" p="0 12px">
           {filteredAnswers.map((answer) => (
             <AnswerRowComponent key={answer.id} answer={answer} />
           ))}
@@ -239,6 +244,15 @@ const AnswersComponent = memo(
             <Flex justify="center" py={4}>
               <Spinner size="lg" />
             </Flex>
+          )}
+          {!isAnswerSummaryLoading && limitedTeamUsers.length > 0 && (
+            <Button
+              width="100%"
+              marginTop="20px"
+              marginBottom="20px"
+              label="Ver mais"
+              onClick={handleViewMore}
+            />
           )}
           <Box
             id="list-bottom"

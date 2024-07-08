@@ -1,17 +1,20 @@
 import { Box, Flex, Heading, Skeleton, SkeletonText, Text, Stack, useToken } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 import React, { memo, useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/components/Base'
+import { DynamicAvatarGroup, SliderWithFilledTrack } from 'src/components/Base'
 import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
 import { GraphQLEffect } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
 import { teamAtomFamily } from 'src/state/recoil/team'
+import { usersCompany } from 'src/state/recoil/team/users-company'
 
 import { MenuCard } from './MenuCard'
 import messages from './messages'
@@ -30,8 +33,12 @@ const HoverableWrapper = styled(Box)`
 `
 
 const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
+  const router = useRouter()
   const intl = useIntl()
   const team = useRecoilValue(teamAtomFamily(id))
+  const setUsersCompany = useSetRecoilState(usersCompany)
+  const setAnswersSummary = useSetRecoilState(answerSummaryAtom)
+
   const [users, setUserEdges] = useConnectionEdges<User>()
   const [shadowStrokeLight] = useToken('shadows', ['for-background.light'])
 
@@ -43,6 +50,12 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
   useEffect(() => {
     if (team) setUserEdges(team.users?.edges)
   }, [team, setUserEdges])
+
+  const handleClickLink = () => {
+    setUsersCompany([])
+    setAnswersSummary([])
+    router.push(`/explore/${id ?? '#'}`)
+  }
 
   return (
     <HoverableWrapper
@@ -59,7 +72,7 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
       {isAllowedToEditTeam && !isFromHoverMenu && (
         <MenuCard position="absolute" top="20px" right="20px" teamId={team?.id} />
       )}
-      <IntlLink href={`/explore/${id ?? '#'}`} as={`/explore/${id ?? '#'}`}>
+      <Box cursor="pointer" onClick={handleClickLink}>
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px" justifyContent="center">
           <Flex direction="column" justifyContent="flex-end">
             {isCompany && (
@@ -122,7 +135,7 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
             </>
           )}
         </Flex>
-      </IntlLink>
+      </Box>
     </HoverableWrapper>
   )
 })
