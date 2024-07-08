@@ -236,11 +236,7 @@ const AnswersComponent = memo(
             onSearch={handleSearch}
           />
         </Flex>
-        <ScrollableItem
-          id="scrollable-list-users"
-          maxH={showAnswerNowButton ? '455px' : '537px'}
-          p="0 12px"
-        >
+        <ScrollableItem id="scrollable-list-users" maxH="537px" p="0 12px">
           {filteredAnswers.map((answer) => (
             <AnswerRowComponent key={answer.id} answer={answer} />
           ))}
