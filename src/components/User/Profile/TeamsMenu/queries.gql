@@ -25,6 +25,7 @@ query GET_TEAM_WITH_ID($teamId: ID!) {
         dateStart
         dateEnd
       }
+      progressWithChildren
   }
 }
 
