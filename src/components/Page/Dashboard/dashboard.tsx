@@ -407,7 +407,6 @@ const DashboardPage = () => {
             <UserProfileHeader
               canUpdate
               onlyPicture
-              // UserProps={{ id: me, picture: user?.picture, role: user?.role }}
               userProps={{ id: data?.me.id, picture: data?.me.picture, role: data?.me.role }}
               handleUpdatePicture={refetch}
               isLoaded={!loading}
