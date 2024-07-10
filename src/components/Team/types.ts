@@ -28,6 +28,7 @@ export interface Team extends GraphQLNode {
   keyResults?: GraphQLConnection<KeyResult>
   ownerId: string
   parentId: string
+  progressWithChildren: number
 }
 
 export interface HealthConfidenceQuantities {

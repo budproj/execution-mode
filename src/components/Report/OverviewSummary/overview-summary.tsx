@@ -177,7 +177,7 @@ const OverviewSummaryTeam = ({
   const intl = useIntl()
 
   const latestCheckIn = team?.status?.latestCheckIn
-  const progress = team?.status?.progress ?? 0
+  const progress = team?.progressWithChildren ?? 0
   const deltaProgress = team?.delta?.progress ?? 0
   const lastUpdateDate = latestCheckIn?.createdAt ? new Date(latestCheckIn.createdAt) : undefined
 
