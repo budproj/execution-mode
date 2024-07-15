@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import buildSkeletonMinSize from 'lib/chakra/build-skeleton-min-size'
-import { DynamicAvatarGroup, SliderWithFilledTrack } from 'src/components/Base'
+import { DynamicAvatarGroup, IntlLink, SliderWithFilledTrack } from 'src/components/Base'
 import CrownIcon from 'src/components/Icon/Crown'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
@@ -72,7 +72,7 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
       {isAllowedToEditTeam && !isFromHoverMenu && (
         <MenuCard position="absolute" top="20px" right="20px" teamId={team?.id} />
       )}
-      <Box cursor="pointer" onClick={handleClickLink}>
+      <IntlLink href={`/explore/${id ?? '#'}`} onClick={handleClickLink}>
         <Flex direction="column" gridGap={6} maxW="90%" minH="300px" justifyContent="center">
           <Flex direction="column" justifyContent="flex-end">
             {isCompany && (
@@ -135,7 +135,7 @@ const TeamCard = memo(({ id, isFromHoverMenu = false }: TeamCardProperties) => {
             </>
           )}
         </Flex>
-      </Box>
+      </IntlLink>
     </HoverableWrapper>
   )
 })
