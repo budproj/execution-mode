@@ -2,7 +2,7 @@ import { Stack, Text, Heading, Skeleton } from '@chakra-ui/react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import { IntlLink, SliderWithFilledTrack } from '../../Base'
+import { SliderWithFilledTrack } from '../../Base'
 import { ArrowRight } from '../../Icon'
 import { Team } from '../types'
 
@@ -14,12 +14,11 @@ interface TeamListSingleProperties {
 
 export const TeamListSingle = ({ team }: TeamListSingleProperties) => {
   const intl = useIntl()
-
   const progress = team?.status?.progress ?? 0
   const isLoaded = Boolean(team)
 
   return (
-    <IntlLink href={`/explore/${team?.id ?? ''}`}>
+    <a href={`/explore/${team?.id ?? ''}`}>
       <Stack direction="row" alignItems="center" _hover={{ svg: { fill: 'brand.400' } }}>
         <Stack flexGrow={1} spacing={4}>
           <Stack direction="row">
@@ -47,6 +46,6 @@ export const TeamListSingle = ({ team }: TeamListSingleProperties) => {
           transition=".2s fill ease-out"
         />
       </Stack>
-    </IntlLink>
+    </a>
   )
 }

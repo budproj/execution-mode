@@ -43,10 +43,11 @@ export const TeamListSearchable = ({
       placeholder={intl.formatMessage(messages.searchPlaceholder)}
       searchKey="name"
       initialItems={teams}
+      isLoading={isLoading}
     >
       {hasPermission && (
         <SearchableListOptionGroup
-          id="create-users"
+          id="create-subteams"
           icon={
             <PlusIcon
               desc={intl.formatMessage(messages.createSubteamOptionGroupIconDesc)}
