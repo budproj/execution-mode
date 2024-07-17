@@ -10,7 +10,6 @@ import {
   KeyResultSectionOwner,
   KeyResultSectionTimeline,
   KeyResultSectionTitle,
-  KeyResultSummarizeSection,
 } from 'src/components/KeyResult/Single/Sections'
 import { KeyResultSingleSectionDeadline } from 'src/components/KeyResult/Single/Sections/Deadline/wrapper'
 import { KeyResultSingleSectionGoal } from 'src/components/KeyResult/Single/Sections/Goal/wrapper'
@@ -46,8 +45,8 @@ const KeyResultDrawerBody = ({
 
   const newCheckInValue =
     keyResult?.format === KEY_RESULT_FORMAT.PERCENTAGE &&
-    keyResult?.initialValue === 0 &&
-    keyResult?.goal === 100
+      keyResult?.initialValue === 0 &&
+      keyResult?.goal === 100
       ? keyResultChecklist && keyResultChecklist?.edges?.length > 0
         ? keyResultChecklist?.progress.progress
         : undefined
@@ -111,10 +110,7 @@ const KeyResultDrawerBody = ({
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
         {isKeyResultSummaryVisible && !isDraft && keyResult && (
           <>
-            <KeyResultSummarizeSection
-              keyResult={keyResult}
-              keyResultChecklist={keyResultChecklist}
-            />
+            <div hx-trigger="load" hx-get={`/core/llm/${keyResultID}`}></div>
             <Divider borderColor="gray.100" />
           </>
         )}
