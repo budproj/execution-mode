@@ -45,8 +45,8 @@ const KeyResultDrawerBody = ({
 
   const newCheckInValue =
     keyResult?.format === KEY_RESULT_FORMAT.PERCENTAGE &&
-      keyResult?.initialValue === 0 &&
-      keyResult?.goal === 100
+    keyResult?.initialValue === 0 &&
+    keyResult?.goal === 100
       ? keyResultChecklist && keyResultChecklist?.edges?.length > 0
         ? keyResultChecklist?.progress.progress
         : undefined
@@ -110,7 +110,7 @@ const KeyResultDrawerBody = ({
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
         {isKeyResultSummaryVisible && !isDraft && keyResult && (
           <>
-            <div hx-trigger="load" hx-get={`/core/llm/${keyResultID}`}></div>
+            <div data-hx-trigger="load" data-hx-get={`/core/llm/${keyResultID}`} />
             <Divider borderColor="gray.100" />
           </>
         )}
