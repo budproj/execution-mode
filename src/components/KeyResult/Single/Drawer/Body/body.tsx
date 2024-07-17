@@ -15,6 +15,7 @@ import { KeyResultSingleSectionDeadline } from 'src/components/KeyResult/Single/
 import { KeyResultSingleSectionGoal } from 'src/components/KeyResult/Single/Sections/Goal/wrapper'
 import { KEY_RESULT_FORMAT, KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
+import useHTMX from 'src/state/hooks/useHTMX/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultChecklistAtom } from 'src/state/recoil/key-result/checklist'
 
@@ -42,6 +43,7 @@ const KeyResultDrawerBody = ({
   const intl = useIntl()
   const keyResultChecklist = useRecoilValue(keyResultChecklistAtom(keyResultID))
   const timelinePortalReference = useRef<HTMLDivElement>(null)
+  useHTMX()
 
   const newCheckInValue =
     keyResult?.format === KEY_RESULT_FORMAT.PERCENTAGE &&

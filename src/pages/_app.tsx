@@ -6,8 +6,6 @@ import { useRouter } from 'next/router'
 import React, { ReactElement, useEffect } from 'react'
 import { RecoilRoot } from 'recoil'
 
-import 'htmx.org'
-
 import AuthzApolloProvider from 'src/components/Base/AuthzApolloProvider'
 import AuthzGatekeeper from 'src/components/Base/AuthzGatekeeper'
 import FlagsmithProvider from 'src/components/Base/FlagsmithProvider'
