@@ -10,12 +10,12 @@ import {
   KeyResultSectionOwner,
   KeyResultSectionTimeline,
   KeyResultSectionTitle,
-  KeyResultSummarizeSection,
 } from 'src/components/KeyResult/Single/Sections'
 import { KeyResultSingleSectionDeadline } from 'src/components/KeyResult/Single/Sections/Deadline/wrapper'
 import { KeyResultSingleSectionGoal } from 'src/components/KeyResult/Single/Sections/Goal/wrapper'
 import { KEY_RESULT_FORMAT, KEY_RESULT_MODE } from 'src/components/KeyResult/constants'
 import { KeyResult } from 'src/components/KeyResult/types'
+import useHTMX from 'src/state/hooks/useHTMX/hook'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { keyResultChecklistAtom } from 'src/state/recoil/key-result/checklist'
 
@@ -43,6 +43,7 @@ const KeyResultDrawerBody = ({
   const intl = useIntl()
   const keyResultChecklist = useRecoilValue(keyResultChecklistAtom(keyResultID))
   const timelinePortalReference = useRef<HTMLDivElement>(null)
+  useHTMX()
 
   const newCheckInValue =
     keyResult?.format === KEY_RESULT_FORMAT.PERCENTAGE &&
@@ -111,10 +112,7 @@ const KeyResultDrawerBody = ({
         <KeyResultSectionDescription keyResultID={keyResultID} isLoading={isLoading} />
         {isKeyResultSummaryVisible && !isDraft && keyResult && (
           <>
-            <KeyResultSummarizeSection
-              keyResult={keyResult}
-              keyResultChecklist={keyResultChecklist}
-            />
+            <div data-hx-trigger="load" data-hx-get={`/core/llm/${keyResultID}`} />
             <Divider borderColor="gray.100" />
           </>
         )}
