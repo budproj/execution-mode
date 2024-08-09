@@ -9,6 +9,7 @@ import TeamTag from 'src/components/Team/Tag'
 import { Team } from 'src/components/Team/types'
 import { GraphQLConnection } from 'src/components/types'
 import { userSelector } from 'src/state/recoil/user'
+import { isAddTeamLoadingAtom } from 'src/state/recoil/user/add-team-loading'
 
 import queries from './queries.gql'
 
@@ -27,11 +28,13 @@ export interface AddUserToTeamMutationResult {
 export const AddUserTeam = ({ userID, teamIDsBlacklist }: AddUserTeamProperties) => {
   const [filter, setFilter] = useState('')
   const setUser = useSetRecoilState(userSelector(userID))
+  const setIsAddTeamLoading = useSetRecoilState(isAddTeamLoadingAtom)
   const [addTeamToUser, { loading }] = useMutation<AddUserToTeamMutationResult>(
     queries.ADD_TEAM_TO_USER,
     {
       onCompleted: (data) => {
         setUser(data.addTeamToUser)
+        setIsAddTeamLoading(false)
       },
     },
   )
@@ -41,6 +44,7 @@ export const AddUserTeam = ({ userID, teamIDsBlacklist }: AddUserTeamProperties)
   }
 
   const handleSelect = (teamID: string) => () => {
+    setIsAddTeamLoading(true)
     void addTeamToUser({
       variables: {
         userID,

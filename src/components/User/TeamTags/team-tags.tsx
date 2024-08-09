@@ -10,6 +10,7 @@ import { User } from 'src/components/User/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { userSelector } from 'src/state/recoil/user'
+import { isAddTeamLoadingAtom } from 'src/state/recoil/user/add-team-loading'
 
 import queries from './queries.gql'
 import UserTeamTagsSkeleton from './skeleton'
@@ -44,11 +45,12 @@ const UserTeamTags = ({
 }: UserTeamTagsProperties) => {
   const [user, setUser] = useRecoilState(userSelector(userID))
   const [remoteTeams, setTeamEdges] = useConnectionEdges<Team>()
-
+  const [isAddTeamLoading, setIsAddTeamLoading] = useRecoilState(isAddTeamLoadingAtom)
   const [removeTeamFromUser, { loading }] = useMutation<RemoveTeamFromUserMutationResult>(
     queries.REMOVE_TEAM_FROM_USER,
     {
       onCompleted: (data) => {
+        setIsAddTeamLoading(false)
         setUser(data.removeTeamFromUser)
         if (onRemove) void onRemove()
       },
@@ -58,8 +60,8 @@ const UserTeamTags = ({
   const userTeams = teams ?? remoteTeams
   const limitedTeams = userTeams?.slice(0, max)
   const hasMoreThanOneTeam = limitedTeams.length > 1
-
   const handleRemoveTeam = (teamID: string) => () => {
+    setIsAddTeamLoading(true)
     void removeTeamFromUser({
       variables: {
         teamID,
@@ -82,6 +84,7 @@ const UserTeamTags = ({
                 redirectToTeam={redirectToTeam}
                 isLoading={loading}
                 isActive={isActive}
+                isDisabled={isAddTeamLoading}
                 onClose={isEditable && hasMoreThanOneTeam ? handleRemoveTeam(team.id) : undefined}
               >
                 {team.name}
@@ -91,6 +94,7 @@ const UserTeamTags = ({
             <TeamTag
               redirectToTeam={redirectToTeam}
               isLoading={loading}
+              isDisabled={isAddTeamLoading}
               isActive={isActive}
               onClose={isEditable && hasMoreThanOneTeam ? handleRemoveTeam(team.id) : undefined}
             >

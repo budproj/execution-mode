@@ -6,11 +6,21 @@ interface TeamTagProperties extends TagProps {
   isActive?: boolean
   redirectToTeam?: boolean
   onClose?: () => void
+  isDisabled?: boolean
 }
 
 const TeamTag = forwardRef(
   (
-    { children, isLoading, isActive, redirectToTeam, onClose, ...rest }: TeamTagProperties,
+    {
+      children,
+      isLoading,
+      isActive,
+      redirectToTeam,
+      onClose,
+      isDisabled,
+      ...rest
+    }: TeamTagProperties,
+
     reference:
       | string
       | ((instance: HTMLDivElement | null) => void)
@@ -47,7 +57,7 @@ const TeamTag = forwardRef(
       >
         <TagLabel>{children}</TagLabel>
         {Boolean(onClose) && !wasClosed && (
-          <TagCloseButton opacity={1} fontSize="md" onClick={handleClose}>
+          <TagCloseButton isDisabled={isDisabled} opacity={1} fontSize="md" onClick={handleClose}>
             ×
           </TagCloseButton>
         )}
