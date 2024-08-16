@@ -34,6 +34,7 @@ const {
   TASK_MANAGEMENT_API,
   REST_API_BASE,
   FLAGSMITH_CLIENT_KEY,
+  NEXT_PUBLIC_MICROSOFT_CLARITY
 } = process.env
 
 const withPWA = require('next-pwa')({
@@ -96,6 +97,10 @@ const publicRuntimeConfig = {
 
   flagsmith: {
     clientSideKey: FLAGSMITH_CLIENT_KEY,
+  },
+
+  microsoft: {
+    clarirt: NEXT_PUBLIC_MICROSOFT_CLARITY
   },
 
   intlRedirects: [
