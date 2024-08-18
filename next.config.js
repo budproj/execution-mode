@@ -100,7 +100,7 @@ const publicRuntimeConfig = {
   },
 
   microsoft: {
-    clarirt: NEXT_PUBLIC_MICROSOFT_CLARITY
+    clarity: NEXT_PUBLIC_MICROSOFT_CLARITY
   },
 
   intlRedirects: [

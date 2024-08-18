@@ -7,11 +7,11 @@ import getConfig from 'src/config'
 
 interface BudDocumentProperties {
   env: string
+  clarity: string
 }
 
 class BudDocument extends Document<BudDocumentProperties> {
   render(): ReactElement {
-    const { publicRuntimeConfig } = getConfig()
     return (
       <Html>
         <Head>
@@ -79,7 +79,7 @@ class BudDocument extends Document<BudDocumentProperties> {
                     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
                     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
                     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-                })(window, document, "clarity", "script", "${publicRuntimeConfig.microsoft.clarity}");
+                })(window, document, "clarity", "script", "${this.props.clarity}");
                 `,
             }}
           />
@@ -100,6 +100,7 @@ BudDocument.getInitialProps = async (context: DocumentContext) => {
   return {
     ...initialProperties,
     env: publicRuntimeConfig.environment,
+    clarity: publicRuntimeConfig.microsoft.clarity,
   }
 }
 
