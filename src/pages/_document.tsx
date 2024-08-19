@@ -1,10 +1,13 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
+import Script from 'next/script'
 import React, { ReactElement } from 'react'
 
 import getConfig from 'src/config'
 
 interface BudDocumentProperties {
   env: string
+  clarity: string
 }
 
 class BudDocument extends Document<BudDocumentProperties> {
@@ -67,6 +70,19 @@ class BudDocument extends Document<BudDocumentProperties> {
           <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
           <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
           <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+          <Script
+            id="microsoft-clarity-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(c,l,a,r,i,t,y){
+                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                })(window, document, "clarity", "script", "${this.props.clarity}");
+                `,
+            }}
+          />
         </Head>
         <body>
           <Main />
@@ -84,6 +100,7 @@ BudDocument.getInitialProps = async (context: DocumentContext) => {
   return {
     ...initialProperties,
     env: publicRuntimeConfig.environment,
+    clarity: publicRuntimeConfig.microsoft.clarity,
   }
 }
 

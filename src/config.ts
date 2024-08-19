@@ -18,6 +18,7 @@ export interface BudPublicConfig {
   amplitude: AmplitudeConfig
   maintenanceMode: MaintenanceModeConfig
   flagsmith: FlagsmithConfig
+  microsoft: MicrosoftConfig
 }
 
 export interface BudServerConfig {
@@ -90,6 +91,10 @@ export interface MaintenanceModeConfig {
 
 export interface FlagsmithConfig {
   clientSideKey: string
+}
+
+export interface MicrosoftConfig {
+  clarity: string
 }
 
 const getConfig = (): BudConfig => getNextConfig()
