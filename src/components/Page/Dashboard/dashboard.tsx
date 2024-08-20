@@ -476,7 +476,7 @@ const DashboardPage = () => {
               data-hx-trigger="load"
               data-hx-get={`/core/dashboard/${
                 selectedDashboardTeam?.id ?? ''
-              }${cycleIdsUrlFormated}`}
+              }?${cycleIdsUrlFormated}`}
             />
             <MetricsOverview maxWidth="50%" flex="1" />
           </Flex>
