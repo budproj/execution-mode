@@ -68,6 +68,7 @@ class BudDocument extends Document<BudDocumentProperties> {
           <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
           <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
           <script src="https://unpkg.com/htmx.org@2.0.1" />
+          <script src="./node_modules/preline/dist/preline.js" />
         </Head>
         <body>
           <Main />

@@ -160,6 +160,7 @@
     "next-pwa": "^5.6.0",
     "nextjs-progressbar": "^0.0.16",
     "postcss": "^8.4.39",
+    "preline": "^2.4.1",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-canvas-confetti": "^1.4.0",

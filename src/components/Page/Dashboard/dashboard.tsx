@@ -12,7 +12,6 @@ import { CADENCE } from 'src/components/Cycle/constants'
 import BoardsOverview from 'src/components/Report/BoardsOverview'
 import MetricsOverview from 'src/components/Report/MetricsOverview'
 import { OverviewSummary } from 'src/components/Report/OverviewSummary'
-import TeamsOverview from 'src/components/Report/TeamsOverview'
 import { useGetCompanyCycles } from 'src/components/Report/hooks'
 import { Team } from 'src/components/Team/types'
 import { UserProfileHeader } from 'src/components/User/Profile/Header/wrapper'
@@ -20,6 +19,7 @@ import { TeamsMenuProfile } from 'src/components/User/Profile/TeamsMenu'
 import { User } from 'src/components/User/types'
 import { GraphQLConnection } from 'src/components/types'
 import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
+import useHTMX from 'src/state/hooks/useHTMX/hook'
 import { selectedDashboardTeamAtom } from 'src/state/recoil/team/selected-dashboard-team'
 
 import { PageHeader } from '../../Base/PageHeader/wrapper'
@@ -380,6 +380,9 @@ const DashboardPage = () => {
 
   const isCompanySelected = company?.id === selectedDashboardTeam?.id
 
+  const cycleIdsUrlFormated = activeCompanyCycles.map((cycle) => `cycle_ids=${cycle.id}`).join('&')
+  useHTMX()
+
   useEffect(() => {
     if (data?.me.settings.edges[0]) {
       const parsedPreferences: PreferencesProperties = JSON.parse(
@@ -468,7 +471,11 @@ const DashboardPage = () => {
             {intl.formatMessage(messages.teamsOverviewTitle)}
           </Text>
           <Flex gridGap="3rem">
-            <TeamsOverview flex="1" quarter={quarter?.period} />
+            {/* <Box bg="white" borderRadius="lg" shadow="for-background.light" px={8} py={5} /> */}
+            <div
+              data-hx-trigger="load"
+              data-hx-get={`/core/dashboard/${selectedDashboardTeam?.id}${cycleIdsUrlFormated}`}
+            />
             <MetricsOverview maxWidth="50%" flex="1" />
           </Flex>
         </Box>
