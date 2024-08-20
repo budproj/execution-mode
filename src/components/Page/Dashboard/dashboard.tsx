@@ -380,7 +380,8 @@ const DashboardPage = () => {
 
   const isCompanySelected = company?.id === selectedDashboardTeam?.id
 
-  const cycleIdsUrlFormated = activeCompanyCycles.map((cycle) => `cycle_ids=${cycle.id}`).join('&')
+  const cycleIdsUrlFormated = `cycle_ids=${activeCompanyCycles[0].id}`
+
   useHTMX()
 
   useEffect(() => {
