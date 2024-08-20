@@ -27,6 +27,8 @@ import theme from 'src/themes/preset-base'
 
 import { AmplitudeProvider } from '../components/Base/AmplitudeProvider/amplitude-provider'
 
+import '../styles/global.css'
+
 type IntlMessage = Record<string, string>
 
 interface BudAppProperties extends AppProps {

@@ -1,5 +1,4 @@
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
-import Script from 'next/script'
 import React, { ReactElement } from 'react'
 
 import getConfig from 'src/config'
@@ -68,7 +67,7 @@ class BudDocument extends Document<BudDocumentProperties> {
           <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
           <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
           <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
-          <Script src="https://unpkg.com/htmx.org@2.0.1" />
+          <script src="https://unpkg.com/htmx.org@2.0.1" />
         </Head>
         <body>
           <Main />
