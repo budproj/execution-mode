@@ -474,9 +474,8 @@ const DashboardPage = () => {
             {/* <Box bg="white" borderRadius="lg" shadow="for-background.light" px={8} py={5} /> */}
             <div
               data-hx-trigger="load"
-              data-hx-get={`/core/dashboard/${
-                selectedDashboardTeam?.id ?? ''
-              }?${cycleIdsUrlFormated}`}
+              data-hx-get={`/core/dashboard/team-ranking/${selectedDashboardTeam?.id ?? ''
+                }?${cycleIdsUrlFormated}`}
             />
             <MetricsOverview maxWidth="50%" flex="1" />
           </Flex>
