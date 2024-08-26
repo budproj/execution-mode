@@ -380,7 +380,8 @@ const DashboardPage = () => {
 
   const isCompanySelected = company?.id === selectedDashboardTeam?.id
 
-  const cycleIdsUrlFormated = `cycle_ids=${activeCompanyCycles[0].id}`
+  const cycleIdsUrlFormated =
+    activeCompanyCycles.length > 0 ? `cycle_ids=${activeCompanyCycles[0].id}` : ''
 
   useHTMX()
 
