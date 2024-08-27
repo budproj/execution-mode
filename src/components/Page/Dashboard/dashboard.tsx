@@ -475,7 +475,7 @@ const DashboardPage = () => {
           <Flex gridGap="3rem">
             {activeCompanyCycles.length > 0 && selectedDashboardTeam && (
               <div
-                data-hx-trigger="load"
+                data-hx-trigger="revealed"
                 data-hx-get={`/core/dashboard/team-ranking/${
                   selectedDashboardTeam?.id ?? ''
                 }?${cycleIdsUrlFormated}`}
