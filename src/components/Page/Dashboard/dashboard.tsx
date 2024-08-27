@@ -384,6 +384,7 @@ const DashboardPage = () => {
     activeCompanyCycles.length > 0 ? `cycle_ids=${activeCompanyCycles[0].id}` : ''
 
   useHTMX()
+  window.htmx.trigger('#element', 'reload')
 
   useEffect(() => {
     if (data?.me.settings.edges[0]) {
@@ -475,7 +476,8 @@ const DashboardPage = () => {
           <Flex gridGap="3rem">
             {activeCompanyCycles.length > 0 && selectedDashboardTeam && (
               <div
-                data-hx-trigger="revealed"
+                id="element"
+                data-hx-trigger="reload"
                 data-hx-get={`/core/dashboard/team-ranking/${
                   selectedDashboardTeam?.id ?? ''
                 }?${cycleIdsUrlFormated}`}
