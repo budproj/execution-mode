@@ -13,6 +13,7 @@ const useHTMX = () => {
     if (window.htmx) {
       setHTMXLoaded(true)
       window.htmx.process(document.body)
+      window.htmx.trigger('#element', 'reload')
     } else {
       const script = document.createElement('script')
       script.src = 'https://unpkg.com/htmx.org@1.6.1'

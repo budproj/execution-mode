@@ -384,9 +384,6 @@ const DashboardPage = () => {
     activeCompanyCycles.length > 0 ? `cycle_ids=${activeCompanyCycles[0].id}` : ''
 
   useHTMX()
-  if (window.htmx) {
-    window.htmx.trigger('#element', 'reload')
-  }
 
   useEffect(() => {
     if (data?.me.settings.edges[0]) {
