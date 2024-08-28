@@ -474,15 +474,13 @@ const DashboardPage = () => {
             {intl.formatMessage(messages.teamsOverviewTitle)}
           </Text>
           <Flex gridGap="3rem">
-            {activeCompanyCycles.length > 0 && selectedDashboardTeam && (
-              <div
-                id="element"
-                data-hx-trigger="reload"
-                data-hx-get={`/core/dashboard/team-ranking/${
-                  selectedDashboardTeam?.id ?? ''
-                }?${cycleIdsUrlFormated}`}
-              />
-            )}
+            <div
+              id="element"
+              data-hx-trigger="reload"
+              data-hx-get={`/core/dashboard/team-ranking/${
+                selectedDashboardTeam?.id ?? ''
+              }?${cycleIdsUrlFormated}`}
+            />
             <MetricsOverview maxWidth="50%" flex="1" />
           </Flex>
         </Box>
