@@ -25,8 +25,6 @@ import TeamRedirectPage from 'src/components/Routine/Drawer/Base/TeamRedirectPag
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
 
-import { AmplitudeProvider } from '../components/Base/AmplitudeProvider/amplitude-provider'
-
 type IntlMessage = Record<string, string>
 
 interface BudAppProperties extends AppProps {
@@ -64,33 +62,31 @@ const BudApp = (properties: BudAppProperties): ReactElement => {
         <ChakraProvider theme={theme}>
           <SocketIOProvider>
             <AuthzGatekeeper>
-              <AmplitudeProvider>
-                <AuthzApolloProvider pageProps={pageProps}>
-                  <RecoilIntlProvider>
-                    <FlagsmithProvider>
-                      <ServicesProvider>
-                        <QueryClientProvider client={queryClient}>
-                          <RoutinesFormActionsProvider>
-                            <>
-                              <NoticesBanner />
-                              <NewsBanner />
-                              <MaintenanceGatekeeper>
-                                <HotjarProvider />
-                                <HubSpotProvider />
-                                <ProgressBar />
-                                <KeyResultSingleDrawer />
-                                <TeamRedirectPage />
-                                <RetrospectiveRoutine />
-                                <Component {...pageProps} />
-                              </MaintenanceGatekeeper>
-                            </>
-                          </RoutinesFormActionsProvider>
-                        </QueryClientProvider>
-                      </ServicesProvider>
-                    </FlagsmithProvider>
-                  </RecoilIntlProvider>
-                </AuthzApolloProvider>
-              </AmplitudeProvider>
+              <AuthzApolloProvider pageProps={pageProps}>
+                <RecoilIntlProvider>
+                  <FlagsmithProvider>
+                    <ServicesProvider>
+                      <QueryClientProvider client={queryClient}>
+                        <RoutinesFormActionsProvider>
+                          <>
+                            <NoticesBanner />
+                            <NewsBanner />
+                            <MaintenanceGatekeeper>
+                              <HotjarProvider />
+                              <HubSpotProvider />
+                              <ProgressBar />
+                              <KeyResultSingleDrawer />
+                              <TeamRedirectPage />
+                              <RetrospectiveRoutine />
+                              <Component {...pageProps} />
+                            </MaintenanceGatekeeper>
+                          </>
+                        </RoutinesFormActionsProvider>
+                      </QueryClientProvider>
+                    </ServicesProvider>
+                  </FlagsmithProvider>
+                </RecoilIntlProvider>
+              </AuthzApolloProvider>
             </AuthzGatekeeper>
           </SocketIOProvider>
         </ChakraProvider>

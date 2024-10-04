@@ -223,6 +223,10 @@
     "defaultMessage": "Na última hora",
     "description": "This label is displayed if the date difference is less than 1 hour"
   },
+  "1EdvvO": {
+    "defaultMessage": "Agora você pode fazer a gestão das atividades da rotina do seu time também na bud. Visite a página do seu time e explore a aba de tarefas! Crie tarefas e acompanhe o andamento dos seus projetos em um só lugar :)",
+    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
+  },
   "1IAVGz": {
     "defaultMessage": "Tarefas pendentes",
     "description": "Label for pending tasks selector item"
@@ -266,6 +270,10 @@
   "2FcRLo": {
     "defaultMessage": "CHECK-LISTS",
     "description": "The title of the checkLists column."
+  },
+  "2GMiov": {
+    "defaultMessage": "{user} {key, select, createdTask {criou} active {} other {alterou}} {value, select, true {desarquivou} false {arquivou} other {}} {key, select, description {a} goal {a} createdTask {a} priority {a} active {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} owner {responsável} createdTask {tarefa} status {status} dueDate {prazo} initialDate {início} supportTeamMembers {time de apoio} priority {prioridade} active {tarefa} other {}}",
+    "description": "dsa"
   },
   "2Hlwn7": {
     "defaultMessage": "EVOLUÇÃO DO RESULTADO CHAVE",
@@ -591,6 +599,10 @@
     "defaultMessage": "As notificações relacionadas a este resultado-chave, como novos comentários, também serão enviadas ao time de apoio.",
     "description": "The tooltip text for the notifications description"
   },
+  "7Czhi+": {
+    "defaultMessage": "Responder",
+    "description": "This message appears on action button of the notices banner"
+  },
   "7GDhfH": {
     "defaultMessage": "O ciclo está ativo, a funcionalidade de check-in está disponível, e o progresso está sendo mensurado.",
     "description": "This string is used to describe the cycles active status option."
@@ -759,10 +771,6 @@
     "defaultMessage": "Selecionar",
     "description": "This is the default placeholder while selecting a given value in a select menu"
   },
-  "A4WTq8": {
-    "defaultMessage": "A cada semana novos desafios personalizados que ajudam você e seu time a se manterem dentro das melhores práticas de implementação de OKRs",
-    "description": "This message appears on action button that redirect the user to company page on Spotlight tab"
-  },
   "A5ct4X": {
     "defaultMessage": "Um ícone de documento de texto",
     "description": "The desc message for the Document icon. This icon is used to ilustrate our key results"
@@ -774,10 +782,6 @@
   "A6/DXF": {
     "defaultMessage": "Salvar",
     "description": "This text appears as a browser tooltip above the icon. This icon appears below an EditableTextArea. It is used to save the edition of that field"
-  },
-  "ADeaSS": {
-    "defaultMessage": "Nosso sistema está enfrentando problemas de performance no momento. Estamos trabalhando para restaurar o funcionamento normal. Agradecemos a compreensão.",
-    "description": "This message appears on the notices banner."
   },
   "ADoBmy": {
     "defaultMessage": "Ícone de maleta representando o índice de produtividade",
@@ -1679,10 +1683,6 @@
     "defaultMessage": "Dia de início do período anual",
     "description": "The label of the company yearly date start while creating a new workspace"
   },
-  "P48rc3": {
-    "defaultMessage": "NOVO FAROL DE BOAS PRÁTICAS",
-    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
-  },
   "PFysOr": {
     "defaultMessage": "Uma seta para baixo. Ela indica que ao clicar aqui você irá editar a meta deste resultado-chave",
     "description": "This message is displayed for screen readers as the description of the arrow down icon inside the key-result drawers. That icon is only displayed when the user hovers the mouse over the goal"
@@ -2251,6 +2251,10 @@
     "defaultMessage": "Nome",
     "description": "This is the label that goes on our user account settings page, at the first field to update the user informations"
   },
+  "Y0d9br": {
+    "defaultMessage": "Organize suas atividades no novo módulo de gestão de tarefas!",
+    "description": "This message appears on the news banner to invite the user to learn about the Spotlight feature."
+  },
   "Y1oyYG": {
     "defaultMessage": "Um ícone de seta para cima, indicando que o progresso aumentou",
     "description": "This desc message explains the increase icon for screen readers"
@@ -2486,10 +2490,6 @@
   "d62Bt/": {
     "defaultMessage": "Ícone de um balão de fala",
     "description": "The description of the thinking balloon icon"
-  },
-  "d8BSWu": {
-    "defaultMessage": "Responda aqui",
-    "description": "This message appears on action button of the notices banner"
   },
   "dB4Sbq": {
     "defaultMessage": "Calculado pela média do progresso de todos os objetivos de um time e dos “sub-times” abaixo dele",
@@ -3735,10 +3735,6 @@
     "defaultMessage": "Inativo",
     "description": "This string is used to select the not-active cycles option."
   },
-  "yyxlZg": {
-    "defaultMessage": "{user} {key, select, createdTask {criou} other {alterou}} {key, select, description {a} goal {a} createdTask {a} priority {a} other {o}} {key, select, title {título} initialValue {valor inicial} description {descrição} goal {meta} format {formato} type {tipo} ownerId {responsável} owner {responsável} createdTask {tarefa} status {status} dueDate {prazo} initialDate {início} supportTeamMembers {time de apoio} priority {prioridade} other {}}",
-    "description": "dsa"
-  },
   "z2jAqq": {
     "defaultMessage": "Um ícone com o sinal de \"mais\". Ao clicar aqui você irá abrir o menu para inserir um novo subtime",
     "description": "This message is used in our new subteam button while seeing the team list"
@@ -3778,6 +3774,10 @@
   "zWpOXa": {
     "defaultMessage": "Criar",
     "description": "The button to create or edit a cycle on modal"
+  },
+  "zZwIvy": {
+    "defaultMessage": "Conte para nós como está sendo sua experiência com a velocidade da plataforma:",
+    "description": "This message appears on the notices banner."
   },
   "zaC3Cb": {
     "defaultMessage": "ativado",

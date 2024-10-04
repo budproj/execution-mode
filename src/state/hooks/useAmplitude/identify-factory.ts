@@ -1,18 +1,30 @@
-import { AmplitudeClient } from 'amplitude-js'
+import * as amplitude from '@amplitude/analytics-browser'
 
 import { ensureInitialized } from './ensure-initialized'
 import { AmplitudeUser, AmplitudeUserGroups } from './types'
 
-export const identifyFactory =
-  (client?: AmplitudeClient) =>
-  (userID: string, userData: AmplitudeUser, userGroups?: AmplitudeUserGroups): void => {
-    if (!client) return
+export const identify = (
+  userID: string,
+  userData: AmplitudeUser,
+  userGroups?: AmplitudeUserGroups,
+): void => {
+  ensureInitialized(userID)
+  amplitude.setUserId(userID)
 
-    ensureInitialized(client)
+  const identify = new amplitude.Identify()
+  identify
+    .set('id', userData.id)
+    .set('email', userData.email)
+    .set('name', userData.name)
+    .set('gender', userData.gender)
+    .set('isTeamLeader', userData.isTeamLeader)
+    .set('role', userData.role)
+    .set('createdAt', userData.createdAt)
 
-    client.setUserId(userID)
-    client.setUserProperties(userData)
+  amplitude.identify(identify)
 
-    if (userGroups)
-      Object.entries(userGroups).map(([type, values]) => client.setGroup(type, values))
-  }
+  if (userGroups)
+    Object.entries(userGroups).map(([type, values]) =>
+      amplitude.groupIdentify(type, values, identify),
+    )
+}

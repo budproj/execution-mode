@@ -17,7 +17,7 @@ export const useEvent = (
   eventType: EventType,
   options: EventHookOptions = {},
 ): EventHook<typeof eventType> => {
-  const { logEvent } = useAmplitude(options.project)
+  const { logEvent } = useAmplitude()
 
   const dispatch = (event: Event[typeof eventType]) => {
     logEvent(eventType, event, options)

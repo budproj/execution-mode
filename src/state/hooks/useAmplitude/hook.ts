@@ -1,12 +1,7 @@
-import { useContext } from 'react'
-
-import { defaultProject } from '../../../components/Base/AmplitudeProvider/constants'
-import { AmplitudeContext } from '../../../components/Base/AmplitudeProvider/context'
-
-import { getStaticAttributes } from './get-static-attributes'
-import { identifyFactory } from './identify-factory'
-import { logEventFactory, LogEventOptions } from './log-event-factory'
-import { AmplitudeStaticAttributes, AmplitudeUser, AmplitudeUserGroups } from './types'
+import { ensureInitialized } from './ensure-initialized'
+import { identify } from './identify-factory'
+import { logEvent, LogEventOptions } from './log-event-factory'
+import { AmplitudeUser, AmplitudeUserGroups } from './types'
 
 export type AmplitudeHook = {
   identify: (userID: string, userData: AmplitudeUser, userGroups?: AmplitudeUserGroups) => void
@@ -15,20 +10,12 @@ export type AmplitudeHook = {
     eventProperties?: Record<string, any>,
     options?: LogEventOptions,
   ) => void
-} & AmplitudeStaticAttributes
+}
 
-export const useAmplitude = (project?: string): AmplitudeHook => {
-  project ??= defaultProject
-
-  const context = useContext(AmplitudeContext)
-  const client = context[project]
-
-  const identify = identifyFactory(client)
-  const logEvent = logEventFactory(client)
-  const staticAttributes = getStaticAttributes(client)
+export const useAmplitude = (): AmplitudeHook => {
+  ensureInitialized()
 
   return {
-    ...staticAttributes,
     identify,
     logEvent,
   }

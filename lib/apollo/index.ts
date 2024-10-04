@@ -10,8 +10,6 @@ import { useMemo } from 'react'
 
 import getConfig from 'src/config'
 
-import { AmplitudeHook, useAmplitude } from '../../src/state/hooks/useAmplitude/hook'
-
 import { APOLLO_STATE } from './constants'
 
 let APOLLO_CLIENT: ApolloClient<NormalizedCacheObject>
@@ -30,21 +28,10 @@ const authzLinkFactory = (authzClient: Auth0ContextInterface) =>
     }
   })
 
-const amplitudeLinkFactory = ({ deviceID, sessionID }: AmplitudeHook) =>
-  setContext((_, { headers, ...previousContext }) => ({
-    ...previousContext,
-    headers: {
-      ...headers,
-      'Device-ID': deviceID,
-      'Session-ID': sessionID,
-    },
-  }))
-
-const linkWithServer = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) => {
+const linkWithServer = (authzClient: Auth0ContextInterface) => {
   const { publicRuntimeConfig } = getConfig()
 
   const authLink = authzLinkFactory(authzClient)
-  const amplitudeLink = amplitudeLinkFactory(amplitude)
   const uploadLink = createUploadLink({
     uri: publicRuntimeConfig.api.graphql,
   })
@@ -55,10 +42,10 @@ const linkWithServer = (authzClient: Auth0ContextInterface, amplitude: Amplitude
     },
   })
 
-  return { link: ApolloLink.from([sentryLink, authLink, amplitudeLink, uploadLink]) }
+  return { link: ApolloLink.from([sentryLink, authLink, uploadLink]) }
 }
 
-const createApolloClient = (authzClient: Auth0ContextInterface, amplitude: AmplitudeHook) =>
+const createApolloClient = (authzClient: Auth0ContextInterface) =>
   new ApolloClient({
     cache: new InMemoryCache({
       typePolicies: {
@@ -70,15 +57,14 @@ const createApolloClient = (authzClient: Auth0ContextInterface, amplitude: Ampli
       },
     }),
     ssrMode: typeof window === 'undefined',
-    ...linkWithServer(authzClient, amplitude),
+    ...linkWithServer(authzClient),
   })
 
 export const initializeApollo = (
   authzClient: Auth0ContextInterface,
-  amplitude: AmplitudeHook,
   initialState: NormalizedCacheObject,
 ) => {
-  const apolloClient = APOLLO_CLIENT ?? createApolloClient(authzClient, amplitude)
+  const apolloClient = APOLLO_CLIENT ?? createApolloClient(authzClient)
 
   if (initialState) {
     const existingCache = apolloClient.extract()
@@ -97,11 +83,10 @@ export const useApollo = (
   pageProperties: Record<string, NormalizedCacheObject>,
 ): ApolloClient<NormalizedCacheObject> => {
   const authzClient = useAuth0()
-  const amplitude = useAmplitude()
 
   const state: NormalizedCacheObject = pageProperties[APOLLO_STATE]
   const client = useMemo(
-    () => initializeApollo(authzClient, amplitude, state),
+    () => initializeApollo(authzClient, state),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [authzClient, state],
   )
