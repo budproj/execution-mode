@@ -13,7 +13,9 @@
     "unicorn/no-nested-ternary": "off",
     "react/default-props-match-prop-types": "off",
     "react/require-default-props": "off",
+    "react/prefer-read-only-props": "off",
     "react/no-unused-prop-type": "off",
+    "react/boolean-prop-naming": "off",
     "@typescript-eslint/no-floating-promises": "off"
   },
   "settings": {

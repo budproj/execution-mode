@@ -1,17 +1,16 @@
-import { AmplitudeClient } from 'amplitude-js'
+import * as amplitude from '@amplitude/analytics-browser'
 
 import getConfig from '../../../config'
 
 const defaultAmplitudeSettings = {
-  saveEvents: true,
-  includeUtm: false,
-  includeReferer: true,
-  saveParamsReferrerOncePerSession: false,
+  attribution: {
+    trackNewCampaigns: true,
+  },
 }
 
-export const ensureInitialized = (client: AmplitudeClient): void => {
+export const ensureInitialized = (userId?: string): void => {
   const { publicRuntimeConfig } = getConfig()
   const { apiKey } = publicRuntimeConfig.amplitude
 
-  client.init(apiKey, undefined, defaultAmplitudeSettings)
+  amplitude.init(apiKey, userId, defaultAmplitudeSettings)
 }

@@ -1,4 +1,4 @@
-import { AmplitudeClient } from 'amplitude-js'
+import * as amplitude from '@amplitude/analytics-browser'
 
 import { ensureInitialized } from './ensure-initialized'
 
@@ -6,33 +6,25 @@ export type LogEventOptions = {
   feature?: string
 }
 
-export const logEventFactory =
-  (client?: AmplitudeClient) =>
-  (
-    eventType: string,
-    eventProperties?: Record<string, any>,
-    options: LogEventOptions = {},
-  ): void => {
-    if (!client) return
+export const logEvent = (
+  eventType: string,
+  eventProperties?: Record<string, any>,
+  options: LogEventOptions = {},
+): void => {
+  ensureInitialized()
+  amplitude.track(eventType, eventProperties)
 
-    ensureInitialized(client)
-    client.logEvent(eventType, eventProperties)
-
-    if (options.feature)
-      handleFeatureUse(options.feature, client, { type: eventType, properties: eventProperties })
-  }
+  if (options.feature)
+    handleFeatureUse(options.feature, { type: eventType, properties: eventProperties })
+}
 
 type HandleFeatureUseEventOriginOptions = {
   type: string
   properties?: Record<string, any>
 }
 
-const handleFeatureUse = (
-  feature: string,
-  client: AmplitudeClient,
-  eventOrigin: HandleFeatureUseEventOriginOptions,
-) => {
-  client.logEvent('UsedFeature', {
+const handleFeatureUse = (feature: string, eventOrigin: HandleFeatureUseEventOriginOptions) => {
+  amplitude.track('UsedFeature', {
     ...eventOrigin.properties,
     eventOriginType: eventOrigin.type,
     feature,

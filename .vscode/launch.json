@@ -8,6 +8,12 @@
   ],
   "configurations": [
     {
+      "command": "npm run start:dev",
+      "name": "Run (dev)",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
       "name": "Server",
       "type": "node",
       "request": "launch",
