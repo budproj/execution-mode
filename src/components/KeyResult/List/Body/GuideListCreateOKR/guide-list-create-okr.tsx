@@ -16,7 +16,7 @@ const GuideListCreateOkr = () => {
         <Text fontSize={14} fontWeight="medium" color="#8491B0">
           {intl.formatMessage(messages.guideListCreateOkrHeadTitle)}
         </Text>
-        <Link href="https://www.exemplosdeokr.com.br/" target="_blank" rel="noreferrer noopener">
+        <Link href="https://exemplos-de-okrs.webflow.io/" target="_blank" rel="noreferrer noopener">
           <Button
             color="brand.500"
             display="flex"
