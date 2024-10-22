@@ -10,7 +10,7 @@ export const OkrExampleLink = () => {
   const intl = useIntl()
 
   return (
-    <Link isExternal href="https://www.exemplosdeokr.com.br">
+    <Link isExternal href="https://exemplos-de-okrs.webflow.io/">
       <Flex alignItems="center">
         {intl.formatMessage(messages.okrExampleLink)}
         <ArrowRightLongIcon
