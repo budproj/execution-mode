@@ -122,7 +122,7 @@ export const InsertOrUpdateKeyResultForm = ({
 
   const [updateKeyResult] = useMutation<UpdateKeyResultMutationResult>(queries.UPDATE_KEY_RESULT)
 
-  const keyResult = editingModeKeyResult
+  const keyResult = editingKeyResultId ? editingModeKeyResult : undefined
 
   useEffect(() => {
     if (keyResult)
