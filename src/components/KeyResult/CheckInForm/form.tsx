@@ -141,23 +141,17 @@ const CheckInForm = ({
     values: CheckInFormValues,
     actions: FormikHelpers<CheckInFormValues>,
   ) => {
-    const wasProgressUpdated = values.valuePrevious !== values.valueNew
-    const wasConfidenceUpdated = values.confidence !== latestKeyResultCheckIn?.confidence
-    const wasCommentCreated = values.comment && values.comment !== ''
+    await dispatchRemoteUpdate(values)
 
-    if (wasProgressUpdated || wasConfidenceUpdated || wasCommentCreated) {
-      await dispatchRemoteUpdate(values)
-
-      if (values.confidence === CONFIDENCE_ACHIEVED.max) {
-        resetOpenDrawer()
-        setTimeout(() => setIsAchievedKeyResultModalOpen(true), 100)
-      }
-
-      if (afterSubmit) afterSubmit(values)
-
-      syncRecoilState()
-      refreshFields(values, actions)
+    if (values.confidence === CONFIDENCE_ACHIEVED.max) {
+      resetOpenDrawer()
+      setTimeout(() => setIsAchievedKeyResultModalOpen(true), 100)
     }
+
+    if (afterSubmit) afterSubmit(values)
+
+    syncRecoilState()
+    refreshFields(values, actions)
   }
 
   const handleCancel = () => {
