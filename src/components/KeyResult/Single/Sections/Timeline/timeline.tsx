@@ -77,6 +77,8 @@ const KeyResultSectionTimeline = ({
     if (onEntryDelete) onEntryDelete(entryType)
   }
 
+  console.log({ timeline })
+
   return (
     <Flex direction="column" gridGap={4}>
       {!isDraft && (
