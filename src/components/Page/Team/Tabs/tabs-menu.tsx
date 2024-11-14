@@ -73,26 +73,7 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
               dispatchTaskManagerTabClick({})
             }}
           >
-            <div
-              id="retrospective-tab"
-              style={{
-                display: 'flex',
-              }}
-            >
-              {intl.formatMessage(messages.tasksTeamTab)}
-              <Tag
-                size="md"
-                color="white"
-                borderColor="current"
-                border="1px solid"
-                lineHeight="0px"
-                fontWeight="semibold"
-                bg="brand.500"
-                ml={2}
-              >
-                {intl.formatMessage(tabMessages.newItem)}
-              </Tag>
-            </div>
+            {intl.formatMessage(messages.tasksTeamTab)}
           </StyledTab>
           <Box width="1px" bg="new-gray.500" />
         </>
