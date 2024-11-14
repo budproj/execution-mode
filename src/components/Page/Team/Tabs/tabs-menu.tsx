@@ -1,10 +1,9 @@
-import { Box, Stack, Tab, TabList, Tag } from '@chakra-ui/react'
+import { Box, Stack, Tab, TabList } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import tabMessages from 'src/components/Base/MainAppBar/messages'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
