@@ -17,14 +17,13 @@ import {
   isCheckListCollapseOpenAtom,
 } from 'src/state/recoil/key-result/checklist'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
+import { isKeyResultListOpenAtom } from 'src/state/recoil/key-result/key-result-list'
 import { createdByCheckInNotificationAtom } from 'src/state/recoil/notifications'
 
 import { EventType } from '../../../../state/hooks/useEvent/event-type'
 import { useEvent } from '../../../../state/hooks/useEvent/hook'
 
 import KeyResultDrawerContent from './content'
-
-import { isKeyResultListOpenAtom } from 'src/state/recoil/key-result/key-result-list'
 
 const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 const objectiveSelector = buildPartialSelector<KeyResult['objective']>('objective')
@@ -47,7 +46,6 @@ const KeyResultDrawer = () => {
   const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
   const setIsChecklistOpen = useSetRecoilState(isCheckListCollapseOpenAtom)
   const setHiddingModal = useSetRecoilState(isKeyResultListOpenAtom)
-  
 
   const objective = useRecoilValue(objectiveSelector(keyResultID))
 

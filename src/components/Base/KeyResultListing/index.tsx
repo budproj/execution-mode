@@ -69,7 +69,7 @@ export const KeyResultListingModal = memo(
     onClose,
   }: KeyResultModalListingProperties) => {
     const setOpenDrawer = useSetRecoilState(keyResultReadDrawerOpenedKeyResultID)
-    const [ isHidding, setHideModal ] = useRecoilState(isKeyResultListOpenAtom);
+    const [isHidding, setHideModal] = useRecoilState(isKeyResultListOpenAtom)
 
     useEffect(() => {
       if (dispatchEvent) dispatchEvent()
@@ -77,13 +77,14 @@ export const KeyResultListingModal = memo(
 
     const onLineClick = useCallback(
       (id: KeyResult['id']) => {
-        setOpenDrawer(id);
-        setHideModal(true);
-      }, [setOpenDrawer, setHideModal])
+        setOpenDrawer(id)
+        setHideModal(true)
+      },
+      [setOpenDrawer, setHideModal],
+    )
 
     return (
-      <>
-      {isHidding === false && (
+      (isHidding && (
         <Modal
           isOpen={isOpen}
           returnFocusOnClose={false}
@@ -177,8 +178,9 @@ export const KeyResultListingModal = memo(
             </ModalBody>
           </StyledModal>
         </Modal>
-      )}
-      </>
+      )) ||
+      // eslint-disable-next-line unicorn/no-null
+      null
     )
   },
 )
