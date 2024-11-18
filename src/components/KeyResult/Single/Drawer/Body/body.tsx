@@ -79,12 +79,14 @@ const KeyResultDrawerBody = ({
       <Portal containerRef={timelinePortalReference}>
         {isDraft && <KeyResultHistory />}
         <Box px={8} pt={4}>
-          <KeyResultSectionTimeline
-            isDraft={isDraft}
-            keyResultID={keyResultID}
-            scrollTarget={SCROLLBAR_ID}
-            newCheckInValue={newCheckInValue}
-          />
+          {keyResult && (
+            <KeyResultSectionTimeline
+              isDraft={isDraft}
+              keyResultID={keyResultID}
+              scrollTarget={SCROLLBAR_ID}
+              newCheckInValue={newCheckInValue}
+            />
+          )}
         </Box>
       </Portal>
       <Stack
