@@ -1,10 +1,9 @@
-import { Box, Stack, Tab, TabList, Tag } from '@chakra-ui/react'
+import { Box, Stack, Tab, TabList } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
-import tabMessages from 'src/components/Base/MainAppBar/messages'
 import { Team } from 'src/components/Team/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
@@ -73,26 +72,7 @@ const TabsMenu = ({ teamId }: TabsMenuProperties) => {
               dispatchTaskManagerTabClick({})
             }}
           >
-            <div
-              id="retrospective-tab"
-              style={{
-                display: 'flex',
-              }}
-            >
-              {intl.formatMessage(messages.tasksTeamTab)}
-              <Tag
-                size="md"
-                color="white"
-                borderColor="current"
-                border="1px solid"
-                lineHeight="0px"
-                fontWeight="semibold"
-                bg="brand.500"
-                ml={2}
-              >
-                {intl.formatMessage(tabMessages.newItem)}
-              </Tag>
-            </div>
+            {intl.formatMessage(messages.tasksTeamTab)}
           </StyledTab>
           <Box width="1px" bg="new-gray.500" />
         </>
