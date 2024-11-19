@@ -17,6 +17,7 @@ import {
   isCheckListCollapseOpenAtom,
 } from 'src/state/recoil/key-result/checklist'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
+import { isKeyResultListOpenAtom } from 'src/state/recoil/key-result/key-result-list'
 import { createdByCheckInNotificationAtom } from 'src/state/recoil/notifications'
 
 import { EventType } from '../../../../state/hooks/useEvent/event-type'
@@ -44,6 +45,7 @@ const KeyResultDrawer = () => {
   const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
   const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
   const setIsChecklistOpen = useSetRecoilState(isCheckListCollapseOpenAtom)
+  const setHiddingModal = useSetRecoilState(isKeyResultListOpenAtom)
 
   const objective = useRecoilValue(objectiveSelector(keyResultID))
 
@@ -56,6 +58,7 @@ const KeyResultDrawer = () => {
     setIsCheckInModalOpen(false)
     setIsChecklistOpen(false)
     setCreatedByNotification(false)
+    setHiddingModal(false)
   }
 
   const isOpen = Boolean(keyResultID)
