@@ -12,6 +12,7 @@ type KeyResultListBodyColumnActionsMessage =
   | 'successfulCopyMessage'
   | 'copyButtonMessage'
   | 'optionsButtonDesc'
+  | 'editButtonLabelMessage'
 
 export default defineMessages<KeyResultListBodyColumnActionsMessage>({
   deleteIconDesc: {
@@ -81,5 +82,10 @@ export default defineMessages<KeyResultListBodyColumnActionsMessage>({
     id: 'XCDzMo',
     description:
       'This button allows you to choose an option that can allow you to copy the title ou exclude the KR.',
+  },
+  editButtonLabelMessage: {
+    defaultMessage: 'Editar este Resultado-Chave',
+    id: 'r2E/o2',
+    description: 'This button allow the user edit the Key Result.',
   },
 })

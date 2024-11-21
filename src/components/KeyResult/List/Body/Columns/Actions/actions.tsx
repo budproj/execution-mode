@@ -15,6 +15,7 @@ import { GraphQLEffect } from '../../../../../types'
 
 import { CopyAction } from './copy-action'
 import { DeleteAction } from './delete-action'
+import EditAction from './edit-action'
 import messages from './messages'
 
 export interface KeyResultListBodyColumnActionsProperties
@@ -38,6 +39,10 @@ const KeyResultListBodyColumnActions = ({
     ? keyResult?.owner?.id === myID
     : keyResult?.policy?.delete === GraphQLEffect.ALLOW
 
+  const canEdit = isPersonalKr
+    ? keyResult?.owner?.id === myID
+    : keyResult?.policy?.update === GraphQLEffect.ALLOW
+
   return (
     <KeyResultListBodyColumnBase preventLineClick>
       <Menu placement="bottom-end" variant="action-list">
@@ -58,6 +63,7 @@ const KeyResultListBodyColumnActions = ({
         <MenuList>
           {keyResult?.title && <CopyAction keyResultTitle={keyResult.title} />}
           {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
+          {canEdit && <EditAction id={id} />}
         </MenuList>
       </Menu>
     </KeyResultListBodyColumnBase>

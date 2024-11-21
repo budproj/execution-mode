@@ -3263,6 +3263,10 @@
     "defaultMessage": "Informações pessoais",
     "description": "This title is displayed as the heading of the personal informations section in our user account settings page"
   },
+  "r2E/o2": {
+    "defaultMessage": "Editar este Resultado-Chave",
+    "description": "This button allow the user edit the Key Result."
+  },
   "rDaIQ2": {
     "defaultMessage": "Retrospectiva da semana",
     "description": "The title of the routine reminder notification"
