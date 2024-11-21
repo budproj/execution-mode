@@ -62,8 +62,8 @@ const KeyResultListBodyColumnActions = ({
         </MenuButton>
         <MenuList>
           {keyResult?.title && <CopyAction keyResultTitle={keyResult.title} />}
-          {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
           {canEdit && <EditAction id={id} />}
+          {canDelete && <DeleteAction id={id} onDelete={onDelete} />}
         </MenuList>
       </Menu>
     </KeyResultListBodyColumnBase>
