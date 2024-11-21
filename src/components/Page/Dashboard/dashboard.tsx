@@ -42,6 +42,16 @@ interface GetUserNameGenderAndSettingsRequest {
   teams: GraphQLConnection<Team>
 }
 
+interface GetUserCompaniesRequest {
+  me: {
+    companies: GraphQLConnection<Team>
+  }
+}
+
+interface GetUserTopTeamsRequest {
+  teams: GraphQLConnection<Team>
+}
+
 interface PreferencesProperties {
   main_team: string
 }
@@ -354,9 +364,13 @@ const StyledStack = styled(Stack)`
 
 const DashboardPage = () => {
   const intl = useIntl()
-  const { data, loading, called, refetch } = useQuery<GetUserNameGenderAndSettingsRequest>(
+  const user = useQuery<GetUserNameGenderAndSettingsRequest>(
     queries.GET_USER_NAME_AND_GENDER_AND_SETTINGS,
   )
+  const user_companies = useQuery<GetUserCompaniesRequest>(queries.GET_USER_COMPANIES)
+  const user_teams = useQuery<GetUserTopTeamsRequest>(queries.GET_USER_TOP_TEAMS, {
+    fetchPolicy: 'cache-first',
+  })
 
   // Const me = useRecoilValue(meAtom)
   // const user = useRecoilValue(selectUser(me))
@@ -366,7 +380,7 @@ const DashboardPage = () => {
 
   const { data: allCompanyCycles, loading: companyCyclesLoading } = useGetCompanyCycles()
 
-  const company = data?.me.companies.edges[0].node
+  const company = user_companies?.data?.me.companies.edges[0].node
 
   const activeCompanyCycles = allCompanyCycles.filter((cycle) => cycle.active)
 
@@ -374,25 +388,27 @@ const DashboardPage = () => {
   const quarter = activeCompanyCycles.find((cycle) => cycle.cadence === CADENCE.QUARTERLY)
 
   const pageTitle =
-    called && !loading && intl.formatMessage(messages.greeting, { name: data?.me.firstName })
+    user.called &&
+    !user.loading &&
+    intl.formatMessage(messages.greeting, { name: user.data?.me.firstName })
 
   const selectedDashboardTeam = useRecoilValue(selectedDashboardTeamAtom)
 
   const isCompanySelected = company?.id === selectedDashboardTeam?.id
 
   useEffect(() => {
-    if (data?.me.settings.edges[0]) {
+    if (user?.data?.me.settings.edges[0]) {
       const parsedPreferences: PreferencesProperties = JSON.parse(
-        data?.me.settings.edges[0]?.node.preferences,
+        user?.data?.me.settings.edges[0]?.node.preferences,
       )
       const mainTeamId = parsedPreferences.main_team
       setMainTeamId(mainTeamId)
     }
-  }, [data?.me.settings.edges])
+  }, [user?.data?.me.settings.edges])
 
   useEffect(() => {
-    if (data) setEdges(data.teams.edges)
-  }, [data, setEdges])
+    if (user_teams.data) setEdges(user_teams.data.teams.edges)
+  }, [user_teams.data, setEdges])
 
   return (
     <StyledStack bg="new-gray.50" position="relative">
@@ -407,9 +423,13 @@ const DashboardPage = () => {
             <UserProfileHeader
               canUpdate
               onlyPicture
-              userProps={{ id: data?.me.id, picture: data?.me.picture, role: data?.me.role }}
-              handleUpdatePicture={refetch}
-              isLoaded={!loading}
+              userProps={{
+                id: user.data?.me.id,
+                picture: user.data?.me.picture,
+                role: user.data?.me.role,
+              }}
+              handleUpdatePicture={user.refetch}
+              isLoaded={!user.loading}
               variantAvatar="circle"
             />
             <PageTitle id="greeting-user" color="white" fontSize={36}>

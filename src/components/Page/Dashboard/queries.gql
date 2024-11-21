@@ -12,6 +12,11 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
         }
       }
     }
+  }
+}
+
+query GET_USER_COMPANIES {
+  me {
     companies {
       edges {
         node {
@@ -37,6 +42,9 @@ query GET_USER_NAME_AND_GENDER_AND_SETTINGS {
       }
     }
   }
+}
+
+query GET_USER_TOP_TEAMS {
   teams(first: 200) {
     edges {
       node {
