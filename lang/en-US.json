@@ -3099,6 +3099,10 @@
     "defaultMessage": "Personal Information",
     "description": "This title is displayed as the heading of the personal informations section in our user account settings page"
   },
+  "r2E/o2": {
+    "defaultMessage": "Edit this Key Result",
+    "description": "This button allow the user edit the Key Result."
+  },
   "R5fgoj": {
     "defaultMessage": "Next",
     "description": "This message appears on the button to move to the next question in the routines form."
