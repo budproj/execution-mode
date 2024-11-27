@@ -20,5 +20,9 @@ export const useGetCommentsByEntity = () => {
     setComments(findedComments)
   }
 
-  return { getCommentsByEntity, comments }
+  const refatch = ({ entity }: { entity: Comment['entity'] }) => {
+    getCommentsByEntity({ entity })
+  }
+
+  return { getCommentsByEntity, comments, refatch }
 }

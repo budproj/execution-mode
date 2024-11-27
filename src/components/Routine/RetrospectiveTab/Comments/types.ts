@@ -4,4 +4,5 @@ export type Comment = {
   userId: string
   content: string
   createdAt: Date
+  isDeleted: boolean
 }

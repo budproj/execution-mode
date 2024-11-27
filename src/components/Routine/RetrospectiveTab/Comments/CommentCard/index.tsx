@@ -1,26 +1,33 @@
 import { Flex, Text, VStack, Avatar, Button, HStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useMemo } from 'react'
+import React, { useMemo, useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useSetRecoilState } from 'recoil'
 import regexifyString from 'regexify-string'
 
+import { ConfirmationDialog } from 'src/components/Base/Dialogs/Confirmation/Base/wrapper'
 import LastUpdateText from 'src/components/Base/LastUpdateText'
+import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
+import { useGetCommentsByEntity } from 'src/components/Routine/hooks/getCommentsByEntity'
 import { useGetUserDetails } from 'src/components/User/hooks'
 import { User } from 'src/components/User/types'
 import { commentInputInitialValue } from 'src/state/recoil/comments/input'
 import { commentEntityToReply } from 'src/state/recoil/comments/reply-comment'
 
+import { COMMENT_DOMAIN } from '../../Answers/utils/constants'
+import { AnswerType } from '../../retrospective-tab-content'
 import { Comment } from '../types'
 
 import messages from './messages'
 
 interface CommentCard {
+  answerId: AnswerType['id']
   userId: User['id']
   id: Comment['id']
   timestamp: Date
   comment: string
   entity: Comment['entity']
+  isDeleted: Comment['isDeleted']
 }
 
 export const MarkedUser = ({ name }: { name?: string }) => (
@@ -46,10 +53,24 @@ export const insertMentionInString = (comment: string) => {
   })
 }
 
-const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) => {
+const CommentCard = ({
+  answerId,
+  id,
+  userId,
+  timestamp,
+  comment,
+  entity,
+  isDeleted,
+}: CommentCard) => {
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
+  const { servicesPromise } = useContext(ServicesContext)
+
+  const origin_entity = `${COMMENT_DOMAIN.routine}:${answerId}`
+
   const { data: user } = useGetUserDetails(userId)
   const setCommentInputValue = useSetRecoilState(commentInputInitialValue)
   const setCommentEntityToReply = useSetRecoilState(commentEntityToReply)
+  const { refatch } = useGetCommentsByEntity()
 
   const intl = useIntl()
 
@@ -64,6 +85,19 @@ const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) =>
   const entityToReply = `${entity}:${id}`
 
   const userToMark = `@[${user?.fullName ?? ''}](${user?.id ?? ''})`
+
+  const handleClose = () => {
+    if (isDialogOpen) setIsDialogOpen(false)
+  }
+
+  const handleDeleteComment = async () => {
+    const { comments } = await servicesPromise
+    await comments.delete<Comment[]>(`/comments/${id}`).catch((error) => {
+      console.error(error)
+      return { data: undefined }
+    })
+    refatch({ entity: origin_entity })
+  }
 
   const handleReplyComment = () => {
     setCommentInputValue({ text: `${userToMark} ` })
@@ -87,19 +121,41 @@ const CommentCard = ({ id, userId, timestamp, comment, entity }: CommentCard) =>
             textAlign="right"
           />
         </Flex>
-        <Text wordBreak="break-word" fontSize={14} color="new-gray.900">
-          {commentText}
+        <Text wordBreak="break-word" fontSize={14} color={isDeleted ? 'gray.400' : 'new-gray.900'}>
+          {isDeleted ? 'Comentario excluido' : commentText}
         </Text>
-        <Button
-          p={0}
-          color="brand.500"
-          fontSize={14}
-          fontWeight="normal"
-          height="24px"
-          onClick={handleReplyComment}
-        >
-          {intl.formatMessage(messages.replyCommentButton)}
-        </Button>
+        {!isDeleted && (
+          <Flex>
+            <Button
+              p={0}
+              color="brand.500"
+              fontSize={14}
+              fontWeight="normal"
+              height="24px"
+              onClick={handleReplyComment}
+            >
+              {intl.formatMessage(messages.replyCommentButton)}
+            </Button>
+            <Button
+              p={0}
+              paddingLeft={3}
+              color="brand.500"
+              fontSize={14}
+              fontWeight="normal"
+              height="24px"
+              onClick={() => setIsDialogOpen(true)}
+            >
+              {intl.formatMessage(messages.excludeCommentButton)}
+            </Button>
+            <ConfirmationDialog
+              isOpen={isDialogOpen}
+              headerImageURL="/images/bud-trash-bin.png"
+              title={intl.formatMessage(messages.deleteDialogTitle)}
+              onConfirm={handleDeleteComment}
+              onClose={handleClose}
+            />
+          </Flex>
+        )}
       </VStack>
     </HStack>
   )
