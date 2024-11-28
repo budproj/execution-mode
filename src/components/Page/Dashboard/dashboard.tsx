@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil'
 import { PageMetaHead, PageTitle } from 'src/components/Base'
 import PageContent from 'src/components/Base/PageContent'
 import { CADENCE } from 'src/components/Cycle/constants'
+import { KeyResultInsertDrawer } from 'src/components/KeyResult/InsertDrawer/wrapper'
 import BoardsOverview from 'src/components/Report/BoardsOverview'
 import MetricsOverview from 'src/components/Report/MetricsOverview'
 import { OverviewSummary } from 'src/components/Report/OverviewSummary'
@@ -473,6 +474,7 @@ const DashboardPage = () => {
           </Flex>
         </Box>
       </PageContent>
+      <KeyResultInsertDrawer teamID={mainTeamId} />
     </StyledStack>
   )
 }

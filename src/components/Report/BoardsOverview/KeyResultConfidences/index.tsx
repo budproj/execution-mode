@@ -1,10 +1,11 @@
 import { Box, Flex, StyleProps } from '@chakra-ui/react'
 import React, { useCallback, useMemo } from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import TooltipWithDelay from 'src/components/Base/TooltipWithDelay'
 import { krHealthStatusAtom } from 'src/state/recoil/key-result'
+import { isKeyResultListOpenAtom } from 'src/state/recoil/key-result/key-result-list'
 import { krTableLengthAtom } from 'src/state/recoil/key-result/kr-table-lenght.atom'
 
 import Board from '../Board'
@@ -26,6 +27,7 @@ const KeyResultConfidences = ({
   const intl = useIntl()
   const setKrHealthStatus = useSetRecoilState(krHealthStatusAtom)
   const setKrTableLength = useSetRecoilState(krTableLengthAtom)
+  const resetListKR = useResetRecoilState(isKeyResultListOpenAtom)
 
   const confidencesToRender = useMemo(
     () =>
@@ -40,9 +42,10 @@ const KeyResultConfidences = ({
       if (confidence.isListable) {
         setKrTableLength(quantities[confidence.name])
         setKrHealthStatus(confidence.name)
+        resetListKR()
       }
     },
-    [quantities, setKrHealthStatus, setKrTableLength],
+    [quantities, setKrHealthStatus, setKrTableLength, resetListKR],
   )
 
   return (
