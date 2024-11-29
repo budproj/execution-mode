@@ -80,21 +80,6 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
               onSearch={setSearchTaskInput}
             />
           </Box>
-          <a
-            href="https://bit.ly/sugestoestmanager"
-            target="_blank"
-            style={{ textDecoration: 'none' }}
-            rel="noreferrer"
-          >
-            <Button
-              bg="#525F7F"
-              color="black.50"
-              _hover={{ background: 'brand.400', color: 'black.50' }}
-              paddingY={2}
-            >
-              Dar sugestão
-            </Button>
-          </a>
           <Button
             bg={isArchivedBoard ? 'brand.500' : 'new-gray.300'}
             _hover={{ background: 'new-gray.400', color: 'new-gray.800' }}
