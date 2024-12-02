@@ -2,7 +2,7 @@ import { Flex, Text, VStack, Avatar, Button, HStack } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useMemo, useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import regexifyString from 'regexify-string'
 
 import { ConfirmationDialog } from 'src/components/Base/Dialogs/Confirmation/Base/wrapper'
@@ -13,6 +13,7 @@ import { useGetUserDetails } from 'src/components/User/hooks'
 import { User } from 'src/components/User/types'
 import { commentInputInitialValue } from 'src/state/recoil/comments/input'
 import { commentEntityToReply } from 'src/state/recoil/comments/reply-comment'
+import meAtom from 'src/state/recoil/user/me'
 
 import { COMMENT_DOMAIN } from '../../Answers/utils/constants'
 import { AnswerType } from '../../retrospective-tab-content'
@@ -67,6 +68,8 @@ const CommentCard = ({
 
   const origin_entity = `${COMMENT_DOMAIN.routine}:${answerId}`
 
+  const logged_user = useRecoilValue(meAtom)
+
   const { data: user } = useGetUserDetails(userId)
   const setCommentInputValue = useSetRecoilState(commentInputInitialValue)
   const setCommentEntityToReply = useSetRecoilState(commentEntityToReply)
@@ -104,6 +107,8 @@ const CommentCard = ({
     setCommentEntityToReply(entityToReply)
   }
 
+  const isCommentOwner = userId === logged_user
+
   return (
     <HStack spacing={4} my={1} alignItems="flex-start" justifyContent="flex-start" width="full">
       <Avatar width="45px" height="45px" src={user?.picture} />
@@ -136,17 +141,19 @@ const CommentCard = ({
             >
               {intl.formatMessage(messages.replyCommentButton)}
             </Button>
-            <Button
-              p={0}
-              paddingLeft={3}
-              color="brand.500"
-              fontSize={14}
-              fontWeight="normal"
-              height="24px"
-              onClick={() => setIsDialogOpen(true)}
-            >
-              {intl.formatMessage(messages.excludeCommentButton)}
-            </Button>
+            {isCommentOwner && (
+              <Button
+                p={0}
+                paddingLeft={3}
+                color="brand.500"
+                fontSize={14}
+                fontWeight="normal"
+                height="24px"
+                onClick={() => setIsDialogOpen(true)}
+              >
+                {intl.formatMessage(messages.excludeCommentButton)}
+              </Button>
+            )}
             <ConfirmationDialog
               isOpen={isDialogOpen}
               headerImageURL="/images/bud-trash-bin.png"
