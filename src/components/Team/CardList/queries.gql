@@ -21,8 +21,14 @@ query GET_TEAMS {
         users {
           edges {
             node {
+              id
+              firstName
+              nickname
               fullName
+              role
               picture
+              about
+              linkedInProfileAddress
             }
           }
         }
@@ -59,8 +65,14 @@ query GET_USER_TEAMS_AND_COMPANIES {
         users {
           edges {
             node {
+              id
+              firstName
+              nickname
               fullName
+              role
               picture
+              about
+              linkedInProfileAddress
             }
           }
         }
@@ -93,8 +105,14 @@ query GET_USER_TEAMS_AND_COMPANIES {
         users {
           edges {
             node {
+              id
+              firstName
+              nickname
               fullName
+              role
               picture
+              about
+              linkedInProfileAddress
             }
           }
         }
