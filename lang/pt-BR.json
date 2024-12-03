@@ -1283,6 +1283,10 @@
     "defaultMessage": "para <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the second line of our confidence tooltip"
   },
+  "IoZbDV": {
+    "defaultMessage": "Deseja excluir esse comentário?",
+    "description": "This message appears in delete modal confirmation."
+  },
   "IsUZSc": {
     "defaultMessage": "Excluir este Resultado-Chave",
     "description": "This message appears in the button that deletes the key result"
@@ -1622,6 +1626,10 @@
   "O4iDCM": {
     "defaultMessage": "Progresso",
     "description": "The title of the progress section in our key-result sidebar"
+  },
+  "O60mSP": {
+    "defaultMessage": "Excluir",
+    "description": "This message appears as a label on the button used to exclude a comment."
   },
   "OA7DUJ": {
     "defaultMessage": "Novo Objetivo",

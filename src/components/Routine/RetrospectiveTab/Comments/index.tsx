@@ -4,17 +4,20 @@ import { useIntl } from 'react-intl'
 
 import { User } from 'src/components/User/types'
 
+import { AnswerType } from '../retrospective-tab-content'
+
 import CommentCard from './CommentCard'
 import RoutineCommentsEmptyState from './empty-state'
 import messages from './messages'
 import { Comment } from './types'
 
 type RoutineCommentsProperties = {
+  answerId: AnswerType['id']
   answerOwner?: User['firstName']
   comments: Comment[]
 }
 
-const RoutineComments = ({ answerOwner, comments }: RoutineCommentsProperties) => {
+const RoutineComments = ({ answerId, answerOwner, comments }: RoutineCommentsProperties) => {
   const intl = useIntl()
 
   return (
@@ -24,14 +27,16 @@ const RoutineComments = ({ answerOwner, comments }: RoutineCommentsProperties) =
       </Text>
       <List>
         {comments && comments.length > 0 ? (
-          comments.map(({ id, userId, content, createdAt, entity }) => (
+          comments.map(({ id, userId, content, createdAt, entity, isDeleted }) => (
             <CommentCard
               key={id}
+              answerId={answerId}
               id={id}
               userId={userId}
               comment={content}
               timestamp={createdAt}
               entity={entity}
+              isDeleted={isDeleted}
             />
           ))
         ) : (

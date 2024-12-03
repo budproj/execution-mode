@@ -1971,6 +1971,10 @@
     "defaultMessage": "to <highlight>{confidence}</highlight>",
     "description": "This text is displayed as the second line of our confidence tooltip"
   },
+  "IoZbDV": {
+    "defaultMessage": "You want to delete this comment?",
+    "description": "This message appears in delete modal confirmation."
+  },
   "iIm/1E": {
     "defaultMessage": "mentioned you in a comment:",
     "description": "This message is displayed to describe a notification that occurs when a user is tagged in a comment."
@@ -2750,6 +2754,10 @@
   "O4iDCM": {
     "defaultMessage": "Progress",
     "description": "The title of the progress section in our key-result sidebar"
+  },
+  "O60mSP": {
+    "defaultMessage": "Delete",
+    "description": "This message appears as a label on the button used to exclude a comment."
   },
   "OA7DUJ": {
     "defaultMessage": "New Objective",
