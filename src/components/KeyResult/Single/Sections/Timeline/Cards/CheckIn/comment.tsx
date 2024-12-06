@@ -1,9 +1,9 @@
 import { Flex, Heading, SkeletonText } from '@chakra-ui/react'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ExpandableText } from 'src/components/Base'
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
+import { insertMentionInString } from 'src/components/Routine/RetrospectiveTab/Comments/CommentCard'
 
 import messages from './messages'
 
@@ -17,6 +17,16 @@ const KeyResultSectionTimelineCardCheckInComment = ({
   const intl = useIntl()
   const isLoaded = Boolean(comment)
 
+  const formattedCommentText = useMemo(() => {
+    if (comment) {
+      return comment.split('\n').map((line) => (
+        <span key={line} style={{ display: 'block' }}>
+          {insertMentionInString(line)}
+        </span>
+      ))
+    }
+  }, [comment])
+
   return (
     <Flex direction="column" gridGap={2}>
       <Heading
@@ -29,12 +39,7 @@ const KeyResultSectionTimelineCardCheckInComment = ({
         {intl.formatMessage(messages.commentTitle)}
       </Heading>
       <SkeletonText isLoaded={isLoaded} noOfLines={4}>
-        <ExpandableText
-          text={comment ?? ''}
-          fontSize="md"
-          color="new-gray.900"
-          maxCollapsedLength={150}
-        />
+        {formattedCommentText ?? ''}
       </SkeletonText>
     </Flex>
   )
