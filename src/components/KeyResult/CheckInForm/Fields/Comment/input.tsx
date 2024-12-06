@@ -1,34 +1,22 @@
-import { Box, Flex, FormLabel, Textarea } from '@chakra-ui/react'
+import { Box, Flex, FormLabel } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { FocusEvent } from 'react'
 import { useIntl } from 'react-intl'
 
+import { MentionField } from 'src/components/Base/MentionField'
 import { CheckInFormValues } from 'src/components/KeyResult/CheckInForm/form'
 
 import messages from './messages'
 
 const CheckInFormFieldCommentInput = () => {
   const intl = useIntl()
-  const [value, setValue] = useState<string | undefined>()
-  const { values, setFieldValue } = useFormikContext<CheckInFormValues>()
-
-  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(event.target.value)
-  }
-
-  const handleBlur = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setFieldValue('comment', event.target.value)
-  }
-
-  useEffect(() => {
-    setValue(values?.comment)
-  }, [values, setValue])
+  const { values, setValues, handleSubmit } = useFormikContext<CheckInFormValues>()
 
   return (
     <Box>
       <FormLabel>{intl.formatMessage(messages.inputLabel)}</FormLabel>
       <Flex direction="column" gridGap={4}>
-        <Textarea value={value} onChange={handleChange} onBlur={handleBlur} />
+        <MentionField values={values} setValues={setValues} handleSubmit={handleSubmit} />
       </Flex>
     </Box>
   )
