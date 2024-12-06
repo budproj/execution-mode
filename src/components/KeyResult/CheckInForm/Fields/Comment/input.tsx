@@ -1,6 +1,6 @@
 import { Box, Flex, FormLabel } from '@chakra-ui/react'
 import { useFormikContext } from 'formik'
-import React, { FocusEvent } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
 
 import { MentionField } from 'src/components/Base/MentionField'
