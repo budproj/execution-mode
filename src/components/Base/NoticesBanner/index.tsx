@@ -6,10 +6,11 @@ import useLocalStorage from 'src/state/hooks/useLocalStorage/hook'
 
 import messages from './messages'
 
-export const storageKey = 'bud-platform-speed-survey'
+export const oldStorageKey = 'bud-platform-speed-survey'
+export const storageKey = 'bud-platform-speed-survey-2'
 
 const NoticesBanner = () => {
-  const { get, register } = useLocalStorage()
+  const { get, register, clear } = useLocalStorage()
 
   const intl = useIntl()
 
@@ -18,17 +19,21 @@ const NoticesBanner = () => {
   useEffect(() => {
     const time = setTimeout(() => {
       setIsOpen(() => {
+        const oldValueStoraged = get(oldStorageKey)
         const valueStoraged = get(storageKey)
-        if (valueStoraged === false) {
-          return valueStoraged
+
+        if (oldValueStoraged !== undefined) {
+          clear(oldStorageKey)
         }
+
+        if (!valueStoraged) return valueStoraged
 
         return true
       })
     }, 2300)
 
     return () => clearTimeout(time)
-  }, [get])
+  }, [get, clear])
 
   const handleCloseBanner = useCallback(() => {
     register(storageKey, false)
