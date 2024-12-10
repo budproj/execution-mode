@@ -19,11 +19,11 @@ const NoticesBanner = () => {
     const time = setTimeout(() => {
       setIsOpen(() => {
         const valueStoraged = get(storageKey)
-        if (valueStoraged === false || valueStoraged === undefined) {
-          return true
+        if (valueStoraged === '10-12-24') {
+          return false
         }
 
-        return false
+        return true
       })
     }, 2300)
 
@@ -31,7 +31,7 @@ const NoticesBanner = () => {
   }, [get])
 
   const handleCloseBanner = useCallback(() => {
-    register(storageKey, true)
+    register(storageKey, '10-12-24')
     setIsOpen(false)
   }, [register])
 
