@@ -1,0 +1,28 @@
+query GET_USER_LIST {
+  users(first: 1000) {
+    edges {
+      node {
+        id
+        firstName
+        nickname
+        status
+        linkedInProfileAddress
+        about
+        fullName
+        role
+        picture
+        teams {
+          edges {
+            node {
+              id
+              name
+              owner {
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
