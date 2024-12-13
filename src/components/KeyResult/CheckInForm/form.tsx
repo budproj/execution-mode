@@ -92,7 +92,6 @@ const CheckInForm = ({
       onCompleted: (data) => {
         setLatestKeyResultCheckIn(data.createKeyResultCheckIn)
         if (onCompleted) onCompleted(data.createKeyResultCheckIn)
-        dispatchCreatedKeyResultCommentEvent({})
         dispatchEvent({
           createdByNotification: Boolean(isCreated),
           userId,
