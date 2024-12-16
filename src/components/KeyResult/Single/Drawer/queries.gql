@@ -5,6 +5,7 @@ query GET_KEY_RESULT_WITH_ID($id: ID!) {
     description
     goal
     initialValue
+    type
     format
     mode
     teamId

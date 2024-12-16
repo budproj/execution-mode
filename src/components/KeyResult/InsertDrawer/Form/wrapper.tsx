@@ -32,6 +32,7 @@ export type FormValues = {
   format: KEY_RESULT_FORMAT
   initialValue: number
   goal: number
+  type?: KEY_RESULT_TYPE
   ownerID: string
 }
 
@@ -110,6 +111,7 @@ export const InsertOrUpdateKeyResultForm = ({
     description: '',
     format: KEY_RESULT_FORMAT.PERCENTAGE,
     initialValue: 0,
+    type: KEY_RESULT_TYPE.ASCENDING,
     goal: 100,
     ownerID,
   }))
@@ -133,6 +135,7 @@ export const InsertOrUpdateKeyResultForm = ({
         description: keyResult.description ?? '',
         format: keyResult.format,
         initialValue: keyResult.initialValue,
+        type: keyResult.type,
         goal: keyResult.goal,
         ownerID: keyResult.owner.id,
       })
@@ -163,6 +166,12 @@ export const InsertOrUpdateKeyResultForm = ({
         if (onValidationError) onValidationError()
 
         return
+      }
+
+      if (values.initialValue <= values.goal) {
+        values.type = KEY_RESULT_TYPE.ASCENDING
+      } else {
+        values.type = KEY_RESULT_TYPE.DESCENDING
       }
 
       const variables = {
