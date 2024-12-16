@@ -13,7 +13,7 @@ import ProgressSlider from 'src/components/KeyResult/ProgressSlider/wrapper'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
-// import { ProgressHistoryChart } from '../ProgressHistory/wrapper'
+// Temp import { ProgressHistoryChart } from '../ProgressHistory/wrapper'
 
 import messages from './messages'
 
