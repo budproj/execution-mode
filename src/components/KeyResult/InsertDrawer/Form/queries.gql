@@ -34,6 +34,7 @@ mutation UPDATE_KEY_RESULT(
   $description: String
   $format: KeyResultFormat
   $initialValue: Float
+  $type: KeyResultType
   $goal: Float
   $ownerID: ID
 ) {
@@ -44,6 +45,7 @@ mutation UPDATE_KEY_RESULT(
       description: $description
       format: $format
       initialValue: $initialValue
+      type: $type
       goal: $goal
       ownerId: $ownerID
     }
@@ -52,6 +54,7 @@ mutation UPDATE_KEY_RESULT(
     description
     format
     initialValue
+    type
     goal
     ownerId
   }

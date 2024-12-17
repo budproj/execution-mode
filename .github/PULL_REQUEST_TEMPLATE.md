@@ -28,13 +28,13 @@ Who tested this PR?
 
 ### Canary
 
-- [ ] Marcelo
-- [ ] Gustavo
-- [ ] Aline
+- [ ] Seiji
+- [ ] Marcel
+- [ ] Kevin
+- [ ] Guilherme
 
 ### Dev
 
-- [ ] Perin
+- [ ] Seiji
+- [ ] Kevin
 - [ ] Guilherme
-- [ ] Rodrigo
-- [ ] Diego

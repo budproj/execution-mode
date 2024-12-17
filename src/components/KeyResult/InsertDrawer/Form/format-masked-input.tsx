@@ -16,7 +16,7 @@ export const FormatMaskedInput = ({ name, value }: FormatMaskedInputProperties) 
   const [currentValue, setCurrentValue] = useState<string | number | null | undefined>(value)
 
   useEffect(() => {
-    if (value) setCurrentValue(value)
+    if (value !== undefined) setCurrentValue(value)
   }, [value])
 
   const Mask = selectMaskBasedOnFormat(format)
