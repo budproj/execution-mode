@@ -19,6 +19,7 @@ export const DescriptionInput = ({ isLoading }: DescriptionInputProperties) => {
         <Field
           name="description"
           as={Textarea}
+          whiteSpace="pre-line"
           placeholder={intl.formatMessage(messages.secondInputPlaceholder)}
           _placeholder={{ color: 'black.400' }}
           minH={28}
