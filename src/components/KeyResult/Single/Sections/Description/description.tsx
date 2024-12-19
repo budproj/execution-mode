@@ -33,8 +33,8 @@ const KeyResultSectionDescription = ({
         <KeyResultSectionHeading>{intl.formatMessage(messages.label)}</KeyResultSectionHeading>
         <Flex alignItems="center" gridGap={2}>
           <SkeletonText isLoaded={!isLoading} noOfLines={5} spacing={2} w="100%">
-            <Text fontSize="md" color="black.800" maxW={420}>
-              {keyResult?.description}
+            <Text whiteSpace="pre-line" fontSize="md" color="black.800" maxW={420}>
+              {keyResult?.description ?? ''}
             </Text>
           </SkeletonText>
         </Flex>
