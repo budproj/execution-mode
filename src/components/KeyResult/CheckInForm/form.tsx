@@ -70,9 +70,6 @@ const CheckInForm = ({
 }: CheckInFormProperties) => {
   const intl = useIntl()
   const { dispatch: dispatchEvent } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_IN)
-  const { dispatch: dispatchCreatedKeyResultCommentEvent } = useEvent(
-    EventType.CREATED_KEY_RESULT_COMMENT,
-  )
   const isCreated = useRecoilValue(createdByCheckInNotificationAtom)
   const userId = useRecoilValue(meAtom)
 
