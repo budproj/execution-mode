@@ -1,5 +1,5 @@
 query LIST_USERS_WITH_INDIVIDUAL_OKR {
-  users(first: 1000, onlyWithIndividualObjectives: true) {
+  users(first: 1000, onlyWithIndividualObjectives: true, withInactives: false) {
   edges {
     node {
       id
