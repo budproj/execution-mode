@@ -131,7 +131,6 @@ export const IndividualOkrPage = ({ intl, userID }: IndividualOkrPageProperties)
   useEffect(() => {
     if (data) {
       const filteredData = data.filter(({ id, status }) => id !== userID && status === 'ACTIVE')
-      console.log(filteredData)
       setUsersList(filteredData)
     }
   }, [data, setUsersList, userID])
