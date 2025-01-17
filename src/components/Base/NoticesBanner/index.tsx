@@ -10,6 +10,7 @@ import selectUser from 'src/state/recoil/user/selector'
 import messages from './messages'
 
 export const storageKey = 'bud-platform-speed-survey'
+export const storageValue = '15-01-25'
 
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()
@@ -23,7 +24,7 @@ const NoticesBanner = () => {
 
   useEffect(() => {
     const time = setTimeout(() => {
-      setIsOpen(() => get(storageKey) !== '15-01-25')
+      setIsOpen(() => get(storageKey) !== storageValue)
     }, 2300)
 
     return () => clearTimeout(time)
@@ -38,7 +39,7 @@ const NoticesBanner = () => {
   }, [user])
 
   const handleCloseBanner = useCallback(() => {
-    register(storageKey, '10-12-24')
+    register(storageKey, storageValue)
     setIsOpen(false)
   }, [register])
 
