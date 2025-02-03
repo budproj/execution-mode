@@ -3,10 +3,12 @@ import { TASK_STATUS } from 'src/services/new-task-management/new-task-managemen
 
 import { GraphQLConnection, GraphQLNode, GraphQLEntityPolicy } from '../types'
 
+import { OLD_TASK_STATUS, TASK_STATUS } from './constants'
+
 export interface Task extends GraphQLNode {
   policy: GraphQLEntityPolicy
   description: string
-  state: TASK_STATUS
+  state: OLD_TASK_STATUS
   updatedAt: string
   keyResultId: string
   userId: User['id']
@@ -16,25 +18,25 @@ export interface Task extends GraphQLNode {
 
 export interface NewTask {
   id: string
-  team: string
-  history: string[]
+  key_result?: string | undefined
+  orderindex: number
   status: TASK_STATUS
+  initialDate: Date
   title: string
   description: string
   dueDate: Date
+  history?: string[]
   priority: number
   owner: string
-  initialDate: Date
-  attachments: string[]
+  attachments?: string[]
   supportTeam: string[]
   tags: string[]
   createdAt: Date
   updatedAt: Date
   deletedAt?: Date
-  active?: boolean
-  orderindex: number
-  key_result?: string
-  cycle?: string
+  team: string
+  cycle: string | null
+  owner_full_name?: string
 }
 
 export interface TaskMeQuery {

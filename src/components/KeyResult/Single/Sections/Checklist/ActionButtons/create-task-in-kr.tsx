@@ -1,21 +1,21 @@
 import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { Ref, useCallback, useState } from 'react'
+import { useRouter } from 'next/router'
+import React, { Ref, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
+import { TASK_STATUS } from 'src/components/Task/constants'
+import { NewTask } from 'src/components/Task/types'
+import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
 import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
 import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
 
 import messages from './messages'
-import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
-import { TASK_STATUS } from 'src/components/Task/constants'
-import { useRouter } from 'next/router'
-import { NewTask } from 'src/components/Task/types'
 
 interface CreateTaskButtonProperties extends StyleProps {
   readonly keyResultID?: string
@@ -64,32 +64,27 @@ export const CreateTaskButton = ({
     }
 
     setIsSubmitting(true)
-
-    await addNewTask(
-      {
-        //team: id as string,
-        team: 'f53c6168-9c21-42e3-b912-c4fe8acac849',
-        status: TASK_STATUS.PENDING,
-        title: title,
-        description:
-          "descrição teste",
-        initialDate: new Date(),
-        dueDate: new Date(),
-        priority: Math.floor(Math.random() * 4) + 1,
-        owner: '0194add4-2730-7fd7-851c-d69d9a17fc16',
-        attachments: [],
-        supportTeam: [],
-        tags: [],
-        orderindex: 0,
-        key_result: '6d10cb65-e3d0-4753-92c0-dc065368c731',
-        cycle: '',
-      }
-     )
+    await addNewTask({
+      team: id as string,
+      status: TASK_STATUS.PENDING,
+      title,
+      description: 'descrição',
+      initialDate: new Date(),
+      dueDate: new Date(),
+      priority: Math.floor(Math.random() * 4) + 1,
+      owner: userID,
+      attachments: [],
+      supportTeam: [],
+      tags: [],
+      orderindex: 0,
+      key_result: keyResultID,
+      cycle: '',
+    })
 
     dispatch({ keyResultID })
     setIsSubmitting(false)
     toggleAdd()
-    if (onCreate) onCreate()       
+    if (onCreate) onCreate()
   }
 
   const toggleAdd = () => {

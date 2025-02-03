@@ -1,14 +1,11 @@
 import { Stack, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useRef } from 'react'
-import { useRecoilValue } from 'recoil'
 
-import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
-
-import { CreateCheckMarkButton } from './ActionButtons/create-checkmark'
-import { InlineTaskList } from './inline-tasklist'
 import { NewTask } from 'src/components/Task/types'
+
 import { CreateTaskButton } from './ActionButtons/create-task-in-kr'
+import { InlineTaskList } from './inline-tasklist'
 
 const StyledStack = styled(Stack)`
   & .editable-input-value__edit-button {
@@ -23,7 +20,6 @@ interface KeyResultChecklistProperties {
   canCreate: boolean
   isEditable?: boolean
   wrapperProps?: StyleProps
-  checkPolicy?: boolean
   createTaskLabel?: string
 }
 
@@ -34,30 +30,21 @@ export const KeyResultChecklist = ({
   canCreate = false,
   isEditable = true,
   wrapperProps,
-  checkPolicy = true,
   createTaskLabel,
 }: KeyResultChecklistProperties) => {
-  const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
   const createButtonReference = useRef<HTMLButtonElement>(null)
 
-  const canUserEdit = (node: NewTask) =>
-    isEditable
-
-  const handleCreateCheckmark = () => {
-    createButtonReference.current?.click()
-  }
   return (
     <>
       {nodes.length > 0 && (
         <StyledStack alignItems="flex-start" pt={4} {...wrapperProps}>
-          {nodes.map((node, index) => (
+          {nodes.map((node) => (
             <InlineTaskList
               key={node.id}
               keyResultID={keyResultID}
               node={node}
+              isEditable={isEditable}
               onUpdate={onUpdate}
-              isEditable={isEditable && canUserEdit(node)}
-              checkPolicy={checkPolicy}
             />
           ))}
         </StyledStack>
