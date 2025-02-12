@@ -9,6 +9,8 @@ import { LlmService } from './llm/llm.service'
 import { getNewTaskManagementInstance } from './new-task-management'
 import { NewTaskManagementService } from './new-task-management/new-task-management.service'
 import { getRoutinesInstance } from './routines'
+import { getNewTaskManagementInstance } from './new-task-management'
+import { NewTaskManagementService } from './new-task-management/new-task-management.service'
 import { getTaskManagementInstance } from './task-management'
 import { TaskManagementService } from './task-management/task-management.service'
 

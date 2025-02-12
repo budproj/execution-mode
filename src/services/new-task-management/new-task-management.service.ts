@@ -9,10 +9,10 @@ import { Except } from 'src/helpers/except'
 import { KeyResult } from '../okr/key-result/@types'
 
 export enum TASK_STATUS {
-  pending = 'pending',
-  toDo = 'toDo',
-  doing = 'doing',
-  done = 'done',
+  PENDING = 'pending',
+  TODO = 'toDo',
+  DOING = 'doing',
+  DONE = 'done',
 }
 
 export type Task = {
