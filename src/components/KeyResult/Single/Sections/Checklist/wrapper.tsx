@@ -1,80 +1,44 @@
-import { useLazyQuery } from '@apollo/client'
 import { Collapse, Stack } from '@chakra-ui/react'
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState } from 'recoil'
-
-import { KeyResultCheckMark } from 'src/components/KeyResult/types'
-import { GraphQLEffect } from 'src/components/types'
-import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
-import {
-  isCheckListCollapseOpenAtom,
-  keyResultChecklistAtom,
-} from 'src/state/recoil/key-result/checklist'
-
-import { EventType } from '../../../../../state/hooks/useEvent/event-type'
-import { Feature } from '../../../../../state/hooks/useEvent/feature'
-import { useEvent } from '../../../../../state/hooks/useEvent/hook'
 import { KeyResultSectionHeading } from '../Heading/wrapper'
-
 import { OptionBarWrapper } from './OptionBar/wrapper'
 import { KeyResultChecklist } from './checklist'
 import messages from './messages'
-import queries from './queries.gql'
 import { ToggleCollapse } from './toggle-collapse'
+import { useGetNewTask } from 'src/components/TaskManagement/hooks/use-get-tasks-new'
+import { useRouter } from 'next/router'
 
 interface KeyResultChecklistWrapperProperties {
   keyResultID?: string
 }
 
 export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWrapperProperties) => {
-  const { dispatch } = useEvent(EventType.OPENED_KEY_RESULT_CHECKLIST, {
-    feature: Feature.CHECK_MARK,
-  })
-  const [keyResultChecklist, setKeyResultChecklist] = useRecoilState(
-    keyResultChecklistAtom(keyResultID),
-  )
-  const [checklist, updateChecklistEdges, _, isChecklistLoaded] =
-    useConnectionEdges<KeyResultCheckMark>()
+  const [progress, setProgress] = useState({ total: 0, numberOfDone: 0, progress: 0 })
+  const [isChecklistOpen, setIsChecklistOpen] = useState(false)
+
   const intl = useIntl()
-  const [isChecklistOpen, setIsChecklistOpen] = useRecoilState(isCheckListCollapseOpenAtom)
+  const router = useRouter()
+  const { id } = router.query
 
-  const [getChecklist, { called, loading }] = useLazyQuery(queries.GET_CHECKLIST_OF_KEY_RESULT, {
-    fetchPolicy: 'network-only',
-    onCompleted: (data) => {
-      setKeyResultChecklist(data.keyResult.checkList)
-    },
-  })
-
-  const canCreate = keyResultChecklist?.policy?.create === GraphQLEffect.ALLOW
-  const hasItems = checklist.length > 0
-
-  const refreshChecklist = useCallback(() => {
-    getChecklist({
-      variables: {
-        id: keyResultID,
-      },
-    })
-  }, [getChecklist, keyResultID])
+  const canCreate = true
 
   const toggleChecklistCollapse = () => {
-    if (!isChecklistOpen) dispatch({ keyResultID })
-
-    setIsChecklistOpen(!isChecklistOpen)
+    setIsChecklistOpen((prev) => !prev)
   }
 
   const handleChecklistCreation = () => {
-    refreshChecklist()
+    refetch()
     if (!isChecklistOpen) setIsChecklistOpen(true)
   }
 
-  useEffect(() => {
-    if (called && !loading) updateChecklistEdges(keyResultChecklist?.edges)
-  }, [called, loading, keyResultChecklist, updateChecklistEdges])
+  const { data: tasks = [], isFetching, isSuccess, refetch } = useGetNewTask(id as string, keyResultID ?? '')
+
+  const hasItems = tasks.length > 0
 
   useEffect(() => {
-    if (keyResultID) refreshChecklist()
-  }, [keyResultID, refreshChecklist])
+    if (keyResultID) refetch()
+  }, [keyResultID, refetch])
 
   return (
     <Stack spacing={0}>
@@ -84,23 +48,22 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
         </KeyResultSectionHeading>
         <OptionBarWrapper
           keyResultID={keyResultID}
-          progress={keyResultChecklist?.progress}
+          progress={progress}
           canCreate={canCreate}
           onCreate={handleChecklistCreation}
         />
         {hasItems && <ToggleCollapse isOpen={isChecklistOpen} onToggle={toggleChecklistCollapse} />}
       </Stack>
-      {isChecklistLoaded ? (
+      {isSuccess ? (
         <Collapse in={isChecklistOpen}>
           <KeyResultChecklist
-            nodes={checklist}
+            nodes={tasks}
             keyResultID={keyResultID}
             canCreate={canCreate}
-            onUpdate={refreshChecklist}
+            onUpdate={refetch}
           />
         </Collapse>
-      ) : // eslint-disable-next-line unicorn/no-null
-      null}
+      ) : null}
     </Stack>
   )
 }

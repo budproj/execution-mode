@@ -207,6 +207,10 @@
     "defaultMessage": "Um ícone de microfone",
     "description": "The desc message for the Voice icon. This icon is used to ilustrate our key results"
   },
+  "1/KiNE": {
+    "defaultMessage": "Adicionar novas tarefas",
+    "description": "This text is used as a button when the key-result has no check-marks"
+  },
   "15BMJI": {
     "defaultMessage": "Valor Inicial",
     "description": "This text is used as a label on the update goal form inside the key-result drawers. That is the first label of that form"
@@ -3315,10 +3319,6 @@
     "defaultMessage": "Muito bom",
     "description": "The description of the pie chart graph that indicates the very good status"
   },
-  "s4h8ne": {
-    "defaultMessage": "Adicionar uma Check-list",
-    "description": "This text is used as a button when the key-result has no check-marks"
-  },
   "s6b2FE": {
     "defaultMessage": "Data Limite",
     "description": "The heading text of the goal section in our key-result drawers"
@@ -3788,7 +3788,7 @@
     "description": "The button to create or edit a cycle on modal"
   },
   "zZwIvy": {
-    "defaultMessage": "Conte para nós como está sendo sua experiência com a plataforma:",
+    "defaultMessage": "Conte para nós como está sendo sua experiência com a velocidade da plataforma:",
     "description": "This message appears on the notices banner."
   },
   "zaC3Cb": {

@@ -7,6 +7,8 @@ import { customHeadersInjector, errorResponseInjector } from './injectors'
 import { getLLMInstance } from './llm'
 import { LlmService } from './llm/llm.service'
 import { getRoutinesInstance } from './routines'
+import { getNewTaskManagementInstance } from './new-task-management'
+import { NewTaskManagementService } from './new-task-management/new-task-management.service'
 import { getTaskManagementInstance } from './task-management'
 import { TaskManagementService } from './task-management/task-management.service'
 
@@ -15,6 +17,7 @@ export interface Services {
   comments: AxiosInstance
   llm: LlmService
   taskManagement: TaskManagementService
+  newTaskManagement: NewTaskManagementService
 }
 
 const configureInstance = (instance: AxiosInstance, authToken: string) => {
@@ -37,5 +40,8 @@ export const getServices = async (
     taskManagement: new TaskManagementService(
       configureInstance(getTaskManagementInstance(config), authToken),
     ),
+    newTaskManagement: new NewTaskManagementService(
+      configureInstance(getNewTaskManagementInstance(config), authToken),
+    ),  
   }
 }

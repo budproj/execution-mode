@@ -1,22 +1,22 @@
-import { useMutation } from '@apollo/client'
 import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { Ref, useState } from 'react'
+import React, { Ref, useCallback, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
 import { KeyResultCheckMark } from 'src/components/KeyResult/types'
-import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
-import { Feature } from '../../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
 
 import messages from './messages'
-import queries from './queries.gql'
+import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
+import { TaskInsert } from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS } from 'src/components/Task/constants'
+import { useRouter } from 'next/router'
 
 interface CreateCheckMarkButtonProperties extends StyleProps {
   readonly keyResultID?: string
@@ -46,28 +46,42 @@ export const CreateCheckMarkButton = ({
   onCreate,
   ...rest
 }: CreateCheckMarkButtonProperties) => {
-  const { dispatch } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_MARK, {
-    feature: Feature.CHECK_MARK,
-  })
+  const { mutate } = useAddTask()
 
   const [isAdding, setIsAdding] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const intl = useIntl()
   const userID = useRecoilValue(meAtom)
-
-  const [createCheckMark] = useMutation(queries.CREATE_CHECK_MARK, {
-    refetchQueries: [
-      myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
-      {
-        variables: {
-          ...(userID ? { userID } : {}),
-        },
-      },
-    ],
-    onCompleted: () => {
-      if (onCreate) onCreate()
+  const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
+  const router = useRouter()
+  const { id } = router.query
+  const addTask = useCallback(
+    (task: TaskInsert) => {
+      dispatch({ taskData: task })
+      mutate(task)
     },
-  })
+    [dispatch, mutate],
+  )
+
+  const addEmptyTask = useCallback(() => {
+    addTask({
+      team: 'f53c6168-9c21-42e3-b912-c4fe8acac849',
+      status: TASK_STATUS.PENDING,
+      title: `Nova tarefa`,
+      description:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
+      initialDate: new Date(),
+      dueDate: new Date(),
+      priority: Math.floor(Math.random() * 4) + 1,
+      owner: '0194add4-2730-7fd7-851c-d69d9a17fc16',
+      attachments: [],
+      supportTeam: [],
+      tags: [],
+      orderindex: 0,
+      key_result: '6d10cb65-e3d0-4753-92c0-dc065368c731',
+      cycle: '',
+    })
+  }, [addTask, id, userID])
 
   const handleNewCheckMark = async (description: KeyResultCheckMark['description']) => {
     if (isSubmitting) return
@@ -79,12 +93,7 @@ export const CreateCheckMarkButton = ({
 
     setIsSubmitting(true)
 
-    await createCheckMark({
-      variables: {
-        keyResultID,
-        description,
-      },
-    })
+    addEmptyTask()
 
     dispatch({ keyResultID })
     setIsSubmitting(false)

@@ -3,12 +3,11 @@ import styled from '@emotion/styled'
 import React, { useRef } from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { KeyResultCheckMark as KeyResultCheckMarkType } from 'src/components/KeyResult/types'
-import { GraphQLEffect } from 'src/components/types'
 import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
 import { CreateCheckMarkButton } from './ActionButtons/create-checkmark'
-import { KeyResultCheckMark } from './check-mark'
+import { InlineTaskList } from './inline-tasklist'
+import { NewTask } from 'src/components/Task/types'
 
 const StyledStack = styled(Stack)`
   & .editable-input-value__edit-button {
@@ -18,7 +17,7 @@ const StyledStack = styled(Stack)`
 
 interface KeyResultChecklistProperties {
   keyResultID?: string
-  nodes: KeyResultCheckMarkType[]
+  nodes: NewTask[]
   onUpdate?: () => void
   canCreate: boolean
   isEditable?: boolean
@@ -31,7 +30,7 @@ export const KeyResultChecklist = ({
   nodes,
   onUpdate,
   keyResultID,
-  canCreate,
+  canCreate = false,
   isEditable = true,
   wrapperProps,
   checkPolicy = true,
@@ -40,29 +39,24 @@ export const KeyResultChecklist = ({
   const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
   const createButtonReference = useRef<HTMLButtonElement>(null)
 
-  const canUserEdit = (node: KeyResultCheckMarkType) =>
-    isEditable && node.policy?.update === GraphQLEffect.ALLOW
+  const canUserEdit = (node: NewTask) =>
+    isEditable
 
   const handleCreateCheckmark = () => {
     createButtonReference.current?.click()
   }
-
   return (
     <>
       {nodes.length > 0 && (
         <StyledStack alignItems="flex-start" pt={4} {...wrapperProps}>
           {nodes.map((node, index) => (
-            <KeyResultCheckMark
+            <InlineTaskList
               key={node.id}
-              isEditable={isEditable && canUserEdit(node)}
-              node={node}
               keyResultID={keyResultID}
-              draftCheckMarks={draftCheckMarks}
-              index={index}
-              checklistLength={nodes.length}
-              checkPolicy={checkPolicy}
+              node={node}
               onUpdate={onUpdate}
-              onCreate={handleCreateCheckmark}
+              isEditable={isEditable && canUserEdit(node)}
+              checkPolicy={checkPolicy}
             />
           ))}
         </StyledStack>

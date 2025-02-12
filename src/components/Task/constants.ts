@@ -1,4 +1,7 @@
 export enum TASK_STATUS {
-  CHECKED = 'checked',
-  UNCHECKED = 'unchecked',
+  PENDING = 'pending',
+  TODO = 'toDo',
+  DOING = 'doing',
+  DONE = 'done',
 }
+
