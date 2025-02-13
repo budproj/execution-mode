@@ -1,24 +1,23 @@
-import { useMutation } from '@apollo/client'
 import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { Ref, useState } from 'react'
+import React, { Ref, useCallback, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
-import { KeyResultCheckMark } from 'src/components/KeyResult/types'
-import myTasksQueries from 'src/components/Page/MyThings/ActiveCycles/my-tasks/queries.gql'
 import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
-import { Feature } from '../../../../../../state/hooks/useEvent/feature'
 import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
 
 import messages from './messages'
-import queries from './queries.gql'
+import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
+import { TASK_STATUS } from 'src/components/Task/constants'
+import { useRouter } from 'next/router'
+import { NewTask } from 'src/components/Task/types'
 
-interface CreateCheckMarkButtonProperties extends StyleProps {
+interface CreateTaskButtonProperties extends StyleProps {
   readonly keyResultID?: string
   readonly label?: string
   readonly isAbsolute?: boolean
@@ -38,57 +37,59 @@ const StyledEditableWrapper = styled(Box)`
   `};
 `
 
-export const CreateCheckMarkButton = ({
+export const CreateTaskButton = ({
   label,
   keyResultID,
   createButtonReference,
   isAbsolute,
   onCreate,
   ...rest
-}: CreateCheckMarkButtonProperties) => {
-  const { dispatch } = useEvent(EventType.CREATED_KEY_RESULT_CHECK_MARK, {
-    feature: Feature.CHECK_MARK,
-  })
+}: CreateTaskButtonProperties) => {
+  const { mutateAsync: addNewTask } = useAddTask()
 
   const [isAdding, setIsAdding] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const intl = useIntl()
   const userID = useRecoilValue(meAtom)
+  const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
+  const router = useRouter()
+  const { id } = router.query
 
-  const [createCheckMark] = useMutation(queries.CREATE_CHECK_MARK, {
-    refetchQueries: [
-      myTasksQueries.GET_KRS_WITH_MY_CHECKMARKS,
-      {
-        variables: {
-          ...(userID ? { userID } : {}),
-        },
-      },
-    ],
-    onCompleted: () => {
-      if (onCreate) onCreate()
-    },
-  })
-
-  const handleNewCheckMark = async (description: KeyResultCheckMark['description']) => {
+  const handleNewCheckMark = async (title: NewTask['title']) => {
     if (isSubmitting) return
 
-    if (description === '') {
+    if (title === '') {
       toggleAdd()
       return
     }
 
     setIsSubmitting(true)
 
-    await createCheckMark({
-      variables: {
-        keyResultID,
-        description,
-      },
-    })
+    await addNewTask(
+      {
+        //team: id as string,
+        team: 'f53c6168-9c21-42e3-b912-c4fe8acac849',
+        status: TASK_STATUS.PENDING,
+        title: title,
+        description:
+          "descrição teste",
+        initialDate: new Date(),
+        dueDate: new Date(),
+        priority: Math.floor(Math.random() * 4) + 1,
+        owner: '0194add4-2730-7fd7-851c-d69d9a17fc16',
+        attachments: [],
+        supportTeam: [],
+        tags: [],
+        orderindex: 0,
+        key_result: '6d10cb65-e3d0-4753-92c0-dc065368c731',
+        cycle: '',
+      }
+     )
 
     dispatch({ keyResultID })
     setIsSubmitting(false)
     toggleAdd()
+    if (onCreate) onCreate()       
   }
 
   const toggleAdd = () => {

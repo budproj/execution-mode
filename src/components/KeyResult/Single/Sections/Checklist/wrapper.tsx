@@ -21,7 +21,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   const router = useRouter()
   const { id } = router.query
 
-  const canCreate = true
+  
 
   const toggleChecklistCollapse = () => {
     setIsChecklistOpen((prev) => !prev)
@@ -35,6 +35,8 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   const { data: tasks = [], isFetching, isSuccess, refetch } = useGetNewTask(id as string, keyResultID ?? '')
 
   const hasItems = tasks.length > 0
+
+  const canCreate = !hasItems
 
   useEffect(() => {
     if (keyResultID) refetch()
@@ -59,7 +61,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
           <KeyResultChecklist
             nodes={tasks}
             keyResultID={keyResultID}
-            canCreate={canCreate}
+            canCreate={!canCreate}
             onUpdate={refetch}
           />
         </Collapse>

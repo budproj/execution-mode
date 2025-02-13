@@ -5,7 +5,6 @@ import { TASK_STATUS } from 'src/services/new-task-management/new-task-managemen
 
 import messages from './messages'
 import { useIntl } from 'react-intl'
-import { DeleteCheckMarkButton } from './ActionButtons/delete-checkmark'
 import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
 import { EditableInputField } from 'src/components/Base'
 import { DeleteTaskButton } from './ActionButtons/delete-task'
@@ -159,7 +158,7 @@ export const InlineTaskList = ({
             checkMarkId={newNode?.key_result}
             assignedUserId={'8140026c-73cd-49cb-882e-6f9157b2ad03'}
             canUpdate={true}
-            //onUpdate={onUpdate}
+            onUpdate={onUpdate}
           />
         </Flex>
       </StyledKeyResultCheckMark>
