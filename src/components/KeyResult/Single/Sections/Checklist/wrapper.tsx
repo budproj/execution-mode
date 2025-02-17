@@ -8,20 +8,19 @@ import messages from './messages'
 import { ToggleCollapse } from './toggle-collapse'
 import { useGetNewTask } from 'src/components/TaskManagement/hooks/use-get-tasks-new'
 import { useRouter } from 'next/router'
+import { TASK_STATUS } from 'src/components/Task/constants'
 
 interface KeyResultChecklistWrapperProperties {
   keyResultID?: string
 }
 
 export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWrapperProperties) => {
-  const [progress, setProgress] = useState({ total: 0, numberOfDone: 0, progress: 0 })
+  const [progress, setProgress] = useState({total: 0, numberOfDone: 0, progress: 0})
   const [isChecklistOpen, setIsChecklistOpen] = useState(false)
 
   const intl = useIntl()
   const router = useRouter()
   const { id } = router.query
-
-  
 
   const toggleChecklistCollapse = () => {
     setIsChecklistOpen((prev) => !prev)
@@ -32,15 +31,29 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
     if (!isChecklistOpen) setIsChecklistOpen(true)
   }
 
-  const { data: tasks = [], isFetching, isSuccess, refetch } = useGetNewTask(id as string, keyResultID ?? '')
+  const {
+    data: tasks = [],
+    isFetching,
+    isSuccess,
+    refetch,
+  } = useGetNewTask(id as string, keyResultID ?? '')
 
   const hasItems = tasks.length > 0
 
   const canCreate = !hasItems
+  
 
   useEffect(() => {
     if (keyResultID) refetch()
   }, [keyResultID, refetch])
+
+  useEffect(() => {
+    const numberOfDone = tasks.filter((task) => task.status === TASK_STATUS.DONE).length;
+    if (isFetching && tasks.length === 0) {
+      setProgress({ total: 0, numberOfDone: 0, progress: 0 })
+    }
+    setProgress({ total: tasks.length, numberOfDone: numberOfDone, progress: numberOfDone !== 0 ? (tasks.length / numberOfDone) * 100 : 0 })
+  }, [isFetching, tasks.length])
 
   return (
     <Stack spacing={0}>

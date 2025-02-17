@@ -5,7 +5,6 @@ import { useRecoilValue } from 'recoil'
 
 import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
-import { CreateCheckMarkButton } from './ActionButtons/create-checkmark'
 import { InlineTaskList } from './inline-tasklist'
 import { NewTask } from 'src/components/Task/types'
 import { CreateTaskButton } from './ActionButtons/create-task-in-kr'

@@ -78,17 +78,25 @@ export const InlineTaskList = ({
   keyResultID,
   node,
   onUpdate,
+  index,
+  checklistLength,
+  onCreate,
   isEditable = true,
   checkPolicy = true,
+  draftCheckMarks
 }: InlineTaskListProperties) => {
   const isLoaded = Boolean(node)
-  //const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
+  const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
+  const isWaiting = false
+  const canUpdate = true
   const intl = useIntl()
   const header = headerColumnMessage.get(node?.status ?? TASK_STATUS.PENDING)
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
   const [toggleTaskStatus, setToggleTaskStatus] = useState(false)
   const [headerText, setHeaderText] = useState(header)
   const [newNode, setNode] = useState(node);
+  const [isEditing, setIsEditing] = useState(false)
+
   function handleOpenSelectTaskStatus() {
     if (!toggleTaskStatus) {
       setToggleTaskStatus(true)
@@ -99,11 +107,42 @@ export const InlineTaskList = ({
     setToggleTaskStatus(false)
     setNode({...node, status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS] })
     setHeaderText(headerColumnMessage.get(TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS]))
+
+    //TODO update status in bd
+  }
+
+  const handleNewTitleStatus = async (title: string) => {
+      //TODO update title in bd
+  }
+
+  const handleCancelTitle = (oldDescription?: string) => {
+    const isEmpty = !oldDescription || oldDescription.trim() === ''
+    if (isEmpty) removeCheckmarkButton.current?.click()
+  }
+
+  const handleEnterKey = (value?: string) => {
+    const isEmpty = !value || value.trim() === ''
+    if (
+      typeof index !== 'undefined' &&
+      checklistLength &&
+      index === checklistLength - 1 &&
+      !isEmpty &&
+      onCreate
+    )
+      onCreate()
+  }
+
+  const handleStartEdit = () => {
+    if (isEditable) setIsEditing(true)
+  }
+
+  const handleStopEdit = () => {
+    if (isEditable) setIsEditing(false)
   }
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
       <StyledKeyResultCheckMark alignItems="center">
-        <Box py={1}>
+        <Box py={1} display={isEditing ? 'none' : undefined}>
           {toggleTaskStatus ? (
             <Select
               value={newNode?.status}
@@ -136,10 +175,19 @@ export const InlineTaskList = ({
           )}
         </Box>
         <VStack marginLeft={0} spacing={2} align="stretch" w="full">
-
-          <Text fontSize="sm" color="gray.500" lineHeight="0.7rem">
-            {newNode?.title}
-          </Text>
+          <EditableInputField
+            autoFocus={isDraft}
+            isWaiting={isWaiting}
+            value={node?.title}
+            isLoaded={isLoaded}
+            startWithEditView={isDraft}
+            isDisabled={(!isEditable || !canUpdate)}
+            onSubmit={handleNewTitleStatus}
+            onCancel={handleCancelTitle}
+            onPressedEnter={handleEnterKey}
+            onStartEdit={handleStartEdit}
+            onStopEdit={handleStopEdit}
+          />
           <Text fontSize="sm" color="new-gray.600" lineHeight="0.7rem">
             David Saggioro
           </Text>
