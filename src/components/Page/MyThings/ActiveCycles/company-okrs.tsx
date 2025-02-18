@@ -28,7 +28,6 @@ import selectUser from 'src/state/recoil/user/selector'
 import { PageHeader } from '../../../Base/PageHeader/wrapper'
 
 import messages from './messages'
-import MyPersonalTasks from './my-personal-tasks'
 import MyTasks from './my-tasks'
 
 interface CompanyOkrPageProperties {
@@ -152,10 +151,7 @@ const CompanyOkrPage = ({ handleLineClick, intl, userID }: CompanyOkrPagePropert
         <Box>
           <Divider orientation="vertical" h="full" borderColor="new-gray.400" opacity="1" />
         </Box>
-        <Box flex="1">
-          <MyPersonalTasks />
-          {userID ? <MyTasks userID={userID} /> : undefined}
-        </Box>
+        <Box flex="1">{userID ? <MyTasks userID={userID} /> : undefined}</Box>
       </HStack>
     </PageContent>
   )
