@@ -11,6 +11,11 @@ import { NewTaskManagementService } from './new-task-management/new-task-managem
 import { getRoutinesInstance } from './routines'
 import { getNewTaskManagementInstance } from './new-task-management'
 import { NewTaskManagementService } from './new-task-management/new-task-management.service'
+import { getCycleInstance } from './okr'
+import { CycleService } from './okr/cycle/cycle.service'
+import { getKeyResultInstance } from './okr/key-result/key-result-instance'
+import { KeyResultService } from './okr/key-result/key-result.service'
+import { getRoutinesInstance } from './routines'
 import { getTaskManagementInstance } from './task-management'
 import { TaskManagementService } from './task-management/task-management.service'
 
