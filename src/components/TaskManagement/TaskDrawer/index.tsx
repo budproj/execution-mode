@@ -63,9 +63,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const companyUsers = useRecoilValue(usersCompany)
 
   useEffect(() => {
-    setTaskSupportTeam(
-      companyUsers.filter((member) => taskDrawer?.supportTeamMembers.includes(member.id)),
-    )
+    setTaskSupportTeam(companyUsers.filter((member) => taskDrawer?.usersRelated.includes(member)))
   }, [companyUsers, setTaskSupportTeam, taskDrawer])
 
   const isOpen = Boolean(taskDrawerId)
@@ -73,12 +71,11 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const handleClickEditButton = () => {
     resetTaskDrawerId()
     setTaskBoardID({
-      boardID: boardData?._id,
-      domain: BOARD_DOMAIN.TEAM,
+      teamId: taskDrawer?.id,
       identifier: teamID as unknown as string,
       column: taskDrawer.status,
     })
-    isEditingTaskDrawerId(taskDrawer?._id)
+    isEditingTaskDrawerId(taskDrawer?.id)
   }
 
   return (

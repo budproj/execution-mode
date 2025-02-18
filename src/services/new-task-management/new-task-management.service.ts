@@ -1,16 +1,20 @@
+import { ParsedUrlQuery } from 'querystring'
+
 import { AxiosInstance } from 'axios'
 
-import { Except } from 'src/helpers/except'
 import { NewTask } from 'src/components/Task/types'
+import { User } from 'src/components/User/types'
+import { Except } from 'src/helpers/except'
+
 export enum TASK_STATUS {
-  PENDING = 'pending',
-  TODO = 'toDo',
-  DOING = 'doing',
-  DONE = 'done',
+  pending = 'pending',
+  toDo = 'toDo',
+  doing = 'doing',
+  done = 'done',
 }
 
 export type Task = {
-  _id: string
+  id: string
   team: string
   history: string[]
   status: TASK_STATUS
@@ -21,7 +25,7 @@ export type Task = {
   owner: string
   initialDate: Date
   attachments: string[]
-  supportTeamMembers: string[]
+  supportTeam?: string[]
   tags: string[]
   createdAt: Date
   updatedAt: Date
@@ -30,6 +34,7 @@ export type Task = {
   orderindex: number
   key_result?: string
   cycle: string | null
+  usersRelated: User[]
 }
 
 export type TaskUpdate = {
@@ -82,47 +87,61 @@ export enum IAuthorType {
 
 export type TaskInsert = Except<NewTask, 'id' | 'createdAt' | 'updatedAt' | 'history'>
 
-
 export class NewTaskManagementService {
   constructor(private readonly client: AxiosInstance) {}
 
-    async getAllTasks(data: string) {
+  async getAllTasks(data: string, parameters: ParsedUrlQuery) {
     if (!data) {
       throw new Error('A team_id is required to get tasks')
     }
 
-    const { data: response } = await this.client.get<NewTask[]>(`task-management/${data}/task/`)
+    /* 
+      Accepted parameters 
+      1. kr: Filter Key Result by id
+      2. cycle: Filter cicle by id
+      3. last: "last <0-100>" filter date by last x days
+      4. since/upto: since + Date define start date, upto + Date define end
+    */
+
+    const { data: response } = await this.client.get<Task[]>(`task-management/${data}/task/`, {
+      params: parameters,
+    })
+    return response
+  }
+
+  async getTask(id: Task['id'], teamId: string) {
+    const { data: response } = await this.client.get<Task>(`task-management/${teamId}/task/${id}/`)
 
     return response
   }
-  
-  
+
   async addTask(data: TaskInsert) {
-    const { data: response } = await this.client.post<NewTask>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/`, data)
-    return response
-  }
-
-  async getTasksByKr(team_id: string, id: string) {
-    //const { data: response } = await this.client.get<NewTask>(`task-management/${team_id}/task/?kr=${id}`)
-    const { data: response } = await this.client.get<NewTask[]>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/?kr=6d10cb65-e3d0-4753-92c0-dc065368c731`)
+    const { data: response } = await this.client.post<NewTask>(
+      `task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/`,
+      data,
+    )
     return response
   }
 
   async removeTask(team_id: string, task_id: string) {
-    //soft delete
-    await this.client.put<NewTask>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/${task_id}`)
-    //await this.client.put<NewTask>(`task-management/${team_id}/task/${task_id}`)
+    // Tasks are soft deleted
+    await this.client.put<NewTask>(`task-management/${team_id}/task/${task_id}`)
   }
-/* TODO: Implement addTask, updateTask, getTask, getTaskUpdates, removeTask methods 
-  async updateTask(data: Partial<Task>) {
-    if (!data._id) {
+
+  async updateTask(teamId: string, data: Partial<Task>) {
+    if (!data.id) {
       throw new Error('A id is required to update task')
     }
 
-    const { data: response } = await this.client.patch<Task>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/${data._id}`, data)
+    const { data: response } = await this.client.patch<Task>(
+      `task-management/${teamId}/task/${data.id}`,
+      data,
+    )
 
     return response
   }
+/* TODO: Implement addTask, updateTask, getTask, getTaskUpdates, removeTask methods 
+  
 
   async getTask(id: Task['_id']) {
     const { data: response } = await this.client.get<Task>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/`, {

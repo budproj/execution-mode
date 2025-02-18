@@ -1,8 +1,7 @@
 import { User } from 'src/components/User/types'
+import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
 
 import { GraphQLConnection, GraphQLNode, GraphQLEntityPolicy } from '../types'
-
-import { TASK_STATUS } from './constants'
 
 export interface Task extends GraphQLNode {
   policy: GraphQLEntityPolicy
@@ -35,7 +34,7 @@ export interface NewTask {
   active?: boolean
   orderindex: number
   key_result?: string
-  cycle: string | null
+  cycle?: string
 }
 
 export interface TaskMeQuery {

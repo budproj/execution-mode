@@ -5,7 +5,10 @@ import { useSetRecoilState } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { KanbanTaskCard } from 'src/components/Base/KanbanTaskCard/wrapper'
-import { Task, Task as TaskModel } from 'src/services/task-management/task-management.service'
+import {
+  Task,
+  Task as TaskModel,
+} from 'src/services/new-task-management/new-task-management.service'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
@@ -16,8 +19,8 @@ import useTaskDragAndDrop from '../hooks/use-task-drag-and-drop'
 type TaskProperties = {
   readonly index: number
   readonly task: TaskModel
-  readonly onUpdate: (id: TaskModel['_id'], updatedTask: TaskModel) => void
-  readonly onDelete: (id: TaskModel['_id']) => void
+  readonly onUpdate: (id: TaskModel['id'], updatedTask: TaskModel) => void
+  readonly onDelete: (id: TaskModel['id']) => void
   readonly onDropHover: (index: number, index_: number) => void
   readonly onArchive?: (task: Task) => void
   readonly isActive?: boolean
@@ -40,7 +43,7 @@ const TaskCardComponent = ({
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
-    handleUpdate(task._id, { ...task, title: newTitle })
+    handleUpdate(task.id, { ...task, title: newTitle })
   }
 
   const handleArchive = () => {
@@ -50,7 +53,7 @@ const TaskCardComponent = ({
   }
 
   const handleTaskDelete = () => {
-    handleDelete(task._id)
+    handleDelete(task.id)
     dispatch({ taskStatus: task.status })
   }
 
@@ -67,7 +70,7 @@ const TaskCardComponent = ({
         userSelect="none"
         onClick={() => {
           setTaskDrawer(task)
-          setTaskDrawerId(task._id)
+          setTaskDrawerId(task.id)
         }}
       >
         <KanbanTaskCard.Root

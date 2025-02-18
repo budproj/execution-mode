@@ -9,7 +9,7 @@ import { User } from 'src/components/User/types'
 import {
   Task,
   TASK_STATUS as ColumnType,
-} from 'src/services/task-management/task-management.service'
+} from 'src/services/new-task-management/new-task-management.service'
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
 import { TASK_UPDATES_DATA_KEY } from '../../hooks/use-get-task-updates'
@@ -52,12 +52,12 @@ export const TaskDrawerSectionOwnerWrapper = ({
   const onSelect = useCallback(
     (userID: string) => {
       const newTaskWithOwner: Partial<Task> = { owner: userID }
-      updateTask(task._id, { _id: task._id, ...newTaskWithOwner })
+      updateTask(task.id, { id: task.id, ...newTaskWithOwner })
       setOwner(userID)
-      queryClient.invalidateQueries({ queryKey: [`${TASK_UPDATES_DATA_KEY}:${task._id}`] })
+      queryClient.invalidateQueries({ queryKey: [`${TASK_UPDATES_DATA_KEY}:${task.id}`] })
       handleClose()
     },
-    [handleClose, queryClient, task._id, updateTask],
+    [handleClose, queryClient, task.id, updateTask],
   )
 
   return (

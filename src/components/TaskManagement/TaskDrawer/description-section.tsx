@@ -2,18 +2,18 @@ import { EditorEvents } from '@tiptap/react'
 import React, { useCallback, useState } from 'react'
 
 import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
-import { Task } from 'src/services/task-management/task-management.service'
+import { Task } from 'src/services/new-task-management/new-task-management.service'
 
 interface TaskDescriptionSectionProperties {
   task: Task
-  updateTask: (_id: Task['_id'], updatedTask: Partial<Task>) => void
+  updateTask: (id: Task['id'], updatedTask: Partial<Task>) => void
 }
 
 export const TaskDescriptionSection = ({ task, updateTask }: TaskDescriptionSectionProperties) => {
   const [newDescriptionValue, setValue] = useState(task.description)
 
   const handleSubmit = () => {
-    updateTask(task._id, { _id: task._id, description: newDescriptionValue })
+    updateTask(task.id, { id: task.id, description: newDescriptionValue })
   }
 
   const handleUpdate = useCallback((parameters: EditorEvents['update']) => {

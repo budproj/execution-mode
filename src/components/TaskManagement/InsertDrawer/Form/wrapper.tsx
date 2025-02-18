@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil'
 import * as Yup from 'yup'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
-import { Task, TASK_STATUS } from 'src/services/task-management/task-management.service'
+import { Task, TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -24,7 +24,9 @@ import { StartDateInput } from './start-date'
 import { TitleInput } from './title'
 
 export type FormValues = {
-  boardID?: string
+  teamId?: string
+  keyResult?: string
+  cycle?: string
   title: string
   priority: TaskPriority
   description: string
@@ -57,8 +59,7 @@ interface InsertKeyResultFormProperties {
   readonly isEditing?: boolean
   readonly onValidationError?: () => void
   readonly column: TASK_STATUS
-  readonly boardID: string
-  readonly domain: BOARD_DOMAIN
+  readonly teamId: string
   readonly identifier: string
 }
 
@@ -67,10 +68,9 @@ const InsertOrUpdateTaskForm = ({
   onSuccess,
   onValidationError,
   column,
-  boardID,
+  teamId,
   isLoading,
   isEditing,
-  domain,
   identifier,
 }: InsertKeyResultFormProperties) => {
   const intl = useIntl()
@@ -78,6 +78,7 @@ const InsertOrUpdateTaskForm = ({
 
   const NewTaskSchema = Yup.object().shape({
     title: Yup.string().required(intl.formatMessage(messages.titleRequiredText)),
+    key_result: Yup.string(),
     priority: Yup.string().required(),
     description: Yup.string(),
     initialDate: Yup.date(),
@@ -89,12 +90,13 @@ const InsertOrUpdateTaskForm = ({
   })
 
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
-  const { addTask, updateTask } = useColumnTasks(column, boardID, domain, identifier)
+  const { addTask, updateTask } = useColumnTasks(column, teamId, identifier)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
 
   const formInitialValues: FormValues = {
     title: '',
     priority: 4,
+    keyResult: '',
     initialDate: new Date(),
     dueDate: new Date(),
     description: ' ',
@@ -135,7 +137,7 @@ const InsertOrUpdateTaskForm = ({
 
     const variables = {
       ...allValues,
-      boardId: boardID,
+      teamId,
       status: column,
       owner: allValues.ownerID,
       attachments: [],
@@ -171,16 +173,17 @@ const InsertOrUpdateTaskForm = ({
 
     const variables = {
       ...allValues,
-      boardId: boardID,
+      teamId,
       status: column,
       owner: allValues.ownerID,
       dueDate: addHours(new Date(allValues.dueDate), 3).toISOString(),
       initialDate: addHours(new Date(allValues.initialDate), 3).toISOString(),
+      supportTeam: [],
     }
 
     const newTask = getUpdatePatches(taskDrawer, variables as unknown as Task)
 
-    updateTask(taskDrawer._id, { _id: taskDrawer._id, ...newTask })
+    updateTask(taskDrawer.id, { id: taskDrawer.id, ...newTask })
 
     if (onSuccess) onSuccess()
   }

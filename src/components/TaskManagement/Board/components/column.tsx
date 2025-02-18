@@ -9,7 +9,7 @@ import {
   Task,
   Task as TaskModel,
   TASK_STATUS as ColumnType,
-} from 'src/services/task-management/task-management.service'
+} from 'src/services/new-task-management/new-task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
 import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
@@ -55,21 +55,12 @@ const StyledCircleButton = styled(Circle)`
 
 type ColumnProperties = {
   readonly column: ColumnType
-  readonly boardID: string
   readonly tasks: TaskModel[]
   readonly teamID: string
-  readonly order: string[]
   handleArchive?: (task: Task) => void
 }
 
-const TaskColumnComponent = ({
-  column,
-  boardID,
-  tasks,
-  teamID,
-  order,
-  handleArchive,
-}: ColumnProperties) => {
+const TaskColumnComponent = ({ column, tasks, teamID, handleArchive }: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
@@ -79,33 +70,26 @@ const TaskColumnComponent = ({
     openInsertDrawerTask,
     deleteTask,
     dropTaskFrom,
-    swapTasks,
     updateTask,
     columnTasks,
     setColumnTasks,
-  } = useColumnTasks(column, boardID, BOARD_DOMAIN.TEAM, teamID)
-
+  } = useColumnTasks(column, teamID, BOARD_DOMAIN.TEAM, '')
   const { dropReference, isOver } = useColumnDrop(column, dropTaskFrom)
-
+  const order = tasks.map((task) => task.id)
   const tasksInOrder = useMemo(() => {
-    const taskMap = new Map(tasks.map((task) => [task._id, task]))
-
-    const reorderedTasks = order
-      .map((id) => taskMap.get(id))
-      .filter((task): task is TaskModel => Boolean(task))
-
-    return reorderedTasks
-  }, [order, tasks])
+    return tasks
+  }, [tasks])
 
   const ColumnTasksComponents = columnTasks.map((task, index) => (
     <TaskCardComponent
-      key={task._id}
+      key={task.id}
       task={task}
       index={index}
-      onDropHover={swapTasks}
+      onDropHover={() => {
+        return true
+      }}
       onUpdate={updateTask}
       onDelete={deleteTask}
-      onArchive={handleArchive}
     />
   ))
 

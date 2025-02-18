@@ -6,9 +6,13 @@ import { getCommentsInstance } from './comments'
 import { customHeadersInjector, errorResponseInjector } from './injectors'
 import { getLLMInstance } from './llm'
 import { LlmService } from './llm/llm.service'
-import { getRoutinesInstance } from './routines'
 import { getNewTaskManagementInstance } from './new-task-management'
 import { NewTaskManagementService } from './new-task-management/new-task-management.service'
+import { getCycleInstance } from './okr'
+import { CycleService } from './okr/cycle/cycle.service'
+import { getKeyResultInstance } from './okr/key-result/key-result-instance'
+import { KeyResultService } from './okr/key-result/key-result.service'
+import { getRoutinesInstance } from './routines'
 import { getTaskManagementInstance } from './task-management'
 import { TaskManagementService } from './task-management/task-management.service'
 
@@ -18,6 +22,8 @@ export interface Services {
   llm: LlmService
   taskManagement: TaskManagementService
   newTaskManagement: NewTaskManagementService
+  keyResult: KeyResultService
+  cycle: CycleService
 }
 
 const configureInstance = (instance: AxiosInstance, authToken: string) => {
@@ -42,6 +48,8 @@ export const getServices = async (
     ),
     newTaskManagement: new NewTaskManagementService(
       configureInstance(getNewTaskManagementInstance(config), authToken),
-    ),  
+    ),
+    keyResult: new KeyResultService(configureInstance(getKeyResultInstance(config), authToken)),
+    cycle: new CycleService(configureInstance(getCycleInstance(config), authToken)),
   }
 }

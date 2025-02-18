@@ -2,39 +2,32 @@ import { useCallback, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import {
+  TaskInsert,
   Task,
   Task as TaskModel,
-  TaskInsert,
   TASK_STATUS as ColumnType,
-} from 'src/services/task-management/task-management.service'
+} from 'src/services/new-task-management/new-task-management.service'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 import meAtom from 'src/state/recoil/user/me'
 
-import { useAddTask } from '../../hooks/use-add-task'
-import { useRemoveTaskMutate } from '../../hooks/use-remove-task-mutate'
-import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
-import { useUpdateBoardMutate } from '../../hooks/use-update-board-mutate'
-import { useUpdateTaskMutate } from '../../hooks/use-update-task-mutate'
+import { useAddTeamTask } from '../../hooks/new-task/use-add-task'
+import { useDeleteTask } from '../../hooks/new-task/use-delete-task'
+import { useUpdateTask } from '../../hooks/new-task/use-update-task'
 import { swap } from '../utils/helpers'
 
-const useColumnTasks = (
-  column: ColumnType,
-  boardID: string,
-  domain: BOARD_DOMAIN,
-  identifier: string,
-) => {
+const useColumnTasks = (column: ColumnType, teamId: string) => {
   const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
-  const { mutate } = useAddTask(domain, identifier)
-  const { mutate: updateTaskMutate } = useUpdateTaskMutate(domain, identifier)
-  const { mutate: updateBoardMutate } = useUpdateBoardMutate()
-  const { mutate: removeTaskMutate } = useRemoveTaskMutate(domain, identifier)
+  const { mutate } = useAddTeamTask(teamId)
+
+  const { mutate: updateTaskMutate } = useUpdateTask(teamId)
+  const { mutate: removeTaskMutate } = useDeleteTask()
 
   const [columnTasks, setColumnTasks] = useState<Task[]>([])
 
   const myID = useRecoilValue(meAtom)
-  const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
+  const setTaskTeamId = useSetRecoilState(taskInsertDrawerTeamID)
 
   const addTask = useCallback(
     (task: TaskInsert) => {
@@ -45,60 +38,62 @@ const useColumnTasks = (
   )
 
   const openInsertDrawerTask = useCallback(() => {
-    setTaskBoardID({ boardID, column, domain, identifier })
-  }, [boardID, column, domain, identifier, setTaskBoardID])
+    setTaskTeamId({ teamId, column })
+  }, [teamId, column, setTaskTeamId])
 
   const addEmptyTask = useCallback(() => {
     addTask({
-      boardId: boardID,
       status: column,
       title: `Nova tarefa`,
+      team: teamId,
+      orderindex: 0,
+      cycle: undefined,
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500",
       initialDate: new Date(),
       dueDate: new Date(),
-      priority: Math.floor(Math.random() * 4) + 1,
+      priority: 1,
       owner: myID,
       attachments: [],
-      supportTeamMembers: [],
+      supportTeam: [],
       tags: [],
       active: true,
     })
-  }, [addTask, boardID, column, myID])
+  }, [addTask, column, myID, teamId])
 
   const deleteTask = useCallback(
-    (_id: TaskModel['_id']) => {
-      removeTaskMutate(_id)
+    (id: TaskModel['id']) => {
+      removeTaskMutate({ teamId, taskId: id })
     },
-    [removeTaskMutate],
+    [removeTaskMutate, teamId],
   )
 
   const updateTask = useCallback(
-    (_id: TaskModel['_id'], updatedTask: Partial<TaskModel>) => {
+    (_id: TaskModel['id'], updatedTask: Partial<TaskModel>) => {
       updateTaskMutate(updatedTask)
     },
     [updateTaskMutate],
   )
 
   const dropTaskFrom = useCallback(
-    (_id: TaskModel['_id']) => {
-      updateTaskMutate({ _id, status: column })
+    (_id: TaskModel['id']) => {
+      updateTaskMutate({ id, status: column })
     },
     [column, updateTaskMutate],
   )
 
-  const swapTasks = useCallback(
-    (index: number, index_: number) => {
-      setColumnTasks((allTasks) => {
-        return swap(allTasks, index, index_)
-      })
+  // const swapTasks = useCallback(
+  //   (index: number, index_: number) => {
+  //     setColumnTasks((allTasks) => {
+  //       return swap(allTasks, index, index_)
+  //     })
 
-      const order = columnTasks.map((task) => task._id)
+  //     const order = columnTasks.map((task) => task._id)
 
-      updateBoardMutate({ boardId: boardID, column, order })
-    },
-    [boardID, column, columnTasks, updateBoardMutate],
-  )
+  //     updateBoardMutate({ boardId: boardID, column, order })
+  //   },
+  //   [boardID, column, columnTasks, updateBoardMutate],
+  // )
 
   return {
     addEmptyTask,
@@ -107,7 +102,6 @@ const useColumnTasks = (
     updateTask,
     dropTaskFrom,
     deleteTask,
-    swapTasks,
     columnTasks,
     setColumnTasks,
   }
