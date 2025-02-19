@@ -6,10 +6,11 @@ import { TASK_STATUS } from 'src/services/new-task-management/new-task-managemen
 import messages from './messages'
 import { useIntl } from 'react-intl'
 import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
+import { User } from 'src/components/User/types'
 import { EditableInputField } from 'src/components/Base'
 import { DeleteTaskButton } from './ActionButtons/delete-task'
 import { useUpdateTaskByKr } from 'src/components/TaskManagement/hooks/use-update-task-new'
-
+//import { SupportTeamField } from '../../../../KeyResult/Single/Sections/Owner/support-team-field'
 export function swap<T>(array: T[], index: number, index_: number): T[] {
   const copy = [...array]
   const temporary = copy[index]
@@ -45,7 +46,7 @@ export interface NewTask {
   priority: number
   owner: string
   attachments?: string[]
-  supportTeam: string[]
+  supportTeam: User[]
   tags: string[]
   createdAt: Date
   updatedAt: Date
@@ -84,7 +85,7 @@ export const InlineTaskList = ({
   checklistLength,
   onCreate,
   isEditable = true,
-  checkPolicy = true,
+  //checkPolicy = true,
   draftCheckMarks
 }: InlineTaskListProperties) => {
   const isLoaded = Boolean(node)
@@ -223,7 +224,25 @@ const handleNewTitleStatus = async (title: string) => {
             assignedUserId={newNode?.owner}
             canUpdate={true}
             onUpdate={onUpdate}
-          />
+            />
+          {/*newNode?.supportTeam.length || canUpdate ? (
+            <Flex gridGap={2} direction="column" flexGrow={1}>
+              <SupportTeamField
+                supportTeamMembers={newNode?.supportTeam}
+                keyResultId={keyResultID}
+                hasPermitionToUpdate={true}
+                ownerName={newNode?.owner}
+              />
+            </Flex>
+          ) : 
+            <ChangeAssignedCheckMarkButton
+            keyResultID={keyResultID}
+            checkMarkId={newNode?.key_result}
+            assignedUserId={newNode?.owner}
+            canUpdate={true}
+            onUpdate={onUpdate}
+            />
+          */}        
         </Flex>
       </StyledKeyResultCheckMark>
     </Skeleton>
