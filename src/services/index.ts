@@ -6,9 +6,9 @@ import { getCommentsInstance } from './comments'
 import { customHeadersInjector, errorResponseInjector } from './injectors'
 import { getLLMInstance } from './llm'
 import { LlmService } from './llm/llm.service'
-import { getRoutinesInstance } from './routines'
 import { getNewTaskManagementInstance } from './new-task-management'
 import { NewTaskManagementService } from './new-task-management/new-task-management.service'
+import { getRoutinesInstance } from './routines'
 import { getTaskManagementInstance } from './task-management'
 import { TaskManagementService } from './task-management/task-management.service'
 
@@ -41,8 +41,8 @@ export const getServices = async (
       configureInstance(getTaskManagementInstance(config), authToken),
     ),
     newTaskManagement: new NewTaskManagementService(
-      //configureInstance(getNewTaskManagementInstance(config), authToken),
+      // Next implementation -> configureInstance(getNewTaskManagementInstance(config), authToken),
       configureInstance(getNewTaskManagementInstance(), authToken),
-    ),  
+    ),
   }
 }

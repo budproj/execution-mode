@@ -1,8 +1,10 @@
+import { ParsedUrlQuery } from 'querystring'
+
 import { AxiosInstance } from 'axios'
 
-import { Except } from 'src/helpers/except'
 import { NewTask } from 'src/components/Task/types'
-import { ParsedUrlQuery } from 'querystring'
+import { Except } from 'src/helpers/except'
+
 export enum TASK_STATUS {
   PENDING = 'pending',
   TODO = 'toDo',
@@ -83,11 +85,10 @@ export enum IAuthorType {
 
 export type TaskInsert = Except<NewTask, 'id' | 'createdAt' | 'updatedAt' | 'history'>
 
-
 export class NewTaskManagementService {
   constructor(private readonly client: AxiosInstance) {}
 
-    async getAllTasks(teamId: string, parameters: ParsedUrlQuery) {
+  async getAllTasks(teamId: string, parameters: ParsedUrlQuery) {
     if (!teamId) {
       throw new Error('A team_id is required to get tasks')
     }
@@ -98,20 +99,24 @@ export class NewTaskManagementService {
 
     return response
   }
-  
-  
+
   async addTask(data: TaskInsert) {
-    const { data: response } = await this.client.post<NewTask>(`task-management/${data.team}/task/`, data)
+    const { data: response } = await this.client.post<NewTask>(
+      `task-management/${data.team}/task/`,
+      data,
+    )
     return response
   }
 
   async getTasksByKr(teamId: string, krId: string) {
-    const { data: response } = await this.client.get<NewTask[]>(`task-management/${teamId}/task/?kr=${krId}`)
+    const { data: response } = await this.client.get<NewTask[]>(
+      `task-management/${teamId}/task/?kr=${krId}`,
+    )
     return response
   }
 
   async removeTask(teamId: string, taskId: string) {
-    //soft delete
+    // Soft delete
     await this.client.delete<NewTask>(`task-management/${teamId}/task/${taskId}`)
   }
 
@@ -120,7 +125,11 @@ export class NewTaskManagementService {
       throw new Error('A id is required to update task')
     }
 
-    const { data: response } = await this.client.put<NewTask>(`task-management/${data.team}/task/${data.id}/`, data)
+    const { data: response } = await this.client.put<NewTask>(
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      `task-management/${data.team}/task/${data.id}/`,
+      data,
+    )
 
     return response
   }

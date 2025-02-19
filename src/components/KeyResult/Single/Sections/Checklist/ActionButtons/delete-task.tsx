@@ -4,9 +4,8 @@ import { useIntl } from 'react-intl'
 
 import { DeleteButton } from 'src/components/Base/Button/delete-button'
 import { useDeleteTaskByKr } from 'src/components/TaskManagement/hooks/use-delete-tasks'
+
 import messages from './messages'
-
-
 
 interface DeleteTaskButtonProperties {
   keyResultID?: string
@@ -21,9 +20,9 @@ interface DeleteTaskButtonProperties {
 export const DeleteTaskButton = ({
   keyResultID,
   taskID,
-  onDelete: refresh,
   isVisible,
   canDelete,
+  onDelete: refresh,
   ...rest
 }: DeleteTaskButtonProperties) => {
   isVisible ??= true
@@ -35,8 +34,6 @@ export const DeleteTaskButton = ({
   const { mutateAsync: deleteTask } = useDeleteTaskByKr()
 
   const handleDelete = async () => {
-    if (!id || !taskID) return
-
     await deleteTask({ teamID: id as string, taskID: taskID as string })
 
     if (refresh) refresh()
@@ -50,5 +47,6 @@ export const DeleteTaskButton = ({
       onDelete={handleDelete}
       {...rest}
     />
-  ) : null
+  ) : // eslint-disable-next-line unicorn/no-null
+  null
 }

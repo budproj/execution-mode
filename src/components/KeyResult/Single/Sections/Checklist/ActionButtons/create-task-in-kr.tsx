@@ -7,10 +7,9 @@ import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
-import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
 import { TASK_STATUS } from 'src/components/Task/constants'
 import { NewTask } from 'src/components/Task/types'
-
+import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
 import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
@@ -68,7 +67,7 @@ export const CreateTaskButton = ({
     await addNewTask({
       team: id as string,
       status: TASK_STATUS.PENDING,
-      title: title,
+      title,
       description: 'descrição',
       initialDate: new Date(),
       dueDate: new Date(),

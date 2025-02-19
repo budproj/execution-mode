@@ -1,16 +1,16 @@
 import { Box, Flex, HStack, Skeleton, VStack, Text, Badge, Select } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useRef, useState } from 'react'
-
 import { useIntl } from 'react-intl'
-//import { User } from 'src/components/User/types'
+
 import { EditableInputField } from 'src/components/Base'
 import { useUpdateTaskByKr } from 'src/components/TaskManagement/hooks/use-update-task-new'
 import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
-import { DeleteTaskButton } from './ActionButtons/delete-task'
+
 import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
+import { DeleteTaskButton } from './ActionButtons/delete-task'
 import messages from './messages'
-//import { SupportTeamField } from '../../../../KeyResult/Single/Sections/Owner/support-team-field'
+
 export function swap<T>(array: T[], index: number, index_: number): T[] {
   const copy = [...array]
   const temporary = copy[index]
@@ -64,7 +64,6 @@ interface InlineTaskListProperties {
   checklistLength?: number
   onCreate?: () => void
   isEditable?: boolean
-  checkPolicy?: boolean
 }
 
 const StyledKeyResultCheckMark = styled(HStack)`
@@ -85,7 +84,6 @@ export const InlineTaskList = ({
   checklistLength,
   onCreate,
   isEditable = true,
-  //checkPolicy = true,
   draftCheckMarks,
 }: InlineTaskListProperties) => {
   const isLoaded = Boolean(node)
@@ -123,8 +121,8 @@ export const InlineTaskList = ({
   }
 
   const handleNewTitleStatus = async (title: string) => {
-    setNode((prevNode) => {
-      const updatedNode = { ...prevNode, title }
+    setNode((previousNode) => {
+      const updatedNode = { ...previousNode, title }
       updateTask({ newNode: updatedNode })
       return updatedNode
     })
@@ -156,6 +154,7 @@ export const InlineTaskList = ({
   const handleStopEdit = () => {
     if (isEditable) setIsEditing(false)
   }
+
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
       <StyledKeyResultCheckMark alignItems="center">
@@ -163,9 +162,9 @@ export const InlineTaskList = ({
           {toggleTaskStatus ? (
             <Select
               value={newNode?.status}
-              width={'36'}
-              onChange={(e) => {
-                handleSetNewTaskStatus(e.target.value)
+              width="36"
+              onChange={(event) => {
+                handleSetNewTaskStatus(event.target.value)
               }}
             >
               {Object.keys(TASK_STATUS).map((name) => {
@@ -179,6 +178,7 @@ export const InlineTaskList = ({
                     </option>
                   )
                 }
+
                 return (
                   <option key={name} value={name.toLocaleLowerCase()}>
                     {intl.formatMessage(taskStatusName)}
@@ -194,8 +194,8 @@ export const InlineTaskList = ({
               backgroundColor={ColumnColorScheme[newNode.status ?? TASK_STATUS.PENDING]}
               color="white"
               textTransform="uppercase"
-              cursor={'pointer'}
-              onClick={handleOpenSelectTaskStatus}
+              cursor="pointer"
+              onClick={() => handleOpenSelectTaskStatus}
             >
               {headerText && intl.formatMessage(headerText)}
             </Badge>
@@ -225,34 +225,14 @@ export const InlineTaskList = ({
             className="deleteCheckMarkButton"
             keyResultID={keyResultID}
             taskID={newNode?.id}
-            canDelete={true}
             onDelete={onUpdate}
           />
           <ChangeAssignedCheckMarkButton
             keyResultID={keyResultID}
             checkMarkId={newNode?.key_result}
             assignedUserId={newNode?.owner}
-            canUpdate={true}
             onUpdate={onUpdate}
           />
-          {/*newNode?.supportTeam.length || canUpdate ? (
-            <Flex gridGap={2} direction="column" flexGrow={1}>
-              <SupportTeamField
-                supportTeamMembers={newNode?.supportTeam}
-                keyResultId={keyResultID}
-                hasPermitionToUpdate={true}
-                ownerName={newNode?.owner}
-              />
-            </Flex>
-          ) : 
-            <ChangeAssignedCheckMarkButton
-            keyResultID={keyResultID}
-            checkMarkId={newNode?.key_result}
-            assignedUserId={newNode?.owner}
-            canUpdate={true}
-            onUpdate={onUpdate}
-            />
-          */}
         </Flex>
       </StyledKeyResultCheckMark>
     </Skeleton>

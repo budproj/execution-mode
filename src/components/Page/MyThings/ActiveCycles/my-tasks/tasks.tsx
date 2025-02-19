@@ -8,8 +8,6 @@ import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResultChecklist } from 'src/components/KeyResult/Single/Sections/Checklist/checklist'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { useGetNewTask } from 'src/components/TaskManagement/hooks/use-get-tasks-new'
-//import { GraphQLEffect } from 'src/components/types'
-//import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 
 import messages from './messages'
 
@@ -25,26 +23,14 @@ interface KeyResultTasksProperties {
 }
 
 const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasksProperties) => {
-  /*onst [checklist, updateChecklistEdges] = useConnectionEdges<KeyResultCheckMark>()
-  const canCreate = keyResult.checkList?.policy?.create === GraphQLEffect.ALLOW
-
-  useEffect(() => {
-    updateChecklistEdges(keyResult.checkList?.edges)
-  }, [keyResult.checkList?.edges, updateChecklistEdges])*/
-
   const router = useRouter()
   const { id } = router.query
 
-
-  const {
-    data: tasks = [],
-    refetch,
-  } = useGetNewTask(id as string, keyResult.id ?? '')
+  const { data: tasks = [], refetch } = useGetNewTask(id as string, keyResult.id ?? '')
 
   const hasItems = tasks.length > 0
 
   const canCreate = !hasItems
-  
 
   useEffect(() => {
     if (keyResult.id) refetch()
@@ -65,7 +51,6 @@ const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasks
       <Box transform="translateY(-10px)" pl="2.2rem">
         <KeyResultChecklist
           isEditable
-          checkPolicy={false}
           keyResultID={keyResult.id}
           nodes={tasks}
           canCreate={canCreate}
