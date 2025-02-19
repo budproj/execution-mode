@@ -31,7 +31,7 @@ export const DeleteTaskButton = ({
     const router = useRouter()
     const { id } = router.query
   
-    const { mutateAsync: deleteTask, isError, isPending, isSuccess } = useDeleteTaskByKr()
+    const { mutateAsync: deleteTask} = useDeleteTaskByKr()
   
     const handleDelete = async () => {
       if (!id || !taskID) return

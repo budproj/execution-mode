@@ -1,9 +1,8 @@
 import { Stack, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useRef } from 'react'
-import { useRecoilValue } from 'recoil'
 
-import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
+//import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
 import { InlineTaskList } from './inline-tasklist'
 import { NewTask } from 'src/components/Task/types'
@@ -36,26 +35,26 @@ export const KeyResultChecklist = ({
   checkPolicy = true,
   createTaskLabel,
 }: KeyResultChecklistProperties) => {
-  const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
+  //const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
   const createButtonReference = useRef<HTMLButtonElement>(null)
-
+ /*
   const canUserEdit = (node: NewTask) =>
     isEditable
 
   const handleCreateCheckmark = () => {
     createButtonReference.current?.click()
-  }
+  }*/
   return (
     <>
       {nodes.length > 0 && (
         <StyledStack alignItems="flex-start" pt={4} {...wrapperProps}>
-          {nodes.map((node, index) => (
+          {nodes.map((node) => (
             <InlineTaskList
               key={node.id}
               keyResultID={keyResultID}
               node={node}
               onUpdate={onUpdate}
-              isEditable={isEditable && canUserEdit(node)}
+              isEditable={isEditable}
               checkPolicy={checkPolicy}
             />
           ))}
