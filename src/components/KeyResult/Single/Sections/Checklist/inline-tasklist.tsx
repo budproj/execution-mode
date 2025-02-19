@@ -1,15 +1,15 @@
 import { Box, Flex, HStack, Skeleton, VStack, Text, Badge, Select } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useRef, useState } from 'react'
-import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
 
-import messages from './messages'
 import { useIntl } from 'react-intl'
-import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
 //import { User } from 'src/components/User/types'
 import { EditableInputField } from 'src/components/Base'
-import { DeleteTaskButton } from './ActionButtons/delete-task'
 import { useUpdateTaskByKr } from 'src/components/TaskManagement/hooks/use-update-task-new'
+import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import { DeleteTaskButton } from './ActionButtons/delete-task'
+import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
+import messages from './messages'
 //import { SupportTeamField } from '../../../../KeyResult/Single/Sections/Owner/support-team-field'
 export function swap<T>(array: T[], index: number, index_: number): T[] {
   const copy = [...array]
@@ -86,7 +86,7 @@ export const InlineTaskList = ({
   onCreate,
   isEditable = true,
   //checkPolicy = true,
-  draftCheckMarks
+  draftCheckMarks,
 }: InlineTaskListProperties) => {
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
@@ -97,7 +97,7 @@ export const InlineTaskList = ({
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
   const [toggleTaskStatus, setToggleTaskStatus] = useState(false)
   const [headerText, setHeaderText] = useState(header)
-  const [newNode, setNode] = useState(node);
+  const [newNode, setNode] = useState(node)
   const [isEditing, setIsEditing] = useState(false)
 
   const { mutateAsync: updateTask } = useUpdateTaskByKr()
@@ -106,31 +106,31 @@ export const InlineTaskList = ({
       setToggleTaskStatus(true)
     }
   }
-  
-  async function handleSetNewTaskStatus(status: string) {
-    setToggleTaskStatus(false);
-    
-    const updatedNode = {
-        ...newNode,
-        status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS]
-    };
 
-    setNode(updatedNode);
-    setHeaderText(headerColumnMessage.get(updatedNode.status));
+  async function handleSetNewTaskStatus(status: string) {
+    setToggleTaskStatus(false)
+
+    const updatedNode = {
+      ...newNode,
+      status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS],
+    }
+
+    setNode(updatedNode)
+    setHeaderText(headerColumnMessage.get(updatedNode.status))
 
     await updateTask({ newNode: updatedNode })
-    if (onUpdate) onUpdate();
-}
+    if (onUpdate) onUpdate()
+  }
 
-const handleNewTitleStatus = async (title: string) => {
-    setNode(prevNode => {
-        const updatedNode = { ...prevNode, title };
-        updateTask({ newNode: updatedNode })
-        return updatedNode;
-    });
+  const handleNewTitleStatus = async (title: string) => {
+    setNode((prevNode) => {
+      const updatedNode = { ...prevNode, title }
+      updateTask({ newNode: updatedNode })
+      return updatedNode
+    })
 
-    if (onUpdate) onUpdate();
-};
+    if (onUpdate) onUpdate()
+  }
 
   const handleCancelTitle = (oldDescription?: string) => {
     const isEmpty = !oldDescription || oldDescription.trim() === ''
@@ -168,21 +168,23 @@ const handleNewTitleStatus = async (title: string) => {
                 handleSetNewTaskStatus(e.target.value)
               }}
             >
-             {Object.keys(TASK_STATUS).map((name) => {
-                const taskStatusName = headerColumnMessage.get(TASK_STATUS[name as keyof typeof TASK_STATUS]);
+              {Object.keys(TASK_STATUS).map((name) => {
+                const taskStatusName = headerColumnMessage.get(
+                  TASK_STATUS[name as keyof typeof TASK_STATUS],
+                )
                 if (!taskStatusName) {
-                  return(
+                  return (
                     <option key={name} value={name.toLocaleLowerCase()}>
                       {headerText && intl.formatMessage(headerText)}
                     </option>
                   )
                 }
-               return (
-                 <option key={name} value={name.toLocaleLowerCase()}>
-                   {intl.formatMessage(taskStatusName)}
-                 </option>
-               )
-             })}
+                return (
+                  <option key={name} value={name.toLocaleLowerCase()}>
+                    {intl.formatMessage(taskStatusName)}
+                  </option>
+                )
+              })}
             </Select>
           ) : (
             <Badge
@@ -206,7 +208,7 @@ const handleNewTitleStatus = async (title: string) => {
             value={node?.title}
             isLoaded={isLoaded}
             startWithEditView={isDraft}
-            isDisabled={(!isEditable || !canUpdate)}
+            isDisabled={!isEditable || !canUpdate}
             onSubmit={handleNewTitleStatus}
             onCancel={handleCancelTitle}
             onPressedEnter={handleEnterKey}
@@ -232,7 +234,7 @@ const handleNewTitleStatus = async (title: string) => {
             assignedUserId={newNode?.owner}
             canUpdate={true}
             onUpdate={onUpdate}
-            />
+          />
           {/*newNode?.supportTeam.length || canUpdate ? (
             <Flex gridGap={2} direction="column" flexGrow={1}>
               <SupportTeamField
@@ -250,7 +252,7 @@ const handleNewTitleStatus = async (title: string) => {
             canUpdate={true}
             onUpdate={onUpdate}
             />
-          */}        
+          */}
         </Flex>
       </StyledKeyResultCheckMark>
     </Skeleton>

@@ -4,9 +4,9 @@ import React, { useRef } from 'react'
 
 //import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
 
-import { InlineTaskList } from './inline-tasklist'
 import { NewTask } from 'src/components/Task/types'
 import { CreateTaskButton } from './ActionButtons/create-task-in-kr'
+import { InlineTaskList } from './inline-tasklist'
 
 const StyledStack = styled(Stack)`
   & .editable-input-value__edit-button {
@@ -35,9 +35,9 @@ export const KeyResultChecklist = ({
   checkPolicy = true,
   createTaskLabel,
 }: KeyResultChecklistProperties) => {
-  //const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
+  // const draftCheckMarks = useRecoilValue(draftCheckMarksAtom(keyResultID))
   const createButtonReference = useRef<HTMLButtonElement>(null)
- /*
+  /*
   const canUserEdit = (node: NewTask) =>
     isEditable
 

@@ -1,21 +1,22 @@
 import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 import React, { Ref, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
+import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
+import { TASK_STATUS } from 'src/components/Task/constants'
+import { NewTask } from 'src/components/Task/types'
+
 import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
 import { useEvent } from '../../../../../../state/hooks/useEvent/hook'
 
 import messages from './messages'
-import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
-import { TASK_STATUS } from 'src/components/Task/constants'
-import { useRouter } from 'next/router'
-import { NewTask } from 'src/components/Task/types'
 
 interface CreateTaskButtonProperties extends StyleProps {
   readonly keyResultID?: string
@@ -64,30 +65,27 @@ export const CreateTaskButton = ({
     }
 
     setIsSubmitting(true)
-    await addNewTask(
-      {
-        team: id as string,
-        status: TASK_STATUS.PENDING,
-        title: title,
-        description:
-          "descrição",
-        initialDate: new Date(),
-        dueDate: new Date(),
-        priority: Math.floor(Math.random() * 4) + 1,
-        owner: userID,
-        attachments: [],
-        supportTeam: [],
-        tags: [],
-        orderindex: 0,
-        key_result: keyResultID,
-        cycle: '',
-      }
-     )
+    await addNewTask({
+      team: id as string,
+      status: TASK_STATUS.PENDING,
+      title: title,
+      description: 'descrição',
+      initialDate: new Date(),
+      dueDate: new Date(),
+      priority: Math.floor(Math.random() * 4) + 1,
+      owner: userID,
+      attachments: [],
+      supportTeam: [],
+      tags: [],
+      orderindex: 0,
+      key_result: keyResultID,
+      cycle: '',
+    })
 
     dispatch({ keyResultID })
     setIsSubmitting(false)
     toggleAdd()
-    if (onCreate) onCreate()       
+    if (onCreate) onCreate()
   }
 
   const toggleAdd = () => {
