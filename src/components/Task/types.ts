@@ -17,24 +17,23 @@ export interface Task extends GraphQLNode {
 
 export interface NewTask {
   id: string
-  team: string
-  history: string[]
+  key_result?: string | undefined
+  orderindex: number
   status: TASK_STATUS
+  initialDate: Date
   title: string
   description: string
   dueDate: Date
+  history?: string[]
   priority: number
   owner: string
-  initialDate: Date
-  attachments: string[]
+  attachments?: string[]
   supportTeam: string[]
   tags: string[]
   createdAt: Date
   updatedAt: Date
   deletedAt?: Date
-  active?: boolean
-  orderindex: number
-  key_result?: string
+  team: string
   cycle: string | null
 }
 

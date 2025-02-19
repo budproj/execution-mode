@@ -52,7 +52,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
     if (isFetching && tasks.length === 0) {
       setProgress({ total: 0, numberOfDone: 0, progress: 0 })
     }
-    setProgress({ total: tasks.length, numberOfDone: numberOfDone, progress: numberOfDone !== 0 ? (tasks.length / numberOfDone) * 100 : 0 })
+    setProgress({ total: tasks.length, numberOfDone: numberOfDone, progress: numberOfDone !== 0 ? (numberOfDone / tasks.length) * 100 : 0 })
   }, [isFetching, tasks.length])
 
   return (

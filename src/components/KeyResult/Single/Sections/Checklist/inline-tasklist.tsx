@@ -8,6 +8,7 @@ import { useIntl } from 'react-intl'
 import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
 import { EditableInputField } from 'src/components/Base'
 import { DeleteTaskButton } from './ActionButtons/delete-task'
+import { useUpdateTaskByKr } from 'src/components/TaskManagement/hooks/use-update-task-new'
 
 export function swap<T>(array: T[], index: number, index_: number): T[] {
   const copy = [...array]
@@ -36,6 +37,7 @@ export interface NewTask {
   key_result?: string | undefined
   orderindex: number
   status: TASK_STATUS
+  initialDate: Date
   title: string
   description: string
   dueDate: Date
@@ -97,23 +99,37 @@ export const InlineTaskList = ({
   const [newNode, setNode] = useState(node);
   const [isEditing, setIsEditing] = useState(false)
 
+  const { mutateAsync: updateTask } = useUpdateTaskByKr()
   function handleOpenSelectTaskStatus() {
     if (!toggleTaskStatus) {
       setToggleTaskStatus(true)
     }
   }
   
-  function handleSetNewTaskStatus(status: string) {
-    setToggleTaskStatus(false)
-    setNode({...node, status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS] })
-    setHeaderText(headerColumnMessage.get(TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS]))
+  async function handleSetNewTaskStatus(status: string) {
+    setToggleTaskStatus(false);
+    
+    const updatedNode = {
+        ...newNode,
+        status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS]
+    };
 
-    //TODO update status in bd
-  }
+    setNode(updatedNode);
+    setHeaderText(headerColumnMessage.get(updatedNode.status));
 
-  const handleNewTitleStatus = async (title: string) => {
-      //TODO update title in bd
-  }
+    await updateTask({ newNode: updatedNode })
+    if (onUpdate) onUpdate();
+}
+
+const handleNewTitleStatus = async (title: string) => {
+    setNode(prevNode => {
+        const updatedNode = { ...prevNode, title };
+        updateTask({ newNode: updatedNode })
+        return updatedNode;
+    });
+
+    if (onUpdate) onUpdate();
+};
 
   const handleCancelTitle = (oldDescription?: string) => {
     const isEmpty = !oldDescription || oldDescription.trim() === ''
