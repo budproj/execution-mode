@@ -6,6 +6,8 @@ import { getCommentsInstance } from './comments'
 import { customHeadersInjector, errorResponseInjector } from './injectors'
 import { getLLMInstance } from './llm'
 import { LlmService } from './llm/llm.service'
+import { getNewTaskManagementInstance } from './new-task-management'
+import { NewTaskManagementService } from './new-task-management/new-task-management.service'
 import { getRoutinesInstance } from './routines'
 import { getTaskManagementInstance } from './task-management'
 import { TaskManagementService } from './task-management/task-management.service'
@@ -15,6 +17,7 @@ export interface Services {
   comments: AxiosInstance
   llm: LlmService
   taskManagement: TaskManagementService
+  newTaskManagement: NewTaskManagementService
 }
 
 const configureInstance = (instance: AxiosInstance, authToken: string) => {
@@ -36,6 +39,10 @@ export const getServices = async (
     llm: new LlmService(configureInstance(getLLMInstance(config), authToken)),
     taskManagement: new TaskManagementService(
       configureInstance(getTaskManagementInstance(config), authToken),
+    ),
+    newTaskManagement: new NewTaskManagementService(
+      // Next implementation -> configureInstance(getNewTaskManagementInstance(config), authToken),
+      configureInstance(getNewTaskManagementInstance(), authToken),
     ),
   }
 }

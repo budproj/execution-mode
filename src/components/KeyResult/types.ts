@@ -121,7 +121,7 @@ export interface KeyResultChecklist extends GraphQLConnection<KeyResultCheckMark
 
 export interface KeyResultChecklistProgress {
   total: number
-  numberOfChecked: number
+  numberOfDone: number
   progress: number
 }
 

@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import React, { useState } from 'react'
 
 import { EditableInputField } from 'src/components/Base'
-import { TASK_STATUS } from 'src/components/Task/constants'
+import { OLD_TASK_STATUS } from 'src/components/Task/constants'
 import { useChangeTaskDescription } from 'src/components/Task/hooks'
 import { Task } from 'src/components/Task/types'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
@@ -36,7 +36,7 @@ export const SingleTask = ({
 }: SingleTaskProperties) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
-  const [isChecked, setIsChecked] = useState(task.state === TASK_STATUS.CHECKED)
+  const [isChecked, setIsChecked] = useState(task.state === OLD_TASK_STATUS.CHECKED)
   const { changeDescription } = useChangeTaskDescription()
   const { dispatch: dispatchUpdateTitleEvent } = useEvent(EventType.UPDATED_PERSONAL_TASK_TITLE)
   const { dispatch: dispatchToggleEvent } = useEvent(EventType.TOGGLED_PERSONAL_TASK)

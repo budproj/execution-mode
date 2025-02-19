@@ -24,7 +24,7 @@ import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOw
 import { KeyResult } from 'src/components/KeyResult/types'
 import tasksMessages from 'src/components/Page/MyThings/ActiveCycles/messages'
 import MyTasks from 'src/components/Page/MyThings/ActiveCycles/my-tasks'
-import { TASK_STATUS } from 'src/components/Task/constants'
+import { OLD_TASK_STATUS } from 'src/components/Task/constants'
 import { companyPreposition } from 'src/components/User/DetailedHeader/constants'
 import { User } from 'src/components/User/types'
 import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
@@ -43,19 +43,19 @@ const CompanyOkrPage = ({ userData, isUserLoading, intl }: ProfilePageProperties
   const setTasksQuery = useSetRecoilState(myThingsTasksQuery)
 
   const statesLabels = new Map([
-    [TASK_STATUS.CHECKED, intl.formatMessage(tasksMessages.allTasks)],
-    [TASK_STATUS.UNCHECKED, intl.formatMessage(tasksMessages.pendingTasks)],
+    [OLD_TASK_STATUS.CHECKED, intl.formatMessage(tasksMessages.allTasks)],
+    [OLD_TASK_STATUS.UNCHECKED, intl.formatMessage(tasksMessages.pendingTasks)],
   ])
 
-  const [taskState, setTaskState] = useState(TASK_STATUS.CHECKED)
+  const [taskState, setTaskState] = useState(OLD_TASK_STATUS.CHECKED)
 
   const handleLineClick = (id: KeyResult['id']) => setOpenDrawer(id)
 
-  const handleTaskFilterChange = (taskState: TASK_STATUS) => {
+  const handleTaskFilterChange = (taskState: OLD_TASK_STATUS) => {
     setTaskState(taskState)
     setTasksQuery((previousQuery) => ({
       ...previousQuery,
-      onlyUnchecked: taskState === TASK_STATUS.UNCHECKED,
+      onlyUnchecked: taskState === OLD_TASK_STATUS.UNCHECKED,
     }))
   }
 

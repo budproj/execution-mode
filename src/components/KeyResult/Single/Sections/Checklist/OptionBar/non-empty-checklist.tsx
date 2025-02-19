@@ -30,7 +30,7 @@ export const NonEmptyChecklist = ({ progress }: NonEmptyChecklistProperties) => 
         <Skeleton isLoaded={isLoaded}>
           <Text color="brand.500" fontSize="sm" fontWeight={500}>
             {intl.formatMessage(messages.completed, {
-              completed: progress?.numberOfChecked ?? 0,
+              completed: progress?.numberOfDone ?? 0,
               total: progress?.total ?? 0,
             })}
           </Text>
