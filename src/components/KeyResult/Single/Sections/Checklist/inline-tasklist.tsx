@@ -6,7 +6,7 @@ import { TASK_STATUS } from 'src/services/new-task-management/new-task-managemen
 import messages from './messages'
 import { useIntl } from 'react-intl'
 import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
-import { User } from 'src/components/User/types'
+//import { User } from 'src/components/User/types'
 import { EditableInputField } from 'src/components/Base'
 import { DeleteTaskButton } from './ActionButtons/delete-task'
 import { useUpdateTaskByKr } from 'src/components/TaskManagement/hooks/use-update-task-new'
@@ -46,7 +46,7 @@ export interface NewTask {
   priority: number
   owner: string
   attachments?: string[]
-  supportTeam: User[]
+  supportTeam: string[]
   tags: string[]
   createdAt: Date
   updatedAt: Date
