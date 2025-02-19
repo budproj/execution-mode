@@ -1,6 +1,6 @@
 import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { Ref, useCallback, useState } from 'react'
+import React, { Ref, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
