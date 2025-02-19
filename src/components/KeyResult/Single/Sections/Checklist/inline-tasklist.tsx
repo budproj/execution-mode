@@ -169,9 +169,17 @@ const handleNewTitleStatus = async (title: string) => {
               }}
             >
              {Object.keys(TASK_STATUS).map((name) => {
+                const taskStatusName = headerColumnMessage.get(TASK_STATUS[name as keyof typeof TASK_STATUS]);
+                if (!taskStatusName) {
+                  return(
+                    <option key={name} value={name.toLocaleLowerCase()}>
+                      {headerText && intl.formatMessage(headerText)}
+                    </option>
+                  )
+                }
                return (
                  <option key={name} value={name.toLocaleLowerCase()}>
-                   {intl.formatMessage(headerColumnMessage.get(TASK_STATUS[name as keyof typeof TASK_STATUS]))}
+                   {intl.formatMessage(taskStatusName)}
                  </option>
                )
              })}
