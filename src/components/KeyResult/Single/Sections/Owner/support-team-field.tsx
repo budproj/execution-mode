@@ -10,7 +10,7 @@ import GET_KEY_RESULTS_HIGHLIGHTS from 'src/components/Page/Team/Highlights/get-
 import GET_NO_RELATED_MEMBERS from 'src/components/Page/Team/Highlights/hooks/getNoRelatedMembers/get-no-related-members.gql'
 import { User } from 'src/components/User/types'
 import { Except } from 'src/helpers/except'
-import { Task } from 'src/services/new-task-management/new-task-management.service'
+import { Task } from 'src/services/task-management/task-management.service'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { ownersAndSupportTeamTaskAtom } from 'src/state/recoil/task-management/board/owners-and-support-team-task'
 import { taskSupportTeamAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-support-team'
