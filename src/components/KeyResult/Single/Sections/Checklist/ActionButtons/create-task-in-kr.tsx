@@ -66,23 +66,20 @@ export const CreateTaskButton = ({
     setIsSubmitting(true)
     await addNewTask(
       {
-        //team: id as string,
-        team: 'f53c6168-9c21-42e3-b912-c4fe8acac849',
+        team: id as string,
         status: TASK_STATUS.PENDING,
         title: title,
         description:
-          "descrição teste",
+          "descrição",
         initialDate: new Date(),
         dueDate: new Date(),
         priority: Math.floor(Math.random() * 4) + 1,
-        owner: '0194add4-2730-7fd7-851c-d69d9a17fc16',
-        //owner: userID,
+        owner: userID,
         attachments: [],
         supportTeam: [],
         tags: [],
         orderindex: 0,
-        key_result: '6d10cb65-e3d0-4753-92c0-dc065368c731',
-        //key_result: keyResultID,
+        key_result: keyResultID,
         cycle: '',
       }
      )

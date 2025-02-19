@@ -205,7 +205,7 @@ const handleNewTitleStatus = async (title: string) => {
             onStopEdit={handleStopEdit}
           />
           <Text fontSize="sm" color="new-gray.600" lineHeight="0.7rem">
-            David Saggioro
+            {node.owner}
           </Text>
         </VStack>
         <Flex gap={2} alignItems="center">
@@ -220,7 +220,7 @@ const handleNewTitleStatus = async (title: string) => {
           <ChangeAssignedCheckMarkButton
             keyResultID={keyResultID}
             checkMarkId={newNode?.key_result}
-            assignedUserId={'8140026c-73cd-49cb-882e-6f9157b2ad03'}
+            assignedUserId={newNode?.owner}
             canUpdate={true}
             onUpdate={onUpdate}
           />

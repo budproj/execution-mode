@@ -102,20 +102,17 @@ export class NewTaskManagementService {
   
   async addTask(data: TaskInsert) {
     const { data: response } = await this.client.post<NewTask>(`task-management/${data.team}/task/`, data)
-    //const { data: response } = await this.client.post<NewTask>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/`, data)
     return response
   }
 
   async getTasksByKr(teamId: string, krId: string) {
-    //const { data: response } = await this.client.get<NewTask[]>(`task-management/${teamId}/task/?kr=${krId}`)
-    const { data: response } = await this.client.get<NewTask[]>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/?kr=6d10cb65-e3d0-4753-92c0-dc065368c731`)
+    const { data: response } = await this.client.get<NewTask[]>(`task-management/${teamId}/task/?kr=${krId}`)
     return response
   }
 
   async removeTask(teamId: string, taskId: string) {
     //soft delete
-    await this.client.delete<NewTask>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/${taskId}/`)
-    //await this.client.delete<NewTask>(`task-management/${teamId}/task/${taskId}`)
+    await this.client.delete<NewTask>(`task-management/${teamId}/task/${taskId}`)
   }
 
   async updateTask(data: Partial<NewTask>) {
@@ -123,7 +120,7 @@ export class NewTaskManagementService {
       throw new Error('A id is required to update task')
     }
 
-    const { data: response } = await this.client.put<NewTask>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/${data.id}/`, data)
+    const { data: response } = await this.client.put<NewTask>(`task-management/${data.team}/task/${data.id}/`, data)
 
     return response
   }
