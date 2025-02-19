@@ -3,5 +3,7 @@ export enum TASK_STATUS {
   TODO = 'toDo',
   DOING = 'doing',
   DONE = 'done',
+  CHECKED = 'checked',
+  UNCHECKED = 'unchecked',
 }
 
