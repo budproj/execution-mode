@@ -62,7 +62,7 @@ export interface BudAPIs {
   restBase: string
   llm: string
   taskManagement: string
-  newTaskManagement: string
+  newApi: string
 }
 
 export interface Auth0Config {

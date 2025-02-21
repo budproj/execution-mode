@@ -41,8 +41,7 @@ export const getServices = async (
       configureInstance(getTaskManagementInstance(config), authToken),
     ),
     newTaskManagement: new NewTaskManagementService(
-      // Next implementation -> configureInstance(getNewTaskManagementInstance(config), authToken),
-      configureInstance(getNewTaskManagementInstance(), authToken),
+      configureInstance(getNewTaskManagementInstance(config), authToken),
     ),
   }
 }
