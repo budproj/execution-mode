@@ -53,6 +53,7 @@ export interface NewTask {
   deletedAt?: Date
   team: string
   cycle: string | null
+  owner_full_name?: string | undefined
 }
 
 interface InlineTaskListProperties {
@@ -90,6 +91,7 @@ export const InlineTaskList = ({
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const isWaiting = false
   const canUpdate = true
+  const canDelete = true
   const intl = useIntl()
   const header = headerColumnMessage.get(node?.status ?? TASK_STATUS.PENDING)
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
@@ -216,7 +218,7 @@ export const InlineTaskList = ({
             onStopEdit={handleStopEdit}
           />
           <Text fontSize="sm" color="new-gray.600" lineHeight="0.7rem">
-            {node.owner}
+            {node.owner_full_name}
           </Text>
         </VStack>
         <Flex gap={2} alignItems="center">
@@ -225,6 +227,7 @@ export const InlineTaskList = ({
             className="deleteCheckMarkButton"
             keyResultID={keyResultID}
             taskID={newNode?.id}
+            canDelete={canDelete}
             onDelete={onUpdate}
           />
           <ChangeAssignedCheckMarkButton

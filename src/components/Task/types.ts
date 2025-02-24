@@ -35,6 +35,7 @@ export interface NewTask {
   deletedAt?: Date
   team: string
   cycle: string | null
+  owner_full_name?: string
 }
 
 export interface TaskMeQuery {
