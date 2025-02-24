@@ -51,12 +51,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const setTaskBoardID = useSetRecoilState(taskInsertDrawerTeamID)
   const isEditingTaskDrawerId = useSetRecoilState(isEditingTaskDrawerIdAtom)
 
-  const { updateTask } = useColumnTasks(
-    taskDrawer?.status,
-    boardData?._id as unknown as string,
-    BOARD_DOMAIN.TEAM,
-    teamID as unknown as string,
-  )
+  const { updateTask } = useColumnTasks(taskDrawer?.status, teamID as unknown as string)
 
   const translatedStatus = headerColumnMessage.get(taskDrawer?.status)
 
@@ -72,7 +67,6 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
     resetTaskDrawerId()
     setTaskBoardID({
       teamId: taskDrawer?.id,
-      identifier: teamID as unknown as string,
       column: taskDrawer.status,
     })
     isEditingTaskDrawerId(taskDrawer?.id)

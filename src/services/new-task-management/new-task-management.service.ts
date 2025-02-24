@@ -103,21 +103,23 @@ export class NewTaskManagementService {
       4. since/upto: since + Date define start date, upto + Date define end
     */
 
-    const { data: response } = await this.client.get<Task[]>(`task-management/${data}/task/`, {
+    const { data: response } = await this.client.get<Task[]>(`task-management/${data}/task/list`, {
       params: parameters,
     })
     return response
   }
 
   async getTask(id: Task['id'], teamId: string) {
-    const { data: response } = await this.client.get<Task>(`task-management/${teamId}/task/${id}/`)
+    const { data: response } = await this.client.get<Task>(
+      `task-management/${teamId}/task/get/${id}`,
+    )
 
     return response
   }
 
-  async addTask(data: TaskInsert) {
+  async addTask(team_id: string, data: TaskInsert) {
     const { data: response } = await this.client.post<NewTask>(
-      `task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/`,
+      `task-management/${team_id}/task/create`,
       data,
     )
     return response
@@ -125,7 +127,7 @@ export class NewTaskManagementService {
 
   async removeTask(team_id: string, task_id: string) {
     // Tasks are soft deleted
-    await this.client.put<NewTask>(`task-management/${team_id}/task/${task_id}`)
+    await this.client.put<NewTask>(`task-management/${team_id}/task/delete/${task_id}`)
   }
 
   async updateTask(teamId: string, data: Partial<Task>) {
@@ -134,7 +136,7 @@ export class NewTaskManagementService {
     }
 
     const { data: response } = await this.client.patch<Task>(
-      `task-management/${teamId}/task/${data.id}`,
+      `task-management/${teamId}/task/update/${data.id}`,
       data,
     )
 

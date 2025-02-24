@@ -16,13 +16,13 @@ export const TaskInsertDrawer = () => {
   // Const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
   const isEditingTaskDrawerId = useRecoilValue(isEditingTaskDrawerIdAtom)
   const resetIsEditingTaskDrawerId = useResetRecoilState(isEditingTaskDrawerIdAtom)
-  const { column, boardID, domain, identifier } = useRecoilValue(taskInsertDrawerTeamID)
+  const { column, teamId } = useRecoilValue(taskInsertDrawerTeamID)
 
   const resetTaskBoardID = useResetRecoilState(taskInsertDrawerTeamID)
   const intl = useIntl()
   const toast = useToast()
 
-  const isOpen = Boolean(boardID)
+  const isOpen = Boolean(teamId)
 
   const handleResetDrawerState = async () => {
     resetTaskBoardID()
@@ -63,14 +63,12 @@ export const TaskInsertDrawer = () => {
         <Stack h="full">
           <TaskInsertOrUpdateDrawerHeader isEditing={isEditing} />
           <Flex flexGrow={1}>
-            {boardID && identifier && (
+            {teamId && (
               <InsertOrUpdateTaskForm
                 isLoading={false}
                 column={column}
-                boardID={boardID}
+                teamId={teamId}
                 isEditing={isEditing}
-                domain={domain}
-                identifier={identifier}
                 onSuccess={handleSuccess}
               />
             )}

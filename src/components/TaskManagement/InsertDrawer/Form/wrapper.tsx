@@ -12,7 +12,6 @@ import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-dr
 import meAtom from 'src/state/recoil/user/me'
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
-import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 
 import { FormActions } from './actions'
 import { DescriptionInput } from './description'
@@ -60,7 +59,6 @@ interface InsertKeyResultFormProperties {
   readonly onValidationError?: () => void
   readonly column: TASK_STATUS
   readonly teamId: string
-  readonly identifier: string
 }
 
 const InsertOrUpdateTaskForm = ({
@@ -71,7 +69,6 @@ const InsertOrUpdateTaskForm = ({
   teamId,
   isLoading,
   isEditing,
-  identifier,
 }: InsertKeyResultFormProperties) => {
   const intl = useIntl()
   const myID = useRecoilValue(meAtom)
@@ -90,7 +87,7 @@ const InsertOrUpdateTaskForm = ({
   })
 
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
-  const { addTask, updateTask } = useColumnTasks(column, teamId, identifier)
+  const { addTask, updateTask } = useColumnTasks(column, teamId)
   const taskDrawer = useRecoilValue(taskDrawerAtom)
 
   const formInitialValues: FormValues = {
@@ -137,11 +134,11 @@ const InsertOrUpdateTaskForm = ({
 
     const variables = {
       ...allValues,
-      teamId,
+      team: teamId,
       status: column,
       owner: allValues.ownerID,
       attachments: [],
-      supportTeamMembers: [],
+      supportTeam: [],
       tags: [],
       initialDate: set(new Date(allValues.initialDate), {
         hours: 0,
@@ -155,6 +152,7 @@ const InsertOrUpdateTaskForm = ({
         seconds: 0,
         milliseconds: 0,
       }),
+      orderindex: 0,
     }
 
     addTask(variables)
@@ -183,7 +181,7 @@ const InsertOrUpdateTaskForm = ({
 
     const newTask = getUpdatePatches(taskDrawer, variables as unknown as Task)
 
-    updateTask(taskDrawer.id, { id: taskDrawer.id, ...newTask })
+    updateTask(taskDrawer.team, { id: taskDrawer.id, ...newTask })
 
     if (onSuccess) onSuccess()
   }
