@@ -1,10 +1,9 @@
-import { Box, Flex, HStack, Skeleton, VStack, Text, Badge, Select } from '@chakra-ui/react'
+import { Box, Flex, HStack, Skeleton, VStack, Text, Badge, Select, Avatar } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { EditableInputField } from 'src/components/Base'
-import AvatarGroupSkeleton from 'src/components/Base/DynamicAvatarGroup/skeleton'
 import { useUpdateTaskByKr } from 'src/components/TaskManagement/hooks/use-update-task-new'
 import { NamedAvatar } from 'src/components/User'
 import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
@@ -102,6 +101,7 @@ export const InlineTaskList = ({
   const [isEditing, setIsEditing] = useState(false)
 
   const { mutateAsync: updateTask } = useUpdateTaskByKr()
+
   function handleOpenSelectTaskStatus() {
     if (!toggleTaskStatus) {
       setToggleTaskStatus(true)
@@ -198,7 +198,7 @@ export const InlineTaskList = ({
               color="white"
               textTransform="uppercase"
               cursor="pointer"
-              onClick={() => handleOpenSelectTaskStatus}
+              onClick={() => handleOpenSelectTaskStatus()}
             >
               {headerText && intl.formatMessage(headerText)}
             </Badge>
@@ -237,10 +237,14 @@ export const InlineTaskList = ({
               avatarSize={8}
               displaySubtitle={false}
               horizontalGap={2}
+              showName={false}
               nameColor="gray.500"
             />
           </Box>
-          <AvatarGroupSkeleton numOfAvatars={node.supportTeam.length ?? 0} />
+          {node.supportTeam.length > 0 ? (
+            <Avatar name={'+' + node.supportTeam.length.toString()} size="sm" />
+          ) : // eslint-disable-next-line unicorn/no-null
+          null}
         </Flex>
       </StyledKeyResultCheckMark>
     </Skeleton>

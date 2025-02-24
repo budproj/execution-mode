@@ -130,7 +130,7 @@ export class NewTaskManagementService {
 
     const { data: response } = await this.client.put<NewTask>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `task-management/${data.team}/task/update/${data.id}/`,
+      `task-management/${data.team}/task/update/${data.id}`,
       data,
     )
 
