@@ -93,16 +93,19 @@ export class NewTaskManagementService {
       throw new Error('A team_id is required to get tasks')
     }
 
-    const { data: response } = await this.client.get<NewTask[]>(`task-management/${teamId}/task/`, {
-      params: parameters,
-    })
+    const { data: response } = await this.client.get<NewTask[]>(
+      `task-management/${teamId}/task/list`,
+      {
+        params: parameters,
+      },
+    )
 
     return response
   }
 
   async addTask(data: TaskInsert) {
     const { data: response } = await this.client.post<NewTask>(
-      `task-management/${data.team}/task/`,
+      `task-management/${data.team}/task/create`,
       data,
     )
     return response
@@ -110,14 +113,14 @@ export class NewTaskManagementService {
 
   async getTasksByKr(teamId: string, krId: string) {
     const { data: response } = await this.client.get<NewTask[]>(
-      `task-management/${teamId}/task/?kr=${krId}`,
+      `task-management/${teamId}/task/list?kr=${krId}`,
     )
     return response
   }
 
   async removeTask(teamId: string, taskId: string) {
     // Soft delete
-    await this.client.delete<NewTask>(`task-management/${teamId}/task/${taskId}`)
+    await this.client.delete<NewTask>(`task-management/${teamId}/task/delete/${taskId}`)
   }
 
   async updateTask(data: Partial<NewTask>) {
@@ -127,7 +130,7 @@ export class NewTaskManagementService {
 
     const { data: response } = await this.client.put<NewTask>(
       // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `task-management/${data.team}/task/${data.id}/`,
+      `task-management/${data.team}/task/update/${data.id}/`,
       data,
     )
 

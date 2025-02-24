@@ -4,10 +4,11 @@ import React, { useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { EditableInputField } from 'src/components/Base'
+import AvatarGroupSkeleton from 'src/components/Base/DynamicAvatarGroup/skeleton'
 import { useUpdateTaskByKr } from 'src/components/TaskManagement/hooks/use-update-task-new'
+import { NamedAvatar } from 'src/components/User'
 import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
 
-import { ChangeAssignedCheckMarkButton } from './ActionButtons/change-assigned'
 import { DeleteTaskButton } from './ActionButtons/delete-task'
 import messages from './messages'
 
@@ -230,12 +231,16 @@ export const InlineTaskList = ({
             canDelete={canDelete}
             onDelete={onUpdate}
           />
-          <ChangeAssignedCheckMarkButton
-            keyResultID={keyResultID}
-            checkMarkId={newNode?.key_result}
-            assignedUserId={newNode?.owner}
-            onUpdate={onUpdate}
-          />
+          <Box>
+            <NamedAvatar
+              userID={node.owner}
+              avatarSize={8}
+              displaySubtitle={false}
+              horizontalGap={2}
+              nameColor="gray.500"
+            />
+          </Box>
+          <AvatarGroupSkeleton numOfAvatars={node.supportTeam.length ?? 0} />
         </Flex>
       </StyledKeyResultCheckMark>
     </Skeleton>
