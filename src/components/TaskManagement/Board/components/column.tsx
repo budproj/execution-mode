@@ -6,19 +6,16 @@ import { useResetRecoilState } from 'recoil'
 
 import PlusIcon from 'src/components/Icon/Plus'
 import {
-  Task,
   Task as TaskModel,
   TASK_STATUS as ColumnType,
 } from 'src/services/new-task-management/new-task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
-import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 import useColumnDrop from '../hooks/use-column-drop'
 import useColumnTasks from '../hooks/use-column-tasks'
 import messages from '../messages'
 import { ColumnColorScheme, headerColumnMessage } from '../utils/helpers'
 
-import ArchiveAndDeleteMenu from './archive-and-delete-menu'
 import TaskCardComponent from './task'
 
 const StyledCircleButton = styled(Circle)`
@@ -57,10 +54,9 @@ type ColumnProperties = {
   readonly column: ColumnType
   readonly tasks: TaskModel[]
   readonly teamID: string
-  handleArchive?: (task: Task) => void
 }
 
-const TaskColumnComponent = ({ column, tasks, teamID, handleArchive }: ColumnProperties) => {
+const TaskColumnComponent = ({ column, tasks, teamID }: ColumnProperties) => {
   const intl = useIntl()
   const header = headerColumnMessage.get(column)
 
@@ -73,7 +69,7 @@ const TaskColumnComponent = ({ column, tasks, teamID, handleArchive }: ColumnPro
     updateTask,
     columnTasks,
     setColumnTasks,
-  } = useColumnTasks(column, teamID, BOARD_DOMAIN.TEAM, '')
+  } = useColumnTasks(column, teamID)
   const { dropReference, isOver } = useColumnDrop(column, dropTaskFrom)
   const order = tasks.map((task) => task.id)
   const tasksInOrder = useMemo(() => {
@@ -84,6 +80,7 @@ const TaskColumnComponent = ({ column, tasks, teamID, handleArchive }: ColumnPro
     <TaskCardComponent
       key={task.id}
       task={task}
+      teamId={teamID}
       index={index}
       onDropHover={() => {
         return true
@@ -135,7 +132,6 @@ const TaskColumnComponent = ({ column, tasks, teamID, handleArchive }: ColumnPro
               {intl.formatMessage(messages.addTaskButton)}
             </Text>
           </StyledCircleButton>
-          <ArchiveAndDeleteMenu boardDomain={BOARD_DOMAIN.TEAM} teamId={teamID} ids={order} />
         </Flex>
       </HStack>
       <Stack

@@ -13,12 +13,11 @@ import messages from './messages'
 const InsertOrUpdateTaskForm = dynamic(async () => import('./Form/wrapper'))
 
 export const TaskInsertDrawer = () => {
-  // Const drawerObjectiveID = useRecoilValue(keyResultInsertDrawerObjectiveID)
   const isEditingTaskDrawerId = useRecoilValue(isEditingTaskDrawerIdAtom)
   const resetIsEditingTaskDrawerId = useResetRecoilState(isEditingTaskDrawerIdAtom)
   const { column, teamId } = useRecoilValue(taskInsertDrawerTeamID)
-
   const resetTaskBoardID = useResetRecoilState(taskInsertDrawerTeamID)
+
   const intl = useIntl()
   const toast = useToast()
 
@@ -39,20 +38,6 @@ export const TaskInsertDrawer = () => {
       status: 'success',
     })
   }
-
-  // Const handleError = () => {
-  //   toast({
-  //     title: intl.formatMessage(messages.unexpectedErrorToastMessage),
-  //     status: 'error',
-  //   })
-  // }
-
-  // const handleValidationError = () => {
-  //   toast({
-  //     title: intl.formatMessage(messages.validationErrorToastMessage),
-  //     status: 'error',
-  //   })
-  // }
 
   const isEditing = Boolean(isEditingTaskDrawerId)
 

@@ -5,7 +5,7 @@ import { ServicesContext } from 'src/components/Base/ServicesProvider/services-p
 import { TaskInsert } from 'src/services/new-task-management/new-task-management.service'
 
 const MODULE = 'taskManager'
-const ACTION = 'addTask'
+const ACTION = 'getAllTasks'
 
 export function useAddTeamTask(teamId: string) {
   const { servicesPromise } = useContext(ServicesContext)

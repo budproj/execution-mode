@@ -159,7 +159,7 @@ const InsertOrUpdateTaskForm = ({
     if (onSuccess) onSuccess()
   }
 
-  const handleEditSubmit = async (values: FormValues): Promise<void> => {
+  const handleEditSubmit = (values: FormValues) => {
     const allValues = { ...values }
 
     const areAllFieldsValid = validateFields(allValues)
@@ -181,7 +181,7 @@ const InsertOrUpdateTaskForm = ({
 
     const newTask = getUpdatePatches(taskDrawer, variables as unknown as Task)
 
-    updateTask(taskDrawer.team, { id: taskDrawer.id, ...newTask })
+    updateTask(taskDrawer.id, taskDrawer.team, { id: taskDrawer.id, ...newTask })
 
     if (onSuccess) onSuccess()
   }

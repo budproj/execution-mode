@@ -13,24 +13,19 @@ import {
 
 import useColumnTasks from '../../Board/hooks/use-column-tasks'
 import { TASK_UPDATES_DATA_KEY } from '../../hooks/use-get-task-updates'
-import { BOARD_DOMAIN } from '../../hooks/use-team-tasks-board-data'
 
 interface KeyResultSingleSectionOwnerWrapperProperties {
   readonly ownerId?: string
   readonly column: ColumnType
-  readonly boardID: string
-  readonly domain: BOARD_DOMAIN
-  readonly identifier: string
+  readonly teamId: string
   readonly task: Task
   teamMembers: User[]
 }
 
 export const TaskDrawerSectionOwnerWrapper = ({
   ownerId,
-  boardID,
   column,
-  domain,
-  identifier,
+  teamId,
   task,
   teamMembers,
 }: KeyResultSingleSectionOwnerWrapperProperties): JSX.Element => {
@@ -39,7 +34,7 @@ export const TaskDrawerSectionOwnerWrapper = ({
 
   const [owner, setOwner] = useState(ownerId)
 
-  const { updateTask } = useColumnTasks(column, boardID, domain, identifier)
+  const { updateTask } = useColumnTasks(column, teamId)
 
   const handleOpen = () => {
     if (!isOpen) setIsOpen(true)
@@ -52,12 +47,12 @@ export const TaskDrawerSectionOwnerWrapper = ({
   const onSelect = useCallback(
     (userID: string) => {
       const newTaskWithOwner: Partial<Task> = { owner: userID }
-      updateTask(task.id, { id: task.id, ...newTaskWithOwner })
+      updateTask(task.id, teamId, { id: task.id, ...newTaskWithOwner })
       setOwner(userID)
       queryClient.invalidateQueries({ queryKey: [`${TASK_UPDATES_DATA_KEY}:${task.id}`] })
       handleClose()
     },
-    [handleClose, queryClient, task.id, updateTask],
+    [handleClose, queryClient, task.id, updateTask, teamId],
   )
 
   return (

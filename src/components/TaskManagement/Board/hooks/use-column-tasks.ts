@@ -21,7 +21,7 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
   const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
   const { mutate } = useAddTeamTask(teamId)
 
-  const { mutate: updateTaskMutate } = useUpdateTask(teamId)
+  const { mutate: updateTaskMutate } = useUpdateTask()
   const { mutate: removeTaskMutate } = useDeleteTask()
 
   const [columnTasks, setColumnTasks] = useState<Task[]>([])
@@ -69,17 +69,17 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
   )
 
   const updateTask = useCallback(
-    (_id: TaskModel['id'], updatedTask: Partial<TaskModel>) => {
-      updateTaskMutate(updatedTask)
+    (id: TaskModel['id'], teamId: string, updatedTask: Partial<TaskModel>) => {
+      updateTaskMutate({ teamId, taskId: id, data: updatedTask })
     },
     [updateTaskMutate],
   )
 
   const dropTaskFrom = useCallback(
-    (_id: TaskModel['id']) => {
-      updateTaskMutate({ id, status: column })
+    (id: TaskModel['id']) => {
+      updateTaskMutate({ teamId, taskId: id, data: { status: column } })
     },
-    [column, updateTaskMutate],
+    [column, updateTaskMutate, teamId],
   )
 
   // const swapTasks = useCallback(
@@ -88,9 +88,9 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
   //       return swap(allTasks, index, index_)
   //     })
 
-  //     const order = columnTasks.map((task) => task._id)
+  //     const order = columnTasks.map((task) => task.id)
 
-  //     updateBoardMutate({ boardId: boardID, column, order })
+  //     //updateBoardMutate({ boardId: boardID, column, order })
   //   },
   //   [boardID, column, columnTasks, updateBoardMutate],
   // )

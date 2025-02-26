@@ -6,12 +6,13 @@ import { Task } from 'src/services/new-task-management/new-task-management.servi
 
 interface TaskTitleSectionProperties {
   task: Task
-  updateTask: (id: Task['id'], updatedTask: Partial<Task>) => void
+  teamId: string
+  updateTask: (id: Task['id'], teamId: string, updatedTask: Partial<Task>) => void
 }
 
-export const TaskTitleSection = ({ task, updateTask }: TaskTitleSectionProperties) => {
+export const TaskTitleSection = ({ task, teamId, updateTask }: TaskTitleSectionProperties) => {
   const handleSubmit = (value: string) => {
-    updateTask(task.id, { id: task.id, title: value })
+    updateTask(task.id, teamId, { id: task.id, title: value })
   }
 
   return (

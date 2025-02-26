@@ -16,7 +16,6 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import CalendarOutlineIcon from 'src/components/Icon/CalendarOutline'
 import { Team } from 'src/components/Team/types'
-import { isArchivedBoardAtom } from 'src/state/recoil/task-management/board/is-archived-board'
 import { isEditingTaskDrawerIdAtom } from 'src/state/recoil/task-management/drawers/insert/is-editing-task-drawer'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
@@ -27,7 +26,6 @@ import { usersCompany } from 'src/state/recoil/team/users-company'
 import useColumnTasks from '../Board/hooks/use-column-tasks'
 import { ColumnColorScheme, headerColumnMessage } from '../Board/utils/helpers'
 import { PrirityItemOption } from '../PrioritySelectMenu/wrapper'
-import { BOARD_DOMAIN, useTeamTasksBoardData } from '../hooks/use-team-tasks-board-data'
 
 import { TaskDrawerSectionOwnerWrapper } from './OwnerSection'
 import { TaskDrawerTimeline } from './Timeline'
@@ -40,10 +38,10 @@ interface TaskDrawerProperties {
 
 export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const router = useRouter()
-  const { id: teamID } = router.query
-  const isArchivedBoard = useRecoilValue(isArchivedBoardAtom)
   const intl = useIntl()
-  const { data: boardData } = useTeamTasksBoardData(teamId, isArchivedBoard ? true : undefined)
+
+  const { id: teamID } = router.query
+
   const taskDrawer = useRecoilValue(taskDrawerAtom)
   const taskDrawerId = useRecoilValue(taskDrawerIdAtom)
   const setTaskSupportTeam = useSetRecoilState(taskSupportTeamAtom)
@@ -113,7 +111,11 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                 </Button>
               </Flex>
 
-              <TaskTitleSection updateTask={updateTask} task={taskDrawer} />
+              <TaskTitleSection
+                updateTask={updateTask}
+                teamId={teamID as string}
+                task={taskDrawer}
+              />
 
               <PrirityItemOption mt="10px" priority={taskDrawer?.priority as TaskPriority} />
 
@@ -132,7 +134,6 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                   <Text color="gray.500" fontWeight={700} lineHeight={1}>
                     PRAZO
                   </Text>
-                  {/* <DueDateSection task={taskDrawer} updateTask={updateTask} /> */}
                   <Text>{intl.formatDate(taskDrawer?.dueDate)}</Text>
                 </Box>
               </Flex>
@@ -140,9 +141,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
 
               <TaskDrawerSectionOwnerWrapper
                 ownerId={taskDrawer?.owner}
-                boardID={boardData?._id ?? ''}
-                domain={BOARD_DOMAIN.TEAM}
-                identifier={teamID as unknown as string}
+                teamId={teamId}
                 column={taskDrawer?.status}
                 task={taskDrawer}
                 teamMembers={companyUsers}
@@ -150,25 +149,11 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
 
               <Divider />
 
-              {/* <Box marginY="24px">
-                <Text color="gray.500" fontWeight={700} marginBottom="10px">
-                  ANEXOS
-                </Text>
-                <Flex flexDir="column" gap="8px">
-                  {taskDrawer?.attachments.map((att) => (
-                    <Flex key={att} gap="5px">
-                      <PDFIcon width="20px" height="20px" desc="" />
-                      <Text color="gray.500" textDecoration="underline" fontWeight={450}>
-                        {att}
-                      </Text>
-                    </Flex>
-                  ))}
-                </Flex>
-              </Box>
-
-              <Divider /> */}
-
-              <TaskDescriptionSection task={taskDrawer} updateTask={updateTask} />
+              <TaskDescriptionSection
+                task={taskDrawer}
+                teamId={teamID as string}
+                updateTask={updateTask}
+              />
             </Flex>
           </Flex>
           <TaskDrawerTimeline task={taskDrawer} />

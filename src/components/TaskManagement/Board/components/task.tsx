@@ -19,7 +19,8 @@ import useTaskDragAndDrop from '../hooks/use-task-drag-and-drop'
 type TaskProperties = {
   readonly index: number
   readonly task: TaskModel
-  readonly onUpdate: (id: TaskModel['id'], updatedTask: TaskModel) => void
+  readonly teamId: string
+  readonly onUpdate: (id: TaskModel['id'], teamId: string, updatedTask: TaskModel) => void
   readonly onDelete: (id: TaskModel['id']) => void
   readonly onDropHover: (index: number, index_: number) => void
   readonly onArchive?: (task: Task) => void
@@ -29,6 +30,7 @@ type TaskProperties = {
 const TaskCardComponent = ({
   index,
   task,
+  teamId,
   onUpdate: handleUpdate,
   onDropHover: handleDropHover,
   onDelete: handleDelete,
@@ -43,7 +45,7 @@ const TaskCardComponent = ({
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
-    handleUpdate(task.id, { ...task, title: newTitle })
+    handleUpdate(task.id, teamId, { ...task, title: newTitle })
   }
 
   const handleArchive = () => {

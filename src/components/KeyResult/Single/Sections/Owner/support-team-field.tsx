@@ -11,6 +11,7 @@ import GET_NO_RELATED_MEMBERS from 'src/components/Page/Team/Highlights/hooks/ge
 import { User } from 'src/components/User/types'
 import { Except } from 'src/helpers/except'
 import { Task } from 'src/services/new-task-management/new-task-management.service'
+import { team } from 'src/state/recoil'
 import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import { ownersAndSupportTeamTaskAtom } from 'src/state/recoil/task-management/board/owners-and-support-team-task'
 import { taskSupportTeamAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-support-team'
@@ -28,7 +29,11 @@ type SupportTeamFieldProperties = {
   readonly keyResultId?: string
   readonly ownerName?: string
   readonly isFromTask?: boolean
-  readonly updateTask?: (_id: string, updatedTask: Except<Partial<Task>, '_id'>) => void
+  readonly updateTask?: (
+    id: string,
+    teamId: string,
+    updatedTask: Except<Partial<Task>, 'id'>,
+  ) => void
   readonly task?: Task
   teamMembers?: User[]
 }
@@ -125,11 +130,11 @@ export const SupportTeamField = ({
       const supportTeamIds = taskSupportTeamMembers.map((member) => member.id)
       const newSupportTeam = [...supportTeamIds, userID]
       const newTaskWithSupportTeam: Partial<Task> = {
-        supportTeamMembers: newSupportTeam,
+        supportTeam: newSupportTeam,
       }
 
       if (updateTask && task) {
-        updateTask(task._id, { _id: task._id, ...newTaskWithSupportTeam })
+        updateTask(task.id, teamId, { id: task.id, ...newTaskWithSupportTeam })
       }
 
       const member = teamMembers?.find((member) => member.id === userID)
@@ -148,6 +153,7 @@ export const SupportTeamField = ({
       taskSupportTeamMembers,
       teamMembers,
       updateTask,
+      teamId,
     ],
   )
 
@@ -157,10 +163,10 @@ export const SupportTeamField = ({
 
       const newSupportTeam = supportTeamIds.filter((member) => member !== userID)
       const newTaskWithSupportTeam: Partial<Task> = {
-        supportTeamMembers: newSupportTeam,
+        supportTeam: newSupportTeam,
       }
       if (updateTask && task) {
-        updateTask(task._id, { _id: task._id, ...newTaskWithSupportTeam })
+        updateTask(task.id, teamId, { id: task.id, ...newTaskWithSupportTeam })
       }
 
       if (teamMembers) {
@@ -169,7 +175,7 @@ export const SupportTeamField = ({
 
       handleClose()
     },
-    [setTaskSupportTeam, task, taskSupportTeamMembers, teamMembers, updateTask],
+    [setTaskSupportTeam, task, taskSupportTeamMembers, teamMembers, updateTask, teamId],
   )
 
   return (

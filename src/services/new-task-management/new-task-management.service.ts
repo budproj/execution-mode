@@ -127,32 +127,19 @@ export class NewTaskManagementService {
 
   async removeTask(team_id: string, task_id: string) {
     // Tasks are soft deleted
-    await this.client.put<NewTask>(`task-management/${team_id}/task/delete/${task_id}`)
+    await this.client.delete<NewTask>(`task-management/${team_id}/task/delete/${task_id}`)
   }
 
-  async updateTask(teamId: string, data: Partial<Task>) {
+  async updateTask(teamId: string, taskId: string, data: Partial<Task>) {
     if (!data.id) {
       throw new Error('A id is required to update task')
     }
 
-    const { data: response } = await this.client.patch<Task>(
-      `task-management/${teamId}/task/update/${data.id}`,
+    const { data: response } = await this.client.put<Task>(
+      `task-management/${teamId}/task/update/${taskId}`,
       data,
     )
 
     return response
   }
-/* TODO: Implement addTask, updateTask, getTask, getTaskUpdates, removeTask methods 
-  
-
-  async getTask(id: Task['_id']) {
-    const { data: response } = await this.client.get<Task>(`task-management/f53c6168-9c21-42e3-b912-c4fe8acac849/task/`, {
-      params: {
-        id,
-      },
-    })
-
-    return response
-  }
-*/
 }
