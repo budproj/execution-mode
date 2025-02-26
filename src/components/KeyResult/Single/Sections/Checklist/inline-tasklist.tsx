@@ -1,4 +1,18 @@
-import { Box, Flex, HStack, Skeleton, VStack, Text, Badge, Select, Avatar } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  HStack,
+  Skeleton,
+  VStack,
+  Text,
+  Select,
+  Avatar,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  useDisclosure,
+} from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -6,6 +20,7 @@ import { useIntl } from 'react-intl'
 import { EditableInputField } from 'src/components/Base'
 import { useUpdateTaskByKr } from 'src/components/TaskManagement/hooks/use-update-task-new'
 import { NamedAvatar } from 'src/components/User'
+import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
 import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
 
 import { DeleteTaskButton } from './ActionButtons/delete-task'
@@ -87,6 +102,7 @@ export const InlineTaskList = ({
   isEditable = true,
   draftCheckMarks,
 }: InlineTaskListProperties) => {
+  const { onOpen, onClose, isOpen } = useDisclosure()
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const isWaiting = false
@@ -95,22 +111,13 @@ export const InlineTaskList = ({
   const intl = useIntl()
   const header = headerColumnMessage.get(node?.status ?? TASK_STATUS.PENDING)
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
-  const [toggleTaskStatus, setToggleTaskStatus] = useState(false)
   const [headerText, setHeaderText] = useState(header)
   const [newNode, setNode] = useState(node)
   const [isEditing, setIsEditing] = useState(false)
 
   const { mutateAsync: updateTask } = useUpdateTaskByKr()
 
-  function handleOpenSelectTaskStatus() {
-    if (!toggleTaskStatus) {
-      setToggleTaskStatus(true)
-    }
-  }
-
   async function handleSetNewTaskStatus(status: string) {
-    setToggleTaskStatus(false)
-
     const updatedNode = {
       ...newNode,
       status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS],
@@ -118,7 +125,6 @@ export const InlineTaskList = ({
 
     setNode(updatedNode)
     setHeaderText(headerColumnMessage.get(updatedNode.status))
-
     await updateTask({ newNode: updatedNode })
     if (onUpdate) onUpdate()
   }
@@ -158,51 +164,59 @@ export const InlineTaskList = ({
     if (isEditable) setIsEditing(false)
   }
 
+  async function handleSetNewOwner(ownerId: string) {
+    const updatedNode = {
+      ...newNode,
+      owner: ownerId,
+    }
+
+    setNode(updatedNode)
+    await updateTask({ newNode: updatedNode })
+    if (onUpdate) onUpdate()
+    onClose()
+  }
+
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
       <StyledKeyResultCheckMark alignItems="center">
         <Box py={1} display={isEditing ? 'none' : undefined}>
-          {toggleTaskStatus ? (
-            <Select
-              value={newNode?.status}
-              width="36"
-              onChange={(event) => {
-                handleSetNewTaskStatus(event.target.value)
-              }}
-            >
-              {Object.keys(TASK_STATUS).map((name) => {
-                const taskStatusName = headerColumnMessage.get(
-                  TASK_STATUS[name as keyof typeof TASK_STATUS],
-                )
-                if (!taskStatusName) {
-                  return (
-                    <option key={name} value={name.toLocaleLowerCase()}>
-                      {headerText && intl.formatMessage(headerText)}
-                    </option>
-                  )
-                }
-
+          <Select
+            value={newNode?.status.toLocaleLowerCase()}
+            width={newNode?.status == TASK_STATUS.DOING ? '150px' : '130px'}
+            height="30px"
+            py="1px"
+            px="3px"
+            borderRadius="full"
+            border="none"
+            color="white"
+            cursor="pointer"
+            textTransform="uppercase"
+            fontWeight="bold"
+            fontSize="12px"
+            background={ColumnColorScheme[newNode.status ?? TASK_STATUS.PENDING]}
+            onChange={(event) => {
+              handleSetNewTaskStatus(event.target.value)
+            }}
+          >
+            {Object.keys(TASK_STATUS).map((name) => {
+              const taskStatusName = headerColumnMessage.get(
+                TASK_STATUS[name as keyof typeof TASK_STATUS],
+              )
+              if (!taskStatusName) {
                 return (
-                  <option key={name} value={name.toLocaleLowerCase()}>
-                    {intl.formatMessage(taskStatusName)}
+                  <option style={{ color: 'black' }} key={name} value={name.toLocaleLowerCase()}>
+                    {headerText && intl.formatMessage(headerText)}
                   </option>
                 )
-              })}
-            </Select>
-          ) : (
-            <Badge
-              py={1}
-              px={3}
-              borderRadius={100}
-              backgroundColor={ColumnColorScheme[newNode.status ?? TASK_STATUS.PENDING]}
-              color="white"
-              textTransform="uppercase"
-              cursor="pointer"
-              onClick={() => handleOpenSelectTaskStatus()}
-            >
-              {headerText && intl.formatMessage(headerText)}
-            </Badge>
-          )}
+              }
+
+              return (
+                <option style={{ color: 'black' }} key={name} value={name.toLocaleLowerCase()}>
+                  {intl.formatMessage(taskStatusName)}
+                </option>
+              )
+            })}
+          </Select>
         </Box>
         <VStack marginLeft={0} spacing={2} align="stretch" w="full">
           <EditableInputField
@@ -231,15 +245,36 @@ export const InlineTaskList = ({
             canDelete={canDelete}
             onDelete={onUpdate}
           />
-          <Box>
-            <NamedAvatar
-              userID={node.owner}
-              avatarSize={8}
-              displaySubtitle={false}
-              horizontalGap={2}
-              showName={false}
-              nameColor="gray.500"
-            />
+          <Box cursor="pointer">
+            <Popover
+              isLazy
+              placement="bottom-end"
+              size="md"
+              isOpen={canUpdate && isOpen}
+              onOpen={onOpen}
+              onClose={onClose}
+            >
+              <PopoverTrigger>
+                <Box>
+                  <NamedAvatar
+                    userID={newNode.owner}
+                    avatarSize={8}
+                    displaySubtitle={false}
+                    horizontalGap={2}
+                    nameColor="gray.500"
+                    showName={false}
+                    canEdit={canUpdate}
+                    canHover={canUpdate}
+                    isEditting={isOpen}
+                  />
+                </Box>
+              </PopoverTrigger>
+              <PopoverContent width="md" h="full" overflow="hidden">
+                <PopoverBody>
+                  <AllReachableUsers avatarSubtitleType="role" onSelect={handleSetNewOwner} />
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
           </Box>
           {node.supportTeam.length > 0 ? (
             <Avatar name={'+' + node.supportTeam.length.toString()} size="sm" />
