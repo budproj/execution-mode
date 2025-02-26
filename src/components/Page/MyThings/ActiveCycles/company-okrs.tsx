@@ -20,7 +20,7 @@ import PageContent from 'src/components/Base/PageContent'
 import { ChevronDown } from 'src/components/Icon'
 import KeyResultsActiveAndOwnedByUser from 'src/components/KeyResult/ActiveAndOwnedByUser'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { TASK_STATUS } from 'src/components/Task/constants'
+import { OLD_TASK_STATUS } from 'src/components/Task/constants'
 import { companyPreposition } from 'src/components/User/DetailedHeader/constants'
 import { myThingsTasksQuery } from 'src/state/recoil/task'
 import selectUser from 'src/state/recoil/user/selector'
@@ -41,17 +41,17 @@ const CompanyOkrPage = ({ handleLineClick, intl, userID }: CompanyOkrPagePropert
   const user = useRecoilValue(selectUser(userID))
 
   const statesLabels = new Map([
-    [TASK_STATUS.CHECKED, intl.formatMessage(messages.allTasks)],
-    [TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
+    [OLD_TASK_STATUS.CHECKED, intl.formatMessage(messages.allTasks)],
+    [OLD_TASK_STATUS.UNCHECKED, intl.formatMessage(messages.pendingTasks)],
   ])
 
-  const [taskState, setTaskState] = useState(TASK_STATUS.CHECKED)
+  const [taskState, setTaskState] = useState(OLD_TASK_STATUS.CHECKED)
 
-  const handleTaskFilterChange = (taskState: TASK_STATUS) => {
+  const handleTaskFilterChange = (taskState: OLD_TASK_STATUS) => {
     setTaskState(taskState)
     setTasksQuery((previousQuery) => ({
       ...previousQuery,
-      onlyUnchecked: taskState === TASK_STATUS.UNCHECKED,
+      onlyUnchecked: taskState === OLD_TASK_STATUS.UNCHECKED,
     }))
   }
 

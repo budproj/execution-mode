@@ -33,6 +33,7 @@ const {
   LLM_API,
   TASK_MANAGEMENT_API,
   REST_API_BASE,
+  BUD_API,
   FLAGSMITH_CLIENT_KEY,
   NEXT_PUBLIC_MICROSOFT_CLARITY
 } = process.env
@@ -89,6 +90,7 @@ const publicRuntimeConfig = {
     comments: COMMENTS_API,
     llm: LLM_API,
     taskManagement: TASK_MANAGEMENT_API,
+    newApi: BUD_API,
   },
 
   sentry: {

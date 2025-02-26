@@ -19,8 +19,8 @@ export default defineMessages<OptionBarMessages>({
   },
 
   newChecklistButtonLabel: {
-    defaultMessage: 'Adicionar uma Check-list',
-    id: 's4h8ne',
+    defaultMessage: 'Adicionar novas tarefas',
+    id: '1/KiNE',
     description: 'This text is used as a button when the key-result has no check-marks',
   },
 })
