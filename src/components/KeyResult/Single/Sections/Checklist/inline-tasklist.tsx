@@ -164,7 +164,7 @@ export const InlineTaskList = ({
     if (isEditable) setIsEditing(false)
   }
 
-  async function handleSetNewOwner(ownerId: string) {
+  const handleSetNewOwner = async (ownerId: string) => {
     const updatedNode = {
       ...newNode,
       owner: ownerId,
@@ -182,7 +182,7 @@ export const InlineTaskList = ({
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Select
             value={newNode?.status.toLocaleLowerCase()}
-            width={newNode?.status == TASK_STATUS.DOING ? '150px' : '130px'}
+            width={newNode?.status === TASK_STATUS.DOING ? '150px' : '130px'}
             height="30px"
             py="1px"
             px="3px"
@@ -204,14 +204,14 @@ export const InlineTaskList = ({
               )
               if (!taskStatusName) {
                 return (
-                  <option style={{ color: 'black' }} key={name} value={name.toLocaleLowerCase()}>
+                  <option key={name} value={name.toLocaleLowerCase()} style={{ color: 'black' }}>
                     {headerText && intl.formatMessage(headerText)}
                   </option>
                 )
               }
 
               return (
-                <option style={{ color: 'black' }} key={name} value={name.toLocaleLowerCase()}>
+                <option key={name} value={name.toLocaleLowerCase()} style={{ color: 'black' }}>
                   {intl.formatMessage(taskStatusName)}
                 </option>
               )
