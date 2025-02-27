@@ -15,7 +15,6 @@ import meAtom from 'src/state/recoil/user/me'
 import { useAddTeamTask } from '../../hooks/new-task/use-add-task'
 import { useDeleteTask } from '../../hooks/new-task/use-delete-task'
 import { useUpdateTask } from '../../hooks/new-task/use-update-task'
-import { swap } from '../utils/helpers'
 
 const useColumnTasks = (column: ColumnType, teamId: string) => {
   const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
@@ -77,11 +76,12 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
 
   const dropTaskFrom = useCallback(
     (id: TaskModel['id']) => {
-      updateTaskMutate({ teamId, taskId: id, data: { status: column } })
+      updateTaskMutate({ teamId, taskId: id, data: { id, status: column } })
     },
     [column, updateTaskMutate, teamId],
   )
 
+  // Função que troca a ordem das tasks
   // const swapTasks = useCallback(
   //   (index: number, index_: number) => {
   //     setColumnTasks((allTasks) => {

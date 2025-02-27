@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useContext } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import { Task } from 'src/services/task-management/task-management.service'
+import { Task } from 'src/services/new-task-management/new-task-management.service'
 
 const MODULE = 'taskManager'
 const ACTION = 'getAllTasks'

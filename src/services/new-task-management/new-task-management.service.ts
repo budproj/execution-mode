@@ -6,6 +6,8 @@ import { NewTask } from 'src/components/Task/types'
 import { User } from 'src/components/User/types'
 import { Except } from 'src/helpers/except'
 
+import { KeyResult } from '../okr/key-result/@types'
+
 export enum TASK_STATUS {
   pending = 'pending',
   toDo = 'toDo',
@@ -32,7 +34,7 @@ export type Task = {
   deletedAt?: Date
   active?: boolean
   orderindex: number
-  key_result?: string
+  keyResult?: KeyResult
   cycle: string | null
   usersRelated: User[]
 }

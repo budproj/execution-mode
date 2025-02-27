@@ -19,7 +19,10 @@ const loadOwnersAndSupportTeam = (tasks: UseLoadOwnersAndSupportTeamProperties) 
         })
         return [...members, ...filterUsers]
       }, [])
-      return [...accumulator, ...members]
+      const filteredMembers = members.filter((member) => {
+        return !accumulator.some((user) => user.id === member.id)
+      })
+      return [...accumulator, ...filteredMembers]
     },
     [],
   )

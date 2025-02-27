@@ -21,6 +21,7 @@ import { OwnerInput } from './owner'
 import { PriorityInput } from './priority'
 import { StartDateInput } from './start-date'
 import { TitleInput } from './title'
+import { KeyResultInput } from './key-result'
 
 export type FormValues = {
   teamId?: string
@@ -75,7 +76,7 @@ const InsertOrUpdateTaskForm = ({
 
   const NewTaskSchema = Yup.object().shape({
     title: Yup.string().required(intl.formatMessage(messages.titleRequiredText)),
-    key_result: Yup.string(),
+    keyResult: Yup.string(),
     priority: Yup.string().required(),
     description: Yup.string(),
     initialDate: Yup.date(),
@@ -208,6 +209,7 @@ const InsertOrUpdateTaskForm = ({
                 hasValidationErrors={validationErrors.includes('title')}
                 isLoading={isLoading}
               />
+              <KeyResultInput isLoading={isLoading} />
               <PriorityInput isLoading={isLoading} />
               <DescriptionInput
                 isLoading={isLoading}

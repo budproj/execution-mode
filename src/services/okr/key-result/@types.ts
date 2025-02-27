@@ -1,3 +1,4 @@
+import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { Except } from 'src/helpers/except'
 
 enum KeyResultFormat {
@@ -28,15 +29,16 @@ export type KeyResult = {
   initialValue: number
   description: string
   format: KeyResultFormat
-  objective_id: string
-  team_id: string
-  owner_id: string
+  objectiveId: string
+  teamId: string
+  ownerId: string
   type: KeyResultType
   mode: KeyResultMode
-  comment_count: JSON
-  last_updated_by: string
+  commentCount: JSON
+  lastUpdatedBy: string
   createdAt: Date
   updatedAt: Date
+  lastCheckin?: KeyResultCheckIn
 }
 
 export type TaskInsert = Except<KeyResult, 'id' | 'createdAt' | 'updatedAt'>
