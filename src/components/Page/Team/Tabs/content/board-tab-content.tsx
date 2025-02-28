@@ -1,22 +1,18 @@
-import { Box, Button, HStack, Stack, Text } from '@chakra-ui/react'
+import { Box, HStack, MenuItemOption, Stack, Text } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { SelectMenu } from 'src/components/Base'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
-import HistoryIcon from 'src/components/Icon/History'
-import RedoIcon from 'src/components/Icon/Redo'
-import ArchivedTasksWrapper from 'src/components/TaskManagement/Board/archived-tasks'
+import { useTeamCycleData } from 'src/components/Cycle/hooks/use-get-team-cycle'
+import { useTeamKRData } from 'src/components/KeyResult/hooks/use-get-team-key-result'
 import BoardWrapper from 'src/components/TaskManagement/Board/wrapper'
 import { TaskInsertDrawer } from 'src/components/TaskManagement/InsertDrawer/wrapper'
 import { TaskDrawer } from 'src/components/TaskManagement/TaskDrawer'
-import { BOARD_DOMAIN } from 'src/components/TaskManagement/hooks/use-team-tasks-board-data'
-import { useUpdateTaskMutate } from 'src/components/TaskManagement/hooks/use-update-task-mutate'
 import { Team } from 'src/components/Team/types'
-import { Task } from 'src/services/task-management/task-management.service'
-import { EventType } from 'src/state/hooks/useEvent/event-type'
-import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { isArchivedBoardAtom } from 'src/state/recoil/task-management/board/is-archived-board'
+import { CycleCadence } from 'src/services/okr/cycle/@types'
 import { teamAtomFamily } from 'src/state/recoil/team'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
@@ -27,21 +23,13 @@ interface BoardTabContentProperties {
 }
 
 const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
+  const router = useRouter()
+
   const setSelectedTeamId = useSetRecoilState(selectedTeamIdHighlight)
-  const [isArchivedBoard, setIsArchivedBoard] = useRecoilState(isArchivedBoardAtom)
-  const { mutate: updateTaskMutate } = useUpdateTaskMutate(BOARD_DOMAIN.TEAM, teamId)
-  const { dispatch: dispatchArchiveTask } = useEvent(EventType.ARCHIVE_TASK)
-  const { dispatch: dispatchUnarchiveTask } = useEvent(EventType.UNARCHIVE_TASK)
-  const { dispatch: dispatchArchivedTasksButtonClick } = useEvent(
-    EventType.ARCHIVED_TASKS_BUTTON_CLICK,
-  )
-  const { dispatch: dispatchUnarchivedTasksButtonClick } = useEvent(
-    EventType.UNARCHIVED_TASKS_BUTTON_CLICK,
-  )
 
   const team = useRecoilValue(teamAtomFamily(teamId))
   const [searchTaskInput, setSearchTaskInput] = useState<string>()
-  const [isSpinnerLoading, setIsSpinnerLoading] = useState(false)
+  const { data: KeyResultData, isFetching: krFetching } = useTeamKRData(teamId, '0')
 
   const intl = useIntl()
 
@@ -49,22 +37,33 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
     setSelectedTeamId(teamId)
   }, [setSelectedTeamId, teamId])
 
-  const handleArchive = (task: Task) => {
-    if (isArchivedBoard) {
-      dispatchUnarchiveTask({})
-    } else {
-      dispatchArchiveTask({})
+  const handleQuery = (key: string) => (newValue: string | string[]) => {
+    if (newValue !== 'none') {
+      router.query[key] = newValue
+      router.push(router)
+      return true
     }
 
-    const updatedTask: Partial<Task> = { _id: task._id, active: Boolean(isArchivedBoard) }
-    updateTaskMutate(updatedTask)
+    router.query[key] = undefined
+    router.push(router)
+    return true
   }
 
-  const spinnerFunction = () => {
-    setIsSpinnerLoading(true)
-    setTimeout(() => {
-      setIsSpinnerLoading(false)
-    }, 500)
+  const krSelected = (): string | undefined => {
+    const key = router.query.kr ? router.query.kr : undefined
+    if (key) {
+      const selectedKr = KeyResultData?.find((kr) => kr.id === key)
+      return selectedKr ? selectedKr.title : undefined
+    }
+
+    return key
+  }
+
+  const cycleSelected = (): string | undefined => {
+    const key = router.query.cycle ? router.query.cycle : undefined
+    if (key) {
+      return Array.isArray(key) ? undefined : CycleCadence[key as keyof typeof CycleCadence]
+    }
   }
 
   return (
@@ -74,55 +73,53 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
           {intl.formatMessage(messages.boardTabHeaderTitle, { team: team?.name })}
         </Text>
         <HStack alignItems="center">
+          <SelectMenu
+            closeOnSelect
+            valueLabel={cycleSelected()}
+            width={320}
+            borderWidth={1}
+            borderColor="new-gray.400"
+            fill="new-gray.600"
+            height="32px"
+            isDisabled={false}
+            placeholder="Filtrar por ciclo"
+            onChange={handleQuery('cycle')}
+          >
+            <MenuItemOption value="none">Selecionar</MenuItemOption>
+            {Object.entries(CycleCadence).map(([key, value]) => (
+              <MenuItemOption key={key} value={key}>
+                {value}
+              </MenuItemOption>
+            ))}
+          </SelectMenu>
+          <SelectMenu
+            closeOnSelect
+            valueLabel={krSelected()}
+            width={320}
+            borderWidth={1}
+            borderColor="new-gray.400"
+            fill="new-gray.600"
+            height="32px"
+            isDisabled={krFetching}
+            placeholder="Filtrar por KR"
+            onChange={handleQuery('kr')}
+          >
+            <MenuItemOption value="none">Selecionar</MenuItemOption>
+            {KeyResultData?.map((keyResult) => (
+              <MenuItemOption key={keyResult.id} value={keyResult.id}>
+                {keyResult.title}
+              </MenuItemOption>
+            ))}
+          </SelectMenu>
           <Box maxW={320} minW={320} w="100%">
             <SearchBar
               placeholder={intl.formatMessage(messages.searchTaskInput)}
               onSearch={setSearchTaskInput}
             />
           </Box>
-          <Button
-            bg={isArchivedBoard ? 'brand.500' : 'new-gray.300'}
-            _hover={{ background: 'new-gray.400', color: 'new-gray.800' }}
-            color={isArchivedBoard ? 'white' : 'new-gray.800'}
-            leftIcon={
-              isArchivedBoard ? (
-                <RedoIcon w="1.3em" h="1.3em" desc="teste" fill="currentColor" />
-              ) : (
-                <HistoryIcon w="1.3em" h="1.3em" desc="teste" fill="currentColor" />
-              )
-            }
-            paddingY={2}
-            width="100%"
-            onClick={() => {
-              setIsArchivedBoard(!isArchivedBoard)
-              spinnerFunction()
-              if (isArchivedBoard) {
-                dispatchUnarchivedTasksButtonClick({})
-              } else {
-                dispatchArchivedTasksButtonClick({})
-              }
-            }}
-          >
-            {isArchivedBoard ? 'Voltar para tarefas ativas' : 'Tarefas arquivadas'}
-          </Button>
         </HStack>
       </HStack>
-      {isArchivedBoard ? (
-        <ArchivedTasksWrapper
-          teamId={teamId}
-          searchTaskInput={searchTaskInput}
-          handleArchive={handleArchive}
-          isSpinnerLoading={isSpinnerLoading}
-        />
-      ) : (
-        <BoardWrapper
-          teamId={teamId}
-          searchTaskInput={searchTaskInput}
-          handleArchive={handleArchive}
-          isSpinnerLoading={isSpinnerLoading}
-        />
-      )}
-
+      <BoardWrapper teamId={teamId} searchTaskInput={searchTaskInput} />
       <TaskInsertDrawer />
       <TaskDrawer teamId={teamId} />
     </Stack>

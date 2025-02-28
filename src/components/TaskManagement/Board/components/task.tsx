@@ -5,7 +5,7 @@ import { useSetRecoilState } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { KanbanTaskCard } from 'src/components/Base/KanbanTaskCard/wrapper'
-import { Task, Task as TaskModel } from 'src/services/task-management/task-management.service'
+import { Task as TaskModel } from 'src/services/new-task-management/new-task-management.service'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
@@ -16,20 +16,20 @@ import useTaskDragAndDrop from '../hooks/use-task-drag-and-drop'
 type TaskProperties = {
   readonly index: number
   readonly task: TaskModel
-  readonly onUpdate: (id: TaskModel['_id'], updatedTask: TaskModel) => void
-  readonly onDelete: (id: TaskModel['_id']) => void
+  readonly teamId: string
+  readonly onUpdate: (id: TaskModel['id'], teamId: string, updatedTask: TaskModel) => void
+  readonly onDelete: (id: TaskModel['id']) => void
   readonly onDropHover: (index: number, index_: number) => void
-  readonly onArchive?: (task: Task) => void
   readonly isActive?: boolean
 }
 
 const TaskCardComponent = ({
   index,
   task,
+  teamId,
   onUpdate: handleUpdate,
   onDropHover: handleDropHover,
   onDelete: handleDelete,
-  onArchive,
   isActive = true,
 }: TaskProperties) => {
   const { dispatch } = useEvent(EventType.TASK_MANAGER_DELETE_TASK_CLICK)
@@ -40,17 +40,11 @@ const TaskCardComponent = ({
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
-    handleUpdate(task._id, { ...task, title: newTitle })
-  }
-
-  const handleArchive = () => {
-    if (onArchive) {
-      onArchive(task)
-    }
+    handleUpdate(task.id, teamId, { ...task, title: newTitle })
   }
 
   const handleTaskDelete = () => {
-    handleDelete(task._id)
+    handleDelete(task.id)
     dispatch({ taskStatus: task.status })
   }
 
@@ -67,7 +61,7 @@ const TaskCardComponent = ({
         userSelect="none"
         onClick={() => {
           setTaskDrawer(task)
-          setTaskDrawerId(task._id)
+          setTaskDrawerId(task.id)
         }}
       >
         <KanbanTaskCard.Root
@@ -79,11 +73,7 @@ const TaskCardComponent = ({
           <VStack w="100%" justifyContent="space-between">
             <HStack w="100%">
               <KanbanTaskCard.Content title={task.title} w="100%" onChange={handleTitleChange} />
-              <KanbanTaskCard.Actions
-                status={task.status}
-                onDelete={handleTaskDelete}
-                onArchive={handleArchive}
-              />
+              <KanbanTaskCard.Actions onDelete={handleTaskDelete} />
             </HStack>
             <KanbanTaskCard.Metadata
               dueDate={task.dueDate}

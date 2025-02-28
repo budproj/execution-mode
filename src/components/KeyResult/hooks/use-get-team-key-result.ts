@@ -1,15 +1,19 @@
 import { useQuery } from '@tanstack/react-query'
 import { useContext } from 'react'
+
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 
-export function useGetNewTask(teamID: string, keyResultID: string) {
+const MODULE = 'KeyResult'
+const ACTION = 'getAllTeamKR'
+
+export function useTeamKRData(teamId: string, objectiveId: string) {
   const { servicesPromise } = useContext(ServicesContext)
 
   const query = useQuery({
-    queryKey: [`get_tasks_by_kr`],
+    queryKey: [`${MODULE}:${ACTION}:${teamId}`],
     queryFn: async () => {
-      const { newTaskManagement } = await servicesPromise
-      const data = await newTaskManagement.getTasksByKr(teamID, keyResultID)
+      const { keyResult } = await servicesPromise
+      const data = await keyResult.getKeyResultTeam(teamId, objectiveId)
       return data
     },
   })

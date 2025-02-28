@@ -1,4 +1,5 @@
 import { User } from 'src/components/User/types'
+import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
 
 import { GraphQLConnection, GraphQLNode, GraphQLEntityPolicy } from '../types'
 

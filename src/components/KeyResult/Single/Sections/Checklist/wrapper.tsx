@@ -85,8 +85,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
             onUpdate={refetch}
           />
         </Collapse>
-      ) : // eslint-disable-next-line unicorn/no-null
-      null}
+      ) : null}
     </Stack>
   )
 }

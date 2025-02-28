@@ -1,10 +1,10 @@
 import {
   Task,
   TASK_STATUS as ColumnType,
-} from 'src/services/task-management/task-management.service'
+} from 'src/services/new-task-management/new-task-management.service'
 
 export interface DragItem {
   index: number
-  _id: Task['_id']
+  id: Task['id']
   from: ColumnType
 }

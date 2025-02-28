@@ -30,7 +30,7 @@ export const FormActions = ({ onClose, isLoading }: FormActionsInterface) => {
     resetEditing()
     resetTaskInsertDrawerTeamId()
     if (taskDrawer) {
-      setTaskDrawerId(taskDrawer._id)
+      setTaskDrawerId(taskDrawer.id)
     }
 
     if (onClose) onClose()
