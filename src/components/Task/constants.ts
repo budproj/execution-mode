@@ -5,3 +5,8 @@ export enum TASK_STATUS {
   DONE = 'done',
 }
 
+export enum OLD_TASK_STATUS {
+  CHECKED = 'checked',
+  UNCHECKED = 'unchecked',
+}
+
