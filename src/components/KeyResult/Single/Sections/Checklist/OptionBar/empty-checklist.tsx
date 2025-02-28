@@ -9,7 +9,6 @@ import { Feature } from '../../../../../../state/hooks/useEvent/feature'
 import { CreateTaskButton } from '../ActionButtons/create-task-in-kr'
 
 import messages from './messages'
-import { CreateTaskButton } from '../ActionButtons/create-task-in-kr'
 
 interface EmptyChecklistProperties {
   onCreate: () => void

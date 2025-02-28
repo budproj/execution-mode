@@ -7,12 +7,11 @@ import { TASK_STATUS } from 'src/components/Task/constants'
 import { useGetNewTask } from 'src/components/TaskManagement/hooks/use-get-tasks-new'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
+
 import { OptionBarWrapper } from './OptionBar/wrapper'
 import { KeyResultChecklist } from './checklist'
 import messages from './messages'
 import { ToggleCollapse } from './toggle-collapse'
-import { useGetNewTask } from 'src/components/TaskManagement/hooks/use-get-tasks-new'
-import { useRouter } from 'next/router'
 
 interface KeyResultChecklistWrapperProperties {
   keyResultID?: string
