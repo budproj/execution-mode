@@ -7,18 +7,18 @@ import { TaskInsert } from 'src/services/new-task-management/new-task-management
 const MODULE = 'taskManager'
 const ACTION = 'getAllTasks'
 
-export function useAddTeamTask(teamId: string) {
+export function useAddTask() {
   const { servicesPromise } = useContext(ServicesContext)
   const queryClient = useQueryClient()
 
   const addTaskToTeamMutate = useMutation({
-    mutationFn: async (data: TaskInsert) => {
+    mutationFn: async ({ teamId, data }: { teamId: string; data: TaskInsert }) => {
       const { newTaskManagement } = await servicesPromise
       const response = await newTaskManagement.addTask(teamId, data)
       return response
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${teamId}`] })
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.teamId}`] })
     },
   })
 

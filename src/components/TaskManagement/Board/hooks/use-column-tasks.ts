@@ -12,13 +12,13 @@ import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'
 import meAtom from 'src/state/recoil/user/me'
 
-import { useAddTeamTask } from '../../hooks/new-task/use-add-task'
+import { useAddTask } from '../../hooks/new-task/use-add-task'
 import { useDeleteTask } from '../../hooks/new-task/use-delete-task'
 import { useUpdateTask } from '../../hooks/new-task/use-update-task'
 
 const useColumnTasks = (column: ColumnType, teamId: string) => {
   const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
-  const { mutate } = useAddTeamTask(teamId)
+  const { mutate } = useAddTask()
 
   const { mutate: updateTaskMutate } = useUpdateTask()
   const { mutate: removeTaskMutate } = useDeleteTask()
@@ -31,9 +31,9 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
   const addTask = useCallback(
     (task: TaskInsert) => {
       dispatch({ taskData: task })
-      mutate(task)
+      mutate({ teamId, data: task })
     },
-    [dispatch, mutate],
+    [dispatch, teamId, mutate],
   )
 
   const openInsertDrawerTask = useCallback(() => {
@@ -56,7 +56,6 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
       attachments: [],
       supportTeam: [],
       tags: [],
-      active: true,
     })
   }, [addTask, column, myID, teamId])
 

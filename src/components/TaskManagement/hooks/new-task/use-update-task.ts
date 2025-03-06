@@ -25,7 +25,7 @@ export function useUpdateTask() {
       const response = await newTaskManagement.updateTask(teamId, taskId, data)
       return response
     },
-    onSuccess: (data, variables) => {
+    onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.teamId}`] })
     },
   })

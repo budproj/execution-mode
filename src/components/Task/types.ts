@@ -3,7 +3,7 @@ import { TASK_STATUS } from 'src/services/new-task-management/new-task-managemen
 
 import { GraphQLConnection, GraphQLNode, GraphQLEntityPolicy } from '../types'
 
-import { OLD_TASK_STATUS, TASK_STATUS } from './constants'
+import { OLD_TASK_STATUS } from './constants'
 
 export interface Task extends GraphQLNode {
   policy: GraphQLEntityPolicy
@@ -35,7 +35,7 @@ export interface NewTask {
   updatedAt: Date
   deletedAt?: Date
   team: string
-  cycle: string | null
+  cycle?: string
   owner_full_name?: string
 }
 

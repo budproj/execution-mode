@@ -6,7 +6,6 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { SelectMenu } from 'src/components/Base'
 import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
-import { useTeamCycleData } from 'src/components/Cycle/hooks/use-get-team-cycle'
 import { useTeamKRData } from 'src/components/KeyResult/hooks/use-get-team-key-result'
 import BoardWrapper from 'src/components/TaskManagement/Board/wrapper'
 import { TaskInsertDrawer } from 'src/components/TaskManagement/InsertDrawer/wrapper'

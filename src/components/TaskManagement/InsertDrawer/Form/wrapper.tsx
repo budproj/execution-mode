@@ -16,12 +16,12 @@ import useColumnTasks from '../../Board/hooks/use-column-tasks'
 import { FormActions } from './actions'
 import { DescriptionInput } from './description'
 import { DueDateInput } from './due-date'
+import { KeyResultInput } from './key-result'
 import messages from './messages'
 import { OwnerInput } from './owner'
 import { PriorityInput } from './priority'
 import { StartDateInput } from './start-date'
 import { TitleInput } from './title'
-import { KeyResultInput } from './key-result'
 
 export type FormValues = {
   teamId?: string

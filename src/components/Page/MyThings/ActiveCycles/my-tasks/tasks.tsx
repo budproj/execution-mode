@@ -7,7 +7,7 @@ import { Accordion } from 'src/components/Base/Accordion'
 import { KeyResultDynamicIcon } from 'src/components/KeyResult'
 import { KeyResultChecklist } from 'src/components/KeyResult/Single/Sections/Checklist/checklist'
 import { KeyResult } from 'src/components/KeyResult/types'
-import { useGetNewTask } from 'src/components/TaskManagement/hooks/use-get-tasks-new'
+import { useTeamTasksData } from 'src/components/TaskManagement/hooks/new-task/use-get-team-tasks'
 
 import messages from './messages'
 
@@ -26,7 +26,7 @@ const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasks
   const router = useRouter()
   const { id } = router.query
 
-  const { data: tasks = [], refetch } = useGetNewTask(id as string, keyResult.id ?? '')
+  const { data: tasks = [], refetch } = useTeamTasksData(id as string, { kr: keyResult.id ?? '' })
 
   const hasItems = tasks.length > 0
 

@@ -35,8 +35,9 @@ export type Task = {
   active?: boolean
   orderindex: number
   keyResult?: KeyResult
-  cycle: string | null
+  cycle?: string
   usersRelated: User[]
+  ownerFullName: string
 }
 
 export type TaskUpdate = {

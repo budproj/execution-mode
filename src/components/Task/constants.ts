@@ -9,4 +9,3 @@ export enum OLD_TASK_STATUS {
   CHECKED = 'checked',
   UNCHECKED = 'unchecked',
 }
-

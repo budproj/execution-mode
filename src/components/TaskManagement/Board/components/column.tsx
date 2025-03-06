@@ -71,7 +71,6 @@ const TaskColumnComponent = ({ column, tasks, teamID }: ColumnProperties) => {
     setColumnTasks,
   } = useColumnTasks(column, teamID)
   const { dropReference, isOver } = useColumnDrop(column, dropTaskFrom)
-  const order = tasks.map((task) => task.id)
   const tasksInOrder = useMemo(() => {
     return tasks
   }, [tasks])
