@@ -34,7 +34,7 @@ export type Task = {
   deletedAt?: Date
   active?: boolean
   orderindex: number
-  keyResult?: string
+  keyResult?: KeyResult
   cycle?: string
   usersRelated: User[]
   ownerFullName: string

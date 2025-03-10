@@ -103,6 +103,7 @@ const InsertOrUpdateTaskForm = ({
 
   const taskDrawerFormatted = {
     ...taskDrawer,
+    keyResult: taskDrawer.keyResult?.id,
     dueDate: taskDrawer ? format(new Date(taskDrawer?.dueDate), 'yyyy-MM-dd') : new Date(),
     initialDate: taskDrawer ? format(new Date(taskDrawer?.initialDate), 'yyyy-MM-dd') : new Date(),
     ownerID: taskDrawer?.owner,
