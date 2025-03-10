@@ -14,14 +14,15 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
+import router from 'next/router'
 import React, { useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { EditableInputField } from 'src/components/Base'
-import { useUpdateTaskByKr } from 'src/components/TaskManagement/hooks/use-update-task-new'
+import { useUpdateTask } from 'src/components/TaskManagement/hooks/new-task/use-update-task'
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
-import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import { Task, TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
 
 import { DeleteTaskButton } from './ActionButtons/delete-task'
 import messages from './messages'
@@ -35,10 +36,10 @@ export function swap<T>(array: T[], index: number, index_: number): T[] {
 }
 
 export const headerColumnMessage = new Map([
-  [TASK_STATUS.PENDING, messages.pendingColumnHeading],
-  [TASK_STATUS.TODO, messages.todoColumnHeading],
-  [TASK_STATUS.DOING, messages.doingColumnHeading],
-  [TASK_STATUS.DONE, messages.doneColumnHeading],
+  [TASK_STATUS.pending, messages.pendingColumnHeading],
+  [TASK_STATUS.toDo, messages.todoColumnHeading],
+  [TASK_STATUS.doing, messages.doingColumnHeading],
+  [TASK_STATUS.done, messages.doneColumnHeading],
 ])
 
 export const ColumnColorScheme: Record<TASK_STATUS, string> = {
@@ -67,14 +68,14 @@ export interface NewTask {
   updatedAt: Date
   deletedAt?: Date
   team: string
-  cycle: string | null
+  cycle?: string
   owner_full_name?: string | undefined
 }
 
 interface InlineTaskListProperties {
   keyResultID?: string
   draftCheckMarks?: string[]
-  node: NewTask
+  node: Task
   onUpdate?: () => void
   index?: number
   checklistLength?: number
@@ -105,17 +106,18 @@ export const InlineTaskList = ({
   const { onOpen, onClose, isOpen } = useDisclosure()
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
+  const { teamId } = router.query
   const isWaiting = false
   const canUpdate = true
   const canDelete = true
   const intl = useIntl()
-  const header = headerColumnMessage.get(node?.status ?? TASK_STATUS.PENDING)
+  const header = headerColumnMessage.get(node?.status ?? TASK_STATUS.pending)
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
   const [headerText, setHeaderText] = useState(header)
   const [newNode, setNode] = useState(node)
   const [isEditing, setIsEditing] = useState(false)
 
-  const { mutateAsync: updateTask } = useUpdateTaskByKr()
+  const { mutateAsync: updateTask } = useUpdateTask()
 
   async function handleSetNewTaskStatus(status: string) {
     const updatedNode = {
@@ -125,14 +127,16 @@ export const InlineTaskList = ({
 
     setNode(updatedNode)
     setHeaderText(headerColumnMessage.get(updatedNode.status))
-    await updateTask({ newNode: updatedNode })
+    const filteredTeamId = (teamId as string) ?? ''
+    await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
     if (onUpdate) onUpdate()
   }
 
   const handleNewTitleStatus = async (title: string) => {
     setNode((previousNode) => {
       const updatedNode = { ...previousNode, title }
-      updateTask({ newNode: updatedNode })
+      const filteredTeamId = (teamId as string) ?? ''
+      updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
       return updatedNode
     })
 
@@ -171,7 +175,8 @@ export const InlineTaskList = ({
     }
 
     setNode(updatedNode)
-    await updateTask({ newNode: updatedNode })
+    const filteredTeamId = (teamId as string) ?? ''
+    await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
     if (onUpdate) onUpdate()
     onClose()
   }
@@ -182,7 +187,7 @@ export const InlineTaskList = ({
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Select
             value={newNode?.status.toLocaleLowerCase()}
-            width={newNode?.status === TASK_STATUS.DOING ? '150px' : '130px'}
+            width={newNode?.status === TASK_STATUS.doing ? '150px' : '130px'}
             height="30px"
             py="1px"
             px="3px"
@@ -193,7 +198,7 @@ export const InlineTaskList = ({
             textTransform="uppercase"
             fontWeight="bold"
             fontSize="12px"
-            background={ColumnColorScheme[newNode.status ?? TASK_STATUS.PENDING]}
+            background={ColumnColorScheme[newNode.status ?? TASK_STATUS.pending]}
             onChange={(event) => {
               handleSetNewTaskStatus(event.target.value)
             }}
@@ -233,7 +238,7 @@ export const InlineTaskList = ({
             onStopEdit={handleStopEdit}
           />
           <Text fontSize="sm" color="new-gray.600" lineHeight="0.7rem">
-            {node.owner_full_name}
+            {node.ownerFullName}
           </Text>
         </VStack>
         <Flex gap={2} alignItems="center">
@@ -276,7 +281,7 @@ export const InlineTaskList = ({
               </PopoverContent>
             </Popover>
           </Box>
-          {node.supportTeam.length > 0 ? (
+          {node.supportTeam && node.supportTeam.length > 0 ? (
             <Avatar name={'+' + node.supportTeam.length.toString()} size="sm" />
           ) : // eslint-disable-next-line unicorn/no-null
           null}

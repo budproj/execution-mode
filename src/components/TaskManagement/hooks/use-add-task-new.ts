@@ -6,11 +6,10 @@ import { TaskInsert } from 'src/services/new-task-management/new-task-management
 
 export function useAddTask() {
   const { servicesPromise } = useContext(ServicesContext)
-
   const addTaskToKrMutate = useMutation({
     mutationFn: async (data: TaskInsert) => {
       const { newTaskManagement } = await servicesPromise
-      const response = await newTaskManagement.addTask(data)
+      const response = await newTaskManagement.addTask('0', data)
       return response
     },
   })

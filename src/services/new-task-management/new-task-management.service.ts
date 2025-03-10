@@ -3,17 +3,20 @@ import { ParsedUrlQuery } from 'querystring'
 import { AxiosInstance } from 'axios'
 
 import { NewTask } from 'src/components/Task/types'
+import { User } from 'src/components/User/types'
 import { Except } from 'src/helpers/except'
 
+import { KeyResult } from '../okr/key-result/@types'
+
 export enum TASK_STATUS {
-  PENDING = 'pending',
-  TODO = 'toDo',
-  DOING = 'doing',
-  DONE = 'done',
+  pending = 'pending',
+  toDo = 'toDo',
+  doing = 'doing',
+  done = 'done',
 }
 
 export type Task = {
-  _id: string
+  id: string
   team: string
   history: string[]
   status: TASK_STATUS
@@ -24,15 +27,17 @@ export type Task = {
   owner: string
   initialDate: Date
   attachments: string[]
-  supportTeamMembers: string[]
+  supportTeam?: string[]
   tags: string[]
   createdAt: Date
   updatedAt: Date
   deletedAt?: Date
   active?: boolean
   orderindex: number
-  key_result?: string
-  cycle: string | null
+  keyResult?: KeyResult
+  cycle?: string
+  usersRelated: User[]
+  ownerFullName: string
 }
 
 export type TaskUpdate = {
@@ -88,49 +93,53 @@ export type TaskInsert = Except<NewTask, 'id' | 'createdAt' | 'updatedAt' | 'his
 export class NewTaskManagementService {
   constructor(private readonly client: AxiosInstance) {}
 
-  async getAllTasks(teamId: string, parameters: ParsedUrlQuery) {
-    if (!teamId) {
+  async getAllTasks(data: string, parameters: ParsedUrlQuery) {
+    if (!data) {
       throw new Error('A team_id is required to get tasks')
     }
 
-    const { data: response } = await this.client.get<NewTask[]>(
-      `task-management/${teamId}/task/list`,
-      {
-        params: parameters,
-      },
+    /* 
+      Accepted parameters 
+      1. kr: Filter Key Result by id
+      2. cycle: Filter cicle by id
+      3. last: "last <0-100>" filter date by last x days
+      4. since/upto: since + Date define start date, upto + Date define end
+    */
+
+    const { data: response } = await this.client.get<Task[]>(`task-management/${data}/task/list`, {
+      params: parameters,
+    })
+    return response
+  }
+
+  async getTask(id: Task['id'], teamId: string) {
+    const { data: response } = await this.client.get<Task>(
+      `task-management/${teamId}/task/get/${id}`,
     )
 
     return response
   }
 
-  async addTask(data: TaskInsert) {
+  async addTask(team_id: string, data: TaskInsert) {
     const { data: response } = await this.client.post<NewTask>(
-      `task-management/${data.team}/task/create`,
+      `task-management/${team_id}/task/create`,
       data,
     )
     return response
   }
 
-  async getTasksByKr(teamId: string, krId: string) {
-    const { data: response } = await this.client.get<NewTask[]>(
-      `task-management/${teamId}/task/list?kr=${krId}`,
-    )
-    return response
+  async removeTask(team_id: string, task_id: string) {
+    // Tasks are soft deleted
+    await this.client.delete<NewTask>(`task-management/${team_id}/task/delete/${task_id}`)
   }
 
-  async removeTask(teamId: string, taskId: string) {
-    // Soft delete
-    await this.client.delete<NewTask>(`task-management/${teamId}/task/delete/${taskId}`)
-  }
-
-  async updateTask(data: Partial<NewTask>) {
+  async updateTask(teamId: string, taskId: string, data: Partial<Task>) {
     if (!data.id) {
       throw new Error('A id is required to update task')
     }
 
-    const { data: response } = await this.client.put<NewTask>(
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      `task-management/${data.team}/task/update/${data.id}`,
+    const { data: response } = await this.client.put<Task>(
+      `task-management/${teamId}/task/update/${taskId}`,
       data,
     )
 

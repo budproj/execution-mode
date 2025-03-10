@@ -1,20 +1,20 @@
 import { Stack, Container, SimpleGrid, Spinner, Box } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import CustomAvatarGroup from 'src/components/Base/DynamicAvatarGroup/custom-avatar-group'
 import { Team } from 'src/components/Team/types'
+import { User } from 'src/components/User/types'
 import {
   Task,
   TASK_STATUS as ColumnType,
-} from 'src/services/task-management/task-management.service'
-import { ownersAndSupportTeamTaskAtom } from 'src/state/recoil/task-management/board/owners-and-support-team-task'
+} from 'src/services/new-task-management/new-task-management.service'
 import { teamAtomFamily } from 'src/state/recoil/team'
-import { usersCompany } from 'src/state/recoil/team/users-company'
 
-import { useTeamTasksBoardData } from '../hooks/use-team-tasks-board-data'
+import { useTeamTasksData } from '../hooks/new-task/use-get-team-tasks'
 
 import TaskColumnComponent from './components/column'
 import loadOwnersAndSupportTeam from './hooks/use-load-owners-and-support-team'
@@ -22,37 +22,39 @@ import loadOwnersAndSupportTeam from './hooks/use-load-owners-and-support-team'
 type BoardWrapperProperties = {
   readonly teamId: Team['id']
   readonly searchTaskInput?: string
-  handleArchive?: (task: Task) => void
   isSpinnerLoading?: boolean
 }
 
-const BoardWrapper = ({
-  teamId,
-  searchTaskInput,
-  handleArchive,
-  isSpinnerLoading,
-}: BoardWrapperProperties) => {
-  const { data: boardData, isError, isFetching } = useTeamTasksBoardData(teamId)
+const BoardWrapper = ({ teamId, searchTaskInput, isSpinnerLoading }: BoardWrapperProperties) => {
+  const router = useRouter()
+
+  const { data: boardData, isError, isFetching, refetch } = useTeamTasksData(teamId, router.query)
+
+  useEffect(() => {
+    if (router.isReady) {
+      refetch()
+    }
+  }, [router, refetch])
 
   const [selectedUser, setSelectedUser] = useState<string>()
+  const [ownersAndSupportTeamMembers, setOwnersAndSupportTeamTask] = useState<User[]>([])
+
   const team = useRecoilValue(teamAtomFamily(teamId))
-  const companyUsers = useRecoilValue(usersCompany)
-  const setOwnersAndSupportTeamTask = useSetRecoilState(ownersAndSupportTeamTaskAtom)
-  const ownersAndSupportTeamMembers = useRecoilValue(ownersAndSupportTeamTaskAtom)
 
   const tasks = useMemo(
     () => ({
-      pending: boardData?.tasks.filter((task) => task.status === ColumnType.pending) ?? [],
-      toDo: boardData?.tasks.filter((task) => task.status === ColumnType.toDo) ?? [],
-      doing: boardData?.tasks.filter((task) => task.status === ColumnType.doing) ?? [],
-      done: boardData?.tasks.filter((task) => task.status === ColumnType.done) ?? [],
+      pending: boardData?.filter((task) => task.status === ColumnType.pending) ?? [],
+      toDo: boardData?.filter((task) => task.status === ColumnType.toDo) ?? [],
+      doing: boardData?.filter((task) => task.status === ColumnType.doing) ?? [],
+      done: boardData?.filter((task) => task.status === ColumnType.done) ?? [],
     }),
     [boardData],
   )
+
   useEffect(() => {
-    const ownersAndSupportTeam = loadOwnersAndSupportTeam(tasks, companyUsers)
+    const ownersAndSupportTeam = loadOwnersAndSupportTeam(tasks)
     setOwnersAndSupportTeamTask(ownersAndSupportTeam)
-  }, [companyUsers, setOwnersAndSupportTeamTask, tasks])
+  }, [setOwnersAndSupportTeamTask, tasks])
 
   const handleSelectUser = useCallback((userId: string) => {
     setSelectedUser((previousSelectedUser) => {
@@ -111,35 +113,23 @@ const BoardWrapper = ({
           <SimpleGrid columns={{ base: 1, md: 4 }} spacing={{ base: 16, md: 6 }}>
             <TaskColumnComponent
               column={ColumnType.pending}
-              boardID={boardData._id}
               tasks={filteredTasks[ColumnType.pending]}
               teamID={teamId}
-              order={boardData.order[ColumnType.pending]}
-              handleArchive={handleArchive}
             />
             <TaskColumnComponent
               column={ColumnType.toDo}
-              boardID={boardData._id}
               tasks={filteredTasks[ColumnType.toDo]}
-              order={boardData.order[ColumnType.toDo]}
               teamID={teamId}
-              handleArchive={handleArchive}
             />
             <TaskColumnComponent
               column={ColumnType.doing}
-              boardID={boardData._id}
               tasks={filteredTasks[ColumnType.doing]}
-              order={boardData.order[ColumnType.doing]}
               teamID={teamId}
-              handleArchive={handleArchive}
             />
             <TaskColumnComponent
               column={ColumnType.done}
-              boardID={boardData._id}
               tasks={filteredTasks[ColumnType.done]}
-              order={boardData.order[ColumnType.done]}
               teamID={teamId}
-              handleArchive={handleArchive}
             />
           </SimpleGrid>
         </Container>

@@ -1,10 +1,12 @@
+import { ParsedUrlQuery } from 'querystring'
+
 import { Collapse, Stack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { TASK_STATUS } from 'src/components/Task/constants'
-import { useGetNewTask } from 'src/components/TaskManagement/hooks/use-get-tasks-new'
+import { useTeamTasksData } from 'src/components/TaskManagement/hooks/new-task/use-get-team-tasks'
+import { TASK_STATUS, Task } from 'src/services/new-task-management/new-task-management.service'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
@@ -39,7 +41,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
     isFetching,
     isSuccess,
     refetch,
-  } = useGetNewTask(id as string, keyResultID ?? '')
+  } = useTeamTasksData(id as string, { kr: keyResultID } as ParsedUrlQuery)
 
   const hasItems = tasks.length > 0
 
@@ -50,7 +52,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   }, [keyResultID, refetch])
 
   useEffect(() => {
-    const numberOfDone = tasks.filter((task) => task.status === TASK_STATUS.DONE).length
+    const numberOfDone = tasks.filter((task: Task) => task.status === TASK_STATUS.done).length
     if (isFetching && tasks.length === 0) {
       setProgress({ total: 0, numberOfDone: 0, progress: 0 })
     }
@@ -60,7 +62,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
       numberOfDone,
       progress: (numberOfDone / tasks.length) * 100,
     })
-  }, [isFetching, tasks.length])
+  }, [isFetching, tasks, tasks.length])
 
   return (
     <Stack spacing={0}>
@@ -85,8 +87,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
             onUpdate={refetch}
           />
         </Collapse>
-      ) : // eslint-disable-next-line unicorn/no-null
-      null}
+      ) : undefined}
     </Stack>
   )
 }
