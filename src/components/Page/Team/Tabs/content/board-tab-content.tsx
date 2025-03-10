@@ -11,7 +11,6 @@ import BoardWrapper from 'src/components/TaskManagement/Board/wrapper'
 import { TaskInsertDrawer } from 'src/components/TaskManagement/InsertDrawer/wrapper'
 import { TaskDrawer } from 'src/components/TaskManagement/TaskDrawer'
 import { Team } from 'src/components/Team/types'
-import { CycleCadence } from 'src/services/okr/cycle/@types'
 import { teamAtomFamily } from 'src/state/recoil/team'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
@@ -58,13 +57,6 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
     return key
   }
 
-  const cycleSelected = (): string | undefined => {
-    const key = router.query.cycle ? router.query.cycle : undefined
-    if (key) {
-      return Array.isArray(key) ? undefined : CycleCadence[key as keyof typeof CycleCadence]
-    }
-  }
-
   return (
     <Stack direction="column" spacing={8} maxH="100%">
       <HStack width="100%" alignItems="center" justifyContent="space-between">
@@ -72,25 +64,6 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
           {intl.formatMessage(messages.boardTabHeaderTitle, { team: team?.name })}
         </Text>
         <HStack alignItems="center">
-          <SelectMenu
-            closeOnSelect
-            valueLabel={cycleSelected()}
-            width={320}
-            borderWidth={1}
-            borderColor="new-gray.400"
-            fill="new-gray.600"
-            height="32px"
-            isDisabled={false}
-            placeholder="Filtrar por ciclo"
-            onChange={handleQuery('cycle')}
-          >
-            <MenuItemOption value="none">Selecionar</MenuItemOption>
-            {Object.entries(CycleCadence).map(([key, value]) => (
-              <MenuItemOption key={key} value={key}>
-                {value}
-              </MenuItemOption>
-            ))}
-          </SelectMenu>
           <SelectMenu
             closeOnSelect
             valueLabel={krSelected()}

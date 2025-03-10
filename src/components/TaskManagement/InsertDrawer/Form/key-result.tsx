@@ -37,10 +37,9 @@ export const KeyResultInput = ({ isLoading }: KeyResultInputProperties) => {
   }
 
   const keyResultTitle = () => {
-    console.log(values.keyResult)
     if (values.keyResult !== '') {
       const kr = KeyResultData?.find((kr) => kr.id === values.keyResult)
-      return kr ? kr.title : ''
+      return kr ? kr.title : 'Selecione um KR'
     }
 
     return 'Selecione um KR'
@@ -54,9 +53,7 @@ export const KeyResultInput = ({ isLoading }: KeyResultInputProperties) => {
           closeOnSelect
           id="key-result-form"
           isOpen={isOpen}
-          scroolable={false}
           value={String(values.keyResult)}
-          placement="top"
           valueLabel={keyResultTitle()}
           onOpen={handleOpen}
           onClose={handleClose}
