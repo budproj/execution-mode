@@ -7,7 +7,7 @@ import { Task } from 'src/services/new-task-management/new-task-management.servi
 interface TaskDescriptionSectionProperties {
   task: Task
   teamId: string
-  updateTask: (id: Task['id'], teamId: string, updatedTask: Partial<Task>) => void
+  updateTask: (id: Task['id'], updatedTask: Partial<Task>) => void
 }
 
 export const TaskDescriptionSection = ({
@@ -18,7 +18,7 @@ export const TaskDescriptionSection = ({
   const [newDescriptionValue, setValue] = useState(task.description)
 
   const handleSubmit = () => {
-    updateTask(task.id, teamId, { id: task.id, description: newDescriptionValue })
+    updateTask(task.id, { id: task.id, team: teamId, description: newDescriptionValue })
   }
 
   const handleUpdate = useCallback((parameters: EditorEvents['update']) => {

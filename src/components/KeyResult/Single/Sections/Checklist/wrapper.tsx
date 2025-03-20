@@ -41,7 +41,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
     isFetching,
     isSuccess,
     refetch,
-  } = useTeamTasksData(id as string, { kr: keyResultID } as ParsedUrlQuery)
+  } = useTeamTasksData({ teamId: id as string, kr: keyResultID } as ParsedUrlQuery)
 
   const hasItems = tasks.length > 0
 
@@ -54,6 +54,10 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
   useEffect(() => {
     const numberOfDone = tasks.filter((task: Task) => task.status === TASK_STATUS.done).length
     if (isFetching && tasks.length === 0) {
+      setProgress({ total: 0, numberOfDone: 0, progress: 0 })
+    }
+
+    if (isSuccess && tasks.length === 0) {
       setProgress({ total: 0, numberOfDone: 0, progress: 0 })
     }
 

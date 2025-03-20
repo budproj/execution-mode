@@ -12,7 +12,7 @@ export function useTeamTasksData(taskId: string, teamId: string) {
     queryKey: [`${MODULE}:${ACTION}:${teamId}`],
     queryFn: async () => {
       const { newTaskManagement } = await servicesPromise
-      const data = await newTaskManagement.getTask(taskId, teamId)
+      const data = await newTaskManagement.getTask(taskId)
       return data
     },
   })

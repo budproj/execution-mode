@@ -106,7 +106,7 @@ export const InlineTaskList = ({
   const { onOpen, onClose, isOpen } = useDisclosure()
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
-  const { teamId } = router.query
+  const { id } = router.query
   const isWaiting = false
   const canUpdate = true
   const canDelete = true
@@ -122,21 +122,20 @@ export const InlineTaskList = ({
   async function handleSetNewTaskStatus(status: string) {
     const updatedNode = {
       ...newNode,
+      team: (id as string) ?? '',
       status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS],
     }
 
     setNode(updatedNode)
     setHeaderText(headerColumnMessage.get(updatedNode.status))
-    const filteredTeamId = (teamId as string) ?? ''
-    await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
+    await updateTask({ taskId: updatedNode.id, data: updatedNode })
     if (onUpdate) onUpdate()
   }
 
   const handleNewTitleStatus = async (title: string) => {
     setNode((previousNode) => {
-      const updatedNode = { ...previousNode, title }
-      const filteredTeamId = (teamId as string) ?? ''
-      updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
+      const updatedNode = { ...previousNode, title, team: (id as string) ?? '' }
+      updateTask({ taskId: updatedNode.id, data: updatedNode })
       return updatedNode
     })
 
@@ -172,11 +171,11 @@ export const InlineTaskList = ({
     const updatedNode = {
       ...newNode,
       owner: ownerId,
+      team: (id as string) ?? '',
     }
 
     setNode(updatedNode)
-    const filteredTeamId = (teamId as string) ?? ''
-    await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
+    await updateTask({ taskId: updatedNode.id, data: updatedNode })
     if (onUpdate) onUpdate()
     onClose()
   }
@@ -186,7 +185,7 @@ export const InlineTaskList = ({
       <StyledKeyResultCheckMark alignItems="center">
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Select
-            value={newNode?.status.toLocaleLowerCase()}
+            value={newNode?.status}
             width={newNode?.status === TASK_STATUS.doing ? '150px' : '130px'}
             height="30px"
             py="1px"

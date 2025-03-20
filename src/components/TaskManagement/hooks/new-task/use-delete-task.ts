@@ -11,12 +11,12 @@ export const useDeleteTask = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async ({ teamId, taskId }: { teamId: string; taskId: string }) => {
+    mutationFn: async ({ taskId }: { taskId: string }) => {
       const { newTaskManagement } = await servicesPromise
-      return newTaskManagement.removeTask(teamId, taskId)
+      return newTaskManagement.removeTask(taskId)
     },
     onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.teamId}`] })
+      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.taskId}`] })
     },
   })
 }

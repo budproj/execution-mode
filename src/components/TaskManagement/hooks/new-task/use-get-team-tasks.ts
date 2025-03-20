@@ -5,17 +5,16 @@ import { useContext } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 
-const MODULE = 'taskManager'
 const ACTION = 'getAllTasks'
 
-export function useTeamTasksData(teamId: string, parameters: ParsedUrlQuery) {
+export function useTeamTasksData(parameters: ParsedUrlQuery) {
   const { servicesPromise } = useContext(ServicesContext)
 
   const query = useQuery({
-    queryKey: [`${MODULE}:${ACTION}:${teamId}`],
+    queryKey: [`${ACTION}`],
     queryFn: async () => {
       const { newTaskManagement } = await servicesPromise
-      const data = await newTaskManagement.getAllTasks(teamId, parameters)
+      const data = await newTaskManagement.getAllTasks(parameters)
       return data
     },
   })

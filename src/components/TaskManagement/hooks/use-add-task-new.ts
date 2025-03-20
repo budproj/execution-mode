@@ -9,7 +9,7 @@ export function useAddTask() {
   const addTaskToKrMutate = useMutation({
     mutationFn: async (data: TaskInsert) => {
       const { newTaskManagement } = await servicesPromise
-      const response = await newTaskManagement.addTask('0', data)
+      const response = await newTaskManagement.addTask(data)
       return response
     },
   })

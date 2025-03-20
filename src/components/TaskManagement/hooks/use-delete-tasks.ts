@@ -7,9 +7,9 @@ export const useDeleteTaskByKr = () => {
   const { servicesPromise } = useContext(ServicesContext)
 
   return useMutation({
-    mutationFn: async ({ teamID, taskID }: { teamID: string; taskID: string }) => {
+    mutationFn: async ({ taskID }: { taskID: string }) => {
       const { newTaskManagement } = await servicesPromise
-      return newTaskManagement.removeTask(teamID, taskID)
+      return newTaskManagement.removeTask(taskID)
     },
   })
 }
