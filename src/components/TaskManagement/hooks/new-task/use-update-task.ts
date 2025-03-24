@@ -3,6 +3,7 @@ import { useContext } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { Task } from 'src/services/new-task-management/new-task-management.service'
+
 export function useUpdateTask() {
   const { servicesPromise } = useContext(ServicesContext)
 
