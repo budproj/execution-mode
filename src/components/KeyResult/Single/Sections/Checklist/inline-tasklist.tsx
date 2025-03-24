@@ -128,7 +128,7 @@ export const InlineTaskList = ({
     setNode(updatedNode)
     setHeaderText(headerColumnMessage.get(updatedNode.status))
     const filteredTeamId = (id as string) ?? ''
-    await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
+    await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: {id: updatedNode.id, status: updatedNode.status} })
     if (onUpdate) onUpdate()
   }
 

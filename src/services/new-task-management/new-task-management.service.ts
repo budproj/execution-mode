@@ -145,17 +145,4 @@ export class NewTaskManagementService {
 
     return response
   }
-
-  async updateTaskByKr(teamId: string, taskId: string, data: Partial<NewTask>) {
-    if (!data.id) {
-      throw new Error('A id is required to update task')
-    }
-
-    const { data: response } = await this.client.put<NewTask>(
-      `task-management/${teamId}/task/update/${taskId}`,
-      data,
-    )
-
-    return response
-  }
 }
