@@ -133,7 +133,6 @@ export const InlineTaskList = ({
       taskId: updatedNode.id,
       data: { id: updatedNode.id, status: updatedNode.status },
     })
-    if (onUpdate) onUpdate()
   }
 
   const handleNewTitleStatus = async (title: string) => {
