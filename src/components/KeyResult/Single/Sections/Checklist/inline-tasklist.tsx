@@ -106,7 +106,7 @@ export const InlineTaskList = ({
   const { onOpen, onClose, isOpen } = useDisclosure()
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
-  const { teamId } = router.query
+  const { id } = router.query
   const isWaiting = false
   const canUpdate = true
   const canDelete = true
@@ -127,7 +127,7 @@ export const InlineTaskList = ({
 
     setNode(updatedNode)
     setHeaderText(headerColumnMessage.get(updatedNode.status))
-    const filteredTeamId = (teamId as string) ?? ''
+    const filteredTeamId = (id as string) ?? ''
     await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
     if (onUpdate) onUpdate()
   }
@@ -135,7 +135,7 @@ export const InlineTaskList = ({
   const handleNewTitleStatus = async (title: string) => {
     setNode((previousNode) => {
       const updatedNode = { ...previousNode, title }
-      const filteredTeamId = (teamId as string) ?? ''
+      const filteredTeamId = (id as string) ?? ''
       updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
       return updatedNode
     })
@@ -175,7 +175,7 @@ export const InlineTaskList = ({
     }
 
     setNode(updatedNode)
-    const filteredTeamId = (teamId as string) ?? ''
+    const filteredTeamId = (id as string) ?? ''
     await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
     if (onUpdate) onUpdate()
     onClose()
