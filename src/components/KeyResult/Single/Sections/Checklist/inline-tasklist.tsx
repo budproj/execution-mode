@@ -123,7 +123,6 @@ export const InlineTaskList = ({
     const updatedNode = {
       ...newNode,
       status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS],
-      key_result: keyResultID,
     }
 
     setNode(updatedNode)

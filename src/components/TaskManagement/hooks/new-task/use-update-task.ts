@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useContext } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import { Task } from 'src/services/new-task-management/new-task-management.service'
+import { NewTask } from 'src/components/Task/types'
 
 const MODULE = 'taskManager'
 const ACTION = 'getAllTasks'
@@ -19,10 +19,10 @@ export function useUpdateTask() {
     }: {
       teamId: string
       taskId: string
-      data: Partial<Task>
+      data: Partial<NewTask>
     }) => {
       const { newTaskManagement } = await servicesPromise
-      const response = await newTaskManagement.updateTask(teamId, taskId, data)
+      const response = await newTaskManagement.updateTaskByKr(teamId, taskId, data)
       return response
     },
     onSuccess: (_data, variables) => {
