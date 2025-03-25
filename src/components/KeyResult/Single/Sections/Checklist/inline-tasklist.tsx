@@ -199,7 +199,7 @@ export const InlineTaskList = ({
       <StyledKeyResultCheckMark alignItems="center">
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Select
-            value={newNode?.status.toLocaleLowerCase()}
+            value={newNode?.status}
             width={newNode?.status === TASK_STATUS.doing ? '150px' : '130px'}
             height="30px"
             py="1px"
@@ -220,14 +220,14 @@ export const InlineTaskList = ({
               )
               if (!taskStatusName) {
                 return (
-                  <option key={name} value={name.toLocaleLowerCase()} style={{ color: 'black' }}>
+                  <option key={name} value={name} style={{ color: 'black' }}>
                     {headerText && intl.formatMessage(headerText)}
                   </option>
                 )
               }
 
               return (
-                <option key={name} value={name.toLocaleLowerCase()} style={{ color: 'black' }}>
+                <option key={name} value={name} style={{ color: 'black' }}>
                   {intl.formatMessage(taskStatusName)}
                 </option>
               )
