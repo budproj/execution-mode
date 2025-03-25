@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import router from 'next/router'
-import React, { useRef, useState } from 'react'
+import React, { ChangeEvent, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { EditableInputField } from 'src/components/Base'
@@ -119,7 +119,9 @@ export const InlineTaskList = ({
 
   const { mutateAsync: updateTask } = useUpdateTask()
 
-  async function handleSetNewTaskStatus(status: string) {
+  async function handleSetNewTaskStatus(event: ChangeEvent<HTMLSelectElement>) {
+    event.preventDefault()
+    const status = event.target.value
     const updatedNode = {
       ...newNode,
       status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS],
@@ -127,6 +129,13 @@ export const InlineTaskList = ({
 
     setNode(updatedNode)
     setHeaderText(headerColumnMessage.get(updatedNode.status))
+    const filteredTeamId = (id as string) ?? ''
+    await updateTask({
+      teamId: filteredTeamId,
+      taskId: updatedNode.id,
+      data: { id: updatedNode.id, status: updatedNode.status },
+    })
+    if (onUpdate) onUpdate()
   }
 
   const handleNewTitleStatus = async (title: string) => {
@@ -200,9 +209,7 @@ export const InlineTaskList = ({
             fontWeight="bold"
             fontSize="12px"
             background={ColumnColorScheme[newNode.status ?? TASK_STATUS.pending]}
-            onChange={(event) => {
-              handleSetNewTaskStatus(event.target.value)
-            }}
+            onChange={handleSetNewTaskStatus}
           >
             {Object.keys(TASK_STATUS).map((name) => {
               const taskStatusName = headerColumnMessage.get(
