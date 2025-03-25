@@ -119,24 +119,27 @@ export const InlineTaskList = ({
 
   const { mutateAsync: updateTask } = useUpdateTask()
 
-  const handleSetNewTaskStatus = useCallback( async (event: ChangeEvent<HTMLSelectElement>) => {
-    event.preventDefault()
-    const status = event.target.value
-    const updatedNode = {
-      ...newNode,
-      status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS],
-    }
+  const handleSetNewTaskStatus = useCallback(
+    async (event: ChangeEvent<HTMLSelectElement>) => {
+      event.preventDefault()
+      const status = event.target.value
+      const updatedNode = {
+        ...newNode,
+        status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS],
+      }
 
-    setNode(updatedNode)
-    setHeaderText(headerColumnMessage.get(updatedNode.status))
-    const filteredTeamId = (id as string) ?? ''
-    await updateTask({
-      teamId: filteredTeamId,
-      taskId: updatedNode.id,
-      data: { id: updatedNode.id, status: updatedNode.status },
-    })
-    if (onUpdate) onUpdate()
-  }, [newNode, id, updateTask, onUpdate])
+      setNode(updatedNode)
+      setHeaderText(headerColumnMessage.get(updatedNode.status))
+      const filteredTeamId = (id as string) ?? ''
+      await updateTask({
+        teamId: filteredTeamId,
+        taskId: updatedNode.id,
+        data: { id: updatedNode.id, status: updatedNode.status },
+      })
+      if (onUpdate) onUpdate()
+    },
+    [newNode, id, updateTask, onUpdate],
+  )
 
   const handleNewTitleStatus = async (title: string) => {
     setNode((previousNode) => {
