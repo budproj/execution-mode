@@ -119,7 +119,7 @@ export const InlineTaskList = ({
 
   const { mutateAsync: updateTask } = useUpdateTask()
 
-  const handleSetNewTaskStatus = useCallback( async (event: ChangeEvent<HTMLSelectElement>) {
+  const handleSetNewTaskStatus = useCallback( async (event: ChangeEvent<HTMLSelectElement>) => {
     event.preventDefault()
     const status = event.target.value
     const updatedNode = {
