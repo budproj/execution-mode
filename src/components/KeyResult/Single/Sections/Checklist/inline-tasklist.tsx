@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import router from 'next/router'
-import React, { ChangeEvent, useRef, useState } from 'react'
+import React, { ChangeEvent, useCallback, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { EditableInputField } from 'src/components/Base'
@@ -119,7 +119,7 @@ export const InlineTaskList = ({
 
   const { mutateAsync: updateTask } = useUpdateTask()
 
-  async function handleSetNewTaskStatus(event: ChangeEvent<HTMLSelectElement>) {
+  const handleSetNewTaskStatus = useCallback( async (event: ChangeEvent<HTMLSelectElement>) {
     event.preventDefault()
     const status = event.target.value
     const updatedNode = {
@@ -136,7 +136,7 @@ export const InlineTaskList = ({
       data: { id: updatedNode.id, status: updatedNode.status },
     })
     if (onUpdate) onUpdate()
-  }
+  }, [newNode, id, updateTask, onUpdate])
 
   const handleNewTitleStatus = async (title: string) => {
     setNode((previousNode) => {
