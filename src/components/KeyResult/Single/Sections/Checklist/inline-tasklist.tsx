@@ -119,27 +119,22 @@ export const InlineTaskList = ({
 
   const { mutateAsync: updateTask } = useUpdateTask()
 
-  const handleSetNewTaskStatus = useCallback(
-    async (event: ChangeEvent<HTMLSelectElement>) => {
-      event.preventDefault()
-      const status = event.target.value
-      const updatedNode = {
-        ...newNode,
-        status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS],
-      }
+  async function handleSetNewTaskStatus(status: string) {
+    const updatedNode = {
+      ...newNode,
+      status: TASK_STATUS[status as keyof typeof TASK_STATUS],
+    }
 
-      setNode(updatedNode)
-      setHeaderText(headerColumnMessage.get(updatedNode.status))
-      const filteredTeamId = (id as string) ?? ''
-      await updateTask({
-        teamId: filteredTeamId,
-        taskId: updatedNode.id,
-        data: { id: updatedNode.id, status: updatedNode.status },
-      })
-      if (onUpdate) onUpdate()
-    },
-    [newNode, id, updateTask, onUpdate],
-  )
+    setNode(updatedNode)
+    setHeaderText(headerColumnMessage.get(updatedNode.status))
+    const filteredTeamId = (id as string) ?? ''
+    await updateTask({
+      teamId: filteredTeamId,
+      taskId: updatedNode.id,
+      data: { id: updatedNode.id, status: updatedNode.status },
+    })
+    if (onUpdate) onUpdate()
+  }
 
   const handleNewTitleStatus = async (title: string) => {
     setNode((previousNode) => {
@@ -212,7 +207,9 @@ export const InlineTaskList = ({
             fontWeight="bold"
             fontSize="12px"
             background={ColumnColorScheme[newNode.status ?? TASK_STATUS.pending]}
-            onChange={handleSetNewTaskStatus}
+            onChange={(event) => {
+              handleSetNewTaskStatus(event.target.value)
+            }}
           >
             {Object.keys(TASK_STATUS).map((name) => {
               const taskStatusName = headerColumnMessage.get(
