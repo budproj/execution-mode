@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import router from 'next/router'
-import React, { ChangeEvent, useCallback, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { EditableInputField } from 'src/components/Base'
