@@ -62,7 +62,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
       numberOfDone,
       progress: (numberOfDone / tasks.length) * 100,
     })
-  }, [isFetching, tasks, tasks.length])
+  }, [isFetching, tasks.length])
 
   return (
     <Stack spacing={0}>

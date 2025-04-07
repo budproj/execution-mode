@@ -12,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
   useDisclosure,
+  AvatarGroup,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import router from 'next/router'
@@ -106,7 +107,7 @@ export const InlineTaskList = ({
   const { onOpen, onClose, isOpen } = useDisclosure()
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
-  const { teamId } = router.query
+  const { id } = router.query
   const isWaiting = false
   const canUpdate = true
   const canDelete = true
@@ -122,24 +123,31 @@ export const InlineTaskList = ({
   async function handleSetNewTaskStatus(status: string) {
     const updatedNode = {
       ...newNode,
-      status: TASK_STATUS[status.toUpperCase() as keyof typeof TASK_STATUS],
+      status: TASK_STATUS[status as keyof typeof TASK_STATUS],
     }
 
     setNode(updatedNode)
     setHeaderText(headerColumnMessage.get(updatedNode.status))
-    const filteredTeamId = (teamId as string) ?? ''
-    await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
+    const filteredTeamId = (id as string) ?? ''
+    await updateTask({
+      teamId: filteredTeamId,
+      taskId: updatedNode.id,
+      data: { id: updatedNode.id, status: updatedNode.status },
+    })
     if (onUpdate) onUpdate()
   }
 
   const handleNewTitleStatus = async (title: string) => {
     setNode((previousNode) => {
       const updatedNode = { ...previousNode, title }
-      const filteredTeamId = (teamId as string) ?? ''
-      updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
+      const filteredTeamId = (id as string) ?? ''
+      updateTask({
+        teamId: filteredTeamId,
+        taskId: updatedNode.id,
+        data: { id: updatedNode.id, title: updatedNode.title },
+      })
       return updatedNode
     })
-
     if (onUpdate) onUpdate()
   }
 
@@ -175,19 +183,23 @@ export const InlineTaskList = ({
     }
 
     setNode(updatedNode)
-    const filteredTeamId = (teamId as string) ?? ''
-    await updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
+    const filteredTeamId = (id as string) ?? ''
+    await updateTask({
+      teamId: filteredTeamId,
+      taskId: updatedNode.id,
+      data: { id: updatedNode.id, owner: ownerId },
+    })
     if (onUpdate) onUpdate()
     onClose()
   }
 
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
-      <StyledKeyResultCheckMark alignItems="center">
+      <StyledKeyResultCheckMark alignItems="start">
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Select
-            value={newNode?.status.toLocaleLowerCase()}
-            width={newNode?.status === TASK_STATUS.doing ? '150px' : '130px'}
+            value={newNode?.status}
+            width="150px"
             height="30px"
             py="1px"
             px="3px"
@@ -209,14 +221,14 @@ export const InlineTaskList = ({
               )
               if (!taskStatusName) {
                 return (
-                  <option key={name} value={name.toLocaleLowerCase()} style={{ color: 'black' }}>
+                  <option key={name} value={name} style={{ color: 'black' }}>
                     {headerText && intl.formatMessage(headerText)}
                   </option>
                 )
               }
 
               return (
-                <option key={name} value={name.toLocaleLowerCase()} style={{ color: 'black' }}>
+                <option key={name} value={name} style={{ color: 'black' }}>
                   {intl.formatMessage(taskStatusName)}
                 </option>
               )
@@ -261,17 +273,27 @@ export const InlineTaskList = ({
             >
               <PopoverTrigger>
                 <Box>
-                  <NamedAvatar
-                    userID={newNode.owner}
-                    avatarSize={8}
-                    displaySubtitle={false}
-                    horizontalGap={2}
-                    nameColor="gray.500"
-                    showName={false}
-                    canEdit={canUpdate}
-                    canHover={canUpdate}
-                    isEditting={isOpen}
-                  />
+                  <AvatarGroup>
+                    <NamedAvatar
+                      userID={newNode.owner}
+                      avatarSize={8}
+                      displaySubtitle={false}
+                      horizontalGap={2}
+                      nameColor="gray.500"
+                      showName={false}
+                      canEdit={canUpdate}
+                      canHover={canUpdate}
+                      isEditting={isOpen}
+                    />
+                    {node.supportTeam && node.supportTeam.length > 0 ? (
+                      <Avatar
+                        name={'+ ' + node.supportTeam.length.toString()}
+                        size="sm"
+                        style={{ position: 'relative', marginLeft: '-12px' }}
+                      />
+                    ) : // eslint-disable-next-line unicorn/no-null
+                    null}
+                  </AvatarGroup>
                 </Box>
               </PopoverTrigger>
               <PopoverContent width="md" h="full" overflow="hidden">
@@ -281,10 +303,6 @@ export const InlineTaskList = ({
               </PopoverContent>
             </Popover>
           </Box>
-          {node.supportTeam && node.supportTeam.length > 0 ? (
-            <Avatar name={'+' + node.supportTeam.length.toString()} size="sm" />
-          ) : // eslint-disable-next-line unicorn/no-null
-          null}
         </Flex>
       </StyledKeyResultCheckMark>
     </Skeleton>
