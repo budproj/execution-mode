@@ -12,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
   useDisclosure,
+  AvatarGroup,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import router from 'next/router'
@@ -191,11 +192,11 @@ export const InlineTaskList = ({
 
   return (
     <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
-      <StyledKeyResultCheckMark alignItems="center">
+      <StyledKeyResultCheckMark alignItems="start">
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Select
             value={newNode?.status}
-            width={newNode?.status === TASK_STATUS.doing ? '150px' : '130px'}
+            width="150px"
             height="30px"
             py="1px"
             px="3px"
@@ -269,17 +270,27 @@ export const InlineTaskList = ({
             >
               <PopoverTrigger>
                 <Box>
-                  <NamedAvatar
-                    userID={newNode.owner}
-                    avatarSize={8}
-                    displaySubtitle={false}
-                    horizontalGap={2}
-                    nameColor="gray.500"
-                    showName={false}
-                    canEdit={canUpdate}
-                    canHover={canUpdate}
-                    isEditting={isOpen}
-                  />
+                  <AvatarGroup>
+                    <NamedAvatar
+                      userID={newNode.owner}
+                      avatarSize={8}
+                      displaySubtitle={false}
+                      horizontalGap={2}
+                      nameColor="gray.500"
+                      showName={false}
+                      canEdit={canUpdate}
+                      canHover={canUpdate}
+                      isEditting={isOpen}
+                    />
+                    {node.supportTeam && node.supportTeam.length > 0 ? (
+                      <Avatar
+                        name={'+ ' + node.supportTeam.length.toString()}
+                        size="sm"
+                        style={{ position: 'relative', marginLeft: '-12px' }}
+                      />
+                    ) : // eslint-disable-next-line unicorn/no-null
+                    null}
+                  </AvatarGroup>
                 </Box>
               </PopoverTrigger>
               <PopoverContent width="md" h="full" overflow="hidden">
@@ -289,10 +300,6 @@ export const InlineTaskList = ({
               </PopoverContent>
             </Popover>
           </Box>
-          {node.supportTeam && node.supportTeam.length > 0 ? (
-            <Avatar name={'+' + node.supportTeam.length.toString()} size="sm" />
-          ) : // eslint-disable-next-line unicorn/no-null
-          null}
         </Flex>
       </StyledKeyResultCheckMark>
     </Skeleton>
