@@ -141,10 +141,13 @@ export const InlineTaskList = ({
     setNode((previousNode) => {
       const updatedNode = { ...previousNode, title }
       const filteredTeamId = (id as string) ?? ''
-      updateTask({ teamId: filteredTeamId, taskId: updatedNode.id, data: updatedNode })
+      updateTask({
+        teamId: filteredTeamId,
+        taskId: updatedNode.id,
+        data: { id: updatedNode.id, title: updatedNode.title },
+      })
       return updatedNode
     })
-
     if (onUpdate) onUpdate()
   }
 
