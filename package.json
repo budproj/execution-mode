@@ -138,7 +138,7 @@
     "@amplitude/analytics-browser": "^1",
     "apollo-link-sentry": "^3.2.1",
     "apollo-upload-client": "^17.0.0",
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "chakra-ui-steps": "^2.0.3",
     "chalk": "^5.2.0",
     "crypto": "^1.0.1",
