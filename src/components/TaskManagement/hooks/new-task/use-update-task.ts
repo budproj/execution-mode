@@ -18,6 +18,7 @@ export function useUpdateTask() {
       return response
     },
     onSuccess: (_data, variables) => {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.data.team}`] })
     },
   })
