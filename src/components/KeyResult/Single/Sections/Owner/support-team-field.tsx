@@ -28,11 +28,7 @@ type SupportTeamFieldProperties = {
   readonly keyResultId?: string
   readonly ownerName?: string
   readonly isFromTask?: boolean
-  readonly updateTask?: (
-    id: string,
-    teamId: string,
-    updatedTask: Except<Partial<Task>, 'id'>,
-  ) => void
+  readonly updateTask?: (id: string, updatedTask: Except<Partial<Task>, 'id'>) => void
   readonly task?: Task
   teamMembers?: User[]
 }
@@ -133,7 +129,7 @@ export const SupportTeamField = ({
       }
 
       if (updateTask && task) {
-        updateTask(task.id, teamId, { id: task.id, ...newTaskWithSupportTeam })
+        updateTask(task.id, { team: teamId, id: task.id, ...newTaskWithSupportTeam })
       }
 
       const member = teamMembers?.find((member) => member.id === userID)
@@ -165,7 +161,7 @@ export const SupportTeamField = ({
         supportTeam: newSupportTeam,
       }
       if (updateTask && task) {
-        updateTask(task.id, teamId, { id: task.id, ...newTaskWithSupportTeam })
+        updateTask(task.id, { team: teamId, id: task.id, ...newTaskWithSupportTeam })
       }
 
       if (teamMembers) {

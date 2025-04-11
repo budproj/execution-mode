@@ -183,7 +183,7 @@ const InsertOrUpdateTaskForm = ({
 
     const newTask = getUpdatePatches(taskDrawer, variables as unknown as Task)
 
-    updateTask(taskDrawer.id, taskDrawer.team, { id: taskDrawer.id, ...newTask })
+    updateTask(taskDrawer.id, { team: taskDrawer.team, id: taskDrawer.id, ...newTask })
 
     if (onSuccess) onSuccess()
   }

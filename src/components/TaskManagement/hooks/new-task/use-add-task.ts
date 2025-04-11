@@ -12,13 +12,13 @@ export function useAddTask() {
   const queryClient = useQueryClient()
 
   const addTaskToTeamMutate = useMutation({
-    mutationFn: async ({ teamId, data }: { teamId: string; data: TaskInsert }) => {
+    mutationFn: async ({ data }: { data: TaskInsert }) => {
       const { newTaskManagement } = await servicesPromise
-      const response = await newTaskManagement.addTask(teamId, data)
+      const response = await newTaskManagement.addTask(data)
       return response
     },
     onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.teamId}`] })
+      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.data.team}`] })
     },
   })
 

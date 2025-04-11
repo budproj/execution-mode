@@ -26,7 +26,10 @@ const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasks
   const router = useRouter()
   const { id } = router.query
 
-  const { data: tasks = [], refetch } = useTeamTasksData(id as string, { kr: keyResult.id ?? '' })
+  const { data: tasks = [], refetch } = useTeamTasksData({
+    teamId: id as string,
+    kr: keyResult.id ?? '',
+  })
 
   const hasItems = tasks.length > 0
 

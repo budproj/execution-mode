@@ -41,7 +41,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
     isFetching,
     isSuccess,
     refetch,
-  } = useTeamTasksData(id as string, { kr: keyResultID } as ParsedUrlQuery)
+  } = useTeamTasksData({ teamId: id as string, kr: keyResultID } as ParsedUrlQuery)
 
   const hasItems = tasks.length > 0
 

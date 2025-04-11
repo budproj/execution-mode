@@ -31,7 +31,7 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
   const addTask = useCallback(
     (task: TaskInsert) => {
       dispatch({ taskData: task })
-      mutate({ teamId, data: task })
+      mutate({ data: task })
     },
     [dispatch, teamId, mutate],
   )
@@ -61,23 +61,23 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
 
   const deleteTask = useCallback(
     (id: TaskModel['id']) => {
-      removeTaskMutate({ teamId, taskId: id })
+      removeTaskMutate({ taskId: id })
     },
-    [removeTaskMutate, teamId],
+    [removeTaskMutate],
   )
 
   const updateTask = useCallback(
-    (id: TaskModel['id'], teamId: string, updatedTask: Partial<TaskModel>) => {
-      updateTaskMutate({ teamId, taskId: id, data: updatedTask })
+    (id: TaskModel['id'], updatedTask: Partial<TaskModel>) => {
+      updateTaskMutate({ taskId: id, data: updatedTask })
     },
     [updateTaskMutate],
   )
 
   const dropTaskFrom = useCallback(
     (id: TaskModel['id']) => {
-      updateTaskMutate({ teamId, taskId: id, data: { id, status: column } })
+      updateTaskMutate({ taskId: id, data: { id, team: teamId, status: column } })
     },
-    [column, updateTaskMutate, teamId],
+    [column, updateTaskMutate],
   )
 
   // Função que troca a ordem das tasks

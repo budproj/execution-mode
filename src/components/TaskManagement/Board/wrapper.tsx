@@ -27,8 +27,13 @@ type BoardWrapperProperties = {
 
 const BoardWrapper = ({ teamId, searchTaskInput, isSpinnerLoading }: BoardWrapperProperties) => {
   const router = useRouter()
-
-  const { data: boardData, isError, isFetching, refetch } = useTeamTasksData(teamId, router.query)
+  console.log(router)
+  const {
+    data: boardData,
+    isError,
+    isFetching,
+    refetch,
+  } = useTeamTasksData({ teamId: router.query.id })
 
   useEffect(() => {
     if (router.isReady) {
