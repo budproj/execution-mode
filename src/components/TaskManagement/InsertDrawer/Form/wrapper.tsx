@@ -7,7 +7,10 @@ import { useRecoilValue } from 'recoil'
 import * as Yup from 'yup'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
-import { Task, TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import {
+  TaskUpdate,
+  TASK_STATUS,
+} from 'src/services/new-task-management/new-task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -181,7 +184,7 @@ const InsertOrUpdateTaskForm = ({
       supportTeam: [],
     }
 
-    const newTask = getUpdatePatches(taskDrawer, variables as unknown as Task)
+    const newTask = getUpdatePatches(taskDrawer as TaskUpdate, variables as unknown as TaskUpdate)
 
     updateTask(taskDrawer.id, taskDrawer.team, { id: taskDrawer.id, ...newTask })
 

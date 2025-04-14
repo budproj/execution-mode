@@ -5,7 +5,10 @@ import { useSetRecoilState } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { KanbanTaskCard } from 'src/components/Base/KanbanTaskCard/wrapper'
-import { Task as TaskModel } from 'src/services/new-task-management/new-task-management.service'
+import {
+  Task as TaskModel,
+  TaskUpdate,
+} from 'src/services/new-task-management/new-task-management.service'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
@@ -17,7 +20,11 @@ type TaskProperties = {
   readonly index: number
   readonly task: TaskModel
   readonly teamId: string
-  readonly onUpdate: (id: TaskModel['id'], teamId: string, updatedTask: TaskModel) => void
+  readonly onUpdate: (
+    id: TaskUpdate['id'],
+    teamId: string,
+    updatedTask: Partial<TaskUpdate>,
+  ) => void
   readonly onDelete: (id: TaskModel['id']) => void
   readonly onDropHover: (index: number, index_: number) => void
   readonly isActive?: boolean
@@ -40,7 +47,7 @@ const TaskCardComponent = ({
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
-    handleUpdate(task.id, teamId, { ...task, title: newTitle })
+    handleUpdate(task.id, teamId, { id: task.id, title: newTitle })
   }
 
   const handleTaskDelete = () => {

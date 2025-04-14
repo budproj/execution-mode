@@ -10,8 +10,8 @@ import { Except } from 'src/helpers/except'
 import { Task, TaskUpdate } from 'src/services/new-task-management/new-task-management.service'
 import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
+import { SupportTeamPopover } from './SupportTeamPopOver'
 import messages from './locale/messages'
-import { SupportTeamPopover } from './support-team-popover'
 
 type SupportTeamFieldProperties = {
   readonly hasPermitionToUpdate?: boolean

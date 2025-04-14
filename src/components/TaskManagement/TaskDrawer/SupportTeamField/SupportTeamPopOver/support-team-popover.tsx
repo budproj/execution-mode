@@ -12,8 +12,8 @@ import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
 import { User } from 'src/components/User/types'
 
-import { KeyResultTooltipSupportTeam } from './RichTooltips'
-import messages from './locale/messages'
+import { KeyResultTooltipSupportTeam } from '../RichTooltips'
+import messages from '../locale/messages'
 
 type SupportTeamPopoverProperties = {
   supportTeamMembers?: User[]
