@@ -2,12 +2,12 @@ import { EditorEvents } from '@tiptap/react'
 import React, { useCallback, useState } from 'react'
 
 import Editor from 'src/components/Base/TipTapEditor/tip-tap-editor'
-import { Task } from 'src/services/new-task-management/new-task-management.service'
+import { Task, TaskUpdate } from 'src/services/new-task-management/new-task-management.service'
 
 interface TaskDescriptionSectionProperties {
   task: Task
   teamId: string
-  updateTask: (id: Task['id'], teamId: string, updatedTask: Partial<Task>) => void
+  updateTask: (id: Task['id'], teamId: string, updatedTask: Partial<TaskUpdate>) => void
 }
 
 export const TaskDescriptionSection = ({
@@ -23,8 +23,6 @@ export const TaskDescriptionSection = ({
 
   const handleUpdate = useCallback((parameters: EditorEvents['update']) => {
     const { editor } = parameters
-
-    // TODO: a debounce would be nice here
     const timer = setTimeout(async () => setValue(editor.getHTML()), 1000)
     return () => clearTimeout(timer)
   }, [])

@@ -5,6 +5,7 @@ import {
   TaskInsert,
   Task,
   Task as TaskModel,
+  TaskUpdate,
   TASK_STATUS as ColumnType,
 } from 'src/services/new-task-management/new-task-management.service'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
@@ -67,7 +68,7 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
   )
 
   const updateTask = useCallback(
-    (id: TaskModel['id'], teamId: string, updatedTask: Partial<TaskModel>) => {
+    (id: TaskModel['id'], teamId: string, updatedTask: Partial<TaskUpdate>) => {
       updateTaskMutate({ teamId, taskId: id, data: updatedTask })
     },
     [updateTaskMutate],

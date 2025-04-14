@@ -3,11 +3,12 @@ import { useQueryClient } from '@tanstack/react-query'
 import React, { useCallback, useState } from 'react'
 
 import KeyResultSectionOwner from 'src/components/KeyResult/Single/Sections/Owner/owner'
-import { SupportTeamField } from 'src/components/KeyResult/Single/Sections/Owner/support-team-field'
 import { KeyResultAvailableOwners } from 'src/components/KeyResult/Single/Sections/Owner/user-list'
+import { SupportTeamField } from 'src/components/TaskManagement/TaskDrawer/SupportTeamField'
 import { User } from 'src/components/User/types'
 import {
   Task,
+  TaskUpdate,
   TASK_STATUS as ColumnType,
 } from 'src/services/new-task-management/new-task-management.service'
 
@@ -46,7 +47,7 @@ export const TaskDrawerSectionOwnerWrapper = ({
 
   const onSelect = useCallback(
     (userID: string) => {
-      const newTaskWithOwner: Partial<Task> = { owner: userID }
+      const newTaskWithOwner: Partial<TaskUpdate> = { owner: userID }
       updateTask(task.id, teamId, { id: task.id, ...newTaskWithOwner })
       setOwner(userID)
       queryClient.invalidateQueries({ queryKey: [`${TASK_UPDATES_DATA_KEY}:${task.id}`] })
@@ -84,8 +85,8 @@ export const TaskDrawerSectionOwnerWrapper = ({
       </Flex>
       <Flex gridGap={2} direction="column" flexGrow={1}>
         <SupportTeamField
-          isFromTask
           hasPermitionToUpdate
+          ownerName={task?.ownerFullName}
           teamMembers={teamMembers}
           task={task}
           updateTask={updateTask}

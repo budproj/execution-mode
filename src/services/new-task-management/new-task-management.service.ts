@@ -27,7 +27,7 @@ export type Task = {
   owner: string
   initialDate: Date
   attachments: string[]
-  supportTeam?: string[]
+  supportTeam?: User[]
   tags: string[]
   createdAt: Date
   updatedAt: Date
@@ -41,13 +41,28 @@ export type Task = {
 }
 
 export type TaskUpdate = {
-  _id: string
-  taskId: string
-  oldState: ITaskStateInterface
-  patches: ITaskPatchInterface[]
-  newState: ITaskStateInterface
-  author: IAuthor
-  createdAt: string
+  id: string
+  team: string
+  history: string[]
+  status: TASK_STATUS
+  title: string
+  description: string
+  dueDate: Date
+  priority: number
+  owner: string
+  initialDate: Date
+  attachments: string[]
+  supportTeam?: string[]
+  tags: string[]
+  createdAt: Date
+  updatedAt: Date
+  deletedAt?: Date
+  active?: boolean
+  orderindex: number
+  keyResult?: KeyResult
+  cycle?: string
+  usersRelated: User[]
+  ownerFullName: string
 }
 
 export interface ITaskPatchInterface {
@@ -133,7 +148,7 @@ export class NewTaskManagementService {
     await this.client.delete<NewTask>(`task-management/${team_id}/task/delete/${task_id}`)
   }
 
-  async updateTask(teamId: string, taskId: string, data: Partial<Task>) {
+  async updateTask(teamId: string, taskId: string, data: Partial<TaskUpdate>) {
     if (!data.id) {
       throw new Error('A id is required to update task')
     }
