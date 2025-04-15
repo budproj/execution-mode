@@ -106,7 +106,6 @@ export const InlineTaskList = ({
   const { onOpen, onClose, isOpen } = useDisclosure()
   const isLoaded = Boolean(node)
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
-  const { id } = router.query
   const isWaiting = false
   const canUpdate = true
   const canDelete = true
