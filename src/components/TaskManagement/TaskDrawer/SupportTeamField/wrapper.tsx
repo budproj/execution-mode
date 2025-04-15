@@ -1,14 +1,12 @@
 import { Text, Flex, Popover, PopoverContent, PopoverTrigger } from '@chakra-ui/react'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
 
 import { DynamicAvatarGroup } from 'src/components/Base'
 import PlusIcon from 'src/components/Icon/Plus'
 import { User } from 'src/components/User/types'
 import { Except } from 'src/helpers/except'
 import { Task, TaskUpdate } from 'src/services/new-task-management/new-task-management.service'
-import { selectedTeamIdHighlight } from 'src/state/recoil/team/highlight/selected-team-id-highlight'
 
 import { SupportTeamPopover } from './SupportTeamPopOver'
 import messages from './locale/messages'
@@ -16,11 +14,7 @@ import messages from './locale/messages'
 type SupportTeamFieldProperties = {
   readonly hasPermitionToUpdate?: boolean
   readonly ownerName?: string
-  readonly updateTask?: (
-    id: string,
-    teamId: string,
-    updatedTask: Except<Partial<TaskUpdate>, 'id'>,
-  ) => void
+  readonly updateTask?: (id: string, updatedTask: Except<Partial<TaskUpdate>, 'id'>) => void
   readonly task?: Task
   teamMembers?: User[]
 }
@@ -33,7 +27,6 @@ export const SupportTeamField = ({
   teamMembers,
 }: SupportTeamFieldProperties) => {
   const intl = useIntl()
-  const teamId = useRecoilValue(selectedTeamIdHighlight)
 
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
   const [supportTeam, setSupportTeam] = useState<User[]>()
@@ -72,7 +65,7 @@ export const SupportTeamField = ({
       }
 
       if (updateTask && task) {
-        updateTask(task.id, teamId, { id: task.id, ...newTaskWithSupportTeam })
+        updateTask(task.id, { id: task.id, ...newTaskWithSupportTeam })
       }
 
       const member = teamMembers?.find((member) => member.id === userID)
@@ -83,7 +76,7 @@ export const SupportTeamField = ({
 
       handleClose()
     },
-    [supportTeam, setSupportTeam, task, teamMembers, updateTask, teamId],
+    [supportTeam, setSupportTeam, task, teamMembers, updateTask],
   )
 
   const onRemoveSupportTeamInTask = useCallback(
@@ -94,8 +87,9 @@ export const SupportTeamField = ({
       const newTaskWithSupportTeam: Partial<TaskUpdate> = {
         supportTeam: newSupportTeam,
       }
+      console.log('fruta', newTaskWithSupportTeam)
       if (updateTask && task) {
-        updateTask(task.id, teamId, { id: task.id, ...newTaskWithSupportTeam })
+        updateTask(task.id, { id: task.id, ...newTaskWithSupportTeam })
       }
 
       if (teamMembers) {
@@ -104,7 +98,7 @@ export const SupportTeamField = ({
 
       handleClose()
     },
-    [supportTeam, setSupportTeam, task, teamMembers, updateTask, teamId],
+    [supportTeam, setSupportTeam, task, teamMembers, updateTask],
   )
 
   return (
@@ -126,7 +120,7 @@ export const SupportTeamField = ({
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {supportTeam && supportTeam?.length > 0 && (
+          {isLoaded && hasPermitionToUpdate && (
             <>
               <DynamicAvatarGroup users={supportTeam ?? []} isLoaded={isLoaded} />
               <Flex alignItems="center">

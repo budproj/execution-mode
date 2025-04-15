@@ -48,12 +48,12 @@ export const TaskDrawerSectionOwnerWrapper = ({
   const onSelect = useCallback(
     (userID: string) => {
       const newTaskWithOwner: Partial<TaskUpdate> = { owner: userID }
-      updateTask(task.id, teamId, { id: task.id, ...newTaskWithOwner })
+      updateTask(task.id, { id: task.id, ...newTaskWithOwner })
       setOwner(userID)
       queryClient.invalidateQueries({ queryKey: [`${TASK_UPDATES_DATA_KEY}:${task.id}`] })
       handleClose()
     },
-    [handleClose, queryClient, task.id, updateTask, teamId],
+    [handleClose, queryClient, task.id, updateTask],
   )
 
   return (

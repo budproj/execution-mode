@@ -12,21 +12,13 @@ export function useUpdateTask() {
   const queryClient = useQueryClient()
 
   const updateTaskMutate = useMutation({
-    mutationFn: async ({
-      teamId,
-      taskId,
-      data,
-    }: {
-      teamId: string
-      taskId: string
-      data: Partial<TaskUpdate>
-    }) => {
+    mutationFn: async ({ taskId, data }: { taskId: string; data: Partial<TaskUpdate> }) => {
       const { newTaskManagement } = await servicesPromise
-      const response = await newTaskManagement.updateTask(teamId, taskId, data)
+      const response = await newTaskManagement.updateTask(taskId, data)
       return response
     },
-    onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.teamId}`] })
+    onSuccess: (_data) => {
+      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}`] })
     },
   })
   return updateTaskMutate

@@ -6,19 +6,14 @@ import { Task, TaskUpdate } from 'src/services/new-task-management/new-task-mana
 
 interface TaskDescriptionSectionProperties {
   task: Task
-  teamId: string
-  updateTask: (id: Task['id'], teamId: string, updatedTask: Partial<TaskUpdate>) => void
+  updateTask: (id: Task['id'], updatedTask: Partial<TaskUpdate>) => void
 }
 
-export const TaskDescriptionSection = ({
-  task,
-  teamId,
-  updateTask,
-}: TaskDescriptionSectionProperties) => {
+export const TaskDescriptionSection = ({ task, updateTask }: TaskDescriptionSectionProperties) => {
   const [newDescriptionValue, setValue] = useState(task.description)
 
   const handleSubmit = () => {
-    updateTask(task.id, teamId, { id: task.id, description: newDescriptionValue })
+    updateTask(task.id, { id: task.id, description: newDescriptionValue })
   }
 
   const handleUpdate = useCallback((parameters: EditorEvents['update']) => {

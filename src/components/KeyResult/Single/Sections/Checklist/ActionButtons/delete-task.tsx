@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import React, { Ref } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -28,13 +27,11 @@ export const DeleteTaskButton = ({
   isVisible ??= true
 
   const intl = useIntl()
-  const router = useRouter()
-  const { id } = router.query
 
   const { mutateAsync: deleteTask } = useDeleteTaskByKr()
 
   const handleDelete = async () => {
-    await deleteTask({ teamID: id as string, taskID: taskID as string })
+    await deleteTask({ taskID: taskID as string })
 
     if (refresh) refresh()
   }

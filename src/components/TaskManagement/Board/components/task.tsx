@@ -19,12 +19,7 @@ import useTaskDragAndDrop from '../hooks/use-task-drag-and-drop'
 type TaskProperties = {
   readonly index: number
   readonly task: TaskModel
-  readonly teamId: string
-  readonly onUpdate: (
-    id: TaskUpdate['id'],
-    teamId: string,
-    updatedTask: Partial<TaskUpdate>,
-  ) => void
+  readonly onUpdate: (id: TaskUpdate['id'], updatedTask: Partial<TaskUpdate>) => void
   readonly onDelete: (id: TaskModel['id']) => void
   readonly onDropHover: (index: number, index_: number) => void
   readonly isActive?: boolean
@@ -33,7 +28,6 @@ type TaskProperties = {
 const TaskCardComponent = ({
   index,
   task,
-  teamId,
   onUpdate: handleUpdate,
   onDropHover: handleDropHover,
   onDelete: handleDelete,
@@ -47,7 +41,7 @@ const TaskCardComponent = ({
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLParagraphElement>) => {
     const newTitle = event.target.textContent ?? task.title
-    handleUpdate(task.id, teamId, { id: task.id, title: newTitle })
+    handleUpdate(task.id, { id: task.id, title: newTitle })
   }
 
   const handleTaskDelete = () => {
