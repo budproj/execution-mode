@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from 'querystring'
+
 import { Stack, Container, SimpleGrid, Spinner, Box } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
@@ -27,7 +29,16 @@ type BoardWrapperProperties = {
 
 const BoardWrapper = ({ teamId, searchTaskInput, isSpinnerLoading }: BoardWrapperProperties) => {
   const router = useRouter()
-  const { data: boardData, isError, isFetching, refetch } = useTeamTasksData(router.query)
+  const [parameters, setParameters] = useState<ParsedUrlQuery>({})
+
+  useEffect(() => {
+    setParameters({
+      ...router.query,
+      team_id__id: router.query.id,
+    })
+  }, [router.query])
+
+  const { data: boardData, isError, isFetching, refetch } = useTeamTasksData(parameters)
 
   useEffect(() => {
     if (router.isReady) {

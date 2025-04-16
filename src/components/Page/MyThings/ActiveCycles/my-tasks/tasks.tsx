@@ -1,5 +1,4 @@
 import { Stack, Text, Box, HStack } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -23,11 +22,8 @@ interface KeyResultTasksProperties {
 }
 
 const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasksProperties) => {
-  const router = useRouter()
-  const { id } = router.query
   const { data: tasks = [], refetch } = useTeamTasksData({
-    teamId: id as string,
-    kr: keyResult.id ?? '',
+    key_result_id__id: keyResult.id ?? '',
   })
   const hasItems = tasks.length > 0
 

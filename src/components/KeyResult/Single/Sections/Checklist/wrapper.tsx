@@ -1,7 +1,6 @@
 import { ParsedUrlQuery } from 'querystring'
 
 import { Collapse, Stack } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -20,9 +19,6 @@ interface KeyResultChecklistWrapperProperties {
 }
 
 export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWrapperProperties) => {
-  const router = useRouter()
-  const { id } = router.query
-
   const [progress, setProgress] = useState({ total: 0, numberOfDone: 0, progress: 0 })
   const [isChecklistOpen, setIsChecklistOpen] = useState(false)
 
@@ -32,17 +28,17 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
     setIsChecklistOpen((previous) => !previous)
   }
 
-  const handleChecklistCreation = () => {
-    refetch()
-    if (!isChecklistOpen) setIsChecklistOpen(true)
-  }
-
   const {
     data: tasks = [],
     isFetching,
     isSuccess,
     refetch,
-  } = useTeamTasksData({ teamId: id as string, kr: keyResultID } as ParsedUrlQuery)
+  } = useTeamTasksData({ key_result_id__id: keyResultID } as ParsedUrlQuery)
+
+  const handleChecklistCreation = () => {
+    refetch()
+    if (!isChecklistOpen) setIsChecklistOpen(true)
+  }
 
   const hasItems = tasks.length > 0
 
