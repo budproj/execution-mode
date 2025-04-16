@@ -74,7 +74,7 @@ const TasksTabContent = ({ teamId }: BoardTabContentProperties) => {
             height="32px"
             isDisabled={krFetching}
             placeholder="Filtrar por KR"
-            onChange={handleQuery('kr')}
+            onChange={handleQuery('key_result_id__id')}
           >
             <MenuItemOption value="none">Selecionar</MenuItemOption>
             {KeyResultData?.map((keyResult) => (

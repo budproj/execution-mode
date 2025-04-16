@@ -17,8 +17,8 @@ export function useAddTask() {
       const response = await newTaskManagement.addTask(data)
       return response
     },
-    onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.data.team}`] })
+    onSuccess: (_data, _variables) => {
+      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}`] })
     },
   })
 

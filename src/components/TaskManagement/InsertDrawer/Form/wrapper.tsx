@@ -7,7 +7,10 @@ import { useRecoilValue } from 'recoil'
 import * as Yup from 'yup'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
-import { Task, TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import {
+  TaskUpdate,
+  TASK_STATUS,
+} from 'src/services/new-task-management/new-task-management.service'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -32,7 +35,7 @@ export type FormValues = {
   description: string
   initialDate: Date
   dueDate: Date
-  ownerID: string
+  owner: string
 }
 
 function getUpdatePatches<T extends Record<string, unknown>>(
@@ -84,7 +87,7 @@ const InsertOrUpdateTaskForm = ({
       .min(Yup.ref('initialDate'), intl.formatMessage(messages.dueDateBeforeInitialDateText))
       .max(new Date(2100, 11, 31), intl.formatMessage(messages.dueDateAfter2030Text))
       .required(),
-    ownerID: Yup.string().required(),
+    owner: Yup.string().required(),
   })
 
   const [validationErrors, setValidationErrors] = useState<Array<keyof FormValues>>([])
@@ -98,7 +101,7 @@ const InsertOrUpdateTaskForm = ({
     initialDate: new Date(),
     dueDate: new Date(),
     description: ' ',
-    ownerID: myID,
+    owner: myID,
   }
 
   const taskDrawerFormatted = {
@@ -106,7 +109,7 @@ const InsertOrUpdateTaskForm = ({
     keyResult: taskDrawer ? taskDrawer.keyResult?.id : undefined,
     dueDate: taskDrawer ? format(new Date(taskDrawer?.dueDate), 'yyyy-MM-dd') : new Date(),
     initialDate: taskDrawer ? format(new Date(taskDrawer?.initialDate), 'yyyy-MM-dd') : new Date(),
-    ownerID: taskDrawer?.owner,
+    owner: taskDrawer?.owner,
   }
 
   const [initialValues, _] = useState<FormValues>(
@@ -138,7 +141,7 @@ const InsertOrUpdateTaskForm = ({
       ...allValues,
       team: teamId,
       status: column,
-      owner: allValues.ownerID,
+      owner: allValues.owner,
       attachments: [],
       supportTeam: [],
       tags: [],
@@ -175,15 +178,15 @@ const InsertOrUpdateTaskForm = ({
       ...allValues,
       teamId,
       status: column,
-      owner: allValues.ownerID,
+      owner: allValues.owner,
       dueDate: addHours(new Date(allValues.dueDate), 3).toISOString(),
       initialDate: addHours(new Date(allValues.initialDate), 3).toISOString(),
       supportTeam: [],
     }
 
-    const newTask = getUpdatePatches(taskDrawer, variables as unknown as Task)
+    const newTask = getUpdatePatches(taskDrawer as TaskUpdate, variables as unknown as TaskUpdate)
 
-    updateTask(taskDrawer.id, { team: taskDrawer.team, id: taskDrawer.id, ...newTask })
+    updateTask(taskDrawer.id, { id: taskDrawer.id, ...newTask })
 
     if (onSuccess) onSuccess()
   }
