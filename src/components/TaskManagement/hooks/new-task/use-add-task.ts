@@ -18,7 +18,7 @@ export function useAddTask() {
       return response
     },
     onSuccess: (_data, _variables) => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}`:${_variables.data.team}] })
+      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${_variables.data.team}`] })
     },
   })
 
