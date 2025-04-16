@@ -15,8 +15,8 @@ export const useDeleteTask = () => {
       const { newTaskManagement } = await servicesPromise
       return newTaskManagement.removeTask(taskId)
     },
-    onSuccess: (_data) => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}`] })
+    onSuccess: (_data, variables) => {
+      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.taskId}`] })
     },
   })
 }
