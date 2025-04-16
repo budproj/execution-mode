@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
 
 import { PREFIX } from './constants'
 

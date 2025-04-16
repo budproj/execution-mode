@@ -7,7 +7,6 @@ import { useDeleteTaskByKr } from 'src/components/TaskManagement/hooks/use-delet
 import messages from './messages'
 
 interface DeleteTaskButtonProperties {
-  keyResultID?: string
   taskID?: string
   onDelete?: () => void
   isVisible?: boolean
@@ -17,7 +16,6 @@ interface DeleteTaskButtonProperties {
 }
 
 export const DeleteTaskButton = ({
-  keyResultID,
   taskID,
   isVisible,
   canDelete,

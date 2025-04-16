@@ -2,7 +2,7 @@ import { Stack, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useRef } from 'react'
 
-import { Task } from 'src/services/new-task-management/new-task-management.service'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 
 import { CreateTaskButton } from './ActionButtons/create-task-in-kr'
 import { InlineTaskList } from './inline-tasklist'

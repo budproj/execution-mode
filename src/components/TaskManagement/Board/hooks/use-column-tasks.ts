@@ -1,13 +1,10 @@
 import { useCallback, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import {
-  TaskInsert,
-  Task,
-  Task as TaskModel,
-  TaskUpdate,
-  TASK_STATUS as ColumnType,
-} from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS as ColumnType } from 'src/services/new-task-management/@types/task-status.enum'
+import { TaskUpdate } from 'src/services/new-task-management/@types/task-update.type'
+import { Task, Task as TaskModel } from 'src/services/new-task-management/@types/task.type'
+import { TaskInsert } from 'src/services/new-task-management/new-task-management.service'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskInsertDrawerTeamID } from 'src/state/recoil/task-management/drawers/insert/task-insert-drawer'

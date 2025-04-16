@@ -3,67 +3,10 @@ import { ParsedUrlQuery } from 'querystring'
 import { AxiosInstance } from 'axios'
 
 import { NewTask } from 'src/components/Task/types'
-import { User } from 'src/components/User/types'
 import { Except } from 'src/helpers/except'
 
-import { KeyResult } from '../okr/key-result/@types'
-
-export enum TASK_STATUS {
-  pending = 'pending',
-  toDo = 'toDo',
-  doing = 'doing',
-  done = 'done',
-}
-
-export type Task = {
-  id: string
-  team: string
-  history: string[]
-  status: TASK_STATUS
-  title: string
-  description: string
-  dueDate: Date
-  priority: number
-  owner: string
-  initialDate: Date
-  attachments: string[]
-  supportTeam?: User[]
-  tags: string[]
-  createdAt: Date
-  updatedAt: Date
-  deletedAt?: Date
-  active?: boolean
-  orderindex: number
-  keyResult?: KeyResult
-  cycle?: string
-  usersRelated: User[]
-  ownerFullName: string
-}
-
-export type TaskUpdate = {
-  id: string
-  team: string
-  history: string[]
-  status: TASK_STATUS
-  title: string
-  description: string
-  dueDate: Date
-  priority: number
-  owner: string
-  initialDate: Date
-  attachments: string[]
-  supportTeam?: string[]
-  tags: string[]
-  createdAt: Date
-  updatedAt: Date
-  deletedAt?: Date
-  active?: boolean
-  orderindex: number
-  keyResult?: KeyResult
-  cycle?: string
-  usersRelated: User[]
-  ownerFullName: string
-}
+import { TaskUpdate } from './@types/task-update.type'
+import { Task } from './@types/task.type'
 
 export interface ITaskPatchInterface {
   key: TaskPatchsKeys
@@ -151,6 +94,12 @@ export class NewTaskManagementService {
     }
 
     const { data: response } = await this.client.put<Task>(`task-management/task/${id}`, data)
+
+    return response
+  }
+
+  async getTaskComments(id: Task['id']) {
+    const { data: response } = await this.client.get<Task>(`task-management/task/comments/${id}`)
 
     return response
   }

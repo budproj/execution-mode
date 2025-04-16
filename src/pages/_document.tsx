@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document'
 import Script from 'next/script'
 import React, { ReactElement } from 'react'
@@ -17,7 +16,6 @@ class BudDocument extends Document<BudDocumentProperties> {
         <Head>
           <link rel="manifest" href="/manifest.json" />
           <meta name="robots" content={this.props.env === 'production' ? 'all' : 'noindex'} />
-          <link href="/fonts/CircularStd/font-face.css" rel="stylesheet" />
           <link
             rel="apple-touch-icon-precomposed"
             sizes="57x57"

@@ -5,7 +5,8 @@ import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { useTeamTasksData } from 'src/components/TaskManagement/hooks/new-task/use-get-team-tasks'
-import { TASK_STATUS, Task } from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
@@ -59,7 +60,7 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
       numberOfDone,
       progress: (numberOfDone / tasks.length) * 100,
     })
-  }, [isFetching, tasks.length])
+  }, [isFetching, tasks, tasks.length])
 
   return (
     <Stack spacing={0}>

@@ -10,10 +10,8 @@ import { useRecoilValue } from 'recoil'
 import CustomAvatarGroup from 'src/components/Base/DynamicAvatarGroup/custom-avatar-group'
 import { Team } from 'src/components/Team/types'
 import { User } from 'src/components/User/types'
-import {
-  Task,
-  TASK_STATUS as ColumnType,
-} from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS as ColumnType } from 'src/services/new-task-management/@types/task-status.enum'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 import { teamAtomFamily } from 'src/state/recoil/team'
 
 import { useTeamTasksData } from '../hooks/new-task/use-get-team-tasks'

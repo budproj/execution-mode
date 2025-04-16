@@ -1,4 +1,3 @@
-/* eslint-disable react/prefer-read-only-props */
 import { Box, Button, Flex } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
