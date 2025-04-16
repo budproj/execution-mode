@@ -117,7 +117,7 @@ export class NewTaskManagementService {
       4. since/upto: since + Date define start date, upto + Date define end
     */
 
-    const { data: response } = await this.client.get<Task[]>(`task-management/task`, 
+    const { data: response } = await this.client.get<Task[]>(`task-management/task`, {
       params: parameters,
     })
     return response
@@ -129,7 +129,7 @@ export class NewTaskManagementService {
     }
     const { data: response } = await this.client.get<Task>(`task-management/task/${id}`, {
       params: parameters,
-    }
+    })
 
     return response
   }

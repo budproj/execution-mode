@@ -6,7 +6,6 @@ import { Task, TaskUpdate } from 'src/services/new-task-management/new-task-mana
 
 interface TaskDescriptionSectionProperties {
   task: Task
-  teamId: string
   updateTask: (id: Task['id'], updatedTask: Partial<TaskUpdate>) => void
 }
 
