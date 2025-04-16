@@ -17,8 +17,9 @@ export function useUpdateTask() {
       const response = await newTaskManagement.updateTask(taskId, data)
       return response
     },
-    onSuccess: (_data) => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}`] })
+    onSuccess: (_data, variables) => {
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.data.team}`] })
     },
   })
   return updateTaskMutate
