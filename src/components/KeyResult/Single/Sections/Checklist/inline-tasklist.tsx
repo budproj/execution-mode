@@ -126,6 +126,7 @@ export const InlineTaskList = ({
 
     setNode(updatedNode)
     setHeaderText(headerColumnMessage.get(updatedNode.status))
+
     await updateTask({
       taskId: updatedNode.id,
       data: { id: updatedNode.id, status: updatedNode.status },
@@ -136,6 +137,7 @@ export const InlineTaskList = ({
   const handleNewTitleStatus = async (title: string) => {
     setNode((previousNode) => {
       const updatedNode = { ...previousNode, title }
+
       updateTask({
         taskId: updatedNode.id,
         data: { id: updatedNode.id, title: updatedNode.title },
@@ -177,6 +179,7 @@ export const InlineTaskList = ({
     }
 
     setNode(updatedNode)
+
     await updateTask({
       taskId: updatedNode.id,
       data: { id: updatedNode.id, owner: ownerId },

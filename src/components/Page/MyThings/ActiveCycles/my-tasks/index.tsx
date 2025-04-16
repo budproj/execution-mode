@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client'
 import {
   Flex,
   Heading,
@@ -8,22 +7,15 @@ import {
   AccordionIcon,
   AccordionPanel,
 } from '@chakra-ui/react'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
 
-import { KeyResult, KeyResultCheckMarkState } from 'src/components/KeyResult/types'
-import { useGetMyTasksProperties } from 'src/components/Task/hooks/getTasks'
+import { useOwnerKRData } from 'src/components/KeyResult/hooks/use-get-owner-key-results'
 import { User } from 'src/components/User/types'
-import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
-import { useRecoilFamilyLoader } from 'src/state/recoil/hooks'
-import { keyResultAtomFamily } from 'src/state/recoil/key-result'
-import { myThingsTasksQuery } from 'src/state/recoil/task'
 
 import messages from '../../../Profile/messages'
 
 import MyTasksEmptyState from './empty-state'
-import queries from './queries.gql'
 import { TaskSkeletons } from './skeletons'
 import Tasks from './tasks'
 
@@ -34,41 +26,10 @@ interface UserTasksProperties {
 
 const MyTasks = ({ userID, username }: UserTasksProperties) => {
   const intl = useIntl()
-  const [loadKeyResults] = useRecoilFamilyLoader<KeyResult>(keyResultAtomFamily)
-  const [keyResults, setKeyResults] = useConnectionEdges<KeyResult>()
-  const { onlyUnchecked } = useRecoilValue<useGetMyTasksProperties>(myThingsTasksQuery)
-  const [filteredKeyResults, setFilteredKeyResults] = useState([] as KeyResult[])
+  const { data: KeyResultData, isLoading, refetch } = useOwnerKRData(userID, '0')
 
-  const { refetch, loading } = useQuery(queries.GET_KRS_WITH_MY_CHECKMARKS, {
-    variables: {
-      ...(userID ? { userID } : {}),
-    },
-    onCompleted: (data) => {
-      setKeyResults(data.user.keyResultsStatus.edges)
-      loadKeyResults(keyResults)
-    },
-  })
-
-  useEffect(() => {
-    const filteredKeyResults = keyResults.map((keyResult) => {
-      const checkListToShow = keyResult.checkList.edges.filter((checklist) =>
-        onlyUnchecked ? checklist.node.state === KeyResultCheckMarkState.UNCHECKED : true,
-      )
-
-      return {
-        ...keyResult,
-        checkList: {
-          ...keyResult.checkList,
-          edges: checkListToShow,
-        },
-      }
-    })
-
-    setFilteredKeyResults(filteredKeyResults)
-  }, [keyResults, setFilteredKeyResults, onlyUnchecked])
-
-  if (loading) {
-    return <TaskSkeletons isLoaded={!loading} />
+  if (isLoading) {
+    return <TaskSkeletons isLoaded={!isLoading} />
   }
 
   return (
@@ -96,8 +57,8 @@ const MyTasks = ({ userID, username }: UserTasksProperties) => {
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel pb={4} px={0}>
-          {keyResults.length > 0 ? (
-            <Tasks items={filteredKeyResults} onUpdate={refetch} />
+          {KeyResultData!.length > 0 ? (
+            <Tasks items={KeyResultData!} onUpdate={refetch} />
           ) : (
             <MyTasksEmptyState username={username} />
           )}
