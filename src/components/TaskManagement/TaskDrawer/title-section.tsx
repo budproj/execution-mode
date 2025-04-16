@@ -2,17 +2,16 @@ import { Text, EditablePreview, Input, Editable, EditableInput } from '@chakra-u
 import React from 'react'
 
 import { EditableControls } from 'src/components/Base/EditableControls/wrapper'
-import { Task } from 'src/services/new-task-management/new-task-management.service'
+import { Task, TaskUpdate } from 'src/services/new-task-management/new-task-management.service'
 
 interface TaskTitleSectionProperties {
   task: Task
-  teamId: string
-  updateTask: (id: Task['id'], teamId: string, updatedTask: Partial<Task>) => void
+  updateTask: (id: Task['id'], updatedTask: Partial<TaskUpdate>) => void
 }
 
-export const TaskTitleSection = ({ task, teamId, updateTask }: TaskTitleSectionProperties) => {
+export const TaskTitleSection = ({ task, updateTask }: TaskTitleSectionProperties) => {
   const handleSubmit = (value: string) => {
-    updateTask(task.id, teamId, { id: task.id, title: value })
+    updateTask(task.id, { id: task.id, title: value })
   }
 
   return (

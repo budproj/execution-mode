@@ -79,7 +79,6 @@ const TaskColumnComponent = ({ column, tasks, teamID }: ColumnProperties) => {
     <TaskCardComponent
       key={task.id}
       task={task}
-      teamId={teamID}
       index={index}
       onDropHover={() => {
         return true

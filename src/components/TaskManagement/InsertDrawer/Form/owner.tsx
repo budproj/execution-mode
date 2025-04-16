@@ -18,7 +18,7 @@ export const OwnerInput = ({ isLoading }: OwnerInputProperties) => {
   const { values, setFieldValue } = useFormikContext<FormValues>()
 
   const handleChange = (newOwnerID: string): void => {
-    setFieldValue('ownerID', newOwnerID)
+    setFieldValue('owner', newOwnerID)
   }
 
   return (
@@ -26,7 +26,7 @@ export const OwnerInput = ({ isLoading }: OwnerInputProperties) => {
       <Skeleton isLoaded={!isLoading}>
         <KeyResultOwnerSelectMenu
           isLazy
-          value={values.ownerID}
+          value={values.owner}
           avatarSubtitleType="role"
           placement="top"
           onChange={handleChange}

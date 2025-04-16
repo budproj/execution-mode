@@ -27,7 +27,7 @@ export type Task = {
   owner: string
   initialDate: Date
   attachments: string[]
-  supportTeam?: string[]
+  supportTeam?: User[]
   tags: string[]
   createdAt: Date
   updatedAt: Date
@@ -41,13 +41,28 @@ export type Task = {
 }
 
 export type TaskUpdate = {
-  _id: string
-  taskId: string
-  oldState: ITaskStateInterface
-  patches: ITaskPatchInterface[]
-  newState: ITaskStateInterface
-  author: IAuthor
-  createdAt: string
+  id: string
+  team: string
+  history: string[]
+  status: TASK_STATUS
+  title: string
+  description: string
+  dueDate: Date
+  priority: number
+  owner: string
+  initialDate: Date
+  attachments: string[]
+  supportTeam?: string[]
+  tags: string[]
+  createdAt: Date
+  updatedAt: Date
+  deletedAt?: Date
+  active?: boolean
+  orderindex: number
+  keyResult?: KeyResult
+  cycle?: string
+  usersRelated: User[]
+  ownerFullName: string
 }
 
 export interface ITaskPatchInterface {
@@ -93,11 +108,7 @@ export type TaskInsert = Except<NewTask, 'id' | 'createdAt' | 'updatedAt' | 'his
 export class NewTaskManagementService {
   constructor(private readonly client: AxiosInstance) {}
 
-  async getAllTasks(data: string, parameters: ParsedUrlQuery) {
-    if (!data) {
-      throw new Error('A team_id is required to get tasks')
-    }
-
+  async getAllTasks(parameters: ParsedUrlQuery) {
     /* 
       Accepted parameters 
       1. kr: Filter Key Result by id
@@ -106,42 +117,40 @@ export class NewTaskManagementService {
       4. since/upto: since + Date define start date, upto + Date define end
     */
 
-    const { data: response } = await this.client.get<Task[]>(`task-management/${data}/task/list`, {
+    const { data: response } = await this.client.get<Task[]>(`task-management/task`, {
       params: parameters,
     })
     return response
   }
 
-  async getTask(id: Task['id'], teamId: string) {
-    const { data: response } = await this.client.get<Task>(
-      `task-management/${teamId}/task/get/${id}`,
-    )
+  async getTask(id: Task['id'], teamId?: string) {
+    const parameters = {
+      team_id__id: teamId,
+    }
+    const { data: response } = await this.client.get<Task>(`task-management/task/${id}`, {
+      params: parameters,
+    })
 
     return response
   }
 
-  async addTask(team_id: string, data: TaskInsert) {
-    const { data: response } = await this.client.post<NewTask>(
-      `task-management/${team_id}/task/create`,
-      data,
-    )
+  async addTask(data: TaskInsert) {
+    const { data: response } = await this.client.post<NewTask>(`task-management/task`, data)
+
     return response
   }
 
-  async removeTask(team_id: string, task_id: string) {
+  async removeTask(id: Task['id']) {
     // Tasks are soft deleted
-    await this.client.delete<NewTask>(`task-management/${team_id}/task/delete/${task_id}`)
+    await this.client.delete<NewTask>(`task-management/task/${id}`)
   }
 
-  async updateTask(teamId: string, taskId: string, data: Partial<Task>) {
-    if (!data.id) {
+  async updateTask(id: Task['id'], data: Partial<TaskUpdate>) {
+    if (!id) {
       throw new Error('A id is required to update task')
     }
 
-    const { data: response } = await this.client.put<Task>(
-      `task-management/${teamId}/task/update/${taskId}`,
-      data,
-    )
+    const { data: response } = await this.client.put<Task>(`task-management/task/${id}`, data)
 
     return response
   }

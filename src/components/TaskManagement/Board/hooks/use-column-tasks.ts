@@ -5,6 +5,7 @@ import {
   TaskInsert,
   Task,
   Task as TaskModel,
+  TaskUpdate,
   TASK_STATUS as ColumnType,
 } from 'src/services/new-task-management/new-task-management.service'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
@@ -31,9 +32,9 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
   const addTask = useCallback(
     (task: TaskInsert) => {
       dispatch({ taskData: task })
-      mutate({ teamId, data: task })
+      mutate({ data: task })
     },
-    [dispatch, teamId, mutate],
+    [dispatch, mutate],
   )
 
   const openInsertDrawerTask = useCallback(() => {
@@ -61,23 +62,23 @@ const useColumnTasks = (column: ColumnType, teamId: string) => {
 
   const deleteTask = useCallback(
     (id: TaskModel['id']) => {
-      removeTaskMutate({ teamId, taskId: id })
+      removeTaskMutate({ taskId: id })
     },
-    [removeTaskMutate, teamId],
+    [removeTaskMutate],
   )
 
   const updateTask = useCallback(
-    (id: TaskModel['id'], teamId: string, updatedTask: Partial<TaskModel>) => {
-      updateTaskMutate({ teamId, taskId: id, data: updatedTask })
+    (id: TaskModel['id'], updatedTask: Partial<TaskUpdate>) => {
+      updateTaskMutate({ taskId: id, data: updatedTask })
     },
     [updateTaskMutate],
   )
 
   const dropTaskFrom = useCallback(
     (id: TaskModel['id']) => {
-      updateTaskMutate({ teamId, taskId: id, data: { id, status: column } })
+      updateTaskMutate({ taskId: id, data: { id, status: column } })
     },
-    [column, updateTaskMutate, teamId],
+    [column, updateTaskMutate],
   )
 
   // Função que troca a ordem das tasks

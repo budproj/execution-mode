@@ -8,14 +8,18 @@ import { ServicesContext } from 'src/components/Base/ServicesProvider/services-p
 const MODULE = 'taskManager'
 const ACTION = 'getAllTasks'
 
-export function useTeamTasksData(teamId: string, parameters: ParsedUrlQuery) {
+export function useTeamTasksData(parameters: ParsedUrlQuery) {
   const { servicesPromise } = useContext(ServicesContext)
 
+  const parameters_ = {
+    ...parameters,
+    deleted_at__isnull: 'True',
+  }
   const query = useQuery({
-    queryKey: [`${MODULE}:${ACTION}:${teamId}`],
+    queryKey: [`${MODULE}:${ACTION}`],
     queryFn: async () => {
       const { newTaskManagement } = await servicesPromise
-      const data = await newTaskManagement.getAllTasks(teamId, parameters)
+      const data = await newTaskManagement.getAllTasks(parameters_)
       return data
     },
   })

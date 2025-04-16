@@ -121,11 +121,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
                 </Button>
               </Flex>
 
-              <TaskTitleSection
-                updateTask={updateTask}
-                teamId={teamID as string}
-                task={taskDrawer}
-              />
+              <TaskTitleSection updateTask={updateTask} task={taskDrawer} />
 
               <PrirityItemOption mt="10px" priority={taskDrawer?.priority as TaskPriority} />
 
@@ -185,11 +181,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
 
               <Divider />
 
-              <TaskDescriptionSection
-                task={taskDrawer}
-                teamId={teamID as string}
-                updateTask={updateTask}
-              />
+              <TaskDescriptionSection task={taskDrawer} updateTask={updateTask} />
             </Flex>
           </Flex>
           <TaskDrawerTimeline task={taskDrawer} />
