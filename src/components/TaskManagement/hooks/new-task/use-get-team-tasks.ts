@@ -16,7 +16,7 @@ export function useTeamTasksData(parameters: ParsedUrlQuery) {
     deleted_at__isnull: 'True',
   }
   const query = useQuery({
-    queryKey: [`${MODULE}:${ACTION}`],
+    queryKey: [`${MODULE}:${ACTION}`, parameters],
     queryFn: async () => {
       const { newTaskManagement } = await servicesPromise
       const data = await newTaskManagement.getAllTasks(parameters_)
