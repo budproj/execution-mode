@@ -7,7 +7,7 @@ import {
   AccordionIcon,
   AccordionPanel,
 } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { useOwnerKRData } from 'src/components/KeyResult/hooks/use-get-owner-key-results'
@@ -27,6 +27,12 @@ interface UserTasksProperties {
 const MyTasks = ({ userID, username }: UserTasksProperties) => {
   const intl = useIntl()
   const { data: KeyResultData, isLoading, refetch } = useOwnerKRData(userID, '0')
+  const [taskUpdateKey, setTaskUpdateKey] = useState(0)
+
+  const handleUpdate = () => {
+    refetch()
+    setTaskUpdateKey((oldKey) => oldKey + 1)
+  }
 
   if (isLoading) {
     return <TaskSkeletons isLoaded={!isLoading} />
@@ -57,8 +63,8 @@ const MyTasks = ({ userID, username }: UserTasksProperties) => {
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel pb={4} px={0}>
-          {KeyResultData!.length > 0 ? (
-            <Tasks items={KeyResultData!} onUpdate={refetch} />
+          {KeyResultData && KeyResultData.length > 0 ? (
+            <Tasks key={taskUpdateKey} items={KeyResultData} onUpdate={handleUpdate} />
           ) : (
             <MyTasksEmptyState username={username} />
           )}
