@@ -74,7 +74,6 @@ export interface NewTask {
 }
 
 interface InlineTaskListProperties {
-  keyResultID?: string
   draftCheckMarks?: string[]
   node: Task
   onUpdate?: () => void
@@ -95,7 +94,6 @@ const StyledKeyResultCheckMark = styled(HStack)`
 `
 
 export const InlineTaskList = ({
-  keyResultID,
   node,
   onUpdate,
   index,
@@ -253,7 +251,6 @@ export const InlineTaskList = ({
           <DeleteTaskButton
             buttonRef={removeCheckmarkButton}
             className="deleteCheckMarkButton"
-            keyResultID={keyResultID}
             taskID={newNode?.id}
             canDelete={canDelete}
             onDelete={onUpdate}

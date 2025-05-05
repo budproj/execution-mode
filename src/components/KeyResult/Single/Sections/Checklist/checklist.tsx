@@ -39,13 +39,7 @@ export const KeyResultChecklist = ({
       {nodes.length > 0 && (
         <StyledStack alignItems="flex-start" pt={4} {...wrapperProps}>
           {nodes.map((node) => (
-            <InlineTaskList
-              key={node.id}
-              keyResultID={keyResultID}
-              node={node}
-              isEditable={isEditable}
-              onUpdate={onUpdate}
-            />
+            <InlineTaskList key={node.id} node={node} isEditable={isEditable} onUpdate={onUpdate} />
           ))}
         </StyledStack>
       )}

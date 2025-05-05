@@ -469,7 +469,7 @@ const DashboardPage = () => {
             {intl.formatMessage(messages.teamsOverviewTitle)}
           </Text>
           <Flex gridGap="3rem">
-            <TeamsOverview flex="1" quarter={quarter?.period} />
+            <TeamsOverview flex="1" />
             <MetricsOverview maxWidth="50%" flex="1" />
           </Flex>
         </Box>
