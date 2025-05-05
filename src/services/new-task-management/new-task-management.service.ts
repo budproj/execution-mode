@@ -5,6 +5,7 @@ import { AxiosInstance } from 'axios'
 import { NewTask } from 'src/components/Task/types'
 import { Except } from 'src/helpers/except'
 
+import { TaskComment, TaskCommentInsert } from './@types/task-comment.type'
 import { TaskUpdate } from './@types/task-update.type'
 import { Task } from './@types/task.type'
 
@@ -98,8 +99,27 @@ export class NewTaskManagementService {
     return response
   }
 
+  async addTaskComment(data: TaskCommentInsert) {
+    const { data: response } = await this.client.post<TaskComment>(
+      `task-management/task/comments`,
+      data,
+    )
+
+    return response
+  }
+
   async getTaskComments(id: Task['id']) {
-    const { data: response } = await this.client.get<Task>(`task-management/task/comments/${id}`)
+    const { data: response } = await this.client.get<TaskComment[]>(
+      `task-management/task/comments/${id}`,
+    )
+
+    return response
+  }
+
+  async removeTaskComments(id: TaskComment['id']) {
+    const { data: response } = await this.client.delete<TaskComment>(
+      `task-management/task/comments/${id}`,
+    )
 
     return response
   }

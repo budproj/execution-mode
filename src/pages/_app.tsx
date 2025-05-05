@@ -25,7 +25,7 @@ import TeamRedirectPage from 'src/components/Routine/Drawer/Base/TeamRedirectPag
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
 
-import 'src/styles/fonts/CircularStd/font-face.css'
+import 'src/global.css'
 
 type IntlMessage = Record<string, string>
 
