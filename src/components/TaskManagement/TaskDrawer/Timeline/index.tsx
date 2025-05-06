@@ -74,7 +74,7 @@ export const TaskDrawerTimeline = ({ task }: TaskDrawerTimelineProperties) => {
           {({ handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
               <Flex gridGap={3} alignItems="flex-start">
-                <SkeletonCircle isLoaded={isLoading} w={10} h={10}>
+                <SkeletonCircle isLoaded={!isLoading} w={10} h={10}>
                   <Avatar name={user?.fullName} src={user?.picture} w={10} h={10} />
                 </SkeletonCircle>
                 <KeyResultSectionAddCommentInput isLoading={isLoading} />
