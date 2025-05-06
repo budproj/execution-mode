@@ -1,6 +1,3 @@
-/* eslint-disable unicorn/no-useless-undefined */
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/dot-notation */
 import { useMutation } from '@apollo/client'
 import { Flex, FormControl, SpaceProps } from '@chakra-ui/react'
 import { Formik, Form, FormikHelpers } from 'formik'

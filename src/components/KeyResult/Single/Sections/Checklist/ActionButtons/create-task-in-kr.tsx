@@ -9,7 +9,7 @@ import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
 import { NewTask } from 'src/components/Task/types'
 import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
-import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
 import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'

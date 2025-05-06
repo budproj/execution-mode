@@ -30,14 +30,12 @@ export interface KeyResultListProperties extends BoxProps {
   type: KEY_RESULT_LIST_TYPE
   templateColumns: GridProps['templateColumns']
   columnGap: GridProps['gridColumnGap']
-  hasMoreKeyResults?: boolean
   emptyStateMessage?: MessageDescriptor
   keyResultIDs?: Array<KeyResult['id']>
   onLineClick?: (id: KeyResult['id']) => void
   onLineDragEnd?: (result: DropResult) => void
   isLoading?: boolean
   mode?: ObjectiveViewMode
-  isDraft?: boolean
 }
 
 const KeyResultList = ({
@@ -50,13 +48,11 @@ const KeyResultList = ({
   columns,
   bodyProperties,
   headProperties,
-  hasMoreKeyResults,
   templateColumns,
   columnGap,
   isLoading,
   emptyStateMessage,
   mode,
-  isDraft,
   ...rest
 }: KeyResultListProperties): ReactElement => {
   const isDataLoading = useMemo(() => {

@@ -22,7 +22,8 @@ import { EditableInputField } from 'src/components/Base'
 import { useUpdateTask } from 'src/components/TaskManagement/hooks/new-task/use-update-task'
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
-import { Task, TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 
 import { DeleteTaskButton } from './ActionButtons/delete-task'
 import messages from './messages'
@@ -73,7 +74,6 @@ export interface NewTask {
 }
 
 interface InlineTaskListProperties {
-  keyResultID?: string
   draftCheckMarks?: string[]
   node: Task
   onUpdate?: () => void
@@ -94,7 +94,6 @@ const StyledKeyResultCheckMark = styled(HStack)`
 `
 
 export const InlineTaskList = ({
-  keyResultID,
   node,
   onUpdate,
   index,
@@ -252,7 +251,6 @@ export const InlineTaskList = ({
           <DeleteTaskButton
             buttonRef={removeCheckmarkButton}
             className="deleteCheckMarkButton"
-            keyResultID={keyResultID}
             taskID={newNode?.id}
             canDelete={canDelete}
             onDelete={onUpdate}

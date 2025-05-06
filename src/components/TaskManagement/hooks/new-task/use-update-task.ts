@@ -2,10 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useContext } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
-import { TaskUpdate } from 'src/services/new-task-management/new-task-management.service'
-
-const MODULE = 'taskManager'
-const ACTION = 'getAllTasks'
+import { TaskUpdate } from 'src/services/new-task-management/@types/task-update.type'
 
 export function useUpdateTask() {
   const { servicesPromise } = useContext(ServicesContext)
@@ -18,8 +15,8 @@ export function useUpdateTask() {
       return response
     },
     onSuccess: (_data, variables) => {
-      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.data.team}`] })
+      queryClient.invalidateQueries({ queryKey: [`taskManager:getAllTasks`] })
+      queryClient.invalidateQueries({ queryKey: [`taskManager:getTask:${variables.taskId}`] })
     },
   })
   return updateTaskMutate

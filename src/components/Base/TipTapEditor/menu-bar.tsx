@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 /* eslint-disable unicorn/no-null */
 import { Box, Button, Icon } from '@chakra-ui/react'
 import { Editor } from '@tiptap/react'

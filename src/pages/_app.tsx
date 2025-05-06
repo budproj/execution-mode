@@ -25,6 +25,8 @@ import TeamRedirectPage from 'src/components/Routine/Drawer/Base/TeamRedirectPag
 import getConfig from 'src/config'
 import theme from 'src/themes/preset-base'
 
+import 'src/global.css'
+
 type IntlMessage = Record<string, string>
 
 interface BudAppProperties extends AppProps {

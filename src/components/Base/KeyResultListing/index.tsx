@@ -115,7 +115,6 @@ export const KeyResultListingModal = memo(
                     type={KEY_RESULT_LIST_TYPE.STATIC}
                     keyResultIDs={keyResultIds}
                     isLoading={isLoading}
-                    hasMoreKeyResults={showNextPageButton}
                     templateColumns="1.5fr 1fr 100px 80px 1fr"
                     borderColor="new-gray.400"
                     flex="1"

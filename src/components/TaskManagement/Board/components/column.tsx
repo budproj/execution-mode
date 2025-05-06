@@ -5,10 +5,8 @@ import { useIntl } from 'react-intl'
 import { useResetRecoilState } from 'recoil'
 
 import PlusIcon from 'src/components/Icon/Plus'
-import {
-  Task as TaskModel,
-  TASK_STATUS as ColumnType,
-} from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS as ColumnType } from 'src/services/new-task-management/@types/task-status.enum'
+import { Task as TaskModel } from 'src/services/new-task-management/@types/task.type'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 
 import useColumnDrop from '../hooks/use-column-drop'

@@ -146,7 +146,6 @@ export const DetailedHeader = ({ userData, isUserLoading }: DetailedHeaderProper
             ) : undefined}
           </Flex>
         )}
-        {/* TODO: Quando o progresso individual for feito, substituir esta Flex abaixo. */}
         {keyResultType === KeyResultType.PERSONAL && (
           <Flex width="64px" height="101px" bg="transparent" />
         )}

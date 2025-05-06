@@ -7,10 +7,8 @@ import { useRecoilValue } from 'recoil'
 import * as Yup from 'yup'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
-import {
-  TaskUpdate,
-  TASK_STATUS,
-} from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { TaskUpdate } from 'src/services/new-task-management/@types/task-update.type'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'
 import meAtom from 'src/state/recoil/user/me'
 

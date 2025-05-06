@@ -1,5 +1,3 @@
-/* eslint-disable unicorn/prefer-query-selector */
-/* eslint-disable prefer-const */
 import { Box, Divider, Flex, GridItem, Text } from '@chakra-ui/react'
 import { addMinutes, format, isSameDay, parseISO } from 'date-fns'
 import pt from 'date-fns/locale/pt'
