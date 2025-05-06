@@ -88,7 +88,7 @@ export const SupportTeamField = ({
       const newTaskWithSupportTeam: Partial<TaskUpdate> = {
         supportTeam: newSupportTeam,
       }
-      console.log('fruta', newTaskWithSupportTeam)
+
       if (updateTask && task) {
         updateTask(task.id, { id: task.id, ...newTaskWithSupportTeam })
       }

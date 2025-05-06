@@ -25,9 +25,8 @@ const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasks
   const { data: tasks = [], refetch } = useTeamTasksData({
     key_result_id__id: keyResult.id ?? '',
   })
-  const hasItems = tasks.length > 0
 
-  const canCreate = !hasItems
+  const canCreate = true
 
   useEffect(() => {
     if (keyResult.id) refetch()

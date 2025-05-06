@@ -14,4 +14,9 @@ export class KeyResultService {
     const { data } = await this.client.get<KeyResult[]>(`kr/owner/${owner}/${objectiveId}/`)
     return data
   }
+
+  async getKeyResultById(keyResultId: string) {
+    const { data } = await this.client.get<KeyResult>(`kr/${keyResultId}/`)
+    return data
+  }
 }

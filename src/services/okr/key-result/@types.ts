@@ -30,7 +30,7 @@ export type KeyResult = {
   description: string
   format: KeyResultFormat
   objectiveId: string
-  teamId: string
+  team: string
   ownerId: string
   type: KeyResultType
   mode: KeyResultMode
