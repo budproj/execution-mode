@@ -1,6 +1,6 @@
 import { Box, HStack, ScaleFade, VStack } from '@chakra-ui/react'
 import _ from 'lodash'
-import React, { memo, useEffect } from 'react'
+import React, { memo } from 'react'
 import { useSetRecoilState } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'

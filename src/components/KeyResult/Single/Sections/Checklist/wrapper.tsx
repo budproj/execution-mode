@@ -8,7 +8,8 @@ import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 import { IntlLink } from 'src/components/Base'
 import { KeyResult } from 'src/components/KeyResult/types'
 import { useTeamTasksData } from 'src/components/TaskManagement/hooks/new-task/use-get-team-tasks'
-import { TASK_STATUS, Task } from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
   keyResultCheckInCommentEnabled,

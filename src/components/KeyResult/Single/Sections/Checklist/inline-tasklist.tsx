@@ -22,7 +22,8 @@ import { EditableInputField } from 'src/components/Base'
 import { useUpdateTask } from 'src/components/TaskManagement/hooks/new-task/use-update-task'
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
-import { Task, TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 import { TaskSummary } from 'src/services/okr/key-result/@types'
 
 import { DeleteTaskButton } from './ActionButtons/delete-task'
@@ -204,7 +205,7 @@ export const InlineTaskList = ({
             textTransform="uppercase"
             fontWeight="bold"
             fontSize="12px"
-            background={ColumnColorScheme[newNode.status ?? TASK_STATUS.pending]}
+            background={ColumnColorScheme[(newNode.status as TASK_STATUS) ?? TASK_STATUS.pending]}
             onChange={(event) => {
               handleSetNewTaskStatus(event.target.value)
             }}
