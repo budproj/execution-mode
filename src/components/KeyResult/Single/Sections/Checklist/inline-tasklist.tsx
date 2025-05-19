@@ -23,6 +23,7 @@ import { useUpdateTask } from 'src/components/TaskManagement/hooks/new-task/use-
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
 import { Task, TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import { TaskSummary } from 'src/services/okr/key-result/@types'
 
 import { DeleteTaskButton } from './ActionButtons/delete-task'
 import messages from './messages'
@@ -75,7 +76,7 @@ export interface NewTask {
 interface InlineTaskListProperties {
   keyResultID?: string
   draftCheckMarks?: string[]
-  node: Task
+  node: TaskSummary | Task
   onUpdate?: () => void
   index?: number
   checklistLength?: number

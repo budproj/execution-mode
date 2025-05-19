@@ -1,5 +1,6 @@
 import { KeyResultCheckIn } from 'src/components/KeyResult/types'
 import { Except } from 'src/helpers/except'
+import { TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
 
 enum KeyResultFormat {
   NUMBER = 'NUMBER',
@@ -39,6 +40,22 @@ export type KeyResult = {
   createdAt: Date
   updatedAt: Date
   lastCheckin?: KeyResultCheckIn
+}
+
+export type TaskSummary = {
+  id: string
+  teamId: string
+  owner: string
+  ownerFullName: string
+  status: TASK_STATUS
+  title: string
+  description: string
+  priority: number
+  supportTeam: string[]
+}
+
+export type KeyResultWithTasks = KeyResult & {
+  krTasks: TaskSummary[]
 }
 
 export type TaskInsert = Except<KeyResult, 'id' | 'createdAt' | 'updatedAt'>

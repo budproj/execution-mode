@@ -18,8 +18,8 @@ export const NonEmptyChecklist = ({ progress }: NonEmptyChecklistProperties) => 
   const isLoaded = Boolean(progress)
 
   return (
-    <Stack direction="row" alignItems="center" flexGrow={1} spacing={2}>
-      <Stack direction="row" spacing={2} alignItems="center" flexGrow={1}>
+    <Stack direction="row" justifyContent="flex-end">
+      <Stack direction="row" spacing={2} alignItems="center">
         <Flex bg="brand.100" borderRadius="full" w={4} h={4}>
           <CheckIcon
             desc={intl.formatMessage(messages.checkIconDescription)}

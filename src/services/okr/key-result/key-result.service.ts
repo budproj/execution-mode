@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios'
 
-import { KeyResult } from './@types'
+import { KeyResult, KeyResultWithTasks } from './@types'
 
 export class KeyResultService {
   constructor(private readonly client: AxiosInstance) {}
@@ -12,6 +12,11 @@ export class KeyResultService {
 
   async getKeyResultByOwner(owner: string, objectiveId: string) {
     const { data } = await this.client.get<KeyResult[]>(`kr/owner/${owner}/${objectiveId}/`)
+    return data
+  }
+
+  async getKeyResultByOwnerWithTasks(owner: string) {
+    const { data } = await this.client.get<KeyResultWithTasks[]>(`kr/task/${owner}/`)
     return data
   }
 

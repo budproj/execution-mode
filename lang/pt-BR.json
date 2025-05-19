@@ -847,6 +847,10 @@
     "defaultMessage": "Progresso Trimestral",
     "description": "User's quarterly progress title"
   },
+  "BQha3x": {
+    "defaultMessage": "Tarefas",
+    "description": "This is the title of our checklist section inside the key-result sidebar"
+  },
   "BTaFbJ": {
     "defaultMessage": "São ousados, desafiadores e devem gerar um certo nível de desconforto por não serem fáceis de alcançar.",
     "description": "This card guides the creation of Objectives."
@@ -1722,10 +1726,6 @@
   "Pkdkh4": {
     "defaultMessage": "Minhas Key Result",
     "description": "The name of the Key Results page, located at \"/keyResults\""
-  },
-  "PktsGq": {
-    "defaultMessage": "Check-list",
-    "description": "This is the title of our checklist section inside the key-result sidebar"
   },
   "PmauyJ": {
     "defaultMessage": "Excluir este Objetivo",

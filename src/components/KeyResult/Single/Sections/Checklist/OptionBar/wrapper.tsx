@@ -19,7 +19,7 @@ export const OptionBarWrapper = ({
   canCreate,
   onCreate,
 }: OptionBarWrapperProperties) => (
-  <Stack direction="row" flexGrow={1} textAlign="right">
+  <Stack direction="row" flexGrow={1} textAlign="right" justifyContent="flex-end">
     {progress && progress.total === 0 ? (
       <EmptyChecklist keyResultID={keyResultID} canCreate={canCreate} onCreate={onCreate} />
     ) : (

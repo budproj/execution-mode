@@ -19,6 +19,7 @@ interface KanbanTaskCardMetadataProperties {
   readonly ownerId?: User['id']
   readonly priority?: TaskPriority
   readonly status?: TASK_STATUS
+  readonly keyResultTitle?: string
   isActive?: boolean
   updatedAt?: Date
 }
@@ -30,6 +31,7 @@ export const KanbanTaskCardMetadata = ({
   status,
   isActive,
   updatedAt,
+  keyResultTitle,
 }: KanbanTaskCardMetadataProperties) => {
   const intl = useIntl()
   const user = useRecoilValue(selectUser(ownerId))
@@ -38,15 +40,38 @@ export const KanbanTaskCardMetadata = ({
   const isCompleted = status === TASK_STATUS.done
 
   return (
-    <HStack justifyContent="space-between" w="100%">
-      <DueDateWrapper isCompleted={isCompleted} isOutdated={isOutdated} isActive={isActive}>
-        {intl.formatDate(isActive ? dueDate : updatedAt)}
-      </DueDateWrapper>
-      <Flex alignItems="center" gap={3}>
-        {priority && isActive && <TaskPriorityIcon priority={priority} />}
-        <Avatar name={user?.fullName} src={user?.picture} w={7} h={7} loading="lazy" />
-      </Flex>
-    </HStack>
+    <>
+      <HStack justifyContent="space-between" w="100%">
+        <DueDateWrapper isCompleted={isCompleted} isOutdated={isOutdated} isActive={isActive}>
+          {intl.formatDate(isActive ? dueDate : updatedAt)}
+        </DueDateWrapper>
+        <Flex alignItems="center" gap={3}>
+          {priority && isActive && <TaskPriorityIcon priority={priority} />}
+          <Avatar name={user?.fullName} src={user?.picture} w={7} h={7} loading="lazy" />
+        </Flex>
+      </HStack>
+      {keyResultTitle && (
+        <HStack w="100%">
+          <p
+            style={{
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+              width: 'auto',
+              border: '1px solid #D2DEED',
+              textAlign: 'start',
+              fontWeight: 450,
+              fontFamily: 'var(--chakra-fonts-body)',
+              color: '#525F7F',
+              borderRadius: '5px',
+              padding: '4px 8px',
+            }}
+          >
+            {keyResultTitle}
+          </p>
+        </HStack>
+      )}
+    </>
   )
 }
 

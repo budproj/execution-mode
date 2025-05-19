@@ -1,6 +1,6 @@
 import Link, { LinkProps } from 'next/link'
 import { useRouter } from 'next/router'
-import React, { ReactElement, forwardRef, RefObject, MouseEvent } from 'react'
+import React, { ReactElement, MouseEvent } from 'react'
 
 export interface IntlLinkProperties extends LinkProps {
   href: string
@@ -13,21 +13,6 @@ export interface ReferenceWrapperProperties {
   onClick?: (event: MouseEvent<HTMLAnchorElement> | MouseEvent) => void
 }
 
-const ReferenceWrapper = forwardRef(
-  (
-    { onClick, href, children }: ReferenceWrapperProperties,
-    reference:
-      | string
-      | ((instance: HTMLAnchorElement | null) => void)
-      | RefObject<HTMLAnchorElement>
-      | null,
-  ) => (
-    <a ref={reference} href={href} onClick={onClick}>
-      {children}
-    </a>
-  ),
-)
-
 const IntlLink = ({ href, children, ...rest }: IntlLinkProperties) => {
   const router = useRouter()
 
@@ -36,7 +21,7 @@ const IntlLink = ({ href, children, ...rest }: IntlLinkProperties) => {
 
   return (
     <Link passHref href={absoluteHref} as={href} {...rest}>
-      <ReferenceWrapper>{children}</ReferenceWrapper>
+      {children}
     </Link>
   )
 }
