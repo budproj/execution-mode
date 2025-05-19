@@ -1,19 +1,15 @@
-import { Avatar, Flex, SkeletonCircle } from '@chakra-ui/react'
+import { Avatar, Flex, SkeletonCircle, Spinner } from '@chakra-ui/react'
 import { Form, Formik, FormikHelpers } from 'formik'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useRecoilValue } from 'recoil'
 
 import KeyResultSectionAddCommentInput from 'src/components/KeyResult/Single/Sections/AddComment/input'
-import { useGetCommentsByEntity } from 'src/components/Routine/hooks/getCommentsByEntity'
-import { useCreateComment } from 'src/components/Routine/hooks/setComment'
-import { Task } from 'src/services/task-management/task-management.service'
-import { EventType } from 'src/state/hooks/useEvent/event-type'
-import { useEvent } from 'src/state/hooks/useEvent/hook'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 import { userAtomFamily } from 'src/state/recoil/user'
 import meAtom from 'src/state/recoil/user/me'
 
-import { useGetTaskUpdates } from '../../hooks/use-get-task-updates'
-import { TASK_DOMAIN } from '../../types'
+import { useAddTaskComment } from '../../hooks/new-task/use-add-task-comments'
+import { useGetTaskComments } from '../../hooks/new-task/use-get-task-comments'
 
 import { TimelineWrapper } from './timeline-wrapper'
 
@@ -33,41 +29,34 @@ export const TaskDrawerTimeline = ({ task }: TaskDrawerTimelineProperties) => {
   const myID = useRecoilValue(meAtom)
   const user = useRecoilValue(userAtomFamily(myID))
 
-  const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_COMMENT_CLICK)
-  const entity = `${TASK_DOMAIN.task}:${task?._id ?? ''}`
-
-  const taskUpdatesRequest = useGetTaskUpdates(task?._id)
-
   const handleSubmit = async (
     values: TaskCommentsInputInitialValues,
     actions: FormikHelpers<TaskCommentsInputInitialValues>,
   ) => {
     if (task) {
-      dispatch({})
-      handleCreateComment({ entity, content: values.text })
+      const data = {
+        text: values.text,
+        taskId: task.id ?? '',
+        userId: myID,
+      }
+      addTaskCommentMutate({ data })
     }
 
     actions.setSubmitting(false)
     actions.resetForm()
   }
 
-  const { getCommentsByEntity, comments } = useGetCommentsByEntity()
-  const { handleCreateComment } = useCreateComment()
-
-  useEffect(() => {
-    if (task) {
-      getCommentsByEntity({ entity })
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [task, entity])
+  const { data: comments, isLoading } = useGetTaskComments(task?.id ?? '')
+  const { mutateAsync: addTaskCommentMutate } = useAddTaskComment()
 
   return (
     <Flex direction="column" paddingTop="2rem" position="relative" height="100%">
       <Flex direction="column" marginX="28px" marginBottom="2rem" gridGap={4}>
-        <TimelineWrapper
-          comments={comments ?? []}
-          updates={taskUpdatesRequest.data ? taskUpdatesRequest.data : []}
-        />
+        {comments ? (
+          <TimelineWrapper comments={comments} updates={[]} />
+        ) : (
+          <Spinner size="sm" color="black.100" />
+        )}
       </Flex>
       <Flex
         direction="column"
@@ -85,10 +74,10 @@ export const TaskDrawerTimeline = ({ task }: TaskDrawerTimelineProperties) => {
           {({ handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
               <Flex gridGap={3} alignItems="flex-start">
-                <SkeletonCircle isLoaded w={10} h={10}>
+                <SkeletonCircle isLoaded={!isLoading} w={10} h={10}>
                   <Avatar name={user?.fullName} src={user?.picture} w={10} h={10} />
                 </SkeletonCircle>
-                <KeyResultSectionAddCommentInput isLoading={false} />
+                <KeyResultSectionAddCommentInput isLoading={isLoading} />
               </Flex>
             </Form>
           )}

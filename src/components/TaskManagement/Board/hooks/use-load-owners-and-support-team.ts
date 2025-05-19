@@ -1,5 +1,6 @@
 import { User } from 'src/components/User/types'
-import { Task, TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 
 interface UseLoadOwnersAndSupportTeamProperties {
   pending: Task[]

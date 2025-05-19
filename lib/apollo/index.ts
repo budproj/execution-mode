@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/default-param-last */
 import { ApolloClient, ApolloLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { offsetLimitPagination } from '@apollo/client/utilities'
@@ -85,11 +84,7 @@ export const useApollo = (
   const authzClient = useAuth0()
 
   const state: NormalizedCacheObject = pageProperties[APOLLO_STATE]
-  const client = useMemo(
-    () => initializeApollo(authzClient, state),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [authzClient, state],
-  )
+  const client = useMemo(() => initializeApollo(authzClient, state), [authzClient, state])
 
   return client
 }

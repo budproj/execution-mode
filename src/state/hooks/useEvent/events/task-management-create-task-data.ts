@@ -1,5 +1,5 @@
 import { Except } from 'src/helpers/except'
-import { Task } from 'src/services/new-task-management/new-task-management.service'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 
 import { BaseEventData } from './base-event'
 

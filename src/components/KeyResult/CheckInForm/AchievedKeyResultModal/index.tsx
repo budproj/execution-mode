@@ -1,6 +1,3 @@
-/* eslint-disable unicorn/no-useless-undefined */
-/* eslint-disable unicorn/no-null */
-/* eslint-disable @typescript-eslint/dot-notation */
 import {
   Flex,
   Heading,
@@ -78,6 +75,7 @@ export const AchivedKeyResultModal = ({ isOpen, handleClose }: AchivedKeyResultM
 
   const stopAnimation = useCallback(() => {
     clearInterval(intervalId)
+    // eslint-disable-next-line unicorn/no-useless-undefined
     setIntervalId(undefined)
     ;(referenceAnimationInstance.current as any | null)?.reset()
   }, [intervalId])

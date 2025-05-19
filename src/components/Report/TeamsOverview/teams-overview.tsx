@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { getScrollableItem } from 'src/components/Base/ScrollableItem'
-import { Cycle } from 'src/components/Cycle/types'
 import { CardHeader } from 'src/components/Report/CardHeaders'
 import { Team } from 'src/components/Team/types'
 import { GraphQLConnection } from 'src/components/types'
@@ -21,13 +20,11 @@ export interface GetCompanyTeamsQuery {
   teams: GraphQLConnection<Team>
 }
 
-export interface TeamsOverviewProperties extends StyleProps {
-  quarter: Cycle['period'] | undefined
-}
+export interface TeamsOverviewProperties extends StyleProps {}
 
 const ScrollableItem = getScrollableItem()
 
-const TeamsOverview = ({ quarter, ...rest }: TeamsOverviewProperties) => {
+const TeamsOverview = ({ ...rest }: TeamsOverviewProperties) => {
   const [index, setIndex] = useState(5)
   const intl = useIntl()
   const flags = useFlags(['view_gamification_teams_ranking'])

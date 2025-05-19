@@ -48,7 +48,7 @@ interface UpdateObjectiveMutationResult {
 export const workflowControlStorageKey = 'Bud@SPOTLIGHT_WORKFLOW'
 
 export const EditMode = React.forwardRef<typeof Formik<EditModeValues>, EditModeProperties>(
-  ({ objective, isDraft, forwardedRef }) => {
+  ({ objective, isDraft, forwardedRef }, _reference) => {
     const intl = useIntl()
     const toast = useToast()
     const { get, register } = useLocalStorage()

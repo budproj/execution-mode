@@ -7,7 +7,6 @@ import { Team } from 'src/components/Team/types'
 
 import RetrospectiveTabContent from '../../../Routine/RetrospectiveTab/retrospective-tab-content'
 
-// TODO: in future this must be replacet to ProjectTabContent
 import TasksTabContent from './content/board-tab-content'
 import OkrsTabContent from './content/okrs-tab-content'
 

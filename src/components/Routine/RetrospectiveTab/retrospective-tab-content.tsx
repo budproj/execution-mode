@@ -211,6 +211,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
 
   return (
     <Stack spacing={10}>
+      {/* Cabeçario Retrospectiva */}
       <Flex alignItems="flex-end" justifyContent="space-between">
         <Stack direction="column" spacing={1}>
           <Text fontSize={28} fontWeight="medium" color="new-gray.800">
@@ -246,6 +247,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
             })}
           </Text>
         </Stack>
+        {/* Botão de lembrete */}
         {canEditTeam && !isLoading ? (
           <Stack>
             <ButtonGroup isAttached size="sm" variant="outline" onClick={onOpen}>
@@ -281,6 +283,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
           </Stack>
         ) : undefined}
       </Flex>
+      {/* Conteudo da Retro */}
       <Grid w="100%" templateColumns="370px 0px 1fr" minHeight="750px" bg="white" borderRadius={15}>
         <AnswersComponent
           after={after}
@@ -300,6 +303,7 @@ const RetrospectiveTabContent = memo(({ teamId, isLoading }: RetrospectiveTabCon
           isLoaded={!isLoading}
         />
       </Grid>
+      {/* Modal que controla as notificações da retro */}
       <NotificationSettingsModal
         isOpen={isOpen}
         teamOptedOut={teamOptedOut}

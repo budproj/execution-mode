@@ -5,10 +5,8 @@ import { useSetRecoilState } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
 import { KanbanTaskCard } from 'src/components/Base/KanbanTaskCard/wrapper'
-import {
-  Task as TaskModel,
-  TaskUpdate,
-} from 'src/services/new-task-management/new-task-management.service'
+import { TaskUpdate } from 'src/services/new-task-management/@types/task-update.type'
+import { Task as TaskModel } from 'src/services/new-task-management/@types/task.type'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import { taskDrawerAtom } from 'src/state/recoil/task-management/drawers/task-drawer/task-drawer'

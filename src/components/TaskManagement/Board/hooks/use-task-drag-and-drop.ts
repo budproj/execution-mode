@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useDrag, useDrop, XYCoord } from 'react-dnd'
 
-import { Task as TaskModel } from 'src/services/new-task-management/new-task-management.service'
+import { Task as TaskModel } from 'src/services/new-task-management/@types/task.type'
 
 import { ItemType } from '../utils/enums'
 import { DragItem } from '../utils/models'

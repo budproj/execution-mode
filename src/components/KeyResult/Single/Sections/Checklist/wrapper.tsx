@@ -90,7 +90,7 @@ export const KeyResultChecklistWrapper = ({
       numberOfDone,
       progress: (numberOfDone / tasks.length) * 100,
     })
-  }, [isFetching, tasks.length])
+  }, [isFetching, tasks, tasks.length])
 
   const handleClose = () => {
     resetOpenDrawer()

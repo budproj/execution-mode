@@ -106,7 +106,6 @@ export const ObjectiveKeyResults = ({
         isLoading={!isLoaded}
         templateColumns={templateColumns}
         columns={columns}
-        isDraft={isDraft}
         emptyStateMessage={
           isDraft
             ? messages.keyResultListDraftEmptyStateMessage

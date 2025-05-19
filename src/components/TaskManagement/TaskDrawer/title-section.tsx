@@ -2,7 +2,8 @@ import { Text, EditablePreview, Input, Editable, EditableInput } from '@chakra-u
 import React from 'react'
 
 import { EditableControls } from 'src/components/Base/EditableControls/wrapper'
-import { Task, TaskUpdate } from 'src/services/new-task-management/new-task-management.service'
+import { TaskUpdate } from 'src/services/new-task-management/@types/task-update.type'
+import { Task } from 'src/services/new-task-management/@types/task.type'
 
 interface TaskTitleSectionProperties {
   task: Task

@@ -33,7 +33,6 @@ const StyledGrid = styled(Grid)<StyledGridProperties>`
 
 export const KanbanTaskCardRoot = ({
   children,
-  mode = kanbanTaskCardViewMode.VIEW_MODE,
   taskPriority,
   isActive,
   ...rest
