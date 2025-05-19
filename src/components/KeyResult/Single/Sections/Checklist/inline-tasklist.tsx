@@ -205,7 +205,7 @@ export const InlineTaskList = ({
             textTransform="uppercase"
             fontWeight="bold"
             fontSize="12px"
-            background={ColumnColorScheme[(newNode.status as TASK_STATUS) ?? TASK_STATUS.pending]}
+            background={ColumnColorScheme[newNode.status ?? TASK_STATUS.pending]}
             onChange={(event) => {
               handleSetNewTaskStatus(event.target.value)
             }}
