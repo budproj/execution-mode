@@ -10,7 +10,7 @@ import {
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { useOwnerKRData } from 'src/components/KeyResult/hooks/use-get-owner-key-results'
+import { useOwnerKRWithTasks } from 'src/components/KeyResult/hooks/use-get-key-results-with-tasks'
 import { User } from 'src/components/User/types'
 
 import messages from '../../../Profile/messages'
@@ -26,7 +26,7 @@ interface UserTasksProperties {
 
 const MyTasks = ({ userID, username }: UserTasksProperties) => {
   const intl = useIntl()
-  const { data: KeyResultData, isLoading, refetch } = useOwnerKRData(userID, '0')
+  const { data: KeyResultData, isLoading, refetch } = useOwnerKRWithTasks(userID)
   const [taskUpdateKey, setTaskUpdateKey] = useState(0)
 
   const handleUpdate = () => {

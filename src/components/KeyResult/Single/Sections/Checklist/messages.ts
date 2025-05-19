@@ -11,8 +11,8 @@ type KeyResultsSectionChecklistMessage =
 
 export default defineMessages<KeyResultsSectionChecklistMessage>({
   heading: {
-    defaultMessage: 'Check-list',
-    id: 'PktsGq',
+    defaultMessage: 'Tarefas',
+    id: 'BQha3x',
     description: 'This is the title of our checklist section inside the key-result sidebar',
   },
 

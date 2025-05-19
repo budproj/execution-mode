@@ -22,8 +22,8 @@ import { EditableInputField } from 'src/components/Base'
 import { useUpdateTask } from 'src/components/TaskManagement/hooks/new-task/use-update-task'
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
-import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
-import { Task } from 'src/services/new-task-management/@types/task.type'
+import { Task, TASK_STATUS } from 'src/services/new-task-management/new-task-management.service'
+import { TaskSummary } from 'src/services/okr/key-result/@types'
 
 import { DeleteTaskButton } from './ActionButtons/delete-task'
 import messages from './messages'
@@ -75,7 +75,7 @@ export interface NewTask {
 
 interface InlineTaskListProperties {
   draftCheckMarks?: string[]
-  node: Task
+  node: TaskSummary | Task
   onUpdate?: () => void
   index?: number
   checklistLength?: number

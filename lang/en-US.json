@@ -1051,6 +1051,10 @@
     "defaultMessage": "Overall progress on goals in the current quarterly cycle",
     "description": "Subtitle to show on the team ranking page when gamification is disabled"
   },
+  "BQha3x": {
+    "defaultMessage": "Tasks",
+    "description": "This is the title of our checklist section inside the key-result sidebar"
+  },
   "BTaFbJ": {
     "defaultMessage": "They are daring, challenging and should generate some level of discomfort for not being easy to achieve.",
     "description": "This card guides the creation of Objectives."

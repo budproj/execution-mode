@@ -3,10 +3,23 @@ import { ParsedUrlQuery } from 'querystring'
 import { Collapse, Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
+import { IntlLink } from 'src/components/Base'
+import { KeyResult } from 'src/components/KeyResult/types'
 import { useTeamTasksData } from 'src/components/TaskManagement/hooks/new-task/use-get-team-tasks'
-import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
-import { Task } from 'src/services/new-task-management/@types/task.type'
+import { TASK_STATUS, Task } from 'src/services/new-task-management/new-task-management.service'
+import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
+import {
+  keyResultCheckInCommentEnabled,
+  keyResultCheckInProgressDraft,
+  keyResultLatestCheckIn,
+} from 'src/state/recoil/key-result/check-in'
+import isCheckInModalOpenAtom from 'src/state/recoil/key-result/check-in/is-check-in-modal-open'
+import { draftCheckMarksAtom } from 'src/state/recoil/key-result/checklist'
+import { keyResultReadDrawerOpenedKeyResultID } from 'src/state/recoil/key-result/drawers/read/opened-key-result-id'
+import { isKeyResultListOpenAtom } from 'src/state/recoil/key-result/key-result-list'
+import { createdByCheckInNotificationAtom } from 'src/state/recoil/notifications'
 
 import { KeyResultSectionHeading } from '../Heading/wrapper'
 
@@ -17,9 +30,26 @@ import { ToggleCollapse } from './toggle-collapse'
 
 interface KeyResultChecklistWrapperProperties {
   keyResultID?: string
+  teamID?: string
 }
 
-export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWrapperProperties) => {
+export const KeyResultChecklistWrapper = ({
+  keyResultID,
+  teamID,
+}: KeyResultChecklistWrapperProperties) => {
+  const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
+
+  // Unnecessary code to resolve the ugly global state usage
+  const resetOpenDrawer = useResetRecoilState(keyResultReadDrawerOpenedKeyResultID)
+  const resetTimeline = useResetRecoilState(timelineSelector(keyResultID))
+  const resetCommentEnabled = useResetRecoilState(keyResultCheckInCommentEnabled(keyResultID))
+  const resetCheckmarkDrafts = useResetRecoilState(draftCheckMarksAtom(keyResultID))
+  const latestKeyResultCheckIn = useRecoilValue(keyResultLatestCheckIn(keyResultID))
+  const setDraftValue = useSetRecoilState(keyResultCheckInProgressDraft(keyResultID))
+  const setIsCheckInModalOpen = useSetRecoilState(isCheckInModalOpenAtom)
+  const setCreatedByNotification = useSetRecoilState(createdByCheckInNotificationAtom)
+  const setHiddingModal = useSetRecoilState(isKeyResultListOpenAtom)
+
   const [progress, setProgress] = useState({ total: 0, numberOfDone: 0, progress: 0 })
   const [isChecklistOpen, setIsChecklistOpen] = useState(false)
 
@@ -62,12 +92,47 @@ export const KeyResultChecklistWrapper = ({ keyResultID }: KeyResultChecklistWra
     })
   }, [isFetching, tasks, tasks.length])
 
+  const handleClose = () => {
+    resetOpenDrawer()
+    resetTimeline()
+    resetCommentEnabled()
+    resetCheckmarkDrafts()
+    setDraftValue(latestKeyResultCheckIn?.value)
+    setIsCheckInModalOpen(false)
+    setIsChecklistOpen(false)
+    setCreatedByNotification(false)
+    setHiddingModal(false)
+  }
+
   return (
     <Stack spacing={0}>
       <Stack direction="row" alignItems="flex-start" position="relative">
-        <KeyResultSectionHeading mt="0.3rem">
-          {intl.formatMessage(messages.heading)}
-        </KeyResultSectionHeading>
+        <IntlLink
+          href={
+            teamID && keyResultID
+              ? `/explore/${teamID}?activeTab=tasks&key_result_id__id=${keyResultID}`
+              : '#'
+          }
+          onClick={handleClose}
+        >
+          <span style={{ display: 'flex', alignItems: 'baseline' }}>
+            <KeyResultSectionHeading mt="0.3rem" textDecoration="underline" mr="4px">
+              {intl.formatMessage(messages.heading)}
+            </KeyResultSectionHeading>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="6"
+              height="7"
+              viewBox="0 0 6 7"
+              fill="none"
+            >
+              <path
+                d="M6 0.881836V6.39914H4.9918V2.61911L0.724748 6.88184L0.665866 6.86992L0 6.19621L4.26518 1.89145H0.490787V0.881836H6Z"
+                fill="#525F7F"
+              />
+            </svg>
+          </span>
+        </IntlLink>
         <OptionBarWrapper
           keyResultID={keyResultID}
           progress={progress}

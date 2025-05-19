@@ -2,7 +2,8 @@ import { Stack, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useRef } from 'react'
 
-import { Task } from 'src/services/new-task-management/@types/task.type'
+import { Task } from 'src/services/new-task-management/new-task-management.service'
+import { TaskSummary } from 'src/services/okr/key-result/@types'
 
 import { CreateTaskButton } from './ActionButtons/create-task-in-kr'
 import { InlineTaskList } from './inline-tasklist'
@@ -15,7 +16,7 @@ const StyledStack = styled(Stack)`
 
 interface KeyResultChecklistProperties {
   keyResultID?: string
-  nodes: Task[]
+  nodes: TaskSummary[] | Task[]
   onUpdate?: () => void
   canCreate: boolean
   isEditable?: boolean

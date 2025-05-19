@@ -1,6 +1,6 @@
 import { Box, HStack, ScaleFade, VStack } from '@chakra-ui/react'
 import _ from 'lodash'
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 
 import { TaskPriority } from 'src/components/Base/KanbanTaskCard/kanban-task-card-root'
@@ -65,7 +65,7 @@ const TaskCardComponent = ({
       >
         <KanbanTaskCard.Root
           display="flex"
-          h={114}
+          h={120}
           taskPriority={task.priority as TaskPriority}
           isActive={isActive}
         >
@@ -81,6 +81,7 @@ const TaskCardComponent = ({
               ownerId={task.owner}
               status={task.status}
               isActive={isActive}
+              keyResultTitle={task.keyResult?.title}
             />
           </VStack>
         </KanbanTaskCard.Root>
