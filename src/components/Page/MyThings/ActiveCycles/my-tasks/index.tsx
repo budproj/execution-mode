@@ -26,11 +26,10 @@ interface UserTasksProperties {
 
 const MyTasks = ({ userID, username }: UserTasksProperties) => {
   const intl = useIntl()
-  const { data: KeyResultData, isLoading, refetch } = useOwnerKRWithTasks(userID)
+  const { data: KeyResultData, isLoading } = useOwnerKRWithTasks(userID)
   const [taskUpdateKey, setTaskUpdateKey] = useState(0)
 
   const handleUpdate = () => {
-    refetch()
     setTaskUpdateKey((oldKey) => oldKey + 1)
   }
 

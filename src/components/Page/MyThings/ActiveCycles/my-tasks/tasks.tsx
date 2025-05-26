@@ -41,6 +41,7 @@ const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasks
           keyResultID={keyResult.id}
           nodes={keyResult.krTasks ?? []}
           canCreate={canCreate}
+          teamId={keyResult.team}
           wrapperProps={{ pt: 0 }}
           createTaskLabel={createTaskLabel}
           onUpdate={onUpdate}
@@ -53,6 +54,7 @@ const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasks
 const Tasks = ({ items, onUpdate }: TasksProperties) => {
   const intl = useIntl()
   const createTaskLabel = intl.formatMessage(messages.createTaskLabel)
+
   return (
     <Stack align="stretch">
       {items.map((item) => (
