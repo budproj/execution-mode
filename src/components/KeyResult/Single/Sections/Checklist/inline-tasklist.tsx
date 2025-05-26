@@ -15,8 +15,8 @@ import {
   AvatarGroup,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useRef, useState } from 'react'
-import { useIntl } from 'react-intl'
+import React, { useEffect, useRef, useState } from 'react'
+import { MessageDescriptor, useIntl } from 'react-intl'
 
 import { EditableInputField } from 'src/components/Base'
 import { useUpdateTask } from 'src/components/TaskManagement/hooks/new-task/use-update-task'
@@ -104,47 +104,49 @@ export const InlineTaskList = ({
   draftCheckMarks,
 }: InlineTaskListProperties) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
-  const isLoaded = Boolean(node)
+  const intl = useIntl()
+
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const isWaiting = false
   const canUpdate = true
   const canDelete = true
-  const intl = useIntl()
-  const header = headerColumnMessage.get(node?.status ?? TASK_STATUS.pending)
+
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
-  const [headerText, setHeaderText] = useState(header)
-  const [newNode, setNode] = useState(node)
+
+  const [headerText, setHeaderText] = useState<MessageDescriptor | undefined>()
+  const [newNode, setNode] = useState<TaskSummary | Task | undefined>()
   const [isEditing, setIsEditing] = useState(false)
 
   const { mutateAsync: updateTask } = useUpdateTask()
 
+  useEffect(() => {
+    setNode(node)
+    setHeaderText(headerColumnMessage.get(node?.status ?? TASK_STATUS.pending))
+  }, [node])
+
   async function handleSetNewTaskStatus(status: string) {
-    const updatedNode = {
-      ...newNode,
-      status: TASK_STATUS[status as keyof typeof TASK_STATUS],
+    if (newNode) {
+      const updatedNode = {
+        ...newNode,
+        status: TASK_STATUS[status as keyof typeof TASK_STATUS],
+      }
+
+      await updateTask({
+        taskId: updatedNode.id,
+        data: { id: updatedNode.id, status: updatedNode.status },
+      })
+      if (onUpdate) onUpdate()
     }
-
-    setNode(updatedNode)
-    setHeaderText(headerColumnMessage.get(updatedNode.status))
-
-    await updateTask({
-      taskId: updatedNode.id,
-      data: { id: updatedNode.id, status: updatedNode.status },
-    })
-    if (onUpdate) onUpdate()
   }
 
   const handleNewTitleStatus = async (title: string) => {
-    setNode((previousNode) => {
-      const updatedNode = { ...previousNode, title }
-
+    if (newNode) {
       updateTask({
-        taskId: updatedNode.id,
-        data: { id: updatedNode.id, title: updatedNode.title },
+        taskId: newNode.id,
+        data: { id: newNode.id, title },
       })
-      return updatedNode
-    })
-    if (onUpdate) onUpdate()
+      if (onUpdate) onUpdate()
+    }
   }
 
   const handleCancelTitle = (oldDescription?: string) => {
@@ -173,23 +175,18 @@ export const InlineTaskList = ({
   }
 
   const handleSetNewOwner = async (ownerId: string) => {
-    const updatedNode = {
-      ...newNode,
-      owner: ownerId,
+    if (newNode) {
+      await updateTask({
+        taskId: newNode.id,
+        data: { id: newNode.id, owner: ownerId },
+      })
+      if (onUpdate) onUpdate()
+      onClose()
     }
-
-    setNode(updatedNode)
-
-    await updateTask({
-      taskId: updatedNode.id,
-      data: { id: updatedNode.id, owner: ownerId },
-    })
-    if (onUpdate) onUpdate()
-    onClose()
   }
 
   return (
-    <Skeleton isLoaded={isLoaded} w="full" fadeDuration={0}>
+    <Skeleton isLoaded={Boolean(node)} w="full" fadeDuration={0}>
       <StyledKeyResultCheckMark alignItems="start">
         <Box py={1} display={isEditing ? 'none' : undefined}>
           <Select
@@ -205,7 +202,7 @@ export const InlineTaskList = ({
             textTransform="uppercase"
             fontWeight="bold"
             fontSize="12px"
-            background={ColumnColorScheme[newNode.status ?? TASK_STATUS.pending]}
+            background={ColumnColorScheme[newNode?.status ?? TASK_STATUS.pending]}
             onChange={(event) => {
               handleSetNewTaskStatus(event.target.value)
             }}
@@ -235,7 +232,7 @@ export const InlineTaskList = ({
             autoFocus={isDraft}
             isWaiting={isWaiting}
             value={node?.title}
-            isLoaded={isLoaded}
+            isLoaded={Boolean(node)}
             startWithEditView={isDraft}
             isDisabled={!isEditable || !canUpdate}
             onSubmit={handleNewTitleStatus}
@@ -269,7 +266,7 @@ export const InlineTaskList = ({
                 <Box>
                   <AvatarGroup>
                     <NamedAvatar
-                      userID={newNode.owner}
+                      userID={newNode?.owner}
                       avatarSize={8}
                       displaySubtitle={false}
                       horizontalGap={2}

@@ -14,9 +14,10 @@ export function useUpdateTask() {
       const response = await newTaskManagement.updateTask(taskId, data)
       return response
     },
-    onSuccess: (_data, variables) => {
+    onSuccess: (_data, _variables) => {
+      queryClient.invalidateQueries({ queryKey: [`KeyResult:getOwnerWithTasks:${_data.owner}`] })
       queryClient.invalidateQueries({ queryKey: [`taskManager:getAllTasks`] })
-      queryClient.invalidateQueries({ queryKey: [`taskManager:getTask:${variables.taskId}`] })
+      queryClient.invalidateQueries({ queryKey: [`taskManager:getTask:${_variables.taskId}`] })
     },
   })
   return updateTaskMutate

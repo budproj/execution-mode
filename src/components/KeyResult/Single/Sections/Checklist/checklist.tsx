@@ -22,6 +22,7 @@ interface KeyResultChecklistProperties {
   isEditable?: boolean
   wrapperProps?: StyleProps
   createTaskLabel?: string
+  teamId?: string
 }
 
 export const KeyResultChecklist = ({
@@ -32,6 +33,7 @@ export const KeyResultChecklist = ({
   isEditable = true,
   wrapperProps,
   createTaskLabel,
+  teamId,
 }: KeyResultChecklistProperties) => {
   const createButtonReference = useRef<HTMLButtonElement>(null)
 
@@ -51,6 +53,7 @@ export const KeyResultChecklist = ({
           keyResultID={keyResultID}
           createButtonReference={createButtonReference}
           label={createTaskLabel}
+          teamId={teamId}
           onCreate={onUpdate}
         />
       )}

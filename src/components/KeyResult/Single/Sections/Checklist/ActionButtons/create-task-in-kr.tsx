@@ -1,13 +1,11 @@
 import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import { useRouter } from 'next/router'
 import React, { Ref, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { PlusOutline } from 'src/components/Icon'
-import { useKRDataById } from 'src/components/KeyResult/hooks/use-get-key-results'
 import { NewTask } from 'src/components/Task/types'
 import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
 import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
@@ -22,6 +20,7 @@ interface CreateTaskButtonProperties extends StyleProps {
   readonly keyResultID?: string
   readonly label?: string
   readonly isAbsolute?: boolean
+  readonly teamId?: string
   readonly onCreate?: () => void
   readonly createButtonReference?: Ref<HTMLButtonElement>
 }
@@ -42,20 +41,18 @@ export const CreateTaskButton = ({
   label,
   keyResultID,
   createButtonReference,
+  teamId,
   isAbsolute,
   onCreate,
   ...rest
 }: CreateTaskButtonProperties) => {
   const { mutateAsync: addNewTask } = useAddTask()
-  const { data: keyResultData } = useKRDataById(keyResultID ?? '')
 
   const [isAdding, setIsAdding] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const intl = useIntl()
   const userID = useRecoilValue(meAtom)
   const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
-  const router = useRouter()
-  const [teamId, setTeamId] = useState(router.query.id ? router.query.id : '')
 
   const handleNewCheckMark = async (title: NewTask['title']) => {
     if (isSubmitting) return
@@ -70,7 +67,7 @@ export const CreateTaskButton = ({
       team: teamId as string,
       status: TASK_STATUS.pending,
       title,
-      description: 'descrição',
+      description: '',
       initialDate: new Date(),
       dueDate: new Date(),
       priority: Math.floor(Math.random() * 4) + 1,
@@ -90,10 +87,6 @@ export const CreateTaskButton = ({
   }
 
   const toggleAdd = () => {
-    if (!router.query.id && keyResultData?.team) {
-      setTeamId(keyResultData.team)
-    }
-
     setIsAdding((isAdding) => !isAdding)
   }
 
