@@ -148,6 +148,7 @@ export const KeyResultChecklistWrapper = ({
             nodes={tasks}
             keyResultID={keyResultID}
             canCreate={!canCreate}
+            teamId={teamID}
             onUpdate={refetch}
           />
         </Collapse>

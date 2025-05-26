@@ -17,16 +17,18 @@ import {
 import styled from '@emotion/styled'
 import React, { useEffect, useRef, useState } from 'react'
 import { MessageDescriptor, useIntl } from 'react-intl'
+import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
-import { useUpdateTask } from 'src/components/TaskManagement/hooks/new-task/use-update-task'
 import { NamedAvatar } from 'src/components/User'
 import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
 import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
 import { Task } from 'src/services/new-task-management/@types/task.type'
 import { TaskSummary } from 'src/services/okr/key-result/@types'
+import meAtom from 'src/state/recoil/user/me'
 
 import { DeleteTaskButton } from './ActionButtons/delete-task'
+import { useUpdateTask } from './hooks/use-update-task'
 import messages from './messages'
 
 export function swap<T>(array: T[], index: number, index_: number): T[] {
@@ -106,6 +108,8 @@ export const InlineTaskList = ({
   const { onOpen, onClose, isOpen } = useDisclosure()
   const intl = useIntl()
 
+  const userId = useRecoilValue(meAtom)
+
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const isWaiting = false
   const canUpdate = true
@@ -117,7 +121,7 @@ export const InlineTaskList = ({
   const [newNode, setNode] = useState<TaskSummary | Task | undefined>()
   const [isEditing, setIsEditing] = useState(false)
 
-  const { mutateAsync: updateTask } = useUpdateTask()
+  const { mutateAsync: updateTask } = useUpdateTask({ userId })
 
   useEffect(() => {
     setNode(node)
@@ -135,7 +139,6 @@ export const InlineTaskList = ({
         taskId: updatedNode.id,
         data: { id: updatedNode.id, status: updatedNode.status },
       })
-      if (onUpdate) onUpdate()
     }
   }
 
@@ -145,7 +148,6 @@ export const InlineTaskList = ({
         taskId: newNode.id,
         data: { id: newNode.id, title },
       })
-      if (onUpdate) onUpdate()
     }
   }
 
@@ -180,7 +182,6 @@ export const InlineTaskList = ({
         taskId: newNode.id,
         data: { id: newNode.id, owner: ownerId },
       })
-      if (onUpdate) onUpdate()
       onClose()
     }
   }
