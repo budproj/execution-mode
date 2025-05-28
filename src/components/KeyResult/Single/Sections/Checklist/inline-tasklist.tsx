@@ -7,11 +7,6 @@ import {
   Text,
   Select,
   Avatar,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-  useDisclosure,
   AvatarGroup,
 } from '@chakra-ui/react'
 import styled from '@emotion/styled'
@@ -21,7 +16,6 @@ import { useRecoilValue } from 'recoil'
 
 import { EditableInputField } from 'src/components/Base'
 import { NamedAvatar } from 'src/components/User'
-import { AllReachableUsers } from 'src/components/User/AllReachableUsers/wrapper'
 import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
 import { Task } from 'src/services/new-task-management/@types/task.type'
 import { TaskSummary } from 'src/services/okr/key-result/@types'
@@ -105,7 +99,6 @@ export const InlineTaskList = ({
   isEditable = true,
   draftCheckMarks,
 }: InlineTaskListProperties) => {
-  const { onOpen, onClose, isOpen } = useDisclosure()
   const intl = useIntl()
 
   const userId = useRecoilValue(meAtom)
@@ -174,16 +167,6 @@ export const InlineTaskList = ({
 
   const handleStopEdit = () => {
     if (isEditable) setIsEditing(false)
-  }
-
-  const handleSetNewOwner = async (ownerId: string) => {
-    if (newNode) {
-      await updateTask({
-        taskId: newNode.id,
-        data: { id: newNode.id, owner: ownerId },
-      })
-      onClose()
-    }
   }
 
   return (
@@ -255,45 +238,28 @@ export const InlineTaskList = ({
             onDelete={onUpdate}
           />
           <Box cursor="pointer">
-            <Popover
-              isLazy
-              placement="bottom-end"
-              size="md"
-              isOpen={canUpdate && isOpen}
-              onOpen={onOpen}
-              onClose={onClose}
-            >
-              <PopoverTrigger>
-                <Box>
-                  <AvatarGroup>
-                    <NamedAvatar
-                      userID={newNode?.owner}
-                      avatarSize={8}
-                      displaySubtitle={false}
-                      horizontalGap={2}
-                      nameColor="gray.500"
-                      showName={false}
-                      canEdit={canUpdate}
-                      canHover={canUpdate}
-                      isEditting={isOpen}
-                    />
-                    {node.supportTeam && node.supportTeam.length > 0 ? (
-                      <Avatar
-                        name={'+ ' + node.supportTeam.length.toString()}
-                        size="sm"
-                        style={{ position: 'relative', marginLeft: '-12px' }}
-                      />
-                    ) : // eslint-disable-next-line unicorn/no-null
-                    null}
-                  </AvatarGroup>
-                </Box>
-              </PopoverTrigger>
-              <PopoverContent width="md" h="full" overflow="hidden">
-                <PopoverBody>
-                  <AllReachableUsers avatarSubtitleType="role" onSelect={handleSetNewOwner} />
-                </PopoverBody>
-              </PopoverContent>
-            </Popover>
+            <Box>
+              <AvatarGroup>
+                <NamedAvatar
+                  userID={newNode?.owner}
+                  avatarSize={8}
+                  displaySubtitle={false}
+                  horizontalGap={2}
+                  nameColor="gray.500"
+                  showName={false}
+                  canEdit={false}
+                  canHover={false}
+                />
+                {node.supportTeam && node.supportTeam.length > 0 ? (
+                  <Avatar
+                    name={'+ ' + node.supportTeam.length.toString()}
+                    size="sm"
+                    style={{ position: 'relative', marginLeft: '-12px' }}
+                  />
+                ) : // eslint-disable-next-line unicorn/no-null
+                null}
+              </AvatarGroup>
+            </Box>
           </Box>
         </Flex>
       </StyledKeyResultCheckMark>
