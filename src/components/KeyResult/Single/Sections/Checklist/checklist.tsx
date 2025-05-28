@@ -23,6 +23,7 @@ interface KeyResultChecklistProperties {
   wrapperProps?: StyleProps
   createTaskLabel?: string
   teamId?: string
+  canUpdateOwner?: boolean
 }
 
 export const KeyResultChecklist = ({
@@ -34,6 +35,7 @@ export const KeyResultChecklist = ({
   wrapperProps,
   createTaskLabel,
   teamId,
+  canUpdateOwner = true,
 }: KeyResultChecklistProperties) => {
   const createButtonReference = useRef<HTMLButtonElement>(null)
 
@@ -42,7 +44,13 @@ export const KeyResultChecklist = ({
       {nodes.length > 0 && (
         <StyledStack alignItems="flex-start" pt={4} {...wrapperProps}>
           {nodes.map((node) => (
-            <InlineTaskList key={node.id} node={node} isEditable={isEditable} onUpdate={onUpdate} />
+            <InlineTaskList
+              key={node.id}
+              node={node}
+              isEditable={isEditable}
+              canUpdateOwner={canUpdateOwner}
+              onUpdate={onUpdate}
+            />
           ))}
         </StyledStack>
       )}

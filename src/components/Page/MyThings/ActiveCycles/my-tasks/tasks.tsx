@@ -44,6 +44,7 @@ const KeyResultTasks = ({ keyResult, createTaskLabel, onUpdate }: KeyResultTasks
           teamId={keyResult.team}
           wrapperProps={{ pt: 0 }}
           createTaskLabel={createTaskLabel}
+          canUpdateOwner={false}
           onUpdate={onUpdate}
         />
       </Box>
