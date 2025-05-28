@@ -84,6 +84,7 @@ interface InlineTaskListProperties {
   checklistLength?: number
   onCreate?: () => void
   isEditable?: boolean
+  canUpdateOwner?: boolean
 }
 
 const StyledKeyResultCheckMark = styled(HStack)`
@@ -103,6 +104,7 @@ export const InlineTaskList = ({
   checklistLength,
   onCreate,
   isEditable = true,
+  canUpdateOwner = true,
   draftCheckMarks,
 }: InlineTaskListProperties) => {
   const { onOpen, onClose, isOpen } = useDisclosure()
@@ -114,7 +116,6 @@ export const InlineTaskList = ({
   const isDraft = typeof node?.id === 'undefined' ? false : draftCheckMarks?.includes(node.id)
   const isWaiting = false
   const canUpdateTitle = true
-  const canUpdateOwner = false
   const canDelete = true
 
   const removeCheckmarkButton = useRef<HTMLButtonElement>(null)
