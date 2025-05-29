@@ -16,6 +16,7 @@ export function useUpdateTask({ userId }: { userId: string }) {
     },
     onSuccess: (_data, _variables) => {
       queryClient.invalidateQueries({ queryKey: [`KeyResult:getOwnerWithTasks:${userId}`] })
+      queryClient.invalidateQueries({ queryKey: [`taskManager:getAllTasks`] })
     },
   })
   return updateTaskMutate
