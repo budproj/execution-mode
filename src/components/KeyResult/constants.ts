@@ -44,4 +44,7 @@ export enum KEY_RESULT_PATCHS_KEYS {
   description = 'description',
   createdTask = 'createdTask',
   status = 'status',
+  initial_date = 'initial_date',
+  due_date = 'due_date',
+  key_result = 'key_result',
 }

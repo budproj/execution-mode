@@ -30,7 +30,9 @@ export const TaskUpdateComponent = ({ taskUpdate }: TaskUpdateComponentPropertie
           <Divider />
           <VStack>
             <KeyResultSectionTimelineLine
-              patche={{ key: taskUpdate.id, value: taskUpdate.newState } as KeyResultPatchInterface}
+              patche={
+                { key: taskUpdate.field, value: taskUpdate.newState } as KeyResultPatchInterface
+              }
               userName={taskUpdate?.author.fullName}
             />
             <Text lineHeight={1} fontSize={12} color="new-gray.700" noOfLines={1} w="max-content">

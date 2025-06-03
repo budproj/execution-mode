@@ -53,7 +53,7 @@ export const TaskDrawerTimeline = ({ task }: TaskDrawerTimelineProperties) => {
     <Flex direction="column" paddingTop="2rem" position="relative" height="100%">
       <Flex direction="column" marginX="28px" marginBottom="2rem" gridGap={4}>
         {comments ? (
-          <TimelineWrapper comments={comments} updates={[]} />
+          <TimelineWrapper comments={comments} updates={task?.history ?? []} />
         ) : (
           <Spinner size="sm" color="black.100" />
         )}

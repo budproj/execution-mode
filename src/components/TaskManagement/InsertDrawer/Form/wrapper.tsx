@@ -36,10 +36,8 @@ export type FormValues = {
   owner: string
 }
 
-function getUpdatePatches<T extends Record<string, unknown>>(
-  oldTaskState: T,
-  newTaskState: T,
-): Partial<T> {
+// eslint-disable-next-line @typescript-eslint/ban-types
+function getUpdatePatches<T extends object>(oldTaskState: T, newTaskState: T): Partial<T> {
   const differingAttributes: Partial<T> = {}
 
   const keys: Array<keyof T> = Object.keys(oldTaskState) as Array<keyof T>
@@ -80,7 +78,7 @@ const InsertOrUpdateTaskForm = ({
     keyResult: Yup.string(),
     priority: Yup.string().required(),
     description: Yup.string(),
-    initialDate: Yup.date(),
+    initialDate: Yup.date().required(),
     dueDate: Yup.date()
       .min(Yup.ref('initialDate'), intl.formatMessage(messages.dueDateBeforeInitialDateText))
       .max(new Date(2100, 11, 31), intl.formatMessage(messages.dueDateAfter2030Text))
@@ -172,17 +170,24 @@ const InsertOrUpdateTaskForm = ({
       return
     }
 
-    const variables = {
+    const variables: TaskUpdate = {
       ...allValues,
-      teamId,
       status: column,
       owner: allValues.owner,
       dueDate: addHours(new Date(allValues.dueDate), 3).toISOString(),
       initialDate: addHours(new Date(allValues.initialDate), 3).toISOString(),
-      supportTeam: [],
     }
 
-    const newTask = getUpdatePatches(taskDrawer as TaskUpdate, variables as unknown as TaskUpdate)
+    const oldState: TaskUpdate = {
+      ...taskDrawer,
+      keyResult: taskDrawer.keyResult?.id,
+      dueDate: addHours(new Date(taskDrawer.dueDate), 3).toISOString(),
+      initialDate: addHours(new Date(taskDrawer.initialDate), 3).toISOString(),
+    }
+
+    console.log(variables.initialDate, oldState.initialDate)
+
+    const newTask = getUpdatePatches(oldState, variables)
 
     updateTask(taskDrawer.id, { id: taskDrawer.id, ...newTask })
 

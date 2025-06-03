@@ -74,7 +74,7 @@ export const TaskDrawer = ({ teamId }: TaskDrawerProperties) => {
   const handleClickEditButton = () => {
     resetTaskDrawerId()
     setTaskBoardID({
-      teamId: taskDrawer?.id,
+      teamId: taskDrawer?.team,
       column: taskDrawer.status,
     })
     isEditingTaskDrawerId(taskDrawer?.id)

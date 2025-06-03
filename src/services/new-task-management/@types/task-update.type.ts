@@ -1,29 +1,25 @@
-import { User } from 'src/components/User/types'
-import { KeyResult } from 'src/services/okr/key-result/@types'
+import { Except } from 'src/helpers/except'
 
-import { TASK_STATUS } from './task-status.enum'
+import { Task } from './task.type'
 
-export type TaskUpdate = {
-  id: string
-  team: string
-  history: string[]
-  status: TASK_STATUS
-  title: string
-  description: string
-  dueDate: Date
-  priority: number
-  owner: string
-  initialDate: Date
-  attachments: string[]
-  supportTeam?: string[]
-  tags: string[]
-  createdAt: Date
-  updatedAt: Date
-  deletedAt?: Date
-  active?: boolean
-  orderindex: number
-  keyResult?: KeyResult
-  cycle?: string
-  usersRelated: User[]
-  ownerFullName: string
+export interface TaskUpdate
+  extends Omit<
+    Except<
+      Task,
+      | 'createdAt'
+      | 'updatedAt'
+      | 'history'
+      | 'attachments'
+      | 'tags'
+      | 'orderindex'
+      | 'usersRelated'
+      | 'ownerFullName'
+      | 'team'
+    >,
+    'dueDate' | 'initialDate' | 'keyResult' | 'id'
+  > {
+  id?: string
+  keyResult?: string
+  dueDate: string
+  initialDate: string
 }

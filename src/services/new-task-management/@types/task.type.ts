@@ -2,12 +2,13 @@ import { User } from 'src/components/User/types'
 import { Except } from 'src/helpers/except'
 import { KeyResult } from 'src/services/okr/key-result/@types'
 
+import { TaskHistory } from './task-history.type'
 import { TASK_STATUS } from './task-status.enum'
 
 export type Task = {
   id: string
   team: string
-  history: string[]
+  history: TaskHistory[]
   status: TASK_STATUS
   title: string
   description: string
