@@ -3,9 +3,6 @@ import { useContext } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 
-const MODULE = 'taskManager'
-const ACTION = 'getAllTasks'
-
 export const useDeleteTask = () => {
   const { servicesPromise } = useContext(ServicesContext)
   const queryClient = useQueryClient()
@@ -15,8 +12,8 @@ export const useDeleteTask = () => {
       const { newTaskManagement } = await servicesPromise
       return newTaskManagement.removeTask(taskId)
     },
-    onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${variables.taskId}`] })
+    onSuccess: (_data, _variables) => {
+      queryClient.invalidateQueries({ queryKey: [`taskManager:getAllTasks`] })
     },
   })
 }

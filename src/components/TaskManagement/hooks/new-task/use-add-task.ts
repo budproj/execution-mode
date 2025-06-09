@@ -4,9 +4,6 @@ import { useContext } from 'react'
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { TaskInsert } from 'src/services/new-task-management/new-task-management.service'
 
-const MODULE = 'taskManager'
-const ACTION = 'getAllTasks'
-
 export function useAddTask() {
   const { servicesPromise } = useContext(ServicesContext)
   const queryClient = useQueryClient()
@@ -18,7 +15,7 @@ export function useAddTask() {
       return response
     },
     onSuccess: (_data, _variables) => {
-      queryClient.invalidateQueries({ queryKey: [`${MODULE}:${ACTION}:${_variables.data.team}`] })
+      queryClient.invalidateQueries({ queryKey: [`taskManager:getAllTasks`] })
     },
   })
 
