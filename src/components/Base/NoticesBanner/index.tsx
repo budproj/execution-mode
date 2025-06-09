@@ -10,7 +10,7 @@ import selectUser from 'src/state/recoil/user/selector'
 import messages from './messages'
 
 export const storageKey = 'bud-platform-speed-survey'
-export const storageValue = '15-01-25'
+export const storageValue = '09-06-25'
 
 const NoticesBanner = () => {
   const { get, register } = useLocalStorage()
@@ -31,10 +31,8 @@ const NoticesBanner = () => {
   }, [get])
 
   useEffect(() => {
-    if (user?.companies) {
-      setFormUrl(
-        `https://asm6am1qamy.typeform.com/to/ws7KOlJ6?utm_term=${user.companies.edges[0].node?.name}&utm_source=getbud&utm_medium=app&utm_campaign=nps25q1`,
-      )
+    if (user) {
+      setFormUrl(`https://asm6am1qamy.typeform.com/to/ws7KOlJ6`)
     }
   }, [user])
 
