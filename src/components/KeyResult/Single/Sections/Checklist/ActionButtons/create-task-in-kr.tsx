@@ -50,6 +50,7 @@ export const CreateTaskButton = ({
 
   const [isAdding, setIsAdding] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [teamID, setTeamID] = useState<string | undefined>()
   const intl = useIntl()
   const userID = useRecoilValue(meAtom)
   const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
@@ -62,35 +63,38 @@ export const CreateTaskButton = ({
       return
     }
 
-    console.log('time quando clica no botão', teamId)
+    console.log('time quando clica no botão', teamID)
 
     setIsSubmitting(true)
-    await addNewTask({
-      team: teamId as string,
-      status: TASK_STATUS.pending,
-      title,
-      description: '',
-      initialDate: new Date(),
-      dueDate: new Date(),
-      priority: Math.floor(Math.random() * 4) + 1,
-      owner: userID,
-      attachments: [],
-      supportTeam: [],
-      tags: [],
-      orderindex: 0,
-      key_result: keyResultID,
-      cycle: '',
-    })
+    if (teamID) {
+      await addNewTask({
+        team: teamID,
+        status: TASK_STATUS.pending,
+        title,
+        description: '',
+        initialDate: new Date(),
+        dueDate: new Date(),
+        priority: Math.floor(Math.random() * 4) + 1,
+        owner: userID,
+        attachments: [],
+        supportTeam: [],
+        tags: [],
+        orderindex: 0,
+        key_result: keyResultID,
+        cycle: '',
+      })
 
-    dispatch({ keyResultID })
-    setIsSubmitting(false)
-    toggleAdd()
-    if (onCreate) onCreate()
+      dispatch({ keyResultID })
+      setIsSubmitting(false)
+      toggleAdd()
+      if (onCreate) onCreate()
+    }
   }
 
   useEffect(() => {
     console.log('valor do time no botão de criar time', teamId)
-  }, [])
+    setTeamID(teamId)
+  }, [teamId])
 
   const toggleAdd = () => {
     setIsAdding((isAdding) => !isAdding)
