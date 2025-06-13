@@ -1,6 +1,6 @@
 import { Stack, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import { Task } from 'src/services/new-task-management/@types/task.type'
 import { TaskSummary } from 'src/services/okr/key-result/@types'
@@ -39,6 +39,10 @@ export const KeyResultChecklist = ({
 }: KeyResultChecklistProperties) => {
   const createButtonReference = useRef<HTMLButtonElement>(null)
 
+  useEffect(() => {
+    console.log('valor do time no checklist', teamId)
+  }, [teamId])
+
   return (
     <>
       {nodes.length > 0 && (
@@ -55,7 +59,7 @@ export const KeyResultChecklist = ({
         </StyledStack>
       )}
 
-      {canCreate && (
+      {canCreate && teamId && (
         <CreateTaskButton
           mt={5}
           keyResultID={keyResultID}

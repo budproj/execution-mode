@@ -113,11 +113,13 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
         teamID: teamId,
       },
       onCompleted: async (data) => {
+        console.log('Mutação concluída:', data)
         setObjectiveIDToEditMode(data.createObjective.id)
         setIsReloadNecessary(true)
         dispatchEventCreateDraftObjective({})
       },
-      onError: () => {
+      onError: (error) => {
+        console.error('Erro na mutação (capturado pelo onError):', error)
         toast({
           title: intl.formatMessage(messages.draftObjectiveErrorToastMessage),
           status: 'error',
@@ -127,17 +129,32 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
   )
 
   const onCreateOKR = async (cycleID?: string) => {
-    const valueStoraged = get(workflowControlStorageKey)
+    console.log('onCreateOKR iniciado.')
+    console.log('Variáveis para createDraftObjective:', { cycleID })
+    console.log('ownerID:', ownerID)
+    console.log('teamId:', teamId)
+    console.log('title:', intl.formatMessage(messages.draftObjectiveTitle))
 
-    await createDraftObjective({
-      variables: {
-        cycleID,
-      },
-    })
+    const valueStoraged = get(workflowControlStorageKey)
+    console.log('valueStoraged antes da mutação:', valueStoraged)
+
+    try {
+      await createDraftObjective({
+        variables: {
+          cycleID,
+        },
+      })
+      console.log('createDraftObjective chamada com sucesso.')
+    } catch (error: unknown) {
+      console.error('Erro ao chamar createDraftObjective (fora do onError):', error)
+    }
 
     if (valueStoraged) {
       register(workflowControlStorageKey, false)
+      console.log('workflowControlStorageKey registrado como false.')
     }
+
+    console.log('onCreateOKR finalizado.')
   }
 
   const handleViewOldCycles = () => {

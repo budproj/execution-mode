@@ -9,6 +9,7 @@ import { PlusOutline } from 'src/components/Icon'
 import { NewTask } from 'src/components/Task/types'
 import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
 import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
@@ -54,6 +55,9 @@ export const CreateTaskButton = ({
   const userID = useRecoilValue(meAtom)
   const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
 
+  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
+  const hasData = Boolean(keyResult?.teamId)
+
   const handleNewCheckMark = async (title: NewTask['title']) => {
     if (isSubmitting) return
 
@@ -63,22 +67,24 @@ export const CreateTaskButton = ({
     }
 
     setIsSubmitting(true)
-    await addNewTask({
-      team: teamId as string,
-      status: TASK_STATUS.pending,
-      title,
-      description: '',
-      initialDate: new Date(),
-      dueDate: new Date(),
-      priority: Math.floor(Math.random() * 4) + 1,
-      owner: userID,
-      attachments: [],
-      supportTeam: [],
-      tags: [],
-      orderindex: 0,
-      key_result: keyResultID,
-      cycle: '',
-    })
+    if (teamId || keyResult) {
+      await addNewTask({
+        team: teamId ?? keyResult?.teamId ?? '',
+        status: TASK_STATUS.pending,
+        title,
+        description: '',
+        initialDate: new Date(),
+        dueDate: new Date(),
+        priority: Math.floor(Math.random() * 4) + 1,
+        owner: userID,
+        attachments: [],
+        supportTeam: [],
+        tags: [],
+        orderindex: 0,
+        key_result: keyResultID,
+        cycle: '',
+      })
+    }
 
     dispatch({ keyResultID })
     setIsSubmitting(false)
@@ -109,28 +115,30 @@ export const CreateTaskButton = ({
           />
         </StyledEditableWrapper>
       )}
-      <Button
-        ref={createButtonReference}
-        variant="text"
-        p={0}
-        h="auto"
-        colorScheme="brand"
-        isDisabled={isSubmitting}
-        leftIcon={
-          <>
-            {isSubmitting && <Spinner color="brand.400" size="sm" mr={3} mt="0.1rem" />}
-            <PlusOutline
-              desc={intl.formatMessage(messages.newCheckMarkButtonIconDescription)}
-              stroke="currentColor"
-              fill="currentColor"
-              fontSize="xl"
-            />
-          </>
-        }
-        onClick={toggleAdd}
-      >
-        {label ?? intl.formatMessage(messages.newCheckMarkButtonLabel)}
-      </Button>
+      {(teamId ?? hasData) && (
+        <Button
+          ref={createButtonReference}
+          variant="text"
+          p={0}
+          h="auto"
+          colorScheme="brand"
+          isDisabled={isSubmitting}
+          leftIcon={
+            <>
+              {isSubmitting && <Spinner color="brand.400" size="sm" mr={3} mt="0.1rem" />}
+              <PlusOutline
+                desc={intl.formatMessage(messages.newCheckMarkButtonIconDescription)}
+                stroke="currentColor"
+                fill="currentColor"
+                fontSize="xl"
+              />
+            </>
+          }
+          onClick={toggleAdd}
+        >
+          {label ?? intl.formatMessage(messages.newCheckMarkButtonLabel)}
+        </Button>
+      )}
     </Box>
   )
 }
