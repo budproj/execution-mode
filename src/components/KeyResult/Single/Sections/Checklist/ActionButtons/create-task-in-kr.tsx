@@ -90,7 +90,7 @@ export const CreateTaskButton = ({
 
   useEffect(() => {
     console.log('valor do time no botão de criar time', teamId)
-  }, [teamId])
+  }, [])
 
   const toggleAdd = () => {
     setIsAdding((isAdding) => !isAdding)
@@ -103,42 +103,40 @@ export const CreateTaskButton = ({
   }
 
   return (
-    teamId && (
-      <Box width="100%" pb={isAdding && isAbsolute ? 14 : 0} {...rest}>
-        {isAdding && (
-          <StyledEditableWrapper isAbsolute={isAbsolute}>
-            <EditableInputField
-              startWithEditView
-              value=""
-              previewProperties={previewProperties}
-              onSubmit={handleNewCheckMark}
-              onCancel={toggleAdd}
+    <Box width="100%" pb={isAdding && isAbsolute ? 14 : 0} {...rest}>
+      {isAdding && (
+        <StyledEditableWrapper isAbsolute={isAbsolute}>
+          <EditableInputField
+            startWithEditView
+            value=""
+            previewProperties={previewProperties}
+            onSubmit={handleNewCheckMark}
+            onCancel={toggleAdd}
+          />
+        </StyledEditableWrapper>
+      )}
+      <Button
+        ref={createButtonReference}
+        variant="text"
+        p={0}
+        h="auto"
+        colorScheme="brand"
+        isDisabled={isSubmitting}
+        leftIcon={
+          <>
+            {isSubmitting && <Spinner color="brand.400" size="sm" mr={3} mt="0.1rem" />}
+            <PlusOutline
+              desc={intl.formatMessage(messages.newCheckMarkButtonIconDescription)}
+              stroke="currentColor"
+              fill="currentColor"
+              fontSize="xl"
             />
-          </StyledEditableWrapper>
-        )}
-        <Button
-          ref={createButtonReference}
-          variant="text"
-          p={0}
-          h="auto"
-          colorScheme="brand"
-          isDisabled={isSubmitting}
-          leftIcon={
-            <>
-              {isSubmitting && <Spinner color="brand.400" size="sm" mr={3} mt="0.1rem" />}
-              <PlusOutline
-                desc={intl.formatMessage(messages.newCheckMarkButtonIconDescription)}
-                stroke="currentColor"
-                fill="currentColor"
-                fontSize="xl"
-              />
-            </>
-          }
-          onClick={toggleAdd}
-        >
-          {label ?? intl.formatMessage(messages.newCheckMarkButtonLabel)}
-        </Button>
-      </Box>
-    )
+          </>
+        }
+        onClick={toggleAdd}
+      >
+        {label ?? intl.formatMessage(messages.newCheckMarkButtonLabel)}
+      </Button>
+    </Box>
   )
 }
