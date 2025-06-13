@@ -83,12 +83,12 @@ export const CreateTaskButton = ({
         key_result: keyResultID,
         cycle: '',
       })
-
-      dispatch({ keyResultID })
-      setIsSubmitting(false)
-      toggleAdd()
-      if (onCreate) onCreate()
     }
+
+    dispatch({ keyResultID })
+    setIsSubmitting(false)
+    toggleAdd()
+    if (onCreate) onCreate()
   }
 
   useEffect(() => {
@@ -119,28 +119,30 @@ export const CreateTaskButton = ({
           />
         </StyledEditableWrapper>
       )}
-      <Button
-        ref={createButtonReference}
-        variant="text"
-        p={0}
-        h="auto"
-        colorScheme="brand"
-        isDisabled={isSubmitting}
-        leftIcon={
-          <>
-            {isSubmitting && <Spinner color="brand.400" size="sm" mr={3} mt="0.1rem" />}
-            <PlusOutline
-              desc={intl.formatMessage(messages.newCheckMarkButtonIconDescription)}
-              stroke="currentColor"
-              fill="currentColor"
-              fontSize="xl"
-            />
-          </>
-        }
-        onClick={toggleAdd}
-      >
-        {label ?? intl.formatMessage(messages.newCheckMarkButtonLabel)}
-      </Button>
+      {teamID && (
+        <Button
+          ref={createButtonReference}
+          variant="text"
+          p={0}
+          h="auto"
+          colorScheme="brand"
+          isDisabled={isSubmitting}
+          leftIcon={
+            <>
+              {isSubmitting && <Spinner color="brand.400" size="sm" mr={3} mt="0.1rem" />}
+              <PlusOutline
+                desc={intl.formatMessage(messages.newCheckMarkButtonIconDescription)}
+                stroke="currentColor"
+                fill="currentColor"
+                fontSize="xl"
+              />
+            </>
+          }
+          onClick={toggleAdd}
+        >
+          {label ?? intl.formatMessage(messages.newCheckMarkButtonLabel)}
+        </Button>
+      )}
     </Box>
   )
 }
