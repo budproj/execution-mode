@@ -1,6 +1,6 @@
 import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { Ref, useEffect, useState } from 'react'
+import React, { Ref, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -9,6 +9,7 @@ import { PlusOutline } from 'src/components/Icon'
 import { NewTask } from 'src/components/Task/types'
 import { useAddTask } from 'src/components/TaskManagement/hooks/use-add-task-new'
 import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import meAtom from 'src/state/recoil/user/me'
 
 import { EventType } from '../../../../../../state/hooks/useEvent/event-type'
@@ -50,10 +51,12 @@ export const CreateTaskButton = ({
 
   const [isAdding, setIsAdding] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [teamID, setTeamID] = useState<string | undefined>()
   const intl = useIntl()
   const userID = useRecoilValue(meAtom)
   const { dispatch } = useEvent(EventType.TASK_MANAGER_CREATE_TASK_CLICK)
+
+  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
+  const hasData = Boolean(keyResult?.teamId)
 
   const handleNewCheckMark = async (title: NewTask['title']) => {
     if (isSubmitting) return
@@ -63,12 +66,10 @@ export const CreateTaskButton = ({
       return
     }
 
-    console.log('time quando clica no botão', teamID)
-
     setIsSubmitting(true)
-    if (teamID) {
+    if (teamId || keyResult) {
       await addNewTask({
-        team: teamID,
+        team: teamId ?? keyResult?.teamId ?? '',
         status: TASK_STATUS.pending,
         title,
         description: '',
@@ -90,11 +91,6 @@ export const CreateTaskButton = ({
     toggleAdd()
     if (onCreate) onCreate()
   }
-
-  useEffect(() => {
-    console.log('valor do time no botão de criar time', teamId)
-    setTeamID(teamId)
-  }, [teamId])
 
   const toggleAdd = () => {
     setIsAdding((isAdding) => !isAdding)
@@ -119,7 +115,7 @@ export const CreateTaskButton = ({
           />
         </StyledEditableWrapper>
       )}
-      {teamID && (
+      {(teamId ?? hasData) && (
         <Button
           ref={createButtonReference}
           variant="text"
