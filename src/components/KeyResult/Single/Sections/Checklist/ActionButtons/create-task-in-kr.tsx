@@ -1,6 +1,6 @@
 import { Button, Box, Spinner, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { Ref, useState } from 'react'
+import React, { Ref, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue } from 'recoil'
 
@@ -62,6 +62,8 @@ export const CreateTaskButton = ({
       return
     }
 
+    console.log('time quando clica no botão', teamId)
+
     setIsSubmitting(true)
     await addNewTask({
       team: teamId as string,
@@ -85,6 +87,10 @@ export const CreateTaskButton = ({
     toggleAdd()
     if (onCreate) onCreate()
   }
+
+  useEffect(() => {
+    console.log('valor do time no botão de criar time', teamId)
+  }, [teamId])
 
   const toggleAdd = () => {
     setIsAdding((isAdding) => !isAdding)
