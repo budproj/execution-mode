@@ -39,10 +39,6 @@ export const KeyResultChecklist = ({
 }: KeyResultChecklistProperties) => {
   const createButtonReference = useRef<HTMLButtonElement>(null)
 
-  useEffect(() => {
-    console.log('valor do time no checklist', teamId)
-  }, [teamId])
-
   return (
     <>
       {nodes.length > 0 && (
