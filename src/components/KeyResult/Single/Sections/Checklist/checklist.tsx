@@ -1,6 +1,6 @@
 import { Stack, StyleProps } from '@chakra-ui/react'
 import styled from '@emotion/styled'
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 
 import { Task } from 'src/services/new-task-management/@types/task.type'
 import { TaskSummary } from 'src/services/okr/key-result/@types'
