@@ -117,7 +117,8 @@ export const MenuHeader = ({ teamId, team }: MenuHeaderProperties) => {
         setIsReloadNecessary(true)
         dispatchEventCreateDraftObjective({})
       },
-      onError: () => {
+      onError: (error) => {
+        console.error('Erro na mutação (capturado pelo onError):', error)
         toast({
           title: intl.formatMessage(messages.draftObjectiveErrorToastMessage),
           status: 'error',

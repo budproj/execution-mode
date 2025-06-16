@@ -120,7 +120,7 @@ const KeyResultDrawerBody = ({
             <Divider borderColor="gray.100" />
           </>
         )}
-        <KeyResultChecklistWrapper keyResultID={keyResultID} teamID={keyResult?.teamId} />
+        <KeyResultChecklistWrapper keyResultID={keyResultID} isLoading={isLoading} />
         <Divider borderColor="gray.100" />
         <KeyResultSectionOwner keyResultID={keyResultID} />
         <Divider borderColor="gray.100" />

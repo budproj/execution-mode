@@ -10,6 +10,7 @@ import { KeyResult } from 'src/components/KeyResult/types'
 import { useTeamTasksData } from 'src/components/TaskManagement/hooks/new-task/use-get-team-tasks'
 import { TASK_STATUS } from 'src/services/new-task-management/@types/task-status.enum'
 import { Task } from 'src/services/new-task-management/@types/task.type'
+import { keyResultAtomFamily } from 'src/state/recoil/key-result'
 import buildPartialSelector from 'src/state/recoil/key-result/build-partial-selector'
 import {
   keyResultCheckInCommentEnabled,
@@ -31,12 +32,12 @@ import { ToggleCollapse } from './toggle-collapse'
 
 interface KeyResultChecklistWrapperProperties {
   keyResultID?: string
-  teamID?: string
+  isLoading?: boolean
 }
 
 export const KeyResultChecklistWrapper = ({
   keyResultID,
-  teamID,
+  isLoading,
 }: KeyResultChecklistWrapperProperties) => {
   const timelineSelector = buildPartialSelector<KeyResult['timeline']>('timeline')
 
@@ -55,6 +56,9 @@ export const KeyResultChecklistWrapper = ({
   const [isChecklistOpen, setIsChecklistOpen] = useState(false)
 
   const intl = useIntl()
+
+  const keyResult = useRecoilValue(keyResultAtomFamily(keyResultID))
+  const hasData = Boolean(keyResult?.teamId)
 
   const toggleChecklistCollapse = () => {
     setIsChecklistOpen((previous) => !previous)
@@ -105,13 +109,13 @@ export const KeyResultChecklistWrapper = ({
     setHiddingModal(false)
   }
 
-  return (
+  return isLoading || hasData ? (
     <Stack spacing={0}>
       <Stack direction="row" alignItems="flex-start" position="relative">
         <IntlLink
           href={
-            teamID && keyResultID
-              ? `/explore/${teamID}?activeTab=tasks&key_result_id__id=${keyResultID}`
+            keyResult?.teamId && keyResultID
+              ? `/explore/${keyResult?.teamId}?activeTab=tasks&key_result_id__id=${keyResultID}`
               : '#'
           }
           onClick={handleClose}
@@ -148,11 +152,12 @@ export const KeyResultChecklistWrapper = ({
             nodes={tasks}
             keyResultID={keyResultID}
             canCreate={!canCreate}
-            teamId={teamID}
+            teamId={keyResult?.teamId}
             onUpdate={refetch}
           />
         </Collapse>
       ) : undefined}
     </Stack>
-  )
+  ) : // eslint-disable-next-line unicorn/no-null
+  null
 }
