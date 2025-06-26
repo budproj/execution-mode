@@ -2,25 +2,19 @@ import { useContext, useEffect, useState } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { Team } from 'src/components/Team/types'
-
-interface RoutineSettings {
-  id: string
-  companyId: string
-  disabledTeams: string[]
-  cron: string
-}
+import { RoutineSettings } from 'src/services/routines/types'
 
 const hasTeamOptedOut = (disabledTeamsIds: string[], teamId: string) => {
   return disabledTeamsIds.includes(teamId)
 }
 
-export const useRoutineNotificationSettings = (teamId: string) => {
+export const useNotificationSettings = (teamId: string) => {
   const { servicesPromise } = useContext(ServicesContext)
   const [companySettings, setCompanySettings] = useState<RoutineSettings>()
 
   const getRoutineNotificationSettings = async () => {
     const { routines } = await servicesPromise
-    const { data } = await routines.get<RoutineSettings>('settings')
+    const data = await routines.getSettings()
 
     if (data) {
       setCompanySettings(data)
@@ -31,7 +25,7 @@ export const useRoutineNotificationSettings = (teamId: string) => {
     disabledTeams: RoutineSettings['disabledTeams'],
   ) => {
     const { routines } = await servicesPromise
-    const { data } = await routines.patch<RoutineSettings>('settings', { disabledTeams })
+    const data = await routines.updateDisabledTeams(disabledTeams)
 
     if (data) {
       setCompanySettings(data)

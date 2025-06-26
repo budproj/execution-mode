@@ -11,9 +11,8 @@ import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
 import useRelativeDate from 'src/state/hooks/useRelativeDate'
 
-import { AnswerSummary } from '../retrospective-tab-content'
-
-import messages from './messages'
+import { AnswerSummary } from '../../types'
+import messages from '../messages'
 
 interface AnswerRowComponentProperties {
   answer: AnswerSummary

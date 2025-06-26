@@ -30,9 +30,7 @@ export const useGetRoutineHighlightsData = (
     try {
       const results: RequestReturnMapped[] = []
       for await (const userId of usersIds) {
-        const { data: routineData } = await routines.get<UserRoutineDataProperties>(
-          `/answers/overview/user/${userId}`,
-        )
+        const routineData = await routines.getAnswerOverviewFromUser(userId)
         results.push({ data: routineData ?? [], userId })
         await delay(350)
       }

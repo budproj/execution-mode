@@ -4,12 +4,12 @@ import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CustomMenuOptions, { Option } from 'src/components/Base/MenuOptions'
-import { useDeleteRoutineAnswer } from 'src/components/Routine/hooks/deleteAnswer/delete-routine-answer'
+import { useDeleteAnswer } from 'src/components/Routine/hooks/new/use-delete-answer'
 import { commentsAtom } from 'src/state/recoil/comments/comments'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 import meAtom from 'src/state/recoil/user/me'
 
-import { AnswerType } from '../../retrospective-tab-content'
+import { AnswerType } from '../../types'
 import messages from '../messages'
 
 import RoutineAnswerCard from './AnswerCards'
@@ -28,7 +28,7 @@ const AnswerContent = ({ answerId, isLoaded }: AnswerContent) => {
 
   const userID = useRecoilValue(meAtom)
 
-  const { deleteRoutineAnswer } = useDeleteRoutineAnswer()
+  const { deleteAnswer } = useDeleteAnswer()
 
   const hasPermission = userID === answerDetailed.user.id
 
@@ -41,7 +41,7 @@ const AnswerContent = ({ answerId, isLoaded }: AnswerContent) => {
   const menuOptions: Option[] = [
     {
       value: intl.formatMessage(messages.firstMenuOption),
-      onSelect: async () => deleteRoutineAnswer(answerId),
+      onSelect: async () => deleteAnswer(answerId),
     },
   ]
 

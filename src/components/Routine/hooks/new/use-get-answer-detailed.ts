@@ -4,8 +4,7 @@ import { useSetRecoilState } from 'recoil'
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 
-import { AnswerDetails } from '../../RetrospectiveTab/Answers/types'
-import { AnswerType } from '../../RetrospectiveTab/retrospective-tab-content'
+import { AnswerType } from '../../RetrospectiveTab/types'
 
 interface useAnswerDetailedProperties {
   isUserDetailedLoaded: boolean
@@ -21,12 +20,7 @@ export const useAnswerDetailed = (): useAnswerDetailedProperties => {
     const useLocaleFormated = locale === 'en-US' ? 'en' : locale.toLocaleLowerCase()
     setIsUserDetailedLoaded(false)
     const { routines } = await servicesPromise
-    const { data } = await routines
-      .get<AnswerDetails>(`answer/${answerId}?locale=${useLocaleFormated}`)
-      .catch((error) => {
-        console.error(error)
-        return { data: undefined }
-      })
+    const data = await routines.getAnswerDetailed(answerId, useLocaleFormated)
 
     if (data) {
       setAnswerDetailed(data)

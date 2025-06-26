@@ -13,11 +13,12 @@ import { CycleService } from './okr/cycle/cycle.service'
 import { getKeyResultInstance } from './okr/key-result/key-result-instance'
 import { KeyResultService } from './okr/key-result/key-result.service'
 import { getRoutinesInstance } from './routines'
+import { RoutinesService } from './routines/routines.service'
 import { getTaskManagementInstance } from './task-management'
 import { TaskManagementService } from './task-management/task-management.service'
 
 export interface Services {
-  routines: AxiosInstance
+  routines: RoutinesService
   comments: AxiosInstance
   llm: LlmService
   taskManagement: TaskManagementService
@@ -40,7 +41,7 @@ export const getServices = async (
   const authToken = await getAuthToken()
 
   return {
-    routines: configureInstance(getRoutinesInstance(config), authToken),
+    routines: new RoutinesService(configureInstance(getRoutinesInstance(config), authToken)),
     comments: configureInstance(getCommentsInstance(config), authToken),
     llm: new LlmService(configureInstance(getLLMInstance(config), authToken)),
     taskManagement: new TaskManagementService(

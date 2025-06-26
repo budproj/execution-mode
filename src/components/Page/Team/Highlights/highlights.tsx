@@ -49,9 +49,7 @@ export const Highlights = ({ teamId, isLoading }: HighlightsProperties) => {
   useEffect(() => {
     const getRoutinesHighlights = async (id: Team['id']) => {
       const { routines } = await servicesPromise
-      const { data: flags } = await routines.get<HighlightCard[] | undefined>(
-        `/answers/flags/${id}`,
-      )
+      const flags = await routines.getFlags(id)
       setRoutineFlags(flags)
     }
 

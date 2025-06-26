@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 
 import { User } from 'src/components/User/types'
 
-import { AnswerType } from '../retrospective-tab-content'
+import { AnswerType } from '../types'
 
 import CommentCard from './CommentCard'
 import RoutineCommentsEmptyState from './empty-state'

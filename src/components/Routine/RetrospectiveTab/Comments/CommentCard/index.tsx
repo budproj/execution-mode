@@ -16,7 +16,7 @@ import { commentEntityToReply } from 'src/state/recoil/comments/reply-comment'
 import meAtom from 'src/state/recoil/user/me'
 
 import { COMMENT_DOMAIN } from '../../Answers/utils/constants'
-import { AnswerType } from '../../retrospective-tab-content'
+import { AnswerType } from '../../types'
 import { Comment } from '../types'
 
 import messages from './messages'

@@ -60,12 +60,7 @@ const RoutinesOverview = ({
 
   const getAnswersOverview = useCallback(async () => {
     const { routines } = await servicesPromise
-    const { data: answersOverview } = await routines.get<OverviewData>(
-      `/answers/overview/${teamId}`,
-      {
-        params: { includeSubteams: false },
-      },
-    )
+    const answersOverview = await routines.getAnswerOverview(teamId)
 
     if (answersOverview) {
       setAnswersOverview(answersOverview)

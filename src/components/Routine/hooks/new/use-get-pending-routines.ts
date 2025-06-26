@@ -10,7 +10,7 @@ export const usePendingRoutines = () => {
 
   const getPendingRoutines = async () => {
     const { routines } = await servicesPromise
-    const { data: pendingRoutines } = await routines.get('/pending')
+    const pendingRoutines = await routines.getPendingRoutines()
     if (pendingRoutines) setPendingRoutines(pendingRoutines)
   }
 

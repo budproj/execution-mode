@@ -1,6 +1,6 @@
 import { Divider, Flex, Stack } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -9,8 +9,8 @@ import { Team } from 'src/components/Team/types'
 import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 import { hasCallToActionOnAnswerDetails } from 'src/state/recoil/routine/has-call-to-action'
 
-import useAnswerDetailed from '../hooks/getAnswerDetailed'
 import { useGetCommentsByEntity } from '../hooks/getCommentsByEntity'
+import { useAnswerDetailed } from '../hooks/new/use-get-answer-detailed'
 
 import AnswerContent from './Answers/AnswerContent'
 import { UserAnswer } from './Answers/AnswerContent/AnswerCards/UserAnswer'
@@ -56,7 +56,7 @@ const RetrospectiveTabContentView = ({
     }
   }
 
-  const needCallToAction = useMemo(() => {
+  const needCallToAction = () => {
     return answerDetailed.answers.some((answer) => {
       if (answer.values) {
         if (
@@ -77,7 +77,7 @@ const RetrospectiveTabContentView = ({
 
       return false
     })
-  }, [answerDetailed.answers])
+  }
 
   useEffect(() => {
     if (answerId && isLoaded) {

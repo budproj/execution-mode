@@ -23,15 +23,9 @@ export const getTeamMetrics = (teamId: Team['id'] | undefined) => {
     const { routines } = await servicesPromise
 
     if (teamId) {
-      const { data: answersOverview } = await routines.get<OverviewData>(
-        `/answers/overview/${teamId}`,
-        {
-          params: { includeSubteams: false, after, before },
-        },
-      )
+      const answersOverview = await routines.getAnswerOverview(teamId, before, after)
       if (answersOverview) setAnswersOverview(answersOverview)
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teamId, servicesPromise])
 
