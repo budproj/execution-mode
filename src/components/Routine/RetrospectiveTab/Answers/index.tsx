@@ -118,7 +118,7 @@ const AnswersComponent = ({
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={handleSearch} />
       </Flex>
       <ScrollableItem id="scrollable-list-users" maxH="700px" p="0 12px">
-        {filteredAnswers().map((answer) => (
+        {filteredAnswers.map((answer) => (
           <AnswerRowComponent key={answer.id} answer={answer} />
         ))}
         {isAnswerSummaryLoading && (

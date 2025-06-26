@@ -22,6 +22,7 @@ import selectUser from 'src/state/recoil/user/selector'
 
 import useGetAnswers from '../../hooks/new/use-get-answers'
 import { useAnswerSummaryPagination } from '../../hooks/useAnswerSummaryPagination'
+import { AnswerSummary } from '../types'
 
 const SEARCH_CHARACTERS_LIMIT = 3
 
@@ -46,6 +47,7 @@ export function useLogic({
 
   // Local States
   const [search, setSearch] = useState('')
+  const [filteredAnswers, setFilteredAnswers] = useState<AnswerSummary[]>([])
 
   // Global States
   const userID = useRecoilValue(meAtom)
@@ -122,7 +124,8 @@ export function useLogic({
   const userTeamIds = userTeams.map((team) => team.id)
   const userCompanie = userCompanies[0]?.id
   const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
-  const filteredAnswers = () => {
+
+  function usersAnswers() {
     const uniqueIds = new Set()
     return answersSummary.filter((answer) => {
       if (
@@ -150,6 +153,11 @@ export function useLogic({
     updateTeams(user?.teams?.edges)
     updateUserCompanies(user?.companies?.edges)
   }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
+
+  useEffect(() => {
+    setFilteredAnswers(usersAnswers())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [teamId])
 
   return {
     date,
