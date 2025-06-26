@@ -159,7 +159,7 @@ export function useLogic({
     )
     setFilteredAnswers(usersAnswers())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [teamId])
+  }, [teamId, answersSummary])
 
   return {
     date,
