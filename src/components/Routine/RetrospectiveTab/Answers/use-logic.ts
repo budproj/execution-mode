@@ -47,6 +47,7 @@ export function useLogic({
 
   // Local States
   const [search, setSearch] = useState('')
+  const [showAnswerNowButton, setShowAnswerNowButton] = useState<boolean>(false)
   const [filteredAnswers, setFilteredAnswers] = useState<AnswerSummary[]>([])
 
   // Global States
@@ -121,10 +122,6 @@ export function useLogic({
   }
 
   // Utils
-  const userTeamIds = userTeams.map((team) => team.id)
-  const userCompanie = userCompanies[0]?.id
-  const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
-
   function usersAnswers() {
     const uniqueIds = new Set()
     return answersSummary.filter((answer) => {
@@ -140,13 +137,6 @@ export function useLogic({
     })
   }
 
-  const haveUserAnswered = answersSummary.find(
-    (answer) => answer.userId === userID && answer.timestamp,
-  )
-  const isActiveRoutine = isBefore(new Date(), before)
-  const showAnswerNowButton = Boolean(
-    isUserFromTheTeam && isActiveRoutine && !haveUserAnswered && answersSummary.length > 0,
-  )
   const debouncedSearch = debounce(performDebounced, 2500)
 
   useEffect(() => {
@@ -155,6 +145,18 @@ export function useLogic({
   }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
 
   useEffect(() => {
+    const userTeamIds = userTeams.map((team) => team.id)
+    const userCompanie = userCompanies[0]?.id
+    const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
+    const isActiveRoutine = isBefore(new Date(), before)
+    const haveUserAnswered = answersSummary.find(
+      (answer) => answer.userId === userID && answer.timestamp,
+    )
+    setShowAnswerNowButton(
+      Boolean(
+        isUserFromTheTeam && isActiveRoutine && !haveUserAnswered && answersSummary.length > 0,
+      ),
+    )
     setFilteredAnswers(usersAnswers())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teamId])
