@@ -145,6 +145,7 @@ export function useLogic({
   }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
 
   useEffect(() => {
+    if (isAnswerSummaryLoading) return
     const userTeamIds = userTeams.map((team) => team.id)
     const userCompanie = userCompanies[0]?.id
     const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
@@ -159,7 +160,7 @@ export function useLogic({
     )
     setFilteredAnswers(usersAnswers())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [teamId, answersSummary])
+  }, [teamId, answerSummaryAtom, isAnswerSummaryLoad])
 
   return {
     date,
