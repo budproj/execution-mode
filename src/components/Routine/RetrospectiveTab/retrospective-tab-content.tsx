@@ -36,14 +36,19 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const {
-    toggleNotifcation,
+    loadingAnswers,
+    limitedTeamUsers,
+    dataAnswers,
     canEditTeam,
     teamOptedOut,
+    usersSelected,
     after,
     before,
     week,
+    toggleNotifcation,
+    setNewDate,
     handleViewMore,
-    handleGetNoCurrentAnswers,
+    setUsersSelected,
   } = useLogic(teamId, router)
 
   return (
@@ -127,8 +132,13 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
           before={before}
           week={week}
           teamId={teamId}
+          dataAnswers={dataAnswers}
+          loadMore={limitedTeamUsers.length > 0}
+          usersSelected={usersSelected}
+          setNewDate={setNewDate}
+          loadingAnswers={loadingAnswers}
           handleViewMore={handleViewMore}
-          onGetNoCurrentAnswers={handleGetNoCurrentAnswers}
+          setUsersSelected={setUsersSelected}
         />
 
         <Divider orientation="vertical" borderColor="new-gray.400" />

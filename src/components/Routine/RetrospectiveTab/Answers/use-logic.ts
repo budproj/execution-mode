@@ -1,27 +1,16 @@
-import { format, isBefore } from 'date-fns'
-import debounce from 'lodash/debounce'
+import { isBefore } from 'date-fns'
 import { NextRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { useConnectionEdges } from 'src/state/hooks/useConnectionEdges/hook'
 import { EventType } from 'src/state/hooks/useEvent/event-type'
 import { useEvent } from 'src/state/hooks/useEvent/hook'
-import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
-import { isAnswerSummaryLoad } from 'src/state/recoil/routine/is-answers-summary-load'
 import { routineDrawerOpened } from 'src/state/recoil/routine/opened-routine-drawer'
-import {
-  getRoutineDateRangeDateFormat,
-  isNextWeekDisabled,
-  routineDatesRangeAtom,
-} from 'src/state/recoil/routine/routine-dates-range'
-import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
+import { isNextWeekDisabled } from 'src/state/recoil/routine/routine-dates-range'
 import { filteredUsersCompany } from 'src/state/recoil/team/users-company'
 import meAtom from 'src/state/recoil/user/me'
 import selectUser from 'src/state/recoil/user/selector'
 
-import useGetAnswers from '../../hooks/new/use-get-answers'
-import { useAnswerSummaryPagination } from '../../hooks/useAnswerSummaryPagination'
 import { AnswerSummary } from '../types'
 
 const SEARCH_CHARACTERS_LIMIT = 3
@@ -31,17 +20,21 @@ interface useLogicProperties {
   before: Date
   after: Date
   router: NextRouter
-  onGetNoCurrentAnswers: (after: Date, before: Date) => Promise<void>
+  dataAnswers: AnswerSummary[] | undefined
+  loadingAnswers: boolean
+  usersSelected: string[]
+  setUsersSelected: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 export function useLogic({
   teamId,
   before,
-  after,
-  onGetNoCurrentAnswers,
-  router,
+  dataAnswers,
+  loadingAnswers,
+  usersSelected,
+  setUsersSelected,
 }: useLogicProperties) {
-  // Events
+  // Events - ok
   const { dispatch: dispatchAnswerNowFormClick } = useEvent(EventType.ANSWER_NOW_FORM_CLICK)
   const { dispatch: dispatchChangeTimePeriod } = useEvent(EventType.CHANGE_TIME_PERIOD_CLICK)
 
@@ -49,129 +42,100 @@ export function useLogic({
   const [search, setSearch] = useState('')
   const [showAnswerNowButton, setShowAnswerNowButton] = useState<boolean>(false)
   const [filteredAnswers, setFilteredAnswers] = useState<AnswerSummary[]>([])
+  const [loadingSearch, setLoadingSearch] = useState<boolean>(false)
 
   // Global States
   const userID = useRecoilValue(meAtom)
   const user = useRecoilValue(selectUser(userID))
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
-
-  const [date, setDate] = useRecoilState(routineDatesRangeAtom)
-  const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
-  const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
-    answerSummaryLoadStateAtom,
-  )
-
-  const setIsAnswerSummaryLoaded = useSetRecoilState(isAnswerSummaryLoad)
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
 
-  // Hooks
-  const { getAnswers } = useGetAnswers()
-  const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
-  const [userTeams, updateTeams] = useConnectionEdges(user?.teams?.edges)
-  const [userCompanies, updateUserCompanies] = useConnectionEdges(user?.companies?.edges)
+  const formattedAnswerSummary = (answers: AnswerSummary[]) => {
+    const answersFormatted = usersSelected.map((userId) => {
+      const user = teamUsers.find((user) => user.id === userId)
+      const { id, latestStatusReply, timestamp, commentCount } =
+        answers.find((answer) => answer.userId === userId) ?? {}
 
-  const setNewDate = async (newDate: Date) => {
-    const dateRange = getRoutineDateRangeDateFormat(newDate)
-    setDate(dateRange)
-
-    router.push(
-      {
-        query: {
-          ...(router?.query ?? {}),
-          before: format(dateRange.before, 'dd/MM/yyyy'),
-          after: format(dateRange.after, 'dd/MM/yyyy'),
-        },
-      },
-      undefined,
-      { shallow: true },
-    )
-
-    await onGetNoCurrentAnswers(dateRange.after, dateRange.before)
+      return {
+        id,
+        userId,
+        name: user ? user.fullName : '',
+        picture: user ? user.picture : '',
+        latestStatusReply,
+        timestamp,
+        commentCount,
+      }
+    })
+    return answersFormatted
   }
 
   const performDebounced = async (searchTerm: string) => {
+    // Search users and create an array of ids
     const usersSearched = teamUsers.filter((user) =>
       user.fullName.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()),
     )
 
     const teamUsersIds = usersSearched.map((user) => user.id)
 
-    const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
-      return answersSummary.some((user) => user.userId === userId)
+    setUsersSelected((previousState) => {
+      const newUsers = teamUsersIds.filter((item) => !previousState.includes(item))
+      return [...previousState, ...newUsers]
     })
 
-    if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
-      const searchDataFormatted = await getAnswers({ teamId, after, before, teamUsersIds })
-
-      if (searchDataFormatted)
-        setAnswersSummary((previousAnswers) => [...previousAnswers, ...searchDataFormatted])
-    }
-
-    setIsAnswerSummaryLoading(false)
+    if (dataAnswers)
+      setFilteredAnswers(
+        reorderAnswers(dataAnswers.filter((item) => teamUsersIds.includes(item.userId))),
+      )
   }
 
   const handleSearch = async (value: string) => {
+    setLoadingSearch(true)
     if (value.length >= SEARCH_CHARACTERS_LIMIT) {
       setSearch(value)
-      setIsAnswerSummaryLoading(true)
-      await debouncedSearch(value)
+      await performDebounced(value)
     } else {
-      setIsAnswerSummaryLoading(false)
       setSearch('')
+      if (dataAnswers) setFilteredAnswers(reorderAnswers(dataAnswers))
     }
+
+    setLoadingSearch(false)
   }
 
-  // Utils
-  function usersAnswers() {
-    const uniqueIds = new Set()
-    return answersSummary.filter((answer) => {
-      if (
-        answer.name.toLowerCase().includes(search.toLocaleLowerCase()) &&
-        !uniqueIds.has(answer.userId)
-      ) {
-        uniqueIds.add(answer.userId)
-        return true
-      }
-
-      return false
+  const reorderAnswers = (answers: AnswerSummary[]) => {
+    const answersFormatted = formattedAnswerSummary(answers)
+    const answersReordered = answersFormatted.sort((a, b) => {
+      if (a.name && b.name) return a.name.localeCompare(b.name)
+      return 0
     })
+    const currentUserAnswer = answersReordered.find((answer) => answer.userId === userID)
+    const othersAnswers = answersReordered.filter((answer) => answer.userId !== userID)
+    return currentUserAnswer ? [currentUserAnswer, ...othersAnswers] : othersAnswers
   }
 
-  const debouncedSearch = debounce(performDebounced, 2500)
-
   useEffect(() => {
-    updateTeams(user?.teams?.edges)
-    updateUserCompanies(user?.companies?.edges)
-  }, [updateTeams, updateUserCompanies, user?.companies?.edges, user?.teams])
+    if (loadingAnswers) return
+    if (!dataAnswers) return
+    if (!teamUsers) return
 
-  useEffect(() => {
-    if (isAnswerSummaryLoading) return
-    const userTeamIds = userTeams.map((team) => team.id)
-    const userCompanie = userCompanies[0]?.id
-    const isUserFromTheTeam = [...userTeamIds, userCompanie].includes(teamId)
+    const isUserFromTeam = user?.id && teamUsers.some(({ id }) => id === user.id)
     const isActiveRoutine = isBefore(new Date(), before)
-    const haveUserAnswered = answersSummary.find(
+    const haveUserAnswered = dataAnswers?.find(
       (answer) => answer.userId === userID && answer.timestamp,
     )
     setShowAnswerNowButton(
-      Boolean(
-        isUserFromTheTeam && isActiveRoutine && !haveUserAnswered && answersSummary.length > 0,
-      ),
+      Boolean(isUserFromTeam && isActiveRoutine && !haveUserAnswered && dataAnswers?.length > 0),
     )
-    setFilteredAnswers(usersAnswers())
+    setFilteredAnswers(reorderAnswers(dataAnswers))
+    handleSearch(search)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [teamId, answerSummaryAtom, isAnswerSummaryLoad])
+  }, [dataAnswers, loadingAnswers, teamUsers])
 
   return {
-    date,
-    isAnswerSummaryLoading,
-    limitedTeamUsers,
     search,
     SEARCH_CHARACTERS_LIMIT,
     showAnswerNowButton,
     filteredAnswers,
-    setIsAnswerSummaryLoaded,
-    setNewDate,
+    loadingSearch,
     dispatchChangeTimePeriod,
     dispatchAnswerNowFormClick,
     isNextWeekDisabled,

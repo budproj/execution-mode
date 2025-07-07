@@ -14,7 +14,7 @@ import { Comment } from './types'
 type RoutineCommentsProperties = {
   answerId: AnswerType['id']
   answerOwner?: User['firstName']
-  comments: Comment[]
+  comments?: Comment[]
 }
 
 const RoutineComments = ({ answerId, answerOwner, comments }: RoutineCommentsProperties) => {

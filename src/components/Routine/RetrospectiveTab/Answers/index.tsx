@@ -11,17 +11,24 @@ import { SearchBar } from 'src/components/Base/SearchBar/wrapper'
 import { ArrowRight } from 'src/components/Icon'
 import BrilliantBellIcon from 'src/components/Icon/BrilliantBell'
 
+import { AnswerSummary } from '../types'
+
 import AnswerRowComponent from './AnswerRow'
 import messages from './messages'
 import { useLogic } from './use-logic'
 
 interface AnswersComponentProperties {
   teamId: string
-  onGetNoCurrentAnswers: (after: Date, before: Date) => Promise<void>
   after: Date
   before: Date
   week: number
+  dataAnswers: AnswerSummary[] | undefined
+  loadingAnswers: boolean
+  loadMore: boolean
+  usersSelected: string[]
+  setNewDate: (newDate: Date) => Promise<void>
   handleViewMore?: () => void
+  setUsersSelected: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 const ScrollableItem = getScrollableItem()
@@ -31,25 +38,26 @@ const AnswersComponent = ({
   after,
   before,
   week,
-  onGetNoCurrentAnswers,
+  dataAnswers,
+  loadingAnswers,
+  loadMore,
+  usersSelected,
+  setNewDate,
   handleViewMore,
+  setUsersSelected,
 }: AnswersComponentProperties) => {
   const intl = useIntl()
   const router = useRouter()
 
   const {
-    date,
-    isAnswerSummaryLoading,
-    limitedTeamUsers,
     search,
     SEARCH_CHARACTERS_LIMIT,
     showAnswerNowButton,
-    setIsAnswerSummaryLoaded,
-    setNewDate,
+    filteredAnswers,
+    loadingSearch,
     dispatchChangeTimePeriod,
     isNextWeekDisabled,
     handleSearch,
-    filteredAnswers,
     setIsRoutineDrawerOpen,
     dispatchAnswerNowFormClick,
   } = useLogic({
@@ -57,11 +65,15 @@ const AnswersComponent = ({
     before,
     after,
     router,
-    onGetNoCurrentAnswers,
+    dataAnswers,
+    loadingAnswers,
+    usersSelected,
+    setUsersSelected,
   })
 
   return (
     <GridItem padding="25px 25px 30px 20px" display="flex" flexDirection="column">
+      {/* Seletor de semana */}
       <Flex width="100%" height="38px" marginBottom="25px" marginTop="6px">
         <IconButton
           background="new-gray.200"
@@ -76,8 +88,7 @@ const AnswersComponent = ({
             />
           }
           onClick={() => {
-            setIsAnswerSummaryLoaded(false)
-            setNewDate(sub(date.after, { weeks: 1 }))
+            setNewDate(sub(after, { weeks: 1 }))
             dispatchChangeTimePeriod({})
           }}
         />
@@ -107,26 +118,30 @@ const AnswersComponent = ({
             />
           }
           onClick={() => {
-            setIsAnswerSummaryLoaded(false)
-            setNewDate(add(date.after, { weeks: 1 }))
+            setNewDate(add(after, { weeks: 1 }))
             dispatchChangeTimePeriod({})
           }}
         />
       </Flex>
+
       <Divider borderColor="new-gray.400" />
+
+      {/* Pesquisa de usuário */}
       <Flex gap="5px" marginTop="20px" marginBottom="30px">
         <SearchBar placeholder="Buscar" borderRadius="10px" height="38px" onSearch={handleSearch} />
       </Flex>
+
+      {/* Lista de respostas por usuários */}
       <ScrollableItem id="scrollable-list-users" maxH="700px" p="0 12px">
         {filteredAnswers.map((answer) => (
           <AnswerRowComponent key={answer.id} answer={answer} />
         ))}
-        {isAnswerSummaryLoading && (
+        {(loadingAnswers || loadingSearch) && (
           <Flex justify="center" py={4}>
             <Spinner size="lg" />
           </Flex>
         )}
-        {!isAnswerSummaryLoading && limitedTeamUsers.length > 0 && (
+        {!loadingAnswers && loadMore && (
           <Button
             width="100%"
             marginTop="20px"
@@ -140,6 +155,8 @@ const AnswersComponent = ({
           display={search.length >= SEARCH_CHARACTERS_LIMIT ? 'none' : 'block'}
         />
       </ScrollableItem>
+
+      {/* Botão de resposta */}
       {showAnswerNowButton && (
         <Box textAlign="center" marginTop="auto">
           <Divider borderColor="new-gray.400" />

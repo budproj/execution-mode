@@ -1,100 +1,103 @@
 /* eslint-disable import/order */
 import { useEffect, useState } from 'react'
 import { format, parse, differenceInDays } from 'date-fns'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import { GraphQLEffect } from 'src/components/types'
 
 import { teamAtomFamily } from 'src/state/recoil/team'
-import { usersCompany } from 'src/state/recoil/team/users-company'
-import { answerSummaryAtom } from 'src/state/recoil/routine/answer-summary'
-import { answerSummaryLoadStateAtom } from 'src/state/recoil/routine/users-summary-load-state'
-import { answerSummaryPaginationAtom } from 'src/state/recoil/routine/cursor-answer-summary-pagination'
 import {
   getRoutineDateRangeDateFormat,
   routineDatesRangeAtom,
 } from 'src/state/recoil/routine/routine-dates-range'
 
 import { useAnswerSummaryPagination } from '../hooks/useAnswerSummaryPagination'
-import useGetAnswers from '../hooks/new/use-get-answers'
+import { useGetAnswersMutation } from '../hooks/new/use-get-answers'
 import { NextRouter } from 'next/router'
 import { useNotificationSettings } from '../hooks/new/use-get-notifications-settings'
+import { filteredUsersCompany, selectUserFromCompany } from 'src/state/recoil/team/users-company'
+import meAtom from 'src/state/recoil/user/me'
 
 export const formatUUIDArray = (uuids: string[]) => {
   return "['" + uuids.join("', '") + "']"
 }
 
 export const useLogic = (teamId: string, router: NextRouter) => {
+  // Local const
+  const REQUEST_LIMIT = 10
+
   // Local states
-  const [isFirstTime, setIsFirstTime] = useState(false)
+  const [usersSelected, setUsersSelected] = useState<string[]>([])
 
   // Global states
   const [{ after, before, week }, setRoutineDatesRange] = useRecoilState(routineDatesRangeAtom)
-  const setAnswerSummaryPaginationData = useSetRecoilState(answerSummaryPaginationAtom)
-  const [isAnswerSummaryLoading, setIsAnswerSummaryLoading] = useRecoilState(
-    answerSummaryLoadStateAtom,
-  )
-  const [answersSummary, setAnswersSummary] = useRecoilState(answerSummaryAtom)
-  const setUsersCompany = useSetRecoilState(usersCompany)
   const team = useRecoilValue(teamAtomFamily(teamId))
+  const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
+  const userID = useRecoilValue(meAtom)
+  const me = useRecoilValue(selectUserFromCompany(userID))
 
   // Permission
   const canEditTeam = team?.policy?.update === GraphQLEffect.ALLOW
 
-  // Date range for Answers hook
-  const { after: afterQuery, before: beforeQuery } = router.query
-  const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
-  const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
-
   // Hooks
   const { teamOptedOut, toggleDisabledTeam } = useNotificationSettings(teamId)
-  const { limitedTeamUsers } = useAnswerSummaryPagination(teamId)
-  const { getAnswers } = useGetAnswers()
+  const { limitedTeamUsers } = useAnswerSummaryPagination(teamId, usersSelected)
+
+  const {
+    data: dataAnswers,
+    isLoading: loadingAnswers,
+    refetch: refetchAnswers,
+  } = useGetAnswersMutation({
+    teamId,
+    after,
+    before,
+    teamUsersIds: usersSelected,
+  })
+
   const toggleNotifcation = () => {
     toggleDisabledTeam(teamId)
   }
 
-  const handleGetNoCurrentAnswers = async (after: Date, before: Date) => {
-    setIsAnswerSummaryLoading(true)
-    const showedUsersIds = answersSummary.map((answer) => answer.userId)
-    setAnswersSummary([])
-
-    const newFormattedData = await getAnswers({
-      teamId,
-      after,
-      before,
-      teamUsersIds: showedUsersIds,
-    })
-    if (newFormattedData) setAnswersSummary(newFormattedData)
-    setIsAnswerSummaryLoading(false)
-  }
-
-  const fetchAnswerSummaryData = async () => {
-    const teamUsersIds = limitedTeamUsers.map((user) => user.id)
-
-    const usersAreBeingRequestedForTheFirstTime = !teamUsersIds.some((userId) => {
-      return answersSummary.some((user) => user.userId === userId)
-    })
-
-    if (usersAreBeingRequestedForTheFirstTime && teamUsersIds.length > 0) {
-      setIsAnswerSummaryLoading(true)
-      setAnswerSummaryPaginationData({
-        lastLoadedUserId: teamUsersIds[teamUsersIds.length - 1],
-        teamId,
-      })
-      const newFormattedData = await getAnswers({ teamId, after, before, teamUsersIds })
-      if (newFormattedData)
-        setAnswersSummary((previousAnswers) => [...previousAnswers, ...newFormattedData])
-      setIsAnswerSummaryLoading(false)
-    }
+  const updateUsers = () => {
+    const isUserFromTeam = me?.id && teamUsers.some(({ id }) => id === me.id)
+    const companyUsersWithMe = isUserFromTeam
+      ? [me, ...teamUsers.filter(({ id }) => id !== me?.id)]
+      : teamUsers
+    const filteredTeamUsers = companyUsersWithMe.filter((user) => !usersSelected.includes(user.id))
+    const limitedTeamUsers = filteredTeamUsers.slice(0, REQUEST_LIMIT)
+    return limitedTeamUsers.map((item) => item.id)
   }
 
   const handleViewMore = () => {
-    if (isAnswerSummaryLoading) return
-
-    if (limitedTeamUsers.length === 0) return
-    fetchAnswerSummaryData()
+    const teamUsersIds = updateUsers()
+    setUsersSelected((previousAnswers) => [
+      ...previousAnswers,
+      ...teamUsersIds.filter((item) => !previousAnswers.includes(item)),
+    ])
   }
+
+  const setNewDate = async (newDate: Date) => {
+    const dateRange = getRoutineDateRangeDateFormat(newDate)
+
+    router.push(
+      {
+        query: {
+          ...(router?.query ?? {}),
+          before: format(dateRange.before, 'dd/MM/yyyy'),
+          after: format(dateRange.after, 'dd/MM/yyyy'),
+        },
+      },
+      undefined,
+      { shallow: true },
+    )
+
+    await refetchAnswers()
+  }
+
+  useEffect(() => {
+    handleViewMore()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [teamUsers])
 
   // Re-render parts
   useEffect(() => {
@@ -115,6 +118,10 @@ export const useLogic = (teamId: string, router: NextRouter) => {
   }, [after, before])
 
   useEffect(() => {
+    const { after: afterQuery, before: beforeQuery } = router.query
+    const afterQueryData = Array.isArray(afterQuery) ? afterQuery[0] : afterQuery
+    const beforeQueryData = Array.isArray(beforeQuery) ? beforeQuery[0] : beforeQuery
+
     if (afterQueryData && beforeQueryData) {
       const parsedAfter = parse(afterQueryData, 'dd/MM/yyyy', new Date())
       const parsedBefore = parse(beforeQueryData, 'dd/MM/yyyy', new Date())
@@ -132,30 +139,21 @@ export const useLogic = (teamId: string, router: NextRouter) => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-    if (isAnswerSummaryLoading) return
-    if (limitedTeamUsers.length === 0) return
-    fetchAnswerSummaryData()
-    setAnswersSummary([])
-    setUsersCompany([])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [teamId, limitedTeamUsers])
+  }, [router.query])
 
   return {
-    isAnswerSummaryLoading,
-    isFirstTime,
-    teamOptedOut,
+    loadingAnswers,
     limitedTeamUsers,
+    dataAnswers,
     canEditTeam,
+    teamOptedOut,
     after,
     before,
     week,
-    setIsFirstTime,
+    usersSelected,
     toggleNotifcation,
-    handleGetNoCurrentAnswers,
-    fetchAnswerSummaryData,
+    setNewDate,
     handleViewMore,
+    setUsersSelected,
   }
 }

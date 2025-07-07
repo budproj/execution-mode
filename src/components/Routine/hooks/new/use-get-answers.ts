@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import { useContext } from 'react'
 
 import { ServicesContext } from 'src/components/Base/ServicesProvider/services-provider'
@@ -55,6 +56,36 @@ const useGetAnswers = (): useGetAnswersProperties => {
   }
 
   return { getAnswers }
+}
+
+/**
+ * [useGetAnswersMutation - mutation that fetch answers to retrospective]
+ * @param  {[string]} teamId [Selected team ID]
+ * @param  {[Date]} after [Selected min date range to answers]
+ * @param  {[Date]} before [Selected max date range to answers]
+ * @param  {[string[]]} teamUsersIds [Filter users to get answers]
+ * @return {[AnswerSummary[]]} [Summarized answers]
+ */
+export function useGetAnswersMutation({
+  teamId,
+  after,
+  before,
+  teamUsersIds,
+}: getAnswersProperties) {
+  const { servicesPromise } = useContext(ServicesContext)
+
+  const query = useQuery({
+    queryKey: [`routines:getAnswer:${teamId}`, [teamId, after, before, ...teamUsersIds]],
+    queryFn: async () => {
+      const { routines } = await servicesPromise
+      if (teamUsersIds.length === 0) return []
+      const queryTeamUsersIds = encodeURIComponent(formatUUIDArray(teamUsersIds))
+      const data = await routines.getAnswers(teamId, queryTeamUsersIds, after, before)
+      return data
+    },
+  })
+
+  return query
 }
 
 export default useGetAnswers

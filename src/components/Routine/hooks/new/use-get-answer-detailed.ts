@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query'
 import { useContext, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 
@@ -29,4 +30,27 @@ export const useAnswerDetailed = (): useAnswerDetailedProperties => {
   }
 
   return { getAnswerDetailed, isUserDetailedLoaded }
+}
+
+export const useGetAnswersDetailedMutation = ({
+  answerId,
+  locale = 'en',
+}: {
+  answerId?: AnswerType['id']
+  locale: string
+}) => {
+  const { servicesPromise } = useContext(ServicesContext)
+
+  const query = useQuery({
+    queryKey: [`routines:getAnswers:${answerId ?? ''}`, answerId],
+    queryFn: async () => {
+      if (!answerId) return
+      const { routines } = await servicesPromise
+      const useLocaleFormated = locale === 'en-US' ? 'en' : locale.toLocaleLowerCase()
+      const data = await routines.getAnswerDetailed(answerId, useLocaleFormated)
+      return data
+    },
+  })
+
+  return query
 }
