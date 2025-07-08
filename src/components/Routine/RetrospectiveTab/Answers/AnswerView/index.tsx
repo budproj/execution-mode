@@ -24,13 +24,7 @@ interface AnswerContentProperties {
 
 const ScrollableItem = getScrollableItem()
 
-const RetrospectiveTabContentView = ({
-  after,
-  before,
-  week,
-  teamId,
-  isLoaded,
-}: AnswerContentProperties) => {
+const AnswerViewContent = ({ after, before, week, teamId, isLoaded }: AnswerContentProperties) => {
   const router = useRouter()
   const intl = useIntl()
 
@@ -47,17 +41,16 @@ const RetrospectiveTabContentView = ({
   }
 
   useEffect(() => {
-    if (isLoaded && element) {
+    if (!isUserDetailedLoaded && element) {
       element.scrollIntoView({ block: 'start', behavior: 'smooth' })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [element, isLoaded])
+  }, [element, isUserDetailedLoaded])
 
   return (
     <Stack>
       {answerDetailed && answerDetailed.answers.length > 0 && (
         <>
-          <UserAnswer user={answerDetailed.user} />
+          <UserAnswer user={answerDetailed.user} isLoaded={!isUserDetailedLoaded} />
           <Flex w="100%" alignItems="center" justifyContent="center">
             <Divider textAlign="center" width="96%" borderColor="new-gray.400" />
           </Flex>
@@ -66,7 +59,11 @@ const RetrospectiveTabContentView = ({
       <ScrollableItem maxH="750px" p="0 12px">
         {answerDetailed && answerId && answerDetailed.answers.length > 0 ? (
           <div id="comments-list">
-            <AnswerContent answerId={answerId} isLoaded={isLoaded && isUserDetailedLoaded} />
+            <AnswerContent
+              answerId={answerId}
+              answerDetailed={answerDetailed}
+              isLoaded={!isUserDetailedLoaded}
+            />
             <RoutineComments
               answerId={answerId}
               comments={comments}
@@ -92,4 +89,4 @@ const RetrospectiveTabContentView = ({
   )
 }
 
-export default RetrospectiveTabContentView
+export default AnswerViewContent

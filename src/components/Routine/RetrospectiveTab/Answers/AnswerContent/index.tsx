@@ -1,15 +1,14 @@
 import { Box, Divider, VStack } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CustomMenuOptions, { Option } from 'src/components/Base/MenuOptions'
 import { useDeleteAnswer } from 'src/components/Routine/hooks/new/use-delete-answer'
 import { commentsAtom } from 'src/state/recoil/comments/comments'
-import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 import meAtom from 'src/state/recoil/user/me'
 
-import { AnswerType } from '../../types'
+import { AnswerDetails, AnswerType } from '../../types'
 import messages from '../messages'
 
 import RoutineAnswerCard from './AnswerCards'
@@ -17,16 +16,29 @@ import HistoryAnswers from './AnswerCards/HistoryAnswersCard/history-answers'
 
 type AnswerContent = {
   answerId: AnswerType['id']
+  answerDetailed: AnswerDetails
   isLoaded?: boolean
 }
 
-const AnswerContent = ({ answerId, isLoaded }: AnswerContent) => {
-  const answerDetailed = useRecoilValue(answerDetailedAtom)
-  const setComments = useSetRecoilState(commentsAtom)
-
+const AnswerContent = ({ answerId, answerDetailed, isLoaded }: AnswerContent) => {
   const intl = useIntl()
 
+  const [answerDetailedFormatted] = useState<AnswerDetails>({
+    ...answerDetailed,
+    answers: answerDetailed.answers.map((answer) => {
+      const dependsThat = answerDetailed.answers.find(
+        (answerDepend) => answerDepend.id === answer.conditional?.dependsOn,
+      )
+
+      return {
+        ...answer,
+        dependsThat,
+      }
+    }),
+  })
+
   const userID = useRecoilValue(meAtom)
+  const setComments = useSetRecoilState(commentsAtom)
 
   const { deleteAnswer } = useDeleteAnswer()
 
@@ -34,7 +46,6 @@ const AnswerContent = ({ answerId, isLoaded }: AnswerContent) => {
 
   useEffect(() => {
     setComments([])
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [answerId])
 
@@ -48,7 +59,7 @@ const AnswerContent = ({ answerId, isLoaded }: AnswerContent) => {
   return (
     <>
       <VStack align="flex-start" px={4} py={10}>
-        {answerDetailed.history.length > 0 && (
+        {answerDetailedFormatted.history.length > 0 && (
           <Box position="relative">
             {hasPermission && (
               <CustomMenuOptions
@@ -59,13 +70,13 @@ const AnswerContent = ({ answerId, isLoaded }: AnswerContent) => {
                 gap={1}
               />
             )}
-            <HistoryAnswers isLoaded={isLoaded} answers={answerDetailed.history} />
-            {answerDetailed.answers.map((answer) => {
+            <HistoryAnswers isLoaded={isLoaded} answers={answerDetailedFormatted.history} />
+            {answerDetailedFormatted.answers.map((answer) => {
               return (
                 <RoutineAnswerCard
                   key={answer.id}
                   answerData={answer}
-                  userThatAnswered={answerDetailed.user}
+                  userThatAnswered={answerDetailedFormatted.user}
                   isLoaded={isLoaded}
                 />
               )

@@ -20,9 +20,10 @@ import messages from './messages'
 
 interface UserAnswerProperties {
   user: Partial<User>
+  isLoaded: boolean
 }
 
-export const UserAnswer = ({ user }: UserAnswerProperties) => {
+export const UserAnswer = ({ user, isLoaded }: UserAnswerProperties) => {
   const [newGray600] = useToken('colors', ['new-gray.600'])
   const router = useRouter()
   const intl = useIntl()
@@ -73,13 +74,13 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
       </Box>
 
       <Flex ml={6}>
-        <SkeletonCircle isLoaded={Boolean(user?.firstName)} w={50} h={50}>
+        <SkeletonCircle isLoaded={isLoaded} w={50} h={50}>
           <Avatar name={userFullName} src={user?.picture} w={50} h={50} />
         </SkeletonCircle>
 
         <Flex ml={4} flexDirection="column">
           <Skeleton
-            isLoaded={Boolean(user.firstName)}
+            isLoaded={isLoaded}
             display="inline-block"
             minWidth="400px"
             height="24px"
@@ -90,7 +91,7 @@ export const UserAnswer = ({ user }: UserAnswerProperties) => {
             </Heading>
           </Skeleton>
           <Skeleton
-            isLoaded={Boolean(user.role)}
+            isLoaded={isLoaded}
             display="inline-block"
             minWidth="100px"
             maxWidth={`${user.role ? user.role.length * 10 : 300}px`}

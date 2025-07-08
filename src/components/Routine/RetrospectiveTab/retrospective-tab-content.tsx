@@ -22,7 +22,7 @@ import { NotificationSettingsModal } from 'src/components/Routine/NotificationSe
 import { Team } from 'src/components/Team/types'
 
 import AnswersComponent from './Answers'
-import RetrospectiveTabContentView from './retrospective-tab-content-view'
+import AnswerViewContent from './Answers/AnswerView'
 import { useLogic } from './use-logic'
 
 interface RetrospectiveTabContentProperties {
@@ -142,7 +142,7 @@ const RetrospectiveTabContent = ({ teamId, isLoading }: RetrospectiveTabContentP
         />
 
         <Divider orientation="vertical" borderColor="new-gray.400" />
-        <RetrospectiveTabContentView
+        <AnswerViewContent
           after={after}
           before={before}
           week={week}

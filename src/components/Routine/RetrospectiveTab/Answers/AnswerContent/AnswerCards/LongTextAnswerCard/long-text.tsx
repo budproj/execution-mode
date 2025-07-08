@@ -2,10 +2,8 @@ import { Box, Skeleton, Text } from '@chakra-ui/react'
 import styled from '@emotion/styled'
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
-import { useRecoilValue } from 'recoil'
 
 import { StarIcon, TargetIcon, WriteIcon } from 'src/components/Icon'
-import { answerDetailedAtom } from 'src/state/recoil/routine/answer'
 
 import { routineAnswer } from '../../../types'
 import { themeColor } from '../../../utils/contants'
@@ -24,44 +22,41 @@ const StyledListItem = styled.span`
 `
 
 const LongTextAnswerCard = ({ answerData, isLoaded }: LongTextAnswerCardProperties) => {
-  const reference = useRef<HTMLDivElement>(null)
-  const [width, setWidth] = useState(0)
-  const answerDetailed = useRecoilValue(answerDetailedAtom)
   const intl = useIntl()
 
-  const isDependentThat = answerDetailed.answers.find(
-    (answer) => answer.id === answerData.conditional?.dependsOn,
-  )
+  const reference = useRef<HTMLDivElement>(null)
+
+  const [width, setWidth] = useState(0)
 
   useEffect(() => {
     if (reference.current) setWidth(reference.current?.offsetWidth)
-  }, [answerDetailed])
+  }, [])
 
   const answerValueThatDepends = useMemo(() => {
-    if (isDependentThat?.values) {
-      if (isDependentThat.type === 'value_range') {
-        const lastValue = isDependentThat.values[isDependentThat.values.length - 1]
+    if (answerData.dependsThat?.values) {
+      if (answerData.dependsThat?.type === 'value_range') {
+        const lastValue = answerData.dependsThat?.values[answerData.dependsThat?.values.length - 1]
         return Number(lastValue?.value) <= 3
       }
 
-      if (isDependentThat.type === 'road_block') {
-        const lastValue = isDependentThat.values[isDependentThat.values.length - 2]
+      if (answerData.dependsThat?.type === 'road_block') {
+        const lastValue = answerData.dependsThat?.values[answerData.dependsThat?.values.length - 2]
         return lastValue?.value === 'y'
       }
     }
-  }, [isDependentThat])
+  }, [answerData.dependsThat])
 
   const justifyContent = useMemo(() => {
     if (answerValueThatDepends === false) return 'flex-start'
-    if (answerValueThatDepends === true || isDependentThat?.type === 'emoji_scale')
+    if (answerValueThatDepends === true || answerData.dependsThat?.type === 'emoji_scale')
       return 'flex-end'
-    if (isDependentThat?.type === 'emoji_scale' && width > 780) return 'flex-end'
-  }, [answerValueThatDepends, isDependentThat?.type, width])
+    if (answerData.dependsThat?.type === 'emoji_scale' && width > 780) return 'flex-end'
+  }, [answerValueThatDepends, answerData.dependsThat?.type, width])
 
   const paddingRight = useMemo(() => {
-    if (isDependentThat?.type === 'emoji_scale' && width > 756) return 0
+    if (answerData.dependsThat?.type === 'emoji_scale' && width > 756) return 0
     return 0
-  }, [isDependentThat?.type, width])
+  }, [answerData.dependsThat?.type, width])
 
   const icons: Record<string, JSX.Element> = {
     '95b84e67-d5b6-4fcf-938a-b4c9897596cb': (
@@ -75,7 +70,7 @@ const LongTextAnswerCard = ({ answerData, isLoaded }: LongTextAnswerCardProperti
     ),
   }
 
-  const theme = themeColor(isDependentThat?.type ?? '')
+  const theme = themeColor(answerData.dependsThat?.type ?? '')
 
   return answerData.value ? (
     <Box ref={reference}>

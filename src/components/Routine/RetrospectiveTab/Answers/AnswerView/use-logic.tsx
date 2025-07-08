@@ -8,6 +8,7 @@ import { hasCallToActionOnAnswerDetails } from 'src/state/recoil/routine/has-cal
 
 import { useGetCommentsByEntityMutation } from '../../../hooks/getCommentsByEntity'
 import { useGetAnswersDetailedMutation } from '../../../hooks/new/use-get-answer-detailed'
+import { AnswerDetails } from '../types'
 
 import { COMMENT_DOMAIN } from '../utils/constants'
 
@@ -20,6 +21,7 @@ export const useLogic = ({ router, intl }: useLogicProperties) => {
   // Local state
   const [answerId, setAnswerId] = useState<string | undefined>()
   const [entity, setEntity] = useState<string | undefined>()
+  const [answerDetailed, setAnswerDetailed] = useState<AnswerDetails | undefined>()
 
   // Global state
   const setHasCallToAction = useSetRecoilState(hasCallToActionOnAnswerDetails)
@@ -29,10 +31,11 @@ export const useLogic = ({ router, intl }: useLogicProperties) => {
     entity,
   })
 
-  const { data: answerDetailed, isLoading: isUserDetailedLoaded } = useGetAnswersDetailedMutation({
-    answerId,
-    locale: intl.locale,
-  })
+  const { data: dataAnswerDetailed, isFetching: isUserDetailedLoaded } =
+    useGetAnswersDetailedMutation({
+      answerId,
+      locale: intl.locale,
+    })
 
   useEffect(() => {
     const answerQuery = router?.query?.answerId
@@ -42,16 +45,20 @@ export const useLogic = ({ router, intl }: useLogicProperties) => {
   }, [router.query])
 
   useEffect(() => {
-    if (answerDetailed && entity) {
+    if (dataAnswerDetailed && entity) {
       setHasCallToAction(needCallToAction)
     }
+
+    if (dataAnswerDetailed) {
+      setAnswerDetailed(dataAnswerDetailed)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answerId, answerDetailed])
+  }, [answerId, dataAnswerDetailed])
 
   // Utils
   const needCallToAction = () => {
-    if (!answerDetailed) return false
-    return answerDetailed.answers.some((answer) => {
+    if (!dataAnswerDetailed) return false
+    return dataAnswerDetailed.answers.some((answer) => {
       if (answer.values) {
         if (
           answer.type === 'value_range' &&

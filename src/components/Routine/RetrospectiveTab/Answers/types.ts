@@ -21,6 +21,7 @@ export type routineAnswer = {
   conditional?: {
     dependsOn: string
   }
+  dependsThat?: routineAnswer
   userThatAnswered: User
 }
 
