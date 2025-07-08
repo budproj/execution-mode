@@ -23,19 +23,25 @@ type AnswerContent = {
 const AnswerContent = ({ answerId, answerDetailed, isLoaded }: AnswerContent) => {
   const intl = useIntl()
 
-  const [answerDetailedFormatted] = useState<AnswerDetails>({
-    ...answerDetailed,
-    answers: answerDetailed.answers.map((answer) => {
-      const dependsThat = answerDetailed.answers.find(
-        (answerDepend) => answerDepend.id === answer.conditional?.dependsOn,
-      )
+  const [answerDetailedFormatted, setAnswerDetailedFormatted] = useState<
+    AnswerDetails | undefined
+  >()
 
-      return {
-        ...answer,
-        dependsThat,
-      }
-    }),
-  })
+  useEffect(() => {
+    setAnswerDetailedFormatted({
+      ...answerDetailed,
+      answers: answerDetailed.answers.map((answer) => {
+        const dependsThat = answerDetailed.answers.find(
+          (answerDepend) => answerDepend.id === answer.conditional?.dependsOn,
+        )
+
+        return {
+          ...answer,
+          dependsThat,
+        }
+      }),
+    })
+  }, [answerDetailed])
 
   const userID = useRecoilValue(meAtom)
   const setComments = useSetRecoilState(commentsAtom)
@@ -59,7 +65,7 @@ const AnswerContent = ({ answerId, answerDetailed, isLoaded }: AnswerContent) =>
   return (
     <>
       <VStack align="flex-start" px={4} py={10}>
-        {answerDetailedFormatted.history.length > 0 && (
+        {answerDetailedFormatted && answerDetailedFormatted.history.length > 0 && (
           <Box position="relative">
             {hasPermission && (
               <CustomMenuOptions
