@@ -121,21 +121,15 @@ export function useLogic({
 
   useEffect(() => {
     if (loadingAnswers) return
-    console.log(loadingAnswers)
     if (!dataAnswers) return
-    console.log(dataAnswers)
     if (!teamUsers) return
-    console.log(teamUsers)
 
     const isUserFromTeam = user?.id && teamUsers.some(({ id }) => id === user.id)
-    console.log(isUserFromTeam)
-    const isActiveRoutine = isBefore(new Date(), before)
-    console.log(isActiveRoutine)
+    const isActiveRoutine = isBefore(new Date(), before.setHours(23, 59, 59))
     const haveUserAnswered = dataAnswers?.find(
       (answer) => answer.userId === userID && answer.timestamp,
     )
-    console.log(haveUserAnswered)
-    console.log(dataAnswers)
+
     setShowAnswerNowButton(
       Boolean(isUserFromTeam && isActiveRoutine && !haveUserAnswered && dataAnswers?.length > 0),
     )
