@@ -48,7 +48,7 @@ const AnswerViewContent = ({ after, before, week, teamId, isLoaded }: AnswerCont
 
   return (
     <Stack>
-      {answerDetailed && answerDetailed.answers.length > 0 && (
+      {answerId && answerDetailed && answerDetailed.answers.length > 0 && (
         <>
           <UserAnswer user={answerDetailed.user} isLoaded={!isUserDetailedLoaded} />
           <Flex w="100%" alignItems="center" justifyContent="center">
