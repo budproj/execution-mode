@@ -135,7 +135,7 @@ export function useLogic({
     setFilteredAnswers(reorderAnswers(dataAnswers))
     handleSearch(search)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataAnswers, loadingAnswers, teamUsers])
+  }, [dataAnswers, loadingAnswers, teamUsers, before])
 
   return {
     search,

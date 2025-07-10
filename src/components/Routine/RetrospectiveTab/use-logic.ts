@@ -100,14 +100,6 @@ export const useLogic = (teamId: string, router: NextRouter) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [teamUsers, me])
 
-  useEffect(() => {
-    console.log(userID)
-  }, [userID])
-
-  useEffect(() => {
-    console.log(me)
-  }, [me])
-
   // Re-render parts
   useEffect(() => {
     if (after && before) {
