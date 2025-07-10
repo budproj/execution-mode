@@ -1,4 +1,5 @@
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
+import { useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilState, useRecoilValue } from 'recoil'
@@ -18,6 +19,12 @@ const TeamRedirectPage = () => {
   const userTeams = useRecoilValue(routineAnswersReturnedData)
   const intl = useIntl()
   const routineTabName = useRoutineTab()
+  const queryClient = useQueryClient()
+
+  const redirectToTeam = (teamId: string) => {
+    setIsOpen(false)
+    queryClient.invalidateQueries({ queryKey: [`routines:getAnswer:${teamId}`] })
+  }
 
   return (
     <RoutineDrawer isOpen={isOpen} formSize={1} onClose={() => setIsOpen(false)}>
@@ -49,7 +56,7 @@ const TeamRedirectPage = () => {
                     desc={intl.formatMessage(messages.title)}
                   />
                 }
-                onClick={() => setIsOpen(false)}
+                onClick={() => redirectToTeam(team.id)}
               >
                 {team.name}
               </Button>
