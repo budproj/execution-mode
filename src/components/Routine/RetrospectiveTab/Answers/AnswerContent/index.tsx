@@ -1,10 +1,12 @@
 import { Box, Divider, VStack } from '@chakra-ui/react'
+import { useQueryClient } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import CustomMenuOptions, { Option } from 'src/components/Base/MenuOptions'
-import { useDeleteAnswer } from 'src/components/Routine/hooks/new/use-delete-answer'
+import { useDeleteAnswerMutation } from 'src/components/Routine/hooks/new/use-delete-answer'
 import { commentsAtom } from 'src/state/recoil/comments/comments'
 import meAtom from 'src/state/recoil/user/me'
 
@@ -15,13 +17,16 @@ import RoutineAnswerCard from './AnswerCards'
 import HistoryAnswers from './AnswerCards/HistoryAnswersCard/history-answers'
 
 type AnswerContent = {
+  teamId: string
   answerId: AnswerType['id']
   answerDetailed: AnswerDetails
   isLoaded?: boolean
 }
 
-const AnswerContent = ({ answerId, answerDetailed, isLoaded }: AnswerContent) => {
+const AnswerContent = ({ teamId, answerId, answerDetailed, isLoaded }: AnswerContent) => {
   const intl = useIntl()
+  const router = useRouter()
+  const queryClient = useQueryClient()
 
   const [answerDetailedFormatted, setAnswerDetailedFormatted] = useState<
     AnswerDetails | undefined
@@ -46,7 +51,7 @@ const AnswerContent = ({ answerId, answerDetailed, isLoaded }: AnswerContent) =>
   const userID = useRecoilValue(meAtom)
   const setComments = useSetRecoilState(commentsAtom)
 
-  const { deleteAnswer } = useDeleteAnswer()
+  const { mutate: deleteAnswer } = useDeleteAnswerMutation()
 
   const hasPermission = userID === answerDetailed.user.id
 
@@ -58,7 +63,23 @@ const AnswerContent = ({ answerId, answerDetailed, isLoaded }: AnswerContent) =>
   const menuOptions: Option[] = [
     {
       value: intl.formatMessage(messages.firstMenuOption),
-      onSelect: async () => deleteAnswer(answerId),
+      onSelect: async () => {
+        deleteAnswer(answerId)
+        setTimeout(
+          async () => queryClient.invalidateQueries({ queryKey: [`routines:getAnswer:${teamId}`] }),
+          2000,
+        )
+        router.push(
+          {
+            query: {
+              ...router.query,
+              answerId: undefined,
+            },
+          },
+          undefined,
+          { shallow: true },
+        )
+      },
     },
   ]
 

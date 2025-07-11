@@ -1,4 +1,5 @@
 import { useToast } from '@chakra-ui/react'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
@@ -68,4 +69,30 @@ export const useDeleteAnswer = () => {
   }
 
   return { deleteAnswer }
+}
+
+export const useDeleteAnswerMutation = () => {
+  const intl = useIntl()
+  const toaster = useToast()
+  const { servicesPromise } = useContext(ServicesContext)
+
+  return useMutation({
+    mutationFn: async (answerId: string) => {
+      const { routines } = await servicesPromise
+      return routines.deleteAnswer(answerId)
+    },
+    onSuccess: () => {
+      toaster({
+        title: intl.formatMessage(messages.successDeleteToastMessage),
+        status: 'success',
+      })
+    },
+    onError: (error) => {
+      console.error(error)
+      toaster({
+        title: intl.formatMessage(messages.warningDeleteToastMessage),
+        status: 'error',
+      })
+    },
+  })
 }

@@ -60,6 +60,7 @@ const AnswerViewContent = ({ after, before, week, teamId, isLoaded }: AnswerCont
         {answerDetailed && answerId && answerDetailed.answers.length > 0 ? (
           <div id="comments-list">
             <AnswerContent
+              teamId={teamId}
               answerId={answerId}
               answerDetailed={answerDetailed}
               isLoaded={!isUserDetailedLoaded}
