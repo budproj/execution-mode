@@ -65,11 +65,7 @@ const AnswerViewContent = ({ after, before, week, teamId, isLoaded }: AnswerCont
               answerDetailed={answerDetailed}
               isLoaded={!isUserDetailedLoaded}
             />
-            <RoutineComments
-              answerId={answerId}
-              comments={comments}
-              answerOwner={answerDetailed.user.firstName}
-            />
+            <RoutineComments comments={comments} answerOwner={answerDetailed.user.firstName} />
             <RoutineCommentsInput
               showLastComment={scrollToShowLastComment}
               routineUser={answerDetailed.user.firstName}
