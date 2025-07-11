@@ -67,7 +67,7 @@ const AnswerContent = ({ teamId, answerId, answerDetailed, isLoaded }: AnswerCon
         deleteAnswer(answerId)
         setTimeout(
           async () => queryClient.invalidateQueries({ queryKey: [`routines:getAnswer:${teamId}`] }),
-          2000,
+          5000,
         )
         router.push(
           {

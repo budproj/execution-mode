@@ -32,7 +32,7 @@ export const useGetCommentsByEntityMutation = ({ entity }: { entity?: Comment['e
   const { servicesPromise } = useContext(ServicesContext)
 
   const query = useQuery({
-    queryKey: [`routines:getCommentsByEntity:${entity ?? ''}`, entity],
+    queryKey: [`routines:getCommentsByEntity`, entity],
     queryFn: async () => {
       if (!entity) return
       const { comments } = await servicesPromise
