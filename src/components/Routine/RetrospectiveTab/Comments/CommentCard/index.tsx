@@ -15,14 +15,11 @@ import { commentInputInitialValue } from 'src/state/recoil/comments/input'
 import { commentEntityToReply } from 'src/state/recoil/comments/reply-comment'
 import meAtom from 'src/state/recoil/user/me'
 
-import { COMMENT_DOMAIN } from '../../Answers/utils/constants'
-import { AnswerType } from '../../types'
 import { Comment } from '../types'
 
 import messages from './messages'
 
 interface CommentCard {
-  answerId: AnswerType['id']
   userId: User['id']
   id: Comment['id']
   timestamp: Date
@@ -54,20 +51,10 @@ export const insertMentionInString = (comment: string) => {
   })
 }
 
-const CommentCard = ({
-  answerId,
-  id,
-  userId,
-  timestamp,
-  comment,
-  entity,
-  isDeleted,
-}: CommentCard) => {
+const CommentCard = ({ id, userId, timestamp, comment, entity, isDeleted }: CommentCard) => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
   const { servicesPromise } = useContext(ServicesContext)
   const queryClient = useQueryClient()
-
-  const origin_entity = `${COMMENT_DOMAIN.routine}:${answerId}`
 
   const logged_user = useRecoilValue(meAtom)
 
