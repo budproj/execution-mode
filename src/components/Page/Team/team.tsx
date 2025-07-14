@@ -81,6 +81,10 @@ const ExploreTeamPage = ({ teamId }: ExploreTeamPageProperties) => {
     if (tabs.has(routerTab) && routerTab !== activeTab) {
       setActiveTab(routerTab)
     }
+
+    if (!routerTab) {
+      setActiveTab('okrs')
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router])
 

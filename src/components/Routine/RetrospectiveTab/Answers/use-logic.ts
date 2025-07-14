@@ -50,7 +50,7 @@ export function useLogic({
   const teamUsers = useRecoilValue(filteredUsersCompany(teamId))
   const setIsRoutineDrawerOpen = useSetRecoilState(routineDrawerOpened)
 
-  const formattedAnswerSummary = (answers: AnswerSummary[], isSearch: boolean) => {
+  const formattedAnswerSummary = (answers: AnswerSummary[], usersSearched?: string[]) => {
     const answersFormatted = usersSelected.map((userId) => {
       const user = teamUsers.find((user) => user.id === userId)
       const { id, latestStatusReply, timestamp, commentCount } =
@@ -66,8 +66,8 @@ export function useLogic({
         commentCount,
       }
     })
-    if (isSearch) {
-      return answersFormatted.filter((answer) => Boolean(answer.id))
+    if (usersSearched) {
+      return answersFormatted.filter((answer) => usersSearched.includes(answer.userId))
     }
 
     return answersFormatted
@@ -90,7 +90,7 @@ export function useLogic({
       setFilteredAnswers(
         reorderAnswers(
           dataAnswers.filter((item) => teamUsersIds.includes(item.userId)),
-          true,
+          teamUsersIds,
         ),
       )
   }
@@ -108,8 +108,8 @@ export function useLogic({
     setLoadingSearch(false)
   }
 
-  const reorderAnswers = (answers: AnswerSummary[], isSearch?: boolean) => {
-    const answersFormatted = formattedAnswerSummary(answers, isSearch ?? false)
+  const reorderAnswers = (answers: AnswerSummary[], isSearch?: string[]) => {
+    const answersFormatted = formattedAnswerSummary(answers, isSearch)
     const answersReordered = answersFormatted.sort((a, b) => {
       if (a.name && b.name) return a.name.localeCompare(b.name)
       return 0
